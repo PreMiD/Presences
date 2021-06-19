@@ -5,7 +5,7 @@ const presence = new Presence({
     largeImageKey: "logo",
     startTimestamp: ~~(Date.now() / 1000)
   },
-  pages: {[key: string]: string} = {
+  pages: { [key: string]: string } = {
     "/": "Homepage",
     "/waze-app/": "Mobile App",
     "/waze/": "Features",
@@ -26,22 +26,29 @@ const presence = new Presence({
     "/legal/copyright/": "Copyright Policy"
   };
 
-let path: string,
-    start: string,
-    end: string;
+let path: string, start: string, end: string;
 
 function fnd() {
   path = window.location.pathname;
   if (!path.endsWith("/")) path = `${path}/`;
-  path = path.replace(/(\/[a-z]{2}|\/[a-z]{2}-[A-Z]{2})\//,"/");
+  path = path.replace(/(\/[a-z]{2}|\/[a-z]{2}-[A-Z]{2})\//, "/");
 
   if (path.includes("/live-map")) {
-    start = (document.querySelector("div.wz-search-container.is-origin > div > div > div.wm-search__selected > span.wm-search__primary") as HTMLSpanElement)?.innerText ?? "somewhere";
-    end = (document.querySelector("div.wz-search-container.is-destination > div > div > div.wm-search__selected > span.wm-search__primary") as HTMLSpanElement)?.innerText ?? "somewhere";
+    start =
+      (
+        document.querySelector(
+          "div.wz-search-container.is-origin > div > div > div.wm-search__selected > span.wm-search__primary"
+        ) as HTMLSpanElement
+      )?.innerText ?? "somewhere";
+    end =
+      (
+        document.querySelector(
+          "div.wz-search-container.is-destination > div > div > div.wm-search__selected > span.wm-search__primary"
+        ) as HTMLSpanElement
+      )?.innerText ?? "somewhere";
 
     presenceData.details = "Planning a route";
     presenceData.state = `From ${start} to ${end}`;
-
   } else {
     presenceData.details = "Browsing";
     presenceData.state = pages[path] ?? null;
@@ -51,9 +58,6 @@ fnd();
 setInterval(fnd, 5000);
 
 presence.on("UpdateData", async () => {
-  if (!presenceData.details)
-    presence.setActivity();
-   else
-    presence.setActivity(presenceData);
-
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });
