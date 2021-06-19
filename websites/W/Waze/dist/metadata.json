@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/H814ZfW.png",
   "thumbnail": "https://i.imgur.com/t1HF0dC.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#33ccff",
   "tags": [
     "navigation",
@@ -16,7 +16,10 @@
     "live",
     "map"
   ],
-  "url": ["waze.com", "www.waze.com"],
+  "url": [
+    "waze.com",
+    "www.waze.com"
+  ],
   "description": {
     "en": "Get driving directions, a live traffic map & road alerts."
   }
