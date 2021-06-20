@@ -790,7 +790,7 @@ presence.on("UpdateData", async () => {
 
   if (presenceData.buttons.length === 0) delete presenceData.buttons;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
