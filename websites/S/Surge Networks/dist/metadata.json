@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Axton P.",
+    "id": "360832097495285761"
+  },
+  "contributors": [
+    {
+      "name": "masondq",
+      "id": "776379465231630346"
+    }
+  ],
+  "url": [
+    "surge-networks.co.uk",
+    "cdn.surge-networks.co.uk",
+    "clients.surge-networks.co.uk",
+    "webmail.surge-networks.co.uk",
+    "support.surge-networks.co.uk",
+    "status.surge-networks.co.uk",
+    "media.surge-networks.co.uk"
+  ],
+  "description": {
+    "en": "A Reliable And Highly Affordable Web Hosting Solution To Host Your Games Servers Or Develop Your Applications"
+  },
+  "service": "Surge Networks",
+  "version": "1.0.0",
+  "logo": "https://cdn.surge-networks.co.uk/assets/content/icons/favicon.ico",
+  "thumbnail": "https://i.imgur.com/7RCKQY8.png",
+  "color": "#0098EF",
+  "tags": [
+    "hosting",
+    "web",
+    "technology"
+  ],
+  "category": "other"
+}
