@@ -15,7 +15,7 @@ presence.on("UpdateData", () => {
       .querySelector(
         "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3"
       )
-      .textContent.split("Jump to")[0]
+      .textContent
       .trim();
 
     if (playingStatus) {
@@ -26,19 +26,19 @@ presence.on("UpdateData", () => {
     try {
       const quickplayWPMUnmerged = document
           .querySelector("#PreMiD-WPM")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         quickplayWPM = `${quickplayWPMUnmerged} WPM`,
         quickplayAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         quickplayAccuracy = `${quickplayAccuracyUnmerged} acc`,
         quickplayRaceStatus = document
           .querySelector(
             "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3"
           )
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim();
 
       if (quickplayRaceStatus === "GO!") {
@@ -48,11 +48,11 @@ presence.on("UpdateData", () => {
 
       const quickplayRacePlace = document
           .querySelector("#PreMiD-RANK")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         quickplayRaceTime = document
           .querySelector("#PreMiD-TIME")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim();
 
       if (quickplayRaceTime !== "--:--") {
@@ -78,7 +78,7 @@ presence.on("UpdateData", () => {
       .querySelector(
         "#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.Status_root__2iFRH > div > h3"
       )
-      .textContent.split("Jump to")[0]
+      .textContent
       .trim();
 
     if (soloRaceStatus !== "Press 'Space' to begin...") {
@@ -92,17 +92,17 @@ presence.on("UpdateData", () => {
     try {
       const soloWPMUnmerged = document
           .querySelector("#PreMiD-WPM")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         soloWPM = `${soloWPMUnmerged} WPM`,
         soloAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         soloAccuracy = `${soloAccuracyUnmerged} acc`,
         soloRaceTime = document
           .querySelector("#PreMiD-TIME")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim();
 
       if (soloRaceStatus === "GO!") {
@@ -131,7 +131,7 @@ presence.on("UpdateData", () => {
         .querySelector(
           "#__next > main > div > div.Lobby_container__1Y-Os > div.Banner_root__thCyZ > h3"
         )
-        .textContent.split("Jump to")[0]
+        .textContent
         .trim();
       presenceData.details = lobbyInfo;
     } catch {
@@ -139,25 +139,25 @@ presence.on("UpdateData", () => {
           .querySelector(
             "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3"
           )
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         privateWPMUnmerged = document
           .querySelector("#PreMiD-WPM")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         privateWPM = `${privateWPMUnmerged} WPM`,
         privateAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         privateRacePlace = document
           .querySelector("#PreMiD-RANK")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         privateAccuracy = `${privateAccuracyUnmerged} acc`,
         privateRaceTime = document
           .querySelector("#PreMiD-TIME")
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim();
 
       if (playingStatus === "Get Ready..." || playingStatus === "Get Set...") {
@@ -187,7 +187,7 @@ presence.on("UpdateData", () => {
         .querySelector(
           "#__next > div.Post_root__ivA4B > div > div.Post_postContainer__oful_ > div.Post_postContent__2KI4z > div.Post_header__19SiQ > h1"
         )
-        .textContent.split("Jump to")[0]
+        .textContent
         .trim();
       presenceData.details = "Reading a post on the forum:";
       presenceData.state = postName;
@@ -210,7 +210,7 @@ presence.on("UpdateData", () => {
         .querySelector(
           "#__next > div.Profile_root__2QIUs > div.Profile_headerContainer__IYvIA > div.Profile_profileContainer__k2Fu9 > div.Profile_wrapper__3Ghk7 > div.Profile_content__rWK4h > h3"
         )
-        .textContent.split("Jump to")[0]
+        .textContent
         .trim();
       presenceData.details = "Viewing a users profile:";
       presenceData.state = user;
@@ -231,7 +231,7 @@ presence.on("UpdateData", () => {
     try {
       const pageNotFoundText = document
         .querySelector("#__next > main > h1")
-        .textContent.split("Jump to")[0]
+        .textContent
         .trim();
       presenceData.details = pageNotFoundText;
     } catch {
