@@ -194,10 +194,9 @@ presence.on("UpdateData", () => {
           "#__next > div.Profile_root__2QIUs > div.Profile_headerContainer__IYvIA > div.Profile_profileContainer__k2Fu9 > div.Profile_wrapper__3Ghk7 > div.Profile_content__rWK4h > h3"
         )
         .textContent.trim();
-      presenceData.details = "Viewing a users profile:";
-      presenceData.state = user;
+      presenceData.details = `Viewing ${user}'s profile.`;
     } catch {
-      presenceData.details = "Viewing a users profile.";
+      presenceData.details = "Viewing a user profile.";
     }
   } else if (document.location.pathname.startsWith("/login"))
     presenceData.details = "Logging in...";
