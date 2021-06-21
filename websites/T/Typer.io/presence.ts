@@ -65,7 +65,7 @@ presence.on("UpdateData", () => {
         quickplayWPM !== "undefined" &&
         quickplayRaceStatus === "Game has Ended"
       ) {
-        presenceData.details = "The game ended, did not place.";
+        presenceData.details = "The game ended, did not finish.";
         presenceData.state = `${quickplayWPM}, ${quickplayAccuracy}`;
       }
     } catch {
@@ -176,7 +176,7 @@ presence.on("UpdateData", () => {
       }
 
       if (privateRacePlace === "-" && playingStatus === "Game has Ended") {
-        presenceData.details = "The game ended, did not place.";
+        presenceData.details = "The game ended, did not finish.";
         presenceData.state = `${privateWPM}, ${privateAccuracy}`;
       }
     }
