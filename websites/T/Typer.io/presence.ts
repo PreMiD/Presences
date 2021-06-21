@@ -15,8 +15,7 @@ presence.on("UpdateData", () => {
       .querySelector(
         "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3"
       )
-      .textContent
-      .trim();
+      .textContent.trim();
 
     if (playingStatus) {
       presenceData.details = "In a quick play race:";
@@ -26,20 +25,17 @@ presence.on("UpdateData", () => {
     try {
       const quickplayWPMUnmerged = document
           .querySelector("#PreMiD-WPM")
-          .textContent
-          .trim(),
+          .textContent.trim(),
         quickplayWPM = `${quickplayWPMUnmerged} WPM`,
         quickplayAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
-          .textContent
-          .trim(),
+          .textContent.trim(),
         quickplayAccuracy = `${quickplayAccuracyUnmerged} acc`,
         quickplayRaceStatus = document
           .querySelector(
             "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3"
           )
-          .textContent
-          .trim();
+          .textContent.trim();
 
       if (quickplayRaceStatus === "GO!") {
         presenceData.details = "In a quick play race:";
@@ -48,12 +44,10 @@ presence.on("UpdateData", () => {
 
       const quickplayRacePlace = document
           .querySelector("#PreMiD-RANK")
-          .textContent
-          .trim(),
+          .textContent.trim(),
         quickplayRaceTime = document
           .querySelector("#PreMiD-TIME")
-          .textContent
-          .trim();
+          .textContent.trim();
 
       if (quickplayRaceTime !== "--:--") {
         presenceData.details = `Placed ${quickplayRacePlace} in a quick play race!`;
@@ -78,8 +72,7 @@ presence.on("UpdateData", () => {
       .querySelector(
         "#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.Status_root__2iFRH > div > h3"
       )
-      .textContent
-      .trim();
+      .textContent.trim();
 
     if (soloRaceStatus !== "Press 'Space' to begin...") {
       presenceData.details = "In a solo race:";
@@ -92,18 +85,15 @@ presence.on("UpdateData", () => {
     try {
       const soloWPMUnmerged = document
           .querySelector("#PreMiD-WPM")
-          .textContent
-          .trim(),
+          .textContent.trim(),
         soloWPM = `${soloWPMUnmerged} WPM`,
         soloAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
-          .textContent
-          .trim(),
+          .textContent.trim(),
         soloAccuracy = `${soloAccuracyUnmerged} acc`,
         soloRaceTime = document
           .querySelector("#PreMiD-TIME")
-          .textContent
-          .trim();
+          .textContent.trim();
 
       if (soloRaceStatus === "GO!") {
         presenceData.details = "In a solo race:";
@@ -131,34 +121,28 @@ presence.on("UpdateData", () => {
         .querySelector(
           "#__next > main > div > div.Lobby_container__1Y-Os > div.Banner_root__thCyZ > h3"
         )
-        .textContent
-        .trim();
+        .textContent.trim();
       presenceData.details = lobbyInfo;
     } catch {
       const playingStatus = document
           .querySelector(
             "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3"
           )
-          .textContent
-          .trim(),
+          .textContent.trim(),
         privateWPMUnmerged = document
           .querySelector("#PreMiD-WPM")
-          .textContent
-          .trim(),
+          .textContent.trim(),
         privateWPM = `${privateWPMUnmerged} WPM`,
         privateAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
-          .textContent
-          .trim(),
+          .textContent.trim(),
         privateRacePlace = document
           .querySelector("#PreMiD-RANK")
-          .textContent
-          .trim(),
+          .textContent.trim(),
         privateAccuracy = `${privateAccuracyUnmerged} acc`,
         privateRaceTime = document
           .querySelector("#PreMiD-TIME")
-          .textContent
-          .trim();
+          .textContent.trim();
 
       if (playingStatus === "Get Ready..." || playingStatus === "Get Set...") {
         presenceData.details = "In a private lobby race:";
@@ -187,8 +171,7 @@ presence.on("UpdateData", () => {
         .querySelector(
           "#__next > div.Post_root__ivA4B > div > div.Post_postContainer__oful_ > div.Post_postContent__2KI4z > div.Post_header__19SiQ > h1"
         )
-        .textContent
-        .trim();
+        .textContent.trim();
       presenceData.details = "Reading a post on the forum:";
       presenceData.state = postName;
     } catch {
@@ -210,8 +193,7 @@ presence.on("UpdateData", () => {
         .querySelector(
           "#__next > div.Profile_root__2QIUs > div.Profile_headerContainer__IYvIA > div.Profile_profileContainer__k2Fu9 > div.Profile_wrapper__3Ghk7 > div.Profile_content__rWK4h > h3"
         )
-        .textContent
-        .trim();
+        .textContent.trim();
       presenceData.details = "Viewing a users profile:";
       presenceData.state = user;
     } catch {
@@ -231,8 +213,7 @@ presence.on("UpdateData", () => {
     try {
       const pageNotFoundText = document
         .querySelector("#__next > main > h1")
-        .textContent
-        .trim();
+        .textContent.trim();
       presenceData.details = pageNotFoundText;
     } catch {
       // When viewing a page which does not have 404 text.
