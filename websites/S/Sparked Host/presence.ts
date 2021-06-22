@@ -144,20 +144,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "HetrixTools";
     presenceData.details = "Server Status";
     presenceData.state = "Who broke it?";
-  } else if (
-    document.location.hostname == "altaruk2.sparkedhost.us" ||
-    document.location.hostname == "altaruk1.sparkedhost.us" ||
-    document.location.hostname == "altar52.sparkedhost.us" ||
-    document.location.hostname == "altar57.sparkedhost.us" ||
-    document.location.hostname == "altarau1.supremepanelau1.com" ||
-    document.location.hostname == "altar45.supremepanel45.com" ||
-    document.location.hostname == "altaruk3.supremepanel3.co.uk" ||
-    document.location.hostname == "altaruk2.supremepanel2.co.uk" ||
-    document.location.hostname == "altaruk1.supremepanel1.co.uk" ||
-    document.location.hostname == "altar51.supremepanel51.com" ||
-    document.location.hostname == "cloud852.thundercloud.uk" ||
-    document.location.hostname == "web-01.sparkedhost.us"
-  ) {
+  } else if (document.location.hostname.startsWith("altar") || document.location.hostname.startsWith("web-01") || document.location.hostname.startsWith("cloud852")) {
     presenceData.details = "Web Hosting";
     presenceData.state = "Managing cPanel";
   }
