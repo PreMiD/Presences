@@ -9,23 +9,23 @@ presence.on("UpdateData", async () => {
     largeImageKey: "gta5mods_logo",
     startTimestamp: browsingStamp
   },
-  pathname = document.location.pathname;
+  {pathname} = document.location;
 
-  if(pathname == "/"){
+  if(pathname == "/") 
     presenceData.details = "Browsing Main Page...";
-  }
+  
 
-  if(pathname.includes("/login")) {
+  if(pathname.includes("/login")) 
     presenceData.details = "Logging in...";
-  }
+  
 
-  if(pathname.includes("/register")) {
+  if(pathname.includes("/register")) 
     presenceData.details = "Registering...";
-  }
+  
 
-  if(pathname.includes("/upload")) {
+  if(pathname.includes("/upload")) 
     presenceData.details = "Uploading a mod...";
-  }
+  
 
   if(pathname.includes("/search/")) {
     const [ searchedmod ] = pathname.split("/");
@@ -38,11 +38,9 @@ presence.on("UpdateData", async () => {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Tools Mod :";
       presenceData.state = modName;
-    } 
-    else
-    {
+    } else 
       presenceData.details = "Searching Tools Mods...";
-    }
+    
   }
   
 
@@ -52,11 +50,9 @@ presence.on("UpdateData", async () => {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Vehicules Mod :";
       presenceData.state = modName;
-    } 
-    else 
-    {
+    } else 
       presenceData.state = "Searching Vehicules Mods...";
-    }
+    
   }
 
   if(pathname.includes("/paintjobs")) {
@@ -65,10 +61,9 @@ presence.on("UpdateData", async () => {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Paintjobs Mod :";
       presenceData.state = modName;
-    } 
-    else {
+    } else 
       presenceData.details = "Searching Paintjobs Mods...";
-    }
+    
   }
 
   if(pathname.includes("/weapons")) {
@@ -77,10 +72,9 @@ presence.on("UpdateData", async () => {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Weapon Mod :";
       presenceData.state = modName;
-    } 
-    else {
+    } else 
       presenceData.details = "Searching Weapons Mods...";
-    }
+    
   }
 
   if(pathname.includes("/scripts")) {
@@ -89,10 +83,9 @@ presence.on("UpdateData", async () => {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Script Mod :";
       presenceData.state = modName;
-    } 
-    else {
+    } else 
       presenceData.details = "Searching Scripts Mods...";
-    }
+    
   }
 
   if(pathname.includes("/player")) {
@@ -101,10 +94,9 @@ presence.on("UpdateData", async () => {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Player Mod :";
       presenceData.state = modName;
-    } 
-    else {
+    } else 
       presenceData.details = "Searching Player Mods...";
-    }
+    
   }
 
   if(pathname.includes("/maps")) {
@@ -113,10 +105,9 @@ presence.on("UpdateData", async () => {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Maps Mod :";
       presenceData.state = modName;
-    } 
-    else {
+    } else 
       presenceData.details = "Searching Maps Mods...";
-    }
+    
   }
 
   if(pathname.includes("/misc")) {
@@ -125,18 +116,16 @@ presence.on("UpdateData", async () => {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Misc Mod :";
       presenceData.state = modName;
-    } 
-    else {
+    } else 
       presenceData.details = "Searching Misc Mods...";
-    }
+    
   }
 
   if (presenceData.details === null) 
   {
     presence.setTrayTitle();
     presence.setActivity();
-  } 
-  else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
