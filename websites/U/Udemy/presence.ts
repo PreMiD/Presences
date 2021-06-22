@@ -95,10 +95,7 @@ udemy.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-  } else if (
-    page.includes("/course/") &&
-    !video
-  ) {
+  } else if (page.includes("/course/") && !video) {
     const courseTitle = document.querySelector(
       ".clp-component-render h1.clp-lead__title"
     );
