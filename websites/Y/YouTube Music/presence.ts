@@ -39,7 +39,6 @@ function getAuthorString(): string {
         authorsArray[authorsArray.length - 1].innerText
       } (${year})`;
     } else {
-      //* Else, the song is a user upload
       //* Build output string
       authorString = `${authorsArray
         .slice(0, authorsArray.length - 1)
@@ -47,7 +46,6 @@ function getAuthorString(): string {
         .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
     }
   } else {
-    //* If from default YouTube music return Uploader
     authorString = (document.querySelector(
       "span yt-formatted-string.ytmusic-player-bar a"
     ) as HTMLAnchorElement)
@@ -66,20 +64,6 @@ function getAuthorString(): string {
   return authorString;
 }
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const title = (
       document.querySelector(".ytmusic-player-bar.title") as HTMLElement
@@ -90,10 +74,13 @@ presence.on("UpdateData", async () => {
       .getAttribute("repeat-Mode_");
 
   if (title !== "" && !isNaN(video.duration)) {
-    const timestamps = getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
+      [, watchID] = document
+        .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
+        .href.match(/v=([^&#]{5,})/),
       presenceData: PresenceData = {
         details: title,
         state: getAuthorString(),
@@ -112,8 +99,13 @@ presence.on("UpdateData", async () => {
           : repeatMode === "ALL"
           ? "Playlist on loop"
           : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
+        endTimestamp,
+        buttons: [
+          {
+            label: "Listen Along",
+            url: `https://music.youtube.com/watch?v=${watchID}`
+          }
+        ]
       };
 
     if (video.paused) {

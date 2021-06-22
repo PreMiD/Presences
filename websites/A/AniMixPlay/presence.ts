@@ -14,8 +14,7 @@ let endTimestamp,
   currentTime: number,
   duration: number,
   paused: boolean,
-  playback,
-  title;
+  playback;
 
 presence.on(
   "iFrameData",
@@ -83,9 +82,12 @@ presence.on("UpdateData", async () => {
         Math.floor(duration)
       );
     }
-    title = document.querySelector(
-      "#aligncenter > span.animetitle"
-    ).textContent;
+    const title = document.querySelector(
+        "#aligncenter > span.animetitle"
+      ).textContent,
+      episode = document
+        .querySelector("#eptitle > span#eptitleplace")
+        .textContent.replace(/\D/g, "");
 
     if (!isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
@@ -93,8 +95,8 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       presenceData.endTimestamp = endTimestamp;
-      presenceData.details = "Currently watching...";
-      presenceData.state = title;
+      presenceData.details = `Watching ${title}`;
+      presenceData.state = `Episode ${episode}`;
 
       if (paused) {
         delete presenceData.startTimestamp;

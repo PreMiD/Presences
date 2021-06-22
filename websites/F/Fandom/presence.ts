@@ -1,11 +1,10 @@
 if (
-  !(
-    (
-      document.location.pathname.includes("/wiki/") &&
-      !document.querySelector("#globalNavigation")
-    )
-    // Only run on Fandom wikis.
-  )
+  document.location.pathname.includes("/wiki/")
+    ? document.querySelector(".skin-oasis") ||
+      ((document.querySelector(".skin-fandomdesktop") ||
+        document.querySelector(".skin-fandommobile")) &&
+        !document.querySelector(".is-gamepedia"))
+    : true
 ) {
   ((): void => {
     const presence = new Presence({
@@ -151,7 +150,7 @@ if (
           };
 
         try {
-          title = document.querySelector("h1").textContent;
+          title = document.querySelector("h1").textContent.trim();
         } catch (e) {
           title = titleFromURL();
         }
@@ -163,9 +162,13 @@ if (
             ) as HTMLMetaElement
           ).content;
         } catch (e) {
-          sitename = document.querySelector(
-            ".wds-community-header__sitename"
-          ).textContent;
+          sitename = (
+            document.querySelector(".wds-community-header__sitename") ||
+            document.querySelector(
+              ".fandom-community-header__community-name"
+            ) ||
+            document.querySelector(".wds-community-bar__sitename")
+          ).textContent.trim();
         }
 
         /**
@@ -196,20 +199,6 @@ if (
             101: "Viewing a portal talk page",
             110: "Viewing a forum page",
             111: "Viewing a forum talk page",
-            112: "Viewing an Admin Central page",
-            113: "Viewing an Admin Central talk page",
-            114: "Viewing an Admin Forum page",
-            115: "Viewing an Admin Forum talk page",
-            116: "Viewing an Admin Support page",
-            117: "Viewing an Admin Support talk page",
-            118: "Viewing an adoption request",
-            119: "Viewing an adoption request talk page",
-            120: "Viewing a bot scan page",
-            121: "Viewing a bot scan talk page",
-            122: "Viewing an archived page",
-            123: "Viewing an archived talk page",
-            150: "Viewing a hub",
-            151: "Viewing a hub talk page",
             420: "Viewing a GeoJson page",
             421: "Viewing a GeoJson talk page",
             500: "Viewing a user blog", // handled again by function below
@@ -221,6 +210,7 @@ if (
             828: "Viewing a module",
             829: "Viewing a module talk page",
             1200: "Viewing a message wall",
+            1201: "Viewing a thread",
             1202: "Viewing a message wall greeting",
             2000: "Viewing a forum board", // depercated, redirected
             2001: "Viewing a forum board thread", // depercated, redirected
@@ -242,10 +232,12 @@ if (
             ) as HTMLMetaElement
           ).content;
           presenceData.details = "On the home page";
-        } else if (document.querySelector("#search-v2-form")) {
+        } else if (document.querySelector(".unified-search__form")) {
           presenceData.details = "Searching for a page";
           presenceData.state = (
-            document.querySelector("#search-v2-input") as HTMLInputElement
+            document.querySelector(
+              ".unified-search__input__query"
+            ) as HTMLInputElement
           ).value;
         } else if (actionResult() === "history") {
           presenceData.details = "Viewing revision history";
