@@ -15,21 +15,43 @@ presence.on("UpdateData", async () => {
   },
   pathname = document.location.pathname;
 
-  if(pathname.includes("/tools/")) {
-    if(pathname != "/tools/") 
+  if(pathname == "/"){
+    presenceData.details = "Browsing Main Page...";
+  }
+
+  if(pathname.includes("/login")) {
+    presenceData.details = "Logging in...";
+  }
+
+  if(pathname.includes("/register")) {
+    presenceData.details = "Registering...";
+  }
+
+  if(pathname.includes("/upload")) {
+    presenceData.details = "Uploading a mod...";
+  }
+
+  if(pathname.includes("/search/")) {
+    const searchedmod = pathname.split("/")[2];
+    presenceData.details = `Searching for ${searchedmod}`;
+  }
+
+  if(pathname.includes("/tools")) {
+    if(pathname != "/tools") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Tools Mod :";
       presenceData.state = modName;
     } 
-    else 
+    else
     {
       presenceData.details = "Searching Tools Mods...";
     }
   }
+  
 
-  if(pathname.includes("/vehicles/")) {
-    if(pathname != "/vehicles/") 
+  if(pathname.includes("/vehicles")) {
+    if(pathname != "/vehicles") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Vehicules Mod :";
@@ -41,8 +63,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if(pathname.includes("/paintjobs/")) {
-    if(pathname != "/paintjobs/") 
+  if(pathname.includes("/paintjobs")) {
+    if(pathname != "/paintjobs") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Paintjobs Mod :";
@@ -53,8 +75,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if(pathname.includes("/weapons/")) {
-    if(pathname != "/weapons/") 
+  if(pathname.includes("/weapons")) {
+    if(pathname != "/weapons") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Weapon Mod :";
@@ -65,8 +87,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if(pathname.includes("/scripts/")) {
-    if(pathname != "/scripts/") 
+  if(pathname.includes("/scripts")) {
+    if(pathname != "/scripts") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Script Mod :";
@@ -77,8 +99,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if(pathname.includes("/player/")) {
-    if(pathname != "/player/") 
+  if(pathname.includes("/player")) {
+    if(pathname != "/player") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Player Mod :";
@@ -89,8 +111,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if(pathname.includes("/maps/")) {
-    if(pathname != "/maps/") 
+  if(pathname.includes("/maps")) {
+    if(pathname != "/maps") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Maps Mod :";
@@ -101,8 +123,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if(pathname.includes("/misc/")) {
-    if(pathname != "/misc/") 
+  if(pathname.includes("/misc")) {
+    if(pathname != "/misc") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Misc Mod :";
