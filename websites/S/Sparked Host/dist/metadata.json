@@ -4,25 +4,7 @@
     "name": "Harry.",
     "id": "428450288668508160"
   },
-  "url": [
-    "sparkedhost.com",
-    "billing.sparkedhost.com",
-    "control.sparkedhost.us",
-    "jars.sparkedhost.us",
-    "status.sparkedhost.com",
-    "altaruk2.sparkedhost.us",
-    "altaruk1.sparkedhost.us",
-    "altar52.sparkedhost.us",
-    "altar57.sparkedhost.us",
-    "web-01.sparkedhost.us",
-    "cloud852.thundercloud.uk",
-    "altar51.supremepanel51.com",
-    "altaruk1.supremepanel1.co.uk",
-    "altaruk2.supremepanel2.co.uk",
-    "altaruk3.supremepanel3.co.uk",
-    "altar45.supremepanel45.com",
-    "altarau1.supremepanelau1.com"
-  ],
+  "url": "sparkedhost.com",
   "description": {
     "en": "Sparking your ideas to life by providing the most powerful, most reliable, and highest quality hosting at the most affordable price since 2017.",
     "nl": "Uw ideeën tot leven brengen door de krachtigste, betrouwbaarste en meest kwalitatieve hosting aan te bieden tegen de meest betaalbare prijs sinds 2017."
@@ -37,5 +19,6 @@
     "server",
     "hosting"
   ],
-  "category": "games"
+  "category": "games",
+  "regExp": "^(?=.*sparkedhost)|(?=.*altar)|(?=.*cloud852)"
 }
