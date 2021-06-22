@@ -1,14 +1,14 @@
 const presence = new Presence({
-  clientId: "653372675166568481"
-}),
-browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "653372675166568481"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "carllogo",
     startTimestamp: browsingStamp
   };
-  
+
   if (document.location.hostname === "carl.gg") {
     if (document.location.pathname.startsWith("/dashboard/")) {
       const title = document
