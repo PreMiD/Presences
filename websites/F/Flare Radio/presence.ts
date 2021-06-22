@@ -2,21 +2,16 @@ const presence = new Presence({
   clientId: "648181559840735232"
 });
 
-let sartist, strack, slisteners, sduration, selapsed;
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let sartist: string,
+  strack: string,
+  slisteners: string,
+  sduration: number,
+  selapsed: number;
 
 function newStats(): void {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function (): void {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       const data = JSON.parse(this.responseText);
       strack = data.now_playing.song.title;
       sartist = data.now_playing.song.artist;
@@ -34,15 +29,16 @@ newStats();
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "flare"
-  };
-
-  const timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
+      largeImageKey: "flare"
+    },
+    timestamps = presence.getTimestamps(
+      Math.floor(selapsed),
+      Math.floor(sduration)
+    );
   presenceData.smallImageKey = "play";
-  presenceData.details = sartist + " - " + strack;
-  presenceData.state = slisteners + " Listeners";
+  presenceData.details = `${sartist} - ${strack}`;
+  presenceData.state = `${slisteners} Listeners`;
   presenceData.smallImageText = "Playing";
-  presenceData.startTimestamp = timestamps[0];
-  presenceData.endTimestamp = timestamps[1];
+  [, presenceData.endTimestamp] = timestamps;
   presence.setActivity(presenceData);
 });

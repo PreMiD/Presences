@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "547436289960574977"
 });
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     const homepagePresence: PresenceData = {
       details: "Viewing the homepage",
       largeImageKey: "logo"

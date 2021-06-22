@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "607678684010381330"
   }),
   strings = presence.getStrings({
@@ -6,32 +6,18 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let lastPlaybackState = null,
+  playback,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
   playback = document.querySelector(".jw-video video") !== null ? true : false;
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg"
   };
 
@@ -39,26 +25,24 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
 
-    presence.setActivity(presenceData, true);
+    presence.setActivity(presenceData);
   }
 
-  var video: HTMLVideoElement = document.querySelector(".jw-video video");
+  const video: HTMLVideoElement = document.querySelector(".jw-video video");
 
   if (video !== null && !isNaN(video.duration)) {
-    var videoTitle: any;
-
-    videoTitle = document.querySelector("#bread .breadcrumb .active");
-
-    var timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+    const videoTitle = document.querySelector<HTMLElement>(
+        "#bread .breadcrumb .active"
+      ),
+      timestamps = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [, presenceData.endTimestamp] = timestamps;
 
     presence.setTrayTitle(
       video.paused
@@ -77,8 +61,6 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (videoTitle !== null) {
-      presence.setActivity(presenceData, !video.paused);
-    }
+    if (videoTitle !== null) presence.setActivity(presenceData, !video.paused);
   }
 });

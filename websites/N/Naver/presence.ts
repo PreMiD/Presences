@@ -82,9 +82,10 @@ const presence = new Presence({
   };
 
 let blog: string, cafeTitle: string;
+type MediaStatus = [number, string, string];
 
 presence.on("iFrameData", (data: { blog: string }) => {
-  blog = data.blog;
+  ({ blog } = data);
 });
 
 presence.on("UpdateData", async () => {
@@ -105,39 +106,33 @@ presence.on("UpdateData", async () => {
       details: "Browsing...",
       smallImageKey: `${data.service.toLowerCase()}_browse`
     },
-    getImageOrTimestamp = (
+    getMediaStatus = (
       video: HTMLVideoElement,
-      type:
-        | "startTimestamp"
-        | "endTimestamp"
-        | "smallImageKey"
-        | "smallImageText"
+      type?: "endTimestamp" | "smallImageKey" | "smallImageText"
     ) => {
       const timestamps = presence.getTimestamps(
           video?.currentTime,
           video?.duration
         ),
-        tempData: {
-          startTimestamp: number;
+        meta: {
           endTimestamp: number;
           smallImageKey: string;
           smallImageText: string;
         } = {
-          startTimestamp: timestamps[0],
           endTimestamp: timestamps[1],
           smallImageKey: `${data.service.toLowerCase()}_play`,
           smallImageText: "Playing"
         };
 
       if (video?.paused) {
-        delete tempData.startTimestamp;
-        delete tempData.endTimestamp;
+        delete meta.endTimestamp;
 
-        tempData.smallImageKey = `${data.service.toLowerCase()}_pause`;
-        tempData.smallImageText = "Paused";
+        meta.smallImageKey = `${data.service.toLowerCase()}_pause`;
+        meta.smallImageText = "Paused";
       }
 
-      return tempData[type];
+      if (type) return meta[type];
+      else return [meta.endTimestamp, meta.smallImageKey, meta.smallImageText];
     };
 
   data.settings = [
@@ -157,31 +152,13 @@ presence.on("UpdateData", async () => {
         ) {
           presenceData.details = "Currently watching an ad";
 
-          presenceData.startTimestamp = <number>(
-            getImageOrTimestamp(
-              document.querySelector('[data-role="videoEl"]'),
-              "startTimestamp"
-            )
-          );
-          presenceData.endTimestamp = <number>(
-            getImageOrTimestamp(
-              document.querySelector('[data-role="videoEl"]'),
-              "endTimestamp"
-            )
-          );
-
-          presenceData.smallImageKey = <string>(
-            getImageOrTimestamp(
-              document.querySelector('[data-role="videoEl"]'),
-              "smallImageKey"
-            )
-          );
-          presenceData.smallImageText = <string>(
-            getImageOrTimestamp(
-              document.querySelector('[data-role="videoEl"]'),
-              "smallImageText"
-            )
-          );
+          [
+            presenceData.endTimestamp,
+            presenceData.smallImageKey,
+            presenceData.smallImageText
+          ] = getMediaStatus(
+            document.querySelector('[data-role="videoEl"]')
+          ) as MediaStatus;
         } else {
           presenceData.details =
             document.querySelector("h3._clipTitle")?.textContent;
@@ -189,28 +166,11 @@ presence.on("UpdateData", async () => {
             .querySelector("div.ch_tit")
             ?.textContent.trim();
 
-          presenceData.startTimestamp = <number>(
-            getImageOrTimestamp(
-              document.querySelector("video"),
-              "startTimestamp"
-            )
-          );
-          presenceData.endTimestamp = <number>(
-            getImageOrTimestamp(document.querySelector("video"), "endTimestamp")
-          );
-
-          presenceData.smallImageKey = <string>(
-            getImageOrTimestamp(
-              document.querySelector("video"),
-              "smallImageKey"
-            )
-          );
-          presenceData.smallImageText = <string>(
-            getImageOrTimestamp(
-              document.querySelector("video"),
-              "smallImageText"
-            )
-          );
+          [
+            presenceData.endTimestamp,
+            presenceData.smallImageKey,
+            presenceData.smallImageText
+          ] = getMediaStatus(document.querySelector("video")) as MediaStatus;
 
           presenceData.buttons = [
             {
@@ -434,19 +394,11 @@ presence.on("UpdateData", async () => {
           )?.textContent;
           presenceData.state = "• HIGHLIGHT";
 
-          presenceData.startTimestamp = <number>(
-            getImageOrTimestamp(video, "startTimestamp")
-          );
-          presenceData.endTimestamp = <number>(
-            getImageOrTimestamp(video, "endTimestamp")
-          );
-
-          presenceData.smallImageKey = <string>(
-            getImageOrTimestamp(video, "smallImageKey")
-          );
-          presenceData.smallImageText = <string>(
-            getImageOrTimestamp(video, "smallImageText")
-          );
+          [
+            presenceData.endTimestamp,
+            presenceData.smallImageKey,
+            presenceData.smallImageText
+          ] = getMediaStatus(video) as MediaStatus;
 
           presenceData.buttons = [
             {
@@ -608,10 +560,11 @@ presence.on("UpdateData", async () => {
   if (data.settings) {
     for (const setting of data.settings) {
       if (!(await presence.getSetting(setting.id))) {
-        if (setting.delete)
+        if (setting.delete) {
           setting.data.forEach((x) => {
             delete presenceData[<"state">x];
           });
+        }
       }
     }
   }

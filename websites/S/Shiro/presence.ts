@@ -18,13 +18,9 @@ let playback: boolean,
   PageStatus: string;
 
 presence.on("iFrameData", (data: IFrameData) => {
-  playback = data.iframe_video?.duration !== undefined ? true : false;
+  playback = data.iframeVideo?.duration !== undefined;
 
-  if (playback) {
-    duration = data.iframe_video.duration;
-    currentTime = data.iframe_video.currentTime;
-    paused = data.iframe_video.paused;
-  }
+  if (playback) ({ duration, currentTime, paused } = data.iframeVideo);
 });
 
 presence.on("UpdateData", async () => {
@@ -155,14 +151,11 @@ presence.on("UpdateData", async () => {
     pages = {
       "/schedule"() {
         const day = Array.from(document.querySelectorAll("span")).find((x) =>
-          YouCanSeeThis(x)
+          isVisible(x)
         )?.textContent;
 
-        if (day) {
-          PageStatus = "ViewSchedule";
-        } else {
-          presenceData.details = "Viewing schedule";
-        }
+        if (day) PageStatus = "ViewSchedule";
+        else presenceData.details = "Viewing schedule";
 
         presenceData.smallImageKey = "search";
         presenceData.startTimestamp = startTimestamp;
@@ -174,10 +167,10 @@ presence.on("UpdateData", async () => {
           title = document
             .querySelector("span:nth-child(3) > a > span")
             ?.textContent.trim(),
-          episode = (document
+          [episode] = document
             .querySelector("div.entry-content > h2")
             ?.textContent.replace(title, "")
-            .match(/[1-9]?[0-9]?[0-9]/g) || ["0"])[0];
+            .match(/[1-9]?[0-9]?[0-9]/g) || ["0"];
 
         if (isNaN(duration)) {
           PageStatus = "viewAnime";
@@ -198,8 +191,7 @@ presence.on("UpdateData", async () => {
         } else {
           PageStatus = "WatchingAnime";
 
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          [, presenceData.endTimestamp] = timestamps;
 
           presenceData.smallImageKey = paused ? "pause" : "play";
           presenceData.smallImageText = paused ? "Paused" : "Playing";
@@ -278,22 +270,23 @@ presence.on("UpdateData", async () => {
           !condition.enabled &&
           !condition.replace &&
           !condition.delete
-        ) {
+        )
           presenceData[setting as "state" | "details"] = condition.setTo;
-        } else if (
+        else if (
           condition.page === PageStatus &&
           !condition.enabled &&
           condition.delete
-        ) {
+        )
           delete presenceData[setting as keyof PresenceData];
-        } else if (condition.page === PageStatus && condition.replace) {
+        else if (condition.page === PageStatus && condition.replace) {
           let replaced = condition.setTo;
 
-          for (const replace of condition.replace.toRepalce)
+          for (const replace of condition.replace.toRepalce) {
             replaced = replaced.replace(
               replace.text,
               (pagesData[condition.page] || {})[replace.with] || "Loading..."
             );
+          }
 
           presenceData[setting as "state" | "details"] = replaced;
         } else if (condition.delete && !condition.enabled)
@@ -305,18 +298,16 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) {
     presence.setActivity();
     presence.setTrayTitle();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
 
 /**
- * Check if you can see this Element
- * @param element The element you want to check
+ * Check if the provided `HTMLElement` is visible
+ * @param element The element you'd like to check
  * @returns The result you want
  */
 
-function YouCanSeeThis(element: HTMLElement) {
+function isVisible(element: HTMLElement) {
   const clientRect = element.getBoundingClientRect();
   return (
     clientRect.top >= 0 &&
@@ -329,7 +320,7 @@ function YouCanSeeThis(element: HTMLElement) {
 }
 
 interface IFrameData {
-  iframe_video: {
+  iframeVideo: {
     duration: number;
     currentTime: number;
     paused: boolean;

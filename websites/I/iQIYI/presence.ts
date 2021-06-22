@@ -31,9 +31,8 @@ presence.on("UpdateData", async () => {
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -49,7 +48,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname === "/") {
     const category = Object.values(document.querySelectorAll("div")).filter(
-      (entry) => entry?.className === "row-title" && YouCanSeeThis(entry)
+      (entry) => entry?.className === "row-title" && isVisible(entry)
     )[0]?.textContent;
 
     presenceData.details = (await strings).browsingThrough;
@@ -114,11 +113,9 @@ presence.on("UpdateData", async () => {
             ? `- ${contentEp[0].match(/(\([1-9]?[0-9]\))/g)[0]}`
             : "Variety show"
         }`;
-      } else {
-        data.ep = `Variety show`;
-      }
+      } else data.ep = "Variety show";
 
-      data.title = (data.title.match(/.+?(?=\s{2})/g) || [null])[0];
+      [data.title] = data.title.match(/.+?(?=\s{2})/g) || [null];
     }
     if (isVShow && !isVShowToo) data.ep = "Variety show";
     if (!isVShow && !isVShowToo && !isMovie && contentEp !== null)
@@ -142,8 +139,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = timestamps.pop();
 
       if (showButtons) {
         presenceData.buttons = [
@@ -187,9 +183,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${result} matching ${
         parseInt(result, 10) > 1 ? "results" : "result"
       }`;
-    } else {
-      presenceData.state = `No matching result`;
-    }
+    } else presenceData.state = "No matching result";
   } else if (document.location.pathname.includes("/personal")) {
     const type = new URLSearchParams(document.location.search).get("type"),
       all = document.querySelector(
@@ -233,12 +227,12 @@ presence.on("UpdateData", async () => {
 });
 
 /**
- * Check if your eyes can see this element :)
- * @param element The element you want to check
+ * Check if the given element is visible
+ * @param element The element you'd like to check
  * @returns The result you want
  */
 
-function YouCanSeeThis(element: HTMLElement) {
+function isVisible(element: HTMLElement) {
   const clientRect = element.getBoundingClientRect();
   return (
     clientRect.top >= 0 &&

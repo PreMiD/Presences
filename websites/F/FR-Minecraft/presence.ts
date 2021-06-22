@@ -11,9 +11,8 @@ presence.on("UpdateData", async () => {
     button = await presence.getSetting("button");
 
   presenceData.startTimestamp = browsingStamp;
-  if (privacy) {
-    presenceData.details = "Browsing";
-  } else {
+  if (privacy) presenceData.details = "Browsing";
+  else {
     if (window.location.pathname.startsWith("/forum")) {
       presenceData.smallImageKey = "forum";
       if (
@@ -27,13 +26,14 @@ presence.on("UpdateData", async () => {
           .querySelector(".crumbs")
           .textContent.replace("Accueil", "")
           .replace("»", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View topic",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.startsWith("/forum/index.php") ||
         window.location.pathname === "/forum/"
@@ -49,19 +49,18 @@ presence.on("UpdateData", async () => {
               "/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.",
               ""
             ) === "Principal / Profil "
-        )
-          presenceData.state =
-            document
-              .querySelector(".blockform > h2 > span")
-              .textContent.replace(" - Principal", "") + " (by the forum)";
-        else
-          presenceData.state =
-            document.title
-              .replace("Profil de", "")
-              .replace(
-                "/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.",
-                ""
-              ) + " (by the forum)";
+        ) {
+          presenceData.state = `${document
+            .querySelector(".blockform > h2 > span")
+            .textContent.replace(" - Principal", "")} (by the forum)`;
+        } else {
+          presenceData.state = `${document.title
+            .replace("Profil de", "")
+            .replace(
+              "/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.",
+              ""
+            )} (by the forum)`;
+        }
       } else if (window.location.pathname.startsWith("/forum/userlist.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Userlist (Forum)";
@@ -78,13 +77,14 @@ presence.on("UpdateData", async () => {
         presenceData.state = document
           .querySelector(".bloc-content > h1")
           .textContent.replace("Profil de ", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View user",
               url: document.URL
             }
           ];
+        }
       } else if (window.location.pathname.length === 1) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Home";
@@ -97,13 +97,14 @@ presence.on("UpdateData", async () => {
           .replace("FR-Minecraft", "")
           .replace(".", "")
           .replace("Minecraft", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View news",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("differents-blocs-jeu.php")
       ) {
@@ -128,13 +129,14 @@ presence.on("UpdateData", async () => {
           type = "item";
         }
         presenceData.state = document.title.replace("Minecraft", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
-              label: "View " + type,
+              label: `View ${type}`,
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("aide-crafting-sur-minecraft.php")
       ) {
@@ -151,13 +153,14 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("mob-")) {
         presenceData.details = "Viewing a minecraft mob:";
         presenceData.state = document.title.replace("Minecraft", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View mob",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("recettes-potions-minecraft.php")
       ) {
@@ -166,13 +169,14 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("potion-")) {
         presenceData.details = "Viewing a minecraft potion:";
         presenceData.state = document.title.replace("Minecraft", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View potion",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("enchantements-minecraft.php")
       ) {
@@ -184,26 +188,28 @@ presence.on("UpdateData", async () => {
           "Minecraft Enchantement ",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View enchantement",
               url: document.URL
             }
           ];
+        }
       } else if (window.location.pathname.includes("biomes-minecraft.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Biomes";
       } else if (window.location.pathname.includes("biome-")) {
         presenceData.details = "Viewing a minecraft biome:";
         presenceData.state = document.title.replace("Minecraft Biome", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View biome",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("advancements-minecraft.php")
       ) {
@@ -212,39 +218,42 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("advancement-")) {
         presenceData.details = "Viewing a minecraft advancement:";
         presenceData.state = document.title.replace("Minecraft Progrès", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View advancement",
               url: document.URL
             }
           ];
+        }
       } else if (window.location.pathname.includes("effets-minecraft.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Potions Effects";
       } else if (window.location.pathname.includes("effet-")) {
         presenceData.details = "Viewing a minecraft effect:";
         presenceData.state = document.title.replace("Minecraft Effet", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View effect",
               url: document.URL
             }
           ];
+        }
       } else if (window.location.pathname.includes("astuces.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Tips";
       } else if (window.location.pathname.includes("astuce-minecraft-")) {
         presenceData.details = "Viewing a minecraft tip:";
         presenceData.state = document.title.replace("Minecraft", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View tip",
               url: document.URL
             }
           ];
+        }
       } else if (window.location.pathname.includes("seeds.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Seeds";
@@ -254,13 +263,14 @@ presence.on("UpdateData", async () => {
           "Minecraft Seed Minecraft :",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View seed",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("guide-des-commandes-minecraft.php")
       ) {
@@ -269,26 +279,28 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("commande-")) {
         presenceData.details = "Viewing a minecraft command:";
         presenceData.state = document.title.replace("Minecraft Commande", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View command",
               url: document.URL
             }
           ];
+        }
       } else if (window.location.pathname.includes("tags-minecraft.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Tags";
       } else if (window.location.pathname.includes("tag-")) {
         presenceData.details = "Viewing a minecraft tag:";
         presenceData.state = document.title.replace("Minecraft Tag", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View tag",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes(
           "skin-habillage-personnage-minecraft.php"
@@ -302,13 +314,14 @@ presence.on("UpdateData", async () => {
           "Minecraft Skin Minecraft :",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View skin",
               url: document.URL
             }
           ];
+        }
       } else if (window.location.pathname.includes("textures.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Ressource Packs";
@@ -318,13 +331,14 @@ presence.on("UpdateData", async () => {
           "Minecraft Texture Minecraft :",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View ressource pack",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("telecharger-mods-minecraft.php")
       ) {
@@ -336,13 +350,14 @@ presence.on("UpdateData", async () => {
           "Minecraft Mod Minecraft :",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View mod",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("telecharger-maps-minecraft.php")
       ) {
@@ -354,13 +369,14 @@ presence.on("UpdateData", async () => {
           "Minecraft Map Minecraft :",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View map",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("telecharger-datapack-minecraft.php")
       ) {
@@ -372,13 +388,14 @@ presence.on("UpdateData", async () => {
           "Minecraft Datapack Minecraft :",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View datapack",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("telecharger-structure-minecraft.php")
       ) {
@@ -390,13 +407,14 @@ presence.on("UpdateData", async () => {
           "Minecraft Structure Minecraft :",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View structure",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes("fonds-ecran-minecraft-gratuit.php")
       ) {
@@ -404,13 +422,14 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Wallpapers";
       } else if (window.location.pathname.includes("wallpaper-minecraft-")) {
         presenceData.details = "Viewing a wallpaper";
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View wallpaper",
               url: document.URL
             }
           ];
+        }
       } else if (window.location.pathname.includes("videos-minecraft.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Videos";
@@ -420,13 +439,14 @@ presence.on("UpdateData", async () => {
           "Minecraft Vidéo Minecraft",
           ""
         );
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View video",
               url: document.URL
             }
           ];
+        }
       } else if (
         window.location.pathname.includes(
           "minecraft-papercraft-ou-creation-de-blocs-minecraft-en-papier.php"
@@ -447,21 +467,20 @@ presence.on("UpdateData", async () => {
       ) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "FR-Minecraft launcher";
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View FRM Launcher",
               url: document.URL
             }
           ];
+        }
       }
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -12,26 +12,26 @@ const presence = new Presence({
     "/windows-dvd-usb-ile-format-atma": "Windows DVD USB İle Format Atma !",
     "/yardim-istek-bolumu": "Yardım & İstek Bölümü !"
   };
+
+let pgn: string;
+
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     searchingFor = document.querySelector("#icerik > h1"),
     category = document.querySelector("#icerik > h1");
-  if (page.includes("/kategori/") && category && category.textContent != "") {
+  if (page.includes("/kategori/") && category && category.textContent !== "") {
     if (page.includes("/page/")) {
-      var location = document.location.pathname.indexOf("page");
-      var pgn =
-        "Sayfa: " +
-        document.location.pathname.slice(
-          location + 5,
-          document.location.pathname.length
-        );
+      const location = document.location.pathname.indexOf("page");
+      pgn = `Sayfa: ${document.location.pathname.slice(
+        location + 5,
+        document.location.pathname.length
+      )}`;
     }
-    var category2 = category.textContent
+    let category2 = category.textContent
       .slice(0, category.textContent.length - 27)
       .trim();
-    if (pgn) {
-      category2 = category2 + "(" + pgn + ")";
-    }
+    if (pgn) category2 = `${category2}(${pgn})`;
+
     presence.setActivity({
       largeImageKey: "fp-logo",
       details: "Bir kategoriyi inceliyor:",
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (page.includes("/page/")) {
-    var pgnum = document.location.pathname.slice(
+    const pgnum = document.location.pathname.slice(
       6,
       document.location.pathname.length
     );
@@ -61,32 +61,37 @@ presence.on("UpdateData", async () => {
     });
   } else if (page.includes(".html")) {
     const topic = document.querySelector(
-      "#icerik-yazi > div.icerik-baslik > h1 > a"
-    );
-    const published = document.querySelector(
-      "#icerik > div > div.yazi-alt > ul > li.tarih > span"
-    );
-    const publisher = document.querySelector(
-      "#icerik > div > div.yazi-alt > ul > li.yazar > a"
-    );
+        "#icerik-yazi > div.icerik-baslik > h1 > a"
+      ),
+      published = document.querySelector(
+        "#icerik > div > div.yazi-alt > ul > li.tarih > span"
+      ),
+      publisher = document.querySelector(
+        "#icerik > div > div.yazi-alt > ul > li.yazar > a"
+      );
     presence.setActivity({
       largeImageKey: "fp-logo",
       details: topic.textContent.trim() || "Belirsiz",
       state:
-        publisher && publisher.textContent != ""
+        publisher && publisher.textContent !== ""
           ? `${publisher.textContent.trim()} ${
-              published && published.textContent != ""
-                ? "(" + published.textContent.trim() + ")"
+              published && published.textContent !== ""
+                ? `(${published.textContent.trim()})`
                 : ""
             }`
           : "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (pages[page] || pages[page.slice(0, -1)]) {
+  } else if (
+    pages[page as keyof typeof pages] ||
+    pages[page.slice(0, -1) as keyof typeof pages]
+  ) {
     presence.setActivity({
       largeImageKey: "fp-logo",
       details: "Bir sayfaya göz atıyor:",
-      state: pages[page] || pages[page.slice(0, -1)],
+      state:
+        pages[page as keyof typeof pages] ||
+        pages[page.slice(0, -1) as keyof typeof pages],
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else {

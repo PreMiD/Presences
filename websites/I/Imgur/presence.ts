@@ -1,10 +1,12 @@
-var presence = new Presence({
-  clientId: "623657389706444820" // CLIENT ID FOR YOUR PRESENCE
-});
+const presence = new Presence({
+    clientId: "623657389706444820"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var item: any, user: any, search: any, item2: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let item: HTMLElement,
+  user: HTMLElement,
+  search: HTMLElement,
+  item2: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -12,7 +14,7 @@ presence.on("UpdateData", async () => {
   };
 
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "imgur.com") {
+  if (document.location.hostname === "imgur.com") {
     user = document.querySelector(
       "#root > div > div.desktop-app.App > div > div.App-cover.NewCover.ProfileCover > div.ProfileCover-header > div.ProfileMeta > div > div.ProfileMeta-user"
     );
@@ -141,16 +143,10 @@ presence.on("UpdateData", async () => {
       item = document.querySelector("#sort > div.selection");
       item2 = document.querySelector("#window > div.selection");
       presenceData.details = "Searching for:";
-      if (item2 !== null) {
-        presenceData.state =
-          search.innerText +
-          ", sorted by " +
-          item.innerText +
-          " of " +
-          item2.innerText;
-      } else {
-        presenceData.state = search.innerText + ", sorted by " + item.innerText;
-      }
+      if (item2 !== null)
+        presenceData.state = `${search.innerText}, sorted by ${item.innerText} of ${item2.innerText}`;
+      else
+        presenceData.state = `${search.innerText}, sorted by ${item.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -161,11 +157,9 @@ presence.on("UpdateData", async () => {
       );
       if (item !== null) {
         presenceData.details = "Viewing a hidden post:";
-        if (item.innerText.length > 128) {
-          presenceData.state = item.innerText.substring(0, 125) + "...";
-        } else {
-          presenceData.state = item.innerText;
-        }
+        if (item.innerText.length > 128)
+          presenceData.state = `${item.innerText.substring(0, 125)}...`;
+        else presenceData.state = item.innerText;
 
         delete presenceData.smallImageKey;
 
@@ -184,22 +178,18 @@ presence.on("UpdateData", async () => {
       );
       if (document.location.pathname.includes("/comment/")) {
         presenceData.details = "Viewing comment at post:";
-        if (item.innerText.length > 128) {
-          presenceData.state = item.innerText.substring(0, 125) + "...";
-        } else {
-          presenceData.state = item.innerText;
-        }
+        if (item.innerText.length > 128)
+          presenceData.state = `${item.innerText.substring(0, 125)}...`;
+        else presenceData.state = item.innerText;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Viewing post:";
-        if (item.innerText.length > 128) {
-          presenceData.state = item.innerText.substring(0, 125) + "...";
-        } else {
-          presenceData.state = item.innerText;
-        }
+        if (item.innerText.length > 128)
+          presenceData.state = `${item.innerText.substring(0, 125)}...`;
+        else presenceData.state = item.innerText;
 
         delete presenceData.smallImageKey;
 
@@ -209,7 +199,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "imgurinc.com") {
+  } else if (document.location.hostname === "imgurinc.com") {
     if (document.location.pathname.includes("/press")) {
       presenceData.details = "Viewing the press info";
       delete presenceData.state;
@@ -253,7 +243,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "blog.imgur.com") {
+  } else if (document.location.hostname === "blog.imgur.com") {
     item = document.querySelector("#main-content > h1");
     if (document.location.pathname.includes("/category/")) {
       presenceData.details = "Blog, viewing category:";
@@ -271,18 +261,18 @@ presence.on("UpdateData", async () => {
         "#main-content > article > header > div.clearfix > h1"
       );
       presenceData.details = "Blog, reading article:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.innerText.length > 128)
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+      else presenceData.state = item.innerText;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
     } else if (item !== null) {
       presenceData.details = "Blog, searching for:";
-      presenceData.state = item.innerText.split("SEARCH RESULTS FOR ")[1];
+      [presenceData.state] = item.innerText
+        .split("SEARCH RESULTS FOR ")
+        .slice(1);
 
       delete presenceData.smallImageKey;
 
@@ -294,14 +284,14 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "help.imgur.com") {
+  } else if (document.location.hostname === "help.imgur.com") {
     presenceData.details = "Viewing Customer Support";
     delete presenceData.state;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "imgurstore.com") {
+  } else if (document.location.hostname === "imgurstore.com") {
     if (
       document.querySelector(
         "#body-wrapper > div > div > div.container-fluid.container > div.row > div.col-md-5 > div.row.desktop-product-title.hidden-xs.hidden-sm > div > h1"
@@ -338,15 +328,13 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "community.imgur.com") {
+  } else if (document.location.hostname === "community.imgur.com") {
     if (document.location.pathname.includes("/t/")) {
       item = document.querySelector("#topic-title > div > div > h1 > a");
       presenceData.details = "Community, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.innerText.length > 128)
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+      else presenceData.state = item.innerText;
 
       presenceData.smallImageKey = "reading";
 
@@ -384,7 +372,7 @@ presence.on("UpdateData", async () => {
         "#main-outlet > div.list-controls > div > section > div.category-navigation > ol > li > div > span > span > span.badge-category.clear-badge > span"
       );
       presenceData.details = "Community, Browsing";
-      presenceData.state = "category: " + item.innerText;
+      presenceData.state = `category: ${item.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -394,7 +382,7 @@ presence.on("UpdateData", async () => {
         "#main-outlet > div:nth-child(3) > section > section > div.details > div.primary > div.primary-textual > div.user-profile-names > h2"
       );
       presenceData.details = "Community, viewing";
-      presenceData.state = "user: " + item.innerText;
+      presenceData.state = `user: ${item.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -403,7 +391,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "apidocs.imgur.com") {
+  } else if (document.location.hostname === "apidocs.imgur.com") {
     presenceData.details = "Reading the API Docs";
     delete presenceData.state;
 

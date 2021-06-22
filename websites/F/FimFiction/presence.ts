@@ -1,28 +1,27 @@
-var presence = new Presence({
-  clientId: "642719342609432586"
-});
+const presence = new Presence({
+    clientId: "642719342609432586"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any;
+let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "ff"
   };
 
-  if (document.location.hostname == "www.fimfiction.net") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.fimfiction.net") {
+    if (document.location.pathname === "/") {
       presenceData.details = "Viewing home page";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.querySelector("#chapter_title") !== null) {
       presenceData.details =
-        "Reading: " +
+        `Reading: ${ 
         document.querySelector(
           "#chapter_format > div.story-page-header > div.inner > div.info-container > div > h1 > a"
-        ).textContent;
+        ).textContent}`;
       presenceData.state =
-        "Chapter: " + document.querySelector("#chapter_title").textContent;
+        `Chapter: ${document.querySelector("#chapter_title").textContent}`;
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/story/")) {
@@ -70,10 +69,10 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

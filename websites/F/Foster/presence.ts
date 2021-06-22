@@ -12,7 +12,7 @@ presence.on("UpdateData", () => {
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
-  if (page == "/") {
+  if (page === "/") {
     presenceData.details = "Home Page";
 
     presenceData.state = "reckless.life";
@@ -30,14 +30,10 @@ presence.on("UpdateData", () => {
 
     presenceData.smallImageKey = "admin";
     presenceData.smallImageText = usernameString;
-  } else {
-    presenceData.details = "Unknown Page";
-  }
+  } else presenceData.details = "Unknown Page";
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

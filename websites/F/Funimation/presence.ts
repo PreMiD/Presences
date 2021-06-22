@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640161890059812865"
   }),
   strings = presence.getStrings({
@@ -6,44 +6,43 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState: boolean,
+  playback: boolean,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-var lastPlaybackState = null;
-var playback;
-
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+interface iFrameData {
+  iframeVideo: {
+    iFrameVideo: boolean;
+    currTime: number;
+    dur: number;
+    paused: boolean;
+  };
+}
+
+presence.on("iFrameData", (data: iFrameData) => {
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    ({ iFrameVideo, paused } = data.iframeVideo);
+    currentTime = data.iframeVideo.currTime;
+    duration = data.iframeVideo.dur;
   }
 });
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "fun"
     };
@@ -53,13 +52,12 @@ presence.on("UpdateData", async () => {
       "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h1"
     ) !== null
   ) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = timestamps.pop();
 
       presenceData.details = document.querySelector(
         "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h1"
@@ -68,21 +66,19 @@ presence.on("UpdateData", async () => {
         "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h2"
       ).textContent;
 
-      if (paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
-    } else if (iFrameVideo == null && isNaN(duration)) {
+      if (paused) delete presenceData.endTimestamp;
+    } else if (!iFrameVideo && isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
-      presenceData.state =
+      presenceData.state = `${
         document.querySelector(
           "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h1"
-        ).textContent +
-        " " +
+        ).textContent
+      } ${
         document.querySelector(
           "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h2"
-        ).textContent;
+        ).textContent
+      }`;
       presenceData.smallImageKey = "reading";
     }
   } else if (document.location.pathname.includes("/shows/")) {
@@ -186,10 +182,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

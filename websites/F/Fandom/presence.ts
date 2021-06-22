@@ -6,7 +6,7 @@ if (
     )
     // Only run on Fandom wikis.
   )
-)
+) {
   ((): void => {
     const presence = new Presence({
         clientId: "644400074008297512"
@@ -64,13 +64,12 @@ if (
 		
 		*/
 
-        if (currentPath[0] === "") {
-          presenceData.details = "On the index page";
-        } else if (currentPath[0] === "signin") {
+        if (currentPath[0] === "") presenceData.details = "On the index page";
+        else if (currentPath[0] === "signin")
           presenceData.details = "Signing in";
-        } else if (currentPath[0] === "register") {
+        else if (currentPath[0] === "register")
           presenceData.details = "Registering an account";
-        } else if (currentPath[0] === "articles") {
+        else if (currentPath[0] === "articles") {
           presenceData.details = "Reading an article";
           presenceData.state = document.querySelector(
             ".article-header__title"
@@ -96,10 +95,8 @@ if (
                 const video: HTMLVideoElement =
                     document.querySelector(".jw-video"),
                   timestamps = presence.getTimestampsfromMedia(video);
-                presenceData.endTimestamp = timestamps[1];
-              } else {
-                delete presenceData.endTimestamp;
-              }
+                [, presenceData.endTimestamp] = timestamps;
+              } else delete presenceData.endTimestamp;
             } catch (e) {
               delete presenceData.endTimestamp;
             }
@@ -262,11 +259,10 @@ if (
         } else if (namespaceDetails() === "Viewing a user blog") {
           if (title) {
             presenceData.details = "Reading a user blog post";
-            presenceData.state =
-              title +
-              " by " +
+            presenceData.state = `${title} by ${
               document.querySelector(".page-header__blog-post-details")
-                .firstElementChild.textContent;
+                .firstElementChild.textContent
+            }`;
           } else {
             presenceData.details = namespaceDetails();
             presenceData.state = titleFromURL();
@@ -281,11 +277,9 @@ if (
               : `${title} (${titleFromURL()})`
           }`;
           updateCallback.function = (): void => {
-            if (actionResult() === "edit" || actionResult() === "editsource") {
+            if (actionResult() === "edit" || actionResult() === "editsource")
               presenceData.details = "Editing a page";
-            } else {
-              presenceData.details = namespaceDetails();
-            }
+            else presenceData.details = namespaceDetails();
           };
         } else {
           if (actionResult() === "edit") {
@@ -303,7 +297,7 @@ if (
           }
         }
 
-        if (presenceData.state) presenceData.state += " | " + sitename;
+        if (presenceData.state) presenceData.state += ` | ${sitename}`;
         else presenceData.state = sitename;
 
         if (lang !== "en") {
@@ -337,9 +331,9 @@ if (
             const category = document.querySelector(
               ".category-filter__dropdown-toggle"
             ).textContent;
-            if (category === "Categories") {
+            if (category === "Categories")
               presenceData.details = "Viewing the discussion page";
-            } else {
+            else {
               presenceData.details = "Viewing a discussion category";
               presenceData.state = category;
             }
@@ -355,7 +349,7 @@ if (
             } | ${sitename}`;
           }
 
-          if (presenceData.state) presenceData.state += " | " + sitename;
+          if (presenceData.state) presenceData.state += ` | ${sitename}`;
           else presenceData.state = sitename;
         };
       }
@@ -374,3 +368,4 @@ if (
       });
     }
   })();
+}
