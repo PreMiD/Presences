@@ -1,10 +1,6 @@
 const presence = new Presence({
     clientId: "854743353824641066"
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  }),
   browsingStamp = Math.floor(Date.now() / 1000);
   
 
@@ -32,12 +28,12 @@ presence.on("UpdateData", async () => {
   }
 
   if(pathname.includes("/search/")) {
-    const searchedmod = pathname.split("/")[2];
+    const [ searchedmod ] = pathname.split("/");
     presenceData.details = `Searching for ${searchedmod}`;
   }
 
   if(pathname.includes("/tools")) {
-    if(pathname != "/tools") 
+    if(pathname !== "/tools") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Tools Mod :";
@@ -51,7 +47,7 @@ presence.on("UpdateData", async () => {
   
 
   if(pathname.includes("/vehicles")) {
-    if(pathname != "/vehicles") 
+    if(pathname !== "/vehicles") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Vehicules Mod :";
@@ -64,7 +60,7 @@ presence.on("UpdateData", async () => {
   }
 
   if(pathname.includes("/paintjobs")) {
-    if(pathname != "/paintjobs") 
+    if(pathname !== "/paintjobs") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Paintjobs Mod :";
@@ -76,7 +72,7 @@ presence.on("UpdateData", async () => {
   }
 
   if(pathname.includes("/weapons")) {
-    if(pathname != "/weapons") 
+    if(pathname !== "/weapons") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Weapon Mod :";
@@ -88,7 +84,7 @@ presence.on("UpdateData", async () => {
   }
 
   if(pathname.includes("/scripts")) {
-    if(pathname != "/scripts") 
+    if(pathname !== "/scripts") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Script Mod :";
@@ -100,7 +96,7 @@ presence.on("UpdateData", async () => {
   }
 
   if(pathname.includes("/player")) {
-    if(pathname != "/player") 
+    if(pathname !== "/player") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Player Mod :";
@@ -112,7 +108,7 @@ presence.on("UpdateData", async () => {
   }
 
   if(pathname.includes("/maps")) {
-    if(pathname != "/maps") 
+    if(pathname !== "/maps") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Maps Mod :";
@@ -124,7 +120,7 @@ presence.on("UpdateData", async () => {
   }
 
   if(pathname.includes("/misc")) {
-    if(pathname != "/misc") 
+    if(pathname !== "/misc") 
     {
       const modName = document.querySelector(".clearfix h1").textContent;
       presenceData.details = "Viewing Misc Mod :";
@@ -135,7 +131,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) 
+  if (presenceData.details === null) 
   {
     presence.setTrayTitle();
     presence.setActivity();
