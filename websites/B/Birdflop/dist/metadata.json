@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Birdflop",
+    "altnames": ["Birdflop Hosting"],
+    "author": {
+      "name": "Oliii",
+      "id": "584459141179768833"
+    },
+    "category": "games",
+    "logo": "https://cdn.discordapp.com/avatars/787929894616825867/69837986a1f6de238ccd00fb5d2264c4.webp?size=2048",
+    "thumbnail": "https://prnt.sc/16gnri9",
+    "version": "1.0.0",
+    "color": "#084cfb",
+    "tags": [
+      "hosting",
+      "developing",
+      "community"
+    ],
+    "url": [
+      "www.birdflop.com",
+      "panel.birdflop.com",
+      "client.birdflop.com"
+    ],
+    "description": {
+      "en": "Top tier minecraft hosting without overselling"
+    }
+  }
