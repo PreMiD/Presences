@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "729013058860744814"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+ browsingStamp = Math.floor(Date.now() / 1000);
   
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "rada",
     startTimestamp: browsingStamp
-  }
+  };
   presenceData.buttons = [
     {
       label: 'Dashboard',
@@ -27,10 +27,10 @@ presence.on("UpdateData", () => {
       presenceData.state = "Guilds";
   } else if (window.location.pathname.startsWith("/guilds/")) {
       presenceData.details = "Editing guild settings";
-      presenceData.state = "Guild ➜ " + document.querySelector("green").textContent;
+      presenceData.state = `Guild ➜ ${document.querySelector("green").textContent}`;
   } else if (window.location.pathname.endsWith("dashboard/")) {
       presenceData.details = "Editing personal settings";
-      presenceData.state = "Dashboard ➜ " + document.querySelector("blurple").textContent;
+      presenceData.state = `Dashboard ➜ ${document.querySelector("blurple").textContent}`;
   } else if (window.location.pathname === "/") {
       presenceData.details = "Home";
       presenceData.state = document.querySelector("div.main-card").textContent;
@@ -39,8 +39,8 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-  } else {
+  } else 
       presence.setActivity(presenceData);
-  }
+  
 
 });
