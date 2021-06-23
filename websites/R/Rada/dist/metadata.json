@@ -1,0 +1,24 @@
+{
+    "author": {
+        "name": "br4d",
+        "id": "286509757546758156"
+    },
+    "service": "Rada",
+    "description": {
+        "en": "An intuitive Discord bot to help with all your moderation / management needs.",
+        "nl": "Een intuïtieve Discord bot die je helpt met al je moderatie / beheers behoeften."
+    },
+    "url": "radabot.net",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/A9Jwzcs.png",
+    "thumbnail": "https://i.imgur.com/IS3enSX.png",
+    "color": "#f05151",
+    "tags": [
+        "discord",
+        "moderation",
+        "bot",
+        "free",
+        "dashboard"
+    ],
+    "category": "other"
+}
