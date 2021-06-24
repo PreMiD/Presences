@@ -35,8 +35,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Watching: " + showName.innerText;
   } else if (document.location.pathname == "/query") {
     presenceData.details = "Searching 7plus!";
-  } else if (document.location.pathname == "/query") {
-    presenceData.details = "Searching 7plus!";
   } else {
     presenceData.details = `Viewing "${document.title.split(" | 7plus")[0]}"`;
   }

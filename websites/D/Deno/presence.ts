@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "843058683100266526"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+browsingStamp = Math.floor(Date.now() / 1000);
 let moduleName: HTMLElement;
 
 // checkmate javascript
