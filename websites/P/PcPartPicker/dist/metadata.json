@@ -14,5 +14,6 @@
   "url": "pcpartpicker.com",
   "description": {
     "en": "Pick parts. Build your PC. Compare and Share."
-  }
+  },
+  "regExp": "([a-z]{2}.|)pcpartpicker.com"
 }
