@@ -114,9 +114,9 @@ presence.on("UpdateData", async () => {
     if (document.location.hostname.startsWith("beta")) {
       episode = document.querySelector(".c-heading.c-heading--xs.c-heading--family-type-one.title").innerHTML;
       [,epName] = episode.match(/.* - (.*)/);
-      seasonregex = new RegExp(`(.*) ${epName} - Watch on Crunchyroll`);
+      seasonregex = new RegExp(`(.*) ${epName}`);
       [,seasonName] = document.title.match(seasonregex);
-      type = document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[2].innerHTML === "Subtitled" ? " (Sub)" : " (Dub)";
+      type = document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[1].innerHTML === "Subtitled" ? " (Sub)" : " (Dub)";
       videoTitle = seasonName + type;
     } else {
       videoTitle = document.querySelector(".ellipsis .text-link span").innerHTML;
