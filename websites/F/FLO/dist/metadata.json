@@ -1,0 +1,25 @@
+{
+  "service": "FLO",
+  "author": {
+    "name": "건유1019",
+    "id": "340373909339635725"
+  },
+  "category": "music",
+  "logo": "https://i.imgur.com/1EEUg5a.png",
+  "thumbnail": "https://i.imgur.com/EgI8zOz.png",
+  "version": "1.0.0",
+  "color": "#3f3fff",
+  "tags": [
+    "korean",
+    "audio"
+  ],
+  "altnames": [
+    "플로"
+  ],
+  "url": "www.music-flo.com",
+  "description": {
+    "ko": "한국 음원 스트리밍 서비스(FLO)",
+    "en": "Korean Music Streaming Service (FLO)",
+    "nl": "Koreaanse muziekstreamingservice (FLO)"
+  }
+}
