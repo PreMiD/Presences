@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "World Romance Translation",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/06NCGow.png",
+  "thumbnail": "https://i.imgur.com/s3wgvCP.png",
+  "version": "1.0.0",
+  "color": "#db75b1",
+  "tags": ["other"],
+  "url": "wrt.my.id",
+  "description": {
+    "en": "World Romance Translation is an Indonesian-language manga website that focuses on the romance comedy genre."
+  }
+}
