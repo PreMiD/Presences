@@ -8,13 +8,13 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
-  const stamp = Math.floor(Date.now() / 1000);
+  const stamp = Math.floor(Date.now() / 1000),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "adn_logo",
-  };
+  },
 
-  const nodeValue = document.getElementsByClassName('sc-qPkqk')[0].attributes[0].nodeValue; 
+   {nodeValue} = document.getElementsByClassName('sc-qPkqk')[0].attributes[0]; 
   if (nodeValue) {
     presenceData.smallImageKey = nodeValue.replace('https://avatar.animedigitalnetwork.fr/web/ch', '').replace('_bg1_green0_188.jpg', '');
     presenceData.smallImageText = 'ADN';
@@ -30,26 +30,26 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = stamp;
 
-    let vfOrvostfr;
-    let quality;
+    let vfOrvostfr,
+     quality;
 
-    const title = document.getElementsByClassName('sc-qQwsb')[0].innerHTML;
-    const episode = document.getElementsByClassName('sc-qYRsW')[0].innerHTML;
+    const title = document.getElementsByClassName('sc-qQwsb')[0].innerHTML,
+     episode = document.getElementsByClassName('sc-qYRsW')[0].innerHTML;
     if (document.getElementsByClassName('vjs-menu-item vjs-selected').length > 0) {
       vfOrvostfr = ((<HTMLElement>document.getElementsByClassName('vjs-menu-item vjs-selected')[1]).innerText.replace(', selected', ''));
       quality = (<HTMLElement>document.getElementsByClassName('vjs-menu-item vjs-selected')[0].firstElementChild).innerText.replace('(', '').replace(')', '');
-      presenceData.details = title + ' : ' + vfOrvostfr + ' - ' + quality;
+      presenceData.details = `${title} : ${vfOrvostfr} - ${quality}`;
       presenceData.state = episode;
     } else {
-      presenceData.state = 'Cette vidéo sera disponible dans : ' + (<HTMLElement>document.getElementsByClassName('adn-player-countdown-value')[0]).innerText;
+      presenceData.state = `Cette vidéo sera disponible dans : ${(<HTMLElement>document.getElementsByClassName('adn-player-countdown-value')[0]).innerText}`;
       presenceData.details = title;
     }
   } else if (document.getElementsByClassName("sc-AxjAm khAjwj").length > 0) {
     // Page de video
     presenceData.startTimestamp = stamp;
-    const title = document.getElementsByClassName('sc-pYA-dN sc-kNYnxC giwmIo')[0].innerHTML;
-    const episodes = (<HTMLElement>document.getElementsByClassName('sc-pTGsb iQjwMY')[0]).innerText.replace('vidéos', 'épisodes')
-    presenceData.details = title
+    const title = document.getElementsByClassName('sc-pYA-dN sc-kNYnxC giwmIo')[0].innerHTML,
+     episodes = (<HTMLElement>document.getElementsByClassName('sc-pTGsb iQjwMY')[0]).innerText.replace('vidéos', 'épisodes');
+    presenceData.details = title;
     presenceData.state = episodes;
   } else if (document.location.pathname.includes("/")) {
     presenceData.startTimestamp = stamp;
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle(); //Clears the tray title for mac users
     presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
-  } else {
+  } else 
     presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
-  }
+  
 });
