@@ -66,14 +66,12 @@ if (
         if (currentPath[0] === "") presenceData.details = "On the index page";
         else if (currentPath[0] === "news") {
           presenceData.details = "Reading an news article";
-          presenceData.state = document.querySelector(
-            ".p-article-title"
-          ).textContent;
+          presenceData.state =
+            document.querySelector(".p-article-title").textContent;
         } else if (currentPath[0] === "blog") {
           presenceData.details = "Reading a blog article";
-          presenceData.state = document.querySelector(
-            ".p-article-title"
-          ).textContent;
+          presenceData.state =
+            document.querySelector(".p-article-title").textContent;
         } else if (currentPath[0] === "members") {
           presenceData.details = "Reading a blog article";
           presenceData.state = document.querySelector(".username").textContent;
@@ -116,9 +114,11 @@ if (
         }
 
         try {
-          sitename = (document.querySelector(
-            "meta[property='og:site_name']"
-          ) as HTMLMetaElement).content;
+          sitename = (
+            document.querySelector(
+              "meta[property='og:site_name']"
+            ) as HTMLMetaElement
+          ).content;
         } catch (e) {
           if (
             document.querySelector(".skin-fandomdesktop") ||
@@ -130,12 +130,11 @@ if (
               ) || document.querySelector(".wds-community-bar__sitename")
             ).textContent.trim();
           } else {
-            const mainPageHref = ((document.querySelector(
-                "#n-mainpage-description a"
-              ) ||
-                document.querySelector("#p-navigation a") ||
-                document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement)
-                .href,
+            const mainPageHref = (
+                (document.querySelector("#n-mainpage-description a") ||
+                  document.querySelector("#p-navigation a") ||
+                  document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement
+              ).href,
               mainPageURL = new URL(mainPageHref),
               mainPagePath = mainPageURL.pathname
                 .replace(/^\/|\/$/g, "")
@@ -212,18 +211,21 @@ if (
 
         if (
           (document.querySelector(".skin-hydra") &&
-            ((document.querySelector("#n-mainpage-description a") ||
-              document.querySelector("#p-navigation a") ||
-              document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement)
-              .href === currentURL.href) ||
+            (
+              (document.querySelector("#n-mainpage-description a") ||
+                document.querySelector("#p-navigation a") ||
+                document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement
+            ).href === currentURL.href) ||
           title === "Home"
         )
           presenceData.details = "On the home page";
         else if (document.querySelector(".unified-search__form")) {
           presenceData.details = "Searching for a page";
-          presenceData.state = (document.querySelector(
-            ".unified-search__input__query"
-          ) as HTMLInputElement).value;
+          presenceData.state = (
+            document.querySelector(
+              ".unified-search__input__query"
+            ) as HTMLInputElement
+          ).value;
         } else if (actionResult() === "history") {
           presenceData.details = "Viewing revision history";
           presenceData.state = titleFromURL();
@@ -235,9 +237,8 @@ if (
           presenceData.state = titleFromURL();
         } else if (namespaceDetails() === "Viewing a user profile") {
           presenceData.details = namespaceDetails();
-          presenceData.state = document.querySelector(
-            ".mw-headline"
-          ).textContent;
+          presenceData.state =
+            document.querySelector(".mw-headline").textContent;
         } else if (namespaceDetails() === "Viewing a user blog") {
           if (title) {
             presenceData.details = "Reading a user blog post";
