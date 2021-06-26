@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname == "rededark.com") {
     presenceData.startTimestamp = browsedTimestamp;
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/") {
       presenceData.details = 'Página inicial | Notícias',
       presenceData.state = 'discord.gg/rededarkoficial';
 
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
