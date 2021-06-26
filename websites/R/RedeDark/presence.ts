@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "858109643347066941"
-});
+}),
 
-const browsedTimestamp = Math.floor(Date.now() / 1000);
+ browsedTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "rededark"
@@ -18,11 +18,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = 'Navegando na loja..',
       presenceData.state = 'discord.gg/rededarkoficial';
 
-    } else if (document.location.pathname.includes("itens")){
+    } else if (document.location.pathname.includes("itens")) {
       presenceData.details = 'Navegando na loja..',
       presenceData.state = 'discord.gg/rededarkoficial';
 
-    } else if (document.location.pathname.includes("equipe")){
+    } else if (document.location.pathname.includes("equipe")) {
       presenceData.details = 'Equipe RD | Lista',
       presenceData.state = 'discord.gg/rededarkoficial';
 
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
