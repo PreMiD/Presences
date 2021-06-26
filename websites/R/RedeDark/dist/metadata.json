@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Lipe44 ✨",
+    "id": "536680820740587521"
+  },
+  "service": "RedeDark",
+  "description": {
+    "pt-br": "Jogue agora com seus amigos em um servidor de mini-games de minecraft totalmente grátis, só aqui na RedeDark!"
+  },
+  "url": "rededark.com",
+  "version": "1.0.5",
+  "logo": "https://i.imgur.com/bhzPECS.png",
+  "thumbnail": "https://i.imgur.com/aYpA47z.png",
+  "color": "#49ABE3",
+  "tags": [
+    "minecraft",
+    "rededark"
+  ],
+  "category": "games"
+}
