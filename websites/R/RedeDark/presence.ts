@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "rededark"
   };
 
-  if (document.location.hostname == "rededark.com") {
+  if (document.location.hostname === "rededark.com") {
     presenceData.startTimestamp = browsedTimestamp;
     if (document.location.pathname === "/") {
       presenceData.details = 'Página inicial | Notícias',
