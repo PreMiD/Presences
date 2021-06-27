@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = price !== null ? `Price: ${price.innerText}` : "";
     presenceData.buttons = [
       {
-        label: "Browse Build",
+        label: "View Build",
         url: document.location.href
       }
     ];
