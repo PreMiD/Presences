@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
   if (invite !== null) {
     presenceData.details = "Waiting for other player to join ...";
     presenceData.buttons.push({
-      label: "Join Invite",
+      label: "Join the game",
       url: document.location.href
     });
   }
