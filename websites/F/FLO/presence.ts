@@ -86,7 +86,6 @@ presence.on("UpdateData", async () => {
           presenceData.details += "(가사)";
     }else if (location.pathname.indexOf("/new") === 0) {
       presenceData.smallImageKey = "search";
-      presenceData.smallImageText = "최근 발매 음악";
       presenceData.details = "최근 발매 음악";
 
       if (location.pathname === "/new/track")
