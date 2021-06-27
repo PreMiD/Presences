@@ -34,8 +34,7 @@ presence.on("UpdateData", async () => {
         data.smallImageText = video.paused
           ? (await strings).pause
           : (await strings).play;
-        (data.startTimestamp = timestamps[0]),
-          (data.endTimestamp = timestamps[1]);
+        data.endTimestamp = endTimestamp;
       }
       const subtitle = document.querySelector(
         "._39WJKEhrSYo7ftwMlFjZtA  ._3tdt8zwgvMCJ6v_sElXneQ"
