@@ -71,7 +71,6 @@ presence.on("UpdateData", async () => {
         const keyword = getQuery();
 
         presenceData.smallImageKey = "search";
-        presenceData.smallImageText = "검색";
         presenceData.details = "검색";
         presenceData.state = keyword.keyword;
 
