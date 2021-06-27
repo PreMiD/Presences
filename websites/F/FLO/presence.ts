@@ -12,12 +12,6 @@ function DataRake(dataset: DOMStringMap) {
   return JSON.parse(_dataset.rake);
 }
 
-function getTimestamp(time: string, deletedKey: string = null) {
-  if (deletedKey !== null) time = time.replace(deletedKey, "");
-  time = time.replace("    ", "").replace("\n", "");
-  return Date.parse(`1970 00:${time} GMT+0000`);
-}
-
 function getQuery() {
   const search = location.search.substring(1);
   return JSON.parse(
@@ -32,13 +26,7 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "flo-logo",
-      buttons: [
-        {
-          label: "FLO 웹사이트",
-          url: "https://www.music-flo.com/"
-        }
-      ]
+      largeImageKey: "flo-logo"
     }, player = document.querySelector(".playbar_wrap"),
     playerBar: HTMLInputElement = player.querySelector("input.progress");
   if (!playerBar.disabled) { // Use first one-time player
@@ -50,11 +38,10 @@ presence.on("UpdateData", async () => {
       allHiddenTime = player.querySelector(".time_all").querySelector("span.hidden").textContent,
       currentTime = player.querySelector(".time_current").textContent,
       currentHiddenTime = player.querySelector(".time_current").querySelector("span.hidden").textContent,
-      nowDate = Date.now(),
-      allDate = getTimestamp(allTime, allHiddenTime),
-      currentDate = getTimestamp(currentTime, currentHiddenTime);
+      allDate = presence.timestampFromFormat(allTime.replace(allHiddenTime, "")),
+      currentDate = presence.timestampFromFormat(currentTime.replace(currentHiddenTime, ""));
 
-    presenceData.endTimestamp = nowDate + allDate - currentDate;
+    [ presenceData.startTimestamp, presenceData.endTimestamp ] = presence.getTimestamps(currentDate, allDate);
     presenceData.details = `${title} - ${artist}`;
     if (playButtonActionId.actionId === "pause") {
       presenceData.smallImageKey = "pause";
