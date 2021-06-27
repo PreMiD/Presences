@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
     },
     canvas: HTMLCanvasElement = document.querySelector("canvas"),
     initalLoading: HTMLSpanElement = document.querySelector("span.percentage"),
-    loadingDon: HTMLDivElement = document.querySelector("div#loading-don");
+    loadingDon: HTMLDivElement = document.querySelector("div#loading-don"),
+    invite: HTMLDivElement = document.querySelector("div#session-invite");
 
   if (canvas !== null) {
     const { id } = canvas;
@@ -27,7 +28,6 @@ presence.on("UpdateData", async () => {
         const lyrics: HTMLDivElement = document.querySelector(
           "div#song-lyrics > div.fill"
         );
-        presenceData.details = "Playing";
         presenceData.state = lyrics !== null ? lyrics.innerText : "";
         break;
       }
@@ -36,6 +36,20 @@ presence.on("UpdateData", async () => {
     presenceData.details = "At Loading screen";
     presenceData.state = `${initalLoading.innerText} Loaded`;
   } else if (loadingDon !== null) presenceData.details = "Game Loading ...";
+
+  presenceData.buttons = [
+    {
+      label: "Play game",
+      url: `https://${document.location.hostname}`
+    }
+  ];
+
+  if (invite !== null) {
+    presenceData.buttons.push({
+      label: "Join Invite",
+      url: document.location.href
+    });
+  }
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
