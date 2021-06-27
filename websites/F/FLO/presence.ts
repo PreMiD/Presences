@@ -119,7 +119,6 @@ presence.on("UpdateData", async () => {
       const title = document.querySelector(".chart_content_head>h4").textContent;
 
       presenceData.smallImageKey = "search";
-      presenceData.smallImageText = title;
       presenceData.details = title;
     }else if (location.pathname.indexOf("/storage") === 0) {
       presenceData.smallImageKey = "search";
