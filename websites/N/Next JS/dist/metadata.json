@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Next.js",
+  "author": {
+    "name": "Knox",
+    "id": "723141045835005962"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/4S1Uw5a.png",
+  "thumbnail": "https://i.imgur.com/h9AZiCc.png",
+  "version": "1.0.0",
+  "color": "#101110",
+  "tags": [
+    "nextjs",
+    "js",
+    "javascript",
+    "next",
+    "react"
+  ],
+  "url": "nextjs.org",
+  "description": {
+    "en": "Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more. No config needed."
+  }
+}
