@@ -23,28 +23,33 @@ class anime_storage {
   private list: store_type;
 
   public anime(title: string, anilist: string | false) {
-
     if (this.list[title]) return this.list[title];
-
     else if (!anilist) return undefined;
     else {
-      const share_link = document.getElementsByClassName('modal-body')[1].lastElementChild.lastElementChild as HTMLAnchorElement;
+      const share_link = document.getElementsByClassName('modal-body')[1]
+        .lastElementChild.lastElementChild as HTMLAnchorElement;
       
       this.list[title] = { 
         id: parseInt(share_link.href.split('/a/')[1]), 
         anilist: parseInt(anilist.split('anime/')[1]),
-        time: Date.now() };
+        time: Date.now()
+      };
 
       // Removes the oldest stored anime if the store length has exceeded 10
       if (Object.keys(this.list).length === 11) 
-        delete this.list[Object.entries(Object.assign({}, this.list)).sort((a, b) => a[1].time - b[1].time)[0][0]];
+        delete this.list[
+          Object.entries(Object.assign({}, this.list)).sort(
+            (a, b) => a[1].time - b[1].time
+          )[0][0]
+        ];
 
       localStorage.setItem('presence_data', btoa(JSON.stringify(this.list)));
     }
   }
 
   constructor () {
-    let storage: store_type | string | null = localStorage.getItem('presence_data');
+    let storage: store_type | string | null =
+      localStorage.getItem('presence_data');
     if (storage) {
       storage = JSON.parse(atob(storage));
 
@@ -179,7 +184,10 @@ presence.on('UpdateData', async () => {
 
       title = document.getElementsByClassName('theatre-info')[0].children[1].children[1].textContent,
 
-      episode = parseInt(document.getElementById('episodeMenu').textContent.split('Episode ')[1].replace(/^\s+|\s+$/g, ''));
+      episode = parseInt(
+        document.getElementById('episodeMenu')
+        .textContent.split('Episode ')[1].replace(/^\s+|\s+$/g, '')
+      );
 
     presenceData.smallImageKey = `presence_playback_${
       iframe_response.paused ? 'paused' : 'playing'

@@ -17,11 +17,15 @@
   },
   "url": [
     "translate.premid.app",
-    "crowdin.com"
+    "crowdin.com",
+    "support.crowdin.com",
+    "store.crowdin.com",
+    "status.crowdin.com",
+    "blog.crowdin.com"
   ],
-  "version": "2.2.8",
+  "version": "3.0.0",
   "logo": "https://i.imgur.com/rtkC4kS.png",
-  "thumbnail": "https://i.imgur.com/Cn7yyqe.png",
+  "thumbnail": "https://i.imgur.com/dJnnzqd.png",
   "color": "#2e3340",
   "tags": [
     "partner",
