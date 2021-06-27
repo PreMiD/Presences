@@ -113,7 +113,6 @@ presence.on("UpdateData", async () => {
        artist = document.querySelector("p.artist").textContent;
 
       presenceData.smallImageKey = "search";
-      presenceData.smallImageText = "앨범";
       presenceData.details = "앨범";
       presenceData.state = `${title} - ${artist}`;
     }else if (location.pathname === "/browse") {
