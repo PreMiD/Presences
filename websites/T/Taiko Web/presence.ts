@@ -28,15 +28,17 @@ script.innerHTML = `
 document.body.append(script);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "taiko_logo",
-      startTimestamp: browsingStamp
-    },
-    presenceData1: PresenceData = {
-      largeImageKey: "taiko_logo",
-      smallImageKey: "taiko_logo",
-      startTimestamp: browsingStamp
-    },
+  const presenceData: PresenceData[] = [
+      {
+        largeImageKey: "taiko_logo",
+        startTimestamp: browsingStamp
+      },
+      {
+        largeImageKey: "taiko_logo",
+        smallImageKey: "taiko_logo",
+        startTimestamp: browsingStamp
+      }
+    ],
     canvas: HTMLCanvasElement = document.querySelector("canvas"),
     initialLoading: HTMLSpanElement = document.querySelector("span.percentage"),
     loadingDon: HTMLDivElement = document.querySelector("div#loading-don"),
@@ -44,50 +46,50 @@ presence.on("UpdateData", async () => {
     view: HTMLDivElement = document.querySelector("div.view"),
     { hash } = document.location;
 
-  let songPlaying = false;
+  let isSongPlaying = false;
 
   if (canvas !== null) {
     const { id } = canvas;
     switch (id) {
       case "logo": {
-        presenceData.details = "At Home Screen";
+        presenceData[0].details = "At Home Screen";
         break;
       }
       case "song-sel-canvas": {
-        presenceData.details = "Selecting Song";
-        songPlaying = true;
+        presenceData[0].details = "Selecting Song";
+        isSongPlaying = true;
         break;
       }
       case "canvas": {
-        presenceData.details = "Playing";
-        songPlaying = true;
+        presenceData[0].details = "Playing";
+        isSongPlaying = true;
         break;
       }
     }
-    presenceData.state = hash === "" ? "SinglePlayer" : "Multiplayer";
+    presenceData[0].state = hash === "" ? "SinglePlayer" : "Multiplayer";
   } else if (initialLoading !== null) {
-    presenceData.details = "At Loading screen";
-    presenceData.state = `${initialLoading.innerText} Loaded`;
-  } else if (loadingDon !== null) presenceData.details = "Game Loading ...";
-  else if (view !== null) presenceData.details = "Changing Game Settings";
+    presenceData[0].details = "At Loading screen";
+    presenceData[0].state = `${initialLoading.innerText} Loaded`;
+  } else if (loadingDon !== null) presenceData[0].details = "Game Loading ...";
+  else if (view !== null) presenceData[0].details = "Changing Game Settings";
 
-  if (slideShow.currentSlide.smallImageKey !== null && songPlaying) {
+  if (slideShow.currentSlide.smallImageKey !== null && isSongPlaying) {
     presence.getPageletiable("song").then((res) => {
       if (res) {
-        presenceData1.details = res.title_lang.en;
-        presenceData1.smallImageText = res.title;
-        presenceData1.state = `Category: ${res.category}`;
+        presenceData[1].details = res.title_lang.en;
+        presenceData[1].smallImageText = res.title;
+        presenceData[1].state = `Category: ${res.category}`;
       } else {
-        presenceData1.details = presenceData.details;
-        presenceData1.state = presenceData.state;
+        presenceData[1].details = presenceData[0].details;
+        presenceData[1].state = presenceData[0].state;
       }
     });
   } else {
-    presenceData1.details = presenceData.details;
-    presenceData1.state = presenceData.state;
+    presenceData[1].details = presenceData[0].details;
+    presenceData[1].state = presenceData[0].state;
   }
 
-  presenceData.buttons = [
+  presenceData[0].buttons = [
     {
       label: "Play game",
       url: `https://${document.location.hostname}`
@@ -95,19 +97,19 @@ presence.on("UpdateData", async () => {
   ];
 
   if (invite !== null) {
-    presenceData.details = "Waiting for other player to join ...";
-    presenceData.buttons.push({
+    presenceData[0].details = "Waiting for other player to join ...";
+    presenceData[0].buttons.push({
       label: "Join Invite",
       url: document.location.href
     });
   }
 
-  presenceData1.buttons = presenceData.buttons;
+  presenceData[1].buttons = presenceData[0].buttons;
 
-  slideShow.addSlide("slide1", presenceData, 10000);
-  slideShow.addSlide("slide2", presenceData1, 5000);
+  slideShow.addSlide("slide1", presenceData[0], 10000);
+  slideShow.addSlide("slide2", presenceData[1], 5000);
 
-  if (presenceData.details === null) {
+  if (presenceData[0].details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(slideShow);
