@@ -105,7 +105,6 @@ presence.on("UpdateData", async () => {
       const title = document.querySelector("p.title").textContent;
 
       presenceData.smallImageKey = "search";
-      presenceData.smallImageText = "테마리스트";
       presenceData.details = "테마리스트";
       presenceData.state = title;
     }else if (location.pathname.indexOf("/detail/album") === 0) {
