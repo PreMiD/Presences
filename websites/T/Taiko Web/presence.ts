@@ -82,24 +82,15 @@ presence.on("UpdateData", async () => {
     }
   ];
 
-  presenceData1.buttons = [
-    {
-      label: "Play game",
-      url: `https://${document.location.hostname}`
-    }
-  ];
-
   if (invite !== null) {
     presenceData.details = "Waiting for other player to join ...";
     presenceData.buttons.push({
       label: "Join Invite",
       url: document.location.href
     });
-    presenceData1.buttons.push({
-      label: "Join Invite",
-      url: document.location.href
-    });
   }
+
+  presenceData1.buttons = presenceData.buttons;
 
   slideShow.addSlide("slide1", presenceData, 5000);
   slideShow.addSlide("slide2", presenceData1, 5000);
