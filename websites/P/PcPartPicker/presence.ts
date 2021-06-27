@@ -20,8 +20,7 @@ presence.on("UpdateData", async () => {
       );
     presenceData.details =
       title !== null ? `Browsing ${title.innerText}` : "Browsing Guide";
-    if (price !== null)
-       presenceData.state = `Price: ${price.innerText}`;
+    if (price !== null) presenceData.state = `Price: ${price.innerText}`;
     presenceData.buttons = [
       {
         label: "Browse Guide",
@@ -36,11 +35,9 @@ presence.on("UpdateData", async () => {
       price: HTMLTableDataCellElement = document.querySelector(
         "tr.tr__total.tr__total--grandtotal > td.td__price"
       );
-    presenceData.details =
-      build !== null && user !== null
-        ? `Viweing ${build.innerText} by ${user.innerText}`
-        : "";
-    presenceData.state = price !== null ? `Price: ${price.innerText}` : "";
+    if (build !== null && user !== null)
+      presenceData.details = `Viweing ${build.innerText} by ${user.innerText}`;
+    if (price !== null) presenceData.state = `Price: ${price.innerText}`;
     presenceData.buttons = [
       {
         label: "View Build",
@@ -112,7 +109,7 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
-  } else if (pathname.startsWith("/builds/")) 
+  } else if (pathname.startsWith("/builds/"))
     presenceData.details = "Viewing Completed Builds";
   if (presenceData.details === null) {
     presence.setTrayTitle();
