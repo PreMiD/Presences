@@ -20,7 +20,8 @@ presence.on("UpdateData", async () => {
       );
     presenceData.details =
       title !== null ? `Browsing ${title.innerText}` : "Browsing Guide";
-    presenceData.state = price !== null ? `Price: ${price.innerText}` : "";
+    if (price !== null)
+       presenceData.state = `Price: ${price.innerText}`;
     presenceData.buttons = [
       {
         label: "Browse Guide",
