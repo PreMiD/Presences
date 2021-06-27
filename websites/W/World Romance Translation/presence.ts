@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
       document.querySelector("h1.entry-title");
     presenceData.details =
       pathname === "/manga/" ? "Browsing Manga List" : "Checking Synopsis";
-    presenceData.state = mangaName !== null ? mangaName.innerText : "";
+    if (mangaName) presenceData.state = mangaName.innerText;
     presenceData.buttons = [
       {
         label: pathname === "/manga/" ? "Browse Manga List" : "Check Synopsis",
