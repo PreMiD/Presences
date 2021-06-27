@@ -96,9 +96,19 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-  } else if (pathname.startsWith("/forums/"))
+  } else if (pathname.startsWith("/forums/")) {
+    const topic: HTMLHeadingElement = document.querySelector("h1.pageTitle");
     presenceData.details = "Browsing Forums";
-  else if (pathname.startsWith("/trends/")) {
+    if (topic !== null) {
+      presenceData.state = topic.innerText;
+      presenceData.buttons = [
+        {
+          label: "View Thread",
+          url: document.location.href
+        }
+      ];
+    }
+  } else if (pathname.startsWith("/trends/")) {
     const product: HTMLHeadingElement = document.querySelector("h1.pageTitle");
     presenceData.details = "Looking at price trends";
     if (pathname !== "/trends/")
