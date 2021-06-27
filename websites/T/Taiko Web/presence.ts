@@ -14,9 +14,12 @@ script.innerHTML = `
   !function(open){
     XMLHttpRequest.prototype.open = function (method, url) {
       if (url && url.startsWith("https://taiko.uk/taiko/songs/")) {
-        console.log(url);
         let songId = parseInt(url.substr(29));
-        window.song = assets.songs.find(song => song.id === songId); 
+        let song = assets.songs.find(song => song.id === songId);
+        window.song = {};
+        window.song.title_lang = song.title_lang;
+        window.song.title = song.title;
+        window.song.category = song.category;
       }
       open.call(this, method, url);
     }
@@ -41,6 +44,8 @@ presence.on("UpdateData", async () => {
     view: HTMLDivElement = document.querySelector("div.view"),
     { hash } = document.location;
 
+  let songPlaying = false;
+
   if (canvas !== null) {
     const { id } = canvas;
     switch (id) {
@@ -50,10 +55,12 @@ presence.on("UpdateData", async () => {
       }
       case "song-sel-canvas": {
         presenceData.details = "Selecting Song";
+        songPlaying = true;
         break;
       }
       case "canvas": {
         presenceData.details = "Playing";
+        songPlaying = true;
         break;
       }
     }
@@ -64,16 +71,21 @@ presence.on("UpdateData", async () => {
   } else if (loadingDon !== null) presenceData.details = "Game Loading ...";
   else if (view !== null) presenceData.details = "Changing Game Settings";
 
-  presence.getPageletiable("song").then((res) => {
-    if (res) {
-      presenceData1.details = res.title_lang.en;
-      presenceData1.smallImageText = res.title;
-      presenceData1.state = `Category: ${res.category}`;
-    } else {
-      presenceData1.details = presenceData.details;
-      presenceData1.state = presenceData.state;
-    }
-  });
+  if (slideShow.currentSlide.smallImageKey !== null && songPlaying) {
+    presence.getPageletiable("song").then((res) => {
+      if (res) {
+        presenceData1.details = res.title_lang.en;
+        presenceData1.smallImageText = res.title;
+        presenceData1.state = `Category: ${res.category}`;
+      } else {
+        presenceData1.details = presenceData.details;
+        presenceData1.state = presenceData.state;
+      }
+    });
+  } else {
+    presenceData1.details = presenceData.details;
+    presenceData1.state = presenceData.state;
+  }
 
   presenceData.buttons = [
     {
@@ -92,7 +104,7 @@ presence.on("UpdateData", async () => {
 
   presenceData1.buttons = presenceData.buttons;
 
-  slideShow.addSlide("slide1", presenceData, 5000);
+  slideShow.addSlide("slide1", presenceData, 10000);
   slideShow.addSlide("slide2", presenceData1, 5000);
 
   if (presenceData.details === null) {
