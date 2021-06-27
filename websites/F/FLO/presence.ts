@@ -2,16 +2,6 @@ const presence = new Presence({
   clientId: "857504781438681089"
 });
 
-type actionType = {
-  actionId?: string;
-};
-
-
-function DataRake(dataset: DOMStringMap) {
-  const _dataset = JSON.parse(JSON.stringify(dataset));
-  return JSON.parse(_dataset.rake);
-}
-
 function getQuery() {
   const search = location.search.substring(1);
   return JSON.parse(
@@ -31,7 +21,6 @@ presence.on("UpdateData", async () => {
     playerBar: HTMLInputElement = player.querySelector("input.progress");
   if (!playerBar.disabled) { // Use first one-time player
     const playButton: HTMLButtonElement = player.querySelector("button.icon-player"),
-      playButtonActionId: actionType = DataRake(playButton.dataset),
       title = player.querySelector("p.title").textContent,
       artist = player.querySelector("p.artist").textContent,
       allTime = player.querySelector(".time_all").textContent,
@@ -43,10 +32,10 @@ presence.on("UpdateData", async () => {
 
     [, presenceData.endTimestamp] = presence.getTimestamps(currentDate, allDate);
     presenceData.details = `${title} - ${artist}`;
-    if (playButtonActionId.actionId === "pause") {
+    if (playButton.className.indexOf("btn-player-play") !== -1) {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "일시 정지";
-    } else if (playButtonActionId.actionId === "play") {
+    } else if (playButton.className.indexOf("btn-player-pause") !== -1) {
       presenceData.smallImageKey = "playing";
       presenceData.smallImageText = "재생";
     }
