@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
       allDate = presence.timestampFromFormat(allTime.replace(allHiddenTime, "")),
       currentDate = presence.timestampFromFormat(currentTime.replace(currentHiddenTime, ""));
 
-    [ presenceData.startTimestamp, presenceData.endTimestamp ] = presence.getTimestamps(currentDate, allDate);
+    [, presenceData.endTimestamp] = presence.getTimestamps(currentDate, allDate);
     presenceData.details = `${title} - ${artist}`;
     if (playButtonActionId.actionId === "pause") {
       presenceData.smallImageKey = "pause";
