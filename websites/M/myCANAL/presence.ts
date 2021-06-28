@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = elapsed;
       } else {
         title = document.querySelector(".bodyTitle___DZEtt").textContent;
-        const timestamps = presence.getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
