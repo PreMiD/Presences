@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       description = "Movie";
     }
 
-    const timestamps = presence.getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
