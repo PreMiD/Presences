@@ -11,15 +11,15 @@ const presence = new Presence({
     browse: "presence.activity.browsing"
   });
 
-let iframe_response = {
+let iframeResponse = {
   paused: true,
   duration: 0,
-  current_time: 0
+  currentTime: 0
 };
 
 type storeType = Record<string, { id: number, anilist: number, time: number }>;
 
-class anime_storage {
+class AnimeStorage {
   private list: storeType;
 
   public anime(title: string, anilist: string | false) {
@@ -62,7 +62,7 @@ class anime_storage {
   }
 }
 
-const anime_store = new anime_storage();
+const animeStore = new AnimeStorage();
 
 function getTimes(time: number): Record<string, number> {
   let seconds = Math.round(time),
@@ -96,8 +96,8 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 
 presence.on(
   "iFrameData",
-  (data: { paused: boolean; duration: number; current_time: number }) => {
-    iframe_response = data;
+  (data: { paused: boolean; duration: number; currentTime: number }) => {
+    iframeResponse = data;
   }
 );
 
@@ -108,12 +108,14 @@ presence.on("UpdateData", async () => {
       details: "loading",
       startTimestamp: Math.floor(Date.now() / 1000)
     };
+  let playback = false;
 
   // homepage / new releases
   if (path[0] === '') {
     presenceData.smallImageKey = "presence_browsing_home";
     presenceData.smallImageText = (await strings).browse;
     presenceData.details = `${(await strings).browse.slice(0, -3)} Latest Releases`;
+  //
   } else if (path[0] === "anime") {
     // a-z all
     if (path.length === 1) {
@@ -154,7 +156,7 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: "View on Pahe",
-            url: `https://pahe.win/a/${anime_store.anime(title, anilist).id}`
+            url: `https://pahe.win/a/${animeStore.anime(title, anilist).id}`
           },
           {
             label: "View on AniList",
@@ -166,8 +168,8 @@ presence.on("UpdateData", async () => {
   // playback
   } else if (path[0] === "play") {
     const timestamps = presence.getTimestamps(
-      Math.floor(iframe_response.current_time),
-      Math.floor(iframe_response.duration)
+      Math.floor(iframeResponse.currentTime),
+      Math.floor(iframeResponse.duration)
     ),
     movie: boolean = document.getElementsByClassName("anime-status")[0].firstElementChild.textContent === "Movie",
 
@@ -179,10 +181,10 @@ presence.on("UpdateData", async () => {
     );
 
     presenceData.smallImageKey = `presence_playback_${
-      iframe_response.paused ? "paused" : "playing"
+      iframeResponse.paused ? "paused" : "playing"
     }`;
 
-    presenceData.smallImageText = iframe_response.paused
+    presenceData.smallImageText = iframeResponse.paused
       ? (await strings).pause
       : (await strings).play;
 
@@ -191,13 +193,13 @@ presence.on("UpdateData", async () => {
 
     presenceData.state = title;
 
-    if (!iframe_response.paused) presenceData.endTimestamp = timestamps[1];
+    if (!iframeResponse.paused) presenceData.endTimestamp = timestamps[1];
     else {
       presenceData.startTimestamp = null;
-      presenceData.smallImageText += ` - ${getTimestamp(iframe_response.current_time)}`;
+      presenceData.smallImageText += ` - ${getTimestamp(iframeResponse.currentTime)}`;
     }
 
-    const anime = anime_store.anime(title, false);
+    const anime = animeStore.anime(title, false);
 
     if (anime) {
       presenceData.buttons = [
@@ -212,7 +214,7 @@ presence.on("UpdateData", async () => {
       ];
     }
 
-    presence.setActivity(presenceData, true);
+    playback = true;
   }
-  presence.setActivity(presenceData, false);
+  presence.setActivity(presenceData, playback);
 });
