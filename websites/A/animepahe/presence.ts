@@ -81,7 +81,7 @@ function getTimes(time: number): Record<string, number> {
   };
 }
 
-const lessTen = (d: number) => d < 10 ? "0" : '';
+const lessTen = (d: number) => d < 10 ? "0" : "";
 
 function getTimestamp(time: number): string {
   const { sec, min, hrs } = getTimes(time);
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
   let playback = false;
 
   // homepage / new releases
-  if (path[0] === '') {
+  if (path[0] === "") {
     presenceData.smallImageKey = "presence_browsing_home";
     presenceData.smallImageText = (await strings).browse;
     presenceData.details = `${(await strings).browse.slice(0, -3)} Latest Releases`;
@@ -172,7 +172,7 @@ presence.on("UpdateData", async () => {
 
         episode = parseInt(
           document.getElementById("episodeMenu")
-          .textContent.split("Episode ")[1].replace(/^\s+|\s+$/g, '')
+          .textContent.split("Episode ")[1].replace(/^\s+|\s+$/g, "")
         );
 
         presenceData.smallImageKey = `presence_playback_${
