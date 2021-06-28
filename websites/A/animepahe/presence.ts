@@ -114,15 +114,13 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "presence_browsing_home";
     presenceData.smallImageText = (await strings).browse;
     presenceData.details = `${(await strings).browse.slice(0, -3)} Latest Releases`;
-  }
-  else if (path[0] === "anime") {
+  } else if (path[0] === "anime") {
     // a-z all
     if (path.length === 1) {
       presenceData.smallImageKey = "presence_browsing_all";
       presenceData.smallImageText = (await strings).browse;
       presenceData.details = `${(await strings).browse.slice(0, -3)} A-Z`;
-    }
-    else {
+    } else {
       // genre
       if (path[1] === "genre") {
         presenceData.smallImageKey = "presence_browsing_all";
