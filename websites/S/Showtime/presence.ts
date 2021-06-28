@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       smallImageKey: smallImageKey,
       smallImageText: smallImageText,
-      endTimestamp: timestamps[1]
+      endTimestamp: endTimestamp
     };
 
     if (video.paused) {
