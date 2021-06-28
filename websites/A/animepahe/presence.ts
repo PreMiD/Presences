@@ -128,12 +128,11 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).browse;
         presenceData.details = `${(await strings).browse.slice(0, -3)} Genre`;
         presenceData.state = capitalize(path[2]);
-      }
-      // browse specific
-      else {
+      } else {
+        // browse specific
         let type: string,
         anilist: string;
-    
+
         for (const info of document.getElementsByClassName("anime-info")[0].children) {
           // Not uniform info order... ugh
           if (info.children[0].textContent === "Type:") {
@@ -144,14 +143,14 @@ presence.on("UpdateData", async () => {
           if (info.children[0].textContent === "External Links:")
             anilist = (info.children[1] as HTMLAnchorElement).href;
         }
-    
+
         const title = document.getElementsByClassName("title-wrapper")[0].children[1].textContent;
-    
+
         presenceData.smallImageKey = "presence_browsing_season";
         presenceData.smallImageText = (await strings).browse;
         presenceData.details = title;
         presenceData.state = `${(await strings).browse.slice(0, -3)} ${type}`;
-    
+
         presenceData.buttons = [
           {
             label: "View on Pahe",
@@ -164,8 +163,8 @@ presence.on("UpdateData", async () => {
         ];
       }
     }
-  // playback
   } else if (path[0] === "play") {
+    // playback
     const movie: boolean = document.getElementsByClassName("anime-status")[0].firstElementChild.textContent === "Movie",
 
         title = document.getElementsByClassName("theatre-info")[0].children[1].children[1].textContent,
