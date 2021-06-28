@@ -37,13 +37,14 @@ interface iFrameData {
 presence.on("iFrameData", (data: iFrameData) => {
   playback = data.iframe_video !== null ? true : false;
 
-  if (playback)
-    ({
+  if (playback) {
+({
       iFrameVideo,
       currTime: currentTime,
       dur: duration,
       paused
     } = data.iframe_video);
+}
 });
 
 presence.on("UpdateData", async () => {
