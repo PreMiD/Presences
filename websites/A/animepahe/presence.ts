@@ -115,7 +115,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "presence_browsing_home";
     presenceData.smallImageText = (await strings).browse;
     presenceData.details = `${(await strings).browse.slice(0, -3)} Latest Releases`;
-  //
   } else if (path[0] === "anime") {
     // a-z all
     if (path.length === 1) {
@@ -167,22 +166,18 @@ presence.on("UpdateData", async () => {
     }
   // playback
   } else if (path[0] === "play") {
-    const timestamps = presence.getTimestamps(
-      Math.floor(iframeResponse.currentTime),
-      Math.floor(iframeResponse.duration)
-    ),
-    movie: boolean = document.getElementsByClassName("anime-status")[0].firstElementChild.textContent === "Movie",
+    const movie: boolean = document.getElementsByClassName("anime-status")[0].firstElementChild.textContent === "Movie",
 
-    title = document.getElementsByClassName("theatre-info")[0].children[1].children[1].textContent,
+        title = document.getElementsByClassName("theatre-info")[0].children[1].children[1].textContent,
 
-    episode = parseInt(
-      document.getElementById("episodeMenu")
-      .textContent.split("Episode ")[1].replace(/^\s+|\s+$/g, '')
-    );
+        episode = parseInt(
+          document.getElementById("episodeMenu")
+          .textContent.split("Episode ")[1].replace(/^\s+|\s+$/g, '')
+        );
 
-    presenceData.smallImageKey = `presence_playback_${
-      iframeResponse.paused ? "paused" : "playing"
-    }`;
+        presenceData.smallImageKey = `presence_playback_${
+          iframeResponse.paused ? "paused" : "playing"
+        }`;
 
     presenceData.smallImageText = iframeResponse.paused
       ? (await strings).pause
@@ -193,7 +188,10 @@ presence.on("UpdateData", async () => {
 
     presenceData.state = title;
 
-    if (!iframeResponse.paused) presenceData.endTimestamp = timestamps[1];
+    if (!iframeResponse.paused) presenceData.endTimestamp = presence.getTimestamps(
+      Math.floor(iframeResponse.currentTime),
+      Math.floor(iframeResponse.duration)
+    )[1];
     else {
       presenceData.startTimestamp = null;
       presenceData.smallImageText += ` - ${getTimestamp(iframeResponse.currentTime)}`;
