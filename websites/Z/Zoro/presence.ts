@@ -1,0 +1,174 @@
+const presence = new Presence({
+    clientId: "859440340683325491"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+
+let data: {
+  iFrameVideo: boolean;
+  currTime: number;
+  duration: number;
+  paused: boolean;
+} = null;
+
+presence.on(
+  "iFrameData",
+  async (recievedData: {
+    iFrameVideo: boolean;
+    currTime: number;
+    duration: number;
+    paused: boolean;
+  }) => {
+    data = recievedData;
+  }
+);
+
+presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
+    { pathname } = document.location,
+    pages =
+      /\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/;
+
+  switch (pathname) {
+    case "/":
+    case "/home": {
+      presenceData.details = "Exploring Zoro.to";
+      break;
+    }
+    case pages.test(pathname) && pathname: {
+      const heading: HTMLHeadElement = document.querySelector("h2.cat-heading");
+      if (heading) presenceData.details = `Looking at ${heading.innerText}`;
+      break;
+    }
+    case pathname.startsWith("/news") && pathname: {
+      presenceData.details = "Looking at Anime news";
+      if (pathname !== "/news") {
+        const title: HTMLHeadingElement =
+          document.querySelector("h2.news-title");
+        if (title) presenceData.state = title.innerText;
+      }
+      break;
+    }
+    case "/search": {
+      presenceData.details = "Searching";
+      const { search } = document.location;
+      presenceData.state = search.substring(9);
+      break;
+    }
+    case pathname.startsWith("/user") && pathname: {
+      const profile: HTMLDivElement = document.querySelector("div.ph-title"),
+        link: HTMLAnchorElement = document
+          .querySelector("ul.nav.nav-tabs.pre-tabs")
+          .querySelector("a.nav-link.active");
+      if (profile) presenceData.details = `Viewing User: ${profile.innerText}`;
+      if (link) presenceData.state = `At ${link.innerText}`;
+      break;
+    }
+    case (pathname.startsWith("people") || pathname.startsWith("character")) &&
+      pathname: {
+      const name: HTMLHeadingElement = document.querySelector("h4.name");
+      if (name) {
+        presenceData.details = `Looking at ${
+          pathname.startsWith("/people") ? "People" : "Character"
+        }`;
+        presenceData.state = name.innerText;
+      }
+      break;
+    }
+    case pathname.startsWith("/az-list") && pathname: {
+      presenceData.details = "Looking at Anime list";
+      if (pathname !== "/az-list") {
+        presenceData.state = `Titles starting with ${
+          pathname.substring(9) === "other"
+            ? "Other characters"
+            : `${pathname.substring(9)}`
+        }`;
+      }
+      break;
+    }
+    case pathname.startsWith("/watch2gether/") && pathname: {
+      if (pathname === "/watch2gether/")
+        presenceData.details = "Looking for anime rooms";
+      else {
+        const filmName: HTMLHeadingElement =
+          document.querySelector("h2.film-name");
+        presenceData.details = "In a room";
+        if (filmName) presenceData.state = `Watching ${filmName.innerText}`;
+        if (data) {
+          if (data.iFrameVideo && !data.paused) {
+            [, presenceData.endTimestamp] = presence.getTimestamps(
+              data.currTime,
+              data.duration
+            );
+          }
+        }
+        presenceData.buttons = [
+          {
+            label: "Join Room",
+            url: document.location.href
+          }
+        ];
+      }
+      break;
+    }
+    case pathname.startsWith("/watch") && pathname: {
+      const title: HTMLDataListElement = document.querySelector(
+        "li.breadcrumb-item.dynamic-name.active"
+      ),
+        episode: HTMLSpanElement = document.querySelector(
+          "span#cm-episode-number"
+        );
+      if (title) presenceData.details = title.innerText;
+      if (episode) presenceData.state = `Episode ${episode.innerText}`;
+      if (data) {
+        if (data.iFrameVideo && !data.paused) {
+          [, presenceData.endTimestamp] = presence.getTimestamps(
+            data.currTime,
+            data.duration
+          );
+        }
+      }
+      presenceData.buttons = [
+        {
+          label: "Watch Episode",
+          url: document.location.href
+        }
+      ];
+      break;
+    }
+    case "/events": {
+      presenceData.details = "Looking at events";
+      break;
+    }
+    case pathname.startsWith("/event/") && pathname: {
+      const title: HTMLDivElement = document.querySelector("div.title"),
+        description: HTMLDivElement = document.querySelector("div.description");
+      if (title) presenceData.details = `Event: ${title.innerText}`;
+      if (description) presenceData.state = description.innerText;
+      break;
+    }
+    default: {
+      const title: HTMLHeadingElement = document.querySelector(
+        "h2.film-name.dynamic-name"
+      );
+      if (title) {
+        presenceData.details = "Checking Synopsis";
+        presenceData.state = title.innerText;
+        presenceData.buttons = [
+          {
+            label: "Check Synopsis",
+            url: document.location.href
+          }
+        ];
+      }
+      break;
+    }
+  }
+
+  if (!presenceData.details) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
+});
