@@ -3,37 +3,52 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const playerTime = document.getElementById("player-time").textContent;
-  if (playerTime == "Welcome back") return;
+  const presenceData: PresenceData = { largeImageKey: "icon" },
+    playerTitle: HTMLDivElement = document.querySelector("div.player-title"),
+    playerArtist: HTMLDivElement = document.querySelector("div.player-artist"),
+    playerTime: HTMLDivElement = document.querySelector("div.player-time"),
+    playBackStatus: HTMLButtonElement =
+      document.querySelector("button.player-play"),
+    listeners: HTMLDivElement = document.querySelector("div.col.cell");
 
-  const playBackStatus =
-    document.querySelector(".player-play").textContent == "Stop"
-      ? "play"
-      : "pause";
-  const presenceData: presenceData = {
-    state: document.querySelector(".player-title").textContent,
-    details: document.querySelector(".player-artist").textContent,
-    largeImageKey: "icon",
-    smallImageKey: playBackStatus
-  };
+  if (playerTitle) presenceData.state = playerTitle.innerText;
+  if (playerArtist) presenceData.details = playerArtist.innerText;
 
-  if (playBackStatus == "play") {
-    const ts = playerTime
-      .substring(0, 5)
-      .split(":")
-      .map((n) => Number(n));
-    const te = playerTime
-      .substring(8, 13)
-      .split(":")
-      .map((n) => Number(n));
-
-    presenceData.startTimestamp = Date.now() - (ts[0] * 60 + ts[1]) * 1000;
-    presenceData.endTimestamp =
-      Date.now() - (ts[0] * 60 + ts[1]) * 1000 + (te[0] * 60 + te[1]) * 1000;
-  } else {
-    delete presenceData.startTimestamp;
-    delete presenceData.endTimestamp;
+  if (playBackStatus) {
+    switch (playBackStatus.innerText) {
+      case "Play": {
+        presenceData.smallImageKey = "play";
+        if (listeners) presenceData.smallImageText = listeners.innerText;
+        break;
+      }
+      case "Stop": {
+        presenceData.smallImageKey = "pause";
+        if (listeners) presenceData.smallImageText = listeners.innerText;
+        break;
+      }
+      default:
+        break;
+    }
   }
 
-  presence.setActivity(presenceData);
+  if (playerTime) {
+    const [currentTime, duration] = playerTime.innerText
+        .split("/")
+        .map((time) => presence.timestampFromFormat(time)),
+      timestamps = presence.getTimestamps(currentTime, duration);
+
+    [, presenceData.endTimestamp] = timestamps;
+  }
+
+  presenceData.buttons = [
+    {
+      label: "Listen Along",
+      url: document.location.href
+    }
+  ];
+
+  if (presenceData.details === null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
 });
