@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "795826688364904468"
   }),
   strings = presence.getStrings({
@@ -15,18 +15,18 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var page = document.location.pathname.startsWith;
-var title: any;
-var user: any;
-var search: any;
-const nome = document.querySelector(".playkit-channels-navigation__program-name");
-const metadata = document.querySelector(".playkit-channels-navigation__program-metadata");
+let browsingStamp = Math.floor(Date.now() / 1000),
+ page = document.location.pathname.startsWith,
+ title: any,
+ user: any,
+ search: any;
+const nome = document.querySelector(".playkit-channels-navigation__program-name"),
+ metadata = document.querySelector(".playkit-channels-navigation__program-metadata");
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Página inicial";
       } else {
-        presenceData.details = "Canais OFF - " + nome.textContent;
+        presenceData.details = `Canais OFF - ${nome.textContent}`;
         presenceData.state = metadata.textContent;
         presenceData.smallImageKey = "live";
         presenceData.largeImageKey = "canaloff";
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/v/")) {
-      var currentTime: any,
+      let currentTime: any,
         duration: any,
         paused: any,
         timestamps: any,
@@ -96,9 +96,9 @@ presence.on("UpdateData", async () => {
         (duration = video.duration),
         (paused = video.paused);
 
-      let title = document.querySelector(".playkit-video-info__link-text")
-        .textContent;
-      let user = document.querySelector(
+      const title = document.querySelector(".playkit-video-info__link-text")
+        .textContent,
+       user = document.querySelector(
         ".playkit-video-info__ep-title"
       ).textContent;
       presenceData.state = user;
@@ -127,85 +127,85 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
       }
     } else if (document.location.pathname.includes("/canal-off/3775790")) {
-      presenceData.details = "Canais OFF - " + nome.textContent;
+      presenceData.details = `Canais OFF - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "canaloff";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/sportv-3/3180413")) {
-      presenceData.details = "SporTV 3 - " + nome.textContent;
+      presenceData.details = `SporTV 3 - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "sportv3";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/sportv-2/3180373")) {
-      presenceData.details = "SporTV 2 - " + nome.textContent;
+      presenceData.details = `SporTV 2 - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "sportv2";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/sportv/3180419")) {
-      presenceData.details = "SporTV - " + nome.textContent;
+      presenceData.details = `SporTV - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "sportv";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/globonews/3180453")) {
-      presenceData.details = "GloboNews - " + nome.textContent;
+      presenceData.details = `GloboNews - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "globonews";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/gnt/4164401")) {
-      presenceData.details = "GNT - " + nome.textContent;
+      presenceData.details = `GNT - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "gnt";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/viva/4093218")) {
-      presenceData.details = "Viva - " + nome.textContent;
+      presenceData.details = `Viva - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "viva";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/multishow/4163749")) {
-      presenceData.details = "Multishow - " + nome.textContent;
+      presenceData.details = `Multishow - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "multishow";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/mais-na-tela/4166185")) {
-      presenceData.details = "Mais na Tela - " + nome.textContent;
+      presenceData.details = `Mais na Tela - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "maisnatela";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/gloob/4163742")) {
-      presenceData.details = "Gloob - " + nome.textContent;
+      presenceData.details = `Gloob - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "gloob";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/gloobinho/6140830")) {
-      presenceData.details = "Gloobinho - " + nome.textContent;
+      presenceData.details = `Gloobinho - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "gloobinho";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/bis/4163157")) {
-      presenceData.details = "BIS - " + nome.textContent;
+      presenceData.details = `BIS - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "bis";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/canal-brasil/3775811")) {
-      presenceData.details = "Canal Brasil - " + nome.textContent;
+      presenceData.details = `Canal Brasil - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "canalbrasil";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/universal/5497510")) {
-      presenceData.details = "Universal TV - " + nome.textContent;
+      presenceData.details = `Universal TV - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "universaltv";
@@ -213,13 +213,13 @@ presence.on("UpdateData", async () => {
     } else if (
       document.location.pathname.includes("/studio-universal/6939705")
     ) {
-      presenceData.details = "Studio Universal - " + nome.textContent;
+      presenceData.details = `Studio Universal - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "studiouniversal";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/syfy/7301289")) {
-      presenceData.details = "SYFY - " + nome.textContent;
+      presenceData.details = `SYFY - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "syfy";
@@ -231,19 +231,19 @@ presence.on("UpdateData", async () => {
       presenceData.largeImageKey = "megapix";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/combate/3180444")) {
-      presenceData.details = "Combate - " + nome.textContent;
+      presenceData.details = `Combate - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "combate";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/premiere/2752761")) {
-      presenceData.details = "Premiere - " + nome.textContent;
+      presenceData.details = `Premiere - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "premiere";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/futura/4500346")) {
-      presenceData.details = "Futura - " + nome.textContent;
+      presenceData.details = `Futura - ${nome.textContent}`;
       presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "futura";
@@ -319,7 +319,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
