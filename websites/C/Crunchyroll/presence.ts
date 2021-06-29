@@ -37,13 +37,14 @@ interface iFrameData {
 presence.on("iFrameData", (data: iFrameData) => {
   playback = data.iframe_video !== null ? true : false;
 
-  if (playback)
+  if (playback) {
     ({
       iFrameVideo,
       currTime: currentTime,
       dur: duration,
       paused
     } = data.iframe_video);
+  }
 });
 
 presence.on("UpdateData", async () => {
@@ -116,10 +117,11 @@ presence.on("UpdateData", async () => {
         ".c-heading.c-heading--xs.c-heading--family-type-one.title"
       ).innerHTML;
       [, epName] = episode.match(/.* - (.*)/);
+      epName = epName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       seasonregex = new RegExp(`(.*) ${epName} - Watch on Crunchyroll`);
       [, seasonName] = document.title.match(seasonregex);
       type =
-        document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[2]
+        document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[1]
           .innerHTML === "Subtitled"
           ? " (Sub)"
           : " (Dub)";
