@@ -25,28 +25,8 @@ var page = document.location.pathname.startsWith;
 var title: any;
 var user: any;
 var search: any;
-let channel = {
-  "/canal-off/" : "canaloff",
-  "/sportv/" : "sportv",
-  "/globonews/" : "globonews",
-  "/gnt/" : "gnt",
-  "/multishow/" : "multishow",
-  "/viva/" : "viva",
-  "/mais-na-tela/" : "maisnatela",
-  "/gloob/" : "gloob",
-  "/gloobinho/" : "gloobinho",
-  "/bis/" : "bis",
-  "/canal-brasil/" : "canalbrasil",
-  "/universal/" : "universaltv",
-  "/studio-universal/" : "studiouniversal",
-  "/syfy/" : "syfy",
-  "/megapix/" : "megapix",
-  "/combate/" : "combate",
-  "/premiere/" : "premiere",
-  "/futura/" : "futura"
-};
-let nome = document.querySelector(".playkit-channels-navigation__program-name").textContent;
-let metadata = document.querySelector(".playkit-channels-navigation__program-metadata").textContent;
+const nome = document.querySelector(".playkit-channels-navigation__program-name");
+const metadata = document.querySelector(".playkit-channels-navigation__program-metadata");
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -59,8 +39,8 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Página inicial";
       } else {
-        presenceData.details = "Canais OFF - " + nome;
-        presenceData.state = metadata;
+        presenceData.details = "Canais OFF - " + nome.textContent;
+        presenceData.state = metadata.textContent;
         presenceData.smallImageKey = "live";
         presenceData.largeImageKey = "canaloff";
         presenceData.startTimestamp = browsingStamp;
@@ -147,124 +127,124 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
       }
     } else if (document.location.pathname.includes("/canal-off/3775790")) {
-      presenceData.details = "Canais OFF - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Canais OFF - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "canaloff";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/sportv-3/3180413")) {
-      presenceData.details = "SporTV 3 - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "SporTV 3 - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "sportv3";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/sportv-2/3180373")) {
-      presenceData.details = "SporTV 2 - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "SporTV 2 - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "sportv2";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/sportv/3180419")) {
-      presenceData.details = "SporTV - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "SporTV - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "sportv";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/globonews/3180453")) {
-      presenceData.details = "GloboNews - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "GloboNews - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "globonews";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/gnt/4164401")) {
-      presenceData.details = "GNT - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "GNT - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "gnt";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/viva/4093218")) {
-      presenceData.details = "Viva - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Viva - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "viva";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/multishow/4163749")) {
-      presenceData.details = "Multishow - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Multishow - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "multishow";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/mais-na-tela/4166185")) {
-      presenceData.details = "Mais na Tela - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Mais na Tela - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "maisnatela";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/gloob/4163742")) {
-      presenceData.details = "Gloob - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Gloob - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "gloob";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/gloobinho/6140830")) {
-      presenceData.details = "Gloobinho - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Gloobinho - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "gloobinho";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/bis/4163157")) {
-      presenceData.details = "BIS - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "BIS - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "bis";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/canal-brasil/3775811")) {
-      presenceData.details = "Canal Brasil - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Canal Brasil - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "canalbrasil";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/universal/5497510")) {
-      presenceData.details = "Universal TV - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Universal TV - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "universaltv";
       presenceData.startTimestamp = browsingStamp;
     } else if (
       document.location.pathname.includes("/studio-universal/6939705")
     ) {
-      presenceData.details = "Studio Universal - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Studio Universal - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "studiouniversal";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/syfy/7301289")) {
-      presenceData.details = "SYFY - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "SYFY - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "syfy";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/megapix/7301516")) {
       presenceData.details = "Megapix";
-      presenceData.state = metadata;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "megapix";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/combate/3180444")) {
-      presenceData.details = "Combate - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Combate - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "combate";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/premiere/2752761")) {
-      presenceData.details = "Premiere - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Premiere - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "premiere";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/futura/4500346")) {
-      presenceData.details = "Futura - " + nome;
-      presenceData.state = metadata;
+      presenceData.details = "Futura - " + nome.textContent;
+      presenceData.state = metadata.textContent;
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "futura";
       presenceData.startTimestamp = browsingStamp;
