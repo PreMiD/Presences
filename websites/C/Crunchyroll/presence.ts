@@ -37,8 +37,14 @@ interface iFrameData {
 presence.on("iFrameData", (data: iFrameData) => {
   playback = data.iframe_video !== null ? true : false;
 
-  if (playback) 
-    ({iFrameVideo, currTime: currentTime, dur: duration, paused} = data.iframe_video);
+  if (playback) {
+    ({
+      iFrameVideo,
+      currTime: currentTime,
+      dur: duration,
+      paused
+    } = data.iframe_video);
+  }
 });
 
 presence.on("UpdateData", async () => {
@@ -105,22 +111,25 @@ presence.on("UpdateData", async () => {
   }
 
   if (iFrameVideo !== false && !isNaN(duration)) {
-    let videoTitle,
-    type,
-    episode,
-    epName,
-    seasonregex,
-    seasonName;
+    let videoTitle, type, episode, epName, seasonregex, seasonName;
     if (document.location.hostname.startsWith("beta")) {
-      episode = document.querySelector(".c-heading.c-heading--xs.c-heading--family-type-one.title").innerHTML;
-      [,epName] = episode.match(/.* - (.*)/);
+      episode = document.querySelector(
+        ".c-heading.c-heading--xs.c-heading--family-type-one.title"
+      ).innerHTML;
+      [, epName] = episode.match(/.* - (.*)/);
       epName = epName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       seasonregex = new RegExp(`(.*) ${epName} - Watch on Crunchyroll`);
-      [,seasonName] = document.title.match(seasonregex);
-      type = document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[1].innerHTML === "Subtitled" ? " (Sub)" : " (Dub)";
+      [, seasonName] = document.title.match(seasonregex);
+      type =
+        document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[1]
+          .innerHTML === "Subtitled"
+          ? " (Sub)"
+          : " (Dub)";
       videoTitle = seasonName + type;
     } else {
-      videoTitle = document.querySelector(".ellipsis .text-link span").innerHTML;
+      videoTitle = document.querySelector(
+        ".ellipsis .text-link span"
+      ).innerHTML;
       const episod = document.querySelectorAll("#showmedia_about_media h4"),
         epName = document.querySelector("h4#showmedia_about_name");
       episode = `${episod[1].innerHTML} - ${epName.innerHTML}`;
@@ -136,11 +145,7 @@ presence.on("UpdateData", async () => {
     presenceData.endTimestamp = endTimestamp;
 
     presence.setTrayTitle(
-      paused
-        ? ""
-        : videoTitle !== null
-        ? videoTitle
-        : "Title not found..."
+      paused ? "" : videoTitle !== null ? videoTitle : "Title not found..."
     );
 
     presenceData.details =
