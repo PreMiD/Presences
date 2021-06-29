@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "fror",
+      "id": "515668127829458945"
+    },
+    "service": "Canais Globo",
+    "description": {
+      "en": "The Globo channels brings together thousands of films, series and programs from SporTV, GloboNews, GNT, Multishow, VIVA, Gloob, OFF, Megapix, Mais na Tela, Canal Brasil, Universal Channel, Syfy, Studio and BIS for you to watch whenever and wherever you want!",
+      "pt_BR": "Os Canais Globo reúnem milhares de filmes, séries e programas dos canais SporTV, GloboNews, GNT, Multishow, VIVA, Gloob, OFF, Megapix, Mais na Tela, Canal Brasil, Universal Channel, Syfy, Studio e BIS para você assistir quando e onde quiser!"
+    },
+    "url": "canaisglobo.globo.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/fK2L2je.png",
+    "thumbnail": "https://i.imgur.com/Gazm91S.jpg",
+    "color": "#FB13A0",
+    "tags": [
+      "shows",
+      "movies"
+    ],
+    "category": "videos"
+  }
