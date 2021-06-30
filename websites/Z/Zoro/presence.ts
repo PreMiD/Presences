@@ -4,7 +4,6 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let data: {
-  iFrameVideo: boolean;
   currTime: number;
   duration: number;
   paused: boolean;
@@ -13,7 +12,6 @@ let data: {
 presence.on(
   "iFrameData",
   async (recievedData: {
-    iFrameVideo: boolean;
     currTime: number;
     duration: number;
     paused: boolean;
@@ -97,7 +95,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "In a room";
         if (filmName) presenceData.state = `Watching ${filmName.innerText}`;
         if (data) {
-          if (data.iFrameVideo && !data.paused) {
+          if (!data.paused) {
             [, presenceData.endTimestamp] = presence.getTimestamps(
               data.currTime,
               data.duration
@@ -123,7 +121,7 @@ presence.on("UpdateData", async () => {
       if (title) presenceData.details = title.innerText;
       if (episode) presenceData.state = `Episode ${episode.innerText}`;
       if (data) {
-        if (data.iFrameVideo && !data.paused) {
+        if (!data.paused) {
           [, presenceData.endTimestamp] = presence.getTimestamps(
             data.currTime,
             data.duration
