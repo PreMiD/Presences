@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
       productName: HTMLHeadingElement = document.querySelector("h1.pageTitle");
     if (productType !== null)
       presenceData.details = `Looking at ${productType.innerText}`;
-    if (productName !== null) presenceData.state = productName.innerText;
+    if (productName) presenceData.state = productName.innerText;
     presenceData.buttons = [
       {
         label: "Look at product",
