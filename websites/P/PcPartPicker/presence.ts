@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
     ];
   } else if (pathname.startsWith("/builds/"))
     presenceData.details = "Viewing Completed Builds";
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
