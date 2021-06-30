@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
         "section.breadcrumb > ol.list-unstyled > li > a"
       ),
       productName: HTMLHeadingElement = document.querySelector("h1.pageTitle");
-    if (productType !== null)
+    if (productType)
       presenceData.details = `Looking at ${productType.innerText}`;
     if (productName) presenceData.state = productName.innerText;
     presenceData.buttons = [
