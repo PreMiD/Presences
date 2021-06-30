@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       price: HTMLTableDataCellElement = document.querySelector(
         "tr.tr__total.tr__total--grandtotal > td.td__price"
       );
-    if (build !== null && user !== null)
+    if (build && user)
       presenceData.details = `Viweing ${build.innerText} by ${user.innerText}`;
     if (price !== null) presenceData.state = `Price: ${price.innerText}`;
     presenceData.buttons = [
