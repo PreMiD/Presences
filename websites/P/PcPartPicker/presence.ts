@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
         "tr.tr__total.tr__total--final > td.td__price"
       );
     presenceData.details =
-      title !== null ? `Browsing ${title.innerText}` : "Browsing Guide";
+      title ? `Browsing ${title.innerText}` : "Browsing Guide";
     if (price !== null) presenceData.state = `Price: ${price.innerText}`;
     presenceData.buttons = [
       {
