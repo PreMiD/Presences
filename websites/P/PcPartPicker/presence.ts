@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Building System";
     presenceData.state =
       price ? `Price: ${price.innerText}` : "Price: $0";
-    if (link !== null) {
+    if (link) {
       presenceData.buttons = [
         {
           label: "View System",
