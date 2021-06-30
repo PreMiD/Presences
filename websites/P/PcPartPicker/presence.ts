@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       );
     if (build && user)
       presenceData.details = `Viweing ${build.innerText} by ${user.innerText}`;
-    if (price !== null) presenceData.state = `Price: ${price.innerText}`;
+    if (price) presenceData.state = `Price: ${price.innerText}`;
     presenceData.buttons = [
       {
         label: "View Build",
