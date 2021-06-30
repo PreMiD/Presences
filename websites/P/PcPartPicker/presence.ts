@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/forums/")) {
     const topic: HTMLHeadingElement = document.querySelector("h1.pageTitle");
     presenceData.details = "Browsing Forums";
-    if (topic !== null) {
+    if (topic) {
       presenceData.state = topic.innerText;
       presenceData.buttons = [
         {
