@@ -7,8 +7,6 @@ strings = presence.getStrings({
   pause: "presence.playback.paused"
 });
 
-console.log("Test"); 
-
 let music: string,
  uploader: string,
  date: Date,
@@ -32,7 +30,6 @@ function myOutsideHeavyLiftingFunction() {
     uploader = `Uploaded By ${uploader}`;
     if(parseInt(document.getElementsByClassName('slider-play')[0].getAttribute('value')) == 0) startTime = date.getTime();
     endTime = date.getTime() + (parseInt(musicLen) * 1000);
-    console.log(endTime);
   }
 }
 
@@ -56,5 +53,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   
 });
-
-console.log("Test2"); 
