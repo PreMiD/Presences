@@ -23,12 +23,15 @@ function myOutsideHeavyLiftingFunction() {
 
   musicLen = document.getElementsByClassName('slider-play')[0].getAttribute('max');
 
-  if(music == '' && uploader == '') {
+  if(music === '' && uploader === '') {
     music = "Viewing Home Page";
     uploader = "";
   } else {
     uploader = `Uploaded By ${uploader}`;
-    if(parseInt(document.getElementsByClassName('slider-play')[0].getAttribute('value')) == 0) startTime = date.getTime();
+    if(parseInt(document.getElementsByClassName('slider-play')[0].getAttribute('value')) == 0) {
+      date = new Date();
+      startTime = date.getTime();
+    }
     endTime = date.getTime() + (parseInt(musicLen) * 1000);
   }
 }
