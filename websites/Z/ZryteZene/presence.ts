@@ -7,19 +7,19 @@ strings = presence.getStrings({
   pause: "presence.playback.paused"
 });
 
-let music: string;
-let uploader: string;
-let date: Date;
-let startTime: number;
-let endTime: number;
-let musicLen: string;
+let music: string,
+ uploader: string,
+ date: Date,
+ startTime: number,
+ endTime: number,
+ musicLen: string;
 
 date = new Date();
 startTime = date.getTime();
 
 const slider = document.getElementsByClassName('slider-play')[0] as HTMLInputElement;
 
-function myOutsideHeavyLiftingFunction(){
+function myOutsideHeavyLiftingFunction() {
     uploader = document.getElementsByClassName('text-xs')[0].innerHTML;
     music = document.getElementsByClassName('title-custom')[0].innerHTML;
   
@@ -29,7 +29,7 @@ function myOutsideHeavyLiftingFunction(){
       music = "Viewing Home Page";
       uploader = "";
     } else {
-      uploader = "Uploaded By " + uploader;
+      uploader = `Uploaded By ${uploader}`;
       date = new Date();
       startTime = date.getTime();
       endTime = date.getTime() + ((parseInt(musicLen) - parseInt(slider.value)) * 1000);
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity(); 
-  } else {
+  } else 
     presence.setActivity(presenceData); 
-  }
+  
 });
