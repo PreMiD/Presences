@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
    
     presenceData.buttons = [
       {
-        label: "Baca Manga",
+        label: "Lihat Manga",
         url: document.location.href
       }
     ];
