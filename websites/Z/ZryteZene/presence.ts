@@ -17,13 +17,15 @@ let musicLen: string;
 date = new Date();
 startTime = date.getTime();
 
-document.getElementsByClassName('slider-play')[0].addEventListener("change", () => {
-  console.log(document.getElementsByClassName('slider-play')[0].getAttribute('value'));
-  if(parseInt(document.getElementsByClassName('slider-play')[0].getAttribute('value')) == 0) {
-    date = new Date();
-    startTime = date.getTime();
-  }
+const slider = document.getElementsByClassName('slider-play')[0] as HTMLInputElement;
+
+slider.addEventListener("change", () => {
+  date = new Date();
+  startTime = date.getTime();
+  endTime = date.getTime() + ((parseInt(musicLen) - parseInt(slider.value)) * 1000);
 });
+
+document.getElementsByClassName('slider-play')[0].setAttribute('onchange', 'console.log(this.value)')
 
 function myOutsideHeavyLiftingFunction(){
   uploader = document.getElementsByClassName('text-xs')[0].innerHTML;
@@ -36,7 +38,6 @@ function myOutsideHeavyLiftingFunction(){
     uploader = "";
   } else {
     uploader = "Uploaded By " + uploader;
-    endTime = date.getTime() + (parseInt(musicLen) * 1000);
   }
 }
 
