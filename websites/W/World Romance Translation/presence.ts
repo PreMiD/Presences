@@ -30,8 +30,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Filter Berdasarkan Genre...";
     presenceData.state = `Genre: ${genres}`;
     presenceData.smallImageKey = "search";
-  }
-   else if (readerArea !== null) {
+  } else if (readerArea !== null) {
     const mangaName: HTMLHeadingElement =
         document.querySelector("h1.entry-title"),
       chapterNumber: HTMLSelectElement =
