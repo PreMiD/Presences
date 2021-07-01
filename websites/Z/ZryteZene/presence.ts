@@ -9,17 +9,17 @@ strings = presence.getStrings({
 
 console.log("Test"); 
 
-let music: string;
-let uploader: string;
-let date: Date;
-let startTime: number;
-let endTime: number;
-let musicLen: string;
+let music: string,
+ uploader: string,
+ date: Date,
+ startTime: number,
+ endTime: number,
+ musicLen: string;
 
 date = new Date();
 startTime = date.getTime();
 
-function myOutsideHeavyLiftingFunction(){
+function myOutsideHeavyLiftingFunction() {
   uploader = document.getElementsByClassName('text-xs')[0].innerHTML;
   music = document.getElementsByClassName('title-custom')[0].innerHTML;
 
@@ -29,10 +29,10 @@ function myOutsideHeavyLiftingFunction(){
     music = "Viewing Home Page";
     uploader = "";
   } else {
-    uploader = "Uploaded By " + uploader;
+    uploader = `Uploaded By ${uploader}`;
     if(parseInt(document.getElementsByClassName('slider-play')[0].getAttribute('value')) == 0) startTime = date.getTime();
     endTime = date.getTime() + (parseInt(musicLen) * 1000);
-    console.log(endTime)
+    console.log(endTime);
   }
 }
 
@@ -52,9 +52,9 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity(); 
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
 
 console.log("Test2"); 
