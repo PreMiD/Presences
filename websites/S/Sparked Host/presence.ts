@@ -12,13 +12,19 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/budget-minecraft-hosting")) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Budget Packages";
-    } else if (document.location.pathname.includes("/enterprise-minecraft-hosting")) {
+    } else if (
+      document.location.pathname.includes("/enterprise-minecraft-hosting")
+    ) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Enterprise Packages";
-    } else if (document.location.pathname.includes("/singapore-minecraft-hosting")) {
+    } else if (
+      document.location.pathname.includes("/singapore-minecraft-hosting")
+    ) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Singapore Packages";
-    } else if (document.location.pathname.includes("/extreme-minecraft-hosting")) {
+    } else if (
+      document.location.pathname.includes("/extreme-minecraft-hosting")
+    ) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Extreme Packages";
     } else if (document.location.pathname.includes("/game-hosting")) {
@@ -144,7 +150,11 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "HetrixTools";
     presenceData.details = "Server Status";
     presenceData.state = "Who broke it?";
-  } else if (document.location.hostname.startsWith("altar") || document.location.hostname.startsWith("web-01") || document.location.hostname.startsWith("cloud852")) {
+  } else if (
+    document.location.hostname.startsWith("altar") ||
+    document.location.hostname.startsWith("web-01") ||
+    document.location.hostname.startsWith("cloud852")
+  ) {
     presenceData.details = "Web Hosting";
     presenceData.state = "Managing cPanel";
   }
