@@ -19,26 +19,21 @@ startTime = date.getTime();
 
 const slider = document.getElementsByClassName('slider-play')[0] as HTMLInputElement;
 
-slider.addEventListener("change", () => {
-  date = new Date();
-  startTime = date.getTime();
-  endTime = date.getTime() + ((parseInt(musicLen) - parseInt(slider.value)) * 1000);
-});
-
-document.getElementsByClassName('slider-play')[0].setAttribute('onchange', 'console.log(this.value)')
-
 function myOutsideHeavyLiftingFunction(){
-  uploader = document.getElementsByClassName('text-xs')[0].innerHTML;
-  music = document.getElementsByClassName('title-custom')[0].innerHTML;
+    uploader = document.getElementsByClassName('text-xs')[0].innerHTML;
+    music = document.getElementsByClassName('title-custom')[0].innerHTML;
+  
+    musicLen = document.getElementsByClassName('slider-play')[0].getAttribute('max');
 
-  musicLen = document.getElementsByClassName('slider-play')[0].getAttribute('max');
-
-  if(music == '' && uploader == '') {
-    music = "Viewing Home Page";
-    uploader = "";
-  } else {
-    uploader = "Uploaded By " + uploader;
-  }
+    if(music == '' && uploader == '') {
+      music = "Viewing Home Page";
+      uploader = "";
+    } else {
+      uploader = "Uploaded By " + uploader;
+      date = new Date();
+      startTime = date.getTime();
+      endTime = date.getTime() + ((parseInt(musicLen) - parseInt(slider.value)) * 1000);
+    }
 }
 
 setInterval(myOutsideHeavyLiftingFunction, 1000);
