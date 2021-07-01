@@ -95,8 +95,7 @@ presence.on("UpdateData", async () => {
     }
     else if (pathname.startsWith('/wish') || pathname.startsWith('/wish/')) {
       const ww = document.querySelector("#sapper > main > div > div.grid.gap-4.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3.max-w-screen-xl > div:nth-child(6) > div.bg-item.rounded-xl.p-4.flex.items-center.w-full.text-white"),
-       numbers = ww.textContent.split(" "),
-       number = numbers[3];
+       [, , , number] = ww.textContent.split(" ")
 
       presenceData.details = "Viewing at the Wish Counter";
       presenceData.state = `Wishes Worth: ✧ ${number}`;
