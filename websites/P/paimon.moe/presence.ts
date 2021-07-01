@@ -62,13 +62,13 @@ presence.on("UpdateData", async () => {
       if (validCharacter) {
         const string = document.URL,
          original = string.match(/(\/\w+)/gi).pop().substr(1);
-        if (original == "traveler_anemo") 
+        if (original === "traveler_anemo") 
           stateText = "Anemo Traveler";
-         else if (original == "traveler_geo") 
+         else if (original === "traveler_geo") 
           stateText = "Geo Traveler";
-         else if (original == "kaedehara_kazuha") 
+         else if (original === "kaedehara_kazuha") 
           stateText = "Kaedehara Kazuha";
-         else if (original == "hu_tao") 
+         else if (original === "hu_tao") 
           stateText = "Hu Tao";
          else 
           stateText = original.charAt(0).toUpperCase() + original.slice(1);
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing the character details:";
         presenceData.state = stateText;
       }
-    }
+    };
     if (pathname.includes("/wish/character-event") || pathname.includes("/wish/character-event/")) {
       presenceData.details = "Viewing at the Wish Counter";
       presenceData.state = "Wish Counter: Character Event";
@@ -141,10 +141,9 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
     presence.setActivity(presenceData);
-  
 });
