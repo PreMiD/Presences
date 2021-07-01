@@ -1,13 +1,13 @@
 const presence = new Presence({
-  clientId: "860131264034897951"
-}),
+    clientId: "860131264034897951"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
   const setting = {
-    timeElapsed: await presence.getSetting("timeElapsed"),
-    showButtons: await presence.getSetting("showButtons")
-  },
+      timeElapsed: await presence.getSetting("timeElapsed"),
+      showButtons: await presence.getSetting("showButtons")
+    },
     urlpath = window.location.pathname.split("/"),
     presenceData: PresenceData = {
       largeImageKey: "logo"
