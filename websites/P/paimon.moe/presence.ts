@@ -78,14 +78,14 @@ presence.on("UpdateData", async () => {
       }
     }
     if (pathname.includes("/wish/character-event") || pathname.includes("/wish/character-event/")) {
-      presenceData.details = "Viewing at the Wish Counter"
-      presenceData.state = "Wish Counter: Character Event"
+      presenceData.details = "Viewing at the Wish Counter";
+      presenceData.state = "Wish Counter: Character Event";
     } else if (pathname.includes("/wish/weapon-event") || pathname.includes("/wish/weapon-event/")) {
-      presenceData.details = "Viewing at the Wish Counter"
-      presenceData.state = "Wish Counter: Weapon Event"
+      presenceData.details = "Viewing at the Wish Counter";
+      presenceData.state = "Wish Counter: Weapon Event";
     } else if (pathname.includes("/wish/standard") || pathname.includes("/wish/standar/")) {
-      presenceData.details = "Viewing at the Wish Counter"
-      presenceData.state = "Wish Counter: Standard Banner"
+      presenceData.details = "Viewing at the Wish Counter";
+      presenceData.state = "Wish Counter: Standard Banner";
     } else if (pathname.includes("/wish/beginners") || pathname.includes("/wish/beginners/")) {
       presenceData.details = "Viewing at the Wish Counter"
       presenceData.state = "Wish Counter: Beginners' Wish"
@@ -95,15 +95,14 @@ presence.on("UpdateData", async () => {
       var numbers = ww.textContent.split(" ")
       var number = numbers[3]
 
-      presenceData.details = "Viewing at the Wish Counter"
-      presenceData.state = `Wishes Worth: ✧ ${number}`
-    }
-    else if (pathname.includes('/calculator') || pathname.includes('/calculator/')) {
-      presenceData.details = "Using the calculator"
-    }  
-    else if (pathname.includes('/todo') || pathname.includes('/todo/')) {
-      presenceData.details = "Viewing at Todo list"
-    }
+      presenceData.details = "Viewing at the Wish Counter";
+      presenceData.state = `Wishes Worth: ✧ ${number}`;
+    } else if (pathname.includes('/calculator') || pathname.includes('/calculator/')) 
+      presenceData.details = "Using the calculator";
+      
+    else if (pathname.includes('/todo') || pathname.includes('/todo/')) 
+      presenceData.details = "Viewing at Todo list";
+    
     else if (pathname.includes('/items') || pathname.includes('/items/')) {
       presenceData.details = "Viewing at the Database";
       presenceData.state = "Items";
