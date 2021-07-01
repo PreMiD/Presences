@@ -9,7 +9,7 @@ presence.on("UpdateData", async function () {
           showButtons: await presence.getSetting("showButtons")
         },
         urlpath = window.location.pathname.split("/"),
-        presenceData = {
+        presenceData: PresenceData = {
               largeImageKey: "logo"
             };
 
@@ -67,10 +67,8 @@ presence.on("UpdateData", async function () {
     return document.querySelector(q).getAttribute(a).toLowerCase() === wl;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
