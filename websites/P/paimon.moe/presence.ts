@@ -87,13 +87,12 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing at the Wish Counter";
       presenceData.state = "Wish Counter: Standard Banner";
     } else if (pathname.includes("/wish/beginners") || pathname.includes("/wish/beginners/")) {
-      presenceData.details = "Viewing at the Wish Counter"
-      presenceData.state = "Wish Counter: Beginners' Wish"
-    }
-    else if (pathname.startsWith('/wish') || pathname.startsWith('/wish/')) {
-      var ww = document.querySelector("#sapper > main > div > div.grid.gap-4.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3.max-w-screen-xl > div:nth-child(6) > div.bg-item.rounded-xl.p-4.flex.items-center.w-full.text-white")
-      var numbers = ww.textContent.split(" ")
-      var number = numbers[3]
+      presenceData.details = "Viewing at the Wish Counter";
+      presenceData.state = "Wish Counter: Beginners' Wish";
+    } else if (pathname.startsWith('/wish') || pathname.startsWith('/wish/')) {
+      const ww = document.querySelector("#sapper > main > div > div.grid.gap-4.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3.max-w-screen-xl > div:nth-child(6) > div.bg-item.rounded-xl.p-4.flex.items-center.w-full.text-white"),
+       numbers = ww.textContent.split(" "),
+       number = numbers[3];
 
       presenceData.details = "Viewing at the Wish Counter";
       presenceData.state = `Wishes Worth: ✧ ${number}`;
