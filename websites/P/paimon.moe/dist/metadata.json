@@ -5,11 +5,11 @@
       "name": "peko",
       "id": "398752205043400724"
     },
-    "category": "other",
+    "category": "games",
     "logo": "https://cdn.upload.systems/uploads/m3yDlghn.png",
     "thumbnail": "https://cdn.upload.systems/uploads/EHpC8lux.png",
-    "version": "1.0.0",
-    "color": "#e3f0ff",
+    "version": "1.0.2",
+    "color": "#25294A",
     "tags": [
       "genshin-impact",
       "game",
