@@ -5,13 +5,12 @@
     "id": "394888268446957569"
   },
   "service": "ZryteZene",
-  "altnames": ["zz"],
   "description": {
     "en": "A Free music streaming services providing fast server respond, Fast music buffering, Always updated, Cross-platform, Easy to use User Interface and, Without requiring to Register an account to play your music. ZryteZene users uploads ~2Musics/Day, Having 1.5GB of storage used, 200+ Musics, And you can even upload it yourself FREE! With no charges at all!"
   },
   "url": "zrytezene.thatcakeid.com",
   "version": "1.0.0",
-  "logo": "https://zrytezene.thatcakeid.com/img/favicon.1fc46723.png",
+  "logo": "https://zrytezene.thatcakeid.com/favicon.ico",
   "thumbnail": "https://cdn.discordapp.com/attachments/859789028286005289/860063908429824070/brave-p0et7JaIfs.png",
   "color": "#EC4899",
   "tags": ["zrytezene", "music", "thatcakeid"],

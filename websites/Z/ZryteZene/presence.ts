@@ -7,8 +7,6 @@ strings = presence.getStrings({
   pause: "presence.playback.paused"
 });
 
-console.log("Test"); 
-
 let music: string;
 let uploader: string;
 let date: Date;
@@ -27,13 +25,6 @@ document.getElementsByClassName('slider-play')[0].addEventListener("change", () 
   }
 });
 
-function checkSlider(value: number) {
-  if(value == 0) {
-    date = new Date();
-    startTime = date.getTime();
-  }
-}
-
 function myOutsideHeavyLiftingFunction(){
   uploader = document.getElementsByClassName('text-xs')[0].innerHTML;
   music = document.getElementsByClassName('title-custom')[0].innerHTML;
@@ -46,7 +37,6 @@ function myOutsideHeavyLiftingFunction(){
   } else {
     uploader = "Uploaded By " + uploader;
     endTime = date.getTime() + (parseInt(musicLen) * 1000);
-    console.log(endTime)
   }
 }
 
@@ -67,8 +57,6 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
     presence.setActivity(); 
   } else {
-    presence.setActivity(presenceData);
+    presence.setActivity(presenceData); 
   }
 });
-
-console.log("Test2"); 
