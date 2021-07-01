@@ -1,4 +1,3 @@
-console.log("Test");
 const presence = new Presence({
     clientId: "857964031700238356"
   }),
