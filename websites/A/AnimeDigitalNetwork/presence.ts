@@ -7,7 +7,7 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
+  const video: HTMLVideoElement = document.querySelector("#adn-video-js_html5_api"),
     presenceData: PresenceData = {
       largeImageKey: "logo"
     };
@@ -15,13 +15,20 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname.includes("video") && video) {
     if (video && !isNaN(video.duration)) {
       const title = document.querySelector(
-          "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-kbKFCX.sc-kgMcbC.kecmmo > div:nth-child(1) > div > div > h1 > a"
-        ),
-        timestamps = presence.getTimestamps(
+        'meta[name="description"]'
+      ) as HTMLMetaElement;
+      const title2 = title.content.replace(/[0-9]/g, '').substr(6),
+      title3 = title2.length - 131;
+      if (title3 < 0) {
+        const title4 = title2.length - 112;
+        presenceData.details = title2.slice(0, title4);
+      } else {
+        presenceData.details = title2.slice(0, title3);
+      }
+      const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
-      presenceData.details = title.textContent;
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? (await strings).pause
@@ -33,12 +40,28 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     }
+    else if (video && isNaN(video.duration)) {
+      const title = document.querySelector(
+        'meta[name="description"]'
+      ) as HTMLMetaElement;
+      const title2 = title.content.replace(/[0-9]/g, '').substr(6),
+      title3 = title2.length - 131;
+      if (title3 < 0) {
+        const title4 = title2.length - 112;
+        presenceData.state = title2.slice(0, title4);
+      } else {
+        presenceData.state = title2.slice(0, title3);
+      }
+      presenceData.details = "Looking at";
+    }
   } else if (document.location.pathname.includes("video") && !video) {
     const title = document.querySelector(
-      "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-kbKFCX.sc-kgMcbC.kecmmo > div:nth-child(1) > div > div > h1 > a"
-    );
-    presenceData.details = "Looking at";
-    presenceData.state = title.textContent;
+      'meta[name="description"]'
+    ) as HTMLMetaElement;
+      const title2 = title.content.replace(/[0-9]/g, '').substr(31),
+      title3 = title2.length - 101; 
+      presenceData.details = "Looking at";
+      presenceData.state = title2.slice(0, title3);
   } else presenceData.details = "Browsing...";
   if (presenceData.details === null) {
     presence.setTrayTitle();
