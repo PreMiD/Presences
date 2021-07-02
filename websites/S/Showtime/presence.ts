@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       description = "Movie";
     }
 
-    const timestamps = presence.getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       smallImageKey: smallImageKey,
       smallImageText: smallImageText,
-      endTimestamp: timestamps[1]
+      endTimestamp: endTimestamp
     };
 
     if (video.paused) {
