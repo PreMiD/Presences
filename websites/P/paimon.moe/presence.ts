@@ -55,9 +55,9 @@ presence.on("UpdateData", async () => {
 
   let stateText: string;
 
-  if (pathname === "/") {
+  if (pathname === "/") 
     presenceData.details = "Viewing homepage";
-  }
+  
     if (pathname.includes("/characters") || pathname.includes("/characters/")) {
       presenceData.details = "Viewing the character list";
       if (validCharacter) {
