@@ -16,7 +16,7 @@ presence.on("UpdateData", async function () {
   if (setting.timeElapsed) presenceData.startTimestamp = browsingStamp;
 
   if (!urlpath[1]) presenceData.details = "Home";
-  else if (urlpath[1] === "discover" || urlpath[1] === "community") presenceData.details = "Discovering";
+  else if (urlpath[1] === "discover" || urlpath[1] === "community" || urlpath[1] === "discover-topics") presenceData.details = "Discovering";
   else if (urlpath[1] === "plan") presenceData.details = "Route Planner";
   else if (urlpath[1] === "shop") presenceData.details = "Shop";
   else if (urlpath[1] === "upload") presenceData.details = "Importing a GPS File";
@@ -48,6 +48,18 @@ presence.on("UpdateData", async function () {
         }
       ];
     }
+  } else if (urlpath[1] === "topic" && urlpath[2]) {
+    presenceData.details = "Topic";
+    presenceData.state = document.querySelector("h1.c-topic-header__headline")?.textContent;
+
+    if (setting.showButtons) {
+      presenceData.buttons = [
+        {
+          label: "View Collection",
+          url: document.location.href
+        }
+      ];
+    }
   } else if (urlpath[1] === "user" && urlpath[2]) {
     presenceData.details = "User";
     presenceData.state = document.querySelector("h1.css-1nujfd4 a.c-link.c-link--inherit")?.textContent;
@@ -67,7 +79,7 @@ presence.on("UpdateData", async function () {
     return document.querySelector(q).getAttribute(a).toLowerCase() === wl;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
