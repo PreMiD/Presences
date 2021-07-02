@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "698217762660548799"
   }),
-  browsingStamp: number = ~~(Date.now() / 1000);
+  browsingStamp = ~~(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
