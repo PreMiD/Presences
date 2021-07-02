@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
         0,
         mangaName.innerText.indexOf("Chapter")
       )}`;
-        presenceData.state = `${chapterNumber.selectedOptions[0].innerText} Slide ${pageNumber.selectedOptions[0].innerText}`;
+      presenceData.state = `${chapterNumber.selectedOptions[0].innerText} Slide ${pageNumber.selectedOptions[0].innerText}`;
     }
    
     presenceData.buttons = [
