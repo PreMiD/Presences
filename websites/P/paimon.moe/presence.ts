@@ -50,13 +50,14 @@ presence.on("UpdateData", async () => {
     startTimestamp: timer
   },
 
-    {hostname} = document.location,
+    // {hostname} = document.location,
     {pathname} = window.location;
 
   let stateText: string;
 
-  if (hostname === "paimon.moe") {
+  if (pathname === "/") {
     presenceData.details = "Viewing homepage";
+  }
     if (pathname.includes("/characters") || pathname.includes("/characters/")) {
       presenceData.details = "Viewing the character list";
       if (validCharacter) {
@@ -140,7 +141,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "smoll";
       presenceData.smallImageText = "Reading";
     }
-  }
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
