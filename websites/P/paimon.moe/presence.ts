@@ -41,7 +41,7 @@ const presence = new Presence({
     "xinyan",
     "yanfei",
     "zhongli",
-    "albedo",
+    "albedo"
   ], pathname = document.URL, character = pathname.match(/\w+/gi).pop(), validCharacter = characterss.includes(character);
 
 presence.on("UpdateData", async () => {
