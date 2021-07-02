@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Melihat Kebijakan Privasi";
   else if (pathname === "/dmca/") presenceData.details = "Melihat DMCA";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
