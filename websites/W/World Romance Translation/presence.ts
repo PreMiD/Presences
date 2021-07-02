@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
   if (pathname === "/") {
     const searchQuery: HTMLHeadingElement =
       document.querySelector("div.releases > h1");
-    if (searchQuery === null) presenceData.details = "Browsing Home Page";
+    if (searchQuery === null) presenceData.details = "Melihat Homepage";
     else {
       const { innerText } = searchQuery;
       presenceData.details = `Sedang Mencari ${innerText.substring(
