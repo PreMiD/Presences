@@ -19,8 +19,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     details: "An overview of the Trackmania Live Services.",
     largeImageKey: "logo",
-    state: `Unsupported page (${window.location.hash})`,
-    startTimestamp: Math.floor(Date.now() / 1000)
+    state: `Unsupported page (${window.location.hash})`
   };
 
   if (window.location.hash.startsWith("#")) {
@@ -97,7 +96,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.state = `${text} (${members})`;
       }
-    } else if (window.location.hash.startsWith("#/matchmaking")) {
+    } else if (window.location.hash.startsWith("#/top")) {
       presenceData.details =
         document.getElementsByClassName("title")[1].textContent;
       presenceData.state = "Leaderboard";
