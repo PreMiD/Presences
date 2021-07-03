@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "darwinikii",
+    "id": "455101088455196683"
+  },
+  "service": "Last.JS Dashboard",
+  "description": {
+    "tr": "Last.JS Bot Dashboard",
+    "en": "Last.JS Bot Dashboard"
+  },
+  "url": "dashboard.last-shot.rf.gd",
+  "version": "1.0.0",
+  "logo": "https://cdn.discordapp.com/avatars/791911792019898388/0851e923ff36067cedfd1d97c4c5d81b.png",
+  "thumbnail": "https://imgur.com/XohJuLA",
+  "color": "#3398b9",
+  "tags": [
+    "türk",
+    "bot",
+    "discord"
+  ],
+  "category": "videos"
+}
