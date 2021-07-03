@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "dae",
+        "id": "514722220090851328"
+    },
+    "service": "anoBoy",
+    "description": {
+        "en": "Download and Watch online streaming anime with Indonesian subtitles and High quality resolution available 240P, 360P, 480P, 720P, MP4 light weight size."
+    },
+    "url": "anoboy.media",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/4XZVIIx.png",
+    "thumbnail": "https://i.imgur.com/YtRe8sE.png",
+    "color": "#ffffff",
+    "tags": [
+        "anime",
+        "videos",
+        "streaming",
+        "other"
+    ],
+    "category": "anime"
+}
