@@ -40,16 +40,16 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).viewHome;
     presenceData.startTimestamp = browsingStamp;
   } else {
-    presenceData.details = "Viewing " + document
+    presenceData.details = `Viewing ${document
       .querySelector(".pagetitle > h1")
-      .textContent.replace(/Subtitle Indonesia/gi, "");
+      .textContent.replace(/Subtitle Indonesia/gi, "")}`;
     presenceData.startTimestamp = browsingStamp;
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
