@@ -63,12 +63,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  presenceData.buttons = [
-    {
-      label: "Listen Along",
-      url: document.location.href
-    }
-  ];
 
   if (!presenceData.details) {
     presence.setTrayTitle();
