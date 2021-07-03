@@ -23,9 +23,10 @@
     "tmtube.mania.exchange",
     "api.mania-exchange.com",
     "api.mania.exchange",
-    "trackmania.exchange"
+    "trackmania.exchange",
+    "blog.mania.exchange"
   ],
-  "version": "1.0.4",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/KPcs9y1.png",
   "thumbnail": "https://i.imgur.com/NYitprM.png",
   "color": "#7ad5ff",

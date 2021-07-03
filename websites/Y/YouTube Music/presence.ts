@@ -78,9 +78,9 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      [, , matchUrl] = document.location.href.match(
-        /^.*(music.youtube.com\/|v\/|u\/\w\/|watch\?v=|\\&v=)([^#&?]*).*/
-      ),
+      [, watchID] = document
+        .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
+        .href.match(/v=([^&#]{5,})/),
       presenceData: PresenceData = {
         details: title,
         state: getAuthorString(),
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
         buttons: [
           {
             label: "Listen Along",
-            url: `https://music.youtube.com/watch?v=${matchUrl}`
+            url: `https://music.youtube.com/watch?v=${watchID}`
           }
         ]
       };
