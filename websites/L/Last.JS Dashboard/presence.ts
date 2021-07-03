@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "last",
 	  details: null
-    }
+    };
     if (window.location.pathname.startsWith("/my/home")) {
 	 presenceData.details = (await strings).browsing;
      presenceData.buttons = [
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 	  }
     ];
 	} else if (window.location.pathname.startsWith("/my/manage/")) {
-	 var server = document.querySelector("body > nav > a")?.textContent.trim() || "Server";
+	 const server = document.querySelector("body > nav > a")?.textContent.trim() || "Server";
 	 presenceData.details = server;
      presenceData.buttons = [
       {
