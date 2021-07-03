@@ -13,44 +13,44 @@ presence.on("UpdateData", async () => {
     fav: HTMLDivElement = document.querySelector(".favFixed");
 
   if (fav && fav.style.display === "block")
-    presenceData.details = "Looking at favorites";
+    presenceData.details = "Olhando os favoritos";
   else {
     if (pathname === "/") {
       if (search) {
-        presenceData.details = "Searching";
-        presenceData.state = `Searching for ${search.substring(3)}`;
-      } else presenceData.details = "Exploring AnimeOnline.Games";
+        presenceData.details = "Procurando";
+        presenceData.state = `Procurando por ${search.substring(3)}`;
+      } else presenceData.details = "Explorando AnimeOnline.Games";
     } else if (pathname === "/lancamentos")
-      presenceData.details = "Browsing latest releases";
+      presenceData.details = "Navegando os lançamentos";
     else if (pathname === "/lista-de-animes")
-      presenceData.details = "Viewing List of animes";
+      presenceData.details = "Vendo Lista de Animes";
     else if (pathname === "/filmes") {
-      presenceData.details = "Viewing List of movies";
-      if (search) presenceData.state = `Searching for ${search.substring(8)}`;
+      presenceData.details = "Vendo Lista de Filmes";
+      if (search) presenceData.state = `Procurando por ${search.substring(8)}`;
     } else if (pathname === "/desenhos") {
-      presenceData.details = "Looking at cartoons";
-      if (search) presenceData.state = `Searching for ${search.substring(8)}`;
+      presenceData.details = "Olhando para desenhos";
+      if (search) presenceData.state = `Procurando por ${search.substring(8)}`;
     } else if (pathname === "/calendario") {
       const day: HTMLLIElement = document.querySelector(
         "ul#calen-nav > li.active"
       );
-      presenceData.details = "Looking at calendar";
-      if (day) presenceData.state = `For day: ${day.innerText}`;
+      presenceData.details = "Olhando o Calendário";
+      if (day) presenceData.state = `No dia: ${day.innerText}`;
     } else if (pathname.startsWith("/genero/")) {
       const genre: HTMLHeadingElement = document.querySelector(
         "body > div.conteudoAlinhado > div.conteudoGen > section:nth-child(1) > section > h1"
       );
-      presenceData.details = "Searching By genre";
+      presenceData.details = "Procurando por gênero";
       if (genre) presenceData.state = genre.innerText;
     } else if (/\/[a-z]\/animes\//.test(pathname)) {
       const anime: HTMLHeadingElement = document.querySelector(
         "body > div.conteudoAlinhado > div.conteudo > section:nth-child(1) > section.tituloPrincipal > h1"
       );
-      presenceData.details = "Checking Synopsis";
+      presenceData.details = "Vendo Sinopse";
       if (anime) presenceData.state = anime.innerText;
       presenceData.buttons = [
         {
-          label: "Check Synopsis",
+          label: "Vendo Sinopse",
           url: document.location.href
         }
       ];
@@ -63,14 +63,14 @@ presence.on("UpdateData", async () => {
         const [animeTitle] = anime.innerText.split("-"),
           episode = parseInt(anime.innerText.split(" ").pop());
         presenceData.details = animeTitle;
-        if (!isNaN(episode)) presenceData.state = `Episode: ${episode}`;
+        if (!isNaN(episode)) presenceData.state = `Episódio: ${episode}`;
         if (video) {
           [, presenceData.endTimestamp] =
             presence.getTimestampsfromMedia(video);
         }
         presenceData.buttons = [
           {
-            label: "Watch Episode",
+            label: "Assistir Episódio",
             url: document.location.href
           }
         ];
