@@ -71,9 +71,9 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Other Pages";
-      if (pageTitle) {
+      if (pageTitle) 
         presenceData.state = pageTitle;
-      }
+      
     }
   }
 
@@ -86,8 +86,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  }
-  else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
