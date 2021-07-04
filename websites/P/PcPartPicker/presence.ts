@@ -18,8 +18,9 @@ presence.on("UpdateData", async () => {
       price: HTMLTableDataCellElement = document.querySelector(
         "tr.tr__total.tr__total--final > td.td__price"
       );
-    presenceData.details =
-      title ? `Browsing ${title.innerText}` : "Browsing Guide";
+    presenceData.details = title
+      ? `Browsing ${title.innerText}`
+      : "Browsing Guide";
     if (price) presenceData.state = `Price: ${price.innerText}`;
     presenceData.buttons = [
       {
@@ -86,8 +87,7 @@ presence.on("UpdateData", async () => {
         "div.actionBox.actionBox__permalink > input.text-input"
       );
     presenceData.details = "Building System";
-    presenceData.state =
-      price ? `Price: ${price.innerText}` : "Price: $0";
+    presenceData.state = price ? `Price: ${price.innerText}` : "Price: $0";
     if (link) {
       presenceData.buttons = [
         {

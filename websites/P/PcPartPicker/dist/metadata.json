@@ -8,9 +8,13 @@
   "category": "other",
   "logo": "https://i.imgur.com/Lpgj0ZZ.png",
   "thumbnail": "https://i.imgur.com/vWF3XN6.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#c3a041",
-  "tags": ["diy", "pc-builder", "building-guides"],
+  "tags": [
+    "diy",
+    "pc-builder",
+    "building-guides"
+  ],
   "url": "pcpartpicker.com",
   "description": {
     "en": "Pick parts. Build your PC. Compare and Share."
