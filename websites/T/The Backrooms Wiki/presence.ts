@@ -1,6 +1,7 @@
 const presence = new Presence({
-  clientId: "861070252301746206"
-}), browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "861070252301746206"
+  }), browsingStamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
   const button = await presence.getSetting("button"),
     presenceData: PresenceData = {
@@ -71,9 +72,8 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Other Pages";
-      if (pageTitle) 
+      if (pageTitle)
         presenceData.state = pageTitle;
-      
     }
   }
 
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
+  } else
     presence.setActivity(presenceData);
-  
+
 });
