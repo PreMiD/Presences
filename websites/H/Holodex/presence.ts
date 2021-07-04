@@ -21,7 +21,7 @@ const getInfo = {
   watch: () => {
     return {
       title: document.querySelectorAll(".v-card__title")[0].children[0].textContent,
-      channel: document.querySelector(".uploader-data-list>div:nth-child(1)").textContent.split("  ")[0],
+      channel: document.querySelector(".uploader-data-list>div:nth-child(1)").textContent.split("  ")[0]
     };
   },
   channel: () => {
@@ -41,7 +41,7 @@ const getInfo = {
     image: "largeimage",
     hover: ""
   },
-  startTime: Date.now(),
+  startTime: Date.now()
 },
 
 /** 
@@ -64,8 +64,7 @@ const getInfo = {
       case "playlists":
         return "Playlists";
       case "multiview":
-        const videoAmount = document.querySelectorAll(".mv-frame").length;
-        return `MultiView - ${videoAmount} ${videoAmount == 1 ? "Video" : "Videos"} Open`;
+        return `MultiView - ${document.querySelectorAll(".mv-frame").length} ${document.querySelectorAll(".mv-frame").length === 1 ? "Video" : "Videos"} Open`;
       case "music":
         return "Music";
       case "infinite":
@@ -75,7 +74,7 @@ const getInfo = {
       case "settings":
         return "Settings";
       case "login":
-        return document.querySelector(".v-card.ma-auto.v-sheet .v-list") == null ? "Login Screen" : "Account Settings";
+        return document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null ? "Login Screen" : "Account Settings";
       case "watch":
         return `Watching ${getInfo.watch().title}`;
       default:
@@ -94,7 +93,7 @@ const getInfo = {
       case "favorites":
         return getHomeFavsCategory();
       case "music":
-        return document.querySelector(".music-player-bar") != null ?
+        return document.querySelector(".music-player-bar") !== null ?
           `Listening to ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.single-line-clamp>a").textContent} - ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.text-h6").textContent}` :
           "Not listening to anything";
       case "infinite":
@@ -103,7 +102,7 @@ const getInfo = {
         return "";
     }
   },
-  getSmallImage: () => {
+  getSmallImage: async () => {
     const path = window.location.pathname.split("/");
     switch (path[1]) {
       case "home":
@@ -164,7 +163,7 @@ const getInfo = {
       case "watch":
         return {
           image: iFrameVideo.isPaused ? "mdipause" : "mdiplay",
-          hover: iFrameVideo.isPaused ? "Paused" : "Playing"
+          hover: iFrameVideo.isPaused ? (await strings).pause : (await strings).play
         };
 
       default:
@@ -173,17 +172,19 @@ const getInfo = {
           hover: ""
         };
     }
-  },
+  }
 };
 
 // Update the data the first time
-data.smallimage = updateData.getSmallImage();
+updateData.getSmallImage().then((newData) => {
+  data.smallimage = newData
+})
 data.details = updateData.getDetails();
 data.state = updateData.getState();
 
 // Update the data every few seconds so Discord doesn't rate limit
-setInterval(() => {
-  data.smallimage = updateData.getSmallImage();
+setInterval(async () => {
+  data.smallimage = await updateData.getSmallImage();
   data.details = updateData.getDetails();
   data.state = updateData.getState();
 }, 5000);
@@ -214,7 +215,7 @@ presence.on("UpdateData", async () => {
     smallImageText: data.smallimage.hover, //The text which is displayed when hovering over the small image
     details: data.details, //The upper section of the presence text
     state: data.state, //The lower section of the presence text
-    startTimestamp: data.startTime, //The unix epoch timestamp for when to start counting from
+    startTimestamp: data.startTime //The unix epoch timestamp for when to start counting from
     // endTimestamp: null, //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
   };
 
@@ -232,7 +233,7 @@ presence.on("UpdateData", async () => {
     ];
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     //This will fire if you do not set presence details
     presence.setTrayTitle(); //Clears the tray title for mac users
     presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/

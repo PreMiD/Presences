@@ -21,5 +21,11 @@
   "description": {
     "en": "Watch your favorite vtubers and find their subbed clips in your language. Tracks 400+ vtubers and almost 700 clippers from Hololive to Independents."
   },
-  "iframe":true
+  "iframe":true,
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": "true"
+    }
+  ]
 }
