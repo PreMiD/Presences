@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Samm-Cheese",
+    "id": "372148345894076416"
+  },
+  "service": "The Backrooms Wiki",
+  "description": {
+    "en": "Explore the Backrooms and their Entities"
+  },
+  "url": "backrooms-wiki.wikidot.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/fuMFiri.jpg",
+  "thumbnail": "https://i.imgur.com/nsWqZ7b.png",
+  "color": "#0d253f",
+  "tags": ["horror", "other"],
+  "category": "other",
+  "regExp": "backrooms-wiki[.]wikidot[.]com",
+  "settings": [
+    {
+      "id": "button",
+      "title": "Enable Button",
+      "icon": "fas fa-info",
+      "value": true
+    }
+  ]
+}
