@@ -177,8 +177,8 @@ const getInfo = {
 
 // Update the data the first time
 updateData.getSmallImage().then((newData) => {
-  data.smallimage = newData
-})
+  data.smallimage = newData;
+});
 data.details = updateData.getDetails();
 data.state = updateData.getState();
 
