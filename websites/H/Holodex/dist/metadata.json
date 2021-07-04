@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Holodex",
+  "author": {
+    "name": "creeperkafasipw",
+    "id": "442685489833705483"
+  },
+  "category": "videos",
+  "logo": "https://cdn.discordapp.com/attachments/798493042662572046/860215233862828062/untitled.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/798493042662572046/860215483142504478/unknown.png",
+  "version": "1.0.0",
+  "color": "#64b5f6",
+  "tags": [
+    "vtuber",
+    "hololive"
+  ],
+  "url": [
+    "staging.holodex.net",
+    "holodex.net"
+  ],
+  "description": {
+    "en": "Watch your favorite vtubers and find their subbed clips in your language. Tracks 400+ vtubers and almost 700 clippers from Hololive to Independents."
+  },
+  "iframe":true
+}
