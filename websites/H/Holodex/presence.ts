@@ -18,162 +18,162 @@ presence.on("iFrameData", (data: { video: { isPaused: boolean } }) => {
  * Functions to get some common info
  */
 const getInfo = {
-  watch: () => {
-    return {
-      title: document.querySelectorAll(".v-card__title")[0].children[0].textContent,
-      channel: document.querySelector(".uploader-data-list>div:nth-child(1)").textContent.split("  ")[0]
-    };
+    watch: () => {
+      return {
+        title: document.querySelectorAll(".v-card__title")[0].children[0].textContent,
+        channel: document.querySelector(".uploader-data-list>div:nth-child(1)").textContent.split("  ")[0]
+      };
+    },
+    channel: () => {
+      return {
+        title: document.querySelector(".channel-container .v-list-item__title").textContent
+      };
+    }
   },
-  channel: () => {
-    return {
-      title: document.querySelector(".channel-container .v-list-item__title").textContent
-    };
-  }
-},
 
-/**
+  /**
  * The object that stores the data
  */
- data = {
-  details: "Default",
-  state: "Default",
-  smallimage: {
-    image: "largeimage",
-    hover: ""
+  data = {
+    details: "Default",
+    state: "Default",
+    smallimage: {
+      image: "largeimage",
+      hover: ""
+    },
+    startTime: Date.now()
   },
-  startTime: Date.now()
-},
 
-/** 
+  /** 
  * This object stores functions that get the updated data
 */
- updateData = {
-  getDetails: () => {
-    const path = window.location.pathname.split("/");
-    switch (path[1]) {
-      case "home":
-        return "Home";
-      case "favorites":
-        return "Favorites";
-      case "channel":
-        return path[2] ?
-          `${getInfo.channel().title}Channel`
-          : "Channels";
-      case "library":
-        return "Library";
-      case "playlists":
-        return "Playlists";
-      case "multiview":
-        return `MultiView - ${document.querySelectorAll(".mv-frame").length} ${document.querySelectorAll(".mv-frame").length === 1 ? "Video" : "Videos"} Open`;
-      case "music":
-        return "Music";
-      case "infinite":
-        return "Mugen Clips";
-      case "about":
-        return "About";
-      case "settings":
-        return "Settings";
-      case "login":
-        return document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null ? "Login Screen" : "Account Settings";
-      case "watch":
-        return `Watching ${getInfo.watch().title}`;
-      default:
-        return "Default value";
-    }
-  },
-  getState: () => {
-    const path = window.location.pathname.split("/");
-    switch (path[1]) {
-      case "watch":
-        return `${getInfo.watch().channel}`;
-      case "channel":
-        return ``;
-      case "home":
-        return getHomeFavsCategory();
-      case "favorites":
-        return getHomeFavsCategory();
-      case "music":
-        return document.querySelector(".music-player-bar") !== null ?
-          `Listening to ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.single-line-clamp>a").textContent} - ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.text-h6").textContent}` :
-          "Not listening to anything";
-      case "infinite":
-        return `${getInfo.watch().title} - ${getInfo.watch().channel}`;
-      default:
-        return "";
-    }
-  },
-  getSmallImage: async () => {
-    const path = window.location.pathname.split("/");
-    switch (path[1]) {
-      case "home":
-        return {
-          image: "mdihome",
-          hover: "Home Page"
-        };
-      case "favorites":
-        return {
-          image: "mdiheart",
-          hover: "Favorites"
-        };
-      case "channel":
-        return {
-          image: (path.length < 3) ? "mdiaccountboxmultiple" : "mdiaccountbox",
-          hover: (path.length < 3) ? "Channels" : `${getInfo.channel().title}`
-        };
-      case "library":
-        return {
-          image: "mdianimationplay",
-          hover: "Library"
-        };
-      case "playlists":
-        return {
-          image: "mdiplaylistplay",
-          hover: "Playlists"
-        };
-      case "multiview":
-        return {
-          image: "multiview",
-          hover: "MultiView"
-        };
-      case "music":
-        return {
-          image: "mdimusic",
-          hover: "Music"
-        };
-      case "infinite":
-        return {
-          image: "mdiinfinity",
-          hover: "Mugen Clips"
-        };
-      case "about":
-        return {
-          image: "mdihelpcircle",
-          hover: ""
-        };
-      case "settings":
-        return {
-          image: "mdisettings",
-          hover: ""
-        };
-      case "login":
-        return {
-          image: "mdiloginvariant",
-          hover: ""
-        };
-      case "watch":
-        return {
-          image: iFrameVideo.isPaused ? "mdipause" : "mdiplay",
-          hover: iFrameVideo.isPaused ? (await strings).pause : (await strings).play
-        };
+  updateData = {
+    getDetails: () => {
+      const path = window.location.pathname.split("/");
+      switch (path[1]) {
+        case "home":
+          return "Home";
+        case "favorites":
+          return "Favorites";
+        case "channel":
+          return path[2] ?
+            `${getInfo.channel().title}Channel`
+            : "Channels";
+        case "library":
+          return "Library";
+        case "playlists":
+          return "Playlists";
+        case "multiview":
+          return `MultiView - ${document.querySelectorAll(".mv-frame").length} ${document.querySelectorAll(".mv-frame").length === 1 ? "Video" : "Videos"} Open`;
+        case "music":
+          return "Music";
+        case "infinite":
+          return "Mugen Clips";
+        case "about":
+          return "About";
+        case "settings":
+          return "Settings";
+        case "login":
+          return document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null ? "Login Screen" : "Account Settings";
+        case "watch":
+          return `Watching ${getInfo.watch().title}`;
+        default:
+          return "Default value";
+      }
+    },
+    getState: () => {
+      const path = window.location.pathname.split("/");
+      switch (path[1]) {
+        case "watch":
+          return `${getInfo.watch().channel}`;
+        case "channel":
+          return "";
+        case "home":
+          return getHomeFavsCategory();
+        case "favorites":
+          return getHomeFavsCategory();
+        case "music":
+          return document.querySelector(".music-player-bar") !== null ?
+            `Listening to ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.single-line-clamp>a").textContent} - ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.text-h6").textContent}` :
+            "Not listening to anything";
+        case "infinite":
+          return `${getInfo.watch().title} - ${getInfo.watch().channel}`;
+        default:
+          return "";
+      }
+    },
+    getSmallImage: async () => {
+      const path = window.location.pathname.split("/");
+      switch (path[1]) {
+        case "home":
+          return {
+            image: "mdihome",
+            hover: "Home Page"
+          };
+        case "favorites":
+          return {
+            image: "mdiheart",
+            hover: "Favorites"
+          };
+        case "channel":
+          return {
+            image: (path.length < 3) ? "mdiaccountboxmultiple" : "mdiaccountbox",
+            hover: (path.length < 3) ? "Channels" : `${getInfo.channel().title}`
+          };
+        case "library":
+          return {
+            image: "mdianimationplay",
+            hover: "Library"
+          };
+        case "playlists":
+          return {
+            image: "mdiplaylistplay",
+            hover: "Playlists"
+          };
+        case "multiview":
+          return {
+            image: "multiview",
+            hover: "MultiView"
+          };
+        case "music":
+          return {
+            image: "mdimusic",
+            hover: "Music"
+          };
+        case "infinite":
+          return {
+            image: "mdiinfinity",
+            hover: "Mugen Clips"
+          };
+        case "about":
+          return {
+            image: "mdihelpcircle",
+            hover: ""
+          };
+        case "settings":
+          return {
+            image: "mdisettings",
+            hover: ""
+          };
+        case "login":
+          return {
+            image: "mdiloginvariant",
+            hover: ""
+          };
+        case "watch":
+          return {
+            image: iFrameVideo.isPaused ? "mdipause" : "mdiplay",
+            hover: iFrameVideo.isPaused ? (await strings).pause : (await strings).play
+          };
 
-      default:
-        return {
-          image: "largeimage",
-          hover: ""
-        };
+        default:
+          return {
+            image: "largeimage",
+            hover: ""
+          };
+      }
     }
-  }
-};
+  };
 
 // Update the data the first time
 updateData.getSmallImage().then((newData) => {
