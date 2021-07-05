@@ -55,24 +55,24 @@ presence.on("UpdateData", async () => {
 
   let stateText: string;
 
-  if (pathname === "/") {
+  if (pathname === "/") 
     presenceData.details = "Viewing homepage";
-  }
-  if (pathname.includes("/characters") || pathname.includes("/characters/")) {
-    presenceData.details = "Viewing the character list";
-    if (validCharacter) {
-      const string = document.URL,
-        original = string.match(/(\/\w+)/gi).pop().substr(1);
-      if (original === "traveler_anemo") 
-        stateText = "Anemo Traveler";
-      else if (original === "traveler_geo") 
-        stateText = "Geo Traveler";
-      else if (original === "kaedehara_kazuha") 
-        stateText = "Kaedehara Kazuha";
-      else if (original === "hu_tao") 
-        stateText = "Hu Tao";
-      else 
-        stateText = original.charAt(0).toUpperCase() + original.slice(1);
+  
+    if (pathname.includes("/characters") || pathname.includes("/characters/")) {
+      presenceData.details = "Viewing the character list";
+      if (validCharacter) {
+        const string = document.URL,
+          original = string.match(/(\/\w+)/gi).pop().substr(1);
+        if (original === "traveler_anemo") 
+          stateText = "Anemo Traveler";
+        else if (original === "traveler_geo") 
+          stateText = "Geo Traveler";
+        else if (original === "kaedehara_kazuha") 
+          stateText = "Kaedehara Kazuha";
+        else if (original === "hu_tao") 
+          stateText = "Hu Tao";
+        else 
+          stateText = original.charAt(0).toUpperCase() + original.slice(1);
         
       presenceData.details = "Viewing the character details:";
       presenceData.state = stateText;
