@@ -58,21 +58,21 @@ presence.on("UpdateData", async () => {
   if (pathname === "/") 
     presenceData.details = "Viewing homepage";
   
-    if (pathname.includes("/characters") || pathname.includes("/characters/")) {
-      presenceData.details = "Viewing the character list";
-      if (validCharacter) {
-        const string = document.URL,
-          original = string.match(/(\/\w+)/gi).pop().substr(1);
-        if (original === "traveler_anemo") 
-          stateText = "Anemo Traveler";
-        else if (original === "traveler_geo") 
-          stateText = "Geo Traveler";
-        else if (original === "kaedehara_kazuha") 
-          stateText = "Kaedehara Kazuha";
-        else if (original === "hu_tao") 
-          stateText = "Hu Tao";
-        else 
-          stateText = original.charAt(0).toUpperCase() + original.slice(1);
+  if (pathname.includes("/characters") || pathname.includes("/characters/")) {
+    presenceData.details = "Viewing the character list";
+    if (validCharacter) {
+      const string = document.URL,
+        original = string.match(/(\/\w+)/gi).pop().substr(1);
+      if (original === "traveler_anemo") 
+        stateText = "Anemo Traveler";
+      else if (original === "traveler_geo") 
+        stateText = "Geo Traveler";
+      else if (original === "kaedehara_kazuha") 
+        stateText = "Kaedehara Kazuha";
+     else if (original === "hu_tao") 
+        stateText = "Hu Tao";
+      else 
+        stateText = original.charAt(0).toUpperCase() + original.slice(1);
         
       presenceData.details = "Viewing the character details:";
       presenceData.state = stateText;
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
     const ww = document.querySelector("#sapper > main > div > div.grid.gap-4.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3.max-w-screen-xl > div:nth-child(6) > div.bg-item.rounded-xl.p-4.flex.items-center.w-full.text-white"),
       [, , , number] = ww.textContent.split(" ");
 
-      presenceData.details = "Viewing at the Wish Counter";
+    presenceData.details = "Viewing at the Wish Counter";
     presenceData.state = `Wishes Worth: ✧ ${number}`;
   } else if (pathname.includes("/calculator") || pathname.includes("/calculator/")) 
     presenceData.details = "Using the calculator";
@@ -124,23 +124,23 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing at the Database";
       presenceData.state = "Looking at the Furnishing List";
       }
-    } else if (pathname.includes("/weapons") || pathname.includes("/weapons/")) {
-      presenceData.details = "Viewing at the Database";
-      presenceData.state = "Weapons";
-    } else if (pathname.includes("/timeline") || pathname.includes("/timeline/")) {
-      const servertime = document.querySelector("#sapper > main > div > div.px-4.md\\:px-8.text-white.select-none.svelte-15n1215 > label"),
-        finalText = servertime.textContent.match(/(\w(\s+)?)+/gi).pop();
+  } else if (pathname.includes("/weapons") || pathname.includes("/weapons/")) {
+    presenceData.details = "Viewing at the Database";
+    presenceData.state = "Weapons";
+  } else if (pathname.includes("/timeline") || pathname.includes("/timeline/")) {
+    const servertime = document.querySelector("#sapper > main > div > div.px-4.md\\:px-8.text-white.select-none.svelte-15n1215 > label"),
+      finalText = servertime.textContent.match(/(\w(\s+)?)+/gi).pop();
 
-      presenceData.details = "Viewing at the Timeline";
-      presenceData.state = `Time of ${finalText}`;
-    } else if (pathname.includes("/settings") || pathname.includes("/settings/")) 
-      presenceData.details = "Settings";
+    presenceData.details = "Viewing at the Timeline";
+    presenceData.state = `Time of ${finalText}`;
+  } else if (pathname.includes("/settings") || pathname.includes("/settings/")) 
+    presenceData.details = "Settings";
     
-    else if (pathname.includes("/privacy-policy") || pathname.includes("/privacy-policy/")) {
-      presenceData.details = "Reading the Privacy Policy";
-      presenceData.smallImageKey = "smoll";
-      presenceData.smallImageText = "Reading";
-    }
+  else if (pathname.includes("/privacy-policy") || pathname.includes("/privacy-policy/")) {
+    presenceData.details = "Reading the Privacy Policy";
+    presenceData.smallImageKey = "smoll";
+    presenceData.smallImageText = "Reading";
+  }
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
