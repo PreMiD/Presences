@@ -72,7 +72,7 @@ presence.on('UpdateData', async() => {
 		presenceData.smallImageKey = "taiko";
 		presenceData.smallImageText = "osu!taiko";
 	} else if (pathname === "/osutrack/bestplays/ctb/") {
-		presenceData.details = "Viewing at the Best Plays";
+		presenceData.details = "ViewKing at the Best Plays";
 		presenceData.state = "osu!catch the beat (cbt)";
 		presenceData.smallImageKey = "ctb";
 		presenceData.smallImageText = "osu!catch the beat";
