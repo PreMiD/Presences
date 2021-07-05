@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "701788656695902258"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -83,7 +83,7 @@ presence.on("UpdateData", () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/bot/")) {
       const priceEls = document.getElementsByClassName("ubot");
-      for (var i = 0; i < priceEls.length; i++) {
+      for (let i = 0; i < priceEls.length; i++) {
         const botname = priceEls[i].textContent;
         presenceData.details = "Bir Bota bakıyor:";
         presenceData.state = botname;
@@ -94,7 +94,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
