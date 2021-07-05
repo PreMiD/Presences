@@ -28,23 +28,23 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Searching for ${document.location.search.substring(
         3
       )}`;
-    } else presenceData.details = "Exploring MyAnimeList.vip";
+    } else presenceData.details = "Explorando MyAnimeList.vip";
   } else if (pathname === "/animes-legendado")
-    presenceData.details = "Searching for Subs";
+    presenceData.details = "Procurando por Legendados";
   else if (pathname === "/animes-dublado")
-    presenceData.details = "Searching for Dubs";
-  else if (pathname === "/filme") presenceData.details = "Searching for movies";
+    presenceData.details = "Procurando por Dublados";
+  else if (pathname === "/filme") presenceData.details = "Procurando por Filmes";
   else if (pathname.startsWith("/animes/")) {
     const iframe = document.querySelector("iframe");
     if (!iframe) {
       const title: HTMLHeadingElement = document.querySelector(
         "section.titlePosts > h1"
       );
-      presenceData.details = "Checking Synopsis";
+      presenceData.details = "Vendo Sinopse";
       if (title) presenceData.state = title.innerText;
       presenceData.buttons = [
         {
-          label: "Check Synopsis",
+          label: "Ver Sinopse",
           url: document.location.href
         }
       ];
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
       }
       presenceData.buttons = [
         {
-          label: "Watch Episode",
+          label: "Assistir o Episódio",
           url: document.location.href
         }
       ];
