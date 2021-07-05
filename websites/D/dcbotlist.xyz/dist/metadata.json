@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Batuhan",
+    "id": "267604752764764160"
+  },
+  "service": "dcbotlist.xyz",
+  "description": {
+    "tr": "Türkiyenin en gelişmiş listi.",
+    "en": "Turkey's most advanced bot list",
+    "nl": "Turkije's meest geavanceerde botlijst"
+  },
+  "url": "dcbotlist.xyz",
+  "version": "2.3.5",
+  "logo": "https://i.hizliresim.com/kd4jbuk.png",
+  "thumbnail": "https://i.hizliresim.com/kd4jbuk.png",
+  "color": "#F10C0C",
+  "tags": [
+    "botlist",
+    "trlist",
+    "turkish"
+  ],
+  "category": "other"
+}
