@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 
   if (pathname === "/") {
     if (document.location.search) {
-      presenceData.details = `Searching for ${document.location.search.substring(
+      presenceData.details = `Procurando por ${document.location.search.substring(
         3
       )}`;
     } else presenceData.details = "Explorando MyAnimeList.vip";
