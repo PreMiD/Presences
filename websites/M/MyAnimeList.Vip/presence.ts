@@ -12,7 +12,7 @@ let iframeData: {
 presence.on(
   "iFrameData",
   (data: { currTime: number; duration: number; paused: boolean }) => {
-    iframeData = data;
+    if (!data.paused) iframeData = data;
   }
 );
 
