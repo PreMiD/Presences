@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
         stateText = "Geo Traveler";
       else if (original === "kaedehara_kazuha") 
         stateText = "Kaedehara Kazuha";
-     else if (original === "hu_tao") 
+      else if (original === "hu_tao") 
         stateText = "Hu Tao";
       else 
         stateText = original.charAt(0).toUpperCase() + original.slice(1);
