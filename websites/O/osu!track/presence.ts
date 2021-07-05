@@ -8,9 +8,9 @@ presence.on("UpdateData", async() => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: timestampe
-  }
+  },
 
-  let pathnames = location.pathname,
+   pathnames = location.pathname,
 	
 	urlSplit = document.URL.split("/"),
 
