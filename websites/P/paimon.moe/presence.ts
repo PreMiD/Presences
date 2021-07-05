@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
     } else if (pathname.includes("/furnishing/list") || pathname.includes("/furnishing/list/")) {
       presenceData.details = "Viewing at the Database";
       presenceData.state = "Looking at the Furnishing List";
-      }
+    }
   } else if (pathname.includes("/weapons") || pathname.includes("/weapons/")) {
     presenceData.details = "Viewing at the Database";
     presenceData.state = "Weapons";
