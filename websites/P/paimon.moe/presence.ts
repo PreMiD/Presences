@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing the character details:";
       presenceData.state = stateText;
     }
-    }
+  }
   if (pathname.includes("/wish/character-event") || pathname.includes("/wish/character-event/")) {
     presenceData.details = "Viewing at the Wish Counter";
     presenceData.state = "Wish Counter: Character Event";
