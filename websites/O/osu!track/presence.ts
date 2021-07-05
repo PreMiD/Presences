@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 const presence = new Presence({
 	clientId: "861180231909113866"
 })
@@ -92,10 +90,12 @@ presence.on('UpdateData', async() => {
 	} else if (pathname === "/osutrack/b/discord/") {
 		presenceData.details = "Viewing about osu!track's Discord Bot"
 	} else if (pathname === "/osutrack/b/mailer/") {
-		presenceData.details = "Viewing abotu osu!track's Mailerbot Refrence"
+		presenceData.details = "Viewing about osu!track's Mailerbot Refrence"
 	} else if (pathname === "/osutrack/b/pp/") {
 		presenceData.details = "Viewing at Top 10 PP Plays of osu!"
     presenceData.state = "As of 10/10/2014"
+    presenceData.smallImageKey = "osu_std_logo"
+		presenceData.smallImageText = "osu!standard"
 	} else if (pathname === "/osutrack/updater/") {
     presenceData.details = "Viewing at the IRC Bot's Documentation"
   } else if (pathname === "/osutrack/updater/index.php") {
