@@ -23,8 +23,13 @@ presence.on("UpdateData", async () => {
   },
     { pathname } = document.location;
 
-  if (pathname === "/") presenceData.details = "Exploring MyAnimeList.vip";
-  else if (pathname === "/animes-legendado")
+  if (pathname === "/") {
+    if (document.location.search) {
+      presenceData.details = `Searching for ${document.location.search.substring(
+        3
+      )}`;
+    } else presenceData.details = "Exploring MyAnimeList.vip";
+  } else if (pathname === "/animes-legendado")
     presenceData.details = "Searching for Subs";
   else if (pathname === "/animes-dublado")
     presenceData.details = "Searching for Dubs";
