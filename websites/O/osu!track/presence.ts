@@ -7,18 +7,18 @@ const presence = new Presence({
 presence.on('UpdateData', async() => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: timestampe,
+		startTimestamp: timestampe
 	},
 
-	 {pathname} = location,
+	{pathname} = location,
 	
-	 urlSplit = document.URL.split('/'),
+	urlSplit = document.URL.split('/'),
 
-	 decodeURL = decodeURIComponent(urlSplit[5]);
+	decodeURL = decodeURIComponent(urlSplit[5]);
 
 	if (pathname === "/osutrack/") 
 		presenceData.details = "Viewing homepage";
-	 else if (pathname === "/osutrack/user/") {
+	else if (pathname === "/osutrack/user/") {
 		presenceData.details = "Viewing a user's statistics";
 		presenceData.state = "User not found!";
 	} else if (pathname === `/osutrack/user/${urlSplit[5]}`) {
@@ -87,11 +87,11 @@ presence.on('UpdateData', async() => {
 		presenceData.details = `Viewing ${indexText.textContent}`;
 	} else if (pathname === "/osutrack/b/ads/") 
 		presenceData.details = "Viewing About Ads on osu!track";
-	 else if (pathname === "/osutrack/b/discord/") 
+	else if (pathname === "/osutrack/b/discord/") 
 		presenceData.details = "Viewing about osu!track's Discord Bot";
-	 else if (pathname === "/osutrack/b/mailer/") 
+	else if (pathname === "/osutrack/b/mailer/") 
 		presenceData.details = "Viewing abotu osu!track's Mailerbot Refrence";
-	 else if (pathname === "/osutrack/b/pp/") {
+	else if (pathname === "/osutrack/b/pp/") {
 		presenceData.details = "Viewing at Top 10 PP Plays of osu!";
     presenceData.state = "As of 10/10/2014";
 	} else if (pathname === "/osutrack/updater/") 
@@ -100,7 +100,7 @@ presence.on('UpdateData', async() => {
     presenceData.details = "Viewing at the IRC Bot's Documentation";
   
 
-	if (presenceData.details == null) {
+	if (presenceData.details === null) {
     //This will fire if you do not set presence details
     presence.setTrayTitle(); //Clears the tray title for mac users
     presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
