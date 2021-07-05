@@ -1,11 +1,10 @@
 const
   presence = new Presence({
-    clientId: "860224040060715018" //The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "860224040060715018"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-    //You can use this to get translated strings in their browser language
   });
 
 let iFrameVideo: { isPaused: boolean };
@@ -48,6 +47,11 @@ const getInfo = {
  * This object stores functions that get the updated data
 */
   updateData = {
+    updateAll: async () => {
+      data.smallimage = await updateData.getSmallImage();
+      data.details = updateData.getDetails();
+      data.state = updateData.getState();
+    },
     getDetails: () => {
       const path = window.location.pathname.split("/");
       switch (path[1]) {
@@ -57,14 +61,14 @@ const getInfo = {
           return "Favorites";
         case "channel":
           return path[2] ?
-            `${getInfo.channel().title}Channel`
-            : "Channels";
+            "Viewing Channel"
+            : "Channel List";
         case "library":
           return "Library";
         case "playlists":
           return "Playlists";
         case "multiview":
-          return `MultiView - ${document.querySelectorAll(".mv-frame").length} ${document.querySelectorAll(".mv-frame").length === 1 ? "Video" : "Videos"} Open`;
+          return "MultiView";
         case "music":
           return "Music";
         case "infinite":
@@ -78,7 +82,7 @@ const getInfo = {
         case "watch":
           return `Watching ${getInfo.watch().title}`;
         default:
-          return "Default value";
+          return `Unsupported Page : ${window.location.pathname}`;
       }
     },
     getState: () => {
@@ -87,7 +91,7 @@ const getInfo = {
         case "watch":
           return `${getInfo.watch().channel}`;
         case "channel":
-          return "";
+          return path[2] === undefined ? getChannelsCategory() : getInfo.channel().title;
         case "home":
           return getHomeFavsCategory();
         case "favorites":
@@ -96,6 +100,8 @@ const getInfo = {
           return document.querySelector(".music-player-bar") !== null ?
             `Listening to ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.single-line-clamp>a").textContent} - ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.text-h6").textContent}` :
             "Not listening to anything";
+        case "multiview":
+          return `${document.querySelectorAll(".mv-frame").length} ${document.querySelectorAll(".mv-frame").length === 1 ? "Video" : "Videos"} Open`;
         case "infinite":
           return `${getInfo.watch().title} - ${getInfo.watch().channel}`;
         default:
@@ -148,17 +154,17 @@ const getInfo = {
         case "about":
           return {
             image: "mdihelpcircle",
-            hover: ""
+            hover: "About"
           };
         case "settings":
           return {
             image: "mdisettings",
-            hover: ""
+            hover: "Settings"
           };
         case "login":
           return {
             image: "mdiloginvariant",
-            hover: ""
+            hover: document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null ? "Login Screen" : "Account Settings"
           };
         case "watch":
           return {
@@ -169,25 +175,11 @@ const getInfo = {
         default:
           return {
             image: "largeimage",
-            hover: ""
+            hover: undefined
           };
       }
     }
   };
-
-// Update the data the first time
-updateData.getSmallImage().then((newData) => {
-  data.smallimage = newData;
-});
-data.details = updateData.getDetails();
-data.state = updateData.getState();
-
-// Update the data every few seconds so Discord doesn't rate limit
-setInterval(async () => {
-  data.smallimage = await updateData.getSmallImage();
-  data.details = updateData.getDetails();
-  data.state = updateData.getState();
-}, 5000);
 
 /**
  * Get the Category on the Home and Favorites Pages
@@ -205,18 +197,37 @@ function getHomeFavsCategory() {
   }
 }
 
+/**
+ * Get the Category on the Channels Page
+ */
+function getChannelsCategory() {
+  switch ([].indexOf.call(document.querySelector("[role='tablist'] div.v-slide-group__content").children, document.querySelector("[role='tablist'] div.v-slide-group__content [aria-selected=true]"))) {
+    case 1:
+      return "VTuber";
+    case 2:
+      return "Subber";
+    case 3:
+      return "Favorites";
+    case 4:
+      return "Blocked";
+    default:
+      return "Unsupported Category"; // This should never occur, if it occurs it's a holodex.net bug
+  }
+}
+
 
 presence.on("UpdateData", async () => {
+  updateData.updateAll();
+
   const presenceData: PresenceData = {
     largeImageKey:
-      "largeimage" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
+      "largeimage",
     smallImageKey:
-      data.smallimage.image /*The key (file name) of the Small Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-    smallImageText: data.smallimage.hover, //The text which is displayed when hovering over the small image
-    details: data.details, //The upper section of the presence text
-    state: data.state, //The lower section of the presence text
-    startTimestamp: data.startTime //The unix epoch timestamp for when to start counting from
-    // endTimestamp: null, //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
+      data.smallimage.image,
+    smallImageText: data.smallimage.hover,
+    details: data.details,
+    state: data.state,
+    startTimestamp: data.startTime
   };
 
   // Add video and channel buttons when on the watch page
@@ -234,11 +245,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (presenceData.details === null) {
-    //This will fire if you do not set presence details
-    presence.setTrayTitle(); //Clears the tray title for mac users
-    presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
-  } else {
-    //This will fire if you set presence details
-    presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
-  }
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
 });
