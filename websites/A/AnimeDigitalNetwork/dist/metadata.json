@@ -7,6 +7,10 @@
     {
       "name": "Bryan",
       "id": "293775922757238784"
+    },
+    {
+      "name": "Dark_Ville",
+      "id": "638080361179512853"
     }
   ],
   "service": "AnimeDigitalNetwork",
@@ -21,10 +25,6 @@
   "logo": "https://i.imgur.com/JnLqL7n.png",
   "thumbnail": "https://i.imgur.com/1idATDN.png",
   "color": "#0096FF",
-  "tags": [
-    "anime-digital-network",
-    "video",
-    "anime"
-  ],
+  "tags": ["anime-digital-network", "video", "anime"],
   "category": "anime"
 }
