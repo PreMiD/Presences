@@ -1,0 +1,25 @@
+{
+  "author": {
+    "name": "Elvêsy",
+    "id": "851095302672744479"
+  },
+  "service": "Discord Türkiye",
+  "description": {
+    "tr": "DiscordTR - Discord Türkiye her kategoride kullanıcılarına destek ve hizmet vermeyi amaçlar.",
+    "en": "DiscordTR - Discord Turkey aims to provide support and service to its users in every category.",
+    "nl": "DiscordTR - Discord Turkije streeft ernaar zijn gebruikers in elke categorie ondersteuning en service te bieden."
+  },
+  "url": [
+    "discordtr.org"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.ibb.co/R4bGV2T/discordtr.jpg",
+  "thumbnail": "https://i.ibb.co/ypmRGBc/thumbnail.png",
+  "color": "#262626",
+  "tags": [
+    "discord",
+    "discordtr",
+    "bot"
+  ],
+  "category": "other"
+}
