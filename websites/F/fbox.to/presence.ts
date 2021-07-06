@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
   },
     { pathname } = document.location;
 
-  if (pathname === "/") presenceData.details = "Exploring Fbox.to";
+  if (pathname === "/") presenceData.details = "Browsing";
   else if (pathname.startsWith("/series/")) {
     const title: HTMLHeadingElement = document.querySelector(
       "#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
