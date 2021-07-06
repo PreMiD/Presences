@@ -5,94 +5,138 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: timestampe
-  },
+      largeImageKey: "logo",
+      startTimestamp: timestampe
+    },
     pathnames = location.pathname,
     urlSplit = document.URL.split("/"),
     decodeURL = decodeURIComponent(urlSplit[5]);
 
-  if (pathnames === "/osutrack/") presenceData.details = "Viewing homepage";
-  else if (pathnames === "/osutrack/user/") {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = "User not found!";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}`) {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = decodeURL;
-    presenceData.smallImageKey = "osu_std_logo";
-    presenceData.smallImageText = "osu!standard";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}/`) {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = decodeURL;
-    presenceData.smallImageKey = "osu_std_logo";
-    presenceData.smallImageText = "osu!standard";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}/taiko`) {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = `${decodeURL} in osu!taiko`;
-    presenceData.smallImageKey = "taiko";
-    presenceData.smallImageText = "Taiko";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}/taiko/`) {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = `${decodeURL} in osu!taiko`;
-    presenceData.smallImageKey = "taiko";
-    presenceData.smallImageText = "Taiko";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}/ctb`) {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = `${decodeURL} in osu!catch the beat`;
-    presenceData.smallImageKey = "ctb";
-    presenceData.smallImageText = "Catch The Beat (CTB)";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}/ctb/`) {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = `${decodeURL} in osu!catch the beat`;
-    presenceData.smallImageKey = "ctb";
-    presenceData.smallImageText = "mania";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}/mania`) {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = `${decodeURL} in osu!mania`;
-    presenceData.smallImageKey = "mania";
-    presenceData.smallImageText = "Mania";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}/mania/`) {
-    presenceData.details = "Viewing a user's statistics";
-    presenceData.state = `${decodeURL} in osu!mania`;
-    presenceData.smallImageKey = "mania";
-    presenceData.smallImageText = "Mania";
-  } else if (pathnames === "/osutrack/bestplays/") {
-    presenceData.details = "Viewing at the Best Plays";
-    presenceData.state = "osu!standard";
-    presenceData.smallImageKey = "osu_std_logo";
-    presenceData.smallImageText = "osu!standard";
-  } else if (pathnames === "/osutrack/bestplays/taiko/") {
-    presenceData.details = "Viewing at the Best Plays";
-    presenceData.state = "osu!taiko";
-    presenceData.smallImageKey = "taiko";
-    presenceData.smallImageText = "osu!taiko";
-  } else if (pathnames === "/osutrack/bestplays/ctb/") {
-    presenceData.details = "ViewKing at the Best Plays";
-    presenceData.state = "osu!catch the beat (cbt)";
-    presenceData.smallImageKey = "ctb";
-    presenceData.smallImageText = "osu!catch the beat";
-  } else if (pathnames === "/osutrack/bestplays/mania/") {
-    presenceData.details = "Viewing at the Best Plays";
-    presenceData.state = "osu!mania";
-    presenceData.smallImageKey = "mania";
-    presenceData.smallImageText = "osu!mania";
-  } else if (pathnames === "/osutrack/b/") {
-    const indexText = document.querySelector("body > h1");
+  if (document.location.hostname === "ameobea.me") {
+    switch (pathnames) {
+      case "/osutrack/":
+        presenceData.details = "Viewing homepage";
+        break;
 
-    presenceData.details = `Viewing ${indexText.textContent}`;
-  } else if (pathnames === "/osutrack/b/ads/")
-    presenceData.details = "Viewing About Ads on osu!track";
-  else if (pathnames === "/osutrack/b/discord/")
-    presenceData.details = "Viewing about osu!track's Discord Bot";
-  else if (pathnames === "/osutrack/b/mailer/")
-    presenceData.details = "Viewing abotu osu!track's Mailerbot Refrence";
-  else if (pathnames === "/osutrack/b/pp/") {
-    presenceData.details = "Viewing at Top 10 PP Plays of osu!";
-    presenceData.state = "As of 10/10/2014";
-  } else if (pathnames === "/osutrack/updater/")
-    presenceData.details = "Viewing at the IRC Bot's Documentation";
-  else if (pathnames === "/osutrack/updater/index.php")
-    presenceData.details = "Viewing at the IRC Bot's Documentation";
+      case "/osutrack/user/":
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = "User not found!";
+        break;
+
+      case `/osutrack/user/${urlSplit[5]}`:
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = decodeURL;
+        presenceData.smallImageKey = "osu_std_logo";
+        presenceData.smallImageText = "osu!standard";
+        break;
+
+      case `/osutrack/user/${urlSplit[5]}/`:
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = decodeURL;
+        presenceData.smallImageKey = "osu_std_logo";
+        presenceData.smallImageText = "osu!standard";
+        break;
+
+      case `/osutrack/user/${urlSplit[5]}/taiko`:
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = decodeURL;
+        presenceData.smallImageKey = "taiko";
+        presenceData.smallImageText = "osu!taiko";
+        break;
+
+      case `/osutrack/user/${urlSplit[5]}/taiko/`:
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = decodeURL;
+        presenceData.smallImageKey = "taiko";
+        presenceData.smallImageText = "osu!taiko";
+        break;
+
+      case `/osutrack/user/${urlSplit[5]}/ctb`:
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = decodeURL;
+        presenceData.smallImageKey = "ctb";
+        presenceData.smallImageText = "osu!ctb (catch the beat)";
+        break;
+
+      case `/osutrack/user/${urlSplit[5]}/ctb/`:
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = decodeURL;
+        presenceData.smallImageKey = "ctb";
+        presenceData.smallImageText = "osu!ctb (catch the beat)";
+        break;
+
+      case `/osutrack/user/${urlSplit[5]}/mania`:
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = decodeURL;
+        presenceData.smallImageKey = "mania";
+        presenceData.smallImageText = "osu!mania";
+        break;
+
+      case `/osutrack/user/${urlSplit[5]}/mania/`:
+        presenceData.details = "Viewing a user's statistics";
+        presenceData.state = decodeURL;
+        presenceData.smallImageKey = "mania";
+        presenceData.smallImageText = "osu!mania";
+        break;
+
+      case "/osutrack/bestplays/":
+        presenceData.details = "Viewing at the Best Plays";
+        presenceData.state = "osu!standard";
+        presenceData.smallImageKey = "osu_std_logo";
+        presenceData.smallImageText = "osu!standard";
+        break;
+
+      case "/osutrack/bestplays/taiko/":
+        presenceData.details = "Viewing at the Best Plays";
+        presenceData.state = "osu!taiko";
+        presenceData.smallImageKey = "taiko";
+        presenceData.smallImageText = "osu!taiko";
+        break;
+
+      case "/osutrack/bestplays/ctb/":
+        presenceData.details = "ViewKing at the Best Plays";
+        presenceData.state = "osu!catch the beat (cbt)";
+        presenceData.smallImageKey = "ctb";
+        presenceData.smallImageText = "osu!catch the beat";
+        break;
+
+      case "/osutrack/bestplays/mania/":
+        presenceData.details = "Viewing at the Best Plays";
+        presenceData.state = "osu!mania";
+        presenceData.smallImageKey = "mania";
+        presenceData.smallImageText = "osu!mania";
+        break;
+
+      case "/osutrack/b/":
+        const indexText = document.querySelector("body > h1");
+        presenceData.details = `Viewing ${indexText.textContent}`;
+        break;
+
+      case "/osutrack/b/ads/":
+        presenceData.details = "Viewing About Ads on osu!track";
+        break;
+
+      case "/osutrack/b/discord/":
+        presenceData.details = "Viewing about osu!track's Discord Bot";
+        break;
+
+      case "/osutrack/b/mailer/":
+        presenceData.details = "Viewing abotu osu!track's Mailerbot Refrence";
+        break;
+
+      case "/osutrack/b/pp/":
+        presenceData.details = "Viewing at Top 10 PP Plays of osu!";
+        break;
+
+      case "/osutrack/updater/":
+        presenceData.details = "Viewing at the IRC Bot's Documentation";
+        break;
+
+      case "/osutrack/updater/index.php":
+        presenceData.details = "Viewing at the IRC Bot's Documentation";
+        break;
+    }
+  }
 
   if (!presenceData.details) {
     //This will fire if you do not set presence details
