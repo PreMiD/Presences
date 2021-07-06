@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
     };
 
   if (document.location.pathname.includes("video") && video) {
-    if (video && !isNaN(video.duration)) {
+    if (!isNaN(video.duration)) {
       const title = document.querySelector(
           'meta[name="description"]'
         ) as HTMLMetaElement,
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (video && isNaN(video.duration)) {
+    } else if (isNaN(video.duration)) {
       const title = document.querySelector(
           'meta[name="description"]'
         ) as HTMLMetaElement,
