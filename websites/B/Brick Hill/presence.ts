@@ -25,16 +25,15 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Register";
   } else if (document.location.pathname.includes("/play/")) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname == "/play/") {
+      presenceData.details = "Viewing Page:";
+      presenceData.state = "Games";
+    } else {
       const gameName = document.querySelector(
         "body > div.main-holder.grid > div:nth-child(2) > div:nth-child(1) > div.top.blue"
       );
       presenceData.details = "Viewing Game:";
       presenceData.state = gameName.textContent;
-    } else {
-      presenceData.details = "Viewing Page:";
-      presenceData.state = "Games";
     }
   } else if (document.location.pathname.includes("/clans/")) {
     presenceData.startTimestamp = browsingStamp;
