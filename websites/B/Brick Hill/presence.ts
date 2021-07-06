@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       const pageName = document.querySelector("#content > div > nav > span");
       presenceData.details = "Viewing Page:";
-      presenceData.state = "Blog (" + pageName.textContent + ")";
+      presenceData.state = `Blog (${pageName.textContent})`;
     }
   }
 
@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
