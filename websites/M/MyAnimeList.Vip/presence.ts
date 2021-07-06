@@ -34,6 +34,7 @@ presence.on("UpdateData", async () => {
   else if (pathname === "/animes-dublado")
     presenceData.details = "Procurando por Dublados";
   else if (pathname === "/filme") presenceData.details = "Procurando por Filmes";
+  else if (pathname.startsWith("/lancamento")) presenceData.details = "Últimos Lancamentos";
   else if (pathname.startsWith("/animes/") || pathname.startsWith("/episodio/")) {
     const iframe = document.querySelector("iframe");
     if (!iframe) {
