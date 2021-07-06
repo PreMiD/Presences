@@ -142,9 +142,8 @@ presence.on("UpdateData", async () => {
 
   if (iFrameVideo !== false && !isNaN(duration)) {
     let videoTitle,
-      series,
+      series: HTMLElement,
       seriesLink,
-      type,
       episode,
       epName,
       seasonregex,
@@ -160,15 +159,10 @@ presence.on("UpdateData", async () => {
       epName = epName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       seasonregex = new RegExp(`(.*) ${epName} - Watch on Crunchyroll`);
       [, seasonName] = document.title.match(seasonregex);
-      type =
-        document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[1]
-          .innerHTML === "Subtitled"
-          ? " (Sub)"
-          : " (Dub)";
-      videoTitle = seasonName + type;
+      videoTitle = seasonName;
     } else {
-      series = document.querySelector(".ellipsis .text-link span");
-      videoTitle = series.innerHTML;
+      series = document.querySelector(".ellipsis .text-link");
+      videoTitle = series.innerText;
       seriesLink = series.getAttribute("href");
       const episod = document.querySelectorAll("#showmedia_about_media h4"),
         epName = document.querySelector("h4#showmedia_about_name");
