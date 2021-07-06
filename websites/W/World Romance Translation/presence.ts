@@ -14,14 +14,21 @@ presence.on("UpdateData", async () => {
   if (pathname === "/") {
     const searchQuery: HTMLHeadingElement =
       document.querySelector("div.releases > h1");
-    if (searchQuery === null) presenceData.details = "Browsing Home Page";
+    if (searchQuery === null) presenceData.details = "Melihat Homepage";
     else {
       const { innerText } = searchQuery;
-      presenceData.details = `Searching for ${innerText.substring(
+      presenceData.details = `Sedang Mencari ${innerText.substring(
         innerText.indexOf("'") + 1,
         innerText.lastIndexOf("'")
       )}`;
     }
+  } else if (pathname.startsWith("/genres/")) {
+    const genres = document.querySelector(
+      "div.wrapper > div > div > div.releases > h1"
+    ).textContent;
+    presenceData.details = "Filter Berdasarkan Genre...";
+    presenceData.state = `Genre: ${genres}`;
+    presenceData.smallImageKey = "search";
   } else if (readerArea !== null) {
     const mangaName: HTMLHeadingElement =
         document.querySelector("h1.entry-title"),
@@ -31,15 +38,16 @@ presence.on("UpdateData", async () => {
         "select#select-paged"
       );
     if (mangaName !== null && chapterNumber !== null && pageNumber !== null) {
-      presenceData.details = `Reading ${mangaName.innerText.substring(
+      presenceData.details = `Membaca ${mangaName.innerText.substring(
         0,
         mangaName.innerText.indexOf("Chapter")
       )}`;
-      presenceData.state = `${chapterNumber.selectedOptions[0].innerText} Page ${pageNumber.selectedOptions[0].innerText}`;
+      presenceData.state = `${chapterNumber.selectedOptions[0].innerText} Slide ${pageNumber.selectedOptions[0].innerText}`;
     }
+   
     presenceData.buttons = [
       {
-        label: "Read Manga",
+        label: "Lihat Manga",
         url: document.location.href
       }
     ];
@@ -47,28 +55,28 @@ presence.on("UpdateData", async () => {
     const mangaName: HTMLHeadingElement =
       document.querySelector("h1.entry-title");
     presenceData.details =
-      pathname === "/manga/" ? "Browsing Manga List" : "Checking Synopsis";
+      pathname === "/manga/" ? "Melihat Daftar Manga" : "Melihat Detail Manga";
     if (mangaName) presenceData.state = mangaName.innerText;
     presenceData.buttons = [
       {
-        label: pathname === "/manga/" ? "Browse Manga List" : "Check Synopsis",
+        label: pathname === "/manga/" ? "Lihat Daftar Manga" : "Lihat Detail Manga",
         url: document.location.href
       }
     ];
   } else if (pathname.startsWith("/bookmark/"))
-    presenceData.details = "Browsing Bookmarks";
+    presenceData.details = "Membuka Bookmarks";
   else if (pathname === "/project-wrt/") {
-    presenceData.details = "Viewing Project WRT";
-    presenceData.state = "Browsing List of Staff Translated Manga";
+    presenceData.details = "Melihat Project WRT";
+    presenceData.state = "Lihat Daftar Project WRT";
   } else if (pathname === "/recruitment/")
-    presenceData.details = "Viewing Join Us Page";
+    presenceData.details = "Membuka Halaman Join Us";
   else if (pathname === "/contact-us/")
-    presenceData.details = "Viewing Contact Us Page";
+    presenceData.details = "Membuka Halaman Contact Us";
   else if (pathname === "/privacy-policy/")
-    presenceData.details = "Viewing Privacy Policy";
-  else if (pathname === "/dmca/") presenceData.details = "Viewing DMCA Policy";
+    presenceData.details = "Melihat Kebijakan Privasi";
+  else if (pathname === "/dmca/") presenceData.details = "Melihat DMCA";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
