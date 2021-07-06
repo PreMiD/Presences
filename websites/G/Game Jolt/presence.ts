@@ -31,9 +31,9 @@ const page = document.location.pathname,
   ) as HTMLElement,
   profile = document.querySelector(
     "#content > div > div > header > section > div > div.row > div > div > h1 > small"
-  ) as HTMLElement;
+  ) as HTMLElement,
 
-const data: { [k: string]: any } = {
+ data: { [k: string]: any } = {
   largeImageKey: "gj-logo",
   startTimestamp: Math.floor(Date.now() / 1000)
 };
@@ -43,10 +43,9 @@ if (page.includes("/games/tag-")) {
 
   data.details = "Browsing games by tag:";
   data.state = tagName[0].toUpperCase() + tagName.slice(1);
-}
-else if (page.includes('/firesides')||page.includes('/fireside') && page!=='/dashboard/fireside/add') {
-  if(page.slice('/firesides'.length)!="") {
-    let firesideOwner = document.querySelector(
+} else if (page.includes('/firesides') || page.includes('/fireside') && page !== '/dashboard/fireside/add') {
+  if(page.slice('/firesides'.length) != "") {
+    const firesideOwner = document.querySelector(
       "#content > div > div > div > div > h2 > small > a"
     ).getAttribute('href').slice(1),
     fireside = document.querySelector(
@@ -58,22 +57,22 @@ else if (page.includes('/firesides')||page.includes('/fireside') && page!=='/das
     .replace('\n\t\t\t\t', '')
     .replace(firesideOwner, '')
     .replace("  's Fireside ", '');
-    data.details = `Sitting By ${firesideOwner.slice(1)}'s Fireside`
-    data.state = `Fireside name: ${fireside}`
+    data.details = `Sitting By ${firesideOwner.slice(1)}'s Fireside`;
+    data.state = `Fireside name: ${fireside}`;
   } else {
-    data.details = pages[page]
-    data.state = `Searching`
+    data.details = pages[page];
+    data.state = `Searching`;
   }
-} else if(page===('/dashboard/fireside/add')) {
-  data.details = pages[page]
-  data.state = `Creating`
+} else if(page === ('/dashboard/fireside/add')) {
+  data.details = pages[page];
+  data.state = `Creating`;
 } else if (
   page.includes("/games/") &&
   gameName &&
   gameName.textContent !== ""
 ) {
   data.details = `Viewing a game${
-    author && author.textContent !== "" ? " by " + author.textContent : ""
+    author && author.textContent !== "" ? ` by ${author.textContent}` : ""
   }:`;
   data.state = gameName.textContent.trim();
 } else if (pages[page] || pages[page.slice(0, -1)]) {
@@ -94,8 +93,7 @@ else if (page.includes('/firesides')||page.includes('/fireside') && page!=='/das
 } else if (profile && profile.textContent != "") {
   data.details = `Viewing a user:`;
   data.state = profile.textContent;
-}
-else {
+} else {
   data.details = "Viewing a page:";
   data.state = "Home";
 }
