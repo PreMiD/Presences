@@ -43,8 +43,12 @@ presence.on("UpdateData", async () => {
       );
       if (episode) presenceData.state += episode.innerText;
     }
-    if (iFrameData && !iFrameData.paused)
-      [, presenceData.endTimestamp] = presence.getTimestamps(iFrameData.currTime, iFrameData.duration);
+    if (iFrameData && !iFrameData.paused) {
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        iFrameData.currTime,
+        iFrameData.duration
+      );
+    }
     presenceData.buttons = [
       {
         label: "Watch Series",
@@ -56,15 +60,23 @@ presence.on("UpdateData", async () => {
       "#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
     );
     if (title) presenceData.details = title.innerText;
-    if (iFrameData && !iFrameData.paused)
-      [, presenceData.endTimestamp] = presence.getTimestamps(iFrameData.currTime, iFrameData.duration);
+    if (iFrameData && !iFrameData.paused) {
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        iFrameData.currTime,
+        iFrameData.duration
+      );
+    }
     presenceData.buttons = [
       {
         label: "Watch Movie",
         url: document.location.href
       }
     ];
-  } else {
+  } else if (pathname === "/user/profile")
+    presenceData.details = "Checking Profile";
+  else if (pathname === "/user/watchlist")
+    presenceData.details = "Checking Watchlist";
+  else {
     const genre: HTMLHeadingElement = document.querySelector(
       "#body > div > div.col-left > section > div.heading > h1"
     );
