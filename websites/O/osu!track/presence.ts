@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: timestampe
-    },
+    largeImageKey: "logo",
+    startTimestamp: timestampe
+  },
     pathnames = location.pathname,
     urlSplit = document.URL.split("/"),
     decodeURL = decodeURIComponent(urlSplit[5]);
@@ -107,10 +107,11 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = "osu!mania";
         break;
 
-      case "/osutrack/b/":
+      case "/osutrack/b/": {
         const indexText = document.querySelector("body > h1");
         presenceData.details = `Viewing ${indexText.textContent}`;
         break;
+      }
 
       case "/osutrack/b/ads/":
         presenceData.details = "Viewing About Ads on osu!track";
