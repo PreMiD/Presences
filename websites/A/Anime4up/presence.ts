@@ -1,21 +1,29 @@
+interface LangStrings {
+  play: string;
+  pause: string;
+  browse: string;
+  viewingMovie: string;
+  viewingSeries: string;
+  watchingMovie: string;
+  watchingSeries: string;
+  search: string;
+  viewAnime: string;
+}
+
 const presence = new Presence({
-  clientId: "770030754356396052"
-});
+    clientId: "770030754356396052"
+  }),
+  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
+    const startTime = Date.now(),
+      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+  };
 
 let video = {
   duration: 0,
   currentTime: 0,
   paused: true
 };
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on(
   "iFrameData",
@@ -26,8 +34,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
+    startTimestamp: Math.floor(Date.now() / 1000),
+    largeImageKey: "logo"
   };
 
   if (location.pathname.startsWith("/episode")) {
@@ -36,13 +44,13 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    data.details = document
+    data.state = document
       .querySelectorAll(".container")[1]
       .textContent.slice(1, -1)
       .split(" ")
       .slice(0, -2)
       .join(" ");
-    data.state = `Episode: ${document
+    data.details = `Episode: ${document
       .querySelectorAll(".container")[1]
       .textContent.slice(1, -1)
       .split(" ")
@@ -50,8 +58,8 @@ presence.on("UpdateData", async () => {
 
     data.smallImageKey = video.paused ? "paused" : "played";
     data.smallImageText = video.paused ? "Paused" : "Played";
-    data.startTimestamp = timestamps[0];
-    data.endTimestamp = timestamps[1];
+    [data.startTimestamp, data.endTimestamp] = timestamps;
+
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
@@ -61,22 +69,24 @@ presence.on("UpdateData", async () => {
       .querySelector(".anime-page-link")
       .querySelector("a")
       .getAttribute("href");
+
     data.buttons = [
       { label: "Watch Episode", url: location.href },
       { label: "Anime Page", url: animeURL }
     ];
+
     presence.setActivity(data, !video.paused);
   } else if (
     location.href.startsWith("https://ww.anime4up.com/?search_param=animes&s=")
   ) {
     data.smallImageKey = "searching";
     data.smallImageText = "Searching";
-    data.details = `Searching: ${document
+    data.state = `Searching: ${document
       .querySelectorAll(".container")[1]
       .textContent.split(" ")
       .slice(4, -1)
       .join(" ")}`;
-    data.state = `Results: ${
+    data.details = `Results: ${
       document.querySelectorAll(".col-lg-2").length
         ? document.querySelectorAll(".col-lg-2").length
         : "Nothing"
@@ -85,19 +95,8 @@ presence.on("UpdateData", async () => {
   } else if (location.pathname.startsWith("/anime/")) {
     data.smallImageKey = "location";
     data.smallImageText = "Viewing";
-    data.details = document.querySelector(".anime-details-title").textContent;
-    data.state = "Viewing an Anime";
-
-    const lastEpisode = document.querySelectorAll(".episodes-card");
-    data.buttons = [
-      { label: "View Anime", url: location.href },
-      {
-        label: "Last Episode",
-        url: lastEpisode[lastEpisode.length - 1]
-          .querySelector("a")
-          .getAttribute("href")
-      }
-    ];
+    data.state = document.querySelector(".anime-details-title").textContent;
+    data.details = "Viewing an Anime";
 
     presence.setActivity(data);
   } else if (
