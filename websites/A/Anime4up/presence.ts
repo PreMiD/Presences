@@ -8,7 +8,7 @@ interface Route extends Functionlize<Partial<PresenceData>> {
   run?(): PresenceData;
 }
 
-enum PresenceSettings {
+enum Settings {
   TIMESTAMP = "timestamp",
   BUTTONS = "buttons",
   LOGO = "logo"
@@ -31,22 +31,17 @@ let video = { duration: 0, currentTime: 0, paused: true };
 const presence = new Presence({
     clientId: "770030754356396052"
   }),
-  getTimestamps = (videoTime: number, videoDuration: number): number[] => {
-    const startTime = Date.now(),
-      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-  },
   router = ({ path, data }: { path: string; data: PresenceData }): Route => {
     const routes: Route[] = [
       {
         path: /^\/episode\//,
         run: () => {
-          const timestamps = getTimestamps(
+          const timestamps = presence.getTimestamps(
             Math.floor(video.currentTime),
             Math.floor(video.duration)
           );
 
-          [data.startTimestamp, data.endTimestamp] = timestamps;
+          [, data.endTimestamp] = timestamps;
 
           if (video.paused) {
             delete data.startTimestamp;
@@ -147,21 +142,20 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const showTimestamp: boolean = await presence.getSetting(
-    PresenceSettings.TIMESTAMP
-  ),
-    showButtons: boolean = await presence.getSetting(PresenceSettings.BUTTONS),
-    logo: number = await presence.getSetting(PresenceSettings.LOGO),
+  const showTimestamp: boolean = await presence.getSetting(Settings.TIMESTAMP),
+    showButtons: boolean = await presence.getSetting(Settings.BUTTONS),
+    logo: number = await presence.getSetting(Settings.LOGO),
     logoArr = [Logos.LIGHT, Logos.DARK];
 
   let data: PresenceData = {
     largeImageKey: logoArr[logo] || Logos.LIGHT
   };
 
+  if (showTimestamp) data.startTimestamp = Math.floor(Date.now() / 1000);
+
   const path = location.href.replace(`https://${location.hostname}`, ""),
     route = router({ data, path });
 
-  if (showTimestamp) data.startTimestamp = Math.floor(Date.now() / 1000);
   if (!route) return presence.setActivity(data);
 
   if (route.run) data = route.run();
