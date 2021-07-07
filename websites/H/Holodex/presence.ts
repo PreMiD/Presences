@@ -175,7 +175,7 @@ const getInfo = {
         default:
           return {
             image: "largeimage",
-            hover: undefined
+            hover: "Holodex"
           };
       }
     }
@@ -226,9 +226,11 @@ presence.on("UpdateData", async () => {
       data.smallimage.image,
     smallImageText: data.smallimage.hover,
     details: data.details,
-    state: data.state,
     startTimestamp: data.startTime
   };
+
+  if(data.state.length > 0)
+    presenceData.state = data.state;
 
   // Add video and channel buttons when on the watch page
   if (/watch\/.{11}/.test(window.location.pathname)) {
