@@ -16,7 +16,10 @@ presence.on("UpdateData", async () => {
   else if (pathnames === "/osutrack/user/") {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = "User not found!";
-  } else if (pathnames === `/osutrack/user/${urlSplit[5]}` || pathnames === `/osutrack/user/${urlSplit[5]}/`) {
+  } else if (
+    pathnames === `/osutrack/user/${urlSplit[5]}` ||
+    pathnames === `/osutrack/user/${urlSplit[5]}/`
+  ) {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = decodeURL;
     presenceData.smallImageKey = "osu_std_logo";
@@ -31,7 +34,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = `${decodeURL} in osu!catch the beat`;
     presenceData.smallImageKey = "ctb";
     presenceData.smallImageText = "Catch The Beat (CTB)";
-  } else if (pathnames.includes(`/osutrack/user/${urlSplit[5]}/mania`))  {
+  } else if (pathnames.includes(`/osutrack/user/${urlSplit[5]}/mania`)) {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = `${decodeURL} in osu!mania`;
     presenceData.smallImageKey = "mania";
@@ -69,7 +72,10 @@ presence.on("UpdateData", async () => {
   else if (pathnames === "/osutrack/b/pp/") {
     presenceData.details = "Viewing at Top 10 PP Plays of osu!";
     presenceData.state = "As of 10/10/2014";
-  } else if (pathnames === "/osutrack/updater/" || pathnames === "/osutrack/updater/index.php")
+  } else if (
+    pathnames === "/osutrack/updater/" ||
+    pathnames === "/osutrack/updater/index.php"
+  )
     presenceData.details = "Viewing at the IRC Bot's Documentation";
 
   if (!presenceData.details) {
