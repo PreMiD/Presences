@@ -229,7 +229,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: data.startTime
   };
 
-  if(data.state.length > 0)
+  if(data.state)
     presenceData.state = data.state;
 
   // Add video and channel buttons when on the watch page
