@@ -8,9 +8,13 @@
   "category": "music",
   "logo": "https://i.imgur.com/rNVPwya.png",
   "thumbnail": "https://i.imgur.com/qnTU97o.jpg",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "color": "#f58ea8",
-  "tags": ["music", "radio", "vaporwave"],
+  "tags": [
+    "music",
+    "radio",
+    "vaporwave"
+  ],
   "url": "plaza.one",
   "description": {
     "en": "Nightwave Plaza is a free 24/7 online vaporwave radio station. The broadcast also includes some future funk and experimental genres. We hope you enjoy.",
