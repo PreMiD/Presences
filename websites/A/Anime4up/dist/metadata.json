@@ -5,8 +5,7 @@
   },
   "url": ["ww.anime4up.com", "www.anime4up.com", "anime4up.com"],
   "description": {
-    "en": "Anime4up - Arabic website to watch and download Arabic subbed anime with multiple servers.",
-    "ar_SA": "انمي فور أب - موقع عربي متخصص لمشاهدة وتحميل الانمي المترجم باللغة العربية بسيرفرات متعددة."
+    "en": "Anime4up - Arabic website to watch and download Arabic subbed anime with multiple servers."
   },
   "service": "Anime4up",
   "version": "1.0.1",
