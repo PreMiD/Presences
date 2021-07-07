@@ -19,7 +19,16 @@ const presence = new Presence({
     "/dashboard/games/add": "Add a Game",
     "/firesides": "Searching for a Fireside",
     "/dashboard/fireside/add": "Staring a Fireside"
-  };
+  },
+  creating: string[] = [
+    "Gathering Wood",
+    "Lighting the Fire",
+    "Getting the Flint & Steel",
+    "Searching how to start a campfire",
+    "Creating"
+  ],
+  creatingNow = creating[Math.floor(Math.random() * (4 - 0 + 1)) + 0];
+
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
@@ -45,7 +54,7 @@ presence.on("UpdateData", async () => {
     data.state = tagName[0].toUpperCase() + tagName.slice(1);
   } else if(page.includes("/dashboard/fireside/add")) {
     data.details = pages[page];
-    data.state = "Creating";
+    data.state = creatingNow;
   } else if (page.startsWith("/firesides") || page.startsWith("/fireside")) {
     if(page.slice("/firesides".length) !== "") {
       const firesideOwner = document.querySelector(
