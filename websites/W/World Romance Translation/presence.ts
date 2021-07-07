@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       )}`;
       presenceData.state = `${chapterNumber.selectedOptions[0].innerText} Slide ${pageNumber.selectedOptions[0].innerText}`;
     }
-   
+
     presenceData.buttons = [
       {
         label: "Lihat Manga",
@@ -59,7 +59,8 @@ presence.on("UpdateData", async () => {
     if (mangaName) presenceData.state = mangaName.innerText;
     presenceData.buttons = [
       {
-        label: pathname === "/manga/" ? "Lihat Daftar Manga" : "Lihat Detail Manga",
+        label:
+          pathname === "/manga/" ? "Lihat Daftar Manga" : "Lihat Detail Manga",
         url: document.location.href
       }
     ];
