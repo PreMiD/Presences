@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "633419305836347393"
 }),
-pages: any = {
+pages: {[k: string]: string} = {
   "/games": "Games",
   "/login": "Login",
   "/join": "Register",
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
      "#content > div > div > header > section > div > div.row > div > div > h1 > small"
     ) as HTMLElement,
 
-    data: { [k: string]: any } = {
+    data: { [k: string]: string | Number } = {
       largeImageKey: "gj-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     };
@@ -43,25 +43,27 @@ presence.on("UpdateData", async () => {
 
     data.details = "Browsing games by tag:";
     data.state = tagName[0].toUpperCase() + tagName.slice(1);
-  } else if (page.includes('/firesides') || page.includes('/fireside') && page !== '/dashboard/fireside/add') {
-    if(page.slice('/firesides'.length) != "") {
-      const firesideOwner = document.querySelector(
-        "#content > div > div > div > div > h2 > small > a"
-      ).getAttribute('href').slice(1),
-      fireside = document.querySelector(
-        "#content > div > div > div > div > h2"
-      ).textContent
-      .replace('\n\t\t\t\t\t\t\t', '')
-      .replace('\n\t\t\t\t\t\t','')
-      .replace('\n\t\t\t\t\t', '')
-      .replace('\n\t\t\t\t', '')
-      .replace(firesideOwner, '')
-      .replace("  's Fireside ", '');
-      data.details = `Sitting By ${firesideOwner.slice(1)}'s Fireside`;
-      data.state = `Fireside name: ${fireside}`;
-    } else {
-      data.details = pages[page];
-      data.state = `Searching`;
+  } else if (page.includes('/firesides') || page.includes('/fireside')) {
+    if (page !== '/dashboard/fireside/add') {
+      if(page.slice('/firesides'.length) !== "") {
+        const firesideOwner = document.querySelector(
+          "#content > div > div > div > div > h2 > small > a"
+        ).getAttribute('href').slice(1),
+        fireside = document.querySelector(
+          "#content > div > div > div > div > h2"
+        ).textContent
+        .replace('\n\t\t\t\t\t\t\t', '')
+        .replace('\n\t\t\t\t\t\t','')
+        .replace('\n\t\t\t\t\t', '')
+        .replace('\n\t\t\t\t', '')
+        .replace(firesideOwner, '')
+        .replace("  's Fireside ", '');
+        data.details = `Sitting By ${firesideOwner.slice(1)}'s Fireside`;
+        data.state = `Fireside name: ${fireside}`;
+      } else {
+        data.details = pages[page];
+        data.state = `Searching`;
+      }
     }
   } else if(page === ('/dashboard/fireside/add')) {
     data.details = pages[page];
@@ -96,7 +98,7 @@ presence.on("UpdateData", async () => {
   } else {
     data.details = "Viewing a page:";
     data.state = "Home";
-}
+  }
 
   if (data.details && data.state && data.details != "" && data.state != "") 
     presence.setActivity(data);
