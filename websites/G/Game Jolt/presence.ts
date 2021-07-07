@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
     data.state = "Home";
   }
 
-  if (data.details && data.state && data.details != "" && data.state != "") 
+  if (data.details && data.state && data.details !== "" && data.state !== "") 
     presence.setActivity(data);
   
 });
