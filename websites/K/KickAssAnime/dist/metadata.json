@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "Striker",
+    "id": "215509157837537280"
+  },
+  "service": "KickAssAnime",
+  "description": {
+    "en": "KickAssAnime is a streaming website where you can watch TV Series, Movies & OVA in dubbed and subbed formats.",
+    "nl": "KickAssAnime is een streamingwebsite waar u tv-series, films en eicellen kunt bekijken in nagesynchroniseerde en subbedformaten."
+  },
+  "url": [
+    "kickassanime.rs",
+    "kickassanime.lol"
+  ],
+  "version": "1.0.7",
+  "logo": "https://i.imgur.com/TGgZkKQ.png",
+  "thumbnail": "https://i.imgur.com/c2vGXuN.png",
+  "color": "#c7c95b",
+  "tags": [
+    "anime",
+    "videos",
+    "movies"
+  ],
+  "iframe": true,
+  "regExp": "([a-z0-9-]+[.])*kickassanime([.][a-z]+)+[/]",
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

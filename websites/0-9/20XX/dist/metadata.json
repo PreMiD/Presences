@@ -6,10 +6,12 @@
   },
   "url": "20xx.io",
   "description": {
-    "en": "20XX is a unique platform MOBA which includes a variety of characters and maps to play on."
+    "en": "20XX is a unique platform MOBA which includes a variety of characters and maps to play on.",
+    "ga_IE": "Is MOBA ardán uathúil é 20XX a chuimsíonn carachtair agus léarscáileanna éagsúla le himirt orthu.",
+    "nl": "20XX is een uniek platform-MOBA met een vartiatie aan personages en kaarten om op te spelen."
   },
   "service": "20XX",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/yamlw9T.png",
   "thumbnail": "https://i.imgur.com/ok9ArGU.jpg",
   "color": "#9AD1FD",

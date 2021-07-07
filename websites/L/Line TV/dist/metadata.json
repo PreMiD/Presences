@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "SlowLife",
+    "id": "374905512661221377"
+  },
+  "url": "tv.line.me",
+  "description": {
+    "en": "LINE TV is a global video streaming service. You can watch high-quality video content in a variety of categories such as TV dramas, entertainment shows.",
+    "nl": "LINE TV is een wereldwijde videostreamingservice. U kunt video-inhoud van hoge kwaliteit bekijken in verschillende categorieën, zoals tv-drama's en entertainmentprogramma's."
+  },
+  "service": "Line TV",
+  "version": "1.1.1",
+  "logo": "https://i.imgur.com/F2sWIqN.png",
+  "thumbnail": "https://i.imgur.com/5sqClBZ.png",
+  "color": "#01d145",
+  "tags": [
+    "drama",
+    "video"
+  ],
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "Buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "searchQuery",
+      "title": "Show Search Query",
+      "icon": "fas fa-search",
+      "value": false
+    },
+    {
+      "id": "detail",
+      "title": "Video Details row1",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%title%",
+      "placeholder": "Use %title%, %FullTitle% or %playlist%"
+    }
+  ]
+}

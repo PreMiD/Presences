@@ -6,12 +6,13 @@
   "service": "Anghami",
   "description": {
     "en": "All the music you love, all the freedom you need. Arabic and International in one place",
-    "ar_SA": "كل الموسيقى التي تحبها ، كل الحرية التي تحتاجها. العربية والدولية في مكان واحد",
     "zh_CN": "您喜欢的音乐，以及您需要的所有。阿拉伯和国际合而为一！",
-    "zh_TW": "您喜歡的音樂，以及您需要的所有。阿拉伯與國際合而為一！"
+    "zh_TW": "您喜歡的音樂，以及您需要的所有。阿拉伯與國際合而為一！",
+    "ga_IE": "An ceol go léir a bhfuil grá agat dó, an tsaoirse go léir atá uait. Araibis agus Idirnáisiúnta in aon áit amháin",
+    "nl": "Alle muziek waar je van houdt, alle vrijheid die je nodig hebt. Arabisch en internationaal op één plek"
   },
   "url": "play.anghami.com",
-  "version": "1.2.8",
+  "version": "1.2.11",
   "logo": "https://i.imgur.com/hfJSnzq.png",
   "thumbnail": "https://i.imgur.com/61ks2yh.png",
   "color": "#d3369f",

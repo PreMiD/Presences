@@ -9,10 +9,11 @@
   ],
   "description": {
     "en": "The Best Dual Agario Unblocked io Private Server.",
-    "fr": "Le meilleur serveur privé io Dual Agario Unblocked."
+    "fr": "Le meilleur serveur privé io Dual Agario Unblocked.",
+    "nl": "De beste Dual Agario Unblocked io Private Server."
   },
   "service": "Senpa.io",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "logo": "https://i.imgur.com/kP7R8IU.png",
   "thumbnail": "https://i.imgur.com/R4BjG18.png",
   "color": "#e67bbe",

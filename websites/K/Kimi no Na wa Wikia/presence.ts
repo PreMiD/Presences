@@ -7,8 +7,8 @@ presence.on("UpdateData", async () => {
     // Making 100% sure it's the wiki
     let page = "N/A";
     try {
-      page = document.getElementsByClassName("page-header__title")[0]
-        .textContent;
+      page =
+        document.getElementsByClassName("page-header__title")[0].textContent;
     } catch (err) {
       const errCode = "KMNNWIKI_WIKIEN_GETPAGETITLE";
       console.log(

@@ -1,18 +1,7 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  episode: string;
-  browse: string;
-  searchFor: string;
-  watchVideo: string;
-  watchEpisode: string;
-  watchMovie: string;
-}
-
 const presence = new Presence({
     clientId: "809748404963770398"
   }),
-  getStrings = async (): Promise<LangStrings> =>
+  getStrings = async () =>
     presence.getStrings(
       {
         play: "general.playing",
@@ -22,32 +11,25 @@ const presence = new Presence({
         searchFor: "general.searchFor",
         watchVideo: "general.buttonWatchVideo",
         watchMovie: "general.buttonViewMovie",
-        watchEpisode: "general.buttonViewEpisode"
+        watchEpisode: "general.buttonViewEpisode",
+        browsingThrough: "discord.browseThrough",
+        viewingSettings: "discord.settings",
+        viewingHistory: "amazon.history",
+        viewingList: "netflix.viewList",
+        viewAccount: "general.viewAccount",
+        viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang")
-    );
+      await presence.getSetting("lang").catch(() => "en")
+    ),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-let browsingStamp = Math.floor(Date.now() / 1000),
-  prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "iqiyi_logo",
-      details: (await strings).browse,
-      smallImageKey: "search",
-      smallImageText: (await strings).browse,
-      startTimestamp: browsingStamp
-    },
-    newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
-
-  if (document.location.href !== prevUrl) {
-    prevUrl = document.location.href;
-    browsingStamp = Math.floor(Date.now() / 1000);
-  }
 
   if (!oldLang) {
     oldLang = newLang;
@@ -56,45 +38,99 @@ presence.on("UpdateData", async () => {
     strings = getStrings();
   }
 
-  if (document.location.pathname.includes("/play")) {
+  const presenceData: PresenceData = {
+    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][
+      await presence.getSetting("logo")
+    ],
+    details: (await strings).browse,
+    smallImageKey: "search",
+    startTimestamp: browsingStamp
+  };
+
+  if (document.location.pathname === "/") {
+    const category = Object.values(document.querySelectorAll("div")).filter(
+      (entry) => entry?.className === "row-title" && YouCanSeeThis(entry)
+    )[0]?.textContent;
+
+    presenceData.details = (await strings).browsingThrough;
+    presenceData.state = category || "Home page";
+  } else if (
+    document.location.pathname.includes("/play") ||
+    document.location.pathname.includes("/intl-common/")
+  ) {
     const data = {
-        title: document.querySelector("h1 a").textContent,
-        ep: document
-          .querySelector("h1")
-          .textContent.replace(document.querySelector("h1 a").textContent, "")
+        title: (
+          document.querySelector("h1 a") || document.querySelector("title")
+        )?.textContent,
+        ep: (
+          document.querySelector("h1") ||
+          document.querySelector(".topice-source-list-item.item-active")
+        )?.textContent.replace(
+          document.querySelector("h1 a")?.textContent || "",
+          ""
+        )
       },
-      URLItem: string = JSON["parse"](
-        document.querySelectorAll('script[type="application/ld+json"]')[1]
-          .innerHTML
-      )[0].itemListElement[0].item,
+      URLItem: string =
+        JSON.parse(
+          document.querySelectorAll('script[type="application/ld+json"]')[1]
+            ?.innerHTML || "{}"
+        )[0]
+          ?.itemListElement.map(
+            (x: {
+              item: {
+                name: string;
+              };
+            }) => x.item.name.toLowerCase()
+          )
+          .join(" ") ?? "",
       video: HTMLVideoElement = document.querySelector("video"),
-      timestamps: number[] = presence.getTimestampsfromMedia(video),
       isMovie = URLItem.includes("movie"),
       isVShow = URLItem.includes("variety-show"),
+      isVShowToo = document.location.pathname.includes("/intl-common/"),
       isTrial =
         document.querySelector(
           ".iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip"
         )?.textContent !== undefined,
       lastestEp: string[] = document
         .querySelector("div.broken-line")
-        .nextSibling.nextSibling.nextSibling?.textContent.match(
+        ?.nextSibling?.nextSibling?.nextSibling?.textContent?.match(
           /[1-9]?[0-9]?[0-9]/g
         ),
-      contentEp: string[] = data.ep.match(/[1-9]?[0-9]?[0-9]/g),
+      contentEp: string[] = isVShowToo
+        ? data.ep.match(/([1-9]?[0-9]?[0-9]? ?\([1-9]?[0-9]\))/g)
+        : data.ep.match(/[1-9]?[0-9]?[0-9]/g),
       isPreview =
-        lastestEp && contentEp
-          ? parseInt(contentEp[0]) > parseInt(lastestEp[0])
-          : false;
+        lastestEp && contentEp && !isVShow && !isVShowToo
+          ? parseInt(contentEp[0], 10) > parseInt(lastestEp[0], 10)
+          : data.ep.toLowerCase().includes("preview");
 
     if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
-    if (isVShow) data.ep = "Variety show";
-    if (!isVShow && !isMovie)
+    if (isVShowToo) {
+      if (contentEp?.length) {
+        data.ep = `${(await strings).episode} ${
+          contentEp[0].match(/.+?(?=\()/g)[0]
+        } ${
+          contentEp[0].includes("(")
+            ? `- ${contentEp[0].match(/(\([1-9]?[0-9]\))/g)[0]}`
+            : "Variety show"
+        }`;
+      } else {
+        data.ep = `Variety show`;
+      }
+
+      data.title = (data.title.match(/.+?(?=\s{2})/g) || [null])[0];
+    }
+    if (isVShow && !isVShowToo) data.ep = "Variety show";
+    if (!isVShow && !isVShowToo && !isMovie && contentEp !== null)
       data.ep = `${(await strings).episode} ${contentEp[0]}`;
+    else if (!isVShow && !isVShowToo && !isMovie) data.ep = "Highlight";
 
     if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
-    if (video && !isNaN(video.duration)) {
-      if (isPreview && !isMovie && !isVShow) data.ep = `${data.ep} preview`;
+    if (video !== null && !Number.isNaN(Number(video.duration))) {
+      const timestamps: number[] = presence.getTimestampsfromMedia(video);
+
+      if (isPreview && !isMovie) data.ep = `${data.ep} preview`;
       else if (video.duration < 270 && !isMovie && !isPreview && !isTrial)
         data.ep = "Highlight";
 
@@ -128,9 +164,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    }
-
-    if (isNaN(video.duration)) {
+    } else if (data.title) {
       presenceData.details = "Looking at:";
       presenceData.state = data.title;
       presenceData.startTimestamp = browsingStamp;
@@ -151,49 +185,67 @@ presence.on("UpdateData", async () => {
 
     if (result) {
       presenceData.state = `${result} matching ${
-        parseInt(result) > 1 ? "results" : "result"
+        parseInt(result, 10) > 1 ? "results" : "result"
       }`;
     } else {
       presenceData.state = `No matching result`;
     }
-  } else if (document.location.pathname.includes("/intl-common")) {
-    const video = document.querySelector("video"),
-      title = document
-        .querySelector("title")
-        .textContent.match(/.+?(?=[1-9]|-)/)[0];
+  } else if (document.location.pathname.includes("/personal")) {
+    const type = new URLSearchParams(document.location.search).get("type"),
+      all = document.querySelector(
+        "div.trans-contributions-detail > span:nth-child(1) > i"
+      )?.textContent,
+      passed = document.querySelector(
+        "div.trans-contributions-detail > span:nth-child(2) > i"
+      )?.textContent,
+      adopted = document.querySelector(
+        "div.trans-contributions-detail > span:nth-child(3) > i"
+      )?.textContent;
 
-    if (video) {
-      const timestamps = presence.getTimestampsfromMedia(video);
+    switch (type) {
+      case "settings":
+        presenceData.details = (await strings).viewingSettings;
+        break;
 
-      presenceData.details = `${title} ${document.title.match(/[1-9]/)}`;
-      presenceData.state = "Variety show";
+      case "history":
+        presenceData.details = (await strings).viewingHistory;
+        break;
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      case "favorite":
+        presenceData.details = (await strings).viewingList;
+        break;
 
-      presenceData.smallImageKey = video.paused ? "pause" : "play";
-      presenceData.smallImageText = video.paused
-        ? (await strings).pause
-        : (await strings).play;
+      case "translation":
+        presenceData.details = "Viewing their subtitle translation";
+        presenceData.state = `All: ${all} • Passed: ${passed} • Adopted: ${adopted}`;
+        break;
 
-      if (showButtons) {
-        presenceData.buttons = [
-          {
-            label: (await strings).watchVideo,
-            url: document.URL
-          }
-        ];
-      } else delete presenceData.buttons;
-
-      if (video.paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
-    } else {
-      presenceData.details = "Looking at:";
-      presenceData.state = title;
+      default:
+        presenceData.details = (await strings).viewAccount;
+        break;
     }
+  } else if (document.location.pathname.includes("/vip/")) {
+    presenceData.details = (await strings).viewPage;
+    presenceData.state = "VIP membership";
   }
 
   presence.setActivity(presenceData);
 });
+
+/**
+ * Check if your eyes can see this element :)
+ * @param element The element you want to check
+ * @returns The result you want
+ */
+
+function YouCanSeeThis(element: HTMLElement) {
+  const clientRect = element.getBoundingClientRect();
+  return (
+    clientRect.top >= 0 &&
+    clientRect.left >= 0 &&
+    clientRect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    clientRect.right <=
+      (window.innerWidth || document.documentElement.clientWidth)
+  );
+}

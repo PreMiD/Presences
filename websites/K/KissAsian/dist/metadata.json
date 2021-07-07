@@ -3,13 +3,22 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "lunax",
+      "id": "251801168689364992"
+    }
+  ],
   "service": "KissAsian",
   "description": {
     "en": "Watch drama online in high quality. Free download high quality drama. Various formats from 240p to 720p HD (or even 1080p). HTML5 available for mobile devices.",
     "nl": "Bekijk drama online in hoge kwaliteit. Gratis download van hoge kwaliteit drama. Verschillende formaten van 240p tot 720p HD (of zelfs 1080p). HTML5 beschikbaar voor mobiele apparaten."
   },
-  "url": "kissasian.sh",
-  "version": "2.2.7",
+  "url": [
+    "kissasian.la",
+    "kissasian.li"
+  ],
+  "version": "2.3.1",
   "logo": "https://i.imgur.com/B8evsEL.png",
   "thumbnail": "https://i.imgur.com/AG3nCsQ.png",
   "color": "#f5d80b",

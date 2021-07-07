@@ -6,7 +6,9 @@
   },
   "service": "Webflow",
   "description": {
-    "en": "Webflow empowers designers to build professional, custom websites in a completely visual canvas."
+    "en": "Webflow empowers designers to build professional, custom websites in a completely visual canvas.",
+    "ga_IE": "Tugann Sreabhadh Gréasáin cumhacht do dhearthóirí suíomhanna Gréasáin gairmiúla saincheaptha a thógáil i chanbhás go hiomlán amhairc.",
+    "nl": "Webflow stelt ontwerpers in staat professionele, op maat gemaakte websites te bouwen in een volledig visueel canvas."
   },
   "url": [
     "webflow.com",
@@ -18,7 +20,7 @@
     "experts.webflow.com",
     "forum.webflow.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/tU15qL1.png",
   "thumbnail": "https://i.imgur.com/fCSFzpr.png",
   "color": "#4353FF",

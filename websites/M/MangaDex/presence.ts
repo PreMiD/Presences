@@ -43,8 +43,9 @@ presence.on("UpdateData", async () => {
     data.details = "Browsing Featured Manga";
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/manga")) {
-    const randomManga = document.querySelector(".card-header span.mx-1")
-      .textContent;
+    const randomManga = document.querySelector(
+      ".card-header span.mx-1"
+    ).textContent;
     data.details = "Viewing a Random Manga";
     data.state = randomManga;
     data.startTimestamp = browsingStamp;
@@ -59,17 +60,18 @@ presence.on("UpdateData", async () => {
       data.details = "Browsing Manga";
       data.startTimestamp = browsingStamp;
     } else {
-      const manga = document.querySelector(".card-header span.mx-1")
-        .textContent;
+      const manga = document.querySelector(
+        ".card-header span.mx-1"
+      ).textContent;
       data.details = "Viewing a Manga:";
       data.state = manga;
       data.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/chapter")) {
     const title = document.querySelector(".manga-link").textContent,
-      chapter = (document.querySelector(
-        "head > title"
-      ) as HTMLElement).innerText
+      chapter = (
+        document.querySelector("head > title") as HTMLElement
+      ).innerText
         .replace(title + " -", "")
         .replace(" - MangaDex", "");
     data.details = title;
@@ -135,8 +137,9 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.startsWith("/forum")) {
     if (document.location.pathname.includes("/forum/")) {
-      const forum = document.querySelector(".breadcrumb-item:last-child")
-        .textContent;
+      const forum = document.querySelector(
+        ".breadcrumb-item:last-child"
+      ).textContent;
       data.details = "Viewing a Forum";
       data.state = forum;
       data.startTimestamp = browsingStamp;
@@ -145,8 +148,9 @@ presence.on("UpdateData", async () => {
       data.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/thread")) {
-    const thread = document.querySelector(".breadcrumb-item:last-child")
-      .textContent;
+    const thread = document.querySelector(
+      ".breadcrumb-item:last-child"
+    ).textContent;
     data.details = "Viewing a thread";
     data.state = thread;
     data.startTimestamp = browsingStamp;

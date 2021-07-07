@@ -5,10 +5,11 @@
   },
   "url": "www.stuff.co.nz",
   "description": {
-    "en": "News from New Zealand and the world: breaking news, videos, sport, rugby, politics, business, entertainment, lifestyle, travel, and property."
+    "en": "News from New Zealand and the world: breaking news, videos, sport, rugby, politics, business, entertainment, lifestyle, travel, and property.",
+    "nl": "Nieuws uit Nieuw-Zeeland en de wereld: het laatste nieuws, video's, sport, rugby, politiek, zaken, entertainment, lifestyle, reizen en onroerend goed."
   },
   "service": "Stuff.co.nz",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/BvHIX05.png",
   "thumbnail": "https://i.imgur.com/BvUwqSy.png",
   "color": "#000000",

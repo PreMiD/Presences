@@ -5,10 +5,12 @@
   },
   "service": "AniMixPlay",
   "description": {
-    "en": "AniMixPlay is a website that allows you to watch Anime from all around the world, completely free."
+    "en": "AniMixPlay is a website that allows you to watch Anime from all around the world, completely free.",
+    "ga_IE": "Is suíomh Gréasáin é AniMixPlay a ligeann duit féachaint ar Anime ó gach cearn den domhan, go hiomlán saor in aisce.",
+    "nl": "AniMixPlay is een website waarmee je gratis anime van over de hele wereld kunt bekijken."
   },
   "url": "animixplay.to",
-  "version": "1.0.1",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/eMXyO0Y.png",
   "thumbnail": "https://i.imgur.com/XcEtF5e.png",
   "color": "#3AACE7",

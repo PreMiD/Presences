@@ -5,10 +5,11 @@
   },
   "service": "Monos Chinos",
   "description": {
-    "en": "Monos Chinos is a streaming website where you can watch anime with spanish subtitles."
+    "en": "Monos Chinos is a streaming website where you can watch anime with spanish subtitles.",
+    "nl": "Monos Chinos is een streamingwebsite waar je anime kunt kijken met Spaanse ondertitels."
   },
-  "url": "monoschinos.com",
-  "version": "1.0.5",
+  "url": "monoschinos2.com",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/urgEiF7.png",
   "thumbnail": "https://i.imgur.com/togvEtr.png",
   "color": "#ff6348",

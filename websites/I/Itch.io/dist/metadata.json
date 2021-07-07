@@ -6,11 +6,12 @@
   },
   "service": "Itch.io",
   "description": {
-    "en": "Itch.io is an indie game distribution platform."
+    "en": "Itch.io is an indie game distribution platform.",
+    "nl": "Itch.io is een distributieplatform voor indie-games."
   },
   "url": "itch.io",
   "regExp": "([a-z0-9-]+[.])*itch[.]io[/]",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/Sv0IpMI.png",
   "thumbnail": "https://i.imgur.com/f3PK8Y5.png",
   "color": "#e22c78",

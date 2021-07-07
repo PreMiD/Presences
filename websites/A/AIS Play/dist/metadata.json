@@ -6,10 +6,12 @@
   },
   "service": "AIS Play",
   "description": {
-    "en": "AIS Play is a thailand streaming service offered to a series, television providers, anime, much more"
+    "en": "AIS Play is a thailand streaming service offered to a series, television providers, anime, much more.",
+    "ga_IE": "Is seirbhís sruthú Téalainn é AIS Play a chuirtear ar fáil do shraith, soláthraithe teilifíse, anime, i bhfad níos mó.",
+    "nl": "AIS Play is een streamingdienst in Thailand die series, televisieaanbieders, anime en nog veel meer aanbied."
   },
   "url": "aisplay.ais.co.th",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/HQs4uPj.png",
   "thumbnail": "https://i.imgur.com/ZYS9jRi.png",
   "color": "#B0B72A",

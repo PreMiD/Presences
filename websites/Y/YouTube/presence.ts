@@ -8,55 +8,7 @@ function truncateAfter(str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
 }
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  live: string;
-  ad: string;
-  search: string;
-  browsingVid: string;
-  browsingPlayl: string;
-  viewCPost: string;
-  ofChannel: string;
-  readChannel: string;
-  searchChannel: string;
-  trending: string;
-  browsingThrough: string;
-  subscriptions: string;
-  library: string;
-  history: string;
-  purchases: string;
-  reports: string;
-  upload: string;
-  viewChannel: string;
-  viewAllPlayL: string;
-  viewEvent: string;
-  viewLiveDash: string;
-  viewAudio: string;
-  studioVid: string;
-  studioEdit: string;
-  studioAnaly: string;
-  studioComments: string;
-  studioTranslate: string;
-  studioTheir: string;
-  studioCAnaly: string;
-  studioCComments: string;
-  studioCTranslate: string;
-  studioArtist: string;
-  studioDash: string;
-  viewPlaylist: string;
-  readAbout: string;
-  viewAccount: string;
-  viewHome: string;
-  watchVid: string;
-  watchLive: string;
-  browsing: string;
-  searchSomething: string;
-  watchVideoButton: string;
-  viewChannelButton: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -102,19 +54,20 @@ async function getStrings(): Promise<LangStrings> {
       watchLive: "general.watchingLive",
       browsing: "general.browsing",
       searchSomething: "general.searchSomething",
+      watchStreamButton: "general.buttonWatchStream",
       watchVideoButton: "general.buttonWatchVideo",
       viewChannelButton: "general.buttonViewChannel"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     time = await presence.getSetting("time"),
     vidDetail = await presence.getSetting("vidDetail"),
@@ -261,32 +214,41 @@ presence.on("UpdateData", async () => {
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
-
-    const presenceData: PresenceData = {
-      details: vidDetail
-        .replace("%title%", finalTitle)
-        .replace("%uploader%", finalUploader),
-      state: vidState
-        .replace("%title%", finalTitle)
-        .replace("%uploader%", finalUploader),
-      largeImageKey: "yt_lg",
-      smallImageKey: video.paused
-        ? "pause"
-        : video.loop
-        ? "repeat-one"
-        : isPlaylistLoop
-        ? "repeat"
-        : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : video.loop
-        ? "On loop"
-        : isPlaylistLoop
-        ? "Playlist on loop"
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+    const unlistedPathElement = document.querySelector<SVGPathElement>(
+        "g#privacy_unlisted > path"
+      ),
+      unlistedBadgeElement = document.querySelector<SVGPathElement>(
+        "h1.title+ytd-badge-supported-renderer path"
+      ),
+      unlistedVideo =
+        unlistedPathElement !== null &&
+        unlistedBadgeElement !== null &&
+        unlistedPathElement.getAttribute("d") ===
+          unlistedBadgeElement.getAttribute("d"),
+      presenceData: PresenceData = {
+        details: vidDetail
+          .replace("%title%", finalTitle)
+          .replace("%uploader%", finalUploader),
+        state: vidState
+          .replace("%title%", finalTitle)
+          .replace("%uploader%", finalUploader),
+        largeImageKey: "yt_lg",
+        smallImageKey: video.paused
+          ? "pause"
+          : video.loop
+          ? "repeat-one"
+          : isPlaylistLoop
+          ? "repeat"
+          : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : video.loop
+          ? "On loop"
+          : isPlaylistLoop
+          ? "Playlist on loop"
+          : (await strings).play,
+        endTimestamp: timestamps[1]
+      };
 
     if (vidState.includes("{0}")) delete presenceData.state;
 
@@ -325,24 +287,29 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
-      presenceData.buttons = [
-        {
-          label: (await strings).watchVideoButton,
-          url: document.URL.includes("/watch?v=")
-            ? document.URL.split("&")[0]
-            : `https://www.youtube.com/watch?v=${document
-                .querySelector("#page-manager > ytd-watch-flexy")
-                .getAttribute("video-id")}`
-        },
-        {
-          label: (await strings).viewChannelButton,
-          url: (document.querySelector(
-            "#top-row > ytd-video-owner-renderer > a"
-          ) as HTMLLinkElement).href
-        }
-      ];
+      if (!unlistedVideo) {
+        presenceData.buttons = [
+          {
+            label: live
+              ? (await strings).watchStreamButton
+              : (await strings).watchVideoButton,
+            url: document.URL.includes("/watch?v=")
+              ? document.URL.split("&")[0]
+              : `https://www.youtube.com/watch?v=${document
+                  .querySelector("#page-manager > ytd-watch-flexy")
+                  .getAttribute("video-id")}`
+          },
+          {
+            label: (await strings).viewChannelButton,
+            url: (
+              document.querySelector(
+                "#top-row > ytd-video-owner-renderer > a"
+              ) as HTMLLinkElement
+            ).href
+          }
+        ];
+      }
     }
-
     if (!time) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
@@ -380,6 +347,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (
       document.location.pathname.includes("/channel") ||
+      document.location.pathname.includes("/c") ||
       document.location.pathname.includes("/user")
     ) {
       //Sometimes causes problems

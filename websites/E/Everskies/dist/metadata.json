@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Everskies",
+  "author": {
+    "name": "SlowLife",
+    "id": "374905512661221377"
+  },
+  "category": "socials",
+  "logo": "https://i.imgur.com/MnsPDQu.png",
+  "thumbnail": "https://i.imgur.com/scedVmN.png",
+  "version": "1.0.3",
+  "color": "#c9bfff",
+  "tags": [
+    "everskies",
+    "forums"
+  ],
+  "url": "everskies.com",
+  "description": {
+    "en": "A community site for teens and young adults with focus on creativity!",
+    "nl": "Een community-site voor tieners en jongvolwassenen met focus op creativiteit!"
+  },
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

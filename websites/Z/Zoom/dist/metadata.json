@@ -6,11 +6,12 @@
   },
   "service": "Zoom",
   "description": {
-    "en": "Stay connected wherever you go – start or join a secure meeting with flawless video and audio, instant screen sharing, and cross-platform instant messaging - for free!"
+    "en": "Stay connected wherever you go – start or join a secure meeting with flawless video and audio, instant screen sharing, and cross-platform instant messaging - for free!",
+    "nl": "Blijf verbonden, waar je ook bent – neem deel aan veilige meetings met soepele video, audio en realtime screensharing en chat op meerdere platformen - gratis!",
+    "ga_IE": "Fan ceangailte cibé áit a théann tú - tosaigh nó bí i do chruinniú slán le físeán agus fuaim gan locht, comhroinnt scáileáin láithreach, agus teachtaireachtaí meandaracha tras-ardán - saor in aisce!"
   },
   "url": "zoom.us",
-  "regExp": "(.*?)[.]?zoom.us",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "logo": "https://i.imgur.com/R4guHwc.png",
   "thumbnail": "https://i.imgur.com/MJptA60.jpg",
   "color": "#0e71eb",
@@ -21,5 +22,6 @@
     "conference",
     "social"
   ],
-  "category": "socials"
+  "category": "socials",
+  "regExp": "(.*?)[.]?zoom.us"
 }

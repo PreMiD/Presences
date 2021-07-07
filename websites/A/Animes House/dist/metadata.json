@@ -7,10 +7,12 @@
   "description": {
     "en": "One of the most confortable brazilian website for watch animes.",
     "pt_BR": "Um dos sites brasileiros mais confortáveis para assistir animes.",
-    "pt": "Um dos sites brasileiros mais confortáveis para assistir animes."
+    "pt": "Um dos sites brasileiros mais confortáveis para assistir animes.",
+    "ga_IE": "Ceann de na suíomhanna Gréasáin Brasaíle is compordaí chun féachaint ar anime.",
+    "nl": "Een van de meest comfortabele Braziliaanse websites om anime te bekijken"
   },
   "url": "animeshouse.net",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/o8Px401.png",
   "thumbnail": "https://i.imgur.com/1YqKDfY.png",
   "color": "#079ac7",

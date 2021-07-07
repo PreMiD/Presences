@@ -6,10 +6,11 @@
   },
   "service": "MSPFA",
   "description": {
-    "en": "MSPFA is a website used for hosting webcomics mostly in the style of the comics found on mspaintadventures.com, although not exclusively."
+    "en": "MSPFA is a website used for hosting webcomics mostly in the style of the comics found on mspaintadventures.com, although not exclusively.",
+    "nl": "MSPFA is een website die wordt gebruikt voor het hosten van webcomics, meestal in de stijl van de strips op mspaintadventures.com, maar niet uitsluitend."
   },
   "url": "mspfa.com",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/GWzbcj0.png",
   "thumbnail": "https://i.imgur.com/UhTbTSy.png",
   "color": "#00FF2D",

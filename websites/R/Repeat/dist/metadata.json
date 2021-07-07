@@ -5,16 +5,17 @@
   },
   "service": "Repeat",
   "description": {
-    "en": "Repeating your favourite tunes daily."
+    "en": "Repeating your favourite tunes daily.",
+    "nl": "Je favoriete deuntjes dagelijks herhaalt."
   },
   "url": [
     "www.repeatradio.net",
     "repeatradio.net",
     "repeat.pw"
   ],
-  "version": "1.0.2",
-  "logo": "https://i.imgur.com/Mh7vi7e.png",
-  "thumbnail": "https://i.imgur.com/7RjRna8.png",
+  "version": "2.0.3",
+  "logo": "https://i.imgur.com/ufIgYNI.png",
+  "thumbnail": "https://i.imgur.com/JLSMA5e.png",
   "color": "#781629",
   "tags": [
     "music",
@@ -26,5 +27,27 @@
     "online-radio"
   ],
   "category": "music",
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamp",
+      "icon": "fas fa-history",
+      "value": true
+    },
+    {
+      "id": "details",
+      "title": "Change Line #1 (Song Details)",
+      "icon": "fas fa-music",
+      "value": "Streaming to %listeners% listeners",
+      "placeholder": "%listeners%"
+    },
+    {
+      "id": "state",
+      "title": "Change Line #2 (Presenter Details)",
+      "icon": "fas fa-microphone",
+      "value": "%songText%",
+      "placeholder": "%artist% - %song%"
+    }
+  ],
   "regExp": "([a-z0-9-]+[.])*(repeatradio[.]net|repeat[.]pw)[/]"
 }

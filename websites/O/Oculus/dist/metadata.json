@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "Oculus",
+  "author": {
+    "name": "Bjarne",
+    "id": "357553061155307523"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/jzoFzDA.jpg",
+  "thumbnail": "https://i.imgur.com/E2oERhP.png",
+  "version": "1.0.1",
+  "color": "#ffffff",
+  "tags": [
+    "games",
+    "vr",
+    "gaming",
+    "quest",
+    "rift"
+  ],
+  "url": [
+    "www.oculus.com",
+    "support.oculus.com"
+  ],
+  "description": {
+    "en": "Oculus is a brand of Facebook that produces virtual reality headsets.",
+    "de": "Oculus ist eine Marke von Facebook, die Virtual-Reality-Headsets herstellt."
+  },
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamp",
+      "icon": "fas fa-clock",
+      "value": true
+    }
+  ]
+}

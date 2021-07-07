@@ -5,8 +5,8 @@ var presence = new Presence({
 presence.on("UpdateData", async () => {
   if (document.getElementsByClassName("community__name")[0]) {
     const testPresenceData: PresenceData = {
-      details: document.getElementsByClassName("community__name")[0]
-        .textContent,
+      details:
+        document.getElementsByClassName("community__name")[0].textContent,
       state: document.getElementsByClassName("community__song-playing")[0]
         .textContent,
       largeImageKey: "pdjlogo"

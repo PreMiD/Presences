@@ -5,10 +5,12 @@
   },
   "service": "xero.gg",
   "description": {
-    "en": "xero.gg is a website Player- and Clan database for a private server of the game S4 League."
+    "en": "xero.gg is a website Player- and Clan database for a private server of the game S4 League.",
+    "ga_IE": "Is bunachar sonraí Player- and Clan suíomh Gréasáin é xero.gg do fhreastalaí príobháideach den chluiche S4 League.",
+    "nl": "xero.gg is een website Player- en Clan-database voor een privéserver van het spel S4 League."
   },
   "url": "xero.gg",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/7GG8BKZ.png",
   "thumbnail": "https://i.imgur.com/zQcNcIm.png",
   "color": "#428DE3",

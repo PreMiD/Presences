@@ -6,10 +6,12 @@
   "service": "AnimeTW",
   "description": {
     "en": "AnimeTW is a streaming website where you can watch anime with Spanish subtitles.",
-    "zh_CN": "AnimeTW是一个视频网站，您可以在其中观看带有西班牙语字幕的动漫。"
+    "zh_CN": "AnimeTW是一个视频网站，您可以在其中观看带有西班牙语字幕的动漫。",
+    "ga_IE": "Is suíomh Gréasáin sruthú é AnimeTW inar féidir leat féachaint ar anime le fotheidil Spáinneacha.",
+    "nl": "AnimeTW is een streamingwebsite waar je anime kunt kijken met Spaanse ondertiteling."
   },
   "url": "animetw.net",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/L1fhc3r.jpg",
   "thumbnail": "https://i.imgur.com/soODdkD.png",
   "color": "#00468b",

@@ -8,10 +8,11 @@
     "ga_IE": "1CAK is inneall cuardaigh é an t-inneall cuardaigh chun teacht ar do is fearr leat ar shuíomh siamsaíochta Indinéisis a sholáthraíonn íomhánna agus físeáin arna uaslódáil ag úsáideoirí. Tugtar soláthraí siamsaíochta ar an suíomh seo freisin trí Idirlíon meme. Is féidir le húsáideoirí 1CAK íomhánna a roghnú agus trácht a dhéanamh orthu. Tá íomhánna coitianta ar na príomhshruthanna gréasáin",
     "en": "1CAK is an Indonesian entertainment site that provides images and videos uploaded by users. This site is also known as entertainment provider through Internet meme. 1CAK users can select and comment on images. Popular images appear on the main website",
     "zh_CN": "1CAK是印度尼西亚的娱乐网站，提供用户上传的图像和视频。 该网站也因各种网络梗而被称为娱乐提供商。 1CAK用户可以选择图像并对其进行评论。 热门图片将会出现在主网站上。",
-    "zh_TW": "1CAK是印度尼西亞的娛樂網站，用戶可以上傳的圖像和視頻。 該網站也因各種網絡迷因而被稱為娛樂提供商。 1CAK用戶可以選擇圖像並對其進行評論。 熱門圖片將會出現在主頁上。"
+    "zh_TW": "1CAK是印度尼西亞的娛樂網站，用戶可以上傳的圖像和視頻。 該網站也因各種網絡迷因而被稱為娛樂提供商。 1CAK用戶可以選擇圖像並對其進行評論。 熱門圖片將會出現在主頁上。",
+    "nl": "1CAK is een Indonesische entertainmentsite die afbeeldingen en video's biedt die door gebruikers zijn geüpload. Deze site is ook bekend als entertainmentprovider via internetmeme. 1CAK-gebruikers kunnen afbeeldingen selecteren en erop reageren. Populaire afbeeldingen verschijnen op de hoofdwebsite"
   },
   "url": "1cak.com",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "logo": "https://i.imgur.com/TIeg5it.png",
   "thumbnail": "https://i.imgur.com/q2Dr6OP.png",
   "color": "#ffffff",

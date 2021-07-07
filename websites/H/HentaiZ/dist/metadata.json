@@ -1,0 +1,27 @@
+{
+  "author": {
+    "name": "Kinue",
+    "id": "634246091293851649"
+  },
+  "service": "HentaiZ",
+  "description": {
+    "vi_VN": "HentaiZ - Trang xem hentai anime vietsub online miễn phí chất lượng cao",
+    "en": "HentaiZ - Top #1 Anime Hentai website in Vietnam with high quality",
+    "nl": "HentaiZ - Top # 1 Anime Hentai-website in Vietnam met hoge kwaliteit"
+  },
+  "url": [
+    "hentaiz.net",
+    "www.hentaiz.net"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/685u3IG.png",
+  "thumbnail": "https://i.imgur.com/3XfELvO.png",
+  "color": "#1f1f1f",
+  "tags": [
+    "anime",
+    "hentai",
+    "nsfw"
+  ],
+  "category": "anime",
+  "iframe": true
+}

@@ -8,7 +8,7 @@
     "turkhackteam.org",
     "www.turkhackteam.org"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://albaysimsek.is-inside.me/miozfJuY.png",
   "thumbnail": "https://albaysimsek.is-inside.me/tk1xeAM6.png",
   "color": "#1c1c1c",
@@ -18,7 +18,8 @@
   ],
   "description": {
     "en": "Türk Hack Team Turkey is one of the popular webmaster forum.",
-    "tr": "Türk Hack Team, Türkiye'nin popüler yazılım geliştirme forumlarından birisidir."
+    "tr": "Türk Hack Team, Türkiye'nin popüler yazılım geliştirme forumlarından birisidir.",
+    "nl": "Türk Hack Team Turkije is een van de populaire webmasterforums."
   },
   "category": "other"
 }

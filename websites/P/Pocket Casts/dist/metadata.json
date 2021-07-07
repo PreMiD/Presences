@@ -5,10 +5,11 @@
   },
   "service": "Pocket Casts",
   "description": {
-    "en": "All the features you need in a podcasting app without any of the bloat. Podcast listening turned up to 11."
+    "en": "All the features you need in a podcasting app without any of the bloat. Podcast listening turned up to 11.",
+    "nl": "Alle functies die je nodig hebt in een podcasting-app zonder een opgeblazen gevoel. Podcast luisteren is op 11 gezet."
   },
   "url": "play.pocketcasts.com",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/dyQLFDS.png",
   "thumbnail": "https://i.imgur.com/AJS6zcg.png",
   "color": "#F43E37",

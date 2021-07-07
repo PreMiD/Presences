@@ -150,8 +150,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/search")) {
     // Ricerca per tipo, categoria e nome
 
-    const searching = document.querySelector("#main-content > center > h3")
-      .textContent;
+    const searching = document.querySelector(
+      "#main-content > center > h3"
+    ).textContent;
 
     if (document.location.href.includes("tv")) {
       // Ricerca TV

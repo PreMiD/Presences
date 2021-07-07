@@ -5,13 +5,15 @@
   },
   "service": "Vidio",
   "description": {
-    "en": "Vidio.com is a video streaming service with various streaming content for tv, films, soap operas, original series and sports such as League 1, Champions and Europe"
+    "en": "Vidio.com is a video streaming service with various streaming content for tv, films, soap operas, original series and sports such as League 1, Champions and Europe",
+    "ga_IE": "Is seirbhís sruthú físeáin é Vidio.com le hábhar sruthú éagsúil le haghaidh teilifíse, scannáin, ceoldrámaí gallúnaí, sraitheanna bunaidh agus spóirt mar League 1, Seaimpíní agus an Eoraip",
+    "nl": "Vidio.com is een videostreamingdienst met verschillende streamingcontent voor tv, films, soapseries, originele series en sporten zoals League 1, Champions en Europa"
   },
   "url": [
     "vidio.com",
     "www.vidio.com"
   ],
-  "version": "1.0.2",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/WiWFwcn.png",
   "thumbnail": "https://i.imgur.com/rrNGa2h.jpg",
   "color": "#ffffff",

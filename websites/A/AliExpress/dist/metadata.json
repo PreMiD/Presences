@@ -8,7 +8,8 @@
     "en": "Online shopping for the latest electronics, fashion, phone accessories, computer electronics, toys, home&garden, home appliances, tools, home improvement and more.",
     "nl": "Online winkelen voor de nieuwste elektronica, mode, telefoonaccessoires, computerelektronica, speelgoed, huis & tuin, huishoudelijke apparaten, gereedschappen, huisverbetering en meer.",
     "zh_CN": "全球速卖通是一个面向全球市场的网络购物平台。",
-    "zh_TW": "全球速賣通是一個面向全球市場的網絡購物平台。"
+    "zh_TW": "全球速賣通是一個面向全球市場的網絡購物平台。",
+    "ga_IE": "Siopadóireacht ar líne le haghaidh na leictreonaice is déanaí, faisean, oiriúintí teileafóin, leictreonaic ríomhaire, bréagáin, baile & gairdín, fearais tí, uirlisí, feabhsú tí agus go leor eile."
   },
   "url": [
     "ru.aliexpress.com",
@@ -43,7 +44,7 @@
     "star.aliexpress.com",
     "home.aliexpress.com"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/2LONg2Y.png",
   "thumbnail": "https://i.imgur.com/UrX3fAS.png",
   "color": "#e62e04",

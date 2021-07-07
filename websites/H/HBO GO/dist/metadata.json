@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "TheDrop.",
-    "id": "293828021134295040"
+    "name": "ririxi",
+    "id": "192490421308489731"
   },
   "service": "HBO GO",
   "description": {
@@ -10,7 +10,8 @@
     "pt_BR": "HBO GO é o serviço de streaming da HBO que permite acesso ilimitado à HBO no seu computador, celular, tablet e outros dispositivos.",
     "fr": "HBO GO est un service de streaming de HBO qui permet un accès illimité à HBO sur votre ordinateur, votre téléphone portable, votre tablette et d’autres appareils.",
     "uk_UA": "HBO GO - послуга стрімінгової передачі HBO, яка пропонує телевізійним провайдерам-учасникам, що надає вам необмежений доступ до HBO на вашому комп’ютері, мобільному телефоні, планшеті та інших пристроях.",
-    "nl": "HBO GO is de streamingdienst van HBO die deelnemende televisieproviders biedt die u onbeperkte toegang geeft tot HBO op uw computer, mobiel, tablet en andere apparaten."
+    "nl": "HBO GO is de streamingdienst van HBO die deelnemende televisieproviders biedt die u onbeperkte toegang geeft tot HBO op uw computer, mobiel, tablet en andere apparaten.",
+    "pl": "HBO GO to najlepsze seriale, filmy i produkcje dla dzieci. Oglądaj online gdzie chcesz, kiedy chcesz, bez reklam."
   },
   "url": [
     "hbogo.ro",
@@ -21,7 +22,7 @@
     "hbogo.sk",
     "hbogola.com"
   ],
-  "version": "2.2.7",
+  "version": "2.2.8",
   "logo": "https://i.imgur.com/TTHQtBH.png",
   "thumbnail": "https://i.imgur.com/vvAp3GI.png",
   "color": "#011921",

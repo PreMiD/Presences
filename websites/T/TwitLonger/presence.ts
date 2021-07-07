@@ -13,15 +13,19 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Home";
   } else if (document.location.pathname.includes("/show/")) {
-    const postTitle = (document.querySelector(
-      "#postcontent > h3"
-    ) as HTMLElement).innerText;
-    const userName = (document.querySelector(
-      "#user-info > div > h4 > a:nth-child(1)"
-    ) as HTMLElement).innerText;
-    const userHandle = (document.querySelector(
-      "#user-info > div > h4 > a:nth-child(2)"
-    ) as HTMLElement).innerText;
+    const postTitle = (
+      document.querySelector("#postcontent > h3") as HTMLElement
+    ).innerText;
+    const userName = (
+      document.querySelector(
+        "#user-info > div > h4 > a:nth-child(1)"
+      ) as HTMLElement
+    ).innerText;
+    const userHandle = (
+      document.querySelector(
+        "#user-info > div > h4 > a:nth-child(2)"
+      ) as HTMLElement
+    ).innerText;
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Reading an post";
     presenceData.state =

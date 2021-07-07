@@ -6,10 +6,11 @@
   },
   "service": "Jstris",
   "description": {
-    "en": "Jstris is just standard competitive multiplayer Tetris, but made with JS."
+    "en": "Jstris is just standard competitive multiplayer Tetris, but made with JS. NOTICE: To activate the 'Join' button to allow others to join your game through Discord, type in `/link` into the Jstris lobby's chat.",
+    "nl": "Jstris is gewoon een standaard competitieve multiplayer Tetris, maar dan gemaakt met JS. LET OP: Om de 'Join'-knop te activeren zodat anderen via Discord aan je spel kunnen deelnemen, typ je' / link 'in de chat van de Jstris-lobby."
   },
   "url": "jstris.jezevec10.com",
-  "version": "1.0.1",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/YWrUCdh.png",
   "thumbnail": "https://i.imgur.com/LKLaEd8.png",
   "color": "#375a7f",
