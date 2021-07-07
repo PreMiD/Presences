@@ -46,11 +46,11 @@ const getInfo = {
   /** 
  * This object stores functions that get the updated data
 */
-  updateData = {
+  dataUpdater = {
     updateAll: async () => {
-      data.smallimage = await updateData.getSmallImage();
-      data.details = updateData.getDetails();
-      data.state = updateData.getState();
+      data.smallimage = await dataUpdater.getSmallImage();
+      data.details = dataUpdater.getDetails();
+      data.state = dataUpdater.getState();
     },
     getDetails: () => {
       const path = window.location.pathname.split("/");
@@ -217,7 +217,7 @@ function getChannelsCategory() {
 
 
 presence.on("UpdateData", async () => {
-  updateData.updateAll();
+  dataUpdater.updateAll();
 
   const presenceData: PresenceData = {
     largeImageKey:
