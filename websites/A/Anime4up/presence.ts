@@ -136,7 +136,6 @@ const presence = new Presence({
       }
     ];
 
-    presence.info(path);
     return routes.find((route) => route.path.test(path));
   };
 
