@@ -166,9 +166,6 @@ presence.on("UpdateData", async () => {
   if (route.smallImageKey) data.smallImageKey = route.smallImageKey();
   if (route.smallImageText) data.smallImageText = route.smallImageText();
 
-  if (showTimestamp && route.startTimestamp)
-    data.startTimestamp = route.startTimestamp();
-
   if (showTimestamp && route.endTimestamp)
     data.endTimestamp = route.endTimestamp();
 
