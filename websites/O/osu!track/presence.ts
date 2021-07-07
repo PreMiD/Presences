@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = `${decodeURL} in osu!catch the beat`;
     presenceData.smallImageKey = "ctb";
     presenceData.smallImageText = "Catch The Beat (CTB)";
-  } else if (pathnames.includes(`/osutrack/user/${urlSplit[5]}/mania`))  {
+  } else if (pathnames.includes(`/osutrack/user/${urlSplit[5]}/mania`)) {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = `${decodeURL} in osu!mania`;
     presenceData.smallImageKey = "mania";
