@@ -148,8 +148,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const showTimestamp: boolean = await presence.getSetting(
-      PresenceSettings.TIMESTAMP
-    ),
+    PresenceSettings.TIMESTAMP
+  ),
     showButtons: boolean = await presence.getSetting(PresenceSettings.BUTTONS),
     logo: number = await presence.getSetting(PresenceSettings.LOGO),
     logoArr = [Logos.LIGHT, Logos.DARK];
@@ -158,7 +158,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: logoArr[logo] || Logos.LIGHT
   };
 
-  const path = location.href.replace("https://" + location.hostname, ""),
+  const path = location.href.replace(`https://${location.hostname}`, ""),
     route = router({ data, path });
 
   if (showTimestamp) data.startTimestamp = Math.floor(Date.now() / 1000);
