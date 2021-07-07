@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+        "name": "AngeloCore",
+        "id": "728512329888825396"
+    },
+    "service": "filmi2k",
+    "description": {
+        "bg": "filmi2k.com e website чрез който може да гледате много филми безплатно на български",
+        "en": "filmi2k.com is a website throuhh you can watch a lot of films for free in bulgarian"
+    },
+    "url": "www.filmi2k.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/j8rwBf3.png",
+    "thumbnail": "https://i.imgur.com/hGzL4ko.png",
+    "color": "#09abba",
+    "tags": [
+        "filmi2k",
+        "bgfilmi",
+        "bulgarianfilmi"
+    ],
+    "category": "videos"
+}
