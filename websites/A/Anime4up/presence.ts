@@ -8,12 +8,22 @@ interface Route extends Functionlize<Partial<PresenceData>> {
   run?(): PresenceData;
 }
 
+enum PresenceSettings {
+  TIMESTAMP = "timestamp",
+  BUTTONS = "buttons",
+  LOGO = "logo"
+}
 enum Icons {
   PAUSED = "paused",
   PLAYED = "played",
   SEARCHING = "searching",
   LOCATION = "location",
   DISCOVERY = "discovery"
+}
+
+enum Logos {
+  LIGHT = "light-logo",
+  DARK = "dark-logo"
 }
 
 let video = { duration: 0, currentTime: 0, paused: true };
@@ -138,24 +148,36 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
+  const showTimestamp: boolean = await presence.getSetting(
+      PresenceSettings.TIMESTAMP
+    ),
+    showButtons: boolean = await presence.getSetting(PresenceSettings.BUTTONS),
+    logo: number = await presence.getSetting(PresenceSettings.LOGO),
+    logoArr = [Logos.LIGHT, Logos.DARK];
+
   let data: PresenceData = {
-    startTimestamp: Math.floor(Date.now() / 1000),
-    largeImageKey: "logo"
+    largeImageKey: logoArr[logo] || Logos.LIGHT
   };
 
   const path = location.href.replace("https://" + location.hostname, ""),
     route = router({ data, path });
+
+  if (showTimestamp) data.startTimestamp = Math.floor(Date.now() / 1000);
   if (!route) return presence.setActivity(data);
 
   if (route.run) data = route.run();
   if (route.state) data.state = route.state();
-  if (route.buttons) data.buttons = route.buttons();
   if (route.details) data.details = route.details();
-  if (route.endTimestamp) data.endTimestamp = route.endTimestamp();
+  if (showButtons && route.buttons) data.buttons = route.buttons();
   if (route.largeImageKey) data.largeImageKey = route.largeImageKey();
   if (route.smallImageKey) data.smallImageKey = route.smallImageKey();
   if (route.smallImageText) data.smallImageText = route.smallImageText();
-  if (route.startTimestamp) data.startTimestamp = route.startTimestamp();
+
+  if (showTimestamp && route.startTimestamp)
+    data.startTimestamp = route.startTimestamp();
+
+  if (showTimestamp && route.endTimestamp)
+    data.endTimestamp = route.endTimestamp();
 
   presence.setActivity(data, route.playback ? route.playback() : false);
 

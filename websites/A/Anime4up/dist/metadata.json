@@ -14,5 +14,26 @@
   "color": "#38b5eb",
   "tags": ["anime", "streaming"],
   "category": "anime",
-  "iframe": true
+  "iframe": true,
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fab fa-discord",
+      "values": ["Light", "Dark"],
+      "value": 0
+    }
+  ]
 }
