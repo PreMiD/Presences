@@ -9,35 +9,29 @@ presence.on("UpdateData", async () => {
     startTimestamp: timestamp
   };
 
-  //Game Pass
   if (document.location.href.includes("/game-pass")) {
+    //Game Pass
     presenceData.largeImageKey = "gamepass";
     presenceData.details = "Reading about Xbox Game Pass";
     if (document.location.href.includes("games"))
       presenceData.details = "Browsing Xbox Game Pass games";
 
-  }
-
-  //Live Gold
-  else if (document.location.href.includes("/live/gold")) {
+  } else if (document.location.href.includes("/live/gold")) {
+    //Live Gold
     presenceData.details = "Reading about Xbox Live Gold";
     if (document.location.href.includes("withgold"))
       presenceData.details = "Viewing Xbox Live Gold benefits";
 
-  }
-
-  //Games
-  else if (document.location.href.includes("/games")) {
+  } else if (document.location.href.includes("/games")) {
+    //Games
     presenceData.details = "Browsing Xbox game catalog";
     if (document.location.href.includes("optimized"))
       presenceData.details = "Reading about Series X|S optimized games";
     else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
 
-  }
-
-  //Consoles
-  else if (document.location.href.includes("/consoles")) {
+  } else if (document.location.href.includes("/consoles")) {
+    //Consoles
     presenceData.details = "Viewing Xbox consoles";
     if (document.location.href.includes("consoles/all-consoles"))
       presenceData.details = "Browsing all Xbox consoles";
@@ -50,10 +44,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
 
-  }
-
-  //Accessories
-  else if (document.location.href.includes("/accessories")) {
+  } else if (document.location.href.includes("/accessories")) {
+    //Accessories
     presenceData.details = "Browsing Xbox accessories";
     if (document.location.href.includes("consoles/all-consoles"))
       presenceData.details = "Browsing all Xbox consoles";
@@ -66,10 +58,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
 
-  }
-
-  //Play
-  else if (document.location.href.includes("/play")) {
+  } else if (document.location.href.includes("/play")) {
+    //Play
     presenceData.largeImageKey = "gamepass";
     if (document.location.href.includes("play/games")) {
       presenceData.details = "Viewing an Xbox Cloud Gaming game";
@@ -82,38 +72,44 @@ presence.on("UpdateData", async () => {
       else if (document.querySelector(`[class^="NotFocused"`)) presenceData.details += " (unfocused)";
     } else {
       presenceData.details = "Browsing Xbox Cloud Gaming games";
-      if (document.location.href.includes("gallery/")) presenceData.state = `Category: ${document.title.split("|")[0]}`;
+      if (document.location.href.includes("gallery/")) {
+        const [splitString] = document.title.split("|");
+        presenceData.state = `Category: ${splitString}`;
+      }
     }
-  }
 
-  //Community
-  else if (document.location.href.includes("/community")) {
+  } else if (document.location.href.includes("/community")) {
+    //Community
     presenceData.details = "Viewing the Xbox Community";
     if (document.location.href.includes("esports"))
       presenceData.details = "Reading about Xbox Esports";
 
-  }
-
-  //My Xbox
-  else if (document.location.hostname === "account.xbox.com") {
+  } else if (document.location.hostname === "account.xbox.com") {
+    //My Xbox
     presenceData.details = "Viewing their profile";
-    if (document.location.href.includes("gamertag=")) presenceData.details = `Viewing profile: ${document.title.split("-")[0]}`;
-  }
+    if (document.location.href.includes("gamertag=")) {
+      const [splitString] = document.title.split("|");
+      presenceData.details = `Viewing profile: ${splitString}`;
+    }
 
-  //Support
-  else if (document.location.hostname === "support.xbox.com") {
+  } else if (document.location.hostname === "support.xbox.com") {
+    //Support
     presenceData.details = "Viewing Xbox Support";
-    if (document.location.href.includes("help")) presenceData.state = document.title.split("|")[0];
-  }
+    if (document.location.href.includes("help")) {
+      const [splitString] = document.title.split("|");
+      presenceData.state = splitString;
+    }
 
-  //Xbox Wire
-  else if (document.location.hostname === "news.xbox.com") {
+  } else if (document.location.hostname === "news.xbox.com") {
+    //Xbox Wire
     presenceData.details = "Viewing news from Xbox Wire";
-    if (document.title.includes("-")) presenceData.state = document.title.split("-")[0];
-  }
+    if (document.title.includes("-")) {
+      const [splitString] = document.title.split("|");
+      presenceData.state = splitString;
+    }
 
-  //Other
-  else {
+  } else {
+    //Other
     presenceData.details = "Browsing the website";
     presenceData.state = `Page: ${document.title}`;
     if (document.location.pathname.length < 8) presenceData.state = "Homepage";
