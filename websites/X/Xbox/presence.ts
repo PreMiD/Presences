@@ -46,6 +46,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.href.includes("consoles/")) {
       presenceData.details = "Viewing an Xbox console";
       presenceData.state = document.title.split("|")[0];
+      presenceData.buttons = [{ label: "View this console", url: document.location.href }]
     } else if (document.location.href.includes("backward-compatibility")) {
       presenceData.details = "Reading about backward compatible games";
     }
@@ -61,6 +62,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.href.includes("accessories/")) {
       presenceData.details = "Viewing an Xbox accessory";
       presenceData.state = document.title.split("|")[0];
+      presenceData.buttons = [{ label: "View this accessory", url: document.location.href }]
     } else if (document.location.href.includes("backward-compatibility")) {
       presenceData.details = "Reading about backward compatible games";
     }
@@ -75,6 +77,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.href.includes("play/launch")) {
       presenceData.details = "Playing an Xbox Cloud Gaming game";
       presenceData.state = document.title.split("|")[0];
+      presenceData.buttons = [{ label: "Play this game (Game Pass)", url: document.location.href }]
       if (document.querySelector(`[class^="Provisioning"`)) presenceData.details += " (setting up)";
       else if (document.querySelector(`[class^="NotFocused"`)) presenceData.details += " (unfocused)";
     } else {
@@ -88,14 +91,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the Xbox Community"
     if (document.location.href.includes("esports")) {
       presenceData.details = "Reading about Xbox Esports";
-    } else if (document.location.href.includes("play/launch")) {
-      presenceData.details = "Playing an Xbox Cloud Gaming game";
-      presenceData.state = document.title.split("|")[0];
-      if (document.querySelector(`[class^="Provisioning"`)) presenceData.details += " (setting up)";
-      else if (document.querySelector(`[class^="NotFocused"`)) presenceData.details += " (unfocused)";
-    } else {
-      presenceData.details = "Browsing Xbox Cloud Gaming games";
-      if (document.location.href.includes("gallery/")) presenceData.state = "Category: " + document.title.split("|")[0];
     }
   }
 
