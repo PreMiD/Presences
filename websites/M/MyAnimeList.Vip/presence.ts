@@ -18,7 +18,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "my_anime_list_logo",
+    largeImageKey: "logo",
     startTimestamp: browsingStamp
   },
     { pathname } = document.location;
