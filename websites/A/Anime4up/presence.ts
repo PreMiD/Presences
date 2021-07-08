@@ -35,6 +35,7 @@ const presence = new Presence({
   startTimestamp: number = Math.floor(Date.now() / 1000),
   router = ({ path, data }: { path: string; data: PresenceData }): Route => {
     const routes: Route[] = [
+      { path: /^\/$/, details: () => "On Homepage" },
       {
         path: /^\/episode\//,
         run: () => {
