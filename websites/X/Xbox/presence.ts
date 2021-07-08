@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "860159948234817536",
+  clientId: "860159948234817536"
 }),
   timestamp = Math.floor(Date.now() / 1000);
 
@@ -13,59 +13,59 @@ presence.on("UpdateData", async () => {
   if (document.location.href.includes("/game-pass")) {
     presenceData.largeImageKey = "gamepass";
     presenceData.details = "Reading about Xbox Game Pass";
-    if (document.location.href.includes("games")) 
+    if (document.location.href.includes("games"))
       presenceData.details = "Browsing Xbox Game Pass games";
-    
+
   }
 
   //Live Gold
   else if (document.location.href.includes("/live/gold")) {
     presenceData.details = "Reading about Xbox Live Gold";
-    if (document.location.href.includes("withgold")) 
+    if (document.location.href.includes("withgold"))
       presenceData.details = "Viewing Xbox Live Gold benefits";
-    
+
   }
 
   //Games
   else if (document.location.href.includes("/games")) {
     presenceData.details = "Browsing Xbox game catalog";
-    if (document.location.href.includes("optimized")) 
+    if (document.location.href.includes("optimized"))
       presenceData.details = "Reading about Series X|S optimized games";
-     else if (document.location.href.includes("backward-compatibility")) 
+    else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
-    
+
   }
 
   //Consoles
   else if (document.location.href.includes("/consoles")) {
     presenceData.details = "Viewing Xbox consoles";
-    if (document.location.href.includes("consoles/all-consoles")) 
+    if (document.location.href.includes("consoles/all-consoles"))
       presenceData.details = "Browsing all Xbox consoles";
-     else if (document.location.href.includes("consoles/help-me-choose")) 
+    else if (document.location.href.includes("consoles/help-me-choose"))
       presenceData.details = "Determining their recommended Xbox console";
-     else if (document.location.href.includes("consoles/")) {
+    else if (document.location.href.includes("consoles/")) {
       presenceData.details = "Viewing an Xbox console";
       presenceData.state = document.title.split("|")[0];
       presenceData.buttons = [{ label: "View this console", url: document.location.href }];
-    } else if (document.location.href.includes("backward-compatibility")) 
+    } else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
-    
+
   }
 
   //Accessories
   else if (document.location.href.includes("/accessories")) {
     presenceData.details = "Browsing Xbox accessories";
-    if (document.location.href.includes("consoles/all-consoles")) 
+    if (document.location.href.includes("consoles/all-consoles"))
       presenceData.details = "Browsing all Xbox consoles";
-     else if (document.location.href.includes("consoles/help-me-choose")) 
+    else if (document.location.href.includes("consoles/help-me-choose"))
       presenceData.details = "Determining their recommended Xbox console";
-     else if (document.location.href.includes("accessories/")) {
+    else if (document.location.href.includes("accessories/")) {
       presenceData.details = "Viewing an Xbox accessory";
       presenceData.state = document.title.split("|")[0];
       presenceData.buttons = [{ label: "View this accessory", url: document.location.href }];
-    } else if (document.location.href.includes("backward-compatibility")) 
+    } else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
-    
+
   }
 
   //Play
@@ -89,9 +89,9 @@ presence.on("UpdateData", async () => {
   //Community
   else if (document.location.href.includes("/community")) {
     presenceData.details = "Viewing the Xbox Community";
-    if (document.location.href.includes("esports")) 
+    if (document.location.href.includes("esports"))
       presenceData.details = "Reading about Xbox Esports";
-    
+
   }
 
   //My Xbox
@@ -119,10 +119,10 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.length < 8) presenceData.state = "Homepage";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
+  } else
     presence.setActivity(presenceData);
-  
+
 });
