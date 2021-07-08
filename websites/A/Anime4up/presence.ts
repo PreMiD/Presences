@@ -13,6 +13,7 @@ enum Settings {
   BUTTONS = "buttons",
   LOGO = "logo"
 }
+
 enum Icons {
   PAUSED = "paused",
   PLAYED = "played",
@@ -98,7 +99,9 @@ const presence = new Presence({
             .querySelectorAll(".container")[1]
             .textContent.split(" ")
             .slice(4, -1)
-            .join(" ")}`
+            .join(" ")}`,
+
+        buttons: () => [{ label: "Results", url: location.href }]
       },
       {
         path: /^\/anime\/(.*)/,
@@ -109,7 +112,20 @@ const presence = new Presence({
 
         details: () => "Viewing an Anime",
 
-        state: () => document.querySelector(".anime-details-title").textContent
+        state: () => document.querySelector(".anime-details-title").textContent,
+
+        buttons: () => [
+          { label: "View Anime", url: location.href },
+          {
+            label: "Last Episode",
+            // prettier-ignore
+            url: document
+              .querySelectorAll(".episodes-card")[
+                document.querySelectorAll(".episodes-card").length - 1
+              ].querySelector("a")
+              .getAttribute("href")
+          }
+        ]
       },
       {
         path: /^\/(%d9%82%d8%a7%d8%a6%d9%85%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%85%d9%8a|anime-(.*))/,
@@ -118,7 +134,9 @@ const presence = new Presence({
 
         smallImageText: () => "Browsing",
 
-        details: () => "Browsing for Anime"
+        details: () => "Browsing for Anime",
+
+        buttons: () => [{ label: "Browse", url: location.href }]
       },
       {
         path: /^\/%d9%85%d9%88%d8%a7%d8%b9%d9%8a%d8%af-%d8%b9%d8%b1%d8%b6-%d8%ad%d9%84%d9%82%d8%a7%d8%aa-%d8%a7%d9%84%d8%a7%d9%86%d9%85%d9%8a/,
@@ -127,7 +145,9 @@ const presence = new Presence({
 
         smallImageText: () => "Discovering",
 
-        details: () => "Discovering Episodes Releases"
+        details: () => "Discovering Episodes Releases",
+
+        buttons: () => [{ label: "Discover", url: location.href }]
       }
     ];
 
