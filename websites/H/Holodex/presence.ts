@@ -81,6 +81,8 @@ const getInfo = {
           return document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null ? "Login Screen" : "Account Settings";
         case "watch":
           return `Watching ${getInfo.watch().title}`;
+        case "search":
+          return "Searching";
         default:
           return `Unsupported Page : ${window.location.pathname}`;
       }
@@ -104,6 +106,8 @@ const getInfo = {
           return `${document.querySelectorAll(".mv-frame").length} ${document.querySelectorAll(".mv-frame").length === 1 ? "Video" : "Videos"} Open`;
         case "infinite":
           return `${getInfo.watch().title} - ${getInfo.watch().channel}`;
+        case "search":
+          return getSearchParamsString();
         default:
           return "";
       }
@@ -171,6 +175,11 @@ const getInfo = {
             image: iFrameVideo.isPaused ? "mdipause" : "mdiplay",
             hover: iFrameVideo.isPaused ? (await strings).pause : (await strings).play
           };
+        case "search":
+          return {
+            image: "mdimagnify",
+            hover: getURLParameter("advanced") === "true" ? "Advanced Search" : "Search"
+          };
 
         default:
           return {
@@ -195,6 +204,67 @@ function getHomeFavsCategory() {
     default:
       return "Live/Upcoming";
   }
+}
+
+/**
+ * Gets the specified url parameter
+ * https://stackoverflow.com/a/11582513/13343832 thanks :)
+ */
+function getURLParameter(name: string) {
+  return decodeURIComponent((new RegExp(`[?|&]${name}=` + "([^&;]+?)(&|#|;|$)").exec(location.search) || [null, ""])[1].replace(/\+/g, "%20")) || null;
+}
+
+/**
+ * Gets the parameters/tags from the Search page
+ */
+function getSearchParamsString() {
+  
+  let returnString = "";
+
+  // Add Search type
+  switch (getURLParameter("type")) {
+    case "all":
+      returnString += "Type: All, ";
+      break;
+    case "stream":
+      returnString += "Type: Official, ";
+      break;
+    case "clip":
+      returnString += "Type: Clip, ";
+      break;
+    default:
+      returnString += "Type: All, ";
+      break;
+  }
+
+  // Add Search query/tags
+  getURLParameter("q").split("\n").forEach((val, i)=>{
+    if(i > 0) {
+      const tag = val.split(",");
+      switch (tag[0]) {
+        case "channel":
+          returnString += `Channel: ${tag[2]}, `;
+          break;
+        case "title & desc":
+          returnString += `Title/Desc: ${tag[2]}, `;
+          break;
+        case "comments":
+          returnString += `Comments: ${tag[2]}, `;
+          break;
+        case "topic":
+          returnString += `Topic: ${tag[2]}, `;
+          break;
+        case "org":
+          returnString += `Org: ${tag[2]}, `;
+          break;
+        
+        default:
+          break;
+      }
+    }
+  });
+
+  return returnString.slice(0, -2); //Remove the last ", "
 }
 
 /**
@@ -229,7 +299,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: data.startTime
   };
 
-  if(data.state)
+  if (data.state)
     presenceData.state = data.state;
 
   // Add video and channel buttons when on the watch page
