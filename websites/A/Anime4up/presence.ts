@@ -32,6 +32,7 @@ let video = { duration: 0, currentTime: 0, paused: true };
 const presence = new Presence({
     clientId: "770030754356396052"
   }),
+  startTimestamp: number = Math.floor(Date.now() / 1000),
   router = ({ path, data }: { path: string; data: PresenceData }): Route => {
     const routes: Route[] = [
       {
@@ -171,7 +172,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: logoArr[logo] || Logos.LIGHT
   };
 
-  if (showTimestamp) data.startTimestamp = Math.floor(Date.now() / 1000);
+  if (showTimestamp) data.startTimestamp = startTimestamp;
 
   const path = location.href.replace(`https://${location.hostname}`, ""),
     route = router({ data, path });
