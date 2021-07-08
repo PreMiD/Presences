@@ -34,8 +34,8 @@ const getInfo = {
  * The object that stores the data
  */
   data = {
-    details: "Default",
-    state: "Default",
+    details: `Unsupported Page: ${window.location.pathname}`,
+    state: "",
     smallimage: {
       image: "largeimage",
       hover: ""
