@@ -56,6 +56,9 @@ presence.on("UpdateData", async () => {
     const pause: HTMLDivElement = document.querySelector(".icon-player-pause"),
       playlist: HTMLDivElement = document.querySelector(
         ".mgr-list-tracks-title"
+      ),
+      popup: HTMLDivElement = document.querySelector(
+        "body > div.mgr-modal.mgr-modal-opaque > div > div.mgr-title"
       );
 
     if (pause) {
@@ -78,7 +81,8 @@ presence.on("UpdateData", async () => {
     } else if (playlist) {
       presenceData.details = "Looking at playlist";
       presenceData.state = playlist.innerText;
-    } else presenceData.details = "At homepage";
+    } else if (popup) presenceData.details = `Viewing ${popup.innerText}`;
+    else presenceData.details = "At homepage";
   }
 
   if (!presenceData.details) {
