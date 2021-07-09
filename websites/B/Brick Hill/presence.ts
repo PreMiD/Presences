@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "brick-hill",
     details: "Viewing Page:",
     state: "404",
-    startTimestamp: Math.floor(Date.now() / 1000)
+    startTimestamp: browsingStamp
   };
 
   // Main Presence
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
