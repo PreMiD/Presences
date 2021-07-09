@@ -99,7 +99,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${(await strings).reading} ${currChapter}`;
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "book_open";
-      presenceData.smallImageText = `${(await strings).page} ${currPage}/${lastPage}`;
+      presenceData.smallImageText = `${
+        (await strings).page
+      } ${currPage}/${lastPage}`;
       presenceData.buttons = [
         {
           label: `Read ${(await strings).chapter}`,
@@ -149,9 +151,9 @@ presence.on("UpdateData", async () => {
       seasonregex,
       seasonName;
     if (document.location.hostname.startsWith("beta")) {
-      seriesLink = document.location.origin + document.querySelector(
-        ".show-title-link"
-      ).getAttribute("href");
+      seriesLink =
+        document.location.origin +
+        document.querySelector(".show-title-link").getAttribute("href");
       episode = document.querySelector(
         ".c-heading.c-heading--xs.c-heading--family-type-one.title"
       ).innerHTML;
@@ -179,11 +181,7 @@ presence.on("UpdateData", async () => {
     presenceData.endTimestamp = endTimestamp;
 
     presence.setTrayTitle(
-      paused
-        ? ""
-        : videoTitle !== null
-          ? videoTitle
-          : "Title not found..."
+      paused ? "" : videoTitle !== null ? videoTitle : "Title not found..."
     );
 
     presenceData.details =
