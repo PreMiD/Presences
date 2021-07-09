@@ -18,9 +18,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
     { pathname } = document.location;
 
   if (pathname === "/") {
