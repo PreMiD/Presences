@@ -65,6 +65,12 @@ presence.on("UpdateData", async () => {
         ).textContent.replace(/(\t|\n)/gm, "");
       data.details = `Sitting By ${firesideOwner.slice(1)}"s Fireside`;
       data.state = `Fireside name: ${fireside}`;
+      data.buttons = [
+        {
+          label: "Join Them!",
+          url: `https://gamejolt.com${page}`
+        }
+      ];
     } else {
       data.details = pages[page];
       data.state = "Searching";
