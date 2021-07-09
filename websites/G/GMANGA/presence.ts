@@ -51,27 +51,7 @@ const presence = new Presence({
         buttons: () => [{ label: "Browse", url: location.href }]
       },
       {
-        path: /^\/mangas\/\d+\/[a-zA-Z-]+$/,
-
-        details: () => "Viewing a manga",
-
-        state: () => document.querySelector("h1.header").textContent,
-
-        smallImageKey: () => Icons.MANGA,
-
-        smallImageText: () => "Viewing",
-
-        buttons: () => [
-          { label: "View Manga", url: location.href },
-          {
-            label: "Last Chapter",
-            // prettier-ignore
-            url: `https://${location.hostname}${document.querySelector("a.primary.button")?.getAttribute("href")}`
-          }
-        ]
-      },
-      {
-        path: /^\/mangas\/\d+\/[a-zA-Z-]+\/[0-9.]+\/(.*)$/,
+        path: /^\/mangas\/\d+\/(.*)+\/[0-9.]+\/(.*)$/,
 
         run: () => {
           // prettier-ignore
@@ -105,6 +85,26 @@ const presence = new Presence({
             url: `https://${location.hostname}${document
               .querySelector(".white-link")
               .getAttribute("href")}`
+          }
+        ]
+      },
+      {
+        path: /^\/mangas\/\d+\/(.*)+$/,
+
+        details: () => "Viewing a manga",
+
+        state: () => document.querySelector("h1.header").textContent,
+
+        smallImageKey: () => Icons.MANGA,
+
+        smallImageText: () => "Viewing",
+
+        buttons: () => [
+          { label: "View Manga", url: location.href },
+          {
+            label: "Last Chapter",
+            // prettier-ignore
+            url: `https://${location.hostname}${document.querySelector("a.primary.button")?.getAttribute("href")}`
           }
         ]
       },
