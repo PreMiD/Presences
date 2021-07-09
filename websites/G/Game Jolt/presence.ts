@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
         fireside = document.querySelector(
           "#content > div > div > div > div > h2"
         ).textContent.replace(/(\t|\n)/gm, "");
-      data.details = `Sitting By ${firesideOwner.slice(1)}"s Fireside`;
+      data.details = `Sitting By ${firesideOwner.slice(1)}'s Fireside`;
       data.state = `Fireside name: ${fireside}`;
       data.buttons = [
         {
