@@ -16,7 +16,23 @@ presence.on("iFrameData", (data: { video: { isPaused: boolean } }) => {
 /**
  * Functions to get some common info
  */
-const getInfo = {
+const 
+
+  /**
+   * The object that stores the functions that get information from the DOM
+   */
+  getInfo = {
+    generic: () => {
+      return {
+      /**
+      * Gets the specified url parameter
+      * https://stackoverflow.com/a/11582513/13343832 thanks :)
+      */
+        getURLParameter: (name: string) => {
+          return decodeURIComponent((new RegExp(`[?|&]${name}=` + "([^&;]+?)(&|#|;|$)").exec(location.search) || [null, ""])[1].replace(/\+/g, "%20")) || null;
+        }
+      };
+    },
     watch: () => {
       return {
         title: document.querySelectorAll(".v-card__title")[0].children[0].textContent,
@@ -27,12 +43,108 @@ const getInfo = {
       return {
         title: document.querySelector(".channel-container .v-list-item__title").textContent.split("  ")[0]
       };
+    },
+    channels: () => {
+      return {
+        /**
+        * Get the Category on the Channels Page
+        */
+        getCategory: () => {
+          switch ([].indexOf.call(document.querySelector("[role='tablist'] div.v-slide-group__content").children, document.querySelector("[role='tablist'] div.v-slide-group__content [aria-selected=true]"))) {
+            case 1:
+              return "VTuber";
+            case 2:
+              return "Subber";
+            case 3:
+              return "Favorites";
+            case 4:
+              return "Blocked";
+            default:
+              return "Unsupported Category"; // This should never occur, if it occurs it's a holodex.net bug
+          }
+        }
+      };
+    },
+    homeFavorites: () => {
+      return {
+        /**
+         * Gets the Category on the Home and Favorites Pages
+         */
+        getCategory: () => {
+          switch (window.location.hash) {
+            case "":
+              return "Live/Upcoming";
+            case "#archive":
+              return "Archive";
+            case "#clips":
+              return "Clips";
+            default:
+              return "Live/Upcoming";
+          }
+        }
+      };
+    },
+    search: () => {
+      return {
+        /**
+         * Gets the parameters/tags from the Search page
+         */
+        getParamsString: () => {
+
+          let returnString = "";
+
+          // Add Search type
+          switch (getInfo.generic().getURLParameter("type")) {
+            case "all":
+              returnString += "Type: All, ";
+              break;
+            case "stream":
+              returnString += "Type: Official, ";
+              break;
+            case "clip":
+              returnString += "Type: Clip, ";
+              break;
+            default:
+              returnString += "Type: All, ";
+              break;
+          }
+
+          // Add Search query/tags
+          getInfo.generic().getURLParameter("q").split("\n").forEach((val, i) => {
+            if (i > 0) {
+              const tag = val.split(",");
+              switch (tag[0]) {
+                case "channel":
+                  returnString += `Channel: ${tag[2]}, `;
+                  break;
+                case "title & desc":
+                  returnString += `Title/Desc: ${tag[2]}, `;
+                  break;
+                case "comments":
+                  returnString += `Comments: ${tag[2]}, `;
+                  break;
+                case "topic":
+                  returnString += `Topic: ${tag[2]}, `;
+                  break;
+                case "org":
+                  returnString += `Org: ${tag[2]}, `;
+                  break;
+
+                default:
+                  break;
+              }
+            }
+          });
+
+          return returnString.slice(0, -2); //Remove the last ", "
+        }
+      };
     }
   },
 
   /**
- * The object that stores the data
- */
+  * The object that stores the data
+  */
   data = {
     details: `Unsupported Page: ${window.location.pathname}`,
     state: "",
@@ -93,11 +205,11 @@ const getInfo = {
         case "watch":
           return `${getInfo.watch().channel}`;
         case "channel":
-          return path[2] === undefined ? getChannelsCategory() : getInfo.channel().title;
+          return path[2] === undefined ? getInfo.channels().getCategory() : getInfo.channel().title;
         case "home":
-          return getHomeFavsCategory();
+          return getInfo.homeFavorites().getCategory();
         case "favorites":
-          return getHomeFavsCategory();
+          return getInfo.homeFavorites().getCategory();
         case "music":
           return document.querySelector(".music-player-bar") !== null ?
             `Listening to ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.single-line-clamp>a").textContent} - ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.text-h6").textContent}` :
@@ -107,7 +219,7 @@ const getInfo = {
         case "infinite":
           return `${getInfo.watch().title} - ${getInfo.watch().channel}`;
         case "search":
-          return getSearchParamsString();
+          return getInfo.search().getParamsString();
         default:
           return "";
       }
@@ -178,7 +290,7 @@ const getInfo = {
         case "search":
           return {
             image: "mdimagnify",
-            hover: getURLParameter("advanced") === "true" ? "Advanced Search" : "Search"
+            hover: getInfo.generic().getURLParameter("advanced") === "true" ? "Advanced Search" : "Search"
           };
 
         default:
@@ -189,101 +301,6 @@ const getInfo = {
       }
     }
   };
-
-/**
- * Get the Category on the Home and Favorites Pages
- */
-function getHomeFavsCategory() {
-  switch (window.location.hash) {
-    case "":
-      return "Live/Upcoming";
-    case "#archive":
-      return "Archive";
-    case "#clips":
-      return "Clips";
-    default:
-      return "Live/Upcoming";
-  }
-}
-
-/**
- * Gets the specified url parameter
- * https://stackoverflow.com/a/11582513/13343832 thanks :)
- */
-function getURLParameter(name: string) {
-  return decodeURIComponent((new RegExp(`[?|&]${name}=` + "([^&;]+?)(&|#|;|$)").exec(location.search) || [null, ""])[1].replace(/\+/g, "%20")) || null;
-}
-
-/**
- * Gets the parameters/tags from the Search page
- */
-function getSearchParamsString() {
-  
-  let returnString = "";
-
-  // Add Search type
-  switch (getURLParameter("type")) {
-    case "all":
-      returnString += "Type: All, ";
-      break;
-    case "stream":
-      returnString += "Type: Official, ";
-      break;
-    case "clip":
-      returnString += "Type: Clip, ";
-      break;
-    default:
-      returnString += "Type: All, ";
-      break;
-  }
-
-  // Add Search query/tags
-  getURLParameter("q").split("\n").forEach((val, i)=>{
-    if(i > 0) {
-      const tag = val.split(",");
-      switch (tag[0]) {
-        case "channel":
-          returnString += `Channel: ${tag[2]}, `;
-          break;
-        case "title & desc":
-          returnString += `Title/Desc: ${tag[2]}, `;
-          break;
-        case "comments":
-          returnString += `Comments: ${tag[2]}, `;
-          break;
-        case "topic":
-          returnString += `Topic: ${tag[2]}, `;
-          break;
-        case "org":
-          returnString += `Org: ${tag[2]}, `;
-          break;
-        
-        default:
-          break;
-      }
-    }
-  });
-
-  return returnString.slice(0, -2); //Remove the last ", "
-}
-
-/**
- * Get the Category on the Channels Page
- */
-function getChannelsCategory() {
-  switch ([].indexOf.call(document.querySelector("[role='tablist'] div.v-slide-group__content").children, document.querySelector("[role='tablist'] div.v-slide-group__content [aria-selected=true]"))) {
-    case 1:
-      return "VTuber";
-    case 2:
-      return "Subber";
-    case 3:
-      return "Favorites";
-    case 4:
-      return "Blocked";
-    default:
-      return "Unsupported Category"; // This should never occur, if it occurs it's a holodex.net bug
-  }
-}
 
 
 presence.on("UpdateData", async () => {
