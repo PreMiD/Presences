@@ -62,13 +62,7 @@ presence.on("UpdateData", async () => {
         ).getAttribute("href").slice(1),
         fireside = document.querySelector(
           "#content > div > div > div > div > h2"
-        ).textContent
-          .replace("\n\t\t\t\t\t\t\t", "")
-          .replace("\n\t\t\t\t\t\t","")
-          .replace("\n\t\t\t\t\t", "")
-          .replace("\n\t\t\t\t", "")
-          .replace(firesideOwner, "")
-          .replace("  's Fireside ", "");
+        ).textContent.replace(/(\t|\n)/gm, "");
       data.details = `Sitting By ${firesideOwner.slice(1)}"s Fireside`;
       data.state = `Fireside name: ${fireside}`;
     } else {
@@ -109,5 +103,4 @@ presence.on("UpdateData", async () => {
 
   if (data.details && data.state) 
     presence.setActivity(data);
-  
 });
