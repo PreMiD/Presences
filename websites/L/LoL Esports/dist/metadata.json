@@ -6,14 +6,22 @@
   },
   "service": "LoL Esports",
   "description": {
-    "en": "The best place to watch League of Legends Esports and earn rewards!"
+    "en": "The best place to watch League of Legends esports and earn rewards!",
+    "de": "Der beste Ort um League of Legends esports zu schauen und belohnungen zu erhalten!",
+    "nl": "De beste plek om League of Legends esports te bekijken en beloningen te verdienen!"
   },
   "url": "lolesports.com",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/BGc0jtj.jpg",
   "thumbnail": "https://i.imgur.com/R1psydE.jpg",
   "color": "#061A25",
-  "tags": ["lol", "leagueoflegends", "esport"],
+  "tags": [
+    "lol",
+    "leagueoflegends",
+    "esport",
+    "riot",
+    "riotgames"
+  ],
   "category": "videos",
   "iframe": true
 }

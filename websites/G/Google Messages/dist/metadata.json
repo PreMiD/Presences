@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "Paulé",
+    "id": "376812375795302402"
+  },
+  "service": "Google Messages",
+  "description": {
+    "en": "Google Messages is a simple, helpful messaging app that keeps you connected with the people who matter most. Text anyone from anywhere across devices.",
+    "nl": "Google Berichten is een eenvoudige, handige berichten-app waarmee u in contact blijft met de mensen die er het meest toe doen. Sms iedereen overal en op verschillende apparaten."
+  },
+  "url": "messages.google.com",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/lkQjuwL.png",
+  "thumbnail": "https://i.imgur.com/ja7iISJ.jpg",
+  "color": "#1a73e8",
+  "tags": [
+    "google",
+    "message"
+  ],
+  "category": "socials",
+  "settings": [
+    {
+      "id": "showContact",
+      "title": "Show contacts name",
+      "icon": "fas fa-user-friends",
+      "value": false
+    }
+  ]
+}

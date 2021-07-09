@@ -10,10 +10,11 @@
     "s.statusbot.xyz"
   ],
   "description": {
-    "en": "Website presence integration for StatusBot"
+    "en": "Website presence integration for StatusBot",
+    "nl": "Website presence integratie voor StatusBot"
   },
   "service": "StatusBot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/hZ0ONFr.png",
   "thumbnail": "https://i.imgur.com/llMPFYn.png",
   "color": "#4e73df",

@@ -15,9 +15,8 @@ presence.on("UpdateData", () => {
     urlParams.has("q")
   ) {
     presenceData.details = "Searching for " + urlParams.get("q");
-    presenceData.state = document.getElementsByClassName(
-      "result-count"
-    )[0].textContent;
+    presenceData.state =
+      document.getElementsByClassName("result-count")[0].textContent;
     presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "search";
   } else if (

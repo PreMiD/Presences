@@ -6,10 +6,11 @@
   "service": "MangasPROJECT",
   "description": {
     "en": "MangasPROJECT - Read online and organize your reads in mangasPROJECT. Read in portuguese mangas and webtoons most reads in action, romance, fantasy, isekai and others!",
-    "pt_BR": "MangasPROJECT - Leia online e organize suas leituras na mangasPROJECT. Leia antes em português os mangás e webtoons mais lidas de ação, romance, fantasia, isekai e outros!"
+    "pt_BR": "MangasPROJECT - Leia online e organize suas leituras na mangasPROJECT. Leia antes em português os mangás e webtoons mais lidas de ação, romance, fantasia, isekai e outros!",
+    "nl": "MangasPROJECT - Lees online en organiseer je reads in mangasPROJECT. Lees in Portugese manga's en webtoons, de meeste leest in actie, romantiek, fantasie, isekai en anderen!"
   },
   "url": "leitor.net",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/M33LuGj.png",
   "thumbnail": "https://i.imgur.com/PGvPuOd.png",
   "color": "#d4c196",

@@ -5,13 +5,15 @@
   },
   "service": "Vanis.io",
   "description": {
-    "en": "Vanis.io a free multiplayer game."
+    "en": "Vanis.io a free multiplayer game.",
+    "ga_IE": "Vanis.io cluiche ilimreora saor in aisce.",
+    "nl": "Vanis.io een gratis spel voor meerdere spelers."
   },
   "url": [
     "vanis.io",
     "skins.vanis.io"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/V8Cerrx.png",
   "thumbnail": "https://i.imgur.com/bNZOUoi.png",
   "color": "#ce3239",

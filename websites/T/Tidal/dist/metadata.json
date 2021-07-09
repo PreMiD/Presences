@@ -9,18 +9,25 @@
       "id": "380411952666640385"
     }
   ],
-  "url": ["listen.tidal.com", "tidal.com"],
+  "url": [
+    "listen.tidal.com",
+    "tidal.com"
+  ],
   "description": {
     "tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir.",
     "en": "Tidal is a music stream service with very high sound quality.",
-    "pl": "Tidal to strona do streamingowania muzyki z bardzo wysoką jakością audio."
+    "pl": "Tidal to strona do streamingowania muzyki z bardzo wysoką jakością audio.",
+    "nl": "Tidal is een muziekstreamdienst met een zeer hoge geluidskwaliteit."
   },
   "service": "Tidal",
-  "version": "2.0.1",
+  "version": "2.0.8",
   "logo": "https://i.imgur.com/clJrylu.jpg",
   "thumbnail": "https://i.imgur.com/UXbP7qG.png",
   "color": "#000000",
-  "tags": ["tidal", "music"],
+  "tags": [
+    "tidal",
+    "music"
+  ],
   "category": "music",
   "settings": [
     {
@@ -32,6 +39,12 @@
       "title": "Privacy Mode",
       "icon": "fad fa-user-secret",
       "value": false
+    },
+    {
+      "id": "showQuality",
+      "title": "Show Song Quality",
+      "icon": "fas fa-music-alt",
+      "value": true
     }
   ]
 }

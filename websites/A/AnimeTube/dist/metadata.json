@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "AnimeTube",
+  "author": {
+    "name": "Drakonir",
+    "id": "469868455902969866"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/9MxXOK3.png",
+  "thumbnail": "https://i.imgur.com/gz0tYlg.png",
+  "version": "1.0.2",
+  "color": "#9b403f",
+  "tags": [
+    "anime"
+  ],
+  "iframe": true,
+  "url": "anime-tube.tv",
+  "description": {
+    "de": "Die Anime Community mit hunderten Anime als Livestream.",
+    "en": "The Anime Community with hundreds of Anime livestreams.",
+    "nl": "De Anime community met honderden Anime livestreams."
+  }
+}

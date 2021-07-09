@@ -5,10 +5,11 @@
   },
   "service": "fnbr.co",
   "description": {
-    "en": "fnbr.co was created to serve as a directory for Fortnite Cosmetics and help spread community awareness of items within Fortnite Battle Royale."
+    "en": "fnbr.co was created to serve as a directory for Fortnite Cosmetics and help spread community awareness of items within Fortnite Battle Royale.",
+    "nl": "fnbr.co is gemaakt om te dienen als een directory voor Fortnite Cosmetics en te helpen bij het verspreiden van community bewustzijn van items binnen Fortnite Battle Royale."
   },
   "url": "fnbr.co",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "logo": "https://i.imgur.com/pI3mGWH.png",
   "thumbnail": "https://i.imgur.com/hT57Bkm.png",
   "color": "#761FA1",

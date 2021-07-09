@@ -9,10 +9,12 @@
     "www.xkcd.com"
   ],
   "description": {
-    "en": "XKCD is a webcomic of romance, sarcasm, math, and language."
+    "en": "XKCD is a webcomic of romance, sarcasm, math, and language.",
+    "ga_IE": "Is webcomic de rómánsaíocht, searbhas, matamaitic agus teanga é XKCD.",
+    "nl": "XKCD is een webcomic over romantiek, sarcasme, wiskunde en taal."
   },
   "service": "XKCD",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/4FWzJpV.png",
   "thumbnail": "https://i.imgur.com/sdVsYvZ.png",
   "color": "#FFFFFF",

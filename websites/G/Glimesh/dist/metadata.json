@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Glimesh",
+  "author": {
+    "name": "Nathaniel.",
+    "id": "147891648628654082"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/YqIpqg4.png",
+  "thumbnail": "https://i.imgur.com/aALh7B4.jpg",
+  "version": "1.0.5",
+  "color": "#2c409b",
+  "tags": [
+    "stream",
+    "glimesh",
+    "tv",
+    "live"
+  ],
+  "url": [
+    "glimesh.tv",
+    "support.glimesh.tv",
+    "blog.glimesh.tv",
+    "glim.shop"
+  ],
+  "description": {
+    "en": "Glimesh is the next generation streaming platform built by the community for the community.",
+    "nl": "Glimesh is het streamingplatform van de volgende generatie dat door de community voor de community is gebouwd."
+  },
+  "settings": [
+    {
+      "id": "show_details",
+      "title": "Show Details",
+      "icon": "fas fa-address-card",
+      "value": true
+    },
+    {
+      "id": "show_buttons",
+      "title": "Show Buttons",
+      "icon": "fab fa-codepen",
+      "value": true
+    },
+    {
+      "id": "show_timestamps",
+      "title": "Show Timestamps",
+      "icon": "fas fa-clock",
+      "value": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "AtCoder",
+  "author": {
+    "name": "Palskie",
+    "id": "90431685472038912"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/sljarC4.png",
+  "thumbnail": "https://i.imgur.com/zuvLy06.png",
+  "version": "1.0.1",
+  "color": "#101010",
+  "tags": [
+    "coding",
+    "competition",
+    "developer",
+    "education",
+    "technology"
+  ],
+  "url": "atcoder.jp",
+  "description": {
+    "en": "AtCoder is a programming contest site for anyone from beginners to experts. We hold weekly programming contests online."
+  }
+}

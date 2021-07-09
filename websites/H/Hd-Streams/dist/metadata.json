@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "Cascade",
+    "id": "442612628104151040"
+  },
+  "service": "HD-Streams",
+  "description": {
+    "de": "Schaue die aktuellsten Filme und Serien kostenlos in HD, Filme und Serien kostenlos online als HD Stream.",
+    "en": "Watch the latest films and series for free in HD, films and series for free online as HD stream.",
+    "nl": "Bekijk gratis de nieuwste films en series in HD, films en series gratis online als HD stream."
+  },
+  "url": [
+    "hd-streams.org",
+    "www.hd-streams.org"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/rtSPknc.png",
+  "thumbnail": "https://i.imgur.com/0bLEfQ2.jpg",
+  "color": "#64DD17",
+  "tags": [
+    "movie",
+    "video",
+    "media"
+  ],
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    }
+  ],
+  "iframe": true,
+  "category": "videos"
+}

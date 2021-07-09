@@ -17,7 +17,8 @@ presence.on("UpdateData", async () => {
     },
     video: HTMLVideoElement = document.querySelector(
       "#storyfire-player_html5_api"
-    );
+    ),
+    buttons = await presence.getSetting("buttons");
 
   if (document.location.pathname.startsWith("/video-details")) {
     const timestamps = getTimestamps(
@@ -25,8 +26,9 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       uploader = document.querySelector(".user-name").textContent,
-      videoTitle = document.querySelector(".title > div:not(.series)")
-        .textContent;
+      videoTitle = document.querySelector(
+        ".title > div:not(.series)"
+      ).textContent;
 
     presenceData.details = videoTitle;
     presenceData.state = uploader;
@@ -39,6 +41,14 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = (await strings).pause;
     }
+
+    if (buttons)
+      presenceData.buttons = [
+        {
+          label: "Watch",
+          url: document.URL
+        }
+      ];
   } else if (document.location.pathname.startsWith("/forgot-password")) {
     presenceData.details = "Forgot Password";
   } else if (document.location.pathname.startsWith("/social")) {

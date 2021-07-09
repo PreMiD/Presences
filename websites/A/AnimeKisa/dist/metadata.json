@@ -12,10 +12,12 @@
   ],
   "service": "AnimeKisa",
   "description": {
-    "en": "Unlike many other websites AnimeKisa has a tiny amount of ads. Find streamable servers and watch the anime you love, subbed or dubbed in HD."
+    "en": "Unlike many other websites AnimeKisa has a tiny amount of ads. Find streamable servers and watch the anime you love, subbed or dubbed in HD.",
+    "ga_IE": "Murab ionann agus go leor suíomhanna Gréasáin eile tá méid beag fógraí ag AnimeKisa. Faigh freastalaithe in-shruthlaithe agus féach ar an anime is breá leat, subbed nó dubáilte i HD.",
+    "nl": "In tegenstelling tot veel andere websites heeft AnimeKisa een klein aantal advertenties. Vind streambare servers en bekijk de anime waar je van houdt, ondertiteld of nagesynchroniseerd in HD."
   },
   "url": "animekisa.tv",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "iframe": true,
   "logo": "https://i.imgur.com/ac0KCKY.png",
   "thumbnail": "https://i.imgur.com/mgcsfhc.png",

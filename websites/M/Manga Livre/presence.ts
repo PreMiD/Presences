@@ -32,9 +32,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/manga/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the manga:";
-      presenceData.state = document.querySelector(
-        ".series-title > h1"
-      ).textContent;
+      presenceData.state =
+        document.querySelector(".series-title > h1").textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/lista-de-mangas")) {
       presenceData.startTimestamp = browsingStamp;

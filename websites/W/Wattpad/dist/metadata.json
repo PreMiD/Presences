@@ -1,16 +1,24 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Wattpad",
   "description": {
-    "en": "Wattpad is an Internet community for readers and writers to publish new user-generated stories in different genres, including classics, general fiction, historical fiction, non-fiction, poetry, fan-fiction, spiritual, humor, and teen fiction."
+    "en": "Wattpad is an Internet community for readers and writers to publish new user-generated stories in different genres, including classics, general fiction, historical fiction, non-fiction, poetry, fan-fiction, spiritual, humor, and teen fiction.",
+    "ga_IE": "Is pobal Idirlín é Wattpad do léitheoirí agus scríbhneoirí scéalta nua a ghineann úsáideoirí a fhoilsiú i seánraí éagsúla, lena n-áirítear clasaicí, ficsean ginearálta, ficsean stairiúil, neamhfhicsean, filíocht, ficsean lucht leanúna, spioradálta, greann agus ficsean do dhéagóirí.",
+    "nl": "Wattpad is een internetgemeenschap voor lezers en schrijvers om nieuwe, door gebruikers gegenereerde verhalen in verschillende genres te publiceren, waaronder klassiekers, algemene fictie, historische fictie, non-fictie, poëzie, fanfictie, spiritueel, humor en tienerfictie."
   },
   "url": "www.wattpad.com",
-  "version": "1.2.6",
-  "logo": "https://i.gyazo.com/b82c454c177d04c66a13c13cff05b539.png",
-  "thumbnail": "https://i.gyazo.com/4721e89edf717fba4a3fbd32d9ac0b80.png",
+  "version": "1.2.11",
+  "logo": "https://i.imgur.com/cSNcCFV.png",
+  "thumbnail": "https://i.imgur.com/gJmOvDd.png",
   "color": "#FF6612",
   "tags": [
     "wattpad",

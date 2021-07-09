@@ -1,0 +1,37 @@
+{
+  "author": {
+    "name": "Striker",
+    "id": "215509157837537280"
+  },
+  "service": "Animelon",
+  "description": {
+    "en": "Animelon is a streaming website which provides subtitles with translations to help learners of Japanese",
+    "ga_IE": "Is suíomh Gréasáin sruthú é Animelon a sholáthraíonn aistriúcháin le fotheidil chun cabhrú le foghlaimeoirí na Seapáine",
+    "nl": "Animelon is een streamingwebsite die ondertiteling met vertalingen biedt om studenten helpen Japans te leren."
+  },
+  "url": "animelon.com",
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/5gunVuc.png",
+  "thumbnail": "https://i.imgur.com/sT2xcZP.jpg",
+  "color": "#D34344",
+  "tags": [
+    "anime",
+    "videos",
+    "movies"
+  ],
+  "iframe": true,
+  "regExp": "([a-z0-9-]+[.])*animelon([.][a-z]+)+[/]",
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

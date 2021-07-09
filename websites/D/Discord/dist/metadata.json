@@ -18,22 +18,10 @@
     "zh_TW": "Discord是一款專為電子遊戲社區設計的免費網路即時通話軟體與數位發行平台。",
     "zh_CN": "Discord是一款专为电子游戏社区设计的免费网络实时通话软件与数字发行平台。"
   },
-  "url": [
-    "discord.com",
-    "support.discord.com",
-    "status.discord.com",
-    "blog.discord.com",
-    "merch.discord.com",
-    "discordapp.com",
-    "support.discordapp.com",
-    "status.discordapp.com",
-    "blog.discordapp.com",
-    "merch.discordapp.com",
-    "discord.gg",
-    "discordmerch.com"
-  ],
-  "version": "2.2.1",
-  "logo": "https://i.imgur.com/FkQDwnv.png",
+  "url": "discord.com",
+  "regExp": "([a-z0-9-]+[.])*(discord[.]com|discord[.]gg|discordapp[.]com|discordmerch[.]com|discordstatus[.]com)[/]",
+  "version": "3.0.3",
+  "logo": "https://i.imgur.com/MysN6Lu.png",
   "thumbnail": "https://i.imgur.com/0v13nHT.png",
   "color": "#7289DA",
   "tags": [
@@ -41,5 +29,61 @@
     "gaming",
     "voice"
   ],
-  "category": "socials"
+  "category": "socials",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "browse",
+      "title": "Show Browsing Status",
+      "icon": "fad fa-book-reader",
+      "value": true
+    },
+    {
+      "id": "call",
+      "title": "Show Calling Status",
+      "icon": "fad fa-phone-volume",
+      "value": true
+    },
+    {
+      "id": "invite",
+      "title": "Show Invite Links",
+      "icon": "fad fa-link",
+      "value": true
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fab fa-discord",
+      "value": 0,
+      "values": [
+        "White",
+        "Blurple",
+        "Black"
+      ]
+    }
+  ]
 }

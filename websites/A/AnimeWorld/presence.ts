@@ -391,8 +391,9 @@ presence.on("UpdateData", async () => {
         if (animename.includes("(ITA)")) {
           animename = animename.split(" (ITA)")[0];
         }
-        const animenumber = document.querySelector("#episode-comment > span")
-          .textContent;
+        const animenumber = document.querySelector(
+          "#episode-comment > span"
+        ).textContent;
         const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
@@ -502,8 +503,9 @@ presence.on("UpdateData", async () => {
         if (oavname.includes("(ITA)")) {
           oavname = oavname.split(" (ITA)")[0];
         }
-        const oavnumber = document.querySelector("#episode-comment > span")
-          .textContent;
+        const oavnumber = document.querySelector(
+          "#episode-comment > span"
+        ).textContent;
         const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
@@ -557,8 +559,9 @@ presence.on("UpdateData", async () => {
         if (onaname.includes("(ITA)")) {
           onaname = onaname.split(" (ITA)")[0];
         }
-        const onanumber = document.querySelector("#episode-comment > span")
-          .textContent;
+        const onanumber = document.querySelector(
+          "#episode-comment > span"
+        ).textContent;
         const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
@@ -612,8 +615,9 @@ presence.on("UpdateData", async () => {
         if (specialname.includes("(ITA)")) {
           specialname = specialname.split(" (ITA)")[0];
         }
-        const specialnumber = document.querySelector("#episode-comment > span")
-          .textContent;
+        const specialnumber = document.querySelector(
+          "#episode-comment > span"
+        ).textContent;
         const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)

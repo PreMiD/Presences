@@ -3,18 +3,29 @@
     "name": "TheDrop.",
     "id": "293828021134295040"
   },
+  "contributors": [
+    {
+      "name": "Rodry",
+      "id": "240875059953139714"
+    }
+  ],
   "service": "Crowdin",
   "description": {
     "en": "Crowdin is a cloud-based solution that streamlines localization management for your team.",
-    "ro": "Crowdin este o soluție bazată pe cloud care eficientizează gestionarea localizării pentru echipa ta."
+    "ro": "Crowdin este o soluție bazată pe cloud care eficientizează gestionarea localizării pentru echipa ta.",
+    "nl": "Crowdin is een cloudgebaseerde oplossing die lokalisatiebeheer voor uw team stroomlijnt."
   },
   "url": [
     "translate.premid.app",
-    "crowdin.com"
+    "crowdin.com",
+    "support.crowdin.com",
+    "store.crowdin.com",
+    "status.crowdin.com",
+    "blog.crowdin.com"
   ],
-  "version": "2.2.6",
+  "version": "3.0.0",
   "logo": "https://i.imgur.com/rtkC4kS.png",
-  "thumbnail": "https://i.imgur.com/Cn7yyqe.png",
+  "thumbnail": "https://i.imgur.com/dJnnzqd.png",
   "color": "#2e3340",
   "tags": [
     "partner",

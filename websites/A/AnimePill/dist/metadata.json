@@ -6,10 +6,12 @@
   },
   "service": "AnimePill",
   "description": {
-    "en": "Watch the latest anime hits. AnimePill - your daily dose of anime & manga."
+    "en": "Watch the latest anime hits. AnimePill - your daily dose of anime & manga.",
+    "ga_IE": "Féach ar na amas anime is déanaí. AnimePill - do dáileog laethúil de anime & manga.",
+    "nl": "Bekijk de nieuwste anime hits. AnimePill - je dagelijkse dosis anime en manga."
   },
   "url": "animepill.com",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/wcqdQyE.png",
   "thumbnail": "https://i.imgur.com/PbPHN13.png",
   "color": "#F36C00",

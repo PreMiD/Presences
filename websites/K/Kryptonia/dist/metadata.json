@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Kryptonia",
+  "author": {
+    "name": "Amaury",
+    "id": "239487545791086592"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/mWyID87.png",
+  "thumbnail": "https://i.imgur.com/EsJ99aG.png",
+  "version": "1.0.2",
+  "color": "#12d968",
+  "tags": [
+    "kryptonia",
+    "minecraft"
+  ],
+  "url": [
+    "kryptonia.fr",
+    "forum.kryptonia.fr"
+  ],
+  "description": {
+    "fr": "Kryptonia est un serveur Minecraft PvP Factions 1.7.10 sous launcher ayant ouvert ses portes en octobre 2016.",
+    "en": "Kryptonia is a 1.7.10 French Minecraft PVP Factions server with launcher that opened in October 2016.",
+    "nl": "Kryptonia is een 1.7.10 Franse Minecraft PVP Factions-server met launcher die in oktober 2016 werd geopend."
+  }
+}

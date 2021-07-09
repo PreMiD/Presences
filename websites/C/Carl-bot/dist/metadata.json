@@ -5,13 +5,14 @@
   },
   "service": "Carl-bot",
   "description": {
-    "en": "A fully customizable and modular discord bot featuring reaction roles, automod, logging, custom commands and much more."
+    "en": "A fully customizable and modular discord bot featuring reaction roles, automod, logging, custom commands and much more.",
+    "nl": "Een volledig aanpasbare en modulaire discord-bot met reactierollen, automod, logboekregistratie, aangepaste opdrachten en nog veel meer."
   },
   "url": [
     "carl.gg",
     "docs.carl.gg"
   ],
-  "version": "1.4.7",
+  "version": "1.4.10",
   "logo": "https://i.imgur.com/2yPwE4a.png",
   "thumbnail": "https://i.imgur.com/wHYCN0D.png",
   "color": "#757F3F",

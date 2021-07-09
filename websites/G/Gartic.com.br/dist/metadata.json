@@ -1,16 +1,23 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Gartic.com.br",
   "description": {
-    "en": "Play Gartic.com.br online and for free without needing to download anything!"
+    "en": "Play Gartic.com.br online and for free without needing to download anything!",
+    "nl": "Speel Gartic.com.br online en gratis zonder iets te hoeven downloaden!"
   },
   "url": "gartic.com.br",
-  "version": "1.3.5",
-  "logo": "https://i.gyazo.com/6e0f45a479d839a75466d1d20f25568d.png",
-  "thumbnail": "https://i.gyazo.com/14e9fc3c322065175907e37f7d21ae10.png",
+  "version": "1.3.9",
+  "logo": "https://i.imgur.com/pkjSFOK.png",
+  "thumbnail": "https://i.imgur.com/qcEQGjB.png",
   "color": "#FBD981",
   "tags": [
     "gartic-com-br",

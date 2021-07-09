@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Tailwind CSS",
+  "version": "1.0.2",
+  "category": "other",
+  "author": {
+    "name": "tarikcoskun",
+    "id": "474537652943847444"
+  },
+  "url": [
+    "tailwindcss.com",
+    "tailwindui.com",
+    "play.tailwindcss.com",
+    "blog.tailwindcss.com"
+  ],
+  "description": {
+    "en": "A utility-first CSS framework that can be composed to build any design, directly in your markup.",
+    "nl": "Een utility-first CSS-framework dat kan worden samengesteld om elk ontwerp te bouwen, rechtstreeks in uw opmaak."
+  },
+  "logo": "https://i.imgur.com/gUxU2Oh.png",
+  "thumbnail": "https://i.imgur.com/hyH0NT9.png",
+  "color": "#06b6d4",
+  "tags": [
+    "tailwind",
+    "framework",
+    "turkish"
+  ]
+}

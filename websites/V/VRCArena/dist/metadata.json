@@ -7,10 +7,11 @@
   "url": "www.vrcarena.com",
   "description": {
     "en": "Download and upload various kinds of assets and tutorials for the different species found in the online multiplayer VR social game VRChat.",
-    "nl": "Download en upload verschillende assets en tutorials voor verschillende (dier)soorten die te vinden zijn in het VR online multiplayer spel VRChat."
+    "nl": "Download en upload verschillende assets en tutorials voor verschillende (dier)soorten die te vinden zijn in het VR online multiplayer spel VRChat.",
+    "ga_IE": "úinéireacht agus uaslódáil cineálacha éagsúla sócmhainní agus ranganna teagaisc do na speicis éagsúla atá le fáil sa chluiche sóisialta il-imreora VR VRChat ar líne."
   },
   "service": "VRCArena",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/Kio1VbP.jpg",
   "thumbnail": "https://i.imgur.com/F7iayRw.png",
   "color": "#5f3d8a",

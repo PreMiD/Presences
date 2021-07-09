@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "Liechtenstein",
+    "id": "471586634899652611"
+  },
+  "contributors": [
+    {
+      "name": "Wargor",
+      "id": "310546454693281794"
+    }
+  ],
+  "url": "mkpc.malahieude.net",
+  "description": {
+    "en": "A computer version of the famous racing game by Nintendo. This is completely free and does not require any download. All you need is a web browser!",
+    "fr": "Une version ordi du célèbre jeu de course de Nintendo. Ce jeu est entièrement gratuit et ne requiert aucun téléchargement, un simple navigateur internet suffit.",
+    "nl": "Een computerversie van het beroemde racespel van Nintendo. Dit is volledig gratis en hoeft niet te worden gedownload. Het enige wat je nodig hebt is een webbrowser!"
+  },
+  "service": "MKPC",
+  "version": "1.0.4",
+  "logo": "https://imgur.com/T2WTLEM.jpeg",
+  "thumbnail": "https://imgur.com/LZwSRDe.jpeg",
+  "color": "#FF001B",
+  "tags": [
+    "game",
+    "mario",
+    "kart",
+    "retro"
+  ],
+  "category": "games"
+}

@@ -5,12 +5,13 @@
     "id": "158049329150427136"
   },
   "url": "newgrounds.com",
-  "regExp": "\\.newgrounds\\.com",
+  "regExp": "([a-z0-9]+)[.]newgrounds[.]com",
   "description": {
-    "en": "A community of artists, game developers, musicians, voice actors and writers who create and share some of the best stuff on the web!"
+    "en": "A community of artists, game developers, musicians, voice actors and writers who create and share some of the best stuff on the web!",
+    "nl": "Een gemeenschap van artiesten, game-ontwikkelaars, muzikanten, stemacteurs en schrijvers die de beste dingen op internet maken en delen!"
   },
   "service": "Newgrounds",
-  "version": "1.0.1",
+  "version": "1.1.3",
   "logo": "https://i.imgur.com/OfHFd5Q.jpeg",
   "thumbnail": "https://i.imgur.com/xBnaql3.jpg",
   "color": "#f58a2f",
@@ -50,6 +51,12 @@
       "id": "timestamp",
       "title": "Show Timestamps",
       "icon": "fas fa-clock",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Presence Buttons",
+      "icon": "fas fa-th-large",
       "value": true
     }
   ]

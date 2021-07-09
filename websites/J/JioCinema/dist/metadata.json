@@ -5,10 +5,11 @@
   },
   "service": "JioCinema",
   "description": {
-    "en": "JioCinema is a video streaming service offered by Jio where in you can watch movies, TV shows, Jio exclusives, documentaries and trailers."
+    "en": "JioCinema is a video streaming service offered by Jio where in you can watch movies, TV shows, Jio exclusives, documentaries and trailers.",
+    "nl": "JioCinema is een videostreamingdienst aangeboden door Jio waar u films, tv-shows, exclusieve Jio, documentaires en trailers kunt bekijken."
   },
   "url": "www.jiocinema.com",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/vP9Hh5d.png",
   "thumbnail": "https://i.imgur.com/uzYoaXO.png",
   "color": "#ec5a7f",

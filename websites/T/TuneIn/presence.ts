@@ -82,8 +82,8 @@ presence.on("UpdateData", async () => {
       title = document.querySelector("#playerTitle").textContent;
       author = document.querySelector("#playerSubtitle").textContent;
       var audioTime = document.querySelector("#scrubberElapsed").textContent;
-      var audioDuration = document.querySelector("#scrubberDuration")
-        .textContent;
+      var audioDuration =
+        document.querySelector("#scrubberDuration").textContent;
       var timestamps = getTimestamps(audioTime, audioDuration);
       const paused = document.querySelector(
         ".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-paused']"

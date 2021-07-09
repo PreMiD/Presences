@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "NMW03",
+    "id": "534099893979971584"
+  },
+  "url": "www.musixmatch.com",
+  "description": {
+    "en": "Enhancing the experience of music worldwide.",
+    "nl": "Verbetering van de muziekbeleving wereldwijd."
+  },
+  "service": "Musixmatch",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/fzadGHL.png",
+  "thumbnail": "https://i.imgur.com/hzsfZlu.png",
+  "color": "#FF3262",
+  "tags": [
+    "music"
+  ],
+  "category": "music"
+}

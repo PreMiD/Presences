@@ -6,7 +6,8 @@
   },
   "service": "binarysearch",
   "description": {
-    "en": "binarysearch is a free site where one can work on coding and algorithms problems with friends."
+    "en": "binarysearch is a free site where one can work on coding and algorithms problems with friends.",
+    "nl": "binarysearch is een gratis site waar men met vrienden kan werken aan coderings- en algoritmeproblemen."
   },
   "url": [
     "binarysearch.com",
@@ -14,7 +15,7 @@
     "www.binarysearch.com",
     "www.binarysearch.io"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/0HotbTy.png",
   "thumbnail": "https://i.imgur.com/Q59B8YD.png",
   "color": "#384252",

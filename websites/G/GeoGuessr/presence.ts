@@ -13,34 +13,33 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as () => void,
-  get function(): () => void {
-    return this._function;
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
-  },
-  get present(): boolean {
-    return this._function !== null;
-  }
-},
-
-/**
- * Initialize/reset presenceData.
- */
- resetData = (
-  defaultData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  }
-): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname
-    .replace(/^\/|\/$|\/index\.html$|.html$/g, "")
-    .split("/");
-  presenceData = { ...defaultData };
-};
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname
+      .replace(/^\/|\/$|\/index\.html$|.html$/g, "")
+      .split("/");
+    presenceData = { ...defaultData };
+  };
 
 ((): void => {
   let loadedPath: string,
@@ -107,9 +106,8 @@ const updateCallback = {
       } else if (currentPath[0] === "maps") {
         if (document.querySelector(".map-block__title")) {
           presenceData.details = "Viewing a map";
-          presenceData.state = document.querySelector(
-            ".map-block__title"
-          ).textContent;
+          presenceData.state =
+            document.querySelector(".map-block__title").textContent;
         } else {
           presenceData.details = "Looking for a map";
         }

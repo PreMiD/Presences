@@ -6,12 +6,13 @@
   "service": "Udemy",
   "description": {
     "en": " Udemy is an online learning and teaching marketplace with over 100000 courses and 24 million students.",
-    "tr": "Udemy, internetten ders alabileceğiniz oldukça popüler global bir internet sitesidir."
+    "tr": "Udemy, internetten ders alabileceğiniz oldukça popüler global bir internet sitesidir.",
+    "nl": "Udemy is een online leer- en onderwijsmarktplaats met meer dan 100.000 cursussen en 24 miljoen studenten."
   },
   "url": "www.udemy.com",
-  "version": "1.1.5",
-  "logo": "https://premid.is-inside.me/V3NzCBvi.png",
-  "thumbnail": "https://premid.is-inside.me/eJynz0Kr.png",
+  "version": "1.2.1",
+  "logo": "https://i.imgur.com/cTa4588.png",
+  "thumbnail": "https://i.imgur.com/g1yqYRK.png",
   "color": "#ea5252",
   "tags": [
     "udemy",

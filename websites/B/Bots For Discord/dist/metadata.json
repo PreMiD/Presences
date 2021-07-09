@@ -1,0 +1,25 @@
+{
+  "author": {
+    "name": "bris",
+    "id": "656165298818514946"
+  },
+  "service": "Bots For Discord",
+  "description": {
+    "en": "Find the perfect discord bot for your server on Bots For Discord, or list your bot for others to find.",
+    "nl": "Vind de perfecte Discord bot voor uw server op Bots For Discord, of vermeld uw bot zodat anderen deze kunnen vinden."
+  },
+  "url": [
+    "docs.botsfordiscord.com",
+    "botsfordiscord.com"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/bk2PPfW.png",
+  "thumbnail": "https://i.imgur.com/skUsdmA.png",
+  "color": "#7289da",
+  "tags": [
+    "discord",
+    "discord-bot",
+    "discord-bot-list"
+  ],
+  "category": "other"
+}

@@ -6,11 +6,12 @@
   "service": "eggsy.codes",
   "description": {
     "en": "eggsy.xyz is where EGGSY (PV and TM) hosts his projects such as PreMiD releated presence usage stats, metadata creator and much more!",
-    "tr": "eggsy.xyz, EGGSY'nin PreMiD ile ve bir çok başka projesiyle alakalı işlerini sergilediği internet sitesidir!"
+    "tr": "eggsy.xyz, EGGSY'nin PreMiD ile ve bir çok başka projesiyle alakalı işlerini sergilediği internet sitesidir!",
+    "nl": "eggsy.xyz is waar EGGSY (PV en TM) zijn projecten host, zoals PreMiD releated presence usage stats, metadata creator en nog veel meer!"
   },
   "url": "eggsy.xyz",
   "regExp": "eggsy[.]xyz(?![/]projects[/]premid[/]custom-status)",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://premid.is-inside.me/L7cXeX83.jpg",
   "thumbnail": "https://premid.is-inside.me/GWRfi8VK.png",
   "color": "#212121",

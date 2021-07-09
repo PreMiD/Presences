@@ -1,23 +1,78 @@
 {
   "author": {
-    "name": "Drull",
-    "id": "244953147154366464"
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
   },
-  "url": "www.apple.com",
+  "contributors": [
+    {
+      "name": "Drull",
+      "id": "244953147154366464"
+    }
+  ],
+  "url": [
+    "www.apple.com",
+    "support.apple.com",
+    "getsupport.apple.com",
+    "apps.apple.com",
+    "developer.apple.com",
+    "www.icloud.com"
+  ],
   "description": {
     "pt_BR": "Apple Inc. é uma empresa multinacional norte-americana que tem o objetivo de projetar e comercializar produtos eletrônicos de consumo, software de computador e computadores pessoais.",
-    "en": " Apple Inc. is an American multinational company that aims to design and market consumer electronics, computer software and personal computers."
+    "en": "Apple Inc. is an American multinational company that aims to design and market consumer electronics, computer software and personal computers.",
+    "ga_IE": "Is cuideachta ilnáisiúnta Meiriceánach é Apple Inc. a bhfuil sé mar aidhm aige leictreonaic tomhaltóra, bogearraí ríomhaireachta agus ríomhairí pearsanta a dhearadh agus a mhargú.",
+    "de": "Apple Inc. ist ein amerikanisches multinationales Unternehmen, das sich mit der Entwicklung und Vermarktung von Unterhaltungselektronik, Computersoftware und Personal Computern beschäftigt.",
+    "nl": "Apple Inc. is een Amerikaans multinationaal bedrijf die tot doel heeft consumentenelektronica, computersoftware en personal computers te ontwerpen en op de markt te brengen."
   },
   "service": "Apple",
-  "version": "1.0.4",
+  "version": "2.1.5",
   "logo": "https://i.imgur.com/rBAusA5.png",
   "thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
   "color": "#606C80",
   "tags": [
     "apple",
     "iphone",
+    "ipad",
+    "imac",
     "eletronics",
-    "store"
+    "store",
+    "icloud"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fad fa-icons",
+      "value": 0,
+      "values": [
+        "Normal",
+        "Rainbow"
+      ]
+    },
+    {
+      "id": "timeElapsed",
+      "title": "Show elapsed time",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "shopCheckout",
+      "title": "Show shop summary",
+      "icon": "fas fa-store",
+      "value": true
+    },
+    {
+      "id": "devProfileBtn",
+      "title": "Show Dev Forum profile button",
+      "icon": "fas fa-id-badge",
+      "value": true
+    }
+  ]
 }

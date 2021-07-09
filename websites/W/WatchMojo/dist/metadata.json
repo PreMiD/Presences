@@ -1,0 +1,57 @@
+{
+  "author": {
+    "name": "Bas950",
+    "id": "241278257335500811"
+  },
+  "service": "WatchMojo",
+  "description": {
+    "en": "Top 10 lists on Music, TV, Film and Video Games.",
+    "ga_IE": "Na 10 liosta is fearr ar Chluichí Ceoil, Teilifíse, Scannáin agus Físe.",
+    "nl": "Top 10-lijsten voor muziek, tv, film en videogames."
+  },
+  "url": "watchmojo.com",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/zQetOPX.jpg",
+  "thumbnail": "https://i.imgur.com/X2KmnaF.jpg",
+  "color": "#01ffff",
+  "tags": [
+    "top10",
+    "video",
+    "media"
+  ],
+  "iframe": true,
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "browse",
+      "title": "Show Browsing Status",
+      "icon": "fad fa-book-reader",
+      "value": true
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

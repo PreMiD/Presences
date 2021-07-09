@@ -1,54 +1,40 @@
-var presence = new Presence({
-  clientId: "708314580304003124"
-});
-var strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  browse: "presence.activity.browsing",
-  search: "presence.activity.searching"
-});
+const presence = new Presence({
+    clientId: "708314580304003124"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
+  getElement = (query: string): string => {
+    const element = document.querySelector(query);
+    if (element) {
+      return element.textContent.replace(/^\s+|\s+$/g, "");
+    } else return "Loading...";
+  },
+  videoStatus = (video: HTMLVideoElement): string => {
+    return video.paused ? "pause" : "play";
+  };
 
-const getElement = (query: string): string => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return "Loading...";
-};
-
-const videoStatus = (video: HTMLVideoElement): string => {
-  return video.paused ? "pause" : "play";
-};
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var oldUrl, elapsed;
+let oldUrl: string, elapsed: number;
 
 presence.on("UpdateData", async () => {
-  const path = location.pathname.replace(/\/?$/, "/");
-
-  const video: HTMLVideoElement = document.querySelector("video");
-  const search: HTMLInputElement = document.querySelector("input");
-
-  const showSearchInfo = await presence.getSetting("search");
-  const showBrowseInfo = await presence.getSetting("browse");
-  const showVideoInfo = await presence.getSetting("video");
-
-  var data: PresenceData = {
-    details: undefined,
-    state: undefined,
-    largeImageKey: "anontpp",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: undefined,
-    endTimestamp: undefined
-  };
+  const path = location.pathname.replace(/\/?$/, "/"),
+    video: HTMLVideoElement = document.querySelector("video"),
+    search: HTMLInputElement = document.querySelector("input"),
+    showSearchInfo = await presence.getSetting("search"),
+    showBrowseInfo = await presence.getSetting("browse"),
+    showVideoInfo = await presence.getSetting("video"),
+    data: PresenceData = {
+      details: undefined,
+      state: undefined,
+      largeImageKey: "anontpp",
+      smallImageKey: undefined,
+      smallImageText: undefined,
+      startTimestamp: undefined,
+      endTimestamp: undefined
+    };
 
   if (oldUrl !== path) {
     oldUrl = path;
@@ -64,7 +50,10 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = status;
     data.smallImageText = (await strings)[status];
     if (status === "play") {
-      const timestamps = getTimestamps(video.currentTime, video.duration);
+      const timestamps = presence.getTimestamps(
+        video.currentTime,
+        video.duration
+      );
       data.startTimestamp = timestamps[0];
       data.endTimestamp = timestamps[1];
     }
@@ -80,10 +69,10 @@ presence.on("UpdateData", async () => {
   /* Video Info */
   if (showVideoInfo) {
     if (video) {
-      const show = getElement("#episodetitle") !== "Feature Film";
-      const state = (document.querySelector(
-        "#infotitle"
-      ) as HTMLElement).innerText.split("\n");
+      const show = getElement("#episodetitle") !== "Feature Film",
+        state = (
+          document.querySelector("#infotitle") as HTMLElement
+        ).innerText.split("\n");
       if (show) {
         // Show Logic
         data.details = "Watching Show";

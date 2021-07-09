@@ -11,10 +11,11 @@
     "pt_BR": "Anihub é um website brasileiro que fornece um lugar para assistir conteúdos de anime gratuitamente, tanto online e offline, e sem anúncios abusivos.",
     "fr": "Anihub est un site brésilien qui fournit un lieu où regarder du contenu d'animés gratuitement, en ligne ou hors-ligne, et sans publicités abusives.",
     "uk_UA": "Anihub - це бразильський веб-сайт, який забезпечує місце для перегляду безкоштовного аніме контенту, як в Інтернеті, так і в автономному режимі без будь-якої дратуючої реклами.",
-    "nl": "Anihub is een braziliaanse website die een plek bied om gratis anime te bekijken, zowel online als offline en zonder misbruik van advertenties."
+    "nl": "Anihub is een braziliaanse website die een plek bied om gratis anime te bekijken, zowel online als offline en zonder misbruik van advertenties.",
+    "ga_IE": "Is suíomh Gréasáin Brasaíleach é Anihub chun áit a sholáthar chun féachaint ar ábhar anime saor in aisce, ar líne agus as líne agus gan aon fhógraí maslacha."
   },
   "url": "anihub.tv",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/HClem6o.png",
   "thumbnail": "https://i.imgur.com/ehkk7qZ.png",
   "color": "#1997C6",

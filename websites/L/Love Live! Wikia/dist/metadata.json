@@ -5,10 +5,11 @@
   },
   "service": "Love Live! Wikia",
   "description": {
-    "en": "Presence for the English Wikia of the Love Live! School Idol Project series"
+    "en": "Presence for the English Wikia of the Love Live! School Idol Project series",
+    "nl": "Aanwezigheid voor de Engelse Wikia van Love Live! School Idol Project-serie"
   },
   "url": "love-live.fandom.com",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://menma.is-inside.me/CtLFeNGR.png",
   "thumbnail": "https://menma.is-inside.me/nSdzu11P.png",
   "color": "#E8218B",

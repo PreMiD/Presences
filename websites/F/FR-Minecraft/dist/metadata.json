@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "fantomitechno 🦊",
+    "id": "563749920683720709"
+  },
+  "url": "fr-minecraft.net",
+  "description": {
+    "en": "News Minecraft, tips, tools and all the help necessary to play Minecraft!",
+    "fr": "L'actualité Minecraft, des astuces, des outils et toute l'aide necessaire pour jouer à Minecraft !",
+    "nl": "Nieuws Minecraft, tips, tools en alle hulp die nodig is om Minecraft te spelen!"
+  },
+  "service": "FR-Minecraft",
+  "version": "1.1.2",
+  "logo": "https://i.imgur.com/W33UNTD.png",
+  "thumbnail": "https://i.imgur.com/XIed4IC.png",
+  "color": "#4AD818",
+  "tags": [
+    "community",
+    "fr-minecraft",
+    "minecraft",
+    "news"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "button",
+      "if": {
+        "privacy": false
+      },
+      "title": "Add Button",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

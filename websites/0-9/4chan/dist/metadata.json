@@ -10,10 +10,12 @@
     "boards.4channel.org"
   ],
   "description": {
-    "en": "4chan is a simple image-based bulletin board where anyone can post comments and share images. There are boards dedicated to a variety of topics, from Japanese animation and culture to videogames, music, and photography. Users do not need to register an account before participating in the community. Feel free to click on a board below that interests you and jump right in!"
+    "en": "4chan is a simple image-based bulletin board where anyone can post comments and share images. There are boards dedicated to a variety of topics, from Japanese animation and culture to videogames, music, and photography. Users do not need to register an account before participating in the community. Feel free to click on a board below that interests you and jump right in!",
+    "ga_IE": "Is clár fógraí simplí íomhá-bhunaithe é 4chan inar féidir le duine ar bith tráchtanna a phostáil agus íomhánna a roinnt. Tá cláir ann atá tiomnaithe d’ábhair éagsúla, ó bheochan agus chultúr na Seapáine go fístéipeanna, ceol agus grianghrafadóireacht. Ní gá d’úsáideoirí cuntas a chlárú sula nglacann siad páirt sa phobal. Ná bíodh leisce ort cliceáil ar chlár thíos a bhfuil spéis agat ann agus léim isteach ceart!",
+    "nl": "4chan is een eenvoudig prikbord op basis van afbeeldingen waarop iedereen opmerkingen kan plaatsen en afbeeldingen kan delen. Er zijn borden gewijd aan een verscheidenheid aan onderwerpen, van Japanse animatie en cultuur tot videogames, muziek en fotografie. Gebruikers hoeven geen account te registreren voordat ze deelnemen aan de community. Klik gerust op een bord hieronder dat u interesseert en spring er meteen in!"
   },
   "service": "4chan",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/W76cGCQ.png",
   "thumbnail": "https://i.imgur.com/uXsy666.png",
   "color": "#3C7E57",

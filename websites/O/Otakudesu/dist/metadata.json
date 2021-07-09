@@ -5,10 +5,11 @@
   },
   "service": "Otakudesu",
   "description": {
-    "en": "Download, watch and stream anime with Indonesian subtitle and with 240p, 360p, 480p, & 720p resolution with MP4 format & MKV along with the batch."
+    "en": "Download, watch and stream anime with Indonesian subtitle and with 240p, 360p, 480p, & 720p resolution with MP4 format & MKV along with the batch.",
+    "nl": "Download, bekijk en stream anime met Indonesische ondertiteling en met 240p, 360p, 480p en 720p resolutie met MP4-formaat en MKV samen met de batch."
   },
-  "url": "otakudesu.tv",
-  "version": "1.0.1",
+  "url": "otakudesu.moe",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/RrlRhIJ.png",
   "thumbnail": "https://i.imgur.com/wHfvj2a.png",
   "color": "#ffffff",

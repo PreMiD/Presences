@@ -9,10 +9,11 @@
     "catchplay.com"
   ],
   "description": {
-    "en": "CatchPlay is a Taiwanese multimedia company founded in 2007, whose businesses include OTT VOD streaming service operation, linear television channel operation (CatchPlay Movie Channel) and theatrical film distribution."
+    "en": "CatchPlay is a Taiwanese multimedia company founded in 2007, whose businesses include OTT VOD streaming service operation, linear television channel operation (CatchPlay Movie Channel) and theatrical film distribution.",
+    "nl": "CatchPlay is een Taiwanees multimediabedrijf opgericht in 2007, met activiteiten als OTT VOD-streamingdienst, beheer van lineaire televisiekanalen (CatchPlay Movie Channel) en bioscoopfilmdistributie."
   },
   "service": "CatchPlay",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/hAt97QK.png",
   "thumbnail": "https://i.imgur.com/vaaItvT.png",
   "color": "#F26F21",
@@ -20,6 +21,14 @@
     "catchplay",
     "video",
     "media"
+  ],
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Presence Buttons",
+      "icon": "fas fa-th-large",
+      "value": true
+    }
   ],
   "category": "videos"
 }

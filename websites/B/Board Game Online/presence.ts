@@ -1,86 +1,121 @@
-var presence = new Presence({
-  clientId: "684570342085099546"
-});
-var strings = presence.getStrings({
-  browse: "presence.activity.browsing"
-});
-
-const getElement = (query: string): string => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return undefined;
-};
-
-const paths = {
-  "/": {
-    details: "Browsing"
-  },
-  "/forum": {
-    details: "Viewing Page",
-    state: "Forums"
-  }
-};
-
-const queries = {
-  forgot_login: {
-    details: "Forgot Login"
-  },
-  register: {
-    details: "Registering..."
-  },
-  newgame: {
-    details: "Creating",
-    state: "New Game"
-  },
-  joingame: {
-    details: "Joining",
-    state: "New Game"
-  },
-  shop: {
-    details: "Viewing",
-    state: "Shop"
-  },
-  donations: {
-    details: "Viewing",
-    state: "Donations"
-  },
-  info: {
-    details: "Viewing",
-    state: "Game Info"
-  },
-  recruit: {
-    details: "Viewing",
-    state: "Recruit a Friend"
-  },
-  terms: {
-    details: "Viewing",
-    state: "Terms of Service"
-  },
-  privacy: {
-    details: "Viewing",
-    state: "Privacy Policy"
-  },
-  contact: {
-    details: "Viewing",
-    state: "Contact"
-  }
-};
-
-presence.on("UpdateData", async () => {
-  let data: PresenceData = {
-    largeImageKey: "boardgameonline"
+const presence = new Presence({
+    clientId: "684570342085099546"
+  }),
+  strings = presence.getStrings({
+    browse: "presence.activity.browsing"
+  }),
+  getElement = (query: string): string => {
+    const element = document.querySelector(query);
+    if (element) {
+      return element.textContent.replace(/^\s+|\s+$/g, "");
+    } else return undefined;
   };
 
-  const host = location.host;
-  const path = location.pathname;
-  const query = location.search;
-  const queryString = query && query.split("page=")[1].split("&")[0];
+function setObject(path: string) {
+  switch (path) {
+    case "/": {
+      return {
+        details: "Browsing"
+      };
+    }
+
+    case "forgot_login": {
+      return {
+        details: "Forgot Login"
+      };
+    }
+
+    case "register": {
+      return {
+        details: "Registering..."
+      };
+    }
+
+    case "newgame": {
+      return {
+        details: "Creating",
+        state: "New Game"
+      };
+    }
+
+    case "joingame": {
+      return {
+        details: "Joining",
+        state: "New Game"
+      };
+    }
+
+    case "shop": {
+      return {
+        details: "Viewing",
+        state: "Shop"
+      };
+    }
+
+    case "donations": {
+      return {
+        details: "Viewing",
+        state: "Donations"
+      };
+    }
+
+    case "info": {
+      return {
+        details: "Viewing",
+        state: "Game Info"
+      };
+    }
+
+    case "recruit": {
+      return {
+        details: "Viewing",
+        state: "Recruit a Friend"
+      };
+    }
+
+    case "terms": {
+      return {
+        details: "Viewing",
+        state: "Terms of Service"
+      };
+    }
+
+    case "privacy": {
+      return {
+        details: "Viewing",
+        state: "Privacy Policy"
+      };
+    }
+
+    case "contact": {
+      return {
+        details: "Viewing",
+        state: "Contact"
+      };
+    }
+
+    case "/forum": {
+      return {
+        details: "Viewing Page",
+        state: "Forums"
+      };
+    }
+  }
+}
+
+presence.on("UpdateData", async () => {
+  const data: PresenceData = {
+      largeImageKey: "boardgameonline"
+    },
+    host = location.host,
+    path = location.pathname,
+    query = location.search,
+    queryString = query && query.split("page=")[1].split("&")[0],
+    detailsObj = setObject(path);
 
   if (host === "www.boardgame-online.com") {
-    if (path in paths) data = { ...data, ...paths[path] };
-    if (queryString && queryString in queries)
-      data = { ...data, ...queries[queryString] };
+    if (path || queryString)
+      (data.details = detailsObj.details), (data.state = detailsObj.state);
 
     const header = getElement(".page_wrapper.show > .page_content > h2");
     if (header !== undefined) {
@@ -96,8 +131,8 @@ presence.on("UpdateData", async () => {
       data.state = profile;
     }
   } else {
-    const playerCount = document.querySelector(".rankingTable")
-      .childElementCount;
+    const playerCount =
+      document.querySelector(".rankingTable").childElementCount;
 
     data.details = "Playing Game";
     data.state = document.title;

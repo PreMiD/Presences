@@ -1,16 +1,24 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Vimeo",
   "description": {
-    "en": "Vimeo is an ad-free video platform headquartered in New York City, providing free video viewing services as a competitor to YouTube. In 2007, Vimeo became the first video sharing site to support high-definition video."
+    "en": "Vimeo is an ad-free video platform headquartered in New York City, providing free video viewing services as a competitor to YouTube. In 2007, Vimeo became the first video sharing site to support high-definition video.",
+    "ga_IE": "Vimeo is an ad-free video platform headquartered in New York City, providing free video viewing services as a competitor to YouTube. In 2007, Vimeo became the first video sharing site to support high-definition video.",
+    "nl": "Vimeo is een advertentievrij videoplatform met hoofdkantoor in New York City en biedt gratis videoweergavediensten als concurrent van YouTube. In 2007 werd Vimeo de eerste site voor het delen van video's die high-definition video ondersteunt."
   },
   "url": "vimeo.com",
-  "version": "1.1.5",
-  "logo": "https://i.gyazo.com/1c653f737cbc237518af07536849eb00.png",
-  "thumbnail": "https://i.gyazo.com/2512f2339ae0088fa329c8911e3aa732.png",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/OJunR7n.png",
+  "thumbnail": "https://i.imgur.com/tA7kbca.png",
   "color": "#18B3E2",
   "tags": [
     "vimeo",

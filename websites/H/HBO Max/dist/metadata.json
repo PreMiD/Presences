@@ -6,7 +6,8 @@
   },
   "service": "HBO Max",
   "description": {
-    "en": "The streaming platform that bundles all of HBO together with even more movies and TV series, plus new Max Originals."
+    "en": "The streaming platform that bundles all of HBO together with even more movies and TV series, plus new Max Originals.",
+    "nl": "Het streamingplatform dat heel HBO bundelt met nog meer films en tv-series, plus nieuwe Max Originals."
   },
   "url": [
     "hbomax.com",
@@ -14,7 +15,7 @@
     "play.hbomax.com",
     "help.hbomax.com"
   ],
-  "version": "1.0.2",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/UxH7DDE.png",
   "thumbnail": "https://i.imgur.com/d1bktD4.jpg",
   "color": "#c600ff",

@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "609774216430092298"
+  clientId: "609774216430092298"
 });
 
 let beatmapTitle: string,
@@ -36,19 +36,23 @@ presence.on("UpdateData", async () => {
       presenceData.state = "The osu! News Feed";
       presenceData.smallImageKey = "searching";
     }
-  } else if (document.location.pathname.includes("/beatmapsets")) {     
+  } else if (document.location.pathname.includes("/beatmapsets")) {
     if (document.location.pathname == "/beatmapsets") {
       presenceData.details = "Browsing...";
       presenceData.state = "Beatmap Listings";
       presenceData.smallImageKey = "searching";
     } else {
-      title = document.querySelector(".beatmapset-header__details-text--title").textContent;
-      diffName= document.querySelector(".beatmapset-header__diff-name").textContent;
+      title = document.querySelector(
+        ".beatmapset-header__details-text--title"
+      ).textContent;
+      diffName = document.querySelector(
+        ".beatmapset-header__diff-name"
+      ).textContent;
       if (title != null && diffName != null) {
-          beatmapTitle = `${title} [${(diffName)}]`,
-          presenceData.details = "Looking at the beatmap:";
-          presenceData.state = beatmapTitle;
-          presenceData.smallImageKey = "searching";
+        (beatmapTitle = `${title} [${diffName}]`),
+          (presenceData.details = "Looking at the beatmap:");
+        presenceData.state = beatmapTitle;
+        presenceData.smallImageKey = "searching";
       }
     }
   } else if (document.location.pathname.startsWith("/beatmaps/packs")) {
@@ -66,8 +70,12 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/rankings")) {
     gamemode = document.location.pathname.split("/")[2];
     if (document.location.pathname.includes("/performance")) {
-      if (document.querySelector("div.u-ellipsis-overflow").textContent !== "All") {
-        selected = document.querySelector("div.u-ellipsis-overflow").textContent;
+      if (
+        document.querySelector("div.u-ellipsis-overflow").textContent !== "All"
+      ) {
+        selected = document.querySelector(
+          "div.u-ellipsis-overflow"
+        ).textContent;
         presenceData.details = "Browsing...";
         presenceData.state = `The Performance Rankings (for ${selected}) [${gamemode}]`;
         presenceData.smallImageKey = "searching";
@@ -100,15 +108,17 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reading...";
       presenceData.state = "A Forum Post";
       presenceData.smallImageKey = "reading";
-    } else if (isNaN(parseInt(document.location.pathname.split("/")[3])) == false) {
-      forumName = document.querySelector("h1.forum-title__name a.link--white.link--no-underline")
-        .textContent
-        .replace(/[\n|\r][\s\S][\s\S]/g, "")
+    } else if (
+      isNaN(parseInt(document.location.pathname.split("/")[3])) == false
+    ) {
+      forumName = document
+        .querySelector("h1.forum-title__name a.link--white.link--no-underline")
+        .textContent.replace(/[\n|\r][\s\S][\s\S]/g, "")
         .trimStart()
         .trimEnd();
-        presenceData.details = "Browsing...";
-        presenceData.state = `Forums (${forumName})`;
-        presenceData.smallImageKey = "searching";
+      presenceData.details = "Browsing...";
+      presenceData.state = `Forums (${forumName})`;
+      presenceData.smallImageKey = "searching";
     } else {
       presenceData.details = "Browsing...";
       presenceData.state = "The Forums";
@@ -171,13 +181,20 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Their Watchlists";
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.startsWith("/users")) {
-    profileName = (document.querySelector("h1.profile-info__name  span.u-ellipsis-pre-overflow") as HTMLElement).textContent;
+    profileName = (
+      document.querySelector(
+        "h1.profile-info__name  span.u-ellipsis-pre-overflow"
+      ) as HTMLElement
+    ).textContent;
     rank = document.querySelector(".value-display__value").textContent;
-    pp = document.querySelector(".value-display--pp .value-display__value").textContent;
+    pp = document.querySelector(
+      ".value-display--pp .value-display__value"
+    ).textContent;
     profileRanking = `Rank: ${rank} / ${pp}pp`;
-    presenceData.details = document.querySelector("div.u-relative").textContent == profileName
-    ? `Looking at ${profileName}'s Profile (Their Own)`
-    : `Looking at ${profileName}'s Profile`;
+    presenceData.details =
+      document.querySelector("div.u-relative").textContent == profileName
+        ? `Looking at ${profileName}'s Profile (Their Own)`
+        : `Looking at ${profileName}'s Profile`;
     presenceData.state = profileRanking;
     presenceData.smallImageKey = "reading";
   } else {

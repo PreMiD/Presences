@@ -5,13 +5,17 @@
   },
   "service": "LookMovie",
   "description": {
-    "en": "Watch all new and old movies on line in FHD quality and subtitles for free."
+    "en": "Watch all new and old movies on line in FHD quality and subtitles for free.",
+    "nl": "Bekijk gratis alle nieuwe en oude films online in HD-kwaliteit en ondertitels."
   },
   "url": "lookmovie.io",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/vlSumUl.png",
   "thumbnail": "https://i.imgur.com/nseTbMZ.png",
   "color": "#ffcc00",
-  "tags": ["lookmovie", "streaming"],
+  "tags": [
+    "lookmovie",
+    "streaming"
+  ],
   "category": "videos"
 }

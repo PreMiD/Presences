@@ -6,10 +6,11 @@
   },
   "service": "GitLab",
   "description": {
-    "en": "GitLab is a project management and code versioning system as well as a social network platform made for developers."
+    "en": "GitLab is a project management and code versioning system as well as a social network platform made for developers.",
+    "nl": "GitLab is a project management and code versioning system as well as a social network platform made for developers."
   },
   "url": "gitlab.com",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/SWx8pPn.png",
   "thumbnail": "https://i.imgur.com/ISBVR2q.png",
   "color": "#ff4400",
@@ -20,5 +21,13 @@
     "gitlab"
   ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*gitlab[.]com[/]"
+  "regExp": "([a-z0-9-]+[.])*gitlab[.]com[/]",
+  "settings": [
+    {
+      "id": "lock",
+      "icon": "fas fa-lock",
+      "title": "Hide Private",
+      "value": true
+    }
+  ]
 }

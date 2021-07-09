@@ -6,10 +6,11 @@
   },
   "url": "www.motorsport.com",
   "description": {
-    "en": "Motorsport.com is a website specializing in motor racing news. Sports like Formula 1, NASCAR, IndyCar, MotoGP, and WEC."
+    "en": "Motorsport.com is a website specializing in motor racing news. Sports like Formula 1, NASCAR, IndyCar, MotoGP, and WEC.",
+    "nl": "Motorsport.com is een website die gespecialiseerd is in nieuws over autoraces. Sporten zoals Formule 1, NASCAR, IndyCar, MotoGP en WEC."
   },
   "service": "motorsport.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/Dvs107P.png",
   "thumbnail": "https://i.imgur.com/7ha5AqJ.jpg",
   "color": "#E7FF7B",

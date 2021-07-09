@@ -5,13 +5,23 @@
   },
   "service": "WoolyPooly",
   "description": {
-    "en": "WoolyPooly is one of the most profitable pools with our focus on minimal commission fees for PPLNS & SOLO reward systems."
+    "en": "WoolyPooly is one of the most profitable pools with our focus on minimal commission fees for PPLNS & SOLO reward systems.",
+    "zh_CN": "WoolyPooly是最有利可图的矿池之一。我们专注于PPLNS & SOLO奖励系统的最低佣金费率。",
+    "ru": "WoolyPooly - один из самых прибыльных пулов, благодаря системам вознаграждения PPLNS и SOLO, а так же низким комиссиям.",
+    "fa_IR": "WoolyPooly با تشکر از سیستم پاداش PPLNS & SOLO و هزینه های کمی برای تجارت ، یکی از استخرهای سودآور است",
+    "ga_IE": "Tá WoolyPooly ar cheann de na linnte is brabúsaí lenár bhfócas ar tháillí coimisiúin íosta do chórais luaíochta PPLNS & SOLO.",
+    "nl": "WoolyPooly is een van de meest winstgevende pools met onze focus op minimale commissiekosten voor PPLNS & SOLO-beloningssystemen."
   },
   "url": "woolypooly.com",
-  "version": "1.0.0",
+  "version": "1.1.3",
   "logo": "https://i.imgur.com/X2sf9rc.png",
   "thumbnail": "https://i.imgur.com/RVtEVMf.png",
   "color": "#3d89f5",
-  "tags": ["crypto", "mining", "blockchain", "network"],
+  "tags": [
+    "crypto",
+    "mining",
+    "blockchain",
+    "network"
+  ],
   "category": "other"
 }

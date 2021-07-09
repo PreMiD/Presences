@@ -11,32 +11,31 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as () => void,
-  get function(): () => void {
-    return this._function;
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
-  },
-  get present(): boolean {
-    return this._function !== null;
-  }
-},
-
-/**
- * Initialize/reset presenceData.
- */
- resetData = (
-  defaultData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  }
-): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-  presenceData = { ...defaultData };
-};
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
+  };
 
 ((): void => {
   let raceStamp: number = null;
@@ -52,8 +51,8 @@ const updateCallback = {
     updateCallback.function = (): void => {
       if (document.querySelector(".gameView")) {
         presenceData.details = "Playing a race";
-        const gameStatusLabel = document.querySelector(".gameStatusLabel")
-          .textContent;
+        const gameStatusLabel =
+          document.querySelector(".gameStatusLabel").textContent;
 
         if (gameStatusLabel === "Waiting for more people...") {
           presenceData.state = "Waiting for more people...";
@@ -74,9 +73,9 @@ const updateCallback = {
           gameStatusLabel === "Go!"
         ) {
           const textBox = document.querySelector(
-            "table.gameView > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div > div"
-          ),
-           lettersTotal = textBox.textContent.length;
+              "table.gameView > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div > div"
+            ),
+            lettersTotal = textBox.textContent.length;
           let lettersTyped = 0;
           for (const i in textBox.children) {
             if (
@@ -92,10 +91,10 @@ const updateCallback = {
             }
           }
           const percentage =
-            Math.round((lettersTyped / lettersTotal) * 10000) / 100,
-           wpm = document
-            .querySelector(".rankPanelWpm-self")
-            .textContent.toUpperCase();
+              Math.round((lettersTyped / lettersTotal) * 10000) / 100,
+            wpm = document
+              .querySelector(".rankPanelWpm-self")
+              .textContent.toUpperCase();
           presenceData.state = `${percentage}%, ${wpm}`;
           if (raceStamp === null) raceStamp = Math.floor(Date.now() / 1000);
           presenceData.startTimestamp = raceStamp;
@@ -105,14 +104,14 @@ const updateCallback = {
         ) {
           presenceData.details = "Just finished with a race";
           const wpm = document
-            .querySelector(".rankPanelWpm-self")
-            .textContent.toUpperCase(),
-           accuracy = document.querySelector(
-            ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)"
-          ).textContent,
-           time = document.querySelector(
-            ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(2)"
-          ).textContent;
+              .querySelector(".rankPanelWpm-self")
+              .textContent.toUpperCase(),
+            accuracy = document.querySelector(
+              ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)"
+            ).textContent,
+            time = document.querySelector(
+              ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(2)"
+            ).textContent;
           presenceData.state = `${wpm}, ${accuracy} acc., ${time}`;
           presenceData.startTimestamp = browsingStamp;
         }
@@ -149,13 +148,13 @@ const updateCallback = {
       } else if (currentPath[1] === "competitions") {
         presenceData.details = "Viewing the competition result";
         const option = document
-          .querySelector("option[selected]")
-          .textContent.trim(),
-         strong = document
-          .querySelector("div.themeContent > div:nth-child(5) > strong")
-          .textContent.trim()
-          .slice(0, -1)
-          .split(" ");
+            .querySelector("option[selected]")
+            .textContent.trim(),
+          strong = document
+            .querySelector("div.themeContent > div:nth-child(5) > strong")
+            .textContent.trim()
+            .slice(0, -1)
+            .split(" ");
         if (option === "day") presenceData.state = strong.join(" ");
         else if (option === "week")
           presenceData.state = `${strong[1]} ${strong[2]}, ${strong[4]}`;

@@ -11,70 +11,67 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as () => void,
-  get function(): () => void {
-    return this._function;
-  },
-  set function(parameter) {
-    this._function = parameter;
-  },
-  get present(): boolean {
-    return this._function !== null;
-  }
-},
-
-/**
- * Initialize/reset presenceData.
- */
- resetData = (
-  defaultData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  }
-): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-  presenceData = { ...defaultData };
-},
-
-/**
- * Function definitions for logging-related things.
- */
- logHandler = {
-  /**
-   * Handles not supported pages.
-   * @param isCritical If the URL is essential to the operation, this should be true, so it will output an error, not a warning.
-   */
-  pageNotSupported(isCritical = false): void {
-    if (isCritical)
-      presence.error(
-        "Whoops. It seems that this page is not supported. \nPlease report this to Hans5958#0969 on Discord."
-      );
-    else
-      presence.error(
-        "It seems that this page is not fully supported. \nPlease report this to Hans5958#0969 on Discord."
-      );
-    presence.info(currentURL.href);
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
   /**
-   * Handles fatal errors.
-   * @param error The error that it threw.
+   * Initialize/reset presenceData.
    */
-  fatalError(error: string): void {
-    presence.error(
-      "Fatal error! Terminating.\nPlease report this to Hans5958#0969 on Discord."
-    );
-    presence.info(currentURL.href);
-    presence.info(error);
-  }
-},
-
-/**
- * Search for URL parameters.
- * @param urlParam The parameter that you want to know about the value.
- */
- getURLParam = (urlParam: string): string => {
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
+  },
+  /**
+   * Function definitions for logging-related things.
+   */
+  logHandler = {
+    /**
+     * Handles not supported pages.
+     * @param isCritical If the URL is essential to the operation, this should be true, so it will output an error, not a warning.
+     */
+    pageNotSupported(isCritical = false): void {
+      if (isCritical)
+        presence.error(
+          "Whoops. It seems that this page is not supported. \nPlease report this to Hans5958#0969 on Discord."
+        );
+      else
+        presence.error(
+          "It seems that this page is not fully supported. \nPlease report this to Hans5958#0969 on Discord."
+        );
+      presence.info(currentURL.href);
+    },
+    /**
+     * Handles fatal errors.
+     * @param error The error that it threw.
+     */
+    fatalError(error: string): void {
+      presence.error(
+        "Fatal error! Terminating.\nPlease report this to Hans5958#0969 on Discord."
+      );
+      presence.info(currentURL.href);
+      presence.info(error);
+    }
+  },
+  /**
+   * Search for URL parameters.
+   * @param urlParam The parameter that you want to know about the value.
+   */
+  getURLParam = (urlParam: string): string => {
     return currentURL.searchParams.get(urlParam);
   },
   prepare = async (): Promise<void> => {
@@ -118,53 +115,54 @@ const updateCallback = {
       else profileType = "user";
 
       const lastItem = (array: NodeList | Array<unknown>): unknown => {
-        return array[array.length - 1];
-      },
-
-       getName = (override = false): string => {
-        try {
-          if (!override) {
-            try {
-              return document.querySelector(
-                "#content-container > div > div > div > div > div > a.user-link"
-              ).textContent;
-            } catch {
-              return document.querySelector(
-                "#root > main > div > div > div > div > div > div > div > div > span > a.user-link"
-              ).textContent;
+          return array[array.length - 1];
+        },
+        getName = (override = false): string => {
+          try {
+            if (!override) {
+              try {
+                return document.querySelector(
+                  "#content-container > div > div > div > div > div > a.user-link"
+                ).textContent;
+              } catch {
+                return document.querySelector(
+                  "#root > main > div > div > div > div > div > div > div > div > span > a.user-link"
+                ).textContent;
+              }
+            } else {
+              try {
+                return (
+                  lastItem(
+                    document.querySelectorAll("h1 .author .u .u")
+                  ) as Element
+                ).textContent;
+              } catch {
+                return document.querySelector("h1 .u .u").textContent;
+              }
             }
-          } else {
-            try {
-              return (lastItem(
-                document.querySelectorAll("h1 .author .u .u")
-              ) as Element).textContent;
-            } catch {
-              return document.querySelector("h1 .u .u").textContent;
-            }
+          } catch {
+            if (
+              currentPath[0].toLowerCase() ===
+              document
+                .querySelector("title")
+                .textContent.split(" ")[0]
+                .toLowerCase()
+            )
+              return document.querySelector("title").textContent.split(" ")[0];
+            else if (
+              currentPath[0].toLowerCase() ===
+              document
+                .querySelector("title")
+                .textContent.split(" by ")[1]
+                .split(" ")[0]
+                .toLowerCase()
+            )
+              return (presenceData.state = document
+                .querySelector("title")
+                .textContent.split(" by ")[1]
+                .split(" ")[0]);
           }
-        } catch {
-          if (
-            currentPath[0].toLowerCase() ===
-            document
-              .querySelector("title")
-              .textContent.split(" ")[0]
-              .toLowerCase()
-          )
-            return document.querySelector("title").textContent.split(" ")[0];
-          else if (
-            currentPath[0].toLowerCase() ===
-            document
-              .querySelector("title")
-              .textContent.split(" by ")[1]
-              .split(" ")[0]
-              .toLowerCase()
-          )
-            return (presenceData.state = document
-              .querySelector("title")
-              .textContent.split(" by ")[1]
-              .split(" ")[0]);
-        }
-      };
+        };
 
       updateCallback.function = (): void => {
         if (loadedPath !== currentURL.pathname || forceUpdate) {
@@ -235,9 +233,11 @@ const updateCallback = {
                 .join(" ");
             } else if (currentPath[0] === "daily-deviations") {
               presenceData.details = "Viewing daily deviations";
-              presenceData.state = (document.querySelector(
-                "#daily-deviation-picker"
-              ) as HTMLSelectElement).value;
+              presenceData.state = (
+                document.querySelector(
+                  "#daily-deviation-picker"
+                ) as HTMLSelectElement
+              ).value;
             } else if (currentPath[0] === "journals") {
               presenceData.details = "Viewing daily deviations";
               if (currentPath[1])
@@ -397,9 +397,8 @@ const updateCallback = {
 
               /* The functions below are vaild for users only. */
             } else if (currentPath[1] === "print") {
-              presenceData.details = document.querySelector(
-                "h1 .title"
-              ).textContent;
+              presenceData.details =
+                document.querySelector("h1 .title").textContent;
               presenceData.state = getName(true);
             } else if (currentPath[1] === "prints") {
               presenceData.details = `Viewing a user's prints`;
@@ -417,9 +416,8 @@ const updateCallback = {
               presenceData.state = getName();
             } else if (currentPath[1] === "journal") {
               if (currentPath[2]) {
-                presenceData.details = document.querySelector(
-                  "._2-k1X"
-                ).textContent;
+                presenceData.details =
+                  document.querySelector("._2-k1X").textContent;
                 presenceData.state = `${getName()} (journal)`;
               } else {
                 /* This part is only valid on the old theme. */
@@ -428,13 +426,11 @@ const updateCallback = {
               }
             } else if (currentPath[1] === "poll") {
               try {
-                presenceData.details = document.querySelector(
-                  "._1ddsf"
-                ).textContent;
+                presenceData.details =
+                  document.querySelector("._1ddsf").textContent;
               } catch {
-                presenceData.details = document.querySelector(
-                  ".gfMBk"
-                ).textContent;
+                presenceData.details =
+                  document.querySelector(".gfMBk").textContent;
               }
               presenceData.state = getName();
             } else if (currentPath[1] === "critique") {

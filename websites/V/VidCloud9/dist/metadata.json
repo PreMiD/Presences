@@ -1,14 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.3",
   "author": {
-    "name": "GURRMAN375D",
+    "name": "Gurr",
     "id": "446528923535278082"
   },
-  "service": "VidCloud9",
-  "description": {
-    "en": "VidCloud9 is a great place to find shows you missed or movies you are dying to see."
-  },
   "url": "vidcloud9.com",
-  "version": "2.0.5",
+  "description": {
+    "en": "VidCloud9 is a great place to find shows you missed or movies you are dying to see.",
+    "ga_IE": "Is áit iontach é VidCloud9 chun seónna a chaill tú nó scannáin a bhfuil tú ag fáil bháis a fheiceáil.",
+    "nl": "VidCloud9 is een geweldige plek om shows te vinden die je hebt gemist of films die je graag wilt zien."
+  },
+  "service": "VidCloud9",
+  "version": "2.0.9",
   "logo": "https://i.imgur.com/AEOuBRB.png",
   "thumbnail": "https://i.imgur.com/IeqotZd.png",
   "color": "#00050C",

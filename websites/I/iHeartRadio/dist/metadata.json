@@ -1,16 +1,23 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "iHeartRadio",
   "description": {
-    "en": "iHeartRadio is a free broadcast, podcast and streaming radio platform owned by iHeartMedia, Inc. It was founded in April 2008."
+    "en": "iHeartRadio is a free broadcast, podcast and streaming radio platform owned by iHeartMedia, Inc. It was founded in April 2008.",
+    "nl": "iHeartRadio is een gratis uitzend-, podcast- en streaming radioplatform dat eigendom is van iHeartMedia, Inc. Het werd opgericht in april 2008."
   },
   "url": "www.iheart.com",
-  "version": "1.1.6",
-  "logo": "https://i.gyazo.com/5e3a5846ee0601d93b717ac6a689f11c.png",
-  "thumbnail": "https://i.gyazo.com/d624c8a4691282087bb9f50812a6f53a.png",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/VhqYveJ.png",
+  "thumbnail": "https://i.imgur.com/jb8OK5e.png",
   "color": "#C42224",
   "tags": [
     "iheartradio",

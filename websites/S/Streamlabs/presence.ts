@@ -64,9 +64,8 @@ presence.on("UpdateData", async () => {
     }
 
     if (document.location.pathname.includes("/clips/watch")) {
-      const video: HTMLVideoElement = document.querySelector(
-        ".video-js > video"
-      );
+      const video: HTMLVideoElement =
+        document.querySelector(".video-js > video");
       clipTitle = document
         .querySelector(".clip__action-info > div:nth-child(1)")
         .innerHTML.split(" ");

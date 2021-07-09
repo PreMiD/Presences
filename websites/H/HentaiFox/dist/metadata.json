@@ -6,10 +6,11 @@
   "service": "HentaiFox",
   "description": {
     "tr": "HentaiFox hentai manga ve doujinshi İngilizce çeviri yapan en popüler ücretsiz hentai sitelerinden biridir.",
-    "en": "HentaiFox is one of the most popular free hentai sites around for English translated hentai manga and doujinshi."
+    "en": "HentaiFox is one of the most popular free hentai sites around for English translated hentai manga and doujinshi.",
+    "nl": "HentaiFox is een van de meest populaire gratis hentai-sites voor Engels vertaalde hentai-manga en doujinshi."
   },
   "url": "hentaifox.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/OcUEF3h.png",
   "thumbnail": "https://i.imgur.com/aTgT0rO.png",
   "color": "#ff9f08",

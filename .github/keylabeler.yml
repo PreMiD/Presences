@@ -9,4 +9,5 @@ matchBody: false
 
 # Explicit keyword mappings to labels. Form of match:label. Required.
 labelMappings:
-    bug: bug
+    "[Presence | Bug]": bug
+    "[Presence | Feature Request]": "feature request"

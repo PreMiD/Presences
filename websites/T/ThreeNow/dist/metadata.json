@@ -5,10 +5,11 @@
   },
   "url": "www.threenow.co.nz",
   "description": {
-    "en": "Watch the latest TV On Demand episodes of all your favourite shows from Three with ThreeNow. Watch Three livestream, Newshub, Three Movies and Three shows."
+    "en": "Watch the latest TV On Demand episodes of all your favourite shows from Three with ThreeNow. Watch Three livestream, Newshub, Three Movies and Three shows.",
+    "nl": "Bekijk de nieuwste TV On Demand-afleveringen van al uw favoriete programma's van Three met ThreeNow. Bekijk Three livestream, Newshub, Three Movies en Three shows."
   },
   "service": "ThreeNow",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/t7j0bcF.png",
   "thumbnail": "https://i.imgur.com/N8CRfMJ.png",
   "color": "#FF0050",

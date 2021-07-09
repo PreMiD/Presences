@@ -1,19 +1,25 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
   },
+  "contributors": [{
+    "name": "Alexx",
+    "id": "604182077088202784"
+  }],
   "service": "Apple Music",
   "description": {
     "en": "Apple Music is a music and video streaming service developed by Apple Inc. Users select music to stream to their device on-demand, or they can listen to existing, curated playlists. The service also includes the Internet radio station Beats 1, which broadcasts live to over 100 countries 24 hours a day.",
     "zh_TW": "Apple Music是蘋果公司推出的一款線上音樂串流媒體服務。",
-    "zh_CN": "Apple Music是苹果推出的流行音乐界又一位新成员。"
+    "zh_CN": "Apple Music是苹果推出的流行音乐界又一位新成员。",
+    "ga_IE": "Is seirbhís sruthú ceoil agus físe é Apple Music a d’fhorbair Apple Inc. Roghnaíonn úsáideoirí ceol le sruthú chuig a bhfeiste ar éileamh, nó is féidir leo éisteacht le seinmliostaí coimeádaithe atá ann cheana. Cuimsíonn an tseirbhís an stáisiún raidió Idirlín Beats 1 freisin, a chraolann beo go breis agus 100 tír 24 uair sa lá.",
+    "nl": "Apple Music is een muziek- en videostreamingservice die is ontwikkeld door Apple Inc. Gebruikers selecteren muziek om on-demand naar hun apparaat te streamen, of ze kunnen naar bestaande, samengestelde afspeellijsten luisteren. De dienst omvat ook het internetradiostation Beats 1, dat 24 uur per dag live uitzendt naar meer dan 100 landen."
   },
   "url": "music.apple.com",
-  "version": "1.2.10",
-  "logo": "https://i.gyazo.com/953a27f5dc6ec95ccb792957b699e3de.png",
-  "thumbnail": "https://i.gyazo.com/a85cbd963a42138975b16436b3cfb3fe.png",
-  "color": "#fff",
+  "version": "1.3.5",
+  "logo": "https://i.imgur.com/06HbqaF.png",
+  "thumbnail": "https://i.imgur.com/dOYmE1u.png",
+  "color": "#FA273F",
   "tags": [
     "apple-music",
     "apple",

@@ -70,8 +70,9 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
       prevState = data.state;
       cp = Date.now();
-      currTime = document.querySelector("#chat div.timeState.timer")
-        .textContent;
+      currTime = document.querySelector(
+        "#chat div.timeState.timer"
+      ).textContent;
     }
 
     const timestamps = getTimestamps(cp, currTime);

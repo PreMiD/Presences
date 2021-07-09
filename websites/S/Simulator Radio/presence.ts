@@ -2,22 +2,39 @@ const presence = new Presence({
   clientId: "651455140477272065"
 });
 
-let strack, sartist, slisteners, sDJ;
+let currentTitle = "Simulator Radio",
+  currentArtist = "Your #1 Simulation Station",
+  currentListeners = 0,
+  currentDj = "Otto";
 
 function newStats(): void {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function (): void {
-    if (this.readyState == 4 && this.status == 200) {
-      const data = JSON.parse(this.responseText);
-      strack = data.nowplaying.title;
-      sartist = data.nowplaying.artists;
-      slisteners = data.listeners;
-      sDJ = data.dj.displayname;
+  fetch("https://apiv2.simulatorradio.com/metadata/combined?premid").then(
+    (response) => {
+      if (response.status == 200) {
+        response.json().then((data) => {
+          currentTitle = data.now_playing.title;
+          currentArtist = data.now_playing.artists;
+          currentListeners = data.listeners;
+          currentDj = data.djs.now.displayname;
+        });
+      }
     }
-  };
-  xhttp.open("GET", "https://api.simulatorradio.com/premid", true);
-  xhttp.withCredentials = true;
-  xhttp.send();
+  );
+}
+
+function pushMusicPresence(presenceData: PresenceData): void {
+  presenceData.details = currentTitle + " - " + currentArtist;
+  presenceData.state = "Listening to " + currentDj;
+  presenceData.smallImageText =
+    currentListeners != 0 ? "Listeners: " + currentListeners : "";
+  presenceData.smallImageKey = "play";
+
+  if (lastTitle != currentTitle) {
+    lastTitle = currentTitle;
+    lastTimeStart = Math.floor(Date.now() / 1000);
+  }
+
+  presenceData.startTimestamp = lastTimeStart;
 }
 
 setInterval(newStats, 10000);
@@ -32,22 +49,37 @@ presence.on("UpdateData", function () {
     largeImageKey: "srlogo"
   };
 
-  if (document.querySelector(".fa.fa-play-circle") !== null) {
+  if (
+    document.querySelector(".fas.fa-play") !== null ||
+    document.querySelector(".fa.fa-play") !== null /*Paused*/
+  ) {
     presenceData.startTimestamp = browsingStamp;
 
     if (document.location.pathname.includes("/request")) {
       presenceData.details = "Requesting...";
       presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/timetable")) {
-      presenceData.details = "Viewing the Timetable for:";
+      presenceData.details = "Viewing the Timetable";
       presenceData.state = document.querySelector("#timetable-day").textContent;
     } else if (document.location.pathname.includes("/home")) {
-      presenceData.details = "Viewing the Homepage";
-    } else if (document.location.pathname.includes("/articles")) {
+      pushMusicPresence(presenceData);
+    } else if (
+      document.location.pathname.includes("/articles") ||
+      document.location.pathname.includes("/news")
+    ) {
       presenceData.details = "Browsing the Blog";
-    } else if (document.location.pathname.includes("/post")) {
-      presenceData.details = "Reading Blog Post:";
-      presenceData.state = document.querySelector(".blog-title").textContent;
+    } else if (
+      document.location.pathname.includes("/post") ||
+      document.location.pathname.includes("/blog")
+    ) {
+      const possibilityOne = document.querySelector(".blog-title"),
+        possibilityTwo = document.querySelector(".blog-page-title");
+
+      presenceData.details = "Reading Blog Post";
+      presenceData.state =
+        possibilityOne != null
+          ? possibilityOne.textContent
+          : possibilityTwo.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/team")) {
       presenceData.details = "Viewing the Team";
@@ -56,17 +88,7 @@ presence.on("UpdateData", function () {
       presenceData.smallImageKey = "reading";
     }
   } else {
-    presenceData.details = strack + " - " + sartist;
-    presenceData.state = "Listening to " + sDJ;
-    presenceData.smallImageText = "Listeners: " + slisteners;
-    presenceData.smallImageKey = "play";
-
-    if (lastTitle != strack) {
-      lastTitle = strack;
-      lastTimeStart = Math.floor(Date.now() / 1000);
-    }
-
-    presenceData.startTimestamp = lastTimeStart;
+    pushMusicPresence(presenceData);
   }
 
   if (presenceData.details == null) {

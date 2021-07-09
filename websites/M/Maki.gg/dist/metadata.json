@@ -5,10 +5,11 @@
   },
   "service": "Maki.gg",
   "description": {
-    "en": "A multi-purpose bot featuring server management, leveling, economy, administration tools, fun commands, and more with an intuitive dashboard!"
+    "en": "A multi-purpose bot featuring server management, leveling, economy, administration tools, fun commands, and more with an intuitive dashboard!",
+    "nl": "Een multifunctionele bot met serverbeheer, nivellering, economie, beheertools, leuke opdrachten en meer met een intuïtief dashboard!"
   },
   "url": "maki.gg",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/xzx4dEZ.gif",
   "thumbnail": "https://i.imgur.com/6CnKHu1.png",
   "color": "#F24443",

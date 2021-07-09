@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "SOAP2DAY",
+  "author": {
+    "name": "fun",
+    "id": "217348698294714370"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/WAOvAe6.png",
+  "thumbnail": "https://i.imgur.com/AEHBaRS.png",
+  "version": "1.0.2",
+  "color": "#9eeae7",
+  "tags": [
+    "stream",
+    "soap2day",
+    "movies",
+    "tv",
+    "friends"
+  ],
+  "description": {
+    "en": "You can watch all videos without logging in or registration. Soap2day is free all the time, but there are few ads on videoplayer page."
+  },
+  "url": "soap2day.to",
+  "regExp": "([a-z0-9]+[.])*(soap2day|s2dfree)([.][a-z]+)"
+}

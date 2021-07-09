@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "Paulé",
+    "id": "376812375795302402"
+  },
+  "service": "Google Fonts",
+  "description": {
+    "en": "Google Fonts is a Google service which provides more than a thousand free licensed font families for Android projects or CSS use.",
+    "fr": "Google Fonts est un service de Google qui propose plus de mille polices d'écriture gratuites et sous licences libres à disposition de projets Android ou d'applications web (via CSS).",
+    "nl": "Google Fonts is een Google-service die meer dan duizend gratis gelicentieerde lettertypefamilies biedt voor Android-projecten of CSS-gebruik."
+  },
+  "url": "fonts.google.com",
+  "version": "1.0.5",
+  "logo": "https://i.imgur.com/l1S996y.png",
+  "thumbnail": "https://i.imgur.com/lVved9l.png",
+  "color": "#ff5756",
+  "tags": [
+    "google",
+    "fonts"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "showButton",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

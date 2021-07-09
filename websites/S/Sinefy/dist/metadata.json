@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Sinefy",
+  "category": "videos",
+  "version": "1.0.2",
+  "author": {
+    "name": "EGGSY",
+    "id": "162969778699501569"
+  },
+  "description": {
+    "en": "Sinefy is a Turkish video streaming service for watching movies and TV shows in full HD.",
+    "tr": "Sinefy, yüksek kalitede Türkçe dublajlı ve altyazılı dizi ve film izleyebileceğiniz bir internet sitesidir.",
+    "nl": "Sinefy is een Turkse videostreamingdienst voor het bekijken van films en tv-programma's in full HD."
+  },
+  "url": "sinefy.com",
+  "color": "#fdc516",
+  "logo": "https://i.imgur.com/8JBfyCa.jpg",
+  "thumbnail": "https://i.imgur.com/UgFuRve.png",
+  "tags": [
+    "video",
+    "turkish"
+  ],
+  "iframe": true,
+  "settings": [
+    {
+      "icon": "fas fa-address-card",
+      "id": "buttons",
+      "title": "Butonları Göster",
+      "value": true
+    }
+  ]
+}

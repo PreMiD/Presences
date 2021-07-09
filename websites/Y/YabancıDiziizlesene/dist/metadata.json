@@ -1,0 +1,28 @@
+{
+  "author": {
+    "name": "Kabal",
+    "id": "269581360316940299"
+  },
+  "service": "YabancıDiziizlesene",
+  "description": {
+    "en": "YabancıDiziizlesene is an online series and movie viewing site that offers the possibility of watching 1080p.",
+    "tr": "YabancıDiziizlesene, 1080p dizi izleme imkanını sunan, online yabancı dizi ve film izleme sitesidir.",
+    "ga_IE": "Is é atá i YabancıDiziizlesene ná sraith ar líne agus suíomh féachana scannáin a thairgeann an fhéidearthacht féachaint ar 1080p.",
+    "nl": "YabancıDiziizlesene is een online site voor het bekijken van series en films die de mogelijkheid biedt om 1080p te bekijken."
+  },
+  "url": "yabancidiziizlesene.com",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/vypcMxL.png",
+  "thumbnail": "https://i.imgur.com/2PnNeRa.png",
+  "color": "#FFCC74",
+  "tags": [
+    "diziay",
+    "yabancı",
+    "dizi",
+    "series",
+    "movie",
+    "video"
+  ],
+  "iframe": true,
+  "category": "videos"
+}

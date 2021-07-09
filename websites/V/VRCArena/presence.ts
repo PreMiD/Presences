@@ -11,6 +11,14 @@ presence.on("UpdateData", async () => {
     privacymode = await presence.getSetting("privacy");
 
   if (document.location.hostname == "www.vrcarena.com") {
+    if (!privacymode) {
+      presenceData.buttons = [
+        {
+          label: "View on VRCArena",
+          url: document.URL.split("?")[0]
+        }
+      ];
+    }
     // Categories
     if (document.location.pathname.includes("/category")) {
       switch (document.location.pathname) {
@@ -50,10 +58,12 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Creating an asset";
       } else {
         if (privacymode === false) {
-          const assetName = document.querySelector("h1.MuiTypography-root > a")
-              .textContent,
-            parentforinfo = document.querySelector("h1.MuiTypography-root")
-              .parentNode,
+          const assetName = document.querySelector(
+              "h1.MuiTypography-root > a"
+            ).textContent,
+            parentforinfo = document.querySelector(
+              "h1.MuiTypography-root"
+            ).parentNode,
             otherinfo = parentforinfo.querySelector("div > div").textContent;
           presenceData.details = assetName;
           presenceData.state = otherinfo;
@@ -64,8 +74,9 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
       // User pages
     } else if (document.location.pathname.includes("/users")) {
-      const thetitle = document.querySelector("h1.MuiTypography-root")
-        .textContent;
+      const thetitle = document.querySelector(
+        "h1.MuiTypography-root"
+      ).textContent;
       if (thetitle == "All Users") {
         presenceData.details = "Browsing users";
       } else {
@@ -79,8 +90,9 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
       // Pages that aren't the focus of the website will be kept in the else statement.
     } else if (document.location.pathname.includes("/species")) {
-      const thetitle = document.querySelector("h1.MuiTypography-root")
-        .textContent;
+      const thetitle = document.querySelector(
+        "h1.MuiTypography-root"
+      ).textContent;
       presenceData.details = "Browsing species";
       if (thetitle != "All Species") {
         if (privacymode === false) {

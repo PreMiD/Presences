@@ -6,12 +6,13 @@
   },
   "url": "www.saltybet.com",
   "description": {
-    "en": "SaltyBet (also known as Salty's Dream Cast Casino) is a betting site where users may bet fake money on the outcomes of A.I.-controlled M.U.G.E.N battles."
+    "en": "SaltyBet (also known as Salty's Dream Cast Casino) is a betting site where users may bet fake money on the outcomes of A.I.-controlled M.U.G.E.N battles.",
+    "nl": "SaltyBet (ook bekend als Salty's Dream Cast Casino) is een goksite waar gebruikers nepgeld kunnen inzetten op de uitkomsten van door A.I. gecontroleerde M.U.G.E.N gevechten."
   },
   "service": "Salty Bet",
-  "version": "1.1.0",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/0GEzMXM.png",
-  "thumbnail": "https://i.imgur.com/gnu0OWE.png",
+  "thumbnail": "https://i.imgur.com/thkngQH.png",
   "color": "#00adef",
   "tags": [
     "games",
@@ -22,5 +23,19 @@
     "streaming",
     "mugen"
   ],
-  "category": "games"
+  "category": "games",
+  "settings": [
+    {
+      "id": "bet",
+      "title": "Show Bet Status",
+      "icon": "fad fa-dollar-sign",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }

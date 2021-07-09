@@ -6,10 +6,11 @@
   "service": "Punch! Fansub",
   "description": {
     "en": "Punch! Fansub is a brazillian fansub and animes streaming website",
-    "pt_BR": "Punch! Fansub é uma fansub brasileira e um site de streaming de animes"
+    "pt_BR": "Punch! Fansub é uma fansub brasileira e um site de streaming de animes",
+    "nl": "Punch! Fansub is een Braziliaanse fansub en anime-streamingwebsite"
   },
   "url": "punchsubs.net",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "logo": "https://i.imgur.com/pyU2frB.png",
   "thumbnail": "https://i.imgur.com/z14DdrT.png",
   "color": "#002e5e",

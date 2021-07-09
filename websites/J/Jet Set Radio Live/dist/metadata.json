@@ -12,10 +12,11 @@
   ],
   "service": "Jet Set Radio Live",
   "description": {
-    "en": "Yo! You've heard about Jet Set Radio, right? It's only the hottest radio station straight outta Tokyo-to! Tune in. Turn on. Jet Set Radiooo!!!"
+    "en": "Yo! You've heard about Jet Set Radio, right? It's only the hottest radio station straight outta Tokyo-to! Tune in. Turn on. Jet Set Radiooo!!!",
+    "nl": "Yo! Je hebt toch van Jet Set Radio gehoord? Het is alleen het populairste radiostation dat rechtstreeks uit Tokio komt! Stem af. Zet aan. Jetset Radiooo !!!"
   },
   "url": "jetsetradio.live",
-  "version": "2.0.1",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/ZiIN6t9.png",
   "thumbnail": "https://i.imgur.com/TmgNbn4.jpeg",
   "color": "#FFE222",
@@ -35,6 +36,12 @@
       "id": "timestamp",
       "title": "Show Timestamps",
       "icon": "fas fa-clock",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Presence Buttons",
+      "icon": "fas fa-th-large",
       "value": true
     }
   ]

@@ -6,13 +6,18 @@
   "service": "cda.pl",
   "description": {
     "en": "The largest independent VOD service in Poland. Offering high quality films and series.",
-    "pl": "Największy niezależny serwis VOD w Polsce. Oferuje wysokiej jakości filmy i seriale."
+    "pl": "Największy niezależny serwis VOD w Polsce. Oferuje wysokiej jakości filmy i seriale.",
+    "nl": "De grootste onafhankelijke VOD-service in Polen. Het aanbieden van films en series van hoge kwaliteit."
   },
   "url": "www.cda.pl",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/SQlMvJh.jpg",
   "thumbnail": "https://i.imgur.com/z9J4MSd.png",
   "color": "#B22907",
-  "tags": ["video", "movies", "vod"],
+  "tags": [
+    "video",
+    "movies",
+    "vod"
+  ],
   "category": "videos"
 }

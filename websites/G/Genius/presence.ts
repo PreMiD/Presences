@@ -1,119 +1,162 @@
-var presence = new Presence({
-    clientId: "630480419598499840"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+interface LangStrings {
+  play: string;
+  pause: string;
+  watch: string;
+  search: string;
+  searching: string;
+  profile: string;
+  article: string;
+  reading: string;
+  lyrics: string;
+  viewLyrics: string;
+  home: string;
+  viewAlbum: string;
+  buttonAlbum: string;
 }
 
-var elapsed = Math.floor(Date.now() / 1000);
-var artist;
-
-presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "genius-logo"
+const presence = new Presence({
+    clientId: "809133308604055622"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  getStrings = async (): Promise<LangStrings> => {
+    return presence.getStrings(
+      {
+        play: "general.playing",
+        pause: "general.paused",
+        watch: "general.watching",
+        search: "general.searchFor",
+        searching: "general.search",
+        profile: "general.viewProfile",
+        article: "general.readingArticle",
+        reading: "general.reading",
+        lyrics: "genius.lyrics",
+        viewLyrics: "genius.viewLyrics",
+        home: "genius.viewHome",
+        viewAlbum: "genius.viewAlbum",
+        buttonAlbum: "general.buttonViewAlbum"
+      },
+      await presence.getSetting("lang")
+    );
   };
 
-  var lyricCheck = document.querySelector(".song_body-lyrics") ? true : false;
-  var profileCheck = document.querySelector(
-    ".profile_identity-name_iq_and_role_icon"
-  )
-    ? true
-    : false;
-  var path = document.location.pathname;
-  if (path == "/") {
-    data.details = "Viewing Homepage";
-    data.startTimestamp = elapsed;
+let strings: Promise<LangStrings> = getStrings(),
+  oldLang: string = null;
+
+presence.on("UpdateData", async () => {
+  const newLang = await presence.getSetting("lang"),
+    buttons = await presence.getSetting("buttons");
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+
+  const presenceData: PresenceData = {
+      largeImageKey: "genius",
+      startTimestamp: browsingStamp
+    },
+    path = document.location.pathname;
+
+  if (path === "/") {
+    presenceData.details = (await strings).home;
   } else if (path.startsWith("/a/")) {
-    var article = document.querySelector("h1.article_title").textContent;
+    let article = document.querySelector("h1.article_title").textContent;
     if (article.length > 128) {
       article = article.substring(0, 125) + "...";
     }
-    data.details = "Viewing an Article";
-    data.state = article;
-    data.startTimestamp = elapsed;
+    presenceData.details = (await strings).article;
+    presenceData.state = article;
+    presenceData.smallImageKey = "reading";
+    presenceData.smallImageText = (await strings).reading;
   } else if (path.startsWith("/artists/")) {
-    artist = document
+    presenceData.details = (await strings).profile;
+    presenceData.state = document
       .querySelector("h1.profile_identity-name_iq_and_role_icon")
       .innerHTML.split("<")[0];
-    data.details = "Viewing Artist Profile";
-    data.state = artist;
-    data.startTimestamp = elapsed;
   } else if (path.startsWith("/albums/")) {
-    var album = document.querySelector(
+    presenceData.details = (await strings).viewAlbum;
+    presenceData.state = document.querySelector(
       "h1.header_with_cover_art-primary_info-title"
     ).textContent;
-    data.details = "Viewing an Album";
-    data.state = album;
-    data.startTimestamp = elapsed;
-  } else if (lyricCheck) {
-    var song = document.querySelector(
-      "h1.header_with_cover_art-primary_info-title"
-    ).textContent;
-    artist = document.querySelector(
-      "a.header_with_cover_art-primary_info-primary_artist"
-    ).textContent;
-    data.details = "Viewing Lyrics";
-    data.state = artist + " - " + song;
-    data.startTimestamp = elapsed;
-  } else if (profileCheck) {
-    var user = document
+    if (buttons)
+      presenceData.buttons = [
+        {
+          label: (await strings).buttonAlbum,
+          url: document.URL
+        }
+      ];
+  } else if (
+    document.querySelector("div[class*='SongPageGrid']") !== null ||
+    document.querySelector(".song_body-lyrics") !== null
+  ) {
+    const song =
+        document
+          .querySelector("h1[class*='SongHeader__Title-sc']")
+          ?.textContent.trim() ||
+        document
+          .querySelector("h1.header_with_cover_art-primary_info-title")
+          ?.textContent.trim(),
+      artist =
+        document
+          .querySelector("a[class*='SongHeader__Artist']")
+          ?.textContent.trim() ||
+        document
+          .querySelector("a.header_with_cover_art-primary_info-primary_artist")
+          ?.textContent.trim();
+    presenceData.details = (await strings).lyrics;
+    presenceData.state = artist + " - " + song;
+    if (buttons)
+      presenceData.buttons = [
+        {
+          label: (await strings).viewLyrics,
+          url: document.URL
+        }
+      ];
+  } else if (
+    document.querySelector(".profile_identity-name_iq_and_role_icon") !== null
+  ) {
+    presenceData.details = (await strings).profile;
+    presenceData.state = document
       .querySelector("h1.profile_identity-name_iq_and_role_icon")
       .innerHTML.split("<")[0];
-    data.details = "Viewing a Profile";
-    data.state = user;
-    data.startTimestamp = elapsed;
   } else if (path.startsWith("/videos/")) {
-    var video: HTMLVideoElement = document.querySelector("video.vjs-tech");
-    var title = document.querySelector("h1.article_title").textContent;
+    const video: HTMLVideoElement = document.querySelector("video.vjs-tech");
+    let title = document.querySelector("h1.article_title").textContent;
     if (title.length > 128) {
       title = title.substring(0, 125) + "...";
     }
-    data.details = "Playing a Video";
-    data.state = title;
+    presenceData.details = (await strings).watch;
+    presenceData.state = title;
     if (video && !isNaN(video.duration)) {
-      var timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      const timestamps = presence.getTimestampsfromMedia(video);
 
-      data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      (data.startTimestamp = timestamps[0]),
-        (data.endTimestamp = timestamps[1]);
+      presenceData.startTimestamp = timestamps[0];
+      presenceData.endTimestamp = timestamps[1];
 
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
     }
   } else if (path.startsWith("/search")) {
-    var search = document.querySelector("h2.search_results_page-header")
-      .textContent;
-    data.details = "Searching for:";
-    data.state = search;
-    data.smallImageKey = "search";
-    data.smallImageText = "Searching";
-    data.startTimestamp = elapsed;
-  } else {
-    data.details = "Somewhere on-site";
-    data.startTimestamp = elapsed;
+    presenceData.details = (await strings).search;
+    presenceData.state = document.querySelector(
+      "h2.search_results_page-header"
+    ).textContent;
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = (await strings).searching;
   }
-  presence.setActivity(data);
+
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
 });

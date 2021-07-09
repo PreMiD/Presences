@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.3",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -14,17 +15,33 @@
     "en": "Quickly send and receive WhatsApp messages right from your computer.",
     "tr": "Bilgisayarınızdan hızlıca WhatsApp üzerinden mesaj gönderin ve alın.",
     "zh_CN": "WhatsApp是一款非常受欢迎的跨平台应用程序，用于智能手机之间的通讯。",
-    "zh_TW": "WhatsApp是Facebook公司的旗下一款用於智慧型手機的跨平台加密即時通訊應用程式。"
+    "zh_TW": "WhatsApp是Facebook公司的旗下一款用於智慧型手機的跨平台加密即時通訊應用程式。",
+    "nl": "Ontvang en verzend gemakkelijk WhatsApp-berichten vanaf je computer.",
+    "ga_IE": "Seol agus faigh teachtaireachtaí WhatsApp go tapa ó do ríomhaire."
   },
   "url": "web.whatsapp.com",
-  "version": "1.2.9",
-  "logo": "https://premid.is-inside.me/hYF0mBZI.png",
-  "thumbnail": "https://premid.is-inside.me/0JktExu1.jpg",
+  "version": "2.0.0",
+  "logo": "https://i.imgur.com/iI0LOkF.png",
+  "thumbnail": "https://i.imgur.com/Gk23OEd.jpg",
   "color": "#0dc143",
   "tags": [
     "whatsapp",
     "social",
     "media"
+  ],
+  "settings": [
+    {
+      "id": "showRecipient",
+      "title": "Show recipient name",
+      "icon": "fas fa-user-alt",
+      "value": true
+    },
+    {
+      "id": "showNumbers",
+      "title": "Show numbers",
+      "icon": "fas fa-shield-alt",
+      "value": false
+    }
   ],
   "category": "socials"
 }

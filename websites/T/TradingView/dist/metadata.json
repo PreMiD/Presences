@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Hibanka",
+    "id": "467658348158779393"
+  },
+  "url": [
+    "www.tradingview.com",
+    "status.tradingview.com"
+  ],
+  "description": {
+    "en": "Free Stock Charts, Stock Quotes and Trade Ideas",
+    "ru": "Бесплатные онлайн-графики акций, котировки и идеи",
+    "nl": "Gratis voorraadgrafieken, aandelenkoersen en handelsideeën"
+  },
+  "service": "TradingView",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/1LFiAqv.png",
+  "thumbnail": "https://i.imgur.com/ow48UTD.png",
+  "color": "#2196f3",
+  "tags": [
+    "markets",
+    "exchange",
+    "currency",
+    "crypto",
+    "stocks"
+  ],
+  "category": "other",
+  "regExp": "([a-z0-9]+)[.]tradingview[.]com"
+}

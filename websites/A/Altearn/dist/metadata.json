@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "fantomitechno 🦊",
+    "id": "563749920683720709"
+  },
+  "url": "altearn.xyz",
+  "description": {
+    "en": "Altearn is a non-profit association which aims to develop and implement solutions and events for educational, scientific or awareness purposes.",
+    "fr": "Altearn est une association à but non-lucratif qui vise à déveloper et mettre en place des solutions et événements dans un but pédagogique, scientifique ou de sensibilisation.",
+    "ga_IE": "Is cumann neamhbhrabúis é Altearn a bhfuil sé mar aidhm aige réitigh agus imeachtaí a fhorbairt agus a chur i bhfeidhm chun críocha oideachais, eolaíochta nó feasachta.",
+    "nl": "Altearn is een vereniging zonder winstoogmerk die tot doel heeft oplossingen en evenementen te ontwikkelen en te implementeren voor educatieve, wetenschappelijke of bewustmakingsdoeleinden."
+  },
+  "service": "Altearn",
+  "version": "1.1.3",
+  "logo": "https://i.imgur.com/FXRVkUd.png",
+  "thumbnail": "https://i.imgur.com/dWA3LHB.png",
+  "color": "#888888",
+  "tags": [
+    "community",
+    "altearn"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "button",
+      "if": {
+        "privacy": false
+      },
+      "title": "Add Button",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

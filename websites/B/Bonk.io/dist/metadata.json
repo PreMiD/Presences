@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Snazzah",
+    "id": "158049329150427136"
+  },
+  "url": "bonk.io",
+  "description": {
+    "en": "A multiplayer browser game where the objective is to knock all of the opponents off the edge of the screen and be the last man standing.",
+    "nl": "Een browsergame voor meerdere spelers waarbij het doel is om alle tegenstanders van de rand van het scherm te slaan en de laatste man te zijn."
+  },
+  "service": "Bonk.io",
+  "version": "1.1.3",
+  "logo": "https://i.imgur.com/rGFRJec.png",
+  "thumbnail": "https://i.imgur.com/i67aXvn.png",
+  "color": "#151f29",
+  "tags": [
+    "game",
+    "multiplayer",
+    "browser"
+  ],
+  "category": "games",
+  "iframe": true,
+  "settings": [
+    {
+      "id": "showName",
+      "title": "Show username",
+      "icon": "fas fa-user",
+      "value": true
+    }
+  ]
+}

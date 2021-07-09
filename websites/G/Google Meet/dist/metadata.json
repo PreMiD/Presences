@@ -6,14 +6,19 @@
   "url": "meet.google.com",
   "description": {
     "en": " Google Meet is a communication platform, developed by Google, which includes instant messaging, video chat, SMS and VOIP.",
-    "pt_BR": "Google Meet é uma plataforma de comunicação, desenvolvida pela Google, que inclui mensagens instantâneas, chat de vídeo, SMS e VOIP."
+    "pt_BR": "Google Meet é uma plataforma de comunicação, desenvolvida pela Google, que inclui mensagens instantâneas, chat de vídeo, SMS e VOIP.",
+    "nl": "Google Meet is een communicatieplatform ontwikkeld door Google en heeft de mogelijkheid om te chatten, te (video)bellen en te sms'en."
   },
   "service": "Google Meet",
-  "version": "1.2.2",
-  "logo": "https://i.imgur.com/OFbN8Uu.png",
+  "version": "1.2.6",
+  "logo": "https://i.imgur.com/LyrRnRS.png",
   "thumbnail": "https://i.imgur.com/6BRZ63d.png",
   "color": "#308574",
-  "tags": ["google", "meet", "video"],
+  "tags": [
+    "google",
+    "meet",
+    "video"
+  ],
   "category": "socials",
   "regExp": "meet[.]google([.][a-z]+)+[/]"
 }

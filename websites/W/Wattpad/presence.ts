@@ -1,19 +1,18 @@
-var presence = new Presence({
-  clientId: "619740858257899520"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "808753360152559716"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "wattpad-logo"
+    largeImageKey: "logo"
   };
 
-  var story;
-  var path = document.location.pathname;
-  var storyCheck = document.location.pathname.split("/")[1].match(/^\d/)
-    ? true
-    : false;
+  let story;
+  const path = document.location.pathname,
+    storyCheck = document.location.pathname.split("/")[1].match(/^\d/)
+      ? true
+      : false;
   if (path == "/home") {
     data.details = "Viewing Homepage";
     data.startTimestamp = browsingStamp;
@@ -21,7 +20,7 @@ presence.on("UpdateData", async () => {
     data.details = "Browsing Stories";
     data.startTimestamp = browsingStamp;
   } else if (path.startsWith("/user")) {
-    var user = document.querySelector("#alias").textContent;
+    const user = document.querySelector("#alias").textContent;
     data.details = "Viewing User Profile";
     data.state = user;
     data.startTimestamp = browsingStamp;
@@ -43,8 +42,9 @@ presence.on("UpdateData", async () => {
       data.details = "Setting-up a new Story";
       data.startTimestamp = browsingStamp;
     } else {
-      story = document.querySelector("div.works-item-metadata span.h4")
-        .textContent;
+      story = document.querySelector(
+        "div.works-item-metadata span.h4"
+      ).textContent;
       data.details = "Viewing their Story";
       data.state = story;
       data.startTimestamp = browsingStamp;
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (storyCheck) {
     story = document.querySelector("span.info h1.title").textContent;
-    var chapter = document.querySelector(".panel-reading h2").textContent;
+    const chapter = document.querySelector(".panel-reading h2").textContent;
     data.details = "Reading " + story;
     data.state = chapter;
     data.startTimestamp = browsingStamp;

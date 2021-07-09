@@ -1,92 +1,6 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  live: string;
-  browse: string;
-  viewPage: string;
-  home: string;
-  download: string;
-  jobs: string;
-  turbo: string;
-  partners: string;
-  press: string;
-  security: string;
-  access: string;
-  ads: string;
-  guidelines: string;
-  terms: string;
-  privacy: string;
-  cookie: string;
-  watchingLive: string;
-  watchingVid: string;
-  viewProfile: string;
-  viewCategory: string;
-  viewWallet: string;
-  viewEsports: string;
-  viewFollow: string;
-  viewTeam: string;
-  viewDropsInv: string;
-  viewDropsComp: string;
-  viewing: string;
-  searchingFor: string;
-  searchingSomething: string;
-  viewSettings: string;
-  viewFriends: string;
-  subs: string;
-  squad: string;
-  modStreamer: string;
-  readingAbout: string;
-  redeem: string;
-  camp: string;
-  campBasic: string;
-  campSetup: string;
-  campLevel: string;
-  campConnect: string;
-  campReward: string;
-  campMusic: string;
-  campLive: string;
-  dashboard: string;
-  dashboardManage: string;
-  manageRoles: string;
-  produce: string;
-  viewTheir: string;
-  channelAnaly: string;
-  streamSum: string;
-  achievements: string;
-  activity: string;
-  followList: string;
-  colls: string;
-  clips: string;
-  channelSettings: string;
-  moderationSettings: string;
-  dropsSettings: string;
-  tools: string;
-  extensions: string;
-  brand: string;
-  brandReal: string;
-  brandMadness: string;
-  brandExpression: string;
-  brandTogether: string;
-  brandWatch: string;
-  blogArchive: string;
-  readingArticle: string;
-  blogBrowse: string;
-  blogs: string;
-  help: string;
-  helpTopic: string;
-  helpTopicCatalog: string;
-  affiliate: string;
-  dev: string;
-  devProduct: string;
-  devShowcase: string;
-  devSupport: string;
-  devDocs: string;
-  incident: string;
-  uptime: string;
-  forums: string;
-  thread: string;
-  user: string;
-}
+let elapsed = Math.floor(Date.now() / 1000),
+  prevUrl = document.location.href,
+  oldLang = "en";
 
 const presence = new Presence({
     clientId: "802958789555781663"
@@ -96,7 +10,7 @@ const presence = new Presence({
       ? document.querySelector(query).textContent
       : undefined;
   },
-  getStrings = async (): Promise<LangStrings> => {
+  getStrings = async () => {
     return presence.getStrings(
       {
         play: "general.playing",
@@ -185,16 +99,15 @@ const presence = new Presence({
         uptime: "general.uptimeHistory",
         forums: "general.forums",
         thread: "general.readingThread",
-        user: "general.viewUser"
+        user: "general.viewUser",
+        watchStream: "general.buttonWatchStream",
+        watchVideo: "general.buttonWatchVideo"
       },
-      await presence.getSetting("lang")
+      oldLang
     );
   };
 
-let elapsed = Math.floor(Date.now() / 1000),
-  prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
-  oldLang: string = null;
+let strings = getStrings();
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
@@ -202,7 +115,7 @@ presence.on("UpdateData", async () => {
     showLive = await presence.getSetting("live"),
     showVideo = await presence.getSetting("video"),
     showTimestamps = await presence.getSetting("timestamp"),
-    newLang = await presence.getSetting("lang"),
+    newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
@@ -211,7 +124,8 @@ presence.on("UpdateData", async () => {
     logo: number = await presence.getSetting("logo"),
     logoArr = ["twitch", "black-ops", "white", "purple", "pride"],
     devLogo: number = await presence.getSetting("devLogo"),
-    devLogoArr = ["dev-main", "dev-white", "dev-purple"];
+    devLogoArr = ["dev-main", "dev-white", "dev-purple"],
+    buttons = await presence.getSetting("buttons");
 
   if (!oldLang) {
     oldLang = newLang;
@@ -230,7 +144,7 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (document.location.hostname == "www.twitch.tv") {
+  if (document.location.hostname === "www.twitch.tv") {
     //* Main website
     const parseVideo = async (video: HTMLVideoElement): Promise<void> => {
         const live = video.duration >= 1073741824;
@@ -238,21 +152,34 @@ presence.on("UpdateData", async () => {
         if (showLive && live) {
           //* Live
           const title = getElement(".channel-info-content h2"),
-            streamer = getElement(".channel-info-content .tw-c-text-base");
+            streamer = getElement(".channel-info-content h1"),
+            game =
+              document.querySelector("a[data-a-target='stream-game-link']")
+                ?.textContent || "Just Chatting";
           presenceData.details =
             title && streamer
               ? streamDetail
                   .replace("%title%", title)
                   .replace("%streamer%", streamer)
+                  .replace("%game%", game)
               : undefined;
           presenceData.state =
             title && streamer
               ? streamState
                   .replace("%title%", title)
                   .replace("%streamer%", streamer)
+                  .replace("%game%", game)
               : undefined;
           presenceData.smallImageKey = "live";
           presenceData.smallImageText = (await strings).live;
+          if (buttons) {
+            presenceData.buttons = [
+              {
+                label: (await strings).watchStream,
+                url: document.URL.split("?")[0]
+              }
+            ];
+          }
         }
 
         if (showVideo && !live) {
@@ -260,18 +187,23 @@ presence.on("UpdateData", async () => {
           const title = getElement(".channel-info-content h2")
               .split("•")
               .shift(),
-            uploader = getElement(".channel-info-content .tw-c-text-base");
+            uploader = getElement(".channel-info-content h1"),
+            game =
+              document.querySelector("a[data-a-target='stream-game-link']")
+                ?.textContent || "Just Chatting";
           presenceData.details =
             title && uploader
               ? vidDetail
                   .replace("%title%", title)
                   .replace("%uploader%", uploader)
+                  .replace("%game%", game)
               : undefined;
           presenceData.state =
             title && uploader
               ? vidState
                   .replace("%title%", title)
                   .replace("%uploader%", uploader)
+                  .replace("%game%", game)
               : undefined;
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = (await strings).play;
@@ -279,6 +211,15 @@ presence.on("UpdateData", async () => {
           const timestamps = presence.getTimestampsfromMedia(video);
           presenceData.startTimestamp = timestamps[0];
           presenceData.endTimestamp = timestamps[1];
+
+          if (buttons) {
+            presenceData.buttons = [
+              {
+                label: (await strings).watchVideo,
+                url: document.URL.split("?")[0]
+              }
+            ];
+          }
         }
 
         if (((showLive && live) || (showVideo && !live)) && video.paused) {
@@ -594,7 +535,7 @@ presence.on("UpdateData", async () => {
     if (!homeCarousel && channelRoot && video) {
       await parseVideo(video);
     }
-  } else if (document.location.hostname == "dashboard.twitch.tv") {
+  } else if (document.location.hostname === "dashboard.twitch.tv") {
     //* Creator Dashboard
     if (showBrowsing) {
       const statics = {
@@ -688,7 +629,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "brand.twitch.tv") {
+  } else if (document.location.hostname === "brand.twitch.tv") {
     //* Brand website
     if (showBrowsing) {
       const statics = {
@@ -744,7 +685,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "blog.twitch.tv") {
+  } else if (document.location.hostname === "blog.twitch.tv") {
     //* Blog website
     if (showBrowsing) {
       const statics = {
@@ -780,7 +721,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "help.twitch.tv") {
+  } else if (document.location.hostname === "help.twitch.tv") {
     //* Help website
     if (showBrowsing) {
       const statics = {
@@ -819,7 +760,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "affiliate.twitch.tv") {
+  } else if (document.location.hostname === "affiliate.twitch.tv") {
     //* Help website
     if (showBrowsing) {
       presenceData.details = (await strings).readingAbout;
@@ -880,7 +821,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "discuss.dev.twitch.tv") {
+  } else if (document.location.hostname === "discuss.dev.twitch.tv") {
     //! Development forums
     presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
     if (showBrowsing) {
@@ -943,8 +884,8 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (
-    document.location.hostname == "devstatus.twitch.tv" ||
-    document.location.hostname == "status.twitch.tv"
+    document.location.hostname === "devstatus.twitch.tv" ||
+    document.location.hostname === "status.twitch.tv"
   ) {
     //* Status pages
     if (document.location.hostname == "devstatus.twitch.tv")
