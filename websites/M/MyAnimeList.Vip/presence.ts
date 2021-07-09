@@ -18,24 +18,27 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
     { pathname } = document.location;
 
   if (pathname === "/") {
-    if (document.location.search) {
-      presenceData.details = `Procurando por ${document.location.search.substring(
-        3
-      )}`;
-    } else presenceData.details = "Explorando MyAnimeList.vip";
+    presenceData.details = document.location.search
+      ? `Procurando por ${document.location.search.substring(3)}`
+      : "Explorando MyAnimeList.vip";
   } else if (pathname === "/animes-legendado")
     presenceData.details = "Procurando por Legendados";
   else if (pathname === "/animes-dublado")
     presenceData.details = "Procurando por Dublados";
-  else if (pathname === "/filme") presenceData.details = "Procurando por Filmes";
-  else if (pathname.startsWith("/lancamento")) presenceData.details = "Últimos Lancamentos";
-  else if (pathname.startsWith("/animes/") || pathname.startsWith("/episodio/")) {
+  else if (pathname === "/filme")
+    presenceData.details = "Procurando por Filmes";
+  else if (pathname.startsWith("/lancamento"))
+    presenceData.details = "Últimos Lancamentos";
+  else if (
+    pathname.startsWith("/animes/") ||
+    pathname.startsWith("/episodio/")
+  ) {
     const iframe = document.querySelector("iframe");
     if (!iframe) {
       const title: HTMLHeadingElement = document.querySelector(
