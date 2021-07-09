@@ -16,7 +16,7 @@ presence.on("iFrameData", (data: { video: { isPaused: boolean } }) => {
 /**
  * Functions to get some common info
  */
-const 
+const
 
   /**
    * The object that stores the functions that get information from the DOM
@@ -24,10 +24,10 @@ const
   getInfo = {
     generic: () => {
       return {
-      /**
-      * Gets the specified url parameter
-      * https://stackoverflow.com/a/11582513/13343832 thanks :)
-      */
+        /**
+        * Gets the specified url parameter
+        * https://stackoverflow.com/a/11582513/13343832 thanks :)
+        */
         getURLParameter: (name: string) => {
           return decodeURIComponent((new RegExp(`[?|&]${name}=` + "([^&;]+?)(&|#|;|$)").exec(location.search) || [null, ""])[1].replace(/\+/g, "%20")) || null;
         }
@@ -41,7 +41,21 @@ const
     },
     channel: () => {
       return {
-        title: document.querySelector(".channel-container .v-list-item__title").textContent.split("  ")[0]
+        title: document.querySelector(".channel-container .v-list-item__title").textContent.split("  ")[0],
+        getCategory: () => {
+          switch (window.location.pathname.split("/")[3]) {
+            case "clips":
+              return "Clips";
+            case "music":
+              return "Music";
+            case "collabs":
+              return "Collabs";
+            case "about":
+              return "About Page";
+            default:
+              return "Videos";
+          }
+        }
       };
     },
     channels: () => {
@@ -173,7 +187,7 @@ const
           return "Favorites";
         case "channel":
           return path[2] ?
-            "Viewing Channel"
+            `Viewing Channel ${getInfo.channel().getCategory()}`
             : "Channel List";
         case "library":
           return "Library";
@@ -195,6 +209,7 @@ const
           return `Watching ${getInfo.watch().title}`;
         case "search":
           return "Searching";
+
         default:
           return `Unsupported Page : ${window.location.pathname}`;
       }
@@ -220,6 +235,7 @@ const
           return `${getInfo.watch().title} - ${getInfo.watch().channel}`;
         case "search":
           return getInfo.search().getParamsString();
+
         default:
           return "";
       }
@@ -319,18 +335,30 @@ presence.on("UpdateData", async () => {
   if (data.state)
     presenceData.state = data.state;
 
+
   // Add video and channel buttons when on the watch page
-  if (/watch\/.{11}/.test(window.location.pathname)) {
-    presenceData.buttons = [
-      {
-        label: "Open Video",
-        url: window.location.href
-      },
-      {
-        label: "Open Channel",
-        url: `${window.location.origin}${document.querySelector(".uploader-data-list>div:nth-child(1)>a").getAttribute("href")}`
+  switch(window.location.pathname.split("/")[1]) {
+    case "watch":
+      presenceData.buttons = [
+        {
+          label: "Open Video",
+          url: window.location.href
+        },
+        {
+          label: "Open Channel",
+          url: `${window.location.origin}${document.querySelector(".uploader-data-list>div:nth-child(1)>a").getAttribute("href")}`
+        }
+      ];
+      break;
+    case "channel":
+      if(window.location.pathname.split("/")[2]) {
+        presenceData.buttons = [
+          {
+            label: "Open Channel",
+            url: window.location.href
+          }
+        ];
       }
-    ];
   }
 
   if (presenceData.details === null) {
