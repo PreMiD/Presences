@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Antharuu",
+    "id": "121667021862600704"
+  },
+  "service": "ADKami",
+  "description": {
+    "fr": "Streaming d'Anime, Manga, Drama, Séries, Hentai",
+    "en": "Anime, Manga, Drama, Séries, Hentai Streaming"
+  },
+  "url": "adkami.com",
+  "version": "1.0.0",
+  "logo": "https://www.adkami.com/favicon2.png",
+  "thumbnail": "https://streaming-one.com/wp-content/uploads/2021/03/FireShot-Capture-1547-Accueil-ADKami-m.adkami.com_-1024x496.png",
+  "color": "#9bd300",
+  "tags": [
+    "anime",
+    "hentai",
+    "drama",
+    "series",
+    "streaming",
+    "adkami"
+  ],
+  "category": "anime",
+  "regExp": "www.adkami[.]com([\\S]+)"
+}
