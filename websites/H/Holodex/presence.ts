@@ -25,7 +25,7 @@ const getInfo = {
     },
     channel: () => {
       return {
-        title: document.querySelector(".channel-container .v-list-item__title").textContent
+        title: document.querySelector(".channel-container .v-list-item__title").textContent.split("  ")[0]
       };
     }
   },
