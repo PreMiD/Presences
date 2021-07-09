@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       "#content > div > div > header > section > div > div.row > div > div > h1 > small"
     ) as HTMLElement,
 
-    data: { [k: string]: string | number } = {
+    data: PresenceData = {
       largeImageKey: "gj-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     };
