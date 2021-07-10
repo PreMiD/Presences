@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
         "#shopify-section-list-collections-template > div > div > div.tt-block-title > div"
       ).textContent;
     } else {
-      presenceData.details = `Viewing ${
+      presenceData.details = `Viewing: ${
         document.querySelector(
           "#same_product_height > div.tt-breadcrumb > div > ul > li:nth-child(2)"
         ).textContent
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
       { label: "View Product", url: document.location.href }
     ];
   } else if (window.location.pathname.includes("/pages")) {
-    presenceData.details = `Viewing ${
+    presenceData.details = `Viewing: ${
       document.querySelector(
         "#same_product_height > div.tt-breadcrumb > div > ul > li:nth-child(2)"
       ).textContent
