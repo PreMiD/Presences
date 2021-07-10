@@ -1,0 +1,17 @@
+{
+  "author": {
+    "name": "The Gamerzs",
+    "id": "730142125181894657"
+  },
+  "url": "limeprogaming.com",
+  "description": {
+    "en": "Here at LIME, we have some of the best gaming equipment and accessories."
+  },
+  "service": "Lime Pro Gaming",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/IZlOaJU.png",
+  "thumbnail": "https://i.imgur.com/FUBK77b.png",
+  "color": "#9bda45",
+  "tags": ["goals", "classes", "exercise", "training"],
+  "category": "shopping"
+}
