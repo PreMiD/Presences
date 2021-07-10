@@ -12,9 +12,9 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (window.location.pathname === "/") {
+  if (window.location.pathname === "/") 
     presenceData.details = "Browsing the Home Page";
-  }
+  
 
   if (window.location.pathname.includes("/collections")) {
     if (window.location.pathname.includes("/products")) {
@@ -52,14 +52,14 @@ presence.on("UpdateData", async () => {
       ).textContent;
     } else {
       presenceData.details =
-        "Viewing " +
+        `Viewing ${ 
         document.querySelector(
           "#same_product_height > div.tt-breadcrumb > div > ul > li:nth-child(2)"
-        ).textContent;
+        ).textContent}`;
       presenceData.state =
-        document.querySelector(
+        `${document.querySelector(
           "#usf_container > div.usf-sr-container.usf-nosearch > div.tt-filters-options > h1 > span > b"
-        ).textContent + " Products";
+        ).textContent} Products`;
     }
   } else if (window.location.pathname.includes("/products/")) {
     productName = document.querySelector(
@@ -72,10 +72,10 @@ presence.on("UpdateData", async () => {
     ];
   } else if (window.location.pathname.includes("/pages")) {
     presenceData.details =
-      "Viewing " +
+      `Viewing ${ 
       document.querySelector(
         "#same_product_height > div.tt-breadcrumb > div > ul > li:nth-child(2)"
-      ).textContent;
+      ).textContent}`;
 
     presenceData.buttons = [
       {
@@ -85,23 +85,23 @@ presence.on("UpdateData", async () => {
     ];
   } else if (window.location.pathname.includes("/search")) {
     presenceData.details =
-      "Searching: " + window.location.search.replace("?q=", "").split("&")[0];
+      `Searching: ${window.location.search.replace("?q=", "").split("&")[0]}`;
 
     presenceData.state =
-      document.querySelector(
+      `${document.querySelector(
         "#usf_container > div.usf-sr-container > div.tt-filters-options > h1 > span > b:nth-child(1)"
-      ).textContent + " Results";
+      ).textContent} Results`;
 
     presenceData.smallImageKey = "search";
-  } else if (window.location.pathname === "/cart") {
+  } else if (window.location.pathname === "/cart") 
     presenceData.details = "Viewing cart";
-  } else if (window.location.pathname === "/account") {
+   else if (window.location.pathname === "/account") 
     presenceData.details = "Viewing account";
-  } else if (window.location.pathname === "/apps/subscriptions") {
+   else if (window.location.pathname === "/apps/subscriptions") 
     presenceData.details = "Viewing subscriptions";
-  } else if (window.location.pathname.includes("/checkouts/")) {
+   else if (window.location.pathname.includes("/checkouts/")) 
     presenceData.details = "Ordering";
-  } else if (window.location.pathname.includes("/blogs/")) {
+   else if (window.location.pathname.includes("/blogs/")) {
     blogTitle =
       document.querySelector(
         "#shopify-section-article-template > div:nth-child(1) > div > div > div > div > h1"
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
