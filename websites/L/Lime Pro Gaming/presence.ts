@@ -16,16 +16,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing the Home Page";
   }
 
-  if (window.location.pathname.includes("/products/")) {
-    productName = document.querySelector(
-      "#shopify-section-product-template > div:nth-child(1) > div.container.container-fluid-mobile > div > div:nth-child(2) > div > h1"
-    ).textContent;
-    presenceData.details = productName;
-
-    presenceData.buttons = [
-      { label: "View Product", url: document.location.href }
-    ];
-  } else if (window.location.pathname.includes("/collections")) {
+  if (window.location.pathname.includes("/collections")) {
     if (window.location.pathname.includes("/products")) {
       productName = document.querySelector(
         "#shopify-section-product-template > div:nth-child(1) > div.container.container-fluid-mobile > div > div:nth-child(2) > div > h1"
@@ -70,6 +61,15 @@ presence.on("UpdateData", async () => {
           "#usf_container > div.usf-sr-container.usf-nosearch > div.tt-filters-options > h1 > span > b"
         ).textContent + " Products";
     }
+  } else if (window.location.pathname.includes("/products/")) {
+    productName = document.querySelector(
+      "#shopify-section-product-template > div:nth-child(1) > div.container.container-fluid-mobile > div > div:nth-child(2) > div > h1"
+    ).textContent;
+    presenceData.details = productName;
+
+    presenceData.buttons = [
+      { label: "View Product", url: document.location.href }
+    ];
   } else if (window.location.pathname.includes("/pages")) {
     presenceData.details =
       "Viewing " +
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
     ];
   } else if (window.location.pathname.includes("/search")) {
     presenceData.details =
-      "Searching: " + window.location.search.replace("?q=", "");
+      "Searching: " + window.location.search.replace("?q=", "").split("&")[0];
 
     presenceData.state =
       document.querySelector(

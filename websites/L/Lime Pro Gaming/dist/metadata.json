@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.3",
   "author": {
     "name": "The Gamerzs",
     "id": "730142125181894657"
@@ -9,10 +10,11 @@
   },
   "service": "Lime Pro Gaming",
   "altnames": ["LPG", "Lime | Pro Gaming"],
+
   "version": "1.0.0",
   "logo": "https://i.imgur.com/IZlOaJU.png",
   "thumbnail": "https://i.imgur.com/FUBK77b.png",
   "color": "#9bda45",
-  "tags": ["goals", "classes", "exercise", "training"],
-  "category": "shopping"
+  "tags": ["gaming", "retail", "drinks", "distributor", "lpg"],
+  "category": "other"
 }
