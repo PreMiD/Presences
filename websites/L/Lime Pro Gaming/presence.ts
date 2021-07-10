@@ -14,9 +14,7 @@ presence.on("UpdateData", async () => {
 
   if (window.location.pathname === "/") {
     presenceData.details = "Browsing the Home Page";
-  }
-
-  if (window.location.pathname.includes("/collections")) {
+  } else if (window.location.pathname.includes("/collections")) {
     if (window.location.pathname.includes("/products")) {
       productName = document.querySelector(
         "#shopify-section-product-template > div:nth-child(1) > div.container.container-fluid-mobile > div > div:nth-child(2) > div > h1"
@@ -115,12 +113,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = blogAuthor;
 
     presenceData.smallImageKey = blogAuthor ? "reading" : null;
-  }
-
-  if (presenceData.details == null) {
+  } else {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
   }
+
+  presence.setActivity(presenceData);
 });
