@@ -18,16 +18,16 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    startTimestamp: browsingStamp,
-    largeImageKey: "fbox_logo"
-  },
+      startTimestamp: browsingStamp,
+      largeImageKey: "fbox_logo"
+    },
     { pathname } = document.location;
 
   if (pathname === "/") presenceData.details = "Browsing";
   else if (pathname.startsWith("/series/")) {
     const title: HTMLHeadingElement = document.querySelector(
-      "#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
-    ),
+        "#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
+      ),
       season: HTMLDataListElement = document.querySelector(
         "#episodes > div.bl-seasons > ul > li"
       ),

@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo_anime",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "logo_anime",
+      startTimestamp: browsingStamp
+    },
     { pathname } = document.location,
     { search } = document.location,
     fav: HTMLDivElement = document.querySelector(".favFixed");
@@ -55,8 +55,8 @@ presence.on("UpdateData", async () => {
     ];
   } else {
     const anime: HTMLHeadingElement = document.querySelector(
-      "body > div.conteudoAlinhado > div.conteudo > section:nth-child(1) > section > h1"
-    ),
+        "body > div.conteudoAlinhado > div.conteudo > section:nth-child(1) > section > h1"
+      ),
       video: HTMLVideoElement = document.querySelector("video");
     if (anime) {
       const [animeTitle] = anime.innerText.split("-"),
