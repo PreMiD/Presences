@@ -53,13 +53,9 @@ const presence = new Presence({
 
           return data;
         },
-
         playback: () => !video.paused,
-
         smallImageKey: () => (video.paused ? Icons.PAUSED : Icons.PLAYED),
-
         smallImageText: () => (video.paused ? "Paused" : "Played"),
-
         state: () =>
           document
             .querySelectorAll(".container")[1]
@@ -67,14 +63,12 @@ const presence = new Presence({
             .split(" ")
             .slice(0, -2)
             .join(" "),
-
         details: () =>
           `Episode: ${document
             .querySelectorAll(".container")[1]
             .textContent.slice(1, -1)
             .split(" ")
             .pop()}`,
-
         buttons: () => [
           { label: "Watch Episode", url: location.href },
           {
@@ -88,34 +82,24 @@ const presence = new Presence({
       },
       {
         path: /^\/\?search_param=(.*)/,
-
         smallImageKey: () => Icons.SEARCHING,
-
         smallImageText: () => "Searching",
-
         details: () =>
           `Results: ${document.querySelectorAll(".col-lg-2").length ?? 0}`,
-
         state: () =>
           `Searching: ${document
             .querySelectorAll(".container")[1]
             .textContent.split(" ")
             .slice(4, -1)
             .join(" ")}`,
-
         buttons: () => [{ label: "Results", url: location.href }]
       },
       {
         path: /^\/anime\/(.*)/,
-
         smallImageKey: () => Icons.LOCATION,
-
         smallImageText: () => "Viewing",
-
         details: () => "Viewing an Anime",
-
         state: () => document.querySelector(".anime-details-title").textContent,
-
         buttons: () => [
           { label: "View Anime", url: location.href },
           {
@@ -129,24 +113,16 @@ const presence = new Presence({
       },
       {
         path: /^\/(%d9%82%d8%a7%d8%a6%d9%85%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%85%d9%8a|anime-(.*))/,
-
         smallImageKey: () => Icons.DISCOVERY,
-
         smallImageText: () => "Browsing",
-
         details: () => "Browsing for Anime",
-
         buttons: () => [{ label: "Browse", url: location.href }]
       },
       {
         path: /^\/%d9%85%d9%88%d8%a7%d8%b9%d9%8a%d8%af-%d8%b9%d8%b1%d8%b6-%d8%ad%d9%84%d9%82%d8%a7%d8%aa-%d8%a7%d9%84%d8%a7%d9%86%d9%85%d9%8a/,
-
         smallImageKey: () => Icons.DISCOVERY,
-
         smallImageText: () => "Discovering",
-
         details: () => "Discovering Episodes Releases",
-
         buttons: () => [{ label: "Discover", url: location.href }]
       }
     ];
