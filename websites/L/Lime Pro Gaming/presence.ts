@@ -114,7 +114,7 @@ presence.on("UpdateData", async () => {
       )?.textContent || null;
 
     presenceData.details = blogTitle;
-    presenceData.state = blogAuthor;
+    if(blogAuthor) presenceData.state = blogAuthor;
 
     presenceData.smallImageKey = blogAuthor ? "reading" : null;
   } else {
