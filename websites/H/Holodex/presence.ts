@@ -166,7 +166,7 @@ const
       image: "largeimage",
       hover: "Holodex"
     },
-    startTime: Date.now()
+    startTime: ~~(Date.now() / 1000)
   },
 
   /** 
