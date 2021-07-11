@@ -78,7 +78,7 @@ const presence = new Presence({
         buttons: () => [
           { label: "Watch Episode", url: location.href },
           {
-            label: "Anime Page",
+            label: "View Anime",
             url: document
               .querySelector(".anime-page-link")
               .querySelector("a")
