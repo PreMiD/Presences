@@ -120,11 +120,9 @@ const presence = new Presence({
           { label: "View Anime", url: location.href },
           {
             label: "Last Episode",
-            // prettier-ignore
             url: document
-              .querySelectorAll(".episodes-card")[
-                document.querySelectorAll(".episodes-card").length - 1
-              ].querySelector("a")
+              .querySelector("#DivEpisodesList")
+              .lastElementChild.querySelector("a")
               .getAttribute("href")
           }
         ]
