@@ -1,53 +1,53 @@
 const presence = new Presence({
   clientId: "802958833214423081"
-});
-const strings = presence.getStrings({
+}),
+ strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
   browse: "presence.activity.browsing",
   search: "presence.activity.searching"
-});
+}),
 
-const getTime = (list: string[]): number => {
+ getTime = (list: string[]): number => {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--) 
     ret += parseInt(list[index]) * 60 ** index;
-  }
+  
   return ret;
-};
+},
 
-const getTimestamps = (
+ getTimestamps = (
   audioTime: string,
   audioDuration: string
 ): Array<number> => {
-  const splitAudioTime = audioTime.split(":").reverse();
-  const splitAudioDuration = audioDuration.split(":").reverse();
+  const splitAudioTime = audioTime.split(":").reverse(),
+   splitAudioDuration = audioDuration.split(":").reverse(),
 
-  const parsedAudioTime = getTime(splitAudioTime);
-  const parsedAudioDuration = getTime(splitAudioDuration);
+   parsedAudioTime = getTime(splitAudioTime),
+   parsedAudioDuration = getTime(splitAudioDuration),
 
-  const startTime = Date.now();
-  const endTime =
+   startTime = Date.now(),
+   endTime =
     Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
-};
+},
 
-const getElement = (query: string): string | undefined => {
+ getElement = (query: string): string | undefined => {
   let text = "";
 
   const element = document.querySelector(query);
   if (element) {
-    if (element.childNodes.length > 1) {
+    if (element.childNodes.length > 1) 
       text = element.childNodes[0].textContent;
-    } else {
+     else 
       text = element.textContent;
-    }
+    
   }
 
   return text.trimStart().trimEnd();
-};
+},
 
-const capitalize = (text: string): string => {
+ capitalize = (text: string): string => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
@@ -132,11 +132,11 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const path = location.pathname.replace(/\/?$/, "/");
+  const path = location.pathname.replace(/\/?$/, "/"),
 
-  const showBrowsing = await presence.getSetting("browse");
-  const showSong = await presence.getSetting("song");
-  const showTimestamps = await presence.getSetting("timestamp");
+   showBrowsing = await presence.getSetting("browse"),
+   showSong = await presence.getSetting("song"),
+   showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
     details: undefined,
@@ -153,8 +153,8 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  const playButton = document.querySelector(".playControls__play.playing");
-  const playing = playButton ? true : false;
+  const playButton = document.querySelector(".playControls__play.playing"),
+   playing = playButton ? true : false;
 
   if ((playing || (!playing && !showBrowsing)) && showSong) {
     data.details = getElement(
@@ -163,11 +163,11 @@ presence.on("UpdateData", async () => {
     data.state = getElement(".playbackSoundBadge__lightLink");
     const current = getElement(
       ".playbackTimeline__timePassed > span:nth-child(2)"
-    );
-    const duration = getElement(
+    ),
+     duration = getElement(
       ".playbackTimeline__duration > span:nth-child(2)"
-    );
-    const timestamps = getTimestamps(current, duration);
+    ),
+     timestamps = getTimestamps(current, duration);
     data.startTimestamp = timestamps[0];
     data.endTimestamp = timestamps[1];
     data.smallImageKey = playing ? "play" : "pause";
@@ -176,16 +176,16 @@ presence.on("UpdateData", async () => {
     data.buttons = [
       {
         label: "Listen Along",
-        url: "https://soundcloud.com" + pathLinkSong
+        url: `https://soundcloud.com${pathLinkSong}`
       }
     ];
   }
 
   if ((!playing || !showSong) && showBrowsing) {
     for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
+      if (path.match(k)) 
         data = { ...data, ...v };
-      }
+      
     }
 
     if (path === "/") {
@@ -243,16 +243,16 @@ presence.on("UpdateData", async () => {
       getElement(".userNetworkTop__title > a");
     if (username) {
       data.details = "Viewing Profile...";
-      data.state = username + ` (${getElement(".g-tabs-link.active")})`;
+      data.state = `${username} (${getElement(".g-tabs-link.active")})`;
     }
 
     const waveform = document.querySelector(".fullListenHero .waveform__layer");
     if (waveform) {
-      if (waveform.childElementCount >= 3) {
+      if (waveform.childElementCount >= 3) 
         data.details = "Viewing Song...";
-      } else {
+       else 
         data.details = "Browsing Playlist/Album...";
-      }
+      
       data.state = `${getElement(".soundTitle__title > span")} by ${getElement(
         ".soundTitle__username"
       )}`;
