@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
       ).innerHTML;
       [, epName] = episode.match(/.* - (.*)/);
       epName = epName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      seasonregex = new RegExp(`(.*) ${epName} - Watch on Crunchyroll`);
+      seasonregex = new RegExp(`(.*) ${epName} -`);
       [, seasonName] = document.title.match(seasonregex);
       videoTitle = seasonName;
     } else {
