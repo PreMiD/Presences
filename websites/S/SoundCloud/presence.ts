@@ -172,6 +172,13 @@ presence.on("UpdateData", async () => {
     data.endTimestamp = timestamps[1];
     data.smallImageKey = playing ? "play" : "pause";
     data.smallImageText = (await strings)[playing ? "play" : "pause"];
+    const pathLinkSong = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a").getAttribute("href");
+    data.buttons = [
+      {
+        label: "Listen Along",
+        url: "https://soundcloud.com" + pathLinkSong
+      }
+    ];
   }
 
   if ((!playing || !showSong) && showBrowsing) {
