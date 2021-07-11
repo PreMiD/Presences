@@ -1,6 +1,7 @@
 const presence = new Presence({
-  clientId: "863173597941727282"
-}), browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "863173597941727282"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let productName, productBrand, blogTitle, blogAuthor;
 
@@ -83,7 +84,9 @@ presence.on("UpdateData", async () => {
     ];
   } else if (window.location.pathname.includes("/search")) {
     presenceData.details = `Searching: ${
-      window.location.search.replace("?q=", "").split("&")[0]
+      document.querySelector(
+        "#usf_container > div.usf-sr-container > div.tt-filters-options > h1 > span > b:nth-child(2)"
+      ).textContent
     }`;
 
     presenceData.state = `${
@@ -112,9 +115,9 @@ presence.on("UpdateData", async () => {
       )?.textContent || null;
 
     presenceData.details = blogTitle;
-    if(blogAuthor) presenceData.state = blogAuthor;
+    if (blogAuthor) presenceData.state = blogAuthor;
 
-    if(blogAuthor) presenceData.smallImageKey = "reading"
+    if (blogAuthor) presenceData.smallImageKey = "reading";
   } else {
     presence.setTrayTitle();
     presence.setActivity();
