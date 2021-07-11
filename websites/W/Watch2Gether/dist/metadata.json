@@ -1,6 +1,7 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.4",
   "service": "Watch2Gether",
+  "altnames": ["w2g"],
   "author": {
     "name": "वाह्य",
     "id": "819696394180100106"
