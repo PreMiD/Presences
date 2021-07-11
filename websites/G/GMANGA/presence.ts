@@ -41,22 +41,17 @@ const presence = new Presence({
       { path: /^\/$/, details: () => "On Homepage" },
       {
         path: /^\/(mangas|mangas\/featured|mangas\/latest|)$/,
-
         smallImageKey: () => Icons.DISCOVERY,
-
         smallImageText: () => "Browsing",
-
         details: () => "Browsing for Manga",
-
         buttons: () => [{ label: "Browse", url: location.href }]
       },
       {
         path: /^\/mangas\/\d+\/(.*)+\/[0-9.]+\/(.*)$/,
-
         run: () => {
-          // prettier-ignore
           const pages = document.querySelectorAll('[id^="page_"]').length,
-            endTimestamp = (pages * AVERAGE_READING_TIME) + Date.now();
+            readingTime = pages * AVERAGE_READING_TIME,
+            endTimestamp = readingTime + Date.now();
 
           data.endTimestamp = endTimestamp / 1000;
 
@@ -64,20 +59,14 @@ const presence = new Presence({
 
           return data;
         },
-
         playback: () => !!data.endTimestamp,
-
         smallImageKey: () => Icons.READING,
-
         smallImageText: () => "Reading",
-
         state: () => document.querySelector(".white-link").textContent,
-
         details: () =>
           `Chapter: ${
             document.querySelector(".reader-dropdown .text").textContent
           }`,
-
         buttons: () => [
           { label: "Read Chapter", url: location.href },
           {
@@ -90,77 +79,53 @@ const presence = new Presence({
       },
       {
         path: /^\/mangas\/\d+\/(.*)+$/,
-
         details: () => "Viewing a manga",
-
         state: () => document.querySelector("h1.header").textContent,
-
         smallImageKey: () => Icons.MANGA,
-
         smallImageText: () => "Viewing",
-
         buttons: () => [
           { label: "View Manga", url: location.href },
           {
             label: "Last Chapter",
-            // prettier-ignore
-            url: `https://${location.hostname}${document.querySelector("a.primary.button")?.getAttribute("href")}`
+            url: `https://${location.hostname}${document
+              .querySelector("a.primary.button")
+              ?.getAttribute("href")}`
           }
         ]
       },
       {
         path: /^\/news+/,
-
         smallImageKey: () => Icons.NEWS,
-
         smallImageText: () => "Reading",
-
         details: () => "Reading News",
-
         state: () => document.querySelector("h1.header")?.textContent,
-
         buttons: () => [{ label: "Read News", url: location.href }]
       },
       {
         path: /\/colorings$/,
-
         smallImageKey: () => Icons.PAINTINGS,
-
         smallImageText: () => "Viewing",
-
         details: () => "Viewing Paintings",
-
         state: () =>
           document
             .querySelector("h1.header")
             .textContent.replace("تلوينات ", ""),
-
         buttons: () => [{ label: "View Paintings", url: location.href }]
       },
       {
         path: /^\/teams/,
-
         smallImageKey: () => Icons.TEAM,
-
         smallImageText: () => "Viewing",
-
         details: () => "Viewing a Team",
-
         state: () => document.querySelector("h2.header").textContent,
-
         buttons: () => [{ label: "View Team", url: location.href }]
       },
       {
         path: /^\/members/,
-
         smallImageKey: () => Icons.LIBRARY,
-
         smallImageText: () => "Viewing",
-
         details: () => "Viewing a User",
-
         state: () => document.querySelector("h2.header").textContent,
-
         buttons: () => [{ label: "View User", url: location.href }]
       }
     ];
@@ -178,9 +143,7 @@ if (searchInput) {
     }
 
     searchData.smallImageKey = Icons.SEARCHING;
-
     searchData.smallImageText = "Searching";
-
     searchData.state = `Searching: ${this.value}`;
   });
 }
