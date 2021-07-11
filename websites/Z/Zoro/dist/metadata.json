@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "Zoro",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/SPMSZxI.png",
+  "thumbnail": "https://i.imgur.com/T0O1fqU.png",
+  "version": "1.0.1",
+  "color": "#cae962",
+  "tags": [
+    "anime",
+    "stream"
+  ],
+  "url": "zoro.to",
+  "description": {
+    "en": "Zoro.to is a free site to watch anime and you can even download subbed or dubbed anime in ultra HD quality without any registration or payment"
+  },
+  "iframe": true
+}
