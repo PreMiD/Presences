@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Watambeee",
+    "id": "338418945620967434"
+  },
+  "service": "Westmanga",
+  "description": {
+    "en": "Westmanga is an Indonesian language manga scanlation website with many isekai manga genres",
+    "id": "Westmanga adalah sebuah website scanlation manga berbahasa indonesia dengan banyak genre manga isekai"
+  },
+  "url": "westmanga.info",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/yB1GENx.png",
+  "thumbnail": "https://i.imgur.com/dX2CJ8p.png",
+  "color": "#7d1217",
+  "tags": [
+    "manga",
+    "comics",
+    "nsfw"
+  ],
+  "category": "other"
+}

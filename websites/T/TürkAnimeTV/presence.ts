@@ -1,66 +1,86 @@
-const presence = new Presence({
-  clientId: "666074265233260555"
-});
-
-const strings = presence.getStrings({
-  playing: "presence.playback.playing",
-  paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
-});
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+interface Video {
+  paused: boolean;
+  duration: number;
+  currentTime: number;
 }
 
-const startTimestamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({ clientId: "666074265233260555" }),
+  strings = presence.getStrings({
+    playing: "presence.playback.playing",
+    paused: "presence.playback.paused",
+    browsing: "presence.activity.browsing",
+    viewAnime: "general.viewAnime",
+    watching: "general.watching",
+    episode: "general.episode",
+    watchEpisode: "general.buttonViewEpisode",
+    anime: "general.anime"
+  });
 
-let video: HTMLVideoElement;
+let video: Video;
 
-presence.on("iFrameData", async (msg) => {
-  if (!msg) return;
+presence.on("iFrameData", (msg: Video) => {
   video = msg;
 });
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "turkanime"
-  };
+      largeImageKey: "turkanime"
+    },
+    title =
+      document
+        .querySelector(
+          "#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(1) > a"
+        )
+        ?.textContent.trim() || null,
+    ep = document
+      .querySelector(
+        "#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(2) > a"
+      )
+      ?.textContent.trim(),
+    animeTitle = document
+      .querySelector("#detayPaylas > div > div.panel-ust > div")
+      ?.textContent.trim(),
+    animePage =
+      document
+        .querySelector(
+          "#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(1) > a"
+        )
+        ?.getAttribute("href") || document.URL;
 
-  const title = document.querySelector(
-    "#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(1) > a"
-  );
-  const ep = document.querySelector(
-    "#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(2) > a"
-  );
-
-  if (!title || !ep) {
-    video = null;
-  }
-
-  // Series
-
+  // Series & Movies
   if (title && ep) {
-    presenceData.details = title.textContent;
-    presenceData.state = ep.textContent.replace(
-      title.textContent.split(" ").slice(1).join(" "),
-      ""
-    );
-  }
+    const epNum = ep.match(/[0-9]+\. Bölüm/g);
 
-  // Browsing
-  else {
+    presenceData.details = `${(await strings).watching} ${title}`;
+    if (epNum)
+      presenceData.state = `${(await strings).episode} ${
+        epNum[0].split(".")[0]
+      }`;
+
+    presenceData.buttons = [
+      {
+        label: (await strings).watchEpisode,
+        url: document.URL.split("&")[0]
+      },
+      {
+        label: (await strings).anime,
+        url: `https://www.turkanime.net/${animePage}`
+      }
+    ];
+  } else if (window.location.pathname.startsWith("/anime/") && animeTitle) {
+    // About Anime Page
+    presenceData.details = (await strings).viewAnime;
+    presenceData.state = animeTitle;
+    presenceData.buttons = [
+      {
+        label: (await strings).anime,
+        url: animePage
+      }
+    ];
+  } else {
+    // Browsing
     presenceData.details = (await strings).browsing;
-    presenceData.startTimestamp = startTimestamp;
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (video) {
@@ -70,12 +90,11 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const timestamps = getTimestamps(
+      const [, duration] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = duration;
     }
   }
 

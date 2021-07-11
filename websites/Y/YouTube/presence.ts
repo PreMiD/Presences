@@ -347,6 +347,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (
       document.location.pathname.includes("/channel") ||
+      document.location.pathname.includes("/c") ||
       document.location.pathname.includes("/user")
     ) {
       //Sometimes causes problems
