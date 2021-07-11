@@ -164,7 +164,7 @@ const
     state: "",
     smallimage: {
       image: "largeimage",
-      hover: ""
+      hover: "Holodex"
     },
     startTime: Date.now()
   },
