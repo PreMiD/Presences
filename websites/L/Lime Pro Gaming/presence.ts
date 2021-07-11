@@ -7,10 +7,9 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (window.location.pathname === "/")
     presenceData.details = "Browsing the Home Page";
