@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = blogTitle;
     if(blogAuthor) presenceData.state = blogAuthor;
 
-    presenceData.smallImageKey = blogAuthor ? "reading" : null;
+    if(blogAuthor) presenceData.smallImageKey = "reading"
   } else {
     presence.setTrayTitle();
     presence.setActivity();
