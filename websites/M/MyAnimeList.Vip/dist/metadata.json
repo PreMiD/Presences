@@ -1,6 +1,6 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.4",
-  "service": "MyAnimeList.Vip",
+  "service": "MyAnimeList.vip",
   "author": {
     "name": "वाह्य",
     "id": "819696394180100106"
