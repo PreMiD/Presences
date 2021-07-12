@@ -6,7 +6,7 @@ const presence = new Presence({
 
   // import $ from "jquery"
 
-  characterss = [
+  characterList = [
     "amber",
     "barbara",
     "beidou",
@@ -42,7 +42,7 @@ const presence = new Presence({
     "yanfei",
     "zhongli",
     "albedo"
-  ], pathname = document.URL, character = pathname.match(/\w+/gi).pop(), validCharacter = characterss.includes(character);
+  ], pathname = document.URL, character = pathname.match(/\w+/gi).pop(), validCharacter = characterList.includes(character);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
