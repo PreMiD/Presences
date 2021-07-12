@@ -98,19 +98,18 @@ presence.on("UpdateData", async () => {
 
     delete presenceData.smallImageKey;
 
-    presence.setActivity(presenceData)
+    presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/support/")) {
     title = document.querySelector(
       "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
-    )
+    );
     presenceData.details = "Support, Browsing";
     presenceData.state = title.innerText;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } 
-  else if (document.location.pathname.includes("/watched/")) {
+  } else if (document.location.pathname.includes("/watched/")) {
     if(document.location.pathname.includes("/threads/")) {
       presenceData.details = "Forums, Viewing Their";
       presenceData.state = "Watched Threads";
@@ -134,7 +133,7 @@ presence.on("UpdateData", async () => {
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
       );
       presenceData.details = "Forums, Reading a DM";
-      presenceData.state = title.innerText + "...";
+      presenceData.state = `${title.innerText}...`;
 
       delete presenceData.smallImageKey;
 
@@ -157,7 +156,7 @@ presence.on("UpdateData", async () => {
 
       delete presenceData.smallImageKey;
 
-      presence.setActivity(presenceData)
+      presence.setActivity(presenceData);
     } else if(document.location.pathname.includes("/leaderboards/")) {
       presenceData.details = "Stats, Browsing";
       presenceData.state = "Server Seaderboards";
@@ -167,7 +166,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       presenceData.details = "Stats, Browsing";
-      presenceData.state = "Server Stats"
+      presenceData.state = "Server Stats";
 
       delete presenceData.smallImageKey;
 
@@ -349,9 +348,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/user")) {
       user = document.querySelector(
         "div.pagewrapper > div.container > div.row > div.col-md-2 > div.user-info > h3"
-      )
+      );
       presenceData.details = "Bans, Viewing";
-      presenceData.state = "Viewing" + user.innerText;
+      presenceData.state = `Viewing${user.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -365,4 +364,4 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
   }
-})
+});
