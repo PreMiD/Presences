@@ -29,18 +29,18 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Viewing Page:";
           presenceData.state = "Account";
           presenceData.smallImageKey = "user-solid_white";
-        };
+        }
 
         if (document.location.pathname == "/" && document.getElementsByClassName("app-game")["app-game"].hidden == false) {
           // Pony Town in Game
           presenceData.details = "Plays on the server";
           presenceData.smallImageKey = "play-circle-solid_white";
-        };
+        }
 
       if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
-      } else {
+      } else 
         presence.setActivity(presenceData);
-      }
+      
     });
