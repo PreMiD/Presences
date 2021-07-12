@@ -4,8 +4,8 @@ const presence = new Presence({
 let points: string,
   progress: string;
 presence.on("iFrameData", (data: IFrameData) => {
-  points = data.iframe_d.points,
-  progress = data.iframe_d.progress;
+  points = data.info.points,
+  progress = data.info.progress;
 
 });
 
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 });
 
 interface IFrameData {
-  iframe_d: {
+  info: {
     points: string;
     progress: string;
   };

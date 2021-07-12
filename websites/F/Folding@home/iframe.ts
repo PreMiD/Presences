@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
   progress = document.querySelector("#slot-0 > div.pu > div.pu-bar.ui-progressbar.ui-widget.ui-widget-content.ui-corner-all > div");
   if (progress && points !== undefined) {
   iframe.send({
-    iframe_d: {
+    info: {
  points: points.textContent,
  progress: progress.textContent
     }
