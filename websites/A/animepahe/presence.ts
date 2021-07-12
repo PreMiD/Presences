@@ -171,72 +171,72 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "presence_browsing_all";
         presenceData.smallImageText = strings.browse;
       } else {
-switch (path[1]) {
-        case "genre": {
-          // viewing genre
-          presenceData.details = strings.viewGenre;
-          presenceData.state = capitalize(path[2]);
-          presenceData.smallImageKey = "presence_browsing_genre";
-          presenceData.smallImageText = strings.browse;
-        } break;
-        case "season": {
-          // viewing anime/time season
-          presenceData.details = `${viewing} Anime ${strings.timeSeason}:`;
-          presenceData.state = document.getElementsByTagName('h1')[0].textContent;
-          presenceData.smallImageKey = "presence_browsing_time";
-          presenceData.smallImageText = strings.browse;
-        } break;
-        default: {
-          if (!path[1].match(/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/)) {
-            // viewing a misc. category (eg. Airing, TV, etc)
-            presenceData.details = strings.viewCategory;
-
-            const heading = document.getElementsByTagName('h1')[0].textContent;
-            presenceData.state = heading.indexOf(" ") !== -1 ? heading.split(" ").map(s => capitalize(s)).join(" ") : capitalize(heading);
-            presenceData.smallImageKey = "presence_browsing_all";
+        switch (path[1]) {
+          case "genre": {
+            // viewing genre
+            presenceData.details = strings.viewGenre;
+            presenceData.state = capitalize(path[2]);
+            presenceData.smallImageKey = "presence_browsing_genre";
             presenceData.smallImageText = strings.browse;
-          } else {
-            // viewing specific
-            const info = parseInfo(document.getElementsByClassName("anime-info")[0].children as unknown as HTMLParagraphElement[]),
-                title = document.getElementsByClassName("title-wrapper")[0].children[1].textContent,
-              listing = (() => {
-                const links = info.external_links as HTMLAnchorElement[];
+          } break;
+          case "season": {
+            // viewing anime/time season
+            presenceData.details = `${viewing} Anime ${strings.timeSeason}:`;
+            presenceData.state = document.getElementsByTagName('h1')[0].textContent;
+            presenceData.smallImageKey = "presence_browsing_time";
+            presenceData.smallImageText = strings.browse;
+          } break;
+          default: {
+            if (!path[1].match(/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/)) {
+              // viewing a misc. category (eg. Airing, TV, etc)
+              presenceData.details = strings.viewCategory;
 
-                if (links[0].textContent === "AniList") return ["AniList", links[0].href];
+              const heading = document.getElementsByTagName('h1')[0].textContent;
+              presenceData.state = heading.indexOf(" ") !== -1 ? heading.split(" ").map(s => capitalize(s)).join(" ") : capitalize(heading);
+              presenceData.smallImageKey = "presence_browsing_all";
+              presenceData.smallImageText = strings.browse;
+            } else {
+              // viewing specific
+              const info = parseInfo(document.getElementsByClassName("anime-info")[0].children as unknown as HTMLParagraphElement[]),
+                  title = document.getElementsByClassName("title-wrapper")[0].children[1].textContent,
+                listing = (() => {
+                  const links = info.external_links as HTMLAnchorElement[];
 
-                for (const link of links) 
-                  if (link.textContent === "MyAnimeList") return ["MAL", link.href];
-                
-              })() as [string, string];
+                  if (links[0].textContent === "AniList") return ["AniList", links[0].href];
 
-            presenceData.details = (() => {
- switch ((info.type[0] as HTMLAnchorElement).textContent) {
-              case "Movie": return strings.viewMovie;
-              case "TV": return `${viewing} ${strings.season}:`;
-              case "Special": return `${viewing} ${strings.special}:`;
-              default: return `${viewing} ${(info.type[0] as HTMLAnchorElement).textContent}:`;
+                  for (const link of links) 
+                    if (link.textContent === "MyAnimeList") return ["MAL", link.href];
+                  
+                })() as [string, string];
+
+              presenceData.details = (() => {
+                switch ((info.type[0] as HTMLAnchorElement).textContent) {
+                  case "Movie": return strings.viewMovie;
+                  case "TV": return `${viewing} ${strings.season}:`;
+                  case "Special": return `${viewing} ${strings.special}:`;
+                  default: return `${viewing} ${(info.type[0] as HTMLAnchorElement).textContent}:`;
+                }
+              })();
+
+              presenceData.state = title;
+
+              presenceData.smallImageKey = "presence_browsing_season";
+              presenceData.smallImageText = strings.browse;
+
+              presenceData.buttons = [
+                {
+                  label: strings.viewOn.replace("{0}", "Pahe"),
+                  url: `https://pahe.win/a/${animeStore.anime(title, listing).id}`
+                },
+                {
+                  label: strings.viewOn.replace("{0}", listing[0]),
+                  url: listing[1]
+                }
+              ];
             }
-})();
-
-            presenceData.state = title;
-
-            presenceData.smallImageKey = "presence_browsing_season";
-            presenceData.smallImageText = strings.browse;
-
-            presenceData.buttons = [
-              {
-                label: strings.viewOn.replace("{0}", "Pahe"),
-                url: `https://pahe.win/a/${animeStore.anime(title, listing).id}`
-              },
-              {
-                label: strings.viewOn.replace("{0}", listing[0]),
-                url: listing[1]
-              }
-            ];
           }
         }
       }
-}
     } break;
     // playback
     case "play": {
