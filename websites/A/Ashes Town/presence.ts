@@ -12,27 +12,27 @@ presence.on("UpdateData", async () => {
         if (document.location.pathname == "/" && document.getElementsByClassName("app-game")["app-game"].hidden == true) {
         // Ashes Town Homepage
         presenceData.details = "Viewing At Home Page";
-        presenceData.smallImageKey = "home-solid_white";
+        presenceData.smallImageKey = "home-solid_green";
         } else if (document.location.pathname == "/help") {
           presenceData.details = "Viewing Page:";
           presenceData.state = "Help";
-          presenceData.smallImageKey = "question-circle-solid_white";
+          presenceData.smallImageKey = "question-circle-solid_green";
         } else if (document.location.pathname == "/about") {
           presenceData.details = "Viewing Page:";
           presenceData.state = "About";
-          presenceData.smallImageKey = "info-circle-solid_white";
+          presenceData.smallImageKey = "info-circle-solid_green";
         } else if (document.location.pathname == "/contributors") {
           presenceData.details = "Viewing Page:";
           presenceData.state = "Contributors";
-          presenceData.smallImageKey = "info-circle-solid_white";
+          presenceData.smallImageKey = "info-circle-solid_green";
         } else if (document.location.pathname == "/character") {
           presenceData.details = "Viewing Page:";
           presenceData.state = "Characters";
-          presenceData.smallImageKey = "horse-head-solid_white";
+          presenceData.smallImageKey = "horse-head-solid_green";
         } else if (document.location.pathname == "/account") {
           presenceData.details = "Viewing Page:";
           presenceData.state = "Account";
-          presenceData.smallImageKey = "user-solid_white";
+          presenceData.smallImageKey = "user-solid_green";
         }
 
         if (document.location.pathname == "/" && document.getElementsByClassName("app-game")["app-game"].hidden == false) {
