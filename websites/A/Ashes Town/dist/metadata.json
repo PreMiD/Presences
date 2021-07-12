@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Ashes Town",
+  "author": {
+    "name": "Ponfertato",
+    "id": "215527730345803777"
+  },
+  "category": "games",
+  "logo": "https://ashes.town/assets/images/logo-small-0decfb2e2f.png",
+  "thumbnail": "https://ashes.town/assets/images/logo-large-a04e72411e.png",
+  "version": "0.0.1",
+  "color": "#409023",
+  "tags": [
+  "pony",
+  "town"
+  ],
+  "url": "ashes.town",
+  "description": {
+    "en": "A custom Pony Town server set in a post apocalyptic world!"
+  }
+}

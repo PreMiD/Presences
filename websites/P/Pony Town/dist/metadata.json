@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Pony Town",
+  "author": {
+    "name": "Ponfertato",
+    "id": "215527730345803777"
+  },
+  "category": "games",
+  "logo": "https://pony.town/assets/images/logo-small-770b141d9d.png",
+  "thumbnail": "https://pony.town/assets/images/logo-large-57d9b1947a.png",
+  "version": "0.0.1",
+  "color": "#ff0000",
+  "tags": [
+  "pony",
+  "town"
+  ],
+  "url": "pony.town",
+  "description": {
+    "en": "A game of ponies building a town."
+  }
+}
