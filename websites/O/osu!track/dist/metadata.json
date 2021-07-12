@@ -21,6 +21,6 @@
     ],
     "url": "ameobea.me",
     "description": {
-      "en": "Site where players of the game osu! can track their progress and view the progression of others. Pulls data from the osu! API, storing time series data and creating a variety of charts, plots, statistics, and other visualizations for a variety of different metrics. An in-game chat bot and Discord bot were also written to allow users to update their stats from in-game. Thousands of players a month continue to use osu!track."
+      "en": "Site where players of the game osu! can track their progress and view the progression of others."
     }
   }
