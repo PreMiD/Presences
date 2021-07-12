@@ -46,7 +46,7 @@ class AnimeStorage {
 
       this.list[title] = { 
         id: parseInt(shareLink.href.split("/a/")[1]), 
-        listing: listing,
+        listing,
         time: Date.now()
       };
 
@@ -170,7 +170,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = `${viewing} A-Z:`;
         presenceData.smallImageKey = "presence_browsing_all";
         presenceData.smallImageText = strings.browse;
-      } else switch (path[1]) {
+      } else {
+switch (path[1]) {
         case "genre": {
           // viewing genre
           presenceData.details = strings.viewGenre;
@@ -203,17 +204,19 @@ presence.on("UpdateData", async () => {
 
                 if (links[0].textContent === "AniList") return ["AniList", links[0].href];
 
-                for (const link of links) {
+                for (const link of links) 
                   if (link.textContent === "MyAnimeList") return ["MAL", link.href];
-                }
+                
               })() as [string, string];
 
-            presenceData.details = (() => { switch ((info.type[0] as HTMLAnchorElement).textContent) {
-              case "Movie":   return strings.viewMovie;
-              case "TV":      return `${viewing} ${strings.season}:`;
+            presenceData.details = (() => {
+ switch ((info.type[0] as HTMLAnchorElement).textContent) {
+              case "Movie": return strings.viewMovie;
+              case "TV": return `${viewing} ${strings.season}:`;
               case "Special": return `${viewing} ${strings.special}:`;
-              default:        return `${viewing} ${(info.type[0] as HTMLAnchorElement).textContent}:`;
-            }})();
+              default: return `${viewing} ${(info.type[0] as HTMLAnchorElement).textContent}:`;
+            }
+})();
 
             presenceData.state = title;
 
@@ -233,6 +236,7 @@ presence.on("UpdateData", async () => {
           }
         }
       }
+}
     } break;
     // playback
     case "play": {
