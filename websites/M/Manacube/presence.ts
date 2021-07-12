@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
     );
-    if(title != null) {
+    if(title !== null) {
       title = document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
       );
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
     );
-    if (title != null) {
+    if (title !== null) {
       title = document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
       );
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1 > a > em"
     );
-    if(search != null) {
+    if(search !== null) {
       presenceData.details = "Forums, Searching For:";
       presenceData.state = search.innerText;
 
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/conversations/")) {
     if(document.querySelector(
       "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
-    ) != null ) {
+    ) !== null ) {
       title = document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
       );
