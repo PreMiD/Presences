@@ -182,7 +182,7 @@ presence.on("UpdateData", async () => {
           case "season": {
             // viewing anime/time season
             presenceData.details = `${viewing} Anime ${strings.timeSeason}:`;
-            presenceData.state = document.getElementsByTagName('h1')[0].textContent;
+            presenceData.state = document.getElementsByTagName("h1")[0].textContent;
             presenceData.smallImageKey = "presence_browsing_time";
             presenceData.smallImageText = strings.browse;
           } break;
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
               // viewing a misc. category (eg. Airing, TV, etc)
               presenceData.details = strings.viewCategory;
 
-              const heading = document.getElementsByTagName('h1')[0].textContent;
+              const heading = document.getElementsByTagName("h1")[0].textContent;
               presenceData.state = heading.indexOf(" ") !== -1 ? heading.split(" ").map(s => capitalize(s)).join(" ") : capitalize(heading);
               presenceData.smallImageKey = "presence_browsing_all";
               presenceData.smallImageText = strings.browse;
@@ -291,7 +291,7 @@ presence.on("UpdateData", async () => {
     } break;
     default: {
       presenceData.details = strings.viewPage;
-      presenceData.state = document.getElementsByTagName('h1')[0].textContent;
+      presenceData.state = document.getElementsByTagName("h1")[0].textContent;
     }
   }
   presence.setActivity(presenceData, playback);
