@@ -144,16 +144,16 @@ presence.on("UpdateData", async () => {
     data.buttons = [
       {
         label: "Listen Along",
-        url: "https://soundcloud.com" + pathLinkSong
+        url: `https://soundcloud.com${pathLinkSong}`
       }
     ];
   }
 
   if ((!playing || !showSong) && showBrowsing) {
     for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
+      if (path.match(k)) 
         data = { ...data, ...v };
-      }
+      
     }
 
     if (path === "/") {
@@ -211,16 +211,16 @@ presence.on("UpdateData", async () => {
       getElement(".userNetworkTop__title > a");
     if (username) {
       data.details = "Viewing Profile...";
-      data.state = username + ` (${getElement(".g-tabs-link.active")})`;
+      data.state = `${username} (${getElement(".g-tabs-link.active")})`;
     }
 
     const waveform = document.querySelector(".fullListenHero .waveform__layer");
     if (waveform) {
-      if (waveform.childElementCount >= 3) {
+      if (waveform.childElementCount >= 3) 
         data.details = "Viewing Song...";
-      } else {
+       else 
         data.details = "Browsing Playlist/Album...";
-      }
+      
       data.state = `${getElement(".soundTitle__title > span")} by ${getElement(
         ".soundTitle__username"
       )}`;
