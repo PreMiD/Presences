@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 
         if (document.location.pathname == "/" && document.getElementsByClassName("app-game")["app-game"].hidden == false) {
           // Ashes Town in Game
-          presenceData.details = "Plays on:";
+          presenceData.details = "Plays on the server";
           presenceData.smallImageKey = "play-circle-solid_green";
         };
 
