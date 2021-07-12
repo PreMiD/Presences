@@ -1,0 +1,22 @@
+{
+    "author": {
+      "name": "Jackelele",
+      "id": "377175513372033024"
+    },
+    "service": "Manacube",
+    "description": {
+      "en": "An amazing Minecraft Network"
+    },
+    "url": "manacube.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/uwd27zO.png",
+    "thumbnail": "https://i.imgur.com/sBgHblJ.png",
+    "color": "#06D1DF",
+    "tags": [
+      "minecraft",
+      "manacube",
+      "gaming"
+    ],
+    "category": "games",
+    "regExp": "([a-z0-9-]+[.])*manacube[.]com[/]"
+  }
