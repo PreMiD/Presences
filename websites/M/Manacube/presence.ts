@@ -63,7 +63,6 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-    console.log(presenceData);
   } else if(document.location.pathname.includes("/whats-new/") && document.location.pathname.includes("/posts/")) {
     presenceData.details = "Forums, Viewing the list of";
     presenceData.state = "Latest Posts";
