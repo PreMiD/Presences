@@ -114,7 +114,7 @@ function parseInfo(dom: HTMLParagraphElement[]) {
 
   for (const entry of dom) {
     let title = entry.children[0].textContent.slice(0, -1);
-    const secondChild = entry.childNodes[1];
+    const [, secondChild] = entry.childNodes;
 
     if (title.indexOf(" ") !== -1) title = title.split(" ").map(e => uncapitalize(e)).join("_");
     else title = uncapitalize(title);
