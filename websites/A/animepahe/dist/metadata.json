@@ -25,6 +25,12 @@
     "media"
   ],
   "category": "anime",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    }
+  ],
   "iFrameRegExp": "kwik.cx/e",
   "iframe": true
 }

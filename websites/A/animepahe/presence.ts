@@ -4,7 +4,7 @@
 const presence = new Presence({
     clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
   }),
-  waitStrings = presence.getStrings({
+  waitStrings = async (lang: string) => await presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browse: "presence.activity.browsing",
@@ -24,7 +24,7 @@ const presence = new Presence({
     special: "animepahe.special",
     viewOn: "animepahe.view",
     timeSeason: "animepahe.timeSeason"
-  });
+  }, lang);
 
 let iframeResponse = {
   paused: true,
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
       details: "loading",
       startTimestamp: Math.floor(Date.now() / 1000)
     },
-    strings = (await waitStrings),
+    strings = await waitStrings(await presence.getSetting("lang").catch(() => "en")),
     viewing = strings.viewing.slice(0, -1),
     watching = strings.watching.slice(0, -1);
   let playback = false;
@@ -168,6 +168,7 @@ presence.on("UpdateData", async () => {
       // browsing a-z all
       if (path.length === 1) {
         presenceData.details = `${viewing} A-Z:`;
+        presenceData.state = document.querySelector('a.nav-link.active').textContent;
         presenceData.smallImageKey = "presence_browsing_all";
         presenceData.smallImageText = strings.browse;
       } else {
