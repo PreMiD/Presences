@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "large_image",
     startTimestamp: browsingStamp
   },
-  appGame = document.getElementsByClassName("app-game")["app-game"].hidden;
+    appGame = document.getElementsByClassName("app-game")["app-game"].hidden;
 
   if (document.location.pathname === "/" && appGame === true) {
     // Ashes Town Homepage
