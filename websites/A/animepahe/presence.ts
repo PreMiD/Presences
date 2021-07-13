@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
       // browsing a-z all
       if (path.length === 1) {
         presenceData.details = `${viewing} A-Z:`;
-        presenceData.state = document.querySelector('a.nav-link.active').textContent;
+        presenceData.state = document.querySelector("a.nav-link.active").textContent;
         presenceData.smallImageKey = "presence_browsing_all";
         presenceData.smallImageText = strings.browse;
       } else {
