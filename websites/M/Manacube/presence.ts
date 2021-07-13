@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "863866805184626708",
+  clientId: "863866805184626708"
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
-  largeImageKey: "manacube",
+  largeImageKey: "manacube"
 };
 
 presenceData.startTimestamp = browsingStamp;
