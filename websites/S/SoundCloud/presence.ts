@@ -133,8 +133,8 @@ presence.on("UpdateData", async () => {
       ".playbackSoundBadge__titleLink > span:nth-child(2)"
     );
     data.state = getElement(".playbackSoundBadge__lightLink");
-    const currentTime = presence.timestampFromFormat(document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__timePassed > span:nth-child(2)").textContent),
-          duration = presence.timestampFromFormat(document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__duration > span:nth-child(2)").textContent),
+    const timer = [presence.timestampFromFormat(document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__timePassed > span:nth-child(2)").textContent), presence.timestampFromFormat(document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__duration > span:nth-child(2)").textContent)],
+          [currentTime, duration] = timer,
           timestamps = presence.getTimestamps(currentTime, duration),
           pathLinkSong = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a").getAttribute("href");
     data.startTimestamp = timestamps[0];
