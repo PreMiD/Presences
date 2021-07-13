@@ -8,9 +8,12 @@
   "category": "music",
   "logo": "https://i.imgur.com/o9rFoCG.png",
   "thumbnail": "https://i.imgur.com/HkLnasC.jpg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#53abee",
-  "tags": ["music", "personal-library"],
+  "tags": [
+    "music",
+    "personal-library"
+  ],
   "url": "www.ibroadcast.com",
   "description": {
     "en": "iBroadcast is the best way to experience your personal music library online and on any mobile device."
