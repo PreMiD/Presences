@@ -19,7 +19,7 @@ const presence = new Presence({
         (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
   
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -31,7 +31,7 @@ const presence = new Presence({
         (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
   
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -43,7 +43,7 @@ const presence = new Presence({
         (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
   
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -55,7 +55,7 @@ const presence = new Presence({
         (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
   
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -67,7 +67,7 @@ const presence = new Presence({
         (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
   
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -79,7 +79,7 @@ const presence = new Presence({
         (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
   
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -92,8 +92,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "play"),
         (presenceData.smallImageText = "Playing");
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-on.kodi-partymode-off.kodi-mute-off.kodi-repeat-off.kodi-media-audio.kodi-playing"
@@ -105,8 +105,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "play"),
         (presenceData.smallImageText = "Playing");
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-off.kodi-partymode-off.kodi-mute-off.kodi-repeat-all.kodi-media-audio.kodi-playing"
@@ -118,8 +118,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "repeat"),
         (presenceData.smallImageText = "Repeating");
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-off.kodi-partymode-off.kodi-mute-off.kodi-repeat-one.kodi-media-audio.kodi-playing"
@@ -131,8 +131,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "repeat-one"),
         (presenceData.smallImageText = "Repeating");
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-on.kodi-partymode-off.kodi-mute-off.kodi-repeat-all.kodi-media-audio.kodi-playing"
@@ -144,8 +144,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "repeat"),
         (presenceData.smallImageText = "Repeating");
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-on.kodi-partymode-off.kodi-mute-off.kodi-repeat-one.kodi-media-audio.kodi-playing"
@@ -157,8 +157,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "repeat-one"),
         (presenceData.smallImageText = "Repeating");
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-off.kodi-partymode-off.kodi-mute-off.kodi-repeat-off.kodi-media-audio.kodi-not-playing"
@@ -189,7 +189,7 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
-      presenceData.details = "Watching: " + Name.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -201,8 +201,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "play"),
         (presenceData.smallImageText = "Playing");
-      presenceData.details = "Watching: " + Name.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-off.kodi-partymode-off.kodi-mute-off.kodi-repeat-all.kodi-media-video.kodi-playing"
@@ -213,8 +213,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "repeat"),
         (presenceData.smallImageText = "Repeating");
-      presenceData.details = "Watching: " + Name.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-off.kodi-partymode-off.kodi-mute-off.kodi-repeat-one.kodi-media-video.kodi-playing"
@@ -225,8 +225,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "repeat-one"),
         (presenceData.smallImageText = "Repeating");
-      presenceData.details = "Watching: " + Name.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-off.kodi-partymode-off.kodi-mute-off.kodi-repeat-all.kodi-media-video.kodi-paused"
@@ -237,7 +237,7 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
-      presenceData.details = "Watching: " + Name.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -249,7 +249,7 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
-      presenceData.details = "Watching: " + Name.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -261,8 +261,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "play"),
         (presenceData.smallImageText = "Playing");
-      presenceData.details = "Watching: " + Name.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-on.kodi-partymode-off.kodi-mute-off.kodi-repeat-all.kodi-media-video.kodi-playing"
@@ -273,8 +273,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "repeat"),
         (presenceData.smallImageText = "Repeating");
-      presenceData.details = "Watching: " + Name.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-on.kodi-partymode-off.kodi-mute-off.kodi-repeat-one.kodi-media-video.kodi-playing"
@@ -285,8 +285,8 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "repeat-one"),
         (presenceData.smallImageText = "Repeating");
-      presenceData.details = "Watching: " + Name.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     } else if (
       document.querySelector(
         "body.section-home.page-.active-player-kodi.kodi-shuffled-on.kodi-partymode-off.kodi-mute-off.kodi-repeat-all.kodi-media-video.kodi-paused"
@@ -297,7 +297,7 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
-      presenceData.details = "Watching: " + Name.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
       presenceData.state = "Paused";
     } else if (
       document.querySelector(
@@ -309,7 +309,7 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "pause"),
         (presenceData.smallImageText = "Paused");
-      presenceData.details = "Watching: " + Name.textContent;
+      presenceData.details = `Watching: ${Name.textContent}`;
       presenceData.state = "Paused";
     } else {
       Name = document.querySelector("div.playing-title");
@@ -318,14 +318,14 @@ const presence = new Presence({
       timeDuration = document.querySelector("div.playing-time-duration");
       (presenceData.smallImageKey = "play"),
         (presenceData.smallImageText = "Playing");
-      presenceData.details = Name.textContent + " - " + Artist.textContent;
-      presenceData.state = timeElapsed.textContent + "/" + timeDuration.textContent;
+      presenceData.details = `${Name.textContent} - ${Artist.textContent}`;
+      presenceData.state = `${timeElapsed.textContent}/${timeDuration.textContent}`;
     }
   
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
+    } else 
       presence.setActivity(presenceData);
-    }
+    
   });

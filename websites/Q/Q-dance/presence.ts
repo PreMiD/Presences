@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       (data.smallImageText = (await strings).live);
     data.startTimestamp = elapsed;
     presence.setActivity(data);
-  } else {
+  } else 
     presence.clearActivity();
-  }
+  
 });
