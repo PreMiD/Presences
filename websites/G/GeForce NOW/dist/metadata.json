@@ -13,10 +13,7 @@
   "logo": "https://i.imgur.com/a1L2Mi2.png",
   "thumbnail": "https://i.imgur.com/JCyb4zk.png",
   "color": "#76B918",
-  "tags": [
-    "gaming",
-    "streaming"
-  ],
+  "tags": ["gaming", "streaming"],
   "category": "games",
   "iframe": false,
   "readLogs": false

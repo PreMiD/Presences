@@ -16,16 +16,22 @@ presence.on("UpdateData", async () => {
     username = document.querySelector(".username");
     presenceData.details = "Browsing GeForce NOW";
     presenceData.smallImageText = username.innerText;
-  } else if (document.location.pathname === "/games" && !document.querySelector("gfn-evidence-panel-tile")) {
-    presenceData.details = "Playing " + document.title.replace(" on GeForce NOW", "");
+  } else if (
+    document.location.pathname === "/games" &&
+    !document.querySelector("gfn-evidence-panel-tile")
+  ) {
+    presenceData.details =
+      "Playing " + document.title.replace(" on GeForce NOW", "");
     presenceData.smallImageText = username.innerText;
   } else if (document.location.pathname === "/games") {
-    const game = document.querySelector("gfn-evidence-panel-tile .evidence-panel-title span") as HTMLElement;
+    const game = document.querySelector(
+      "gfn-evidence-panel-tile .evidence-panel-title span"
+    ) as HTMLElement;
     presenceData.details = "Viewing " + game.innerText;
     presenceData.smallImageText = username.innerText;
   } else {
     presenceData.details = "Unknown Page";
-    delete presenceData.smallImageKey
+    delete presenceData.smallImageKey;
   }
 
   if (presenceData.details == null) {
