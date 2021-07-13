@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "724828738461630475"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+  clientId: "843058683100266526"
+}),
+browsingStamp = Math.floor(Date.now() / 1000);
 let moduleName: HTMLElement;
 
 // checkmate javascript
@@ -75,8 +74,11 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   }
-
-  presenceData.startTimestamp = browsingStamp;
-
-  presence.setActivity(presenceData);
+  if (presenceData.details === null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+}
+else {
+    presence.setActivity(presenceData);
+}
 });
