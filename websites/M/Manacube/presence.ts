@@ -288,5 +288,8 @@ if (document.location.hostname === "bans.manacube.com") {
 
       presence.setActivity(presenceData);
   }
+} else {
+    presence.setActivity();
+    presence.setTrayTitle();
 }
 });
