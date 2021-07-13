@@ -1,5 +1,5 @@
 // Note: Developer has been working on a new website design for ages,
-//       maybe at some point he"ll finish it and this will need updating.
+//       maybe at some point he'll finish it and this will need updating.
 
 const presence = new Presence({
     clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
