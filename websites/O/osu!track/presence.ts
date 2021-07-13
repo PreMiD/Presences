@@ -79,11 +79,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing at the IRC Bot's Documentation";
 
   if (!presenceData.details) {
-    //This will fire if you do not set presence details
-    presence.setTrayTitle(); //Clears the tray title for mac users
-    presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
+    presence.setTrayTitle();
+    presence.setActivity();
   } else {
-    //This will fire if you set presence details
-    presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
+    presence.setActivity(presenceData);
   }
 });
