@@ -7,7 +7,7 @@ const presence = new Presence({
   waitStrings = async (lang: string) => await presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browse: "presence.activity.browsing",
+    browse: "general.browsing",
     page: "general.page",
     episode: "general.episode",
     watching: "general.watching",
