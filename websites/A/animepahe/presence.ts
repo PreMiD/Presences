@@ -38,7 +38,7 @@ class AnimeStorage {
   private list: storeType;
 
   public anime(title: string, listing: [string, string] | false) {
-    if (this.list[title]) return this.list[title];
+    if (this.list[title] && this.list[title].listing) return this.list[title];
     else if (!listing) return undefined;
     else {
       const shareLink = document.getElementsByClassName("modal-body")[1]
