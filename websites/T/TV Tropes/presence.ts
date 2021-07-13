@@ -12,7 +12,7 @@ presence.on("UpdateData", () => {
       startTimestamp
     };
 
-  function mainWikiPathDetails(namespace: String) {
+  function mainWikiPathDetails(namespace: string) {
     if (namespace === "Main") {
       const titleText = document
         .querySelector(".entry-title")
@@ -84,12 +84,12 @@ presence.on("UpdateData", () => {
         presenceData.state = document.title;
       }
     }
-  } else if (pathCheck) {
+  } else if (pathCheck) 
     mainWikiPathDetails(pathCheck);
-  } else {
+   else 
     presenceData.details = "Browsing TV Tropes Homepage";
-  }
-  if (presenceData.details) {
+  
+  if (presenceData.details) 
     presence.setActivity(presenceData);
-  }
+  
 });
