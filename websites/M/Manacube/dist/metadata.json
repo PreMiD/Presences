@@ -5,12 +5,12 @@
     },
     "service": "Manacube",
     "description": {
-      "en": "An amazing Minecraft Network"
+      "en": "ManaCube is a premium Minecraft network with a range of feature-rich gamemodes."
     },
     "url": "manacube.com",
     "version": "1.0.0",
-    "logo": "https://i.imgur.com/uwd27zO.png",
-    "thumbnail": "https://i.imgur.com/sBgHblJ.png",
+    "logo": "https://i.imgur.com/sBgHblJ.png",
+    "thumbnail": "https://i.imgur.com/D04YmVN.png",
     "color": "#06D1DF",
     "tags": [
       "minecraft",
