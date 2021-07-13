@@ -12,11 +12,11 @@ const presence = new Presence({
 
     const element = document.querySelector(query);
     if (element) {
-      if (element.childNodes.length > 1) {
+      if (element.childNodes.length > 1) 
         text = element.childNodes[0].textContent;
-      } else {
+       else 
         text = element.textContent;
-      }
+      
     }
   return text.trimStart().trimEnd();
   },
@@ -159,38 +159,28 @@ presence.on("UpdateData", async () => {
     if (path === "/") {
       data.details = "Browsing...";
       data.state = "Home";
-    }
-
-    else if (path.includes("/charts/")) {
+    } else if (path.includes("/charts/")) {
       data.details = "Browsing Charts...";
 
       const heading = path.split("/").slice(-2)[0];
       data.state =
         heading && !heading.includes("charts") && capitalize(heading);
-    }
-
-    else if (path.includes("/you/")) {
+    } else if (path.includes("/you/")) {
       data.details = "Browsing My Content...";
 
       const heading = location.pathname.split("/").pop();
       data.state = heading && capitalize(heading);
-    }
-
-    else if (path.includes("/settings/")) {
+    } else if (path.includes("/settings/")) {
       data.details = "Browsing Settings...";
       data.state = getElement(".g-tabs-link.active");
-    }
-
-    else if (path.includes("/search/")) {
+    } else if (path.includes("/search/")) {
       data.details = "Searching...";
 
       const searchBox: HTMLInputElement = document.querySelector(
         ".headerSearch__input"
       );
       data.state = searchBox && searchBox.value;
-    }
-
-    else if (path.includes("/discover/")) {
+    } else if (path.includes("/discover/")) {
       data.details = "Discovering...";
       data.state = "Music";
 
@@ -199,9 +189,7 @@ presence.on("UpdateData", async () => {
         data.details = "Browsing Set...";
         data.state = setLabel;
       }
-    }
-
-    else if (path.includes("/stats/")) {
+    } else if (path.includes("/stats/")) {
       data.details = "Viewing Stats...";
       data.state = getElement(".statsNavigation .g-tabs-link.active");
     }
@@ -231,16 +219,13 @@ presence.on("UpdateData", async () => {
     if (data.details.match("(Browsing|Viewing|Discovering)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;
-    }
-    else if (data.details.match("(Searching)")) {
+    } else if (data.details.match("(Searching)")) {
       data.smallImageKey = "search";
       data.smallImageText = (await strings).search;
-    }
-    else if (data.details.match("(Uploading)")) {
+    } else if (data.details.match("(Uploading)")) {
       data.smallImageKey = "uploading";
       data.smallImageText = "Uploading..."; // no string available
-    }
-    else if (!showTimestamps || (!playing && !showBrowsing)) {
+    } else if (!showTimestamps || (!playing && !showBrowsing)) {
       delete data.startTimestamp;
       delete data.endTimestamp;
     }
