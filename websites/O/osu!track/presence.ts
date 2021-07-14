@@ -9,8 +9,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: timestampe
   },
     pathnames = location.pathname,
-    urlSplitRaw = document.URL.split("/"),
-    [, , , , , urlSplit] = urlSplitRaw,
+    [, , , , , urlSplit] = document.URL.split("/"),
     decodeURL = decodeURIComponent(urlSplit);
 
   if (pathnames === "/osutrack/") presenceData.details = "Viewing homepage";
