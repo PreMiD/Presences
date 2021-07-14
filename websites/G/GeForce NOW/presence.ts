@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
