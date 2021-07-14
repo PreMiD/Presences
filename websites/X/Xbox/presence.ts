@@ -39,7 +39,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Determining their recommended Xbox console";
     else if (document.location.href.includes("consoles/")) {
       presenceData.details = "Viewing an Xbox console";
-      presenceData.state = document.title.split("|")[0];
+      const [splitString] = document.title.split("|");
+      presenceData.state = splitString;
       presenceData.buttons = [{ label: "View this console", url: document.location.href }];
     } else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
@@ -53,7 +54,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Determining their recommended Xbox console";
     else if (document.location.href.includes("accessories/")) {
       presenceData.details = "Viewing an Xbox accessory";
-      presenceData.state = document.title.split("|")[0];
+      const [splitString] = document.title.split("|");
+      presenceData.state = splitString;
       presenceData.buttons = [{ label: "View this accessory", url: document.location.href }];
     } else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
@@ -63,10 +65,12 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "gamepass";
     if (document.location.href.includes("play/games")) {
       presenceData.details = "Viewing an Xbox Cloud Gaming game";
-      presenceData.state = document.title.split("|")[0];
+      const [splitString] = document.title.split("|");
+      presenceData.state = splitString;
     } else if (document.location.href.includes("play/launch")) {
       presenceData.details = "Playing an Xbox Cloud Gaming game";
-      presenceData.state = document.title.split("|")[0];
+      const [splitString] = document.title.split("|");
+      presenceData.state = splitString;
       presenceData.buttons = [{ label: "Play this game (Game Pass)", url: document.location.href }];
       if (document.querySelector(`[class^="Provisioning"`)) presenceData.details += " (setting up)";
       else if (document.querySelector(`[class^="NotFocused"`)) presenceData.details += " (unfocused)";
