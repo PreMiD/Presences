@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "864631234339930132"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 let username: HTMLElement;
 
@@ -20,26 +20,26 @@ presence.on("UpdateData", async () => {
     !document.querySelector("gfn-evidence-panel-tile")
   ) {
     presenceData.details =
-      "Playing " + document.title.replace(" on GeForce NOW", "");
+      `Playing ${document.title.replace(" on GeForce NOW", "")}`;
   } else if (document.location.pathname === "/games") {
     const game = document.querySelector(
       "gfn-evidence-panel-tile .evidence-panel-title span"
     ) as HTMLElement;
-    presenceData.details = "Viewing " + game.innerText;
-  } else {
+    presenceData.details = `Viewing ${game.innerText}`;
+  } else 
     presenceData.details = "Unknown Page";
-  }
+  
 
-  if (username) {
+  if (username) 
     presenceData.smallImageText = username.innerText;
-  } else {
+   else 
     delete presenceData.smallImageKey;
-  }
+  
 
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
