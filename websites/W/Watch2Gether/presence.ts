@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
     { hostname, pathname } = document.location;
 
   if (hostname === "w2g.tv") {
@@ -60,11 +60,14 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (pathname.startsWith("/users/")) {
-      if (pathname.includes("edit")) presenceData.details = "Editing user profile";
+      if (pathname.includes("edit"))
+        presenceData.details = "Editing user profile";
       else presenceData.details = "Viewing user rooms";
-    } else if (pathname === "/auth/sign_in") presenceData.details = "Signing In";
+    } else if (pathname === "/auth/sign_in")
+      presenceData.details = "Signing In";
     else if (pathname === "/auth/sign_up") presenceData.details = "Signing Up";
-    else if (pathname === "/pages/plus") presenceData.details = "Checking w2g+ plans";
+    else if (pathname === "/pages/plus")
+      presenceData.details = "Checking w2g+ plans";
     else if (pathname === "/pages/leave") presenceData.details = "Left room";
   } else if (hostname === "community.w2g.tv") {
     if (pathname === "/") presenceData.details = "At Community homepage";
@@ -75,8 +78,10 @@ presence.on("UpdateData", async () => {
         presenceData.state = title.innerText;
       }
     } else if (pathname.startsWith("/u/")) {
-      const username: HTMLHeadingElement = document.querySelector("h1.full-name");
-      if (username) presenceData.details = `Looking at user ${username.innerText}`;
+      const username: HTMLHeadingElement =
+        document.querySelector("h1.full-name");
+      if (username)
+        presenceData.details = `Looking at user ${username.innerText}`;
     } else {
       presenceData.details = `Looking at ${document.title.substring(
         0,

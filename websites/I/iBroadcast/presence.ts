@@ -5,15 +5,15 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "ibroadcast_logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "ibroadcast_logo",
+      startTimestamp: browsingStamp
+    },
     { hostname } = document.location;
 
   if (hostname.startsWith("media")) {
     const controls: HTMLImageElement = document.querySelector(
-      "img.mgr-player-play"
-    ),
+        "img.mgr-player-play"
+      ),
       album: HTMLDivElement = document.querySelector(".mgr-player-album"),
       pageTitle: HTMLDivElement = document.querySelector(".mgr-page-title"),
       playlistDetails: HTMLDivElement = document.querySelector(
@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Viewing ${pageTitle.innerText}`;
     else if (playlistDetails) {
       const type: HTMLDivElement = playlistDetails.querySelector(
-        ".mgr-list-tracks-header-type"
-      ),
+          ".mgr-list-tracks-header-type"
+        ),
         name: HTMLDivElement = playlistDetails.querySelector(
           ".mgr-list-tracks-header-name"
         );
