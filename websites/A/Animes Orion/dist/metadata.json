@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "Animes Orion",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/8lYgOFi.png",
+  "thumbnail": "https://i.imgur.com/FGaMOSH.jpg",
+  "version": "1.0.0",
+  "color": "#0652dd",
+  "tags": ["anime", "brazil", "stream"],
+  "url": "animesorionvip.com",
+  "description": {
+    "en": "Animes Orion is a site with the fastest releases and the highest quality in Brazil!",
+    "pt_BR": "O Animes Orion é um site com os lançamentos mais rápidos e com a maior qualidade no Brasil!"
+  }
+}
