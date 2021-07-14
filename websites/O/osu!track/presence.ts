@@ -9,32 +9,33 @@ presence.on("UpdateData", async () => {
     startTimestamp: timestampe
   },
     pathnames = location.pathname,
-    urlSplit = document.URL.split("/"),
-    decodeURL = decodeURIComponent(urlSplit[5]);
+    urlSplitRaw = document.URL.split("/"),
+    [, , , , , urlSplit] = urlSplitRaw,
+    decodeURL = decodeURIComponent(urlSplit);
 
   if (pathnames === "/osutrack/") presenceData.details = "Viewing homepage";
   else if (pathnames === "/osutrack/user/") {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = "User not found!";
   } else if (
-    pathnames === `/osutrack/user/${urlSplit[5]}` ||
-    pathnames === `/osutrack/user/${urlSplit[5]}/`
+    pathnames === `/osutrack/user/${urlSplit}` ||
+    pathnames === `/osutrack/user/${urlSplit}/`
   ) {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = decodeURL;
     presenceData.smallImageKey = "osu_std_logo";
     presenceData.smallImageText = "osu!standard";
-  } else if (pathnames.includes(`/osutrack/user/${urlSplit[5]}/taiko`)) {
+  } else if (pathnames.includes(`/osutrack/user/${urlSplit}/taiko`)) {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = `${decodeURL} in osu!taiko`;
     presenceData.smallImageKey = "taiko";
     presenceData.smallImageText = "Taiko";
-  } else if (pathnames.includes(`/osutrack/user/${urlSplit[5]}/ctb`)) {
+  } else if (pathnames.includes(`/osutrack/user/${urlSplit}/ctb`)) {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = `${decodeURL} in osu!catch the beat`;
     presenceData.smallImageKey = "ctb";
     presenceData.smallImageText = "Catch The Beat (CTB)";
-  } else if (pathnames.includes(`/osutrack/user/${urlSplit[5]}/mania`)) {
+  } else if (pathnames.includes(`/osutrack/user/${urlSplit}/mania`)) {
     presenceData.details = "Viewing a user's statistics";
     presenceData.state = `${decodeURL} in osu!mania`;
     presenceData.smallImageKey = "mania";
