@@ -84,12 +84,7 @@ presence.on("UpdateData", () => {
         presenceData.state = document.title;
       }
     }
-  } else if (pathCheck) 
-    mainWikiPathDetails(pathCheck);
-   else 
-    presenceData.details = "Browsing TV Tropes Homepage";
-  
-  if (presenceData.details) 
-    presence.setActivity(presenceData);
-  
+  } else if (pathCheck) mainWikiPathDetails(pathCheck);
+  else presenceData.details = "Browsing TV Tropes Homepage";
+  if (presenceData.details) presence.setActivity(presenceData);
 });
