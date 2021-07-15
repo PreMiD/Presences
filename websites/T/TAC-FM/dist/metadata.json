@@ -1,0 +1,28 @@
+{
+  "author": {
+    "name": "InfoBlock",
+    "id": "124220790001500161"
+  },
+  "service": "TAC-FM",
+  "description": {
+    "en": "The best tunes worldwide! TAC-FM",
+    "de": "Die Besten Songs weltweit! TAC-FM"
+  },
+  "url": [
+    "tac-fm.ml"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/6jA9enD.png",
+  "thumbnail": "https://i.imgur.com/6jA9enD.png",
+  "color": "#781629",
+  "tags": [
+    "music",
+    "radio",
+    "gamers",
+    "community",
+    "tac-fm",
+    "tac-fm-radio",
+    "online-radio"
+  ],
+  "category": "music"
+}
