@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "Ghaith M. AlHallak",
+    "id": "448318357540962314"
+  },
+  "url": ["gmanga.org", "gmanga.io", "gmanga.me"],
+  "description": {
+    "en": "GMANGA - An interactive site that aims to provide more options for translating manga chapters to Arabic."
+  },
+  "service": "GMANGA",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/HITNgFU.png",
+  "thumbnail": "https://i.imgur.com/mVR71z8.png",
+  "color": "#428bca",
+  "tags": ["manga", "manhwa", "manhua"],
+  "category": "anime",
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fab fa-discord",
+      "values": ["Light", "Dark"],
+      "value": 0
+    }
+  ]
+}

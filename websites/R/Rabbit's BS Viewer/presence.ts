@@ -22,13 +22,13 @@ presence.on("UpdateData", async () => {
         " " +
         document.querySelector("#songsubname").textContent;
       presenceData.state =
-        (document.getElementById(
-          "difficultyselect"
-        ) as HTMLSelectElement).value.replace("Plus", "+") +
+        (
+          document.getElementById("difficultyselect") as HTMLSelectElement
+        ).value.replace("Plus", "+") +
         " (" +
-        (document.getElementById(
-          "difficultyselect"
-        ) as HTMLSelectElement).selectedOptions.item(0).textContent +
+        (
+          document.getElementById("difficultyselect") as HTMLSelectElement
+        ).selectedOptions.item(0).textContent +
         ")";
       presenceData.buttons = [
         {
@@ -73,17 +73,21 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Mapping Tool";
     presenceData.state = document.querySelector(".selected-tab").textContent;
     if (
-      (document.querySelector(
-        "input#file-input.file-input"
-      ) as HTMLInputElement).value !== "" &&
+      (
+        document.querySelector(
+          "input#file-input.file-input"
+        ) as HTMLInputElement
+      ).value !== "" &&
       !privacy
     )
       presenceData.state =
         document.querySelector(".selected-tab").textContent +
         " (" +
-        (document.querySelector(
-          "input#file-input.file-input"
-        ) as HTMLInputElement).value.replace("C:\\fakepath\\", "") +
+        (
+          document.querySelector(
+            "input#file-input.file-input"
+          ) as HTMLInputElement
+        ).value.replace("C:\\fakepath\\", "") +
         ")";
   } else if (document.location.pathname.includes("/"))
     presenceData.details = "Viewing Homepage";

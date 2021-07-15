@@ -264,8 +264,7 @@ interface MediaInfo {
   Height: number;
 }
 
-const
-  // official website
+const // official website
   EMBY_URL = "emby.media",
   // web client app name
   APP_NAME = "Emby Web",
@@ -284,8 +283,7 @@ const
     largeImageKey: PRESENCE_ART_ASSETS.logo
   };
 
-  let presence: Presence,
-    ApiClient: ApiClient;
+let presence: Presence, ApiClient: ApiClient;
 
 /**
  * handleOfficialWebsite - handle the presence while the user is in the official website
@@ -382,10 +380,8 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp = presence.getTimestampsfromMedia(
-          audioElem
-        )[1];
-
+        presenceData.endTimestamp =
+          presence.getTimestampsfromMedia(audioElem)[1];
       } else delete presenceData.endTimestamp;
 
       // paused
@@ -409,8 +405,9 @@ function getUserId(): string {
   try {
     return ApiClient["_currentUser"]["Id"];
   } catch (e) {
-    const servers = JSON.parse(localStorage.getItem("servercredentials3"))
-      .Servers;
+    const servers = JSON.parse(
+      localStorage.getItem("servercredentials3")
+    ).Servers;
 
     // server id available on browser location
     if (location.hash.indexOf("?") > 0) {
@@ -463,11 +460,11 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
     baseLocation = location.protocol + "//" + location.host + basePath,
     res = await fetch(
       `${baseLocation}emby/Users/${getUserId()}/Items/${itemId}?` +
-      `X-Emby-Client=${ApiClient["_appName"]}&` +
-      `X-Emby-Device-Name=${ApiClient["_deviceName"]}&` +
-      `X-Emby-Device-Id=${ApiClient["_deviceId"]}&` +
-      `X-Emby-Client-Version=${ApiClient["_appVersion"]}&` +
-      `X-Emby-Token=${ApiClient["_serverInfo"]["AccessToken"]}`
+        `X-Emby-Client=${ApiClient["_appName"]}&` +
+        `X-Emby-Device-Name=${ApiClient["_deviceName"]}&` +
+        `X-Emby-Device-Id=${ApiClient["_deviceId"]}&` +
+        `X-Emby-Client-Version=${ApiClient["_appVersion"]}&` +
+        `X-Emby-Token=${ApiClient["_serverInfo"]["AccessToken"]}`
     ),
     mediaInfo = await res.json();
 
@@ -492,15 +489,14 @@ async function handleVideoPlayback(): Promise<void> {
   const videoPlayerElem = document.getElementsByTagName("video")[0];
 
   // this variables content will be replaced in details and status properties on presenceData
-  let title,
-    subtitle;
+  let title, subtitle;
 
   // title on the header
   const headerTitleElem = videoPlayerPage.querySelector("h3.videoOsdTitle"),
     // title on the osdControls
     osdParentTitleElem = videoPlayerPage.querySelector(
-    "h2.videoOsdParentTitle"
-  );
+      "h2.videoOsdParentTitle"
+    );
 
   // media metadata
   let mediaInfo: string | MediaInfo;
@@ -512,7 +508,9 @@ async function handleVideoPlayback(): Promise<void> {
   // no background image, we're playing live tv
   if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
     // with this url we can obtain the id of the item we are playing back
-    const mediaId = (videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage
+    const mediaId = (
+      videoPlayerContainerElem as HTMLVideoElement
+    ).style.backgroundImage
       .split('"')[1]
       .split("/")[5];
 
@@ -554,10 +552,8 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp = presence.getTimestampsfromMedia(
-          videoPlayerElem
-        )[1];
-
+        presenceData.endTimestamp =
+          presence.getTimestampsfromMedia(videoPlayerElem)[1];
       } else delete presenceData.endTimestamp;
 
       // paused

@@ -44,9 +44,9 @@ presence.on("UpdateData", async () => {
       document.querySelector(".jam_header_widget")
     ) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = (document.querySelector(
-        ".jam_title_header"
-      ) as HTMLElement).innerText;
+      presenceData.details = (
+        document.querySelector(".jam_title_header") as HTMLElement
+      ).innerText;
       presenceData.state =
         "Jam " +
         (document.querySelector(".jam_host_header") as HTMLElement).innerText;

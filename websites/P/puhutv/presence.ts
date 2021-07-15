@@ -74,9 +74,11 @@ presence.on("UpdateData", async () => {
                 document.querySelector(
                   "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
                 )
-                  ? (document.querySelector(
-                      "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
-                    ) as any).innerText.replace("\n", ": ")
+                  ? (
+                      document.querySelector(
+                        "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
+                      ) as any
+                    ).innerText.replace("\n", ": ")
                   : null
               }`,
         smallImageKey: video.paused ? "paused" : "playing",

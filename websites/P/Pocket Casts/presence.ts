@@ -17,9 +17,10 @@ presence.on("UpdateData", async () => {
       document.location.pathname.startsWith("/discover/podcast/")
     ) {
       presenceData.details = "Viewing podcast";
-      presenceData.state = document.getElementsByClassName(
-        "title-and-actions"
-      )[0].children[0].textContent;
+      presenceData.state =
+        document.getElementsByClassName(
+          "title-and-actions"
+        )[0].children[0].textContent;
     } else if (document.location.pathname == "/discover") {
       presenceData.details = "Viewing discover page";
     } else if (document.location.pathname.startsWith("/discover/list/")) {

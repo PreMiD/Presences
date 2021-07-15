@@ -19,13 +19,30 @@
   },
   "rules": {
     "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
-    "no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
-    "quotes": "off",
-    "indent": "off",
-    "camelcase": "off",
+    "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
+    "quotes": ["warn", "double", { "avoidEscape": true }],
+    "camelcase": ["warn", { "properties": "always" }],
+    "indent": [2, 2, { "SwitchCase": 1 }],
+    "curly": ["warn", "multi-or-nest"],
+    "eqeqeq": ["error", "always"],
     "comma-dangle": ["warn", "never"],
     "one-var": ["warn", "consecutive"],
     "linebreak-style": ["warn", "unix"],
+    "prefer-const": "error",
+    "no-multi-spaces": "error",
+    "object-shorthand": "error",
+    "quote-props": ["error", "as-needed"],
+    "prefer-destructuring": "warn",
+    "prefer-template": "warn",
+    "space-before-blocks": ["error", "always"],
+    "space-infix-ops": "warn",
+    "func-call-spacing": ["error", "never"],
+    "key-spacing": ["warn", { "beforeColon": false }],
+    "dot-notation": "error",
+    "no-case-declarations": "error",
+    "no-mixed-operators": "error",
+    "brace-style": "error",
+    "template-curly-spacing": "warn",
     "no-console": "error",
     "no-var": "error",
     "no-undef": "off",
@@ -36,9 +53,7 @@
         "message": "Usage of const enums is forbidden."
       }
     ],
-    "@typescript-eslint/camelcase": "off",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/indent": "off"
+    "@typescript-eslint/no-explicit-any": "error"
   },
   "overrides": [
     {
@@ -53,7 +68,7 @@
       }
     }
   ],
-  "reportUnusedDisableDirectives": true,	
+  "reportUnusedDisableDirectives": true,
   "noInlineConfig": true,
   "plugins": ["@typescript-eslint"]
 }

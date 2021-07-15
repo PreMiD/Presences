@@ -67,8 +67,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = userElement.textContent;
       presenceData.smallImageKey = "reading";
     } else if (episodeSelection) {
-      episodeTitle = document.querySelector("div#player-content > header > h1")
-        .textContent;
+      episodeTitle = document.querySelector(
+        "div#player-content > header > h1"
+      ).textContent;
       // .textContent.replace("information", "")
       // .replace("Drama", "");
       dramaTitle = document.querySelector(".meta-cat > a").textContent;

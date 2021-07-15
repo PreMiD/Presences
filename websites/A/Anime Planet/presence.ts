@@ -148,8 +148,8 @@ presence.on("UpdateData", async () => {
       "/users/": {
         details: (await strings).viewProfile,
         state: document.querySelector("h1")?.textContent.trim(),
-        smallImageText: document.querySelector("p:nth-child(2) > a")
-          .textContent,
+        smallImageText:
+          document.querySelector("p:nth-child(2) > a").textContent,
         buttons: [
           {
             label: (await strings).buttonViewProfile,
@@ -161,10 +161,11 @@ presence.on("UpdateData", async () => {
         details: `Viewing studio:`,
         state: content.title
       },
-      "/manga/(read-online|recommendations|light-novels|top-manga|all|magazines)": {
-        details: (await strings).viewPage,
-        state: content.title
-      },
+      "/manga/(read-online|recommendations|light-novels|top-manga|all|magazines)":
+        {
+          details: (await strings).viewPage,
+          state: content.title
+        },
       "/manga/tags/": {
         details: `Manga | Viewing tag:`,
         state: content.title

@@ -44,7 +44,7 @@ const presence = new Presence({
         latest: "netflix.latest",
         refer: "netflix.referral"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     );
   };
 
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
     showTimestamp: boolean = await presence.getSetting("timestamp"),
     showButtons: boolean = await presence.getSetting("buttons"),
     privacy = await presence.getSetting("privacy"),
-    newLang = await presence.getSetting("lang"),
+    newLang = await presence.getSetting("lang").catch(() => "en"),
     logo: number = await presence.getSetting("logo"),
     logoArr = ["nflix_lg", "noback"];
 
@@ -266,10 +266,11 @@ presence.on("UpdateData", async () => {
             ? (await strings).viewingSeries
             : (await strings).viewingMovie,
           state:
-            (document.querySelector(
-              ".previewModal--player-titleTreatment-logo"
-            ) as HTMLImageElement)?.title ||
-            document.querySelector("h1.title-title")?.textContent,
+            (
+              document.querySelector(
+                ".previewModal--player-titleTreatment-logo"
+              ) as HTMLImageElement
+            )?.title || document.querySelector("h1.title-title")?.textContent,
           buttons: [
             {
               label: document.querySelector(".btn.btn-get-started")
@@ -293,18 +294,20 @@ presence.on("UpdateData", async () => {
         },
         "/search/": {
           details: (await strings).searchFor,
-          state: (document.querySelector(
-            ".searchInput > input"
-          ) as HTMLInputElement)?.value,
+          state: (
+            document.querySelector(".searchInput > input") as HTMLInputElement
+          )?.value,
           smallImageKey: "search"
         },
         "jbv/(\\d*)/": {
           details: document.querySelector(".episodeSelector")
             ? (await strings).viewingSeries
             : (await strings).viewingMovie,
-          state: (document.querySelector(
-            ".previewModal--player-titleTreatment-logo"
-          ) as HTMLImageElement)?.title,
+          state: (
+            document.querySelector(
+              ".previewModal--player-titleTreatment-logo"
+            ) as HTMLImageElement
+          )?.title,
           buttons: [
             {
               label: document.querySelector(".episodeSelector")

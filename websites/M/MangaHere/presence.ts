@@ -85,8 +85,9 @@ presence.on("UpdateData", async () => {
   }
   //Manga Viewing
   else if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
-    const title = document.querySelector(".detail-info-right-title-font")
-        .textContent,
+    const title = document.querySelector(
+        ".detail-info-right-title-font"
+      ).textContent,
       link = window.location.href;
     data.details = "Viewing manga:";
     data.state = title;

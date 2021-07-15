@@ -26,9 +26,8 @@ presence.on("UpdateData", async () => {
       document.getElementsByClassName("campaignname").length > 0 &&
       !hideDetails
     ) {
-      presenceData.state = document.getElementsByClassName(
-        "campaignname"
-      )[0].textContent;
+      presenceData.state =
+        document.getElementsByClassName("campaignname")[0].textContent;
     }
   } else if (document.location.pathname.includes("/lfg")) {
     presenceData.details = "Finding games to join";
@@ -77,9 +76,8 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/post") && !hideDetails) {
       presenceData.details = "Reading Forum Post";
       if (document.getElementsByClassName("posttitle").length > 0) {
-        presenceData.state = document.getElementsByClassName(
-          "posttitle"
-        )[0].textContent;
+        presenceData.state =
+          document.getElementsByClassName("posttitle")[0].textContent;
       }
     } else if (
       document.location.pathname.includes("/category") &&

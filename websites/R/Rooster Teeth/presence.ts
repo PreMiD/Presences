@@ -16,9 +16,9 @@ presence.on("UpdateData", () => {
   };
   if (window.location.hash.includes("#search?term=")) {
     presenceData.details = "Searching For:";
-    presenceData.state = (document.querySelector(
-      ".search__input"
-    ) as HTMLInputElement).value;
+    presenceData.state = (
+      document.querySelector(".search__input") as HTMLInputElement
+    ).value;
   } else if (path.includes("/live/rt-tv")) {
     video = document.querySelector(".vjs-tech");
     presenceData.details = document
@@ -46,9 +46,8 @@ presence.on("UpdateData", () => {
         ".video-details__show"
       ).textContent;
     } else {
-      presenceData.details = document.querySelector(
-        ".player-title"
-      ).textContent;
+      presenceData.details =
+        document.querySelector(".player-title").textContent;
       presenceData.state = "Miniplayer";
     }
   } else if (path.includes("/watch")) {
@@ -60,9 +59,8 @@ presence.on("UpdateData", () => {
         ".video-details__show"
       ).textContent;
     } else {
-      presenceData.details = document.querySelector(
-        ".player-title"
-      ).textContent;
+      presenceData.details =
+        document.querySelector(".player-title").textContent;
       presenceData.state = "Miniplayer";
     }
   } else if (path.includes("/schedule")) {
