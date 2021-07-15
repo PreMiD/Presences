@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Mert",
+    "id": "708746139092123679"
+  },
+  "service": "TürkAnimeTV-V3",
+  "description": {
+    "tr": "TürkAnime, Animeleri Türkçe İzleyebileceğiniz En İyi Site."
+  },
+  "url": "www.turkanime.net",
+  "version": "1.0.0",
+  "logo": "https://cdn.discordapp.com/attachments/864137946705690674/864935558224281600/4070d0eb8a3af577f1386ab0d9b6eb86.png",
+  "thumbnail": "https://i.imgur.com/sIWWJ0X.png",
+  "color": "#3398b9",
+  "tags": [
+    "türk",
+    "anime",
+    "video"
+  ],
+  "iframe": true,
+  "category": "anime"
+}
