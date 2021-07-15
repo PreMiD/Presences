@@ -5,20 +5,19 @@ interface VideoClient {
 currentTime: number;
 paused: boolean;
 duration: number;
-};
+}
 
 
-const presence = new Presence({ clientId: "864139152303063071" })
-const strings = presence.getStrings({ playing: "presence.playback.playing", paused: "presence.playback.paused", browsing: "presence.activity.browsing", viewAnime: "general.viewAnime", watching: "general.watching", episode: "general.episode", watchEpisode: "general.buttonViewEpisode", anime: "general.anime" });
+const presence = new Presence({ clientId: "864139152303063071" }),
+ strings = presence.getStrings({ playing: "presence.playback.playing", paused: "presence.playback.paused", browsing: "presence.activity.browsing", viewAnime: "general.viewAnime", watching: "general.watching", episode: "general.episode", watchEpisode: "general.buttonViewEpisode", anime: "general.anime" });
 
 
-var video: VideoClient;
+let video: VideoClient;
 
 
 presence.on("iFrameData", (Message: VideoClient) => {
   video = Message;
 });
-
 
 
 presence.on("UpdateData", async () => {
@@ -48,10 +47,11 @@ title =
           const epNum = ep.match(/[0-9]+\. Bölüm/g);
 
           presenceData.details = `${(await strings).watching} ${title}`;
-          if (epNum)
-            presenceData.state = `${(await strings).episode} ${
+          if (epNum) {
+presenceData.state = `${(await strings).episode} ${
               epNum[0].split(".")[0]
             }`;
+}
 
           presenceData.buttons = [
             {
