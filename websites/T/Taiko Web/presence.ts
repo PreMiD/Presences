@@ -1,116 +1,93 @@
 const presence = new Presence({
     clientId: "858246998561783828"
   }),
-  slideShow = presence.createSlideshow(),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  script = document.createElement("script");
+  slideshow = presence.createSlideshow(),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-/*
-  Overriding XMLHttpRequest.open method
-  to know the current request song
-  Doesn't work if song is in cache :[
-*/
-script.innerHTML = `
-  !function(open){
-    XMLHttpRequest.prototype.open = function (method, url) {
-      if (url && url.startsWith("https://taiko.uk/taiko/songs/")) {
-        let songId = parseInt(url.substr(29));
-        let song = assets.songs.find(song => song.id === songId);
-        window.song = {};
-        window.song.title_lang = song.title_lang;
-        window.song.title = song.title;
-        window.song.category = song.category;
-      }
-      open.call(this, method, url);
-    }
-  }(XMLHttpRequest.prototype.open);`;
+let selectedSong: {
+  title: string;
+  originalTitle: string;
+  difficulty: string;
+  category: string;
+} = null;
 
-document.body.append(script);
+async function getSongInfo() {
+  presence
+    .getPageletiable('debugObj"]["controller"]["selectedSong')
+    .then((res) => {
+      if (res) selectedSong = res;
+    });
+}
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData[] = [
-      {
-        largeImageKey: "taiko_logo",
-        startTimestamp: browsingStamp
-      },
-      {
-        largeImageKey: "taiko_logo",
-        smallImageKey: "taiko_logo",
-        startTimestamp: browsingStamp
-      }
-    ],
-    canvas: HTMLCanvasElement = document.querySelector("canvas"),
-    initialLoading: HTMLSpanElement = document.querySelector("span.percentage"),
-    loadingDon: HTMLDivElement = document.querySelector("div#loading-don"),
-    invite: HTMLDivElement = document.querySelector("div#session-invite"),
-    view: HTMLDivElement = document.querySelector("div.view"),
-    { hash } = document.location;
+  const presenceData: PresenceData = {
+    largeImageKey: "taiko_logo",
+    startTimestamp: browsingStamp
+  },
+    canvas = document.querySelector<HTMLCanvasElement>("canvas"),
+    initialLoading = document.querySelector<HTMLSpanElement>("span.percentage"),
+    loadingDon = document.querySelector<HTMLDivElement>("div#loading-don"),
+    invite = document.querySelector<HTMLDivElement>("div#session-invite"),
+    view = document.querySelector<HTMLDivElement>("div.view"),
+    mulitplayer = !!document.querySelector(".multiplayer");
 
-  let isSongPlaying = false;
-
-  if (canvas !== null) {
+  if (canvas) {
+    presenceData.state = mulitplayer ? "MultiPlayer" : "Singleplayer";
+    
     const { id } = canvas;
+    
     switch (id) {
       case "logo": {
-        presenceData[0].details = "At Home Screen";
+        presenceData.details = "At Home Screen";
+        slideshow.addSlide("slide1", presenceData, 3500);
         break;
       }
       case "song-sel-canvas": {
-        presenceData[0].details = "Selecting Song";
-        isSongPlaying = true;
+        selectedSong = null;
+        presenceData.details = "Selecting Song";
+        if (invite) {
+          presenceData.details = "Waiting for other player to join ...";
+          presenceData.buttons = [
+            {
+              label: "Join the game",
+              url: document.location.href
+            }
+          ];
+        }
+        slideshow.addSlide("slide1", presenceData, 3500);
         break;
       }
       case "canvas": {
-        presenceData[0].details = "Playing";
-        isSongPlaying = true;
+        if (!selectedSong) await getSongInfo();
+        presenceData.details = `Playing ${selectedSong.title}`;
+        presenceData.state = mulitplayer ? "MultiPlayer" : "Singleplayer";
+        presenceData.smallImageKey = "taiko_logo";
+        presenceData.smallImageText = selectedSong.originalTitle;
+
+        slideshow.addSlide("slide1", presenceData, 3500);
+        slideshow.addSlide(
+          "slide2",
+          <PresenceData>{
+            largeImageKey: "taiko_logo",
+            startTimestamp: browsingStamp,
+            smallImageKey: "taiko_logo",
+            smallImageText: selectedSong.originalTitle,
+            details: `Category: ${selectedSong.category}`,
+            state: `Difficulty: ${selectedSong.difficulty}`
+          },
+          3500
+        );
         break;
       }
     }
-    presenceData[0].state = hash === "" ? "SinglePlayer" : "Multiplayer";
-  } else if (initialLoading !== null) {
-    presenceData[0].details = "At Loading screen";
-    presenceData[0].state = `${initialLoading.innerText} Loaded`;
-  } else if (loadingDon !== null) presenceData[0].details = "Game Loading ...";
-  else if (view !== null) presenceData[0].details = "Changing Game Settings";
+  } else if (initialLoading) {
+    presenceData.details = "At Loading screen";
+    presenceData.state = `${initialLoading.innerText} Loaded`;
+  } else if (loadingDon) presenceData.details = "Game Loading ...";
+  else if (view) presenceData.details = "Changing Game Settings";
 
-  if (slideShow.currentSlide.smallImageKey !== null && isSongPlaying) {
-    presence.getPageletiable("song").then((res) => {
-      if (res) {
-        presenceData[1].details = res.title_lang.en;
-        presenceData[1].smallImageText = res.title;
-        presenceData[1].state = `Category: ${res.category}`;
-      } else {
-        presenceData[1].details = presenceData[0].details;
-        presenceData[1].state = presenceData[0].state;
-      }
-    });
-  } else {
-    presenceData[1].details = presenceData[0].details;
-    presenceData[1].state = presenceData[0].state;
-  }
-
-  presenceData[0].buttons = [
-    {
-      label: "Play game",
-      url: `https://${document.location.hostname}`
-    }
-  ];
-
-  if (invite !== null) {
-    presenceData[0].details = "Waiting for other player to join ...";
-    presenceData[0].buttons.push({
-      label: "Join the game",
-      url: document.location.href
-    });
-  }
-
-  presenceData[1].buttons = presenceData[0].buttons;
-
-  slideShow.addSlide("slide1", presenceData[0], 10000);
-  slideShow.addSlide("slide2", presenceData[1], 5000);
-
-  if (presenceData[0].details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else presence.setActivity(slideShow);
+  } else presence.setActivity(slideshow);
 });
