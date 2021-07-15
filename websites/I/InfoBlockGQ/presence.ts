@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Looking at:";
       presenceData.state = "Commands";
     } else if (document.location.pathname.includes("/tacfm")) {
-      presenceData.startTimestamp = browsingStamp
+      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Listening to:";
       presenceData.state = "TAC-FM";
     }
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
