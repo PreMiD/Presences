@@ -16,8 +16,8 @@ presence.on("UpdateData", async () => {
   if (fav) presenceData.details = "Vendo os Favoritos";
   else if (pathname === "/") {
     presenceData.details = search
-      ? `Searching for ${search.substring(3)}`
-      : "Browsing Homepage";
+      ? `Procurando por ${search.substring(3)}`
+      : "Navegação";
   } else if (pathname === "/animes-legendados/") {
     presenceData.details = "Vendo Animes Legendados";
     if (search) presenceData.state = `Procurando por ${search.substring(1).split("=").join(" ")}`;
