@@ -5,13 +5,18 @@
     },
     "service": "InfoBlock.gq",
     "description": {
-      "en": "The Official Website of InfoBlock and Block Giveaways",
-      "de": "Die Offizielle Webseite von InfoBlock und Block Giveaways"
+      "de": "InfoBlock.gq ist die Community des Users InfoBlock und die Website seines Bots Block Giveaways",
+      "en": "InfoBlock.gq is the Community of the user InfoBlock and the Website of his Bot Block Giveaways"
     },
     "url": "infoblock.gq",
-    "version": "1.0.0",
+    "version": "1.3.5",
     "logo": "https://i.imgur.com/HhVAM3d.png",
     "thumbnail": "https://i.imgur.com/HhVAM3d.png",
     "color": "#000000",
-    "category": "other"
+    "tags": [
+      "community",
+      "giveaways"
+    ],
+    "category": "other",
+    "button": false
   }
