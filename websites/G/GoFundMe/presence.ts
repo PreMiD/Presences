@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     { pathname, href } = location,
     url = new URL(href),
     searchParams = url.searchParams.get("q"),
-    [, , fundraiserURL] = pathname.split("/")
+    [, , fundraiserURL] = pathname.split("/");
 
   if (pathname === "/") {
     data.details = "Viewing homepage";
@@ -20,19 +20,21 @@ presence.on("UpdateData", async () => {
       data.details = "Searching for a fundraiser:";
       data.state = searchParams;
     } else {
-        data.details = "Going to start a GoFundMe"
+      data.details = "Going to start a GoFundMe";
     }
   } else if (pathname.includes(`/f/${fundraiserURL}`)) {
-      const fundraiserName = document.querySelector("#root > div > main > div.p-campaign > header > h1")
-    
-      data.details = "Viewing at a fundraiser:"
-      data.state = fundraiserName.textContent
-      data.buttons = [
-          {
-              label: "Visit fundraiser",
-              url: href
-          }
-      ]
+    const fundraiserName = document.querySelector(
+      "#root > div > main > div.p-campaign > header > h1"
+    );
+
+    data.details = "Viewing at a fundraiser:";
+    data.state = fundraiserName.textContent;
+    data.buttons = [
+      {
+        label: "Visit fundraiser",
+        url: href
+      }
+    ];
   }
 
   if (!data.details) {
