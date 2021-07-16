@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "osu!track",
+    "author": {
+      "name": "rushia",
+      "id": "398752205043400724"
+    },
+    "category": "games",
+    "logo": "https://i.imgur.com/oSw7qlV.png",
+    "thumbnail": "https://i.imgur.com/huSlPUo.png",
+    "version": "1.0.0",
+    "color": "#ffffff",
+    "tags": [
+      "osu",
+      "osutrack",
+      "osu-stats",
+      "osu-top-plays",
+      "osu-taiko",
+      "osu-mania",
+      "osu-catch-the-beat"
+    ],
+    "url": "ameobea.me",
+    "description": {
+      "en": "Site where players of the game osu! can track their progress and view the progression of others."
+    }
+  }
