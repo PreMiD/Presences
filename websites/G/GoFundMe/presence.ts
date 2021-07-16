@@ -13,9 +13,9 @@ presence.on("UpdateData", async () => {
     searchParams = url.searchParams.get("q"),
     [, , fundraiserURL] = pathname.split("/");
 
-  if (pathname === "/") {
+  if (pathname === "/") 
     data.details = "Viewing homepage";
-  } else if (pathname.startsWith(`/s`)) {
+   else if (pathname.startsWith(`/s`)) {
       data.details = "Searching for a fundraiser:";
       data.state = searchParams;
   } else if (pathname.includes(`/f/${fundraiserURL}`)) {
