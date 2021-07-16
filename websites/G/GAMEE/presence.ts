@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "gamee_logo",
     startTimestamp: timer
-  };
+  };  
 
   const pathname = location.pathname,
   [, , IDs] = pathname.split("/");
@@ -20,6 +20,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the winners"
   } else if (pathname.includes("/create-profile")) {
     presenceData.details = "Creating an account"
+  } else if (pathname.includes("/login")) {
+    presenceData.details = "Logg  ing In"
+  } else if (pathname.includes("/phone-login")) {
+    presenceData.details  = "Logging in with a phone number"
+  } else if (pathname.includes("/reset-password")) {
+    presenceData.details  = "Resetting a password"
   } else if (pathname === "/contest" || pathname === "/contest/") {
     presenceData.details = "Viewing Contest Page"
   } else if (pathname.includes("/contest-rules")) {
