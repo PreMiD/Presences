@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "theusaf",
+    "id": "193714715631812608"
+  },
+  "service": "TV Tropes",
+  "description": {
+    "en": "TV Tropes, the all-devouring pop-culture wiki, catalogs and cross-references recurrent plot devices, archetypes, and tropes in all forms of media."
+  },
+  "url": "tvtropes.org",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/XpiG2Uo.png",
+  "thumbnail": "https://i.imgur.com/gNn3Ya7.png",
+  "color": "#28323C",
+  "tags": ["wiki", "pop-culture", "catalog"],
+  "category": "other"
+}
