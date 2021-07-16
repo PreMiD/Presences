@@ -15,6 +15,18 @@
   "color": "#76B918",
   "tags": ["gaming", "streaming"],
   "category": "games",
-  "iframe": false,
-  "readLogs": false
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
 }
