@@ -16,12 +16,8 @@ presence.on("UpdateData", async () => {
   if (pathname === "/") {
     data.details = "Viewing homepage";
   } else if (pathname.includes(`/s`)) {
-    if (searchParams) {
       data.details = "Searching for a fundraiser:";
       data.state = searchParams;
-    } else {
-      data.details = "Going to start a GoFundMe";
-    }
   } else if (pathname.includes(`/f/${fundraiserURL}`)) {
     const fundraiserName = document.querySelector(
       "#root > div > main > div.p-campaign > header > h1"
