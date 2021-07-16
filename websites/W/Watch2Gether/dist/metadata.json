@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "Watch2Gether",
+  "altnames": [
+    "w2g"
+  ],
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/VXAzxLk.png",
+  "thumbnail": "https://i.imgur.com/CxLvrwm.png",
+  "version": "1.0.1",
+  "color": "#facb3d",
+  "tags": [
+    "w2g",
+    "watch-together",
+    "video"
+  ],
+  "url": [
+    "w2g.tv",
+    "community.w2g.tv"
+  ],
+  "description": {
+    "en": "Enjoy the internet in sync with your friends. Watch videos, listen to music or go shopping on Watch2Gether."
+  }
+}
