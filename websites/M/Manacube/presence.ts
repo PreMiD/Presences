@@ -204,7 +204,5 @@ if (document.location.hostname === "bans.manacube.com") {
 if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-} else {
-    presence.setActivity(presenceData);
-}
+} else presence.setActivity(presenceData);
 });
