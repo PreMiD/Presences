@@ -7,7 +7,8 @@
     {
       "name": "Bryan",
       "id": "293775922757238784"
-    }, {
+    },
+    {
       "name": "Alexx",
       "id": "604182077088202784"
     }
@@ -19,7 +20,7 @@
     "nl": "Q-Dance is een Nederlands bedrijf dat evenementen en festivals organiseert die zich richten op de hardere stijlen van dansmuziek, voornamelijk Hardstyle, Hardcore en Hard Trance. Populaire evenementen en festivals georganiseerd door Q-Dance zijn Defqon.1 Festival, Q-BASE, Qlimax en X-Qlusive."
   },
   "url": "www.q-dance.com",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "logo": "https://i.imgur.com/wkzP4tG.png",
   "thumbnail": "https://i.imgur.com/NIfFOgK.png",
   "color": "#EA580C",
