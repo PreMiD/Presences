@@ -7,9 +7,9 @@ let username: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const privacy: boolean = await presence.getSetting("privacy"),
-    showTimestamp: boolean = await presence.getSetting("timestamp");
+    showTimestamp: boolean = await presence.getSetting("timestamp"),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "logo",
     smallImageKey: "small"
   };
@@ -35,9 +35,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Viewing ${game.innerText}`;
   } else presenceData.details = "Unknown Page";
 
-  if (username && !privacy) {
+  if (username && !privacy) 
     presenceData.smallImageText = username.innerText;
-  } else {
+   else {
     delete presenceData.smallImageText;
     delete presenceData.smallImageKey;
   }
