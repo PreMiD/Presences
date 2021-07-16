@@ -123,12 +123,12 @@ function parseInfo(dom: HTMLParagraphElement[]) {
     let title = entry.children[0].textContent.slice(0, -1);
     const [, secondChild] = entry.childNodes;
 
-    if (title.indexOf(" ") !== -1)
-      title = title
+    if (title.indexOf(" ") !== -1) {
+title = title
         .split(" ")
         .map((e) => uncapitalize(e))
         .join("_");
-    else title = uncapitalize(title);
+} else title = uncapitalize(title);
 
     if (secondChild.nodeName === "#text" && entry.childNodes.length === 2)
       entries[title] = secondChild.textContent;
@@ -136,10 +136,11 @@ function parseInfo(dom: HTMLParagraphElement[]) {
       entries[title] = [];
 
       for (const node of entry.childNodes) {
-        if (node.nodeName !== "STRONG" && node.nodeName !== "#text")
-          (entries[title] as HTMLAnchorElement[]).push(
+        if (node.nodeName !== "STRONG" && node.nodeName !== "#text") {
+(entries[title] as HTMLAnchorElement[]).push(
             node as HTMLAnchorElement
           );
+}
       }
     }
   }
@@ -249,9 +250,10 @@ presence.on("UpdateData", async () => {
                     if (links[0].textContent === "AniList")
                       return ["AniList", links[0].href];
 
-                    for (const link of links)
-                      if (link.textContent === "MyAnimeList")
+                    for (const link of links) {
+if (link.textContent === "MyAnimeList")
                         return ["MAL", link.href];
+}
                   })() as [string, string];
 
                 presenceData.details = (() => {

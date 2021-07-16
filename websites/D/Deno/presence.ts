@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/std")) {
     presenceData.details = "Deno Standard Modules";
     moduleName = document.querySelector("span.ml-2.font-medium");
-    presenceData.state = "Viewing: " + moduleName.innerText;
+    presenceData.state = `Viewing: ${moduleName.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/x")) {
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

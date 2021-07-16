@@ -163,9 +163,9 @@ presence.on("UpdateData", async () => {
   }
 
   if ((!playing || !showSong) && showBrowsing) {
-    for (const [k, v] of Object.entries(statics)) {
+    for (const [k, v] of Object.entries(statics)) 
       if (path.match(k)) data = { ...data, ...v };
-    }
+    
 
     if (path === "/") {
       data.details = "Browsing...";
