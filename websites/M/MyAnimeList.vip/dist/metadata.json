@@ -8,9 +8,13 @@
   "category": "anime",
   "logo": "https://i.imgur.com/byl8bvz.png",
   "thumbnail": "https://i.imgur.com/pxSgtdy.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#c62d3c",
-  "tags": ["anime", "stream", "brazilian"],
+  "tags": [
+    "anime",
+    "stream",
+    "brazilian"
+  ],
   "url": "myanimelist.vip",
   "description": {
     "en": "MyAnimeList is a brazilian site where you can watch the best animes with the best quality!",
