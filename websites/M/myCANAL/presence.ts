@@ -6,17 +6,18 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
   }),
- elapsed = Math.floor(Date.now() / 1000);
+  elapsed = Math.floor(Date.now() / 1000);
 let title;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
-  }, video: HTMLVideoElement = document.querySelector(
-    ".aPWk0-TaQEzvggxIT6qvP"
-  );
+      largeImageKey: "logo"
+    },
+    video: HTMLVideoElement = document.querySelector(".aPWk0-TaQEzvggxIT6qvP");
   if (video && !isNaN(video.duration)) {
-    const Ad = document.querySelector("._3uUpH58Juk_Qbizq6j5ThG") ? true : false;
+    const Ad = document.querySelector("._3uUpH58Juk_Qbizq6j5ThG")
+      ? true
+      : false;
     if (!Ad) {
       const path = document.location.pathname;
       if (path.includes("/live/")) {

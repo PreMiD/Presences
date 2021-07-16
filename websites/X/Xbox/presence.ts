@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "860159948234817536"
-}),
+    clientId: "860159948234817536"
+  }),
   timestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -15,13 +15,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading about Xbox Game Pass";
     if (document.location.href.includes("games"))
       presenceData.details = "Browsing Xbox Game Pass games";
-
   } else if (document.location.href.includes("/live/gold")) {
     //Live Gold
     presenceData.details = "Reading about Xbox Live Gold";
     if (document.location.href.includes("withgold"))
       presenceData.details = "Viewing Xbox Live Gold benefits";
-
   } else if (document.location.href.includes("/games")) {
     //Games
     presenceData.details = "Browsing Xbox game catalog";
@@ -29,7 +27,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reading about Series X|S optimized games";
     else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
-
   } else if (document.location.href.includes("/consoles")) {
     //Consoles
     presenceData.details = "Viewing Xbox consoles";
@@ -41,10 +38,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing an Xbox console";
       const [splitString] = document.title.split("|");
       presenceData.state = splitString;
-      presenceData.buttons = [{ label: "View this console", url: document.location.href }];
+      presenceData.buttons = [
+        { label: "View this console", url: document.location.href }
+      ];
     } else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
-
   } else if (document.location.href.includes("/accessories")) {
     //Accessories
     presenceData.details = "Browsing Xbox accessories";
@@ -56,10 +54,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing an Xbox accessory";
       const [splitString] = document.title.split("|");
       presenceData.state = splitString;
-      presenceData.buttons = [{ label: "View this accessory", url: document.location.href }];
+      presenceData.buttons = [
+        { label: "View this accessory", url: document.location.href }
+      ];
     } else if (document.location.href.includes("backward-compatibility"))
       presenceData.details = "Reading about backward compatible games";
-
   } else if (document.location.href.includes("/play")) {
     //Play
     presenceData.largeImageKey = "gamepass";
@@ -71,9 +70,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Playing an Xbox Cloud Gaming game";
       const [splitString] = document.title.split("|");
       presenceData.state = splitString;
-      presenceData.buttons = [{ label: "Play this game (Game Pass)", url: document.location.href }];
-      if (document.querySelector(`[class^="Provisioning"`)) presenceData.details += " (setting up)";
-      else if (document.querySelector(`[class^="NotFocused"`)) presenceData.details += " (unfocused)";
+      presenceData.buttons = [
+        { label: "Play this game (Game Pass)", url: document.location.href }
+      ];
+      if (document.querySelector(`[class^="Provisioning"`))
+        presenceData.details += " (setting up)";
+      else if (document.querySelector(`[class^="NotFocused"`))
+        presenceData.details += " (unfocused)";
     } else {
       presenceData.details = "Browsing Xbox Cloud Gaming games";
       if (document.location.href.includes("gallery/")) {
@@ -81,13 +84,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = `Category: ${splitString}`;
       }
     }
-
   } else if (document.location.href.includes("/community")) {
     //Community
     presenceData.details = "Viewing the Xbox Community";
     if (document.location.href.includes("esports"))
       presenceData.details = "Reading about Xbox Esports";
-
   } else if (document.location.hostname === "account.xbox.com") {
     //My Xbox
     presenceData.details = "Viewing their profile";
@@ -95,7 +96,6 @@ presence.on("UpdateData", async () => {
       const [splitString] = document.title.split("|");
       presenceData.details = `Viewing profile: ${splitString}`;
     }
-
   } else if (document.location.hostname === "support.xbox.com") {
     //Support
     presenceData.details = "Viewing Xbox Support";
@@ -103,7 +103,6 @@ presence.on("UpdateData", async () => {
       const [splitString] = document.title.split("|");
       presenceData.state = splitString;
     }
-
   } else if (document.location.hostname === "news.xbox.com") {
     //Xbox Wire
     presenceData.details = "Viewing news from Xbox Wire";
@@ -111,7 +110,6 @@ presence.on("UpdateData", async () => {
       const [splitString] = document.title.split("|");
       presenceData.state = splitString;
     }
-
   } else {
     //Other
     presenceData.details = "Browsing the website";
@@ -122,7 +120,5 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else
-    presence.setActivity(presenceData);
-
+  } else presence.setActivity(presenceData);
 });

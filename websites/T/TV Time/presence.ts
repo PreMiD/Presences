@@ -1,6 +1,7 @@
 const presence = new Presence({
-  clientId: "844109006679179265"
-}), browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "844109006679179265"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -40,9 +41,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/show")) {
     if (document.location.pathname.includes("/episode/")) {
       const showname = document.querySelector("div.info-box h3 a").textContent,
-      shownumber = document.querySelector(
-        "div.info-box h1 .episode-label"
-      ).textContent;
+        shownumber = document.querySelector(
+          "div.info-box h1 .episode-label"
+        ).textContent;
       (data.details = "Viewing an Episode"),
         (data.state = showname + " - " + shownumber);
       data.startTimestamp = browsingStamp;
