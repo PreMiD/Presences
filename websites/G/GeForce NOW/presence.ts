@@ -8,14 +8,13 @@ let username: HTMLElement;
 presence.on("UpdateData", async () => {
   const privacy: boolean = await presence.getSetting("privacy"),
     showTimestamp: boolean = await presence.getSetting("timestamp"),
+    presenceData: PresenceData = {
+      largeImageKey: "logo",
+      smallImageKey: "small",
+      startTimestamp: browsingStamp
+    };
 
-   presenceData: PresenceData = {
-    largeImageKey: "logo",
-    smallImageKey: "small"
-  };
-
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
-  else delete presenceData.startTimestamp;
+  if (!showTimestamp) delete presenceData.startTimestamp;
 
   if (document.location.pathname === "/mall/") {
     username = document.querySelector(".username");
