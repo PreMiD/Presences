@@ -10,7 +10,7 @@
     "nl": "Uw ideeën tot leven brengen door de krachtigste, betrouwbaarste en meest kwalitatieve hosting aan te bieden tegen de meest betaalbare prijs sinds 2017."
   },
   "service": "Sparked Host",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "logo": "https://i.imgur.com/LIRCNuJ.png",
   "thumbnail": "https://i.imgur.com/uVujqhk.png",
   "color": "#FF9F00",
@@ -20,5 +20,5 @@
     "hosting"
   ],
   "category": "games",
-  "regExp": "sparkedhost|altar|cloud852"
+  "regExp": "([a-z0-9-]+[.])*sparkedhost[.](com|us)[/]|([a-z0-9-]+[.])*altar[.](com|us)|([a-z0-9-]+[.])*cloud852[.](com|us)"
 }
