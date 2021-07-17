@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
         label: `Visit ${name.textContent}'s profile`,
         url: href
       }
-    ]
+    ];
   } else if (pathname.includes(`/game/${IDs}`)) {
     const gameName = document.querySelector("#root > div.game-page > div.game-detail > div.game-bar > div.game-bar__slot.game-bar__slot--left > h3");
 
