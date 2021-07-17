@@ -20,5 +20,5 @@
     "hosting"
   ],
   "category": "games",
-  "regExp": "sparkedhost|altar|cloud852"
+  "regExp": "([a-z0-9-]+[.])*sparkedhost[.](com|us)[/]|([a-z0-9-]+[.])*altar[.](com|us)|([a-z0-9-]+[.])*cloud852[.](com|us)"
 }
