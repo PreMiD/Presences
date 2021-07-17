@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: timer
   },  
 
-   {pathname} = location,
+   {pathname, href} = location,
   [, , IDs] = pathname.split("/");
 
   if (pathname === "/") 
@@ -47,6 +47,12 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing a user's profile:";
     presenceData.state = name.textContent;
+    presenceData.buttons = [
+      {
+        label: `Visit ${name.textContent}'s profile`,
+        url: href
+      }
+    ]
   } else if (pathname.includes(`/game/${IDs}`)) {
     const gameName = document.querySelector("#root > div.game-page > div.game-detail > div.game-bar > div.game-bar__slot.game-bar__slot--left > h3");
 
