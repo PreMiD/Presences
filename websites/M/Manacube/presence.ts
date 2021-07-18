@@ -22,7 +22,7 @@ if (document.location.pathname.includes("/threads/")) {
         title = document.querySelector(
             "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
         );
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
         presenceData.details = "Forums, Viewing Thread:";
     } else {
         presenceData.details = "Forums, Browsing..";
@@ -35,7 +35,7 @@ if (document.location.pathname.includes("/threads/")) {
         title = document.querySelector(
             "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
         );
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
         presenceData.details = "Forums, Viewing Category:";
     } else {
         presenceData.details = "Forums, Browsing...";
@@ -58,7 +58,7 @@ if (document.location.pathname.includes("/threads/")) {
     );
     if (search !== null) {
         presenceData.details = "Forums, Searching For:";
-        presenceData.state = search.innerText;
+        presenceData.state = search.textContent;
 
         presenceData.smallImageKey = "search";
     }
@@ -67,7 +67,7 @@ if (document.location.pathname.includes("/threads/")) {
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-pageContent > div.block > div.block-container > div.block-body > div.memberHeader > div.memberHeader-main > div.memberHeader-content > h1 > span > span"
     );
     presenceData.details = "Forums, Viewing User:";
-    presenceData.state = user.innerText;
+    presenceData.state = user.textContent;
 } else if (document.location.pathname.includes("/account/")) {
     presenceData.details = "Forums, Account Settings";
 } else if (document.location.pathname.includes("/support/")) {
@@ -75,7 +75,7 @@ if (document.location.pathname.includes("/threads/")) {
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
     );
     presenceData.details = "Support, Browsing";
-    presenceData.state = title.innerText;
+    presenceData.state = title.textContent;
 } else if (document.location.pathname.includes("/watched/")) {
     if (document.location.pathname.includes("/threads/")) {
         presenceData.details = "Forums, Viewing Their";
@@ -94,7 +94,7 @@ if (document.location.pathname.includes("/threads/")) {
             "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
         );
         presenceData.details = "Forums, Reading a DM";
-        presenceData.state = `${title.innerText}...`;
+        presenceData.state = `${title.textContent}...`;
     } else {
         presenceData.details = "Forums, Browsing";
         presenceData.state = "Through DMs";
@@ -105,7 +105,7 @@ if (document.location.pathname.includes("/threads/")) {
             "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-pageContent > div.section--player > div.air > div.section-playerName > div.text > div.top > h3"
         );
         presenceData.details = "Stats, Viewing User:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
     } else if (document.location.pathname.includes("/leaderboards/")) {
         presenceData.details = "Stats, Browsing";
         presenceData.state = "Server Seaderboards";
@@ -196,7 +196,7 @@ if (document.location.hostname === "bans.manacube.com") {
             "div.pagewrapper > div.container > div.row > div.col-md-2 > div.user-info > h3"
         );
         presenceData.details = "Bans, Viewing";
-        presenceData.state = `Viewing${user.innerText}`;
+        presenceData.state = `Viewing${user.textContent}`;
     } else {
         presenceData.details = "Bans, Browsing...";
     }
