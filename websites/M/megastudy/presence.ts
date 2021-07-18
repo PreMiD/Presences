@@ -24,7 +24,7 @@ function unescapeHtml(str: string) {
 }
 
 presence.on("iFrameData", (data: { isPlayerPlaying: boolean; currentTime: number; duration: number; }) => {
-  let { isPlayerPlaying, currentTime, duration } = data;
+  const { isPlayerPlaying, currentTime, duration } = data;
 });
 
 presence.on("UpdateData", async () => {
