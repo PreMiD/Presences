@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
- browsingStamp = Math.floor(Date.now() / 1000)
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 let isTitleChecked = false, title: string, isPlayerPlaying: boolean, currentTime: number, duration: number;
 
