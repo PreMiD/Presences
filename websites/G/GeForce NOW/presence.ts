@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 
   if (username && !privacy) 
     presenceData.smallImageText = username.innerText;
-   else {
+  else {
     delete presenceData.smallImageText;
     delete presenceData.smallImageKey;
   }
