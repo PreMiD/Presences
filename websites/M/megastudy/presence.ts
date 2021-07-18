@@ -4,9 +4,9 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
+  }),
 
-const browsingStamp = Math.floor(Date.now() / 1000),
+ browsingStamp = Math.floor(Date.now() / 1000),
  isTitleChecked = false,
  title: string, isPlayerPlaying: boolean, currentTime: number, duration: number;
 
@@ -27,7 +27,7 @@ function unescapeHtml(str: string) {
 presence.on("iFrameData", (data: { isPlayerPlaying: boolean; currentTime: number; duration: number; }) => {
   isPlayerPlaying = data.isPlayerPlaying,
   currentTime = data.currentTime,
-  duration = data.duration
+  duration = data.duration;
 });
 
 presence.on("UpdateData", async () => {
