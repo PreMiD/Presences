@@ -5,10 +5,9 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
+ browsingStamp = Math.floor(Date.now() / 1000)
 
- browsingStamp = Math.floor(Date.now() / 1000),
- isTitleChecked = false,
- title: string, isPlayerPlaying: boolean, currentTime: number, duration: number;
+let isTitleChecked = false, title: string, isPlayerPlaying: boolean, currentTime: number, duration: number;
 
 function unescapeHtml(str: string) {
   if (str === null) 
