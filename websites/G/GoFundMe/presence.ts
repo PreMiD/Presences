@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
     data.state = fundraiserName.textContent;
     data.buttons = [
       {
-        label: "Visit fundraiser",
+        label: "View fundraiser",
         url: href
       }
     ];
