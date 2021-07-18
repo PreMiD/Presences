@@ -11,7 +11,7 @@ const presenceData: PresenceData = {
 };
 
 presenceData.startTimestamp = browsingStamp;
-if (document.location.hostname === "manacube.com") 
+if (document.location.hostname === "manacube.com")
     presenceData.details = "Forums";
 
 if (document.location.pathname.includes("/threads/")) {
@@ -24,9 +24,7 @@ if (document.location.pathname.includes("/threads/")) {
         );
         presenceData.state = title.textContent;
         presenceData.details = "Forums, Viewing Thread:";
-    } else 
-        presenceData.details = "Forums, Browsing..";
-    
+    } else presenceData.details = "Forums, Browsing..";
 } else if (document.location.pathname.includes("/forums/")) {
     title = document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
@@ -37,9 +35,7 @@ if (document.location.pathname.includes("/threads/")) {
         );
         presenceData.state = title.textContent;
         presenceData.details = "Forums, Viewing Category:";
-    } else 
-        presenceData.details = "Forums, Browsing...";
-    
+    } else presenceData.details = "Forums, Browsing...";
 } else if (
     document.location.pathname.includes("/whats-new/") &&
     document.location.pathname.includes("/profile-posts/")
@@ -68,9 +64,9 @@ if (document.location.pathname.includes("/threads/")) {
     );
     presenceData.details = "Forums, Viewing User:";
     presenceData.state = user.textContent;
-} else if (document.location.pathname.includes("/account/")) 
+} else if (document.location.pathname.includes("/account/"))
     presenceData.details = "Forums, Account Settings";
- else if (document.location.pathname.includes("/support/")) {
+else if (document.location.pathname.includes("/support/")) {
     title = document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
     );
@@ -177,9 +173,7 @@ if (document.location.hostname === "store.manacube.com") {
     } else if (document.location.pathname.includes("/checkout")) {
         presenceData.details = "Store, Checking out";
         presenceData.state = "Viewing basket";
-    } else 
-        presenceData.details = "Store, Browsing...";
-    
+    } else presenceData.details = "Store, Browsing...";
 }
 if (document.location.hostname === "bans.manacube.com") {
     if (document.location.pathname.includes("/bans")) {
@@ -197,9 +191,7 @@ if (document.location.hostname === "bans.manacube.com") {
         );
         presenceData.details = "Bans, Viewing";
         presenceData.state = `Viewing ${user.textContent}`;
-    } else 
-        presenceData.details = "Bans, Browsing...";
-    
+    } else presenceData.details = "Bans, Browsing...";
 }
 if (!presenceData.details) {
     presence.setTrayTitle();
