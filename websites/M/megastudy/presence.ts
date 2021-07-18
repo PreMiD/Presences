@@ -6,12 +6,12 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+const browsingStamp = Math.floor(Date.now() / 1000),
  isTitleChecked = false,
  title: string, isPlayerPlaying: boolean, currentTime: number, duration: number;
 
 function unescapeHtml(str: string) {
-  if (str == null) 
+  if (str === null) 
    return "";
   
   return str
@@ -25,9 +25,7 @@ function unescapeHtml(str: string) {
 }
 
 presence.on("iFrameData", (data: { isPlayerPlaying: boolean; currentTime: number; duration: number; }) => {
-  isPlayerPlaying = data.isPlayerPlaying,
-  currentTime = data.currentTime,
-  duration = data.duration;
+  { isPlayerPlaying, currentTime, duration } = data
 });
 
 presence.on("UpdateData", async () => {
@@ -36,7 +34,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname == "/megastudy.asp" || document.location.pathname == "/") {
+  if (document.location.pathname === "/megastudy.asp" || document.location.pathname === "/") {
     presenceData.details = "홈 화면";
     presenceData.startTimestamp = browsingStamp;
 
@@ -80,7 +78,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
