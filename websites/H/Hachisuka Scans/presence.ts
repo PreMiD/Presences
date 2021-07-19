@@ -6,31 +6,28 @@ presence.on("UpdateData", async () => {
     startTimestamp: Math.floor(Date.now() / 1000),
     largeImageKey: "hs_icon"
   },
-   path: any = document.location.pathname,
-        titulo: any = document.title,
-        url: any = document.URL;
-  let pesquisaTexto: any,
-      mangaNome: any,
-      mangaType: any,
-      mangaGenr: any,
-      readerMangaNome: any,
-      readerMangaCap: any,
-      userPageSelect: any,
-      userName: any,
-      obraNum: any,
-      genrTexto: any,
-      genrNumObra: any,
-      teste: HTMLElement = document.querySelector(
-        "body > div.wrap > div > div > div > div.profile-manga.summary-layout-2 > div > div > div > div.tab-summary > div.summary_content_wrap > div > div > div:nth-child(9) > div.summary-content"
-        ),
-      obraUrl: any,
-      postMangaName: any,
-      postMangaType: any,
-      postMangaCap: any,
-      postMangaURL:any,
-      obraCapNumTotal: any;
+   path = document.location.pathname,
+        titulo = document.title,
+        url = document.URL,
+        pesquisaTexto, 
+        mangaNome,
+        mangaType,
+        mangaGenr,
+        readerMangaNome,
+        readerMangaCap,
+        userPageSelect,
+        userName,
+        obraNum,
+        genrTexto,
+        genrNumObra,
+        obraUrl,
+        postMangaName,
+        postMangaType,
+        postMangaCap,
+        postMangaURL:any,
+        obraCapNumTotal;
 
-  if (path == "/") {
+  if (path === "/") {
     if (
       (titulo.includes("Você pesquisou por"))
     ) {
@@ -70,7 +67,7 @@ presence.on("UpdateData", async () => {
       postMangaCap = document.querySelector("#wp-manga-chapter-name");
       postMangaURL = document.querySelector("#sample-permalink > a");
 
-      if (postMangaCap.value == "" || postMangaCap.value == null || postMangaCap.value == undefined ) {
+      if (postMangaCap.value === "" || postMangaCap.value === null || postMangaCap.value === undefined ) {
         presenceData.details = `Postando [ ${postMangaType.value} ]`; 
         presenceData.state = postMangaName.value;
       } else {
@@ -101,7 +98,7 @@ presence.on("UpdateData", async () => {
       );
     presenceData.details = `Gênero: ${genrTexto.innerText} ( ${genrNumObra.textContent.replace(" result", "").replace("s", "")} )`;
   } else if (path.includes("/manga/")) {
-    if (path.split("/").length - 1 == 3) {
+    if (path.split("/").length - 1 === 3) {
       mangaNome = document.querySelector(
         "body > div.wrap > div > div > div > div.profile-manga.summary-layout-2 > div > div > div > div.post-title > h1"
         );
@@ -110,6 +107,9 @@ presence.on("UpdateData", async () => {
         ); 
       mangaGenr = document.querySelector(
         "body > div.wrap > div > div > div > div.profile-manga.summary-layout-2 > div > div > div > div.tab-summary > div.summary_content_wrap > div > div > div:nth-child(8) > div.summary-content > div"
+        );
+      teste = document.querySelector(
+        "body > div.wrap > div > div > div > div.profile-manga.summary-layout-2 > div > div > div > div.tab-summary > div.summary_content_wrap > div > div > div:nth-child(9) > div.summary-content"
         );
       presenceData.buttons = [
           {
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     }
   }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
