@@ -7,8 +7,8 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let isTitleChecked = false, title: string,
- video = {
+let isTitleChecked = false, title: string;
+const video = {
   isPlayerPlaying: false,
   currentTime: 0,
   duration: 0
