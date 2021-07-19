@@ -14,20 +14,6 @@ const video = {
   duration: 0
 };
 
-function unescapeHtml(str: string) {
-  if (str === null)
-    return "";
-
-  return str
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&#39;/g, "'");
-}
-
 presence.on("iFrameData", (data: { isPlayerPlaying: boolean; currentTime: number; duration: number; }) => {
   Object.assign(video, data);
 });
@@ -44,11 +30,11 @@ presence.on("UpdateData", async () => {
 
   } else if (document.location.pathname.includes("Player")) {
 
-    presenceData.details = unescapeHtml(document.querySelector(".txt").innerHTML);
+    presenceData.details = document.querySelector(".txt").textContent;
 
     if (!isTitleChecked) {
       try {
-        title = unescapeHtml(document.querySelector("tr.on td").innerHTML);
+        title = document.querySelector("tr.on td").textContent;
         isTitleChecked = true;
       } catch(e) {
         title = "[수강정보]를 클릭하여 주세요";
@@ -73,8 +59,17 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     
   } else if (document.location.pathname.includes("my_std_room/detail.asp")) {
-    presenceData.details = unescapeHtml(document.querySelector(".name").innerHTML);
-    presenceData.state = unescapeHtml(document.querySelector("h4").innerHTML);
+    presenceData.details = document.querySelector(".name").textContent;
+    presenceData.state = document.querySelector("h4").textContent;
+    presenceData.startTimestamp = browsingStamp;
+    
+  } else if (document.location.pathname.includes("/teacher_v2/teacher_main.asp")) {
+    presenceData.details = "메가선생님";
+    presenceData.startTimestamp = browsingStamp;
+
+  } else if (document.location.pathname.includes("/teacher_v2/main.asp")) {
+    presenceData.details = (document.querySelector(".lnb_tit") as HTMLElement).innerText.split("\n")[0];
+    presenceData.state = (document.querySelector(".lnb_tit") as HTMLElement).innerText.split("\n")[1];
     presenceData.startTimestamp = browsingStamp;
 
   } else if (document.location.pathname.includes("/Mypage/mp_2017/main/main.asp")) {
@@ -83,10 +78,6 @@ presence.on("UpdateData", async () => {
 
   } else if (document.location.pathname.includes("/mypage/mp_2017/notice/list.asp")) {
     presenceData.details = "알림";
-    presenceData.startTimestamp = browsingStamp;
-
-  } else if (document.location.pathname.includes("/teacher_v2/teacher_main.asp")) {
-    presenceData.details = "메가선생님";
     presenceData.startTimestamp = browsingStamp;
 
   } else if (document.location.pathname.includes("/Mypage/mp_2017/apply/chr_new/main.asp")) {
