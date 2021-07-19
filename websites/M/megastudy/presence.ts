@@ -29,11 +29,7 @@ function unescapeHtml(str: string) {
 }
 
 presence.on("iFrameData", (data: { isPlayerPlaying: boolean; currentTime: number; duration: number; }) => {
-  video = {
-    isPlayerPlaying: data.isPlayerPlaying,
-    currentTime: data.currentTime,
-    duration: data.duration
-  };
+  Object.assign(video, data);
 });
 
 presence.on("UpdateData", async () => {
