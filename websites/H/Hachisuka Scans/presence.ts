@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
         postMangaURL:any,
         obraCapNumTotal;
 
-  if (path === "/") {
+  if (path.includes("/")) {
     if (
       (titulo.includes("Você pesquisou por"))
     ) {
