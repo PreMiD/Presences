@@ -34,8 +34,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Viewing ${game.innerText}`;
   } else presenceData.details = "Unknown Page";
 
-  if (username && !privacy) 
-    presenceData.smallImageText = username.innerText;
+  if (username && !privacy) presenceData.smallImageText = username.innerText;
   else {
     delete presenceData.smallImageText;
     delete presenceData.smallImageKey;
