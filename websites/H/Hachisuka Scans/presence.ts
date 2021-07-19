@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
             url: document.URL
           }
         ];
-    };
+    }
   } else if (
     (document.location.pathname.includes("/user-settings/"))
   ) {
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.details = `Postando [ ${postMangaType.value} ] ( ${postMangaCap.value} )`; 
         presenceData.state = postMangaName.value;
-      };
+      }
       presenceData.buttons = [
           {
             label: `Página do ${postMangaName.value.slice(0, 15)}...`,
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.details = null;
       presenceData.state = null;
-    };
+    }
   } else if (document.location.pathname.includes("/obras/")) {
     const obraNum = document.querySelector(
       "body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div > div > div.c-page__content > div.tab-wrap > div > div.h4"
