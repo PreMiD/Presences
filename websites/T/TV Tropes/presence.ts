@@ -25,8 +25,8 @@ presence.on("UpdateData", () => {
           namespace === "Main"
             ? null
             : titleElement
-              .querySelector("strong")
-              .textContent.replace(/ \/ $/, ""),
+                .querySelector("strong")
+                .textContent.replace(/ \/ $/, ""),
         pageText = titleElement.childNodes[2].textContent.replace(
           whitespaceRegex,
           ""
