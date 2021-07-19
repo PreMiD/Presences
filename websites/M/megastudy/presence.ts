@@ -7,12 +7,17 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let isTitleChecked = false, title: string, isPlayerPlaying: boolean, currentTime: number, duration: number;
+let isTitleChecked = false, title: string
+let video = {
+  isPlayerPlaying: false,
+  currentTime: 0,
+  duration: 0,
+};
 
 function unescapeHtml(str: string) {
   if (str === null) 
-   return "";
-  
+  return "";
+
   return str
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
@@ -24,12 +29,16 @@ function unescapeHtml(str: string) {
 }
 
 presence.on("iFrameData", (data: { isPlayerPlaying: boolean; currentTime: number; duration: number; }) => {
-  isPlayerPlaying = data.isPlayerPlaying,
-  currentTime = data.currentTime;
-  duration = data.duration;
+  video = {
+    isPlayerPlaying: data.isPlayerPlaying,
+    currentTime: data.currentTime,
+    duration: data.duration
+  };
 });
 
 presence.on("UpdateData", async () => {
+
+  console.log(video.isPlayerPlaying, video.currentTime, video.duration);
 
   const presenceData: PresenceData = {
     largeImageKey: "logo"
@@ -54,8 +63,8 @@ presence.on("UpdateData", async () => {
 
     presenceData.state = title;
 
-    if (isPlayerPlaying) {
-      const [, endTimestamp] = presence.getTimestamps(currentTime, duration);
+    if (video.isPlayerPlaying) {
+      const [, endTimestamp] = presence.getTimestamps(video.currentTime, video.duration);
       presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).play;
@@ -84,5 +93,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else 
     presence.setActivity(presenceData);
-  
+
 });
