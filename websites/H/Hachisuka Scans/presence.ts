@@ -8,24 +8,7 @@ presence.on("UpdateData", async () => {
   },
    path = document.location.pathname,
         titulo = document.title,
-        url = document.URL,
-   pesquisaTexto, 
-        mangaNome,
-        mangaType,
-        mangaGenr,
-        readerMangaNome,
-        readerMangaCap,
-        userPageSelect,
-        userName,
-        obraNum,
-        genrTexto,
-        genrNumObra,
-        obraUrl,
-        postMangaName,
-        postMangaType,
-        postMangaCap,
-        postMangaUR,
-        obraCapNumTotal;
+        url = document.URL
 
   if (path.includes("/")) {
     if (
