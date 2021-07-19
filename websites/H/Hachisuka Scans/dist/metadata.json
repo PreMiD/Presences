@@ -1,0 +1,25 @@
+{
+  "author": {
+    "name": "Yuu Hachisuka",
+    "id": "316989384077475841"
+  },
+  "service": "Hachisuka Scans",
+  "description": {
+    "en": "Read manga online at Hachisuka Scans without ads, high quality images.",
+    "pt_BR": "Leia mangá online na Hachisuka Scans sem anúncios, imagens de alta qualidade.",
+    "pt": "Leia mangá online na Hachisuka Scans sem anúncios, imagens de alta qualidade.",
+    "nl": "Lees manga online op Hachisuka Scans zonder advertenties, afbeeldingen van hoge kwaliteit."
+  },
+  "url": "hachisukascans.tk",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/Pcpt9t0.png",
+  "thumbnail": "https://i.imgur.com/t2u2L0s.png",
+  "color": "#CD5C5C",
+  "tags": [
+    "manga",
+    "scan",
+    "hachisuka",
+    "scanlator"
+  ],
+  "category": "other"
+}
