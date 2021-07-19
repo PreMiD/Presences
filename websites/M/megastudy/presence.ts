@@ -77,6 +77,30 @@ presence.on("UpdateData", async () => {
     presenceData.state = unescapeHtml(document.querySelector("h4").innerHTML);
     presenceData.startTimestamp = browsingStamp;
 
+  } else if (document.location.pathname.includes("/Mypage/mp_2017/main/main.asp")) {
+    presenceData.details = "마이페이지";
+    presenceData.startTimestamp = browsingStamp;
+
+  } else if (document.location.pathname.includes("/mypage/mp_2017/notice/list.asp")) {
+    presenceData.details = "알림";
+    presenceData.startTimestamp = browsingStamp;
+
+  } else if (document.location.pathname.includes("/teacher_v2/teacher_main.asp")) {
+    presenceData.details = "메가선생님";
+    presenceData.startTimestamp = browsingStamp;
+
+  } else if (document.location.pathname.includes("/Mypage/mp_2017/apply/chr_new/main.asp")) {
+    presenceData.details = "수강신청";
+    presenceData.startTimestamp = browsingStamp;
+
+  } else if (document.location.pathname.includes("/mypage/mp_2017/pay/cart/cart_list.asp")) {
+    presenceData.details = "장바구니";
+    presenceData.startTimestamp = browsingStamp;
+
+  } else if (document.location.pathname.includes("/mypage/mp_2017/order/order_list.asp")) {
+    presenceData.details = "주문/배송조회";
+    presenceData.startTimestamp = browsingStamp;
+
   } else {
     presenceData.details = "합격 불변의 법칙";
     presenceData.startTimestamp = browsingStamp;
