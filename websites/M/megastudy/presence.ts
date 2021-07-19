@@ -11,7 +11,7 @@ let isTitleChecked = false, title: string,
  video = {
   isPlayerPlaying: false,
   currentTime: 0,
-  duration: 0,
+  duration: 0
 };
 
 function unescapeHtml(str: string) {
@@ -37,8 +37,6 @@ presence.on("iFrameData", (data: { isPlayerPlaying: boolean; currentTime: number
 });
 
 presence.on("UpdateData", async () => {
-
-  console.log(video.isPlayerPlaying, video.currentTime, video.duration);
 
   const presenceData: PresenceData = {
     largeImageKey: "logo"
