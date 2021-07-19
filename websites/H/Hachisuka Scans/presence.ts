@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   },
    path = document.location.pathname,
         titulo = document.title,
-        url = document.URL
+        url = document.URL;
 
   if (path.includes("/")) {
     if (
