@@ -68,8 +68,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
   } else if (document.location.pathname.includes("/teacher_v2/main.asp")) {
-    presenceData.details = (document.querySelector(".lnb_tit") as HTMLElement).innerText.split("\n")[0];
-    presenceData.state = (document.querySelector(".lnb_tit") as HTMLElement).innerText.split("\n")[1];
+    [presenceData.details, presenceData.state] = (document.querySelector(".lnb_tit") as HTMLElement).innerText.split("\n");
     presenceData.startTimestamp = browsingStamp;
 
   } else if (document.location.pathname.includes("/Mypage/mp_2017/main/main.asp")) {
