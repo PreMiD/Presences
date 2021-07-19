@@ -4,6 +4,15 @@ const presence = new Presence({
   pages: {[k: string]: string} = {
     "/anime": "Watching an anime",
     "/genre": "Searching by genre",
+    "/search": "Searching anime by name",
+    "/faq": "Reading the FAQ",
+    "/contact": "Reading the contacts",
+    "/user/settings": "Changing the settings",
+    "/user/watchlist": "Looking at their watchlist",
+    "/user/import": "Importing their MAL list to Animesuge!"
+  },
+  pagesSearching: {[k:string]: string} = {
+    "/": "At the homepage",
     "/newest": "Searching for the newest animes",
     "/updated": "Searching for recently updated animes",
     "/ongoing": "Searching for ongoing animes",
@@ -13,15 +22,9 @@ const presence = new Presence({
     "/ova": "Searching for OVA animes",
     "/ona": "Searching for ONA animes",
     "/special": "Searching for special anime episodes",
-    "/search": "Searching anime by name",
     "/az-list": "Seaching all animes",
     "/most-watched": "Searching most watched animes",
-    "/upcoming": "Searching upcoming animes",
-    "/faq": "Reading the FAQ",
-    "/contact": "Reading the contacts",
-    "/user/settings": "Changing the settings",
-    "/user/watchlist": "Looking at their watchlist",
-    "/user/import": "Importing their MAL list to Animesuge!"
+    "/upcoming": "Searching upcoming animes"
   };
 
 let timeEnd: number,
@@ -42,8 +45,8 @@ presence.on("UpdateData", async () => {
     },
     search: URLSearchParams = new URLSearchParams(document.location.search.substring(1)),
     timestamps = presence.getTimestamps(currentTime, timeEnd);
-  if (page === "/") {
-    data.details = "At the home page";
+  if (page in pagesSearching) {
+    data.details = pages[page];
     data.state = "Searching animes";
   } else if (page.includes("/anime")) {
     data.details = pages["/anime"];
@@ -59,45 +62,9 @@ presence.on("UpdateData", async () => {
     const genre = page.slice("/genre/".length);
     data.details = pages["/genre"];
     data.state = `Searching for ${genre.charAt(0).toUpperCase() + genre.slice(1)} Animes`;
-  } else if (page === "/newest") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/updated") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/ongoing") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/added") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/tv") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/movie") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/ova") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/ona") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/special") {
-    data.details = pages[page];
-    data.state = "Searching animes";
   } else if (page.includes("/search")) {
     data.details = pages[page];
     data.state = `Searching: "${search.get("keyword")}"`;
-  } else if (page === "/az-list") {
-    data.details = pages[page];
-    data.state = "Seaching animes";
-  } else if (page === "/most-watched") {
-    data.details = pages[page];
-    data.state = "Searching animes";
-  } else if (page === "/upcoming") {
-    data.details = pages[page];
-    data.state = "Searching animes";
   } else if (page === "/faq") {
     data.details = pages[page];
     data.state = "Reading";
