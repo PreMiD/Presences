@@ -15,14 +15,14 @@ const video = {
 };
 
 function unescapeHtml(str: string) {
-  if (str === null) 
-  return "";
+  if (str === null)
+    return "";
 
   return str
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
     .replace(/&#39;/g, "'");
