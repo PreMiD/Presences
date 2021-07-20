@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: `830517484472762408`
+    clientId: "830517484472762408"
   }),
 
   strings = presence.getStrings({
@@ -33,8 +33,7 @@ const presence = new Presence({
     "/edit:information": "Neue Serieninformationen vorschlagen"
 
   };
-  
-  let video, 
+let video, 
   timeEnd: number,
   currentTime: number,
   paused: boolean,
@@ -64,7 +63,7 @@ presence.on("UpdateData", async () => {
       "#wrapper > div.container > div.seriesWishListHeader > div.row > div.col-md-4 > small") as HTMLElement,
     
     beliebteanime = document.querySelector(
-    "title"
+      "title"
     ) as HTMLElement,
 
     search = document.querySelector(
@@ -103,7 +102,7 @@ presence.on("UpdateData", async () => {
   if (page === "/") 
     data.details = "Betrachtet die Startseite";
   
-   else if (page.startsWith("/anime/")) {
+  else if (page.startsWith("/anime/")) {
     data.details = `${animeName.textContent}`;
     data.state = `${episode.textContent.split("Staffel")[0].replace("Filme von", " ").split(" | AniCloud.io - Animes gratis online ansehen")} - ${germanepisodename.textContent}`;
     [data.startTimestamp, data.endTimestamp] = timestamps;
@@ -115,18 +114,18 @@ presence.on("UpdateData", async () => {
     ];
   
     video = document.querySelector(
-    "video"
+      "video"
     );
     if (video !== null) {
-      played = video.currentTime != 0;
+      played = video.currentTime !== 0;
       timeEnd = video.duration;
-      currentTime = video.currentTime;
-      paused = video.paused;
+      ({currentTime} = video);
+      ({paused} = video);
     }
     if (played) {
       if (!paused) {
         const timestamps = presence.getTimestamps(currentTime, timeEnd);
-        data.endTimestamp = timestamps[1];
+        [, data.endTimestamp] = timestamps;
       }
       data.smallImageKey = paused ? "pause" : "play";
       data.smallImageText = paused
@@ -143,7 +142,7 @@ presence.on("UpdateData", async () => {
   } else if (page === "/beliebte-animes") 
     data.state = `${beliebteanime.textContent.split("|")[0]}`;
   
-   else if (page === "/support/anleitung") {
+  else if (page === "/support/anleitung") {
     data.details = pages[page];
     data.state = "Die Anleitung";
 
@@ -157,35 +156,35 @@ presence.on("UpdateData", async () => {
   } else if (page === "/zufall") 
     data.details = pages[page];
 
-   else if (page === "/random") 
+  else if (page === "/random") 
     data.details = pages[page];
 
-      // UNTERE REITER
-   else if (page === "/neu") 
+  // UNTERE REITER
+  else if (page === "/neu") 
     data.details = pages[page];
       
-   else if (page === "/support/regeln") 
+  else if (page === "/support/regeln") 
     data.details = pages[page];
   
-   else if (page === "/dmca") 
+  else if (page === "/dmca") 
     data.details = pages[page];
   
-   else if (page === "/animewuensche") 
+  else if (page === "/animewuensche") 
     data.details = pages[page];
   
   //Sign In & Sign Up
 
-   else if (page === "/login") 
+  else if (page === "/login") 
     data.details = pages[page];
   
-   else if (page === "/registrierung") 
+  else if (page === "/registrierung") 
     data.details = pages[page];
   
-    //User Leiste
-   else if (page === "/account") 
+  //User Leiste
+  else if (page === "/account") 
     data.details = pages[page];
 
-   else if (page.startsWith("/user/profil/")) {
+  else if (page.startsWith("/user/profil/")) {
     data.details = "Betrachtet ein Profil";
     data.state = `${user.textContent}`;
     data.smallImageKey = "user";
@@ -194,43 +193,43 @@ presence.on("UpdateData", async () => {
   } else if (page === "/account/nachrichten") 
     data.details = pages[page];
 
-   else if (page === "/account/notifications") 
+  else if (page === "/account/notifications") 
     data.details = pages[page]; 
   
-   else if (page === "/account/support") 
+  else if (page === "/account/support") 
     data.details = pages[page];
   
-   else if (page === "/account/watchlist") 
+  else if (page === "/account/watchlist") 
     data.details = pages[page];
   
-   else if (page === "/account/subscribed") 
+  else if (page === "/account/subscribed") 
     data.details = pages[page];
 
-   else if (page === "/account/settings") 
+  else if (page === "/account/settings") 
     data.details = pages[page]; 
   
   //MORE PROFILE SETTINGS --
   //BUGGY 1.0.5 ??
-   else if (page.startsWith("/support/fragen")) 
+  else if (page.startsWith("/support/fragen")) 
     data.details = pages[page]; 
   
-   else if (page === "/support") 
+  else if (page === "/support") 
     data.details = pages[page]; 
 
-   else if (page === "/edit:information") 
+  else if (page === "/edit:information") 
     data.details = pages[page]; 
 
-   else if (page.startsWith("/katalog/")) 
+  else if (page.startsWith("/katalog/")) 
     data.details = `Betrachtet Animes mit ${katalog.textContent}`;
 
-   else if (page.startsWith("/support/frage/")) {
+  else if (page.startsWith("/support/frage/")) {
     data.details = `Frage von ${forumname.textContent}`;
     data.state = `${forum.textContent}`;
 
   } else if (page.startsWith("/genre/")) 
     data.details = `Sucht nach ${genre2.textContent}`;
   
-   else 
+  else 
     data.details = "Befindet sich auf einer Unbekannte Seite";
   
   
