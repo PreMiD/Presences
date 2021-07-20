@@ -14,12 +14,11 @@ presence.on("UpdateData", async () => {
   let searchParams = new URLSearchParams(paramsString);
 
   /* Homepage */
-  if (document.location.href == "https://www.mangaworld.io/") {
+  if (document.location.pathname == "/") {
     data.smallImageKey = "home";
     data.smallImageText = "Homepage";
     data.details = "Nella homepage";
     data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
   }
 
   /* Preferiti - Bookmarks*/
@@ -46,7 +45,6 @@ presence.on("UpdateData", async () => {
     }
 
     data.state = filter;
-    presence.setActivity(data);
   }
 
   /* ----- ARCHIVIO - ARCHIVE ----- */
@@ -58,7 +56,6 @@ presence.on("UpdateData", async () => {
     data.details = "Cercando:";
     data.state = "\"" + keyword + "\"";
     data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
   }
   /* Ricerca per autore - Search by author */
   else if (document.location.href.includes("author=")) {
@@ -68,7 +65,6 @@ presence.on("UpdateData", async () => {
     data.details = "Sfogliando i contenuti dell'autore:";
     data.state = author;
     data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
   } 
   /* Ricerca per artista - Search by artist */
   else if (document.location.href.includes("artist=")) {
@@ -78,7 +74,6 @@ presence.on("UpdateData", async () => {
     data.details = "Sfogliando i contenuti dell'artista:";
     data.state = artist;
     data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
   } 
   /* Ricerca per genere - Search by genre */
   else if (document.location.href.includes("genre=")) {
@@ -96,7 +91,6 @@ presence.on("UpdateData", async () => {
     data.details = "Sfogliando i contenuti del genere:";
     data.state = genre;
     data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
   }
   /* Ricerca per anno - Search by year of release */
   else if (document.location.href.includes("year=")) {
@@ -106,7 +100,6 @@ presence.on("UpdateData", async () => {
     data.details = "Sfogliando i contenuti dell'anno:";
     data.state = year;
     data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
   }
   /* Ricerca per stato - Search by status */
   else if (document.location.href.includes("status=")) {
@@ -129,7 +122,6 @@ presence.on("UpdateData", async () => {
     }
 
     data.state = status;
-    presence.setActivity(data);
   }
   /* Ricerca per tipo - Search by type/format */
   else if (document.location.href.includes("type=")) {
@@ -143,7 +135,6 @@ presence.on("UpdateData", async () => {
     data.details = "Sfogliando i contenuti del formato:";
     data.state = type;
     data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
   }
   /* Ricerca per ordinamento - Order by */
   else if (document.location.href.includes("sort=")) {
@@ -168,7 +159,6 @@ presence.on("UpdateData", async () => {
     }
 
     data.state = query;
-    presence.setActivity(data);
   }
   /* Pagina principale - Main page */
   else if (document.location.href.includes("archive")) {
@@ -177,7 +167,6 @@ presence.on("UpdateData", async () => {
     data.details = "Nell'archivio";
     data.state = "Sfogliando...";
     data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
   }
 
   /* ----- LETTURA - READING ----- */
@@ -221,7 +210,6 @@ presence.on("UpdateData", async () => {
           url: document.location.href.replace(/.$/,"1")
         }
       ]
-      presence.setActivity(data);
     } 
     /* In qualsiasi altra pagina - In any other page */
     else {
@@ -231,7 +219,9 @@ presence.on("UpdateData", async () => {
       data.details = "Vedendo la pagina riguardante:";
       data.state = pageName;
       data.startTimestamp = browsingStamp;
-      presence.setActivity(data);
       }
+  }
+  if (data.details !== null) {
+    presence.setActivity(data);
   }
 });
