@@ -3,6 +3,12 @@
     "name": "Tellen",
     "id": "535214819520020510"
   },
+  "contributors": [
+    {
+      "name": "The_TecnoKing",
+      "id": "430014181220024330"
+    }
+  ],
   "service": "MangaWorld",
   "description": {
     "en": "Check out our MangaWorld site to read your favorite Manga in Italian and completely free.",
@@ -13,7 +19,7 @@
     "mangaworld.io",
     "www.mangaworld.io"
   ],
-  "version": "3.0.1",
+  "version": "3.0.2",
   "logo": "https://i.imgur.com/y53UAth.png",
   "thumbnail": "https://i.imgur.com/rALkJMV.png",
   "color": "#EE6C4D",

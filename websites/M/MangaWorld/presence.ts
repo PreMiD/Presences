@@ -29,17 +29,17 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
 
     if (document.location.href.endsWith("RE-READING")) {
-      var filter = "Nei contenuti in rilettura";
+      var filter = "In rilettura";
     } else if (document.location.href.endsWith("COMPLETED")) {
-      var filter = "Nei contenuti completati";
+      var filter = "Completati";
     } else if (document.location.href.endsWith("ON_HOLD")) {
-      var filter = "Nei contenuti in pausa";
+      var filter = "In pausa";
     } else if (document.location.href.endsWith("PLAN_TO_READ")) {
-      var filter = "Nei contenuti da leggere";
+      var filter = "Da leggere";
     } else if (document.location.href.endsWith("DROPPED")) {
-      var filter = "Nei contenuti droppati";
+      var filter = "Droppati";
     } else if (document.location.href.endsWith("READING")) {
-      var filter = "Nei contenuti in lettura";
+      var filter = "In lettura";
     } else {
       var filter = "";
     }
@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 
     data.smallImageKey = "file3";
     data.smallImageText = "Ricerca per formato";
-    data.details = "Sfogliando i contenuti del formato:";
+    data.details = "Sfogliando i contenuti in formato:";
     data.state = type;
     data.startTimestamp = browsingStamp;
   }
@@ -141,21 +141,21 @@ presence.on("UpdateData", async () => {
     let sortQuery = searchParams.get("sort");
     data.smallImageKey = "sort";
     data.smallImageText = "Ricerca per ordinamento";
-    data.details = "Sfogliando i contenuti ordinati:";
+    data.details = "Sfogliando i contenuti:";
     data.startTimestamp = browsingStamp;
 
     if (sortQuery == "a z") {
-      var query = "Dalla A alla Z";
+      var query = "Ordinati dalla A alla Z";
     } else if (sortQuery == "z a") {
-      var query = "Dalla Z alla A";
+      var query = "Ordinati dalla Z alla A";
     } else if (sortQuery == "most_read") {
-      var query = "Per popolarità (decrescente)";
+      var query = "Più popolari";
     } else if (sortQuery == "less_read") {
-      var query = "Per popolarità (crescente)";
+      var query = "Meno popolari";
     } else if (sortQuery == "newest") {
-      var query = "Per data di upload (decrescente)";
+      var query = "Più recenti";
     } else if (sortQuery == "oldest") {
-      var query = "Per data di upload (crescente)";
+      var query = "Meno recenti";
     }
 
     data.state = query;
@@ -216,10 +216,10 @@ presence.on("UpdateData", async () => {
       let pageName = document.title.replace(" Scan ITA - MangaWorld", "").replace("MangaWorld - ", "");
       data.smallImageKey = "eye";
       data.smallImageText = pageName;
-      data.details = "Vedendo la pagina riguardante:";
-      data.state = pageName;
+      data.details = "Visitando la pagina di:";
+      data.state = "\"" + pageName + "\"";
       data.startTimestamp = browsingStamp;
-      }
+    }
   }
   if (data.details !== null) {
     presence.setActivity(data);
