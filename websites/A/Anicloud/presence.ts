@@ -100,10 +100,10 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     },
     timestamps = presence.getTimestamps(currentTime, timeEnd);
-  if (page === "/") {
+  if (page === "/") 
     data.details = "Betrachtet die Startseite";
   
-  } else if (page.startsWith("/anime/")) {
+   else if (page.startsWith("/anime/")) {
     data.details = `${animeName.textContent}`;
     data.state = `${episode.textContent.split("Staffel")[0].replace("Filme von", " ").split(" | AniCloud.io - Animes gratis online ansehen")} - ${germanepisodename.textContent}`;
     [data.startTimestamp, data.endTimestamp] = timestamps;
@@ -140,10 +140,10 @@ presence.on("UpdateData", async () => {
     data.details = pages[page];
     data.state = `Sortiert nach: ${genre.textContent}`;
   
-  } else if (page === "/beliebte-animes") {
+  } else if (page === "/beliebte-animes") 
     data.state = `${beliebteanime.textContent.split("|")[0]}`;
   
-  } else if (page === "/support/anleitung") {
+   else if (page === "/support/anleitung") {
     data.details = pages[page];
     data.state = "Die Anleitung";
 
@@ -154,86 +154,86 @@ presence.on("UpdateData", async () => {
     data.details = pages[page];
     data.state = `${animekalender.textContent}`;
 
-  } else if (page === "/zufall") {
+  } else if (page === "/zufall") 
     data.details = pages[page];
 
-  } else if (page === "/random") {
+   else if (page === "/random") 
     data.details = pages[page];
 
       // UNTERE REITER
-  } else if (page === "/neu") {
+   else if (page === "/neu") 
     data.details = pages[page];
       
-  } else if (page === "/support/regeln") {
+   else if (page === "/support/regeln") 
     data.details = pages[page];
   
-  } else if (page === "/dmca") {
+   else if (page === "/dmca") 
     data.details = pages[page];
   
-  } else if (page === "/animewuensche") {
+   else if (page === "/animewuensche") 
     data.details = pages[page];
   
   //Sign In & Sign Up
 
-  } else if (page === "/login") {
+   else if (page === "/login") 
     data.details = pages[page];
   
-  } else if (page === "/registrierung") {
+   else if (page === "/registrierung") 
     data.details = pages[page];
   
     //User Leiste
-  } else if (page === "/account") {
+   else if (page === "/account") 
     data.details = pages[page];
 
-  } else if (page.startsWith("/user/profil/")) {
+   else if (page.startsWith("/user/profil/")) {
     data.details = "Betrachtet ein Profil";
     data.state = `${user.textContent}`;
     data.smallImageKey = "user";
     data.smallImageText = `${rank.textContent}`;
   
-  } else if (page === "/account/nachrichten") {
+  } else if (page === "/account/nachrichten") 
     data.details = pages[page];
 
-  } else if (page === "/account/notifications") {
+   else if (page === "/account/notifications") 
     data.details = pages[page]; 
   
-  } else if (page === "/account/support") {
+   else if (page === "/account/support") 
     data.details = pages[page];
   
-  } else if (page === "/account/watchlist") {
+   else if (page === "/account/watchlist") 
     data.details = pages[page];
   
-  } else if (page === "/account/subscribed") {
+   else if (page === "/account/subscribed") 
     data.details = pages[page];
 
-  } else if (page === "/account/settings") {
+   else if (page === "/account/settings") 
     data.details = pages[page]; 
   
   //MORE PROFILE SETTINGS --
   //BUGGY 1.0.5 ??
-  } else if (page.startsWith("/support/fragen")) {
+   else if (page.startsWith("/support/fragen")) 
     data.details = pages[page]; 
   
-  } else if (page === "/support") {
+   else if (page === "/support") 
     data.details = pages[page]; 
 
-  } else if (page === "/edit:information") {
+   else if (page === "/edit:information") 
     data.details = pages[page]; 
 
-  } else if (page.startsWith("/katalog/")) {
+   else if (page.startsWith("/katalog/")) 
     data.details = `Betrachtet Animes mit ${katalog.textContent}`;
 
-  } else if (page.startsWith("/support/frage/")) {
+   else if (page.startsWith("/support/frage/")) {
     data.details = `Frage von ${forumname.textContent}`;
-    data.state  = `${forum.textContent}`;
+    data.state = `${forum.textContent}`;
 
-  } else if (page.startsWith("/genre/")) {
+  } else if (page.startsWith("/genre/")) 
     data.details = `Sucht nach ${genre2.textContent}`;
   
-  } else {
+   else 
     data.details = "Befindet sich auf einer Unbekannte Seite";
   
-  }
+  
   if (data.details !== null && data.state !== null)
     presence.setActivity(data);
 }); 
