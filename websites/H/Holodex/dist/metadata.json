@@ -1,0 +1,30 @@
+{
+  "service": "Holodex",
+  "author": {
+    "name": "creeperkafasipw",
+    "id": "442685489833705483"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/ywSCOHi.png",
+  "thumbnail": "https://i.imgur.com/FM9qnIG.png",
+  "version": "1.0.1",
+  "color": "#64b5f6",
+  "tags": [
+    "vtuber",
+    "hololive"
+  ],
+  "url": [
+    "staging.holodex.net",
+    "holodex.net"
+  ],
+  "description": {
+    "en": "Watch your favorite vtubers and find their subbed clips in your language. Tracks 400+ vtubers and almost 700 clippers from Hololive to Independents."
+  },
+  "iframe": true,
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": "true"
+    }
+  ]
+}

@@ -25,7 +25,7 @@
     "www.crunchyroll.com",
     "beta.crunchyroll.com"
   ],
-  "version": "2.7.1",
+  "version": "2.7.6",
   "logo": "https://i.imgur.com/LpTKP8c.png",
   "thumbnail": "https://i.imgur.com/hzM7YCb.png",
   "color": "#f47521",
@@ -35,5 +35,11 @@
     "manga"
   ],
   "iframe": true,
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    }
+  ],
   "category": "anime"
 }

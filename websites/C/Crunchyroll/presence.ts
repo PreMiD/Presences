@@ -1,17 +1,41 @@
 const presence = new Presence({
-    clientId: "608065709741965327"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    browse: "presence.activity.browsing",
-    reading: "presence.activity.reading",
-    viewManga: "general.viewManga",
-    watchEpisode: "general.buttonViewEpisode",
-    manga: "general.manga"
-  });
+  clientId: "608065709741965327"
+});
 
-let lastPlaybackState = null,
+interface LangStrings {
+  play: string;
+  pause: string;
+  browse: string;
+  reading: string;
+  viewManga: string;
+  watchEpisode: string;
+  viewSeries: string;
+  manga: string;
+  chapter: string;
+  page: string;
+}
+
+async function getStrings(): Promise<LangStrings> {
+  return presence.getStrings(
+    {
+      play: "presence.playback.playing",
+      pause: "presence.playback.paused",
+      browse: "presence.activity.browsing",
+      reading: "presence.activity.reading",
+      viewManga: "general.viewManga",
+      watchEpisode: "general.buttonViewEpisode",
+      viewSeries: "general.buttonViewSeries",
+      manga: "general.manga",
+      chapter: "general.chapter",
+      page: "general.page"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
+
+let strings: Promise<LangStrings> = getStrings(),
+  oldLang: string = null,
+  lastPlaybackState = null,
   playback: boolean,
   browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -26,7 +50,7 @@ let iFrameVideo: boolean,
   paused: boolean;
 
 interface iFrameData {
-  iframe_video: {
+  iFrameVideoData: {
     iFrameVideo: boolean;
     currTime: number;
     dur: number;
@@ -35,18 +59,25 @@ interface iFrameData {
 }
 
 presence.on("iFrameData", (data: iFrameData) => {
-  playback = data.iframe_video !== null ? true : false;
+  playback = data.iFrameVideoData !== null ? true : false;
 
-  if (playback)
+  if (playback) {
     ({
       iFrameVideo,
       currTime: currentTime,
       dur: duration,
       paused
-    } = data.iframe_video);
+    } = data.iFrameVideoData);
+  }
 });
 
 presence.on("UpdateData", async () => {
+  const newLang = await presence.getSetting("lang").catch(() => "en");
+  if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+
   const presenceData: PresenceData = {
     largeImageKey: "lg"
   };
@@ -68,10 +99,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${(await strings).reading} ${currChapter}`;
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "book_open";
-      presenceData.smallImageText = `Page ${currPage}/${lastPage}`;
+      presenceData.smallImageText = `${
+        (await strings).page
+      } ${currPage}/${lastPage}`;
       presenceData.buttons = [
         {
-          label: "Read Chapter",
+          label: `Read ${(await strings).chapter}`,
           url: document.location.toString()
         }
       ];
@@ -110,24 +143,29 @@ presence.on("UpdateData", async () => {
   }
 
   if (iFrameVideo !== false && !isNaN(duration)) {
-    let videoTitle, type, episode, epName, seasonregex, seasonName;
+    let videoTitle,
+      series: HTMLElement,
+      seriesLink,
+      episode,
+      epName,
+      seasonregex,
+      seasonName;
     if (document.location.hostname.startsWith("beta")) {
+      seriesLink =
+        document.location.origin +
+        document.querySelector(".show-title-link").getAttribute("href");
       episode = document.querySelector(
         ".c-heading.c-heading--xs.c-heading--family-type-one.title"
       ).innerHTML;
       [, epName] = episode.match(/.* - (.*)/);
-      seasonregex = new RegExp(`(.*) ${epName} - Watch on Crunchyroll`);
+      epName = epName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      seasonregex = new RegExp(`(.*) ${epName} -`);
       [, seasonName] = document.title.match(seasonregex);
-      type =
-        document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[2]
-          .innerHTML === "Subtitled"
-          ? " (Sub)"
-          : " (Dub)";
-      videoTitle = seasonName + type;
+      videoTitle = seasonName;
     } else {
-      videoTitle = document.querySelector(
-        ".ellipsis .text-link span"
-      ).innerHTML;
+      series = document.querySelector(".ellipsis .text-link");
+      videoTitle = series.innerText;
+      seriesLink = series.getAttribute("href");
       const episod = document.querySelectorAll("#showmedia_about_media h4"),
         epName = document.querySelector("h4#showmedia_about_name");
       episode = `${episod[1].innerHTML} - ${epName.innerHTML}`;
@@ -160,6 +198,10 @@ presence.on("UpdateData", async () => {
         {
           label: (await strings).watchEpisode,
           url: document.location.toString()
+        },
+        {
+          label: (await strings).viewSeries,
+          url: seriesLink
         }
       ];
       presence.setActivity(presenceData, !paused);
