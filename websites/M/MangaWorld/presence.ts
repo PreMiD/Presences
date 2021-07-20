@@ -217,7 +217,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "eye";
       data.smallImageText = pageName;
       data.details = "Visitando la pagina di:";
-      data.state = "\"" + pageName + "\"";
+      data.state = pageName;
       data.startTimestamp = browsingStamp;
     }
   }
