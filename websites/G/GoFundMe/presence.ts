@@ -20,11 +20,11 @@ presence.on("UpdateData", async () => {
       "#root > div > main > div.p-campaign > header > h1"
     );
 
-    data.details = "Viewing at a fundraiser:";
+    data.details = "Viewing fundraiser:";
     data.state = fundraiserName.textContent;
     data.buttons = [
       {
-        label: "Visit fundraiser",
+        label: "View fundraiser",
         url: href
       }
     ];
