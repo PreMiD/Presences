@@ -30,7 +30,7 @@ const presence = new Presence({
     "/account/settings": "Account Einstellungen",
     "/support/fragen": "Betrachtet Fragen & Antworten",
     "/support": "Hilfe & Support bei Anicloud",
-    "/edit:information": "Neue Serieninformationen vorschlagen",
+    "/edit:information": "Neue Serieninformationen vorschlagen"
 
   };
   
