@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
    searchParams = new URLSearchParams(paramsString);
 
   /* Homepage */
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     data.smallImageKey = "home";
     data.smallImageText = "Homepage";
     data.details = "Nella homepage";
@@ -27,21 +27,20 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "bookmark";
     data.smallImageText = "Preferiti";
     data.details = "Sfogliando i preferiti";
+    let filter;
 
     if (document.location.href.endsWith("RE-READING")) 
-      var filter = "In rilettura";
+      filter = "In rilettura";
      else if (document.location.href.endsWith("COMPLETED")) 
-      var filter = "Completati";
+      filter = "Completati";
      else if (document.location.href.endsWith("ON_HOLD")) 
-      var filter = "In pausa";
+      filter = "In pausa";
      else if (document.location.href.endsWith("PLAN_TO_READ")) 
-      var filter = "Da leggere";
+      filter = "Da leggere";
      else if (document.location.href.endsWith("DROPPED")) 
-      var filter = "Droppati";
+      filter = "Droppati";
      else if (document.location.href.endsWith("READING")) 
-      var filter = "In lettura";
-     else 
-      var filter = "";
+      filter = "In lettura";
     
     data.state = filter;
   }
@@ -99,17 +98,18 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "slash";
     data.smallImageText = "Ricerca per stato";
     data.details = "Sfogliando i contenuti:";
+    let status;
 
-    if (statusQuery == "dropped") 
-      var status = "Droppati";
-     else if (statusQuery == "ongoing") 
-      var status = "In corso d'opera";
-     else if (statusQuery == "completed") 
-      var status = "Finiti";
-     else if (statusQuery == "paused") 
-      var status = "In pausa";
-     else if (statusQuery == "canceled") 
-      var status = "Cancellati";
+    if (statusQuery === "dropped") 
+      status = "Droppati";
+     else if (statusQuery === "ongoing") 
+      status = "In corso d'opera";
+     else if (statusQuery === "completed") 
+      status = "Finiti";
+     else if (statusQuery === "paused") 
+      status = "In pausa";
+     else if (statusQuery === "canceled") 
+      status = "Cancellati";
     
     data.state = status;
   }
@@ -129,19 +129,20 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "sort";
     data.smallImageText = "Ricerca per ordinamento";
     data.details = "Sfogliando i contenuti:";
+    let query;
 
-    if (sortQuery == "a z") 
-      var query = "Ordinati dalla A alla Z";
-     else if (sortQuery == "z a") 
-      var query = "Ordinati dalla Z alla A";
-     else if (sortQuery == "most_read") 
-      var query = "Più letti";
-     else if (sortQuery == "less_read") 
-      var query = "Meno letti";
-     else if (sortQuery == "newest") 
-      var query = "Più recenti";
-     else if (sortQuery == "oldest") 
-      var query = "Meno recenti";
+    if (sortQuery === "a z") 
+      query = "Ordinati dalla A alla Z";
+     else if (sortQuery === "z a") 
+      query = "Ordinati dalla Z alla A";
+     else if (sortQuery === "most_read") 
+      query = "Più letti";
+     else if (sortQuery === "less_read") 
+      query = "Meno letti";
+     else if (sortQuery === "newest") 
+      query = "Più recenti";
+     else if (sortQuery === "oldest") 
+      query = "Meno recenti";
     
     data.state = query;
   }
@@ -157,29 +158,28 @@ presence.on("UpdateData", async () => {
   else if (document.location.href.includes("/manga/")) {
     /* Nell'e-reader - In the e-reader */
     if (document.location.href.includes("/read/")) {
-      const mangaName = document.title
+      const [ mangaName ] = document.title
         .replace(" Scan ITA - MangaWorld", "")
         .replace(" Oneshot", "")
-        .split("Capitolo")[0],
+        .split("Capitolo"),
       
        chapter0n = document.title
         .replace(" Scan ITA - MangaWorld", "")
         .split("Capitolo")[1],
       
        chapterInt = parseInt(chapter0n, 10);
+
+      let chapter = chapter0n;
+
       if (chapterInt < 10) 
-        var chapter = chapter0n.replace("0", "");
-      
-      else 
-        var chapter = chapter0n;
-      
-      
+        chapter = chapter0n.replace("0", "");
+          
       const page = document.location.pathname
         .split("/")[6];
       
-      var chapterString = "Capitolo";
+      let chapterString = "Capitolo";
       if (chapter0n === undefined) {
-        var chapterString = "Oneshot",
+        chapterString = "Oneshot",
          chapter = "";
       }
 
