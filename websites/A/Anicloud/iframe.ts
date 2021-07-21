@@ -6,7 +6,8 @@ iframe.on("UpdateData", async () => {
     hostname === "streamtape.com" ||
     hostname === "playtube.ws" ||
     hostname === "vidoza.net" ||
-    hostname === "strcloud.link" 
+    hostname === "strcloud.link" ||
+    hostname === "ninjastream.to"
   ) {
     const video = document.querySelector(`video`);
     if (video != null) {
