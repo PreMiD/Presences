@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
                 label: getTranslation("view"),
                 url: window.location.href
             }
-        ]
+        ],
     }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
 
     if (window.location.pathname === "/") presenceData.details = getTranslation("home");
