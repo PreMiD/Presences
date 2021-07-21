@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 async function getTranslation(name: string) {
-    const language = await presence.getSetting("lang") == 0 ? "en" : "de";
+    const language = await presence.getSetting("lang") === 0 ? "en" : "de";
 
     switch(name) {
         case "home":
