@@ -163,9 +163,12 @@ presence.on("UpdateData", async () => {
         .replace(" Oneshot", "")
         .split("Capitolo"),
       
-       chapter0n = document.title
+       [ , chapter0n ] = document.title
         .replace(" Scan ITA - MangaWorld", "")
-        .split("Capitolo")[1],
+        .split("Capitolo"),
+
+       [ , , , , , , page ] = document.location.pathname
+        .split("/"),
       
        chapterInt = parseInt(chapter0n, 10);
 
@@ -173,9 +176,6 @@ presence.on("UpdateData", async () => {
 
       if (chapterInt < 10) 
         chapter = chapter0n.replace("0", "");
-          
-      const page = document.location.pathname
-        .split("/")[6];
       
       let chapterString = "Capitolo";
       if (chapter0n === undefined) {
