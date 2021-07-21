@@ -1,0 +1,19 @@
+ {
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+      "name": "Lena the fauli",
+      "id": "680778360871190600"
+    },
+    "service": "YouTubetoMP3",
+    "altnames": ["YouTube Converter"],
+    "description": {
+      "en": "Downloading Youtube Videos"
+    },
+    "url": "youtubetomp3music.com",
+    "version": "1.0.0",
+    "logo": "https://cdn.discordapp.com/attachments/805925040330637332/867383549194928128/Download_1.png",
+    "thumbnail": "https://media.discordapp.net/attachments/805925040330637332/867383901726048287/featured-image-youtube-downloader.png?width=757&height=473",
+    "color": "#ff0000",
+    "tags": ["youtube", "download","mp3"],
+    "category": "other"
+  }
