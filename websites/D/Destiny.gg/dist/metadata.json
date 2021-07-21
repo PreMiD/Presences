@@ -9,10 +9,11 @@
     "destiny.gg"
   ],
   "description": {
-    "en": "Streaming website for the streamer Steven \"Destiny\" Bonnell II"
+    "en": "Streaming website for the streamer Steven \"Destiny\" Bonnell II",
+    "nl": "Streaming website voor de streamer Steven \"Destiny\" Bonnell II"
   },
   "service": "Destiny.gg",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/pSEZ2Cm.png",
   "thumbnail": "https://i.imgur.com/UAGQHuC.png",
   "color": "#568FCA",

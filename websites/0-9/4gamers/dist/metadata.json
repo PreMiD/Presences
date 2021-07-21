@@ -8,10 +8,11 @@
     "en": "An integrated company for planning, executing, marketing and broadcasting of e-sports in Taiwan .",
     "zh_CN": "一家台湾电竞规划、执行、行销和转播的整合公司。",
     "zh_TW": "一家台灣電競規劃、執行、行銷和轉播的整合公司。",
-    "ga_IE": "Cuideachta chomhtháite chun ríomh-spórt a phleanáil, a fhorghníomhú, a mhargú agus a chraoladh sa Téaváin."
+    "ga_IE": "Cuideachta chomhtháite chun ríomh-spórt a phleanáil, a fhorghníomhú, a mhargú agus a chraoladh sa Téaváin.",
+    "nl": "Een geïntegreerd bedrijf voor de planning, uitvoering, marketing en uitzending van e-sports in Taiwan."
   },
   "url": "www.4gamers.com.tw",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "logo": "https://i.imgur.com/zjbM0Um.png",
   "thumbnail": "https://i.imgur.com/rJR3o2n.png",
   "color": "#2E93A5",

@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Yokkkoso && Baka",
+    "id": "190762645316567040"
+  },
+  "service": "jut.su",
+  "description": {
+    "en": "Jut.su is Russian anime website",
+    "ru": "Jut.su это русский аниме сайт",
+    "nl": "Jut.su is een Russische anime-website"
+  },
+  "url": "jut.su",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/f3zxOuL.png",
+  "thumbnail": "https://i.imgur.com/NlBgvR0.png",
+  "color": "#c9e58b",
+  "tags": [
+    "jutsu",
+    "anime"
+  ],
+  "category": "anime"
+}

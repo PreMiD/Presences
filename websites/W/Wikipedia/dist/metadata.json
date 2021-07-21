@@ -18,10 +18,11 @@
     "fr": "Wikipedia est une encyclopédie en ligne multilingue, basée sur collaboration ouverte grâce à un système d'édition de contenu.",
     "uk_UA": "Вікіпедія — це багатомовна онлайн-енциклопедія, заснована на відкритій співпраці через систему редагування вмісту на основі вікі.",
     "nl": "Wikipedia is een meertalige online encyclopedie, gebaseerd op open samenwerking via een wiki-gebaseerd contentbewerkingssysteem.",
-    "zh_CN": "维基百科是一种多语言的在线百科全书，包含基于Wiki的内容的协作编辑系统。"
+    "zh_CN": "维基百科是一种多语言的在线百科全书，包含基于Wiki的内容的协作编辑系统。",
+    "ga_IE": "Ciclipéid ilteangach ar líne é Wikipedia, bunaithe ar chomhoibriú oscailte trí chóras eagarthóireachta ábhar bunaithe ar wiki."
   },
   "url": "wikipedia.org",
-  "version": "2.7.6",
+  "version": "2.7.8",
   "logo": "https://i.imgur.com/JyyHKLB.png",
   "thumbnail": "https://i.imgur.com/vJiuzZy.png",
   "color": "#f9f9f9",

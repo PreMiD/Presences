@@ -6,13 +6,14 @@
   "service": "Toradora Wikia",
   "description": {
     "en": "Presence for the english & german wikias of the anime Toradora!",
-    "de": "Präsenz für die englischen & deutschen Wikias über den Anime Toradora!"
+    "de": "Präsenz für die englischen & deutschen Wikias über den Anime Toradora!",
+    "nl": "Aanwezigheid voor de Engelse en Duitse wikia's van de anime Toradora!"
   },
   "url": [
     "tora-dora.fandom.com",
     "toradora.fandom.com"
   ],
-  "version": "1.1.5",
+  "version": "1.1.7",
   "logo": "https://crugg.de/premid/tapilogo.png",
   "thumbnail": "https://crugg.de/premid/tapibanner.png",
   "color": "#F9304B",

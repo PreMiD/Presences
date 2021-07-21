@@ -1,10 +1,11 @@
-* @Timeraa @Bas950 @StrikerFRFX
+websites/** @PreMiD/presence-verifiers
 
-@types/* @Timeraa
-LICENSE @Fruxh
+@types/** @Timeraa @Bas950
 package.json @Timeraa @Fruxh @TheDropX
 yarn.lock @Timeraa @Fruxh @TheDropX
-presenceUpdater.ts @Timeraa
-syntaxEnforcer.ts @SeMiD
-qualityAssurance.ts @SeMiD
-.gitignore @Timeraa @Fruxh
+.eslintrc.json @Bas950
+.github/CODEOWNERS @Bas950
+.github/CONTRIBUTING.md @Bas950
+
+util/tools/translator.ts @Bas950
+util/tools/auto/** @SeMiD

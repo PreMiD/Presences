@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "SlowLife",
+    "id": "374905512661221377"
+  },
+  "url": "dramacool.vc",
+  "regExp": "[0-9w]{0,6}.*dramacool.[a-z]+",
+  "description": {
+    "en": "Dramacool - Watch Asian Dramas, Movies and Shows with English Subtitles on Dramacool in Full HD For Free. A cool Site for Great Peoples.",
+    "nl": "Dramacool - Bekijk Aziatische drama's, films en shows met Engelse ondertiteling op Dramacool in Full HD Gratis. Een coole site voor grote mensen."
+  },
+  "service": "DramaCool",
+  "version": "1.1.1",
+  "logo": "https://i.imgur.com/Bn5qNZO.png",
+  "thumbnail": "https://i.imgur.com/f3AIc30.png",
+  "color": "#26bdc6",
+  "tags": [
+    "drama",
+    "movie"
+  ],
+  "iframe": true,
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

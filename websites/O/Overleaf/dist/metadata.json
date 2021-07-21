@@ -5,12 +5,14 @@
     "id": "329669021043523594"
   },
   "url": "www.overleaf.com",
+  "regExp": "([a-z0-9-]+[.])*overleaf[.]com[/]",
   "description": {
     "en": "Overleaf is a collaborative cloud-based LaTeX editor used for writing, editing and publishing scientific documents. It partners with a wide range of scientific publishers to provide official journal LaTeX templates, and direct submission links.",
-    "fr": "Overleaf est un éditeur LaTeX en ligne collaboratif en temps réel utilisé pour écrire, éditer et publier des documents scientifiques. Il fournit différents modèles LaTeX de journaux officiels et permet d'y publier directement des documents grâce à ses partenariats avec des éditeurs scientifiques."
+    "fr": "Overleaf est un éditeur LaTeX en ligne collaboratif en temps réel utilisé pour écrire, éditer et publier des documents scientifiques. Il fournit différents modèles LaTeX de journaux officiels et permet d'y publier directement des documents grâce à ses partenariats avec des éditeurs scientifiques.",
+    "nl": "Overleaf is een op samenwerking gebaseerde LaTeX-editor in de cloud die wordt gebruikt voor het schrijven, bewerken en publiceren van wetenschappelijke documenten. Het werkt samen met een breed scala aan wetenschappelijke uitgevers om LaTeX-sjablonen van officiële tijdschriften en directe indieningslinks te bieden."
   },
   "service": "Overleaf",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/FbpZZg1.png",
   "thumbnail": "https://i.imgur.com/lWInfl3.png",
   "color": "#138A07",

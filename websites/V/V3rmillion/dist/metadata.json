@@ -5,10 +5,12 @@
   },
   "service": "V3rmillion",
   "description": {
-    "en": "Vermillion is a Programming and Gaming community forum dedicated to the conversation of a range of topics, within and out of the programming world."
+    "en": "Vermillion is a Programming and Gaming community forum dedicated to the conversation of a range of topics, within and out of the programming world.",
+    "ga_IE": "Is fóram pobail Clárúcháin agus Cearrbhachais é Vermillion atá tiomnaithe do chomhrá réimse ábhar, laistigh agus lasmuigh de shaol na gclár.",
+    "nl": "Vermillion is een communityforum voor programmering en gaming dat zich toelegt op het bespreken van een reeks onderwerpen, binnen en buiten de programmeerwereld."
   },
   "url": "v3rmillion.net",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "logo": "https://i.vgy.me/RNs8y0.png",
   "thumbnail": "https://i.vgy.me/LtyBwC.png",
   "color": "#CD1818",

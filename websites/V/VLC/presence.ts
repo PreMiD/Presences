@@ -183,24 +183,19 @@ const getStatus = setLoop(function () {
 
           req.responseXML.getElementsByTagName("state")[0].textContent.length >
           0
-            ? (media.state = req.responseXML.getElementsByTagName(
-                "state"
-              )[0].textContent)
+            ? (media.state =
+                req.responseXML.getElementsByTagName("state")[0].textContent)
             : (media.state = "stopped");
 
           if (media.state !== "stopped") {
-            media.time = req.responseXML.getElementsByTagName(
-              "time"
-            )[0].textContent;
-            media.length = req.responseXML.getElementsByTagName(
-              "length"
-            )[0].textContent;
-            media.loop = req.responseXML.getElementsByTagName(
-              "loop"
-            )[0].textContent;
-            media.repeat = req.responseXML.getElementsByTagName(
-              "repeat"
-            )[0].textContent;
+            media.time =
+              req.responseXML.getElementsByTagName("time")[0].textContent;
+            media.length =
+              req.responseXML.getElementsByTagName("length")[0].textContent;
+            media.loop =
+              req.responseXML.getElementsByTagName("loop")[0].textContent;
+            media.repeat =
+              req.responseXML.getElementsByTagName("repeat")[0].textContent;
           } else {
             media.time = null;
             media.length = null;

@@ -6,11 +6,13 @@
   },
   "url": "music.yandex.ru",
   "description": {
+    "en": "Yandex streaming service that allows you to listen to music tracks, albums, and collections of music tracks and get personal recommendations.",
     "ru": "Стриминговый сервис компании «Яндекс», позволяющий прослушивать музыкальные композиции, альбомы, подборки музыкальных треков и получать персональные рекомендации.",
-    "en": "Yandex streaming service that allows you to listen to music tracks, albums, and collections of music tracks and get personal recommendations."
+    "ga_IE": "Seirbhís sruthú Yandex a ligeann duit éisteacht le rianta ceoil, albam, agus bailiúcháin rianta ceoil agus moltaí pearsanta a fháil.",
+    "nl": "Yandex-streamingdienst waarmee u naar muziektracks, albums en verzamelingen muziektracks kunt luisteren en persoonlijke aanbevelingen kunt krijgen."
   },
   "service": "Yandex Music",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/d1za28M.png",
   "thumbnail": "https://i.imgur.com/JohXxhi.png",
   "color": "#FDCD01",

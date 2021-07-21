@@ -150,9 +150,8 @@ presence.on("UpdateData", async () => {
           .replace(" ", "_")
           .replace("+", "plus")
           .replace("#", "sharp");
-        presenceData.smallImageText = document.querySelector(
-          "#catalog-heading"
-        ).textContent;
+        presenceData.smallImageText =
+          document.querySelector("#catalog-heading").textContent;
       } else if (pathArray[1] === "subject") {
         presenceData.details = "Looking at a subject";
         presenceData.state = `"${

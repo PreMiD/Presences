@@ -1,19 +1,31 @@
 {
-  "author": {
-    "name": "Alexx",
-    "id": "604182077088202784"
-  },
-  "url": "client.foldingathome.org",
-  "description": {
-    "en": "Folding@home is a project focused on disease research. The problems we're solving require so many computer calcul­ations - and we need your help to find the cures! Fight diseases Together with us."
-  },
+  "$schema": "https://schemas.premid.app/metadata/1.3",
   "service": "Folding@home",
-  "version": "1.0.6",
+  "author": {
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
+  },
+  "contributors": [
+    {
+      "name": "Alexx",
+      "id": "604182077088202784"
+    }
+  ],
+  "category": "other",
   "logo": "https://i.imgur.com/V6FvA5I.png",
   "thumbnail": "https://i.imgur.com/5TNqcl6.png",
-  "color": "#BFFF00",
+  "version": "1.1.1",
+  "color": "#581919",
   "tags": [
-    "charity"
+    "charity",
+    "folding",
+    "foldinghome",
+    "foldingathome"
   ],
-  "category": "other"
+  "url": "client.foldingathome.org",
+  "description": {
+    "en": "Folding@home is a project focused on disease research. The problems we're solving require so many computer calcul­ations - and we need your help to find the cures! Fight diseases Together with us.",
+    "nl": "Folding@home is een project gericht op onderzoek naar ziektes. De problemen die we oplossen vereisen zo veel computerberekeningen - en we hebben jouw hulp nodig om de remedies te vinden! Bestrijd ziekten samen met ons."
+  },
+  "iframe": true
 }

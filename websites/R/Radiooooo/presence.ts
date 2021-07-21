@@ -1,8 +1,3 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-}
-
 const presence = new Presence({
     clientId: "812656134120931330"
   }),
@@ -17,7 +12,7 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let oldLang: string = null,
-  strings: Promise<LangStrings> = getStrings();
+  strings = getStrings();
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -31,8 +26,9 @@ presence.on("UpdateData", async () => {
     const timestamps = presence.getTimestampsfromMedia(audio),
       paused = audio.paused,
       title = document.querySelector("div.info > div.title").textContent,
-      artist = document.querySelector("div.field.artist > span:nth-child(2)")
-        .textContent,
+      artist = document.querySelector(
+        "div.field.artist > span:nth-child(2)"
+      ).textContent,
       place = document.querySelector("div.head > div.place").textContent,
       year = document.querySelector("div.head > div.year").textContent,
       songDetails = await presence.getSetting("song_1"),

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "SlowLife",
+    "id": "374905512661221377"
+  },
+  "contributors": [
+    {
+      "name": "Elon Musk",
+      "id": "631499344863821877"
+    },
+    {
+      "name": "Bas950",
+      "id": "241278257335500811"
+    }
+  ],
+  "service": "BBC",
+  "description": {
+    "en": "The best of the BBC, with the latest news and sport headlines, weather, TV & radio highlights and much more from across the whole of BBC Online.",
+    "nl": "Het beste van de BBC, met het laatste nieuws en sportkoppen, weerberichten, hoogtepunten op tv en radio en nog veel meer uit heel BBC Online."
+  },
+  "url": [
+    "www.bbc.co.uk",
+    "www.bbc.com"
+  ],
+  "version": "2.0.3",
+  "logo": "https://i.imgur.com/4GzQf9o.png",
+  "thumbnail": "https://i.imgur.com/fBxxQDw.png",
+  "color": "#000000",
+  "tags": [
+    "bbc",
+    "bbc-iplayer",
+    "bbc-sounds",
+    "movie",
+    "weather",
+    "bbc-weather",
+    "news"
+  ],
+  "category": "other",
+  "iframe": true,
+  "settings": [
+    {
+      "multiLanguage": true,
+      "id": "lang"
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "search",
+      "title": "Show Search Query",
+      "icon": "fas fa-search",
+      "value": true
+    }
+  ]
+}

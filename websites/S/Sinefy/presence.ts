@@ -1,15 +1,13 @@
 const sinefy = new Presence({
     clientId: "817552908991594530"
   }),
-  strings = async () => {
-    return sinefy.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused"
-      },
-      await sinefy.getSetting("lang")
-    );
-  },
+  strings = sinefy.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused"
+    },
+    "tr"
+  ),
   pages: { [k: string]: string } = {
     "/": "Ana Sayfa",
     "/gozat": "Göz At",
@@ -32,9 +30,15 @@ const sinefy = new Presence({
     "/netflix-filmleri-izle": "Netflix Filmleri"
   };
 
-let video: HTMLVideoElement;
-sinefy.on("iFrameData", (data: { video: HTMLVideoElement }) => {
-  if (data.video) video = data.video;
+interface iframeData {
+  duration: number;
+  currentTime: number;
+  paused: boolean;
+}
+
+let video: iframeData;
+sinefy.on("iFrameData", (data: iframeData) => {
+  if (data) video = data;
 });
 
 const startTimestamp = Math.floor(Date.now() / 1000);
@@ -45,8 +49,7 @@ sinefy.on("UpdateData", async () => {
       startTimestamp
     },
     settings = {
-      buttons: await sinefy.getSetting("buttons"),
-      showTitle: await sinefy.getSetting("show-title")
+      buttons: await sinefy.getSetting("buttons")
     };
 
   if (page.includes("/izle/")) {
@@ -60,28 +63,37 @@ sinefy.on("UpdateData", async () => {
         document.querySelector(".bg-cover-faker h1.page-title span")
           ?.textContent || null;
 
-    // Set status state
     activity.details = title.replace(episode, "");
     if (episode) activity.state = episode.replace("izle", "");
 
-    if (video) {
+    if (Object.keys(video || {}).length > 0) {
       const timestamps = sinefy.getTimestamps(
         video.currentTime,
         video.duration
       );
 
-      // Set timestamps
       activity.startTimestamp = timestamps[0];
       activity.endTimestamp = timestamps[1];
 
-      // Set playing/paused text
+      if (video.paused) {
+        delete activity.startTimestamp;
+        delete activity.endTimestamp;
+      }
+
+      if (settings.buttons)
+        activity.buttons = [
+          {
+            label: "Filmi/Diziyi İzle",
+            url: location.href
+          }
+        ];
+
       activity.smallImageKey = video.paused ? "pause" : "play";
       activity.smallImageText = video.paused
-        ? (await strings()).pause
-        : (await strings()).play;
+        ? (await strings).pause
+        : (await strings).play;
     }
 
-    // Set activity
     sinefy.setActivity(activity);
   } else if (page.includes("/gozat/")) {
     const title =
@@ -100,7 +112,6 @@ sinefy.on("UpdateData", async () => {
     activity.details = "Bir kullanıcıya göz atıyor:";
     activity.state = username;
 
-    // Set buttons if settings is turned on
     if (settings.buttons === true)
       activity.buttons = [
         {

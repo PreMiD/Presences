@@ -6,14 +6,15 @@
   },
   "service": "pays.host",
   "description": {
-    "en": "Custom ShareX image uploader and host"
+    "en": "Custom ShareX image uploader and host",
+    "nl": "Aangepaste ShareX image-uploader en host"
   },
   "url": [
     "pays.host",
     "beta.pays.host",
     "status.pays.host"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/YW4nMV4.png",
   "thumbnail": "https://i.imgur.com/qBToMIr.png",
   "color": "#ad6edd",

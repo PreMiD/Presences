@@ -6,13 +6,15 @@
   "service": "Anime Music Quiz",
   "description": {
     "en": "Anime Music Quiz is a game platform that allows friends to compete against each other anime music knowledge.",
-    "it": "Anime Music Quiz è una piattaforma di gioco che permette agli amici di competere tra di loro basandosi sulla conoscenza musicale degli anime."
+    "it": "Anime Music Quiz è una piattaforma di gioco che permette agli amici di competere tra di loro basandosi sulla conoscenza musicale degli anime.",
+    "ga_IE": "Is ardán cluiche é Tráth na gCeist Ceoil Anime a ligeann do chairde dul san iomaíocht i gcoinne a chéile ar eolas faoi cheol anime.",
+    "nl": "Anime Music Quiz is een spelplatform waarmee vrienden het tegen elkaar kunnen opnemen op hun anime-muziekkennis."
   },
   "url": [
     "www.animemusicquiz.com",
     "animemusicquiz.com"
   ],
-  "version": "1.0.7",
+  "version": "1.0.10",
   "logo": "https://i.imgur.com/oaRshoy.png",
   "thumbnail": "https://i.imgur.com/8tXZEqG.png",
   "color": "#DF6975",

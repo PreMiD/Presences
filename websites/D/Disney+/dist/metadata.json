@@ -21,9 +21,9 @@
   },
   "url": "www.disneyplus.com",
   "regExp": "([a-z0-9-]+[.])*disneyplus[.]com[/]|([a-z0-9-]+[.])*hotstar[.]com[/]",
-  "version": "1.4.1",
+  "version": "1.4.6",
   "logo": "https://i.imgur.com/zuUeb2A.png",
-  "thumbnail": "https://i.imgur.com/KKRJx25.png",
+  "thumbnail": "https://i.imgur.com/Tp9oYPj.png",
   "color": "#233778",
   "tags": [
     "disney",
@@ -45,6 +45,12 @@
       "multiLanguage": true
     },
     {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
       "id": "time",
       "title": "Show Timestamps",
       "icon": "fad fa-stopwatch",
@@ -52,6 +58,9 @@
     },
     {
       "id": "buttons",
+      "if": {
+        "privacy": false
+      },
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
@@ -59,7 +68,8 @@
     {
       "id": "groupWatchBtn",
       "if": {
-        "buttons": true
+        "buttons": true,
+        "privacy": false
       },
       "title": "Join GroupWatch Button",
       "icon": "fas fa-users",

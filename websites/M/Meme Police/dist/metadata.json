@@ -7,10 +7,11 @@
   "url": "meme-police.ru",
   "description": {
     "en": "Online versions of popular board games",
-    "ru": "Веб-версии популярных настольных игр"
+    "ru": "Веб-версии популярных настольных игр",
+    "nl": "Onlineversies van populaire bordspellen"
   },
   "service": "Meme Police",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/8T258D8.png",
   "thumbnail": "https://i.imgur.com/5N7oOem.png",
   "color": "#9C27B0",

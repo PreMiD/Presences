@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "fontsred",
+      largeImageKey: "favicon",
       smallImageKey: "google",
       startTimestamp: tmb
     },
@@ -53,11 +53,11 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/featured/")) {
     let featuredFonts;
     if (document.getElementsByClassName("gmat-headline-1")[0]) {
-      featuredFonts = document.getElementsByClassName("gmat-headline-1")[0]
-        .textContent;
+      featuredFonts =
+        document.getElementsByClassName("gmat-headline-1")[0].textContent;
     } else if (!document.getElementsByClassName("gmat-headline-1")[0]) {
-      featuredFonts = document.getElementsByClassName("gmat-headline-4")[0]
-        .textContent;
+      featuredFonts =
+        document.getElementsByClassName("gmat-headline-4")[0].textContent;
     }
     presenceData.details = "Looking at a featured font:";
     presenceData.state = featuredFonts;
@@ -69,6 +69,27 @@ presence.on("UpdateData", async () => {
           url: document.URL
         }
       ];
+    }
+  } else if (path === "/icons") {
+    if (
+      new URL(document.location.href).searchParams.get("icon.query") === null
+    ) {
+      if (document.getElementsByClassName("mdc-chip--selected")[0]) {
+        const iconsFilter = document
+          .getElementsByClassName("mdc-chip--selected")[0]
+          .textContent.toLowerCase();
+        presenceData.details = "Browsing Material icons"; // The icons are named "Material icons" like this on the Fonts website
+        presenceData.state = `Looking at the ${iconsFilter} icons`;
+      } else {
+        presenceData.details = "Browsing Material icons";
+        presenceData.state = "Looking at all icons";
+      }
+    } else {
+      const iconSearch = new URL(document.location.href).searchParams.get(
+        "icon.query"
+      );
+      presenceData.details = "Searching for icons";
+      presenceData.state = `Search query: ${iconSearch}`;
     }
   } else if (path === "/about") {
     presenceData.details = "Viewing the about page";

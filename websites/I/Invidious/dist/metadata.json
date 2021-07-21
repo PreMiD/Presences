@@ -7,9 +7,11 @@
   "service": "Invidious",
   "description": {
     "en": "Invidious is an alternative front-end to YouTube.",
-    "de": "Invidious ist eine alternative Oberfläche für YouTube."
+    "de": "Invidious ist eine alternative Oberfläche für YouTube.",
+    "nl": "Invidious is een alternatieve front-end voor YouTube."
   },
   "url": [
+    "iteroni.com",
     "invidiou.site",
     "invidious.cmh.pw",
     "invidious.fdn.fr",
@@ -23,7 +25,7 @@
     "vid.mint.lgbt",
     "yewtu.be"
   ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/Cfm6lRV.png",
   "thumbnail": "https://i.imgur.com/qBOgRqU.jpg",
   "color": "#00B6F0",

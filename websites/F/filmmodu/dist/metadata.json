@@ -6,10 +6,11 @@
   "service": "filmmodu",
   "description": {
     "en": "filmmodu is a Turkish service that provides latest movies.",
-    "tr": "Film modun geldiyse yüksek kalitede en yeni filmleri 1080p kalitede izleyebileceğiniz reklamsız film sitesi."
+    "tr": "Film modun geldiyse yüksek kalitede en yeni filmleri 1080p kalitede izleyebileceğiniz reklamsız film sitesi.",
+    "nl": "filmmodu is een Turkse dienst die de nieuwste films aanbiedt."
   },
   "url": "www.filmmodu.org",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://premid.is-inside.me/GvIBOekm.png",
   "thumbnail": "https://premid.is-inside.me/LEAlVN1e.png",
   "color": "#ffc526",

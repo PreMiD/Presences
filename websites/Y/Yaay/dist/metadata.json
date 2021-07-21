@@ -6,11 +6,13 @@
   },
   "url": "yaay.com.tr",
   "description": {
+    "en": "Yaay, new Turkish social media with many features!",
     "tr": "Yerli sosyal medya uygulaması Yaay için PreMiD eklentisi.",
-    "en": "Yaay, new Turkish social media with many features!"
+    "ga_IE": "Yaay, new Turkish social media with many features!",
+    "nl": "Yaay, nieuwe Turkse sociale media met veel functies!"
   },
   "service": "Yaay",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/KbcxoIV.png",
   "thumbnail": "https://i.imgur.com/mgHnMIf.png",
   "color": "#0076f6",

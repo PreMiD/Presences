@@ -6,10 +6,11 @@
   "service": "Kimi no Na wa Wikia",
   "description": {
     "en": "Presence for the english wikia of the anime movie Kimi no Na wa./Your Name.",
-    "de": "Präsenz für das englische Wikia über den Anime-Film Kimi no Na wa./Your Name."
+    "de": "Präsenz für das englische Wikia über den Anime-Film Kimi no Na wa./Your Name.",
+    "nl": "Aanwezigheid voor de engelse wikia van de anime-film Kimi no Na wa./Your Name."
   },
   "url": "kiminonawa.fandom.com",
-  "version": "2.1.5",
+  "version": "2.1.7",
   "logo": "https://crugg.de/premid/knnwlogo.png",
   "thumbnail": "https://crugg.de/premid/knnwbanner.png",
   "color": "#7DA1BB",

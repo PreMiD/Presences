@@ -4,12 +4,17 @@
     "name": "Dragonism",
     "id": "694943372720341045"
   },
-  "url": "www.brick-hill.com",
+  "url": [
+    "www.brick-hill.com",
+    "blog.brick-hill.com",
+    "api.brick-hill.com"
+  ],
   "description": {
-    "en": "Brick Hill is the ultimate building block game, allowing you to push the limits of digital bricks and make your own games."
+    "en": "Brick Hill is the ultimate building block game, allowing you to push the limits of digital bricks and make your own games.",
+    "nl": "Brick Hill is het ultieme bouwsteenspel, waarmee je de grenzen van digitale stenen kunt verleggen en je eigen spellen kunt maken."
   },
   "service": "Brick Hill",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/zeeZUb0.png",
   "thumbnail": "https://i.imgur.com/Gy5U4QK.png",
   "color": "#00A9FE",

@@ -5,10 +5,11 @@
   },
   "service": "skindb.co",
   "description": {
-    "en": "skindb.co is a database for fortnite, valorant and fall gyus skins/items."
+    "en": "skindb.co is a database for fortnite, valorant and fall guys skins/items.",
+    "nl": "skindb.co is een database voor fortnite, valorant en fall guys skins/items."
   },
   "url": "skindb.co",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/F6LKEIl.jpg",
   "thumbnail": "https://i.imgur.com/liASfLj.png",
   "color": "#60ACFF",

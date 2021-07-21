@@ -72,7 +72,7 @@ async function getStrings(): Promise<LangStrings> {
       viewing: "general.viewing",
       profile: "general.viewProfile"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -81,7 +81,7 @@ let strings: Promise<LangStrings> = getStrings(),
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     time = await presence.getSetting("time");
   if (!oldLang) {

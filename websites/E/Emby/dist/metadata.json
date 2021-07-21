@@ -15,7 +15,7 @@
     "nl": "Uw persoonlijke media op elk apparaat. Het was nog nooit zo eenvoudig om al uw video's, muziek en foto's samen te brengen op één plek. Uw persoonlijke Emby-server converteert en streamt uw media automatisch om ze op elk apparaat af te spelen."
   },
   "service": "Emby",
-  "version": "1.2.4",
+  "version": "1.3.1",
   "logo": "https://i.imgur.com/mTHBDPm.png",
   "thumbnail": "https://i.imgur.com/gDfeWur.png",
   "color": "#52B54B",
@@ -26,5 +26,19 @@
     "tv",
     "media"
   ],
-  "regExp": ".*[/]web[/]index[.]html"
+  "regExp": ".*[/]web[/]index[.]html",
+  "settings": [
+    {
+      "id": "showMediaTimestamps",
+      "title": "Show media timestamps",
+      "icon": "fad fa-play",
+      "value": true
+    },
+    {
+      "id": "showTimestamps",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
 }

@@ -7,13 +7,14 @@
   "service": "Wikibooks",
   "description": {
     "en": "Wikibooks aims to build a collection of free e-book resources including textbooks, annotated texts, instructional guides, and manuals.",
-    "ar_SA": "تهدف ويكي الكتب إلى إنشاء مجموعة من موارد الكتب الإلكترونية المجانية بما في ذلك الكتب النصية ، والنصوص المشروحة ، والأدلة الإرشادية ، والأدلة.",
     "zh_CN": "維基教科書旨在建立一系列免費電子書資源，包括教科書，註釋文本，教學指南和手冊。",
     "fr": "Wikilivres vise à constituer une bibliothèque de ressources livresques électroniques, composée de manuels scolaires et techniques ainsi que de textes annotés et de guides.",
-    "es": "Wikilibros busca construir una colección de recursos libres en e-book incluyendo libros de texto, versiones comentadas, guías instructivas y manuales."
+    "es": "Wikilibros busca construir una colección de recursos libres en e-book incluyendo libros de texto, versiones comentadas, guías instructivas y manuales.",
+    "ga_IE": "Tá sé mar aidhm ag Wikibooks bailiúchán d’acmhainní r-leabhar saor in aisce a thógáil lena n-áirítear téacsleabhair, téacsanna anótáilte, treoracha teagaisc agus lámhleabhair.",
+    "nl": "Wikibooks heeft tot doel een verzameling gratis bronnen voor e-boeken op te bouwen, waaronder tekstboeken, geannoteerde teksten, instructiehandleidingen en handleidingen."
   },
   "url": "wikibooks.org",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/Y6Z6NKa.png",
   "thumbnail": "https://i.imgur.com/zhJBMJe.png",
   "color": "#f9f9f9",

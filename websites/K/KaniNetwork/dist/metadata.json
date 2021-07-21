@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "fantomitechno 🦊",
+    "id": "563749920683720709"
+  },
+  "url": "kaniwork.com",
+  "description": {
+    "en": "The Kani Network is a community gathered around different discord bots",
+    "fr": "Le Kani Network est une communauté réunis autour de différents bots discord",
+    "nl": "Het Kani-netwerk is een gemeenschap die is verzameld rond verschillende onenigheidsrobots"
+  },
+  "service": "KaniNetwork",
+  "version": "1.3.3",
+  "logo": "https://i.imgur.com/hCHdlGM.png",
+  "thumbnail": "https://i.imgur.com/zqESW36.png",
+  "color": "#FF0000",
+  "tags": [
+    "bot",
+    "kanishiel",
+    "discord",
+    "game-bot",
+    "kani-network"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Hide server",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "super-privacy",
+      "title": "Privacy mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ]
+}

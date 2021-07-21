@@ -52,12 +52,10 @@ presence.on("UpdateData", async () => {
     selectHunter: HTMLSelectElement = document.querySelector(
       "#corpo > div:nth-child(1) > div.box_content > div > select"
     ),
-    indicacaoTipo: HTMLSelectElement = document.querySelector(
-      "#conteudoSelect"
-    ),
-    indicacaoGenero: HTMLSelectElement = document.querySelector(
-      "#generoSelect"
-    ),
+    indicacaoTipo: HTMLSelectElement =
+      document.querySelector("#conteudoSelect"),
+    indicacaoGenero: HTMLSelectElement =
+      document.querySelector("#generoSelect"),
     nomePerfil: HTMLElement = document.querySelector(
       "#corpo > header > div.perfil_header_photos > div.perfil_box_photo > h1"
     ),

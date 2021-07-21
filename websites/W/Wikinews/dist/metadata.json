@@ -7,13 +7,14 @@
   "service": "Wikinews",
   "description": {
     "en": "Wikinews provides a free content alternative to commercial news sites with articles that are fact-checked and peer reviewed.",
-    "ar_SA": "تقدم ويكي الأخبار محتوى مجانيًا بديلًا لمواقع الأخبار التجارية مع مقالات يتم التحقق منها بشكل حقيقي بمراجعة الزملاء.",
     "zh_CN": "維基新聞提供商業新聞網站的免費內容替代品。",
     "fr": "Wikinews est une alternative libre aux sites d’actualités commerciaux, aux articles vérifiés factuellement par les pairs.",
-    "es": "Wikinoticias provee contenido libre y es una alternativa a los sitios comerciales de noticias con artículos verificados y revisados por colegas."
+    "es": "Wikinoticias provee contenido libre y es una alternativa a los sitios comerciales de noticias con artículos verificados y revisados por colegas.",
+    "ga_IE": "Soláthraíonn Wikinews rogha eile ar ábhar saor in aisce ar shuíomhanna nuachta tráchtála le hailt a dhéantar a sheiceáil agus a athbhreithniú ag piaraí.",
+    "nl": "Wikinews biedt een gratis inhoudsalternatief voor commerciële nieuwssites met artikelen die op feiten worden gecontroleerd en door vakgenoten worden beoordeeld."
   },
   "url": "wikinews.org",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/GVgGEKB.png",
   "thumbnail": "https://i.imgur.com/r6l2Z7m.png",
   "color": "#f9f9f9",

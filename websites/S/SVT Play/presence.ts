@@ -83,10 +83,12 @@ presence.on("UpdateData", async () => {
       const video: HTMLVideoElement = document.querySelector(
         "#js-play_video__fullscreen-container > div > div > video"
       );
-      title = document.querySelector("#titel > h1 > span:nth-child(1)")
-        .textContent;
-      user = document.querySelector("#titel > h1 > span:nth-child(2)")
-        .textContent;
+      title = document.querySelector(
+        "#titel > h1 > span:nth-child(1)"
+      ).textContent;
+      user = document.querySelector(
+        "#titel > h1 > span:nth-child(2)"
+      ).textContent;
       if (video !== null) {
         if (video.duration == undefined) {
           time = false;

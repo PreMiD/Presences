@@ -49,8 +49,9 @@ presence.on("UpdateData", async () => {
     if (video == null) {
       video = document.querySelector("#videojs_html5_api");
     }
-    title = document.querySelector("#watchEpisode > div.poster > div > h1")
-      .textContent;
+    title = document.querySelector(
+      "#watchEpisode > div.poster > div > h1"
+    ).textContent;
     user = document.querySelector("#player > div.head > p").textContent;
     if (user.includes(" - ")) {
       user = user.split(" - ")[1];

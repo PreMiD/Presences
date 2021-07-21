@@ -82,9 +82,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
 
-      presenceData.details = document.querySelector(
-        "body > header > h1"
-      ).textContent;
+      presenceData.details =
+        document.querySelector("body > header > h1").textContent;
       presenceData.state = document.querySelector(
         "body > header > div > p.artist"
       ).textContent;
@@ -136,9 +135,8 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/collabo/")) {
       presenceData.details = "Viewing collab:";
-      presenceData.state = document.querySelector(
-        "#main_name > h2"
-      ).textContent;
+      presenceData.state =
+        document.querySelector("#main_name > h2").textContent;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/collabo_list/")) {
       presenceData.details = "Viewing collab list";

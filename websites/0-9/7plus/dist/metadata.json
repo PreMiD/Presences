@@ -1,14 +1,22 @@
 {
   "author": {
-    "name": "Alexx",
-    "id": "604182077088202784"
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
   },
+  "contributors": [
+   {
+      "name": "Alexx",
+      "id": "604182077088202784"
+    }
+  ],
   "url": "7plus.com.au",
   "description": {
-    "en": "7plus is a video on demand, catch-up TV service run by the Seven Network. 7plus also offers online live streaming of Channel Seven, 7TWO, 7mate, 7flix, and Racing.com."
+    "en": "7plus is a video on demand, catch-up TV service run by the Seven Network. 7plus also offers online live streaming of Channel Seven, 7TWO, 7mate, 7flix, and Racing.com.",
+    "ga_IE": "Is físeán é 7plus ar sheirbhís teilifíse teacht suas ar éileamh, arna reáchtáil ag Líonra na Seacht. Cuireann 7plus sruthú beo ar líne ar Channel Seven, 7TWO, 7mate, 7flix, agus Racing.com ar fáil.",
+    "nl": "7plus is een video-on-demand, inhaal-tv-dienst van het Seven Network. 7plus biedt ook online livestreaming van Channel Seven, 7TWO, 7mate, 7flix en Racing.com."
   },
   "service": "7plus",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/ZY2K3CC.png",
   "thumbnail": "https://i.imgur.com/A50n9nx.png",
   "color": "#FF0000",

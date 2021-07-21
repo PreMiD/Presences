@@ -9,10 +9,12 @@
     "en": "Wikispecies is a species database for taxonomy that covers living and fossil representatives of Animalia, Plantae, Fungi, Bacteria, Archaea, Protista and all other forms of life.",
     "zh_CN": "維基物種是分類學物種數據庫，涵蓋動物界，植物界，真菌，細菌，古細菌，原生生物和所有其他形式的生命的生活和化石形態。",
     "fr": "Wikispecies est une base de données taxonomiques pour les espèces vivantes et fossiles d’Animalia, Plantae, Fungi, Bacteria, Archaea, Protista et toute autre forme de vie.",
-    "es": "Wikiespecies el la base de datos de especies por taxonomía que incluye representantes vivos y fósiles de Animalia, Plantae, Fungi, Bacteria, Archaea, Protista y otras formas de vida."
+    "es": "Wikiespecies el la base de datos de especies por taxonomía que incluye representantes vivos y fósiles de Animalia, Plantae, Fungi, Bacteria, Archaea, Protista y otras formas de vida.",
+    "ga_IE": "Is bunachar sonraí speiceas é Wikispecies le haghaidh tacsanomaíocht a chuimsíonn ionadaithe beo agus iontaise de Animalia, Plantae, Fungais, Baictéir, Archaea, Protista agus gach cineál beatha eile.",
+    "nl": "Wikispecies is een soortendatabase voor taxonomie die levende en fossiele vertegenwoordigers van Animalia, Plantae, Fungi, Bacteria, Archaea, Protista en alle andere levensvormen omvat."
   },
   "url": "species.wikimedia.org",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/9f1XxZE.png",
   "thumbnail": "https://i.imgur.com/5SnUKIH.png",
   "color": "#f9f9f9",

@@ -14,10 +14,11 @@
     "en": "Think about a real or fictional character. I will try to guess who it is",
     "nl": "Bedenk een echt of fictief personage. Ik zal proberen te raden wie het is",
     "zh_CN": "《阿基纳多》是个基于20个问题的网络游戏和手机应用程序，其将会问出不同的问题来猜出玩家正在想的人物或角色。这个游戏是个能够找出最适合询问玩家的问题并学习的人工智能程序。",
-    "zh_TW": "《阿基納多》是個基於20個問題的網路遊戲和手機應用程式，其將會問出不同的問題來猜出玩家正在想的人物或角色。這個遊戲是個能夠找出最適合詢問玩家的問題並學習的人工智慧程序。"
+    "zh_TW": "《阿基納多》是個基於20個問題的網路遊戲和手機應用程式，其將會問出不同的問題來猜出玩家正在想的人物或角色。這個遊戲是個能夠找出最適合詢問玩家的問題並學習的人工智慧程序。",
+    "ga_IE": "Smaoinigh ar charachtar fíor nó ficseanúil. Déanfaidh mé iarracht buille faoi thuairim cé hé"
   },
   "url": "en.akinator.com",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "logo": "https://i.imgur.com/XJ9h94X.png",
   "thumbnail": "https://i.imgur.com/CPWBwGM.png",
   "color": "#0000ff",

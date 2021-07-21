@@ -19,10 +19,11 @@
     "ja_JP": "Nuxtは、モダンな web アプリケーションを作成する Vue.js に基づいたプログレッシブフレームワークです。Vue.js 公式ライブラリ（vue、vue-router や vuex）および強力な開発ツール（webpack、Babel や PostCSS）に基づいています。 Nuxt の目標は、優れた開発者エクスペリエンスを念頭に置き、Web 開発を強力かつ高性能にすることです。",
     "ko_KR": "Nuxt는 현대 웹 애플리케이션을 만들기 위해 Vue.js를 기반으로 하는 진보적인 프레임워크입니다. Nuxt는 Vue.js의 공식 라이브러리(vue, vue-router 및 vuex)와 강력한 개발 도구(webpack, Babel and PostCSS)를 기반으로 합니다. Nuxt의 목표는 뛰어난 개발자 경험과 함께 강력하고 뛰어난 웹 개발을 가능하도록 하는 것입니다.",
     "ru": "Nuxt.js — это фреймворк для создания приложений на Vue.js. Вы можете выбрать между Универсальным, Статически-Сгенерированным или Одностраничным приложением.",
-    "id": "Tanggal 25 Oktober 2016, tim di belakang zeit.co, mengumumkan Next.js, sebuah kerangka kerja untuk aplikasi Bereaksi yang diberikan server. Beberapa jam setelah pengumuman, gagasan untuk membuat aplikasi Vue.js yang dibuat server dengan cara yang sama seperti Next.js sudah jelas: Nuxt.js lahir."
+    "id": "Tanggal 25 Oktober 2016, tim di belakang zeit.co, mengumumkan Next.js, sebuah kerangka kerja untuk aplikasi Bereaksi yang diberikan server. Beberapa jam setelah pengumuman, gagasan untuk membuat aplikasi Vue.js yang dibuat server dengan cara yang sama seperti Next.js sudah jelas: Nuxt.js lahir.",
+    "nl": "Nuxt is een progressief framework gebaseerd op Vue.js om moderne webapplicaties te maken. Het is gebaseerd op de officiële bibliotheken van Vue.js (vue, vue-router en vuex) en krachtige ontwikkeltools (webpack, Babel en PostCSS). Het doel van Nuxt is om webontwikkeling krachtig en performant te maken met een geweldige ontwikkelaarservaring in gedachten."
   },
   "service": "Nuxt.js",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/XSYIbbu.png",
   "thumbnail": "https://i.imgur.com/mlwpfWK.png",
   "color": "#00c58e",

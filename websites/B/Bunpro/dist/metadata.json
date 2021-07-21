@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Bunpro",
+  "author": {
+    "name": "JulianCDC",
+    "id": "159565307831123968"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/NkfEDwV.png",
+  "thumbnail": "https://i.imgur.com/uKMafFN.png",
+  "version": "1.0.2",
+  "color": "#5e6266",
+  "tags": [
+    "education",
+    "japanese",
+    "grammar",
+    "srs",
+    "language"
+  ],
+  "altnames": [
+    "文プロ"
+  ],
+  "url": [
+    "www.bunpro.jp",
+    "bunpro.jp"
+  ],
+  "description": {
+    "en": "Bunpro is a japanese grammar learning application.",
+    "fr": "Bunpro est une application d'apprentissage de la grammaire japonaise.",
+    "nl": "Bunpro is een japanse grammatica leer applicatie."
+  }
+}

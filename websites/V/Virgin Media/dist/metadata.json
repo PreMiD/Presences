@@ -5,13 +5,15 @@
   },
   "service": "Virgin Media",
   "description": {
-    "en": "Fibre broadband, digital TV, landline phone and mobile services from Virgin Media. Order online for the best broadband, cable TV, phone and mobile deals."
+    "en": "Fibre broadband, digital TV, landline phone and mobile services from Virgin Media. Order online for the best broadband, cable TV, phone and mobile deals.",
+    "ga_IE": "Fibre broadband, digital TV, landline phone and mobile services from Virgin Media. Order online for the best broadband, cable TV, phone and mobile deals.",
+    "nl": "Glasvezelbreedband, digitale tv, vaste telefoon en mobiele diensten van Virgin Media. Bestel online voor de beste aanbiedingen voor breedband, kabel-tv, telefoon en mobiel."
   },
   "url": [
     "virginmedia.com",
     "www.virginmedia.com"
   ],
-  "version": "1.3.4",
+  "version": "1.3.6",
   "logo": "https://i.imgur.com/ucmvNa5.png",
   "thumbnail": "https://i.imgur.com/SE5FQlo.png",
   "color": "#ed0000",

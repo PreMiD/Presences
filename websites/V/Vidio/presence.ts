@@ -25,9 +25,9 @@ presence.on("UpdateData", async () => {
     case "/search":
       presenceData.smallImageKey = "search";
       presenceData.details = "Searching for";
-      presenceData.state = (document.querySelector(
-        "#q"
-      ) as HTMLInputElement).value;
+      presenceData.state = (
+        document.querySelector("#q") as HTMLInputElement
+      ).value;
       break;
     case "/packages":
       presenceData.details = "Viewing packages pricing";
@@ -65,9 +65,8 @@ presence.on("UpdateData", async () => {
           const series = document.querySelector(".user-name.video-channel");
           if (series) presenceData.state = series.textContent;
           else
-            presenceData.state = document.querySelector(
-              ".content-title-big"
-            ).textContent;
+            presenceData.state =
+              document.querySelector(".content-title-big").textContent;
           const timestamps = presence.getTimestamps(
             video.currentTime,
             video.duration

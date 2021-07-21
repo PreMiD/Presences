@@ -10,10 +10,11 @@
     "r23.core.learn.edgenuity.com"
   ],
   "description": {
-    "en": "Edgenuity is an online classroom program used to teach students what they need to learn through online methods."
+    "en": "Edgenuity is an online classroom program used to teach students what they need to learn through online methods.",
+    "nl": "Edgenuity is een online lesprogramma dat wordt gebruikt om leerlingen via online methodes te leren wat ze moeten leren."
   },
   "service": "Edgenuity",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/FDv2y9V.png",
   "thumbnail": "https://i.imgur.com/sEMMqUf.png",
   "color": "#FF0000",

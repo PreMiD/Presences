@@ -36,15 +36,15 @@ presence.on("UpdateData", () => {
         presenceData.details = "Creating a team";
       } else if (path.startsWith("/team/")) {
         presenceData.details = "Looking at Team Info";
-        presenceData.state = document.querySelector(
-          ".card-teamTag"
-        ).parentElement.innerText;
+        presenceData.state =
+          document.querySelector(".card-teamTag").parentElement.innerText;
       } else if (path.startsWith("/team")) {
         presenceData.details = "Looking at Teams";
       } else if (path.startsWith("/achievements")) {
         presenceData.details = "Browsing Achievements";
-        var pName = document.querySelector(".has-btn--vertical .btn.is-active")
-          .textContent;
+        var pName = document.querySelector(
+          ".has-btn--vertical .btn.is-active"
+        ).textContent;
         presenceData.state =
           pName +
           " (" +
@@ -71,9 +71,8 @@ presence.on("UpdateData", () => {
         presenceData.details = "Checking the Support Page";
       } else if (path.startsWith("/racer")) {
         presenceData.details = "Viewing Racer Profiles";
-        presenceData.state = document.querySelector(
-          ".profile-username"
-        ).textContent;
+        presenceData.state =
+          document.querySelector(".profile-username").textContent;
       } else if (path.startsWith("/stats") || path.startsWith("/racelog")) {
         presenceData.details = "Viewing Stats";
       } else if (path.startsWith("/race")) {

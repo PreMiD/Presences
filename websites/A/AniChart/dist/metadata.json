@@ -5,10 +5,12 @@
   },
   "service": "AniChart",
   "description": {
-    "en": "Find, track, and share upcoming seasonal anime shows and movies on AniChart.net"
+    "en": "Find, track, and share upcoming seasonal anime shows and movies on AniChart.net",
+    "ga_IE": "Faigh, rianaigh, agus roinn seónna agus scannáin anime séasúracha atá le teacht ar AniChart.net",
+    "nl": "Zoek, volg en deel aankomende anime-series en films uit volgend seizoen op AniChart.net"
   },
   "url": "anichart.net",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/8jwNL3C.png",
   "thumbnail": "https://i.imgur.com/C1DeRp2.png",
   "color": "#ffffff",

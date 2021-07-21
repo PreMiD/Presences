@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "fbox.to",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/HXOjyCu.png",
+  "thumbnail": "https://i.imgur.com/bCuViFL.png",
+  "version": "1.0.1",
+  "color": "#565c67",
+  "tags": [
+    "movies",
+    "stream"
+  ],
+  "url": "www3.fbox.to",
+  "description": {
+    "en": "fbox online is free movies streaming website with zero ads, it allows you watch free movies online, watch free tv series online in high quality for free"
+  },
+  "iframe": true
+}

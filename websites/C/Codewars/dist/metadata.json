@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": " .•` KIΛRΛ `•. ",
+    "id": "586905336850677760"
+  },
+  "service": "Codewars",
+  "version": "1.0.3",
+  "color": "#9c1414",
+  "description": {
+    "en": "Codewars is where developers achieve code mastery through challenge. Train on kata in the dojo and reach your highest potential.",
+    "nl": "Codewars is waar ontwikkelaars codebeheersing bereiken door middel van uitdaging. Train op kata in de dojo en bereik je hoogste potentieel."
+  },
+  "tags": [
+    "codewars",
+    "coding",
+    "social"
+  ],
+  "category": "other",
+  "url": "www.codewars.com",
+  "logo": "https://i.imgur.com/BpF8tPx.png",
+  "thumbnail": "https://i.imgur.com/Bv7T0JI.png",
+  "settings": [
+    {
+      "id": "statsdisplay",
+      "title": "Display Stats",
+      "icon": "fas fa-bar-chart",
+      "value": true
+    }
+  ]
+}

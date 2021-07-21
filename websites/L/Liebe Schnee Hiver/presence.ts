@@ -47,8 +47,9 @@ LSHiver.on("UpdateData", async () => {
 
     LSHiver.setActivity(presenceData);
   } else if (page.includes("/blog")) {
-    const title = document.querySelector(".entry-header h1.entry-title")
-      ?.textContent;
+    const title = document.querySelector(
+      ".entry-header h1.entry-title"
+    )?.textContent;
 
     if (title) {
       presenceData.details = "Bir gönderi okuyor:";
@@ -99,5 +100,5 @@ LSHiver.on("UpdateData", async () => {
     presenceData.state = pages[page] || pages[page.slice(0, -1)];
 
     LSHiver.setActivity(presenceData);
-  } else LSHiver.setActivity()
+  } else LSHiver.setActivity();
 });
