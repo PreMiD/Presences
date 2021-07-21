@@ -1,12 +1,16 @@
 {
   "author": {
-    "name": "Alexx",
-    "id": "604182077088202784"
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
   },
   "contributors": [
     {
       "name": "Bryan",
       "id": "293775922757238784"
+    },
+    {
+      "name": "Alexx",
+      "id": "604182077088202784"
     }
   ],
   "service": "TV Time",
@@ -15,7 +19,7 @@
     "nl": "TV Time is een online dienst die uitsluitend gericht is op televisieseries. Het stelt gebruikers in staat om informatie te krijgen en commentaar te geven op de shows die ze volgen, met verschillende informatie-segmenten die aan hen gerelateerd zijn, zoals releasedatums van nieuwe afleveringen en verschillende opties op basis van de reactie van de gebruiker."
   },
   "url": "www.tvtime.com",
-  "version": "1.2.8",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/KuPkyx2.png",
   "thumbnail": "https://i.imgur.com/9Uc9myA.png",
   "color": "#FDDF39",
