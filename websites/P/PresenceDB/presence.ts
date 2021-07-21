@@ -67,7 +67,8 @@ async function getTranslation(name: string) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: new Date().getTime()
   };
 
   if (window.location.pathname === "/")
