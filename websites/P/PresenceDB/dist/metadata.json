@@ -11,12 +11,12 @@
   },
   "url": ["www.presencedb.com", "preview.presencedb.com"],
   "version": "1.0.0",
-  "logo": "https://i.imgur.com/tXfdJDT.png",
+  "logo": "https://i.imgur.com/6SyDAmT.png",
   "thumbnail": "https://i.imgur.com/P20KlQh.png",
   "color": "#fff",
   "tags": ["presencedb", "database"],
   "category": "other",
-  "regExp": "(www|preview)[.]presencedb[.]com[/]([a-z]*)",
+  "regExp": "(www|preview)[.]presencedb[.]com[/]",
   "settings": [
     {
       "id": "lang",
