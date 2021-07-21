@@ -12,11 +12,9 @@ presence.on("UpdateData", () => {
 
   let state, details, buttons: [ButtonData, ButtonData?];
 
-  if (/^\/$/.test(pathname)) 
-    details = "Viewing Home Page";
-   else if (/^\/comics\/?$/.test(pathname)) 
-    details = "Viewing Comic List";
-   else if (/^\/comics\/[0-9a-z-]+\/?$/i.test(pathname)) {
+  if (/^\/$/.test(pathname)) details = "Viewing Home Page";
+  else if (/^\/comics\/?$/.test(pathname)) details = "Viewing Comic List";
+  else if (/^\/comics\/[0-9a-z-]+\/?$/i.test(pathname)) {
     details = "Viewing Comic Page";
     state = document.querySelector(".entry-title").textContent;
     const viewComicButton: ButtonData = {
@@ -47,7 +45,5 @@ presence.on("UpdateData", () => {
   data.state = state;
   data.buttons = buttons;
 
-  if (data.details) 
-    presence.setActivity(data);
-  
+  if (data.details) presence.setActivity(data);
 });

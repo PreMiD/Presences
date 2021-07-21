@@ -1,28 +1,26 @@
 const presence = new Presence({
-  clientId: "802958833214423081"
-}),
+    clientId: "802958833214423081"
+  }),
   strings = presence.getStrings({
-      play: "presence.playback.playing",
-      pause: "presence.playback.paused",
-      browse: "presence.activity.browsing",
-      search: "presence.activity.searching"
-}),
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
   getElement = (query: string): string | undefined => {
     let text = "";
 
     const element = document.querySelector(query);
     if (element) {
-      if (element.childNodes.length > 1) 
+      if (element.childNodes.length > 1)
         text = element.childNodes[0].textContent;
-       else 
-        text = element.textContent;
-      
+      else text = element.textContent;
     }
-  return text.trimStart().trimEnd();
+    return text.trimStart().trimEnd();
   },
   capitalize = (text: string): string => {
     return text.charAt(0).toUpperCase() + text.slice(1);
-    };
+  };
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
@@ -106,9 +104,9 @@ const statics = {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-        showBrowsing = await presence.getSetting("browse"),
-        showSong = await presence.getSetting("song"),
-        showTimestamps = await presence.getSetting("timestamp");
+    showBrowsing = await presence.getSetting("browse"),
+    showSong = await presence.getSetting("song"),
+    showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
     details: undefined,
@@ -126,17 +124,32 @@ presence.on("UpdateData", async () => {
   }
 
   const playButton = document.querySelector(".playControls__play.playing"),
-        playing = playButton ? true : false;
+    playing = playButton ? true : false;
 
   if ((playing || (!playing && !showBrowsing)) && showSong) {
     data.details = getElement(
       ".playbackSoundBadge__titleLink > span:nth-child(2)"
     );
     data.state = getElement(".playbackSoundBadge__lightLink");
-    const timer = [presence.timestampFromFormat(document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__timePassed > span:nth-child(2)").textContent), presence.timestampFromFormat(document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__duration > span:nth-child(2)").textContent)],
-          [currentTime, duration] = timer,
-          timestamps = presence.getTimestamps(currentTime, duration),
-          pathLinkSong = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a").getAttribute("href");
+    const timer = [
+        presence.timestampFromFormat(
+          document.querySelector(
+            "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__timePassed > span:nth-child(2)"
+          ).textContent
+        ),
+        presence.timestampFromFormat(
+          document.querySelector(
+            "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__duration > span:nth-child(2)"
+          ).textContent
+        )
+      ],
+      [currentTime, duration] = timer,
+      timestamps = presence.getTimestamps(currentTime, duration),
+      pathLinkSong = document
+        .querySelector(
+          "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a"
+        )
+        .getAttribute("href");
     data.startTimestamp = timestamps[0];
     data.endTimestamp = timestamps[1];
     data.smallImageKey = playing ? "play" : "pause";
@@ -150,11 +163,8 @@ presence.on("UpdateData", async () => {
   }
 
   if ((!playing || !showSong) && showBrowsing) {
-    for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) 
-        data = { ...data, ...v };
-      
-    }
+    for (const [k, v] of Object.entries(statics))
+      if (path.match(k)) data = { ...data, ...v };
 
     if (path === "/") {
       data.details = "Browsing...";
@@ -204,11 +214,9 @@ presence.on("UpdateData", async () => {
 
     const waveform = document.querySelector(".fullListenHero .waveform__layer");
     if (waveform) {
-      if (waveform.childElementCount >= 3) 
-        data.details = "Viewing Song...";
-       else 
-        data.details = "Browsing Playlist/Album...";
-      
+      if (waveform.childElementCount >= 3) data.details = "Viewing Song...";
+      else data.details = "Browsing Playlist/Album...";
+
       data.state = `${getElement(".soundTitle__title > span")} by ${getElement(
         ".soundTitle__username"
       )}`;

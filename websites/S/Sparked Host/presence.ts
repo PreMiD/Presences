@@ -140,11 +140,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Account Settings";
       presenceData.state = "Changing information";
     }
-  } else if (document.location.hostname == "jars.sparkedhost.us") {
-    presenceData.smallImageKey = "bukkit";
-    presenceData.smallImageText = "Minecraft Server";
-    presenceData.details = "Server Jars";
-    presenceData.state = "Downloading Files";
   } else if (document.location.hostname == "status.sparkedhost.com") {
     presenceData.smallImageKey = "hetrix";
     presenceData.smallImageText = "HetrixTools";
