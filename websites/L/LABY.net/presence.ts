@@ -34,7 +34,7 @@ presence.on("UpdateData", () => {
     presenceData.details = `Viewing cape ${item}`;
   }
 
-  if(presenceData.details == null) {
+  if(presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
