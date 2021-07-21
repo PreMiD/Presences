@@ -17,5 +17,13 @@
     "tags": ["presencedb", "database"],
     "category": "other",
     "regExp": "(www|preview)[.]presencedb[.]com[/]([a-z]*)",
-    "readLogs": false
+    "settings": [
+        {
+            "id": "lang",
+            "title": "Language",
+            "icon": "fas fa-global",
+            "value": 0,
+            "values": ["English", "German"]
+        }
+    ]
 }

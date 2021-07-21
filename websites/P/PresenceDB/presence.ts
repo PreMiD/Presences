@@ -1,9 +1,10 @@
 const presence = new Presence({
     clientId: "840759396103749633"
-}),
-{ language } = window.navigator;
+});
 
-function getTranslation(name: string) {
+async function getTranslation(name: string) {
+    const language = await presence.getSetting("lang") == 0 ? "en" : "de";
+
     switch(name) {
         case "home":
             switch(language) {
@@ -47,44 +48,47 @@ function getTranslation(name: string) {
                 default:
                     return "Browsing settings page";
             }
-        case "view":
+        case "viewUser":
             switch(language) {
                 case "de":
-                    return "Seite anzeigen";
+                    return "Benutzer anzeigen";
                 default:
-                    return "View page";
+                    return "View user";
+            }
+        case "viewActivity":
+            switch(language) {
+                case "de":
+                    return "Aktivität anzeigen";
+                default:
+                    return "View activity";
             }
     }
 }
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
-        largeImageKey: "logo",
-        buttons: [
-            {
-                label: getTranslation("view"),
-                url: window.location.href
-            }
-        ]
-    }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
+        largeImageKey: "logo"
+    };
 
-    if (window.location.pathname === "/") presenceData.details = getTranslation("home");
-    else if (window.location.pathname === "/search") presenceData.details = getTranslation("search");
-    else if (window.location.pathname === "/faq") presenceData.details = getTranslation("faq");
+    if (window.location.pathname === "/") presenceData.details = await getTranslation("home");
+    else if (window.location.pathname === "/search") presenceData.details = await getTranslation("search");
+    else if (window.location.pathname === "/faq") presenceData.details = await getTranslation("faq");
     else if (window.location.pathname.includes("/activity/")) {
         if (!document.getElementById("activityName")) return;
         const activityName = document.getElementById("activityName").innerHTML;
-        presenceData.details = getTranslation("activity");
+        presenceData.details = await getTranslation("activity");
         presenceData.state = activityName;
+        presenceData.buttons = [ { label: await getTranslation("viewActivity"), url: window.location.href } ]
     } else if (window.location.pathname.includes("/user/")) {
         if (!document.getElementById("userName")) return;
         const username = document.getElementById("userName").innerHTML;
-        presenceData.details = getTranslation("user");
+        presenceData.details = await getTranslation("user");
         presenceData.state = username;
-    } else if (window.location.pathname === "/settings") presenceData.details = getTranslation("settings");
+        presenceData.buttons = [ { label: await getTranslation("viewUser"), url: window.location.href } ]
+    } else if (window.location.pathname === "/settings") presenceData.details = await getTranslation("settings");
 
     if (presenceData.details === null) {
-        presence.setTrayTitle(); //Clears the tray title for mac users
-        presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
-    } else presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
+        presence.setTrayTitle();
+        presence.setActivity();
+    } else presence.setActivity(presenceData);
 });
