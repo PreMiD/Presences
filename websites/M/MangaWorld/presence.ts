@@ -10,7 +10,9 @@ presence.on("UpdateData", async () => {
   };
 
   /* Query dell'URI - URI query */
-  let paramsString = decodeURIComponent(document.location.search).replace("?", "").replace(/-/g, " ");
+  let paramsString = decodeURIComponent(document.location.search)
+    .replace("?", "")
+    .replace(/-/g, " ");
   let searchParams = new URLSearchParams(paramsString);
 
   /* Homepage */
@@ -43,7 +45,6 @@ presence.on("UpdateData", async () => {
     } else {
       var filter = "";
     }
-
     data.state = filter;
   }
 
@@ -78,9 +79,7 @@ presence.on("UpdateData", async () => {
   /* Ricerca per genere - Search by genre */
   else if (document.location.href.includes("genre=")) {
     let rawgenre = searchParams.get("genre");
-
-    const genrestr = rawgenre;
-    const words = genrestr.split(" ");
+    const words = rawgenre.split(" ");
     for (let i = 0; i < words.length; i++) {
         words[i] = words[i][0].toUpperCase() + words[i].substr(1);
     }
@@ -112,7 +111,7 @@ presence.on("UpdateData", async () => {
     if (statusQuery == "dropped") {
       var status = "Droppati";
     } else if (statusQuery == "ongoing") {
-      var status = "In corso";
+      var status = "In corso d'opera";
     } else if (statusQuery == "completed") {
       var status = "Finiti";
     } else if (statusQuery == "paused") {
@@ -120,15 +119,12 @@ presence.on("UpdateData", async () => {
     } else if (statusQuery == "canceled") {
       var status = "Cancellati";
     }
-
     data.state = status;
   }
   /* Ricerca per tipo - Search by type/format */
   else if (document.location.href.includes("type=")) {
     let rawtype = searchParams.get("type");
-    
-    const typestr = rawtype;
-    var type = typestr[0].toUpperCase() + typestr.substring(1);
+    var type = rawtype[0].toUpperCase() + rawtype.substring(1);
 
     data.smallImageKey = "file3";
     data.smallImageText = "Ricerca per formato";
@@ -157,7 +153,6 @@ presence.on("UpdateData", async () => {
     } else if (sortQuery == "oldest") {
       var query = "Meno recenti";
     }
-
     data.state = query;
   }
   /* Pagina principale - Main page */
@@ -170,7 +165,7 @@ presence.on("UpdateData", async () => {
   }
 
   /* ----- LETTURA - READING ----- */
-  else if (document.location.href.includes("manga")) {
+  else if (document.location.href.includes("/manga/")) {
     /* Nell'e-reader - In the e-reader */
     if (document.location.href.includes("/read/")) {
       let mangaName = document.title
@@ -211,15 +206,26 @@ presence.on("UpdateData", async () => {
         }
       ]
     } 
-    /* In qualsiasi altra pagina - In any other page */
+    /* Nella pagina principale del manga - In the manga's main page */
     else {
-      let pageName = document.title.replace(" Scan ITA - MangaWorld", "").replace("MangaWorld - ", "");
+      let pageName = document.title
+        .replace(" Scan ITA - MangaWorld", "")
       data.smallImageKey = "eye";
       data.smallImageText = pageName;
       data.details = "Visitando la pagina di:";
       data.state = pageName;
       data.startTimestamp = browsingStamp;
     }
+  }
+  /* In qualunque altra pagina - In any other page */
+  else {
+    let pageName = document.title
+      .replace("MangaWorld - ", "");
+      data.smallImageKey = "eye";
+      data.smallImageText = "\"" + pageName + "\"";
+      data.details = "Visitando la pagina:";
+      data.state = "\"" + pageName + "\"";
+      data.startTimestamp = browsingStamp;
   }
   if (data.details !== null) {
     presence.setActivity(data);
