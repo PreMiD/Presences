@@ -20,7 +20,6 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "home";
     data.smallImageText = "Homepage";
     data.details = "Nella homepage";
-    data.startTimestamp = browsingStamp;
   }
 
   /* Preferiti - Bookmarks*/
@@ -28,7 +27,6 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "bookmark";
     data.smallImageText = "Preferiti";
     data.details = "Sfogliando i preferiti";
-    data.startTimestamp = browsingStamp;
 
     if (document.location.href.endsWith("RE-READING")) {
       var filter = "In rilettura";
@@ -56,7 +54,6 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Ricerca";
     data.details = "Cercando:";
     data.state = "\"" + keyword + "\"";
-    data.startTimestamp = browsingStamp;
   }
   /* Ricerca per autore - Search by author */
   else if (document.location.href.includes("author=")) {
@@ -65,7 +62,6 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Ricerca per autore";
     data.details = "Sfogliando i contenuti dell'autore:";
     data.state = author;
-    data.startTimestamp = browsingStamp;
   } 
   /* Ricerca per artista - Search by artist */
   else if (document.location.href.includes("artist=")) {
@@ -74,7 +70,6 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Ricerca per artista";
     data.details = "Sfogliando i contenuti dell'artista:";
     data.state = artist;
-    data.startTimestamp = browsingStamp;
   } 
   /* Ricerca per genere - Search by genre */
   else if (document.location.href.includes("genre=")) {
@@ -89,7 +84,6 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Ricerca per genere";
     data.details = "Sfogliando i contenuti del genere:";
     data.state = genre;
-    data.startTimestamp = browsingStamp;
   }
   /* Ricerca per anno - Search by year of release */
   else if (document.location.href.includes("year=")) {
@@ -98,7 +92,6 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Ricerca per anno";
     data.details = "Sfogliando i contenuti dell'anno:";
     data.state = year;
-    data.startTimestamp = browsingStamp;
   }
   /* Ricerca per stato - Search by status */
   else if (document.location.href.includes("status=")) {
@@ -106,7 +99,6 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "slash";
     data.smallImageText = "Ricerca per stato";
     data.details = "Sfogliando i contenuti:";
-    data.startTimestamp = browsingStamp;
 
     if (statusQuery == "dropped") {
       var status = "Droppati";
@@ -130,7 +122,6 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Ricerca per formato";
     data.details = "Sfogliando i contenuti in formato:";
     data.state = type;
-    data.startTimestamp = browsingStamp;
   }
   /* Ricerca per ordinamento - Order by */
   else if (document.location.href.includes("sort=")) {
@@ -138,7 +129,6 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "sort";
     data.smallImageText = "Ricerca per ordinamento";
     data.details = "Sfogliando i contenuti:";
-    data.startTimestamp = browsingStamp;
 
     if (sortQuery == "a z") {
       var query = "Ordinati dalla A alla Z";
@@ -161,7 +151,6 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Archivio";
     data.details = "Nell'archivio";
     data.state = "Sfogliando...";
-    data.startTimestamp = browsingStamp;
   }
 
   /* ----- LETTURA - READING ----- */
@@ -198,7 +187,6 @@ presence.on("UpdateData", async () => {
       data.smallImageText = mangaName;
       data.details = "Leggendo: " + mangaName;
       data.state = chapterString + chapter + " | Pagina " + page;
-      data.startTimestamp = browsingStamp;
       data.buttons = [
         {
           label: "Leggilo anche tu!",
@@ -214,7 +202,6 @@ presence.on("UpdateData", async () => {
       data.smallImageText = pageName;
       data.details = "Visitando la pagina di:";
       data.state = pageName;
-      data.startTimestamp = browsingStamp;
     }
   }
   /* In qualunque altra pagina - In any other page */
@@ -225,9 +212,9 @@ presence.on("UpdateData", async () => {
       data.smallImageText = "\"" + pageName + "\"";
       data.details = "Visitando la pagina:";
       data.state = "\"" + pageName + "\"";
-      data.startTimestamp = browsingStamp;
   }
   if (data.details !== null) {
+    data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   }
 });
