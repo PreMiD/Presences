@@ -135,9 +135,9 @@ presence.on("UpdateData", async () => {
     } else if (sortQuery == "z a") {
       var query = "Ordinati dalla Z alla A";
     } else if (sortQuery == "most_read") {
-      var query = "Più popolari";
+      var query = "Più letti";
     } else if (sortQuery == "less_read") {
-      var query = "Meno popolari";
+      var query = "Meno letti";
     } else if (sortQuery == "newest") {
       var query = "Più recenti";
     } else if (sortQuery == "oldest") {
