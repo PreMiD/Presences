@@ -78,13 +78,13 @@ presence.on("UpdateData", async () => {
         const activityName = document.getElementById("activityName").innerHTML;
         presenceData.details = await getTranslation("activity");
         presenceData.state = activityName;
-        presenceData.buttons = [ { label: await getTranslation("viewActivity"), url: window.location.href } ]
+        presenceData.buttons = [ { label: await getTranslation("viewActivity"), url: window.location.href } ];
     } else if (window.location.pathname.includes("/user/")) {
         if (!document.getElementById("userName")) return;
         const username = document.getElementById("userName").innerHTML;
         presenceData.details = await getTranslation("user");
         presenceData.state = username;
-        presenceData.buttons = [ { label: await getTranslation("viewUser"), url: window.location.href } ]
+        presenceData.buttons = [ { label: await getTranslation("viewUser"), url: window.location.href } ];
     } else if (window.location.pathname === "/settings") presenceData.details = await getTranslation("settings");
 
     if (presenceData.details === null) {
