@@ -1,7 +1,7 @@
 const presence = new Presence({
-        clientId: "840759396103749633"
-    }),
-    { language } = window.navigator;
+    clientId: "840759396103749633"
+}),
+{ language } = window.navigator;
 
 function getTranslation(name: string) {
     switch(name) {
@@ -60,7 +60,6 @@ function getTranslation(name: string) {
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "logo",
-        startTimestamp: new Date().getTime(), //The unix epoch timestamp for when to start counting from
         buttons: [
             {
                 label: getTranslation("view"),
@@ -73,11 +72,13 @@ presence.on("UpdateData", async () => {
     else if (window.location.pathname === "/search") presenceData.details = getTranslation("search");
     else if (window.location.pathname === "/faq") presenceData.details = getTranslation("faq");
     else if (window.location.pathname.includes("/activity/")) {
-        const activityName = document.querySelector("#__next > div > main > div > h1").innerHTML;
+        if (!document.getElementById("activityName")) return;
+        const activityName = document.getElementById("activityName").innerHTML;
         presenceData.details = getTranslation("activity");
         presenceData.state = activityName;
     } else if (window.location.pathname.includes("/user/")) {
-        const [ username ] = document.querySelector("#__next > div > main > div > h1").innerHTML.split("<"); // We use split bc I do not want to display the img tag in the presence
+        if (!document.getElementById("userName")) return;
+        const username = document.getElementById("userName").innerHTML;
         presenceData.details = getTranslation("user");
         presenceData.state = username;
     } else if (window.location.pathname === "/settings") presenceData.details = getTranslation("settings");
