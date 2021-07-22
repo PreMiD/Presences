@@ -1,9 +1,7 @@
 const presence = new Presence({
     clientId: "867452106016161822"
   }),
-
   browsingStamp = Math.floor(Date.now() / 1000);
-  // I just did what Codacy told me even though it looks weird lol
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
