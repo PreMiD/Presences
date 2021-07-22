@@ -24,7 +24,8 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing profile settings";
   else if(document.location.pathname.startsWith("/server")) {
     const item = document.querySelector("div.server-info-wrapper>h1").textContent;
-    presenceData.details = `Viewing server: ${item}`;
+    presenceData.details = "Viewing server";
+    presenceData.state = item;
   } else if(document.location.pathname.startsWith("/badge")) {
     const item = document.querySelector("div.mb-1>h1").textContent;
     presenceData.details = "Viewing badge";
