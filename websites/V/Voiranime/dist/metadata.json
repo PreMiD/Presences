@@ -3,10 +3,10 @@
     "name": "DooMLorD",
     "id": "654398152513945611"
   },
-  "contributors": {
+  "contributors": [{
     "name": "Kozou",
     "id": "379362415428632576"
-  },
+  }],
   "service": "Voiranime",
   "description": {
     "en": "Voiranime is a streaming website where you can watch VF and VOSTFR anime.",
