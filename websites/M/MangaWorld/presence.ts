@@ -167,6 +167,10 @@ presence.on("UpdateData", async () => {
         {
           label: "Leggilo anche tu!",
           url: document.location.href.replace(/.$/, "1")
+        },
+        {
+          label: "Vai alla pagina dell'opera!",
+          url: document.location.href.replace(/read\/.*/g, "")
         }
       ];
     } else {
@@ -176,6 +180,12 @@ presence.on("UpdateData", async () => {
       data.smallImageText = pageName;
       data.details = "Visualizzando la pagina di:";
       data.state = pageName;
+      data.buttons = [
+        {
+          label: "Vai alla pagina dell'opera!",
+          url: document.location.href
+        }
+      ];
     }
   } else {
     /* In qualunque altra pagina - In any other page */
