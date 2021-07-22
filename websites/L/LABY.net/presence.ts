@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing Minecraft capes";
   else if(document.location.pathname.startsWith("/@")) {
     presenceData.details = "Viewing profile";
-    presenceData.state = document.location.pathname.split("/@")[1]
+    presenceData.state = document.location.pathname.split("/@")[1];
   } else if(document.location.pathname.startsWith("/settings")) 
     presenceData.details = `Viewing ${document.location.pathname.split("/@")[1]}'s profile`;
   else if(document.location.pathname.startsWith("/settings")) 
