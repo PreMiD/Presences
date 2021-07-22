@@ -53,8 +53,7 @@ presence.on("UpdateData", async () => {
     if (!isNaN(video.duration) && title) { 
       const splitString = document.querySelector("#manga-reading-nav-head > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li.active").textContent,
        [startTimestamp, endTimestamp] = presence.getTimestamps(video.currentTime, video.duration),
-       splitEp = splitString.split("-"),
-       epAndSeason = splitEp[1],
+       [,epAndSeason,] = splitString.split("-"),
        animeLink = document.querySelector("#manga-reading-nav-head > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li:nth-child(2) > a").getAttribute("href");
 
       presenceData.details = title;
