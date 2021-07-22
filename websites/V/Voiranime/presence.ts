@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
   } else 
     presenceData.details = "Page d'accueil";
   
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
