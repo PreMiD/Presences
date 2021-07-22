@@ -8,9 +8,14 @@
   "category": "games",
   "logo": "https://i.imgur.com/YOBgufd.png",
   "thumbnail": "https://i.imgur.com/P1f5v3g.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#f40101",
-  "tags": ["taiko-no-tatsujin-simulator", "browser-game", "online-multiplayer", "web-based"],
+  "tags": [
+    "taiko-no-tatsujin-simulator",
+    "browser-game",
+    "online-multiplayer",
+    "web-based"
+  ],
   "url": "taiko.bui.pm",
   "description": {
     "en": "A web-based Taiko no Tatsujin simulator."
