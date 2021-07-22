@@ -52,14 +52,15 @@ presence.on("UpdateData", async () => {
     presenceData.state = animeTitle;
     if (!isNaN(video.duration) && title) { 
       const splitString = document.querySelector("#manga-reading-nav-head > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li.active").textContent,
-       timestamps = presence.getTimestamps(video.currentTime, video.duration),
-       epAndSeason = splitString.split("-"),
+       [startTimestamp, endTimestamp] = presence.getTimestamps(video.currentTime, video.duration),
+       splitEp = splitString.split("-"),
+       epAndSeason = splitEp[1],
        animeLink = document.querySelector("#manga-reading-nav-head > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li:nth-child(2) > a").getAttribute("href");
 
       presenceData.details = title;
-      presenceData.state = epAndSeason[1];
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.state = epAndSeason;
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
       presenceData.buttons = [
@@ -75,7 +76,6 @@ presence.on("UpdateData", async () => {
       if (video.paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
-        delete presenceData.buttons;
       }
     }
   } else if (path.includes("/anime-genre")) {
