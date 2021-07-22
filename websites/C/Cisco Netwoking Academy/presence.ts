@@ -48,6 +48,9 @@ presence.on("UpdateData", async () => {
     state,
     startTimestamp: timestamp
   };
+  if (!state) 
+    delete presenceData.state;
+  
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
