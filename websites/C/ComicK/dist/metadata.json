@@ -8,9 +8,12 @@
   "category": "other",
   "logo": "https://i.imgur.com/DeNqLCB.png",
   "thumbnail": "https://i.imgur.com/9Wp14l1.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#f698c7",
-  "tags": ["manga", "comic-reader"],
+  "tags": [
+    "manga",
+    "comic-reader"
+  ],
   "url": "comick.fun",
   "description": {
     "en": "🚀 ComicK - Fastest Comic Reader"
