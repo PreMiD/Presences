@@ -21,7 +21,7 @@
     {
       "id": "lang",
       "title": "Language",
-      "icon": "fas fa-global",
+      "icon": "fas fa-language",
       "value": 0,
       "values": ["English", "German"]
     }
