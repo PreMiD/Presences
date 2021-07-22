@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname === "/settings")
     presenceData.details = await getTranslation("settings");
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
