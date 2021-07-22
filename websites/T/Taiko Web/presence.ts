@@ -44,9 +44,9 @@ async function getSongs() {
       songIndexToSongId = songs
         .sort((a, b) => {
           return (
-            (a.category_id * songs.length) +
+            a.category_id * songs.length +
             a.id -
-            ((b.category_id * songs.length) + b.id)
+            (b.category_id * songs.length + b.id)
           );
         })
         .map((song) => song.id);
@@ -60,9 +60,9 @@ async function getSong(id: number) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "taiko_logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "taiko_logo",
+      startTimestamp: browsingStamp
+    },
     canvas = document.querySelector<HTMLCanvasElement>("canvas"),
     initialLoading = document.querySelector<HTMLSpanElement>("span.percentage"),
     loadingDon = document.querySelector<HTMLDivElement>("div#loading-don"),

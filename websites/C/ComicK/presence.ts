@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "large",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "large",
+      startTimestamp: browsingStamp
+    },
     { pathname } = document.location;
 
   if (pathname === "/") presenceData.details = "Browsing Homepage";
@@ -67,8 +67,10 @@ presence.on("UpdateData", async () => {
         break;
       }
     }
-  } else if (pathname === "/ranking") presenceData.details = "Looking at rankings";
-  else if (pathname === "/comment_list") presenceData.details = "Looking at comment list";
+  } else if (pathname === "/ranking")
+    presenceData.details = "Looking at rankings";
+  else if (pathname === "/comment_list")
+    presenceData.details = "Looking at comment list";
   else if (pathname === "/settings") presenceData.details = "Settings";
   else if (pathname === "/languages") presenceData.details = "Languages";
   else if (pathname === "/privacy") presenceData.details = "Privacy POlicy";
