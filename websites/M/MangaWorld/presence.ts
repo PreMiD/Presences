@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
     data.details = "Visualizzando la pagina:";
     data.state = `"${pageName}"`;
   }
-  if (data.details !== null) {
+  if (data.details) {
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   }
