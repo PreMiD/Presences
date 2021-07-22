@@ -45,4 +45,5 @@ const presence = new Presence({
         presence.setActivity(presenceData);
     } else {
     presence.setActivity(presenceData);
+    }
 });
