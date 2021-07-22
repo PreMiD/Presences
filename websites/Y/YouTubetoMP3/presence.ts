@@ -4,10 +4,10 @@ const presence = new Presence({
   presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "logo"
-    };
+    },
 
-    const time = Math.floor(Date.now() / 1000);
-    const test = document.location.pathname.split("/");
+     time = Math.floor(Date.now() / 1000),
+     test = document.location.pathname.split("/");
 
     if(test.length === 4) {
         presenceData.startTimestamp = time;
@@ -42,7 +42,7 @@ const presence = new Presence({
         presenceData.startTimestamp = time;
         presenceData.details = `Downloading.. ${title[0].textContent}`;
         presence.setActivity(presenceData);
-    } else {
+    } else 
     presence.setActivity(presenceData);
-    }
+    
 });
