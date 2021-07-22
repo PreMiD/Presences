@@ -1,6 +1,7 @@
 const presence = new Presence({
   clientId: "840759396103749633"
-});
+}),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 async function getTranslation(name: string) {
   const language = (await presence.getSetting("lang")) === 0 ? "en" : "de";
