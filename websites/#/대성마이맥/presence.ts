@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname.includes("/common/aquaplayer/")) {
 
     presenceData.details = document.querySelector(".lec_title").textContent;
-    presenceData.state = document.querySelector("#sel_lec option[selected]").textContent
+    presenceData.state = document.querySelector("#sel_lec option[selected]").textContent;
 
     const video: HTMLVideoElement = document.querySelector("#video-nplayer-1");
 
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
   
     else if (document.location.pathname.includes("/tcher/eachTcherMain.ds")) {
       const temp: string[] = (document.querySelector(".tcher_modal") as HTMLElement).innerText.split("\n");
-      [presenceData.details, presenceData.state] = [temp[0].replace("영역", " 영역"), temp[1].replace("선생님", " 선생님")]
+      [presenceData.details, presenceData.state] = [temp[0].replace("영역", " 영역"), temp[1].replace("선생님", " 선생님")];
     
     } else if (document.location.pathname.includes("/myzone/mypage/myInfo/msgList.ds"))
       presenceData.details = "쪽지";
