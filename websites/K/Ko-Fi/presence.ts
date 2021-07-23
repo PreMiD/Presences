@@ -84,7 +84,7 @@ presence.on("UpdateData", () => {
       presenceData.state = `By ${shopOwner}`;
       presenceData.buttons = [{ label: "View Item", url: URL }];
     } catch {
-      presenceData.details = `Viewing a shop item.`;
+      presenceData.details = "Viewing a shop item.";
     }
   } else if (document.location.pathname.toLowerCase().startsWith("/summary"))
     presenceData.details = "Viewing payment summary.";
