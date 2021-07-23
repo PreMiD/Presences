@@ -139,30 +139,29 @@ presence.on("UpdateData", () => {
           )
           .textContent.split("Jump to")[0]
           .trim(),
-        userSplit = document.location.pathname.split("/"),
-        userFixed = userSplit[1];
+        userSplit = document.location.pathname.split("/");
       // userFixed = user.toLowerCase().split(" ").join("");
       // console.log(userFixed)
 
       if (user !== "undefined") {
-        const userURL = `https://ko-fi.com/${userFixed}?ref=premid_discord_presence`;
+        const userURL = `https://ko-fi.com/${userSplit[1]}?ref=premid_discord_presence`;
 
         presenceData.details = "Viewing this users page:";
         presenceData.state = user;
         presenceData.buttons = [{ label: "View Page", url: userURL }];
       }
 
-      if (document.location.pathname.startsWith(`/${userFixed}/gallery`))
+      if (document.location.pathname.startsWith(`/${userSplit[1]}/gallery`))
         presenceData.details = "Viewing this users gallery:";
-      else if (document.location.pathname.startsWith(`/${userFixed}/posts`))
+      else if (document.location.pathname.startsWith(`/${userSplit[1]}/posts`))
         presenceData.details = "Viewing this users posts:";
-      else if (document.location.pathname.startsWith(`/${userFixed}/shop`))
+      else if (document.location.pathname.startsWith(`/${userSplit[1]}/shop`))
         presenceData.details = "Viewing this users shop:";
       else if (
-        document.location.pathname.startsWith(`/${userFixed}/commissions`)
+        document.location.pathname.startsWith(`/${userSplit[1]}/commissions`)
       )
         presenceData.details = "Viewing this users commissions:";
-      else if (document.location.pathname.startsWith(`/${userFixed}/tiers`))
+      else if (document.location.pathname.startsWith(`/${userSplit[1]}/tiers`))
         presenceData.details = "Viewing this users tier options:";
     } catch {
       presenceData.details = "Viewing an unsupported page.";
