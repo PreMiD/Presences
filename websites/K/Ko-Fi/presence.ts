@@ -140,18 +140,18 @@ presence.on("UpdateData", () => {
   } else {
     try {
       const user = document
-        .querySelector(
-          "#profile-header-v2 > div > div.kfds-lyt-column.kfds-lyt-width-100.kfds-c-header-showmobile-at-736 > div.kfds-lyt-row-start.kfds-lyt-width-100 > div > div.kfds-font-size-22.kfds-font-bold > span"
-        )
-        .textContent.split("Jump to")[0]
-        .trim();
+          .querySelector(
+            "#profile-header-v2 > div > div.kfds-lyt-column.kfds-lyt-width-100.kfds-c-header-showmobile-at-736 > div.kfds-lyt-row-start.kfds-lyt-width-100 > div > div.kfds-font-size-22.kfds-font-bold > span"
+          )
+          .textContent.split("Jump to")[0]
+          .trim(),
+        userSplit = document.location.pathname.split("/"),
+        userFixed = userSplit[1];
       // userFixed = user.toLowerCase().split(" ").join("");
       // console.log(userFixed)
 
       if (user !== "undefined") {
-        var userSplit = document.location.pathname.split("/"),
-          userFixed = userSplit[1],
-          userURL = `https://ko-fi.com/${userFixed}?ref=premid_discord_presence`;
+        const userURL = `https://ko-fi.com/${userFixed}?ref=premid_discord_presence`;
 
         presenceData.details = "Viewing this users page:";
         presenceData.state = user;
