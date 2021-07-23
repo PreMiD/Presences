@@ -8,9 +8,9 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
   };
-  if (document.location.pathname === "/") {
+  if (document.location.pathname === "/") 
     presenceData.details = "Viewing the home page.";
-  } else if (document.location.pathname.startsWith("/dashboard/")) {
+   else if (document.location.pathname.startsWith("/dashboard/")) {
     const title = document
       .querySelector(
         "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
@@ -21,54 +21,54 @@ presence.on("UpdateData", () => {
     presenceData.state = title;
   } else if (
     document.location.pathname.toLowerCase().startsWith("/account/register")
-  ) {
+  ) 
     presenceData.details = "Registering...";
-  } else if (
+   else if (
     document.location.pathname.toLowerCase().startsWith("/account/login") ||
     document.location.pathname
       .toLowerCase()
       .startsWith("/account/externallogincallback")
-  ) {
+  ) 
     presenceData.details = "Logining in...";
-  } else if (document.location.pathname.toLowerCase().startsWith("/account/")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/account/")) 
     presenceData.details = "Setting up account...";
-  } else if (document.location.pathname.startsWith("/gold")) {
+   else if (document.location.pathname.startsWith("/gold")) 
     presenceData.details = "Viewing the Gold plan.";
-  } else if (document.location.pathname.startsWith("/art")) {
+   else if (document.location.pathname.startsWith("/art")) 
     presenceData.details = "Viewing art creations.";
-  } else if (document.location.pathname.startsWith("/cosplay")) {
+   else if (document.location.pathname.startsWith("/cosplay")) 
     presenceData.details = "Viewing cosplay creations.";
-  } else if (document.location.pathname.startsWith("/commissionsopen")) {
+   else if (document.location.pathname.startsWith("/commissionsopen")) 
     presenceData.details = "Viewing open commissions.";
-  } else if (
+   else if (
     document.location.pathname.toLowerCase().startsWith("/home/featured")
-  ) {
+  ) 
     presenceData.details = "Viewing featured creators.";
-  } else if (document.location.pathname.toLowerCase() === "/explore") {
+   else if (document.location.pathname.toLowerCase() === "/explore") 
     presenceData.details = "Viewing the explore page.";
-  } else if (document.location.pathname.toLowerCase() === "/explore") {
+   else if (document.location.pathname.toLowerCase() === "/explore") 
     presenceData.details = "Viewing the explore page.";
-  } else if (document.location.pathname.toLowerCase().startsWith("/blog/")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/blog/")) 
     presenceData.details = "Creating a blog post...";
-  } else if (document.location.pathname.toLowerCase().startsWith("/manage")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/manage")) 
     presenceData.details = "Managing Ko-Fi";
-  } else if (document.location.pathname.toLowerCase().startsWith("/settings")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/settings")) 
     presenceData.details = "Adjusting user settings...";
-  } else if (document.location.pathname.toLowerCase().startsWith("/newsfeed")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/newsfeed")) 
     presenceData.details = "Viewing the newsfeed...";
-  } else if (
+   else if (
     document.location.pathname.toLowerCase().startsWith("/my-supporters")
-  ) {
+  ) 
     presenceData.details = "Viewing supporters...";
-  } else if (
+   else if (
     document.location.pathname.toLowerCase().startsWith("/streamalerts")
-  ) {
+  ) 
     presenceData.details = "Viewing stream alerts.";
-  } else if (document.location.pathname.toLowerCase().startsWith("/shop")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/shop")) 
     presenceData.details = "Viewing shop.";
-  } else if (document.location.pathname.toLowerCase() === "/about") {
+   else if (document.location.pathname.toLowerCase() === "/about") 
     presenceData.details = "Viewing Ko-Fi's About Page";
-  } else if (document.location.pathname.toLowerCase().startsWith("/s/")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/s/")) {
     try {
       const shopItem = document
           .querySelector(
@@ -90,19 +90,19 @@ presence.on("UpdateData", () => {
     } catch {
       presenceData.details = `Viewing a shop item.`;
     }
-  } else if (document.location.pathname.toLowerCase().startsWith("/summary")) {
+  } else if (document.location.pathname.toLowerCase().startsWith("/summary")) 
     presenceData.details = "Viewing payment summary.";
-  } else if (
+   else if (
     document.location.pathname.toLowerCase().startsWith("/home/coffeeshop")
-  ) {
+  ) 
     presenceData.details = "Just bought someone coffee!";
-  } else if (
+   else if (
     document.location.pathname.toLowerCase().startsWith("/home/about")
-  ) {
+  ) 
     presenceData.details = "Viewing Ko-Fi's About Page";
-  } else if (document.location.pathname.toLowerCase().startsWith("/home")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/home")) 
     presenceData.details = "Viewing the home page.";
-  } else if (document.location.pathname.toLowerCase().startsWith("/post")) {
+   else if (document.location.pathname.toLowerCase().startsWith("/post")) {
     presenceData.details = "Viewing a post.";
     try {
       const postName = document
@@ -135,9 +135,9 @@ presence.on("UpdateData", () => {
     } catch {
       presenceData.details = "Viewing an album.";
     }
-  } else if (document.location.pathname.toLowerCase() === "/404.html") {
+  } else if (document.location.pathname.toLowerCase() === "/404.html") 
     presenceData.details = "Oh No! Page Not Found.";
-  } else {
+   else {
     try {
       const user = document
         .querySelector(
@@ -158,19 +158,19 @@ presence.on("UpdateData", () => {
         presenceData.buttons = [{ label: "View Page", url: userURL }];
       }
 
-      if (document.location.pathname.startsWith(`/${userFixed}/gallery`)) {
+      if (document.location.pathname.startsWith(`/${userFixed}/gallery`)) 
         presenceData.details = "Viewing this users gallery:";
-      } else if (document.location.pathname.startsWith(`/${userFixed}/posts`)) {
+       else if (document.location.pathname.startsWith(`/${userFixed}/posts`)) 
         presenceData.details = "Viewing this users posts:";
-      } else if (document.location.pathname.startsWith(`/${userFixed}/shop`)) {
+       else if (document.location.pathname.startsWith(`/${userFixed}/shop`)) 
         presenceData.details = "Viewing this users shop:";
-      } else if (
+       else if (
         document.location.pathname.startsWith(`/${userFixed}/commissions`)
-      ) {
+      ) 
         presenceData.details = "Viewing this users commissions:";
-      } else if (document.location.pathname.startsWith(`/${userFixed}/tiers`)) {
+       else if (document.location.pathname.startsWith(`/${userFixed}/tiers`)) 
         presenceData.details = "Viewing this users tier options:";
-      }
+      
     } catch {
       presenceData.details = "Viewing an unsupported page.";
     }
