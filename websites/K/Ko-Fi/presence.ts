@@ -46,8 +46,6 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing featured creators.";
    else if (document.location.pathname.toLowerCase() === "/explore") 
     presenceData.details = "Viewing the explore page.";
-   else if (document.location.pathname.toLowerCase() === "/explore") 
-    presenceData.details = "Viewing the explore page.";
    else if (document.location.pathname.toLowerCase().startsWith("/blog/")) 
     presenceData.details = "Creating a blog post...";
    else if (document.location.pathname.toLowerCase().startsWith("/manage")) 
