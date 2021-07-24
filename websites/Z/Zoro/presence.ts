@@ -22,12 +22,13 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
     { pathname } = document.location,
     pages =
-      /\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/;
+      /\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/,
+    buttons: boolean = await presence.getSetting("buttons");
 
   if (pathname === "/" || pathname === "/home")
     presenceData.details = "Exploring Zoro.to";
@@ -87,17 +88,19 @@ presence.on("UpdateData", async () => {
           );
         }
       }
-      presenceData.buttons = [
-        {
-          label: "Join Room",
-          url: document.location.href
-        }
-      ];
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "Join Room",
+            url: document.location.href
+          }
+        ];
+      }
     }
   } else if (pathname.startsWith("/watch")) {
     const title: HTMLDataListElement = document.querySelector(
-        "li.breadcrumb-item.dynamic-name.active"
-      ),
+      "li.breadcrumb-item.dynamic-name.active"
+    ),
       episode: HTMLSpanElement = document.querySelector(
         "span#cm-episode-number"
       );
@@ -111,12 +114,14 @@ presence.on("UpdateData", async () => {
         );
       }
     }
-    presenceData.buttons = [
-      {
-        label: "Watch Episode",
-        url: document.location.href
-      }
-    ];
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Watch Episode",
+          url: document.location.href
+        }
+      ];
+    }
   } else if (pathname === "/events") presenceData.details = "Looking at events";
   else if (pathname.startsWith("/event/")) {
     const title: HTMLDivElement = document.querySelector("div.title"),
@@ -130,12 +135,14 @@ presence.on("UpdateData", async () => {
     if (title) {
       presenceData.details = "Checking Synopsis";
       presenceData.state = title.innerText;
-      presenceData.buttons = [
-        {
-          label: "Check Synopsis",
-          url: document.location.href
-        }
-      ];
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "Check Synopsis",
+            url: document.location.href
+          }
+        ];
+      }
     }
   }
 
