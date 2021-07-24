@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
     input = document.querySelector<HTMLInputElement>("input#keyword"),
     buttons: boolean = await presence.getSetting("buttons");
 
-  if (input && input.value) setCookie("searchQuery", input.value, 1);
+  if (input && input.value) setCookie("PMD_searchQuery", input.value, 1);
 
   switch (pathname) {
     case "/":
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reporting Error";
       break;
     case "/Search/Comic": {
-      const searchQuery = getCookie("searchQuery");
+      const searchQuery = getCookie("PMD_searchQuery");
       presenceData.details = `Searching for ${searchQuery}`;
       break;
     }
@@ -77,26 +77,26 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Advanced Search";
 
       if (comicName && comicName.value)
-        setCookie("searchQuery", `Looking for title: ${comicName.value}`, 1);
+        setCookie("PMD_searchQuery", `Looking for title: ${comicName.value}`, 1);
       else if (include.length > 0) {
         const searchQuery = `Searching for Genre: ${include[0].innerText} ${
           include.length > 1 ? `and ${include.length - 1} more` : ""
         }`;
-        setCookie("searchQuery", searchQuery, 1);
+        setCookie("PMD_searchQuery", searchQuery, 1);
       } else if (exclude.length > 0) {
         const searchQuery = `Searching for all Genres except: ${
           exclude[0].innerText
         } ${exclude.length > 1 ? `and ${exclude.length - 1} more` : ""}`;
-        setCookie("searchQuery", searchQuery, 1);
+        setCookie("PMD_searchQuery", searchQuery, 1);
       } else if (status) {
         setCookie(
-          "searchQuery",
+          "PMD_searchQuery",
           `Looking for: ${status.selectedOptions[0].innerText} comics`,
           1
         );
       } else {
         [presenceData.details, presenceData.state] =
-          getCookie("searchQuery").split(":");
+          getCookie("PMD_searchQuery").split(":");
       }
       break;
     }
@@ -127,6 +127,7 @@ presence.on("UpdateData", async () => {
               6,
               title.innerText.indexOf("information")
             );
+            presenceData.smallImageKey = "reading";
             if (episode)
               presenceData.state = episode.selectedOptions[0].innerText.trim();
             if (page)
