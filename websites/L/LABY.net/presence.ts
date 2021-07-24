@@ -30,8 +30,8 @@ presence.on("UpdateData", () => {
     presenceData.state = server;
   } else if(document.location.pathname.startsWith("/badge")) {
     const badge = document.querySelector("div.mb-1>h1").textContent;
-    presenceData.details = "Viewing badge";
-    presenceData.state = item;
+    presenceData.details = "Viewing badge:";
+    presenceData.state = badge;
   } else if(document.location.pathname.startsWith("/cape")) {
     const item = document.querySelector("div.mb-1>h1").textContent;
     presenceData.details = "Viewing cape";
