@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "o!rdr",
+  "author": {
+    "name": "LockBlock",
+    "id": "810163923391217725"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/K5oX7Rb.png",
+  "thumbnail": "https://i.imgur.com/AyLNuEo.png",
+  "version": "1.0.0",
+  "color": "#ad41ab",
+  "tags": ["osu", "replays", "api"],
+  "url": "ordr.issou.best",
+  "description": {
+    "en": "o!rdr is a free osu! replay video generator, with an easy-to-use API. No watermarks. Lots of customisation. Nice Discord embeds. Uses Danser."
+  }
+}
