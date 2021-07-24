@@ -43,8 +43,6 @@ presence.on("UpdateData", async () => {
     } else if(pathname.includes("/p/")) {
         const filename = document.querySelector("div.filename") ? document.querySelector("div.filename").textContent.split("/").pop() : null 
         if(!filename) return;
-
-        console.log({ lastfile, filename, check: !lastfile.startsWith(filename.split(" ")[0])})
     
         const extension = filename.match(/\.\w+/g) ? filename.match(/\.\w+/g)[0].replace(".", "") : false
         presenceData.details = `Project: ${path[2]}`
