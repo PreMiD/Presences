@@ -1,16 +1,16 @@
 const presence = new Presence({
     clientId: "858292108195921920"
-})
+}),
 
-const supportedLanguages : Array<String> = [ 'js', 'md', 'json', 'gitignore', 'txt', 'html', 'css']
+ supportedLanguages : Array<string> = [ 'js', 'md', 'json', 'gitignore', 'txt', 'html', 'css'];
 
 presence.on("UpdateData", async () => {
     const presenceData : PresenceData = {
         largeImageKey: "autocode"
-    };
+    },
 
-    const { pathname } = window.location;
-    let path = pathname.split("/").slice(1);
+     { pathname } = window.location,
+     path = pathname.split("/").slice(1);
     if (pathname.includes("/snippet")) {
         if (path.length >= 3) presenceData.details = document.querySelector("h1.snippet-title.h3").textContent.trim();
         else presenceData.details = "Looking for Snippets";
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
     if (!presenceData.details) {
         presence.setTrayTitle();
         presence.setActivity();
-    } else {
+    } else 
         presence.setActivity(presenceData);
-    }
+    
 });
