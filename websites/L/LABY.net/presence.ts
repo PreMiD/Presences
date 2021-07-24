@@ -34,8 +34,8 @@ presence.on("UpdateData", () => {
     presenceData.state = badge;
   } else if(document.location.pathname.startsWith("/cape")) {
     const cape = document.querySelector("div.mb-1>h1").textContent;
-    presenceData.details = "Viewing cape";
-    presenceData.state = item;
+    presenceData.details = "Viewing cape:";
+    presenceData.state = cape;
   }
 
   if(!presenceData.details) {
