@@ -1,44 +1,41 @@
 const presence = new Presence({
     clientId: "858292108195921920"
-});
-const supportedLanguages = ['js', 'md', 'json', 'gitignore', 'txt', 'html', 'css'];
+}),
+ supportedLanguages = ['js', 'md', 'json', 'gitignore', 'txt', 'html', 'css'];
 presence.on("UpdateData", async () => {
     const presenceData = {
         largeImageKey: "autocode"
-    };
-    const { pathname } = window.location;
-    let path = pathname.split("/").slice(1);
+    },
+     { pathname } = window.location,
+     path = pathname.split("/").slice(1);
     if (pathname.includes("/snippet")) {
-        if (path.length >= 3) {
+        if (path.length >= 3) 
             presenceData.details = document.querySelector("h1.snippet-title.h3").textContent.trim();
-        }
-        else {
+        
+        else 
             presenceData.details = "Looking for Snippets";
-        }
+        
         presenceData.state = `${window.location.hostname}/${path[0]}`;
         presenceData.smallImageKey = 'snippet';
-    }
-    else if (pathname.includes("/app")) {
-        if (path.length >= 3) {
+    } else if (pathname.includes("/app")) {
+        if (path.length >= 3) 
             presenceData.details = document.querySelector("h1.jumbo").textContent.trim();
-        }
-        else {
+        
+        else 
             presenceData.details = "Looking for Apps";
-        }
+        
         presenceData.state = `${window.location.hostname}/${path[0]}`;
         presenceData.smallImageKey = 'apps';
-    }
-    else if (pathname.includes("/lib")) {
-        if (path.length >= 3) {
+    } else if (pathname.includes("/lib")) {
+        if (path.length >= 3) 
             presenceData.details = `Reading ${path[1]} docs`;
-        }
-        else {
+        
+        else 
             presenceData.details = "Looking for Docs";
-        }
+        
         presenceData.state = `${window.location.hostname}/${path[0]}`;
         presenceData.smallImageKey = 'lib';
-    }
-    else if (pathname.includes("/p/")) {
+    } else if (pathname.includes("/p/")) {
         const filename = document.querySelector("div.filename") ? document.querySelector("div.filename").textContent.split("/").pop() : null;
         if (!filename)
             return;
@@ -54,8 +51,7 @@ presence.on("UpdateData", async () => {
     if (!presenceData.details) {
         presence.setTrayTitle();
         presence.setActivity();
-    }
-    else {
+    } else 
         presence.setActivity(presenceData);
-    }
+    
 });
