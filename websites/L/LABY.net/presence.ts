@@ -19,9 +19,9 @@ presence.on("UpdateData", () => {
   else if(document.location.pathname.startsWith("/capes")) 
     presenceData.details = "Viewing Minecraft capes";
   else if(document.location.pathname.startsWith("/@")) {
-    const item = document.querySelector("div.profile-header>h1").textContent;
-    presenceData.details = "Viewing profile";
-    presenceData.state = item;
+    const user = document.querySelector("div.profile-header>h1").textContent;
+    presenceData.details = "Viewing profile of:";
+    presenceData.state = user;
   } else if(document.location.pathname.startsWith("/settings")) 
     presenceData.details = "Viewing profile settings";
   else if(document.location.pathname.startsWith("/server")) {
