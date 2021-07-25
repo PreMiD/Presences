@@ -58,7 +58,8 @@ presence.on("UpdateData", async () => {
     } else {
       data.smallImageKey = "pause";
       data.smallImageText = "Paused";
-      [data.startTimestamp, data.endTimestamp] = [undefined, undefined];
+      delete data.startTimestamp;
+      delete data.endTimestamp;
     }
     data.buttons = [
       {
