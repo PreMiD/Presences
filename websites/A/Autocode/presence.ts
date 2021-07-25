@@ -1,7 +1,6 @@
 const presence = new Presence({
-  clientId: "858292108195921920"
-}),
-supportedLanguages: Array<string> = [ "js", "md", "json", "gitignore", "txt", "html", "css"];
+clientId: "858292108195921920"
+}),  supportedLanguages: Array<string> = [ "js", "md", "json", "gitignore", "txt", "html", "css"];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -35,7 +34,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = `Editing: ${filename}`;
     presenceData.smallImageKey = "autocode";
     if (extension && supportedLanguages.includes(extension)) presenceData.largeImageKey = `lang-${extension}`;
-    else presenceData.largeImageKey = `autocode`;
+    else presenceData.largeImageKey = "autocode";
   }
 
   if (!presenceData.details) {
