@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "858292108195921920"
-});
+}),
 
-const supportedLanguages: Array<string> = [
+ supportedLanguages: Array<string> = [
   "js",
   "md",
   "json",
@@ -15,24 +15,24 @@ const supportedLanguages: Array<string> = [
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "autocode"
-  };
+  },
 
-  const { pathname } = window.location;
-  let path = pathname.split("/").slice(1);
+   { pathname } = window.location,
+   path = pathname.split("/").slice(1);
   if (pathname.includes("/snippet")) {
-    if (path.length >= 3)
-      presenceData.details = document
+    if (path.length >= 3) {
+presenceData.details = document
         .querySelector("h1.snippet-title.h3")
         .textContent.trim();
-    else presenceData.details = "Looking for Snippets";
+} else presenceData.details = "Looking for Snippets";
     presenceData.state = `${window.location.hostname}/${path[0]}`;
     presenceData.smallImageKey = "snippet";
   } else if (pathname.includes("/app")) {
-    if (path.length >= 3)
-      presenceData.details = document
+    if (path.length >= 3) {
+presenceData.details = document
         .querySelector("h1.jumbo")
         .textContent.trim();
-    else presenceData.details = "Looking for Apps";
+} else presenceData.details = "Looking for Apps";
     presenceData.state = `${window.location.hostname}/${path[0]}`;
     presenceData.smallImageKey = "apps";
   } else if (pathname.includes("/lib")) {
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
