@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: "858292108195921920" }),
-supportedLanguages: Array<string> = [ "js", "md", "json", "gitignore", "txt", "html", "css"];
+      supportedLanguages: Array<string> = [ "js", "md", "json", "gitignore", "txt", "html", "css"];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
