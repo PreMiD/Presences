@@ -1,37 +1,21 @@
 const presence = new Presence({
   clientId: "858292108195921920"
-}),
-
- supportedLanguages: Array<string> = [
-  "js",
-  "md",
-  "json",
-  "gitignore",
-  "txt",
-  "html",
-  "css"
-];
+}), supportedLanguages: Array<string> = [ "js", "md", "json", "gitignore", "txt", "html", "css"];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "autocode"
-  },
-
-   { pathname } = window.location,
-   path = pathname.split("/").slice(1);
+  }, { pathname } = window.location, path = pathname.split("/").slice(1);
+  
   if (pathname.includes("/snippet")) {
     if (path.length >= 3) {
-presenceData.details = document
-        .querySelector("h1.snippet-title.h3")
-        .textContent.trim();
+      presenceData.details = document.querySelector("h1.snippet-title.h3").textContent.trim();
 } else presenceData.details = "Looking for Snippets";
     presenceData.state = `${window.location.hostname}/${path[0]}`;
     presenceData.smallImageKey = "snippet";
   } else if (pathname.includes("/app")) {
     if (path.length >= 3) {
-presenceData.details = document
-        .querySelector("h1.jumbo")
-        .textContent.trim();
+      presenceData.details = document.querySelector("h1.jumbo").textContent.trim();
 } else presenceData.details = "Looking for Apps";
     presenceData.state = `${window.location.hostname}/${path[0]}`;
     presenceData.smallImageKey = "apps";
@@ -45,7 +29,7 @@ presenceData.details = document
       ? document.querySelector("div.filename").textContent.split("/").pop()
       : null;
     if (!filename) return;
-
+    
     const extension = filename.match(/\.\w+/g)
       ? filename.match(/\.\w+/g)[0].replace(".", "")
       : false;
@@ -62,5 +46,4 @@ presenceData.details = document
     presence.setActivity();
   } else 
     presence.setActivity(presenceData);
-  
 });
