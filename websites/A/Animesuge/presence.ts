@@ -28,10 +28,11 @@ const presence = new Presence({
   };
 
 let timeEnd: number,
-  currentTime: number;
+  currentTime: number,
+  paused: boolean;
 
-presence.on("iFrameData", async (data: {currentTime: number, timeEnd: number}) => {
-  ({currentTime, timeEnd} = data);
+presence.on("iFrameData", async (data: {currentTime: number, timeEnd: number, paused: boolean}) => {
+  ({currentTime, timeEnd, paused} = data);
 });
 
 presence.on("UpdateData", async () => {
@@ -51,7 +52,14 @@ presence.on("UpdateData", async () => {
   } else if (page.includes("/anime")) {
     data.details = pages["/anime"];
     data.state = `Watching ${animeName.textContent}`;
-    [data.startTimestamp, data.endTimestamp] = timestamps;
+    if (!paused) {
+      data.smallImageKey = "play";
+      [data.startTimestamp, data.endTimestamp] = timestamps;
+    } else {
+      data.smallImageKey = "pause";
+      data.smallImageText = "Paused";
+      [data.startTimestamp, data.endTimestamp] = [undefined, undefined];
+    }
     data.buttons = [
       {
         label: "Watch it too!",
@@ -65,6 +73,8 @@ presence.on("UpdateData", async () => {
   } else if (page.includes("/search")) {
     data.details = pages[page];
     data.state = `Searching: "${search.get("keyword")}"`;
+    data.smallImageKey = "search";
+    data.smallImageText = "Searching";
   } else if (page === "/faq") {
     data.details = pages[page];
     data.state = "Reading";
