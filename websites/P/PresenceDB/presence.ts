@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "840759396103749633"
-}),
+    clientId: "840759396103749633"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 async function getTranslation(name: string) {
@@ -69,7 +69,7 @@ async function getTranslation(name: string) {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp 
+    startTimestamp: browsingStamp
   };
 
   if (window.location.pathname === "/")

@@ -5,8 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "mangaworld_logo_dark"
-  },
+      largeImageKey: "mangaworld_logo_dark"
+    },
     /* Query dell'URI - URI query */
     paramsString = decodeURIComponent(document.location.search)
       .replace("?", "")
@@ -25,18 +25,14 @@ presence.on("UpdateData", async () => {
     data.details = "Sfogliando i preferiti";
     let filter;
 
-    if (document.location.href.endsWith("RE-READING")) 
-      filter = "In rilettura";
+    if (document.location.href.endsWith("RE-READING")) filter = "In rilettura";
     else if (document.location.href.endsWith("COMPLETED"))
       filter = "Completati";
-    else if (document.location.href.endsWith("ON_HOLD")) 
-      filter = "In pausa";
+    else if (document.location.href.endsWith("ON_HOLD")) filter = "In pausa";
     else if (document.location.href.endsWith("PLAN_TO_READ"))
       filter = "Da leggere";
-    else if (document.location.href.endsWith("DROPPED")) 
-      filter = "Droppati";
-    else if (document.location.href.endsWith("READING")) 
-      filter = "In lettura";
+    else if (document.location.href.endsWith("DROPPED")) filter = "Droppati";
+    else if (document.location.href.endsWith("READING")) filter = "In lettura";
 
     data.state = filter;
   } else if (document.location.href.includes("keyword=")) {
@@ -89,16 +85,11 @@ presence.on("UpdateData", async () => {
     data.details = "Sfogliando i contenuti:";
     let status;
 
-    if (statusQuery === "dropped")
-      status = "Droppati";
-    else if (statusQuery === "ongoing") 
-      status = "In corso d'opera";
-    else if (statusQuery === "completed") 
-      status = "Finiti";
-    else if (statusQuery === "paused") 
-      status = "In pausa";
-    else if (statusQuery === "canceled") 
-      status = "Cancellati";
+    if (statusQuery === "dropped") status = "Droppati";
+    else if (statusQuery === "ongoing") status = "In corso d'opera";
+    else if (statusQuery === "completed") status = "Finiti";
+    else if (statusQuery === "paused") status = "In pausa";
+    else if (statusQuery === "canceled") status = "Cancellati";
 
     data.state = status;
   } else if (document.location.href.includes("type=")) {
@@ -118,18 +109,12 @@ presence.on("UpdateData", async () => {
     data.details = "Sfogliando i contenuti:";
     let query;
 
-    if (sortQuery === "a z") 
-      query = "Ordinati dalla A alla Z";
-    else if (sortQuery === "z a") 
-      query = "Ordinati dalla Z alla A";
-    else if (sortQuery === "most_read") 
-      query = "Più letti";
-    else if (sortQuery === "less_read") 
-      query = "Meno letti";
-    else if (sortQuery === "newest") 
-      query = "Più recenti";
-    else if (sortQuery === "oldest") 
-      query = "Meno recenti";
+    if (sortQuery === "a z") query = "Ordinati dalla A alla Z";
+    else if (sortQuery === "z a") query = "Ordinati dalla Z alla A";
+    else if (sortQuery === "most_read") query = "Più letti";
+    else if (sortQuery === "less_read") query = "Meno letti";
+    else if (sortQuery === "newest") query = "Più recenti";
+    else if (sortQuery === "oldest") query = "Meno recenti";
 
     data.state = query;
   } else if (document.location.href.includes("archive")) {
