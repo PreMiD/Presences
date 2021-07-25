@@ -89,12 +89,14 @@ presence.on("UpdateData", async () => {
     },
     albumCover = Array.from(document.querySelectorAll("a")).find(
       (a) => a.dataset?.testid === "cover-art-link"
+    ) || Array.from(document.querySelectorAll("a")).find(
+      (a) => a.dataset?.testid === "context-link"
     );
 
   let podcast = false,
     searching = false;
 
-  if (albumCover !== null && albumCover.href.includes("/show/")) podcast = true;
+  if (albumCover !== null && (albumCover.href.includes("/show/") || albumCover.href.includes("/episode/"))) podcast = true;
 
   if (!podcast) {
     if (time) presenceData.startTimestamp = browsingStamp;
