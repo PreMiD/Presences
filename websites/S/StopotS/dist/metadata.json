@@ -1,12 +1,16 @@
 {
   "author": {
-    "name": "Alexx",
-    "id": "604182077088202784"
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
   },
   "contributors": [
     {
       "name": "Bryan",
       "id": "293775922757238784"
+    },
+    {
+      "name": "Alexx",
+      "id": "604182077088202784"
     }
   ],
   "service": "StopotS",
@@ -15,7 +19,7 @@
     "nl": "StopotS, het stop spel op het internet. Speel dit populaire spel gratis en zonder downloads."
   },
   "url": "stopots.com",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/2LqhoUb.png",
   "thumbnail": "https://i.imgur.com/Bg869KE.png",
   "color": "#FFBE55",
