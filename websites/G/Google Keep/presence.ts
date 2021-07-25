@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "keep_logo",
-    startTimestamp: timer
-  },
+      largeImageKey: "keep_logo",
+      startTimestamp: timer
+    },
     { pathname, hash, href } = location,
     [, , , , userInt, , LorLNorId] = href.split("/");
 

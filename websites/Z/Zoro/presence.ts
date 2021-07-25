@@ -22,9 +22,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
     { pathname } = document.location,
     pages =
       /\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/,
@@ -99,8 +99,8 @@ presence.on("UpdateData", async () => {
     }
   } else if (pathname.startsWith("/watch")) {
     const title: HTMLDataListElement = document.querySelector(
-      "li.breadcrumb-item.dynamic-name.active"
-    ),
+        "li.breadcrumb-item.dynamic-name.active"
+      ),
       episode: HTMLSpanElement = document.querySelector(
         "span#cm-episode-number"
       );
