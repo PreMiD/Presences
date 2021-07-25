@@ -16,9 +16,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = pesquisaTexto.value;
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Pesquisando";
-    } else {
+    } else 
       delete presenceData.details;
-    }
+    
   } else if ((document.location.pathname.includes("/user-settings/"))) {
    const userPageSelect = document.querySelector("#post-5 > div.entry-content > div > div > div.col-md-3.col-sm-3 > div > ul > li.active"),
           userName = document.querySelector("body > div.wrap > div > header > div.c-sub-header-nav.with-border > div > div > div.c-modal_item > div > span" );
