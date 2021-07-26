@@ -1,10 +1,8 @@
 const presence = new Presence({clientId: "867525909204566056"});
 
-let author: any,
- book: any,
- user: any;
-
-
+let book: string,
+ author: string;
+ 
 presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
@@ -13,54 +11,56 @@ presence.on("UpdateData", async () => {
     startTimestamp: Math.floor(Date.now() / 1000)
   };
 
-
-  if (document.location.pathname == "/home" ||
-      document.location.pathname == "/" ) 
+  if (document.location.pathname === "/home" ||
+      document.location.pathname === "/" ) 
     presenceData.details = "Browsing homepage";
-   else if (document.location.pathname == "/book") 
+   else if (document.location.pathname === "/book") 
     presenceData.details = "Browsing books";
    else if (document.location.pathname.includes("/book/show/")) {
     // beta layout conditional
     presenceData.details = "Browsing a book:";
-    if (document.getElementById("bookTitle") == null) {
-      book = document.querySelector("h1");
-      author = document.querySelector(".ContributorLink__name");
-      presenceData.state = `${book.innerText} | by: ${author.innerText}`;
+    if (document.getElementById("bookTitle") === null) {
+      book = document.querySelector("h1").innerText;
+      author = document.querySelector("span.ContributorLink__name").textContent;
+      presenceData.state = `${book} | by: ${author}`;
     } else{
-      book = document.getElementById("bookTitle");
-      author = document.querySelector(".authorName");
-      presenceData.state = `${book.innerText} | by: ${author.innerText}`;
+      book = document.getElementById("bookTitle").innerText;
+      author = document.querySelector(".authorName").textContent;
+      presenceData.state = `${book} | by: ${author}`;
     }
   } else if (document.location.pathname.includes("/series")) {
-    book = document.querySelector("h1");
-    if (book.innerText == "Series") 
+    let bookseries: string = document.querySelector("h1").innerText;
+    if ( bookseries === "Series") 
       presenceData.details = "Viewing all book series on Goodreads";
      else {
       presenceData.details = "Viewing a book series:";
-      presenceData.state = book.innerText;
+      presenceData.state = bookseries;
     }
   } else if (document.location.pathname.includes("/user/show/")) {
-    presenceData.details = "Browsing a profile: ";
-    user = document.querySelector("#profileNameTopHeading");
-    if(user.innerHTML.includes("smallText")) {
-      const trash: any = document.querySelector("#profileNameTopHeading a");
-      presenceData.state = user.innerText.replace(trash.innerText, "");
-    } else presenceData.state = user.innerText;
+    presenceData.details = "Browsing a profile:";
+    let user: string = document.getElementById("profileNameTopHeading").innerText;
+    if(document.querySelector("h1 a") === null) {
+      //others profiles
+      presenceData.state = user;
+    } else {
+      // own profile
+      const trash: string = document.querySelector("h1 a").innerHTML;
+      presenceData.state = user.replace(trash, ""); 
+    }
   } else if (document.location.pathname.includes("/author/show/")) {
     presenceData.details = "Viewing an author:";
-    author = document.querySelector(".authorName span"); 
-    presenceData.state = author.innerText;
+    author = document.querySelector(".authorName span").innerHTML; 
+    presenceData.state = author;
   } else if (document.location.pathname.includes("/group/show/")) {
     presenceData.details = "Viewing a group:";
-    const group: any = document.querySelector("h1");
-    presenceData.state = group.innerText;
+    presenceData.state = document.querySelector("h1").innerText;
   } else if (document.location.pathname.includes("/topic")) 
     presenceData.details = "Browsing discussions";
    else if (document.location.pathname.includes("/review/edit/")) {
+    book = document.querySelector("a.bookTitle").innerHTML;
     presenceData.details = "Writing a book review...";
-    book = document.querySelector("a.bookTitle");
     presenceData.smallImageKey = "writing";
-    presenceData.smallImageText = book.innerText;
+    presenceData.smallImageText = book;
   } else if(document.location.pathname.includes("/review/list/")) 
     presenceData.details = "Browsing bookshelves";
    else if (document.location.pathname.includes("/review/show")) {
