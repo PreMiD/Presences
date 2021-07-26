@@ -21,6 +21,12 @@
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
+    },
+    {
+      "id": "cookies",
+      "title": "Allow Cookies",
+      "icon": "fas fa-cookie-bite",
+      "value": true
     }
   ]
 }

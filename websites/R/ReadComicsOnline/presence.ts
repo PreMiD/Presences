@@ -31,9 +31,11 @@ presence.on("UpdateData", async () => {
   },
     { pathname } = location,
     input = document.querySelector<HTMLInputElement>("input#keyword"),
-    buttons: boolean = await presence.getSetting("buttons");
+    buttons: boolean = await presence.getSetting("buttons"),
+    cookies: boolean = await presence.getSetting("cookies");
 
-  if (input && input.value) setCookie("PMD_searchQuery", input.value, 1);
+  if (cookies && input && input.value)
+    setCookie("PMD_searchQuery", input.value, 1);
 
   switch (pathname) {
     case "/":
@@ -61,8 +63,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reporting Error";
       break;
     case "/Search/Comic": {
-      const searchQuery = getCookie("PMD_searchQuery");
-      presenceData.details = `Searching for ${searchQuery}`;
+      if (cookies) {
+        const searchQuery = getCookie("PMD_searchQuery");
+        presenceData.details = `Searching for ${searchQuery}`;
+      } else presenceData.details = "Searching";
       break;
     }
     case "/AdvanceSearch": {
@@ -76,27 +80,33 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Advanced Search";
 
-      if (comicName && comicName.value)
-        setCookie("PMD_searchQuery", `Looking for title: ${comicName.value}`, 1);
-      else if (include.length > 0) {
-        const searchQuery = `Searching for Genre: ${include[0].innerText} ${
-          include.length > 1 ? `and ${include.length - 1} more` : ""
-        }`;
-        setCookie("PMD_searchQuery", searchQuery, 1);
-      } else if (exclude.length > 0) {
-        const searchQuery = `Searching for all Genres except: ${
-          exclude[0].innerText
-        } ${exclude.length > 1 ? `and ${exclude.length - 1} more` : ""}`;
-        setCookie("PMD_searchQuery", searchQuery, 1);
-      } else if (status) {
-        setCookie(
-          "PMD_searchQuery",
-          `Looking for: ${status.selectedOptions[0].innerText} comics`,
-          1
-        );
-      } else {
-        [presenceData.details, presenceData.state] =
-          getCookie("PMD_searchQuery").split(":");
+      if (cookies) {
+        if (comicName && comicName.value) {
+          setCookie(
+            "PMD_searchQuery",
+            `Looking for title: ${comicName.value}`,
+            1
+          );
+        } else if (include.length > 0) {
+          const searchQuery = `Searching for Genre: ${include[0].innerText} ${
+            include.length > 1 ? `and ${include.length - 1} more` : ""
+          }`;
+          setCookie("PMD_searchQuery", searchQuery, 1);
+        } else if (exclude.length > 0) {
+          const searchQuery = `Searching for all Genres except: ${
+            exclude[0].innerText
+          } ${exclude.length > 1 ? `and ${exclude.length - 1} more` : ""}`;
+          setCookie("PMD_searchQuery", searchQuery, 1);
+        } else if (status) {
+          setCookie(
+            "PMD_searchQuery",
+            `Looking for: ${status.selectedOptions[0].innerText} comics`,
+            1
+          );
+        } else {
+          [presenceData.details, presenceData.state] =
+            getCookie("PMD_searchQuery").split(":");
+        }
       }
       break;
     }
@@ -139,7 +149,7 @@ presence.on("UpdateData", async () => {
                   url: location.href
                 },
                 {
-                  label: "Read Description",
+                  label: "Check Description",
                   url: title.href
                 }
               ];
