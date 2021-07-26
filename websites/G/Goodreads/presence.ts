@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${book} | by: ${author}`;
     }
   } else if (document.location.pathname.includes("/series")) {
-    let bookseries: string = document.querySelector("h1").innerText;
+    const bookseries: string = document.querySelector("h1").innerText;
     if ( bookseries === "Series") 
       presenceData.details = "Viewing all book series on Goodreads";
      else {
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("/user/show/")) {
     presenceData.details = "Browsing a profile:";
-    let user: string = document.getElementById("profileNameTopHeading").innerText;
+    const user: string = document.getElementById("profileNameTopHeading").innerText;
     if(document.querySelector("h1 a") === null) {
       //others profiles
       presenceData.state = user;
