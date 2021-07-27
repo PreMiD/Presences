@@ -6,7 +6,7 @@
   },
   "service": "Hypixel API Reborn",
   "description": {
-    "en": "Hypixel API • Reborn is feature-rich Hypixel API wrapper for Node.js.",
+    "en": "Hypixel API • Reborn is a feature-rich Hypixel API wrapper for Node.js.",
     "ru": "Hypixel API • Reborn - многофункциональный парсер Hypixel API для Node.js.",
     "nl": "Hypixel API • Reborn is de enige Hypixel API-wrapper voor Node.js / Typescript met intellisense-ondersteuning."
   },
