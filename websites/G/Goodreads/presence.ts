@@ -38,7 +38,8 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("/user/show/")) {
     presenceData.details = "Browsing a profile:";
-    const user: string = document.getElementById("profileNameTopHeading").innerText;
+    //Without reading ID for private profiles
+    const user: string = document.querySelector("h1").innerText;
     if(document.querySelector("h1 a") === null) {
       //others profiles
       presenceData.state = user;
