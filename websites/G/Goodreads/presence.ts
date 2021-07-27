@@ -1,7 +1,7 @@
 const presence = new Presence({clientId: "867525909204566056"});
 
 let book: string,
- author: string;
+  author: string;
  
 presence.on("UpdateData", async () => {
 
@@ -14,9 +14,9 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/home" ||
       document.location.pathname === "/" ) 
     presenceData.details = "Browsing homepage";
-   else if (document.location.pathname === "/book") 
+  else if (document.location.pathname === "/book") 
     presenceData.details = "Browsing books";
-   else if (document.location.pathname.includes("/book/show/")) {
+  else if (document.location.pathname.includes("/book/show/")) {
     // beta layout conditional
     presenceData.details = "Browsing a book:";
     if (document.getElementById("bookTitle") === null) {
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     const bookseries: string = document.querySelector("h1").innerText;
     if ( bookseries === "Series") 
       presenceData.details = "Viewing all book series on Goodreads";
-     else {
+    else {
       presenceData.details = "Viewing a book series:";
       presenceData.state = bookseries;
     }
@@ -57,25 +57,25 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector("h1").innerText;
   } else if (document.location.pathname.includes("/topic")) 
     presenceData.details = "Browsing discussions";
-   else if (document.location.pathname.includes("/review/edit/")) {
+  else if (document.location.pathname.includes("/review/edit/")) {
     book = document.querySelector("a.bookTitle").innerHTML;
     presenceData.details = "Writing a book review...";
     presenceData.smallImageKey = "writing";
     presenceData.smallImageText = book;
   } else if(document.location.pathname.includes("/review/list/")) 
     presenceData.details = "Browsing bookshelves";
-   else if (document.location.pathname.includes("/review/show")) {
+  else if (document.location.pathname.includes("/review/show")) {
     presenceData.details = "Reading a review...";
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = "On Goodreads";
   } else if(document.location.pathname.includes("/recommendations")) 
     presenceData.details = "Browsing recommendations";
-   else if(document.location.pathname.includes("/challenges") ||
+  else if(document.location.pathname.includes("/challenges") ||
   document.location.pathname.includes("/user_challenges")) 
     presenceData.details = "Viewing reading challenge";
-   else if(document.location.pathname.includes("/quotes")) 
+  else if(document.location.pathname.includes("/quotes")) 
     presenceData.details = "Browsing quotes";
-   else if(document.location.pathname.includes("/search")) {
+  else if(document.location.pathname.includes("/search")) {
     presenceData.details = "Searching for a book...";
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "On Goodreads";
