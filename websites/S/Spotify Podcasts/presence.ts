@@ -87,16 +87,23 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "spotify"
     },
-    albumCover = Array.from(document.querySelectorAll("a")).find(
-      (a) => a.dataset?.testid === "cover-art-link"
-    ) || Array.from(document.querySelectorAll("a")).find(
-      (a) => a.dataset?.testid === "context-link"
-    );
+    albumCover =
+      Array.from(document.querySelectorAll("a")).find(
+        (a) => a.dataset?.testid === "cover-art-link"
+      ) ||
+      Array.from(document.querySelectorAll("a")).find(
+        (a) => a.dataset?.testid === "context-link"
+      );
 
   let podcast = false,
     searching = false;
 
-  if (albumCover !== null && (albumCover.href.includes("/show/") || albumCover.href.includes("/episode/"))) podcast = true;
+  if (
+    albumCover !== null &&
+    (albumCover.href.includes("/show/") ||
+      albumCover.href.includes("/episode/"))
+  )
+    podcast = true;
 
   if (!podcast) {
     if (time) presenceData.startTimestamp = browsingStamp;
@@ -238,9 +245,10 @@ presence.on("UpdateData", async () => {
     let pause: boolean;
 
     if (
-      (document.querySelector("div.player-controls__buttons")
-        .children[1] as HTMLButtonElement).dataset.testid ===
-      "control-button-play"
+      (
+        document.querySelector("div.player-controls__buttons")
+          .children[1] as HTMLButtonElement
+      ).dataset.testid === "control-button-play"
     )
       pause = true;
     else pause = false;
