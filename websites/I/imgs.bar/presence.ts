@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const title = document.title,
+  const {title} = document,
     path = document.location.pathname,
 
     presenceData: PresenceData = {
@@ -18,8 +18,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "A private file host";
       break;
     case "/dashboard": {
-      presenceData.startTimestamp = Date.now()
-      presenceData.details = "Viewing the gallery"
+      presenceData.startTimestamp = Date.now();
+      presenceData.details = "Viewing the gallery";
       break;
     }
     case "/settings": {
@@ -40,10 +40,10 @@ presence.on("UpdateData", async () => {
       } else if (fakeUrlManager && fakeUrlManager.parentElement.style.display !== "none") {
         presenceData.startTimestamp = Date.now();
         presenceData.state = "Editing Fake URL";
-      } else {
+      } else 
         presenceData.startTimestamp = Date.now();
         // presenceData.state = "Viewing their settings";
-      }
+      
       break;
     }
     case "/settings/domains": {
@@ -72,13 +72,13 @@ presence.on("UpdateData", async () => {
     default:
       presenceData.state = "Viewing imgs.bar";
   }
-  if (!isNaN(parseInt(path.charAt(path.length - 1), 10))) {
+  if (!isNaN(parseInt(path.charAt(path.length - 1), 10))) 
     presenceData.state = `Viewing ${document.getElementsByClassName("title___aqmzM")[0].innerHTML}'s profile`;
-  }
+  
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
