@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = (await strings).viewPage;
       presenceData.state = videoData.dimension1;
     }
-  } else if (document.location.search) {
+  } else if (document.querySelector("input#search") && location.search) {
     const searchQuery = (
       document.querySelector("input#search") as HTMLInputElement
     ).value;
