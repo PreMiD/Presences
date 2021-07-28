@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: timestampe
-  },
+      largeImageKey: "logo",
+      startTimestamp: timestampe
+    },
     pathnames = location.pathname,
     [, , , , , urlSplit] = document.URL.split("/"),
     decodeURL = decodeURIComponent(urlSplit);
@@ -81,7 +81,5 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
-    presence.setActivity(presenceData);
-  
+  } else presence.setActivity(presenceData);
 });
