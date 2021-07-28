@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Flame",
+    "id": "844231069988814918"
+  },
+  "url": "imgs.bar",
+  "description": {
+    "en": "imgs.bar, the superior image host."
+  },
+  "service": "Imgs.bar",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/RkQlYWr.png",
+  "thumbnail": "https://i.imgur.com/6D33QWu.jpg",
+  "color": "#58b9ff",
+  "tags": ["imgs-bar","image","hosting", "sharex", "host"],
+  "category": "other"
+}
