@@ -1,14 +1,15 @@
 const presence = new Presence({clientId: "867525909204566056"});
 
 let book: string,
-  author: string;
- 
+  author: string,
+  timeElapsed: number = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     largeImageKey: "goodreads",
     details: "Browsing Goodreads",
-    startTimestamp: Math.floor(Date.now() / 1000)
+    startTimestamp: timeElapsed
   };
 
   if (document.location.pathname === "/home" ||
@@ -18,7 +19,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing books";
   else if (document.location.pathname.includes("/book/show/")) {
     // beta layout conditional
-    presenceData.details = "Browsing a book:";
+    presenceData.details = "Viewing a book:";
     if (document.getElementById("bookTitle") === null) {
       book = document.querySelector("h1").innerText;
       author = document.querySelector("span.ContributorLink__name").textContent;
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = bookseries;
     }
   } else if (document.location.pathname.includes("/user/show/")) {
-    presenceData.details = "Browsing a profile:";
+    presenceData.details = "Viewing a profile:";
     //Without reading ID for private profiles
     const user: string = document.querySelector("h1").innerText;
     if(document.querySelector("h1 a") === null) {
