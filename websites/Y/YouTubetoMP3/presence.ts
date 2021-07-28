@@ -1,4 +1,3 @@
-  
 const presence = new Presence({
     clientId: "865963561889169408" 
 });
@@ -42,5 +41,5 @@ const presence = new Presence({
         presenceData.details = `Downloading.. ${title[0].textContent}`;
         presence.setActivity(presenceData);
     } else 
-    presence.setActivity(presenceData)
+    presence.setActivity(presenceData);
 });
