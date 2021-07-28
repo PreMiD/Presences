@@ -1,8 +1,8 @@
-const presence = new Presence({clientId: "867525909204566056"});
+const presence = new Presence({clientId: "867525909204566056"}),
+  timeElapsed: number = Math.floor(Date.now() / 1000);
 
 let book: string,
-  author: string,
-  timeElapsed: number = Math.floor(Date.now() / 1000);
+  author: string;
 
 presence.on("UpdateData", async () => {
 
@@ -21,16 +21,16 @@ presence.on("UpdateData", async () => {
     // beta layout conditional
     presenceData.details = "Viewing a book:";
     if (document.getElementById("bookTitle") === null) {
-      book = document.querySelector("h1").innerText;
+      book = document.querySelector("h1").textContent;
       author = document.querySelector("span.ContributorLink__name").textContent;
       presenceData.state = `${book} | by: ${author}`;
     } else{
-      book = document.getElementById("bookTitle").innerText;
+      book = document.getElementById("bookTitle").textContent;
       author = document.querySelector(".authorName").textContent;
       presenceData.state = `${book} | by: ${author}`;
     }
   } else if (document.location.pathname.includes("/series")) {
-    const bookseries: string = document.querySelector("h1").innerText;
+    const bookseries: string = document.querySelector("h1").textContent;
     if ( bookseries === "Series") 
       presenceData.details = "Viewing all book series on Goodreads";
     else {
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/user/show/")) {
     presenceData.details = "Viewing a profile:";
     //Without reading ID for private profiles
-    const user: string = document.querySelector("h1").innerText;
+    const user: string = document.querySelector("h1").textContent;
     if(document.querySelector("h1 a") === null) {
       //others profiles
       presenceData.state = user;
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = author;
   } else if (document.location.pathname.includes("/group/show/")) {
     presenceData.details = "Viewing a group:";
-    presenceData.state = document.querySelector("h1").innerText;
+    presenceData.state = document.querySelector("h1").textContent;
   } else if (document.location.pathname.includes("/topic")) 
     presenceData.details = "Browsing discussions";
   else if (document.location.pathname.includes("/review/edit/")) {
