@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
     { pathname } = location,
     buttons: boolean = await presence.getSetting("buttons");
 
@@ -49,8 +49,8 @@ presence.on("UpdateData", async () => {
     pathname.startsWith("/bibles/verses")
   ) {
     const chapter = document.querySelector<HTMLLIElement>(
-      "div.sm2-playlist > div > ul > li"
-    ),
+        "div.sm2-playlist > div > ul > li"
+      ),
       player = document.querySelector<HTMLDivElement>(".sm2-bar-ui");
     if (chapter) {
       presenceData.details = "Listening to";
