@@ -37,6 +37,7 @@ presence.on("iFrameData", async (data: {currentTime: number, timeEnd: number, pa
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
+    epNumber = page.slice(page.length - 5).replace(/^\D+/g, ""),
     animeName = document.querySelector(
       "#body > div > div > div > div > section > div > h1"
     ) as HTMLElement,
@@ -50,8 +51,13 @@ presence.on("UpdateData", async () => {
     data.details = pages[page];
     data.state = "Searching animes";
   } else if (page.includes("/anime")) {
-    data.details = pages["/anime"];
-    data.state = `Watching ${animeName.textContent}`;
+    data.details = `Watching ${animeName.textContent}`;
+
+    if (epNumber === "")
+      data.state = "Full episode";
+    else 
+      data.state = `Episode ${epNumber}`;
+
     if (!paused) {
       data.smallImageKey = "play";
       [data.startTimestamp, data.endTimestamp] = timestamps;
@@ -63,7 +69,7 @@ presence.on("UpdateData", async () => {
     }
     data.buttons = [
       {
-        label: "Watch it too!",
+        label: "Watch Episode",
         url: `http://animesuge.io${page}`
       }
     ];
