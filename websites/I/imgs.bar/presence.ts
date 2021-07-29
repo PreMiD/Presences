@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing their account";
         presenceData.startTimestamp = Date.now();
         break;
-    case !isNaN(parseInt(path.charAt(path.length - 1))):
+    } else if (!isNaN(parseInt(path.charAt(path.length - 1)))) {
         presenceData.details = "";
         presenceData.state = `Viewing ${document.getElementsByClassName("title___aqmzM")[0].innerHTML}"s profile`;
         presenceData.startTimestamp = Date.now();
