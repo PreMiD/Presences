@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
   if (!isNaN(parseInt(path.charAt(path.length - 1), 10))) 
     presenceData.state = `Viewing ${document.getElementsByClassName("title___aqmzM")[0].innerHTML}'s profile`;
   
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
