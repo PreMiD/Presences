@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const title = document.title,
+  const {title} = document,
     path = document.location.pathname,
 
    presenceData: PresenceData = {
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-  } else {
+  } else 
       presence.setActivity(presenceData);
-  }
+  
 });
