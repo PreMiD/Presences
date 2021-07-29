@@ -3,13 +3,13 @@
   "service": "Goodreads",
   "author": {
     "name": "ThiaudioTT3.2V6BITURBO",
-    "id": "867435320219533363"
+    "id": "258926263132094464"
   },
   "category": "other",
   "logo": "https://i.imgur.com/DtHgzGt.png",
-  "thumbnail": "https://i.imgur.com/oecqx3C.png",
-  "version": "1.0.0",
-  "color": "#ebe8d7",
+  "thumbnail": "https://i.imgur.com/susc3Ij.png",
+  "version": "1.0.1",
+  "color": "#b5ae84",
   "tags": [
     "books"
   ],
