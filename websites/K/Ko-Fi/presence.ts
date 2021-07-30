@@ -78,9 +78,8 @@ presence.on("UpdateData", () => {
           )
           .textContent
           .trim(),
-        [ URLSplit ] = document.location.pathname.split("/"),
-        splitURL = URLSplit[2],
-        URL = `https://ko-fi.com/s/${splitURL}?ref=premid_discord_presence`;
+        [ URLSplit ] = document.location.pathname.split("/")[2],
+        URL = `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = `Viewing ${shopItem}`;
       presenceData.state = `By ${shopOwner}`;
       presenceData.buttons = [{ label: "View Item", url: URL }];
@@ -106,9 +105,8 @@ presence.on("UpdateData", () => {
           )
           .textContent
           .trim(),
-        [ URLSplit ] = document.location.pathname.split("/"),
-        splitURL = URLSplit[2],
-        URL = `https://ko-fi.com/post/${splitURL}?ref=premid_discord_presence`;
+        [ URLSplit ] = document.location.pathname.split("/")[2],
+        URL = `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = "Viewing a post:";
       presenceData.state = postName;
       presenceData.buttons = [{ label: "View Post", url: URL }];
