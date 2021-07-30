@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: "778715860638367804" }),
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing",
-    anime: "general.anime",
+    anime: "general.anime"
   });
 
 function getTimestamps(
@@ -26,7 +26,7 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "anizm",
+      largeImageKey: "anizm"
     },
     title = document.querySelector(
       "html > body > main > #pageContent > div > h2 > a"
@@ -97,12 +97,12 @@ presence.on("UpdateData", async () => {
     data.buttons = [
       {
         label: "Bölümü İzle",
-        url: document.URL.split("&")[0],
+        url: document.URL.split("&")[0]
       },
       {
         label: (await strings).anime,
-        url: animeSeries,
-      },
+        url: animeSeries
+      }
     ];
   }
   //Series part
@@ -111,8 +111,8 @@ presence.on("UpdateData", async () => {
     data.buttons = [
       {
         label: (await strings).anime,
-        url: animeSeries,
-      },
+        url: animeSeries
+      }
     ];
   }
   //Home page part
