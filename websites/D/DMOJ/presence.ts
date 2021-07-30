@@ -16,7 +16,7 @@ presence.on("UpdateData", () => {
 
   if (url.includes("post")) {
     
-    const postName = presenceData.state = document.querySelector("#content > h2").textContent.trim(),
+    const postName = document.querySelector("#content > h2").textContent.trim(),
       [,,postCode] = url,
       postURL = `https://dmoj.ca/post/${postCode}`;
 
