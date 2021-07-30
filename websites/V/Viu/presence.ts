@@ -43,7 +43,6 @@ presence.on("UpdateData", async () => {
   presenceData.largeImageKey = logos[PresenceLogo];
 
   if (oldPath !== document.location.pathname) {
-    oldPath = document.location.pathname;
     episodeData = null;
     title = null;
   }
@@ -144,7 +143,7 @@ presence.on("UpdateData", async () => {
           document.querySelectorAll(".CN-episodeCard")
         ).find(
           (x) =>
-            x.querySelector("img").alt ===
+            x.querySelector("img")?.alt ===
             document.querySelector(".ep_title").textContent
         );
 
