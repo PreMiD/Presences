@@ -77,8 +77,8 @@ presence.on("UpdateData", () => {
             "#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > div > a > div > span:nth-child(1)"
           )
           .textContent
-          .trim(),
-        [ URLSplit ] = document.location.pathname.split("/")[2],
+          .trim();
+        const [ URLSplit ] = document.location.pathname.split("/")[2],
         URL = `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = `Viewing ${shopItem}`;
       presenceData.state = `By ${shopOwner}`;
@@ -104,8 +104,8 @@ presence.on("UpdateData", () => {
             "#body-content > div > div.wrapper.wrapper-content.article > div > div > div > div > div:nth-child(4) > div > h1"
           )
           .textContent
-          .trim(),
-        [ URLSplit ] = document.location.pathname.split("/")[2],
+          .trim();
+        const [ URLSplit ] = document.location.pathname.split("/")[2],
         URL = `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = "Viewing a post:";
       presenceData.state = postName;
