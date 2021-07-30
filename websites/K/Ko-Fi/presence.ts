@@ -78,8 +78,8 @@ presence.on("UpdateData", () => {
           )
           .textContent
           .trim(),
-        [ URLSplit ] = document.location.pathname.split("/"),
-        URL = `https://ko-fi.com/s/${URLSplit[2]}?ref=premid_discord_presence`;
+        [, , URLSplit ] = document.location.pathname.split("/"),
+        URL = `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = `Viewing ${shopItem}`;
       presenceData.state = `By ${shopOwner}`;
       presenceData.buttons = [{ label: "View Item", url: URL }];
