@@ -66,7 +66,9 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing Ko-Fi's About Page";
   else if (document.location.pathname.toLowerCase().startsWith("/s/")) {
     try {
-      const shopItem = document
+      const [ URLSplit ] = document.location.pathname.split("/")[2],
+      URL = `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`,
+      shopItem = document
           .querySelector(
             "#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > span"
           )
@@ -78,8 +80,6 @@ presence.on("UpdateData", () => {
           )
           .textContent
           .trim();
-        let [ URLSplit ] = document.location.pathname.split("/")[2],
-        URL = `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = `Viewing ${shopItem}`;
       presenceData.state = `By ${shopOwner}`;
       presenceData.buttons = [{ label: "View Item", url: URL }];
@@ -99,14 +99,14 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.toLowerCase().startsWith("/post")) {
     presenceData.details = "Viewing a post.";
     try {
-      const postName = document
+      const [ URLSplit ] = document.location.pathname.split("/")[2],
+      URL = `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`,
+      postName = document
           .querySelector(
             "#body-content > div > div.wrapper.wrapper-content.article > div > div > div > div > div:nth-child(4) > div > h1"
           )
           .textContent
           .trim();
-        let [ URLSplit ] = document.location.pathname.split("/")[2],
-        URL = `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = "Viewing a post:";
       presenceData.state = postName;
       presenceData.buttons = [{ label: "View Post", url: URL }];
