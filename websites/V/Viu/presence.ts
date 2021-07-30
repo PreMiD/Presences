@@ -19,14 +19,14 @@ const presence = new Presence({
       },
       await presence.getSetting("lang")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingStamp = Math.floor(Date.now() / 1000),
+  oldPath = document.location.pathname;
 
 let strings = getStrings(),
   oldLang: string = null,
   videoData: VideoData = null,
   episodeData: EpisodeData = null,
-  title: string = null,
-  oldPath = document.location.pathname;
+  title: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
