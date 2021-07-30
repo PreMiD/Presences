@@ -265,9 +265,13 @@ presence.on("UpdateData", async () => {
     }
     title = Array.from(document.querySelectorAll("a")).find(
       (a) => a.dataset?.testid === "nowplaying-track-link"
+    )?.textContent || Array.from(document.querySelectorAll("a")).find(
+      (a) => a.dataset?.testid === "context-item-link"
     )?.textContent;
     uploader = Array.from(document.querySelectorAll("div")).find(
       (a) => a.dataset?.testid === "track-info-artists"
+    )?.textContent || Array.from(document.querySelectorAll("a")).find(
+      (a) => a.dataset?.testid === "context-item-info-show"
     )?.textContent;
     presenceData.details = title;
     presenceData.state = uploader;
