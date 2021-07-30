@@ -6,7 +6,7 @@ const presence = new Presence({
     let expires: string;
     if (days) {
       const date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       expires = `; expires=${date.toUTCString()}`;
     } else expires = "";
 
@@ -26,9 +26,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "rco_logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "rco_logo",
+      startTimestamp: browsingStamp
+    },
     { pathname } = location,
     input = document.querySelector<HTMLInputElement>("input#keyword"),
     buttons: boolean = await presence.getSetting("buttons"),

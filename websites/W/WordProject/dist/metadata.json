@@ -8,9 +8,13 @@
   "category": "other",
   "logo": "https://i.imgur.com/mydYezY.png",
   "thumbnail": "https://i.imgur.com/QteJu92.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#aa2023",
-  "tags": ["bible", "bible-verses", "audio-bible"],
+  "tags": [
+    "bible",
+    "bible-verses",
+    "audio-bible"
+  ],
   "url": "www.wordproject.org",
   "description": {
     "en": "The Holy Bible International - in the major languages of the world"
