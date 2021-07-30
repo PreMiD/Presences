@@ -91,7 +91,8 @@ presence.on("UpdateData", async () => {
   }
 
   //Episode part
-  if (title && episode) {
+  if (title && episode)
+  {
     data.details = title.textContent;
     data.state = episode.textContent.split("/ ").slice(1).join(" ");
     data.buttons = [
@@ -106,7 +107,8 @@ presence.on("UpdateData", async () => {
     ];
   }
   //Series part
-  else if (title) {
+  else if (title)
+  {
     data.details = title.textContent;
     data.buttons = [
       {
@@ -133,9 +135,12 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/girisyap") ||
     document.location.pathname.includes("/uyeol") ||
     window.location.href.indexOf("?sayfa=") > 1
-  ) {
+  ) 
+  {
     data.startTimestamp = startTimestamp;
-  } else {
+  } 
+  else 
+  {
     data.details = (await strings).browsing;
     data.startTimestamp = startTimestamp;
   }
