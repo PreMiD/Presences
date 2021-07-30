@@ -11,6 +11,8 @@ const presence = new Presence({
         searchFor: "general.searchFor",
         watchVideo: "general.buttonWatchVideo",
         viewPage: "general.viewPage",
+        viewingShow: "general.viewShow",
+        viewingMovie: "general.viewMovie",
         watchMovie: "general.buttonViewMovie",
         watchEpisode: "general.buttonViewEpisode",
         searching: "general.search"
@@ -21,14 +23,17 @@ const presence = new Presence({
 
 let strings = getStrings(),
   oldLang: string = null,
-  videoData: VideoData = null;
+  videoData: VideoData = null,
+  episodeData: EpisodeData = null,
+  title: string = null,
+  oldPath = document.location.pathname;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      details: (await strings).browse,
-      smallImageKey: "reading",
-      startTimestamp: browsingStamp
-    },
+    details: (await strings).browse,
+    smallImageKey: "reading",
+    startTimestamp: browsingStamp
+  },
     newLang = await presence.getSetting("lang"),
     buttonsOn = await presence.getSetting("buttons"),
     searchQueryOn = await presence.getSetting("searchQ"),
@@ -37,20 +42,30 @@ presence.on("UpdateData", async () => {
 
   presenceData.largeImageKey = logos[PresenceLogo];
 
+  if (oldPath !== document.location.pathname) {
+    oldPath = document.location.pathname;
+    episodeData = null;
+    title = null;
+  }
+
   if (!videoData) videoData = await presence.getPageletiable("GA_DIMENSIONS");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   if (document.location.pathname.includes("/vod/")) {
-    const video = document.querySelector("video");
+    const video = document.querySelector("video"),
+      isMovie = (
+        document.getElementsByName("keywords")[0] as HTMLMetaElement
+      ).content
+        .split(", ")
+        .some((keyword) => keyword.toLowerCase().includes("movie"));
 
     if (video) {
-      const timestamps = presence.getTimestampsfromMedia(video),
+      const timestamp = presence.getTimestampsfromMedia(video).pop(),
         episode = videoData.dimension2,
         episodeName = document.querySelector(
           "h3.video-update-epi-name"
@@ -64,21 +79,16 @@ presence.on("UpdateData", async () => {
         isTrailer = videoData.dimension1.match(/(trailer?:? )/i) ? true : false,
         isHighlight = videoData.dimension1.match(/(highlight?:? )/i)
           ? true
-          : false,
-        isMovie = (
-          document.getElementsByName("keywords")[0] as HTMLMetaElement
-        ).content
-          .split(", ")
-          .some((keyword) => keyword.toLowerCase().includes("movie"));
+          : false;
 
       presenceData.details = videoData.dimension1.replace(
         /(trailer?:? |highlight?:? )/i,
         ""
       );
 
-      if (isMovie) {
+      if (isMovie)
         presenceData.state = "Movie";
-      } else if (isHighlight) {
+      else if (isHighlight) {
         presenceData.state = `Highlight • EP.${episode}${
           part ? ` • ${part[0]} ` : ""
         }${hasEpName ? ` • ${episodeName}` : ""}`;
@@ -97,8 +107,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = timestamp;
 
       if (buttonsOn) {
         presenceData.buttons = [
@@ -116,12 +125,87 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = isMovie
+        ? (await strings).viewingMovie
+        : (await strings).viewingShow;
+
       presenceData.state = videoData.dimension1;
     }
-  } else if (document.querySelector("input#search") && document.location.search) {
+  } else if (document.location.pathname.match(/[/]video-.*/)) {
+    const video = document.querySelector("video"),
+      isMovie = !document.querySelector('[data-testid="Tab1"]');
+    let unknownType = false;
+
+    if (video) {
+      const timestamp = presence.getTimestampsfromMedia(video).pop();
+
+      if (!episodeData && !isMovie) {
+        const episodeCard = Array.from(
+          document.querySelectorAll(".CN-episodeCard")
+        ).find(
+          (x) =>
+            x.querySelector("img").alt ===
+            document.querySelector(".ep_title").textContent
+        );
+
+        if (!episodeCard) return;
+        episodeData = {};
+
+        episodeData.number =
+          episodeCard.querySelector(".tag--count.for--SMdesktop")
+            ?.textContent ?? "";
+        episodeData.title = document
+          .querySelector(".ep_title")
+          .textContent.split(" - ")
+          .pop();
+        [title] = document.querySelector(".ep_title").textContent.split(" - ");
+      }
+
+      if (isMovie) title = document.querySelector(".ep_title").textContent;
+      if (episodeData && !episodeData.number) unknownType = true;
+
+      presenceData.details = title;
+
+      if (isMovie) presenceData.state = "Movie";
+      else if (unknownType) presenceData.state = episodeData.title;
+      else
+        presenceData.state = `EP.${episodeData.number} • ${episodeData.title}`;
+
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
+
+      presenceData.endTimestamp = timestamp;
+
+      if (buttonsOn) {
+        presenceData.buttons = [
+          {
+            label: isMovie
+              ? (await strings).watchMovie
+              : (await strings).watchEpisode,
+            url: document.baseURI
+          }
+        ];
+      }
+
+      if (video.paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
+    } else {
+      presenceData.details = isMovie
+        ? (await strings).viewingMovie
+        : (await strings).viewingShow;
+      presenceData.state = document.querySelector(".ep_title").textContent;
+    }
+  } else if (
+    (document.querySelector("input#search") && document.location.search) ||
+    document.querySelector('[name="searchInput"]')
+  ) {
     const searchQuery = (
-      document.querySelector("input#search") as HTMLInputElement
+      (document.querySelector("input#search") ||
+        document.querySelector('[name="searchInput"]')) as HTMLInputElement
     ).value;
 
     presenceData.details = (await strings).searchFor;
@@ -141,4 +225,9 @@ presence.on("UpdateData", async () => {
 interface VideoData {
   dimension1?: string;
   dimension2?: string;
+}
+
+interface EpisodeData {
+  title?: string;
+  number?: string;
 }
