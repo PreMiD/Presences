@@ -15,7 +15,7 @@ presence.on("UpdateData", () => {
       .querySelector(
         "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
       )
-      .textContent.split("Jump to")[0]
+      .textContent
       .trim();
     presenceData.details = "Managing the settings of:";
     presenceData.state = title;
@@ -70,16 +70,16 @@ presence.on("UpdateData", () => {
           .querySelector(
             "#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > span"
           )
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         shopOwner = document
           .querySelector(
             "#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > div > a > div > span:nth-child(1)"
           )
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
-        URLSplit = document.location.pathname.split("/"),
-        URL = `https://ko-fi.com/s/${URLSplit[2]}?ref=premid_discord_presence`;
+        URLSplit = document.location.pathname.split("/")[2],
+        URL = `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = `Viewing ${shopItem}`;
       presenceData.state = `By ${shopOwner}`;
       presenceData.buttons = [{ label: "View Item", url: URL }];
@@ -103,10 +103,10 @@ presence.on("UpdateData", () => {
           .querySelector(
             "#body-content > div > div.wrapper.wrapper-content.article > div > div > div > div > div:nth-child(4) > div > h1"
           )
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
-        URLSplit = document.location.pathname.split("/"),
-        URL = `https://ko-fi.com/post/${URLSplit[2]}?ref=premid_discord_presence`;
+        URLSplit = document.location.pathname.split("/")[2],
+        URL = `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = "Viewing a post:";
       presenceData.state = postName;
       presenceData.buttons = [{ label: "View Post", url: URL }];
@@ -119,7 +119,7 @@ presence.on("UpdateData", () => {
         .querySelector(
           "#body-content > div > div > div:nth-child(2) > div > a > name"
         )
-        .textContent.split("Jump to")[0]
+        .textContent
         .trim();
       presenceData.details = "Viewing an album.";
       if (user !== "undefined") {
@@ -137,7 +137,7 @@ presence.on("UpdateData", () => {
           .querySelector(
             "#profile-header-v2 > div > div.kfds-lyt-column.kfds-lyt-width-100.kfds-c-header-showmobile-at-736 > div.kfds-lyt-row-start.kfds-lyt-width-100 > div > div.kfds-font-size-22.kfds-font-bold > span"
           )
-          .textContent.split("Jump to")[0]
+          .textContent
           .trim(),
         userSplit = document.location.pathname.split("/");
       // userFixed = user.toLowerCase().split(" ").join("");
