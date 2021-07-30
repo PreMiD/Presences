@@ -1,10 +1,9 @@
-const presence = new Presence({
-    clientId: "778715860638367804"
-  }),
+const presence = new Presence({ clientId: "778715860638367804" }),
   strings = presence.getStrings({
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
-    browsing: "presence.activity.browsing"
+    browsing: "presence.activity.browsing",
+    anime: "general.anime",
   });
 
 function getTimestamps(
@@ -27,14 +26,18 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "anizm"
+      largeImageKey: "anizm",
     },
     title = document.querySelector(
-      "html > body > font > main > #pageContent > div > h2 > a"
+      "html > body > main > #pageContent > div > h2 > a"
     ),
     episode = document.querySelector(
-      "html > body > font > main > #pageContent > div > h2 > span"
-    );
+      "html > body > main > #pageContent > div > h2.anizm_pageTitle > span"
+    ),
+    animeSeries =
+      document
+        .querySelector("#pageContent > div > h2 > a")
+        ?.getAttribute("href") || document.URL;
 
   if (!title || !episode) {
     video = null;
@@ -49,6 +52,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/FanSil") ||
     document.location.pathname.includes("/VideoEkle") ||
     document.location.pathname.includes("/Toplu") ||
+    document.location.pathname.includes("/HyperVideo") ||
     document.location.pathname.includes("/yetkiliislemleri")
   ) {
     tags = document.querySelector(
@@ -85,10 +89,31 @@ presence.on("UpdateData", async () => {
     data.details = (await strings).browsing;
     data.state = "Sayfa: " + pageNum;
   }
+
   //Episode part
   if (title && episode) {
     data.details = title.textContent;
     data.state = episode.textContent.split("/ ").slice(1).join(" ");
+    data.buttons = [
+      {
+        label: "Bölümü İzle",
+        url: document.URL.split("&")[0],
+      },
+      {
+        label: (await strings).anime,
+        url: animeSeries,
+      },
+    ];
+  }
+  //Series part
+  else if (title) {
+    data.details = title.textContent;
+    data.buttons = [
+      {
+        label: (await strings).anime,
+        url: animeSeries,
+      },
+    ];
   }
   //Home page part
   else if (
@@ -100,6 +125,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/FanSil") ||
     document.location.pathname.includes("/VideoEkle") ||
     document.location.pathname.includes("/Toplu") ||
+    document.location.pathname.includes("/HyperVideo") ||
     document.location.pathname.includes("/yetkiliislemleri") ||
     document.location.pathname.includes("/profil") ||
     document.location.pathname.includes("/ayarlar") ||
