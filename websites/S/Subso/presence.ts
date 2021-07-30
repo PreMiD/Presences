@@ -55,12 +55,17 @@ presence.on("UpdateData", async () => {
 					} else {
 						presenceData.details = "Viewing a creator:";
 						presenceData.state = document.title.split(" — All their content in one place on Subso")[0];
+						presenceData.buttons = [{
+							label: "View Creator",
+							url: window.location.href
+						}]
 					}
 				} else if (window.location.pathname.startsWith("/settings/")) {
 					const tab = window.location.pathname.split("/settings/")[1].replace("watchlater", "Watch Later");
 					presenceData.details = "Settings:";
 					presenceData.state = tab.charAt(0).toUpperCase() + tab.slice(1);
 				}
+				break;
 		}
 	} else if (window.location.host === "creators.sub.so") {
 		presenceData.details = "Creator Dashboard"
