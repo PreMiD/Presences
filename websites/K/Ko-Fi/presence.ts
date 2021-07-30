@@ -105,8 +105,8 @@ presence.on("UpdateData", () => {
           )
           .textContent
           .trim(),
-        [ URLSplit ] = document.location.pathname.split("/"),
-        URL = `https://ko-fi.com/post/${URLSplit[2]}?ref=premid_discord_presence`;
+        [, , URLSplit ] = document.location.pathname.split("/"),
+        URL = `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`;
       presenceData.details = "Viewing a post:";
       presenceData.state = postName;
       presenceData.buttons = [{ label: "View Post", url: URL }];
