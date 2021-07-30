@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: "870727282405306368" });
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo"
-	}
+	};
 
 	if (window.location.host === "sub.so") {
 		presenceData.details = "Landing site";
@@ -54,11 +54,11 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Creator not found";
 					} else {
 						presenceData.details = "Viewing a creator:";
-						presenceData.state = document.title.split(" — All their content in one place on Subso")[0];
+						[presenceData.state] = document.title.split(" — All their content in one place on Subso");
 						presenceData.buttons = [{
 							label: "View Creator",
 							url: window.location.href
-						}]
+						}];
 					}
 				} else if (window.location.pathname.startsWith("/settings/")) {
 					const tab = window.location.pathname.split("/settings/")[1].replace("watchlater", "Watch Later");
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 				break;
 		}
 	} else if (window.location.host === "creators.sub.so") {
-		presenceData.details = "Creator Dashboard"
+		presenceData.details = "Creator Dashboard";
 		switch (window.location.pathname) {
 			case "/auth/login":
 				presenceData.state = "Login";
