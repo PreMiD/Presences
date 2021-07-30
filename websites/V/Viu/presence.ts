@@ -19,14 +19,14 @@ const presence = new Presence({
       },
       await presence.getSetting("lang")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingStamp = Math.floor(Date.now() / 1000),
+  oldPath = document.location.pathname;
 
 let strings = getStrings(),
   oldLang: string = null,
   videoData: VideoData = null,
   episodeData: EpisodeData = null,
-  title: string = null,
-  oldPath = document.location.pathname;
+  title: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -43,7 +43,6 @@ presence.on("UpdateData", async () => {
   presenceData.largeImageKey = logos[PresenceLogo];
 
   if (oldPath !== document.location.pathname) {
-    oldPath = document.location.pathname;
     episodeData = null;
     title = null;
   }
@@ -144,7 +143,7 @@ presence.on("UpdateData", async () => {
           document.querySelectorAll(".CN-episodeCard")
         ).find(
           (x) =>
-            x.querySelector("img").alt ===
+            x.querySelector("img")?.alt ===
             document.querySelector(".ep_title").textContent
         );
 
