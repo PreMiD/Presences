@@ -19,5 +19,6 @@
   "description": {
     "en": "Watch anime online cartoons Thai dubbed anime Thai subtitled anime latest episodes.",
     "th": "ดูอนิเมะออนไลน์ การ์ตูน อนิเมะพากย์ไทย อนิเมะซับไทย ตอนใหม่ล่าสุด"
-  }
+  },
+  "iframe": true
 }
