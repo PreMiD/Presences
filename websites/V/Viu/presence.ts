@@ -30,10 +30,10 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    details: (await strings).browse,
-    smallImageKey: "reading",
-    startTimestamp: browsingStamp
-  },
+      details: (await strings).browse,
+      smallImageKey: "reading",
+      startTimestamp: browsingStamp
+    },
     newLang = await presence.getSetting("lang"),
     buttonsOn = await presence.getSetting("buttons"),
     searchQueryOn = await presence.getSetting("searchQ"),
@@ -85,8 +85,7 @@ presence.on("UpdateData", async () => {
         ""
       );
 
-      if (isMovie)
-        presenceData.state = "Movie";
+      if (isMovie) presenceData.state = "Movie";
       else if (isHighlight) {
         presenceData.state = `Highlight • EP.${episode}${
           part ? ` • ${part[0]} ` : ""

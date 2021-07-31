@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "863949633009090580"
   }),
-  pages: {[k: string]: string} = {
+  pages: { [k: string]: string } = {
     "/anime": "Watching an anime",
     "/genre": "Searching by genre",
     "/search": "Searching anime by name",
@@ -11,7 +11,7 @@ const presence = new Presence({
     "/user/watchlist": "Looking at their watchlist",
     "/user/import": "Importing their MAL list to Animesuge!"
   },
-  pagesSearching: {[k:string]: string} = {
+  pagesSearching: { [k: string]: string } = {
     "/": "At the homepage",
     "/newest": "Searching for the newest animes",
     "/updated": "Searching for recently updated animes",
@@ -27,13 +27,14 @@ const presence = new Presence({
     "/upcoming": "Searching upcoming animes"
   };
 
-let timeEnd: number,
-  currentTime: number,
-  paused: boolean;
+let timeEnd: number, currentTime: number, paused: boolean;
 
-presence.on("iFrameData", async (data: {currentTime: number, timeEnd: number, paused: boolean}) => {
-  ({currentTime, timeEnd, paused} = data);
-});
+presence.on(
+  "iFrameData",
+  async (data: { currentTime: number; timeEnd: number; paused: boolean }) => {
+    ({ currentTime, timeEnd, paused } = data);
+  }
+);
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
@@ -45,7 +46,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "animesuge",
       startTimestamp: Math.floor(Date.now() / 1000)
     },
-    search: URLSearchParams = new URLSearchParams(document.location.search.substring(1)),
+    search: URLSearchParams = new URLSearchParams(
+      document.location.search.substring(1)
+    ),
     timestamps = presence.getTimestamps(currentTime, timeEnd);
   if (page in pagesSearching) {
     data.details = pages[page];
@@ -53,10 +56,8 @@ presence.on("UpdateData", async () => {
   } else if (page.includes("/anime")) {
     data.details = `Watching ${animeName.textContent}`;
 
-    if (epNumber === "")
-      data.state = "Full episode";
-    else 
-      data.state = `Episode ${epNumber}`;
+    if (epNumber === "") data.state = "Full episode";
+    else data.state = `Episode ${epNumber}`;
 
     if (!paused) {
       data.smallImageKey = "play";
@@ -76,7 +77,9 @@ presence.on("UpdateData", async () => {
   } else if (page.includes("/genre")) {
     const genre = page.slice("/genre/".length);
     data.details = pages["/genre"];
-    data.state = `Searching for ${genre.charAt(0).toUpperCase() + genre.slice(1)} Animes`;
+    data.state = `Searching for ${
+      genre.charAt(0).toUpperCase() + genre.slice(1)
+    } Animes`;
   } else if (page.includes("/search")) {
     data.details = pages[page];
     data.state = `Searching: "${search.get("keyword")}"`;
@@ -95,8 +98,7 @@ presence.on("UpdateData", async () => {
     const list = search.get("folder");
     data.details = pages[page];
     data.state = `At folder: ${list}`;
-    if (list === null)
-      data.state = "Looking at all animes in the watch list";
+    if (list === null) data.state = "Looking at all animes in the watch list";
   } else if (page === "/user/import") {
     data.details = pages[page];
     data.state = "Importing!";
@@ -104,6 +106,5 @@ presence.on("UpdateData", async () => {
     data.details = "Looking at an unknown page";
     data.state = "Unknown";
   }
-  if (data.details !== null && data.state !== null)
-    presence.setActivity(data);
+  if (data.details !== null && data.state !== null) presence.setActivity(data);
 });
