@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    smallImageKey: "icon",
-    smallImageText: "DMOJ: Modern Online Judge"
-  },
+      smallImageKey: "icon",
+      smallImageText: "DMOJ: Modern Online Judge"
+    },
     url = document.location.pathname.split("/");
 
   presenceData.startTimestamp = browsingStamp;
@@ -40,7 +40,10 @@ presence.on("UpdateData", () => {
       presenceData.largeImageKey = "submit";
     } else if (url.includes("submissions")) {
       const problemName = document
-          .querySelectorAll(".tabs > h2 > a")[document.querySelectorAll(".tabs > h2 > a").length - 1].textContent.trim(),
+          .querySelectorAll(".tabs > h2 > a")
+          [
+            document.querySelectorAll(".tabs > h2 > a").length - 1
+          ].textContent.trim(),
         problemSubmissionsURL = `${problemURL}/submissions/`;
 
       presenceData.details = "Viewing submissions to problem:";
@@ -52,7 +55,8 @@ presence.on("UpdateData", () => {
       });
     } else if (url.includes("rank")) {
       const problemName = document
-          .querySelector(".tabs > h2 > a").textContent.trim(),
+          .querySelector(".tabs > h2 > a")
+          .textContent.trim(),
         problemBestSubmissionsURL = `${problemURL}/rank/`;
 
       presenceData.details = "Viewing best submissions to problem:";
