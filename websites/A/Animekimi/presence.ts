@@ -167,8 +167,8 @@ if (path.hostname === "animekimi.com" || path.hostname.includes("www.")) {
 if (presenceData.details === null) {
   presence.setTrayTitle();
   presence.setActivity();
-} else {
+} else 
   presence.setActivity(presenceData);
   //console.log(presenceData);
-}
+
 });
