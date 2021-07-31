@@ -61,8 +61,8 @@ function Presence(d: string) {
 }
 
 // Presence
-if (path.hostname == "animekimi.com" || path.hostname.includes("www.")) {
-  if (document.location.pathname == "/") 
+if (path.hostname === "animekimi.com" || path.hostname.includes("www.")) {
+  if (document.location.pathname === "/") 
     Presence("อนิเมะอัพเดตล่าสุด");
    else if (path.pathname.includes("genre")) {
     Presence("ประเภท ");
@@ -164,11 +164,11 @@ if (path.hostname == "animekimi.com" || path.hostname.includes("www.")) {
   }
 }
 
-if (presenceData.details == null) {
+if (presenceData.details === null) {
   presence.setTrayTitle();
   presence.setActivity();
 } else {
   presence.setActivity(presenceData);
-  console.log(presenceData);
+  //console.log(presenceData);
 }
 });
