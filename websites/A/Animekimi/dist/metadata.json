@@ -1,0 +1,23 @@
+{
+  "service": "animekimi",
+  "author": {
+    "name": "Faelayis",
+    "id": "439582316873121793"
+  },
+  "category": "anime",
+  "logo": "https://www.google.com/s2/favicons?domain=https://animekimi.com/",
+  "thumbnail": "https://www.google.com/s2/favicons?domain=https://animekimi.com/",
+  "version": "1.0.0",
+  "color": "#e67e22",
+  "tags": [
+    "anime",
+    "videos",
+    "thai"
+  ],
+  "regExp": "([a-z0-9-]+[.])*animekimi[.]com[/]",
+  "url": "animekimi.com",
+  "description": {
+    "en": "Watch anime online cartoons Thai dubbed anime Thai subtitled anime latest episodes.",
+    "th": "ดูอนิเมะออนไลน์ การ์ตูน อนิเมะพากย์ไทย อนิเมะซับไทย ตอนใหม่ล่าสุด"
+  }
+}
