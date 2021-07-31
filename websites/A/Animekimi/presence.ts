@@ -105,9 +105,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      if (!video.paused) {
+      if (!video.paused) 
         [, presenceData.endTimestamp] = timestamps;
-      } else {
+       else {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
@@ -144,9 +144,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      if (!video.paused) {
+      if (!video.paused) 
         [, presenceData.endTimestamp] = timestamps;
-      }
+      
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "เลือกตอน ";
