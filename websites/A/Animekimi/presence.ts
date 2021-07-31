@@ -8,7 +8,7 @@ strings = presence.getStrings({
   browsing: "presence.activity.browsing",
 });
 
-var video = {
+let video = {
 current: 0,
 duration: 0,
 paused: true,
@@ -23,25 +23,25 @@ function getTimestamps(
 videoTime: number,
 videoDuration: number
 ): Array<number> {
-const startTime = Date.now();
-const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+const startTime = Date.now(),
+ endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
 return [Math.floor(startTime / 1000), endTime];
 }
 
 // Const thing
-const browsingStamp = Math.floor(Date.now() / 1000);
-const title =
+const browsingStamp = Math.floor(Date.now() / 1000),
+ title =
 document.querySelector("#contenedor > div.module > div.content > header > h1")
-  ?.textContent ?? "ไม่ทราบชื่อ";
-const titlemovies =
+  ?.textContent ?? "ไม่ทราบชื่อ",
+ titlemovies =
 document.querySelector("#single > div.content > div.sheader > div.data > h1")
-  ?.textContent ?? "ไม่ทราบชื่อ";
-const playvdo =
-document.querySelector("#info > h1")?.textContent ?? "ไม่ทราบชื่อ";
-const ep =
+  ?.textContent ?? "ไม่ทราบชื่อ",
+ playvdo =
+document.querySelector("#info > h1")?.textContent ?? "ไม่ทราบชื่อ",
+ ep =
 document.querySelector("#single > div.content > div.sheader > div.data > h1")
-  ?.textContent ?? "ไม่ทราบชื่อตอน";
-const path = document.location;
+  ?.textContent ?? "ไม่ทราบชื่อตอน",
+ path = document.location;
 
 presence.on(
 "iFrameData",
@@ -62,9 +62,9 @@ function Presence(d: string) {
 
 // Presence
 if (path.hostname == "animekimi.com" || path.hostname.includes("www.")) {
-  if (document.location.pathname == "/") {
+  if (document.location.pathname == "/") 
     Presence("อนิเมะอัพเดตล่าสุด");
-  } else if (path.pathname.includes("genre")) {
+   else if (path.pathname.includes("genre")) {
     Presence("ประเภท ");
     presenceData.state = title;
   } else if (path.pathname.includes("catalog")) {
@@ -97,12 +97,12 @@ if (path.hostname == "animekimi.com" || path.hostname.includes("www.")) {
       const moiveinfo = titlemovies.split("เดอะมูฟวี่");
       moive = moiveinfo.pop();
 
-      if (moive.includes("ซับไทย")) {
+      if (moive.includes("ซับไทย")) 
         moive = moive.replace("เดอะมูฟวี่ ซับไทย", "").trim();
-      } else if (moive.includes("พากย์ไทย")) {
+       else if (moive.includes("พากย์ไทย")) 
         moive = moive.replace("เดอะมูฟวี่ พากย์ไทย", "").trim();
-      }
-      moive = "เดอะมูฟวี่ " + moive;
+      
+      moive = `เดอะมูฟวี่ ${moive}`;
       presenceData.details = moive;
     }
     presenceData.smallImageKey = video.paused ? "pause" : "playing";
@@ -126,22 +126,22 @@ if (path.hostname == "animekimi.com" || path.hostname.includes("www.")) {
       const info = playvdo.split("ตอนที่");
       episode = info.pop();
 
-      if (episode.includes("ซับไทย")) {
+      if (episode.includes("ซับไทย")) 
         episode = episode.replace("ซับไทย", "").trim();
-      } else if (episode.includes("พากย์ไทย")) {
+       else if (episode.includes("พากย์ไทย")) 
         episode = episode.replace("พากย์ไทย", "").trim();
-      }
+      
 
-      episode = "ตอนที่ " + episode;
+      episode = `ตอนที่ ${episode}`;
       presenceData.state = info[0];
       presenceData.details = episode;
     } else {
       let info;
-      if (playvdo.includes("ซับไทย")) {
+      if (playvdo.includes("ซับไทย")) 
         info = playvdo.replace("ซับไทย", "").trim();
-      } else if (playvdo.includes("พากย์ไทย")) {
+       else if (playvdo.includes("พากย์ไทย")) 
         info = playvdo.replace("พากย์ไทย", "").trim();
-      }
+      
       episode = "กำลังดู";
       presenceData.state = info;
       presenceData.details = episode;
