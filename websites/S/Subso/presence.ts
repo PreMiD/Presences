@@ -15,8 +15,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Terms of Service";
         break;
       case "/privacy":
-        presenceData.state = "Privacy Police";
-
+        presenceData.state = "Privacy Policy";
         break;
       case "/blog":
         presenceData.state = "Blog";
