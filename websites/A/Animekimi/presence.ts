@@ -59,30 +59,30 @@ presence.on("UpdateData", async () => {
 
   // Presence
   if (path.hostname === "animekimi.com" || path.hostname.includes("www.")) {
-    if (document.location.pathname === "/") presenceData.details = ("อนิเมะอัพเดตล่าสุด");
+    if (document.location.pathname === "/") presenceData.details = "อนิเมะอัพเดตล่าสุด";
     else if (path.pathname.includes("genre")) {
-      presenceData.details = ("ประเภท ");
+      presenceData.details = "ประเภท ";
       presenceData.state = title;
     } else if (path.pathname.includes("catalog")) {
-      presenceData.details = ("หมวดหมู่ ");
+      presenceData.details = "หมวดหมู่ ";
       presenceData.state = title;
     } else if (path.pathname.includes("category")) {
-      presenceData.details = ("หมวดหมู่ ");
+      presenceData.details = "หมวดหมู่ ";
       presenceData.state = title;
     } else if (path.pathname.includes("title")) {
-      presenceData.details = ("หมวดหมู่ ");
+      presenceData.details = "หมวดหมู่ ";
       presenceData.state = title;
     } else if (path.pathname.includes("tag")) {
-      presenceData.details = ("หมวดหมู่ ");
+      presenceData.details = "หมวดหมู่ ";
       presenceData.state = playvdo;
     } else if (path.pathname.includes("release")) {
-      presenceData.details = ("ปี ");
+      presenceData.details = "ปี ";
       presenceData.state = title;
     } else if (path.search.includes("search")) {
-      presenceData.details = ("ค้นหา ");
+      presenceData.details = "ค้นหา ";
       presenceData.state = playvdo;
     } else if (path.pathname.includes("movies")) {
-      presenceData.details = ("เดอะมูฟวี่ ");
+      presenceData.details = "เดอะมูฟวี่ ";
       presenceData.state = titlemovies;
       let moive;
       const timestamps = getTimestamps(
