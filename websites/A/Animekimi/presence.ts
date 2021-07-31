@@ -53,40 +53,36 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "site"
+    largeImageKey: "site",
+    startTimestamp: browsingStamp
   };
-
-  function Presence(d: string) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = d;
-  }
 
   // Presence
   if (path.hostname === "animekimi.com" || path.hostname.includes("www.")) {
-    if (document.location.pathname === "/") Presence("อนิเมะอัพเดตล่าสุด");
+    if (document.location.pathname === "/") presenceData.details = ("อนิเมะอัพเดตล่าสุด");
     else if (path.pathname.includes("genre")) {
-      Presence("ประเภท ");
+      presenceData.details = ("ประเภท ");
       presenceData.state = title;
     } else if (path.pathname.includes("catalog")) {
-      Presence("หมวดหมู่ ");
+      presenceData.details = ("หมวดหมู่ ");
       presenceData.state = title;
     } else if (path.pathname.includes("category")) {
-      Presence("หมวดหมู่ ");
+      presenceData.details = ("หมวดหมู่ ");
       presenceData.state = title;
     } else if (path.pathname.includes("title")) {
-      Presence("หมวดหมู่ ");
+      presenceData.details = ("หมวดหมู่ ");
       presenceData.state = title;
     } else if (path.pathname.includes("tag")) {
-      Presence("หมวดหมู่ ");
+      presenceData.details = ("หมวดหมู่ ");
       presenceData.state = playvdo;
     } else if (path.pathname.includes("release")) {
-      Presence("ปี ");
+      presenceData.details = ("ปี ");
       presenceData.state = title;
     } else if (path.search.includes("search")) {
-      Presence("ค้นหา ");
+      presenceData.details = ("ค้นหา ");
       presenceData.state = playvdo;
     } else if (path.pathname.includes("movies")) {
-      Presence("เดอะมูฟวี่ ");
+      presenceData.details = ("เดอะมูฟวี่ ");
       presenceData.state = titlemovies;
       let moive;
       const timestamps = getTimestamps(
@@ -110,8 +106,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       if (!video.paused) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [, presenceData.endTimestamp] = timestamps;
       } else {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
@@ -132,7 +127,7 @@ presence.on("UpdateData", async () => {
           episode = episode.replace("พากย์ไทย", "").trim();
 
         episode = `ตอนที่ ${episode}`;
-        presenceData.state = info[0];
+        [presenceData.state] = info;
         presenceData.details = episode;
       } else {
         let info;
@@ -150,8 +145,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       if (!video.paused) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [, presenceData.endTimestamp] = timestamps;
       }
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
@@ -162,10 +156,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
   }
-
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
-  //console.log(presenceData);
 });
