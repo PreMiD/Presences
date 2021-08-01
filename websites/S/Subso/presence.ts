@@ -53,14 +53,20 @@ presence.on("UpdateData", async () => {
             presenceData.state = "Creator not found";
           } else {
             presenceData.details = "Viewing a creator:";
-            [presenceData.state] = document.title.split(" — All their content in one place on Subso");
-            presenceData.buttons = [{
-              label: "View Creator",
-              url: window.location.href
-            }];
+            [presenceData.state] = document.title.split(
+              " — All their content in one place on Subso"
+            );
+            presenceData.buttons = [
+              {
+                label: "View Creator",
+                url: window.location.href
+              }
+            ];
           }
         } else if (window.location.pathname.startsWith("/settings/")) {
-          const tab = window.location.pathname.split("/settings/")[1].replace("watchlater", "Watch Later");
+          const tab = window.location.pathname
+            .split("/settings/")[1]
+            .replace("watchlater", "Watch Later");
           presenceData.details = "Settings:";
           presenceData.state = tab.charAt(0).toUpperCase() + tab.slice(1);
         }
