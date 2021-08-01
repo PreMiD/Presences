@@ -21,7 +21,7 @@
     "@types/babel__core": "^7.1.14",
     "@types/chrome": "^0.0.145",
     "@types/debug": "^4.1.7",
-    "@types/glob": "^7.1.3",
+    "@types/glob": "^7.1.4",
     "@types/mongodb": "3.6.18",
     "@types/node": "^16.4.10",
     "@types/prettier": "^2.3.0",
