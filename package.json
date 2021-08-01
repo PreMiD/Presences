@@ -24,7 +24,7 @@
     "@types/glob": "^7.1.4",
     "@types/mongodb": "3.6.18",
     "@types/node": "^16.4.10",
-    "@types/prettier": "^2.3.0",
+    "@types/prettier": "^2.3.2",
     "@types/semver": "^7.3.8",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
