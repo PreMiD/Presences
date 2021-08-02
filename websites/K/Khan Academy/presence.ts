@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "871752405551829013" //The client ID of the Application created at https://discordapp.com/developers/applications
 });
 
-let startTime: number
+let startTime: number;
 /*
 
 function myOutsideHeavyLiftingFunction(){
@@ -29,21 +29,21 @@ presence.on("UpdateData", async () => {
       "logo" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
     // details: "Browsing Page Name", //The upper section of the presence text
     // state: "Reading section A", //The lower section of the presence text
-    startTimestamp: startTime??(startTime=Date.now()), //The unix epoch timestamp for when to start counting from
+    startTimestamp: startTime ?? (startTime = Date.now()), //The unix epoch timestamp for when to start counting from
     "buttons": [
       {
         "label": "Go to page",
-        url:location.href
+        url: location.href
       }
     ]
-  };
-const username=(document.querySelector('[data-test-id="header-profile-button"]')as HTMLSpanElement)?.innerText
+  },
+ username = (document.querySelector('[data-test-id="header-profile-button"]')as HTMLSpanElement)?.innerText;
 if(username) {
 presenceData.buttons.push(
   {
-    "label": username+"'s profile",
-    url:"https://www.khanacademy.org/profile/"+username
-  })
+    "label": `${username}'s profile`,
+    url: `https://www.khanacademy.org/profile/${username}`
+  });
 }
   const title = document.title.split(" | ");
   title.pop();
@@ -53,23 +53,23 @@ presenceData.buttons.push(
   const currently = document.getElementById("uid-dialog-0-title")?.innerText;
   if (currently) title.push(currently);
 
-  if (title.length&&!document.hidden) {
-    const details = [];
-    const state = [];
-    const topRowLen = Math.ceil(title.length / 2);
-    for (let i = 0; i < topRowLen; i++) {
+  if (title.length && !document.hidden) {
+    const details = [],
+     state = [],
+     topRowLen = Math.ceil(title.length / 2);
+    for (let i = 0; i < topRowLen; i++) 
       details.push(title[ i ]);
-    }
-    for (let i = topRowLen; i < title.length; i++) {
+    
+    for (let i = topRowLen; i < title.length; i++) 
       state.push(title[ i ]);
-    }
+    
     presenceData.details = details.join(" | ");
     presenceData.state = state.join(" | ");
     console.log(presenceData);
     //This will fire if you set presence details
     presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
   } else {
-    startTime=null
+    startTime = null;
     //This will fire if you do not set presence details
     presence.setTrayTitle(); //Clears the tray title for mac users
     presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
