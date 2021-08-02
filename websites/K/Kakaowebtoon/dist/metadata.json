@@ -1,0 +1,42 @@
+{
+  "service": "Kakaowebtoon",
+  "author": {
+    "name": "Faelayis",
+    "id": "328731868096888833"
+  },
+  "category": "anime",
+  "logo": "https://th-a.kakaopagecdn.com/web/kakaowebtoon_meta.png",
+  "thumbnail": "https://th-a.kakaopagecdn.com/web/kakaowebtoon_meta.png",
+  "version": "1.0.0",
+  "color": "#000000",
+  "tags": [
+    "comics",
+    "thai"
+  ],
+  "url": "th.kakaowebtoon.com",
+  "description": {
+    "en": "Enjoy KAKAO WEBTOON anywhere anytime Find fun cartoons in a variety of genres for free every day at KAKAO WEBTOON",
+    "th": "สนุกกับ KAKAO WEBTOON ได้ทุกที่ทุกเวลา พบกับการ์ตูนสนุก หลากหลายแนว ได้ฟรีทุกวันที่ KAKAO WEBTOON"
+  },
+  "iframe": false,
+    "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "timestamps",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
+}
