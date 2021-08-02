@@ -28,6 +28,7 @@
   "category": "music",
   "settings": [
     {
+
       "id": "time",
       "title": "Show timestamps",
       "icon": "fad fa-stopwatch",
@@ -40,4 +41,3 @@
       "value": true
     }
   ]
-}
