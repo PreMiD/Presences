@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
   if (buttons) {
     presenceData.buttons = [
       {
-        label: "Reading",
+        label: "Go to page",
         url: document.location.href.replace(/#\d+/, "")
       }
     ];
