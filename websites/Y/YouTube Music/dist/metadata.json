@@ -17,7 +17,7 @@
     "ga_IE": "Seirbhís nua ceoil le halbaim oifigiúla, singles, físeáin, remixes, léirithe beo agus go leor eile do Android, iOS agus deasc. Tá sé ar fad anseo."
   },
   "url": "music.youtube.com",
-  "version": "2.5.11",
+  "version": "2.5.12",
   "logo": "https://i.imgur.com/cIZnPDy.png",
   "thumbnail": "https://i.imgur.com/iQ8MA50.png",
   "color": "#E40813",
@@ -25,5 +25,13 @@
     "audio",
     "music"
   ],
-  "category": "music"
+  "category": "music",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }

@@ -53,12 +53,12 @@ function getAuthorString(): string {
           document.querySelector(
             "span yt-formatted-string.ytmusic-player-bar a"
           ) as HTMLAnchorElement
-        ).innerText
+      ).innerText
       : (
           document.querySelector(
             "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
           ) as HTMLAnchorElement
-        ).innerText;
+      ).innerText;
   }
 
   return authorString;
@@ -71,7 +71,8 @@ presence.on("UpdateData", async () => {
     video = document.querySelector(".video-stream") as HTMLVideoElement,
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
-      .getAttribute("repeat-Mode_");
+      .getAttribute("repeat-Mode_"),
+    buttons = await presence.getSetting("buttons");
 
   if (title !== "" && !isNaN(video.duration)) {
     const [, endTimestamp] = presence.getTimestamps(
@@ -88,25 +89,28 @@ presence.on("UpdateData", async () => {
         smallImageKey: video.paused
           ? "pause"
           : repeatMode === "ONE"
-          ? "repeat-one"
-          : repeatMode === "ALL"
-          ? "repeat"
-          : "play",
+            ? "repeat-one"
+            : repeatMode === "ALL"
+              ? "repeat"
+              : "play",
         smallImageText: video.paused
           ? (await strings).pause
           : repeatMode === "ONE"
-          ? "On loop"
-          : repeatMode === "ALL"
-          ? "Playlist on loop"
-          : (await strings).play,
-        endTimestamp,
-        buttons: [
-          {
-            label: "Listen Along",
-            url: `https://music.youtube.com/watch?v=${watchID}`
-          }
-        ]
+            ? "On loop"
+            : repeatMode === "ALL"
+              ? "Playlist on loop"
+              : (await strings).play,
+        endTimestamp
       };
+
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${watchID}`
+        }
+      ];
+    }
 
     if (video.paused) {
       delete presenceData.startTimestamp;
