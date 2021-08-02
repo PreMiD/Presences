@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     time = await presence.getSetting("timestamps"),
     presenceData: PresenceData = {
       details: "Page not Supported", // If the page cannot be recognized
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
 
   if (document.location.href === "https://komiku.id/") {
