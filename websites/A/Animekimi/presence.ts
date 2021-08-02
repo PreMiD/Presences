@@ -38,12 +38,15 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "site",
-    startTimestamp: browsingStamp
-  };
+  const time = await presence.getSetting("timestamps"),
+    privacy = await presence.getSetting("privacy"),
+    presenceData: PresenceData = {
+      largeImageKey: "site",
+      startTimestamp: browsingStamp
+    };
 
   // Presence
+  if (time) presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname === "/")
     presenceData.details = "อนิเมะอัพเดตล่าสุด";
   else if (path.pathname.includes("genre")) {
@@ -137,6 +140,14 @@ presence.on("UpdateData", async () => {
   } else {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
+  }
+  if (!time) {
+    delete presenceData.startTimestamp;
+    delete presenceData.endTimestamp;
+  }
+  if (privacy) {
+    delete presenceData.details;
+    delete presenceData.state;
   }
   if (!presenceData.details) {
     presence.setTrayTitle();
