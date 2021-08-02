@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "868085258371870820"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 // Presence On
 presence.on("UpdateData", async () => {
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/other/")) {
     if (document.location.pathname.startsWith("/other/hot/")) {
       presenceData.details = "Browsing Featured";
-      presenceData.startTimestamp = browsingStamp
+      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.endsWith("/rekomendasi/")) {
       presenceData.details = "Browsing Recommendation";
       presenceData.startTimestamp = browsingStamp;
@@ -46,23 +46,23 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing History";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.startsWith("/manga/")) {
-    const name = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, "")
-    const type = document.querySelector("section#Informasi b").textContent
-    presenceData.details = "Viewing " + type;
+    const name = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, ""),
+     type = document.querySelector("section#Informasi b").textContent;
+    presenceData.details = `Viewing ${type}`;
     presenceData.state = name;
     presenceData.startTimestamp = browsingStamp;
     // View Manga Buttons
     if (buttons) {
       presenceData.buttons = [
         {
-          label: "View " + type,
+          label: `View ${type}`,
           url: document.location.href
         }
       ];
     }
   } else if (document.location.pathname.startsWith("/ch/")) {
-    const title = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, "").replace(/Chapter \d+/, "")
-    const chapter = document.location.pathname.match(/chapter-\d+/)[0].replace("c", "C").replace("-", " ")
+    const title = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, "").replace(/Chapter \d+/, ""),
+     chapter = document.location.pathname.match(/chapter-\d+/)[0].replace("c", "C").replace("-", " ");
     presenceData.details = title;
     presenceData.state = chapter;
     presenceData.startTimestamp = browsingStamp;
@@ -80,15 +80,15 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.pathname.startsWith("/cari/")) {
-    const search = document.querySelector("div.ntah h1").textContent.replace("Hasil Pencarian", "").replace(/\t|\n/g, "")
-    const result = document.querySelectorAll("div.bge").length
-    presenceData.details = "Searching" + search;
-    presenceData.state = "Result: " + result;
+    const search = document.querySelector("div.ntah h1").textContent.replace("Hasil Pencarian", "").replace(/\t|\n/g, ""),
+     result = document.querySelectorAll("div.bge").length;
+    presenceData.details = `Searching${search}`;
+    presenceData.state = `Result: ${result}`;
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.startsWith("/genre/")) {
-    const genre = document.querySelector("div.ntah h1").textContent.replace("Genre", "").replace(/\t|\n/g, "")
-    presenceData.details = "Viewing Genre" + genre;
-    presenceData.startTimestamp = browsingStamp
+    const genre = document.querySelector("div.ntah h1").textContent.replace("Genre", "").replace(/\t|\n/g, "");
+    presenceData.details = `Viewing Genre${genre}`;
+    presenceData.startTimestamp = browsingStamp;
   }
 
   // Show Timestamps
