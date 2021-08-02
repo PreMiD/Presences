@@ -15,13 +15,28 @@ presence.on("UpdateData", async () => {
     privacy = await presence.getSetting("privacy"),
     buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
-      largeImageKey: "kakaowebtoon",
+      largeImageKey: "kakaopage",
       startTimestamp: browsingStamp
     };
 
   // Presence
-  if (time) presenceData.startTimestamp = browsingStamp;
-  if (document.location.pathname === "/") 
+  if (document.location.href === "https://page.kakao.com/") 
+    presenceData.details = "หน้าหลัก ";
+  else if (path.pathname.includes("main")) {
+    presenceData.details = "ดูหมวดหมู่",
+    presenceData.state = title;
+  } else if (path.pathname.includes("home")) {
+    presenceData.details = "เลือกซีรี่ส์",
+    presenceData.state = title;
+  }else if (path.pathname.includes("up/today")) {
+    presenceData.details = "วันนี้",
+    presenceData.state = title;
+  }else if (document.location.href === "https://store.kakaofriends.com/") 
+    presenceData.details = title;
+  else if (path.pathname.includes("index")) {
+    presenceData.details = "หน้าหลัก",
+    presenceData.state = title;
+  }else if (document.location.href === "https://th.kakaowebtoon.com/") 
     presenceData.details = "แนะนำ";
   else if (path.pathname.includes("original-webtoon"))
     presenceData.details = "ตารางเว็บตูน ";
@@ -38,7 +53,7 @@ presence.on("UpdateData", async () => {
   else if (path.pathname.includes("content")) {
     presenceData.details = "เนื้อหา ",
     presenceData.state = title;
-  } else if (path.pathname.includes("viewer")) {
+  } else if (path.pathname.includes("viewer") || (path.pathname.includes("theme"))) {
     let reading;
     const timestamps = presence.getTimestamps(
       Math.floor(read.current),
@@ -65,10 +80,17 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: "Reading",
-        url: "https://th.kakaowebtoon.com"
+        url: document.location.href.replace(/#\d+/, "")
       }
     ];
   }
+  if (document.location.href === "https://page.kakao.com/") 
+    presenceData.largeImageKey = "kakaopage";
+  if (document.location.href === "https://store.kakaofriends.com/") 
+    presenceData.largeImageKey = "kakaofriends";
+  if (document.location.href === "https://th.kakaowebtoon.com/") 
+    presenceData.largeImageKey = "kakaowebtoon";
+  
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();

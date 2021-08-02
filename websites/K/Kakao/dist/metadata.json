@@ -1,11 +1,11 @@
 {
-  "service": "Kakaowebtoon",
+  "service": "Kakao",
   "author": {
     "name": "Faelayis",
     "id": "328731868096888833"
   },
   "category": "anime",
-  "logo": "https://i.imgur.com/DCxdJ9o.jpg",
+  "logo": "https://i.imgur.com/RN217wd.jpg",
   "thumbnail": "https://i.imgur.com/CF3R4db.jpg",
   "version": "1.0.0",
   "color": "#000000",
@@ -13,10 +13,14 @@
     "comics",
     "thai"
   ],
-  "url": "th.kakaowebtoon.com",
+  "url": [
+    "page.kakao.com",
+    "th.kakaowebtoon.com",
+    "store.kakaofriends.com"
+  ],
   "description": {
-    "en": "Enjoy KAKAO WEBTOON anywhere anytime Find fun cartoons in a variety of genres for free every day at KAKAO WEBTOON",
-    "th": "สนุกกับ KAKAO WEBTOON ได้ทุกที่ทุกเวลา พบกับการ์ตูนสนุก หลากหลายแนว ได้ฟรีทุกวันที่ KAKAO WEBTOON"
+    "en": "Enjoy KAKAO anywhere anytime Find fun cartoons in a variety of genres for free every day at KAKAO WEBTOON",
+    "th": "สนุกกับ KAKAO ได้ทุกที่ทุกเวลา พบกับการ์ตูนสนุก หลากหลายแนว ได้ฟรีทุกวันที่ KAKAO WEBTOON"
   },
   "iframe": false,
     "settings": [
