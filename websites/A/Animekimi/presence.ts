@@ -46,7 +46,6 @@ presence.on("UpdateData", async () => {
     };
 
   // Presence
-  if (time) presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname === "/")
     presenceData.details = "อนิเมะอัพเดตล่าสุด";
   else if (path.pathname.includes("genre")) {
