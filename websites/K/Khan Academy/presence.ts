@@ -65,7 +65,6 @@ presenceData.buttons.push(
     }
     presenceData.details = details.join(" | ");
     presenceData.state = state.join(" | ");
-    console.log(presenceData);
     //This will fire if you set presence details
     presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
   } else {
