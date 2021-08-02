@@ -2,12 +2,12 @@ const presence = new Presence({
   clientId: "868085258371870820"
 }),
 
-browsingStamp = Math.floor(Date.now() / 1000);
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 // Presence On
 presence.on("UpdateData", async () => {
   const buttons = await presence.getSetting("buttons"),
-  time = await presence.getSetting("timestamps"),
+    time = await presence.getSetting("timestamps"),
     presenceData: PresenceData = {
       details: "Page not Supported", // If the page cannot be recognized
       largeImageKey: "logo",
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.startsWith("/manga/")) {
     const name = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, ""),
-     type = document.querySelector("section#Informasi b").textContent;
+      type = document.querySelector("section#Informasi b").textContent;
     presenceData.details = `Viewing ${type}`;
     presenceData.state = name;
     presenceData.startTimestamp = browsingStamp;
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.startsWith("/ch/")) {
     const title = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, "").replace(/Chapter \d+/, ""),
-     chapter = document.location.pathname.match(/chapter-\d+/)[0].replace("c", "C").replace("-", " ");
+      chapter = document.location.pathname.match(/chapter-\d+/)[0].replace("c", "C").replace("-", " ");
     presenceData.details = title;
     presenceData.state = chapter;
     presenceData.startTimestamp = browsingStamp;
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.startsWith("/cari/")) {
     const search = document.querySelector("div.ntah h1").textContent.replace("Hasil Pencarian", "").replace(/\t|\n/g, ""),
-     result = document.querySelectorAll("div.bge").length;
+      result = document.querySelectorAll("div.bge").length;
     presenceData.details = `Searching${search}`;
     presenceData.state = `Result: ${result}`;
     presenceData.startTimestamp = browsingStamp;
