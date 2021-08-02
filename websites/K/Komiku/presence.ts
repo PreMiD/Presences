@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "868085258371870820"
 }),
 
- browsingStamp = Math.floor(Date.now() / 1000);
+browsingStamp = Math.floor(Date.now() / 1000);
 
 // Presence On
 presence.on("UpdateData", async () => {
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
     };
 
-  if (document.location.href == "https://komiku.id/") {
+  if (document.location.href === "https://komiku.id/") {
     presenceData.details = "Viewing Homepage";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/baca-manga/")) {
