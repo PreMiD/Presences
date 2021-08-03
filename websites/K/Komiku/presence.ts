@@ -10,47 +10,37 @@ presence.on("UpdateData", async () => {
     time = await presence.getSetting("timestamps"),
     presenceData: PresenceData = {
       details: "Page not Supported", // If the page cannot be recognized
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
     };
 
   if (document.location.href === "https://komiku.id/") {
     presenceData.details = "Viewing Homepage";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/baca-manga/")) {
     presenceData.details = "Viewing Manga List";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/baca-manhua/")) {
     presenceData.details = "Viewing Manhua List";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/baca-manhwa/")) {
     presenceData.details = "Viewing Manhwa List";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/daftar-komik/")) {
     presenceData.details = "Viewing Comic List";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/pustaka/")) {
     presenceData.details = "Viewing New Release";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.startsWith("/other/")) {
     if (document.location.pathname.startsWith("/other/hot/")) {
       presenceData.details = "Browsing Featured";
-      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.endsWith("/rekomendasi/")) {
       presenceData.details = "Browsing Recommendation";
-      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.endsWith("/berwarna/")) {
       presenceData.details = "Browsing Coloured Comic";
-      presenceData.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/bookmark/history.html")) {
     presenceData.details = "Viewing History";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.startsWith("/manga/")) {
     const name = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, ""),
       type = document.querySelector("section#Informasi b").textContent;
     presenceData.details = `Viewing ${type}`;
     presenceData.state = name;
-    presenceData.startTimestamp = browsingStamp;
     // View Manga Buttons
     if (buttons) {
       presenceData.buttons = [
@@ -65,7 +55,6 @@ presence.on("UpdateData", async () => {
       chapter = document.location.pathname.match(/chapter-\d+/)[0].replace("c", "C").replace("-", " ");
     presenceData.details = title;
     presenceData.state = chapter;
-    presenceData.startTimestamp = browsingStamp;
     // View Manga & Chapter Buttons
     if (buttons) {
       presenceData.buttons = [
@@ -80,15 +69,12 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.pathname.startsWith("/cari/")) {
-    const search = document.querySelector("div.ntah h1").textContent.replace("Hasil Pencarian", "").replace(/\t|\n/g, ""),
-      result = document.querySelectorAll("div.bge").length;
-    presenceData.details = `Searching${search}`;
-    presenceData.state = `Result: ${result}`;
-    presenceData.startTimestamp = browsingStamp;
+    const search = document.querySelector("div.ntah h1").textContent.replace("Hasil Pencarian", "").replace(/\t|\n/g, "")
+    presenceData.details = `Searching:`;
+    presenceData.state = search;
   } else if (document.location.pathname.startsWith("/genre/")) {
     const genre = document.querySelector("div.ntah h1").textContent.replace("Genre", "").replace(/\t|\n/g, "");
     presenceData.details = `Viewing Genre${genre}`;
-    presenceData.startTimestamp = browsingStamp;
   }
 
   // Show Timestamps
