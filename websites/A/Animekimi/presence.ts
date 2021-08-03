@@ -40,6 +40,7 @@ presence.on(
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("timestamps"),
     privacy = await presence.getSetting("privacy"),
+    buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "site",
       startTimestamp: browsingStamp
@@ -147,6 +148,14 @@ presence.on("UpdateData", async () => {
   if (privacy) {
     delete presenceData.details;
     delete presenceData.state;
+  }
+  if (buttons) {
+    presenceData.buttons = [
+      {
+        label: "ดูเว็บไซต์",
+        url: document.location.href.replace(/#\d+/, "")
+      }
+    ];
   }
   if (!presenceData.details) {
     presence.setTrayTitle();
