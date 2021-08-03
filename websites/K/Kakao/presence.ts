@@ -7,7 +7,6 @@ const presence = new Presence({
   },
   browsingStamp = Math.floor(Date.now() / 1000),
   title = document.querySelector("head > title")?.textContent ?? "ไม่พบ",
-  ep = document.querySelector("head > title")?.textContent ?? "ไม่พบ",
   path = document.location;
 
 presence.on("UpdateData", async () => {
@@ -36,7 +35,7 @@ presence.on("UpdateData", async () => {
   else if (path.pathname.includes("index")) {
     presenceData.details = "หน้าหลัก",
     presenceData.state = title;
-  }else if (document.location.href === "https://th.kakaowebtoon.com/") 
+  }else if (document.location.pathname === "/") 
     presenceData.details = "แนะนำ";
   else if (path.pathname.includes("original-webtoon"))
     presenceData.details = "ตารางเว็บตูน ";
@@ -46,13 +45,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "กล่องของขวัญ ";
   else if (path.pathname.includes("my-page"))
     presenceData.details = "ชั้นหนังสือ ";
-  else if (path.pathname.includes("event"))
-    presenceData.details = "เหตุการณ์ ";
   else if (path.pathname.includes("more"))
     presenceData.details = "เมนู ";
-  else if (path.pathname.includes("content")) {
+  else if (path.pathname.includes("event")) {
+    presenceData.details = "เหตุการณ์ ",
+    presenceData.state = document.querySelector("head > title")?.textContent ?? "ไม่พบเหตุการณ์";
+  } else if (path.pathname.includes("content")) {
     presenceData.details = "เนื้อหา ",
-    presenceData.state = title;
+    presenceData.state = document.querySelector("head > title")?.textContent ?? "ไม่พบเนื้อหา";
   } else if (path.pathname.includes("viewer") || (path.pathname.includes("theme"))) {
     let reading;
     const timestamps = presence.getTimestamps(
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
     );
     if (path.href) {
       reading = "กำลังอ่าน ";
-      presenceData.state = ep;
+      presenceData.state = document.querySelector("head > title")?.textContent ?? "ไม่พบ",
       presenceData.details = reading;
     } else if (!read) [, presenceData.endTimestamp] = timestamps;
   } else {
@@ -84,11 +84,11 @@ presence.on("UpdateData", async () => {
       }
     ];
   }
-  if (document.location.href === "https://page.kakao.com/") 
+  if (document.location.host === "page.kakao.com") 
     presenceData.largeImageKey = "kakaopage";
-  if (document.location.href === "https://store.kakaofriends.com/") 
+  if (document.location.host === "store.kakaofriends.com") 
     presenceData.largeImageKey = "kakaofriends";
-  if (document.location.href === "https://th.kakaowebtoon.com/") 
+  if (document.location.host === "th.kakaowebtoon.com") 
     presenceData.largeImageKey = "kakaowebtoon";
   
   if (!presenceData.details) {
