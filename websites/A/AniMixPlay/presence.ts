@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.pathname === "/") {
+  if (location.pathname === "/") {
     const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.get("q")) {
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "browsing-v1";
       presenceData.smallImageText = (await strings).browsing;
     }
-  } else if (new RegExp("^/v.").test(document.location.pathname)) {
+  } else if (new RegExp("^/v.").test(location.pathname)) {
     if (iFrameVideo) {
       [, endTimestamp] = presence.getTimestamps(
         Math.floor(currentTime),
@@ -95,28 +95,34 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       presenceData.endTimestamp = endTimestamp;
-      presenceData.details = `Watching ${title}`;
+      presenceData.details = title;
       presenceData.state = `Episode ${episode}`;
+      presenceData.buttons = [
+        {
+          label: "Watch Episode",
+          url: location.href
+        }
+      ];
 
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
     }
-  } else if (document.location.pathname.includes("/anime/")) {
-    const animepagetitle =
+  } else if (location.pathname.includes("/anime/")) {
+    const animePageTitle =
         document.querySelector("#animepagetitle").textContent,
-      animepagetype = document
+      animePageType = document
         .querySelector("#addInfo")
         .textContent.split(" ")[5]
         .trim();
     presenceData.details = "Currently reading...";
-    presenceData.state = `${animepagetitle} (${animepagetype})`;
+    presenceData.state = `${animePageTitle} (${animePageType})`;
     presenceData.smallImageKey = "reading-v1";
     presenceData.smallImageText = "Reading...";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
