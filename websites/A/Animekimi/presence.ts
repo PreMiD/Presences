@@ -95,7 +95,14 @@ presence.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
     if (!video.paused) [, presenceData.endTimestamp] = timestamps;
-    else {
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "ดูเดอะมูฟวี่",
+          url: document.location.href.replace(/#\d+/, "")
+        }
+      ];
+    } else {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
@@ -133,6 +140,14 @@ presence.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
     if (!video.paused) [, presenceData.endTimestamp] = timestamps;
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "ดูอนิเมะ",
+          url: document.location.href.replace(/#\d+/, "")
+        }
+      ];
+    }
   } else if (path.href) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "เลือกตอน ";
@@ -146,16 +161,8 @@ presence.on("UpdateData", async () => {
     delete presenceData.endTimestamp;
   }
   if (privacy) {
-    delete presenceData.details;
     delete presenceData.state;
-  }
-  if (buttons) {
-    presenceData.buttons = [
-      {
-        label: "ดูเว็บไซต์",
-        url: document.location.href.replace(/#\d+/, "")
-      }
-    ];
+    delete presenceData.buttons;
   }
   if (!presenceData.details) {
     presence.setTrayTitle();
