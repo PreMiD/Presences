@@ -5,7 +5,7 @@ const presence = new Presence({
 function getQuery() {
   const search = location.search.substring(1);
   return JSON.parse(
-    `{"${decodeURI(search)
+    `{"${decodeURI(decodeURIComponent(search))
       .replace(/"/g, "\\\"")
       .replace(/&/g, "\",\"")
       .replace(/=/g, "\":\"")}"}`
@@ -199,6 +199,7 @@ presence.on("UpdateData", async () => {
       presenceData.details += "(문의 내역)";
     
   } else if (location.pathname.startsWith("/myMusic")) {
+    presenceData.smallImageKey = "profile";
     presenceData.details = "마이 뮤직";
     if (location.pathname.startsWith("/myMusic/profile")) 
       presenceData.details += "(프로필)";
