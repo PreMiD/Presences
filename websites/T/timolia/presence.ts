@@ -16,8 +16,8 @@ presence.on("UpdateData", () => {
             presenceData.startTimestamp = browsingStamp;
             const player = document.querySelector("#liveplayercount").textContent;
             presenceData.details = "Viewing home page";
-            presenceData.smallImageKey = "minecraft"
-            presenceData.smallImageText = player + " online players";
+            presenceData.smallImageKey = "minecraft";
+            presenceData.smallImageText = `${player} online players`;
         } else if (document.location.pathname.startsWith("/stats")) {
             presenceData.startTimestamp = browsingStamp;
             const stats = document.querySelector("#playername").textContent;
@@ -38,7 +38,7 @@ presence.on("UpdateData", () => {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Shop - Viewing store page";
         if (document.location.pathname.includes("#Ranks")) {
-            console.log("ranks")
+            console.log("ranks");
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Shop - Viewing products:";
             presenceData.state = "Ränge";
@@ -62,9 +62,9 @@ presence.on("UpdateData", () => {
             presenceData.details = "Viewing forum:";
             presenceData.state = forum;
         }
-    } else if (document.location.hostname.includes("wi.timolia.de")) {
+    } else if (document.location.hostname.includes("wi.timolia.de")) 
         presenceData.details = "Viewing Webinterface";
-    } else if (document.location.hostname.includes("gitlab.timolia.de")) {
+     else if (document.location.hostname.includes("gitlab.timolia.de")) {
         presenceData.details = "Viewing GitLab Server";
         presenceData.smallImageKey = "gitlab";
     }
@@ -72,8 +72,8 @@ presence.on("UpdateData", () => {
     if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
-    } else {
+    } else 
         presence.setActivity(presenceData);
-    }
+    
 
 });
