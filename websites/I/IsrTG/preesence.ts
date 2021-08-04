@@ -1,11 +1,13 @@
 const presence = new Presence({
     clientId: "000000000000000000" //The client ID of the Application created at https://discordapp.com/developers/applications
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-    //You can use this to get translated strings in their browser language
-  });
+  browsingStamp = Math.floor(Date.now() / 1000),
+  pageInput: HTMLInputElement = document.querySelector("#lst-ib"),
+  homepageInput: HTMLInputElement = document.querySelector(
+    "#tsf > div:nth-child(1) > div.A8SBwf > div.RNNXgb > div > div.a4bIc > input"
+  ),
+  homepageImage: HTMLElement = document.querySelector("#hplogo"),
+  imgInput: HTMLInputElement = document.querySelector("#REsRA");
 
 /*
 
@@ -25,8 +27,9 @@ setInterval(myOutsideHeavyLiftingFunction, 10000);
 presence.on("UpdateData", async () => {
   /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
 
-    It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
 
+    It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
+  console.log("on isrtg home page");
   const presenceData: PresenceData = {
     largeImageKey:
       "key" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
