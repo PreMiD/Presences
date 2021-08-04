@@ -53,12 +53,12 @@ function getAuthorString(): string {
           document.querySelector(
             "span yt-formatted-string.ytmusic-player-bar a"
           ) as HTMLAnchorElement
-        ).innerText
+      ).innerText
       : (
           document.querySelector(
             "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
           ) as HTMLAnchorElement
-        ).innerText;
+      ).innerText;
   }
 
   return authorString;
@@ -71,13 +71,12 @@ presence.on("UpdateData", async () => {
     video = document.querySelector(".video-stream") as HTMLVideoElement,
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
-      .getAttribute("repeat-Mode_");
+      .getAttribute("repeat-Mode_"),
+    buttons = await presence.getSetting("buttons"),
+    time = await presence.getSetting("time");
 
   if (title !== "" && !isNaN(video.duration)) {
-    const [, endTimestamp] = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
+    const [, endTimestamp] = presence.getTimestampsfromMedia(video),
       [, watchID] = document
         .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
         .href.match(/v=([^&#]{5,})/),
@@ -88,26 +87,40 @@ presence.on("UpdateData", async () => {
         smallImageKey: video.paused
           ? "pause"
           : repeatMode === "ONE"
-          ? "repeat-one"
-          : repeatMode === "ALL"
-          ? "repeat"
-          : "play",
+            ? "repeat-one"
+            : repeatMode === "ALL"
+              ? "repeat"
+              : "play",
         smallImageText: video.paused
           ? (await strings).pause
           : repeatMode === "ONE"
-          ? "On loop"
-          : repeatMode === "ALL"
-          ? "Playlist on loop"
-          : (await strings).play,
-        endTimestamp,
-        buttons: [
-          {
-            label: "Listen Along",
-            url: `https://music.youtube.com/watch?v=${watchID}`
-          }
-        ]
+            ? "On loop"
+            : repeatMode === "ALL"
+              ? "Playlist on loop"
+              : (await strings).play,
+        endTimestamp
       };
+  
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${watchID}`
+        }
+      ];
+    }
 
+    if (!time) delete presenceData.endTimestamp;
+    
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${watchID}`
+        }
+      ];
+    }
+    
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;

@@ -1,5 +1,4 @@
-const
-  presence = new Presence({
+const presence = new Presence({
     clientId: "860224040060715018"
   }),
   strings = presence.getStrings({
@@ -16,32 +15,42 @@ presence.on("iFrameData", (data: { video: { isPaused: boolean } }) => {
 /**
  * Functions to get some common info
  */
-const
-
-  /**
+const /**
    * The object that stores the functions that get information from the DOM
    */
   getInfo = {
     generic: () => {
       return {
         /**
-        * Gets the specified url parameter
-        * https://stackoverflow.com/a/11582513/13343832 thanks :)
-        */
+         * Gets the specified url parameter
+         * https://stackoverflow.com/a/11582513/13343832 thanks :)
+         */
         getURLParameter: (name: string) => {
-          return decodeURIComponent((new RegExp(`[?|&]${name}=` + "([^&;]+?)(&|#|;|$)").exec(location.search) || [null, ""])[1].replace(/\+/g, "%20")) || null;
+          return (
+            decodeURIComponent(
+              (new RegExp(`[?|&]${name}=` + "([^&;]+?)(&|#|;|$)").exec(
+                location.search
+              ) || [null, ""])[1].replace(/\+/g, "%20")
+            ) || null
+          );
         }
       };
     },
     watch: () => {
       return {
-        title: document.querySelectorAll(".v-card__title")[0].children[0].textContent,
-        channel: document.querySelector(".uploader-data-list>div:nth-child(1)").textContent.split("  ")[0]
+        title:
+          document.querySelectorAll(".v-card__title")[0].children[0]
+            .textContent,
+        channel: document
+          .querySelector(".uploader-data-list>div:nth-child(1)")
+          .textContent.split("  ")[0]
       };
     },
     channel: () => {
       return {
-        title: document.querySelector(".channel-container .v-list-item__title").textContent.split("  ")[0],
+        title: document
+          .querySelector(".channel-container .v-list-item__title")
+          .textContent.split("  ")[0],
         getCategory: () => {
           switch (window.location.pathname.split("/")[3]) {
             case "clips":
@@ -61,10 +70,19 @@ const
     channels: () => {
       return {
         /**
-        * Get the Category on the Channels Page
-        */
+         * Get the Category on the Channels Page
+         */
         getCategory: () => {
-          switch ([].indexOf.call(document.querySelector("[role='tablist'] div.v-slide-group__content").children, document.querySelector("[role='tablist'] div.v-slide-group__content [aria-selected=true]"))) {
+          switch (
+            [].indexOf.call(
+              document.querySelector(
+                "[role='tablist'] div.v-slide-group__content"
+              ).children,
+              document.querySelector(
+                "[role='tablist'] div.v-slide-group__content [aria-selected=true]"
+              )
+            )
+          ) {
             case 1:
               return "VTuber";
             case 2:
@@ -104,7 +122,6 @@ const
          * Gets the parameters/tags from the Search page
          */
         getParamsString: () => {
-
           let returnString = "";
 
           // Add Search type
@@ -124,41 +141,44 @@ const
           }
 
           // Add Search query/tags
-          getInfo.generic().getURLParameter("q").split("\n").forEach((val, i) => {
-            if (i > 0) {
-              const tag = val.split(",");
-              switch (tag[0]) {
-                case "channel":
-                  returnString += `Channel: ${tag[2]}, `;
-                  break;
-                case "title & desc":
-                  returnString += `Title/Desc: ${tag[2]}, `;
-                  break;
-                case "comments":
-                  returnString += `Comments: ${tag[2]}, `;
-                  break;
-                case "topic":
-                  returnString += `Topic: ${tag[2]}, `;
-                  break;
-                case "org":
-                  returnString += `Org: ${tag[2]}, `;
-                  break;
+          getInfo
+            .generic()
+            .getURLParameter("q")
+            .split("\n")
+            .forEach((val, i) => {
+              if (i > 0) {
+                const tag = val.split(",");
+                switch (tag[0]) {
+                  case "channel":
+                    returnString += `Channel: ${tag[2]}, `;
+                    break;
+                  case "title & desc":
+                    returnString += `Title/Desc: ${tag[2]}, `;
+                    break;
+                  case "comments":
+                    returnString += `Comments: ${tag[2]}, `;
+                    break;
+                  case "topic":
+                    returnString += `Topic: ${tag[2]}, `;
+                    break;
+                  case "org":
+                    returnString += `Org: ${tag[2]}, `;
+                    break;
 
-                default:
-                  break;
+                  default:
+                    break;
+                }
               }
-            }
-          });
+            });
 
           return returnString.slice(0, -2); //Remove the last ", "
         }
       };
     }
   },
-
   /**
-  * The object that stores the data
-  */
+   * The object that stores the data
+   */
   data = {
     details: `Unsupported Page: ${window.location.pathname}`,
     state: "",
@@ -168,10 +188,9 @@ const
     },
     startTime: ~~(Date.now() / 1000)
   },
-
-  /** 
- * This object stores functions that get the updated data
-*/
+  /**
+   * This object stores functions that get the updated data
+   */
   dataUpdater = {
     updateAll: async () => {
       data.smallimage = await dataUpdater.getSmallImage();
@@ -186,8 +205,8 @@ const
         case "favorites":
           return "Favorites";
         case "channel":
-          return path[2] ?
-            `Viewing Channel ${getInfo.channel().getCategory()}`
+          return path[2]
+            ? `Viewing Channel ${getInfo.channel().getCategory()}`
             : "Channel List";
         case "library":
           return "Library";
@@ -204,7 +223,10 @@ const
         case "settings":
           return "Settings";
         case "login":
-          return document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null ? "Login Screen" : "Account Settings";
+          return document.querySelector(".v-card.ma-auto.v-sheet .v-list") ===
+            null
+            ? "Login Screen"
+            : "Account Settings";
         case "watch":
           return `Watching ${getInfo.watch().title}`;
         case "search":
@@ -220,17 +242,31 @@ const
         case "watch":
           return `${getInfo.watch().channel}`;
         case "channel":
-          return path[2] === undefined ? getInfo.channels().getCategory() : getInfo.channel().title;
+          return path[2] === undefined
+            ? getInfo.channels().getCategory()
+            : getInfo.channel().title;
         case "home":
           return getInfo.homeFavorites().getCategory();
         case "favorites":
           return getInfo.homeFavorites().getCategory();
         case "music":
-          return document.querySelector(".music-player-bar") !== null ?
-            `Listening to ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.single-line-clamp>a").textContent} - ${document.querySelector(".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.text-h6").textContent}` :
-            "Not listening to anything";
+          return document.querySelector(".music-player-bar") !== null
+            ? `Listening to ${
+                document.querySelector(
+                  ".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.single-line-clamp>a"
+                ).textContent
+              } - ${
+                document.querySelector(
+                  ".music-player-bar>div>div:nth-child(2)>div:nth-child(2)>.text-h6"
+                ).textContent
+              }`
+            : "Not listening to anything";
         case "multiview":
-          return `${document.querySelectorAll(".mv-frame").length} ${document.querySelectorAll(".mv-frame").length === 1 ? "Video" : "Videos"} Open`;
+          return `${document.querySelectorAll(".mv-frame").length} ${
+            document.querySelectorAll(".mv-frame").length === 1
+              ? "Video"
+              : "Videos"
+          } Open`;
         case "infinite":
           return `${getInfo.watch().title} - ${getInfo.watch().channel}`;
         case "search":
@@ -255,8 +291,8 @@ const
           };
         case "channel":
           return {
-            image: (path.length < 3) ? "mdiaccountboxmultiple" : "mdiaccountbox",
-            hover: (path.length < 3) ? "Channels" : `${getInfo.channel().title}`
+            image: path.length < 3 ? "mdiaccountboxmultiple" : "mdiaccountbox",
+            hover: path.length < 3 ? "Channels" : `${getInfo.channel().title}`
           };
         case "library":
           return {
@@ -296,17 +332,25 @@ const
         case "login":
           return {
             image: "mdiloginvariant",
-            hover: document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null ? "Login Screen" : "Account Settings"
+            hover:
+              document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null
+                ? "Login Screen"
+                : "Account Settings"
           };
         case "watch":
           return {
             image: iFrameVideo.isPaused ? "mdipause" : "mdiplay",
-            hover: iFrameVideo.isPaused ? (await strings).pause : (await strings).play
+            hover: iFrameVideo.isPaused
+              ? (await strings).pause
+              : (await strings).play
           };
         case "search":
           return {
             image: "mdimagnify",
-            hover: getInfo.generic().getURLParameter("advanced") === "true" ? "Advanced Search" : "Search"
+            hover:
+              getInfo.generic().getURLParameter("advanced") === "true"
+                ? "Advanced Search"
+                : "Search"
           };
 
         default:
@@ -318,26 +362,21 @@ const
     }
   };
 
-
 presence.on("UpdateData", async () => {
   dataUpdater.updateAll();
 
   const presenceData: PresenceData = {
-    largeImageKey:
-      "largeimage",
-    smallImageKey:
-      data.smallimage.image,
+    largeImageKey: "largeimage",
+    smallImageKey: data.smallimage.image,
     smallImageText: data.smallimage.hover,
     details: data.details,
     startTimestamp: data.startTime
   };
 
-  if (data.state)
-    presenceData.state = data.state;
-
+  if (data.state) presenceData.state = data.state;
 
   // Add video and channel buttons when on the watch page
-  switch(window.location.pathname.split("/")[1]) {
+  switch (window.location.pathname.split("/")[1]) {
     case "watch":
       presenceData.buttons = [
         {
@@ -346,12 +385,14 @@ presence.on("UpdateData", async () => {
         },
         {
           label: "Open Channel",
-          url: `${window.location.origin}${document.querySelector(".uploader-data-list>div:nth-child(1)>a").getAttribute("href")}`
+          url: `${window.location.origin}${document
+            .querySelector(".uploader-data-list>div:nth-child(1)>a")
+            .getAttribute("href")}`
         }
       ];
       break;
     case "channel":
-      if(window.location.pathname.split("/")[2]) {
+      if (window.location.pathname.split("/")[2]) {
         presenceData.buttons = [
           {
             label: "Open Channel",

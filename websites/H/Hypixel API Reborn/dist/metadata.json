@@ -6,12 +6,12 @@
   },
   "service": "Hypixel API Reborn",
   "description": {
-    "en": "Hypixel API • Reborn is the only Hypixel API wrapper for Node.js/Typescript with intellisense support.",
-    "ru": "Hypixel API • Reborn - единственный парсер Hypixel API для Node.js/Typescript с поддержкой intellisense.",
+    "en": "Hypixel API • Reborn is a feature-rich Hypixel API wrapper for Node.js.",
+    "ru": "Hypixel API • Reborn - многофункциональный парсер Hypixel API для Node.js.",
     "nl": "Hypixel API • Reborn is de enige Hypixel API-wrapper voor Node.js / Typescript met intellisense-ondersteuning."
   },
-  "url": "hypixel.stavzdev.xyz",
-  "version": "1.0.3",
+  "url": "hypixel.stavzdev.me",
+  "version": "1.1.0",
   "logo": "https://i.imgur.com/eQzO2nG.png",
   "thumbnail": "https://i.imgur.com/9BpoEmx.png",
   "color": "#ff8c00",

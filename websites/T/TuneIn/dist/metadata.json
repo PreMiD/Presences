@@ -7,7 +7,8 @@
     {
       "name": "Bryan",
       "id": "293775922757238784"
-    }, {
+    },
+    {
       "name": "Alexx",
       "id": "604182077088202784"
     }
@@ -18,7 +19,7 @@
     "nl": "TuneIn In is een Amerikaanse audiostreamingservice die live nieuws, radio, sport, muziek en podcasts levert aan meer dan 60 miljoen maandelijkse actieve gebruikers. Vanaf 2019 heeft TuneIn meer dan 75 miljoen maandelijkse actieve gebruikers. TuneIn wordt beheerd door het bedrijf TuneIn Inc, gevestigd in San Francisco, Californië."
   },
   "url": "tunein.com",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "logo": "https://i.imgur.com/mcwhb4p.png",
   "thumbnail": "https://i.imgur.com/lewvpKU.png",
   "color": "#33B6A8",

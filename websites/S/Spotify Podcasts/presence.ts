@@ -87,14 +87,23 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "spotify"
     },
-    albumCover = Array.from(document.querySelectorAll("a")).find(
-      (a) => a.dataset?.testid === "cover-art-link"
-    );
+    albumCover =
+      Array.from(document.querySelectorAll("a")).find(
+        (a) => a.dataset?.testid === "cover-art-link"
+      ) ||
+      Array.from(document.querySelectorAll("a")).find(
+        (a) => a.dataset?.testid === "context-link"
+      );
 
   let podcast = false,
     searching = false;
 
-  if (albumCover !== null && albumCover.href.includes("/show/")) podcast = true;
+  if (
+    albumCover !== null &&
+    (albumCover.href.includes("/show/") ||
+      albumCover.href.includes("/episode/"))
+  )
+    podcast = true;
 
   if (!podcast) {
     if (time) presenceData.startTimestamp = browsingStamp;
@@ -254,12 +263,20 @@ presence.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-    title = Array.from(document.querySelectorAll("a")).find(
-      (a) => a.dataset?.testid === "nowplaying-track-link"
-    )?.textContent;
-    uploader = Array.from(document.querySelectorAll("div")).find(
-      (a) => a.dataset?.testid === "track-info-artists"
-    )?.textContent;
+    title =
+      Array.from(document.querySelectorAll("a")).find(
+        (a) => a.dataset?.testid === "nowplaying-track-link"
+      )?.textContent ||
+      Array.from(document.querySelectorAll("a")).find(
+        (a) => a.dataset?.testid === "context-item-link"
+      )?.textContent;
+    uploader =
+      Array.from(document.querySelectorAll("div")).find(
+        (a) => a.dataset?.testid === "track-info-artists"
+      )?.textContent ||
+      Array.from(document.querySelectorAll("a")).find(
+        (a) => a.dataset?.testid === "context-item-info-show"
+      )?.textContent;
     presenceData.details = title;
     presenceData.state = uploader;
 

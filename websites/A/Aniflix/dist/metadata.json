@@ -14,7 +14,7 @@
     "ga_IE": "Cuireann Aniflix os cionn 1300 anime Dubáilte agus Subbed Gearmánach ar fáil saor in aisce. Ina theannta sin Scaoiltear na Eipeasóidí Anime is Nua gach Lá tar éis a Scaoileadh Seapánach."
   },
   "url": "www2.aniflix.tv",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "logo": "https://i.imgur.com/lza7ROE.png",
   "thumbnail": "https://i.imgur.com/Io2fHvW.png",
   "color": "#ff3645",
@@ -24,5 +24,6 @@
     "video"
   ],
   "iframe": true,
-  "category": "anime"
+  "category": "anime",
+  "button": false
 }
