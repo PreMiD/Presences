@@ -37,12 +37,7 @@ presence.on("UpdateData", () => {
     } else if (document.location.hostname == "shop.timolia.de") {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Shop - Viewing store page";
-        if (document.location.pathname.includes("#Ranks")) {
-            console.log("ranks");
-            presenceData.startTimestamp = browsingStamp;
-            presenceData.details = "Shop - Viewing products:";
-            presenceData.state = "Ränge";
-        } else if (document.location.pathname.startsWith("/checkout")) {
+        if (document.location.pathname.startsWith("/checkout")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Shop - Viewing shopping cart:";
             presenceData.state = document.querySelector("body > div.sections-wrapper > section > div > div > div.jumbotron > div > div.packages > form > table > tbody > tr > td.col-md-6").textContent;
