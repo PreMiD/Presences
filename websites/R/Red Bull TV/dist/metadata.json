@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "Red Bull TV",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/sAxySI0.png",
+  "thumbnail": "https://i.imgur.com/nO2N1Zf.png",
+  "version": "1.0.0",
+  "color": "#db0a41",
+  "tags": ["redbull", "tv", "live"],
+  "url": "www.redbull.com",
+  "description": {
+    "en": "The official website of RedBull"
+  },
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
