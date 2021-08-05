@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname.includes("video") && video) {
     const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div:nth-child(1) > script").textContent);
     if (!isNaN(video.duration)) {
-        const timestamps = presence.getTimestamps(
+      const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
@@ -38,10 +38,10 @@ presence.on("UpdateData", async () => {
     const catalogue = document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"); 
     if (catalogue) 
       presenceData.details = "Browsing...";
-     else {
-    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script").textContent);
-    presenceData.details = "Looking at";
-    presenceData.state = episode.name;
+    else {
+      const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script").textContent);
+      presenceData.details = "Looking at";
+      presenceData.state = episode.name;
     }
   } else presenceData.details = "Browsing...";
   if (presenceData.details === null) {
