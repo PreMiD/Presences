@@ -56,7 +56,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = title;
   } else if (path.pathname.includes("play")) {
     let episode,
-      Movie;
+      Movie,
+      Sub;
     presenceData.startTimestamp = browsingStamp;
     const timestamps = presence.getTimestamps(
       Math.floor(video.current),
@@ -66,32 +67,35 @@ presence.on("UpdateData", async () => {
       const info = playvdo.split("ตอนที่");
       episode = info.pop();
 
-      if (episode.includes("ซับไทย"))
+      if (episode.includes("ซับไทย")) { 
         episode = episode.replace("ซับไทย", "").trim();
-      else if (episode.includes("พากย์ไทย"))
+        Sub = "ซับไทย";
+      }else if (episode.includes("พากย์ไทย"))
         episode = episode.replace("พากย์ไทย", "").trim();
+      Sub = "พากย์ไทย";
 
-      episode = `ตอนที่ ${episode}`;
+      episode = `ตอนที่  ${episode} ${Sub}`;
       [presenceData.details] = info;
       presenceData.state = episode;
-    } else if (titlemovie.includes("The Movie" || "เดอะมูวี่" || "เดอะมูฟวี่" || "มูฟวี่" )) {
+    } else if (titlemovie.includes("The Movie" || "เดอะมูวี่" || "เดอะมูฟวี่" || "มูฟวี่")) {
       const info = titlemovie.split("The Movie" || "พากย์ไทย");
       Movie = info.pop();
-
-      if (Movie.includes("ซับไทย"))
-        Movie = Movie.replace("ซับไทย", "ซับไทย").trim();
-      else if (Movie.includes("พากย์ไทย"))
-        Movie = Movie.replace("พากย์ไทย", "พากย์ไทย").trim();
-
-      Movie = `เดอะมูวี่ ${Movie}`;
+      if (Movie.includes("ซับไทย")) {
+        Movie = Movie.replace("ซับไทย", "").trim();
+        Sub = "ซับไทย";
+      }else if (Movie.includes("พากย์ไทย"))
+        Movie = Movie.replace("พากย์ไทย", "").trim();
+      Sub = "พากย์ไทย";
+      
+      Movie = `เดอะมูวี่ ${Movie} ${Sub}`;
       [presenceData.details] = info;
       presenceData.state = Movie;
     }else {
       let info;
       if (ep.includes("ซับไทย"))
-        info = ep.replace("", "").trim();
+        info = ep.replace("ซับไทย", "").trim();
       else if (ep.includes("พากย์ไทย"))
-        info = ep.replace("", "").trim();
+        info = ep.replace("พากย์ไทย", "").trim();
 
       episode = "กำลังดู";
       presenceData.details = info;
