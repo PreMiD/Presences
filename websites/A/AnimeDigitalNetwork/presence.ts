@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     };
   
   if (document.location.pathname.includes("video") && video) {
-    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div:nth-child(1) > script").textContent)
+    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div:nth-child(1) > script").textContent);
     if (video && !isNaN(video.duration)) {
         const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
@@ -35,11 +35,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = episode.partOfSeries.name;
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const catalogue = document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span") 
-    if (catalogue) {
+    const catalogue = document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"); 
+    if (catalogue) 
       presenceData.details = "Browsing...";
-    } else {
-    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script").textContent)
+     else {
+    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script").textContent);
     presenceData.details = "Looking at";
     presenceData.state = episode.name;
     }
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
