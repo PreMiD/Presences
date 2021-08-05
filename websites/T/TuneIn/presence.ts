@@ -14,14 +14,19 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     },
-    playerCheck = document.querySelector(".player__playerContainer___JEJ2U")
+    error = document.querySelector("#innerAppContent > div.player__playerContainer___JEJ2U > div > div.player__leftSection___flqSC > div.player__leftErrorMessageContainer___10rm9 > div > div > div.player__errorMessageContainer___1dw8a")
+    if (error) { 
+      presence.clearActivity()
+    } else {
+    const playerCheck = document.querySelector(".player__playerContainer___JEJ2U")
       ? true
       : false;
-  if (playerCheck) {
+  if (playerCheck) { 
     const liveCheck =
       document.querySelector("#scrubberElapsed").textContent == "LIVE"
         ? true
         : false;
+        
     if (liveCheck) {
       const playCheck = document.querySelector(
         ".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-playing']"
@@ -50,12 +55,12 @@ presence.on("UpdateData", async () => {
         const audioTime =
             document.querySelector("#scrubberElapsed").textContent,
           audioDuration =
-            document.querySelector("#scrubberDuration").textContent,
+          document.querySelector("#scrubberElapsed").innerHTML,
           timestamp1 = presence.timestampFromFormat(audioTime),
           timestamp2 = presence.timestampFromFormat(audioDuration),
           timestamps = presence.getTimestamps(timestamp1, timestamp2),
           paused = document.querySelector(
-            ".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-paused']"
+            ".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-stopped']"
           )
             ? true
             : false;
@@ -82,10 +87,16 @@ presence.on("UpdateData", async () => {
           delete data.endTimestamp;
         }
 
-        presence.setActivity(data);
+        if (data.details === null) {
+          presence.setTrayTitle();
+          presence.setActivity();
+        } else {
+          presence.setActivity(data);
+        }
       }
-    } else {
-      presence.clearActivity();
+    }
+    } else { 
+      presence.clearActivity()
     }
   }
 });
