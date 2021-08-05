@@ -53,12 +53,12 @@ function getAuthorString(): string {
           document.querySelector(
             "span yt-formatted-string.ytmusic-player-bar a"
           ) as HTMLAnchorElement
-      ).innerText
+        ).innerText
       : (
           document.querySelector(
             "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
           ) as HTMLAnchorElement
-      ).innerText;
+        ).innerText;
   }
 
   return authorString;
@@ -87,20 +87,20 @@ presence.on("UpdateData", async () => {
         smallImageKey: video.paused
           ? "pause"
           : repeatMode === "ONE"
-            ? "repeat-one"
-            : repeatMode === "ALL"
-              ? "repeat"
-              : "play",
+          ? "repeat-one"
+          : repeatMode === "ALL"
+          ? "repeat"
+          : "play",
         smallImageText: video.paused
           ? (await strings).pause
           : repeatMode === "ONE"
-            ? "On loop"
-            : repeatMode === "ALL"
-              ? "Playlist on loop"
-              : (await strings).play,
+          ? "On loop"
+          : repeatMode === "ALL"
+          ? "Playlist on loop"
+          : (await strings).play,
         endTimestamp
       };
-  
+
     if (buttons) {
       presenceData.buttons = [
         {
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
     }
 
     if (!time) delete presenceData.endTimestamp;
-    
+
     if (buttons) {
       presenceData.buttons = [
         {
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-    
+
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
