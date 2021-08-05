@@ -128,5 +128,4 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
-  //console.log(presenceData);
 });
