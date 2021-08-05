@@ -55,9 +55,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "ค้นหา ";
     presenceData.state = title;
   } else if (path.pathname.includes("play")) {
-    let episode,
-      Movie,
-      Sub;
+    let episode, Movie, Sub, SubMovie;
     presenceData.startTimestamp = browsingStamp;
     const timestamps = presence.getTimestamps(
       Math.floor(video.current),
@@ -82,12 +80,12 @@ presence.on("UpdateData", async () => {
       Movie = info.pop();
       if (Movie.includes("ซับไทย")) {
         Movie = Movie.replace("ซับไทย", "").trim();
-        Sub = "ซับไทย";
+        SubMovie = "ซับไทย";
       }else if (Movie.includes("พากย์ไทย"))
         Movie = Movie.replace("พากย์ไทย", "").trim();
-      Sub = "พากย์ไทย";
+      SubMovie = "พากย์ไทย";
       
-      Movie = `เดอะมูวี่ ${Movie} ${Sub}`;
+      Movie = `เดอะมูวี่ ${Movie} ${SubMovie}`;
       [presenceData.details] = info;
       presenceData.state = Movie;
     }else {
