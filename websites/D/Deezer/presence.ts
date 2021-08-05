@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
     const paused2 =
     document.querySelector("#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path").outerHTML;
     let paused: boolean;
-    if (paused2 == '<path d="m5 2 18 10L5 22V2z"></path>') 
+    if (paused2 === '<path d="m5 2 18 10L5 22V2z"></path>') 
       paused = true;
      else 
       paused = false;
