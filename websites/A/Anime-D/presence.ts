@@ -8,11 +8,11 @@ const presence = new Presence({
   });
 
 let video = {
-  current: 0,
-  duration: 0,
-  paused: true
-};
-
+    current: 0,
+    duration: 0,
+    paused: true
+  },
+  Sub: string;
 // Const thing
 const browsingStamp = Math.floor(Date.now() / 1000),
   title = document.querySelector(".panel-heading")?.textContent ?? "ไม่ทราบชื่อ",
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "ค้นหา ";
     presenceData.state = title;
   } else if (path.pathname.includes("play")) {
-    let episode, Movie, Sub, SubMovie;
+    let episode, Movie;
     presenceData.startTimestamp = browsingStamp;
     const timestamps = presence.getTimestamps(
       Math.floor(video.current),
@@ -65,12 +65,10 @@ presence.on("UpdateData", async () => {
       const info = playvdo.split("ตอนที่");
       episode = info.pop();
 
-      if (episode.includes("ซับไทย")) { 
-        episode = episode.replace("ซับไทย", "").trim();
-        Sub = "ซับไทย";
-      }else if (episode.includes("พากย์ไทย"))
-        episode = episode.replace("พากย์ไทย", "").trim();
-      Sub = "พากย์ไทย";
+      if (episode.includes("ซับไทย"))  
+        episode = episode.replace((Sub = "ซับไทย"), "").trim();
+      else if (episode.includes("พากย์ไทย"))
+        episode = episode.replace(Sub = "พากย์ไทย", "").trim();
 
       episode = `ตอนที่  ${episode} ${Sub}`;
       [presenceData.details] = info;
@@ -78,14 +76,12 @@ presence.on("UpdateData", async () => {
     } else if (titlemovie.includes("The Movie" || "เดอะมูวี่" || "เดอะมูฟวี่" || "มูฟวี่")) {
       const info = titlemovie.split("The Movie" || "พากย์ไทย");
       Movie = info.pop();
-      if (Movie.includes("ซับไทย")) {
-        Movie = Movie.replace("ซับไทย", "").trim();
-        SubMovie = "ซับไทย";
-      }else if (Movie.includes("พากย์ไทย"))
-        Movie = Movie.replace("พากย์ไทย", "").trim();
-      SubMovie = "พากย์ไทย";
+      if (Movie.includes("ซับไทย")) 
+        Movie = Movie.replace(Sub = "ซับไทย", "").trim();
+      else if (Movie.includes("พากย์ไทย"))
+        Movie = Movie.replace(Sub = "พากย์ไทย", "").trim() ;
       
-      Movie = `เดอะมูวี่ ${Movie} ${SubMovie}`;
+      Movie = `เดอะมูวี่ ${Movie} ${Sub}`;
       [presenceData.details] = info;
       presenceData.state = Movie;
     }else {
