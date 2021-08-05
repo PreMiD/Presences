@@ -35,11 +35,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = episode.partOfSeries.name;
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script").textContent)
     const catalogue = document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span") 
     if (catalogue) {
       presenceData.details = "Browsing...";
     } else {
+    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script").textContent)
     presenceData.details = "Looking at";
     presenceData.state = episode.name;
     }
