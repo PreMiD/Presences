@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
   
   if (document.location.pathname.includes("video") && video) {
     const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div:nth-child(1) > script").textContent)
-    if (video && !isNaN(video.duration)) {
+    if (!isNaN(video.duration)) {
         const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
