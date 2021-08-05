@@ -14,10 +14,10 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     },
-    error = document.querySelector("#innerAppContent > div.player__playerContainer___JEJ2U > div > div.player__leftSection___flqSC > div.player__leftErrorMessageContainer___10rm9 > div > div > div.player__errorMessageContainer___1dw8a")
-    if (error) { 
-      presence.clearActivity()
-    } else {
+    error = document.querySelector("#innerAppContent > div.player__playerContainer___JEJ2U > div > div.player__leftSection___flqSC > div.player__leftErrorMessageContainer___10rm9 > div > div > div.player__errorMessageContainer___1dw8a");
+    if (error)  
+      presence.clearActivity();
+     else {
     const playerCheck = document.querySelector(".player__playerContainer___JEJ2U")
       ? true
       : false;
@@ -38,14 +38,14 @@ presence.on("UpdateData", async () => {
         author = document.querySelector("#playerSubtitle").textContent;
 
         data.details = title;
-        if (title.length > 128) {
-          data.details = title.substring(0, 125) + "...";
-        }
+        if (title.length > 128) 
+          data.details = `${title.substring(0, 125)}...`;
+        
 
         data.state = author;
-        if (author.length > 128) {
-          data.state = author.substring(0, 125) + "...";
-        }
+        if (author.length > 128) 
+          data.state = `${author.substring(0, 125)}...`;
+        
 
         data.smallImageKey = "live";
         data.smallImageText = (await strings).live;
@@ -66,14 +66,14 @@ presence.on("UpdateData", async () => {
             : false;
 
         data.details = title;
-        if (title.length > 128) {
-          data.details = title.substring(0, 125) + "...";
-        }
+        if (title.length > 128) 
+          data.details = `${title.substring(0, 125)}...`;
+        
 
         data.state = author;
-        if (author.length > 128) {
-          data.state = author.substring(0, 125) + "...";
-        }
+        if (author.length > 128) 
+          data.state = `${author.substring(0, 125)}...`;
+        
 
         (data.smallImageKey = paused ? "pause" : "play"),
           (data.smallImageText = paused
@@ -90,13 +90,13 @@ presence.on("UpdateData", async () => {
         if (data.details === null) {
           presence.setTrayTitle();
           presence.setActivity();
-        } else {
+        } else 
           presence.setActivity(data);
-        }
+        
       }
     }
-    } else { 
-      presence.clearActivity()
-    }
+    } else  
+      presence.clearActivity();
+    
   }
 });
