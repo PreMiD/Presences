@@ -72,13 +72,11 @@ presence.on("UpdateData", async () => {
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
       .getAttribute("repeat-Mode_"),
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting("buttons"),
+    time = await presence.getSetting("time");
 
   if (title !== "" && !isNaN(video.duration)) {
-    const [, endTimestamp] = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
+    const [, endTimestamp] = presence.getTimestampsfromMedia(video),
       [, watchID] = document
         .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
         .href.match(/v=([^&#]{5,})/),
@@ -102,7 +100,7 @@ presence.on("UpdateData", async () => {
               : (await strings).play,
         endTimestamp
       };
-
+  
     if (buttons) {
       presenceData.buttons = [
         {
@@ -112,6 +110,17 @@ presence.on("UpdateData", async () => {
       ];
     }
 
+    if (!time) delete presenceData.endTimestamp;
+    
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${watchID}`
+        }
+      ];
+    }
+    
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
