@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = episode.name;
     }
   } else presenceData.details = "Browsing...";
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
