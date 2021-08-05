@@ -11,17 +11,15 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     };
-
+  
   if (document.location.pathname.includes("video") && video) {
+    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div:nth-child(1) > script").textContent)
     if (video && !isNaN(video.duration)) {
-      const title = document.querySelector(
-          "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-kbKFCX.sc-kgMcbC.kecmmo > div:nth-child(1) > div > div > h1 > a"
-        ),
-        timestamps = presence.getTimestamps(
+        const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
-      presenceData.details = title.textContent;
+      presenceData.details = episode.partOfSeries.name;
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? (await strings).pause
@@ -32,13 +30,19 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
+    } else {
+      presenceData.details = "Looking at";
+      presenceData.state = episode.partOfSeries.name;
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const title = document.querySelector(
-      "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-kbKFCX.sc-kgMcbC.kecmmo > div:nth-child(1) > div > div > h1 > a"
-    );
+    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script").textContent)
+    const catalogue = document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span") 
+    if (catalogue) {
+      presenceData.details = "Browsing...";
+    } else {
     presenceData.details = "Looking at";
-    presenceData.state = title.textContent;
+    presenceData.state = episode.name;
+    }
   } else presenceData.details = "Browsing...";
   if (presenceData.details === null) {
     presence.setTrayTitle();
