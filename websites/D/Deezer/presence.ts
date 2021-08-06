@@ -41,9 +41,9 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -54,10 +54,14 @@ presence.on("UpdateData", async () => {
     albumLink = document.querySelector("div.marquee-content")
       .children[0] as HTMLAnchorElement;
 
-    const paused =
-      document.querySelector(
-        ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
-      ) === null;
+    const paused2 =
+    document.querySelector("#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path").outerHTML;
+    let paused: boolean;
+    if (paused2 === '<path d="m5 2 18 10L5 22V2z"></path>') 
+      paused = true;
+     else 
+      paused = false;
+    
     currentTime = document.querySelector(
       "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
     ).textContent;
@@ -141,7 +145,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !paused);
     }
   } else {
-    const pathname = document.location.pathname,
+    const {pathname} = document.location,
       presenceData: PresenceData = {
         largeImageKey: "deezer"
       };
@@ -175,9 +179,9 @@ presence.on("UpdateData", async () => {
     } else if (pathname.includes("artist")) {
       presenceData.details = "Looking at...";
       presenceData.state = "An Artist";
-    } else {
+    } else 
       presenceData.details = "Browsing...";
-    }
+    
     presence.setActivity(presenceData);
   }
 });

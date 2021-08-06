@@ -38,10 +38,13 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "site",
-    startTimestamp: browsingStamp
-  };
+  const time = await presence.getSetting("timestamps"),
+    privacy = await presence.getSetting("privacy"),
+    buttons = await presence.getSetting("buttons"),
+    presenceData: PresenceData = {
+      largeImageKey: "site",
+      startTimestamp: browsingStamp
+    };
 
   // Presence
   if (document.location.pathname === "/")
@@ -92,7 +95,14 @@ presence.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
     if (!video.paused) [, presenceData.endTimestamp] = timestamps;
-    else {
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "ดูเดอะมูฟวี่",
+          url: document.location.href.replace(/#\d+/, "")
+        }
+      ];
+    } else {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
@@ -130,6 +140,14 @@ presence.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
     if (!video.paused) [, presenceData.endTimestamp] = timestamps;
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "ดูอนิเมะ",
+          url: document.location.href.replace(/#\d+/, "")
+        }
+      ];
+    }
   } else if (path.href) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "เลือกตอน ";
@@ -137,6 +155,14 @@ presence.on("UpdateData", async () => {
   } else {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
+  }
+  if (!time) {
+    delete presenceData.startTimestamp;
+    delete presenceData.endTimestamp;
+  }
+  if (privacy) {
+    delete presenceData.state;
+    delete presenceData.buttons;
   }
   if (!presenceData.details) {
     presence.setTrayTitle();
