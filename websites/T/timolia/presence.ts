@@ -11,8 +11,8 @@ presence.on("UpdateData", () => {
         startTimestamp: browsingStamp
     };
 
-    if (document.location.hostname == "www.timolia.de") {
-        if (document.location.pathname == "/") {
+    if (document.location.hostname === "www.timolia.de") {
+        if (document.location.pathname === "/") {
             presenceData.startTimestamp = browsingStamp;
             const player = document.querySelector("#liveplayercount").textContent;
             presenceData.details = "Viewing home page";
@@ -30,11 +30,11 @@ presence.on("UpdateData", () => {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing account settings";
         }
-    } else if (document.location.hostname == "howto.timolia.de") {
+    } else if (document.location.hostname === "howto.timolia.de") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "HowTo - Reading:";
         presenceData.state = document.querySelector("body > div.md-container > main > div > div.md-content > article > h1").textContent;
-    } else if (document.location.hostname == "shop.timolia.de") {
+    } else if (document.location.hostname === "shop.timolia.de") {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Shop - Viewing store page";
         if (document.location.pathname.startsWith("/checkout")) {
@@ -42,7 +42,7 @@ presence.on("UpdateData", () => {
             presenceData.details = "Shop - Viewing shopping cart:";
             presenceData.state = document.querySelector("body > div.sections-wrapper > section > div > div > div.jumbotron > div > div.packages > form > table > tbody > tr > td.col-md-6").textContent;
         }
-    } else if (document.location.hostname == "forum.timolia.de") {
+    } else if (document.location.hostname === "forum.timolia.de") {
             presenceData.details = "Viewing forum start page";
         if (document.location.pathname.startsWith("/members")) {
             const user = document.querySelector("#content > div.pageWidth > div > div > div.mainProfileColumn > div > div > h1 > span").textContent;
@@ -64,7 +64,7 @@ presence.on("UpdateData", () => {
         presenceData.smallImageKey = "gitlab";
     }
 
-    if (presenceData.details == null) {
+    if (presenceData.details === null) {
         presence.setTrayTitle();
         presence.setActivity();
     } else 
