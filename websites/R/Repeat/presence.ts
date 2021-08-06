@@ -27,7 +27,7 @@ newStats();
 
 presence.on("UpdateData", async () => {
   if (!data) return;
-  console.log(1)
+  console.log(1);
   const settings = {
     details: (await presence.getSetting("details")).replace(
       "%listeners%",
