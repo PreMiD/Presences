@@ -1,8 +1,6 @@
 const presence = new Presence({
     clientId: "872429725090447360"
   }),
-
-  // Const thing
   browsingStamp = Math.floor(Date.now() / 1000),
   title = document.querySelector(".title")?.textContent ?? "unknown",
   path = document.location;
@@ -16,8 +14,7 @@ presence.on("UpdateData", async () => {
     };
 
   // Presence
-  if (document.location.pathname === "/")
-    (presenceData.state = "Home Page");
+  if (document.location.pathname === "/") presenceData.state = "Home Page";
   if (path.search.includes("filter")) {
     presenceData.state = `Search ${title}`;
     presenceData.smallImageKey = "search";
@@ -25,19 +22,17 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading";
     presenceData.state = "Frequent Questions ?";
     presenceData.smallImageKey = "question";
-  } else if (path.pathname.includes("developers")) 
+  } else if (path.pathname.includes("developers"))
     presenceData.state = "Views Developers";
   else if (path.pathname.includes("Docs")) {
     presenceData.details = "Reading";
-    presenceData.state = title,
-    presenceData.smallImageKey = "reading";
+    (presenceData.state = title), (presenceData.smallImageKey = "reading");
   } else if (path.pathname.includes("Privacy")) {
     presenceData.details = "Reading";
-    presenceData.state = title,
-    presenceData.smallImageKey = "reading";
-  } else if (path.pathname.includes("themes")) 
+    (presenceData.state = title), (presenceData.smallImageKey = "reading");
+  } else if (path.pathname.includes("themes"))
     presenceData.state = "Views Themes";
-  else if (path.pathname.includes("plugins")) 
+  else if (path.pathname.includes("plugins"))
     presenceData.state = "Views plugins";
   else if (path.pathname.includes("theme/")) {
     presenceData.startTimestamp = browsingStamp;
@@ -51,7 +46,6 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-  
   } else if (path.pathname.includes("plugin/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Views plugin";

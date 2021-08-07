@@ -18,7 +18,6 @@
   "description": {
     "en": "BetterDiscord extends the functionality of DiscordApp by enhancing it with new features."
   },
-  "iframe": false,
   "settings": [
     {
       "id": "timestamps",
