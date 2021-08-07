@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
             .getAttribute("href"),
       },
     ];
-  } else if (document.location.pathname.includes("/profile/")) {
+  } else if (document.location.pathname.includes("/profile")) {
     presenceData.details = "Viewing Profile";
     presenceData.state = document.querySelector("h4").textContent;
     presenceData.buttons = [
