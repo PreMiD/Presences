@@ -17,59 +17,59 @@ presence.on("UpdateData", () => {
 
    presenceData.details = vars.details;
 
-   if(vars.page == 'test') {
+   if(vars.page === 'test'){
 
-      const testActive = document.querySelector("#resultsContent").textContent == '';
+      var testActive = document.querySelector("#resultsContent").textContent === '';
 
-      if(live.chrOk == undefined
-      || (live.chrOk == 0 && live.chrKo == 0)
-      ) 
+      if(live.chrOk === undefined
+      || (live.chrOk === 0 && live.chrKo === 0)
+      ){
          presenceData.state = vars.ready;
-      else{         
-         presenceData.state = `${live.worPm} wpm, ${
-                         live.points} ${vars.points}, ${
-                         live.chrAcc}% ${vars.accuracy}`
+      }else{         
+         presenceData.state = live.worPm + ' wpm, '
+                        + live.points + ' ' + vars.points + ', '
+                        + live.chrAcc + '% ' + vars.accuracy
                         ;
       }
 
-      if(testActive) {
+      if(testActive){
 
-         if(vars.testType == 0) {
-            const residualTime = document.querySelector("#premIdVars").getAttribute('residualTime');
-            if(residualTime !== '') {
+         if(vars.testType === 0){
+            var residualTime = document.querySelector("#premIdVars").getAttribute('residualTime');
+            if(residualTime !== ''){
                presenceData.endTimestamp = Math.floor(Date.now() / 1000) 
                                    + (parseInt(residualTime) + 1);
             } 
          }else{
-            if(presenceData.state !== vars.ready) 
-               presenceData.state += `, ${Math.round(live.time)} ${vars.seconds}`;
-            
+            if(presenceData.state !== vars.ready){
+               presenceData.state  += ', ' + Math.round(live.time) + ' ' + vars.seconds;
+            }
          }
 
       }else{
 
          presenceData.details = vars.finished;
 
-         if(presenceData.state !== vars.ready) {
-            presenceData.state += `, ${live.time} ${vars.seconds
-                             }, ${vars.words} ${live.worOk}/${live.worKo
-                             }, ${vars.chars} ${live.chrOk}/${live.chrKo}`
+         if(presenceData.state !== vars.ready){
+            presenceData.state  += ', ' + live.time + ' ' + vars.seconds
+                            + ', ' + vars.words + ' ' + live.worOk + '/' + live.worKo
+                            + ', ' + vars.chars + ' ' + live.chrOk + '/' + live.chrKo
                             ;
          }
 
       }
    }
 
-   if(!document.querySelector("#cntr-boxOverlay").classList.contains("displayNone")) {
+   if(!document.querySelector("#cntr-boxOverlay").classList.contains("displayNone")){
       presenceData.details = vars.checking_stats;
       delete presenceData.state;
    }
  
-   if (presenceData.details == null) {
+   if(presenceData.details === null){
       presence.setTrayTitle();
       presence.setActivity();
-   } else 
+   }else{
       presence.setActivity(presenceData);
-   
+   }
 
 });
