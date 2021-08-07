@@ -1,5 +1,5 @@
 ﻿const presence = new Presence({
-    clientId: "837997079208525835",
+    clientId: "837997079208525835"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
 
   if (document.location.href.includes("/?q=")) {
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: "View Page",
-        url: document.location.href,
+        url: document.location.href
       },
       {
         label: "View Uploader's Profile",
@@ -76,8 +76,8 @@ presence.on("UpdateData", async () => {
               "list-group-item d-flex justify-content-between"
             )
             .item(0)
-            .getAttribute("href")}`,
-      },
+            .getAttribute("href")}`
+      }
     ];
   } else if (document.location.pathname.includes("/profile")) {
     presenceData.details = "Viewing Profile";
@@ -85,8 +85,8 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: "View Profile",
-        url: document.location.href,
-      },
+        url: document.location.href
+      }
     ];
   } else if (document.location.pathname === "/") {
     presenceData.details = "Browsing Beatmaps";
