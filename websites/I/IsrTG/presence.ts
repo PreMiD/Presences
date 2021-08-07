@@ -26,12 +26,14 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.pathname === "/")
-    presenceData.details = "Viewing the homepage";
-  else if (document.location.pathname.startsWith("/events")) {
+  if (document.location.pathname === "/") {
+    presenceData.details = "Homepage";
+    presenceData.state = "";
+  } else if (document.location.pathname.startsWith("/events")) {
     const [, , pathName] = document.location.pathname.split("/");
-    presenceData.details = "Viewing a event";
-    presenceData.state = pathName;
+    eventName = document.getElementsByClassName("example");
+    presenceData.details = "Events";
+    presenceData.state = `looking at`;
   } else if (document.location.pathname.startsWith("/profile")) {
     presenceData.details = "Profile";
     presenceData.state = "Looking at their profile";
