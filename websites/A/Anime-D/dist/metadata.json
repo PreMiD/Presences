@@ -7,7 +7,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/mD1fANc.jpg",
   "thumbnail": "https://i.imgur.com/2wyv3S9.jpg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#cc6d00",
   "tags": [
     "anime",
@@ -22,7 +22,7 @@
   },
   "iframe": true,
   "settings": [
-            {
+    {
       "id": "privacy",
       "title": "Privacy Mode",
       "icon": "fad fa-user-secret",

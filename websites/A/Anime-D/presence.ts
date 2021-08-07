@@ -15,10 +15,17 @@ let video = {
   Sub: string;
 // Const thing
 const browsingStamp = Math.floor(Date.now() / 1000),
-  title = document.querySelector(".panel-heading")?.textContent ?? "ไม่ทราบชื่อ",
-  titlemovie = document.querySelector(".panel-heading")?.textContent ?? "ไม่ทราบชื่อเรื่อง",
-  ep = document.querySelector(".panel-heading")?.textContent ?? "ไม่ทราบชื่อตอน",
-  playvdo = document.querySelector("body > div:nth-child(3) > div > div.col-lg-9 > div > div.panel-heading > h3")?.textContent ?? "ไม่ทราบชื่อเรื่อง",
+  title =
+    document.querySelector(".panel-heading")?.textContent ?? "ไม่ทราบชื่อ",
+  titlemovie =
+    document.querySelector(".panel-heading")?.textContent ??
+    "ไม่ทราบชื่อเรื่อง",
+  ep =
+    document.querySelector(".panel-heading")?.textContent ?? "ไม่ทราบชื่อตอน",
+  playvdo =
+    document.querySelector(
+      "body > div:nth-child(3) > div > div.col-lg-9 > div > div.panel-heading > h3"
+    )?.textContent ?? "ไม่ทราบชื่อเรื่อง",
   path = document.location;
 
 presence.on(
@@ -40,7 +47,7 @@ presence.on("UpdateData", async () => {
   // Presence
   if (document.location.pathname === "/")
     presenceData.state = "อนิเมะอัพเดตล่าสุด";
-  else if (path.pathname.includes("index.html")) 
+  else if (path.pathname.includes("index.html"))
     presenceData.state = "อนิเมะอัพเดตล่าสุด";
   else if (path.pathname.includes("genre")) {
     presenceData.startTimestamp = browsingStamp;
@@ -65,29 +72,32 @@ presence.on("UpdateData", async () => {
       const info = playvdo.split("ตอนที่");
       episode = info.pop();
 
-      if (episode.includes("ซับไทย"))  
+      if (episode.includes("ซับไทย"))
         episode = episode.replace((Sub = "ซับไทย"), "").trim();
       else if (episode.includes("พากย์ไทย"))
-        episode = episode.replace(Sub = "พากย์ไทย", "").trim();
+        episode = episode.replace((Sub = "พากย์ไทย"), "").trim();
 
       episode = `ตอนที่  ${episode} ${Sub}`;
       [presenceData.details] = info;
       presenceData.state = episode;
-    } else if (titlemovie.includes("The Movie" || "เดอะมูวี่" || "เดอะมูฟวี่" || "มูฟวี่")) {
+    } else if (
+      titlemovie.includes(
+        "The Movie" || "เดอะมูวี่" || "เดอะมูฟวี่" || "มูฟวี่"
+      )
+    ) {
       const info = titlemovie.split("The Movie" || "พากย์ไทย");
       Movie = info.pop();
-      if (Movie.includes("ซับไทย")) 
-        Movie = Movie.replace(Sub = "ซับไทย", "").trim();
+      if (Movie.includes("ซับไทย"))
+        Movie = Movie.replace((Sub = "ซับไทย"), "").trim();
       else if (Movie.includes("พากย์ไทย"))
-        Movie = Movie.replace(Sub = "พากย์ไทย", "").trim() ;
-      
+        Movie = Movie.replace((Sub = "พากย์ไทย"), "").trim();
+
       Movie = `เดอะมูวี่ ${Movie} ${Sub}`;
       [presenceData.details] = info;
       presenceData.state = Movie;
-    }else {
+    } else {
       let info;
-      if (ep.includes("ซับไทย"))
-        info = ep.replace("ซับไทย", "").trim();
+      if (ep.includes("ซับไทย")) info = ep.replace("ซับไทย", "").trim();
       else if (ep.includes("พากย์ไทย"))
         info = ep.replace("พากย์ไทย", "").trim();
 
