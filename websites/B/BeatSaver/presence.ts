@@ -30,14 +30,14 @@ presence.on("UpdateData", async () => {
           .textContent.replace("+", "_")
           .toLowerCase();
       presenceData.smallImageText =
-        (
+        `${(
           document
             .querySelector("a[class~='active']")
             .childNodes.item(0) as HTMLElement
-        ).title +
-        " " +
+        ).title 
+        } ${ 
         document.querySelector("a[class~='active']").childNodes.item(1)
-          .textContent;
+          .textContent}`;
     }
     if (
       document
@@ -51,17 +51,17 @@ presence.on("UpdateData", async () => {
       .getElementsByClassName("card-header d-flex")
       .item(0)
       .childNodes.item(0).textContent;
-    if (presenceData.details === "") {
+    if (presenceData.details === "") 
       presenceData.details = "<NO NAME>";
-    }
+    
     presenceData.state =
-      "Uploaded by " +
+      `Uploaded by ${ 
       document
         .getElementsByClassName(
           "list-group-item d-flex justify-content-between"
         )
         .item(0)
-        .children.item(0).textContent;
+        .children.item(0).textContent}`;
     presenceData.buttons = [
       {
         label: "View Page",
@@ -70,13 +70,13 @@ presence.on("UpdateData", async () => {
       {
         label: "View Uploader's Profile",
         url:
-          "https://beatsaver.com" +
+          `https://beatsaver.com${ 
           document
             .getElementsByClassName(
               "list-group-item d-flex justify-content-between"
             )
             .item(0)
-            .getAttribute("href"),
+            .getAttribute("href")}`,
       },
     ];
   } else if (document.location.pathname.includes("/profile")) {
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
       if (document.location.href.includes("me=true"))
         filters += " Mapping Extensions,";
       if (document.location.href.includes("cinema=true")) filters += " Cinema,";
-      presenceData.state = "Filters:" + filters.slice(0, -1);
+      presenceData.state = `Filters:${filters.slice(0, -1)}`;
     }
   }
 
