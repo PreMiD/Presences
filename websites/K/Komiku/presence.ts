@@ -1,7 +1,6 @@
 const presence = new Presence({
     clientId: "868085258371870820"
   }),
-
   browsingStamp = Math.floor(Date.now() / 1000);
 
 // Presence On
@@ -14,30 +13,31 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp
     };
 
-  if (document.location.href === "https://komiku.id/") 
+  if (document.location.href === "https://komiku.id/")
     presenceData.details = "Viewing Homepage";
-   else if (document.location.pathname.endsWith("/baca-manga/")) 
+  else if (document.location.pathname.endsWith("/baca-manga/"))
     presenceData.details = "Viewing Manga List";
-   else if (document.location.pathname.endsWith("/baca-manhua/")) 
+  else if (document.location.pathname.endsWith("/baca-manhua/"))
     presenceData.details = "Viewing Manhua List";
-   else if (document.location.pathname.endsWith("/baca-manhwa/")) 
+  else if (document.location.pathname.endsWith("/baca-manhwa/"))
     presenceData.details = "Viewing Manhwa List";
-   else if (document.location.pathname.endsWith("/daftar-komik/")) 
+  else if (document.location.pathname.endsWith("/daftar-komik/"))
     presenceData.details = "Viewing Comic List";
-   else if (document.location.pathname.endsWith("/pustaka/")) 
+  else if (document.location.pathname.endsWith("/pustaka/"))
     presenceData.details = "Viewing New Release";
-   else if (document.location.pathname.startsWith("/other/")) {
-    if (document.location.pathname.startsWith("/other/hot/")) 
+  else if (document.location.pathname.startsWith("/other/")) {
+    if (document.location.pathname.startsWith("/other/hot/"))
       presenceData.details = "Browsing Featured";
-     else if (document.location.pathname.endsWith("/rekomendasi/")) 
+    else if (document.location.pathname.endsWith("/rekomendasi/"))
       presenceData.details = "Browsing Recommendation";
-     else if (document.location.pathname.endsWith("/berwarna/")) 
+    else if (document.location.pathname.endsWith("/berwarna/"))
       presenceData.details = "Browsing Coloured Comic";
-    
-  } else if (document.location.pathname.startsWith("/bookmark/history.html")) 
+  } else if (document.location.pathname.startsWith("/bookmark/history.html"))
     presenceData.details = "Viewing History";
-   else if (document.location.pathname.startsWith("/manga/")) {
-    const name = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, ""),
+  else if (document.location.pathname.startsWith("/manga/")) {
+    const name = document
+        .querySelector("header#Judul h1")
+        .textContent.replace(/\t|\n/g, ""),
       type = document.querySelector("section#Informasi b").textContent;
     presenceData.details = `Viewing ${type}`;
     presenceData.state = name;
@@ -51,8 +51,14 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.pathname.startsWith("/ch/")) {
-    const title = document.querySelector("header#Judul h1").textContent.replace(/\t|\n/g, "").replace(/Chapter \d+/, ""),
-      chapter = document.location.pathname.match(/chapter-\d+/)[0].replace("c", "C").replace("-", " ");
+    const title = document
+        .querySelector("header#Judul h1")
+        .textContent.replace(/\t|\n/g, "")
+        .replace(/Chapter \d+/, ""),
+      chapter = document.location.pathname
+        .match(/chapter-\d+/)[0]
+        .replace("c", "C")
+        .replace("-", " ");
     presenceData.details = title;
     presenceData.state = chapter;
     // View Manga & Chapter Buttons
@@ -60,7 +66,10 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         {
           label: "View Manga",
-          url: document.location.href.replace("ch", "manga").replace(/-chapter-\d+/, "").replace(/#\d+/, "")
+          url: document.location.href
+            .replace("ch", "manga")
+            .replace(/-chapter-\d+/, "")
+            .replace(/#\d+/, "")
         },
         {
           label: chapter,
@@ -69,11 +78,17 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.pathname.startsWith("/cari/")) {
-    const search = document.querySelector("div.ntah h1").textContent.replace("Hasil Pencarian", "").replace(/\t|\n/g, "");
+    const search = document
+      .querySelector("div.ntah h1")
+      .textContent.replace("Hasil Pencarian", "")
+      .replace(/\t|\n/g, "");
     presenceData.details = `Searching:`;
     presenceData.state = search;
   } else if (document.location.pathname.startsWith("/genre/")) {
-    const genre = document.querySelector("div.ntah h1").textContent.replace("Genre", "").replace(/\t|\n/g, "");
+    const genre = document
+      .querySelector("div.ntah h1")
+      .textContent.replace("Genre", "")
+      .replace(/\t|\n/g, "");
     presenceData.details = `Viewing Genre${genre}`;
   }
 
