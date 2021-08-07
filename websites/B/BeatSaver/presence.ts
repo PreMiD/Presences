@@ -36,8 +36,8 @@ presence.on("UpdateData", async () => {
             .childNodes.item(0) as HTMLElement
         ).title 
         } ${ 
-        document.querySelector("a[class~='active']").childNodes.item(1)
-          .textContent}`;
+          document.querySelector("a[class~='active']").childNodes.item(1)
+            .textContent}`;
     }
     if (
       document
@@ -56,12 +56,12 @@ presence.on("UpdateData", async () => {
     
     presenceData.state =
       `Uploaded by ${ 
-      document
-        .getElementsByClassName(
-          "list-group-item d-flex justify-content-between"
-        )
-        .item(0)
-        .children.item(0).textContent}`;
+        document
+          .getElementsByClassName(
+            "list-group-item d-flex justify-content-between"
+          )
+          .item(0)
+          .children.item(0).textContent}`;
     presenceData.buttons = [
       {
         label: "View Page",
@@ -71,12 +71,12 @@ presence.on("UpdateData", async () => {
         label: "View Uploader's Profile",
         url:
           `https://beatsaver.com${ 
-          document
-            .getElementsByClassName(
-              "list-group-item d-flex justify-content-between"
-            )
-            .item(0)
-            .getAttribute("href")}`
+            document
+              .getElementsByClassName(
+                "list-group-item d-flex justify-content-between"
+              )
+              .item(0)
+              .getAttribute("href")}`
       }
     ];
   } else if (document.location.pathname.includes("/profile")) {
