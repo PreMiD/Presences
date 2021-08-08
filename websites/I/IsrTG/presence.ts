@@ -6,15 +6,15 @@ const presence = new Presence({
     pause: "presence.playback.paused"
     //You can use this to get translated strings in their browser language
   });
-console.log("IsrTG  working ");
+
+console.log("IsrTG presence Working ");
+console.log(document.location);
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 const eventName = document.querySelector("#app > div > div >div > h2");
 const user = document.querySelector("#app > div > div >div >h2 ").firstChild;
 const currentUser = document.getElementById("dropdownMenuButton");
-console.log(currentUser.innerText);
 
-//   .innerHTML;
 //Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
 
 presence.on("UpdateData", async () => {
@@ -35,32 +35,25 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname === "/") {
     presenceData.details = "Homepage";
-    presenceData.state = "";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/events")) {
     presenceData.details = "Events";
     presenceData.state = `looking at ${eventName.innerHTML} `;
+    presenceData.smallImageText = `Really looking at ${eventName.innerHTML}`;
     presenceData.smallImageKey = "calendar";
-  } else if (document.location.pathname.startsWith("manage/events")) {
-    presenceData.details = "Reading Missions Brief";
-    presenceData.state = "";
-    console.log("hit the /storage/brief");
   } else if (document.location.pathname.startsWith("/profile")) {
-    if (user.nodeValue == currentUser.innerText) {
-      presenceData.details = "Profile";
-      presenceData.state = `Looking At their own profile`;
-      presenceData.smallImageKey = "pencil";
-    } else {
-      presenceData.details = "Profile";
-      presenceData.state = `Looking at ${user.nodeValue} profile`;
-    }
+    presenceData.details = "Profile";
+    presenceData.state = `Looking At ${user.nodeValue} profile`;
+    presenceData.smallImageKey = "avatar";
   } else if (document.location.pathname.startsWith("/about")) {
-    presenceData.details = "Viewing The About Page";
+    presenceData.details = "Reading The About Page";
+    presenceData.smallImageKey = "glasses";
     delete presenceData.state;
   } else if (document.location.pathname.startsWith("/roster")) {
     presenceData.details = "Looking At The Clan Members";
     delete presenceData.state;
   } else if (document.location.pathname.startsWith("/tutorials")) {
-    presenceData.details = "Viewing Tutorials";
+    presenceData.details = "Reading Tutorials";
     delete presenceData.state;
   } else if (document.location.pathname.startsWith("/contact-us")) {
     presenceData.details = "Viewing Contact-Us";
@@ -70,9 +63,6 @@ presence.on("UpdateData", async () => {
     delete presenceData.state;
   } else if (document.location.pathname.startsWith("/info")) {
     presenceData.details = "Viewing The Clan's Info";
-    delete presenceData.state;
-  } else if (document.location.pathname.startsWith("/manage")) {
-    presenceData.details = "Doing Some Manage Work";
     delete presenceData.state;
   }
 
