@@ -2,8 +2,6 @@ const presence = new Presence({
   clientId: "547436289960574977"
 });
 
-console.log("working on instagram");
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"

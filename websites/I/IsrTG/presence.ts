@@ -7,9 +7,6 @@ const presence = new Presence({
     //You can use this to get translated strings in their browser language
   });
 
-console.log("IsrTG presence Working ");
-console.log(document.location);
-
 var browsingStamp = Math.floor(Date.now() / 1000);
 const eventName = document.querySelector("#app > div > div >div > h2");
 const user = document.querySelector("#app > div > div >div >h2 ").firstChild;
