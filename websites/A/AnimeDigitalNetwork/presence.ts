@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
       presenceData.endTimestamp = timestamps[1];
       presenceData.buttons = [
         {
-          label: "Watch",
+          label: "Watch Episode",
           url: document.location.href
         }
       ];
