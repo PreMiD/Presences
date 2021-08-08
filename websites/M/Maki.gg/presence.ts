@@ -21,7 +21,6 @@ presence.on("UpdateData", async () => {
   }
   if (document.location.pathname !== "/") {
     presenceData.buttons = [
-      { label: "Maki.gg", url: "https://maki.gg/" },
       { label: "Invite", url: "https://maki.gg/invite" }
     ];
 
