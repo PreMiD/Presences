@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "563434444321587202"
 }),
 
- browsingStamp = Math.floor(Date.now() / 1000);
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   // Default data
@@ -16,16 +16,16 @@ presence.on("UpdateData", async () => {
   };
 
   // Homepage
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "On Homepage";
 
     const excatPath = document.location.href.substring(document.location.host.length + document.location.protocol.length + 2);
-    if (excatPath == "/#features") 
+    if (excatPath === "/#features")
       presenceData.state = "Looking at Makis features";
-    
+
   }
   // Server selection
-  else if (document.location.pathname == "/dashboard") {
+  else if (document.location.pathname === "/dashboard") {
     presenceData.details = "On Dashboard";
     presenceData.state = "Selecting a server";
   }
@@ -37,9 +37,9 @@ presence.on("UpdateData", async () => {
     let dashboardTab;
     const dashboardTabs = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-2.mb-2.mb-md-0 > ul").getElementsByTagName("li");
     for (let i = 0; i < dashboardTabs.length; i++) {
-      if (dashboardTabs[i].getElementsByTagName("a")[0].classList.contains("active")) 
+      if (dashboardTabs[i].getElementsByTagName("a")[0].classList.contains("active"))
         dashboardTab = dashboardTabs[i].getElementsByTagName("a")[0].innerHTML.split("\n")[2];
-      
+
     }
 
     presenceData.details = `${guildName}'s Dashboard`;
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
   }
   // Backgrounds
   else if (document.location.pathname.includes("/backgrounds/")) {
-    const profileBackgrounds = window.getComputedStyle(document.querySelector("#profile")).display == "block" ? true : false;
+    const profileBackgrounds = window.getComputedStyle(document.querySelector("#profile")).display === "block" ? true : false;
 
     presenceData.details = "Browsing through";
     presenceData.state = profileBackgrounds ? "Profile backgrounds" : "Rank backgrounds";
@@ -67,34 +67,34 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Maki premium";
   }
   // Commands
-  else if (document.location.pathname == "/commands") {
+  else if (document.location.pathname === "/commands") {
     presenceData.details = "Reading";
     presenceData.state = "Commands page";
   }
   // Status
-  else if (document.location.pathname == "/status") {
+  else if (document.location.pathname === "/status") {
     presenceData.details = "Reading";
     presenceData.state = "Status page";
   }
   // Profile
-  else if (document.location.pathname == "/profile") {
+  else if (document.location.pathname === "/profile") {
     const userName = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.justify-content-start > div > div.mb-1 > h4").innerHTML,
 
-     userLevel = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div.d-flex.align-items-center.mr-2 > div.ml-1 > h5").innerHTML,
-     userXp = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div:nth-child(2) > div.ml-1 > h5").innerHTML;
+      userLevel = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div.d-flex.align-items-center.mr-2 > div.ml-1 > h5").innerHTML,
+      userXp = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div:nth-child(2) > div.ml-1 > h5").innerHTML;
 
     presenceData.details = `Looking at the profile of ${userName}`;
     presenceData.state = `Level ${userLevel} | ` + `Xp ${userXp}`;
   }
   // Verify
-  else if (document.location.pathname == "/verify") {
+  else if (document.location.pathname === "/verify") {
     presenceData.details = "In the process to";
     presenceData.state = "Verify";
   }
   // Leaderboard
   else if (document.location.pathname.includes("/leaderboard")) {
     // Global leaderboard
-    if (document.location.pathname == "/leaderboard") {
+    if (document.location.pathname === "/leaderboard") {
       presenceData.details = "Looking at the";
       presenceData.state = "Global leaderboard";
     } else {
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
   // Knowledge
   else if (document.location.pathname.includes("/knowledge")) {
     // Main knowledge page
-    if (document.location.pathname == "/knowledge") {
+    if (document.location.pathname === "/knowledge") {
       presenceData.details = "Browsing through the";
       presenceData.state = "Knowledge page";
     }
@@ -119,20 +119,20 @@ presence.on("UpdateData", async () => {
 
   }
   // Terms
-  else if (document.location.pathname == "/terms") {
+  else if (document.location.pathname === "/terms") {
     presenceData.details = "Reading";
     presenceData.state = "The boring terms of service";
   }
   // Team
-  else if (document.location.pathname == "/team") {
+  else if (document.location.pathname === "/team") {
     presenceData.details = "Looking at the";
     presenceData.state = "Team";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
+  } else
     presence.setActivity(presenceData);
-  
+
 });
