@@ -8,8 +8,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo",
     startTimestamp: time
   },
-
-   data = document.querySelector("#premIdVars"),
+    data = document.querySelector("#premIdVars"),
     vars = JSON.parse(data.getAttribute("vars")),
     live = JSON.parse(data.getAttribute("liveScores"));
   presenceData.details = vars.details;
