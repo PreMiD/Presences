@@ -11,14 +11,18 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     };
-  
+
   if (document.location.pathname.includes("video") && video) {
-    const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div:nth-child(1) > script").textContent);
+    const episode = JSON.parse(
+      document.querySelector(
+        "#root > div > div > div.sc-pkSvE.kPCOPp > div > div:nth-child(1) > script"
+      ).textContent
+    );
     if (!isNaN(video.duration)) {
       const timestamps = presence.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        );
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       presenceData.details = episode.partOfSeries.name;
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
@@ -35,11 +39,16 @@ presence.on("UpdateData", async () => {
       presenceData.state = episode.partOfSeries.name;
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const catalogue = document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"); 
-    if (catalogue) 
-      presenceData.details = "Browsing...";
+    const catalogue = document.querySelector(
+      "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
+    );
+    if (catalogue) presenceData.details = "Browsing...";
     else {
-      const episode = JSON.parse(document.querySelector("#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script").textContent);
+      const episode = JSON.parse(
+        document.querySelector(
+          "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script"
+        ).textContent
+      );
       presenceData.details = "Looking at";
       presenceData.state = episode.name;
     }
@@ -47,7 +56,5 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
-    presence.setActivity(presenceData);
-  
+  } else presence.setActivity(presenceData);
 });
