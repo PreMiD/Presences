@@ -117,6 +117,7 @@ presence.on("UpdateData", async () => {
         .textContent.split(" · ")[0];
       showLink = albumLink = document.querySelector("div.marquee-content")
         .children[0] as HTMLAnchorElement;
+      if (!showLink) showLink = null;
       presenceData.details = title;
       presenceData.state = episode;
       presenceData.largeImageKey = "deezer";
@@ -127,13 +128,24 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
 
-      if (buttons) {
-        presenceData.buttons = [
-          {
-            label: (await strings).viewPodcast,
-            url: showLink.href
-          }
-        ];
+      if (showLink !== null) {
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).viewPodcast,
+              url: showLink.href
+            }
+          ];
+        }
+      } else {
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).play,
+              url: "https://support.deezer.com/hc/en-gb/articles/115004221605-Uploading-MP3s-to-Deezer"
+            }
+          ];
+        }
       }
       if (paused) {
         delete presenceData.startTimestamp;
