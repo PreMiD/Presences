@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "563434444321587202"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   // Default data
@@ -20,9 +20,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "On Homepage";
 
     const excatPath = document.location.href.substring(document.location.host.length + document.location.protocol.length + 2);
-    if (excatPath == "/#features") {
+    if (excatPath == "/#features") 
       presenceData.state = "Looking at Makis features";
-    }
+    
   }
   // Server selection
   else if (document.location.pathname == "/dashboard") {
@@ -34,16 +34,16 @@ presence.on("UpdateData", async () => {
     const guildName = document.querySelector("div.app-content.content > div.content-wrapper > div.content-body > section.dashboard > div.row > div.col-md-10 > div.card > div.card-content > div.card-body > div.tab-content > div.media.mb-2 > div.media-body.mt-50 > h4.media-heading").innerHTML;
 
     //var dashboardTab = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-2.mb-2.mb-md-0 > ul > li.active > a").innerHTML;
-    var dashboardTab;
+    let dashboardTab;
     const dashboardTabs = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-2.mb-2.mb-md-0 > ul").getElementsByTagName("li");
-    for (var i = 0; i < dashboardTabs.length; i++) {
-      if (dashboardTabs[i].getElementsByTagName("a")[0].classList.contains("active")) {
+    for (let i = 0; i < dashboardTabs.length; i++) {
+      if (dashboardTabs[i].getElementsByTagName("a")[0].classList.contains("active")) 
         dashboardTab = dashboardTabs[i].getElementsByTagName("a")[0].innerHTML.split("\n")[2];
-      }
+      
     }
 
-    presenceData.details = guildName + "'s Dashboard";
-    presenceData.state = "Editing " + dashboardTab + " settings";
+    presenceData.details = `${guildName}'s Dashboard`;
+    presenceData.state = `Editing ${dashboardTab} settings`;
   }
   // Server statisitcs
   else if (document.location.pathname.includes("/statistics/")) {
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
     console.log("stats");
     const guildName = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > div:nth-child(1) > div > div > div > div.media.mb-2 > div > h3").innerHTML;
 
-    presenceData.details = "Analyzing " + guildName;
+    presenceData.details = `Analyzing ${guildName}`;
     presenceData.state = "With Makis statistics";
   }
   // Backgrounds
@@ -78,13 +78,13 @@ presence.on("UpdateData", async () => {
   }
   // Profile
   else if (document.location.pathname == "/profile") {
-    const userName = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.justify-content-start > div > div.mb-1 > h4").innerHTML;
+    const userName = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.justify-content-start > div > div.mb-1 > h4").innerHTML,
 
-    const userLevel = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div.d-flex.align-items-center.mr-2 > div.ml-1 > h5").innerHTML;
-    const userXp = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div:nth-child(2) > div.ml-1 > h5").innerHTML;
+     userLevel = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div.d-flex.align-items-center.mr-2 > div.ml-1 > h5").innerHTML,
+     userXp = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div:nth-child(2) > div.ml-1 > h5").innerHTML;
 
-    presenceData.details = "Looking at the profile of " + userName;
-    presenceData.state = "Level " + userLevel + " | " + "Xp " + userXp;
+    presenceData.details = `Looking at the profile of ${userName}`;
+    presenceData.state = `Level ${userLevel} | ` + `Xp ${userXp}`;
   }
   // Verify
   else if (document.location.pathname == "/verify") {
@@ -97,11 +97,10 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname == "/leaderboard") {
       presenceData.details = "Looking at the";
       presenceData.state = "Global leaderboard";
-    }
-    else {
+    } else {
       const guildName = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div:nth-child(1) > div > div > div > div.col-12.col-sm-9.col-md-6.col-lg-5 > div.card-title").innerHTML;
       presenceData.details = "Looking at";
-      presenceData.state = guildName + "'s leaderboard";
+      presenceData.state = `${guildName}'s leaderboard`;
     }
   }
   // Knowledge
@@ -133,7 +132,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
