@@ -19,16 +19,19 @@ presence.on("UpdateData", async () => {
       ).textContent
     );
     if (!isNaN(video.duration)) {
-      const timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      const timestamps = presence.getTimestampsfromMedia(video);
       presenceData.details = episode.partOfSeries.name;
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
       presenceData.endTimestamp = timestamps[1];
+      presenceData.buttons = [
+        {
+          label: "Watch",
+          url: document.location.href
+        }
+      ];
 
       if (video.paused) {
         delete presenceData.startTimestamp;
@@ -37,13 +40,26 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.details = "Looking at";
       presenceData.state = episode.partOfSeries.name;
+      presenceData.buttons = [
+        {
+          label: "Check Out",
+          url: document.location.href
+        }
+      ];
     }
   } else if (document.location.pathname.includes("video") && !video) {
     const catalogue = document.querySelector(
       "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
     );
-    if (catalogue) presenceData.details = "Browsing...";
-    else {
+    if (catalogue) {
+      presenceData.details = "Browsing...";
+      presenceData.buttons = [
+        {
+          label: "Browse",
+          url: document.location.href
+        }
+      ];
+    } else {
       const episode = JSON.parse(
         document.querySelector(
           "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script"
@@ -51,8 +67,22 @@ presence.on("UpdateData", async () => {
       );
       presenceData.details = "Looking at";
       presenceData.state = episode.name;
+      presenceData.buttons = [
+        {
+          label: "Check Out",
+          url: document.location.href
+        }
+      ];
     }
-  } else presenceData.details = "Browsing...";
+  } else {
+    presenceData.details = "Browsing...";
+    presenceData.buttons = [
+      {
+        label: "Browse",
+        url: document.location.href
+      }
+    ];
+  }
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
