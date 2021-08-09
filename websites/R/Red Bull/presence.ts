@@ -22,13 +22,18 @@ presence.on("UpdateData", async () => {
   else if (pathname.includes("discover"))
     presenceData.details = "Discovering videos";
   else if (heading) presenceData.details = `Looking for ${heading.textContent}`;
-  else if (splitPath.length === 3 && splitPath[2] !== "") {
+  else if (pathname.includes("energydrink")) {
+    presenceData.details = "Looking at product info";
+    const heading =
+      document.querySelector<HTMLHeadingElement>("h1") ||
+      document.querySelector<HTMLHeadingElement>("h2");
+    if (heading) presenceData.state = heading.textContent;
+  } else if (splitPath.length === 3 && splitPath[2] !== "") {
     const title =
       document.querySelector<HTMLHeadingElement>(
         ".unified-story-hero__title"
       ) || document.querySelector<HTMLHeadingElement>(".story-hero__title");
     if (title) {
-      
       const video = document.querySelector("video");
       if (video) {
         [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
@@ -119,9 +124,10 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details)
+  if (!presenceData.details) {
     /* Sometimes some elements don't load but video works, the site is weird */
     presenceData.details = document.title;
+  }
 
   presence.setActivity(presenceData);
 });
