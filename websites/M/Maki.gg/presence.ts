@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname !== "/") {
     const [ButtonData, ButtonData] = {
 
-    }
+    };
     presenceData.buttons = [
       {
         label: "Invite",
