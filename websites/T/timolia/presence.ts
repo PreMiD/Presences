@@ -21,7 +21,6 @@ presence.on("UpdateData", () => {
         presenceData.details = "Viewing stats from:";
         presenceData.state = stats;
     } else if (document.location.pathname.includes("/games")) {
-        presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing gamemodes";
     } else if (document.location.pathname.includes("/account")) {
         presenceData.startTimestamp = browsingStamp;
