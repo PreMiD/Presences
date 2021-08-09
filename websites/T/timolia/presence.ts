@@ -12,7 +12,6 @@ presence.on("UpdateData", () => {
 
   if (document.location.hostname === "www.timolia.de") {
     if (document.location.pathname === "/") {
-        presenceData.startTimestamp = browsingStamp;
         const player = document.querySelector("#liveplayercount").textContent;
         presenceData.details = "Viewing home page";
         presenceData.smallImageKey = "minecraft";
