@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     storyCheck = document.location.pathname.split("/")[1].match(/^\d/)
       ? true
       : false;
-  if (path == "/home" || path == "/") {
+  if (path === "/home" || path === "/") {
     data.details = "Viewing Homepage";
     data.startTimestamp = browsingStamp;
   } else if (path.includes("/stories") || path.includes("/featured")) {
