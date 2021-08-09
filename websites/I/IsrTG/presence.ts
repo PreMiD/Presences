@@ -7,10 +7,9 @@ const presence = new Presence({
     //You can use this to get translated strings in their browser language
   });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 const eventName = document.querySelector("#app > div > div >div > h2");
 const user = document.querySelector("#app > div > div >div >h2 ").firstChild;
-const currentUser = document.getElementById("dropdownMenuButton");
 
 //Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
 
