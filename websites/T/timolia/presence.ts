@@ -17,7 +17,6 @@ presence.on("UpdateData", () => {
         presenceData.smallImageKey = "minecraft";
         presenceData.smallImageText = `${player} online players`;
     } else if (document.location.pathname.startsWith("/stats")) {
-        presenceData.startTimestamp = browsingStamp;
         const stats = document.querySelector("#playername").textContent;
         presenceData.details = "Viewing stats from:";
         presenceData.state = stats;
