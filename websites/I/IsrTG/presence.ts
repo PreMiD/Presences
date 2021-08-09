@@ -11,8 +11,6 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 const eventName = document.querySelector("#app > div > div >div > h2");
 const user = document.querySelector("#app > div > div >div >h2 ").firstChild;
 
-//Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-
 presence.on("UpdateData", async () => {
   /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
 
