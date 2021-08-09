@@ -11,7 +11,6 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  // Homepage
   if (document.location.pathname === "/") {
     presenceData.details = "On Homepage";
 
@@ -19,17 +18,13 @@ presence.on("UpdateData", async () => {
     if (excatPath === "/#features")
       presenceData.state = "Looking at Makis features";
   }
-  if (document.location.pathname !== "/") {
-    const [ButtonData, ButtonData] = {
-
-    };
+  else {
     presenceData.buttons = [
       {
         label: "Invite",
         url: "https://maki.gg/invite"
       }
     ];
-
     // Server selection
     if (document.location.pathname === "/dashboard") {
       presenceData.details = "On Dashboard";
@@ -68,8 +63,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reading";
       presenceData.state = "Status page";
     } else if (document.location.pathname === "/profile") {
-      const userName = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.justify-content-start > div > div.mb-1 > h4").innerHTML,
-
+      const
+        userName = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.justify-content-start > div > div.mb-1 > h4").innerHTML,
         userLevel = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div.d-flex.align-items-center.mr-2 > div.ml-1 > h5").innerHTML,
         userXp = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div:nth-child(2) > div.ml-1 > h5").innerHTML;
 
@@ -113,5 +108,4 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else
     presence.setActivity(presenceData);
-
 });
