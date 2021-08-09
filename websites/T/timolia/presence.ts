@@ -23,7 +23,6 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/games")) {
         presenceData.details = "Viewing gamemodes";
     } else if (document.location.pathname.includes("/account")) {
-        presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing account settings";
     }
   } else if (document.location.hostname === "howto.timolia.de") {
