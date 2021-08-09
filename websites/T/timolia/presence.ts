@@ -20,11 +20,11 @@ presence.on("UpdateData", () => {
         const stats = document.querySelector("#playername").textContent;
         presenceData.details = "Viewing stats from:";
         presenceData.state = stats;
-    } else if (document.location.pathname.includes("/games")) {
+    } else if (document.location.pathname.includes("/games")) 
         presenceData.details = "Viewing gamemodes";
-    } else if (document.location.pathname.includes("/account")) {
+     else if (document.location.pathname.includes("/account")) 
         presenceData.details = "Viewing account settings";
-    }
+    
   } else if (document.location.hostname === "howto.timolia.de") {
         presenceData.details = "HowTo - Reading:";
         presenceData.state = document.querySelector("body > div.md-container > main > div > div.md-content > article > h1").textContent;
