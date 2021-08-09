@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
     presenceData: PresenceData = {
       largeImageKey: "logo"
-    };
+    },
+    buttons = await presence.getSetting("buttons");
 
   if (document.location.pathname.includes("video") && video) {
     const episode = JSON.parse(
@@ -26,12 +27,14 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       presenceData.endTimestamp = timestamps[1];
-      presenceData.buttons = [
-        {
-          label: "Watch Episode",
-          url: document.location.href
-        }
-      ];
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "Watch Episode",
+            url: document.location.href
+          }
+        ];
+      }
 
       if (video.paused) {
         delete presenceData.startTimestamp;
@@ -40,20 +43,21 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.details = "Looking at";
       presenceData.state = episode.partOfSeries.name;
-      presenceData.buttons = [
-        {
-          label: "View Page",
-          url: document.location.href
-        }
-      ];
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "View Page",
+            url: document.location.href
+          }
+        ];
+      }
     }
   } else if (document.location.pathname.includes("video") && !video) {
     const catalogue = document.querySelector(
       "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
     );
-    if (catalogue) {
-      presenceData.details = "Browsing...";
-    } else {
+    if (catalogue) presenceData.details = "Browsing...";
+    else {
       const episode = JSON.parse(
         document.querySelector(
           "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script"
@@ -61,6 +65,7 @@ presence.on("UpdateData", async () => {
       );
       presenceData.details = "Looking at";
       presenceData.state = episode.name;
+      if (buttons) {
       presenceData.buttons = [
         {
           label: "View Page",
@@ -68,6 +73,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
+  }
   } else {
     presenceData.details = "Browsing...";
   }
@@ -75,4 +81,4 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
-});
+};);

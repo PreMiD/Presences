@@ -21,11 +21,14 @@
   "logo": "https://i.imgur.com/JnLqL7n.png",
   "thumbnail": "https://i.imgur.com/1idATDN.png",
   "color": "#0096FF",
-  "tags": [
-    "anime-digital-network",
-    "video",
-    "anime",
-    "adn"
-  ],
-  "category": "anime"
+  "tags": ["anime-digital-network", "video", "anime", "adn"],
+  "category": "anime",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }
