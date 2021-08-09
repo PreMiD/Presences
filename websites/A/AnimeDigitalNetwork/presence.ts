@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = episode.name;
       presenceData.buttons = [
         {
-          label: "Check Out",
+          label: "View Page",
           url: document.location.href
         }
       ];
