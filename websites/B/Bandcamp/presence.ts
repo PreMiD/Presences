@@ -2,19 +2,23 @@ const presence = new Presence({
     clientId: "640561280800915456"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let min: number, sec: number, time: number,
- min2: number, sec2: number, time2: number;
+let min: number,
+  sec: number,
+  time: number,
+  min2: number,
+  sec2: number,
+  time2: number;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "bc"
   };
 
-  if (document.location.hostname == "bandcamp.com") {
+  if (document.location.hostname === "bandcamp.com") {
     if (
       document.querySelector(
         "#discover > div:nth-child(9) > div:nth-child(2) > div > div.detail-player > div > table > tbody > tr:nth-child(1) > td.play_cell > a > div"
-      ) == null
+      ) === null
     ) {
       presenceData.details = "Viewing:";
       presenceData.startTimestamp = browsingStamp;
@@ -40,7 +44,7 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector(
         "#discover > div:nth-child(9) > div:nth-child(2) > div > div.detail-player > div > table > tbody > tr:nth-child(1) > td.play_cell > a > div"
-      ).className == "playbutton playing"
+      ).className === "playbutton playing"
     ) {
       min = parseInt(
         document
@@ -99,7 +103,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing:";
       presenceData.state = document.querySelector("head > title").textContent;
     }
-  } else if (document.location.hostname == "daily.bandcamp.com") {
+  } else if (document.location.hostname === "daily.bandcamp.com") {
     if (
       document.querySelector("#content > div:nth-child(2) > h2") !== null &&
       document.location.pathname !== "/"
@@ -122,7 +126,7 @@ presence.on("UpdateData", async () => {
       ) !== null &&
       document.querySelector(
         "#trackInfoInner > div.inline_player > table > tbody > tr:nth-child(1) > td.play_cell > a > div"
-      ).className == "playbutton playing" &&
+      ).className === "playbutton playing" &&
       document.location.pathname.includes("/album/")
     ) {
       min = parseInt(
@@ -187,7 +191,7 @@ presence.on("UpdateData", async () => {
       ) !== null &&
       document.querySelector(
         "#trackInfoInner > div.inline_player.one-track > table > tbody > tr:nth-child(1) > td.play_cell > a > div"
-      ).className == "playbutton playing" &&
+      ).className === "playbutton playing" &&
       document.location.pathname.includes("/track/")
     ) {
       min = parseInt(
@@ -250,7 +254,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector("head > title").textContent;
     }
   }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
