@@ -5,11 +5,11 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
     //You can use this to get translated strings in their browser language
-  });
+  }),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-const eventName = document.querySelector("#app > div > div >div > h2");
-const user = document.querySelector("#app > div > div >div >h2 ").firstChild;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ eventName = document.querySelector("#app > div > div >div > h2"),
+ user = document.querySelector("#app > div > div >div >h2 ").firstChild;
 
 presence.on("UpdateData", async () => {
   /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
