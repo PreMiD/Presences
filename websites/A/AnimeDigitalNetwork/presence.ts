@@ -66,19 +66,20 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Looking at";
       presenceData.state = episode.name;
       if (buttons) {
-      presenceData.buttons = [
-        {
-          label: "View Page",
-          url: document.location.href
-        }
-      ];
+        presenceData.buttons = [
+          {
+            label: "View Page",
+            url: document.location.href
+          }
+        ];
+      }
     }
-  }
   } else {
     presenceData.details = "Browsing...";
+
+    if (!presenceData.details) {
+      presence.setTrayTitle();
+      presence.setActivity();
+    } else presence.setActivity(presenceData);
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
-};);
+});
