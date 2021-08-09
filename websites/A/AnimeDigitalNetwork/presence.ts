@@ -53,12 +53,6 @@ presence.on("UpdateData", async () => {
     );
     if (catalogue) {
       presenceData.details = "Browsing...";
-      presenceData.buttons = [
-        {
-          label: "Browse",
-          url: document.location.href
-        }
-      ];
     } else {
       const episode = JSON.parse(
         document.querySelector(
