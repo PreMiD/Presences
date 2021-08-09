@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "ibroadcast_logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "ibroadcast_logo",
+      startTimestamp: browsingStamp
+    },
     { hostname } = document.location;
 
   if (hostname.startsWith("edit")) presenceData.details = "Editing Library";
