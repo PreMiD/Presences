@@ -20,8 +20,14 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Looking at Makis features";
   }
   if (document.location.pathname !== "/") {
+    const [ButtonData, ButtonData] = {
+
+    }
     presenceData.buttons = [
-      { label: "Invite", url: "https://maki.gg/invite" }
+      {
+        label: "Invite",
+        url: "https://maki.gg/invite"
+      }
     ];
 
     // Server selection
