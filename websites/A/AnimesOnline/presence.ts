@@ -17,7 +17,6 @@ const browsingStamp = Math.floor(Date.now() / 1000),
   title =
     document.querySelector("div.data > h1")?.textContent ?? "desconhecido",
   titlemovie = document.querySelector("#info > h2")?.textContent,
-  ep = document.querySelector("#info > h1")?.textContent ?? "desconhecido",
   Search =
     document.querySelector(
       "#contenedor > div.module > div.content.rigth.csearch > header > h1"
@@ -77,8 +76,7 @@ presence.on("UpdateData", async () => {
     path.pathname.includes("episodio") ||
     path.pathname.includes("filmes/")
   ) {
-    let episode,
-     filmes;
+    let episode, filmes;
     presenceData.startTimestamp = browsingStamp;
     const timestamps = presence.getTimestamps(
       Math.floor(video.current),
@@ -106,9 +104,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    if (!video.paused) 
-      [, presenceData.endTimestamp] = timestamps;
-    
+    if (!video.paused) [, presenceData.endTimestamp] = timestamps;
+
     if (buttons) {
       presenceData.buttons = [
         {
