@@ -13,21 +13,6 @@ let video = {
   paused: true
 };
 
-const browsingStamp = Math.floor(Date.now() / 1000),
-  title =
-    document.querySelector("div.data > h1")?.textContent ?? "desconhecido",
-  titlemovie = document.querySelector("#info > h2")?.textContent,
-  Search =
-    document.querySelector(
-      "#contenedor > div.module > div.content.rigth.csearch > header > h1"
-    )?.textContent ?? "pesquisa não encontrada",
-  playfilmes =
-    document.querySelector(
-      "#single > div.content.right > div.sheader > div.data > h1"
-    )?.textContent ?? "desconhecido",
-  playvdo = document.querySelector("#info > h1")?.textContent ?? "desconhecido",
-  path = document.location;
-
 presence.on(
   "iFrameData",
   (data: { current: number; duration: number; paused: boolean }) => {
@@ -38,6 +23,21 @@ presence.on(
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("timestamps"),
     buttons = await presence.getSetting("buttons"),
+    browsingStamp = Math.floor(Date.now() / 1000),
+    title =
+      document.querySelector("div.data > h1")?.textContent ?? "desconhecido",
+    titlemovie = document.querySelector("#info > h2")?.textContent,
+    Search =
+      document.querySelector(
+        "#contenedor > div.module > div.content.rigth.csearch > header > h1"
+      )?.textContent ?? "pesquisa não encontrada",
+    playfilmes =
+      document.querySelector(
+        "#single > div.content.right > div.sheader > div.data > h1"
+      )?.textContent ?? "desconhecido",
+    playvdo =
+      document.querySelector("#info > h1")?.textContent ?? "desconhecido",
+    path = document.location,
     presenceData: PresenceData = {
       largeImageKey: "site",
       startTimestamp: browsingStamp
