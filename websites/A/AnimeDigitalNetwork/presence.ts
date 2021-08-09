@@ -51,9 +51,9 @@ presence.on("UpdateData", async () => {
     const catalogue = document.querySelector(
       "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
     );
-    if (catalogue) {
+    if (catalogue) 
       presenceData.details = "Browsing...";
-    } else {
+     else {
       const episode = JSON.parse(
         document.querySelector(
           "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script"
@@ -68,9 +68,9 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-  } else {
+  } else 
     presenceData.details = "Browsing...";
-  }
+  
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
