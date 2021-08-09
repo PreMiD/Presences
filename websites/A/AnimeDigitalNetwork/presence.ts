@@ -70,12 +70,6 @@ presence.on("UpdateData", async () => {
     }
   } else {
     presenceData.details = "Browsing...";
-    presenceData.buttons = [
-      {
-        label: "Browse",
-        url: document.location.href
-      }
-    ];
   }
   if (!presenceData.details) {
     presence.setTrayTitle();
