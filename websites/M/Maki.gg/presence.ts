@@ -47,8 +47,6 @@ presence.on("UpdateData", async () => {
     }
     // Server statisitcs
     else if (document.location.pathname.includes("/statistics/")) {
-
-      console.log("stats");
       const guildName = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > div:nth-child(1) > div > div > div > div.media.mb-2 > div > h3").innerHTML;
 
       presenceData.details = `Analyzing ${guildName}`;
