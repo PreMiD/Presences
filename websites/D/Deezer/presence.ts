@@ -117,7 +117,6 @@ presence.on("UpdateData", async () => {
         .textContent.split(" · ")[0];
       showLink = albumLink = document.querySelector("div.marquee-content")
         .children[0] as HTMLAnchorElement;
-      if (!showLink) showLink = null;
       presenceData.details = title;
       presenceData.state = episode;
       presenceData.largeImageKey = "deezer";
@@ -128,7 +127,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
 
-      if (showLink !== null) {
+      if (showLink) {
         if (buttons) {
           presenceData.buttons = [
             {
