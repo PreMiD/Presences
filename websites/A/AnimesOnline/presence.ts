@@ -74,9 +74,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Selecionando um episódio";
   } else if (
     path.pathname.includes("episodio") ||
-    path.pathname.includes("filmes/")
+    path.pathname.match(/(\W|^)filmes(\W\w|$)/)
   ) {
-    let episode, filmes;
+    let episode;
     presenceData.startTimestamp = browsingStamp;
     const timestamps = presence.getTimestamps(
       Math.floor(video.current),
@@ -84,20 +84,14 @@ presence.on("UpdateData", async () => {
     );
     if (playvdo.includes("Episódio")) {
       const info = playvdo.split("- Episódio" || "Episódio");
-      episode = info.pop();
-      episode = `Episódio ${episode}`;
       [presenceData.details] = info;
-      presenceData.state = episode;
+      presenceData.state = `Episódio ${info.pop()}`;
     } else if (titlemovie.includes("Sinopse")) {
-      const titlemovie = playfilmes;
-      filmes = titlemovie;
-      filmes = `${filmes}`;
       presenceData.details = "Filmes";
-      presenceData.state = filmes;
+      presenceData.state = playfilmes;
     } else {
-      let info;
       episode = "Assistir Anime";
-      presenceData.details = info;
+      presenceData.details = playvdo;
       presenceData.state = episode;
     }
     presenceData.smallImageKey = video.paused ? "pause" : "play";
@@ -114,6 +108,9 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
+  } else if (path.pathname.match(/(\W|^)filmes(\W|$)/)) {
+    presenceData.details = "Vendo filmes";
+    presenceData.state = "Lista de Animes filmes";
   } else {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
