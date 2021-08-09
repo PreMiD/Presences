@@ -17,8 +17,7 @@ presence.on("UpdateData", async () => {
     const excatPath = document.location.href.substring(document.location.host.length + document.location.protocol.length + 2);
     if (excatPath === "/#features")
       presenceData.state = "Looking at Makis features";
-  }
-  else {
+  } else {
     presenceData.buttons = [
       {
         label: "Invite",
