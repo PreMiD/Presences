@@ -32,7 +32,6 @@ presence.on("UpdateData", () => {
         presenceData.details = "HowTo - Reading:";
         presenceData.state = document.querySelector("body > div.md-container > main > div > div.md-content > article > h1").textContent;
     } else if (document.location.hostname === "shop.timolia.de") {
-        presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Shop - Viewing store page";
         if (document.location.pathname.startsWith("/checkout")) {
             presenceData.startTimestamp = browsingStamp;
