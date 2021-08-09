@@ -1,25 +1,9 @@
-var presence = new Presence({
-  clientId: "640561280800915456"
-});
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-var min: number, sec: number, time: number;
-var min2: number, sec2: number, time2: number;
-var timestamps: any;
+const presence = new Presence({
+    clientId: "640561280800915456"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let min: number, sec: number, time: number;
+let min2: number, sec2: number, time2: number;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -92,7 +76,7 @@ presence.on("UpdateData", async () => {
       min2 = min2 * 60;
       time2 = min2 + sec2;
 
-      timestamps = getTimestamps(time, time2);
+      const timestamps = presence.getTimestamps(time, time2);
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = "play";
@@ -175,7 +159,7 @@ presence.on("UpdateData", async () => {
       min2 = min2 * 60;
       time2 = min2 + sec2;
 
-      timestamps = getTimestamps(time, time2);
+      const timestamps = presence.getTimestamps(time, time2);
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = "play";
@@ -239,7 +223,7 @@ presence.on("UpdateData", async () => {
       min2 = min2 * 60;
       time2 = min2 + sec2;
 
-      timestamps = getTimestamps(time, time2);
+      const timestamps = presence.getTimestamps(time, time2);
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = "play";
