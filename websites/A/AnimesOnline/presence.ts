@@ -77,21 +77,21 @@ presence.on("UpdateData", async () => {
     path.pathname.includes("episodio") ||
     path.pathname.includes("filmes/")
   ) {
-    let episode;
-    let filmes;
+    let episode,
+     filmes;
     presenceData.startTimestamp = browsingStamp;
     const timestamps = presence.getTimestamps(
       Math.floor(video.current),
       Math.floor(video.duration)
     );
     if (playvdo.includes("Episódio")) {
-      let info = playvdo.split("- Episódio" || "Episódio");
+      const info = playvdo.split("- Episódio" || "Episódio");
       episode = info.pop();
       episode = `Episódio ${episode}`;
       [presenceData.details] = info;
       presenceData.state = episode;
     } else if (titlemovie.includes("Sinopse")) {
-      let titlemovie = playfilmes;
+      const titlemovie = playfilmes;
       filmes = titlemovie;
       filmes = `${filmes}`;
       presenceData.details = "Filmes";
@@ -106,9 +106,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    if (!video.paused) {
+    if (!video.paused) 
       [, presenceData.endTimestamp] = timestamps;
-    }
+    
     if (buttons) {
       presenceData.buttons = [
         {
