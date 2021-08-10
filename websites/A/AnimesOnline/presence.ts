@@ -24,7 +24,6 @@ presence.on(
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("timestamps"),
     buttons = await presence.getSetting("buttons"),
-    browsingStamp = Math.floor(Date.now() / 1000),
     title =
       document.querySelector("div.data > h1")?.textContent ?? "desconhecido",
     titlemovie = document.querySelector("#info > h2")?.textContent,
