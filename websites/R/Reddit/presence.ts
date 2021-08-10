@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
     if (!presenceData.buttons?.length) {
       presenceData.buttons = [
         {
-          url: `https://www.reddit.com/r/netflix`,
+          url: "https://www.reddit.com/r/netflix",
           label: "View r/Netflix Subreddit"
         },
         {
