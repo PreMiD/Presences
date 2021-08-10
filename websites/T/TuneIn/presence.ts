@@ -74,12 +74,12 @@ presence.on("UpdateData", async () => {
           if (author.length > 128)
             data.state = `${author.substring(0, 125)}...`;
 
-          (data.smallImageKey = paused ? "pause" : "play"),
-            (data.smallImageText = paused
-              ? (await strings).pause
-              : (await strings).play),
-            (data.startTimestamp = timestamps[0]),
-            (data.endTimestamp = timestamps[1]);
+          data.smallImageKey = paused ? "pause" : "play";
+          data.smallImageText = paused
+            ? (await strings).pause
+            : (await strings).play;
+          data.startTimestamp = timestamps[0];
+          data.endTimestamp = timestamps[1];
 
           if (paused) {
             delete data.startTimestamp;
