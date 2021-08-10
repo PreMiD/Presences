@@ -55,8 +55,8 @@ presence.on("UpdateData", async () => {
   if (oldReddit) {
     subReddit = document.querySelector(".redditname")
       ? `r/${document.querySelector(".redditname").textContent}`
-      : `Home`;
-    if (pathname.includes(`/comments/`)) {
+      : "Home";
+    if (pathname.includes("/comments/")) {
       postTitle = document.querySelector("p.title > a").textContent;
       presenceData.details = `${(await strings).reading} '${postTitle}'`;
       presenceData.state = subReddit;
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
           label: (await strings).readButton
         }
       ];
-    } else if (pathname.startsWith(`/user/`)) {
+    } else if (pathname.startsWith("/user/")) {
       username = document.querySelector(".titlebox > h1").textContent;
       presenceData.details = (await strings).profile;
       presenceData.state = username;
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
           label: (await strings).viewProfileButton
         }
       ];
-    } else if (pathname.startsWith(`/search`)) {
+    } else if (pathname.startsWith("/search")) {
       presenceData.details = (await strings).searchSomething;
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = (await strings).searching;
