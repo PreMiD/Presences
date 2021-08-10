@@ -5,7 +5,8 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-  });
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let video = {
   current: 0,
