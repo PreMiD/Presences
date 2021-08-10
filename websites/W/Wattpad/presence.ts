@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     storyCheck = document.location.pathname.split("/")[1].match(/^\d/)
       ? true
       : false;
-  if (path == "/home") {
+  if (path === "/home" || path === "/") {
     data.details = "Viewing Homepage";
     data.startTimestamp = browsingStamp;
   } else if (path.includes("/stories") || path.includes("/featured")) {
@@ -56,14 +56,18 @@ presence.on("UpdateData", async () => {
       data.state = story;
       data.startTimestamp = browsingStamp;
     } else {
-      story = document.querySelector("#story-landing h1").textContent;
+      story = document.querySelector("head > title").textContent;
       data.details = "Viewing a Story";
       data.state = story;
       data.startTimestamp = browsingStamp;
     }
   } else if (storyCheck) {
-    story = document.querySelector("span.info h1.title").textContent;
-    const chapter = document.querySelector(".panel-reading h2").textContent;
+    story = document.querySelector(
+      "#funbar-part-details > span > span.info > h2"
+    ).textContent;
+    const chapter = document.querySelector(
+      "#funbar-story > div > ul > li.active > a > div"
+    ).textContent;
     data.details = "Reading " + story;
     data.state = chapter;
     data.startTimestamp = browsingStamp;
