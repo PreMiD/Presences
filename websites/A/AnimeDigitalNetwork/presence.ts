@@ -74,12 +74,10 @@ presence.on("UpdateData", async () => {
         ];
       }
     }
-  } else {
-    presenceData.details = "Browsing...";
+  } else presenceData.details = "Browsing...";
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
-  }
+  if (!presenceData.details) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
 });
