@@ -6,7 +6,6 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "large_image",
-    details: document.location.href,
     startTimestamp: browsingStamp
   };
 
