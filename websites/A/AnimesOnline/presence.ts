@@ -76,7 +76,6 @@ presence.on("UpdateData", async () => {
     path.pathname.includes("episodio") ||
     path.pathname.match(/(\W|^)filmes(\W\w|$)/)
   ) {
-    let episode;
     presenceData.startTimestamp = browsingStamp;
     const timestamps = presence.getTimestamps(
       Math.floor(video.current),
@@ -90,9 +89,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Filmes";
       presenceData.state = playfilmes;
     } else {
-      episode = "Assistir Anime";
       presenceData.details = playvdo;
-      presenceData.state = episode;
+      presenceData.state = "Assistir Anime";
     }
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
