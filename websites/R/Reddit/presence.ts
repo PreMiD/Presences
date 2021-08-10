@@ -89,11 +89,7 @@ presence.on("UpdateData", async () => {
       postTitle =
         document.querySelector(
           "div._2SdHzo12ISmrC8H86TgSCp._29WrubtjAcKqzJSPdQqQ4h"
-        ) !== undefined
-          ? document.querySelector(
-              "div._2SdHzo12ISmrC8H86TgSCp._29WrubtjAcKqzJSPdQqQ4h"
-            ).textContent
-          : "";
+        )?.textContent || "";
       subReddit = document.querySelector(
         "span._1GieMuLljOrqnVpRAwz7VP"
       ).textContent;
