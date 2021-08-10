@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
       ).textContent;
       subReddit =
         subReddit === "Home" &&
-        document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] !== undefined
+        document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] !== null
           ? document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1].textContent
           : subReddit;
       presenceData.details = `${(await strings).reading} '${postTitle}'`;
