@@ -1,5 +1,9 @@
 {
   "author": {
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
+  },
+  "contributor": {
     "name": "Tellen",
     "id": "535214819520020510"
   },
@@ -12,15 +16,11 @@
     "nl": "Op onze website AnimeSaturn vind je Anime (Ondertiteld in ITA). Download of stream je favoriete serie helemaal gratis."
   },
   "url": "www.animesaturn.com",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "logo": "https://i.imgur.com/7jVKxPj.png",
   "thumbnail": "https://i.imgur.com/remIE0w.png",
   "color": "#dbc1ff",
-  "tags": [
-    "animesaturn",
-    "anime",
-    "videos"
-  ],
+  "tags": ["animesaturn", "anime", "videos"],
   "iframe": true,
   "category": "anime",
   "regExp": "([a-z0-9-]+[.])*animesaturn([.][a-z]+)+[/]"

@@ -237,13 +237,7 @@ presence.on("UpdateData", async () => {
         .replace("Server 1", "")
         .replace("Server 2", "");
     } else {
-      fullName = document
-        .querySelector(
-          "#wtf > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
-        )
-        .textContent.trim()
-        .replace("Server 1", "")
-        .replace("Server 2", "");
+      fullName = document.querySelector("#wtf > h4").textContent;
     }
     if (iFrameVideo === true) {
       timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
