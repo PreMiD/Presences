@@ -30,7 +30,7 @@ async function getStrings() {
     streamButton: "general.buttonWatchStream"
   },
     await presence.getSetting("lang").catch(() => "en")
-  )
+  );
 }
 
 const startTimestamp = Math.floor(Date.now() / 1000),
@@ -40,9 +40,9 @@ presence.on("UpdateData", async () => {
   setPresence();
   const newLang = await presence.getSetting("lang").catch(() => "en"),
     buttons = await presence.getSetting("buttons");
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -50,8 +50,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "reddit_lg",
     startTimestamp
-  };
-  const { pathname } = window.location;
+  },
+   { pathname } = window.location;
   if (oldReddit) {
     subReddit = document.querySelector(".redditname")
       ? `r/${document.querySelector(".redditname").textContent}`
@@ -65,17 +65,17 @@ presence.on("UpdateData", async () => {
           url: `https://www.reddit.com${pathname}`,
           label: (await strings).readButton
         }
-      ]
+      ];
     } else if (pathname.startsWith(`/user/`)) {
       username = document.querySelector(".titlebox > h1").textContent;
       presenceData.details = (await strings).profile;
-      presenceData.state = username
+      presenceData.state = username;
       presenceData.buttons = [
         {
           url: `https://www.reddit.com${pathname}`,
           label: (await strings).viewProfileButton
         }
-      ]
+      ];
     } else if (pathname.startsWith(`/search`)) {
       presenceData.details = (await strings).searchSomething;
       presenceData.smallImageKey = "search";
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
           url: `https://www.reddit.com${pathname}`,
           label: (await strings).readButton
         }
-      ]
+      ];
     } else if (pathname.startsWith("/user/")) {
       username = document.querySelector(
         "span._1GieMuLljOrqnVpRAwz7VP"
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
           url: `https://www.reddit.com${pathname}`,
           label: (await strings).viewProfileButton
         }
-      ]
+      ];
     } else if (pathname.startsWith("/search")) {
       presenceData.details = (await strings).searchSomething;
       presenceData.smallImageKey = "search";
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
           url: `https://www.reddit.com${pathname}`,
           label: (await strings).streamButton
         }
-      ]
+      ];
     } else {
       const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
       if (sub === null) {
@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
           url: "https://discord.gg/bDumw325vX",
           label: "Join r/Netflix Discord"
         }
-      ]
+      ];
     }
     if (presenceData.buttons.length === 1) {
       presenceData.buttons.push({
