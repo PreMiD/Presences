@@ -17,18 +17,19 @@ let subReddit: string,
   oldLang: string = null;
 
 async function getStrings() {
-  return presence.getStrings({
-    browsing: "general.browsing",
-    live: "general.live",
-    profile: "general.viewProfile",
-    searchSomething: "general.searchSomething",
-    searching: "general.search",
-    reading: "general.readingPost",
-    watching: "general.watching",
-    readButton: "general.buttonReadArticle",
-    viewProfileButton: "general.buttonViewProfile",
-    streamButton: "general.buttonWatchStream"
-  },
+  return presence.getStrings(
+    {
+      browsing: "general.browsing",
+      live: "general.live",
+      profile: "general.viewProfile",
+      searchSomething: "general.searchSomething",
+      searching: "general.search",
+      reading: "general.readingPost",
+      watching: "general.watching",
+      readButton: "general.buttonReadArticle",
+      viewProfileButton: "general.buttonViewProfile",
+      streamButton: "general.buttonWatchStream"
+    },
     await presence.getSetting("lang").catch(() => "en")
   );
 }
@@ -40,18 +41,17 @@ presence.on("UpdateData", async () => {
   setPresence();
   const newLang = await presence.getSetting("lang").catch(() => "en"),
     buttons = await presence.getSetting("buttons");
-  if (!oldLang) 
-    oldLang = newLang;
-   else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: "reddit_lg",
-    startTimestamp
-  },
-   { pathname } = window.location;
+      largeImageKey: "reddit_lg",
+      startTimestamp
+    },
+    { pathname } = window.location;
   if (oldReddit) {
     subReddit = document.querySelector(".redditname")
       ? `r/${document.querySelector(".redditname").textContent}`
