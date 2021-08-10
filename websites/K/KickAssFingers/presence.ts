@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: time
-  },
+      largeImageKey: "logo",
+      startTimestamp: time
+    },
     data = document.querySelector("#premIdVars"),
     vars = JSON.parse(data.getAttribute("vars")),
     live = JSON.parse(data.getAttribute("liveScores"));
@@ -19,9 +19,8 @@ presence.on("UpdateData", () => {
 
     if (live.chrOk === undefined || (live.chrOk === 0 && live.chrKo === 0))
       presenceData.state = vars.ready;
-    else 
+    else
       presenceData.state = `${live.worPm} wpm, ${live.points} ${vars.points}, ${live.chrAcc}% ${vars.accuracy}`;
-    
 
     if (testActive) {
       if (vars.testType === 0) {
@@ -39,9 +38,8 @@ presence.on("UpdateData", () => {
     } else {
       presenceData.details = vars.finished;
 
-      if (presenceData.state !== vars.ready) 
+      if (presenceData.state !== vars.ready)
         presenceData.state += `, ${live.time} ${vars.seconds}, ${vars.words} ${live.worOk}/${live.worKo}, ${vars.chars} ${live.chrOk}/${live.chrKo}`;
-      
     }
   }
 
