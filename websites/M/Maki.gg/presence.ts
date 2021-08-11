@@ -1,7 +1,6 @@
 const presence = new Presence({
   clientId: "563434444321587202"
 }),
-
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -36,8 +35,9 @@ presence.on("UpdateData", async () => {
       const dashboardTabs = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-2.mb-2.mb-md-0 > ul").getElementsByTagName("li");
       for (let i = 0; i < dashboardTabs.length; i++) {
         if (dashboardTabs[i].getElementsByTagName("a")[0].classList.contains("active"))
-          dashboardTab = dashboardTabs[i].getElementsByTagName("a")[0].innerHTML.split("\n")[2];
-
+          var currentTab = dashboardTabs[i].getElementsByTagName("a")[0];
+        currentTab.removeChild(currentTab.getElementsByTagName("i")[0]);
+        dashboardTab = currentTab.innerHTML;
       }
 
       presenceData.details = `${guildName}'s Dashboard`;
