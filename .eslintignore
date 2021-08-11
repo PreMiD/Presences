@@ -3,7 +3,6 @@ node_modules
 .vscode
 .npmrc
 .github
-utils/tools/auto/*
 
 *.js
 *.d.ts
