@@ -254,7 +254,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector("head > title").textContent;
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
