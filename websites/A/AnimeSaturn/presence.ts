@@ -2,31 +2,17 @@ const presence = new Presence({
   clientId: "669254632400355358"
 });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 const browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean,
   currentTime: number,
   duration: number,
   paused: boolean,
   playback,
- pageNumber,
- videoName,
- videoEpisode,
- fullName: string,
- timestamps: number[];
+  pageNumber,
+  videoName,
+  videoEpisode,
+  fullName: string,
+  timestamps: number[];
 
 presence.on(
   "iFrameData",
@@ -141,9 +127,9 @@ presence.on("UpdateData", async () => {
     videoName = document.title
       .split("AnimeSaturn - ")[1]
       .split(" Streaming ")[0];
-    if (videoName.includes(" (ITA)")) 
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    
+
     data.smallImageKey = "viewing";
     data.smallImageText = `Scheda di: ${videoName}`;
     data.details = "Guarda la scheda di:";
@@ -154,9 +140,9 @@ presence.on("UpdateData", async () => {
     videoName = document.title
       .split("AnimeSaturn - ")[1]
       .split(" Episodio ")[0];
-    if (videoName.includes(" (ITA)")) 
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    
+
     videoEpisode = document.title
       .split(" Episodio ")[1]
       .split(" Streaming ")[0];
@@ -168,12 +154,12 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/movie/")) {
     videoName = document.title.split("AnimeSaturn - ")[1].split(" Movie ")[0];
-    if (videoName.includes(" Movie")) 
+    if (videoName.includes(" Movie"))
       videoName = videoName.replace(" Movie", "");
-    
-    if (videoName.includes(" (ITA)")) 
+
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    
+
     data.smallImageKey = "watching";
     data.smallImageText = `Sta per guardare il film: ${videoName}`;
     data.details = "Sta per guardare il film:";
@@ -182,15 +168,13 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/oav/")) {
     videoName = document.title.split("AnimeSaturn - ")[1].split(" OVA ")[0];
-    if (videoName.includes(" OVA")) 
-      videoName = videoName.replace(" OVA", "");
-    
-    if (videoName.includes(" OAV")) 
-      videoName = videoName.replace(" OAV", "");
-    
-    if (videoName.includes(" (ITA)")) 
+    if (videoName.includes(" OVA")) videoName = videoName.replace(" OVA", "");
+
+    if (videoName.includes(" OAV")) videoName = videoName.replace(" OAV", "");
+
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    
+
     data.smallImageKey = "watching";
     data.smallImageText = `Sta per guardare l'ova: ${videoName}`;
     data.details = "Sta per guardare l'ova:";
@@ -199,12 +183,12 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/special/")) {
     videoName = document.title.split("AnimeSaturn - ")[1].split(" Special ")[0];
-    if (videoName.includes(" Specials")) 
+    if (videoName.includes(" Specials"))
       videoName = videoName.replace(" Specials", "");
-    
-    if (videoName.includes(" (ITA)")) 
+
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    
+
     data.smallImageKey = "watching";
     data.smallImageText = `Sta per guardare lo special: ${videoName}`;
     data.details = "Sta per guardare lo special:";
@@ -236,12 +220,14 @@ presence.on("UpdateData", async () => {
         .textContent.trim()
         .replace("Server 1", "")
         .replace("Server 2", "");
-    } else 
-      fullName = document.querySelector("#wtf > h4").textContent;
-    
-    if (iFrameVideo === true) 
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-    
+    } else fullName = document.querySelector("#wtf > h4").textContent;
+
+    if (iFrameVideo === true)
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      );
+
     if (document.location.href.endsWith("=alt")) {
       // Alternative
       if (fullName.includes(" Special")) {
@@ -250,9 +236,8 @@ presence.on("UpdateData", async () => {
 
           videoName = fullName.split(" Specials Episodio ")[0];
           videoEpisode = fullName.split(" Specials Episodio ")[1];
-          if (videoName.includes(" (ITA)")) 
+          if (videoName.includes(" (ITA)"))
             videoName = videoName.replace(" (ITA)", "");
-          
 
           data.smallImageKey = paused ? "pause" : "play";
           data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
@@ -266,12 +251,11 @@ presence.on("UpdateData", async () => {
 
           videoName = fullName.split(" Special ")[0];
           videoEpisode = fullName.split(" Special ")[1];
-          if (videoName.includes(" Special")) 
+          if (videoName.includes(" Special"))
             videoName = videoName.replace(" Special", "");
-          
-          if (videoName.includes(" (ITA)")) 
+
+          if (videoName.includes(" (ITA)"))
             videoName = videoName.replace(" (ITA)", "");
-          
 
           data.smallImageKey = paused ? "pause" : "play";
           data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
@@ -285,12 +269,11 @@ presence.on("UpdateData", async () => {
         // Movies
 
         videoName = fullName.split(" Movie ")[0];
-        if (videoName.includes(" Movie")) 
+        if (videoName.includes(" Movie"))
           videoName = videoName.replace(" Movie", "");
-        
-        if (videoName.includes(" (ITA)")) 
+
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
@@ -302,12 +285,11 @@ presence.on("UpdateData", async () => {
 
         videoName = fullName.split(" OVA ")[0];
         videoEpisode = fullName.split(" OVA ")[1];
-        if (videoName.includes(" OVA")) 
+        if (videoName.includes(" OVA"))
           videoName = videoName.replace(" OVA", "");
-        
-        if (videoName.includes(" (ITA)")) 
+
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
@@ -321,9 +303,8 @@ presence.on("UpdateData", async () => {
 
         videoName = fullName.split(" Episodio ")[0];
         videoEpisode = fullName.split(" Episodio ")[1];
-        if (videoName.includes(" (ITA)")) 
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
@@ -341,9 +322,8 @@ presence.on("UpdateData", async () => {
 
           videoName = fullName.split(" Specials Episodio ")[0];
           videoEpisode = fullName.split(" Specials Episodio ")[1];
-          if (videoName.includes(" (ITA)")) 
+          if (videoName.includes(" (ITA)"))
             videoName = videoName.replace(" (ITA)", "");
-          
 
           data.smallImageKey = paused ? "pause" : "play";
           data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
@@ -357,12 +337,11 @@ presence.on("UpdateData", async () => {
 
           videoName = fullName.split(" Special ")[0];
           videoEpisode = fullName.split(" Special ")[1];
-          if (videoName.includes(" Special")) 
+          if (videoName.includes(" Special"))
             videoName = videoName.replace(" Special", "");
-          
-          if (videoName.includes(" (ITA)")) 
+
+          if (videoName.includes(" (ITA)"))
             videoName = videoName.replace(" (ITA)", "");
-          
 
           data.smallImageKey = paused ? "pause" : "play";
           data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
@@ -376,12 +355,11 @@ presence.on("UpdateData", async () => {
         // Movies
 
         videoName = fullName.split(" Movie ")[0];
-        if (videoName.includes(" Movie")) 
+        if (videoName.includes(" Movie"))
           videoName = videoName.replace(" Movie", "");
-        
-        if (videoName.includes(" (ITA)")) 
+
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
@@ -393,12 +371,11 @@ presence.on("UpdateData", async () => {
 
         videoName = fullName.split(" OVA ")[0];
         videoEpisode = fullName.split(" OVA ")[1];
-        if (videoName.includes(" OVA")) 
+        if (videoName.includes(" OVA"))
           videoName = videoName.replace(" OVA", "");
-        
-        if (videoName.includes(" (ITA)")) 
+
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
@@ -412,9 +389,8 @@ presence.on("UpdateData", async () => {
 
         videoName = fullName.split(" Episodio ")[0];
         videoEpisode = fullName.split(" Episodio ")[1];
-        if (videoName.includes(" (ITA)")) 
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
