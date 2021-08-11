@@ -24,5 +24,6 @@
     "video"
   ],
   "iframe": true,
-  "category": "anime"
+  "category": "anime",
+  "button": false
 }

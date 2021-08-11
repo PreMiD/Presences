@@ -113,7 +113,7 @@
       case "live2.nicovideo.jp": {
         if (location.pathname.startsWith("/watch/lv")) {
           const title = document.querySelector(
-            "[class^='___title___']"
+            " [class^='___program-title___'] span "
           ).textContent;
           const ownerElement =
             document.querySelector("[class^='___channel-name-anchor___']") ||
@@ -122,7 +122,7 @@
           const [liveId] = location.pathname.match(/lv\d+/);
 
           const elapsed = document.querySelector(
-            "span[class^='___elapsed-time___'] span"
+            " span[class^='___time-score___'] span[class^='___value___'] "
           ).textContent;
 
           const presenceData: PresenceData = {

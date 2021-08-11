@@ -35,5 +35,11 @@
     "manga"
   ],
   "iframe": true,
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    }
+  ],
   "category": "anime"
 }

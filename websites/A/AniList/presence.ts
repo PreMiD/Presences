@@ -1,6 +1,6 @@
 const presence: Presence = new Presence({
-    clientId: "614220272790274199"
-  }),
+  clientId: "614220272790274199"
+}),
   startTimestamp: number = Math.floor(Date.now() / 1000),
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
@@ -9,15 +9,15 @@ const presence: Presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "anilist_lg",
-      startTimestamp
-    },
+    largeImageKey: "anilist_lg",
+    startTimestamp
+  },
     { pathname } = window.location;
   if (pathname.startsWith("/home")) {
     presenceData.details = (await strings).browsing;
     presenceData.state = "Home";
   } else if (pathname.startsWith("/user")) {
-    const user = document.querySelector(".name").textContent;
+    const user = document.querySelector(".name").textContent.trim();
     if (pathname.includes("mangalist"))
       presenceData.details = `Viewing ${user}'s manga list`;
     else if (pathname.includes("animelist"))

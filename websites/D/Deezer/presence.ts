@@ -53,10 +53,13 @@ presence.on("UpdateData", async () => {
     albumLink = document.querySelector("div.marquee-content")
       .children[0] as HTMLAnchorElement;
 
-    const paused =
-      document.querySelector(
-        ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
-      ) === null;
+    const paused2 = document.querySelector(
+      "#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path"
+    ).outerHTML;
+    let paused: boolean;
+    if (paused2 === '<path d="m5 2 18 10L5 22V2z"></path>') paused = true;
+    else paused = false;
+
     currentTime = document.querySelector(
       "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
     ).textContent;
@@ -122,13 +125,24 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.endTimestamp = endTimestamp;
 
-      if (buttons) {
-        presenceData.buttons = [
-          {
-            label: (await strings).viewPodcast,
-            url: showLink.href
-          }
-        ];
+      if (showLink) {
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).viewPodcast,
+              url: showLink.href
+            }
+          ];
+        }
+      } else {
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).play,
+              url: "https://support.deezer.com/hc/en-gb/articles/115004221605-Uploading-MP3s-to-Deezer"
+            }
+          ];
+        }
       }
       if (paused) {
         delete presenceData.startTimestamp;

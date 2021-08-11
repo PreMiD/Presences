@@ -25,6 +25,7 @@ let fullscreen: boolean,
   paused,
   currentTime,
   timeLeft,
+  timestamps,
   playlistLink,
   artistLink,
   strings: Promise<LangStrings> = getStrings(),
@@ -43,26 +44,32 @@ presence.on("UpdateData", async () => {
     oldLang = newLang;
     strings = getStrings();
   }
-  player =
-    document.querySelector(
-      "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
-    ) !== undefined
-      ? true
-      : false;
+  player = document.querySelector(
+    "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
+  )
+    ? true
+    : false;
 
   if (player) {
     const exitFSButton = document.querySelector(
       "div._2kGtEHAlQ5t5sY3jvz-wwl > div._1Wgs9MKFGuL58IFgKSM811 > div._2HXusrWftEtKAYukKt5IuO > music-button"
     );
-    exitFSButton !== null ? (fullscreen = true) : (fullscreen = false);
+    exitFSButton ? (fullscreen = true) : (fullscreen = false);
     if (fullscreen) {
-      const title = document.querySelector("a.music-headline-2").textContent,
+      const title = document
+          .querySelector(
+            "#transport > div._3l2xsX5-KkYUgDHJDu-L0r.box > music-horizontal-item"
+          )
+          .shadowRoot.querySelector("div > div.center > music-link")
+          .getAttribute("title"),
         [artist] = document
           .querySelector("a.music-primary-text")
           .textContent.split(" - "),
         pausedIcon = document
-          .querySelector("music-button.hydrated:nth-child(4)")
-          .shadowRoot.querySelector("button > div > music-icon");
+          .querySelector(
+            "#transport > div._2EZickYBrNGgbqeaZ5l5hr.box > music-button:nth-child(3)"
+          )
+          .shadowRoot.querySelector("button > music-icon");
       paused = pausedIcon.attributes[1].value === "pause" ? false : true;
       currentTime = document.querySelector(
         "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
@@ -71,7 +78,7 @@ presence.on("UpdateData", async () => {
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(2)")
         .textContent.replace(" - ", "");
 
-      const [, endTimestamp] = presence.getTimestamps(
+      timestamps = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
         presence.timestampFromFormat(timeLeft) +
           presence.timestampFromFormat(currentTime)
@@ -84,7 +91,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       presenceData.largeImageKey = "logo";
-      presenceData.endTimestamp = endTimestamp;
+      presenceData.endTimestamp = timestamps.pop();
 
       if (paused) {
         delete presenceData.startTimestamp;
@@ -97,15 +104,15 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
         )
-        .shadowRoot.querySelector("div > div > span")
-        .children[2].querySelector("a").href;
+        ?.shadowRoot.querySelector("div > div > span")
+        .children[2]?.querySelector("a")?.href;
 
       artistLink = document
         .querySelector(
           "music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
         )
-        .shadowRoot.querySelector("div > div > span")
-        .children[0].querySelector("a").href;
+        ?.shadowRoot.querySelector("div > div > span")
+        .children[0]?.querySelector("a")?.href;
       const title = document
           .querySelector(
             "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
@@ -122,17 +129,22 @@ presence.on("UpdateData", async () => {
           )
           .textContent.split("-"),
         pausedIcon = document
-          .querySelector("music-button.hydrated:nth-child(4)")
-          .shadowRoot.querySelector("button > div > music-icon");
+          .querySelector(
+            "#transport > div._2EZickYBrNGgbqeaZ5l5hr.box > music-button:nth-child(3)"
+          )
+          .shadowRoot.querySelector("button > music-icon");
       paused = pausedIcon.attributes[1].value === "pause" ? false : true;
-      const [currentTime, timeLeft] = document
-          .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
-          .textContent.split(" - "),
-        [, endTimestamp] = presence.getTimestamps(
-          presence.timestampFromFormat(currentTime),
-          presence.timestampFromFormat(timeLeft) +
-            presence.timestampFromFormat(currentTime)
-        );
+      [currentTime] = document
+        .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
+        .textContent.split(" - ");
+      [, timeLeft] = document
+        .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
+        .textContent.split(" - ");
+      timestamps = presence.getTimestamps(
+        presence.timestampFromFormat(currentTime),
+        presence.timestampFromFormat(timeLeft) +
+          presence.timestampFromFormat(currentTime)
+      );
 
       presenceData.details = title;
       presenceData.state = artist;
@@ -141,9 +153,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.endTimestamp = endTimestamp;
+      presenceData.endTimestamp = timestamps.pop();
 
-      if (showPlaylist && buttons) {
+      if (showPlaylist && buttons && artistLink && playlistLink) {
         presenceData.buttons = [
           {
             label: (await strings).viewArtist,
@@ -154,7 +166,7 @@ presence.on("UpdateData", async () => {
             url: playlistLink
           }
         ];
-      } else {
+      } else if (artistLink) {
         presenceData.buttons = [
           {
             label: (await strings).viewArtist,

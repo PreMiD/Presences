@@ -1,15 +1,13 @@
-var presence = new Presence({
-  clientId: "620084360120369172"
-});
-
-var elapsed = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "844109673618735144"
+  }),
+  elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "yahoomail-logo"
-  };
-
-  var path = document.location.pathname;
+      largeImageKey: "logo"
+    },
+    path = document.location.pathname;
   if (path.includes("/folders/") || path.includes("/search/")) {
     if (path.includes("messages")) {
       data.details = "Viewing an Email";

@@ -19,6 +19,32 @@ presence.on("UpdateData", async () => {
     if (
       document.querySelector(
         "#discover > div:nth-child(9) > div:nth-child(2) > div > div.detail-player > div > table > tbody > tr:nth-child(1) > td.play_cell > a > div"
+      ) === null
+    ) {
+      presenceData.details = "Viewing:";
+      presenceData.startTimestamp = browsingStamp;
+      if (document.location.pathname.endsWith("wishlist")) {
+        presenceData.state = `${
+          document.querySelector(
+            "#fan-bio-vm > div.fan-bio.owner.no-photo > div.fan-bio-inner > div.name > h1 > span"
+          ).textContent
+        }'s wishlist`;
+      } else if (document.location.pathname.endsWith("genres")) {
+        presenceData.state = `${
+          document.querySelector(
+            "#fan-bio-vm > div.fan-bio.owner.no-photo > div.fan-bio-inner > div.name > h1 > span"
+          ).textContent
+        }'s following genres`;
+      } else {
+        presenceData.state = `${
+          document.querySelector(
+            "#fan-bio-vm > div.fan-bio.owner.no-photo > div.fan-bio-inner > div.name > h1 > span"
+          ).textContent
+        }'s profile`;
+      }
+    } else if (
+      document.querySelector(
+        "#discover > div:nth-child(9) > div:nth-child(2) > div > div.detail-player > div > table > tbody > tr:nth-child(1) > td.play_cell > a > div"
       ).className === "playbutton playing"
     ) {
       min = parseInt(
@@ -220,7 +246,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector("head > title").textContent;
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

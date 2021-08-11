@@ -9,7 +9,7 @@ setInterval(function () {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframeVideo: {
+        iFrameVideoData: {
           iFrameVideo: true,
           currentTime: video.currentTime,
           duration: video.duration,
