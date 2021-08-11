@@ -34,10 +34,11 @@ presence.on("UpdateData", async () => {
       let dashboardTab;
       const dashboardTabs = document.querySelector("body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-2.mb-2.mb-md-0 > ul").getElementsByTagName("li");
       for (let i = 0; i < dashboardTabs.length; i++) {
-        if (dashboardTabs[i].getElementsByTagName("a")[0].classList.contains("active"))
-          var currentTab = dashboardTabs[i].getElementsByTagName("a")[0];
-        currentTab.removeChild(currentTab.getElementsByTagName("i")[0]);
-        dashboardTab = currentTab.innerHTML;
+        if (dashboardTabs[i].getElementsByTagName("a")[0].classList.contains("active")) {
+          let currentTab = dashboardTabs[i].getElementsByTagName("a")[0];
+          currentTab.removeChild(currentTab.getElementsByTagName("i")[0]);
+          dashboardTab = currentTab.innerHTML;
+        }
       }
 
       presenceData.details = `${guildName}'s Dashboard`;
