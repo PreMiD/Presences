@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
     else {
       const episode = JSON.parse(
         document.querySelector(
-          "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-psOyd.fIwdpb > script"
+          "#root > div > div > div.sc-qPmLO.gspUft > div > div > div.sc-qXiOn.iVbXhX > script"
         ).textContent
       );
       presenceData.details = "Looking at";
