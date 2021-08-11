@@ -78,8 +78,7 @@ presence.on("UpdateData", async () => {
           data.smallImageText = paused
             ? (await strings).pause
             : (await strings).play;
-          data.startTimestamp = timestamps[0];
-          data.endTimestamp = timestamps[1];
+          data.endTimestamp = timestamps.pop();
 
           if (paused) {
             delete data.startTimestamp;
