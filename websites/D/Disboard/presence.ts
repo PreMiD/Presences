@@ -1,13 +1,12 @@
-
   const presence = new Presence({
     clientId: "872937214093443093"
-  });
+  }),
 
-  var browsingStamp = Math.floor(Date.now() / 1000);
+   browsingStamp = Math.floor(Date.now() / 1000);
 
   presence.on("UpdateData", async () => {
-    const urlpath = window.location.pathname.split("/")
-    const langs = [
+    const urlpath = window.location.pathname.split("/"),
+     langs = [
       "de",
       "es",
       "fil",
@@ -28,11 +27,11 @@
       "ko",
       "hi"
     ],
-    urlpNum = new RegExp(langs.join("|")).test(urlpath[1]) ? 2 : 1
+    urlpNum = new RegExp(langs.join("|")).test(urlpath[1]) ? 2 : 1,
 
-    const data: PresenceData = {
+     data: PresenceData = {
       largeImageKey: "disboardsmall"
-    }
+    };
 
       // Home
     if (window.location.hostname == "disboard.org") {
@@ -43,28 +42,28 @@
       {
         data.state = document
           .querySelector("head > title")
-          .textContent.replace("Disboard", "")
+          .textContent.replace("Disboard", "");
       } 
 
       // Dashboard - disboard.org/dashboard/
-      if (urlpath[urlpNum].startsWith("dashboard")) {
+      if (urlpath[urlpNum].startsWith("dashboard")) 
          data.details = "Dashboard";
-      }
+      
 
       // Servers - disboard.org/servers
-      else if (urlpath[urlpNum].startsWith("servers")) {
+      else if (urlpath[urlpNum].startsWith("servers")) 
         data.details = "Take a look at servers";
-      }
+      
 
       // Search - disboard.org/search
-      else if (urlpath[urlpNum].startsWith("search")) {
+      else if (urlpath[urlpNum].startsWith("search")) 
         data.details = "Searching";
-      }
+      
       
       // Reviews - disboard.org/reviews
-      else if (urlpath[urlpNum].startsWith("reviews")) {
+      else if (urlpath[urlpNum].startsWith("reviews")) 
         data.details = "Look at reviews";
-      }
+      
     }
 
   
