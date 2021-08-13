@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
     { pathname } = location,
     buttons: boolean = await presence.getSetting("buttons"),
     heading =
@@ -110,8 +110,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = presenceData.smallImageKey = live
         ? "live"
         : video.paused
-          ? "pause"
-          : "play";
+        ? "pause"
+        : "play";
     }
 
     if (buttons) {
