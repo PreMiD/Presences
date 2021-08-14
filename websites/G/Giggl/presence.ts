@@ -3,11 +3,9 @@ const presence: Presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-    const presenceData: PresenceData = {
+    let presenceData: PresenceData = {
         largeImageKey: "lg"
     };
-
-    console.log(1);
 
     // Presence for Giggl's static landing page
     if (document.location.hostname === "giggl.app") {
@@ -25,7 +23,6 @@ presence.on("UpdateData", async () => {
 
     // Presence for Giggl itself
     } else if (document.location.hostname === "canary.giggl.app") {
-        console.log(2);
         presenceData.details = "Browsing Giggl";
 
         // If in a portal, set status to that
