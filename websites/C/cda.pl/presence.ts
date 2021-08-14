@@ -23,8 +23,9 @@ presence.on("UpdateData", async () => {
     pathname.includes("/video") &&
     document.querySelector("#naglowek > span > span > h1")
   ) {
-    const title = document.querySelector("#naglowek > span > span > h1")
-        .textContent,
+    const title = document.querySelector(
+        "#naglowek > span > span > h1"
+      ).textContent,
       ad = document.querySelector(
         "#player > div > div > div > div > div > div > span.pb-video-player-wrap > span.pb-video-ad-container"
       ),

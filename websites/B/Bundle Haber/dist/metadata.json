@@ -6,10 +6,11 @@
   "service": "Bundle Haber",
   "description": {
     "tr": "Tüm haberlerin toplandığı website.",
-    "en": "The fastest way to reach news."
+    "en": "The fastest way to reach news.",
+    "nl": "De snelste manier om nieuws te vinden."
   },
   "url": "www.bundlehaber.com",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "logo": "https://i.imgur.com/fshr89j.png",
   "thumbnail": "https://i.imgur.com/ntbbC9T.png",
   "color": "#BBBBBB",

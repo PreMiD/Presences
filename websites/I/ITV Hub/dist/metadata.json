@@ -5,13 +5,14 @@
   },
   "service": "ITV Hub",
   "description": {
-    "en": "Watch live and past ITV TV shows"
+    "en": "Watch live and past ITV TV shows",
+    "nl": "Bekijk live en eerdere ITV-tv-shows"
   },
   "url": [
     "www.itv.com",
     "itv.com"
   ],
-  "version": "1.4.4",
+  "version": "1.4.5",
   "logo": "https://i.imgur.com/3MyvsnD.png",
   "thumbnail": "https://i.imgur.com/WRttRBO.png",
   "color": "#2ABEC9",

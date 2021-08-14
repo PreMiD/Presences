@@ -230,9 +230,11 @@ presence.on("UpdateData", async () => {
     if (document.querySelector(".paginated-item-list") !== null) {
       presenceData.details = "Viewing their players";
       if (
-        (document.querySelector(
-          ".ut-list-header-icon > img"
-        ) as HTMLImageElement).src
+        (
+          document.querySelector(
+            ".ut-list-header-icon > img"
+          ) as HTMLImageElement
+        ).src
           .toLowerCase()
           .includes("staff")
       ) {
@@ -240,9 +242,11 @@ presence.on("UpdateData", async () => {
       } else if (document.querySelector(".consumable") !== null) {
         presenceData.details = "Viewing their consumables";
       } else if (
-        (document.querySelector(
-          ".ut-list-header-icon > img"
-        ) as HTMLImageElement).src
+        (
+          document.querySelector(
+            ".ut-list-header-icon > img"
+          ) as HTMLImageElement
+        ).src
           .toLowerCase()
           .includes("items")
       ) {

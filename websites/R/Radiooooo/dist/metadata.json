@@ -6,10 +6,11 @@
   },
   "url": "radiooooo.com",
   "description": {
-    "en": "Radiooooo - The Musical Time Machine."
+    "en": "Radiooooo - The Musical Time Machine.",
+    "nl": "Radiooooo - De muzikale tijdmachine."
   },
   "service": "Radiooooo",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/EktlHNP.png",
   "thumbnail": "https://i.imgur.com/AT7vWm9.jpg",
   "color": "#108cb4",

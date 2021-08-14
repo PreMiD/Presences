@@ -40,12 +40,15 @@ presence.on("UpdateData", () => {
       const mode = document
           .querySelector("#top .config .mode .text-button.active")
           .textContent.replace(/[\t\r\n]/g, ""),
-        testType = document.querySelector(".pageTest #premidTestMode")
-          .textContent,
-        wpm = document.querySelector(".pageTest #largeLiveWpmAndAcc #liveWpm")
-          .textContent,
-        acc = document.querySelector(".pageTest #largeLiveWpmAndAcc #liveAcc")
-          .textContent;
+        testType = document.querySelector(
+          ".pageTest #premidTestMode"
+        ).textContent,
+        wpm = document.querySelector(
+          ".pageTest #largeLiveWpmAndAcc #liveWpm"
+        ).textContent,
+        acc = document.querySelector(
+          ".pageTest #largeLiveWpmAndAcc #liveAcc"
+        ).textContent;
 
       presenceData.details = `Typing ${testType}`;
       presenceData.state = `${wpm} wpm ${acc} acc`;

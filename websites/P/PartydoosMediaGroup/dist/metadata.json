@@ -11,10 +11,11 @@
   ],
   "service": "PartydoosMediaGroup",
   "description": {
-    "en": "An upcoming site which will have services such as web hosting in cloud environments."
+    "en": "An upcoming site which will have services such as web hosting in cloud environments.",
+    "nl": "Een aanstaande site die diensten zal hebben zoals webhosting in cloudomgevingen."
   },
   "url": "partydoosmediagroup.weebly.com",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/Qejrged.png",
   "thumbnail": "https://i.imgur.com/3vMtIJb.png",
   "color": "#F97D00",

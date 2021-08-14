@@ -22,8 +22,8 @@ presence.on("UpdateData", async () => {
   } else if (categories[document.location.pathname.split("/")[1]]) {
     if (document.getElementsByClassName("btn-download")[0]) {
       presenceData.details = "Viewing a Mod...";
-      let name = document.getElementsByClassName("clearfix")[1].children[0]
-        .textContent;
+      let name =
+        document.getElementsByClassName("clearfix")[1].children[0].textContent;
       if (name.length > 60) name = name.slice(0, 57) + "...";
       presenceData.state =
         name +

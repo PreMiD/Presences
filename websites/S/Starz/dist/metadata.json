@@ -11,10 +11,11 @@
   ],
   "service": "Starz",
   "description": {
-    "en": "Starz is an American premium cable and satellite television network which serves as the flagship service of Starz Inc., which is ultimately owned by Lionsgate. Starz's programming features theatrically released motion pictures and first-run original television series."
+    "en": "Starz is an American premium cable and satellite television network which serves as the flagship service of Starz Inc., which is ultimately owned by Lionsgate. Starz's programming features theatrically released motion pictures and first-run original television series.",
+    "nl": "Starz is een Amerikaans premium kabel- en satelliettelevisienetwerk dat fungeert als vlaggenschip van Starz Inc., dat uiteindelijk eigendom is van Lionsgate. De programmering van Starz omvat speelfilms en originele televisieseries die in de bioscoop worden uitgebracht."
   },
   "url": "www.starz.com",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "logo": "https://i.imgur.com/qssGc1m.png",
   "thumbnail": "https://i.imgur.com/jPv0Zw1.png",
   "color": "#000",

@@ -6,10 +6,11 @@
   "service": "My Nintendo",
   "description": {
     "en": "Thanks to My Nintendo makes playing software and interacting with Nintendo even more fun. You can earn points and get rewards such as discounts and additional content for games.",
-    "de": "Dank My Nintendo macht das Spielen von Software und die Interaktion mit Nintendo noch mehr Spaß. Du kannst Punkte sammeln und Belohnungen wie Rabatte und Zusatzinhalte für Spiele erhalten."
+    "de": "Dank My Nintendo macht das Spielen von Software und die Interaktion mit Nintendo noch mehr Spaß. Du kannst Punkte sammeln und Belohnungen wie Rabatte und Zusatzinhalte für Spiele erhalten.",
+    "nl": "Dankzij My Nintendo wordt het spelen van software en de interactie met Nintendo nog leuker. U kunt punten verdienen en beloningen krijgen, zoals kortingen en extra content voor games."
   },
   "url": "my.nintendo.com",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/eywFbXQ.png",
   "thumbnail": "https://i.imgur.com/ekWK1iw.png",
   "color": "#e60012",

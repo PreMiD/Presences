@@ -9,10 +9,11 @@
     "kosmi.io"
   ],
   "description": {
-    "en": "Online Hangouts Made Easy."
+    "en": "Online Hangouts Made Easy.",
+    "nl": "Online Hangouts gemakkelijk gemaakt."
   },
   "service": "kosmi.io",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/Qr9bR87.png",
   "thumbnail": "https://i.imgur.com/ZzMzc1l.png",
   "color": "#322484",

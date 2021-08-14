@@ -6,10 +6,11 @@
   "service": "TürkAnimeTV",
   "description": {
     "tr": "TürkAnimeTV, türkçe altyazılı anime izleyebileceğiniz bir site.",
-    "en": "TürkAnimeTV is a site where you can watch anime with Turkish subtitles."
+    "en": "TürkAnimeTV is a site where you can watch anime with Turkish subtitles.",
+    "nl": "TürkAnimeTV is een site waar je anime kunt kijken met Turkse ondertitels."
   },
   "url": "www.turkanime.net",
-  "version": "1.1.5",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/N9oAnuS.png",
   "thumbnail": "https://i.imgur.com/sIWWJ0X.png",
   "color": "#3398b9",

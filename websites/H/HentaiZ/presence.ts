@@ -7,7 +7,8 @@ const presence = new Presence({
   });
 
 let lastPlaybackState: boolean,
-  lastPath: string, video = {
+  lastPath: string,
+  video = {
     duration: 0,
     currentTime: 0,
     paused: true
@@ -23,10 +24,12 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const curPath = document.location.pathname,
-    playback = video !== null && !isNaN(video.duration) && curPath.includes("/xem-phim"),
+    playback =
+      video !== null && !isNaN(video.duration) && curPath.includes("/xem-phim"),
     presenceData: PresenceData = {
       largeImageKey: "logo"
-    }, search = document.location.search;
+    },
+    search = document.location.search;
 
   if (lastPath !== curPath || lastPlaybackState !== playback) {
     lastPath = curPath;

@@ -48,8 +48,9 @@ TRanimeizle.on("UpdateData", async () => {
     presenceData.state = searchingFor;
     presenceData.smallImageKey = "search";
   } else if (page.includes("/harfler/")) {
-    const letter = document.querySelector(".post-head .title strong")
-      ?.textContent;
+    const letter = document.querySelector(
+      ".post-head .title strong"
+    )?.textContent;
 
     presenceData.details = "Bir harfe göz atıyor:";
     presenceData.state = letter ? `Harf: ${letter}` : "Bilinmeyen Harf";

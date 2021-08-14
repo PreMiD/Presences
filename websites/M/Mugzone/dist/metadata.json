@@ -22,9 +22,10 @@
       "icon": "fas fa-eye-slash",
       "value": false
     }
-    ],
-    "url": "m.mugzone.net",
-    "description": {
-      "en": "Malody, cross-platform music game community."
-    }
+  ],
+  "url": "m.mugzone.net",
+  "description": {
+    "en": "Malody, cross-platform music game community.",
+    "nl": "Malody, platformonafhankelijke muziekgame-community."
   }
+}

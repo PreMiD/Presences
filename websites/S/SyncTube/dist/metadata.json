@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
+  },
+  "service": "SyncTube",
+  "description": {
+    "en": "A simple platform where you can create rooms, manage permissions and chat while watching YouTube videos synchronized with your friends.",
+    "nl": "Een eenvoudig platform waar je kamers kunt aanmaken, rechten kunt beheren en kunt chatten terwijl je samen met je vrienden gesynchroniseerde YouTube-video's bekijkt."
+  },
+  "url": "sync-tube.de",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/I7PhFlB.png",
+  "thumbnail": "https://i.imgur.com/2cTHWAe.png",
+  "color": "#381010",
+  "tags": [
+    "youtube"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "timeElapsed",
+      "title": "Show elapsed time",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fad fa-icons",
+      "value": 0,
+      "values": [
+        "With text",
+        "Icon"
+      ]
+    }
+  ]
+}

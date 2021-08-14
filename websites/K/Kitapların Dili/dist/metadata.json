@@ -7,10 +7,11 @@
   "url": "kitaplarindili.ga",
   "description": {
     "en": "Kitapların Dili is a website where you can find audio books for free and listen to them!",
-    "tr": "Kitapların Dili, sesli kitaplara ücretsiz bir şekilde erişebileceğiniz ve dinleyebileceğiniz bir internet sitesidir."
+    "tr": "Kitapların Dili, sesli kitaplara ücretsiz bir şekilde erişebileceğiniz ve dinleyebileceğiniz bir internet sitesidir.",
+    "nl": "Kitapların Dili is een website waar u gratis audioboeken kunt vinden en ernaar kunt luisteren!"
   },
   "service": "Kitapların Dili",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/vVYzTFE.png",
   "thumbnail": "https://i.imgur.com/roLAe64.png",
   "color": "#d32028",

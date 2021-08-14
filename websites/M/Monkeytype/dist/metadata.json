@@ -15,10 +15,11 @@
     "monkeytype.com"
   ],
   "description": {
-    "en": "A minimalistic, customisable typing website. Test yourself in various modes, track your progress and improve your typing speed."
+    "en": "A minimalistic, customisable typing website. Test yourself in various modes, track your progress and improve your typing speed.",
+    "nl": "Een minimalistische, aanpasbare typewebsite. Test jezelf in verschillende modi, houd je voortgang bij en verbeter je typsnelheid."
   },
   "service": "Monkeytype",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/OnkMhFB.png",
   "thumbnail": "https://i.imgur.com/HH1UVqD.png",
   "color": "#383200",

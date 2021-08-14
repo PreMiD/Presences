@@ -57,8 +57,9 @@ presence.on("UpdateData", async function () {
       document.location.pathname.includes("/transactions") &&
       window.location.search.substr(1)
     ) {
-      let inputfield = document.querySelector('input[name="transfer_to"]')
-        .value;
+      let inputfield = document.querySelector(
+        'input[name="transfer_to"]'
+      ).value;
       if (!inputfield) {
         inputfield = "...";
       }
@@ -127,9 +128,8 @@ presence.on("UpdateData", async function () {
     } else if (urlpath[1] === "c") {
       if (urlpath[2] != undefined) {
         presenceData.details = "Betrachtet Kategorie:";
-        presenceData.state = document.querySelector(
-          ".category-name"
-        ).textContent;
+        presenceData.state =
+          document.querySelector(".category-name").textContent;
         if (set_showButtons) {
           presenceData.buttons = [
             {

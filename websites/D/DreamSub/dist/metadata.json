@@ -10,10 +10,11 @@
   ],
   "description": {
     "en": "Watch all the series thanks to our archive of Anime in Streaming Sub ITA HD / FULL HD and Free Download. Find the best series ever completely free.",
-    "it": "Guarda tutte le serie grazie al nostro archivio di Anime in Streaming Sub ITA HD/FULL HD e Download gratis. Trova le migliori serie di sempre completamente gratuite."
+    "it": "Guarda tutte le serie grazie al nostro archivio di Anime in Streaming Sub ITA HD/FULL HD e Download gratis. Trova le migliori serie di sempre completamente gratuite.",
+    "nl": "Bekijk alle series dankzij ons archief van Anime in Streaming Sub ITA HD / FULL HD en Gratis Downloaden. Vind de beste series ooit helemaal gratis."
   },
   "service": "DreamSub",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/vCJqRBO.png",
   "thumbnail": "https://i.imgur.com/MYEWI2L.png",
   "color": "#4281bb",

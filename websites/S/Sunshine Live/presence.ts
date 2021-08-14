@@ -3,8 +3,9 @@ var presence = new Presence({
 });
 presence.on("UpdateData", () => {
   let paused = true;
-  const children = document.getElementById("audioPlayer-controls-buttons")
-    .children;
+  const children = document.getElementById(
+    "audioPlayer-controls-buttons"
+  ).children;
   console.log(children);
   for (let i = 0; i < children.length; i++) {
     console.log(children[i].id);

@@ -6,10 +6,11 @@
   },
   "url": "itspulse.net",
   "description": {
-    "en": "Pulse is an internet radio community originally started in 2019, after much disrespect and un-professional antics across the radio community; we decided to make our own project that gives people the chance and opportunity to take control of how they want a community."
+    "en": "Pulse is an internet radio community originally started in 2019, after much disrespect and un-professional antics across the radio community; we decided to make our own project that gives people the chance and opportunity to take control of how they want a community.",
+    "nl": "Pulse is een internetradiogemeenschap die oorspronkelijk in 2019 is gestart, na veel gebrek aan respect en onprofessionele capriolen in de radiogemeenschap; we hebben besloten om ons eigen project te maken dat mensen de kans en de mogelijkheid geeft om zelf te bepalen hoe ze een gemeenschap willen."
   },
   "service": "Pulse",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/IPlZPxB.png",
   "thumbnail": "https://i.imgur.com/bGeTjan.png",
   "color": "#EE0B0B",

@@ -5,10 +5,11 @@
   },
   "url": "rizo-host.com",
   "description": {
-    "en": "Affordable game servers, VPS and web hosting."
+    "en": "Affordable game servers, VPS and web hosting.",
+    "nl": "Betaalbare gameservers, VPS en webhosting."
   },
   "service": "Rizo-Host",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/7GbzQFf.png",
   "thumbnail": "https://i.imgur.com/B8Mp9SJ.png",
   "color": "#8b555b",

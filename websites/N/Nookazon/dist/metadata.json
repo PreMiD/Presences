@@ -5,10 +5,11 @@
   },
   "service": "Nookazon",
   "description": {
-    "en": "Nookazon is a fan-site where users can buy and sell items and villagers in \"Animal Crossing: New Horizons\"."
+    "en": "Nookazon is a fan-site where users can buy and sell items and villagers in \"Animal Crossing: New Horizons\".",
+    "nl": "Nookazon is een fansite waar gebruikers items en dorpelingen kunnen kopen en verkopen in \"Animal Crossing: New Horizons\"."
   },
   "url": "nookazon.com",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/Bt6Nip9.png",
   "thumbnail": "https://i.imgur.com/skoBmeu.png",
   "color": "#5FA0D7",

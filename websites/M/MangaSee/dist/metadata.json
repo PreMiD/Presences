@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "MangaSee",
+    "author": {
+      "name": "Harold",
+      "id": "141206144264699904"
+    },
+    "category": "anime",
+    "logo": "https://i.imgur.com/E8zTeX8.png",
+    "thumbnail": "https://i.imgur.com/sMOaa2x.png",
+    "version": "1.0.3",
+    "color": "#6488be",
+    "tags": [
+      "manga",
+      "manhwa"
+    ],
+    "url": ["www.mangasee123.com", "mangasee123.com"],
+    "description": {
+      "en": "Read free manga online. Read the latest chapters of Tower of God, One Piece, Onepunch-Man, Berserk, Boku no Hero Academia, Naruto.",
+      "nl": "Lees gratis manga online. Lees de laatste hoofdstukken van Tower of God, One Piece, Onepunch Man, Berserk, Boku no Hero Academia, Naruto."
+    },
+    "settings": [
+      {
+        "id": "entries",
+        "title": "Entries number",
+        "icon": "fas fa-eye",
+        "value": true
+      },
+      {
+        "id": "buttons",
+        "title": "Show buttons",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
+      }
+    ]
+  }
