@@ -14,9 +14,9 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     presenceData.startTimestamp = browsingStamp;
-    if (document.location.pathname == "/") {
+    if (document.location.pathname == "/") 
       presenceData.details = "Malody Main Page";
-    } else if (document.location.pathname == "/index") {
+     else if (document.location.pathname == "/index") {
       presenceData.smallImageKey = "home";
       presenceData.details = "Viewing Home Page";
     } else if (document.location.pathname.endsWith("/chart")) {
@@ -91,11 +91,10 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: "View Skin",
-            url : document.URL
+            url: document.URL
           }
         ];
-      }
-      else if (document.location.pathname.endsWith("/all")) {
+      } else if (document.location.pathname.endsWith("/all")) {
         presenceData.smallImageKey = "store";
         presenceData.details = "Browsing Item Store";
       } else if (document.location.pathname.endsWith("/my")) {
@@ -106,8 +105,8 @@ presence.on("UpdateData", async () => {
       if (document.location.pathname.includes("/topic")) {
         presenceData.smallImageKey = "chat";
         presenceData.details =
-          "Viewing topic: " +
-          document.querySelector("#chead > div > a").textContent;
+          `Viewing topic: ${ 
+          document.querySelector("#chead > div > a").textContent}`;
         presenceData.state = document.querySelector(
           "#g_talk > div.g_talk_title > p > span"
         ).textContent;
@@ -136,16 +135,16 @@ presence.on("UpdateData", async () => {
         }
       }
     } else if (document.location.pathname.startsWith("/accounts")) {
-      if (document.location.pathname.includes("/login")) {
+      if (document.location.pathname.includes("/login")) 
         presenceData.details = "Logging in";
-      } else if (document.location.pathname.endsWith("/accounts/limit")) {
+       else if (document.location.pathname.endsWith("/accounts/limit")) {
         presenceData.smallImageKey = "jail";
         presenceData.details = "Visiting the Jail";
         presenceData.state = "What Is This Place Anyway?";
         presenceData.buttons = [
           {
-            label : "Go with " + document.querySelector("#header > div > a:nth-child(4) > b").textContent,
-            url : document.URL
+            label: `Go with ${document.querySelector("#header > div > a:nth-child(4) > b").textContent}`,
+            url: document.URL
           }
         ];
       } else if (document.location.pathname.includes("/user")) {
@@ -161,8 +160,8 @@ presence.on("UpdateData", async () => {
            d4: number = +d,
            e5: number = +e,
            Top = Math.min(a1,b2,c3,d4,e5);
-          presenceData.details = "User: " + document.querySelector("#content > div.user_head.g_rblock > div.right > p.name > span").textContent;
-          presenceData.state = "Best Rank: " + Top;
+          presenceData.details = `User: ${document.querySelector("#content > div.user_head.g_rblock > div.right > p.name > span").textContent}`;
+          presenceData.state = `Best Rank: ${Top}`;
           presenceData.smallImageKey = "user";
           presenceData.buttons = [
             {
@@ -187,8 +186,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/page/userpage/edit/")) {
       presenceData.smallImageKey = "edit";
       presenceData.details =
-        document.querySelector("#content > div.g_title").textContent +
-        "profile";
+        `${document.querySelector("#content > div.g_title").textContent 
+        }profile`;
     } else if (document.location.pathname.includes("/page/search")) {
       presenceData.smallImageKey = "search";
       presenceData.details = document.querySelector(
