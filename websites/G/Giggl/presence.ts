@@ -3,7 +3,7 @@ const presence: Presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-    let presenceData: PresenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "lg"
     };
 
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
         // If in a portal, set status to that
         if (document.location.pathname.startsWith("/portal")) {
             presenceData.details = "In a Portal";
-            presenceData.state = document.querySelector("title").innerText.split(" • ")[0]
+            presenceData.state = document.querySelector("title").innerText.split(" • ")[0];
         }
 
         // Check if in a call
@@ -41,9 +41,9 @@ presence.on("UpdateData", async () => {
         }
 
     // Presence for status page
-    } else if (document.location.hostname === "status.giggl.app") {
+    } else if (document.location.hostname === "status.giggl.app") 
         presenceData.details = "Viewing the status page";
-    }
+    
 
     presence.setActivity(presenceData);
 });
