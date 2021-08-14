@@ -4,7 +4,7 @@ const presence = new Presence({
 
  time = Math.floor(Date.now() / 1000);
  
- var courseName: string,
+ let courseName: string,
  chapterName: string,
  courseCompletion: string;
 
