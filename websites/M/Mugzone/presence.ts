@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Browsing Skin Store";
       } else if (document.location.pathname.includes("/skin/detail")) {
         presenceData.smallImageKey = "skin";
-        presenceData.details = "Viewing a skin:"
+        presenceData.details = "Viewing a skin:";
         presenceData.state = document.querySelector("#content > div.song_title.g_rblock > div.right > h2.textfix.title").textContent;
         presenceData.buttons = [
           {
@@ -150,17 +150,17 @@ presence.on("UpdateData", async () => {
         ];
       } else if (document.location.pathname.includes("/user")) {
         if (document.querySelector("#content > div.user_head.g_rblock > div.right > p.name > span").textContent == document.querySelector("#header > div > a:nth-child(4) > b").textContent) {
-          const a = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank").textContent.replace("#","");
-          const b = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank").textContent.replace("#","");
-          const c = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank").textContent.replace("#","");
-          const d = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank").textContent.replace("#","");
-          const e = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank").textContent.replace("#","");
-          const a1: number = +a;
-          const b2: number = +b;
-          const c3: number = +c;
-          const d4: number = +d;
-          const e5: number = +e;
-          const Top = Math.min(a1,b2,c3,d4,e5);
+          const a = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank").textContent.replace("#",""),
+           b = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank").textContent.replace("#",""),
+           c = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank").textContent.replace("#",""),
+           d = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank").textContent.replace("#",""),
+           e = document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank").textContent.replace("#",""),
+           a1: number = +a,
+           b2: number = +b,
+           c3: number = +c,
+           d4: number = +d,
+           e5: number = +e,
+           Top = Math.min(a1,b2,c3,d4,e5);
           presenceData.details = "User: " + document.querySelector("#content > div.user_head.g_rblock > div.right > p.name > span").textContent;
           presenceData.state = "Best Rank: " + Top;
           presenceData.smallImageKey = "user";
