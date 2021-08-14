@@ -1,0 +1,26 @@
+{
+    "author": {
+        "name": "CRUGG",
+        "id": "228965621478588416"
+    },
+    "service": "Giggl",
+    "description": {
+        "en": "Watch & browse the web, together - From hosting virtual movie nights, browsing the web with friends or watching anime with your long-distance partner: Giggl lets you do that together in real-time."
+    },
+    "url": [
+        "giggl.app",
+        "canary.giggl.app",
+        "status.giggl.app"
+    ],
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/pwh2bwL.jpg",
+    "thumbnail": "https://i.imgur.com/i5j8A6k.png",
+    "color": "#FF0099",
+    "tags": [
+        "voice",
+        "browsing",
+        "watching",
+        "media"
+    ],
+    "category": "videos"
+}
