@@ -1,9 +1,10 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "876055665091678228"
 }),
 
- time = Math.floor(Date.now() / 1000),
- courseName: string,
+ time = Math.floor(Date.now() / 1000);
+ 
+ var courseName: string,
  chapterName: string,
  courseCompletion: string;
 
@@ -78,7 +79,7 @@ presence.on("UpdateData", () => {
     presenceData.state = null;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
