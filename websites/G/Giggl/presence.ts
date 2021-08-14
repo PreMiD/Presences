@@ -3,7 +3,7 @@ const presence: Presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-    let presenceData: PresenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "lg"
     };
 
