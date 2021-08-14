@@ -1,23 +1,23 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "876055665091678228"
-});
+}),
 
-var time = Math.floor(Date.now() / 1000);
-var courseName: string;
-var chapterName: string;
-var courseCompletion: string;
+ time = Math.floor(Date.now() / 1000),
+ courseName: string,
+ chapterName: string,
+ courseCompletion: string;
 
 const pathStartsWith = (path: string): boolean => {
   return document.location.pathname.startsWith(path);
-};
+},
 
-const isInCourse = (): boolean => {
+ isInCourse = (): boolean => {
   return !!document.location.pathname.match(
     /\/courses\/[\w-_]{1,}\/[\w-_]{1,}/g
   );
-};
+},
 
-const setCourseInfo = () => {
+ setCourseInfo = () => {
   // Sets course info from page
   if (pathStartsWith("/courses")) {
     if (isInCourse()) {
@@ -26,18 +26,18 @@ const setCourseInfo = () => {
         .getElementsByClassName("whitespace-pre-wrap")[0]
         .getElementsByTagName("span")[0]
         .innerText.split("%")[0];
-      var lessonEl = document
+      const lessonEl = document
         .getElementsByClassName("bePFDW")[0]
-        .getElementsByTagName("span")[0];
-      var lesson = lessonEl.innerText;
-      var chapter = lessonEl
+        .getElementsByTagName("span")[0],
+       lesson = lessonEl.innerText,
+       chapter = lessonEl
         .closest(".CollectionSidebarCategory-sc-15b6owa-0")
-        .getElementsByTagName("h5")[0].innerText;
-      var seperator = lesson && chapter ? " - " : "";
+        .getElementsByTagName("h5")[0].innerText,
+       seperator = lesson && chapter ? " - " : "";
       chapterName = chapter + seperator + lesson;
-    } else {
+    } else 
       courseName = document.getElementsByTagName("h1")[0].innerText;
-    }
+    
   }
 };
 
@@ -54,24 +54,24 @@ presence.on("UpdateData", () => {
     if (isInCourse()) {
       presenceData.details = courseName || "Learning";
       presenceData.state = chapterName;
-      presenceData.smallImageKey = "number_" + courseCompletion;
-      presenceData.smallImageText = courseCompletion + "% Complete";
-    } else {
+      presenceData.smallImageKey = `number_${courseCompletion}`;
+      presenceData.smallImageText = `${courseCompletion}% Complete`;
+    } else 
       presenceData.state = "Viewing course";
-    }
-  } else if (pathStartsWith("/explore")) {
+    
+  } else if (pathStartsWith("/explore")) 
     presenceData.details = "Exploring courses";
-  } else if (pathStartsWith("/mycourses")) {
+   else if (pathStartsWith("/mycourses")) 
     presenceData.details = "My courses";
-  } else if (pathStartsWith("/learn")) {
+   else if (pathStartsWith("/learn")) 
     presenceData.details = "Browsing homepage";
-  } else if (pathStartsWith("/paths")) {
+   else if (pathStartsWith("/paths")) 
     presenceData.details = "Exploring paths";
-  } else if (pathStartsWith("/certificates")) {
+   else if (pathStartsWith("/certificates")) 
     presenceData.details = "Browsing certificates";
-  } else {
+   else 
     presenceData.details = "Idle";
-  }
+  
 
   if (!presenceData.details) {
     presenceData.details = presenceData.state;
@@ -81,7 +81,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
