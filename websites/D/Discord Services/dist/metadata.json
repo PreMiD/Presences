@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "un boing man",
+    "id": "376540589669351424"
+  },
+  "service": "Discord Services",
+  "description": {
+    "en": "Rich Presence for discordservices.net - A Discord Bot List and more"
+  },
+  "url": "discordservices.net",
+  "version": "1.0.0",
+  "logo": "https://discordservices.net/icon.webp",
+  "thumbnail": "https://bots.unboxingman.com/pix/ds-bc.PNG",
+  "color": "#7289DA",
+  "tags": [
+    "discord",
+    "bot",
+    "gaming"
+  ],
+  "category": "other"
+}
