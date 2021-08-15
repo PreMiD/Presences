@@ -200,7 +200,7 @@ if (privacy) {
         presenceData.smallImageKey = "user";
         presenceData.buttons = [
           {
-            label: "Visit Player",
+            label: "Visit My Profile!",
             url: document.URL
           }
         ];
