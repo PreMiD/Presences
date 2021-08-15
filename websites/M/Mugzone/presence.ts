@@ -14,9 +14,9 @@ if (privacy) {
   presence.setActivity(presenceData);
 } else {
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.pathname == "/")
+  if (document.location.pathname === "/")
     presenceData.details = "Malody Main Page";
-  else if (document.location.pathname == "/index") {
+  else if (document.location.pathname === "/index") {
     presenceData.smallImageKey = "home";
     presenceData.details = "Viewing Home Page";
   } else if (document.location.pathname.endsWith("/chart")) {
@@ -58,7 +58,7 @@ if (privacy) {
     presenceData.smallImageKey = "song";
     presenceData.details = "Viewing a song";
     presenceData.state = document.querySelector(
-      "#content > div.song_title.g_rblock > div.right > h2.textfix.title",
+      "#content > div.song_title.g_rblock > div.right > h2.textfix.title"
     ).textContent;
     presenceData.buttons = [
       {
@@ -69,10 +69,10 @@ if (privacy) {
   } else if (document.location.href.includes("/chart")) {
     presenceData.smallImageKey = "song";
     presenceData.details = document.querySelector(
-      "#content > div.song_title.g_rblock > div.right > h2.textfix.title",
+      "#content > div.song_title.g_rblock > div.right > h2.textfix.title"
     ).textContent;
     presenceData.state = document.querySelector(
-      "#content > div.song_title.g_rblock > div.right > h2.mode > span:nth-child(2)",
+      "#content > div.song_title.g_rblock > div.right > h2.mode > span:nth-child(2)"
     ).textContent;
     presenceData.buttons = [
       {
@@ -88,7 +88,7 @@ if (privacy) {
       presenceData.smallImageKey = "skin";
       presenceData.details = "Viewing a skin:";
       presenceData.state = document.querySelector(
-        "#content > div.song_title.g_rblock > div.right > h2.textfix.title",
+        "#content > div.song_title.g_rblock > div.right > h2.textfix.title"
       ).textContent;
       presenceData.buttons = [
         {
@@ -110,7 +110,7 @@ if (privacy) {
         document.querySelector("#chead > div > a").textContent
       }`;
       presenceData.state = document.querySelector(
-        "#g_talk > div.g_talk_title > p > span",
+        "#g_talk > div.g_talk_title > p > span"
       ).textContent;
     } else if (document.location.pathname.includes("/user")) {
       if (document.location.pathname.endsWith("/user")) {
@@ -155,34 +155,34 @@ if (privacy) {
     } else if (document.location.pathname.includes("/user")) {
       if (
         document.querySelector(
-          "#content > div.user_head.g_rblock > div.right > p.name > span",
-        ).textContent ==
-        document.querySelector("#header > div > a:nth-child(4) > b")
-          .textContent
+          "#content > div.user_head.g_rblock > div.right > p.name > span"
+        ).textContent ===
+        document.querySelector("#header > div > a:nth-child(4) > b"
+        ).textContent
       ) {
         const a = document
             .querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank",
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
             )
             .textContent.replace("#", ""),
           b = document
             .querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank",
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
             )
             .textContent.replace("#", ""),
           c = document
             .querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank",
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
             )
             .textContent.replace("#", ""),
           d = document
             .querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank",
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
             )
             .textContent.replace("#", ""),
           e = document
             .querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank",
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank"
             )
             .textContent.replace("#", ""),
           a1: number = +a,
@@ -193,7 +193,7 @@ if (privacy) {
           Top = Math.min(a1, b2, c3, d4, e5);
         presenceData.details = `User: ${
           document.querySelector(
-            "#content > div.user_head.g_rblock > div.right > p.name > span",
+            "#content > div.user_head.g_rblock > div.right > p.name > span"
           ).textContent
         }`;
         presenceData.state = `Best Rank: ${Top}`;
@@ -207,7 +207,7 @@ if (privacy) {
       } else {
         presenceData.details = "Viewing User: ";
         presenceData.state = document.querySelector(
-          "#content > div.user_head.g_rblock > div.right > p.name > span",
+          "#content > div.user_head.g_rblock > div.right > p.name > span"
         ).textContent;
         presenceData.smallImageKey = "user";
       }
@@ -226,7 +226,7 @@ if (privacy) {
   } else if (document.location.pathname.includes("/page/search")) {
     presenceData.smallImageKey = "search";
     presenceData.details = document.querySelector(
-      "#content > div.g_title",
+      "#content > div.g_title"
     ).textContent;
   } else if (document.location.pathname.includes("/page/all")) {
     presenceData.smallImageKey = "eye";
@@ -245,7 +245,7 @@ if (privacy) {
     presenceData.smallImageKey = "wiki";
     presenceData.details = "Viewing Wiki";
     presenceData.state = document.querySelector(
-      "#content > div.wiki_title.g_rblock > div.title",
+      "#content > div.wiki_title.g_rblock > div.title"
     ).textContent;
   }
   presence.setActivity(presenceData);
