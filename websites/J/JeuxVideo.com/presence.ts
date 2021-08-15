@@ -32,8 +32,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = truncateString(video, 128);
   } else if (document.location.pathname.includes("/test/")) {
     const test = document.querySelector(".gameHeaderBanner__title").textContent;
-    const note = document.querySelector(".bloc-avis-testeur > .note > strong")
-      .textContent;
+    const note = document.querySelector(
+      ".bloc-avis-testeur > .note > strong"
+    ).textContent;
     presenceData.details = "Lis un test";
     presenceData.state = truncateString(test, 128) + " (" + note + "/20)";
   } else if (document.location.pathname.includes("/messages-prives/")) {

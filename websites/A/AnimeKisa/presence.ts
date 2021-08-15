@@ -7,25 +7,10 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 let video = {
-  video: false,
   duration: 0,
   currentTime: 0,
   paused: true
 };
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on(
   "iFrameData",
@@ -43,14 +28,12 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "akisa"
   };
-
   if (
     document.querySelector(".infoan2") !== null &&
-    document.querySelector("#iframemain") !== null &&
-    video.video
+    document.querySelector("#iframemain") !== null
   ) {
     // on page of a episode
-    const timestamps = getTimestamps(
+    const timestamps = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );

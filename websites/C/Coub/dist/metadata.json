@@ -14,10 +14,11 @@
   "description": {
     "ru": "Coub это сайт-видеохостинг, позволяющий своим пользователям публиковать короткие зацикленные видеоролики с несинхронным звуковым сопровождением — «коубы». ",
     "en": "Coub is a video sharing website. It allows users to create and share looping videos up to ten seconds long, using existing video from YouTube, Vimeo, or their own files",
-    "de": "Coub ist eine Video-Sharing-Website, die sowohl für iOS als auch für Android verfügbar ist. Benutzer können Loop-Videos mit einer Länge von bis zu zehn Sekunden erstellen und freigeben, indem sie vorhandene Videos von YouTube, Vimeo oder ihren eigenen Dateien verwenden."
+    "de": "Coub ist eine Video-Sharing-Website, die sowohl für iOS als auch für Android verfügbar ist. Benutzer können Loop-Videos mit einer Länge von bis zu zehn Sekunden erstellen und freigeben, indem sie vorhandene Videos von YouTube, Vimeo oder ihren eigenen Dateien verwenden.",
+    "nl": "Coub is een website voor het delen van video's. Hiermee kunnen gebruikers looping-video's tot tien seconden lang maken en delen, met behulp van bestaande video van YouTube, Vimeo of hun eigen bestanden"
   },
   "url": "coub.com",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "logo": "https://i.imgur.com/HRAGMzw.png",
   "thumbnail": "https://i.imgur.com/8P8RhcZ.png",
   "color": "#0084FF",

@@ -9,10 +9,11 @@
     "de": "Der umfassende Breitband-Geschwindigkeitstest",
     "en": "The Global Broadband Speed Test",
     "es": "La prueba de velocidad de banda ancha global",
-    "fr": "Le test de vitesse de connexion global"
+    "fr": "Le test de vitesse de connexion global",
+    "nl": "De wereldwijde breedbandsnelheidstest"
   },
   "service": "Speedtest",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/MOxmNLG.png",
   "thumbnail": "https://i.imgur.com/JXIDlOL.png",
   "color": "#141526",

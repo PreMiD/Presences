@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).browsing;
     presenceData.state = "Home";
   } else if (pathname.startsWith(`/user`)) {
-    const user = document.querySelector(".name").textContent;
+    const user = document.querySelector(".name").textContent.trim();
     if (pathname.includes(`mangalist`)) {
       presenceData.details = `Viewing ${user}'s manga list`;
     } else if (pathname.includes(`animelist`)) {
@@ -50,9 +50,8 @@ presence.on("UpdateData", async () => {
     }
   } else if (pathname.startsWith(`/studio`)) {
     presenceData.details = "Viewing a studio";
-    presenceData.state = document.querySelector(
-      "div.container > h1"
-    ).textContent;
+    presenceData.state =
+      document.querySelector("div.container > h1").textContent;
   } else if (pathname.startsWith(`/review`)) {
     const title = document.querySelector(`a.title`).textContent.trim();
     presenceData.details = `Reading a '${title}' review`;

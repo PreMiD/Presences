@@ -14,7 +14,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/K5IdObW.png",
   "thumbnail": "https://i.imgur.com/jy7RZMJ.png",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "color": "#e61d2f",
   "tags": [
     "video",
@@ -24,7 +24,8 @@
   "url": "animeheaven.ru",
   "description": {
     "en": "animeheaven.ru is the best website for anime, where you can watch anime online completely free. No download, no surveys and only instant premium streaming.",
-    "ga_IE": "Is é animeheaven.ru an suíomh Gréasáin is fearr le haghaidh anime, áit ar féidir leat féachaint ar anime ar líne go hiomlán saor in aisce. Gan aon íoslódáil, gan aon suirbhéanna agus gan ach sruthú préimhe láithreach."
+    "ga_IE": "Is é animeheaven.ru an suíomh Gréasáin is fearr le haghaidh anime, áit ar féidir leat féachaint ar anime ar líne go hiomlán saor in aisce. Gan aon íoslódáil, gan aon suirbhéanna agus gan ach sruthú préimhe láithreach.",
+    "nl": "animeheaven.ru is de beste website voor anime, waar je gratis anime online kunt bekijken. Geen download, geen enquêtes en alleen  maar instant premium streaming."
   },
   "settings": [
     {

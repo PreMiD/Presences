@@ -7,10 +7,11 @@
   "service": "Wallhaven",
   "description": {
     "en": "Your source for the best high quality wallpapers on the Net!",
-    "ga_IE": "Do foinse do na páipéir balla ardchaighdeáin is fearr ar an nGlan!"
+    "ga_IE": "Do foinse do na páipéir balla ardchaighdeáin is fearr ar an nGlan!",
+    "nl": "Uw bron voor de beste wallpapers van hoge kwaliteit op het net!"
   },
   "url": "wallhaven.cc",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/SsIZl80.png",
   "thumbnail": "https://i.imgur.com/QV6vAk6.jpg",
   "color": "#0E6288",

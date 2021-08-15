@@ -5,10 +5,11 @@
   },
   "service": "Foster",
   "description": {
-    "en": "Foster. The Powerful Discord Bot."
+    "en": "Foster. The Powerful Discord Bot.",
+    "nl": "Foster. De machtige Discord Bot."
   },
   "url": "reckless.life",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/SnK6byp.png",
   "thumbnail": "https://i.imgur.com/K0eOJUw.png",
   "color": "#d61515",

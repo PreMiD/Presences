@@ -6,10 +6,11 @@
   "service": "Rainwave",
   "description": {
     "en": "Video game music online radio, including remixes and original soundtracks! Vote for the songs you want to hear!",
-    "zh_CN": "电子游戏音乐在线广播，包括混音和原声带！ 为您想听的歌曲投票！"
+    "zh_CN": "电子游戏音乐在线广播，包括混音和原声带！ 为您想听的歌曲投票！",
+    "nl": "Videogamemuziek online radio, inclusief remixen en originele soundtracks! Stem op de liedjes die je wilt horen!"
   },
   "url": "rainwave.cc",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://sks316.s-ul.eu/9WjgnZ6W.png",
   "thumbnail": "https://sks316.s-ul.eu/ScXsp0ui.png",
   "color": "#D17C2B",

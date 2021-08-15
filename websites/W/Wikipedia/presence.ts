@@ -126,10 +126,11 @@ const updateCallback = {
     //
 
     if (
-      ((document.querySelector("#n-mainpage a") ||
-        document.querySelector("#p-navigation a") ||
-        document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement).href ===
-      currentURL.href
+      (
+        (document.querySelector("#n-mainpage a") ||
+          document.querySelector("#p-navigation a") ||
+          document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement
+      ).href === currentURL.href
     ) {
       presenceData.details = "On the main page";
     } else if (document.querySelector("#wpLoginAttempt")) {
@@ -138,9 +139,9 @@ const updateCallback = {
       presenceData.details = "Creating an account";
     } else if (document.querySelector(".searchresults")) {
       presenceData.details = "Searching for a page";
-      presenceData.state = (document.querySelector(
-        "input[type=search]"
-      ) as HTMLInputElement).value;
+      presenceData.state = (
+        document.querySelector("input[type=search]") as HTMLInputElement
+      ).value;
     } else if (actionResult() === "history") {
       presenceData.details = "Viewing revision history";
       presenceData.state = titleFromURL();

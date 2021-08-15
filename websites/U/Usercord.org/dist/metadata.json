@@ -5,10 +5,11 @@
   },
   "service": "Usercord.org",
   "description": {
-    "en": "Fraud prevention, scam prevention and Discord safety brought to you by UserCord."
+    "en": "Fraud prevention, scam prevention and Discord safety brought to you by UserCord.",
+    "nl": "Fraudepreventie, zwendelpreventie en Discord-veiligheid aangeboden door UserCord."
   },
   "url": "usercord.org",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/cVIFD4l.png",
   "thumbnail": "https://i.imgur.com/K7XK8SV.png",
   "color": "#00ff00",

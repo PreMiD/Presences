@@ -5,10 +5,11 @@
   },
   "url": "flyte.moe",
   "description": {
-    "en": "flyte scribe is a blog written by edo/flyte, telling the interwebs about his current life at Tokyo, Japan. Mainly talks about photography and the like."
+    "en": "flyte scribe is a blog written by edo/flyte, telling the interwebs about his current life at Tokyo, Japan. Mainly talks about photography and the like.",
+    "nl": "flyte scribe is een blog geschreven door edo/flyte, waarin hij op de interwebs vertelt over zijn huidige leven in Tokio, Japan. Voornamelijk praat over fotografie en dergelijke."
   },
   "service": "flyte scribe",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/LI4SUhs.png",
   "thumbnail": "https://i.imgur.com/nTdJdf9.png",
   "color": "#A3A3A3",

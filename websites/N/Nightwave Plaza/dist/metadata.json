@@ -1,21 +1,23 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "Nightwave Plaza",
   "author": {
     "name": "ry",
     "id": "421371986824921109"
   },
-  "service": "Nightwave Plaza",
-  "description": {
-    "en": "Nightwave Plaza is a free 24/7 online vaporwave radio station. The broadcast also includes some future funk and experimental genres. We hope you enjoy."
-  },
-  "url": "plaza.one",
-  "version": "1.2.6",
+  "category": "music",
   "logo": "https://i.imgur.com/rNVPwya.png",
   "thumbnail": "https://i.imgur.com/qnTU97o.jpg",
-  "color": "#F58EA8",
+  "version": "2.0.1",
+  "color": "#f58ea8",
   "tags": [
     "music",
     "radio",
     "vaporwave"
   ],
-  "category": "music"
+  "url": "plaza.one",
+  "description": {
+    "en": "Nightwave Plaza is a free 24/7 online vaporwave radio station. The broadcast also includes some future funk and experimental genres. We hope you enjoy.",
+    "nl": "Nightwave Plaza is een gratis 24/7 online vaporwave radiostation. De uitzending bevat ook enkele toekomstige funk en experimentele genres. We hopen dat je ervan gaat genieten."
+  }
 }

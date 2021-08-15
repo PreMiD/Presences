@@ -25,8 +25,9 @@ presence.on("UpdateData", async () => {
 
   if (end) {
     // Player is looking at match results, this needs to be before checking if active due to the way the active variable is set up
-    place = document.querySelector(".ui-stats-current .ui-stats-player-rank")
-      .textContent;
+    place = document.querySelector(
+      ".ui-stats-current .ui-stats-player-rank"
+    ).textContent;
     data.details = "Placed " + place;
   } else if (!active) {
     gametypequery = 'div[id="index-play-type-selected"]';

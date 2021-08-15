@@ -6,15 +6,19 @@
   },
   "service": "TRanimeizle",
   "category": "anime",
-  "url": ["www.tranimeizle.net", "tranimeizle.net"],
+  "url": [
+    "www.tranimeizle.net",
+    "tranimeizle.net"
+  ],
   "description": {
     "en": "TRanimeizle is a Turkish anime website to find and watch animes online.",
-    "tr": "TRanimeizle, anime izleyebileceğiniz bir Türk servisidir."
+    "tr": "TRanimeizle, anime izleyebileceğiniz bir Türk servisidir.",
+    "nl": "TRanimeizle is een Turkse anime-website om online animaties te zoeken en te bekijken."
   },
   "logo": "https://i.imgur.com/TsLirN4.jpg",
   "thumbnail": "https://i.imgur.com/tvxzX3S.png",
   "color": "#eb0254",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "iframe": true,
   "tags": [
     "turkish",

@@ -18,7 +18,29 @@
     }
   ],
   "service": "Netflix",
-  "altnames": ["Нетфликс", "Նեթֆլիքս", "נטפליקס", "נעטפליקס", "نتفليكس", "نتفلیکس", "نيتفليكس", "نیٹ فلکس", "نیٹ فلیکس", "نێتفلیکس", "نەتفلىكىس", "नेटफ्लिक्स", "নেটফ্লিক্স", "ਨੈਟਫਲਿਕਸ", "நெற்ஃபிளிக்சு", "నెట్‌ఫ్లిక్స్", "ನೆಟ್‍ಫ್ಲಿಕ್ಸ್", "നെറ്റ്ഫ്ലിക്സ്", "เน็ตฟลิกซ์", "網飛", "넷플릭스"],
+  "altnames": [
+    "Нетфликс",
+    "Նեթֆլիքս",
+    "נטפליקס",
+    "נעטפליקס",
+    "نتفليكس",
+    "نتفلیکس",
+    "نيتفليكس",
+    "نیٹ فلکس",
+    "نیٹ فلیکس",
+    "نێتفلیکس",
+    "نەتفلىكىس",
+    "नेटफ्लिक्स",
+    "নেটফ্লিক্স",
+    "ਨੈਟਫਲਿਕਸ",
+    "நெற்ஃபிளிக்சு",
+    "నెట్‌ఫ్లిక్స్",
+    "ನೆಟ್‍ಫ್ಲಿಕ್ಸ್",
+    "നെറ്റ്ഫ്ലിക്സ്",
+    "เน็ตฟลิกซ์",
+    "網飛",
+    "넷플릭스"
+  ],
   "description": {
     "en": "Netflix is the world's leading internet entertainment service with 139 million paid memberships in over 190 countries enjoying TV series, documentaries and feature films across a wide variety of genres and languages.",
     "de": "Netflix ist der weltweit führende Internet-Entertainment-Dienst mit 139 Millionen bezahlten Mitgliedschaften in über 190 Ländern, die TV-Serien, Dokumentationen und Spielfilme in einer Vielzahl von Genres und Sprachen genießen.",
@@ -35,8 +57,8 @@
     "www.netflix.com",
     "netflix.com"
   ],
-  "version": "4.1.0",
-  "logo": "https://i.imgur.com/gvnSwSK.png",
+  "version": "4.1.3",
+  "logo": "https://i.imgur.com/LyG9Afx.png",
   "thumbnail": "https://i.imgur.com/LWcRBZs.jpg",
   "color": "#db0000",
   "tags": [
@@ -134,7 +156,10 @@
       "title": "Icon",
       "icon": "fad fa-images",
       "value": 0,
-      "values": ["Normal", "No Background"]
+      "values": [
+        "Normal",
+        "No Background"
+      ]
     }
   ]
 }

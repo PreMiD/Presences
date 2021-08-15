@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "621819308481445934"
+    clientId: "842112189618978897"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -15,7 +15,7 @@ function getTime(list: string[]): number {
 }
 
 function getTimestamps(audioDuration: string): Array<number> {
-  const splitAudioDuration = audioDuration.split(":").reverse();
+  const splitAudioDuration = audioDuration?.split(":").reverse();
 
   const parsedAudioDuration = getTime(splitAudioDuration);
 
@@ -39,15 +39,15 @@ presence.on("UpdateData", async () => {
       .querySelector(
         ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
       )
-      .textContent.trim();
+      ?.textContent.trim();
     const author = document
       .querySelector(
         ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
       )
-      .textContent.split("—")[0];
+      ?.textContent.split("—")[0];
     const audioTime = document.querySelector(
       ".web-chrome-playback-lcd__time-end"
-    ).textContent;
+    )?.textContent;
     const timestamps = getTimestamps(audioTime);
     const paused = document.querySelector(
       ".web-chrome-playback-controls__playback-btn[aria-label='Play']"

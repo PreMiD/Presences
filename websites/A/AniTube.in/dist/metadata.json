@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "AniTube.in",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/pL1fgAo.png",
+  "thumbnail": "https://i.imgur.com/nRikMNR.png",
+  "version": "1.0.0",
+  "color": "#0fa6a9",
+  "tags": ["anime", "stream"],
+  "url": "www.anitube.in",
+  "description": {
+    "en": "Anitube.in is a Portuguese(language) website where anyone can stream and download anime/dramas for Free."
+  }
+}

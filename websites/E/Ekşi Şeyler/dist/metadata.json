@@ -6,10 +6,11 @@
   "service": "Ekşi Şeyler",
   "description": {
     "en": "Ekşi Şeyler is the alter website of ekşi sozluk for global and local news.",
-    "tr": "Ekşi Şeyler, ekşi sözlük'ün haber yayınlama sitesidir."
+    "tr": "Ekşi Şeyler, ekşi sözlük'ün haber yayınlama sitesidir.",
+    "nl": "Ekşi Şeyler is de andere website van ekşi sozluk voor wereldwijd en lokaal nieuws."
   },
   "url": "seyler.eksisozluk.com",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://premid.is-inside.me/ghauWwHq.png",
   "thumbnail": "https://premid.is-inside.me/0je7tBcf.png",
   "color": "#54c7e0",

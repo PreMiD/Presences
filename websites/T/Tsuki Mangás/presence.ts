@@ -83,9 +83,9 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/perfil/") && !notfound) {
     const username = document.querySelector("#capapl > b");
-    const sessionUsername = (document.querySelector(
-      "#menu>li>ul>a"
-    ) as HTMLLinkElement).href
+    const sessionUsername = (
+      document.querySelector("#menu>li>ul>a") as HTMLLinkElement
+    ).href
       .split("/")
       .slice(-1)[0];
     const usernameValue = [0, "...", true];

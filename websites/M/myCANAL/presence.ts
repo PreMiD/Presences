@@ -1,41 +1,25 @@
-var presence = new Presence({
-    clientId: "620678620041576478"
+const presence = new Presence({
+    clientId: "844106861711196179"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     live: "presence.activity.live"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var elapsed = Math.floor(Date.now() / 1000);
-var title;
+  }),
+  elapsed = Math.floor(Date.now() / 1000);
+let title;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "mycanal-logo"
-  };
-
-  var video: HTMLVideoElement = document.querySelector(
-    ".aPWk0-TaQEzvggxIT6qvP"
-  );
+      largeImageKey: "logo"
+    },
+    video: HTMLVideoElement = document.querySelector(".aPWk0-TaQEzvggxIT6qvP");
   if (video && !isNaN(video.duration)) {
-    var Ad = document.querySelector("._3uUpH58Juk_Qbizq6j5ThG") ? true : false;
+    const Ad = document.querySelector("._3uUpH58Juk_Qbizq6j5ThG")
+      ? true
+      : false;
     if (!Ad) {
-      var path = document.location.pathname;
+      const path = document.location.pathname;
       if (path.includes("/live/")) {
         title = document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ").textContent;
         data.smallImageKey = "live";
@@ -43,7 +27,7 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = elapsed;
       } else {
         title = document.querySelector(".bodyTitle___DZEtt").textContent;
-        var timestamps = getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
@@ -51,10 +35,9 @@ presence.on("UpdateData", async () => {
         data.smallImageText = video.paused
           ? (await strings).pause
           : (await strings).play;
-        (data.startTimestamp = timestamps[0]),
-          (data.endTimestamp = timestamps[1]);
+        data.endTimestamp = endTimestamp;
       }
-      var subtitle = document.querySelector(
+      const subtitle = document.querySelector(
         "._39WJKEhrSYo7ftwMlFjZtA  ._3tdt8zwgvMCJ6v_sElXneQ"
       ).textContent;
       data.details = title;

@@ -83,9 +83,8 @@
 
           const isPlaying = !!document.querySelector(".PlayerPauseButton");
 
-          const video: HTMLVideoElement = document.querySelector(
-            ".VideoPlayer video"
-          );
+          const video: HTMLVideoElement =
+            document.querySelector(".VideoPlayer video");
           const elapsedSec = Math.floor(video.currentTime);
 
           const presenceData: PresenceData = {
@@ -113,8 +112,9 @@
       case "live.nicovideo.jp":
       case "live2.nicovideo.jp": {
         if (location.pathname.startsWith("/watch/lv")) {
-          const title = document.querySelector("[class^='___title___']")
-            .textContent;
+          const title = document.querySelector(
+            " [class^='___program-title___'] span "
+          ).textContent;
           const ownerElement =
             document.querySelector("[class^='___channel-name-anchor___']") ||
             document.querySelector("[class^='___group-name-anchor___']");
@@ -122,7 +122,7 @@
           const [liveId] = location.pathname.match(/lv\d+/);
 
           const elapsed = document.querySelector(
-            "span[class^='___elapsed-time___'] span"
+            " span[class^='___time-score___'] span[class^='___value___'] "
           ).textContent;
 
           const presenceData: PresenceData = {

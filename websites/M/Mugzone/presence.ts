@@ -14,9 +14,9 @@ if (privacy) {
   presence.setActivity(presenceData);
 } else {
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Malody Main Page";
-  } else if (document.location.pathname == "/index") {
+  } else if (document.location.pathname === "/index") {
     presenceData.smallImageKey = "home";
     presenceData.details = "Viewing Home Page";
   } else if (document.location.pathname.endsWith("/chart")) {
@@ -107,8 +107,8 @@ if (privacy) {
     if (document.location.pathname.includes("/topic")) {
       presenceData.smallImageKey = "chat";
       presenceData.details =
-        "Viewing topic: " +
-        document.querySelector("#chead > div > a").textContent;
+      `Viewing topic: ${ 
+        document.querySelector("#chead > div > a").textContent}`;
       presenceData.state = document.querySelector(
         "#g_talk > div.g_talk_title > p > span",
       ).textContent;
@@ -137,18 +137,18 @@ if (privacy) {
       }
     }
   } else if (document.location.pathname.startsWith("/accounts")) {
-    if (document.location.pathname.includes("/login")) {
+    if (document.location.pathname.includes("/login"))
       presenceData.details = "Logging in";
-    } else if (document.location.pathname.endsWith("/accounts/limit")) {
+    else if (document.location.pathname.endsWith("/accounts/limit")) {
       presenceData.smallImageKey = "jail";
       presenceData.details = "Visiting the Jail";
       presenceData.state = "What Is This Place Anyway?";
       presenceData.buttons = [
         {
           label:
-            "Go with " +
-            document.querySelector("#header > div > a:nth-child(4) > b")
-              .textContent,
+            `Go with 
+            ${document.querySelector("#header > div > a:nth-child(4) > b")
+              .textContent}`,
           url: document.URL,
         },
       ];

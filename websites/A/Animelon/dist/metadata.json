@@ -6,10 +6,11 @@
   "service": "Animelon",
   "description": {
     "en": "Animelon is a streaming website which provides subtitles with translations to help learners of Japanese",
-    "ga_IE": "Is suíomh Gréasáin sruthú é Animelon a sholáthraíonn aistriúcháin le fotheidil chun cabhrú le foghlaimeoirí na Seapáine"
+    "ga_IE": "Is suíomh Gréasáin sruthú é Animelon a sholáthraíonn aistriúcháin le fotheidil chun cabhrú le foghlaimeoirí na Seapáine",
+    "nl": "Animelon is een streamingwebsite die ondertiteling met vertalingen biedt om studenten helpen Japans te leren."
   },
   "url": "animelon.com",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/5gunVuc.png",
   "thumbnail": "https://i.imgur.com/sT2xcZP.jpg",
   "color": "#D34344",

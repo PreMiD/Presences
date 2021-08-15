@@ -13,7 +13,7 @@ const presence = new Presence({
         viewEpisode: "general.buttonViewEpisode",
         watchVideo: "general.buttonWatchVideo",
         viewTeam: "twitch.viewTeam",
-        readingAricle: "general.readingArticle",
+        readingArticle: "general.readingArticle",
         viewPage: "general.viewPage",
         viewSeries: "general.buttonViewSeries"
       },
@@ -211,20 +211,20 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).viewPage;
         presenceData.state = title;
       } else if (path.includes("/sport/formula1/")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
       } else if (path.includes("/formula1/")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
@@ -240,20 +240,20 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).viewTeam;
         presenceData.state = title;
       } else if (path.includes("/gossip")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
       } else if (path.includes("/transfers")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
@@ -270,11 +270,11 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).viewPage;
         presenceData.state = "European's Cricket";
       } else if (path.includes("/football/")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
@@ -312,11 +312,11 @@ presence.on("UpdateData", async () => {
 
         presenceData.state = `${Team1} & ${Team2}`;
       } else if (path.includes("/sport/cricket/")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
@@ -332,11 +332,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.smallImageText = "Rugby Union Team";
       } else if (path.includes("/rugby-union/")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
@@ -354,11 +354,11 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).viewPage;
         presenceData.state = title;
       } else if (path.includes("/tennis/")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
@@ -370,11 +370,11 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Golf";
 
       if (path.includes("/athletics/")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
@@ -386,21 +386,21 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Cycling";
 
       if (path.includes("/cycling/")) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
       }
     } else if (path.includes("/sport/")) {
-      presenceData.details = (await strings).readingAricle;
+      presenceData.details = (await strings).readingArticle;
       presenceData.state = title;
       presenceData.buttons = [
         {
-          label: "Read Aricle",
+          label: "Read Article",
           url: document.baseURI
         }
       ];
@@ -501,8 +501,9 @@ presence.on("UpdateData", async () => {
       time = (
         document.querySelector("time>span") || document.querySelector("b")
       )?.textContent,
-      weather = document.querySelector("div.wr-day-summary > div > span")
-        ?.textContent,
+      weather = document.querySelector(
+        "div.wr-day-summary > div > span"
+      )?.textContent,
       weatherPages: {
         [key: string]: PresenceData;
       } = {
@@ -529,12 +530,12 @@ presence.on("UpdateData", async () => {
           ]
         },
         "/weather/features/([0-9])": {
-          details: (await strings).readingAricle,
+          details: (await strings).readingArticle,
           state: title,
           smallImageKey: "reading",
           buttons: [
             {
-              label: "Read Aricle",
+              label: "Read Article",
               url: document.baseURI
             }
           ]
@@ -586,11 +587,11 @@ presence.on("UpdateData", async () => {
           state: "Coronavirus pandemic"
         },
         "(-|/)([0-9])": {
-          details: (await strings).readingAricle,
+          details: (await strings).readingArticle,
           state: title,
           buttons: [
             {
-              label: "Read Aricle",
+              label: "Read Article",
               url: document.baseURI
             }
           ]
@@ -608,7 +609,7 @@ presence.on("UpdateData", async () => {
           state: "Long Reads"
         },
         "/newsbeat": {
-          details: (await strings).readingAricle,
+          details: (await strings).readingArticle,
           state: "Newsbeat"
         },
         "/blogs": {
@@ -685,21 +686,20 @@ presence.on("UpdateData", async () => {
           }
         ];
       } else if (path.match(/(-[0-9])/)) {
-        presenceData.details = (await strings).readingAricle;
+        presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
 
         presenceData.buttons = [
           {
-            label: "Read Aricle",
+            label: "Read Article",
             url: document.baseURI
           }
         ];
       }
     }
   } else if (path === "/search") {
-    const searchValue = document.querySelector<HTMLInputElement>(
-      "#search-input"
-    )?.value;
+    const searchValue =
+      document.querySelector<HTMLInputElement>("#search-input")?.value;
 
     presenceData.details = (await strings).searchFor;
     presenceData.state = searchValue;
