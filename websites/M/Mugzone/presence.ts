@@ -14,9 +14,9 @@ if (privacy) {
   presence.setActivity(presenceData);
 } else {
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.pathname === "/") {
+  if (document.location.pathname == "/")
     presenceData.details = "Malody Main Page";
-  } else if (document.location.pathname === "/index") {
+  else if (document.location.pathname == "/index") {
     presenceData.smallImageKey = "home";
     presenceData.details = "Viewing Home Page";
   } else if (document.location.pathname.endsWith("/chart")) {
@@ -106,9 +106,9 @@ if (privacy) {
   } else if (document.location.pathname.startsWith("/talk")) {
     if (document.location.pathname.includes("/topic")) {
       presenceData.smallImageKey = "chat";
-      presenceData.details =
-      `Viewing topic: ${ 
-        document.querySelector("#chead > div > a").textContent}`;
+      presenceData.details = `Viewing topic: ${
+        document.querySelector("#chead > div > a").textContent
+      }`;
       presenceData.state = document.querySelector(
         "#g_talk > div.g_talk_title > p > span",
       ).textContent;
@@ -145,10 +145,10 @@ if (privacy) {
       presenceData.state = "What Is This Place Anyway?";
       presenceData.buttons = [
         {
-          label:
-            `Go with 
-            ${document.querySelector("#header > div > a:nth-child(4) > b")
-              .textContent}`,
+          label: `Go with ${
+            document.querySelector("#header > div > a:nth-child(4) > b")
+              .textContent
+          }`,
           url: document.URL,
         },
       ];
@@ -161,46 +161,46 @@ if (privacy) {
           .textContent
       ) {
         const a = document
-          .querySelector(
-            "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank",
-          )
-          .textContent.replace("#", "");
-        const b = document
-          .querySelector(
-            "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank",
-          )
-          .textContent.replace("#", "");
-        const c = document
-          .querySelector(
-            "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank",
-          )
-          .textContent.replace("#", "");
-        const d = document
-          .querySelector(
-            "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank",
-          )
-          .textContent.replace("#", "");
-        const e = document
-          .querySelector(
-            "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank",
-          )
-          .textContent.replace("#", "");
-        const a1: number = +a;
-        const b2: number = +b;
-        const c3: number = +c;
-        const d4: number = +d;
-        const e5: number = +e;
-        const Top = Math.min(a1, b2, c3, d4, e5);
-        presenceData.details =
-          "User: " +
+            .querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank",
+            )
+            .textContent.replace("#", ""),
+          b = document
+            .querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank",
+            )
+            .textContent.replace("#", ""),
+          c = document
+            .querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank",
+            )
+            .textContent.replace("#", ""),
+          d = document
+            .querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank",
+            )
+            .textContent.replace("#", ""),
+          e = document
+            .querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank",
+            )
+            .textContent.replace("#", ""),
+          a1: number = +a,
+          b2: number = +b,
+          c3: number = +c,
+          d4: number = +d,
+          e5: number = +e,
+          Top = Math.min(a1, b2, c3, d4, e5);
+        presenceData.details = `User: ${
           document.querySelector(
             "#content > div.user_head.g_rblock > div.right > p.name > span",
-          ).textContent;
-        presenceData.state = "Best Rank: " + Top;
+          ).textContent
+        }`;
+        presenceData.state = `Best Rank: ${Top}`;
         presenceData.smallImageKey = "user";
         presenceData.buttons = [
           {
-            label: "Visit My Profile",
+            label: "Visit Player",
             url: document.URL,
           },
         ];
@@ -220,9 +220,9 @@ if (privacy) {
     }
   } else if (document.location.pathname.includes("/page/userpage/edit/")) {
     presenceData.smallImageKey = "edit";
-    presenceData.details =
-      document.querySelector("#content > div.g_title").textContent +
-      "profile";
+    presenceData.details = `${
+      document.querySelector("#content > div.g_title").textContent
+    }profile`;
   } else if (document.location.pathname.includes("/page/search")) {
     presenceData.smallImageKey = "search";
     presenceData.details = document.querySelector(
