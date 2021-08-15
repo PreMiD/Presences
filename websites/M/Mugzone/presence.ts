@@ -1,12 +1,12 @@
 const presence = new Presence({
-  clientId: "823408394098311178"
+  clientId: "823408394098311178",
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 const privacy = await presence.getSetting("privacy"),
   presenceData: PresenceData = {
-    largeImageKey: "malody"
+    largeImageKey: "malody",
   };
 if (privacy) {
   presenceData.details = "Browsing Malody Website";
@@ -63,8 +63,8 @@ if (privacy) {
     presenceData.buttons = [
       {
         label: "View Song",
-        url: document.URL
-      }
+        url: document.URL,
+      },
     ];
   } else if (document.location.href.includes("/chart")) {
     presenceData.smallImageKey = "song";
@@ -77,8 +77,8 @@ if (privacy) {
     presenceData.buttons = [
       {
         label: "View Chart",
-        url: document.URL
-      }
+        url: document.URL,
+      },
     ];
   } else if (document.location.pathname.startsWith("/store")) {
     if (document.location.pathname.endsWith("/skin")) {
@@ -93,8 +93,8 @@ if (privacy) {
       presenceData.buttons = [
         {
           label: "View Skin",
-          url: document.URL
-        }
+          url: document.URL,
+        },
       ];
     } else if (document.location.pathname.endsWith("/all")) {
       presenceData.smallImageKey = "store";
@@ -149,16 +149,16 @@ if (privacy) {
             document.querySelector("#header > div > a:nth-child(4) > b")
               .textContent
           }`,
-          url: document.URL
-        }
+          url: document.URL,
+        },
       ];
     } else if (document.location.pathname.includes("/user")) {
       if (
         document.querySelector(
           "#content > div.user_head.g_rblock > div.right > p.name > span"
         ).textContent ===
-        document.querySelector("#header > div > a:nth-child(4) > b"
-        ).textContent
+        document.querySelector("#header > div > a:nth-child(4) > b")
+          .textContent
       ) {
         const a = document
             .querySelector(
@@ -201,8 +201,8 @@ if (privacy) {
         presenceData.buttons = [
           {
             label: "Visit My Profile!",
-            url: document.URL
-          }
+            url: document.URL,
+          },
         ];
       } else {
         presenceData.details = "Viewing User: ";
