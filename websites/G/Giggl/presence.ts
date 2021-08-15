@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
         // If in a portal, set status to that
         if (document.location.pathname.startsWith("/portal")) {
             presenceData.details = "In a Portal";
-            presenceData.state = document.querySelector("title").innerText.split(" • ")[0];
+            [presenceData.state] = document.querySelector("title").innerText.split(" • ");
         }
 
         // Check if in a call
