@@ -1,7 +1,6 @@
 websites/** @PreMiD/presence-verifiers
 
 @types/** @Timeraa @Bas950
-package.json @Timeraa @Fruxh @TheDropX
 yarn.lock @Timeraa @Fruxh @TheDropX
 .eslintrc.json @Bas950
 .github/CODEOWNERS @Bas950
