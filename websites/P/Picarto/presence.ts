@@ -8,8 +8,7 @@ const presence = new Presence({
   presenceData: PresenceData = {
     largeImageKey: "logo"
   },
-
- browsingStamp = Math.floor(Date.now() / 1000);
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const video = document.getElementsByClassName("mistvideo-video"),
@@ -42,10 +41,6 @@ presence.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-
-    if (title !== null && uploader !== null) 
-      presence.setActivity(presenceData, playorpause.includes("playing"));
-    
   } else {
     console.log("Browsing");
     const pageData: PresenceData = {
