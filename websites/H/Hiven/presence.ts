@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing a House...";
       else {
         presenceData.details = `Viewing House: ${document.querySelector("span.sc-pQSRh.kUecYO").textContent}`;
-        presenceData.state = `Channel: ${document.querySelector("span.sc-pbYdQ.elGOsQ").textContent}`;
+        presenceData.state = `Room: ${document.querySelector("span.sc-pbYdQ.elGOsQ").textContent}`;
       }
       
     }
