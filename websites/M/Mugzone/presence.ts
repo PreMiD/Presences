@@ -3,11 +3,47 @@ const presence = new Presence({
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
 
+// Get string(All)
+const mode = [document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > img").textContent,
+  document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > img").textContent,
+  document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > img").textContent,
+  document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > img").textContent,
+  document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > img").textContent,
+  document.querySelector("#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(6) > img").textContent
+]
+
 presence.on("UpdateData", async () => {
 const privacy = await presence.getSetting("privacy"),
   presenceData: PresenceData = {
     largeImageKey: "malody"
-  };
+};
+
+// String checker :D
+const check1 = mode;
+if (check1.includes('mode-0')) { 
+  presenceData.smallImageKey = "key";
+}
+const check2 = mode;
+if (check2.includes('mode-3')) { 
+  presenceData.smallImageKey = "catch";
+}
+const check3 = mode;
+if (check3.includes('mode-4')) { 
+  presenceData.smallImageKey = "pad";
+}
+const check4 = mode;
+if (check4.includes('mode-5')) { 
+  presenceData.smallImageKey = "taiko";
+}
+const check5 = mode;
+if (check5.includes('mode-6')) { 
+  presenceData.smallImageKey = "ring";
+}
+const check6 = mode;
+if (check6.includes('mode-7')) { 
+  presenceData.smallImageKey = "slide";
+}
+
 if (privacy) {
   presenceData.details = "Browsing Malody Website";
   presenceData.startTimestamp = browsingStamp;
@@ -164,40 +200,48 @@ if (privacy) {
             .querySelector(
               "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
             )
-            .textContent.replace("#", ""),
+            .textContent,
           b = document
             .querySelector(
               "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
             )
-            .textContent.replace("#", ""),
+            .textContent,
           c = document
             .querySelector(
               "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
             )
-            .textContent.replace("#", ""),
+            .textContent,
           d = document
             .querySelector(
               "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
             )
-            .textContent.replace("#", ""),
+            .textContent,
           e = document
             .querySelector(
               "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank"
             )
-            .textContent.replace("#", ""),
-          a1: number = +a,
-          b2: number = +b,
-          c3: number = +c,
-          d4: number = +d,
-          e5: number = +e,
-          Top = Math.min(a1, b2, c3, d4, e5);
+            .textContent,
+          f  = document
+            .querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(6) > div > p.rank"
+            )
+            .textContent,
+          a1: number = +a.replace("#", ""),
+          b1: number = +b.replace("#", ""),
+          c1: number = +c.replace("#", ""),
+          d1: number = +d.replace("#", ""),
+          e1: number = +e.replace("#", ""),
+          f1: number = +f.replace("#", ""),
+          Top = Math.min(a1, b1, c1, d1, e1, f1);
         presenceData.details = `User: ${
           document.querySelector(
             "#content > div.user_head.g_rblock > div.right > p.name > span"
           ).textContent
         }`;
         presenceData.state = `Best Rank: ${Top}`;
-        presenceData.smallImageKey = "user";
+        if (Top == a1) {
+          check1
+        }
         presenceData.buttons = [
           {
             label: "Visit My Profile!",
