@@ -35,28 +35,28 @@ presence.on("UpdateData", async () => {
 
     // Check if the user is on House
     if (document.location.pathname.startsWith("/houses/")) {
-      if (privacy) {
+      if (privacy) 
         presenceData.details = "Viewing a House...";
-      } else {
-        presenceData.details = `Viewing House: ${ document.querySelector("span.sc-pQSRh.kUecYO").textContent }`;
+       else {
+        presenceData.details = `Viewing House: ${document.querySelector("span.sc-pQSRh.kUecYO").textContent}`;
         presenceData.state = `Channel: ${document.querySelector("span.sc-pbYdQ.elGOsQ").textContent}`;
       }
       
     }
 
     // Check if user is viewing their friends page
-    if (document.location.pathname.startsWith("/friends")) {
+    if (document.location.pathname.startsWith("/friends")) 
       presenceData.details = "Viewing their friends...";
-    }
+    
 
     // Check if user is in settings
     if (document.querySelector("div.sc-pjIPr.fZnZKj") && document.querySelector("div.sc-pjIPr.fZnZKj").textContent === "User Settings") {
       presenceData.details = "Viewing their settings";
-      if (privacy) {
+      if (privacy) 
         presenceData.state = undefined;
-      } else {
+       else 
         presenceData.state = document.querySelector("div.sc-pbWVv.hTvDIL").textContent;
-      }
+      
     }
 
   }
