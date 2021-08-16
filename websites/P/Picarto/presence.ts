@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "630771716058120192"
   }),
   strings = presence.getStrings({
@@ -9,42 +9,48 @@ var presence = new Presence({
     largeImageKey: "logo"
   };
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector(
-    "#picarto-player-1_html5_api"
-  );
-  if (video !== null && !isNaN(video.duration)) {
-    var title: any, uploader: any;
+  const video = document.getElementsByClassName("mistvideo-video"),
+    time = document.getElementsByClassName("mistvideo-currentTime")[0]
+      .textContent;
+  if (video[0] && !isNaN(presence.timestampFromFormat(time))) {
+    let title: HTMLElement, uploader: Element;
 
-    title = document.querySelector(".d-flex h4");
-    uploader = document.querySelector("#userbar-name .d-flex .d-inline-block");
-    presenceData.details =
-      title !== null ? (title as HTMLElement).innerText : "Title not found...";
-    presenceData.state =
-      uploader !== null
-        ? (uploader as HTMLElement).textContent
-        : "Uploader not found...";
+    title = document.querySelector(
+      "#channel-page > section > section > main > div > div.styled__ChannelLeftContent-sf47ty-1.FBOTx > div.scrollbar-container.styled__ChannelContent-sf47ty-2.bYRWNT.ps > div.styled__StreamTabWrapper-sf47ty-27.qmuRk > div.styled__ChannelBottomContent-sf47ty-5.kkyoeB > div.FlexCol-sc-1y959hh-0.styled__ChannelHeader-sf47ty-4.gxSgjV.dbXdlh > div.FlexRow-sc-1j9kiqj-0.styled__ChannelHeaderTop-sf47ty-22.dFXswc.kRGjEe > span"
+    );
+    uploader = document.getElementsByClassName("mistvideo-streamer")[0];
+    const playorpause = document
+      .getElementsByClassName("mistvideo-play")[0]
+      .getAttribute("data-state");
+    presenceData.details = title.textContent;
+    presenceData.state = uploader.textContent;
     presenceData.largeImageKey = "logo";
-    presenceData.smallImageKey = video.paused ? "pause" : "play";
-    presenceData.smallImageText = video.paused
+    presenceData.smallImageKey = playorpause.includes("paused")
+      ? "pause"
+      : "play";
+    presenceData.smallImageText = playorpause.includes("paused")
       ? (await strings).pause
       : (await strings).play;
     presenceData.startTimestamp = browsingStamp;
 
-    presence.setTrayTitle(video.paused ? "" : title.innerText);
+    presence.setTrayTitle(
+      playorpause.includes("paused") ? "" : title.textContent
+    );
 
-    if (video.paused) {
+    if (playorpause.includes("paused")) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
 
     if (title !== null && uploader !== null) {
-      presence.setActivity(presenceData, !video.paused);
+      presence.setActivity(presenceData, playorpause.includes("playing"));
     }
   } else {
-    var pageData: PresenceData = {
+    console.log("Browsing");
+    const pageData: PresenceData = {
       details: "Browsing..",
       largeImageKey: "logo"
     };
