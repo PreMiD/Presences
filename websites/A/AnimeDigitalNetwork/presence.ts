@@ -15,9 +15,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("video") && video) {
     const episode = JSON.parse(
-      document.querySelector(
-        "#root > div > div > div.sc-pkSvE.kPCOPp > div > div:nth-child(1) > script"
-      ).textContent
+      document.querySelector('[type="application/ld+json"]').textContent
     );
     if (!isNaN(video.duration)) {
       const timestamps = presence.getTimestampsfromMedia(video);
@@ -59,9 +57,7 @@ presence.on("UpdateData", async () => {
     if (catalogue) presenceData.details = "Browsing...";
     else {
       const episode = JSON.parse(
-        document.querySelector(
-          "#root > div > div > div.sc-qPmLO.gspUft > div > div > div.sc-qXiOn.iVbXhX > script"
-        ).textContent
+        document.querySelector('[type="application/ld+json"]').textContent
       );
       presenceData.details = "Looking at";
       presenceData.state = episode.name;
