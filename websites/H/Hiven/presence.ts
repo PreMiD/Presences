@@ -1,4 +1,3 @@
-/// @ts-ignore
 const presence: Presence = new Presence({
   clientId: "876835643983007754"
 });
