@@ -49,9 +49,9 @@ presence.on("UpdateData", async () => {
     
     // Check if the user is viewing a profile
     if (document.location.pathname.startsWith("/@")) {
-      if (privacy) {
-        presenceData.details = "Viewing a profile..."
-      } else {
+      if (privacy) 
+        presenceData.details = "Viewing a profile...";
+       else {
         presenceData.details = `Viewing ${document.querySelector("div.sc-pcwJP.eLUntd").textContent}'s Profile...`;
         presenceData.state = `User: ${document.querySelector("div.sc-pkvSM.fVFrlQ").textContent}`;
         presenceData.buttons = [
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
             label: "View Profile",
             url: document.location.href
           }
-        ]
+        ];
       }
     }
 
@@ -76,9 +76,9 @@ presence.on("UpdateData", async () => {
     // Check if user is viewing Settings of a House
     if (document.querySelector("div.sc-psfJB.efwVkl")) {
       presenceData.details = "Viewing a House's settings";
-      if (!privacy) {
+      if (!privacy) 
         presenceData.state = document.querySelector("div.sc-psfJB.efwVkl").children[2].textContent;
-      }
+      
     }
 
   }
