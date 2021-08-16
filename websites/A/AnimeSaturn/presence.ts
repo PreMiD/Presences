@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "669254632400355358"
-}),
-
- browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "669254632400355358"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean,
   currentTime: number,
   duration: number,
@@ -223,11 +222,11 @@ presence.on("UpdateData", async () => {
     } else fullName = document.querySelector("#wtf > h4").textContent;
 
     if (iFrameVideo === true) {
-timestamps = presence.getTimestamps(
+      timestamps = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
-}
+    }
 
     if (document.location.href.endsWith("=alt")) {
       // Alternative
