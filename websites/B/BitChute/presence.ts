@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "bitchute_logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "bitchute_logo",
+      startTimestamp: browsingStamp
+    },
     { pathname } = location,
     [privacy, buttons, time] = await Promise.all(
       ["privacy", "buttons", "time"].map(async (setting) => {

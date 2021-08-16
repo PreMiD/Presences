@@ -185,7 +185,6 @@ presence.on("UpdateData", async () => {
         parseInt(result, 10) > 1 ? "results" : "result"
       }`;
     } else presenceData.state = "No matching result";
-    
   } else if (document.location.pathname.includes("/personal")) {
     const type = new URLSearchParams(document.location.search).get("type"),
       all = document.querySelector(
