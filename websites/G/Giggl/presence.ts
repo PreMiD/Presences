@@ -42,5 +42,5 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the status page";
 
 
-    presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
