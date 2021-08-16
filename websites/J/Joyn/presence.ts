@@ -291,15 +291,10 @@ presence.on("UpdateData", async function () {
     } else if (urlpath[1] == "fsk") {
       presenceData.details = "My Account";
       presenceData.state = "FSK Settings";
-    } else if (urlpath[1] == "ueber-joyn") {
-      presenceData.details = "About Joyn";
-    } else if (urlpath[1] == "jugendschutz") {
-      presenceData.details = "Youth protection";
-    } else if (urlpath[1] == "datenschutz") {
-      presenceData.details = "Privacy policy";
-    } else if (urlpath[1] == "agb") {
-      presenceData.details = "Terms of service";
-    }
+    } else if (urlpath[1] == "ueber-joyn") presenceData.details = "About Joyn";
+    else if (urlpath[1] == "jugendschutz") presenceData.details = "Youth protection";
+    else if (urlpath[1] == "datenschutz") presenceData.details = "Privacy policy";
+    else if (urlpath[1] == "agb") presenceData.details = "Terms of service";
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();
