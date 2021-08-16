@@ -47,6 +47,21 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.startsWith("/friends")) 
       presenceData.details = "Viewing their friends...";
     
+    // Check if the user is viewing a profile
+    if (document.location.pathname.startsWith("/@")) {
+      if (privacy) {
+        presenceData.details = "Viewing a profile..."
+      } else {
+        presenceData.details = `Viewing ${document.querySelector("div.sc-pcwJP.eLUntd").textContent}'s Profile...`;
+        presenceData.state = `User: ${document.querySelector("div.sc-pkvSM.fVFrlQ").textContent}`;
+        presenceData.buttons = [
+          {
+            label: "View Profile",
+            url: document.location.href
+          }
+        ]
+      }
+    }
 
     // Check if user is in settings
     if (document.querySelector("div.sc-pjIPr.fZnZKj") && document.querySelector("div.sc-pjIPr.fZnZKj").textContent === "User Settings") {
@@ -56,6 +71,14 @@ presence.on("UpdateData", async () => {
       else 
         presenceData.state = document.querySelector("div.sc-pbWVv.hTvDIL").textContent;
       
+    }
+
+    // Check if user is viewing Settings of a House
+    if (document.querySelector("div.sc-psfJB.efwVkl")) {
+      presenceData.details = "Viewing a House's settings";
+      if (!privacy) {
+        presenceData.state = document.querySelector("div.sc-psfJB.efwVkl").children[2].textContent;
+      }
     }
 
   }
