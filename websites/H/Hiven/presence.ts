@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.startsWith("/houses/")) {
       if (privacy) 
         presenceData.details = "Viewing a House...";
-       else {
+      else {
         presenceData.details = `Viewing House: ${document.querySelector("span.sc-pQSRh.kUecYO").textContent}`;
         presenceData.state = `Channel: ${document.querySelector("span.sc-pbYdQ.elGOsQ").textContent}`;
       }
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing their settings";
       if (privacy) 
         presenceData.state = undefined;
-       else 
+      else 
         presenceData.state = document.querySelector("div.sc-pbWVv.hTvDIL").textContent;
       
     }
