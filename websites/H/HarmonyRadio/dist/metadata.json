@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "Milan",
+      "id": "700817449414557736"
+    },
+    "service": "Harmony",
+    "description": {
+      "en": "Harmony | You bring the Harmony to music."
+    },
+    "url": [
+      "weareharmony.net"
+    ],
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/JePetUr.jpg",
+    "thumbnail": "https://i.imgur.com/JePetUr.jpg",
+    "color": "#C408E8",
+    "tags": [
+      "music"
+    ],
+    "category": "music"
+  }
