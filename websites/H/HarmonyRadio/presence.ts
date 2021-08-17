@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         
-    }
+    };
     presenceData.startTimestamp = timeofbrowsing;
     if (window.location.pathname.toLowerCase() === "/maintenance") {
         presenceData.largeImageKey = "default";
@@ -14,8 +14,8 @@ presence.on("UpdateData", async () => {
     }
     if (window.location.pathname.toLowerCase() === "/") {
         presenceData.largeImageKey = "default";
-        let title = document.getElementById("titlemarquee").innerText;
-        let artist = document.getElementById("artistmarquee").innerText;
+        let title = document.getElementById("titlemarquee").innerText,
+         artist = document.getElementById("artistmarquee").innerText;
         if (artist === "") 
             artist = document.getElementsByClassName("player-artist")[0].innerHTML;
         
