@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
- const browsingStamp = Math.floor(Date.now() / 1000)
-  const presenceData: PresenceData = {
+ const browsingStamp = Math.floor(Date.now() / 1000) ,
+   presenceData: PresenceData = {
     largeImageKey: "dslogo",
     smallImageKey: "fplogo",
     smallImageText: "fluxpoint",
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Staff section:";
 
 
-    if (window.location.pathname == "/staff/stats")
+    if (window.location.pathname === "/staff/stats")
       presenceData.state = "looking at leader board";
 
   } else if (window.location.pathname.startsWith("/bots")) {
@@ -30,20 +30,20 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname.startsWith("/bot/")) {
     if (window.location.pathname.endsWith("/edit")) {
       presenceData.details = "Editing a Discord bot:";
-      presenceData.state = document.querySelectorAll(`h3`).item(1).textContent.slice(4);
+      presenceData.state = document.querySelectorAll("h3").item(1).textContent.slice(4);
 
     } else {
       presenceData.details = "Viewing a Discord bot:";
-      presenceData.state = document.querySelectorAll(`h3`).item(1).textContent;
+      presenceData.state = document.querySelectorAll("h3").item(1).textContent;
     }
   } else if (window.location.pathname.startsWith("/tag")) {
     presenceData.details = "Viewing Discord bots with tag:";
-    presenceData.state = document.querySelectorAll(`h3`).item(1).textContent;
+    presenceData.state = document.querySelectorAll("h3").item(1).textContent;
   } else if (
     window.location.pathname.startsWith("/user/")
   ) {
     presenceData.details = "Viewing a profile:";
-    presenceData.state = document.querySelectorAll(`h3`).item(1).textContent;
+    presenceData.state = document.querySelectorAll("h3").item(1).textContent;
   } else if (window.location.pathname.startsWith("/docs")) {
     if (window.location.pathname.endsWith("/api"))
       presenceData.state = "Looking at API Documentation";
@@ -51,10 +51,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Looking at Markdown example";
     else if (window.location.pathname.endsWith("/markdown"))
       presenceData.state = "Looking at Markdown Editor";
-
     else
       presenceData.state = "Looking at Documentation";
-
   }
 
   //Discord Server List
@@ -63,14 +61,12 @@ presence.on("UpdateData", async () => {
 
 
   //If it doesn't fit to anything
-  else if (document.querySelectorAll(`h3`).item(1))
-    presenceData.state = document.querySelectorAll(`h3`).item(1).textContent;
+  else if (document.querySelectorAll("h3").item(1))
+    presenceData.state = document.querySelectorAll("h3").item(1).textContent;
 
 
   //If it really finds nothing
   else
-    presenceData.details = "Viewing something...";
-
-
-  presence.setActivity(presenceData);
+   presenceData.details = "Viewing something...";
+   presence.setActivity(presenceData);
 });
