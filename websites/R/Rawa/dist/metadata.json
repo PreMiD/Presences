@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Rawa",
+    "author": {
+      "name": "awex",
+      "id": "288101780074528768"
+    },
+    "category": "socials",
+    "logo": "https://play-lh.googleusercontent.com/9OkD3pzLKcI3PTjyh1dEGaV1KkggfDmQHn5M47KXSWbbrnXEqK79H55exw0WT88jUg",
+    "thumbnail": "https://mail.google.com/mail/u/0?ui=2&ik=424c05e3c8&attid=0.1&permmsgid=msg-a:r-5949483411265467005&th=17b534f7661fa853&view=fimg&realattid=f_ksftui8g0&disp=thd&attbid=ANGjdJ_P7XNtKOXyfqvGgbTkNrVTGPOQqweVrv5gr07tFwMw_cezS_4w3pFnyMYjyPL1tniXEhekViE8FK4jctqGS2YhUJAeKwM5GtzthxjBgrcyICJrjJwPLBTZuCg&ats=2524608000000&sz=w1920-h1011",
+    "version": "1.0.0",
+    "color": "#e66300",
+    "tags": [
+      "streaming",
+      "gaming",
+      "medal"
+    ],
+    "url": "rawa.tv",
+    "description": {
+      "en": "Rawa.tv is a streaming service by the game clipping service Medal.tv. We do clips. We do live. We love gamers and their content. Join us now!"
+    }
+  }
