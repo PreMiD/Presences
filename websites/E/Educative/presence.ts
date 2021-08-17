@@ -2,23 +2,19 @@ const presence = new Presence({
   clientId: "876055665091678228"
 }),
 
- time = Math.floor(Date.now() / 1000);
- 
- let courseName: string,
- chapterName: string,
- courseCompletion: string;
+time = Math.floor(Date.now() / 1000),
 
-const pathStartsWith = (path: string): boolean => {
+pathStartsWith = (path: string): boolean => {
   return document.location.pathname.startsWith(path);
 },
 
- isInCourse = (): boolean => {
+isInCourse = (): boolean => {
   return !!document.location.pathname.match(
     /\/courses\/[\w-_]{1,}\/[\w-_]{1,}/g
   );
 },
 
- setCourseInfo = () => {
+setCourseInfo = () => {
   // Sets course info from page
   if (pathStartsWith("/courses")) {
     if (isInCourse()) {
@@ -30,17 +26,21 @@ const pathStartsWith = (path: string): boolean => {
       const lessonEl = document
         .getElementsByClassName("bePFDW")[0]
         .getElementsByTagName("span")[0],
-       lesson = lessonEl.innerText,
-       chapter = lessonEl
+      lesson = lessonEl.innerText,
+      chapter = lessonEl
         .closest(".CollectionSidebarCategory-sc-15b6owa-0")
         .getElementsByTagName("h5")[0].innerText,
-       seperator = lesson && chapter ? " - " : "";
+      seperator = lesson && chapter ? " - " : "";
       chapterName = chapter + seperator + lesson;
     } else 
       courseName = document.getElementsByTagName("h1")[0].innerText;
     
   }
 };
+
+let courseName: string,
+chapterName: string,
+courseCompletion: string;
 
 setInterval(setCourseInfo, 2000);
 
