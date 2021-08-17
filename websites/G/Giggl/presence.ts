@@ -38,8 +38,8 @@ presence.on("UpdateData", async () => {
     }
 
     // Check if viewing a profile
-    if (document.querySelector("div.sc-pkHUE.fIcDpF")) {
-      presenceData.details = `Viewing ${document.querySelector("div.sc-pkHUE.fIcDpF").children[1].textContent}'s Profile`;
+    if (document.querySelector(".feather.feather-map-pin")) {
+      presenceData.details = `Viewing ${document.querySelector("div.sc-pkHUE.fIcDpF").querySelector("p").textContent}'s Profile`;
       delete presenceData.state;
     }
 
