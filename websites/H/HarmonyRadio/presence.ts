@@ -1,15 +1,11 @@
 const presence = new Presence({
     clientId: "877119819328131093"
-}),
-
- timeofbrowsing = Math.floor(Date.now() / 1000);
+}), timeofbrowsing = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
-        largeImageKey:
-            "default",
-    };
-    console.log(window.location.pathname.toLowerCase());
+        
+    }
     presenceData.startTimestamp = timeofbrowsing;
     if (window.location.pathname.toLowerCase() === "/maintenance") {
         presenceData.largeImageKey = "default";
@@ -18,8 +14,8 @@ presence.on("UpdateData", async () => {
     }
     if (window.location.pathname.toLowerCase() === "/") {
         presenceData.largeImageKey = "default";
-        let title = document.getElementById("titlemarquee").innerText,
-         artist = document.getElementById("artistmarquee").innerText;
+        let title = document.getElementById("titlemarquee").innerText;
+        let artist = document.getElementById("artistmarquee").innerText;
         if (artist === "") 
             artist = document.getElementsByClassName("player-artist")[0].innerHTML;
         
@@ -40,7 +36,7 @@ presence.on("UpdateData", async () => {
         }*/
         const onair = document.getElementsByClassName("player-presenter");
         presenceData.details = `${artist} - ${title}`;
-        presenceData.state = `Presenter: ${onair[0].innerHTML}`;
+        presenceData.state = `Presenter: ${onair}`;
     }
     presence.setActivity(presenceData);
 });
