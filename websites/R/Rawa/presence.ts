@@ -1,13 +1,13 @@
 const presence = new Presence({
   clientId: "877115128326287390"
-})
+});
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
   largeImageKey: "rawa"
-};
+},
 
-var pathName = document.location.pathname
+ pathName = document.location.pathname;
 
 if(pathName === '/') presenceData.details = 'Viewing the homepage';
 
@@ -42,7 +42,7 @@ Watching Stream
 if (presenceData.details === null) {
   presence.setTrayTitle();
   presence.setActivity();
-} else {
+} else 
   presence.setActivity(presenceData);
-}
+
 });
