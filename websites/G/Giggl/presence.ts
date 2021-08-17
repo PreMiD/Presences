@@ -37,6 +37,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "In a call";
     }
 
+    // Check if viewing a profile
+    if (document.querySelector("div.sc-pkHUE.fIcDpF")) {
+      presenceData.details = `Viewing ${document.querySelector("div.sc-pkHUE.fIcDpF").children[1].textContent}'s Profile`;
+      delete presenceData.state;
+    }
+
   // Presence for status page
   } else if (document.location.hostname === "status.giggl.app") 
     presenceData.details = "Viewing the status page";
