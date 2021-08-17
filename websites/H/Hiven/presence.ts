@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.startsWith("/@")) {
       if (privacy) 
         presenceData.details = "Viewing a profile...";
-       else {
+      else {
         presenceData.details = `Viewing ${document.querySelector("div.sc-pcwJP.eLUntd").textContent}'s Profile...`;
         presenceData.state = `User: ${document.querySelector("div.sc-pkvSM.fVFrlQ").textContent}`;
         presenceData.buttons = [
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
     if (document.querySelector("div.sc-pjIPr.fZnZKj") && document.querySelector("div.sc-pjIPr.fZnZKj").textContent === "User Settings") {
       presenceData.details = "Viewing their settings";
       if (privacy) 
-        presenceData.state = undefined;
+        delete presenceData.state;
       else 
         presenceData.state = document.querySelector("div.sc-pbWVv.hTvDIL").textContent;
       
