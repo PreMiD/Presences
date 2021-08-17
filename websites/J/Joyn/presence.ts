@@ -34,7 +34,7 @@ async function getStrings() {
 }
 
 let lang: LangStrings,
-    oldLang: string;
+  oldLang: string;
 
 presence.on("UpdateData", async function () {
   const presenceData: PresenceData = {
