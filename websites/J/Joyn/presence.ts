@@ -296,10 +296,8 @@ presence.on("UpdateData", async function () {
     else if (urlpath[1] === "datenschutz") presenceData.details = "Privacy policy";
     else if (urlpath[1] === "agb") presenceData.details = "Terms of service";
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
