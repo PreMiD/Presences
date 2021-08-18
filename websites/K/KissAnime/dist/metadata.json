@@ -19,6 +19,7 @@
   "tags": [
     "Anime"
   ],
+  "regExp": "([a-z0-9-]+[.])*9anime([.][a-z]+)+[/]",
   "iframe": true,
   "url": "kissanime.com.ru",
   "description": {
