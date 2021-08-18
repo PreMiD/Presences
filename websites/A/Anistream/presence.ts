@@ -52,7 +52,7 @@ Anipresence.on("UpdateData", async () => {
         } else if (document.location.pathname.includes("/serie/")) {
 
             /*presenceData.startTimestamp = browsingStamp;*/
-            
+
             const epNr = document.querySelector(".tab-pane.show.active > .active > .episode");
             const epName = document.querySelector(".tab-pane.show.active > .active > .name");
 
@@ -70,7 +70,7 @@ Anipresence.on("UpdateData", async () => {
         }
     }
 
-    if (presenceData.details == null) {
+    if (presenceData.details === null) {
         //This will fire if you do not set presence details
         Anipresence.setTrayTitle(); //Clears the tray title for mac users
         Anipresence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
