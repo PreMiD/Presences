@@ -45,24 +45,24 @@ Anipresence.on("UpdateData", async () => {
             "icon"
     }
 
-    if (document.location.hostname == "anistream.de") {
-        if (document.location.pathname == "/") {
+    if (document.location.hostname === "anistream.de") {
+        if (document.location.pathname === "/") {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Startseite";
         } else if (document.location.pathname.includes("/serie/")) {
 
             /*presenceData.startTimestamp = browsingStamp;*/
 
-            let epNr = document.querySelector(".tab-pane.show.active > .active > .episode");
-            let epName = document.querySelector(".tab-pane.show.active > .active > .name");
+            const epNr = document.querySelector(".tab-pane.show.active > .active > .episode");
+            const epName = document.querySelector(".tab-pane.show.active > .active > .name");
 
             if (epName && epNr) {
                 presenceData.details = epName.innerHTML;
                 presenceData.state = epNr.innerHTML;
             } else {
-                let title = document.querySelector("h1");
+                const title = document.querySelector("h1");
                 presenceData.details = title.innerText;
-                let staffel = document.querySelector(".nav-link.active");
+                const staffel = document.querySelector(".nav-link.active");
                 presenceData.state = staffel.innerHTML;
             }
 
