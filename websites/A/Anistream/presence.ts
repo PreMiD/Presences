@@ -54,7 +54,7 @@ Anipresence.on("UpdateData", async () => {
             /*presenceData.startTimestamp = browsingStamp;*/
 
             const epNr = document.querySelector(".tab-pane.show.active > .active > .episode");
-            const epName = document.querySelector(".tab-pane.show.active > .active > .name");
+            epName = document.querySelector(".tab-pane.show.active > .active > .name");
 
 
             if (epName && epNr) {
