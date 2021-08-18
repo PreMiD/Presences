@@ -20,7 +20,6 @@ presence.on("UpdateData", async () => {
 
   // Presence for Hiven itself
   } else if (document.location.hostname === "app.hiven.io") {
-
     // Get Privacy Settings
     const privacy = await presence.getSetting("privacy");
 
@@ -40,7 +39,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = `Viewing House: ${document.querySelector("span.sc-pQSRh.kUecYO").textContent}`;
         presenceData.state = `Room: ${document.querySelector("span.sc-pbYdQ.elGOsQ").textContent}`;
       }
-      
     }
 
     // Check if user is viewing their friends page
@@ -80,9 +78,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = document.querySelector("div.sc-psfJB.efwVkl").children[2].textContent;
       
     }
-
   }
-
 
   presence.setActivity(presenceData);
 });
