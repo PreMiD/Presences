@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "KissAnime",
+  "author": {
+    "name": "Snakees",
+    "id": "599227786753998849"
+  },
+  "contributors": [
+    {
+      "name": "ririxi",
+      "id": "192490421308489731"
+    }
+  ],
+  "category": "anime",
+  "logo": "https://static.anmedm.com/images/icons/favicon_new.ico",
+  "thumbnail": "https://i.imgur.com/VhXMH8r.png",
+  "version": "1.0.0",
+  "color": "#588c14",
+  "tags": [
+    "Anime"
+  ],
+  "iframe": true,
+  "url": "kissanime.com.ru",
+  "description": {
+    "en": "A presence for KissAnime"
+  }
+}
