@@ -5,7 +5,7 @@ const Anipresence = new Presence({
         play: "presence.playback.playing",
         pause: "presence.playback.paused"
         //You can use this to get translated strings in their browser language
-    });
+    }),
 
 /*
 
@@ -21,7 +21,7 @@ setInterval(myOutsideHe: string | number: string | numberavyLiftingFunction, 100
 //Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
 
 */
-const template: PresenceData = {
+ template: PresenceData = {
     largeImageKey:
         "icon" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
     smallImageKey:
@@ -31,9 +31,9 @@ const template: PresenceData = {
     state: "Reading section A", //The lower section of the presence text
     startTimestamp: 1577232000, //The unix epoch timestamp for when to start counting from
     endTimestamp: 1577151472000 //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
-}; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
+}, /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 Anipresence.on("UpdateData", async () => {
 
@@ -43,7 +43,7 @@ Anipresence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey:
             "icon"
-    }
+    };
 
     if (document.location.hostname === "anistream.de") {
         if (document.location.pathname === "/") {
@@ -52,9 +52,10 @@ Anipresence.on("UpdateData", async () => {
         } else if (document.location.pathname.includes("/serie/")) {
 
             /*presenceData.startTimestamp = browsingStamp;*/
-
+            
             const epNr = document.querySelector(".tab-pane.show.active > .active > .episode");
             const epName = document.querySelector(".tab-pane.show.active > .active > .name");
+
 
             if (epName && epNr) {
                 presenceData.details = epName.innerHTML;
