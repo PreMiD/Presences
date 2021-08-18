@@ -59,11 +59,11 @@ presence.on("UpdateData", async () => {
 
     data.details = document.querySelector("#info .title").textContent;
     data.state = tv
-      ? document.querySelector(
+      ? `${document.querySelector(
           ".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
-        ).textContent +
-        " • E" +
-        document.querySelector("#episodes .episodes a.active").textContent
+        ).textContent 
+        } • E${ 
+        document.querySelector("#episodes .episodes a.active").textContent}`
       : document.querySelector(
           ".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
         ).textContent;
