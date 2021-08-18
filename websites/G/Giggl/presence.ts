@@ -39,14 +39,13 @@ presence.on("UpdateData", async () => {
 
     // Check if viewing a profile
     if (document.querySelector(".feather.feather-map-pin")) {
-      presenceData.details = `Viewing ${document.querySelector("div.sc-pkHUE.fIcDpF").querySelector("p").textContent}'s Profile`;
+      presenceData.details = `Viewing ${document.querySelector("p").textContent}'s Profile`;
       delete presenceData.state;
     }
 
   // Presence for status page
   } else if (document.location.hostname === "status.giggl.app") 
     presenceData.details = "Viewing the status page";
-
 
   presence.setActivity(presenceData);
 });
