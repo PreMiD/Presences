@@ -4,14 +4,17 @@ iframe.on("UpdateData", async () => {
   if (
     hostname === "voe.sx" ||
     hostname === "streamtape.com" ||
-    hostname == "playtube.ws"
+    hostname === "playtube.ws" ||
+    hostname === "vidoza.net" ||
+    hostname === "strcloud.link" ||
+    hostname === "ninjastream.to"
   ) {
     const video = document.querySelector(`video`);
     if (video != null) {
       const played = video.currentTime != 0;
       iframe.send({
-        current: video.currentTime,
-        duration: video.duration,
+        currentTime: video.currentTime,
+        timeEnd: video.duration,
         paused: video.paused,
         played
       });

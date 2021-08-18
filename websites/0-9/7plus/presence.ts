@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "704212795666726941"
+  clientId: "843060416208306196"
 });
 
 let showName: HTMLElement;
@@ -33,8 +33,6 @@ presence.on("UpdateData", async () => {
     );
     presenceData.details = "Tuned Into 7plus Live!";
     presenceData.state = "Watching: " + showName.innerText;
-  } else if (document.location.pathname == "/query") {
-    presenceData.details = "Searching 7plus!";
   } else if (document.location.pathname == "/query") {
     presenceData.details = "Searching 7plus!";
   } else {

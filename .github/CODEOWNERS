@@ -1,11 +1,10 @@
 websites/** @PreMiD/presence-verifiers
 
-@types/** @Timeraa @ririxidev @Bas950
-package.json @Timeraa @Fruxh @TheDropX @ririxidev
-yarn.lock @Timeraa @Fruxh @TheDropX @ririxidev
-.eslintrc.json @ririxidev
-.github/CODEOWNERS @ririxidev @Bas950
-.github/CONTRIBUTING.md @Bas950 @ririxidev
+@types/** @Timeraa @Bas950
+yarn.lock @Timeraa @Fruxh @TheDropX
+.eslintrc.json @Bas950
+.github/CODEOWNERS @Bas950
+.github/CONTRIBUTING.md @Bas950
 
-util/tools/translator.ts @Bas950 @ririxidev
+util/tools/translator.ts @Bas950
 util/tools/auto/** @SeMiD

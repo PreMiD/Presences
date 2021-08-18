@@ -9,110 +9,113 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
-    },
-    showAutos = <HTMLInputElement>document.querySelector("#showAutos");
+    };
 
-  if (document.location.pathname.includes("/search")) {
+  if (document.location.href.includes("/?q=")) {
     presenceData.details = "Searching Beatmaps";
-    presenceData.state = document
-      .querySelector("input.input")
-      .getAttribute("value");
-    if (showAutos.checked) {
+    presenceData.state = (
+      document.querySelector("input.form-control") as HTMLInputElement
+    ).value;
+  } else if (document.location.pathname.includes("/maps/")) {
+    if (document.querySelector("a[class~='active']") !== null) {
+      presenceData.smallImageKey =
+        (
+          document
+            .querySelector("a[class~='active']")
+            .childNodes.item(0) as HTMLElement
+        ).title.toLowerCase() +
+        document
+          .querySelector("a[class~='active']")
+          .childNodes.item(1)
+          .textContent.replace("+", "_")
+          .toLowerCase();
+      presenceData.smallImageText = `${
+        (
+          document
+            .querySelector("a[class~='active']")
+            .childNodes.item(0) as HTMLElement
+        ).title
+      } ${
+        document.querySelector("a[class~='active']").childNodes.item(1)
+          .textContent
+      }`;
+    }
+    if (
+      document
+        .getElementsByClassName("badge badge-pill badge-danger mr-2")
+        .item(0) !== null
+    ) {
       presenceData.smallImageKey = "showauto";
-      presenceData.smallImageText = "Showing Auto-generated Beatmaps";
+      presenceData.smallImageText = "Made by a bot";
     }
-  } else if (document.location.pathname.includes("/beatmap/")) {
-    if (document.querySelector("span.tag.is-expert-plus") != null)
-      (presenceData.smallImageKey = "expert_"),
-        (presenceData.smallImageText = "Top Diff: Expert+");
-    else if (document.querySelector("span.tag.is-expert") != null)
-      (presenceData.smallImageKey = "expert"),
-        (presenceData.smallImageText = "Top Diff: Expert");
-    else if (document.querySelector("span.tag.is-hard") != null)
-      (presenceData.smallImageKey = "hard"),
-        (presenceData.smallImageText = "Top Diff: Hard");
-    else if (document.querySelector("span.tag.is-normal") != null)
-      (presenceData.smallImageKey = "normal"),
-        (presenceData.smallImageText = "Top Diff: Normal");
-    else {
-      presenceData.smallImageKey = "easy";
-      presenceData.smallImageText = "Top Diff: Easy";
-    }
-    presenceData.details = document.querySelector("h1.is-size-1").textContent;
-    presenceData.state = document.querySelector("h2.is-size-4").textContent;
+    presenceData.details = document
+      .getElementsByClassName("card-header d-flex")
+      .item(0)
+      .childNodes.item(0).textContent;
+    if (presenceData.details === "") presenceData.details = "<NO NAME>";
+
+    presenceData.state = `Uploaded by ${
+      document
+        .getElementsByClassName(
+          "list-group-item d-flex justify-content-between"
+        )
+        .item(0)
+        .children.item(0).textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Page",
         url: document.location.href
       },
       {
-        label: "View Uploader's Page",
-        url:
-          "https://beatsaver.com" +
-          document.querySelector("h2.is-size-4 > a").getAttribute("href")
+        label: "View Uploader's Profile",
+        url: `https://beatsaver.com${document
+          .getElementsByClassName(
+            "list-group-item d-flex justify-content-between"
+          )
+          .item(0)
+          .getAttribute("href")}`
       }
     ];
-  } else if (document.location.pathname.includes("/uploader/")) {
-    presenceData.details = "Browsing By Uploader";
-    presenceData.state = document
-      .querySelector("h1.is-size-2.has-text-weight-light.has-text-centered")
-      .textContent.split(" ")[2];
+  } else if (document.location.pathname.includes("/profile")) {
+    presenceData.details = "Viewing Profile";
+    presenceData.state = document.querySelector("h4").textContent;
     presenceData.buttons = [
       {
-        label: "View Page",
+        label: "View Profile",
         url: document.location.href
       }
     ];
-    if (showAutos.checked) {
-      presenceData.smallImageKey = "showauto";
-      presenceData.smallImageText = "Showing Auto-generated Beatmaps";
+  } else if (document.location.pathname === "/") {
+    presenceData.details = "Browsing Beatmaps";
+    if (document.location.href !== "https://beatsaver.com/") {
+      let filters = "";
+      if (document.location.href.includes("auto=true")) filters += " AI,";
+      if (document.location.href.includes("ranked=true")) filters += " Ranked,";
+      if (document.location.href.includes("fullSpread=true"))
+        filters += " Full Spread,";
+      if (document.location.href.includes("chroma=true")) filters += " Chroma,";
+      if (document.location.href.includes("noodle=true")) filters += " Noodle,";
+      if (document.location.href.includes("me=true"))
+        filters += " Mapping Extensions,";
+      if (document.location.href.includes("cinema=true")) filters += " Cinema,";
+      presenceData.state = `Filters:${filters.slice(0, -1)}`;
     }
   }
 
   switch (document.location.pathname) {
-    case "/browse/latest":
-      presenceData.details = "Browsing By Latest";
+    case "/mappers":
+      presenceData.details = "Browsing Mappers";
       break;
-    case "/browse/plays":
-      presenceData.details = "Browsing By Plays";
+    case "/alerts":
+      presenceData.details = "Viewing Alerts";
       break;
-    case "/browse/downloads":
-      presenceData.details = "Browsing By Downloads";
-      break;
-    case "/browse/rating":
-      presenceData.details = "Browsing By Rating";
-      break;
-    case "/browse/hot":
-      presenceData.details = "Browsing By Hot";
-      break;
-    case "/legal/license":
-      presenceData.details = "Viewing License";
-      break;
-    case "/legal/privacy":
-      presenceData.details = "Viewing Privacy Policy";
-      break;
-    case "/legal/dmca":
+    case "/policy/dmca":
       presenceData.details = "Viewing DMCA Policy";
       break;
-    case "/auth/login":
-      presenceData.details = "Logging In...";
-      break;
-    case "/auth/register":
-      presenceData.details = "Registering...";
-      break;
-    case "/user/upload":
+    case "/upload":
       presenceData.details = "Uploading...";
       break;
-    case "/":
-      presenceData.details = "Viewing Home Page";
-      break;
-  }
-
-  if (document.location.pathname.split("/")[1].includes("browse")) {
-    if (showAutos.checked) {
-      presenceData.smallImageKey = "showauto";
-      presenceData.smallImageText = "Showing Auto-generated Beatmaps";
-    }
   }
 
   if (!time) delete presenceData.startTimestamp;

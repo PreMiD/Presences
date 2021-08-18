@@ -1,11 +1,12 @@
-const presence = new Presence({
+const dizilla = new Presence({
     clientId: "712838005165129728"
   }),
-  strings = presence.getStrings({
+  strings = dizilla.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
   pages: { [k: string]: string } = {
+    "/": "Ana Sayfa",
     "/giris-yap": "Giriş Yap",
     "/kayit-ol": "Kayıt Ol",
     "/favorilerim": "Favorilerim",
@@ -23,29 +24,18 @@ const presence = new Presence({
     "/iletisim": "İletişim"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+interface IframeData {
+  duration: number;
+  currentTime: number;
+  paused: boolean;
 }
 
-let video: { duration: number; currentTime: number; paused: boolean };
-presence.on(
-  "iFrameData",
-  (data: { duration: number; currentTime: number; paused: boolean }) => {
-    video = data;
-  }
-);
+let video: IframeData;
+dizilla.on("iFrameData", (data: IframeData) => {
+  video = data;
+});
 
-presence.on("UpdateData", async () => {
+dizilla.on("UpdateData", async () => {
   const path: string = document.location.pathname,
     showName: HTMLLinkElement = document.querySelector(
       "div.content > div > div.top-sticky-content h1 > a"
@@ -54,7 +44,8 @@ presence.on("UpdateData", async () => {
       "div.content > div > div.top-sticky-content span.text-white.text-small"
     ),
     object: PresenceData = {
-      largeImageKey: "dz-logo"
+      largeImageKey: "dz-logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
     };
 
   if (path.startsWith("/dizi/")) {
@@ -64,9 +55,8 @@ presence.on("UpdateData", async () => {
 
     object.details = "Bir diziye göz atıyor:";
     object.state = showTitle?.textContent || "Bilinmeyen Dizi";
-    object.startTimestamp = Date.now();
 
-    presence.setActivity(object);
+    dizilla.setActivity(object);
   } else if (path.startsWith("/oyuncular/")) {
     const actorName = document.querySelector(
       "div.content > div > div.top-sticky-content div > span"
@@ -74,9 +64,8 @@ presence.on("UpdateData", async () => {
 
     object.details = "Bir oyuncuya göz atıyor:";
     object.state = actorName?.textContent || "Bilinmeyen Oyuncu";
-    object.startTimestamp = Date.now();
 
-    presence.setActivity(object);
+    dizilla.setActivity(object);
   } else if (path.startsWith("/dizi-turu/")) {
     const genre = document.querySelector(
       "div.content > div > div.top-sticky-content div > h1"
@@ -84,9 +73,8 @@ presence.on("UpdateData", async () => {
 
     object.details = "Bir türe göz atıyor:";
     object.state = genre?.textContent || "Bilinmeyen Tür";
-    object.startTimestamp = Date.now();
 
-    presence.setActivity(object);
+    dizilla.setActivity(object);
   } else if (path.startsWith("/kanal/")) {
     const title: string = document.title.slice(
       0,
@@ -95,14 +83,11 @@ presence.on("UpdateData", async () => {
 
     object.details = "Bir kanala göz atıyor:";
     object.state = title || "Bilinmeyen Kanal";
-    object.startTimestamp = Date.now();
 
-    presence.setActivity(object);
+    dizilla.setActivity(object);
   } else if (path.startsWith("/arsiv/")) {
     const url: URL = new URL(document.location.href),
       query = url.searchParams.get("q");
-
-    object.startTimestamp = Date.now();
 
     if (query) {
       object.details = "Bir şey arıyor:";
@@ -113,42 +98,39 @@ presence.on("UpdateData", async () => {
       object.state = "Arşiv";
     }
 
-    presence.setActivity(object);
+    dizilla.setActivity(object);
   } else if (pages[path] || pages[path.slice(0, -1)]) {
     object.details = "Bir sayfaya göz atıyor:";
     object.state =
       pages[path] || pages[path.slice(0, -1)] || "Bilinmeyen Sayfa";
-    object.startTimestamp = Date.now();
 
-    presence.setActivity(object);
+    dizilla.setActivity(object);
   } else if (
     !isNaN(video?.duration) &&
     showName?.innerText &&
     episode?.textContent
   ) {
-    const timestamps = getTimestamps(
+    const [, endTimestamp] = dizilla.getTimestamps(
       Math.floor(video?.currentTime),
       Math.floor(video?.duration)
     );
 
     object.details = showName?.innerText || "Bilinmeyen Dizi";
     object.state = episode?.textContent || "Bilinmeyen Bölüm";
+
     object.smallImageKey = video?.paused ? "pause" : "play";
     object.smallImageText = video?.paused
       ? (await strings).pause
       : (await strings).play;
 
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      object.startTimestamp = timestamps[0];
-      object.endTimestamp = timestamps[1];
-    }
+    if (!isNaN(endTimestamp)) object.endTimestamp = endTimestamp;
 
     if (video.paused) {
       delete object.startTimestamp;
       delete object.endTimestamp;
     }
 
-    presence.setTrayTitle(showName?.innerText);
-    presence.setActivity(object);
-  } else presence.setActivity();
+    dizilla.setTrayTitle(showName?.innerText);
+    dizilla.setActivity(object);
+  } else dizilla.setActivity();
 });

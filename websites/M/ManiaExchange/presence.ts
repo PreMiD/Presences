@@ -1,15 +1,14 @@
 const presence = new Presence({
-  clientId: "731069087031230487"
-});
-
+    clientId: "731069087031230487"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
-let presenceData: PresenceData = {
-  details: "Viewing an unsupported page",
-  largeImageKey: "lg",
-  startTimestamp: browsingStamp
-};
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
+  presenceData: PresenceData = {
+    details: "Viewing an unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
+  };
 const updateCallback = {
     _function: null as () => void,
     get function(): () => void {
@@ -59,14 +58,15 @@ const updateCallback = {
     currentURL.hostname.startsWith("mania") ||
     currentURL.hostname.startsWith("www")
   ) {
-    if (currentPath[0] === "") {
-      presenceData.details = "On the portal";
-    } else if (currentPath[0] === "tac.html") {
+    if (currentPath[0] === "") presenceData.details = "On the portal";
+    else {
       presenceData.details = "Viewing a page";
-      presenceData.details = "Terms and Conditions";
-    } else if (currentPath[0] === "privacy.html") {
-      presenceData.details = "Viewing a page";
-      presenceData.details = "Privacy Policy";
+      const pageNames: { [index: string]: string } = {
+        tac: "Terms and Conditions",
+        privacy: "Privacy Policy",
+        logos: "Logos & Signpacks"
+      };
+      presenceData.state = pageNames[currentPath[0]];
     }
   } else if (
     currentURL.hostname.startsWith("tm.") ||
@@ -98,26 +98,27 @@ const updateCallback = {
         break;
     }
 
-    if (currentPath[0] === "error") {
+    if (
+      currentPath[0] === "error" ||
+      (document.querySelector(".ly-box > span").children.length === 3 &&
+        document.querySelector(".ly-box b").textContent === "Error")
+    )
       presenceData.details = "On a non-existent page";
-    } else if (currentPath[0] === "" || currentPath[0] === "home") {
+    else if (currentPath[0] === "" || currentPath[0] === "home") {
       if (currentPath[1] === "rules") {
         presenceData.details = "Viewing a page";
         presenceData.state = "Rules & Guidelines"; // actually "Guildelines" on the page
       } else if (currentPath[1] === "about") {
         presenceData.details = "Viewing a page";
         presenceData.state = "About";
-      } else {
-        presenceData.details = "On the home page";
-      }
-    } else if (currentPath[0] === "auth") {
-      presenceData.details = "Logging in";
-    } else if (currentPath[0] === "tracks" || currentPath[0] === "maps") {
+      } else presenceData.details = "On the home page";
+    } else if (currentPath[0] === "auth") presenceData.details = "Logging in";
+    else if (currentPath[0] === "tracks" || currentPath[0] === "maps") {
       presenceData.details = document
         .querySelector(".panelbox-heading h1")
         .textContent.trim();
       presenceData.state = document
-        .querySelector(".panelbox-stats a[id^='user-']")
+        .querySelector(".panelbox-stats a[data-userid]")
         .textContent.trim();
     } else if (
       currentPath[0] === "tracksearch2" ||
@@ -125,11 +126,11 @@ const updateCallback = {
       currentPath[0] === "ts" ||
       currentPath[0] === "ms"
     ) {
+      presenceData.details = chooseTwo(
+        "Searching for a track",
+        "Searching for a map"
+      );
       updateCallback.function = (): void => {
-        presenceData.details = chooseTwo(
-          "Searching for a track",
-          "Searching for a map"
-        );
         presenceData.state = getURLParam("trackname") || undefined;
       };
     } else if (
@@ -144,13 +145,14 @@ const updateCallback = {
         "Searching for a track",
         "Searching for a map"
       );
-      if ((document.querySelector("#TrackName") as HTMLInputElement).value)
+      if ((document.querySelector("#TrackName") as HTMLInputElement).value) {
         presenceData.state = `${
           (document.querySelector("#TrackName") as HTMLInputElement).value
         }, ${searchSummary}`;
-      else
+      } else {
         presenceData.state =
           searchSummary[0].toUpperCase() + searchSummary.slice(1);
+      }
     } else if (currentPath[0] === "mappacksearch") {
       // Valid on TrackMania² and Trackmania (2020) only
       updateCallback.function = (): void => {
@@ -159,9 +161,9 @@ const updateCallback = {
       };
     } else if (currentPath[0] === "mappack") {
       // Valid on TrackMania² and Trackmania (2020) only
-      if (currentPath[1] === "create") {
+      if (currentPath[1] === "create")
         presenceData.details = "Creating a mappack";
-      } else if (currentPath[1] === "view") {
+      else if (currentPath[1] === "view") {
         presenceData.details = document
           .querySelector(".WindowText td:nth-of-type(2)")
           .textContent.trim();
@@ -171,38 +173,30 @@ const updateCallback = {
       }
     } else if (currentPath[0] === "upload") {
       // Valid on TrackMania² and Trackmania (2020) only
-      if (currentPath[1] === "track") {
+      if (currentPath[1] === "track")
         presenceData.details = "Uploading a track";
-      } else if (currentPath[1] === "replay") {
+      else if (currentPath[1] === "replay")
         presenceData.details = "Uploading a replay";
-      }
     } else if (currentPath[0] === "recordsearch") {
       // Valid on TrackMania² and Trackmania (2020) only
+      presenceData.details = "Searching for a record";
       updateCallback.function = (): void => {
-        presenceData.details = "Searching for a record";
         presenceData.state = getURLParam("name") || undefined;
       };
     } else if (currentPath[0] === "leaderboard") {
       // Valid on TrackMania² and Trackmania (2020) only
-      const searchSummary = document
-        .querySelector(".windowv2-textcontainer")
-        .textContent.slice(17, this.length - 4);
       presenceData.details = "Viewing the leaderboards";
-      if ((document.querySelector("#DriverName") as HTMLInputElement).value)
-        presenceData.state = `${
-          (document.querySelector("#DriverName") as HTMLInputElement).value
-        }, ${searchSummary}`;
-      else
-        presenceData.state =
-          searchSummary[0].toUpperCase() + searchSummary.slice(1);
+      updateCallback.function = (): void => {
+        presenceData.state = document
+          .querySelector(".select2-choice")
+          .textContent.trim();
+      };
     } else if (currentPath[0] === "reports") {
-      if (currentPath[1] === "compose") {
+      if (currentPath[1] === "compose")
         presenceData.details = "Reporting something";
-      } else if (currentPath[1] === "my-reports") {
+      else if (currentPath[1] === "my-reports")
         presenceData.details = "Viewing reports";
-      } else {
-        presenceData.details = "Viewing a report";
-      }
+      else presenceData.details = "Viewing a report";
     } else if (currentPath[0] === "forums") {
       presenceData.details = "Viewing the forums";
       presenceData.state = document
@@ -210,31 +204,27 @@ const updateCallback = {
         .textContent.trim();
       if (presenceData.state === "Community forums") delete presenceData.state;
     } else if (currentPath[0] === "threads") {
-      if (currentPath[1] === "new-thread") {
+      if (currentPath[1] === "new-thread")
         presenceData.details = "Writing a new thread";
-      } else if (currentPath[1] === "new-post") {
+      else if (currentPath[1] === "new-post")
         presenceData.details = "Replying to a thread";
-      } else {
+      else {
         presenceData.details = "Viewing a thread";
         presenceData.state = document
           .querySelector(".windowv2-header")
           .textContent.trim();
       }
     } else if (currentPath[0] === "posts") {
-      if (currentPath[1] === "edit") {
-        presenceData.details = "Editing a post";
-      }
+      if (currentPath[1] === "edit") presenceData.details = "Editing a post";
     } else if (currentPath[0] === "blogs") {
       if (currentPath[1] === "entry") {
         presenceData.details = "Reading a blog entry";
         presenceData.state = document
           .querySelector(".windowv2-header")
           .textContent.trim();
-      } else if (currentPath[1] === "search") {
+      } else if (currentPath[1] === "search")
         presenceData.details = "Searching for a blog entry";
-      } else {
-        presenceData.details = "Viewing the blog";
-      }
+      else presenceData.details = "Viewing the blog";
     } else if (currentPath[0] === "user") {
       if (currentPath[1] === "search") {
         const searchSummary = document
@@ -246,26 +236,26 @@ const updateCallback = {
             document.querySelector("#UserUsername") as HTMLInputElement
           ).value;
         presenceData.details = "Searching for a user";
-        if (usernameSearched)
+        if (usernameSearched) {
           presenceData.state = `${usernameSearched}, ${searchSummary.slice(
             usernameSearched.length + 30
           )}`;
-        else
+        } else {
           presenceData.state =
             searchSummary[0].toUpperCase() + searchSummary.slice(1);
+        }
       } else if (currentPath[1] === "team") {
         presenceData.details = "Viewing the team behind the site";
         presenceData.state = "(MX Crew)";
-      } else if (currentPath[1] === "online") {
+      } else if (currentPath[1] === "online")
         presenceData.details = "Viewing active users";
-      } else if (currentPath[1] === "profile") {
+      else if (currentPath[1] === "profile") {
         presenceData.details = "Viewing a user profile";
         presenceData.state = document.querySelector(
           ".WindowText .RowModCell_1:nth-of-type(2) a:nth-of-type(3)"
         ).textContent;
-      } else if (currentPath[1] === "edit") {
+      } else if (currentPath[1] === "edit")
         presenceData.details = "Editing their account information";
-      }
     } else if (currentPath[0] === "support") {
       presenceData.details = "Viewing a page";
       presenceData.state = "Support";
@@ -289,22 +279,22 @@ const updateCallback = {
         .querySelector(".windowv2-header")
         .textContent.trim();
       if (presenceData.state === "Statistics") delete presenceData.state;
-    }
+    } else if (currentPath[0] === "news" && currentPath[1] === "archive")
+      presenceData.details = "Viewing the news archive";
   } else if (currentURL.hostname.startsWith("item")) {
     presenceData.smallImageKey = "lg";
     presenceData.smallImageText = "ItemExchange";
     presenceData.largeImageKey = "item";
 
-    if (currentPath[0] === "error") {
+    if (currentPath[0] === "error")
       presenceData.details = "On a non-existent page";
-    } else if (
+    else if (
       (currentPath[0] === "" || currentPath[0] === "home") &&
       currentPath.length === 1
-    ) {
+    )
       presenceData.details = "On the home page";
-    } else if (currentPath[0] === "auth") {
-      presenceData.details = "Logging in";
-    } else if (currentPath[0].toLowerCase() === "item") {
+    else if (currentPath[0] === "auth") presenceData.details = "Logging in";
+    else if (currentPath[0].toLowerCase() === "item") {
       presenceData.details = document.querySelector("h3").textContent;
       presenceData.state = document
         .querySelector(".panel-body dd:nth-of-type(2)")
@@ -315,18 +305,18 @@ const updateCallback = {
         .querySelector(".panel-body dd:nth-of-type(2)")
         .textContent.trim()} (set)`;
     } else if (currentPath[0] === "itemsearch") {
+      presenceData.details = "Searching for an item";
       updateCallback.function = (): void => {
-        presenceData.details = "Searching for an item";
         presenceData.state = getURLParam("itemname") || undefined;
       };
     } else if (currentPath[0] === "setsearch") {
+      presenceData.details = "Searching for a set";
       updateCallback.function = (): void => {
-        presenceData.details = "Searching for a set";
         presenceData.state = getURLParam("setname") || undefined;
       };
-    } else if (currentPath[0] === "blocks") {
+    } else if (currentPath[0] === "blocks")
       presenceData.details = "Searching for a block";
-    } else if (currentPath[0] === "forum") {
+    else if (currentPath[0] === "forum") {
       presenceData.details = "Viewing the forums";
       presenceData.state = document
         .querySelector(".windowv2-header")
@@ -339,10 +329,13 @@ const updateCallback = {
         .textContent.trim();
     } else if (currentPath[0] === "usersearch") {
       const details = [];
-      if ((document.querySelector("#username") as HTMLInputElement).textContent)
+      if (
+        (document.querySelector("#username") as HTMLInputElement).textContent
+      ) {
         details.push(
           (document.querySelector("#username") as HTMLInputElement).textContent
         );
+      }
       if (document.querySelector("#s2id_mode").textContent)
         details.push(document.querySelector("#s2id_mode").textContent.slice(1));
       presenceData.details = "Searching for a user";
@@ -353,9 +346,8 @@ const updateCallback = {
         presenceData.state = document.querySelector(
           ".WindowText .RowModCell_1:nth-of-type(2) a:nth-of-type(3)"
         ).textContent;
-      } else if (currentPath[1] === "edit") {
+      } else if (currentPath[1] === "edit")
         presenceData.details = "Editing their account information";
-      }
     } else if (currentPath[0] === "messaging") {
       if (currentPath[1] === "index" || currentPath[1] === undefined)
         presenceData.details = "Viewing thier private messages";
@@ -376,50 +368,50 @@ const updateCallback = {
     presenceData.smallImageText = "Accounts";
 
     if (currentPath[0] === "auth") {
-      if (currentPath[1] === "login") {
-        presenceData.details = "Logging in";
-      } else if (
+      if (currentPath[1] === "login") presenceData.details = "Logging in";
+      else if (
         currentPath[1] === "register" ||
         currentPath[1] === "resend_confirm"
-      ) {
+      )
         presenceData.details = "Registering an account";
-      } else if (currentPath[1] === "forgot") {
+      else if (currentPath[1] === "forgot")
         presenceData.details = "Figuring out the password";
-      }
-    } else if (currentPath[0] === "user") {
+    } else if (currentPath[0] === "user")
       presenceData.details = "Configuring their account";
-    }
   } else if (currentURL.hostname.startsWith("tmtube")) {
     presenceData.smallImageKey = "lg";
     presenceData.smallImageText = "TMTube Archive";
     presenceData.largeImageKey = "tmtube";
 
     updateCallback.function = (): void => {
-      if (currentPath[0] === "") {
-        presenceData.details = "On the home page";
-      } else if (currentPath[0] === "view") {
+      if (currentPath[0] === "") presenceData.details = "On the home page";
+      else if (currentPath[0] === "view") {
         presenceData.details = document.querySelector("h2").textContent.trim();
         presenceData.state = document
           .querySelector(".box-user h2")
           .textContent.trim();
+        delete presenceData.startTimestamp;
         try {
           if (
             document
               .querySelector(".mejs__playpause-button button")
               .getAttribute("aria-label") === "Pause"
           ) {
+            presenceData.smallImageKey = "play";
+            presenceData.smallImageText = "TMTube Archive — Playing";
             const video: HTMLVideoElement = document.querySelector("video"),
               timestamps = getTimestamps(
                 Math.floor(video.currentTime),
                 Math.floor(video.duration)
               );
-            presenceData.startTimestamp = timestamps[0];
-            presenceData.endTimestamp = timestamps[1];
+            [, presenceData.endTimestamp] = timestamps;
           } else {
-            delete presenceData.startTimestamp;
+            presenceData.smallImageKey = "pause";
+            presenceData.smallImageText = "TMTube Archive — Paused";
+            delete presenceData.endTimestamp;
           }
         } catch (e) {
-          delete presenceData.startTimestamp;
+          delete presenceData.endTimestamp;
         }
       } else if (currentPath[0] === "search") {
         presenceData.details = "Searching for a video";
@@ -430,9 +422,8 @@ const updateCallback = {
     presenceData.smallImageKey = "api";
     presenceData.smallImageText = "API Documentation";
 
-    if (currentPath[0] === "") {
-      presenceData.details = "On the home page";
-    } else if (currentPath[0] === "documents") {
+    if (currentPath[0] === "") presenceData.details = "On the home page";
+    else if (currentPath[0] === "documents") {
       presenceData.details = "Viewing a page";
       switch (currentPath[1]) {
         case "reference":
@@ -449,6 +440,14 @@ const updateCallback = {
           break;
       }
     }
+  } else if (currentURL.hostname.startsWith("blog")) {
+    presenceData.smallImageKey = "reading";
+    presenceData.smallImageText = "Blog";
+
+    if (currentPath[0] === "posts" && currentPath[1]) {
+      presenceData.details = "Reading a blog post";
+      presenceData.state = document.querySelector("h1").textContent;
+    } else presenceData.details = "Viewing the blog";
   }
 })();
 

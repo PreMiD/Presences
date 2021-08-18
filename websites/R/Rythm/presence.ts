@@ -1,7 +1,19 @@
 /**
  * Rythm API namespace
  */
-type apiNamespace = "r1" | "r2" | "r3" | "r4" | "r5" | "rc" | "rchan";
+type apiNamespace =
+  | "r1"
+  | "r2"
+  | "r3"
+  | "r4"
+  | "r5"
+  | "r6"
+  | "r7"
+  | "r8"
+  | "r9"
+  | "r10"
+  | "rc"
+  | "rchan";
 /**
  * Queue repeating state
  */
@@ -11,8 +23,8 @@ type repeatingState = "none" | "one" | "queue";
  * API Info
  */
 interface APIInfo {
-  namespace: apiNamespace;
-  socketUrl: string;
+  namespace: apiNamespace; // API namespace
+  socketUrl: string; // Socket URL
 }
 
 /**
@@ -103,6 +115,197 @@ interface APIPlayingTrack {
   duration?: number; // Song duration
   enqueuer?: APIMember; // Song enqueuer
 }
+
+/**
+ * Rythm Bot
+ */
+interface Rythm {
+  name: string; // Bot name
+  image: string; // Image key
+  invite: string; // Bot invite
+  dashboard: string; // Bot dashboard
+}
+
+/**
+ * Language Strings
+ */
+interface LangStrings {
+  play: string;
+  pause: string;
+  search: string;
+  searchFor: string;
+  browsing: string;
+  readingAbout: string;
+  repeat: string;
+  repeatAll: string;
+  dj: string;
+  buttonViewSong: string;
+  openDashboard: string;
+  inviteBot: string;
+  djs: string;
+  users: string;
+  requestedBy: string;
+}
+
+/**
+ * Rythm PreMiD Presence
+ */
+const presence = new Presence({
+    clientId: "683285340571566091"
+  }),
+  /**
+   * Presence strings
+   */
+  strings = getStrings(),
+  /**
+   * Rythm bots
+   */
+  rythms = {
+    /**
+     * Rythm#3722
+     * ID: 235088799074484224
+     * Hex: #fb0f32
+     */
+    r1: {
+      name: "Rythm",
+      image: "r1",
+      invite: "invite",
+      dashboard: "app"
+    } as Rythm,
+    /**
+     * Rythm 2#2000
+     * ID: 252128902418268161
+     * Hex: #0070ff
+     */
+    r2: {
+      name: "Rythm 2",
+      image: "r2",
+      invite: "invite2",
+      dashboard: "app/r2"
+    } as Rythm,
+    /**
+     * Rythm 3#0817
+     * ID: 814675737331105832
+     * Hex: #db00ff
+     */
+    r3: {
+      name: "Rythm 3",
+      image: "r3",
+      invite: "invite3",
+      dashboard: "app/r3"
+    } as Rythm,
+    /**
+     * Rythm 4#0952
+     * ID: 814675803065155585
+     * Hex: #46af2c
+     */
+    r4: {
+      name: "Rythm 4",
+      image: "r4",
+      invite: "invite4",
+      dashboard: "app/r4"
+    } as Rythm,
+    /**
+     * Rythm 5#6171
+     * ID: 814675864859836417
+     * Hex: #33bed1
+     */
+    r5: {
+      name: "Rythm 5",
+      image: "r5",
+      invite: "invite5",
+      dashboard: "app/r5"
+    } as Rythm,
+    /**
+     * Rythm 6#8453
+     * ID: 836330384530735196
+     * Hex: #8844e9
+     */
+    r6: {
+      name: "Rythm 6",
+      image: "r6",
+      invite: "invite6",
+      dashboard: "app/r6"
+    } as Rythm,
+    /**
+     * Rythm 7#8724
+     * ID: 836330611337330768
+     * Hex: #f1963a
+     */
+    r7: {
+      name: "Rythm 7",
+      image: "r7",
+      invite: "invite7",
+      dashboard: "app/r7"
+    } as Rythm,
+    /**
+     * Rythm 8#4115
+     * ID: 836330724990517248
+     * Hex: #3fe08b
+     */
+    r8: {
+      name: "Rythm 8",
+      image: "r8",
+      invite: "invite8",
+      dashboard: "app/r8"
+    } as Rythm,
+    /**
+     * Rythm 9#1961
+     * ID: 836330845538877461
+     * Hex: #db2c6b
+     */
+    r9: {
+      name: "Rythm 9",
+      image: "r9",
+      invite: "invite9",
+      dashboard: "app/r9"
+    } as Rythm,
+    /**
+     * Rythm 10#4379
+     * ID: 836330954972725289
+     * Hex: #e3ef39
+     */
+    r10: {
+      name: "Rythm 10",
+      image: "r10",
+      invite: "invite10",
+      dashboard: "app/r10"
+    } as Rythm,
+    /**
+     * Rythm-chan#1001
+     * ID: 826622077615341569
+     * Hex: #fe7f9d
+     */
+    rchan: {
+      name: "Rythm-chan",
+      image: "rchan",
+      invite: "invitechan",
+      dashboard: "app/rchan"
+    } as Rythm,
+    /**
+     * Rythm Canary#8406
+     * ID: 415062217596076033
+     * Hex: #efa613
+     */
+    rc: {
+      name: "Rythm Canary",
+      image: "rc",
+      invite: "invitecanary",
+      dashboard: "app/rc"
+    } as Rythm
+  },
+  /**
+   * String separator
+   */
+  separator = "•",
+  /**
+   * Namespace letiable name
+   */
+  namespaceLetiable = "apiNamespace",
+  /**
+   * Socket URL letiable name
+   */
+  socketUrlLetiable = "apiWebsocketUrl";
 
 /**
  * API Connection
@@ -219,22 +422,6 @@ class APIConnection {
 }
 
 /**
- * Language Strings
- */
-interface LangStrings {
-  play: string;
-  pause: string;
-  search: string;
-  searchFor: string;
-  browsing: string;
-  readingAbout: string;
-  repeat: string;
-  repeatAll: string;
-  dj: string;
-  buttonViewSong: string;
-}
-
-/**
  * Check the API connection
  * @param namespace API Namespace
  * @param socketUrl WebSocket URL
@@ -305,6 +492,29 @@ async function getAPIInfo(path: string[]): Promise<APIInfo> {
 }
 
 /**
+ * Get or guess Rythm info
+ * @param namespace API namespace
+ */
+function getRythm(namespace: apiNamespace): Rythm {
+  if (Object.prototype.hasOwnProperty.call(rythms, namespace)) {
+    // Get the Rythm name for known namespaces
+    return rythms[namespace];
+  } else if (/^r\d+$/.test(namespace)) {
+    // Try to guess the name for unknown namespaces that match the default schema
+    const number = parseInt(namespace.slice(1));
+    return {
+      name: `Rythm ${number}`,
+      image: namespace,
+      invite: `invite${number}`,
+      dashboard: `app/${namespace}`
+    } as Rythm;
+  } else {
+    // Otherwise use the default namespace
+    return rythms.r1;
+  }
+}
+
+/**
  * Get Language Strings
  * @returns Language Strings
  */
@@ -328,7 +538,12 @@ async function getStrings(): Promise<LangStrings> {
       repeat: "general.repeat",
       repeatAll: "general.repeatAll",
       dj: "general.dj",
-      buttonViewSong: "general.buttonViewSong"
+      buttonViewSong: "general.buttonViewSong",
+      openDashboard: "rythm.openDashboard",
+      inviteBot: "rythm.inviteBot",
+      djs: "rythm.djs",
+      users: "rythm.users",
+      requestedBy: "rythm.requestedBy"
     },
     languageCode
   );
@@ -368,26 +583,6 @@ function getPageletiable(js: string): Promise<string> {
     );
   });
 }
-
-/**
- * Rythm PreMiD Presence
- */
-const presence = new Presence({
-    clientId: "683285340571566091"
-  }),
-  strings = getStrings(),
-  rythms = {
-    r1: "Rythm",
-    r2: "Rythm 2",
-    r3: "Rythm 3",
-    r4: "Rythm 4",
-    r5: "Rythm 5",
-    rc: "Rythm Canary",
-    rchan: "Rythm-chan"
-  },
-  separator = "•",
-  namespaceLetiable = "apiNamespace",
-  socketUrlLetiable = "apiWebsocketUrl";
 
 // Presence data
 let connection: APIConnection = undefined,
@@ -448,15 +643,18 @@ presence.on("UpdateData", async () => {
     // Make sure the API connection is ready before continuing
     if (!apiReady) return;
 
-    // Select the large image to logo of the Rythm version currently being used
-    presenceData.largeImageKey = namespace;
+    // Get information about the Rythm to which the presence is currently connected to
+    const rythm = getRythm(namespace);
+
+    // Set the large image to the logo of the corresponding Rythm bot
+    presenceData.largeImageKey = rythm.image;
 
     // Add the open dashboard button if buttons should be displayed
     if (showButtons) {
       presenceData.buttons = [
         {
-          label: "Open Dashboard",
-          url: `https://${host}/${path.length > 0 ? path[0] : ""}`
+          label: (await strings).openDashboard,
+          url: `https://${host}/${rythm.dashboard}`
         }
       ];
     }
@@ -472,11 +670,12 @@ presence.on("UpdateData", async () => {
       // Add song information
       presenceData.details = apiData.playingTrack.title;
       if (showUsernames) {
-        presenceData.state = `Requested by: ${
+        presenceData.state = (await strings).requestedBy.replace(
+          "{0}",
           apiData.playingTrack.enqueuer[
             showNicknames ? "displayName" : "username"
           ]
-        }`;
+        );
       }
 
       // Add the view song button if buttons should be displayed
@@ -487,11 +686,11 @@ presence.on("UpdateData", async () => {
         });
       }
 
+      // Add the Rythm version name and separator
+      presenceData.smallImageText = `${rythm.name} ${separator} `;
+
       // Check if the song isn't paused
       if (apiData.isPaused === false) {
-        // Add the Rythm version name and seperator
-        presenceData.smallImageText = `${rythms[namespace]} ${separator} `;
-
         // Check repeating state and add it
         switch (apiData.repeatMode) {
           // Repeat song
@@ -528,11 +727,17 @@ presence.on("UpdateData", async () => {
       } else {
         // Pause
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = `${rythms[namespace]} ${separator} ${
-          (await strings).pause
-        }`;
+        presenceData.smallImageText += (await strings).pause;
       }
     } else {
+      // Add the invite bot button if buttons should be displayed
+      if (showButtons) {
+        presenceData.buttons.push({
+          label: (await strings).inviteBot,
+          url: `https://${host}/${rythm.invite}`
+        });
+      }
+
       // Check if server details can and should be shown
       if (showServerDetails) {
         // Get the amount of DJs and normal users
@@ -547,23 +752,26 @@ presence.on("UpdateData", async () => {
         // Check if any users are connected
         if (djAmount > 0 || userAmount > 0) {
           // Add user information
-          presenceData.state =
-            `${(await strings).dj}s: ${djAmount}` +
-            ` ${separator} ` +
-            `Users: ${userAmount}`;
+          presenceData.state = `${(await strings).djs.replace(
+            "{0}",
+            djAmount.toString()
+          )} ${separator} ${(await strings).users.replace(
+            "{0}",
+            userAmount.toString()
+          )}`;
         }
       } else {
         // Check the idle time
         if (idleStamp === 0) idleStamp = Date.now() / 1000;
 
         // Add idle information
-        presenceData.details = "Idle";
+        presenceData.details = "Dashboard";
         presenceData.startTimestamp = idleStamp;
       }
     }
 
     presence.setActivity(presenceData);
-    presence.setTrayTitle(`${namespace} ${separator} Dashboard`);
+    presence.setTrayTitle(`${rythm.name} ${separator} Dashboard`);
     return;
   }
 

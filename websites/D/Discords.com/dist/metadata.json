@@ -5,16 +5,29 @@
       "name": "Anaxes",
       "id": "567885938160697377"
     },
+    "contributors": [
+      {
+        "name": "EGGSY",
+        "id": "162969778699501569"
+      },
+      {
+        "name": "MauriceX",
+        "id": "268768664411439115"
+      }
+    ],
     "category": "socials",
     "logo": "https://i.imgur.com/ZjtyAQx.png",
     "thumbnail": "https://i.imgur.com/LbR2uNX.png",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "color": "#23283B",
     "tags": [
       "discord",
       "discord-service",
       "discord-invite",
-      "discords"
+      "discords",
+      "discord-bio",
+      "discord-servers",
+      "discord-templates"
     ],
     "url": "discords.com",
     "description": {

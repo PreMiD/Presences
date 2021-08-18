@@ -9,13 +9,22 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname == "sparkedhost.com") {
-    if (document.location.pathname.includes("/budget-minecraft")) {
+    if (document.location.pathname.includes("/budget-minecraft-hosting")) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Budget Packages";
-    } else if (document.location.pathname.includes("/premium-minecraft")) {
+    } else if (
+      document.location.pathname.includes("/enterprise-minecraft-hosting")
+    ) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Enterprise Packages";
-    } else if (document.location.pathname.includes("/extreme-minecraft")) {
+    } else if (
+      document.location.pathname.includes("/singapore-minecraft-hosting")
+    ) {
+      presenceData.details = "Minecraft Hosting";
+      presenceData.state = "Singapore Packages";
+    } else if (
+      document.location.pathname.includes("/extreme-minecraft-hosting")
+    ) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Extreme Packages";
     } else if (document.location.pathname.includes("/game-hosting")) {
@@ -131,22 +140,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Account Settings";
       presenceData.state = "Changing information";
     }
-  } else if (document.location.hostname == "jars.sparkedhost.us") {
-    presenceData.smallImageKey = "bukkit";
-    presenceData.smallImageText = "Minecraft Server";
-    presenceData.details = "Server Jars";
-    presenceData.state = "Downloading Files";
   } else if (document.location.hostname == "status.sparkedhost.com") {
     presenceData.smallImageKey = "hetrix";
     presenceData.smallImageText = "HetrixTools";
     presenceData.details = "Server Status";
     presenceData.state = "Who broke it?";
   } else if (
-    document.location.hostname == "altaruk2.sparkedhost.us" ||
-    document.location.hostname == "altaruk1.sparkedhost.us" ||
-    document.location.hostname == "altar52.sparkedhost.us" ||
-    document.location.hostname == "altar57.sparkedhost.us" ||
-    document.location.hostname == "web-01.sparkedhost.us"
+    document.location.hostname.startsWith("altar") ||
+    document.location.hostname.startsWith("web-01") ||
+    document.location.hostname.startsWith("cloud852")
   ) {
     presenceData.details = "Web Hosting";
     presenceData.state = "Managing cPanel";

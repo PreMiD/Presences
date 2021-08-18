@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "AnimesOnlineGames",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/R56JzLO.png",
+  "thumbnail": "https://i.imgur.com/W8bQjFZ.png",
+  "version": "1.0.1",
+  "color": "#229050",
+  "tags": [
+    "anime",
+    "stream",
+    "brazilian"
+  ],
+  "url": "animesonlinegames.com",
+  "description": {
+    "en": "One of the sites with the largest anime catalog to watch in Brazil for free.",
+    "pt_BR": "Um dos sites com o maior catálogo de animes para assistir gratuitamente no Brasil."
+  }
+}

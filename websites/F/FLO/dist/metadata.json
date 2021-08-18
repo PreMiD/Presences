@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "FLO",
+  "author": {
+    "name": "건유1019",
+    "id": "340373909339635725"
+  },
+  "category": "music",
+  "logo": "https://i.imgur.com/1EEUg5a.png",
+  "thumbnail": "https://i.imgur.com/EgI8zOz.png",
+  "version": "1.0.0",
+  "color": "#3f3fff",
+  "tags": [
+    "korean",
+    "audio"
+  ],
+  "altnames": [
+    "플로"
+  ],
+  "url": "www.music-flo.com",
+  "description": {
+    "ko_KR": "음악을 들을수록 나를 더 닮아가는 나만의 FLO. 지금, 당신의 음악",
+    "en": "My own FLO that resembles me more and more the more I listen to music. Now, your music"
+  }
+}

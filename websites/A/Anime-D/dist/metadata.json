@@ -1,0 +1,44 @@
+{
+  "service": "Anime-D",
+  "author": {
+    "name": "Faelayis",
+    "id": "328731868096888833"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/mD1fANc.jpg",
+  "thumbnail": "https://i.imgur.com/2wyv3S9.jpg",
+  "version": "1.0.1",
+  "color": "#cc6d00",
+  "tags": [
+    "anime",
+    "videos",
+    "thai"
+  ],
+  "regExp": "([a-z0-9-]+[.])*anime-d[.]com[/]",
+  "url": "anime-d.com",
+  "description": {
+    "en": "Anime-D anime good anime web site cartoon online The latest episode loads quickly. Watch for free.",
+    "th": "Anime-D อนิเมะ ดี เว็บดูอนิเมะ การ์ตูนออนไลน์ ตอนล่าสุดโหลดเร็ว ดูฟรี"
+  },
+  "iframe": true,
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "timestamps",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

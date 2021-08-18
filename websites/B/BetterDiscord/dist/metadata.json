@@ -1,0 +1,35 @@
+{
+  "service": "BetterDiscord",
+  "author": {
+    "name": "Faelayis",
+    "id": "328731868096888833"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/EoUjX5F.jpg",
+  "thumbnail": "https://i.imgur.com/ihkTxZ9.jpg",
+  "version": "1.0.0",
+  "color": "#3c83e6",
+  "tags": [
+    "betterdiscord",
+    "Themes",
+    "plugin"
+  ],
+  "url": "betterdiscord.app",
+  "description": {
+    "en": "BetterDiscord extends the functionality of DiscordApp by enhancing it with new features."
+  },
+  "settings": [
+    {
+      "id": "timestamps",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

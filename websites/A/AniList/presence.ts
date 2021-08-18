@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).browsing;
     presenceData.state = "Home";
   } else if (pathname.startsWith(`/user`)) {
-    const user = document.querySelector(".name").textContent;
+    const user = document.querySelector(".name").textContent.trim();
     if (pathname.includes(`mangalist`)) {
       presenceData.details = `Viewing ${user}'s manga list`;
     } else if (pathname.includes(`animelist`)) {

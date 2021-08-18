@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
+  },
+  "service": "Komoot",
+  "description": {
+    "en": "Komoot is an app that lets you find, plan, and share adventures with the easy route planner."
+  },
+  "url": [
+    "www.komoot.com",
+    "www.komoot.de",
+    "www.komoot.fr",
+    "www.komoot.it",
+    "www.komoot.es",
+    "www.komoot.nl"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/TtuBUri.png",
+  "thumbnail": "https://i.imgur.com/mbb326e.png",
+  "color": "#FFFFFF",
+  "category": "other",
+  "tags": [
+    "planner",
+    "bike",
+    "bicycle",
+    "walk"
+  ],
+  "settings": [
+    {
+      "id": "timeElapsed",
+      "title": "Show elapsed time",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

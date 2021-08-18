@@ -31,9 +31,8 @@ presence.on("UpdateData", async () => {
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -49,7 +48,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname === "/") {
     const category = Object.values(document.querySelectorAll("div")).filter(
-      (entry) => entry?.className === "row-title" && YouCanSeeThis(entry)
+      (entry) => entry?.className === "row-title" && isVisible(entry)
     )[0]?.textContent;
 
     presenceData.details = (await strings).browsingThrough;
@@ -78,15 +77,16 @@ presence.on("UpdateData", async () => {
           ?.itemListElement.map(
             (x: {
               item: {
+                "@id": string;
                 name: string;
               };
-            }) => x.item.name.toLowerCase()
+            }) => `${x.item.name.toLowerCase()} ${x.item["@id"]}`
           )
           .join(" ") ?? "",
       video: HTMLVideoElement = document.querySelector("video"),
       isMovie = URLItem.includes("movie"),
       isVShow = URLItem.includes("variety-show"),
-      isVShowToo = document.location.pathname.includes("/intl-common/"),
+      possiblyVShow = document.location.pathname.includes("/intl-common/"),
       isTrial =
         document.querySelector(
           ".iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip"
@@ -94,36 +94,34 @@ presence.on("UpdateData", async () => {
       lastestEp: string[] = document
         .querySelector("div.broken-line")
         ?.nextSibling?.nextSibling?.nextSibling?.textContent?.match(
-          /[1-9]?[0-9]?[0-9]/g
+          /[1-9][0-9]?[0-9]?/g
         ),
-      contentEp: string[] = isVShowToo
-        ? data.ep.match(/([1-9]?[0-9]?[0-9]? ?\([1-9]?[0-9]\))/g)
-        : data.ep.match(/[1-9]?[0-9]?[0-9]/g),
+      contentEp: string[] = possiblyVShow
+        ? data.ep.match(/([1-9][0-9]?[0-9]? ?\([1-9][0-9]?\))/g)
+        : data.ep.match(/[1-9][0-9]?[0-9]?/g),
       isPreview =
-        lastestEp && contentEp && !isVShow && !isVShowToo
+        lastestEp && contentEp && !isVShow && !possiblyVShow
           ? parseInt(contentEp[0], 10) > parseInt(lastestEp[0], 10)
           : data.ep.toLowerCase().includes("preview");
 
     if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
-    if (isVShowToo) {
+    if (possiblyVShow) {
       if (contentEp?.length) {
         data.ep = `${(await strings).episode} ${
           contentEp[0].match(/.+?(?=\()/g)[0]
         } ${
           contentEp[0].includes("(")
-            ? `- ${contentEp[0].match(/(\([1-9]?[0-9]\))/g)[0]}`
+            ? `- ${contentEp[0].match(/(\([1-9][0-9]?\))/g)[0]}`
             : "Variety show"
         }`;
-      } else {
-        data.ep = `Variety show`;
-      }
+      } else data.ep = "Variety show";
 
       data.title = (data.title.match(/.+?(?=\s{2})/g) || [null])[0];
     }
-    if (isVShow && !isVShowToo) data.ep = "Variety show";
-    if (!isVShow && !isVShowToo && !isMovie && contentEp !== null)
+    if (isVShow && !possiblyVShow) data.ep = "Variety show";
+    if (!isVShow && !possiblyVShow && !isMovie && contentEp !== null)
       data.ep = `${(await strings).episode} ${contentEp[0]}`;
-    else if (!isVShow && !isVShowToo && !isMovie) data.ep = "Highlight";
+    else if (!isVShow && !possiblyVShow && !isMovie) data.ep = "Highlight";
 
     if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
@@ -142,8 +140,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = timestamps.pop();
 
       if (showButtons) {
         presenceData.buttons = [
@@ -175,7 +172,7 @@ presence.on("UpdateData", async () => {
       ),
       result = document
         .querySelector("div.has-result")
-        ?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
+        ?.textContent.match(/[0-9][0-9]?[0-9]?[0-9]?/)[0];
 
     presenceData.details = `${(await strings).searchFor} ${
       searchQuery ? searchQuery_ : "( Hidden )"
@@ -187,9 +184,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${result} matching ${
         parseInt(result, 10) > 1 ? "results" : "result"
       }`;
-    } else {
-      presenceData.state = `No matching result`;
-    }
+    } else presenceData.state = "No matching result";
   } else if (document.location.pathname.includes("/personal")) {
     const type = new URLSearchParams(document.location.search).get("type"),
       all = document.querySelector(
@@ -233,12 +228,11 @@ presence.on("UpdateData", async () => {
 });
 
 /**
- * Check if your eyes can see this element :)
- * @param element The element you want to check
- * @returns The result you want
+ * Check whether the given `Element` is visible.
+ * @param Element
  */
 
-function YouCanSeeThis(element: HTMLElement) {
+function isVisible(element: HTMLElement) {
   const clientRect = element.getBoundingClientRect();
   return (
     clientRect.top >= 0 &&

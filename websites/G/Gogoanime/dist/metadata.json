@@ -15,23 +15,15 @@
     "nl": "Bekijk anime online in het Engels. U kunt gratis series en films online bekijken met Engelse ondertiteling. Gratis download anime van hoge kwaliteit."
   },
   "url": [
-    "gogoanime.io",
-    "gogoanime.sh",
-    "gogoanime.so",
-    "gogoanime.movie",
-    "gogoanimes.co",
-    "gogoanime.tv",
-    "gogoanime.in",
-    "gogoanime.video",
-    "gogoanime.ai",
+    "gogoanime.pe",
     "gogoanime.vc",
     "gogoanime.news"
   ],
   "regExp": "[0-9w]{0,6}.*gogoanime[s]*.[a-z]+",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "logo": "https://i.imgur.com/OnaEYdo.png",
   "thumbnail": "https://i.imgur.com/RZwilwc.png",
-  "color": "#4CA64C",
+  "color": "#FFC119",
   "tags": [
     "anime",
     "video",

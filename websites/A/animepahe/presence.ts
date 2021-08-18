@@ -4,60 +4,87 @@
 const presence = new Presence({
     clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    episode: "presence.media.info.episode",
-    browse: "presence.activity.browsing"
-  });
+  waitStrings = async (lang: string) =>
+    await presence.getStrings(
+      {
+        play: "presence.playback.playing",
+        pause: "presence.playback.paused",
+        browse: "general.browsing",
+        page: "general.page",
+        episode: "general.episode",
+        watching: "general.watching",
+        watchingMovie: "general.watchingMovie",
+        viewing: "general.viewing",
+        viewGenre: "general.viewGenre",
+        viewCategory: "general.viewCategory",
+        viewPage: "general.viewPage",
+        viewMovie: "general.viewMovie",
+        watchEpisode: "general.buttonViewEpisode",
+        watchMovie: "general.buttonViewMovie",
+        latest: "animepahe.latestRelease",
+        season: "animepahe.season",
+        special: "animepahe.special",
+        viewOn: "animepahe.view",
+        timeSeason: "animepahe.timeSeason"
+      },
+      lang
+    );
 
-let iframe_response = {
+let iframeResponse = {
   paused: true,
   duration: 0,
-  current_time: 0
+  currentTime: 0
 };
 
-type store_type = Record<string, { id: number; time: number }>;
+type storeType = Record<
+  string,
+  { id: number; listing: [string, string]; time: number }
+>;
 
-class anime_storage {
-  private list: store_type;
+class AnimeStorage {
+  private list: storeType;
 
-  public anime(title: string, playing: boolean) {
-    if (this.list[title]) return this.list[title].id;
-    else if (playing) return undefined;
+  public anime(title: string, listing: [string, string] | false) {
+    if (this.list[title] && this.list[title].listing) return this.list[title];
+    else if (!listing) return undefined;
     else {
-      const share_link = document.getElementsByClassName("modal-body")[1]
+      const shareLink = document.getElementsByClassName("modal-body")[1]
         .lastElementChild.lastElementChild as HTMLAnchorElement;
 
       this.list[title] = {
-        id: parseInt(share_link.href.split("/a/")[1]),
+        id: parseInt(shareLink.href.split("/a/")[1]),
+        listing,
         time: Date.now()
       };
 
       // Removes the oldest stored anime if the store length has exceeded 10
-      if (Object.keys(this.list).length === 11)
+      if (Object.keys(this.list).length === 11) {
         delete this.list[
           Object.entries(Object.assign({}, this.list)).sort(
             (a, b) => a[1].time - b[1].time
           )[0][0]
         ];
+      }
 
       localStorage.setItem("presence_data", btoa(JSON.stringify(this.list)));
     }
   }
 
   constructor() {
-    let storage: store_type | string | null =
+    let storage: storeType | string | null =
       localStorage.getItem("presence_data");
+
     if (storage) {
       storage = JSON.parse(atob(storage));
 
-      this.list = storage as store_type;
+      this.list = storage as storeType;
+
+      if (!Object.entries(this.list)[0][1].listing) this.list = {};
     } else this.list = {};
   }
 }
 
-const anime_store = new anime_storage();
+const animeStore = new AnimeStorage();
 
 function getTimes(time: number): Record<string, number> {
   let seconds = Math.round(time),
@@ -76,141 +103,261 @@ function getTimes(time: number): Record<string, number> {
   };
 }
 
-function lessTen(digit: number): string {
-  return digit < 10 ? "0" : "";
-}
+const lessTen = (d: number) => (d < 10 ? "0" : "");
 
 function getTimestamp(time: number): string {
   const { sec, min, hrs } = getTimes(time);
 
   return hrs > 0
-    ? hrs + ":" + lessTen(min) + min + ":" + lessTen(sec) + sec
-    : min + ":" + lessTen(sec) + sec;
+    ? `${hrs}:${lessTen(min)}${min}:${lessTen(sec)}${sec}`
+    : `${min}:${lessTen(sec)}${sec}`;
+}
+
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
+  uncapitalize = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
+
+function parseInfo(dom: HTMLParagraphElement[]) {
+  const entries: Record<string, string | HTMLAnchorElement[]> = {};
+
+  for (const entry of dom) {
+    let title = entry.children[0].textContent.slice(0, -1);
+    const [, secondChild] = entry.childNodes;
+
+    if (title.indexOf(" ") !== -1) {
+      title = title
+        .split(" ")
+        .map((e) => uncapitalize(e))
+        .join("_");
+    } else title = uncapitalize(title);
+
+    if (secondChild.nodeName === "#text" && entry.childNodes.length === 2)
+      entries[title] = secondChild.textContent;
+    else {
+      entries[title] = [];
+
+      for (const node of entry.childNodes) {
+        if (node.nodeName !== "STRONG" && node.nodeName !== "#text") {
+          (entries[title] as HTMLAnchorElement[]).push(
+            node as HTMLAnchorElement
+          );
+        }
+      }
+    }
+  }
+  return entries;
 }
 
 presence.on(
   "iFrameData",
-  (data: { paused: boolean; duration: number; current_time: number }) => {
-    iframe_response = data;
+  (data: { paused: boolean; duration: number; currentTime: number }) => {
+    iframeResponse = data;
   }
 );
 
 presence.on("UpdateData", async () => {
-  const path = document.location.pathname,
+  const path = document.location.pathname.split("/").slice(1),
     presenceData: PresenceData = {
       largeImageKey: "animepahe",
       details: "loading",
-      state: "animepahe",
       startTimestamp: Math.floor(Date.now() / 1000)
-    };
+    },
+    strings = await waitStrings(
+      await presence.getSetting("lang").catch(() => "en")
+    ),
+    viewing = strings.viewing.slice(0, -1),
+    watching = strings.watching.slice(0, -1);
+  let playback = false;
 
-  // homepage / new releases
-  if (!path.includes("anime")) {
-    presenceData.smallImageKey = "presence_browsing_home";
-    presenceData.smallImageText = (await strings).browse;
-    presenceData.details = `${(await strings).browse.slice(
-      0,
-      -3
-    )} Latest Releases`;
-    presenceData.state = "animepahe";
-
-    // a-z all browse
-  } else if (path == "/anime") {
-    presenceData.smallImageKey = "presence_browsing_all";
-    presenceData.smallImageText = (await strings).browse;
-    presenceData.details = `${(await strings).browse.slice(0, -3)} A-Z`;
-    presenceData.state = "animepahe";
-
-    // season browse
-  } else if (!path.split("anime/")[1].includes("/")) {
-    let type: string, anilist: string;
-
-    for (const info of document.getElementsByClassName("anime-info")[0]
-      .children) {
-      // Not uniform info order... ugh
-      if (info.children[0].textContent == "Type:")
-        info.children[1].textContent == "TV"
-          ? (type = "Season")
-          : (type = info.children[1].textContent);
-      if (info.children[0].textContent == "External Links:")
-        anilist = (info.children[1] as HTMLAnchorElement).href;
-    }
-
-    const title =
-      document.getElementsByClassName("title-wrapper")[0].children[1]
-        .textContent;
-
-    presenceData.smallImageKey = "presence_browsing_season";
-    presenceData.smallImageText = (await strings).browse;
-    presenceData.details = title;
-    presenceData.state = `${(await strings).browse.slice(0, -3)} ${type}`;
-
-    presenceData.buttons = [
+  switch (path[0]) {
+    // homepage / browsing new releases
+    case "":
       {
-        label: "View on Pahe",
-        url: `https://pahe.win/a/${anime_store.anime(title, false)}`
-      },
-      {
-        label: "View on AniList",
-        url: anilist
+        presenceData.details = strings.latest;
+
+        let page = new URLSearchParams(document.location.href)
+          .values()
+          .next().value;
+
+        if (page === "") page = "1";
+
+        presenceData.state = `${strings.page} ${page}`;
+        presenceData.smallImageKey = "presence_browsing_home";
+        presenceData.smallImageText = strings.browse;
       }
-    ];
-  }
+      break;
+    case "anime":
+      {
+        // browsing a-z all
+        if (path.length === 1) {
+          presenceData.details = `${viewing} A-Z:`;
+          presenceData.state =
+            document.querySelector("a.nav-link.active").textContent;
+          presenceData.smallImageKey = "presence_browsing_all";
+          presenceData.smallImageText = strings.browse;
+        } else {
+          switch (path[1]) {
+            case "genre":
+              {
+                // viewing genre
+                presenceData.details = strings.viewGenre;
+                presenceData.state = capitalize(path[2]);
+                presenceData.smallImageKey = "presence_browsing_genre";
+                presenceData.smallImageText = strings.browse;
+              }
+              break;
+            case "season":
+              {
+                // viewing anime/time season
+                presenceData.details = `${viewing} Anime ${strings.timeSeason}:`;
+                presenceData.state =
+                  document.getElementsByTagName("h1")[0].textContent;
+                presenceData.smallImageKey = "presence_browsing_time";
+                presenceData.smallImageText = strings.browse;
+              }
+              break;
+            default: {
+              if (
+                !path[1].match(
+                  /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/
+                )
+              ) {
+                // viewing a misc. category (eg. Airing, TV, etc)
+                presenceData.details = strings.viewCategory;
 
-  // playback / episode
-  if (path.split("/")[1] == "play") {
-    const timestamps = presence.getTimestamps(
-        Math.floor(iframe_response.current_time),
-        Math.floor(iframe_response.duration)
-      ),
-      movie: boolean =
-        document.getElementsByClassName("anime-status")[0].firstElementChild
-          .textContent == "Movie",
-      title =
-        document.getElementsByClassName("theatre-info")[0].children[1]
-          .children[1].textContent,
-      episode = parseInt(
-        document
-          .getElementById("episodeMenu")
-          .textContent.split("Episode ")[1]
-          .replace(/^\s+|\s+$/g, "")
-      );
+                const heading =
+                  document.getElementsByTagName("h1")[0].textContent;
+                presenceData.state =
+                  heading.indexOf(" ") !== -1
+                    ? heading
+                        .split(" ")
+                        .map((s) => capitalize(s))
+                        .join(" ")
+                    : capitalize(heading);
+                presenceData.smallImageKey = "presence_browsing_all";
+                presenceData.smallImageText = strings.browse;
+              } else {
+                // viewing specific
+                const info = parseInfo(
+                    document.getElementsByClassName("anime-info")[0]
+                      .children as unknown as HTMLParagraphElement[]
+                  ),
+                  title =
+                    document.getElementsByClassName("title-wrapper")[0]
+                      .children[1].textContent,
+                  listing = (() => {
+                    const links = info.external_links as HTMLAnchorElement[];
 
-    presenceData.smallImageKey = `presence_playback_${
-      iframe_response.paused ? "paused" : "playing"
-    }`;
+                    if (links[0].textContent === "AniList")
+                      return ["AniList", links[0].href];
 
-    presenceData.smallImageText = iframe_response.paused
-      ? (await strings).pause
-      : (await strings).play;
+                    for (const link of links) {
+                      if (link.textContent === "MyAnimeList")
+                        return ["MAL", link.href];
+                    }
+                  })() as [string, string];
 
-    presenceData.details = `Watching ${
-      !movie ? `${(await strings).episode.slice(0, -3)} ${episode} of ` : ""
-    }${title}`;
+                presenceData.details = (() => {
+                  switch ((info.type[0] as HTMLAnchorElement).textContent) {
+                    case "Movie":
+                      return strings.viewMovie;
+                    case "TV":
+                      return `${viewing} ${strings.season}:`;
+                    case "Special":
+                      return `${viewing} ${strings.special}:`;
+                    default:
+                      return `${viewing} ${
+                        (info.type[0] as HTMLAnchorElement).textContent
+                      }:`;
+                  }
+                })();
 
-    if (!iframe_response.paused) {
-      presenceData.state = `${(await strings).play}`;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-    } else {
-      presenceData.startTimestamp = null;
-      presenceData.state = `${(await strings).pause} - ${getTimestamp(
-        iframe_response.current_time
-      )}`;
-    }
+                presenceData.state = title;
 
-    const anime_id = anime_store.anime(title, true);
+                presenceData.smallImageKey = "presence_browsing_season";
+                presenceData.smallImageText = strings.browse;
 
-    if (anime_id)
-      presenceData.buttons = [
-        {
-          label: `Watch ${movie ? "Movie" : "Episode"}`,
-          url: `https://pahe.win/a/${anime_id}/${episode}`
+                presenceData.buttons = [
+                  {
+                    label: strings.viewOn.replace("{0}", "Pahe"),
+                    url: `https://pahe.win/a/${
+                      animeStore.anime(title, listing).id
+                    }`
+                  },
+                  {
+                    label: strings.viewOn.replace("{0}", listing[0]),
+                    url: listing[1]
+                  }
+                ];
+              }
+            }
+          }
         }
-      ];
+      }
+      break;
+    // playback
+    case "play":
+      {
+        const movie: boolean =
+            document.getElementsByClassName("anime-status")[0].firstElementChild
+              .textContent === "Movie",
+          title =
+            document.getElementsByClassName("theatre-info")[0].children[1]
+              .children[1].textContent,
+          episode = parseInt(
+            document
+              .getElementById("episodeMenu")
+              .textContent.split("Episode ")[1]
+              .replace(/^\s+|\s+$/g, "")
+          );
 
-    presence.setActivity(presenceData, true);
-  } else {
-    presence.setActivity(presenceData, false);
+        if (!movie)
+          presenceData.details = `${watching} ${strings.episode} ${episode}`;
+        else presenceData.details = strings.watchingMovie;
+
+        presenceData.state = title;
+
+        presenceData.smallImageKey = `presence_playback_${
+          iframeResponse.paused ? "paused" : "playing"
+        }`;
+
+        presenceData.smallImageText = iframeResponse.paused
+          ? strings.pause
+          : strings.play;
+
+        if (!iframeResponse.paused) {
+          [, presenceData.endTimestamp] = presence.getTimestamps(
+            Math.floor(iframeResponse.currentTime),
+            Math.floor(iframeResponse.duration)
+          );
+        } else {
+          presenceData.startTimestamp = null;
+          presenceData.smallImageText += ` - ${getTimestamp(
+            iframeResponse.currentTime
+          )}`;
+        }
+
+        const anime = animeStore.anime(title, false);
+
+        if (anime) {
+          presenceData.buttons = [
+            {
+              label: movie ? strings.watchMovie : strings.watchEpisode,
+              url: `https://pahe.win/a/${anime.id}/${episode}`
+            },
+            {
+              label: strings.viewOn.replace("{0}", anime.listing[0]),
+              url: anime.listing[1]
+            }
+          ];
+        }
+
+        playback = true;
+      }
+      break;
+    default: {
+      presenceData.details = strings.viewPage;
+      presenceData.state = document.getElementsByTagName("h1")[0].textContent;
+    }
   }
+  presence.setActivity(presenceData, playback);
 });

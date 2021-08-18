@@ -5,18 +5,15 @@
   },
   "service": "Repeat",
   "description": {
-    "en": "Repeating your favourite tunes daily.",
-    "nl": "Je favoriete deuntjes dagelijks herhaalt."
+    "en": "A warm welcome to Repeat, an online radio station that broadcasts across the globe, we aim to bring you your favourite tunes on repeat on the daily.",
+    "nl": "Je favoriete deuntjes dagelijks herhaalt.",
+    "ga_IE": "Fáilte mhór roimh Repeat, stáisiún raidió ar líne a chraolann ar fud na cruinne, tá sé mar aidhm againn na foinn is fearr leat a thabhairt leat arís agus arís eile go laethúil."
   },
-  "url": [
-    "www.repeatradio.net",
-    "repeatradio.net",
-    "repeat.pw"
-  ],
-  "version": "2.0.3",
+  "url": "itsrepeat.net",
+  "version": "2.0.5",
   "logo": "https://i.imgur.com/ufIgYNI.png",
   "thumbnail": "https://i.imgur.com/JLSMA5e.png",
-  "color": "#781629",
+  "color": "#001629",
   "tags": [
     "music",
     "radio",
@@ -48,6 +45,5 @@
       "value": "%songText%",
       "placeholder": "%artist% - %song%"
     }
-  ],
-  "regExp": "([a-z0-9-]+[.])*(repeatradio[.]net|repeat[.]pw)[/]"
+  ]
 }

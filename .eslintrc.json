@@ -22,7 +22,7 @@
     "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
     "quotes": ["warn", "double", { "avoidEscape": true }],
     "camelcase": ["warn", { "properties": "always" }],
-    "indent": "off",
+    "indent": [2, 2, { "SwitchCase": 1 }],
     "curly": ["warn", "multi-or-nest"],
     "eqeqeq": ["error", "always"],
     "comma-dangle": ["warn", "never"],

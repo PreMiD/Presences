@@ -59,11 +59,16 @@ const presence = new Presence({
         setPresenceData?: () => void;
       };
     };
+    presenceData: PresenceData;
   } = {
     presence: {},
     meta: {},
+    oldLang: "",
     startedSince: ~~(Date.now() / 1000),
-    oldLang: ""
+    presenceData: {
+      largeImageKey: "betteranime",
+      smallImageKey: "browse"
+    }
   };
 
 let strings = getStrings(),
@@ -78,22 +83,23 @@ presence.on("iFrameData", (data: typeof video) => {
 });
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "betteranime",
-      smallImageKey: "browse",
-      startTimestamp: data.startedSince
-    },
-    newLang = await presence.getSetting("lang").catch(() => "en"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     anime = await presence.getSetting("anime"),
     movie = await presence.getSetting("movie"),
-    browse = await presence.getSetting("browse");
+    browse = await presence.getSetting("browse"),
+    timestamp = await presence.getSetting("timestamp");
 
-  if (browse) presenceData.details = (await strings).browse;
+  if (browse) data.presenceData.details = (await strings).browse;
+  if (
+    timestamp &&
+    !data.presenceData.startTimestamp &&
+    !data.presenceData.endTimestamp
+  )
+    data.presenceData.startTimestamp = data.startedSince;
 
-  if (!data.oldLang) {
-    data.oldLang = newLang;
-  } else if (data.oldLang !== newLang) {
+  if (!data.oldLang) data.oldLang = newLang;
+  else if (data.oldLang !== newLang) {
     data.oldLang = newLang;
     strings = getStrings();
   }
@@ -102,26 +108,26 @@ presence.on("UpdateData", async () => {
     "/anime/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)": {
       disabled: !anime,
       async setPresenceData() {
-        const timestamps = presence.getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           video.currentTime,
           video.duration
         );
 
-        data.meta["episode"] = document.querySelector(
+        data.meta.episode = document.querySelector(
           "div.anime-title > h3"
         ).textContent;
-        data.meta["title"] = document
+        data.meta.title = document
           .querySelector("div.anime-title")
-          .textContent.replace(data.meta["episode"], "");
+          .textContent.replace(data.meta.episode, "");
 
-        presenceData.smallImageKey = video.paused ? "pause" : "play";
-        presenceData.smallImageText = video.paused
+        data.presenceData.smallImageKey = video.paused ? "pause" : "play";
+        data.presenceData.smallImageText = video.paused
           ? (await strings).pause
           : (await strings).play;
 
-        presenceData.endTimestamp = timestamps[1];
+        data.presenceData.endTimestamp = endTimestamp;
 
-        presenceData.buttons = [
+        data.presenceData.buttons = [
           {
             label: (await strings).viewEpisode,
             url: document.URL
@@ -135,20 +141,20 @@ presence.on("UpdateData", async () => {
         ];
 
         if (video.paused) {
-          delete presenceData.endTimestamp;
-          delete presenceData.startTimestamp;
+          delete data.presenceData.endTimestamp;
+          delete data.presenceData.startTimestamp;
         }
       }
     },
     "/anime/(dublado|legendado)/([a-zA-Z0-9-]+)": {
       disabled: privacy || !anime,
       async setPresenceData() {
-        presenceData.details = (await strings).viewAnime;
-        presenceData.state = document.querySelector(
+        data.presenceData.details = (await strings).viewAnime;
+        data.presenceData.state = document.querySelector(
           "div.infos_left > div > h2"
         ).textContent;
 
-        presenceData.buttons = [
+        data.presenceData.buttons = [
           {
             label: (await strings).viewSeries,
             url: document.URL
@@ -159,26 +165,26 @@ presence.on("UpdateData", async () => {
     "/filme/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-]+)": {
       disabled: !movie,
       async setPresenceData() {
-        const timestamps = presence.getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           video.currentTime,
           video.duration
         );
 
-        data.meta["title"] = document
+        data.meta.title = document
           .querySelector("div.anime-title")
           .textContent.replace(
             document.querySelector("div.anime-title > h3").textContent,
             ""
           );
 
-        presenceData.smallImageKey = video.paused ? "pause" : "play";
-        presenceData.smallImageText = video.paused
+        data.presenceData.smallImageKey = video.paused ? "pause" : "play";
+        data.presenceData.smallImageText = video.paused
           ? (await strings).pause
           : (await strings).play;
 
-        presenceData.endTimestamp = timestamps[1];
+        data.presenceData.endTimestamp = endTimestamp;
 
-        presenceData.buttons = [
+        data.presenceData.buttons = [
           {
             label: (await strings).buttonViewMovie,
             url: document.URL
@@ -186,20 +192,20 @@ presence.on("UpdateData", async () => {
         ];
 
         if (video.paused) {
-          delete presenceData.endTimestamp;
-          delete presenceData.startTimestamp;
+          delete data.presenceData.endTimestamp;
+          delete data.presenceData.startTimestamp;
         }
       }
     },
     "/filme/(dublado|legendado)/([a-zA-Z0-9-]+)": {
       disabled: privacy || !movie,
       async setPresenceData() {
-        presenceData.details = (await strings).viewMovie;
-        presenceData.state = document.querySelector(
+        data.presenceData.details = (await strings).viewMovie;
+        data.presenceData.state = document.querySelector(
           "div.infos_left > div > h2"
         ).textContent;
 
-        presenceData.buttons = [
+        data.presenceData.buttons = [
           {
             label: (await strings).buttonViewMovie,
             url: document.URL
@@ -210,15 +216,15 @@ presence.on("UpdateData", async () => {
     "/minha-conta": {
       disabled: privacy,
       async setPresenceData() {
-        presenceData.details = (await strings).viewAccount;
+        data.presenceData.details = (await strings).viewAccount;
       }
     },
     "/pesquisa": {
       async setPresenceData() {
-        presenceData.details = (await strings).searchFor;
-        presenceData.state = new URLSearchParams(document.location.search).get(
-          "titulo"
-        );
+        data.presenceData.details = (await strings).searchFor;
+        data.presenceData.state = new URLSearchParams(
+          document.location.search
+        ).get("titulo");
       }
     }
   };
@@ -275,11 +281,11 @@ presence.on("UpdateData", async () => {
           replace: [
             {
               input: "%title%",
-              output: data.meta["title"]
+              output: data.meta.title
             },
             {
               input: "%episode%",
-              output: data.meta["episode"]
+              output: data.meta.episode
             }
           ]
         },
@@ -297,11 +303,11 @@ presence.on("UpdateData", async () => {
           replace: [
             {
               input: "%title%",
-              output: data.meta["title"]
+              output: data.meta.title
             },
             {
               input: "%episode%",
-              output: data.meta["episode"]
+              output: data.meta.episode
             }
           ]
         },
@@ -322,7 +328,7 @@ presence.on("UpdateData", async () => {
           replace: [
             {
               input: "%title%",
-              output: data.meta["title"]
+              output: data.meta.title
             }
           ]
         },
@@ -340,7 +346,7 @@ presence.on("UpdateData", async () => {
           replace: [
             {
               input: "%title%",
-              output: data.meta["title"]
+              output: data.meta.title
             }
           ]
         }
@@ -361,26 +367,27 @@ presence.on("UpdateData", async () => {
       .catch(() => null);
 
     if (
-      ((!settingValue && !setting.value) || settingValue === setting.value) &&
+      ((!settingValue && setting.value === undefined) ||
+        settingValue === setting.value) &&
       setting.delete &&
       !setting.presence
-    )
+    ) {
       for (const PData of setting.uses)
-        delete presenceData[PData as keyof PresenceData];
-    else if (setting.presence) {
+        delete data.presenceData[PData as keyof PresenceData];
+    } else if (setting.presence) {
       for (const presenceSetting of setting.presence) {
         if (document.location.pathname.match(presenceSetting.page)) {
-          if (presenceSetting.setTo && !presenceSetting.replace)
-            presenceData[presenceSetting.uses as "details"] =
+          if (presenceSetting.setTo && !presenceSetting.replace) {
+            data.presenceData[presenceSetting.uses as "details"] =
               presenceSetting.setTo;
-          else if (presenceSetting.setTo && presenceSetting.replace) {
+          } else if (presenceSetting.setTo && presenceSetting.replace) {
             let replaced = presenceSetting.setTo;
 
             for (const toReplace of presenceSetting.replace)
               replaced = replaced.replace(toReplace.input, toReplace.output);
 
             if (replaced)
-              presenceData[presenceSetting.uses as "details"] = replaced;
+              data.presenceData[presenceSetting.uses as "details"] = replaced;
           }
 
           if (presenceSetting.if) {
@@ -388,18 +395,21 @@ presence.on("UpdateData", async () => {
               for (const setting of presenceSetting.if) {
                 if (setting.k) {
                   if (setting.delete && !setting.v)
-                    delete presenceData[presenceSetting.uses];
-                  else if (setting.v)
-                    presenceData[presenceSetting.uses as "details"] = setting.v;
+                    delete data.presenceData[presenceSetting.uses];
+                  else if (setting.v) {
+                    data.presenceData[presenceSetting.uses as "details"] =
+                      setting.v;
+                  }
                 }
               }
             } else {
               if (presenceSetting.if.k) {
                 if (presenceSetting.if.delete && !presenceSetting.if.v)
-                  delete presenceData[presenceSetting.uses];
-                else if (presenceSetting.if.v)
-                  presenceData[presenceSetting.uses as "details"] =
+                  delete data.presenceData[presenceSetting.uses];
+                else if (presenceSetting.if.v) {
+                  data.presenceData[presenceSetting.uses as "details"] =
                     presenceSetting.if.v;
+                }
               }
             }
           }
@@ -408,12 +418,13 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  for (const x of ["state", "details"])
-    if (presenceData[x as "details"] === "undefined")
-      delete presenceData[x as "details"];
+  for (const x of ["state", "details"]) {
+    if (data.presenceData[x as "details"] === "undefined")
+      delete data.presenceData[x as "details"];
+  }
 
-  if (!presenceData.details) {
+  if (!data.presenceData.details) {
     presence.setActivity();
     presence.setTrayTitle();
-  } else presence.setActivity(presenceData);
+  } else presence.setActivity(data.presenceData);
 });
