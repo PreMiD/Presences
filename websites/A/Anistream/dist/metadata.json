@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Anistream",
+    "author": {
+      "name": "Flumuffel#3423",
+      "id": "274209471968837634"
+    },
+    "category": "anime",
+    "logo": "https://anistream.de/public/static/favicon.png",
+    "thumbnail": "https://anistream.de/public/static/Anistream.png",
+    "version": "1.0.0",
+    "color": "#007deb",
+    "tags": [
+      "streaming",
+      "anime"
+    ],
+    "url": "anistream.de",
+    "description": {
+      "de": "Dies ist eine Presence für die kostenlose Anime Streaming Seite mit der du deine Aktivitäten auf der Seite in Discord anzeigen lassen kannst.",
+      "en": "This is a presence for the free anime streaming site with which you can view your activities on the site in Discord."
+    },
+    "contributors": [
+      {
+        "name": "Deny",
+        "id": "266592658984665088"
+      }
+    ]
+  }
