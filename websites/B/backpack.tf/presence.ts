@@ -1,19 +1,17 @@
 let presence = new Presence({
   clientId: "850295838361649153"
 }),
-
- browsingStamp = Math.floor(Date.now() / 1000),
  title: any,
  sec: any;
-
+const browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   presenceData.startTimestamp = browsingStamp;
-
-  if (document.location.hostname == "backpack.tf") {
-      if (document.location.pathname == "/") 
+  
+  if (document.location.hostname === "backpack.tf") {
+      if (document.location.pathname === "/") 
         presenceData.details = "Viewing Main page";
        else if (document.location.pathname.includes("/overview/")) {
     title = document.querySelector(
@@ -124,13 +122,12 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/top/generous")) presenceData.details = "Viewing Top Gifters";
     else if (document.location.pathname.includes("/top/contributors")) presenceData.details = "Viewing Top Contributors";
     else if (document.location.pathname.includes("/developer")) presenceData.details = "Viewing Develoapers page";
-    else if (document.location.pathname.includes("/developer")) presenceData.details = "Viewing Develoapers page";
     else if (document.location.pathname.includes("/help")) presenceData.details = "Viewing help center";
     else if (document.location.pathname.includes("/rules")) presenceData.details = "Reading rules";
     else if (document.location.pathname.includes("/servers")) presenceData.details = "Viewing servers with backpack.tf plugin";
     else if (document.location.pathname.includes("/top/accurate")) presenceData.details = "Viewing The Most Accurate Users";
 }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
