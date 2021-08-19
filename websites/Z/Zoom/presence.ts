@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/s/"))
     presenceData.details = "Joining a meeting";
   else if (document.location.pathname.startsWith("/wc/")) {
-    if (document.location.pathname.endsWith("start"))
+    if (document.querySelector("#prompt > h4") && document.location.pathname.endsWith("start"))
       presenceData.details = "Joining a meeting";
     else if (document.location.pathname.endsWith("leave"))
       presenceData.details = "Leaving an meeting";
