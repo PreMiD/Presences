@@ -68,7 +68,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.state;
       else 
         presenceData.state = document.querySelector("div.sc-pbWVv.hTvDIL").textContent;
-      
     }
 
     // Check if user is viewing Settings of a House
@@ -76,7 +75,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a House's settings";
       if (!privacy) 
         presenceData.state = document.querySelector("div.sc-psfJB.efwVkl").children[2].textContent;
-      
     }
   }
 
