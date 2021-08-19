@@ -86,11 +86,11 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("/watch")) {
     const video: HTMLVideoElement = document.querySelector(
-      ".VideoContainer video"
+      ".watch-video--player-view video"
     );
     if (video && !isNaN(video.duration)) {
       const showCheck = document.querySelector(
-          "[class$='title'] .ellipsize-text span"
+          "[data-uia$='video-title'] span"
         )
           ? true
           : false,
@@ -113,21 +113,21 @@ presence.on("UpdateData", async () => {
           let state: string;
           if (
             document.querySelector(
-              "[class$='title'] .ellipsize-text span:nth-child(3)"
+              "[data-uia$='video-title'] span:nth-child(3)"
             )
           ) {
             //* if the episode has a title, it's added to season and episode numbers
             state =
-              document.querySelector("[class$='title'] .ellipsize-text span")
+              document.querySelector("[data-uia$='video-title'] span")
                 .textContent +
               " " +
               document.querySelector(
-                "[class$='title'] .ellipsize-text span:nth-child(3)"
+                "[data-uia$='video-title'] span:nth-child(3)"
               ).textContent;
           } else {
             //* if no episode title, it proceeds with the season and episode numbers only
             state = document.querySelector(
-              "[class$='title'] .ellipsize-text span"
+              "[data-uia$='video-title'] span"
             ).textContent;
           }
 
@@ -135,14 +135,14 @@ presence.on("UpdateData", async () => {
             presenceData.details = seriesDetail
               .replace(
                 "%title%",
-                document.querySelector("[class$='title'] .ellipsize-text h4")
+                document.querySelector("[data-uia$='video-title'] h4")
                   .textContent
               )
               .replace("%episode%", state);
             presenceData.state = seriesState
               .replace(
                 "%title%",
-                document.querySelector("[class$='title'] .ellipsize-text h4")
+                document.querySelector("[data-uia$='video-title'] h4")
                   .textContent
               )
               .replace("%episode%", state);
@@ -171,7 +171,7 @@ presence.on("UpdateData", async () => {
       } else {
         //* if not a show
         const title = document.querySelector(
-          "[class$='title'] h4.ellipsize-text"
+          "[data-uia$='video-title']"
         ).textContent;
         if (/\(([^)]+)\)/.test(title.toLowerCase())) {
           if (showSeries && !privacy) {
