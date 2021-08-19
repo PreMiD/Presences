@@ -72,7 +72,7 @@ function videoEnabled() {
 function memberCount() {
   const counter = document.querySelector(
     ".footer-button__participants-icon > .footer-button__number-counter > span"
-  );
-  const res = counter === null ? null : Number(counter.innerHTML);
+  ),
+   res = counter === null ? null : Number(counter.innerHTML);
   return res;
 }
