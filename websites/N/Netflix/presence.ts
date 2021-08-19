@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
         }
       } else {
         //* if not a show
-        const title =(document.querySelector(
+        const title = (document.querySelector(
           "[class$='title'] h4.ellipsize-text"
         )
         ?? document.querySelector(
