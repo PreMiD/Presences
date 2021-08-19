@@ -576,7 +576,7 @@ presence.on("UpdateData", async () => {
     },
     isPreparing = document.querySelector(".vscs-splash-screen-steps-pane"),
     activeTab = document.querySelector(".tab.active"),
-    editorMode = document.getElementById("status.editor.mode");
+    editorMode = document.querySelector("h3.title");
 
   // Preparing Screen
   if (isPreparing) {
@@ -655,7 +655,7 @@ presence.on("UpdateData", async () => {
     data.details = "Idling";
   }
 
-  if (data.largeImageKey === null) {
+  if (!data.largeImageKey) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);
