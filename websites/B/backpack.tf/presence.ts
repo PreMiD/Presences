@@ -1,9 +1,9 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "850295838361649153"
 }),
- title: any,
- sec: any;
-const browsingStamp = Math.floor(Date.now() / 1000);
+browsingStamp = Math.floor(Date.now() / 1000);
+let title: any,
+    sec: any;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
