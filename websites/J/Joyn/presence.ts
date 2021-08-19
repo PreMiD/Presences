@@ -3,16 +3,16 @@ const presence = new Presence({
 });
 
 interface LangStrings {
-  play: string,
-  pause: string,
-  browsing: string,
-  live: string,
-  searching: string,
-  viewMovie: string,
-  watchingMovie: string,
-  watchingSeries: string,
-  watchMovie: string,
-  watchSeries: string,
+  play: string;
+  pause: string;
+  browsing: string;
+  live: string;
+  searching: string;
+  viewMovie: string;
+  watchingMovie: string;
+  watchingSeries: string;
+  watchMovie: string;
+  watchSeries: string;
 }
 
 async function getStrings() {
@@ -33,8 +33,7 @@ async function getStrings() {
   );
 }
 
-let lang: LangStrings,
-  oldLang: string;
+let lang: LangStrings, oldLang: string;
 
 presence.on("UpdateData", async function () {
   const presenceData: PresenceData = {
@@ -271,7 +270,9 @@ presence.on("UpdateData", async function () {
       }
     } else if (urlpath[1] === "collections" && urlpath[2]) {
       presenceData.details = "Viewing Collection:";
-      presenceData.state = document.querySelector("h1.sc-eqamei-0.cdfQp")?.textContent;
+      presenceData.state = document.querySelector(
+        "h1.sc-eqamei-0.cdfQp"
+      )?.textContent;
     } else if (urlpath[1] === "mein-account") {
       if (urlpath[2] === "details") {
         presenceData.details = "My Account";
@@ -292,8 +293,10 @@ presence.on("UpdateData", async function () {
       presenceData.details = "My Account";
       presenceData.state = "FSK Settings";
     } else if (urlpath[1] === "ueber-joyn") presenceData.details = "About Joyn";
-    else if (urlpath[1] === "jugendschutz") presenceData.details = "Youth protection";
-    else if (urlpath[1] === "datenschutz") presenceData.details = "Privacy policy";
+    else if (urlpath[1] === "jugendschutz")
+      presenceData.details = "Youth protection";
+    else if (urlpath[1] === "datenschutz")
+      presenceData.details = "Privacy policy";
     else if (urlpath[1] === "agb") presenceData.details = "Terms of service";
   }
   if (!presenceData.details) {

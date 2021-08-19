@@ -21,14 +21,16 @@ presence.on("UpdateData", async () => {
         break;
     }
 
-  // Presence for Giggl itself
+    // Presence for Giggl itself
   } else if (document.location.hostname === "canary.giggl.app") {
     presenceData.details = "Browsing Giggl";
 
     // If in a portal, set status to that
     if (document.location.pathname.startsWith("/portal")) {
       presenceData.details = "In a Portal";
-      [presenceData.state] = document.querySelector("title").innerText.split(" • ");
+      [presenceData.state] = document
+        .querySelector("title")
+        .innerText.split(" • ");
     }
 
     // Check if in a call
@@ -39,12 +41,14 @@ presence.on("UpdateData", async () => {
 
     // Check if viewing a profile
     if (document.querySelector(".feather.feather-map-pin")) {
-      presenceData.details = `Viewing ${document.querySelector("p").textContent}'s Profile`;
+      presenceData.details = `Viewing ${
+        document.querySelector("p").textContent
+      }'s Profile`;
       delete presenceData.state;
     }
 
-  // Presence for status page
-  } else if (document.location.hostname === "status.giggl.app") 
+    // Presence for status page
+  } else if (document.location.hostname === "status.giggl.app")
     presenceData.details = "Viewing the status page";
 
   presence.setActivity(presenceData);
