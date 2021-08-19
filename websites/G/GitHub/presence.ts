@@ -218,9 +218,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = profile.nickname.innerText;
       else if (profile.nickname.innerText.length === 0)
         presenceData.state = profile.name.innerText;
-      else {
+      else 
         presenceData.state = `${profile.name.innerText} | ${profile.nickname.innerText}`;
-      }
+      
     } else if (document.location.pathname.indexOf(profileTabs)) {
       presenceData.details = `Browsing ${profileCurrentTab} from:`;
 
@@ -228,9 +228,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = profile.nickname.innerText;
       else if (profile.nickname.innerText.length === 0)
         presenceData.state = profile.name.innerText;
-      else {
+      else 
         presenceData.state = `${profile.name.innerText} | ${profile.nickname.innerText}`;
-      }
+      
 
       if (profileCurrentTab === null) {
         presenceData.details = "Browsing a profile...";
@@ -239,9 +239,9 @@ presence.on("UpdateData", async () => {
           presenceData.state = profile.nickname.innerText;
         else if (profile.nickname.innerText.length === 0)
           presenceData.state = profile.name.innerText;
-        else {
+        else 
           presenceData.state = `${profile.name.innerText} | ${profile.nickname.innerText}`;
-        }
+        
       }
     }
   } else if (organization.name) {
