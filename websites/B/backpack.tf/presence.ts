@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "850295838361649153"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var sec: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ title: any,
+ sec: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,16 +13,16 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
 
   if (document.location.hostname == "backpack.tf") {
-      if (document.location.pathname == "/") {
+      if (document.location.pathname == "/") 
         presenceData.details = "Viewing Main page";
-      } else if (document.location.pathname.includes("/overview/")) {
+       else if (document.location.pathname.includes("/overview/")) {
     title = document.querySelector(
       "#page-content > div:nth-child(1) > div.stats-body > div > h1"
     );
     presenceData.details = "Viewing item stats:";
     presenceData.state = title.innerText;
     } else if (document.location.pathname.includes("/stats/")) {
-        if (document.location.pathname.includes("Unique/Mann%20Co.%20Supply%20Crate%20Key")){
+        if (document.location.pathname.includes("Unique/Mann%20Co.%20Supply%20Crate%20Key")) {
           title = document.querySelector(
             "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(1) > div.text > div.value"
           );
@@ -40,11 +40,13 @@ presence.on("UpdateData", async () => {
           );
           presenceData.details = "Viewing Earbuds price:";
           presenceData.state = `${title.innerText} | ${sec.innerText}`;
-        } else { title = document.querySelector(
+        } else {
+ title = document.querySelector(
           "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-header > div.stats-header-item > div.stats-header-title"
         );
         presenceData.details = "Viewing item:";
-        presenceData.state = title.innerText;}
+        presenceData.state = title.innerText;
+}
     } else if (document.location.pathname.includes("/u/")) {
       title = document.querySelector(
         "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.title > span > a"
@@ -81,21 +83,21 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/award-tickets")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Tickets";
-    } else if (document.location.pathname.includes("/donate")) {
+    } else if (document.location.pathname.includes("/donate")) 
       presenceData.details = "Viewing Donation page";
-    } else if (document.location.pathname.includes("/premium/subscribe")) {
+     else if (document.location.pathname.includes("/premium/subscribe")) 
       presenceData.details = "Viewing Premium subscription";
-    } else if (document.location.pathname.includes("/pricelist")) {
+     else if (document.location.pathname.includes("/pricelist")) {
       presenceData.details = "Viewing Community Pricelist";
       presenceData.state = "Pricegrid view";
     } else if (document.location.pathname.includes("/spreadsheet")) {
       presenceData.details = "Viewing Community Pricelist";
       presenceData.state = "Spreadsheet view";
-    } else if (document.location.pathname.includes("/vote")) {
+    } else if (document.location.pathname.includes("/vote")) 
       presenceData.details = "Browsing Suggestions";
-    } else if (document.location.pathname.includes("/latest")) {
+     else if (document.location.pathname.includes("/latest")) 
       presenceData.details = "Viewing the Latest Price Updates";
-    } else if (document.location.pathname.includes("/unusuals")) {
+     else if (document.location.pathname.includes("/unusuals")) {
       presenceData.details = "Viewing Unusual Pricelist";
       presenceData.state = "Browsing by Item";
     } else if (document.location.pathname.includes("/effects")) {
@@ -127,11 +129,11 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/rules")) presenceData.details = "Reading rules";
     else if (document.location.pathname.includes("/servers")) presenceData.details = "Viewing servers with backpack.tf plugin";
     else if (document.location.pathname.includes("/top/accurate")) presenceData.details = "Viewing The Most Accurate Users";
-};
+}
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
