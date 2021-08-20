@@ -19,8 +19,8 @@ presence.on("UpdateData", async () => {
           if (document.location.pathname.includes("Unique/Mann%20Co.%20Supply%20Crate%20Key")) {
           const title = document.querySelector(
             "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(1) > div.text > div.value"
-          );
-          const sec = document.querySelector(
+          ),
+           sec = document.querySelector(
             "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(2) > div.text > div.value"
           );
           presenceData.details = "Viewing Key price:";
@@ -28,8 +28,8 @@ presence.on("UpdateData", async () => {
           } else if (document.location.pathname.includes("Unique/Earbuds")) {
           const title = document.querySelector(
             "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(1) > div.text > div.value"
-          );
-          const sec = document.querySelector(
+          ),
+           sec = document.querySelector(
             "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(2) > div.text > div.value"
           );
           presenceData.details = "Viewing Earbuds price:";
@@ -68,8 +68,8 @@ presence.on("UpdateData", async () => {
       } else if (document.location.pathname.includes("/item/")) {
         const title = document.querySelector(
           "#page-content > div > div > div > div.panel-heading > span:nth-child(1)"
-        );
-        const sec = document.querySelector(
+        ),
+         sec = document.querySelector(
           "#page-content > div > div > div > div.panel-body > div > div.item-wrapper > div.item-text > h2"
         );
         presenceData.details = `Viewing ${title.innerText}:`;
