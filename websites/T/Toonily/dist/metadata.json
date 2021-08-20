@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "Toonily",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/Msc57Yo.png",
+  "thumbnail": "https://i.imgur.com/mTFbSCz.png",
+  "version": "1.0.0",
+  "color": "#2f063e",
+  "tags": ["manga", "english-translation"],
+  "url": "toonily.net",
+  "description": {
+    "en": "Read English Translated Manga For Free For The Fans"
+  },
+  "iframe": true,
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
