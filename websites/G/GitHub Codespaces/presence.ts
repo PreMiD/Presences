@@ -576,7 +576,7 @@ presence.on("UpdateData", async () => {
     },
     isPreparing = document.querySelector(".vscs-splash-screen-steps-pane"),
     activeTab = document.querySelector(".tab.active"),
-    editorMode = document.querySelector("h3.title");
+    editorMode = document.getElementById("status.editor.mode");
 
   // Preparing Screen
   if (isPreparing) {
@@ -588,7 +588,7 @@ presence.on("UpdateData", async () => {
       data.details = "Inactive Codespace";
     // Idle/Start Screen
   } else if (activeTab && editorMode) {
-    const scmTab = document.getElementById("status.scm"),
+    const scmTab = document.querySelector("h3.title"),
       filename = activeTab.getAttribute("data-resource-name"),
       filepath = activeTab.getAttribute("title"),
       syntaxMode = editorMode.getAttribute("aria-label").toLowerCase(),
