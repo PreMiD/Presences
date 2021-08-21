@@ -61,10 +61,10 @@ presence.on("UpdateData", () => {
 
   if (!presenceData.details) {
     presenceData.details = presenceData.state;
-    presenceData.state = null;
+    delete presenceData.state
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
