@@ -13,9 +13,9 @@ const presenceData: PresenceData = {
   if (hostname === "rockstargames.com" || hostname === "www.rockstargames.com") {
     if (pathname === "/") 
       presenceData.details = "Browsing Homepage";
-     else if (pathname === "/newswire") {
+     else if (pathname === "/newswire") 
       presenceData.details = "Browsing Newswire";
-     }else if (pathname.startsWith("/newswire/")) {
+     else if (pathname.startsWith("/newswire/")) {
       presenceData.details = "Browsing Newswire";
       presenceData.state = document.querySelector(
         "head > title"
@@ -33,9 +33,9 @@ const presenceData: PresenceData = {
     } else if (pathname === "/GTAOnline") {
       presenceData.details = "Browsing Games";
       presenceData.state = "Grand Theft Auto Online";
-    } else if (pathname === "/videos") {
+    } else if (pathname === "/videos") 
       presenceData.details = "Browsing Videos";
-    } else if (pathname.startsWith("/videos/")) {
+     else if (pathname.startsWith("/videos/")) {
       presenceData.details = "Browsing Videos";
       presenceData.state = document.querySelector(
         "head > title"
