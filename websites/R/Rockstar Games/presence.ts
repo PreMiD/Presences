@@ -11,7 +11,6 @@ presence.on("UpdateData", async () => {
      {pathname, hostname} = document.location;
   
     if (hostname === "rockstargames.com" || hostname === "www.rockstargames.com") {
-      presenceData.largeImageKey = "rockstargameshome";
       if (pathname === "/") 
         presenceData.details = "Browsing Homepage";
        else if (pathname === "/newswire") 
