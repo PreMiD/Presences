@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           { label: "Read Manga", url: href },
           {
-            label: "Check Summary",
+            label: "Read Summary",
             url: href.substring(0, href.lastIndexOf("chapter"))
           }
         ];
@@ -95,10 +95,10 @@ presence.on("UpdateData", async () => {
         if (buttons)
           presenceData.buttons = [{ label: "See Comments", url: href }];
       } else {
-        presenceData.details = "Checking Summary";
+        presenceData.details = "Reading Summary";
         if (title) presenceData.state = title.textContent;
         if (buttons)
-          presenceData.buttons = [{ label: "Check Summary", url: href }];
+          presenceData.buttons = [{ label: "Read Summary", url: href }];
       }
     }
   } else if(pathname.startsWith("/user-settings/")) {
