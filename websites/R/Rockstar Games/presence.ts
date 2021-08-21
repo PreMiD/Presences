@@ -8,9 +8,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "rockstargameshome",
     startTimestamp: browsingTimestamp
   },
-
-     {pathname} = document.location,
-     {hostname} = document.location;
+     {pathname, hostname} = document.location;
   
     if (hostname === "rockstargames.com" || hostname === "www.rockstargames.com") {
       presenceData.largeImageKey = "rockstargameshome";
