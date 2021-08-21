@@ -95,7 +95,6 @@ const presenceData: PresenceData = {
   }
   
 if (!presenceData.details) {
-  
   presence.setTrayTitle();
   presence.setActivity(); 
 } else 
