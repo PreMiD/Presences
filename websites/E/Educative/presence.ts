@@ -15,13 +15,13 @@ const presence = new Presence({
     if (pathStartsWith("/courses")) {
       if (isInCourse()) {
         courseName = document.getElementsByTagName("h4")[0].innerText;
-        courseCompletion = document
+        [courseCompletion] = document
           .getElementsByClassName("whitespace-pre-wrap")[0]
           .getElementsByTagName("span")[0]
-          .innerText.split("%")[0];
-        const lessonEl = document
+          .innerText.split("%");
+        const [lessonEl] = document
             .getElementsByClassName("bePFDW")[0]
-            .getElementsByTagName("span")[0],
+            .getElementsByTagName("span"),
           lesson = lessonEl.innerText,
           chapter = lessonEl
             .closest(".CollectionSidebarCategory-sc-15b6owa-0")
