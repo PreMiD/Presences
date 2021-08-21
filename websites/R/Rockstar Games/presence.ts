@@ -99,5 +99,4 @@ if (!presenceData.details) {
   presence.setActivity(); 
 } else 
   presence.setActivity(presenceData);
-
 });
