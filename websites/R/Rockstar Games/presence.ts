@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "rockstargamesspecial3";
     if (pathname === "/en") 
       presenceData.details = "Browsing Store Homepage";
-  else if (pathname.startsWith("/en/")) {
+    else if (pathname.startsWith("/en/")) {
       presenceData.details = "Browsing Rockstar Store";
       presenceData.state = document.querySelector(
         "head > title"
