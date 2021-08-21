@@ -1,28 +1,28 @@
 const presence = new Presence({
-  clientId: "765234467849240657"
-}),
-browsingTimestamp = Math.floor(Date.now() / 1000);
+    clientId: "765234467849240657"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-const presenceData: PresenceData = {
-  largeImageKey: "rockstargameshome",
-  startTimestamp: browsingTimestamp
-},
-   {pathname, hostname} = document.location;
+  const presenceData: PresenceData = {
+    largeImageKey: "rockstargameshome",
+    startTimestamp: browsingTimestamp
+  },
+    {pathname, hostname} = document.location;
 
   if (hostname === "rockstargames.com" || hostname === "www.rockstargames.com") {
     if (pathname === "/") 
       presenceData.details = "Browsing Homepage";
-     else if (pathname === "/newswire") 
+    else if (pathname === "/newswire") 
       presenceData.details = "Browsing Newswire";
-     else if (pathname.startsWith("/newswire/")) {
+    else if (pathname.startsWith("/newswire/")) {
       presenceData.details = "Browsing Newswire";
       presenceData.state = document.querySelector(
         "head > title"
       ).textContent;
     } else if (pathname === "/games") 
       presenceData.details = "Browsing Games";
-     else if (pathname.startsWith("/games/")) {
+    else if (pathname.startsWith("/games/")) {
       presenceData.details = "Browsing Games";
       presenceData.state = document.querySelector(
         "head > title"
@@ -35,7 +35,7 @@ const presenceData: PresenceData = {
       presenceData.state = "Grand Theft Auto Online";
     } else if (pathname === "/videos") 
       presenceData.details = "Browsing Videos";
-     else if (pathname.startsWith("/videos/")) {
+    else if (pathname.startsWith("/videos/")) {
       presenceData.details = "Browsing Videos";
       presenceData.state = document.querySelector(
         "head > title"
@@ -48,7 +48,7 @@ const presenceData: PresenceData = {
     presenceData.largeImageKey = "rockstargamestransparent";
     if (pathname === "/") 
       presenceData.details = "Browsing Support Homepage";
-     else if (pathname.startsWith("/categories/")) {
+    else if (pathname.startsWith("/categories/")) {
       presenceData.details = "Browsing Support Pages";
       presenceData.state = document.querySelector(
         "head > title"
@@ -60,24 +60,24 @@ const presenceData: PresenceData = {
     presenceData.largeImageKey = "rockstargamespurple";
     if (pathname === "/") 
       presenceData.details = "Browsing Social Club Homepage";
-     else if (pathname === "/games") 
+    else if (pathname === "/games") 
       presenceData.details = "Browsing Social Club Games";
-     else if (pathname.startsWith("/games/")) {
+    else if (pathname.startsWith("/games/")) {
       presenceData.details = "Browsing Games";
       presenceData.state = document.querySelector(
         "head > title"
       ).textContent;
     } else if (pathname === "/crews") 
       presenceData.details = "Browsing Social Club Crews";
-     else if (pathname === "/jobs") 
+    else if (pathname === "/jobs") 
       presenceData.details = "Browsing Social Club Jobs";
-     else if (pathname === "/photos") 
+    else if (pathname === "/photos") 
       presenceData.details = "Browsing Social Club Photos";
-     else if (pathname === "/videos") 
+    else if (pathname === "/videos") 
       presenceData.details = "Browsing Social Club Videos";
-     else if (pathname === "/events") 
+    else if (pathname === "/events") 
       presenceData.details = "Browsing Social Club Events";
-     else if (pathname === "/rockstar-games-launcher") 
+    else if (pathname === "/rockstar-games-launcher") 
       presenceData.details = "Browsing Rockstar's Game Launcher";
     
   }
@@ -86,7 +86,7 @@ const presenceData: PresenceData = {
     presenceData.largeImageKey = "rockstargamesspecial3";
     if (pathname === "/en") 
       presenceData.details = "Browsing Store Homepage";
-      else if (pathname.startsWith("/en/")) {
+  else if (pathname.startsWith("/en/")) {
       presenceData.details = "Browsing Rockstar Store";
       presenceData.state = document.querySelector(
         "head > title"
@@ -94,9 +94,9 @@ const presenceData: PresenceData = {
     } 
   }
   
-if (!presenceData.details) {
-  presence.setTrayTitle();
-  presence.setActivity(); 
-} else 
-  presence.setActivity(presenceData);
+  if (!presenceData.details) {
+    presence.setTrayTitle();
+    presence.setActivity(); 
+  } else 
+    presence.setActivity(presenceData);
 });
