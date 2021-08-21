@@ -15,10 +15,8 @@ const presenceData: PresenceData = {
       presenceData.details = "Browsing Homepage";
      else if (pathname === "/newswire") {
       presenceData.details = "Browsing Newswire";
-      presenceData.smallImageKey = "reading";
      }else if (pathname.startsWith("/newswire/")) {
       presenceData.details = "Browsing Newswire";
-      presenceData.smallImageKey = "reading";
       presenceData.state = document.querySelector(
         "head > title"
       ).textContent;
@@ -26,30 +24,24 @@ const presenceData: PresenceData = {
       presenceData.details = "Browsing Games";
      else if (pathname.startsWith("/games/")) {
       presenceData.details = "Browsing Games";
-      presenceData.smallImageKey = "reading";
       presenceData.state = document.querySelector(
         "head > title"
       ).textContent;
     } else if (pathname === "/reddeadonline") {
       presenceData.details = "Browsing Games";
-      presenceData.smallImageKey = "reading";
       presenceData.state = "Read Dead Redemption Online";
     } else if (pathname === "/GTAOnline") {
       presenceData.details = "Browsing Games";
-      presenceData.smallImageKey = "reading";
       presenceData.state = "Grand Theft Auto Online";
     } else if (pathname === "/videos") {
       presenceData.details = "Browsing Videos";
-      presenceData.smallImageKey = "premiere";
     } else if (pathname.startsWith("/videos/")) {
       presenceData.details = "Browsing Videos";
-      presenceData.smallImageKey = "premiere";
       presenceData.state = document.querySelector(
         "head > title"
       ).textContent;
     } else if (pathname === "/downloads") 
       presenceData.details = "Browsing Downloads";
-      presenceData.smallImageKey = "reading";
   } 
   
   if (hostname === "support.rockstargames.com" || hostname === "www.support.rockstargames.com") {
