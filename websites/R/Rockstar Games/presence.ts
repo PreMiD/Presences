@@ -1,27 +1,12 @@
 const presence = new Presence({
-    clientId: "765234467849240657" //The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "765234467849240657"
   }),
-  browsingTimestamp = Math.floor(Date.now() / 1000),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+  //strings = presence.getStrings({
+    //play: "presence.playback.playing",
+   // pause: "presence.playback.paused"
     //You can use this to get translated strings in their browser language
-  });
-
-/*
-
-function myOutsideHeavyLiftingFunction(){
-    //Grab and process all your data here
-
-    // element grabs //
-    // api calls //
-    // variable sets //
-}
-
-setInterval(myOutsideHeavyLiftingFunction, 10000);
-//Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-
-*/
+  //});
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
