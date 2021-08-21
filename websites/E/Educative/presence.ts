@@ -61,7 +61,7 @@ presence.on("UpdateData", () => {
 
   if (!presenceData.details) {
     presenceData.details = presenceData.state;
-    delete presenceData.state
+    delete presenceData.state;
   }
 
   if (!presenceData.details) {
