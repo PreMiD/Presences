@@ -26,11 +26,13 @@ const presenceData: PresenceData = {
       presenceData.details = "Browsing Games";
      else if (pathname.startsWith("/games/")) {
       presenceData.details = "Browsing Games";
+      presenceData.smallImageKey = "reading";
       presenceData.state = document.querySelector(
         "head > title"
       ).textContent;
     } else if (pathname === "/reddeadonline") {
       presenceData.details = "Browsing Games";
+      presenceData.smallImageKey = "reading";
       presenceData.state = "Read Dead Redemption Online";
     } else if (pathname === "/GTAOnline") {
       presenceData.details = "Browsing Games";
