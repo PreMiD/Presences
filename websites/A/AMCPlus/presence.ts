@@ -50,10 +50,7 @@ presence.on("UpdateData", async () => {
       state = "Watching movie";
     }
 
-    const timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
+    const timestamps = presence.getTimestampsfromMedia(video),
       live = timestamps[1] === Infinity;
 
     smallImageText = live
