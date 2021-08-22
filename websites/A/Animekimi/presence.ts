@@ -41,8 +41,10 @@ presence.on("UpdateData", async () => {
         "#single > div.content > div.sheader > div.data > h1"
       )?.textContent ?? "ไม่ทราบชื่อตอน",
     search =
-      document.querySelector(".no-result.animation-2 > h2 > span")
-        ?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา",
+      document.querySelector(
+        ".content.rigth.csearch > header > h1" ||
+          ".no-result.animation-2 > h2 > span"
+      )?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา",
     path = document.location,
     presenceData: PresenceData = {
       largeImageKey: "site",
@@ -51,8 +53,9 @@ presence.on("UpdateData", async () => {
 
   // Presence
   if (path.search.includes("?s")) {
+    const searchinfo = search.split("ผลการค้นหา:");
     presenceData.details = "กำลังค้นหา";
-    presenceData.state = search;
+    presenceData.state = searchinfo.pop();
     presenceData.smallImageKey = "search";
   } else if (path.pathname === "/") presenceData.details = "อนิเมะอัพเดตล่าสุด";
   else if (path.pathname.includes("genre")) {
