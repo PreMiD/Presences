@@ -22,12 +22,13 @@ const presence = new Presence({
       details: "Vendo o calendario de animes",
       state: "Vendo..."
     }
-  };
+  },
+  presenceTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
+    startTimestamp: presenceTimestamp
   };
   const page = document.location.pathname,
     params = new URLSearchParams(document.location.search.substring(1));
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
           "#video > div > div > video"
         ) as HTMLMediaElement,
         timestamps = presence.getTimestampsfromMedia(video);
-      data.details = "Assitindo um anime!";
+      data.details = "Assitindo um anime.";
       data.state = `Vendo ${animeTitleWatching}`;
       data.smallImageKey = "play";
       if (video.paused) {
@@ -69,7 +70,7 @@ presence.on("UpdateData", async () => {
         delete data.startTimestamp;
         data.smallImageKey = "pause";
       }
-      [data.startTimestamp, data.endTimestamp] = timestamps;
+      [, data.endTimestamp] = timestamps;
       data.buttons = [
         {
           label: "Asistir tambem",
@@ -85,7 +86,7 @@ presence.on("UpdateData", async () => {
         ).innerHTML,
         showFullName = await presence.getSetting("fullName");
       data.details = "Vendo sobre um anime.";
-      if (showFullName === true && animeTitleFull !== undefined && animeTitleFull !== null && animeTitleFull !== "") 
+      if (showFullName && animeTitleFull) 
         data.state = `Vendo sobre ${animeTitleFull}`;
       else 
         data.state = `Vendo sobre ${animeTitleAbout}`;
@@ -109,11 +110,11 @@ presence.on("UpdateData", async () => {
       ) as HTMLMediaElement,
       timestamps = presence.getTimestampsfromMedia(video);
     data.details = "Assitindo um filme de anime";
-    if (showFullName === true && animeTitleFull !== undefined && animeTitleFull !== null && animeTitleFull !== "") 
+    if (showFullName && animeTitleFull) 
       data.state = `Vendo sobre ${animeTitleFull}`;
     else 
       data.state = `Vendo sobre ${animeTitleAbout}`;
-    [data.startTimestamp, data.endTimestamp] = timestamps;
+    [, data.endTimestamp] = timestamps;
     data.buttons = [
       {
         label: "Asistir tambem",
@@ -136,4 +137,6 @@ presence.on("UpdateData", async () => {
 
   if (data.details && data.state)
     presence.setActivity(data);
+  else
+    presence.setActivity();
 });
