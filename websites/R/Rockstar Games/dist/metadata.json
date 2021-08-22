@@ -1,24 +1,26 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.3",
-    "service": "Rockstar Games",
-    "author": {
-      "name": "BobsterJS 💗",
-      "id": "359755774873960450"
-    },
-    "category": "games",
-    "logo": "https://i.imgur.com/CIXf7iW.png",
-    "thumbnail": "https://i.imgur.com/1pthcL3.png",
-    "version": "1.0.0",
-    "color": "#fbff00",
-    "tags": ["rockstargames", "rockstar", "gaming"],
-    "url": [
-      "www.rockstargames.com",
-      "support.rockstargames.com",
-      "store.rockstargames.com",
-      "socialclub.rockstargames.com",
-      "signin.rockstargames.com"
-    ],
-    "description": {
-      "en": "Rockstar Games is a game development studio"
-    }
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Rockstar Games",
+  "author": {
+    "name": "BobsterJS 💗",
+    "id": "359755774873960450"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/CIXf7iW.png",
+  "thumbnail": "https://i.imgur.com/1pthcL3.png",
+  "version": "1.0.0",
+  "color": "#fbff00",
+  "tags": ["rockstargames", "rockstar", "gaming"],
+  "url": [
+    "www.rockstargames.com",
+    "support.rockstargames.com",
+    "store.rockstargames.com",
+    "socialclub.rockstargames.com",
+    "signin.rockstargames.com"
+  ],
+  "description": {
+    "en": "Rockstar Games is a game development studio who created Grand Theft Auto & Read Dead Redemption",
+    "fr": "Rockstar Games est un studio de développement de jeux qui a créé Grand Theft Auto & Read Dead Redemption",
+    "nl": "Rockstar Games is een game-ontwikkelingsstudio die Grand Theft Auto & Read Dead Redemption heeft gemaakt"
   }
+}
