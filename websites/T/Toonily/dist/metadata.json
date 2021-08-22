@@ -8,9 +8,12 @@
   "category": "other",
   "logo": "https://i.imgur.com/Msc57Yo.png",
   "thumbnail": "https://i.imgur.com/mTFbSCz.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#2f063e",
-  "tags": ["manga", "english-translation"],
+  "tags": [
+    "manga",
+    "english-translation"
+  ],
   "url": "toonily.net",
   "description": {
     "en": "Read your favorite Manhua and Manhwa translated to English for free. Read Manga, Manhua, Manhwa Online, Free webtoon Online, Updated Daily!"

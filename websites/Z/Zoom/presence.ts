@@ -30,7 +30,10 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/s/"))
     presenceData.details = "Joining a meeting";
   else if (document.location.pathname.startsWith("/wc/")) {
-    if (document.querySelector("#prompt > h4") && document.location.pathname.endsWith("start"))
+    if (
+      document.querySelector("#prompt > h4") &&
+      document.location.pathname.endsWith("start")
+    )
       presenceData.details = "Joining a meeting";
     else if (document.location.pathname.endsWith("leave"))
       presenceData.details = "Leaving an meeting";
@@ -71,8 +74,8 @@ function videoEnabled() {
 
 function memberCount() {
   const counter = document.querySelector(
-    ".footer-button__participants-icon > .footer-button__number-counter > span"
-  ),
-   res = counter === null ? null : Number(counter.innerHTML);
+      ".footer-button__participants-icon > .footer-button__number-counter > span"
+    ),
+    res = counter === null ? null : Number(counter.innerHTML);
   return res;
 }

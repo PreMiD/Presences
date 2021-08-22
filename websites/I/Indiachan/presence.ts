@@ -4,8 +4,9 @@ const presence: Presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  }, p = document.location.pathname;
+      largeImageKey: "logo"
+    },
+    p = document.location.pathname;
   if (p === "/") {
     presenceData.details = "Home";
     presenceData.smallImageText = "Idling";
@@ -43,15 +44,22 @@ presence.on("UpdateData", async () => {
   }
 
   const parts = p.split("/");
-  presenceData.smallImageText = `Browsing /${parts[1].split(".")[0]}/ - ${parts[2] === "" ? "1" : parts[2].split(".")[0]}`;
+  presenceData.smallImageText = `Browsing /${parts[1].split(".")[0]}/ - ${
+    parts[2] === "" ? "1" : parts[2].split(".")[0]
+  }`;
 
   if (p.endsWith("catalog.html"))
     presenceData.smallImageText = "Browsing catalog";
-  else if ((<HTMLInputElement>document.querySelector("textarea[name=\"message\"]")).value !== "")
+  else if (
+    (<HTMLInputElement>document.querySelector('textarea[name="message"]'))
+      .value !== ""
+  )
     presenceData.smallImageText = "Writing a post";
-  else if (p.includes("res"))
-    presenceData.smallImageText = `Reading thread #${p.split("/")[3].split(".")[0]}`;
-  else if (p.endsWith("Rules.html") || p.endsWith("rules.html")) {
+  else if (p.includes("res")) {
+presenceData.smallImageText = `Reading thread #${
+      p.split("/")[3].split(".")[0]
+    }`;
+} else if (p.endsWith("Rules.html") || p.endsWith("rules.html")) {
     presenceData.smallImageText = "Reading rules";
     presenceData.smallImageKey = "logo";
   } else if (p.includes("media"))
