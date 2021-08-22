@@ -80,8 +80,8 @@ presence.on("UpdateData", async () => {
       Math.floor(video.current),
       Math.floor(video.duration)
     );
-    if (titlemovies.includes("มูฟวี่" || "เดอะมูฟวี่")) {
-      const movieinfo = titlemovies.split("มูฟวี่" || "เดอะมูฟวี่");
+    if (titlemovies.includes("มูฟวี่")) {
+      const movieinfo = titlemovies.split(/(เดอะ)?(มูฟวี่)/);
       movie = movieinfo.pop();
       if (movie.includes("ซับไทย"))
         movie = movie.replace((Sub = "ซับไทย"), "").trim();
