@@ -61,7 +61,6 @@ presence.on("UpdateData", async () => {
       state = slot3.textContent;
     } else {
       // A movie only has slot1 (the title)
-      details = slot1.textContent;
       state = "Watching movie";
     }
 
