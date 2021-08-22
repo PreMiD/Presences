@@ -41,10 +41,8 @@ presence.on("UpdateData", async () => {
         "#single > div.content > div.sheader > div.data > h1"
       )?.textContent ?? "ไม่ทราบชื่อตอน",
     search =
-      document.querySelector(
-        ".content.rigth.csearch > header > h1" ||
-          ".no-result.animation-2 > h2 > span"
-      )?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา",
+      document.querySelector(".content.rigth.csearch > header > h1")
+        ?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา",
     path = document.location,
     presenceData: PresenceData = {
       largeImageKey: "site",
@@ -61,7 +59,10 @@ presence.on("UpdateData", async () => {
   else if (path.pathname.includes("genre")) {
     presenceData.details = "ประเภท";
     presenceData.state = title;
-  } else if (path.pathname.includes("catalog" || "category" || "title")) {
+  } else if (path.pathname.includes("catalog")) {
+    presenceData.details = "หมวดหมู่";
+    presenceData.state = title;
+  } else if (path.pathname.includes("category")) {
     presenceData.details = "หมวดหมู่";
     presenceData.state = title;
   } else if (path.pathname.includes("tag")) {
