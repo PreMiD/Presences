@@ -8,20 +8,6 @@ const presence = new Presence({
     search: "presence.activity.searching"
   });
 
-/**
- * Get timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let elapsed: number = undefined,
   oldUrl: string = undefined;
 
@@ -64,7 +50,7 @@ presence.on("UpdateData", async () => {
       state = "Watching movie";
     }
 
-    const timestamps = getTimestamps(
+    const timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
@@ -76,7 +62,7 @@ presence.on("UpdateData", async () => {
 
     smallImageKey = live ? "live" : video.paused ? "pause" : "play";
 
-    startTimestamp = live ? elapsed : timestamps[0];
+    if (live) startTimestamp = elapsed;
     endTimestamp = live ? undefined : timestamps[1];
     if (video.paused) {
       startTimestamp = undefined;
@@ -105,6 +91,6 @@ presence.on("UpdateData", async () => {
   if (endTimestamp !== undefined) 
     data.endTimestamp = endTimestamp;
   
-  presence.setActivity(data, video ? !video.paused : true);
+  presence.setActivity(data);
   presence.setTrayTitle(details);
 });
