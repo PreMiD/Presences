@@ -6,10 +6,10 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
 	largeImageKey: "logo"
-};
-  var docTitle = document.title;
-  var url = new URL(window.location.href);
-  var params = new URLSearchParams(url.search);
+},
+   docTitle = document.title,
+   url = new URL(window.location.href),
+   params = new URLSearchParams(url.search);
   
   if (document.location.pathname == "/") {
 	if (params.has("s") === true) {
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(data);
-  }
+  
 });
