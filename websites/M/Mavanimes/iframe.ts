@@ -1,22 +1,9 @@
 const iframe = new iFrame();
-
-setInterval(function () {
+iframe.on("UpdateData", async () => {
   const video = document.getElementsByClassName("jw-video")[0] as HTMLVideoElement;
-  if (
-    video &&
-    video.currentTime &&
-    video.duration &&
-    video.paused !== undefined
-  ) {
-    iframe.send({
-      error: false,
-      currentTime: video.currentTime,
-      duration: video.duration,
-      paused: video.paused
-    });
-  } else {
-    iframe.send({
-      error: true
-    });
-  }
-}, 100);
+  iframe.send({
+    currentTime: video.currentTime,
+    duration: video.duration,
+	paused: video.paused
+  });
+});
