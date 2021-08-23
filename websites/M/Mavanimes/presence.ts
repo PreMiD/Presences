@@ -6,20 +6,20 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
-},
-   docTitle = document.title,
-   url = new URL(window.location.href),
-   params = new URLSearchParams(url.search);
+  },
+    docTitle = document.title,
+    url = new URL(window.location.href),
+    params = new URLSearchParams(url.search);
   
   if (document.location.pathname === "/") {
-	if (params.has("s") === true) {
-    data.details = "Cherche un animé..";
-    data.state = params.get("s");
-    data.startTimestamp = browsingStamp;
-   } else{
-     data.details = "Page d'accueil";
-     data.startTimestamp = browsingStamp;
-	}
+    if (params.has("s") === true) {
+      data.details = "Cherche un animé..";
+      data.state = params.get("s");
+      data.startTimestamp = browsingStamp;
+    } else{
+      data.details = "Page d'accueil";
+      data.startTimestamp = browsingStamp;
+    }
   } else if (document.location.pathname.endsWith("/tous-les-animes-en-vf/")) {
     data.details = "Cherche un animé en VF..";
     data.startTimestamp = browsingStamp;
@@ -36,9 +36,9 @@ presence.on("UpdateData", async () => {
     data.details = "Regarde le calendrier de sortie";
     data.startTimestamp = browsingStamp;
   } else {
-	data.details = "Regarde un animé :";
-	data.state = docTitle;
-	data.startTimestamp = browsingStamp;
+    data.details = "Regarde un animé :";
+    data.state = docTitle;
+    data.startTimestamp = browsingStamp;
   }
 
 
