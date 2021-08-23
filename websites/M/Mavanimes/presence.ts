@@ -41,7 +41,6 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
   }
 
-
   if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
