@@ -22,10 +22,10 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
-    { pathname, href, hash, search } = location,
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
+    { hostname, pathname, href, hash, search } = location,
     buttons: boolean = await presence.getSetting("buttons"),
     searchBarVisible = !!document.querySelector("ul.search-main-menu.active");
 
@@ -43,22 +43,34 @@ presence.on("UpdateData", async () => {
       if (results) presenceData.state = results.textContent;
       presenceData.smallImageText = presenceData.smallImageKey = "search";
     } else presenceData.details = "At homepage";
-  } else if (pathname === "/manga/" || pathname.startsWith("/manga-genre/")) {
+  } else if (
+    pathname === "/manga/" ||
+    pathname.startsWith("/manga-genre/") ||
+    pathname === "/webtoons" ||
+    pathname.startsWith("/webtoon-genre/") ||
+    pathname.startsWith("/webtoon-tag")
+  ) {
     const order = document.querySelector<HTMLLIElement>(
-        "div.c-nav-tabs > ul > li.active"
-      ),
+      "div.c-nav-tabs > ul > li.active"
+    ),
       category = document.querySelector<HTMLHeadingElement>("h1.item-title.h4");
     presenceData.details = `Looking for ${
-      pathname.startsWith("/manga-genre") && category
+      (pathname.startsWith("/manga-genre") ||
+        pathname.startsWith("/webtoon-genre") ||
+        pathname.startsWith("/webtoon-tag")) &&
+      category
         ? category.textContent
         : ""
-    } Mangas`;
+    } ${hostname.endsWith(".com") ? "Manhwas" : "Mangas"}`;
     if (order) presenceData.state = `Ordered By ${order.textContent}`;
     presenceData.smallImageText = presenceData.smallImageKey = "looking";
-  } else if (pathname.startsWith("/manga/")) {
+  } else if (
+    pathname.startsWith("/manga/") ||
+    pathname.startsWith("/webtoon/")
+  ) {
     const title = document.querySelector<HTMLHeadingElement>(
-        "div.post-title > h1"
-      ),
+      "div.post-title > h1"
+    ),
       chapterHeading =
         document.querySelector<HTMLHeadingElement>("h1#chapter-heading");
     if (chapterHeading) {
@@ -101,16 +113,17 @@ presence.on("UpdateData", async () => {
           presenceData.buttons = [{ label: "Read Summary", url: href }];
       }
     }
-  } else if (pathname.startsWith("/user-settings/")) {
+  } else if (pathname.startsWith("/user-settings")) {
     const tab = document.querySelector<HTMLLIElement>("li.active");
     presenceData.details = "Viewing User Settings";
     if (tab) presenceData.state = tab.textContent;
   } else if (pathname === "/legal-disclaimer/")
     presenceData.details = "Legal Disclaimer";
-  else if (pathname === "/privacy-policy/")
+  else if (pathname.startsWith("/privacy-policy"))
     presenceData.details = "Privacy Policy";
   else if (pathname === "/about-us/") presenceData.details = "About Us";
-  else if (pathname === "/contact/") presenceData.details = "Contact Us";
+  else if (pathname.startsWith("/contact")) presenceData.details = "Contact Us";
+  else if (pathname === "/terms") presenceData.details = "Terms of Service";
 
   if (!presenceData.details) {
     presence.setTrayTitle();
