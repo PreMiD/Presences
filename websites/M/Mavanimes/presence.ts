@@ -1,6 +1,6 @@
 const mavanimes = new Presence({
     clientId: "814986239681626143"
-  }),
+  }),;
 
 function getTimestamps(
   videoTime: number,
