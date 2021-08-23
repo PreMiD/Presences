@@ -11,14 +11,14 @@ presence.on("UpdateData", async () => {
    url = new URL(window.location.href),
    params = new URLSearchParams(url.search);
   
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
 	if (params.has("s") === true) {
-      data.details = "Cherche un animé..";
-	  data.state = params.get("s");
-      data.startTimestamp = browsingStamp;
+    data.details = "Cherche un animé..";
+    data.state = params.get("s");
+    data.startTimestamp = browsingStamp;
    } else{
-	  data.details = "Page d'accueil";
-	  data.startTimestamp = browsingStamp;
+     data.details = "Page d'accueil";
+     data.startTimestamp = browsingStamp;
 	}
   } else if (document.location.pathname.endsWith("/tous-les-animes-en-vf/")) {
     data.details = "Cherche un animé en VF..";
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
   }
 
 
-  if (data.details == null) {
+  if (data.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
