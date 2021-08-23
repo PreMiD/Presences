@@ -64,8 +64,8 @@ mavanimes.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 	if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {     
-      [ data.startTimestamp ] = timestamps;
-      [ data.endTimestamp ] = timestamps;
+      data.startTimestamp = timestamps[0];
+      data.endTimestamp = timestamps[1];
     }
     if (video.paused) {
       delete data.startTimestamp;
