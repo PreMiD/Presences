@@ -2,7 +2,6 @@ const iframe = new iFrame();
 
 setInterval(function () {
   const video = document.getElementsByClassName("jw-video")[0] as HTMLVideoElement;
-
   if (
     video &&
     video.currentTime &&
