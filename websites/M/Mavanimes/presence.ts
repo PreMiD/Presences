@@ -75,9 +75,8 @@ mavanimes.on("UpdateData", async () => {
     } else {
       data.smallImageText = "";
       data.smallImageKey = "play";
-	  }
+    }
   }
-
   if (!data.details) {
     mavanimes.setTrayTitle();
     mavanimes.setActivity();
