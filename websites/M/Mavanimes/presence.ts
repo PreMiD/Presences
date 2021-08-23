@@ -5,7 +5,7 @@ const presence = new Presence({
   
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-	largeImageKey: "logo"
+    largeImageKey: "logo"
 },
    docTitle = document.title,
    url = new URL(window.location.href),
