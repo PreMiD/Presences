@@ -2,12 +2,7 @@ const iframe = new iFrame();
 
 setInterval(function () {
   const video = document.getElementsByClassName("jw-video")[0] as HTMLVideoElement;
-  if (
-    video &&
-    video.currentTime &&
-    video.duration &&
-    video.paused !== undefined
-  ) {
+  if (video && video.currentTime && video.duration && video.paused !== undefined) {
     iframe.send({
       error: false,
       currentTime: video.currentTime,
