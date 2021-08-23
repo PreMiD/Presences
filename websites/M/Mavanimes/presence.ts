@@ -1,6 +1,6 @@
 const mavanimes = new Presence({
     clientId: "814986239681626143"
-  }),;
+  }),
 
 function getTimestamps(
   videoTime: number,
@@ -59,14 +59,14 @@ mavanimes.on("UpdateData", async () => {
    else {
     data.details = "Regarde un animé :";
     data.state = animeName;
-	const timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
-	if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
+    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
       data.startTimestamp = timestamps[0];
       data.endTimestamp = timestamps[1];
-    }
+     }
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
