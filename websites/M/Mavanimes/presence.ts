@@ -1,7 +1,6 @@
 const mavanimes = new Presence({
     clientId: "814986239681626143"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
 
 function getTimestamps(
   videoTime: number,
@@ -69,14 +68,14 @@ mavanimes.on("UpdateData", async () => {
       data.endTimestamp = timestamps[1];
     }
     if (video.paused) {
-	  delete data.startTimestamp;
+      delete data.startTimestamp;
       delete data.endTimestamp;
-	  data.smallImageText = "En pause";
-	  data.smallImageKey = "pause";
+      data.smallImageText = "En pause";
+      data.smallImageKey = "pause";
     } else {
-	  data.smallImageText = "";
-	  data.smallImageKey = "play";
-	}
+      data.smallImageText = "";
+      data.smallImageKey = "play";
+    }
   }
 
   if (!data.details) {
