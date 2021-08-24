@@ -41,13 +41,13 @@ presence.on("UpdateData", async () => {
   const [subMatch] = document.location.href.match(new RegExp("#.*"));
   if (subMatch !== null && !(subMatch.includes("(") || subMatch.includes(")"))) {
     const subObj = iframeObj.querySelector(subMatch);
-    if (subObj.tagName.toLowerCase() === "p") {
+    if (subObj.tagName.toLowerCase() === "p") 
       subTxt = `${subObj.textContent.slice(0, 51)}(...)`;
-    } else if (subObj.tagName.toLowerCase() === "div") {
+     else if (subObj.tagName.toLowerCase() === "div") 
       subTxt = subObj.querySelector('[class*="head"]').textContent;
-    } else if (subObj.tagName.toLowerCase() === "tr") {
+     else if (subObj.tagName.toLowerCase() === "tr") 
       subTxt = subObj.children[0].textContent.match(reg)[0].trim();
-    } else subTxt = subObj.textContent;
+     else subTxt = subObj.textContent;
   }
 
   presenceData.state = headingTxt + (subTxt === null ? "" : ` - ${subTxt}`);
