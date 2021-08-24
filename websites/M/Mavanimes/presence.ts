@@ -1,28 +1,25 @@
 const mavanimes = new Presence({
     clientId: "814986239681626143"
-  }),
-
-  video: {
+  });
+const video: {
   dataAvailable?: boolean;
   currentTime?: number;
   duration?: number;
   paused?: boolean;
 } = {};
-
 mavanimes.on("iFrameData", (videoData: {
     error?: boolean;
     currentTime: number;
     duration: number;
     paused: boolean;
   }) => {
-  if (!videoData.error) {
-    video.dataAvailable = true;
-    video.currentTime = videoData.currentTime;
-    video.duration = videoData.duration;
-    video.paused = videoData.paused;
-  }
+    if (!videoData.error) {
+      video.dataAvailable = true;
+      video.currentTime = videoData.currentTime;
+      video.duration = videoData.duration;
+      video.paused = videoData.paused;
+    }
 });
-
 mavanimes.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
@@ -30,27 +27,26 @@ mavanimes.on("UpdateData", async () => {
     animeName = document.getElementsByClassName("entry-title")[0].innerHTML,
     url = new URL(window.location.href),
     params = new URLSearchParams(url.search);
-  
   if (document.location.pathname === "/") {
     if (params.has("s") === true) {
       data.details = "Cherche un animé..";
       data.state = params.get("s");
     } else
       data.details = "Page d'accueil";
-  } else if (document.location.pathname.endsWith("/tous-les-animes-en-vf/")) 
+  } else if (document.location.pathname.endsWith("/tous-les-animes-en-vf/")) {
     data.details = "Cherche un animé en VF..";
-  else if (document.location.pathname.endsWith("/films/")) 
+  } else if (document.location.pathname.endsWith("/films/")) {
     data.details = "Cherche un film..";
-  else if (document.location.pathname.endsWith("/tous-les-animes-en-vostfr-fullhd-2/")) 
+  } else if (document.location.pathname.endsWith("/tous-les-animes-en-vostfr-fullhd-2/")) {
     data.details = "Cherche un animé..";
-  else if (document.location.pathname.endsWith("/regarder-animes-oav-streaming/")) 
+  } else if (document.location.pathname.endsWith("/regarder-animes-oav-streaming/")) {
     data.details = "Cherche un OAV..";
-  else if (document.location.pathname.endsWith("/calendrier-de-sorties-des-nouveaux-episodes/")) 
+  } else if (document.location.pathname.endsWith("/calendrier-de-sorties-des-nouveaux-episodes/")) {
     data.details = "Regarde le calendrier de sortie";
-  else {
+  } else {
     data.details = "Regarde un animé :";
     data.state = animeName;
-    const timestamps = mavanimes.getTimestamps(
+	const timestamps = mavanimes.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -63,12 +59,7 @@ mavanimes.on("UpdateData", async () => {
     } else {
       data.smallImageText = "";
       data.smallImageKey = "play";
-	}
+    }
   }
-
-  if (!data.details) {
-    mavanimes.setTrayTitle();
-    mavanimes.setActivity();
-  } else 
-    mavanimes.setActivity(data);
+  mavanimes.setActivity(data);
 });
