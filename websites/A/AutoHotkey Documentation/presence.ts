@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
             } else if (subObj.tagName.toLowerCase() === "tr") {
                 // Get the <tr>'s first child node's textContent (which is <td>), then clean it up and trim
                 subTxt = subObj.children[0].textContent.match(reg)[0].trim();
-            } else { subTxt = subObj.textContent; }
+            } else subTxt = subObj.textContent; 
         }
     } catch { }
 
