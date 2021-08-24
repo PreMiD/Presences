@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "720731927216259083"
+    clientId: "879535934977245244"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
