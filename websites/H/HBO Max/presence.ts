@@ -14,7 +14,7 @@ const presence = new Presence({
     "just-added": "Just Added",
     "last-chance": "Last Chance",
     "coming-soon": "Coming Soon",
-    "trending-now": "Trending Now",
+    trending: "Trending Now",
     action: "Action",
     animation: "Animation",
     comedy: "Comedy",
