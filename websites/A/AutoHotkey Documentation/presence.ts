@@ -5,7 +5,6 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "biglogo",
-        // smallImageKey: "shitlogo",
         smallImageText: "AHK v2 Documentation",
         startTimestamp: Math.floor(Date.now() / 1000)
     };
@@ -15,14 +14,9 @@ presence.on("UpdateData", async () => {
     switch (document.location.pathname) {
         case "/":
             presenceData.details = "Selecting AHK / docs version...";
-            presence.setActivity(presenceData);
-            return;
-            break;
+            return presence.setActivity(presenceData);
         case "/v2/docs/AutoHotkey.htm":
-            presenceData.details = "Viewing 'Quick Reference'";
-            presence.setActivity(presenceData);
-            return;
-            break; // I know this is unreachable but I don't care, all cases end with break in my code
+            return presence.setActivity(presenceData);
         default:
             presenceData.details = "Viewing a Doc page";
             break;
@@ -34,7 +28,7 @@ presence.on("UpdateData", async () => {
     /* Get the iframe the actual content is in.
       This is such basic text retrieval that using the iframe data retrieval method from the documentation would be overkill... */
      iframeObj = document.querySelector('iframe').contentDocument;
-    if (iframeObj == null) {
+    if (!iframeObj) {
         const pd: PresenceData = {};
         presence.setActivity(pd);
         return;
@@ -59,7 +53,7 @@ presence.on("UpdateData", async () => {
         However, the way I initially wrote this already provides a veeeery fragile safety net against any potential problems, because a null value in subMatch just leads to the entirety of the subTxt routine being skipped. The problem is, subMatch is not null in the above example, meaning the SyntaxError is thrown during the part where it is assumed that subMatch is 100% valid.
         Solution is easy enough, however, just add some checks whether subMatch contains parentheses and we're set. That is, assuming no other "invalid" selectors are anywhere in the AHK v2 Docs.
         I'll leave *those* to be sorted by that safety net though, it'll just not display a subpart / heading and that's it. */
-        var subMatch = document.location.href.match(new RegExp("#.*"))[0];
+        const [subMatch] = document.location.href.match(new RegExp("#.*"));
     } catch { }
     let subTxt;
     if (subMatch != null && !(subMatch.includes("(") || subMatch.includes(")"))) {
