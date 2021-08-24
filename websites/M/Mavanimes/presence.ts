@@ -57,7 +57,7 @@ mavanimes.on("UpdateData", async () => {
       data.smallImageText = "En pause";
       data.smallImageKey = "pause";
     } else {
-      data.smallImageText = "";
+      data.smallImageText = "Lecture..";
       data.smallImageKey = "play";
     }
   }
