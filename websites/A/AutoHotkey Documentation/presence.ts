@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
-        largeImageKey: "ahk_long",
+        largeImageKey: "biglogo",
         smallImageKey: "shitlogo",
         smallImageText: "AHK v2 Documentation",
         startTimestamp: Math.floor(Date.now() / 1000)
@@ -12,16 +12,15 @@ presence.on("UpdateData", async () => {
 
     /* I KNOW it's recommended in the documentation to use another function to do the "heavy lifting", but this is literally just string manipulation and I didn't experience performance issues of any kind during testing. */
 
-    switch (document.location.pathname)
-    {
+    switch (document.location.pathname) {
         case "/":
             presenceData.details = "Selecting AHK / docs version...";
-            push(presenceData);
+            presence.setActivity(presenceData);
             return;
             break;
         case "/v2/docs/AutoHotkey.htm":
             presenceData.details = "Viewing 'Quick Reference'";
-            push(presenceData);
+            presence.setActivity(presenceData);
             return;
             break; // I know this is unreachable but I don't care, all cases end with break in my code
         default:
@@ -35,10 +34,9 @@ presence.on("UpdateData", async () => {
     /* Get the iframe the actual content is in.
       This is such basic text retrieval that using the iframe data retrieval method from the documentation would be overkill... */
     const iframeObj = document.querySelector('iframe').contentDocument;
-    if (iframeObj == null)
-    {
-        const pd: PresenceData = { };
-        push(pd);
+    if (iframeObj == null) {
+        const pd: PresenceData = {};
+        presence.setActivity(pd);
         return;
     }
 
@@ -46,12 +44,11 @@ presence.on("UpdateData", async () => {
         Some headings, such as the one at "Hotkeys.htm", have extra info, like "(Mouse, Joystick and Keyboard Shortcuts)". My initial clean-up method for this was just removing everything from the first comma to the end of the textContent, however, this results in shit like "Hotkeys (Mouse", which is obviously unwanted. Basically, everything BEFORE and unwanted character (such as a comma or an opening parenthesis) is to be kept (which might include leading/trailing whitespace, so trim() that), end of the story. */
     const headingObj = iframeObj.querySelector('h1');
     var headingTxt;
-    if (headingObj != null)
-    {
+    if (headingObj != null) {
         headingTxt = headingObj.textContent.match(reg)[0].trim();
     } else {
-        const pd: PresenceData = { };
-        push(pd);
+        const pd: PresenceData = {};
+        presence.setActivity(pd);
         return;
     }
 
@@ -65,8 +62,7 @@ presence.on("UpdateData", async () => {
         var subMatch = document.location.href.match(new RegExp("#.*"))[0];
     } catch { }
     var subTxt;
-    if (subMatch != null && !(subMatch.includes("(") || subMatch.includes(")")))
-    {
+    if (subMatch != null && !(subMatch.includes("(") || subMatch.includes(")"))) {
         const subObj = iframeObj.querySelector(subMatch);
         if (subObj.tagName.toLowerCase() == "p") {
             // Retrieve part of the textContent of the <p> element, truncate at 50 chars and ellipsize
@@ -87,9 +83,5 @@ presence.on("UpdateData", async () => {
         presenceData.state = headingTxt + (subTxt == null ? "" : " - " + subTxt);
     }
 
-    push(presenceData);
-});
-
-function push(presenceData: PresenceData) {
     presence.setActivity(presenceData);
-}
+});
