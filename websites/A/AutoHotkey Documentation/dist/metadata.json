@@ -11,8 +11,8 @@
       "id": "345453949391994884"
     },
     "category": "other",
-    "logo": "https://www.autohotkey.com/static/ahk76.png",
-    "thumbnail": "https://www.autohotkey.com/assets/images/ahk_wallpaper_reduced.jpg",
+    "logo": "https://i.imgur.com/uMNU9p9.png",
+    "thumbnail": "https://i.imgur.com/ovF2ogy.jpg",
     "version": "1.0.0",
     "color": "#09aa0b",
     "tags": [
@@ -24,6 +24,7 @@
     ],
     "url": "lexikos.github.io",
     "description": {
-      "en": "English"
+      "en": "AutoHotkey is a free and open-source custom scripting language, initially aimed at providing easy keyboard shortcuts or hotkeys, fast macro-creation and software automation.",
+      "de": "AutoHotkey ist eine kostenlose und quelloffene, benutzerdefinierte Skriptsprache, die ursprünglich dazu diente, einfache Tastenkombinationen oder Hotkeys, schnelle Makro-Erstellung und Software-Automatisierung zu ermöglichen."
     }
   }
