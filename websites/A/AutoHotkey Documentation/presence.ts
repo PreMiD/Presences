@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "biglogo",
-        smallImageKey: "shitlogo",
+        // smallImageKey: "shitlogo",
         smallImageText: "AHK v2 Documentation",
         startTimestamp: Math.floor(Date.now() / 1000)
     };
