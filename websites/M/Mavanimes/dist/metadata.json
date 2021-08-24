@@ -6,14 +6,14 @@
     "id": "256458960666624003"
   },
   "category": "anime",
-  "logo": "https://i.imgur.com/PgicAOE.png",
-  "thumbnail": "https://i.imgur.com/XQddkkZ.png",
-  "version": "0.9.0",
+  "logo": "https://i.imgur.com/xqLsTty.png",
+  "thumbnail": "https://i.imgur.com/oeUAnJ2.png",
+  "version": "1.0.0",
   "color": "#0f61b8",
   "url": "www.mavanimes.co",
   "iframe": true,
   "description": {
-    "fr": "Extension Mavanime pour PreMiD",
-    "en": "Mavanimes for PreMiD"
+    "fr": "Mavanimes est un site de streaming qui dispose d'animés en VF et VOSTFR.",
+    "en": "Mavanimes is a streaming website where you can watch VF and VOSTFR anime."
   }
 }
