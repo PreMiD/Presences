@@ -29,11 +29,11 @@ presence.on("UpdateData", async () => {
     }
 
     /* Define the "unwanted character" regex here, cause we need that more than once XD */
-    const reg = '([^,(\\n\'"]*)';
+    const reg = '([^,(\\n\'"]*)',
 
     /* Get the iframe the actual content is in.
       This is such basic text retrieval that using the iframe data retrieval method from the documentation would be overkill... */
-    const iframeObj = document.querySelector('iframe').contentDocument;
+     iframeObj = document.querySelector('iframe').contentDocument;
     if (iframeObj == null) {
         const pd: PresenceData = {};
         presence.setActivity(pd);
@@ -43,10 +43,10 @@ presence.on("UpdateData", async () => {
     /* h1 heading at the top of the page + textContent handling
         Some headings, such as the one at "Hotkeys.htm", have extra info, like "(Mouse, Joystick and Keyboard Shortcuts)". My initial clean-up method for this was just removing everything from the first comma to the end of the textContent, however, this results in shit like "Hotkeys (Mouse", which is obviously unwanted. Basically, everything BEFORE and unwanted character (such as a comma or an opening parenthesis) is to be kept (which might include leading/trailing whitespace, so trim() that), end of the story. */
     const headingObj = iframeObj.querySelector('h1');
-    var headingTxt;
-    if (headingObj != null) {
+    let headingTxt;
+    if (headingObj != null) 
         headingTxt = headingObj.textContent.match(reg)[0].trim();
-    } else {
+     else {
         const pd: PresenceData = {};
         presence.setActivity(pd);
         return;
@@ -61,26 +61,26 @@ presence.on("UpdateData", async () => {
         I'll leave *those* to be sorted by that safety net though, it'll just not display a subpart / heading and that's it. */
         var subMatch = document.location.href.match(new RegExp("#.*"))[0];
     } catch { }
-    var subTxt;
+    let subTxt;
     if (subMatch != null && !(subMatch.includes("(") || subMatch.includes(")"))) {
         const subObj = iframeObj.querySelector(subMatch);
         if (subObj.tagName.toLowerCase() == "p") {
             // Retrieve part of the textContent of the <p> element, truncate at 50 chars and ellipsize
-            subTxt = subObj.textContent.slice(0, 51) + "(...)";
+            subTxt = `${subObj.textContent.slice(0, 51)}(...)`;
         } else if (subObj.tagName.toLowerCase() == "div") {
             // Get a child node of the <div> which's class name contains "head" and retrieve its textContent (this should always be a heading, no clean-up or ellipsis needed)
             subTxt = subObj.querySelector('[class*="head"]').textContent;
         } else if (subObj.tagName.toLowerCase() == "tr") {
             // Get the <tr>'s first child node's textContent (which is <td>), then clean it up and trim
             subTxt = subObj.children[0].textContent.match(reg)[0].trim();
-        } else {
+        } else 
             subTxt = subObj.textContent;
-        }
+        
     }
 
     if (headingObj != null) {
         // Finish piecing the parts of presenceData.state together
-        presenceData.state = headingTxt + (subTxt == null ? "" : " - " + subTxt);
+        presenceData.state = headingTxt + (subTxt == null ? "" : ` - ${subTxt}`);
     }
 
     presence.setActivity(presenceData);
