@@ -5,11 +5,46 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-  });
-
-function pathHandler(string: string): boolean {
-  return document.location.pathname.toLowerCase().includes(string);
-}
+  }),
+  slugs: { [key: string]: string; } = {
+    home: "Home",
+    series: "Series",
+    movies: "Movies",
+    originals: "Originals",
+    "just-added": "Just Added",
+    "last-chance": "Last Chance",
+    "coming-soon": "Coming Soon",
+    "trending-now": "Trending Now",
+    action: "Action",
+    animation: "Animation",
+    comedy: "Comedy",
+    crime: "Crime",
+    documentaries: "Documentaries",
+    drama: "Drama",
+    "fantasy-sci-fi": "Fantasy & Sci-Fi",
+    horror: "Horror",
+    international: "International",
+    kids: "Kids & Family",
+    latino: "Latino",
+    music: "Music",
+    "news-talk": "News/Talk",
+    reality: "Reality",
+    romance: "Romance",
+    shorts: "Shorts",
+    sports: "Sports",
+    suspense: "Suspense",
+    "audio-description": "Audio Description",
+    hbo: "HBO",
+    "max-originals": "Max Originals",
+    dc: "DC",
+    "classics-curated-by-tcm": "Classics Curated by TCM",
+    "adult-swim": "Adult Swim",
+    "studio-ghibli": "Studio Ghibli",
+    "cartoon-network": "Cartoon Network",
+    "sesame-workshop": "Sesame Workshop",
+    "looney-tunes": "Looney Tunes",
+    crunchyroll: "Crunchyroll Collection"
+  };
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -18,7 +53,7 @@ presence.on("UpdateData", async () => {
     video: HTMLVideoElement = document.querySelector("video"),
     path = document.location.pathname;
 
-  let titles, hasEpisode, timestamps;
+  let titles, hasEpisode, timestamps, pageSlug;
 
   switch (true) {
     case path === "/profileSelect":
@@ -59,13 +94,12 @@ presence.on("UpdateData", async () => {
     
     default: {
       Object.assign(data, { details: "Browsing" });
-      switch (true) {
-        case pathHandler(":page:home"):
-          Object.assign(data, { state: "Home" });
-          break;
-      }
+      pageSlug = Object.keys(slugs).find(z => window.location.href.includes(`:page:${z}`));
+
+      if(pageSlug) 
+        Object.assign(data, { state: slugs[pageSlug] });
+      
       break;
-      //tbd: add more specific pages (optional/anyone can do so!)
     }
   }
   presence.setActivity(data);
