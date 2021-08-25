@@ -2,7 +2,6 @@ const mavanimes = new Presence({
     clientId: "814986239681626143"
   }),
  video: {
-  dataAvailable?: boolean;
   currentTime?: number;
   duration?: number;
   paused?: boolean;
@@ -14,7 +13,6 @@ mavanimes.on("iFrameData", (videoData: {
     paused: boolean;
   }) => {
   if (!videoData.error) {
-    video.dataAvailable = true;
     video.currentTime = videoData.currentTime;
     video.duration = videoData.duration;
     video.paused = videoData.paused;
@@ -24,7 +22,7 @@ mavanimes.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
   },
-    animeName = document.getElementsByClassName("entry-title")[0].innerHTML,
+    animeName = document.getElementsByClassName("entry-title")[0].textContent,
     url = new URL(window.location.href),
     params = new URLSearchParams(url.search);
   if (document.location.pathname === "/") {
