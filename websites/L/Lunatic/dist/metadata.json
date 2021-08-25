@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "MeDrioX",
+    "id": "242255451247476736"
+  },
+  "service": "Lunatic",
+  "description": {
+    "en": "Display your lunatic-bot site navigation on discord"
+  },
+  "url": "www.lunatic-bot.app",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/4OjKrrj.png",
+  "thumbnail": "https://i.imgur.com/4OjKrrj.png",
+  "color": "#1D2951",
+  "tags": [
+    "discord",
+    "bot",
+    "lunatic"
+  ],
+  "category": "Other",
+  "regExp": "([a-z0-9-]+[.])*lunatic-bot[.]app[/]"
+}
