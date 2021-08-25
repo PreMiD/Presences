@@ -463,12 +463,16 @@ async function handleVideoPlayback(): Promise<void> {
   let mediaInfo: string | MediaInfo;
 
   // no background image, we're playing live tv
-  if (videoPlayerElem.hasAttribute("poster")) {
+  if (videoPlayerElem?.hasAttribute("poster")) {
     const backgroundImageUrl = videoPlayerElem.getAttribute("poster");
 
     mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[4]);
-  }
+  } else if (videoPlayerElem?.src?.match(/(mediaSourceId=)([a-z0-9]{32})/)){
+    const itemId = videoPlayerElem.src.match(/(mediaSourceId=)([a-z0-9]{32})/)[2];
 
+    mediaInfo = await obtainMediaInfo(itemId);
+  }
+  
   // display generic info
   if (!mediaInfo) {
     title = "Watching unknown content";
