@@ -384,13 +384,11 @@ function getUserId(): string {
           for (const server of servers) {
             if (server.Id === serverId) 
               return server.UserId;
-            
           }
         }
       }
     } else 
       return servers[0].UserId;
-    
   }
 }
 
@@ -408,7 +406,6 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   const pending = "pending";
   if (media[itemId] && media[itemId] !== pending) 
     return media[itemId];
-  
 
   media[itemId] = pending;
   const basePath = location.pathname.replace(
@@ -432,7 +429,6 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   if (media[itemId] === pending) 
     media[itemId] = mediaInfo;
   
-
   return media[itemId];
 }
 
@@ -526,7 +522,6 @@ async function handleVideoPlayback(): Promise<void> {
 
   if (!presenceData.state) 
     delete presenceData.state;
-  
 }
 
 /**
@@ -778,9 +773,7 @@ async function updateData(): Promise<void> {
     if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else 
-      presence.setActivity(presenceData);
-    
+    } else presence.setActivity(presenceData);
   }
 }
 
