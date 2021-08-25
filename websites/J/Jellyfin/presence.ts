@@ -468,7 +468,7 @@ async function handleVideoPlayback(): Promise<void> {
 
     mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[4]);
   } else if (videoPlayerElem?.src?.match(/(mediaSourceId=)([a-z0-9]{32})/)) {
-    const itemId = videoPlayerElem.src.match(/(mediaSourceId=)([a-z0-9]{32})/)[2];
+    const [itemId] = videoPlayerElem.src.match(/(mediaSourceId=)([a-z0-9]{32})/).slice(2);
 
     mediaInfo = await obtainMediaInfo(itemId);
   }
