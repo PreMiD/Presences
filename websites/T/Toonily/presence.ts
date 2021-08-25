@@ -22,9 +22,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
     { hostname, pathname, href, hash, search } = location,
     buttons: boolean = await presence.getSetting("buttons"),
     searchBarVisible = !!document.querySelector("ul.search-main-menu.active");
@@ -51,8 +51,8 @@ presence.on("UpdateData", async () => {
     pathname.startsWith("/webtoon-tag")
   ) {
     const order = document.querySelector<HTMLLIElement>(
-      "div.c-nav-tabs > ul > li.active"
-    ),
+        "div.c-nav-tabs > ul > li.active"
+      ),
       category = document.querySelector<HTMLHeadingElement>("h1.item-title.h4");
     presenceData.details = `Looking for ${
       (pathname.startsWith("/manga-genre") ||
@@ -69,8 +69,8 @@ presence.on("UpdateData", async () => {
     pathname.startsWith("/webtoon/")
   ) {
     const title = document.querySelector<HTMLHeadingElement>(
-      "div.post-title > h1"
-    ),
+        "div.post-title > h1"
+      ),
       chapterHeading =
         document.querySelector<HTMLHeadingElement>("h1#chapter-heading");
     if (chapterHeading) {
