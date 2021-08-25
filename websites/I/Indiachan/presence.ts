@@ -56,10 +56,10 @@ presence.on("UpdateData", async () => {
   )
     presenceData.smallImageText = "Writing a post";
   else if (p.includes("res")) {
-presenceData.smallImageText = `Reading thread #${
+    presenceData.smallImageText = `Reading thread #${
       p.split("/")[3].split(".")[0]
     }`;
-} else if (p.endsWith("Rules.html") || p.endsWith("rules.html")) {
+  } else if (p.endsWith("Rules.html") || p.endsWith("rules.html")) {
     presenceData.smallImageText = "Reading rules";
     presenceData.smallImageKey = "logo";
   } else if (p.includes("media"))

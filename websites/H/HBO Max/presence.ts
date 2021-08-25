@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   }),
-  slugs: { [key: string]: string; } = {
+  slugs: { [key: string]: string } = {
     home: "Home",
     series: "Series",
     movies: "Movies",
@@ -48,8 +48,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "lg"
-  },
+      largeImageKey: "lg"
+    },
     video: HTMLVideoElement = document.querySelector("video"),
     path = document.location.pathname;
 
@@ -69,10 +69,12 @@ presence.on("UpdateData", async () => {
       });
       break;
     case !!video:
-      titles = Array.from(document.querySelectorAll("[role=heading]:first-child span span"))
-        .map(z => z.textContent)
-        .filter(z => z.length > 1 && !/\d \/ \d+/.test(z)), // Test for "d / d" ex.: 01:45 / 01:30:00
-      hasEpisode = titles.length > 1;
+      (titles = Array.from(
+        document.querySelectorAll("[role=heading]:first-child span span")
+      )
+        .map((z) => z.textContent)
+        .filter((z) => z.length > 1 && !/\d \/ \d+/.test(z))), // Test for "d / d" ex.: 01:45 / 01:30:00
+        (hasEpisode = titles.length > 1);
 
       timestamps = presence.getTimestampsfromMedia(video);
 
@@ -84,21 +86,22 @@ presence.on("UpdateData", async () => {
           ? (await strings).pause
           : (await strings).play
       });
-      if(!video.paused) {
+      if (!video.paused) {
         Object.assign(data, {
           startTimestamp: timestamps[0],
           endTimestamp: timestamps[1]
         });
       }
       break;
-    
+
     default: {
       Object.assign(data, { details: "Browsing" });
-      pageSlug = Object.keys(slugs).find(z => window.location.href.includes(`:page:${z}`));
+      pageSlug = Object.keys(slugs).find((z) =>
+        window.location.href.includes(`:page:${z}`)
+      );
 
-      if(pageSlug) 
-        Object.assign(data, { state: slugs[pageSlug] });
-      
+      if (pageSlug) Object.assign(data, { state: slugs[pageSlug] });
+
       break;
     }
   }

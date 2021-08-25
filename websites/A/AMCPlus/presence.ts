@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     endTimestamp: number;
 
   const video: HTMLVideoElement = document.querySelector("video"),
-    {href} = window.location;
+    { href } = window.location;
 
   if (href !== oldUrl) {
     oldUrl = href;
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 
   startTimestamp = elapsed;
 
-  if(video) {
+  if (video) {
     const slot1 = document.querySelector(".slot1"),
       slot2 = document.querySelector(".slot2"),
       slot3 = document.querySelector(".slot3"),
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 
     details = slot1.textContent;
 
-    if(isSeries) {
+    if (isSeries) {
       // A series has slot1 (the series name), slot2 (the episode)
       // and slot3 (the episode name)
       details += `: ${slot2.textContent}`;
@@ -54,8 +54,10 @@ presence.on("UpdateData", async () => {
       live = timestamps[1] === Infinity;
 
     smallImageText = live
-      ? (await strings).live : video.paused
-        ? (await strings).pause : (await strings).play;
+      ? (await strings).live
+      : video.paused
+      ? (await strings).pause
+      : (await strings).play;
 
     smallImageKey = live ? "live" : video.paused ? "pause" : "play";
 
@@ -73,21 +75,16 @@ presence.on("UpdateData", async () => {
     details
   };
 
-  if (state !== undefined) 
-    data.state = state;
-  
-  if (smallImageKey !== undefined) 
-    data.smallImageKey = smallImageKey;
-  
-  if (smallImageText !== undefined) 
-    data.smallImageText = smallImageText;
-  
-  if (startTimestamp !== undefined) 
-    data.startTimestamp = startTimestamp;
-  
-  if (endTimestamp !== undefined) 
-    data.endTimestamp = endTimestamp;
-  
+  if (state !== undefined) data.state = state;
+
+  if (smallImageKey !== undefined) data.smallImageKey = smallImageKey;
+
+  if (smallImageText !== undefined) data.smallImageText = smallImageText;
+
+  if (startTimestamp !== undefined) data.startTimestamp = startTimestamp;
+
+  if (endTimestamp !== undefined) data.endTimestamp = endTimestamp;
+
   presence.setActivity(data);
   presence.setTrayTitle(details);
 });
