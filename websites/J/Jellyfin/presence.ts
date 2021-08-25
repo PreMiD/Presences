@@ -775,7 +775,7 @@ async function updateData(): Promise<void> {
 
   // if jellyfin is detected init/update the presence status
   if (showPresence) {
-    if (presenceData.details == null) {
+    if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
     } else 
