@@ -11,7 +11,7 @@ mavanimes.on("iFrameData", (videoData: {
     duration: number;
     paused: boolean;
   }) => {
-  if (!!videoData.duration) {
+  if (videoData.duration) {
     video.currentTime = videoData.currentTime;
     video.duration = videoData.duration;
     video.paused = videoData.paused;
