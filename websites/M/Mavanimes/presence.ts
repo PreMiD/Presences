@@ -7,12 +7,11 @@ const mavanimes = new Presence({
   paused?: boolean;
 } = {};
 mavanimes.on("iFrameData", (videoData: {
-    error?: boolean;
     currentTime: number;
     duration: number;
     paused: boolean;
   }) => {
-  if (!videoData.error) {
+  if (!!videoData.duration) {
     video.currentTime = videoData.currentTime;
     video.duration = videoData.duration;
     video.paused = videoData.paused;
