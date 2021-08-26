@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey:
       "dramagg",
     smallImageKey:
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = "Writing a thread";
       presenceData.details = "Starting some drama!";
-      presenceData.state = "Writing a post"
+      presenceData.state = "Writing a post";
       break;
     default:
       presenceData.smallImageKey = "search";
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
+    } else 
       presence.setActivity(presenceData);
-    }
+    
 });
