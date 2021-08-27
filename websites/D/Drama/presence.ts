@@ -21,7 +21,7 @@ presence.on("UpdateData", () => {
       presenceData.state = `${document.querySelector("span.Scrubber-index").textContent} / ${document.querySelector("span.Scrubber-count").textContent} Posts`;
       presenceData.buttons = [
         {
-          label: "Go To Post",
+          label: "View Post",
           url: `${document.URL}`
         }
       ];
