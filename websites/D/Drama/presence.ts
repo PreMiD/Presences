@@ -5,13 +5,11 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
-    largeImageKey:
-      "dramagg",
-    smallImageKey:
-      "search",
+    largeImageKey: "dramagg",
+    smallImageKey: "search",
     smallImageText: "Looking for a thread",
     details: "Looking for drama!",
-    state: 'Browsing',
+    state: "Browsing"
   };
 
   switch (true) {
