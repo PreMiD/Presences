@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "852245069984825394"
 });
 
-presence.on("UpdateData", async () => {
+presence.on("UpdateData", () => {
 
   const presenceData: PresenceData = {
     largeImageKey: "dramagg",
