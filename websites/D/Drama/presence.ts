@@ -68,7 +68,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Looking for drama!";
       presenceData.state = "Looking at trinkets";
       break;
-    case document.querySelector('div.Composer.visible') != null:
+    case document.querySelector('div.Composer.visible') !== null:
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = "Writing a thread";
       presenceData.details = "Starting some drama!";
