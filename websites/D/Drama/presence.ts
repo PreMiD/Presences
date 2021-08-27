@@ -3,7 +3,6 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-
   const presenceData: PresenceData = {
     largeImageKey: "dramagg",
     smallImageKey: "search",
