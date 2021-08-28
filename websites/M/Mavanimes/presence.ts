@@ -1,7 +1,7 @@
 const mavanimes = new Presence({
     clientId: "814986239681626143"
   });
- var video: {
+ let video: {
   currentTime?: number;
   duration?: number;
   paused?: boolean;
