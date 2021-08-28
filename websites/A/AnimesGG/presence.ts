@@ -33,8 +33,7 @@ presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     params = new URLSearchParams(document.location.search.substring(1));
 
-  if (page in pages) 
-    data = Object.assign(data, pages[page]);
+  if (page in pages) data = Object.assign(data, pages[page]);
   else if (page === "/") {
     data.details = "Na página inicial";
     data.state = "Procurando animes...";
@@ -54,10 +53,9 @@ presence.on("UpdateData", async () => {
       data.state = `Procurando por ${params.get("search")}`;
   } else if (page.includes("/anime/")) {
     const isEpisode = page.includes("/episodio");
-    if(isEpisode) {
-      const animeTitleWatching = document.querySelector(
-          "#anime_title"
-        ).innerHTML,
+    if (isEpisode) {
+      const animeTitleWatching =
+          document.querySelector("#anime_title").innerHTML,
         video = document.querySelector(
           "#video > div > div > video"
         ) as HTMLMediaElement,
@@ -78,9 +76,8 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else {
-      const animeTitleAbout = document.querySelector(
-          ".ani_titulo > h1"
-        ).innerHTML,
+      const animeTitleAbout =
+          document.querySelector(".ani_titulo > h1").innerHTML,
         animeTitleFull = document.querySelector(
           ".ani_titulo_original"
         ).innerHTML,
@@ -88,8 +85,7 @@ presence.on("UpdateData", async () => {
       data.details = "Vendo sobre um anime";
       if (showFullName && animeTitleFull) 
         data.state = `Vendo sobre ${animeTitleFull}`;
-      else 
-        data.state = `Vendo sobre ${animeTitleAbout}`;
+      else data.state = `Vendo sobre ${animeTitleAbout}`;
     }
   } else if (page.startsWith("/usuario")) {
     const username = document.querySelector(
@@ -98,12 +94,9 @@ presence.on("UpdateData", async () => {
     data.details = "Vendo a página de um usuário";
     data.state = `Vendo a página do ${username}`;
   } else if (page.startsWith("/filme")) {
-    const animeTitleAbout = document.querySelector(
-        ".ani_titulo > h1"
-      ).innerHTML,
-      animeTitleFull = document.querySelector(
-        ".ani_titulo_original"
-      ).innerHTML,
+    const animeTitleAbout =
+        document.querySelector(".ani_titulo > h1").innerHTML,
+      animeTitleFull = document.querySelector(".ani_titulo_original").innerHTML,
       showFullName = await presence.getSetting("fullName"),
       video = document.querySelector(
         "#video > div > div > video"
@@ -135,8 +128,6 @@ presence.on("UpdateData", async () => {
     data.state = "Vendo...";
   }
 
-  if (data.details && data.state)
-    presence.setActivity(data);
-  else
-    presence.setActivity();
+  if (data.details && data.state) presence.setActivity(data);
+  else presence.setActivity();
 });
