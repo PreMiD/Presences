@@ -1,7 +1,7 @@
 const mavanimes = new Presence({
     clientId: "814986239681626143"
-  }),
- video: {
+  });
+ var video: {
   currentTime?: number;
   duration?: number;
   paused?: boolean;
@@ -11,11 +11,7 @@ mavanimes.on("iFrameData", (videoData: {
     duration: number;
     paused: boolean;
   }) => {
-  if (videoData.duration) {
-    video.currentTime = videoData.currentTime;
-    video.duration = videoData.duration;
-    video.paused = videoData.paused;
-  }
+  if (videoData.duration) video = videoData;
 });
 mavanimes.on("UpdateData", async () => {
   const data: PresenceData = {
