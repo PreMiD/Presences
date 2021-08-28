@@ -381,9 +381,9 @@ function getUserId(): string {
         if (param.startsWith("serverId")) {
           const serverId = param.split("=")[1];
 
-          for (const server of servers) {
+          for (const server of servers) 
             if (server.Id === serverId) return server.UserId;
-          }
+          
         }
       }
     } else return servers[0].UserId;
@@ -720,9 +720,9 @@ async function setDefaultsToPresence(): Promise<void> {
 async function isJellyfinWebClient(): Promise<boolean> {
   if (!ApiClient) ApiClient = await presence.getPageletiable("ApiClient");
 
-  if (ApiClient && typeof ApiClient === "object") {
+  if (ApiClient && typeof ApiClient === "object") 
     if (ApiClient._appName && ApiClient._appName === APP_NAME) return true;
-  }
+  
 
   return false;
 }
