@@ -16,8 +16,12 @@ presence.on("UpdateData", () => {
       presenceData.largeImageKey = "dramagg";
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = "Reading a thread";
-      presenceData.details = `Viewing Thread: ${document.querySelector("h2.DiscussionHero-title").textContent}`;
-      presenceData.state = `${document.querySelector("span.Scrubber-index").textContent} / ${document.querySelector("span.Scrubber-count").textContent} Posts`;
+      presenceData.details = `Viewing Thread: ${
+        document.querySelector("h2.DiscussionHero-title").textContent
+      }`;
+      presenceData.state = `${
+        document.querySelector("span.Scrubber-index").textContent
+      } / ${document.querySelector("span.Scrubber-count").textContent} Posts`;
       presenceData.buttons = [
         {
           label: "View Post",
@@ -29,7 +33,9 @@ presence.on("UpdateData", () => {
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = "Viewing a profile";
       presenceData.details = `Viewing Profile: ${document.URL.split("/")[4]}`;
-      presenceData.state = `Posts: ${document.querySelector("span.Button-badge").textContent} `;
+      presenceData.state = `Posts: ${
+        document.querySelector("span.Button-badge").textContent
+      } `;
       break;
     case document.location.pathname.includes("/meta"):
       presenceData.smallImageKey = "search";
@@ -67,7 +73,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Looking for drama!";
       presenceData.state = "Looking at trinkets";
       break;
-    case document.querySelector('div.Composer.visible') !== null:
+    case document.querySelector("div.Composer.visible") !== null:
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = "Writing a thread";
       presenceData.details = "Starting some drama!";
@@ -79,10 +85,10 @@ presence.on("UpdateData", () => {
       presenceData.details = "Looking for drama!";
       presenceData.state = "Browsing";
       break;
-    }
+  }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+  if (!presenceData.details) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
 });
