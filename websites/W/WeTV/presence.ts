@@ -1,9 +1,9 @@
 class WeTV extends Presence {  
-  constructor(options: PresenceOptions){
+  constructor(options: PresenceOptions) {
     super(options);
   }
 
-  getTitle(){
+  getTitle() {
     const JSONData: {
       "@graph": {
         name: string
@@ -13,26 +13,26 @@ class WeTV extends Presence {
     return JSONData["@graph"][0].name;
   }
 
-  getMovieTitle(){
+  getMovieTitle() {
     return document.querySelector(".play-relevant__link").getAttribute("title");
   }
 
-  getEpisodeTitle(){
+  getEpisodeTitle() {
     const Element = document.querySelector(".play-relevant__item.play-relevant__item--selected");
 
     if (Element)
       return Element.children[2].textContent;
   }
 
-  getEpisodeNumber(){
+  getEpisodeNumber() {
     return document.querySelector(".play-video__item.play-video__item--selected")?.textContent.match(/[1-9][0-9]?[0-9]?/)[0];
   }
 
-  isMovie(){
+  isMovie() {
     return this.getTitle() === this.getMovieTitle();
   }
 
-  isClip(){
+  isClip() {
     return this.getTitle() !== this.getEpisodeTitle();
   }
 }
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
     details: "Browsing...",
     largeImageKey: "wetv",
     smallImageKey: "browse"
-  }
+  };
 
   if (document.location.pathname.includes("/play/")) {
     const video = document.querySelector("video");
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Movie";
 
         if (presence.isClip())
-          presenceData.state = "Clip"
+          presenceData.state = "Clip";
       } else {
         if (presence.getEpisodeNumber()) 
           presenceData.state = `Episode ${presence.getEpisodeNumber()}`;
