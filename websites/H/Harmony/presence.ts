@@ -57,11 +57,5 @@ presence.on("UpdateData", async () => {
       presenceData.state = `💿 ➜ ${npOnAir}`;
     }
   }
-
-  if(presenceData.details === null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else 
     presence.setActivity(presenceData);
-  
 });
