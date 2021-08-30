@@ -3,10 +3,10 @@ const presence = new Presence({
   }),
   browseTimestamp = Math.floor(Date.now() / 1000);
 
-let npTitle = "WeAreHarmony.net",
-  npArtist = "We play the biggest hits!",
-  npOnAir = "AutoDJ",
-  npListeners = 0;
+let npTitle: string,
+  npArtist: string,
+  npOnAir: string,
+  npListeners: number;
 
 function fetchStats(): void {
   fetch("https://staff.weareharmony.net/api/nowplaying")
