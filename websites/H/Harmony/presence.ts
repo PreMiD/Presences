@@ -28,10 +28,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: "nobg_white"
   };
 
-  if(
-    document.location.hostname === "weareharmony.net" &&
-    document.location.hash.startsWith("#/")
-  ) {
+  if(document.location.hash.startsWith("#/")) {
     presenceData.startTimestamp = browseTimestamp;
     presenceData.smallImageText = `Listeners: ${npListeners} | Live DJ: ${npOnAir}`;
 
