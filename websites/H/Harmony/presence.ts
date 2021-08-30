@@ -31,7 +31,6 @@ presence.on("UpdateData", async () => {
   if(document.location.hash.startsWith("#/")) {
     presenceData.startTimestamp = browseTimestamp;
     presenceData.smallImageText = `Listeners: ${npListeners} | Live DJ: ${npOnAir}`;
-
     if(document.location.hash === "#/Home") {
       presenceData.details = `🎶 ➜ ${npTitle}`;
       presenceData.state = `🎤 ➜ ${npArtist}`;
