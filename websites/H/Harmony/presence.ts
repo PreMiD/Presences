@@ -57,5 +57,5 @@ presence.on("UpdateData", async () => {
       presenceData.state = `💿 ➜ ${npOnAir}`;
     }
   }
-    presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
