@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Disclaimer";
   else presenceData.details = "Viewing a Special Page";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

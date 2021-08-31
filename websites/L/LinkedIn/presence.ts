@@ -278,7 +278,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching for something.";
   else presenceData.details = "Doing stuffs.";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [{ label: "Play Game", url: window.location.href }];
   } else presenceData.details = "Page Not Found";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

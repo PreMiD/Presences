@@ -212,7 +212,7 @@ presence.on("UpdateData", async () => {
       control === null ||
       control.dataset.testid === "control-button-play"
     ) {
-      if (presenceData.details === null) {
+      if (!presenceData.details) {
         presence.setTrayTitle();
         presence.setActivity();
       } else {

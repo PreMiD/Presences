@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/serverstatus.html"))
     presenceData.details = "Viewing Server Status";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

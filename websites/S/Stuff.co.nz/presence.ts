@@ -292,7 +292,7 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

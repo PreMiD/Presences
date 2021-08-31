@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/upgrade"))
     presenceData.details = "Viewing Dyno Premium Plans";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

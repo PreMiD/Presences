@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = details[document.location.pathname];
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

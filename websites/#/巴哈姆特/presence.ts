@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presenceData.details = "Viewing site:";
     presenceData.state = "巴哈姆特";
     presence.setActivity(presenceData);

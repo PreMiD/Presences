@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/animeList"))
     presenceData.details = "Viewing all animes";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presenceData.details = "Viewing page:";
     presenceData.state = document
       .querySelector("head > title")

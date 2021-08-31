@@ -168,7 +168,7 @@ presence.on("UpdateData", async function () {
     presenceData.details = "Browsing Newsletters";
   else presenceData.details = "Other";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

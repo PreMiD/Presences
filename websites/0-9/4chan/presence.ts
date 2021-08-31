@@ -78,7 +78,7 @@ presence.on("UpdateData", () => {
     presenceData.smallImageKey = "writing";
     presenceData.smallImageText = "Replying/Posting";
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

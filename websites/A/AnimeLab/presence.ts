@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/profile"))
     presenceData.details = "Viewing their profile...";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

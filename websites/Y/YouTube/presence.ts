@@ -312,7 +312,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (presenceData.details === null) {
+    if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
     } else presence.setActivity(presenceData);
@@ -503,7 +503,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (presenceData.details === null) {
+    if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
     } else presence.setActivity(presenceData);
@@ -566,7 +566,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (presenceData.details === null) {
+    if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
     } else presence.setActivity(presenceData);

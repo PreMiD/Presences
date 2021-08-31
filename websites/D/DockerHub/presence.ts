@@ -173,7 +173,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.match(/^\/billing/))
     presenceData.details = "Checking billing info";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

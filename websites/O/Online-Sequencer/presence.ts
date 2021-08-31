@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
     refreshTime();
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

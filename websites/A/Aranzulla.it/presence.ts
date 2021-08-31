@@ -63,7 +63,7 @@ presence.on("UpdateData", () => {
     presenceData.state = guidename.replace(" | Salvatore Aranzulla", "");
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

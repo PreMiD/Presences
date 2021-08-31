@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

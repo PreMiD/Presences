@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
   showBrowsingSearch = await presence.getSetting("search");
   showBrowsingCategory = await presence.getSetting("category");
   presenceData.startTimestamp = browsingStamp;
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Viewing ${title.textContent}`;
     } else presenceData.details = "Viewing Unknown";
   } else presenceData.details = "Viewing Unknown";
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     //This will fire if you do not set presence details
     presence.setTrayTitle();
     presence.setActivity();

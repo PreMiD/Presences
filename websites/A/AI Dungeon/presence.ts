@@ -180,7 +180,7 @@ presence.on("UpdateData", async () => {
       } else presenceData.details = "Viewing Home";
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

@@ -310,7 +310,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Navigando...";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

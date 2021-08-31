@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
   } else
     presenceData.details = document.querySelector("h1.f00-light").textContent;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
    * Apply
    *
    */
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

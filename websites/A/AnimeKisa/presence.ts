@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presenceData.details = (await strings).browsing;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).browsing;

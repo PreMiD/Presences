@@ -94,6 +94,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = pageStatus;
   }
 
-  if (presenceData.details === null) presenceData.details = "Home";
+  if (!presenceData.details) presenceData.details = "Home";
   else presence.setActivity(presenceData);
 });

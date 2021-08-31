@@ -71,8 +71,7 @@ presence.on("UpdateData", async () => {
     includesProduct = products.find((e) => urlpath.includes(e)),
     includesService = services.find((e) => urlpath.includes(e)),
     presenceData: PresenceData = {
-      largeImageKey: logoArr[setting.logo] || "logo",
-      buttons: []
+      largeImageKey: logoArr[setting.logo] || "logo"
     };
 
   function getPSName() {
@@ -791,9 +790,7 @@ presence.on("UpdateData", async () => {
   )
     presenceData.startTimestamp = time;
 
-  if (presenceData.buttons.length === 0) delete presenceData.buttons;
-
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
