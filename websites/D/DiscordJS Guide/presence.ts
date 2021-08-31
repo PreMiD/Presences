@@ -15,7 +15,7 @@ pPresence.on("UpdateData", async () => {
   pData.details = "Viewing Docs";
   pData.state = `Page: ${title}`;
 
-  if (p!presenceData.details) {
+  if (!presenceData.details) {
     pPresence.setTrayTitle();
     pPresence.setActivity();
   } else pPresence.setActivity(pData);
