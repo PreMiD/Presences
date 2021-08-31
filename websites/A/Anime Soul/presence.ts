@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Hidden Page";
   }
-  if (!presenceData.details) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);

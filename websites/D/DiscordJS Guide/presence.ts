@@ -5,9 +5,9 @@ const pPresence = new Presence({
 
 pPresence.on("UpdateData", async () => {
   const pData: PresenceData = {
-      largeImageKey: "icon2",
-      startTimestamp: pBrowsing
-    },
+    largeImageKey: "icon2",
+    startTimestamp: pBrowsing
+  },
     title: string = document
       .getElementsByTagName("h1")[0]
       .textContent.replace("#", "");
@@ -15,7 +15,7 @@ pPresence.on("UpdateData", async () => {
   pData.details = "Viewing Docs";
   pData.state = `Page: ${title}`;
 
-  if (!presenceData.details) {
+  if (!pData.details) {
     pPresence.setTrayTitle();
     pPresence.setActivity();
   } else pPresence.setActivity(pData);

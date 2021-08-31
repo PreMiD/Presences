@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
     path = document.location.pathname;
   if (
     window.location.hostname === "bungie.net" ||

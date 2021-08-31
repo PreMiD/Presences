@@ -13,8 +13,8 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.startsWith("/episodes")) {
     const player: HTMLVideoElement = document.querySelector(
-        ".edge-player-content-element"
-      ),
+      ".edge-player-content-element"
+    ),
       show = document.querySelector(".header h3 a").textContent,
       epTitle = document.querySelector(".sub-header h1").textContent;
     let epNumber: string | HTMLElement =

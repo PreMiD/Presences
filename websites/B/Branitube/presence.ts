@@ -41,8 +41,8 @@ presence.on("UpdateData", async () => {
 
   if (video !== null) {
     const videoTitle: HTMLElement = document.querySelector(
-        "div > div.episodeInfo > div.nomeAnime"
-      ),
+      "div > div.episodeInfo > div.nomeAnime"
+    ),
       episode: HTMLElement = document.querySelector(
         "div > div.episodeInfo > div.epInfo"
       ),

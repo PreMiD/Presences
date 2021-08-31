@@ -34,8 +34,8 @@ presence.on("UpdateData", async () => {
 
   if (video !== null) {
     const videoTitle = document.querySelector<HTMLElement>(
-        ".info-line-left.flex-box .flex-column.flex-justify-center div"
-      ),
+      ".info-line-left.flex-box .flex-column.flex-justify-center div"
+    ),
       streamer = document.querySelector<HTMLElement>(
         "div.channel-header span.dlive-name span.overflow-ellipsis"
       ),

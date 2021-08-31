@@ -26,8 +26,8 @@ let gameStartTimestamp: number = null,
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "agar"
-    },
+    largeImageKey: "agar"
+  },
     buttons = await presence.getSetting("buttons");
 
   if (agarData) {
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!presenceData.details) {
+  if (!data.details) {
     presence.setTrayTitle(); // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);

@@ -38,8 +38,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a genre...";
   else if (document.location.pathname.includes("/videos/")) {
     const video = document.querySelector<HTMLVideoElement>(
-        "#playersdbeta > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-      ),
+      "#playersdbeta > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+    ),
       title = document.querySelector(
         "#wrapper > div.container > div:nth-child(1) > div:nth-child(2) > h1"
       ).textContent,

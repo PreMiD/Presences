@@ -4,8 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "logo"
-    },
+    largeImageKey: "logo"
+  },
     path = document.location.pathname;
 
   if (path === "/") data.details = "Viewing homepage";

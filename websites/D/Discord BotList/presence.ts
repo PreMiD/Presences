@@ -5,9 +5,9 @@ const botPresence = new Presence({
 
 botPresence.on("UpdateData", async () => {
   const botData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: botBrowsing
-    },
+    largeImageKey: "logo",
+    startTimestamp: botBrowsing
+  },
     botPage = document.location.pathname,
     botHost = document.location.hostname,
     buttons = await botPresence.getSetting("buttons"),
@@ -29,8 +29,8 @@ botPresence.on("UpdateData", async () => {
       ];
     } else if (botPage === "/bots/tag") {
       const urlParams: URLSearchParams = new URLSearchParams(
-          window.location.search
-        ),
+        window.location.search
+      ),
         myParam: string = urlParams.get("tag");
       botData.details = "Searching Tag:";
       botData.state = myParam;
@@ -105,7 +105,7 @@ botPresence.on("UpdateData", async () => {
 
   if (!buttons) delete botData.buttons;
 
-  if (!presenceData.details) {
+  if (!botData.details) {
     botPresence.setTrayTitle();
     botPresence.setActivity();
   } else botPresence.setActivity(botData);

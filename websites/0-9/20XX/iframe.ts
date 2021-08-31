@@ -105,28 +105,28 @@ iframe.on("UpdateData", async () => {
   const data = {
     user: main.net.user
       ? {
-          displayName: main.net.display,
-          isGuest: main.net.guest,
-          username: main.net.user,
-          isDonator: main.net.type === 1,
-          rank: main.stats ? main.stats.rank : null
-        }
+        displayName: main.net.display,
+        isGuest: main.net.guest,
+        username: main.net.user,
+        isDonator: main.net.type === 1,
+        rank: main.stats ? main.stats.rank : null
+      }
       : null,
     serverInfo: main.net.game.info || null,
     game: main.game
       ? {
-          character: main.game.charSelect,
-          gameOver: main.game.gameOver,
-          info: {
-            ...main.game.settings,
-            players: main.game.ui.score.scores.length
-          },
-          score: main.game.ui.score.scores.find(
-            (score: Score20XX) =>
-              score.name.replace("γ", "") === main.net.display
-          ),
-          map: guessMap(main.game.map)
-        }
+        character: main.game.charSelect,
+        gameOver: main.game.gameOver,
+        info: {
+          ...main.game.settings,
+          players: main.game.ui.score.scores.length
+        },
+        score: main.game.ui.score.scores.find(
+          (score: Score20XX) =>
+            score.name.replace("γ", "") === main.net.display
+        ),
+        map: guessMap(main.game.map)
+      }
       : null,
     nav: main.menu.lastNav
   };

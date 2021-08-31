@@ -26,8 +26,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   } else {
     const video: HTMLVideoElement = document
-        .evaluate("//video[@class='jw-video jw-reset']", document)
-        .iterateNext() as HTMLVideoElement,
+      .evaluate("//video[@class='jw-video jw-reset']", document)
+      .iterateNext() as HTMLVideoElement,
       videoTitle: Node = document
         .evaluate("//body//h1[1]", document)
         .iterateNext(),

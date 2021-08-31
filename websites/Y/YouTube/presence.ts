@@ -105,14 +105,14 @@ presence.on("UpdateData", async () => {
     YouTubeEmbed
       ? (title = document.querySelector("div.ytp-title-text > a"))
       : oldYouTube && document.location.pathname.includes("/watch")
-      ? (title = document.querySelector(".watch-title"))
-      : YouTubeTV
-      ? (title = document.querySelector(".player-video-title"))
-      : !document.location.pathname.includes("/watch")
-      ? (title = document.querySelector(".ytd-miniplayer .title"))
-      : (title = document.querySelector(
-          "h1 yt-formatted-string.ytd-video-primary-info-renderer"
-        ));
+        ? (title = document.querySelector(".watch-title"))
+        : YouTubeTV
+          ? (title = document.querySelector(".player-video-title"))
+          : !document.location.pathname.includes("/watch")
+            ? (title = document.querySelector(".ytd-miniplayer .title"))
+            : (title = document.querySelector(
+              "h1 yt-formatted-string.ytd-video-primary-info-renderer"
+            ));
 
     let uploaderTV: Element | string,
       uploaderMiniPlayer: HTMLElement,
@@ -120,18 +120,18 @@ presence.on("UpdateData", async () => {
       edited: boolean,
       uploaderEmbed: HTMLElement;
     (edited = false),
-      (uploaderTV =
+    (uploaderTV =
         document.querySelector(".player-video-details") ||
         document.querySelector(
           "ytd-video-owner-renderer  .ytd-channel-name a"
         )),
-      (uploaderEmbed = document.querySelector(
-        "div.ytp-title-expanded-heading > h2 > a"
-      )),
-      (uploaderMiniPlayer = document.querySelector(
-        "yt-formatted-string#owner-name"
-      )),
-      (uploader2 = document.querySelector("#owner-name a"));
+    (uploaderEmbed = document.querySelector(
+      "div.ytp-title-expanded-heading > h2 > a"
+    )),
+    (uploaderMiniPlayer = document.querySelector(
+      "yt-formatted-string#owner-name"
+    )),
+    (uploader2 = document.querySelector("#owner-name a"));
 
     if (
       uploaderMiniPlayer !== null &&
@@ -148,21 +148,21 @@ presence.on("UpdateData", async () => {
         uploaderMiniPlayer !== null && uploaderMiniPlayer.textContent.length > 0
           ? uploaderMiniPlayer
           : uploader2 !== null && uploader2.textContent.length > 0
-          ? uploader2
-          : document.querySelector(
+            ? uploader2
+            : document.querySelector(
               "#upload-info yt-formatted-string.ytd-channel-name a"
             ) !== null
-          ? document.querySelector(
-              "#upload-info yt-formatted-string.ytd-channel-name a"
-            )
-          : uploaderEmbed !== null &&
+              ? document.querySelector(
+                "#upload-info yt-formatted-string.ytd-channel-name a"
+              )
+              : uploaderEmbed !== null &&
             YouTubeEmbed &&
             uploaderEmbed.textContent.length > 0
-          ? uploaderEmbed
-          : (uploaderTV = truncateAfter(
-              uploaderTV.textContent.replace(/\s+/g, ""),
-              pattern
-            )),
+                ? uploaderEmbed
+                : (uploaderTV = truncateAfter(
+                  uploaderTV.textContent.replace(/\s+/g, ""),
+                  pattern
+                )),
       timestamps = presence.getTimestampsfromMedia(video),
       live = Boolean(document.querySelector(".ytp-live")),
       ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
@@ -183,12 +183,12 @@ presence.on("UpdateData", async () => {
     let finalUploader = edited
         ? uploaderMiniPlayer.getAttribute("premid-value")
         : uploaderTV !== null
-        ? typeof uploaderTV === "string"
-          ? uploaderTV
-          : uploaderTV.textContent
-        : typeof uploader === "string"
-        ? uploader
-        : uploader.textContent,
+          ? typeof uploaderTV === "string"
+            ? uploaderTV
+            : uploaderTV.textContent
+          : typeof uploader === "string"
+            ? uploader
+            : uploader.textContent,
       finalTitle =
         title === null || title.textContent.replace(/\s+/g, "") === ""
           ? document.querySelector("div.ytp-title-text > a").textContent
@@ -214,8 +214,8 @@ presence.on("UpdateData", async () => {
       ).textContent;
     }
     const unlistedPathElement = document.querySelector<SVGPathElement>(
-        "g#privacy_unlisted > path"
-      ),
+      "g#privacy_unlisted > path"
+    ),
       unlistedBadgeElement = document.querySelector<SVGPathElement>(
         "h1.title+ytd-badge-supported-renderer path"
       ),
@@ -235,17 +235,17 @@ presence.on("UpdateData", async () => {
         smallImageKey: video.paused
           ? "pause"
           : video.loop
-          ? "repeat-one"
-          : isPlaylistLoop
-          ? "repeat"
-          : "play",
+            ? "repeat-one"
+            : isPlaylistLoop
+              ? "repeat"
+              : "play",
         smallImageText: video.paused
           ? (await strings).pause
           : video.loop
-          ? "On loop"
-          : isPlaylistLoop
-          ? "Playlist on loop"
-          : (await strings).play,
+            ? "On loop"
+            : isPlaylistLoop
+              ? "Playlist on loop"
+              : (await strings).play,
         endTimestamp: timestamps[1]
       };
 
@@ -255,10 +255,10 @@ presence.on("UpdateData", async () => {
       video.paused
         ? ""
         : finalTitle === null
-        ? document.querySelector(
+          ? document.querySelector(
             ".title.style-scope.ytd-video-primary-info-renderer"
           ).textContent
-        : finalTitle
+          : finalTitle
     );
 
     //* Remove timestamps if paused or live
@@ -293,8 +293,8 @@ presence.on("UpdateData", async () => {
             url: document.URL.includes("/watch?v=")
               ? document.URL.split("&")[0]
               : `https://www.youtube.com/watch?v=${document
-                  .querySelector("#page-manager > ytd-watch-flexy")
-                  .getAttribute("video-id")}`
+                .querySelector("#page-manager > ytd-watch-flexy")
+                .getAttribute("video-id")}`
           },
           {
             label: (await strings).viewChannelButton,
@@ -321,8 +321,8 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "youtube.com"
   ) {
     const presenceData: PresenceData = {
-        largeImageKey: "yt_lg"
-      },
+      largeImageKey: "yt_lg"
+    },
       browsingStamp = Math.floor(Date.now() / 1000);
     let searching = false;
 
@@ -509,10 +509,10 @@ presence.on("UpdateData", async () => {
     } else presence.setActivity(presenceData);
   } else if (document.location.hostname === "studio.youtube.com") {
     const presenceData: PresenceData = {
-        largeImageKey: "yt_lg",
-        smallImageKey: "studio",
-        smallImageText: "Youtube Studio"
-      },
+      largeImageKey: "yt_lg",
+      smallImageKey: "studio",
+      smallImageText: "Youtube Studio"
+    },
       browsingStamp = Math.floor(Date.now() / 1000);
 
     if (document.location.pathname.includes("/videos")) {

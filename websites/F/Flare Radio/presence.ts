@@ -29,8 +29,8 @@ newStats();
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "flare"
-    },
+    largeImageKey: "flare"
+  },
     timestamps = presence.getTimestamps(
       Math.floor(selapsed),
       Math.floor(sduration)

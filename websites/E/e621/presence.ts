@@ -67,8 +67,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing user";
 
     const HTMLElement = document.querySelector(
-        "#userpage div h2"
-      ) as HTMLBaseElement,
+      "#userpage div h2"
+    ) as HTMLBaseElement,
       [htmlinner] = HTMLElement.innerHTML.split("<span");
 
     presenceData.state = htmlinner;

@@ -47,15 +47,15 @@ interface ItemMap {
 
 // A map of character prefixes with their names.
 const characterNameMap: ItemMap = {
-    box: "Box",
-    crt: "Crate",
-    qua: "Quad",
-    vox: "Voxel",
-    blk: "Block",
-    crg: "Cargo",
-    inf: "Plus",
-    cub: "Cube"
-  },
+  box: "Box",
+  crt: "Crate",
+  qua: "Quad",
+  vox: "Voxel",
+  blk: "Block",
+  crg: "Cargo",
+  inf: "Plus",
+  cub: "Cube"
+},
   // A map of map IDs with their names.
   mapNameMap: ItemMap = {
     attack: "Attack Area",
@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
   if (!(await presence.getSetting("showName"))) delete data.state;
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!presenceData.details) {
+  if (!data.details) {
     presence.setTrayTitle(); // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);

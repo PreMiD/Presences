@@ -17,10 +17,10 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "animewho",
-      details: "Ana Sayfada Anime Arıyor",
-      startTimestamp
-    },
+    largeImageKey: "animewho",
+    details: "Ana Sayfada Anime Arıyor",
+    startTimestamp
+  },
     title = document.querySelector("head > title"),
     anime = title.textContent
       .replace("Türkçe İzle - AnimeWho? Anime", "")

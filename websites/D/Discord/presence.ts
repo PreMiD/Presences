@@ -209,7 +209,7 @@ presence.on("UpdateData", async () => {
             document.querySelector(
               "input[name=channel_name]"
             ) as HTMLInputElement
-          )?.value || "Undefined"
+        )?.value || "Undefined"
         : `@${document.querySelector("h3")?.textContent || "Undefined"}`,
       serverTyping =
         Array.from(document.querySelectorAll("div[contenteditable=true]")).find(
@@ -240,22 +240,22 @@ presence.on("UpdateData", async () => {
         "/channels/(\\d*)/(\\d*)/": {
           details: serverTyping
             ? (await strings).channelTyping
-                .split("{0}")[0]
-                .replace("{1}", serverChannel)
-                .replace("{2}", serverServerName)
+              .split("{0}")[0]
+              .replace("{1}", serverChannel)
+              .replace("{2}", serverServerName)
             : (await strings).channelReading
-                .split("{0}")[0]
-                .replace("{1}", serverChannel)
-                .replace("{2}", serverServerName),
+              .split("{0}")[0]
+              .replace("{1}", serverChannel)
+              .replace("{2}", serverServerName),
           state: serverTyping
             ? (await strings).channelTyping
-                .split("{0}")[1]
-                ?.replace("{1}", serverChannel)
-                .replace("{2}", serverServerName)
+              .split("{0}")[1]
+              ?.replace("{1}", serverChannel)
+              .replace("{2}", serverServerName)
             : (await strings).channelReading
-                .split("{0}")[1]
-                ?.replace("{1}", serverChannel)
-                .replace("{2}", serverServerName),
+              .split("{0}")[1]
+              ?.replace("{1}", serverChannel)
+              .replace("{2}", serverServerName),
           smallImageKey: serverTyping ? "writing" : "reading",
           smallImageText: serverTyping
             ? (await strings).writing
@@ -268,31 +268,31 @@ presence.on("UpdateData", async () => {
           details: dmsTyping
             ? groupDm
               ? (await strings).dmGroupTyping
-                  .split("{0}")[0]
-                  .replace("{1}", dmsUserGroupName)
-              : (await strings).dmTyping
-                  .split("{0}")[0]
-                  .replace("{1}", dmsUserGroupName)
-            : groupDm
-            ? (await strings).dmGroupReading
                 .split("{0}")[0]
                 .replace("{1}", dmsUserGroupName)
-            : (await strings).dmReading
+              : (await strings).dmTyping
+                .split("{0}")[0]
+                .replace("{1}", dmsUserGroupName)
+            : groupDm
+              ? (await strings).dmGroupReading
+                .split("{0}")[0]
+                .replace("{1}", dmsUserGroupName)
+              : (await strings).dmReading
                 .split("{0}")[0]
                 .replace("{1}", dmsUserGroupName),
           state: dmsTyping
             ? groupDm
               ? (await strings).dmGroupTyping
-                  .split("{0}")[1]
-                  ?.replace("{1}", dmsUserGroupName)
-              : (await strings).dmTyping
-                  .split("{0}")[1]
-                  ?.replace("{1}", dmsUserGroupName)
-            : groupDm
-            ? (await strings).dmGroupReading
                 .split("{0}")[1]
                 ?.replace("{1}", dmsUserGroupName)
-            : (await strings).dmReading
+              : (await strings).dmTyping
+                .split("{0}")[1]
+                ?.replace("{1}", dmsUserGroupName)
+            : groupDm
+              ? (await strings).dmGroupReading
+                .split("{0}")[1]
+                ?.replace("{1}", dmsUserGroupName)
+              : (await strings).dmReading
                 .split("{0}")[1]
                 ?.replace("{1}", dmsUserGroupName),
           smallImageKey: dmsTyping ? "writing" : "reading",
@@ -303,28 +303,28 @@ presence.on("UpdateData", async () => {
         "/invite/(\\w*\\d*)/": {
           details: showInvites
             ? (await strings).invite
-                .split("{0}")[0]
-                .replace("{1}", document.URL.split("/")[4])
-                .replace("{2}", document.title)
+              .split("{0}")[0]
+              .replace("{1}", document.URL.split("/")[4])
+              .replace("{2}", document.title)
             : (await strings).inviteServer
-                .split("{0}")[0]
-                .replace("{1}", document.title),
+              .split("{0}")[0]
+              .replace("{1}", document.title),
           state: showInvites
             ? (await strings).invite
-                .split("{0}")[1]
-                ?.replace("{1}", document.URL.split("/")[4])
-                .replace("{2}", document.title)
+              .split("{0}")[1]
+              ?.replace("{1}", document.URL.split("/")[4])
+              .replace("{2}", document.title)
             : (await strings).inviteServer
-                .split("{0}")[1]
-                ?.replace("{1}", document.title),
+              .split("{0}")[1]
+              ?.replace("{1}", document.title),
           smallImageKey: "reading",
           buttons: showInvites
             ? [
-                {
-                  label: (await strings).buttonInvite,
-                  url: document.URL
-                }
-              ]
+              {
+                label: (await strings).buttonInvite,
+                url: document.URL
+              }
+            ]
             : []
         },
         "/store/": {
@@ -490,32 +490,32 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = connectedToDm
           ? (await strings).voiceConnectedWith
-              .split("{0}")[0]
-              .replace("{1}", connectedTo.textContent)
+            .split("{0}")[0]
+            .replace("{1}", connectedTo.textContent)
           : (await strings).voiceConnectedTo
-              .split("{0}")[0]
-              .replace(
-                "{1}",
-                connectedTo.textContent.replace(
-                  ` / ${connectedTo.textContent.split(" / ").pop()}`,
-                  ""
-                )
+            .split("{0}")[0]
+            .replace(
+              "{1}",
+              connectedTo.textContent.replace(
+                ` / ${connectedTo.textContent.split(" / ").pop()}`,
+                ""
               )
-              .replace("{2}", connectedTo.textContent.split(" / ").pop());
+            )
+            .replace("{2}", connectedTo.textContent.split(" / ").pop());
         presenceData.state = connectedToDm
           ? (await strings).voiceConnectedWith
-              .split("{0}")[1]
-              ?.replace("{1}", connectedTo.textContent)
+            .split("{0}")[1]
+            ?.replace("{1}", connectedTo.textContent)
           : (await strings).voiceConnectedTo
-              .split("{0}")[1]
-              ?.replace(
-                "{1}",
-                connectedTo.textContent.replace(
-                  ` / ${connectedTo.textContent.split(" / ").pop()}`,
-                  ""
-                )
+            .split("{0}")[1]
+            ?.replace(
+              "{1}",
+              connectedTo.textContent.replace(
+                ` / ${connectedTo.textContent.split(" / ").pop()}`,
+                ""
               )
-              .replace("{2}", connectedTo.textContent.split(" / ").pop());
+            )
+            .replace("{2}", connectedTo.textContent.split(" / ").pop());
         presenceData.smallImageKey = "call";
         presenceData.smallImageText = (await strings).calling;
       }
@@ -668,8 +668,8 @@ presence.on("UpdateData", async () => {
           state:
             document.querySelector("h1")?.textContent !== "Discord Blog"
               ? `${(await strings).readingArticle} ${
-                  document.querySelector("h1").textContent
-                }`
+                document.querySelector("h1").textContent
+              }`
               : (await strings).browse
         },
         "/product-posts/": {

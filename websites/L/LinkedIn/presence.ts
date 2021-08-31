@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "785263902321541181" //Presence Application ID on Discord Developers.
+    clientId: "785263902321541181"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -11,9 +11,9 @@ function unescapeHTML(string: string): string {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "linkedin_logo",
-      startTimestamp: browsingStamp
-    },
+    largeImageKey: "linkedin_logo",
+    startTimestamp: browsingStamp
+  },
     path = document.location.pathname;
 
   //Homepage.
@@ -161,16 +161,16 @@ presence.on("UpdateData", async () => {
     const userName =
       path !== "/in/luca-biagetti/detail/recent-activity/"
         ? document
-            .querySelector(
-              "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div:nth-child(2) > main > div > section > div:nth-child(2) > div:nth-child(2) > div:first-child > ul:first-child > li:first-child"
-            )
-            .innerHTML.trim()
+          .querySelector(
+            "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div:nth-child(2) > main > div > section > div:nth-child(2) > div:nth-child(2) > div:first-child > ul:first-child > li:first-child"
+          )
+          .innerHTML.trim()
         : document
-            .querySelector(
-              "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div > div:first-child > header > h1"
-            )
-            .innerHTML.trim()
-            .replace("’s Activity", "");
+          .querySelector(
+            "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div > div:first-child > header > h1"
+          )
+          .innerHTML.trim()
+          .replace("’s Activity", "");
 
     //Profile detail subsection.
     if (path.includes("/detail/")) {

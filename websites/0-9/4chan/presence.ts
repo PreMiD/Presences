@@ -52,7 +52,7 @@ presence.on("UpdateData", () => {
       : false;
     query3 = document.querySelector("div.pagelist>div.pages")
       ? document.querySelector("div.pagelist>div.pages").lastElementChild
-          .textContent
+        .textContent
       : false;
     query4 = document.querySelector("div.pagelist>div.pages>strong")
       ? document.querySelector("div.pagelist>div.pages>strong").textContent
