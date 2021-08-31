@@ -7,7 +7,6 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "zoom_logo"
   };
-
   if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
   else if (document.location.pathname.includes("signin"))
@@ -28,23 +27,15 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing meetings page";
   else if (document.location.pathname.includes("meeting"))
     presenceData.details = "Viewing their meetings";
-  else if (document.location.pathname.includes("join"))
-    presenceData.details = "Joining a meeting";
   else if (document.location.pathname.startsWith("/s/"))
     presenceData.details = "Joining a meeting";
   else if (document.location.pathname.startsWith("/wc/")) {
     if (
       document.querySelector("#prompt > h4") &&
-      document.querySelector("#prompt > h4").textContent ===
-        "You are already in another meeting"
+      document.location.pathname.endsWith("start")
     )
       presenceData.details = "Joining a meeting";
-    else if (
-      document.querySelector(".leave-wrap > h4") &&
-      document
-        .querySelector(".leave-wrap > h4")
-        .textContent.includes("Thank you for attending the meeting")
-    )
+    else if (document.location.pathname.endsWith("leave"))
       presenceData.details = "Leaving an meeting";
     else {
       if (videoEnabled()) {
@@ -63,7 +54,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
@@ -85,6 +76,6 @@ function memberCount() {
   const counter = document.querySelector(
       ".footer-button__participants-icon > .footer-button__number-counter > span"
     ),
-    res = typeof counter === "undefined" ? null : Number(counter.innerHTML);
+    res = counter === null ? null : Number(counter.innerHTML);
   return res;
 }

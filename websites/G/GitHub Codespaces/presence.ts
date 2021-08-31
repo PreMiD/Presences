@@ -588,7 +588,7 @@ presence.on("UpdateData", async () => {
       data.details = "Inactive Codespace";
     // Idle/Start Screen
   } else if (activeTab && editorMode) {
-    const scmTab = document.getElementById("status.scm"),
+    const scmTab = document.querySelector("h3.title"),
       filename = activeTab.getAttribute("data-resource-name"),
       filepath = activeTab.getAttribute("title"),
       syntaxMode = editorMode.getAttribute("aria-label").toLowerCase(),
@@ -655,7 +655,7 @@ presence.on("UpdateData", async () => {
     data.details = "Idling";
   }
 
-  if (data.largeImageKey === null) {
+  if (!data.largeImageKey) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);

@@ -14,9 +14,9 @@
     "www.joyn.de",
     "joyn.de"
   ],
-  "version": "1.2.2",
+  "version": "1.2.4",
   "logo": "https://i.imgur.com/SrAaJDz.jpg",
-  "thumbnail": "https://i.imgur.com/NsmbW8l.png",
+  "thumbnail": "https://i.imgur.com/W0qRCZk.png",
   "color": "#000",
   "tags": [
     "streaming",
@@ -25,14 +25,18 @@
   "category": "videos",
   "settings": [
     {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
       "id": "timeRemaining",
-      "title": "Verbleibende Zeit einblenden",
+      "title": "Show remaining time",
       "icon": "fad fa-hourglass-half",
       "value": true
     },
     {
       "id": "showButtons",
-      "title": "Buttons anzeigen",
+      "title": "Show Buttons",
       "icon": "fad fa-mouse-pointer",
       "value": true
     }

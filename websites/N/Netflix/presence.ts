@@ -77,23 +77,22 @@ presence.on("UpdateData", async () => {
     browsingStamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   if (document.location.pathname.includes("/watch")) {
-    const video: HTMLVideoElement = document.querySelector(
-      ".VideoContainer video"
-    );
+    const video: HTMLVideoElement =
+      document.querySelector(".VideoContainer video") ??
+      document.querySelector(".watch-video--player-view video");
     if (video && !isNaN(video.duration)) {
-      const showCheck = document.querySelector(
-          "[class$='title'] .ellipsize-text span"
-        )
-          ? true
-          : false,
+      const showCheck =
+          document.querySelector("[class$='title'] .ellipsize-text span") ||
+          document.querySelector("[data-uia$='video-title'] span")
+            ? true
+            : false,
         timestamps = presence.getTimestampsfromMedia(video);
 
       presenceData.smallImageKey = video.paused ? "pause" : "play";
@@ -114,20 +113,33 @@ presence.on("UpdateData", async () => {
           if (
             document.querySelector(
               "[class$='title'] .ellipsize-text span:nth-child(3)"
+            ) ||
+            document.querySelector(
+              "[data-uia$='video-title'] span:nth-child(3)"
             )
           ) {
             //* if the episode has a title, it's added to season and episode numbers
-            state =
-              document.querySelector("[class$='title'] .ellipsize-text span")
-                .textContent +
-              " " +
-              document.querySelector(
-                "[class$='title'] .ellipsize-text span:nth-child(3)"
-              ).textContent;
+            state = `${
+              (
+                document.querySelector(
+                  "[class$='title'] .ellipsize-text span"
+                ) ?? document.querySelector("[data-uia$='video-title'] span")
+              ).textContent
+            } ${
+              (
+                document.querySelector(
+                  "[class$='title'] .ellipsize-text span:nth-child(3)"
+                ) ??
+                document.querySelector(
+                  "[data-uia$='video-title'] span:nth-child(3)"
+                )
+              ).textContent
+            }`;
           } else {
             //* if no episode title, it proceeds with the season and episode numbers only
-            state = document.querySelector(
-              "[class$='title'] .ellipsize-text span"
+            state = (
+              document.querySelector("[class$='title'] .ellipsize-text span") ??
+              document.querySelector("[data-uia$='video-title'] span")
             ).textContent;
           }
 
@@ -135,15 +147,21 @@ presence.on("UpdateData", async () => {
             presenceData.details = seriesDetail
               .replace(
                 "%title%",
-                document.querySelector("[class$='title'] .ellipsize-text h4")
-                  .textContent
+                (
+                  document.querySelector(
+                    "[class$='title'] .ellipsize-text h4"
+                  ) ?? document.querySelector("[data-uia$='video-title'] h4")
+                ).textContent
               )
               .replace("%episode%", state);
             presenceData.state = seriesState
               .replace(
                 "%title%",
-                document.querySelector("[class$='title'] .ellipsize-text h4")
-                  .textContent
+                (
+                  document.querySelector(
+                    "[class$='title'] .ellipsize-text h4"
+                  ) ?? document.querySelector("[data-uia$='video-title'] h4")
+                ).textContent
               )
               .replace("%episode%", state);
             presenceData.buttons = [
@@ -159,9 +177,7 @@ presence.on("UpdateData", async () => {
               }
             ];
             if (seriesState.includes("{0}")) delete presenceData.state;
-          } else {
-            presenceData.details = (await strings).watchingSeries;
-          }
+          } else presenceData.details = (await strings).watchingSeries;
         } else if (showBrowsing) {
           presenceData.details = (await strings).browse;
           delete presenceData.endTimestamp;
@@ -170,8 +186,9 @@ presence.on("UpdateData", async () => {
         }
       } else {
         //* if not a show
-        const title = document.querySelector(
-          "[class$='title'] h4.ellipsize-text"
+        const title = (
+          document.querySelector("[class$='title'] h4.ellipsize-text") ??
+          document.querySelector("[data-uia$='video-title']")
         ).textContent;
         if (/\(([^)]+)\)/.test(title.toLowerCase())) {
           if (showSeries && !privacy) {
@@ -184,17 +201,15 @@ presence.on("UpdateData", async () => {
               .replace("%title%", title.replace(regExp[0], ""))
               .replace("%episode%", regExp[1]);
             if (seriesState.includes("{0}")) delete presenceData.state;
-          } else if (showSeries) {
+          } else if (showSeries)
             presenceData.details = (await strings).watchingSeries;
-          } else if (showBrowsing) {
-            presenceData.details = (await strings).browse;
-          }
+          else if (showBrowsing) presenceData.details = (await strings).browse;
         } else if (showMovie && !privacy) {
           if (!(movieDetail === "{0}" && movieState === "{0}")) {
             //* if it's a movie
-            if (movieDetail === "{0}") {
+            if (movieDetail === "{0}")
               presenceData.details = movieState.replace("%title%", title);
-            } else {
+            else {
               presenceData.details = movieDetail.replace("%title%", title);
               if (movieState !== "{0}")
                 presenceData.state = movieState.replace("%title%", title);
@@ -207,9 +222,9 @@ presence.on("UpdateData", async () => {
               url: document.URL.split("?")[0]
             }
           ];
-        } else if (showMovie) {
+        } else if (showMovie)
           presenceData.details = (await strings).watchingMovie;
-        } else if (showBrowsing) {
+        else if (showBrowsing) {
           presenceData.details = (await strings).browse;
           delete presenceData.endTimestamp;
           presenceData.startTimestamp = browsingStamp;
@@ -218,28 +233,24 @@ presence.on("UpdateData", async () => {
       }
 
       if (presenceData.details.length < 3)
-        presenceData.details = " " + presenceData.details;
+        presenceData.details = ` ${presenceData.details}`;
 
       if (!showTimestamp) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
 
-      if (!showButtons) {
-        delete presenceData.buttons;
-      }
+      if (!showButtons) delete presenceData.buttons;
 
       if (presenceData.details == null) {
         presence.setActivity();
         presence.setTrayTitle();
-      } else {
-        presence.setActivity(presenceData, !video.paused);
-      }
+      } else presence.setActivity(presenceData, !video.paused);
     }
   } else {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -343,9 +354,7 @@ presence.on("UpdateData", async () => {
       }
     }
 
-    if (showTimestamp) {
-      presenceData.startTimestamp = browsingStamp;
-    }
+    if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
     if (privacy && presenceData.smallImageKey === "search") {
       presenceData.details = (await strings).searchSomething;
@@ -355,15 +364,11 @@ presence.on("UpdateData", async () => {
       delete presenceData.state;
     }
 
-    if (!showButtons || privacy) {
-      delete presenceData.buttons;
-    }
+    if (!showButtons || privacy) delete presenceData.buttons;
 
     if (!showBrowsing) {
       presence.setActivity();
       presence.setTrayTitle();
-    } else {
-      presence.setActivity(presenceData);
-    }
+    } else presence.setActivity(presenceData);
   }
 });

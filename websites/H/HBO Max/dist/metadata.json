@@ -1,8 +1,8 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.4",
   "author": {
-    "name": "PreMiD",
-    "id": "503557087041683458"
+    "name": "Kedi",
+    "id": "238668511222693888"
   },
   "service": "HBO Max",
   "description": {
@@ -15,7 +15,7 @@
     "play.hbomax.com",
     "help.hbomax.com"
   ],
-  "version": "1.0.5",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/UxH7DDE.png",
   "thumbnail": "https://i.imgur.com/d1bktD4.jpg",
   "color": "#c600ff",
