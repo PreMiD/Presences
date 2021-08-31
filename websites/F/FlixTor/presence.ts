@@ -17,9 +17,9 @@ if (lastPlaybackState !== playback) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      details: "Unknown page",
-      largeImageKey: "lg"
-    },
+    details: "Unknown page",
+    largeImageKey: "lg"
+  },
     video: HTMLVideoElement = document.querySelector(
       "#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
@@ -35,8 +35,8 @@ presence.on("UpdateData", async () => {
 
   if (video !== null && !isNaN(video.duration)) {
     const videoTitle: HTMLElement = document.querySelector(
-        "div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
-      ),
+      "div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
+    ),
       season: HTMLElement = document.querySelector(
         "#playercontainer span.outPes"
       ),
@@ -58,8 +58,8 @@ presence.on("UpdateData", async () => {
       video.paused
         ? ""
         : videoTitle !== null
-        ? videoTitle.innerText
-        : "Title not found..."
+          ? videoTitle.innerText
+          : "Title not found..."
     );
 
     if (season && episode) {

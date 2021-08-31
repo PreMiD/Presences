@@ -6,8 +6,8 @@ let search: HTMLInputElement, title: HTMLElement, title2: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
+    largeImageKey: "logo"
+  },
     page = window.location.pathname;
 
   presenceData.startTimestamp = browsingStamp;
@@ -59,8 +59,8 @@ presence.on("UpdateData", async () => {
   if (page.includes("/afleveringen/video/")) {
     delete presenceData.startTimestamp;
     const titles = document.querySelector(
-        "meta[name=\"og:title\"]"
-      ) as HTMLMetaElement,
+      "meta[name=\"og:title\"]"
+    ) as HTMLMetaElement,
       rp23 = titles.content.replace(/[^0-9.]/g, ""),
       rp2 = rp23.length + 21,
       rp = titles.content.slice(-rp2);

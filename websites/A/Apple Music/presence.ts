@@ -14,8 +14,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "applemusic-logo"
-    },
+    largeImageKey: "applemusic-logo"
+  },
     playerCheck = document.querySelector(
       ".web-chrome-playback-controls__playback-btn[disabled]"
     )

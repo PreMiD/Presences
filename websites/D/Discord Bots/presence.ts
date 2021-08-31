@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
     page = window.location.pathname;
 
   if (page.includes("search")) presenceData.details = "Searching something";

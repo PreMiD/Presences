@@ -41,9 +41,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
     path = document.location.pathname;
 
   if (path === "/") {
@@ -54,11 +54,11 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("anime")) {
     path.split("/").length - 1 === 2 || path.split("/").length - 1 === 4
       ? ((presenceData.details = "Lista de animes"),
-        (presenceData.state = paginaText.innerText),
-        (presenceData.startTimestamp = browsingStamp))
+      (presenceData.state = paginaText.innerText),
+      (presenceData.startTimestamp = browsingStamp))
       : ((presenceData.details = nomeObraText.innerText),
-        (presenceData.state = lancamentoText.innerText),
-        (presenceData.startTimestamp = browsingStamp));
+      (presenceData.state = lancamentoText.innerText),
+      (presenceData.startTimestamp = browsingStamp));
   } else if (path.includes("generos")) {
     presenceData.details = `Gênero: ${generoText.innerText}`;
     presenceData.state = paginaText.innerText;

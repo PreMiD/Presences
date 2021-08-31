@@ -17,9 +17,9 @@ presence.on("UpdateData", async () => {
     } else if (document.querySelector("#chapter_title") !== null) {
       presenceData.details =
         `Reading: ${ 
-        document.querySelector(
-          "#chapter_format > div.story-page-header > div.inner > div.info-container > div > h1 > a"
-        ).textContent}`;
+          document.querySelector(
+            "#chapter_format > div.story-page-header > div.inner > div.info-container > div > h1 > a"
+          ).textContent}`;
       presenceData.state =
         `Chapter: ${document.querySelector("#chapter_title").textContent}`;
       presenceData.smallImageKey = "reading";

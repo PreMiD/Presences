@@ -18,8 +18,8 @@ function parseQueryString(queryString?: string): Record<string, string> {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
+    largeImageKey: "logo"
+  },
     route = document.location.pathname.split("/");
 
   presenceData.smallImageKey = "reading";
@@ -34,15 +34,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Apps";
       presenceData.state = !parseQueryString(document.location.hash).q
         ? `Watching apps list ${
-            !parseQueryString(document.location.hash).category
-              ? ""
-              : `(${parseQueryString(document.location.hash).category})`
-          }`
+          !parseQueryString(document.location.hash).category
+            ? ""
+            : `(${parseQueryString(document.location.hash).category})`
+        }`
         : `Searching ${parseQueryString(document.location.hash).q} ${
-            !parseQueryString(document.location.hash).category
-              ? ""
-              : `(${parseQueryString(document.location.hash).category})`
-          }`;
+          !parseQueryString(document.location.hash).category
+            ? ""
+            : `(${parseQueryString(document.location.hash).category})`
+        }`;
     } else {
       presenceData.details = "Watching app";
       presenceData.state = document.querySelector(

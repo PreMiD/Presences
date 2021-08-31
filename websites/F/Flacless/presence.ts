@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname === "/") 
     presenceData.details = "Starting Flacless";
-   else if (document.location.pathname.includes("/search")) {
+  else if (document.location.pathname.includes("/search")) {
     const title = document.title
       .split(" | ")[0]
       .replace("on Flacless", "")

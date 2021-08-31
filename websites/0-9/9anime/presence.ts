@@ -46,15 +46,15 @@ presence.on("UpdateData", async () => {
     data.details = document.querySelector("#info .title").textContent;
     data.state = tv
       ? `${
-          document.querySelector(
-            ".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
-          ).textContent
-        } • E${
-          document.querySelector("#episodes .episodes a.active").textContent
-        }`
-      : document.querySelector(
+        document.querySelector(
           ".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
-        ).textContent;
+        ).textContent
+      } • E${
+        document.querySelector("#episodes .episodes a.active").textContent
+      }`
+      : document.querySelector(
+        ".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
+      ).textContent;
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused
       ? (await strings).pause

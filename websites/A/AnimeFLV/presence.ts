@@ -38,9 +38,9 @@ presence.on("UpdateData", async () => {
       "#XpndCn .Title, .CapiCnt .Title"
     ).textContent;
     (data.smallImageKey = video.paused ? "pause" : "play"),
-      (data.smallImageText = video.paused
-        ? (await strings).pause
-        : (await strings).play);
+    (data.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play);
     data.endTimestamp = endTimestamp;
 
     if (video.paused) {

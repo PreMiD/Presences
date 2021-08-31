@@ -32,8 +32,8 @@ presence.on("UpdateData", async () => {
 
   if (video !== null && !isNaN(video.duration)) {
     const videoTitle = document.querySelector<HTMLElement>(
-        "#bread .breadcrumb .active"
-      ),
+      "#bread .breadcrumb .active"
+    ),
       timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -48,8 +48,8 @@ presence.on("UpdateData", async () => {
       video.paused
         ? ""
         : videoTitle !== null
-        ? videoTitle.innerText
-        : "Title not found..."
+          ? videoTitle.innerText
+          : "Title not found..."
     );
 
     presenceData.details = "Watching";

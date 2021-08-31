@@ -4,8 +4,8 @@ const presence = new Presence({
 
 let paginaAtual: HTMLElement, ultimaPagina: HTMLElement;
 const nomeObra: HTMLElement = document.querySelector(
-    "body > main > div > div > div.col-sm-12 > div.manga-page > div.pst-block-head-manga > h2"
-  ),
+  "body > main > div > div > div.col-sm-12 > div.manga-page > div.pst-block-head-manga > h2"
+),
   categoriasObra: HTMLElement = document.querySelector(
     "body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(3)"
   ),
@@ -23,8 +23,8 @@ const nomeObra: HTMLElement = document.querySelector(
   );
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
+    largeImageKey: "logo"
+  },
     path: string = document.location.pathname;
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
@@ -51,16 +51,16 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/manga/")) {
     document.location.pathname.split("/").length - 1 === 4
       ? ((presenceData.details = nomeObraLeitor.innerText.replace(
-          "Manga",
-          " "
-        )),
-        (presenceData.state = leitorCapitulo.innerText
-          .slice(0, leitorCapitulo.innerText.search(":") + 1)
-          .replace(":", ""))) //,
+        "Manga",
+        " "
+      )),
+      (presenceData.state = leitorCapitulo.innerText
+        .slice(0, leitorCapitulo.innerText.search(":") + 1)
+        .replace(":", ""))) //,
       : ((presenceData.details = nomeObra.innerText),
-        categoria1.innerText.includes("Categoria")
-          ? (presenceData.state = categoria1.innerText)
-          : (presenceData.state = categoriasObra.innerText));
+      categoria1.innerText.includes("Categoria")
+        ? (presenceData.state = categoria1.innerText)
+        : (presenceData.state = categoriasObra.innerText));
   } else if (path.includes("/news/")) {
     presenceData.details = "Nóticias";
     presenceData.state = noticiaTitulo.innerText;

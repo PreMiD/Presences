@@ -25,9 +25,9 @@ function getGuildTitle(): string {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "aminoapps",
-      startTimestamp: new Date().getTime()
-    },
+    largeImageKey: "aminoapps",
+    startTimestamp: new Date().getTime()
+  },
     host = document.location.hostname;
   if (host === "aminoapps.com") {
     switch (true) {

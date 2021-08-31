@@ -183,8 +183,8 @@ presence.on("UpdateData", async () => {
           "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
         ).textContent
           ? document.querySelector(
-              "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
-            ).textContent
+            "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
+          ).textContent
           : null ||
             (document.querySelector(
               "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span"
@@ -192,7 +192,7 @@ presence.on("UpdateData", async () => {
               document.querySelector(
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ))
-          ? `${document
+            ? `${document
               .querySelector(
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span"
               )
@@ -201,7 +201,7 @@ presence.on("UpdateData", async () => {
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ).textContent
             }. Bölüm`
-          : "none found",
+            : "none found",
       fixedEpisodeName = episodeX
         .replace(/\n/g, "")
         .replace(/-/g, "")
@@ -249,8 +249,8 @@ presence.on("UpdateData", async () => {
           "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
         ).textContent
           ? document.querySelector(
-              "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
-            ).textContent
+            "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
+          ).textContent
           : null ||
             (document.querySelector(
               "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span"
@@ -258,7 +258,7 @@ presence.on("UpdateData", async () => {
               document.querySelector(
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ))
-          ? `${document
+            ? `${document
               .querySelector(
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span"
               )
@@ -267,7 +267,7 @@ presence.on("UpdateData", async () => {
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ).textContent
             }. Bölüm`
-          : null;
+            : null;
 
     if (title && title.textContent !== "" && episodeX) {
       const fixedEpisodeName = episodeX

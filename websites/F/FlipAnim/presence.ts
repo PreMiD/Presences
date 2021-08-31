@@ -20,9 +20,9 @@ presence.on("UpdateData", async () => {
         `${document.querySelector("#mainDivActive > div:nth-child(6) > div")
           .textContent 
         } by: ${ 
-        document.querySelector(
-          "#mainDivActive > div:nth-child(10) > div:nth-child(2) > div.anim_author > a:nth-child(1)"
-        ).textContent}`;
+          document.querySelector(
+            "#mainDivActive > div:nth-child(10) > div:nth-child(2) > div.anim_author > a:nth-child(1)"
+          ).textContent}`;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/profile")) {
       presenceData.startTimestamp = browsingStamp;

@@ -60,18 +60,18 @@ function getData() {
         userState = el.querySelector("i.icon-bbb-desktop")
           ? "screen"
           : el.querySelector("i.icon-bbb-video")
-          ? "video"
-          : el.querySelector("i.icon-bbb-desktop_off")
-          ? "presentation"
-          : el.querySelector("i.icon-bbb-unmute")
-          ? "microphone"
-          : el.querySelector("i.icon-bbb-mute")
-          ? "muted"
-          : el.querySelector("i.icon-bbb-audio_on")
-          ? "headphones"
-          : el.querySelector("i.icon-bbb-listen")
-          ? "headphones"
-          : "disconnected";
+            ? "video"
+            : el.querySelector("i.icon-bbb-desktop_off")
+              ? "presentation"
+              : el.querySelector("i.icon-bbb-unmute")
+                ? "microphone"
+                : el.querySelector("i.icon-bbb-mute")
+                  ? "muted"
+                  : el.querySelector("i.icon-bbb-audio_on")
+                    ? "headphones"
+                    : el.querySelector("i.icon-bbb-listen")
+                      ? "headphones"
+                      : "disconnected";
       }
     });
   } else {
@@ -97,16 +97,16 @@ presence.on("UpdateData", async () => {
       userState === "screen"
         ? "Sharing screen..."
         : userState === "presentation"
-        ? "Presenting..."
-        : userState === "video"
-        ? "Video call"
-        : userState === "microphone"
-        ? "Speaking..."
-        : userState === "muted"
-        ? "Muted"
-        : userState === "headphones"
-        ? "Listening..."
-        : "Disconnected",
+          ? "Presenting..."
+          : userState === "video"
+            ? "Video call"
+            : userState === "microphone"
+              ? "Speaking..."
+              : userState === "muted"
+                ? "Muted"
+                : userState === "headphones"
+                  ? "Listening..."
+                  : "Disconnected",
     presenceData = {
       largeImageKey: "logo",
       smallImageKey: inCall ? userState : "logo",

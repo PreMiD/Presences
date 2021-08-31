@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
     page = document.location.pathname;
   if (page.startsWith("/bots/")) {
     presenceData.details = "Viewing a bot:";

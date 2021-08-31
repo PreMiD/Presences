@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: timeStamp
-    },
+    largeImageKey: "logo",
+    startTimestamp: timeStamp
+  },
     page = document.location.pathname;
   if (page.startsWith("/learn/")) {
     presenceData.details = "Learning:";
