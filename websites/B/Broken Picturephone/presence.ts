@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 
   if (waitValue >= 1) data.details = "On waitlist";
 
-  if (data.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);
