@@ -53,8 +53,8 @@ presence.on("UpdateData", async () => {
     });
   } else if (page.includes("/film-ara")) {
     const searching = document.querySelector(
-        "body > main > div.row.category-head > div > h2"
-      ) as HTMLElement,
+      "body > main > div.row.category-head > div > h2"
+    ) as HTMLElement,
       fixedSearching =
         searching && searching.textContent !== ""
           ? searching.textContent.replace(/"/g, "").replace(" Sonuçları", "")

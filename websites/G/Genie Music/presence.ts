@@ -36,8 +36,8 @@ function getGenre(code: string) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "geneie"
-    },
+    largeImageKey: "geneie"
+  },
     { location } = window;
   // If player
   if (location.pathname === "/player/fPlayer") {

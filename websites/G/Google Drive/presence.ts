@@ -4,9 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "drivenewlogo",
-      details: "Viewing page:"
-    },
+    largeImageKey: "drivenewlogo",
+    details: "Viewing page:"
+  },
     path = document.location.pathname
       .toLowerCase()
       .replace(/(\/u\/([0-9])+)/g, "");
@@ -30,10 +30,10 @@ presence.on("UpdateData", async () => {
   else if (path.startsWith("/file/")) {
     const main = document.title.split("."),
       fileName =
-        main.length == 2 ? main[0] : main.slice(0, -1).join("").toString(),
+        main.length === 2 ? main[0] : main.slice(0, -1).join("").toString(),
       fileExtension = main.slice(-1).toString().replace("- Google Drive", "");
 
-    presenceData.details = `Viewing a file:`;
+    presenceData.details = "Viewing a file:";
     presenceData.state = (await presence.getSetting("filename"))
       ? `${fileName}.${fileExtension.toUpperCase()}`
       : `unknown.${fileExtension.toUpperCase()} (File name hidden)`;

@@ -571,9 +571,9 @@ let lastFileChange: number = null,
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      smallImageKey: "gh",
-      smallImageText: "GitHub Codespaces"
-    },
+    smallImageKey: "gh",
+    smallImageText: "GitHub Codespaces"
+  },
     isPreparing = document.querySelector(".vscs-splash-screen-steps-pane"),
     activeTab = document.querySelector(".tab.active"),
     editorMode = document.getElementById("status.editor.mode");

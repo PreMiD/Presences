@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "gofundme",
-      startTimestamp: timer
-    },
+    largeImageKey: "gofundme",
+    startTimestamp: timer
+  },
     { pathname, href } = location,
     url = new URL(href),
     searchParams = url.searchParams.get("q"),
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.details = "GoFundMe Causes";
     data.state = "Justice & Equality";
-  } else if (pathname.startsWith(`/s`)) {
+  } else if (pathname.startsWith("/s")) {
     data.details = "Searching for a fundraiser:";
     data.state = searchParams;
   }

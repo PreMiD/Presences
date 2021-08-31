@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "meetlogo",
-      startTimestamp: time
-    },
+    largeImageKey: "meetlogo",
+    startTimestamp: time
+  },
     path = document.location.pathname.toLowerCase();
 
   if (path === "/") {

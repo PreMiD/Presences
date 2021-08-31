@@ -4,9 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const profile: { [key: string]: HTMLElement } = {
-      name: document.querySelector(".vcard-names .p-name"),
-      nickname: document.querySelector(".vcard-names .p-nickname")
-    },
+    name: document.querySelector(".vcard-names .p-name"),
+    nickname: document.querySelector(".vcard-names .p-nickname")
+  },
     organization: { [key: string]: HTMLElement } = {
       name: document.querySelector(
         "#js-pjax-container > div > header > div.container-xl.pt-4.pt-lg-0.p-responsive.clearfix > div > div.flex-1 > h1"
@@ -246,12 +246,12 @@ presence.on("UpdateData", async () => {
     presenceData.state = organization.name.innerText;
   } else if (
     !organization.name &&
-    document.location.pathname.includes(`/orgs/`)
+    document.location.pathname.includes("/orgs/")
   ) {
     const pathData: string[] = document.location.pathname.split("/").slice(2);
 
     presenceData.details = `Viewing ${pathData[1]} from`;
-    presenceData.state = pathData[0];
+    [presenceData.state] = pathData;
   }
   presence.setActivity(presenceData);
 });

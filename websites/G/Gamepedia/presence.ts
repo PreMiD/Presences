@@ -101,8 +101,8 @@ if (
               currentPath[0] === "index.php"
                 ? getURLParam("title")
                 : currentPath[0] === "wiki"
-                ? currentPath.slice(1).join("/")
-                : currentPath.slice(2).join("/");
+                  ? currentPath.slice(1).join("/")
+                  : currentPath.slice(2).join("/");
             //let lang: string = currentPath[0]
             return decodeURIComponent(raw.replace(/_/g, " "));
           };
@@ -143,8 +143,8 @@ if (
                 mainPagePath[0] === "index.php"
                   ? getURLParam("title")
                   : mainPagePath[0] === "wiki"
-                  ? mainPagePath.slice(1).join("/")
-                  : mainPagePath.slice(2).join("/");
+                    ? mainPagePath.slice(1).join("/")
+                    : mainPagePath.slice(2).join("/");
             sitename = decodeURIComponent(mainPageRaw.replace(/_/g, " "));
           }
         }

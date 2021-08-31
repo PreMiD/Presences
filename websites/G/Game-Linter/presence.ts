@@ -1,12 +1,12 @@
 const presence = new Presence({
-  clientId: "724010668751323196" //The client ID of the Application created at https://discordapp.com/developers/applications
+  clientId: "724010668751323196"
 });
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logoalso",
-      smallImageKey: "logoalso"
-    },
+    largeImageKey: "logoalso",
+    smallImageKey: "logoalso"
+  },
     browsingStamp = Math.floor(Date.now() / 1000);
 
   presenceData.startTimestamp = browsingStamp;
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Making a request or a report";
     presenceData.state = "Request/Report";
   } else if (/\/game\/(.)+/g.test(path)) {
-    presenceData.details = `Browsing a Game`;
+    presenceData.details = "Browsing a Game";
 
     const ttl = path
       .split("/")[2]
@@ -45,10 +45,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Just surfing";
     presenceData.state = "Boring";
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

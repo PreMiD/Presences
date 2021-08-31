@@ -30,8 +30,8 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      startTimestamp: browsingStamp
-    },
+    startTimestamp: browsingStamp
+  },
     privacy = await presence.getSetting("privacy"),
     newLang = await presence.getSetting("lang");
 

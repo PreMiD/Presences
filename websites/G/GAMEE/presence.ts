@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "gamee_logo",
-      startTimestamp: timer
-    },
+    largeImageKey: "gamee_logo",
+    startTimestamp: timer
+  },
     { pathname, href } = location,
     [, , IDs] = pathname.split("/");
 

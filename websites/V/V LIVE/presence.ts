@@ -120,14 +120,14 @@ presence.on("UpdateData", async () => {
       "#root > div > div > div > nav > div > a > strong"
     )
       ? document.querySelector(
-          "#root > div > div > div > nav > div > a > strong"
-        ).textContent
+        "#root > div > div > div > nav > div > a > strong"
+      ).textContent
       : "ERROR: NOT FOUND!",
     channelPageBoardTitle = document.querySelector(
       "#root > div > div > div > div > div > h3"
     )
       ? document.querySelector("#root > div > div > div > div > div > h3")
-          .textContent
+        .textContent
       : "ERROR: NOT FOUND!",
     productPageTitle = document.querySelector("h3.tit")
       ? document.querySelector("h3.tit").textContent
@@ -138,9 +138,9 @@ presence.on("UpdateData", async () => {
     searchPageValue = privacy
       ? undefined
       : document.querySelector("#searchForm > input")
-      ? (document.querySelector("#searchForm > input") as HTMLInputElement)
+        ? (document.querySelector("#searchForm > input") as HTMLInputElement)
           .value
-      : "ERROR: NOT FOUND!",
+        : "ERROR: NOT FOUND!",
     statics: {
       [name: string]: PresenceData;
     } = {
@@ -267,23 +267,23 @@ presence.on("UpdateData", async () => {
         smallImageKey: "reading"
       },
       "/about/": {
-        details: (await strings).readingAbout + " V LIVE",
+        details: `${(await strings).readingAbout} V LIVE`,
         smallImageKey: "reading"
       }
     };
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   if (showBrowsing) {
     for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
+      if (path.match(k)) 
         presenceData = { ...presenceData, ...v };
-      }
+      
     }
 
     if (privacy) {
@@ -306,8 +306,8 @@ presence.on("UpdateData", async () => {
         "#root > div > div > div > div > div > div > div > div > div > span > strong"
       )
         ? document.querySelector(
-            "#root > div > div > div > div > div > div > div > div > div > span > strong"
-          ).textContent
+          "#root > div > div > div > div > div > div > div > div > div > span > strong"
+        ).textContent
         : "ERROR: NOT FOUND!";
 
     if (video) {
@@ -319,7 +319,7 @@ presence.on("UpdateData", async () => {
               document.querySelector(".timeBox").textContent
             );
             presenceData.startTimestamp = Math.floor(
-              Date.now() / 1000 - timestamp
+              (Date.now() / 1000) - timestamp
             );
           }
           presenceData.smallImageKey = video.paused ? "pause" : "live";
@@ -333,9 +333,9 @@ presence.on("UpdateData", async () => {
             .replace("%title%", title)
             .replace("%streamer%", channelPageChannelName);
 
-          if (video.paused) {
+          if (video.paused) 
             delete presenceData.startTimestamp;
-          }
+          
         }
 
         //* Privacy mode enabled.
@@ -351,8 +351,7 @@ presence.on("UpdateData", async () => {
         //* Is a a normal video
         if (showVideo) {
           const timestamps = presence.getTimestampsfromMedia(video);
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          presenceData.endTimestamp = timestamps.pop();
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused
             ? (await strings).pause
@@ -454,8 +453,7 @@ presence.on("UpdateData", async () => {
       //* Has video
       if (showVideo) {
         const timestamps = presence.getTimestampsfromMedia(video);
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        presenceData.endTimestamp = timestamps.pop();
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
           ? (await strings).pause
@@ -484,7 +482,7 @@ presence.on("UpdateData", async () => {
     } else if (postTitle && postPoster) {
       //* Normal text post
       presenceData.details =
-        (await strings).readingPost + " (" + postPoster.textContent + ")";
+        `${(await strings).readingPost} (${postPoster.textContent})`;
       presenceData.state = postTitle.textContent;
       presenceData.smallImageKey = "reading";
     }

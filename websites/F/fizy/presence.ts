@@ -8,8 +8,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const player = document.querySelector(
-      "#audio-player_html5_api"
-    ) as HTMLAudioElement,
+    "#audio-player_html5_api"
+  ) as HTMLAudioElement,
     playing = player ? (player.paused ? false : true) : false,
     data: PresenceData = {
       largeImageKey: "fizy-logo"
@@ -22,9 +22,9 @@ presence.on("UpdateData", async () => {
     ),
     timestamps = player
       ? presence.getTimestamps(
-          Math.floor(player.currentTime),
-          Math.floor(player.duration)
-        )
+        Math.floor(player.currentTime),
+        Math.floor(player.duration)
+      )
       : null;
 
   if (
