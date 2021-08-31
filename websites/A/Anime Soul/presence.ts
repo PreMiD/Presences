@@ -40,6 +40,18 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/events")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing AS Events";
+  } else if (document.location.pathname.includes("/articles")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing Articles";
+  } else if (document.location.pathname.includes("/achievements")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing Achievements";
+  } else if (document.location.pathname.includes("/messages")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing Messages";
+  } else if (document.location.pathname.includes("/keysgiveaways")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing Keys Giveaway";
   }
 
   /// Anime Soul anime section ///
@@ -75,11 +87,17 @@ presence.on("UpdateData", async () => {
     data.details = "Viewing the Auction";
   } else if (document.location.pathname.includes("/trades")) {
     data.startTimestamp = browsingStamp;
-    data.details = "Viewing Trades List";
+    data.details = "Viewing Trades";
+  } else if (document.location.pathname.includes("/stacks")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing Stacks";
   }
 
   /// Anime Soul games section ///
-  else if (document.location.pathname.includes("/this-or-that")) {
+  else if (document.location.pathname.includes("/games")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Playing Games";
+  } else if (document.location.pathname.includes("/this-or-that")) {
     data.startTimestamp = browsingStamp;
     data.details = "Playing This or That";
   } else if (document.location.pathname.includes("/mini-games")) {
@@ -103,6 +121,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/servers")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing AS Servers";
+  } else if (document.location.pathname.includes("/cardmakers/leaderboard")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing AS Card Makers";
   }
 
   /// Anime Soul support section ///
@@ -124,6 +145,18 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/staff")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Hidden Page";
+  } else if (document.location.pathname.includes("/support/category")) {
+    data.startTimestamp = browsingStamp;
+    data.details = document.title;
+  } else if (document.location.pathname.includes("/support/thread")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing Threads";
+  } else if (document.location.pathname.includes("/support")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing Support HQ Forum";
+  } else if (document.location.pathname.includes("/tasks")) {
+    data.startTimestamp = browsingStamp;
+    data.details = "Viewing Tasks";
   }
   if (data.details == null) {
     presence.setTrayTitle();
