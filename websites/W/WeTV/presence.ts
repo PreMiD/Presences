@@ -1,4 +1,4 @@
-class WeTV extends Presence {  
+class WeTV extends Presence {
   constructor(options: PresenceOptions) {
     super(options);
   }
@@ -6,9 +6,11 @@ class WeTV extends Presence {
   getTitle() {
     const JSONData: {
       "@graph": {
-        name: string
-      }[]
-    } = JSON.parse(document.querySelector('[type="application/ld+json"]').textContent);
+        name: string;
+      }[];
+    } = JSON.parse(
+      document.querySelector('[type="application/ld+json"]').textContent
+    );
 
     return JSONData["@graph"][0].name;
   }
@@ -18,14 +20,17 @@ class WeTV extends Presence {
   }
 
   getEpisodeTitle() {
-    const Element = document.querySelector(".play-relevant__item.play-relevant__item--selected");
+    const Element = document.querySelector(
+      ".play-relevant__item.play-relevant__item--selected"
+    );
 
-    if (Element)
-      return Element.children[2].textContent;
+    if (Element) return Element.children[2].textContent;
   }
 
   getEpisodeNumber() {
-    return document.querySelector(".play-video__item.play-video__item--selected")?.textContent.match(/[1-9][0-9]?[0-9]?/)[0];
+    return document
+      .querySelector(".play-video__item.play-video__item--selected")
+      ?.textContent.match(/[1-9][0-9]?[0-9]?/)[0];
   }
 
   isMovie() {
@@ -58,16 +63,14 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-      if (video.paused)
-        delete presenceData.endTimestamp;
-      
+      if (video.paused) delete presenceData.endTimestamp;
+
       if (presence.isMovie()) {
         presenceData.state = "Movie";
 
-        if (presence.isClip())
-          presenceData.state = "Clip";
+        if (presence.isClip()) presenceData.state = "Clip";
       } else {
-        if (presence.getEpisodeNumber()) 
+        if (presence.getEpisodeNumber())
           presenceData.state = `Episode ${presence.getEpisodeNumber()}`;
         else presenceData.state = presence.getEpisodeTitle();
       }
