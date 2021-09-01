@@ -16,7 +16,7 @@
     "translator:compile": "tsc -p ./util/configs/tsconfig.translator.json"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
+    "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.14.9",
     "@types/babel__core": "^7.1.15",
     "@types/chrome": "^0.0.149",
