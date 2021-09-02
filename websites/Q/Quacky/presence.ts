@@ -1,9 +1,7 @@
 const presence = new Presence({
   clientId: "882955333121757236"
 }),
-
- browsingStamp = Math.floor(Date.now() / 1000);
-
+browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "avatar",
