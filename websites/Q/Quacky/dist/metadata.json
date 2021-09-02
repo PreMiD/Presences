@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Dominik",
+    "id": "594491170248458250"
+  },
+  "service": "Quacky",
+  "description": {
+    "en": "Quacky is an advanced utility bot that increases automation in your server. With commands ranging from fun to moderation, it's the perfect bot for both users and admins alike."
+  },
+  "url": [
+    "quacky.xyz",
+    "docs.quacky.xyz"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/YIggKpo.png",
+  "thumbnail": "https://i.imgur.com/pxoECNQ.png",
+  "color": "#FFFFFF",
+  "tags": [
+    "discord",
+    "bot"
+  ],
+  "category": "other"
+}

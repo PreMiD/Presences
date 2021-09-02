@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Dominik",
+    "id": "594491170248458250"
+  },
+  "service": "Statcord.com",
+  "description": {
+    "en": "Monitoring your Discord Bots statistics has never been easier. Get started within minute to track statistics that will last a lifetime."
+  },
+  "url": [
+    "statcord.com",
+    "docs.statcord.com"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/gTaQmgt.png",
+  "thumbnail": "https://i.imgur.com/hCnhNgr.png",
+  "color": "#00D0FD",
+  "tags": [
+    "discord",
+    "bots"
+  ],
+  "category": "other"
+}
