@@ -1,9 +1,7 @@
 const presence = new Presence({
   clientId: "692810788196581376"
 }),
-
- browsingStamp = Math.floor(Date.now() / 1000);
-
+browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
@@ -31,11 +29,9 @@ presence.on("UpdateData", () => {
   if (document.location.hostname === "docs.statcord.com") 
     presenceData.details = "Viewing Docs";
   
-
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
     presence.setActivity(presenceData);
-  
 });
