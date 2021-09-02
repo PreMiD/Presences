@@ -32,10 +32,5 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing Docs";
   
 
-  if (presenceData.details === null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else 
-    presence.setActivity(presenceData);
-  
+presence.setActivity(presenceData);
 });
