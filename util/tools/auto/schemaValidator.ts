@@ -26,8 +26,14 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
     );
     stats.failedToValidate++;
   },
-  loadMetadata = (path: string): metadata =>
-    JSON.parse(readFileSync(path, "utf-8")),
+  loadMetadata = (path: string): metadata => {
+    try {
+      return JSON.parse(readFileSync(path, "utf-8"));
+    } catch {
+      return null;
+    }
+  },
+  getServiceName = (path: string) => path.split("/")[2],
   changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
   metaFiles = changedFiles.filter((f: string) => f.endsWith("metadata.json"));
 
@@ -41,11 +47,16 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
   );
 
   for (const metaFile of metaFiles) {
-    const meta = loadMetadata(metaFile),
-      service = meta.service,
+    const meta = loadMetadata(metaFile);
+
+    if (!meta) {
+      failedToValidate(getServiceName(metaFile), ["Invalid JSON"]);
+      continue;
+    }
+
+    const service = meta.service,
       result = validate(meta, schema),
-      validLangs = (await axios.get("https://api.premid.app/v2/langFile/list"))
-        .data,
+      validLangs = (await axios.get("https://api.premid.app/v2/langFile/list")).data,
       invalidLangs: string[] = [];
 
     Object.keys(meta.description).forEach((lang) => {
