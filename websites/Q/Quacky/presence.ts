@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "882955333121757236"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -28,14 +28,14 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (document.location.hostname == "docs.quacky.xyz") {
+  if (document.location.hostname == "docs.quacky.xyz") 
     presenceData.details = "Viewing Docs";
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

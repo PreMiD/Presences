@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "692810788196581376"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -15,7 +15,7 @@ presence.on("UpdateData", () => {
     presenceData.state = "Viewing At Home Page";
     if (document.location.pathname.includes("/bot/")) {
       presenceData.details = "Viewing:";
-      presenceData.state = document.querySelector("#overview > div:nth-child(1) > div > div > div > div.col.mr-2 > div.h5.mb-0.font-weight-bold").textContent+" Statistics";
+      presenceData.state = `${document.querySelector("#overview > div:nth-child(1) > div > div > div > div.col.mr-2 > div.h5.mb-0.font-weight-bold").textContent} Statistics`;
     } else if (document.location.pathname.includes("/login/")) {
       presenceData.details = `Viewing Page:`;
       presenceData.state = `Login`;
@@ -28,14 +28,14 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (document.location.hostname == "docs.statcord.com") {
+  if (document.location.hostname == "docs.statcord.com") 
     presenceData.details = "Viewing Docs";
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
