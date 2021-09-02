@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.hostname == "statcord.com") {
+  if (document.location.hostname === "statcord.com") {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Viewing At Home Page";
     if (document.location.pathname.includes("/bot/")) {
@@ -28,11 +28,11 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (document.location.hostname == "docs.statcord.com") 
+  if (document.location.hostname === "docs.statcord.com") 
     presenceData.details = "Viewing Docs";
   
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
