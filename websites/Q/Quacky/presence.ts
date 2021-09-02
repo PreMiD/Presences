@@ -28,11 +28,11 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (document.location.hostname == "docs.quacky.xyz") 
+  if (document.location.hostname === "docs.quacky.xyz") 
     presenceData.details = "Viewing Docs";
   
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
