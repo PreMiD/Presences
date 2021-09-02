@@ -369,7 +369,7 @@ function handleOfficialWebsite(): void {
  */
 function getUserId(): string {
   try {
-    return ApiClient["_currentUser"]["Id"];
+    return ApiClient._currentUser.Id;
   } catch (e) {
     const servers = JSON.parse(
       localStorage.getItem("jellyfin_credentials")
@@ -381,16 +381,11 @@ function getUserId(): string {
         if (param.startsWith("serverId")) {
           const serverId = param.split("=")[1];
 
-          for (const server of servers) {
-            if (server.Id === serverId) {
-              return server.UserId;
-            }
-          }
+          for (const server of servers)
+            if (server.Id === serverId) return server.UserId;
         }
       }
-    } else {
-      return servers[0].UserId;
-    }
+    } else return servers[0].UserId;
   }
 }
 
@@ -406,32 +401,28 @@ const media: Record<string, string | MediaInfo> = {};
  */
 async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   const pending = "pending";
-  if (media[itemId] && media[itemId] !== pending) {
-    return media[itemId];
-  }
+  if (media[itemId] && media[itemId] !== pending) return media[itemId];
 
   media[itemId] = pending;
   const basePath = location.pathname.replace(
       location.pathname.split("/").slice(-2).join("/"),
       ""
     ),
-    baseLocation = location.protocol + "//" + location.host + basePath,
+    baseLocation = `${location.protocol}//${location.host}${basePath}`,
     res = await fetch(`${baseLocation}Users/${getUserId()}/Items/${itemId}`, {
       credentials: "include",
       headers: {
         "x-emby-authorization":
-          `MediaBrowser Client="${ApiClient["_appName"]}",` +
-          `Device="${ApiClient["_deviceName"]}",` +
-          `DeviceId="${ApiClient["_deviceId"]}",` +
-          `Version="${ApiClient["_appVersion"]}",` +
-          `Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
+          `MediaBrowser Client="${ApiClient._appName}",` +
+          `Device="${ApiClient._deviceName}",` +
+          `DeviceId="${ApiClient._deviceId}",` +
+          `Version="${ApiClient._appVersion}",` +
+          `Token="${ApiClient._serverInfo.AccessToken}"`
       }
     }),
     mediaInfo = await res.json();
 
-  if (media[itemId] === pending) {
-    media[itemId] = mediaInfo;
-  }
+  if (media[itemId] === pending) media[itemId] = mediaInfo;
 
   return media[itemId];
 }
@@ -463,19 +454,24 @@ async function handleVideoPlayback(): Promise<void> {
   let mediaInfo: string | MediaInfo;
 
   // no background image, we're playing live tv
-  if (videoPlayerElem.hasAttribute("poster")) {
+  if (videoPlayerElem?.hasAttribute("poster")) {
     const backgroundImageUrl = videoPlayerElem.getAttribute("poster");
 
     mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[4]);
+  } else if (videoPlayerElem?.src?.match(/(mediaSourceId=)([a-z0-9]{32})/)) {
+    const [itemId] = videoPlayerElem.src
+      .match(/(mediaSourceId=)([a-z0-9]{32})/)
+      .slice(2);
+
+    mediaInfo = await obtainMediaInfo(itemId);
   }
 
   // display generic info
   if (!mediaInfo) {
     title = "Watching unknown content";
     subtitle = "No metadata could be obtained";
-  } else if (typeof mediaInfo === "string") {
-    return;
-  } else {
+  } else if (typeof mediaInfo === "string") return;
+  else {
     switch (mediaInfo.Type) {
       case "Movie":
         title = "Watching a Movie:";
@@ -520,9 +516,7 @@ async function handleVideoPlayback(): Promise<void> {
   presenceData.details = title;
   presenceData.state = subtitle;
 
-  if (!presenceData.state) {
-    delete presenceData.state;
-  }
+  if (!presenceData.state) delete presenceData.state;
 }
 
 /**
@@ -544,9 +538,8 @@ async function handleItemDetails(): Promise<void> {
   if (!data) {
     presenceData.details = "Browsing details of an item";
     presenceData.state = "Could not get item details";
-  } else if (typeof data === "string") {
-    return;
-  } else {
+  } else if (typeof data === "string") return;
+  else {
     presenceData.details = `Browsing details of: ${data.Name}`;
 
     switch (data.Type) {
@@ -704,22 +697,17 @@ async function handleWebClient(): Promise<void> {
  * setDefaultsToPresence - set default values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
-  if (presenceData.smallImageKey) {
-    delete presenceData.smallImageKey;
-  }
-  if (presenceData.smallImageText) {
-    delete presenceData.smallImageText;
-  }
-  if (presenceData.startTimestamp) {
-    delete presenceData.startTimestamp;
-  }
-  if (presenceData.endTimestamp && isNaN(presenceData.endTimestamp)) {
-    delete presenceData.endTimestamp;
-  }
+  if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
-  if (await presence.getSetting("showTimestamps")) {
+  if (presenceData.smallImageText) delete presenceData.smallImageText;
+
+  if (presenceData.startTimestamp) delete presenceData.startTimestamp;
+
+  if (presenceData.endTimestamp && isNaN(presenceData.endTimestamp))
+    delete presenceData.endTimestamp;
+
+  if (await presence.getSetting("showTimestamps"))
     presenceData.startTimestamp = Date.now();
-  }
 }
 
 /**
@@ -729,15 +717,10 @@ async function setDefaultsToPresence(): Promise<void> {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isJellyfinWebClient(): Promise<boolean> {
-  if (!ApiClient) {
-    ApiClient = await presence.getPageletiable("ApiClient");
-  }
+  if (!ApiClient) ApiClient = await presence.getPageletiable("ApiClient");
 
-  if (ApiClient && typeof ApiClient === "object") {
-    if (ApiClient["_appName"] && ApiClient["_appName"] === APP_NAME) {
-      return true;
-    }
-  }
+  if (ApiClient && typeof ApiClient === "object")
+    if (ApiClient._appName && ApiClient._appName === APP_NAME) return true;
 
   return false;
 }
@@ -765,18 +748,15 @@ async function updateData(): Promise<void> {
   if (
     presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
     presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
-  ) {
+  )
     delete presenceData.startTimestamp;
-  }
 
   // if jellyfin is detected init/update the presence status
   if (showPresence) {
-    if (presenceData.details == null) {
+    if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
-      presence.setActivity(presenceData);
-    }
+    } else presence.setActivity(presenceData);
   }
 }
 

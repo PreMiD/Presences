@@ -29,15 +29,16 @@ presence.on("UpdateData", async () => {
           .childNodes.item(1)
           .textContent.replace("+", "_")
           .toLowerCase();
-      presenceData.smallImageText =
-        `${(
+      presenceData.smallImageText = `${
+        (
           document
             .querySelector("a[class~='active']")
             .childNodes.item(0) as HTMLElement
-        ).title 
-        } ${ 
-          document.querySelector("a[class~='active']").childNodes.item(1)
-            .textContent}`;
+        ).title
+      } ${
+        document.querySelector("a[class~='active']").childNodes.item(1)
+          .textContent
+      }`;
     }
     if (
       document
@@ -51,17 +52,16 @@ presence.on("UpdateData", async () => {
       .getElementsByClassName("card-header d-flex")
       .item(0)
       .childNodes.item(0).textContent;
-    if (presenceData.details === "") 
-      presenceData.details = "<NO NAME>";
-    
-    presenceData.state =
-      `Uploaded by ${ 
-        document
-          .getElementsByClassName(
-            "list-group-item d-flex justify-content-between"
-          )
-          .item(0)
-          .children.item(0).textContent}`;
+    if (presenceData.details === "") presenceData.details = "<NO NAME>";
+
+    presenceData.state = `Uploaded by ${
+      document
+        .getElementsByClassName(
+          "list-group-item d-flex justify-content-between"
+        )
+        .item(0)
+        .children.item(0).textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Page",
@@ -69,14 +69,12 @@ presence.on("UpdateData", async () => {
       },
       {
         label: "View Uploader's Profile",
-        url:
-          `https://beatsaver.com${ 
-            document
-              .getElementsByClassName(
-                "list-group-item d-flex justify-content-between"
-              )
-              .item(0)
-              .getAttribute("href")}`
+        url: `https://beatsaver.com${document
+          .getElementsByClassName(
+            "list-group-item d-flex justify-content-between"
+          )
+          .item(0)
+          .getAttribute("href")}`
       }
     ];
   } else if (document.location.pathname.includes("/profile")) {

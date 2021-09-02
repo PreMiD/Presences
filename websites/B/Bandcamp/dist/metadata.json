@@ -9,14 +9,11 @@
     "nl": "Ontdek geweldige muziek en ondersteun direct de artiesten die het maken."
   },
   "url": "bandcamp.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/FozA4oY.png",
   "thumbnail": "https://i.imgur.com/OcNBvvP.png",
   "color": "#61929c",
-  "tags": [
-    "music",
-    "albums"
-  ],
+  "tags": ["music", "albums"],
   "category": "music",
   "regExp": "([a-z0-9-]+[.])*bandcamp([.][a-z]+)+[/]"
 }
