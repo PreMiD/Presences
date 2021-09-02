@@ -33,7 +33,6 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
       return null;
     }
   },
-  getServiceName = (path: string) => path.split("/")[2],
   changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
   metaFiles = changedFiles.filter((f: string) => f.endsWith("metadata.json"));
 
@@ -50,7 +49,7 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
     const meta = loadMetadata(metaFile);
 
     if (!meta) {
-      failedToValidate(getServiceName(metaFile), ["Invalid JSON"]);
+      failedToValidate(metaFile.split("/")[2], ["Invalid JSON"]);
       continue;
     }
 
