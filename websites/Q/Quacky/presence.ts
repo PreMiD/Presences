@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.hostname == "quacky.xyz") {
+  if (document.location.hostname === "quacky.xyz") {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Home";
     if (document.location.pathname.includes("/vote")) {
