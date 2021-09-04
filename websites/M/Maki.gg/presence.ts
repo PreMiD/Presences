@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Selecting a module";
     } else if (document.location.pathname.includes("/dashboard/") && document.location.pathname.split("/").length > 3) { // Specfic dashboard tab
       const guildName = document.querySelector("#user-profile > div > div > div > div.relative > div.profile-img-container.d-flex.align-items-center.justify-content-between > div.profile-title.ml-3 > h1").innerHTML,
-       [tab] = document.location.pathname.split("/")[3];
+       [,,,tab] = document.location.pathname.split("/");
       let state;
       switch (tab) {
         // Modulues
