@@ -1,6 +1,6 @@
 const presence = new Presence({
   clientId: "563434444321587202"
-}),
+  }),
 
   browsingStamp = Math.floor(Date.now() / 1000);
 
