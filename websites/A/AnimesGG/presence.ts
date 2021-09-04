@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
   } else if (page === "/lista-de-animes/") {
     data.details = "Procurando animes";
     data.state = "Na lista de animes";
-    if (params.get("search") !== "0" )
+    if (params.get("search") !== "0")
       data.state = `Procurando por ${params.get("search")}`;
   } else if (page === "/filmes/") {
     data.details = "Procurando filmes de animes";
@@ -83,14 +83,12 @@ presence.on("UpdateData", async () => {
         ).innerHTML,
         showFullName = await presence.getSetting("fullName");
       data.details = "Vendo sobre um anime";
-      if (showFullName && animeTitleFull) 
+      if (showFullName && animeTitleFull)
         data.state = `Vendo sobre ${animeTitleFull}`;
       else data.state = `Vendo sobre ${animeTitleAbout}`;
     }
   } else if (page.startsWith("/usuario")) {
-    const username = document.querySelector(
-      ".profile-name"
-    ).innerHTML;
+    const username = document.querySelector(".profile-name").innerHTML;
     data.details = "Vendo a página de um usuário";
     data.state = `Vendo a página do ${username}`;
   } else if (page.startsWith("/filme")) {
@@ -103,10 +101,8 @@ presence.on("UpdateData", async () => {
       ) as HTMLMediaElement,
       timestamps = presence.getTimestampsfromMedia(video);
     data.details = "Assistindo um filme de anime";
-    if (showFullName && animeTitleFull) 
-      data.state = `${animeTitleFull}`;
-    else 
-      data.state = `${animeTitleAbout}`;
+    if (showFullName && animeTitleFull) data.state = `${animeTitleFull}`;
+    else data.state = `${animeTitleAbout}`;
     [, data.endTimestamp] = timestamps;
     data.buttons = [
       {
