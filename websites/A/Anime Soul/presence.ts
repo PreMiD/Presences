@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "672156210627084328"
 }),
- browsingStamp = Math.floor(Date.now() / 1000),
-var user;
+ browsingStamp = Math.floor(Date.now() / 1000),;
+let user;
 presence.on("UpdateData", async () => {
   const data = {
     largeImageKey: "animesoul",
