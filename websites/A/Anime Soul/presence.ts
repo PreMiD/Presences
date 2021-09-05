@@ -158,11 +158,6 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Tasks";
   }
-  if (data.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
     presence.setActivity(data);
-  }
   presence.setActivity(data);
 });
