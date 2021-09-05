@@ -161,8 +161,8 @@ presence.on("UpdateData", async () => {
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
+  } else {
     presence.setActivity(data);
-  
+  }
   presence.setActivity(data);
 });
