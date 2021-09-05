@@ -35,10 +35,10 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "lg",
-      startTimestamp: browsingStamp
-    },
-    newLang = await presence.getSetting("lang").catch(() => "en");
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
+  };
+  const newLang = await presence.getSetting("lang").catch(() => "en");
 
   if (oldLang !== newLang) {
     oldLang = newLang;
