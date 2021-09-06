@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+        "name": "EllieMTF",
+        "id": "771518390162292746"
+    },
+    "service": "Ornikar",
+    "description": {
+        "fr": "Ornikar est une plateforme en ligne de révision du code de la route et du passage du permis de conduire.",
+        "en":"Ornikar is an online platform of traffic laws learning and driver license exam."
+    },
+    "url": "ornikar.com",
+    "version": "1.0.0",
+    "logo":"https://i.imgur.com/vingA2A.png",
+    "thumbnail": "https://i.imgur.com/9hUo1Hc.png",
+    "color": "#4c34e0",
+    "tags":["car","ornikar","voiture","permis","code","auto"],
+    "category": "other"
+}
