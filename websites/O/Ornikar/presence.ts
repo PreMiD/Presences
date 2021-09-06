@@ -1,15 +1,15 @@
 const presence = new Presence({
-  clientId: "884234034450939974"
-}),
-timeS = Math.floor(Date.now() / 1000);
+    clientId: "884234034450939974"
+  }),
+  timeS = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    smallImageKey: 'car',
-    smallImageText: 'Ornikar',
-    largeImageKey: 'logo'
-  },
-  webpath = window.location.pathname.toLowerCase();
+      smallImageKey: "car",
+      smallImageText: "Ornikar",
+      largeImageKey: "logo"
+    },
+    webpath = window.location.pathname.toLowerCase();
 
   if (webpath.includes("/connexion")) { // Authentification
     presenceData.details = "Authentification";
