@@ -1,7 +1,8 @@
 const presence = new Presence({
-  clientId: "672156210627084328"
-}),
- browsingStamp = Math.floor(Date.now() / 1000);
+   clientId: "672156210627084328"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+
 let user;
 presence.on("UpdateData", async () => {
   const data = {
@@ -158,6 +159,6 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Tasks";
   }
-    presence.setActivity(data);
+
   presence.setActivity(data);
 });
