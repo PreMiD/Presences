@@ -7,40 +7,27 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     smallImageKey: 'car',
     smallImageText: 'Ornikar',
-    largeImageKey: 'logo',
+    largeImageKey: 'logo'
   };
 
   const webpath = window.location.pathname.toLowerCase();
 
-  // Connexion
-  if (webpath.includes("/connexion")) {
+  if (webpath.includes("/connexion")) { // Authentification
     presenceData.details = "Authentification";
     presenceData.state = "En train de se connecter...";
-  }
-
-  // Code de la route
-  else if (webpath.includes("/entrainement-au-code") || webpath.includes("/elearning")) {
+  } else if (webpath.includes("/entrainement-au-code") || webpath.includes("/elearning")) { // Code de la route
     presenceData.details = "Code de la route";
-  }
-
-  // Conduite
-  else if (webpath.includes("/conduite") || webpath.includes("/espace-conduite")) {
+  } else if (webpath.includes("/conduite") || webpath.includes("/espace-conduite")) { // Conduite
     presenceData.details = "Conduite";
-  }
-
-  // Boutique
-  else if (webpath.includes("/boutique")) {
+  } else if (webpath.includes("/boutique")) { // Boutique
     presenceData.details = "Boutique";
-  }
-
-  // Compte
-  else if (webpath.includes("/compte")) {
+  } else if (webpath.includes("/compte")) { // Compte
     presenceData.details = "Compte";
   }
 
   presenceData.startTimestamp = timeS;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
