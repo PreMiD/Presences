@@ -5,10 +5,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      smallImageKey: "car",
-      smallImageText: "Ornikar",
-      largeImageKey: "logo"
-    },
+    smallImageKey: "car",
+    smallImageText: "Ornikar",
+    largeImageKey: "logo"
+  },
     webpath = window.location.pathname.toLowerCase();
 
   if (webpath.includes("/connexion")) { // Authentification
