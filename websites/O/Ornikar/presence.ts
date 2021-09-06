@@ -1,16 +1,15 @@
 const presence = new Presence({
   clientId: "884234034450939974"
-});
-const timeS = Math.floor(Date.now() / 1000);
+}),
+timeS = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     smallImageKey: 'car',
     smallImageText: 'Ornikar',
     largeImageKey: 'logo'
-  };
-
-  const webpath = window.location.pathname.toLowerCase();
+  },
+  webpath = window.location.pathname.toLowerCase();
 
   if (webpath.includes("/connexion")) { // Authentification
     presenceData.details = "Authentification";
@@ -30,7 +29,5 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
