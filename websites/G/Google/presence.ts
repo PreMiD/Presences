@@ -20,6 +20,7 @@ async function getStrings() {
       doodles: "google.viewDoodles",
       viewingDoodle: "google.viewingDoodle",
       searchingDoodle: "google.searchingDoodle",
+      archive: "google.viewArchive",
       currentPage: "google.currentPage",
       images: "google.viewImages",
       videos: "google.viewVideos",
@@ -45,12 +46,16 @@ presence.on("UpdateData", async () => {
     strings = getStrings();
   }
 
-  if ((homepageInput && homepageImage) || !document.location.pathname) {
+  if (
+    (homepageInput && homepageImage) ||
+    !document.location.pathname ||
+    document.location.pathname === "/"
+  ) {
     presenceData.state = (await strings).home;
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.details;
-  } else if (document.location.pathname.startsWith("/doodles/")) {
+  } else if (document.location.pathname.startsWith("/doodles")) {
     const searchURL = new URL(document.location.href),
       doodleResult = searchURL.searchParams.get("q"),
       doodleTitle: HTMLElement = document.querySelector(
@@ -60,10 +65,17 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/about")) {
       presenceData.details = (await strings).doodles;
       presenceData.state = (await strings).about;
+    } else if (document.location.hash.includes("#archive")) {
+      presenceData.details = (await strings).doodles;
+      presenceData.state = (await strings).archive;
     } else if (doodleTitle !== null) {
       presenceData.details = (await strings).viewingDoodle;
       presenceData.state = doodleTitle.innerText;
-    } else if (doodleResult && document.location.pathname === "/doodles/") {
+    } else if (
+      doodleResult &&
+      (document.location.pathname === "/doodles" ||
+        document.location.pathname === "/doodles/")
+    ) {
       presenceData.details = (await strings).searchingDoodle;
       presenceData.state = doodleResult;
       presenceData.smallImageKey = "search";
