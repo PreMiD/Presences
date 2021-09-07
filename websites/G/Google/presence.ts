@@ -17,7 +17,7 @@ async function getStrings() {
       about: "google.viewAbout",
       search: "general.searchFor",
       news: "google.viewNews",
-      doodles: "google.doodles",
+      doodles: "google.viewDoodles",
       viewingDoodle: "google.viewingDoodle",
       searchingDoodle: "google.searchingDoodle",
       currentPage: "google.currentPage",
