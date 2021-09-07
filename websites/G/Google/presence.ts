@@ -12,19 +12,19 @@ const presence = new Presence({
 async function getStrings() {
   return presence.getStrings(
     {
-      home: "google.home",
-      books: "google.books",
-      about: "google.about",
+      home: "google.viewHome",
+      books: "google.viewBooks",
+      about: "google.viewAbout",
       search: "general.searchFor",
-      news: "google.news",
+      news: "google.viewNews",
       doodles: "google.doodles",
       viewingDoodle: "google.viewingDoodle",
       searchingDoodle: "google.searchingDoodle",
       currentPage: "google.currentPage",
-      images: "google.images",
-      videos: "google.videos",
-      finance: "google.finance",
-      personal: "google.personal"
+      images: "google.viewImages",
+      videos: "google.viewVideos",
+      finance: "google.viewFinance",
+      personal: "google.viewPersonal"
     },
     await presence.getSetting("lang").catch(() => "en")
   );
@@ -35,10 +35,10 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  },
-   newLang = await presence.getSetting("lang").catch(() => "en");
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    },
+    newLang = await presence.getSetting("lang").catch(() => "en");
 
   if (oldLang !== newLang) {
     oldLang = newLang;
