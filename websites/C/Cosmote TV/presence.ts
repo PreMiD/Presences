@@ -130,9 +130,5 @@ presence.on("UpdateData", async () => {
       data.state = 'Paused';
     }
   }
-  if (data.details === null) 
-    presence.setActivity();
-   else 
     presence.setActivity(data);
-  
 });
