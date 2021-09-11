@@ -8,10 +8,10 @@ const presence = new Presence({
     search: "general.searchFor"
   });
 
-
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "tv"
+    largeImageKey: "tv",
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
   if (document.location.href.includes("search")) {
     data.details = "Searching...";
@@ -48,8 +48,6 @@ presence.on("UpdateData", async () => {
   else
     data.details = "Browsing...";
 
-  data.startTimestamp = Math.floor(Date.now() / 1000);
-
   const playerCheck = document.querySelector(
     "div[ng-if='showPlayer']"
   )
@@ -62,19 +60,16 @@ presence.on("UpdateData", async () => {
         ".meta-title[ng-bind='details.title']"
       )
       ?.textContent,
-
       video: HTMLVideoElement = document.querySelector("video#arxPlayer"),
-
       { paused, currentTime, duration } = video,
       timestamps = presence.getTimestamps(Math.floor(currentTime), Math.floor(duration)),
-
       live = document.querySelector(
         ".meta-remain"
       )
         ? true
         : false;
 
-    if (live === false) {
+    if (!live) {
       (data.smallImageKey = paused ? "pause" : "play"),
         (data.smallImageText = paused
           ? (await strings).pause
@@ -111,10 +106,10 @@ presence.on("UpdateData", async () => {
       .querySelector(
         ".meta-title[ng-bind='details.channel.title']"
       )
-      ?.textContent;
+      ?.textContent
 
-    if (channel !== '') {
-      if (live === false)
+    if (channel.length !== 0) {
+      if (!live)
         data.state = `Watching on ${channel}`;
       else
         data.state = `Live on ${channel}`;
