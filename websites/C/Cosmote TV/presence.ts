@@ -8,14 +8,6 @@ const presence = new Presence({
     search: "general.searchFor"
   });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -79,10 +71,8 @@ presence.on("UpdateData", async () => {
 
      video: HTMLVideoElement = document.querySelector("video#arxPlayer"),
 
-     {paused} = video,
-     {currentTime} = video,
-     {duration} = video,
-     timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+     { paused, currentTime, duration } = video,
+     timestamps = presence.getTimestamps(Math.floor(currentTime), Math.floor(duration)),
 
      live = document.querySelector(
       ".meta-remain"
@@ -99,7 +89,7 @@ presence.on("UpdateData", async () => {
       (data.startTimestamp = timestamps[0]),
         (data.endTimestamp = timestamps[1]);
 
-      var series = document.querySelector(
+      const series = document.querySelector(
         "span[ng-bind='details.seriesSubs']"
       ).innerHTML.length > 0
         ? true
@@ -126,7 +116,7 @@ presence.on("UpdateData", async () => {
       data.largeImageKey = hashCode.toString();
     }
 
-    if (series === true) {
+    if (series) {
       data.details = document.querySelector(
         "span[ng-bind='details.seriesSubs']"
       ).textContent;
