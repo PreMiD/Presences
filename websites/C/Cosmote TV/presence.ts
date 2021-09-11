@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
       .querySelector(
         ".meta-title[ng-bind='details.channel.title']"
       )
-      ?.textContent
+      ?.textContent;
 
     if (channel.length !== 0) {
       if (!live)
