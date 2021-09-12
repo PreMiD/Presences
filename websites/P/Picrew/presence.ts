@@ -1,5 +1,5 @@
 const presence: Presence = new Presence({
-  clientId: "886406987137576981",
+  clientId: "886406987137576981"
 });
 
 presence.on("UpdateData", () => {
