@@ -1,13 +1,13 @@
 const presence: Presence = new Presence({
   clientId: "886406987137576981"
-});
+}),
 
-const { pathname } = window.location,
+ { pathname } = window.location,
   data: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: Math.round(new Date().getTime() / 1000)
-  };
-var lastPathname = null;
+  },
+ lastPathname = null;
 
 presence.on("UpdateData", () => {
   let details: string, state: string;
