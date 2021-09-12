@@ -6,18 +6,11 @@ let uploader: HTMLElement,
   uploaderName: string,
   uploaderLink: string,
   title: HTMLElement,
-  inread_title: HTMLElement,
-  page: HTMLElement,
   video: HTMLVideoElement,
-  videoDuration: number,
-  videoCurrentTime: number,
   videoPaused: boolean,
   currentTime: number,
   duration: number,
-  timestamps: number[],
-  paused: boolean,
-  playback: boolean,
-  iFramePaused: boolean;
+  timestamps: number[];
 
 const multiUploader = document.querySelector("div.members-info");
 
