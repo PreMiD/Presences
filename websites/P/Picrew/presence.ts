@@ -1,6 +1,5 @@
 const presence: Presence = new Presence({
   clientId: "886406987137576981",
-  injectOnComplete: true
 });
 
 presence.on("UpdateData", () => {
