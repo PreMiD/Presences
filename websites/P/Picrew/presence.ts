@@ -24,7 +24,7 @@ presence.on("UpdateData", () => {
       break;
     default:
       if (pathname.includes("/image_maker/")) {
-        const picrewId = pathname.match(/\/image_maker\/([0-9]{0,8})/)[1],
+        const [, picrewId] = pathname.match(/\/image_maker\/([0-9]{0,8})/),
           picrewTitle = `ID: ${picrewId} - ${document.title.substr(
             0,
             document.title.lastIndexOf("｜")
