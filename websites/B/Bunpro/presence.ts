@@ -21,8 +21,6 @@ function getLevelInHeader() {
   const levelElement: HTMLDivElement =
     document.querySelector(".navbar-user-level");
 
-  if (!levelElement) return null;
-
   return +levelElement.innerText.slice(6);
 }
 
@@ -89,13 +87,13 @@ presence.on("UpdateData", () => {
       case "/learn": {
         startTimestamp = Date.now();
 
-        const checkQuizElement: HTMLDivElement = document.querySelector(
+        const checkQuizzElement: HTMLDivElement = document.querySelector(
             "#learn-new-grammar-page"
           ),
-          isOnQuiz = checkQuizElement.style.display === "block";
+          isOnQuizz = checkQuizzElement.style.display === "block";
 
-        if (isOnQuiz) {
-          details = "Learning New Grammar (Quiz)";
+        if (isOnQuizz) {
+          details = "Learning New Grammar (Quizz)";
 
           const grammarPointElement: HTMLDivElement = document.querySelector(
               ".study-question-english-hint"
