@@ -55,10 +55,6 @@ presence.on("UpdateData", async () => {
   switch (document.location.hostname) {
     case "www.bilibili.com": {
       switch (urlpath[1]) {
-        default: {
-          presenceData.startTimestamp = browsingStamp;
-          break;
-        }
         case "video": {
           getTimestamps();
 
@@ -89,6 +85,10 @@ presence.on("UpdateData", async () => {
               url: `https:${uploaderLink}`
             }
           ];
+          break;
+        }
+        default: {
+          presenceData.startTimestamp = browsingStamp;
           break;
         }
       }
