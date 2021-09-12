@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 
   async function getTimestamps() {
     video = document.querySelector("bwp-video");
-    if (video === null) {
+    if (!video) {
       video = document.querySelector("video");
       videoPaused = video.paused;
       timestamps = presence.getTimestamps(video.currentTime, video.duration);
@@ -45,7 +45,6 @@ presence.on("UpdateData", async () => {
     presenceData.endTimestamp = timestamps[1];
 
     presenceData.smallImageKey = videoPaused ? "pause" : "play";
-    // presenceData.smallImageText = videoPaused ? (await strings).pause : (await strings).play; Not working due language issues, this issue should fix in extension
 
     if (videoPaused) {
       delete presenceData.startTimestamp;
@@ -56,7 +55,7 @@ presence.on("UpdateData", async () => {
   switch (document.location.hostname) {
     case "www.bilibili.com": {
       switch (urlpath[1]) {
-        case "": {
+        default: {
           presenceData.startTimestamp = browsingStamp;
           break;
         }
@@ -110,8 +109,5 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
