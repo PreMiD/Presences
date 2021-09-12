@@ -27,18 +27,25 @@ presence.on("UpdateData", async () => {
   };
 
   async function getTimestamps() {
-
     video = document.querySelector("bwp-video");
     if (video === null) {
       video = document.querySelector("video");
       videoPaused = video.paused;
       timestamps = presence.getTimestamps(video.currentTime, video.duration);
     } else {
-      const playerButton = document.querySelector(".bilibili-player-video-btn-start");
-      videoPaused = playerButton.classList.contains("video-state-pause") === true;
-      currentTime = presence.timestampFromFormat(document.querySelector(".bilibili-player-video-time-now").textContent),
-      duration = presence.timestampFromFormat(document.querySelector(".bilibili-player-video-time-total").textContent),
-      timestamps = presence.getTimestamps(currentTime, duration);
+      const playerButton = document.querySelector(
+        ".bilibili-player-video-btn-start"
+      );
+      videoPaused =
+        playerButton.classList.contains("video-state-pause") === true;
+      (currentTime = presence.timestampFromFormat(
+        document.querySelector(".bilibili-player-video-time-now").textContent
+      )),
+      (duration = presence.timestampFromFormat(
+        document.querySelector(".bilibili-player-video-time-total")
+          .textContent
+      )),
+      (timestamps = presence.getTimestamps(currentTime, duration));
     }
 
     presenceData.startTimestamp = timestamps[0];
@@ -61,7 +68,6 @@ presence.on("UpdateData", async () => {
           break;
         }
         case "video": {
-
           getTimestamps();
 
           if (multiUploader !== null) {
@@ -81,7 +87,6 @@ presence.on("UpdateData", async () => {
 
           presenceData.details = title.getAttribute("title");
           presenceData.state = uploaderName;
-          console.log(`https://www.bilibili.com/video/${urlpath[2]}, https:${uploaderLink}`)
           presenceData.buttons = [
             {
               label: "Watch Video", // getString() later
@@ -91,7 +96,7 @@ presence.on("UpdateData", async () => {
               label: "View Space", // getString() later
               url: `https:${uploaderLink}`
             }
-          ]
+          ];
           break;
         }
       }
@@ -107,12 +112,10 @@ presence.on("UpdateData", async () => {
           label: "View Space", // getString() later
           url: `https://space.bilibili.com/${urlpath[1]}`
         }
-      ]
+      ];
       break;
     }
   }
-
-  console.log(urlpath);
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
