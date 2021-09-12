@@ -24,11 +24,11 @@ presence.on("UpdateData", () => {
       break;
     default:
       if (pathname.includes("/image_maker/")) {
-        const picrewId = pathname.match(/\/image_maker\/([0-9]{0,8})/)[1];
-        const picrewTitle = `ID: ${picrewId} - ${document.title.substr(
-          0,
-          document.title.lastIndexOf("｜")
-        )}`;
+        const picrewId = pathname.match(/\/image_maker\/([0-9]{0,8})/)[1],
+          picrewTitle = `ID: ${picrewId} - ${document.title.substr(
+            0,
+            document.title.lastIndexOf("｜")
+          )}`;
 
         if (pathname.includes("/complete")) {
           details = "viewing their creation";
@@ -37,9 +37,7 @@ presence.on("UpdateData", () => {
           details = "creating a masterpiece";
           state = picrewTitle;
         }
-      } else {
-        details = "on Picrew";
-      }
+      } else details = "on Picrew";
   }
 
   data.state = state;
