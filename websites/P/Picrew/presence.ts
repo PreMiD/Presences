@@ -4,12 +4,13 @@ const presence: Presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  const pathname = window.location.pathname;
+  const { pathname } = window.location,
+    data: PresenceData = {
+      largeImageKey: "logo",
+      startTimestamp: Math.round(new Date().getTime() / 1000)
+    };
 
-  let data: PresenceData = {};
-  let details: string;
-  let state: string;
-  let startTimestamp = new Date().getTime();
+  let details: string, state: string;
 
   switch (pathname) {
     case "/":
@@ -41,10 +42,8 @@ presence.on("UpdateData", () => {
       }
   }
 
-  data.largeImageKey = "logo";
   data.state = state;
   data.details = details;
-  data.startTimestamp = Math.round(startTimestamp / 1000);
 
   presence.setActivity(data);
 });
