@@ -14,7 +14,7 @@
     "art",
     "avatar"
   ],  
-  "url": "picrew.me",
+  "url": ["picrew.me", "support.picrew.me"],
   "description": {
     "en": "Picrew is an avatar creation website.",
     "fr": "Picrew est un site de création d'avatars."
