@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Picrew",
+  "author": {
+    "name": "doggo",
+    "id": "428716613240619008"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/YqVt8WN.png",
+  "thumbnail": "https://i.imgur.com/5t4119s.png",
+  "version": "1.0.0",
+  "color": "#ffb6c1",
+  "tags": [
+    "art",
+    "avatar"
+  ],  
+  "url": "picrew.me",
+  "description": {
+    "en": "Picrew is an avatar creation website.",
+    "fr": "Picrew est un site de création d'avatars."
+  }
+}
