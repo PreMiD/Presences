@@ -6,17 +6,18 @@ const presence = new Presence({
     pause: "general.paused",
     live: "general.live",
     search: "general.searchFor"
-  });
+  }),
+  startedTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "tv",
-    startTimestamp: Math.floor(Date.now() / 1000)
+    startTimestamp: startedTime
   };
   if (document.location.href.includes("search")) {
     data.details = "Searching...";
     data.smallImageKey = "search";
-    data.smallImageText = await (await strings).search;
+    data.smallImageText = (await strings).search;
   } else if (document.location.href.includes("loginSplash"))
     data.details = "Viewing login page...";
   else if (document.location.href.includes("settings"))
@@ -70,13 +71,12 @@ presence.on("UpdateData", async () => {
         : false;
 
     if (!live) {
-      (data.smallImageKey = paused ? "pause" : "play"),
-        (data.smallImageText = paused
-          ? (await strings).pause
-          : (await strings).play);
+      data.smallImageKey = paused ? "pause" : "play";
+      data.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).play;
 
-      (data.startTimestamp = timestamps[0]),
-        (data.endTimestamp = timestamps[1]);
+      data.endTimestamp = timestamps.pop();
 
       const series = document.querySelector(
         "span[ng-bind='details.seriesSubs']"
@@ -92,10 +92,10 @@ presence.on("UpdateData", async () => {
       } else
         data.details = title;
     } else {
-      (data.smallImageKey = paused ? "pause" : "live"),
-        (data.smallImageText = paused
-          ? (await strings).pause
-          : (await strings).live);
+      data.smallImageKey = paused ? "pause" : "live";
+      data.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).live;
 
       const watchTime = Math.floor(Date.now() / 1000);
       data.startTimestamp = watchTime;
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
       )
       ?.textContent;
 
-    if (channel.length !== 0) {
+    if (channel?.length !== 0) {
       if (!live)
         data.state = `Watching on ${channel}`;
       else
