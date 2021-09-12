@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Moe Kotoki",
-    "id": "276627005280092162"
+    "name": "Bas950",
+    "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Moe Kotoki",
+      "id": "276627005280092162"
+    }
+  ],
   "service": "bilibili",
   "description": {
     "en": "bilibili is a well-known video barrage website in China. Here is the most timely animation new fan, the best ACG atmosphere, the most creative Up master. Everyone can find a lot of joy here.",
