@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
     };
 
     if (!showTimestamps)
-      delete presenceData.startTimestamp
+      delete presenceData.startTimestamp;
 
     if (hostname === etrnl || hostname === `www.${etrnl}`) {
 
