@@ -7,12 +7,12 @@ const desmosPresence = new Presence({
     //You can use this to get translated strings in their browser language
   });
 
-var url: string
-var graphing: number = 0
-var pageType: string
-var title: string = ""
-var numEquations: number = 0
-var startTime: number = Date.now()
+let url: string,
+ graphing = 0,
+ pageType: string,
+ title = "",
+ numEquations = 0,
+ startTime: number = Date.now();
 
 desmosPresence.on("UpdateData", async () => {
   /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
@@ -22,16 +22,16 @@ desmosPresence.on("UpdateData", async () => {
   // About the comment above: Is this really recommended? It appears to be not allowed according to the Presence Rules
   
   url = document.URL;
-  if (url[url.length-1] == "/") {
-  	url = url.substring(0, url.length-1)
-  }
-  var splitUrl = url.split("/")
-  var urlPage = splitUrl[splitUrl.length-1]
-  if (urlPage == "www.desmos.com") { 
-  	pageType = "Home Page" 
-  } else { 
-  	pageType = urlPage[0].toUpperCase() + urlPage.substring(1) 
-  }
+  if (url[url.length - 1] == "/") 
+  	url = url.substring(0, url.length - 1);
+  
+  const splitUrl = url.split("/"),
+   urlPage = splitUrl[splitUrl.length - 1];
+  if (urlPage == "www.desmos.com")  
+  	pageType = "Home Page"; 
+   else  
+  	pageType = urlPage[0].toUpperCase() + urlPage.substring(1); 
+  
   if (url.includes("/calculator")) {
   	graphing = 2;	
   	title = document.getElementsByClassName("dcg-variable-title")[0].innerHTML;
@@ -39,52 +39,51 @@ desmosPresence.on("UpdateData", async () => {
   } else if (url.includes("/geometry")) {
   	graphing = 1;	
   	title = document.getElementsByClassName("dcg-variable-title")[0].innerHTML;
-  	pageType = "Geometry"
-  	numEquations = 0
-  } 
-  else if (["scientific", "fourfunction", "matrix", "practice"].includes(urlPage)) {
+  	pageType = "Geometry";
+  	numEquations = 0;
+  } else if (["scientific", "fourfunction", "matrix", "practice"].includes(urlPage)) {
   	graphing = 1;
-  	if (pageType == "Scientific" || pageType == "Fourfunction") {
-  		numEquations = document.getElementsByClassName("dcg-basic-list")[0].childElementCount
-  	} else if (pageType == "Matrix") {
-  		numEquations = document.getElementsByClassName("dcg-matrix-list")[0].childElementCount
-  	} else {
-  		numEquations = 0
-  	}
-  } else {
+  	if (pageType == "Scientific" || pageType == "Fourfunction") 
+  		numEquations = document.getElementsByClassName("dcg-basic-list")[0].childElementCount;
+  	 else if (pageType == "Matrix") 
+  		numEquations = document.getElementsByClassName("dcg-matrix-list")[0].childElementCount;
+  	 else 
+  		numEquations = 0;
+  	
+  } else 
   	graphing = 0;
-  }
   
-  var presenceData: PresenceData = {
+  
+  const presenceData: PresenceData = {
     largeImageKey:
       "logo",
     startTimestamp: startTime,
   };
   
   if (graphing == 2) {
-	presenceData.smallImageKey = "logo"
-	presenceData.smallImageText = "Desmos Graphing Calculator"
-	presenceData.details = "Plotting a Graph: ".concat(title)
-	presenceData.state = numEquations.toString().concat(" Equation")
-	if (numEquations != 1) { presenceData.state += "s" }
+	presenceData.smallImageKey = "logo";
+	presenceData.smallImageText = "Desmos Graphing Calculator";
+	presenceData.details = "Plotting a Graph: ".concat(title);
+	presenceData.state = numEquations.toString().concat(" Equation");
+	if (numEquations != 1) presenceData.state += "s"; 
   } else {
-	delete presenceData.smallImageKey
-	delete presenceData.smallImageText
+	delete presenceData.smallImageKey;
+	delete presenceData.smallImageText;
 	if (graphing == 1) {
-		presenceData.details = "Using Desmos ".concat(pageType)
+		presenceData.details = "Using Desmos ".concat(pageType);
 		if (numEquations > 0) {
-			presenceData.details += " Calculator"
-			presenceData.state = numEquations.toString().concat(" Expression")
-			if (numEquations != 1) { presenceData.state += "s" }
-		} else {
-			delete presenceData.state
-		}
-		if (title != "") {
-			presenceData.details += ": ".concat(title)
-		}
-	} else {
-		presenceData.details = "Reading ".concat(pageType)
-	}
+			presenceData.details += " Calculator";
+			presenceData.state = numEquations.toString().concat(" Expression");
+			if (numEquations != 1) presenceData.state += "s"; 
+		} else 
+			delete presenceData.state;
+		
+		if (title != "") 
+			presenceData.details += ": ".concat(title);
+		
+	} else 
+		presenceData.details = "Reading ".concat(pageType);
+	
   }
   
   if (presenceData.details == null) {
