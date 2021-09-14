@@ -1,11 +1,6 @@
 const desmosPresence = new Presence({
 	clientId: "886254740399349852" //The client ID of the Application created at https://discordapp.com/developers/applications
-  }),
-  /*strings = desmosPresence.getStrings({
-	play: "presence.playback.playing",
-	pause: "presence.playback.paused"
-	//You can use this to get translated strings in their browser language
-  });*/
+  })
   
 var url: string
 var graphing: number = 0
