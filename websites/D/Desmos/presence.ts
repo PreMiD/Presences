@@ -4,7 +4,7 @@ let url: string,
  graphing: number,
  pageType: string,
  title: string,
- numEquations: number
+ numEquations: number;
 const startTime: number = Date.now();
 
 presence.on("UpdateData", async () => {
