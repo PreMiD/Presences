@@ -13,14 +13,7 @@ const startTime: number = Date.now()
     pause: "presence.playback.paused"
     //You can use this to get translated strings in their browser language
   });
-
-let url: string,
- graphing = 0,
- pageType: string,
- title = "",
- numEquations = 0,
- startTime: number = Date.now();
-
+  
 desmosPresence.on("UpdateData", async () => {
   /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
 
