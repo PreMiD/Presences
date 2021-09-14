@@ -18,7 +18,7 @@ quora.on("UpdateData", async () => {
       ).textContent;
       presenceData.details = "Viewing space:";
       presenceData.state = taxonomy;
-    } else if (document.location.pathname == "/") {
+    } else if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing homepage";
     } else if (document.location.pathname == "/notifications") {
