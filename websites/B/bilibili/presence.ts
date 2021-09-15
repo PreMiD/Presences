@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
     if (!video) {
       video = document.querySelector("video");
       videoPaused = video.paused;
-      timestamps = presence.getTimestamps(video.currentTime, video.duration);
+      timestamps = presence.getTimestampsfromMedia(video);
     } else {
       const playerButton = document.querySelector(
         ".bilibili-player-video-btn-start"
