@@ -8,6 +8,10 @@ let url: string,
 const startTime: number = Date.now();
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: startTime
+  };
   // Getting Data
   url = document.URL;
   if (url[url.length - 1] === "/") 
@@ -39,14 +43,7 @@ presence.on("UpdateData", async () => {
       numEquations = 0;
   } else 
     graphing = 0;
-  
-  
   // Setting Presence
-  const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: startTime
-  };
-  
   if (graphing === 2) {
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = "Desmos Graphing Calculator";
