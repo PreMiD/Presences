@@ -122,5 +122,4 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageText;
   }
   presence.setActivity(presenceData);
-  }
-);
+});
