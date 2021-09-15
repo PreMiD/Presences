@@ -70,14 +70,7 @@ presence.on("UpdateData", async () => {
             presenceData.details += ": ".concat(title);
         
     } else 
-        presenceData.details = "Reading ".concat(pageType);
-    
+        presenceData.details = "Reading ".concat(pageType);    
   }
-  
-  if (presenceData.details === null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else 
-    presence.setActivity(presenceData);
-  
+  presence.setActivity(presenceData);
 });
