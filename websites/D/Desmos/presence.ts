@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       numEquations = document.getElementsByClassName("dcg-basic-list")[0].childElementCount;
     } else if (pageType === "Matrix") 
       numEquations = document.getElementsByClassName("dcg-matrix-list")[0].childElementCount;
-     else 
+    else 
       numEquations = 0;
   } else 
     graphing = 0;
