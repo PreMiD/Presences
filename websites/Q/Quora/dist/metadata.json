@@ -11,9 +11,9 @@
     "nl": "Quora is een plek om kennis op te doen en te delen. Het is een platform om vragen te stellen en in contact te komen met mensen die unieke inzichten en kwaliteitsantwoorden inbrengen."
   },
   "service": "Quora",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/WBwFUzx.png",
-  "thumbnail": "https://imgur.com/rrhEpI3.png",
+  "thumbnail": "https://i.imgur.com/rrhEpI3.png",
   "color": "#A70000",
   "tags": [
     "question",
