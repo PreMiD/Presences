@@ -17,10 +17,7 @@ if (
  else if (document.location.pathname.startsWith("/toplist")) 
   presenceData.details = "Viewing the Toplist";
  else {
-  presenceData = {
-    largeImageKey: "logo",
-    details: "Homepage"
-  };
+  presenceData.details = "Homepage";
 }
 presence.setActivity(presenceData);
 });
