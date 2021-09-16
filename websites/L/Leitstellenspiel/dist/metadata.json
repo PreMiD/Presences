@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Leitstellenspiel",
+  "author": {
+    "name": "Bastian Leicht",
+    "id": "350618993020764161"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/hTS2dtF.png",
+  "thumbnail": "https://i.imgur.com/WBMPAxg.png",
+  "version": "1.0.0",
+  "color": "#4f1311",
+  "tags": [
+    "Leitstellenspiel"
+  ],
+  "url": [
+    "www.leitstellenspiel.de",
+    "www.missionchief.co.uk",
+    "www.missionchief.com",
+    "www.meldkamerspel.com",
+    "www.centro-de-mando.es",
+    "www.missionchief-australia.com",
+    "www.armcentralen-spelet.se",
+    "www.operatorratunkowy.pl",
+    "www.operatore112.it",
+    "www.operateur112.fr",
+    "www.dispetcher112.ru",
+    "www.alarmcentral-spil.dk",
+    "www.nodsentralspillet.com",
+    "www.operacni-stredisko.cz",
+    "www.112-merkez.com",
+    "www.jogo-operador112.com",
+    "www.operador193.com",
+    "www.centro-de-mando.mx",
+    "www.dyspetcher101-game.com",
+    "www.missionchief-japan.com"
+  ],
+  "description": {
+    "de": "Bei Leitstellenspiel sitzt Du in der Leitstelle, fährst Einsätze auf einer echten Karte und meisterst alleine oder zusammen mit Freunden viele Einsätze!",
+    "en": "Find yourself in a dispatch center and manage emergencies with your friends on a real map!"
+  }
+}
