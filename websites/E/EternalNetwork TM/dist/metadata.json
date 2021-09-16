@@ -1,6 +1,6 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.4",
-  "service": "EternalNetwork TM",
+  "service": "EternalNetworkTM",
   "author": {
     "name": "TheDjRider",
     "id": "149202464590004224"
@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/Saq6ADh.png",
   "thumbnail": "https://i.imgur.com/8pBRB2e.png",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "color": "#c005e6",
   "tags": [
     "Community",
