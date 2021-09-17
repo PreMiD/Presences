@@ -584,11 +584,13 @@ presence.on("UpdateData", async () => {
     data.details = "Preparing a codespace...";
     delete data.smallImageKey;
 
-    if (document.querySelector(".vso-button"))
+    if (document.querySelector(".vso-splash-screen__button"))
       data.details = "Inactive Codespace";
     // Idle/Start Screen
   } else if (activeTab && editorMode) {
-    const scmTab = document.querySelector("h3.title"),
+    const scmTabs = Array.from(document.querySelectorAll("#status\\.scm")).reverse(),
+      scmTab = scmTabs.find(scmTab => scmTab && scmTab.hasAttribute("aria-label")),
+      workspace = scmTab ? scmTab.getAttribute("aria-label").split("(Git)")[0] : null,
       filename = activeTab.getAttribute("data-resource-name"),
       filepath = activeTab.getAttribute("title"),
       syntaxMode = editorMode.getAttribute("aria-label").toLowerCase(),
@@ -620,15 +622,11 @@ presence.on("UpdateData", async () => {
       )
       .replace(
         /%workspace%/g,
-        scmTab && scmTab.hasAttribute("title")
-          ? scmTab.getAttribute("title").split(" (Git)")[0]
-          : "N/A"
+        workspace || "N/A"
       )
       .replace(
         /%workspaceOrFolder%/g,
-        scmTab && scmTab.hasAttribute("title")
-          ? scmTab.getAttribute("title").split(" (Git)")[0]
-          : filepath.split("/").reverse()[1]
+        workspace || filepath.split("/").reverse()[1]
       );
     data.state = (await presence.getSetting("state"))
       .replace(/%file%/g, filename)
@@ -640,15 +638,11 @@ presence.on("UpdateData", async () => {
       )
       .replace(
         /%workspace%/g,
-        scmTab && scmTab.hasAttribute("title")
-          ? scmTab.getAttribute("title").split(" (Git)")[0]
-          : "N/A"
+        workspace || "N/A"
       )
       .replace(
         /%workspaceOrFolder%/g,
-        scmTab && scmTab.hasAttribute("title")
-          ? scmTab.getAttribute("title").split(" (Git)")[0]
-          : filepath.split("/").reverse()[1]
+        workspace || filepath.split("/").reverse()[1]
       );
   } else if (!editorMode) {
     data.largeImageKey = "idle";
