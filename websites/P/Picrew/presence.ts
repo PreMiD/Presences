@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
       details = "on the homepage";
       break;
     case "/search/creator":
-      var creatorName = document.querySelector(
+      let creatorName = document.querySelector(
         ".creator-Header_Name"
       ).textContent;
 
