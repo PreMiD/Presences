@@ -49,5 +49,5 @@ presence.on("UpdateData", async () => {
   if (!showButtons) delete presenceData.buttons;
   if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
-presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
