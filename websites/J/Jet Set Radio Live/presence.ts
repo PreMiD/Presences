@@ -11,9 +11,11 @@ const presence = new Presence({
     return [Math.floor(startTime / 1000), endTime];
   },
   stationIDMap: { [key: string]: string } = {
+    outerspace: "Outer Space",
     classic: "Classic",
     future: "Future",
     ultraremixes: "Ultra Remixes",
+    garage: "The Garage",
     ggs: "GG's",
     noisetanks: "Noise Tanks",
     poisonjam: "Poison Jam",
@@ -24,18 +26,26 @@ const presence = new Presence({
     goldenrhinos: "Golden Rhinos",
     ganjah: "Ganjah",
     lofi: "Lo-Fi",
-    siivagunner: "SilvaGunner x JSR",
+    chiptunes: "Chiptunes",
+    retroremix: "Retro Remix",
+    classical: "Classical Remix",
+    revolution: "Revolution",
+    endofdays: "End of Days",
     silvagunner: "SilvaGunner x JSR",
     futuregeneration: "Future Generation",
     jetmashradio: "Jet Mash Radio",
-    djchidow: "DJ Chidow",
+    crazytaxi: "Crazy Taxi",
+    ollieking: "Ollie King",
+    toejamandearl: "Toe Jam & Earl",
     hover: "Hover",
     butterflies: "Butterflies",
-    toejamandearl: "Toe Jam & Earl",
-    ollieking: "Ollie King",
-    crazytaxi: "Crazy Taxi",
-    revolution: "Revolution",
-    endofdays: "End of Days"
+    bonafidebloom: "BonafideBloom",
+    djchidow: "DJ Chidow",
+    verafx: "VeraFX",
+    summer: "Summer",
+    halloween: "Halloween",
+    christmas: "Christmas",
+    snowfi: "Snow-Fi"
   };
 
 presence.on("UpdateData", async () => {
