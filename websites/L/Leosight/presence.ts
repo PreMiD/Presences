@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
   //filtrace fóra//
 
   if (
-    path == "/" &&
+    path === "/" &&
     !window.location.href.includes("artic") &&
     !window.location.href.includes("ctf") &&
     !window.location.href.includes("eco") &&
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Prohlíží si hlavní stránku...";
     presenceData.startTimestamp = time;
-  } else if (path == "/novinky") {
+  } else if (path === "/novinky") {
     presenceData.details = "Fórum";
     presenceData.state = "Novinky";
     presenceData.startTimestamp = time;
@@ -32,12 +32,12 @@ presence.on("UpdateData", async () => {
       "div.col-md-3.pull-left span.authorname"
     ) as HTMLElement;
     presenceData.details = item.innerText;
-    presenceData.state = `Autor článku: ${item2.innerText}`;
+    presenceData.state = "Autor článku: " + item2.innerText;
     presenceData.startTimestamp = time;
   } else if (path.includes("editor/novy")) {
     presenceData.details = "Píše nový článek";
     presenceData.startTimestamp = time;
-  } else if (path == "/forum") {
+  } else if (path === "/forum") {
     presenceData.details = "Fórum";
     presenceData.state = "Hlavní stránka";
     presenceData.startTimestamp = time;
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Fórum";
     presenceData.state = item.innerText;
     presenceData.startTimestamp = time;
-  } else if (path == "/forum/new") {
+  } else if (path === "/forum/new") {
     presenceData.details = "Fórum";
     presenceData.state = "Nejnovější témata";
     presenceData.startTimestamp = time;
@@ -60,9 +60,9 @@ presence.on("UpdateData", async () => {
       "div.forum-message div.left a.pname"
     ) as HTMLElement;
     presenceData.details = item.innerText;
-    presenceData.state = `Autor tématu: ${item2.innerText}`;
+    presenceData.state = "Autor tématu: " + item2.innerText;
     presenceData.startTimestamp = time;
-  } else if (path == "/forum/43") {
+  } else if (path === "/forum/43") {
     presenceData.state = "Chystá se způsobit adminům deprese.";
     presenceData.startTimestamp = time;
   } else if (path.includes("/newtopic")) {
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
   else if (path.includes("turnaje")) {
     presenceData.details = "Turnaje";
     presenceData.startTimestamp = time;
-  } else if (path == "/donate") {
+  } else if (path === "/donate") {
     presenceData.details = "Podpora portálu";
     presenceData.startTimestamp = time;
   }
@@ -106,96 +106,96 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = time;
     }
     ////
-  } else if (path == "/trade") {
+  } else if (path === "/trade") {
     presenceData.details = "Nabídky obchodu";
     presenceData.startTimestamp = time;
-  } else if (path == "/market") {
+  } else if (path === "/market") {
     presenceData.details = "Tržiště";
     presenceData.startTimestamp = time;
-  } else if (path == "/poukaz") {
+  } else if (path === "/poukaz") {
     presenceData.details = "Uplatnit poukaz";
     presenceData.startTimestamp = time;
-  } else if (path == "/vip") {
+  } else if (path === "/vip") {
     presenceData.details = "VIP";
     presenceData.startTimestamp = time;
-  } else if (path == "/premium") {
+  } else if (path === "/premium") {
     presenceData.details = "PREMIUM";
     presenceData.startTimestamp = time;
-  } else if (path == "/team") {
+  } else if (path === "/team") {
     presenceData.details = "Praisuje AT";
     presenceData.startTimestamp = time;
-  } else if (path == "/statistiky") {
+  } else if (path === "/statistiky") {
     presenceData.details = "Statistiky";
     presenceData.startTimestamp = time;
-  } else if (path == "/pravidla") {
+  } else if (path === "/pravidla") {
     presenceData.details = "Pravidla portálu";
     presenceData.startTimestamp = time;
   } else if (path.includes("/tym")) {
     item = document.querySelector("div.obsah.text-center p") as HTMLElement;
     item2 = document.querySelector("div.obsah.text-center h2") as HTMLElement;
-    if (item2.innerText == "Týmy") {
+    if (item2.innerText === "Týmy") {
       presenceData.details = "Prohlíží si týmy";
       presenceData.startTimestamp = time;
     } else {
       presenceData.details = "Prohlíží si tým:";
-      presenceData.state = `${item.innerText} (${item2.innerText})`;
+      presenceData.state = item.innerText + " (" + item2.innerText + ")";
       presenceData.startTimestamp = time;
     }
-  } else if (path == "/ucp") {
+  } else if (path === "/ucp") {
     presenceData.details = "Uživatelský panel";
     presenceData.startTimestamp = time;
-  } else if (path == "/prospect") {
+  } else if (path === "/prospect") {
     presenceData.details = "Prospect";
     presenceData.startTimestamp = time;
-  } else if (path == "/akce") {
+  } else if (path === "/akce") {
     presenceData.details = "Komunitní akce";
     presenceData.startTimestamp = time;
-  } else if (path == "/ankety") {
+  } else if (path === "/ankety") {
     presenceData.details = "Ankety";
     presenceData.startTimestamp = time;
-  } else if (path == "/spoluhraci") {
+  } else if (path === "/spoluhraci") {
     presenceData.details = "Hledám spoluhráče";
     presenceData.startTimestamp = time;
-  } else if (path == "/herna") {
+  } else if (path === "/herna") {
     presenceData.details = "Jsem gambler";
     presenceData.startTimestamp = time;
-  } else if (path == "/hlasky") {
+  } else if (path === "/hlasky") {
     presenceData.details = "Hlášky";
     presenceData.startTimestamp = time;
-  } else if (path == "/ticket") {
+  } else if (path === "/ticket") {
     presenceData.details = "Tickety";
     presenceData.startTimestamp = time;
-  } else if (path == "/logs") {
+  } else if (path === "/logs") {
     presenceData.details = "Logy";
     presenceData.startTimestamp = time;
-  } else if (path == "/ukoly") {
+  } else if (path === "/ukoly") {
     presenceData.details = "Denní úkoly";
     presenceData.startTimestamp = time;
-  } else if (path == "/chat") {
+  } else if (path === "/chat") {
     presenceData.details = "Chatuje";
     presenceData.startTimestamp = time;
-  } else if (path == "/upozorneni") {
+  } else if (path === "/upozorneni") {
     presenceData.details = "Upozornění";
     presenceData.startTimestamp = time;
-  } else if (path == "/znamky") {
+  } else if (path === "/znamky") {
     presenceData.details = "Katalog známek";
     presenceData.startTimestamp = time;
-  } else if (path == "/banlist") {
+  } else if (path === "/banlist") {
     presenceData.details = "Seznam zabanovaných uživatelů";
     presenceData.startTimestamp = time;
-  } else if (path == "/faktury") {
+  } else if (path === "/faktury") {
     presenceData.details = "Faktury";
     presenceData.startTimestamp = time;
-  } else if (path == "/nastaveni") {
+  } else if (path === "/nastaveni") {
     presenceData.details = "Nastavení účtu";
     presenceData.startTimestamp = time;
-  } else if (path == "/dashboard") {
+  } else if (path === "/dashboard") {
     presenceData.details = "Provádí adminskou magii";
     presenceData.startTimestamp = time;
-  } else if (path == "/modlog") {
+  } else if (path === "/modlog") {
     presenceData.details = "Provádí ještě adminštější magii";
     presenceData.startTimestamp = time;
-  } else if (path == "/kodex-at") {
+  } else if (path === "/kodex-at") {
     presenceData.details = "Studuje adminskou Bibli";
     presenceData.startTimestamp = time;
   } else if (path.includes("/skimo")) {
@@ -220,11 +220,11 @@ presence.on("UpdateData", async () => {
     else if (path.includes("/banlist")) presenceData.state = "Seznam banů";
   }
   // uživatelé //
-  else if (path == "/profil/3773") {
+  else if (path === "/profil/3773") {
     presenceData.details = "Obtěžuje autora tohoto";
     presenceData.state = "RPC";
     presenceData.startTimestamp = time;
-  } else if (path == "/profil/1") {
+  } else if (path === "/profil/1") {
     presenceData.details = "Obtěžuje Ratáže.";
     presenceData.startTimestamp = time;
   } else if (path.includes("uzivatele")) {
@@ -236,13 +236,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Prohlíží si profil uživatele:";
     presenceData.state = item.innerText;
     presenceData.startTimestamp = time;
-  } else if (path == "/pratele") {
+  } else if (path === "/pratele") {
     presenceData.details = "Seznam přátel";
     presenceData.startTimestamp = time;
-  } else if (path == "/avatar") {
+  } else if (path === "/avatar") {
     presenceData.details = "Nastavuje si avatar";
     presenceData.startTimestamp = time;
-  } else if (path == "/profil") {
+  } else if (path === "/profil") {
     presenceData.details = "Prohlíží si svůj profil";
     presenceData.startTimestamp = time;
   }
@@ -252,7 +252,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "artic.leosight.cz";
     presenceData.details = "Artic";
     presenceData.startTimestamp = time;
-    if (path == "/" || path == "") {
+    if (path === "/" || path === "") {
       presenceData.state = "Hlavní stránka";
       presenceData.startTimestamp = time;
     }
@@ -260,7 +260,7 @@ presence.on("UpdateData", async () => {
     if (path.includes("mdc.ic")) {
       presenceData.details = "Prohlíží si MDC";
       presenceData.startTimestamp = time;
-      if (path == "/mdc.ic/") presenceData.state = "Ověření uživatele";
+      if (path === "/mdc.ic/") presenceData.state = "Ověření uživatele";
       if (path.includes("dashboard")) presenceData.state = "Hlavní stránka";
       else if (path.includes("apb")) presenceData.state = "APB";
       else if (path.includes("warrants")) presenceData.state = "Zatykače";
@@ -424,7 +424,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "guard.leosight.cz";
     presenceData.details = "Leosigh Guard";
     presenceData.startTimestamp = time;
-    if (path == "" || path == "/") presenceData.state = "Seznam serverů";
+    if (path === "" || path === "/") presenceData.state = "Seznam serverů";
     if (path.includes("hive.php")) presenceData.state = "LSG - Hive";
     else if (path.includes("skimose")) presenceData.state = "Skimo SE - API";
     else if (path.includes("dokumentace.php"))
@@ -447,10 +447,10 @@ presence.on("UpdateData", async () => {
   }
 
   //neco//
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle("Provádí nespecifikovanou činnost.");
     presence.setActivity();
-  } else 
+  } else {
     presence.setActivity(presenceData);
-  
+  }
 });
