@@ -16,6 +16,13 @@ presence.on("UpdateData", () => {
     case "/":
       details = "on the homepage";
       break;
+    case "/search/creator":
+      const creatorName = document.querySelector(
+        ".creator-Header_Name"
+      ).textContent;
+
+      details = `Viewing the profile of ${creatorName}`;
+      break;
     case "/search":
       details = "searching";
       break;
