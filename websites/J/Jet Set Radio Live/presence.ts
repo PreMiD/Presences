@@ -16,7 +16,7 @@ const presence = new Presence({
     future: "Future",
     ultraremixes: "Ultra Remixes",
     garage: "The Garage",
-    ggs: "GG\'s",
+    ggs: "GG's",
     noisetanks: "Noise Tanks",
     poisonjam: "Poison Jam",
     rapid99: "Rapid 99",
