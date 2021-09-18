@@ -32,7 +32,7 @@ if (
       "div.col-md-3.pull-left span.authorname"
   ) as HTMLElement;
   presenceData.details = item.innerText;
-  presenceData.state = "Autor článku: " + item2.innerText;
+  presenceData.state = `Autor článku: ${item2.innerText}`;
   presenceData.startTimestamp = time;
 } else if (path.includes("editor/novy")) {
   presenceData.details = "Píše nový článek";
@@ -60,7 +60,7 @@ if (
       "div.forum-message div.left a.pname"
   ) as HTMLElement;
   presenceData.details = item.innerText;
-  presenceData.state = "Autor tématu: " + item2.innerText;
+  presenceData.state = `Autor tématu: ${item2.innerText}`;
   presenceData.startTimestamp = time;
 } else if (path === "/forum/43") {
   presenceData.state = "Chystá se způsobit adminům deprese.";
@@ -138,7 +138,7 @@ else if (path.includes("/shop")) {
       presenceData.startTimestamp = time;
   } else {
       presenceData.details = "Prohlíží si tým:";
-      presenceData.state = item.innerText + " (" + item2.innerText + ")";
+      presenceData.state = `${item.innerText} (${item2.innerText})`;
       presenceData.startTimestamp = time;
   }
 } else if (path === "/ucp") {
@@ -450,7 +450,7 @@ else if (window.location.href.includes("guard")) {
 if (presenceData.details === null) {
   presence.setTrayTitle("Provádí nespecifikovanou činnost.");
   presence.setActivity();
-} else {
+} else 
   presence.setActivity(presenceData);
-}
+
 });
