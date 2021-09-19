@@ -42,10 +42,10 @@ presence.on("UpdateData", async () => {
       // These three use a different container for equations
       numEquations =
         document.getElementsByClassName("dcg-basic-list")[0].childElementCount;
-    } else if (pageType === "Matrix")
-      numEquations =
+    } else if (pageType === "Matrix") {
+numEquations =
         document.getElementsByClassName("dcg-matrix-list")[0].childElementCount;
-    else numEquations = 0;
+} else numEquations = 0;
   } else graphing = 0;
   // Setting Presence
   if (graphing === 2) {
