@@ -1,4 +1,3 @@
-@@ -0,0 +1,39 @@
 const presence = new Presence({
   clientId: "886576430408929291"
 });
