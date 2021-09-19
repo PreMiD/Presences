@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Noctu",
+    "id": "509840385695154192"
+  },
+  "contributors": [
+    {
+      "name": "PotatoTeKotoba",
+      "id": "551460608743047205"
+    }],
+  "service": "Pronote",
+  "category": "socials & stream",
+  "logo": "https://i.imgur.com/j09xUSZ.png",
+  "thumbnail": "https://i.imgur.com/ePLvjtt.jpg",
+  "version": "1.0.0",
+  "color": "#026b00",
+  "tags": [
+    "Pronote"
+  ],
+  "url": "index-education.net",
+  "regExp": "([a-z0-9-]+[.])*(index-education[.]net)",
+  "description": {
+    "fr": "Pronote est un logiciel de gestion de vie scolaire créé en 1999 par Index Éducation, et utilisé dans plus de 10 000 collèges et lycées selon l'entreprise.",
+    "en": "Pronote is a school life  management software created in 1999 by Index Education, it is used in more than 10 000 middle and high schools according to the compagny."
+  }
+}
