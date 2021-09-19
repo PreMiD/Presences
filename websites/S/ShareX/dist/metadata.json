@@ -17,8 +17,6 @@
     "color": "#2486f1",
     "tags": ["uploader", "screenshot", "sharex", "capture"],
     "category": "socials",
-    "iframe": false,
-    "readLogs": false,
     "settings": [
       {
         "id": "timestamp",
