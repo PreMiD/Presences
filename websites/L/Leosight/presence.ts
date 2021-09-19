@@ -33,7 +33,7 @@ if (
       "div.col-md-3.pull-left span.authorname"
   ) as HTMLElement;
   presenceData.details = item.innerText;
-  presenceData.state = "Autor článku: " + item2.innerText;
+  presenceData.state = `Autor článku: ${item2.innerText}`;
   presenceData.startTimestamp;
 } else if (path.includes("editor/novy")) {
   presenceData.details = "Píše nový článek";
@@ -61,7 +61,7 @@ if (
       "div.forum-message div.left a.pname"
   ) as HTMLElement;
   presenceData.details = item.innerText;
-  presenceData.state = "Autor tématu: " + item2.innerText;
+  presenceData.state = `Autor tématu: ${item2.innerText}`;
   presenceData.startTimestamp;
 } else if (path === "/forum/43") {
   presenceData.state = "Chystá se způsobit adminům deprese.";
@@ -139,7 +139,7 @@ else if (path.includes("/shop")) {
       presenceData.startTimestamp;
   } else {
       presenceData.details = "Prohlíží si tým:";
-      presenceData.state = item.innerText + " (" + item2.innerText + ")";
+      presenceData.state = `${item.innerText} (${item2.innerText})`;
       presenceData.startTimestamp;
   }
 } else if (path === "/ucp") {
