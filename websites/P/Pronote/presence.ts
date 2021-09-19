@@ -36,4 +36,4 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = `Lieu de l'établissement : ${document.querySelector("head > meta:nth-child(14)").content}`;
   }
   presence.setActivity(presenceData);
-})
+});
