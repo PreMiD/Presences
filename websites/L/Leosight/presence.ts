@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
       "div.col-md-3.pull-left span.authorname"
     ) as HTMLElement;
     presenceData.details = item.innerText;
-    presenceData.state = `Autor článku: ${item2.innerText}`;
+    presenceData.state = "Autor článku: " + item2.innerText;
     presenceData.startTimestamp;
   } else if (path.includes("editor/novy")) {
     presenceData.details = "Píše nový článek";
@@ -61,23 +61,21 @@ presence.on("UpdateData", async () => {
       "div.forum-message div.left a.pname"
     ) as HTMLElement;
     presenceData.details = item.innerText;
-    presenceData.state = `Autor tématu: ${item2.innerText}`;
+    presenceData.state = "Autor tématu: " + item2.innerText;
     presenceData.startTimestamp;
   } else if (path === "/forum/43") {
     presenceData.state = "Chystá se způsobit adminům deprese.";
     presenceData.startTimestamp;
   } else if (path.includes("/newtopic")) {
     presenceData.details = "Zakládá nové téma";
-    presenceData.startTimestamp;
-  }
+    presenceData.startTimestamp; }
   //další možnosti//
   else if (path.includes("turnaje")) {
     presenceData.details = "Turnaje";
     presenceData.startTimestamp;
   } else if (path === "/donate") {
     presenceData.details = "Podpora portálu";
-    presenceData.startTimestamp;
-  }
+    presenceData.startTimestamp; }
   //shop//
   else if (path.includes("/shop")) {
     presenceData.details = "Obchod";
@@ -139,7 +137,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp;
     } else {
       presenceData.details = "Prohlíží si tým:";
-      presenceData.state = `${item.innerText} (${item2.innerText})`;
+      presenceData.state = item.innerText + " (" + item2.innerText + ")";
       presenceData.startTimestamp;
     }
   } else if (path === "/ucp") {
@@ -218,8 +216,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Seznam interiérů";
     else if (path.includes("/skiny")) presenceData.state = "Seznam skinů";
     else if (path.includes("/radia")) presenceData.state = "Seznam rádií";
-    else if (path.includes("/banlist")) presenceData.state = "Seznam banů";
-  }
+    else if (path.includes("/banlist")) presenceData.state = "Seznam banů"; }
   // uživatelé //
   else if (path === "/profil/3773") {
     presenceData.details = "Obtěžuje autora tohoto";
@@ -245,8 +242,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp;
   } else if (path === "/profil") {
     presenceData.details = "Prohlíží si svůj profil";
-    presenceData.startTimestamp;
-  }
+    presenceData.startTimestamp; }
   //Artic//
   else if (window.location.href.includes("artic")) {
     presenceData.smallImageKey = "artic";
@@ -305,8 +301,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Zastavovací techniky";
       else if (path.includes("law")) presenceData.state = "Zákon o policii";
       else if (path.includes("directive")) presenceData.state = "Směrnice";
-      else if (path.includes("teams")) presenceData.state = "Hierarchie PSA";
-    }
+      else if (path.includes("teams")) presenceData.state = "Hierarchie PSA"; }
     ////
     //stoongle//
     else if (path.includes("stoongle")) {
@@ -315,8 +310,7 @@ presence.on("UpdateData", async () => {
       if (path.includes("katalog")) {
         presenceData.state = "Katalog webů";
         presenceData.startTimestamp;
-      }
-    }
+      }}
     ////
     else if (path.includes("burza.ic")) {
       presenceData.state = "Burza";
@@ -335,8 +329,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp;
     } else if (path.includes("katastr.ic")) {
       presenceData.state = "Katastr nemovitostí";
-      presenceData.startTimestamp;
-    }
+      presenceData.startTimestamp; }
     //lemon//
     else if (path.includes("lemongate.ic")) {
       presenceData.state = "LemonGate - hlavní stránka";
@@ -355,8 +348,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp;
     } else if (path.includes("1trade.lemon")) {
       presenceData.state = "LemonGate - AceTrade";
-      presenceData.startTimestamp;
-    }
+      presenceData.startTimestamp; }
     ////
     else if (path.includes("blockchain.ic")) {
       presenceData.state = "NC Blockchain";
@@ -375,8 +367,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp;
     } else if (path.includes("sherwood.ic")) {
       presenceData.state = "Sherwood Corporation";
-      presenceData.startTimestamp;
-    }
+      presenceData.startTimestamp; }
     //smail//
     else if (path.includes("smail.ic")) {
       presenceData.details = "Smail";
@@ -385,8 +376,7 @@ presence.on("UpdateData", async () => {
       if (path.includes("prijate")) presenceData.state = "Přijaté";
       else if (path.includes("napsat")) presenceData.state = "Napsat e-mail";
       else if (path.includes("odeslane")) presenceData.state = "Odeslané";
-      else if (path.includes("nastaveni")) presenceData.state = "Nastavení";
-    }
+      else if (path.includes("nastaveni")) presenceData.state = "Nastavení"; }
     ////
     else if (path.includes("tcu.ic")) {
       presenceData.state = "Tax Compliance Unit";
@@ -400,8 +390,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("writer.ic")) {
       presenceData.state = "Writer";
       presenceData.startTimestamp;
-    }
-  }
+    }}
   //ctf//
   else if (window.location.href.includes("ctf")) {
     presenceData.smallImageKey = "ctf";
@@ -410,15 +399,13 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp;
     if (path.includes("login.php")) presenceData.state = "Přihlášení";
     else if (path.includes("index.php"))
-      presenceData.state = "Odvařuje si mozek";
-  }
+      presenceData.state = "Odvařuje si mozek"; }
   //eco//
   else if (window.location.href.includes("eco")) {
     presenceData.smallImageKey = "eco";
     presenceData.smallImageText = "eco.leosight.cz";
     presenceData.details = "Hraje Leosight ECO";
-    presenceData.startTimestamp;
-  }
+    presenceData.startTimestamp; }
   //guard//
   else if (window.location.href.includes("guard")) {
     presenceData.smallImageKey = "guard";
