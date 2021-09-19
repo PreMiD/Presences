@@ -9,13 +9,13 @@ function get_url_extension( url ) {
 
 LeTimeMicieu = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-  if (document.getElementById('breadcrumbBandeau') !== null) 
+  if (document.getElementById('breadcrumbBandeau') !== null) {
   eingrosscarott = document.getElementsByClassName("titre-onglet")[0].textContent;
-   else if (document.getElementById('id_14') !== null) 
-    eingrosscarott = `Connection - ${document.querySelector("#id_14 > div.InlineBlock.Texte10 > div.Texte14.Gras").textContent}`;
-   else 
-    eingrosscarott = `Visionne un fichier ${get_url_extension(document.location.pathname)}`;
-  
+  } else if (document.getElementById('id_14') !== null) {
+    eingrosscarott = "Connection - " + document.querySelector("#id_14 > div.InlineBlock.Texte10 > div.Texte14.Gras").textContent;
+  } else {
+    eingrosscarott = "Visionne un fichier " + get_url_extension(document.location.pathname);
+  }
   if (document.location.pathname.includes('FichiersExternes')) {
     ladetay = "Fichiers Externes";
     smallImageKeyy = "nonmaiscprlesfichiers";
@@ -23,11 +23,14 @@ presence.on("UpdateData", async () => {
   }else{
     ladetay = document.getElementsByClassName("ibe_etab_cont")[0].textContent;
     smallImageKeyy = "mini_logo";
-    smallImageSext = `Lieu de l'établissement : ${document.querySelector("head > meta:nth-child(14)").content}`;
+    smallImageSext = "Lieu de l'établissement : " + document.querySelector("head > meta:nth-child(14)").content;
   }
 
 
-  const presenceData = {
+
+
+
+  let presenceData = {
     largeImageKey: "pronote_2",
     smallImageKey: smallImageKeyy,
     details: ladetay,
@@ -45,7 +48,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
+  } else {
     presence.setActivity(presenceData);
-  
+  }
 });
