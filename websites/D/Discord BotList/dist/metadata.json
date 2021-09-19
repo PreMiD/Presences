@@ -5,6 +5,12 @@
     "name": "OGMatrix",
     "id": "657290880947978241"
   },
+  "contributors": [
+    {
+      "name": "Exstare",
+      "id": "462914535351779328"
+    }
+  ],
   "category": "other",
   "logo": "https://imgur.com/HwNmdMj.png",
   "thumbnail": "https://imgur.com/R24meTP.png",
@@ -15,6 +21,11 @@
     "botlist",
     "list",
     "discord-botlist"
+  ],
+  "altnames": [
+    "discord-botlist",
+    "discord-botlist.eu",
+    "dbleu"
   ],
   "url": [
     "docs.discord-botlist.eu",
