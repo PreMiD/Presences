@@ -9,7 +9,7 @@ function getUrlExtension( url ) {
 LeTimeMicieu = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData = {
+  const presenceData = {
     largeImageKey: "pronote_2",
     smallImageKey: null,
     details: null,
