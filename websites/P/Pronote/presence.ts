@@ -25,20 +25,20 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.getElementById('breadcrumbBandeau') !== null) 
-    presenceData.eingrosscarott = document.getElementsByClassName("titre-onglet")[0].textContent;
+    presenceData.state = document.getElementsByClassName("titre-onglet")[0].textContent;
   else if (document.getElementById('id_14') !== null) 
-    presenceData.eingrosscarott = `Connection - ${document.querySelector("#id_14 > div.InlineBlock.Texte10 > div.Texte14.Gras").textContent}`;
+    presenceData.state = `Connection - ${document.querySelector("#id_14 > div.InlineBlock.Texte10 > div.Texte14.Gras").textContent}`;
   else 
-    presenceData.eingrosscarott = `Visionne un fichier ${getUrlExtension(document.location.pathname)}`;
+    presenceData.state = `Visionne un fichier ${getUrlExtension(document.location.pathname)}`;
 
   if (document.location.pathname.includes('FichiersExternes')) {
-    presenceData.ladetay = "Fichiers Externes";
-    presenceData.smallImageKeyy = "nonmaiscprlesfichiers";
-    presenceData.smallImageSext = getUrlExtension(document.location.pathname);
+    presenceData.details = "Fichiers Externes";
+    presenceData.smallImageKey = "nonmaiscprlesfichiers";
+    presenceData.smallImageText = getUrlExtension(document.location.pathname);
   }else{
-    presenceData.ladetay = document.getElementsByClassName("ibe_etab_cont")[0].textContent;
-    presenceData.smallImageKeyy = "mini_logo";
-    presenceData.smallImageSext = `Lieu de l'établissement : ${document.querySelector("head > meta:nth-child(14)").content}`;
+    presenceData.details = document.getElementsByClassName("ibe_etab_cont")[0].textContent;
+    presenceData.smallImageKey = "mini_logo";
+    presenceData.smallImageText = `Lieu de l'établissement : ${document.querySelector("head > meta:nth-child(14)").content}`;
   }
 
   presence.setActivity(presenceData);
