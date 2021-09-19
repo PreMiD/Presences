@@ -14,11 +14,11 @@ botPresence.on("UpdateData", async () => {
     sSubmit = await botPresence.getSetting("submitP");
 
   if (botHost == "discord-botlist.eu") {
-    if (botPage == "/") {
+    if (botPage === "/") {
 
       botData.details = "Browsing home";
 
-    } else if (botPage == "/search") {
+    } else if (botPage === "/search") {
 
       const search: string = document
         .querySelector("[name='q']")
@@ -32,7 +32,7 @@ botPresence.on("UpdateData", async () => {
         }
       ];
 
-    } else if (botPage == "/login_err/") {
+    } else if (botPage === "/login_err/") {
 
       botData.details = "Login page";
 
@@ -116,17 +116,17 @@ botPresence.on("UpdateData", async () => {
         botData.details = "Editing profile"
       }
 
-    } else if (botPage == "/info/certify/") {
+    } else if (botPage === "/info/certify/") {
       botData.details = "Viewing certification Page";
-    } else if (botPage == "/certify/") {
+    } else if (botPage === "/certify/") {
       botData.details = "Applying for certification";
-    } else if (botPage == "/partner") {
+    } else if (botPage === "/partner") {
       botData.details = "Viewing partner page"
-    } else if (botPage == "/terms/") {
+    } else if (botPage === "/terms/") {
       botData.details = "Viewing ToS";
-    } else if (botPage == "/privacy/") {
+    } else if (botPage === "/privacy/") {
       botData.details = "Viewing privacy policy";
-    } else if (botPage == "/imprint/") {
+    } else if (botPage === "/imprint/") {
       botData.details = "Viewing imprint";
     }
   } else if (botHost == "docs.discord-botlist.eu") {
