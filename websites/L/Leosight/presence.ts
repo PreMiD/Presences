@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Podmínky užití";
     presenceData.startTimestamp;
   } else if (path.includes("ochrana-osobnich-udaju")) {
-    presenceData.details = "GDPR"
+    presenceData.details = "GDPR";
     presenceData.startTimestamp;
   } else if (path.includes("clanek")) {
     item = document.querySelector("div.panel-body h2") as HTMLElement;
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       "div.col-md-3.pull-left span.authorname"
     ) as HTMLElement;
     presenceData.details = item.innerText;
-    presenceData.state = "Autor článku: " + item2.innerText;
+    presenceData.state = `Autor článku: ${item2.innerText}`;
     presenceData.startTimestamp;
   } else if (path.includes("editor/novy")) {
     presenceData.details = "Píše nový článek";
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
       "div.forum-message div.left a.pname"
     ) as HTMLElement;
     presenceData.details = item.innerText;
-    presenceData.state = "Autor tématu: " + item2.innerText;
+    presenceData.state = `Autor tématu: ${item2.innerText}`;
     presenceData.startTimestamp;
   } else if (path === "/forum/43") {
     presenceData.state = "Chystá se způsobit adminům deprese.";
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp;
     } else {
       presenceData.details = "Prohlíží si tým:";
-      presenceData.state = item.innerText + " (" + item2.innerText + ")";
+      presenceData.state = `${item.innerText} (${item2.innerText})`;
       presenceData.startTimestamp;
     }
   } else if (path === "/ucp") {
