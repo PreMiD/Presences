@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "883446187099840562"
-}),
+    clientId: "883446187099840562"
+  }),
   strings = presence.getStrings({
     play: "general.playing",
     pause: "general.paused",
@@ -46,29 +46,23 @@ presence.on("UpdateData", async () => {
     data.details = "Browsing Kids content...";
   else if (document.location.href.includes("watchlist"))
     data.details = "Viewing watchlist...";
-  else
-    data.details = "Browsing...";
+  else data.details = "Browsing...";
 
-  const playerCheck = document.querySelector(
-    "div[ng-if='showPlayer']"
-  )
+  const playerCheck = document.querySelector("div[ng-if='showPlayer']")
     ? true
     : false;
 
   if (playerCheck) {
-    const title = document
-      .querySelector(
+    const title = document.querySelector(
         ".meta-title[ng-bind='details.title']"
-      )
-      ?.textContent,
+      )?.textContent,
       video: HTMLVideoElement = document.querySelector("video#arxPlayer"),
       { paused, currentTime, duration } = video,
-      timestamps = presence.getTimestamps(Math.floor(currentTime), Math.floor(duration)),
-      live = document.querySelector(
-        ".meta-remain"
-      )
-        ? true
-        : false;
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      ),
+      live = document.querySelector(".meta-remain") ? true : false;
 
     if (!live) {
       data.smallImageKey = paused ? "pause" : "play";
@@ -78,19 +72,17 @@ presence.on("UpdateData", async () => {
 
       data.endTimestamp = timestamps.pop();
 
-      const series = document.querySelector(
-        "span[ng-bind='details.seriesSubs']"
-      ).innerHTML.length > 0
-        ? true
-        : false;
+      const series =
+        document.querySelector("span[ng-bind='details.seriesSubs']").innerHTML
+          .length > 0
+          ? true
+          : false;
 
       if (series) {
         data.details = document.querySelector(
           "span[ng-bind='details.seriesSubs']"
         ).textContent;
-
-      } else
-        data.details = title;
+      } else data.details = title;
     } else {
       data.smallImageKey = paused ? "pause" : "live";
       data.smallImageText = paused
@@ -102,20 +94,17 @@ presence.on("UpdateData", async () => {
       data.details = title;
     }
 
-    const channel = document
-      .querySelector(
-        ".meta-title[ng-bind='details.channel.title']"
-      )
-      ?.textContent;
+    const channel = document.querySelector(
+      ".meta-title[ng-bind='details.channel.title']"
+    )?.textContent;
 
     if (channel?.length !== 0) {
-      if (!live)
-        data.state = `Watching on ${channel}`;
-      else
-        data.state = `Live on ${channel}`;
+      if (!live) data.state = `Watching on ${channel}`;
+      else data.state = `Live on ${channel}`;
 
       const hashCode = channel.split("").reduce(function (a, b) {
-        a = ((a << 5) - a) + b.charCodeAt(0); return a & a;
+        a = (a << 5) - a + b.charCodeAt(0);
+        return a & a;
       }, 0);
       data.largeImageKey = hashCode.toString();
     }
@@ -123,7 +112,7 @@ presence.on("UpdateData", async () => {
     if (paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
-      data.state = 'Paused';
+      data.state = "Paused";
     }
   }
   presence.setActivity(data);

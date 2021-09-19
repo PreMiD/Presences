@@ -13,7 +13,9 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
   else if (document.location.pathname.includes("/u/")) {
-    const username = document.querySelector("p.text-5xl.text-white")?.textContent,
+    const username = document.querySelector(
+        "p.text-5xl.text-white"
+      )?.textContent,
       userLikes = document.getElementById("likes-count")?.textContent;
     presenceData.details = "Viewing user:";
     presenceData.state = `${username || "Unknown"} - ❤️ ${userLikes || 0}`;
@@ -37,13 +39,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/discover")) {
     presenceData.details = "Viewing page:";
     presenceData.state = "Discover";
-  } else if (document.location.pathname === "/@me") 
+  } else if (document.location.pathname === "/@me")
     presenceData.details = "Viewing my profile";
-  else if (document.location.pathname === "/@me/settings") 
+  else if (document.location.pathname === "/@me/settings")
     presenceData.details = "Editing my profile";
-  else if (document.location.pathname.includes("/login")) 
+  else if (document.location.pathname.includes("/login"))
     presenceData.details = "Logging in...";
-  else if (document.location.pathname.includes("/register")) 
+  else if (document.location.pathname.includes("/register"))
     presenceData.details = "Registering...";
 
   if (!showButtons) delete presenceData.buttons;
