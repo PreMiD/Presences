@@ -14,10 +14,10 @@ presenceData: PresenceData = {
   smallImageText: "Navigating on getsharex.com"
 };
 // Main Pages
-if (document.location.pathname === "/") {
+if (document.location.pathname === "/") 
 presenceData.state = "🏠 | Browsing Home Page";
 
-}else if (document.location.pathname.includes('/downloads')) {
+else if (document.location.pathname.includes('/downloads')) {
 presenceData.state = "⚡ | Browsing Downloads Page";
 presenceData.buttons = [
   {
