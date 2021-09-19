@@ -11,7 +11,7 @@ presenceData: PresenceData = {
     "sharex-logo",
   smallImageKey:
     "sharex-white-logo",
-  smallImageText: "Navigating on getsharex.com", 
+  smallImageText: "Navigating on getsharex.com"
 };
 // Main Pages
 if (document.location.pathname === "/") {
