@@ -16,12 +16,6 @@ presenceData: PresenceData = {
 // Main Pages
 if (document.location.pathname === "/") {
 presenceData.state = "🏠 | Browsing Home Page";
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if (document.location.pathname.includes('/downloads')) {
 presenceData.state = "⚡ | Browsing Downloads Page";
