@@ -122,12 +122,6 @@ presenceData.state = '📱 | Reading Custom Uploaders Guide';
 
 }else if(document.location.pathname.includes('amazon-s3')) {
 presenceData.state = '🦺 | Reading Amazon S3 Guide';
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/google-cloud-storage')) {
 presenceData.state = '🧱 | Reading Google Cloud Guide';
