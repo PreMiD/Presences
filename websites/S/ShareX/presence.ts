@@ -20,10 +20,10 @@ presenceData: PresenceData = {
 ]
 };
 // Main Pages
-if (document.location.pathname === "/") 
+if (document.location.pathname === "/") {
 presenceData.state = "🏠 | Browsing Home Page";
-
-else if (document.location.pathname.includes('/downloads')) {
+delete presenceData.buttons;
+} else if (document.location.pathname.includes('/downloads')) {
 presenceData.state = "⚡ | Browsing Downloads Page";
 
 }else if(document.location.pathname.includes('/screenshots')) {
