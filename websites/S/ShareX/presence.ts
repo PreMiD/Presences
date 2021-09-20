@@ -32,87 +32,33 @@ presenceData.state = "🖼 | Viewing Screenshots";
 else if(document.location.pathname.includes('/changelog')) {
   presenceData.details = "📜 | Reading Changelog";
   presenceData.state = document.querySelector("h2")?.textContent; 
-  presenceData.buttons = [
-    {
-      label: "View Page",
-      url: document.location.href
-    }
-  ];
 
 }else if(document.location.pathname.includes('/donate')) {
 presenceData.state = "🛒 | Browsing Donations Page";
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes("/image-effects")) {
 presenceData.state = "🤳 | Browsing Image Effects";
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/actions')) {
 presenceData.state = "💻 | Browsing Actions Page";
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/brand-assets')) {
 presenceData.state = "🎨 | Browsing Brand Assets";
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }
 
 // Docs
 if(document.location.pathname.includes('/faq')) {
 presenceData.state = '🙋‍♂️ | Browsing FAQ';
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/dev-builds')) {
 presenceData.state = '🥼 | Browsing Dev Builds';
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/region-capture')) {
 presenceData.state = '⚙ | Browsing RC Keybinds';
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/command-line-arguments')) {
 presenceData.state = '⛓ | Browsing CLI Page';
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/translation')) 
 presenceData.state = '📝 | Reading Translation Guide';
