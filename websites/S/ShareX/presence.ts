@@ -125,12 +125,6 @@ presenceData.state = '🦺 | Reading Amazon S3 Guide';
 
 }else if(document.location.pathname.includes('/google-cloud-storage')) {
 presenceData.state = '🧱 | Reading Google Cloud Guide';
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('website-capture')) {
 presenceData.state = '🔌 | Reading Website Capture Guide';
