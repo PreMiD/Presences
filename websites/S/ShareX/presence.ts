@@ -28,12 +28,6 @@ presenceData.state = "⚡ | Browsing Downloads Page";
 
 }else if(document.location.pathname.includes('/screenshots')) {
 presenceData.state = "🖼 | Viewing Screenshots";
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/changelog')) {
   presenceData.details = "📜 | Reading Changelog";
