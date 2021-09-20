@@ -109,14 +109,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Bladert...";
     presenceData.state = `Op pagina '${document.location.pathname
       .split("/")[1]}'`;
-  } else 
-    presenceData.details = "Bezoekt de tweakers pagina...";
-  
+  } else presenceData.details = "Bezoekt de tweakers pagina...";
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
-    presence.setActivity(presenceData);
-  
+  } else presence.setActivity(presenceData);
 });
