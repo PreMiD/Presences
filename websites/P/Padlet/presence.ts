@@ -12,23 +12,20 @@ presence.on("UpdateData", async () => {
 
   if (pathnames[1] === "dashboard") {
     //Dashboard
+    let type, count;
 
     switch (pathnames[2]) {
       case "drive":
         presenceData.details = "Viewing";
         presenceData.state = `Padlet Drive`;
         break;
-      case "settings":
-        presenceData.details = null;
-        presenceData.state = null;
-        break;
       case undefined:
-        const type = document
-            .querySelector(
-              'body > div > div > div > div > nav > a[data-selected="true"]'
-            )
-            .textContent.replace("edit", ""),
-          count = document.querySelector(".padlet-cards-list")?.children.length;
+        type = document
+          .querySelector(
+            'body > div > div > div > div > nav > a[data-selected="true"]'
+          )
+          .textContent.replace("edit", "");
+        count = document.querySelector(".padlet-cards-list")?.children.length;
 
         presenceData.details = `Viewing ${type}`;
         presenceData.state = `Padlets - ${count ?? "0"}`;
