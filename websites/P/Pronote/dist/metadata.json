@@ -17,7 +17,7 @@
   "version": "1.0.0",
   "color": "#026b00",
   "tags": [
-    "Pronote"
+    "pronote"
   ],
   "url": "index-education.net",
   "regExp": "([a-z0-9-]+[.])*(index-education[.]net)",
