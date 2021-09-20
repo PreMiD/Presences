@@ -116,12 +116,6 @@ presenceData.buttons = [
 
 }else if(document.location.pathname.includes('/translation')) {
 presenceData.state = '📝 | Reading Translation Guide';
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/custom-uploader')) {
 presenceData.state = '📱 | Reading Custom Uploaders Guide';
