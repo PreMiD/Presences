@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
 
   if (!showButtons) delete presenceData.buttons;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
