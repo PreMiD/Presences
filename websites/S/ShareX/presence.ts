@@ -19,12 +19,6 @@ presenceData.state = "🏠 | Browsing Home Page";
 
 else if (document.location.pathname.includes('/downloads')) {
 presenceData.state = "⚡ | Browsing Downloads Page";
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }else if(document.location.pathname.includes('/screenshots')) {
 presenceData.state = "🖼 | Viewing Screenshots";
