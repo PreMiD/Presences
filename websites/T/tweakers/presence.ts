@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `Review: '${document.location.pathname
         .split("/")[3]
         .replace(".html", "")}'`;
-    } else if(document.location.pathname.split("/")[2] && document.location.pathname.split("/")[2] == "reviews") {
+    } else if (document.location.pathname.split("/")[2] && document.location.pathname.split("/")[2] === "reviews") {
       presenceData.details = "Scrollt reviews...";
       presenceData.state = `Categorie: '${document.location.pathname
         .split("/")[1]}'`;
