@@ -1,5 +1,3 @@
-/*eslint linebreak-style: ["error", "unix"]*/
-
 const presence = new Presence({
   clientId: "886576430408929291"
 });
