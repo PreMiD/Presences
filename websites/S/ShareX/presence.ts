@@ -128,12 +128,6 @@ presenceData.state = '🧱 | Reading Google Cloud Guide';
 
 }else if(document.location.pathname.includes('website-capture')) {
 presenceData.state = '🔌 | Reading Website Capture Guide';
-presenceData.buttons = [
-  {
-    label: "View Page",
-    url: document.location.href
-  }
-];
 
 }
 
