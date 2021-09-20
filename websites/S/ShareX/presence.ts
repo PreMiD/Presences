@@ -49,10 +49,8 @@ presenceData.smallImageKey = "imageeffects";
 presenceData.state = "Browsing Actions Page";
 presenceData.smallImageKey = "actionspage";
 
-} else if(document.location.pathname.includes('/brand-assets')) {
+} else if(document.location.pathname.includes('/brand-assets')) 
 presenceData.state = "Browsing Brand Assets";
-
-}
 
 
 // Docs
