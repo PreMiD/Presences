@@ -1,4 +1,3 @@
-@@ -0,0 +1,39 @@
 const presence = new Presence({
   clientId: "886576430408929291"
 });
@@ -9,10 +8,6 @@ LeTimeMicieu = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData = {
     largeImageKey: "pronote_2",
-    smallImageKey: null,
-    details: null,
-    state: null,
-    smallImageText: null,
     startTimestamp: LeTimeMicieu,
     buttons: [
      {
