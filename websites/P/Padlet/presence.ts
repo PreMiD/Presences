@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
     switch (pathnames[2]) {
       case "drive":
         presenceData.details = "Viewing";
-        presenceData.state = `Padlet Drive`;
+        presenceData.state = "Padlet Drive";
         break;
       case undefined:
         type = document
