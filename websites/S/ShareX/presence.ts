@@ -23,13 +23,13 @@ presenceData: PresenceData = {
 if (document.location.pathname === "/") {
 presenceData.state = "🏠 | Browsing Home Page";
 delete presenceData.buttons;
-} else if (document.location.pathname.includes('/downloads')) {
+} else if (document.location.pathname.includes('/downloads')) 
 presenceData.state = "⚡ | Browsing Downloads Page";
 
-}else if(document.location.pathname.includes('/screenshots')) {
+else if(document.location.pathname.includes('/screenshots')) 
 presenceData.state = "🖼 | Viewing Screenshots";
 
-}else if(document.location.pathname.includes('/changelog')) {
+else if(document.location.pathname.includes('/changelog')) {
   presenceData.details = "📜 | Reading Changelog";
   presenceData.state = document.querySelector("h2")?.textContent; 
   presenceData.buttons = [
@@ -114,22 +114,21 @@ presenceData.buttons = [
   }
 ];
 
-}else if(document.location.pathname.includes('/translation')) {
+}else if(document.location.pathname.includes('/translation')) 
 presenceData.state = '📝 | Reading Translation Guide';
 
-}else if(document.location.pathname.includes('/custom-uploader')) {
+else if(document.location.pathname.includes('/custom-uploader')) 
 presenceData.state = '📱 | Reading Custom Uploaders Guide';
 
-}else if(document.location.pathname.includes('amazon-s3')) {
+else if(document.location.pathname.includes('amazon-s3')) 
 presenceData.state = '🦺 | Reading Amazon S3 Guide';
 
-}else if(document.location.pathname.includes('/google-cloud-storage')) {
+else if(document.location.pathname.includes('/google-cloud-storage')) 
 presenceData.state = '🧱 | Reading Google Cloud Guide';
 
-}else if(document.location.pathname.includes('website-capture')) {
+else if(document.location.pathname.includes('website-capture')) 
 presenceData.state = '🔌 | Reading Website Capture Guide';
 
-}
 
 // Start Browsing Timestamp
 if (showTimestamp) presenceData.startTimestamp = browsingStamp;
