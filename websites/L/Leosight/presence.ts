@@ -109,7 +109,7 @@ if (
  else if (path.includes("/skimo")) {
    presenceData.details = "Skimo rozcestník";
   if (path.includes("postavy")) presenceData.state = "Moje postavy";
-  else if (path.includes("/frakce")){
+  else if (path.includes("/frakce")) {
     presenceData.details = "Seznam frakcí";
     if (path.includes("/frakce/")) {
       item = document.querySelectorAll(
