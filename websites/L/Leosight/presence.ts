@@ -17,9 +17,9 @@ if (
   !window.location.href.includes("ctf") &&
   !window.location.href.includes("eco") &&
   !window.location.href.includes("guard")
-) 
+)
   presenceData.details = "Prohlíží si hlavní stránku...";
- else if (path === "/novinky") {
+  else if (path === "/novinky") {
   presenceData.details = "Fórum";
   presenceData.state = "Novinky";
 } else if (path.includes("registrace")) presenceData.details = "Registrace";
@@ -82,8 +82,7 @@ if (
  else if (path.includes("/tym")) {
   item = document.querySelector("div.obsah.text-center p") as HTMLElement;
   item2 = document.querySelector("div.obsah.text-center h2") as HTMLElement;
-  if (item2.innerText === "Týmy") 
-    presenceData.details = "Prohlíží si týmy";
+  if (item2.innerText === "Týmy") presenceData.details = "Prohlíží si týmy";
    else {
     presenceData.details = "Prohlíží si tým:";
     presenceData.state = `${item.innerText} (${item2.innerText})`;
@@ -110,7 +109,7 @@ if (
  else if (path.includes("/skimo")) {
    presenceData.details = "Skimo rozcestník";
   if (path.includes("postavy")) presenceData.state = "Moje postavy";
-  else if (path.includes("/frakce")) {
+  else if (path.includes("/frakce")){
     presenceData.details = "Seznam frakcí";
     if (path.includes("/frakce/")) {
       item = document.querySelectorAll(
