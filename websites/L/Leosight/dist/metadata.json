@@ -6,8 +6,8 @@
     "id": "523468146183634971"
   },
   "category": "games",
-  "logo": "https://imgur.com/KR8f71Y",
-  "thumbnail": "https://imgur.com/HOmso2n",
+  "logo": "https://i.imgur.com/HOmso2n.png", 
+  "thumbnail": "https://i.imgur.com/KR8f71Y.png",
   "version": "1.0.0",
   "color": "#595959",
   "tags": ["mta", "skimo", "leosight", "community", "fun"],
@@ -19,7 +19,7 @@
     "guard.leosight.cz"
   ],
   "description": {
-    "cz": "Discordové RPC pro stránku LeoSight, které vám umožní sdílet vaši aktivitu s přáteli.",
-    "en": "Discord RPC for LeoSight, which can show your activity to your friends."
+    "cs_CZ": "Discordové RPC pro stránku LeoSight, které vám umožní sdílet vaši aktivitu s přáteli.",
+    "en_EN": "Discord RPC for LeoSight, which can show your activity to your friends."
   }
 }
