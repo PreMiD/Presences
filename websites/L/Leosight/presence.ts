@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "888141162488143893",
+    clientId: "888141162488143893"
   }),
   time = Math.floor(Date.now() / 1000);
 let item, item2;
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "lslogo",
       smallImageKey: "lsminilogo",
-      smallImageText: "leosight.cz",
+      smallImageText: "leosight.cz"
     },
     path = document.location.pathname;
   presenceData.startTimestamp = time;
