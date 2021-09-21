@@ -100,6 +100,7 @@ const updateCallback = {
 
     if (
       currentPath[0] === "error" ||
+      currentPath[0] === "errorhandler" ||
       (document.querySelector(".ly-box > span").children.length === 3 &&
         document.querySelector(".ly-box b").textContent === "Error")
     )

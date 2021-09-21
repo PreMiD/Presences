@@ -39,7 +39,7 @@ const getLanguages = async () => {
   getAuthorString = (): string => {
     let authorsArray: Array<HTMLAnchorElement>, authorString: string;
     const authors: NodeListOf<HTMLAnchorElement> = document.querySelectorAll(
-      "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-14o5h2y > span > span > a"
+      "#footerPlayer span > span > a"
     );
 
     if (authors.length > 1) {
@@ -51,7 +51,7 @@ const getLanguages = async () => {
         .join(", ")}`;
     } else {
       authorString = document.querySelector<HTMLAnchorElement>(
-        "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-14o5h2y > span > span > a"
+        "#footerPlayer span > span > a"
       ).textContent;
     }
 

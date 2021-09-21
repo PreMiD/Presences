@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/NkfEDwV.png",
   "thumbnail": "https://i.imgur.com/uKMafFN.png",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "color": "#5e6266",
   "tags": [
     "education",
@@ -27,6 +27,7 @@
   "description": {
     "en": "Bunpro is a japanese grammar learning application.",
     "fr": "Bunpro est une application d'apprentissage de la grammaire japonaise.",
-    "nl": "Bunpro is een japanse grammatica leer applicatie."
+    "nl": "Bunpro is een japanse grammatica leer applicatie.",
+    "ja_JP": "Bunproは日本語の文法学ぶアプリ"
   }
 }
