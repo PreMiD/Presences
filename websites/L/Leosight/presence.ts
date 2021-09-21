@@ -78,17 +78,13 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/newtopic")) {
     presenceData.details = "Zakládá nové téma";
     presenceData.startTimestamp;
-  }
-  //další možnosti//
-  else if (path.includes("turnaje")) {
+  } else if (path.includes("turnaje")) {
     presenceData.details = "Turnaje";
     presenceData.startTimestamp;
   } else if (path === "/donate") {
     presenceData.details = "Podpora portálu";
     presenceData.startTimestamp;
-  }
-  //shop//
-  else if (path.includes("/shop")) {
+  } else if (path.includes("/shop")) {
     presenceData.details = "Obchod";
     presenceData.startTimestamp;
 
@@ -115,7 +111,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = item.innerText;
       presenceData.startTimestamp;
     }
-    ////
   } else if (path === "/trade") {
     presenceData.details = "Nabídky obchodu";
     presenceData.startTimestamp;
@@ -228,9 +223,7 @@ presence.on("UpdateData", async () => {
     else if (path.includes("/skiny")) presenceData.state = "Seznam skinů";
     else if (path.includes("/radia")) presenceData.state = "Seznam rádií";
     else if (path.includes("/banlist")) presenceData.state = "Seznam banů";
-  }
-  // uživatelé //
-  else if (path === "/profil/3773") {
+  } else if (path === "/profil/3773") {
     presenceData.details = "Obtěžuje autora tohoto";
     presenceData.state = "RPC";
     presenceData.startTimestamp;
@@ -255,9 +248,7 @@ presence.on("UpdateData", async () => {
   } else if (path === "/profil") {
     presenceData.details = "Prohlíží si svůj profil";
     presenceData.startTimestamp;
-  }
-  //Artic//
-  else if (window.location.href.includes("artic")) {
+  } else if (window.location.href.includes("artic")) {
     presenceData.smallImageKey = "artic";
     presenceData.smallImageText = "artic.leosight.cz";
     presenceData.details = "Artic";
@@ -270,64 +261,32 @@ presence.on("UpdateData", async () => {
     if (path.includes("mdc.ic")) {
       presenceData.details = "Prohlíží si MDC";
       presenceData.startTimestamp;
-      if (path === "/mdc.ic/") presenceData.state = "Ověření uživatele";
+      if (path === "/mdc.ic/") presenceData.state = "Ověření uživatele"; {
       if (path.includes("dashboard")) presenceData.state = "Hlavní stránka";
       else if (path.includes("apb")) presenceData.state = "APB";
       else if (path.includes("warrants")) presenceData.state = "Zatykače";
-      else if (path.includes("osoba")) {
-        /*if (path.includes("/osoba/")){
-           item = document.querySelector("div.col-sm6 div.clearfix.mt-2.mb-4 h1") as HTMLElement
-            presenceData.state = "Prohlíží si osobu " + item.innerText
-          }
-          else */
-        presenceData.state = "Vyhledává osobu";
-      } else if (path.includes("vozidlo")) {
-        /*if(path.includes("/vozidlo/")){
-            item = document.querySelector("div.clearfix mt-2 mb-4 h1") as HTMLElement
-            presenceData.state = "Vozidlo " + item.innerText
-          }
-          else */
-        presenceData.state = "Vyhledává vozidlo";
-      } else if (path.includes("nemovitost")) {
-        /*if(path.includes("/nemovitost/")){
-            item = document.querySelector("div.container.shadow.bg-light.my-5.px-4.py-3 h1") as HTMLElement
-            presenceData.state = "Nemovitost " + item.innerText
-          }
-          else */
-        presenceData.state = "Vyhledává nemovitost";
-      } else if (path.includes("firma")) {
-        /* if(path.includes("/firma/")){
-            item = document.querySelector("div.container.shadow.bg-light.my-5.px-4.py-3 h1") as HTMLElement
-            presenceData.state = "Firma " + item.innerText
-          }
-          else */
-        presenceData.state = "Vyhledává firmu";
-      } else if (path.includes("smazane"))
-        presenceData.state = "Smazané záznamy";
+      else if (path.includes("osoba")) presenceData.state = "Vyhledává osobu";
+      else if (path.includes("vozidlo")) presenceData.state = "Vyhledává vozidlo";
+      else if (path.includes("nemovitost")) presenceData.state = "Vyhledává nemovitost";
+      else if (path.includes("firma")) presenceData.state = "Vyhledává firmu";
+      else if (path.includes("smazane")) presenceData.state = "Smazané záznamy";
       else if (path.includes("odtahy")) presenceData.state = "Odtažená vozidla";
       else if (path.includes("handbook")) presenceData.state = "Úvod příručky";
       else if (path.includes("slovnik")) presenceData.state = "Slovník";
       else if (path.includes("codes")) presenceData.state = "Kódy";
-      else if (path.includes("sazebnik"))
-        presenceData.state = "Sazebník trestů";
-      else if (path.includes("stop"))
-        presenceData.state = "Zastavovací techniky";
+      else if (path.includes("sazebnik")) presenceData.state = "Sazebník trestů";
+      else if (path.includes("stop")) presenceData.state = "Zastavovací techniky";
       else if (path.includes("law")) presenceData.state = "Zákon o policii";
       else if (path.includes("directive")) presenceData.state = "Směrnice";
       else if (path.includes("teams")) presenceData.state = "Hierarchie PSA";
-    }
-    ////
-    //stoongle//
-    else if (path.includes("stoongle")) {
+    } else if (path.includes("stoongle")) {
       presenceData.details = "Stoongluje";
       presenceData.startTimestamp;
       if (path.includes("katalog")) {
         presenceData.state = "Katalog webů";
         presenceData.startTimestamp;
       }
-    }
-    ////
-    else if (path.includes("burza.ic")) {
+    } else if (path.includes("burza.ic")) {
       presenceData.state = "Burza";
       presenceData.startTimestamp;
     } else if (path.includes("invest.ic")) {
@@ -345,9 +304,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("katastr.ic")) {
       presenceData.state = "Katastr nemovitostí";
       presenceData.startTimestamp;
-    }
-    //lemon//
-    else if (path.includes("lemongate.ic")) {
+    } else if (path.includes("lemongate.ic")) {
       presenceData.state = "LemonGate - hlavní stránka";
       presenceData.startTimestamp;
     } else if (path.includes("e6ftf4.lemon")) {
@@ -365,9 +322,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("1trade.lemon")) {
       presenceData.state = "LemonGate - AceTrade";
       presenceData.startTimestamp;
-    }
-    ////
-    else if (path.includes("blockchain.ic")) {
+    } else if (path.includes("blockchain.ic")) {
       presenceData.state = "NC Blockchain";
       presenceData.startTimestamp;
     } else if (path.includes("nomelcoin.ic")) {
@@ -385,9 +340,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("sherwood.ic")) {
       presenceData.state = "Sherwood Corporation";
       presenceData.startTimestamp;
-    }
-    //smail//
-    else if (path.includes("smail.ic")) {
+    } else if (path.includes("smail.ic")) {
       presenceData.details = "Smail";
       presenceData.state = "Hlavní stránka";
       presenceData.startTimestamp;
@@ -395,9 +348,7 @@ presence.on("UpdateData", async () => {
       else if (path.includes("napsat")) presenceData.state = "Napsat e-mail";
       else if (path.includes("odeslane")) presenceData.state = "Odeslané";
       else if (path.includes("nastaveni")) presenceData.state = "Nastavení";
-    }
-    ////
-    else if (path.includes("tcu.ic")) {
+    } else if (path.includes("tcu.ic")) {
       presenceData.state = "Tax Compliance Unit";
       presenceData.startTimestamp;
     } else if (path.includes("mining.ic")) {
@@ -410,9 +361,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Writer";
       presenceData.startTimestamp;
     }
-  }
-  //ctf//
-  else if (window.location.href.includes("ctf")) {
+  } else if (window.location.href.includes("ctf")) {
     presenceData.smallImageKey = "ctf";
     presenceData.smallImageText = "ctf.leosight.cz";
     presenceData.details = "Leosight CTF";
@@ -420,16 +369,12 @@ presence.on("UpdateData", async () => {
     if (path.includes("login.php")) presenceData.state = "Přihlášení";
     else if (path.includes("index.php"))
       presenceData.state = "Odvařuje si mozek";
-  }
-  //eco//
-  else if (window.location.href.includes("eco")) {
+  } else if (window.location.href.includes("eco")) {
     presenceData.smallImageKey = "eco";
     presenceData.smallImageText = "eco.leosight.cz";
     presenceData.details = "Hraje Leosight ECO";
     presenceData.startTimestamp;
-  }
-  //guard//
-  else if (window.location.href.includes("guard")) {
+  } else if (window.location.href.includes("guard")) {
     presenceData.smallImageKey = "guard";
     presenceData.smallImageText = "guard.leosight.cz";
     presenceData.details = "Leosigh Guard";
