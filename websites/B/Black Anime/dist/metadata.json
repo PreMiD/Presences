@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Dev",
+    "id": "492457380563386369"
+  },
+  "contributors": [
+    {
+      "name": "ThePlug",
+      "id": "492457380563386369"
+    }
+  ],
+  "service": "Black Anime",
+  "description": {
+    "en": "Watch anime online in English. You can watch free series and movies online and English subtitle. Free download high quality anime.",
+    "nl": "Bekijk anime online in het Engels. U kunt gratis series en films online bekijken met Engelse ondertiteling. Gratis download anime van hoge kwaliteit."
+  },
+  "url": [
+    "https://blackanime.herokuapp.com",
+    "https://blackanimev2.herokuapp.com",
+    "https://blackanimev3.herokuapp.com"
+  ],
+  "regExp": "[0-9w]{0,6}.*blackanime[s]*.[a-z]+",
+  "version": "2.0.8",
+  "logo": "https://lucid-bartik-b50b21.netlify.app/favicon.ico",
+  "thumbnail": "https://gogocdn.net/cover/tokyo-revengers.png",
+  "color": "#FFC119",
+  "tags": [
+    "anime",
+    "video",
+    "streaming"
+  ],
+  "category": "anime",
+  "iframe": true
+}
