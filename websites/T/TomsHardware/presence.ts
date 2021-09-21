@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "tomshardware"
   };
 
-  let { pathname: pathname } = document.location;
+  let { pathname } = document.location;
 
   if (pathname.includes("uk/")) pathname = pathname.replace("uk/", "");
   if (pathname.includes("uk")) pathname = pathname.replace("uk", "");
@@ -35,9 +35,8 @@ presence.on("UpdateData", async () => {
         .replace("best-", "")}'`;
     } else presenceData.details = "Scrolling through best picks...";
   } else if (document.location.href.includes("coupons")) {
-    if (pathname.includes("?")) {
-      presenceData.details = "Looking at a coupon...";
-    } else if (pathname.split("/")[2]) {
+    if (pathname.includes("?")) presenceData.details = "Looking at a coupon...";
+    else if (pathname.split("/")[2]) {
       presenceData.details = "Looking at coupons...";
       presenceData.state = `Coupons for: '${pathname
         .split("/")[3]
