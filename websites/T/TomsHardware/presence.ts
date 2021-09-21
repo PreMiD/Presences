@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "tomshardware"
   };
 
-  let pathname = document.location.pathname;
+  let { pathname: pathname } = document.location;
 
   if (pathname.includes("uk/")) pathname = pathname.replace("uk/", "");
   if (pathname.includes("uk")) pathname = pathname.replace("uk", "");
@@ -54,21 +54,20 @@ presence.on("UpdateData", async () => {
         .split("/")[2]
         .split(".")[0]
         .replace(".html", "")}'`;
-    } else if (pathname.includes("featured")) {
+    } else if (pathname.includes("featured"))
       presenceData.state = "Looking at featured threads...";
-    } else if (pathname.includes("whats-new")) {
+    else if (pathname.includes("whats-new"))
       presenceData.state = "Looking at new threads...";
-    } else if (pathname.includes("members")) {
+    else if (pathname.includes("members"))
       presenceData.state = "Looking at members...";
-    } else if (pathname.includes("help")) {
-      presenceData.state = "Getting help...";
-    } else if (pathname.includes("search")) {
+    else if (pathname.includes("help")) presenceData.state = "Getting help...";
+    else if (pathname.includes("search"))
       presenceData.state = "Searching the forums...";
-    } else if (pathname.includes("billboard")) {
+    else if (pathname.includes("billboard"))
       presenceData.state = "Looking at the billboard...";
-    } else if (pathname.includes("register")) {
+    else if (pathname.includes("register"))
       presenceData.state = "Registering an account...";
-    }
+
     presenceData.details = "Visiting the forums...";
   } else if (document.location.href.includes("topics")) {
     if (pathname.split("/")[3]) {
