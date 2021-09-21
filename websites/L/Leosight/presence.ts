@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "888141162488143893"
+    clientId: "888141162488143893",
   }),
   time = Math.floor(Date.now() / 1000);
 let item, item2;
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "lslogo",
       smallImageKey: "lsminilogo",
-      smallImageText: "leosight.cz"
+      smallImageText: "leosight.cz",
     },
     path = document.location.pathname;
   presenceData.startTimestamp = time;
@@ -261,24 +261,33 @@ presence.on("UpdateData", async () => {
     if (path.includes("mdc.ic")) {
       presenceData.details = "Prohlíží si MDC";
       presenceData.startTimestamp;
-      if (path === "/mdc.ic/") presenceData.state = "Ověření uživatele"; {
-      if (path.includes("dashboard")) presenceData.state = "Hlavní stránka";
-      else if (path.includes("apb")) presenceData.state = "APB";
-      else if (path.includes("warrants")) presenceData.state = "Zatykače";
-      else if (path.includes("osoba")) presenceData.state = "Vyhledává osobu";
-      else if (path.includes("vozidlo")) presenceData.state = "Vyhledává vozidlo";
-      else if (path.includes("nemovitost")) presenceData.state = "Vyhledává nemovitost";
-      else if (path.includes("firma")) presenceData.state = "Vyhledává firmu";
-      else if (path.includes("smazane")) presenceData.state = "Smazané záznamy";
-      else if (path.includes("odtahy")) presenceData.state = "Odtažená vozidla";
-      else if (path.includes("handbook")) presenceData.state = "Úvod příručky";
-      else if (path.includes("slovnik")) presenceData.state = "Slovník";
-      else if (path.includes("codes")) presenceData.state = "Kódy";
-      else if (path.includes("sazebnik")) presenceData.state = "Sazebník trestů";
-      else if (path.includes("stop")) presenceData.state = "Zastavovací techniky";
-      else if (path.includes("law")) presenceData.state = "Zákon o policii";
-      else if (path.includes("directive")) presenceData.state = "Směrnice";
-      else if (path.includes("teams")) presenceData.state = "Hierarchie PSA";
+      if (path === "/mdc.ic/") presenceData.state = "Ověření uživatele";
+      {
+        if (path.includes("dashboard")) presenceData.state = "Hlavní stránka";
+        else if (path.includes("apb")) presenceData.state = "APB";
+        else if (path.includes("warrants")) presenceData.state = "Zatykače";
+        else if (path.includes("osoba")) presenceData.state = "Vyhledává osobu";
+        else if (path.includes("vozidlo"))
+          presenceData.state = "Vyhledává vozidlo";
+        else if (path.includes("nemovitost"))
+          presenceData.state = "Vyhledává nemovitost";
+        else if (path.includes("firma")) presenceData.state = "Vyhledává firmu";
+        else if (path.includes("smazane"))
+          presenceData.state = "Smazané záznamy";
+        else if (path.includes("odtahy"))
+          presenceData.state = "Odtažená vozidla";
+        else if (path.includes("handbook"))
+          presenceData.state = "Úvod příručky";
+        else if (path.includes("slovnik")) presenceData.state = "Slovník";
+        else if (path.includes("codes")) presenceData.state = "Kódy";
+        else if (path.includes("sazebnik"))
+          presenceData.state = "Sazebník trestů";
+        else if (path.includes("stop"))
+          presenceData.state = "Zastavovací techniky";
+        else if (path.includes("law")) presenceData.state = "Zákon o policii";
+        else if (path.includes("directive")) presenceData.state = "Směrnice";
+        else if (path.includes("teams")) presenceData.state = "Hierarchie PSA";
+      }
     } else if (path.includes("stoongle")) {
       presenceData.details = "Stoongluje";
       presenceData.startTimestamp;
