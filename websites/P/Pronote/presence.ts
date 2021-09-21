@@ -4,15 +4,15 @@ const presence = new Presence({
 function getUrlExtension( url ) {
   return url.split(/[#?]/)[0].split('.').pop().trim();
 }
-const LeTimeMicieu = Math.floor(Date.now() / 1000);
+let LeTimeMicieu = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData = {
     largeImageKey: "pronote_2",
     startTimestamp: LeTimeMicieu,
     buttons: [
      {
-             label: "Accéder à pronote",
-             url: window.location.href
+             label: "Découvrir pronote",
+             url: "https://www.index-education.com/fr/logiciel-gestion-vie-scolaire.php"
          }
     ]
   };
