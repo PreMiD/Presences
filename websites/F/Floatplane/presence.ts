@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
     if (!video) return;
 
     const timestamps = presence.getTimestampsfromMedia(video),
-      endTS = timestamps[1];
+      [, endTS] = timestamps;
 
     presenceData.details = title;
     presenceData.state = channel;
