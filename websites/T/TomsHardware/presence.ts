@@ -89,8 +89,5 @@ presence.on("UpdateData", async () => {
     presenceData.state = `On the page '${pathname.split("/")[1]}'`;
   } else presenceData.details = "Visiting the front page...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
