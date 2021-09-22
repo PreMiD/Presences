@@ -173,16 +173,6 @@ presence.on("UpdateData", async () => {
         url: "https://www.floatplane.com/legal/privacy"
       }
     ];
-  } else if (pathnames[1] === "login" || pathnames[1] === "signup") {
-    //Logn/Signup
-
-    presenceData.details = " "; // to show signup button
-    presenceData.buttons = [
-      {
-        label: "Sign Up",
-        url: "https://www.floatplane.com/signup"
-      }
-    ];
   } else if (pathnames[1] === "post") {
     //Video
     const title = document.querySelector(".title-text")?.textContent,
