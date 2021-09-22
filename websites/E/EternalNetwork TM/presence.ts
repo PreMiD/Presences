@@ -101,9 +101,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Checking video gallery";
 
     if (search.includes("?mode=view&id=")) {
-      let videoTitle = document.querySelector("h3.first > a").textContent;
-      let checkVideoBtn = document.querySelector("div.postbody > div > a > span").getAttribute("title");
-      presenceData.details = (await strings).watchingVid + ":";
+      const videoTitle = document.querySelector("h3.first > a").textContent,
+       checkVideoBtn = document.querySelector("div.postbody > div > a > span").getAttribute("title");
+      presenceData.details = `${(await strings).watchingVid}:`;
       presenceData.state = videoTitle;
       presenceData.buttons = [
         {
