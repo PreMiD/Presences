@@ -185,7 +185,8 @@ presence.on("UpdateData", async () => {
     //Wait for page to load
     if (!video) return;
 
-    const timestamps = presence.getTimestampsfromMedia(video);
+    const timestamps = presence.getTimestampsfromMedia(video),
+      endTS = timestamps[1];
 
     presenceData.details = title;
     presenceData.state = channel;
@@ -194,7 +195,7 @@ presence.on("UpdateData", async () => {
 
     delete presenceData.startTimestamp;
 
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.endTimestamp = endTS;
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
