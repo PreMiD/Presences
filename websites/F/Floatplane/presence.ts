@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 
       switch (channelCount) {
         case 1:
-          if (!!document.querySelector(".search-not-found")) {
+          if (document.querySelector(".search-not-found")) {
             stringFormated = "No Results";
             break;
           }
