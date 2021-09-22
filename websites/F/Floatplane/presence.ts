@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
             stringFormated = "No Results";
             break;
           }
-          stringFormated = `1 Channel`;
+          stringFormated = "1 Channel";
           break;
 
         default:
@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
 
       switch (faqCount) {
         case 1:
-          stringFormated = `1 Topic`;
+          stringFormated = "1 Topic";
           break;
         case 0:
           stringFormated = "No Results";
