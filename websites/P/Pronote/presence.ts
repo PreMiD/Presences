@@ -4,11 +4,10 @@ const presence = new Presence({
 function getUrlExtension( url ) {
   return url.split(/[#?]/)[0].split('.').pop().trim();
 }
-const LeTimeMicieu = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData = {
     largeImageKey: "pronote_2",
-    startTimestamp: LeTimeMicieu,
+    startTimestamp: Math.floor(Date.now() / 1000),
     buttons: [
      {
              label: "Découvrir pronote",
