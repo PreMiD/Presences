@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 
     if (search.includes("?mode=view&id=")) {
       const videoTitle = document.querySelector("h3.first > a").textContent,
-       checkVideoBtn = document.querySelector("div.postbody > div > a > span").getAttribute("title");
+        checkVideoBtn = document.querySelector("div.postbody > div > a > span").getAttribute("title");
       presenceData.details = `${(await strings).watchingVid}:`;
       presenceData.state = videoTitle;
       presenceData.buttons = [
