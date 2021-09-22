@@ -79,21 +79,15 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [{ label: "View Channel", url: location.href }];
 
     if (pathnames[3] === "live") {
-      //Not tested - should work
-
       //Stream
       const title = document.querySelector(".title-text")?.textContent,
         video = document.querySelector("video") as HTMLVideoElement;
 
-      if (!video) return;
-
-      const timestamps = presence.getTimestampsfromMedia(video);
+      if (!title || !video) return;
 
       presenceData.details = title;
 
       delete presenceData.startTimestamp;
-
-      presenceData.endTimestamp = timestamps[1] ?? -1;
 
       presenceData.smallImageKey = "live";
       presenceData.smallImageText = "Live";
