@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "tomshardware"
-  },
+  };
 
   let { pathname } = document.location;
 
