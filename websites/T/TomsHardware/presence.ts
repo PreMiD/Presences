@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "tomshardware"
   },
 
-   { pathname } = document.location;
+  let { pathname } = document.location;
 
   if (pathname.includes("uk/")) pathname = pathname.replace("uk/", "");
   if (pathname.includes("uk")) pathname = pathname.replace("uk", "");
