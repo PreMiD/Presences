@@ -9,10 +9,10 @@ presence.on("UpdateData", async () => {
     largeImageKey: "pronote_2",
     startTimestamp: Math.floor(Date.now() / 1000),
     buttons: [
-    {
+      {
         label: "Découvrir pronote",
         url: "https://www.index-education.com/fr/logiciel-gestion-vie-scolaire.php"
-     }
+      }
     ]
   };
   if (document.getElementById("breadcrumbBandeau")) 
