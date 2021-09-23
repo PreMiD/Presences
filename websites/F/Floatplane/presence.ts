@@ -70,12 +70,9 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing channel:";
     presenceData.state = channelTitle;
-
     presenceData.largeImageKey = pathnames[2].toLowerCase();
-
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = document.title;
-
     presenceData.buttons = [{ label: "View Channel", url: location.href }];
 
     if (pathnames[3] === "live") {
@@ -85,10 +82,9 @@ presence.on("UpdateData", async () => {
 
       if (!title || !video) return;
 
-      presenceData.details = title;
-
       delete presenceData.startTimestamp;
 
+      presenceData.details = title;
       presenceData.smallImageKey = "live";
       presenceData.smallImageText = "Live";
       presenceData.buttons = [
@@ -113,7 +109,6 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing user:";
     presenceData.state = channelTitle;
-
     presenceData.buttons = [{ label: "View User", url: location.href }];
   } else if (pathnames[2] === "settings") {
     //Settings
@@ -182,15 +177,12 @@ presence.on("UpdateData", async () => {
     const timestamps = presence.getTimestampsfromMedia(video),
       [, endTS] = timestamps;
 
-    presenceData.details = title;
-    presenceData.state = channel;
-
-    presenceData.largeImageKey = channelURL?.split("/").slice(-1)[0];
-
     delete presenceData.startTimestamp;
 
+    presenceData.details = title;
+    presenceData.state = channel;
+    presenceData.largeImageKey = channelURL?.split("/").slice(-1)[0];
     presenceData.endTimestamp = endTS;
-
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
     presenceData.buttons = [
