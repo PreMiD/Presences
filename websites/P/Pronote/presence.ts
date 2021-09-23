@@ -15,9 +15,9 @@ presence.on("UpdateData", async () => {
          }
     ]
   };
-  if (document.getElementById('breadcrumbBandeau') !== null) 
+  if (document.getElementById('breadcrumbBandeau')) 
     presenceData.state = document.getElementsByClassName("titre-onglet")[0].textContent;
-  else if (document.getElementById('id_14') !== null) 
+  else if (document.getElementById('id_14')) 
     presenceData.state = `Connection - ${document.querySelector("#id_14 > div.InlineBlock.Texte10 > div.Texte14.Gras").textContent}`;
   else 
     presenceData.state = `Visionne un fichier ${getUrlExtension(document.location.pathname)}`;
