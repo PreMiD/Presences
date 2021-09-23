@@ -5,9 +5,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "tomshardware"
-  };
+  },
 
-  const { pathname } = document.location;
+   { pathname } = document.location;
 
   if (pathname.includes("uk/")) pathname = pathname.replace("uk/", "");
   if (pathname.includes("uk")) pathname = pathname.replace("uk", "");
