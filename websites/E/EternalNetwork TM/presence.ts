@@ -4,17 +4,23 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 interface LangStrings {
+  buttonViewPage: string;
   listeningMusic: string;
   readingPost: string;
   viewPage: string;
+  viewUser: string;
+  watchingVid: string;
 }
 
 async function getStrings(): Promise<LangStrings> {
   return presence.getStrings(
     {
+      buttonViewPage: "general.buttonViewPage",
       listeningMusic: "general.listeningMusic",
       readingPost: "general.readingPost",
-      viewPage: "general.viewPage"
+      viewPage: "general.viewPage",
+      viewUser: "general.viewUser",
+      watchingVid: "general.watchingVid"
     },
     await presence.getSetting("lang")
   );
@@ -24,20 +30,19 @@ let strings: Promise<LangStrings> = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang"),
+  const
+    newLang = await presence.getSetting("lang"),
     showTimestamps = await presence.getSetting("timestamp"),
     showSubdomain = await presence.getSetting("subdomain"),
     bigicon = await presence.getSetting("bigicon"),
-    { hostname, pathname } = document.location,
+    buttons = await presence.getSetting("buttons"),
+    {hostname, pathname, search, hash} = document.location,
     etrnl = "eternalnetworktm.com",
     ttl = document.title,
-    logoArr = [
-      "eternalnetworktm_logo",
-      "eternalnetworktm_logo_2",
-      "eternalnetworktm_logo_3"
-    ];
+    logoArr = ["eternalnetworktm_logo", "eternalnetworktm_logo_2", "eternalnetworktm_logo_3"];
 
-  if (!oldLang) oldLang = newLang;
+  if (!oldLang)
+    oldLang = newLang;
   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
@@ -47,75 +52,126 @@ presence.on("UpdateData", async () => {
     details: (await strings).viewPage,
     largeImageKey: logoArr[bigicon] || "eternalnetworktm_logo",
     smallImageText: hostname + pathname,
-    startTimestamp: browsingStamp
+    startTimestamp: browsingStamp,
+    buttons: [{
+      label: (await strings).buttonViewPage,
+      url: window.location.href
+    }]
   };
 
-  if (!showTimestamps) delete presenceData.startTimestamp;
+  if (!showTimestamps)
+    delete presenceData.startTimestamp;
 
   if (hostname === etrnl || hostname === `www.${etrnl}`) {
+
     presenceData.smallImageKey = "eternalnetworktm_logo";
 
-    if (pathname.startsWith("/")) presenceData.state = ttl;
+    if (pathname.startsWith("/"))
+      presenceData.state = ttl;
+
     if (pathname.includes("/wp-admin")) {
       presenceData.state = "Using administrating power over the website !";
       presenceData.smallImageText = "Admin Panel";
+      delete presenceData.buttons;
     }
-  } else if (
-    hostname === `forum.${etrnl}` ||
-    hostname === `www.forum.${etrnl}`
-  ) {
+
+  } else if (hostname === `forum.${etrnl}` || hostname === `www.forum.${etrnl}`) {
+
     presenceData.smallImageKey = "eternalnetworktm_logo_v2";
 
-    if (pathname.startsWith("/")) presenceData.state = ttl;
+    if (pathname.startsWith("/"))
+      presenceData.state = ttl;
 
     if (pathname.includes("/memberlist.php"))
       presenceData.state = "Sneaking into member list !";
+
+    if (search.includes("?mode=team"))
+      presenceData.state = "Checking out team list !";
+
+    if (pathname.includes("/partner"))
+      presenceData.state = "Cheking our partners !";
+
+    if (pathname.includes("/donation"))
+      presenceData.state = "Trying to make donation for the forum !";
+
+    if (pathname.includes("/imageupload"))
+      presenceData.state = "Uploading images!";
+
+    if (pathname.includes("/video"))
+      presenceData.state = "Checking video gallery";
+
+    if (search.includes("?mode=view&id=")) {
+      const videoTitle = document.querySelector("h3.first > a").textContent,
+        checkVideoBtn = document.querySelector("div.postbody > div > a > span").getAttribute("title");
+      presenceData.details = `${(await strings).watchingVid}:`;
+      presenceData.state = videoTitle;
+      presenceData.buttons = [
+        {
+          label: (await strings).buttonViewPage,
+          url: window.location.href
+        },
+        {
+          label: checkVideoBtn,
+          url: document.querySelector("#video_title").getAttribute("value")
+        }
+      ];
+    }
 
     if (pathname.includes("/viewtopic.php")) {
       presenceData.details = (await strings).readingPost;
       presenceData.state = ttl;
     }
 
+    if (pathname.includes("/posting.php")) {
+      presenceData.details = "Making a new post";
+      presenceData.state = ttl;
+    }
+
     if (pathname.includes("/adm/")) {
       presenceData.state = "Using administrating power over the forum !";
       presenceData.smallImageText = "Admin Panel";
+      delete presenceData.buttons;
     }
-  } else if (
-    hostname === `radio.${etrnl}` ||
-    hostname === `www.radio.${etrnl}`
-  ) {
+
+  } else if (hostname === `radio.${etrnl}` || hostname === `www.radio.${etrnl}`) {
+
     presenceData.smallImageKey = "eternalradio_logo";
     presenceData.details = (await strings).listeningMusic;
 
-    if (pathname.startsWith("/")) presenceData.state = ttl;
+    if (pathname.startsWith("/"))
+      presenceData.state = ttl;
 
-    if (pathname.includes("page_ABOUT"))
+    if (hash.includes("page_ABOUT"))
       presenceData.state = "About info page !";
 
-    if (pathname.includes("page_PROGRAMS"))
+    if (hash.includes("page_PROGRAMS"))
       presenceData.state = "Checking radio program !";
 
-    if (pathname.includes("page_REQUEST"))
+    if (hash.includes("page_REQUEST"))
       presenceData.state = "Requesting a song !";
 
-    if (pathname.includes("page_CONTACTS"))
+    if (hash.includes("page_CONTACTS"))
       presenceData.state = "Contact us page !";
-  } else if (
-    hostname === `status.${etrnl}` ||
-    hostname === `www.status.${etrnl}`
-  ) {
+  } else if (hostname === `status.${etrnl}` || hostname === `www.status.${etrnl}`) {
+
     presenceData.smallImageKey = "eternalnetworktm_status";
 
-    if (pathname.startsWith("/")) presenceData.state = ttl;
+    if (pathname.startsWith("/"))
+      presenceData.state = ttl;
 
     if (pathname.includes("/admin")) {
       presenceData.state = "Adding new incident 😥 !";
       presenceData.smallImageText = "Admin Panel";
+      delete presenceData.buttons;
     }
 
-    if (pathname.includes("/?do=settings"))
+    if (search.includes("?do=settings"))
       presenceData.state = "Adding new service !";
+    delete presenceData.buttons;
   }
+
+  if (!buttons)
+    delete presenceData.buttons;
 
   if (!showSubdomain) {
     delete presenceData.smallImageKey;
