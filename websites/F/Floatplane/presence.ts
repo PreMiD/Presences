@@ -25,7 +25,6 @@ presence.on("UpdateData", async () => {
     }
   } else if (pathnames[1] === "discover") {
     //Homepage
-
     presenceData.details = "Viewing Homepage";
     presenceData.state = "Say Hello To Floatplane";
   } else if (pathnames[1] === "browse") {
@@ -101,7 +100,6 @@ presence.on("UpdateData", async () => {
     }
   } else if (pathnames[2] === "profile") {
     //User
-
     const channelTitle = document.querySelector(".channel-title").textContent;
 
     //Wait for page to load
@@ -112,12 +110,10 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [{ label: "View User", url: location.href }];
   } else if (pathnames[2] === "settings") {
     //Settings
-
     presenceData.details = "Viewing thier";
     presenceData.state = "Settings";
   } else if (pathnames[2] === "help") {
     //Help pages
-
     presenceData.details = "Viewing:";
     presenceData.state = "Support pages";
   } else if (pathnames[1] === "support") {
@@ -150,7 +146,6 @@ presence.on("UpdateData", async () => {
     }
   } else if (pathnames[1] === "legal") {
     //Support Pages
-
     presenceData.details = "Legal Stuff";
     presenceData.buttons = [
       {
