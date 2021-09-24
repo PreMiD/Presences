@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     },
-    pathnames = location.pathname.split("/");
+    [, page, pageType, pageTypeType] = location.pathname.split("/");
 
-  if (pathnames[1] === "") {
+  if (page === "") {
     //Uploads
     const subCount =
         document.querySelector(".simplebar-content")?.children.length,
@@ -23,11 +23,11 @@ presence.on("UpdateData", async () => {
         subCount > 2 ? "Subscriptions" : "Subscription"
       }`;
     }
-  } else if (pathnames[1] === "discover") {
+  } else if (page === "discover") {
     //Homepage
     presenceData.details = "Viewing Homepage";
     presenceData.state = "Say Hello To Floatplane";
-  } else if (pathnames[1] === "browse") {
+  } else if (page === "browse") {
     //Browsing
     const searchTerm = (
         document.querySelector(".search-bar") as HTMLInputElement
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
     }
-  } else if (pathnames[1] === "channel") {
+  } else if (page === "channel") {
     //Viewing a channel
     const channelTitle = document.querySelector(".channel-title")?.textContent;
 
@@ -69,12 +69,12 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing channel:";
     presenceData.state = channelTitle;
-    presenceData.largeImageKey = pathnames[2].toLowerCase();
+    presenceData.largeImageKey = pageType.toLowerCase();
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = document.title;
     presenceData.buttons = [{ label: "View Channel", url: location.href }];
 
-    if (pathnames[3] === "live") {
+    if (pageTypeType === "live") {
       //Stream
       const title = document.querySelector(".title-text")?.textContent,
         video = document.querySelector("video") as HTMLVideoElement;
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-  } else if (pathnames[2] === "profile") {
+  } else if (pageType === "profile") {
     //User
     const channelTitle = document.querySelector(".channel-title").textContent;
 
@@ -108,15 +108,15 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing user:";
     presenceData.state = channelTitle;
     presenceData.buttons = [{ label: "View User", url: location.href }];
-  } else if (pathnames[2] === "settings") {
+  } else if (pageType === "settings") {
     //Settings
     presenceData.details = "Viewing thier";
     presenceData.state = "Settings";
-  } else if (pathnames[2] === "help") {
+  } else if (pageType === "help") {
     //Help pages
     presenceData.details = "Viewing:";
     presenceData.state = "Support pages";
-  } else if (pathnames[1] === "support") {
+  } else if (page === "support") {
     //Support Pages
     const searchTerm = (document.querySelector("#search") as HTMLInputElement)
         .value,
@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
     }
-  } else if (pathnames[1] === "legal") {
+  } else if (page === "legal") {
     //Support Pages
     presenceData.details = "Legal Stuff";
     presenceData.buttons = [
@@ -157,7 +157,7 @@ presence.on("UpdateData", async () => {
         url: "https://www.floatplane.com/legal/privacy"
       }
     ];
-  } else if (pathnames[1] === "post") {
+  } else if (page === "post") {
     //Video
     const title = document.querySelector(".title-text")?.textContent,
       channel = document.querySelector(".channel-title")?.textContent,
