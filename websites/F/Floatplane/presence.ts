@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     },
     [, page, pageType, pageTypeType] = location.pathname.split("/");
 
-  if (page === "") {
+  if (!page) {
     //Uploads
     const subCount =
         document.querySelector(".simplebar-content")?.children.length,
