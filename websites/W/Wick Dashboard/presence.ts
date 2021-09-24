@@ -1,17 +1,17 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "890182436695187528"
-}),
+});
 
- browsingStamp = Math.floor(Date.now() / 1000),
+const browsingStamp = Math.floor(Date.now() / 1000);
 
- title: any;
+var title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "wick"
   };
 
-  if (document.location.hostname == "wickbot.com") {
+  if (document.location.hostname === "wickbot.com") {
     presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname.includes("/team")) {
       presenceData.details = "Reading about the Team";
@@ -21,27 +21,27 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#dashboard-mount > div > div.column.nav-sidebar > aside > div.guild-header > h3 > div > div"
       );
-      presenceData.state = `server: ${title.innerText}`;
+      presenceData.state = "server: " + title.innerText;
       presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/dashboard")) {
       presenceData.details = "Browsing through the Servers";
       presenceData.state = "server listings";
-    } else if (document.location.pathname.includes("/myreview")) 
+    } else if (document.location.pathname.includes("/myreview")) {
       presenceData.details = "Viewing all the their reviews";
-     else if (document.location.pathname.includes("/tos")) {
+    } else if (document.location.pathname.includes("/tos")) {
       presenceData.details = "Reading the TOS";
       presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/status")) 
+    } else if (document.location.pathname.includes("/status")) {
       presenceData.details = "Viewing the status";
-     else if (document.location.pathname.includes("/premium")) 
+    } else if (document.location.pathname.includes("/premium")) {
       presenceData.details = "Viewing Wick Premium Plans";
-    
+    }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
+  } else {
     presence.setActivity(presenceData);
-  
+  }
 });
