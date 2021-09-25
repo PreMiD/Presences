@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
     showMenuState: boolean = await presence.getSetting("menuDetail"),
     showPlayerCount: boolean = await presence.getSetting("playerCount"),
     logo: number = await presence.getSetting("logo"),
-    logoArr = ["wov", "wov_no_bg", "wov_tile", "wov_web", "wov_blue", "wov_red", "wov_orange", "wov_yellow", "wov_green", "wov_purple", "wov_pink", "wov_white"];
+    logoArr = ["wov", "wov_no_bg", "wov_tile", "wov_web", "wov_blue", "wov_red", "wov_orange", "wov_yellow", "wov_green", "wov_purple", "wov_pink", "wov_white"],
 
-  const data: PresenceData = {
+   data: PresenceData = {
     largeImageKey: logoArr[logo] || "wov",
     startTimestamp: startedTime
   };
@@ -41,13 +41,13 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.href.includes("legal.wolvesville.com")) { //Legal
     data.details = "Legal";
-    if (document.location.pathname.includes("tos")) {
+    if (document.location.pathname.includes("tos")) 
       data.state = "Reading the Terms of Service";
-    } else if (document.location.pathname.includes("privacy-policy")) {
+     else if (document.location.pathname.includes("privacy-policy")) 
       data.state = "Reading the Privacy Policy";
-    } else if (document.location.pathname.includes("imprint")) {
+     else if (document.location.pathname.includes("imprint")) 
       data.state = "Reading the imprint";
-    }
+    
 
   } else if (document.location.href.includes("heroes.wolvesville.com")) { //Wolvesvile Heroes
     data.details = "Wolvesville Heroes";
@@ -55,13 +55,13 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "wov_heroes";
     data.smallImageText = "Wolvesville Heroes";
 
-    if (document.location.pathname.includes("overview")) {
+    if (document.location.pathname.includes("overview")) 
       data.state = "Viewing Overview";
-    } else if (document.location.pathname.includes("applications")) {
+     else if (document.location.pathname.includes("applications")) 
       data.state = "Viewing Applications";
-    } else if (document.location.pathname.includes("updates")) {
+     else if (document.location.pathname.includes("updates")) 
       data.state = "Viewing Updates";
-    } else if (document.location.href.includes("list?role") || document.location.href.includes("list.html?role")) {
+     else if (document.location.href.includes("list?role") || document.location.href.includes("list.html?role")) {
       const role = document.querySelector("#staff_member_name").textContent;
       data.state = `Reading about the ${role} role`;
     } else if (document.location.href.includes("list?member") || document.location.href.includes("list.html?member")) {
@@ -80,9 +80,9 @@ presence.on("UpdateData", async () => {
     if (submissionView) {
       const author = document.querySelector(".css-757v71").textContent;
       data.state = `Viewing submission by ${author}`;
-    } else {
+    } else 
       data.state = "Browsing...";
-    }
+    
   } else if (document.location.href.includes("app.wolvesville.com")) { //App info page
     data.details = "Viewing the app";
   } else if (document.location.href.includes("wolvesville.com")) { //Game
@@ -104,14 +104,14 @@ presence.on("UpdateData", async () => {
     ) ? true : false;
 
     if (menu) {
-      data.details = "In the main menu"
+      data.details = "In the main menu";
       const username = document.querySelectorAll(
         "div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u"
-      )
+      );
 
-      if (showUsername) {
+      if (showUsername) 
         data.state = username[0]?.textContent;
-      }
+      
 
       if (showMenuState) {
         //Inventory
@@ -175,11 +175,11 @@ presence.on("UpdateData", async () => {
           "div.css-1dbjc4n.r-1awozwy.r-1777fci.r-1rngwi6"
         )?.length;
 
-        if (playerCountLobby === 1) {
+        if (playerCountLobby === 1) 
           data.state = `${playerCountLobby} player connected`;
-        } else {
+         else 
           data.state = `${playerCountLobby} players connected`;
-        }
+        
       }
     }
 
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
 
     if (game) {
       //Pre-game Lobby
-      var preGameLobby = document.querySelector(
+      let preGameLobby = document.querySelector(
         "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-1loqt21.r-sga3zk.r-1sbahrg.r-1otgn73.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao"
       )
         ? true : false;
@@ -205,28 +205,28 @@ presence.on("UpdateData", async () => {
         if (preGameLobby) {
           var lobbyChar = document.querySelector(
             "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
-          ).textContent
+          ).textContent;
         }
       } else {
         var lobbyChar = document.querySelector(
           "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-1loqt21.r-sga3zk.r-1sbahrg.r-1otgn73.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao"
-        ).textContent
+        ).textContent;
       }
 
       if (preGameLobby && lobbyChar === '') {
         data.details = "In pre-game lobby";
 
         if (showPlayerCount) {
-          var playerCountPreGame = document.querySelectorAll(
+          let playerCountPreGame = document.querySelectorAll(
             "div.css-1dbjc4n.r-kdyh1x.r-1loqt21.r-13awgt0.r-1064s9p.r-1udh08x.r-1otgn73.r-lrvibr[tabindex='0']"
-          )?.length
+          )?.length;
           playerCountPreGame = 16 - playerCountPreGame;
 
-          if (playerCountPreGame === 1) {
+          if (playerCountPreGame === 1) 
             data.state = `${playerCountPreGame} player connected`;
-          } else {
+           else 
             data.state = `${playerCountPreGame} players connected`;
-          }
+          
         }
 
       } else { //Playing
@@ -247,9 +247,9 @@ presence.on("UpdateData", async () => {
         if (showPlayerCount) {
           const playerCount = document.querySelectorAll(
             "div.css-1dbjc4n.r-obd0qt.r-1p6tffz.r-17s6mgv.r-l4djrs.r-5kp9u6.r-12vffkv.r-u8s1d.r-1xce0ei.r-1s3egr7"
-          )?.length
+          )?.length;
 
-          var deadCount = (document.querySelector(
+          let deadCount = (document.querySelector(
             "div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
           )?.innerHTML.match(/text-decoration-line: line-through/g) || []).length;
 
@@ -257,11 +257,11 @@ presence.on("UpdateData", async () => {
 
           const aliveCount = playerCount - deadCount;
 
-          if (aliveCount === 1) {
+          if (aliveCount === 1) 
             data.state = `${aliveCount}/${playerCount} player alive`;
-          } else {
+           else 
             data.state = `${aliveCount}/${playerCount} players alive`;
-          }
+          
         }
       }
     }
