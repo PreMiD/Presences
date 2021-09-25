@@ -191,9 +191,9 @@ presence.on("UpdateData", async () => {
       let preGameLobby = document.querySelector(
         "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-1loqt21.r-sga3zk.r-1sbahrg.r-1otgn73.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao"
       )
-        ? true : false;
+        ? true : false,
 
-      let lobbyChar;
+       lobbyChar;
       if (!preGameLobby) {
         preGameLobby = document.querySelector(
           "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
