@@ -30,19 +30,21 @@ let strings: Promise<LangStrings> = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const
-    newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang"),
     showTimestamps = await presence.getSetting("timestamp"),
     showSubdomain = await presence.getSetting("subdomain"),
     bigicon = await presence.getSetting("bigicon"),
     buttons = await presence.getSetting("buttons"),
-    {hostname, pathname, search, hash} = document.location,
+    { hostname, pathname, search, hash } = document.location,
     etrnl = "eternalnetworktm.com",
     ttl = document.title,
-    logoArr = ["eternalnetworktm_logo", "eternalnetworktm_logo_2", "eternalnetworktm_logo_3"];
+    logoArr = [
+      "eternalnetworktm_logo",
+      "eternalnetworktm_logo_2",
+      "eternalnetworktm_logo_3"
+    ];
 
-  if (!oldLang)
-    oldLang = newLang;
+  if (!oldLang) oldLang = newLang;
   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
@@ -53,34 +55,33 @@ presence.on("UpdateData", async () => {
     largeImageKey: logoArr[bigicon] || "eternalnetworktm_logo",
     smallImageText: hostname + pathname,
     startTimestamp: browsingStamp,
-    buttons: [{
-      label: (await strings).buttonViewPage,
-      url: window.location.href
-    }]
+    buttons: [
+      {
+        label: (await strings).buttonViewPage,
+        url: window.location.href
+      }
+    ]
   };
 
-  if (!showTimestamps)
-    delete presenceData.startTimestamp;
+  if (!showTimestamps) delete presenceData.startTimestamp;
 
   if (hostname === etrnl || hostname === `www.${etrnl}`) {
-
     presenceData.smallImageKey = "eternalnetworktm_logo";
 
-    if (pathname.startsWith("/"))
-      presenceData.state = ttl;
+    if (pathname.startsWith("/")) presenceData.state = ttl;
 
     if (pathname.includes("/wp-admin")) {
       presenceData.state = "Using administrating power over the website !";
       presenceData.smallImageText = "Admin Panel";
       delete presenceData.buttons;
     }
-
-  } else if (hostname === `forum.${etrnl}` || hostname === `www.forum.${etrnl}`) {
-
+  } else if (
+    hostname === `forum.${etrnl}` ||
+    hostname === `www.forum.${etrnl}`
+  ) {
     presenceData.smallImageKey = "eternalnetworktm_logo_v2";
 
-    if (pathname.startsWith("/"))
-      presenceData.state = ttl;
+    if (pathname.startsWith("/")) presenceData.state = ttl;
 
     if (pathname.includes("/memberlist.php"))
       presenceData.state = "Sneaking into member list !";
@@ -102,7 +103,9 @@ presence.on("UpdateData", async () => {
 
     if (search.includes("?mode=view&id=")) {
       const videoTitle = document.querySelector("h3.first > a").textContent,
-        checkVideoBtn = document.querySelector("div.postbody > div > a > span").getAttribute("title");
+        checkVideoBtn = document
+          .querySelector("div.postbody > div > a > span")
+          .getAttribute("title");
       presenceData.details = `${(await strings).watchingVid}:`;
       presenceData.state = videoTitle;
       presenceData.buttons = [
@@ -132,17 +135,16 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Admin Panel";
       delete presenceData.buttons;
     }
-
-  } else if (hostname === `radio.${etrnl}` || hostname === `www.radio.${etrnl}`) {
-
+  } else if (
+    hostname === `radio.${etrnl}` ||
+    hostname === `www.radio.${etrnl}`
+  ) {
     presenceData.smallImageKey = "eternalradio_logo";
     presenceData.details = (await strings).listeningMusic;
 
-    if (pathname.startsWith("/"))
-      presenceData.state = ttl;
+    if (pathname.startsWith("/")) presenceData.state = ttl;
 
-    if (hash.includes("page_ABOUT"))
-      presenceData.state = "About info page !";
+    if (hash.includes("page_ABOUT")) presenceData.state = "About info page !";
 
     if (hash.includes("page_PROGRAMS"))
       presenceData.state = "Checking radio program !";
@@ -152,12 +154,13 @@ presence.on("UpdateData", async () => {
 
     if (hash.includes("page_CONTACTS"))
       presenceData.state = "Contact us page !";
-  } else if (hostname === `status.${etrnl}` || hostname === `www.status.${etrnl}`) {
-
+  } else if (
+    hostname === `status.${etrnl}` ||
+    hostname === `www.status.${etrnl}`
+  ) {
     presenceData.smallImageKey = "eternalnetworktm_status";
 
-    if (pathname.startsWith("/"))
-      presenceData.state = ttl;
+    if (pathname.startsWith("/")) presenceData.state = ttl;
 
     if (pathname.includes("/admin")) {
       presenceData.state = "Adding new incident 😥 !";
@@ -170,8 +173,7 @@ presence.on("UpdateData", async () => {
     delete presenceData.buttons;
   }
 
-  if (!buttons)
-    delete presenceData.buttons;
+  if (!buttons) delete presenceData.buttons;
 
   if (!showSubdomain) {
     delete presenceData.smallImageKey;
