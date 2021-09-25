@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
   if (document.location.href.includes("blog.wolvesville.com")) { //Wolvesville Blog
     data.smallImageKey = "wov_blog";
     data.smallImageText = "Development Blog";
-    if (document.location.pathname === '/' || document.location.pathname.startsWith('/page')) {
+    if (document.location.pathname === "/" || document.location.pathname.startsWith("/page")) {
       data.details = "Development Blog";
       data.state = "Browing posts...";
     } else {
@@ -48,7 +48,6 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("imprint"))
       data.state = "Reading the imprint";
 
-
   } else if (document.location.href.includes("heroes.wolvesville.com")) { //Wolvesvile Heroes
     data.details = "Wolvesville Heroes";
     data.state = "In the home page";
@@ -68,7 +67,6 @@ presence.on("UpdateData", async () => {
       const member = document.querySelector("#staff_member_name").textContent;
       data.state = `Reading about ${member}`;
     }
-
   } else if (document.location.href.includes("voting.wolvesville.com")) { //Voting Gallery
     data.details = "Voting Gallery";
 
@@ -111,7 +109,6 @@ presence.on("UpdateData", async () => {
 
       if (showUsername)
         data.state = username[0]?.textContent;
-
 
       if (showMenuState) {
         //Inventory
@@ -196,13 +193,13 @@ presence.on("UpdateData", async () => {
       )
         ? true : false;
 
+      let lobbyChar;
       if (!preGameLobby) {
         preGameLobby = document.querySelector(
           "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
         )
           ? true : false;
 
-        var lobbyChar;
         if (preGameLobby) {
           lobbyChar = document.querySelector(
             "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
@@ -214,7 +211,7 @@ presence.on("UpdateData", async () => {
         ).textContent;
       }
 
-      if (preGameLobby && lobbyChar === '') {
+      if (preGameLobby && lobbyChar === "") {
         data.details = "In pre-game lobby";
 
         if (showPlayerCount) {
@@ -227,7 +224,6 @@ presence.on("UpdateData", async () => {
             data.state = `${playerCountPreGame} player connected`;
           else
             data.state = `${playerCountPreGame} players connected`;
-
         }
 
       } else { //Playing
@@ -262,7 +258,6 @@ presence.on("UpdateData", async () => {
             data.state = `${aliveCount}/${playerCount} player alive`;
           else
             data.state = `${aliveCount}/${playerCount} players alive`;
-
         }
       }
     }
