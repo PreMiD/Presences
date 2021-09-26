@@ -20,13 +20,12 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Development Blog";
     if (document.location.pathname === "/" || document.location.pathname.startsWith("/page")) {
       data.details = "Development Blog";
-      data.state = "Browing posts...";
+      data.state = "Browsing posts...";
     } else {
 
-      const post = document.querySelector(
+      const post = !!document.querySelector(
         ".post-title"
       )
-        ? true : false;
 
       if (post) {
         data.details = "Reading a blog post:";
@@ -50,7 +49,7 @@ presence.on("UpdateData", async () => {
 
   } else if (document.location.href.includes("heroes.wolvesville.com")) { //Wolvesvile Heroes
     data.details = "Wolvesville Heroes";
-    data.state = "In the home page";
+    data.state = "At the home page";
     data.smallImageKey = "wov_heroes";
     data.smallImageText = "Wolvesville Heroes";
 
@@ -62,18 +61,17 @@ presence.on("UpdateData", async () => {
       data.state = "Viewing Updates";
     else if (document.location.href.includes("list?role") || document.location.href.includes("list.html?role")) {
       const role = document.querySelector("#staff_member_name").textContent;
-      data.state = `Reading about the ${role} role`;
+      data.state = `Viewing the ${role} role`;
     } else if (document.location.href.includes("list?member") || document.location.href.includes("list.html?member")) {
       const member = document.querySelector("#staff_member_name").textContent;
-      data.state = `Reading about ${member}`;
+      data.state = `Viewing ${member}`;
     }
   } else if (document.location.href.includes("voting.wolvesville.com")) { //Voting Gallery
     data.details = "Voting Gallery";
 
-    const submissionView = document.querySelector(
+    const submissionView = !!document.querySelector(
       ".css-757v71"
     )
-      ? true : false;
 
     if (submissionView) {
       const author = document.querySelector(".css-757v71").textContent;
@@ -97,9 +95,9 @@ presence.on("UpdateData", async () => {
     ) ? data.details = "At the login page" : false;
 
     //Menu
-    const menu = document.querySelector(
+    const menu = !!document.querySelector(
       "div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-18u37iz.r-u8s1d.r-e1k2in.r-ipm5af"
-    ) ? true : false;
+    )
 
     if (menu) {
       data.details = "At the main menu";
@@ -122,8 +120,7 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1w6e6rj.r-1777fci.r-1guathk"
         )
-          ? data.state = "Shop"
-          : false;
+          ? data.state = "Shop" : false;
 
         //Settings
         document.querySelector(
@@ -132,10 +129,9 @@ presence.on("UpdateData", async () => {
           ? data.state = "Settings" : false;
 
         //Clan
-        const clan = document.querySelector(
+        const clan = !!document.querySelector(
           "div.css-1dbjc4n.r-13awgt0.r-zd98yo.r-1v1z2uz.r-13qz1uu"
         )
-          ? true : false;
 
         if (clan) {
           document.querySelector(
@@ -157,10 +153,9 @@ presence.on("UpdateData", async () => {
       "div.css-1dbjc4n.r-13awgt0.r-gy4na3.r-wk8lta > div.css-1dbjc4n.r-1awozwy.r-led734.r-vu3uv8.r-18u37iz.r-ur6pnr.r-13qz1uu.r-136ojw6"
     )
       ? true
-      : document.querySelector(
+      : !!document.querySelector(
         "div.css-1dbjc4n.r-13awgt0.r-wk8lta > div.css-1dbjc4n.r-1awozwy.r-led734.r-vu3uv8.r-18u37iz.r-ur6pnr.r-13qz1uu.r-136ojw6"
       )
-        ? true : false;
 
     if (lobby) {
       document.querySelector(
@@ -181,24 +176,21 @@ presence.on("UpdateData", async () => {
     }
 
     //In game
-    const game = document.querySelector(
+    const game = !!document.querySelector(
       "div.css-1dbjc4n.r-1xfd6ze.r-d045u9.r-13awgt0.r-edyy15"
     )
-      ? true : false;
 
     if (game) {
       //Pre-game Lobby
-      let preGameLobby = document.querySelector(
+      let preGameLobby = !!document.querySelector(
         "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-1loqt21.r-sga3zk.r-1sbahrg.r-1otgn73.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao"
-      )
-        ? true : false,
+      ),
         lobbyChar;
 
       if (!preGameLobby) {
-        preGameLobby = document.querySelector(
+        preGameLobby = !!document.querySelector(
           "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
         )
-          ? true : false;
 
         if (preGameLobby) {
           lobbyChar = document.querySelector(
