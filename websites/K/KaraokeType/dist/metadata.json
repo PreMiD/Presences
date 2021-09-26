@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "aqua_desu",
+    "id": "231774635476254721"
+  },
+  "url": "karaoketype.com",
+  "description": {
+    "en": "KaraokeType is the best rhythm typing game in the world. Type the lyrics correctly fast enough while earning the most points and staying in sync."
+  },
+  "service": "KaraokeType",
+  "version": "1.0.0",
+  "logo": "https://karaoketype.com/karaoketype.png",
+  "thumbnail": "https://karaoketype.com/karaoketype.png",
+  "color": "#4A4A4A",
+  "tags": [
+    "typing",
+    "songs",
+    "karaoke",
+    "game",
+    "music"
+  ],
+  "category": "games"
+}
