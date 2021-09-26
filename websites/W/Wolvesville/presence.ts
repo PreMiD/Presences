@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 
       const post = !!document.querySelector(
         ".post-title"
-      )
+      );
 
       if (post) {
         data.details = "Reading a blog post:";
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 
     const submissionView = !!document.querySelector(
       ".css-757v71"
-    )
+    );
 
     if (submissionView) {
       const author = document.querySelector(".css-757v71").textContent;
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
     //Menu
     const menu = !!document.querySelector(
       "div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-18u37iz.r-u8s1d.r-e1k2in.r-ipm5af"
-    )
+    );
 
     if (menu) {
       data.details = "At the main menu";
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
         //Clan
         const clan = !!document.querySelector(
           "div.css-1dbjc4n.r-13awgt0.r-zd98yo.r-1v1z2uz.r-13qz1uu"
-        )
+        );
 
         if (clan) {
           document.querySelector(
@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
       ? true
       : !!document.querySelector(
         "div.css-1dbjc4n.r-13awgt0.r-wk8lta > div.css-1dbjc4n.r-1awozwy.r-led734.r-vu3uv8.r-18u37iz.r-ur6pnr.r-13qz1uu.r-136ojw6"
-      )
+      );
 
     if (lobby) {
       document.querySelector(
@@ -178,7 +178,7 @@ presence.on("UpdateData", async () => {
     //In game
     const game = !!document.querySelector(
       "div.css-1dbjc4n.r-1xfd6ze.r-d045u9.r-13awgt0.r-edyy15"
-    )
+    );
 
     if (game) {
       //Pre-game Lobby
@@ -190,7 +190,7 @@ presence.on("UpdateData", async () => {
       if (!preGameLobby) {
         preGameLobby = !!document.querySelector(
           "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
-        )
+        );
 
         if (preGameLobby) {
           lobbyChar = document.querySelector(
