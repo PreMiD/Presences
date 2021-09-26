@@ -27,12 +27,12 @@ const resetData = (): void => {
 ((): void => {
 
   if (currentURL.hostname === "karaoketype.com") {
-      if (currentPath[0] === "play") {
-        presenceData.details = "Playing" + document.title;
+      if (currentPath[0] === "play") 
+        presenceData.details = `Playing${document.title}`;
 
-    } else if (currentPath[0] === "") {
+     else if (currentPath[0] === "") 
       presenceData.details = "Choosing a song";
-    }
+    
   }
 });
 
