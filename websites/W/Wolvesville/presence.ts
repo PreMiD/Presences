@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
     //Login
     document.querySelector(
       "div.css-1dbjc4n.r-z2wwpe.r-13awgt0.r-1dhrvg0.r-169s5xo.r-hvns9x.r-1pcd2l5"
-    ) ? data.details = "In the login page" : false;
+    ) ? data.details = "At the login page" : false;
 
     //Menu
     const menu = document.querySelector(
@@ -102,13 +102,14 @@ presence.on("UpdateData", async () => {
     ) ? true : false;
 
     if (menu) {
-      data.details = "In the main menu";
-      const username = document.querySelectorAll(
-        "div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u"
-      );
+      data.details = "At the main menu";
 
-      if (showUsername)
+      if (showUsername) {
+        const username = document.querySelectorAll(
+          "div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u"
+        );
         data.state = username[0]?.textContent;
+      }
 
       if (showMenuState) {
         //Inventory
@@ -176,7 +177,6 @@ presence.on("UpdateData", async () => {
           data.state = `${playerCountLobby} player connected`;
         else
           data.state = `${playerCountLobby} players connected`;
-
       }
     }
 
@@ -192,8 +192,8 @@ presence.on("UpdateData", async () => {
         "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-1loqt21.r-sga3zk.r-1sbahrg.r-1otgn73.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao"
       )
         ? true : false,
+        lobbyChar;
 
-       lobbyChar;
       if (!preGameLobby) {
         preGameLobby = document.querySelector(
           "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
