@@ -55,9 +55,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: timer
-    },
+    largeImageKey: "logo",
+    startTimestamp: timer
+  },
     // {hostname} = document.location,
     { pathname } = window.location;
 
