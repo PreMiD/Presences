@@ -9,10 +9,10 @@
   "description": {
     "en": "Floatplane is a streaming service that offers a wide variety of content from shows to reviews and more! All viewable on thousands of internet-connected devices."
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/tXncd0U.png",
   "thumbnail": "https://i.imgur.com/b4eo89T.png",
-  "color": "#00aeef",
+  "color": "#ffffff",
   "tags": ["streaming", "vod", "video", "media"],
   "category": "videos",
   "settings": [
