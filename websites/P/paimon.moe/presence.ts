@@ -80,15 +80,15 @@ presence.on("UpdateData", async () => {
       else if (original === "hu_tao") 
         stateText = "Hu Tao";
       else if (original === "raiden_shogun")
-        stateText = "Raiden Shogun (Baal)"
+        stateText = "Raiden Shogun (Baal)";
       else if (original === "kujou_sara")
-        stateText = "Kujou Sara"
+        stateText = "Kujou Sara";
       else if (original === "traveler_electro")
-        stateText = "Electro Traveler"
+        stateText = "Electro Traveler";
       else if (original === "kamisato_ayaka")
-        stateText = "Kamisato Ayaka"
+        stateText = "Kamisato Ayaka";
         else if (original === "sangonomiya_kokomi")
-        stateText = "Sangonomiya Kokomi"
+        stateText = "Sangonomiya Kokomi";
       else 
         stateText = original.charAt(0).toUpperCase() + original.slice(1);
 
@@ -148,8 +148,7 @@ presence.on("UpdateData", async () => {
   } else if (pathname.includes("/artifacts") || pathname.includes("/artifacts/")) {
     presenceData.details = "Viewing at the Database";
     presenceData.state = "Artifacts";
-  }
-    else if (pathname.includes("/timeline") || pathname.includes("/timeline/")) {
+  } else if (pathname.includes("/timeline") || pathname.includes("/timeline/")) {
     const servertime = document.querySelector("#sapper > main > div > div.flex.svelte-15n1215 > div.svelte-15n1215 > div > label"),
       finalText = servertime.textContent.match(/(\w(\s+)?)+/gi).pop();
 
