@@ -2,7 +2,6 @@ const presence = new Presence({
   clientId: "859781231351693312"
 }),
 timer = Math.floor(Date.now() / 1000),
-// import $ from "jquery"
 
 characterList = [
   "amber",
