@@ -16,7 +16,7 @@
     "nl": "Koop en verkoop elektronica, auto's, mode, verzamelobjecten, sportartikelen, digitale camera's, babyartikelen, kortingsbonnen en al het andere op eBay, 's werelds online marktplaats."
   },
   "regExp": "(.*)[.]?ebay[.][a-z]+",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/FuSdtYk.png",
   "thumbnail": "https://i.imgur.com/WajY5CI.png",
   "color": "#e53238",
