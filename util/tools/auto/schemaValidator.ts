@@ -47,9 +47,10 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
 
   for (const metaFile of metaFiles) {
     const meta = loadMetadata(metaFile);
+    const folder = metaFile.split("/")[2];
 
     if (!meta) {
-      failedToValidate(metaFile.split("/")[2], ["Invalid JSON"]);
+      failedToValidate(folder, ["Invalid JSON"]);
       continue;
     }
 
@@ -63,7 +64,7 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
       if (index == -1) invalidLangs.push(lang);
     });
 
-    if (result.valid && !invalidLangs.length) {
+    if (result.valid && !invalidLangs.length && folder === meta.service) {
       if (meta.schema && meta.schema !== latestMetadataSchema) {
         validatedWithWarnings(service, "Using out of date schema");
       } else {
@@ -71,6 +72,10 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
       }
     } else {
       const errors: string[] = [];
+
+      if (folder !== meta.service)
+        errors.push("service name does not equal to the name of the folder!");
+
       for (const error of result.errors)
         errors.push(`${error.message} @ ${error.property}`);
 
