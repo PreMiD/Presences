@@ -18,8 +18,8 @@ presence.on("UpdateData", async () => {
 
   if (path.includes("/episodes/") || path.includes("/episodios/")) {
 	 
-	let sitepath = "episodes"
-	let site = "https://www.southparkstudios.com/"
+	let sitepath = "episodes";
+	let site = "https://www.southparkstudios.com/";
 	if (path.includes("/episodios/")) {
 		sitepath = "episodios"
 		site = "https://www.southpark.lat/"
