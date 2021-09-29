@@ -18,21 +18,24 @@ presence.on("UpdateData", async () => {
     } else if (page === "itm") {
       const detail = document.querySelector("#itemTitle > span").textContent,
         itemName = document.querySelector("#itemTitle").textContent,
-        itemfinish = document.querySelector("#vi-cdown_timeLeft")?.textContent,
-        seller = document.querySelector(".mbg-nw")?.textContent;
+        seller = (document.querySelector(".mbg > a") as HTMLAnchorElement)
+          ?.href;
 
       presenceData.details = itemName.replace(detail, "");
-      presenceData.state = itemfinish;
-
-      if (itemfinish) delete presenceData.startTimestamp;
-
       presenceData.buttons = [
         { label: "View Item", url: location.href },
         {
           label: "View Seller",
-          url: `https://www.ebay.co.uk/usr/${seller}`
+          url: seller
         }
       ];
+
+      if (document.querySelector("#vi-cdown_timeLeft")) {
+        const itemfinish = document.querySelector("#vi-cdown_timeLeft");
+
+        delete presenceData.startTimestamp;
+        presenceData.state = itemfinish.textContent;
+      }
     } else if (page === "sch") {
       if (location.pathname.includes("/i.html")) {
         const searchTerm = document.querySelector(
@@ -46,15 +49,15 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${searchCount} Results`;
         presenceData.smallImageKey = "search";
       } else if (location.pathname.includes("/m.html")) {
-        const seller = document.querySelector(".mbid")?.textContent;
+        const seller = document.querySelector(".mbid") as HTMLAnchorElement;
 
         presenceData.details = "Viewing listed products of:";
-        presenceData.state = seller;
+        presenceData.state = seller.textContent;
         presenceData.buttons = [
           { label: "View List", url: location.href },
           {
             label: "View Seller",
-            url: `https://www.ebay.co.uk/usr/${seller}`
+            url: seller.href
           }
         ];
       }
