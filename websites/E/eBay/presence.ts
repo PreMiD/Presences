@@ -111,19 +111,19 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.details = "eBay Messages";
     }
-  } else if (location.hostname.startsWith("ocsnext.")) {
+  } else if (location.hostname.startsWith("ocsnext."))
     presenceData.details = "eBay Customer Support";
-  } else if (location.hostname.includes("developer.")) {
+  else if (location.hostname.includes("developer."))
     presenceData.details = "eBay Developer Program";
-  } else if (location.hostname.startsWith("resolutioncenter.")) {
+  else if (location.hostname.startsWith("resolutioncenter."))
     presenceData.details = "eBay Resolution Center";
-  } else if (location.hostname.startsWith("my.")) {
+  else if (location.hostname.startsWith("my."))
     presenceData.details = "Viewing their eBay";
-  } else if (location.hostname.startsWith("login.")) {
+  else if (location.hostname.startsWith("login."))
     presenceData.details = "eBay Login";
-  } else if (location.hostname.startsWith("signin.")) {
+  else if (location.hostname.startsWith("signin."))
     presenceData.details = "eBay Login";
-  } else if (location.hostname.startsWith("pages.")) {
+  else if (location.hostname.startsWith("pages.")) {
     if (location.hash !== "") {
       presenceData.details = "Viewing the sitemap";
       presenceData.state = location.hash;
