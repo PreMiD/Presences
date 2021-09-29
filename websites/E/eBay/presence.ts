@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  let [, page] = location.pathname.split("/");
+  const [, page] = location.pathname.split("/");
 
   if (location.hostname.startsWith("www.")) {
     if (!page) {
