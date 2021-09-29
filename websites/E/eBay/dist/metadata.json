@@ -16,8 +16,8 @@
     "en": "Buy and sell electronics, cars, fashion apparel, collectibles, sporting goods, digital cameras, baby items, coupons, and everything else on eBay, the world's online marketplace.",
     "nl": "Koop en verkoop elektronica, auto's, mode, verzamelobjecten, sportartikelen, digitale camera's, babyartikelen, kortingsbonnen en al het andere op eBay, 's werelds online marktplaats."
   },
-  "regExp": "(.*)[.]?ebay[.][a-z]+",
-  "version": "1.2.6",
+  "regExp": "([a-z0-9-]+[.])*ebay([.][a-z]+)+[/]",
+  "version": "1.3.0",
   "logo": "https://i.imgur.com/FuSdtYk.png",
   "thumbnail": "https://i.imgur.com/WajY5CI.png",
   "color": "#e53238",
