@@ -21,7 +21,8 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp,
       largeImageKey: "fbox_logo"
     },
-    { pathname } = document.location;
+    { pathname } = document.location,
+    buttons: boolean = await presence.getSetting("buttons");
 
   if (pathname === "/") presenceData.details = "Browsing";
   else if (pathname.startsWith("/series/")) {
@@ -29,7 +30,7 @@ presence.on("UpdateData", async () => {
         "#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
       ),
       season: HTMLDataListElement = document.querySelector(
-        "#episodes > div.bl-seasons > ul > li"
+        "#episodes > div.bl-seasons > ul > li.active"
       ),
       date: HTMLSpanElement = season ? season.querySelector("span") : null,
       episode: HTMLAnchorElement = document.querySelector(
@@ -48,13 +49,16 @@ presence.on("UpdateData", async () => {
         iFrameData.currTime,
         iFrameData.duration
       );
+      presenceData.smallImageKey = "play";
+    } else presenceData.smallImageKey = "pause";
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Watch Series",
+          url: document.location.href
+        }
+      ];
     }
-    presenceData.buttons = [
-      {
-        label: "Watch Series",
-        url: document.location.href
-      }
-    ];
   } else if (pathname.startsWith("/movie/")) {
     const title: HTMLHeadingElement = document.querySelector(
       "#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
@@ -65,13 +69,16 @@ presence.on("UpdateData", async () => {
         iFrameData.currTime,
         iFrameData.duration
       );
+      presenceData.smallImageKey = "play";
+    } else presenceData.smallImageKey = "pause";
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Watch Movie",
+          url: document.location.href
+        }
+      ];
     }
-    presenceData.buttons = [
-      {
-        label: "Watch Movie",
-        url: document.location.href
-      }
-    ];
   } else if (pathname === "/user/profile")
     presenceData.details = "Checking Profile";
   else if (pathname === "/user/watchlist")
@@ -80,7 +87,10 @@ presence.on("UpdateData", async () => {
     const genre: HTMLHeadingElement = document.querySelector(
       "#body > div > div.col-left > section > div.heading > h1"
     );
-    if (genre) presenceData.details = genre.innerText;
+    if (genre) {
+      presenceData.details = genre.innerText;
+      presenceData.smallImageKey = "search";
+    }
   }
 
   if (!presenceData.details) {
