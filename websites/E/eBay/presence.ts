@@ -5,11 +5,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "ebaylogo",
-    startTimestamp: browsingStamp
-  };
-
-  const [, page] = location.pathname.split("/");
+      largeImageKey: "ebaylogo",
+      startTimestamp: browsingStamp
+    },
+    [, page] = location.pathname.split("/");
 
   if (location.hostname.startsWith("www.")) {
     if (!page) {
@@ -78,9 +77,9 @@ presence.on("UpdateData", async () => {
     } else if (
       location.pathname.includes("/sns") ||
       location.pathname.includes("/b/Stores-Hub/")
-    ) {
+    )
       presenceData.details = "Viewing stores";
-    } else if (location.pathname.includes("/sl/")) {
+    else if (location.pathname.includes("/sl/")) {
       presenceData.details = "eBay Sell";
       presenceData.state = "Listing an item";
     } else if (location.pathname.includes("/b/")) {
@@ -90,20 +89,19 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing category:";
       presenceData.state = category;
-    } else if (location.pathname.includes("/help/")) {
+    } else if (location.pathname.includes("/help/"))
       presenceData.details = "eBay Help";
-    } else if (location.pathname.includes("/deals")) {
+    else if (location.pathname.includes("/deals")) {
       presenceData.details = "Viewing the latest";
       presenceData.state = "eBay deals";
-    } else if (location.pathname.includes("/allcategories")) {
+    } else if (location.pathname.includes("/allcategories"))
       presenceData.details = "Viewing all categories";
-    } else if (page === "str") {
-      const store = document.querySelector(".str-billboard__title").textContent;
+  } else if (page === "str") {
+    const store = document.querySelector(".str-billboard__title").textContent;
 
-      presenceData.details = "eBay Store";
-      presenceData.state = store;
-      presenceData.buttons = [{ label: "View Store", url: location.href }];
-    }
+    presenceData.details = "eBay Store";
+    presenceData.state = store;
+    presenceData.buttons = [{ label: "View Store", url: location.href }];
   } else if (location.hostname.startsWith("mesg.")) {
     if (location.pathname.includes("/ViewMessageDetail/")) {
       presenceData.details = "eBay Messages";
@@ -130,11 +128,10 @@ presence.on("UpdateData", async () => {
     if (location.hash !== "") {
       presenceData.details = "Viewing the sitemap";
       presenceData.state = location.hash;
-    } else if (location.pathname.includes("sitemap.html")) {
+    } else if (location.pathname.includes("sitemap.html"))
       presenceData.details = "Viewing the sitemap";
-    } else if (location.pathname.includes("seller-center")) {
+    else if (location.pathname.includes("seller-center"))
       presenceData.details = "Viewing the seller center";
-    }
   } else if (location.hostname.startsWith("community.")) {
     if (document.querySelector(".lia-message-subject")) {
       const title = document.querySelector(".lia-message-subject")?.textContent,
