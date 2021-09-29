@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/Saq6ADh.png",
   "thumbnail": "https://i.imgur.com/8pBRB2e.png",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "color": "#c005e6",
   "tags": [
     "community",
@@ -45,6 +45,12 @@
       "id": "subdomain",
       "title": "Show Small icon info",
       "icon": "fas fa-browser",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
       "value": true
     },
     {
