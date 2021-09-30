@@ -50,7 +50,6 @@ presence.on("UpdateData", async () => {
           url: `${Url}/${
             document.location.pathname.split("/")[2]
           }`
-		  
         }
       ];
 
