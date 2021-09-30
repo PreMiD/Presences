@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
-      - name: Use Node.js 16
+      - name: Use Node.js 12
         uses: actions/setup-node@v2.4.0
         with:
-          node-version: 16
-          cache: "yarn"
+          node-version: 12
+          cache: 'yarn'
       - name: Install Deps
         run: yarn
       - name: Compile Script
