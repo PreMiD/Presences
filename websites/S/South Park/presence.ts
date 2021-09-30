@@ -17,7 +17,6 @@ presence.on("UpdateData", async () => {
   };
 
   if (path.includes("/episodes/") || path.includes("/episodios/")) {
-
     const Url = path.includes("/episodios/") ? "https://www.southpark.lat/episodios" : "https://www.southparkstudios.com/episodes",
       EpAndSeason = SouthParkData.children[0].props.title.text
         .split(" - ")[1]
