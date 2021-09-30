@@ -16,8 +16,9 @@ presence.on("UpdateData", async () => {
     startTimestamp: startsTime
   };
 
-  if (path.includes("/episodes/")) {
-    const EpAndSeason = SouthParkData.children[0].props.title.text
+  if (path.includes("/episodes/") || path.includes("/episodios/")) {
+    const Url = path.includes("/episodios/") ? "https://www.southpark.lat/episodios" : "https://www.southparkstudios.com/episodes",
+      EpAndSeason = SouthParkData.children[0].props.title.text
         .split(" - ")[1]
         .match(/([1-9]?[0-9]?[0-9])/g),
       EpTitle = SouthParkData.children[0].props.title.text.split(" - ")[2],
@@ -46,7 +47,7 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         {
           label: "Watch Episode",
-          url: `https://www.southparkstudios.com/episodes/${
+          url: `${Url}/${
             document.location.pathname.split("/")[2]
           }`
         }
