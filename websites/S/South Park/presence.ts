@@ -21,7 +21,6 @@ presence.on("UpdateData", async () => {
       EpAndSeason = SouthParkData.children[0].props.title.text
         .split(" - ")[1]
         .match(/([1-9]?[0-9]?[0-9])/g),
-    
       EpTitle = SouthParkData.children[0].props.title.text.split(" - ")[2],
       title = SouthParkData.children[0].props.title.text.split(" - ")[0],
       timestamps = presence.getTimestamps(
