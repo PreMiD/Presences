@@ -21,8 +21,8 @@ presence.on("UpdateData", async () => {
 	let sitepath = "episodes";
 	let site = "https://www.southparkstudios.com/";
 	if (path.includes("/episodios/")) {
-		sitepath = "episodios"
-		site = "https://www.southpark.lat/"
+		sitepath = "episodios";
+		site = "https://www.southpark.lat/";
 	}
     const EpAndSeason = SouthParkData.children[0].props.title.text
         .split(" - ")[1]
