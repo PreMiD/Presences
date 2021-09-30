@@ -5,7 +5,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
-    "inc": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
+    "inc": "tsc --module CommonJS --target ES2021 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
     "se": "node ./util/tools/auto/syntaxEnforcer.js",
     "se:compile": "tsc -p ./util/configs/tsconfig.auto.syntaxEnforcer.json",
     "sv": "node ./util/tools/auto/schemaValidator.js",
@@ -41,6 +41,6 @@
     "semver": "^7.3.5",
     "source-map-support": "^0.5.19",
     "terser": "^5.7.2",
-    "typescript": "^3.9.10"
+    "typescript": "^4.4.3"
   }
 }
