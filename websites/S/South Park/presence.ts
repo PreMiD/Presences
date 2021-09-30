@@ -18,15 +18,11 @@ presence.on("UpdateData", async () => {
 
   if (path.includes("/episodes/") || path.includes("/episodios/")) {
 	 
-	let sitepath = "episodes";
-	let site = "https://www.southparkstudios.com/";
-	if (path.includes("/episodios/")) {
-		sitepath = "episodios";
-		site = "https://www.southpark.lat/";
-	}
+	  const Url = path.includes("/episodios/") ? "https://www.southpark.lat/episodios" : "https://www.southparkstudios.com/episodes",
     const EpAndSeason = SouthParkData.children[0].props.title.text
         .split(" - ")[1]
         .match(/([1-9]?[0-9]?[0-9])/g),
+    
       EpTitle = SouthParkData.children[0].props.title.text.split(" - ")[2],
       title = SouthParkData.children[0].props.title.text.split(" - ")[0],
       timestamps = presence.getTimestamps(
@@ -53,7 +49,7 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         {
           label: "Watch Episode",
-		  url: `${site + sitepath}/${
+		  url: `${Url}/${
             document.location.pathname.split("/")[2]
           }`
 		  
