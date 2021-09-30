@@ -26,8 +26,13 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
     );
     stats.failedToValidate++;
   },
-  loadMetadata = (path: string): metadata =>
-    JSON.parse(readFileSync(path, "utf-8")),
+  loadMetadata = (path: string): metadata => {
+    try {
+      return JSON.parse(readFileSync(path, "utf-8"));
+    } catch {
+      return null;
+    }
+  },
   changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
   metaFiles = changedFiles.filter((f: string) => f.endsWith("metadata.json"));
 
@@ -41,11 +46,17 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
   );
 
   for (const metaFile of metaFiles) {
-    const meta = loadMetadata(metaFile),
-      service = meta.service,
+    const meta = loadMetadata(metaFile);
+    const folder = metaFile.split("/")[2];
+
+    if (!meta) {
+      failedToValidate(folder, ["Invalid JSON"]);
+      continue;
+    }
+
+    const service = meta.service,
       result = validate(meta, schema),
-      validLangs = (await axios.get("https://api.premid.app/v2/langFile/list"))
-        .data,
+      validLangs = (await axios.get("https://api.premid.app/v2/langFile/list")).data,
       invalidLangs: string[] = [];
 
     Object.keys(meta.description).forEach((lang) => {
@@ -53,7 +64,7 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
       if (index == -1) invalidLangs.push(lang);
     });
 
-    if (result.valid && !invalidLangs.length) {
+    if (result.valid && !invalidLangs.length && folder === meta.service) {
       if (meta.schema && meta.schema !== latestMetadataSchema) {
         validatedWithWarnings(service, "Using out of date schema");
       } else {
@@ -61,6 +72,10 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
       }
     } else {
       const errors: string[] = [];
+
+      if (folder !== meta.service)
+        errors.push("service name does not equal to the name of the folder!");
+
       for (const error of result.errors)
         errors.push(`${error.message} @ ${error.property}`);
 
