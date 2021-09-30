@@ -14,11 +14,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "tiktok",
-    startTimestamp: browsingStamp
-  };
-
-  const [, page, pageType] = location.pathname.split("/");
+      largeImageKey: "tiktok",
+      startTimestamp: browsingStamp
+    },
+    [, page, pageType] = location.pathname.split("/");
 
   if (!page || page === "foryou") {
     presenceData.details = (await strings).forYou.split("{0}")[0];
@@ -75,12 +74,13 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else {
-      (presenceData.details = (await strings).viewProfile),
-        (presenceData.state = `${document
+      const author = document
           .querySelector(".share-sub-title")
-          ?.textContent.trim()} (@${document
-          .querySelector(".share-title")
-          ?.textContent.trim()})`);
+          ?.textContent.trim(),
+        username = document.querySelector(".share-title")?.textContent.trim();
+
+      presenceData.details = (await strings).viewProfile;
+      presenceData.state = `${author} (@${username})`;
       presenceData.buttons = [
         {
           label: (await strings).buttonViewProfile,
@@ -89,8 +89,10 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (page === "following") {
-    presenceData.details = (await strings).following.split("{0}")[0];
-    presenceData.state = (await strings).following.split("{0}")[1];
+    const [detail, state] = (await strings).following.split("{0}");
+
+    presenceData.details = detail;
+    presenceData.state = state;
     presenceData.smallImageText = (await strings).browse;
     presenceData.smallImageKey = "reading";
   }
