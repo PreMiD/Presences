@@ -20,8 +20,10 @@ presence.on("UpdateData", async () => {
     [, page, pageType] = location.pathname.split("/");
 
   if (!page || page === "foryou") {
-    presenceData.details = (await strings).forYou.split("{0}")[0];
-    presenceData.state = (await strings).forYou.split("{0}")[1];
+    const [detail, state] = (await strings).forYou.split("{0}");
+
+    presenceData.details = detail;
+    presenceData.state = state;
   } else if (page.startsWith("@")) {
     //User
 
