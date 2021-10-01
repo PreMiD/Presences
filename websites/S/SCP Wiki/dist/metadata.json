@@ -1,8 +1,15 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "ry",
     "id": "421371986824921109"
   },
+  "contributors": [
+    {
+      "name": "MrBartusek",
+      "id": "212988300137463809"
+    }
+  ],
   "service": "SCP Wiki",
   "description": {
     "en": "Operating clandestine and worldwide, the Foundation operates beyond jurisdiction, empowered and entrusted by every major national government with the task of containing anomalous objects, entities, and phenomena.",
