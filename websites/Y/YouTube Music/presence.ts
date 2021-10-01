@@ -69,14 +69,15 @@ presence.on("UpdateData", async () => {
       document.querySelector(".ytmusic-player-bar.title") as HTMLElement
     ).innerText,
     video = document.querySelector(".video-stream") as HTMLVideoElement,
+    progressBar = document.querySelector("#progress-bar") as HTMLElement,
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
       .getAttribute("repeat-Mode_"),
     buttons = await presence.getSetting("buttons"),
     time = await presence.getSetting("time");
-
   if (title !== "" && !isNaN(video.duration)) {
-    const [, endTimestamp] = presence.getTimestampsfromMedia(video),
+    const remainingLength = (Number(progressBar.ariaValueMax) * 1000) - (Number(progressBar.ariaValueNow) * 1000),
+      endTimestamp = Date.now() + remainingLength,
       [, watchID] = document
         .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
         .href.match(/v=([^&#]{5,})/),
