@@ -1,23 +1,40 @@
 const presence = new Presence({
     clientId: "893257746877644830"
   }),
-  strings = presence.getStrings({
-    browse: "general.browsing",
-    forYou: "tiktok.forYou",
-    following: "tiktok.following",
-    buttonViewProfile: "general.buttonViewProfile",
-    viewProfile: "general.viewProfile",
-    viewTikTok: "tiktok.viewing",
-    buttonViewTikTok: "tiktok.buttonViewTikTok"
-  }),
   browsingStamp = Math.floor(Date.now() / 1000);
+
+async function getStrings() {
+  return presence.getStrings(
+    {
+      browse: "general.browsing",
+      forYou: "tiktok.forYou",
+      following: "tiktok.following",
+      buttonViewProfile: "general.buttonViewProfile",
+      viewProfile: "general.viewProfile",
+      viewTikTok: "tiktok.viewing",
+      buttonViewTikTok: "tiktok.buttonViewTikTok"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
+
+let strings = getStrings(),
+  oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "tiktok",
       startTimestamp: browsingStamp
     },
+    newLang = await presence.getSetting("lang").catch(() => "en"),
     [, page, pageType] = location.pathname.split("/");
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
 
   if (!page || page === "foryou") {
     const [detail, state] = (await strings).forYou.split("{0}");
