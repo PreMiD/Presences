@@ -588,9 +588,15 @@ presence.on("UpdateData", async () => {
       data.details = "Inactive Codespace";
     // Idle/Start Screen
   } else if (activeTab && editorMode) {
-    const scmTabs = Array.from(document.querySelectorAll("#status\\.scm")).reverse(),
-      scmTab = scmTabs.find(scmTab => scmTab && scmTab.hasAttribute("aria-label")),
-      workspace = scmTab ? scmTab.getAttribute("aria-label").split("(Git)")[0] : null,
+    const scmTabs = Array.from(
+        document.querySelectorAll("#status\\.scm")
+      ).reverse(),
+      scmTab = scmTabs.find(
+        (scmTab) => scmTab && scmTab.hasAttribute("aria-label")
+      ),
+      workspace = scmTab
+        ? scmTab.getAttribute("aria-label").split("(Git)")[0]
+        : null,
       filename = activeTab.getAttribute("data-resource-name"),
       filepath = activeTab.getAttribute("title"),
       syntaxMode = editorMode.getAttribute("aria-label").toLowerCase(),
@@ -620,10 +626,7 @@ presence.on("UpdateData", async () => {
         /%ext%/g,
         (largeImageKey ? largeImageKey.image : "txt").toUpperCase()
       )
-      .replace(
-        /%workspace%/g,
-        workspace || "N/A"
-      )
+      .replace(/%workspace%/g, workspace || "N/A")
       .replace(
         /%workspaceOrFolder%/g,
         workspace || filepath.split("/").reverse()[1]
@@ -636,10 +639,7 @@ presence.on("UpdateData", async () => {
         /%ext%/g,
         (largeImageKey ? largeImageKey.image : "txt").toUpperCase()
       )
-      .replace(
-        /%workspace%/g,
-        workspace || "N/A"
-      )
+      .replace(/%workspace%/g, workspace || "N/A")
       .replace(
         /%workspaceOrFolder%/g,
         workspace || filepath.split("/").reverse()[1]
