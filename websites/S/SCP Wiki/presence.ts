@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "logo-sandbox";
 
   if (document.location.pathname == "/" || !document.location.pathname)
-    presenceData.state = "Main";
+    presenceData.state = "Front Page";
   else
     presenceData.state = document.getElementById("page-title").textContent.trim();
 
