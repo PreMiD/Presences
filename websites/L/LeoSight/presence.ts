@@ -102,6 +102,8 @@ presence.on("UpdateData", async () => {
   else if (path === "/ticket") presenceData.details = "Tickety";
   else if (path === "/logs") presenceData.details = "Logy";
   else if (path === "/ukoly") presenceData.details = "Denní úkoly";
+  else if (path === "/rychlobitva") presenceData.details = "Rychlobitva!";
+  else if (path === "/rychlobitva/karty") presenceData.details = "Seznam karet Rychlobitvy";
   else if (path === "/chat") presenceData.details = "Chatuje";
   else if (path === "/upozorneni") presenceData.details = "Upozornění";
   else if (path === "/znamky") presenceData.details = "Katalog známek";
