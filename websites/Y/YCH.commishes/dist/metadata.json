@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "jjjhhhppp",
+    "id": "331545618269077505"
+  },
+  "service": "YCH.Commishes",
+  "description": {
+    "en": "List and bid on fandom art and crafts on YCH.Commishes."
+  },
+  "url": [
+    "ych.commishes.com",
+    "account.commishes.com",
+    "ping.commishes.com",
+    "portfolio.commishes.com",
+    "wallet.commishes.com",
+    "crm.commishes.com"
+  ],
+  "version": "1.0.0",
+    "logo": "https://i.imgur.com/KvpKfvI.png",
+    "thumbnail": "https://i.imgur.com/Oeiap9g.png",
+    "color": "#7ac14d",
+    "tags": [
+      "art",
+      "fandom",
+      "drawing",
+      "creative"
+    ],
+    "category": "other",
+    "settings": [
+      {
+        "id": "timestamp",
+        "title": "Show Timestamps",
+        "icon": "fas fa-user-clock",
+        "value": true
+      },
+      {
+        "id": "buttons",
+        "title": "Show Buttons",
+        "icon": "fas fa-mouse-pointer",
+        "value": true
+      }
+    ]
+  }
