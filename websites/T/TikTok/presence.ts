@@ -23,9 +23,9 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "tiktok",
-      startTimestamp: browsingStamp
-    },
+    largeImageKey: "tiktok",
+    startTimestamp: browsingStamp
+  },
     newLang = await presence.getSetting("lang").catch(() => "en"),
     [, page, pageType] = location.pathname.split("/");
 
