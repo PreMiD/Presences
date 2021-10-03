@@ -6,37 +6,23 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
-let iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-let lastPlaybackState = null;
-let playback;
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let browsingStamp = Math.floor(Date.now() / 1000),
+  iFrameVideo: boolean,
+  currentTime: any,
+  duration: any,
+  paused: any,
+  lastPlaybackState = null,
+  playback;
 
 presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
 
   if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    ({ iFrameVideo, currentTime, duration, paused } =
+      data.iframe_video.iFrameVideo);
   }
 
-  if (lastPlaybackState != playback) {
+  if (lastPlaybackState !== playback) {
     lastPlaybackState = playback;
     browsingStamp = Math.floor(Date.now() / 1000);
   }
@@ -54,7 +40,7 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname.includes("/watch/")) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
@@ -67,19 +53,19 @@ presence.on("UpdateData", async () => {
           ".content > div > div > .episode-info > .season"
         ) !== null
       ) {
-        presenceData.details =
+        presenceData.details = `${
           document.querySelector(
             ".content > div > div > .episode-info > .series"
-          ).textContent +
-          " - S" +
-          document
-            .querySelector(".content > div > div > .episode-info > .season")
-            .textContent.toLowerCase()
-            .replace("season", "")
-            .trim() +
+          ).textContent
+        } - S${document
+          .querySelector(".content > div > div > .episode-info > .season")
+          .textContent.toLowerCase()
+          .replace("season", "")
+          .trim()}${
           document
             .querySelector(".content > div > div > .title")
-            .textContent.split(" - ")[0];
+            .textContent.split(" - ")[0]
+        }`;
         presenceData.state = document
           .querySelector(".content > div > div > .title")
           .textContent.split(" - ")[1];
@@ -96,7 +82,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       presenceData.details = "Looking at: ";
 
       if (
@@ -104,30 +90,31 @@ presence.on("UpdateData", async () => {
           ".content > div > div > .episode-info > .season"
         ) !== null
       ) {
-        presenceData.state =
+        presenceData.state = `${
           document.querySelector(
             ".content > div > div > .episode-info > .series"
-          ).textContent +
-          " - S" +
-          document
-            .querySelector(".content > div > div > .episode-info > .season")
-            .textContent.toLowerCase()
-            .replace("season", "")
-            .trim() +
-          document
-            .querySelector(".content > div > div > .title")
-            .textContent.split(" - ")[0] +
-          " " +
+          ).textContent
+        } - S${document
+          .querySelector(".content > div > div > .episode-info > .season")
+          .textContent.toLowerCase()
+          .replace("season", "")
+          .trim()}${
           document
             .querySelector(".content > div > div > .title")
-            .textContent.split(" - ")[1];
+            .textContent.split(" - ")[0]
+        } ${
+          document
+            .querySelector(".content > div > div > .title")
+            .textContent.split(" - ")[1]
+        }`;
       } else {
-        presenceData.state =
+        presenceData.state = `${
           document.querySelector(
             ".content > div > div > .episode-info > .series"
-          ).textContent +
-          " - " +
-          document.querySelector(".content > div > div > .title").textContent;
+          ).textContent
+        } - ${
+          document.querySelector(".content > div > div > .title").textContent
+        }`;
       }
       presenceData.smallImageKey = "reading";
     }
@@ -138,22 +125,20 @@ presence.on("UpdateData", async () => {
     ).textContent;
   } else if (
     document.querySelector(".item-type") !== null &&
-    document.querySelector(".item-type").textContent == "Channel"
+    document.querySelector(".item-type").textContent === "Channel"
   ) {
     presenceData.details = "Viewing channel:";
     presenceData.state = document.querySelector(".item-title").textContent;
   } else if (document.location.pathname.includes("/watchlist")) {
     presenceData.details = "Viewing their watchlist";
     presenceData.smallImageKey = "reading";
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing the homepage";
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -25,7 +25,7 @@ presence.on(
     duration: number;
     paused: boolean;
   }) => {
-    if (data.iframevideo == true) {
+    if (data.iframevideo === true) {
       currentTime = data.currentTime;
       duration = data.duration;
       paused = data.paused;
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     },
     path = document.location.pathname;
 
-  if (path == "/") {
+  if (path === "/") {
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = time;
   } else if (path.includes("/news")) {
@@ -77,10 +77,11 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
     presenceData.details = "Watching a replay";
-    presenceData.state =
-      document.querySelector("div.teams").textContent.replace("VS", " vs ") +
-      " - Game " +
-      document.querySelector(".game.selected").textContent;
+    presenceData.state = `${document
+      .querySelector("div.teams")
+      .textContent.replace("VS", " vs ")} - Game ${
+      document.querySelector(".game.selected").textContent
+    }`;
   } else if (path.includes("/standings/")) {
     presenceData.details = "Looking at the standings";
     presenceData.startTimestamp = time;
@@ -91,10 +92,8 @@ presence.on("UpdateData", async () => {
       url: document.URL
     }
   ];
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

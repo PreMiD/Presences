@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     endTimestamp = undefined,
     extra = "...";
 
-  const href = window.location.href,
+  const { href } = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -44,24 +44,16 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (path.includes("/movies/highlights")) {
-    extra = " Movies";
-  } else if (path.includes("/watch/tv/highlights")) {
-    extra = " TV Shows";
-  } else if (path.includes("/watch/kids/highlights")) {
-    extra = " Kids";
-  } else if (path.includes("/watch/sports/highlights")) {
-    extra = " Sports";
-  } else if (path.includes("/watch/latino/highlights")) {
-    extra = " Latino";
-  }
+  if (path.includes("/movies/highlights")) extra = " Movies";
+  else if (path.includes("/watch/tv/highlights")) extra = " TV Shows";
+  else if (path.includes("/watch/kids/highlights")) extra = " Kids";
+  else if (path.includes("/watch/sports/highlights")) extra = " Sports";
+  else if (path.includes("/watch/latino/highlights")) extra = " Latino";
 
   // By default, details will be "Browsing..."
   details = `Browsing${extra}`;
 
-  if (path.includes("/watch/search")) {
-    details = `Searching...`;
-  }
+  if (path.includes("/watch/search")) details = "Searching...";
 
   startTimestamp = elapsed;
 
@@ -85,14 +77,12 @@ presence.on("UpdateData", async () => {
             ".swiper-slide-active .playlist-item-overlay__container-title"
           );
 
-      if (desc) {
-        state = desc.textContent;
-      }
+      if (desc) state = desc.textContent;
+
       if (title) {
         details = title.textContent;
-        if (path.includes("/watch/playback/playlist")) {
-          details = details + " Playlist";
-        }
+        if (path.includes("/watch/playback/playlist"))
+          details = `${details} Playlist`;
       }
 
       smallImageKey = live ? "live" : video.paused ? "pause" : "play";
@@ -115,21 +105,15 @@ presence.on("UpdateData", async () => {
     details
   };
 
-  if (state !== undefined) {
-    data.state = state;
-  }
-  if (smallImageKey !== undefined) {
-    data.smallImageKey = smallImageKey;
-  }
-  if (smallImageText !== undefined) {
-    data.smallImageText = smallImageText;
-  }
-  if (startTimestamp !== undefined) {
-    data.startTimestamp = startTimestamp;
-  }
-  if (endTimestamp !== undefined) {
-    data.endTimestamp = endTimestamp;
-  }
+  if (state !== undefined) data.state = state;
+
+  if (smallImageKey !== undefined) data.smallImageKey = smallImageKey;
+
+  if (smallImageText !== undefined) data.smallImageText = smallImageText;
+
+  if (startTimestamp !== undefined) data.startTimestamp = startTimestamp;
+
+  if (endTimestamp !== undefined) data.endTimestamp = endTimestamp;
 
   presence.setActivity(data, video ? !video.paused : true);
   presence.setTrayTitle(details);

@@ -53,7 +53,7 @@ presence.on("UpdateData", () => {
       presenceData.details = `Typing ${testType}`;
       presenceData.state = `${wpm} wpm ${acc} acc`;
 
-      if (mode == "time") {
+      if (mode === "time") {
         presenceData.endTimestamp =
           Math.floor(Date.now() / 1000) +
           (parseInt(
@@ -61,17 +61,11 @@ presence.on("UpdateData", () => {
           ) +
             1);
       }
-    } else if (lbVisible) {
-      presenceData.details = "Checking leaderboards";
-    }
-  } else if (path === "/about") {
-    presenceData.details = "Reading about page";
-  } else if (path === "/settings") {
-    presenceData.details = "Changing settings";
-  } else if (path === "/login") {
-    presenceData.details = "Logging in";
-  } else if (path === "/account") {
-    presenceData.details = "Checking stats";
-  }
+    } else if (lbVisible) presenceData.details = "Checking leaderboards";
+  } else if (path === "/about") presenceData.details = "Reading about page";
+  else if (path === "/settings") presenceData.details = "Changing settings";
+  else if (path === "/login") presenceData.details = "Logging in";
+  else if (path === "/account") presenceData.details = "Checking stats";
+
   presence.setActivity(presenceData);
 });

@@ -15,8 +15,8 @@ interface QuizletData {
   };
 }
 
-let qzData: QuizletData = null;
-let actionTimestamp: number = null;
+let qzData: QuizletData = null,
+  actionTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -40,13 +40,14 @@ presence.on("UpdateData", async () => {
         data.state = document.querySelector(
           ".ProfileHeader-username"
         ).textContent;
-        if (buttons)
+        if (buttons) {
           data.buttons = [
             {
               label: "View Profile",
               url: document.URL
             }
           ];
+        }
         actionTimestamp = null;
         break;
       case "Topic":
@@ -67,13 +68,14 @@ presence.on("UpdateData", async () => {
             if (!actionTimestamp) actionTimestamp = Date.now();
             data.details = "Viewing a set";
             data.state = qzData.layer.studyableTitle;
-            if (buttons)
+            if (buttons) {
               data.buttons = [
                 {
                   label: "View Set",
                   url: document.URL
                 }
               ];
+            }
             break;
           case "new":
             data.details = "Creating a set";
@@ -142,7 +144,7 @@ presence.on("UpdateData", async () => {
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (data.details == null) {
+  if (data.details === null) {
     presence.setTrayTitle(); // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);

@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "641416608790609942"
 });
 
@@ -11,25 +11,29 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var search: any;
-var min: number, sec: number, time: number;
-var min2: number, sec2: number, time2: number;
-var paused: any, timestamps: any;
+let browsingStamp = Math.floor(Date.now() / 1000),
+  search: any,
+  min: number,
+  sec: number,
+  time: number,
+  min2: number,
+  sec2: number,
+  time2: number,
+  paused: any,
+  timestamps: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "pia"
   };
 
-  if (document.location.hostname == "piapro.jp") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "piapro.jp") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/html5_player_popup/")) {
@@ -70,11 +74,9 @@ presence.on("UpdateData", async () => {
         !document
           .querySelector("#jp_container_1")
           .className.includes("jp-state-playing")
-      ) {
+      )
         paused = true;
-      } else {
-        paused = false;
-      }
+      else paused = false;
 
       timestamps = getTimestamps(time, time2);
       presenceData.startTimestamp = timestamps[0];
@@ -96,13 +98,12 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/t/")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details =
-        "Viewing " +
+      presenceData.details = `Viewing ${
         document
           .querySelector("head > title")
           .textContent.split("|")[1]
-          .split("「")[0] +
-        ":";
+          .split("「")[0]
+      }:`;
       presenceData.state = document.querySelector(
         "#main > div.cd_works-whole.illust > div.cd_works-mainclm > h1"
       ).textContent;
@@ -154,10 +155,8 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     }
   }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,17 +1,16 @@
-var presence = new Presence({
-  clientId: "647973934603567130"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+let presence = new Presence({
+    clientId: "647973934603567130"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "bahamut"
   };
 
-  if (document.location.hostname == "forum.gamer.com.tw") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "forum.gamer.com.tw") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.querySelector(".BH-menu") !== null) {
@@ -37,7 +36,7 @@ presence.on("UpdateData", async () => {
         title = document
           .querySelector("div.BH-menu > ul.BH-menuE > li > a[title]")
           .getAttribute("title");
-        var header_title = document.getElementsByClassName(
+        const header_title = document.getElementsByClassName(
           "c-post__header__title"
         )[0].innerHTML;
         presenceData.details = title;
@@ -47,12 +46,10 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing site:";
     presenceData.state = "巴哈姆特";
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

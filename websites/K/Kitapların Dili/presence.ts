@@ -32,8 +32,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -118,29 +118,29 @@ kitaplarinDili.on("UpdateData", async () => {
         "Bilinmeyen Kitap",
       video: HTMLVideoElement = document.querySelector("video.vjs-tech");
 
-    if (!video)
+    if (!video) {
       return kitaplarinDili.setActivity({
         largeImageKey: "kd-logo",
         details: bookName || "Bilinmeyen Kitap",
         smallImageKey: "question",
         smallImageText: "Video verisi alınamıyor"
       });
+    }
 
     const timestamps = getTimestamps(
-      Math.floor(video?.currentTime),
-      Math.floor(video?.duration)
-    );
-
-    const object = {
-      largeImageKey: "kd-logo",
-      details: bookName || "Bilinmeyen Kitap",
-      smallImageKey: video?.paused ? "pause" : "play",
-      smallImageText: video?.paused
-        ? (await strings).pause
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+        Math.floor(video?.currentTime),
+        Math.floor(video?.duration)
+      ),
+      object = {
+        largeImageKey: "kd-logo",
+        details: bookName || "Bilinmeyen Kitap",
+        smallImageKey: video?.paused ? "pause" : "play",
+        smallImageText: video?.paused
+          ? (await strings).pause
+          : (await strings).play,
+        startTimestamp: timestamps[0],
+        endTimestamp: timestamps[1]
+      };
 
     if (video?.paused) {
       delete object.startTimestamp;

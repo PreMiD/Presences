@@ -52,11 +52,8 @@ presence.on("UpdateData", async () => {
     strings = await getStrings();
   }
 
-  if (isHostDP)
-    data.largeImageKey = "disneyplus-logo";
-   else if (isHostHS)
-    data.largeImageKey = "disneyplus-hotstar-logo";
-
+  if (isHostDP) data.largeImageKey = "disneyplus-logo";
+  else if (isHostHS) data.largeImageKey = "disneyplus-hotstar-logo";
 
   // Disney+ video
   if (isHostDP && location.pathname.includes("/video/")) {

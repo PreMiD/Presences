@@ -146,7 +146,7 @@ presence.on("UpdateData", async function () {
       if (set_showButtons) {
         presenceData.buttons = [
           {
-            label: `View Solar Roof`,
+            label: "View Solar Roof",
             url: window.location.href
           }
         ];
@@ -157,7 +157,7 @@ presence.on("UpdateData", async function () {
       if (set_showButtons) {
         presenceData.buttons = [
           {
-            label: `View Solar Panels`,
+            label: "View Solar Panels",
             url: window.location.href
           }
         ];
@@ -171,7 +171,7 @@ presence.on("UpdateData", async function () {
       if (set_showButtons) {
         presenceData.buttons = [
           {
-            label: `View Page`,
+            label: "View Page",
             url: window.location.href
           }
         ];
@@ -182,7 +182,7 @@ presence.on("UpdateData", async function () {
       if (set_showButtons) {
         presenceData.buttons = [
           {
-            label: `View Powerwall`,
+            label: "View Powerwall",
             url: window.location.href
           }
         ];
@@ -193,7 +193,7 @@ presence.on("UpdateData", async function () {
       if (set_showButtons) {
         presenceData.buttons = [
           {
-            label: `View Inventory`,
+            label: "View Inventory",
             url: window.location.href
           }
         ];
@@ -208,9 +208,10 @@ presence.on("UpdateData", async function () {
         const error = document.querySelector(
           ".error-container>.error-code"
         ).textContent;
-        if (error === "404")
+        if (error === "404") {
           (presenceData.details = "Error 404"),
             (presenceData.state = "Page not found");
+        }
       } else presenceData.details = "Other";
     }
   } else if (window.location.hostname === "shop.tesla.com") {
@@ -258,10 +259,8 @@ presence.on("UpdateData", async function () {
       presenceData.state = "Order History";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

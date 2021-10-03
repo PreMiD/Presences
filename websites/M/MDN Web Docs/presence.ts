@@ -11,10 +11,10 @@ presence.on("UpdateData", async () => {
 
   if (!paths[2] || paths[2] === "") {
     data.largeImageKey = "homepage";
-    data.details = `Looking at the main page...`;
+    data.details = "Looking at the main page...";
   } else if (!paths[3]) {
     data.largeImageKey = "homepage";
-    data.details = `Looking at Web Technologies`;
+    data.details = "Looking at Web Technologies";
   } else {
     switch (paths[4]) {
       case "JavaScript": {
@@ -27,9 +27,8 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
-          data.details = `Looking at JavaScript Technologie`;
-        }
+        } else data.details = "Looking at JavaScript Technologie";
+
         break;
       }
       case "HTML": {
@@ -42,9 +41,8 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
-          data.details = `Looking at HTML Technologie`;
-        }
+        } else data.details = "Looking at HTML Technologie";
+
         break;
       }
       case "CSS": {
@@ -57,9 +55,8 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
-          data.details = `Looking at CSS Technologie`;
-        }
+        } else data.details = "Looking at CSS Technologie";
+
         break;
       }
       case "MathML": {
@@ -72,9 +69,8 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
-          data.details = `Looking at MathML Technologie`;
-        }
+        } else data.details = "Looking at MathML Technologie";
+
         break;
       }
       case "WebExtensions": {
@@ -87,9 +83,8 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
-          data.details = `Looking at Web Extensions Technologies`;
-        }
+        } else data.details = "Looking at Web Extensions Technologies";
+
         break;
       }
       default: {
@@ -104,9 +99,8 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
-          data.details = `Looking at ${tech}`;
-        }
+        } else data.details = `Looking at ${tech}`;
+
         break;
       }
     }

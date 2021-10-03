@@ -1,9 +1,8 @@
-var presence = new Presence({
-  clientId: "636649694109499393"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+let presence = new Presence({
+    clientId: "636649694109499393"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -11,7 +10,7 @@ presence.on("UpdateData", async () => {
   };
 
   title = document.querySelector("#offer-balance");
-  if (document.location.hostname == "www.rocketleagueesports.com") {
+  if (document.location.hostname === "www.rocketleagueesports.com") {
     title = document.querySelector("head > title");
     presenceData.details = "Esports - Viewing:";
     presenceData.state = title.innerText.replace(
@@ -19,7 +18,7 @@ presence.on("UpdateData", async () => {
       ""
     );
   } else {
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the home page";
     } else if (document.location.pathname.includes("/game-info/")) {
@@ -103,10 +102,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

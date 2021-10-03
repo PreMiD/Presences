@@ -49,36 +49,37 @@ presence.on("UpdateData", async () => {
 
   if (matchPage(null, "/user/"))
     updateData("Viewing profile:", window.location.pathname.split("/")[2]);
-  else if (matchPage(null, "/joke/tag/"))
+  else if (matchPage(null, "/joke/tag/")) {
     updateData(
       "Viewing a tag (Jokes):",
       window.location.pathname.split("/")[3]
     );
-  else if (matchPage(null, "/pics/tag/"))
+  } else if (matchPage(null, "/pics/tag/")) {
     updateData(
       "Viewing a tag (Images):",
       window.location.pathname.split("/")[3]
     );
-  else if (matchPage(null, "/joke/category/"))
+  } else if (matchPage(null, "/joke/category/")) {
     updateData(
       "Viewing a category:",
       `ID: ${window.location.pathname.split("/")[3]}`
     );
-  else if (matchPage(null, "/joke/subcategory/"))
+  } else if (matchPage(null, "/joke/subcategory/")) {
     updateData(
       "Viewing a subcategory:",
       `ID: ${window.location.pathname.split("/")[3]}`
     );
-  else if (matchPage(null, "/joke/"))
+  } else if (matchPage(null, "/joke/")) {
     updateData(
       "Viewing a joke:",
       `ID: ${window.location.pathname.split("/")[2]}`
     );
-  else if (matchPage(null, "/pics/"))
+  } else if (matchPage(null, "/pics/")) {
     updateData(
       "Viewing a picture:",
       `ID: ${window.location.pathname.split("/")[2]}`
     );
+  }
   presence.setActivity(data.presenceData);
 });
 
@@ -94,16 +95,18 @@ function matchPage(href: string, option?: string) {
 }
 
 function updateData(details?: string, state?: string, buttons = true) {
-  if (buttons && !data.privacyMode)
+  if (buttons && !data.privacyMode) {
     data.presenceData.buttons = [
       { label: "View Page", url: window.location.href }
     ];
+  }
   if (details && !data.privacyMode) data.presenceData.details = details;
   if (state && !data.privacyMode) data.presenceData.state = state;
-  if (data.privacyMode)
+  if (data.privacyMode) {
     data.presenceData = {
       ...data.presenceData,
       details: "Privacy mode enabled",
       state: "Content hidden"
     };
+  }
 }

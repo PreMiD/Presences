@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "m4"
   };
 
-  if (video != null && !isNaN(video.duration) && video.duration > 0) {
+  if (video !== null && !isNaN(video.duration) && video.duration > 0) {
     const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)

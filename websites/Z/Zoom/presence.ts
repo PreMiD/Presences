@@ -68,7 +68,7 @@ function videoEnabled() {
       .getAttribute("aria-label") &&
     document
       .querySelector(".send-video-container > button")
-      .getAttribute("aria-label") != "start sending my video"
+      .getAttribute("aria-label") !== "start sending my video"
   );
 }
 

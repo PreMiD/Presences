@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
   };
 
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "perpheads.com") {
+  if (document.location.hostname === "perpheads.com") {
     title = document.querySelector(
       "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
     );
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
     );
-    if (title != null) {
+    if (title !== null) {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
     );
-    if (title != null) {
+    if (title !== null) {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1 > a > em"
     );
-    if (search != null) {
+    if (search !== null) {
       presenceData.details = "Forums, searching for:";
       presenceData.state = search.innerText;
 
@@ -122,14 +122,14 @@ presence.on("UpdateData", async () => {
     if (
       document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
-      ) != null
+      ) !== null
     ) {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
       presenceData.state = title.innerText;
       presenceData.details = "Forums, Reading a DM";
-      presenceData.state = title + "...";
+      presenceData.state = `${title}...`;
 
       delete presenceData.smallImageKey;
 
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "help.perpheads.com") {
+  } else if (document.location.hostname === "help.perpheads.com") {
     presenceData.details = "PERPHeads Help";
     delete presenceData.state;
 

@@ -73,9 +73,9 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         { label: "Play this game (Game Pass)", url: document.location.href }
       ];
-      if (document.querySelector(`[class^="Provisioning"`))
+      if (document.querySelector('[class^="Provisioning"'))
         presenceData.details += " (setting up)";
-      else if (document.querySelector(`[class^="NotFocused"`))
+      else if (document.querySelector('[class^="NotFocused"'))
         presenceData.details += " (unfocused)";
     } else {
       presenceData.details = "Browsing Xbox Cloud Gaming games";

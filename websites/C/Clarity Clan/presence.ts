@@ -16,10 +16,8 @@ presence.on("UpdateData", async () => {
     state: "clarityclan.team"
   };
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

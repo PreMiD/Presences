@@ -17,7 +17,7 @@ function send(): void {
 iframe.on("UpdateData", () => {
   const link = document.location;
 
-  if (document.getElementsByTagName("video").length != 0) {
+  if (document.getElementsByTagName("video").length !== 0) {
     const video: HTMLVideoElement = document.getElementsByTagName("video")[0];
     sendback = {
       audio: false,

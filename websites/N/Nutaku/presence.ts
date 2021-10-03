@@ -28,9 +28,9 @@ interface GameEntity {
 
 function getGameEntity(): GameEntity {
   const object = Array.from(
-    document.querySelectorAll(`script[type="application/ld+json"]`)
+    document.querySelectorAll('script[type="application/ld+json"]')
   )
-    .find((x) => x.textContent.indexOf(`"@type": "SoftwareApplication"`) !== -1)
+    .find((x) => x.textContent.indexOf('"@type": "SoftwareApplication"') !== -1)
     ?.textContent.replace(/\r?\n/g, ""); // filter out new lines - required by json
   if (!object) return null;
   return JSON.parse(object);
@@ -41,7 +41,7 @@ function getQuery() {
       queryString && queryString.length > 0 && queryString[1]
         ? queryString[1].split("&").reduce(function (l, r) {
             const entry = r ? r.split("=", 2) : null;
-            if (entry == null) return l;
+            if (entry === null) return l;
             return Object.assign(l, { [entry[0]]: entry[1] });
           }, {})
         : {};
@@ -87,7 +87,7 @@ function getQuery() {
           let search: string;
           if (
             !(search = document.querySelector<HTMLInputElement>(
-              `.modal.open input.search-field[data-search-url]`
+              ".modal.open input.search-field[data-search-url]"
             )?.value)
           ) {
             delete data.state;

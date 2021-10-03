@@ -52,13 +52,13 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = setTimestamp();
     presenceData.smallImageKey = "search";
 
-    if (document.location.href.includes("/images/")) {
+    if (document.location.href.includes("/images/"))
       presenceData.details = await handleFormatting("imageSearch");
-    } else if (document.location.href.includes("/videos/")) {
+    else if (document.location.href.includes("/videos/"))
       presenceData.details = await handleFormatting("videoSearch");
-    } else if (document.location.href.includes("/news/")) {
+    else if (document.location.href.includes("/news/"))
       presenceData.details = await handleFormatting("newsSearch");
-    } else {
+    else {
       presenceData.details = await handleFormatting("standardSearch");
       presenceData.state = queryResults().innerText;
     }
@@ -67,7 +67,5 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

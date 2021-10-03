@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "616754182858342426"
   }),
   strings = presence.getStrings({
@@ -15,29 +15,28 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var lastPlaybackState = null;
-var playback: boolean;
-var browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null,
+  playback: boolean,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    details: "Unknown page",
-    largeImageKey: "lg"
-  };
-
-  const video: HTMLVideoElement = document.querySelector(
-    "#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-  );
+      details: "Unknown page",
+      largeImageKey: "lg"
+    },
+    video: HTMLVideoElement = document.querySelector(
+      "#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+    );
 
   playback = video !== null ? true : false;
 
@@ -57,12 +56,11 @@ presence.on("UpdateData", async () => {
       ),
       episode: HTMLElement = document.querySelector(
         "#playercontainer span.outPep"
+      ),
+      timestamps = getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
       );
-
-    const timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
@@ -82,12 +80,11 @@ presence.on("UpdateData", async () => {
     if (season && episode) {
       presenceData.details =
         videoTitle !== null ? videoTitle.innerText : "Title not found...";
-      presenceData.state =
-        "Season " + season.innerText + ", Episode " + episode.innerText;
+      presenceData.state = `Season ${season.innerText}, Episode ${episode.innerText}`;
     } else if (!season && episode) {
       presenceData.details =
         videoTitle !== null ? videoTitle.innerText : "Title not found...";
-      presenceData.state = "Episode " + episode.innerText;
+      presenceData.state = `Episode ${episode.innerText}`;
     } else {
       presenceData.details = "Watching";
       presenceData.state =
@@ -99,8 +96,6 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (videoTitle !== null) {
-      presence.setActivity(presenceData, !video.paused);
-    }
+    if (videoTitle !== null) presence.setActivity(presenceData, !video.paused);
   }
 });

@@ -2,22 +2,20 @@ const presence = new Presence({
   clientId: "630790482804473857"
 });
 
-var tags = [
-  "/anime/",
-  "/book/",
-  "/cartoon/",
-  "/comic/",
-  "/game/",
-  "/misc/",
-  "/movie/",
-  "/play/",
-  "tv"
-];
-var anime;
-var crossover = [];
-for (let i = 0; i < tags.length; i++) {
-  crossover.push(["/crossovers" + tags[i]]);
-}
+let tags = [
+    "/anime/",
+    "/book/",
+    "/cartoon/",
+    "/comic/",
+    "/game/",
+    "/misc/",
+    "/movie/",
+    "/play/",
+    "tv"
+  ],
+  anime,
+  crossover = [];
+for (let i = 0; i < tags.length; i++) crossover.push([`/crossovers${tags[i]}`]);
 
 const elapsed = Math.floor(Date.now() / 1000);
 
@@ -28,7 +26,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = elapsed;
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Browing fanfics";
     presenceData.state = "at Homepage";
     presenceData.smallImageKey = "logo";
@@ -42,7 +40,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = document.location.href;
   } else if (document.location.pathname.startsWith("/s/")) {
-    var current = document.location.pathname
+    const current = document.location.pathname
       .replace("/s/", "")
       .split("/")
       .join("")
@@ -87,10 +85,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = document.location.href;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

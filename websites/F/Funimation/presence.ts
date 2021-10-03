@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640161890059812865"
   }),
   strings = presence.getStrings({
@@ -15,18 +15,20 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
+let browsingStamp = Math.floor(Date.now() / 1000),
+  iFrameVideo: boolean,
+  currentTime: any,
+  duration: any,
+  paused: any,
+  lastPlaybackState = null,
+  playback;
 
-var lastPlaybackState = null;
-var playback;
-
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -43,7 +45,10 @@ presence.on("iFrameData", (data) => {
 });
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "fun"
     };
@@ -53,7 +58,7 @@ presence.on("UpdateData", async () => {
       "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h1"
     ) !== null
   ) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
@@ -72,17 +77,18 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
-      presenceData.state =
+      presenceData.state = `${
         document.querySelector(
           "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h1"
-        ).textContent +
-        " " +
+        ).textContent
+      } ${
         document.querySelector(
           "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h2"
-        ).textContent;
+        ).textContent
+      }`;
       presenceData.smallImageKey = "reading";
     }
   } else if (document.location.pathname.includes("/shows/")) {
@@ -186,10 +192,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

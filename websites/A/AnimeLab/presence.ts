@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "641432995764633612"
   }),
   strings = presence.getStrings({
@@ -15,30 +15,29 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
+let browsingStamp = Math.floor(Date.now() / 1000),
+  user: any,
+  title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "al"
   };
 
-  if (document.location.hostname == "www.animelab.com") {
+  if (document.location.hostname === "www.animelab.com") {
     if (
-      document.location.pathname == "/" ||
-      document.location.pathname == "/home"
+      document.location.pathname === "/" ||
+      document.location.pathname === "/home"
     ) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/player/")) {
-      var currentTime: any,
+      let currentTime: any,
         duration: any,
         paused: any,
         timestamps: any,
@@ -69,7 +68,7 @@ presence.on("UpdateData", async () => {
       } else if (isNaN(duration)) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Looing at:";
-        presenceData.state = title + " | " + user;
+        presenceData.state = `${title} | ${user}`;
       }
     } else if (document.location.pathname.includes("/shows/")) {
       if (document.querySelector(".show-title") !== null) {
@@ -113,10 +112,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

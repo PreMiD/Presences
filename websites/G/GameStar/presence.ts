@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640969147911503910"
   }),
   strings = presence.getStrings({
@@ -15,23 +15,22 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
+let browsingStamp = Math.floor(Date.now() / 1000),
+  user: any,
+  title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "star"
   };
 
-  if (document.location.hostname == "www.gamestar.de") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.gamestar.de") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Betrachtet die Startseite";
     } else if (document.location.pathname.includes("/artikel/")) {
@@ -43,7 +42,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/videos/")) {
-      var currentTime: any,
+      let currentTime: any,
         duration: any,
         paused: any,
         timestamps: any,
@@ -67,7 +66,7 @@ presence.on("UpdateData", async () => {
         presenceData.endTimestamp = timestamps[1];
 
         presenceData.details = title.split("-")[0];
-        presenceData.state = title.replace(title.split("-")[0] + "- ", "");
+        presenceData.state = title.replace(`${title.split("-")[0]}- `, "");
 
         if (paused) {
           delete presenceData.startTimestamp;
@@ -81,12 +80,10 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Betrachtet Seite:";
     presenceData.state = document.querySelector("head > title").textContent;
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

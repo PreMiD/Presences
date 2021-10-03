@@ -31,8 +31,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -65,9 +65,9 @@ presence.on("UpdateData", async () => {
 
     if (
       !document.location.search ||
-      document.location.search == "" ||
-      (document.location.search != "" && !genre && !showName) ||
-      (document.location.search != "" && genre == "" && showName == "")
+      document.location.search === "" ||
+      (document.location.search !== "" && !genre && !showName) ||
+      (document.location.search !== "" && genre === "" && showName === "")
     ) {
       presence.setActivity({
         largeImageKey: "dl-logo",
@@ -76,8 +76,8 @@ presence.on("UpdateData", async () => {
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (
-      (genre && genre != "" && !showName) ||
-      (genre && genre != "" && showName == "")
+      (genre && genre !== "" && !showName) ||
+      (genre && genre !== "" && showName === "")
     ) {
       presence.setActivity({
         largeImageKey: "dl-logo",
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: "search",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
-    } else if (genre && genre != "" && showName && showName != "") {
+    } else if (genre && genre !== "" && showName && showName !== "") {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: "Bir dizi arıyor:",
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
       });
     } else if (
       (!genre && showName) ||
-      (genre == "" && showName && showName != "")
+      (genre === "" && showName && showName !== "")
     ) {
       presence.setActivity({
         largeImageKey: "dl-logo",
@@ -117,14 +117,14 @@ presence.on("UpdateData", async () => {
       state: user && user.textContent ? user.textContent.trim() : "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (!isVideoData && showTitle && showTitle.textContent != "") {
+  } else if (!isVideoData && showTitle && showTitle.textContent !== "") {
     presence.setActivity({
       largeImageKey: "dl-logo",
       details: "Bir diziyi inceliyor:",
       state: showTitle.textContent,
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (!isVideoData && actorName && actorName.textContent != "") {
+  } else if (!isVideoData && actorName && actorName.textContent !== "") {
     presence.setActivity({
       largeImageKey: "dl-logo",
       details: "Bir aktörü inceliyor:",
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: `${
-          forumTitle && forumTitle.textContent != ""
+          forumTitle && forumTitle.textContent !== ""
             ? forumTitle.textContent.replace(" tartışma forumu", "")
             : "Bilinmeyen"
         } dizisinin forumlarına bakıyor:`,
@@ -154,12 +154,12 @@ presence.on("UpdateData", async () => {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: `${
-          forumTitle && forumTitle.textContent != ""
+          forumTitle && forumTitle.textContent !== ""
             ? forumTitle.textContent.replace(" tartışma forumu", "")
             : "Bilinmeyen"
         } dizisinin forumlarına bakıyor:`,
         state:
-          postTitle && postTitle.textContent != ""
+          postTitle && postTitle.textContent !== ""
             ? postTitle.textContent
             : "Bilinmeyen",
         startTimestamp: Math.floor(Date.now() / 1000)
@@ -206,9 +206,8 @@ presence.on("UpdateData", async () => {
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ).textContent
             }. Bölüm`
-          : "none found";
-
-    const fixedEpisodeName = episodeX
+          : "none found",
+      fixedEpisodeName = episodeX
         .replace(/\n/g, "")
         .replace(/-/g, "")
         .replace(title.textContent, "")
@@ -217,17 +216,16 @@ presence.on("UpdateData", async () => {
       timestamps = getTimestamps(
         Math.floor(_video.currentTime),
         Math.floor(_video.duration)
-      );
-
-    const data: { [k: string]: any } = {
-      largeImageKey: "dl-logo",
-      details: title.textContent,
-      state: fixedEpisodeName,
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play
-    };
+      ),
+      data: { [k: string]: any } = {
+        largeImageKey: "dl-logo",
+        details: title.textContent,
+        state: fixedEpisodeName,
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play
+      };
 
     if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
       data.startTimestamp = timestamps[0];
@@ -278,7 +276,7 @@ presence.on("UpdateData", async () => {
             }. Bölüm`
           : null;
 
-    if (title && title.textContent != "" && episodeX) {
+    if (title && title.textContent !== "" && episodeX) {
       const fixedEpisodeName = episodeX
           .replace(/\n/g, "")
           .replace(/-/g, "")
@@ -288,17 +286,16 @@ presence.on("UpdateData", async () => {
         timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
-        );
-
-      const data: { [k: string]: any } = {
-        largeImageKey: "dl-logo",
-        details: title.textContent,
-        state: fixedEpisodeName,
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play
-      };
+        ),
+        data: { [k: string]: any } = {
+          largeImageKey: "dl-logo",
+          details: title.textContent,
+          state: fixedEpisodeName,
+          smallImageKey: video.paused ? "pause" : "play",
+          smallImageText: video.paused
+            ? (await strings).pause
+            : (await strings).play
+        };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
         data.startTimestamp = timestamps[0];

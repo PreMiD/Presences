@@ -13,19 +13,21 @@ presence.on("UpdateData", async () => {
       "body > div.pagAniTitulo > div > h1"
     ).textContent;
     presenceData.details = "Página de Busca";
-    presenceData.state =
-      "Pesquisando: " + result.replace("Você pesquisou por:", "");
+    presenceData.state = `Pesquisando: ${result.replace(
+      "Você pesquisou por:",
+      ""
+    )}`;
     presenceData.startTimestamp = tempo;
-  } else if (path == "/lista-de-animes-online/") {
+  } else if (path === "/lista-de-animes-online/") {
     presenceData.details = "Animes Legendados";
     presenceData.startTimestamp = tempo;
-  } else if (path == "/lista-de-animes-dublados-online/") {
+  } else if (path === "/lista-de-animes-dublados-online/") {
     presenceData.details = "Animes Dublados";
     presenceData.startTimestamp = tempo;
-  } else if (path == "/lista-de-generos-online/") {
+  } else if (path === "/lista-de-generos-online/") {
     presenceData.details = "Gêneros";
     presenceData.startTimestamp = tempo;
-  } else if (path == "/calendario/") {
+  } else if (path === "/calendario/") {
     presenceData.details = "Calendário de Animes";
     presenceData.startTimestamp = tempo;
   } else if (titulo.includes("Todos os Epi")) {
@@ -79,10 +81,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

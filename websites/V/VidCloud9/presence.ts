@@ -66,28 +66,27 @@ presence.on("UpdateData", async () => {
     };
   if (videoTime) {
     presence.info("Video Time is On");
-    if (playback == true) {
+    if (playback === true) {
       // lastPlaybackState = playback;
       browsingStamp = Math.floor(Date.now() / 1000);
     }
-  } else {
-    presence.info("Video time is off");
-  }
+  } else presence.info("Video time is off");
+
   if (info) {
     presence.info("Info is On.");
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
-    } else if (document.location.pathname == "/movies") {
+    } else if (document.location.pathname === "/movies") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the recently added movies";
-    } else if (document.location.pathname == "/series") {
+    } else if (document.location.pathname === "/series") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the recently added series";
-    } else if (document.location.pathname == "/cinema-movies") {
+    } else if (document.location.pathname === "/cinema-movies") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the recently added cinema movies.";
-    } else if (document.location.pathname == "/recommended-series") {
+    } else if (document.location.pathname === "/recommended-series") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing recommened series";
     }
@@ -96,13 +95,13 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#main_bg > div:nth-child(5) > div > div.video-info-left > h1"
       );
-      if (title != null) {
+      if (title !== null) {
         presenceData.state = (title as HTMLTextAreaElement).innerText;
         if (
-          iFrameVideo == true &&
+          iFrameVideo === true &&
           !isNaN(duration) &&
-          title != null &&
-          video != null
+          title !== null &&
+          video !== null
         ) {
           if (!paused) {
             presenceData.details = "Watching:";
@@ -121,7 +120,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "pause";
             presenceData.smallImageText = (await strings).pause;
           }
-        } else if (iFrameVideo == null && isNaN(duration) && title != null) {
+        } else if (iFrameVideo === null && isNaN(duration) && title !== null) {
           presenceData.details = "Viewing:";
           presenceData.state = (title as HTMLTextAreaElement).innerText;
           presenceData.startTimestamp = browsingStamp;
@@ -145,7 +144,7 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector(
         "#main_bg > div:nth-child(5) > div > div.section-header > h3"
-      ).textContent == " Result search"
+      ).textContent === " Result search"
     ) {
       presence.info("Searching");
       presenceData.details = "Searching:";
@@ -167,7 +166,7 @@ presence.on("UpdateData", async () => {
     presence.info("Info is off.");
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     //This will fire if you do not set presence details
     presence.setTrayTitle();
     presence.setActivity();

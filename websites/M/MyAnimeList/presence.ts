@@ -1,16 +1,16 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "468420510632509473"
 });
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     const presenceData: PresenceData = {
       details: "Viewing the homepage",
       largeImageKey: "lg-mal"
     };
     presence.setActivity(presenceData);
   } else if (
-    document.location.pathname == "/anime.php" ||
+    document.location.pathname === "/anime.php" ||
     document.location.pathname.startsWith("/topanime") ||
     document.location.pathname.startsWith("/watch")
   ) {
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     };
     presence.setActivity(presenceData);
   } else if (
-    document.location.pathname == "/manga.php" ||
+    document.location.pathname === "/manga.php" ||
     document.location.pathname.startsWith("/topmanga") ||
     document.location.pathname.startsWith("/store")
   ) {

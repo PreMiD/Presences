@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "bigdefault"
   };
 
-  if (document.location.hostname == "spinsha.re") {
-    const pathname = document.location.pathname;
+  if (document.location.hostname === "spinsha.re") {
+    const { pathname } = document.location;
     switch (pathname) {
       case "/":
         presenceData.startTimestamp = browsingStamp;
@@ -37,9 +37,8 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = document.querySelector(".song-title").innerHTML;
       presenceData.state = document.querySelector(".song-artist").innerHTML;
-      if (document.querySelector(".player-active")) {
+      if (document.querySelector(".player-active"))
         presenceData.smallImageKey = "play";
-      }
     } else if (pathname.startsWith("/user")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing User Profile:";
@@ -57,10 +56,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

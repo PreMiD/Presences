@@ -45,11 +45,12 @@ presence.on("UpdateData", async () => {
       ];
     } else {
       presenceData.details = titulo
-        .replace(document.querySelector(`h1.Title > span`).textContent, ``)
-        .replace(/\s+/g, ` `)
+        .replace(document.querySelector("h1.Title > span").textContent, "")
+        .replace(/\s+/g, " ")
         .trim();
-      presenceData.state =
-        document.querySelector(`h1.Title > span`).textContent + " " + subtitulo;
+      presenceData.state = `${
+        document.querySelector("h1.Title > span").textContent
+      } ${subtitulo}`;
       presenceData.buttons = [
         { label: "Ver Episodio", url: window.location.href }
       ];
@@ -71,7 +72,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData, !videoPaused);
   } else if (document.location.pathname.includes("/serie/")) {
-    presenceData.details = document.querySelector(`h1.Title`).textContent;
+    presenceData.details = document.querySelector("h1.Title").textContent;
     presenceData.smallImageKey = "browsing";
     presenceData.smallImageText = (await strings).browsing;
     presence.setActivity(presenceData);

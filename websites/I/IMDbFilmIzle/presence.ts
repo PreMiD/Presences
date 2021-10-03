@@ -103,13 +103,13 @@ presence.on("UpdateData", async () => {
       )?.textContent;
     }
 
-    if (new URLSearchParams(window.location.search).get("i") == "wl") {
+    if (new URLSearchParams(window.location.search).get("i") === "wl") {
       presenceData.details = "Bir sayfaya göz atıyor:";
       presenceData.state = "İzleme Listem";
-    } else if (new URLSearchParams(window.location.search).get("i") == "v") {
+    } else if (new URLSearchParams(window.location.search).get("i") === "v") {
       presenceData.details = "Bir sayfaya göz atıyor:";
       presenceData.state = "Video Yöneticisi";
-    } else if (new URLSearchParams(window.location.search).get("i") == "e") {
+    } else if (new URLSearchParams(window.location.search).get("i") === "e") {
       presenceData.details = "Bir sayfaya göz atıyor:";
       presenceData.state = "Bilgileri Düzenle";
     }

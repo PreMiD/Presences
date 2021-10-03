@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "698231292172435567"
   }),
   strings = presence.getStrings({
@@ -15,8 +15,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -45,11 +45,11 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
 
   if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/kisscartoon.html"
-  ) {
+    document.location.pathname === "/" ||
+    document.location.pathname === "/kisscartoon.html"
+  )
     presenceData.details = "Viewing home page";
-  } else if (document.querySelector(".full.watch_container") !== null) {
+  else if (document.querySelector(".full.watch_container") !== null) {
     timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
     if (!isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
@@ -74,17 +74,16 @@ presence.on("UpdateData", async () => {
     } else if (isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at:";
-      presenceData.state =
-        document
-          .querySelector("#adsIfrme > div > div > div > h1 > strong")
-          .textContent.replace("Watch ", "")
-          .replace(" online free", "") +
-        " " +
-        document.querySelector("#selectEpisode").textContent.trim();
+      presenceData.state = `${document
+        .querySelector("#adsIfrme > div > div > div > h1 > strong")
+        .textContent.replace("Watch ", "")
+        .replace(" online free", "")} ${document
+        .querySelector("#selectEpisode")
+        .textContent.trim()}`;
     }
-  } else if (document.location.pathname.includes("/CartoonList")) {
+  } else if (document.location.pathname.includes("/CartoonList"))
     presenceData.details = "Viewing the Cartoon List";
-  } else if (document.location.pathname.includes("/Cartoon")) {
+  else if (document.location.pathname.includes("/Cartoon")) {
     presenceData.details = "Viewing Cartoon:";
     presenceData.state = document.querySelector(
       "#leftside > div:nth-child(2) > div.barContent.full > div.full > h1 > a"
@@ -94,10 +93,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "writing";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

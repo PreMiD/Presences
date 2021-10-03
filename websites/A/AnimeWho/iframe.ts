@@ -1,6 +1,6 @@
-const video_frame = new iFrame();
+const videoFrame = new iFrame();
 
-video_frame.on("UpdateData", async () => {
+videoFrame.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector("video");
 
   if (video) {
@@ -10,6 +10,6 @@ video_frame.on("UpdateData", async () => {
       currentTime: video.currentTime
     };
 
-    video_frame.send(videoMessage);
+    videoFrame.send(videoMessage);
   }
 });

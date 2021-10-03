@@ -14,12 +14,10 @@ presence.on("UpdateData", async () => {
   presenceData.details = `Contributing to: ${points}`;
   presenceData.state = `Project Progress: ${progress}`;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
 
 interface IFrameData {

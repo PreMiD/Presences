@@ -1,12 +1,11 @@
-var presence = new Presence({
-  clientId: "609531561389588480"
-});
+let presence = new Presence({
+    clientId: "609531561389588480"
+  }),
+  lastPlaybackState = null,
+  playback,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -28,12 +27,12 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  var video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
     "video.dplayer-video.dplayer-video-current"
   );
 
   if (video !== null) {
-    var videoTitle: any, streamer: any;
+    let videoTitle: any, streamer: any;
 
     videoTitle = document.querySelector(
       ".info-line-left.flex-box .flex-column.flex-justify-center div"

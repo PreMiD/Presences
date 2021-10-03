@@ -6,18 +6,17 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "itv_logo",
-    startTimestamp: new Date().getTime()
-  };
-
-  const path = document.location.pathname;
+      largeImageKey: "itv_logo",
+      startTimestamp: new Date().getTime()
+    },
+    path = document.location.pathname;
 
   if (path === "/") {
     presenceData.details = "Browsing ITV Hub";
@@ -73,13 +72,12 @@ presence.on("UpdateData", () => {
     // Last path is a valid hex (Show ID)
     delete presenceData.startTimestamp;
     const showDetails = {
-      name: document.getElementById("programme-title").innerText,
-      episode: document
-        .getElementsByClassName("episode-info__episode-title")[0]
-        .textContent.trim()
-    };
-
-    const video = document.getElementsByTagName("video")[0];
+        name: document.getElementById("programme-title").innerText,
+        episode: document
+          .getElementsByClassName("episode-info__episode-title")[0]
+          .textContent.trim()
+      },
+      video = document.getElementsByTagName("video")[0];
     if (!video.paused) {
       const timestamps = getTimestamps(
         Math.floor(video.currentTime),
@@ -100,10 +98,8 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

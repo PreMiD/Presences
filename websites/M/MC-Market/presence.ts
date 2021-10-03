@@ -1,10 +1,10 @@
-var presence = new Presence({
-  clientId: "626148940927991829" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var user: any, search: any, title: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let presence = new Presence({
+    clientId: "626148940927991829" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  user: any,
+  search: any,
+  title: any,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
   };
 
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "www.mc-market.org") {
+  if (document.location.hostname === "www.mc-market.org") {
     if (document.location.pathname.includes("/chat/")) {
       presenceData.details = "Reading the";
       presenceData.state = "global chat";
@@ -55,11 +55,10 @@ presence.on("UpdateData", async () => {
       );
       if (title !== null) {
         presenceData.details = "Resources, viewing:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
-          presenceData.state = title.innerText;
-        }
+        if (title.innerText.length > 128)
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+        else presenceData.state = title.innerText;
+
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
@@ -68,15 +67,13 @@ presence.on("UpdateData", async () => {
           "#content > div > div > div.titleBar > h1"
         );
         presenceData.details = "Resources, viewing";
-        presenceData.state =
-          "category: " +
-          title.innerText
-            .replace("Add Resource", "")
-            .replace("Sell your OG", "")
-            .replace("Sell your Semi-OG", "")
-            .replace("Sell your cape account", "")
-            .replace("Sell your Rank Account", "")
-            .replace("Post New Thread", "");
+        presenceData.state = `category: ${title.innerText
+          .replace("Add Resource", "")
+          .replace("Sell your OG", "")
+          .replace("Sell your Semi-OG", "")
+          .replace("Sell your cape account", "")
+          .replace("Sell your Rank Account", "")
+          .replace("Post New Thread", "")}`;
 
         delete presenceData.smallImageKey;
 
@@ -157,7 +154,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#content > div > div > div.mainContainer > div > div.titleBar > h1"
       );
-      if (title == null) {
+      if (title === null) {
         title = document.querySelector(
           "#content > div > div > div.titleBar > h1"
         );
@@ -184,11 +181,10 @@ presence.on("UpdateData", async () => {
         presence.setTrayTitle();
       } else {
         presenceData.details = "Reading thread:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
-          presenceData.state = title.innerText;
-        }
+        if (title.innerText.length > 128)
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+        else presenceData.state = title.innerText;
+
         presenceData.smallImageKey = "reading";
 
         presence.setActivity(presenceData);
@@ -372,7 +368,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#content > div > div > div.mainContainer > div > div.titleBar > h1"
       );
-      if (title == null) {
+      if (title === null) {
         presenceData.details = "Viewing their";
         presenceData.state = "conversations";
 
@@ -391,7 +387,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "status.mc-market.org") {
+  } else if (document.location.hostname === "status.mc-market.org") {
     presenceData.details = "Viewing MC-Market Status";
     delete presenceData.state;
 

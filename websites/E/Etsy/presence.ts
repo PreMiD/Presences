@@ -1,10 +1,8 @@
-var presence = new Presence({
-  clientId: "620721262112538625" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var item: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let presence = new Presence({
+    clientId: "620721262112538625" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  item: any,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,38 +11,36 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.hostname == "investors.etsy.com") {
+  if (document.location.hostname === "investors.etsy.com") {
     presenceData.details = "Viewing page:";
     presenceData.state = "Etsy Investors";
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "help.etsy.com") {
+  } else if (document.location.hostname === "help.etsy.com") {
     presenceData.details = "Viewing page:";
     presenceData.state = "Etsy Help Center";
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "help.etsy.com") {
+  } else if (document.location.hostname === "help.etsy.com") {
     presenceData.details = "Viewing page:";
     presenceData.state = "Etsy Community";
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "www.etsy.com") {
+  } else if (document.location.hostname === "www.etsy.com") {
     if (document.location.pathname.includes("/listing/")) {
       item = document.querySelector(
         "#listing-page-cart > div > div.listing-page-title-component > h1"
       );
       presenceData.details = "Viewing product:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.innerText.length > 128)
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+      else presenceData.state = item.innerText;
 
       delete presenceData.smallImageKey;
 

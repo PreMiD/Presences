@@ -1,15 +1,14 @@
 const presence = new Presence({
-  clientId: "668013997760708618"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "668013997760708618"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
-  if (document.location.hostname == "discordtrlist.xyz") {
+  if (document.location.hostname === "discordtrlist.xyz") {
     presenceData.details = "Bir Sayfaya Bakıyor:";
     presenceData.state = "Anasayfa";
     presenceData.startTimestamp = browsingStamp;
@@ -107,10 +106,8 @@ presence.on("UpdateData", () => {
       }
     }
   }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

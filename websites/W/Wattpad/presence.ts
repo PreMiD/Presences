@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
     const chapter = document.querySelector(
       "#funbar-story > div > ul > li.active > a > div"
     ).textContent;
-    data.details = "Reading " + story;
+    data.details = `Reading ${story}`;
     data.state = chapter;
     data.startTimestamp = browsingStamp;
   } else if (path.includes("/settings")) {

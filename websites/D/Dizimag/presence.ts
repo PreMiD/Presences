@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Profilini inceliyor:";
     presenceData.state = name || "Bulunamadı";
     presenceData.startTimestamp = Date.now();
-  } else if (path == "/") {
+  } else if (path === "/") {
     presenceData.details = "Bir sayfaya bakıyor:";
     presenceData.state = "Ana Sayfa";
     presenceData.startTimestamp = Date.now();
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Bir oyuncuya bakıyor:";
     presenceData.state = name || "Bulunamadı";
     presenceData.startTimestamp = Date.now();
-  } else if (path.startsWith("/dizi") && ayrac[3] == "") {
+  } else if (path.startsWith("/dizi") && ayrac[3] === "") {
     const name: string = document.querySelector("h1.text-nowrap").textContent;
     presenceData.details = "Bir diziye bakıyor:";
     presenceData.state = name || "Bulunamadı";
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
   } else if (
     !isNaN(stream.duration) &&
     !isNaN(stream.currentTime) &&
-    typeof stream.paused == "boolean"
+    typeof stream.paused === "boolean"
   ) {
     const name: string[] = document
       .querySelector("h1.text-sans > a")
@@ -92,19 +92,16 @@ presence.on("UpdateData", async () => {
     presenceData.details = name[0] || "Bulunamadı";
     presenceData.state = name[1] || "Bulunamadı";
 
-    if (stream.paused == true) {
+    if (stream.paused === true) {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "Durduruldu";
       presenceData.buttons = [
         { label: "İzle", url: document.location.href },
         {
           label: "Diziyi Görüntüle",
-          url:
-            document.location.origin +
-            "/" +
-            document.location.pathname.split("/")[1] +
-            "/" +
-            document.location.pathname.split("/")[2]
+          url: `${document.location.origin}/${
+            document.location.pathname.split("/")[1]
+          }/${document.location.pathname.split("/")[2]}`
         }
       ];
       delete presenceData.startTimestamp;
@@ -121,12 +118,9 @@ presence.on("UpdateData", async () => {
         { label: "İzle", url: document.location.href },
         {
           label: "Diziyi Görüntüle",
-          url:
-            document.location.origin +
-            "/" +
-            document.location.pathname.split("/")[1] +
-            "/" +
-            document.location.pathname.split("/")[2]
+          url: `${document.location.origin}/${
+            document.location.pathname.split("/")[1]
+          }/${document.location.pathname.split("/")[2]}`
         }
       ];
       presenceData.startTimestamp = timestamps[0];

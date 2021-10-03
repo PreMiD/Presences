@@ -1,17 +1,17 @@
-var presence = new Presence({
-  clientId: "629428243061145640"
-});
-
-var user: any, search: any, title: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let presence = new Presence({
+    clientId: "629428243061145640"
+  }),
+  user: any,
+  search: any,
+  title: any,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "pinterest"
   };
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "help.pinterest.com") {
+  if (document.location.hostname === "help.pinterest.com") {
     presenceData.details = "Viewing Help Center";
     delete presenceData.state;
 
@@ -31,15 +31,15 @@ presence.on("UpdateData", async () => {
   } else if (
     document.querySelector(
       "#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
-    ) != null ||
+    ) !== null ||
     document.querySelector(
       "body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
-    ) != null
+    ) !== null
   ) {
     user = document.querySelector(
       "#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
     );
-    if (user == null) {
+    if (user === null) {
       user = document.querySelector(
         "body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
       );
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
   } else if (
     document.querySelector(
       "#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
-    ) != null ||
+    ) !== null ||
     document.querySelector(
       "body > div > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
     )
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
     );
-    if (user == null) {
+    if (user === null) {
       user = document.querySelector(
         "body > div > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
       );
@@ -75,15 +75,15 @@ presence.on("UpdateData", async () => {
   } else if (
     document.querySelector(
       "body > div > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
-    ) != null ||
+    ) !== null ||
     document.querySelector(
       "#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
-    ) != null
+    ) !== null
   ) {
     title = document.querySelector(
       "body > div > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
     );
-    if (title == null) {
+    if (title === null) {
       title = document.querySelector(
         "#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
       );
@@ -123,8 +123,8 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.querySelector("#__PWS_ROOT__ > div.App.AppBase") != null &&
-    document.querySelector("#__PWS_ROOT__ > div.App.AppBase").className ==
+    document.querySelector("#__PWS_ROOT__ > div.App.AppBase") !== null &&
+    document.querySelector("#__PWS_ROOT__ > div.App.AppBase").className ===
       "App AppBase"
   ) {
     presenceData.details = "Viewing the home page";

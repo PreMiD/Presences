@@ -4,10 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "coin"
-  };
-
-  const q = new URLSearchParams(window.location.search);
+      largeImageKey: "coin"
+    },
+    q = new URLSearchParams(window.location.search);
 
   if (window.location.href.includes("gdbrowser.com")) {
     // Levels
@@ -17,11 +16,11 @@ presence.on("UpdateData", async () => {
       window.location.pathname.toLowerCase() === "/weekly"
     ) {
       const downloads = document.getElementsByClassName(
-        "inline smaller spaced"
-      )[0].innerHTML;
-      const likes = document.getElementsByClassName("inline smaller spaced")[1]
-        .innerHTML;
-      const orbs = document.getElementsByClassName("orbs")[1].innerHTML;
+          "inline smaller spaced"
+        )[0].innerHTML,
+        likes = document.getElementsByClassName("inline smaller spaced")[1]
+          .innerHTML,
+        orbs = document.getElementsByClassName("orbs")[1].innerHTML;
       presenceData.state = `🔽 ${downloads} | 👍 ${likes} | 🔵 ${orbs}`;
       presenceData.details = `${
         document.getElementsByTagName("h1")[0].innerText
@@ -40,26 +39,22 @@ presence.on("UpdateData", async () => {
       if (document.getElementById("credits").style.display === "block") {
         presenceData.details = "Viewing the credits";
         presenceData.state = "❤";
-      } else {
-        presenceData.details = "Viewing the homepage";
-      }
+      } else presenceData.details = "Viewing the homepage";
     }
 
     // other stuff
-    if (window.location.pathname.toLowerCase() === "/iconkit") {
+    if (window.location.pathname.toLowerCase() === "/iconkit")
       presenceData.details = "In the iconkit";
-    }
 
     if (window.location.pathname.toLowerCase().includes("/search")) {
-      if (window.location.pathname.toLowerCase() === "/search") {
+      if (window.location.pathname.toLowerCase() === "/search")
         presenceData.details = "Searching for levels";
-      } else {
+      else {
         presenceData.details = "Searching for levels";
 
         // Map Packs
-        if (parseInt(q.get("mappack")) === 1) {
+        if (parseInt(q.get("mappack")) === 1)
           presenceData.state = "Viewing a map pack";
-        }
 
         // Quick Search (Now with 100% more switch)
         switch (q.get("type")) {
@@ -138,21 +133,17 @@ presence.on("UpdateData", async () => {
       }
     }
 
-    if (window.location.pathname.toLowerCase().includes("/mappacks")) {
+    if (window.location.pathname.toLowerCase().includes("/mappacks"))
       presenceData.details = "Viewing the Map Packs";
-    }
 
-    if (window.location.pathname.toLowerCase().includes("/gauntlets")) {
+    if (window.location.pathname.toLowerCase().includes("/gauntlets"))
       presenceData.details = "Viewing the Gauntlets";
-    }
 
-    if (window.location.pathname.toLowerCase().includes("/leaderboards")) {
+    if (window.location.pathname.toLowerCase().includes("/leaderboards"))
       presenceData.details = "Viewing the leaderboards";
-    }
 
-    if (window.location.pathname.toLowerCase() === "/messages") {
+    if (window.location.pathname.toLowerCase() === "/messages")
       presenceData.details = "Checking messages";
-    }
 
     if (window.location.pathname.toLowerCase().includes("/profile")) {
       presenceData.details = `Looking at ${

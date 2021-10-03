@@ -1,10 +1,10 @@
-var presence = new Presence({
-  clientId: "626496186496450570"
-});
-
-var user: any, search: any, title: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let presence = new Presence({
+    clientId: "626496186496450570"
+  }),
+  user: any,
+  search: any,
+  title: any,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -12,23 +12,22 @@ presence.on("UpdateData", async () => {
   };
 
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "forums.spongepowered.org") {
+  if (document.location.hostname === "forums.spongepowered.org") {
     if (document.location.pathname.includes("/t/")) {
       title = document.querySelector(
         "#topic-title > div > div > h1 > a.fancy-title"
       );
-      if (title == null) {
+      if (title === null) {
         title = document.querySelector(
           "#ember6 > header > div > div > div.extra-info-wrapper > div > div > h1 > a > span"
         );
       }
 
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.innerText.length > 128)
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+      else presenceData.state = title.innerText;
+
       delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/c/")) {
@@ -85,11 +84,11 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "docs.spongepowered.org") {
+  } else if (document.location.hostname === "docs.spongepowered.org") {
     title = document.querySelector(
       "body > div.wy-grid-for-nav > section > div > div > div.document > div > div > h1"
     );
-    if (title != null) {
+    if (title !== null) {
       presenceData.details = "Docs, reading:";
       presenceData.state = title.innerText;
 
@@ -104,20 +103,18 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "jd.spongepowered.org") {
+  } else if (document.location.hostname === "jd.spongepowered.org") {
     title = document.querySelector("head > title");
     title = title.innerText.split(" (")[0];
     presenceData.details = "Java Docs, viewing:";
-    if (title.length > 128) {
-      presenceData.state = title.substring(0, 125) + "...";
-    } else {
-      presenceData.state = title;
-    }
+    if (title.length > 128)
+      presenceData.state = `${title.substring(0, 125)}...`;
+    else presenceData.state = title;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "www.spongepowered.org") {
+  } else if (document.location.hostname === "www.spongepowered.org") {
     if (document.location.pathname.includes("/downloads/")) {
       presenceData.details = "Viewing downloads";
       delete presenceData.state;
@@ -143,7 +140,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "ore.spongepowered.org") {
+  } else if (document.location.hostname === "ore.spongepowered.org") {
     if (document.URL.includes("?categories=")) {
       title = document.querySelector(
         "body > div > div > div.row.project-content > div.col-md-3 > div:nth-child(3) > table > tbody > tr.selected > td:nth-child(2) > strong"
@@ -163,11 +160,9 @@ presence.on("UpdateData", async () => {
         "body > div > div > div.project-header-container > div:nth-child(1) > div > div > h1 > strong > a"
       );
       presenceData.details = "Ore, Viewing resource:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.innerText.length > 128)
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+      else presenceData.state = title.innerText;
 
       delete presenceData.smallImageKey;
 

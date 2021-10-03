@@ -23,10 +23,8 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "writing";
       data.smallImageText = "Editing";
 
-      const docName = document.querySelector("[class*='logoText-'] span");
-      const pageName = document.querySelector(
-        "[class*=--navButtonOpened-] span"
-      );
+      const docName = document.querySelector("[class*='logoText-'] span"),
+        pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
       if (!actionTimestamp) actionTimestamp = Date.now();
       if (docName) data.details = `Editing ${docName.textContent}`;
@@ -37,8 +35,8 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "reading";
     data.smallImageText = "Viewing";
 
-    const docName = document.querySelector("[class*='logoText-'] span");
-    const pageName = document.querySelector("[class*=--navButtonOpened-] span");
+    const docName = document.querySelector("[class*='logoText-'] span"),
+      pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
     if (!actionTimestamp) actionTimestamp = Date.now();
     if (docName) data.details = `Viewing ${docName.textContent}`;
@@ -47,7 +45,7 @@ presence.on("UpdateData", async () => {
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (data.details == null) {
+  if (data.details === null) {
     presence.setTrayTitle(); // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);

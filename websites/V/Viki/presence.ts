@@ -16,15 +16,14 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let title: HTMLElement | HTMLInputElement;
-
-// the video variable is a html video element
-let video: HTMLVideoElement;
+let title: HTMLElement | HTMLInputElement,
+  // the video variable is a html video element
+  video: HTMLVideoElement;
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -43,8 +42,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     if (
-      document.location.hostname == "www.viki.com" &&
-      document.location.pathname == "/"
+      document.location.hostname === "www.viki.com" &&
+      document.location.pathname === "/"
     ) {
       presenceData.details = "Browsing through";
       presenceData.smallImageKey = "reading";
@@ -52,7 +51,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/explore") &&
       document.URL.includes("genre=")
     ) {
@@ -66,7 +65,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/explore") &&
       document.URL.includes("country=")
     ) {
@@ -80,7 +79,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/explore") &&
       document.URL.includes("program=")
     ) {
@@ -90,11 +89,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Browsing through";
       presenceData.smallImageKey = "reading";
-      presenceData.state = "schedules: " + title.innerText;
+      presenceData.state = `schedules: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/explore")
     ) {
       presenceData.details = "Browsing through";
@@ -103,7 +102,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/collections/") &&
       document.location.pathname.includes("/fan")
     ) {
@@ -113,7 +112,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/collections/") &&
       document.location.pathname.includes("/viki")
     ) {
@@ -123,7 +122,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/collections/")
     ) {
       title = document.querySelector(
@@ -136,15 +135,12 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing the collection:";
       presenceData.smallImageKey = "reading";
 
-      if (title !== null) {
-        presenceData.state = title.innerText;
-      } else {
-        presenceData.state = search.textContent;
-      }
+      if (title !== null) presenceData.state = title.innerText;
+      else presenceData.state = search.textContent;
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/partners")
     ) {
       presenceData.details = "Viewing the partner page";
@@ -153,7 +149,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/networks")
     ) {
       presenceData.details = "Viewing the networks page";
@@ -162,7 +158,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/advertise")
     ) {
       presenceData.details = "Viewing the advertisers page";
@@ -171,7 +167,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/press")
     ) {
       presenceData.details = "Viewing the press center";
@@ -180,7 +176,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/users/") &&
       document.location.pathname.includes("/overview")
     ) {
@@ -194,7 +190,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/users/") &&
       document.location.pathname.includes("/about")
     ) {
@@ -204,11 +200,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the about of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText + "'s profile";
+      presenceData.state = `${title.innerText}'s profile`;
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/users/") &&
       document.location.pathname.includes("/badges")
     ) {
@@ -222,7 +218,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/users/") &&
       document.location.pathname.includes("contributions")
     ) {
@@ -232,11 +228,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the contributions";
       presenceData.smallImageKey = "reading";
-      presenceData.state = "of: " + title.innerText;
+      presenceData.state = `of: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/users/") &&
       document.location.pathname.includes("/reviews")
     ) {
@@ -250,7 +246,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/users/") &&
       document.location.pathname.includes("/collections")
     ) {
@@ -264,7 +260,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/users/") &&
       document.location.pathname.includes("/connection")
     ) {
@@ -274,11 +270,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the connections";
       presenceData.smallImageKey = "reading";
-      presenceData.state = "of: " + title.innerText;
+      presenceData.state = `of: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/users/") &&
       document.location.pathname.includes("/following")
     ) {
@@ -288,11 +284,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing all the things";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText + " follows";
+      presenceData.state = `${title.innerText} follows`;
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/about")
     ) {
       presenceData.details = "Viewing the about page";
@@ -301,7 +297,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/tv-guide")
     ) {
       presenceData.details = "Viewing the TV Guide";
@@ -310,7 +306,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/celebrities/") &&
       document.URL.includes("-works")
     ) {
@@ -324,7 +320,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/celebrities/") &&
       document.URL.includes("-honor")
     ) {
@@ -338,7 +334,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/celebrities/")
     ) {
       title = document.querySelector(
@@ -347,11 +343,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the celeb profile";
       presenceData.smallImageKey = "reading";
-      presenceData.state = "of: " + title.innerText;
+      presenceData.state = `of: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/genres/")
     ) {
       title = document.querySelector(
@@ -364,7 +360,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/genres")
     ) {
       presenceData.details = "Browsing through genres";
@@ -373,7 +369,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/tagged/news")
     ) {
       presenceData.details = "Browsing the Viki blogs";
@@ -382,7 +378,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/tagged/product")
     ) {
       presenceData.details = "Browsing the Viki blogs";
@@ -391,7 +387,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/tagged/engineering")
     ) {
       presenceData.details = "Browsing the Viki blogs";
@@ -400,7 +396,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/tagged/qc-rewards")
     ) {
       presenceData.details = "Browsing the Viki blogs";
@@ -409,7 +405,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/about")
     ) {
       presenceData.details = "Viewing the about page";
@@ -418,7 +414,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/@")
     ) {
       title = document.querySelector("div.u-flex1 h1.ui-h2.hero-title");
@@ -429,7 +425,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/") &&
       document.location.pathname.includes("-")
     ) {
@@ -441,7 +437,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/search")
     ) {
       title = document.querySelector(
@@ -454,7 +450,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "blog.viki.com" &&
+      document.location.hostname === "blog.viki.com" &&
       document.location.pathname.includes("/")
     ) {
       presenceData.details = "Browsing through the";
@@ -463,7 +459,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/apps")
     ) {
       presenceData.details = "Viewing the";
@@ -472,7 +468,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/search")
     ) {
       title = document.querySelector(
@@ -484,20 +480,20 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.innerText;
 
       presence.setActivity(presenceData);
-    } else if (document.location.hostname == "support.viki.com") {
+    } else if (document.location.hostname === "support.viki.com") {
       presenceData.details = "Viki Support page";
       delete presenceData.smallImageKey;
       delete presenceData.state;
 
       presence.setActivity(presenceData);
-    } else if (document.location.hostname == "contribute.viki.com") {
+    } else if (document.location.hostname === "contribute.viki.com") {
       presenceData.details = "Viki Contribution page";
       delete presenceData.smallImageKey;
       delete presenceData.state;
 
       presence.setActivity(presenceData);
     } else if (
-      document.location.hostname == "www.viki.com" &&
+      document.location.hostname === "www.viki.com" &&
       document.location.pathname.includes("/tv/")
     ) {
       title = document.querySelector(
@@ -518,20 +514,20 @@ presence.on("UpdateData", async () => {
   // Check if it can find the video
   if (video !== null && !isNaN(video.duration)) {
     const timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
-    const presenceData: PresenceData = {
-      details: "",
-      state: "",
-      largeImageKey: "viki",
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      ),
+      presenceData: PresenceData = {
+        details: "",
+        state: "",
+        largeImageKey: "viki",
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play,
+        startTimestamp: timestamps[0],
+        endTimestamp: timestamps[1]
+      };
 
     presenceData.details = document.querySelector(
       ".vkp-pos-container-title"

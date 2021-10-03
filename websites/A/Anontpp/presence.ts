@@ -9,9 +9,8 @@ const presence = new Presence({
   }),
   getElement = (query: string): string => {
     const element = document.querySelector(query);
-    if (element) {
-      return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return "Loading...";
+    if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
+    else return "Loading...";
   },
   videoStatus = (video: HTMLVideoElement): string => {
     return video.paused ? "pause" : "play";
@@ -41,30 +40,22 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) {
-    data.startTimestamp = elapsed;
-  }
+  if (elapsed) data.startTimestamp = elapsed;
 
   const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
     data.smallImageKey = status;
     data.smallImageText = (await strings)[status];
     if (status === "play") {
-      const timestamps = presence.getTimestamps(
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
         video.currentTime,
         video.duration
       );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
     }
   };
 
   /* Browsing Info */
-  if (showBrowseInfo) {
-    if (path === "/") {
-      data.details = "Browsing";
-    }
-  }
+  if (showBrowseInfo) if (path === "/") data.details = "Browsing";
 
   /* Video Info */
   if (showVideoInfo) {
@@ -86,7 +77,7 @@ presence.on("UpdateData", async () => {
         // Movie Logic
         data.details = "Watching Movie";
         try {
-          data.state = state[0];
+          [data.state] = state;
           await parseVideo();
         } catch {
           // deepscan

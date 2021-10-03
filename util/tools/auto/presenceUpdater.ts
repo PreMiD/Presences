@@ -64,9 +64,8 @@ const readFile = (path: string): string =>
             character + 1
           }): ${message}`
         );
-      } else {
+      } else
         console.log(flattenDiagnosticMessageText(diagnostic.messageText, "\n"));
-      }
     });
 
     if (emitResult.emitSkipped) appCode = 1;
@@ -127,10 +126,11 @@ const readFile = (path: string): string =>
     }
   },
   main = async (): Promise<void> => {
-    if (!process.env.GITHUB_ACTIONS)
+    if (!process.env.GITHUB_ACTIONS) {
       console.log(
         "\nPlease note that this script is ONLY supposed to run on a CI environment"
       );
+    }
 
     console.log("\nFETCHING...\n");
 
@@ -151,7 +151,7 @@ const readFile = (path: string): string =>
           const file = readFile(`${pF}/dist/metadata.json`);
           if (isValidJSON(file)) {
             const data = JSON.parse(file);
-            delete data["$schema"];
+            delete data.$schema;
             return [data, pF];
           } else {
             console.error(
@@ -214,7 +214,7 @@ const readFile = (path: string): string =>
 
         if (
           !metadataFile ||
-          (metadataFile && valid(metadataFile.version) == null)
+          (metadataFile && valid(metadataFile.version) === null)
         ) {
           const meta =
             metadataFile && metadataFile.service
@@ -232,9 +232,7 @@ const readFile = (path: string): string =>
         await compile(sources);
 
         const jsFiles = glob(`${path}dist/*.js`);
-        for (const file of jsFiles) {
-          await polyfill(file);
-        }
+        for (const file of jsFiles) await polyfill(file);
 
         if (!existsSync(`${path}dist/presence.js`)) {
           const meta = metadataFile.service ? metadataFile.service : path;

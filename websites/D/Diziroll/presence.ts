@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
   } else if (path.startsWith("/hesabim")) {
     presenceData.details = "Bir sayfaya bakıyor:";
     presenceData.state = "Hesabım";
-  } else if (path == "/") {
+  } else if (path === "/") {
     presenceData.details = "Bir sayfaya bakıyor:";
     presenceData.state = "Ana Sayfa";
   } else if (document.getElementById("archive-page")) {
@@ -45,10 +45,9 @@ presence.on("UpdateData", async () => {
       { label: "İzle", url: document.location.href },
       {
         label: "Diziyi Görüntüle",
-        url:
-          document.location.origin +
-          "/" +
+        url: `${document.location.origin}/${
           document.location.pathname.split("/")[1]
+        }`
       }
     ];
     const timestamps = presence.getTimestamps(

@@ -9,12 +9,12 @@ const presence = new Presence({
 let browsingStamp = 0; //Last started activity
 
 presence.on("UpdateData", async () => {
-  const host = window.location.hostname.replace("www.", "");
-  const path = window.location.pathname.split("/").slice(1);
-  const presenceData: PresenceData = {
-    details: "Keep Talking and Nobody Explodes",
-    largeImageKey: "logo_big"
-  };
+  const host = window.location.hostname.replace("www.", ""),
+    path = window.location.pathname.split("/").slice(1),
+    presenceData: PresenceData = {
+      details: "Keep Talking and Nobody Explodes",
+      largeImageKey: "logo_big"
+    };
 
   switch (host) {
     //Keep Talking Game
