@@ -46,7 +46,7 @@ presence.on("UpdateData", () => {
     if (document.location.pathname.startsWith("/photos/search/")) {
       const photoname = document.querySelector("head > title").textContent;
       presenceData.details = "Searching photos of:";
-      presenceData.state = photoname.split(" - ")[0];
+      [presenceData.state] = photoname.split(" - ");
     } else presenceData.details = "Browsing the photos";
   } else if (document.location.pathname.startsWith("/brand"))
     presenceData.details = "Editing his brand";
