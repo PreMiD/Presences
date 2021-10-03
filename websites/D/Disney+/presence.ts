@@ -85,8 +85,8 @@ presence.on("UpdateData", async () => {
           ".btm-media-overlays-container .subtitle-field"
         );
 
-      title = titleField?.textContent;
-      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+      title = titleField?.innerText;
+      subtitle = subtitleField?.innerText; // episode or empty if it's a movie
 
       if (!privacy && groupWatchId) {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
@@ -156,8 +156,8 @@ presence.on("UpdateData", async () => {
     `);
 
     if (seriesFields.length > 0) {
-      title = seriesFields[0]?.textContent;
-      subtitle = seriesFields[1]?.textContent;
+      title = seriesFields[0]?.innerText;
+      subtitle = seriesFields[1]?.innerText;
     } else {
       const movieField: HTMLImageElement = document.querySelector(
         "#webAppScene main #group + div:not([id]) img[alt]"
@@ -197,8 +197,8 @@ presence.on("UpdateData", async () => {
           ".controls-overlay .show-title"
         );
 
-      title = titleField?.textContent;
-      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+      title = titleField?.innerText;
+      subtitle = subtitleField?.innerText; // episode or empty if it's a movie
 
       if (privacy)
         data.state = subtitle ? strings.watchingSeries : strings.watchingMovie;
