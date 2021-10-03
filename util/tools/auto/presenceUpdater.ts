@@ -1,23 +1,13 @@
 import "source-map-support/register";
 
-import {
-  CompilerOptions,
-  createProgram,
-  flattenDiagnosticMessageText,
-  getPreEmitDiagnostics
-} from "typescript";
-import {
-  DeleteWriteOpResultObject,
-  MongoClient,
-  UpdateWriteOpResult
-} from "mongodb";
-import { existsSync, readFileSync, writeFileSync } from "fs";
-import { join, normalize, resolve as rslv, sep } from "path";
-
-import { sync as glob } from "glob";
-import { minify as terser } from "terser";
 import { transformFileAsync as transform } from "@babel/core";
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { sync as glob } from "glob";
+import { DeleteWriteOpResultObject, MongoClient, UpdateWriteOpResult } from "mongodb";
+import { join, normalize, resolve as rslv, sep } from "path";
 import { valid } from "semver";
+import { minify as terser } from "terser";
+import { CompilerOptions, createProgram, flattenDiagnosticMessageText, getPreEmitDiagnostics } from "typescript";
 
 const url = process.env.MONGO_URL,
   dbname = "PreMiD";
