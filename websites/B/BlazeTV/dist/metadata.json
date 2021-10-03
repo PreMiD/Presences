@@ -1,0 +1,17 @@
+{
+  "author": {
+    "name": "The Gamerzs",
+    "id": "208105877838888960"
+  },
+  "url": ["www.blazetv.com", "get.blazetv.com", "shop.blazemedia.com"],
+  "description": {
+    "en": "News & entertainment for people who love America."
+  },
+  "service": "BlazeTV",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/ONlxAWi.jpg",
+  "thumbnail": "https://i.imgur.com/T61DujT.png",
+  "color": "#00809D",
+  "tags": ["news", "videos", "streams"],
+  "category": "videos"
+}
