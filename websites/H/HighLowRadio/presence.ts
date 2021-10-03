@@ -6,8 +6,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -16,7 +16,7 @@ let strack, sartist, slisteners, slive, sDJ, sduration, selapsed;
 function newStats(): void {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function (): void {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       const data = JSON.parse(this.responseText);
       strack = data.now_playing.song.title;
       sartist = data.now_playing.song.artist;
@@ -35,16 +35,16 @@ function newStats(): void {
 setInterval(newStats, 1000);
 newStats();
 
-let lastTitle;
-let lastTimeStart = Math.floor(Date.now() / 1000);
+let lastTitle,
+  lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", function () {
   const presenceData: PresenceData = {
     largeImageKey: "hlr"
   };
 
-  if (sduration == 0) {
-    if (lastTitle != strack) {
+  if (sduration === 0) {
+    if (lastTitle !== strack) {
       lastTitle = strack;
       lastTimeStart = Math.floor(Date.now() / 1000);
     }
@@ -61,19 +61,17 @@ presence.on("UpdateData", function () {
   }
 
   if (slive) {
-    presenceData.details = strack + " - " + sartist;
-    presenceData.state = "Listening to " + sDJ;
+    presenceData.details = `${strack} - ${sartist}`;
+    presenceData.state = `Listening to ${sDJ}`;
   } else {
     presenceData.details = strack;
-    presenceData.state = "by: " + sartist;
+    presenceData.state = `by: ${sartist}`;
   }
-  presenceData.smallImageText = "Listeners: " + slisteners;
+  presenceData.smallImageText = `Listeners: ${slisteners}`;
   presenceData.smallImageKey = "play";
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

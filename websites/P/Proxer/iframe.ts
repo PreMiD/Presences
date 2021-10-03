@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
   if (document.getElementById("proxerToken")) return;
 
   const videos = document.getElementsByTagName("video");
-  if (videos.length == 0) return;
+  if (videos.length === 0) return;
   const video = videos[0];
 
   if (video) {
@@ -16,7 +16,5 @@ iframe.on("UpdateData", async () => {
       duration: video.duration,
       paused: video.paused
     });
-  } else {
-    iframe.send(null);
-  }
+  } else iframe.send(null);
 });

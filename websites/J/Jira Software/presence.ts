@@ -13,9 +13,9 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname.match(/[a-z0-9]+[.]atlassian[.]net/)) {
     //If user is not creating a new issue.
-    if (document.title != "Create issue - Jira") {
+    if (document.title !== "Create issue - Jira") {
       //Projects homepage section.
-      if (path == "/projects" || path == "/secure/BrowseProjects.jspa") {
+      if (path === "/projects" || path === "/secure/BrowseProjects.jspa") {
         presenceData.details = "Browsing Projects.";
         presenceData.startTimestamp = browsingStamp;
       }
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
           const issueName = path.split("/").pop();
 
           presenceData.startTimestamp = browsingStamp;
-          if (issueName == "") {
+          if (issueName === "") {
             presenceData.details = "Tracking Issues.";
             presenceData.state = `Project: ${projectName}`;
           } else {
@@ -93,10 +93,11 @@ presence.on("UpdateData", async () => {
             else {
               if (path.includes("/apps/")) {
                 if (path.includes("/app-fields")) {
-                  presenceData.details = `Editing Apps settings: App fields.`;
+                  presenceData.details = "Editing Apps settings: App fields.";
                   presenceData.state = `Project: ${projectName}`;
                 } else {
-                  presenceData.details = `Editing Apps settings: Project automation.`;
+                  presenceData.details =
+                    "Editing Apps settings: Project automation.";
                   presenceData.state = `Project: ${projectName}`;
                 }
               } else {
@@ -141,7 +142,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       }
       //Your work section.
-      else if (path == "/jira/your-work") {
+      else if (path === "/jira/your-work") {
         presenceData.details = "Viewing personal Issues.";
         presenceData.startTimestamp = browsingStamp;
       }
@@ -151,7 +152,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       }
       //Advanced Issues section.
-      else if (path == "/issues/") {
+      else if (path === "/issues/") {
         enum issuesSection {
           "My open issues." = -1,
           "Reported by me." = -2,
@@ -172,17 +173,17 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       }
       //Filters section.
-      else if (path == "/secure/ManageFilters.jspa") {
+      else if (path === "/secure/ManageFilters.jspa") {
         presenceData.details = "Managing Filters.";
         presenceData.startTimestamp = browsingStamp;
       }
       //Dashboards homepage section.
-      else if (path == "/jira/dashboards") {
+      else if (path === "/jira/dashboards") {
         presenceData.details = "Browsing Dashboards.";
         presenceData.startTimestamp = browsingStamp;
       }
       //Dashboard section.
-      else if (path == "/secure/Dashboard.jspa") {
+      else if (path === "/secure/Dashboard.jspa") {
         const dashboardName = document.querySelector(
           "#dashboard-content > div:first-child > div > div:first-child > h1"
         ).innerHTML;
@@ -192,7 +193,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       }
       //People homepage section. (yeah, path is correct, don't ask me why there is a "search", ~isladot)
-      else if (path == "/jira/people/search") {
+      else if (path === "/jira/people/search") {
         presenceData.details = "Browsing Users.";
         presenceData.startTimestamp = browsingStamp;
       }
@@ -217,7 +218,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       }
       //Personal settings section.
-      else if (path == "/secure/ViewPersonalSettings.jspa") {
+      else if (path === "/secure/ViewPersonalSettings.jspa") {
         presenceData.details = "Editing Personal settings.";
         presenceData.startTimestamp = browsingStamp;
       }
@@ -229,10 +230,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
   if (document.location.pathname.includes("/videos")) {
-    if (playback == true && !isNaN(duration)) {
+    if (playback === true && !isNaN(duration)) {
       const videoTitle = document.querySelector(
           "div > div.title-views.flex.column > h1"
         ),
@@ -70,8 +70,7 @@ presence.on("UpdateData", async () => {
         videoTitle !== null ? videoTitle.textContent : "Title not found";
       presenceData.state = brand.textContent;
     }
-  } else {
-    presenceData.details = "Browsing..";
-  }
+  } else presenceData.details = "Browsing..";
+
   presence.setActivity(presenceData);
 });

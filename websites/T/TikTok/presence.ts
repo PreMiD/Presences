@@ -23,15 +23,14 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "tiktok",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "tiktok",
+      startTimestamp: browsingStamp
+    },
     newLang = await presence.getSetting("lang").catch(() => "en"),
     [, page, pageType] = location.pathname.split("/");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

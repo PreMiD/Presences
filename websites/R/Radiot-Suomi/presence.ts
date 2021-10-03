@@ -7,8 +7,8 @@ presence.on("UpdateData", async () => {
   const presenceData = {
     largeImageKey: "radiot"
   };
-  if (document.location.hostname == "www.radio-suomi.com") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.radio-suomi.com") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "🌐 Etusivulla";
     } else if (document.querySelector(".song-name")) {
@@ -24,13 +24,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = `📻 ${
         document.querySelector(".mdc-typography--display1").textContent
       }`;
-      presenceData.state = `🎵 Ei saatavilla`;
+      presenceData.state = "🎵 Ei saatavilla";
     }
   }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

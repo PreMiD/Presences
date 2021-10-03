@@ -8,15 +8,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 function newStats(): void {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function (): void {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       const data = JSON.parse(this.responseText);
       strack = data.now_playing.song.title;
       sartist = data.now_playing.song.artist;
@@ -34,13 +34,12 @@ newStats();
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "flare"
-  };
-
-  const timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
+      largeImageKey: "flare"
+    },
+    timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
   presenceData.smallImageKey = "play";
-  presenceData.details = sartist + " - " + strack;
-  presenceData.state = slisteners + " Listeners";
+  presenceData.details = `${sartist} - ${strack}`;
+  presenceData.state = `${slisteners} Listeners`;
   presenceData.smallImageText = "Playing";
   presenceData.startTimestamp = timestamps[0];
   presenceData.endTimestamp = timestamps[1];

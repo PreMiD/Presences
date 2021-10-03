@@ -93,12 +93,10 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presenceData.details = (await strings).browsing;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).browsing;
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

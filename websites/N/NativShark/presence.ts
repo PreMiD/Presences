@@ -37,9 +37,8 @@ presence.on("UpdateData", async () => {
       let unitText = unitInfo[0];
       const unitStatus = unitInfo[1];
 
-      if (unitText === "All Units") {
-        unitText = "Today's units";
-      }
+      if (unitText === "All Units") unitText = "Today's units";
+
       presenceData.details = "Viewing the dashboard";
       presenceData.state = `${unitText}: ${unitStatus}`;
     }
@@ -68,10 +67,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData, true);
-  }
+  } else presence.setActivity(presenceData, true);
 });

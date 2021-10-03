@@ -1,8 +1,7 @@
-var presence = new Presence({
-  clientId: "618233809481236491"
-});
-
-const timeElapsed = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "618233809481236491"
+  }),
+  timeElapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname.startsWith("/pages/playback_history")) {
@@ -36,7 +35,7 @@ presence.on("UpdateData", async () => {
       playCheck = document.querySelector(
         "div#r4_audio_player.unselectable.playing"
       );
-    if (playCheck == null) {
+    if (playCheck === null) {
       const presenceData: PresenceData = {
         details: "Not listening.",
         largeImageKey: "rainwv",
@@ -45,8 +44,8 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       const presenceData: PresenceData = {
-        details: songName.innerText + " by " + artistName.innerText,
-        state: "Listening on " + stationName.textContent,
+        details: `${songName.innerText} by ${artistName.innerText}`,
+        state: `Listening on ${stationName.textContent}`,
         largeImageKey: "rainwv",
         smallImageKey: "live",
         startTimestamp: timeElapsed

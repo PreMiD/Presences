@@ -22,23 +22,20 @@ presence.on("UpdateData", async () => {
     },
     video: HTMLVideoElement = document.querySelector("video");
 
-  if (video != null && !isNaN(video.duration)) {
+  if (video !== null && !isNaN(video.duration)) {
     const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
 
     if (document.location.pathname.includes("/shows/view")) {
-      data.details =
+      data.details = `${
         document.querySelector(".watch-heading > h1 > span").previousSibling
-          .textContent +
-        "(" +
-        document.querySelector(".watch-heading > h1 > span").textContent +
-        ")";
-      data.state =
-        document.querySelector(".seasons-switcher > span").textContent +
-        " " +
-        document.querySelector(".episodes-switcher > span").textContent;
+          .textContent
+      }(${document.querySelector(".watch-heading > h1 > span").textContent})`;
+      data.state = `${
+        document.querySelector(".seasons-switcher > span").textContent
+      } ${document.querySelector(".episodes-switcher > span").textContent}`;
     } else if (document.location.pathname.includes("/movies/view")) {
       data.details = document.querySelector(
         ".watch-heading > h1 > span"

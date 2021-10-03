@@ -1,15 +1,14 @@
-const presence = new Presence({ clientId: "714636053235105832" });
-
-const strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+const presence = new Presence({ clientId: "714636053235105832" }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused"
+  });
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--)
     ret += parseInt(list[index]) * 60 ** index;
-  }
+
   return ret;
 }
 
@@ -56,27 +55,22 @@ presence.on("UpdateData", async () => {
     ).textContent;
     audioDuration = audioTimeLeft.replace(/(.*)(?=\/)/, "").replace("/ ", "");
 
-    const timestamps = getTimestamps(audioTime, audioDuration);
-
-    const data: PresenceData = {
-      details: title,
-      state: author,
-      largeImageKey: "logo",
-      smallImageKey: paused ? "pause" : "play",
-      smallImageText: paused ? (await strings).pause : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+    const timestamps = getTimestamps(audioTime, audioDuration),
+      data: PresenceData = {
+        details: title,
+        state: author,
+        largeImageKey: "logo",
+        smallImageKey: paused ? "pause" : "play",
+        smallImageText: paused ? (await strings).pause : (await strings).play,
+        startTimestamp: timestamps[0],
+        endTimestamp: timestamps[1]
+      };
 
     if (paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
     }
 
-    if (title !== null && author !== null) {
-      presence.setActivity(data, !paused);
-    }
-  } else {
-    presence.clearActivity();
-  }
+    if (title !== null && author !== null) presence.setActivity(data, !paused);
+  } else presence.clearActivity();
 });

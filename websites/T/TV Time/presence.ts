@@ -9,13 +9,13 @@ presence.on("UpdateData", async () => {
   };
 
   if (
-    document.location.pathname == "/en" ||
-    document.location.pathname == "/fr" ||
-    document.location.pathname == "/es" ||
-    document.location.pathname == "/it" ||
-    document.location.pathname == "/pt_PT" ||
-    document.location.pathname == "/pt_BR" ||
-    document.location.pathname == "/de"
+    document.location.pathname === "/en" ||
+    document.location.pathname === "/fr" ||
+    document.location.pathname === "/es" ||
+    document.location.pathname === "/it" ||
+    document.location.pathname === "/pt_PT" ||
+    document.location.pathname === "/pt_BR" ||
+    document.location.pathname === "/de"
   ) {
     (data.details = "Viewing Watchlist"), (data.startTimestamp = browsingStamp);
     presence.setActivity(data);
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
           "div.info-box h1 .episode-label"
         ).textContent;
       (data.details = "Viewing an Episode"),
-        (data.state = showname + " - " + shownumber);
+        (data.state = `${showname} - ${shownumber}`);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     } else if (document.location.pathname.endsWith("/explore")) {

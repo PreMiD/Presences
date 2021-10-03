@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "692230804402864148"
 });
 
@@ -7,11 +7,8 @@ var presence = new Presence({
  *
  */
 function elementExist(element): boolean {
-  if (typeof element != "undefined" && element != null) {
-    return true;
-  } else {
-    return false;
-  }
+  if (typeof element !== "undefined" && element !== null) return true;
+  else return false;
 }
 
 /**
@@ -28,11 +25,9 @@ function firstLetterUp(str): string {
  */
 function getTrackPlaying(): string {
   const element = document.querySelector("#trackInfo > a");
-  if (elementExist(element) && element.innerHTML.length > 0) {
-    return "🎧  " + firstLetterUp(element.innerHTML);
-  } else {
-    return "📀 Navegando...";
-  }
+  if (elementExist(element) && element.innerHTML.length > 0)
+    return `🎧  ${firstLetterUp(element.innerHTML)}`;
+  else return "📀 Navegando...";
 }
 
 /**
@@ -40,11 +35,9 @@ function getTrackPlaying(): string {
  */
 function getArtistPlaying(): string {
   const element = document.querySelector("#trackInfo > span > a");
-  if (elementExist(element) && element.innerHTML != " - ") {
-    return "🎤  " + firstLetterUp(element.innerHTML);
-  } else {
-    return "🇧🇷 suamusica.com.br";
-  }
+  if (elementExist(element) && element.innerHTML !== " - ")
+    return `🎤  ${firstLetterUp(element.innerHTML)}`;
+  else return "🇧🇷 suamusica.com.br";
 }
 
 /**
@@ -52,15 +45,12 @@ function getArtistPlaying(): string {
  */
 function actionPlay(): string {
   const element = document.querySelector("a.btnPlayer.playPause.pause");
-  if (elementExist(element)) {
-    return "play";
-  } else {
-    return "pause";
-  }
+  if (elementExist(element)) return "play";
+  else return "pause";
 }
 
 presence.on("UpdateData", async () => {
-  var presenceData = {
+  const presenceData = {
     largeImageKey: "mini_logo",
     smallImageKey: actionPlay(),
     smallImageText: "suamusica.com.br",
@@ -70,10 +60,8 @@ presence.on("UpdateData", async () => {
     endTimestamp: 0
   };
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -60,19 +60,20 @@ presence.on("UpdateData", async () => {
 
       if (buttons) {
         const code = document.querySelector(".partymode-info > #code");
-        if (code)
+        if (code) {
           data.buttons = [
             {
               label: "Join Party",
               url: document.URL
             }
           ];
+        }
       }
     }
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (data.details == null) {
+  if (data.details === null) {
     presence.setTrayTitle(); // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);

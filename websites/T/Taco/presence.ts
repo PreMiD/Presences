@@ -4,10 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "taco"
-  };
-
-  const pathSplits = location.pathname.split("/");
+      largeImageKey: "taco"
+    },
+    pathSplits = location.pathname.split("/");
   switch (pathSplits[1]) {
     case "guide":
       data.details = "Reading the guide";
@@ -26,10 +25,5 @@ presence.on("UpdateData", async () => {
       data.details = "Homepage";
       break;
   }
-
-  // If data doesn't exist clear else set activity to the presence data
-  if (data.details == null) {
-    presence.setTrayTitle(); // Clear tray
-    presence.setActivity(); // Clear activity
-  } else presence.setActivity(data);
+  presence.setActivity(data);
 });

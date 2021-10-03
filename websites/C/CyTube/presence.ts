@@ -45,8 +45,8 @@ function getTimestamp(time: number): string {
   const { sec, min, hrs } = getTimes(time);
 
   return hrs > 0
-    ? hrs + ":" + lessTen(min) + min + ":" + lessTen(sec) + sec
-    : min + ":" + lessTen(sec) + sec;
+    ? `${hrs}:${lessTen(min)}${min}:${lessTen(sec)}${sec}`
+    : `${min}:${lessTen(sec)}${sec}`;
 }
 
 interface Match {
@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
         document.body.className.includes("chatOnly") ||
         !document.getElementById("videowrap")
       ),
-      active_content: boolean = iframe_response.site != undefined,
+      active_content: boolean = iframe_response.site !== undefined,
       room: string = path.split("r/")[1],
       motd: string = document.getElementById("motd").textContent;
 
@@ -185,13 +185,13 @@ presence.on("UpdateData", async () => {
         });
       }
     }
-  } else if (path == "/") {
+  } else if (path === "/") {
     presenceData.details = "On Homepage";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   } else if (path.includes("/account/")) {
     presenceData.details = "Managing Account";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  } else if (path == "/contact") {
+  } else if (path === "/contact") {
     presenceData.details = "Contacting Support";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }

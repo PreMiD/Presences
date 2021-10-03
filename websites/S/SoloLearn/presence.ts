@@ -54,7 +54,7 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const host = location.host,
+  const { host } = location,
     path = location.pathname.replace(/\/?$/, "/"),
     showBrowsing = await presence.getSetting("browse"),
     showCourses = await presence.getSetting("course"),
@@ -78,11 +78,8 @@ presence.on("UpdateData", async () => {
 
   if (showBrowsing) {
     if (host === "www.sololearn.com") {
-      for (const [k, v] of Object.entries(statics)) {
-        if (path.match(k)) {
-          data = { ...data, ...v };
-        }
-      }
+      for (const [k, v] of Object.entries(statics))
+        if (path.match(k)) data = { ...data, ...v };
 
       if (path === "/") {
         data.details = "Browsing...";
@@ -161,7 +158,5 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(data);
-  } else {
-    presence.setActivity();
-  }
+  } else presence.setActivity();
 });

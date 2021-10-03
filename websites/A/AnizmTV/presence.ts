@@ -4,18 +4,8 @@ const presence = new Presence({ clientId: "778715860638367804" }),
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing",
     anime: "general.anime"
-  });
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const startTimestamp = Math.floor(Date.now() / 1000);
+  }),
+  startTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement, tags: HTMLElement;
 
@@ -102,9 +92,8 @@ presence.on("UpdateData", async () => {
         url: animeSeries
       }
     ];
-  }
-  //Series part
-  else if (title) {
+  } else if (title) {
+    //Series part
     data.details = title.textContent;
     data.buttons = [
       {
@@ -112,9 +101,7 @@ presence.on("UpdateData", async () => {
         url: animeSeries
       }
     ];
-  }
-  //Home page part
-  else if (
+  } else if (
     document.location.pathname.includes("/SeriEkle") ||
     document.location.pathname.includes("/Bolac") ||
     document.location.pathname.includes("/TopluBolac") ||
@@ -132,6 +119,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/uyeol") ||
     window.location.href.indexOf("?sayfa=") > 1
   )
+    //Home page part
     data.startTimestamp = startTimestamp;
   else {
     data.details = (await strings).browsing;
@@ -145,12 +133,10 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const timestamps = getTimestamps(
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
     }
   }
 

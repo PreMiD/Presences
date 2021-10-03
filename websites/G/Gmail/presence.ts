@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "logo"
     },
     path = window.location.href,
-    emailCheck = window.location.href.split("/").length == 7 ? false : true;
+    emailCheck = window.location.href.split("/").length === 7 ? false : true;
 
   if (emailCheck) {
     if (path.endsWith("#category/social")) {
@@ -114,10 +114,8 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

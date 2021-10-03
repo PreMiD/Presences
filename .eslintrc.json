@@ -6,7 +6,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:eqeqeq-fix/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -16,13 +17,13 @@
   "parserOptions": {
     "ecmaVersion": 2021,
     "project": "./tsconfig.json"
+    
   },
   "rules": {
     "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
     "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
     "quotes": ["warn", "double", { "avoidEscape": true }],
     "camelcase": ["warn", { "properties": "always" }],
-    "indent": [2, 2, { "SwitchCase": 1 }],
     "curly": ["warn", "multi-or-nest"],
     "eqeqeq": ["error", "always"],
     "comma-dangle": ["warn", "never"],
@@ -40,7 +41,6 @@
     "key-spacing": ["warn", { "beforeColon": false }],
     "dot-notation": "error",
     "no-case-declarations": "error",
-    "no-mixed-operators": "error",
     "brace-style": "error",
     "template-curly-spacing": "warn",
     "no-console": "error",

@@ -47,12 +47,13 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
         }
       });
 
-    if (missingMetadata && missingMetadata.length > 0)
+    if (missingMetadata && missingMetadata.length > 0) {
       console.log(
         `\nThe following presence${
           missingMetadata.length > 1 ? "s don't" : "doesn't"
         } include a metadata file :\n${missingMetadata.join(", ")}\n`
       );
+    }
 
     for (const metadata of allmeta) {
       if (metadata) {

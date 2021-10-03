@@ -41,10 +41,10 @@ presence.on("UpdateData", async () => {
       largeImageKey: "wt-logo",
       details: "Bir yazara göz atıyor:",
       state:
-        author && author.textContent != "" ? author.textContent : "Belirsiz",
+        author && author.textContent !== "" ? author.textContent : "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (title && title.textContent != "") {
+  } else if (title && title.textContent !== "") {
     const postCreated = document.querySelector(
         "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > time"
       )
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
       smallImageText: "Bir gönderi okuyor...",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (videoTitle && videoTitle.textContent != "") {
+  } else if (videoTitle && videoTitle.textContent !== "") {
     const postCreated = document.querySelector(
         "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > time"
       )
@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
   } else {
     presence.setActivity({
       largeImageKey: "wt-logo",
-      details: `Bir sayfaya göz atıyor:`,
+      details: "Bir sayfaya göz atıyor:",
       state: pages[page] || pages[page.slice(0, -1)] || "Ana Sayfa",
       smallImageKey:
         smallImageKey[page] || smallImageKey[page.slice(0, -1)] || "NOTHING",

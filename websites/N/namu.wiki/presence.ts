@@ -96,10 +96,11 @@ presence.on("UpdateData", async () => {
 
   let page;
   /* View Contribute */
-  if ((page = validateContributeUrl.exec(path)))
+  if ((page = validateContributeUrl.exec(path))) {
     if (page[1] === "author") page = `User: ${page[2]}`;
     else page = "IP User";
-  /* View Membership */ else if ((page = validateMembershipUrl.exec(path))) {
+  } else if ((page = validateMembershipUrl.exec(path))) {
+    /* View Membership */
     presenceData.details = "Member Page";
     page = membersMapping[page[1]];
 
@@ -118,16 +119,17 @@ presence.on("UpdateData", async () => {
     action === "thread" ||
     action === "edit_request"
   )
-    page = document.querySelector(`h1 > a`).textContent;
+    page = document.querySelector("h1 > a").textContent;
   // H1 Tag Only one
   /* Other */ else if (details !== undefined)
     page = decodeURI(path.substring(`/${action}/`.length));
   else page = null;
 
-  if (action === "w")
+  if (action === "w") {
     presenceData.buttons = [
       { label: "View Page", url: document.location.href }
     ];
+  }
   if (page !== null && page !== undefined)
     presenceData.state = page.length > 128 ? `${page.slice(0, 120)}...` : page;
 
@@ -138,7 +140,7 @@ presence.on("UpdateData", async () => {
    */
   if (details !== undefined) {
     const members = document.querySelectorAll(
-      `#app > div > div > nav > ul[class=r] > li > div > div > div`
+      "#app > div > div > nav > ul[class=r] > li > div > div > div"
     );
     if (members[1].textContent.indexOf("Please login!") === -1) {
       presenceData.smallImageKey = "user";

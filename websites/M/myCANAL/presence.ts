@@ -48,13 +48,8 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      if (title !== null && subtitle !== null) {
+      if (title !== null && subtitle !== null)
         presence.setActivity(data, !video.paused);
-      }
-    } else {
-      (data.details = "Watching an Ad"), presence.setActivity(data);
-    }
-  } else {
-    (data.details = "Browsing..."), presence.setActivity(data);
-  }
+    } else (data.details = "Watching an Ad"), presence.setActivity(data);
+  } else (data.details = "Browsing..."), presence.setActivity(data);
 });

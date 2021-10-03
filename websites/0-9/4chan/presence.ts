@@ -1,8 +1,8 @@
 const presence = new Presence({
-  clientId: "706956748329713685"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
-var pathname, query1, query2, query3, query4, query5, query6, query7;
+    clientId: "706956748329713685"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let pathname, query1, query2, query3, query4, query5, query6, query7;
 presence.on("iFrameData", (data) => {
   pathname = data.pathnameA;
   query1 = data.queryA;
@@ -15,7 +15,7 @@ presence.on("iFrameData", (data) => {
 });
 presence.on("UpdateData", () => {
   if (!location.pathname.startsWith("/frames")) {
-    pathname = window.location.pathname;
+    ({ pathname } = window.location);
     query1 = document.querySelector("div.boardBanner>div.boardTitle");
     query2 = document.querySelector("div.boxbar>h2");
     query3 = document.querySelector("div.pagelist>div.pages");
@@ -32,20 +32,20 @@ presence.on("UpdateData", () => {
     query7 = query7 ? true : false;
   }
   let title;
-  var getTitle = function (): string {
-    if (!query1) title = query2;
-    else title = query1;
-    if (query3) title += ` - ${query4}/${query3}`;
-    return title;
-  };
   const presenceData: PresenceData = {
-    details: getTitle(),
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  };
-  if (pathname == "/") presenceData.details = "Home";
+      details: getTitle(),
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
+    getTitle = function (): string {
+      if (!query1) title = query2;
+      else title = query1;
+      if (query3) title += ` - ${query4}/${query3}`;
+      return title;
+    };
+  if (pathname === "/") presenceData.details = "Home";
   else if (pathname && pathname.includes("/thread/")) {
-    var ThreadId = pathname.split("/");
+    const ThreadId = pathname.split("/");
     presenceData.state = `Thread ${
       ThreadId[Number(ThreadId.indexOf("thread") + 1)]
     }`;
@@ -55,7 +55,7 @@ presence.on("UpdateData", () => {
     presenceData.smallImageText = "Replying/Posting";
   }
   presenceData.startTimestamp = browsingStamp;
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

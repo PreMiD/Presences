@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
       "#page-content > div:nth-child(1) > div.stats-body > div > h1"
     );
     presenceData.details = "Viewing item stats:";
-    presenceData.state = title.innerText;
+    presenceData.state = title.textContent;
   } else if (document.location.pathname.includes("/stats/")) {
     if (
       document.location.pathname.includes(
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
           "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(2) > div.text > div.value"
         );
       presenceData.details = "Viewing Key price:";
-      presenceData.state = `${title.innerText} | ${sec.innerText}`;
+      presenceData.state = `${title.textContent} | ${sec.textContent}`;
     } else if (document.location.pathname.includes("Unique/Earbuds")) {
       const title = document.querySelector(
           "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(1) > div.text > div.value"
@@ -37,13 +37,13 @@ presence.on("UpdateData", async () => {
           "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(2) > div.text > div.value"
         );
       presenceData.details = "Viewing Earbuds price:";
-      presenceData.state = `${title.innerText} | ${sec.innerText}`;
+      presenceData.state = `${title.textContent} | ${sec.textContent}`;
     } else {
       const title = document.querySelector(
         "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-header > div.stats-header-item > div.stats-header-title"
       );
       presenceData.details = "Viewing item:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
     }
   } else if (document.location.pathname.includes("/u/")) {
     const title = document.querySelector(
@@ -72,8 +72,8 @@ presence.on("UpdateData", async () => {
       sec = document.querySelector(
         "#page-content > div > div > div > div.panel-body > div > div.item-wrapper > div.item-text > h2"
       );
-    presenceData.details = `Viewing ${title.innerText}:`;
-    presenceData.state = sec.innerText;
+    presenceData.details = `Viewing ${title.textContent}:`;
+    presenceData.state = sec.textContent;
   } else if (document.location.pathname.includes("/settings")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Settings";

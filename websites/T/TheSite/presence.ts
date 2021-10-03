@@ -9,9 +9,8 @@ const presence = new Presence({
   }),
   getElement = (query: string): string => {
     const element = document.querySelector(query);
-    if (element) {
-      return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return "Loading...";
+    if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
+    else return "Loading...";
   },
   videoStatus = (video: HTMLVideoElement): string => {
     return video.paused ? "pause" : "play";
@@ -196,9 +195,7 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) {
-    data.startTimestamp = elapsed;
-  }
+  if (elapsed) data.startTimestamp = elapsed;
 
   const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
@@ -274,8 +271,8 @@ presence.on("UpdateData", async () => {
         setting = await presence.getSetting("show-format"),
         title: string = getElement(".mv-movie-title > span > a");
       if (title !== "Loading...") {
-        const season = regex.groups.season,
-          episode = regex.groups.episode,
+        const { season } = regex.groups,
+          { episode } = regex.groups,
           state = setting
             .replace("%show%", title)
             .replace("%season%", season)
@@ -305,8 +302,8 @@ presence.on("UpdateData", async () => {
         setting = await presence.getSetting("show-format"),
         title: string = getElement(".full-title > .content > .title");
       if (title !== "Loading...") {
-        const season = regex.groups.season,
-          episode = regex.groups.episode,
+        const { season } = regex.groups,
+          { episode } = regex.groups,
           state = setting
             .replace("%show%", title)
             .replace("%season%", season)
@@ -331,7 +328,7 @@ presence.on("UpdateData", async () => {
 
   /* Search Info */
   if (showSearchInfo) {
-    if (search.value != searchText) {
+    if (search.value !== searchText) {
       searchText = search.value;
       searchElapsed = Date.now();
     }

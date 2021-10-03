@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname == "/home") {
+  if (document.location.pathname === "/home") {
     presenceData.details = "Viewing...";
     presenceData.state = "The Homepage";
     presenceData.smallImageKey = "searching";
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "searching";
     }
   } else if (document.location.pathname.includes("/beatmapsets")) {
-    if (document.location.pathname == "/beatmapsets") {
+    if (document.location.pathname === "/beatmapsets") {
       presenceData.details = "Browsing...";
       presenceData.state = "Beatmap Listings";
       presenceData.smallImageKey = "searching";
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
       diffName = document.querySelector(
         ".beatmapset-header__diff-name"
       ).textContent;
-      if (title != null && diffName != null) {
+      if (title !== null && diffName !== null) {
         (beatmapTitle = `${title} [${diffName}]`),
           (presenceData.details = "Looking at the beatmap:");
         presenceData.state = beatmapTitle;
@@ -104,12 +104,12 @@ presence.on("UpdateData", async () => {
     presenceData.state = `${selected}`;
     presenceData.smallImageKey = "searching";
   } else if (document.location.pathname.startsWith("/community/forums")) {
-    if (document.location.pathname.split("/")[3] == "topics") {
+    if (document.location.pathname.split("/")[3] === "topics") {
       presenceData.details = "Reading...";
       presenceData.state = "A Forum Post";
       presenceData.smallImageKey = "reading";
     } else if (
-      isNaN(parseInt(document.location.pathname.split("/")[3])) == false
+      isNaN(parseInt(document.location.pathname.split("/")[3])) === false
     ) {
       forumName = document
         .querySelector("h1.forum-title__name a.link--white.link--no-underline")
@@ -124,9 +124,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = "The Forums";
       presenceData.smallImageKey = "searching";
     }
-  } else if (document.location.pathname.startsWith("/community/chat")) {
+  } else if (document.location.pathname.startsWith("/community/chat"))
     presenceData.details = "Chatting...";
-  } else if (document.location.pathname.startsWith("/community/contests")) {
+  else if (document.location.pathname.startsWith("/community/contests")) {
     presenceData.details = "Browsing...";
     presenceData.state = "Contests";
     presenceData.smallImageKey = "searching";
@@ -141,9 +141,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/home/search")) {
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "searching";
-  } else if (document.location.pathname.startsWith("/home/account/edit")) {
+  } else if (document.location.pathname.startsWith("/home/account/edit"))
     presenceData.details = "Changing account settings...";
-  } else if (document.location.pathname.startsWith("/wiki")) {
+  else if (document.location.pathname.startsWith("/wiki")) {
     if (document.location.pathname.includes("/FAQ")) {
       presenceData.details = "Reading...";
       presenceData.state = "The FAQ";
@@ -192,7 +192,7 @@ presence.on("UpdateData", async () => {
     ).textContent;
     profileRanking = `Rank: ${rank} / ${pp}pp`;
     presenceData.details =
-      document.querySelector("div.u-relative").textContent == profileName
+      document.querySelector("div.u-relative").textContent === profileName
         ? `Looking at ${profileName}'s Profile (Their Own)`
         : `Looking at ${profileName}'s Profile`;
     presenceData.state = profileRanking;

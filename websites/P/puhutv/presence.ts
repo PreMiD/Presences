@@ -15,8 +15,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -26,9 +26,9 @@ presence.on("UpdateData", async () => {
   ) as HTMLElement;
 
   if (
-    document.location.pathname == "/" ||
+    document.location.pathname === "/" ||
     !document.location.pathname ||
-    (category && category.innerHTML != "")
+    (category && category.innerHTML !== "")
   ) {
     presence.setActivity({
       largeImageKey: "puhu-logo",
@@ -55,20 +55,20 @@ presence.on("UpdateData", async () => {
                 .querySelector(
                   "#widget_video_detail_3 > section.hero.hero--video-detay.hero--subpages > header > div > div.video-detay-header-content > h1"
                 )
-                .innerHTML.replace(title.outerHTML + " ", "")
+                .innerHTML.replace(`${title.outerHTML} `, "")
             : null,
         timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
 
-      if (!title || title.innerHTML == "") return;
+      if (!title || title.innerHTML === "") return;
 
       const data: { [k: string]: any } = {
         largeImageKey: "puhu-logo",
         details: title.innerHTML,
         state:
-          episode != ""
+          episode !== ""
             ? episode
             : `${
                 document.querySelector(

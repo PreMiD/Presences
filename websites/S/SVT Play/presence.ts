@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "641353660986687508"
   }),
   strings = presence.getStrings({
@@ -15,23 +15,22 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
+let browsingStamp = Math.floor(Date.now() / 1000),
+  user: any,
+  title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "svt"
   };
 
-  if (document.location.hostname == "www.svtplay.se") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.svtplay.se") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
       presenceData.details = "Navigerar landnings sidan";
@@ -51,12 +50,12 @@ presence.on("UpdateData", async () => {
       ).textContent;
       if (video !== null) {
         presenceData.smallImageKey = "live";
-        presenceData.smallImageText =
-          "Watching live on channel: " +
-          document.querySelector("head > title").textContent.split("|")[0];
-        presenceData.smallImageText =
-          "Kollar live på kanalen: " +
-          document.querySelector("head > title").textContent.split("|")[0];
+        presenceData.smallImageText = `Watching live on channel: ${
+          document.querySelector("head > title").textContent.split("|")[0]
+        }`;
+        presenceData.smallImageText = `Kollar live på kanalen: ${
+          document.querySelector("head > title").textContent.split("|")[0]
+        }`;
         presenceData.startTimestamp = browsingStamp;
 
         presenceData.details = title;
@@ -74,7 +73,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing for channels...";
       presenceData.details = "Söker efter kanaler...";
     } else if (document.location.pathname.includes("/video/")) {
-      var currentTime: any,
+      let currentTime: any,
         duration: any,
         paused: any,
         time: any,
@@ -90,12 +89,11 @@ presence.on("UpdateData", async () => {
         "#titel > h1 > span:nth-child(2)"
       ).textContent;
       if (video !== null) {
-        if (video.duration == undefined) {
+        if (video.duration === undefined) {
           time = false;
           live = false;
-        } else if (video.duration == 9007199254740991) {
-          live = true;
-        } else {
+        } else if (video.duration === 9007199254740991) live = true;
+        else {
           time = true;
           live = false;
           currentTime = video.currentTime;
@@ -106,7 +104,7 @@ presence.on("UpdateData", async () => {
             Math.floor(duration)
           );
         }
-        if (time == true && !isNaN(duration) && live == false) {
+        if (time === true && !isNaN(duration) && live === false) {
           presenceData.smallImageKey = paused ? "pause" : "play";
           presenceData.smallImageText = paused
             ? (await strings).pause
@@ -130,7 +128,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Waiting for:";
           presenceData.details = "Väntar på:";
           presenceData.state = title;
-        } else if (live == true) {
+        } else if (live === true) {
           presenceData.details = title;
           presenceData.state = user;
           presenceData.smallImageKey = "live";
@@ -157,10 +155,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

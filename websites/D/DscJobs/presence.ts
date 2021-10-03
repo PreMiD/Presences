@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
         .split("page=")[1]
         .split("&")[0],
       filters = document.location.href.includes("&");
-    presenceData.details = `Viewing 🔨 hireable moderators`;
+    presenceData.details = "Viewing 🔨 hireable moderators";
     presenceData.state = `${
       filters ? "💿 Filters: True" : `📖 Page ${moderator_page}`
     }`;
@@ -57,13 +57,14 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/vote")) {
     const username_vote = document.querySelector("h1")?.textContent;
     presenceData.details = `Voting 🗳️ ${username_vote || "N/A"} `;
-    if (username_vote)
+    if (username_vote) {
       presenceData.buttons = [
         {
           label: `Vote ${username_vote}`,
           url: document.location.href
         }
       ];
+    }
   } else if (document.location.pathname.includes("/cv/")) {
     const cv_page = document
         .querySelector("h2.cursor")
@@ -77,16 +78,17 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Viewing 📖 ${cv_page} resume`;
     presenceData.state = `❤️ ${likes} & 👀 ${views}`;
     if (showButtons) {
-      if (showCvButton)
+      if (showCvButton) {
         presenceData.buttons = [
           {
-            label: `View Resume`,
+            label: "View Resume",
             url: document.location.href
           }
         ];
+      }
     }
   } else if (document.location.pathname.includes("/settings"))
-    presenceData.details = `Editing 📜 curriculum vitae/resume`;
+    presenceData.details = "Editing 📜 curriculum vitae/resume";
   else if (document.location.pathname.includes("/legal")) {
     presenceData.details = "Viewing 👩‍⚖️ Legal Page";
     presenceData.buttons = [
@@ -108,14 +110,13 @@ presence.on("UpdateData", async () => {
     const users_page = document.location.href.split("page=")[1];
     presenceData.details = "Viewing 👥 Members Panel";
     presenceData.state = `📖 Page ${users_page}`;
-  } else if (document.location.pathname.includes("/panel")) {
+  } else if (document.location.pathname.includes("/panel"))
     presenceData.details = "Viewing ⚙️ Staff Panel";
-  }
 
   if (!showButtons) delete presenceData.buttons;
   if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

@@ -9,9 +9,9 @@ iframe.on("UpdateData", async () => {
     hostname === "strcloud.link" ||
     hostname === "ninjastream.to"
   ) {
-    const video = document.querySelector(`video`);
-    if (video != null) {
-      const played = video.currentTime != 0;
+    const video = document.querySelector("video");
+    if (video !== null) {
+      const played = video.currentTime !== 0;
       iframe.send({
         currentTime: video.currentTime,
         timeEnd: video.duration,

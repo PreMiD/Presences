@@ -10,12 +10,12 @@ iframe.on("UpdateData", async () => {
       (audio !== undefined && !isNaN(audio?.duration))
     ) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           currentTime: video?.currentTime,
           duration: video?.duration,
           paused: video?.paused
         },
-        iframe_audio: {
+        iframeAudio: {
           currentTime: audio?.currentTime,
           duration: audio?.duration,
           paused: audio?.paused,

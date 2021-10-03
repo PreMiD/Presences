@@ -29,7 +29,7 @@ let title,
   playback,
   browsingStamp = Math.floor(Date.now() / 1000);
 
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
     };
 
   if (document.location.pathname.includes("/watch/")) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector("#episode > div.h1 > h1");
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.textContent;
       presenceData.smallImageKey = "reading";
     }
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing main page";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/cartoon-list")) {
@@ -126,10 +126,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

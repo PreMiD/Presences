@@ -4,11 +4,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
-  };
-
-  const Player = document.querySelector(".player").classList;
-  const Info = document.querySelector(".playing").textContent;
+      largeImageKey: "logo"
+    },
+    Player = document.querySelector(".player").classList,
+    Info = document.querySelector(".playing").textContent;
 
   if (Info) {
     const InfoSplit = Info.split("-");

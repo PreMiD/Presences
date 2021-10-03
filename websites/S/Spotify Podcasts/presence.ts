@@ -66,7 +66,7 @@ async function getStrings(): Promise<LangStrings> {
       listening: "general.listeningMusic",
       show: "general.viewShow"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 

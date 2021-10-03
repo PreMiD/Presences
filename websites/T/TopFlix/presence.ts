@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -52,9 +52,9 @@ presence.on("UpdateData", async () => {
       title = title.textContent.replace(year.textContent, "");
 
       const seasonList = document
-        .querySelector(".tabs > ul > li.active")
-        .textContent.includes("Temporadas");
-      const season = document.querySelector(".accordion > li.open > div");
+          .querySelector(".tabs > ul > li.active")
+          .textContent.includes("Temporadas"),
+        season = document.querySelector(".accordion > li.open > div");
 
       if (seasonList && season !== null) {
         const sseason = season.textContent.replace("ª Temporada", "");
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = title;
           presenceData.state = season.textContent;
 
-          if (iFrameVideo == true && !isNaN(duration)) {
+          if (iFrameVideo === true && !isNaN(duration)) {
             const timestamps = getTimestamps(
               Math.floor(currentTime),
               Math.floor(duration)
@@ -76,29 +76,27 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageText = (await strings).pause;
           }
         } else {
-          presenceData.details = "Vendo temporada " + sseason + " da série:";
+          presenceData.details = `Vendo temporada ${sseason} da série:`;
           presenceData.state = title;
         }
       } else {
         presenceData.details = "Vendo série:";
         presenceData.state = title;
       }
-    } else {
-      presenceData.details = "Navegando pelas séries...";
-    }
+    } else presenceData.details = "Navegando pelas séries...";
   } else if (document.location.pathname.includes("/filme")) {
     title = document.querySelector(".bd-hd");
     if (title !== null) {
       const year = document.querySelector(".bd-hd > span");
       let rating = document.querySelector(".rate > p > span").textContent;
-      rating = rating + "/10";
+      rating = `${rating}/10`;
       title = title.textContent.replace(year.textContent, "");
 
       if (document.querySelector("body > .modal.fade.in") !== null) {
         presenceData.details = title;
-        presenceData.state = year.textContent + " - " + rating;
+        presenceData.state = `${year.textContent} - ${rating}`;
 
-        if (iFrameVideo == true && !isNaN(duration)) {
+        if (iFrameVideo === true && !isNaN(duration)) {
           const timestamps = getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
@@ -115,23 +113,18 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Vendo filme:";
         presenceData.state = title;
       }
-    } else {
-      presenceData.details = "Navegando pelos filmes...";
-    }
-  } else if (document.location.pathname.includes("/lancamentos")) {
+    } else presenceData.details = "Navegando pelos filmes...";
+  } else if (document.location.pathname.includes("/lancamentos"))
     presenceData.details = "Navegando lançamentos...";
-  } else if (document.location.pathname.includes("/app")) {
+  else if (document.location.pathname.includes("/app"))
     presenceData.details = "Vendo os aplicativos";
-  } else if (document.location.pathname.includes("/imdb")) {
+  else if (document.location.pathname.includes("/imdb"))
     presenceData.details = "Navegando IMDb...";
-  } else if (document.location.pathname == "/") {
+  else if (document.location.pathname === "/")
     presenceData.details = "Navegando...";
-  }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

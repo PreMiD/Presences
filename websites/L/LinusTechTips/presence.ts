@@ -12,8 +12,8 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.hostname == "linustechtips.com") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "linustechtips.com") {
+    if (document.location.pathname === "/") {
       presenceData.details = "Browsing";
       presenceData.state = "Categories";
 

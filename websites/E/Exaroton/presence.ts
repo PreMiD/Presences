@@ -60,9 +60,8 @@ presence.on("UpdateData", async () => {
           const article: HTMLInputElement = document.querySelector("#query");
           presenceData.details = "Help Center - Searching:";
           presenceData.state = article.value;
-        } else {
-          presenceData.details = "Help Center";
-        }
+        } else presenceData.details = "Help Center";
+
         break;
       default:
         presenceData.details = "Browsing...";

@@ -1,10 +1,10 @@
-var presence = new Presence({
-  clientId: "626481021843669044" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var user: any, search: any, title: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let presence = new Presence({
+    clientId: "626481021843669044" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  user: any,
+  search: any,
+  title: any;
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,8 +13,8 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
   if (
-    document.location.hostname == "bukkit.org" ||
-    document.location.hostname == "dl.bukkit.org"
+    document.location.hostname === "bukkit.org" ||
+    document.location.hostname === "dl.bukkit.org"
   ) {
     if (document.location.pathname.includes("/threads/")) {
       title = document.querySelector(
@@ -22,17 +22,16 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.innerText.length > 128)
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+      else presenceData.state = title.innerText;
+
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/forums/")) {
       title = document.querySelector(
         "#content > div.pageWidth > div.pageContent > div.titleBar > h1"
       );
-      if (title != null) {
+      if (title !== null) {
         presenceData.details = "Forums, viewing category:";
         presenceData.state = title.innerText;
 
@@ -132,9 +131,9 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "bukkit.gamepedia.com") {
+  } else if (document.location.hostname === "bukkit.gamepedia.com") {
     title = document.querySelector("#firstHeading");
-    if (title != null) {
+    if (title !== null) {
       presenceData.details = "Docs, reading:";
       presenceData.state = title.innerText;
 
@@ -146,7 +145,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "dev.bukkit.org") {
+  } else if (document.location.hostname === "dev.bukkit.org") {
     if (document.location.pathname.includes("/dashboard")) {
       presenceData.details = "Devs, viewing:";
       presenceData.state = "Dashboard";
@@ -162,7 +161,7 @@ presence.on("UpdateData", async () => {
         "#content > section > section.level-categories.categories-tier > div > div > ul > li.tier-holder > ul > li.level-categories-nav.highlight > a > span"
       );
       presenceData.details = "Devs, viewing plugins in";
-      presenceData.state = "category: " + title.innerText;
+      presenceData.state = `category: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/bukkit-plugins")) {
@@ -193,11 +192,9 @@ presence.on("UpdateData", async () => {
         "#site-main > section.atf > div > div > div.project-details-container > div > h1 > a > span"
       );
       presenceData.details = "Devs, viewing project:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.innerText.length > 128)
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+      else presenceData.state = title.innerText;
 
       presence.setActivity(presenceData);
     } else {

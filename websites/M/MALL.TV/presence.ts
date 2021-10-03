@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = strings.paused;
     }
   }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

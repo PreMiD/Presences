@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "sto"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Stöbert durch";
     presenceData.state = "die Startseite";
 
@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
     );
     // Try if Name of Title are visible
     try {
-      presenceData.details = "Schaut " + nameofserie.textContent;
+      presenceData.details = `Schaut ${nameofserie.textContent}`;
       const titleofserie = document.querySelector(
         "#wrapper > div.seriesContentBox > div.container.marginBottom > div:nth-child(4) > div.hosterSiteTitle > h2 > span"
       ).textContent;
@@ -29,14 +29,14 @@ presence.on("UpdateData", () => {
     }
     delete presenceData.smallImageText;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/app") {
+  } else if (document.location.pathname === "/app") {
     presenceData.details = "Schaut nach";
     presenceData.state = "Streaming ToGo";
     presenceData.smallImageKey = "reading";
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/beliebte-serien") {
+  } else if (document.location.pathname === "/beliebte-serien") {
     presenceData.details = "Schaut nach";
     presenceData.state = "Beliebten Serien";
     presenceData.smallImageKey = "search";
@@ -49,7 +49,7 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/statistics") {
+  } else if (document.location.pathname === "/statistics") {
     presenceData.details = "Informiert sich über S.To";
     const info1 = document.querySelector(
       "#wrapper > div.container > div.row > div:nth-child(1) > div.facts.row > div:nth-child(4) > h3"
@@ -98,7 +98,7 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/info") {
+  } else if (document.location.pathname === "/info") {
     const name1 = document.querySelector(
       "#wrapper > div.container > div > div > div.col-lg-12 > div > h2"
     );
@@ -123,7 +123,7 @@ presence.on("UpdateData", () => {
     const katalog1 = document.querySelector(
       "#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong"
     );
-    presenceData.state = "Serien mit " + katalog1.textContent;
+    presenceData.state = `Serien mit ${katalog1.textContent}`;
     presenceData.smallImageKey = "search";
     delete presenceData.smallImageText;
 
@@ -156,7 +156,7 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/neu") {
+  } else if (document.location.pathname === "/neu") {
     presenceData.details = "Sucht neue Serien";
     presenceData.state = "OwO";
     presenceData.smallImageKey = "search";
@@ -168,12 +168,12 @@ presence.on("UpdateData", () => {
       "#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name"
     );
     presenceData.details = "Schreibt Nachrichten...";
-    presenceData.state = "als " + user1.textContent;
+    presenceData.state = `als ${user1.textContent}`;
     presenceData.smallImageKey = "reading";
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/support") {
+  } else if (document.location.pathname === "/support") {
     presenceData.details = "Befindet sich im Support";
     const supportzahl = document.querySelector(
       "#wrapper > div.container.noPadding > div:nth-child(6) > h3"
@@ -193,7 +193,7 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/support/fragen") {
+  } else if (document.location.pathname === "/support/fragen") {
     presenceData.details = "Liest Fragen...";
     presenceData.smallImageKey = "reading";
     delete presenceData.smallImageText;
@@ -204,7 +204,7 @@ presence.on("UpdateData", () => {
       "#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name"
     );
     presenceData.details = "Ändert die Einstellungen";
-    presenceData.state = "Account: " + user2.textContent;
+    presenceData.state = `Account: ${user2.textContent}`;
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
@@ -217,13 +217,13 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/account/friendships") {
+  } else if (document.location.pathname === "/account/friendships") {
     presenceData.details = "Beobachtet";
     presenceData.state = "die Freundesliste";
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/support/anleitung") {
+  } else if (document.location.pathname === "/support/anleitung") {
     presenceData.details = "Liest das Tutorial";
     presenceData.state = "So viel Text owo";
     delete presenceData.smallImageText;
@@ -234,14 +234,14 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/registrierung") {
+  } else if (document.location.pathname === "/registrierung") {
     const username1: HTMLInputElement = document.querySelector("#formUsername");
     presenceData.details = "Registriert sich gerade...";
-    presenceData.state = "Vielleicht als " + username1.value;
+    presenceData.state = `Vielleicht als ${username1.value}`;
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/account") {
+  } else if (document.location.pathname === "/account") {
     const user3 = document.querySelector(
       "#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name"
     );
@@ -250,12 +250,12 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/serienwuensche") {
+  } else if (document.location.pathname === "/serienwuensche") {
     const name4 = document.querySelector(
       "#wrapper > div.container > div.row.leaderboardBox > div.col-md-3 > div > strong"
     );
     presenceData.details = "Votet für neue Serien";
-    presenceData.state = name4.textContent + " Serienwünsche";
+    presenceData.state = `${name4.textContent} Serienwünsche`;
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
@@ -289,7 +289,5 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-  }
+  } else presence.setActivity();
 });

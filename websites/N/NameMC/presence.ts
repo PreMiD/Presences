@@ -67,9 +67,8 @@ let strings: Promise<LangStrings> = getStrings(),
 presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("lang"),
     buttons = await presence.getSetting("buttons");
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -81,7 +80,7 @@ presence.on("UpdateData", async () => {
 
   const path = location.href
       .replace(/\/?$/, "/")
-      .replace("https://" + location.hostname, "")
+      .replace(`https://${location.hostname}`, "")
       .replace("?", "/"),
     statics: {
       [name: string]: PresenceData;
@@ -124,10 +123,11 @@ presence.on("UpdateData", async () => {
       },
       "/cape/": {
         details: (await strings).viewCape,
-        state:
+        state: `${
           document
             .querySelector(".default-skin main.container h1")
-            ?.textContent.split("\n")[1] + " Cape"
+            ?.textContent.split("\n")[1]
+        } Cape`
       },
       "/minecraft-servers/": {
         details: (await strings).servers

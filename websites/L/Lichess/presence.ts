@@ -29,12 +29,11 @@ presence.on("UpdateData", async () => {
     ) as HTMLElement,
     status = document.querySelector(
       "#main-wrap > main > aside > div > section.status"
-    ) as HTMLElement;
-
-  const data: { [k: string]: any } = {
-    largeImageKey: "lc-logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
+    ) as HTMLElement,
+    data: { [k: string]: any } = {
+      largeImageKey: "lc-logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
+    };
 
   if ((page && pages[page]) || (page && pages[page.slice(0, -1)])) {
     data.details = "Viewing a page:";
@@ -48,17 +47,17 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "search";
   } else if (
     status &&
-    status.textContent != "" &&
+    status.textContent !== "" &&
     game &&
-    game.textContent != ""
+    game.textContent !== ""
   ) {
     data.details = game.textContent.trim();
     data.state = status.textContent.trim();
-  } else if (!status && game && game.textContent != "") {
+  } else if (!status && game && game.textContent !== "") {
     data.details = "Playing a game:";
     data.state = game.textContent.trim();
   }
 
-  if (data.details && data.state && data.details != "" && data.state != "")
+  if (data.details && data.state && data.details !== "" && data.state !== "")
     presence.setActivity(data);
 });

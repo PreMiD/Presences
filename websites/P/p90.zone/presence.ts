@@ -9,27 +9,26 @@ function getTimestamps(curr: number, dura: number): Array<number> {
 }
 
 presence.on("UpdateData", async () => {
-  const video = document.querySelector("video");
-  const strings = await presence.getStrings({
-    playing: "presence.playback.playing",
-    paused: "presence.playback.paused",
-    browsing: "presence.activity.browsing"
-  });
+  const video = document.querySelector("video"),
+    strings = await presence.getStrings({
+      playing: "presence.playback.playing",
+      paused: "presence.playback.paused",
+      browsing: "presence.activity.browsing"
+    });
 
   if (video !== null) {
-    const timestamps = getTimestamps(video.currentTime, video.duration);
-
-    const presenceData: PresenceData = {
-      state: document.querySelector("body > div.menu.main > div > h2")
-        .textContent,
-      largeImageKey: "logo",
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1],
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).paused
-        : (await strings).playing
-    };
+    const timestamps = getTimestamps(video.currentTime, video.duration),
+      presenceData: PresenceData = {
+        state: document.querySelector("body > div.menu.main > div > h2")
+          .textContent,
+        largeImageKey: "logo",
+        startTimestamp: timestamps[0],
+        endTimestamp: timestamps[1],
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).paused
+          : (await strings).playing
+      };
 
     if (video.paused) {
       delete presenceData.startTimestamp;
@@ -37,7 +36,5 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-  }
+  } else presence.setActivity();
 });

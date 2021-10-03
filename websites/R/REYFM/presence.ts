@@ -58,9 +58,8 @@ function findChannel(): string {
             channel.firstElementChild.children[2]
               .firstElementChild as HTMLImageElement
           ).src.includes("stop.png")
-        ) {
+        )
           return channel.firstElementChild.id.replace("channel-", "");
-        }
       }
     }
     return "YOU FAILED";
@@ -101,9 +100,9 @@ presence.on("UpdateData", async () => {
   let showFormat3 = false;
 
   if (info) {
-    if (document.location.hostname == "status.reyfm.de") {
+    if (document.location.hostname === "status.reyfm.de")
       presenceData.details = "Viewing status page";
-    } else if (document.location.hostname == "www.reyfm.de") {
+    else if (document.location.hostname === "www.reyfm.de") {
       if (document.location.pathname.includes("/bots")) {
         presenceData.details = "Viewing bots";
         presenceData.buttons = [
@@ -120,31 +119,28 @@ presence.on("UpdateData", async () => {
             url: "https://www.reyfm.de/discord-bot"
           }
         ];
-      } else if (document.location.pathname.includes("/partner")) {
+      } else if (document.location.pathname.includes("/partner"))
         presenceData.details = "Viewing partners";
-      } else if (document.location.pathname.includes("/stream-urls")) {
+      else if (document.location.pathname.includes("/stream-urls"))
         presenceData.details = "Viewing streams";
-      } else if (document.location.pathname.includes("/apply")) {
+      else if (document.location.pathname.includes("/apply"))
         presenceData.details = "Viewing job postings";
-      } else if (document.location.pathname.includes("/datenschutz")) {
+      else if (document.location.pathname.includes("/datenschutz"))
         presenceData.details = "Reading the datenschutz";
-      } else if (document.location.pathname.includes("/impressum")) {
+      else if (document.location.pathname.includes("/impressum"))
         presenceData.details = "Reading the impressum";
-      } else if (document.location.pathname.includes("/stats")) {
+      else if (document.location.pathname.includes("/stats"))
         presenceData.details = "Viewing the statistics";
-      } else if (document.location.pathname == "/") {
+      else if (document.location.pathname === "/")
         presenceData.details = "Browsing...";
-      }
     }
   }
 
-  if (elapsed) {
-    presenceData.startTimestamp = browsingStamp;
-  }
+  if (elapsed) presenceData.startTimestamp = browsingStamp;
 
   if (
-    document.location.hostname == "www.reyfm.de" &&
-    document.location.pathname == "/"
+    document.location.hostname === "www.reyfm.de" &&
+    document.location.pathname === "/"
   ) {
     if (
       (document.querySelector("#player") as HTMLElement).style.cssText !==
@@ -191,7 +187,7 @@ presence.on("UpdateData", async () => {
           "#player > div.wrapper > div.current > span.title"
         ).textContent;
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = "Total Listeners: " + totalListeners;
+        presenceData.smallImageText = `Total Listeners: ${totalListeners}`;
         delete presenceData.startTimestamp;
       }
 
@@ -203,7 +199,7 @@ presence.on("UpdateData", async () => {
         .replace("%artist%", artist);
     }
   } else if (
-    document.location.hostname == "www.reyfm.de" &&
+    document.location.hostname === "www.reyfm.de" &&
     document.querySelector("#channel-player") !== null
   ) {
     const channelID = document
@@ -248,10 +244,8 @@ presence.on("UpdateData", async () => {
 
   if (!buttons) delete presenceData.buttons;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

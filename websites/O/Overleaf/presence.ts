@@ -20,9 +20,8 @@ presence.on("UpdateData", async () => {
       actif = menu[0].getElementsByClassName("active"),
       //Take care of custom folders
       maybecustom = actif[0].getElementsByClassName("name ng-binding");
-    if (maybecustom.length != 0) {
+    if (maybecustom.length !== 0)
       presenceData.state = maybecustom[0].textContent;
-    }
     //Take care of (i) logo
     else {
       const fnl = actif[0].getElementsByTagName("a");
@@ -50,9 +49,8 @@ presence.on("UpdateData", async () => {
   //Documentation
   else if (pth.includes("/learn")) {
     presenceData.details = "Browsing Documentation";
-    if (pth === "/learn" || pth === "/learn/") {
-      presenceData.state = "Main Page";
-    } else {
+    if (pth === "/learn" || pth === "/learn/") presenceData.state = "Main Page";
+    else {
       presenceData.state = document.title.replace(
         "- Overleaf, Online LaTeX Editor",
         ""
@@ -71,10 +69,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

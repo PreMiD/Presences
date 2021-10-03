@@ -1,8 +1,8 @@
-var presence = new Presence({
-  clientId: "672156210627084328"
-});
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user;
+let presence = new Presence({
+    clientId: "672156210627084328"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  user;
 presence.on("UpdateData", async () => {
   const data = {
     largeImageKey: "animesoul",
@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
     details: "Viewing home page"
   };
   if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/home/"
+    document.location.pathname === "/" ||
+    document.location.pathname === "/home/"
   ) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing home page";
@@ -125,10 +125,8 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Hidden Page";
   }
-  if (data.details == null) {
+  if (data.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(data);
-  }
+  } else presence.setActivity(data);
 });

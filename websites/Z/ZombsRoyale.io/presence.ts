@@ -57,9 +57,9 @@ presence.on("UpdateData", async () => {
     currentGameState === "Game" ||
     currentGameState === "UiReportPlayerOverlay" ||
     currentGameState === "UiLeaveOverlay"
-  ) {
+  )
     presenceData.details = "In Game";
-  } else if (currentGameState === "Plane") {
+  else if (currentGameState === "Plane") {
     presenceData.details = "In Game";
     presenceData.state = "Flying plane";
   } else if (currentGameState === "Parachute") {
@@ -76,25 +76,21 @@ presence.on("UpdateData", async () => {
   } else if (currentGameState === "UiMapOverlay") {
     presenceData.details = "In Game";
     presenceData.state = "Viewing map";
-  } else presence.error("Unknown state: " + currentGameState);
+  } else presence.error(`Unknown state: ${currentGameState}`);
 
   const playing =
     presenceData.details === "In Game" || presenceData.details === "In Lobby";
 
-  if (playing && matchStart === null) {
+  if (playing && matchStart === null)
     matchStart = Math.floor(Date.now() / 1000);
-  } else if (!playing && matchStart !== null) {
-    matchStart = null;
-  }
+  else if (!playing && matchStart !== null) matchStart = null;
 
   presenceData.startTimestamp = matchStart;
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
 
 // Stolen from https://github.com/PreMiD/Presences/blob/master/websites/R/Rythm/presence.ts#L461

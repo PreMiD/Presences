@@ -246,7 +246,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = organization.name.innerText;
   } else if (
     !organization.name &&
-    document.location.pathname.includes(`/orgs/`)
+    document.location.pathname.includes("/orgs/")
   ) {
     const pathData: string[] = document.location.pathname.split("/").slice(2);
 

@@ -12,8 +12,8 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.hostname == "asphalt.events") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "asphalt.events") {
+    if (document.location.pathname === "/") {
       presenceData.details = "Browsing";
       presenceData.state = "Upcoming Convoys & Events";
       presenceData.smallImageKey = "search";
@@ -43,13 +43,13 @@ presence.on("UpdateData", async () => {
       const type = item2.innerText,
         firstWord = type.replace(/ .*/, "");
 
-      if (item == null || item.innerText == "xClose") {
+      if (item === null || item.innerText === "xClose") {
         item = document.querySelector(
           "body > div > main > div.container > div > div.col-md-8 > div.card-header > h3"
         ) as HTMLElement;
       }
 
-      presenceData.details = "Viewing " + firstWord + ":";
+      presenceData.details = `Viewing ${firstWord}:`;
       presenceData.state = item.innerText;
       delete presenceData.smallImageKey;
 
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
       ) as HTMLElement;
 
       presenceData.details = "Viewing ";
-      presenceData.state = item.innerText + "'s Profile";
+      presenceData.state = `${item.innerText}'s Profile`;
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
@@ -89,11 +89,9 @@ presence.on("UpdateData", async () => {
         "body > div > form > div > div > div > div:nth-child(2) > select > option:checked"
       ) as HTMLElement;
 
-      if (item != null) {
-        presenceData.state = item.innerText;
-      } else {
-        presenceData.state = "Translation Center";
-      }
+      if (item !== null) presenceData.state = item.innerText;
+      else presenceData.state = "Translation Center";
+
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);

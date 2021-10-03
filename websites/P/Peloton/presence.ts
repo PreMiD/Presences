@@ -2,11 +2,7 @@ const presence = new Presence({
   clientId: "712294190339588209"
 });
 
-let path;
-let strings;
-let clipTitle;
-let clipAuthor;
-let clipTimeLeft;
+let path, strings, clipTitle, clipAuthor, clipTimeLeft;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -86,7 +82,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (window.location.hostname.includes("members.onepeloton")) {
     //Class categories
-    if (window.location.pathname == "/classes") {
+    if (window.location.pathname === "/classes") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing classes";
     }
@@ -304,10 +300,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

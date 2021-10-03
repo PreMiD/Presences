@@ -1,12 +1,13 @@
-var presence = new Presence({
-  clientId: "608043966285348944"
-});
 
-var lastPlaybackState = null;
-var reading;
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "608043966285348944"
+  });
+  let
+  lastPlaybackState = null,
+  reading,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-if (lastPlaybackState != reading) {
+if (lastPlaybackState !== reading) {
   lastPlaybackState = reading;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -15,26 +16,24 @@ presence.on("UpdateData", async () => {
   reading =
     document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
 
-  var something: any, a: any, b: any;
+  let a: HTMLAnchorElement, b: HTMLAnchorElement;
 
   if (reading) {
-    something = document.querySelectorAll(".margin-bottom-12 h1 a");
-    a = something[0];
-    b = something[1];
+    [a, b] = document.querySelectorAll(".margin-bottom-12 h1 a");
+    
 
-    var page = document
-      .querySelector(".page-jump.text-center")
-      .getAttribute("value");
-
-    const presenceData: PresenceData = {
-      details: a.innerText,
-      state: b.innerText + " [Page: " + page + "]",
-      largeImageKey: "lg"
-    };
+    const page = document
+        .querySelector(".page-jump.text-center")
+        .?value,
+      presenceData: PresenceData = {
+        details: a.innerText,
+        state: `${b.innerText} [Page: ${page}]`,
+        largeImageKey: "lg"
+      };
 
     presenceData.startTimestamp = browsingStamp;
 
-    presence.setActivity(presenceData, true);
+    
   } else {
     const presenceData: PresenceData = {
       largeImageKey: "lg"
@@ -46,6 +45,12 @@ presence.on("UpdateData", async () => {
     delete presenceData.state;
     delete presenceData.smallImageKey;
 
-    presence.setActivity(presenceData, true);
+    
   }
+
+  if (presenceData.details === null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
+
 });

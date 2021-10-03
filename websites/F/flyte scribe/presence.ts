@@ -1,4 +1,4 @@
-var presence = new Presence({
+let presence = new Presence({
     clientId: "707632555612045413"
   }),
   startBrowse = Date.now(),
@@ -8,27 +8,25 @@ var presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  var blogCheck = false;
+  let blogCheck = false;
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/")
     presenceData.details = "Viewing the homepage";
-  } else if (document.location.pathname == "/about/") {
+  else if (document.location.pathname === "/about/")
     presenceData.details = "Looking at the blog info";
-  } else if (document.location.pathname == "/flyte/") {
+  else if (document.location.pathname === "/flyte/")
     presenceData.details = "Getting to know edo/flyte";
-  } else {
-    var blogTitle = document.querySelector("h1.post-title");
-    var blogData = (presenceData = {
-      details: "Looking at a Blog Post",
-      state: blogTitle.innerHTML,
-      startTimestamp: startBrowse,
-      largeImageKey: "logo"
-    });
+  else {
+    const blogTitle = document.querySelector("h1.post-title"),
+      blogData = (presenceData = {
+        details: "Looking at a Blog Post",
+        state: blogTitle.innerHTML,
+        startTimestamp: startBrowse,
+        largeImageKey: "logo"
+      });
     blogCheck = true;
     presence.setActivity(blogData);
   }
 
-  if (!blogCheck) {
-    presence.setActivity(presenceData);
-  }
+  if (!blogCheck) presence.setActivity(presenceData);
 });

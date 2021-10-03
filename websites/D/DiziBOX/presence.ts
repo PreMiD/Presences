@@ -66,8 +66,8 @@ dizibox.on("UpdateData", async () => {
   if (!_video && !isVideoData) {
     if (
       (page.includes("/diziler/") &&
-        document.location.pathname != "/diziler/") ||
-      (page.includes("/diziler") && document.location.pathname != "/diziler")
+        document.location.pathname !== "/diziler/") ||
+      (page.includes("/diziler") && document.location.pathname !== "/diziler")
     ) {
       const showName = document.querySelector(
         "#single-diziler > div.tv-overview.bg-dark > div.title-terms > h1 > a"
@@ -77,7 +77,7 @@ dizibox.on("UpdateData", async () => {
         largeImageKey: "db-logo",
         details: "Bir diziye göz atıyor:",
         state:
-          showName && showName.textContent != ""
+          showName && showName.textContent !== ""
             ? showName.textContent
             : "Belirsiz",
         startTimestamp: Math.floor(Date.now() / 1000)

@@ -7,31 +7,31 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname == "/gui/home") {
+  if (document.location.pathname === "/gui/home") {
     // -------------------------------------- Mainpage
     presenceData.state = "Browsing on mainpage...";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/gui/home/upload") {
+  } else if (document.location.pathname === "/gui/home/upload") {
     //-------------------------- Upload File
     presenceData.details = "Uploading an file...";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/gui/home/url") {
+  } else if (document.location.pathname === "/gui/home/url") {
     //-------------------------- URL Scan
     presenceData.details = "Search an URL...";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/gui/home/search") {
+  } else if (document.location.pathname === "/gui/home/search") {
     //-------------------------- Search
     presenceData.details = "Search an anything...";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/gui/sign-in") {
+  } else if (document.location.pathname === "/gui/sign-in") {
     //-------------------------- login
     presenceData.details = "Sign In to VirusTotal";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/gui/join-us") {
+  } else if (document.location.pathname === "/gui/join-us") {
     //-------------------------- join in
     presenceData.details = "Sign Up to VirusTotal";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/gui/settings") {
+  } else if (document.location.pathname === "/gui/settings") {
     //-------------------------- Account settings
     const nickname = document
       .querySelector("body > vt-virustotal-app")
@@ -263,8 +263,6 @@ presence.on("UpdateData", () => {
       presenceData.details = "Reading behavior of...";
       presenceData.state = detectionURL2.textContent;
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-    }
+    } else presence.setActivity();
   }
 });

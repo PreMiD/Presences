@@ -12,19 +12,19 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname == "/home/foryou") {
+  if (document.location.pathname === "/home/foryou")
     presenceData.details = "Viewing SiriusXM Home";
-  } else if (document.location.pathname == "/home/music") {
+  else if (document.location.pathname === "/home/music")
     presenceData.details = "Viewing Music Home";
-  } else if (document.location.pathname == "/home/sports") {
+  else if (document.location.pathname === "/home/sports")
     presenceData.details = "Viewing Sports Home";
-  } else if (document.location.pathname == "/home/news") {
+  else if (document.location.pathname === "/home/news")
     presenceData.details = "Viewing News Home";
-  } else if (document.location.pathname == "/home/entertainment") {
+  else if (document.location.pathname === "/home/entertainment")
     presenceData.details = "Viewing Talk Home";
-  } else if (document.location.pathname == "/home/howard") {
+  else if (document.location.pathname === "/home/howard")
     presenceData.details = "Viewing Howard Stern Home";
-  } else if (
+  else if (
     document.querySelector("p.now-playing-info-label__text").textContent ===
     "On Air Show"
   ) {
@@ -33,9 +33,8 @@ presence.on("UpdateData", async () => {
     songName = document.querySelector("span.track-name");
     songArtist = document.querySelector("span.artist-name");
 
-    presenceData.details = songName.innerText + " - " + songArtist.innerText;
-    presenceData.state =
-      channelName.innerText + " - " + channelNumber.innerText;
+    presenceData.details = `${songName.innerText} - ${songArtist.innerText}`;
+    presenceData.state = `${channelName.innerText} - ${channelNumber.innerText}`;
   } else if (
     document.querySelector("p.now-playing-info-label__text").textContent ===
     "Xtra Channel"
@@ -44,8 +43,8 @@ presence.on("UpdateData", async () => {
     songName = document.querySelector("span.track-name");
     songArtist = document.querySelector("span.artist-name");
 
-    presenceData.details = songName.innerText + " - " + songArtist.innerText;
-    presenceData.state = channelName.innerText + " - Xtra Channel";
+    presenceData.details = `${songName.innerText} - ${songArtist.innerText}`;
+    presenceData.state = `${channelName.innerText} - Xtra Channel`;
   } else if (
     document.querySelector("p.now-playing-info-label__text").textContent ===
     "Episode"
@@ -53,7 +52,7 @@ presence.on("UpdateData", async () => {
     songName = document.querySelector("p.track-name");
     songArtist = document.querySelector("p.show-title");
 
-    presenceData.details = songName.innerText + " - " + songArtist.innerText;
+    presenceData.details = `${songName.innerText} - ${songArtist.innerText}`;
     presenceData.state = "On Demand Episode";
   } else if (
     document.querySelector("p.now-playing-info-label__text").textContent ===
@@ -63,19 +62,19 @@ presence.on("UpdateData", async () => {
     songName = document.querySelector("span.track-name");
     songArtist = document.querySelector("span.artist-name");
 
-    presenceData.details = songName.innerText + " - " + songArtist.innerText;
-    presenceData.state = channelName.innerText + " - Pandora Station";
-  } else if (document.location.pathname == "/favorites/channels") {
+    presenceData.details = `${songName.innerText} - ${songArtist.innerText}`;
+    presenceData.state = `${channelName.innerText} - Pandora Station`;
+  } else if (document.location.pathname === "/favorites/channels")
     presenceData.details = "Viewing Favorite Channels";
-  } else if (document.location.pathname == "/favorites/shows") {
+  else if (document.location.pathname === "/favorites/shows")
     presenceData.details = "Viewing Favorite Shows";
-  } else if (document.location.pathname == "/favorites/episodes") {
+  else if (document.location.pathname === "/favorites/episodes")
     presenceData.details = "Viewing Favorite Episodes";
-  } else if (document.location.pathname == "/recently-played") {
+  else if (document.location.pathname === "/recently-played")
     presenceData.details = "Viewing Recently Played Stations";
-  } else if (document.location.pathname == "/query") {
+  else if (document.location.pathname === "/query")
     presenceData.details = "Searching SiriusXM";
-  } else if (document.location.pathname.includes("/query")) {
+  else if (document.location.pathname.includes("/query")) {
     searchTerm = document.querySelector("h2.search-page-header");
 
     presenceData.details = "Viewing: ";
@@ -85,14 +84,10 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing Category: ";
     presenceData.state = categoryTerm.innerText;
-  } else {
-    presenceData.details = "Can't read page";
-  }
+  } else presenceData.details = "Can't read page";
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

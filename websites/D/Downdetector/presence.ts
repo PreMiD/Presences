@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 function decodeReq(entity: Element): string {
-  var txt = document.createElement("textarea");
+  const txt = document.createElement("textarea");
   txt.innerHTML = entity.textContent;
   return txt.value;
 }
@@ -16,7 +16,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.host == "downdetector.com") {
+  if (document.location.host === "downdetector.com") {
     presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname.startsWith("/search/")) {
       presenceData.details = "Searching for:";
@@ -60,10 +60,8 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

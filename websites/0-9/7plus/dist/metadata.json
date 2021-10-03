@@ -4,7 +4,7 @@
     "id": "638080361179512853"
   },
   "contributors": [
-   {
+    {
       "name": "Alexx",
       "id": "604182077088202784"
     }
@@ -16,7 +16,7 @@
     "nl": "7plus is een video-on-demand, inhaal-tv-dienst van het Seven Network. 7plus biedt ook online livestreaming van Channel Seven, 7TWO, 7mate, 7flix en Racing.com."
   },
   "service": "7plus",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/ZY2K3CC.png",
   "thumbnail": "https://i.imgur.com/A50n9nx.png",
   "color": "#FF0000",

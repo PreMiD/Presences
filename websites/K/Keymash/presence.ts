@@ -36,14 +36,15 @@ presence.on("UpdateData", () => {
       break;
     case "leaderboards":
       presenceData.details = "Viewing Leaderboards";
-      if (query)
+      if (query) {
         presenceData.state = `${
           query.charAt(0).toUpperCase() + query.slice(1)
         } Leaders`;
+      }
       break;
     case "profile":
       if (query) {
-        presenceData.details = `Viewing profile`;
+        presenceData.details = "Viewing profile";
         presenceData.state = query.replace("-", "#");
       } else presenceData.details = "Viewing profile";
       break;

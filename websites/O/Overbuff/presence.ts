@@ -9,11 +9,11 @@ presence.on("UpdateData", () => {
 
   if (window.location.pathname.includes("/players/")) {
     const nickname = document.querySelector(
-      "div.layout-header-primary-bio > h1"
-    ).firstChild.textContent;
-    const level = document.querySelector(
-      "div.image-with-corner > div.corner.corner-text"
-    ).textContent;
+        "div.layout-header-primary-bio > h1"
+      ).firstChild.textContent,
+      level = document.querySelector(
+        "div.image-with-corner > div.corner.corner-text"
+      ).textContent;
     if (window.location.pathname.includes("pc")) {
       presenceData.smallImageKey = "windows";
       presenceData.smallImageText = "Playing on PC";
@@ -53,11 +53,11 @@ presence.on("UpdateData", () => {
     presenceData.state = "Heroes";
     try {
       const hero_name = document.querySelector(
-        "div.layout-header-primary-bio > div > h1"
-      ).firstChild.textContent;
-      const hero_role = document.querySelector(
-        "div.layout-header-primary-bio > div > h1 > small"
-      ).textContent;
+          "div.layout-header-primary-bio > div > h1"
+        ).firstChild.textContent,
+        hero_role = document.querySelector(
+          "div.layout-header-primary-bio > div > h1 > small"
+        ).textContent;
       presenceData.details = "Viewing a Hero:";
       presenceData.state = `${hero_name} (${hero_role})`;
     } catch {
@@ -72,9 +72,8 @@ presence.on("UpdateData", () => {
       ).firstChild.textContent;
       presenceData.details = "Viewing a role:";
       presenceData.state = role_name;
-      if (window.location.pathname.includes("/rankings")) {
+      if (window.location.pathname.includes("/rankings"))
         presenceData.state = `${role_name} ranking`;
-      }
     } catch {
       console.log("That's not a Hero profile.");
     }
@@ -125,10 +124,8 @@ presence.on("UpdateData", () => {
     presenceData.state = "Front page";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

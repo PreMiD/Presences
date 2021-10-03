@@ -11,15 +11,14 @@ presence.on("UpdateData", async () => {
   };
   try {
     const product_title = document.querySelector(
-      "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
-    ).textContent;
-    const product_price = document.querySelector("div.price").textContent;
-    var product_platform = document.querySelector(
+        "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
+      ).textContent,
+      product_price = document.querySelector("div.price").textContent;
+    let product_platform = document.querySelector(
       "div.subinfos > a.platform"
     ).textContent;
-    if (product_platform.startsWith("Other")) {
-      product_platform = "N/A";
-    }
+    if (product_platform.startsWith("Other")) product_platform = "N/A";
+
     presenceData.details = "Viewing a product:";
     presenceData.state = `[${product_platform}] ${product_title} (${product_price})`;
   } catch {
@@ -29,15 +28,11 @@ presence.on("UpdateData", async () => {
       ).textContent;
       presenceData.details = "Viewing a profile:";
       presenceData.state = profile_name;
-    } else {
-      presenceData.details = (await strings).browsing;
-    }
+    } else presenceData.details = (await strings).browsing;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

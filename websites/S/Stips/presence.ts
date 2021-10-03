@@ -175,9 +175,7 @@ presence.on("UpdateData", () => {
       if (isEdit) details = isAns ? askObj.editAns : askObj.editAsk;
       if (isWrite) details = askObj.write;
 
-      if (!details) {
-        details = askObj.main;
-      }
+      if (!details) details = askObj.main;
 
       action = `${Path} & ${details}`;
       break;
@@ -263,9 +261,7 @@ presence.on("UpdateData", () => {
       if (isDelete) details = isAns ? repObj.removeAns : repObj.removeAsk;
       if (isEdit) details = isAns ? repObj.editAns : repObj.editAsk;
 
-      if (!details) {
-        details = repObj.main;
-      }
+      if (!details) details = repObj.main;
 
       action = `${Path} & ${details}`;
       break;
@@ -334,9 +330,8 @@ presence.on("UpdateData", () => {
       break;
     case "post":
       pstObj = translate(is_male).post;
-      if (PathSecond === "ask") {
-        details = pstObj.ask.main;
-      }
+      if (PathSecond === "ask") details = pstObj.ask.main;
+
       action = `${Path} & ${details}`;
       break;
   }
@@ -346,7 +341,7 @@ presence.on("UpdateData", () => {
       decodeURI(
         location.pathname.split("/").length === 4
           ? location.pathname.replace(
-              "/" + location.pathname.split("/").pop(),
+              `/${location.pathname.split("/").pop()}`,
               ""
             )
           : location.pathname === "/"
@@ -359,7 +354,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "stips",
       smallImageKey: has_dark ? "stipspin_dark" : "stipspin_light",
       startTimestamp: elapsed,
-      smallImageText: smallImageText
+      smallImageText
     };
 
   presence.setActivity(data);

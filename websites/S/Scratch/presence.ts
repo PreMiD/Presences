@@ -22,9 +22,9 @@ presence.on("UpdateData", () => {
         window.location.pathname
           .toLowerCase()
           .includes("/projects/editor/?tutorial=getstarted")
-      ) {
+      )
         presenceData.state = "Tutorial";
-      } else if (
+      else if (
         window.location.pathname
           .toLowerCase()
           .includes("/projects/editor/?tutorial=all")

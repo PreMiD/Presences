@@ -1,10 +1,10 @@
-var presence = new Presence({
-  clientId: "631990024719695901" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var user: any, search: any, title: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let presence = new Presence({
+    clientId: "631990024719695901" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  user: any,
+  search: any,
+  title: any,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -12,17 +12,16 @@ presence.on("UpdateData", async () => {
   };
 
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "thearchon.net") {
+  if (document.location.hostname === "thearchon.net") {
     if (document.location.pathname.includes("/threads/")) {
       title = document.querySelector(
         "#top > div.p-body > div > div.p-body-header > div.p-title > h1"
       );
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.innerText.length > 128)
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+      else presenceData.state = title.innerText;
+
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/trending/")) {
@@ -111,16 +110,14 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/conversations/")) {
-      if (document.location.pathname.split("/")[4] != null) {
+      if (document.location.pathname.split("/")[4] !== null) {
         title = document.querySelector(
           "#top > div.p-body > div > div.uix_titlebar > div > div > div.p-title > h1"
         );
         presenceData.details = "Forums, Reading DM:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
-          presenceData.state = title.innerText;
-        }
+        if (title.innerText.length > 128)
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+        else presenceData.state = title.innerText;
 
         presenceData.smallImageKey = "reading";
 
@@ -153,7 +150,7 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#top > div.p-body > div > div.uix_titlebar > div > div > div > h1 > a > em"
       );
-      if (search != null) {
+      if (search !== null) {
         presenceData.details = "Forums, searching for:";
         presenceData.state = search.innerText;
 
@@ -265,7 +262,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#top > div.p-body > div > div.p-body-header > div.p-title > h1"
       );
-      if (title != null && title.innerText != "THEARCHON") {
+      if (title !== null && title.innerText !== "THEARCHON") {
         presenceData.details = "Forums, viewing category:";
         presenceData.state = title.innerText;
 
@@ -294,7 +291,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/") {
+    } else if (document.location.pathname === "/") {
       presenceData.details = "Viewing home page";
       delete presenceData.state;
 
@@ -305,7 +302,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "shop.thearchon.net") {
+  } else if (document.location.hostname === "shop.thearchon.net") {
     title = document.querySelector("head > title");
     presenceData.details = "Store, viewing:";
     presenceData.state = title.innerText.replace("TheArchon Store | ", "");

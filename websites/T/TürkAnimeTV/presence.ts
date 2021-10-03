@@ -52,10 +52,11 @@ presence.on("UpdateData", async () => {
     const epNum = ep.match(/[0-9]+\. Bölüm/g);
 
     presenceData.details = `${(await strings).watching} ${title}`;
-    if (epNum)
+    if (epNum) {
       presenceData.state = `${(await strings).episode} ${
         epNum[0].split(".")[0]
       }`;
+    }
 
     presenceData.buttons = [
       {

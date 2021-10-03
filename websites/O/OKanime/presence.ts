@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "oa"
   };
 
-  if (video != null && !isNaN(video.duration) && video.duration > 0) {
+  if (video !== null && !isNaN(video.duration) && video.duration > 0) {
     const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
       document
         .querySelector("body div.summary-block > p")
         ?.firstChild?.textContent.includes("حلقة")
-    )
+    ) {
       data.state = document
         .querySelector("body div.summary-block > p")
         .firstChild.textContent.substr(
@@ -60,6 +60,7 @@ presence.on("UpdateData", async () => {
             .querySelector("body div.summary-block > p")
             .firstChild.textContent.indexOf("من")
         );
+    }
 
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused

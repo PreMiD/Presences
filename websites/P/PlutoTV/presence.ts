@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640292045117980713"
   }),
   strings = presence.getStrings({
@@ -15,21 +15,22 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var playing: boolean;
-var paused: boolean;
-var progress: any;
-var lastState: any;
-var oldTitle: any;
-
-var currentTime: any, duration: any;
-var video: HTMLVideoElement, timestamps: any;
+let browsingStamp = Math.floor(Date.now() / 1000),
+  title: any,
+  playing: boolean,
+  paused: boolean,
+  progress: any,
+  lastState: any,
+  oldTitle: any,
+  currentTime: any,
+  duration: any,
+  video: HTMLVideoElement,
+  timestamps: any;
 
 lastState = null;
 oldTitle = null;
@@ -39,7 +40,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "plutotv"
   };
 
-  if (document.location.hostname == "pluto.tv") {
+  if (document.location.hostname === "pluto.tv") {
     if (document.location.pathname.includes("/live-tv/")) {
       progress = document.querySelector(
         "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.VideoControls__videoControls-irCOHX.frYEBe > div.VideoControls__bottomPanel-gpACgQ.jiJGDj > div > div > div > div"
@@ -51,11 +52,11 @@ presence.on("UpdateData", async () => {
       //console.log("progress:" + progress); //Previews the progress in console
       //console.log("lastState:" + lastState); //Previews the lastState in console
 
-      if (lastState == progress && progress !== "0" && progress !== "100") {
+      if (lastState === progress && progress !== "0" && progress !== "100") {
         //If the player doesnt equal to 0 or 100 but does equal to the latest request make paused true
         playing = true;
         paused = true;
-      } else if (progress == "0" || progress == "100") {
+      } else if (progress === "0" || progress === "100") {
         //If the player equals to 0 or 100 so that site information can be displayed because there is nothing playing
         playing = false;
         paused = true;
@@ -73,20 +74,20 @@ presence.on("UpdateData", async () => {
       //console.log("paused:" + paused); //previews paused in console
     }
 
-    if (playing == true && paused == false) {
+    if (playing === true && paused === false) {
       title = document.querySelector(
         "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.NnGyI"
       );
       presenceData.details = title.innerText;
-      presenceData.state = progress + "% progressed";
+      presenceData.state = `${progress}% progressed`;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
-    } else if (playing == true && paused == true) {
+    } else if (playing === true && paused === true) {
       title = document.querySelector(
         "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.NnGyI"
       );
       presenceData.details = title.innerText;
-      presenceData.state = progress + "% progressed";
+      presenceData.state = `${progress}% progressed`;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
     } else {
@@ -113,15 +114,15 @@ presence.on("UpdateData", async () => {
           title = document.querySelector(
             "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.ktRSHs > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.krcxuL"
           );
-          if (title == null) {
+          if (title === null) {
             title = document.querySelector(
               "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.krcxuL"
             );
           }
 
-          if (title == null && oldTitle !== null) {
+          if (title === null && oldTitle !== null)
             presenceData.details = oldTitle;
-          } else {
+          else {
             presenceData.details = title.textContent;
             oldTitle = title.textContent;
           }
@@ -136,14 +137,14 @@ presence.on("UpdateData", async () => {
           title = document.querySelector(
             "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.ktRSHs > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.krcxuL"
           );
-          if (title == null) {
+          if (title === null) {
             title = document.querySelector(
               "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.krcxuL"
             );
           }
-          if (title == null && oldTitle !== null) {
+          if (title === null && oldTitle !== null)
             presenceData.details = oldTitle;
-          } else {
+          else {
             presenceData.details = title.textContent;
             oldTitle = title.textContent;
           }
@@ -161,10 +162,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,19 +1,17 @@
-var presence = new Presence({
-  clientId: "639583736970739733"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
+let presence = new Presence({
+    clientId: "639583736970739733"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  user: any,
+  title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "aod"
   };
 
-  if (document.location.hostname == "www.anime-on-demand.de") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.anime-on-demand.de") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/anime/")) {
@@ -51,10 +49,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

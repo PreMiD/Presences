@@ -14,7 +14,7 @@
     "nl": "Website presence integratie voor StatusBot"
   },
   "service": "StatusBot",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/hZ0ONFr.png",
   "thumbnail": "https://i.imgur.com/llMPFYn.png",
   "color": "#4e73df",

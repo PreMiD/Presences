@@ -14,12 +14,13 @@ presence.on("UpdateData", async () => {
     largeImageKey: "online_sequencer_icon",
     startTimestamp: timestart
   };
-  if (document.getElementsByClassName("fas fa-stop")[0] != undefined) {
+  if (document.getElementsByClassName("fas fa-stop")[0] !== undefined) {
     prevPage = currPage;
     currPage = "l";
     presenceData.details = "Listening to a sequence";
-    presenceData.state =
-      "Title: " + (document.getElementById("title") as HTMLInputElement).value;
+    presenceData.state = `Title: ${
+      (document.getElementById("title") as HTMLInputElement).value
+    }`;
     presenceData.buttons = [
       { label: "View Sequence", url: window.location.href },
       {
@@ -32,25 +33,26 @@ presence.on("UpdateData", async () => {
     prevPage = currPage;
     currPage = "w";
     presenceData.details = "Writing a new sequence";
-    presenceData.state =
-      "Title: " + (document.getElementById("title") as HTMLInputElement).value;
+    presenceData.state = `Title: ${
+      (document.getElementById("title") as HTMLInputElement).value
+    }`;
   } else if (document.location.pathname === "/sequences") {
     prevPage = currPage;
     currPage = "bs";
     presenceData.details = "Browsing sequences";
-    if (document.getElementsByTagName("input")[2].value != "") {
-      presenceData.state =
-        "Searching: " +
-        (document.getElementsByTagName("input")[2] as HTMLInputElement).value;
+    if (document.getElementsByTagName("input")[2].value !== "") {
+      presenceData.state = `Searching: ${
+        (document.getElementsByTagName("input")[2] as HTMLInputElement).value
+      }`;
     }
   } else if (document.location.pathname === "/memberlist") {
     prevPage = currPage;
     currPage = "ml";
     presenceData.details = "Viewing members";
-    if (document.getElementsByTagName("input")[2].value != "") {
-      presenceData.state =
-        "Searching: " +
-        (document.getElementsByTagName("input")[2] as HTMLInputElement).value;
+    if (document.getElementsByTagName("input")[2].value !== "") {
+      presenceData.state = `Searching: ${
+        (document.getElementsByTagName("input")[2] as HTMLInputElement).value
+      }`;
     }
   } else if (document.location.pathname.startsWith("/members/")) {
     prevPage = currPage;
@@ -70,11 +72,9 @@ presence.on("UpdateData", async () => {
     const threadtitle = (
       document.getElementsByClassName("thead")[0] as HTMLElement
     ).innerText;
-    if (threadtitle.includes("Thread Modes")) {
+    if (threadtitle.includes("Thread Modes"))
       presenceData.state = threadtitle.substr(13);
-    } else {
-      presenceData.state = threadtitle;
-    }
+    else presenceData.state = threadtitle;
   } else if (document.location.pathname.startsWith("/forum/announcements")) {
     prevPage = currPage;
     currPage = "fa";
@@ -114,33 +114,26 @@ presence.on("UpdateData", async () => {
             .href
         }
       ];
-    } else {
-      presenceData.details = "Editing a sequence";
-    }
+    } else presenceData.details = "Editing a sequence";
+
     const str = (
       document.getElementsByClassName("text")[1] as HTMLElement
     ).innerHTML.trim();
-    if (str.includes("by <a")) {
-      presenceData.state = "Title: " + str.substring(0, str.indexOf("by <a"));
-    } else {
-      presenceData.state = "Title: " + str;
-    }
+    if (str.includes("by <a"))
+      presenceData.state = `Title: ${str.substring(0, str.indexOf("by <a"))}`;
+    else presenceData.state = `Title: ${str}`;
   }
 
-  if (document.getElementById("chatbox") != null) {
+  if (document.getElementById("chatbox") !== null) {
     prevPage = currPage;
     currPage = "c";
     presenceData.details = "Viewing Chat";
   }
 
-  if (prevPage != currPage) {
-    refreshTime();
-  }
+  if (prevPage !== currPage) refreshTime();
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

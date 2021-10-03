@@ -15,9 +15,9 @@ presence.on("UpdateData", async () => {
     },
     path = document.location.pathname;
 
-  if (document.location.hostname == "www.linkedin.com") {
+  if (document.location.hostname === "www.linkedin.com") {
     //Homepage.
-    if (path == "/feed/") {
+    if (path === "/feed/") {
       presenceData.details = "Browsing Feed.";
       presenceData.startTimestamp = browsingStamp;
     }
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = subSection;
       //If the user is on following/ subsection, show the selected filter.
-      if (subSection == feedSubSection["following/"]) {
+      if (subSection === feedSubSection["following/"]) {
         presenceData.state = `Filtering by ${
           filterType[
             document.location.search
@@ -72,31 +72,25 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
 
       //Invitations subsection.
-      if (path.includes("/invitation-manager/")) {
+      if (path.includes("/invitation-manager/"))
         presenceData.state = "Viewing Invitations.";
-      }
       //Contacts subsections.
       else if (
         path.includes("/import-contacts/") ||
-        path == "/mynetwork/contacts/"
+        path === "/mynetwork/contacts/"
       ) {
         //Contacts homepage.
-        if (path == "/mynetwork/contacts/") {
+        if (path === "/mynetwork/contacts/")
           presenceData.state = "Browsing Contacts.";
-        }
         //Saved contacts.
-        else if (path.endsWith("saved-contacts/")) {
+        else if (path.endsWith("saved-contacts/"))
           presenceData.state = "Browsing Saved contacts.";
-        }
         //Adding contacts.
-        else {
-          presenceData.state = "Adding Contacts.";
-        }
+        else presenceData.state = "Adding Contacts.";
       }
       //Teammates subsection.
-      else if (path.includes("/colleagues/")) {
+      else if (path.includes("/colleagues/"))
         presenceData.state = "Browsing Colleagues.";
-      }
       //My Network subsections with same link path structure.
       else {
         enum networkSubSection {
@@ -114,7 +108,7 @@ presence.on("UpdateData", async () => {
       }
     }
     //Jobs section.
-    else if (path.includes("/jobs/") || path == "/my-items/saved-jobs/") {
+    else if (path.includes("/jobs/") || path === "/my-items/saved-jobs/") {
       presenceData.startTimestamp = browsingStamp;
 
       //Application settings subsection.
@@ -127,11 +121,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Browsing Jobs:";
 
         //Saved Jobs subsection.
-        if (path == "/my-items/saved-jobs/") {
+        if (path === "/my-items/saved-jobs/")
           presenceData.state = "Saved Jobs.";
-        }
         //Searching for a Job subsection.
-        else if (path == "/jobs/search/") {
+        else if (path === "/jobs/search/") {
           //Getting user preference for showJobsQuery.
           const showJobsQuery = await presence.getSetting("showJobsQuery");
 
@@ -145,14 +138,10 @@ presence.on("UpdateData", async () => {
             );
 
             presenceData.state = `Searching for a "${jobsQuery}" position.`;
-          } else {
-            presenceData.state = "Searching for a job.";
-          }
+          } else presenceData.state = "Searching for a job.";
         }
         //Homepage.
-        else {
-          presenceData.state = "Homepage.";
-        }
+        else presenceData.state = "Homepage.";
       }
     }
     //Interview prep section (Jobs related section with a different path).
@@ -173,13 +162,11 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
 
       //New message subsection.
-      if (path == "/messaging/thread/new/") {
+      if (path === "/messaging/thread/new/")
         presenceData.state = "Writing a new message.";
-      }
       //New group subsection.
-      else if (path == "/messaging/compose-group/") {
+      else if (path === "/messaging/compose-group/")
         presenceData.state = "Creating a new group.";
-      }
       //Chats subsection.
       else {
         //Getting user preference for showChatUsername.
@@ -193,13 +180,11 @@ presence.on("UpdateData", async () => {
             .innerHTML.trim();
 
           presenceData.state = `Chatting with ${unescapeHTML(charUsername)}.`;
-        } else {
-          presenceData.state = "Chatting with someone.";
-        }
+        } else presenceData.state = "Chatting with someone.";
       }
     }
     //Notifications section.
-    else if (path == "/notifications/") {
+    else if (path === "/notifications/") {
       presenceData.details = "Viewing Notifications.";
       presenceData.startTimestamp = browsingStamp;
     }
@@ -218,7 +203,7 @@ presence.on("UpdateData", async () => {
     //Profile subsections.
     else if (path.match(/\/in\/[A-z0-9-]+\//)) {
       const userName =
-        path != "/in/luca-biagetti/detail/recent-activity/"
+        path !== "/in/luca-biagetti/detail/recent-activity/"
           ? document
               .querySelector(
                 "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div:nth-child(2) > main > div > section > div:nth-child(2) > div:nth-child(2) > div:first-child > ul:first-child > li:first-child"
@@ -249,7 +234,7 @@ presence.on("UpdateData", async () => {
           .shift() as keyof typeof detailSubSection;
 
         //If the user is editing skills (the only edit related subsection with "detail" path).
-        if (path == "/in/luca-biagetti/detail/skills/add/") {
+        if (path === "/in/luca-biagetti/detail/skills/add/") {
           presenceData.details = "Editing profile:";
           presenceData.state = "Skills.";
         }
@@ -340,13 +325,10 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
 
         //Requested groups subsection.
-        if (path == "/groups/requests/") {
+        if (path === "/groups/requests/")
           presenceData.state = "Requested groups.";
-        }
         //Homepage.
-        else {
-          presenceData.state = "My groups.";
-        }
+        else presenceData.state = "My groups.";
       }
     }
     //Settings section.
@@ -355,12 +337,12 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     }
     //My Items section.
-    else if (path == "/my-items/") {
+    else if (path === "/my-items/") {
       presenceData.details = "Browsing My Items.";
       presenceData.startTimestamp = browsingStamp;
     }
     //New Post section.
-    else if (path == "/post/new/") {
+    else if (path === "/post/new/") {
       presenceData.details = "Writing a New Post.";
       presenceData.startTimestamp = browsingStamp;
     }
@@ -376,10 +358,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

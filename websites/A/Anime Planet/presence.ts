@@ -50,9 +50,8 @@ presence.on("UpdateData", async () => {
     timestamp: boolean = await presence.getSetting("timestamp"),
     buttons = await presence.getSetting("buttons");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -158,7 +157,7 @@ presence.on("UpdateData", async () => {
         ]
       },
       "/studios/": {
-        details: `Viewing studio:`,
+        details: "Viewing studio:",
         state: content.title
       },
       "/manga/(read-online|recommendations|light-novels|top-manga|all|magazines)":
@@ -167,7 +166,7 @@ presence.on("UpdateData", async () => {
           state: content.title
         },
       "/manga/tags/": {
-        details: `Manga | Viewing tag:`,
+        details: "Manga | Viewing tag:",
         state: content.title
       },
       "/manga/": {
@@ -179,7 +178,7 @@ presence.on("UpdateData", async () => {
         state: content.title
       },
       "/anime/tags/": {
-        details: `Anime | Viewing tag:`,
+        details: "Anime | Viewing tag:",
         state: content.title
       },
       "/anime/": {
