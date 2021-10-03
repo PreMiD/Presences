@@ -5,7 +5,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
-    "inc": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
+    "inc": "tsc --module CommonJS --target ES1 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
     "se": "node ./util/tools/auto/syntaxEnforcer.js",
     "se:compile": "tsc -p ./util/configs/tsconfig.auto.syntaxEnforcer.json",
     "sv": "node ./util/tools/auto/schemaValidator.js",
