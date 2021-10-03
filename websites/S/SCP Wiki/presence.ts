@@ -7,8 +7,7 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp,
-    state: document.getElementById("page-title").textContent.trim()
+    startTimestamp: browsingStamp
   };
 
   if (document.location.hostname == "scp-int.wikidot.com")
@@ -17,7 +16,9 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "logo-sandbox";
 
   if (document.location.pathname == "/" || !document.location.pathname)
-    presenceData.state = "Main";
+    presenceData.state = "Front Page";
+  else
+    presenceData.state = document.getElementById("page-title").textContent.trim();
 
   presence.setActivity(presenceData);
 });
