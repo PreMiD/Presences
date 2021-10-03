@@ -10,10 +10,9 @@
   },
   "url": [
     "www.pramborsfm.com",
-    "live.pramborsfm.com",
-    "streaming.pramborsfm.com"
+    "live.pramborsfm.com"
   ],
-  "version": "1.3.2",
+  "version": "1.3.3",
   "logo": "https://i.imgur.com/GHM1owM.png",
   "thumbnail": "https://i.imgur.com/mhwloZI.png",
   "color": "#ffc925",
