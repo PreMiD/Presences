@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "617113314572369973" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var group: any, typing: any, chat: any, user: any, search: any;
+ group: any, typing: any, chat: any, user: any, search: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
       if (!typing.className.includes("ql-blank")) {
         presenceData.details = "Typing in DMs to:";
         presenceData.state =
-          user.innerText + " (Workspace: " + group.innerText + ")";
+          `${user.innerText} (Workspace: ${group.innerText})`;
 
         delete presenceData.smallImageKey;
 
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.details = "Reading DMs from:";
         presenceData.state =
-          user.innerText + " (Workspace: " + group.innerText + ")";
+          `${user.innerText} (Workspace: ${group.innerText})`;
 
         presenceData.smallImageKey = "reading";
 
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
       if (!typing.className.includes("ql-blank")) {
         presenceData.details = "Typing in channel:";
         presenceData.state =
-          "#" + chat.innerText + " (Workspace: " + group.innerText + ")";
+          `#${chat.innerText} (Workspace: ${group.innerText})`;
 
         delete presenceData.smallImageKey;
 
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.details = "Reading channel messages:";
         presenceData.state =
-          "#" + chat.innerText + " (Workspace: " + group.innerText + ")";
+          `#${chat.innerText} (Workspace: ${group.innerText})`;
 
         presenceData.smallImageKey = "reading";
 
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
   ) {
     search = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = "Searching for: " + search[2];
+    presenceData.state = `Searching for: ${search[2]}`;
 
     presenceData.smallImageKey = "search";
 
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
   ) {
     search = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = "Searching with role: " + search[2];
+    presenceData.state = `Searching with role: ${search[2]}`;
 
     presenceData.smallImageKey = "search";
 
@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
   ) {
     search = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = "Searching with tag: " + search[2];
+    presenceData.state = `Searching with tag: ${search[2]}`;
 
     presenceData.smallImageKey = "search";
 
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
   ) {
     search = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = "Searching with category: " + search[2];
+    presenceData.state = `Searching with category: ${search[2]}`;
 
     presenceData.smallImageKey = "search";
 
@@ -114,7 +114,7 @@ presence.on("UpdateData", async () => {
     );
     if (group !== null) {
       presenceData.details = "Slack Blog";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -135,7 +135,7 @@ presence.on("UpdateData", async () => {
       "body > main > section > div.banner_container > h1"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = "Browsing through category: " + search.innerText;
+    presenceData.state = `Browsing through category: ${search.innerText}`;
 
     delete presenceData.smallImageKey;
 
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
       "body > main > div.article_page.has_sidenav > div.article_container > div.content_col > h1"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = "Reading article: " + search.innerText;
+    presenceData.state = `Reading article: ${search.innerText}`;
 
     delete presenceData.smallImageKey;
 
@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
       "body > main > section.banner.banner_search_results > div > h1 > span.hidden.query_val"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = "Searching for: " + search.innerText;
+    presenceData.state = `Searching for: ${search.innerText}`;
 
     presenceData.smallImageKey = "search";
 
@@ -187,7 +187,7 @@ presence.on("UpdateData", async () => {
     group = document.querySelector("#api_main_content > h1");
     if (group !== null) {
       presenceData.details = "Slack api";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -235,7 +235,7 @@ presence.on("UpdateData", async () => {
     if (group[4] !== null) {
       group = document.querySelector("#main > div:nth-child(1) > h1");
       presenceData.details = "Slack";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -252,7 +252,7 @@ presence.on("UpdateData", async () => {
     if (group[4] !== null) {
       group = document.querySelector("#main > section > div > header > h1");
       presenceData.details = "Slack";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -271,7 +271,7 @@ presence.on("UpdateData", async () => {
         "#main > section.c-billboard > div > header > h1"
       );
       presenceData.details = "Slack";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 

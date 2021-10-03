@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "starz-logo"
     },
-    href = window.location.href,
+    {href} = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -72,26 +72,26 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title) {
+    if (title) 
       presence.setActivity(data, !video.paused);
-    }
+    
   } else {
     data.details = "Browsing...";
-    if (path.includes("/series")) {
+    if (path.includes("/series")) 
       data.details = "Browsing Series";
-    }
-    if (path.includes("/movies")) {
+    
+    if (path.includes("/movies")) 
       data.details = "Browsing Movies";
-    }
-    if (path.includes("/playlist")) {
+    
+    if (path.includes("/playlist")) 
       data.details = "Browsing Playlist";
-    }
-    if (path.includes("/schedule")) {
+    
+    if (path.includes("/schedule")) 
       data.details = "Browsing Schedule";
-    }
-    if (path.includes("/search")) {
+    
+    if (path.includes("/search")) 
       data.details = "Searching...";
-    }
+    
     data.startTimestamp = elapsed;
     presence.setActivity(data);
   }

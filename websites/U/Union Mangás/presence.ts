@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "609791567540256780"
-});
+}),
 
-const startTimestamp = Math.floor(Date.now() / 1000),
+ startTimestamp = Math.floor(Date.now() / 1000),
   { pathname } = window.location,
   strings = presence.getStrings({
     browsing: "presence.activity.browsing"
@@ -25,9 +25,9 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith(`/leitor`)) {
     const title = document
       .querySelector(".titulo-leitura")
-      .textContent.split(" - ");
-    const mangaName = title[0];
-    const mangaChapter = title[1];
+      .textContent.split(" - "),
+     mangaName = title[0],
+     mangaChapter = title[1];
     presenceData.details = mangaName;
     if (
       !document
@@ -39,17 +39,17 @@ presence.on("UpdateData", async () => {
         (document.querySelector(`#paginas`) as HTMLSelectElement).options
           .selectedIndex + 1;
       presenceData.state = `${mangaChapter} - Página ${mangaPage}`;
-    } else {
+    } else 
       presenceData.state = mangaChapter;
-    }
+    
     presenceData.smallImageKey = `reading`;
     presenceData.smallImageText = `Lendo`;
   } else if (pathname.startsWith(`/scans`)) {
     presenceData.details = `Procurando uma Scan`;
     presenceData.smallImageKey = `search`;
     presenceData.smallImageText = `Procurando`;
-  } else {
+  } else 
     presenceData.details = (await strings).browsing;
-  }
+  
   presence.setActivity(presenceData, true);
 });

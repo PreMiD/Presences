@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "743239699992281160"
 });
 
@@ -55,20 +55,20 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = 0;
 
     // Page Section
-    if (Queries.section === "my-updates") {
+    if (Queries.section === "my-updates") 
       data.state = "Мои обновления";
-    } else {
+     else 
       data.state = "Все обновления";
-    }
+    
   } else if (Routes[0] === "manga-list") {
     // List of mangas
     data.smallImageText = "reading";
     data.smallImageKey = "search";
     data.details = "Каталог хентая";
 
-    if (!Array.isArray(Queries.types)) {
+    if (!Array.isArray(Queries.types)) 
       Queries.types = [Queries.types];
-    }
+    
 
     // Search Types
     if (Queries.types && Queries.types.length === 1) {
@@ -126,10 +126,10 @@ presence.on("UpdateData", async () => {
         }
       });
 
-      data.state = "Ищет: " + mangas.join(", ");
-    } else {
+      data.state = `Ищет: ${mangas.join(", ")}`;
+    } else 
       data.state = "Ищет Хентай";
-    }
+    
   } else if (Routes[0] === "forum") {
     // Forum page
     data.details = "Форум";
@@ -140,13 +140,13 @@ presence.on("UpdateData", async () => {
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
 
-      if (Queries.subscription) {
+      if (Queries.subscription) 
         data.state = "Мои подписки";
-      }
+      
 
-      if (Queries.user_id) {
+      if (Queries.user_id) 
         data.state = "Мои темы";
-      }
+      
 
       switch (Queries.category) {
         case "all":
@@ -216,7 +216,7 @@ presence.on("UpdateData", async () => {
 
         if (DiscussionAuthor && DiscussionTitle) {
           data.state =
-            "Тема: " + DiscussionTitle + "| Автор: " + DiscussionAuthor;
+            `Тема: ${DiscussionTitle}| Автор: ${DiscussionAuthor}`;
         }
       } else if (Routes[3] && Routes[3] === "edit") {
         // Editor discussion
@@ -224,7 +224,7 @@ presence.on("UpdateData", async () => {
         data.smallImageKey = "writing";
 
         data.state = DiscussionTitle
-          ? "Редактирует тему: " + DiscussionTitle
+          ? `Редактирует тему: ${DiscussionTitle}`
           : "Редактирует тему";
       }
     }
@@ -237,7 +237,7 @@ presence.on("UpdateData", async () => {
       data.details = "Faq";
       data.smallImageText = "Редактирует";
       data.smallImageKey = "writing";
-      data.state = "Редактирует: " + Queries.article + " вопрос";
+      data.state = `Редактирует: ${Queries.article} вопрос`;
     } else {
       // Faq Sections
       data.details = "Faq";
@@ -285,9 +285,9 @@ presence.on("UpdateData", async () => {
       const titleElement = document.querySelector(".news__title");
       NewsTitle = titleElement && titleElement.textContent;
 
-      if (NewsTitle) {
+      if (NewsTitle) 
         data.state = NewsTitle;
-      }
+      
     } else {
       // News List
       data.details = "Новости";
@@ -345,11 +345,11 @@ presence.on("UpdateData", async () => {
 
       PeopleName = name.value;
 
-      if (PeopleName.length > 1) {
+      if (PeopleName.length > 1) 
         data.state = PeopleName;
-      } else {
+       else 
         data.state = "Имя автора не задано";
-      }
+      
     }
   } else if (Routes[0] === "team") {
     // Team page
@@ -364,11 +364,11 @@ presence.on("UpdateData", async () => {
 
       TeamName = name.value;
 
-      if (TeamName.length > 1) {
+      if (TeamName.length > 1) 
         data.state = TeamName;
-      } else {
+       else 
         data.state = "Имя команды не задано";
-      }
+      
     } else {
       // Others
 
@@ -382,9 +382,9 @@ presence.on("UpdateData", async () => {
 
         TeamName = title && title.textContent.replace("редактировать", "");
 
-        if (TeamName) {
+        if (TeamName) 
           data.state = TeamName;
-        }
+        
       } else if (Routes[2] === "edit") {
         data.details = "Команда перевода";
         data.smallImageText = "Редактирует переводчика";
@@ -407,35 +407,35 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Управляет сайтом";
     data.smallImageKey = "reading";
 
-    if (!Routes[1]) {
+    if (!Routes[1]) 
       data.state = "Модерация глав";
-    } else if (Routes[1] === "manga") {
-      if (Routes[2] === "rejected") {
+     else if (Routes[1] === "manga") {
+      if (Routes[2] === "rejected") 
         data.state = "Отклоненный хентай";
-      } else {
+       else 
         data.state = "Модерация хентая";
-      }
-    } else if (Routes[1] === "manga-edit") {
+      
+    } else if (Routes[1] === "manga-edit") 
       data.state = "Изменения хентаев";
-    } else if (Routes[1] === "author") {
+     else if (Routes[1] === "author") 
       data.state = "Новые Авторы";
-    } else if (Routes[1] === "publisher") {
+     else if (Routes[1] === "publisher") 
       data.state = "Новые Издательства";
-    } else if (Routes[1] === "comments") {
+     else if (Routes[1] === "comments") 
       data.state = "Жалобы на комментарии";
-    } else if (Routes[1] === "forum-posts") {
+     else if (Routes[1] === "forum-posts") 
       data.state = "Жалобы на форуме";
-    } else if (Routes[1] === "comments-list") {
-      if (Routes[2] === "all") {
+     else if (Routes[1] === "comments-list") {
+      if (Routes[2] === "all") 
         data.state = "Список комментариев";
-      } else if (Routes[2] === "sticky") {
+       else if (Routes[2] === "sticky") 
         data.state = "Закрепленные комментарии";
-      }
-    } else if (Routes[1] === "ban-list") {
+      
+    } else if (Routes[1] === "ban-list") 
       data.state = "Баны";
-    } else if (Routes[1] === "other") {
+     else if (Routes[1] === "other") 
       data.state = "Другое";
-    }
+    
   } else if (Routes[0] === "user") {
     // User page
     data.smallImageText = "Смотрит профиль пользователя";
@@ -445,9 +445,9 @@ presence.on("UpdateData", async () => {
 
     UserName = username && username.textContent;
 
-    if (UserName) {
-      data.details = "Профиль:" + UserName;
-    }
+    if (UserName) 
+      data.details = `Профиль:${UserName}`;
+    
 
     if (Routes[1] === "content") {
       data.details = `Мои добавления`;
@@ -455,15 +455,15 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "writing";
       data.startTimestamp = 0;
 
-      if (!Routes[2]) {
+      if (!Routes[2]) 
         data.state = "Добавленные тайтлы";
-      } else if (Routes[2] === "moderation") {
+       else if (Routes[2] === "moderation") 
         data.state = "Тайтлы на модерации";
-      } else if (Routes[2] === "rejected") {
+       else if (Routes[2] === "rejected") 
         data.state = "Тайтлы не прошедшие модерацию";
-      } else if (Routes[2] === "chapters") {
+       else if (Routes[2] === "chapters") 
         data.state = "Главы на модерации";
-      }
+      
     } else if (Routes[1] === "edit") {
       data.details = `Мои настройки`;
       data.smallImageText = "Настраивает";
@@ -509,15 +509,15 @@ presence.on("UpdateData", async () => {
         data.details = `Профиль: ${UserName}`;
         let comment_type;
 
-        if (Queries.comment_type === "manga") {
+        if (Queries.comment_type === "manga") 
           comment_type = "Комментарии к хентаю";
-        } else if (Queries.comment_type === "chapter") {
+         else if (Queries.comment_type === "chapter") 
           comment_type = "Комментарии к главам";
-        } else if (Queries.comment_type === "post") {
+         else if (Queries.comment_type === "post") 
           comment_type = "Комментарии к новостям";
-        } else {
+         else 
           comment_type = "Все комментарии";
-        }
+        
 
         data.state = comment_type;
       } else if (Routes[2] === "following") {
@@ -545,11 +545,11 @@ presence.on("UpdateData", async () => {
 
       const title = <HTMLInputElement>document.getElementById("rus_name");
 
-      if (title.value.length > 1) {
+      if (title.value.length > 1) 
         data.state = title.value;
-      } else {
+       else 
         data.state = "Имя хентая не задано";
-      }
+      
     } else {
       if (Routes[2] === "edit") {
         // edit
@@ -579,7 +579,7 @@ presence.on("UpdateData", async () => {
 
         const title = document.querySelector(".section__header .breadcrumb a");
 
-        data.state = "Ранобэ: " + title.textContent;
+        data.state = `Ранобэ: ${title.textContent}`;
       } else if (Routes[2] === "add-chapter") {
         // add chapter
         data.details = "Добавляет главу";
@@ -588,7 +588,7 @@ presence.on("UpdateData", async () => {
 
         const title = document.querySelector(".section__header .breadcrumb a");
 
-        data.state = "Ранобэ: " + title.textContent;
+        data.state = `Ранобэ: ${title.textContent}`;
       } else {
         data.details = "Редактирует главу";
         data.smallImageText = "Пишет";
@@ -596,7 +596,7 @@ presence.on("UpdateData", async () => {
 
         const title = document.querySelector(".section__header .breadcrumb a");
 
-        data.state = "Ранобэ: " + title.textContent;
+        data.state = `Ранобэ: ${title.textContent}`;
       }
     }
   } else {
@@ -604,8 +604,8 @@ presence.on("UpdateData", async () => {
     const ReaderMode = document.querySelector(".reader");
 
     if (ReaderMode) {
-      const titleArray: Array<string> = document.title.split(" ");
-      const mangaName = titleArray.slice(2, -4).join(" ");
+      const titleArray: Array<string> = document.title.split(" "),
+       mangaName = titleArray.slice(2, -4).join(" ");
 
       data.details = "Читает хентай";
       data.state = mangaName;
@@ -613,8 +613,8 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "reading";
       data.startTimestamp = getTimeStamp();
     } else {
-      const title: string = document.title;
-      const mangaName: string = title
+      const {title} = document,
+       mangaName: string = title
         .split("/")[0]
         .split(" ")
         .slice(1)

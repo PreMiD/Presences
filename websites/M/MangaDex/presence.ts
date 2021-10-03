@@ -72,14 +72,14 @@ presence.on("UpdateData", async () => {
       chapter = (
         document.querySelector("head > title") as HTMLElement
       ).innerText
-        .replace(title + " -", "")
+        .replace(`${title} -`, "")
         .replace(" - MangaDex", "");
     data.details = title;
     data.state = chapter;
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.startsWith("/genre")) {
     const genre = document.querySelector(".card-header").textContent.trim();
-    data.details = "Viewing Genre (" + genre + ")";
+    data.details = `Viewing Genre (${genre})`;
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/history")) {
     data.details = "Viewing History";

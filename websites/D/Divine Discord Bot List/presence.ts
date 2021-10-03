@@ -20,9 +20,9 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.includes("/api")) {
     presenceData.details = `Viewing Page:`;
     presenceData.state = `Devine Discord Bots Api`;
-  } else if (document.location.pathname.includes("/add/bot")) {
+  } else if (document.location.pathname.includes("/add/bot")) 
     presenceData.details = `Adding Discord Bot`;
-  } else {
+   else {
     presenceData.details = `Viewing Page:`;
     presenceData.state = `Discord Bot List`;
   }
@@ -30,7 +30,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

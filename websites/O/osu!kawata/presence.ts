@@ -1,20 +1,20 @@
-var presence = new Presence({
+let presence = new Presence({
     clientId: "675322225490001924"
   }),
   presenceData: PresenceData = {
     largeImageKey: "logo"
   },
-  customData = false;
+  customData = false,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var title: any;
-var subtitle: any;
-var countryrank: any;
-var rank: any;
-var pp: any;
-var url: URL;
-var mode: number;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ user: any,
+ title: any,
+ subtitle: any,
+ countryrank: any,
+ rank: any,
+ pp: any,
+ url: URL,
+ mode: number;
 
 presence.on("UpdateData", async () => {
   customData = false;
@@ -82,16 +82,16 @@ presence.on("UpdateData", async () => {
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.right.aligned"
     );
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = user.innerText + "'s profile";
+    presenceData.details = `${user.innerText}'s profile`;
     presenceData.state =
-      rank.innerText +
-      " | " +
-      pp.innerText +
-      "pp | " +
-      subtitle.innerText +
-      "(" +
-      countryrank.innerText +
-      ")";
+      `${rank.innerText 
+      } | ${ 
+      pp.innerText 
+      }pp | ${ 
+      subtitle.innerText 
+      }(${ 
+      countryrank.innerText 
+      })`;
   } else if (document.location.pathname.includes("/c")) {
     title = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div.ui.top.attached.segment.overflow.auto.aligned > div > div > h1"
@@ -108,13 +108,13 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing Clans";
     presenceData.state =
-      title.innerText +
-      subtitle.innerText +
-      " | " +
-      pp.innerText +
-      "pp(" +
-      rank.innerText +
-      ")";
+      `${title.innerText +
+      subtitle.innerText 
+      } | ${ 
+      pp.innerText 
+      }pp(${ 
+      rank.innerText 
+      })`;
   } else if (document.location.pathname.includes("/about")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing About";
@@ -140,9 +140,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing their settings";
   }
 
-  if (!customData) {
+  if (!customData) 
     presence.setActivity(presenceData);
-  }
+  
 });
 
 presence.on("iFrameData", function (data) {

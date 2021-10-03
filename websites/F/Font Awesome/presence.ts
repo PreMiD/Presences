@@ -60,7 +60,7 @@ pPresence.on("UpdateData", async () => {
   if (pData.details == null) {
     pPresence.setTrayTitle();
     pPresence.setActivity();
-  } else {
+  } else 
     pPresence.setActivity(pData);
-  }
+  
 });

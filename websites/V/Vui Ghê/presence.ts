@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "642111645774118944"
   }),
   strings = presence.getStrings({
@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -37,15 +37,15 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector("#player > video.player-video") !== null
     ) {
-      var currentTime: any,
+      let currentTime: any,
         duration: any,
         paused: any,
         timestamps: any,
         video: HTMLVideoElement;
       video = document.querySelector("#player > video.player-video");
-      if (video == null) {
+      if (video == null) 
         video = document.querySelector("#centerDivVideo > div > div > video");
-      }
+      
       title = document.querySelector(
         "body > div.container > div.film-info > h1"
       ).textContent;
@@ -86,10 +86,10 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Đang xem:";
       presenceData.state =
-        "Anime - " +
+        `Anime - ${ 
         document.querySelector(
           "body > div.container > div.genre > a.genre-item.activated"
-        ).textContent;
+        ).textContent}`;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/bang-xep-hang")) {
       presenceData.startTimestamp = browsingStamp;
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -2,11 +2,11 @@ const presence = new Presence({
   clientId: "612653415419609088"
 });
 
-let lastPlaybackState = null;
-let reading;
-let browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null,
+ reading,
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-let title: any,
+ title: any,
   title2: any,
   currentPage: any,
   pageNumber: any,
@@ -23,10 +23,10 @@ let character: any,
   tag: HTMLElement,
   artist: HTMLElement;
 
-const searchURL = new URL(document.location.href);
-const searchResult = searchURL.searchParams.get("q");
+const searchURL = new URL(document.location.href),
+ searchResult = searchURL.searchParams.get("q"),
 
-const truncateAfter = function (str: string, pattern: string): string {
+ truncateAfter = function (str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
 };
 
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Home";
 
-    presenceData.state = "Page: " + homeCurrentPage.innerText;
+    presenceData.state = `Page: ${homeCurrentPage.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/g/")) {
@@ -66,18 +66,18 @@ presence.on("UpdateData", async () => {
 
       title2 = truncateAfter(tabTitle, pattern);
 
-      presenceData.details = "Reading: " + title2;
+      presenceData.details = `Reading: ${title2}`;
 
       presenceData.state =
-        "Current page: " + currentPage.innerText + "/" + pageNumber.innerText;
+        `Current page: ${currentPage.innerText}/${pageNumber.innerText}`;
 
       presenceData.startTimestamp = browsingStamp;
     } else if (title.innerText.length > 0) {
-      if (title.innerText.length > 128) {
+      if (title.innerText.length > 128) 
         presenceData.state = "Title longer than 128 characters.";
-      } else {
+       else 
         presenceData.state = title.innerText;
-      }
+      
 
       presenceData.details = "Viewing a page: ";
 
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
     );
     presenceData.details = "Favorites";
 
-    presenceData.state = "Page: " + favoriteCurrentPage.innerText;
+    presenceData.state = `Page: ${favoriteCurrentPage.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/search/")) {

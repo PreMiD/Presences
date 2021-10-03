@@ -55,10 +55,10 @@ const characterNameMap: ItemMap = {
   crg: "Cargo",
   inf: "Plus",
   cub: "Cube"
-};
+},
 
 // A map of map IDs with their names.
-const mapNameMap: ItemMap = {
+ mapNameMap: ItemMap = {
   attack: "Attack Area",
   battle: "Battle Field",
   big: "Big Place",
@@ -119,13 +119,13 @@ presence.on("UpdateData", async () => {
       if (!gameStartTimestamp) gameStartTimestamp = Date.now();
 
       // Character
-      data.smallImageKey = "char_" + data20XX.game.character.split("_")[0];
+      data.smallImageKey = `char_${data20XX.game.character.split("_")[0]}`;
       data.smallImageText =
         characterNameMap[data20XX.game.character.split("_")[0]];
 
       // Map
       if (data20XX.game.map) {
-        data.largeImageKey = "map_" + data20XX.game.map;
+        data.largeImageKey = `map_${data20XX.game.map}`;
         data.smallImageText = `${mapNameMap[data20XX.game.map]} - ${
           data.smallImageText
         }`;

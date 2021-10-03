@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "618569989842010122" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var item: any, typing: any;
+ item: any, typing: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -37,11 +37,11 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = "Viewing product:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       delete presenceData.smallImageKey;
 

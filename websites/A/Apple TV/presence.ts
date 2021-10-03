@@ -21,11 +21,12 @@ class AppleTV extends Presence {
         .shadowRoot.querySelector("div.info__eyebrow")?.textContent;
 
       if (title || eyebrow) return title;
-      else
-        return document
+      else {
+return document
           .querySelector("apple-tv-plus-player")
           .shadowRoot.querySelector("amp-video-player-internal")
           .shadowRoot.querySelector("div.info__title")?.textContent;
+}
     }
     const title = document.querySelector(
       "div.product-header__image-logo.clr-primary-text-on-dark > a > h2"
@@ -190,16 +191,17 @@ presence.on("UpdateData", async () => {
     }
   ];
 
-  for (const [pathname, PData] of Object.entries(data.presence)) {
+  for (const [pathname, PData] of Object.entries(data.presence)) 
     if (document.location.pathname.match(pathname)) PData.setPresenceData();
-  }
+  
 
   for (const setting of data.settings) {
     const settingValue = await presence.getSetting(setting.id);
 
-    if (!settingValue && setting.delete)
-      for (const PData of setting.data)
+    if (!settingValue && setting.delete) {
+for (const PData of setting.data)
         delete presenceData[PData as keyof PresenceData];
+}
   }
 
   presence.setActivity(presenceData);

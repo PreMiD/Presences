@@ -11,14 +11,15 @@ const presence = new Presence({
   };
 
 function stripText(element: HTMLElement, id = "None", log = true): string {
-  if (element && element.firstChild) {
+  if (element && element.firstChild) 
     return element.firstChild.textContent;
-  } else {
-    if (log)
-      presence.error(
-        "An error occurred while stripping data off the page. Please contact Bas950 on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-          id
+   else {
+    if (log) {
+presence.error(
+        `An error occurred while stripping data off the page. Please contact Bas950 on the PreMiD Discord server, and send him a screenshot of this error. ID: ${ 
+          id}`
       );
+}
     return null;
   }
 }
@@ -84,9 +85,9 @@ presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     time = await presence.getSetting("time");
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -110,25 +111,25 @@ presence.on("UpdateData", async () => {
     if (info === "Bookmarks") info = (await strings).bookmarks;
   }
 
-  if (path.match("/notifications")) {
+  if (path.match("/notifications")) 
     info = (await strings).notifs;
-  }
+  
 
-  if (path.match("/explore")) {
+  if (path.match("/explore")) 
     info = (await strings).explore;
-  }
+  
 
-  if (path.match("/tos")) {
+  if (path.match("/tos")) 
     info = (await strings).terms;
-  }
+  
 
-  if (path.match("/privacy")) {
+  if (path.match("/privacy")) 
     info = (await strings).privacy;
-  }
+  
 
-  if (path.match("/settings/")) {
+  if (path.match("/settings/")) 
     info = (await strings).settings;
-  }
+  
 
   if (path.match("/search")) {
     if (privacy) {
@@ -150,17 +151,17 @@ presence.on("UpdateData", async () => {
       stripText(objHeader, "Object Header").split("@")[0]
     } // ${capitalize(path.split("/")[1])}`;
 
-    if (path.match("/with_replies")) {
+    if (path.match("/with_replies")) 
       title = (await strings).viewTweetsWithReplies;
-    }
+    
 
-    if (path.match("/media")) {
+    if (path.match("/media")) 
       title = (await strings).viewMedia;
-    }
+    
 
-    if (path.match("/likes")) {
+    if (path.match("/likes")) 
       title = (await strings).viewLiked;
-    }
+    
   }
 
   if (objHeader === undefined && path.match("/status/")) {
@@ -205,13 +206,13 @@ presence.on("UpdateData", async () => {
     const header = document.querySelector(".mdl-header-title"),
       profile = document.querySelector(".js-action-url > .fullname");
 
-    if (header) {
-      info = (await strings).viewing + " " + capitalize(header.textContent);
-    }
+    if (header) 
+      info = `${(await strings).viewing} ${capitalize(header.textContent)}`;
+    
 
-    if (profile) {
-      info = (await strings).profile + " " + profile.textContent;
-    }
+    if (profile) 
+      info = `${(await strings).profile} ${profile.textContent}`;
+    
   }
 
   const presenceData: PresenceData = {

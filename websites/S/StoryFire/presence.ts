@@ -42,46 +42,48 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).pause;
     }
 
-    if (buttons)
-      presenceData.buttons = [
+    if (buttons) {
+presenceData.buttons = [
         {
           label: "Watch",
           url: document.URL
         }
       ];
-  } else if (document.location.pathname.startsWith("/forgot-password")) {
+}
+  } else if (document.location.pathname.startsWith("/forgot-password")) 
     presenceData.details = "Forgot Password";
-  } else if (document.location.pathname.startsWith("/social")) {
+   else if (document.location.pathname.startsWith("/social")) 
     presenceData.details = "Viewing social";
-  } else if (document.location.pathname.startsWith("/leaderboard")) {
+   else if (document.location.pathname.startsWith("/leaderboard")) 
     presenceData.details = "Viewing leaderboard";
-  } else if (document.location.pathname.startsWith("/blaze")) {
+   else if (document.location.pathname.startsWith("/blaze")) 
     presenceData.details = "Viewing Blaze page";
-  } else if (document.location.pathname.startsWith("/profile")) {
+   else if (document.location.pathname.startsWith("/profile")) 
     presenceData.details = "Viewing their profile";
-  } else if (document.location.pathname.startsWith("/user")) {
+   else if (document.location.pathname.startsWith("/user")) {
     presenceData.details = "Viewing a user's profile";
     presenceData.state = document.querySelector(".username h3").textContent;
-  } else if (document.location.pathname.startsWith("/story")) {
+  } else if (document.location.pathname.startsWith("/story")) 
     presenceData.details = "Writing a story";
-  } else if (document.location.pathname.startsWith("/legal-policies")) {
+   else if (document.location.pathname.startsWith("/legal-policies")) 
     presenceData.details = "Viewing legal & policies";
-  } else if (document.location.pathname.startsWith("/search")) {
+   else if (document.location.pathname.startsWith("/search")) {
     presenceData.details = "Searching";
     presenceData.smallImageKey = "search";
     if (
       (await presence.getSetting("showsearchterm")) &&
       document.querySelector(".content-header > span")
-    )
-      presenceData.state = document.querySelector(
+    ) {
+presenceData.state = document.querySelector(
         ".content-header > span"
       ).childNodes[1].textContent;
+}
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

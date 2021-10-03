@@ -51,11 +51,11 @@ presence.on("UpdateData", async () => {
     },
     newLang = await presence.getSetting("lang").catch(() => "en"),
     showButtons = await presence.getSetting("buttons"),
-    pathname = document.location.pathname;
+    {pathname} = document.location;
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

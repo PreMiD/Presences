@@ -13,21 +13,21 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 function parseQueryString(queryString?: string): any {
-  if (!queryString) {
+  if (!queryString) 
     queryString = window.location.search.substring(1);
-  }
-  const params = {};
-  const queries = queryString.split("&");
+  
+  const params = {},
+   queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
-    const indexPair = indexQuery.split("=");
-    const queryKey = decodeURIComponent(indexPair[0]);
-    const queryValue = decodeURIComponent(
+    const indexPair = indexQuery.split("="),
+     queryKey = decodeURIComponent(indexPair[0]),
+     queryValue = decodeURIComponent(
       indexPair.length > 1 ? indexPair[1] : ""
     );
     params[queryKey] = queryValue;
@@ -38,12 +38,12 @@ function parseQueryString(queryString?: string): any {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-  const pageTitle = document.querySelector("title").textContent.split(" | ");
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  const route = document.location.pathname.split("/");
-  const query = await parseQueryString(document.location.hash).search;
+   pageTitle = document.querySelector("title").textContent.split(" | "),
+   browsingStamp = Math.floor(Date.now() / 1000),
+   route = document.location.pathname.split("/"),
+   query = await parseQueryString(document.location.hash).search;
 
   if (document.location.pathname == "/") {
     presenceData.details = (await strings).browsing;
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

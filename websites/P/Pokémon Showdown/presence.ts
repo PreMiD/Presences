@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
         url: document.baseURI
       }
     ];
-    if (elapsed == null) {
+    if (elapsed == null) 
       elapsed = Math.floor(Date.now() / 1000);
-    }
+    
     data.startTimestamp = elapsed;
   } else {
     data.details = "Somewhere on-site";

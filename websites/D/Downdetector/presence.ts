@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 function decodeReq(entity: Element): string {
-  var txt = document.createElement("textarea");
+  const txt = document.createElement("textarea");
   txt.innerHTML = entity.textContent;
   return txt.value;
 }
@@ -63,7 +63,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

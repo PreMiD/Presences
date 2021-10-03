@@ -25,11 +25,11 @@ const iframe = new iFrame(),
   selector = menuIDs
     .map(
       (id) =>
-        "#" +
-        id +
-        '[style*="visibility: inherit"]' +
-        "," +
-        ("#" + id + '[style*="display: block"]')
+        `#${ 
+        id 
+        }[style*="visibility: inherit"]` +
+        `,` +
+        `#${id}[style*="display: block"]`
     )
     .join(",");
 
@@ -57,9 +57,9 @@ iframe.on("UpdateData", async () => {
       "#newbonklobby_modetext"
     )?.textContent,
     state =
-      document.querySelector("#pretty_top_name").textContent +
-      " - " +
-      document.querySelector("#pretty_top_level").textContent,
+      `${document.querySelector("#pretty_top_name").textContent 
+      } - ${ 
+      document.querySelector("#pretty_top_level").textContent}`,
     playerCount = document.querySelectorAll(".newbonklobby_playerentry").length;
 
   if (element?.id === "newbonklobby") lastGameMode = lobbyGameMode;

@@ -75,10 +75,11 @@ presence.on("UpdateData", async () => {
         nameArray.splice(nameArray.indexOf("сезон") - 1, season ? 4 : 2);
         presenceData.details = nameArray.join(" ");
 
-        if (episode)
-          presenceData.state = `${
+        if (episode) {
+presenceData.state = `${
             season ? `${season} сезон ` : ""
           }${episode} серия`;
+}
       }
 
       const namePreview = document.querySelector(

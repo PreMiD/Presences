@@ -1,15 +1,15 @@
 const presence = new Presence({
   clientId: "797749214175035412"
-});
+}),
 
-const timeStamp = Math.floor(Date.now() / 1000);
+ timeStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: timeStamp
-  };
-  const page = document.location.pathname;
+  },
+   page = document.location.pathname;
   if (page.startsWith("/learn/")) {
     presenceData.details = "Learning:";
     presenceData.state = "Writing Code!";

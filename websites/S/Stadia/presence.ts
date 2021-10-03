@@ -1,11 +1,11 @@
 const presence = new Presence({
   clientId: "713114770584109150"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
-let gameName: HTMLElement;
-let storeName: HTMLElement;
-let gamePrice: HTMLElement;
-let userName: HTMLElement;
+}),
+ browsingStamp = Math.floor(Date.now() / 1000);
+let gameName: HTMLElement,
+ storeName: HTMLElement,
+ gamePrice: HTMLElement,
+ userName: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -25,20 +25,20 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/store/details")) {
     storeName = document.querySelector("div.UG7HXc");
     gamePrice = document.querySelector("span.rdAlw");
-    presenceData.details = "Viewing " + storeName.innerText;
-    presenceData.state = gamePrice.innerText + " on the Stadia Store";
+    presenceData.details = `Viewing ${storeName.innerText}`;
+    presenceData.state = `${gamePrice.innerText} on the Stadia Store`;
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/store")) {
     presenceData.details = "Viewing Stadia Store";
     presenceData.startTimestamp = browsingStamp;
-  } else {
+  } else 
     presenceData.details = "Can't read page";
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

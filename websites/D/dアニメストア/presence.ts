@@ -1,8 +1,8 @@
 {
   const presence = new Presence({
     clientId: "611012705306017792"
-  });
-  const strings = presence.getStrings({
+  }),
+   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
@@ -12,15 +12,15 @@
       location.pathname.startsWith("/animestore/sc_d_pc") &&
       document.querySelector("#video")
     ) {
-      const video: HTMLVideoElement = document.querySelector("#video");
-      const title = document.querySelector(".backInfoTxt1").textContent;
-      const episode = document.querySelector(".backInfoTxt2").textContent;
-      const epName = document.querySelector(".backInfoTxt3").textContent;
+      const video: HTMLVideoElement = document.querySelector("#video"),
+       title = document.querySelector(".backInfoTxt1").textContent,
+       episode = document.querySelector(".backInfoTxt2").textContent,
+       epName = document.querySelector(".backInfoTxt3").textContent,
 
-      const isPlaying = !video.paused;
-      const elapsedSec = Math.floor(video.currentTime);
+       isPlaying = !video.paused,
+       elapsedSec = Math.floor(video.currentTime),
 
-      const presenceData: PresenceData = {
+       presenceData: PresenceData = {
         details: `${title} - ${episode}`,
         state: epName,
         largeImageKey: "danime",
@@ -31,11 +31,11 @@
         startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
       };
 
-      if (isPlaying) {
+      if (isPlaying) 
         presence.setTrayTitle(title);
-      } else {
+       else 
         delete presenceData.startTimestamp;
-      }
+      
 
       presence.setActivity(presenceData);
     }

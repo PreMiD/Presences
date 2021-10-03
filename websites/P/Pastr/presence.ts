@@ -5,18 +5,18 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "pastrlogo"
-  };
+  },
 
-  const pageTitle = document.title.slice(11);
-  let action;
-  let state;
+   pageTitle = document.title.slice(11);
+  let action,
+   state;
   if (pageTitle == "Create") {
     action = "Creating a paste";
     let pasteName = (document.getElementById("paste-title") as HTMLInputElement)
       .value;
-    if (!pasteName) {
+    if (!pasteName) 
       pasteName = "Untitled";
-    }
+    
     state = pasteName;
   } else if (pageTitle == "The smoothest paste service") {
     action = "Viewing a page";

@@ -11,16 +11,16 @@ presence.on("UpdateData", async () => {
     button = await presence.getSetting("button");
 
   presenceData.startTimestamp = browsingStamp;
-  if (privacy) {
+  if (privacy) 
     presenceData.details = "Browsing";
-  } else if (document.location.hostname == "gunivers.net") {
+   else if (document.location.hostname == "gunivers.net") {
     if (window.location.pathname.startsWith("/articles")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Activities";
     } else if (window.location.pathname.startsWith("/category/")) {
       presenceData.details = "Searching an article:";
       presenceData.state =
-        "in category " + document.title.replace(" | Gunivers", "");
+        `in category ${document.title.replace(" | Gunivers", "")}`;
       if (window.location.pathname.endsWith("category/chronique/")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Chronicles";
@@ -30,13 +30,14 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.title
         .replace(" | Gunivers", "")
         .replace("Chronique Mensuelle - ", "");
-      if (button)
-        presenceData.buttons = [
+      if (button) {
+presenceData.buttons = [
           {
             label: "View chronicle",
             url: document.URL
           }
         ];
+}
     } else if (
       window.location.pathname.endsWith("/a-propos/") ||
       window.location.pathname.endsWith("/about-us/")
@@ -80,23 +81,25 @@ presence.on("UpdateData", async () => {
     ) {
       presenceData.details = "Reading an article:";
       presenceData.state = document.title.replace(" | Gunivers", "");
-      if (button)
-        presenceData.buttons = [
+      if (button) {
+presenceData.buttons = [
           {
             label: "View article",
             url: document.URL
           }
         ];
+}
       if (window.location.pathname.includes("/author/")) {
         presenceData.details = "Looking for an user:";
         presenceData.state = document.title.replace(" | Gunivers", "");
-        if (button)
-          presenceData.buttons = [
+        if (button) {
+presenceData.buttons = [
             {
               label: "View user",
               url: document.URL
             }
           ];
+}
       }
     } else if (
       window.location.pathname.length === 1 ||
@@ -115,30 +118,32 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.startsWith("/projects/")) {
       presenceData.details = "Reading a project:";
       presenceData.state = document.title.split(" - ")[1];
-      if (button)
-        presenceData.buttons = [
+      if (button) {
+presenceData.buttons = [
           {
             label: "View project",
             url: document.URL
           }
         ];
+}
     } else if (window.location.pathname.startsWith("/users/")) {
       presenceData.details = "Looking for an user:";
       presenceData.state = document.querySelector("#content > h2").textContent;
-      if (button)
-        presenceData.buttons = [
+      if (button) {
+presenceData.buttons = [
           {
             label: "View user",
             url: document.URL
           }
         ];
+}
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

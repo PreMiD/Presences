@@ -70,8 +70,8 @@ presence.on("UpdateData", async () => {
         videoTitle !== null ? videoTitle.textContent : "Title not found";
       presenceData.state = brand.textContent;
     }
-  } else {
+  } else 
     presenceData.details = "Browsing..";
-  }
+  
   presence.setActivity(presenceData);
 });

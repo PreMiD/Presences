@@ -30,22 +30,22 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo"
   };
 
-  presenceData.smallImageText = dListeners + " Listeners";
+  presenceData.smallImageText = `${dListeners} Listeners`;
   presenceData.startTimestamp = currentTime;
 
   if (document.location.hostname == "simulatorhits.com") {
-    if (document.getElementById("artwork").classList.contains("rotateImg")) {
+    if (document.getElementById("artwork").classList.contains("rotateImg")) 
       presenceData.smallImageKey = "play";
-    } else {
+     else 
       presenceData.smallImageKey = "pause";
-    }
+    
 
     if (document.location.pathname.includes("/team")) {
       presenceData.details = "Viewing the Staff Team";
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/profile")) {
       presenceData.details =
-        document.getElementById("name").innerText + "'s Profile";
+        `${document.getElementById("name").innerText}'s Profile`;
       presenceData.state = document.getElementById("position").innerText;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/timetable")) {
@@ -55,8 +55,8 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Terms of Service";
       presenceData.smallImageKey = "reading";
     } else {
-      presenceData.details = dSong + " - " + dArtist;
-      presenceData.state = "Presenter: " + dDJ;
+      presenceData.details = `${dSong} - ${dArtist}`;
+      presenceData.state = `Presenter: ${dDJ}`;
     }
   } else if (document.location.hostname == "panel.simulatorhits.com") {
     if (document.location.pathname.includes("/dashboard")) {
@@ -64,19 +64,19 @@ presence.on("UpdateData", () => {
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/timetable")) {
       presenceData.details = "Staff Timetable";
-      if (document.getElementById("book-modal").classList.contains("show")) {
+      if (document.getElementById("book-modal").classList.contains("show")) 
         presenceData.state = "Booking a Slot";
-      } else {
+       else 
         presenceData.state = "Viewing";
-      }
+      
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/admin")) {
       presenceData.details = "Admin Area";
       presenceData.state = "Doing Secret Things";
       presenceData.smallImageKey = "reading";
     } else {
-      presenceData.details = dSong + " - " + dArtist;
-      presenceData.state = "Presenter: " + dDJ;
+      presenceData.details = `${dSong} - ${dArtist}`;
+      presenceData.state = `Presenter: ${dDJ}`;
       presenceData.smallImageKey = "reading";
     }
   }
@@ -84,7 +84,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

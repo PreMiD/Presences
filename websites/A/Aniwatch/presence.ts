@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: `676041156437737472`
   }),
   strings = presence.getStrings({
@@ -15,33 +15,33 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any; //title of the webpage
-var titleName: any; //title of the webpage without site name
-var path: any; //site path
-var siteArray: any; //array of site path split by '/'
-var fullPath: any; //entire path of the whole website
-var animeArray: any; //array of anime name + episode number
-var anime: any; //name of anime
-var episode: any; //episode number
-var code: any; //room code for Watch2Gether
-var season: any; //array of season where anime air
-var types: any; //array of types of tabs when available
-var type: any; //the current tab selected
-var parameters: any; //array of parameters for current page
-var page: any; //page number when available
-var username: any; //username for viewing profiles
+let browsingStamp = Math.floor(Date.now() / 1000),
+ title: any, //title of the webpage
+ titleName: any, //title of the webpage without site name
+ path: any, //site path
+ siteArray: any, //array of site path split by '/'
+ fullPath: any, //entire path of the whole website
+ animeArray: any, //array of anime name + episode number
+ anime: any, //name of anime
+ episode: any, //episode number
+ code: any, //room code for Watch2Gether
+ season: any, //array of season where anime air
+ types: any, //array of types of tabs when available
+ type: any, //the current tab selected
+ parameters: any, //array of parameters for current page
+ page: any, //page number when available
+ username: any, //username for viewing profiles
 
-var video: HTMLVideoElement; //the video player
-var currentTime: any; //how far along the video is
-var paused: any; //is the video paused?
-var duration: any; //how long the video is
-var timestamps: any;
+ video: HTMLVideoElement, //the video player
+ currentTime: any, //how far along the video is
+ paused: any, //is the video paused?
+ duration: any, //how long the video is
+ timestamps: any;
 
 presence.on(`UpdateData`, async () => {
   const presenceData: PresenceData = {
@@ -97,9 +97,9 @@ presence.on(`UpdateData`, async () => {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
           }
-        } else if (isNaN(duration)) {
+        } else if (isNaN(duration)) 
           presenceData.startTimestamp = browsingStamp;
-        } //end of Bas950's code
+         //end of Bas950's code
       } else {
         //not watching an episode, but just browsing anime
         presenceData.startTimestamp = browsingStamp;
@@ -171,9 +171,9 @@ presence.on(`UpdateData`, async () => {
               delete presenceData.startTimestamp;
               delete presenceData.endTimestamp;
             }
-          } else if (isNaN(duration)) {
+          } else if (isNaN(duration)) 
             presenceData.startTimestamp = browsingStamp;
-          } //end of Bas950's code
+           //end of Bas950's code
           presenceData.state = `Watching: [${anime}] | ${episode}`;
         }
       }
@@ -274,7 +274,7 @@ presence.on(`UpdateData`, async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

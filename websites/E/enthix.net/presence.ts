@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "662715886662057994"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -12,15 +12,15 @@ presence.on("UpdateData", () => {
   if (document.location.hostname == "enthix.net") {
     presenceData.details = "Viewing Home Page";
     presenceData.state =
-      document.querySelector(
+      `${document.querySelector(
         "body > div.container > div.playercount > p > span.sip"
-      ).textContent + " Players Online";
+      ).textContent} Players Online`;
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

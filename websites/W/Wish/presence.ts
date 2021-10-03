@@ -5,12 +5,12 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-  const itemsetting = await presence.getSetting("items");
-  const languagesetting = await presence.getSetting("language");
-  var itemsite = null;
-  let itemdesc;
+   itemsetting = await presence.getSetting("items"),
+   languagesetting = await presence.getSetting("language");
+  let itemsite = null,
+   itemdesc;
 
   // _________________________________________________________________________________________________________________________ Product item
   if (
@@ -18,9 +18,9 @@ presence.on("UpdateData", async () => {
   ) {
     // Ask for item-site
     itemsite = false;
-  } else {
+  } else 
     itemsite = true;
-  }
+  
 
   if (itemsetting == true && itemsite == true) {
     // Ask for Settings
@@ -29,13 +29,13 @@ presence.on("UpdateData", async () => {
       "#related-products-scroll-container > div > div > div.ProductContainer__ProductMainSection-sc-1vbd28u-1.dXQSMR > div.ProductContainer__RightColumn-sc-1vbd28u-3.cgensx > div > div.PurchaseContainer__UpperWrapper-sc-1qlezk8-1.gwTXit > h1"
     ).textContent;
     // ------------------------------
-    itemdesc = itemdesc.substring(0, itemdesc.length / 2) + "...";
+    itemdesc = `${itemdesc.substring(0, itemdesc.length / 2)}...`;
   } else {
-    if (languagesetting == "0") {
+    if (languagesetting == "0") 
       itemdesc = "Watching an item...";
-    } else if (languagesetting == "1") {
+     else if (languagesetting == "1") 
       itemdesc = "Beobachtet ein Produkt...";
-    }
+    
   }
   // ___________________________________________________________________________________________________________________________
 
@@ -55,11 +55,11 @@ presence.on("UpdateData", async () => {
 
     if (languagesetting == "0") {
       presenceData.details = "Browsing thought Wishlist";
-      presenceData.state = nameuser + "'s Wishlist";
+      presenceData.state = `${nameuser}'s Wishlist`;
       presence.setActivity(presenceData);
     } else if (languagesetting == "1") {
       presenceData.details = "Störbert durch Wunschliste";
-      presenceData.state = nameuser + "'s Wunschliste";
+      presenceData.state = `${nameuser}'s Wunschliste`;
       presence.setActivity(presenceData);
     }
   } else if (document.location.pathname.includes("/wishlist/")) {
@@ -113,11 +113,11 @@ presence.on("UpdateData", async () => {
 
     if (languagesetting == "0") {
       presenceData.details = "Looking for new Customers";
-      presenceData.state = "50% discount > Code: " + code;
+      presenceData.state = `50% discount > Code: ${code}`;
       presence.setActivity(presenceData);
     } else if (languagesetting == "1") {
       presenceData.details = "Sucht neue Kunden";
-      presenceData.state = "50% Rabatt > Code: " + code;
+      presenceData.state = `50% Rabatt > Code: ${code}`;
       presence.setActivity(presenceData);
     }
   } else if (document.location.pathname.includes("/transaction/")) {
@@ -260,7 +260,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = product;
       presence.setActivity(presenceData);
     }
-  } else {
+  } else 
     presence.setActivity();
-  }
+  
 });

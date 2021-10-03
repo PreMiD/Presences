@@ -41,12 +41,12 @@ presence.on("UpdateData", async () => {
     let video: HTMLVideoElement = document.querySelector(
       ".scalingVideoContainer > div.scalingVideoContainerBottom > div > video"
     );
-    if (video == null || isNaN(video.duration)) {
+    if (video == null || isNaN(video.duration)) 
       video = document.querySelector("video");
-    }
-    if (video == null || isNaN(video.duration)) {
+    
+    if (video == null || isNaN(video.duration)) 
       video = document.querySelector("video:nth-child(2)");
-    }
+    
     const subtitle: HTMLElement =
       document.querySelector(
         ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h2"
@@ -58,9 +58,9 @@ presence.on("UpdateData", async () => {
         subtitle &&
         subtitle.textContent &&
         subtitle.textContent.trim() !== title.trim()
-      ) {
+      ) 
         presenceData.state = subtitle.textContent;
-      }
+      
 
       if (video.paused) {
         presenceData.smallImageKey = "paused";
@@ -95,22 +95,22 @@ presence.on("UpdateData", async () => {
     } else if (title2 !== undefined) {
       presenceData.details = "Viewing:";
       presenceData.state = title2;
-    } else if (document.location.pathname.includes("shop")) {
+    } else if (document.location.pathname.includes("shop")) 
       presenceData.details = "Browsing the store...";
-    } else {
+     else 
       presenceData.details = "Browsing...";
-    }
-  } else if (document.location.pathname.includes("/home/")) {
+    
+  } else if (document.location.pathname.includes("/home/")) 
     presenceData.details = "Browsing...";
-  } else if (document.location.pathname.includes("shop")) {
+   else if (document.location.pathname.includes("shop")) 
     presenceData.details = "Browsing the store...";
-  } else if (document.location.pathname.includes("/tv/")) {
+   else if (document.location.pathname.includes("/tv/")) 
     presenceData.details = "Browsing TV-Series";
-  } else if (document.location.pathname.includes("/movie/")) {
+   else if (document.location.pathname.includes("/movie/")) 
     presenceData.details = "Browsing Movies";
-  } else if (document.location.pathname.includes("/kids/")) {
+   else if (document.location.pathname.includes("/kids/")) 
     presenceData.details = "Browsing Movies for kids";
-  } else if (
+   else if (
     document.location.pathname.includes("/search/") &&
     document.querySelector(".av-refine-bar-summaries") !== null
   ) {
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

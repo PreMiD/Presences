@@ -49,8 +49,8 @@ OMGUbuntu.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
     presenceData.state = articleHeader;
     presenceData.buttons = [{ label: "Read Article", url: location.href }];
-  } else if (pages[page]) {
+  } else if (pages[page]) 
     presenceData.details = `Looking at the ${pages[page]} page`;
-  }
+  
   OMGUbuntu.setActivity(presenceData);
 });

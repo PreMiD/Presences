@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "621835880474345473"
   }),
   strings = presence.getStrings({
@@ -15,36 +15,36 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var subtitle;
+let subtitle;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "tubi-logo"
-  };
+  },
 
-  var video: HTMLVideoElement = document.querySelector(
+   video: HTMLVideoElement = document.querySelector(
     "video#videoPlayerComponent"
   );
   if (video && !isNaN(video.duration)) {
-    var title = document.querySelector("h1._1PDoZ._1nW6s").textContent;
-    var timestamps = getTimestamps(
+    const title = document.querySelector("h1._1PDoZ._1nW6s").textContent,
+     timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
-    );
-    var subtitleCheck = document.querySelector("h2._29XQF._24NNJ")
+    ),
+     subtitleCheck = document.querySelector("h2._29XQF._24NNJ")
       ? false
       : true;
 
-    if (subtitleCheck) {
+    if (subtitleCheck) 
       subtitle = "Movie";
-    } else {
+     else 
       subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
-    }
+    
 
     (data.details = title), (data.state = subtitle);
     (data.smallImageKey = video.paused ? "pause" : "play"),
@@ -59,9 +59,9 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title !== null && subtitle !== null) {
+    if (title !== null && subtitle !== null) 
       presence.setActivity(data, !video.paused);
-    }
+    
   } else {
     data.details = "Browsing...";
     presence.setActivity(data);

@@ -31,8 +31,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -206,9 +206,9 @@ presence.on("UpdateData", async () => {
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ).textContent
             }. Bölüm`
-          : "none found";
+          : "none found",
 
-    const fixedEpisodeName = episodeX
+     fixedEpisodeName = episodeX
         .replace(/\n/g, "")
         .replace(/-/g, "")
         .replace(title.textContent, "")
@@ -217,9 +217,9 @@ presence.on("UpdateData", async () => {
       timestamps = getTimestamps(
         Math.floor(_video.currentTime),
         Math.floor(_video.duration)
-      );
+      ),
 
-    const data: { [k: string]: any } = {
+     data: { [k: string]: any } = {
       largeImageKey: "dl-logo",
       details: title.textContent,
       state: fixedEpisodeName,
@@ -288,9 +288,9 @@ presence.on("UpdateData", async () => {
         timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
-        );
+        ),
 
-      const data: { [k: string]: any } = {
+       data: { [k: string]: any } = {
         largeImageKey: "dl-logo",
         details: title.textContent,
         state: fixedEpisodeName,

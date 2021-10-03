@@ -1,11 +1,11 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "640146822257573928"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       user = document.querySelector(".title.m-0");
       presenceData.details = "🌐 Viewing user:";
-      presenceData.state = "📰 " + user.textContent;
+      presenceData.state = `📰 ${user.textContent}`;
     } else if (document.location.pathname.includes("/logistics")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "📰 Reading about the logistics";
@@ -54,18 +54,18 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "🌐 Viewing their logbook";
       presenceData.state =
-        "📰 " +
-        document.querySelector("#jobskm").textContent +
-        " " +
+        `📰 ${ 
+        document.querySelector("#jobskm").textContent 
+        } ${ 
         document.querySelector(
           "#page-content-wrapper > div > div.row > div:nth-child(1) > div > span.count-name.white"
-        ).textContent +
-        " | " +
-        document.querySelector("#jobscount").textContent +
-        " " +
+        ).textContent 
+        } | ${ 
+        document.querySelector("#jobscount").textContent 
+        } ${ 
         document.querySelector(
           "#page-content-wrapper > div > div.row > div:nth-child(2) > div > span.count-name"
-        ).textContent;
+        ).textContent}`;
     } else if (document.location.pathname.includes("/downloads")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "🌐 Viewing the";
@@ -103,14 +103,14 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "body > div > div.content-wrapper > section.content-header > ol > li:nth-child(2) > a"
         );
-      presenceData.state = "📰 Server: " + title.textContent;
+      presenceData.state = `📰 Server: ${title.textContent}`;
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

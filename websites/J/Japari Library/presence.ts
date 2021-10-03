@@ -1,13 +1,13 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "670669014363668481"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var title: any;
+ title: any,
 
-var actionURL = new URL(document.location.href);
-var title2URL = new URL(document.location.href);
+ actionURL = new URL(document.location.href),
+ title2URL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -16,8 +16,8 @@ presence.on("UpdateData", async () => {
 
   title = document.querySelector("h1#firstHeading");
 
-  var actionResult = actionURL.searchParams.get("action");
-  var title2Result = title2URL.searchParams.get("title");
+  const actionResult = actionURL.searchParams.get("action"),
+   title2Result = title2URL.searchParams.get("title");
 
   if (document.location.pathname == "/wiki/Main_Page") {
     presenceData.state = "Main Page | Home";
@@ -38,11 +38,11 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Viewing revision history of:";
 
-    if (title2Result.includes("_")) {
+    if (title2Result.includes("_")) 
       presenceData.state = title2Result.replace(/_/g, " ");
-    } else {
+     else 
       presenceData.state = title2Result;
-    }
+    
 
     presenceData.startTimestamp = browsingStamp;
   } else if (
@@ -52,11 +52,11 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Editing a page:";
 
-    if (title2Result.includes("_")) {
+    if (title2Result.includes("_")) 
       presenceData.state = title2Result.replace(/_/g, " ");
-    } else {
+     else 
       presenceData.state = title2Result;
-    }
+    
 
     presenceData.startTimestamp = browsingStamp;
   } else if (
@@ -66,11 +66,11 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Form editing a page:";
 
-    if (title2Result.includes("_")) {
+    if (title2Result.includes("_")) 
       presenceData.state = title2Result.replace(/_/g, " ");
-    } else {
+     else 
       presenceData.state = title2Result;
-    }
+    
 
     presenceData.startTimestamp = browsingStamp;
   }

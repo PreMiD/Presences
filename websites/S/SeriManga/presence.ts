@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     },
-    pathname = document.location.pathname;
+    {pathname} = document.location;
 
   if (pathname === "/") data.details = "Ana Sayfa";
   else if (pathname == "/fansublar") data.details = "Çeviri Gruplarına Bakıyor";
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
       link = window.location.href;
 
     data.details = title;
-    data.state = "📖 Bölüm " + lastItem + " 📄 " + page;
+    data.state = `📖 Bölüm ${lastItem} 📄 ${page}`;
     data.smallImageKey = "read";
     data.buttons = [{ label: "Sayfaya Git", url: link }];
   } else if (pathname.startsWith("/manga/")) {
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
   else if (pathname.startsWith("/kategori")) {
     const ganre = document.querySelector(".page__title").textContent;
     data.details = "Mangaya Göz Atıyor";
-    data.state = "Tür: " + ganre;
+    data.state = `Tür: ${ganre}`;
   }
   presence.setActivity(data);
 });

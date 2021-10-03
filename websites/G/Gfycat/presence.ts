@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "630874255990587402"
   }),
   strings = presence.getStrings({
@@ -15,8 +15,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -26,24 +26,24 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname.startsWith("/discover")) {
-    var section = document.querySelector(".multiple-view__title").textContent;
-    if (section) {
+    const section = document.querySelector(".multiple-view__title").textContent;
+    if (section) 
       data.state = section;
-    }
+    
 
     data.details = "Browsing...";
     data.startTimestamp = Date.now();
 
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/gifs/search")) {
-    var searchText = document.querySelector(
+    const searchText = document.querySelector(
       ".feed-with-player__title"
     ).textContent;
 
     data.details = "Searching...";
-    if (searchText) {
+    if (searchText) 
       data.state = searchText;
-    }
+    
     data.startTimestamp = Date.now();
     data.smallImageKey = "search";
     data.smallImageText = "Searching";
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/@")) {
-    var profile = document.querySelector(
+    const profile = document.querySelector(
       ".profile-container .profile-info-container .name"
     ).textContent;
 
@@ -73,14 +73,14 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data);
   } else {
-    var player: HTMLVideoElement = document.querySelector(
+    const player: HTMLVideoElement = document.querySelector(
       ".video-player-wrapper video"
     );
 
     if (player) {
-      var title = document.querySelector(".gif-info .title").textContent;
-      var views = document.querySelector(".gif-info .gif-views").textContent;
-      var timestamps = getTimestamps(
+      const title = document.querySelector(".gif-info .title").textContent,
+       views = document.querySelector(".gif-info .gif-views").textContent,
+       timestamps = getTimestamps(
         Math.floor(player.currentTime),
         Math.floor(player.duration)
       );

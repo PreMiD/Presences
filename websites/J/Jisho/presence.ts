@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "715912352561627246"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -26,14 +26,14 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing a kanji:";
         const kanji = document.querySelector(
           "#result_area > div.kanji > div > div > div > div > h1.character"
-        ).innerHTML;
-        const meaning = document
+        ).innerHTML,
+         meaning = document
           .querySelector(
             "#result_area > div.kanji > div > div > div > div > div.kanji-details__main-meanings"
           )
           .innerHTML.trim();
-        presenceData.state = kanji + " - " + meaning;
-        console.log(kanji + " - " + meaning);
+        presenceData.state = `${kanji} - ${meaning}`;
+        console.log(`${kanji} - ${meaning}`);
       }
     } else if (document.location.pathname.startsWith("/word")) {
       presenceData.details = "Viewing a word:";
@@ -67,9 +67,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "About";
     }
-  } else if (document.location.hostname === "classic.jisho.org") {
+  } else if (document.location.hostname === "classic.jisho.org") 
     presenceData.details = "Jisho Classic";
-  }
+  
 
   if (presenceData.details == null) {
     //This will fire if you do not set presence details

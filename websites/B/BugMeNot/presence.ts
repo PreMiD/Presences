@@ -63,10 +63,10 @@ presence.on("UpdateData", () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "bugmenot",
-    smallImageKey: smallImageKey,
+    smallImageKey,
     startTimestamp: elapsed,
     smallImageText: location.host + location.pathname
   };

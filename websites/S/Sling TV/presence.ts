@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     endTimestamp = undefined,
     extra = "...";
 
-  const href = window.location.href,
+  const {href} = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -53,23 +53,23 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (path.includes("/browse/my-tv")) {
+  if (path.includes("/browse/my-tv")) 
     extra = ' "My TV"';
-  } else if (path.includes("/browse/guide")) {
+   else if (path.includes("/browse/guide")) 
     extra = ' "Guide"';
-  } else if (path.includes("/browse/dynamic/shows")) {
+   else if (path.includes("/browse/dynamic/shows")) 
     extra = ' "On Demand"';
-  } else if (path.includes("/browse/dynamic/sports")) {
+   else if (path.includes("/browse/dynamic/sports")) 
     extra = ' "Sports"';
-  } else if (path.includes("/browse/movie-rentals")) {
+   else if (path.includes("/browse/movie-rentals")) 
     extra = ' "Rentals"';
-  }
+  
 
   details = `Browsing${extra}`;
 
-  if (path.includes("/browse/search")) {
+  if (path.includes("/browse/search")) 
     details = `Searching...`;
-  }
+  
 
   state = undefined;
   startTimestamp = elapsed;
@@ -107,13 +107,13 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "slingtv",
-    smallImageKey: smallImageKey,
-    smallImageText: smallImageText,
-    startTimestamp: startTimestamp,
-    endTimestamp: endTimestamp
+    smallImageKey,
+    smallImageText,
+    startTimestamp,
+    endTimestamp
   };
   presence.setActivity(data, video ? !video.paused : true);
   presence.setTrayTitle(details);

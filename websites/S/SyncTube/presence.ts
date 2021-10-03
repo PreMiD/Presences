@@ -15,17 +15,18 @@ presence.on("UpdateData", async function () {
 
   if (set_timeElapsed) presenceData.startTimestamp = browsingStamp;
 
-  if (!urlpath[1]) {
+  if (!urlpath[1]) 
     presenceData.details = "Home";
-  } else if (urlpath[1] === "rooms") {
+   else if (urlpath[1] === "rooms") {
     if (urlpath[2]) {
       presenceData.details = set_privacy
         ? "In room"
         : document.querySelector("div.roomName.noselect").textContent;
-      if (!set_privacy)
-        presenceData.state = document.querySelector(
+      if (!set_privacy) {
+presenceData.state = document.querySelector(
           "div.userCount.noselect"
         ).textContent;
+}
 
       if (set_showButtons) {
         presenceData.buttons = [
@@ -35,16 +36,16 @@ presence.on("UpdateData", async function () {
           }
         ];
       }
-    } else {
+    } else 
       presenceData.details = "Browsing rooms";
-    }
-  } else {
+    
+  } else 
     presenceData.details = "Other";
-  }
+  
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

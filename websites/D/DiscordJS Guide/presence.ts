@@ -13,12 +13,12 @@ pPresence.on("UpdateData", async () => {
       .textContent.replace("#", "");
 
   pData.details = "Viewing Docs";
-  pData.state = "Page: " + title;
+  pData.state = `Page: ${title}`;
 
   if (pData.details == null) {
     pPresence.setTrayTitle();
     pPresence.setActivity();
-  } else {
+  } else 
     pPresence.setActivity(pData);
-  }
+  
 });

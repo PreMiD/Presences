@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "618233809481236491"
-});
+}),
 
-const timeElapsed = Math.floor(Date.now() / 1000);
+ timeElapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname.startsWith("/pages/playback_history")) {
@@ -45,8 +45,8 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       const presenceData: PresenceData = {
-        details: songName.innerText + " by " + artistName.innerText,
-        state: "Listening on " + stationName.textContent,
+        details: `${songName.innerText} by ${artistName.innerText}`,
+        state: `Listening on ${stationName.textContent}`,
         largeImageKey: "rainwv",
         smallImageKey: "live",
         startTimestamp: timeElapsed

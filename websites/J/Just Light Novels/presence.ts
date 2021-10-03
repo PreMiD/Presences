@@ -7,7 +7,7 @@ function capitalize(string: string): string {
 }
 
 const elapsed = Math.floor(Date.now() / 1000);
-var stext;
+let stext;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.split("/").join("").split("-").join(" ")
     )}`;
   } else {
-    var d = document.location.pathname.split("/");
+    const d = document.location.pathname.split("/");
     if (d.length === 5) {
       presenceData.details = `Reading ${capitalize(
         d[3].split("-").join(" ")
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -111,9 +111,10 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = videoPaused
           ? (await strings).pause
           : (await strings).play;
-        if (videoDuration && !videoPaused)
-          presenceData.endTimestamp =
+        if (videoDuration && !videoPaused) {
+presenceData.endTimestamp =
             Date.now() + (videoDuration - videoCurrentTime) * 1000;
+}
       } else {
         presenceData.startTimestamp = start;
         const bodyHeading = document.querySelector(
@@ -170,11 +171,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Exploring...";
       break;
     case "":
-      if (window.location.hostname === "news.codecademy.com") {
+      if (window.location.hostname === "news.codecademy.com") 
         presenceData.details = "Browsing articles";
-      } else {
+       else 
         presenceData.details = "At the homepage";
-      }
+      
       break;
     case "pricing":
       presenceData.details = "Checking out the";
@@ -190,9 +191,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = `"${
           document.querySelector("[class^=articleHeader__]").textContent
         }"`;
-      } else {
+      } else 
         presenceData.details = "Browsing articles";
-      }
+      
       break;
     default:
       if (window.location.hostname === "news.codecademy.com") {
@@ -206,7 +207,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

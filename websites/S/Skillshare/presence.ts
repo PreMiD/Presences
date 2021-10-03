@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "642122988925485086"
   }),
   strings = presence.getStrings({
@@ -15,14 +15,14 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var title: any;
+let browsingStamp = Math.floor(Date.now() / 1000),
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -37,15 +37,15 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/classes/")) {
-      var currentTime: any,
+      let currentTime: any,
         duration: any,
         paused: any,
         timestamps: any,
         video: HTMLVideoElement;
       video = document.querySelector("#vjs_video_3_html5_api");
-      if (video == null) {
+      if (video == null) 
         video = document.querySelector(".video-player-module > div > video");
-      }
+      
       title = document
         .querySelector(".class-details-header-name")
         .textContent.trim();
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

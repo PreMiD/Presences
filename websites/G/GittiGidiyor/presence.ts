@@ -34,9 +34,9 @@ presence.on("UpdateData", async () => {
       ) as HTMLElement),
     seller = document.querySelector(
       "#store-page-title > div.store-name > h1"
-    ) as HTMLElement;
+    ) as HTMLElement,
 
-  const data: { [k: string]: any } = {
+   data: { [k: string]: any } = {
     largeImageKey: "gg-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
   if (productName && productName.textContent != "") {
     data.details = "Bir ürüne göz atıyor:";
     data.state = `${productName.textContent}${
-      price ? " - " + price.textContent.trim() : ""
+      price ? ` - ${price.textContent.trim()}` : ""
     }`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     // We are using slice(0, -1) here to slice the last "/" and check if there's a record on pages variable.

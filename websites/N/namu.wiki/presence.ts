@@ -96,9 +96,10 @@ presence.on("UpdateData", async () => {
 
   let page;
   /* View Contribute */
-  if ((page = validateContributeUrl.exec(path)))
-    if (page[1] === "author") page = `User: ${page[2]}`;
+  if ((page = validateContributeUrl.exec(path))) {
+if (page[1] === "author") page = `User: ${page[2]}`;
     else page = "IP User";
+}
   /* View Membership */ else if ((page = validateMembershipUrl.exec(path))) {
     presenceData.details = "Member Page";
     page = membersMapping[page[1]];
@@ -124,10 +125,11 @@ presence.on("UpdateData", async () => {
     page = decodeURI(path.substring(`/${action}/`.length));
   else page = null;
 
-  if (action === "w")
-    presenceData.buttons = [
+  if (action === "w") {
+presenceData.buttons = [
       { label: "View Page", url: document.location.href }
     ];
+}
   if (page !== null && page !== undefined)
     presenceData.state = page.length > 128 ? `${page.slice(0, 120)}...` : page;
 

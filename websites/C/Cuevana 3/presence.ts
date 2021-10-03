@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
         .replace(/\s+/g, ` `)
         .trim();
       presenceData.state =
-        document.querySelector(`h1.Title > span`).textContent + " " + subtitulo;
+        `${document.querySelector(`h1.Title > span`).textContent} ${subtitulo}`;
       presenceData.buttons = [
         { label: "Ver Episodio", url: window.location.href }
       ];

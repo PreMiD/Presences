@@ -1,11 +1,11 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "639916600031707149"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var hour: number, min: number, sec: number, time: number;
-var hour2: number, min2: number, sec2: number, time2: number;
-var paused: any, timestamps: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ hour: number, min: number, sec: number, time: number,
+ hour2: number, min2: number, sec2: number, time2: number,
+ paused: any, timestamps: any;
 
 /**
  * Get Timestamps
@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

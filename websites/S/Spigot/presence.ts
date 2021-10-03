@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "625795936286932993"
-});
+}),
 
-var user: any, search: any, title: any;
+ user: any, search: any, title: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -22,20 +22,20 @@ presence.on("UpdateData", async () => {
           "#content > div > div > div.mainContainer_noSidebar > div > div.resourceInfo > h1"
         );
         presenceData.details = "Forums, viewing thread:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
+        if (title.innerText.length > 128) 
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = title.innerText;
-        }
+        
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Forums, viewing thread:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
+        if (title.innerText.length > 128) 
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = title.innerText;
-        }
+        
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData);
       }
@@ -156,11 +156,11 @@ presence.on("UpdateData", async () => {
           "#content > div > div > div.uix_contentFix > div > div > div.resourceInfo > h1"
         );
         presenceData.details = "Resources, Viewing:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
+        if (title.innerText.length > 128) 
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = title.innerText;
-        }
+        
 
         delete presenceData.smallImageKey;
 
@@ -190,11 +190,11 @@ presence.on("UpdateData", async () => {
           "#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1"
         );
         presenceData.details = "Forums, Reading DM:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
+        if (title.innerText.length > 128) 
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = title.innerText;
-        }
+        
 
         presenceData.smallImageKey = "reading";
 

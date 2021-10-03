@@ -49,9 +49,9 @@ presence.on("UpdateData", () => {
         ? "Main Section"
         : `${document.querySelector("#post-396 > h1").textContent}`
     }`;
-  } else {
+  } else 
     presenceData.details = `Browsing the site `;
-  }
+  
 
   presence.setActivity(presenceData);
 });

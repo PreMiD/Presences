@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "626462884649500686" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var user: any, search: any, title: any;
+ user: any, search: any, title: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -19,11 +19,11 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
       delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/search/")) {

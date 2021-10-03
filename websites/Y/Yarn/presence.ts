@@ -3,15 +3,15 @@ const presence = new Presence({
 });
 
 function parseQueryString(queryString?: string): any {
-  if (!queryString) {
+  if (!queryString) 
     queryString = window.location.search.substring(1);
-  }
-  const params = {};
-  const queries = queryString.split("&");
+  
+  const params = {},
+   queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
-    const indexPair = indexQuery.split("=");
-    const queryKey = decodeURIComponent(indexPair[0]);
-    const queryValue = decodeURIComponent(
+    const indexPair = indexQuery.split("="),
+     queryKey = decodeURIComponent(indexPair[0]),
+     queryValue = decodeURIComponent(
       indexPair.length > 1 ? indexPair[1] : ""
     );
     params[queryKey] = queryValue;
@@ -22,9 +22,9 @@ function parseQueryString(queryString?: string): any {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-  var route = document.location.pathname.split("/");
+   route = document.location.pathname.split("/");
 
   if (document.location.pathname == "/") {
     presenceData.details = "Home";
@@ -46,20 +46,20 @@ presence.on("UpdateData", async () => {
       : document.querySelector("header h2").textContent;
   } else if (document.location.pathname.includes("/getting-started")) {
     presenceData.details = "Getting Started";
-    if (route[2] === "install") {
+    if (route[2] === "install") 
       presenceData.state = "Installation";
-    } else if (route[2] === "usage") {
+     else if (route[2] === "usage") 
       presenceData.state = "Usage";
-    } else {
+     else 
       presenceData.state = "Introduction";
-    }
+    
   } else if (document.location.pathname.includes("/configuration/")) {
     presenceData.details = "Configuration";
-    if (route[2] === "manifest") {
+    if (route[2] === "manifest") 
       presenceData.state = "Manifests";
-    } else if (route[2] === "yarnrc") {
+     else if (route[2] === "yarnrc") 
       presenceData.state = "Yarnrc files";
-    }
+    
   } else if (document.location.pathname.includes("/features/")) {
     presenceData.details = "Features";
     presenceData.state = document.querySelector("article h1").textContent;
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

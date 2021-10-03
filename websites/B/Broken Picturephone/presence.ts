@@ -26,9 +26,9 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "playing";
     data.smallImageText = "On game";
 
-    if (players.length > numLimit) {
+    if (players.length > numLimit) 
       data.state = `(${numLimit} of ${numLimit} players)`;
-    }
+    
   }
 
   const typing = document.getElementById("writeEntryundefined"),
@@ -39,22 +39,22 @@ presence.on("UpdateData", async () => {
     waitlist = document.getElementsByClassName("waitingSet rounded"),
     waitValue = waitlist.length;
 
-  if (typing) {
+  if (typing) 
     data.details = "Typing...";
-  }
-  if (valueDraw >= 1) {
+  
+  if (valueDraw >= 1) 
     data.details = "Drawing";
-  }
-  if (presentingValue >= 1) {
+  
+  if (presentingValue >= 1) 
     data.details = "Viewing the presentation";
-  }
-  if (waitValue >= 1) {
+  
+  if (waitValue >= 1) 
     data.details = "On waitlist";
-  }
+  
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(data);
-  }
+  
 });

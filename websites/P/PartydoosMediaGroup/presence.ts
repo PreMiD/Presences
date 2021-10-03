@@ -30,7 +30,7 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
   const string = (await strings).browsing,
-    host = location.host,
+    {host} = location,
     path = location.pathname.replace(/\/$/, ""),
     detailsObj = setObject(path);
 
@@ -39,9 +39,9 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) {
+  if (elapsed) 
     data.startTimestamp = elapsed;
-  }
+  
 
   data.details = detailsObj.details;
   data.state = detailsObj.state;

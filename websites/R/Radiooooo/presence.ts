@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 
   if (audio) {
     const timestamps = presence.getTimestampsfromMedia(audio),
-      paused = audio.paused,
+      {paused} = audio,
       title = document.querySelector("div.info > div.title").textContent,
       artist = document.querySelector(
         "div.field.artist > span:nth-child(2)"
@@ -35,9 +35,9 @@ presence.on("UpdateData", async () => {
       songState = await presence.getSetting("song_2"),
       newLang = await presence.getSetting("lang");
 
-    if (!oldLang) {
+    if (!oldLang) 
       oldLang = newLang;
-    } else if (oldLang !== newLang) {
+     else if (oldLang !== newLang) {
       oldLang = newLang;
       strings = getStrings();
     }

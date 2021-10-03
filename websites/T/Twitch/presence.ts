@@ -127,9 +127,9 @@ presence.on("UpdateData", async () => {
     devLogoArr = ["dev-main", "dev-white", "dev-purple"],
     buttons = await presence.getSetting("buttons");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -322,35 +322,35 @@ presence.on("UpdateData", async () => {
           state: "Artists"
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/learn-the-basics/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campBasic
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/setting-up-your-stream/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campSetup
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/level-up/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campLevel
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/connect-and-engage/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campConnect
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/get-rewarded/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campReward
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/twitch-music-getting-started/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campMusic
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/live/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campLive
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).home
         }
       };
@@ -416,9 +416,9 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "search";
       }
 
-      if (path.includes("/drops/inventory/")) {
+      if (path.includes("/drops/inventory/")) 
         presenceData.details = (await strings).viewDropsInv;
-      }
+      
 
       if (path.includes("/drops/campaigns/")) {
         presenceData.details = (await strings).viewDropsComp;
@@ -431,12 +431,12 @@ presence.on("UpdateData", async () => {
         for (const drop of drops) {
           if (!drop.children[1].className.includes("tw-hide")) {
             activeDrop =
+              `${drop.firstElementChild.firstElementChild.firstElementChild
+                .children[1].firstElementChild.children[0].textContent 
+              } (${ 
               drop.firstElementChild.firstElementChild.firstElementChild
-                .children[1].firstElementChild.children[0].textContent +
-              " (" +
-              drop.firstElementChild.firstElementChild.firstElementChild
-                .children[1].firstElementChild.children[1].textContent +
-              ")";
+                .children[1].firstElementChild.children[1].textContent 
+              })`;
           }
         }
 
@@ -471,7 +471,7 @@ presence.on("UpdateData", async () => {
           tab = getElement(".tw-c-text-link");
 
         presenceData.details = (await strings).viewCategory;
-        presenceData.state = category && category + ` (${tab})`;
+        presenceData.state = category && `${category} (${tab})`;
       }
 
       if (path.includes("/directory/esports/")) {
@@ -532,15 +532,15 @@ presence.on("UpdateData", async () => {
       ),
       channelRoot: HTMLDivElement = document.querySelector(".channel-root"),
       video: HTMLVideoElement = document.querySelector("video");
-    if (!homeCarousel && channelRoot && video) {
+    if (!homeCarousel && channelRoot && video) 
       await parseVideo(video);
-    }
+    
   } else if (document.location.hostname === "dashboard.twitch.tv") {
     //* Creator Dashboard
     if (showBrowsing) {
       const statics = {
         "/home/": {
-          details: (await strings).dashboard + " | " + (await strings).viewPage,
+          details: `${(await strings).dashboard} | ${(await strings).viewPage}`,
           state: (await strings).home
         },
         "/stream-manager/": {
@@ -549,17 +549,17 @@ presence.on("UpdateData", async () => {
         },
         "/channel-analytics/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).channelAnaly
         },
         "/stream-summary/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).streamSum
         },
         "/achievements/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).achievements
         },
         "/community/roles/": {
@@ -568,12 +568,12 @@ presence.on("UpdateData", async () => {
         },
         "/community/activity/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).activity
         },
         "/community/followers-list/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).followList
         },
         "/content/video-producer/": {
@@ -582,27 +582,27 @@ presence.on("UpdateData", async () => {
         },
         "/content/collections/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).colls
         },
         "/content/clips/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).clips
         },
         "/settings/channel/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).channelSettings
         },
         "/settings/moderation/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).moderationSettings
         },
         "/drops/": {
           details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+            `${(await strings).dashboard} | ${(await strings).viewTheir}`,
           state: (await strings).dropsSettings
         },
         "/broadcast/": {
@@ -675,9 +675,9 @@ presence.on("UpdateData", async () => {
         );
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
-      } else if (path === "/") {
+      } else if (path === "/") 
         presenceData.details = (await strings).brand;
-      }
+      
 
       if (privacy) {
         presenceData.details = (await strings).browse;
@@ -700,7 +700,7 @@ presence.on("UpdateData", async () => {
         },
         "/(\\w*|\\w*-\\w*)/(\\d*)/(\\d*)/(\\d*)/((\\w*|\\w*-\\w*)*)/": {
           details:
-            (await strings).blogs + " | " + (await strings).readingArticle,
+            `${(await strings).blogs} | ${(await strings).readingArticle}`,
           state: document.querySelector(".c-page-heading__text")
             ? document.querySelector(".c-page-heading__text").textContent
             : undefined
@@ -726,7 +726,7 @@ presence.on("UpdateData", async () => {
     if (showBrowsing) {
       const statics = {
         "/s/": {
-          details: (await strings).help + " | " + (await strings).browse
+          details: `${(await strings).help} | ${(await strings).browse}`
         },
         "/s/topiccatalog/": {
           details: (await strings).helpTopicCatalog
@@ -739,7 +739,7 @@ presence.on("UpdateData", async () => {
         },
         "/s/article/": {
           details:
-            (await strings).help + " | " + (await strings).readingArticle,
+            `${(await strings).help} | ${(await strings).readingArticle}`,
           state: document.querySelector(".articleTitle")
             ? document.querySelector(".articleTitle").textContent
             : undefined
@@ -780,18 +780,18 @@ presence.on("UpdateData", async () => {
     if (showBrowsing) {
       const statics = {
         "/": {
-          details: (await strings).dev + " | " + (await strings).browse
+          details: `${(await strings).dev} | ${(await strings).browse}`
         },
         "/products/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
+          details: `${(await strings).dev} | ${(await strings).viewing}`,
           state: (await strings).devProduct
         },
         "/showcase/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
+          details: `${(await strings).dev} | ${(await strings).viewing}`,
           state: (await strings).devShowcase
         },
         "/support/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
+          details: `${(await strings).dev} | ${(await strings).viewing}`,
           state: (await strings).devSupport
         },
         "/docs/": {
@@ -800,7 +800,7 @@ presence.on("UpdateData", async () => {
         },
         "/docs/(\\w*|\\w*-\\w*)/": {
           details:
-            (await strings).devDocs + " | " + (await strings).readingAbout,
+            `${(await strings).devDocs} | ${(await strings).readingAbout}`,
           state: document.querySelector(".text-content > h1")
             ? document.querySelector(".text-content > h1").textContent
             : undefined
@@ -828,41 +828,41 @@ presence.on("UpdateData", async () => {
       const statics = {
         "/": {
           details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).browse
+            `${(await strings).dev 
+            } (${ 
+            (await strings).forums 
+            }) | ${ 
+            (await strings).browse}`
         },
         "/c/": {
           details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).viewCategory,
+            `${(await strings).dev 
+            } (${ 
+            (await strings).forums 
+            }) | ${ 
+            (await strings).viewCategory}`,
           state: document.querySelector(".category-name")
             ? document.querySelector(".category-name").textContent
             : undefined
         },
         "/t/": {
           details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).thread,
+            `${(await strings).dev 
+            } (${ 
+            (await strings).forums 
+            }) | ${ 
+            (await strings).thread}`,
           state: document.querySelector(".fancy-title")
             ? document.querySelector(".fancy-title").textContent
             : undefined
         },
         "/u/": {
           details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).user,
+            `${(await strings).dev 
+            } (${ 
+            (await strings).forums 
+            }) | ${ 
+            (await strings).user}`,
           state: document.querySelector(".username")
             ? document.querySelector(".username").textContent
             : undefined
@@ -893,20 +893,20 @@ presence.on("UpdateData", async () => {
     if (showBrowsing) {
       const statics = {
         "/": {
-          details: "Status page | " + (await strings).browse
+          details: `Status page | ${(await strings).browse}`
         },
         "/incidents/": {
-          details: "Status page | " + (await strings).viewing,
+          details: `Status page | ${(await strings).viewing}`,
           state: document.querySelector(".page-title > div")
             ? document.querySelector(".page-title > div").textContent
             : undefined
         },
         "/history/": {
-          details: "Status page | " + (await strings).viewing,
+          details: `Status page | ${(await strings).viewing}`,
           state: (await strings).incident
         },
         "/uptime/": {
-          details: "Status page | " + (await strings).viewing,
+          details: `Status page | ${(await strings).viewing}`,
           state: (await strings).uptime
         }
       };

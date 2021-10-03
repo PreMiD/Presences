@@ -10,7 +10,7 @@ function newStats(): void {
       strack = data.song.title;
       sartist = data.song.artist;
       sdj = data.dj.livedj;
-      slisteners = " • " + data.listeners.current;
+      slisteners = ` • ${data.listeners.current}`;
     }
   };
   xhttp.open("GET", "https://api.itspulse.net/stats", true);
@@ -21,8 +21,8 @@ newStats();
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    state: (strack || "Loading...") + (" - " + sartist),
-    details: (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners"
+    state: `${strack || "Loading..."} - ${sartist}`,
+    details: `${(sdj || "Loading...") + (slisteners || "Loading...")} Listeners`
   };
   presence.setActivity(presenceData);
 });

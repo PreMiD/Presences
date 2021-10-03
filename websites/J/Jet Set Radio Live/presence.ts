@@ -90,19 +90,20 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).pause;
     }
 
-    if (buttons)
-      presenceData.buttons = [
+    if (buttons) {
+presenceData.buttons = [
         {
           label: "Tune In",
           url: document.URL
         }
       ];
+}
   }
 
   if (presenceData.details == null && presenceData.state == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

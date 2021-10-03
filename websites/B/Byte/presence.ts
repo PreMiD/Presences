@@ -7,9 +7,9 @@ const presence = new Presence({
   }),
   getElement = (query: string): string => {
     const element = document.querySelector(query);
-    if (element) {
+    if (element) 
       return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return undefined;
+     else return undefined;
   };
 
 let oldUrl: string, elapsed: number;
@@ -74,7 +74,7 @@ function setObject(path: string) {
 }
 
 presence.on("UpdateData", async () => {
-  const host = location.host,
+  const {host} = location,
     path = location.pathname.replace(/\/?$/, "/"),
     detailsObj = setObject(path),
     data: PresenceData = {
@@ -92,9 +92,9 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) {
+  if (elapsed) 
     data.startTimestamp = elapsed;
-  }
+  
 
   if (host === "community.byte.co") {
     data.details = "Browsing Community";
@@ -108,18 +108,18 @@ presence.on("UpdateData", async () => {
     )
       data.state = getElement(".active");
 
-    if (path.match("/new/")) {
+    if (path.match("/new/")) 
       data.state = "Newest";
-    }
+    
 
     if (path.match("/badges/")) {
       data.details = "Viewing Badges";
       data.state = getElement(".show-badge-details .badge-link");
     }
 
-    if (path.match("/tags/")) {
+    if (path.match("/tags/")) 
       data.state = "Tags";
-    }
+    
 
     if (path.match("/tag/")) {
       data.details = "Viewing Tag";
@@ -138,9 +138,9 @@ presence.on("UpdateData", async () => {
       data.state = getElement(".selected-name .category-name");
 
       const tag = getElement(".active");
-      if (tag) {
+      if (tag) 
         data.details += `'s ${tag}`;
-      }
+      
     }
 
     if (path.match("/t/")) {
@@ -156,9 +156,9 @@ presence.on("UpdateData", async () => {
         data.state = `${getElement(".username")} (${getElement(".full-name")})`;
 
         const tag = getElement(".active");
-        if (tag) {
+        if (tag) 
           data.details += `'s ${tag}`;
-        }
+        
       }
     }
 
@@ -169,9 +169,9 @@ presence.on("UpdateData", async () => {
       )})`;
 
       const tag = getElement(".active");
-      if (tag) {
+      if (tag) 
         data.details += `'s ${tag}`;
-      }
+      
     }
 
     if (path.match("/search/")) {

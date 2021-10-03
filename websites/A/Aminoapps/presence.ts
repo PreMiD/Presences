@@ -7,9 +7,9 @@ function pathStarts(string: string): boolean {
 }
 function isHome(string: string): boolean {
   if (string === "/") {
-    if (document.location.pathname === "/") {
+    if (document.location.pathname === "/") 
       return true;
-    }
+    
   }
   return false;
 }
@@ -30,8 +30,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "aminoapps",
     startTimestamp: new Date().getTime()
-  };
-  const host = document.location.hostname;
+  },
+   host = document.location.hostname;
   if (host === "aminoapps.com") {
     switch (true) {
       case isHome("/"):

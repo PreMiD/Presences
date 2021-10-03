@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "605119835751579649"
   }),
   strings = presence.getStrings({
@@ -15,18 +15,18 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
+  const video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
   if (video !== null && !isNaN(video.duration)) {
-    var title: any;
+    let title: any;
     title = document.querySelector(".video-page #main .page-title");
 
-    var uploader = document.querySelector(
+    const uploader = document.querySelector(
         ".video-page #main .video-metadata .uploader-tag .name"
       ),
       timestamps = getTimestamps(
@@ -55,9 +55,9 @@ presence.on("UpdateData", async () => {
     }
 
     //* If tags are not "null"
-    if (title !== null && uploader !== null) {
+    if (title !== null && uploader !== null) 
       presence.setActivity(presenceData, !video.paused);
-    }
+    
   } else {
     presence.setActivity();
     presence.setTrayTitle();

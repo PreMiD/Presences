@@ -34,7 +34,7 @@ sezonlukDizi.on("UpdateData", async () => {
       startTimestamp
     },
     page = document.location.pathname,
-    search = document.location.search;
+    {search} = document.location;
 
   if (search.includes("?tur=")) {
     const titleReplaced = document.title.slice(

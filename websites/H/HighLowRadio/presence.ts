@@ -6,8 +6,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -35,8 +35,8 @@ function newStats(): void {
 setInterval(newStats, 1000);
 newStats();
 
-let lastTitle;
-let lastTimeStart = Math.floor(Date.now() / 1000);
+let lastTitle,
+ lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", function () {
   const presenceData: PresenceData = {
@@ -61,19 +61,19 @@ presence.on("UpdateData", function () {
   }
 
   if (slive) {
-    presenceData.details = strack + " - " + sartist;
-    presenceData.state = "Listening to " + sDJ;
+    presenceData.details = `${strack} - ${sartist}`;
+    presenceData.state = `Listening to ${sDJ}`;
   } else {
     presenceData.details = strack;
-    presenceData.state = "by: " + sartist;
+    presenceData.state = `by: ${sartist}`;
   }
-  presenceData.smallImageText = "Listeners: " + slisteners;
+  presenceData.smallImageText = `Listeners: ${slisteners}`;
   presenceData.smallImageKey = "play";
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -1,10 +1,10 @@
 const presence = new Presence({
   clientId: "714733112499896343"
-});
+}),
 
 // Const thing
-const browsingStamp = Math.floor(Date.now() / 1000);
-const path = document.location;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ path = document.location;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -38,12 +38,12 @@ presence.on("UpdateData", async () => {
         const page =
           document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = page + " | Articles";
+        presenceData.state = `${page} | Articles`;
       } else {
         const titlen =
           document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Reading on articles";
-        presenceData.state = titlen + " | Articles";
+        presenceData.state = `${titlen} | Articles`;
         presenceData.smallImageKey = "reading";
       } // Videos
     } else if (path.pathname.includes("videos")) {
@@ -64,12 +64,12 @@ presence.on("UpdateData", async () => {
         const page =
           document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = page + " | Videos";
+        presenceData.state = `${page} | Videos`;
       } else {
         const titlen =
           document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = titlen + " | Videos";
+        presenceData.state = `${titlen} | Videos`;
         presenceData.smallImageKey = "playing";
       } // Podcast
     } else if (path.pathname.includes("podcasts")) {
@@ -116,12 +116,12 @@ presence.on("UpdateData", async () => {
         const page =
           document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = page + " | Series";
+        presenceData.state = `${page} | Series`;
       } else {
         const titlen =
           document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = titlen + " | Series";
+        presenceData.state = `${titlen} | Series`;
       } //Explore
     } else if (
       path.pathname.includes("explore") ||
@@ -130,7 +130,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       const extitle = path.pathname.replace("/explore/", "| ");
       presenceData.details = "Viewing on exploring";
-      presenceData.state = "About " + extitle;
+      presenceData.state = `About ${extitle}`;
       presenceData.smallImageKey = "search";
     } else if (path.pathname.includes("notification")) {
       presenceData.startTimestamp = browsingStamp;
@@ -155,9 +155,9 @@ presence.on("UpdateData", async () => {
       if (path.pathname.includes("pages")) {
         presenceData.details = "Viewing on page creator";
         presenceData.state = "Settings";
-      } else if (path.pathname.includes("user-settings")) {
+      } else if (path.pathname.includes("user-settings")) 
         presenceData.details = "Viewing on user settings";
-      } else {
+       else {
         presenceData.details = "Viewing on settings";
         presenceData.state = "Unknow settings";
       }
@@ -264,8 +264,8 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
     //console.log(presenceData);
-  }
+  
 });

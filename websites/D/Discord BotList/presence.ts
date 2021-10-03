@@ -14,9 +14,9 @@ botPresence.on("UpdateData", async () => {
     sSubmit = await botPresence.getSetting("submitP");
 
   if (botHost == "discord-botlist.eu") {
-    if (botPage == "/") {
+    if (botPage == "/") 
       botData.details = "Browsing";
-    } else if (botPage == "/search") {
+     else if (botPage == "/search") {
       const search: string = document
         .querySelector("[name='search']")
         .getAttribute("value");
@@ -41,9 +41,9 @@ botPresence.on("UpdateData", async () => {
           url: document.URL
         }
       ];
-    } else if (botPage == "/login_err/") {
+    } else if (botPage == "/login_err/") 
       botData.details = "Login In Page";
-    } else if (botPage.includes("/users/")) {
+     else if (botPage.includes("/users/")) {
       const username: string = document.querySelector("#Username").textContent;
       botData.details = "Viewing Profile:";
       botData.state = username;
@@ -54,9 +54,9 @@ botPresence.on("UpdateData", async () => {
         }
       ];
     } else if (botPage.includes("/bots/")) {
-      if (botPage.includes("/new")) {
+      if (botPage.includes("/new")) 
         botData.details = "Adding a Bot";
-      } else if (botPage.includes("/vote")) {
+       else if (botPage.includes("/vote")) {
         const voteBotName: string = document
           .querySelector("#vote1 > h1")
           .textContent.replace("Vote for ", "");
@@ -64,13 +64,13 @@ botPresence.on("UpdateData", async () => {
         botData.state = voteBotName;
         botData.buttons = [
           {
-            label: "Vote for " + voteBotName,
+            label: `Vote for ${voteBotName}`,
             url: document.URL
           }
         ];
-      } else if (botPage.includes("/edit")) {
+      } else if (botPage.includes("/edit")) 
         botData.details = "Editing a Bot";
-      } else if (botPage.includes("/all")) {
+       else if (botPage.includes("/all")) {
         botData.details = "Viewing all Bots";
         botData.buttons = [
           {
@@ -89,23 +89,23 @@ botPresence.on("UpdateData", async () => {
           }
         ];
       }
-    } else if (botPage == "/apply/certification/") {
+    } else if (botPage == "/apply/certification/") 
       botData.details = "Viewing Certification Page";
-    } else if (botPage == "/apply/certification/application") {
+     else if (botPage == "/apply/certification/application") 
       botData.details = "Applying for Certification";
-    } else if (botPage == "/tos/") {
+     else if (botPage == "/tos/") 
       botData.details = "Viewing ToS";
-    } else if (botPage == "/privacypolicy/") {
+     else if (botPage == "/privacypolicy/") 
       botData.details = "Viewing Privacy Policy";
-    } else if (botPage == "/Imprint/") {
+     else if (botPage == "/Imprint/") 
       botData.details = "Viewing Imprint";
-    }
+    
   } else if (botHost == "docs.discord-botlist.eu") {
     const page = document.querySelector(
       "#__GITBOOK__ROOT__CLIENT__ > div.reset-3c756112--body-68cac36c > div.reset-3c756112--bodyContent-2f98451b > div > div.reset-3c756112--wholeContentBody-554be184 > div.reset-3c756112--wholeContentPage-6c3f1fc5 > div > div.reset-3c756112--pageContainer-544d6e9c > div.reset-3c756112 > div.reset-3c756112--pageHeader-15724735 > div > div > div.reset-3c756112--horizontalFlex-5a0077e0 > div.reset-3c756112--pageHeaderIntro-0c1463da > h1 > span"
     ).textContent;
     botData.details = "Viewing Docs";
-    botData.state = "Page: " + page;
+    botData.state = `Page: ${page}`;
   }
 
   if (!sSubmit && botData.details === "Adding a Bot") delete botData.details;
@@ -115,7 +115,7 @@ botPresence.on("UpdateData", async () => {
   if (botData.details == null) {
     botPresence.setTrayTitle();
     botPresence.setActivity();
-  } else {
+  } else 
     botPresence.setActivity(botData);
-  }
+  
 });

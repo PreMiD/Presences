@@ -5,23 +5,23 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-  var route = document.location.pathname.split("/");
+   route = document.location.pathname.split("/");
 
-  if (document.location.pathname === "/") {
+  if (document.location.pathname === "/") 
     presenceData.details = "Home";
-  } else if (document.location.pathname.includes("/dashboard")) {
+   else if (document.location.pathname.includes("/dashboard")) {
     presenceData.details = "Dashboard";
     presenceData.state = "Choosing a server...";
   } else if (document.location.pathname.includes("/server/")) {
     presenceData.details =
-      "Edit a server : " + document.querySelector(".title").textContent;
-    if (!route[3]) {
+      `Edit a server : ${document.querySelector(".title").textContent}`;
+    if (!route[3]) 
       presenceData.state = "Main";
-    } else {
+     else 
       presenceData.state = document.querySelector("a.is-active").textContent;
-    }
+    
   } else if (document.location.pathname.includes("/status")) {
     presenceData.details = "Status";
     presenceData.state = "Watching current status of Koya";

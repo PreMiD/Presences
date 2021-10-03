@@ -19,9 +19,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Start a story";
     } else if (window.location.pathname.endsWith("draw")) {
       presenceData.startTimestamp = browsingStamp;
-      if (privacyDraw == true) {
+      if (privacyDraw == true) 
         presenceData.details = `Drawing...`;
-      } else {
+       else {
         presenceData.details = `Drawing:`;
         presenceData.state = `${
           document.querySelector(".jsx-1934821697 h3").textContent
@@ -32,9 +32,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Writing...";
     } else if (window.location.pathname.endsWith("book")) {
       presenceData.startTimestamp = browsingStamp;
-      if (privacyAlbum == true) {
+      if (privacyAlbum == true) 
         presenceData.details = `Look at the album`;
-      } else {
+       else {
         presenceData.details = `Look at the album of:`;
         presenceData.state = `${
           document.querySelector(".jsx-1186471753 span").textContent
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

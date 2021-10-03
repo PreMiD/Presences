@@ -103,8 +103,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               isCoubPicks && activeTabTitle.match(/^(\w+)/gi)
                 ? activeTabTitle.match(/^(\w+)/gi)[0]
                 : activeTabTitle
-            }` +
-            (pageType?.length > 0 &&
+            }${ 
+            pageType?.length > 0 &&
             activeTabTitle.toLowerCase() !== pageType[0].toLowerCase()
               ? ` in ${pageType[0]}`
               : isWeekly
@@ -113,15 +113,15 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ? " in Best of the Year"
               : isCoubPicks
               ? " in Coub Picks"
-              : "");
+              : ""}`;
           data.details = `${title}${isLiked ? " (❤)" : ""}`;
           data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
           const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
             ".description__stamp a.description__stamp__source"
           );
           data.buttons = [];
-          if (showWatch)
-            data.buttons.push(
+          if (showWatch) {
+data.buttons.push(
               ...[
                 {
                   label: strings.watchVideo,
@@ -130,6 +130,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                 ...getSourceLink(sourceLink?.href)
               ]
             );
+}
           return data;
         }
       },
@@ -175,8 +176,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           data.details = `${title}${isLiked ? " (❤)" : ""}`;
           data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
           data.buttons = [];
-          if (showWatch)
-            data.buttons.push(
+          if (showWatch) {
+data.buttons.push(
               ...[
                 {
                   label: strings.watchVideo,
@@ -190,6 +191,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                 }
               ]
             );
+}
           return data;
         }
       },
@@ -221,8 +223,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               `.coub__info .media-block__item > a[type="embedPopup"]`
             );
           data.buttons = [];
-          if (showWatch)
-            data.buttons.push(
+          if (showWatch) {
+data.buttons.push(
               ...[
                 {
                   label: strings.watchVideo,
@@ -231,6 +233,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                 ...getSourceLink(sourceLink?.href)
               ]
             );
+}
           return data;
         }
       },
@@ -269,8 +272,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             ".description__stamp a.description__stamp__source"
           );
           data.buttons = [];
-          if (showWatch)
-            data.buttons.push(
+          if (showWatch) {
+data.buttons.push(
               ...[
                 {
                   label: strings.watchVideo,
@@ -279,6 +282,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                 ...getSourceLink(sourceLink?.href)
               ]
             );
+}
 
           return data;
         }

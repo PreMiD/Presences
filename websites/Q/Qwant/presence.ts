@@ -6,25 +6,25 @@ interface ItemMap {
   [key: string]: string;
 }
 
-const browsingTimestamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000),
 
-const searchTypeMap: ItemMap = {
+ searchTypeMap: ItemMap = {
   web: "Searching on the web",
   news: "Searching the news",
   images: "Searching images",
   videos: "Searching videos",
   social: "Searching social media",
   shopping: "Searching for products"
-};
+},
 
-const searchMusicTypeMap: ItemMap = {
+ searchMusicTypeMap: ItemMap = {
   overview: "Searching music",
   albums: "Searching music albums",
   artists: "Searching music artists",
   songs: "Searching songs"
-};
+},
 
-const searchJuniorTypeMap: ItemMap = {
+ searchJuniorTypeMap: ItemMap = {
   web: "Searching on the web",
   images: "Searching images",
   videos: "Searching videos",
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
       case "/":
         if (query.has("q")) {
           data.details =
-            searchJuniorTypeMap[query.get("type")] + " in Qwant Junior";
+            `${searchJuniorTypeMap[query.get("type")]} in Qwant Junior`;
           data.state = query.get("q");
         } else data.details = "Junior Home";
         break;

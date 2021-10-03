@@ -58,7 +58,7 @@ presence.on("UpdateData", async function () {
         const post = document.querySelector("h1.ArticleHero_title__cOam6"),
           label =
             post?.textContent.length >= 15
-              ? post?.textContent.substring(0, 15) + "..."
+              ? `${post?.textContent.substring(0, 15)}...`
               : post?.textContent;
 
         presenceData.state = post?.textContent || "Unknown";
@@ -102,10 +102,11 @@ presence.on("UpdateData", async function () {
               }
             ];
           }
-        } else
-          presenceData.state =
+        } else {
+presenceData.state =
             document.querySelector("h1.DiscoverListHeader_header__3ivqr")
               ?.textContent || "Unknown";
+}
       }
     } else if (urlpath[1] === "collections") {
       presenceData.details = "Collections";
@@ -143,7 +144,7 @@ presence.on("UpdateData", async function () {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

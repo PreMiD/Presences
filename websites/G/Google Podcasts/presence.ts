@@ -32,21 +32,21 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = ts - elapsedSeconds;
       presenceData.endTimestamp = ts + totalSeconds - elapsedSeconds;
     }
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname == "/") 
     presenceData.details = "Browsing Podcasts";
-  } else if (document.location.pathname.includes("feed/")) {
+   else if (document.location.pathname.includes("feed/")) {
     presenceData.details = "Viewing Podcast";
     // It's quite tricky to locate the right podcast title because
     // website makes new element for each of them
     for (const element of document.getElementsByClassName("dbCu3e")) {
       if (element.children[0].innerHTML == document.title) {
         presenceData.state =
-          document.title + " by " + element.children[1].innerHTML;
+          `${document.title} by ${element.children[1].innerHTML}`;
       }
     }
-  } else if (document.location.pathname.includes("/subscriptions")) {
+  } else if (document.location.pathname.includes("/subscriptions")) 
     presenceData.details = "Browsing Subscriptions";
-  } else if (document.location.pathname.includes("search/")) {
+   else if (document.location.pathname.includes("search/")) {
     presenceData.details = "Searching for podcast";
     presenceData.state = document.location.pathname.replace("/search/", "");
   }
@@ -54,9 +54,9 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
 
 // Function that convert lengths like 01:13 to seconds like 73
@@ -65,9 +65,9 @@ function parseLength(length: string) {
   let result = 0;
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i];
-    if (!isNaN(Number(element))) {
+    if (!isNaN(Number(element))) 
       result += Number(element) * Math.pow(60, i);
-    }
+    
   }
   return result;
 }

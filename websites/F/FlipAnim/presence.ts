@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "642119548803219466"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -18,12 +18,12 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing anim:";
       presenceData.state =
-        document.querySelector("#mainDivActive > div:nth-child(6) > div")
-          .textContent +
-        " by: " +
+        `${document.querySelector("#mainDivActive > div:nth-child(6) > div")
+          .textContent 
+        } by: ${ 
         document.querySelector(
           "#mainDivActive > div:nth-child(10) > div:nth-child(2) > div.anim_author > a:nth-child(1)"
-        ).textContent;
+        ).textContent}`;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/profile")) {
       presenceData.startTimestamp = browsingStamp;
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

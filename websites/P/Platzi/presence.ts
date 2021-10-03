@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "lg-dark"
     },
-    pathname = document.location.pathname;
+    {pathname} = document.location;
 
   if (pathname.includes("/home")) {
     const SearchInputs: NodeListOf<HTMLInputElement> =
@@ -110,11 +110,11 @@ presence.on("UpdateData", async () => {
       }
     } else if (ForumPage)
       presenceData.state = `Página ${ForumPage.textContent}`;
-  } else if (pathname.startsWith("/precios/")) {
+  } else if (pathname.startsWith("/precios/")) 
     presenceData.state = `Viendo los planes de compra`;
-  } else if (pathname.startsWith("/empresas/")) {
+   else if (pathname.startsWith("/empresas/")) 
     presenceData.state = `Viendo el plan para empresas`;
-  } else if (pathname.startsWith("/comprar/")) {
+   else if (pathname.startsWith("/comprar/")) {
     const planName = document.querySelector(".Details-name");
 
     presenceData.details = "Comprando un plan...";
@@ -146,10 +146,11 @@ presence.on("UpdateData", async () => {
     let FinalString = "";
 
     FinalString += ` ${UserFullName.textContent} `;
-    if (UserFlag)
-      FinalString += ` ${stripPlatziProfileFlags(
+    if (UserFlag) {
+FinalString += ` ${stripPlatziProfileFlags(
         UserFlag.getAttribute("src")
       )} `;
+}
 
     FinalString += ` [${UserPoints.textContent} pts] `;
 
@@ -164,9 +165,9 @@ presence.on("UpdateData", async () => {
     if (isUserProfile.length > 0) presenceData.details = "Viendo su perfil";
 
     presenceData.state = FinalString;
-  } else if (pathname == "/agenda/") {
+  } else if (pathname == "/agenda/") 
     presenceData.state = "Viendo la Agenda";
-  } else if (pathname == "/live/") {
+   else if (pathname == "/live/") {
     presenceData.state = "Viendo Platzi Live";
     presenceData.startTimestamp = estimatedTime;
     presenceData.buttons = [
@@ -329,15 +330,15 @@ presence.on("UpdateData", async () => {
         presenceData.state = `Empezando el exámen [${ExamQuestions.textContent}]`;
       }
     }
-  } else if (pathname.startsWith("/direct-messages/u/soporte-platzi")) {
+  } else if (pathname.startsWith("/direct-messages/u/soporte-platzi")) 
     presenceData.state = "Hablando con el Soporte Platzi";
-  } else if (pathname.startsWith("/mensajes-directos/")) {
+   else if (pathname.startsWith("/mensajes-directos/")) 
     presenceData.state = "Viendo sus Mensajes";
-  } else if (pathname.startsWith("/empleos/")) {
+   else if (pathname.startsWith("/empleos/")) 
     presenceData.state = "Viendo la lista de Empleos";
-  } else if (pathname.startsWith("/mi-suscripcion/beneficiario/")) {
+   else if (pathname.startsWith("/mi-suscripcion/beneficiario/")) 
     presenceData.state = "Viendo su Beneficiario";
-  } else if (pathname.startsWith("/mi-suscripcion/facturas/")) {
+   else if (pathname.startsWith("/mi-suscripcion/facturas/")) {
     const FullName: HTMLDivElement =
         document.querySelector(".ProfileMenu-name"),
       Pts: HTMLDivElement = document.querySelector(".ProfileMenu-rank"),

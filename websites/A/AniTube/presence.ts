@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     ).textContent;
     presenceData.details = "Página de Busca";
     presenceData.state =
-      "Pesquisando: " + result.replace("Você pesquisou por:", "");
+      `Pesquisando: ${result.replace("Você pesquisou por:", "")}`;
     presenceData.startTimestamp = tempo;
   } else if (path == "/lista-de-animes-online/") {
     presenceData.details = "Animes Legendados";
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

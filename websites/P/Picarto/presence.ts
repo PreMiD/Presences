@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "630771716058120192"
   }),
   strings = presence.getStrings({
@@ -7,16 +7,16 @@ var presence = new Presence({
   }),
   presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
     "#picarto-player-1_html5_api"
   );
   if (video !== null && !isNaN(video.duration)) {
-    var title: any, uploader: any;
+    let title: any, uploader: any;
 
     title = document.querySelector(".d-flex h4");
     uploader = document.querySelector("#userbar-name .d-flex .d-inline-block");
@@ -40,11 +40,11 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (title !== null && uploader !== null) {
+    if (title !== null && uploader !== null) 
       presence.setActivity(presenceData, !video.paused);
-    }
+    
   } else {
-    var pageData: PresenceData = {
+    const pageData: PresenceData = {
       details: "Browsing..",
       largeImageKey: "logo"
     };

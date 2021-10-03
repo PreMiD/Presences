@@ -28,92 +28,94 @@ function getText(selector: string) {
 
 function getModeImageKey(): string[] {
   if (
-    getText(SelectorMap["tmode"]) !== null ||
-    getText(SelectorMap["footer"]).includes("bracket!") ||
-    getText(SelectorMap["footer"]).includes("FINAL")
-  ) {
+    getText(SelectorMap.tmode) !== null ||
+    getText(SelectorMap.footer).includes("bracket!") ||
+    getText(SelectorMap.footer).includes("FINAL")
+  ) 
     return ["trofeo", "Tournament Mode"];
-  } else if (
-    getText(SelectorMap["footer"]).includes("exhibition") ||
-    getText(SelectorMap["footer"]).includes("Exhibition")
-  ) {
+   else if (
+    getText(SelectorMap.footer).includes("exhibition") ||
+    getText(SelectorMap.footer).includes("Exhibition")
+  ) 
     return ["saltgirl", "Exhibition Mode"];
-  } else {
+   else 
     return ["salero", "Matchmaking Mode"];
-  }
+  
 }
 
 function getFighters(): string {
   if (
-    getText(SelectorMap["Red"]) !== null &&
-    getText(SelectorMap["Blue"]) !== null
+    getText(SelectorMap.Red) !== null &&
+    getText(SelectorMap.Blue) !== null
   )
-    return getText(SelectorMap["Red"]) + " VS " + getText(SelectorMap["Blue"]);
+    return `${getText(SelectorMap.Red)} VS ${getText(SelectorMap.Blue)}`;
   else return "Loading Fighters...";
 }
 
 function isBetOpen(): boolean {
-  return getText(SelectorMap["estatus"]).includes("OPEN!");
+  return getText(SelectorMap.estatus).includes("OPEN!");
 }
 
 function getBetStatus(show: boolean): string {
   if (!isBetOpen()) {
-    if (!getText(SelectorMap["estatus"]).includes("Payouts")) {
-      if (getText(SelectorMap["betsView"]).includes("|") && show) {
-        if (getText(SelectorMap["betRed"]).includes("$"))
-          return (
-            "$" +
-            abbrNum(+getText(SelectorMap["betRed"]).replace("$", ""), 1) +
-            "(Red) → " +
-            "+$" +
-            abbrNum(+getText(SelectorMap["prize"]).replace("+$", ""), 1) +
-            " | " +
-            getText(SelectorMap["oddsRed"]) +
-            ":" +
-            getText(SelectorMap["oddsBlue"])
+    if (!getText(SelectorMap.estatus).includes("Payouts")) {
+      if (getText(SelectorMap.betsView).includes("|") && show) {
+        if (getText(SelectorMap.betRed).includes("$")) {
+return (
+            `$${ 
+            abbrNum(+getText(SelectorMap.betRed).replace("$", ""), 1) 
+            }(Red) → ` +
+            `+$${ 
+            abbrNum(+getText(SelectorMap.prize).replace("+$", ""), 1) 
+            } | ${ 
+            getText(SelectorMap.oddsRed) 
+            }:${ 
+            getText(SelectorMap.oddsBlue)}`
           );
-        else
-          return (
-            "$" +
-            abbrNum(+getText(SelectorMap["betBlue"]).replace("$", ""), 1) +
-            "(Blue) → " +
-            "+$" +
-            abbrNum(+getText(SelectorMap["prize"]).replace("+$", ""), 1) +
-            " | " +
-            getText(SelectorMap["oddsRed"]) +
-            ":" +
-            getText(SelectorMap["oddsBlue"])
+} else {
+return (
+            `$${ 
+            abbrNum(+getText(SelectorMap.betBlue).replace("$", ""), 1) 
+            }(Blue) → ` +
+            `+$${ 
+            abbrNum(+getText(SelectorMap.prize).replace("+$", ""), 1) 
+            } | ${ 
+            getText(SelectorMap.oddsRed) 
+            }:${ 
+            getText(SelectorMap.oddsBlue)}`
           );
+}
       } else {
         if (
-          getText(SelectorMap["oddsRed"]) !== null &&
-          getText(SelectorMap["oddsBlue"]) !== null
-        )
-          return (
-            "Odds: " +
-            getText(SelectorMap["oddsRed"]) +
-            ":" +
-            getText(SelectorMap["oddsBlue"])
+          getText(SelectorMap.oddsRed) !== null &&
+          getText(SelectorMap.oddsBlue) !== null
+        ) {
+return (
+            `Odds: ${ 
+            getText(SelectorMap.oddsRed) 
+            }:${ 
+            getText(SelectorMap.oddsBlue)}`
           );
-        else return "Loading...";
+} else return "Loading...";
       }
     } else {
-      if (getText(SelectorMap["estatus"]) !== null) {
-        if (getText(SelectorMap["estatus"]).split("wins!")[0].length <= 32)
-          return getText(SelectorMap["estatus"]).split("wins!")[0] + "wins!";
-        else
-          return (
-            getText(SelectorMap["estatus"])
+      if (getText(SelectorMap.estatus) !== null) {
+        if (getText(SelectorMap.estatus).split("wins!")[0].length <= 32)
+          return `${getText(SelectorMap.estatus).split("wins!")[0]}wins!`;
+        else {
+return (
+            `${getText(SelectorMap.estatus)
               .replace(".", "")
               .split(" ")
               .splice(-2)
-              .join(" ") + " wins!"
+              .join(" ")} wins!`
           );
+}
       } else return "Loading...";
     }
   } else {
-    if (getText(SelectorMap["estatus"]) !== null)
-      return getText(SelectorMap["estatus"]);
+    if (getText(SelectorMap.estatus) !== null)
+      return getText(SelectorMap.estatus);
     else return "Loading...";
   }
 }
@@ -156,8 +158,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = getFighters();
       fightersCheck = getFighters();
     } else {
-      presenceData.details = getFighters() + "‎";
-      fightersCheck = getFighters() + "‎";
+      presenceData.details = `${getFighters()}‎`;
+      fightersCheck = `${getFighters()}‎`;
     }
 
     presenceData.state = getBetStatus(bet);
@@ -169,8 +171,8 @@ presence.on("UpdateData", async () => {
       ? (browsingStamp = Math.floor(Date.now() / 1000))
       : (presenceData.startTimestamp = browsingStamp);
 
-    if (buttons)
-      switch (mode[0]) {
+    if (buttons) {
+switch (mode[0]) {
         case "trofeo":
           presenceData.buttons = [
             {
@@ -188,6 +190,7 @@ presence.on("UpdateData", async () => {
           ];
           break;
       }
+}
   } else if (document.location.pathname == "/authenticate") {
     presenceData.details = "Signing in...";
     presenceData.startTimestamp = browsingStamp;
@@ -202,14 +205,14 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Checking Exhibition Queue";
     presenceData.startTimestamp = browsingStamp;
-  } else {
+  } else 
     presenceData.details = null;
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

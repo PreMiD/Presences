@@ -5,9 +5,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "taco"
-  };
+  },
 
-  const pathSplits = location.pathname.split("/");
+   pathSplits = location.pathname.split("/");
   switch (pathSplits[1]) {
     case "guide":
       data.details = "Reading the guide";

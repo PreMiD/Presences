@@ -11,20 +11,20 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "anilist_lg",
     startTimestamp
-  };
-  const { pathname } = window.location;
+  },
+   { pathname } = window.location;
   if (pathname.startsWith(`/home`)) {
     presenceData.details = (await strings).browsing;
     presenceData.state = "Home";
   } else if (pathname.startsWith(`/user`)) {
     const user = document.querySelector(".name").textContent.trim();
-    if (pathname.includes(`mangalist`)) {
+    if (pathname.includes(`mangalist`)) 
       presenceData.details = `Viewing ${user}'s manga list`;
-    } else if (pathname.includes(`animelist`)) {
+     else if (pathname.includes(`animelist`)) 
       presenceData.details = `Viewing ${user}'s anime list`;
-    } else {
+     else 
       presenceData.details = `Viewing ${user}'s profile`;
-    }
+    
   } else if (pathname.startsWith(`/search`)) {
     presenceData.details = "Searching";
     presenceData.smallImageKey = "search";
@@ -45,9 +45,9 @@ presence.on("UpdateData", async () => {
         .textContent.trim()}'`;
       presenceData.smallImageKey = `reading`;
       presenceData.smallImageText = (await strings).reading;
-    } else {
+    } else 
       presenceData.details = "Browsing the forum";
-    }
+    
   } else if (pathname.startsWith(`/studio`)) {
     presenceData.details = "Viewing a studio";
     presenceData.state =
@@ -62,10 +62,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = `${author}`;
     presenceData.smallImageKey = `reading`;
     presenceData.smallImageText = (await strings).reading;
-  } else if (pathname.startsWith(`/notifications`)) {
+  } else if (pathname.startsWith(`/notifications`)) 
     presenceData.details = `Viewing notifications`;
-  } else if (pathname.startsWith(`/settings`)) {
+   else if (pathname.startsWith(`/settings`)) 
     presenceData.details = `Changing settings`;
-  }
+  
   presence.setActivity(presenceData, true);
 });

@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "660928900163174412"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

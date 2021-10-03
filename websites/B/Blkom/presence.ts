@@ -61,12 +61,12 @@ presence.on("UpdateData", async () => {
     if (
       document.querySelectorAll(".content").length &&
       document.querySelectorAll(".page-item").length
-    )
-      data.state = `Results: ${
+    ) {
+data.state = `Results: ${
         document.querySelectorAll(".content").length *
         (document.querySelectorAll(".page-item").length - 3)
       } and More..`;
-    else if (document.querySelectorAll(".content").length)
+} else if (document.querySelectorAll(".content").length)
       data.state = `Results: ${document.querySelectorAll(".content").length}`;
     else data.state = `Results: Nothing`;
     presence.setActivity(data);

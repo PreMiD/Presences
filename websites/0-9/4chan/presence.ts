@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "706956748329713685"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
-var pathname, query1, query2, query3, query4, query5, query6, query7;
+}),
+ browsingStamp = Math.floor(Date.now() / 1000);
+let pathname, query1, query2, query3, query4, query5, query6, query7;
 presence.on("iFrameData", (data) => {
   pathname = data.pathnameA;
   query1 = data.queryA;
@@ -31,8 +31,8 @@ presence.on("UpdateData", () => {
     query6 = query6 ? query6.hasAttribute("style") : false;
     query7 = query7 ? true : false;
   }
-  let title;
-  var getTitle = function (): string {
+  let title,
+   getTitle = function (): string {
     if (!query1) title = query2;
     else title = query1;
     if (query3) title += ` - ${query4}/${query3}`;
@@ -45,7 +45,7 @@ presence.on("UpdateData", () => {
   };
   if (pathname == "/") presenceData.details = "Home";
   else if (pathname && pathname.includes("/thread/")) {
-    var ThreadId = pathname.split("/");
+    const ThreadId = pathname.split("/");
     presenceData.state = `Thread ${
       ThreadId[Number(ThreadId.indexOf("thread") + 1)]
     }`;

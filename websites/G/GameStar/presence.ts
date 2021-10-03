@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640969147911503910"
   }),
   strings = presence.getStrings({
@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/videos/")) {
-      var currentTime: any,
+      let currentTime: any,
         duration: any,
         paused: any,
         timestamps: any,
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
         presenceData.endTimestamp = timestamps[1];
 
         presenceData.details = title.split("-")[0];
-        presenceData.state = title.replace(title.split("-")[0] + "- ", "");
+        presenceData.state = title.replace(`${title.split("-")[0]}- `, "");
 
         if (paused) {
           delete presenceData.startTimestamp;
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Betrachtet Seite:";
     presenceData.state = document.querySelector("head > title").textContent;
     presence.setActivity(presenceData);
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

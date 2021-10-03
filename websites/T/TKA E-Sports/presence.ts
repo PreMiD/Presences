@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "683017570072264726"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -18,21 +18,21 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.includes("/headmanagement")) {
     presenceData.details = "Reading about TKA's";
     presenceData.state = "management team";
-  } else if (document.location.pathname.includes("/streams")) {
+  } else if (document.location.pathname.includes("/streams")) 
     presenceData.details = "Viewing TKA's streams";
-  } else if (document.location.pathname.includes("/partner")) {
+   else if (document.location.pathname.includes("/partner")) 
     presenceData.details = "Viewing TKA's partners";
-  } else if (document.location.pathname.includes("/headmanagement")) {
+   else if (document.location.pathname.includes("/headmanagement")) {
     presenceData.details = "Reading about TKA's";
     presenceData.state = "management team";
   } else if (document.location.pathname.includes("/datenschutz")) {
     presenceData.details = "Reading TKA's";
     presenceData.state = "privacy policy";
-  } else if (document.location.pathname.includes("/impressum")) {
+  } else if (document.location.pathname.includes("/impressum")) 
     presenceData.details = "Reading TKA's imprint";
-  } else if (document.location.pathname.includes("/media")) {
+   else if (document.location.pathname.includes("/media")) 
     presenceData.details = "Viewing TKA's media kit";
-  } else if (document.location.pathname.includes("/counter-strike-academy")) {
+   else if (document.location.pathname.includes("/counter-strike-academy")) {
     presenceData.details = "Viewing TKA's";
     presenceData.state = "CS Academy Roster";
   } else if (document.location.pathname.includes("/counter-strike")) {
@@ -58,7 +58,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -5,10 +5,10 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "bundle"
-  };
+  },
 
-  const page = window.location.pathname;
-  const browsingStamp = Math.floor(Date.now() / 1000);
+   page = window.location.pathname,
+   browsingStamp = Math.floor(Date.now() / 1000);
 
   if (page.startsWith("/detay/")) {
     presenceData.details = "Bir haber okuyor";
@@ -21,7 +21,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

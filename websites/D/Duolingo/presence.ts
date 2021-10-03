@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "612071822321647648"
   }),
   presenceData: PresenceData = {
@@ -6,9 +6,9 @@ var presence = new Presence({
   },
   pageData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-const lang = new Map();
+ lang = new Map();
 lang.set("de", "German");
 lang.set("es", "Spanish");
 lang.set("fr", "French");
@@ -45,7 +45,7 @@ lang.set("nv", "Navajo");
 lang.set("en", "English");
 
 presence.on("UpdateData", async () => {
-  var path1 = document.location.pathname;
+  const path1 = document.location.pathname;
 
   if (path1.split("/")[2] == null) {
     if (document.location.pathname.startsWith("/learn")) {
@@ -56,11 +56,11 @@ presence.on("UpdateData", async () => {
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/dictionary")) {
       pageData.details = "Using dictionary..";
-      pageData.state = "Language: " + document.location.pathname.split("/")[2];
+      pageData.state = `Language: ${document.location.pathname.split("/")[2]}`;
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/profile")) {
       pageData.details = "Browsing profile..";
-      pageData.state = "Browsing: " + document.location.pathname.split("/")[2];
+      pageData.state = `Browsing: ${document.location.pathname.split("/")[2]}`;
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/words")) {
       presenceData.details = "Checking words...";
@@ -69,16 +69,16 @@ presence.on("UpdateData", async () => {
     } else if (
       document.location.pathname == "/" ||
       !document.location.pathname
-    ) {
+    ) 
       presence.setActivity(pageData);
-    }
+    
   } else {
     if (
       path1.length > 1 &&
       path1.split("/")[2] !== null &&
       path1.split("/")[2].length == 2
     ) {
-      var language: string;
+      let language: string;
       for (const value of lang.keys()) {
         if (path1.split("/")[2] == value) {
           language = lang.get(value);
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
         }
       }
       presenceData.details = "Taking a lesson";
-      presenceData.state = "Language: " + language;
+      presenceData.state = `Language: ${language}`;
       presenceData.largeImageKey = "logo";
       presence.setActivity(presenceData);
     }

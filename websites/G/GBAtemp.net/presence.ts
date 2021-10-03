@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "632110854543769601"
-});
+}),
 
-const timeElapsed = Math.floor(Date.now() / 1000);
+ timeElapsed = Math.floor(Date.now() / 1000);
 let threadName,
   authorName,
   newsAuthor,
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
     newsAuthor = document.querySelector("div.news-author > a.username > b");
     if (authorName == null) {
       const presenceData: PresenceData = {
-        details: "Reading a news post by " + newsAuthor.innerText,
+        details: `Reading a news post by ${newsAuthor.innerText}`,
         state: threadName.innerText,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       const presenceData: PresenceData = {
-        details: "Reading a thread by " + authorName.innerText,
+        details: `Reading a thread by ${authorName.innerText}`,
         state: threadName.innerText,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       const presenceData: PresenceData = {
-        details: "Looking at " + profileName.innerText + "'s profile",
+        details: `Looking at ${profileName.innerText}'s profile`,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
       };
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
     reviewAuthor = document.querySelector("span.review_author > a.username");
     reviewTitle = document.querySelector("h1#review_title > a");
     const presenceData: PresenceData = {
-      details: "Reading a review by " + reviewAuthor.innerText,
+      details: `Reading a review by ${reviewAuthor.innerText}`,
       state: reviewTitle.innerText,
       largeImageKey: "tempy",
       startTimestamp: timeElapsed
@@ -165,7 +165,7 @@ presence.on("UpdateData", async () => {
     );
     blogTitle = document.querySelector("a.newsTitle");
     const presenceData: PresenceData = {
-      details: "Reading a blog post by " + blogAuthor.innerText,
+      details: `Reading a blog post by ${blogAuthor.innerText}`,
       state: blogTitle.innerText,
       largeImageKey: "tempy",
       startTimestamp: timeElapsed

@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640275259282686015"
   }),
   strings = presence.getStrings({
@@ -15,18 +15,18 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var title: any;
-var currentTime: any, video: HTMLVideoElement, duration: any, paused: any;
+ title: any,
+ currentTime: any, video: HTMLVideoElement, duration: any, paused: any;
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
     presenceData: PresenceData = {
       largeImageKey: "tv"
     };
@@ -49,9 +49,9 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > now-root > now-seo > article > h1 > font > font"
       );
-      if (title !== null) {
+      if (title !== null) 
         presenceData.details = title.textContent.split("-")[0];
-      } else {
+       else {
         title = document.querySelector(
           "body > now-root > now-seo > article > h1"
         );
@@ -71,18 +71,18 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > now-root > now-seo > article > h1 > font > font"
       );
-      if (title !== null) {
+      if (title !== null) 
         presenceData.state = title.textContent.split("-")[0];
-      } else {
+       else {
         title = document.querySelector(
           "body > now-root > now-seo > article > h1"
         );
         presenceData.state =
-          document.querySelector(
+          `${document.querySelector(
             "body > now-root > now-footer > footer > now-breadcrumb > ul > li:nth-child(3) > a > span"
-          ).textContent +
-          " - " +
-          title.textContent;
+          ).textContent 
+          } - ${ 
+          title.textContent}`;
       }
       presenceData.smallImageKey = "reading";
     }
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

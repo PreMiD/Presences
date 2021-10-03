@@ -114,9 +114,9 @@ function getQuery() {
               document.querySelector(`.category .arg > .q.arg_category`)
                 ?.textContent
             }`;
-          } else {
+          } else 
             delete data.state;
-          }
+          
           data.smallImageKey = images.SEARCH;
           return data;
         }

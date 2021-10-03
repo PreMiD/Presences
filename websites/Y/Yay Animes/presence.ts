@@ -30,8 +30,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -74,30 +74,30 @@ presence.on("UpdateData", async () => {
     }
     presenceData.details = videoTitle;
     presenceData.state = episode;
-  } else if (path.includes("lista-de-animes")) {
+  } else if (path.includes("lista-de-animes")) 
     presenceData.details = "Procurando um anime";
-  } else if (
+   else if (
     document.querySelector(
       "#content > div.contentBox > div > h1 > div > b > p > span"
     )
   ) {
     presenceData.details =
-      "Olhando o anime " +
+      `Olhando o anime ${ 
       document.querySelector(
         "#content > div.contentBox > div > h1 > div > b > p > span"
-      ).textContent;
-  } else if (path.includes("pedidos")) {
+      ).textContent}`;
+  } else if (path.includes("pedidos")) 
     presenceData.details = "Pedindo um anime";
-  } else if (path.includes("calendario")) {
+   else if (path.includes("calendario")) 
     presenceData.details = "Vendo o calendário de animes";
-  } else if (path.includes("noticia")) {
+   else if (path.includes("noticia")) 
     presenceData.details = "Lendo notícias";
-  } else if (path.includes("perfil")) {
+   else if (path.includes("perfil")) {
     presenceData.details =
-      "Vendo o perfil de " +
-      document.querySelector("div.um-name > a").textContent;
-  } else {
+      `Vendo o perfil de ${ 
+      document.querySelector("div.um-name > a").textContent}`;
+  } else 
     presenceData.details = (await strings).browsing;
-  }
+  
   presence.setActivity(presenceData, true);
 });

@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "630125847134863371"
-});
-const { pathname } = window.location,
+}),
+ { pathname } = window.location,
   startTimestamp = Math.floor(Date.now() / 1000);
 let current: number, duration: number, paused: boolean, played: boolean;
 
@@ -14,8 +14,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -38,18 +38,18 @@ presence.on("UpdateData", async () => {
     details: (await strings).browsing,
     startTimestamp
   };
-  if (pathname === `/`) {
+  if (pathname === `/`) 
     presenceData.state = `Home page`;
-  } else if (pathname.startsWith(`/filmes`)) {
+   else if (pathname.startsWith(`/filmes`)) 
     presenceData.state = `Filmes`;
-  } else if (pathname.startsWith(`/series`)) {
+   else if (pathname.startsWith(`/series`)) 
     presenceData.state = `Séries`;
-  } else if (pathname.startsWith(`/favoritos`)) {
+   else if (pathname.startsWith(`/favoritos`)) 
     presenceData.state = `Favoritos`;
-  } else if (pathname.startsWith(`/filme`) || pathname.startsWith(`/serie`)) {
+   else if (pathname.startsWith(`/filme`) || pathname.startsWith(`/serie`)) {
     presenceData.startTimestamp = undefined;
-    const title = document.querySelector(`h3`).textContent;
-    const episode = title.match(/((S|E)\d{1,2}){2}/);
+    const title = document.querySelector(`h3`).textContent,
+     episode = title.match(/((S|E)\d{1,2}){2}/);
     presenceData.details = pathname.startsWith(`/serie`)
       ? title.replace(episode[0], "")
       : title;

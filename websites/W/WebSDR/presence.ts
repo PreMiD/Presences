@@ -7,15 +7,15 @@ const presence = new Presence({
     record: "Recording",
     view: "Viewing",
     read: "Reading"
-  };
+  },
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-const modes = ["CW", "LSB", "USB", "AM", "FM", "AMsync"];
+ modes = ["CW", "LSB", "USB", "AM", "FM", "AMsync"];
 
-let frequency: string;
-let mode = 2;
-let intHandle: number;
+let frequency: string,
+ mode = 2,
+ intHandle: number;
 
 function updateMode(): void {
   let i = 0;
@@ -48,18 +48,18 @@ presence.on("UpdateData", async () => {
       ) as HTMLInputElement
     ).value;
 
-    presenceData.details = frequency + " " + modes[mode];
+    presenceData.details = `${frequency} ${modes[mode]}`;
 
-    if (document.getElementById("recbutton").innerHTML === "stop") {
+    if (document.getElementById("recbutton").innerHTML === "stop") 
       presenceData.state = strings.record;
-    } else if (
+     else if (
       (document.getElementById("mutecheckbox") as HTMLInputElement).checked ===
       true
-    ) {
+    ) 
       presenceData.state = strings.mute;
-    } else {
+     else 
       presenceData.state = strings.listen;
-    }
+    
   } else if (document.location.pathname === "/wspr/") {
     presenceData.details = "WSPR Map";
     presenceData.state = strings.view;

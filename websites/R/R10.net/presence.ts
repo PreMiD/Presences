@@ -1,5 +1,5 @@
-const presence = new Presence({ clientId: "650497315391537153" });
-const pages = {
+const presence = new Presence({ clientId: "650497315391537153" }),
+ pages = {
   "/kontrolpaneli": "Üye Kontrol Paneli",
   "/groups": "Sosyal Gruplar",
   "/members/albums.html": "Albümler",
@@ -20,25 +20,25 @@ const pages = {
 };
 
 presence.on("UpdateData", async () => {
-  const page = document.location.pathname;
-  const kategori = document.querySelector(
+  const page = document.location.pathname,
+   kategori = document.querySelector(
     "body > main > div > div.threadList > div > ul > li:nth-child(1)"
-  );
-  const post = document.querySelector(
+  ),
+   post = document.querySelector(
     "body > main > div > div.pagination > div.left.double > a.rbtn.rgreen > span:nth-child(2)"
-  );
-  const cevap = document.querySelector(
+  ),
+   cevap = document.querySelector(
     "body > main > div > form > div:nth-child(12) > div.head"
-  );
-  const head = document.querySelector("head > title");
-  const analiz = document.querySelector(
+  ),
+   head = document.querySelector("head > title"),
+   analiz = document.querySelector(
     "body > div.page-header.r10title > div > div > h4 > span"
-  );
-  const report = document.querySelector(
+  ),
+   report = document.querySelector(
     "body > main > div > form > div > div.head"
-  );
+  ),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "logo_beyaz",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "631990024719695901" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var user: any, search: any, title: any;
+ user: any, search: any, title: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -18,11 +18,11 @@ presence.on("UpdateData", async () => {
         "#top > div.p-body > div > div.p-body-header > div.p-title > h1"
       );
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/trending/")) {
@@ -116,11 +116,11 @@ presence.on("UpdateData", async () => {
           "#top > div.p-body > div > div.uix_titlebar > div > div > div.p-title > h1"
         );
         presenceData.details = "Forums, Reading DM:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
+        if (title.innerText.length > 128) 
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = title.innerText;
-        }
+        
 
         presenceData.smallImageKey = "reading";
 

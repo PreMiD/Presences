@@ -61,9 +61,9 @@ presence.on("UpdateData", async () => {
     if (path.includes("/p/")) {
       // Whoever editing this file in the future, keep this as it is for the sake of user's privacy
       data.state = "Accounts";
-    } else if (path.includes("/b/")) {
+    } else if (path.includes("/b/")) 
       data.state = "Broadcast page";
-    } else if (path.includes("/tag/")) {
+     else if (path.includes("/tag/")) {
       if (
         typeof path.split("/")[3] === "undefined" ||
         path.split("/")[3] == null ||
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
         path.split("/")[3].length > 1
       ) {
         // Different checks to prevent "undefined" gender strings.
-        data.state = "Tag : " + path.split("/")[2];
+        data.state = `Tag : ${path.split("/")[2]}`;
       } else {
         switch (path.split("/")[3]) {
           case "f":
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
             gender = "trans";
         }
 
-        data.state = "Tag : " + path.split("/")[2] + " (" + gender + ")";
+        data.state = `Tag : ${path.split("/")[2]} (${gender})`;
       }
     } else {
       switch (path) {

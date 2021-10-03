@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "641353660986687508"
   }),
   strings = presence.getStrings({
@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -52,11 +52,11 @@ presence.on("UpdateData", async () => {
       if (video !== null) {
         presenceData.smallImageKey = "live";
         presenceData.smallImageText =
-          "Watching live on channel: " +
-          document.querySelector("head > title").textContent.split("|")[0];
+          `Watching live on channel: ${ 
+          document.querySelector("head > title").textContent.split("|")[0]}`;
         presenceData.smallImageText =
-          "Kollar live på kanalen: " +
-          document.querySelector("head > title").textContent.split("|")[0];
+          `Kollar live på kanalen: ${ 
+          document.querySelector("head > title").textContent.split("|")[0]}`;
         presenceData.startTimestamp = browsingStamp;
 
         presenceData.details = title;
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing for channels...";
       presenceData.details = "Söker efter kanaler...";
     } else if (document.location.pathname.includes("/video/")) {
-      var currentTime: any,
+      let currentTime: any,
         duration: any,
         paused: any,
         time: any,
@@ -93,9 +93,9 @@ presence.on("UpdateData", async () => {
         if (video.duration == undefined) {
           time = false;
           live = false;
-        } else if (video.duration == 9007199254740991) {
+        } else if (video.duration == 9007199254740991) 
           live = true;
-        } else {
+         else {
           time = true;
           live = false;
           currentTime = video.currentTime;
@@ -160,7 +160,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

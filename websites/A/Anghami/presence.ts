@@ -9,9 +9,9 @@ const presence = new Presence({
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--) 
     ret += parseInt(list[index]) * 60 ** index;
-  }
+  
   return ret;
 }
 

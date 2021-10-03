@@ -28,20 +28,21 @@ presence.on("UpdateData", async () => {
           ).content
         : null;
 
-    if (state && details)
-      presence.setActivity({
+    if (state && details) {
+presence.setActivity({
         largeImageKey: "ec-logo",
-        details: details,
-        state: state,
+        details,
+        state,
         smallImageKey: smallImage ? smallImage : "SOMETHING-SKETCHY",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
-    else
-      presence.setActivity({
+} else {
+presence.setActivity({
         largeImageKey: "ec-logo",
         details: "Viewing a page:",
         state: "Homepage",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
+}
   }
 });

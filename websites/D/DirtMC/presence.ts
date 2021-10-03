@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "631995227132919819" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var title: any;
+ title: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -34,11 +34,11 @@ presence.on("UpdateData", async () => {
     ) {
       title = document.querySelector("#site-main > article > header > h1");
       presenceData.details = "Reading thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
     } else {

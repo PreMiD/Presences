@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: !logo ? "logo" : "logo-v2",
       startTimestamp: browsingStamp
     },
-    pathname = document.location.pathname;
+    {pathname} = document.location;
 
   if (pathname === "/" && window.location.search.substr(0, 2) == "?s") {
     const urlParams = new URLSearchParams(window.location.search),
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
         .querySelector(".c-blog__heading > .h4")
         .textContent.split(" ")[1];
     data.details = "Searching:";
-    data.state = search + " 🔸 " + results + " results";
+    data.state = `${search} 🔸 ${results} results`;
     data.smallImageKey = "search";
   } else if (pathname === "/") data.details = "Viewing the homepage";
   else if (pathname.endsWith("/webtoons/")) {
@@ -33,8 +33,8 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/webtoon-genre/")) {
     const genre = document.querySelector(".item-title").textContent,
       results = document.querySelector(".c-blog__heading > .h4").textContent;
-    data.details = "Browsing " + genre + " webtoons";
-    data.state = "📋 " + results;
+    data.details = `Browsing ${genre} webtoons`;
+    data.state = `📋 ${results}`;
     data.smallImageKey = "search";
   } else if (pathname === "/completed-webtoons/") {
     data.details = "Browsing:";
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
       100;
     progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
     data.details = title;
-    data.state = "📖 " + chapter + " 🔸 " + progress + "%";
+    data.state = `📖 ${chapter} 🔸 ${progress}%`;
     data.largeImageKey = title.includes("Solo Leveling")
       ? "solo"
       : logo == 0

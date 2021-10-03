@@ -22,77 +22,77 @@ presence.on("UpdateData", async function () {
     document.location.hostname === "reallifegtav.de" ||
     document.location.hostname === "rlv.link"
   ) {
-    if (set_timeElapsed) {
+    if (set_timeElapsed) 
       presenceData.startTimestamp = browsingStamp;
-    }
+    
     if (
       (urlpath[1] === "" || document.location.pathname.includes("/home")) &&
       urlpath[2] != ""
-    ) {
-      presenceData.details = "Startseite" + showUsername();
-    } else if (document.location.pathname.includes("/login")) {
-      presenceData.details = "Meldet sich an" + showUsername();
-    } else if (document.location.pathname.includes("/register")) {
-      presenceData.details = "Registriert sich" + showUsername();
-    } else if (document.location.pathname.includes("/dashboard")) {
-      presenceData.details = "Dashboard" + showUsername();
-    } else if (document.location.pathname.includes("/faq")) {
-      presenceData.details = "FAQ" + showUsername();
-    } else if (document.location.pathname.includes("/jobs")) {
-      presenceData.details = "Jobs" + showUsername();
-    } else if (document.location.pathname.includes("/ingame-jobs")) {
-      presenceData.details = "Ingame Jobs" + showUsername();
-    } else if (document.location.pathname.includes("/partner")) {
-      presenceData.details = "Partner Panel" + showUsername();
-    } else if (document.location.pathname.includes("/luxurycars")) {
-      presenceData.details = "LuxuryAutos Shop" + showUsername();
-    } else if (document.location.pathname.includes("/rules")) {
-      presenceData.details = "Regelwerk" + showUsername();
-    } else if (
+    ) 
+      presenceData.details = `Startseite${showUsername()}`;
+     else if (document.location.pathname.includes("/login")) 
+      presenceData.details = `Meldet sich an${showUsername()}`;
+     else if (document.location.pathname.includes("/register")) 
+      presenceData.details = `Registriert sich${showUsername()}`;
+     else if (document.location.pathname.includes("/dashboard")) 
+      presenceData.details = `Dashboard${showUsername()}`;
+     else if (document.location.pathname.includes("/faq")) 
+      presenceData.details = `FAQ${showUsername()}`;
+     else if (document.location.pathname.includes("/jobs")) 
+      presenceData.details = `Jobs${showUsername()}`;
+     else if (document.location.pathname.includes("/ingame-jobs")) 
+      presenceData.details = `Ingame Jobs${showUsername()}`;
+     else if (document.location.pathname.includes("/partner")) 
+      presenceData.details = `Partner Panel${showUsername()}`;
+     else if (document.location.pathname.includes("/luxurycars")) 
+      presenceData.details = `LuxuryAutos Shop${showUsername()}`;
+     else if (document.location.pathname.includes("/rules")) 
+      presenceData.details = `Regelwerk${showUsername()}`;
+     else if (
       document.location.pathname.includes("/transactions") &&
       !window.location.search.substr(1)
-    ) {
-      presenceData.details = "Transaktionen" + showUsername();
-    } else if (
+    ) 
+      presenceData.details = `Transaktionen${showUsername()}`;
+     else if (
       document.location.pathname.includes("/transactions") &&
       window.location.search.substr(1)
     ) {
       let inputfield = document.querySelector(
         'input[name="transfer_to"]'
       ).value;
-      if (!inputfield) {
+      if (!inputfield) 
         inputfield = "...";
-      }
-      presenceData.details = "Überweisung an " + inputfield;
+      
+      presenceData.details = `Überweisung an ${inputfield}`;
     } else if (document.location.pathname.includes("/pages")) {
-      if (document.location.pathname.includes("/impressum")) {
-        presenceData.details = "Impressum" + showUsername();
-      } else if (document.location.pathname.includes("/datenschutz")) {
-        presenceData.details = "Datenschutzerklärung" + showUsername();
-      } else if (document.location.pathname.includes("/tos")) {
-        presenceData.details = "Terms Of Service" + showUsername();
-      }
+      if (document.location.pathname.includes("/impressum")) 
+        presenceData.details = `Impressum${showUsername()}`;
+       else if (document.location.pathname.includes("/datenschutz")) 
+        presenceData.details = `Datenschutzerklärung${showUsername()}`;
+       else if (document.location.pathname.includes("/tos")) 
+        presenceData.details = `Terms Of Service${showUsername()}`;
+      
     }
   } else if (
     document.location.hostname === "forum.reallifegtav.de" ||
     document.location.hostname === "forum.rlv.link"
   ) {
-    if (set_timeElapsed) {
+    if (set_timeElapsed) 
       presenceData.startTimestamp = browsingStamp;
-    }
+    
     if (
       urlpath[1] === "" ||
       document.location.pathname.includes("/categories")
-    ) {
+    ) 
       presenceData.details = "Schaut sich im Forum um";
-    } else if (urlpath[1] === "admin") {
+     else if (urlpath[1] === "admin") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Admin Page";
     } else if (urlpath[1] === "team-build") {
       const tb_type = urlpath[2] || "High-Scores";
       let tb_user = "";
       if (urlpath[3] != undefined)
-        tb_user = " von " + capitalizeFirstLetter(urlpath[3]) + ":";
+        tb_user = ` von ${capitalizeFirstLetter(urlpath[3])}:`;
       presenceData.details = "Team-Building";
       presenceData.state = capitalizeFirstLetter(tb_type) + tb_user;
     } else if (urlpath[1] === "map") {
@@ -140,9 +140,9 @@ presence.on("UpdateData", async function () {
         }
       }
     } else if (urlpath[1] === "u") {
-      if (urlpath[2] === "" || urlpath[2] == undefined) {
+      if (urlpath[2] === "" || urlpath[2] == undefined) 
         presenceData.details = "Schaut alle User an";
-      } else if (urlpath[2] != "" && urlpath[1] != "t") {
+       else if (urlpath[2] != "" && urlpath[1] != "t") {
         presenceData.details = "Betrachtet Profil:";
         presenceData.state = capitalizeFirstLetter(urlpath[2]);
         if (set_showButtons) {
@@ -170,7 +170,7 @@ presence.on("UpdateData", async function () {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -15,14 +15,14 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let browsingStamp = Math.floor(Date.now() / 1000);
-let iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-let lastPlaybackState = null,
+let browsingStamp = Math.floor(Date.now() / 1000),
+ iFrameVideo: boolean, currentTime: any, duration: any, paused: any,
+ lastPlaybackState = null,
   playback: any;
 
 if (document.location.pathname.includes(".html")) {
@@ -71,32 +71,32 @@ presence.on("UpdateData", async () => {
 
       const title = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > a > h1"
-      );
-      const views = document.querySelector(
+      ),
+       views = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > p:nth-child(7)"
       );
       presenceData.details = title.textContent;
 
       const air = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > p:nth-child(9)"
-      );
-      const air2 = document.querySelector(
+      ),
+       air2 = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > p:nth-child(8)"
       );
 
       if (air !== null && air.textContent.includes("Air on:")) {
         presenceData.state =
-          views.textContent.replace("Status: ", "") +
-          ", " +
-          air.textContent.replace("Air", "Aired");
+          `${views.textContent.replace("Status: ", "") 
+          }, ${ 
+          air.textContent.replace("Air", "Aired")}`;
       } else if (air2 !== null && air2.textContent.includes("Air on:")) {
         presenceData.state =
-          views.textContent.replace("Status: ", "") +
-          ", " +
-          air2.textContent.replace("Air", "Aired");
-      } else {
+          `${views.textContent.replace("Status: ", "") 
+          }, ${ 
+          air2.textContent.replace("Air", "Aired")}`;
+      } else 
         presenceData.state = views.textContent;
-      }
+      
 
       if (paused) {
         delete presenceData.startTimestamp;
@@ -149,7 +149,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

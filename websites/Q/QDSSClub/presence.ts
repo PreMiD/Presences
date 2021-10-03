@@ -1,34 +1,34 @@
 const presence = new Presence({
   clientId: "674236194053160971"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "qdss"
-  };
+  },
 
-  const href = document.location.href;
+   {href} = document.location;
   presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname == "/") {
     if (href.startsWith("https://www.qdssclub.com/?page=")) {
       presenceData.details = "Nella homepage";
       presenceData.state =
-        "Sfoglia il forum. Pag: " +
-        href.replace("https://www.qdssclub.com/?page=", "");
+        `Sfoglia il forum. Pag: ${ 
+        href.replace("https://www.qdssclub.com/?page=", "")}`;
     } else if (href.startsWith("https://www.qdssclub.com/?articoli=")) {
       presenceData.details = "Nella homepage";
       presenceData.state =
-        "Sfoglia gli articoli. Pag: " +
-        href.replace("https://www.qdssclub.com/?articoli=", "");
-    } else {
+        `Sfoglia gli articoli. Pag: ${ 
+        href.replace("https://www.qdssclub.com/?articoli=", "")}`;
+    } else 
       presenceData.details = "Nella homepage";
-    }
-  } else if (document.location.pathname.startsWith("/faq")) {
+    
+  } else if (document.location.pathname.startsWith("/faq")) 
     presenceData.details = "Nella scheda FAQ";
-  } else if (document.location.pathname.startsWith("/contatti")) {
+   else if (document.location.pathname.startsWith("/contatti")) {
     presenceData.details = "Vuole contattare";
     presenceData.state = "Quei Due Sul Server";
   } else if (document.location.pathname.startsWith("/utente/profilo")) {
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
   } else if (href.startsWith("https://www.qdssclub.com/forums?page=")) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state =
-      "Pagina: " + href.replace("https://www.qdssclub.com/forums?page=", "");
+      `Pagina: ${href.replace("https://www.qdssclub.com/forums?page=", "")}`;
   } else if (href.endsWith("/forums/category/Consigli")) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state = "Categoria: Consigli Pag: 1";
@@ -64,11 +64,11 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state =
-      "Categoria: Consigli Pag: " +
+      `Categoria: Consigli Pag: ${ 
       href.replace(
         "https://www.qdssclub.com/forums/category/Consiglipage=",
         ""
-      );
+      )}`;
   } else if (href.endsWith("/forums/category/consigli")) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state = "Categoria: Consigli Pag: 1";
@@ -80,11 +80,11 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state =
-      "Categoria: Consigli Pag: " +
+      `Categoria: Consigli Pag: ${ 
       href.replace(
         "https://www.qdssclub.com/forums/category/consiglipage=",
         ""
-      );
+      )}`;
   } else if (href.endsWith("/forums/category/Salotto")) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state = "Categoria: Salotto Pag: 1";
@@ -96,8 +96,8 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state =
-      "Categoria: Salotto Pag: " +
-      href.replace("https://www.qdssclub.com/forums/category/Salottopage=", "");
+      `Categoria: Salotto Pag: ${ 
+      href.replace("https://www.qdssclub.com/forums/category/Salottopage=", "")}`;
   } else if (href.endsWith("/forums/category/salotto")) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state = "Categoria: Salotto Pag: 1";
@@ -109,8 +109,8 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state =
-      "Categoria: Salotto Pag: " +
-      href.replace("https://www.qdssclub.com/forums/category/salottopage=", "");
+      `Categoria: Salotto Pag: ${ 
+      href.replace("https://www.qdssclub.com/forums/category/salottopage=", "")}`;
   } else if (href.endsWith("/forums/category/Conosciamoci")) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state = "Categoria: Conosciamoci Pag: 1";
@@ -124,11 +124,11 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state =
-      "Categoria: Conosciamoci Pag: " +
+      `Categoria: Conosciamoci Pag: ${ 
       href.replace(
         "https://www.qdssclub.com/forums/category/Conosciamocipage=",
         ""
-      );
+      )}`;
   } else if (href.endsWith("/forums/category/conosciamoci")) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state = "Categoria: Conosciamoci Pag: 1";
@@ -142,11 +142,11 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Sfoglia il forum";
     presenceData.state =
-      "Categoria: Conosciamoci Pag: " +
+      `Categoria: Conosciamoci Pag: ${ 
       href.replace(
         "https://www.qdssclub.com/forums/category/conosciamocipage=",
         ""
-      );
+      )}`;
   } else if (document.location.pathname.startsWith("/forums/discussion/")) {
     const discussionname =
       document.querySelector(".text-center h1").textContent;
@@ -168,14 +168,14 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/convalida")) {
     presenceData.details = "Sta cercando di";
     presenceData.state = "registrarsi";
-  } else {
+  } else 
     presenceData.details = "Navigando...";
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

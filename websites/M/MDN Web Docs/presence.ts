@@ -27,9 +27,9 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
+        } else 
           data.details = `Looking at JavaScript Technologie`;
-        }
+        
         break;
       }
       case "HTML": {
@@ -42,9 +42,9 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
+        } else 
           data.details = `Looking at HTML Technologie`;
-        }
+        
         break;
       }
       case "CSS": {
@@ -57,9 +57,9 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
+        } else 
           data.details = `Looking at CSS Technologie`;
-        }
+        
         break;
       }
       case "MathML": {
@@ -72,9 +72,9 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
+        } else 
           data.details = `Looking at MathML Technologie`;
-        }
+        
         break;
       }
       case "WebExtensions": {
@@ -87,9 +87,9 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
+        } else 
           data.details = `Looking at Web Extensions Technologies`;
-        }
+        
         break;
       }
       default: {
@@ -104,9 +104,9 @@ presence.on("UpdateData", async () => {
             paths.splice(0, 1);
             data.state = `Topic: ${paths.join(", ")}`;
           }
-        } else {
+        } else 
           data.details = `Looking at ${tech}`;
-        }
+        
         break;
       }
     }

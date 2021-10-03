@@ -39,9 +39,9 @@ presence.on("UpdateData", async () => {
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(data);
-  }
+  
 });
 
 function RefreshData() {
@@ -58,11 +58,11 @@ function RefreshData() {
       lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 
     data.details = "Picking Powers";
-    data.state = "In Lobby, " + lobbyName + " (" + userRows.length + "/6)";
+    data.state = `In Lobby, ${lobbyName} (${userRows.length}/6)`;
 
     if (skinNames.has(skinName)) {
       data.smallImageKey = skinNames.get(skinName);
-      data.smallImageText = "Playing as " + skinName;
+      data.smallImageText = `Playing as ${skinName}`;
     }
 
     lastlobbyName = lobbyName;
@@ -71,12 +71,13 @@ function RefreshData() {
       userRows = document.getElementsByClassName("group-players-list__row"),
       lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
     let playerCount = 0;
-    for (let i = 0; i < userRows.length; i++)
-      if (!userRows[i].className.includes("group-players-list__row--empty"))
+    for (let i = 0; i < userRows.length; i++) {
+if (!userRows[i].className.includes("group-players-list__row--empty"))
         playerCount++;
+}
 
     data.details = "Ready In Lobby";
-    data.state = lobbyName + " (" + playerCount + "/6)";
+    data.state = `${lobbyName} (${playerCount}/6)`;
     lastlobbyName = lobbyName;
   } else if (state_Page == "in_game") {
     data.details = "Playing";
@@ -104,11 +105,11 @@ function RefreshData() {
 }
 
 function getActualGamePage() {
-  if (document.getElementsByClassName("game-overlay")[0]) {
+  if (document.getElementsByClassName("game-overlay")[0]) 
     return "in_game";
-  } else if (document.getElementsByClassName("post-game-rewards__title")[0]) {
+   else if (document.getElementsByClassName("post-game-rewards__title")[0]) 
     return "in_game_finished";
-  } else if (document.getElementsByClassName("popup-header")[0]) {
+   else if (document.getElementsByClassName("popup-header")[0]) {
     const popup_Caption =
       document.getElementsByClassName("popup-header")[0].textContent;
     if (popup_Caption == "Room settings") return "creating_match";
@@ -118,15 +119,15 @@ function getActualGamePage() {
     else if (popup_Caption == "Locker") return "in_locker";
     else if (popup_Caption == "Leaderboard") return "in_leaderboard";
     else if (popup_Caption == "Shop") return "in_shop";
-  } else if (document.getElementsByClassName("menu side-menu")[0]) {
+  } else if (document.getElementsByClassName("menu side-menu")[0]) 
     return "in_menu";
-  } else if (document.getElementsByClassName("lobby")[0]) {
+   else if (document.getElementsByClassName("lobby")[0]) 
     return "browsing_lobbies";
-  } else if (document.getElementsByClassName("module-inventory-top")[0]) {
+   else if (document.getElementsByClassName("module-inventory-top")[0]) 
     return "in_lobby_picking_powers";
-  } else if (document.getElementsByClassName("group-ready-state__title")[0]) {
+   else if (document.getElementsByClassName("group-ready-state__title")[0]) 
     return "in_lobby_ready";
-  }
+  
   return "in_menu";
 }
 

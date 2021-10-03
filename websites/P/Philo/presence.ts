@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "philo"
     },
-    href = window.location.href,
+    {href} = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -71,27 +71,27 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (!data.endTimestamp) {
+    if (!data.endTimestamp) 
       delete data.endTimestamp;
-    }
+    
 
     if (data.details && data.state.trim()) {
-      if (channel && channel.getAttribute("alt")) {
-        data.state += " on " + channel.getAttribute("alt");
-      }
+      if (channel && channel.getAttribute("alt")) 
+        data.state += ` on ${channel.getAttribute("alt")}`;
+      
       presence.setActivity(data, !video.paused);
     }
   } else {
     data.details = "Browsing...";
-    if (path.includes("/guide")) {
+    if (path.includes("/guide")) 
       data.details = "Browsing Guide";
-    }
-    if (path.includes("/saved")) {
+    
+    if (path.includes("/saved")) 
       data.details = "Browsing Saved";
-    }
-    if (path.includes("/search")) {
+    
+    if (path.includes("/search")) 
       data.details = "Searching...";
-    }
+    
     data.startTimestamp = elapsed;
     presence.setActivity(data);
   }

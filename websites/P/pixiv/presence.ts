@@ -36,11 +36,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = typeURL.searchParams.get("nick");
       presenceData.smallImageKey = "search";
     } else if (curPath.includes("/dashboard")) {
-      if (curPath.includes("/works"))
-        presenceData.details = `Managing ${
+      if (curPath.includes("/works")) {
+presenceData.details = `Managing ${
           curPath.includes("/series") ? "Series" : "Artworks"
         }`;
-      else if (curPath.includes("/report/artworks"))
+} else if (curPath.includes("/report/artworks"))
         presenceData.details = "Viewing access analytics";
       else if (curPath.includes("report/ranking"))
         presenceData.details = "Viewing ranking report";
@@ -59,9 +59,9 @@ presence.on("UpdateData", async () => {
       if (title !== null) {
         presenceData.details = "Viewing event:";
         presenceData.state = title.textContent;
-      } else {
+      } else 
         presenceData.details = "Browsing events...";
-      }
+      
     } else if (curPath.includes("/ranking")) {
       presenceData.details = "Viewing ranking:";
       presenceData.state = document.querySelector(".current").innerHTML;
@@ -116,15 +116,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Recommended Works";
       if (curPath.includes("/users"))
         presenceData.details = "Viewing Recommended Users";
-    } else if (curPath.includes("/upload.php"))
-      presenceData.details = `Submiting New ${
+    } else if (curPath.includes("/upload.php")) {
+presenceData.details = `Submiting New ${
         typeResult == "manga"
           ? "Manga"
           : curPath.includes("novel")
           ? "Novel"
           : "Illustrations"
       }`;
-    else if (curPath.includes("/ugoira_upload.php"))
+} else if (curPath.includes("/ugoira_upload.php"))
       presenceData.details = "Submiting New Ugoira(Animations)";
     else if (curPath.includes("/manage"))
       presenceData.details = "Managing Artworks";
@@ -157,14 +157,14 @@ presence.on("UpdateData", async () => {
     //end
   } else if (document.location.hostname == "sketch.pixiv.net") {
     presenceData.smallImageKey = "writing";
-    if (curPath == "/" || curPath.includes("/public")) {
+    if (curPath == "/" || curPath.includes("/public")) 
       presenceData.details = "Viewing sketch page";
-    } else if (curPath.includes("/lives/")) {
+     else if (curPath.includes("/lives/")) {
       const title = document.querySelector<HTMLElement>(
         "#LiveSidebarLiveUser > div.name"
       );
       presenceData.details = "Sketch- Viewing livestream";
-      presenceData.state = "by user: " + title.innerText;
+      presenceData.state = `by user: ${title.innerText}`;
       presenceData.smallImageKey = "live";
     } else if (curPath.includes("/lives"))
       presenceData.details = "Sketch- Browsing livestreams";

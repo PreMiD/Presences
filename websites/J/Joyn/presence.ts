@@ -62,9 +62,9 @@ presence.on("UpdateData", async function () {
     } else if (
       (urlpath[1] === "" || document.location.pathname.includes("/#home")) &&
       urlpath[2] != ""
-    ) {
+    ) 
       presenceData.details = lang.browsing;
-    } else if (urlpath[1] === "compilation") {
+     else if (urlpath[1] === "compilation") {
       const compilation = document.querySelector(".artLogo");
       presenceData.details = "Viewing Compilation:";
       if (compilation) presenceData.state = compilation.alt;
@@ -75,7 +75,7 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: "Watch Compilation",
-            url: "https://www.joyn.de/compilation/" + urlpath[2]
+            url: `https://www.joyn.de/compilation/${urlpath[2]}`
           }
         ];
       }
@@ -90,7 +90,7 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: lang.watchMovie,
-            url: "https://www.joyn.de/filme/" + urlpath[2]
+            url: `https://www.joyn.de/filme/${urlpath[2]}`
           }
         ];
       }
@@ -105,7 +105,7 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: lang.watchSeries,
-            url: "https://www.joyn.de/serien/" + urlpath[2]
+            url: `https://www.joyn.de/serien/${urlpath[2]}`
           }
         ];
       }
@@ -114,9 +114,9 @@ presence.on("UpdateData", async function () {
       (document.location.pathname.includes("/serien") ||
         document.location.pathname.includes("/filme") ||
         document.location.pathname.includes("/sport"))
-    ) {
+    ) 
       presenceData.details = lang.browsing;
-    } else if (urlpath[1] === "channels") {
+     else if (urlpath[1] === "channels") {
       presenceData.details = lang.browsing;
       presenceData.state = document.querySelector(".bISbKZ").textContent;
     } else if (urlpath[1] === "play" && urlpath[2] === "filme") {
@@ -142,7 +142,7 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: lang.watchMovie,
-            url: "https://www.joyn.de/filme/" + urlpath[3]
+            url: `https://www.joyn.de/filme/${urlpath[3]}`
           }
         ];
       }
@@ -170,7 +170,7 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: lang.watchSeries,
-            url: "https://www.joyn.de/serien/" + urlpath[3]
+            url: `https://www.joyn.de/serien/${urlpath[3]}`
           }
         ];
       }
@@ -234,7 +234,7 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: "Watch Compilation",
-            url: "https://www.joyn.de/compilation/" + urlpath[3]
+            url: `https://www.joyn.de/compilation/${urlpath[3]}`
           }
         ];
       }

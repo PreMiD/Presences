@@ -1,22 +1,22 @@
 const presence = new Presence({
   clientId: "700596580218175548"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-const titulo = document.title;
-const pesquisaR = titulo.slice(77);
-const tituloLength = titulo.length - 3;
-const obraR = titulo.slice(0, tituloLength);
-const capituloR = titulo.slice(tituloLength);
-const removeanime = titulo.slice(7);
-const obraanimeR = removeanime.slice(0, titulo.length - 18);
-const listaR = titulo.slice(54);
-const capitulo =
+ browsingStamp = Math.floor(Date.now() / 1000),
+ titulo = document.title,
+ pesquisaR = titulo.slice(77),
+ tituloLength = titulo.length - 3,
+ obraR = titulo.slice(0, tituloLength),
+ capituloR = titulo.slice(tituloLength),
+ removeanime = titulo.slice(7),
+ obraanimeR = removeanime.slice(0, titulo.length - 18),
+ listaR = titulo.slice(54),
+ capitulo =
   document
     .querySelector("h2.post-title.entry-title")
-    .textContent.match(/\d+/g) || null;
-const obra = document.querySelector("h2.post-title.entry-title").textContent;
-const noticia = document.querySelector("h2.post-title.entry-title").textContent;
+    .textContent.match(/\d+/g) || null,
+ obra = document.querySelector("h2.post-title.entry-title").textContent,
+ noticia = document.querySelector("h2.post-title.entry-title").textContent;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -27,12 +27,12 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.indexOf("anime") != -1) {
     presenceData.details = obraanimeR;
-    presenceData.state = "Episódio " + capituloR;
+    presenceData.state = `Episódio ${capituloR}`;
   } else if (document.location.pathname.startsWith("/search")) {
     if (document.location.pathname.indexOf("/search/label/") != -1) {
-      if (document.location.pathname.indexOf("/In%C3%ADcio") != -1) {
+      if (document.location.pathname.indexOf("/In%C3%ADcio") != -1) 
         presenceData.details = "Página inícial";
-      } else {
+       else {
         presenceData.details = "Vendo a lista de";
         presenceData.state = listaR;
       }
@@ -56,14 +56,14 @@ presence.on("UpdateData", async () => {
       presenceData.state = noticia;
     } else {
       presenceData.details = obraR;
-      presenceData.state = "Capítulo " + capituloR;
+      presenceData.state = `Capítulo ${capituloR}`;
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

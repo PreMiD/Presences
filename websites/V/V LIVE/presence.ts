@@ -267,23 +267,23 @@ presence.on("UpdateData", async () => {
         smallImageKey: "reading"
       },
       "/about/": {
-        details: (await strings).readingAbout + " V LIVE",
+        details: `${(await strings).readingAbout} V LIVE`,
         smallImageKey: "reading"
       }
     };
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   if (showBrowsing) {
     for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
+      if (path.match(k)) 
         presenceData = { ...presenceData, ...v };
-      }
+      
     }
 
     if (privacy) {
@@ -333,9 +333,9 @@ presence.on("UpdateData", async () => {
             .replace("%title%", title)
             .replace("%streamer%", channelPageChannelName);
 
-          if (video.paused) {
+          if (video.paused) 
             delete presenceData.startTimestamp;
-          }
+          
         }
 
         //* Privacy mode enabled.
@@ -484,7 +484,7 @@ presence.on("UpdateData", async () => {
     } else if (postTitle && postPoster) {
       //* Normal text post
       presenceData.details =
-        (await strings).readingPost + " (" + postPoster.textContent + ")";
+        `${(await strings).readingPost} (${postPoster.textContent})`;
       presenceData.state = postTitle.textContent;
       presenceData.smallImageKey = "reading";
     }

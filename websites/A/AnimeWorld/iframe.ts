@@ -1,5 +1,5 @@
 const iframe = new iFrame();
-var video: HTMLVideoElement;
+let video: HTMLVideoElement;
 
 iframe.on("UpdateData", async () => {
   if (document.querySelector("#video-player") !== null) {

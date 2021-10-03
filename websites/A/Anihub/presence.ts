@@ -2,8 +2,8 @@ const presence = new Presence({
   clientId: "715045665796915250"
 });
 function MediaTimestamps(mediaTimes: number, mediaDuration: number): number[] {
-  const startTime = Math.floor(Date.now() / 1000);
-  const endTime = Math.floor(startTime - mediaTimes + mediaDuration);
+  const startTime = Math.floor(Date.now() / 1000),
+   endTime = Math.floor(startTime - mediaTimes + mediaDuration);
   return [startTime, endTime];
 }
 function NotFound(): boolean {
@@ -86,11 +86,11 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showVideos)) &&
     !NotFound()
   ) {
-    const value = ["...", "..."];
-    const animeNameEP = document.querySelector("#main>article>h1");
-    const comment = document.querySelector("textarea");
-    const report = document.querySelector("div.modal-header>h1");
-    const genders = document.querySelectorAll("div.autofill>span")[1];
+    const value = ["...", "..."],
+     animeNameEP = document.querySelector("#main>article>h1"),
+     comment = document.querySelector("textarea"),
+     report = document.querySelector("div.modal-header>h1"),
+     genders = document.querySelectorAll("div.autofill>span")[1];
     let timestamps: number[] = [];
     if (animeNameEP) {
       value[0] = animeNameEP.textContent.replace(
@@ -163,12 +163,12 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showProfile)) &&
     !NotFound()
   ) {
-    const title = ["Visualizando Perfil", "..."];
-    const username = document.querySelector("h1>b>font");
-    const selected = document.querySelector(
+    const title = ["Visualizando Perfil", "..."],
+     username = document.querySelector("h1>b>font"),
+     selected = document.querySelector(
       "#main > div.black.flexContent.subNav.p1 > a.btn.router-link-active"
-    );
-    const selfUsername = document.querySelector(
+    ),
+     selfUsername = document.querySelector(
       "#menu-links>ul>li>div>div>li>a"
     );
     if (
@@ -196,11 +196,11 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showForum)) &&
     !NotFound()
   ) {
-    const Thread = document.getElementsByClassName("thread")[0];
-    const ThreadTitle = document
+    const Thread = document.getElementsByClassName("thread")[0],
+     ThreadTitle = document
       .querySelector("head>title")
-      .textContent.replace(" - Tópico", "");
-    const NonThread = document.querySelector("#main>article>div>h1>b");
+      .textContent.replace(" - Tópico", ""),
+     NonThread = document.querySelector("#main>article>div>h1>b");
     if (pathName.split("/").join("") == PathNames.forum.split("/").join("")) {
       data.details = "Fórum";
       if (await presence.getSetting(SettingsId.showForumCategory)) {
@@ -215,8 +215,8 @@ presence.on("UpdateData", async () => {
         : "Fórum";
       const ThreadAuthor = document.querySelector(
         "div.flexContent.thread>div>div>a"
-      ).textContent;
-      const textarea = document.querySelector("div.chill.fill");
+      ).textContent,
+       textarea = document.querySelector("div.chill.fill");
       if (await presence.getSetting(SettingsId.showForumTitle)) {
         data.state = `${ThreadAuthor}: ${ThreadTitle}`;
         data.smallImageKey = ResourceNames.reading;
@@ -245,13 +245,14 @@ presence.on("UpdateData", async () => {
       data.details = "Fórum";
       if (await presence.getSetting(SettingsId.showForumNewTopic)) {
         data.details += " - [Novo Tópico]";
-        const category = document.querySelector("select");
-        const selectedCategory =
+        const category = document.querySelector("select"),
+         selectedCategory =
           category.options[category.selectedIndex].textContent;
-        if (await presence.getSetting(SettingsId.showForumCategory))
-          data.state = `Categoria: ${
+        if (await presence.getSetting(SettingsId.showForumCategory)) {
+data.state = `Categoria: ${
             isNaN(parseInt(selectedCategory)) ? selectedCategory : "..."
           }`;
+}
         data.smallImageKey = ResourceNames.writing;
       }
     }
@@ -275,13 +276,13 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = ResourceNames.reading;
   } else if (
     pathName.startsWith(PathNames.anime_info) &&
-    !pathName.startsWith(PathNames.anime_info + "s") &&
+    !pathName.startsWith(`${PathNames.anime_info}s`) &&
     (await presence.getSetting(SettingsId.showAnime)) &&
     !NotFound()
   ) {
-    const animeName = document.querySelector("h1>b");
-    const modal = document.querySelector("div.modal-header>h1");
-    const selected = document.querySelector(
+    const animeName = document.querySelector("h1>b"),
+     modal = document.querySelector("div.modal-header>h1"),
+     selected = document.querySelector(
       "a.p1.din.router-link-exact-active"
     );
     document.querySelectorAll("div.aniinfos>span").forEach((item) => {
@@ -292,21 +293,24 @@ presence.on("UpdateData", async () => {
     });
 
     if (await presence.getSetting(SettingsId.showAnimeReview)) {
-      if (modal && modal.textContent.toLowerCase().includes("resenha"))
-        selected && (await presence.getSetting(SettingsId.showAnimeSelection))
+      if (modal && modal.textContent.toLowerCase().includes("resenha")) {
+selected && (await presence.getSetting(SettingsId.showAnimeSelection))
           ? (data.details = `Criando Resenha - ${selected.textContent}:`)
           : (data.details = `Criando Resenha:`);
+}
     }
     if (await presence.getSetting(SettingsId.showAnimeTrailer)) {
-      if (modal && modal.textContent.toLowerCase().includes("trailer"))
-        selected && (await presence.getSetting(SettingsId.showAnimeSelection))
+      if (modal && modal.textContent.toLowerCase().includes("trailer")) {
+selected && (await presence.getSetting(SettingsId.showAnimeSelection))
           ? (data.details = `Assistindo Trailer - ${selected.textContent}:`)
           : (data.details = `Assistindo Trailer:`);
+}
     }
-    if (!data.details)
-      selected && (await presence.getSetting(SettingsId.showAnimeSelection))
+    if (!data.details) {
+selected && (await presence.getSetting(SettingsId.showAnimeSelection))
         ? (data.details = `Visualizando Anime - ${selected.textContent}:`)
         : (data.details = `Visualizando Anime:`);
+}
     if (await presence.getSetting(SettingsId.showAnimeName))
       data.state = animeName ? animeName.textContent : "...";
     else {
@@ -317,8 +321,8 @@ presence.on("UpdateData", async () => {
     pathName.startsWith(PathNames.room) &&
     (await presence.getSetting(SettingsId.showRoom))
   ) {
-    const usersCount = document.querySelector("#main>article>div>div>b");
-    const animeNameEP = document.querySelector("#main>article>h1");
+    const usersCount = document.querySelector("#main>article>div>div>b"),
+     animeNameEP = document.querySelector("#main>article>h1");
     let timestamps: number[] = [];
     const value = ["...", "..."];
     if (animeNameEP) {
@@ -336,14 +340,14 @@ presence.on("UpdateData", async () => {
       : value[0];
     data.state = `Episódio ${value[1]}`;
     data.smallImageKey = ResourceNames.group;
-    if (usersCount && (await presence.getSetting(SettingsId.showRoomUsers)))
-      data.smallImageText =
+    if (usersCount && (await presence.getSetting(SettingsId.showRoomUsers))) {
+data.smallImageText =
         usersCount.textContent.split(" ")[0] == "1"
           ? "Assistindo sozinho(a)"
           : `Assistindo com ${
               parseInt(usersCount.textContent.split(" ")[0]) - 1
             } usuário(s)`;
-    else if (
+} else if (
       !(await presence.getSetting(SettingsId.showRoomUsers)) &&
       (await presence.getSetting(SettingsId.showRoomName))
     )
@@ -380,9 +384,9 @@ presence.on("UpdateData", async () => {
         "/equipe-membros=Membros da Equipe",
         "/conquistas=Lista de Conquistas",
         "/animes=Lista de Animes"
-      ];
-      const customPaths: string = await presence.getSetting("customPaths");
-      const pathsFromCustom = eval(
+      ],
+       customPaths: string = await presence.getSetting("customPaths"),
+       pathsFromCustom = eval(
         `[${customPaths.toLowerCase().replace(/[\s\n]+/g, "")}]`
       );
       pathsAndStrings.forEach((item: string) => {

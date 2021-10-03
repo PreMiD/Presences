@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "636614830698004480"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var title: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Trading...";
     presenceData.state =
-      title.innerText + " keys worth for " + user.innerText + "worth of items";
+      `${title.innerText} keys worth for ${user.innerText}worth of items`;
   } else {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Going to trade...";
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -16,15 +16,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let title: HTMLElement | HTMLInputElement;
+let title: HTMLElement | HTMLInputElement,
 
 // the video variable is a html video element
-let video: HTMLVideoElement;
+ video: HTMLVideoElement;
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Browsing through";
       presenceData.smallImageKey = "reading";
-      presenceData.state = "schedules: " + title.innerText;
+      presenceData.state = `schedules: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -136,11 +136,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing the collection:";
       presenceData.smallImageKey = "reading";
 
-      if (title !== null) {
+      if (title !== null) 
         presenceData.state = title.innerText;
-      } else {
+       else 
         presenceData.state = search.textContent;
-      }
+      
 
       presence.setActivity(presenceData);
     } else if (
@@ -204,7 +204,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the about of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText + "'s profile";
+      presenceData.state = `${title.innerText}'s profile`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -232,7 +232,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the contributions";
       presenceData.smallImageKey = "reading";
-      presenceData.state = "of: " + title.innerText;
+      presenceData.state = `of: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -274,7 +274,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the connections";
       presenceData.smallImageKey = "reading";
-      presenceData.state = "of: " + title.innerText;
+      presenceData.state = `of: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -288,7 +288,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing all the things";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText + " follows";
+      presenceData.state = `${title.innerText} follows`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -347,7 +347,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the celeb profile";
       presenceData.smallImageKey = "reading";
-      presenceData.state = "of: " + title.innerText;
+      presenceData.state = `of: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -520,8 +520,8 @@ presence.on("UpdateData", async () => {
     const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
-    );
-    const presenceData: PresenceData = {
+    ),
+     presenceData: PresenceData = {
       details: "",
       state: "",
       largeImageKey: "viki",

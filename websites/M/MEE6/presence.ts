@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "632002763483512843"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var search: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ title: any,
+ search: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -31,9 +31,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/premium")) {
       presenceData.details = "Reading about premium";
       presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname == "/") {
+    } else if (document.location.pathname == "/") 
       presenceData.details = "Viewing the homepage";
-    }
+    
   } else if (document.location.hostname == "help.mee6.xyz") {
     title = document.querySelector("head > title");
     search = document.querySelector(
@@ -44,9 +44,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Helpdesk searching for:";
       presenceData.state = search.value;
       presenceData.smallImageKey = "searching";
-    } else if (title.innerText == "MEE6 Helpdesk") {
+    } else if (title.innerText == "MEE6 Helpdesk") 
       presenceData.details = "Browsing the helpdesk";
-    } else {
+     else {
       presenceData.details = "Helpdesk viewing:";
       presenceData.state = title.innerText.replace(" | MEE6 Helpdesk", "");
       presenceData.smallImageKey = "reading";
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

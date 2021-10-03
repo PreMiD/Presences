@@ -61,17 +61,17 @@ presence.on("UpdateData", () => {
           ) +
             1);
       }
-    } else if (lbVisible) {
+    } else if (lbVisible) 
       presenceData.details = "Checking leaderboards";
-    }
-  } else if (path === "/about") {
+    
+  } else if (path === "/about") 
     presenceData.details = "Reading about page";
-  } else if (path === "/settings") {
+   else if (path === "/settings") 
     presenceData.details = "Changing settings";
-  } else if (path === "/login") {
+   else if (path === "/login") 
     presenceData.details = "Logging in";
-  } else if (path === "/account") {
+   else if (path === "/account") 
     presenceData.details = "Checking stats";
-  }
+  
   presence.setActivity(presenceData);
 });

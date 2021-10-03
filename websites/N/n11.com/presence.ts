@@ -37,13 +37,13 @@ presence.on("UpdateData", async () => {
       ) as any) &&
       document.querySelector(
         "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-      ).attributes["content"]
+      ).attributes.content
         ? document.querySelector(
             "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-          ).attributes["content"].textContent
-        : null;
+          ).attributes.content.textContent
+        : null,
 
-  const data: { [k: string]: any } = {
+   data: { [k: string]: any } = {
     largeImageKey: "n11-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
   if (productName && productName.textContent != "") {
     data.details = "Bir ürüne göz atıyor:";
     data.state = `${productName.textContent.trim()}${
-      price ? " - " + price + " TL" : ""
+      price ? ` - ${price} TL` : ""
     }`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     data.details = "Bir sayfaya göz atıyor:";

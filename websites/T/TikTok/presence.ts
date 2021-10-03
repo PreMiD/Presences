@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
     newLang = await presence.getSetting("lang").catch(() => "en"),
     [, page, pageType] = location.pathname.split("/");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

@@ -1,8 +1,8 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "672156210627084328"
-});
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user;
+}),
+ browsingStamp = Math.floor(Date.now() / 1000),
+ user;
 presence.on("UpdateData", async () => {
   const data = {
     largeImageKey: "animesoul",
@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(data);
-  }
+  
 });

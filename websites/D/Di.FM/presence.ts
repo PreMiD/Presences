@@ -12,8 +12,8 @@ presence.on("UpdateData", () => {
   ) {
     const tracka = document
       .getElementsByClassName("artist-name")[0]
-      .innerHTML.replace("-", "");
-    const trackt = document.getElementsByClassName("track-name")[0].innerHTML;
+      .innerHTML.replace("-", ""),
+     trackt = document.getElementsByClassName("track-name")[0].innerHTML;
     presenceData.details = tracka;
     presenceData.state = trackt;
     presenceData.smallImageKey = "play";

@@ -14,9 +14,9 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "#user-card > div > div.grid--cell.fl1.wmn0 > div > div.grid--cell.fl1.w0.overflow-x-hidden.overflow-y-auto.pr16.profile-user--about.about > div > div:nth-child(1) > h2 > div"
     ),
-    searchresult = document.querySelector("#bigsearch > div > input");
+    searchresult = document.querySelector("#bigsearch > div > input"),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "607881666836561930"
   }),
   strings = presence.getStrings({
@@ -15,14 +15,14 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null,
+ playback,
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -32,7 +32,7 @@ if (lastPlaybackState != playback) {
 presence.on("UpdateData", async () => {
   playback = document.querySelector(".AT-player video") !== null ? true : false;
 
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg"
   };
 
@@ -46,16 +46,16 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  var video: HTMLVideoElement = document.querySelector(".AT-player video");
+  const video: HTMLVideoElement = document.querySelector(".AT-player video");
 
   if (video !== null && !isNaN(video.duration)) {
-    var videoTitle: any;
-    var seasonepisode;
+    let videoTitle: any,
+     seasonepisode;
 
     videoTitle = document.querySelector(".series-title span");
     seasonepisode = document.querySelector(".series-episode");
 
-    var timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -79,8 +79,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (videoTitle !== null) {
+    if (videoTitle !== null) 
       presence.setActivity(presenceData, !video.paused);
-    }
+    
   }
 });

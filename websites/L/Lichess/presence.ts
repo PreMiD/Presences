@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
     ) as HTMLElement,
     status = document.querySelector(
       "#main-wrap > main > aside > div > section.status"
-    ) as HTMLElement;
+    ) as HTMLElement,
 
-  const data: { [k: string]: any } = {
+   data: { [k: string]: any } = {
     largeImageKey: "lc-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

@@ -1,13 +1,13 @@
-var presence = new Presence({ clientId: "688752009079160852" }),
+let presence = new Presence({ clientId: "688752009079160852" }),
   presenceData: PresenceData = { largeImageKey: "logo" },
-  customData = false;
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var user: any;
-var pp: any;
-var rank: any;
-var url: URL;
-var mode: number;
+  customData = false,
+ browsingStamp = Math.floor(Date.now() / 1000),
+ title: any,
+ user: any,
+ pp: any,
+ rank: any,
+ url: URL,
+ mode: number;
 
 presence.on("UpdateData", async () => {
   customData = false;
@@ -42,9 +42,9 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(6) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Taiko profile";
+            presenceData.details = `${user.innerText}'s Taiko profile`;
             presenceData.state =
-              rank.innerText + " | " + pp.innerText + "pp(Relax)";
+              `${rank.innerText} | ${pp.innerText}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -53,8 +53,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Taiko profile";
-            presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
+            presenceData.details = `${user.innerText}'s Taiko profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
             break;
         }
         break;
@@ -69,9 +69,9 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(7) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Catch profile";
+            presenceData.details = `${user.innerText}'s Catch profile`;
             presenceData.state =
-              rank.innerText + " | " + pp.innerText + "pp(Relax)";
+              `${rank.innerText} | ${pp.innerText}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -80,8 +80,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(3) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Catch profile";
-            presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
+            presenceData.details = `${user.innerText}'s Catch profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
             break;
         }
         break;
@@ -92,8 +92,8 @@ presence.on("UpdateData", async () => {
         pp = document.querySelector(
           "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(4) > table > tbody > tr:nth-child(1) > td.right.aligned"
         );
-        presenceData.details = user.innerText + "'s Mania profile";
-        presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
+        presenceData.details = `${user.innerText}'s Mania profile`;
+        presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
         break;
       default:
         url = new URL(document.location.href);
@@ -106,9 +106,9 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(5) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Standard profile";
+            presenceData.details = `${user.innerText}'s Standard profile`;
             presenceData.state =
-              rank.innerText + " | " + pp.innerText + "pp(Relax)";
+              `${rank.innerText} | ${pp.innerText}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -117,8 +117,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(1) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Standard profile";
-            presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
+            presenceData.details = `${user.innerText}'s Standard profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
             break;
         }
         break;
@@ -246,9 +246,9 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (!customData) {
+  if (!customData) 
     presence.setActivity(presenceData);
-  }
+  
 });
 
 presence.on("iFrameData", function (data) {

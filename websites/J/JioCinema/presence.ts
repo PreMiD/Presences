@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -25,8 +25,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "large_img",
     startTimestamp
-  };
-  const url = window.location.href;
+  },
+   url = window.location.href;
   if (url.includes("/watch/")) {
     const video: HTMLVideoElement = document.getElementsByTagName("video")[0],
       timestamps = getTimestamps(
@@ -47,13 +47,13 @@ presence.on("UpdateData", async () => {
         document.querySelectorAll("div.now-playing") as NodeListOf<HTMLElement>
       )[0].offsetParent.querySelectorAll("span.jioTitle")[1].textContent;
       presenceData.state = episode.replace("| ", "");
-    } else if (url.includes("/movies/")) {
+    } else if (url.includes("/movies/")) 
       presenceData.state = "Movie";
-    } else if (url.includes("/playlist/")) {
+     else if (url.includes("/playlist/")) 
       presenceData.state = "Music Video";
-    } else {
+     else 
       presenceData.state = "Video";
-    }
+    
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
@@ -61,9 +61,9 @@ presence.on("UpdateData", async () => {
   } else if (url.includes("/search/")) {
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "search";
-  } else {
+  } else 
     presenceData.details = "Browsing";
-  }
+  
 
   presence.setActivity(presenceData, true);
 });

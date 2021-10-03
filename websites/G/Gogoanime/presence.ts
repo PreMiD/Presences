@@ -64,7 +64,7 @@ function upperCaseFirstChar(word: string) {
 function formatStr(anime: string[]): string {
   return anime
     .reduce((t, c): string => {
-      return t + upperCaseFirstChar(c) + " ";
+      return `${t + upperCaseFirstChar(c)} `;
     }, "")
     .replace(/Dub/g, "(Dub)");
 }
@@ -120,16 +120,16 @@ async function checkDomain(): Promise<DomainCheckState> {
   }
 
   await sendRequestToDomainAPI().then(async (body) => {
-    if (body.status !== 200) {
+    if (body.status !== 200) 
       return;
-    }
+    
     const data: GogoanimeApiResponse = await body.json();
     if (data) {
       const domains: string[] = (result.validDomains = data.payload.allDomains);
       document.cookie = `${cookieName}=${domains.join("-")}; max-age=1800`;
-      if (domains.includes(currentDomain)) {
+      if (domains.includes(currentDomain)) 
         result.invalid = false;
-      }
+      
     }
   });
   return result;
@@ -161,14 +161,14 @@ presence.on("UpdateData", async () => {
       }
     });
 
-    if (isClone) {
+    if (isClone) 
       presence.clearActivity();
-    }
+    
   }
 
-  if (isClone) {
+  if (isClone) 
     return;
-  }
+  
 
   const currentPath = document.location.pathname;
   let detail: string,
@@ -176,9 +176,9 @@ presence.on("UpdateData", async () => {
   const is404 =
     document.querySelector("#wrapper_bg > section h1.entry-title")
       ?.textContent === "404";
-  if (is404) {
+  if (is404) 
     state = states.NOTFOUND;
-  } else if (currentPath === "/") {
+   else if (currentPath === "/") {
     const sel = document.querySelector(
       "#load_recent_release > div.anime_name.recent_release > h2"
     )?.children;
@@ -200,29 +200,29 @@ presence.on("UpdateData", async () => {
           break;
         }
       }
-    } else {
+    } else 
       detail = "Home";
-    }
-  } else if (currentPath === "/anime-list.html") {
+    
+  } else if (currentPath === "/anime-list.html") 
     detail = "The anime list";
-  } else if (
+   else if (
     currentPath === "/new-season.html" ||
     currentPath === "/recent-release-anime"
-  ) {
+  ) 
     detail = "Most recent anime";
-  } else if (currentPath === "/anime-movies.html") {
+   else if (currentPath === "/anime-movies.html") 
     detail = "Anime movies";
-  } else if (currentPath === "/popular.html") {
+   else if (currentPath === "/popular.html") 
     detail = "Most popular anime";
-  } else if (currentPath === "/news/reviews") {
+   else if (currentPath === "/news/reviews") 
     detail = "Anime reviews";
-  } else if (currentPath === "/news/trailers") {
+   else if (currentPath === "/news/trailers") 
     detail = "Anime trailers";
-  } else if (currentPath === "/requested-list.html") {
+   else if (currentPath === "/requested-list.html") 
     detail = "The requested anime list";
-  } else if (currentPath === "/upcoming-anime") {
+   else if (currentPath === "/upcoming-anime") 
     detail = "Upcoming anime";
-  } else if (currentPath.includes("/genre/")) {
+   else if (currentPath.includes("/genre/")) {
     const genre = currentPath.split("/").pop();
     detail = `Anime genre: ${upperCaseFirstChar(genre)}`;
   } else if (currentPath.includes("/category/")) {
@@ -237,11 +237,11 @@ presence.on("UpdateData", async () => {
   ) {
     const cat = currentPath.split("/").pop().split("-");
     detail = `${formatStr(cat)}`;
-  } else if (currentPath === "/announcement.html") {
+  } else if (currentPath === "/announcement.html") 
     detail = "Announcements";
-  } else if (currentPath === "/news.html") {
+   else if (currentPath === "/news.html") 
     detail = "Latest News";
-  } else if (currentPath.includes("/requested/")) {
+   else if (currentPath.includes("/requested/")) {
     const animeTitle = document.querySelector(
         "#wrapper_bg > section > section.content_left > div > div.anime_info_body > div > h1"
       )?.textContent,
@@ -276,15 +276,15 @@ presence.on("UpdateData", async () => {
     const anime = (document.getElementsByName("title")[0] as HTMLInputElement)
       ?.value;
     detail = `Anime: ${anime}`;
-  } else if (currentPath === "contact-us.html") {
+  } else if (currentPath === "contact-us.html") 
     state = states.CONTACTING;
-  } else if (currentPath === "/login.html") {
+   else if (currentPath === "/login.html") 
     state = states.LOGIN;
-  } else if (currentPath === "/register.html") {
+   else if (currentPath === "/register.html") 
     state = states.SIGNUP;
-  } else if (currentPath === "/user/bookmark") {
+   else if (currentPath === "/user/bookmark") 
     state = states.BOOKMARK;
-  } else if (currentPath === "//search.html") {
+   else if (currentPath === "//search.html") {
     state = states.SEARCHING;
     const word = new URLSearchParams(window.location.search)
       .get("keyword")
@@ -311,9 +311,9 @@ presence.on("UpdateData", async () => {
     state: detail
   };
 
-  if (state === states.NOTFOUND) {
+  if (state === states.NOTFOUND) 
     presence.setActivity({});
-  } else if (state === states.WATCHING && videoInfos) {
+   else if (state === states.WATCHING && videoInfos) {
     presenceData.buttons = [
       {
         label: "Watch",

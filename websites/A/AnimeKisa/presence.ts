@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).browsing;
     presence.setActivity(presenceData);
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

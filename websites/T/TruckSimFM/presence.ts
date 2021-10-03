@@ -1,12 +1,12 @@
 const presence = new Presence({
   clientId: "640538683392655370"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement;
-let player: HTMLAudioElement;
-let dj: HTMLElement;
-let listeners: HTMLElement;
+ browsingStamp = Math.floor(Date.now() / 1000);
+let title: HTMLElement,
+ player: HTMLAudioElement,
+ dj: HTMLElement,
+ listeners: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -20,10 +20,10 @@ presence.on("UpdateData", async () => {
     listeners = document.querySelector("#listeners");
     presenceData.details = title.textContent;
     presenceData.state =
-      "DJ: " +
-      dj.textContent +
-      " Listeners: " +
-      listeners.textContent.replace(" Listeners", "");
+      `DJ: ${ 
+      dj.textContent 
+      } Listeners: ${ 
+      listeners.textContent.replace(" Listeners", "")}`;
     presenceData.smallImageKey = "play";
   } else if (document.location.pathname.includes("/recent")) {
     presenceData.startTimestamp = browsingStamp;
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

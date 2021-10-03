@@ -7,9 +7,9 @@ let profile: string;
 function getUserName(): void {
   // Get your own username
   const tempusername = document.querySelector(".user-info > h6");
-  if (tempusername !== null) {
+  if (tempusername !== null) 
     profile = tempusername.textContent;
-  }
+  
 }
 
 async function getProfileDetails() {
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
         /* Portal */
         if (privacymode === false) {
           getUserName();
-          presenceData.state = "User: " + profile;
+          presenceData.state = `User: ${profile}`;
         }
         if (document.location.pathname.includes("/worlds")) {
           presenceData.details = "Browsing Worlds";
@@ -115,11 +115,11 @@ presence.on("UpdateData", async () => {
           const worldname =
             document.querySelector(".col-md-12 > h3").textContent;
           presenceData.details = "Viewing World:";
-          if (privacymode === false) {
+          if (privacymode === false) 
             presenceData.state = worldname;
-          } else {
+           else 
             presenceData.details = "Viewing a world";
-          }
+          
           presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/avatars")) {
           /* Viewing Avatars*/
@@ -157,11 +157,11 @@ presence.on("UpdateData", async () => {
               "div.col-12.col-md-8 > h4 > span > small"
             ).textContent;
           presenceData.details = "Viewing Avatar:";
-          if (privacymode === false) {
-            presenceData.state = avatarname + " " + avatarpublicstatus;
-          } else {
+          if (privacymode === false) 
+            presenceData.state = `${avatarname} ${avatarpublicstatus}`;
+           else 
             presenceData.details = "Viewing an avatar";
-          }
+          
           presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/playermoderations")) {
           /* Viewing blocks & mutes*/

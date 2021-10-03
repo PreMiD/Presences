@@ -54,9 +54,9 @@ presence.on("UpdateData", () => {
       } else if (document.location.href.includes("/quizzies")) {
         presenceData.details = "Looking at quizzes";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      } else {
+      } else 
         presenceData.details = "Viewing national headlines";
-      }
+      
     } else if (document.location.href.includes("/environment")) {
       presenceData.details = "Viewing national articles on the...";
       presenceData.state = "Environment";
@@ -86,9 +86,9 @@ presence.on("UpdateData", () => {
       } else if (document.location.href.includes("/south-pacific")) {
         presenceData.details = "Viewing international news from the...";
         presenceData.state = "South Pacific";
-      } else {
+      } else 
         presenceData.details = "Viewing world-wide headlines";
-      }
+      
     } else if (document.location.href.includes("/business")) {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       if (document.location.href.includes("/property")) {
@@ -109,11 +109,11 @@ presence.on("UpdateData", () => {
       } else if (document.location.href.includes("/small-business")) {
         presenceData.details = "Viewing business news related to...";
         presenceData.state = "Small Businesses";
-      } else if (document.location.href.includes("/world")) {
+      } else if (document.location.href.includes("/world")) 
         presenceData.details = "Viewing international business news";
-      } else {
+       else 
         presenceData.details = "Viewing business headlines";
-      }
+      
     } else if (document.location.href.includes("/sport")) {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       if (document.location.href.includes("/scores")) {
@@ -155,11 +155,11 @@ presence.on("UpdateData", () => {
       } else if (document.location.href.includes("/combat")) {
         presenceData.details = "Viewing sports news related to...";
         presenceData.state = "Combat";
-      } else if (document.location.href.includes("/other-sports")) {
+      } else if (document.location.href.includes("/other-sports")) 
         presenceData.details = "Viewing sporting news";
-      } else {
+       else 
         presenceData.details = "Viewing sporting headlines";
-      }
+      
     } else if (document.location.href.includes("/entertainment")) {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       if (document.location.href.includes("/bravo")) {
@@ -189,9 +189,9 @@ presence.on("UpdateData", () => {
       } else if (document.location.href.includes("/events")) {
         presenceData.details = "Viewing entertainment articles related to...";
         presenceData.state = "Events";
-      } else {
+      } else 
         presenceData.details = "Viewing entertainment headlines";
-      }
+      
     } else if (document.location.href.includes("/life-style")) {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       if (document.location.href.includes("/love-sex")) {
@@ -224,11 +224,11 @@ presence.on("UpdateData", () => {
       } else if (document.location.href.includes("/cutestuff")) {
         presenceData.details = "Viewing lifestyle articles related to...";
         presenceData.state = "Cute Stuff";
-      } else if (document.location.href.includes("/puzzles")) {
+      } else if (document.location.href.includes("/puzzles")) 
         presenceData.details = "Viewing puzzles";
-      } else {
+       else 
         presenceData.details = "Viewing lifestyle headlines";
-      }
+      
     } else if (document.location.href.includes("/travel")) {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       if (document.location.href.includes("/back-your-backyard")) {
@@ -258,9 +258,9 @@ presence.on("UpdateData", () => {
       } else if (document.location.href.includes("/cruising")) {
         presenceData.details = "Viewing travel articles related to...";
         presenceData.state = "Cruising";
-      } else {
+      } else 
         presenceData.details = "Viewing travel headlines";
-      }
+      
     } else if (document.location.href.includes("/motoring")) {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       if (document.location.href.includes("/electric-vehicles")) {
@@ -278,11 +278,11 @@ presence.on("UpdateData", () => {
       } else if (document.location.href.includes("/top-cars")) {
         presenceData.details = "Viewing travel articles related to...";
         presenceData.state = "Top Cars";
-      } else if (document.location.href.includes("/news")) {
+      } else if (document.location.href.includes("/news")) 
         presenceData.details = "Viewing motoring news";
-      } else {
+       else 
         presenceData.details = "Viewing motoring headlines";
-      }
+      
     }
   } else {
     presenceData.details = "Reading an article...";
@@ -295,7 +295,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

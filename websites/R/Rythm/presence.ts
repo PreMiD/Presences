@@ -383,8 +383,8 @@ class APIConnection {
 
         this.onclose = function (event: CloseEvent) {
           presence.info(
-            `Disconnected from Rythm's API [${namespace}]` +
-              (event && event.reason ? `: ${event.reason}` : "")
+            `Disconnected from Rythm's API [${namespace}]${ 
+              event && event.reason ? `: ${event.reason}` : ""}`
           );
         };
 
@@ -398,8 +398,8 @@ class APIConnection {
        */
       connection.websocket.onerror = function (event: ErrorEvent) {
         presence.error(
-          `Unable to connect to Rythm's API [${namespace}]` +
-            (event && event.message ? `: ${event.message}` : "")
+          `Unable to connect to Rythm's API [${namespace}]${ 
+            event && event.message ? `: ${event.message}` : ""}`
         );
         reject(event);
       };

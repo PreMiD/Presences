@@ -45,9 +45,9 @@ presence.on("UpdateData", async () => {
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-  });
+  }),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "animedao_lg"
   };
   if (pathname.startsWith(`/view/`)) {
@@ -57,9 +57,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${episode[0]} - ${
         document.querySelector(`h4`).textContent
       }`;
-    } else {
+    } else 
       presenceData.details = title;
-    }
+    
     const video: HTMLVideoElement = document.querySelector(`video`);
     if (video != null) {
       played = video.currentTime != 0;
@@ -80,11 +80,11 @@ presence.on("UpdateData", async () => {
     }
   } else if (hostname === `animedao.to`) {
     presenceData.startTimestamp = startTimestamp;
-    if (pathname === `/`) {
+    if (pathname === `/`) 
       presenceData.details = (await strings).browsing;
-    } else if (pathname.startsWith(`/animelist`)) {
+     else if (pathname.startsWith(`/animelist`)) 
       presenceData.details = `Viewing the Animelist`;
-    } else if (pathname.startsWith(`/genre`)) {
+     else if (pathname.startsWith(`/genre`)) {
       const genre: string = document.querySelector(`h2`).textContent.trim();
       presenceData.details = `Viewing genres`;
       if (pathname !== `/genre`) {
@@ -93,9 +93,9 @@ presence.on("UpdateData", async () => {
           ``
         )}`;
       }
-    } else if (pathname.startsWith(`/popular-anime`)) {
+    } else if (pathname.startsWith(`/popular-anime`)) 
       presenceData.details = `Viewing popular anime`;
-    } else if (pathname.startsWith(`/anime`)) {
+     else if (pathname.startsWith(`/anime`)) {
       const title = document.querySelector(`h2`);
       presenceData.details = `Viewing an anime`;
       presenceData.state = `${title ? title.textContent.trim() : undefined}`;

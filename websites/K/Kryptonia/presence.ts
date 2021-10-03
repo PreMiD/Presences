@@ -18,20 +18,20 @@ presence.on("UpdateData", async () => {
     data.details = "Navigue sur le forum";
     if (window.location.pathname.startsWith("/threads/")) {
       data.state =
-        "📝" +
-        (document.querySelector(
+        `📝${ 
+        document.querySelector(
           "#top > div.p-body-header > div > div > div.p-title > h1 > span.label-append"
         )
           ? ""
-          : " ") +
-        document
+          : " " 
+        }${document
           .querySelector(
             "#top > div.p-body-header > div > div > div.p-title > h1"
           )
           .textContent.replace("Accepté(e)", "")
           .replace("Refusé(e)", "")
           .replace("Résolu(e)", "")
-          .replace("Important", "");
+          .replace("Important", "")}`;
     } else if (window.location.pathname.startsWith("/members/")) {
       if (
         document.querySelector(
@@ -39,10 +39,10 @@ presence.on("UpdateData", async () => {
         )
       ) {
         data.state =
-          "👤 " +
+          `👤 ${ 
           document.querySelector(
             "#top > div.p-body > div > div > div > div > div > div > div > div > div > div.memberHeader-main > div > h1 > span > span"
-          ).textContent;
+          ).textContent}`;
       } else {
         data.state = document
           .querySelector("head > title")
@@ -50,10 +50,10 @@ presence.on("UpdateData", async () => {
       }
     } else if (window.location.pathname.includes("/forums/")) {
       data.state =
-        "📌 " +
+        `📌 ${ 
         document
           .querySelector("head > title")
-          .textContent.replace("| Kryptonia", "");
+          .textContent.replace("| Kryptonia", "")}`;
     } else {
       data.state = document
         .querySelector("head > title")

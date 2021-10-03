@@ -5,10 +5,10 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  const page = window.location.pathname;
+   browsingStamp = Math.floor(Date.now() / 1000),
+   page = window.location.pathname;
 
   if (page.endsWith("panel")) {
     presenceData.details = "Bir sayfayı görüntülüyor:";
@@ -36,7 +36,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

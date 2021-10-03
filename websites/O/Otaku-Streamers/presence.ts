@@ -1,15 +1,15 @@
 const presence = new Presence({
   clientId: "719985436075753492"
-});
-const path = window.location.pathname;
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+ path = window.location.pathname,
+ browsingStamp = Math.floor(Date.now() / 1000);
 let title, video, timestamps, chapter, blog;
 function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(
+  const startTime = Date.now(),
+   endTime = Math.floor(
     Math.floor(startTime / 1000) - videoTime + videoDuration
   );
   return [Math.floor(startTime / 1000), endTime];
@@ -51,18 +51,18 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageText = "Paused";
           delete presenceData.startTimestamp;
           delete presenceData.endTimestamp;
-          presenceData.state = title.innerText + " " + chapter.innerText;
+          presenceData.state = `${title.innerText} ${chapter.innerText}`;
         } else if (!video.paused && title && video.currentTime != 0) {
           presenceData.details = "Playing";
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = "Playing";
           presenceData.startTimestamp = timestamps[0];
           presenceData.endTimestamp = timestamps[1];
-          presenceData.state = title.innerText + " " + chapter.innerText;
+          presenceData.state = `${title.innerText} ${chapter.innerText}`;
         } else if (title) {
           presenceData.startTimestamp = browsingStamp;
           presenceData.details = "Viewing";
-          presenceData.state = title.innerText + " " + chapter.innerText;
+          presenceData.state = `${title.innerText} ${chapter.innerText}`;
         } else {
           presenceData.details = "Unable To Read Page";
           presenceData.startTimestamp = browsingStamp;
@@ -72,13 +72,13 @@ presence.on("UpdateData", async () => {
       title = document.querySelector("#pagetitle > h1") as HTMLTextAreaElement;
       if (title) {
         presenceData.details = title.childNodes[0].textContent;
-        if (title.childNodes[1]) {
+        if (title.childNodes[1]) 
           presenceData.state = title.childNodes[1].textContent;
-        } else {
+         else {
           blog = document.querySelector("#blog_title") as HTMLTextAreaElement;
-          if (blog) {
+          if (blog) 
             presenceData.state = blog.innerText;
-          }
+          
         }
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "read";
@@ -107,9 +107,9 @@ presence.on("UpdateData", async () => {
       if (title) {
         presenceData.details = "Viewing:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Viewing Genres";
-      }
+      
     } else if (path == "/discussions/") {
       presenceData.details = "Viewing Discussions";
       presenceData.startTimestamp = browsingStamp;
@@ -120,9 +120,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = title.innerText.replace(" - Otaku-Streamers", "");
         presenceData.smallImageKey = "read";
         presenceData.smallImageText = "Reading";
-      } else {
+      } else 
         presenceData.details = "Reading a discusion";
-      }
+      
     } else if (path.includes("/title/")) {
       title = document.querySelector(
         "div.album-top-box.mb-4.text-left > h1"
@@ -131,9 +131,9 @@ presence.on("UpdateData", async () => {
       if (title) {
         presenceData.details = "Viewing:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Viewing a show";
-      }
+      
     } else if (path.includes("/review/")) {
       title = document.querySelector(
         "div.title-box > h4 > a"
@@ -141,9 +141,9 @@ presence.on("UpdateData", async () => {
       if (title) {
         presenceData.details = "Viewing Reviews:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Viewing Reviews";
-      }
+      
     } else if (path.includes("/watch/")) {
       video = document.getElementsByClassName(
         "vjs-tech"
@@ -161,17 +161,17 @@ presence.on("UpdateData", async () => {
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
             presenceData.details = "Playing";
-            presenceData.state = title.innerText + " " + chapter.innerText;
+            presenceData.state = `${title.innerText} ${chapter.innerText}`;
           } else {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
             presenceData.details = "Paused";
-            presenceData.state = title.innerText + " " + chapter.innerText;
+            presenceData.state = `${title.innerText} ${chapter.innerText}`;
           }
         } else if (video.currentTime) {
           presenceData.startTimestamp = browsingStamp;
           presenceData.details = "Viewing";
-          presenceData.state = title.innerText + " " + chapter.innerText;
+          presenceData.state = `${title.innerText} ${chapter.innerText}`;
         } else {
           presenceData.details = "Watching Some Anime";
           presenceData.startTimestamp = browsingStamp;
@@ -193,13 +193,13 @@ presence.on("UpdateData", async () => {
         presenceData.state = title.innerText;
       }
     }
-  } else {
+  } else 
     presenceData.details = "Site is Unreadable";
-  }
+  
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

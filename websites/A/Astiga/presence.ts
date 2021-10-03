@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "612746548631044116"
   }),
   strings = presence.getStrings({
@@ -15,48 +15,48 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 function getSeconds(minutes: number, seconds: number): number {
-  var minutesToSeconds = Number(Math.floor(minutes * 60));
+  const minutesToSeconds = Number(Math.floor(minutes * 60)),
 
-  var result = minutesToSeconds + Number(seconds);
+   result = minutesToSeconds + Number(seconds);
 
   return result;
 }
 
-var truncateBefore = function (str, pattern): string {
+let truncateBefore = function (str, pattern): string {
   return str.slice(str.indexOf(pattern) + pattern.length);
-};
+},
 
-var truncateAfter = function (str, pattern): string {
+ truncateAfter = function (str, pattern): string {
   return str.slice(0, str.indexOf(pattern));
-};
+},
 
-var musicTitle: any;
+ musicTitle: any,
 
-var pattern = ":";
+ pattern = ":",
 
-var minutesDuration: any,
+ minutesDuration: any,
   minutesDurationString: any,
   secondsDuration: any,
-  secondsDurationString: any;
+  secondsDurationString: any,
 
-var currentMinutes: any,
+ currentMinutes: any,
   currentMinutesString: any,
   currentSeconds: any,
-  currentSecondsString: any;
+  currentSecondsString: any,
 
-var duration: any, currentTime: any;
+ duration: any, currentTime: any,
 
-var play: any;
+ play: any,
 
-var currentUser: any, albumName: any, currentArtist: any;
+ currentUser: any, albumName: any, currentArtist: any,
 
-var playback = false;
+ playback = false;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -113,35 +113,35 @@ presence.on("UpdateData", async () => {
 
     duration = getSeconds(minutesDuration, secondsDuration);
 
-    if (!play.style.display || currentTime == 0) {
+    if (!play.style.display || currentTime == 0) 
       playback = false;
-    } else {
+     else 
       playback = true;
-    }
+    
 
-    var timestamps = getTimestamps(currentTime, duration);
+    const timestamps = getTimestamps(currentTime, duration);
 
-    presenceData.details = "Song: " + musicTitle.innerText;
+    presenceData.details = `Song: ${musicTitle.innerText}`;
 
     if (albumName.innerText.length > 0 && currentArtist.innerText.length > 0) {
       presenceData.state =
-        currentArtist.innerText + " / " + albumName.innerText;
+        `${currentArtist.innerText} / ${albumName.innerText}`;
     } else if (
       albumName.innerText.length == 0 &&
       currentArtist.innerText.length > 0
-    ) {
-      presenceData.state = currentArtist.innerText + " / No album";
-    } else if (
+    ) 
+      presenceData.state = `${currentArtist.innerText} / No album`;
+     else if (
       albumName.innerText.length > 0 &&
       currentArtist.innerText.length == 0
-    ) {
-      presenceData.state = "No artist / " + albumName.innerText;
-    } else if (
+    ) 
+      presenceData.state = `No artist / ${albumName.innerText}`;
+     else if (
       albumName.innerText.length == 0 &&
       currentArtist.innerText.length == 0
-    ) {
+    ) 
       presenceData.state = "No artist / No album";
-    }
+    
 
     presenceData.smallImageKey = playback ? "play" : "pause";
 
@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.details = "No music playing.";
 
-    presenceData.state = "Logged in user: " + currentUser.innerText;
+    presenceData.state = `Logged in user: ${currentUser.innerText}`;
   }
 
   presence.setActivity(presenceData);

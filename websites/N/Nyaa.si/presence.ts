@@ -1,11 +1,11 @@
 const presence = new Presence({
   clientId: "635213174144237601"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 let title;
-const viewString = "Viewing ";
-const torrentString = "'s torrents";
+const viewString = "Viewing ",
+ torrentString = "'s torrents";
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

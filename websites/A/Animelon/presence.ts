@@ -69,9 +69,9 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
         .replace(" - Animelon", "")
         .split(" Episode ");
       currentAnimeTitle = currentAnimeWatching[0];
-      currentAnimeEpisode = "Episode " + currentAnimeWatching[1];
+      currentAnimeEpisode = `Episode ${currentAnimeWatching[1]}`;
 
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
         .replace(" - Animelon", "")
         .split(" Episode ");
       currentAnimeTitle = currentAnimeWatching[0];
-      currentAnimeEpisode = "Episode " + currentAnimeWatching[1];
+      currentAnimeEpisode = `Episode ${currentAnimeWatching[1]}`;
 
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
@@ -150,9 +150,9 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-  } else {
+  } else 
     presenceData.details = "Browsing...";
-  }
+  
 
   presence.setActivity(presenceData);
 });

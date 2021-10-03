@@ -12,17 +12,17 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname == "habbofests.com") {
-    if (document.location.pathname.includes("/home")) {
+    if (document.location.pathname.includes("/home")) 
       presenceData.details = "Looking at the home page";
-    } else if (document.location.pathname.includes("/fests/associates")) {
+     else if (document.location.pathname.includes("/fests/associates")) 
       presenceData.details = "Reading the affiliates page";
-    } else if (document.location.pathname.includes("/fests/contact-us")) {
+     else if (document.location.pathname.includes("/fests/contact-us")) 
       presenceData.details = "Looking at the contact page";
-    } else if (document.location.pathname.includes("/fests/join")) {
+     else if (document.location.pathname.includes("/fests/join")) 
       presenceData.details = "Viewing the apply page";
-    } else if (document.location.pathname.includes("/fests/staffs")) {
+     else if (document.location.pathname.includes("/fests/staffs")) 
       presenceData.details = "Viewing the staff page";
-    } else if (document.location.pathname.includes("/profile/")) {
+     else if (document.location.pathname.includes("/profile/")) {
       user = document.querySelector(
         "body > content > content > div:nth-child(3) > div > div.sideBar > div.user > span"
       );
@@ -54,18 +54,18 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/admin")) {
       presenceData.details = "Looking at the staff panel";
       user = document.querySelector("#relogio");
-      presenceData.state = "Current time:" + user.innerText;
+      presenceData.state = `Current time:${user.innerText}`;
     } else if (document.location.pathname.includes("/conversations/")) {
       if (document.location.pathname.split("/")[4] != null) {
         title = document.querySelector(
           "#top > div.p-body > div > div.uix_titlebar > div > div > div.p-title > h1"
         );
         presenceData.details = "Forums, Reading DM:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
+        if (title.innerText.length > 128) 
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = title.innerText;
-        }
+        
         presenceData.smallImageKey = "reading";
       } else {
         presenceData.details = "Forums, Browsing";
@@ -92,9 +92,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = "something up";
         presenceData.smallImageKey = "search";
       }
-    } else if (document.location.pathname.includes("/account/")) {
+    } else if (document.location.pathname.includes("/account/")) 
       presenceData.details = "Forums, account settings";
-    } else if (document.location.pathname.includes("/members/")) {
+     else if (document.location.pathname.includes("/members/")) {
       if (document.URL.includes("key=staff_members")) {
         presenceData.details = "Viewing the list";
         presenceData.state = "of staff members";
@@ -133,9 +133,9 @@ presence.on("UpdateData", async () => {
         );
         presenceData.details = "Viewing user:";
         presenceData.state = user.innerText;
-      } else {
+      } else 
         presenceData.details = "Viewing overview of members";
-      }
+      
     } else if (document.location.pathname.includes("/forums/")) {
       title = document.querySelector(
         "#top > div.p-body > div > div.uix_titlebar > div > div > div > h1"
@@ -143,16 +143,16 @@ presence.on("UpdateData", async () => {
       if (title != null) {
         presenceData.details = "Forums, viewing category:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Forums, Browsing...";
-      }
+      
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -61,14 +61,14 @@ undercards.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing page";
       presenceData.state = getText(".mainContent > h2:nth-child(2)");
-    } else {
+    } else 
       presenceData.details = "Browsing...";
-    }
+    
   }
   if (presenceData.details == null) {
     undercards.setTrayTitle();
     undercards.setActivity();
-  } else {
+  } else 
     undercards.setActivity(presenceData);
-  }
+  
 });

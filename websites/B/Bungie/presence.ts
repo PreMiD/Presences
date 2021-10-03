@@ -1,15 +1,15 @@
 const presence = new Presence({
   clientId: "711393222252822539"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+ browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
     largeImageKey: "logo"
-  };
+  },
 
   //This is just here so that I can have "changes"  to push to GitHub
   //This is just to push to GitHub
-  const path = document.location.pathname;
+   path = document.location.pathname;
   if (
     window.location.hostname == "bungie.net" ||
     window.location.hostname == "www.bungie.net"
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/en/Explore/Detail/News/")) {
     const title = document.querySelector("#article-container > h1").innerHTML;
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + title;
+    presenceData.details = `Reading ${title}`;
   } else if (path == "/en/News") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Cheking out news from Bungie";
@@ -51,22 +51,22 @@ presence.on("UpdateData", async () => {
     ).innerHTML;
     presenceData.startTimestamp = browsingStamp;
     presenceData.details =
-      "Looking at thier clan:  " +
-      titleSix.replace("<span>", "").replace("</span>", "");
+      `Looking at thier clan:  ${ 
+      titleSix.replace("<span>", "").replace("</span>", "")}`;
   } else if (path.includes("/en/Forums/Topics")) {
     const titleThirteen = document.querySelector("head > title");
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Looking at " + titleThirteen.innerHTML;
+    presenceData.details = `Looking at ${titleThirteen.innerHTML}`;
   } else if (path.includes("/en/Forums/Post/")) {
     const titleFourteen = document.querySelector(
       "#topicPost > div > div.threadMeta > div > div > div.authorMeta > a"
-    );
-    const titleTwo = document.querySelector(
+    ),
+     titleTwo = document.querySelector(
       "#topicPost > div > div.threadMeta > div > h1"
     );
     presenceData.startTimestamp = browsingStamp;
     presenceData.details =
-      "Looking at: " + titleTwo.innerHTML + "By: " + titleFourteen.innerHTML;
+      `Looking at: ${titleTwo.innerHTML}By: ${titleFourteen.innerHTML}`;
   } else if (path.includes("/en/ClanV2/MyClans")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Looking at the clans they are apart of";
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
       "#mainContent > div.darkThemeContent.grid.full-screen > div > div.container_bodyContent.customScroll > div.header > div.clanIdentity > h1"
     );
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Concerding joining clan " + titleSeven;
+    presenceData.details = `Concerding joining clan ${titleSeven}`;
   } else if (path.includes("/en/ClanV2/Fireteam")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Checking out the available fireteams";
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
       "#clan-container > div > div > div > div > div.activity-header > h2"
     );
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Interested in in fireteam " + titleNine.innerHTML;
+    presenceData.details = `Interested in in fireteam ${titleNine.innerHTML}`;
   } else if (path.includes("en/Groups/SuggestedGroups")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Looking at the groups Bungie suggested to them";
@@ -100,20 +100,20 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/en/Groups/Chat")) {
     const titleTen = document.querySelector("#groupName");
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Interested/Joined group " + titleTen.innerHTML;
+    presenceData.details = `Interested/Joined group ${titleTen.innerHTML}`;
   } else if (path.includes("/en/Community/Creations")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Looking at the creations the community made";
   } else if (path.includes("/en/Community/Detail")) {
     const titleEleven = document.querySelector(
       "#mainContent > div.community-detail-header > div > div > div.community-details.flex > div.title"
-    );
-    const titleTwelve = document.querySelector(
+    ),
+     titleTwelve = document.querySelector(
       "#mainContent > div.community-detail-header > div > div > div.community-meta > span:nth-child(1) > a"
     );
     presenceData.startTimestamp = browsingStamp;
     presenceData.details =
-      "Looking at " + titleEleven.innerHTML + " By: " + titleTwelve.innerHTML;
+      `Looking at ${titleEleven.innerHTML} By: ${titleTwelve.innerHTML}`;
   } else if (path == "/en/Help") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Getting help from Bungie";
@@ -123,36 +123,36 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/en/Help/Index")) {
     const titleFifteen = document.querySelector("#searchValue");
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Helpful " + titleFifteen.innerHTML;
+    presenceData.details = `Helpful ${titleFifteen.innerHTML}`;
   } else if (path.includes("/en/Help/Article/")) {
     const titleSeventeen = document.querySelector(
       "#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.content_help > div > div.HelpItemTitle"
     );
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + titleSeventeen.innerHTML;
+    presenceData.details = `Reading ${titleSeventeen.innerHTML}`;
   } else if (path.includes("/en/guide/destiny2")) {
     const titleEighteen = document.querySelector(
       "#guide-container > div.header > h1"
     );
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + titleEighteen.innerHTML;
+    presenceData.details = `Reading ${titleEighteen.innerHTML}`;
   } else if (path.includes("/en/Help/Troubleshoot")) {
     const titleNinteen = document.querySelector(
       "#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.troubleshootStep > h3"
     );
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + titleNinteen.innerHTML;
+    presenceData.details = `Reading ${titleNinteen.innerHTML}`;
   } else if (path.includes("/en/Support/Troubleshoot")) {
     const titleTwenty = document.querySelector(
       "#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.troubleshootStep > h3"
     );
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + titleTwenty.innerHTML;
+    presenceData.details = `Reading ${titleTwenty.innerHTML}`;
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

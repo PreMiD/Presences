@@ -35,23 +35,23 @@ presence.on("UpdateData", async () => {
   const startTimestamp = elapsed,
     path = window.location.pathname;
 
-  if (path === "/") {
+  if (path === "/") 
     details = "Browsing...";
-  } else if (path.match("/user") || path.match("/signup")) {
-    if (path.match("signup")) {
+   else if (path.match("/user") || path.match("/signup")) {
+    if (path.match("signup")) 
       details = "Signing up...";
-    } else {
+     else 
       details = "Logging in...";
-    }
-  } else if (path.match("/terms-use")) {
+    
+  } else if (path.match("/terms-use")) 
     details = "Viewing Terms of Use";
-  } else if (path.match("/trivia")) {
+   else if (path.match("/trivia")) {
     details = "Viewing Trivia";
 
     const title = document.querySelector("#start-the-quiz-title");
-    if (title) {
+    if (title) 
       state = title.textContent;
-    }
+    
   } else {
     const playlists = document.querySelector(".playlists-queue-wrapper"),
       breadcrumb = document.querySelector(".pane-content > .breadcrumb > ol"),
@@ -90,10 +90,10 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "coolmathgames",
-    startTimestamp: startTimestamp
+    startTimestamp
   };
 
   presence.setActivity(data);

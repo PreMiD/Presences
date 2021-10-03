@@ -22,8 +22,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -48,26 +48,26 @@ presence.on("UpdateData", async () => {
   const timestamps = getTimestamps(
     Math.floor(video.current),
     Math.floor(video.duration)
-  );
-  const Info = document.querySelector(".ez-detail-title").textContent;
+  ),
+   Info = document.querySelector(".ez-detail-title").textContent;
   let episode;
 
   if (Info.includes("ตอนที่")) {
     const info = Info.split("ตอนที่");
     episode = info.pop();
 
-    if (episode.includes("ซับไทย")) {
+    if (episode.includes("ซับไทย")) 
       episode = episode.replace("ซับไทย", "").trim();
-    } else if (episode.includes("พากย์ไทย")) {
+     else if (episode.includes("พากย์ไทย")) 
       episode = episode.replace("พากย์ไทย", "").trim();
-    }
+    
 
-    episode = "ตอนที่ " + episode;
+    episode = `ตอนที่ ${episode}`;
     presenceData.state = episode;
     presenceData.details = info[0];
-  } else {
+  } else 
     presenceData.details = Info;
-  }
+  
 
   presenceData.smallImageKey = video.paused ? "pause" : "play";
   presenceData.smallImageText = video.paused

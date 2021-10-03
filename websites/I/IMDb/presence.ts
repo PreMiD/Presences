@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -25,8 +25,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "large_img",
     startTimestamp
-  };
-  const url = document.URL;
+  },
+   url = document.URL;
   if (url.includes("/videoplayer/")) {
     const video: HTMLVideoElement = document.getElementsByTagName("video")[0],
       timestamps = getTimestamps(
@@ -55,17 +55,17 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "search";
   } else if (url.includes("/title/")) {
-    const tokens = document.title.split(" - ");
-    const title = tokens[0];
+    const tokens = document.title.split(" - "),
+     title = tokens[0];
     presenceData.details = title;
-    if (tokens[1].trim() == "IMDb") {
+    if (tokens[1].trim() == "IMDb") 
       presenceData.state = "Browsing...";
-    } else {
+     else 
       presenceData.state = tokens[1].trim();
-    }
-  } else if (url.includes("/user/") || url.includes("/poll/")) {
+    
+  } else if (url.includes("/user/") || url.includes("/poll/")) 
     presenceData.details = document.title.split(" - ")[0];
-  } else if (url.includes("/list/")) {
+   else if (url.includes("/list/")) {
     presenceData.details = document.title.split(" - ")[0];
     presenceData.state = "Viewing a list";
   } else if (url.includes("/search/")) {
@@ -73,19 +73,19 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Searching...";
   } else if (url.includes("/name/")) {
     presenceData.details = document.title.split(" - ")[0];
-    if (document.title.split(" - ")[1].trim() == "IMDb") {
+    if (document.title.split(" - ")[1].trim() == "IMDb") 
       presenceData.state = "Filmography";
-    } else {
+     else 
       presenceData.state = document.title.split(" - ")[1].trim();
-    }
+    
   } else {
     if (
       !url.includes("/ap/") &&
       !url.includes("/registration/") &&
       url != "https://www.imdb.com/"
-    ) {
+    ) 
       presenceData.details = document.title.split(" - ")[0];
-    }
+    
     presenceData.state = "Browsing";
   }
   presence.setActivity(presenceData, true);

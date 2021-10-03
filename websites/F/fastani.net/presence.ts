@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
     // If an anime card is on the screen it'll use the last seen title.
     presenceData.details =
       document.querySelector("div.aninfobox-content-body") && previousTitle
-        ? "Viewing " + previousTitle.textContent
+        ? `Viewing ${previousTitle.textContent}`
         : "Browsing...";
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData, true);
@@ -87,8 +87,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (videoTitle !== null) {
+    if (videoTitle !== null) 
       presence.setActivity(presenceData, !video.paused);
-    }
+    
   }
 });

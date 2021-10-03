@@ -9,9 +9,9 @@ presence.on("UpdateData", async () => {
     ),
     sections = document.querySelector(
       "#news-content > div.content-column.xs-mt2.lg-mt0.md-mb4 > h1 > span"
-    );
+    ),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "bfnews-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

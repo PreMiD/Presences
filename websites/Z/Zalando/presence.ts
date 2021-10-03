@@ -1,14 +1,14 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "644645903973482536"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
+ genericStyle = "font-weight: 800; padding: 2px 5px; color: white;",
 
-var user: any;
-var title: any;
-var language: any;
+ user: any,
+ title: any,
+ language: any;
 
 /**
  * Send PreMiD error message in console of browser
@@ -16,9 +16,9 @@ var language: any;
  */
 function PMD_error(message: string): void {
   console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
+    `%cPreMiD%cERROR%c ${message}`,
+    `${genericStyle}border-radius: 25px 0 0 25px; background: #596cae;`,
+    `${genericStyle}border-radius: 0 25px 25px 0; background: #ff5050;`,
     "color: unset;"
   );
 }
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
       ".h-container.h-product-title.topSection.h-align-left > div:nth-child(1) > a > h2"
     );
     presenceData.details = getTranslation("ProductView");
-    presenceData.state = user.textContent + " > " + title.textContent;
+    presenceData.state = `${user.textContent} > ${title.textContent}`;
   } else if (
     document.querySelector(
       "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
@@ -183,7 +183,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

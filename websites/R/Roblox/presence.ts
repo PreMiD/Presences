@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     //console.log(profileTabs.innerText);
 
     if (profileTabs.innerText == "Creations") {
-      presenceData.details = "Profile: " + profileName.innerText;
+      presenceData.details = `Profile: ${profileName.innerText}`;
 
       presenceData.state = "Browsing creations...";
 
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Messages";
 
-    presenceData.state = "Tab: " + messageTab.innerText;
+    presenceData.state = `Tab: ${messageTab.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/users/friends")) {
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Friends";
 
-    presenceData.state = "Tab: " + friendsTab.innerText;
+    presenceData.state = `Tab: ${friendsTab.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/my/avatar")) {
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = groupName.innerText;
 
-    presenceData.state = "Tab: " + groupTab.innerText;
+    presenceData.state = `Tab: ${groupTab.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/search/groups")) {
@@ -151,9 +151,9 @@ presence.on("UpdateData", async () => {
       document.querySelector("#horizontal-tabs li.rbx-tab.active")
     );
 
-    presenceData.details = "Game: " + gameName.innerText;
+    presenceData.details = `Game: ${gameName.innerText}`;
 
-    presenceData.state = "Tab: " + gameTab.innerText;
+    presenceData.state = `Tab: ${gameTab.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/catalog/")) {
@@ -191,21 +191,21 @@ presence.on("UpdateData", async () => {
     )).innerText;
     if (developTabs == "My Creations") {
       presenceData.state =
-        "Tab: " +
-        developTabs +
-        " > " +
+        `Tab: ${ 
+        developTabs 
+        } > ${ 
         (<HTMLAnchorElement>document.querySelector(".tab-item-selected"))
-          .innerText;
+          .innerText}`;
     } else if (developTabs == "Library") {
       presenceData.state =
-        "Tab: " +
-        developTabs +
-        " > " +
+        `Tab: ${ 
+        developTabs 
+        } > ${ 
         (<HTMLAnchorElement>document.querySelector(".selectedAssetTypeFilter"))
-          .innerText;
-    } else {
-      presenceData.state = "Tab: " + developTabs;
-    }
+          .innerText}`;
+    } else 
+      presenceData.state = `Tab: ${developTabs}`;
+    
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/robux")) {
     presenceData.details = "Current page:";

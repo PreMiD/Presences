@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "626496186496450570"
-});
+}),
 
-var user: any, search: any, title: any;
+ user: any, search: any, title: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -24,11 +24,11 @@ presence.on("UpdateData", async () => {
       }
 
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
       delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/c/")) {
@@ -108,11 +108,11 @@ presence.on("UpdateData", async () => {
     title = document.querySelector("head > title");
     title = title.innerText.split(" (")[0];
     presenceData.details = "Java Docs, viewing:";
-    if (title.length > 128) {
-      presenceData.state = title.substring(0, 125) + "...";
-    } else {
+    if (title.length > 128) 
+      presenceData.state = `${title.substring(0, 125)}...`;
+     else 
       presenceData.state = title;
-    }
+    
 
     delete presenceData.smallImageKey;
 
@@ -163,11 +163,11 @@ presence.on("UpdateData", async () => {
         "body > div > div > div.project-header-container > div:nth-child(1) > div > div > h1 > strong > a"
       );
       presenceData.details = "Ore, Viewing resource:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
 
       delete presenceData.smallImageKey;
 

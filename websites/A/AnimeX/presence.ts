@@ -2,9 +2,9 @@ const presence = new Presence({
   clientId: "663821800014348300"
 });
 
-let lastPlaybackState = null;
-let playback;
-let browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null,
+ playback,
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 /**
  * Get Timestamps
@@ -15,8 +15,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -41,11 +41,11 @@ presence.on("UpdateData", async () => {
   } else {
     const video: HTMLVideoElement = document
       .evaluate("//video[@class='jw-video jw-reset']", document)
-      .iterateNext() as HTMLVideoElement;
-    const videoTitle: Node = document
+      .iterateNext() as HTMLVideoElement,
+     videoTitle: Node = document
       .evaluate("//body//h1[1]", document)
-      .iterateNext();
-    const episode: Array<string> = videoTitle.textContent.split(" - Episode ");
+      .iterateNext(),
+     episode: Array<string> = videoTitle.textContent.split(" - Episode ");
     if (!video.paused) {
       const timestamps: Array<number> = getTimestamps(
         Math.floor(video.currentTime),
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
     presenceData.details =
       episode[0] !== null ? episode[0] : "Title not found...";
     presenceData.state =
-      episode[1] !== null ? "Episode " + episode[1] : "Episode not found...";
+      episode[1] !== null ? `Episode ${episode[1]}` : "Episode not found...";
 
     presence.setActivity(presenceData, !video.paused);
   }

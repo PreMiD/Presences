@@ -8,9 +8,9 @@ presence.on("UpdateData", () => {
       largeImageKey: "logo"
     };
 
-  if (route.length === 1 || route[1] === "") {
+  if (route.length === 1 || route[1] === "") 
     data.details = "Browsing the main page...";
-  } else if (route[1] === "docs") {
+   else if (route[1] === "docs") {
     data.smallImageKey = route[2];
     data.smallImageText = `${route[2].replace(/^[a-z]/i, (c) =>
       c.toUpperCase()

@@ -1,9 +1,9 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "647973934603567130"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
         title = document
           .querySelector("div.BH-menu > ul.BH-menuE > li > a[title]")
           .getAttribute("title");
-        var header_title = document.getElementsByClassName(
+        const header_title = document.getElementsByClassName(
           "c-post__header__title"
         )[0].innerHTML;
         presenceData.details = title;
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing site:";
     presenceData.state = "巴哈姆特";
     presence.setActivity(presenceData);
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

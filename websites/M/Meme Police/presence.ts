@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
   if (!gameData || gameData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(gameData);
-  }
+  
 });
 
 presence.on("iFrameData", (data: PresenceData) => (gameData = data));

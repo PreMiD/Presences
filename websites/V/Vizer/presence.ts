@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -50,11 +50,11 @@ presence.on("UpdateData", async () => {
     if (title !== null) {
       const season = document.querySelector(
         "#seasons > div > div:nth-child(2) > div > div > .owl-item.active > .item.active"
-      );
-      const episodeNumber = document.querySelector(
+      ),
+       episodeNumber = document.querySelector(
         "#episodes > div > div > div > div > .owl-item.active > div > .poster.active > .title"
-      );
-      const episodeName = document.querySelector(
+      ),
+       episodeName = document.querySelector(
         "#episodes > div > div > div > div > .owl-item.active > div > .poster.active > .title"
       );
 
@@ -62,12 +62,12 @@ presence.on("UpdateData", async () => {
         if (episodeNumber !== null && episodeName !== null) {
           presenceData.details = title.textContent;
           presenceData.state =
-            "S" +
-            season.textContent +
-            "E" +
-            episodeNumber.textContent.split(".")[0] +
-            " - " +
-            episodeName.textContent.split(".")[1];
+            `S${ 
+            season.textContent 
+            }E${ 
+            episodeNumber.textContent.split(".")[0] 
+            } - ${ 
+            episodeName.textContent.split(".")[1]}`;
 
           if (iFrameVideo == true && !isNaN(duration)) {
             const timestamps = getTimestamps(
@@ -84,16 +84,16 @@ presence.on("UpdateData", async () => {
           }
         } else {
           presenceData.details =
-            "Vendo temporada " + season.textContent + " da série:";
+            `Vendo temporada ${season.textContent} da série:`;
           presenceData.state = title.textContent;
         }
       } else {
         presenceData.details = "Vendo série:";
         presenceData.state = title.textContent;
       }
-    } else {
+    } else 
       presenceData.details = "Navegando pelas séries...";
-    }
+    
   } else if (document.location.pathname.includes("/filme")) {
     title = document.querySelector("#ms > div.wrap > section > h2");
     if (title !== null) {
@@ -101,10 +101,10 @@ presence.on("UpdateData", async () => {
         document.querySelector("#watchMovieButton > div.tit").textContent ==
         "audio"
       ) {
-        const year = document.querySelector(".year").textContent;
-        const rating = document.querySelector(".rating").textContent;
+        const year = document.querySelector(".year").textContent,
+         rating = document.querySelector(".rating").textContent;
         presenceData.details = title.textContent;
-        presenceData.state = year + " - " + rating;
+        presenceData.state = `${year} - ${rating}`;
 
         if (iFrameVideo == true && !isNaN(duration)) {
           const timestamps = getTimestamps(
@@ -123,14 +123,14 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Vendo filme:";
         presenceData.state = title.textContent;
       }
-    } else {
+    } else 
       presenceData.details = "Navegando pelos filmes...";
-    }
-  } else if (document.location.pathname.includes("/animes")) {
+    
+  } else if (document.location.pathname.includes("/animes")) 
     presenceData.details = "Navegando pelos animes...";
-  } else if (document.location.pathname.includes("/aplicativo")) {
+   else if (document.location.pathname.includes("/aplicativo")) 
     presenceData.details = "Vendo os aplicativos";
-  } else if (document.location.pathname.includes("/pesquisar")) {
+   else if (document.location.pathname.includes("/pesquisar")) {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = (await strings).search;
 
@@ -140,17 +140,17 @@ presence.on("UpdateData", async () => {
         "/pesquisar/",
         ""
       );
-    } else {
+    } else 
       presenceData.details = "Procurando por algo...";
-    }
-  } else if (document.location.pathname == "/") {
+    
+  } else if (document.location.pathname == "/") 
     presenceData.details = "Navegando...";
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

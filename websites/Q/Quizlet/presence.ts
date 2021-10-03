@@ -15,8 +15,8 @@ interface QuizletData {
   };
 }
 
-let qzData: QuizletData = null;
-let actionTimestamp: number = null;
+let qzData: QuizletData = null,
+ actionTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -40,13 +40,14 @@ presence.on("UpdateData", async () => {
         data.state = document.querySelector(
           ".ProfileHeader-username"
         ).textContent;
-        if (buttons)
-          data.buttons = [
+        if (buttons) {
+data.buttons = [
             {
               label: "View Profile",
               url: document.URL
             }
           ];
+}
         actionTimestamp = null;
         break;
       case "Topic":
@@ -67,13 +68,14 @@ presence.on("UpdateData", async () => {
             if (!actionTimestamp) actionTimestamp = Date.now();
             data.details = "Viewing a set";
             data.state = qzData.layer.studyableTitle;
-            if (buttons)
-              data.buttons = [
+            if (buttons) {
+data.buttons = [
                 {
                   label: "View Set",
                   url: document.URL
                 }
               ];
+}
             break;
           case "new":
             data.details = "Creating a set";

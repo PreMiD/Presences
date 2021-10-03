@@ -76,8 +76,8 @@ Blockbench.on("UpdateData", async () => {
     presenceData.details = "Reading a blog post:";
     presenceData.smallImageKey = "reading";
     presenceData.state = header;
-  } else if (pages[page]) {
+  } else if (pages[page]) 
     presenceData.details = `Looking at the ${pages[page]} page`;
-  }
+  
   Blockbench.setActivity(presenceData);
 });

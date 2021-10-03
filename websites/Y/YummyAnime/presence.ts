@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 
       if (air !== null) {
         presenceData.state =
-          "Aired on: " + air.textContent.replace("AIRED :", "");
+          `Aired on: ${air.textContent.replace("AIRED :", "")}`;
       }
 
       if (paused) {
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

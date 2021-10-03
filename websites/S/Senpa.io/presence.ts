@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "691669470057594940"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -10,9 +10,9 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.host.split(".")[0] !== "forum") {
-    if (document.location.pathname === "/") {
+    if (document.location.pathname === "/") 
       presenceData.details = "Home";
-    } else if (document.location.pathname.includes("/web/")) {
+     else if (document.location.pathname.includes("/web/")) {
       const profile = JSON.parse(localStorage.getItem("senpaio:profiles"));
       presenceData.details = `Playing on server : ${localStorage.getItem(
         "senpaio:region"

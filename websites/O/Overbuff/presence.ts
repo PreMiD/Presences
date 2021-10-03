@@ -10,8 +10,8 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.includes("/players/")) {
     const nickname = document.querySelector(
       "div.layout-header-primary-bio > h1"
-    ).firstChild.textContent;
-    const level = document.querySelector(
+    ).firstChild.textContent,
+     level = document.querySelector(
       "div.image-with-corner > div.corner.corner-text"
     ).textContent;
     if (window.location.pathname.includes("pc")) {
@@ -54,8 +54,8 @@ presence.on("UpdateData", () => {
     try {
       const hero_name = document.querySelector(
         "div.layout-header-primary-bio > div > h1"
-      ).firstChild.textContent;
-      const hero_role = document.querySelector(
+      ).firstChild.textContent,
+       hero_role = document.querySelector(
         "div.layout-header-primary-bio > div > h1 > small"
       ).textContent;
       presenceData.details = "Viewing a Hero:";
@@ -72,9 +72,9 @@ presence.on("UpdateData", () => {
       ).firstChild.textContent;
       presenceData.details = "Viewing a role:";
       presenceData.state = role_name;
-      if (window.location.pathname.includes("/rankings")) {
+      if (window.location.pathname.includes("/rankings")) 
         presenceData.state = `${role_name} ranking`;
-      }
+      
     } catch {
       console.log("That's not a Hero profile.");
     }
@@ -128,7 +128,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

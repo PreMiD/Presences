@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       case path.includes("/common-core-maths"):
       case path.includes("/probability"):
         presenceData.details = "Reading about:";
-        presenceData.state = title + " examples";
+        presenceData.state = `${title} examples`;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Mathematics";
         break;
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
       case path.includes("/health-and-medicine"):
       case path.includes("/food-science"):
         presenceData.details = "Reading about:";
-        presenceData.state = title + " examples";
+        presenceData.state = `${title} examples`;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Science & Technology";
         break;
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
       case path.includes("/economic-data"):
       case path.includes("/education"):
         presenceData.details = "Reading about:";
-        presenceData.state = title + " examples";
+        presenceData.state = `${title} examples`;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Society & Culture";
         break;
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
       case path.includes("/todays-world"):
       case path.includes("/hobbies"):
         presenceData.details = "Reading about:";
-        presenceData.state = title + " examples";
+        presenceData.state = `${title} examples`;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Everyday life";
         break;
@@ -135,16 +135,16 @@ presence.on("UpdateData", async () => {
     if (path.includes("/quiz")) {
       const theme = document.querySelector(".categoryTitle").textContent.trim();
       let determinant = "a ";
-      if (theme.startsWith("A")) {
+      if (theme.startsWith("A")) 
         determinant = "an ";
-      }
-      presenceData.details = "Playing " + determinant + theme + " Quiz:";
+      
+      presenceData.details = `Playing ${determinant}${theme} Quiz:`;
       presenceData.state =
-        document.querySelector(".topicTitle").textContent.trim() +
-        " quiz | " +
-        document.querySelector(".titleBar.Beginner").textContent.trim() +
-        " | Correct: " +
-        document.querySelector(".purpleBox").textContent.trim();
+        `${document.querySelector(".topicTitle").textContent.trim() 
+        } quiz | ${ 
+        document.querySelector(".titleBar.Beginner").textContent.trim() 
+        } | Correct: ${ 
+        document.querySelector(".purpleBox").textContent.trim()}`;
     } else {
       presenceData.details = "Looking at:";
       presenceData.state = "Maths problems";
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

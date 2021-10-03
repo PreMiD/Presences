@@ -7,8 +7,8 @@ let details: string,
   state: string,
   lives: string,
   level: string,
-  strikes: string = "0 of 3",
-  numbers: string = "4";
+  strikes = "0 of 3",
+  numbers = "4";
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

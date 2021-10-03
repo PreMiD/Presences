@@ -109,9 +109,9 @@ presence.on("UpdateData", async () => {
     } else if (location.pathname.includes("/ViewMessages/")) {
       presenceData.details = "Browsing through";
       presenceData.state = "eBay Messages";
-    } else {
+    } else 
       presenceData.details = "eBay Messages";
-    }
+    
   } else if (location.hostname.startsWith("ocsnext."))
     presenceData.details = "eBay Customer Support";
   else if (location.hostname.includes("developer."))
@@ -161,9 +161,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "eBay Forum Search:";
       presenceData.state = search;
-    } else {
+    } else 
       presenceData.details = "eBay Forum";
-    }
+    
   }
 
   const showButtons = await presence.getSetting("buttons");

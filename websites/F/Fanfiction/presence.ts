@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "630790482804473857"
 });
 
-var tags = [
+let tags = [
   "/anime/",
   "/book/",
   "/cartoon/",
@@ -12,12 +12,12 @@ var tags = [
   "/movie/",
   "/play/",
   "tv"
-];
-var anime;
-var crossover = [];
-for (let i = 0; i < tags.length; i++) {
-  crossover.push(["/crossovers" + tags[i]]);
-}
+],
+ anime,
+ crossover = [];
+for (let i = 0; i < tags.length; i++) 
+  crossover.push([`/crossovers${tags[i]}`]);
+
 
 const elapsed = Math.floor(Date.now() / 1000);
 
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = document.location.href;
   } else if (document.location.pathname.startsWith("/s/")) {
-    var current = document.location.pathname
+    const current = document.location.pathname
       .replace("/s/", "")
       .split("/")
       .join("")
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

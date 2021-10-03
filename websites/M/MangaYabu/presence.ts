@@ -1,33 +1,33 @@
 const presence = new Presence({
   clientId: "704006227276857385"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-const nomeObraLeitor: HTMLElement = document.querySelector(
+ browsingStamp = Math.floor(Date.now() / 1000),
+ nomeObraLeitor: HTMLElement = document.querySelector(
   "#app > div.theme-container.no-sidebar > main > div.manga-reader > h1"
-);
-const nomeObraLeitor2: HTMLElement = document.querySelector(
+),
+ nomeObraLeitor2: HTMLElement = document.querySelector(
   "#app > div.theme-container.no-sidebar > main > div.manga-reader > h1"
-);
-const paginas: HTMLElement = document.querySelector(
+),
+ paginas: HTMLElement = document.querySelector(
   "#app > div.theme-container.no-sidebar > main > div.yabu-list-content > div > div.container.mt-5 > div.mt-3.text-muted > p"
-);
-const nomeObra: HTMLElement = document.querySelector(
+),
+ nomeObra: HTMLElement = document.querySelector(
   "#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-title > h1"
-);
-const generosObra: HTMLElement = document.querySelector(
+),
+ generosObra: HTMLElement = document.querySelector(
   "#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-genres"
-);
-const tagTexto: HTMLElement = document.querySelector(
+),
+ tagTexto: HTMLElement = document.querySelector(
   "#app > div.theme-container.no-sidebar > main > div.features > h3"
 );
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-  const path = document.location.pathname;
+   path = document.location.pathname;
   presenceData.startTimestamp = browsingStamp;
 
   if (path == "/") {
@@ -56,12 +56,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Lista de mangás";
     paginas.innerText.includes("Gêneros")
       ? (presenceData.state =
-          paginas.innerText.slice(
+          `${paginas.innerText.slice(
             paginas.innerText.search("Página"),
             paginas.innerText.search("Gêneros") - 2
-          ) +
-          " | " +
-          paginas.innerText.slice(paginas.innerText.search("Gêneros") + 8, -1))
+          ) 
+          } | ${ 
+          paginas.innerText.slice(paginas.innerText.search("Gêneros") + 8, -1)}`)
       : (presenceData.state = paginas.innerText.slice(
           paginas.innerText.search("Página")
         ));
@@ -73,8 +73,8 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/tag/")) {
     presenceData.details = "Página de Tag";
     presenceData.state = tagTexto.innerText.slice(1);
-  } else {
+  } else 
     presenceData.details = "Navegando...";
-  }
+  
   presence.setActivity(presenceData);
 });

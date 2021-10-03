@@ -36,9 +36,9 @@ presence.on("UpdateData", async () => {
       ? true
       : false;
 
-  if (!seriesBool && !movieBool) {
+  if (!seriesBool && !movieBool) 
     video = null;
-  }
+  
 
   // Series
 

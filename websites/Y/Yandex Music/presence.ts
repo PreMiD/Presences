@@ -64,9 +64,9 @@ setInterval(getData, 1000);
 presence.on("UpdateData", () => {
   const title = document.getElementsByClassName("track__title");
 
-  if (title.length != 0) {
+  if (title.length != 0) 
     presence.setActivity(presenceData);
-  } else {
+   else {
     presence.setTrayTitle();
     presence.setActivity();
   }

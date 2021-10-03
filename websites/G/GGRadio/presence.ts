@@ -1,26 +1,26 @@
 const presence = new Presence({
   clientId: "730052820459454496"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
-  const format1 = await presence.getSetting("sFormatNoDj1");
-  const format2 = await presence.getSetting("sFormatNoDj2");
-  const elapsed = await presence.getSetting("tElapsed");
-  const format = await presence.getSetting("sFormat");
-  const info = await presence.getSetting("sInfo");
-  const dj = await presence.getSetting("sDJ");
+  },
+   format1 = await presence.getSetting("sFormatNoDj1"),
+   format2 = await presence.getSetting("sFormatNoDj2"),
+   elapsed = await presence.getSetting("tElapsed"),
+   format = await presence.getSetting("sFormat"),
+   info = await presence.getSetting("sInfo"),
+   dj = await presence.getSetting("sDJ");
 
   if (elapsed) presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname.includes("/player")) {
-    const title = document.querySelector("#title").textContent;
-    const artist = document.querySelector("#artist").textContent;
-    const paused = document.querySelector("#play") !== null;
+    const title = document.querySelector("#title").textContent,
+     artist = document.querySelector("#artist").textContent,
+     paused = document.querySelector("#play") !== null;
     let djType = document
       .querySelector("#presenter-text")
       .textContent.replace("Currently playing: ", "");
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       presenceData.state =
         djType == "AutoDJ"
           ? "No DJ Currently Playing"
-          : "Current DJ: " + djType;
+          : `Current DJ: ${djType}`;
     } else {
       presenceData.details = format1
         .replace("%song%", title)
@@ -54,11 +54,11 @@ presence.on("UpdateData", async () => {
     }
   } else {
     if (info) {
-      if (document.location.pathname.includes("/downloads")) {
+      if (document.location.pathname.includes("/downloads")) 
         presenceData.details = "Viewing the downloads";
-      } else if (document.location.pathname.includes("/team")) {
+       else if (document.location.pathname.includes("/team")) 
         presenceData.details = "Viewing the team";
-      } else if (document.location.pathname.includes("/community")) {
+       else if (document.location.pathname.includes("/community")) {
         const title = document.querySelector(
           "#top > div.p-body > div > div.p-body-header > div.p-title > h1"
         ).textContent;
@@ -66,9 +66,9 @@ presence.on("UpdateData", async () => {
         if (title !== "GGRadio") {
           presenceData.details = "Forums - Viewing category:";
           presenceData.state = title;
-        } else {
+        } else 
           presenceData.details = "Forums - Browsing...";
-        }
+        
       } else if (document.location.pathname.includes("/threads")) {
         presenceData.details = "Forums - Reading thread:";
         presenceData.state = document.querySelector(
@@ -84,18 +84,18 @@ presence.on("UpdateData", async () => {
       } else if (document.location.pathname.includes("/account")) {
         presenceData.details = "Viewing their account";
         presenceData.smallImageKey = "reading";
-      } else if (document.location.pathname == "/") {
+      } else if (document.location.pathname == "/") 
         presenceData.details = "Browsing...";
-      }
-    } else {
+      
+    } else 
       presenceData.details = "Browsing...";
-    }
+    
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

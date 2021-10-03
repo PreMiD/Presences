@@ -31,17 +31,17 @@ presence.on("UpdateData", async () => {
       } catch {
         presenceData.details = `Player: ${player_nickname}`;
       }
-    } else {
+    } else 
       presenceData.details = `Viewing a profile`;
-    }
+    
     presenceData.state = "Viewing Statistics";
-    if (document.location.pathname.includes("/matches")) {
+    if (document.location.pathname.includes("/matches")) 
       presenceData.state = "Viewing Match History";
-    } else if (document.location.pathname.includes("/characters")) {
+     else if (document.location.pathname.includes("/characters")) 
       presenceData.state = "Viewing Characters";
-    } else if (document.location.pathname.includes("/inventory")) {
+     else if (document.location.pathname.includes("/inventory")) 
       presenceData.state = "Viewing Inventory";
-    }
+    
   } else if (document.location.pathname.includes("/news")) {
     try {
       const news_title = document
@@ -153,14 +153,14 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.endsWith("/terms")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Terms of Service";
-  } else {
+  } else 
     presenceData.details = (await strings).browsing;
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

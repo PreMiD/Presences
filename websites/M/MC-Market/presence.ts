@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "626148940927991829" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var user: any, search: any, title: any;
+ user: any, search: any, title: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -55,11 +55,11 @@ presence.on("UpdateData", async () => {
       );
       if (title !== null) {
         presenceData.details = "Resources, viewing:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
+        if (title.innerText.length > 128) 
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = title.innerText;
-        }
+        
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
@@ -69,14 +69,14 @@ presence.on("UpdateData", async () => {
         );
         presenceData.details = "Resources, viewing";
         presenceData.state =
-          "category: " +
+          `category: ${ 
           title.innerText
             .replace("Add Resource", "")
             .replace("Sell your OG", "")
             .replace("Sell your Semi-OG", "")
             .replace("Sell your cape account", "")
             .replace("Sell your Rank Account", "")
-            .replace("Post New Thread", "");
+            .replace("Post New Thread", "")}`;
 
         delete presenceData.smallImageKey;
 
@@ -184,11 +184,11 @@ presence.on("UpdateData", async () => {
         presence.setTrayTitle();
       } else {
         presenceData.details = "Reading thread:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
+        if (title.innerText.length > 128) 
+          presenceData.state = `${title.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = title.innerText;
-        }
+        
         presenceData.smallImageKey = "reading";
 
         presence.setActivity(presenceData);

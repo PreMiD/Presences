@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "701922288488022046"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -50,37 +50,37 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname == "/popoutplayer.php") {
     const play = document.querySelector(
       "#stream1 > div > div > div.ppBtn.play-btn"
-    );
-    const pause = document.querySelector(
+    ),
+     pause = document.querySelector(
       "#stream1 > div > div > div.ppBtn.playing.stop-btn"
-    );
-    const songTitle = document.querySelector(
+    ),
+     songTitle = document.querySelector(
       "#stream1 > div > div > div.player-ctr > div.track-info.animated > div.track-title.animated"
-    ).textContent;
-    const songArtist = document.querySelector(
+    ).textContent,
+     songArtist = document.querySelector(
       "#stream1 > div > div > div.player-ctr > div.track-info.animated > div.artist-name.animated"
-    ).textContent;
-    const dj = document.querySelector(
+    ).textContent,
+     dj = document.querySelector(
       "body > div.container > div > div.card-header.col-md-12.centertext.bg-danger > h5 > small"
     ).textContent;
     if (play != null) {
       //Set to Pause
-      presenceData.details = songTitle + " by " + songArtist;
-      presenceData.state = "DJ: " + dj;
+      presenceData.details = `${songTitle} by ${songArtist}`;
+      presenceData.state = `DJ: ${dj}`;
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "Paused";
       presenceData.startTimestamp = browsingStamp;
     } else if (pause != null) {
       // Set to Play
-      presenceData.details = songTitle + " by " + songArtist;
-      presenceData.state = "DJ: " + dj;
+      presenceData.details = `${songTitle} by ${songArtist}`;
+      presenceData.state = `DJ: ${dj}`;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Listening...";
       presenceData.startTimestamp = browsingStamp;
     } else {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing:" + songTitle + " by " + songArtist;
-      presenceData.state = "DJ: " + dj;
+      presenceData.details = `Viewing:${songTitle} by ${songArtist}`;
+      presenceData.state = `DJ: ${dj}`;
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Who's on air?";
     }
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -54,7 +54,7 @@ matrixPresence.on("UpdateData", async () => {
   if (matrixPData.details == null) {
     matrixPresence.setTrayTitle();
     matrixPresence.setActivity();
-  } else {
+  } else 
     matrixPresence.setActivity(matrixPData);
-  }
+  
 });

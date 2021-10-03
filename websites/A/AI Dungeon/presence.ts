@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "713563682722021436"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 let login,
   register,
   target: string,
@@ -10,8 +10,8 @@ let login,
   playing,
   action,
   textArray;
-const path = document.location.pathname;
-const check = window.addEventListener("click", function (event) {
+const path = document.location.pathname,
+ check = window.addEventListener("click", function (event) {
   target = (event.target as HTMLTextAreaElement).innerText;
   if (target != undefined) {
     if (target.includes("Home")) {
@@ -45,14 +45,14 @@ const check = window.addEventListener("click", function (event) {
     ) {
       bullsEye = target;
       return bullsEye;
-    } else if (target.includes("")) {
+    } else if (target.includes("")) 
       return (bullsEye = "NEW SINGLEPLAYER GAME");
-    } else {
+     else 
       return bullsEye;
-    }
-  } else {
+    
+  } else 
     return (bullsEye = "Home");
-  }
+  
 });
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -67,21 +67,21 @@ presence.on("UpdateData", async () => {
         "elementor-headline-dynamic-letter elementor-headline-animation-in"
       );
       if (textArray) {
-        if (textArray[0].textContent == "s") {
+        if (textArray[0].textContent == "s") 
           presenceData.state = "Create your own Story";
-        } else if (textArray[0].textContent == "a") {
+         else if (textArray[0].textContent == "a") 
           presenceData.state = "Create your own Adventure";
-        } else if (textArray[0].textContent == "f") {
+         else if (textArray[0].textContent == "f") 
           presenceData.state = "Create your own Fantasy";
-        } else if (textArray[0].textContent == "m") {
+         else if (textArray[0].textContent == "m") 
           presenceData.state = "Create your own Mystery";
-        } else if (textArray[0].textContent == "r") {
+         else if (textArray[0].textContent == "r") 
           presenceData.state = "Create your own Romance";
-        } else if (textArray[0].textContent == "d") {
+         else if (textArray[0].textContent == "d") 
           presenceData.state = "Create your own Dream";
-        } else if (textArray[0].textContent == "w") {
+         else if (textArray[0].textContent == "w") 
           presenceData.state = "Create your own World";
-        }
+        
       }
     } else if (path == "/play-ai-dungeon/") {
       presenceData.details = "Selecting Platform to play on";
@@ -166,13 +166,13 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "play";
             presenceData.smallImageText = "Playing a Game";
             if (action.getAttribute("aria-label") == "Do") {
-              presenceData.state = "Doing: " + playing.textContent;
+              presenceData.state = `Doing: ${playing.textContent}`;
               delete presenceData.startTimestamp;
             } else if (action.getAttribute("aria-label") == "Say") {
-              presenceData.state = "Saying: " + playing.textContent;
+              presenceData.state = `Saying: ${playing.textContent}`;
               delete presenceData.startTimestamp;
             } else if (action.getAttribute("aria-label") == "Story") {
-              presenceData.state = "Story is: " + playing.textContent;
+              presenceData.state = `Story is: ${playing.textContent}`;
               delete presenceData.startTimestamp;
             }
           }
@@ -195,13 +195,13 @@ presence.on("UpdateData", async () => {
                 "#root > div > div > div > div > div:nth-child(4) > div > div.css-1dbjc4n.r-13awgt0 > div > div:nth-child(2) > div.css-1dbjc4n.r-18u37iz.r-13qz1uu > div.css-1dbjc4n.r-13awgt0.r-18u37iz > div > div"
               );
               if (action.getAttribute("aria-label") == "Do") {
-                presenceData.state = "Doing: " + playing.textContent;
+                presenceData.state = `Doing: ${playing.textContent}`;
                 delete presenceData.startTimestamp;
               } else if (action.getAttribute("aria-label") == "Say") {
-                presenceData.state = "Saying: " + playing.textContent;
+                presenceData.state = `Saying: ${playing.textContent}`;
                 delete presenceData.startTimestamp;
               } else if (action.getAttribute("aria-label") == "Story") {
-                presenceData.state = "Story is: " + playing.textContent;
+                presenceData.state = `Story is: ${playing.textContent}`;
                 delete presenceData.startTimestamp;
               }
             }
@@ -219,7 +219,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

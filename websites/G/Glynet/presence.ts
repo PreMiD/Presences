@@ -16,9 +16,9 @@ presence.on("UpdateData", () => {
   }
 
   // Explore
-  if (page.startsWith("/explore")) {
+  if (page.startsWith("/explore")) 
     presenceData.details = "Keşfet bölümünde...";
-  }
+  
 
   // Hashtags
   if (page.startsWith("/hashtag-")) {
@@ -50,19 +50,20 @@ presence.on("UpdateData", () => {
     presenceData.state = "Yasaklı Bölge!";
   }
   if (page.startsWith("/503") || page.startsWith("/500")) {
-    presenceData.details = "Server Error: " + page.substring(1);
+    presenceData.details = `Server Error: ${page.substring(1)}`;
     presenceData.state = "Sunucuya şu anda ulaşılamıyor.";
   }
   if (page.startsWith("/400")) {
     presenceData.details = "Server Error: 400";
     presenceData.state = "Geçersiz istek.";
   }
-  if (typeof presenceData.details === "string") {
+  if (typeof presenceData.details === "string") 
     presence.setActivity(presenceData);
-  } else
-    presence.setActivity({
+   else {
+presence.setActivity({
       details: "Bilinmeyen bir sayfada...",
       startTimestamp: browsingStamp,
       largeImageKey: "gly-logo"
     });
+}
 });

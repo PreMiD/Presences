@@ -69,9 +69,9 @@ presence.on("UpdateData", () => {
     presenceData.state = new URLSearchParams(window.location.search).get("s");
   }
 
-  if (page.startsWith("/ara")) {
+  if (page.startsWith("/ara")) 
     presenceData.details = "Arama bölümünde...";
-  }
+  
 
   if (
     ["/kunye", "/iletisim", "/gizlilik-politikasi"].some((pac) =>
@@ -95,7 +95,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "buk-logo",
       details: "Bilinmeyen bir sayfada..."
     });
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

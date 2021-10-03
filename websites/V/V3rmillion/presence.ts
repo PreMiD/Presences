@@ -2,15 +2,15 @@
 const presence = new Presence({
   clientId: "650569876993343529"
 });
-var profile: any, title: any;
-var browsingStamp = Math.floor(Date.now() / 1000);
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
+let profile: any, title: any,
+ browsingStamp = Math.floor(Date.now() / 1000),
+ genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
 
 function PMD_error(message): void {
   console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
+    `%cPreMiD%cERROR%c ${message}`,
+    `${genericStyle}border-radius: 25px 0 0 25px; background: #596cae;`,
+    `${genericStyle}border-radius: 0 25px 25px 0; background: #ff5050;`,
     "color: unset;"
   );
 }
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
     ) {
       profile = document.querySelector("#panel strong");
       presenceData.details = "Viewing Homepage";
-      presenceData.state = "Logged in as " + profile.innerText;
+      presenceData.state = `Logged in as ${profile.innerText}`;
       presenceData.smallImageKey = "twemoji-house-1024x";
     } else if (document.location.pathname.includes("showthread.php")) {
       /* Viewing Thread*/
@@ -75,13 +75,13 @@ presence.on("UpdateData", async () => {
       /* Editing settings */
       profile = document.querySelector("#panel strong");
       presenceData.details = "User Control Panel";
-      presenceData.state = "Logged in as " + profile.innerText;
+      presenceData.state = `Logged in as ${profile.innerText}`;
       presenceData.smallImageKey = "twemoji-cog-1024x";
     } else if (document.location.pathname.includes("search.php")) {
       /* Searching */
       profile = document.querySelector("#panel strong");
       presenceData.details = "Searching site";
-      presenceData.state = "Logged in as " + profile.innerText;
+      presenceData.state = `Logged in as ${profile.innerText}`;
     } else if (document.location.pathname.includes("pages.php")) {
       /* Other page fallback */
       const page = document.URL.substring(document.URL.indexOf(".php") + 10);
@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
     PMD_error("Unable to determine location.");
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

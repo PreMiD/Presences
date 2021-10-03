@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "611657413350654010"
   }),
   strings = presence.getStrings({
@@ -15,14 +15,14 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null,
+ playback,
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -49,17 +49,17 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  var video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
     "#player > div.jw-media.jw-reset > video"
   );
 
   if (video !== null) {
-    var videoTitle: any;
+    let videoTitle: any;
 
     videoTitle = document.querySelector(
       "div > div.episodeInfo > div.nomeAnime"
     );
-    var episode: any = document.querySelector(
+    const episode: any = document.querySelector(
         "div > div.episodeInfo > div.epInfo"
       ),
       timestamps = getTimestamps(

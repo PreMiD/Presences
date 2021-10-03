@@ -22,9 +22,9 @@ function pathIncludes(string: string): boolean {
 }
 
 function isShop(): boolean {
-  if (document.location.host.includes("shop")) {
+  if (document.location.host.includes("shop")) 
     return true;
-  }
+  
 }
 
 function isProfile(): boolean {
@@ -109,21 +109,22 @@ presence.on("UpdateData", async () => {
       presenceData.details = authorName;
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "Profile";
-      if (buttons)
-        presenceData.buttons = [
+      if (buttons) {
+presenceData.buttons = [
           {
             label: "View Profile",
             url: document.location.origin + authorUrl
           }
         ];
+}
       break;
     case isArticle():
       presenceData.details = articleTitle;
       presenceData.state = authorName;
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = "Reading";
-      if (buttons)
-        presenceData.buttons = [
+      if (buttons) {
+presenceData.buttons = [
           {
             label: "View Article",
             url: document.location.href
@@ -133,12 +134,13 @@ presence.on("UpdateData", async () => {
             url: document.location.origin + authorUrl
           }
         ];
+}
       break;
     case isVideo():
       presenceData.details = articleTitle;
       presenceData.state = authorName;
-      if (buttons)
-        presenceData.buttons = [
+      if (buttons) {
+presenceData.buttons = [
           {
             label: "View Video",
             url: document.location.href
@@ -148,6 +150,7 @@ presence.on("UpdateData", async () => {
             url: document.location.origin + authorUrl
           }
         ];
+}
       contentStateKey = (<HTMLVideoElement>document.querySelector("video"))
         ?.paused
         ? "pause"
@@ -160,9 +163,9 @@ presence.on("UpdateData", async () => {
       endTimestamp = presence.getTimestampsfromMedia(
         document.querySelector("video")
       )[1];
-      if (contentStateKey === "play" && endTimestamp > 0) {
+      if (contentStateKey === "play" && endTimestamp > 0) 
         presenceData.endTimestamp = endTimestamp;
-      } else {
+       else {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
@@ -171,8 +174,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = podcastTitle;
       presenceData.state = authorName;
 
-      if (buttons)
-        presenceData.buttons = [
+      if (buttons) {
+presenceData.buttons = [
           {
             label: "View Podcast",
             url: document.location.href
@@ -182,6 +185,7 @@ presence.on("UpdateData", async () => {
             url: document.location.origin + authorUrl
           }
         ];
+}
       contentStateKey = (<HTMLAudioElement>document.getElementById("audio"))
         .paused
         ? "pause"
@@ -194,9 +198,9 @@ presence.on("UpdateData", async () => {
       endTimestamp = presence.getTimestampsfromMedia(
         document.querySelector("#audio")
       )[1];
-      if (contentStateKey === "play" && endTimestamp > 0) {
+      if (contentStateKey === "play" && endTimestamp > 0) 
         presenceData.endTimestamp = endTimestamp;
-      } else {
+       else {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
@@ -205,11 +209,11 @@ presence.on("UpdateData", async () => {
       feedTop = document.querySelector(
         "#main-content > header > nav > a.crayons-tabs__item.crayons-tabs__item--current"
       ).textContent;
-      presenceData.details = feedTop + " Feed";
+      presenceData.details = `${feedTop} Feed`;
       break;
     case pathIncludes("/t/"):
       feedTag = document.querySelector("h1").textContent;
-      presenceData.details = feedTag + " Articles";
+      presenceData.details = `${feedTag} Articles`;
       break;
     case pathIncludes("/tags"):
       presenceData.details = "Tags";
@@ -242,21 +246,22 @@ presence.on("UpdateData", async () => {
     case pathIncludes("/series"):
       authorName = document.querySelector("h1").textContent;
       presenceData.details = authorName;
-      if (buttons)
-        presenceData.buttons = [
+      if (buttons) {
+presenceData.buttons = [
           {
             label: "View Series",
             url: document.location.href
           }
         ];
+}
       break;
     case pathIncludes("/search"):
       searchTerm = (<HTMLInputElement>(
         document.querySelector(".crayons-textfield")
       )).value;
       searchLength = document.querySelector("#substories").children.length;
-      presenceData.details = "Search: " + searchTerm;
-      presenceData.state = searchLength + " Results";
+      presenceData.details = `Search: ${searchTerm}`;
+      presenceData.state = `${searchLength} Results`;
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching...";
       break;

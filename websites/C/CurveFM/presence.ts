@@ -6,8 +6,8 @@ async function newStats(): Promise<void> {
     .fetch("https://cp.curvefm.com/api/nowplaying/1")
     .then((res) => res.json());
   ssong = data.now_playing.song.text;
-  sdj = data.live.is_live ? "DJ " + data.live.streamer_name : "AutoDJ";
-  slisteners = data.listeners.unique + " Listeners";
+  sdj = data.live.is_live ? `DJ ${data.live.streamer_name}` : "AutoDJ";
+  slisteners = `${data.listeners.unique} Listeners`;
 }
 
 setInterval(newStats, 5000);

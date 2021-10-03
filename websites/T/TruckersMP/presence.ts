@@ -13,33 +13,33 @@ presence.on("UpdateData", async () => {
   if (document.location.hostname == "truckersmp.com") {
     presenceData.details = "Viewing the home page";
     presenceData.smallImageKey = "reading";
-    if (document.location.pathname.includes("/team")) {
+    if (document.location.pathname.includes("/team")) 
       presenceData.details = "Viewing the staff team";
-    } else if (document.location.pathname.includes("/status")) {
+     else if (document.location.pathname.includes("/status")) 
       presenceData.details = "Viewing the server status";
-    } else if (document.location.pathname == "/knowledge-base") {
+     else if (document.location.pathname == "/knowledge-base") 
       presenceData.details = "Viewing the knowledge base";
-    } else if (document.location.pathname.includes("/article/")) {
+     else if (document.location.pathname.includes("/article/")) {
       presenceData.details = "Viewing a knowledge base article";
       presenceData.state = document.querySelector("h1").innerHTML;
       presenceData.buttons = [{ label: "Read Article", url: document.URL }];
-    } else if (document.location.pathname.includes("/support")) {
+    } else if (document.location.pathname.includes("/support")) 
       presenceData.details = "Viewing the Support Center";
-    } else if (document.location.pathname.includes("/rules")) {
+     else if (document.location.pathname.includes("/rules")) 
       presenceData.details = "Viewing the rules";
-    } else if (document.location.pathname.includes("/download")) {
+     else if (document.location.pathname.includes("/download")) 
       presenceData.details = "Viewing the downloads page";
-    } else if (document.location.pathname.includes("/user")) {
+     else if (document.location.pathname.includes("/user")) {
       presenceData.details = "Viewing a user profile";
       presenceData.state = document.querySelector(
         "div.col-md-12 > h1 > span"
       ).innerHTML;
       presenceData.buttons = [{ label: "View Profile", url: document.URL }];
-    } else if (document.location.pathname == "/profile/settings") {
+    } else if (document.location.pathname == "/profile/settings") 
       presenceData.details = "Viewing profile settings";
-    } else if (document.location.pathname == "/vtc") {
+     else if (document.location.pathname == "/vtc") 
       presenceData.details = "Viewing the VTC center";
-    } else if (document.location.pathname == "/vtc/search") {
+     else if (document.location.pathname == "/vtc/search") {
       delete presenceData.smallImageKey;
       presenceData.smallImageKey = "search";
       presenceData.details = "Searching for a VTC";
@@ -61,19 +61,19 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/blog/")) {
       const blogTitle = document.querySelector("div.container-fluid > h1");
       presenceData.details = "Reading the blog:";
-      presenceData.state = blogTitle.innerHTML.substring(0, 125) + "...";
+      presenceData.state = `${blogTitle.innerHTML.substring(0, 125)}...`;
       presenceData.buttons = [
         { label: "Read News Article", url: document.URL }
       ];
-    } else if (document.location.pathname == "/events") {
+    } else if (document.location.pathname == "/events") 
       presenceData.details = "Browsing the events center";
-    } else if (document.location.pathname == "/events/manage") {
+     else if (document.location.pathname == "/events/manage") {
       delete presenceData.smallImageKey;
       presenceData.smallImageKey = "editing";
       presenceData.details = "Managing their events";
-    } else if (document.location.pathname == "/events/manage/past") {
+    } else if (document.location.pathname == "/events/manage/past") 
       presenceData.details = "Viewing their past events";
-    } else if (document.location.pathname.includes("/events/create")) {
+     else if (document.location.pathname.includes("/events/create")) {
       delete presenceData.smallImageKey;
       presenceData.smallImageKey = "editing";
       presenceData.details = "Creating an event";
@@ -119,17 +119,17 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname == "stats.truckersmp.com") {
     presenceData.smallImageKey = "reading";
-    if (document.location.pathname == "/") {
+    if (document.location.pathname == "/") 
       presenceData.details = "Viewing the statistics";
-    } else if (document.location.pathname.includes("/api")) {
+     else if (document.location.pathname.includes("/api")) {
       presenceData.details = "Viewing the";
       presenceData.state = "API Documentation";
     } else if (document.location.pathname.includes("/live")) {
       presenceData.details = "Viewing the";
       presenceData.state = "Live statistics";
-    } else if (document.location.pathname.includes("/history")) {
+    } else if (document.location.pathname.includes("/history")) 
       presenceData.details = "Viewing the history";
-    } else if (document.location.pathname.includes("/settings")) {
+     else if (document.location.pathname.includes("/settings")) {
       presenceData.details = "Viewing their settings";
       delete presenceData.smallImageKey;
       presenceData.smallImageKey = "editing";

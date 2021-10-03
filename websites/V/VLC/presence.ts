@@ -58,9 +58,9 @@ function getTag(
   collection: HTMLCollectionOf<Element>,
   tagName: string
 ): Element {
-  for (const tag of collection) {
+  for (const tag of collection) 
     if (tag.getAttribute("name") === tagName) return tag;
-  }
+  
 }
 
 presence.on("UpdateData", async () => {
@@ -80,17 +80,17 @@ presence.on("UpdateData", async () => {
 
     if (media.state == "playing" || media.state == "paused") {
       if (isSong) {
-        if (media.title && media.album && media.title == media.album) {
+        if (media.title && media.album && media.title == media.album) 
           media.album = null;
-        }
+        
         data.details =
           (media.title
             ? media.title
             : media.track_number
-            ? "Track N°" + media.track_number
-            : "A song") + (media.album ? " on " + media.album : "");
+            ? `Track N°${media.track_number}`
+            : "A song") + (media.album ? ` on ${media.album}` : "");
         media.artist
-          ? (data.state = "by " + media.artist)
+          ? (data.state = `by ${media.artist}`)
           : media.filename
           ? (data.state = media.filename)
           : delete data.state;
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
           : media.filename
           ? (data.details = media.filename)
           : (data.details = "some TV");
-        data.state = "S" + media.seasonNumber + "E" + media.episodeNumber;
+        data.state = `S${media.seasonNumber}E${media.episodeNumber}`;
       } else {
         media.showName
           ? (data.details = media.showName)
@@ -112,9 +112,9 @@ presence.on("UpdateData", async () => {
           ? (data.details = media.filename)
           : (data.details = "something");
         media.seasonNumber
-          ? (data.state = "season " + media.seasonNumber)
+          ? (data.state = `season ${media.seasonNumber}`)
           : media.episodeNumber
-          ? (data.state = "episode " + media.episodeNumber)
+          ? (data.state = `episode ${media.episodeNumber}`)
           : delete data.state;
       }
 
@@ -148,9 +148,9 @@ presence.on("UpdateData", async () => {
       data.startTimestamp = timestamps[0];
       data.endTimestamp = timestamps[1];
 
-      if (media.state == "playing") {
+      if (media.state == "playing") 
         presence.setActivity(data, true);
-      } else {
+       else {
         delete data.startTimestamp;
         delete data.endTimestamp;
         presence.setActivity(data, false);
@@ -323,11 +323,11 @@ const getStatus = setLoop(function () {
             clearInterval(getStatus);
             media.state = "stopped";
             alert(
-              "Something went wrong with the request, please contact ririxi#2721 at https://discord.premid.app with the following infos (RES: " +
-                req.status +
-                " / S: " +
-                req.readyState +
-                ")"
+              `Something went wrong with the request, please contact ririxi#2721 at https://discord.premid.app with the following infos (RES: ${ 
+                req.status 
+                } / S: ${ 
+                req.readyState 
+                })`
             );
           }
         }
@@ -340,12 +340,12 @@ const getStatus = setLoop(function () {
 
     req.open(
       "GET",
-      document.location.protocol +
-        "//" +
-        document.location.hostname +
-        ":" +
-        (document.location.port ? document.location.port : "") +
-        "/requests/status.xml",
+      `${document.location.protocol 
+        }//${ 
+        document.location.hostname 
+        }:${ 
+        document.location.port ? document.location.port : "" 
+        }/requests/status.xml`,
       true
     );
     req.send();

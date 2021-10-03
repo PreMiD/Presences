@@ -15,8 +15,8 @@ presence.on("UpdateData", async () => {
   if (player) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details =
-      "Listening to " + title.textContent + " by " + artist.textContent;
-    presenceData.state = "Presented by " + dj.innerText;
+      `Listening to ${title.textContent} by ${artist.textContent}`;
+    presenceData.state = `Presented by ${dj.innerText}`;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/") {
     presenceData.startTimestamp = browsingStamp;

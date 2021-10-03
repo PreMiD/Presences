@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "628786533587091490"
-});
-const { pathname } = window.location,
+}),
+ { pathname } = window.location,
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
     searching: "presence.activity.searching",
@@ -17,9 +17,9 @@ presence.on("UpdateData", async () => {
     nav = document.querySelector("#secaoNav").lastChild.textContent;
   if (pathname.startsWith("/historia")) {
     if (pathname.startsWith(`/historia/gerenciar`)) {
-      if (pathname === `/historia/gerenciar`) {
+      if (pathname === `/historia/gerenciar`) 
         presenceData.details = "Vendo Minhas Histórias";
-      } else if (nav === `Gerenciar Capítulos`) {
+       else if (nav === `Gerenciar Capítulos`) {
         presenceData.details = `Gerenciando capítulos`;
         presenceData.state = document
           .querySelector(".tituloPrincipal")
@@ -30,9 +30,9 @@ presence.on("UpdateData", async () => {
       pathname.startsWith(`/historia/adicionar`) ||
       pathname.startsWith(`/historia/termos`)
     ) {
-      if (nav === `Adicionar História` || nav === `Termos`) {
+      if (nav === `Adicionar História` || nav === `Termos`) 
         presenceData.details = `Criando uma nova história`;
-      } else if (nav === `Adicionar Capítulo`) {
+       else if (nav === `Adicionar Capítulo`) {
         presenceData.details = `Escrevendo um novo capítulo`;
         presenceData.state = document
           .querySelector(".tituloPrincipal")
@@ -69,9 +69,9 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/perfil")) {
     presenceData.details = "Vendo um perfil";
     presenceData.state = nav;
-  } else if (pathname.startsWith("/home")) {
+  } else if (pathname.startsWith("/home")) 
     presenceData.state = "Home";
-  } else if (pathname.startsWith("/aulas")) {
+   else if (pathname.startsWith("/aulas")) {
     presenceData.details = "Vendo aulas";
     presenceData.state = nav != "Aulas" ? nav : undefined;
   } else if (pathname.startsWith("/generos")) {
@@ -83,16 +83,16 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/tags")) {
     presenceData.details = "Navegando por tags";
     presenceData.state = nav != "Tags populares" ? nav : undefined;
-  } else if (pathname.startsWith("/historico")) {
+  } else if (pathname.startsWith("/historico")) 
     presenceData.details = `Vendo o histórico`;
-  } else if (pathname.startsWith("/grupos")) {
+   else if (pathname.startsWith("/grupos")) 
     presenceData.state = `Vendo grupos`;
-  } else if (pathname.startsWith(`/busca`)) {
+   else if (pathname.startsWith(`/busca`)) {
     presenceData.details = `${(await strings).searching}...`;
     presenceData.smallImageKey = `search`;
     presenceData.smallImageText = (await strings).searching;
-  } else {
+  } else 
     presenceData.state = nav;
-  }
+  
   presence.setActivity(presenceData, true);
 });

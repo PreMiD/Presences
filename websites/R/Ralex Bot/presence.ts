@@ -1,26 +1,26 @@
 const presence = new Presence({
   clientId: "715289275977039987"
-});
+}),
 
-const browsedTimestamp = Math.floor(Date.now() / 1000);
+ browsedTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "ralexlogo"
   };
   if (document.location.hostname == "bot.ralex.xyz") {
     presenceData.startTimestamp = browsedTimestamp;
-    if (document.location.pathname == "/") {
+    if (document.location.pathname == "/") 
       presenceData.details = "Ana sayfayı inceliyor.";
-    } else if (document.location.pathname.includes("/komutlar")) {
+     else if (document.location.pathname.includes("/komutlar")) 
       presenceData.details = "Komutlara bakıyor.";
-    } else if (document.location.pathname.includes("/panel")) {
+     else if (document.location.pathname.includes("/panel")) 
       presenceData.details = "Panele bakıyor.";
-    } else if (
+     else if (
       document.location.pathname == "/yonetim" ||
       document.location.pathname == "/yonetim/"
-    ) {
+    ) 
       presenceData.details = "Sunucularını inceliyor.";
-    } else if (
+     else if (
       document.location.pathname.includes("/yonetim/") &&
       document.location.pathname.includes("ozel-komutlar")
     ) {
@@ -96,11 +96,11 @@ presence.on("UpdateData", async () => {
         "basvuru",
         "logging"
       ].includes(document.location.pathname)
-    ) {
+    ) 
       presenceData.details = "Bir sunucusunun ayarlarına bakıyor";
-    } else if (document.location.pathname.includes("/404")) {
+     else if (document.location.pathname.includes("/404")) 
       presenceData.details = "Bilinmeyen bir yerde geziniyor";
-    } else {
+     else {
       presenceData.details = "Gezdiğin sayfayı";
       presenceData.state = "Ralex evreninde bulamadım ツ";
     }
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

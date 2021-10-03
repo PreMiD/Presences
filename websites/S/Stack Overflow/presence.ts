@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "610123745033584651"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var title: any,
+ title: any,
   pageNumber: any,
   jobPageNumber: any,
   usersortagsPageNumber: any,
@@ -40,13 +40,13 @@ presence.on("UpdateData", async () => {
   if (
     document.location.pathname.includes("/users") ||
     document.location.pathname.includes("/tags")
-  ) {
+  ) 
     lastPage = allPages[allPages.length - 2].innerText;
-  } else if (document.location.pathname.includes("/jobs")) {
+   else if (document.location.pathname.includes("/jobs")) 
     lastPage = jobLastPage[jobLastPage.length - 2].innerText;
-  } else if (document.location.pathname == "/questions") {
+   else if (document.location.pathname == "/questions") 
     lastPage = questionsLastPage[questionsLastPage.length - 2].innerText;
-  }
+  
 
   if (title && document.location.pathname.includes("/questions/")) {
     presenceData.details = "Reading a question.";
@@ -65,11 +65,11 @@ presence.on("UpdateData", async () => {
       document.location.pathname == "/questions" &&
       pageNumber.innerText.length > 0
     ) {
-      var lastPageNumber: number = +lastPage;
-      var lastquestionsPageNumber: number = +pageNumber.innerText;
+      const lastPageNumber: number = +lastPage,
+       lastquestionsPageNumber: number = +pageNumber.innerText;
 
       if (lastquestionsPageNumber > lastPageNumber) {
-        console.log(lastPageNumber + " --- " + lastquestionsPageNumber);
+        console.log(`${lastPageNumber} --- ${lastquestionsPageNumber}`);
 
         lastPage = pageNumber.innerText;
       }
@@ -77,15 +77,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing all the questions.";
 
       presenceData.state =
-        "Current page: " + pageNumber.innerText + "/" + lastPage;
+        `Current page: ${pageNumber.innerText}/${lastPage}`;
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname == "/jobs") {
-      const lastPageNumber: number = +lastPage;
-      const lastjobPageNumber: number = +jobPageNumber.innerText;
+      const lastPageNumber: number = +lastPage,
+       lastjobPageNumber: number = +jobPageNumber.innerText;
 
       if (lastjobPageNumber > lastPageNumber) {
-        console.log(lastPageNumber + " --- " + lastjobPageNumber);
+        console.log(`${lastPageNumber} --- ${lastjobPageNumber}`);
 
         lastPage = jobPageNumber.innerText;
       }
@@ -93,15 +93,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing jobs.";
 
       presenceData.state =
-        "Current page: " + jobPageNumber.innerText + "/" + lastPage;
+        `Current page: ${jobPageNumber.innerText}/${lastPage}`;
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname == "/users") {
-      const lastPageNumber: number = +lastPage;
-      var lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
+      const lastPageNumber: number = +lastPage,
+       lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
 
       if (lastusersortagsPageNumber > lastPageNumber) {
-        console.log(lastPageNumber + " --- " + lastusersortagsPageNumber);
+        console.log(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
 
         lastPage = usersortagsPageNumber.innerText;
       }
@@ -109,16 +109,16 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing users.";
 
       presenceData.state =
-        "Current page: " + usersortagsPageNumber.innerText + "/" + lastPage;
+        `Current page: ${usersortagsPageNumber.innerText}/${lastPage}`;
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname == "/tags") {
-      const lastPageNumber: number = +lastPage;
-      const lastusersortagsPageNumber: number =
+      const lastPageNumber: number = +lastPage,
+       lastusersortagsPageNumber: number =
         +usersortagsPageNumber.innerText;
 
       if (lastusersortagsPageNumber > lastPageNumber) {
-        console.log(lastPageNumber + " --- " + lastusersortagsPageNumber);
+        console.log(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
 
         lastPage = usersortagsPageNumber.innerText;
       }
@@ -126,7 +126,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing tags.";
 
       presenceData.state =
-        "Current page: " + usersortagsPageNumber.innerText + "/" + lastPage;
+        `Current page: ${usersortagsPageNumber.innerText}/${lastPage}`;
 
       presenceData.startTimestamp = browsingStamp;
     }

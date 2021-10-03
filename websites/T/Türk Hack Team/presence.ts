@@ -1,28 +1,28 @@
-const presence = new Presence({ clientId: "653578846448123906" });
-const pages = {
+const presence = new Presence({ clientId: "653578846448123906" }),
+ pages = {
   "/usercp.php": "Kullanıcı Profili",
   "/ihbar/": "İhbar Portalı"
 };
 
 presence.on("UpdateData", async () => {
-  const page = document.location.pathname;
-  const kategori = document.querySelector(
+  const page = document.location.pathname,
+   kategori = document.querySelector(
     "#inlinemodform > table.tborder.respborder > tbody > tr > td.tcat"
-  );
-  const CevapButon = document.querySelector(
+  ),
+   CevapButon = document.querySelector(
     "body > div:nth-child(5) > div.showth-top-bor > div > div:nth-child(1) > a"
-  );
-  const login = document.querySelector(
+  ),
+   login = document.querySelector(
     "body > div:nth-child(3) > table.tborder > tbody > tr:nth-child(2) > td > div > div > form > fieldset > legend"
-  );
-  const register = document.querySelector(
+  ),
+   register = document.querySelector(
     "body > div:nth-child(3) > form > table > tbody > tr:nth-child(2) > td > div.panel > div > fieldset > legend"
-  );
-  const report = document.querySelector(
+  ),
+   report = document.querySelector(
     "body > div:nth-child(5) > form > table > tbody > tr:nth-child(1) > td"
-  );
+  ),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "tht-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
     report.textContent.toLowerCase().includes("mesaji moderatöre bi̇ldi̇r")
   ) {
     presenceData.details = "Bir Mesajı Moderatöre Bildiriyor";
-    presenceData.state = "Forum: " + report.textContent.split(":")[1];
+    presenceData.state = `Forum: ${report.textContent.split(":")[1]}`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     presenceData.details = "Forumda geziniyor:";
     presenceData.state = pages[page] || pages[page.slice(0, -1)];
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

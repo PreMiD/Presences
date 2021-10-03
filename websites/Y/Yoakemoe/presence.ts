@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Đang đăng ký...";
     else if (curPath.startsWith("/genres.php")) {
       presenceData.state =
-        "Thể loại: " + document.querySelector(".genreh2").innerHTML;
+        `Thể loại: ${document.querySelector(".genreh2").innerHTML}`;
       presenceData.details = "Đang chọn phim...";
     } else if (curPath.startsWith("/history.php"))
       presenceData.details = "Đang xem lịch sử...";
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 
     presence.setTrayTitle(video.paused ? "" : titleArr[0]);
 
-    presenceData.details = "Đang xem: " + titleArr[0];
+    presenceData.details = `Đang xem: ${titleArr[0]}`;
     presenceData.state = titleArr[1];
 
     if (video.paused) {

@@ -118,9 +118,9 @@ presence.on("UpdateData", () => {
             `.grammar-point-study[style*="display: block"]`
           );
 
-          if (!activeGrammarPoint) {
+          if (!activeGrammarPoint) 
             activeGrammarPoint = document.querySelector(".grammar-point-study");
-          }
+          
 
           const grammarPointElement: HTMLSpanElement =
               activeGrammarPoint.querySelector(
@@ -182,9 +182,9 @@ presence.on("UpdateData", () => {
 
           details = "Viewing Dashboard";
           state = `${reviewsCount} reviews`;
-        } else {
+        } else 
           details = "Browsing Pages";
-        }
+        
 
         break;
       }

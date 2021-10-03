@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Головна";
   } else if (
     document.location.pathname ===
-    "/" + encodeURIComponent("новини.html")
+    `/${encodeURIComponent("новини.html")}`
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Загальне";
   } else if (
     document.location.pathname ===
-    "/" + encodeURIComponent("відео-гуртом.html")
+    `/${encodeURIComponent("відео-гуртом.html")}`
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Відео Гуртом";
   } else if (
     document.location.pathname ===
-    "/" + encodeURIComponent("фільми-українською.html")
+    `/${encodeURIComponent("фільми-українською.html")}`
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Фільми";
   } else if (
     document.location.pathname ===
-    "/" + encodeURIComponent("українська-музика.html")
+    `/${encodeURIComponent("українська-музика.html")}`
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Музика";
   } else if (
     document.location.pathname ===
-    "/" + encodeURIComponent("література-українською.html")
+    `/${encodeURIComponent("література-українською.html")}`
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Література";
   } else if (
     document.location.pathname ===
-    "/" + encodeURIComponent("програми-українською.html")
+    `/${encodeURIComponent("програми-українською.html")}`
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Програми";
   } else if (
     document.location.pathname ===
-    "/" + encodeURIComponent("ігри-українською.html")
+    `/${encodeURIComponent("ігри-українською.html")}`
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Ігри";
   } else if (
     document.location.pathname ===
-    "/" + encodeURIComponent("архів.html")
+    `/${encodeURIComponent("архів.html")}`
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
@@ -127,9 +127,9 @@ presence.on("UpdateData", async () => {
       "body > div.maxwidth > table > tbody > tr > td.bodyline > form#form > table.forumline:nth-child(18) > tbody > tr:nth-child(2) > td.row4 > table:nth-child(3) > tbody > tr > td.row4:nth-child(3) > div > fieldset.fieldset > div > input.post"
     );
     presenceData.startTimestamp = browsingStamp;
-    if (search.value == "" || !showSearchQuery) {
+    if (search.value == "" || !showSearchQuery) 
       presenceData.details = "Щось шукаю";
-    } else {
+     else {
       presenceData.details = "Шукаю:";
       presenceData.state = search.value;
     }
@@ -150,9 +150,9 @@ presence.on("UpdateData", async () => {
       if (showUseramePM) {
         presenceData.details = "Читаю ПП від:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Читаю ПП";
-      }
+      
     } else if (document.location.search.includes("?folder=sentbox&mode=read")) {
       title = document.querySelector(
         "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
@@ -160,9 +160,9 @@ presence.on("UpdateData", async () => {
       if (showUseramePM) {
         presenceData.details = "Читаю ПП для:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Читаю ПП";
-      }
+      
     } else if (document.location.search.includes("?folder=outbox&mode=read")) {
       title = document.querySelector(
         "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
@@ -170,19 +170,19 @@ presence.on("UpdateData", async () => {
       if (showUseramePM) {
         presenceData.details = "Читаю ПП для:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Читаю ПП";
-      }
+      
     } else if (document.location.search.includes("?folder=savebox&mode=read")) {
       title = document.querySelector(
         "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
       );
       if (showUseramePM) {
         presenceData.details = "Читаю збережене ПП";
-        presenceData.state = "від:" + title.innerText;
-      } else {
+        presenceData.state = `від:${title.innerText}`;
+      } else 
         presenceData.details = "Читаю ПП";
-      }
+      
     } else if (document.location.search.includes("?folder=inbox")) {
       presenceData.details = "Переглядаю";
       presenceData.state = "вхідні ПП";
@@ -202,9 +202,9 @@ presence.on("UpdateData", async () => {
       if (showUseramePM) {
         presenceData.details = "Відповідаю на ПП від:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Відповідаю на ПП";
-      }
+      
     } else if (document.location.search.includes("?mode=quote")) {
       title = document.querySelector(
         "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed > input.post"
@@ -212,12 +212,12 @@ presence.on("UpdateData", async () => {
       if (showUseramePM) {
         presenceData.details = "Цитую ПП від:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Цитую ПП";
-      }
-    } else if (document.location.search.includes("?mode=post")) {
+      
+    } else if (document.location.search.includes("?mode=post")) 
       presenceData.details = "Пишу нове ПП";
-    }
+    
   } else if (document.location.pathname.includes("/watched_topics.php")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю";
@@ -243,9 +243,9 @@ presence.on("UpdateData", async () => {
     if (document.location.search.includes("?mode=newtopic")) {
       presenceData.details = "Створюю нову";
       presenceData.state = "тему";
-    } else if (document.location.search.includes("?mode=reply")) {
+    } else if (document.location.search.includes("?mode=reply")) 
       presenceData.details = "Відповідаю на тему";
-    }
+    
   } else if (document.location.pathname.includes("/helptoseed.php")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю роздачі";
@@ -255,9 +255,9 @@ presence.on("UpdateData", async () => {
       "body > div.maxwidth > table > tbody > tr > td.bodyline > table.forumline > tbody > tr > td.row1 > div#___gcse_0 > div.gsc-control-cse.gsc-control-cse-uk > div.gsc-control-wrapper-cse > form.gsc-search-box.gsc-search-box-tools > table.gsc-search-box > tbody > tr > td.gsc-input > div#gsc-iw-id1.gsc-input-box > table#gs_id50.gstl_50.gsc-input > tbody > tr > td#gs_tti50.gsib_a > input#gsc-i-id1.gsc-input"
     );
     presenceData.startTimestamp = browsingStamp;
-    if (search.value == "" || !showSearchQuery) {
+    if (search.value == "" || !showSearchQuery) 
       presenceData.details = "Щось шукаю";
-    } else {
+     else {
       presenceData.details = "Шукаю:";
       presenceData.state = search.value;
     }
@@ -278,7 +278,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

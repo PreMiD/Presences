@@ -64,11 +64,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "billing.sparkedhost.com") {
     if (document.location.pathname.includes("knowledgebase")) {
       const article = document.title.split(" - ");
-      if (article[0] == "Knowledgebase") {
+      if (article[0] == "Knowledgebase") 
         presenceData.state = "Browsing Articles";
-      } else {
+       else 
         presenceData.state = article[0];
-      }
+      
       presenceData.details = "Knowledgebase";
     } else if (document.location.pathname.includes("clientarea")) {
       presenceData.details = "Client Area";
@@ -98,43 +98,43 @@ presence.on("UpdateData", async () => {
       presenceData.state = pageAdmin[1];
     } else if (document.location.pathname.includes("files")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "File Manager";
     } else if (document.location.pathname.includes("databases")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Databases";
     } else if (document.location.pathname.includes("schedules")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Schedules";
     } else if (document.location.pathname.includes("users")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Subusers";
     } else if (document.location.pathname.includes("backups")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Backups";
     } else if (document.location.pathname.includes("subdomains")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Subdomains";
     } else if (document.location.pathname.includes("network")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Network";
     } else if (document.location.pathname.includes("startup")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Startup";
     } else if (document.location.pathname.includes("settings")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Settings";
     } else if (document.location.pathname.includes("server")) {
       const serverName = document.title.split(" | ");
-      presenceData.details = "Managing " + serverName[0];
+      presenceData.details = `Managing ${serverName[0]}`;
       presenceData.state = "Watching Console";
     } else if (document.location.pathname.includes("account")) {
       presenceData.details = "Account Settings";

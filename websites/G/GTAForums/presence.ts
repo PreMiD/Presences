@@ -69,10 +69,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "search";
     presenceData.state =
-      "Looking" +
+      `Looking${ 
       document
         .getElementsByClassName("ipsType_reset ipsType_large")[0]
-        .textContent.split("results")[1];
+        .textContent.split("results")[1]}`;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   } else {
     delete presenceData.details;

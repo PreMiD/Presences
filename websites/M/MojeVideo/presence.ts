@@ -9,9 +9,9 @@ presence.on("UpdateData", async () => {
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(data);
-  }
+  
 });
 
 function RefreshData() {
@@ -40,16 +40,16 @@ function RefreshData() {
     actualUrl = actualUrl.replace("mesiac/", "");
     actualUrl = actualUrl.replace("celkovo/", "");
 
-    if (actualUrl == "") {
+    if (actualUrl == "") 
       data.details = "Hlavná stránka";
-    } else if (!actualTitle.startsWith("Videá - mojeVideo.sk")) {
+     else if (!actualTitle.startsWith("Videá - mojeVideo.sk")) {
       if (actualTitle.includes(".strana")) {
         const titlePieces = actualTitle.split(" - ");
         data.details = titlePieces[0];
         data.state = titlePieces[1];
-      } else {
+      } else 
         data.details = actualTitle;
-      }
+      
     } else {
       let extraPage = "Hlavná stránka",
         extraPageNumber = 0;
@@ -66,7 +66,7 @@ function RefreshData() {
       if (actualUrl.includes("prihlasenie")) extraPage = "Prihlásenie";
       else if (actualUrl.includes("registracia")) extraPage = "Registrácia";
       data.details = extraPage;
-      if (extraPageNumber != 0) data.state = extraPageNumber + ".strana";
+      if (extraPageNumber != 0) data.state = `${extraPageNumber}.strana`;
     }
   }
   data.largeImageKey = "mojevideo";

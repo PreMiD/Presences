@@ -54,13 +54,13 @@ presence.on("UpdateData", () => {
         presenceData.endTimestamp = Math.floor(
           now + videoData.duration - videoData.time
         );
-      } else {
+      } else 
         presenceData.details = "Paused";
-      }
+      
     } else {
-      if (missing) {
+      if (missing) 
         presenceData.details = "Awaiting";
-      } else {
+       else {
         presenceData.details = "Watching";
         presenceData.startTimestamp = browsingStamp;
       }
@@ -70,12 +70,12 @@ presence.on("UpdateData", () => {
     presenceData.state = "";
     if (ep) {
       presenceData.state += ep;
-      if (maxEp) {
+      if (maxEp) 
         presenceData.state += `/${maxEp}`;
-      }
-      if (lang) {
+      
+      if (lang) 
         presenceData.state += ` (${lang})`;
-      }
+      
     }
     /*
     // For the future to make watch together requests
@@ -89,24 +89,24 @@ presence.on("UpdateData", () => {
   } else if (path.startsWith("/info")) {
     const info = document.title.replace(/ - Proxer\.Me$/, "");
     presenceData.details = `Checking out ${info}`;
-  } else if (path.startsWith("/anime") || path.startsWith("/season")) {
+  } else if (path.startsWith("/anime") || path.startsWith("/season")) 
     presenceData.details = "Checking out Anime";
-  } else if (path.startsWith("/chat")) {
+   else if (path.startsWith("/chat")) 
     presenceData.details = "Chatting";
-  } else if (path.startsWith("/forum")) {
+   else if (path.startsWith("/forum")) 
     presenceData.details = "Checking the forum";
-  } else if (path.startsWith("/gallery")) {
+   else if (path.startsWith("/gallery")) 
     presenceData.details = "Checking the gallery";
-  } else if (path.startsWith("/news")) {
+   else if (path.startsWith("/news")) 
     presenceData.details = "Checking the news";
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });
 
 function getByXpath<T>(xpath: string, extractor?: (e: Node) => T): T | Node {

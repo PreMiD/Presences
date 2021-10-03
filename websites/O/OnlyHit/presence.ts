@@ -32,19 +32,19 @@ presence.on("UpdateData", async () => {
   //! Merch website
   if (document.location.hostname == "onlyhit.merchforall.com") {
     //* Show timestamp if the setting is enabled and set largeImageKey
-    if (showElapsed) {
+    if (showElapsed) 
       presenceData.startTimestamp = browsingStamp;
-    } else {
+     else 
       delete presenceData.startTimestamp;
-    }
+    
     presenceData.largeImageKey = "logo_onlyhit";
     presenceData.smallImageKey = "reading";
 
     //* If they have site information enabled
     if (info) {
-      if (document.location.hash.includes("/cart")) {
+      if (document.location.hash.includes("/cart")) 
         presenceData.details = "Store - Viewing cart";
-      } else if (document.location.pathname == "/") {
+       else if (document.location.pathname == "/") {
         if (document.querySelector(".popup-container.active") !== null) {
           presenceData.details = "Store - Viewing product:";
           presenceData.state = document.querySelector(
@@ -101,11 +101,11 @@ presence.on("UpdateData", async () => {
     }
 
     //* Show timestamp if the setting is enabled
-    if (showElapsed) {
+    if (showElapsed) 
       presenceData.startTimestamp = songTimestamp;
-    } else {
+     else 
       delete presenceData.startTimestamp;
-    }
+    
 
     //* If they have site information enabled
     if (info) {
@@ -115,11 +115,11 @@ presence.on("UpdateData", async () => {
         !document.location.pathname.includes("video-version")
       ) {
         //* Show timestamp if the setting is enabled
-        if (showElapsed) {
+        if (showElapsed) 
           presenceData.startTimestamp = browsingStamp;
-        } else {
+         else 
           delete presenceData.startTimestamp;
-        }
+        
 
         //* Get page title, and set smallImageText to track information
         const page = document.querySelector(".main_title").textContent.trim();
@@ -180,7 +180,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

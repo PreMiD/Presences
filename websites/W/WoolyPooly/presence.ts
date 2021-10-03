@@ -13,8 +13,8 @@ presence.on("UpdateData", async () => {
   switch (window.location.pathname) {
     case "/":
       presenceData.state =
-        document.querySelector("div.contentContainer > span")
-          .childElementCount + " Coins";
+        `${document.querySelector("div.contentContainer > span")
+          .childElementCount} Coins`;
       presenceData.details = "Charts Overview";
       break;
 
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
           ).textContent;
 
           presenceData.state =
-            "24h Revenue: " + wallet24Revenue + " " + currencyTitle;
+            `24h Revenue: ${wallet24Revenue} ${currencyTitle}`;
           currencyTitle += " Wallet";
         } else {
           currencyEffort = document.querySelector(
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
           ).textContent;
 
           presenceData.state =
-            "Effort (" + effortType + "): " + currencyEffort + "%";
+            `Effort (${effortType}): ${currencyEffort}%`;
         }
         presenceData.details = currencyTitle;
         presenceData.smallImageKey = window.location.pathname.split("/")[2];
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Charts Overview";
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

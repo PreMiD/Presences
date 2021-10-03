@@ -22,14 +22,14 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 // Const thing
-const browsingStamp = Math.floor(Date.now() / 1000);
-const path = document.location;
+const browsingStamp = Math.floor(Date.now() / 1000),
+ path = document.location;
 
 presence.on(
   "iFrameData",
@@ -62,22 +62,22 @@ presence.on("UpdateData", async () => {
         const info = title.split("ตอนที่");
         episode = info.pop();
 
-        if (episode.includes("ซับไทย")) {
+        if (episode.includes("ซับไทย")) 
           episode = episode.replace("ซับไทย", "").trim();
-        } else if (episode.includes("พากย์ไทย")) {
+         else if (episode.includes("พากย์ไทย")) 
           episode = episode.replace("พากย์ไทย", "").trim();
-        }
+        
 
-        episode = "ตอนที่ " + episode;
+        episode = `ตอนที่ ${episode}`;
         presenceData.state = info[0];
         presenceData.details = episode;
       } else {
         let info;
-        if (title.includes("ซับไทย")) {
+        if (title.includes("ซับไทย")) 
           info = title.replace("ซับไทย", "").trim();
-        } else if (title.includes("พากย์ไทย")) {
+         else if (title.includes("พากย์ไทย")) 
           info = title.replace("พากย์ไทย", "").trim();
-        }
+        
         episode = "Movie";
         presenceData.state = info;
         presenceData.details = episode;
@@ -97,8 +97,8 @@ presence.on("UpdateData", async () => {
     } else {
       const ep = document.querySelector(
         "#section-opt > div > div > div > div > div.movie-heading.overflow-hidden > span"
-      );
-      const rate = document.querySelector("#home > p > span");
+      ),
+       rate = document.querySelector("#home > p > span");
       if (!rate || !ep) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = (await strings).browsing;
@@ -106,12 +106,12 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "เลือกตอน ";
         presenceData.state =
-          rate.textContent +
-          "⭐ -" +
+          `${rate.textContent 
+          }⭐ -${ 
           ep.textContent
             .replace("ตอนของ", " ")
             .replace('"', " ")
-            .replace('"', " ");
+            .replace('"', " ")}`;
       }
     }
   }
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

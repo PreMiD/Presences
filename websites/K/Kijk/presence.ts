@@ -15,15 +15,15 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "#__next > div > div > div.SearchModalstyle__SearchModalStyle-sc-1h6b5wy-0.knmuVj > div.SearchModalstyle__SearchModalHeaderStyle-sc-1h6b5wy-1.kNvWZE > div > div:nth-child(2) > div.SearchModalstyle__SearchModalInputWrapperStyle-sc-1h6b5wy-5.iwOFOK > input"
     );
-    if (!search) {
+    if (!search) 
       presenceData.details = "Bekijkt de homepagina";
-    } else if (search.value !== "") {
+     else if (search.value !== "") {
       presenceData.details = "Zoekt voor:";
       presenceData.state = search.value;
       presenceData.smallImageKey = "searching";
-    } else {
+    } else 
       presenceData.details = "Bekijkt de homepagina";
-    }
+    
   }
   if (page === "/programmas" || page === "/programmas/") {
     presenceData.details = "Ontdekt:";
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
           "div.info-box h1 .episode-label"
         ).textContent;
       (data.details = "Viewing an Episode"),
-        (data.state = showname + " - " + shownumber);
+        (data.state = `${showname} - ${shownumber}`);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     } else if (document.location.pathname.endsWith("/explore")) {

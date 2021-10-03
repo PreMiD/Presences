@@ -28,9 +28,9 @@ presence.on("UpdateData", async () => {
     path !== "/web/conversations/new"
   ) {
     // checking parameters
-    if (!showcon) {
+    if (!showcon) 
       presenceData.state = "Hidden (adjustable in Presence settings)";
-    } else {
+     else {
       const itl = document
         .getElementsByClassName("title-container")[0]
         .querySelector("h2 > span > span").textContent;
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -52,11 +52,11 @@ presence.on("UpdateData", async () => {
     strings = await getStrings();
   }
 
-  if (isHostDP) {
+  if (isHostDP) 
     data.largeImageKey = "disneyplus-logo";
-  } else if (isHostHS) {
+   else if (isHostHS) 
     data.largeImageKey = "disneyplus-hotstar-logo";
-  }
+  
 
   // Disney+ video
   if (isHostDP && location.pathname.includes("/video/")) {
@@ -92,11 +92,11 @@ presence.on("UpdateData", async () => {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = "In a GroupWatch";
       } else {
-        if (privacy)
-          data.state = subtitle
+        if (privacy) {
+data.state = subtitle
             ? strings.watchingSeries
             : strings.watchingMovie;
-        else {
+} else {
           data.details = title;
           data.state = subtitle || "Movie";
         }

@@ -30,14 +30,14 @@ presence.on("UpdateData", () => {
 
     presenceData.smallImageKey = "admin";
     presenceData.smallImageText = usernameString;
-  } else {
+  } else 
     presenceData.details = "Unknown Page";
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

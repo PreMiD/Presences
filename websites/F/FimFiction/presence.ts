@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "642719342609432586"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var title: any;
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -17,12 +17,12 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.querySelector("#chapter_title") !== null) {
       presenceData.details =
-        "Reading: " +
+        `Reading: ${ 
         document.querySelector(
           "#chapter_format > div.story-page-header > div.inner > div.info-container > div > h1 > a"
-        ).textContent;
+        ).textContent}`;
       presenceData.state =
-        "Chapter: " + document.querySelector("#chapter_title").textContent;
+        `Chapter: ${document.querySelector("#chapter_title").textContent}`;
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/story/")) {
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

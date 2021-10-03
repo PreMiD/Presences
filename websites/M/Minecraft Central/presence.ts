@@ -1,11 +1,11 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "693097839424831489"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var thread: any;
+ user: any,
+ thread: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
       thread = document.querySelector(".titleBar > h1");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the thread:";
-      presenceData.state = '"' + thread.innerText + '"';
+      presenceData.state = `"${thread.innerText}"`;
     } else if (document.location.pathname.includes("/announcements/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
@@ -285,7 +285,7 @@ presence.on("UpdateData", async () => {
       user = document.querySelector(".mainText > h1");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
-      presenceData.state = user.innerText + "'s profile page";
+      presenceData.state = `${user.innerText}'s profile page`;
     } else if (document.location.pathname.includes("/search/search")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
@@ -364,7 +364,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

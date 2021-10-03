@@ -608,10 +608,11 @@ presence.on("UpdateData", async () => {
   if (data.settings) {
     for (const setting of data.settings) {
       if (!(await presence.getSetting(setting.id))) {
-        if (setting.delete)
-          setting.data.forEach((x) => {
+        if (setting.delete) {
+setting.data.forEach((x) => {
             delete presenceData[<"state">x];
           });
+}
       }
     }
   }

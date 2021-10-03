@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
     const page =
       document.getElementsByClassName("page-header__title") !== null
         ? document.getElementsByClassName("page-header__title")[0].textContent
-        : "N/A";
-    const presenceData: PresenceData = {
+        : "N/A",
+     presenceData: PresenceData = {
       details: "Viewing a page...",
       state: page,
       largeImageKey: "logo"

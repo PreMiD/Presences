@@ -50,9 +50,9 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "logo" },
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -103,19 +103,19 @@ presence.on("UpdateData", async () => {
 
       case pathIncludes("/terms"):
         presenceData.details =
-          (await strings).reading + " " + (await strings).terms;
+          `${(await strings).reading} ${(await strings).terms}`;
         presenceData.smallImageKey = "list";
         break;
 
       case pathIncludes("/cookie"):
         presenceData.details =
-          (await strings).reading + " " + (await strings).cookies;
+          `${(await strings).reading} ${(await strings).cookies}`;
         presenceData.smallImageKey = "list";
         break;
 
       case pathIncludes("/privacy"):
         presenceData.details =
-          (await strings).reading + " " + (await strings).privacy;
+          `${(await strings).reading} ${(await strings).privacy}`;
         presenceData.smallImageKey = "list";
         break;
 
@@ -136,9 +136,9 @@ presence.on("UpdateData", async () => {
     switch (true) {
       case pathIncludes("/posts/"):
         presenceData.details =
-          (await strings).reading +
-          " " +
-          document.querySelector(".post-header h1").innerHTML;
+          `${(await strings).reading 
+          } ${ 
+          document.querySelector(".post-header h1").innerHTML}`;
         break;
       default:
         presenceData.details = (await strings).viewMainPage;
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

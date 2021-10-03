@@ -8,36 +8,36 @@ const presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  const queryparams = new URLSearchParams(document.location.search);
-  const vowelmatch = "^[aieouAIEOU].*";
+  const queryparams = new URLSearchParams(document.location.search),
+   vowelmatch = "^[aieouAIEOU].*";
 
   if (
     document.location.pathname.split("/").slice(-1)[0] == "" &&
     document.location.search == ""
-  ) {
+  ) 
     presenceData.details = "Viewing the homepage";
-  } else if (document.location.href.indexOf("/search") > -1) {
-    if (queryparams.get("preset") == "discount") {
+   else if (document.location.href.indexOf("/search") > -1) {
+    if (queryparams.get("preset") == "discount") 
       presenceData.details = "Searching for a discounted game";
-    } else if (queryparams.get("preset") == "unfair") {
+     else if (queryparams.get("preset") == "unfair") 
       presenceData.details = "Searching for an unfair priced game";
-    } else if (queryparams.has("preset")) {
+     else if (queryparams.has("preset")) {
       if (queryparams.get("preset").match(vowelmatch)) {
         presenceData.details =
-          "Searching for an " + queryparams.get("preset") + " game";
+          `Searching for an ${queryparams.get("preset")} game`;
       } else {
         presenceData.details =
-          "Searching for a " + queryparams.get("preset") + " game";
+          `Searching for a ${queryparams.get("preset")} game`;
       }
     } else {
       presenceData.details = "Searching for a game";
-      if (queryparams.has("q")) {
+      if (queryparams.has("q")) 
         presenceData.state = queryparams.get("q").replace(/\+/g, " ");
-      }
+      
     }
-  } else if (document.location.href.indexOf("/search/") > -1) {
+  } else if (document.location.href.indexOf("/search/") > -1) 
     presenceData.details = "Searching for a game";
-  } else if (document.location.href.indexOf("/s/") > -1) {
+   else if (document.location.href.indexOf("/s/") > -1) {
     presenceData.details = "Searching for a game";
     presenceData.state = document
       .getElementById("entriesfound")
@@ -53,20 +53,20 @@ presence.on("UpdateData", async () => {
     presenceData.state = (
       document.querySelector("h1.title") as HTMLElement
     ).innerText.match(/[^\s*].*[^\s*]/)[0];
-  } else if (document.location.href.indexOf("/tracker") > -1) {
+  } else if (document.location.href.indexOf("/tracker") > -1) 
     presenceData.details = "Tracking game prices";
-  } else if (document.location.href.indexOf("/publishers") > -1) {
+   else if (document.location.href.indexOf("/publishers") > -1) 
     presenceData.details = "Comparing publisher's regional prices";
-  } else if (document.location.href.indexOf("/user/") > -1) {
-    if (document.location.href.indexOf("wishlist") > -1) {
+   else if (document.location.href.indexOf("/user/") > -1) {
+    if (document.location.href.indexOf("wishlist") > -1) 
       presenceData.details = "Looking at the wishlist";
-    } else if (document.location.href.indexOf("ownedgames") > -1) {
+     else if (document.location.href.indexOf("ownedgames") > -1) 
       presenceData.details = "Looking at owned games";
-    } else if (document.location.href.indexOf("blacklist") > -1) {
+     else if (document.location.href.indexOf("blacklist") > -1) 
       presenceData.details = "Looking at the blacklist";
-    } else if (document.location.href.indexOf("settings") > -1) {
+     else if (document.location.href.indexOf("settings") > -1) 
       presenceData.details = "Changing user settings";
-    }
+    
   } else if (document.location.href.indexOf("/blog") > -1) {
     presenceData.details = "Looking at the blog";
     if (
@@ -77,13 +77,13 @@ presence.on("UpdateData", async () => {
         document.querySelector("h4.title") as HTMLElement
       ).innerText;
     }
-  } else if (document.location.href.indexOf("/faq") > -1) {
+  } else if (document.location.href.indexOf("/faq") > -1) 
     presenceData.details = "Reading the FAQ";
-  } else if (document.location.href.indexOf("/contact") > -1) {
+   else if (document.location.href.indexOf("/contact") > -1) 
     presenceData.details = "Looking the SteamPrices.com contact info";
-  } else {
+   else 
     presenceData.details = "Currently somewhere unknown";
-  }
+  
 
   presence.setActivity(presenceData);
 });

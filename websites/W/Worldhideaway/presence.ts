@@ -15,9 +15,9 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "#masthead > div.header-search-wrap > div > form > label > input"
     );
-    if (!search || search.value === "") {
+    if (!search || search.value === "") 
       presenceData.details = "Viendo Inicio";
-    } else {
+     else {
       presenceData.details = "Buscando:";
       presenceData.state = search.value;
       presenceData.smallImageKey = "searching";
@@ -58,11 +58,11 @@ presence.on("UpdateData", async () => {
   } else if (expage.includes("/wp-login.php?action=lostpassword")) {
     presenceData.details = "Viendo:";
     presenceData.state = `Contraseña Olvidada`;
-  } else if (expage === "https://worldhideaway.com/wp-login.php") {
+  } else if (expage === "https://worldhideaway.com/wp-login.php") 
     presenceData.details = "Conectar";
-  } else if (page === "/register/") {
+   else if (page === "/register/") 
     presenceData.details = "Registro";
-  } else if (page === "/logros/") {
+   else if (page === "/logros/") {
     presenceData.details = "Viendo:";
     presenceData.state = `Logros`;
   } else if (page === "/events/") {
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

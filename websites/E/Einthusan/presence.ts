@@ -1,25 +1,25 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "702375041320484944"
-});
-var browsingStamp = Math.floor(Date.now() / 1000);
+}),
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var search: string,
+ search: string,
   title: string,
   director: string,
   video: any,
-  timestamps: any[];
-let Name: any;
+  timestamps: any[],
+ Name: any;
 
 function getTimestamps(videoTime: number, videoDuration: number): any {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 function getSeconds(videoTime: string, videoDuration: string): any {
-  var a = videoTime.split(":");
-  var b = videoDuration.split(":");
-  var secondsStart = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
-  var secondsEnd = +b[0] * 60 * 60 + +b[1] * 60 + +b[2];
+  const a = videoTime.split(":"),
+   b = videoDuration.split(":"),
+   secondsStart = +a[0] * 60 * 60 + +a[1] * 60 + +a[2],
+   secondsEnd = +b[0] * 60 * 60 + +b[1] * 60 + +b[2];
   return (timestamps = getTimestamps(
     Math.floor(secondsStart),
     Math.floor(secondsEnd)
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "#content > div.results-info > h5 > span"
     ).textContent;
-    presenceData.details = "Searching: " + search;
+    presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
     presenceData.state = "Movie";
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "#content > div.results-info > h5 > span"
     ).textContent;
-    presenceData.details = "Searching: " + search;
+    presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
     presenceData.state = "Music Video";
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "#content > div.results-info > h5 > span"
     ).textContent;
-    presenceData.details = "Searching: " + search;
+    presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
     presenceData.state = "Music Video Playlist";
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "#content > div.results-info > h5 > span"
     ).textContent;
-    presenceData.details = "Searching: " + search;
+    presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
     presenceData.state = "Movie Clip";
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "#content > div.results-info > h5 > span"
     ).textContent;
-    presenceData.details = "Searching: " + search;
+    presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
     presenceData.state = "Movie Clip Playlist";
@@ -91,22 +91,22 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "#UIMovieSummary > ul > li > div.block2 > a > h3"
     ).textContent;
-    var container_div = document.querySelector("div.professionals");
-    var count = container_div.getElementsByTagName("div").length;
+    const container_div = document.querySelector("div.professionals"),
+     count = container_div.getElementsByTagName("div").length;
     director = document.querySelector(
-      "div.professionals > div:nth-child(" +
-        (count - count / 3) +
-        " ) > div.prof > p"
+      `div.professionals > div:nth-child(${ 
+        count - count / 3 
+        } ) > div.prof > p`
     ).textContent;
     video = document.querySelector("#icons-and-text > div#play.show");
-    var start = document.querySelector(
+    const start = document.querySelector(
       "#controlbar > div.durations > div.watched-duration"
-    ).textContent;
-    var end = document.querySelector(
+    ).textContent,
+     end = document.querySelector(
       "#controlbar > div.durations > div.content-duration"
-    ).textContent;
+    ).textContent,
     // var timestamps = getTimestamps(Math.floor(start), Math.floor(end));
-    var div = document.querySelector(
+     div = document.querySelector(
       "#UIMovieSummary > ul > li > div.block2 > div.info > p:nth-child(1)"
     );
     Name = div.firstChild.nodeValue;
@@ -114,21 +114,21 @@ presence.on("UpdateData", async () => {
       timestamps = getSeconds(start, end);
       console.log(timestamps[0]);
       console.log(timestamps[1]);
-      presenceData.details = title + " (" + Name + ")";
+      presenceData.details = `${title} (${Name})`;
       presenceData.state = director;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "playing";
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
     } else if (video != null && end != "--:--:--") {
-      presenceData.details = title + " (" + Name + ")";
+      presenceData.details = `${title} (${Name})`;
       presenceData.state = director;
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "paused";
     } else {
-      presenceData.details = title + " (" + Name + ")";
+      presenceData.details = `${title} (${Name})`;
       presenceData.startTimestamp = browsingStamp;
       presenceData.state = director;
       presenceData.smallImageKey = "search";
@@ -179,10 +179,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing your feed.";
       presenceData.startTimestamp = browsingStamp;
     } else {
-      var profile = document.querySelector(
+      const profile = document.querySelector(
         "#UIFeedSidebar > div.quickinfo > h2"
       ).textContent;
-      presenceData.details = "Viewing: " + profile;
+      presenceData.details = `Viewing: ${profile}`;
       presenceData.startTimestamp = browsingStamp;
     }
   } else if (
@@ -200,7 +200,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

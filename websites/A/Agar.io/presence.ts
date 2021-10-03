@@ -60,13 +60,14 @@ presence.on("UpdateData", async () => {
 
       if (buttons) {
         const code = document.querySelector(".partymode-info > #code");
-        if (code)
-          data.buttons = [
+        if (code) {
+data.buttons = [
             {
               label: "Join Party",
               url: document.URL
             }
           ];
+}
       }
     }
   }

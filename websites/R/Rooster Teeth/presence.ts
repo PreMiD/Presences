@@ -1,14 +1,14 @@
 const presence = new Presence({
   clientId: "703697546794631209"
-});
+}),
 
-const elapsed = Math.floor(Date.now() / 1000);
+ elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const path = window.location.pathname;
-  var video;
-  var live;
+  const urlParams = new URLSearchParams(window.location.search),
+   path = window.location.pathname;
+  let video,
+   live;
   const presenceData: PresenceData = {
     largeImageKey: "roosterteeth",
     details: "Browsing Rooster Teeth",
@@ -27,12 +27,12 @@ presence.on("UpdateData", () => {
       )
       .querySelector(".livestream-show").textContent;
     presenceData.details +=
-      " " +
+      ` ${ 
       document
         .querySelector(
           ".livestream-card.livestream-schedule-item-fade-enter-done"
         )
-        .querySelector(".livestream-title").textContent;
+        .querySelector(".livestream-title").textContent}`;
     presenceData.state = "RT-TV";
     live = true;
   } else if (document.querySelector(".vjs-tech")) {
@@ -89,30 +89,30 @@ presence.on("UpdateData", () => {
       .querySelector(".carousel-container")
       .querySelector(".carousel-title")
       .textContent.split("RECENT EPISODES FROM ")[1];
-  } else if (path.includes("/series")) {
+  } else if (path.includes("/series")) 
     presenceData.details = "Browsing Series";
-  } else if (path.includes("/episodes")) {
+   else if (path.includes("/episodes")) {
     if (urlParams.get("channel_id")) {
       presenceData.details = "Browsing Episodes Of:";
       presenceData.state = document
         .querySelector(".dropdown-label")
         .textContent.split("FILTER (")[1]
         .replace(")", "");
-    } else {
+    } else 
       presenceData.details = "Browsing Episodes";
-    }
+    
   } else if (path.includes("/g/") && !path.includes("/g/all")) {
     presenceData.details = "Browsing Group:";
-    if (path.includes("explore")) {
+    if (path.includes("explore")) 
       presenceData.state = "Explore";
-    } else {
+     else {
       presenceData.state = document
         .querySelector(".content-sidebar")
         .querySelector(".banner-title").textContent;
     }
   } else if (path.includes("/g")) {
     presenceData.details =
-      "Browsing " + (path.includes("/g/all") ? "All " : "") + "Groups";
+      `Browsing ${path.includes("/g/all") ? "All " : ""}Groups`;
   }
   if (video != undefined) {
     if (live) {
@@ -130,16 +130,16 @@ presence.on("UpdateData", () => {
           Math.floor(Date.now() / 1000) -
           Math.floor(video.currentTime) +
           Math.floor(video.duration);
-      } else {
+      } else 
         presenceData.startTimestamp = undefined;
-      }
+      
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

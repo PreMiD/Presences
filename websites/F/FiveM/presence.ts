@@ -8,14 +8,14 @@ presence.on("UpdateData", () => {
       largeImageKey: "fivem",
       startTimestamp: browsingTimestamp
     },
-    pathname = document.location.pathname,
-    hostname = document.location.hostname;
+    {pathname} = document.location,
+    {hostname} = document.location;
 
   if (hostname === "fivem.net" || hostname === "www.fivem.net") {
     presenceData.details = "Viewing:";
-    if (pathname === "/") {
+    if (pathname === "/") 
       presenceData.state = "Home Page";
-    }
+    
   } else if (
     hostname === "docs.fivem.net" ||
     hostname === "www.docs.fivem.net"
@@ -35,15 +35,15 @@ presence.on("UpdateData", () => {
       presenceData.state = document.querySelector(
         "body > app-root > div > div.app-root > servers > app-servers-detail > div.info.one-info > h1"
       ).textContent;
-    } else if (pathname === "/servers") {
+    } else if (pathname === "/servers") 
       presenceData.details = "Seaching for a server";
-    }
+    
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

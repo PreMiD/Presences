@@ -50,7 +50,7 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const host = location.host,
+  const {host} = location,
     path = location.pathname.replace(/\/?$/, "/"),
     showSearch = await presence.getSetting("search"),
     showTimestamps = await presence.getSetting("timestamp");
@@ -71,9 +71,9 @@ presence.on("UpdateData", async () => {
   }
 
   for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
+    if (path.match(k)) 
       data = { ...data, ...v };
-    }
+    
   }
 
   if (path === "/") {

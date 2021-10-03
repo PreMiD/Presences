@@ -91,9 +91,9 @@ presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
   const newLang = await presence.getSetting("lang"),
     time = await presence.getSetting("time");
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 
   if (host === "premid.app" || host === "beta.premid.app") {
     host.includes("beta")
-      ? (presenceData.smallImageText = "BETA | " + (await strings).browsing)
+      ? (presenceData.smallImageText = `BETA | ${(await strings).browsing}`)
       : (presenceData.smallImageText = (await strings).browsing);
     presenceData.smallImageKey = "search";
 
@@ -167,7 +167,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (host === "docs.premid.app") {
     presenceData.details =
-      (await strings).docs + " | " + (await strings).viewPage;
+      `${(await strings).docs} | ${(await strings).viewPage}`;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).reading;
 
@@ -249,16 +249,16 @@ presence.on("UpdateData", async () => {
         presenceData.state = (await strings).home;
     }
   } else if (host === "status.premid.app") {
-    presenceData.details = "Status page | " + (await strings).viewing;
+    presenceData.details = `Status page | ${(await strings).viewing}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = (await strings).browsing;
 
     switch (true) {
       case pathIncludes("/incidents"):
         presenceData.details =
-          (await strings).viewing +
-          " " +
-          document.title.replace("PreMiD Status - ", "");
+          `${(await strings).viewing 
+          } ${ 
+          document.title.replace("PreMiD Status - ", "")}`;
         break;
       case pathIncludes("/history"):
         presenceData.state = (await strings).incident;

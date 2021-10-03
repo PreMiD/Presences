@@ -9,8 +9,8 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname.includes("itch.io")) {
-    const hostname = document.location.hostname,
-      pathname = document.location.pathname;
+    const {hostname} = document.location,
+      {pathname} = document.location;
 
     if (hostname.split(".")[0] != "itch") {
       if (pathname == "/") {
@@ -28,9 +28,9 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = "Playing";
         }
-        if (pathname.split("/")[2] == "devlog") {
-          presenceData.state = devName + "'s Devlog";
-        }
+        if (pathname.split("/")[2] == "devlog") 
+          presenceData.state = `${devName}'s Devlog`;
+        
       }
     } else if (
       pathname.startsWith("/board") ||
@@ -48,8 +48,8 @@ presence.on("UpdateData", async () => {
         document.querySelector(".jam_title_header") as HTMLElement
       ).innerText;
       presenceData.state =
-        "Jam " +
-        (document.querySelector(".jam_host_header") as HTMLElement).innerText;
+        `Jam ${ 
+        (document.querySelector(".jam_host_header") as HTMLElement).innerText}`;
     } else {
       presenceData.startTimestamp = browsingStamp;
       switch (pathname) {
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

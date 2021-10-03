@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "mh_l",
       startTimestamp: browsingStamp
     },
-    pathname = document.location.pathname,
-    hostname = document.location.hostname;
+    {pathname} = document.location,
+    {hostname} = document.location;
 
   if (hostname === "mangahosted.com" || hostname === "www.mangahosted.com") {
     if (pathname.startsWith("/")) {
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = mangaName;
         presenceData.state =
-          "Capítulo " + chapterNumber + " - Pg " + pageNumber;
+          `Capítulo ${chapterNumber} - Pg ${pageNumber}`;
       } else {
         presenceData.details = "Vendo Informações:";
         presenceData.state = document.querySelector("h1.title").textContent;
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

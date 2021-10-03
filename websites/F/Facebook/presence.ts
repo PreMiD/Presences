@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "631803867708915732"
   }),
   strings = presence.getStrings({
@@ -15,19 +15,19 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
-var typing: any;
-var replace: any;
-var search: any;
-var video: any,
+ user: any,
+ title: any,
+ typing: any,
+ replace: any,
+ search: any,
+ video: any,
   videoDuration: any,
   videoCurrentTime: any,
   videoPaused: any,
@@ -90,9 +90,9 @@ presence.on("UpdateData", async () => {
   ) {
     //Profile page finder (It is their username)
     user = document.querySelector("#seo_h1_tag > a > span");
-    if (user == null) {
+    if (user == null) 
       user = document.querySelector("#fb-timeline-cover-name > a");
-    }
+    
     video = document.querySelector(
       "body > div > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div > div > div > div > div > video"
     );
@@ -123,11 +123,11 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
       presenceData.state = user.innerText;
       if (videoPaused) {
         delete presenceData.startTimestamp;
@@ -189,9 +189,9 @@ presence.on("UpdateData", async () => {
         "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(2) > h5 > span > span > span > a"
       );
     }
-    if (user == null) {
+    if (user == null) 
       user = document.querySelector(".profileLink");
-    }
+    
     title = document.querySelector(
       "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div > span > span"
     );
@@ -210,22 +210,22 @@ presence.on("UpdateData", async () => {
         "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div > div > div > div"
       );
     }
-    if (title == null) {
+    if (title == null) 
       title = document.querySelector("#u_2_d > div._1rgv > div._1rgw");
-    }
-    if (title == null) {
+    
+    if (title == null) 
       title = document.querySelector("._1rgw");
-    }
+    
     if (video == null) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
       presenceData.smallImageKey = "live";
       presenceData.smallImageText = "live";
-      if (title.innerText.length > 128) {
-        presenceData.details = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.details = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.details = title.innerText;
-      }
+      
       presenceData.state = user.innerText;
     } else {
       videoCurrentTime = video.currentTime;
@@ -241,11 +241,11 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
-      if (title.innerText.length > 128) {
-        presenceData.details = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.details = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.details = title.innerText;
-      }
+      
       presenceData.state = user.innerText;
       if (videoPaused) {
         delete presenceData.startTimestamp;
@@ -277,11 +277,11 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
-      if (title.innerText.length > 128) {
-        presenceData.details = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.details = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.details = title.innerText;
-      }
+      
       presenceData.state = user.innerText;
       if (videoPaused) {
         delete presenceData.startTimestamp;
@@ -327,49 +327,49 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/item/")) {
       presenceData.details = "Marketplace - Viewing item:";
       title = document.querySelector("#marketplace-modal-dialog-title > span");
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
-    } else if (document.location.pathname.includes("/groups/")) {
+      
+    } else if (document.location.pathname.includes("/groups/")) 
       presenceData.details = "Marketplace - Viewing groups";
-    } else if (document.location.pathname.includes("/stores/")) {
+     else if (document.location.pathname.includes("/stores/")) 
       presenceData.details = "Marketplace - Viewing stores";
-    } else if (document.location.pathname.includes("/buying/")) {
+     else if (document.location.pathname.includes("/buying/")) 
       presenceData.details = "Marketplace - Viewing buying";
-    } else if (document.location.pathname.includes("/selling/")) {
+     else if (document.location.pathname.includes("/selling/")) 
       presenceData.details = "Marketplace - Viewing selling";
-    } else if (document.location.pathname.includes("/saved/")) {
+     else if (document.location.pathname.includes("/saved/")) 
       presenceData.details = "Marketplace - Viewing saved";
-    } else {
+     else 
       presenceData.details = "Marketplace - Browsing...";
-    }
+    
   } else if (document.location.pathname.includes("/groups/")) {
     presenceData.startTimestamp = browsingStamp;
     replace = document.location.pathname.split("/");
     if (replace[2] !== undefined && replace[2] !== "") {
       title = document.querySelector("#seo_h1_tag > a");
       presenceData.details = "Groups - Viewing:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
-    } else {
+      
+    } else 
       presenceData.details = "Groups - Browsing...";
-    }
+    
   } else if (document.location.pathname.includes("/groups_browse/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Groups - Browsing category:";
     title = document.querySelector(
       "#content > div > div > div:nth-child(3) > div > div:nth-child(3) > span"
     );
-    if (title.innerText.length > 128) {
-      presenceData.state = title.innerText.substring(0, 125) + "...";
-    } else {
+    if (title.innerText.length > 128) 
+      presenceData.state = `${title.innerText.substring(0, 125)}...`;
+     else 
       presenceData.state = title.innerText;
-    }
+    
   } else if (document.location.pathname.includes("/pages/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Pages - Browsing...";
@@ -382,22 +382,22 @@ presence.on("UpdateData", async () => {
     if (replace[2] !== undefined && replace[2] !== "") {
       title = document.querySelector("#seo_h1_tag");
       presenceData.details = "Events - Viewing:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
-    } else if (document.location.pathname.includes("/calendar/")) {
+      
+    } else if (document.location.pathname.includes("/calendar/")) 
       presenceData.details = "Events - Viewing calendar";
-    } else if (document.location.pathname.includes("/birthdays/")) {
+     else if (document.location.pathname.includes("/birthdays/")) 
       presenceData.details = "Events - Viewing birthdays";
-    } else if (document.location.pathname.includes("/discovery/")) {
+     else if (document.location.pathname.includes("/discovery/")) 
       presenceData.details = "Events - Viewing discovery";
-    } else if (document.location.pathname.includes("/hosting/")) {
+     else if (document.location.pathname.includes("/hosting/")) 
       presenceData.details = "Events - Viewing hosting";
-    } else {
+     else 
       presenceData.details = "Events - Browsing...";
-    }
+    
   } else if (document.location.pathname.includes("/fundraisers/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Fundraisers - Browsing...";
@@ -407,11 +407,11 @@ presence.on("UpdateData", async () => {
       "#info_section > div.clearfix > div > div > div:nth-child(2) > div > h1"
     );
     presenceData.details = "Fundraisers - Viewing:";
-    if (title.innerText.length > 128) {
-      presenceData.state = title.innerText.substring(0, 125) + "...";
-    } else {
+    if (title.innerText.length > 128) 
+      presenceData.state = `${title.innerText.substring(0, 125)}...`;
+     else 
       presenceData.state = title.innerText;
-    }
+    
   } else if (document.location.pathname.includes("/games/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Games - Browsing...";
@@ -453,7 +453,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

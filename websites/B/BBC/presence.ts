@@ -58,9 +58,9 @@ presence.on("UpdateData", async () => {
     buttonsE = await presence.getSetting("buttons"),
     showSearchQuery = await presence.getSetting("search");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -165,7 +165,7 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.details = SoundMedia.title;
         presenceData.state =
-          soundData.modules["data"][0].data[0].titles?.secondary;
+          soundData.modules.data[0].data[0].titles?.secondary;
         presenceData.smallImageKey =
           SoundMedia.paused || !SoundMedia.duration ? "pause" : "play";
       }

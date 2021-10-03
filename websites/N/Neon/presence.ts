@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
       details: "Browsing...",
       startTimestamp: timestamp
     },
-    pathname = document.location.pathname;
+    {pathname} = document.location;
 
   if (pathname.includes("/series/")) {
     presenceData.details = "Viewing series:";
@@ -63,11 +63,11 @@ presence.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-  } else if (pathname.includes("/my-list")) {
+  } else if (pathname.includes("/my-list")) 
     presenceData.details = "Viewing their list";
-  } else if (pathname.includes("/my-account")) {
+   else if (pathname.includes("/my-account")) 
     presenceData.details = "Viewing their account";
-  } else if (pathname.includes("/watch/")) {
+   else if (pathname.includes("/watch/")) {
     const video = document.querySelector("video"),
       isSeries = !!findElement("span", "Mr-text"),
       timestamps = presence.getTimestampsfromMedia(video);
@@ -79,14 +79,14 @@ presence.on("UpdateData", async () => {
 
     presenceData.endTimestamp = timestamps[1];
 
-    if (isSeries)
-      presenceData.state = `${findElement(
+    if (isSeries) {
+presenceData.state = `${findElement(
         "span",
         "Mr-text"
       )?.textContent.replace(".", ":")} ${findElement("h3", "so-name")
         ?.textContent.trim()
         .replace(/([0-9]+)[.]/, "")}`;
-    else presenceData.state = "Movie";
+} else presenceData.state = "Movie";
 
     presenceData.buttons = [
       {

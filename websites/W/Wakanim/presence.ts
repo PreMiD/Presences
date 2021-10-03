@@ -1,4 +1,4 @@
-var presence = new Presence({
+let presence = new Presence({
     clientId: "662841394171346955"
   }),
   strings = presence.getStrings({
@@ -9,27 +9,27 @@ var presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 function capitalize(str: string): string {
-  var text = str.toLowerCase().split(" ");
-  for (var i = 0, x = text.length; i < x; i++) {
+  const text = str.toLowerCase().split(" ");
+  for (let i = 0, x = text.length; i < x; i++) 
     text[i] = text[i][0].toUpperCase() + text[i].substr(1);
-  }
+  
 
   return text.join(" ");
 }
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = { largeImageKey: "wakanim" };
-  var path = document.location.pathname;
-  var video = document.querySelector("video");
-  var title = document.querySelector(".episode_title");
-  var subtitle = document.querySelector(".episode_subtitle") as HTMLElement;
+  const presenceData: PresenceData = { largeImageKey: "wakanim" },
+   path = document.location.pathname,
+   video = document.querySelector("video"),
+   title = document.querySelector(".episode_title"),
+   subtitle = document.querySelector(".episode_subtitle") as HTMLElement;
 
   if (path.includes("/v2/catalogue/episode/") && video != null && title) {
     browsingStamp = Math.floor(Date.now() / 1000);
     presenceData.details = title.innerHTML;
-    if (subtitle && subtitle.innerText) {
+    if (subtitle && subtitle.innerText) 
       presenceData.state = capitalize(subtitle.innerText);
-    }
+    
 
     if (video.paused) {
       presenceData.smallImageKey = "paused";
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

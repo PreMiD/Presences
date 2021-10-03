@@ -1,13 +1,13 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "631566704648126503"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
-var replace: any;
-var search: any;
+ user: any,
+ title: any,
+ replace: any,
+ search: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -42,11 +42,11 @@ presence.on("UpdateData", async () => {
       );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing gag:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
     } else if (document.location.pathname.includes("/hot")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing what's hot";
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -8,8 +8,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -35,12 +35,12 @@ newStats();
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "flare"
-  };
+  },
 
-  const timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
+   timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
   presenceData.smallImageKey = "play";
-  presenceData.details = sartist + " - " + strack;
-  presenceData.state = slisteners + " Listeners";
+  presenceData.details = `${sartist} - ${strack}`;
+  presenceData.state = `${slisteners} Listeners`;
   presenceData.smallImageText = "Playing";
   presenceData.startTimestamp = timestamps[0];
   presenceData.endTimestamp = timestamps[1];

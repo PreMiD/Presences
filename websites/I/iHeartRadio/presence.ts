@@ -8,11 +8,11 @@ const presence = new Presence({
   });
 
 function checkLength(string: string): string {
-  if (string.length > 128) {
-    return string.substring(0, 125) + "...";
-  } else {
+  if (string.length > 128) 
+    return `${string.substring(0, 125)}...`;
+   else 
     return string;
-  }
+  
 }
 
 function parseAudioTimestamps(
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
         title = document.querySelector(".css-19ebljp").textContent;
         author = document.querySelector(".css-zzaxa6").textContent;
         song = document.querySelector(".css-9be0f7").textContent;
-        subtitle = author + " - " + song;
+        subtitle = `${author} - ${song}`;
 
         title = checkLength(title);
         data.details = title;
@@ -69,9 +69,9 @@ presence.on("UpdateData", async () => {
 
         data.smallImageKey = "live";
         data.smallImageText = (await strings).live;
-        if (elapsed === null) {
+        if (elapsed === null) 
           elapsed = Math.floor(Date.now() / 1000);
-        }
+        
         data.startTimestamp = elapsed;
         presence.setActivity(data);
       } else {
@@ -83,11 +83,11 @@ presence.on("UpdateData", async () => {
       try {
         author = document.querySelector(".css-x5q5qs").textContent;
         song = document.querySelector(".css-9be0f7").textContent;
-        subtitle = author + " - " + song;
+        subtitle = `${author} - ${song}`;
       } catch {
         author = document.querySelector(".css-x5q5qs").textContent;
         song = document.querySelector(".css-1uhpu6r").textContent;
-        subtitle = song + " - " + author;
+        subtitle = `${song} - ${author}`;
       }
       const audioTime = document.querySelector(".css-9dpnv0").textContent,
         audioDuration = document.querySelector(".css-xf5pff").textContent,

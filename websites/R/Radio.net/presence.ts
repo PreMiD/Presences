@@ -8,8 +8,8 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-var lastPath = ""; //Last played radio station or podcast
-var browsingStamp = 0; //Timestamp when started listening to a radio station
+let lastPath = "", //Last played radio station or podcast
+ browsingStamp = 0; //Timestamp when started listening to a radio station
 
 presence.on("UpdateData", async () => {
   //Current path
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo_big"
     },
     //Document title
-    title = document.title,
+    {title} = document,
     //Document header
     header = document.querySelector("h1") as HTMLElement;
 
@@ -65,26 +65,26 @@ presence.on("UpdateData", async () => {
             .map((e) => e.split(":").reverse());
 
           //Add the amount of time the podcast has been playing
-          if (start.length > 0) {
+          if (start.length > 0) 
             presenceData.startTimestamp += parseInt(start[0]);
-          }
-          if (start.length > 1) {
+          
+          if (start.length > 1) 
             presenceData.startTimestamp += parseInt(start[1]) * 60;
-          }
-          if (start.length > 2) {
+          
+          if (start.length > 2) 
             presenceData.startTimestamp += parseInt(start[2]) * 60 * 24;
-          }
+          
 
           //Add the length of the podcast
-          if (end.length > 0) {
+          if (end.length > 0) 
             presenceData.endTimestamp += parseInt(end[0]);
-          }
-          if (end.length > 1) {
+          
+          if (end.length > 1) 
             presenceData.endTimestamp += parseInt(end[1]) * 60;
-          }
-          if (end.length > 2) {
+          
+          if (end.length > 2) 
             presenceData.endTimestamp += parseInt(end[2]) * 60 * 24;
-          }
+          
         }
       } else {
         //Paused
@@ -106,9 +106,9 @@ presence.on("UpdateData", async () => {
 
             presenceData.startTimestamp = Math.floor(Date.now() / 1000);
             presenceData.endTimestamp = presenceData.startTimestamp + adlength;
-          } else {
+          } else 
             presenceData.state = status.innerText;
-          }
+          
         } else {
           //Player is inactive (no status is being displayed)
           const tags = (document.querySelector(".z7kxsz-11") as HTMLElement)

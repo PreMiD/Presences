@@ -124,9 +124,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = "The Forums";
       presenceData.smallImageKey = "searching";
     }
-  } else if (document.location.pathname.startsWith("/community/chat")) {
+  } else if (document.location.pathname.startsWith("/community/chat")) 
     presenceData.details = "Chatting...";
-  } else if (document.location.pathname.startsWith("/community/contests")) {
+   else if (document.location.pathname.startsWith("/community/contests")) {
     presenceData.details = "Browsing...";
     presenceData.state = "Contests";
     presenceData.smallImageKey = "searching";
@@ -141,9 +141,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/home/search")) {
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "searching";
-  } else if (document.location.pathname.startsWith("/home/account/edit")) {
+  } else if (document.location.pathname.startsWith("/home/account/edit")) 
     presenceData.details = "Changing account settings...";
-  } else if (document.location.pathname.startsWith("/wiki")) {
+   else if (document.location.pathname.startsWith("/wiki")) {
     if (document.location.pathname.includes("/FAQ")) {
       presenceData.details = "Reading...";
       presenceData.state = "The FAQ";

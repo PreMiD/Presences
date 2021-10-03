@@ -9,9 +9,9 @@ const presence = new Presence({
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--) 
     ret += parseInt(list[index]) * 60 ** index;
-  }
+  
   return ret;
 }
 
@@ -64,9 +64,9 @@ presence.on("UpdateData", async () => {
         const setting_item = document.querySelector(
           ".SettingsMenu__tabItem__3ypki.SettingsMenu__selectedTab__OMITL"
         );
-        if (setting_item) {
+        if (setting_item) 
           state = `Viewing ${setting_item.textContent}`;
-        }
+        
       }
       if (path.match("/join")) {
         const connection_info = document.querySelector(".Connect__info__3Vwlv"),
@@ -78,17 +78,17 @@ presence.on("UpdateData", async () => {
           ),
           menu_header = document.querySelector(".MenuHeader__header__1SYq0");
 
-        if (connection_info) {
+        if (connection_info) 
           details = "Connecting...";
-        } else if (disconnection_info) {
+         else if (disconnection_info) {
           details = "Disconnected";
 
-          if (disconnection_label) {
+          if (disconnection_label) 
             state = disconnection_label.textContent;
-          }
-        } else if (menu_header) {
+          
+        } else if (menu_header) 
           details = "Setting up...";
-        } else {
+         else {
           smallImageKey = "live";
           smallImageText = (await strings).live;
 
@@ -97,11 +97,11 @@ presence.on("UpdateData", async () => {
               document.createElement("HTMLDivElement"),
             user_button = document.querySelector(".UserItem__menuBtn__1ST9k");
 
-          if (users.childElementCount === 1 || user_button !== null) {
+          if (users.childElementCount === 1 || user_button !== null) 
             details = `Hosting (${users.childElementCount} Users)`;
-          } else {
+           else 
             details = `Watching (${users.childElementCount} Users)`;
-          }
+          
 
           const title = document.querySelector(".TitleBar__title__3VPpW");
           if (title && title.textContent !== "Metastream") {
@@ -145,13 +145,13 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "metastream",
-    smallImageKey: smallImageKey,
-    smallImageText: smallImageText,
-    startTimestamp: startTimestamp,
-    endTimestamp: endTimestamp
+    smallImageKey,
+    smallImageText,
+    startTimestamp,
+    endTimestamp
   };
 
   presence.setActivity(data, playing);

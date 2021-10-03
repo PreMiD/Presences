@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "702935358395908168"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -48,7 +48,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "Adlı Habere Bakıyor...";
     } else if (document.location.pathname.includes("/home/")) {
       presenceData.details =
-        "Şuanda " + document.location.pathname.split("/")[2] + " Adlı";
+        `Şuanda ${document.location.pathname.split("/")[2]} Adlı`;
       presenceData.state = "Kişinin Profiline Bakıyor...";
     } else if (document.location.pathname.startsWith("/xler")) {
       presenceData.details = "Şuanda BüyükElçiler Sayfasında,";
@@ -77,7 +77,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

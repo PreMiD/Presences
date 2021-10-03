@@ -57,9 +57,9 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (title !== null && game !== null) {
+    if (title !== null && game !== null) 
       presence.setActivity(presenceData, !video.paused);
-    }
+    
   } else {
     const pageData: PresenceData = {
       details: "Browsing..",

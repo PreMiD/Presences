@@ -14,9 +14,9 @@ let path,
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--) 
     ret += parseInt(list[index]) * 60 ** index;
-  }
+  
   return ret;
 }
 
@@ -54,9 +54,9 @@ presence.on("UpdateData", async () => {
     path.includes("/articles/") &&
     path.split("/")[2] != null &&
     path.split("/")[2].length > 1
-  ) {
+  ) 
     data.state = document.querySelector("body h1").textContent;
-  } else if (
+   else if (
     path.includes("/game/") &&
     path.split("/")[2] != null &&
     path.split("/")[2].length > 1
@@ -84,9 +84,9 @@ presence.on("UpdateData", async () => {
     if (currTime && currTime.includes(":")) {
       data.startTimestamp = timestamps[0];
       data.endTimestamp = timestamps[1];
-    } else {
+    } else 
       data.startTimestamp = cp;
-    }
+    
   } else {
     switch (path) {
       case "/settings":

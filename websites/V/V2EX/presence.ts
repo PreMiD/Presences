@@ -9,9 +9,9 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "v2ex-logo",
     startTimestamp: browsingStamp
-  };
+  },
 
-  const path = document.location.pathname;
+   path = document.location.pathname;
 
   if (path === "/") {
     presenceData.state = "Home";
@@ -26,11 +26,11 @@ presence.on("UpdateData", async () => {
       document
         .querySelector("#reply-box")
         .classList.contains("reply-box-sticky")
-    ) {
+    ) 
       presenceData.details = "Replying post";
-    } else {
+     else 
       presenceData.details = "Reading post";
-    }
+    
   } else if (path.includes("/member/")) {
     title = document.querySelector("#Main > div.box h1");
     presenceData.state = title.innerText.trim();
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

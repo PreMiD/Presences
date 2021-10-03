@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "629768767987122217"
 });
 
@@ -11,17 +11,17 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "goyabu"
-  };
+  },
 
-  const path = document.location.pathname,
+   path = document.location.pathname,
     host = document.location.hostname,
     browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
       const anSc = document.querySelector("#home-content > h1 > span");
       presenceData.details = "Pesquisando Animes";
       presenceData.state =
-        "Pesquisou: " + anSc.textContent.replace("Você pesquisou por: ", "");
+        `Pesquisou: ${anSc.textContent.replace("Você pesquisou por: ", "")}`;
       presenceData.smallImageText = "Pesquisando";
       presenceData.smallImageKey = "search";
       presenceData.startTimestamp = browsingStamp;
@@ -105,16 +105,16 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     host == "goyabu.com" &&
-    path == "/video" + path.replace("/video", "")
+    path == `/video${path.replace("/video", "")}`
   ) {
-    const video = document.querySelector("video");
-    const title: HTMLHeadingElement = document.querySelector(
+    const video = document.querySelector("video"),
+     title: HTMLHeadingElement = document.querySelector(
       "#wrapper > div.row.block.page.p-video > div.video-holder.row > div.video-under.col-md-8.col-xs-12 > div.user-container.full.top20.bottom20 > div.pull-left.user-box > div > a:nth-child(1) > h3"
-    );
-    const a = document.querySelector(
+    ),
+     a = document.querySelector(
       "#wrapper > div.row.block.page.p-video > div.video-holder.row > div.video-under.col-md-8.col-xs-12 > div:nth-child(1) > div.row.vibe-interactions > h1"
-    ).textContent;
-    const b = a
+    ).textContent,
+     b = a
       .replace("(Assistido)", "")
       .replace(title.textContent, "")
       .replace(" – ", "")
@@ -122,8 +122,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = title.innerText;
     presenceData.state = b;
     if (video.paused === false) {
-      const { duration, currentTime } = video;
-      const timestamps = getTimestamps(currentTime, duration);
+      const { duration, currentTime } = video,
+       timestamps = getTimestamps(currentTime, duration);
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = "play";

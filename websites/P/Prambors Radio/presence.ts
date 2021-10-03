@@ -11,7 +11,7 @@ const presence = new Presence({
 let timestamp: number;
 
 presence.on("UpdateData", async () => {
-  const pause = (await strings).pause;
+  const {pause} = await strings;
   if (
     ["streaming.pramborsfm.com", "live.pramborsfm.com"].includes(
       document.location.hostname

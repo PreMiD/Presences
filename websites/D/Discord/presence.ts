@@ -161,9 +161,9 @@ presence.on("UpdateData", async () => {
     browsingStamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -171,7 +171,7 @@ presence.on("UpdateData", async () => {
   if (document.location.hostname === "discord.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       voiceConnected = Array.from(document.querySelectorAll("div")).find((c) =>
@@ -560,7 +560,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "discordstatus.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -572,11 +572,11 @@ presence.on("UpdateData", async () => {
         },
         "/uptime/": {
           details: (await strings).status,
-          state: (await strings).viewing + " " + (await strings).uptime
+          state: `${(await strings).viewing} ${(await strings).uptime}`
         },
         "/history/": {
           details: (await strings).status,
-          state: (await strings).viewing + " " + (await strings).incident
+          state: `${(await strings).viewing} ${(await strings).incident}`
         },
         "/incidents/": {
           details: (await strings).status,
@@ -604,7 +604,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "support.discord.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -617,25 +617,25 @@ presence.on("UpdateData", async () => {
         "/categories/": {
           details: (await strings).helpCenter,
           state:
-            (await strings).viewCategory +
-            " " +
-            document.querySelector("h1")?.textContent
+            `${(await strings).viewCategory 
+            } ${ 
+            document.querySelector("h1")?.textContent}`
         },
         "/search/": {
           details: (await strings).helpCenter,
           state:
-            (await strings).searchFor +
-            " " +
-            (document.querySelector("#query") as HTMLInputElement)?.value,
+            `${(await strings).searchFor 
+            } ${ 
+            (document.querySelector("#query") as HTMLInputElement)?.value}`,
           smallImageKey: "search",
           smallImageText: (await strings).searching
         },
         "/articles/": {
           details: (await strings).helpCenter,
           state:
-            (await strings).readingArticle +
-            " " +
-            document.querySelector("h1")?.textContent.trim(),
+            `${(await strings).readingArticle 
+            } ${ 
+            document.querySelector("h1")?.textContent.trim()}`,
           smallImageKey: "reading",
           smallImageText: (await strings).reading
         }
@@ -661,7 +661,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "blog.discord.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -671,30 +671,30 @@ presence.on("UpdateData", async () => {
           details: (await strings).blog,
           state:
             document.querySelector("h1")?.textContent !== "Discord Blog"
-              ? (await strings).readingArticle +
-                " " +
-                document.querySelector("h1").textContent
+              ? `${(await strings).readingArticle 
+                } ${ 
+                document.querySelector("h1").textContent}`
               : (await strings).browse
         },
         "/product-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Product posts"
+          state: `${(await strings).viewCategory} Product posts`
         },
         "/company-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Company posts"
+          state: `${(await strings).viewCategory} Company posts`
         },
         "/education-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Education posts"
+          state: `${(await strings).viewCategory} Education posts`
         },
         "/community-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Community posts"
+          state: `${(await strings).viewCategory} Community posts`
         },
         "/engineering-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Engineering posts"
+          state: `${(await strings).viewCategory} Engineering posts`
         }
       };
     if (showBrowsing) {
@@ -718,7 +718,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "discordmerch.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -731,34 +731,34 @@ presence.on("UpdateData", async () => {
         "/products/": {
           details: (await strings).merch,
           state:
-            (await strings).product +
-            " " +
-            document.querySelector("h1")?.textContent
+            `${(await strings).product 
+            } ${ 
+            document.querySelector("h1")?.textContent}`
         },
         "/collections/": {
           details: (await strings).merch,
           state:
-            (await strings).collection +
-            " " +
-            document.querySelector("h1")?.textContent
+            `${(await strings).collection 
+            } ${ 
+            document.querySelector("h1")?.textContent}`
         },
         "/pages/": {
           details: (await strings).merch,
           state:
-            (await strings).viewPage +
-            " " +
-            document.querySelector("h1")?.textContent
+            `${(await strings).viewPage 
+            } ${ 
+            document.querySelector("h1")?.textContent}`
         },
         "/cart/": {
           details: (await strings).merch,
-          state: (await strings).viewing + " " + (await strings).shopCart
+          state: `${(await strings).viewing} ${(await strings).shopCart}`
         },
         "/search/": {
           details: (await strings).merch,
           state:
-            (await strings).searchFor +
-            " " +
-            (document.querySelector("input") as HTMLInputElement)?.value,
+            `${(await strings).searchFor 
+            } ${ 
+            (document.querySelector("input") as HTMLInputElement)?.value}`,
           smallImageKey: "search",
           smallImageText: (await strings).searching
         }
@@ -790,7 +790,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

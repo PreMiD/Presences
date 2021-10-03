@@ -40,9 +40,9 @@ presence.on("UpdateData", async () => {
   }
 
   if (path == "/") {
-    if (pesquisatexto == null) {
+    if (pesquisatexto == null) 
       presenceData.details = "Página inicial";
-    } else {
+     else {
       presenceData.details = "Pesquisando";
       presenceData.state = pesquisatexto.value;
     }
@@ -52,20 +52,20 @@ presence.on("UpdateData", async () => {
       title.innerText.indexOf("Mark") - 2
     )}`;
 
-    if (filtroprojetos !== null) {
+    if (filtroprojetos !== null) 
       presenceData.state = `Filtro: ${filtroprojetos.innerText}`;
-    } else {
+     else 
       presenceData.state = "Filtro: Nenhum";
-    }
+    
   } else if (path.includes("/manga/")) {
     const opcoes = {
-      0: function () {
+      0 () {
         presenceData.state = `${title.innerText.slice(
           title.innerText.indexOf("- Capítulo") + 2,
           title.innerText.indexOf("- Mark") - 1
         )}`;
       },
-      1: function () {
+      1 () {
         presenceData.state = `${title.innerText.slice(
           title.innerText.indexOf("- Capítulo") + 2,
           title.innerText.indexOf("- Mark") - 1
@@ -88,13 +88,13 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${tipoobra.textContent} | ${primeirogeneroobra.textContent}`;
       }
     }
-  } else if (path.includes("/mangas/")) {
+  } else if (path.includes("/mangas/")) 
     presenceData.details = "Todos os projetos";
-  } else if (path.includes("/meu-perfil/")) {
+   else if (path.includes("/meu-perfil/")) {
     presenceData.details = "Meu perfil";
     presenceData.state = paginaLogin.innerText;
-  } else {
+  } else 
     presenceData.details = "Navegando...";
-  }
+  
   presence.setActivity(presenceData);
 });

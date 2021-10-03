@@ -5,24 +5,24 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo-dbl"
-  };
+  },
 
-  const browsingStamp = Math.floor(Date.now() / 1000);
+   browsingStamp = Math.floor(Date.now() / 1000);
   presenceData.startTimestamp = browsingStamp;
 
   if (window.location.pathname.endsWith("top")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Top Voted Bots";
-  } else if (window.location.pathname.endsWith("add")) {
+  } else if (window.location.pathname.endsWith("add")) 
     presenceData.details = "Adding a new bot";
-  } else if (window.location.pathname.endsWith("mine")) {
+   else if (window.location.pathname.endsWith("mine")) 
     presenceData.details = "Viewing their bot(s)";
-  } else if (window.location.pathname.startsWith("/bots/")) {
+   else if (window.location.pathname.startsWith("/bots/")) {
     presenceData.details = "Viewing a bot:";
     const ad = document.querySelector(
       "#__layout > div > div.main-content > div > div > div.row > div.col-12.col-md-6 > h1"
-    ).textContent;
-    const oy = document.querySelector(
+    ).textContent,
+     oy = document.querySelector(
       "#__layout > div > div.main-content > div > div > div.row > div.col-12.col-md-6 > h1 > a"
     ).textContent;
     presenceData.state = ad.replace(oy, "");
@@ -41,7 +41,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

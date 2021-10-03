@@ -14,22 +14,22 @@ presence.on("UpdateData", async () => {
     };
 
   if (document.location.pathname.includes("/bs-viewer/")) {
-    if (document.querySelector("#songname").textContent === "") {
+    if (document.querySelector("#songname").textContent === "") 
       presenceData.details = "Selecting Beatmap";
-    } else {
+     else {
       presenceData.details =
-        document.querySelector("#songname").textContent +
-        " " +
-        document.querySelector("#songsubname").textContent;
+        `${document.querySelector("#songname").textContent 
+        } ${ 
+        document.querySelector("#songsubname").textContent}`;
       presenceData.state =
+        `${(
+          document.getElementById("difficultyselect") as HTMLSelectElement
+        ).value.replace("Plus", "+") 
+        } (${ 
         (
           document.getElementById("difficultyselect") as HTMLSelectElement
-        ).value.replace("Plus", "+") +
-        " (" +
-        (
-          document.getElementById("difficultyselect") as HTMLSelectElement
-        ).selectedOptions.item(0).textContent +
-        ")";
+        ).selectedOptions.item(0).textContent 
+        })`;
       presenceData.buttons = [
         {
           label: "View Page",
@@ -79,16 +79,17 @@ presence.on("UpdateData", async () => {
         ) as HTMLInputElement
       ).value !== "" &&
       !privacy
-    )
-      presenceData.state =
-        document.querySelector(".selected-tab").textContent +
-        " (" +
+    ) {
+presenceData.state =
+        `${document.querySelector(".selected-tab").textContent 
+        } (${ 
         (
           document.querySelector(
             "input#file-input.file-input"
           ) as HTMLInputElement
-        ).value.replace("C:\\fakepath\\", "") +
-        ")";
+        ).value.replace("C:\\fakepath\\", "") 
+        })`;
+}
   } else if (document.location.pathname.includes("/"))
     presenceData.details = "Viewing Homepage";
 

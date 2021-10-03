@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "719119956486258749"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -15,13 +15,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/show/")) {
     const postTitle = (
       document.querySelector("#postcontent > h3") as HTMLElement
-    ).innerText;
-    const userName = (
+    ).innerText,
+     userName = (
       document.querySelector(
         "#user-info > div > h4 > a:nth-child(1)"
       ) as HTMLElement
-    ).innerText;
-    const userHandle = (
+    ).innerText,
+     userHandle = (
       document.querySelector(
         "#user-info > div > h4 > a:nth-child(2)"
       ) as HTMLElement
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Reading an post";
     presenceData.state =
-      postTitle + " by " + userName + " (" + userHandle + ")";
+      `${postTitle} by ${userName} (${userHandle})`;
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/about")) {
     presenceData.startTimestamp = browsingStamp;
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

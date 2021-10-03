@@ -5,7 +5,7 @@ const presence = new Presence({
 function getRow(row: number) {
   const metas = document.getElementsByTagName("meta");
   for (let i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute("property") === "premid:row" + row) {
+    if (metas[i].getAttribute("property") === `premid:row${row}`) {
       const content = metas[i].getAttribute("content");
       return content === "" ? undefined : content;
     }

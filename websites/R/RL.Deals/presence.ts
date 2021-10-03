@@ -1,11 +1,11 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "636600375067279370"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var title: any;
-var replace: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ user: any,
+ title: any,
+ replace: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -39,31 +39,31 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Trading...";
     if (replace !== null) {
       presenceData.state =
-        title.innerText
+        `${title.innerText
           .replace("(", "")
           .replace(")", "")
-          .replace("Items", "item(s)") +
-        " for " +
-        replace.innerText +
-        " " +
-        user.innerText.replace("Items)", "") +
-        " total item(s))";
+          .replace("Items", "item(s)") 
+        } for ${ 
+        replace.innerText 
+        } ${ 
+        user.innerText.replace("Items)", "") 
+        } total item(s))`;
     } else {
       presenceData.state =
-        title.innerText
+        `${title.innerText
           .replace("(", "")
           .replace(")", "")
-          .replace("Items", "item(s)") +
-        " for " +
-        user.innerText.replace("Items)", "") +
-        " total item(s))";
+          .replace("Items", "item(s)") 
+        } for ${ 
+        user.innerText.replace("Items)", "") 
+        } total item(s))`;
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

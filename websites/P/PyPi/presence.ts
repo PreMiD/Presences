@@ -19,13 +19,13 @@ presence.on("UpdateData", () => {
       .children.length;
     presenceData.details = `Viewing the help-page :`;
     presenceData.state = `${total} total topics`;
-  } else if (Path.startsWith("/account/login")) {
+  } else if (Path.startsWith("/account/login")) 
     presenceData.details = `Logging into their account `;
-  } else if (Path.startsWith("/account/register")) {
+   else if (Path.startsWith("/account/register")) 
     presenceData.details = `Registering a new account `;
-  } else if (Path.startsWith("/search")) {
-    const query = (document.querySelector("#search") as HTMLInputElement).value;
-    const totalResults = document.querySelector(
+   else if (Path.startsWith("/search")) {
+    const query = (document.querySelector("#search") as HTMLInputElement).value,
+     totalResults = document.querySelector(
       "#content > div > div > div.left-layout__main > form > div.split-layout.split-layout--table.split-layout--wrap-on-tablet > div:nth-child(1) > p > strong"
     ).textContent;
     presenceData.details = `Searching for ${query} :`;
@@ -33,18 +33,18 @@ presence.on("UpdateData", () => {
   } else if (Path.startsWith("/project")) {
     const name = document.querySelector(
       "#content > div.banner > div > div.package-header__left > h1"
-    ).textContent;
-    const author = document.querySelector(
+    ).textContent,
+     author = document.querySelector(
       "#content > div:nth-child(3) > div > div > div.vertical-tabs__tabs > div:nth-child(5) > span > a > span.sidebar-section__user-gravatar-text"
     ).textContent;
     presenceData.details = `Viewing a package :`;
     presenceData.state = `${name} BY ${author}`;
-  } else if (Path.startsWith("/security")) {
+  } else if (Path.startsWith("/security")) 
     presenceData.details = `Reporting a security flaw `;
-  } else if (Path.startsWith("/policy/terms-of-use/")) {
+   else if (Path.startsWith("/policy/terms-of-use/")) 
     presenceData.details = `Viewing the terms of use `;
-  } else {
+   else 
     presenceData.details = `Browsing the site `;
-  }
+  
   presence.setActivity(presenceData);
 });

@@ -49,26 +49,26 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
 
     if (!searchTab) {
-      presenceData.details = "Searching for " + homepageInput.value;
+      presenceData.details = `Searching for ${homepageInput.value}`;
       presenceData.state = resultsInfo.textContent;
     } else if (searchTab == "isch") {
       presenceData.details = "Google Images";
-      presenceData.state = "Searching for " + imgInput.value;
+      presenceData.state = `Searching for ${imgInput.value}`;
     } else if (searchTab == "vid") {
       presenceData.details = "Google Videos";
-      presenceData.state = "Searching for " + pageInput.value;
+      presenceData.state = `Searching for ${pageInput.value}`;
     } else if (searchTab == "nws") {
       presenceData.details = "Google News";
-      presenceData.state = "Searching for " + pageInput.value;
+      presenceData.state = `Searching for ${pageInput.value}`;
     } else if (searchTab == "bks") {
       presenceData.details = "Google Books";
-      presenceData.state = "Searching for " + pageInput.value;
+      presenceData.state = `Searching for ${pageInput.value}`;
     } else if (searchTab == "fin") {
       presenceData.details = "Google Finance";
-      presenceData.state = "Searching for " + pageInput.value;
+      presenceData.state = `Searching for ${pageInput.value}`;
     } else if (searchTab == "pers") {
       presenceData.details = "Google Personal";
-      presenceData.state = "Searching for " + pageInput.value;
+      presenceData.state = `Searching for ${pageInput.value}`;
     }
   }
 

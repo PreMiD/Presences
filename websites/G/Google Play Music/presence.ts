@@ -1,8 +1,8 @@
 {
   const presence = new Presence({
     clientId: "610850440266907648"
-  });
-  const strings = presence.getStrings({
+  }),
+   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
@@ -12,8 +12,8 @@
     durationString = "00:00",
     separator = ":"
   ): { elapsedSec: number; durationSec: number } {
-    const elapsed = elapsedString.split(separator);
-    const duration = durationString.split(separator);
+    const elapsed = elapsedString.split(separator),
+     duration = durationString.split(separator);
 
     let elapsedSec: number, durationSec: number;
 
@@ -53,7 +53,7 @@
       }
     }
 
-    return { elapsedSec: elapsedSec, durationSec: durationSec };
+    return { elapsedSec, durationSec };
   }
 
   presence.on("UpdateData", async () => {
@@ -63,27 +63,27 @@
     ) {
       const title = document.querySelector(
         "#currently-playing-title"
-      ).textContent;
-      const artist =
+      ).textContent,
+       artist =
         document.querySelector("#player-artist").textContent ||
         document
           .querySelector(
             "#music-content > div.g-content.view-transition > div > table > tbody > tr.song-row.currently-playing > td:nth-child(1) > span"
           )
-          .textContent.split(" - ")[1];
-      const album =
+          .textContent.split(" - ")[1],
+       album =
         document.querySelector(".player-album").textContent ||
         document
           .querySelector(
             "#music-content > div.g-content.view-transition > div > table > tbody > tr.song-row.currently-playing > td:nth-child(1) > span"
           )
-          .textContent.split(" - ")[0];
+          .textContent.split(" - ")[0],
 
-      const isPlaying = !!document.querySelector(
+       isPlaying = !!document.querySelector(
         "#player-bar-play-pause.playing"
-      );
+      ),
 
-      const presenceData: PresenceData = {
+       presenceData: PresenceData = {
         details: title,
         state: `${artist} - ${album}`,
         largeImageKey: "gpm",
@@ -99,11 +99,11 @@
           Math.floor(Date.now() / 1000) - getTimesec(elapsed).elapsedSec;
       }
 
-      if (isPlaying) {
+      if (isPlaying) 
         presence.setTrayTitle(title);
-      } else {
+       else 
         delete presenceData.startTimestamp;
-      }
+      
 
       presence.setActivity(presenceData);
     }

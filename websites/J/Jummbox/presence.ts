@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "637737627151368202"
 });
 
 presence.on("UpdateData", async () => {
-  var presenceData = {
+  const presenceData = {
     largeImageKey: "large",
     details: "Using Jummbox",
     state: "Making a Beep"
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

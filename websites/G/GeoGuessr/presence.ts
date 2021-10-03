@@ -52,28 +52,28 @@ const updateCallback = {
 
       if (currentPath[0] !== "game") forceUpdate = false;
 
-      if (currentPath[0] === "") {
+      if (currentPath[0] === "") 
         presenceData.details = "On the home page";
-      } else if (currentPath[0] === "game") {
+       else if (currentPath[0] === "game") {
         forceUpdate = true;
         presenceData.details = document.querySelector(
           ".game-status[data-qa=map-name] .game-status__body"
         ).textContent;
         if (document.querySelector(".result")) {
           presenceData.state =
-            Number(
+            `${Number(
               document
                 .querySelector(
                   ".game-status[data-qa=round-number] .game-status__body"
                 )
                 .textContent.split(" / ")[0]
             ) +
-            1 +
-            " of 5, " +
+            1 
+            } of 5, ${ 
             document.querySelector(
               ".game-status[data-qa=score] .game-status__body"
-            ).textContent +
-            " points";
+            ).textContent 
+            } points`;
           if (
             document
               .querySelector(
@@ -82,44 +82,44 @@ const updateCallback = {
               .textContent.split(" / ")[0] === "5"
           ) {
             presenceData.state =
-              "Finished, " +
+              `Finished, ${ 
               document.querySelector(
                 ".game-status[data-qa=score] .game-status__body"
-              ).textContent +
-              " points";
+              ).textContent 
+              } points`;
           }
         } else {
           presenceData.state =
-            document
+            `${document
               .querySelector(
                 ".game-status[data-qa=round-number] .game-status__body"
               )
-              .textContent.split(" / ")[0] +
-            " of 5, " +
+              .textContent.split(" / ")[0] 
+            } of 5, ${ 
             document.querySelector(
               ".game-status[data-qa=score] .game-status__body"
-            ).textContent +
-            " points";
+            ).textContent 
+            } points`;
         }
-      } else if (currentPath[0] === "maps" && !currentPath[1]) {
+      } else if (currentPath[0] === "maps" && !currentPath[1]) 
         presenceData.details = "Looking for a map";
-      } else if (currentPath[0] === "maps") {
+       else if (currentPath[0] === "maps") {
         if (document.querySelector(".map-block__title")) {
           presenceData.details = "Viewing a map";
           presenceData.state =
             document.querySelector(".map-block__title").textContent;
-        } else {
+        } else 
           presenceData.details = "Looking for a map";
-        }
+        
       } else if (currentPath[0] === "user") {
         presenceData.details = "Viewing a user profile";
         presenceData.state = document.querySelector(
           ".profile-summary__nick"
         ).textContent;
       } else if (currentPath[0] === "me") {
-        if (currentPath[2] === undefined) {
+        if (currentPath[2] === undefined) 
           presenceData.details = "Viewing their own profile";
-        } else {
+         else {
           const pageNames: { [index: string]: string } = {
             settings: "Settings",
             leagues: "Leagues",
@@ -133,11 +133,11 @@ const updateCallback = {
           presenceData.details = "Viewing a personal page";
           presenceData.state = pageNames[currentURL.pathname.split("/")[2]];
         }
-      } else if (currentPath[0] === "signin") {
+      } else if (currentPath[0] === "signin") 
         presenceData.details = "Signing in";
-      } else if (currentPath[0] === "signup") {
+       else if (currentPath[0] === "signup") 
         presenceData.details = "Registering an account";
-      } else {
+       else {
         if (document.title === "GeoGuessr - Let's explore the world!")
           forceUpdate = true;
         else {
@@ -148,9 +148,9 @@ const updateCallback = {
       }
 
       presenceDataPlaced = presenceData;
-    } else {
+    } else 
       presenceData = presenceDataPlaced;
-    }
+    
   };
 })();
 

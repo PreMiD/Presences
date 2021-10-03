@@ -100,9 +100,9 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -125,11 +125,11 @@ presence.on("UpdateData", async () => {
         .split("/")[3]
         .split("-")[1];
       if (!isMovie) {
-        if (currentAnimeEpisode[0] == "0") {
+        if (currentAnimeEpisode[0] == "0") 
           episodeNumber = currentAnimeEpisode.replace("0", "");
-        } else {
+         else 
           episodeNumber = currentAnimeEpisode;
-        }
+        
         currentAnimeEpisode = `Episode ${episodeNumber}`;
 
         if (buttons) {
@@ -175,11 +175,11 @@ presence.on("UpdateData", async () => {
         .split("/")[3]
         .split("-")[1];
       if (!isMovie) {
-        if (currentAnimeEpisode[0] == "0") {
+        if (currentAnimeEpisode[0] == "0") 
           episodeNumber = currentAnimeEpisode.replace("0", "");
-        } else {
+         else 
           episodeNumber = currentAnimeEpisode;
-        }
+        
         currentAnimeEpisode = `Episode ${episodeNumber}`;
 
         if (buttons) {

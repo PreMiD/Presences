@@ -1,9 +1,9 @@
 const presence = new Presence({
   clientId: "714628886222209105"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
-let chapter, titlePage, title;
-let subject;
+}),
+ browsingStamp = Math.floor(Date.now() / 1000);
+let chapter, titlePage, title,
+ subject;
 const path = document.location.pathname;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,18 +13,18 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "body > header.TitleHeader_header.TitleHeader_header--studyGuide > div > div > h1"
     );
-    if (path == "/" + subject + "/") {
+    if (path == `/${subject}/`) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing " + subject.replace(/-/gi, " ");
+      presenceData.details = `Viewing ${subject.replace(/-/gi, " ")}`;
     } else if (title) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = title.textContent;
       chapter = document.querySelector(
         "body > header.interior-header > div > div.interior-header__title > div"
       );
-      if (chapter) {
+      if (chapter) 
         presenceData.state = chapter.textContent;
-      }
+      
     }
     return;
   }
@@ -65,24 +65,24 @@ presence.on("UpdateData", async () => {
   } else if (path == "/othersubjects/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing Other Subjects";
-  } else if (path == "/math/") {
+  } else if (path == "/math/") 
     subjectCondition("math");
-  } else if (path == "/biology/") {
+   else if (path == "/biology/") 
     subjectCondition("biology");
-  } else if (path == "/american-government/") {
+   else if (path == "/american-government/") 
     subjectCondition("american-government");
-  } else if (path == "/sociology/") {
+   else if (path == "/sociology/") 
     subjectCondition("sociology");
-  } else if (path == "/poetry/") {
+   else if (path == "/poetry/") 
     subjectCondition("poetry");
-  } else if (path == "/drama/") {
+   else if (path == "/drama/") 
     subjectCondition("drama");
-  } else if (path == "/cs/") {
+   else if (path == "/cs/") {
     subject = "cs";
     title = document.querySelector(
       "body > header.TitleHeader_header.TitleHeader_header--studyGuide > div > div > h1"
     );
-    if (path == "/" + subject + "/") {
+    if (path == `/${subject}/`) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing Computer Science";
     } else if (title) {
@@ -91,27 +91,27 @@ presence.on("UpdateData", async () => {
       chapter = document.querySelector(
         "body > header.interior-header > div > div.interior-header__title > div"
       );
-      if (chapter) {
+      if (chapter) 
         presenceData.state = chapter.textContent;
-      }
+      
     }
-  } else if (path == "/health/") {
+  } else if (path == "/health/") 
     subjectCondition("health");
-  } else if (path == "/physics/") {
+   else if (path == "/physics/") 
     subjectCondition("physics");
-  } else if (path == "/biography/") {
+   else if (path == "/biography/") 
     subjectCondition("biography");
-  } else if (path == "/economics/") {
+   else if (path == "/economics/") 
     subjectCondition("economics");
-  } else if (path == "/history/") {
+   else if (path == "/history/") 
     subjectCondition("history");
-  } else if (path == "/philosophy/") {
+   else if (path == "/philosophy/") 
     subjectCondition("philosophy");
-  } else if (path == "/psychology/") {
+   else if (path == "/psychology/") 
     subjectCondition("psychology");
-  } else if (path == "/us-government-and-politics/") {
+   else if (path == "/us-government-and-politics/") 
     subjectCondition("us-government-and-politics");
-  } else if (path == "/search") {
+   else if (path == "/search") {
     title = (
       document.querySelector("#results-search-input") as HTMLInputElement
     ).value;
@@ -120,18 +120,18 @@ presence.on("UpdateData", async () => {
     presenceData.state = title;
   } else if (title) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing: " + title.textContent;
+    presenceData.details = `Viewing: ${title.textContent}`;
     chapter = document.querySelector("#section > h3:nth-child(2)");
     titlePage = document.querySelector(
       "body > header.interior-header > div > div.interior-header__title > div > span.interior-header__title__pagetitle"
     );
-    if (chapter) {
+    if (chapter) 
       presenceData.state = chapter.textContent;
-    } else if (titlePage) {
+     else if (titlePage) 
       presenceData.state = titlePage.textContent;
-    } else {
+     else 
       presenceData.state = "Viewing Study Guide";
-    }
+    
   } else if (
     title == null &&
     document.querySelector(
@@ -142,13 +142,13 @@ presence.on("UpdateData", async () => {
       "body > header.TitleHeader_header.TitleHeader_header--noFear > div > div > h1"
     );
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing: " + title.textContent;
+    presenceData.details = `Viewing: ${title.textContent}`;
     titlePage = document.querySelector(
       "body > header.interior-header > div > div.interior-header__title > div"
     );
-    if (titlePage) {
+    if (titlePage) 
       presenceData.state = titlePage.textContent;
-    }
+    
   } else if (path == "/login/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Login Unavailable";
@@ -163,7 +163,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

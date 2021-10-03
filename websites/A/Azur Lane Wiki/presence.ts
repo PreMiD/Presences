@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "670325644319522816"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -10,9 +10,9 @@ presence.on("UpdateData", () => {
   };
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.pathname == "/Azur_Lane_Wiki") {
+  if (document.location.pathname == "/Azur_Lane_Wiki") 
     presenceData.details = "Viewing Wiki home page";
-  } else if (document.querySelector(".firstHeading") !== null) {
+   else if (document.querySelector(".firstHeading") !== null) {
     presenceData.details = "Viewing page:";
     presenceData.state = document.querySelector(".firstHeading").textContent;
   }
@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

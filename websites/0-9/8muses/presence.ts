@@ -3,9 +3,9 @@ const presence = new Presence({
   }),
   strings = presence.getStrings({
     search: "presence.activity.searching"
-  });
+  }),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -31,16 +31,16 @@ presence.on("UpdateData", async () => {
   } else if (document.location.href.includes("/#")) {
     const comicName = (
       document.querySelector("head > meta:nth-child(17)") as HTMLMetaElement
-    ).content;
-    const issueName = document.location.pathname
+    ).content,
+     issueName = document.location.pathname
       .split("/")[2]
-      .replace(/_/g, " ");
-    const issueNumber = document
+      .replace(/_/g, " "),
+     issueNumber = document
       .querySelector("#left-menu > ol > li:nth-child(3) > div > span")
       .textContent.trim();
     if (document.location.pathname.split("/")[2].includes("")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = comicName + " - " + issueName;
+      presenceData.details = `${comicName} - ${issueName}`;
       presenceData.state = issueNumber;
       presenceData.smallImageKey = "reading";
     } else {
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

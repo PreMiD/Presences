@@ -2,9 +2,9 @@ const presence = new Presence({
   clientId: "729035228324298852" // CLIENT ID FOR YOUR PRESENCE
 });
 
-var item: any, user: any, title: any;
+let item: any, user: any, title: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -34,11 +34,11 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#content > div > div:nth-child(1) > div > div:nth-child(2) > h3"
       );
-      if (item != null) {
+      if (item != null) 
         title = title.innerText.replace(item.innerText, "");
-      } else {
+       else 
         title = title.innerText;
-      }
+      
       presenceData.details = "Ideas, Viewing:";
       presenceData.state = title;
 
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "body > div > main > div > div.md-sidebar.md-sidebar--primary > div > div > nav > ul > li.md-nav__item.md-nav__item--active.md-nav__item--nested > label"
     );
-    title = user.innerText + " - " + title.innerText;
+    title = `${user.innerText} - ${title.innerText}`;
     presenceData.details = "Docs viewing:";
     presenceData.state = title;
 

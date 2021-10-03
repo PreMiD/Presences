@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
   } else if (
     !isNaN(stream.duration) &&
     !isNaN(stream.currentTime) &&
-    typeof stream.paused == "boolean"
+    typeof stream.paused === "boolean"
   ) {
     const name: string[] = document
       .querySelector("h1.text-sans > a")
@@ -100,11 +100,11 @@ presence.on("UpdateData", async () => {
         {
           label: "Diziyi Görüntüle",
           url:
-            document.location.origin +
-            "/" +
-            document.location.pathname.split("/")[1] +
-            "/" +
-            document.location.pathname.split("/")[2]
+            `${document.location.origin 
+            }/${ 
+            document.location.pathname.split("/")[1] 
+            }/${ 
+            document.location.pathname.split("/")[2]}`
         }
       ];
       delete presenceData.startTimestamp;
@@ -122,11 +122,11 @@ presence.on("UpdateData", async () => {
         {
           label: "Diziyi Görüntüle",
           url:
-            document.location.origin +
-            "/" +
-            document.location.pathname.split("/")[1] +
-            "/" +
-            document.location.pathname.split("/")[2]
+            `${document.location.origin 
+            }/${ 
+            document.location.pathname.split("/")[1] 
+            }/${ 
+            document.location.pathname.split("/")[2]}`
         }
       ];
       presenceData.startTimestamp = timestamps[0];

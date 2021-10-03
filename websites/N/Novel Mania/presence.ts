@@ -37,24 +37,24 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = time;
     } else if (document.body.contains(VolNumb)) {
       presenceData.details =
-        "Lendo " +
-        NovelTitle.innerText +
-        " || " +
-        VolNumb.innerText; /* reading volume */
+        `Lendo ${ 
+        NovelTitle.innerText 
+        } || ${ 
+        VolNumb.innerText}`; /* reading volume */
       presenceData.state =
-        "Em " +
-        porcent.innerText +
-        " do " +
-        currentChapTitle.innerText; /*in X% of... novel chapter*/
+        `Em ${ 
+        porcent.innerText 
+        } do ${ 
+        currentChapTitle.innerText}`; /*in X% of... novel chapter*/
       presenceData.startTimestamp = time;
     } else {
       presenceData.details =
-        "Lendo" + NovelTitle.innerText; /* reading *novel**/
+        `Lendo${NovelTitle.innerText}`; /* reading *novel**/
       presenceData.state =
-        "Em " +
-        porcent.innerText +
-        "do" +
-        currentChapTitle.innerText; /*in X% of... novel chapter*/
+        `Em ${ 
+        porcent.innerText 
+        }do${ 
+        currentChapTitle.innerText}`; /*in X% of... novel chapter*/
       presenceData.startTimestamp = time;
     }
   } else if (path.includes("/u/")) {

@@ -40,10 +40,10 @@ eldiru.on("UpdateData", async () => {
         sub = document.querySelector(
           "#page-mod-attendance-view > div#page-wrapper > div#page > div#learningcontent > div#page-content > div#region-main-box > section#region-main > div > h2"
         ).textContent;
-        presenceData.details = "Viewing " + sub;
-      } else {
+        presenceData.details = `Viewing ${sub}`;
+      } else 
         presenceData.details = "Viewing attendance:";
-      }
+      
       presenceData.state = course;
     } else if (document.location.pathname.includes("/mod/forum/")) {
       presenceData.startTimestamp = browsingStamp;
@@ -58,10 +58,10 @@ eldiru.on("UpdateData", async () => {
         sub = document.querySelector(
           "#page-mod-forum-view > div#page-wrapper > div#page > div#learningcontent > div#page-content > div#region-main-box > section#region-main > div > h2"
         ).textContent;
-        presenceData.details = "Viewing " + sub;
-      } else {
+        presenceData.details = `Viewing ${sub}`;
+      } else 
         presenceData.details = "Viewing forum:";
-      }
+      
       presenceData.state = course;
     } else if (document.location.pathname.includes("/mod/page/")) {
       presenceData.startTimestamp = browsingStamp;
@@ -76,10 +76,10 @@ eldiru.on("UpdateData", async () => {
         sub = document.querySelector(
           "#page-mod-page-view > div#page-wrapper > div#page > div#learningcontent > div#page-content > div#region-main-box > section#region-main > div > h2"
         ).textContent;
-        presenceData.details = "Viewing " + sub;
-      } else {
+        presenceData.details = `Viewing ${sub}`;
+      } else 
         presenceData.details = "Viewing page:";
-      }
+      
       presenceData.state = course;
     } else if (document.location.pathname.includes("/mod/assign/")) {
       presenceData.startTimestamp = browsingStamp;
@@ -94,10 +94,10 @@ eldiru.on("UpdateData", async () => {
         sub = document.querySelector(
           "#page-mod-assign-view > div#page-wrapper > div#page > div#learningcontent > div#page-content > div#region-main-box > section#region-main > div > h2"
         ).textContent;
-        presenceData.details = "Viewing " + sub;
-      } else {
+        presenceData.details = `Viewing ${sub}`;
+      } else 
         presenceData.details = "Viewing assignment:";
-      }
+      
       presenceData.state = course;
     } else if (document.location.pathname.includes("/mod/quiz/")) {
       presenceData.startTimestamp = browsingStamp;
@@ -112,18 +112,18 @@ eldiru.on("UpdateData", async () => {
         sub = document.querySelector(
           "#page-mod-quiz-view > div#page-wrapper > div#page > div#learningcontent > div#page-content > div#region-main-box > section#region-main > div > h2"
         ).textContent;
-        presenceData.details = "Viewing " + sub;
-      } else {
+        presenceData.details = `Viewing ${sub}`;
+      } else 
         presenceData.details = "Viewing quiz:";
-      }
+      
       presenceData.state = course;
     }
 
     if (presenceData.details == null) {
       eldiru.setTrayTitle();
       eldiru.setActivity();
-    } else {
+    } else 
       eldiru.setActivity(presenceData);
-    }
+    
   }
 });

@@ -2,8 +2,8 @@ const presence = new Presence({
   clientId: "715667985267949649"
 });
 let title, subTitle, chapter, quiz, search;
-const browsingStamp = Math.floor(Date.now() / 1000);
-const path = document.location.pathname;
+const browsingStamp = Math.floor(Date.now() / 1000),
+ path = document.location.pathname;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "#mainTag > section > div:nth-child(1) > div > div > h1"
     ) as HTMLTextAreaElement;
-    presenceData.details = "Viewing " + title.innerText;
+    presenceData.details = `Viewing ${title.innerText}`;
     presenceData.startTimestamp = browsingStamp;
   } else if (path == "/disclaimer") {
     presenceData.details = "Viewing Disclaimer";
@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "619967690056007699"
 });
 
 presence.on("UpdateData", async () => {
-  var urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(window.location.search);
   if (document.location.href.includes("rule34.xxx")) {
     if (document.location.pathname == "/") {
       const pdata: PresenceData = {
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
       } else if (urlParams.get("s") == "view" && urlParams.get("id")) {
         const pdata: PresenceData = {
           details: "Viewing a Post...",
-          state: "Post " + urlParams.get("id"),
+          state: `Post ${urlParams.get("id")}`,
           largeImageKey: "lg-r34"
         };
         presence.setActivity(pdata);
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(pdata);
     }
   } else if (document.location.href.includes("rule34.paheal.net")) {
-    var path = document.location.pathname.split("/");
+    const path = document.location.pathname.split("/");
     if (document.location.pathname == "/") {
       const pdata: PresenceData = {
         details: "Viewing the homepage...",
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
       } else if (path[2] == "view") {
         const pdata: PresenceData = {
           details: "Viewing a post...",
-          state: "Post " + path[3],
+          state: `Post ${path[3]}`,
           largeImageKey: "lg-r34"
         };
         presence.setActivity(pdata);

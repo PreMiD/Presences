@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "641409342566039558"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -18,15 +18,15 @@ presence.on("UpdateData", async () => {
       null
     ) {
       presenceData.details =
-        "Reading '" + document.querySelector(".title").textContent + "'";
+        `Reading '${document.querySelector(".title").textContent}'`;
       presenceData.state =
-        "Chapter " +
+        `Chapter ${ 
         document
           .querySelector(".current-chapter")
-          .textContent.replace("Chap ", "") +
-        " - Page " +
+          .textContent.replace("Chap ", "") 
+        } - Page ${ 
         document.querySelector(".page-navigation > span > em:nth-child(1)")
-          .textContent;
+          .textContent}`;
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/manga/")) {
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

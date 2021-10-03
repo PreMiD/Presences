@@ -143,13 +143,13 @@ presence.on("UpdateData", () => {
           "PreMiD_Salem_Out"
         ) as HTMLTextAreaElement,
         info = JSON.parse(e.value);
-      if (oldState.page != info.page) {
+      if (oldState.page != info.page) 
         elapsed = Math.round(Date.now() / 1000);
-      }
+      
       let key = "regular";
-      if (info.type.search(/Coven/g) !== -1) {
+      if (info.type.search(/Coven/g) !== -1) 
         key = "coven";
-      }
+      
       let gameType = "Classic";
       switch (info.type) {
         case "ClassicTownTraitor": {
@@ -248,22 +248,22 @@ presence.on("UpdateData", () => {
           });
           switch (info.state) {
             case 0: {
-              data.state = "Night " + info.day;
+              data.state = `Night ${info.day}`;
               data.smallImageKey = "night";
               break;
             }
             case 1: {
-              data.state = "Day " + info.day;
+              data.state = `Day ${info.day}`;
               data.smallImageKey = "day";
               break;
             }
             case 2: {
-              data.state = "Day " + info.day + " | Judgement";
+              data.state = `Day ${info.day} | Judgement`;
               data.smallImageKey = "voting";
               break;
             }
             case 3: {
-              data.state = "Day " + info.day + " | Game End";
+              data.state = `Day ${info.day} | Game End`;
               data.smallImageKey = "idle";
               break;
             }

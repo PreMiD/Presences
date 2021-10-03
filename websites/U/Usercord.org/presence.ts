@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "661150919584514067"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -40,9 +40,9 @@ presence.on("UpdateData", () => {
       presenceData.details = `Joining Discord..`;
       presenceData.state = `Name: DiscordLabs`;
     } else if (document.location.pathname.includes("/u/")) {
-      var priceEls = document.getElementsByClassName("usertitle");
-      for (var i = 0; i < priceEls.length; i++) {
-        var profilename = priceEls[i].textContent;
+      const priceEls = document.getElementsByClassName("usertitle");
+      for (let i = 0; i < priceEls.length; i++) {
+        const profilename = priceEls[i].textContent;
         presenceData.details = "Viewing a profile:";
         presenceData.state = profilename;
       }
@@ -51,7 +51,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -144,9 +144,9 @@ presence.on("UpdateData", async () => {
         if (currentClueData.length) {
           presenceData.details = "Spectating... Current clue:";
           presenceData.state = `${currentClueData[0].firstElementChild.textContent} (Matches ${currentClueData[0].children[1].textContent} cards)`;
-        } else {
+        } else 
           presenceData.details = "Spectating...";
-        }
+        
       } else if (document.querySelector("input")) {
         //* is spymaster and has to put in a clue rn
         presenceData.details = "Giving a clue";
@@ -192,9 +192,9 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-    } else {
+    } else 
       presenceData.details = "Browsing...";
-    }
+    
   }
   presence.setActivity(presenceData);
 });

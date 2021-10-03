@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "739290632463319141"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
@@ -28,9 +28,9 @@ presence.on("UpdateData", async () => {
       document.location.search.substring(3)
     ).replace(/\+/g, " ");
 
-    if (searchThing.includes("&")) {
+    if (searchThing.includes("&")) 
       searchThing = searchThing.substring(0, searchThing.indexOf("&"));
-    }
+    
 
     const presenceData: PresenceData = {
       details: "Searching for a show...",
@@ -43,11 +43,11 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (window.location.href.match("/[^-][0-9]{1,5}")) {
     if (document.location.pathname.startsWith("/profile/")) {
-      let profileName1 = document.querySelector(
+      const profileName1 = document.querySelector(
         "#content > div > div.container-fluid.profile-container > div > div.col-lg-8.col-md-8 > div.box > div.box-header.box-navbar > div.profile-header > div.hidden-sm-down > h1"
-      );
+      ),
 
-      const profilePresnceData: PresenceData = {
+       profilePresnceData: PresenceData = {
         details: "Looking at user profile",
         state: profileName1.textContent,
         largeImageKey: "mdl-logo",
@@ -55,11 +55,11 @@ presence.on("UpdateData", async () => {
       };
       presence.setActivity(profilePresnceData);
     } else if (document.location.pathname.startsWith("/people/")) {
-      let actorsName = document.querySelector(
+      const actorsName = document.querySelector(
         "#content > div > div.container-fluid > div > div.col-lg-4.col-md-4 > div > div:nth-child(1) > div.box-header.p-b-0.text-center > h1"
-      );
+      ),
 
-      const actorPresenceData: PresenceData = {
+       actorPresenceData: PresenceData = {
         details: "Looking at Actors",
         state: actorsName.textContent,
         largeImageKey: "mdl-logo",
@@ -70,11 +70,11 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(actorPresenceData);
     } else {
-      let showName = document.querySelector(
+      const showName = document.querySelector(
         "div.col-lg-8.col-md-8.col-right > div:nth-child(1) > div.box-header.box-navbar > h1 > a"
-      );
+      ),
 
-      const presenceData: PresenceData = {
+       presenceData: PresenceData = {
         details: "Viewing show page ...",
         state: showName.textContent,
         largeImageKey: "mdl-logo",
@@ -85,11 +85,11 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
   } else if (document.location.pathname.startsWith("/article/")) {
-    let articleName = document.querySelector(
+    const articleName = document.querySelector(
       "#article > div.box-header > h1 > a"
-    ).textContent;
+    ).textContent,
 
-    const presenceData: PresenceData = {
+     presenceData: PresenceData = {
       details: "Reading an article",
       state: articleName,
       largeImageKey: "mdl-logo",
@@ -182,9 +182,9 @@ presence.on("UpdateData", async () => {
         */
     const profileName = document.querySelector(
       "#content > div > div.container-fluid.profile-container > div > div.col-lg-8.col-md-8 > div.box > div.box-header.box-navbar > div.profile-header > div.hidden-sm-down > h1"
-    );
+    ),
 
-    const presenceData: PresenceData = {
+     presenceData: PresenceData = {
       details: "Looking at user profile",
       state: profileName.textContent,
       largeImageKey: "mdl-logo",

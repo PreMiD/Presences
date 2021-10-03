@@ -46,9 +46,9 @@ presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("lang"),
     buttons = await presence.getSetting("buttons");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -59,13 +59,13 @@ presence.on("UpdateData", async () => {
     },
     path = document.location.pathname;
 
-  if (path === "/") {
+  if (path === "/") 
     presenceData.details = (await strings).home;
-  } else if (path.startsWith("/a/")) {
+   else if (path.startsWith("/a/")) {
     let article = document.querySelector("h1.article_title").textContent;
-    if (article.length > 128) {
-      article = article.substring(0, 125) + "...";
-    }
+    if (article.length > 128) 
+      article = `${article.substring(0, 125)}...`;
+    
     presenceData.details = (await strings).article;
     presenceData.state = article;
     presenceData.smallImageKey = "reading";
@@ -80,13 +80,14 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "h1.header_with_cover_art-primary_info-title"
     ).textContent;
-    if (buttons)
-      presenceData.buttons = [
+    if (buttons) {
+presenceData.buttons = [
         {
           label: (await strings).buttonAlbum,
           url: document.URL
         }
       ];
+}
   } else if (
     document.querySelector("div[class*='SongPageGrid']") !== null ||
     document.querySelector(".song_body-lyrics") !== null
@@ -106,14 +107,15 @@ presence.on("UpdateData", async () => {
           .querySelector("a.header_with_cover_art-primary_info-primary_artist")
           ?.textContent.trim();
     presenceData.details = (await strings).lyrics;
-    presenceData.state = artist + " - " + song;
-    if (buttons)
-      presenceData.buttons = [
+    presenceData.state = `${artist} - ${song}`;
+    if (buttons) {
+presenceData.buttons = [
         {
           label: (await strings).viewLyrics,
           url: document.URL
         }
       ];
+}
   } else if (
     document.querySelector(".profile_identity-name_iq_and_role_icon") !== null
   ) {
@@ -124,9 +126,9 @@ presence.on("UpdateData", async () => {
   } else if (path.startsWith("/videos/")) {
     const video: HTMLVideoElement = document.querySelector("video.vjs-tech");
     let title = document.querySelector("h1.article_title").textContent;
-    if (title.length > 128) {
-      title = title.substring(0, 125) + "...";
-    }
+    if (title.length > 128) 
+      title = `${title.substring(0, 125)}...`;
+    
     presenceData.details = (await strings).watch;
     presenceData.state = title;
     if (video && !isNaN(video.duration)) {
@@ -156,7 +158,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

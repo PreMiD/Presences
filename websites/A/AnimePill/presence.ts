@@ -100,9 +100,9 @@ const pages: PageContext[] = [
     } else if (
       !lastIframeData ||
       (Date.now() - lastIframeData.getTime()) / 1000 / 60 > 10
-    ) {
+    ) 
       currentVideo = null;
-    }
+    
   });
   presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -136,8 +136,8 @@ const pages: PageContext[] = [
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
+    } else 
       presence.setActivity(presenceData);
-    }
+    
   });
 })();

@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "623657389706444820" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var item: any, user: any, search: any, item2: any;
+ item: any, user: any, search: any, item2: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -143,14 +143,14 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Searching for:";
       if (item2 !== null) {
         presenceData.state =
-          search.innerText +
-          ", sorted by " +
-          item.innerText +
-          " of " +
-          item2.innerText;
-      } else {
-        presenceData.state = search.innerText + ", sorted by " + item.innerText;
-      }
+          `${search.innerText 
+          }, sorted by ${ 
+          item.innerText 
+          } of ${ 
+          item2.innerText}`;
+      } else 
+        presenceData.state = `${search.innerText}, sorted by ${item.innerText}`;
+      
 
       delete presenceData.smallImageKey;
 
@@ -161,11 +161,11 @@ presence.on("UpdateData", async () => {
       );
       if (item !== null) {
         presenceData.details = "Viewing a hidden post:";
-        if (item.innerText.length > 128) {
-          presenceData.state = item.innerText.substring(0, 125) + "...";
-        } else {
+        if (item.innerText.length > 128) 
+          presenceData.state = `${item.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = item.innerText;
-        }
+        
 
         delete presenceData.smallImageKey;
 
@@ -184,22 +184,22 @@ presence.on("UpdateData", async () => {
       );
       if (document.location.pathname.includes("/comment/")) {
         presenceData.details = "Viewing comment at post:";
-        if (item.innerText.length > 128) {
-          presenceData.state = item.innerText.substring(0, 125) + "...";
-        } else {
+        if (item.innerText.length > 128) 
+          presenceData.state = `${item.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = item.innerText;
-        }
+        
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Viewing post:";
-        if (item.innerText.length > 128) {
-          presenceData.state = item.innerText.substring(0, 125) + "...";
-        } else {
+        if (item.innerText.length > 128) 
+          presenceData.state = `${item.innerText.substring(0, 125)}...`;
+         else 
           presenceData.state = item.innerText;
-        }
+        
 
         delete presenceData.smallImageKey;
 
@@ -271,11 +271,11 @@ presence.on("UpdateData", async () => {
         "#main-content > article > header > div.clearfix > h1"
       );
       presenceData.details = "Blog, reading article:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       presenceData.smallImageKey = "reading";
 
@@ -342,11 +342,11 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/t/")) {
       item = document.querySelector("#topic-title > div > div > h1 > a");
       presenceData.details = "Community, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       presenceData.smallImageKey = "reading";
 
@@ -384,7 +384,7 @@ presence.on("UpdateData", async () => {
         "#main-outlet > div.list-controls > div > section > div.category-navigation > ol > li > div > span > span > span.badge-category.clear-badge > span"
       );
       presenceData.details = "Community, Browsing";
-      presenceData.state = "category: " + item.innerText;
+      presenceData.state = `category: ${item.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -394,7 +394,7 @@ presence.on("UpdateData", async () => {
         "#main-outlet > div:nth-child(3) > section > section > div.details > div.primary > div.primary-textual > div.user-profile-names > h2"
       );
       presenceData.details = "Community, viewing";
-      presenceData.state = "user: " + item.innerText;
+      presenceData.state = `user: ${item.innerText}`;
 
       delete presenceData.smallImageKey;
 

@@ -2,7 +2,7 @@
   Currently no further information like time left and pause status, as the iframes get added after the page is loaded, which doesn't work with the iframe.ts at the moment.
 */
 
-var presence = new Presence({
+const presence = new Presence({
   clientId: "614903529240395782"
 });
 

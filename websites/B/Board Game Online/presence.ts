@@ -6,9 +6,9 @@ const presence = new Presence({
   }),
   getElement = (query: string): string => {
     const element = document.querySelector(query);
-    if (element) {
+    if (element) 
       return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return undefined;
+     else return undefined;
   };
 
 function setObject(path: string) {
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "boardgameonline"
     },
-    host = location.host,
+    {host} = location,
     path = location.pathname,
     query = location.search,
     queryString = query && query.split("page=")[1].split("&")[0],
@@ -137,9 +137,9 @@ presence.on("UpdateData", async () => {
     data.details = "Playing Game";
     data.state = document.title;
 
-    if (playerCount) {
-      data.state = document.title + ` (${playerCount - 1} Players)`;
-    }
+    if (playerCount) 
+      data.state = `${document.title} (${playerCount - 1} Players)`;
+    
   }
 
   if (data.details !== undefined) {

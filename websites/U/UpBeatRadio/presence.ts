@@ -80,10 +80,10 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/News.Article")) {
       presenceData.details =
-        "Reading article: " +
-        document.querySelector(".title").textContent.trim();
+        `Reading article: ${ 
+        document.querySelector(".title").textContent.trim()}`;
       presenceData.state =
-        "Written by: " + document.querySelector(".info > a").textContent.trim();
+        `Written by: ${document.querySelector(".info > a").textContent.trim()}`;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/Account.Profile")) {
       presenceData.details = "Viewing profile of:";
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
         .textContent.toLowerCase();
       if (type == "vip's") type = "VIP";
       presenceData.details = "Viewing the";
-      presenceData.state = type + " members";
+      presenceData.state = `${type} members`;
       presenceData.smallImageKey = "reading";
     } else if (document.querySelector(".bigTitle") !== null) {
       let type = document.querySelector(".bigTitle").textContent.toLowerCase();

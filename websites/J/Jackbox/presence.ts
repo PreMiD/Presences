@@ -55,15 +55,15 @@ const elapsed: number = Math.round(new Date().getTime() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "jackbox"
-  };
+  },
 
   // Check for presence setting
-  const useName: boolean = await presence.getSetting("useName");
-  const useTime: boolean = await presence.getSetting("useTime");
+   useName: boolean = await presence.getSetting("useName"),
+   useTime: boolean = await presence.getSetting("useTime");
 
-  if (useTime) {
+  if (useTime) 
     presenceData.startTimestamp = elapsed;
-  }
+  
 
   // PP6
   if (document.getElementsByClassName("Ridictionary").length > 0) {
@@ -162,38 +162,38 @@ presence.on("UpdateData", async () => {
     layout = "legacy";
 
     // Other
-  } else if (window.location.href.includes("games.jackbox.tv")) {
+  } else if (window.location.href.includes("games.jackbox.tv")) 
     presenceData.details = "Looking at a past game";
-  } else {
+   else 
     presenceData.details = "Idle";
-  }
+  
 
   if (useName && layout == "new") {
     presenceData.state =
-      "as " + document.getElementById("playername").innerHTML;
+      `as ${document.getElementById("playername").innerHTML}`;
   }
 
   if (useName && layout == "legacy") {
     presenceData.state =
-      "as " + document.getElementById("player").children[0].innerHTML;
+      `as ${document.getElementById("player").children[0].innerHTML}`;
   }
 
   if (useName && layout == "dict") {
     presenceData.state =
-      "as " +
-      document.getElementById("playericon").className.split("_")[1] +
-      document.getElementById("playername").innerHTML.toLowerCase();
+      `as ${ 
+      document.getElementById("playericon").className.split("_")[1] 
+      }${document.getElementById("playername").innerHTML.toLowerCase()}`;
   }
 
   if (useName && layout == "guessp") {
     presenceData.state =
-      "as " + document.getElementById("player").children[1].innerHTML;
+      `as ${document.getElementById("player").children[1].innerHTML}`;
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

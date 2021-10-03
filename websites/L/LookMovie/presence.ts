@@ -30,15 +30,15 @@ presence.on("UpdateData", async () => {
 
     if (document.location.pathname.includes("/shows/view")) {
       data.details =
-        document.querySelector(".watch-heading > h1 > span").previousSibling
-          .textContent +
-        "(" +
-        document.querySelector(".watch-heading > h1 > span").textContent +
-        ")";
+        `${document.querySelector(".watch-heading > h1 > span").previousSibling
+          .textContent 
+        }(${ 
+        document.querySelector(".watch-heading > h1 > span").textContent 
+        })`;
       data.state =
-        document.querySelector(".seasons-switcher > span").textContent +
-        " " +
-        document.querySelector(".episodes-switcher > span").textContent;
+        `${document.querySelector(".seasons-switcher > span").textContent 
+        } ${ 
+        document.querySelector(".episodes-switcher > span").textContent}`;
     } else if (document.location.pathname.includes("/movies/view")) {
       data.details = document.querySelector(
         ".watch-heading > h1 > span"

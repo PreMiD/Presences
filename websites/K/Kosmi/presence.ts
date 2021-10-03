@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 
     /* This is executed if the user plays a game that is not in the "Special Activities" Array */
     if (activityName !== null && !noGames.includes(activityName.textContent)) {
-      details = "Playing " + activityName.textContent;
+      details = `Playing ${activityName.textContent}`;
       smallImageKey = "gamepad";
     } else if (
       activityName !== null &&
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
         activityName.textContent /* Proper Grammar for the Activities */
       ) {
         case "Watch Party":
-          details = "In a " + activityName.textContent;
+          details = `In a ${activityName.textContent}`;
           smallImageKey = "live";
           break;
         case "Paint":
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
           details = "At the Table";
           break;
         default:
-          details = "In a " + activityName.textContent;
+          details = `In a ${activityName.textContent}`;
           smallImageKey = "vcam";
           break;
       }
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

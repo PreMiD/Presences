@@ -237,12 +237,12 @@ presence.on("UpdateData", async () => {
     type = document.location.search.split("&")[3];
     from = document.location.search.split("&")[0].replace("?sl=", "");
     to = document.location.search.split("&")[1].replace("tl=", "");
-    if (type.replace("op=", "") === "translate") {
+    if (type.replace("op=", "") === "translate") 
       typet = "Text";
-    }
-    if (type.replace("op=", "") === "docs") {
+    
+    if (type.replace("op=", "") === "docs") 
       typet = "Documents";
-    }
+    
   } else {
     typet = "Text";
     from = "Detecting";

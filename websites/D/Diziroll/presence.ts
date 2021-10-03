@@ -46,9 +46,9 @@ presence.on("UpdateData", async () => {
       {
         label: "Diziyi Görüntüle",
         url:
-          document.location.origin +
-          "/" +
-          document.location.pathname.split("/")[1]
+          `${document.location.origin 
+          }/${ 
+          document.location.pathname.split("/")[1]}`
       }
     ];
     const timestamps = presence.getTimestamps(

@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "614389710625964045"
   }),
   strings = presence.getStrings({
@@ -15,18 +15,18 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var title: any, views: any, air: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
+ title: any, views: any, air: any,
+ iFrameVideo: boolean, currentTime: any, duration: any, paused: any,
 
-var lastPlaybackState = null;
-var playback;
+ lastPlaybackState = null,
+ playback;
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -48,7 +48,7 @@ if (document.location.pathname.includes("/kshow/")) {
 
 presence.on("UpdateData", async () => {
   // Get the video
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
     presenceData: PresenceData = {
       largeImageKey: "kshowonline",
       smallImageKey: paused ? "pause" : "play",
@@ -78,10 +78,10 @@ presence.on("UpdateData", async () => {
       );
       if (air !== null) {
         presenceData.state =
-          "Subbed by: " + views.innerText + ", Aired on: " + air.innerText;
-      } else {
+          `Subbed by: ${views.innerText}, Aired on: ${air.innerText}`;
+      } else 
         presenceData.state = views.innerText;
-      }
+      
 
       // Set presence state to views value
 

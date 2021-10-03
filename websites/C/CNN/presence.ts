@@ -128,7 +128,7 @@ presence.on("UpdateData", async function () {
       }
     } else presenceData.details = "Specials";
   } else if (urlpath[1] === "election" && urlpath[2] >= "1900") {
-    presenceData.details = "Election " + urlpath[2];
+    presenceData.details = `Election ${urlpath[2]}`;
 
     if (urlpath[4] === "president") {
       const scoreStyle = document.querySelectorAll(
@@ -139,13 +139,13 @@ presence.on("UpdateData", async function () {
         );
 
       presenceData.state =
-        scoreStyle2[1]?.textContent +
-        ": " +
-        scoreStyle[1]?.textContent +
-        " - " +
-        scoreStyle2[2]?.textContent +
-        ": " +
-        scoreStyle[2]?.textContent;
+        `${scoreStyle2[1]?.textContent 
+        }: ${ 
+        scoreStyle[1]?.textContent 
+        } - ${ 
+        scoreStyle2[2]?.textContent 
+        }: ${ 
+        scoreStyle[2]?.textContent}`;
     } else if (urlpath[4] === "state") {
       const details = document.querySelector(
         "h1.pagestyles__DesktopH1-sc-7kqwl2-74"
@@ -178,7 +178,7 @@ presence.on("UpdateData", async function () {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

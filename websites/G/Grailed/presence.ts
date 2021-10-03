@@ -23,10 +23,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a listing:";
       if (item.innerHTML.length > 128) {
         presenceData.state =
-          item.innerHTML.replace(/amp;/g, "").substring(0, 125) + "...";
-      } else {
+          `${item.innerHTML.replace(/amp;/g, "").substring(0, 125)}...`;
+      } else 
         presenceData.state = item.innerHTML.replace(/amp;/g, "");
-      }
+      
       presence.setActivity(presenceData);
     } else if (document.location.href.includes("www.grailed.com/mygrails/")) {
       presenceData.details = "Browsing:";
@@ -45,10 +45,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a collaboration:";
       if (item.innerHTML.length > 128) {
         presenceData.state =
-          item.innerHTML.replace(/amp;/g, "").substring(0, 125) + "...";
-      } else {
+          `${item.innerHTML.replace(/amp;/g, "").substring(0, 125)}...`;
+      } else 
         presenceData.state = item.innerHTML.replace(/amp;/g, "");
-      }
+      
       presence.setActivity(presenceData);
     } else if (
       document.location.href.includes("www.grailed.com/collections/")
@@ -59,10 +59,10 @@ presence.on("UpdateData", async () => {
       );
       if (item.innerHTML.length > 128) {
         presenceData.state =
-          item.innerHTML.replace(/amp;/g, "").substring(0, 125) + "...";
-      } else {
+          `${item.innerHTML.replace(/amp;/g, "").substring(0, 125)}...`;
+      } else 
         presenceData.state = item.innerHTML.replace(/amp;/g, "");
-      }
+      
       presence.setActivity(presenceData);
     } else if (document.location.href.includes("www.grailed.com/collections")) {
       presenceData.details = "Browsing:";
@@ -77,10 +77,10 @@ presence.on("UpdateData", async () => {
           );
           if (item.innerHTML.length > 128) {
             presenceData.state =
-              item.innerHTML.replace(/amp;/g, "").substring(0, 125) + "...";
-          } else {
+              `${item.innerHTML.replace(/amp;/g, "").substring(0, 125)}...`;
+          } else 
             presenceData.state = item.innerHTML.replace(/amp;/g, "");
-          }
+          
         } else {
           item = document.querySelector(
             "#designer-category > div.FiltersInstantSearch > div.feed-and-filters > div.right > h2"
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Browsing:";
           if (item.innerHTML.length > 128) {
             presenceData.state =
-              item.innerHTML.replace(/amp;/g, "").substring(29, 125) + "...";
+              `${item.innerHTML.replace(/amp;/g, "").substring(29, 125)}...`;
           } else {
             presenceData.state = item.innerHTML
               .replace(/amp;/g, "")
@@ -107,10 +107,10 @@ presence.on("UpdateData", async () => {
       );
       if (item.innerHTML.length > 128) {
         presenceData.state =
-          item.innerHTML.replace(/amp;/g, "").substring(0, 125) + "...";
-      } else {
+          `${item.innerHTML.replace(/amp;/g, "").substring(0, 125)}...`;
+      } else 
         presenceData.state = item.innerHTML.replace(/amp;/g, "");
-      }
+      
       presence.setActivity(presenceData);
     } else if (
       document.location.href.includes(
@@ -123,10 +123,10 @@ presence.on("UpdateData", async () => {
       );
       if (item.innerHTML.length > 128) {
         presenceData.state =
-          item.innerHTML.replace(/amp;/g, "").substring(0, 125) + "...";
-      } else {
+          `${item.innerHTML.replace(/amp;/g, "").substring(0, 125)}...`;
+      } else 
         presenceData.state = item.innerHTML.replace(/amp;/g, "");
-      }
+      
       presence.setActivity(presenceData);
     } else if (document.location.href.includes("www.grailed.com/products/")) {
       presenceData.details = "Browsing a Product:";
@@ -138,15 +138,15 @@ presence.on("UpdateData", async () => {
       );
       if (item.innerHTML.length > 108) {
         presenceData.state =
-          item2.textContent.replace(/amp;/g, "") +
-          ": " +
-          item.textContent.replace(/amp;/g, "").substring(0, 105) +
-          "...";
+          `${item2.textContent.replace(/amp;/g, "") 
+          }: ${ 
+          item.textContent.replace(/amp;/g, "").substring(0, 105) 
+          }...`;
       } else {
         presenceData.state =
-          item2.textContent.replace(/amp;/g, "") +
-          ": " +
-          item.textContent.replace(/amp;/g, "");
+          `${item2.textContent.replace(/amp;/g, "") 
+          }: ${ 
+          item.textContent.replace(/amp;/g, "")}`;
       }
       presence.setActivity(presenceData);
     } else if (
@@ -163,17 +163,17 @@ presence.on("UpdateData", async () => {
         if (item != null) {
           if (item.innerHTML.length > 128) {
             presenceData.state =
-              item.innerHTML.replace(/amp;/g, "").substring(0, 125) + "...";
-          } else {
+              `${item.innerHTML.replace(/amp;/g, "").substring(0, 125)}...`;
+          } else 
             presenceData.state = item.innerHTML.replace(/amp;/g, "");
-          }
+          
         } else if (item2 != null) {
           if (item2.innerHTML.length > 128) {
             presenceData.state =
-              item2.innerHTML.replace(/amp;/g, "").substring(0, 125) + "...";
-          } else {
+              `${item2.innerHTML.replace(/amp;/g, "").substring(0, 125)}...`;
+          } else 
             presenceData.state = item2.innerHTML.replace(/amp;/g, "");
-          }
+          
         }
       } else {
         presenceData.details = "Reading:";
@@ -208,11 +208,11 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (userName != null) {
       presenceData.details = "Viewing a User:";
-      if (userName.innerHTML.length > 128) {
-        presenceData.state = userName.innerHTML.substring(0, 125) + "...";
-      } else {
+      if (userName.innerHTML.length > 128) 
+        presenceData.state = `${userName.innerHTML.substring(0, 125)}...`;
+       else 
         presenceData.state = userName.innerHTML;
-      }
+      
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();

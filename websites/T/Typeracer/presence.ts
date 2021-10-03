@@ -85,9 +85,9 @@ const updateCallback = {
               if (
                 getComputedStyle(textBox.children[i]).color ===
                 "rgb(153, 204, 0)"
-              ) {
+              ) 
                 lettersTyped += textBox.children[i].textContent.length;
-              }
+              
             }
           }
           const percentage =
@@ -115,9 +115,9 @@ const updateCallback = {
           presenceData.state = `${wpm}, ${accuracy} acc., ${time}`;
           presenceData.startTimestamp = browsingStamp;
         }
-      } else {
+      } else 
         presenceData.details = "Viewing the home page";
-      }
+      
     };
   } else if (currentURL.hostname === "data.typeracer.com") {
     /*
@@ -143,9 +143,9 @@ const updateCallback = {
       } else if (currentPath[1] === "race_history") {
         presenceData.details = "Viewing someone's race history";
         presenceData.state = currentURL.searchParams.get("user") || null;
-      } else if (currentPath[1] === "home") {
+      } else if (currentPath[1] === "home") 
         presenceData.details = "Viewing the pit stop";
-      } else if (currentPath[1] === "competitions") {
+       else if (currentPath[1] === "competitions") {
         presenceData.details = "Viewing the competition result";
         const option = document
             .querySelector("option[selected]")
@@ -161,9 +161,9 @@ const updateCallback = {
         else if (option === "month")
           presenceData.state = `${strong[3]} ${strong[4]}`;
         else if (option === "year") presenceData.state = strong[2];
-      } else if (currentPath[1] === "login") {
+      } else if (currentPath[1] === "login") 
         presenceData.details = "Logging in";
-      } else {
+       else {
         const pageNames: { [index: string]: string } = {
           upgrade_account: "Upgrade your account",
           tos: "Terms of Service",
@@ -177,9 +177,9 @@ const updateCallback = {
         presenceData.details = "Viewing a page";
         presenceData.state = "About";
       }
-    } else if (currentPath[0] === "admin") {
+    } else if (currentPath[0] === "admin") 
       presenceData.details = "Viewing school admin pages";
-    }
+    
   }
 })();
 

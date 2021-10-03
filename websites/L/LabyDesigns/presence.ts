@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "660588527079391243"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -13,9 +13,9 @@ presence.on("UpdateData", () => {
   if (document.location.pathname.includes("/downloads")) {
     presenceData.smallImageKey = "downloading";
     presenceData.details = "Viewing the free downloads";
-  } else if (document.location.pathname.includes("/advent")) {
+  } else if (document.location.pathname.includes("/advent")) 
     presenceData.details = "Viewing the adventcalander";
-  } else if (document.location.pathname.includes("/profil")) {
+   else if (document.location.pathname.includes("/profil")) {
     if (document.location.pathname.includes("/login")) {
       presenceData.details = "Logging in...";
       presenceData.smallImageKey = "writing";
@@ -43,7 +43,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

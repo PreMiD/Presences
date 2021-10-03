@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "721266123282317333"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
@@ -43,10 +43,10 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/nguoi-dung/")) {
       presenceData.details = "Đang xem trang cá nhân:";
       presenceData.state =
-        document.querySelector(".display-name").textContent +
-        " (" +
-        document.querySelector(".nickname").textContent +
-        ")";
+        `${document.querySelector(".display-name").textContent 
+        } (${ 
+        document.querySelector(".nickname").textContent 
+        })`;
     } else if (document.location.pathname.includes("/s/all/")) {
       presenceData.details = "Đang xem:";
       presenceData.state = "Tất cả bài viết";
@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -21,11 +21,11 @@ function getData(): void {
 
 function getStatus(): string {
   const playPauseBtn = document.querySelector("#play");
-  if (playPauseBtn.className === "fas fa-play") {
+  if (playPauseBtn.className === "fas fa-play") 
     return "Paused";
-  } else if (playPauseBtn.className === "fas fa-pause") {
+   else if (playPauseBtn.className === "fas fa-pause") 
     return "Playing";
-  }
+  
   return "Playing";
 }
 
@@ -43,11 +43,11 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.startTimestamp = browsingStamp;
     playbackStatus = getStatus();
-    if (playbackStatus === "Paused") {
+    if (playbackStatus === "Paused") 
       presenceData.smallImageKey = "pause";
-    } else if (playbackStatus === "Playing") {
+     else if (playbackStatus === "Playing") 
       presenceData.smallImageKey = "play";
-    }
+    
 
     presenceData.details = `🎵 | ${artist} - ${title}`;
     presenceData.state = `🎙️ | ${dj}`;
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

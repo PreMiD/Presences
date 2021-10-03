@@ -8,31 +8,31 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     };
-  if (document.location.pathname === "/" && !floatingViewer) {
+  if (document.location.pathname === "/" && !floatingViewer) 
     presenceData.details = "Browsing homepage";
-  } else if (document.location.pathname.startsWith("/$/")) {
+   else if (document.location.pathname.startsWith("/$/")) {
     const path = document.location.pathname;
-    if (path.includes("/$/following")) {
+    if (path.includes("/$/following")) 
       presenceData.details = "Browsing followed content";
-    } else if (path.includes("/$/uploads")) {
+     else if (path.includes("/$/uploads")) 
       presenceData.details = "Browsing own uploads";
-    } else if (path.includes("/$/channels")) {
+     else if (path.includes("/$/channels")) 
       presenceData.details = "Browsing own channels";
-    } else if (path.includes("/$/settings")) {
+     else if (path.includes("/$/settings")) 
       presenceData.details = "Browsing settings";
-    } else if (path.includes("/$/wallet")) {
+     else if (path.includes("/$/wallet")) 
       presenceData.details = "Looking inside wallet";
-    } else if (path.includes("/$/dashboard")) {
+     else if (path.includes("/$/dashboard")) 
       presenceData.details = "Reading dashboard";
-    } else if (path.includes("/$/rewards")) {
+     else if (path.includes("/$/rewards")) 
       presenceData.details = "Browsing own rewards";
-    } else if (path.includes("/$/notifications")) {
+     else if (path.includes("/$/notifications")) 
       presenceData.details = "Reading notifications";
-    } else if (path.includes("/$/upload")) {
+     else if (path.includes("/$/upload")) 
       presenceData.details = "Planning to upload some content";
-    } else {
+     else 
       presenceData.details = "Browsing subpage";
-    }
+    
   } else if (floatingViewer || document.location.pathname.includes("/@")) {
     const userName: HTMLVideoElement =
         document.querySelector("h1.channel__title"),
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = title.textContent;
         presenceData.state =
           uploaderName.textContent +
-          (uploaderTag ? " " + uploaderTag.textContent : "");
+          (uploaderTag ? ` ${uploaderTag.textContent}` : "");
         presenceData.smallImageKey = "paused";
         presenceData.smallImageText = "Paused";
 
@@ -90,9 +90,9 @@ presence.on("UpdateData", async () => {
           presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
           presenceData.smallImageKey = video.paused ? "paused" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Watching";
-          if (video.paused) {
+          if (video.paused) 
             delete presenceData.endTimestamp;
-          }
+          
         }
       }
     }
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

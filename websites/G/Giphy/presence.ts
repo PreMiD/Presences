@@ -20,17 +20,17 @@ presence.on("UpdateData", async () => {
   } else {
     const at = document.location.pathname;
     let doing;
-    if (at.includes("entertainment")) {
+    if (at.includes("entertainment")) 
       doing = "Entertainment";
-    } else if (at.includes("sports")) {
+     else if (at.includes("sports")) 
       doing = "Sports";
-    } else if (at.includes("stickers")) {
+     else if (at.includes("stickers")) 
       doing = "Stickers";
-    } else if (at.includes("artist")) {
+     else if (at.includes("artist")) 
       doing = "Artists";
-    } else if (at.includes("reaction")) {
+     else if (at.includes("reaction")) 
       doing = "Reactions";
-    }
+    
     presenceData.details = "Browsing Gifs...";
     presenceData.state = `at ${doing} page`;
     presenceData.smallImageKey = "browsing";

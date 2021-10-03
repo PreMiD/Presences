@@ -49,10 +49,11 @@ presence.on("UpdateData", async function () {
       presenceData.details = "Accessoires";
     else if (urlpath[urlpNum + 2] === "brands") {
       presenceData.details = "Brands";
-      if (urlpath[urlpNum + 3])
-        presenceData.state = document.querySelector(
+      if (urlpath[urlpNum + 3]) {
+presenceData.state = document.querySelector(
           "li.b-breadcrumb-item>span.b-breadcrumb-text"
         ).textContent;
+}
     } else if (urlpath[urlpNum + 2] === "sale") presenceData.details = "Sale";
     else if (urlpath[urlpNum + 2] === "deals") presenceData.details = "Deals";
     else if (urlpath[urlpNum + 2] === "musthaves")
@@ -136,13 +137,13 @@ presence.on("UpdateData", async function () {
     }
 
     presenceData.smallImageKey = smallimage;
-    presenceData.smallImageText = "SNIPES " + smallimage.toUpperCase();
+    presenceData.smallImageText = `SNIPES ${smallimage.toUpperCase()}`;
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

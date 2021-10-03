@@ -36,8 +36,8 @@ presence.on("UpdateData", () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "logo",
     smallImageKey: "help",
     smallImageText: alt,

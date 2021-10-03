@@ -1,34 +1,34 @@
 const presence = new Presence({
   clientId: "630098355145539595"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "lg"
-  };
+  },
 
-  const domain = "https://tugastrikes.com/";
-  const url = window.location.href.replace(domain, "");
-  const parts = url.split("/");
-  const section = parts[1];
-  const page = parts[0];
+   domain = "https://tugastrikes.com/",
+   url = window.location.href.replace(domain, ""),
+   parts = url.split("/"),
+   section = parts[1],
+   page = parts[0];
   let state;
-  if (section == "skins") {
+  if (section == "skins") 
     state = "Skins";
-  } else if (section == "myskins") {
+   else if (section == "myskins") 
     state = "My Skins";
-  } else if (section == "buyskins") {
+   else if (section == "buyskins") 
     state = "Buy Skins";
-  } else if (section == "sellskins") {
+   else if (section == "sellskins") 
     state = "Sell Skins";
-  } else {
+   else 
     state = "Home Page";
-  }
-  if (page == "market") {
+  
+  if (page == "market") 
     presenceData.details = "Market";
-  }
+  
 
   presenceData.state = state;
 

@@ -42,9 +42,9 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp
     },
     title = document.title.slice(0, -13); //title of the page
-  if (document.location.pathname == "/") {
+  if (document.location.pathname == "/") 
     presenceData.details = "Exploring Genoanime";
-  } else if (document.location.pathname.includes("/browse")) {
+   else if (document.location.pathname.includes("/browse")) {
     presenceData.details = "Exploring Genoanime library";
     presenceData.buttons = [
       {
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/watch")) {
     presenceData.details = title;
     presenceData.state =
-      "Episode " + document.location.href.split("episode=")[1];
+      `Episode ${document.location.href.split("episode=")[1]}`;
     anime_breadcumb = document.querySelector<HTMLAnchorElement>(
       "#anime_details_breadcrumbs"
     ).href;
@@ -111,9 +111,9 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       presenceData.endTimestamp = timestamps[1];
-      if (paused) {
+      if (paused) 
         delete presenceData.endTimestamp;
-      }
+      
     }
   } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching For...";
@@ -128,9 +128,9 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
-  } else if (document.location.pathname.includes("/favorite")) {
+  } else if (document.location.pathname.includes("/favorite")) 
     presenceData.details = "Browsing Favourites";
-  } else if (document.location.pathname.includes("/schedule")) {
+   else if (document.location.pathname.includes("/schedule")) {
     presenceData.details = "Checking Schedule";
     presenceData.state = document.querySelector(
       "#container > section > div > div:nth-child(1) > div > h3"
@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

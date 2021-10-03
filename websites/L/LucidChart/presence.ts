@@ -6,9 +6,9 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: new Date().getTime()
-  };
+  },
 
-  const path = document.location.pathname;
+   path = document.location.pathname;
 
   if (path === "/pages" || path === "/pages/") {
     presenceData.details = "Browsing LucidChart";
@@ -61,7 +61,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

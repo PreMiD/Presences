@@ -45,8 +45,8 @@ function getTimestamp(time: number): string {
   const { sec, min, hrs } = getTimes(time);
 
   return hrs > 0
-    ? hrs + ":" + lessTen(min) + min + ":" + lessTen(sec) + sec
-    : min + ":" + lessTen(sec) + sec;
+    ? `${hrs}:${lessTen(min)}${min}:${lessTen(sec)}${sec}`
+    : `${min}:${lessTen(sec)}${sec}`;
 }
 
 interface Match {

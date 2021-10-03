@@ -1,15 +1,15 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "618138980273094695" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var item: any,
+ item: any,
   dropdown: any,
   dropdownfinal: any,
   dropdownplus1: any,
   dropdowninnertext: any,
-  split: any;
+  split: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -26,11 +26,11 @@ presence.on("UpdateData", async () => {
     item = document.querySelector("#productTitle");
 
     presenceData.details = "Viewing product:"; //general.viewProduct
-    if (item.innerText.length > 128) {
-      presenceData.state = item.innerText.substring(0, 125) + "...";
-    } else {
+    if (item.innerText.length > 128) 
+      presenceData.state = `${item.innerText.substring(0, 125)}...`;
+     else 
       presenceData.state = item.innerText;
-    }
+    
   } else if (document.location.pathname.includes("/s") && item !== null) {
     presenceData.details = "Searching for:"; //general.searchFor
     presenceData.state = item.innerText;
@@ -40,11 +40,11 @@ presence.on("UpdateData", async () => {
     item = document.querySelector("#gc-asin-title");
 
     presenceData.details = "Viewing product:"; //general.viewProduct
-    if (item.innerText.length > 128) {
-      presenceData.state = item.innerText.substring(0, 125) + "...";
-    } else {
+    if (item.innerText.length > 128) 
+      presenceData.state = `${item.innerText.substring(0, 125)}...`;
+     else 
       presenceData.state = item.innerText;
-    }
+    
   } else if (document.location.pathname.includes("/profile")) {
     item = document.querySelector(
       "#customer-profile-name-header > div.a-row.a-spacing-none.name-container > span"
@@ -55,58 +55,58 @@ presence.on("UpdateData", async () => {
     item = document.title.split(":");
     presenceData.details = "Viewing store:"; //amazon.store
     presenceData.state = item[1];
-  } else if (document.location.pathname.includes("/history")) {
+  } else if (document.location.pathname.includes("/history")) 
     presenceData.details = "Viewing their history"; //amazon.history
-  } else if (document.location.pathname.includes("/gift-cards")) {
+   else if (document.location.pathname.includes("/gift-cards")) 
     presenceData.details = "Viewing Giftcards"; //amazon.viewTheir
     //amazon.giftcards
-  } else if (document.location.pathname.includes("/yourstore")) {
+   else if (document.location.pathname.includes("/yourstore")) 
     presenceData.details = "Viewing recommended"; //amazon.recommended
-  } else if (document.location.pathname.includes("/wishlist")) {
+   else if (document.location.pathname.includes("/wishlist")) 
     presenceData.details = "Viewing their wishlist"; //amazon.viewTheir
     //amazon.wishlist
-  } else if (document.location.pathname.includes("/cart")) {
+   else if (document.location.pathname.includes("/cart")) 
     presenceData.details = "Viewing their cart"; //amazon.viewTheir
     //amazon.cart
-  } else if (document.location.pathname.includes("/order-history")) {
+   else if (document.location.pathname.includes("/order-history")) {
     presenceData.details = "Viewing their"; //amazon.viewTheir
     presenceData.state = "order history"; //amazon.orderHistory
   } else if (document.location.pathname.includes("/order-details")) {
     presenceData.details = "Viewing their"; //amazon.viewTheir
     presenceData.state = "order details"; //amazon.orderDetails
-  } else if (document.location.pathname.includes("/amazonprime")) {
+  } else if (document.location.pathname.includes("/amazonprime")) 
     presenceData.details = "Viewing Amazon Prime"; //amazon.prime
-  } else if (document.location.pathname.includes("/site-directory")) {
+   else if (document.location.pathname.includes("/site-directory")) 
     presenceData.details = "Viewing all categories"; //amazon.catergoriesAll
-  } else if (document.location.pathname.includes("/yourpets")) {
+   else if (document.location.pathname.includes("/yourpets")) 
     presenceData.details = "Viewing pets"; //amazon.pets
-  } else if (document.location.pathname.includes("/addresses")) {
+   else if (document.location.pathname.includes("/addresses")) 
     presenceData.details = "Viewing addresses"; //amazon.address
-  } else if (document.location.pathname.includes("/managepaymentmethods")) {
+   else if (document.location.pathname.includes("/managepaymentmethods")) 
     presenceData.details = "Viewing payment methods"; //amazon.payment
-  } else if (document.location.pathname.includes("/balance")) {
+   else if (document.location.pathname.includes("/balance")) 
     presenceData.details = "Viewing their balance"; //amazon.balance
-  } else if (document.location.pathname.includes("/adprefs")) {
+   else if (document.location.pathname.includes("/adprefs")) 
     presenceData.details = "Viewing their adprefs"; //amazon.adprefs
-  } else if (
+   else if (
     document.location.pathname.includes("/yourmembershipsandsubscriptions")
-  ) {
+  ) 
     presenceData.details = "Viewing subscriptions"; //amazon.subscriptions
-  } else if (
+   else if (
     document.location.search.includes("nav_youraccount_ya") ||
     document.location.pathname.includes("/your-account")
-  ) {
+  ) 
     presenceData.details = "Viewing their account"; //general.viewAccount
-  } else if (document.location.pathname.includes("/help/")) {
+   else if (document.location.pathname.includes("/help/")) 
     presenceData.details = "Viewing Help Center"; //general.viewing + Help Center
-  } else {
+   else {
     if (document.querySelector("#searchDropdownBox") !== null) {
       dropdown = document
         .querySelector("#searchDropdownBox")
         .getAttribute("data-nav-selected");
       dropdownplus1 = +dropdown + 1;
       dropdownfinal =
-        "#searchDropdownBox > option:nth-child(" + dropdownplus1 + ")";
+        `#searchDropdownBox > option:nth-child(${dropdownplus1})`;
       dropdowninnertext = document.querySelector(dropdownfinal).innerText;
       split = document.location.pathname.split("/", 3);
       if (dropdown !== "0" || split[1] !== "") {
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

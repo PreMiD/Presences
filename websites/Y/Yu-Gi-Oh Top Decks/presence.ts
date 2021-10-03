@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "630550023133724692"
 });
-var deck;
+let deck;
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
@@ -16,20 +16,20 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/decklists") {
-    var pagenumber =
+    const pagenumber =
       document.getElementsByClassName("current")[0].firstElementChild
-        .textContent;
-    var no1 =
+        .textContent,
+     no1 =
       document.getElementById("deck_lists").lastElementChild.firstElementChild
-        .children[2].textContent;
-    var auth =
+        .children[2].textContent,
+     auth =
       document.getElementById("deck_lists").lastElementChild.firstElementChild
-        .children[1].ENTITY_NODE;
-    var deckurl = (
+        .children[1].ENTITY_NODE,
+     deckurl = (
       document.getElementById("deck_lists").lastElementChild.firstElementChild
         .children[2].firstElementChild as HTMLLinkElement
-    ).href;
-    const presenceData: PresenceData = {
+    ).href,
+     presenceData: PresenceData = {
       details: "Looking at Decklists",
       state: `Page: ${pagenumber} top: ${no1} by ${auth}`,
       //largeImageKey: "banner",
@@ -45,8 +45,8 @@ presence.on("UpdateData", async () => {
       .children[1].firstElementChild.children[1].textContent.replace(
         "Most Used Cards",
         ""
-      );
-    const presenceData: PresenceData = {
+      ),
+     presenceData: PresenceData = {
       details: "Looking at Top decks",
       state: `Current Meta: ${top}`,
       //largeImageKey: "banner",
@@ -58,11 +58,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname == "/top_cards") {
     const top =
       document.getElementsByClassName("sortable")[0].children[1]
-        .firstElementChild.children[2].textContent;
-    var price =
+        .firstElementChild.children[2].textContent,
+     price =
       document.getElementsByClassName("sortable")[0].children[1]
-        .firstElementChild.children[4].textContent;
-    const presenceData: PresenceData = {
+        .firstElementChild.children[4].textContent,
+     presenceData: PresenceData = {
       details: "Looking at Top Cards",
       state: `Top Card: ${top} Price: ${price}`,
       //largeImageKey: "banner",
@@ -87,17 +87,17 @@ presence.on("UpdateData", async () => {
     if (/\d/.test("/deck/8205")) {
       deck = document.getElementsByClassName("large-12 columns panel")[0]
         .firstElementChild.textContent;
-      var by = document.getElementsByClassName("large-12 columns panel")[0]
-        .children[1].children[1].textContent;
-      var archetype = document.getElementsByClassName(
+      const by = document.getElementsByClassName("large-12 columns panel")[0]
+        .children[1].children[1].textContent,
+       archetype = document.getElementsByClassName(
         "large-12 columns panel"
-      )[0].children[1].children[10].textContent;
-      var value = document
+      )[0].children[1].children[10].textContent,
+       value = document
         .getElementsByClassName("large-12 columns panel")[1]
         .children[1].textContent.replace("\n", ":")
-        .split(":")[1];
+        .split(":")[1],
 
-      const presenceData: PresenceData = {
+       presenceData: PresenceData = {
         details: `Viewing deck: ${deck} (archetype: ${archetype})`,
         state: `by: ${by}, price: ${value}`,
         //largeImageKey: "banner",

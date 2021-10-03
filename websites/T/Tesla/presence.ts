@@ -208,9 +208,10 @@ presence.on("UpdateData", async function () {
         const error = document.querySelector(
           ".error-container>.error-code"
         ).textContent;
-        if (error === "404")
-          (presenceData.details = "Error 404"),
+        if (error === "404") {
+(presenceData.details = "Error 404"),
             (presenceData.state = "Page not found");
+}
       } else presenceData.details = "Other";
     }
   } else if (window.location.hostname === "shop.tesla.com") {
@@ -261,7 +262,7 @@ presence.on("UpdateData", async function () {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

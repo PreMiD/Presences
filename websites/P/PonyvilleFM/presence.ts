@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "613628090219757599"
-});
+}),
 
-const timeElapsed = Math.floor(Date.now() / 1000);
+ timeElapsed = Math.floor(Date.now() / 1000);
 let otherListeners, stationStatus, listeningCheck, onAir;
 
 presence.on("UpdateData", async () => {
@@ -14,11 +14,11 @@ presence.on("UpdateData", async () => {
       document.querySelector(
         "html > body > #playerContent > #about > div.row > div.col-sm-12 > div.sm2-bar-ui.textured.full-width.playing"
       ) == null
-    ) {
+    ) 
       (stationStatus = "Paused on PVFM One"), (listeningCheck = "No");
-    } else {
+     else {
       (stationStatus =
-        "Listening on PVFM One with" + otherListeners.innerText + " others"),
+        `Listening on PVFM One with${otherListeners.innerText} others`),
         (listeningCheck = "Yes");
     }
     onAir = document.querySelector(
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     } else {
       const presenceData: PresenceData = {
         details: stationStatus,
-        state: "On air: " + onAir.innerText,
+        state: `On air: ${onAir.innerText}`,
         largeImageKey: "pvfm",
         smallImageKey: "play",
         startTimestamp: timeElapsed
@@ -49,11 +49,11 @@ presence.on("UpdateData", async () => {
       document.querySelector(
         "html > body > #playerContent > #about > div.row > div.col-sm-12 > div.sm2-bar-ui.textured.full-width.playing"
       ) == null
-    ) {
+    ) 
       (stationStatus = "Paused on PVFM Two"), (listeningCheck = "No");
-    } else {
+     else {
       (stationStatus =
-        "Listening on PVFM Two with" + otherListeners.innerText + " others"),
+        `Listening on PVFM Two with${otherListeners.innerText} others`),
         (listeningCheck = "Yes");
     }
     onAir = document.querySelector(
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
     } else {
       const presenceData: PresenceData = {
         details: stationStatus,
-        state: "On air: " + onAir.innerText,
+        state: `On air: ${onAir.innerText}`,
         largeImageKey: "pvfm",
         smallImageKey: "play",
         startTimestamp: timeElapsed
@@ -84,11 +84,11 @@ presence.on("UpdateData", async () => {
       document.querySelector(
         "html > body > #playerContent > #about > div.row > div.col-sm-12 > div.sm2-bar-ui.textured.full-width.playing"
       ) == null
-    ) {
+    ) 
       (stationStatus = "Paused on PVFM Free"), (listeningCheck = "No");
-    } else {
+     else {
       (stationStatus =
-        "Listening on PVFM Free with" + otherListeners.innerText + " others"),
+        `Listening on PVFM Free with${otherListeners.innerText} others`),
         (listeningCheck = "Yes");
     }
     onAir = document.querySelector(
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
     } else {
       const presenceData: PresenceData = {
         details: stationStatus,
-        state: "On air: " + onAir.innerText,
+        state: `On air: ${onAir.innerText}`,
         largeImageKey: "pvfm",
         smallImageKey: "play",
         startTimestamp: timeElapsed

@@ -13,9 +13,9 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
   if (host == "www.mediafire.com") {
-    if (page == "/") {
+    if (page == "/") 
       presenceData.details = "Viewing the homepage";
-    }
+    
     if (page.includes("/file/")) {
       title = document.querySelector("div.dl-btn-label");
       presenceData.details = "Viewing:";
@@ -98,9 +98,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing:";
       presenceData.state = "Help";
     }
-    if (page.includes("/login/")) {
+    if (page.includes("/login/")) 
       presenceData.details = "Logging in";
-    }
+    
     if (page.includes("/upgrade/")) {
       presenceData.details = "Viewing:";
       presenceData.state = "Upgrade Plans";
@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

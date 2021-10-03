@@ -263,8 +263,8 @@ presence.on("UpdateData", () => {
       presenceData.details = "Reading behavior of...";
       presenceData.state = detectionURL2.textContent;
       presence.setActivity(presenceData);
-    } else {
+    } else 
       presence.setActivity();
-    }
+    
   }
 });

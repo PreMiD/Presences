@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "514771696134389760"
 });
 
-var localeStrings = {
+let localeStrings = {
   en: {
     Chatting: "Browsing PM's...",
     Watching: "Watching",
@@ -15,10 +15,10 @@ var localeStrings = {
     Browsing: "Просматривает",
     BrowsingFeed: "Смотрит ленту..."
   }
-};
+},
 
-var isPlaying: boolean;
-var timestamps;
+ isPlaying: boolean,
+ timestamps;
 
 /**
  * Get Timestamps
@@ -29,8 +29,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -42,11 +42,11 @@ function getLocalizedString(stringPath): string {
   if (
     localeStrings[getLocale()] !== undefined &&
     localeStrings[getLocale()][stringPath] !== undefined
-  ) {
+  ) 
     return localeStrings[getLocale()][stringPath];
-  } else {
+   else {
     console.warn(`Language for [${stringPath}] was not found!`);
-    return localeStrings["en"][stringPath];
+    return localeStrings.en[stringPath];
   }
 }
 
@@ -55,11 +55,11 @@ function getVKTrackTimeLeft(): Record<string, any> {
     ".audio_page_player_duration"
   ) as HTMLElement;
 
-  var timeLeft;
+  let timeLeft;
 
-  if (playerDuration.innerText.startsWith("-")) {
+  if (playerDuration.innerText.startsWith("-")) 
     timeLeft = playerDuration.innerText;
-  } else {
+   else {
     playerDuration.click();
     timeLeft = playerDuration.innerText;
     playerDuration.click();
@@ -76,11 +76,11 @@ function getVKTrackTimePassed(): Record<string, any> {
     ".audio_page_player_duration"
   ) as HTMLElement;
 
-  var timePassed;
+  let timePassed;
 
-  if (!playerDuration.innerText.startsWith("-")) {
+  if (!playerDuration.innerText.startsWith("-")) 
     timePassed = playerDuration.innerText;
-  } else {
+   else {
     playerDuration.click();
     timePassed = playerDuration.innerText;
     playerDuration.click();
@@ -91,7 +91,7 @@ function getVKTrackTimePassed(): Record<string, any> {
 
 //* Returns VK track length.
 function getVKTrackLength(): Record<string, any> {
-  var timeLeft, timePassed, overallTime;
+  let timeLeft, timePassed, overallTime;
 
   timeLeft = getVKTrackTimeLeft();
   timePassed = getVKTrackTimePassed();
@@ -104,8 +104,8 @@ function getVKTrackLength(): Record<string, any> {
 
   //* Checking if overall time have more than 60 seconds and adding 1 minute if it does.
   if (Number(overallTime[1]) > 60) {
-    var t1 = overallTime[0] + 1;
-    var t2 = overallTime[1] - 60;
+    const t1 = overallTime[0] + 1,
+     t2 = overallTime[1] - 60;
 
     overallTime = [t1, t2];
   }
@@ -113,14 +113,14 @@ function getVKTrackLength(): Record<string, any> {
   return overallTime;
 }
 
-var browsingTimestamp = Math.floor(Date.now() / 1000);
+let browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "vk_logo"
-  };
+  },
 
-  const gstrings = await presence.getStrings({
+   gstrings = await presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/audios") ||
     document.querySelector(".audio_layer_container")
   ) {
-    var title: string = (
+    const title: string = (
         document.querySelector(".audio_page_player_title_song") as HTMLElement
       ).textContent,
       author: string = (
@@ -138,11 +138,11 @@ presence.on("UpdateData", async () => {
         ) as HTMLElement
       ).textContent;
 
-    if (document.querySelector(".audio_playing") == null) {
+    if (document.querySelector(".audio_playing") == null) 
       isPlaying = true;
-    } else {
+     else 
       isPlaying = false;
-    }
+    
 
     timestamps = getTimestamps(
       Math.floor(
@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
       ? (isPlaying = true)
       : (isPlaying = false);
 
-    var videoTitle = (document.querySelector(".mv_title") as HTMLElement)
+    const videoTitle = (document.querySelector(".mv_title") as HTMLElement)
         .innerText,
       videoCurrentTime = (
         document.querySelector("._time_current") as HTMLElement
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
       Math.floor(Number(videoDuration[0]) * 60 + Number(videoDuration[1]))
     );
 
-    presenceData.details = getLocalizedString("Watching") + " " + videoTitle;
+    presenceData.details = `${getLocalizedString("Watching")} ${videoTitle}`;
     presenceData.state = videoAuthor;
     presenceData.smallImageKey = isPlaying ? "pause" : "play";
     presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData, true);
   } else if (document.querySelector(".page_name") !== null) {
-    var page_title = (document.querySelector(".page_name") as HTMLElement)
+    const page_title = (document.querySelector(".page_name") as HTMLElement)
       .innerText;
 
     presenceData.details = page_title;

@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  language = window.navigator.language; //Make this change-able with presence settings
+  {language} = window.navigator; //Make this change-able with presence settings
 //en = English
 //nl = Nederlands
 //Language list can be found here: https://api.premid.app/v2/langFile/list
@@ -32,9 +32,9 @@ const genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
  */
 function PMD_error(message: string): void {
   console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
+    `%cPreMiD%cERROR%c ${message}`,
+    `${genericStyle}border-radius: 25px 0 0 25px; background: #596cae;`,
+    `${genericStyle}border-radius: 0 25px 25px 0; background: #ff5050;`,
     "color: unset;"
   );
 }
@@ -179,9 +179,9 @@ presence.on("UpdateData", async () => {
       const video: HTMLVideoElement = document.querySelector(
           "#plex > div:nth-child(4) > div > div:nth-child(1) > video"
         ),
-        currentTime = video.currentTime,
-        duration = video.duration,
-        paused = video.paused,
+        {currentTime} = video,
+        {duration} = video,
+        {paused} = video,
         timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
@@ -311,8 +311,8 @@ presence.on("UpdateData", async () => {
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
+    } else 
       presence.setActivity(presenceData);
-    }
+    
   }
 });

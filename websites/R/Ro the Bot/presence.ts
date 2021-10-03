@@ -7,9 +7,9 @@ presence.on("UpdateData", () => {
     largeImageKey: "bot-magic"
   };
 
-  if (window.location.href.includes("status.ro-the-bot.ga")) {
+  if (window.location.href.includes("status.ro-the-bot.ga")) 
     presenceData.details = "Viewing https://status.ro-the-bot.ga/";
-  } else if (window.location.href.includes("ro-the-bot.ga")) {
+   else if (window.location.href.includes("ro-the-bot.ga")) {
     if (window.location.pathname.toLowerCase() === "/") {
       presenceData.details = "Viewing the a page:";
       presenceData.state = "Home";
@@ -43,7 +43,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -15,9 +15,9 @@ presence.on("UpdateData", async () => {
     ),
     search: HTMLInputElement = document.querySelector(
       "#searchbox > div > form > input"
-    );
+    ),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "hn-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

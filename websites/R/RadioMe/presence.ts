@@ -8,9 +8,9 @@ const presence = new Presence({
     search: "presence.activity.searching"
   });
 
-let language = navigator.language; //Browser language
-var lastRadio = "";
-var browsingStamp = 0; //Timestamp when started listening to a radio station
+let {language} = navigator, //Browser language
+ lastRadio = "",
+ browsingStamp = 0; //Timestamp when started listening to a radio station
 
 switch (language) {
   //German
@@ -48,9 +48,9 @@ switch (language) {
 }
 
 presence.on("UpdateData", async () => {
-  const host = window.location.hostname.replace("www.", "");
-  const path = window.location.pathname.split("/").slice(1);
-  const presenceData: PresenceData = {
+  const host = window.location.hostname.replace("www.", ""),
+   path = window.location.pathname.split("/").slice(1),
+   presenceData: PresenceData = {
     details: "RadioMe",
     largeImageKey: "logo_big"
   };

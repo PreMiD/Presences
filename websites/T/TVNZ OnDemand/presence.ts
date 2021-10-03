@@ -6,8 +6,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -26,9 +26,9 @@ presence.on("UpdateData", () => {
   const timestamps = getTimestamps(
     Math.floor(currentTime),
     Math.floor(duration)
-  );
+  ),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
@@ -44,9 +44,9 @@ presence.on("UpdateData", () => {
   } else if (
     document.location.pathname.includes("/choose-profile") ||
     document.location.pathname.includes("/profiles-welcome")
-  ) {
+  ) 
     presenceData.details = "Choosing a profile";
-  } else if (
+   else if (
     document.URL === "https://www.tvnz.co.nz/" ||
     document.URL === "https://www.tvnz.co.nz" ||
     document.URL === "https://www.tvnz.co.nz/shows"
@@ -88,16 +88,16 @@ presence.on("UpdateData", () => {
   } else if (
     document.location.pathname.includes("/manage-profiles") ||
     document.location.pathname.includes("/add-profile")
-  ) {
+  ) 
     presenceData.details = "Managing profiles";
-  } else if (document.location.pathname.includes("/settings")) {
+   else if (document.location.pathname.includes("/settings")) 
     presenceData.details = "Managing account details";
-  } else if (document.location.pathname.includes("/search")) {
+   else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching shows";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  } else if (document.URL === "https://www.tvnz.co.nz/livetv") {
+  } else if (document.URL === "https://www.tvnz.co.nz/livetv") 
     presenceData.details = "Viewing the Live TV guide";
-  } else if (document.URL === "https://www.tvnz.co.nz/livetv/tvnz-1") {
+   else if (document.URL === "https://www.tvnz.co.nz/livetv/tvnz-1") {
     presenceData.details = "Watching TVNZ 1 Live";
     presenceData.smallImageKey = "one";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
@@ -123,7 +123,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -16,14 +16,14 @@ presence.on("UpdateData", async () => {
       roundCurrent = document.querySelector(".rounds span").textContent,
       roundEnd = document.querySelector(".rounds p:nth-child(3)").textContent;
 
-    data.details = user + " - " + points.split("pts")[0].trim() + " points";
-    data.state = "Round: " + " " + roundCurrent + roundEnd;
-  } else if (path == "/create") {
+    data.details = `${user} - ${points.split("pts")[0].trim()} points`;
+    data.state = `${"Round: " + " "}${roundCurrent}${roundEnd}`;
+  } else if (path == "/create") 
     data.details = "Creating a Room";
-  } else if (path == "/search") {
+   else if (path == "/search") 
     data.details = "Viewing Rooms";
-  } else {
+   else 
     data.details = "Not in-game";
-  }
+  
   presence.setActivity(data);
 });

@@ -181,7 +181,7 @@ presence.on("UpdateData", async () => {
             ? author.textContent
             : "Belirsiz Gönderi Sahibi"
         } ${
-          time && time.textContent != "" ? "(" + time.textContent + ")" : ""
+          time && time.textContent != "" ? `(${time.textContent})` : ""
         }`,
         smallImageKey: "forum",
         smallImageText: "Bir forum gönderisi okuyor.",

@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640194732718292992"
   }),
   strings = presence.getStrings({
@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.querySelector("#ani_video_html5_api") !== null) {
-      var video: HTMLVideoElement,
+      let video: HTMLVideoElement,
         videoDuration: any,
         videoCurrentTime: any,
         paused: any,
@@ -65,9 +65,9 @@ presence.on("UpdateData", async () => {
           "#BH_background > div.container-player > div.anime-title > div.anime-option > section.videoname > div.anime_name > div > p"
         );
 
-        if (user !== null) {
+        if (user !== null) 
           presenceData.state = user.innerText;
-        }
+        
 
         if (paused) {
           delete presenceData.startTimestamp;
@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
       .querySelector("head > title")
       .textContent.replace(" - 巴哈姆特動畫瘋", "");
     presence.setActivity(presenceData);
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -297,11 +297,12 @@ yabancidizi.on("UpdateData", async () => {
       );
       yabancidizi.setActivity(data);
     }
-  } else
-    yabancidizi.setActivity({
+  } else {
+yabancidizi.setActivity({
       largeImageKey: "yd-logo",
       details: "Bir sayfaya göz atıyor:",
       state: "Bilinmeyen Sayfa",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
+}
 });

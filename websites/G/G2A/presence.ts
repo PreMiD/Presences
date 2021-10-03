@@ -1,11 +1,11 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "633805202868273153"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -14,11 +14,11 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname == "www.g2a.com") {
     presenceData.startTimestamp = browsingStamp;
-    if (document.location.pathname.includes("/wishlist")) {
+    if (document.location.pathname.includes("/wishlist")) 
       presenceData.details = "Viewing their wishlist";
-    } else if (document.location.pathname.includes("/cart")) {
+     else if (document.location.pathname.includes("/cart")) 
       presenceData.details = "Viewing their cart";
-    } else if (document.location.pathname.includes("/search")) {
+     else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching for:";
       presenceData.state = title.innerText
         .replace('" - G2A.COM', "")
@@ -44,16 +44,16 @@ presence.on("UpdateData", async () => {
         "#app > div > div.content > div > div > div > section > div.user-info > button > strong"
       );
       presenceData.state = user.innerText;
-    } else if (document.location.pathname.includes("/goldmine")) {
+    } else if (document.location.pathname.includes("/goldmine")) 
       presenceData.details = "Using the goldmine";
-    } else if (document.location.pathname.includes("/news/")) {
+     else if (document.location.pathname.includes("/news/")) {
       presenceData.startTimestamp = browsingStamp;
       title = document.querySelector(
         "body > div.single-article.single-article--feature.default-template > div.review-top > div.review-top__wrapper > div > header > h1"
       );
-      if (title == null) {
+      if (title == null) 
         presenceData.details = "Browsing news section";
-      } else {
+       else {
         presenceData.details = "News - Reading:";
         presenceData.state = title.innerText;
         presenceData.smallImageKey = "reading";
@@ -75,9 +75,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = title.innerText.replace(" - G2A Plus", "");
   } else if (document.location.hostname == "loot.g2a.com") {
     presenceData.startTimestamp = browsingStamp;
-    if (document.location.pathname == "/") {
+    if (document.location.pathname == "/") 
       presenceData.details = "Browsing G2A Loot";
-    } else {
+     else {
       presenceData.details = "G2A Loot - Viewing:";
       title = document.querySelector("head > title");
       presenceData.state = title.innerText.replace(" - G2A Loot", "");
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

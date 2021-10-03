@@ -15,17 +15,17 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let timestamps: any;
-let iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-let playback: any;
+let timestamps: any,
+ iFrameVideo: boolean, currentTime: any, duration: any, paused: any,
+ playback: any,
 
-let lastPlaybackState = null;
-let browsingStamp = Math.floor(Date.now() / 1000);
+ lastPlaybackState = null,
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
@@ -41,24 +41,24 @@ presence.on("iFrameData", (data) => {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "lr"
-  };
+  },
 
-  const sGlobalRepeat = await presence.getSetting("sGlobalRepeat");
-  const sFormatRepeat = await presence.getSetting("sFormatRepeat");
-  const sFormatGlobalRepeat = await presence.getSetting("sFormatGlobalRepeat");
+   sGlobalRepeat = await presence.getSetting("sGlobalRepeat"),
+   sFormatRepeat = await presence.getSetting("sFormatRepeat"),
+   sFormatGlobalRepeat = await presence.getSetting("sFormatGlobalRepeat"),
 
   //TODO language selector and translation strings
-  const repeatsTrans = "Repeats";
-  const gRepeatTrans = "Global Repeats";
+   repeatsTrans = "Repeats",
+   gRepeatTrans = "Global Repeats",
 
-  const repeats = document
+   repeats = document
     .querySelector(
       "#content > div.main-area-offset > div:nth-child(2) > div.player-card > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2) > div > div > span"
     )
     .textContent.split(":")[1]
     .split("(")[0]
-    .trim();
-  const globalRepeats = document
+    .trim(),
+   globalRepeats = document
     .querySelector(
       "#content > div.main-area-offset > div:nth-child(2) > div.player-card > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1) > div > div > span"
     )
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

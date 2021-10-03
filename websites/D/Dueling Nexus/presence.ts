@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "618212337895079996"
-});
+}),
 
-const elapsed = Math.floor(Date.now() / 1000);
+ elapsed = Math.floor(Date.now() / 1000);
 let text;
 
 presence.on("UpdateData", async () => {
@@ -14,16 +14,16 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/home") {
     if (
       document.getElementsByTagName("p")[1].innerHTML.includes("Welcome back")
-    ) {
+    ) 
       text = document.getElementsByTagName("p")[1].innerHTML;
-    } else {
+     else 
       text = document.getElementsByTagName("p")[3].innerHTML;
-    }
+    
 
-    if (localStorage.getItem("name") == null) {
+    if (localStorage.getItem("name") == null) 
       localStorage.setItem("name", text.split(",")[1]);
-    }
-    presenceData.details = "Online as " + text.split(",")[1];
+    
+    presenceData.details = `Online as ${text.split(",")[1]}`;
     presenceData.state = "waiting in lobby";
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = "in game";
@@ -35,15 +35,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/editor")) {
     const d = document.getElementsByTagName("strong")[0].textContent;
     presenceData.details = "Building Decks";
-    presenceData.state = "Editing: " + d;
+    presenceData.state = `Editing: ${d}`;
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = "in game";
   } else if (document.location.pathname.includes("/game")) {
     let opponent = document.getElementById("game-opponent-name").textContent;
-    const mylife = document.getElementById("game-life-player").textContent;
-    const opplife = document.getElementById("game-life-opponent").textContent;
-    let myname = document.getElementById("game-player-name").textContent;
-    let state, status;
+    const mylife = document.getElementById("game-life-player").textContent,
+     opplife = document.getElementById("game-life-opponent").textContent;
+    let myname = document.getElementById("game-player-name").textContent,
+     state, status;
 
     if (myname == "Player" || myname == "Opponent") {
       myname = document.getElementById(
@@ -54,9 +54,9 @@ presence.on("UpdateData", async () => {
       if (
         document.getElementById("game-room-player2-username").textContent ==
         "---"
-      ) {
+      ) 
         opponent = "waiting..";
-      } else {
+       else {
         opponent = document.getElementById(
           "game-room-player2-username"
         ).textContent;
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

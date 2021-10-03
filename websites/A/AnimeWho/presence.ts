@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "animewho",
       details: "Ana Sayfada Anime Arıyor",
-      startTimestamp: startTimestamp
+      startTimestamp
     },
     title = document.querySelector("head > title"),
     anime = title.textContent
@@ -50,35 +50,35 @@ presence.on("UpdateData", async () => {
     const bolum = document.querySelector(
       "div.MuiBox-root > button.MuiButton-outlinedSecondary > span.MuiButton-label"
     );
-    presenceData.state = bolum.innerHTML + "'ü İzliyor";
+    presenceData.state = `${bolum.innerHTML}'ü İzliyor`;
   } else if (new RegExp("oku/[0-9]+/[0-9]+").test(document.location.pathname)) {
     const read_type = document.querySelector(
         "div.MuiGrid-root > div.MuiBox-root > button.MuiButtonBase-root > span.MuiButton-label"
       ),
       arr = document.location.pathname.split("/");
     presenceData.state = `${arr[5]}.Bölüm`;
-    if (read_type && read_type.innerHTML.includes("Webtoon")) {
+    if (read_type && read_type.innerHTML.includes("Webtoon")) 
       presenceData.state = `${arr[5]}.Bölüm ${arr[6]}.Sayfa`;
-    }
+    
   } else if (
     document.location.pathname.includes("/izle") ||
     document.location.pathname.includes("/oku")
-  ) {
+  ) 
     presenceData.state = "Bölüm Seçiyor";
-  } else if (new RegExp("ceviriler/anime").test(document.location.pathname)) {
+   else if (new RegExp("ceviriler/anime").test(document.location.pathname)) 
     presenceData.state = "Göz Gezdiriyor";
-  } else if (document.location.pathname.includes("/ekip-alimlari")) {
+   else if (document.location.pathname.includes("/ekip-alimlari")) {
     presenceData.details = "Ekip Alımları";
     presenceData.state = "Potansiyel Ekip Üyesi";
   } else if (document.location.pathname.includes("/ara")) {
     const tur = document.querySelector(
       "div.MuiGrid-root > div.MuiBox-root > button.MuiButton-outlinedPrimary > span.MuiButton-label"
     );
-    if (tur.innerHTML == "Anime") {
+    if (tur.innerHTML == "Anime") 
       presenceData.state = "Ne İzlesem Diye Bakıyor";
-    } else {
+     else 
       presenceData.state = "Ne Okusam Diye Bakıyor";
-    }
+    
   } else if (document.location.pathname.includes("/destek-ol")) {
     presenceData.details = "Destek Ol";
     presenceData.state = "Acaba? Bir İhtimal?";

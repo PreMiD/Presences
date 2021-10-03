@@ -1,15 +1,15 @@
-const presence = new Presence({ clientId: "714636053235105832" });
+const presence = new Presence({ clientId: "714636053235105832" }),
 
-const strings = presence.getStrings({
+ strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused"
 });
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--) 
     ret += parseInt(list[index]) * 60 ** index;
-  }
+  
   return ret;
 }
 
@@ -56,9 +56,9 @@ presence.on("UpdateData", async () => {
     ).textContent;
     audioDuration = audioTimeLeft.replace(/(.*)(?=\/)/, "").replace("/ ", "");
 
-    const timestamps = getTimestamps(audioTime, audioDuration);
+    const timestamps = getTimestamps(audioTime, audioDuration),
 
-    const data: PresenceData = {
+     data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "logo",
@@ -73,10 +73,10 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title !== null && author !== null) {
+    if (title !== null && author !== null) 
       presence.setActivity(data, !paused);
-    }
-  } else {
+    
+  } else 
     presence.clearActivity();
-  }
+  
 });

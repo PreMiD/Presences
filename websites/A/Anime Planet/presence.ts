@@ -50,9 +50,9 @@ presence.on("UpdateData", async () => {
     timestamp: boolean = await presence.getSetting("timestamp"),
     buttons = await presence.getSetting("buttons");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

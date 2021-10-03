@@ -13,9 +13,9 @@ presence.on("UpdateData", async () => {
     details: "Home",
     largeImageKey: "main"
   };
-  if (document.location.pathname == "/home") {
+  if (document.location.pathname == "/home") 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/buscar-projeto/anime") {
+   else if (document.location.pathname == "/buscar-projeto/anime") {
     presenceData.details = "Procurando anime...";
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/projeto/")) {
@@ -25,8 +25,8 @@ presence.on("UpdateData", async () => {
 
     if (document.getElementsByClassName("modal-open").length > 0) {
       if (vid && vid.currentTime > 0 && !vid.paused) {
-        var { currentTime, duration } = vid;
-        const start = Math.floor(Date.now() / 1000);
+        const { currentTime, duration } = vid,
+         start = Math.floor(Date.now() / 1000);
 
         presenceData.startTimestamp = start;
         presenceData.endTimestamp = Math.floor(start - currentTime + duration);
@@ -41,12 +41,12 @@ presence.on("UpdateData", async () => {
         presenceData.details = anime.innerText;
         presenceData.smallImageKey = "paused";
         presenceData.smallImageText = (await strings).paused;
-      } else {
+      } else 
         presenceData.details = `${anime.innerText}`;
-      }
-    } else {
+      
+    } else 
       presenceData.details = `${anime.innerText}`;
-    }
+    
 
     presence.setActivity(presenceData);
   }

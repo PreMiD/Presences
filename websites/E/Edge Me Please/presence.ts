@@ -3,22 +3,22 @@ const presence = new Presence({
 });
 
 function setTime(a: number): number {
-  var time = new Date(Date.now());
+  const time = new Date(Date.now());
   time.setSeconds(time.getSeconds() + a);
   return Math.floor((time as any) / 1000);
 }
 
 function findParents(b: string | any[], a: string): number {
-  var r: any;
+  let r: any;
   for (let i = 0; i < b.length; i++) {
-    if (b[i][0] == a) {
+    if (b[i][0] == a) 
       r = b[i];
-    }
+    
   }
   return r;
 }
 
-var messages = {
+let messages = {
   finish: [
     [
       "STOP! Sorry, no cumshot for you. <br />Try again, maybe you will get lucky next time... Now get your hands off your dick until this is over.",
@@ -84,27 +84,27 @@ var messages = {
     "The game will go faster now, remember NOT to cum yet!",
     "This is the final phase, you may be allowed to cum any moment now!"
   ]
-};
+},
 
-var gomsgs = [];
-var stopmsgs = [];
-var finishmsgs = [];
-var elapsed;
+ gomsgs = [],
+ stopmsgs = [],
+ finishmsgs = [],
+ elapsed;
 
-for (let i = 0; i < messages["go"].length; i++) {
-  (gomsgs as any) += messages["go"][i][0];
-}
+for (let i = 0; i < messages.go.length; i++) 
+  (gomsgs as any) += messages.go[i][0];
 
-for (let i = 0; i < messages["stop"].length; i++) {
-  (stopmsgs as any) += messages["stop"][i][0];
-}
-for (let i = 0; i < messages["finish"].length; i++) {
-  (finishmsgs as any) += messages["finish"][i][0];
-}
+
+for (let i = 0; i < messages.stop.length; i++) 
+  (stopmsgs as any) += messages.stop[i][0];
+
+for (let i = 0; i < messages.finish.length; i++) 
+  (finishmsgs as any) += messages.finish[i][0];
+
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
-    var choosen = document.getElementById("choose").style.display != "none";
+    const choosen = document.getElementById("choose").style.display != "none";
 
     if (choosen) {
       elapsed = Math.floor((Date.now as any) / 1000);
@@ -118,10 +118,10 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else {
-      let presenceData;
-      var msg = document.getElementById("message").innerText;
+      let presenceData,
+       msg = document.getElementById("message").innerText;
       if (gomsgs.includes(msg)) {
-        var cr = findParents(messages["go"], msg);
+        var cr = findParents(messages.go, msg);
         presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
@@ -130,7 +130,7 @@ presence.on("UpdateData", async () => {
         };
         presence.setActivity(presenceData);
       } else if (finishmsgs.includes(msg)) {
-        var cr = findParents(messages["finish"], msg);
+        var cr = findParents(messages.finish, msg);
         presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
@@ -139,7 +139,7 @@ presence.on("UpdateData", async () => {
         };
         presence.setActivity(presenceData);
       } else if (stopmsgs.includes(msg)) {
-        var cr = findParents(messages["stop"], msg);
+        var cr = findParents(messages.stop, msg);
         presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
@@ -149,7 +149,7 @@ presence.on("UpdateData", async () => {
 
         presence.setActivity(presenceData);
       } else if (
-        messages["first"][0] ==
+        messages.first[0] ==
         document.getElementById("message").children[0].innerHTML
       ) {
         elapsed = Math.floor((Date.now as any) / 1000);

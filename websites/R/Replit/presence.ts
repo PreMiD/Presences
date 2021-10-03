@@ -8,9 +8,9 @@ presence.on("UpdateData", () => {
     },
     Path = document.location.pathname;
 
-  if (Path == "/" || Path == "/~") {
+  if (Path == "/" || Path == "/~") 
     presenceData.details = "Viewing home page";
-  } else if (Path.startsWith("/@")) {
+   else if (Path.startsWith("/@")) {
     if (
       Path.replace("/@", "")
         .split("/")
@@ -25,9 +25,9 @@ presence.on("UpdateData", () => {
             "#workspace-root > div > div.jsx-132086333.content > div.jsx-77352756.workspace-page-wrapper.desktop > div > div > div:nth-child(1) > header > div > div.jsx-2650114939.left > div > div > div.jsx-2652062152.workspace-header-info > div.jsx-2652062152.language-icon-container > img"
           ) as HTMLImageElement
         ).alt,
-        projectName: string =
-          Path.split("/").filter((elm) => elm !== "")[1] +
-          `${
+        projectName =
+          `${Path.split("/").filter((elm) => elm !== "")[1] 
+          }${
             window.location.hash ? ` - ${window.location.hash.substr(1)}` : ""
           }`;
       presenceData.details = `Editing ${fileType} repl`;
@@ -56,7 +56,7 @@ presence.on("UpdateData", () => {
     presenceData.state = `${
       Path == "/repls"
         ? "In the main page"
-        : "In a folder : " + Path.replace("/repls/folder/", "")
+        : `In a folder : ${Path.replace("/repls/folder/", "")}`
     }`;
   } else if (Path.startsWith("/talk")) {
     presenceData.details = "Surfing feed";

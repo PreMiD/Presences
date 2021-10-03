@@ -21,14 +21,14 @@ presence.on("UpdateData", () => {
     ) {
       presenceData.details = "Listening to the radio";
       presenceData.state =
-        document.getElementById("song").innerHTML +
-        " - " +
-        document.getElementById("artist").innerHTML;
+        `${document.getElementById("song").innerHTML 
+        } - ${ 
+        document.getElementById("artist").innerHTML}`;
       presenceData.smallImageKey = "play";
     } else {
       presenceData.details = "On website,";
       presenceData.state =
-        "Browsing " + document.title.replace("Bargrooves FM - ", "");
+        `Browsing ${document.title.replace("Bargrooves FM - ", "")}`;
       presenceData.smallImageKey = "pause";
     }
   } else if (window.location.pathname == "/player/") {
@@ -39,16 +39,16 @@ presence.on("UpdateData", () => {
     ) {
       presenceData.details = "Browsing the player";
       presenceData.state =
-        "Looking at " + document.title.replace("Bargrooves FM - ", "");
+        `Looking at ${document.title.replace("Bargrooves FM - ", "")}`;
       presenceData.smallImageKey = "pause";
     } else {
       presenceData.details =
-        "Listening to " +
-        document.getElementById("current-album").innerHTML.split("<")[0];
+        `Listening to ${ 
+        document.getElementById("current-album").innerHTML.split("<")[0]}`;
       presenceData.state =
-        document.getElementById("csong").innerHTML +
-        " - " +
-        document.getElementById("cartist").innerHTML;
+        `${document.getElementById("csong").innerHTML 
+        } - ${ 
+        document.getElementById("cartist").innerHTML}`;
       presenceData.smallImageKey = "play";
     }
   }
@@ -56,7 +56,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

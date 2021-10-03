@@ -13,8 +13,8 @@ const _frameInstance = new iFrame();
         currentTime: video.currentTime,
         paused: video.paused
       });
-    } else {
+    } else 
       iframe.send(null);
-    }
+    
   });
 })(_frameInstance);

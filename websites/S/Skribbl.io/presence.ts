@@ -30,9 +30,9 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -49,9 +49,9 @@ presence.on("UpdateData", async () => {
       ];
     }
 
-    if (elapsed == null) {
+    if (elapsed == null) 
       elapsed = Math.floor(Date.now() / 1000);
-    }
+    
     presenceData.startTimestamp = elapsed;
   } else {
     presenceData.details = "Viewing the Homepage";

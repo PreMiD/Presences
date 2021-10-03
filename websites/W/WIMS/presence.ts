@@ -1,32 +1,32 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "656959119118565406"
 });
 
 // Redirect to iframe source, to prevent loss of progress
 if (document.getElementsByTagName("frame")[1]) {
-  if (document.baseURI != document.getElementsByTagName("frame")[1].src) {
+  if (document.baseURI != document.getElementsByTagName("frame")[1].src) 
     window.location.replace(document.getElementsByTagName("frame")[1].src);
-  }
+  
 }
 
 // Check whether loggedout
-var loggedout = false;
+let loggedout = false;
 if (
   (document.baseURI.match(/module=adm/) &&
     document.baseURI.match(/(type=|classes)/)) ||
   (document.getElementsByClassName("menuitem")[1] as HTMLElement).innerText ==
     ""
-) {
+) 
   loggedout = true;
-}
 
-var Classname: any;
-var Worksheet = "...";
-var WSNo: any;
-var EXNo: any;
-var Exercise: any;
-var timestamp: any;
-var timeleft: any;
+
+let Classname: any,
+ Worksheet = "...",
+ WSNo: any,
+ EXNo: any,
+ Exercise: any,
+ timestamp: any,
+ timeleft: any;
 
 // In Worksheet
 if (!loggedout) {
@@ -34,28 +34,29 @@ if (!loggedout) {
   // if (document.querySelector(".wimscenter"))
   if (document.querySelector(".wims_subclasses")) {
     Classname =
-      (document.querySelector(".wimscenter") as HTMLElement).innerText.split(
+      `${(document.querySelector(".wimscenter") as HTMLElement).innerText.split(
         "\n"
-      )[1] + " ";
+      )[1]} `;
   } else if (document.querySelectorAll("td.small")[1]) {
     Classname =
-      (document.querySelectorAll("td.small")[1] as HTMLElement).innerText.split(
+      `${(document.querySelectorAll("td.small")[1] as HTMLElement).innerText.split(
         " "
-      )[0] + " ";
-  } else
-    Classname =
-      (document.querySelector(".wimscenter") as HTMLElement).innerText.split(
+      )[0]} `;
+  } else {
+Classname =
+      `${(document.querySelector(".wimscenter") as HTMLElement).innerText.split(
         "\n"
-      )[0] + " ";
+      )[0]} `;
+}
 
   // Set Worksheet
   if (document.baseURI.match(/sh=/)) {
     WSNo = document.baseURI.match(/sh=(.?.?)/)[1].replace(/&|#/g, "");
     Worksheet =
-      "- " +
-      document.getElementsByClassName("text_item ")[1].innerHTML +
-      "" +
-      WSNo;
+      `- ${ 
+      document.getElementsByClassName("text_item ")[1].innerHTML 
+      }${ 
+      WSNo}`;
     Exercise = "...";
   }
 
@@ -66,14 +67,14 @@ if (!loggedout) {
       .match(/sh=(.?.?)/)[1]
       .replace(/&|#/g, "");
     Worksheet =
-      "- " +
-      (document.querySelector(".sheet") as HTMLElement).innerText +
-      " " +
-      WSNo;
+      `- ${ 
+      (document.querySelector(".sheet") as HTMLElement).innerText 
+      } ${ 
+      WSNo}`;
     Classname =
-      (document.querySelectorAll("td.small")[2] as HTMLElement).innerText.split(
+      `${(document.querySelectorAll("td.small")[2] as HTMLElement).innerText.split(
         " "
-      )[0] + " ";
+      )[0]} `;
 
     // Set Exercise
     if (document.querySelector(".main_body .titre")) {
@@ -86,17 +87,18 @@ if (!loggedout) {
           .getElementsByTagName("kbd")[1]
           .innerText.match(/\d+/)[0];
         Exercise =
-          (document.querySelector(".sheet") as HTMLAnchorElement).href
+          `${(document.querySelector(".sheet") as HTMLAnchorElement).href
             .match(/#ex(.?.?)/)[1]
-            .replace(/&|#/g, "") +
-          "." +
-          EXNo +
-          ": " +
+            .replace(/&|#/g, "") 
+          }.${ 
+          EXNo 
+          }: ${ 
           (document.querySelector(".main_body .titre") as HTMLElement)
-            .innerText;
-      } else
-        Exercise = (document.querySelector(".main_body .titre") as HTMLElement)
-          .innerText; // Results page, so no EXNo
+            .innerText}`;
+      } else {
+Exercise = (document.querySelector(".main_body .titre") as HTMLElement)
+          .innerText;
+} // Results page, so no EXNo
     }
     if (document.querySelector(".oeftitle")) {
       if (
@@ -108,12 +110,13 @@ if (!loggedout) {
           .getElementsByTagName("kbd")[1]
           .innerText.match(/\d+/)[0];
         Exercise =
-          (document.querySelector(".oeftitle") as HTMLElement).innerText +
-          ": " +
-          EXNo;
-      } else
-        Exercise = (document.querySelector(".oeftitle") as HTMLElement)
+          `${(document.querySelector(".oeftitle") as HTMLElement).innerText 
+          }: ${ 
+          EXNo}`;
+      } else {
+Exercise = (document.querySelector(".oeftitle") as HTMLElement)
           .innerText;
+}
     }
     if (EXNo > "1") {
       // If exercise >1 get last time
@@ -157,10 +160,10 @@ presence.on("UpdateData", async () => {
     endTimestamp: timeleft,
     largeImageKey: "wims_lg"
   };
-  if (loggedout) {
+  if (loggedout) 
     presence.setActivity();
-  } else presence.setActivity(presenceData);
-  if (EXNo != undefined) {
+   else presence.setActivity(presenceData);
+  if (EXNo != undefined) 
     sessionStorage.setItem("TimeStampStorage", timestamp.toString());
-  }
+  
 });

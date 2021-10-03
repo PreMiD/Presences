@@ -70,9 +70,9 @@ presence.on("UpdateData", async () => {
       // lastPlaybackState = playback;
       browsingStamp = Math.floor(Date.now() / 1000);
     }
-  } else {
+  } else 
     presence.info("Video time is off");
-  }
+  
   if (info) {
     presence.info("Info is On.");
     if (document.location.pathname == "/") {

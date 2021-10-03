@@ -29,9 +29,9 @@ function getArtists(): string {
     ? document.querySelector("span.ja.player-song-artist-container").childNodes
     : undefined;
   if (elemt != undefined) {
-    for (let i = 0; i < elemt.length; i++) {
+    for (let i = 0; i < elemt.length; i++) 
       artists.push(elemt[i].textContent.replace(/\s+/g, " ").trim());
-    }
+    
     artist = artists.join(" ");
   }
   return artist;
@@ -77,14 +77,14 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = startTimestamp;
   } else if (path.includes("u")) {
     user = document.querySelector("div.profileName > span").textContent;
-    presenceData.details = "Viewing " + user + "'s profile";
-    if (path.includes("favorites")) {
+    presenceData.details = `Viewing ${user}'s profile`;
+    if (path.includes("favorites")) 
       presenceData.state = "Favorites";
-    } else if (path.includes("uploads")) {
+     else if (path.includes("uploads")) 
       presenceData.state = "Uploads";
-    } else {
+     else 
       delete presenceData.state;
-    }
+    
     presenceData.startTimestamp;
   } else {
     presenceData.details = "Not playing";

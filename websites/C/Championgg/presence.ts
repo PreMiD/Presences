@@ -1,14 +1,14 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "704756386860499089"
-});
+}),
 
-var time = Math.floor(Date.now() / 1000);
+ time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "championgg"
-  };
-  var path = document.location.pathname.toLowerCase();
+  },
+   path = document.location.pathname.toLowerCase();
   if (path === "/") {
     presenceData.details = "Initial page";
     presenceData.state = "Viewing champions";
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -36,14 +36,14 @@ presence.on("UpdateData", async () => {
       presence.setTrayTitle(video.paused ? "" : title.innerText);
 
       //* Remove timestamps if paused or not show timestamps
-      if (video.paused || !showTime) {
+      if (video.paused || !showTime) 
         delete presenceData.endTimestamp;
-      }
+      
 
       //* If tags are not "null"
-      if (title && uploader) {
+      if (title && uploader) 
         presence.setActivity(presenceData, !video.paused);
-      } else {
+       else {
         presence.setActivity();
         presence.setTrayTitle();
       }

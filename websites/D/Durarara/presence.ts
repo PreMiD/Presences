@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "712269360206708766"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
@@ -14,16 +14,16 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/lounge")) {
       presenceData.details = "Searching for a room";
       presenceData.state =
-        "Username: " + document.querySelector(".name").textContent;
+        `Username: ${document.querySelector(".name").textContent}`;
       presenceData.smallImageKey = "search";
-    } else if (document.location.pathname.includes("/create_room")) {
+    } else if (document.location.pathname.includes("/create_room")) 
       presenceData.details = "Creating a room";
-    } else if (document.location.pathname.includes("/room/")) {
+     else if (document.location.pathname.includes("/room/")) {
       presenceData.details =
-        "In a room: " + document.querySelector(".room-title-name").textContent;
+        `In a room: ${document.querySelector(".room-title-name").textContent}`;
       presenceData.state =
-        "Members: " +
-        document.querySelector(".room-title-capacity").textContent;
+        `Members: ${ 
+        document.querySelector(".room-title-capacity").textContent}`;
       presenceData.smallImageKey = "chat";
     }
   }
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

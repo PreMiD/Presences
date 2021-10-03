@@ -1,15 +1,15 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "651145049811451924"
 });
 presence.on("UpdateData", async () => {
   if (document.location.pathname.startsWith("/wiki/")) {
     const page = document.getElementsByClassName("page-header__title")[0];
     let pageText;
-    if (page == null) {
+    if (page == null) 
       pageText = "Unknown Page";
-    } else {
+     else 
       pageText = page.textContent;
-    }
+    
     const presenceData: PresenceData = {
       details: "Viewing a page...",
       state: pageText,

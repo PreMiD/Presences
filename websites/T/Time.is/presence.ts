@@ -1,13 +1,13 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "642714892201230336"
 });
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "time"
-  };
+  },
 
-  var clock =
+   clock =
     document.querySelector("#clock0_bg") ||
     document.querySelector("#time_section > div:nth-child(2) > div");
 
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

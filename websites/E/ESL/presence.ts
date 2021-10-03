@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "623229289864626195" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var item: any, admin: any, item2: any;
+ item: any, admin: any, item2: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " standings, " + item2.innerText;
+      presenceData.state = `${item.innerText} standings, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
       );
       presenceData.details = "ESL Pros, viewing:";
       presenceData.state =
-        item.innerText + " scores & schedule, " + item2.innerText;
+        `${item.innerText} scores & schedule, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " statistics, " + item2.innerText;
+      presenceData.state = `${item.innerText} statistics, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " teams, " + item2.innerText;
+      presenceData.state = `${item.innerText} teams, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " brackets, " + item2.innerText;
+      presenceData.state = `${item.innerText} brackets, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " partners, " + item2.innerText;
+      presenceData.state = `${item.innerText} partners, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " sponsors, " + item2.innerText;
+      presenceData.state = `${item.innerText} sponsors, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " rules, " + item2.innerText;
+      presenceData.state = `${item.innerText} rules, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " contact, " + item2.innerText;
+      presenceData.state = `${item.innerText} contact, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " videos, " + item2.innerText;
+      presenceData.state = `${item.innerText} videos, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -163,7 +163,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " players, " + item2.innerText;
+      presenceData.state = `${item.innerText} players, ${item2.innerText}`;
 
       delete presenceData.smallImageKey;
 
@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, reading:";
-      presenceData.state = item.innerText + " news, " + item2.innerText;
+      presenceData.state = `${item.innerText} news, ${item2.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -189,11 +189,11 @@ presence.on("UpdateData", async () => {
     ) {
       item = document.querySelector("#content > article > header > h2");
       presenceData.details = "ESL Pros, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       presenceData.smallImageKey = "reading";
 
@@ -237,11 +237,11 @@ presence.on("UpdateData", async () => {
         "#content > div > div > div > section > div > div > div > div > div > div > div > h1"
       );
       presenceData.details = "ESL Intel Grand Slam, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       presenceData.smallImageKey = "reading";
 
@@ -259,7 +259,7 @@ presence.on("UpdateData", async () => {
       item = document.querySelector("#site-logo-inner > a > img");
       if (item !== null) {
         presenceData.details = "ESL Intel Extreme Masters";
-        presenceData.state = "Viewing: " + item.alt;
+        presenceData.state = `Viewing: ${item.alt}`;
 
         delete presenceData.smallImageKey;
 
@@ -333,11 +333,11 @@ presence.on("UpdateData", async () => {
     ) {
       item = document.querySelector("#content > article > header > h2");
       presenceData.details = "ESL Intel Extreme Masters, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       presenceData.smallImageKey = "reading";
 
@@ -364,11 +364,11 @@ presence.on("UpdateData", async () => {
     ) {
       item = document.querySelector("#content > article > header > h2");
       presenceData.details = "ESL ONE, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       presenceData.smallImageKey = "reading";
 
@@ -563,11 +563,11 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/article/")) {
       item = document.querySelector("#content > article > header > h2");
       presenceData.details = "ESL News, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       presenceData.smallImageKey = "reading";
 
@@ -589,11 +589,11 @@ presence.on("UpdateData", async () => {
         "#vanilla_discussion_index > section > div > main > div.MessageList.Discussion > div > h1"
       );
       presenceData.details = "ESL Forums, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
+      if (item.innerText.length > 128) 
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = item.innerText;
-      }
+      
 
       presenceData.smallImageKey = "reading";
 
@@ -648,7 +648,7 @@ presence.on("UpdateData", async () => {
         "body > div.l-page > div.l-main > div > div.l-content > article > div > div > div > div > div > table > tbody > tr:nth-child(2) > td > div.TitleNews"
       );
       presenceData.details = "ESL - Schulmeisterschaft";
-      presenceData.state = "Reading: " + item.innerText;
+      presenceData.state = `Reading: ${item.innerText}`;
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
@@ -710,7 +710,7 @@ presence.on("UpdateData", async () => {
         item = document.querySelector("head > title");
         presenceData.details = "ESL - Schulmeisterschaft";
         presenceData.state =
-          "Viewing: " + item.innerText.split(" | Schulmeisterschaft")[0];
+          `Viewing: ${item.innerText.split(" | Schulmeisterschaft")[0]}`;
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
@@ -719,7 +719,7 @@ presence.on("UpdateData", async () => {
       item = document.querySelector("head > title");
       presenceData.details = "ESL - Schulmeisterschaft";
       presenceData.state =
-        "Viewing: " + item.innerText.split(" | Schulmeisterschaft")[0];
+        `Viewing: ${item.innerText.split(" | Schulmeisterschaft")[0]}`;
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);

@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "708082807775428678"
-});
+}),
 
-const strings = presence.getStrings({
+ strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
@@ -12,8 +12,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -29,18 +29,18 @@ presence.on("iFrameData", async (msg) => {
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "aniturk"
-  };
+  },
 
-  const title = document.querySelector(
+   title = document.querySelector(
     "html > body > div.konter > a > div.icerik-bilgi"
-  );
-  const episode = document.querySelector(
+  ),
+   episode = document.querySelector(
     "html > body > div.konter > div.icerik-baslik"
   );
 
-  if (!title || !episode) {
+  if (!title || !episode) 
     video = null;
-  }
+  
   //Episode part
   if (title && episode) {
     data.details = title.textContent;

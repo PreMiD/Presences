@@ -6,9 +6,9 @@ function displayPresence(presenceData: PresenceData) {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 }
 
 presence.on("UpdateData", async () => {
@@ -71,9 +71,9 @@ presence.on("UpdateData", async () => {
     }
 
     if (!presenceData.state) {
-      if (path.startsWith("/admin")) {
+      if (path.startsWith("/admin")) 
         presenceData.state = "Viewing an admin page";
-      } else if (/[a-zA-Z0-9]{8}/.test(path)) {
+       else if (/[a-zA-Z0-9]{8}/.test(path)) {
         const imageOwner = document.getElementById("image-owner").innerText;
         presenceData.state = `Viewing an upload by ${imageOwner}`;
       }
@@ -215,9 +215,9 @@ presence.on("UpdateData", async () => {
       const decodedPath = decodeURIComponent(path.substr(1)), // Decode URI path without leading /
         invisiblePath = /[\u200B\u200C]+/.test(decodeURIComponent(decodedPath)); // Test if the path uses invisible chars
 
-      if (path.startsWith("/admin")) {
+      if (path.startsWith("/admin")) 
         presenceData.state = "Viewing an admin page";
-      } else if (path.startsWith("/changelog/")) {
+       else if (path.startsWith("/changelog/")) {
         const changelogVersion = path.replace("/changelog/", "");
         presenceData.state = `Viewing ${changelogVersion} changelog`;
       }
@@ -260,10 +260,11 @@ presence.on("UpdateData", async () => {
               .replace(/\u200c/g, "1"),
             bytes = binaryString.match(/.{8}/g);
 
-          if (bytes)
-            id = bytes
+          if (bytes) {
+id = bytes
               .map((bin) => String.fromCharCode(parseInt(bin, 2)))
               .join("");
+}
 
           // Check the decoded invisible path does not follow valid image ID format
           if (!/\b[a-zA-Z0-9]{8}\b/.test(id)) {
@@ -279,9 +280,9 @@ presence.on("UpdateData", async () => {
           const imageOwner = imageOwnerElement.textContent;
           presenceData.state = `Viewing an upload by ${imageOwner}`;
         }
-      } else {
+      } else 
         presenceData.state = "Page not found";
-      }
+      
     }
   }
   // status page

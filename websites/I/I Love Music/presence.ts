@@ -2,7 +2,7 @@
 const presence = new Presence({
   clientId: "477919120789078026"
 });
-let language = navigator.language;
+let {language} = navigator;
 
 switch (language) {
   // By ACertainCoder#9011
@@ -39,9 +39,9 @@ switch (language) {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-  const playing = parseInt(document.querySelector("#playstop").textContent);
+   playing = parseInt(document.querySelector("#playstop").textContent);
   if (playing > 0) {
     const station =
       document.getElementsByClassName("channelname")[0].textContent;

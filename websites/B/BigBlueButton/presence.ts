@@ -81,13 +81,13 @@ function getData() {
         return;
       }
     });
-    if (document.querySelector("#room_access_code")) {
+    if (document.querySelector("#room_access_code")) 
       userState = "Entering the room passcode";
-    } else if (document.querySelector(".form-control.join-form")) {
+     else if (document.querySelector(".form-control.join-form")) 
       userState = "Entering the name";
-    } else if (document.querySelector(".col-3 .loader")) {
+     else if (document.querySelector(".col-3 .loader")) 
       userState = "Waiting for the session to start...";
-    }
+    
   }
 }
 
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

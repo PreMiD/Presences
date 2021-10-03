@@ -47,10 +47,10 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.includes("/find/team")) {
     presenceData.details = `Finding Team`;
     presenceData.state =
-      "Looking At " +
+      `Looking At ${ 
       document.querySelector(
         "#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.StatusContext-container.AppV2-container > div > div.LayerContext-container > div > div > div.IconNavMenu-container.PlayerLfgPortal-menu > div.TeamFinder-container > div > div.VoteSwiperList-container.VoteSwiperList-container-type-lfg.VoteSwiperList-container-desktop > div.VoteSwiperItem-container.VoteSwiperList-item-wrapper.VoteSwiperList-item-0.ClickAndDragControl-container.ClickAndDragControl-container-grab > div > div > div.TeamCardV2-container.TeamCardV2-container-layout-horizontal.TeamCardV2-container-no-interact.TeamCardV2-container-with-games.TeamListingCard-alias-card > div.TeamCardV2-content > div.TeamCardV2-header.TeamCardHeader-container.TeamCardHeader-container-layout-horizontal > div.TeamCardHeader-team-name-wrapper > h2"
-      ).textContent;
+      ).textContent}`;
   } else if (document.location.pathname.includes("/find/team/status")) {
     presenceData.details = `Viewing Page:`;
     presenceData.state = `Teams Status`;
@@ -61,12 +61,12 @@ presence.on("UpdateData", () => {
     const edit =
       document.querySelector(
         ".StatusContext-container.OptionsMenu-option-content"
-      ) !== null;
-    const add =
+      ) !== null,
+     add =
       document.querySelector(
         ".InputControllerWrapper-container.InputControllerWrapper-container-grid.InputControllerWrapper-container-2-columns.RadiosField-panel-inputs.RadiosField-layout-horizontal"
-      ) !== null;
-    const status =
+      ) !== null,
+     status =
       document.querySelector(
         ".StatusContext-container.ModalV2-modal-content.ModalV2-modal-content-scrollable"
       ) !== null;
@@ -95,7 +95,7 @@ presence.on("UpdateData", () => {
     const priceEls = document.getElementsByClassName(
       "GH1-container UserProfileName-name"
     );
-    for (var i = 0; i < priceEls.length; i++) {
+    for (let i = 0; i < priceEls.length; i++) {
       const profilename = priceEls[i].textContent;
       presenceData.details = `Viewing a profile:`;
       presenceData.state = profilename;
@@ -138,7 +138,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

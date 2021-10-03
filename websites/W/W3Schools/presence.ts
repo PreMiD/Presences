@@ -27,14 +27,14 @@ presence.on("UpdateData", () => {
     exercise = document.querySelector("#completedExercisesNo");
 
   if (language) {
-    details = "Learning " + capitalize(language.textContent.toLowerCase());
+    details = `Learning ${capitalize(language.textContent.toLowerCase())}`;
     if (whitelist.some((lang) => lang === language.textContent))
-      details = "Learning " + language.textContent;
+      details = `Learning ${language.textContent}`;
   }
 
-  if (lesson) {
+  if (lesson) 
     state = lesson.textContent;
-  }
+  
 
   if (exercise) {
     details = `${capitalize(window.location.pathname.split("/")[1])} Exercise`;
@@ -42,8 +42,8 @@ presence.on("UpdateData", () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "w3schools",
     startTimestamp: elapsed
   };

@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "616738921765667023"
   }),
   presenceData: PresenceData = {
@@ -6,9 +6,9 @@ var presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
+  if (document.location.pathname == "/") 
     presenceData.details = "Viewing the homepage";
-  } else if (
+   else if (
     document.location.pathname == "/post" ||
     document.location.pathname.startsWith("/post/")
   ) {
@@ -35,17 +35,17 @@ presence.on("UpdateData", async () => {
         presenceData.details = `Viewing #${
           document.location.pathname.split("/post/show/")[1]
         }`;
-        presenceData.state = "by " + artists;
+        presenceData.state = `by ${artists}`;
       }
 
       if (document.querySelector(".sidebar .status-notice div[id^=pool]")) {
-        var PoolName = document
+        const PoolName = document
           .querySelector(".sidebar .status-notice div[id^=pool]")
           .querySelector("p").innerText;
         presenceData.details = `Viewing ${PoolName} (#${
           document.location.pathname.split("/post/show/")[1]
         })`;
-        presenceData.state = "by " + artists;
+        presenceData.state = `by ${artists}`;
       }
     } else if (document.location.pathname.startsWith("/post/popular_by_day")) {
       presenceData.details = "Viewing posts";
@@ -60,19 +60,19 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Popular by Month";
     }
     // } else if (document.location.pathname.startsWith("/post/popular_by_week")) {
-  } else if (document.location.pathname.startsWith("/forum")) {
+  } else if (document.location.pathname.startsWith("/forum")) 
     presenceData.details = "Viewing the forum";
-  } else if (document.location.pathname.startsWith("/user/show")) {
+   else if (document.location.pathname.startsWith("/user/show")) {
     presenceData.details = "Viewing user";
 
-    var HTMLElement = document.querySelector(
+    const HTMLElement = document.querySelector(
       "#userpage div h2"
     ) as HTMLBaseElement;
 
     presenceData.state = HTMLElement.innerHTML.split("<span")[0];
-  } else {
+  } else 
     presenceData.details = `Viewing "${document.title.split(" - e621")[0]}"`;
-  }
+  
 
   presence.setActivity(presenceData);
 });

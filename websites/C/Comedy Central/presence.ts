@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "630533580119998496"
   }),
   strings = presence.getStrings({
@@ -15,8 +15,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -26,22 +26,22 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname.startsWith("/episodes")) {
-    var player: HTMLVideoElement = document.querySelector(
+    let player: HTMLVideoElement = document.querySelector(
       ".edge-player-content-element"
-    );
+    ),
 
-    var show = document.querySelector(".header h3 a").textContent;
-    var epTitle = document.querySelector(".sub-header h1").textContent;
-    var epNumber: any;
+     show = document.querySelector(".header h3 a").textContent,
+     epTitle = document.querySelector(".sub-header h1").textContent,
+     epNumber: any;
     epNumber = document.querySelector(".meta span");
     if (epNumber) {
       epNumber =
-        epNumber.textContent.replace("Season ", "S").replace(" Ep ", ":E") +
-        " ";
-    } else {
+        `${epNumber.textContent.replace("Season ", "S").replace(" Ep ", ":E") 
+        } `;
+    } else 
       epNumber = "";
-    }
-    var timestamps = getTimestamps(
+    
+    const timestamps = getTimestamps(
       Math.floor(player.currentTime),
       Math.floor(player.duration)
     );

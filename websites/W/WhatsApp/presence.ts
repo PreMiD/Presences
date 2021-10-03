@@ -27,8 +27,8 @@ presence.on("UpdateData", async () => {
     name = null;
 
   if (!name && typing === null) return presence.setActivity();
-  else
-    presence.setActivity({
+  else {
+presence.setActivity({
       largeImageKey: "waweb-logo",
       details: `Texting with ${name || "someone"}`,
       state:
@@ -37,4 +37,5 @@ presence.on("UpdateData", async () => {
         "Just waiting...",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
+}
 });

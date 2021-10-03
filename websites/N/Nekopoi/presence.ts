@@ -17,11 +17,11 @@ presence.on("UpdateData", async () => {
   if (document.location.search.startsWith("?s")) {
     presenceData.details = "Searching for:";
     presenceData.state = `${title.replace(/Search Results/g, "")}`;
-  } else if (path == "/") {
+  } else if (path == "/") 
     presenceData.details = "Viewing home page";
-  } else if (path == "/genre-list/") {
+   else if (path == "/genre-list/") 
     presenceData.details = "Viewing at Genre List";
-  } else if (path == "/jadwal-new-hentai/") {
+   else if (path == "/jadwal-new-hentai/") {
     presenceData.details = "Viewing a page";
     presenceData.state = "New Hentai Schedule";
   } else if (path == `${regex[0]}`) {
@@ -31,9 +31,9 @@ presence.on("UpdateData", async () => {
     } else if (ttl.some((x) => title.includes(x))) {
       presenceData.details = "Viewing a page";
       presenceData.state = title;
-    } else {
+    } else 
       presenceData.details = title;
-    }
+    
   }
   return presence.setActivity(presenceData);
 });

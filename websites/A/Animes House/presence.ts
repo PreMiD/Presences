@@ -1,12 +1,12 @@
 const presence = new Presence({
   clientId: "711685584573169686"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 function getTimestamps(videoTime, videoDuration): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -44,9 +44,9 @@ presence.on("iFrameData", (data) => {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
 
-  const path = document.location.pathname;
+   path = document.location.pathname;
 
   if (path == "/") {
     if (document.title.includes("Resultados da pesquisa por ")) {
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
         (presenceData.state = lancamentoText.innerText),
         (presenceData.startTimestamp = browsingStamp));
   } else if (path.includes("generos")) {
-    presenceData.details = "Gênero: " + generoText.innerText;
+    presenceData.details = `Gênero: ${generoText.innerText}`;
     presenceData.state = paginaText.innerText;
     presenceData.startTimestamp = browsingStamp;
   } else if (path.includes("episodio")) {
@@ -112,9 +112,9 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/pedidos")) {
     presenceData.details = "Página de pedidos";
     presenceData.startTimestamp = browsingStamp;
-    if (document.querySelector("div.discover.hidde.show")) {
+    if (document.querySelector("div.discover.hidde.show")) 
       presenceData.state = "Fazendo um novo pedido...";
-    }
+    
   } else if (path.includes("/calendario")) {
     presenceData.details = "Calendário de lançamentos";
     presenceData.startTimestamp = browsingStamp;
@@ -122,8 +122,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Minha Conta";
     presenceData.state = contaText.innerText;
     presenceData.startTimestamp = browsingStamp;
-  } else {
+  } else 
     presenceData.details = "Navegando...";
-  }
+  
   presence.setActivity(presenceData);
 });

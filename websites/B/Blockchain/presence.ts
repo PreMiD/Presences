@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Home";
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

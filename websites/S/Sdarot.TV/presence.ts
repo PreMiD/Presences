@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "641969062083035146"
   }),
   strings = presence.getStrings({
@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
+ user: any,
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -40,22 +40,22 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "צופה ברשימת הסדרות";
   } else if (document.location.pathname.includes("/watch/")) {
-    var currentTime: any,
+    let currentTime: any,
       duration: any,
       paused: any,
       timestamps: any,
       video: HTMLVideoElement;
     video = document.querySelector("#playerDiv > div > video");
-    if (video == null) {
+    if (video == null) 
       video = document.querySelector("#videojs_html5_api");
-    }
+    
     title = document.querySelector(
       "#watchEpisode > div.poster > div > h1"
     ).textContent;
     user = document.querySelector("#player > div.head > p").textContent;
-    if (user.includes(" - ")) {
+    if (user.includes(" - ")) 
       user = user.split(" - ")[1];
-    }
+    
 
     if (video !== null) {
       currentTime = video.currentTime;
@@ -82,14 +82,14 @@ presence.on("UpdateData", async () => {
     } else if (isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = ":צופה ב";
-      presenceData.state = title + " - " + user;
+      presenceData.state = `${title} - ${user}`;
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

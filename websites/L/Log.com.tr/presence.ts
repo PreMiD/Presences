@@ -1,10 +1,10 @@
 const presence = new Presence({
   clientId: "657615662537244673"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-const presenceData: PresenceData = {
+ presenceData: PresenceData = {
   largeImageKey: "log-logo",
   startTimestamp: browsingStamp
 };
@@ -41,7 +41,7 @@ presence.on("UpdateData", () => {
   if (page.includes("/page")) {
     const pagenum = parseInt(document.location.pathname.split("/")[2]);
     presenceData.details = "Ana Sayfa";
-    presenceData.state = "Sayfa: " + pagenum;
+    presenceData.state = `Sayfa: ${pagenum}`;
   }
   if (page.includes("/asfalt")) makeCategoryRPC("Asfalt");
   if (page.includes("/teknoloji-haberleri")) makeCategoryRPC("Teknoloji");
@@ -62,7 +62,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

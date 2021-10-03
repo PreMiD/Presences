@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "660894911331172372"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+ browsingStamp = Math.floor(Date.now() / 1000);
 let priceEls;
 
 presence.on("UpdateData", () => {
@@ -21,7 +21,7 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/profile/")) {
       priceEls = document.getElementsByClassName("uname");
       for (var i = 0; i < priceEls.length; i++) {
-        var profilename = priceEls[i].innerText;
+        const profilename = priceEls[i].innerText;
         presenceData.details = "Viewing a profile:";
         presenceData.state = profilename;
       }
@@ -39,7 +39,7 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/bot/")) {
       priceEls = document.getElementsByClassName("botname");
       for (var i = 0; i < priceEls.length; i++) {
-        var botname = priceEls[i].innerText;
+        const botname = priceEls[i].innerText;
         presenceData.details = "Viewing a Discord bot:";
         presenceData.state = botname;
       }
@@ -48,7 +48,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

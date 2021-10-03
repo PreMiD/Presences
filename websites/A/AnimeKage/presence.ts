@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640244531346014214"
   }),
   strings = presence.getStrings({
@@ -15,18 +15,18 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var title: any, air: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
+ title: any, air: any,
+ iFrameVideo: boolean, currentTime: any, duration: any, paused: any,
 
-var lastPlaybackState = null;
-var playback;
+ lastPlaybackState = null,
+ playback;
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -45,7 +45,7 @@ presence.on("iFrameData", (data) => {
 });
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
     presenceData: PresenceData = {
       largeImageKey: "ak"
     };
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
         "body > div:nth-child(2) > div > div > div > div > div > div > div > div:nth-child(3) > div > div.row > div:nth-child(3) > div"
       );
 
-      presenceData.state = "Aired on: " + air.innerText;
+      presenceData.state = `Aired on: ${air.innerText}`;
 
       if (paused) {
         delete presenceData.startTimestamp;
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

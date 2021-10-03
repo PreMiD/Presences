@@ -38,17 +38,17 @@ const updateCallback = {
   };
 
 ((): void => {
-  if (document.querySelector("outline-not-found")) {
+  if (document.querySelector("outline-not-found")) 
     presenceData.details = "On a non-existent page";
-  } else if (currentPath[0] === "terms.html") {
+   else if (currentPath[0] === "terms.html") 
     presenceData.details = "Reading the terms";
-  } else if (currentPath[0] === "privacy.html") {
+   else if (currentPath[0] === "privacy.html") 
     presenceData.details = "Reading the privacy policy";
-  } else if (currentPath[0] === "dmca.html") {
+   else if (currentPath[0] === "dmca.html") 
     presenceData.details = "Reading the DMCA page";
-  } else if (currentPath[0] === "report.html") {
+   else if (currentPath[0] === "report.html") 
     presenceData.details = "Reporting an article";
-  } else {
+   else {
     let loadedPath: string,
       forceUpdate = false,
       presenceDataPlaced: PresenceData = {};
@@ -56,11 +56,11 @@ const updateCallback = {
       if (loadedPath !== currentURL.pathname || forceUpdate) {
         loadedPath = currentURL.pathname;
         try {
-          if (document.querySelector("outline-not-found")) {
+          if (document.querySelector("outline-not-found")) 
             presenceData.details = "On a non-existent page";
-          } else if (currentPath[0] === "") {
+           else if (currentPath[0] === "") 
             presenceData.details = "On the home page";
-          } else {
+           else {
             presenceData.details = document.querySelector("h1").textContent;
             presenceData.state = document
               .querySelector(".publication")
@@ -74,9 +74,9 @@ const updateCallback = {
         }
         presenceDataPlaced = presenceData;
         forceUpdate = false;
-      } else {
+      } else 
         presenceData = presenceDataPlaced;
-      }
+      
     };
   }
 })();

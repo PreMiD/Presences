@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "mixcloud",
       smallImageKey: isPlaying ? "play" : "pause",
       smallImageText: isPlaying ? (await strings).play : (await strings).pause,
-      buttons: [{ label: openUrlText, url: url }]
+      buttons: [{ label: openUrlText, url }]
     };
 
     if (liveIsPlaying) {
@@ -64,9 +64,9 @@ presence.on("UpdateData", async () => {
       data.smallImageText = (await strings).live;
     }
 
-    if (isPlaying) {
+    if (isPlaying) 
       presence.setActivity(data);
-    } else {
+     else {
       presence.setActivity();
       presence.setTrayTitle();
     }

@@ -9,9 +9,9 @@ const presence = new Presence({
   }),
   getElement = (query: string): string => {
     const element = document.querySelector(query);
-    if (element) {
+    if (element) 
       return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return "Loading...";
+     else return "Loading...";
   },
   videoStatus = (video: HTMLVideoElement): string => {
     return video.paused ? "pause" : "play";
@@ -41,9 +41,9 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) {
+  if (elapsed) 
     data.startTimestamp = elapsed;
-  }
+  
 
   const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
@@ -61,9 +61,9 @@ presence.on("UpdateData", async () => {
 
   /* Browsing Info */
   if (showBrowseInfo) {
-    if (path === "/") {
+    if (path === "/") 
       data.details = "Browsing";
-    }
+    
   }
 
   /* Video Info */

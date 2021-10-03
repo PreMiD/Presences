@@ -3,9 +3,9 @@ const presence = new Presence({
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing"
-  });
+  }),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 let artist: string, title: string, playing: boolean;
 
 presence.on(
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

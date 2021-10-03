@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "631039621656084480"
-});
+}),
 
-const timeNyaned = Math.floor(Date.now() / 1000);
+ timeNyaned = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {

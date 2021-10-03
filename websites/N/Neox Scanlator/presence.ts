@@ -1,11 +1,11 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "704585837949747330"
 });
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
     startTimestamp: Math.floor(Date.now() / 1000)
-  };
-  const path: any = document.location.pathname;
+  },
+   path: any = document.location.pathname;
   let PesquisaTexto: any,
     OrdenarTexto: any,
     OrdenarTextoObra: any,
@@ -33,17 +33,17 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Em pesquisa";
       presenceData.state = PesquisaTexto.value;
-    } else {
+    } else 
       presenceData.state = "Página inicial";
-    }
+    
   } else if (path.includes("/projects/")) {
     presenceData.details = "Todos os Projetos";
     OrdenarTexto = document.querySelector(
       "body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active"
     );
-    if (OrdenarTexto != null) {
-      presenceData.state = "Ordenar por: " + OrdenarTexto.innerText;
-    }
+    if (OrdenarTexto != null) 
+      presenceData.state = `Ordenar por: ${OrdenarTexto.innerText}`;
+    
   } else if (path.includes("/manga-genre/")) {
     OrdenarTextoObra = document.querySelector(
       "body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active"
@@ -51,10 +51,10 @@ presence.on("UpdateData", async () => {
     GeneroTexto = document.querySelector(
       "body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div.main-col-inner > div > div.entry-header > div > div > h1"
     );
-    presenceData.details = "Gênero: " + GeneroTexto.innerText;
-    if (OrdenarTextoObra != null) {
-      presenceData.state = "Ordenar por: " + OrdenarTextoObra.innerText;
-    }
+    presenceData.details = `Gênero: ${GeneroTexto.innerText}`;
+    if (OrdenarTextoObra != null) 
+      presenceData.state = `Ordenar por: ${OrdenarTextoObra.innerText}`;
+    
   } else if (path.includes("/user-settings/")) {
     StatusContaTexto = document.querySelector(
       "#post-11 > div.entry-content > div > div > div.col-md-3.col-sm-3 > div > ul > li.active"
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
       generoObra = document.querySelector(
         "body > div.wrap > div > div > div > div.profile-manga > div > div > div > div.c-breadcrumb-wrapper > div > ol > li:nth-child(3) > a"
       );
-      presenceData.state = tipoObra.innerText + " | " + generoObra.innerText;
+      presenceData.state = `${tipoObra.innerText} | ${generoObra.innerText}`;
       nomeObra = document.querySelector(
         "body > div.wrap > div > div > div > div.profile-manga > div > div > div > div.post-title > h1"
       );
@@ -87,9 +87,9 @@ presence.on("UpdateData", async () => {
           spanObra.innerText,
           ""
         );
-      } else {
+      } else 
         presenceData.details = nomeObra.innerText;
-      }
+      
     } else if (
       (path.includes("capitulo") && document.title.includes("Cap")) ||
       (path.includes("cap") && document.title.includes("Cap"))
@@ -110,36 +110,36 @@ presence.on("UpdateData", async () => {
       if (opcaoLeitor.innerText == "Paginação") {
         if (seasonLeitor != null) {
           presenceData.details =
-            nomeObraLeitor.innerText +
-            " | " +
-            seasonLeitor[seasonLeitor.selectedIndex].innerText;
+            `${nomeObraLeitor.innerText 
+            } | ${ 
+            seasonLeitor[seasonLeitor.selectedIndex].innerText}`;
           presenceData.state =
-            capituloLeitor.innerText +
-            " | " +
-            (paginaLeitor.selectedIndex + 1) +
-            " de " +
+            `${capituloLeitor.innerText 
+            } | ${ 
+            paginaLeitor.selectedIndex + 1 
+            } de ${ 
             paginaLeitor[0].innerText.slice(
               paginaLeitor[0].innerText.search("/") + 1,
               paginaLeitor[0].innerText.search("/") + 6
-            );
+            )}`;
         } else {
           presenceData.details = nomeObraLeitor.innerText;
           presenceData.state =
-            capituloLeitor.innerText +
-            " | " +
-            (paginaLeitor.selectedIndex + 1) +
-            " de " +
+            `${capituloLeitor.innerText 
+            } | ${ 
+            paginaLeitor.selectedIndex + 1 
+            } de ${ 
             paginaLeitor[0].innerText.slice(
               paginaLeitor[0].innerText.search("/") + 1,
               paginaLeitor[0].innerText.search("/") + 6
-            );
+            )}`;
         }
       } else if (opcaoLeitor.innerText == "Longstripe") {
         if (seasonLeitor != null) {
           presenceData.details =
-            nomeObraLeitor.innerText +
-            " | " +
-            seasonLeitor[seasonLeitor.selectedIndex].innerText;
+            `${nomeObraLeitor.innerText 
+            } | ${ 
+            seasonLeitor[seasonLeitor.selectedIndex].innerText}`;
           presenceData.state = capituloLeitor.innerText;
         } else {
           presenceData.details = nomeObraLeitor.innerText;
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
       "#post-497 > div.entry-header > div > div.entry-meta > div.post-on > div > span.posted-on > a"
     );
     if (postagemData.innerText.includes("postado em")) {
-      presenceData.details = "Postagem | " + dataPostagem.textContent;
+      presenceData.details = `Postagem | ${dataPostagem.textContent}`;
       presenceData.state = document.title.slice(
         0,
         document.title.search("-") - 15
@@ -178,14 +178,14 @@ presence.on("UpdateData", async () => {
   if (
     window.getComputedStyle(bodyWrap).getPropertyValue("background-color") ==
     "rgb(38, 38, 38)"
-  ) {
+  ) 
     presenceData.largeImageKey = "logo2";
-  } else if (
+   else if (
     window.getComputedStyle(bodyWrap).getPropertyValue("background-color") !=
     "rgb(38, 38, 38)"
-  ) {
+  ) 
     presenceData.largeImageKey = "logo";
-  }
+  
 
   const UsuarioTexto = document.querySelector(
     "body > div.wrap > div > header > div.c-sub-header-nav.with-border.hide-sticky-menu > div > div > div.c-modal_item > div > span"

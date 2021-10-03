@@ -8,28 +8,28 @@ const presence = new Presence({
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--) 
     ret += parseInt(list[index]) * 60 ** index;
-  }
+  
   return ret;
 }
 
 function getTimestamps(audioDuration: string): Array<number> {
-  const splitAudioDuration = audioDuration?.split(":").reverse();
+  const splitAudioDuration = audioDuration?.split(":").reverse(),
 
-  const parsedAudioDuration = getTime(splitAudioDuration);
+   parsedAudioDuration = getTime(splitAudioDuration),
 
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
+   startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "applemusic-logo"
-  };
+  },
 
-  const playerCheck = document.querySelector(
+   playerCheck = document.querySelector(
     ".web-chrome-playback-controls__playback-btn[disabled]"
   )
     ? false
@@ -39,17 +39,17 @@ presence.on("UpdateData", async () => {
       .querySelector(
         ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
       )
-      ?.textContent.trim();
-    const author = document
+      ?.textContent.trim(),
+     author = document
       .querySelector(
         ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
       )
-      ?.textContent.split("—")[0];
-    const audioTime = document.querySelector(
+      ?.textContent.split("—")[0],
+     audioTime = document.querySelector(
       ".web-chrome-playback-lcd__time-end"
-    )?.textContent;
-    const timestamps = getTimestamps(audioTime);
-    const paused = document.querySelector(
+    )?.textContent,
+     timestamps = getTimestamps(audioTime),
+     paused = document.querySelector(
       ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
     )
       ? true
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(data);
-  } else {
+  } else 
     presence.clearActivity();
-  }
+  
 });

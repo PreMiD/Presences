@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
       );
       presenceData.state = title.innerText;
       presenceData.details = "Forums, Reading a DM";
-      presenceData.state = title + "...";
+      presenceData.state = `${title}...`;
 
       delete presenceData.smallImageKey;
 

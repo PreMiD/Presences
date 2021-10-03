@@ -64,9 +64,9 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname.includes("/privacy-policy")) {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Privacy Policy";
-  } else {
+  } else 
     presenceData.details = "Browsing...";
-  }
+  
 
   presence.setActivity(presenceData);
 });

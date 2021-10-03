@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "629473655218241557"
   }),
   strings = presence.getStrings({
@@ -15,22 +15,22 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 function getTime(timegone, timetotal): Array<number> {
-  var timegoneN = parseInt(timegone[0]) + parseInt(timegone[1]) * 60;
-  var timetotalN = parseInt(timetotal[0]) + parseInt(timetotal[1]) * 60;
-  var back = [timegoneN, timetotalN];
+  const timegoneN = parseInt(timegone[0]) + parseInt(timegone[1]) * 60,
+   timetotalN = parseInt(timetotal[0]) + parseInt(timetotal[1]) * 60,
+   back = [timegoneN, timetotalN];
   return back;
 }
 
 function getTimeLeft(Time: string[]): Array<number> {
-  var TimeGone = Time[0].split(":").reverse();
-  var TimeTotal = Time[1].split(":").reverse();
-  var parsedAudioDuration = getTime(TimeGone, TimeTotal);
+  const TimeGone = Time[0].split(":").reverse(),
+   TimeTotal = Time[1].split(":").reverse(),
+   parsedAudioDuration = getTime(TimeGone, TimeTotal);
   return [parsedAudioDuration[0], parsedAudioDuration[1]];
 }
 

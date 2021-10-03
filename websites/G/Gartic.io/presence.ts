@@ -24,14 +24,14 @@ presence.on("UpdateData", async () => {
         ".infosRoom li:last-child span strong"
       ).textContent;
       data.details = "Setting up Info to Join";
-      data.state = "Players: " + players;
+      data.state = `Players: ${players}`;
       data.startTimestamp = elapsed;
     } else {
       const user = document.querySelector(".you .nick").textContent,
         points = document.querySelector(".you .points").textContent,
         lobby = document.querySelector("title").innerText;
-      data.details = user + " - " + points.split("pts")[0].trim() + " points";
-      data.state = "Lobby: " + lobby.split("-")[0];
+      data.details = `${user} - ${points.split("pts")[0].trim()} points`;
+      data.state = `Lobby: ${lobby.split("-")[0]}`;
       data.startTimestamp = elapsed;
     }
   } else {

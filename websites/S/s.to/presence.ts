@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
     );
     // Try if Name of Title are visible
     try {
-      presenceData.details = "Schaut " + nameofserie.textContent;
+      presenceData.details = `Schaut ${nameofserie.textContent}`;
       const titleofserie = document.querySelector(
         "#wrapper > div.seriesContentBox > div.container.marginBottom > div:nth-child(4) > div.hosterSiteTitle > h2 > span"
       ).textContent;
@@ -123,7 +123,7 @@ presence.on("UpdateData", () => {
     const katalog1 = document.querySelector(
       "#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong"
     );
-    presenceData.state = "Serien mit " + katalog1.textContent;
+    presenceData.state = `Serien mit ${katalog1.textContent}`;
     presenceData.smallImageKey = "search";
     delete presenceData.smallImageText;
 
@@ -168,7 +168,7 @@ presence.on("UpdateData", () => {
       "#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name"
     );
     presenceData.details = "Schreibt Nachrichten...";
-    presenceData.state = "als " + user1.textContent;
+    presenceData.state = `als ${user1.textContent}`;
     presenceData.smallImageKey = "reading";
     delete presenceData.smallImageText;
 
@@ -204,7 +204,7 @@ presence.on("UpdateData", () => {
       "#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name"
     );
     presenceData.details = "Ändert die Einstellungen";
-    presenceData.state = "Account: " + user2.textContent;
+    presenceData.state = `Account: ${user2.textContent}`;
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
@@ -237,7 +237,7 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname == "/registrierung") {
     const username1: HTMLInputElement = document.querySelector("#formUsername");
     presenceData.details = "Registriert sich gerade...";
-    presenceData.state = "Vielleicht als " + username1.value;
+    presenceData.state = `Vielleicht als ${username1.value}`;
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
@@ -255,7 +255,7 @@ presence.on("UpdateData", () => {
       "#wrapper > div.container > div.row.leaderboardBox > div.col-md-3 > div > strong"
     );
     presenceData.details = "Votet für neue Serien";
-    presenceData.state = name4.textContent + " Serienwünsche";
+    presenceData.state = `${name4.textContent} Serienwünsche`;
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
@@ -289,7 +289,7 @@ presence.on("UpdateData", () => {
     delete presenceData.smallImageText;
 
     presence.setActivity(presenceData);
-  } else {
+  } else 
     presence.setActivity();
-  }
+  
 });

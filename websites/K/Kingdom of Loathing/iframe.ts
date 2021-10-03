@@ -42,9 +42,9 @@ function updateCharpane(i: iFrame) {
 
   let adventures = -1;
 
-  if (nonCompactContainer) {
+  if (nonCompactContainer) 
     adventures = Number(nonCompactContainer.innerText);
-  } else if (compactContainer) {
+   else if (compactContainer) {
     adventures = Number(
       (compactContainer.parentElement.parentElement.nextSibling as HTMLElement)
         .innerText

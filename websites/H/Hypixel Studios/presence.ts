@@ -9,9 +9,9 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.pathname === "/") {
+  if (document.location.pathname === "/") 
     presenceData.details = "Viewing the main page";
-  } else if (document.location.pathname === "/who-we-are") {
+   else if (document.location.pathname === "/who-we-are") {
     presenceData.details = "Learning more about";
     presenceData.state = "Who they are";
     presenceData.smallImageKey = "reading";
@@ -30,13 +30,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/jobs/") {
     presenceData.details = "Viewing Job Openings";
     presenceData.smallImageKey = "reading";
-    if (document.location.hash === "#our-process") {
+    if (document.location.hash === "#our-process") 
       presenceData.state = "Our process";
-    } else if (document.location.hash === "#current-openings") {
+     else if (document.location.hash === "#current-openings") 
       presenceData.state = "Current job openings";
-    } else if (document.location.hash === "#from-the-team") {
+     else if (document.location.hash === "#from-the-team") 
       presenceData.state = "Messages from the team";
-    }
+    
   } else if (document.location.pathname === "/jobs/data-protection-statement") {
     presenceData.details = "Reading the";
     presenceData.state = "Data protection statement";
@@ -68,21 +68,21 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/cookie-policy") {
     presenceData.details = "Reading the Cookie Policy";
     presenceData.smallImageKey = "reading";
-    if (document.location.hash === "#what-is-cookie") {
+    if (document.location.hash === "#what-is-cookie") 
       presenceData.state = "What is a Cookie?";
-    } else if (document.location.hash === "#why-are-cookies-used") {
+     else if (document.location.hash === "#why-are-cookies-used") 
       presenceData.state = "Why are Cookies used?";
-    } else if (document.location.hash === "#who-places-cookies") {
+     else if (document.location.hash === "#who-places-cookies") 
       presenceData.state = "Who places Cookies";
-    } else if (document.location.hash === "#how-manage-cookies") {
+     else if (document.location.hash === "#how-manage-cookies") 
       presenceData.state = "How can I manage cookies?";
-    } else if (document.location.hash === "#do-not-track-signals") {
+     else if (document.location.hash === "#do-not-track-signals") 
       presenceData.state = "Do-not-track signals";
-    } else if (document.location.hash === "#policy-updates") {
+     else if (document.location.hash === "#policy-updates") 
       presenceData.state = "Policy updates";
-    } else if (document.location.hash === "#contact-us") {
+     else if (document.location.hash === "#contact-us") 
       presenceData.state = "Contact us";
-    }
+    
   } else if (document.location.pathname === "/privacy") {
     presenceData.details = "Viewing the";
     presenceData.state = "Privacy Policy";
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

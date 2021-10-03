@@ -35,11 +35,12 @@ presence.on("UpdateData", async () => {
         presenceData.state = (
           document.querySelector(".input") as HTMLInputElement
         ).value;
-      } else
-        presenceData.details = `Viewing ${document.location.pathname
+      } else {
+presenceData.details = `Viewing ${document.location.pathname
           .substring(1)
           .split("-")
           .join(" ")} anime`;
+}
       break;
     }
   }

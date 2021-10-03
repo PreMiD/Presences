@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "605861238852943988"
   }),
   strings = presence.getStrings({
@@ -15,23 +15,23 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
     ".mhp1138_videoWrapper video"
   );
   if (video[0] !== null && !isNaN(video.duration)) {
     //* Get required tags
-    var title: any;
+    let title: any;
     title = document.querySelector(
       "#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col .video_left_section .video_header_container #video_header h1"
     );
 
-    var uploader = document.querySelector(
+    const uploader = document.querySelector(
         "#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col #video_underplayer #video-infobox #video-infobox-wrap .video-infobox-col .video-infobox-row .video-infobox-content .video-infobox-link"
       ),
       timestamps = getTimestamps(
@@ -59,9 +59,9 @@ presence.on("UpdateData", async () => {
     }
 
     //* If tags are not "null"
-    if (title !== null && uploader !== null) {
+    if (title !== null && uploader !== null) 
       presence.setActivity(presenceData, !video.paused);
-    }
+    
   } else {
     presence.setActivity();
     presence.setTrayTitle();

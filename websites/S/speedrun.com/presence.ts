@@ -1,9 +1,9 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "639603634451120138"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -27,11 +27,11 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing forum post:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
     } else if (document.location.pathname.includes("/forum")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing the forums...";
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing:";
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -23,17 +23,17 @@ presence.on("UpdateData", async () => {
     productName = document.querySelector("#product-name"),
     price =
       (document.querySelector("#offering-price") as HTMLElement) &&
-      document.querySelector("#offering-price").attributes["content"] &&
-      document.querySelector("#offering-price").attributes["content"]
+      document.querySelector("#offering-price").attributes.content &&
+      document.querySelector("#offering-price").attributes.content
         .textContent != ""
-        ? document.querySelector("#offering-price").attributes["content"]
+        ? document.querySelector("#offering-price").attributes.content
             .textContent
         : null,
     seller = document.querySelector(
       "#productResult > div > div > div > div.col.lg-1.md-1.sm-1.filter-content > section > div > div.title-wrapper.with-bg.for-desktop.brand > h1"
-    ) as HTMLElement;
+    ) as HTMLElement,
 
-  const data: { [k: string]: any } = {
+   data: { [k: string]: any } = {
     largeImageKey: "hb-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
   if (productName && productName.textContent != "") {
     data.details = "Bir ürüne göz atıyor:";
     data.state = `${productName.textContent.trim()}${
-      price ? " - " + price + " TL" : ""
+      price ? ` - ${price} TL` : ""
     }`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     data.details = "Bir sayfaya göz atıyor:";

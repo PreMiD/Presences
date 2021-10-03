@@ -78,9 +78,9 @@ presence.on("UpdateData", async () => {
     }
     presenceData.details = "Watching a replay";
     presenceData.state =
-      document.querySelector("div.teams").textContent.replace("VS", " vs ") +
-      " - Game " +
-      document.querySelector(".game.selected").textContent;
+      `${document.querySelector("div.teams").textContent.replace("VS", " vs ") 
+      } - Game ${ 
+      document.querySelector(".game.selected").textContent}`;
   } else if (path.includes("/standings/")) {
     presenceData.details = "Looking at the standings";
     presenceData.startTimestamp = time;
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

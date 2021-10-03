@@ -1,12 +1,12 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "639568013590528030"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000),
 
-var user: any;
-var title: any;
-var search: any;
+ user: any,
+ title: any,
+ search: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -41,11 +41,11 @@ presence.on("UpdateData", async () => {
         "#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span"
       );
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
     } else if (document.URL.includes("/trending/")) {
@@ -177,16 +177,16 @@ presence.on("UpdateData", async () => {
       if (title != null) {
         presenceData.details = "Forums, viewing category:";
         presenceData.state = title.innerText;
-      } else {
+      } else 
         presenceData.details = "Forums, Browsing...";
-      }
+      
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

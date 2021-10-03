@@ -23,10 +23,10 @@ function newStats(): void {
 }
 
 function pushMusicPresence(presenceData: PresenceData): void {
-  presenceData.details = currentTitle + " - " + currentArtist;
-  presenceData.state = "Listening to " + currentDj;
+  presenceData.details = `${currentTitle} - ${currentArtist}`;
+  presenceData.state = `Listening to ${currentDj}`;
   presenceData.smallImageText =
-    currentListeners != 0 ? "Listeners: " + currentListeners : "";
+    currentListeners != 0 ? `Listeners: ${currentListeners}` : "";
   presenceData.smallImageKey = "play";
 
   if (lastTitle != currentTitle) {
@@ -40,9 +40,9 @@ function pushMusicPresence(presenceData: PresenceData): void {
 setInterval(newStats, 10000);
 newStats();
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var lastTitle = "";
-var lastTimeStart = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
+ lastTitle = "",
+ lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", function () {
   const presenceData: PresenceData = {
@@ -61,14 +61,14 @@ presence.on("UpdateData", function () {
     } else if (document.location.pathname.includes("/timetable")) {
       presenceData.details = "Viewing the Timetable";
       presenceData.state = document.querySelector("#timetable-day").textContent;
-    } else if (document.location.pathname.includes("/home")) {
+    } else if (document.location.pathname.includes("/home")) 
       pushMusicPresence(presenceData);
-    } else if (
+     else if (
       document.location.pathname.includes("/articles") ||
       document.location.pathname.includes("/news")
-    ) {
+    ) 
       presenceData.details = "Browsing the Blog";
-    } else if (
+     else if (
       document.location.pathname.includes("/post") ||
       document.location.pathname.includes("/blog")
     ) {
@@ -81,20 +81,20 @@ presence.on("UpdateData", function () {
           ? possibilityOne.textContent
           : possibilityTwo.textContent;
       presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/team")) {
+    } else if (document.location.pathname.includes("/team")) 
       presenceData.details = "Viewing the Team";
-    } else if (document.location.pathname.includes("/changelog")) {
+     else if (document.location.pathname.includes("/changelog")) {
       presenceData.details = "Reading the Changelog";
       presenceData.smallImageKey = "reading";
     }
-  } else {
+  } else 
     pushMusicPresence(presenceData);
-  }
+  
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

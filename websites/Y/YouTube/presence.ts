@@ -73,9 +73,9 @@ presence.on("UpdateData", async () => {
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
     buttons = await presence.getSetting("buttons");
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -174,11 +174,12 @@ presence.on("UpdateData", async () => {
       document
         .querySelector("#playlist-actions .yt-icon-button#button")
         .getAttribute("aria-pressed")
-    )
-      isPlaylistLoop =
+    ) {
+isPlaylistLoop =
         document
           .querySelector("#playlist-actions .yt-icon-button#button")
           .getAttribute("aria-pressed") === "true";
+}
 
     let finalUploader =
         edited == true
@@ -278,11 +279,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = (await strings).ad;
       delete presenceData.state;
     } else if (privacy) {
-      if (live) {
+      if (live) 
         presenceData.details = (await strings).watchLive;
-      } else {
+       else 
         presenceData.details = (await strings).watchVid;
-      }
+      
       delete presenceData.state;
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
@@ -318,9 +319,9 @@ presence.on("UpdateData", async () => {
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
+    } else 
       presence.setActivity(presenceData);
-    }
+    
   } else if (
     document.location.hostname == "www.youtube.com" ||
     document.location.hostname == "youtube.com"
@@ -338,9 +339,9 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#search-input > div > div:nth-child(2) > input"
       );
-      if (search == null) {
+      if (search == null) 
         search = document.querySelector("#search-input > input");
-      }
+      
       presenceData.details = (await strings).search;
       presenceData.state = search.value;
       presenceData.smallImageKey = "search";
@@ -359,9 +360,9 @@ presence.on("UpdateData", async () => {
           .includes(
             document.querySelector("#text.ytd-channel-name").textContent
           )
-      ) {
+      ) 
         user = document.querySelector("#text.ytd-channel-name").textContent;
-      } else if (
+       else if (
         /\(([^)]+)\)/.test(
           document.title.substr(0, document.title.lastIndexOf(" - YouTube"))
         )
@@ -442,9 +443,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = (await strings).viewPlaylist;
 
       let title: HTMLElement | null = document.querySelector("#text-displayed");
-      if (title == null) {
+      if (title == null) 
         title = document.querySelector("#title > yt-formatted-string > a");
-      }
+      
 
       presenceData.state = title.textContent;
       presenceData.startTimestamp = browsingStamp;
@@ -512,9 +513,9 @@ presence.on("UpdateData", async () => {
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
+    } else 
       presence.setActivity(presenceData);
-    }
+    
   } else if (document.location.hostname == "studio.youtube.com") {
     const presenceData: PresenceData = {
         largeImageKey: "yt_lg",
@@ -577,8 +578,8 @@ presence.on("UpdateData", async () => {
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
+    } else 
       presence.setActivity(presenceData);
-    }
+    
   }
 });

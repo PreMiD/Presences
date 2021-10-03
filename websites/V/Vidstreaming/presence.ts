@@ -53,13 +53,13 @@ presence.on("UpdateData", async () => {
     videoTime = await presence.getSetting("sVT"),
     buttons = await presence.getSetting("buttons");
   if (videoTime) {
-    if (lastPlaybackState !== playback) {
+    if (lastPlaybackState !== playback) 
       lastPlaybackState = playback;
-    }
+    
   }
-  if (elapsed) {
+  if (elapsed) 
     browsingStamp = Math.floor(Date.now() / 1000);
-  }
+  
   const timestamps = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
@@ -103,9 +103,9 @@ presence.on("UpdateData", async () => {
           ).children.length;
           firstVideo = document
             .querySelector(
-              "#main_bg > div:nth-child(5) > div > div.video-info-left > ul > li:nth-child(" +
-                (childLength - 1) +
-                ")"
+              `#main_bg > div:nth-child(5) > div > div.video-info-left > ul > li:nth-child(${ 
+                childLength - 1 
+                })`
             )
             .firstElementChild.getAttribute("href");
           presenceData.buttons = [
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
             },
             {
               label: "First Episode",
-              url: "https://gogo-stream.com" + firstVideo
+              url: `https://gogo-stream.com${firstVideo}`
             }
           ];
         }

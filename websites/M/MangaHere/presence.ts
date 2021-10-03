@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "mangahere",
       startTimestamp: browsingStamp
     },
-    pathname = document.location.pathname,
+    {pathname} = document.location,
     ganres = [
       "martial-arts",
       "action",
@@ -107,8 +107,8 @@ presence.on("UpdateData", async () => {
         readingPage = document.querySelector(
           ".pager-list-left > span > .active"
         ).textContent,
-        progress = readingPage + "/" + totalPages;
-      data.state = chapter + " page " + progress;
+        progress = `${readingPage}/${totalPages}`;
+      data.state = `${chapter} page ${progress}`;
     }
     data.details = title;
     data.smallImageKey = "reading";
@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
   ganres.forEach(function (ganre) {
     if (pathname.substring(1, pathname.length - 1) === ganre) {
       data.details = "Browsing:";
-      data.state = ganre.replace("-", " ") + " manga";
+      data.state = `${ganre.replace("-", " ")} manga`;
     }
   });
   presence.setActivity(data);

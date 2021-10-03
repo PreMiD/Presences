@@ -4,9 +4,9 @@ const presence = new Presence({
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--) 
     ret += parseInt(list[index]) * 60 ** index;
-  }
+  
   return ret;
 }
 
@@ -14,14 +14,14 @@ function getTimestamps(
   audioTime: string,
   audioDuration: string
 ): Array<number> {
-  const splitAudioTime = audioTime.split(":").reverse();
-  const splitAudioDuration = audioDuration.split(":").reverse();
+  const splitAudioTime = audioTime.split(":").reverse(),
+   splitAudioDuration = audioDuration.split(":").reverse(),
 
-  const parsedAudioTime = getTime(splitAudioTime);
-  const parsedAudioDuration = getTime(splitAudioDuration);
+   parsedAudioTime = getTime(splitAudioTime),
+   parsedAudioDuration = getTime(splitAudioDuration),
 
-  const startTime = Date.now();
-  const endTime =
+   startTime = Date.now(),
+   endTime =
     Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
@@ -34,21 +34,21 @@ presence.on("UpdateData", async () => {
     .getAttribute("class");
 
   if (player) {
-    const paused = player.includes("pause") === false;
+    const paused = player.includes("pause") === false,
 
-    const title = document.querySelector(
+     title = document.querySelector(
       "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > b > a"
-    ).textContent;
-    const author = document.querySelector(
+    ).textContent,
+     author = document.querySelector(
       "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span"
-    ).textContent;
-    const audioTime = document.querySelector("#currentTime").textContent;
-    const audioDuration = document.querySelector(
+    ).textContent,
+     audioTime = document.querySelector("#currentTime").textContent,
+     audioDuration = document.querySelector(
       "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq"
-    ).textContent;
-    const timestamps = getTimestamps(audioTime, audioDuration);
+    ).textContent,
+     timestamps = getTimestamps(audioTime, audioDuration),
 
-    const data: PresenceData = {
+     data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "icon",
@@ -63,10 +63,10 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title !== null && author !== null) {
+    if (title !== null && author !== null) 
       presence.setActivity(data, !paused);
-    }
-  } else {
+    
+  } else 
     presence.clearActivity();
-  }
+  
 });

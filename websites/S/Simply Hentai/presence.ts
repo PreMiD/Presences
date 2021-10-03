@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "608043966285348944"
-});
+}),
 
-var lastPlaybackState = null;
-var reading;
-var browsingStamp = Math.floor(Date.now() / 1000);
+ lastPlaybackState = null,
+ reading,
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != reading) {
   lastPlaybackState = reading;
@@ -15,20 +15,20 @@ presence.on("UpdateData", async () => {
   reading =
     document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
 
-  var something: any, a: any, b: any;
+  let something: any, a: any, b: any;
 
   if (reading) {
     something = document.querySelectorAll(".margin-bottom-12 h1 a");
     a = something[0];
     b = something[1];
 
-    var page = document
+    const page = document
       .querySelector(".page-jump.text-center")
-      .getAttribute("value");
+      .getAttribute("value"),
 
-    const presenceData: PresenceData = {
+     presenceData: PresenceData = {
       details: a.innerText,
-      state: b.innerText + " [Page: " + page + "]",
+      state: `${b.innerText} [Page: ${page}]`,
       largeImageKey: "lg"
     };
 

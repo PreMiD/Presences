@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp,
       details: (await strings).browse
     },
-    pathname = document.location.pathname,
+    {pathname} = document.location,
     newLang = await presence.getSetting("lang"),
     showButton = await presence.getSetting("Buttons"),
     showSearch = await presence.getSetting("searchQuery"),
@@ -45,9 +45,9 @@ presence.on("UpdateData", async () => {
 
   if (!videoData) videoData = await presence.getPageletiable("ghtEnv");
 
-  if (!oldLang) {
+  if (!oldLang) 
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
+   else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -81,11 +81,12 @@ presence.on("UpdateData", async () => {
 
     if (videoD.title.includes("["))
       videoD.title = videoD.title.replace(/(\[.+\])/g, "");
-    if (videoD.title.includes("EP."))
-      videoD.title = videoD.title.replace(
+    if (videoD.title.includes("EP.")) {
+videoD.title = videoD.title.replace(
         /(ตอนต่อไป EP.[1-9]?[0-9]?[0-9]|EP.[1-9]?[0-9]?[0-9])/,
         ""
       );
+}
     if (videoD.title.match(/ \| | \|(?!.)/))
       videoD.title = videoD.title.replace(/ \| | \|(?!.)/, " ");
     if (videoD.title.match(/(highlight)/i))
@@ -94,17 +95,19 @@ presence.on("UpdateData", async () => {
       videoD.aTitle.match(
         /(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9])/g
       )
-    )
-      videoD.episodes = videoD.aTitle.match(
+    ) {
+videoD.episodes = videoD.aTitle.match(
         /(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9]|\([1-9]\/[1-9]\))/g
       );
-    if (videoD.episodes)
-      videoD.epText =
+}
+    if (videoD.episodes) {
+videoD.epText =
         videoD.episodes[0].includes("[") || videoD.episodes[0].includes("(")
           ? ` ${videoD.episodes[0]}`
           : ` ${videoD.episodes[0].match(/[1-9]?[0-9]?[0-9]/)[0]}${
               videoD.episodes.length > 1 ? ` | ${videoD.episodes[1]}` : ""
             }`;
+}
 
     if (video) {
       if (videoD.isTrailer) videoD.genre = "TRAILER";
@@ -283,9 +286,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${resutls} matching ${
         resutls > 1 ? "results" : "result"
       }`;
-    } else {
+    } else 
       presenceData.state = "No matching result";
-    }
+    
   }
 
   presence.setActivity(presenceData);

@@ -1,9 +1,9 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "648494004870184981"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ title: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -16,27 +16,27 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/new")) {
       title = document.getElementsByClassName("news-header-title")[0].innerHTML;
-      var category = document.getElementsByClassName("news-header-category ")[0]
+      const category = document.getElementsByClassName("news-header-category ")[0]
         .innerHTML;
       presenceData.details = title;
-      presenceData.state = "Category: " + category;
+      presenceData.state = `Category: ${category}`;
     } else if (document.location.pathname.includes("magazine")) {
       title = document.getElementsByClassName("magazine-content-title")[0]
         .innerHTML;
-      var time = document.getElementsByClassName("magazine-content-time")[0]
+      const time = document.getElementsByClassName("magazine-content-time")[0]
         .innerHTML;
       presenceData.details = title;
-      presenceData.state = "Publish Date: " + time;
-    } else if (document.location.pathname.includes("tournament")) {
+      presenceData.state = `Publish Date: ${time}`;
+    } else if (document.location.pathname.includes("tournament")) 
       presenceData.details = "賽事專欄";
-    }
+    
   }
   if (presenceData.details == null) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing site:";
     presenceData.state = "4gamers";
     presence.setActivity(presenceData);
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

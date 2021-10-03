@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "633795089600348160"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var search: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ title: any,
+ search: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,13 +13,13 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname == "yagpdb.xyz") {
     presenceData.startTimestamp = browsingStamp;
-    if (document.URL == "yagpdb.xyz") {
+    if (document.URL == "yagpdb.xyz") 
       presenceData.details = "Viewing the homepage";
-    } else if (document.URL == "yagpdb.xyz/#features") {
+     else if (document.URL == "yagpdb.xyz/#features") 
       presenceData.details = "Viewing the features";
-    } else if (document.URL == "yagpdb.xyz/#about") {
+     else if (document.URL == "yagpdb.xyz/#about") 
       presenceData.details = "Viewing the about section";
-    } else if (document.querySelector("#main-content > header > h2") !== null) {
+     else if (document.querySelector("#main-content > header > h2") !== null) {
       title = document.querySelector("#main-content > header > h2");
       presenceData.details = "Control Panel - Editing:";
       presenceData.smallImageKey = "writing";
@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
         delete presenceData.state;
       }
-    } else if (document.location.pathname.includes("/manage/")) {
+    } else if (document.location.pathname.includes("/manage/")) 
       presenceData.details = "Viewing the Control Panel";
-    }
+    
   } else if (document.location.hostname == "docs.yagpdb.xyz") {
     title = document.querySelector("head > title");
     search = document.querySelector(
@@ -47,9 +47,9 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Docs going to search something up";
         presenceData.smallImageKey = "searching";
       }
-    } else if (title.innerText == "MEE6 Helpdesk") {
+    } else if (title.innerText == "MEE6 Helpdesk") 
       presenceData.details = "Browsing the helpdesk";
-    } else {
+     else {
       presenceData.details = "Docs viewing:";
       presenceData.state = title.innerText.replace(" - YAGPDB", "");
       presenceData.smallImageKey = "reading";
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

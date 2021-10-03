@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "614583717951963137" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var board: any, profile: any;
+ board: any, profile: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -26,16 +26,16 @@ presence.on("UpdateData", async () => {
             .querySelector("#permission-level > span.board-header-btn-icon")
             .classList.contains("icon-private") &&
           !displayPrivateBoards
-        ) {
+        ) 
           presenceData.details = "Viewing private board";
-        } else {
+         else {
           presenceData.details =
-            "Viewing board: " +
+            `Viewing board: ${ 
             document.querySelector(
               ".js-board-editing-target.board-header-btn-text"
-            ).textContent;
+            ).textContent}`;
           presenceData.state =
-            "By team: " +
+            `By team: ${ 
             document
               .querySelector(
                 ".board-header-btn.board-header-btn-org-name.js-open-org-menu"
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
               .textContent.replace(
                 document.querySelector(".org-label").textContent,
                 ""
-              );
+              )}`;
         }
       } else {
         presenceData.details = "Viewing board:";
@@ -52,9 +52,9 @@ presence.on("UpdateData", async () => {
             .querySelector("#permission-level > span.board-header-btn-icon")
             .classList.contains("icon-private") &&
           !displayPrivateBoards
-        ) {
+        ) 
           presenceData.details = "Viewing private board";
-        } else {
+         else {
           presenceData.state = document.querySelector(
             ".js-board-editing-target.board-header-btn-text"
           ).textContent;
@@ -72,54 +72,54 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Private Board";
       } else {
         presenceData.details =
-          "Viewing card: " +
-          document.querySelector(".window-title").textContent;
+          `Viewing card: ${ 
+          document.querySelector(".window-title").textContent}`;
         presenceData.state =
-          "Board: " +
+          `Board: ${ 
           document.querySelector(
             ".js-board-editing-target.board-header-btn-text"
-          ).textContent;
+          ).textContent}`;
         presenceData.smallImageKey = "reading";
       }
     } else if (document.location.pathname.includes("/activity")) {
       profile = document.location.pathname.split("/", 3);
-      presenceData.details = "Viewing @" + profile[1] + "'s";
+      presenceData.details = `Viewing @${profile[1]}'s`;
       presenceData.state = "recent activites";
     } else if (document.location.pathname.includes("/cards")) {
       profile = document.location.pathname.split("/", 3);
-      presenceData.details = "Viewing @" + profile[1] + "'s";
+      presenceData.details = `Viewing @${profile[1]}'s`;
       presenceData.state = "recent cards";
     } else if (document.location.pathname.includes("/boards")) {
       profile = document.location.pathname.split("/", 3);
-      presenceData.details = "Viewing @" + profile[1] + "'s boards";
+      presenceData.details = `Viewing @${profile[1]}'s boards`;
     } else if (document.location.pathname.includes("/home")) {
       profile = document.location.pathname.split("/", 3);
-      presenceData.details = "Viewing Team: " + profile[1];
+      presenceData.details = `Viewing Team: ${profile[1]}`;
     } else if (
       document.location.pathname.includes("/account") ||
       document.location.pathname.includes("/billing")
-    ) {
+    ) 
       presenceData.details = "Changing account settings";
-    } else if (document.location.pathname.includes("/shortcuts")) {
+     else if (document.location.pathname.includes("/shortcuts")) 
       presenceData.details = "Viewing shortcut settings";
-    } else if (document.location.pathname.includes("/tour")) {
+     else if (document.location.pathname.includes("/tour")) 
       presenceData.details = "Viewing Trello's Tour";
-    } else if (document.location.pathname.includes("/pricing")) {
+     else if (document.location.pathname.includes("/pricing")) 
       presenceData.details = "Viewing Trello's Pricing";
-    } else if (document.location.pathname.includes("/platforms")) {
+     else if (document.location.pathname.includes("/platforms")) 
       presenceData.details = "Viewing Trello's Platforms";
-    } else if (document.location.pathname.includes("/about")) {
+     else if (document.location.pathname.includes("/about")) {
       presenceData.details = "Viewing Trello's";
       presenceData.state = "About page";
     } else if (document.location.pathname.includes("/")) {
       profile = document.querySelector(
         "#content > div > div.tabbed-pane-header > div > div > div > div._2MiqoEbHZgSlXq > span._32mB-ZO8fxjtUy"
       );
-      if (profile !== null) {
+      if (profile !== null) 
         presenceData.details = "Viewing own profile page";
-      } else {
+       else 
         presenceData.details = "Viewing home page";
-      }
+      
     }
   } else if (document.location.hostname == "help.trello.com") {
     if (document.location.pathname.includes("/article/")) {
@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "626481021843669044" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var user: any, search: any, title: any;
+ user: any, search: any, title: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -22,11 +22,11 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/forums/")) {
       title = document.querySelector(
@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
         "#content > section > section.level-categories.categories-tier > div > div > ul > li.tier-holder > ul > li.level-categories-nav.highlight > a > span"
       );
       presenceData.details = "Devs, viewing plugins in";
-      presenceData.state = "category: " + title.innerText;
+      presenceData.state = `category: ${title.innerText}`;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/bukkit-plugins")) {
@@ -193,11 +193,11 @@ presence.on("UpdateData", async () => {
         "#site-main > section.atf > div > div > div.project-details-container > div > h1 > a > span"
       );
       presenceData.details = "Devs, viewing project:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
+      if (title.innerText.length > 128) 
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+       else 
         presenceData.state = title.innerText;
-      }
+      
 
       presence.setActivity(presenceData);
     } else {

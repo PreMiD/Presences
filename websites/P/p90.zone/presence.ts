@@ -9,17 +9,17 @@ function getTimestamps(curr: number, dura: number): Array<number> {
 }
 
 presence.on("UpdateData", async () => {
-  const video = document.querySelector("video");
-  const strings = await presence.getStrings({
+  const video = document.querySelector("video"),
+   strings = await presence.getStrings({
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   });
 
   if (video !== null) {
-    const timestamps = getTimestamps(video.currentTime, video.duration);
+    const timestamps = getTimestamps(video.currentTime, video.duration),
 
-    const presenceData: PresenceData = {
+     presenceData: PresenceData = {
       state: document.querySelector("body > div.menu.main > div > h2")
         .textContent,
       largeImageKey: "logo",
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(presenceData);
-  } else {
+  } else 
     presence.setActivity();
-  }
+  
 });

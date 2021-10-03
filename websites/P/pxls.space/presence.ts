@@ -9,9 +9,9 @@ presence.on("UpdateData", async () => {
   };
   if (document.location.hostname == "pxls.space") {
     data.state =
-      "Canvas: " + document.getElementById("current-pixel-count").innerHTML;
+      `Canvas: ${document.getElementById("current-pixel-count").innerHTML}`;
     data.details =
-      "All time: " + document.getElementById("alltime-pixel-count").innerHTML;
+      `All time: ${document.getElementById("alltime-pixel-count").innerHTML}`;
     presence.setActivity(data);
   }
 });

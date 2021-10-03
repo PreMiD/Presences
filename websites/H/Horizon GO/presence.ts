@@ -9,23 +9,23 @@ presence.on("UpdateData", async () => {
       .querySelector(
         "div.player-linear-bottom-bar__channelstrip:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)"
       )
-      .getAttribute("title");
-    const titledetailes = document.querySelector(
+      .getAttribute("title"),
+     titledetailes = document.querySelector(
       "div.player-linear-bottom-bar__channelstrip:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)"
-    );
-    const pageData: PresenceData = {
-      state: "Channel: " + channelstate,
-      details: "Watching: " + titledetailes.textContent,
+    ),
+     pageData: PresenceData = {
+      state: `Channel: ${channelstate}`,
+      details: `Watching: ${titledetailes.textContent}`,
       largeImageKey: "icon"
     };
     presence.setActivity(pageData);
   } else if (path.includes("offset")) {
     const statedetails = document.querySelector(
       ".player-ui-bottom-bar-controls__main-info"
-    );
-    const movieVideo: PresenceData = {
-      state: "Video: " + document.title,
-      details: "Watching: " + statedetails.textContent,
+    ),
+     movieVideo: PresenceData = {
+      state: `Video: ${document.title}`,
+      details: `Watching: ${statedetails.textContent}`,
       largeImageKey: "icon"
     };
     presence.setActivity(movieVideo);

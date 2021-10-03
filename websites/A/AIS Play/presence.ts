@@ -17,8 +17,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -71,8 +71,8 @@ presence.on("UpdateData", async () => {
   const timestamps = getTimestamps(
     Math.floor(video.current),
     Math.floor(video.duration)
-  );
-  const Info =
+  ),
+   Info =
     document.querySelector(".default-title") ||
     document.querySelector(".live-text-text");
   let episode;
@@ -81,12 +81,12 @@ presence.on("UpdateData", async () => {
     const info = Info.textContent.split("ตอนที่");
     episode = info.pop();
 
-    episode = "ตอนที่ " + episode;
+    episode = `ตอนที่ ${episode}`;
     presenceData.state = episode;
     presenceData.details = info[0];
-  } else if (Info.textContent) {
+  } else if (Info.textContent) 
     presenceData.details = Info.textContent;
-  }
+  
 
   presenceData.smallImageKey = video.paused
     ? "pause"
@@ -102,9 +102,9 @@ presence.on("UpdateData", async () => {
   if (!video.paused && !video.isLive) {
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
-  } else if (!video.paused && video.isLive) {
+  } else if (!video.paused && video.isLive) 
     presenceData.startTimestamp = timestamps[0];
-  } else {
+   else {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }

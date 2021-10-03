@@ -14,16 +14,16 @@ type VideoContext = {
 
 const presence = new Presence({
   clientId: "707389880505860156"
-});
-const strings = presence.getStrings({
+}),
+ strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing",
   searching: "presence.activity.searching",
   episode: "presence.media.info.episode"
 });
-let video: VideoContext = null;
-let lastVideoOption = 1;
+let video: VideoContext = null,
+ lastVideoOption = 1;
 
 /**
  * Get Timestamps
@@ -34,8 +34,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -46,14 +46,14 @@ presence.on("iFrameData", async (context) => {
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
-  };
-  const browsingData: PresenceData = {
+  },
+   browsingData: PresenceData = {
     largeImageKey: "logo",
     details: (await strings).browsing,
     smallImageKey: "browsing",
     smallImageText: (await strings).browsing
-  };
-  const actions: PageAction[] = [
+  },
+   actions: PageAction[] = [
     {
       id: "episode",
       path: "/ver",
@@ -93,17 +93,17 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (action === null) {
+  if (action === null) 
     Object.assign(data, browsingData);
-  } else if (action.id == "episode") {
-    const detailsPattern = /^([^\d]+).* (\d+).+$/;
-    const detailsMatch = document
+   else if (action.id == "episode") {
+    const detailsPattern = /^([^\d]+).* (\d+).+$/,
+     detailsMatch = document
       .querySelector(".Title-epi")
       .textContent.match(detailsPattern);
 
-    if (!detailsMatch) {
+    if (!detailsMatch) 
       return presence.setActivity(browsingData);
-    }
+    
 
     const [title, episode] = detailsMatch.slice(1);
 
@@ -116,8 +116,8 @@ presence.on("UpdateData", async () => {
 
     const currentOptionElement = document.querySelector(
       ".TPlayerNv > .Button.Current"
-    );
-    const currentOption = currentOptionElement
+    ),
+     currentOption = currentOptionElement
       ? parseInt(
           currentOptionElement
             .getAttribute("data-tplayernv")
@@ -130,9 +130,9 @@ presence.on("UpdateData", async () => {
       video = null;
     }
 
-    if (!video || (video && video.ended)) {
+    if (!video || (video && video.ended)) 
       return presence.setActivity(data);
-    }
+    
 
     const [startTimestamp, endTimestamp] = getTimestamps(
       Math.floor(video.elapsed),
@@ -154,9 +154,9 @@ presence.on("UpdateData", async () => {
     if (
       document.location.pathname.includes("/anime/") &&
       document.querySelector("h1.Title")
-    ) {
+    ) 
       data.state = document.querySelector("h1.Title").textContent;
-    }
+    
 
     Object.assign(data, {
       details: action.text,

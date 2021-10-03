@@ -52,8 +52,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Auto's";
       } else {
         const numberPat = "[0-9]+",
-          r = new RegExp("/c" + numberPat),
-          r2 = new RegExp("/c" + numberPat + "/");
+          r = new RegExp(`/c${numberPat}`),
+          r2 = new RegExp(`/c${numberPat}/`);
         if (r2.test(page)) {
           title = document.querySelector(
             "div.bucket-page.active > h2.bucket-title.heading.heading-3"
@@ -213,7 +213,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

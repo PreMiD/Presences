@@ -11,7 +11,7 @@ iframe.on("UpdateData", async () => {
       currentTime: video.currentTime,
       paused: video.paused
     });
-  } else {
+  } else 
     iframe.send({ video: false });
-  }
+  
 });

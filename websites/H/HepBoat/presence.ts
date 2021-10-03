@@ -1,8 +1,8 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "634299110782140416"
-});
+}),
 
-var pageTitle;
+ pageTitle;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -11,20 +11,20 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.startsWith("/guilds/")) {
     pageTitle = document.querySelector(".panel-heading").textContent;
-    if (pageTitle.startsWith(" Guild Weekly Message Throughput")) {
+    if (pageTitle.startsWith(" Guild Weekly Message Throughput")) 
       pageTitle = "Guild Stats";
-    } else if (pageTitle.startsWith(" Guild Banner")) {
+     else if (pageTitle.startsWith(" Guild Banner")) 
       pageTitle = "Guild Info";
-    }
+    
 
-    var guildName = document.querySelector(
+    const guildName = document.querySelector(
       "#side-menu > li.active-guild.active > a > div"
     );
 
     data.details = pageTitle;
-    if (guildName) {
+    if (guildName) 
       data.state = guildName.getAttribute("data-original-title");
-    }
+    
     data.startTimestamp = Date.now();
 
     presence.setActivity(data);

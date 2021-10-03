@@ -54,9 +54,9 @@ presence.on("UpdateData", async () => {
       // Asset pages
     } else if (document.location.pathname.includes("/assets")) {
       // User is viewing an asset.
-      if (document.location.pathname.includes("/create")) {
+      if (document.location.pathname.includes("/create")) 
         presenceData.details = "Creating an asset";
-      } else {
+       else {
         if (privacymode === false) {
           const assetName = document.querySelector(
               "h1.MuiTypography-root > a"
@@ -67,9 +67,9 @@ presence.on("UpdateData", async () => {
             otherinfo = parentforinfo.querySelector("div > div").textContent;
           presenceData.details = assetName;
           presenceData.state = otherinfo;
-        } else {
+        } else 
           presenceData.details = "Looking at an asset";
-        }
+        
       }
       presence.setActivity(presenceData);
       // User pages
@@ -77,15 +77,15 @@ presence.on("UpdateData", async () => {
       const thetitle = document.querySelector(
         "h1.MuiTypography-root"
       ).textContent;
-      if (thetitle == "All Users") {
+      if (thetitle == "All Users") 
         presenceData.details = "Browsing users";
-      } else {
+       else {
         if (privacymode === false) {
           presenceData.details = "Viewing user";
           presenceData.state = thetitle;
-        } else {
+        } else 
           presenceData.details = "Browsing users";
-        }
+        
       }
       presence.setActivity(presenceData);
       // Pages that aren't the focus of the website will be kept in the else statement.
@@ -95,9 +95,9 @@ presence.on("UpdateData", async () => {
       ).textContent;
       presenceData.details = "Browsing species";
       if (thetitle != "All Species") {
-        if (privacymode === false) {
+        if (privacymode === false) 
           presenceData.state = thetitle;
-        }
+        
       }
       presence.setActivity(presenceData);
     } else {
@@ -133,11 +133,11 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Account settings";
           break;
         case "/nsfw":
-          if (privacymode === false) {
+          if (privacymode === false) 
             presenceData.details = "Browsing NSFW";
-          } else {
+           else 
             presenceData.details = "Browsing VRCArena";
-          }
+          
           break;
         default:
           presenceData.details = "Browsing VRCArena";

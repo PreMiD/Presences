@@ -6,8 +6,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -26,9 +26,9 @@ presence.on("UpdateData", () => {
   const timestamps = getTimestamps(
     Math.floor(currentTime),
     Math.floor(duration)
-  );
+  ),
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
@@ -70,9 +70,9 @@ presence.on("UpdateData", () => {
       )[0] as HTMLInputElement
     ).value;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  } else if (document.URL === "https://www.threenow.co.nz/live-tv-guide") {
+  } else if (document.URL === "https://www.threenow.co.nz/live-tv-guide") 
     presenceData.details = "Viewing the Live TV guide";
-  } else if (
+   else if (
     document.URL === "https://www.threenow.co.nz/live-tv-guide/three"
   ) {
     presenceData.details = "Watching Three Live";
@@ -103,7 +103,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

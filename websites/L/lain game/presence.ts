@@ -1,9 +1,9 @@
 const presence = new Presence({
   clientId: "672143036767272961"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-const url = new URLSearchParams(window.location.search).get("site");
+ browsingStamp = Math.floor(Date.now() / 1000),
+ url = new URLSearchParams(window.location.search).get("site");
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

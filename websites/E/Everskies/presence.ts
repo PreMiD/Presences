@@ -200,9 +200,9 @@ presence.on("UpdateData", async () => {
   ];
 
   for (const [k, v] of Object.entries(data.presence)) {
-    if (document.location.pathname.match(k) && !v.disabled) {
+    if (document.location.pathname.match(k) && !v.disabled) 
       v.setPresenceData();
-    }
+    
   }
 
   for (const setting of data.settings) {
@@ -210,9 +210,10 @@ presence.on("UpdateData", async () => {
       .getSetting(setting.id)
       .catch(() => null);
 
-    if (!settingValue && setting.delete)
-      for (const PData of setting.uses)
+    if (!settingValue && setting.delete) {
+for (const PData of setting.uses)
         delete presenceData[PData as keyof PresenceData];
+}
   }
 
   if (!presenceData.details) {

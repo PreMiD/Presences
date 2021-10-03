@@ -51,8 +51,8 @@ presence.on("UpdateData", async () => {
       document
         .querySelector("body div.summary-block > p")
         ?.firstChild?.textContent.includes("حلقة")
-    )
-      data.state = document
+    ) {
+data.state = document
         .querySelector("body div.summary-block > p")
         .firstChild.textContent.substr(
           0,
@@ -60,6 +60,7 @@ presence.on("UpdateData", async () => {
             .querySelector("body div.summary-block > p")
             .firstChild.textContent.indexOf("من")
         );
+}
 
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused

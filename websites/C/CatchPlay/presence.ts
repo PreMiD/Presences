@@ -29,26 +29,27 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("/watch")) {
     const video: HTMLVideoElement = document.querySelector(".player-box video");
-    if (buttons)
-      data.buttons = [
+    if (buttons) {
+data.buttons = [
         {
           label: "Watch",
           url: document.URL
         }
       ];
+}
     if (video && !isNaN(video.duration)) {
       if (document.querySelector(".CPplayer-header-subtitle")) {
         data.state =
-          " " + document.querySelector(".CPplayer-header-subtitle").textContent;
-      } else {
+          ` ${document.querySelector(".CPplayer-header-subtitle").textContent}`;
+      } else 
         data.state = "Movie";
-      }
+      
       const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
       data.details =
-        " " + document.querySelector(".CPplayer-header-title span").textContent;
+        ` ${document.querySelector(".CPplayer-header-title span").textContent}`;
       (data.smallImageKey = video.paused ? "pause" : "play"),
         (data.smallImageText = video.paused
           ? (await strings).pause

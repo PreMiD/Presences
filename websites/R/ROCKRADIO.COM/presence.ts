@@ -1,12 +1,12 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "639616115873546261"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var title: any;
-var replace: any;
-var playing: any;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ user: any,
+ title: any,
+ replace: any,
+ playing: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
         "#now-playing > div.info-container > div.title-container > div > span > span.track-name"
       );
       presenceData.details = title.innerText + replace.innerText;
-      presenceData.state = user.innerText.replace("-", "") + " left";
+      presenceData.state = `${user.innerText.replace("-", "")} left`;
       playing =
         document.querySelector("#play-button > div > a").className ==
         "ico icon-pause"
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

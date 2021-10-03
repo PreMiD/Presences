@@ -41,9 +41,9 @@ presence.on("UpdateData", async () => {
   }
 
   for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
+    if (path.match(k)) 
       data = { ...data, ...v };
-    }
+    
   }
 
   if (path.includes("/m/registrar/")) {
@@ -63,9 +63,9 @@ presence.on("UpdateData", async () => {
     data.state = getElement(".item-count")?.slice(1, -1);
   }
 
-  if (path.includes("/m/registrar/checkout/")) {
+  if (path.includes("/m/registrar/checkout/")) 
     data.details = "Viewing Checkout...";
-  }
+  
 
   if (path.includes("/m/registrar/search/")) {
     data.details = "Searching...";

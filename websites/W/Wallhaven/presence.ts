@@ -88,12 +88,12 @@ function getQuery() {
           if (!context) return null;
           data.state = strings.searching;
           data.details =
-            decodeURIComponent(
+            `${decodeURIComponent(
               document.querySelector<HTMLElement>("span.search-term")
                 ?.innerText ??
                 query?.q ??
                 "Invalid Search Term"
-            ) + `, Page ${query?.page || 1}`;
+            )}, Page ${query?.page || 1}`;
 
           return data;
         }
@@ -127,9 +127,9 @@ function getQuery() {
                 url: document.URL
               }
             ];
-          } else {
+          } else 
             data.buttons = [];
-          }
+          
 
           return data;
         }
@@ -195,9 +195,9 @@ function getQuery() {
       if (presenceData.details == null) {
         app.setTrayTitle();
         app.setActivity();
-      } else {
+      } else 
         app.setActivity(presenceData);
-      }
+      
     });
   })(presence);
 })();

@@ -1,9 +1,9 @@
 const presence = new Presence({
   clientId: "666246771785334784"
-});
+}),
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-const path = document.location.search;
+ browsingStamp = Math.floor(Date.now() / 1000),
+ path = document.location.search;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -28,8 +28,8 @@ presence.on("UpdateData", async () => {
         if (path.includes("id")) {
           const id1 = document.querySelector(
             "body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(6) > b"
-          );
-          const id =
+          ),
+           id =
             id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
             "ไม่ทราบสมาชิก";
           presenceData.details = "การเติมเเบบโอน";
@@ -44,8 +44,8 @@ presence.on("UpdateData", async () => {
         if (path.includes("&id=")) {
           const id1 = document.querySelector(
             "body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(7) > b"
-          );
-          const id =
+          ),
+           id =
             id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
             "ไม่ทราบสมาชิก";
           presenceData.details = "การเติมเเบบหรัส";
@@ -60,8 +60,8 @@ presence.on("UpdateData", async () => {
         if (path.includes("id")) {
           const id1 = document.querySelector(
             "body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(3) > b"
-          );
-          const id =
+          ),
+           id =
             id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
             "ไม่ทราบสมาชิก";
           presenceData.details = "ตรวจสอบการโอนเงิน";
@@ -76,8 +76,8 @@ presence.on("UpdateData", async () => {
         if (path.includes("id")) {
           const maid1 = document.querySelector(
             "body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > div > h4"
-          );
-          const maid =
+          ),
+           maid =
             maid1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
             "ไม่ทราบสมาชิก";
           presenceData.details = "จัดการสมาชิก";
@@ -114,11 +114,11 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("robux_group")) {
       const stock1 = document.querySelector(
         "body > main > div > section > div.container.shape-container.d-flex.align-items-center.py-lg > div > div > div:nth-child(1) > div > div > div > b:nth-child(1) > span"
-      );
-      const stock = stock1?.textContent ?? "0 R$";
+      ),
+       stock = stock1?.textContent ?? "0 R$";
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "กำลังซื้อสินค้า";
-      presenceData.state = "เเบบกลุ่ม - " + stock + " R$";
+      presenceData.state = `เเบบกลุ่ม - ${stock} R$`;
     } else if (path.includes("robux_idpass")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "กำลังซื้อสินค้า";
@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

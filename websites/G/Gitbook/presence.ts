@@ -23,8 +23,8 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "writing";
       data.smallImageText = "Editing";
 
-      const docName = document.querySelector("[class*='logoText-'] span");
-      const pageName = document.querySelector(
+      const docName = document.querySelector("[class*='logoText-'] span"),
+       pageName = document.querySelector(
         "[class*=--navButtonOpened-] span"
       );
 
@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "reading";
     data.smallImageText = "Viewing";
 
-    const docName = document.querySelector("[class*='logoText-'] span");
-    const pageName = document.querySelector("[class*=--navButtonOpened-] span");
+    const docName = document.querySelector("[class*='logoText-'] span"),
+     pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
     if (!actionTimestamp) actionTimestamp = Date.now();
     if (docName) data.details = `Viewing ${docName.textContent}`;

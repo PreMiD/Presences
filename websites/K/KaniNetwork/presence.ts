@@ -10,9 +10,9 @@ presence.on("UpdateData", async () => {
     privacy = await presence.getSetting("privacy"),
     sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
-  if (sprivacy || window.location.host === "kaniwork.com:8080") {
+  if (sprivacy || window.location.host === "kaniwork.com:8080") 
     presenceData.details = "Browsing";
-  } else {
+   else {
     const path = window.location.pathname.replace(".php", "");
     if (path.endsWith("commandes")) {
       presenceData.details = "Viewing a page:";
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

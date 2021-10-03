@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "664216462038401066"
-});
+}),
 
-const strings = presence.getStrings({
+ strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
@@ -23,8 +23,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -39,9 +39,9 @@ presence.on("iFrameData", async (msg) => {
 });
 
 presence.on("UpdateData", async () => {
-  const path = document.location.pathname;
+  const path = document.location.pathname,
 
-  const presenceData: PresenceData = {
+   presenceData: PresenceData = {
     largeImageKey: "blutv"
   };
 

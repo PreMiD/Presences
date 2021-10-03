@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
         stuff && stuff.textContent != ""
           ? `${stuff.textContent.trim()} ${
               price && price.textContent != ""
-                ? "(" + price.textContent.trim().split(" ")[0] + " TL)"
+                ? `(${price.textContent.trim().split(" ")[0]} TL)`
                 : ""
             }`
           : "Belirsiz",

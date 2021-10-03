@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640292045117980713"
   }),
   strings = presence.getStrings({
@@ -15,21 +15,21 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var playing: boolean;
-var paused: boolean;
-var progress: any;
-var lastState: any;
-var oldTitle: any;
+let browsingStamp = Math.floor(Date.now() / 1000),
+ title: any,
+ playing: boolean,
+ paused: boolean,
+ progress: any,
+ lastState: any,
+ oldTitle: any,
 
-var currentTime: any, duration: any;
-var video: HTMLVideoElement, timestamps: any;
+ currentTime: any, duration: any,
+ video: HTMLVideoElement, timestamps: any;
 
 lastState = null;
 oldTitle = null;
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
         "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.NnGyI"
       );
       presenceData.details = title.innerText;
-      presenceData.state = progress + "% progressed";
+      presenceData.state = `${progress}% progressed`;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
     } else if (playing == true && paused == true) {
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
         "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.NnGyI"
       );
       presenceData.details = title.innerText;
-      presenceData.state = progress + "% progressed";
+      presenceData.state = `${progress}% progressed`;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
     } else {
@@ -119,9 +119,9 @@ presence.on("UpdateData", async () => {
             );
           }
 
-          if (title == null && oldTitle !== null) {
+          if (title == null && oldTitle !== null) 
             presenceData.details = oldTitle;
-          } else {
+           else {
             presenceData.details = title.textContent;
             oldTitle = title.textContent;
           }
@@ -141,9 +141,9 @@ presence.on("UpdateData", async () => {
               "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.PlayerOverlay__Wrapper-kMDJbl.dZAJEx > div > div > div.Overlay__copyWrapper-cCOfPR.dWHpCz > div.Overlay__title-kcjStc.krcxuL"
             );
           }
-          if (title == null && oldTitle !== null) {
+          if (title == null && oldTitle !== null) 
             presenceData.details = oldTitle;
-          } else {
+           else {
             presenceData.details = title.textContent;
             oldTitle = title.textContent;
           }
@@ -164,7 +164,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

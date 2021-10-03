@@ -1,10 +1,10 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "617500416887881748" // CLIENT ID FOR YOUR PRESENCE
-});
+}),
 
-var typing: any, user: any, bot: any;
+ typing: any, user: any, bot: any,
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

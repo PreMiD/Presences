@@ -25,8 +25,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -93,9 +93,9 @@ presence.on("UpdateData", async () => {
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      );
+      ),
 
-    const data: { [k: string]: any } = {
+     data: { [k: string]: any } = {
       largeImageKey: "wh-logo",
       details:
         title && title.textContent != "" ? title.textContent : "Bilinmeyen",
@@ -137,9 +137,9 @@ presence.on("UpdateData", async () => {
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      );
+      ),
 
-    const data: { [k: string]: any } = {
+     data: { [k: string]: any } = {
       largeImageKey: "wh-logo",
       details:
         showName && showName.textContent != ""

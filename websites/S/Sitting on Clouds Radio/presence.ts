@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "689724677274337290"
-});
+}),
 
-const timeElapsed = Math.floor(Date.now() / 1000);
+ timeElapsed = Math.floor(Date.now() / 1000);
 let songName, albumName, artistName;
 
 presence.on("UpdateData", async () => {
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
   } else {
     const presenceData: PresenceData = {
       details: songName.innerText,
-      state: artistName.innerText + " - " + albumName.innerText,
+      state: `${artistName.innerText} - ${albumName.innerText}`,
       largeImageKey: "clouds",
       smallImageKey: "live",
       startTimestamp: timeElapsed

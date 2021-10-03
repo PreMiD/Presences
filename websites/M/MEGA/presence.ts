@@ -16,9 +16,9 @@ presence.on("UpdateData", () => {
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
-  if (page == "/" || page.includes("startpage") || page.includes("start")) {
+  if (page == "/" || page.includes("startpage") || page.includes("start")) 
     presenceData.details = "Homepage";
-  } else if (page.includes("fm")) {
+   else if (page.includes("fm")) {
     presenceData.details = "Viewing:";
     presenceData.state = "File Manager";
   } else if (page.includes("chat")) {
@@ -82,7 +82,7 @@ presence.on("UpdateData", () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
-  }
+  
 });

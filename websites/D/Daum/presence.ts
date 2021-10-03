@@ -497,8 +497,8 @@ presence.on("UpdateData", async () => {
   for (const setting of data.settings) {
     const settingValue = await presence.getSetting(setting.id);
 
-    if (!settingValue && setting.delete)
-      for (const PData of setting.data) {
+    if (!settingValue && setting.delete) {
+for (const PData of setting.data) 
         delete presenceData[PData as keyof PresenceData];
       }
   }

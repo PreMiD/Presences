@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    href = window.location.href,
+    {href} = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -128,19 +128,19 @@ presence.on("UpdateData", async () => {
       document.querySelector('[type="application/ld+json"]').innerHTML
     );
     if (vidArea) {
-      if (path.includes("/movies")) {
+      if (path.includes("/movies")) 
         movTitle = jsonData.name;
-      } else if (path.includes("/video")) {
+       else if (path.includes("/video")) {
         title = jsonData.partOfSeries.name;
 
         seasonEpi =
-          "S" +
-          jsonData.partOfSeason.seasonNumber +
-          ":" +
-          "E" +
-          jsonData.episodeNumber +
-          " " +
-          jsonData.name;
+          `S${ 
+          jsonData.partOfSeason.seasonNumber 
+          }:` +
+          `E${ 
+          jsonData.episodeNumber 
+          } ${ 
+          jsonData.name}`;
       }
 
       const content = seasonEpi,
@@ -157,7 +157,7 @@ presence.on("UpdateData", async () => {
 
       if (path.includes("/news/")) {
         presenceData.details = "Watching News Content";
-        presenceData.state = jsonData.partOfSeries.name + ": " + jsonData.name;
+        presenceData.state = `${jsonData.partOfSeries.name}: ${jsonData.name}`;
       }
 
       presenceData.smallImageKey = video.paused ? "pause" : "play";

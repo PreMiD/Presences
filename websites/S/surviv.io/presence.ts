@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
     place = document.querySelector(
       ".ui-stats-current .ui-stats-player-rank"
     ).textContent;
-    data.details = "Placed " + place;
+    data.details = `Placed ${place}`;
   } else if (!active) {
     gametypequery = 'div[id="index-play-type-selected"]';
     gamemodequery = 'div[id="index-play-mode-selected"]';
@@ -56,19 +56,19 @@ presence.on("UpdateData", async () => {
     data.details = "In the menus...";
   } else if (active) {
     // Player is in-game
-    data.smallImageText = "Playing " + gametype + "s";
+    data.smallImageText = `Playing ${gametype}s`;
     alivecount = document.querySelector(".ui-players-alive").textContent;
     killcount = document.querySelector(".ui-player-kills").textContent;
 
     data.details = `${killcount} kill${
       parseInt(killcount) != 1 ? "s" : ""
     } with ${alivecount} alive`;
-    data.state = `${gamemode != "50v50" ? gametype + " - " : ""}${gamemode}`;
+    data.state = `${gamemode != "50v50" ? `${gametype} - ` : ""}${gamemode}`;
   }
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(data);
-  }
+  
 });

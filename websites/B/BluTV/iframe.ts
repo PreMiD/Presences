@@ -1,12 +1,12 @@
-var iframe = new iFrame();
+const iframe = new iFrame();
 let videoMessage;
 
 iframe.on("UpdateData", async () => {
-  const title = document.querySelector("div.vjs-title-control > div");
-  const season = document.querySelector(
+  const title = document.querySelector("div.vjs-title-control > div"),
+   season = document.querySelector(
     "div.episode-selector.episode-selector-container > h3"
-  );
-  const video: HTMLVideoElement = document.querySelector("video");
+  ),
+   video: HTMLVideoElement = document.querySelector("video");
 
   if (video) {
     videoMessage = {
@@ -22,10 +22,10 @@ iframe.on("UpdateData", async () => {
 
   if (title.textContent.includes("Bölüm")) {
     const titleArr = title.textContent.split("."),
-      epTitle = titleArr[0].charAt(titleArr[0].length - 1) + "." + titleArr[1];
+      epTitle = `${titleArr[0].charAt(titleArr[0].length - 1)}.${titleArr[1]}`,
 
-    const rx = new RegExp(epTitle, "g");
-    const seriesName: string =
+     rx = new RegExp(epTitle, "g"),
+     seriesName: string =
       title.textContent.charAt(0) != epTitle.split(".")[0]
         ? title.textContent.replace(rx, "")
         : null;

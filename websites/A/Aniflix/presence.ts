@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "630093952342687794" // CLIENT ID FOR YOUR PRESENCE
   }),
   strings = presence.getStrings({
@@ -15,18 +15,18 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
 
-var title: any, views: any, air: any, search: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
+ title: any, views: any, air: any, search: any,
+ iFrameVideo: boolean, currentTime: any, duration: any, paused: any,
 
-var lastPlaybackState = null;
-var playback;
+ lastPlaybackState = null,
+ playback;
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -51,7 +51,7 @@ if (
 }
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
     presenceData: PresenceData = {
       largeImageKey: "aniflix",
       smallImageKey: paused ? "pause" : "play",
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
       views = document.querySelector(
         "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > div > div.episode-number"
       );
-      presenceData.state = title.innerText + " (" + views.innerText + ")";
+      presenceData.state = `${title.innerText} (${views.innerText})`;
 
       air = document.querySelector(
         "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > h1"
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
       views = document.querySelector(
         "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > div > div.episode-number"
       );
-      presenceData.state = title.innerText + " (" + views.innerText + ")";
+      presenceData.state = `${title.innerText} (${views.innerText})`;
       delete presenceData.smallImageText;
       presenceData.smallImageKey = "reading";
 
