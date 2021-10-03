@@ -19,7 +19,7 @@ import { minify as terser } from "terser";
 import { transformFileAsync as transform } from "@babel/core";
 import { valid } from "semver";
 
-const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
+const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27019`,
   dbname = "PreMiD-DEV";
 let extendedRun = false,
   exitCode = 0,
