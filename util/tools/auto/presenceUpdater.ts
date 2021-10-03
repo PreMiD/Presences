@@ -20,7 +20,7 @@ import { transformFileAsync as transform } from "@babel/core";
 import { valid } from "semver";
 
 const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
-  dbname = "PreMiD";
+  dbname = "PreMiD-DEV";
 let extendedRun = false,
   exitCode = 0,
   appCode = 0;
@@ -56,10 +56,8 @@ const readFile = (path: string): string =>
 
     allDiagnostics.forEach((diagnostic) => {
       if (diagnostic.file) {
-        const {
-            line,
-            character
-          } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!),
+        const { line, character } =
+            diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!),
           message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
         console.log(
           `${diagnostic.file.fileName} (${line + 1},${
@@ -100,7 +98,12 @@ const readFile = (path: string): string =>
     }
   },
   compile = async (filesToCompile: string[]): Promise<void> => {
-    const premidTypings = join(__dirname, "../../../@types", "premid", "index.d.ts"),
+    const premidTypings = join(
+        __dirname,
+        "../../../@types",
+        "premid",
+        "index.d.ts"
+      ),
       { compilerOptions: baseTsConfig } = readJson<{
         compilerOptions: CompilerOptions;
       }>(rslv(__dirname, "../../../tsconfig.json"));
