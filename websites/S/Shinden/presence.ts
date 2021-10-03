@@ -7,7 +7,7 @@ const presence = new Presence({
   }),browsingStamp = Math.floor(Date.now() / 1000),
 
 
-let 
+let
   iFrameVideo: boolean,
   currentTime: number,
   duration: number,

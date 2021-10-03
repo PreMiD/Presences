@@ -334,7 +334,7 @@ function handleOfficialWebsite(): void {
  * @return {ApiClient} ApiClient object
  */
 async function getApiClient(): Promise<ApiClient> {
-  return await presence.getPageletiable("ApiClient");
+  return presence.getPageletiable("ApiClient");
 }
 
 /**

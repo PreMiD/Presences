@@ -17,18 +17,18 @@ function getStateText(paused: boolean, live: boolean) {
   return live ? "Live" : paused ? "Paused" : "Watching";
 }
 
-let elapsed: number = undefined,
-  oldUrl: string = undefined,
+let elapsed: number,
+  oldUrl: string,
   title;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null,
-    details = undefined,
-    state = undefined,
-    smallImageKey = undefined,
-    smallImageText = undefined,
-    startTimestamp = undefined,
-    endTimestamp = undefined,
+    details,
+    state,
+    smallImageKey,
+    smallImageText,
+    startTimestamp,
+    endTimestamp,
     extra = "...";
 
   const { href } = window.location,
