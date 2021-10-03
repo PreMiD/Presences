@@ -17,15 +17,13 @@ jobs:
         uses: actions/setup-node@v2.4.0
         with:
           node-version: 16
-          cache: 'yarn'
+          cache: "yarn"
       - name: Install Deps
         run: yarn
       - name: Compile Script
         run: yarn pu:compile
       - name: Update Presences
         env:
-          MONGO_IP: ${{ secrets.MONGO_IP }}
-          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
-          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          MONGO_URL: ${{ secrets.MONGO_URL }}
           GHTOKEN: ${{ secrets.GHTOKEN }}
         run: yarn pu
