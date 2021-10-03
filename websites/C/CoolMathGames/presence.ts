@@ -29,8 +29,8 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  let details = undefined,
-    state = undefined;
+  let details,
+    state;
 
   const startTimestamp = elapsed,
     path = window.location.pathname;

@@ -128,7 +128,7 @@ presence.on("UpdateData", () => {
   const Path = window.location.pathname;
   let PathMain: string = Path.split("/")[1],
     PathSecond: string = Path.split("/")[2],
-    details = undefined,
+    details,
     isReport = false,
     isDelete = false,
     isAns = true,

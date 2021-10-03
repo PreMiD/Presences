@@ -16,8 +16,8 @@ function getStateText(paused: boolean, live: boolean) {
   return live ? "Live Broadcast" : paused ? "Paused" : "Watching";
 }
 
-let elapsed: number = undefined,
-  oldUrl: string = undefined;
+let elapsed: number,
+  oldUrl: string;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {

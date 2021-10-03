@@ -12,8 +12,8 @@ let title: string,
   seasonEpi: string,
   movTitle: string,
   vidMdTl: Element,
-  elapsed: number = undefined,
-  oldUrl: string = undefined;
+  elapsed: number,
+  oldUrl: string;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null;

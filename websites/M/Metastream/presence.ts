@@ -37,12 +37,12 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  let details = undefined,
-    state = undefined,
-    smallImageKey = undefined,
-    smallImageText = undefined,
+  let details,
+    state,
+    smallImageKey,
+    smallImageText,
     startTimestamp = elapsed,
-    endTimestamp = undefined,
+    endTimestamp,
     playing = true;
 
   const host = window.location.hostname,
