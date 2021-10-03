@@ -6,7 +6,7 @@ jobs:
   qa:
     name: Syntax Enforcer
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'PreMiD'
+    if: github.repository_owner == 'TheGamerzs'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2

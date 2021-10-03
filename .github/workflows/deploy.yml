@@ -9,7 +9,7 @@ on:
 jobs:
   UpdatePresences:
     runs-on: ubuntu-18.04
-    if: github.repository_owner == 'PreMiD'
+    if: github.repository_owner == 'TheGamerzs'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
