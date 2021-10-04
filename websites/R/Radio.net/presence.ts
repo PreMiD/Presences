@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
     case "p": {
       if (path[1] !== lastPath || browsingStamp === 0) {
         browsingStamp = Math.round(Date.now() / 1000);
-        lastPath = path[1];
+        [, lastPath] = path;
       }
 
       //Player State
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
     //Search
     case "search": {
       browsingStamp = 0;
-      const results = header.innerText.match(/\d+/g)[0];
+      const [results] = header.innerText.match(/\d+/g);
 
       presenceData.details = new URLSearchParams(window.location.search).get(
         "q"

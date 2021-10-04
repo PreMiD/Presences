@@ -44,9 +44,9 @@ presence.on("UpdateData", async () => {
     data.details = "Viewing:";
     data.state = "Collections";
   } else if (pathname.startsWith("/collection")) {
-    const collection_name = document.querySelector(".page-title").textContent;
+    const collectionName = document.querySelector(".page-title").textContent;
     data.details = "Viewing collection:";
-    data.state = collection_name;
+    data.state = collectionName;
   } else if (pathname === "/advanced-search") {
     const query = (<HTMLInputElement>(
       document.querySelector('[name="manga-name"]')

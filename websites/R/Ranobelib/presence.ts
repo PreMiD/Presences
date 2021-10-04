@@ -9,7 +9,7 @@ function getTimeStamp() {
 
 // Variables
 let Routes: string[],
-  Queries,
+  Queries: { [key: string]: string | string[] },
   DiscussionTitle: string,
   DiscussionAuthor: string,
   NewsTitle: string,
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     document.location.search
       .slice(1)
       .split("&")
-      .map((k, i, a) => {
+      .map((k, _i, a) => {
         const item: string[] = k.replace(/\[(.*?)\]+/g, "").split("="),
           Keys = a
             .map((i) => i.replace(/\[(.*?)\]+/g, "").split("="))
@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
       // Types size > 1
       const mangas: string[] = [];
 
-      Queries.types.sort().forEach((item: any) => {
+      Queries.types.sort().forEach(item => {
         switch (item) {
           case "10":
             mangas.push("Японское");
@@ -463,17 +463,17 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = 0;
       } else if (Routes[2] === "comment") {
         data.details = `Профиль: ${UserName}`;
-        let comment_type;
+        let commentType;
 
         if (Queries.comment_type === "manga")
-          comment_type = "Комментарии к ранобэ";
+          commentType = "Комментарии к ранобэ";
         else if (Queries.comment_type === "chapter")
-          comment_type = "Комментарии к главам";
+          commentType = "Комментарии к главам";
         else if (Queries.comment_type === "post")
-          comment_type = "Комментарии к новостям";
-        else comment_type = "Все комментарии";
+          commentType = "Комментарии к новостям";
+        else commentType = "Все комментарии";
 
-        data.state = comment_type;
+        data.state = commentType;
       } else if (Routes[2] === "following") {
         data.details = `Профиль: ${UserName}`;
         data.state = "Список друзей";

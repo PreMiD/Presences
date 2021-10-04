@@ -57,8 +57,7 @@ presence.on("UpdateData", async () => {
       .replace("%place%", place)
       .replace("%year%", year);
 
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
     if (paused) {
       delete presenceData.startTimestamp;

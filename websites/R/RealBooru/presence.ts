@@ -3,10 +3,10 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
+  const urlParams = new URLSearchParams(window.location.search);
   let presenceData: PresenceData = {
-      largeImageKey: "lg"
-    },
-    urlParams = new URLSearchParams(window.location.search);
+    largeImageKey: "lg"
+  };
   if (document.location.pathname === "/") presence.setActivity(presenceData);
   else if (
     urlParams.get("page") &&

@@ -77,9 +77,8 @@ presence.on("UpdateData", async () => {
       "dashboard",
       {}
     );
-  }
-  // if searching for docs with the search term in the url
-  else if (loc.match(/search/)) {
+    // if searching for docs with the search term in the url
+  } else if (loc.match(/search/)) {
     if (!loc.endsWith("/search")) {
       const term = loc.replace(
         /https?:\/\/readthedocs[.](io|org)\/search\/\?q=([^&]+).*/g,
