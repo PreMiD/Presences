@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: "653578846448123906" }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/usercp.php": "Kullanıcı Profili",
     "/ihbar/": "İhbar Portalı"
   };

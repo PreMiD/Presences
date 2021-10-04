@@ -39,7 +39,6 @@ presence.on("UpdateData", async () => {
     game = getText(SelectorMap.game),
     roomID = getText(SelectorMap.roomid),
     replay = getText(SelectorMap.replay);
-  let buttons: Array<{ label: string; url: string }> = [];
   if (
     status.includes("Idle") ||
     status.includes("Busy") ||
@@ -73,15 +72,19 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "ct";
       presenceData.smallImageText = game;
       if (status.includes("public")) {
-        buttons.push({
-          label: "Enter Public Room",
-          url: `https://tetr.io/${roomID}`
-        });
+        presenceData.buttons = [
+          {
+            label: "Enter Public Room",
+            url: `https://tetr.io/${roomID}`
+          }
+        ];
       } else if (showPrivButton) {
-        buttons.push({
-          label: "Enter Private Room",
-          url: `https://tetr.io/${roomID}`
-        });
+        presenceData.buttons = [
+          {
+            label: "Enter Private Room",
+            url: `https://tetr.io/${roomID}`
+          }
+        ];
       }
     } else if (status.includes("QUICK")) {
       if (status.includes("game")) presenceData.startTimestamp = browsingStamp;
@@ -130,15 +133,14 @@ presence.on("UpdateData", async () => {
     !getText(SelectorMap.username).includes("guest-") &&
     showButtons
   ) {
-    buttons.push({
-      label: "View Profile",
-      url: `https://ch.tetr.io/u/${getText(SelectorMap.username)}`
-    });
-    presenceData.buttons = buttons;
-  } else {
-    buttons = [];
-    delete presenceData.buttons;
-  }
+    presenceData.buttons = [
+      {
+        label: "View Profile",
+        url: `https://ch.tetr.io/u/${getText(SelectorMap.username)}`
+      }
+    ];
+  } else delete presenceData.buttons;
+
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();

@@ -125,7 +125,7 @@ function getQuery() {
                 url: document.URL
               }
             ];
-          } else data.buttons = [];
+          } else delete data.buttons;
 
           return data;
         }

@@ -15,12 +15,17 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   lastPlaybackState = null,
   playback: boolean;
 
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+interface iFrameData {
+  iframeVideo: {
+    duration?: any;
+    currTime?: any;
+    dur?: any;
+    iFrameVideo?: boolean;
+    paused?: boolean;
+  };
 }
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", (data: iFrameData) => {
   playback = data.iframeVideo.duration !== null ? true : false;
 
   if (playback) {
