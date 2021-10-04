@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Learning vocabulary";
     if (pathname.includes("/jlpt/")) {
       const jlptdetails = pathname.match(/\/jlpt\/(\d+)\/(\d+)/);
-      if (jlptdetails !== null) {
+      if (jlptdetails) {
         presenceData.state = `JLPT N${parseInt(jlptdetails[1])} page ${parseInt(
           jlptdetails[2]
         )}`;

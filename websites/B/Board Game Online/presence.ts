@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
       (data.details = detailsObj.details), (data.state = detailsObj.state);
 
     const header = getElement(".page_wrapper.show > .page_content > h2");
-    if (header !== undefined) {
+    if (header) {
       data.details = "Viewing";
       data.state = header;
     }
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
     const profile = getElement(
       ".page_wrapper.show > .page_content > #profile_name_title > .userName"
     );
-    if (profile !== undefined) {
+    if (profile) {
       data.details = "Viewing Profile";
       data.state = profile;
     }
@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
       data.state = `${document.title} (${playerCount - 1} Players)`;
   }
 
-  if (data.details !== undefined) {
+  if (data.details) {
     if (data.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;

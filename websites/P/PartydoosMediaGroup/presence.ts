@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
   data.details = detailsObj.details;
   data.state = detailsObj.state;
 
-  if (data.details !== undefined) {
+  if (data.details) {
     if (data.details.match("(Viewing|Browsing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = string;

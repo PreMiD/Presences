@@ -60,6 +60,5 @@ presence.on("UpdateData", async () => {
     data.state = game.textContent.trim();
   }
 
-  if (data.details && data.state && data.details !== "" && data.state !== "")
-    presence.setActivity(data);
+  if (data.details && data.state) presence.setActivity(data);
 });

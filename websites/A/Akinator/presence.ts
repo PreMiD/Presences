@@ -19,9 +19,7 @@ presence.on("UpdateData", async () => {
         document.getElementsByClassName("bubble-body")[0].textContent,
       hover = document.querySelectorAll(":hover")[12].textContent;
     presenceData.details = `Q: ${current}`;
-    presenceData.state = `Selecting: ${
-      hover !== undefined ? hover : "Still Thinking"
-    }`;
+    presenceData.state = `Selecting: ${hover ? hover : "Still Thinking"}`;
   }
   if (presenceData.details === null) {
     presence.setTrayTitle();

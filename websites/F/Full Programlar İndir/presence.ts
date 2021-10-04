@@ -26,11 +26,10 @@ presence.on("UpdateData", async () => {
       let category2 = category.textContent
         .slice(0, category.textContent.length - 27)
         .trim();
-      if (pgn) category2 = `${category2}(${pgn})`;
       presence.setActivity({
         largeImageKey: "fp-logo",
         details: "Bir kategoriyi inceliyor:",
-        state: category2 || "Belirsiz",
+        state: `${category2}(${pgn})`,
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     }

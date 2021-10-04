@@ -106,5 +106,5 @@ presence.on("UpdateData", async () => {
     data.details = "Looking at an unknown page";
     data.state = "Unknown";
   }
-  if (data.details !== null && data.state !== null) presence.setActivity(data);
+  if (data.details && data.state) presence.setActivity(data);
 });

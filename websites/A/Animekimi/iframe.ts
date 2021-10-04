@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
     document.querySelector(".jw-video") ||
     document.querySelector(".html5-video-container");
 
-  if (video !== undefined && !isNaN(video.duration)) {
+  if (video && !isNaN(video.duration)) {
     iframe.send({
       current: video.currentTime,
       duration: video.duration,

@@ -6,8 +6,8 @@ iframe.on("UpdateData", async () => {
       audio: HTMLAudioElement = document.querySelector("#p_a_player_0");
 
     if (
-      (video !== undefined && !isNaN(video?.duration)) ||
-      (audio !== undefined && !isNaN(audio?.duration))
+      (video && !isNaN(video?.duration)) ||
+      (audio && !isNaN(audio?.duration))
     ) {
       iframe.send({
         iframeVideo: {

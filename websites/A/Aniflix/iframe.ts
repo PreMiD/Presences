@@ -4,7 +4,7 @@ iframe.on("UpdateData", async () => {
   if (document.querySelector("#dogevideo_html5_api") !== null) {
     video = document.querySelector("#dogevideo_html5_api");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -23,7 +23,7 @@ iframe.on("UpdateData", async () => {
       "#player > div > div.container.pointer-enabled > video"
     );
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -42,7 +42,7 @@ iframe.on("UpdateData", async () => {
       "#mediaplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -55,7 +55,7 @@ iframe.on("UpdateData", async () => {
   } else if (document.querySelector("#vid_html5_api") !== null) {
     video = document.querySelector("#vid_html5_api");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -73,7 +73,7 @@ iframe.on("UpdateData", async () => {
       "#myElement > div.jw-media.jw-reset > video"
     );
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -86,7 +86,7 @@ iframe.on("UpdateData", async () => {
   } else if (document.querySelector("#mgvideo > div.vjs-poster") !== null) {
     video = document.querySelector("#mgvideo > div.vjs-poster");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -99,7 +99,7 @@ iframe.on("UpdateData", async () => {
   } else if (document.querySelector("#olvideo_html5_api") !== null) {
     video = document.querySelector("#olvideo_html5_api");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -114,7 +114,7 @@ iframe.on("UpdateData", async () => {
   ) {
     video = document.querySelector("#vplayer > div > div.container > video");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -133,7 +133,7 @@ iframe.on("UpdateData", async () => {
       "#vplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -146,7 +146,7 @@ iframe.on("UpdateData", async () => {
   } else if (document.querySelector("body > div > div > video") !== null) {
     video = document.querySelector("body > div > div > video");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -159,7 +159,7 @@ iframe.on("UpdateData", async () => {
   } else if (document.querySelector("#videojs_html5_api") !== null) {
     video = document.querySelector("#videojs_html5_api");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -178,7 +178,7 @@ iframe.on("UpdateData", async () => {
       "#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -191,7 +191,7 @@ iframe.on("UpdateData", async () => {
   } else if (document.querySelector("#mgvideo_html5_api") !== null) {
     video = document.querySelector("#mgvideo_html5_api");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -206,7 +206,7 @@ iframe.on("UpdateData", async () => {
   ) {
     video = document.querySelector("#player > div.jw-media.jw-reset > video");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -225,7 +225,7 @@ iframe.on("UpdateData", async () => {
       "#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -238,7 +238,7 @@ iframe.on("UpdateData", async () => {
   } else if (document.querySelector("video") !== null) {
     video = document.querySelector("video");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,

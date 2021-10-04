@@ -76,19 +76,19 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     if (
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
+      //@ts-expect-error
       statusLista[statusLista.selectedIndex].innerText !== "Selecione o Status"
     )
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
+      //@ts-expect-error
       presenceData.state = statusLista[statusLista.selectedIndex].innerText;
     else if (
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
+      //@ts-expect-error
       generolista[generolista.selectedIndex].innerText !== "Selecione o Gênero"
     )
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
+      //@ts-expect-error
       presenceData.state = generolista[generolista.selectedIndex].innerText;
   } else {
     presenceData.details = "Navegando... ";
