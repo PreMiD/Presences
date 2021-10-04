@@ -4,25 +4,9 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  user: any,
-  title: any;
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -42,30 +26,25 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/videos/")) {
-      let currentTime: any,
-        duration: any,
-        paused: any,
-        timestamps: any,
-        video: HTMLVideoElement;
-      video = document.querySelector(
+      const video = document.querySelector(
         "#playerID > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
       );
-      title = document.querySelector(
+      (title = document.querySelector(
         "#content > div:nth-child(3) > div > div > div > div:nth-child(3) > div > h1"
-      ).textContent;
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+      ).textContent),
+        ({ currentTime, duration, paused } = video),
+        (timestamps = presence.getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        ));
       if (!isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.smallImageText = paused
           ? (await strings).pause
           : (await strings).play;
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
-        presenceData.details = title.split("-")[0];
+        [presenceData.details] = title.split("-");
         presenceData.state = title.replace(`${title.split("-")[0]}- `, "");
 
         if (paused) {
@@ -80,7 +59,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Betrachtet Seite:";
     presenceData.state = document.querySelector("head > title").textContent;

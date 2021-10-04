@@ -55,12 +55,12 @@ presence.on("UpdateData", async () => {
       );
       if (title !== null) {
         presenceData.details = "Resources, viewing:";
-        if ((title as HTMLElement).innerText.length > 128)
+        if ((title as HTMLElement).innerText.length > 128) {
           presenceData.state = `${(title as HTMLElement).innerText.substring(
             0,
             125
           )}...`;
-        else presenceData.state = (title as HTMLElement).innerText;
+        } else presenceData.state = (title as HTMLElement).innerText;
 
         delete presenceData.smallImageKey;
 
@@ -187,12 +187,12 @@ presence.on("UpdateData", async () => {
         presence.setTrayTitle();
       } else {
         presenceData.details = "Reading thread:";
-        if ((title as HTMLElement).innerText.length > 128)
+        if ((title as HTMLElement).innerText.length > 128) {
           presenceData.state = `${(title as HTMLElement).innerText.substring(
             0,
             125
           )}...`;
-        else presenceData.state = (title as HTMLElement).innerText;
+        } else presenceData.state = (title as HTMLElement).innerText;
 
         presenceData.smallImageKey = "reading";
 

@@ -28,7 +28,6 @@ presence.on("UpdateData", async () => {
     audioTime,
     audioDuration,
     details,
-    timestamps,
     status,
     audioElement: HTMLAudioElement = document.querySelector("audio:last-child");
   audioElement === null
@@ -54,12 +53,10 @@ presence.on("UpdateData", async () => {
 
       smallImageKey = "play";
       smallImageText = (await strings).play;
-      timestamps = presence.getTimestamps(
+      [audioTime, audioDuration] = presence.getTimestamps(
         Math.floor(audioElement.currentTime),
         Math.floor(audioElement.duration)
       );
-      audioTime = timestamps[0];
-      audioDuration = timestamps[1];
       break;
 
     default:

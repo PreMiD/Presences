@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      data: { [k: string]: any } = {
+      data: PresenceData = {
         largeImageKey: "wh-logo",
         details:
           title && title.textContent !== "" ? title.textContent : "Bilinmeyen",

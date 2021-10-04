@@ -12,14 +12,6 @@ interface VideoContext {
   currentTime: number;
   paused: boolean;
 }
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 const pages: PageContext[] = [
     {
@@ -51,7 +43,7 @@ const pages: PageContext[] = [
       ) => {
         if (!context) return null;
         if (video && video.video) {
-          const [start, end] = getTimestamps(
+          const [start, end] = presence.getTimestamps(
             Math.floor(video.currentTime),
             Math.floor(video.duration)
           );

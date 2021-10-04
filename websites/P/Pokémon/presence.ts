@@ -12,19 +12,6 @@ function settingSetter(): void {
   else presence.hideSetting("pdexID");
 }
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -327,7 +314,7 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "pokemontv";
     if (document.location.pathname.includes("/player")) {
       const video = document.querySelector("video"),
-        [startTimestamp, endTimestamp] = getTimestamps(
+        [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );

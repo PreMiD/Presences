@@ -4,25 +4,9 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  user: any,
-  title: any;
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -64,21 +48,21 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Looing at channel:";
         presenceData.details = "Kollar på kanalen:";
-        presenceData.state = document
+        [presenceData.state] = document
           .querySelector("head > title")
-          .textContent.split("|")[0];
+          .textContent.split("|");
       }
     } else if (document.location.pathname.includes("/kanaler")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing for channels...";
       presenceData.details = "Söker efter kanaler...";
     } else if (document.location.pathname.includes("/video/")) {
-      let currentTime: any,
-        duration: any,
-        paused: any,
-        time: any,
-        live: any,
-        timestamps: any;
+      let currentTime: number,
+        duration: number,
+        paused: boolean,
+        time: number,
+        live: boolean,
+        timestamps: number[];
       const video: HTMLVideoElement = document.querySelector(
         "#js-play_video__fullscreen-container > div > div > video"
       );
@@ -96,10 +80,8 @@ presence.on("UpdateData", async () => {
         else {
           time = true;
           live = false;
-          currentTime = video.currentTime;
-          duration = video.duration;
-          paused = video.paused;
-          timestamps = getTimestamps(
+          ({ currentTime, duration, paused } = video);
+          timestamps = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
           );
@@ -109,8 +91,7 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageText = paused
             ? (await strings).pause
             : (await strings).play;
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
           presenceData.details = title;
           presenceData.state = user;

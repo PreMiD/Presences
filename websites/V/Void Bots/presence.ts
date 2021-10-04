@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
           (hasMeta("button_1_Label") && hasMeta("button_1_Url")) ||
           (hasMeta("button_2_Label") && hasMeta("button_2_Url"))
         )
-          presenceData.buttons = [];
+          delete presenceData.buttons;
         if (hasMeta("button_1_Label") && hasMeta("button_1_Url")) {
           presenceData.buttons.push({
             label: getMeta("button_1_Label"),

@@ -85,10 +85,8 @@ presence.on("UpdateData", async () => {
     if (window.location.pathname === "/classes") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing classes";
-    }
-
-    //Class category
-    else if (window.location.pathname.includes("/classes/")) {
+    } else if (window.location.pathname.includes("/classes/")) {
+      //Class category
       path = window.location.pathname.replace("/classes/", "");
       switch (path) {
         case "strength":

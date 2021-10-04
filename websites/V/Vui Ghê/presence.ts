@@ -4,11 +4,9 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  user: any,
-  title: any;
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement | Element | string, title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -22,10 +20,10 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector("#player > video.player-video") !== null
     ) {
-      let currentTime: any,
-        duration: any,
-        paused: any,
-        timestamps: any,
+      let currentTime: number,
+        duration: number,
+        paused: boolean,
+        timestamps: number[],
         video: HTMLVideoElement;
       video = document.querySelector("#player > video.player-video");
       if (video === null)
@@ -39,10 +37,8 @@ presence.on("UpdateData", async () => {
       ).textContent;
 
       if (video !== null) {
-        currentTime = video.currentTime;
-        duration = video.duration;
-        paused = video.paused;
-        timestamps = getTimestamps(
+        ({ currentTime, duration, paused } = video);
+        timestamps = presence.getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );
@@ -52,8 +48,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = paused
           ? (await strings).pause
           : (await strings).play;
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
         presenceData.details = title;
         presenceData.state = user;
@@ -84,12 +79,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/tim-kiem")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "search";
-      presenceData.details = document
+      [presenceData.details, presenceData.state] = document
         .querySelector("body > div.container > section > div.tray-title")
-        .textContent.split(": ")[0];
-      presenceData.state = document
-        .querySelector("body > div.container > section > div.tray-title")
-        .textContent.split(": ")[1];
+        .textContent.split(": ");
     }
   }
 

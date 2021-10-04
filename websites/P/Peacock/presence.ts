@@ -8,20 +8,6 @@ const presence = new Presence({
     search: "presence.activity.searching"
   });
 
-/**
- * Get timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let elapsed: number, oldUrl: string, title;
 
 presence.on("UpdateData", async () => {
@@ -61,7 +47,7 @@ presence.on("UpdateData", async () => {
       title =
         document.querySelector(".playback-header__title") ||
         document.querySelector(".playback-metadata__container-title");
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),

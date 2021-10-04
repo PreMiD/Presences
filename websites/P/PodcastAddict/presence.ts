@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     data.details = title;
     data.state = episode;
     if (!playPause.classList.contains("fa-play-circle")) {
-      data.endTimestamp = timestamps[1];
+      [, data.endTimestamp] = timestamps;
       data.smallImageKey = "play";
     } else data.smallImageKey = "pause";
   }

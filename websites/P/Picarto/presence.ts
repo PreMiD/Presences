@@ -15,10 +15,10 @@ presence.on("UpdateData", async () => {
     "#picarto-player-1_html5_api"
   );
   if (video !== null && !isNaN(video.duration)) {
-    let title: any, uploader: any;
-
-    title = document.querySelector(".d-flex h4");
-    uploader = document.querySelector("#userbar-name .d-flex .d-inline-block");
+    const title = document.querySelector(".d-flex h4"),
+      uploader = document.querySelector(
+        "#userbar-name .d-flex .d-inline-block"
+      );
     presenceData.details =
       title !== null ? (title as HTMLElement).innerText : "Title not found...";
     presenceData.state =
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       : (await strings).play;
     presenceData.startTimestamp = browsingStamp;
 
-    presence.setTrayTitle(video.paused ? "" : title.innerText);
+    presence.setTrayTitle(video.paused ? "" : (title as HTMLElement).innerText);
 
     if (video.paused) {
       delete presenceData.startTimestamp;

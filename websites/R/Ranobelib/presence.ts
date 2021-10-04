@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
       // Types size > 1
       const mangas: string[] = [];
 
-      Queries.types.sort().forEach(item => {
+      Queries.types.sort().forEach((item) => {
         switch (item) {
           case "10":
             mangas.push("Японское");

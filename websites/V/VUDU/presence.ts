@@ -5,12 +5,12 @@ const presence = new Presence({
 
 // Global variables
 let startTime = Date.now(),
-  videoPlayer,
-  videoDuration,
-  cuTime,
-  endTime,
+  videoPlayer: HTMLVideoElement,
+  videoDuration: number,
+  cuTime: number,
+  endTime: number,
   videoState = "paused", // Default
-  metadata,
+  metadata: string,
   // Set the default presence data for when the video is loading
   presenceData: PresenceData = {
     largeImageKey:
@@ -36,13 +36,17 @@ function grabMetadata(): void {
 // Get the video player element
 function getVideoPlayer(): void {
   // VUDU plays movies in an iFrame. Cool! Let's get that iFrame
-  const VUDUIFrame: any = document.getElementById("contentPlayerFrame"),
+  const VUDUIFrame = document.getElementById(
+      "contentPlayerFrame"
+    ) as HTMLIFrameElement,
     // Now let's get the content INSIDE of that.
     VUDUIFrameContent =
       VUDUIFrame.contentDocument || VUDUIFrame.contentWindow.document;
 
   // Finally... get the video
-  videoPlayer = VUDUIFrameContent.getElementById("videoPlayer");
+  videoPlayer = VUDUIFrameContent.getElementById(
+    "videoPlayer"
+  ) as HTMLVideoElement;
 
   videoDuration = videoPlayer.duration; // duration of movie in seconds
 

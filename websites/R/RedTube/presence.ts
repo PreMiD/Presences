@@ -6,20 +6,6 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const video = document.querySelector<HTMLVideoElement>(
     ".mhp1138_videoWrapper video"
@@ -28,7 +14,7 @@ presence.on("UpdateData", async () => {
     //* Get required tags
     const title = document.querySelector<HTMLHeadingElement>(".video_title"),
       uploader = document.querySelector(".video-infobox-link"),
-      timestamps = getTimestamps(
+      timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),

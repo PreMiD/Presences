@@ -6,20 +6,6 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const category = document.querySelector(
     "#widget_serie_contents_3 > section > div > div > div.category-main-content-right > header > h1 > strong"
@@ -57,14 +43,14 @@ presence.on("UpdateData", async () => {
                 )
                 .innerHTML.replace(`${title.outerHTML} `, "")
             : null,
-        timestamps = getTimestamps(
+        timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
 
       if (!title || title.innerHTML === "") return;
 
-      const data: { [k: string]: any } = {
+      const data: PresenceData = {
         largeImageKey: "puhu-logo",
         details: title.innerHTML,
         state:
@@ -74,11 +60,11 @@ presence.on("UpdateData", async () => {
                 document.querySelector(
                   "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
                 )
-                  ? (
-                      document.querySelector(
+                  ? document
+                      .querySelector(
                         "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
-                      ) as any
-                    ).innerText.replace("\n", ": ")
+                      )
+                      .innerText.replace("\n", ": ")
                   : null
               }`,
         smallImageKey: video.paused ? "paused" : "playing",
@@ -87,10 +73,9 @@ presence.on("UpdateData", async () => {
           : (await strings).play
       };
 
-      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-        data.startTimestamp = timestamps[0];
-        data.endTimestamp = timestamps[1];
-      }
+      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+
       if (video.paused) {
         delete data.startTimestamp;
         delete data.endTimestamp;
