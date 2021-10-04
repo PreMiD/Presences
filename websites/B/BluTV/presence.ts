@@ -15,7 +15,12 @@ function seriesName(name: string): string {
 
 const startTimestamp = Math.floor(Date.now() / 1000);
 
-let data: Data | null, video: HTMLVideoElement;
+let data: Data | null,
+  video: {
+    paused: boolean;
+    duration: number;
+    currentTime: number;
+  };
 
 interface Data {
   video: {

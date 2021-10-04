@@ -2,7 +2,11 @@ const presence = new Presence({
   clientId: "701157425318854756"
 });
 
-let sname, sartist, keylisteners, keyislive, keypresenter;
+let sname: string,
+  sartist: string,
+  keylisteners: string,
+  keyislive: boolean,
+  keypresenter: string;
 
 function metadataListener(): void {
   const data = JSON.parse(this.responseText);
@@ -25,7 +29,7 @@ window.onload = function (): void {
   updateMetaData();
 };
 
-let lastTitle,
+let lastTitle: string,
   lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -45,7 +49,7 @@ presence.on("UpdateData", async () => {
     }
 
     presenceData.startTimestamp = lastTimeStart;
-  } else presenceData.startTimestamp = false;
+  } else delete presenceData.startTimestamp;
 
   if (!sname) {
     lastTitle = "Loading...";

@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "626496186496450570"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let user: HTMLLinkElement, search: HTMLLinkElement, title: HTMLLinkElement;
+let user: HTMLLinkElement, search: HTMLLinkElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -103,11 +103,11 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname === "jd.spongepowered.org") {
     title = document.querySelector("head > title");
-    [title] = title.innerText.split(" (");
+    const [title2] = title.innerText.split(" (");
     presenceData.details = "Java Docs, viewing:";
-    if (title.length > 128)
-      presenceData.state = `${title.substring(0, 125)}...`;
-    else presenceData.state = title;
+    if (title2.length > 128)
+      presenceData.state = `${title2.substring(0, 125)}...`;
+    else presenceData.state = title2;
 
     delete presenceData.smallImageKey;
 

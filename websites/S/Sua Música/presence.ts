@@ -6,7 +6,7 @@ const presence = new Presence({
  * Check if the element exists on the web page
  *
  */
-function elementExist(element): boolean {
+function elementExist(element: Element): boolean {
   if (typeof element !== "undefined" && element !== null) return true;
   else return false;
 }
@@ -14,7 +14,7 @@ function elementExist(element): boolean {
 /**
  * Transforms the first letter of the string to uppercase.
  */
-function firstLetterUp(str): string {
+function firstLetterUp(str: string): string {
   return str.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
     return a.toUpperCase();
   });

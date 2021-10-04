@@ -8,21 +8,29 @@ const presence = new Presence({
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   title: HTMLElement,
-  air: HTMLElement,
+  air: HTMLInputElement,
   iFrameVideo: boolean,
   currentTime: number,
-  duration: numer,
+  duration: number,
   paused: boolean,
-  lastPlaybackState = null,
+  lastPlaybackState: boolean,
   playback: boolean;
 
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframeVideo.duration !== null ? true : false;
+presence.on("iFrameData", (data: IFrameData) => {
+  if (lastPlaybackState !== playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
+  }
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
     ({ iFrameVideo, paused } = data.iframeVideo);

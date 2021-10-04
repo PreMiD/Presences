@@ -25,7 +25,7 @@ const presence = new Presence({
 let video: VideoContext = null,
   lastVideoOption = 1;
 
-presence.on("iFrameData", async (context) => {
+presence.on("iFrameData", async (context: VideoContext) => {
   video = context;
 });
 

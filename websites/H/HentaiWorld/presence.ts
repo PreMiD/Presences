@@ -12,7 +12,16 @@ let iFrameVideo: boolean,
   episodenumber,
   timestamps;
 
-presence.on("iFrameData", (data) => {
+interface IFrameData {
+  iframeVideo: {
+    duration: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
+}
+
+presence.on("iFrameData", (data: IFrameData) => {
   const playback = data.iframeVideo.duration !== null ? true : false;
   if (playback) {
     ({ iFrameVideo, duration, paused } = data.iframeVideo);

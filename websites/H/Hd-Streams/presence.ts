@@ -255,8 +255,13 @@ function getQuery() {
             });
           } else {
             if (data.details) presence.setActivity(data);
-            if (data.buttons && data.buttons.length === 0) delete data.buttons;
-            else data.buttons = data.buttons?.slice(0, 2);
+            if (data.buttons && (data.buttons.length as number) === 0)
+              delete data.buttons;
+            else
+              data.buttons = data.buttons?.slice(0, 2) as [
+                ButtonData,
+                ButtonData
+              ];
           }
           return data;
         })

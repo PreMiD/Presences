@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
                   "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
                 )
                   ? document
-                      .querySelector(
+                      .querySelector<HTMLElement>(
                         "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
                       )
                       .innerText.replace("\n", ": ")
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
       };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
-        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+        [data.startTimestamp, data.endTimestamp] = timestamps;
 
       if (video.paused) {
         delete data.startTimestamp;

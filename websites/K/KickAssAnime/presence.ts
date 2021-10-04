@@ -59,7 +59,9 @@ function checkIfMovie() {
 
   !isMovie
     ? presence.getPageletiable("appData").then((appData) => {
-        isMovie = appData.anime.types?.find((x) => x.name === "Movie")
+        isMovie = appData.anime.types?.find(
+          (x: { name: string }) => x.name === "Movie"
+        )
           ? true
           : false;
       })

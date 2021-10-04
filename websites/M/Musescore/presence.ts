@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-function getTime(timegone: string, timetotal: string): Array<number> {
+function getTime(timegone: string[], timetotal: string[]): Array<number> {
   const timegoneN = parseInt(timegone[0]) + parseInt(timegone[1]) * 60,
     timetotalN = parseInt(timetotal[0]) + parseInt(timetotal[1]) * 60,
     back = [timegoneN, timetotalN];

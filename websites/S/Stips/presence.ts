@@ -191,7 +191,7 @@ presence.on("UpdateData", () => {
       if (isEdit) details = xplrObj["/"].edit;
 
       if (!details) {
-        if (xplrObj[PathSecond]) {
+        if (xplrObj.hasOwnProperty(PathSecond)) {
           // seems like xplrObj[PathSecond] won't work
           // let's do it manually then >'-'<
           switch (PathSecond) {
@@ -348,7 +348,7 @@ presence.on("UpdateData", () => {
           : location.pathname
       ),
     data: PresenceData = {
-      details: details || translate(is_male).default,
+      details: details || translate(isMale).default,
       state: undefined,
       largeImageKey: "stips",
       smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",

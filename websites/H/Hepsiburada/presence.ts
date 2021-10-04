@@ -23,13 +23,14 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     productName = document.querySelector("#product-name"),
+    attr = document.querySelector("#offering-price").attributes as unknown as {
+      [name: string]: HTMLElement;
+    },
     price =
       (document.querySelector("#offering-price") as HTMLElement) &&
-      document.querySelector("#offering-price").attributes.content &&
-      document.querySelector("#offering-price").attributes.content
-        .textContent !== ""
-        ? document.querySelector("#offering-price").attributes.content
-            .textContent
+      attr.content &&
+      attr.content.textContent !== ""
+        ? attr.content.textContent
         : null,
     seller = document.querySelector(
       "#productResult > div > div > div > div.col.lg-1.md-1.sm-1.filter-content > section > div > div.title-wrapper.with-bg.for-desktop.brand > h1"
@@ -62,6 +63,5 @@ presence.on("UpdateData", async () => {
     data.state = "Ana Sayfa";
   }
 
-  if (data.details && data.state && data.details !== "" && data.state !== "")
-    presence.setActivity(data);
+  if (data.details && data.state) presence.setActivity(data);
 });

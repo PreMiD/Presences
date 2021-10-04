@@ -31,7 +31,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector("div.top > h1").textContent;
   } else if (document.getElementsByClassName("episode-detail").length > 0) {
     presenceData.details =
-      document.getElementsByClassName("series-name")[0].title || "Bulunamadı";
+      (document.getElementsByClassName("series-name")[0] as HTMLElement)
+        .title || "Bulunamadı";
     presenceData.state = `${
       document.querySelector("div.select-season > a").textContent
         ? document.querySelector("div.select-season > a").textContent

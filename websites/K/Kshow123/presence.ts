@@ -11,12 +11,21 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   currentTime: number,
   duration: number,
   paused: boolean,
-  lastPlaybackState = null,
+  lastPlaybackState: boolean,
   playback: boolean;
 
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
+}
+
 if (document.location.pathname.includes(".html")) {
-  presence.on("iFrameData", (data) => {
-    playback = data.iframeVideo.duration !== null ? true : false;
+  presence.on("iFrameData", (data: IFrameData) => {
+    playback = data.iframeVideo.dur !== null ? true : false;
     if (playback) {
       ({ iFrameVideo, paused } = data.iframeVideo);
       currentTime = data.iframeVideo.currTime;

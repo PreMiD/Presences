@@ -19,9 +19,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Procurando anime...";
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/projeto/")) {
-    let vid = document.getElementById("playerIframe");
+    let vid: HTMLIFrameElement | HTMLVideoElement =
+      document.querySelector<HTMLIFrameElement>("#playerIframe");
     [vid] = vid.contentDocument.getElementsByTagName("video");
-    const [anime] = document.querySelectorAll(".content-heading h3");
+    const [anime] = document.querySelectorAll<HTMLElement>(
+      ".content-heading h3"
+    );
 
     if (document.getElementsByClassName("modal-open").length > 0) {
       if (vid && vid.currentTime > 0 && !vid.paused) {
@@ -36,7 +39,7 @@ presence.on("UpdateData", async () => {
         const [ep] = document.getElementsByClassName("modal-title");
 
         presenceData.details = anime.innerText;
-        presenceData.state = `EP ${ep.innerText.substr(-2)}`;
+        presenceData.state = `EP ${(ep as HTMLElement).innerText.substr(-2)}`;
       } else if (vid && vid.paused) {
         presenceData.details = anime.innerText;
         presenceData.smallImageKey = "paused";

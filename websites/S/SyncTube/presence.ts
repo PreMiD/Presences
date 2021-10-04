@@ -8,7 +8,7 @@ presence.on("UpdateData", async function () {
     setShowButtons = await presence.getSetting("showButtons"),
     setPrivacy = await presence.getSetting("privacy"),
     setLogo = await presence.getSetting("logo"),
-    presenceData = {
+    presenceData: PresenceData = {
       largeImageKey: setLogo === 0 ? "logo" : "logo2"
     },
     urlpath = window.location.pathname.split("/");
