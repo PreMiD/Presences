@@ -4,22 +4,20 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  title: string,
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let title: string,
   iFrameVideo: boolean,
   currentTime: number,
   duration: number,
   paused: boolean,
-  lastPlaybackState = null,
   playback: boolean;
 
 interface iFrameData {
   iframeVideo: {
-    duration?: any;
-    currTime?: any;
-    dur?: any;
+    duration?: number;
+    currTime?: number;
+    dur?: number;
     iFrameVideo?: boolean;
     paused?: boolean;
   };

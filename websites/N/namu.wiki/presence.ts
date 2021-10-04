@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
   )
     page = document.querySelector("h1 > a").textContent;
   // H1 Tag Only one
-  /* Other */ else if (details !== undefined)
+  /* Other */ else if (details)
     page = decodeURI(path.substring(`/${action}/`.length));
   else page = null;
 
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
       { label: "View Page", url: document.location.href }
     ];
   }
-  if (page !== null && page !== undefined)
+  if (page)
     presenceData.state = page.length > 128 ? `${page.slice(0, 120)}...` : page;
 
   /**
@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
    * Login Status
    *
    */
-  if (details !== undefined) {
+  if (details) {
     const members = document.querySelectorAll(
       "#app > div > div > nav > ul[class=r] > li > div > div > div"
     );

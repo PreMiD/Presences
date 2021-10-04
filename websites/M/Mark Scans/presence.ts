@@ -79,6 +79,7 @@ presence.on("UpdateData", async () => {
           0,
           title.innerText.indexOf("- Capítulo") - 1
         );
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error
         opcoes[selecaoLeitura.selectedIndex]();
       } else {

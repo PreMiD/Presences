@@ -3,7 +3,7 @@ iframe.on("UpdateData", async () => {
   let video: HTMLVideoElement;
   if (document.querySelector(".video") !== null) {
     video = document.querySelector(".video");
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
@@ -17,7 +17,7 @@ iframe.on("UpdateData", async () => {
     document.querySelector("body > div > div > div > video") !== null
   ) {
     video = document.querySelector("body > div > div > div > video");
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,

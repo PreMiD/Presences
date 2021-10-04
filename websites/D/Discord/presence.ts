@@ -318,6 +318,7 @@ presence.on("UpdateData", async () => {
                 .split("{0}")[1]
                 ?.replace("{1}", document.title),
           smallImageKey: "reading",
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-expect-error
           buttons: showInvites
             ? [

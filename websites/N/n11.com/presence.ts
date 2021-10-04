@@ -37,12 +37,18 @@ presence.on("UpdateData", async () => {
       document.querySelector(
         "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
       ) &&
-      (document.querySelector(
-        "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-      ).attributes as unknown as {[name: string]: string}).content
-        ? ((document.querySelector(
-            "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-          ).attributes as unknown as {[name: string]: string}).content as Element).textContent
+      (
+        document.querySelector(
+          "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
+        ).attributes as unknown as { [name: string]: string }
+      ).content
+        ? (
+            (
+              document.querySelector(
+                "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
+              ).attributes as unknown as { [name: string]: string }
+            ).content as Element
+          ).textContent
         : null,
     data: PresenceData = {
       largeImageKey: "n11-logo",
@@ -84,6 +90,5 @@ presence.on("UpdateData", async () => {
     data.state = "Ana Sayfa";
   }
 
-  if (data.details && data.state && data.details !== "" && data.state !== "")
-    presence.setActivity(data);
+  if (data.details && data.state) presence.setActivity(data);
 });

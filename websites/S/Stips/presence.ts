@@ -191,6 +191,7 @@ presence.on("UpdateData", () => {
       if (isEdit) details = xplrObj["/"].edit;
 
       if (!details) {
+        // eslint-disable-next-line no-prototype-builtins
         if (xplrObj.hasOwnProperty(PathSecond)) {
           // seems like xplrObj[PathSecond] won't work
           // let's do it manually then >'-'<

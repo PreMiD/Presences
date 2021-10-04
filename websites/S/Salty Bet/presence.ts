@@ -18,10 +18,7 @@ let fightersCheck: string,
   browsingStamp = Math.floor(Date.now() / 1000);
 
 function getText(selector: string) {
-  if (
-    document.querySelector(selector) !== null &&
-    document.querySelector(selector) !== undefined
-  )
+  if (document.querySelector(selector))
     return document.querySelector(selector).textContent;
   else return null;
 }

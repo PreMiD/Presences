@@ -12,7 +12,7 @@ let login,
 const path = document.location.pathname,
   check = window.addEventListener("click", function (event) {
     target = (event.target as HTMLTextAreaElement).innerText;
-    if (target !== undefined) {
+    if (target) {
       if (target.includes("Home")) {
         bullsEye = target;
         return bullsEye;

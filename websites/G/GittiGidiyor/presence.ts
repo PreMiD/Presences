@@ -64,6 +64,5 @@ presence.on("UpdateData", async () => {
     data.state = "Ana Sayfa";
   }
 
-  if (data.details && data.state && data.details !== "" && data.state !== "")
-    presence.setActivity(data);
+  if (data.details && data.state) presence.setActivity(data);
 });
