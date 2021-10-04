@@ -1,9 +1,9 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "614583717951963137" // CLIENT ID FOR YOUR PRESENCE
   }),
-  board: any,
-  profile: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+
+let board: HTMLElement, profile: HTMLElement | string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -79,19 +79,19 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       }
     } else if (document.location.pathname.includes("/activity")) {
-      profile = document.location.pathname.split("/", 3);
-      presenceData.details = `Viewing @${profile[1]}'s`;
+      [, profile] = document.location.pathname.split("/", 3);
+      presenceData.details = `Viewing @${profile}'s`;
       presenceData.state = "recent activites";
     } else if (document.location.pathname.includes("/cards")) {
-      profile = document.location.pathname.split("/", 3);
-      presenceData.details = `Viewing @${profile[1]}'s`;
+      [, profile] = document.location.pathname.split("/", 3);
+      presenceData.details = `Viewing @${profile}'s`;
       presenceData.state = "recent cards";
     } else if (document.location.pathname.includes("/boards")) {
-      profile = document.location.pathname.split("/", 3);
-      presenceData.details = `Viewing @${profile[1]}'s boards`;
+      [, profile] = document.location.pathname.split("/", 3);
+      presenceData.details = `Viewing @${profile}'s boards`;
     } else if (document.location.pathname.includes("/home")) {
-      profile = document.location.pathname.split("/", 3);
-      presenceData.details = `Viewing Team: ${profile[1]}`;
+      [, profile] = document.location.pathname.split("/", 3);
+      presenceData.details = `Viewing Team: ${profile}`;
     } else if (
       document.location.pathname.includes("/account") ||
       document.location.pathname.includes("/billing")
@@ -111,8 +111,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/")) {
       profile = document.querySelector(
         "#content > div > div.tabbed-pane-header > div > div > div > div._2MiqoEbHZgSlXq > span._32mB-ZO8fxjtUy"
-      );
-      if (profile !== null) presenceData.details = "Viewing own profile page";
+      ).textContent;
+      if (profile) presenceData.details = "Viewing own profile page";
       else presenceData.details = "Viewing home page";
     }
   } else if (document.location.hostname === "help.trello.com") {
@@ -140,13 +140,14 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/author/")) {
       profile = document.querySelector(
         "body > div.body-container-wrapper > div > div > div > div > div > div.row-fluid > div > div.row-fluid-wrapper.row-depth-1.row-number-6 > div > div > div > div > div > div:nth-child(1) > div > h2"
-      );
+      )?.textContent;
       presenceData.details = "Blog, viewing profile:";
-      presenceData.state = profile.textContent;
+      presenceData.state = profile;
     } else if (document.location.pathname.includes("/search")) {
-      profile = document.querySelector("#gsc-i-id1");
+      profile = (document.querySelector("#gsc-i-id1") as HTMLInputElement)
+        .value;
       presenceData.details = "Blog, searching for:";
-      presenceData.state = profile.value;
+      presenceData.state = profile;
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/")) {
       board = document.querySelector("#hs_cos_wrapper_name");
@@ -161,9 +162,9 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname === "developers.trello.com") {
     if (document.location.pathname.includes("/reference")) {
-      profile = document.URL.split("#", 2);
+      [, profile] = document.URL.split("#", 2);
       presenceData.details = "Developers, API Docs:";
-      presenceData.state = profile[1];
+      presenceData.state = profile;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/docs")) {
       presenceData.details = "Developers, Reading guide";

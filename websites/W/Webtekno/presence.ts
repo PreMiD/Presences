@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "628269030901547037"
   }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/": "Ana Sayfa",
     "/haber": "Haberler",
     "/video": "Videolar",
@@ -17,7 +17,7 @@ const presence = new Presence({
     "/gizlilik": "Gizlilik",
     "/iletisim": "İletişim"
   },
-  smallImageKey = {
+  smallImageKey: { [key: string]: string } = {
     "/ara": "searching",
     "/video": "video",
     "/uye/favorilerim": "star"

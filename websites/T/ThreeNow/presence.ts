@@ -2,11 +2,17 @@ const presence = new Presence({
   clientId: "691491207356088320"
 });
 
-let currentTime, duration, paused;
+let currentTime: number, duration: number, paused: boolean;
 
-presence.on("iFrameData", (data) => {
+interface iFrameData {
+  currentTime: number;
+  duration: number;
+  paused: boolean;
+}
+
+presence.on("iFrameData", (data: iFrameData) => {
   const playback = data.duration !== null ? true : false;
-  if (playback) ({ currentTime, duration, paused } = data.currentTime);
+  if (playback) ({ currentTime, duration, paused } = data);
 });
 
 presence.on("UpdateData", () => {

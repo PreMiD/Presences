@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "645051733961211934"
 });
 
-let elapsed, oldURL;
+let elapsed: number, oldURL: string;
 
 presence.on("UpdateData", async () => {
   let details, state;
