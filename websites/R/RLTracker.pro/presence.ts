@@ -1,8 +1,9 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "636659890927960064"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  title: any;
+  browsingStamp = Math.floor(Date.now() / 1000);
+
+let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -22,7 +23,7 @@ presence.on("UpdateData", async () => {
       "#rip_col > div.fav_no_category.main_box.main_stats_box > h4"
     );
     presenceData.details = "Viewing stats of:";
-    presenceData.state = title.innerText.split("Last update")[0];
+    [presenceData.state] = title.innerText.split("Last update");
   } else if (document.location.pathname.includes("/trades")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing trades";

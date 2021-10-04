@@ -2,10 +2,10 @@ const presence = new Presence({
   clientId: "673322920809988120"
 });
 
-function parseQueryString(queryString?: string): any {
+function parseQueryString(queryString?: string): { [key: string]: string } {
   if (!queryString) queryString = window.location.search.substring(1);
 
-  const params = {},
+  const params: { [key: string]: string } = {},
     queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
     const indexPair = indexQuery.split("="),
@@ -15,14 +15,6 @@ function parseQueryString(queryString?: string): any {
   });
   return params;
 }
-
-//var browsingStamp = Math.floor(Date.now()/1000);
-
-console.log(
-  "%c RootMe Presence ",
-  "background: #7289da; color: white; padding: 2px; border-radius: 50px",
-  "Presence detected !"
-);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
