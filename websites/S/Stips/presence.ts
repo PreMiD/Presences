@@ -127,7 +127,7 @@ fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
 presence.on("UpdateData", () => {
   const Path = window.location.pathname;
   let [PathMain, PathSecond] = Path.split("/"),
-    details = undefined,
+    details,
     isReport = false,
     isDelete = false,
     isAns = true,
