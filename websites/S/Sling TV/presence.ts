@@ -17,9 +17,7 @@ function getStateText(paused: boolean, live: boolean) {
   return live ? "Live" : paused ? "Paused" : "Watching";
 }
 
-let elapsed: number,
-  oldUrl: string,
-  title;
+let elapsed: number, oldUrl: string, title;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null,
