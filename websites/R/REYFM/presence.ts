@@ -156,8 +156,7 @@ presence.on("UpdateData", async () => {
         const channelID = findChannel();
         if (channelID !== "YOU FAILED") {
           const channel = channels.find((channel) => channel.id === channelID);
-          track = channel.track;
-          artist = channel.artist;
+          ({ track, artist } = channel);
 
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = format3

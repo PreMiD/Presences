@@ -4,36 +4,21 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-let currentTime: any,
-  duration: any,
-  paused: any,
-  playback: any,
-  timestamps: any;
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let currentTime: number,
+  duration: number,
+  paused: boolean,
+  playback: number,
+  timestamps: number[];
 
 presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+  playback = data.iframeVideo.duration !== null ? true : false;
 
   if (playback) {
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    currentTime = data.iframeVideo.currTime;
+    duration = data.iframeVideo.dur;
+    ({ paused } = data.iframeVideo);
   }
 });
 
@@ -56,8 +41,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       presenceData.details = document
         .querySelector("#adsIfrme > div > div > div > h1 > strong")

@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    path: any = document.location.pathname;
+    path: string = document.location.pathname;
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 

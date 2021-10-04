@@ -3,19 +3,6 @@ const presence = new Presence({
   }),
   time = Math.floor(Date.now() / 1000);
 let currentTime: number, duration: number, paused: boolean;
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on(
   "iFrameData",
@@ -25,11 +12,7 @@ presence.on(
     duration: number;
     paused: boolean;
   }) => {
-    if (data.iframevideo === true) {
-      currentTime = data.currentTime;
-      duration = data.duration;
-      paused = data.paused;
-    }
+    if (data.iframevideo === true) ({ currentTime, duration, paused } = data);
   }
 );
 
@@ -65,12 +48,11 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Looking at past matches";
     presenceData.startTimestamp = time;
   } else if (path.includes("/vod/")) {
-    const timestamps = getTimestamps(
+    const timestamps = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     );
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
     presenceData.smallImageKey = paused ? "pause" : "play";
     if (paused) {
       delete presenceData.startTimestamp;

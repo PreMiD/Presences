@@ -27,9 +27,9 @@ presence.on("UpdateData", async () => {
       (data.startTimestamp = browsingStamp);
     presence.setActivity(data);
   } else if (document.location.pathname.endsWith("/profile")) {
-    const user = document
+    const [user] = document
       .querySelector(".profile-infos h1.name")
-      .textContent.split("Follow")[0];
+      .textContent.split("Follow");
     (data.details = "Viewing a User Profile"),
       (data.state = user),
       (data.startTimestamp = browsingStamp);

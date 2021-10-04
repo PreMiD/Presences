@@ -84,7 +84,7 @@ const presence = new Presence({
 let blog: string, cafeTitle: string;
 
 presence.on("iFrameData", (data: { blog: string }) => {
-  blog = data.blog;
+  ({ blog } = data);
 });
 
 presence.on("UpdateData", async () => {

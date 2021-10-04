@@ -2,15 +2,6 @@ const presence = new Presence({
   clientId: "645290651604221999"
 });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
       largeImageKey: "itv_logo",
@@ -77,17 +68,16 @@ presence.on("UpdateData", () => {
           .getElementsByClassName("episode-info__episode-title")[0]
           .textContent.trim()
       },
-      video = document.getElementsByTagName("video")[0];
+      [video] = document.getElementsByTagName("video");
     if (!video.paused) {
-      const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
 
       presenceData.details = `Watching ${showDetails.name}`;
       presenceData.state = showDetails.episode;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
     } else {

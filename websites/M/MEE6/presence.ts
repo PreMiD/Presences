@@ -1,9 +1,8 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "632002763483512843"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  title: any,
-  search: any;
+  browsingStamp = Math.floor(Date.now() / 1000);
+let title: Element | HTMLElement, search: Element | HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -17,16 +16,16 @@ presence.on("UpdateData", async () => {
         "#app-mount > div > div > div > div.leaderboardHeader > div.leaderboardHeaderGuildInfo > div.leaderboardGuildName"
       );
       presenceData.details = "Viewing leaderboard of server:";
-      presenceData.state = title.innerText;
+      presenceData.state = (title as HTMLElement).innerText;
     } else if (document.querySelector(".pluginTitle") !== null) {
       title = document.querySelector(".pluginTitle");
       presenceData.details = "Dashboard - Editing plugin:";
-      presenceData.state = title.innerText;
+      presenceData.state = (title as HTMLElement).innerText;
       presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/dashboard/")) {
       title = document.querySelector(".subHeaderMenuListItem.selected");
       presenceData.details = "Dashboard - Viewing tab:";
-      presenceData.state = title.innerText;
+      presenceData.state = (title as HTMLElement).innerText;
     } else if (document.location.pathname.includes("/premium")) {
       presenceData.details = "Reading about premium";
       presenceData.smallImageKey = "reading";
@@ -38,20 +37,23 @@ presence.on("UpdateData", async () => {
       "body > header > div.csh-wrapper > form > span > input"
     );
     presenceData.startTimestamp = browsingStamp;
-    if (search.value !== "") {
+    if ((search as HTMLElement).textContent !== "") {
       presenceData.details = "Helpdesk searching for:";
-      presenceData.state = search.value;
+      presenceData.state = (search as Element).textContent;
       presenceData.smallImageKey = "searching";
-    } else if (title.innerText === "MEE6 Helpdesk")
+    } else if ((title as HTMLElement).innerText === "MEE6 Helpdesk")
       presenceData.details = "Browsing the helpdesk";
     else {
       presenceData.details = "Helpdesk viewing:";
-      presenceData.state = title.innerText.replace(" | MEE6 Helpdesk", "");
+      presenceData.state = (title as HTMLElement).innerText.replace(
+        " | MEE6 Helpdesk",
+        ""
+      );
       presenceData.smallImageKey = "reading";
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

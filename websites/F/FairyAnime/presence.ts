@@ -13,20 +13,6 @@ let video = {
   paused: true
 };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 // Const thing
 const browsingStamp = Math.floor(Date.now() / 1000),
   path = document.location;
@@ -54,10 +40,6 @@ presence.on("UpdateData", async () => {
           "#section-opt > div > div > div > div > div.movie-heading.overflow-hidden > span"
         ).textContent ?? "ไม่ทราบเรื่อง";
       let episode;
-      const timestamps = getTimestamps(
-        Math.floor(video.current),
-        Math.floor(video.duration)
-      );
       if (title.includes("ตอนที่")) {
         const info = title.split("ตอนที่");
         episode = info.pop();
@@ -68,7 +50,7 @@ presence.on("UpdateData", async () => {
           episode = episode.replace("พากย์ไทย", "").trim();
 
         episode = `ตอนที่ ${episode}`;
-        presenceData.state = info[0];
+        [presenceData.state] = info;
         presenceData.details = episode;
       } else {
         let info;
@@ -86,8 +68,11 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       if (!video.paused) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(
+            Math.floor(video.current),
+            Math.floor(video.duration)
+          );
       } else {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;

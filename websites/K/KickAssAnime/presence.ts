@@ -74,11 +74,7 @@ presence.on(
     video = data;
     playback = video.duration !== null ? true : false;
 
-    if (playback) {
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
-    }
+    if (playback) ({ currentTime, duration, paused } = video);
 
     if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
@@ -116,13 +112,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
       currentAnimeTitle =
         document.querySelector("a.ka-url-wrapper").textContent;
-      currentAnimeEpisode = document.location.pathname
+      [, currentAnimeEpisode] = document.location.pathname
         .split("/")[3]
-        .split("-")[1];
+        .split("-");
       if (!isMovie) {
         if (currentAnimeEpisode[0] === "0")
           episodeNumber = currentAnimeEpisode.replace("0", "");
@@ -169,9 +164,9 @@ presence.on("UpdateData", async () => {
     } else {
       currentAnimeTitle =
         document.querySelector("a.ka-url-wrapper").textContent;
-      currentAnimeEpisode = document.location.pathname
+      [, currentAnimeEpisode] = document.location.pathname
         .split("/")[3]
-        .split("-")[1];
+        .split("-");
       if (!isMovie) {
         if (currentAnimeEpisode[0] === "0")
           episodeNumber = currentAnimeEpisode.replace("0", "");

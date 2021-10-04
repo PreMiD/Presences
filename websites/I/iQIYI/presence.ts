@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
         }`;
       } else data.ep = "Variety show";
 
-      data.title = (data.title.match(/.+?(?=\s{2})/g) || [null])[0];
+      [data.title] = data.title.match(/.+?(?=\s{2})/g) || [null];
     }
     if (isVShow && !possiblyVShow) data.ep = "Variety show";
     if (!isVShow && !possiblyVShow && !isMovie && contentEp !== null)

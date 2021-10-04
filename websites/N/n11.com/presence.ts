@@ -1,7 +1,9 @@
 const presence = new Presence({
     clientId: "629588152679399424"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/hesabim/siparislerim": "Siparişlerim",
     "/hesabim/iptal-degisim-iade": "İptal, Değişim ve İade",
     "/hesabim/biletlerim": "Biletlerim",
@@ -32,17 +34,17 @@ presence.on("UpdateData", async () => {
         "#contentProDetail > div.container.product-detail-container > section.box-view.pro-detail-part > div.pro-prop > div.pro-title > h1"
       ) as HTMLElement),
     price =
-      (document.querySelector(
-        "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-      ) as any) &&
       document.querySelector(
         "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-      ).attributes.content
-        ? document.querySelector(
+      ) &&
+      (document.querySelector(
+        "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
+      ).attributes as unknown as {[name: string]: string}).content
+        ? ((document.querySelector(
             "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-          ).attributes.content.textContent
+          ).attributes as unknown as {[name: string]: string}).content as Element).textContent
         : null,
-    data: { [k: string]: any } = {
+    data: PresenceData = {
       largeImageKey: "n11-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     };

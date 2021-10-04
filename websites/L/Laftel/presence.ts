@@ -8,15 +8,6 @@ type Detail = {
   name?: string;
 };
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let last: Detail = {};
 
 type Episode = {
@@ -93,13 +84,12 @@ presence.on("UpdateData", async () => {
         !video.ended &&
         video.readyState > 2
       ) {
-        const timestamps = getTimestamps(
+        const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
         presenceData.smallImageKey = "play";
       } else {
         presenceData.startTimestamp = null;

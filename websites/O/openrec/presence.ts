@@ -47,8 +47,7 @@ presence.on("UpdateData", async () => {
       : video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
     presence.setTrayTitle(video.paused ? "" : title.textContent);
 

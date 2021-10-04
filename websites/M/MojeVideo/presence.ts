@@ -6,7 +6,7 @@ const presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  if (data.details === null) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);
@@ -18,7 +18,7 @@ function RefreshData() {
       mvTime = document.getElementById("mv-tm"),
       mvPlaying = mvPlay.style.visibility !== "visible",
       mvCaptionElement = document.getElementById("video-comment"),
-      mvCaptionH1 = mvCaptionElement.getElementsByTagName("h1")[0],
+      [mvCaptionH1] = mvCaptionElement.getElementsByTagName("h1"),
       videoName = mvCaptionH1 ? mvCaptionH1.textContent : "Unknown video";
 
     if (mvTime) {
@@ -42,8 +42,7 @@ function RefreshData() {
     else if (!actualTitle.startsWith("Videá - mojeVideo.sk")) {
       if (actualTitle.includes(".strana")) {
         const titlePieces = actualTitle.split(" - ");
-        data.details = titlePieces[0];
-        data.state = titlePieces[1];
+        [data.details, data.state] = titlePieces;
       } else data.details = actualTitle;
     } else {
       let extraPage = "Hlavná stránka",

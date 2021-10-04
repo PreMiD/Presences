@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
 
   if (document.getElementsByClassName("entry-title").length > 0) {
     // Reading an article
-    const title = document.getElementsByClassName("entry-title")[0];
+    const [title] = document.getElementsByClassName("entry-title");
     presenceData.details = "Bir haber okuyor...";
     presenceData.state = title
       ? title.textContent.replace("[İzle]", "")

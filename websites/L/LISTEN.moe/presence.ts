@@ -19,7 +19,7 @@ let path: string,
   track: string,
   artist: string;
 
-function resetTimestamp(): any {
+function resetTimestamp() {
   startTimestamp = Math.floor(Date.now() / 1000);
 }
 

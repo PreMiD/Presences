@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "514771696134389760"
-});
-
-let localeStrings = {
+    clientId: "514771696134389760"
+  }),
+  localeStrings: { [stringPath: string]: string } = {
     en: {
       Chatting: "Browsing PM's...",
       Watching: "Watching",
@@ -15,23 +14,8 @@ let localeStrings = {
       Browsing: "Просматривает",
       BrowsingFeed: "Смотрит ленту..."
     }
-  },
-  isPlaying: boolean,
-  timestamps;
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+  };
+let isPlaying: boolean, timestamps;
 
 function getLocale(): string {
   return window.navigator.language.replace("-", "_").toLowerCase();
@@ -44,12 +28,12 @@ function getLocalizedString(stringPath): string {
   )
     return localeStrings[getLocale()][stringPath];
   else {
-    console.warn(`Language for [${stringPath}] was not found!`);
+    presence.info(`Language for [${stringPath}] was not found!`);
     return localeStrings.en[stringPath];
   }
 }
 
-function getVKTrackTimeLeft(): Record<string, any> {
+function getVKTrackTimeLeft(): string[] {
   const playerDuration = document.querySelector(
     ".audio_page_player_duration"
   ) as HTMLElement;
@@ -70,7 +54,7 @@ function getVKTrackTimeLeft(): Record<string, any> {
   return timeLeft.split(":");
 }
 
-function getVKTrackTimePassed(): Record<string, any> {
+function getVKTrackTimePassed(): string[] {
   const playerDuration = document.querySelector(
     ".audio_page_player_duration"
   ) as HTMLElement;
@@ -89,11 +73,11 @@ function getVKTrackTimePassed(): Record<string, any> {
 }
 
 //* Returns VK track length.
-function getVKTrackLength(): Record<string, any> {
-  let timeLeft, timePassed, overallTime;
+function getVKTrackLength(): number[] {
+  let overallTime;
 
-  timeLeft = getVKTrackTimeLeft();
-  timePassed = getVKTrackTimePassed();
+  const timeLeft = getVKTrackTimeLeft(),
+    timePassed = getVKTrackTimePassed();
 
   //* Summing minutes and seconds from time passed and left.
   overallTime = [
@@ -139,7 +123,7 @@ presence.on("UpdateData", async () => {
     if (document.querySelector(".audio_playing") === null) isPlaying = true;
     else isPlaying = false;
 
-    timestamps = getTimestamps(
+    timestamps = presence.getTimestamps(
       Math.floor(
         Number(getVKTrackTimePassed()[0]) * 60 +
           Number(getVKTrackTimePassed()[1])
@@ -174,7 +158,7 @@ presence.on("UpdateData", async () => {
       videoAuthor = (document.querySelector(".mv_author_name a") as HTMLElement)
         .innerText;
 
-    timestamps = getTimestamps(
+    timestamps = presence.getTimestamps(
       Math.floor(
         Number(videoCurrentTime[0]) * 60 + Number(videoCurrentTime[1])
       ),
@@ -190,10 +174,10 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData, true);
   } else if (document.querySelector(".page_name") !== null) {
-    const page_title = (document.querySelector(".page_name") as HTMLElement)
+    const pageTitle = (document.querySelector(".page_name") as HTMLElement)
       .innerText;
 
-    presenceData.details = page_title;
+    presenceData.details = pageTitle;
     presenceData.startTimestamp = browsingTimestamp;
 
     presence.setActivity(presenceData, true);

@@ -38,16 +38,6 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (
-    document.location.hostname === "mcstacker.bimbimma.com" ||
-    document.URL.includes("mcstacker.net/1.12.php")
-  ) {
-    presenceData.details = "MCStacker for 1.12.x";
-    delete presenceData.state;
-
-    delete presenceData.smallImageKey;
-
-    presence.setActivity(presenceData);
   } else if (document.URL.includes("mcstacker.net/1.13converter.php")) {
     presenceData.details = "MCStacker Converter for 1.13.x";
     delete presenceData.state;
@@ -133,23 +123,9 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#rootEntity") !== null) {
-      presenceData.details = "MCStacker for latest";
-      presenceData.state = "Making a /execute command";
-
-      delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.querySelector("#tellrawPane") !== null) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /tellraw command";
-
-      delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
-    } else if (document.querySelector("#replaceItemPane") !== null) {
-      presenceData.details = "MCStacker for latest";
-      presenceData.state = "Making a /teleport command";
 
       delete presenceData.smallImageKey;
 

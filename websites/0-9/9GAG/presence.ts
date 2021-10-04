@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector(
         "#container > div.page > div.main-wrap > div.profile > section > header > h2"
-      ) !== null
+      )
     ) {
       user = document.querySelector(
         "#container > div.page > div.main-wrap > div.profile > section > header > h2"
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
       search = document.querySelector("#search-hero");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
-      presenceData.state = search.value;
+      presenceData.state = (search as HTMLInputElement).value;
       presenceData.smallImageKey = "search";
     }
   } else if (document.location.hostname === "about.9gag.com") {
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
       search = document.querySelector("#SearchInput");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Shop - Searching for:";
-      presenceData.state = search.value;
+      presenceData.state = (search as HTMLInputElement).value;
       presenceData.smallImageKey = "search";
     }
   }

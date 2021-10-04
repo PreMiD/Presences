@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "DiscordLabs Partners";
     } else if (document.location.pathname.includes("/profile/")) {
       priceEls = document.getElementsByClassName("uname");
-      for (var i = 0; i < priceEls.length; i++) {
+      for (let i = 0; i < priceEls.length; i++) {
         const profilename = priceEls[i].innerText;
         presenceData.details = "Viewing a profile:";
         presenceData.state = profilename;
@@ -38,7 +38,7 @@ presence.on("UpdateData", () => {
         .replace(/\+|%20/g, " ");
     } else if (document.location.pathname.includes("/bot/")) {
       priceEls = document.getElementsByClassName("botname");
-      for (var i = 0; i < priceEls.length; i++) {
+      for (let i = 0; i < priceEls.length; i++) {
         const botname = priceEls[i].innerText;
         presenceData.details = "Viewing a Discord bot:";
         presenceData.state = botname;

@@ -7,20 +7,6 @@ const presence: Presence = new Presence({
   }),
   startTimestamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "large_img",
@@ -28,11 +14,7 @@ presence.on("UpdateData", async () => {
     },
     url = document.URL;
   if (url.includes("/videoplayer/")) {
-    const video: HTMLVideoElement = document.getElementsByTagName("video")[0],
-      timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
+    const [video] = document.getElementsByTagName("video"),
       title = document.querySelectorAll("h1.title")[0].textContent,
       authorElement = document.getElementsByClassName(
         "primary-relation-name"
@@ -45,8 +27,11 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
@@ -56,20 +41,20 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
   } else if (url.includes("/title/")) {
     const tokens = document.title.split(" - "),
-      title = tokens[0];
+      [title] = tokens;
     presenceData.details = title;
     if (tokens[1].trim() === "IMDb") presenceData.state = "Browsing...";
     else presenceData.state = tokens[1].trim();
   } else if (url.includes("/user/") || url.includes("/poll/"))
-    presenceData.details = document.title.split(" - ")[0];
+    [presenceData.details] = document.title.split(" - ");
   else if (url.includes("/list/")) {
-    presenceData.details = document.title.split(" - ")[0];
+    [presenceData.details] = document.title.split(" - ");
     presenceData.state = "Viewing a list";
   } else if (url.includes("/search/")) {
-    presenceData.details = document.title.split(" - ")[0];
+    [presenceData.details] = document.title.split(" - ");
     presenceData.state = "Searching...";
   } else if (url.includes("/name/")) {
-    presenceData.details = document.title.split(" - ")[0];
+    [presenceData.details] = document.title.split(" - ");
     if (document.title.split(" - ")[1].trim() === "IMDb")
       presenceData.state = "Filmography";
     else presenceData.state = document.title.split(" - ")[1].trim();
@@ -79,7 +64,7 @@ presence.on("UpdateData", async () => {
       !url.includes("/registration/") &&
       url !== "https://www.imdb.com/"
     )
-      presenceData.details = document.title.split(" - ")[0];
+      [presenceData.details] = document.title.split(" - ");
 
     presenceData.state = "Browsing";
   }

@@ -24,7 +24,7 @@ presence.on(
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
     if (playback) {
       ({ iFrameVideo, duration, paused } = data.iframeVideo);
       currentTime = data.iframeVideo.currTime;
@@ -223,11 +223,12 @@ presence.on("UpdateData", async () => {
         .replace("Server 1", "")
         .replace("Server 2", "");
     }
-    if (iFrameVideo === true)
+    if (iFrameVideo === true) {
       timestamps = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
+    }
 
     if (document.location.href.endsWith("=alt")) {
       // Alternative

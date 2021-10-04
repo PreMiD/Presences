@@ -2,9 +2,9 @@ const presence = new Presence({
   clientId: "745570917823807519"
 });
 
-function translate(is_male: boolean): object {
+function translate(isMale: boolean) {
   const refferGender = (arr: Array<string>): string =>
-      is_male ? arr[0] : arr[1],
+      isMale ? arr[0] : arr[1],
     reporting: string = refferGender(["מדווח", "מדווחת"]),
     removingQuestion: string = refferGender(["מוחק שאלה", "מוחקת שאלה"]),
     removingPenfriends: string = refferGender([
@@ -112,22 +112,21 @@ let elapsed: number,
   oldUrl: string,
   lastAction: string,
   action: string,
-  is_male = true;
-const has_dark: boolean = elemExists("#darkmode");
+  isMale = true;
+const hasDark: boolean = elemExists("#darkmode");
 
 // get gender
 fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
   resp.json().then((json) => {
-    if (json.data.appUser.gender === "male") is_male = true;
-    else is_male = false;
+    if (json.data.appUser.gender === "male") isMale = true;
+    else isMale = false;
   })
 );
 
 // main loop
 presence.on("UpdateData", () => {
   const Path = window.location.pathname;
-  let PathMain: string = Path.split("/")[1],
-    PathSecond: string = Path.split("/")[2],
+  let [PathMain, PathSecond] = Path.split("/"),
     details,
     isReport = false,
     isDelete = false,
@@ -156,7 +155,7 @@ presence.on("UpdateData", () => {
 
   switch (PathMain) {
     case "/":
-      details = translate(is_male)["/"].main;
+      details = translate(isMale)["/"].main;
       action = `${Path} & ${details}`;
       break;
     case "ask":
@@ -169,7 +168,7 @@ presence.on("UpdateData", () => {
       if (isEdit) isAns = elemExists(".list-single-item .edit-view");
 
       // set state text
-      askObj = translate(is_male).ask;
+      askObj = translate(isMale).ask;
       if (isReport) details = askObj.report;
       if (isDelete) details = isAns ? askObj.removeAns : askObj.removeAsk;
       if (isEdit) details = isAns ? askObj.editAns : askObj.editAsk;
@@ -184,7 +183,7 @@ presence.on("UpdateData", () => {
       isDelete = elemExists("app-item-editor-delete");
       isEdit = elemExists(".edit-view");
 
-      xplrObj = translate(is_male).explore;
+      xplrObj = translate(isMale).explore;
 
       // if any of the bools apply, we don't care about the second path
       if (isReport) details = xplrObj["/"].report;
@@ -192,7 +191,7 @@ presence.on("UpdateData", () => {
       if (isEdit) details = xplrObj["/"].edit;
 
       if (!details) {
-        if (xplrObj.hasOwnProperty(PathSecond)) {
+        if (xplrObj[PathSecond]) {
           // seems like xplrObj[PathSecond] won't work
           // let's do it manually then >'-'<
           switch (PathSecond) {
@@ -218,7 +217,7 @@ presence.on("UpdateData", () => {
       isDelete = elemExists("app-item-editor-delete");
       isEdit = elemExists(".edit-view");
 
-      cnlObj = translate(is_male).channel;
+      cnlObj = translate(isMale).channel;
 
       if (isReport) details = cnlObj.report;
       if (isDelete) details = cnlObj.remove;
@@ -236,7 +235,7 @@ presence.on("UpdateData", () => {
       isDelete = elemExists("app-item-editor-delete");
       isWrite = elemExists(".active app-add-item-form");
 
-      penfObj = translate(is_male)["pen-friends"];
+      penfObj = translate(isMale)["pen-friends"];
       if (isDelete) details = penfObj.remove;
       if (isWrite) details = penfObj.write;
       if (!details) details = penfObj.main;
@@ -257,7 +256,7 @@ presence.on("UpdateData", () => {
       if (isEdit) isAns = elemExists(".edit-view + mat-card.item-type-ans");
 
       // set state text
-      repObj = translate(is_male).reports;
+      repObj = translate(isMale).reports;
       if (isDelete) details = isAns ? repObj.removeAns : repObj.removeAsk;
       if (isEdit) details = isAns ? repObj.editAns : repObj.editAsk;
 
@@ -266,7 +265,7 @@ presence.on("UpdateData", () => {
       action = `${Path} & ${details}`;
       break;
     case "settings":
-      details = translate(is_male).settings.main;
+      details = translate(isMale).settings.main;
       action = Path;
       break;
     case "topic":
@@ -274,7 +273,7 @@ presence.on("UpdateData", () => {
       isDelete = elemExists("app-item-editor-delete");
       isEdit = elemExists(".edit-view");
 
-      tpcObj = translate(is_male).topic;
+      tpcObj = translate(isMale).topic;
 
       if (isReport) details = tpcObj.report;
       if (isDelete) details = tpcObj.remove;
@@ -292,7 +291,7 @@ presence.on("UpdateData", () => {
     case "profile":
       isDelete = elemExists("app-item-editor-delete");
 
-      pflObj = translate(is_male).profile;
+      pflObj = translate(isMale).profile;
 
       if (isDelete) details = pflObj.remove;
 
@@ -307,11 +306,11 @@ presence.on("UpdateData", () => {
       action = `${Path} & ${details}`;
       break;
     case "notifications":
-      details = translate(is_male).notifications.main;
+      details = translate(isMale).notifications.main;
       action = Path;
       break;
     case "messages":
-      msgObj = translate(is_male).messages;
+      msgObj = translate(isMale).messages;
 
       if (PathSecond === "/") {
         details = elemExists("app-contacts")
@@ -329,7 +328,7 @@ presence.on("UpdateData", () => {
       action = `${Path} & ${details}`;
       break;
     case "post":
-      pstObj = translate(is_male).post;
+      pstObj = translate(isMale).post;
       if (PathSecond === "ask") details = pstObj.ask.main;
 
       action = `${Path} & ${details}`;
@@ -352,7 +351,7 @@ presence.on("UpdateData", () => {
       details: details || translate(is_male).default,
       state: undefined,
       largeImageKey: "stips",
-      smallImageKey: has_dark ? "stipspin_dark" : "stipspin_light",
+      smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",
       startTimestamp: elapsed,
       smallImageText
     };

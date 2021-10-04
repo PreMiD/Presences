@@ -15,13 +15,12 @@ presence.on("UpdateData", async () => {
     details: string,
     state: string
   ) {
-    presenceData.smallImageKey = nome; //SmallImageKey Function
-    presenceData.smallImageText = imagetext; //smallImageText Function
-    presenceData.details = details; //details Function
-    presenceData.state = state; //state Function
+    presenceData.smallImageKey = nome;
+    presenceData.smallImageText = imagetext;
+    presenceData.details = details;
+    presenceData.state = state;
   }
   function shortpresence(nome: string, imagetext: string, details: string) {
-    //Function without presenceData.state
     presenceData.smallImageKey = nome; //SmallImageKey Function
     presenceData.smallImageText = imagetext; //smallImageText Function
     presenceData.details = details; //details Function
@@ -32,10 +31,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "house";
     presenceData.smallImageText = "Figma";
     presenceData.details = "Homepage";
-  }
-
-  //BLOG
-  else if (document.location.pathname.endsWith("/product/")) {
+  } else if (document.location.pathname.endsWith("/product/")) {
+    //BLOG
     //Product in Figma Blog
 
     figmapresence(
@@ -354,10 +351,8 @@ presence.on("UpdateData", async () => {
     //About Us Page
 
     figmapresence("layers", "About Us | Figma", "In About Us", "Page...");
-  }
-
-  //HELP PAGE CENTER
-  else if (document.location.pathname.includes("articles")) {
+  } else if (document.location.pathname.includes("articles")) {
+    //HELP PAGE CENTER
     //Articles Page Help cennter
 
     const articlename = document.querySelector(
@@ -398,10 +393,8 @@ presence.on("UpdateData", async () => {
       '"Admin" Category',
       "Figma Help Center"
     );
-  }
-
-  // EDITING FILES
-  else if (document.location.pathname.includes("create-team")) {
+  } else if (document.location.pathname.includes("create-team")) {
+    // EDITING FILES
     //Creating Team
 
     figmapresence("group", "New Team | Figma", "Creating a", "New Team...");
@@ -427,7 +420,7 @@ presence.on("UpdateData", async () => {
     );
   } else if (document.location.pathname.includes("search")) {
     //Searching files
-    const search = document.title.split("- Figma")[0];
+    const [search] = document.title.split("- Figma");
     shortpresence("search", search, search);
   } else if (document.location.pathname.endsWith("drafts")) {
     //Drafts page
@@ -488,10 +481,10 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("file")) {
     //Viewing and editing files
     if (document.location.pathname.includes("community")) {
-      const filename = document.title.split("- Figma")[0];
+      const [filename] = document.title.split("- Figma");
       figmapresence("view", filename, "Viewing:", filename);
     } else {
-      const filename = document.title.split("- Figma")[0];
+      const [filename] = document.title.split("- Figma");
       figmapresence("edit", filename, "Editing:", filename);
     }
   } else if (document.location.pathname.includes("Community")) {
@@ -521,10 +514,8 @@ presence.on("UpdateData", async () => {
       "In Help Center",
       "Figma Help Center"
     );
-  }
-
-  //PROJECTS & COMMUNITY
-  else if (document.location.pathname.includes("@")) {
+  } else if (document.location.pathname.includes("@")) {
+    //PROJECTS & COMMUNITY
     //Figma Users
 
     const username = document.querySelector(
@@ -631,7 +622,7 @@ presence.on("UpdateData", async () => {
     figmapresence("search", "Figma", "Exploring ", "Figma...");
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

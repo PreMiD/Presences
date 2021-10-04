@@ -2,28 +2,18 @@ const presence = new Presence({
   clientId: "687426695417823238"
 });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let currentTime: number, duration: number, paused: boolean, playback;
 
-let currentTime, duration, paused, playback;
-
-presence.on("iFrameData", (data) => {
-  playback = data.duration !== null ? true : false;
-  if (playback) {
-    currentTime = data.currentTime;
-    duration = data.duration;
-    paused = data.paused;
+presence.on(
+  "iFrameData",
+  (data: { duration: number; currentTime?: number; paused?: boolean }) => {
+    playback = data.duration ? true : false;
+    if (playback) ({ currentTime, duration, paused } = data);
   }
-});
+);
 
 presence.on("UpdateData", () => {
-  const timestamps = getTimestamps(
+  const [startTimestamp, endTimestamp] = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     ),
@@ -53,9 +43,9 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browsing the main page";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   } else if (document.location.pathname.includes("/episodes/")) {
-    if (!isNaN(timestamps[1])) {
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+    if (!isNaN(endTimestamp)) {
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
     }
 
     presenceData.state =

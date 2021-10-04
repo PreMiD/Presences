@@ -111,12 +111,9 @@ presence.on("UpdateData", async () => {
       if (elapsed) presenceData.startTimestamp = browsingStamp;
     }
 
-    const artist = document
+    const [artist, title] = document
         .querySelector("#current_song")
-        .textContent.split(" - ")[0],
-      title = document
-        .querySelector("#current_song")
-        .textContent.split(" - ")[1],
+        .textContent.split(" - "),
       presenter = document.querySelector(".show_time").textContent;
 
     presenceData.details = format1

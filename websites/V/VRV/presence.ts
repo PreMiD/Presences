@@ -8,19 +8,25 @@ const presence = new Presence({
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   iFrameVideo: boolean,
-  currentTime: any,
-  duration: any,
-  paused: any,
-  lastPlaybackState = null,
-  playback;
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState: boolean,
+  playback: boolean;
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+interface IFrameData {
+  iframeVideo: {
+    iFrameVideo: boolean;
+    currentTime: number;
+    duration: number;
+    paused: boolean;
+  };
+}
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = data.iframeVideo.duration !== null ? true : false;
 
-  if (playback) {
-    ({ iFrameVideo, currentTime, duration, paused } =
-      data.iframe_video.iFrameVideo);
-  }
+  if (playback)
+    ({ iFrameVideo, currentTime, duration, paused } = data.iframeVideo);
 
   if (lastPlaybackState !== playback) {
     lastPlaybackState = playback;
@@ -29,7 +35,7 @@ presence.on("iFrameData", (data) => {
 });
 
 presence.on("UpdateData", async () => {
-  const timestamps = getTimestamps(
+  const timestamps = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     ),
@@ -45,8 +51,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (
         document.querySelector(
@@ -66,9 +71,9 @@ presence.on("UpdateData", async () => {
             .querySelector(".content > div > div > .title")
             .textContent.split(" - ")[0]
         }`;
-        presenceData.state = document
+        [, presenceData.state] = document
           .querySelector(".content > div > div > .title")
-          .textContent.split(" - ")[1];
+          .textContent.split(" - ");
       } else {
         presenceData.details = document.querySelector(
           ".content > div > div > .episode-info > .series"
@@ -137,7 +142,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

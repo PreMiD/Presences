@@ -1,10 +1,9 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "630023998767497217" // CLIENT ID FOR YOUR PRESENCE
   }),
-  user: any,
-  search: any,
-  title: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+
+let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -88,16 +87,6 @@ presence.on("UpdateData", async () => {
     ) {
       presenceData.details = "Forums, Viewing the";
       presenceData.state = "news feed";
-
-      delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
-    } else if (
-      document.location.pathname.includes("/whats-new/") &&
-      document.location.pathname.includes("/news-feed")
-    ) {
-      presenceData.details = "Forums, Viewing the";
-      presenceData.state = "latest activity";
 
       delete presenceData.smallImageKey;
 

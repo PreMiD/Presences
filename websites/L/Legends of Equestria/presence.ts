@@ -1,9 +1,9 @@
-let presence = new Presence({
-    clientId: "651406405093425152"
-  }),
-  presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+const presence = new Presence({
+  clientId: "651406405093425152"
+});
+let presenceData: PresenceData = {
+  largeImageKey: "logo"
+};
 
 presence.on("UpdateData", async () => {
   if (

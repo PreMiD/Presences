@@ -158,10 +158,10 @@ const updateCallback = {
                 .split(" ")[0]
                 .toLowerCase()
             ) {
-              return (presenceData.state = document
+              return ([presenceData.state] = document
                 .querySelector("title")
                 .textContent.split(" by ")[1]
-                .split(" ")[0]);
+                .split(" "));
             }
           }
         };
@@ -336,11 +336,11 @@ const updateCallback = {
                 .textContent.split(" by ")
                 .slice(0, -1)
                 .join(" - ");
-              presenceData.state = document
+              [presenceData.state] = document
                 .querySelector("title")
                 .textContent.split(" by ")
                 .pop()
-                .split(" ")[0];
+                .split(" ");
               /* I actually wanted to get it using the visible elements, but well, it's complicated. */
               if (
                 presenceData.details === presenceDataPlaced.details &&
@@ -562,7 +562,7 @@ const updateCallback = {
 
       updateCallback.function = (): void => {
         if (currentTitle !== document.title.split(" - ")[0]) {
-          currentTitle = document.title.split(" - ")[0];
+          [currentTitle] = document.title.split(" - ");
           presenceData.details = "Viewing the help center/KB";
           presenceData.state = currentTitle;
           presenceDataPlaced = presenceData;

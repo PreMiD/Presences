@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: Date.now()
     },
-    baslik: string = document.querySelector("h1.title");
+    baslik: Element = document.querySelector("h1.title");
 
   if (path === "/") presenceData.details = "Ana Sayfa";
   else if (path.startsWith("/ekrem-imamoglu-kimdir"))

@@ -7,20 +7,6 @@ const presence = new Presence({
     live: "presence.activity.live"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
@@ -39,7 +25,7 @@ presence.on("UpdateData", async () => {
 
   if (video) {
     const title = document.querySelector(".player-controls-title")?.textContent,
-      timestamps = getTimestamps(
+      timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),

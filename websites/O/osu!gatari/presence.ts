@@ -1,10 +1,10 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "642393312392904705"
   }),
   presenceData: PresenceData = {
     largeImageKey: "logo"
-  },
-  customData = false;
+  };
+let customData = false;
 
 presence.on("UpdateData", async () => {
   customData = false;
@@ -153,7 +153,3 @@ presence.on("UpdateData", async () => {
 
 if (document.location.hostname === "sig.gatari.pw")
   presenceData.details = "Ready to generator a Signature";
-
-presence.on("iFrameData", function (data) {
-  console.log(data);
-});

@@ -22,23 +22,8 @@ const presence = new Presence({
     "/haberler": "Haberler",
     "/iletisim": "İletişim",
     "/efsane-filmler": "Efsane Filmler"
-  };
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const video: { [k: string]: string | boolean | number } = {};
+  },
+  video: { [k: string]: string | boolean | number } = {};
 
 interface IFrameData {
   error: boolean;
@@ -88,7 +73,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/diziler/") && document.title.includes(" | ")) {
     presenceData.details = "Bir kategoriye göz atıyor:";
-    presenceData.state = document.title.split(" | ")[0];
+    [presenceData.state] = document.title.split(" | ");
   }
 
   // Members
@@ -121,15 +106,11 @@ presence.on("UpdateData", async () => {
     video?.currentTime &&
     isVideoData
   ) {
-    const timestamps = getTimestamps(
-      Math.floor(Number(video.currentTime)),
-      Math.floor(Number(video.duration))
-    );
-
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-    }
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(Number(video.currentTime)),
+        Math.floor(Number(video.duration))
+      );
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused

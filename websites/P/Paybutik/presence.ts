@@ -38,13 +38,13 @@ presence.on("UpdateData", async () => {
     path.startsWith("/project/")
   ) {
     presenceData.details = "Bir ürün oluşturuyor..";
-    const form = document.forms[2];
+    const [, , form] = document.forms;
 
     presenceData.smallImageKey = "project";
     presenceData.smallImageText = (form[0] as HTMLInputElement).value;
   } else if (path.startsWith("/project/") && path.includes("/products/")) {
     presenceData.details = "Bir ürünü düzenliyor:";
-    const form = document.forms[2];
+    const [, , form] = document.forms;
 
     presenceData.smallImageKey = "project";
     presenceData.smallImageText = (form[0] as HTMLInputElement).value;
@@ -53,9 +53,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Bir proje oluşturuyor..";
   else if (path.startsWith("/project/")) {
     presenceData.details = "Bir projeyi düzenliyor:";
-    presenceData.state = document
+    [presenceData.state] = document
       .querySelector("body > div > div > div > div > div > div > div > h1 ")
-      .textContent.split("|")[0];
+      .textContent.split("|");
   } else if (path.includes("/verify"))
     presenceData.details = "E-postasını doğruluyor..";
   else presenceData.details = "Bir sayfayı görüntülüyor..";

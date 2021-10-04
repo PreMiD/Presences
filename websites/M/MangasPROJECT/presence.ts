@@ -8,11 +8,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "icon"
   };
 
-  if (document.location.pathname === "/") {
+  if (document.location.pathname === "/")
     (data.details = "Página principal"), (data.startTimestamp = browsingStamp);
-    presence.setActivity(data);
-  }
-
   // ----------- barra de opções topo ----------- //
   else if (document.location.pathname.startsWith("/lista-de-mangas")) {
     (data.details = "Lista de mangás"),
@@ -50,11 +47,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/destaques")) {
     (data.details = "Mangás em Destaque"),
       (data.startTimestamp = browsingStamp);
-    presence.setActivity(data);
-  }
-
-  // ----------- Categorias (Categoria selecionada) e página da scan ----------- //
-  else if (document.location.pathname.startsWith("/mangas")) {
+  } else if (document.location.pathname.startsWith("/mangas")) {
+    // ----------- Categorias (Categoria selecionada) e página da scan ----------- //
     (data.details = "Lista de Mangás"),
       (data.state = `Ordenada por: ${(
         document.querySelector("head > title") as HTMLElement
@@ -72,10 +66,8 @@ presence.on("UpdateData", async () => {
     data.state = "Visualizando Principais Mangás da Scan";
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
-  }
-
-  // ----------- Lendo mangá & Vendo Informações do Mangá ----------- //
-  else if (document.location.pathname.startsWith("/manga")) {
+  } else if (document.location.pathname.startsWith("/manga")) {
+    // ----------- Lendo mangá & Vendo Informações do Mangá ----------- //
     if (
       document.querySelector(
         "#reader-wrapper > div.reader-navigation.clear-fix > div.series-info-container > div.series-info > div.series-title > span.title"
@@ -108,4 +100,5 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   }
+  presence.setActivity(data);
 });

@@ -2,25 +2,25 @@ const presence = new Presence({
   clientId: "704585837949747330"
 });
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
       startTimestamp: Math.floor(Date.now() / 1000)
     },
-    path: any = document.location.pathname;
-  let PesquisaTexto: any,
-    OrdenarTexto: any,
-    OrdenarTextoObra: any,
-    GeneroTexto: any,
-    StatusContaTexto: any,
-    opcaoLeitor: any,
-    tipoObra: any,
-    generoObra: any,
-    spanObra: any,
-    nomeObra: any,
-    nomeObraLeitor: any,
-    capituloLeitor: any,
-    seasonLeitor: any,
-    paginaLeitor: any,
-    postagemData: any;
+    path = document.location.pathname;
+  let PesquisaTexto: HTMLElement,
+    OrdenarTexto: HTMLElement,
+    OrdenarTextoObra: HTMLElement,
+    GeneroTexto: HTMLElement,
+    StatusContaTexto: HTMLElement,
+    opcaoLeitor: HTMLElement,
+    tipoObra: HTMLElement,
+    generoObra: HTMLElement,
+    spanObra: HTMLElement,
+    nomeObra: HTMLElement,
+    nomeObraLeitor: HTMLElement,
+    capituloLeitor: HTMLElement,
+    seasonLeitor: HTMLSelectElement,
+    paginaLeitor: HTMLElement,
+    postagemData: HTMLElement;
 
   const bodyWrap: HTMLElement = document.querySelector("body > div.wrap > div");
 
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
       seasonLeitor = document.querySelector(
         "body > div.wrap > div > div > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.select-view > div.c-selectpicker.selectpicker_volume > label > select"
       );
-      paginaLeitor = document.getElementById("single-pager");
+      paginaLeitor = document.getElementById("single-pager") as HTMLElement;
       capituloLeitor = document.querySelector(
         "body > div.wrap > div > div > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li.active"
       );

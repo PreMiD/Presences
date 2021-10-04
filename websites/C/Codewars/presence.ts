@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const pathName = document.location.pathname,
-    pages = pathName.split("/").filter((p) => p),
+    [pages, state] = pathName.split("/").filter((p) => p),
     data: PresenceData = {
       largeImageKey: "largeimage",
       startTimestamp: timebrowsed,
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
   } else if (pages[0] === "topics") {
     if (pages[1]) {
       data.details = "Viewing Topic";
-      data.state = pages[1];
+      data.state = state;
     } else data.details = "Viewing Forum";
   } else if (pages[0] === "kumite") data.details = "Viewing kumite";
   else if (pages[0] === "subscription") data.details = "Viewing Codewars Red";

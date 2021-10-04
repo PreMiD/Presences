@@ -85,8 +85,8 @@ let video: {
 presence.on(
   "iFrameData",
   (data: { video?: typeof video; cafe?: typeof cafe }) => {
-    if (data.video) video = data.video;
-    if (data.cafe) cafe = data.cafe;
+    if (data.video) ({ video } = data);
+    if (data.cafe) ({ cafe } = data);
   }
 );
 
@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-          presenceData.endTimestamp = timestamps[1];
+          [, presenceData.endTimestamp] = timestamps;
 
           presenceData.buttons = [
             {
@@ -183,8 +183,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video?.paused ? "pause" : "play";
         presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
         presenceData.buttons = [
           {
@@ -260,7 +259,7 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-          presenceData.endTimestamp = timestamps[1];
+          [, presenceData.endTimestamp] = timestamps;
 
           presenceData.buttons = [
             {
@@ -291,7 +290,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video?.paused ? "pause" : "play";
         presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
-        presenceData.endTimestamp = timestamps[1];
+        [, presenceData.endTimestamp] = timestamps;
 
         presenceData.buttons = [
           {
@@ -324,7 +323,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video?.paused ? "pause" : "play";
         presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
-        presenceData.endTimestamp = timestamps[1];
+        [, presenceData.endTimestamp] = timestamps;
 
         presenceData.buttons = [
           {

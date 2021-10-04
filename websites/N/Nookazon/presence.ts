@@ -3,6 +3,7 @@ const presence = new Presence({
   }),
   elapsed = Math.floor(Date.now() / 1000);
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface String {
   capitalize(): string;
 }
@@ -119,7 +120,7 @@ presence.on("UpdateData", async () => {
           document.querySelector("a.profile-tab-active").textContent
         }`;
       } catch {
-        console.log(
+        presence.error(
           "No active profile tab - State parameter will not be reported to PreMiD."
         );
       }

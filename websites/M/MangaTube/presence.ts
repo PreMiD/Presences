@@ -18,9 +18,9 @@ presence.on("UpdateData", async () => {
           "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > ul > li.active > a"
         )
         .textContent.replace("Seite", "Kapitel"),
-      manganame = document
+      [manganame] = document
         .querySelector("head > title")
-        .textContent.split("- Kapitel ")[0],
+        .textContent.split("- Kapitel "),
       seite = document.querySelector(".page-text").textContent;
     data.details = manganame;
     data.state = `${chapter} | ${seite}`;
@@ -32,9 +32,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/series"))
     data.details = "| Serien";
   else if (document.location.pathname.includes("/serieslist")) {
-    const serieslist = document
+    const [serieslist] = document
       .querySelector("head > title")
-      .textContent.split("- Manga-Tube")[0];
+      .textContent.split("- Manga-Tube");
     data.details = "| Serienliste";
     data.state = serieslist;
 
@@ -44,9 +44,9 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/partner"))
     data.details = "| Partner";
   else if (document.location.pathname.startsWith("/gewinnspiel")) {
-    const giveaway = document
+    const [giveaway] = document
       .querySelector("head > title")
-      .textContent.split(" - Manga-Tube")[0];
+      .textContent.split(" - Manga-Tube");
     data.details = "| Gewinnspiel";
     data.state = giveaway;
   } else if (document.location.pathname.startsWith("/join"))

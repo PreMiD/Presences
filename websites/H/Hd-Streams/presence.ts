@@ -51,7 +51,7 @@ function getQuery() {
           { strings, images, frame }: ExecutionArguments
         ) => {
           if (!context) return null;
-          const partName = location.pathname.match(/^\/(movies|series)\//i)[1];
+          const [, partName] = location.pathname.match(/^\/(movies|series)\//i);
           if (!partName) return null;
           const type: "movie" | "series" | "other" =
             partName === "series"
@@ -148,9 +148,9 @@ function getQuery() {
           ),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          const type = location.pathname.match(
+          const [, type] = location.pathname.match(
             /^\/(movies|series|seasons|actors|popular|cinema)$/i
-          )[1];
+          );
           data.details = strings.searching;
           data.state = {
             movies: "Movies",

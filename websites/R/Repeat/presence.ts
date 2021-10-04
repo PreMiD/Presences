@@ -6,7 +6,7 @@ const presence = new Presence({ clientId: "729087463452049559" }),
     ).json());
 
 let data: {
-  now_playing: {
+  nowplaying: {
     song: {
       artist: string;
       title: string;
@@ -17,8 +17,8 @@ let data: {
     unique: number;
   };
   live: {
-    is_live: boolean;
-    streamer_name: string;
+    islive: boolean;
+    streamername: string;
   };
 };
 
@@ -34,9 +34,9 @@ presence.on("UpdateData", async () => {
         data.listeners.unique || "Listeners"
       ),
       state: (await presence.getSetting("state"))
-        .replace("%artist%", data.now_playing.song.artist || "Artist")
-        .replace("%songText%", data.now_playing.song.text || "Song")
-        .replace("%title%", data.now_playing.song.title || "Title"),
+        .replace("%artist%", data.nowplaying.song.artist || "Artist")
+        .replace("%songText%", data.nowplaying.song.text || "Song")
+        .replace("%title%", data.nowplaying.song.title || "Title"),
       timestamp: await presence.getSetting("timestamp")
     },
     presenceData: PresenceData = {
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       details: settings.details,
       state: settings.state,
       smallImageText: `${
-        data.live.is_live ? data.live.streamer_name : "AutoDJ"
+        data.live.islive ? data.live.streamername : "AutoDJ"
       } is live!`,
       buttons: [
         {
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
     };
 
   if (settings.timestamp) presenceData.startTimestamp = timestamp;
-  if (data.live.is_live) presenceData.smallImageKey = "bouncelive";
+  if (data.live.islive) presenceData.smallImageKey = "bouncelive";
   else delete presenceData.smallImageText;
 
   presence.setActivity(presenceData);

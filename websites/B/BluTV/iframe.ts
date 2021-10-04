@@ -1,5 +1,9 @@
 const iframe = new iFrame();
-let videoMessage;
+let videoMessage: {
+  paused: boolean;
+  duration: number;
+  currentTime: number;
+};
 
 iframe.on("UpdateData", async () => {
   const title = document.querySelector("div.vjs-title-control > div"),
@@ -42,10 +46,8 @@ iframe.on("UpdateData", async () => {
             : "1. Sezon"
       }
     });
-  }
-
-  //Movies
-  else {
+  } else {
+    //Movies
     iframe.send({
       video: {
         ...videoMessage

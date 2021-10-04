@@ -56,10 +56,8 @@ presence.on("UpdateData", async () => {
     );
     presenceData.smallImageKey = stream.paused ? "pause" : "play";
     presenceData.smallImageText = stream.paused ? "Durduruldu" : "Oynatılıyor";
-    if (!stream.paused) {
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-    }
+    if (!stream.paused)
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
   } else {
     presenceData.details = "Bir sayfayı inceliyor:";
     presenceData.state = "Bilinmeyen Sayfa";

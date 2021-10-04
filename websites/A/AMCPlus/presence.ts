@@ -8,8 +8,7 @@ const presence = new Presence({
     search: "presence.activity.searching"
   });
 
-let elapsed: number = undefined,
-  oldUrl: string = undefined;
+let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
   let details: string,

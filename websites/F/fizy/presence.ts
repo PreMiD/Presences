@@ -6,26 +6,12 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const player = document.querySelector(
       "#audio-player_html5_api"
     ) as HTMLAudioElement,
     playing = player ? (player.paused ? false : true) : false,
-    data: { [k: string]: any } = {
+    data: { [k: string]: string | number } = {
       largeImageKey: "fizy-logo"
     },
     songName = document.querySelector(
@@ -33,13 +19,13 @@ presence.on("UpdateData", async () => {
     ),
     artistName = document.querySelector(
       "body > div.main-wrapper.ng-scope > ui-view > main > div > media-player > div > div.player > div.player__wrapper > div.player__metadata > div > div.player__media-artists > a"
-    ),
-    timestamps = player
-      ? getTimestamps(
-          Math.floor(player.currentTime),
-          Math.floor(player.duration)
-        )
-      : null;
+    );
+  [data.startTimestamp, data.endTimestamp] = player
+    ? presence.getTimestamps(
+        Math.floor(player.currentTime),
+        Math.floor(player.duration)
+      )
+    : null;
 
   if (
     songName &&
@@ -49,16 +35,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.details = songName.textContent;
     data.state = artistName.textContent.trim();
-
-    if (
-      playing &&
-      timestamps &&
-      !isNaN(timestamps[0]) &&
-      !isNaN(timestamps[1])
-    ) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
-    } else if (!playing) {
+    if (!playing) {
       delete data.startTimestamp;
       delete data.endTimestamp;
     }

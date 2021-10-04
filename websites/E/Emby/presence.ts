@@ -358,8 +358,8 @@ async function isEmbyWebClient(): Promise<boolean> {
 async function handleAudioPlayback(): Promise<void> {
   // sometimes the buttons are not created fast enough
   try {
-    const audioElem = document.getElementsByTagName("audio")[0],
-      infoContainer = document.getElementsByClassName("nowPlayingBar")[0],
+    const [audioElem] = document.getElementsByTagName("audio"),
+      [infoContainer] = document.getElementsByClassName("nowPlayingBar"),
       buttons = infoContainer.querySelectorAll("button.itemAction");
 
     presenceData.details = `Listening to: ${
@@ -375,8 +375,8 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp =
-          presence.getTimestampsfromMedia(audioElem)[1];
+        [, presenceData.endTimestamp] =
+          presence.getTimestampsfromMedia(audioElem);
       } else delete presenceData.endTimestamp;
 
       // paused
@@ -408,7 +408,7 @@ function getUserId(): string {
     if (location.hash.indexOf("?") > 0) {
       for (const param of location.hash.split("?")[1].split("&")) {
         if (param.startsWith("serverId")) {
-          const serverId = param.split("=")[1];
+          const [serverId] = param.split("=");
 
           for (const server of servers)
             if (server.Id === serverId) return server.UserId;
@@ -474,7 +474,7 @@ async function handleVideoPlayback(): Promise<void> {
     return;
   }
 
-  const videoPlayerElem = document.getElementsByTagName("video")[0];
+  const [videoPlayerElem] = document.getElementsByTagName("video");
 
   // this variables content will be replaced in details and status properties on presenceData
   let title, subtitle;
@@ -489,18 +489,18 @@ async function handleVideoPlayback(): Promise<void> {
   // media metadata
   let mediaInfo: string | MediaInfo;
 
-  const videoPlayerContainerElem = document.body.getElementsByClassName(
+  const [videoPlayerContainerElem] = document.body.getElementsByClassName(
     "videoPlayerContainer"
-  )[0];
+  );
 
   // no background image, we're playing live tv
   if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
     // with this url we can obtain the id of the item we are playing back
-    const mediaId = (
+    const [, , , , , mediaId] = (
       videoPlayerContainerElem as HTMLVideoElement
     ).style.backgroundImage
       .split('"')[1]
-      .split("/")[5];
+      .split("/");
 
     mediaInfo = await obtainMediaInfo(mediaId);
   }
@@ -540,8 +540,8 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp =
-          presence.getTimestampsfromMedia(videoPlayerElem)[1];
+        [, presenceData.endTimestamp] =
+          presence.getTimestampsfromMedia(videoPlayerElem);
       } else delete presenceData.endTimestamp;
 
       // paused
@@ -568,7 +568,7 @@ async function handleItemDetails(): Promise<void> {
 
   for (const param of params) {
     if (param.startsWith("id=")) {
-      id = param.split("=")[1];
+      [id] = param.split("=");
       break;
     }
   }

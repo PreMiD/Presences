@@ -1,11 +1,11 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "707632555612045413"
   }),
-  startBrowse = Date.now(),
-  presenceData: PresenceData = {
-    startTimestamp: startBrowse,
-    largeImageKey: "logo"
-  };
+  startBrowse = Date.now();
+let presenceData: PresenceData = {
+  startTimestamp: startBrowse,
+  largeImageKey: "logo"
+};
 
 presence.on("UpdateData", async () => {
   let blogCheck = false;

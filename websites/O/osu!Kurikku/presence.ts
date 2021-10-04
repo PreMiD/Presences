@@ -184,8 +184,7 @@ presence.on("UpdateData", () => {
       presenceData.details = " View document";
       presenceData.state = title.innerText;
     }
-  } else if (document.location.pathname.includes("/login"))
-    presenceData.details = "Regitstering account";
+  }
 
   if (document.location.hostname === "status.kurikku.pw") {
     presenceData.details = "Checking server status";

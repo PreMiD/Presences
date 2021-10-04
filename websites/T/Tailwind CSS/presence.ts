@@ -2,7 +2,7 @@ const Tailwind = new Presence({ clientId: "818756651279450144" });
 
 Tailwind.on("UpdateData", async () => {
   const path = location.pathname,
-    subdomain = location.host.split(".")[0],
+    [subdomain] = location.host.split("."),
     presenceData: PresenceData = {
       largeImageKey: "tailwind-logo",
       startTimestamp: Math.round(Date.now() / 1000)

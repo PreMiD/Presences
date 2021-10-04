@@ -1,28 +1,23 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "702375041320484944"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  search: string,
+  browsingStamp = Math.floor(Date.now() / 1000);
+
+let search: string,
   title: string,
   director: string,
-  video: any,
-  timestamps: any[],
-  Name: any;
+  video: HTMLElement,
+  Name: string;
 
-function getTimestamps(videoTime: number, videoDuration: number): any {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-function getSeconds(videoTime: string, videoDuration: string): any {
+function getSeconds(videoTime: string, videoDuration: string) {
   const a = videoTime.split(":"),
     b = videoDuration.split(":"),
     secondsStart = +a[0] * 60 * 60 + +a[1] * 60 + +a[2],
     secondsEnd = +b[0] * 60 * 60 + +b[1] * 60 + +b[2];
-  return (timestamps = getTimestamps(
+  return presence.getTimestamps(
     Math.floor(secondsStart),
     Math.floor(secondsEnd)
-  ));
+  );
 }
 
 presence.on("UpdateData", async () => {
@@ -37,9 +32,8 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/movie/browse/") {
     presenceData.details = "Browsing Movies";
     presenceData.startTimestamp = browsingStamp;
-  }
-  // Searching Part
-  else if (document.location.pathname === "/movie/results/") {
+  } else if (document.location.pathname === "/movie/results/") {
+    // Searching Part
     search = document.querySelector(
       "#content > div.results-info > h5 > span"
     ).textContent;
@@ -85,15 +79,13 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
     presenceData.state = "Movie Clip Playlist";
-  }
-
-  // Watching Movie
-  else if (document.location.pathname.indexOf("/movie/watch/") === 0) {
+  } else if (document.location.pathname.indexOf("/movie/watch/") === 0) {
+    // Watching Movie
     title = document.querySelector(
       "#UIMovieSummary > ul > li > div.block2 > a > h3"
     ).textContent;
-    const container_div = document.querySelector("div.professionals"),
-      count = container_div.getElementsByTagName("div").length;
+    const containerDiv = document.querySelector("div.professionals"),
+      count = containerDiv.getElementsByTagName("div").length;
     director = document.querySelector(
       `div.professionals > div:nth-child(${count - count / 3} ) > div.prof > p`
     ).textContent;
@@ -104,21 +96,19 @@ presence.on("UpdateData", async () => {
       end = document.querySelector(
         "#controlbar > div.durations > div.content-duration"
       ).textContent,
-      // var timestamps = getTimestamps(Math.floor(start), Math.floor(end));
       div = document.querySelector(
         "#UIMovieSummary > ul > li > div.block2 > div.info > p:nth-child(1)"
       );
     Name = div.firstChild.nodeValue;
-    if (video === null && end !== "--:--:--") {
-      timestamps = getSeconds(start, end);
-      console.log(timestamps[0]);
-      console.log(timestamps[1]);
+    if (!video && end !== "--:--:--") {
+      [presenceData.startTimestamp, presenceData.endTimestamp] = getSeconds(
+        start,
+        end
+      );
       presenceData.details = `${title} (${Name})`;
       presenceData.state = director;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "playing";
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
     } else if (video !== null && end !== "--:--:--") {
       presenceData.details = `${title} (${Name})`;
       presenceData.state = director;
@@ -133,9 +123,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Browsing";
     }
-  }
-  // Viewing other non-important pages
-  else if (document.location.pathname === "/privacy/") {
+  } else if (document.location.pathname === "/privacy/") {
+    // Viewing other non-important pages
     presenceData.details = "Viewing privacy";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname === "/terms/") {
@@ -171,9 +160,7 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Viewing Movie Clips";
     presenceData.startTimestamp = browsingStamp;
-  }
-  // Works Locally with mine but don't know if it will work for everyone
-  else if (document.location.pathname.includes("/feed")) {
+  } else if (document.location.pathname.includes("/feed")) {
     if (document.location.pathname === "/feed/home/") {
       presenceData.details = "Viewing your feed.";
       presenceData.startTimestamp = browsingStamp;
@@ -196,7 +183,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Unable to Read Page";
     presenceData.startTimestamp = browsingStamp;
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

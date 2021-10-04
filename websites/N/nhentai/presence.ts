@@ -1,32 +1,29 @@
 const presence = new Presence({
-  clientId: "612653415419609088"
-});
-
-let lastPlaybackState = null,
-  reading,
-  browsingStamp = Math.floor(Date.now() / 1000),
-  title: any,
-  title2: any,
-  currentPage: any,
-  pageNumber: any,
-  tabTitle: any,
-  homeCurrentPage: any,
-  favoriteCurrentPage: HTMLElement;
-
-const pattern = "- Page";
-
-let character: any,
-  parody: any,
-  group: HTMLElement,
-  user: HTMLElement,
-  tag: HTMLElement,
-  artist: HTMLElement;
-
-const searchURL = new URL(document.location.href),
+    clientId: "612653415419609088"
+  }),
+  pattern = "- Page",
+  searchURL = new URL(document.location.href),
   searchResult = searchURL.searchParams.get("q"),
   truncateAfter = function (str: string, pattern: string): string {
     return str.slice(0, str.indexOf(pattern));
   };
+
+let lastPlaybackState = null,
+  reading,
+  browsingStamp = Math.floor(Date.now() / 1000),
+  title: HTMLElement,
+  title2: HTMLElement | string,
+  currentPage: HTMLElement,
+  pageNumber: HTMLElement,
+  tabTitle: string,
+  homeCurrentPage: HTMLElement,
+  favoriteCurrentPage: HTMLElement,
+  character: HTMLElement,
+  parody: HTMLElement,
+  group: HTMLElement,
+  user: HTMLElement,
+  tag: HTMLElement,
+  artist: HTMLElement;
 
 if (lastPlaybackState !== reading) {
   lastPlaybackState = reading;

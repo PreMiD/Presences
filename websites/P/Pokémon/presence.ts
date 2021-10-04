@@ -12,19 +12,6 @@ function settingSetter(): void {
   else presence.hideSetting("pdexID");
 }
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -327,7 +314,7 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "pokemontv";
     if (document.location.pathname.includes("/player")) {
       const video = document.querySelector("video"),
-        timestamps = getTimestamps(
+        [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
@@ -335,8 +322,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
       const season = document
           .querySelector(".header-bar-small > span:nth-child(2)")
           .textContent.trim(),
@@ -647,8 +634,10 @@ presence.on("UpdateData", async () => {
         ).textContent;
       } else presenceData.details = "Viewing products";
     } else if (document.location.pathname.includes("/ex")) {
+      const [, state] = document.title.split("」 ｜ ")[0].split("「");
+
       presenceData.details = "Viewing extension pack:";
-      presenceData.state = document.title.split("」 ｜ ")[0].split("「")[1];
+      presenceData.state = state;
     } else if (document.location.pathname.includes("/event")) {
       if (
         document.querySelector(

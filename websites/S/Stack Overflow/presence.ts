@@ -7,9 +7,9 @@ let title: HTMLAnchorElement,
   jobPageNumber: HTMLAnchorElement,
   usersortagsPageNumber: HTMLElement,
   allPages: HTMLAnchorElement,
-  lastPage: any,
-  jobLastPage: any,
-  questionsLastPage: any;
+  lastPage: string,
+  jobLastPage: string,
+  questionsLastPage: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
         lastquestionsPageNumber: number = +pageNumber.innerText;
 
       if (lastquestionsPageNumber > lastPageNumber) {
-        console.log(`${lastPageNumber} --- ${lastquestionsPageNumber}`);
+        presence.info(`${lastPageNumber} --- ${lastquestionsPageNumber}`);
 
         lastPage = pageNumber.innerText;
       }
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
         lastjobPageNumber: number = +jobPageNumber.innerText;
 
       if (lastjobPageNumber > lastPageNumber) {
-        console.log(`${lastPageNumber} --- ${lastjobPageNumber}`);
+        presence.info(`${lastPageNumber} --- ${lastjobPageNumber}`);
 
         lastPage = jobPageNumber.innerText;
       }
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
         lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
 
       if (lastusersortagsPageNumber > lastPageNumber) {
-        console.log(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
+        presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
 
         lastPage = usersortagsPageNumber.innerText;
       }
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
         lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
 
       if (lastusersortagsPageNumber > lastPageNumber) {
-        console.log(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
+        presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
 
         lastPage = usersortagsPageNumber.innerText;
       }

@@ -57,7 +57,7 @@ presence.on("UpdateData", () => {
     }`;
   } else if (Path.startsWith("/talk")) {
     presenceData.details = "Surfing feed";
-    const postType: string = Path.replace("/talk/", "").split("/")[0],
+    const [postType] = Path.replace("/talk/", "").split("/"),
       postElement: HTMLDivElement = document.querySelector(
         "#__next > div > div.jsx-132086333.content > div.jsx-2019133593 > div.jsx-2019133593.post-page-content > div.jsx-347352367 > div.jsx-347352367.board-post-detail-header > div.jsx-347352367.board-post-detail-title"
       );

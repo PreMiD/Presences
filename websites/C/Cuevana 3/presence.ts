@@ -7,7 +7,10 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-let iFrameVideo: boolean, videoPaused: boolean, timestamps: number[];
+let iFrameVideo: boolean,
+  videoPaused: boolean,
+  startTimestamp: number,
+  endTimestamp: number;
 
 presence.on(
   "iFrameData",
@@ -17,8 +20,11 @@ presence.on(
     currentTime: number;
     paused: boolean;
   }) => {
-    iFrameVideo = data.iFrameVideo;
-    timestamps = presence.getTimestamps(data.currentTime, data.duration);
+    ({ iFrameVideo } = data);
+    [startTimestamp, endTimestamp] = presence.getTimestamps(
+      data.currentTime,
+      data.duration
+    );
     videoPaused = data.paused;
   }
 );
@@ -61,8 +67,8 @@ presence.on("UpdateData", async () => {
         (presenceData.smallImageText = videoPaused
           ? (await strings).pause
           : (await strings).play),
-        (presenceData.startTimestamp = timestamps[0]),
-        (presenceData.endTimestamp = timestamps[1]);
+        (presenceData.startTimestamp = startTimestamp),
+        (presenceData.endTimestamp = endTimestamp);
 
       if (videoPaused) {
         delete presenceData.startTimestamp;

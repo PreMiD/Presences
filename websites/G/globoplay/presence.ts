@@ -4,26 +4,10 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  user: any,
-  title: any,
-  search: any;
+let user: HTMLElement, title: HTMLElement | string, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -90,18 +74,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/v/")) {
-      let currentTime: any,
-        duration: any,
-        paused: any,
-        timestamps: any,
-        video: HTMLVideoElement;
-      video = document.querySelector(".id-playback > video");
-      (currentTime = video.currentTime),
-        (duration = video.duration),
-        (paused = video.paused);
+      const video: HTMLVideoElement = document.querySelector(".id-playback > video"),
+        { currentTime, duration, paused } = video;
 
       if (document.location.pathname.includes("/programa/")) {
-        title = document.querySelector(
+        (title as string) = document.querySelector(
           ".video-info__data-program, .playkit-video-info__link-text"
         ).textContent;
         presenceData.state = document.querySelector(
@@ -114,18 +91,14 @@ presence.on("UpdateData", async () => {
       }
 
       if (!isNaN(duration)) {
-        timestamps = getTimestamps(
-          Math.floor(currentTime),
-          Math.floor(duration)
-        );
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.smallImageText = paused
           ? (await strings).pause
           : (await strings).play;
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
 
-        presenceData.details = title;
+        presenceData.details = title as string;
 
         if (paused) {
           delete presenceData.startTimestamp;
@@ -134,7 +107,7 @@ presence.on("UpdateData", async () => {
       } else if (isNaN(duration)) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Olhando para:";
-        presenceData.state = title;
+        presenceData.state = title as string;
       }
     } else if (document.location.pathname.includes("/agora-na-tv/")) {
       presenceData.details = document.querySelector(
@@ -426,7 +399,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

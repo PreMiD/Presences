@@ -934,13 +934,13 @@ function isValidGame(name: string): boolean {
  * @returns {object} The updated instance of presence data.
  */
 function getCategorizedPresenceData(
-  path,
-  presenceData,
-  pageTitle,
-  gameTitle,
-  typeUrl,
-  typeSingle,
-  typePlural
+  path:string[],
+  presenceData: PresenceData,
+  pageTitle: string,
+  gameTitle: string,
+  typeUrl: string,
+  typeSingle: string,
+  typePlural: string
 ): PresenceData {
   if (
     path.length > 3 &&
@@ -1013,7 +1013,7 @@ function getCategorizedPresenceData(
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const subdomain = window.location.host.split(".")[0],
+  const [subdomain] = window.location.host.split("."),
     path = window.location.pathname.split("/").slice(1);
   presenceData = {
     largeImageKey: "logo",
@@ -1033,13 +1033,13 @@ presence.on("UpdateData", () => {
       // Explicitely don't do anything due to privacy being a possible concern.
       presenceData.details = "Editing user account";
       break;
-    case "wiki":
+    case "wiki": {
       // Domain: https://wiki.nexusmods.com/
-      var wikiTitle = null;
+      let wikiTitle;
       try {
         wikiTitle = document.getElementById("firstHeading").innerText;
 
-        if (wikiTitle > 128) wikiTitle = `${wikiTitle.substring(0, 125)}...`;
+        if (parseInt(wikiTitle) > 128) wikiTitle = `${wikiTitle.substring(0, 125)}...`;
       } catch (error) {
         wikiTitle = "Unknown page";
       }
@@ -1047,9 +1047,10 @@ presence.on("UpdateData", () => {
       presenceData.details = "Reading wiki";
       presenceData.state = wikiTitle;
       break;
-    case "forums":
+    }
+    case "forums": {
       // Domain: https://forums.nexusmods.com/
-      var forumTitle = null;
+      let forumTitle;
       try {
         forumTitle = document
           .getElementsByTagName("title")[0]
@@ -1057,7 +1058,7 @@ presence.on("UpdateData", () => {
           .replace("The Nexus Forums", "");
 
         if (forumTitle === "") forumTitle = "Home";
-        else if (forumTitle > 128)
+        else if (parseInt(forumTitle) > 128)
           forumTitle = `${forumTitle.substring(0, 125)}...`;
       } catch (error) {
         forumTitle = "Unknown page";
@@ -1066,24 +1067,25 @@ presence.on("UpdateData", () => {
       presenceData.details = "Browsing forums";
       presenceData.state = forumTitle;
       break;
-    default:
+    }
+    default: {
       // Domain: https://www.nexusmods.com/ (with fallback in place)
       // Get game title if available.
-      var gameTitle = null;
+      let gameTitle;
       try {
         gameTitle = document.getElementsByClassName("game-name")[0].textContent;
 
-        if (gameTitle > 128) gameTitle = `${gameTitle.substring(0, 125)}...`;
+        if (parseInt(gameTitle) > 128) gameTitle = `${gameTitle.substring(0, 125)}...`;
       } catch (error) {
         gameTitle = "Unknown game";
       }
 
       // Get page title if available.
-      var pageTitle = null;
+      let pageTitle: string;
       try {
         pageTitle = document.getElementsByTagName("H1")[0].textContent;
 
-        if (pageTitle > 128) pageTitle = `${pageTitle.substring(0, 125)}...`;
+        if (parseInt(pageTitle) > 128) pageTitle = `${pageTitle.substring(0, 125)}...`;
       } catch (error) {
         pageTitle = "Unknown page";
       }
@@ -1153,42 +1155,43 @@ presence.on("UpdateData", () => {
             presenceData.details = "Browsing about";
             break;
 
-          case "news":
+          case "news": {
             if (path.length > 1 && parseInt(path[1])) {
               presenceData.details = "Reading a news article";
               presenceData.state = pageTitle;
             } else presenceData.details = "Browsing news";
 
             break;
-
-          case "mods":
+          }
+          case "mods": {
             if (path.length > 1 && path[1] === "add") {
               presenceData.details = "Uploading a new mod";
               presenceData.smallImageKey = "writing";
             } else presenceData.details = "Browsing mods";
 
             break;
-
+          }
           case "media":
             presenceData.details = "Browsing media";
             break;
 
-          case "images":
+          case "images": {
             if (path.length > 1 && path[1] === "add") {
               presenceData.details = "Uploading a new image";
               presenceData.smallImageKey = "writing";
             } else presenceData.details = "Browsing images";
 
             break;
+          }
 
-          case "videos":
+          case "videos": {
             if (path.length > 1 && path[1] === "add") {
               presenceData.details = "Uploading a new video";
               presenceData.smallImageKey = "writing";
             } else presenceData.details = "Browsing videos";
 
             break;
-
+          }
           case "games":
             presenceData.details = "Browsing games";
             break;
@@ -1202,10 +1205,11 @@ presence.on("UpdateData", () => {
         presenceData.details = "Browsing home";
       }
       break;
+    }
   }
 
   // Set presence.
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

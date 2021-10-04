@@ -81,9 +81,9 @@ presence.on("UpdateData", async () => {
 
     const currentKanji = document.querySelector("#current-kanji");
     if (currentKanji !== null) {
-      const challenge = document
+      const [challenge] = document
         .querySelector("#challenge")
-        .textContent.match(/reading|meaning/)[0];
+        .textContent.match(/reading|meaning/);
       presenceData.state = `${
         challenge.charAt(0).toUpperCase() + challenge.slice(1)
       } of ${currentKanji.textContent}`;
@@ -103,8 +103,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing review results";
     const statsList = document.querySelectorAll("#summary-stats li");
     if (statsList !== null) {
-      const totalLi = statsList[0],
-        correctLi = statsList[1];
+      const [totalLi, correctLi] = statsList;
       if (totalLi !== null && correctLi !== null) {
         presenceData.state = `${correctLi.querySelector("p").textContent}/${
           totalLi.querySelector("p").textContent

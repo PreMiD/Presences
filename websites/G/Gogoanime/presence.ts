@@ -318,7 +318,7 @@ presence.on("UpdateData", async () => {
     }
     presence.setActivity(presenceData, !videoInfos.paused);
   } else {
-    presenceData.smallImageKey = state[1];
+    [, presenceData.smallImageKey] = state;
     presenceData.startTimestamp = new Date().getTime();
     presence.setActivity(presenceData);
   }

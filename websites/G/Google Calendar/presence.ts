@@ -32,9 +32,9 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.startsWith("/calendar/r/year")) {
       const datey = document.querySelector("head > title").textContent;
       presenceData.details = "Viewing the year schedule:";
-      presenceData.state = datey
+      [, presenceData.state] = datey
         .replace("Google Calendar - ", "")
-        .split(" ")[1];
+        .split(" ");
     } else if (document.location.pathname.startsWith("/calendar/r/agenda"))
       presenceData.details = "Browsing in the schedule";
     else if (document.location.pathname.startsWith("/calendar/r/customday")) {

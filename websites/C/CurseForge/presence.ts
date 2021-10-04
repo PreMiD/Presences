@@ -1,10 +1,11 @@
-let presence = new Presence({
-    clientId: "626536244670889985" // CLIENT ID FOR YOUR PRESENCE
+const presence = new Presence({
+    clientId: "626536244670889985"
   }),
-  user: any,
-  search: any,
-  title: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+
+let user: HTMLElement | string | Element,
+  search: HTMLElement,
+  title: string | Element | HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -20,24 +21,26 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > header > div.container.mx-auto.mt-auto.flex.justify-between > div:nth-child(1) > div > div:nth-child(1) > h2"
       );
-      if (title === null) {
+      if (!title) {
         title = document.querySelector(
           "body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > div > section > div.px-2.flex-1 > div > div.flex.flex-col.mb-4 > h2"
         );
         presenceData.details = `${game}, Viewing category:`;
-        presenceData.state = `${categoryText} - ${title.innerText.replace(
-          "All ",
-          ""
-        )}`;
+        presenceData.state = `${categoryText} - ${(
+          title as HTMLElement
+        ).innerText.replace("All ", "")}`;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = `${game}, Viewing ${categoryTextSingle}:`;
-        if (title.innerText.length > 128)
-          presenceData.state = `${title.innerText.substring(0, 125)}...`;
-        else presenceData.state = title.innerText;
+        if ((title as HTMLElement).innerText.length > 128) {
+          presenceData.state = `${(title as HTMLElement).innerText.substring(
+            0,
+            125
+          )}...`;
+        } else presenceData.state = (title as HTMLElement).innerText;
 
         delete presenceData.smallImageKey;
 
@@ -159,7 +162,7 @@ presence.on("UpdateData", async () => {
         "body > div.flex.flex-col.min-h-full.min-h-screen > main > section > div > div.text-base > div.username.text-xl"
       );
       presenceData.details = "Viewing user:";
-      presenceData.state = user.innerText;
+      presenceData.state = (user as HTMLElement).innerText;
 
       delete presenceData.smallImageKey;
 
@@ -204,7 +207,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector("#content > section > div > header > h2");
       if (title !== null) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = title.innerText;
+        presenceData.state = (title as HTMLElement).innerText;
 
         delete presenceData.smallImageKey;
 
@@ -218,9 +221,12 @@ presence.on("UpdateData", async () => {
           "#content > section > div > div > header > h2"
         );
         presenceData.details = "Forums, reading thread:";
-        if (title.innerText.length > 128)
-          presenceData.state = `${title.innerText.substring(0, 125)}...`;
-        else presenceData.state = title.innerText;
+        if ((title as HTMLElement).innerText.length > 128) {
+          presenceData.state = `${(title as HTMLElement).innerText.substring(
+            0,
+            125
+          )}...`;
+        } else presenceData.state = (title as HTMLElement).innerText;
 
         presenceData.smallImageKey = "reading";
         presence.setActivity(presenceData);
@@ -234,9 +240,9 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/search")) {
       search = document.querySelector("#field-search");
-      if (search.value.length > 1) {
+      if ((search as HTMLInputElement).value.length > 1) {
         presenceData.details = "Forums, Searching for:";
-        presenceData.state = search.value;
+        presenceData.state = (search as HTMLInputElement).value;
 
         presenceData.smallImageKey = "search";
 
@@ -286,8 +292,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/members")) {
       if (document.URL.includes("filter-user-sort=")) {
-        title = document.URL;
-        title = title.split("filter-user-sort=")[1].split("&")[0];
+        [title] = document.URL.split("filter-user-sort=")[1].split("&");
         switch (title) {
           case "1":
             presenceData.details = "Forums, Viewing list of";
@@ -339,7 +344,7 @@ presence.on("UpdateData", async () => {
           "#content > section > section > div.p-user-info > ul.p-user-details > li.username"
         );
         presenceData.details = "Forums, Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = (user as HTMLElement).innerText;
 
         delete presenceData.smallImageKey;
 
@@ -369,7 +374,7 @@ presence.on("UpdateData", async () => {
       "#content > section > div.featured-site-info-container > div > h2"
     );
     presenceData.details = "Viewing game:";
-    presenceData.state = title.innerText;
+    presenceData.state = (title as HTMLElement).innerText;
 
     delete presenceData.smallImageKey;
 

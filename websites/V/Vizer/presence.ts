@@ -13,8 +13,16 @@ let iFrameVideo: boolean,
   duration: number,
   playback: boolean;
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframeVideo.duration !== null ? true : false;
+interface IFrameData {
+  iframeVideo: {
+    iFrameVideo: boolean;
+    currTime: number;
+    dur: number | null;
+  };
+}
+
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
     ({ iFrameVideo } = data.iframeVideo);

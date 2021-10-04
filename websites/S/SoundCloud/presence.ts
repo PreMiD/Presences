@@ -175,7 +175,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("/charts/")) {
       data.details = "Browsing Charts...";
 
-      const [heading] = path.split("/").slice(-2)[0];
+      const [heading] = path.split("/").slice(-2);
       data.state =
         heading && !heading.includes("charts") && capitalize(heading);
     } else if (path.includes("/you/")) {

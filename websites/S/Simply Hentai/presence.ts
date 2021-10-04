@@ -1,9 +1,7 @@
-
 const presence = new Presence({
-    clientId: "608043966285348944"
-  });
-  let
-  lastPlaybackState = null,
+  clientId: "608043966285348944"
+});
+let lastPlaybackState = null,
   reading,
   browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -20,11 +18,10 @@ presence.on("UpdateData", async () => {
 
   if (reading) {
     [a, b] = document.querySelectorAll(".margin-bottom-12 h1 a");
-    
 
-    const page = document
-        .querySelector(".page-jump.text-center")
-        .?value,
+    const page = (
+        document.querySelector(".page-jump.text-center") as HTMLInputElement
+      ).value,
       presenceData: PresenceData = {
         details: a.innerText,
         state: `${b.innerText} [Page: ${page}]`,
@@ -32,8 +29,6 @@ presence.on("UpdateData", async () => {
       };
 
     presenceData.startTimestamp = browsingStamp;
-
-    
   } else {
     const presenceData: PresenceData = {
       largeImageKey: "lg"
@@ -44,13 +39,10 @@ presence.on("UpdateData", async () => {
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
-
-    
   }
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
-
 });

@@ -1,7 +1,7 @@
-let presence = new Presence({
-    clientId: "634299110782140416"
-  }),
-  pageTitle;
+const presence = new Presence({
+  clientId: "634299110782140416"
+});
+let pageTitle;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {

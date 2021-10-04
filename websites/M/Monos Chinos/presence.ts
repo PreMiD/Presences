@@ -25,20 +25,6 @@ const presence = new Presence({
 let video: VideoContext = null,
   lastVideoOption = 1;
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("iFrameData", async (context) => {
   video = context;
 });
@@ -129,7 +115,7 @@ presence.on("UpdateData", async () => {
 
     if (!video || (video && video.ended)) return presence.setActivity(data);
 
-    const [startTimestamp, endTimestamp] = getTimestamps(
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
       Math.floor(video.elapsed),
       Math.floor(video.duration)
     );

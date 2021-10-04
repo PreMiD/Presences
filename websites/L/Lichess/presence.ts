@@ -1,7 +1,9 @@
 const presence = new Presence({
     clientId: "632924426131996702"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/": "Home",
     "/learn": "Learn to Play Chess",
     "/practice": "Practice",
@@ -30,7 +32,7 @@ presence.on("UpdateData", async () => {
     status = document.querySelector(
       "#main-wrap > main > aside > div > section.status"
     ) as HTMLElement,
-    data: { [k: string]: any } = {
+    data: PresenceData = {
       largeImageKey: "lc-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     };

@@ -11,35 +11,6 @@ const presence = new Presence({
 //Language list can be found here: https://api.premid.app/v2/langFile/list
 
 /**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
-/**
- * Send PreMiD error message in console of browser
- * @param message the message that you want to be sent in console
- */
-function PMD_error(message: string): void {
-  console.log(
-    `%cPreMiD%cERROR%c ${message}`,
-    `${genericStyle}border-radius: 25px 0 0 25px; background: #596cae;`,
-    `${genericStyle}border-radius: 0 25px 25px 0; background: #ff5050;`,
-    "color: unset;"
-  );
-}
-
-/**
  * Get Translation
  * @param stringName Name of string you want to get
  */
@@ -158,7 +129,7 @@ function getTranslation(stringName: string): string {
           return "Viewing Movie/TV Show/VOD:";
       }
     default:
-      PMD_error(
+      presence.error(
         "Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.premid.app)"
       );
       return "Unknown stringName";
@@ -182,7 +153,7 @@ presence.on("UpdateData", async () => {
         { currentTime } = video,
         { duration } = video,
         { paused } = video,
-        timestamps = getTimestamps(
+        timestamps = presence.getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );
@@ -190,8 +161,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
       user =
         document.querySelector(
           "#plex > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a"

@@ -10,11 +10,8 @@ let artist: string, title: string, playing: boolean;
 presence.on(
   "iFrameData",
   (data: { playing: boolean; artist: string; title: string }) => {
-    playing = data.playing;
-    if (playing) {
-      artist = data.artist;
-      title = data.title;
-    }
+    ({ playing } = data);
+    if (playing) ({ artist, title } = data);
   }
 );
 

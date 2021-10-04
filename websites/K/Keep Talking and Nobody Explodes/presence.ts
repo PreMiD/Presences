@@ -95,11 +95,11 @@ presence.on("UpdateData", async () => {
         case "how-to-play-gear-vr.html":
         case "how-to-play-oculus-go.html":
         case "how-to-play-oculus-quest.html":
-        case "how-to-play-daydream.html":
+        case "how-to-play-daydream.html": {
           browsingStamp = 0;
+          let platform: string;
 
           presenceData.details = "How to Play";
-          var platform = null;
           switch (path[0].replace("how-to-play-", "").replace(".html", "")) {
             case "pc":
               platform = "PC/Mac/Linux";
@@ -139,6 +139,7 @@ presence.on("UpdateData", async () => {
           }
           if (platform) presenceData.state = `on ${platform}`;
           break;
+        }
         //Other Languages
         case "other-languages.html":
           browsingStamp = 0;

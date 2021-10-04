@@ -66,12 +66,12 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).paused;
         delete presenceData.startTimestamp;
       } else {
-        const timestamps = getTimestamps(
+        const [startTimestamp, endTimestamp] = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        presenceData.startTimestamp = startTimestamp;
+        presenceData.endTimestamp = endTimestamp;
         presenceData.smallImageKey = "playing";
         presenceData.smallImageText = (await strings).playing;
       }
@@ -82,12 +82,12 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).paused;
         delete presenceData.startTimestamp;
       } else {
-        const timestamps = getTimestamps(
+        const [startTimestamp, endTimestamp] = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        presenceData.startTimestamp = startTimestamp;
+        presenceData.endTimestamp = endTimestamp;
         presenceData.smallImageKey = "playing";
         presenceData.smallImageText = (await strings).playing;
       }
@@ -111,11 +111,13 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/search/") &&
     document.querySelector(".av-refine-bar-summaries") !== null
   ) {
-    presenceData.details = "Searching for:";
-    presenceData.state = document
+    const [state] = document
       .querySelector(".av-refine-bar-summaries")
       .textContent.split(/["„]/)[1]
-      .split(/[”"]/)[0];
+      .split(/[”"]/);
+
+    presenceData.details = "Searching for:";
+    presenceData.state = state;
     presenceData.smallImageKey = "search";
   }
 

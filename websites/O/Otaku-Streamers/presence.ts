@@ -4,16 +4,7 @@ const presence = new Presence({
   path = window.location.pathname,
   browsingStamp = Math.floor(Date.now() / 1000);
 let title, video, timestamps, chapter, blog;
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(
-      Math.floor(startTime / 1000) - videoTime + videoDuration
-    );
-  return [Math.floor(startTime / 1000), endTime];
-}
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
@@ -44,7 +35,7 @@ presence.on("UpdateData", async () => {
       ) as HTMLTextAreaElement;
       chapter = document.querySelector("#video_episode") as HTMLTextAreaElement;
       if (video) {
-        timestamps = getTimestamps(video.currentTime, video.duration);
+        timestamps = presence.getTimestamps(video.currentTime, video.duration);
         if (video.paused && title && video.currentTime !== 0) {
           presenceData.details = "Paused";
           presenceData.smallImageKey = "pause";
@@ -56,8 +47,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Playing";
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = "Playing";
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
           presenceData.state = `${title.innerText} ${chapter.innerText}`;
         } else if (title) {
           presenceData.startTimestamp = browsingStamp;
@@ -143,13 +133,13 @@ presence.on("UpdateData", async () => {
         "div > h2 > span"
       ) as HTMLTextAreaElement;
       if (video && title && chapter) {
-        timestamps = getTimestamps(video.currentTime, video.duration);
+        timestamps = presence.getTimestamps(video.currentTime, video.duration);
         if (video.currentTime !== 0) {
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Playing";
           if (!video.paused) {
-            presenceData.startTimestamp = timestamps[0];
-            presenceData.endTimestamp = timestamps[1];
+            [presenceData.startTimestamp, presenceData.endTimestamp] =
+              timestamps;
             presenceData.details = "Playing";
             presenceData.state = `${title.innerText} ${chapter.innerText}`;
           } else {

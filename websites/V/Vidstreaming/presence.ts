@@ -10,7 +10,7 @@ let iFrameVideo: boolean,
   duration: number,
   paused: boolean,
   video: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
@@ -28,7 +28,7 @@ let iFrameVideo: boolean,
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
@@ -36,12 +36,11 @@ presence.on(
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
       video = data;
     }
   }
@@ -57,13 +56,9 @@ presence.on("UpdateData", async () => {
 
   if (elapsed) browsingStamp = Math.floor(Date.now() / 1000);
 
-  const timestamps = presence.getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    ),
-    presenceData: PresenceData = {
-      largeImageKey: "logo"
-    };
+  const presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
   if (info) {
     if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
@@ -86,9 +81,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname === "/ongoing-series") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the ongoing series.";
-    }
-    //Used for the video files (Needs some work done here)
-    else if (document.location.pathname.includes("/videos/")) {
+    } else if (document.location.pathname.includes("/videos/")) {
+      //Used for the video files (Needs some work done here)
       title = document.querySelector(
         "body > #wrapper_bg > #wrapper > #main_bg > div > div > div.video-info-left > h1"
       );
@@ -129,8 +123,12 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageText = paused
                 ? (await strings).pause
                 : (await strings).play;
-              presenceData.startTimestamp = timestamps[0];
-              presenceData.endTimestamp = timestamps[1];
+
+              [presenceData.startTimestamp, presenceData.endTimestamp] =
+                presence.getTimestamps(
+                  Math.floor(currentTime),
+                  Math.floor(duration)
+                );
             }
           } else if (paused) {
             delete presenceData.startTimestamp;
@@ -171,15 +169,15 @@ presence.on("UpdateData", async () => {
         .join(" ");
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
-    } //If it can't get the page it will output an error
-    else {
+    } else {
+      //If it can't get the page it will output an error
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Error 01: Can't Read Page";
       presenceData.smallImageKey = "search";
       presence.error("Can't read page.");
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     //This will fire if you do not set presence details
     presence.setTrayTitle();
     presence.setActivity();

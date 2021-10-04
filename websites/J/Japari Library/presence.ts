@@ -1,10 +1,10 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "670669014363668481"
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
-  title: any,
   actionURL = new URL(document.location.href),
   title2URL = new URL(document.location.href);
+let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "on Gunivers Workspace";
     } else if (window.location.pathname.startsWith("/projects/")) {
       presenceData.details = "Reading a project:";
-      presenceData.state = document.title.split(" - ")[1];
+      [, presenceData.state] = document.title.split(" - ");
       if (button) {
         presenceData.buttons = [
           {

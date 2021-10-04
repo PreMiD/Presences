@@ -11,7 +11,7 @@ let iFrameVideo: boolean,
   duration: number,
   paused: boolean,
   video: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
@@ -26,7 +26,7 @@ let iFrameVideo: boolean,
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
@@ -35,12 +35,11 @@ presence.on(
     };
   }) => {
     video = data;
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
     }
   }
 );
@@ -89,9 +88,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname === "/recommended-series") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing recommened series";
-    }
-    //Used for the video files (Needs some work done here)
-    else if (document.location.pathname.includes("/videos/")) {
+      //Used for the video files (Needs some work done here)
+    } else if (document.location.pathname.includes("/videos/")) {
       title = document.querySelector(
         "#main_bg > div:nth-child(5) > div > div.video-info-left > h1"
       );
@@ -110,8 +108,8 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageText = paused
                 ? (await strings).pause
                 : (await strings).play;
-              presenceData.startTimestamp = timestamps[0];
-              presenceData.endTimestamp = timestamps[1];
+              [presenceData.startTimestamp, presenceData.endTimestamp] =
+                timestamps;
             }
           } else if (paused) {
             delete presenceData.startTimestamp;
@@ -154,8 +152,8 @@ presence.on("UpdateData", async () => {
       );
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
-    } //If it can't get the page it will output an error
-    else {
+    } else {
+      //If it can't get the page it will output an error
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Error 01: Can't Read Page";
       presenceData.smallImageKey = "search";

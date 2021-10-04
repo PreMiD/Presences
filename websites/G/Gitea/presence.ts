@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
           .querySelector(".ui.header")
           .textContent.replace(/\s*(?=(shaare))/gm, "")
           .replace(/(?<=(shaare))\s*/gm, ""),
-        orgName = document.location.pathname.split("/")[1];
+        [, orgName] = document.location.pathname.split("/");
       if (displayName === orgName)
         presenceData.details = `Viewing Organization: ${orgName}`;
       else

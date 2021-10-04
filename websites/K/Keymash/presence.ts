@@ -6,8 +6,7 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    path = document.location.pathname.split("/")[1],
-    query = document.location.pathname.split("/")[2];
+    [, path, query] = document.location.pathname.split("/");
 
   switch (path) {
     case "":

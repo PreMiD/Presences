@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "634816982843129857"
   }),
-  strings: any = presence.getStrings({
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
@@ -17,20 +17,6 @@ const presence = new Presence({
     "/kayit-ol": "Kayıt Ol",
     "/iletisim": "İletişim"
   };
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
@@ -101,11 +87,11 @@ presence.on("UpdateData", async () => {
       state: title.textContent
     });
   } else if (title && title.textContent !== "" && video) {
-    const timestamps = getTimestamps(
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      data: { [k: string]: any } = {
+      data: { [k: string]: string | number } = {
         largeImageKey: "fm-logo",
         details: "Bir film izliyor:",
         state: title.textContent,
@@ -115,10 +101,9 @@ presence.on("UpdateData", async () => {
           : (await strings).play
       };
 
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
-    }
+    data.startTimestamp = startTimestamp;
+    data.endTimestamp = endTimestamp;
+
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;

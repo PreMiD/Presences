@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const urlParams = new URLSearchParams(window.location.search),
     path = window.location.pathname;
-  let video, live;
+  let video: HTMLVideoElement, live;
   const presenceData: PresenceData = {
     largeImageKey: "roosterteeth",
     details: "Browsing Rooster Teeth",
@@ -66,10 +66,12 @@ presence.on("UpdateData", () => {
     for (const x in document.getElementsByClassName("schedule-day")) {
       const position = document
         .getElementsByClassName("schedule-day")
+        // eslint-disable-next-line no-unexpected-multiline
         [x].getBoundingClientRect();
       if (position.top < window.innerHeight && position.bottom >= 0) {
         presenceData.state = document
           .getElementsByClassName("schedule-day")
+          // eslint-disable-next-line no-unexpected-multiline
           [x].querySelector(".schedule-day__heading")
           .textContent.toLowerCase();
         presenceData.state =
@@ -83,10 +85,10 @@ presence.on("UpdateData", () => {
     presenceData.state = document.querySelector(".featured-title").textContent;
   } else if (path.includes("/channel/")) {
     presenceData.details = "Viewing Channel:";
-    presenceData.state = document
+    [, presenceData.state] = document
       .querySelector(".carousel-container")
       .querySelector(".carousel-title")
-      .textContent.split("RECENT EPISODES FROM ")[1];
+      .textContent.split("RECENT EPISODES FROM ");
   } else if (path.includes("/series")) presenceData.details = "Browsing Series";
   else if (path.includes("/episodes")) {
     if (urlParams.get("channel_id")) {

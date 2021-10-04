@@ -2,10 +2,10 @@ const presence = new Presence({
   clientId: "691406198091677737"
 });
 
-function parseQueryString(queryString?: string): any {
+function parseQueryString(queryString?: string) {
   if (!queryString) queryString = window.location.search.substring(1);
 
-  const params = {},
+  const params: {[queryKey: string]: string} = {},
     queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
     const indexPair = indexQuery.split("="),
@@ -103,9 +103,11 @@ presence.on("UpdateData", async () => {
     if (!route[2])
       presenceData.details = document.querySelector("h1.f00-light").textContent;
     else {
-      const title = document.querySelector("title").textContent.split(" | ");
-      presenceData.details = title[1];
-      presenceData.state = title[0];
+      const [title, TitleOne] = document
+        .querySelector("title")
+        .textContent.split(" | ");
+      presenceData.details = title;
+      presenceData.state = TitleOne;
     }
   } else if (document.location.pathname.includes("/releases/")) {
     presenceData.details = document.querySelector(
@@ -123,11 +125,11 @@ presence.on("UpdateData", async () => {
   } else
     presenceData.details = document.querySelector("h1.f00-light").textContent;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
-    if (presenceData.state === null) presenceData.state = "Navigating...";
+    if (!presenceData.state) presenceData.state = "Navigating...";
     presence.setActivity(presenceData);
   }
 });
