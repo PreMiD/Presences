@@ -11,8 +11,8 @@ const stripPlatziProfileFlags = (url: string) => {
       .replace("https://static.platzi.com/media/flags/", "")
       .replace(".png", "");
   },
-  setPresenceFromEvent = (learning_path: string) => {
-    activeCategory = learning_path;
+  setPresenceFromEvent = (learningPath: string) => {
+    activeCategory = learningPath;
   };
 
 presence.on("UpdateData", async () => {
@@ -231,7 +231,7 @@ presence.on("UpdateData", async () => {
     ) {
       timestamps = presence.getTimestampsfromMedia(video);
 
-      presenceData.endTimestamp = timestamps[1];
+      [, presenceData.endTimestamp] = timestamps;
     }
   } else if (pathname.includes("/cursos/")) {
     //NEW UI, SAME PRESENCE /CLASES/
@@ -264,9 +264,9 @@ presence.on("UpdateData", async () => {
       if (activeCategory !== "") presenceData.details = activeCategory;
 
       if (!categoriesEventListener) {
-        learningPaths.forEach((learning_path) => {
-          learning_path.addEventListener("mouseover", () =>
-            setPresenceFromEvent(learning_path.querySelector("h2").textContent)
+        learningPaths.forEach((learningPath) => {
+          learningPath.addEventListener("mouseover", () =>
+            setPresenceFromEvent(learningPath.querySelector("h2").textContent)
           );
         });
         categoriesEventListener = true;
@@ -309,9 +309,9 @@ presence.on("UpdateData", async () => {
           Score: number = parseFloat(
             document.querySelector(".ExamResults-score-grade").textContent
           ),
-          Questions: string = document
+          [, Questions] = document
             .querySelector(".ExamResults-score-answers")
-            .textContent.split("/")[1];
+            .textContent.split("/");
 
         presenceData.details = CourseName.textContent;
         presenceData.state = `Examen ${

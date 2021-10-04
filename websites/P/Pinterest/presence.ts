@@ -1,10 +1,10 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "629428243061145640"
   }),
-  user: any,
-  search: any,
-  title: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+let user: Element | HTMLElement | string,
+  search: Element | HTMLElement | string,
+  title: Element | HTMLElement | string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
       "#HeaderContent > div > div > div > div > div > div > div > div > div > div > input"
     );
     presenceData.details = "Searching for:";
-    presenceData.state = search.value;
+    presenceData.state = (search as HTMLInputElement).value;
 
     presenceData.smallImageKey = "search";
 
@@ -39,13 +39,13 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
     );
-    if (user === null) {
+    if (!user) {
       user = document.querySelector(
         "body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
       );
     }
     presenceData.details = "Viewing user:";
-    presenceData.state = user.innerText;
+    presenceData.state = (user as HTMLElement).innerText;
 
     delete presenceData.smallImageKey;
 
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
       );
     }
     presenceData.details = "Viewing user:";
-    presenceData.state = user.innerText;
+    presenceData.state = (user as HTMLElement).innerText;
 
     delete presenceData.smallImageKey;
 
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
       );
     }
     presenceData.details = "Viewing board:";
-    presenceData.state = title.innerText;
+    presenceData.state = (title as HTMLElement).innerText;
 
     delete presenceData.smallImageKey;
 
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
   } else {
     title = document.querySelector("head > title");
     presenceData.details = "Viewing:";
-    presenceData.state = title.innerText;
+    presenceData.state = (title as HTMLElement).innerText;
 
     delete presenceData.smallImageKey;
 

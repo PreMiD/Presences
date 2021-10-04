@@ -345,8 +345,7 @@ presence.on("UpdateData", async () => {
         //* Is a a normal video
         if (showVideo) {
           const timestamps = presence.getTimestampsfromMedia(video);
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused
             ? (await strings).pause
@@ -448,8 +447,7 @@ presence.on("UpdateData", async () => {
       //* Has video
       if (showVideo) {
         const timestamps = presence.getTimestampsfromMedia(video);
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
           ? (await strings).pause

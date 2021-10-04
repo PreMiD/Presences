@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
     } else {
-        //If it can't get the page it will output an error
+      //If it can't get the page it will output an error
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Error 01: Can't Read Page";
       presenceData.smallImageKey = "search";

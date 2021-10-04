@@ -1,20 +1,9 @@
 /* Global variables */
 const presence = new Presence({
-  clientId: "650569876993343529"
-});
-let profile: any,
-  title: any,
-  browsingStamp = Math.floor(Date.now() / 1000),
-  genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
-function PMD_error(message): void {
-  console.log(
-    `%cPreMiD%cERROR%c ${message}`,
-    `${genericStyle}border-radius: 25px 0 0 25px; background: #596cae;`,
-    `${genericStyle}border-radius: 0 25px 25px 0; background: #ff5050;`,
-    "color: unset;"
-  );
-}
+    clientId: "650569876993343529"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let profile: HTMLElement, title: HTMLElement;
 
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
@@ -93,7 +82,7 @@ presence.on("UpdateData", async () => {
   }
   /* Unknown site location */
   if (presenceData.details === null) {
-    PMD_error("Unable to determine location.");
+    presence.error("Unable to determine location.");
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

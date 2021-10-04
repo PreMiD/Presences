@@ -85,7 +85,7 @@ presence.on("UpdateData", () => {
     presenceData.state = document.querySelector(".featured-title").textContent;
   } else if (path.includes("/channel/")) {
     presenceData.details = "Viewing Channel:";
-    [,presenceData.state] = document
+    [, presenceData.state] = document
       .querySelector(".carousel-container")
       .querySelector(".carousel-title")
       .textContent.split("RECENT EPISODES FROM ");

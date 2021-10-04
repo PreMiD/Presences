@@ -73,8 +73,7 @@ presence.on("UpdateData", async () => {
             video.currentTime,
             video.duration
           );
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
           if (video.paused) {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;

@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "699318388270301284"
 });
 
-let title: any;
+let title: HTMLVideoElement;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {

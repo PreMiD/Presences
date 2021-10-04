@@ -221,7 +221,7 @@ presence.on("UpdateData", async () => {
         path.startsWith("/user/") &&
         /\d+\/?$/.test(path.replace("/user/", ""))
       ) {
-         // User pages follow format of "/user/UID"
+        // User pages follow format of "/user/UID"
 
         const usernameElement = document.querySelector("main h2");
 
@@ -247,7 +247,7 @@ presence.on("UpdateData", async () => {
           return displayPresence(presenceData);
         }
       } else if (/\b[a-zA-Z0-9]{8}\b/.test(path) || invisiblePath) {
-              // Image path IDs are alphanumeric and 8 characters in length, or uses invisible characters
+        // Image path IDs are alphanumeric and 8 characters in length, or uses invisible characters
 
         if (invisiblePath) {
           let id;
