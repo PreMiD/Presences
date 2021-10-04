@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/v/")) {
-      const video = document.querySelector(".id-playback > video"),
+      const video: HTMLVideoElement = document.querySelector(".id-playback > video"),
         { currentTime, duration, paused } = video;
 
       if (document.location.pathname.includes("/programa/")) {

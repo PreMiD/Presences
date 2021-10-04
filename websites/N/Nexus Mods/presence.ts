@@ -934,13 +934,13 @@ function isValidGame(name: string): boolean {
  * @returns {object} The updated instance of presence data.
  */
 function getCategorizedPresenceData(
-  path,
-  presenceData,
-  pageTitle,
-  gameTitle,
-  typeUrl,
-  typeSingle,
-  typePlural
+  path:string[],
+  presenceData: PresenceData,
+  pageTitle: string,
+  gameTitle: string,
+  typeUrl: string,
+  typeSingle: string,
+  typePlural: string
 ): PresenceData {
   if (
     path.length > 3 &&
@@ -1039,7 +1039,7 @@ presence.on("UpdateData", () => {
       try {
         wikiTitle = document.getElementById("firstHeading").innerText;
 
-        if (wikiTitle > 128) wikiTitle = `${wikiTitle.substring(0, 125)}...`;
+        if (parseInt(wikiTitle) > 128) wikiTitle = `${wikiTitle.substring(0, 125)}...`;
       } catch (error) {
         wikiTitle = "Unknown page";
       }
@@ -1058,7 +1058,7 @@ presence.on("UpdateData", () => {
           .replace("The Nexus Forums", "");
 
         if (forumTitle === "") forumTitle = "Home";
-        else if (forumTitle > 128)
+        else if (parseInt(forumTitle) > 128)
           forumTitle = `${forumTitle.substring(0, 125)}...`;
       } catch (error) {
         forumTitle = "Unknown page";
@@ -1075,17 +1075,17 @@ presence.on("UpdateData", () => {
       try {
         gameTitle = document.getElementsByClassName("game-name")[0].textContent;
 
-        if (gameTitle > 128) gameTitle = `${gameTitle.substring(0, 125)}...`;
+        if (parseInt(gameTitle) > 128) gameTitle = `${gameTitle.substring(0, 125)}...`;
       } catch (error) {
         gameTitle = "Unknown game";
       }
 
       // Get page title if available.
-      let pageTitle;
+      let pageTitle: string;
       try {
         pageTitle = document.getElementsByTagName("H1")[0].textContent;
 
-        if (pageTitle > 128) pageTitle = `${pageTitle.substring(0, 125)}...`;
+        if (parseInt(pageTitle) > 128) pageTitle = `${pageTitle.substring(0, 125)}...`;
       } catch (error) {
         pageTitle = "Unknown page";
       }
@@ -1209,7 +1209,7 @@ presence.on("UpdateData", () => {
   }
 
   // Set presence.
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

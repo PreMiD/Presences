@@ -119,7 +119,6 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
             ".description__stamp a.description__stamp__source"
           );
-          data.buttons = [];
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -175,7 +174,6 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           data.state = `Browsing ${activeTabTitle} from ${userName}`;
           data.details = `${title}${isLiked ? " (❤)" : ""}`;
           data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
-          data.buttons = [];
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -222,7 +220,6 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             activeMedia.parentElement.querySelector<HTMLAnchorElement>(
               '.coub__info .media-block__item > a[type="embedPopup"]'
             );
-          data.buttons = [];
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -271,7 +268,6 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
             ".description__stamp a.description__stamp__source"
           );
-          data.buttons = [];
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -351,11 +347,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             largeImageKey: "logo",
             state: localizedStrings.browsing
           });
-        } else {
-          if (data.details) presence.setActivity(data);
-          if (data.buttons && data.buttons.length === 0) delete data.buttons;
-          else data.buttons = data.buttons?.slice(0, 2);
-        }
+        } else if (data.details) presence.setActivity(data);
         return data;
       });
     });

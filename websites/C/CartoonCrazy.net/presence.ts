@@ -7,7 +7,7 @@ const presence = new Presence({
   });
 
 let title,
-  iFrameVideo: boolean,
+  iFrameVideo: HTMLVideoElement,
   currentTime: number,
   duration: number,
   paused: boolean,
@@ -24,16 +24,16 @@ presence.on(
   "iFrameData",
   (data: {
     iFrameVideo: {
-      iFrameVideo: boolean;
+      iFrameVideo: HTMLVideoElement;
       currTime: number;
       dur: number;
-      paused;
+      paused: boolean;
     };
   }) => {
     playback = data.iFrameVideo.dur !== null ? true : false;
 
     if (playback) {
-      ({ iFrameVideo, paused } = data.iFrameVideo.iFrameVideo);
+      ({ iFrameVideo, paused } = data.iFrameVideo);
       currentTime = data.iFrameVideo.currTime;
       duration = data.iFrameVideo.dur;
     }
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname.includes("/watch/")) {
-    if (iFrameVideo === true && !isNaN(duration)) {
+    if (iFrameVideo && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause

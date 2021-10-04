@@ -63,7 +63,7 @@ presence.on("UpdateData", async function () {
     }
   } else if (
     urlpath[1] >= "1900" &&
-    urlpath[1] <= new Date().getFullYear() &&
+    parseInt(urlpath[1]) <= new Date().getFullYear() &&
     urlpath[2] >= "01" &&
     urlpath[2] <= "12" &&
     urlpath[3] >= "01" &&

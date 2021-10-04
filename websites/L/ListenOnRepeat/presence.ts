@@ -12,7 +12,7 @@ let timestamps: number[],
   duration: number,
   paused: boolean,
   playback: boolean,
-  lastPlaybackState = null,
+  lastPlaybackState: boolean,
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("iFrameData", (data) => {
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

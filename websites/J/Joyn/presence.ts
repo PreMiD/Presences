@@ -45,7 +45,7 @@ presence.on("UpdateData", async function () {
       showButtons: await presence.getSetting("showButtons")
     },
     urlpath = window.location.pathname.split("/"),
-    video = document.querySelector("div video");
+    video: HTMLVideoElement = document.querySelector("div video");
 
   if (!oldLang || oldLang !== newLang) {
     oldLang = newLang;
@@ -58,7 +58,9 @@ presence.on("UpdateData", async function () {
   ) {
     if (document.querySelector(".lk71lm-0.htJLsh")) {
       presenceData.details = lang.searching;
-      presenceData.state = document.querySelector(".search-input").value;
+      presenceData.state = (
+        document.querySelector(".search-input") as HTMLElement
+      ).textContent;
     } else if (
       (urlpath[1] === "" || document.location.pathname.includes("/#home")) &&
       urlpath[2] !== ""
@@ -67,7 +69,8 @@ presence.on("UpdateData", async function () {
     else if (urlpath[1] === "compilation") {
       const compilation = document.querySelector(".artLogo");
       presenceData.details = "Viewing Compilation:";
-      if (compilation) presenceData.state = compilation.alt;
+      if (compilation)
+        presenceData.state = (compilation as HTMLImageElement).alt;
       if (!compilation)
         presenceData.state = document.querySelector(".hXdaOG").textContent;
 
@@ -82,7 +85,7 @@ presence.on("UpdateData", async function () {
     } else if (urlpath[1] === "filme") {
       const film = document.querySelector(".artLogo");
       presenceData.details = lang.viewMovie;
-      if (film) presenceData.state = film.alt;
+      if (film) presenceData.state = (film as HTMLImageElement).alt;
       if (!film)
         presenceData.state = document.querySelector(".hXdaOG").textContent;
 
@@ -97,7 +100,7 @@ presence.on("UpdateData", async function () {
     } else if (urlpath[1] === "serien") {
       const serie = document.querySelector(".artLogo");
       presenceData.details = "Viewing Series:";
-      if (serie) presenceData.state = serie.alt;
+      if (serie) presenceData.state = (serie as HTMLImageElement).alt;
       if (!serie)
         presenceData.state = document.querySelector(".hXdaOG").textContent;
 
