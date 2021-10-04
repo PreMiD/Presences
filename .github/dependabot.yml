@@ -11,7 +11,7 @@ updates:
       prefix: "🔼"
       prefix-development: "🔼"
     labels:
-      - "dependencies"
+      - "🔼 Dependencies"
     open-pull-requests-limit: 15
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -24,5 +24,5 @@ updates:
       prefix: "🔼"
       prefix-development: "🔼"
     labels:
-      - "dependencies"
+      - "🔼 Dependencies"
     open-pull-requests-limit: 15
