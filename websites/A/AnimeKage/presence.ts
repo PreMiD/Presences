@@ -21,8 +21,17 @@ if (lastPlaybackState !== playback) {
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframeVideo.duration !== null ? true : false;
+interface IFrameData {
+  iframeVideo: {
+    dur: number
+    iFrameVideo: boolean
+    paused: boolean
+    currTime: number
+  }
+}
+
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
     ({ iFrameVideo, paused } = data.iframeVideo);
@@ -32,7 +41,7 @@ presence.on("iFrameData", (data) => {
 });
 
 presence.on("UpdateData", async () => {
-  const timestamps = getTimestamps(
+  const timestamps = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     ),

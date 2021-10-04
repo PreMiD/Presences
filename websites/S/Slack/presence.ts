@@ -6,7 +6,8 @@ let group: HTMLElement,
   typing: HTMLElement,
   chat: HTMLElement,
   user: HTMLElement,
-  search: string;
+  search: HTMLElement,
+  path: string[];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -66,9 +67,9 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "slackhq.com" &&
     document.location.pathname.includes("/search/")
   ) {
-    search = document.location.pathname.split("/", 7);
+    path = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = `Searching for: ${search[2]}`;
+    presenceData.state = `Searching for: ${path[2]}`;
 
     presenceData.smallImageKey = "search";
 
@@ -77,9 +78,9 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "slackhq.com" &&
     document.location.pathname.includes("/role/")
   ) {
-    search = document.location.pathname.split("/", 7);
+    path = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = `Searching with role: ${search[2]}`;
+    presenceData.state = `Searching with role: ${path[2]}`;
 
     presenceData.smallImageKey = "search";
 
@@ -88,9 +89,9 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "slackhq.com" &&
     document.location.pathname.includes("/tags/")
   ) {
-    search = document.location.pathname.split("/", 7);
+    path = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = `Searching with tag: ${search[2]}`;
+    presenceData.state = `Searching with tag: ${path[2]}`;
 
     presenceData.smallImageKey = "search";
 
@@ -99,9 +100,9 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "slackhq.com" &&
     document.location.pathname.includes("/categories/")
   ) {
-    search = document.location.pathname.split("/", 7);
+    path = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = `Searching with category: ${search[2]}`;
+    presenceData.state = `Searching with category: ${path[2]}`;
 
     presenceData.smallImageKey = "search";
 
@@ -229,8 +230,8 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/resources")
   ) {
-    group = document.location.pathname.split("/", 9);
-    if (group[4] !== null) {
+    path = document.location.pathname.split("/", 9);
+    if (path[4] !== null) {
       group = document.querySelector("#main > div:nth-child(1) > h1");
       presenceData.details = "Slack";
       presenceData.state = `Reading article: ${group.innerText}`;
@@ -246,8 +247,8 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/slack-tips")
   ) {
-    group = document.location.pathname.split("/", 9);
-    if (group[4] !== null) {
+    path = document.location.pathname.split("/", 9);
+    if (path[4] !== null) {
       group = document.querySelector("#main > section > div > header > h1");
       presenceData.details = "Slack";
       presenceData.state = `Reading article: ${group.innerText}`;
@@ -263,8 +264,8 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/solutions")
   ) {
-    group = document.location.pathname.split("/", 9);
-    if (group[4] !== null) {
+    path = document.location.pathname.split("/", 9);
+    if (path[4] !== null) {
       group = document.querySelector(
         "#main > section.c-billboard > div > header > h1"
       );

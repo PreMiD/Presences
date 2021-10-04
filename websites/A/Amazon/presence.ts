@@ -3,10 +3,10 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 let item: HTMLElement,
-  dropdown: HTMLElement,
-  dropdownfinal: HTMLElement,
-  dropdownplus1: HTMLElement,
-  dropdowninnertext: HTMLElement,
+  dropdown: string,
+  dropdownplus1: number,
+  dropdownfinal: string,
+  dropdowninnertext: string,
   split: string[];
 
 presence.on("UpdateData", async () => {
@@ -46,9 +46,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing profile:"; //general.viewProfile
     presenceData.state = item.innerText;
   } else if (document.location.pathname.includes("/store")) {
-    item = document.title.split(":");
     presenceData.details = "Viewing store:"; //amazon.store
-    [, presenceData.state] = item;
+    [, presenceData.state] = document.title.split(":");
   } else if (document.location.pathname.includes("/history"))
     presenceData.details = "Viewing their history";
   //amazon.history
@@ -115,7 +114,8 @@ presence.on("UpdateData", async () => {
         .getAttribute("data-nav-selected");
       dropdownplus1 = +dropdown + 1;
       dropdownfinal = `#searchDropdownBox > option:nth-child(${dropdownplus1})`;
-      dropdowninnertext = document.querySelector(dropdownfinal).innerText;
+      dropdowninnertext =
+        document.querySelector<HTMLElement>(dropdownfinal).innerText;
       split = document.location.pathname.split("/", 3);
       if (dropdown !== "0" || split[1] !== "") {
         presenceData.details = "Browsing category:"; //general.viewCategory

@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "618569989842010122"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let item: HTMLElement, typing: HTMLElement;
+let item, typing: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/item/")) {
       item = document.querySelector(
         "#root > div > div.product-main > div > div.product-info > div.product-title"
-      );
+      ) as HTMLElement;
 
       presenceData.details = "Viewing product:";
       if (item.innerText.length > 128)
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/store/")) {
       item = document.querySelector(
         "#hd > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(1) > span"
-      );
+      ) as HTMLElement;
       presenceData.details = "Viewing store:";
       presenceData.state = item.innerText;
 
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/category/")) {
       item = document.querySelector(
         "#root > div > div > div.main-content > div.right-menu > div > div.top-container > div.nav-breadcrumb > div > div > span > span > span"
-      );
+      ) as HTMLElement;
 
       presenceData.details = "Viewing category:";
       presenceData.state = item.innerText;
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/wholesale") &&
       document.location.search.includes("SearchText")
     ) {
-      item = document.querySelector("#search-key");
+      item = document.querySelector("#search-key") as HTMLInputElement;
 
       presenceData.details = "Searching for:";
       presenceData.state = item.value;
@@ -90,11 +90,10 @@ presence.on("UpdateData", async () => {
     ) {
       item = document.querySelector(
         "#root > div > div > div > span > div.message-view > div.message-view-title > div.message-view-title__content"
-      );
-      typing = document.querySelector("#buyer_msg_send_btn");
+      ) as HTMLElement;
+      typing = document.querySelector("#buyer_msg_send_btn") as HTMLButtonElement;
       if (typing) {
-        typing = document.querySelector("#buyer_msg_send_btn").className;
-        if (typing.baseVal.includes("icon-plane disable")) {
+        if (typing.className.includes("icon-plane disable")) {
           presenceData.details = "Reading dms with:";
           presenceData.state = item.innerText;
         } else {

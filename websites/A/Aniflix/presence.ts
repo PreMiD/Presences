@@ -23,13 +23,20 @@ if (lastPlaybackState !== playback) {
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
+interface IFrameData {
+  iframeVideo: {
+    dur: number
+    iFrameVideo: boolean
+    paused: boolean
+    currTime: number
+  }
+}
+
 if (
-  document.querySelector(
-    "#view-wrapper > div:nth-child(2) > div > div.episode"
-  ) !== null
+  document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode")
 ) {
-  presence.on("iFrameData", (data) => {
-    playback = data.iframeVideo.duration !== null ? true : false;
+  presence.on("iFrameData", (data: IFrameData) => {
+    playback = data.iframeVideo.dur !== null ? true : false;
 
     if (playback) {
       ({ iFrameVideo, paused } = data.iframeVideo);
@@ -52,7 +59,7 @@ presence.on("UpdateData", async () => {
       endTimestamp
     };
 
-  search = document.querySelector("#searchbar > div > input[type=text]").value;
+  search = document.querySelector<HTMLInputElement>("#searchbar > div > input[type=text]").value;
   if (
     document.querySelector(
       "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > h1"

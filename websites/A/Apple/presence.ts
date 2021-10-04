@@ -71,8 +71,7 @@ presence.on("UpdateData", async () => {
     includesProduct = products.find((e) => urlpath.includes(e)),
     includesService = services.find((e) => urlpath.includes(e)),
     presenceData: PresenceData = {
-      largeImageKey: logoArr[setting.logo] || "logo",
-      buttons: []
+      largeImageKey: logoArr[setting.logo] || "logo"
     };
 
   function getPSName() {
@@ -792,8 +791,6 @@ presence.on("UpdateData", async () => {
     !window.location.href.startsWith("https://developer.apple.com/videos/play")
   )
     presenceData.startTimestamp = time;
-
-  if (presenceData.buttons.length === 0) delete presenceData.buttons;
 
   if (presenceData.details === null) {
     presence.setTrayTitle();

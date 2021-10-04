@@ -4,7 +4,7 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data = {
+  const data: PresenceData = {
     largeImageKey: "animesoul",
     startTimestamp: browsingStamp,
     details: "Viewing home page"
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
   )
     data.details = "Viewing home page";
   else if (document.location.pathname.includes("/user"))
-    data.details = `Viewing ${document.titl}`;
+    data.details = `Viewing ${document.title}`;
   else if (document.location.pathname.includes("/dashboard"))
     data.details = "Viewing the Dashboard";
   else if (document.location.pathname.includes("/premium"))

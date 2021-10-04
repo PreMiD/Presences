@@ -31,12 +31,14 @@ presence.on("UpdateData", async () => {
     if (description === null || description.trim() === title)
       description = "Movie";
 
-    const [, endTimestamp] = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+    let [, endTimestamp] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      ),
+      currentState: string,
+      smallImageKey: string,
+      smallImageText: string;
 
-    let currentState: string, smallImageKey: string, smallImageText: string;
     if (description.includes("ON NOW")) {
       currentState = "Live TV";
       endTimestamp = 0;
