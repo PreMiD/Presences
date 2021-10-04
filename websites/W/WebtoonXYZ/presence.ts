@@ -41,12 +41,9 @@ presence.on("UpdateData", async () => {
     data.state = "Completed webtoons";
     data.smallImageKey = "search";
   } else if (pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0) {
-    const title = document
-        .querySelector("#chapter-heading")
-        .textContent.split("-")[0],
-      chapter = document
-        .querySelector("#chapter-heading")
-        .textContent.split("-")[1];
+    const [title, chapter] = document
+      .querySelector("#chapter-heading")
+      .textContent.split("-");
     let progress =
       (document.documentElement.scrollTop /
         (document.querySelector(".reading-content").scrollHeight -

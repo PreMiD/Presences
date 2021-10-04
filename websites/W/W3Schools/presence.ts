@@ -14,8 +14,7 @@ const presence = new Presence({
 let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", () => {
-  let details,
-    state;
+  let details, state;
 
   if (window.location.href !== oldUrl) {
     oldUrl = window.location.href;

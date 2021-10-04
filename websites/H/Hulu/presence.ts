@@ -13,11 +13,7 @@ function capitalize(text: string): string {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-let elapsed: number,
-  oldUrl: string,
-  header,
-  title,
-  item;
+let elapsed: number, oldUrl: string, header, title, item;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null,

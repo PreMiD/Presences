@@ -16,20 +16,6 @@ const presence = new Presence({
     "/profile": "Profilim"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     video = document.querySelector("video") as HTMLVideoElement,
@@ -90,7 +76,7 @@ presence.on("UpdateData", async () => {
       IMDb = document.querySelector(
         "body > div.wrapper > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(1) > button > span"
       ),
-      timestamps = getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
@@ -107,9 +93,9 @@ presence.on("UpdateData", async () => {
           : (await strings).play
       };
 
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+    if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
+      data.startTimestamp = startTimestamp;
+      data.endTimestamp = endTimestamp;
     }
     if (video.paused) {
       delete data.startTimestamp;
@@ -133,7 +119,7 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "body > div.wrapper > div.fw.playBotAll > div > div > div.playTopInfo > ul > li.desc"
         ),
-      [startTimestamp, endTimestamp] = getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
