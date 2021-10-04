@@ -18,7 +18,9 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/" || !document.location.pathname)
     presenceData.state = "Front Page";
   else
-    presenceData.state = document.getElementById("page-title").textContent.trim();
+    presenceData.state = document
+      .getElementById("page-title")
+      .textContent.trim();
 
   presence.setActivity(presenceData);
 });
