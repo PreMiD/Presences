@@ -563,7 +563,7 @@ presence.on("UpdateData", async () => {
         const specialnumber = document.querySelector(
             "#episode-comment > span"
           ).textContent,
-          timestamps = getTimestamps(
+          timestamps = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
           );
@@ -608,7 +608,7 @@ presence.on("UpdateData", async () => {
         if (previewname.includes("(ITA)"))
           [previewname] = previewname.split(" (ITA)");
 
-        const timestamps = getTimestamps(
+        const timestamps = presence.getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );

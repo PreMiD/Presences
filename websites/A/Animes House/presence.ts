@@ -3,13 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-function getTimestamps(videoTime, videoDuration): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-let currentTime, duration, paused, played, timestamps;
+let currentTime: number, duration: number, paused: boolean, played: boolean, timestamps;
 const pesquisaText: HTMLInputElement = document.querySelector("#s"),
   paginaText: HTMLElement = document.querySelector(
     "#contenedor > div.module > div.content > div.pagination > span:nth-child(1)"
@@ -33,7 +27,14 @@ const pesquisaText: HTMLInputElement = document.querySelector("#s"),
     "#contenedor > div > nav > ul > li > a.selected"
   );
 
-presence.on("iFrameData", (data) => {
+interface IFrameData {
+  duration: number;
+  played: boolean;
+  paused: boolean;
+  currentTime: number;
+}
+
+presence.on("iFrameData", (data: IFrameData) => {
   ({ currentTime, duration, paused, played } = data);
 });
 
@@ -71,7 +72,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "";
     if (played) {
       !paused
-        ? ((timestamps = getTimestamps(
+        ? ((timestamps = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
           )),
@@ -92,7 +93,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = filmeNomeText.innerText;
       if (played) {
         !paused
-          ? ((timestamps = getTimestamps(
+          ? ((timestamps = presence.getTimestamps(
               Math.floor(currentTime),
               Math.floor(duration)
             )),

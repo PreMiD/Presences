@@ -5,10 +5,10 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  truncateBefore = function (str, pattern): string {
+  truncateBefore = function (str: string, pattern: string): string {
     return str.slice(str.indexOf(pattern) + pattern.length);
   },
-  truncateAfter = function (str, pattern): string {
+  truncateAfter = function (str: string, pattern: string): string {
     return str.slice(0, str.indexOf(pattern));
   },
   getSeconds = function (minutes: number, seconds: number): number {
@@ -20,16 +20,16 @@ const presence = new Presence({
   pattern = ":";
 
 let musicTitle: HTMLElement,
-  minutesDuration: HTMLElement,
+  minutesDuration: string,
   minutesDurationString: HTMLElement,
-  secondsDuration: HTMLElement,
+  secondsDuration: string,
   secondsDurationString: HTMLElement,
-  currentMinutes: HTMLElement,
+  currentMinutes: string,
   currentMinutesString: HTMLElement,
-  currentSeconds: HTMLElement,
+  currentSeconds: string,
   currentSecondsString: HTMLElement,
-  duration: HTMLElement,
-  currentTime: HTMLElement,
+  duration: number,
+  currentTime: number,
   play: HTMLElement,
   currentUser: HTMLElement,
   albumName: HTMLElement,
@@ -87,9 +87,9 @@ presence.on("UpdateData", async () => {
 
     secondsDuration = truncateBefore(secondsDurationString.innerText, pattern);
 
-    currentTime = getSeconds(currentMinutes, currentSeconds);
+    currentTime = getSeconds(parseInt(currentMinutes), parseInt(currentSeconds));
 
-    duration = getSeconds(minutesDuration, secondsDuration);
+    duration = getSeconds(parseInt(minutesDuration), parseInt(secondsDuration));
 
     if (!play.style.display || currentTime === 0) playback = false;
     else playback = true;

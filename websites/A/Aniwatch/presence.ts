@@ -16,17 +16,17 @@ let title: string, //title of the webpage
   anime: string, //name of anime
   episode: string, //episode number
   code: string, //room code for Watch2Gether
-  season: string, //array of season where anime air
-  types: string, //array of types of tabs when available
+  season: string[], //array of season where anime air
+  types: string[], //array of types of tabs when available
   type: string, //the current tab selected
-  parameters: string, //array of parameters for current page
+  parameters: string[], //array of parameters for current page
   page: string, //page number when available
   username: string, //username for viewing profiles
   video: HTMLVideoElement, //the video player
   currentTime: number, //how far along the video is
   paused: boolean, //is the video paused?
   duration: number, //how long the video is
-  timestamps: [number, number];
+  timestamps: number[];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
           ); //video player
 
           ({ currentTime, duration, paused } = video);
-          timestamps = getTimestamps(
+          timestamps = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
           );
@@ -166,7 +166,7 @@ presence.on("UpdateData", async () => {
       if (siteArray.length >= 3) {
         //if array is equal to or greater than 3 then the user has customized the year/season
         season = ["Winter", "Spring", "Summer", "Fall"]; //list of possible seasons
-        presenceData.state = `${season[siteArray[2]]} ${siteArray[3]}`; //siteArray[2] = season, siteArray[3] = year
+        presenceData.state = `${season[parseInt(siteArray[2])]} ${siteArray[3]}`; //siteArray[2] = season, siteArray[3] = year
       }
     } else if (path.startsWith("/airing")) {
       //if we're on the airing page
@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
       type = parameters[0].slice(2); //grabbing type from parameters
       page = parameters[1].slice(2); //grabbing page from parameters (im using slice to remove t= and p=)
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = `Browsing ${types[type]}`;
+      presenceData.details = `Browsing ${types[parseInt(type)]}`;
       presenceData.state = `Page ${page}`;
     } else if (path.startsWith("/requests")) {
       //if we're on the requests page
@@ -206,12 +206,12 @@ presence.on("UpdateData", async () => {
       type = fullPath.slice(13); //tab we are currently on
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = `Looking at ${username} profile`;
-      if (types[type] === undefined) {
+      if (types[parseInt(type)] === undefined) {
         //if there aren't any parameters in the url, then we are on the default profile tab
         presenceData.state = "Overview";
       } else {
         //if we're not on the default tab
-        presenceData.state = `${types[type]}`; //what tab are we on
+        presenceData.state = `${types[parseInt(type)]}`; //what tab are we on
       }
     } else if (
       path.startsWith("/notification") ||

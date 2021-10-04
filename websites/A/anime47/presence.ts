@@ -7,7 +7,7 @@ const presence = new Presence({
   });
 
 let browsingStamp = Math.floor(Date.now() / 1000),
-  title: HTMLElement,
+  title: string,
   iFrameVideo: boolean,
   currentTime: number,
   duration: number,
@@ -20,8 +20,17 @@ if (lastPlaybackState !== playback) {
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframeVideo.duration !== null ? true : false;
+interface IFrameData {
+  iframeVideo: {
+    dur: number
+    iFrameVideo: boolean
+    paused: boolean
+    currTime: number
+  }
+}
+
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
     ({ iFrameVideo, paused } = data.iframeVideo);

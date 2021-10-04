@@ -8,11 +8,17 @@ const presence = new Presence({
   }),
   startTimestamp = Math.floor(Date.now() / 1000);
 
-let video: HTMLVideoElement;
+let video: IFrameData;
 
-presence.on("iFrameData", async (msg) => {
-  if (!msg) return;
-  video = msg;
+interface IFrameData {
+    duration: number
+    paused: boolean
+    currentTime: number
+}
+
+presence.on("iFrameData", async (data: IFrameData) => {
+  if (!data) return;
+  video = data;
 });
 
 presence.on("UpdateData", async () => {

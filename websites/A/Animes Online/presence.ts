@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/videos/")) {
       const video = document.querySelector(
           "#playersdbeta > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-        ),
+        ) as HTMLVideoElement,
         title = document.querySelector(
           "#wrapper > div.container > div:nth-child(1) > div:nth-child(2) > h1"
         ).textContent,

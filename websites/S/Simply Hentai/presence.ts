@@ -11,23 +11,22 @@ if (lastPlaybackState !== reading) {
 }
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {};
+
   reading =
     document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
 
-  let a: HTMLAnchorElement, b: HTMLAnchorElement;
-
   if (reading) {
-    [a, b] = document.querySelectorAll(".margin-bottom-12 h1 a");
-
-    const page = (
+    const [a, b] = document.querySelectorAll<HTMLElement>(
+        ".margin-bottom-12 h1 a"
+      ),
+      page = (
         document.querySelector(".page-jump.text-center") as HTMLInputElement
-      ).value,
-      presenceData: PresenceData = {
-        details: a.innerText,
-        state: `${b.innerText} [Page: ${page}]`,
-        largeImageKey: "lg"
-      };
+      ).value;
 
+    presenceData.details = a.innerText;
+    presenceData.state = `${b.innerText} [Page: ${page}]`;
+    presenceData.largeImageKey = "lg";
     presenceData.startTimestamp = browsingStamp;
   } else {
     const presenceData: PresenceData = {
@@ -36,9 +35,6 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
   }
 
   if (presenceData.details === null) {

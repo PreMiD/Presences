@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: "653156362548805652" }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/docs": "Documention",
     "/login": "Login Page"
   };

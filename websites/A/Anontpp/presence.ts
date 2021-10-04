@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "708314580304003124"
   }),
-  strings = presence.getStrings({
+  strings: Promise<{ [key: string]: string }> = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browse: "presence.activity.browsing",
