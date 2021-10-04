@@ -22,9 +22,7 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let elapsed: number,
-  oldUrl: string,
-  title;
+let elapsed: number, oldUrl: string, title;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null,

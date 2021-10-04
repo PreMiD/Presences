@@ -21,12 +21,12 @@ if (lastPlaybackState !== playback) {
 }
 
 presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+  playback = data.iframeVideo.duration !== null ? true : false;
 
   if (playback) {
     ({ iFrameVideo, paused } = data.iframe_video);
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
+    currentTime = data.iframeVideo.currTime;
+    duration = data.iframeVideo.dur;
   }
 });
 

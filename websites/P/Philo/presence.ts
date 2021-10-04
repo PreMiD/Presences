@@ -21,8 +21,7 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let elapsed: number,
-  oldUrl: string;
+let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
