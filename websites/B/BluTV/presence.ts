@@ -15,9 +15,25 @@ function seriesName(name: string): string {
 
 const startTimestamp = Math.floor(Date.now() / 1000);
 
-let data: any, video: HTMLVideoElement;
+let data: Data | null, video: HTMLVideoElement;
 
-presence.on("iFrameData", async (msg) => {
+interface Data {
+  video: {
+    paused: boolean;
+    duration: number;
+    currentTime: number;
+  };
+  series?: {
+    name: string;
+    ep: string;
+    season: string;
+  };
+  movie?: {
+    name: string;
+  };
+}
+
+presence.on("iFrameData", async (msg: Data | null) => {
   if (!msg) return;
   ({ video } = msg);
   data = msg;

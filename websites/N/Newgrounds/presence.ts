@@ -106,8 +106,8 @@ presence.on("UpdateData", async () => {
               document.querySelector("#audio-listen-progress").textContent,
               document.querySelector("#audio-listen-duration").textContent
             );
-            presenceData.startTimestamp = timestamps[0];
-            presenceData.endTimestamp = timestamps[1];
+            [presenceData.startTimestamp, presenceData.endTimestamp] =
+              timestamps;
           }
           presenceData.smallImageKey = "audio_play";
           presenceData.smallImageText = "Audio - Playing";
@@ -167,8 +167,8 @@ presence.on("UpdateData", async () => {
                     document.querySelector('[data-value="total-time"]')
                       .textContent
                   );
-                  presenceData.startTimestamp = timestamps[0];
-                  presenceData.endTimestamp = timestamps[1];
+                  [presenceData.startTimestamp, presenceData.endTimestamp] =
+                    timestamps;
                 }
                 presenceData.smallImageKey = "movies_play";
                 presenceData.smallImageText = "Movies - Playing";
@@ -208,9 +208,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "forum";
       presenceData.smallImageText = "Forums";
       if (document.location.pathname.startsWith("/bbs/search/author/")) {
-        const userName = document
+        const [, userName] = document
           .querySelector(".pod-head > .search")
-          .textContent.split('"')[1];
+          .textContent.split('"');
         presenceData.details = "Viewing a user's posts";
         presenceData.smallImageKey = "user";
         presenceData.smallImageText = "User Profile";

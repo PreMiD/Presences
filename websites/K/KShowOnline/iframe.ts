@@ -6,7 +6,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -25,7 +25,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -44,7 +44,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -57,7 +57,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -75,7 +75,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -88,7 +88,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -101,7 +101,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -114,7 +114,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -133,7 +133,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -146,7 +146,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -161,7 +161,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -180,7 +180,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -199,7 +199,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -212,7 +212,7 @@ iframe.on("UpdateData", async () => {
 
     if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,

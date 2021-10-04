@@ -39,9 +39,9 @@ presence.on("UpdateData", () => {
     presenceData.details = `Looking at topic ${
       document.getElementsByClassName("Topics_topicTitle-3OfJU")[0].textContent
     }`;
-    presenceData.state = document
+    [, , , presenceData.state] = document
       .getElementsByClassName("Topics_topicDescription-2CNwF")[0]
-      .textContent.split("\n")[3];
+      .textContent.split("\n");
   } else if (window.location.pathname.includes("/tv/")) {
     presenceData.details = `Watching ${document
       .getElementsByClassName("collection-details")[0]
@@ -86,13 +86,13 @@ presence.on("UpdateData", () => {
       presenceData.state = document.title;
     } else {
       presenceData.details = "Looking at page";
-      presenceData.state = document
+      [presenceData.state] = document
         .getElementsByClassName("title-header")[0]
-        .textContent.split("\n")[0];
+        .textContent.split("\n");
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

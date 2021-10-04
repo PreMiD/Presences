@@ -9,30 +9,13 @@ const presence = new Presence({
   });
 let prev: string, elapsed: number, path: string, gender: string;
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "chb"
-  };
+      largeImageKey: "chb"
+    },
+    video: HTMLVideoElement = document.querySelector("video[id$='_html5_api']");
 
   path = document.location.pathname;
-
-  const video: HTMLVideoElement = document.querySelector(
-    "video[id$='_html5_api']"
-  );
 
   if (
     path.includes("/b/") &&
@@ -46,7 +29,7 @@ presence.on("UpdateData", async () => {
     }
 
     data.details = "Broadcasting as";
-    data.state = path.split("/")[2];
+    [, , data.state] = path.split("/");
     data.smallImageKey = "live";
     data.smallImageText = (await strings).live;
     data.startTimestamp = elapsed;
@@ -195,7 +178,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "search";
       data.smallImageText = (await strings).browsing;
     } else if (video && path.includes("/photo_videos/photo/")) {
-      const timestamps = getTimestamps(
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -206,8 +189,6 @@ presence.on("UpdateData", async () => {
       data.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
 
       if (video.paused) {
         delete data.startTimestamp;
@@ -226,7 +207,7 @@ presence.on("UpdateData", async () => {
     }
 
     data.startTimestamp = elapsed;
-    data.details = path.split("/")[1];
+    [, data.details] = path.split("/");
 
     if (video && !video.paused) {
       data.smallImageKey = "live";

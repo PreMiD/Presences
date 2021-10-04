@@ -5,18 +5,8 @@ const presence = new Presence({
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-  });
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const startTimestamp = Math.floor(Date.now() / 1000);
+  }),
+  startTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement;
 
@@ -45,9 +35,8 @@ presence.on("UpdateData", async () => {
       title.textContent.split(" ").slice(1).join(" "),
       ""
     );
-  }
-  //Home page part
-  else {
+  } else {
+    //Home page part
     data.details = (await strings).browsing;
     data.startTimestamp = startTimestamp;
   }
@@ -59,12 +48,10 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const timestamps = getTimestamps(
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
     }
   }
 

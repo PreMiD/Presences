@@ -7,15 +7,6 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "lm"
@@ -23,7 +14,7 @@ presence.on("UpdateData", async () => {
     video: HTMLVideoElement = document.querySelector("video");
 
   if (video !== null && !isNaN(video.duration)) {
-    const timestamps = getTimestamps(
+    const timestamps = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -44,12 +35,11 @@ presence.on("UpdateData", async () => {
         ".watch-heading > h1 > span"
       ).textContent;
     }
-    (data.smallImageKey = video.paused ? "pause" : "play"),
-      (data.smallImageText = video.paused
-        ? (await strings).pause
-        : (await strings).play),
-      (data.startTimestamp = timestamps[0]),
-      (data.endTimestamp = timestamps[1]);
+    data.smallImageKey = video.paused ? "pause" : "play";
+    data.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
     if (video.paused) {
       delete data.startTimestamp;

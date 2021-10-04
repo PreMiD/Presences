@@ -11,6 +11,7 @@ interface QuizletData {
     studyableType?: string;
   };
   searchLayer?: {
+    // eslint-disable-next-line camelcase
     search_term: string;
   };
 }

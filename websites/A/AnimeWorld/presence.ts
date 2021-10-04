@@ -19,7 +19,7 @@ presence.on(
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
     if (playback) {
       ({ iFrameVideo, paused, duration } = data.iframeVideo);
       currentTime = data.iframeVideo.currTime;

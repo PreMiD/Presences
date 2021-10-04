@@ -6,20 +6,6 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "gfycat"
@@ -76,16 +62,14 @@ presence.on("UpdateData", async () => {
 
     if (player) {
       const title = document.querySelector(".gif-info .title").textContent,
-        views = document.querySelector(".gif-info .gif-views").textContent,
-        timestamps = getTimestamps(
-          Math.floor(player.currentTime),
-          Math.floor(player.duration)
-        );
+        views = document.querySelector(".gif-info .gif-views").textContent;
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
+        Math.floor(player.currentTime),
+        Math.floor(player.duration)
+      );
 
       data.details = title;
       data.state = views;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
       data.smallImageKey = player.paused ? "pause" : "play";
       data.smallImageText = player.paused
         ? (await strings).pause

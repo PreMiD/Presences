@@ -1,7 +1,9 @@
 const presence = new Presence({
     clientId: "707123244397887548"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/chat": "Mesjalar",
     "/about-letgo": "Letgo Hakkında",
     "/careers": "Insan Kaynakları",
@@ -85,7 +87,8 @@ presence.on("UpdateData", async () => {
       document.querySelector(
         "#app > main > div.sc-qPlga.fsImDA > div > div > div.sc-fzqARJ.kWvyBH.sc-fzoYkl.kUkghz.ProfileInfostyles__ContainerBox-is6738-1.cYAoIp > div.sc-fzqARJ.kWvyBH.sc-fzoYkl.cpfWDL > div.sc-fzqARJ.kWvyBH.sc-fzoYkl.eTDXj.ProfileInfostyles__UserDataWrapper-is6738-2.jeNnEm > div.sc-fzplWN.dMbFMh > h1"
       );
-    if (user && user.textContent !== "") var username = user.textContent.trim();
+    let username;
+    if (user && user.textContent !== "") username = user.textContent.trim();
     presence.setActivity({
       largeImageKey: "letgo-logob",
       details: "Bir kullanıcı profili inceliyor:",

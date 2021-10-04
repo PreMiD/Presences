@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
     ];
 
     video = document.querySelector("video");
-    if (video !== null) {
+    if (video) {
       played = video.currentTime !== 0;
       timeEnd = video.duration;
       ({ currentTime } = video);
@@ -167,5 +167,5 @@ presence.on("UpdateData", async () => {
     data.details = `Sucht nach ${genre2.textContent}`;
   else data.details = "Befindet sich auf einer Unbekannte Seite";
 
-  if (data.details !== null && data.state !== null) presence.setActivity(data);
+  if (data.details && data.state) presence.setActivity(data);
 });

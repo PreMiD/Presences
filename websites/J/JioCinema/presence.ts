@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
     },
     url = window.location.href;
   if (url.includes("/watch/")) {
-    const video: HTMLVideoElement = document.getElementsByTagName("video")[0],
+    const [video] = document.getElementsByTagName("video") as HTMLVideoElement,
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -40,8 +40,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
     if (url.includes("/tv/")) {
       const episode = (
         document.querySelectorAll("div.now-playing") as NodeListOf<HTMLElement>

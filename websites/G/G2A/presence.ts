@@ -1,9 +1,8 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "633805202868273153"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  user: any,
-  title: any;
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: string | HTMLElement | Element, title: string | HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -18,14 +17,17 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing their cart";
     else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching for:";
-      presenceData.state = title.innerText
+      presenceData.state = (title as HTMLElement).innerText
         .replace('" - G2A.COM', "")
         .replace('Search results - "', "");
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/category")) {
       presenceData.details = "Viewing category:";
       title = document.querySelector("head > title");
-      presenceData.state = title.innerText.replace(" - G2A.COM", "");
+      presenceData.state = (title as HTMLElement).innerText.replace(
+        " - G2A.COM",
+        ""
+      );
     } else if (
       document.querySelector(
         "#app > div > div.content > div > article > header > div > div > h1 > span"
@@ -35,13 +37,13 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#app > div > div.content > div > article > header > div > div > h1 > span"
       );
-      presenceData.state = title.innerText;
+      presenceData.state = (title as HTMLElement).innerText;
     } else if (document.location.pathname.includes("/user")) {
       presenceData.details = "Viewing user:";
       user = document.querySelector(
         "#app > div > div.content > div > div > div > section > div.user-info > button > strong"
       );
-      presenceData.state = user.innerText;
+      presenceData.state = (user as HTMLElement).innerText;
     } else if (document.location.pathname.includes("/goldmine"))
       presenceData.details = "Using the goldmine";
     else if (document.location.pathname.includes("/news/")) {
@@ -49,10 +51,10 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > div.single-article.single-article--feature.default-template > div.review-top > div.review-top__wrapper > div > header > h1"
       );
-      if (title === null) presenceData.details = "Browsing news section";
+      if (!title) presenceData.details = "Browsing news section";
       else {
         presenceData.details = "News - Reading:";
-        presenceData.state = title.innerText;
+        presenceData.state = (title as HTMLElement).innerText;
         presenceData.smallImageKey = "reading";
       }
     }
@@ -69,7 +71,10 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "G2A Plus - Viewing:";
     title = document.querySelector("head > title");
-    presenceData.state = title.innerText.replace(" - G2A Plus", "");
+    presenceData.state = (title as HTMLElement).innerText.replace(
+      " - G2A Plus",
+      ""
+    );
   } else if (document.location.hostname === "loot.g2a.com") {
     presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname === "/")
@@ -77,11 +82,14 @@ presence.on("UpdateData", async () => {
     else {
       presenceData.details = "G2A Loot - Viewing:";
       title = document.querySelector("head > title");
-      presenceData.state = title.innerText.replace(" - G2A Loot", "");
+      presenceData.state = (title as HTMLElement).innerText.replace(
+        " - G2A Loot",
+        ""
+      );
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

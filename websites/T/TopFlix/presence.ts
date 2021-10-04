@@ -5,35 +5,28 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     search: "presence.activity.searching"
-  });
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  playback: boolean;
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+presence.on(
+  "iFrameData",
+  (data: {
+    iframeVideo: {
+      duration: number;
+      iFrameVideo?: boolean;
+      currentTime?: number;
+    };
+  }) => {
+    playback = data.iframeVideo.duration ? true : false;
 
-let iFrameVideo: boolean, currentTime: any, duration: any, playback: boolean;
-
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
-
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
+    if (playback) ({ iFrameVideo, currentTime, duration } = data.iframeVideo);
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -63,12 +56,12 @@ presence.on("UpdateData", async () => {
           presenceData.state = season.textContent;
 
           if (iFrameVideo === true && !isNaN(duration)) {
-            const timestamps = getTimestamps(
+            const [startTimestamp, endTimestamp] = presence.getTimestamps(
               Math.floor(currentTime),
               Math.floor(duration)
             );
-            presenceData.startTimestamp = timestamps[0];
-            presenceData.endTimestamp = timestamps[1];
+            presenceData.startTimestamp = startTimestamp;
+            presenceData.endTimestamp = endTimestamp;
             presenceData.smallImageKey = "play";
             presenceData.smallImageText = (await strings).play;
           } else {
@@ -97,12 +90,12 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${year.textContent} - ${rating}`;
 
         if (iFrameVideo === true && !isNaN(duration)) {
-          const timestamps = getTimestamps(
+          const [startTimestamp, endTimestamp] = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
           );
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          presenceData.startTimestamp = startTimestamp;
+          presenceData.endTimestamp = endTimestamp;
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = (await strings).play;
         } else {

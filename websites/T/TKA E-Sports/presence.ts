@@ -21,10 +21,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing TKA's streams";
   else if (document.location.pathname.includes("/partner"))
     presenceData.details = "Viewing TKA's partners";
-  else if (document.location.pathname.includes("/headmanagement")) {
-    presenceData.details = "Reading about TKA's";
-    presenceData.state = "management team";
-  } else if (document.location.pathname.includes("/datenschutz")) {
+  else if (document.location.pathname.includes("/datenschutz")) {
     presenceData.details = "Reading TKA's";
     presenceData.state = "privacy policy";
   } else if (document.location.pathname.includes("/impressum"))

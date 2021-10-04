@@ -9,21 +9,6 @@ presence.on(
     (stream = data)
 );
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const path: string = document.location.pathname,
     ayrac: string[] = path.split("/"),
@@ -107,7 +92,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     } else {
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(stream?.currentTime),
         Math.floor(stream?.duration)
       );
@@ -123,8 +108,7 @@ presence.on("UpdateData", async () => {
           }/${document.location.pathname.split("/")[2]}`
         }
       ];
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
     }
   }
 

@@ -207,9 +207,10 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = (await strings).play;
 
-          const timestamps = presence.getTimestampsfromMedia(video);
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          const [startTimestamp, endTimestamp] =
+            presence.getTimestampsfromMedia(video);
+          presenceData.startTimestamp = startTimestamp;
+          presenceData.endTimestamp = endTimestamp;
 
           if (buttons) {
             presenceData.buttons = [
@@ -665,15 +666,14 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).brandWatch;
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = (await strings).play;
-        const timestamps = presence.getTimestamps(
-          presence.timestampFromFormat(
-            document.querySelector(".c-controls__time.plyr__time--current")
-              .textContent
-          ),
-          presence.timestampFromFormat("01:30")
-        );
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(
+            presence.timestampFromFormat(
+              document.querySelector(".c-controls__time.plyr__time--current")
+                .textContent
+            ),
+            presence.timestampFromFormat("01:30")
+          );
       } else if (path === "/") presenceData.details = (await strings).brand;
 
       if (privacy) {

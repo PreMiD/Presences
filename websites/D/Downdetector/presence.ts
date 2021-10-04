@@ -1,6 +1,7 @@
 const presence = new Presence({
-  clientId: "656574682916585473"
-});
+    clientId: "656574682916585473"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 function decodeReq(entity: Element): string {
   const txt = document.createElement("textarea");
@@ -8,7 +9,6 @@ function decodeReq(entity: Element): string {
   return txt.value;
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
 let title;
 
 presence.on("UpdateData", () => {
@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname.startsWith("/search/")) {
       presenceData.details = "Searching for:";
-      const item = document.location.href.split("?q=")[1];
+      const [, item] = document.location.href.split("?q=");
       presenceData.state = item;
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/archive/")) {
@@ -37,7 +37,7 @@ presence.on("UpdateData", () => {
       presenceData.state = decodeReq(title);
     } else if (document.location.pathname.includes("/map/")) {
       presenceData.details = "Viewing outage map for:";
-      title = document.title.split("outage")[0];
+      [title] = document.title.split("outage");
       presenceData.state = title;
     } else if (document.location.pathname.includes("/status/")) {
       presenceData.details = "Viewing a status for:";

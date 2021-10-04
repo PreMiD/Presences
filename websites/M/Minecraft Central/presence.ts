@@ -1,9 +1,8 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "693097839424831489"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  user: any,
-  thread: any;
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement | Element, thread: HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -26,7 +25,7 @@ presence.on("UpdateData", async () => {
       thread = document.querySelector(".titleBar > h1");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the thread:";
-      presenceData.state = `"${thread.innerText}"`;
+      presenceData.state = `"${(thread as HTMLElement).innerText}"`;
     } else if (document.location.pathname.includes("/announcements/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
@@ -283,7 +282,7 @@ presence.on("UpdateData", async () => {
       user = document.querySelector(".mainText > h1");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
-      presenceData.state = `${user.innerText}'s profile page`;
+      presenceData.state = `${(user as HTMLElement).innerText}'s profile page`;
     } else if (document.location.pathname.includes("/search/search")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
@@ -359,7 +358,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

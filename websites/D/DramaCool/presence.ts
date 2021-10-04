@@ -32,12 +32,12 @@ let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("iFrameData", (data: Data) => {
-  ShowData.playback = !isNaN(data.iframe_video.duration) ? true : false;
+  ShowData.playback = !isNaN(data.iframeVideo.duration) ? true : false;
 
   if (ShowData.playback) {
-    ShowData.duration = data.iframe_video.duration;
-    ShowData.paused = data.iframe_video.paused;
-    ShowData.currentTime = data.iframe_video.currentTime;
+    ShowData.duration = data.iframeVideo.duration;
+    ShowData.paused = data.iframeVideo.paused;
+    ShowData.currentTime = data.iframeVideo.currentTime;
   }
 });
 
@@ -106,8 +106,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = ShowData.title;
       presenceData.state = `${(await strings).episode} ${ShowData.ep}`;
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       presenceData.buttons = [
         {
@@ -156,7 +155,7 @@ presence.on("UpdateData", async () => {
 });
 
 interface Data {
-  iframe_video: {
+  iframeVideo: {
     currentTime: number;
     paused: boolean;
     duration: number;

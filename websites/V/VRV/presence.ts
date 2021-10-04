@@ -15,11 +15,11 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   playback;
 
 presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+  playback = data.iframeVideo.duration !== null ? true : false;
 
   if (playback) {
     ({ iFrameVideo, currentTime, duration, paused } =
-      data.iframe_video.iFrameVideo);
+      data.iframeVideo.iFrameVideo);
   }
 
   if (lastPlaybackState !== playback) {

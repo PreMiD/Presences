@@ -47,23 +47,23 @@ presence.on("UpdateData", async () => {
   } else {
     const playlists = document.querySelector(".playlists-queue-wrapper"),
       breadcrumb = document.querySelector(".pane-content > .breadcrumb > ol"),
-      breadcrumb_last = document.querySelector(
+      breadcrumbLast = document.querySelector(
         ".pane-content > .breadcrumb > ol > li:last-child > span"
       ),
       difficulty = document.querySelector("a.active");
-    if (breadcrumb && breadcrumb_last && difficulty) {
+    if (breadcrumb && breadcrumbLast && difficulty) {
       details = "Viewing Jigsaw Puzzle";
-      state = `${breadcrumb_last.textContent} (${difficulty.textContent})`;
-    } else if (breadcrumb && breadcrumb_last) {
+      state = `${breadcrumbLast.textContent} (${difficulty.textContent})`;
+    } else if (breadcrumb && breadcrumbLast) {
       details = "Viewing Jigsaw Puzzles";
-      state = breadcrumb_last.textContent;
+      state = breadcrumbLast.textContent;
     } else if (playlists) {
       details = "Viewing Category";
       state = "Jigsaw Puzzles";
     } else {
-      const parsedData = parse(path),
-        type = parseInt(parsedData[0]),
-        name = parsedData[1];
+      const [parsedInt, parsedName] = parse(path),
+        type = parseInt(parsedInt),
+        name = parsedName;
 
       switch (type) {
         case PageType.Category:

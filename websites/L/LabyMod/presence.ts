@@ -1,11 +1,9 @@
 const presence = new Presence({
-  clientId: "729035228324298852" // CLIENT ID FOR YOUR PRESENCE
-});
-
-let item: any,
-  user: any,
-  title: any,
+    clientId: "729035228324298852" // CLIENT ID FOR YOUR PRESENCE
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
+
+let item: HTMLElement, user: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -149,10 +147,8 @@ presence.on("UpdateData", async () => {
           "https://translate.labymod.net/translate/?project=website&lang=",
           ""
         );
-        if (document.URL.includes("#")) {
-          lang = lang.split("#");
-          lang = lang[0];
-        }
+        if (document.URL.includes("#")) [lang] = lang.split("#");
+
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Website";
       } else if (document.URL.includes("?project=notification")) {
@@ -160,10 +156,8 @@ presence.on("UpdateData", async () => {
           "https://translate.labymod.net/translate/?project=website&lang=",
           ""
         );
-        if (document.URL.includes("#")) {
-          lang = lang.split("#");
-          lang = lang[0];
-        }
+        if (document.URL.includes("#")) [lang] = lang.split("#");
+
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Notification";
       } else if (document.URL.includes("?project=client")) {
@@ -171,10 +165,8 @@ presence.on("UpdateData", async () => {
           "https://translate.labymod.net/translate/?project=website&lang=",
           ""
         );
-        if (document.URL.includes("#")) {
-          lang = lang.split("#");
-          lang = lang[0];
-        }
+        if (document.URL.includes("#")) [lang] = lang.split("#");
+
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Client";
       }

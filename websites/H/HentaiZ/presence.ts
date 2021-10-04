@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     } else if (curPath.includes("/category")) {
       const title = document.querySelector("title");
       presenceData.details = "Đang tìm phim";
-      presenceData.state = title.textContent.split(" - ")[0];
+      [presenceData.state] = title.textContent.split(" - ");
     } else if (curPath.includes("/hentai-uncensored"))
       presenceData.details = "Đang tìm phim Uncensored";
     else if (curPath.includes("/completed-hentai"))
@@ -81,8 +81,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
     presence.setTrayTitle(video.paused ? "" : title);
 

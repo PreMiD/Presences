@@ -7,20 +7,6 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let user: string, title: string;
 
 presence.on("UpdateData", async () => {
@@ -59,9 +45,7 @@ presence.on("UpdateData", async () => {
         );
 
       if (video !== null) {
-        currentTime = video.currentTime;
-        duration = video.duration;
-        paused = video.paused;
+        ({ currentTime, duration, paused } = video);
         [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)

@@ -1,13 +1,13 @@
-let presence = new Presence({
-    clientId: "618138980273094695" // CLIENT ID FOR YOUR PRESENCE
+const presence = new Presence({
+    clientId: "618138980273094695"
   }),
-  item: any,
-  dropdown: any,
-  dropdownfinal: any,
-  dropdownplus1: any,
-  dropdowninnertext: any,
-  split: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+let item: HTMLElement,
+  dropdown: HTMLElement,
+  dropdownfinal: HTMLElement,
+  dropdownplus1: HTMLElement,
+  dropdowninnertext: HTMLElement,
+  split: string[];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/store")) {
     item = document.title.split(":");
     presenceData.details = "Viewing store:"; //amazon.store
-    presenceData.state = item[1];
+    [, presenceData.state] = item;
   } else if (document.location.pathname.includes("/history"))
     presenceData.details = "Viewing their history";
   //amazon.history

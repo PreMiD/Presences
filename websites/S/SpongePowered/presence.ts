@@ -1,10 +1,8 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "626496186496450570"
   }),
-  user: any,
-  search: any,
-  title: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLLinkElement, search: HTMLLinkElement, title: HTMLLinkElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -33,9 +31,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/c/")) {
       title = document.querySelector("head > title");
       presenceData.details = "Forums, viewing category:";
-      presenceData.state = title.innerText
+      [, presenceData.state] = title.innerText
         .split("topics")[0]
-        .split("Latest")[1];
+        .split("Latest");
 
       delete presenceData.smallImageKey;
 
@@ -105,7 +103,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname === "jd.spongepowered.org") {
     title = document.querySelector("head > title");
-    title = title.innerText.split(" (")[0];
+    [title] = title.innerText.split(" (");
     presenceData.details = "Java Docs, viewing:";
     if (title.length > 128)
       presenceData.state = `${title.substring(0, 125)}...`;

@@ -251,7 +251,7 @@ presence.on("UpdateData", async () => {
     const pathData: string[] = document.location.pathname.split("/").slice(2);
 
     presenceData.details = `Viewing ${pathData[1]} from`;
-    presenceData.state = pathData[0];
+    [presenceData.state] = pathData;
   }
   presence.setActivity(presenceData);
 });

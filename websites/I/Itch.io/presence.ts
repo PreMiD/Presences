@@ -18,9 +18,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Developer Profile";
         presenceData.state = document.title.replace(" - itch.io", "");
       } else {
-        const documentTitle = document.title.split(" by "),
-          gameName = documentTitle[0],
-          devName = documentTitle[1];
+        const [gameName, devName] = document.title.split(" by ");
         presenceData.details = gameName;
         presenceData.state = devName;
         if (document.querySelector(".game_loaded")) {

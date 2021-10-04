@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Lançamentos";
     }
     if (pathname.startsWith("/scans")) {
-      const pathsplitted = pathname.split("/").slice(-1)[0];
+      const [pathsplitted] = pathname.split("/").slice(-1);
       if (!pathsplitted.includes("scans")) {
         const scanName = document.querySelector("h1").textContent;
         presenceData.details = "Vendo Scan:";
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     }
 
     if (pathname.startsWith("/find")) {
-      const pathsplitted = pathname.split("/").slice(-1)[0];
+      const [pathsplitted] = pathname.split("/").slice(-1);
       presenceData.details = "Pesquisando por:";
       presenceData.state = pathsplitted;
     }
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
     }
 
     if (pathname.startsWith("/mangas")) {
-      const pathsplitted = pathname.split("/").slice(-1)[0];
+      const [pathsplitted] = pathname.split("/").slice(-1);
       if (!pathsplitted.startsWith("mangas")) {
         const information = pathsplitted
           .replace("-", " ")
@@ -77,10 +77,10 @@ presence.on("UpdateData", async () => {
     }
 
     if (pathname.startsWith("/manga/") && pathname.includes("-mh")) {
-      const pathsplitted = pathname.split("/").slice(-1)[0];
+      const [pathsplitted] = pathname.split("/").slice(-1);
       if (!pathsplitted.includes("-mh")) {
         const mangaName = document.querySelector("h1 a").textContent,
-          chapterNumber = pathsplitted.split("#")[0],
+          [chapterNumber] = pathsplitted.split("#"),
           e = document.getElementById("capitulos-3") as HTMLSelectElement,
           sel = e.selectedIndex,
           opt = e.options[sel],
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

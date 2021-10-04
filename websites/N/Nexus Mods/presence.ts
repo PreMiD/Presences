@@ -1013,7 +1013,7 @@ function getCategorizedPresenceData(
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const subdomain = window.location.host.split(".")[0],
+  const [subdomain] = window.location.host.split("."),
     path = window.location.pathname.split("/").slice(1);
   presenceData = {
     largeImageKey: "logo",
@@ -1033,9 +1033,9 @@ presence.on("UpdateData", () => {
       // Explicitely don't do anything due to privacy being a possible concern.
       presenceData.details = "Editing user account";
       break;
-    case "wiki":
+    case "wiki": {
       // Domain: https://wiki.nexusmods.com/
-      var wikiTitle = null;
+      let wikiTitle;
       try {
         wikiTitle = document.getElementById("firstHeading").innerText;
 
@@ -1047,9 +1047,10 @@ presence.on("UpdateData", () => {
       presenceData.details = "Reading wiki";
       presenceData.state = wikiTitle;
       break;
-    case "forums":
+    }
+    case "forums": {
       // Domain: https://forums.nexusmods.com/
-      var forumTitle = null;
+      let forumTitle;
       try {
         forumTitle = document
           .getElementsByTagName("title")[0]
@@ -1066,10 +1067,11 @@ presence.on("UpdateData", () => {
       presenceData.details = "Browsing forums";
       presenceData.state = forumTitle;
       break;
-    default:
+    }
+    default: {
       // Domain: https://www.nexusmods.com/ (with fallback in place)
       // Get game title if available.
-      var gameTitle = null;
+      let gameTitle;
       try {
         gameTitle = document.getElementsByClassName("game-name")[0].textContent;
 
@@ -1079,7 +1081,7 @@ presence.on("UpdateData", () => {
       }
 
       // Get page title if available.
-      var pageTitle = null;
+      let pageTitle;
       try {
         pageTitle = document.getElementsByTagName("H1")[0].textContent;
 
@@ -1153,42 +1155,43 @@ presence.on("UpdateData", () => {
             presenceData.details = "Browsing about";
             break;
 
-          case "news":
+          case "news": {
             if (path.length > 1 && parseInt(path[1])) {
               presenceData.details = "Reading a news article";
               presenceData.state = pageTitle;
             } else presenceData.details = "Browsing news";
 
             break;
-
-          case "mods":
+          }
+          case "mods": {
             if (path.length > 1 && path[1] === "add") {
               presenceData.details = "Uploading a new mod";
               presenceData.smallImageKey = "writing";
             } else presenceData.details = "Browsing mods";
 
             break;
-
+          }
           case "media":
             presenceData.details = "Browsing media";
             break;
 
-          case "images":
+          case "images": {
             if (path.length > 1 && path[1] === "add") {
               presenceData.details = "Uploading a new image";
               presenceData.smallImageKey = "writing";
             } else presenceData.details = "Browsing images";
 
             break;
+          }
 
-          case "videos":
+          case "videos": {
             if (path.length > 1 && path[1] === "add") {
               presenceData.details = "Uploading a new video";
               presenceData.smallImageKey = "writing";
             } else presenceData.details = "Browsing videos";
 
             break;
-
+          }
           case "games":
             presenceData.details = "Browsing games";
             break;
@@ -1202,6 +1205,7 @@ presence.on("UpdateData", () => {
         presenceData.details = "Browsing home";
       }
       break;
+    }
   }
 
   // Set presence.

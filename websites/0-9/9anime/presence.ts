@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (
-    video !== null &&
+    video &&
     !isNaN(video.duration) &&
     document.location.pathname.includes("/watch")
   ) {

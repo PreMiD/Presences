@@ -114,7 +114,7 @@ eldiru.on("UpdateData", async () => {
       presenceData.state = course;
     }
 
-    if (presenceData.details === null) {
+    if (!presenceData.details) {
       eldiru.setTrayTitle();
       eldiru.setActivity();
     } else eldiru.setActivity(presenceData);

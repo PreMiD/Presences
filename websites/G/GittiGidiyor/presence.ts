@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "632914600949710868"
   }),
-  pages = {
+  pages: { [page: string]: string } = {
     "/yildiz-firsatlar": "Yıldız Fırsatlar",
     "/tum-kampanyalar": "Tüm Kampanyalar",
     "/cadde": "Cadde",
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
     seller = document.querySelector(
       "#store-page-title > div.store-name > h1"
     ) as HTMLElement,
-    data: { [k: string]: any } = {
+    data: { [k: string]: string | number } = {
       largeImageKey: "gg-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     };

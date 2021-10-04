@@ -6,21 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getTime(timegone, timetotal): Array<number> {
+function getTime(timegone: string, timetotal: string): Array<number> {
   const timegoneN = parseInt(timegone[0]) + parseInt(timegone[1]) * 60,
     timetotalN = parseInt(timetotal[0]) + parseInt(timetotal[1]) * 60,
     back = [timegoneN, timetotalN];
@@ -195,8 +181,10 @@ presence.on("UpdateData", async () => {
           )
           .textContent.split("/")[1]
       ]);
-      Data.startTimestamp = getTimestamps(time[0], time[1])[0];
-      Data.endTimestamp = getTimestamps(time[0], time[1])[1];
+      [Data.startTimestamp, Data.endTimestamp] = presence.getTimestamps(
+        time[0],
+        time[1]
+      );
       Data.smallImageKey = "play";
       Data.details = "Listening to";
       Data.state = document.querySelector(

@@ -13,8 +13,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = "www.mixmods.com.br";
   } else if (document.location.pathname.match("/search/label")) {
-    const url = document.location.href.split("/label/")[1].split("?&max")[0],
-      test = url.split("?&max")[0];
+    const [url] = document.location.href.split("/label/")[1].split("?&max"),
+      [test] = url.split("?&max");
     presenceData.details = "Visualizando categoria:";
     presenceData.state = decodeURI(test);
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
@@ -53,8 +53,8 @@ presence.on("UpdateData", async () => {
     }`;
   } else {
     presenceData.details = "Navegando no site";
-    const url = document.location.href.split("#")[1],
-      text = url.split("=")[1];
+    const [, url] = document.location.href.split("#"),
+      [, text] = url.split("=");
     presenceData.state = `Página ${text}`;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }

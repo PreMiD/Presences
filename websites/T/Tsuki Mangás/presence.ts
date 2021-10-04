@@ -84,11 +84,11 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/perfil/") && !notfound) {
     const username = document.querySelector("#capapl > b"),
-      sessionUsername = (
+      [sessionUsername] = (
         document.querySelector("#menu>li>ul>a") as HTMLLinkElement
       ).href
         .split("/")
-        .slice(-1)[0],
+        .slice(-1),
       usernameValue = [0, "...", true];
     if (!(await presence.getSetting("showUserName"))) {
       usernameValue[1] = "👁‍🗨👁‍🗨";
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
       sessionUsername !== pathName.split("/").slice(-2)[0]
     ) {
       usernameValue[0] = 0;
-      if (usernameValue[3]) usernameValue[1] = pathName.split("/").slice(-2)[0];
+      if (usernameValue[3]) [usernameValue[1]] = pathName.split("/").slice(-2);
     }
     data.details =
       usernameValue[0] === 0 ? "Vizualizando Perfil:" : "Editando Perfil:";

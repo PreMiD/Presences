@@ -2,7 +2,7 @@ const OneDrive = new Presence({ clientId: "818822000176791553" });
 
 OneDrive.on("UpdateData", async () => {
   const title = document.title.split("-"),
-    fileName = title[0],
+    [fileName] = title,
     fileType = title[1].replace("Microsoft", "").replace("Online", "").trim(),
     presenceData: PresenceData = {
       largeImageKey: "onedrive-logo",

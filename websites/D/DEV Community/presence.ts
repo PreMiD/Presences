@@ -158,9 +158,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = contentStateKey;
       presenceData.smallImageText = contentStateText;
 
-      endTimestamp = presence.getTimestampsfromMedia(
+      [, endTimestamp] = presence.getTimestampsfromMedia(
         document.querySelector("video")
-      )[1];
+      );
       if (contentStateKey === "play" && endTimestamp > 0)
         presenceData.endTimestamp = endTimestamp;
       else {
@@ -193,9 +193,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = contentStateKey;
       presenceData.smallImageText = contentStateText;
 
-      endTimestamp = presence.getTimestampsfromMedia(
+      [, endTimestamp] = presence.getTimestampsfromMedia(
         document.querySelector("#audio")
-      )[1];
+      );
       if (contentStateKey === "play" && endTimestamp > 0)
         presenceData.endTimestamp = endTimestamp;
       else {

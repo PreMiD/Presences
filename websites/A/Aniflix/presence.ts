@@ -6,31 +6,17 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let browsingStamp = Math.floor(Date.now() / 1000),
-  title: any,
-  views: any,
-  air: any,
-  search: any,
+  title: HTMLElement,
+  views: HTMLElement,
+  air: HTMLElement,
+  search: string,
   iFrameVideo: boolean,
-  currentTime: any,
-  duration: any,
-  paused: any,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
   lastPlaybackState = null,
-  playback;
+  playback: boolean;
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
@@ -43,19 +29,18 @@ if (
   ) !== null
 ) {
   presence.on("iFrameData", (data) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
 
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
     }
   });
 }
 
 presence.on("UpdateData", async () => {
-  const timestamps = getTimestamps(
+  const [startTimestamp, endTimestamp] = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     ),
@@ -63,12 +48,11 @@ presence.on("UpdateData", async () => {
       largeImageKey: "aniflix",
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
+      startTimestamp,
+      endTimestamp
     };
 
-  search = document.querySelector("#searchbar > div > input[type=text]");
-  search = search.value;
+  search = document.querySelector("#searchbar > div > input[type=text]").value;
   if (
     document.querySelector(
       "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > h1"

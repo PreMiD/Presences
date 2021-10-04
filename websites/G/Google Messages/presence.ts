@@ -15,9 +15,7 @@ presence.on("UpdateData", async () => {
   if (path === "/" || path.includes("/intl/")) {
     presenceData.largeImageKey = "icon";
     presenceData.details = "Home page";
-  }
-  // Auth page
-  else if (path === "/web/authentication") {
+  } else if (path === "/web/authentication") {
     presenceData.largeImageKey = "icon";
     presenceData.details = "Authentication page";
   } else if (path === "/web/conversations") {

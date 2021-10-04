@@ -30,7 +30,7 @@ presence.on("UpdateData", () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/oyver")) {
       const priceEls = document.getElementsByClassName("ubott");
-      for (var i = 0; i < priceEls.length; i++) {
+      for (let i = 0; i < priceEls.length; i++) {
         const profilename = priceEls[i].textContent;
         presenceData.details = "Bir Bota Oyveriyor:";
         presenceData.state = profilename;
@@ -46,7 +46,7 @@ presence.on("UpdateData", () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/profil/")) {
       const priceEls = document.getElementsByClassName("uname");
-      for (var i = 0; i < priceEls.length; i++) {
+      for (let i = 0; i < priceEls.length; i++) {
         const profilename = priceEls[i].textContent;
         presenceData.details = "Bir kişinin profiline bakıyor:";
         presenceData.state = profilename;
@@ -98,7 +98,7 @@ presence.on("UpdateData", () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/bot/")) {
       const priceEls = document.getElementsByClassName("ubot");
-      for (var i = 0; i < priceEls.length; i++) {
+      for (let i = 0; i < priceEls.length; i++) {
         const botname = priceEls[i].textContent;
         presenceData.details = "Bir Bota bakıyor:";
         presenceData.state = botname;

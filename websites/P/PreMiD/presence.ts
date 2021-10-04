@@ -79,7 +79,7 @@ async function getStrings(): Promise<LangStrings> {
       metadata: "premid.pageMetadata",
       ts: "premid.pageTs"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 

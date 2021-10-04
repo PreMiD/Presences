@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
       url = new URL(document.location.href);
       params = url.searchParams;
 
-      let query: string = params.get(searchItems.query),
-        type: string = params.get(searchItems.type);
+      const query: string = params.get(searchItems.query);
+      let type: string = params.get(searchItems.type);
       type = (type && decodeURIComponent(type)) || "image";
 
       let edition: string = params.get(searchItems.edition);
@@ -78,8 +78,7 @@ presence.on("UpdateData", async () => {
         /^\/orgs\/([^/]+)(?:\/([^/]+))?/
       ))
     ) {
-      name = match[1];
-      tab = match[2];
+      [, name, tab] = match;
       tab = tab || "members";
       presenceData.details = `On org ${tab}page`;
       presenceData.state = `${name}`;
@@ -87,7 +86,7 @@ presence.on("UpdateData", async () => {
       url = new URL(document.location.href);
       params = url.searchParams;
 
-      name = match[1];
+      [, name] = match;
 
       tab = params.get(searchItems.tab);
 
@@ -101,9 +100,7 @@ presence.on("UpdateData", async () => {
       url = new URL(document.location.href);
       params = url.searchParams;
 
-      owner = match[1];
-      name = match[2];
-      tab = match[3];
+      [, owner, name, tab] = match;
 
       page = params.get(searchItems.page);
 
@@ -124,8 +121,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = "On personal repository";
         presenceData.state = "Image history";
       } else {
-        (owner = match[1]), (name = match[2]);
-        const tag: string = match[3];
+        [, owner, name] = match;
+        const [, , , tag]: string = match;
 
         selector = document.querySelector(".Select-value") || null;
         arch = (selector && selector.textContent) || null;
@@ -136,7 +133,7 @@ presence.on("UpdateData", async () => {
     } else if (
       (match = document.location.pathname.match(/^\/u\/([^/]+)(?:\/([^/]+))?/))
     ) {
-      const user: string = match[1];
+      const [, user]: string = match;
       tab = match[2] || "repositories";
       presenceData.details = `On profile ${tab} page`;
       presenceData.state = user;
@@ -150,7 +147,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "On personal repository";
 
-      tab = match[1];
+      [, tab] = match;
 
       page = params.get(searchItems.page);
       selector = document.querySelector(

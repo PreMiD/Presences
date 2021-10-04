@@ -62,10 +62,10 @@ const updateCallback = {
             presenceData.details = "On the home page";
           else {
             presenceData.details = document.querySelector("h1").textContent;
-            presenceData.state = document
+            [presenceData.state] = document
               .querySelector(".publication")
               .textContent.trim()
-              .split(" ›")[0];
+              .split(" ›");
           }
         } catch (error) {
           forceUpdate = true;

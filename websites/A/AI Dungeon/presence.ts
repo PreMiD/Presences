@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "ailogo"
   };
   if (window.location.hostname === "aidungeon.io") {
-    console.log("Online");
+    presence.info("Online");
     if (path === "/" || path === "") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Home";
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
       "#root > div > div > div > div > div:nth-child(2) > div > div.css-1dbjc4n.r-13awgt0 > div > div:nth-child(2) > div.css-1dbjc4n.r-18u37iz.r-13qz1uu > div.css-1dbjc4n.r-13awgt0.r-18u37iz > div > div"
     );
 
-    if (login !== null) {
+    if (login) {
       if (login.getAttribute("aria-label") === "Login (selected)") {
         presenceData.details = "Logging in";
         presenceData.startTimestamp = browsingStamp;
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
       }
     } else {
       check;
-      console.log(bullsEye);
+      presence.info(bullsEye);
       if (bullsEye === "Home" || bullsEye === "home") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing Home";

@@ -2,7 +2,10 @@ const presence = new Presence({
     clientId: "613628090219757599"
   }),
   timeElapsed = Math.floor(Date.now() / 1000);
-let otherListeners, stationStatus, listeningCheck, onAir;
+let otherListeners: HTMLElement,
+  stationStatus,
+  listeningCheck,
+  onAir: HTMLElement;
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname === "/player") {

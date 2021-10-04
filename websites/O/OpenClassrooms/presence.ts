@@ -37,10 +37,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = `Browsing: ${pathn}`;
       presenceData.largeImageKey = "favicon";
     }
-  }
-
-  // Courses page
-  else if (
+    // Courses page
+  } else if (
     webpath === "/fr/courses" ||
     webpath === "fr/courses/" ||
     webpath.includes("/fr/search") ||
@@ -49,25 +47,22 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Courses main page";
     presenceData.state = "Looking for a course";
     presenceData.largeImageKey = "favicon";
-  }
-
-  // Paths page
-  else if (webpath === "/en/paths" || webpath === "/fr/paths") {
+    // Paths page
+  } else if (webpath === "/en/paths" || webpath === "/fr/paths") {
     presenceData.details = "Paths main page";
     presenceData.state = "Looking for a path";
     presenceData.largeImageKey = "favicon";
-  }
-
-  // Main page of a selected path
-  else if (webpath.includes("/fr/paths") || webpath.includes("/en/paths")) {
+    // Main page of a selected path
+  } else if (webpath.includes("/fr/paths") || webpath.includes("/en/paths")) {
     const pathName = document.title.replace(" - OpenClassrooms", "");
     presenceData.details = "Looking for a path";
     presenceData.state = `Looking at ${pathName}`;
     presenceData.largeImageKey = "favicon";
-  }
-
-  // Reading a course
-  else if (webpath.includes("/fr/courses") || webpath.includes("/en/courses")) {
+    // Reading a course
+  } else if (
+    webpath.includes("/fr/courses") ||
+    webpath.includes("/en/courses")
+  ) {
     // Check if the user is reading the first chapter or not
     if (
       document.body.contains(

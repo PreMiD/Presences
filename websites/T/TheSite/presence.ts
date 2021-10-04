@@ -201,12 +201,12 @@ presence.on("UpdateData", async () => {
     const status = videoStatus(video);
     data.smallImageKey = status;
     if (status === "play") {
-      const timestamps = presence.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
         video.currentTime,
         video.duration
       );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      data.startTimestamp = startTimestamp;
+      data.endTimestamp = endTimestamp;
     }
   };
 
@@ -243,10 +243,10 @@ presence.on("UpdateData", async () => {
   /* Video Info */
   if (showVideoInfo) {
     const wl = path.includes("/list"),
-      wl_movie = wl && getElement(".media-body .genre"),
-      wl_show = wl && !wl_movie;
+      wlMovie = wl && getElement(".media-body .genre"),
+      wlShow = wl && !wlMovie;
 
-    if (wl_movie || path.includes("/movies")) {
+    if (wlMovie || path.includes("/movies")) {
       const menu: HTMLElement = document.querySelector(".mv-movie-info"),
         title: string = getElement(".mv-movie-title > span");
 
@@ -293,7 +293,7 @@ presence.on("UpdateData", async () => {
       }
     }
     /* Watch Later */
-    if (wl_show) {
+    if (wlShow) {
       const menu: HTMLElement = document.querySelector(".mv-movie-info"),
         regex: RegExpMatchArray = getElement(
           ".full-title > .content > .seq > em"

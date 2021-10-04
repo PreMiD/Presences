@@ -21,7 +21,7 @@ englishPresence.on("UpdateData", async () => {
           document.getElementsByClassName("page-header__title")[0].textContent;
       } catch (err) {
         const errCode = "TWIKI_WIKIEN_GETPAGETITLE";
-        console.log(
+        englishPresence.info(
           `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
         );
       }
@@ -45,7 +45,7 @@ englishPresence.on("UpdateData", async () => {
               .textContent;
         } catch (err) {
           const errCode = "TWIKI_WIKIDE_GETPAGETITLE";
-          console.log(
+          germanPresence.info(
             `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
           );
         }

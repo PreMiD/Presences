@@ -153,9 +153,6 @@ presence.on("UpdateData", async () => {
       } else if (path.href.includes("#inbox")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "กล่องข้อความ ";
-      } else if (path.href.includes("#inbox")) {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "กล่องข้อความ ";
       } else if (path.href) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "อยู่ในสนทนา ";

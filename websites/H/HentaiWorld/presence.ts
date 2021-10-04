@@ -2,32 +2,21 @@ const presence = new Presence({
     clientId: "660882722839068702"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let iFrameVideo,
-  currentTime,
-  duration,
-  paused,
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
   usernamewl,
   username,
   hentainame,
   episodenumber,
   timestamps;
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("iFrameData", (data) => {
   const playback = data.iframeVideo.duration !== null ? true : false;
   if (playback) {
-    iFrameVideo = data.iframeVideo.iFrameVideo;
+    ({ iFrameVideo, duration, paused } = data.iframeVideo);
     currentTime = data.iframeVideo.currTime;
-    duration = data.iframeVideo.duration;
-    paused = data.iframeVideo.paused;
   }
 });
 presence.on("UpdateData", () => {
@@ -179,8 +168,8 @@ presence.on("UpdateData", () => {
       presenceData.smallImageKey = "search";
       presenceData.details = "Doing an advanced";
       presenceData.state = "search";
-    } // Categories
-    else if (document.location.pathname.startsWith("/tv-series")) {
+    } else if (document.location.pathname.startsWith("/tv-series")) {
+      // Categories
       // TV-Series
       if (
         document.location.href.startsWith(
@@ -288,24 +277,27 @@ presence.on("UpdateData", () => {
         presenceData.details = "In the category: Preview";
         presenceData.state = "Page: 1";
       }
-    } // End Categories
-    else if (document.location.pathname.startsWith("/watch")) {
+    } else if (document.location.pathname.startsWith("/watch")) {
+      // End Categories
       // Hentai Episode
-      hentainame = document.title
+      [hentainame] = document.title
         .replace("HentaiWorld: ", "")
-        .split(" Episodio")[0];
-      episodenumber = document
+        .split(" Episodio");
+      [, episodenumber] = document
         .querySelector("a#downloadLink.btn.btn-sm.btn-primary")
-        .textContent.split("Ep ")[1];
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+        .textContent.split("Ep ");
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      );
       if (iFrameVideo === true && !isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.details = `Watching: ${hentainame}`;
         presenceData.state = paused
           ? `Ep. ${episodenumber}｜Paused`
           : `Ep. ${episodenumber}｜Playing`;
-        presenceData.startTimestamp = paused ? "" : timestamps[0];
-        presenceData.endTimestamp = paused ? "" : timestamps[1];
+        presenceData.startTimestamp = paused ? null : timestamps[0];
+        presenceData.endTimestamp = paused ? null : timestamps[1];
       } else {
         presenceData.smallImageKey = "watching";
         presenceData.details = ` Is going to watch: ${hentainame}`;
@@ -451,8 +443,8 @@ presence.on("UpdateData", () => {
       presenceData.smallImageKey = "search";
       presenceData.details = "Sta facendo una ricerca";
       presenceData.state = "avanzata";
-    } // Categories
-    else if (document.location.pathname.startsWith("/tv-series")) {
+    } else if (document.location.pathname.startsWith("/tv-series")) {
+      // Categories
       // TV-Series
       if (
         document.location.href.startsWith(
@@ -560,8 +552,8 @@ presence.on("UpdateData", () => {
         presenceData.details = "Nella categoria: Preview";
         presenceData.state = "Pagina: 1";
       }
-    } // End Categories
-    else if (document.location.pathname.startsWith("/watch")) {
+    } else if (document.location.pathname.startsWith("/watch")) {
+      // End Categories
       // Hentai Episode
       [hentainame] = document.title
         .replace("HentaiWorld: ", "")
@@ -569,15 +561,18 @@ presence.on("UpdateData", () => {
       [, episodenumber] = document
         .querySelector("a#downloadLink.btn.btn-sm.btn-primary")
         .textContent.split("Ep ");
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      );
       if (iFrameVideo === true && !isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.details = `Guardando: ${hentainame}`;
         presenceData.state = paused
           ? `Ep. ${episodenumber}｜In pausa`
           : `Ep. ${episodenumber}｜In riproduzione`;
-        presenceData.startTimestamp = paused ? "" : timestamps[0];
-        presenceData.endTimestamp = paused ? "" : timestamps[1];
+        presenceData.startTimestamp = paused ? 0 : timestamps[0];
+        presenceData.endTimestamp = paused ? 0 : timestamps[1];
       } else {
         presenceData.smallImageKey = "watching";
         presenceData.details = `Sta per guardare: ${hentainame}`;
@@ -586,7 +581,7 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

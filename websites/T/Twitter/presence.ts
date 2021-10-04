@@ -148,12 +148,12 @@ presence.on("UpdateData", async () => {
 
   if (objHeader === undefined && path.match("/status/")) {
     title = (await strings).readTweet;
-    info = stripText(
+    [info] = stripText(
       document.querySelectorAll(
         `a[href='/${path.split("/")[1]}']`
       )[1] as HTMLElement,
       "Tweet"
-    ).split("@")[0];
+    ).split("@");
   }
 
   if (path.match("/messages") && objHeader) {

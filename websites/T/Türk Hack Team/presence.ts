@@ -27,8 +27,10 @@ presence.on("UpdateData", async () => {
     };
 
   if (kategori && kategori.textContent !== "") {
+    const [, state] = kategori.textContent.split(":");
+
     presenceData.details = "Bir kategoriyi inceliyor:";
-    presenceData.state = kategori.textContent.split(":")[1];
+    presenceData.state = state;
   } else if (CevapButon && CevapButon.textContent !== "") {
     presenceData.details = "Bir konuyu inceliyor:";
     presenceData.state = document.querySelector(

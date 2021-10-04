@@ -24,7 +24,7 @@ presence.on(
     if (playback) {
       currentTime = data.currTime;
       duration = data.dur;
-      paused = data.paused;
+      ({ paused } = data);
     }
   }
 );
@@ -52,8 +52,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (paused) {
         delete presenceData.startTimestamp;

@@ -1,11 +1,11 @@
-let presence = new Presence({ clientId: "688752009079160852" }),
+const presence = new Presence({ clientId: "688752009079160852" }),
   presenceData: PresenceData = { largeImageKey: "logo" },
-  customData = false,
-  browsingStamp = Math.floor(Date.now() / 1000),
-  title: any,
-  user: any,
-  pp: any,
-  rank: any,
+  browsingStamp = Math.floor(Date.now() / 1000);
+let customData = false,
+  title: HTMLElement,
+  user: HTMLElement,
+  pp: HTMLElement,
+  rank: HTMLElement,
   url: URL,
   mode: number;
 
@@ -210,9 +210,6 @@ presence.on("UpdateData", async () => {
     if (title !== null) presenceData.details = "Viewing Documentation";
     presenceData.state = title.innerText;
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/login")) {
-    presenceData.details = "Regitstering account";
-    presenceData.startTimestamp = browsingStamp;
   }
 
   if (document.location.hostname === "vinse.ripple.moe") {
@@ -244,8 +241,4 @@ presence.on("UpdateData", async () => {
   }
 
   if (!customData) presence.setActivity(presenceData);
-});
-
-presence.on("iFrameData", function (data) {
-  console.log(data);
 });

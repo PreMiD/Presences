@@ -88,10 +88,6 @@ presence.on("UpdateData", async () => {
       const audioTime = document.querySelector(".css-9dpnv0").textContent,
         audioDuration = document.querySelector(".css-xf5pff").textContent,
         parsedTimestamps = parseAudioTimestamps(audioTime, audioDuration),
-        timestamps = presence.getTimestamps(
-          parsedTimestamps[0],
-          parsedTimestamps[1]
-        ),
         paused = document.querySelector(
           "button.ekca8d00 span[aria-labelledby='Play']"
         )
@@ -106,8 +102,10 @@ presence.on("UpdateData", async () => {
         (data.smallImageText = paused
           ? (await strings).pause
           : (await strings).play),
-        (data.startTimestamp = timestamps[0]),
-        (data.endTimestamp = timestamps[1]);
+        ([data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
+          parsedTimestamps[0],
+          parsedTimestamps[1]
+        ));
 
       if (paused) {
         delete data.startTimestamp;

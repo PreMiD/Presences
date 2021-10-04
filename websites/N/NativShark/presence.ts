@@ -34,8 +34,8 @@ presence.on("UpdateData", async () => {
       .innerText.split("\n");
 
     if (unitInfo.length === 2) {
-      let unitText = unitInfo[0];
-      const unitStatus = unitInfo[1];
+      let [unitText] = unitInfo;
+      const [, unitStatus] = unitInfo;
 
       if (unitText === "All Units") unitText = "Today's units";
 
