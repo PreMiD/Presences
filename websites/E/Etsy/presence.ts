@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
       item = document.querySelector("#global-enhancements-search-query");
 
       presenceData.details = "Searching for:";
-      presenceData.state = item.value;
+      presenceData.state = (item as HTMLInputElement).value;
 
       presenceData.smallImageKey = "search";
 

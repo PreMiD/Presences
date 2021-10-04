@@ -5,7 +5,7 @@ const presence = new Presence({
 function parseQueryString(queryString?: string) {
   if (!queryString) queryString = window.location.search.substring(1);
 
-  const params = {},
+  const params: {[queryKey: string]: string} = {},
     queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
     const indexPair = indexQuery.split("="),

@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "704585837949747330"
 });
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
       startTimestamp: Math.floor(Date.now() / 1000)
     },
     path = document.location.pathname;
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
     nomeObra: HTMLElement,
     nomeObraLeitor: HTMLElement,
     capituloLeitor: HTMLElement,
-    seasonLeitor: HTMLElement,
+    seasonLeitor: HTMLSelectElement,
     paginaLeitor: HTMLElement,
     postagemData: HTMLElement;
 
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
       seasonLeitor = document.querySelector(
         "body > div.wrap > div > div > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.select-view > div.c-selectpicker.selectpicker_volume > label > select"
       );
-      paginaLeitor = document.getElementById("single-pager");
+      paginaLeitor = document.getElementById("single-pager") as HTMLElement;
       capituloLeitor = document.querySelector(
         "body > div.wrap > div > div > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li.active"
       );
