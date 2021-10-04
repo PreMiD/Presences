@@ -4,8 +4,8 @@
  * Website: www.animefillerlist.com
  */
 
-const presence = new Presence({  
-    clientId: "894342965772820490"  
+const presence = new Presence({
+    clientId: "894342965772820490"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
