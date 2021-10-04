@@ -22,11 +22,11 @@ if (lastPlaybackState !== playback) {
 
 interface IFrameData {
   iframeVideo: {
-    dur: number
-    iFrameVideo: boolean
-    paused: boolean
-    currTime: number
-  }
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
 presence.on("iFrameData", (data: IFrameData) => {

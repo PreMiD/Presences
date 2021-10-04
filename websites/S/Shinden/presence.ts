@@ -16,11 +16,11 @@ let iFrameVideo: boolean,
 
 interface IFrameData {
   iframeVideo: {
-    dur: number
-    iFrameVideo: boolean
-    paused: boolean
-    currTime: number
-  }
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
 presence.on("iFrameData", (data: IFrameData) => {

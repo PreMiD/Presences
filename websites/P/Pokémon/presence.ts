@@ -12,7 +12,6 @@ function settingSetter(): void {
   else presence.hideSetting("pdexID");
 }
 
-
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {

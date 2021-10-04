@@ -208,11 +208,11 @@ function getQuery() {
             if (data.buttons && (data.buttons.length as number) === 0)
               delete data.buttons;
             else {
-data.buttons = data.buttons?.slice(0, 2) as [
+              data.buttons = data.buttons?.slice(0, 2) as [
                 ButtonData,
                 ButtonData
               ];
-}
+            }
           }
           return data;
         })

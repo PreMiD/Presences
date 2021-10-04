@@ -87,7 +87,10 @@ presence.on("UpdateData", async () => {
 
     secondsDuration = truncateBefore(secondsDurationString.innerText, pattern);
 
-    currentTime = getSeconds(parseInt(currentMinutes), parseInt(currentSeconds));
+    currentTime = getSeconds(
+      parseInt(currentMinutes),
+      parseInt(currentSeconds)
+    );
 
     duration = getSeconds(parseInt(minutesDuration), parseInt(secondsDuration));
 

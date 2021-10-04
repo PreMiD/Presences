@@ -33,7 +33,8 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#content > div > div:nth-child(1) > div > div:nth-child(2) > h3"
       );
-      if (item !== null) title = (title as HTMLElement).innerText.replace(item.innerText, "");
+      if (item !== null)
+        title = (title as HTMLElement).innerText.replace(item.innerText, "");
       else title = (title as HTMLElement).innerText;
 
       presenceData.details = "Ideas, Viewing:";
@@ -56,7 +57,10 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Shop, Viewing:";
-        presenceData.state = (title as HTMLElement).innerText.replace("LABYMOD", "");
+        presenceData.state = (title as HTMLElement).innerText.replace(
+          "LABYMOD",
+          ""
+        );
 
         delete presenceData.smallImageKey;
 

@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
     endTimestamp,
     extra = "...";
 
-  const {href} = window.location,
+  const { href } = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {

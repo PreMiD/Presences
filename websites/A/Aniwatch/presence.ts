@@ -166,7 +166,9 @@ presence.on("UpdateData", async () => {
       if (siteArray.length >= 3) {
         //if array is equal to or greater than 3 then the user has customized the year/season
         season = ["Winter", "Spring", "Summer", "Fall"]; //list of possible seasons
-        presenceData.state = `${season[parseInt(siteArray[2])]} ${siteArray[3]}`; //siteArray[2] = season, siteArray[3] = year
+        presenceData.state = `${season[parseInt(siteArray[2])]} ${
+          siteArray[3]
+        }`; //siteArray[2] = season, siteArray[3] = year
       }
     } else if (path.startsWith("/airing")) {
       //if we're on the airing page
