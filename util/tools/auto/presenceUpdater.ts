@@ -3,11 +3,20 @@ import "source-map-support/register";
 import { transformFileAsync as transform } from "@babel/core";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
-import { DeleteWriteOpResultObject, MongoClient, UpdateWriteOpResult } from "mongodb";
+import {
+  DeleteWriteOpResultObject,
+  MongoClient,
+  UpdateWriteOpResult
+} from "mongodb";
 import { join, normalize, resolve as rslv, sep } from "path";
 import { valid } from "semver";
 import { minify as terser } from "terser";
-import { CompilerOptions, createProgram, flattenDiagnosticMessageText, getPreEmitDiagnostics } from "typescript";
+import {
+  CompilerOptions,
+  createProgram,
+  flattenDiagnosticMessageText,
+  getPreEmitDiagnostics
+} from "typescript";
 
 const url = process.env.MONGO_URL,
   dbname = "PreMiD";

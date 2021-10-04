@@ -2,20 +2,6 @@ const presence = new Presence({
   clientId: "629768767987122217"
 });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "goyabu"
@@ -123,10 +109,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = title.innerText;
     presenceData.state = b;
     if (video.paused === false) {
-      const { duration, currentTime } = video,
-        timestamps = getTimestamps(currentTime, duration);
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      const { duration, currentTime } = video;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(currentTime, duration);
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Assistindo";
       presence.setActivity(presenceData);

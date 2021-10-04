@@ -20,11 +20,13 @@ const boardTypeMapping: interfaceMapping = {
     edit: "Editing",
     move: "Move Document",
     delete: "Delete Confirm",
+    // eslint-disable-next-line camelcase
     new_edit_request: "Create New Edit Request",
 
     // discuss
     discuss: "Dicsussing",
     thread: "View Discuss",
+    // eslint-disable-next-line camelcase
     edit_request: "Edit Request",
 
     // recent
@@ -47,11 +49,15 @@ const boardTypeMapping: interfaceMapping = {
   validateMembershipUrl = /\/member\/(.+)/,
   membersMapping: interfaceMapping = {
     login: "Login",
+    // eslint-disable-next-line camelcase
     recover_password: "Recover Password",
     signup: "Sign Up",
     mypage: "My Page",
+    // eslint-disable-next-line camelcase
     change_email: "Change Email",
+    // eslint-disable-next-line camelcase
     change_password: "Change Password",
+    // eslint-disable-next-line camelcase
     activate_otp: "Activate OTP"
   },
   // /RecentChanges?logtype=(search)
@@ -64,12 +70,19 @@ const boardTypeMapping: interfaceMapping = {
   },
   // /RecentDiscuss?logtype=(search)
   discussMapping: interfaceMapping = {
+    // eslint-disable-next-line camelcase
     normal_thread: "Normal Thread",
+    // eslint-disable-next-line camelcase
     old_thread: "Old Thread",
+    // eslint-disable-next-line camelcase
     closed_thread: "Closed Thread",
+    // eslint-disable-next-line camelcase
     open_editrequest: "Opened Edit Request",
+    // eslint-disable-next-line camelcase
     accepted_editrequest: "Accepted Edit Request",
+    // eslint-disable-next-line camelcase
     closed_editrequest: "Closed Edit Request",
+    // eslint-disable-next-line camelcase
     old_editrequest: "Old Edit Request"
   },
   // /contribution/(type)/(username)/(contributeType)
@@ -83,7 +96,7 @@ presence.on("UpdateData", async () => {
     path = document.location.pathname,
     params = document.location.search,
     parsedUrl = path.split("/"), // It's a very bad design, but they have a slash document.
-    action = parsedUrl[1],
+    [, action] = parsedUrl,
     details = boardTypeMapping[action],
     presenceData: PresenceData = { largeImageKey: "namu" };
 

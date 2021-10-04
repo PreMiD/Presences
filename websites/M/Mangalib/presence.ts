@@ -457,17 +457,17 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = 0;
       } else if (Routes[2] === "comment") {
         data.details = `Профиль: ${UserName}`;
-        let comment_type;
+        let commentType;
 
-        if (Queries.comment_type === "manga")
-          comment_type = "Комментарии к манге";
-        else if (Queries.comment_type === "chapter")
-          comment_type = "Комментарии к главам";
-        else if (Queries.comment_type === "post")
-          comment_type = "Комментарии к новостям";
-        else comment_type = "Все комментарии";
+        if (Queries.commentType === "manga")
+          commentType = "Комментарии к манге";
+        else if (Queries.commentType === "chapter")
+          commentType = "Комментарии к главам";
+        else if (Queries.commentType === "post")
+          commentType = "Комментарии к новостям";
+        else commentType = "Все комментарии";
 
-        data.state = comment_type;
+        data.state = commentType;
       } else if (Routes[2] === "following") {
         data.details = `Профиль: ${UserName}`;
         data.state = "Список друзей";

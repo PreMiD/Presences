@@ -70,12 +70,12 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browing Domino's Pizza";
     presenceData.state = "Contacting support";
   } else if (path === "/basketdetails/show") {
-    const price = document.getElementsByClassName(
+    const [price] = document.getElementsByClassName(
         "new-basket-total-price basket-price"
-      )[0],
-      saving = document.getElementsByClassName(
+      ),
+      [saving] = document.getElementsByClassName(
         "new-basket-total-price basket-alt-price"
-      )[0];
+      );
 
     let priceText, savingText;
 

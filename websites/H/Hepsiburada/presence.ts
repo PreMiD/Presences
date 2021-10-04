@@ -1,7 +1,9 @@
 const presence = new Presence({
     clientId: "629650221634158592"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/siparislerim": "Siparişlerim",
     "/hesabim": "Hesabım",
     "/ayagina-gelsin/teslimat-adreslerim": "Teslimat Adreslerim",
@@ -32,7 +34,7 @@ presence.on("UpdateData", async () => {
     seller = document.querySelector(
       "#productResult > div > div > div > div.col.lg-1.md-1.sm-1.filter-content > section > div > div.title-wrapper.with-bg.for-desktop.brand > h1"
     ) as HTMLElement,
-    data: { [k: string]: any } = {
+    data: PresenceData = {
       largeImageKey: "hb-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     };

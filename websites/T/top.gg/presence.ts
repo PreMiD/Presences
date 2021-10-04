@@ -109,13 +109,13 @@ presence.on("UpdateData", async () => {
     else if (window.location.pathname.startsWith("/servers/me"))
       presenceData.state = "My servers";
     else presenceData.state = "Discord Servers";
-  }
-
-  //If it doesn't fit to anything
-  else if (document.querySelector("#botlistitle"))
+  } else if (document.querySelector("#botlistitle")) {
+    //If it doesn't fit to anything
     presenceData.state = document.querySelector("#botlistitle").textContent;
-  //If it really finds nothing
-  else presenceData.details = "Viewing something...";
+  } else {
+    //If it really finds nothing
+    presenceData.details = "Viewing something...";
+  }
 
   presence.setActivity(presenceData);
 });

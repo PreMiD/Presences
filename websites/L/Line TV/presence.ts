@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
             .toLowerCase()
             .includes("highlight") ||
           videoData.sClipTitle.toLowerCase().includes("highlight"),
-        isLowerThan1_5mins: video ? video.duration < 90 : false,
+        isLowerThan15mins: video ? video.duration < 90 : false,
         episodes: null,
         buttonLabel: (await strings).viewEpisode,
         smallImagePlay: "play",
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
         videoD.genre = "HIGHLIGHT_";
       else if (videoData.sLiveStatus) videoD.genre = "LIVE";
       else if (
-        videoD.isLowerThan1_5mins &&
+        videoD.isLowerThan15mins &&
         !videoD.isHighligh &&
         !videoD.isTrailer &&
         video.currentTime &&
@@ -240,8 +240,7 @@ presence.on("UpdateData", async () => {
           break;
       }
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       presenceData.smallImageKey = video.paused
         ? "pause"
@@ -297,7 +296,7 @@ interface VideoDType {
   isTrailer: boolean;
   isHighligh: boolean;
   isTeaser: boolean;
-  isLowerThan1_5mins: boolean;
+  isLowerThan15mins: boolean;
   episodes: string[];
   playList: string;
   buttonLabel: string;

@@ -1,14 +1,7 @@
 const presence = new Presence({
-  clientId: "708779444541849640"
-});
-
-function Timestamps(videoTime, videoDuration): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const nomeObraAnime: HTMLElement = document.querySelector(
+    clientId: "708779444541849640"
+  }),
+  nomeObraAnime: HTMLElement = document.querySelector(
     "#weds > div > div.pageAnime > div > div > div.right > div.animeFirstContainer > h1"
   ),
   filtroObraAnime: HTMLElement = document.querySelector(
@@ -63,16 +56,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Lista de vídeos";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     } else {
-      const video: any = document.querySelector("video"),
-        timestamps: any = Timestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        );
+      const video = document.querySelector("video");
       presenceData.details = nomeEpisodio.innerText;
       presenceData.state = numeroEpisodio.innerText;
       if (!video.paused) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(
+            Math.floor(video.currentTime),
+            Math.floor(video.duration)
+          );
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = "Assistindo";
       }
@@ -83,12 +75,20 @@ presence.on("UpdateData", async () => {
     } de ${ultimaPagina.innerText}`;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     if (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
       statusLista[statusLista.selectedIndex].innerText !== "Selecione o Status"
     )
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
       presenceData.state = statusLista[statusLista.selectedIndex].innerText;
     else if (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
       generolista[generolista.selectedIndex].innerText !== "Selecione o Gênero"
     )
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
       presenceData.state = generolista[generolista.selectedIndex].innerText;
   } else {
     presenceData.details = "Navegando... ";

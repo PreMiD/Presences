@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
     video = document.querySelector(".bitmovinplayer-container video");
     if (video) {
       title = document.querySelector("title");
-      const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),

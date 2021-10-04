@@ -1,14 +1,14 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "632013978608074764"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  user: any,
-  title: any,
-  search: any,
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement | Element | string,
+  title: HTMLElement | Element | string,
+  search: HTMLElement | Element | string,
   playing: boolean,
   paused: boolean,
-  progress: any,
-  lastState: any;
+  progress: HTMLElement | Element | string | number,
+  lastState: HTMLElement | Element | string;
 
 lastState = null;
 
@@ -19,37 +19,29 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.monstercat.com") {
     progress = document.querySelector(".progress"); //Catches the progress bar
-    progress = progress.style.cssText.replace("width: ", "").replace("%;", ""); //Replace everything so only "x.xxxx" is left (x standing for numbers)
-
-    //console.log("progress:" + progress); //Previews the progress in console
-    //console.log("lastState:" + lastState); //Previews the lastState in console
-
+    progress = (progress as HTMLStyleElement).style.cssText
+      .replace("width: ", "")
+      .replace("%;", ""); //Replace everything so only "x.xxxx" is left (x standing for numbers)
     if (lastState === progress && progress !== "0" && progress !== "100") {
-      //If the player doesnt equal to 0 or 100 but does equal to the latest request make paused true
       playing = true;
       paused = true;
     } else if (progress === "0" || progress === "100") {
-      //If the player equals to 0 or 100 so that site information can be displayed because there is nothing playing
       playing = false;
       paused = true;
     } else {
-      //Sets the last progress to the latest progress and playing true and paused false
       lastState = progress;
       playing = true;
       paused = false;
     }
 
-    progress = Number(progress); //make progress from string to numbers
-    progress = Math.round(progress); //Remove everything after "."
-
-    //console.log("playing:" + playing);  //previews playing in console
-    //console.log("paused:" + paused); //previews paused in console
+    (progress as number) = Number(progress);
+    (progress as number) = Math.round(progress);
 
     if (playing === true && paused === false) {
       title = document.querySelector(
         "body > header > div.container.player > div.flex.controls.push-right.playing > a > span"
       );
-      presenceData.details = title.innerText;
+      presenceData.details = (title as HTMLElement).innerText;
       presenceData.state = `${progress}% progressed`;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
@@ -57,7 +49,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > header > div.container.player > div.flex.controls.push-right.playing > a > span"
       );
-      presenceData.details = title.innerText;
+      presenceData.details = (title as HTMLElement).innerText;
       presenceData.state = `${progress}% progressed`;
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "Paused";
@@ -72,13 +64,15 @@ presence.on("UpdateData", async () => {
           "body > section > div:nth-child(1) > div.container.flex > div > h3"
         );
         presenceData.details = "Viewing release:";
-        presenceData.state = `${title.innerText} by ${user.innerText}`;
+        presenceData.state = `${(title as HTMLElement).innerText} by ${
+          (user as HTMLElement).innerText
+        }`;
       } else if (document.location.pathname.includes("/artist/")) {
         user = document.querySelector(
           "body > section > div.top-banner > div.container.flex > div > div > h1"
         );
         presenceData.details = "Viewing artist:";
-        presenceData.state = user.innerText;
+        presenceData.state = (user as HTMLElement).innerText;
       } else if (document.location.pathname.includes("/music"))
         presenceData.details = "Browsing music releases...";
       else if (document.location.pathname.includes("/browse"))
@@ -90,7 +84,7 @@ presence.on("UpdateData", async () => {
       else if (document.location.pathname.includes("/playlist/")) {
         title = document.querySelector("body > section > div > h1");
         presenceData.details = "Viewing playlist:";
-        presenceData.state = title.innerText;
+        presenceData.state = (title as HTMLElement).innerText;
       } else if (document.location.pathname.includes("/playlists"))
         presenceData.details = "Viewing their playlists";
       else if (document.location.pathname.includes("/events"))
@@ -100,9 +94,12 @@ presence.on("UpdateData", async () => {
           "body > section > div.event-page-header > div > div.container.container--event-header.flex > div > a.silent.no-hover > h1"
         );
         presenceData.details = "Reading about event:";
-        if (title.innerText.length > 128)
-          presenceData.state = `${title.innerText.substring(0, 125)}...`;
-        else presenceData.state = title.innerText;
+        if ((title as HTMLElement).innerText.length > 128) {
+          presenceData.state = `${(title as HTMLElement).innerText.substring(
+            0,
+            125
+          )}...`;
+        } else presenceData.state = (title as HTMLElement).innerText;
 
         presenceData.smallImageKey = "reading";
       } else if (document.location.pathname.includes("/publishing"))
@@ -116,7 +113,10 @@ presence.on("UpdateData", async () => {
       else if (document.location.pathname.includes("/blog/")) {
         if (document.location.pathname.includes("/tags/")) {
           title = document.querySelector("head > title");
-          title = title.innerText.replace(" Posts - Monstercat", "");
+          title = (title as HTMLElement).innerText.replace(
+            " Posts - Monstercat",
+            ""
+          );
           presenceData.details = "Blog - Viewing tag:";
           presenceData.state = title;
         } else {
@@ -124,9 +124,12 @@ presence.on("UpdateData", async () => {
             "body > section > div.panel.panel--article > header > h1"
           );
           presenceData.details = "Reading article:";
-          if (title.innerText.length > 128)
-            presenceData.state = `${title.innerText.substring(0, 125)}...`;
-          else presenceData.state = title.innerText;
+          if ((title as HTMLElement).innerText.length > 128) {
+            presenceData.state = `${(title as HTMLElement).innerText.substring(
+              0,
+              125
+            )}...`;
+          } else presenceData.state = (title as HTMLElement).innerText;
 
           presenceData.smallImageKey = "reading";
         }
@@ -137,7 +140,7 @@ presence.on("UpdateData", async () => {
           "body > header > div.container.player > div.col-xs-hidden.col-md-visible.global-search > form > input[type=text]"
         );
         presenceData.details = "Searching for:";
-        presenceData.state = search.value;
+        presenceData.state = (search as HTMLElement).textContent;
         presenceData.smallImageKey = "searching";
       } else if (document.location.pathname === "/")
         presenceData.details = "Viewing homepage";
@@ -149,13 +152,16 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#product-description > div:nth-child(1) > h1"
       );
-      if (title.innerText.length > 128)
-        presenceData.state = `${title.innerText.substring(0, 125)}...`;
-      else presenceData.state = title.innerText;
+      if ((title as HTMLElement).innerText.length > 128) {
+        presenceData.state = `${(title as HTMLElement).innerText.substring(
+          0,
+          125
+        )}...`;
+      } else presenceData.state = (title as HTMLElement).innerText;
     } else if (document.location.pathname.includes("/collections/")) {
       presenceData.details = "Shop - Viewing collection:";
       title = document.querySelector("#collection-description > h1");
-      presenceData.state = title.innerText;
+      presenceData.state = (title as HTMLElement).innerText;
     } else if (document.location.pathname.includes("/cart"))
       presenceData.details = "Shop - Viewing cart";
     else if (document.location.pathname === "/")

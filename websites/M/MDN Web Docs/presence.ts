@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
       default: {
         data.largeImageKey = "homepage";
 
-        const tech = paths[4];
+        const [, , , , tech] = paths;
 
         if (paths[5]) {
           paths.splice(0, 5);

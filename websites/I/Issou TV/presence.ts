@@ -9,19 +9,10 @@ const presence = new Presence({
     reading: "presence.activity.reading"
   });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function parseQueryString(queryString?: string): any {
+function parseQueryString(queryString?: string) {
   if (!queryString) queryString = window.location.search.substring(1);
 
-  const params = {},
+  const params: { [queryKey: string]: string } = {},
     queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
     const indexPair = indexQuery.split("="),
@@ -72,27 +63,26 @@ presence.on("UpdateData", async () => {
       const video: HTMLVideoElement = document.querySelector(
         ".mejs-mediaelement > mediaelementwrapper > video"
       );
-      presenceData.details = pageTitle[0];
+      [presenceData.details] = pageTitle;
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
       if (video.paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
     }
   } else if (document.location.pathname.includes("/upload")) {
-    presenceData.details = pageTitle[0];
+    [presenceData.details] = pageTitle;
     presenceData.smallImageKey = "uploading";
   } else {
-    presenceData.details = pageTitle[0];
+    [presenceData.details] = pageTitle;
     presenceData.state = (await strings).reading;
     presenceData.startTimestamp = browsingStamp;
   }
@@ -102,7 +92,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = `${(await strings).searching} : ${query}`;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

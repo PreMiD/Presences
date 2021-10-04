@@ -3,6 +3,8 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
+let x: string;
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
@@ -16,12 +18,12 @@ presence.on("UpdateData", async () => {
       document.location.pathname
     )
   ) {
-    var d = document.location.pathname.replace("/", "").split(":");
-    presenceData.details = `browsing ${d[0]}`;
-    presenceData.state = `at ${d[1]}`;
+    const [d, d1] = document.location.pathname.replace("/", "").split(":");
+    presenceData.details = `browsing ${d}`;
+    presenceData.state = `at ${d1}`;
   } else if (document.location.pathname.startsWith("/Help:Contents/")) {
-    const help = document.location.pathname.split("/");
-    d = help[1].split(":");
+    const help = document.location.pathname.split("/"),
+      d = help[1].split(":");
     presenceData.details = `getting ${d[0]}`;
     presenceData.state = `${d[1]}: ${help[2]
       .replace("%26", "&")
@@ -33,16 +35,16 @@ presence.on("UpdateData", async () => {
       .innerText.replace(")", "")
       .split("(");
     if (name[0].startsWith("Prerelease:")) {
-      d = name[0].split(":");
-      var x = `Game: ${d[1]}(${d[0]})`;
-    } else var x = `Game: ${name[0]}`;
+      const d = name[0].split(":");
+      x = `Game: ${d[1]}(${d[0]})`;
+    } else x = `Game: ${name[0]}`;
 
     let stated;
     if (name[1] === undefined) stated = "Platform: Multiple";
     else stated = `Platform: ${name[1]} `;
 
     //var year = document.getElementsByClassName("mw-headline")[1].innerText
-    presenceData.details = `${x}`;
+    presenceData.details = x;
     presenceData.state = stated;
   }
 });

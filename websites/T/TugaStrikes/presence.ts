@@ -9,9 +9,8 @@ presence.on("UpdateData", () => {
     },
     domain = "https://tugastrikes.com/",
     url = window.location.href.replace(domain, ""),
-    parts = url.split("/"),
-    section = parts[1],
-    page = parts[0];
+    [page, section] = url.split("/");
+
   let state;
   if (section === "skins") state = "Skins";
   else if (section === "myskins") state = "My Skins";

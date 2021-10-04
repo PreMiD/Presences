@@ -5,7 +5,9 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/": "Ana Sayfa",
     "/uyeler": "Üyeler",
     "/yabanci-dizi-takvimi": "Dizi Takvimi",
@@ -22,28 +24,16 @@ const presence = new Presence({
     "/pano/son-izlediklerim": "Son İzlediklerim"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+let video: Video;
+
+interface Video extends HTMLVideoElement {
+  dataAvailable: boolean;
 }
 
-const video: { [k: string]: any } = {};
-
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", (data: Video) => {
   if (!data.error) {
+    video = data;
     video.dataAvailable = true;
-    video.currentTime = data.currentTime;
-    video.duration = data.duration;
-    video.paused = data.paused;
   }
 });
 
@@ -213,11 +203,11 @@ presence.on("UpdateData", async () => {
         .replace(title.textContent, "")
         .replace(" ", "")
         .trim(),
-      timestamps = getTimestamps(
+      timestamps = presence.getTimestamps(
         Math.floor(_video.currentTime),
         Math.floor(_video.duration)
       ),
-      data: { [k: string]: any } = {
+      data: { [k: string]: boolean | string | number } = {
         largeImageKey: "dl-logo",
         details: title.textContent,
         state: fixedEpisodeName,
@@ -227,10 +217,9 @@ presence.on("UpdateData", async () => {
           : (await strings).play
       };
 
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
-    }
+    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
+      [data.startTimestamp, data.endTimestamp] = timestamps;
+
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
@@ -283,11 +272,11 @@ presence.on("UpdateData", async () => {
           .replace(title.textContent, "")
           .replace(" ", "")
           .trim(),
-        timestamps = getTimestamps(
+        timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        data: { [k: string]: any } = {
+        data: PresenceData = {
           largeImageKey: "dl-logo",
           details: title.textContent,
           state: fixedEpisodeName,
@@ -297,10 +286,9 @@ presence.on("UpdateData", async () => {
             : (await strings).play
         };
 
-      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-        data.startTimestamp = timestamps[0];
-        data.endTimestamp = timestamps[1];
-      }
+      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
+        [data.startTimestamp, data.endTimestamp] = timestamps;
+
       if (video.paused) {
         delete data.startTimestamp;
         delete data.endTimestamp;

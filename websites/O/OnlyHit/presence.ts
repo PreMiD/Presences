@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = "reading";
         } else if (document.location.pathname.includes("/search")) {
           presenceData.details = "Searching for:";
-          presenceData.state = page.split('"')[1];
+          [, presenceData.state] = page.split('"');
           presenceData.smallImageKey = "search";
         } else {
           //* Show normal page information if there isn't a "special" one set above

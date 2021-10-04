@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-    presenceData.endTimestamp = timestamps[1];
+    [, presenceData.endTimestamp] = timestamps;
 
     presenceData.buttons = [
       {
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-    presenceData.endTimestamp = timestamps[1];
+    [, presenceData.endTimestamp] = timestamps;
 
     if (isSeries) {
       presenceData.state = `${findElement(

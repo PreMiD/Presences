@@ -11,7 +11,7 @@ let iFrameVideo: boolean,
   duration: number,
   paused: boolean,
   video: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
@@ -26,7 +26,7 @@ let iFrameVideo: boolean,
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
@@ -35,12 +35,12 @@ presence.on(
     };
   }) => {
     video = data;
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      paused = data.iframe_video.paused;
+      iFrameVideo = data.iframeVideo.iFrameVideo;
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
+      paused = data.iframeVideo.paused;
     }
   }
 );

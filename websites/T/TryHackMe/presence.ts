@@ -1,12 +1,12 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "656826806061498368" //The client ID of the Application created at https://discordapp.com/developers/applications
     //Enable use and detection of media key presses
   }),
   presenceData: PresenceData = {
     largeImageKey: "icon"
   },
-  customData = false,
   browsingStamp = Math.floor(Date.now() / 1000);
+let customData = false;
 
 presence.on("UpdateData", async () => {
   customData = false;

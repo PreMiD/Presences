@@ -61,15 +61,14 @@ presence.on("UpdateData", async () => {
 
     if (video !== null && !isNaN(video.duration)) {
       const videoTitle = AniN,
-        seasonepisode = AniEp.replace("– ", "").replace(" [SEM CENSURA]", ""),
-        timestamps = presence.getTimestamps(
+        seasonepisode = AniEp.replace("– ", "").replace(" [SEM CENSURA]", "");
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused ? "Pausado" : "Assistindo";
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
       presence.setTrayTitle(video.paused ? "" : videoTitle);
       presenceData.details = videoTitle;
       presenceData.state = seasonepisode;
@@ -81,7 +80,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

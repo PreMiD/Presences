@@ -4,10 +4,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   let presenceData: PresenceData = {
-      details: "Viewing the homepage...",
-      largeImageKey: "lg-gb"
-    },
-    urlParams = new URLSearchParams(window.location.search);
+    details: "Viewing the homepage...",
+    largeImageKey: "lg-gb"
+  };
+  const urlParams = new URLSearchParams(window.location.search);
   if (document.location.pathname === "/") {
     presenceData = {
       details: "Viewing the homepage...",

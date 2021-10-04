@@ -64,11 +64,11 @@ presence.on("UpdateData", async () => {
           document.getElementsByClassName("black-title")[0].innerHTML
         } izliyor`;
         if (document.getElementsByClassName("episode-name")) {
-          presenceData.state = document
+          [presenceData.state] = document
             .querySelector(
               "body > div#body-wrapper > div#content > div.section > section > div.section-title > h1 > a > mark"
             )
-            .innerHTML.split('<span class="episode-name">')[0];
+            .innerHTML.split('<span class="episode-name">');
         }
       }
     }

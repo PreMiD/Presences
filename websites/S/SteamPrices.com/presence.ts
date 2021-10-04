@@ -46,14 +46,14 @@ presence.on("UpdateData", async () => {
       .replace(/"/g, "");
   } else if (document.location.href.indexOf("/app/") > -1) {
     presenceData.details = "Looking at a game";
-    presenceData.state = (
+    [presenceData.state] = (
       document.querySelector("h1.title") as HTMLElement
-    ).innerText.match(/[^\s*].*[^\s*]/)[0];
+    ).innerText.match(/[^\s*].*[^\s*]/);
   } else if (document.location.href.indexOf("/bundle/") > -1) {
     presenceData.details = "Looking at a bundle";
-    presenceData.state = (
+    [presenceData.state] = (
       document.querySelector("h1.title") as HTMLElement
-    ).innerText.match(/[^\s*].*[^\s*]/)[0];
+    ).innerText.match(/[^\s*].*[^\s*]/);
   } else if (document.location.href.indexOf("/tracker") > -1)
     presenceData.details = "Tracking game prices";
   else if (document.location.href.indexOf("/publishers") > -1)

@@ -5,30 +5,8 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-  });
-
-let video = {
-  current: 0,
-  duration: 0,
-  paused: true
-};
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-// Const thing
-const browsingStamp = Math.floor(Date.now() / 1000),
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
   title = document.querySelector(
     "body > div:nth-child(3) > div > div.col-lg-9 > div > div.panel-heading > h3"
   ),
@@ -38,6 +16,12 @@ const browsingStamp = Math.floor(Date.now() / 1000),
   title1 = title?.textContent ?? "ไม่ทราบชื่อ",
   ep1 = ep?.textContent ?? "ไม่ทราบชื่อตอน",
   path = document.location;
+
+let video = {
+  current: 0,
+  duration: 0,
+  paused: true
+};
 
 presence.on(
   "iFrameData",
@@ -87,7 +71,7 @@ presence.on("UpdateData", async () => {
           episode = episode.replace("พากย์ไทย", "").trim();
 
         episode = `ตอนที่ ${episode}`;
-        presenceData.state = info[0];
+        [presenceData.state] = info;
         presenceData.details = episode;
       } else {
         let info;
@@ -105,10 +89,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      if (!video.paused) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
-      }
+      if (!video.paused)
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "เลือกตอน ";
@@ -119,7 +101,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

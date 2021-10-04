@@ -4,23 +4,8 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -315,16 +300,14 @@ presence.on("UpdateData", async () => {
     const video: HTMLVideoElement = document.querySelector("video");
 
     if (video !== null && !isNaN(video.duration)) {
-      let timestamps: Array<number>;
-      timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
       presenceData.largeImageKey = "chess";
       presenceData.details = "Watching video";
       presenceData.state = document.title;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
       if (video.paused) {
         presenceData.smallImageKey = "pause";
         presenceData.smallImageText = (await strings).pause;
@@ -336,7 +319,7 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

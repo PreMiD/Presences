@@ -56,8 +56,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Playing";
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = "Playing";
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
           presenceData.state = `${title.innerText} ${chapter.innerText}`;
         } else if (title) {
           presenceData.startTimestamp = browsingStamp;
@@ -148,8 +147,8 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Playing";
           if (!video.paused) {
-            presenceData.startTimestamp = timestamps[0];
-            presenceData.endTimestamp = timestamps[1];
+            [presenceData.startTimestamp, presenceData.endTimestamp] =
+              timestamps;
             presenceData.details = "Playing";
             presenceData.state = `${title.innerText} ${chapter.innerText}`;
           } else {

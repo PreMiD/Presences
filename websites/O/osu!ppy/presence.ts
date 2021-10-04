@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "The osu! Store";
     presenceData.smallImageKey = "searching";
   } else if (document.location.pathname.startsWith("/rankings")) {
-    gamemode = document.location.pathname.split("/")[2];
+    [, , gamemode] = document.location.pathname.split("/");
     if (document.location.pathname.includes("/performance")) {
       if (
         document.querySelector("div.u-ellipsis-overflow").textContent !== "All"

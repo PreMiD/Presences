@@ -10,24 +10,24 @@ presence.on("UpdateData", async () => {
     largeImageKey: "instantgaming"
   };
   try {
-    const product_title = document.querySelector(
+    const productTitle = document.querySelector(
         "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
       ).textContent,
-      product_price = document.querySelector("div.price").textContent;
-    let product_platform = document.querySelector(
+      productPrice = document.querySelector("div.price").textContent;
+    let productPlatform = document.querySelector(
       "div.subinfos > a.platform"
     ).textContent;
-    if (product_platform.startsWith("Other")) product_platform = "N/A";
+    if (productPlatform.startsWith("Other")) productPlatform = "N/A";
 
     presenceData.details = "Viewing a product:";
-    presenceData.state = `[${product_platform}] ${product_title} (${product_price})`;
+    presenceData.state = `[${productPlatform}] ${productTitle} (${productPrice})`;
   } catch {
     if (window.location.pathname.includes("/user/")) {
-      const profile_name = document.querySelector(
+      const profileName = document.querySelector(
         "div.ig-profile-info-nick > span"
       ).textContent;
       presenceData.details = "Viewing a profile:";
-      presenceData.state = profile_name;
+      presenceData.state = profileName;
     } else presenceData.details = (await strings).browsing;
   }
 

@@ -120,17 +120,17 @@ presence.on("UpdateData", async function () {
       presenceData.details = lang.browsing;
       presenceData.state = document.querySelector(".bISbKZ").textContent;
     } else if (urlpath[1] === "play" && urlpath[2] === "filme") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.title.replace("streamen | Joyn", "");
       presenceData.state = "Movie";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;
@@ -147,17 +147,17 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "serien") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.title.replace("streamen", "");
       presenceData.state = "Series";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;
@@ -175,17 +175,17 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "trailer") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.title.replace("Trailer | Joyn", "");
       presenceData.state = "Trailer";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;
@@ -211,17 +211,17 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "compilation") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.title.replace("| Joyn", "");
       presenceData.state = "Compilation";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;
@@ -239,9 +239,9 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "sport") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.querySelector(
@@ -250,8 +250,8 @@ presence.on("UpdateData", async function () {
       presenceData.state = "Sport";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;

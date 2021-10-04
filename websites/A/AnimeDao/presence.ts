@@ -5,20 +5,6 @@ const presence = new Presence({
   { hostname } = window.location,
   startTimestamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Math.floor(Date.now() / 1000),
-    endTime = Math.floor(startTime - videoTime + videoDuration);
-  return [startTime, endTime];
-}
-
 let episode,
   current: number,
   duration: number,
@@ -33,10 +19,7 @@ presence.on(
     paused: boolean;
     played: boolean;
   }) => {
-    current = data.current;
-    duration = data.duration;
-    paused = data.paused;
-    played = data.played;
+    ({ current, duration, paused, played } = data);
   }
 );
 
@@ -61,16 +44,15 @@ presence.on("UpdateData", async () => {
     const video: HTMLVideoElement = document.querySelector("video");
     if (video !== null) {
       played = video.currentTime !== 0;
-      duration = video.duration;
+      ({ duration, paused } = video);
       current = video.currentTime;
-      paused = video.paused;
     }
     if (played) {
       if (!paused) {
-        const timestamps = getTimestamps(current, duration);
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(current, duration);
       }
+
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).paused

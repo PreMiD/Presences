@@ -1,10 +1,11 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "623229289864626195" // CLIENT ID FOR YOUR PRESENCE
   }),
-  item: any,
-  admin: any,
-  item2: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+let item: HTMLElement,
+  admin: HTMLElement,
+  item2: HTMLElement,
+  item3: HTMLImageElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -251,10 +252,10 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname === "www.intelextrememasters.com") {
     if (document.location.pathname.includes("/season-")) {
-      item = document.querySelector("#site-logo-inner > a > img");
+      item3 = document.querySelector("#site-logo-inner > a > img");
       if (item !== null) {
         presenceData.details = "ESL Intel Extreme Masters";
-        presenceData.state = `Viewing: ${item.alt}`;
+        presenceData.state = `Viewing: ${item3.alt}`;
 
         delete presenceData.smallImageKey;
 
@@ -367,14 +368,14 @@ presence.on("UpdateData", async () => {
     } else if (item2.innerText.includes(" - ")) {
       if (item2.innerText.split(" - ")[0].includes("ESL")) {
         presenceData.details = "ESL ONE viewing: ";
-        presenceData.state = item2.innerText.split(" - ")[0];
+        [presenceData.state] = item2.innerText.split(" - ");
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else if (item2.innerText.split(" - ")[1].includes("ESL")) {
         presenceData.details = "ESL ONE viewing: ";
-        presenceData.state = item2.innerText.split(" - ")[1];
+        [, presenceData.state] = item2.innerText.split(" - ");
 
         delete presenceData.smallImageKey;
 
@@ -438,7 +439,7 @@ presence.on("UpdateData", async () => {
         "#MainContent > div > div > div > form > input.input-group-field"
       );
       presenceData.details = "ESL Shop, searching for:";
-      presenceData.state = item.value;
+      presenceData.state = item.innerText;
 
       delete presenceData.smallImageKey;
 
@@ -515,7 +516,7 @@ presence.on("UpdateData", async () => {
         "body > div.l-page > div.l-main > div > div.l-content > article > div > div > div > div > div > div:nth-child(1) > div:nth-child(1) > form > input[type=text]:nth-child(6)"
       );
       presenceData.details = "ESL Play, searching for:";
-      presenceData.state = item.value;
+      presenceData.state = item.innerText;
 
       delete presenceData.smallImageKey;
 
@@ -534,14 +535,14 @@ presence.on("UpdateData", async () => {
       } else {
         item = document.querySelector("head > title");
         presenceData.details = "ESL Play, viewing:";
-        presenceData.state = item.innerText.split(" | ESL Play")[0];
+        [presenceData.state] = item.innerText.split(" | ESL Play");
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       }
     } else if (item2.innerText.includes(" | ESL Play")) {
       presenceData.details = "ESL Play, viewing:";
-      presenceData.state = item2.innerText.split(" | ESL Play")[0];
+      [presenceData.state] = item2.innerText.split(" | ESL Play");
 
       delete presenceData.smallImageKey;
 
@@ -563,7 +564,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/category/")) {
       presenceData.details = "Browsing category:";
-      presenceData.state = document.location.pathname.split("category/")[1];
+      [presenceData.state] = document.location.pathname.split("category/");
 
       delete presenceData.smallImageKey;
 
@@ -587,7 +588,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/categories/")) {
       presenceData.details = "ESL Forums, Browsing category:";
-      presenceData.state = document.location.pathname.split("categories/")[1];
+      [, presenceData.state] = document.location.pathname.split("categories/");
 
       delete presenceData.smallImageKey;
 
@@ -600,19 +601,19 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/profile/comments")) {
       presenceData.details = "ESL Forums, viewing profile:";
-      presenceData.state = document.location.pathname.split("/")[4];
+      [, , , , presenceData.state] = document.location.pathname.split("/");
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/profile/discussions")) {
       presenceData.details = "ESL Forums, viewing profile:";
-      presenceData.state = document.location.pathname.split("/")[4];
+      [, , , , presenceData.state] = document.location.pathname.split("/");
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/profile")) {
       presenceData.details = "ESL Forums, viewing profile:";
-      presenceData.state = document.location.pathname.split("/")[3];
+      [, , , presenceData.state] = document.location.pathname.split("/");
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);

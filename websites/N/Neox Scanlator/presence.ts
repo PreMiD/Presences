@@ -5,22 +5,22 @@ presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
       startTimestamp: Math.floor(Date.now() / 1000)
     },
-    path: any = document.location.pathname;
-  let PesquisaTexto: any,
-    OrdenarTexto: any,
-    OrdenarTextoObra: any,
-    GeneroTexto: any,
-    StatusContaTexto: any,
-    opcaoLeitor: any,
-    tipoObra: any,
-    generoObra: any,
-    spanObra: any,
-    nomeObra: any,
-    nomeObraLeitor: any,
-    capituloLeitor: any,
-    seasonLeitor: any,
-    paginaLeitor: any,
-    postagemData: any;
+    path = document.location.pathname;
+  let PesquisaTexto: HTMLElement,
+    OrdenarTexto: HTMLElement,
+    OrdenarTextoObra: HTMLElement,
+    GeneroTexto: HTMLElement,
+    StatusContaTexto: HTMLElement,
+    opcaoLeitor: HTMLElement,
+    tipoObra: HTMLElement,
+    generoObra: HTMLElement,
+    spanObra: HTMLElement,
+    nomeObra: HTMLElement,
+    nomeObraLeitor: HTMLElement,
+    capituloLeitor: HTMLElement,
+    seasonLeitor: HTMLElement,
+    paginaLeitor: HTMLElement,
+    postagemData: HTMLElement;
 
   const bodyWrap: HTMLElement = document.querySelector("body > div.wrap > div");
 

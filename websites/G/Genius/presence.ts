@@ -69,9 +69,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = (await strings).reading;
   } else if (path.startsWith("/artists/")) {
     presenceData.details = (await strings).profile;
-    presenceData.state = document
+    [presenceData.state] = document
       .querySelector("h1.profile_identity-name_iq_and_role_icon")
-      .innerHTML.split("<")[0];
+      .innerHTML.split("<");
   } else if (path.startsWith("/albums/")) {
     presenceData.details = (await strings).viewAlbum;
     presenceData.state = document.querySelector(
@@ -117,9 +117,9 @@ presence.on("UpdateData", async () => {
     document.querySelector(".profile_identity-name_iq_and_role_icon") !== null
   ) {
     presenceData.details = (await strings).profile;
-    presenceData.state = document
+    [presenceData.state] = document
       .querySelector("h1.profile_identity-name_iq_and_role_icon")
-      .innerHTML.split("<")[0];
+      .innerHTML.split("<");
   } else if (path.startsWith("/videos/")) {
     const video: HTMLVideoElement = document.querySelector("video.vjs-tech");
     let title = document.querySelector("h1.article_title").textContent;
@@ -128,14 +128,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).watch;
     presenceData.state = title;
     if (video && !isNaN(video.duration)) {
-      const timestamps = presence.getTimestampsfromMedia(video);
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestampsfromMedia(video);
 
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
 
       if (video.paused) {
         delete presenceData.startTimestamp;

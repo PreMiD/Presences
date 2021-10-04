@@ -51,7 +51,7 @@ quora.on("UpdateData", async () => {
       presenceData.details = "Viewing profile:";
       presenceData.state = account;
     } else if (
-      document.location.pathname.match(/^\/[A-Za-z0-9\%\-]+\/answer\//)
+      document.location.pathname.match(/^\/[A-Za-z0-9%-]+\/answer\//)
     ) {
       presenceData.startTimestamp = browsingStamp;
       question = document.querySelector(
@@ -62,7 +62,7 @@ quora.on("UpdateData", async () => {
       ).textContent;
       presenceData.details = `Viewing ${account}'s answer for:`;
       presenceData.state = question;
-    } else if (document.location.pathname.match(/^\/[A-Za-z0-9\%\-]+/)) {
+    } else if (document.location.pathname.match(/^\/[A-Za-z0-9%-]+/)) {
       presenceData.startTimestamp = browsingStamp;
       question = document.querySelector(
         "#mainContent > div.q-box.qu-borderBottom > div > div.q-text.qu-dynamicFontSize--xlarge.qu-bold.qu-color--gray_dark_dim.qu-passColorToLinks.qu-lineHeight--regular > span > span > div > div > div > span > span"

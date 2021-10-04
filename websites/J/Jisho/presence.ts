@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = decodeURIComponent(
           document.location.pathname.substr(8)
         );
-        console.log("searching");
+        presence.info("searching");
       } else {
         presenceData.details = "Viewing a kanji:";
         const kanji = document.querySelector(
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
             )
             .innerHTML.trim();
         presenceData.state = `${kanji} - ${meaning}`;
-        console.log(`${kanji} - ${meaning}`);
+        presence.info(`${kanji} - ${meaning}`);
       }
     } else if (document.location.pathname.startsWith("/word")) {
       presenceData.details = "Viewing a word:";

@@ -41,8 +41,7 @@ presence.on("UpdateData", async () => {
         (timestamps = presence.getTimestamps(currentTime, duration));
     }
 
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
     presenceData.smallImageKey = videoPaused ? "pause" : "play";
 

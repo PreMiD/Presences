@@ -98,8 +98,7 @@ presence.on("UpdateData", async () => {
           Math.floor(video.duration)
         );
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
         presenceData.smallImageKey = "play";
       } else {
         presenceData.startTimestamp = null;

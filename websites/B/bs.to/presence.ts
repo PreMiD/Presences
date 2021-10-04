@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "639568013590528030"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let user: any, title: any, search: any;
+let user: HTMLElement, title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

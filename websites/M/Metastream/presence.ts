@@ -53,35 +53,35 @@ presence.on("UpdateData", async () => {
       if (path === "/") {
         details = "Home";
 
-        const menu_item = document.querySelector(
+        const menuItem = document.querySelector(
           ".MenuTabs__tabItem__2ny6A.MenuTabs__selected__c65wY"
         );
-        if (menu_item) state = `Viewing ${menu_item.textContent}`;
+        if (menuItem) state = `Viewing ${menuItem.textContent}`;
       }
       if (path.match("/settings")) {
         details = "Settings";
 
-        const setting_item = document.querySelector(
+        const settingItem = document.querySelector(
           ".SettingsMenu__tabItem__3ypki.SettingsMenu__selectedTab__OMITL"
         );
-        if (setting_item) state = `Viewing ${setting_item.textContent}`;
+        if (settingItem) state = `Viewing ${settingItem.textContent}`;
       }
       if (path.match("/join")) {
-        const connection_info = document.querySelector(".Connect__info__3Vwlv"),
-          disconnection_info = document.querySelector(
+        const connectionInfo = document.querySelector(".Connect__info__3Vwlv"),
+          disconnectionInfo = document.querySelector(
             ".Disconnect__info__3Uejx"
           ),
-          disconnection_label = document.querySelector(
+          disconnecctionLabel = document.querySelector(
             ".Disconnect__info__3Uejx > span"
           ),
-          menu_header = document.querySelector(".MenuHeader__header__1SYq0");
+          menuHeader = document.querySelector(".MenuHeader__header__1SYq0");
 
-        if (connection_info) details = "Connecting...";
-        else if (disconnection_info) {
+        if (connectionInfo) details = "Connecting...";
+        else if (disconnectionInfo) {
           details = "Disconnected";
 
-          if (disconnection_label) state = disconnection_label.textContent;
-        } else if (menu_header) details = "Setting up...";
+          if (disconnecctionLabel) state = disconnecctionLabel.textContent;
+        } else if (menuHeader) details = "Setting up...";
         else {
           smallImageKey = "live";
           smallImageText = (await strings).live;
@@ -89,9 +89,9 @@ presence.on("UpdateData", async () => {
           const users =
               document.querySelector(".ListOverlay__list__1epFe") ||
               document.createElement("HTMLDivElement"),
-            user_button = document.querySelector(".UserItem__menuBtn__1ST9k");
+            userButton = document.querySelector(".UserItem__menuBtn__1ST9k");
 
-          if (users.childElementCount === 1 || user_button !== null)
+          if (users.childElementCount === 1 || userButton !== null)
             details = `Hosting (${users.childElementCount} Users)`;
           else details = `Watching (${users.childElementCount} Users)`;
 
@@ -106,12 +106,10 @@ presence.on("UpdateData", async () => {
                 ".Timeline__time__gcvG5:nth-child(3)"
               );
             if (current && duration) {
-              const timestamps = getTimestamps(
+              [startTimestamp, endTimestamp] = getTimestamps(
                 current.textContent,
                 duration.textContent
               );
-              startTimestamp = timestamps[0];
-              endTimestamp = timestamps[1];
             }
 
             const play: SVGUseElement = document.querySelector(

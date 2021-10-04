@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
   let query: URLSearchParams = null;
 
   if (location.hostname === "www.qwant.com") {
-    const firstPath = location.pathname.split("/")[1];
+    const [, firstPath] = location.pathname.split("/");
     switch (firstPath) {
       case "":
         query = new URLSearchParams(location.search);

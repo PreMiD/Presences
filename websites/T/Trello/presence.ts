@@ -1,9 +1,9 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "614583717951963137" // CLIENT ID FOR YOUR PRESENCE
   }),
-  board: any,
-  profile: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+
+let board: HTMLElement, profile: string[] | HTMLElement | string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -161,9 +161,9 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname === "developers.trello.com") {
     if (document.location.pathname.includes("/reference")) {
-      profile = document.URL.split("#", 2);
+      [, profile] = document.URL.split("#", 2);
       presenceData.details = "Developers, API Docs:";
-      presenceData.state = profile[1];
+      presenceData.state = profile;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/docs")) {
       presenceData.details = "Developers, Reading guide";

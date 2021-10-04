@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector(
         "#container > div.page > div.main-wrap > div.profile > section > header > h2"
-      ) !== null
+      )
     ) {
       user = document.querySelector(
         "#container > div.page > div.main-wrap > div.profile > section > header > h2"

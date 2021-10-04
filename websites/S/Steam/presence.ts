@@ -1,17 +1,17 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "612299892764966923"
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
-  AppName: any,
-  topicTitle: any,
-  topicAuthor: any,
-  broadcastTitle: any,
-  broadcaster: any,
-  itemName: any,
-  itemPrice: any,
-  workshop: any,
   homeURL = new URL(document.location.href),
   subsection = homeURL.searchParams.get("subsection");
+let AppName: HTMLElement,
+  topicTitle: HTMLElement,
+  topicAuthor: HTMLElement,
+  broadcastTitle: HTMLElement,
+  broadcaster: HTMLElement,
+  itemName: HTMLElement,
+  itemPrice: HTMLElement,
+  workshop: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       }
     } else if (document.location.pathname.includes("/search/users")) {
-      const input: any = document.querySelector("#search_text_box");
+      const input = document.querySelector("#search_text_box");
 
       presenceData.details = "Searching for a user: ";
 

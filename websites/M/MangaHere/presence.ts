@@ -64,27 +64,24 @@ presence.on("UpdateData", async () => {
       splitUrl[1] === "new"
         ? "Browsing new manga"
         : `Browsing new ${splitUrl[1]} manga`;
-  }
-  //ganre/completed/
-  else if (pathname.endsWith("/completed/")) {
+  } else if (pathname.endsWith("/completed/")) {
+    //ganre/completed/
     const url = pathname,
       splitUrl = url.split("/");
     data.details =
       splitUrl[1] === "completed"
         ? "Browsing completed manga"
         : `Browsing completed ${splitUrl[1]} manga`;
-  }
-  //ganre/on_going/
-  else if (pathname.endsWith("/on_going/")) {
+  } else if (pathname.endsWith("/on_going/")) {
+    //ganre/on_going/
     const url = pathname,
       splitUrl = url.split("/");
     data.details =
       splitUrl[1] === "on_going"
         ? "Browsing ongoing manga"
         : `Browsing ongoing ${splitUrl[1]} manga`;
-  }
-  //Manga Viewing
-  else if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
+  } else if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
+    //Manga Viewing
     const title = document.querySelector(
         ".detail-info-right-title-font"
       ).textContent,
@@ -93,9 +90,8 @@ presence.on("UpdateData", async () => {
     data.state = title;
     data.buttons = [{ label: "View Manga", url: link }];
     data.smallImageKey = "viewing";
-  }
-  //Manga Reading
-  else if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
+  } else if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
+    //Manga Reading
     const title = document.querySelector(".reader-header-title-1").textContent,
       chapter = document.querySelector(".reader-header-title-2").textContent,
       //setting up page progress
@@ -112,9 +108,8 @@ presence.on("UpdateData", async () => {
     }
     data.details = title;
     data.smallImageKey = "reading";
-  }
-  //Searching
-  else if (pathname.startsWith("/search")) {
+  } else if (pathname.startsWith("/search")) {
+    //Searching
     const queryString = window.location.search,
       urlParams = new URLSearchParams(queryString),
       search = urlParams.get("title"),

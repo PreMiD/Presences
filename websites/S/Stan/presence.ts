@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
           ? (await strings).pause
           : (await strings).play;
 
-        presenceData.endTimestamp = timestamps[1];
+        [, presenceData.endTimestamp] = timestamps;
 
         presenceData.buttons = [
           {

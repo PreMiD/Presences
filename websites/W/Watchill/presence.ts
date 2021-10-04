@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  pages = {
+  pages: { [page: string]: string } = {
     "/": "Ana Sayfa",
     "/login": "Giriş Yap",
     "/series": "Diziler",
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      data: { [k: string]: any } = {
+      data: { [k: string]: string | number } = {
         largeImageKey: "wh-logo",
         details:
           showName && showName.textContent !== ""

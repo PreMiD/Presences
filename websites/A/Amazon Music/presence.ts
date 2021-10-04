@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
 
-      if (title !== null && artist !== null) presence.setActivity(presenceData);
+      if (title && artist) presence.setActivity(presenceData);
     } else {
       playlistLink = document
         .querySelector(
@@ -180,7 +180,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
 
-      if (title !== null && artist !== null) presence.setActivity(presenceData);
+      if (title && artist) presence.setActivity(presenceData);
     }
   } else {
     presenceData.details = "Browsing...";

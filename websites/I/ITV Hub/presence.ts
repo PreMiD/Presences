@@ -77,17 +77,15 @@ presence.on("UpdateData", () => {
           .getElementsByClassName("episode-info__episode-title")[0]
           .textContent.trim()
       },
-      video = document.getElementsByTagName("video")[0];
+      [video] = document.getElementsByTagName("video");
     if (!video.paused) {
-      const timestamps = getTimestamps(
+      [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
 
       presenceData.details = `Watching ${showDetails.name}`;
       presenceData.state = showDetails.episode;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
     } else {

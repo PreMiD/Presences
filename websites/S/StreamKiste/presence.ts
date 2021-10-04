@@ -45,8 +45,7 @@ function getQuery() {
           { strings, images, frame }: ExecutionArguments
         ) => {
           if (!context) return null;
-          const [, partName] =
-            location.pathname.match(/^\/(movie|serie)\//i)[1];
+          const [, partName] = location.pathname.match(/^\/(movie|serie)\//i);
           if (!partName) return null;
           const type: "movie" | "series" | "other" =
             partName === "serie"

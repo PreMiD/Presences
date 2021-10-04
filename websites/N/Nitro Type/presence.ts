@@ -100,11 +100,11 @@ presence.on("UpdateData", () => {
         }
       } else if (PREMID_DEBUG_LOGGING) presenceData.details = path;
     } catch (e) {
-      console.log(e);
+      presence.error(e);
     }
 
     if (presenceData.details === null) {
-      console.log("no presence!");
+      presence.error("no presence!");
       presence.setTrayTitle();
       presence.setActivity();
     } else {
@@ -112,6 +112,6 @@ presence.on("UpdateData", () => {
       presence.setActivity(presenceData);
     }
   } catch (e) {
-    console.log(e);
+    presence.error(e);
   }
 });

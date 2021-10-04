@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
         Math.floor(duration)
       );
 
-      presenceData.endTimestamp = timestamps[1];
+      [, presenceData.endTimestamp] = timestamps;
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).paused

@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
         document.getElementsByClassName("page-header__title")[0].textContent;
     } catch (err) {
       const errCode = "KMNNWIKI_WIKIEN_GETPAGETITLE";
-      console.log(
+      presence.error(
         `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
       );
     }

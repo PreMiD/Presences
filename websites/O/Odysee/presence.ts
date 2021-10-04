@@ -85,7 +85,8 @@ presence.on("UpdateData", async () => {
           ];
         }
         if (video) {
-          presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+          [, presenceData.endTimestamp] =
+            presence.getTimestampsfromMedia(video);
           presenceData.smallImageKey = video.paused ? "paused" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Watching";
           if (video.paused) delete presenceData.endTimestamp;

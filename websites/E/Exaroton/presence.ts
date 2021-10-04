@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     const page = paths[path];
     if (page) presenceData.details = page;
   } else {
-    const page = document.location.hostname.split(".")[0];
+    const [page] = document.location.hostname.split(".");
     presenceData.startTimestamp = Date.now();
     switch (page) {
       case "support":

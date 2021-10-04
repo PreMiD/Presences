@@ -1,9 +1,8 @@
-let presence = new Presence({
-    clientId: "618569989842010122" // CLIENT ID FOR YOUR PRESENCE
+const presence = new Presence({
+    clientId: "618569989842010122"
   }),
-  item: any,
-  typing: any,
   browsingStamp = Math.floor(Date.now() / 1000);
+let item: HTMLElement, typing: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -87,13 +86,13 @@ presence.on("UpdateData", async () => {
     if (
       document.querySelector(
         "#root > div > div > div > span > div.message-view > div.message-view-title > div.message-view-title__content"
-      ) !== null
+      )
     ) {
       item = document.querySelector(
         "#root > div > div > div > span > div.message-view > div.message-view-title > div.message-view-title__content"
       );
       typing = document.querySelector("#buyer_msg_send_btn");
-      if (typing !== null) {
+      if (typing) {
         typing = document.querySelector("#buyer_msg_send_btn").className;
         if (typing.baseVal.includes("icon-plane disable")) {
           presenceData.details = "Reading dms with:";

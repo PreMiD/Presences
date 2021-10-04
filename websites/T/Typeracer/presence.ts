@@ -22,9 +22,6 @@ const updateCallback = {
       return this._function !== null;
     }
   },
-  /**
-   * Initialize/reset presenceData.
-   */
   resetData = (
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
@@ -41,13 +38,6 @@ const updateCallback = {
   let raceStamp: number = null;
 
   if (currentURL.hostname === "play.typeracer.com") {
-    /*
-
-		Part 1
-		play.typeracer.com (game page)
-		
-		*/
-
     updateCallback.function = (): void => {
       if (document.querySelector(".gameView")) {
         presenceData.details = "Playing a race";
@@ -157,13 +147,18 @@ const updateCallback = {
           presenceData.state = `${strong[1]} ${strong[2]}, ${strong[4]}`;
         else if (option === "month")
           presenceData.state = `${strong[3]} ${strong[4]}`;
-        else if (option === "year") presenceData.state = strong[2];
+        else if (option === "year") {
+          const [, strong2] = strong;
+          presenceData.state = strong2;
+        }
       } else if (currentPath[1] === "login")
         presenceData.details = "Logging in";
       else {
         const pageNames: { [index: string]: string } = {
+          // eslint-disable-next-line camelcase
           upgrade_account: "Upgrade your account",
           tos: "Terms of Service",
+          // eslint-disable-next-line camelcase
           privacy_poicy: "Privacy Policy"
         };
         presenceData.details = "Viewing a page";

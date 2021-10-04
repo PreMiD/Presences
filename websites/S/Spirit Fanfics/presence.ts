@@ -21,10 +21,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Vendo Minhas Histórias";
       else if (nav === "Gerenciar Capítulos") {
         presenceData.details = "Gerenciando capítulos";
-        presenceData.state = document
+        [presenceData.state] = document
           .querySelector(".tituloPrincipal")
           .textContent.replace("História ", "")
-          .split(" - ")[0];
+          .split(" - ");
       }
     } else if (
       pathname.startsWith("/historia/adicionar") ||
@@ -34,10 +34,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Criando uma nova história";
       else if (nav === "Adicionar Capítulo") {
         presenceData.details = "Escrevendo um novo capítulo";
-        presenceData.state = document
+        [presenceData.state] = document
           .querySelector(".tituloPrincipal")
           .textContent.replace("História ", "")
-          .split(" - ")[0];
+          .split(" - ");
         presenceData.smallImageKey = "writing";
         presenceData.smallImageText = "Escrevendo";
       }
@@ -57,13 +57,13 @@ presence.on("UpdateData", async () => {
         .textContent.replace("História ", "")
         .split(" - ");
       if (pathname.match(/\/historia\/(\w+-)+\d+\/\w+/)) {
-        presenceData.details = title[0];
+        [presenceData.details] = title;
         presenceData.state = `${title[1]} - ${nav}`;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).reading;
       } else {
         presenceData.details = "Vendo uma história";
-        presenceData.state = title[0];
+        [presenceData.state] = title;
       }
     }
   } else if (pathname.startsWith("/perfil")) {

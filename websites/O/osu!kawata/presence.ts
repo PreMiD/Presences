@@ -1,17 +1,17 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "675322225490001924"
   }),
   presenceData: PresenceData = {
     largeImageKey: "logo"
   },
-  customData = false,
-  browsingStamp = Math.floor(Date.now() / 1000),
-  user: any,
-  title: any,
-  subtitle: any,
-  countryrank: any,
-  rank: any,
-  pp: any,
+  browsingStamp = Math.floor(Date.now() / 1000);
+let customData = false,
+  user: HTMLElement,
+  title: HTMLElement,
+  subtitle: HTMLElement,
+  countryrank: HTMLElement,
+  rank: HTMLElement,
+  pp: HTMLElement,
   url: URL,
   mode: number;
 
@@ -127,8 +127,4 @@ presence.on("UpdateData", async () => {
   }
 
   if (!customData) presence.setActivity(presenceData);
-});
-
-presence.on("iFrameData", function (data) {
-  console.log(data);
 });

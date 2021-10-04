@@ -4,7 +4,7 @@ interface TrickSplitWindow {
   game?: {
     aliveTime: number;
     lbPosition: number;
-    playerCells: Map<number, object>;
+    playerCells: Map<number, unknown>;
   };
   menuHandler?: {
     gameMode: string;

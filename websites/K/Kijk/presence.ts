@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
           ).textContent
         ),
         timestamps = presence.getTimestamps(currentTime, durationss);
-      presenceData.endTimestamp = timestamps[1];
+      [, presenceData.endTimestamp] = timestamps;
       presenceData.smallImageKey = "play";
     }
   }
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
           ).textContent
         ),
         timestamps = presence.getTimestamps(currentTime, durationss);
-      presenceData.endTimestamp = timestamps[1];
+      [, presenceData.endTimestamp] = timestamps;
       presenceData.smallImageKey = "play";
     } else {
       title = document.querySelector(

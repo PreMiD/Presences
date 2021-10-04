@@ -10,13 +10,6 @@ function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-/**
- * -1 = unset
- * 0 = browsing
- * 1 = browsing dashboard
- * 2 = doing lessons/reviews
- */
-
 presence.on("UpdateData", () => {
   const { hostname, pathname } = window.location,
     data: PresenceData = {};

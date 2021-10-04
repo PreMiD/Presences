@@ -2,7 +2,9 @@ const presence = new Presence({
   clientId: "705454018343862362"
 });
 
-let courseName: any, lessonName: any, lessonActivity: any;
+let courseName: HTMLElement,
+  lessonName: HTMLElement,
+  lessonActivity: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const info = await presence.getSetting("eSI"),
@@ -31,7 +33,7 @@ presence.on("UpdateData", async () => {
     else presenceData.details = "Can't read page";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

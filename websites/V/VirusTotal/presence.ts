@@ -8,31 +8,24 @@ presence.on("UpdateData", () => {
   };
 
   if (document.location.pathname === "/gui/home") {
-    // -------------------------------------- Mainpage
     presenceData.state = "Browsing on mainpage...";
     presence.setActivity(presenceData);
   } else if (document.location.pathname === "/gui/home/upload") {
-    //-------------------------- Upload File
     presenceData.details = "Uploading an file...";
     presence.setActivity(presenceData);
   } else if (document.location.pathname === "/gui/home/url") {
-    //-------------------------- URL Scan
     presenceData.details = "Search an URL...";
     presence.setActivity(presenceData);
   } else if (document.location.pathname === "/gui/home/search") {
-    //-------------------------- Search
     presenceData.details = "Search an anything...";
     presence.setActivity(presenceData);
   } else if (document.location.pathname === "/gui/sign-in") {
-    //-------------------------- login
     presenceData.details = "Sign In to VirusTotal";
     presence.setActivity(presenceData);
   } else if (document.location.pathname === "/gui/join-us") {
-    //-------------------------- join in
     presenceData.details = "Sign Up to VirusTotal";
     presence.setActivity(presenceData);
   } else if (document.location.pathname === "/gui/settings") {
-    //-------------------------- Account settings
     const nickname = document
       .querySelector("body > vt-virustotal-app")
       .shadowRoot.querySelector("#toolbar")
@@ -44,7 +37,6 @@ presence.on("UpdateData", () => {
     presenceData.state = nickname;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/gui/user/")) {
-    //-------------------------- Profile of XYZ
     const profilex = document
       .querySelector("body > vt-virustotal-app")
       .shadowRoot.querySelector("#authChecker > user-view")
@@ -55,14 +47,10 @@ presence.on("UpdateData", () => {
     presenceData.state = profilex;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/gui/top-users")) {
-    //-------------------------- Top users
     presenceData.details = "Looking for top users...";
     presence.setActivity(presenceData);
-  }
-  //_______________________________________________________________________________________Domain path's
-  else if (document.location.pathname.includes("/gui/domain/")) {
+  } else if (document.location.pathname.includes("/gui/domain/")) {
     if (document.location.pathname.endsWith("detection")) {
-      //-------------------------- Detection
       const detectionURL = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
@@ -75,7 +63,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionURL.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("details")) {
-      //-------------------------- Details
       const detectionURL = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
@@ -88,7 +75,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionURL.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("relations")) {
-      //-------------------------- relations
       const detectionURL = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
@@ -101,7 +87,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionURL.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("community")) {
-      //-------------------------- community
       const detectionURL = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
@@ -114,7 +99,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionURL.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("summary")) {
-      //-------------------------- summary
       const detectionURL = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
@@ -127,11 +111,8 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionURL.textContent;
       presence.setActivity(presenceData);
     }
-
-    //__________________________________________________________________________________________ File Path's
   } else if (document.location.pathname.includes("/gui/file/")) {
     if (document.location.pathname.endsWith("detection")) {
-      //-------------------------- detection
       const detectionFILE = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
@@ -144,7 +125,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionFILE.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("details")) {
-      //-------------------------- details
       const detectionFILE = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
@@ -157,7 +137,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionFILE.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("community")) {
-      //-------------------------- community
       const detectionFILE = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
@@ -170,7 +149,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionFILE.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("summary")) {
-      //-------------------------- summary
       const detectionFILE = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
@@ -183,7 +161,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionFILE.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("behavior")) {
-      //-------------------------- behavior
       const detectionFILE = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
@@ -196,10 +173,8 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionFILE.textContent;
       presence.setActivity(presenceData);
     }
-    // URLS
   } else if (document.location.pathname.includes("/gui/url/")) {
     if (document.location.pathname.endsWith("detection")) {
-      //-------------------------- detection
       const detectionURL2 = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
@@ -225,7 +200,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionURL2.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("community")) {
-      //-------------------------- community
       const detectionURL2 = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
@@ -238,7 +212,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionURL2.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("summary")) {
-      //-------------------------- summary
       const detectionURL2 = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
@@ -251,7 +224,6 @@ presence.on("UpdateData", () => {
       presenceData.state = detectionURL2.textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("behavior")) {
-      //-------------------------- behavior
       const detectionURL2 = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "707431547715977218"
   }),
-  pages = {
+  pages: { [name: string]: string } = {
     "/turbobit-premium-alma-hizli-indirme":
       "Turbobit Premium Alma Hızlı indirme !",
     "/redbunker-premium-alma-hizli-indirme":
@@ -23,18 +23,17 @@ presence.on("UpdateData", async () => {
           location + 5,
           document.location.pathname.length
         )}`;
+      let category2 = category.textContent
+        .slice(0, category.textContent.length - 27)
+        .trim();
+      if (pgn) category2 = `${category2}(${pgn})`;
+      presence.setActivity({
+        largeImageKey: "fp-logo",
+        details: "Bir kategoriyi inceliyor:",
+        state: category2 || "Belirsiz",
+        startTimestamp: Math.floor(Date.now() / 1000)
+      });
     }
-    let category2 = category.textContent
-      .slice(0, category.textContent.length - 27)
-      .trim();
-    if (pgn) category2 = `${category2}(${pgn})`;
-
-    presence.setActivity({
-      largeImageKey: "fp-logo",
-      details: "Bir kategoriyi inceliyor:",
-      state: category2 || "Belirsiz",
-      startTimestamp: Math.floor(Date.now() / 1000)
-    });
   } else if (document.location.href.includes("?s=") && searchingFor) {
     presence.setActivity({
       largeImageKey: "fp-logo",

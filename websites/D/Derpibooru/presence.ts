@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "611544256758153225"
   }),
   presenceData: PresenceData = {
@@ -85,13 +85,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
     ).innerText;
-  } else if (document.location.pathname === "/tagging")
-    presenceData.details = "Browsing through tagging discussions";
-  else if (document.location.pathname.startsWith("/tagging/")) {
-    presenceData.details = "Reading the tagging discussion:";
-    presenceData.state = (
-      document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
   } else if (document.location.pathname === "/forums")
     presenceData.details = "Browsing through the forum";
   else if (document.location.pathname.startsWith("/forums")) {
@@ -109,8 +102,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching something";
   else if (document.location.pathname.startsWith("/filters"))
     presenceData.details = "Changing their filter settings";
-  else if (document.location.pathname.startsWith("/settings"))
-    presenceData.details = "Changing their settings";
   else if (document.location.pathname.startsWith("/pages/rules"))
     presenceData.details = "Reading the rules";
   else if (document.location.pathname.startsWith("/pages/privacy"))
@@ -145,8 +136,4 @@ presence.on("UpdateData", async () => {
     };
   }
   presence.setActivity(presenceData);
-});
-
-presence.on("iFrameData", function (data) {
-  console.log(data);
 });

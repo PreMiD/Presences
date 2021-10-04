@@ -1,24 +1,7 @@
 const presence = new Presence({
-  clientId: "711175341825064970"
-});
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "711175341825064970"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean,
   currentTime: number,
   duration: number,
@@ -28,19 +11,17 @@ let iFrameVideo: boolean,
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.duration;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, duration, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
     }
   }
 );
@@ -60,7 +41,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Nella Homepage...";
   } else if (document.location.pathname.includes("/animelist")) {
     // Anime guardati
-    const username = document.title.split("-")[1];
+    const [, username] = document.title.split("-");
     if (document.location.href.includes("?type=watched")) {
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "DreamSub";
@@ -115,7 +96,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/user")) {
     // Profilo
 
-    const username = document.title.split("-")[1];
+    const [, username] = document.title.split("-");
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "DreamSub";
     presenceData.details = "Guardando il profilo di:";
@@ -241,7 +222,10 @@ presence.on("UpdateData", async () => {
         "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
       ).textContent,
       vote = document.querySelector("#vote_percent").textContent,
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      ),
       animepreviewname = document.querySelector(
         "#animeDetails > div > div > div.dc-info > h1 > a > strong"
       ).textContent;
@@ -254,10 +238,10 @@ presence.on("UpdateData", async () => {
       `Voto: ${vote}`;
 
     if (iFrameVideo === true && !isNaN(duration)) {
-      const newname = document.title.split(": Episodio")[0],
-        animenumber = document.title
+      const [newname] = document.title.split(": Episodio"),
+        [animenumber] = document.title
           .split(": ")[1]
-          .split("Streaming & Download HD")[0];
+          .split("Streaming & Download HD");
 
       if (currentTime === duration) {
         presenceData.smallImageKey = "pause";
@@ -287,7 +271,10 @@ presence.on("UpdateData", async () => {
         "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
       ).textContent,
       vote = document.querySelector("#vote_percent").textContent,
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      ),
       animepreviewname = document.querySelector(
         "#animeDetails > div > div > div.dc-info > h1 > a > strong"
       ).textContent;

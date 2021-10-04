@@ -4,9 +4,8 @@ iframe.on("UpdateData", async () => {
   // Exclude proxer
   if (document.getElementById("proxerToken")) return;
 
-  const videos = document.getElementsByTagName("video");
+  const videos = document.getElementsByTagName("video"),[video] = videos;
   if (videos.length === 0) return;
-  const video = videos[0];
 
   if (video) {
     // Exclude proxer ads

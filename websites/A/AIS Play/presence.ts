@@ -8,20 +8,6 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let video = {
   current: 0,
   duration: 0,
@@ -68,7 +54,7 @@ presence.on("UpdateData", async () => {
     return presence.setActivity(presenceData);
   }
 
-  const timestamps = getTimestamps(
+  const timestamps = presence.getTimestamps(
       Math.floor(video.current),
       Math.floor(video.duration)
     ),
@@ -83,7 +69,7 @@ presence.on("UpdateData", async () => {
 
     episode = `ตอนที่ ${episode}`;
     presenceData.state = episode;
-    presenceData.details = info[0];
+    [presenceData.details] = info;
   } else if (Info.textContent) presenceData.details = Info.textContent;
 
   presenceData.smallImageKey = video.paused
@@ -97,11 +83,10 @@ presence.on("UpdateData", async () => {
     ? (await strings).live
     : (await strings).play;
 
-  if (!video.paused && !video.isLive) {
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
-  } else if (!video.paused && video.isLive)
-    presenceData.startTimestamp = timestamps[0];
+  if (!video.paused && !video.isLive)
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+  else if (!video.paused && video.isLive)
+    [presenceData.startTimestamp] = timestamps;
   else {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
