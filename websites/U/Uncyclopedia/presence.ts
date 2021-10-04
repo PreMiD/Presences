@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "643159616498171934"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let title;
+let title: string;
 const actionURL = new URL(document.location.href),
   title2URL = new URL(document.location.href);
 
@@ -11,7 +11,9 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  title = document.querySelector("h1#firstHeading.firstHeading");
+  title = (
+    document.querySelector("h1#firstHeading.firstHeading") as HTMLElement
+  ).innerText;
   const actionResult = actionURL.searchParams.get("action"),
     title2Result = title2URL.searchParams.get("title");
   if (document.location.pathname === "/wiki/Main_Page") {
@@ -22,7 +24,7 @@ presence.on("UpdateData", async () => {
     (title && document.location.pathname.includes("/stupi/"))
   ) {
     presenceData.details = "Reading about:";
-    presenceData.state = title.innerText;
+    presenceData.state = title;
     presenceData.startTimestamp = browsingStamp;
   } else if (
     actionResult === "history" &&

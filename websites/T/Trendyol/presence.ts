@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "643758670131363840"
   }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/butik/liste/erkek": "Erkek Giyim",
     "/butik/liste/kadin": "Kadın Giyim",
     "/butik/liste/cocuk": "Çocuk Giyim",

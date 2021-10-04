@@ -200,7 +200,6 @@ presence.on("UpdateData", async () => {
   const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
     data.smallImageKey = status;
-    data.smallImageText = (await strings)[status];
     if (status === "play") {
       const timestamps = presence.getTimestamps(
         video.currentTime,

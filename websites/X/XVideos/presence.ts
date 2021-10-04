@@ -9,7 +9,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
   if (video !== null && !isNaN(video.duration)) {
-    const title = document.querySelector(".video-page #main .page-title"),
+    const title = (
+        document.querySelector(".video-page #main .page-title") as HTMLElement
+      )?.innerText,
       uploader = document.querySelector(
         ".video-page #main .video-metadata .uploader-tag .name"
       ),
@@ -18,7 +20,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       presenceData: PresenceData = {
-        details: title !== null ? title.innerText : "Title not found...",
+        details: title ?? "Title not found...",
         state:
           uploader !== null ? uploader.textContent : "Uploader not found...",
         largeImageKey: "lg",
@@ -30,7 +32,7 @@ presence.on("UpdateData", async () => {
         endTimestamp
       };
 
-    presence.setTrayTitle(video.paused ? "" : title.innerText);
+    presence.setTrayTitle(video.paused ? "" : title);
 
     //* Remove timestamps if paused
     if (video.paused) {

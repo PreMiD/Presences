@@ -17,13 +17,13 @@ const yabancidizi = new Presence({
     "/koleksiyon": "Koleksiyon",
     "/birlikte-izle": "Birlikte İzle",
     "/profil/ayarlar": "Hesap Ayarları"
-  },
-  video: {
-    dataAvailable?: boolean;
-    currentTime?: number;
-    duration?: number;
-    paused?: boolean;
-  } = {};
+  };
+let video: {
+  dataAvailable?: boolean;
+  currentTime?: number;
+  duration?: number;
+  paused?: boolean;
+} = {};
 
 yabancidizi.on(
   "iFrameData",
@@ -220,7 +220,7 @@ yabancidizi.on("UpdateData", async () => {
       movieTitle &&
       movieTitle.textContent !== ""
     ) {
-      const [startTimestamp, endTimestamp] = yabancidizi.getTimestampsfromMedia(
+      const [startTimestamp, endTimestamp] = yabancidizi.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
@@ -252,7 +252,7 @@ yabancidizi.on("UpdateData", async () => {
       episode &&
       episode.textContent !== ""
     ) {
-      const [startTimestamp, endTimestamp] = getTimestamps(
+      const [startTimestamp, endTimestamp] = yabancidizi.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
