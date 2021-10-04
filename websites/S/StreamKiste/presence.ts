@@ -187,7 +187,7 @@ function getQuery() {
           images: IMAGES
         })
       );
-      return await result
+      return result
         .then((data) => {
           if (
             lastPageIndex !== undefined &&

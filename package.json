@@ -5,7 +5,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
-    "inc": "tsc --module CommonJS --target esnext --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
+    "inc": "tsc --module CommonJS --target 2021 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
     "se": "node ./util/tools/auto/syntaxEnforcer.js",
     "se:compile": "tsc -p ./util/configs/tsconfig.auto.syntaxEnforcer.json",
     "sv": "node ./util/tools/auto/schemaValidator.js",
@@ -33,6 +33,7 @@
     "debug": "^4.3.2",
     "enquirer": "^2.3.6",
     "eslint": "^7.32.0",
+    "eslint-plugin-eqeqeq-fix": "^1.0.3",
     "glob": "^7.2.0",
     "jsonschema": "^1.4.0",
     "mongodb": "^3.6.9",
@@ -42,8 +43,5 @@
     "source-map-support": "^0.5.19",
     "terser": "^5.9.0",
     "typescript": "^4.4.3"
-  },
-  "dependencies": {
-    "eslint-plugin-eqeqeq-fix": "^1.0.3"
   }
 }

@@ -159,7 +159,7 @@ presence.on("UpdateData", () => {
         }
         case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {})
           .input: {
-          const type: string = pathname.split("/")[1],
+          const [, type] = pathname.split("/"),
             text: string = (
               document.querySelector(
                 `.${type.replace(/s$/, "")}-icon`
@@ -203,7 +203,7 @@ presence.on("UpdateData", () => {
     }
     case "knowledge.wanikani.com": {
       details = "Browsing WaniKani Knowledge...";
-      state = document.title.split(" | ")[0];
+      [state] = document.title.split(" | ");
       if (eventType !== 0) {
         elapsed = Math.round(Date.now() / 1000);
         eventType = 0;
@@ -222,7 +222,7 @@ presence.on("UpdateData", () => {
         break;
       }
       details = "Browsing WaniKani Community...";
-      state = document.title.split(" - ")[0];
+      [state] = document.title.split(" - ");
       break;
     }
   }

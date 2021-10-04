@@ -80,7 +80,7 @@ const updateCallback = {
 
 	For future developers:
 
-	These domains are supported. 
+	These domains are supported.
 	- www.deviantart.com
 	- about.deviantart.com
 	- chat.deviantart.com

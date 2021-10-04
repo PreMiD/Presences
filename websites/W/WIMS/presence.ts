@@ -18,24 +18,22 @@ if (
 )
   loggedout = true;
 
-let Classname: any,
+let Classname: string,
   Worksheet = "...",
-  WSNo: any,
-  EXNo: any,
-  Exercise: any,
-  timestamp: any,
-  timeleft: any;
+  WSNo: string,
+  EXNo: string,
+  Exercise: string,
+  timestamp: number,
+  timeleft: number;
 
 // In Worksheet
 if (!loggedout) {
   // Set Class
   // if (document.querySelector(".wimscenter"))
   if (document.querySelector(".wims_subclasses")) {
-    Classname = `${
-      (document.querySelector(".wimscenter") as HTMLElement).innerText.split(
-        "\n"
-      )[1]
-    } `;
+    [, Classname] = (
+      document.querySelector(".wimscenter") as HTMLElement
+    ).innerText.split("\n");
   } else if (document.querySelectorAll("td.small")[1]) {
     Classname = `${
       (document.querySelectorAll("td.small")[1] as HTMLElement).innerText.split(
@@ -57,10 +55,8 @@ if (!loggedout) {
       document.getElementsByClassName("text_item ")[1].innerHTML
     }${WSNo}`;
     Exercise = "...";
-  }
-
-  // In Exercise
-  else if (document.baseURI.match(/(worksheet=|reply)/)) {
+  } else if (document.baseURI.match(/(worksheet=|reply)/)) {
+    // In Exercise
     // Set Worksheet
     WSNo = (document.querySelector(".sheet") as HTMLAnchorElement).href
       .match(/sh=(.?.?)/)[1]
@@ -81,9 +77,7 @@ if (!loggedout) {
         document.getElementsByTagName("kbd")[1] &&
         !document.querySelector(".answer")
       ) {
-        EXNo = document
-          .getElementsByTagName("kbd")[1]
-          .innerText.match(/\d+/)[0];
+        [EXNo] = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/);
         Exercise = `${(
           document.querySelector(".sheet") as HTMLAnchorElement
         ).href
@@ -102,9 +96,7 @@ if (!loggedout) {
         document.getElementsByTagName("kbd")[1] &&
         !document.querySelector(".oefanswer")
       ) {
-        EXNo = document
-          .getElementsByTagName("kbd")[1]
-          .innerText.match(/\d+/)[0];
+        [EXNo] = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/);
         Exercise = `${
           (document.querySelector(".oeftitle") as HTMLElement).innerText
         }: ${EXNo}`;
@@ -123,10 +115,8 @@ if (!loggedout) {
       // If answer page hide time
       timestamp = 0;
     } else timestamp = Date.now(); // Else reset time
-  }
-
-  // In Exam
-  else if (document.baseURI.match(/(exam=)/)) {
+  } else if (document.baseURI.match(/(exam=)/)) {
+    // In Exam
     Worksheet = "";
     Exercise = (document.querySelector("h1.wims_title font") as HTMLElement)
       .innerText;

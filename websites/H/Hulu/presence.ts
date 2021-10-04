@@ -13,20 +13,16 @@ function capitalize(text: string): string {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-let elapsed: number = undefined,
-  oldUrl: string = undefined,
-  header,
-  title,
-  item;
+let elapsed: number, oldUrl: string, header, title, item;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null,
-    details = undefined,
-    state = undefined,
-    smallImageKey = undefined,
-    smallImageText = undefined,
-    startTimestamp = undefined,
-    endTimestamp = undefined;
+    details,
+    state,
+    smallImageKey,
+    smallImageText,
+    startTimestamp,
+    endTimestamp;
 
   const { href } = window.location,
     path = window.location.pathname;

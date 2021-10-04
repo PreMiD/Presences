@@ -278,7 +278,7 @@ presence.on("UpdateData", () => {
           break;
         }
         default: {
-          throw "";
+          throw new Error("");
           break;
         }
       }

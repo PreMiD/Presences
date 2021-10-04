@@ -172,7 +172,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/profile/")) {
     /*
-        There are two profile sections due to regex mathcing, some profiles have numbers some dont. 
+        There are two profile sections due to regex mathcing, some profiles have numbers some dont.
         */
     const profileName = document.querySelector(
         "#content > div > div.container-fluid.profile-container > div > div.col-lg-8.col-md-8 > div.box > div.box-header.box-navbar > div.profile-header > div.hidden-sm-down > h1"

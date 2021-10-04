@@ -36,7 +36,13 @@ interface PresenceData {
   buttons?: [ButtonData, ButtonData?];
 }
 interface ButtonData {
+  /**
+   * Text for the button
+   */
   label: string;
+  /**
+   * URL of button link
+   */
   url: string;
 }
 /**
