@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "641416608790609942"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let search: HTMLElement,
+let search: HTMLInputElement,
   min: number,
   sec: number,
   time: number,

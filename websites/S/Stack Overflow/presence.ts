@@ -6,10 +6,10 @@ let title: HTMLAnchorElement,
   pageNumber: HTMLElement,
   jobPageNumber: HTMLAnchorElement,
   usersortagsPageNumber: HTMLElement,
-  allPages: HTMLAnchorElement,
+  allPages: NodeListOf<HTMLAnchorElement>,
   lastPage: string,
-  jobLastPage: string,
-  questionsLastPage: string;
+  jobLastPage: NodeListOf<HTMLAnchorElement>,
+  questionsLastPage: NodeListOf<HTMLAnchorElement>;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

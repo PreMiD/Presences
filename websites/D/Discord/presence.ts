@@ -318,6 +318,7 @@ presence.on("UpdateData", async () => {
                 .split("{0}")[1]
                 ?.replace("{1}", document.title),
           smallImageKey: "reading",
+          //@ts-expect-error
           buttons: showInvites
             ? [
                 {

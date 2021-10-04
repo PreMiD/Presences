@@ -112,7 +112,7 @@ dizibox.on("UpdateData", async () => {
         episode = document.querySelector(
           "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-episode"
         ),
-        timestamps = presence.getTimestamps(
+        timestamps = dizibox.getTimestamps(
           Math.floor(_video.currentTime),
           Math.floor(_video.duration)
         ),
@@ -150,7 +150,7 @@ dizibox.on("UpdateData", async () => {
         episode = document.querySelector(
           "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-episode"
         ),
-        timestamps = presence.getTimestamps(
+        timestamps = dizibox.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),

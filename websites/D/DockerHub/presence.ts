@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Image history";
       } else {
         [, owner, name] = match;
-        const [, , , tag]: string = match;
+        const [, , , tag] = match;
 
         selector = document.querySelector(".Select-value") || null;
         arch = (selector && selector.textContent) || null;
@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
     } else if (
       (match = document.location.pathname.match(/^\/u\/([^/]+)(?:\/([^/]+))?/))
     ) {
-      const [, user]: string = match;
+      const [, user] = match;
       tab = match[2] || "repositories";
       presenceData.details = `On profile ${tab} page`;
       presenceData.state = user;

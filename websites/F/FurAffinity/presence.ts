@@ -73,8 +73,8 @@ function checkCurrentPage() {
       document.location.pathname.includes("/search/") &&
       showBrowsingSearch
     ) {
-      const searchTerm = document.location.search.replace("?q=", ""),
-        searchResults = parseInt(
+      let searchTerm = document.location.search.replace("?q=", "");
+      const searchResults = parseInt(
           document.querySelector("#query-stats>div span:nth-child(2)").innerHTML
         ),
         searchPage = parseInt(

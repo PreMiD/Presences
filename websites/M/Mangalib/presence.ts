@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     document.location.search
       .slice(1)
       .split("&")
-      .map((k, i, a) => {
+      .map((k, _, a) => {
         const item: string[] = k.replace(/\[(.*?)\]+/g, "").split("="),
           Keys = a
             .map((i) => i.replace(/\[(.*?)\]+/g, "").split("="))

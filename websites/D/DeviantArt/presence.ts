@@ -158,10 +158,11 @@ const updateCallback = {
                 .split(" ")[0]
                 .toLowerCase()
             ) {
-              return ([presenceData.state] = document
+              [presenceData.state] = document
                 .querySelector("title")
                 .textContent.split(" by ")[1]
-                .split(" "));
+                .split(" ");
+              return;
             }
           }
         };
@@ -326,7 +327,7 @@ const updateCallback = {
 
 					Section 2
 					This section includes all pages below the user/group's directory. (eq. deviantart.com/team/art/..)
-					
+
 					*/
             /* The function below is vaild for users only. */ else if (
               currentPath[1] === "art"

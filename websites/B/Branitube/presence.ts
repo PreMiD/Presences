@@ -42,8 +42,10 @@ presence.on("UpdateData", async () => {
   if (video !== null) {
     const videoTitle = document.querySelector(
         "div > div.episodeInfo > div.nomeAnime"
-      ),
-      episode = document.querySelector("div > div.episodeInfo > div.epInfo"),
+      ) as HTMLElement,
+      episode = document.querySelector(
+        "div > div.episodeInfo > div.epInfo"
+      ) as HTMLElement,
       [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)

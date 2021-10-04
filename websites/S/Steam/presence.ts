@@ -57,7 +57,8 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       }
     } else if (document.location.pathname.includes("/search/users")) {
-      const input = document.querySelector("#search_text_box");
+      const input =
+        document.querySelector<HTMLInputElement>("#search_text_box");
 
       presenceData.details = "Searching for a user: ";
 

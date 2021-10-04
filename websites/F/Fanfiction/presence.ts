@@ -14,8 +14,7 @@ const presence = new Presence({
     "tv"
   ];
 let anime;
-for (const i = 0; i < tags.length; i++)
-  crossover.push([`/crossovers${tags[i]}`]);
+for (let i = 0; i < tags.length; i++) crossover.push([`/crossovers${tags[i]}`]);
 
 const elapsed = Math.floor(Date.now() / 1000);
 

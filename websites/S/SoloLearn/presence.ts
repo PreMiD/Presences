@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
   if (data.details) {
     if (data.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
+      data.smallImageText = (await strings).browsing;
     }
     if (!showTimestamps) {
       delete data.startTimestamp;

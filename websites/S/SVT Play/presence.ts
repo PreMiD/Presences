@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let user: HTMLElement, title: HTMLElement;
+let user: string, title: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
       let currentTime: number,
         duration: number,
         paused: boolean,
-        time: number,
+        time: boolean,
         live: boolean,
         timestamps: number[];
       const video: HTMLVideoElement = document.querySelector(

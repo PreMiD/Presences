@@ -9,11 +9,20 @@ const presence = new Presence({
 let currentTime: number,
   duration: number,
   paused: boolean,
-  playback: number,
+  playback: boolean,
   timestamps: number[];
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframeVideo.duration !== null ? true : false;
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
+}
+
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
     currentTime = data.iframeVideo.currTime;
@@ -35,7 +44,10 @@ presence.on("UpdateData", async () => {
   )
     presenceData.details = "Viewing home page";
   else if (document.querySelector(".full.watch_container") !== null) {
-    timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+    timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    );
     if (!isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused

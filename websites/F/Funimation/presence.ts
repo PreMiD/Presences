@@ -11,19 +11,27 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   currentTime: number,
   duration: number,
   paused: boolean,
-  lastPlaybackState = null,
-  playback;
+  lastPlaybackState: boolean,
+  playback: boolean;
 
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+interface IFrameData {
+  iFrameVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
-presence.on("iFrameData", (data) => {
-  playback = data.iFrameVideo.duration !== null ? true : false;
+presence.on("iFrameData", (data: IFrameData) => {
+  if (lastPlaybackState !== playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
+  }
+  playback = data.iFrameVideo.dur !== null ? true : false;
 
   if (playback) {
-    ({ iFrameVideo, paused } = data.iFrameVideo.iFrameVideo);
+    ({ iFrameVideo, paused } = data.iFrameVideo);
     currentTime = data.iFrameVideo.currTime;
     duration = data.iFrameVideo.dur;
   }

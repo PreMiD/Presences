@@ -34,8 +34,8 @@ presence.on("UpdateData", async () => {
       paused = false;
     }
 
-    (progress as number) = Number(progress);
-    (progress as number) = Math.round(progress);
+    progress = Number(progress);
+    progress = Math.round(progress);
 
     if (playing === true && paused === false) {
       title = document.querySelector(

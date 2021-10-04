@@ -5,7 +5,9 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/film-arsivi": "Film Arşivi",
     "/en-cok-izlenen-filmler": "En Çok İzlenen Filmler",
     "/boxset-filmler": "Seri Filmleri",

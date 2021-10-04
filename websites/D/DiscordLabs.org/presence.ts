@@ -21,7 +21,7 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/profile/")) {
       priceEls = document.getElementsByClassName("uname");
       for (let i = 0; i < priceEls.length; i++) {
-        const profilename = priceEls[i].innerText;
+        const profilename = (priceEls[i] as HTMLElement).innerText;
         presenceData.details = "Viewing a profile:";
         presenceData.state = profilename;
       }
@@ -39,7 +39,7 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/bot/")) {
       priceEls = document.getElementsByClassName("botname");
       for (let i = 0; i < priceEls.length; i++) {
-        const botname = priceEls[i].innerText;
+        const botname = (priceEls[i] as HTMLElement).innerText;
         presenceData.details = "Viewing a Discord bot:";
         presenceData.state = botname;
       }

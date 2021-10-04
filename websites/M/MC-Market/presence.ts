@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       );
       if (search !== null) {
         presenceData.details = "Searching for:";
-        presenceData.state = search.innerText;
+        presenceData.state = (search as HTMLElement).innerText;
 
         presenceData.smallImageKey = "search";
 

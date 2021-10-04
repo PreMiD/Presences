@@ -17,14 +17,22 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   lastPlaybackState = null,
   playback: boolean;
 
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
 if (document.location.pathname.includes("/kshow/")) {
-  presence.on("iFrameData", (data) => {
-    playback = data.iframeVideo.duration !== null ? true : false;
+  if (lastPlaybackState !== playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
+  }
+  presence.on("iFrameData", (data: IFrameData) => {
+    playback = data.iframeVideo.dur !== null ? true : false;
 
     if (playback) {
       ({ iFrameVideo, paused } = data.iframeVideo);

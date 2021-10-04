@@ -79,6 +79,7 @@ presence.on("UpdateData", async () => {
           0,
           title.innerText.indexOf("- Capítulo") - 1
         );
+        //@ts-expect-error
         opcoes[selecaoLeitura.selectedIndex]();
       } else {
         presenceData.details = tituloobra.textContent;
