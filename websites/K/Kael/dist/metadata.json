@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "version": "1.0.4",
   "service": "Kael",
   "category": "other",

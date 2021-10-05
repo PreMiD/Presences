@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title1;
     } else if (path.pathname.includes("play")) {
       let episode;
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(video.current),
         Math.floor(video.duration)
       );
