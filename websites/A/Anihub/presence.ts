@@ -378,9 +378,7 @@ presence.on("UpdateData", async () => {
           "/animes=Lista de Animes"
         ],
         customPaths: string = await presence.getSetting("customPaths"),
-        pathsFromCustom = eval(
-          `[${customPaths.toLowerCase().replace(/[\s\n]+/g, "")}]`
-        );
+        pathsFromCustom = [customPaths.toLowerCase().replace(/[\s\n]+/g, "")];
       pathsAndStrings.forEach((item: string) => {
         const splitItem = item.split("=");
         if (
