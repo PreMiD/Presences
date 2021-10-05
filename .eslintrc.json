@@ -52,7 +52,9 @@
         "message": "Usage of const enums is forbidden."
       }
     ],
-    "@typescript-eslint/no-explicit-any": "error"
+    "@typescript-eslint/no-explicit-any": "error",
+    "radix": 0,
+    "no-conditional-assignment": 2
   },
   "overrides": [
     {
