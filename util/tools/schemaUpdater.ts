@@ -1,7 +1,11 @@
 import "source-map-support/register";
 
 import axios from "axios";
-import { existsSync as exists, readFileSync as readFile, writeFileSync as writeFile } from "fs";
+import {
+  existsSync as exists,
+  readFileSync as readFile,
+  writeFileSync as writeFile
+} from "fs";
 import { sync as glob } from "glob";
 
 /*  NOTE: THIS IS A TOOL THAT IS ONLY MEANT TO BE USED

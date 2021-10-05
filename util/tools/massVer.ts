@@ -1,6 +1,10 @@
 import "source-map-support/register";
 
-import { existsSync as exists, readFileSync as readFile, writeFileSync as writeFile } from "fs";
+import {
+  existsSync as exists,
+  readFileSync as readFile,
+  writeFileSync as writeFile
+} from "fs";
 import { sync as glob } from "glob";
 import { coerce, inc, valid } from "semver";
 

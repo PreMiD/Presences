@@ -22,10 +22,10 @@ presence.on("UpdateData", async () => {
         pgn = `Sayfa: ${document.location.pathname.slice(
           location + 5,
           document.location.pathname.length
-        )}`;
-      let category2 = category.textContent
-        .slice(0, category.textContent.length - 27)
-        .trim();
+        )}`,
+        category2 = category.textContent
+          .slice(0, category.textContent.length - 27)
+          .trim();
       presence.setActivity({
         largeImageKey: "fp-logo",
         details: "Bir kategoriyi inceliyor:",
