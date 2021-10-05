@@ -1,8 +1,3 @@
-/**
- * Coded by ! Yelo (425326889565945856)
- * Presence for Premid
- * Website: www.animefillerlist.com
- */
 
 const presence = new Presence({
     clientId: "894342965772820490"
