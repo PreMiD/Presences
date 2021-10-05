@@ -53,8 +53,7 @@
       }
     ],
     "@typescript-eslint/no-explicit-any": "error",
-    "radix": 0,
-    "no-conditional-assignment": 2
+    "radix": 0
   },
   "overrides": [
     {
