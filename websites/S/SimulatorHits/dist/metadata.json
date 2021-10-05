@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.4",
   "author": {
     "name": "HuckinB",
     "id": "228575716214702080"
@@ -14,8 +14,8 @@
   },
   "service": "SimulatorHits",
   "version": "1.0.4",
-  "logo": "https://panel.simulatorhits.com/img/SH_Logo.jpg",
-  "thumbnail": "https://simulatorhits.com/assets/img/front-page.png",
+  "logo": "https://i.imgur.com/an0EarG.png",
+  "thumbnail": "https://i.imgur.com/HFpEiPB.png",
   "color": "#D4426E",
   "tags": [
     "ets2",
