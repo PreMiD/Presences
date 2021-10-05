@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
       presenceData.state =
         `Search results (${window.location.pathname
           .split("/search/")[1]
-          .trim()}` || "" + ")";
+          .trim()}` + ")";
     }
   } else if (window.location.hostname === "docs.botsfordiscord.com") {
     if (window.location.pathname.startsWith("/")) {

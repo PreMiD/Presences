@@ -112,7 +112,8 @@ presence.on("UpdateData", async () => {
   if (page) {
     if (page[1] === "author") page = `User: ${page[2]}`;
     else page = "IP User";
-  } else if ((page = validateMembershipUrl.exec(path))) {
+  } else if (validateMembershipUrl.exec(path)) {
+    page = validateMembershipUrl.exec(path);
     /* View Membership */
     presenceData.details = "Member Page";
     page = membersMapping[page[1]];
