@@ -8,8 +8,12 @@ presence.on("UpdateData", async () => {
   songName = document.querySelector<HTMLElement>(
     "span#cardTitle.card-title.playerText.truncate"
   );
-  albumName = document.querySelector<HTMLElement>("p#cardAlbum.playerText.truncate");
-  artistName = document.querySelector<HTMLElement>("p#cardArtist.playerText.truncate");
+  albumName = document.querySelector<HTMLElement>(
+    "p#cardAlbum.playerText.truncate"
+  );
+  artistName = document.querySelector<HTMLElement>(
+    "p#cardArtist.playerText.truncate"
+  );
   if (albumName.innerText === "Press the Play button to start the radio") {
     const presenceData: PresenceData = {
       details: "Not tuned in.",

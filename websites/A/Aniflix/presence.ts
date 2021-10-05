@@ -25,11 +25,11 @@ if (lastPlaybackState !== playback) {
 
 interface IFrameData {
   iframeVideo: {
-    dur: number
-    iFrameVideo: boolean
-    paused: boolean
-    currTime: number
-  }
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
 if (
@@ -59,7 +59,9 @@ presence.on("UpdateData", async () => {
       endTimestamp
     };
 
-  search = document.querySelector<HTMLInputElement>("#searchbar > div > input[type=text]").value;
+  search = document.querySelector<HTMLInputElement>(
+    "#searchbar > div > input[type=text]"
+  ).value;
   if (
     document.querySelector(
       "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > h1"

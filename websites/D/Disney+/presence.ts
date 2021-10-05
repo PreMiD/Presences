@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
       const groupWatchId = new URLSearchParams(location.search).get(
           "groupWatchId"
         ),
-        timestamps: number[] = presence.getTimestampsfromMedia(video);
+        timestamps = presence.getTimestampsfromMedia(video);
 
       if (!privacy && groupWatchId) {
         groupWatchCount = Number(
@@ -82,8 +82,8 @@ presence.on("UpdateData", async () => {
           ".btm-media-overlays-container .subtitle-field"
         );
 
-      title = titleField?.textContent;
-      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+      title = titleField?.innerText;
+      subtitle = subtitleField?.innerText; // episode or empty if it's a movie
 
       if (!privacy && groupWatchId) {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
@@ -152,8 +152,8 @@ presence.on("UpdateData", async () => {
     `);
 
     if (seriesFields.length > 0) {
-      title = seriesFields[0]?.textContent;
-      subtitle = seriesFields[1]?.textContent;
+      title = seriesFields[0]?.innerText;
+      subtitle = seriesFields[1]?.innerText;
     } else {
       const movieField: HTMLImageElement = document.querySelector(
         "#webAppScene main #group + div:not([id]) img[alt]"
@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
       document.querySelector(".player-base video");
 
     if (video && !isNaN(video.duration)) {
-      const timestamps: number[] = presence.getTimestampsfromMedia(video),
+      const timestamps = presence.getTimestampsfromMedia(video),
         titleField: HTMLDivElement = document.querySelector(
           ".controls-overlay .primary-title"
         ),
@@ -193,8 +193,8 @@ presence.on("UpdateData", async () => {
           ".controls-overlay .show-title"
         );
 
-      title = titleField?.textContent;
-      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+      title = titleField?.innerText;
+      subtitle = subtitleField?.innerText; // episode or empty if it's a movie
 
       if (privacy)
         data.state = subtitle ? strings.watchingSeries : strings.watchingMovie;

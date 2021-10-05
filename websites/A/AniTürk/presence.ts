@@ -11,9 +11,9 @@ const presence = new Presence({
 let video: IFrameData;
 
 interface IFrameData {
-    duration: number
-    paused: boolean
-    currentTime: number
+  duration: number;
+  paused: boolean;
+  currentTime: number;
 }
 
 presence.on("iFrameData", async (data: IFrameData) => {

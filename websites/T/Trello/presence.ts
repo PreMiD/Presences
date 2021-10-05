@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let board: HTMLElement, profile: HTMLElement | string;
+let board: HTMLElement, profile: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

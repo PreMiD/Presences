@@ -30,7 +30,9 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "צופה ברשימת הסדרות";
   } else if (document.location.pathname.includes("/watch/")) {
-    let video = document.querySelector("#playerDiv > div > video") as HTMLVideoElement;
+    let video = document.querySelector(
+      "#playerDiv > div > video"
+    ) as HTMLVideoElement;
     if (video === null) video = document.querySelector("#videojs_html5_api");
 
     title = document.querySelector(

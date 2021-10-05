@@ -91,7 +91,9 @@ presence.on("UpdateData", async () => {
       item = document.querySelector(
         "#root > div > div > div > span > div.message-view > div.message-view-title > div.message-view-title__content"
       ) as HTMLElement;
-      typing = document.querySelector("#buyer_msg_send_btn") as HTMLButtonElement;
+      typing = document.querySelector(
+        "#buyer_msg_send_btn"
+      ) as HTMLButtonElement;
       if (typing) {
         if (typing.className.includes("icon-plane disable")) {
           presenceData.details = "Reading dms with:";

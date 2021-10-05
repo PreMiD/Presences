@@ -23,7 +23,9 @@ presence.on("UpdateData", async () => {
     newsAuthor = document.querySelector("div.news-author > a.username > b");
     if (authorName === null) {
       const presenceData: PresenceData = {
-        details: `Reading a news post by ${(newsAuthor as HTMLElement).innerText}`,
+        details: `Reading a news post by ${
+          (newsAuthor as HTMLElement).innerText
+        }`,
         state: (threadName as HTMLElement).innerText,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
@@ -121,7 +123,9 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       const presenceData: PresenceData = {
-        details: `Looking at ${(profileName as HTMLElement).innerText}'s profile`,
+        details: `Looking at ${
+          (profileName as HTMLElement).innerText
+        }'s profile`,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
       };
@@ -164,7 +168,9 @@ presence.on("UpdateData", async () => {
     );
     blogTitle = document.querySelector("a.newsTitle");
     const presenceData: PresenceData = {
-      details: `Reading a blog post by ${(blogAuthor as HTMLElement).innerText}`,
+      details: `Reading a blog post by ${
+        (blogAuthor as HTMLElement).innerText
+      }`,
       state: (blogTitle as HTMLElement).innerText,
       largeImageKey: "tempy",
       startTimestamp: timeElapsed

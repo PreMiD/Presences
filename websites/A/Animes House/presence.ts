@@ -3,7 +3,11 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let currentTime: number, duration: number, paused: boolean, played: boolean, timestamps;
+let currentTime: number,
+  duration: number,
+  paused: boolean,
+  played: boolean,
+  timestamps;
 const pesquisaText: HTMLInputElement = document.querySelector("#s"),
   paginaText: HTMLElement = document.querySelector(
     "#contenedor > div.module > div.content > div.pagination > span:nth-child(1)"

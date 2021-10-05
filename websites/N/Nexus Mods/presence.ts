@@ -934,7 +934,7 @@ function isValidGame(name: string): boolean {
  * @returns {object} The updated instance of presence data.
  */
 function getCategorizedPresenceData(
-  path:string[],
+  path: string[],
   presenceData: PresenceData,
   pageTitle: string,
   gameTitle: string,
@@ -1039,7 +1039,8 @@ presence.on("UpdateData", () => {
       try {
         wikiTitle = document.getElementById("firstHeading").innerText;
 
-        if (parseInt(wikiTitle) > 128) wikiTitle = `${wikiTitle.substring(0, 125)}...`;
+        if (parseInt(wikiTitle) > 128)
+          wikiTitle = `${wikiTitle.substring(0, 125)}...`;
       } catch (error) {
         wikiTitle = "Unknown page";
       }
@@ -1075,7 +1076,8 @@ presence.on("UpdateData", () => {
       try {
         gameTitle = document.getElementsByClassName("game-name")[0].textContent;
 
-        if (parseInt(gameTitle) > 128) gameTitle = `${gameTitle.substring(0, 125)}...`;
+        if (parseInt(gameTitle) > 128)
+          gameTitle = `${gameTitle.substring(0, 125)}...`;
       } catch (error) {
         gameTitle = "Unknown game";
       }
@@ -1085,7 +1087,8 @@ presence.on("UpdateData", () => {
       try {
         pageTitle = document.getElementsByTagName("H1")[0].textContent;
 
-        if (parseInt(pageTitle) > 128) pageTitle = `${pageTitle.substring(0, 125)}...`;
+        if (parseInt(pageTitle) > 128)
+          pageTitle = `${pageTitle.substring(0, 125)}...`;
       } catch (error) {
         pageTitle = "Unknown page";
       }
