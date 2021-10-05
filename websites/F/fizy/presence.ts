@@ -20,12 +20,12 @@ presence.on("UpdateData", async () => {
     artistName = document.querySelector(
       "body > div.main-wrapper.ng-scope > ui-view > main > div > media-player > div > div.player > div.player__wrapper > div.player__metadata > div > div.player__media-artists > a"
     );
-  [data.startTimestamp, data.endTimestamp] = player
-    ? presence.getTimestamps(
-        Math.floor(player.currentTime),
-        Math.floor(player.duration)
-      )
-    : null;
+  if (player) {
+    [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
+      Math.floor(player.currentTime),
+      Math.floor(player.duration)
+    );
+  }
 
   if (
     songName &&

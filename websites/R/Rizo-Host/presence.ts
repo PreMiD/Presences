@@ -84,7 +84,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "Client Area";
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

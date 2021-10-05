@@ -44,7 +44,7 @@ presence.on("UpdateData", () => {
   } else if (page.startsWith("/yetkili"))
     presenceData.details = "Yetkili sayfasında dolaşıyor...";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

@@ -19,9 +19,8 @@ presence.on("UpdateData", async () => {
         document.location.pathname.split("/post/show/")[1]
       }`;
 
+      const artists: string[] = [];
       if (document.querySelectorAll(".tag-type-artist a").length > 0) {
-        let artists: string[];
-
         Array.from(document.querySelectorAll(".tag-type-artist")).forEach(
           (artistHTML) => {
             if (Array.from(artistHTML.querySelectorAll("a"))[1]) {

@@ -92,7 +92,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Checking the gallery";
   else if (path.startsWith("/news")) presenceData.details = "Checking the news";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

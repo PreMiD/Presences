@@ -71,7 +71,7 @@ quora.on("UpdateData", async () => {
       presenceData.state = question;
     }
 
-    if (presenceData.details === null) {
+    if (!presenceData.details) {
       quora.setTrayTitle();
       quora.setActivity();
     } else quora.setActivity(presenceData);

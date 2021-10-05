@@ -34,7 +34,7 @@ presence.on("UpdateData", () => {
     presenceData.state = "API Documentation";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

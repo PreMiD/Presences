@@ -49,7 +49,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Sumbitting a bot";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

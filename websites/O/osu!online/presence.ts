@@ -99,7 +99,7 @@ presence.on("UpdateData", () => {
     (presenceData.details = "Viewing settings"),
       (presenceData.state = "Changing...");
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

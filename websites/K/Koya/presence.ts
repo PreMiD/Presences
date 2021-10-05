@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Watching premium page";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

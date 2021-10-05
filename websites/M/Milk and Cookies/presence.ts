@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viendo la sección de Postulaciones";
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

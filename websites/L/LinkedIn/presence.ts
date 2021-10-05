@@ -177,7 +177,7 @@ presence.on("UpdateData", async () => {
       //Notifications section.
       presenceData.details = "Viewing Notifications.";
       presenceData.startTimestamp = browsingStamp;
-    } else if (path.match(/\/in\/[A-z0-9-]+\/$/)) {
+    } else if (path.match(/\/in\/[A-Za-z0-9-]+\/$/)) {
       //Profile page section.
       const userName = document
         .querySelector(
@@ -188,7 +188,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a profile:";
       presenceData.state = `${userName}.`;
       presenceData.startTimestamp = browsingStamp;
-    } else if (path.match(/\/in\/[A-z0-9-]+\//)) {
+    } else if (path.match(/\/in\/[A-Za-z0-9-]+\//)) {
       //Profile subsections.
       const userName =
         path !== "/in/luca-biagetti/detail/recent-activity/"
@@ -216,7 +216,7 @@ presence.on("UpdateData", async () => {
         }
 
         const subsection: string = path
-          .split(/\/in\/[A-z0-9-]+\/detail\//)
+          .split(/\/in\/[A-Za-z0-9-]+\/detail\//)
           .pop()
           .split("/")
           .shift() as keyof typeof detailSubSection;
@@ -257,7 +257,7 @@ presence.on("UpdateData", async () => {
         }
 
         const subsection: string = path
-          .split(/\/in\/[A-z0-9-]+\/edit\//)
+          .split(/\/in\/[A-Za-z0-9-]+\/edit\//)
           .pop()
           .replace("forms/", "")
           .split("/")
@@ -267,7 +267,7 @@ presence.on("UpdateData", async () => {
         presenceData.state =
           editSubSection[subsection as keyof typeof editSubSection];
       }
-    } else if (path.match(/\/company\/[A-z0-9-]+\//)) {
+    } else if (path.match(/\/company\/[A-Za-z0-9-]+\//)) {
       //Company page section.
       const companyName = document
         .querySelector(
@@ -278,7 +278,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a company:";
       presenceData.state = `${unescapeHTML(companyName)}.`;
       presenceData.startTimestamp = browsingStamp;
-    } else if (path.match(/\/school\/[A-z0-9-]+\//)) {
+    } else if (path.match(/\/school\/[A-Za-z0-9-]+\//)) {
       //School page section.
       const schoolName = document
         .querySelector(
@@ -336,7 +336,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

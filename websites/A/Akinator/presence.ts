@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Q: ${current}`;
     presenceData.state = `Selecting: ${hover ? hover : "Still Thinking"}`;
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
   else
     presenceData.details = `Viewing "${document.title.split(" | 7plus")[0]}"`;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

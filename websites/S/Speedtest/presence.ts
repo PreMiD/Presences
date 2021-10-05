@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
           ping.length === 27 ? "Testing" : ping
         } | Download ${
           download.length === 29 ? "Testing" : download
-        } | Upload ${upload.length === 29 ? "Testing" : upload}`;
+        } | Upload Testing`;
         presenceData.state = `ISP: ${isp} | Server: ${server}`;
       } else presenceData.details = "Browsing the homepage";
       presenceData.startTimestamp = browsingStamp;
@@ -170,13 +170,13 @@ presence.on("UpdateData", async () => {
           ping.length === 27 ? "Testing" : ping
         } | Download ${
           download.length === 29 ? "Testing" : download
-        } | Upload ${upload.length === 29 ? "Testing" : upload}`;
+        } | Upload Testing`;
         presenceData.state = `ISP: ${isp} | Server: ${server}`;
       } else presenceData.details = "Browsing the homepage";
       presenceData.startTimestamp = browsingStamp;
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

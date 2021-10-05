@@ -87,7 +87,7 @@ presence.on("UpdateData", () => {
     )?.textContent;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity({
       largeImageKey: "buk-logo",

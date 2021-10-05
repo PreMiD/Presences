@@ -121,7 +121,7 @@ presence.on("UpdateData", () => {
     presenceData.state = "Front page";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

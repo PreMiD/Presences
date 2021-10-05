@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Ana Sayfa";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

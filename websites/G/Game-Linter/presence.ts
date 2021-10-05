@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Just surfing";
     presenceData.state = "Boring";
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

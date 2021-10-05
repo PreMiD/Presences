@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) delete presenceData.details;
   if (!presenceData.state) delete presenceData.state;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

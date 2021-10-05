@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       presenceData.endTimestamp; // Reset timestamp if not in game
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

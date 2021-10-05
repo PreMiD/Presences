@@ -103,7 +103,7 @@ presence.on("UpdateData", () => {
       presence.error(e);
     }
 
-    if (presenceData.details === null) {
+    if (!presenceData.details) {
       presence.error("no presence!");
       presence.setTrayTitle();
       presence.setActivity();

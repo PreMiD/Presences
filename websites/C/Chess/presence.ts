@@ -279,7 +279,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "mastergames";
     presenceData.smallImageText = "Master Games";
   } else if (document.location.pathname.indexOf("/games/view/") === 0) {
-    presenceData.startTimestamp === browsingStamp;
+    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Watching a master game";
     presenceData.smallImageKey = "mastergames";
     presenceData.smallImageText = "Master Games";

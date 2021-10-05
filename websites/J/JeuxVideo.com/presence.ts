@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = truncateString(thread, 128);
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

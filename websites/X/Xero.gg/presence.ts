@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Terms of Service";
   } else presenceData.details = (await strings).browsing;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

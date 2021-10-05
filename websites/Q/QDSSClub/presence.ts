@@ -164,7 +164,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "registrarsi";
   } else presenceData.details = "Navigando...";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

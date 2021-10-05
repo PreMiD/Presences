@@ -6,20 +6,20 @@ iframe.on("UpdateData", async () => {
       audio: HTMLAudioElement = document.querySelector("#p_a_player_0");
 
     if (
-      (video && !isNaN(video?.duration)) ||
-      (audio && !isNaN(audio?.duration))
+      (video && !isNaN(video.duration)) ||
+      (audio && !isNaN(audio.duration))
     ) {
       iframe.send({
         iframeVideo: {
-          currentTime: video?.currentTime,
-          duration: video?.duration,
-          paused: video?.paused
+          currentTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         },
         iframeAudio: {
-          currentTime: audio?.currentTime,
-          duration: audio?.duration,
-          paused: audio?.paused,
-          title: audio?.title
+          currentTime: audio.currentTime,
+          duration: audio.duration,
+          paused: audio.paused,
+          title: audio.title
         }
       });
     }

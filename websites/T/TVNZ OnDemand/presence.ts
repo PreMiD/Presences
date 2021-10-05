@@ -109,7 +109,7 @@ presence.on("UpdateData", () => {
     presenceData.smallImageKey = "one";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

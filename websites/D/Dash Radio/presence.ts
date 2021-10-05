@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = songArtistS;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

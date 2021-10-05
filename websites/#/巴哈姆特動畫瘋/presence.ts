@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing page:";
     presenceData.state = document

@@ -774,7 +774,7 @@ async function updateData(): Promise<void> {
 
   // if emby is detected init/update the presence status
   if (showPresence) {
-    if (presenceData.details === null) {
+    if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
     } else presence.setActivity(presenceData);

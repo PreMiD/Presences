@@ -13,13 +13,8 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   currentTime: number,
   duration: number,
   paused: boolean,
-  lastPlaybackState = null,
+  lastPlaybackState: boolean,
   playback: boolean;
-
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
-}
 
 interface IFrameData {
   iframeVideo: {
@@ -41,6 +36,10 @@ presence.on("iFrameData", (data: IFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
+  if (lastPlaybackState !== playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
+  }
   const timestamps = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)

@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     }
   }
   /* Unknown site location */
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.error("Unable to determine location.");
     presence.setTrayTitle();
     presence.setActivity();

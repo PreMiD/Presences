@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
       { label: "View profile", url: document.location.href }
     ];
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

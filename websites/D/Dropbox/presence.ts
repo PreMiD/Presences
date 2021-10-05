@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/apps"))
     presenceData.details = "Browsing AppStore";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

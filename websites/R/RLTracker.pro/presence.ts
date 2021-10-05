@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the price changes";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

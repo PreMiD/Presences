@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "classic.jisho.org")
     presenceData.details = "Jisho Classic";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     //This will fire if you do not set presence details
     presence.setTrayTitle(); //Clears the tray title for mac users
     presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/

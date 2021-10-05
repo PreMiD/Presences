@@ -169,7 +169,7 @@ presence.on("UpdateData", async () => {
   }
 
   //* Sets the presenceData, if there is no details it sets empty data (Which will still show "Playing OnlyHit")
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

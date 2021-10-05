@@ -148,10 +148,6 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Paused";
             presenceData.state = `${title.innerText} ${chapter.innerText}`;
           }
-        } else if (video.currentTime) {
-          presenceData.startTimestamp = browsingStamp;
-          presenceData.details = "Viewing";
-          presenceData.state = `${title.innerText} ${chapter.innerText}`;
         } else {
           presenceData.details = "Watching Some Anime";
           presenceData.startTimestamp = browsingStamp;
@@ -175,7 +171,7 @@ presence.on("UpdateData", async () => {
     }
   } else presenceData.details = "Site is Unreadable";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

@@ -65,10 +65,7 @@ presence.on("UpdateData", async () => {
         state: "Arşiv",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
-    } else if (
-      (genre && genre !== "" && !showName) ||
-      (genre && genre !== "" && showName === "")
-    ) {
+    } else if ((genre && !showName) || (genre && showName === "")) {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: "Bir kategoriye göz atıyor:",
@@ -76,7 +73,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: "search",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
-    } else if (genre && genre !== "" && showName && showName !== "") {
+    } else if (genre && showName) {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: "Bir dizi arıyor:",

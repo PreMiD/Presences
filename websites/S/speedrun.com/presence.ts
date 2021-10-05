@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     title = document.querySelector("head > title");
     presenceData.state = title.innerText.replace(" - speedrun.com", "");
     presenceData.details = "Viewing:";

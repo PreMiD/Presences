@@ -248,7 +248,7 @@ presence.on("UpdateData", () => {
       break;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

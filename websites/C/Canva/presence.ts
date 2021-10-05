@@ -97,7 +97,7 @@ presence.on("UpdateData", () => {
     } else presenceData.details = "Viewing a design";
   } else presenceData.details = "Browsing...";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

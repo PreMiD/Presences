@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

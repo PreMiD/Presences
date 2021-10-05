@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Dyno Premium Plans";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

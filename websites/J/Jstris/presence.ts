@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
   if (tempButtons.length !== 0 && tempButtons.length <= 2)
     presenceData.buttons = tempButtons;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

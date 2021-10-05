@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = (await strings).searching;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

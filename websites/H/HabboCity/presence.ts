@@ -23,7 +23,7 @@ presence.on("UpdateData", () => {
     const registername = (
       window.document.getElementById("registerusername") as HTMLInputElement
     ).value;
-    if (registername && registername !== "")
+    if (registername)
       presenceData.state = `S'inscrit sur HabboCity - ${registername}`;
   }
 
@@ -544,7 +544,7 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presenceData.details = "Erreur - 404";
     presenceData.state = "Page introuvable";
     presence.setActivity(presenceData);

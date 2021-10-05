@@ -164,7 +164,7 @@ presence.on("UpdateData", async () => {
     presence.info("Info is off.");
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     //This will fire if you do not set presence details
     presence.setTrayTitle();
     presence.setActivity();

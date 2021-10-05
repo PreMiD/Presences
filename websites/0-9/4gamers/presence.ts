@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("tournament"))
       presenceData.details = "賽事專欄";
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing site:";
     presenceData.state = "4gamers";

@@ -33,7 +33,7 @@ presence.on("UpdateData", () => {
       "Kahve bot projesi nasıl başladı bloguna göz atıyor...";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

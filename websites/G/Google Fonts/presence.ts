@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (path === "/about") presenceData.details = "Viewing the about page";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

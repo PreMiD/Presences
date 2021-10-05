@@ -194,7 +194,7 @@ presence.on("UpdateData", () => {
   if (document.location.hostname === "sig.kurikku.pw")
     presenceData.details = "Signature Generator";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

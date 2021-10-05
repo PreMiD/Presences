@@ -152,7 +152,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Managing cPanel";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presenceData.details = "Server Hosting";
     presenceData.state = "Starting at $1";
     presenceData.startTimestamp = browsingStamp;

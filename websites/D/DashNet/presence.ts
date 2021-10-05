@@ -79,7 +79,7 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.includes("/mailtopia/"))
     presenceData.details = "Playing mailtopia";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

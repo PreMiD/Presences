@@ -140,7 +140,7 @@ presence.on("UpdateData", async function () {
     presenceData.smallImageText = `SNIPES ${smallimage.toUpperCase()}`;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

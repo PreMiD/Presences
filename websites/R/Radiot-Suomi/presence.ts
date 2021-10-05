@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "🎵 Ei saatavilla";
     }
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

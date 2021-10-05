@@ -38,7 +38,7 @@ presence.on("UpdateData", async function () {
     } else presenceData.details = "Browsing rooms";
   } else presenceData.details = "Other";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

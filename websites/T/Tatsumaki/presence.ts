@@ -30,7 +30,7 @@ presence.on("UpdateData", () => {
   else if (page.startsWith("/profile"))
     presenceData.details = "Viewing their profile";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

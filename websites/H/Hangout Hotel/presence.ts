@@ -79,7 +79,7 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase().startsWith("/login"))
     presenceData.details = "Logging in";
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

@@ -63,7 +63,7 @@ undercards.on("UpdateData", async () => {
       presenceData.state = getText(".mainContent > h2:nth-child(2)");
     } else presenceData.details = "Browsing...";
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     undercards.setTrayTitle();
     undercards.setActivity();
   } else undercards.setActivity(presenceData);
