@@ -1,19 +1,14 @@
+import "source-map-support/register";
+
+import { existsSync as exists, readFileSync as readFile, writeFileSync as writeFile } from "fs";
+import { sync as glob } from "glob";
+import { coerce, inc, valid } from "semver";
+
 /*  NOTE: THIS IS A TOOL THAT IS ONLY MEANT TO BE USED
     BY THE DEVS AND REVIEWERS FOR DEPLOYMENT PURPOSES,
     PLEASE DON'T COMPILE OR RUN IT BEFORE MAKING A PULL
     REQUEST UNLESS YOU'VE BEEN EXPLICITLY INSTRUCTED BY
     A DEV TO DO SO, WHICH WILL MOST LIKELY NEVER HAPPEN.  */
-
-import "source-map-support/register";
-
-import { coerce, inc, valid } from "semver";
-import {
-  existsSync as exists,
-  readFileSync as readFile,
-  writeFileSync as writeFile
-} from "fs";
-
-import { sync as glob } from "glob";
 
 function isValidJSON(text: string): boolean {
   try {
@@ -30,7 +25,7 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
       encoding: "utf8",
       flag: "w"
     }),
-  main = (): void => {
+  main = async (): Promise<void> => {
     const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
         (pF) => !exists(`${pF}/dist/metadata.json`)
       ),

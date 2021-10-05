@@ -1,12 +1,24 @@
 import "source-map-support/register";
 
-import { blue, green, red, yellow } from "chalk";
-
 import axios from "axios";
+import { blue, green, red, yellow } from "chalk";
 import { readFileSync } from "fs";
 import { validate } from "jsonschema";
 
-const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
+const latestMetadataSchema = async (): Promise<string> => {
+    const versions = (
+      (
+        await axios.get(
+          "https://github.com/PreMiD/Schemas/tree/main/schemas/metadata"
+        )
+      ).data as string
+    )
+      .match(/>\d.\d.json<\/a>/g)
+      .map((c) => c.match(/\d.\d/g)[0]);
+    return `https://schemas.premid.app/metadata/${
+      versions[versions.length - 1]
+    }`;
+  },
   stats = {
     validated: 0,
     validatedWithWarnings: 0,
@@ -39,7 +51,8 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
 (async (): Promise<void> => {
   console.log(blue("Getting latest schema..."));
 
-  const schema = (await axios.get(latestMetadataSchema)).data;
+  const latestSchema = await latestMetadataSchema(),
+    schema = (await axios.get(latestSchema)).data;
 
   console.log(blue(`Beginning validation of ${metaFiles.length} presences...`));
 
@@ -65,7 +78,7 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
     });
 
     if (result.valid && !invalidLangs.length && folder === meta.service) {
-      if (meta.schema && meta.schema !== latestMetadataSchema)
+      if (meta.schema && meta.schema !== latestSchema)
         validatedWithWarnings(service, "Using out of date schema");
       else validated(service);
     } else {
