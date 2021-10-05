@@ -18,20 +18,20 @@ presence.on("UpdateData", async () => {
     category = document.querySelector("#icerik > h1");
   if (page.includes("/kategori/") && category && category.textContent != "") {
     if (page.includes("/page/")) {
-      var location = document.location.pathname.indexOf("page");
-      var pgn =
-        "Sayfa: " +
+      const location = document.location.pathname.indexOf("page"),
+       pgn =
+        `Sayfa: ${ 
         document.location.pathname.slice(
           location + 5,
           document.location.pathname.length
-        );
+        )}`;
     }
-    var category2 = category.textContent
+    let category2 = category.textContent
       .slice(0, category.textContent.length - 27)
       .trim();
-    if (pgn) {
-      category2 = category2 + "(" + pgn + ")";
-    }
+    if (pgn) 
+      category2 = `${category2}(${pgn})`;
+    
     presence.setActivity({
       largeImageKey: "fp-logo",
       details: "Bir kategoriyi inceliyor:",
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (page.includes("/page/")) {
-    var pgnum = document.location.pathname.slice(
+    const pgnum = document.location.pathname.slice(
       6,
       document.location.pathname.length
     );
@@ -62,11 +62,11 @@ presence.on("UpdateData", async () => {
   } else if (page.includes(".html")) {
     const topic = document.querySelector(
       "#icerik-yazi > div.icerik-baslik > h1 > a"
-    );
-    const published = document.querySelector(
+    ),
+     published = document.querySelector(
       "#icerik > div > div.yazi-alt > ul > li.tarih > span"
-    );
-    const publisher = document.querySelector(
+    ),
+     publisher = document.querySelector(
       "#icerik > div > div.yazi-alt > ul > li.yazar > a"
     );
     presence.setActivity({
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
         publisher && publisher.textContent != ""
           ? `${publisher.textContent.trim()} ${
               published && published.textContent != ""
-                ? "(" + published.textContent.trim() + ")"
+                ? `(${published.textContent.trim()})`
                 : ""
             }`
           : "Belirsiz",
