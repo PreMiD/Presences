@@ -34,7 +34,8 @@ presence.on("UpdateData", async () => {
     };
   if (pathname.startsWith("/view/")) {
     const title: string = document.querySelector("h2").textContent.trim();
-    if ((episode = title.match(/\WEpisode\W\d{1,3}/)) !== null) {
+    episode = title.match(/\WEpisode\W\d{1,3}/);
+    if (episode !== null) {
       presenceData.details = title.replace(episode[0], "");
       presenceData.state = `${episode[0]} - ${
         document.querySelector("h4").textContent
@@ -54,9 +55,7 @@ presence.on("UpdateData", async () => {
       }
 
       presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).paused
-        : (await strings).playing;
+      presenceData.smallImageText = paused ? strings.paused : strings.playing;
     }
   } else if (hostname === "animedao.to") {
     presenceData.startTimestamp = startTimestamp;

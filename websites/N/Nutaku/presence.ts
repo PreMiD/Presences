@@ -84,12 +84,10 @@ function getQuery() {
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
           data.details = strings.searching;
-          let search: string;
-          if (
-            !(search = document.querySelector<HTMLInputElement>(
-              ".modal.open input.search-field[data-search-url]"
-            )?.value)
-          ) {
+          const search = document.querySelector<HTMLInputElement>(
+            ".modal.open input.search-field[data-search-url]"
+          )?.value;
+          if (!search) {
             delete data.state;
             delete data.smallImageText;
           } else {

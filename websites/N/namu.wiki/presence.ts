@@ -107,9 +107,9 @@ presence.on("UpdateData", async () => {
    */
   presenceData.details = details === undefined ? "Unknown Action" : details;
 
-  let page;
+  let page: RegExpExecArray | string = validateContributeUrl.exec(path);
   /* View Contribute */
-  if ((page = validateContributeUrl.exec(path))) {
+  if (page) {
     if (page[1] === "author") page = `User: ${page[2]}`;
     else page = "IP User";
   } else if ((page = validateMembershipUrl.exec(path))) {
@@ -143,8 +143,10 @@ presence.on("UpdateData", async () => {
       { label: "View Page", url: document.location.href }
     ];
   }
-  if (page)
-    presenceData.state = page.length > 128 ? `${page.slice(0, 120)}...` : page;
+  if (page) {
+    presenceData.state =
+      page.length > 128 ? `${page.slice(0, 120)}...` : (page as string);
+  }
 
   /**
    *

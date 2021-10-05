@@ -74,33 +74,33 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.match(/^\/orgs$/))
       presenceData.details = "Browsing organizations";
     else if (
-      (match = document.location.pathname.match(
-        /^\/orgs\/([^/]+)(?:\/([^/]+))?/
-      ))
+      document.location.pathname.match(/^\/orgs\/([^/]+)(?:\/([^/]+))?/)
     ) {
-      [, name, tab] = match;
+      [, name, tab] = document.location.pathname.match(
+        /^\/orgs\/([^/]+)(?:\/([^/]+))?/
+      );
       tab = tab || "members";
       presenceData.details = `On org ${tab}page`;
       presenceData.state = `${name}`;
-    } else if ((match = document.location.pathname.match(/^\/_\/([^?]+)/))) {
+    } else if (document.location.pathname.match(/^\/_\/([^?]+)/)) {
       url = new URL(document.location.href);
       params = url.searchParams;
 
-      [, name] = match;
+      [, name] = document.location.pathname.match(/^\/_\/([^?]+)/);
 
       tab = params.get(searchItems.tab);
 
       presenceData.details = `On image ${tab ? `${tab} ` : ""}page`;
       presenceData.state = `${name}`;
     } else if (
-      (match = document.location.pathname.match(
-        /^\/r\/([^/]+)\/([^/]+)(?:\/([^?]+))?/
-      ))
+      document.location.pathname.match(/^\/r\/([^/]+)\/([^/]+)(?:\/([^?]+))?/)
     ) {
       url = new URL(document.location.href);
       params = url.searchParams;
 
-      [, owner, name, tab] = match;
+      [, owner, name, tab] = document.location.pathname.match(
+        /^\/r\/([^/]+)\/([^/]+)(?:\/([^?]+))?/
+      );
 
       page = params.get(searchItems.page);
 
@@ -109,10 +109,11 @@ presence.on("UpdateData", async () => {
       }`;
       presenceData.state = `${owner}/${name}`;
     } else if (
-      (match = document.location.pathname.match(
-        /^\/layers\/([^/]+)\/([^/]+)\/([^/]+)/
-      ))
+      document.location.pathname.match(/^\/layers\/([^/]+)\/([^/]+)\/([^/]+)/)
     ) {
+      match = document.location.pathname.match(
+        /^\/layers\/([^/]+)\/([^/]+)\/([^/]+)/
+      );
       url = new URL(document.location.href);
       params = url.searchParams;
 
@@ -131,23 +132,25 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${owner}/${name}:${tag} ${arch ? arch : ""}`;
       }
     } else if (
-      (match = document.location.pathname.match(/^\/u\/([^/]+)(?:\/([^/]+))?/))
+      document.location.pathname.match(/^\/u\/([^/]+)(?:\/([^/]+))?/)
     ) {
-      const [, user] = match;
+      const [, user] = document.location.pathname.match(
+        /^\/u\/([^/]+)(?:\/([^/]+))?/
+      );
       tab = match[2] || "repositories";
       presenceData.details = `On profile ${tab} page`;
       presenceData.state = user;
     } else if (document.location.pathname.match(/^\/repository\/create/))
       presenceData.details = "Creating repository";
-    else if (
-      (match = document.location.pathname.match(/^\/repository(?:\/([^/?]+))+/))
-    ) {
+    else if (document.location.pathname.match(/^\/repository(?:\/([^/?]+))+/)) {
       url = new URL(document.location.href);
       params = url.searchParams;
 
       presenceData.details = "On personal repository";
 
-      [, tab] = match;
+      [, tab] = document.location.pathname.match(
+        /^\/repository(?:\/([^/?]+))+/
+      );
 
       page = params.get(searchItems.page);
       selector = document.querySelector(
@@ -160,10 +163,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.state = `${capitalize(tab)}${page ? ` ${page}` : ""}`;
     } else if (
-      (match = document.location.pathname.match(
-        /^\/support\/(?:(doc)?(contact)?)/
-      ))
+      document.location.pathname.match(/^\/support\/(?:(doc)?(contact)?)/)
     ) {
+      match = document.location.pathname.match(
+        /^\/support\/(?:(doc)?(contact)?)/
+      );
       const doc: boolean = match[1] && true,
         contact: boolean = match[2] && true;
       presenceData.details = "Reading FAQ";
