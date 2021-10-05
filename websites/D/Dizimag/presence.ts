@@ -93,8 +93,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     } else {
       const timestamps = presence.getTimestamps(
-        Math.floor(stream?.currentTime),
-        Math.floor(stream?.duration)
+        Math.floor(stream.currentTime),
+        Math.floor(stream.duration)
       );
 
       presenceData.smallImageKey = "play";

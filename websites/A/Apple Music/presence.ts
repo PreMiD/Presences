@@ -15,7 +15,7 @@ function getTime(list: string[]): number {
 }
 
 function getTimestamps(audioDuration: string): Array<number> {
-  const splitAudioDuration = audioDuration?.split(":").reverse(),
+  const splitAudioDuration = audioDuration.split(":").reverse(),
     parsedAudioDuration = getTime(splitAudioDuration),
     startTime = Date.now(),
     endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
         ?.textContent.split("—")[0],
       audioTime = document.querySelector(
         ".web-chrome-playback-lcd__time-end"
-      )?.textContent,
+      ).textContent,
       paused = document.querySelector(
         ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
       )

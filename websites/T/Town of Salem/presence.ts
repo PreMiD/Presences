@@ -148,7 +148,7 @@ presence.on("UpdateData", () => {
       let key = "regular";
       if (info.type.search(/Coven/g) !== -1) key = "coven";
 
-      let gameType = "Classic";
+      let gameType;
       switch (info.type) {
         case "ClassicTownTraitor": {
           gameType = "Town Traitor";

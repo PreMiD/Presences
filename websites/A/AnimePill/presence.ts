@@ -112,14 +112,11 @@ const pages: PageContext[] = [
         context.exec(presence, presenceData, { strings, video: currentVideo })
       );
       return result.then((data) => {
-        if (data.details === null) {
+        if (!data.details) {
           data.details = strings.browsing;
           presence.setTrayTitle();
           presence.setActivity();
-        } else {
-          if (data) presence.setActivity(data);
-          else presence.setActivity();
-        }
+        } else presence.setActivity(data);
         return data;
       });
     }

@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     },
     paths = document.location.pathname.split("/");
 
-  if (!paths[2] || paths[2] === "") {
+  if (!paths[2]) {
     data.largeImageKey = "homepage";
     data.details = "Looking at the main page...";
   } else if (!paths[3]) {

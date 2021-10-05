@@ -70,7 +70,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused ? "Pausado" : "Assistindo";
       presence.setTrayTitle(video.paused ? "" : videoTitle);
-      presenceData.details = videoTitle;
       presenceData.state = seasonepisode;
 
       if (video.paused) {

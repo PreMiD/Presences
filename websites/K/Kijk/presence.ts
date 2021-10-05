@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
       .replace("aflevering", "")
       .replace(/[0-9]/g, "");
     presenceData.state = rp
-      .replace("/,/g", ":")
+      .replace(/,/g, ":")
       .replace("Seizoen", "S")
       .replace("aflevering", ":E")
       .replace(/\s/g, "");
