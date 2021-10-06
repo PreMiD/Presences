@@ -1,11 +1,6 @@
 const presence = new Presence({
   clientId: "715045665796915250"
 });
-function MediaTimestamps(mediaTimes: number, mediaDuration: number): number[] {
-  const startTime = Math.floor(Date.now() / 1000),
-    endTime = Math.floor(startTime - mediaTimes + mediaDuration);
-  return [startTime, endTime];
-}
 function NotFound(): boolean {
   const q = document.querySelector("#content>div>div>h1");
   if (window.location.pathname === "/404") return true;
@@ -103,7 +98,7 @@ presence.on("UpdateData", async () => {
         .match(/\d+/g);
     }
     if (video && !isNaN(video.duration)) {
-      timestamps = MediaTimestamps(video.currentTime, video.duration);
+      timestamps = presence.getTimestamps(video.currentTime, video.duration);
       if (await presence.getSetting(SettingsId.showVideosLTime)) {
         if (!video.paused && video.readyState >= 1) {
           [data.startTimestamp, data.endTimestamp] = timestamps;
@@ -351,7 +346,7 @@ presence.on("UpdateData", async () => {
       !isNaN(video.duration) &&
       (await presence.getSetting(SettingsId.showRoomLTime))
     ) {
-      timestamps = MediaTimestamps(video.currentTime, video.duration);
+      timestamps = presence.getTimestamps(video.currentTime, video.duration);
       if (!video.paused && video.readyState >= 1)
         [data.startTimestamp, data.endTimestamp] = timestamps;
     }

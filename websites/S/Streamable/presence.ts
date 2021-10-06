@@ -11,14 +11,6 @@ const presence = new Presence({
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
  */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -29,7 +21,7 @@ presence.on("UpdateData", async () => {
   if (player) {
     const title = document.querySelector(".metadata #title").textContent,
       views = document.querySelector(".metadata #visits").textContent,
-      [startTimestamp, endTimestamp] = getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(player.currentTime),
         Math.floor(player.duration)
       );
