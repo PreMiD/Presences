@@ -36,7 +36,7 @@ lang.set("kl", "Klingon");
 lang.set("ro", "Romanian");
 lang.set("cs", "Czech");
 lang.set("sw", "Swahili");
-lang.set("cy", "Walsh");
+lang.set("cy", "Welsh");
 lang.set("id", "Indonesian");
 lang.set("hu", "Hungarian");
 lang.set("uk", "Ukrainian");
