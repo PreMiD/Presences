@@ -36,7 +36,7 @@ const data: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
-  if (data.details === null) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);

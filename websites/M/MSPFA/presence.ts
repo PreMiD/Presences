@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector("title").innerText;
     presenceData.smallImageKey = "reading";
     let { search } = document.location;
-    [, , search] = search.split("=");
+    search = new URLSearchParams(search).get("p");
     presenceData.smallImageText = `On page ${search}`;
   }
 
