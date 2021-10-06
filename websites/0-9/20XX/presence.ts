@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
   if (!(await presence.getSetting("showName"))) delete data.state;
 
   // If data doesn't exist clear else set activity to the presence data
-  if (data.details === null) {
+  if (!data.details) {
     presence.setTrayTitle(); // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);

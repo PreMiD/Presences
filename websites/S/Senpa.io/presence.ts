@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       presence.setTrayTitle();
       presence.setActivity();
     } else {
-      if (presenceData.state === null) presenceData.state = "Navigating...";
+      if (!presenceData.state) presenceData.state = "Navigating...";
       presence.setActivity(presenceData);
     }
   }

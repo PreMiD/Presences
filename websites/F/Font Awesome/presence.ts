@@ -57,7 +57,7 @@ pPresence.on("UpdateData", async () => {
     pData.state = "Sign In";
   }
 
-  if (pData.details === null) {
+  if (!pData.details) {
     pPresence.setTrayTitle();
     pPresence.setActivity();
   } else pPresence.setActivity(pData);

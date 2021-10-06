@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
     buttons: [{ label: "View Page", url: document.URL }]
   };
 
-  if (data.state === null) delete data.state;
+  if (!data.state) delete data.state;
 
   if (
     !(await presence.getSetting("buttons")) ||
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
   )
     delete data.buttons;
 
-  if (data.details === null) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

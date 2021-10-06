@@ -51,7 +51,7 @@ matrixPresence.on("UpdateData", async () => {
     matrixPData.state = "API";
   }
 
-  if (matrixPData.details === null) {
+  if (!matrixPData.details) {
     matrixPresence.setTrayTitle();
     matrixPresence.setActivity();
   } else matrixPresence.setActivity(matrixPData);

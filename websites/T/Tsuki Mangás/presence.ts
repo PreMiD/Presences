@@ -250,7 +250,7 @@ presence.on("UpdateData", async () => {
       data.smallImageText = `Username: ${user}`;
     }
   }
-  if (data.details === null) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);

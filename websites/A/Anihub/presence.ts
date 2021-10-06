@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
     pathName = window.location.pathname,
     video = document.querySelector("video");
   function DefaultPresence(): void {
-    if (data.details === null) {
+    if (!data.details) {
       presence.setTrayTitle();
       presence.setActivity();
     } else presence.setActivity(data);

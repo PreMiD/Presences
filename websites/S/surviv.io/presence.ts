@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
     } with ${alivecount} alive`;
     data.state = `${gamemode !== "50v50" ? `${gametype} - ` : ""}${gamemode}`;
   }
-  if (data.details === null) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);

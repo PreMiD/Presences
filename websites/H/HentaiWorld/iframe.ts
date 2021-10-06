@@ -2,7 +2,7 @@ const iframe = new iFrame();
 iframe.on("UpdateData", () => {
   if (document.querySelector("#video-player") !== null) {
     const hentai: HTMLVideoElement = document.querySelector("#video-player");
-    if (hentai !== undefined && !isNaN(hentai.duration)) {
+    if (hentai !== null && !isNaN(hentai.duration)) {
       iframe.send({
         iframeVideo: {
           iFrameVideo: true,
