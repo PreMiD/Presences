@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
       case "Sets":
         switch (pathSplits[1]) {
           case "show":
-            if (!actionTimestamp) actionTimestamp = Date.now();
+            actionTimestamp ??= Date.now();
             data.details = "Viewing a set";
             data.state = qzData.layer.studyableTitle;
             if (buttons) {
@@ -85,56 +85,56 @@ presence.on("UpdateData", async () => {
         }
         break;
       case "Gravity": // Set > Gravity
-        if (!actionTimestamp) actionTimestamp = Date.now();
+        actionTimestamp ??= Date.now();
         data.smallImageKey = "gravity";
         data.smallImageText = "Gravity";
         data.details = "Playing Gravity";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "Match": // Set > Match
-        if (!actionTimestamp) actionTimestamp = Date.now();
+        actionTimestamp ??= Date.now();
         data.smallImageKey = "match";
         data.smallImageText = "Match";
         data.details = "Playing Match";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "LiveGame": // Set > Live
-        if (!actionTimestamp) actionTimestamp = Date.now();
+        actionTimestamp ??= Date.now();
         data.smallImageKey = "live";
         data.smallImageText = "Quizlet Live";
         data.details = "Hosting a live game";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "Assistant": // Set > Learn
-        if (!actionTimestamp) actionTimestamp = Date.now();
+        actionTimestamp ??= Date.now();
         data.smallImageKey = "learn";
         data.smallImageText = "Learn";
         data.details = "Learning set";
         data.state = qzData.layer.studyableTitle;
         break;
       case "Cards": // Set > Flashcards
-        if (!actionTimestamp) actionTimestamp = Date.now();
+        actionTimestamp ??= Date.now();
         data.smallImageKey = "flashcards";
         data.smallImageText = "Flashcards";
         data.details = "Reviewing flashcards";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Test": // Set > Test
-        if (!actionTimestamp) actionTimestamp = Date.now();
+        actionTimestamp ??= Date.now();
         data.smallImageKey = "test";
         data.smallImageText = "Test";
         data.details = "Testing";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Learn": // Set > Write
-        if (!actionTimestamp) actionTimestamp = Date.now();
+        actionTimestamp ??= Date.now();
         data.smallImageKey = "write";
         data.smallImageText = "Writing";
         data.details = "Writing";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Spell": // Set > Spell
-        if (!actionTimestamp) actionTimestamp = Date.now();
+        actionTimestamp ??= Date.now();
         data.smallImageKey = "spell";
         data.smallImageText = "Spell";
         data.details = "Spelling";

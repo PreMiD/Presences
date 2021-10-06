@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
         url: "https://live.pramborsfm.com"
       }
     ];
-    if (!timestamp) timestamp = Date.now();
+    timestamp ??= Date.now();
     switch (document.location.hostname) {
       case "streaming.pramborsfm.com": {
         const status = document.querySelector("#playerBtn")?.className;

@@ -19,11 +19,10 @@ presence.on("UpdateData", async () => {
       epTitle = document.querySelector(".sub-header h1").textContent;
     let epNumber: string | Element | HTMLElement =
       document.querySelector(".meta span");
-    if (epNumber) {
-      epNumber = `${(epNumber as HTMLElement).textContent
-        .replace("Season ", "S")
-        .replace(" Ep ", ":E")} `;
-    } else epNumber = "";
+    epNumber &&= `${(epNumber as HTMLElement).textContent
+      .replace("Season ", "S")
+      .replace(" Ep ", ":E")} `;
+    epNumber ??= "";
 
     [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
       Math.floor(player.currentTime),

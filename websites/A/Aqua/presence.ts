@@ -48,9 +48,10 @@ presence.on("UpdateData", async () => {
   if (!sname) {
     lastTitle = "Loading...";
     sname = "Loading...";
-  } else if (!sartist) sartist = "Loading...";
-  else if (!aquapresenter) aquapresenter = "Loading...";
-  else if (!aqualisteners) aqualisteners = "Loading...";
+  }
+  sartist ??= "Loading...";
+  aquapresenter ??= "Loading...";
+  aqualisteners ??= "Loading...";
 
   if (aquapresenter !== "AutoDJ") {
     if (changedetails) {

@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 function parseQueryString(queryString?: string) {
-  if (!queryString) queryString = window.location.search.substring(1);
+  queryString ??= window.location.search.substring(1);
 
   const params: { [queryKey: string]: string } = {},
     queries = queryString.split("&");
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
-    if (!presenceData.state) presenceData.state = "Navigating...";
+    presenceData.state ??= "Navigating...";
     presence.setActivity(presenceData);
   }
 });

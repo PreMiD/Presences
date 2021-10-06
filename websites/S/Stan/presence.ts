@@ -67,8 +67,8 @@ presence.on("UpdateData", async () => {
     newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy");
 
-  if (!data.oldLang) data.oldLang = newLang;
-  else if (data.oldLang !== newLang) {
+  data.oldLang ??= newLang;
+  if (data.oldLang !== newLang) {
     data.oldLang = newLang;
     strings = getStrings();
   }

@@ -717,7 +717,7 @@ async function setDefaultsToPresence(): Promise<void> {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isJellyfinWebClient(): Promise<boolean> {
-  if (!ApiClient) ApiClient = await presence.getPageletiable("ApiClient");
+  ApiClient ??= await presence.getPageletiable("ApiClient");
 
   if (ApiClient && typeof ApiClient === "object")
     if (ApiClient._appName && ApiClient._appName === APP_NAME) return true;

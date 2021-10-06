@@ -127,8 +127,8 @@ presence.on("UpdateData", async () => {
     devLogoArr = ["dev-main", "dev-white", "dev-purple"],
     buttons = await presence.getSetting("buttons");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

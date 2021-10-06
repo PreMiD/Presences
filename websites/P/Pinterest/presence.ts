@@ -39,11 +39,9 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
     );
-    if (!user) {
-      user = document.querySelector(
-        "body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
-      );
-    }
+    user ??= document.querySelector(
+      "body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
+    );
     presenceData.details = "Viewing user:";
     presenceData.state = (user as HTMLElement).innerText;
 

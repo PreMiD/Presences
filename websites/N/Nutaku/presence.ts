@@ -58,7 +58,7 @@ function getQuery() {
           const game = {
             name: document.title.replace(/ \| Nutaku$/g, "")
           };
-          if (!timers.playing) timers.playing = new Date();
+          timers.playing ??= new Date();
           data.startTimestamp = timers.playing.getTime();
           data.details = strings.playing;
           data.state = game.name;
@@ -123,7 +123,7 @@ function getQuery() {
           !!ref.location.pathname.match(/^\/news-(page|updates)\/(\d+)\//i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          if (!timers.readingArticle) timers.readingArticle = new Date();
+          timers.readingArticle ??= new Date();
           data.startTimestamp = timers.readingArticle.getTime();
           data.details = strings.readingArticle;
           data.state = document.title;

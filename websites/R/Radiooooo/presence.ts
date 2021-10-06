@@ -35,8 +35,8 @@ presence.on("UpdateData", async () => {
       songState = await presence.getSetting("song_2"),
       newLang = await presence.getSetting("lang");
 
-    if (!oldLang) oldLang = newLang;
-    else if (oldLang !== newLang) {
+    oldLang ??= newLang;
+    if (oldLang !== newLang) {
       oldLang = newLang;
       strings = getStrings();
     }

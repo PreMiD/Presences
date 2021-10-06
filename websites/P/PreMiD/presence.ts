@@ -91,8 +91,8 @@ presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
   const newLang = await presence.getSetting("lang"),
     time = await presence.getSetting("time");
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

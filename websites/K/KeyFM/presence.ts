@@ -54,9 +54,10 @@ presence.on("UpdateData", async () => {
   if (!sname) {
     lastTitle = "Loading...";
     sname = "Loading...";
-  } else if (!sartist) sartist = "Loading...";
-  else if (!keypresenter) keypresenter = "Loading...";
-  else if (!keylisteners) keylisteners = "Loading...";
+  }
+  sartist ??= "Loading...";
+  keypresenter ??= "Loading...";
+  keylisteners ??= "Loading...";
 
   if (!keyislive) {
     if (changedetails) {

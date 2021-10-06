@@ -43,10 +43,10 @@ presence.on("UpdateData", async () => {
     showSearch = await presence.getSetting("searchQuery"),
     pDetail = await presence.getSetting("detail");
 
-  if (!videoData) videoData = await presence.getPageletiable("ghtEnv");
+  videoData ??= await presence.getPageletiable("ghtEnv");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

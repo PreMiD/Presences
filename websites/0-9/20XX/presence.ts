@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
     if (data20XX.game) {
       data.details = `In-Game - ${data20XX.game.info.gametype} (${data20XX.game.info.players}/${data20XX.game.info.maxplayers})`;
 
-      if (!gameStartTimestamp) gameStartTimestamp = Date.now();
+      gameStartTimestamp ??= Date.now();
 
       // Character
       data.smallImageKey = `char_${data20XX.game.character.split("_")[0]}`;

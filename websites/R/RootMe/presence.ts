@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 function parseQueryString(queryString?: string): { [key: string]: string } {
-  if (!queryString) queryString = window.location.search.substring(1);
+  queryString ??= window.location.search.substring(1);
 
   const params: { [key: string]: string } = {},
     queries = queryString.split("&");

@@ -178,25 +178,18 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div > span > span"
     );
-    if (!title) {
-      title = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(3) > div:nth-child(2) > div > div > div > div > div > span > span"
-      );
-    }
-    if (!title) {
-      title = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div"
-      );
-    }
-    if (!title) {
-      title = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div > div > div > div"
-      );
-    }
-    if (!title)
-      title = document.querySelector("#u_2_d > div._1rgv > div._1rgw");
+    title ??= document.querySelector(
+      "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(3) > div:nth-child(2) > div > div > div > div > div > span > span"
+    );
+    title ??= document.querySelector(
+      "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div"
+    );
+    title ??= document.querySelector(
+      "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div > div > div > div"
+    );
+    title ??= document.querySelector("#u_2_d > div._1rgv > div._1rgw");
 
-    if (!title) title = document.querySelector("._1rgw");
+    title ??= document.querySelector("._1rgw");
 
     if (!title) {
       delete presenceData.startTimestamp;

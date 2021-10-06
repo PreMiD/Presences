@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
           if (await presence.getSetting("showName"))
             data.details = `Playing as ${agarData.nick}`;
           else data.details = "Playing";
-          if (!gameStartTimestamp) gameStartTimestamp = Date.now();
+          gameStartTimestamp ??= Date.now();
           break;
         case 2:
           data.details = "Game Over";

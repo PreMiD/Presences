@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
         //Bomb Defusal Manual
         case "print": //Currently not working for the pdf version
         case "web":
-          if (!browsingStamp) browsingStamp = Math.floor(Date.now() / 1000);
+          browsingStamp ??= Math.floor(Date.now() / 1000);
           presenceData.startTimestamp = browsingStamp;
 
           presenceData.smallImageKey = "reading";

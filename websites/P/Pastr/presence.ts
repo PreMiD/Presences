@@ -12,7 +12,7 @@ presence.on("UpdateData", () => {
     action = "Creating a paste";
     let pasteName = (document.getElementById("paste-title") as HTMLInputElement)
       .value;
-    if (!pasteName) pasteName = "Untitled";
+    pasteName ??= "Untitled";
 
     state = pasteName;
   } else if (pageTitle === "The smoothest paste service") {

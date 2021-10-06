@@ -39,8 +39,8 @@ presence.on("UpdateData", async () => {
     newLang = await presence.getSetting("lang").catch(() => "en"),
     showPlaylist = await presence.getSetting("showPlaylist");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

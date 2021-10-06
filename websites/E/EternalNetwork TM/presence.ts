@@ -44,8 +44,8 @@ presence.on("UpdateData", async () => {
       "eternalnetworktm_logo_3"
     ];
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       const docName = document.querySelector("[class*='logoText-'] span"),
         pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
-      if (!actionTimestamp) actionTimestamp = Date.now();
+      actionTimestamp ??= Date.now();
       if (docName) data.details = `Editing ${docName.textContent}`;
       if (pageName) data.state = `on ${pageName.textContent}`;
       data.startTimestamp = actionTimestamp;
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     const docName = document.querySelector("[class*='logoText-'] span"),
       pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
-    if (!actionTimestamp) actionTimestamp = Date.now();
+    actionTimestamp ??= Date.now();
     if (docName) data.details = `Viewing ${docName.textContent}`;
     if (pageName) data.state = `on ${pageName.textContent}`;
     data.startTimestamp = actionTimestamp;

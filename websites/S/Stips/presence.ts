@@ -144,7 +144,7 @@ presence.on("UpdateData", () => {
     penfObj;
 
   if (PathMain === "") PathMain = "/";
-  if (!PathSecond) PathSecond = "/";
+  PathSecond ??= "/";
 
   // detect url changes
   if (window.location.href !== oldUrl || lastAction !== action) {
@@ -174,7 +174,7 @@ presence.on("UpdateData", () => {
       if (isEdit) details = isAns ? askObj.editAns : askObj.editAsk;
       if (isWrite) details = askObj.write;
 
-      if (!details) details = askObj.main;
+      details ??= askObj.main;
 
       action = `${Path} & ${details}`;
       break;
@@ -224,11 +224,9 @@ presence.on("UpdateData", () => {
       if (isDelete) details = cnlObj.remove;
       if (isEdit) details = cnlObj.edit;
 
-      if (!details) {
-        details = cnlObj.main
-          .replace("%channel%", decodeURI(location.pathname.split("/")[2])) // %D7%90%D7%91%D7%92 => אבג
-          .replace("-", " "); // סדרות-וסרטים => סדרות וסרטים
-      }
+      details ??= cnlObj.main
+        .replace("%channel%", decodeURI(location.pathname.split("/")[2])) // %D7%90%D7%91%D7%92 => אבג
+        .replace("-", " "); // סדרות-וסרטים => סדרות וסרטים
 
       action = `${Path} & ${details}`;
       break;
@@ -239,7 +237,7 @@ presence.on("UpdateData", () => {
       penfObj = translate(isMale)["pen-friends"];
       if (isDelete) details = penfObj.remove;
       if (isWrite) details = penfObj.write;
-      if (!details) details = penfObj.main;
+      details ??= penfObj.main;
 
       action = `${Path} & ${details}`;
       break;
@@ -261,7 +259,7 @@ presence.on("UpdateData", () => {
       if (isDelete) details = isAns ? repObj.removeAns : repObj.removeAsk;
       if (isEdit) details = isAns ? repObj.editAns : repObj.editAsk;
 
-      if (!details) details = repObj.main;
+      details ??= repObj.main;
 
       action = `${Path} & ${details}`;
       break;
@@ -280,12 +278,10 @@ presence.on("UpdateData", () => {
       if (isDelete) details = tpcObj.remove;
       if (isEdit) details = tpcObj.edit;
 
-      if (!details) {
-        details = tpcObj.main.replace(
-          "%topic%",
-          decodeURI(location.pathname.split("/")[2])
-        );
-      }
+      details ??= tpcObj.main.replace(
+        "%topic%",
+        decodeURI(location.pathname.split("/")[2])
+      );
 
       action = `${Path} & ${details}`;
       break;
@@ -296,13 +292,11 @@ presence.on("UpdateData", () => {
 
       if (isDelete) details = pflObj.remove;
 
-      if (!details) {
-        details = pflObj.main.replace(
-          "%nickname%",
-          document.querySelector("app-user-profile .nickname")?.textContent ||
-            "טוען..."
-        );
-      }
+      details ??= pflObj.main.replace(
+        "%nickname%",
+        document.querySelector("app-user-profile .nickname")?.textContent ||
+          "טוען..."
+      );
 
       action = `${Path} & ${details}`;
       break;

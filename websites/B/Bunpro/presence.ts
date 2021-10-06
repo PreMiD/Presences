@@ -118,8 +118,7 @@ presence.on("UpdateData", () => {
             '.grammar-point-study[style*="display: block"]'
           );
 
-          if (!activeGrammarPoint)
-            activeGrammarPoint = document.querySelector(".grammar-point-study");
+          activeGrammarPoint ??= document.querySelector(".grammar-point-study");
 
           const grammarPointElement: HTMLSpanElement =
               activeGrammarPoint.querySelector(
@@ -195,7 +194,7 @@ presence.on("UpdateData", () => {
   if (level) {
     data.smallImageKey = getLevelIcon(level);
 
-    if (!smallImageText) smallImageText = `Level ${level}`;
+    smallImageText ??= `Level ${level}`;
   }
   if (smallImageText) data.smallImageText = smallImageText;
 

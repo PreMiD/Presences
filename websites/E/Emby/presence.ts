@@ -344,7 +344,7 @@ async function getApiClient(): Promise<ApiClient> {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isEmbyWebClient(): Promise<boolean> {
-  if (!ApiClient) ApiClient = await getApiClient();
+  ApiClient ??= await getApiClient();
 
   if (typeof ApiClient === "object")
     if (ApiClient._appName && ApiClient._appName === APP_NAME) return true;

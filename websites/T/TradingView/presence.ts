@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "TradingView Blog";
   }
 
-  if (!presenceData.details) presenceData.details = "Browsing...";
+  presenceData.details ??= "Browsing...";
 
   presence.setActivity(presenceData);
 });

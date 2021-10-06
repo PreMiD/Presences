@@ -50,8 +50,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "logo" },
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

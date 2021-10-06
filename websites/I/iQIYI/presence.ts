@@ -31,8 +31,8 @@ presence.on("UpdateData", async () => {
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

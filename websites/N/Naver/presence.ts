@@ -538,8 +538,7 @@ presence.on("UpdateData", async () => {
             }
           ];
         } else if (data.service === "NAVER_CAFE") {
-          if (!cafeTitle)
-            cafeTitle = document.querySelector("h1.d-none")?.textContent;
+          cafeTitle ??= document.querySelector("h1.d-none")?.textContent;
           if (cafeTitle) {
             presenceData.details = "Viewing cafe:";
             presenceData.state = cafeTitle;
