@@ -1,7 +1,6 @@
-
 const presence = new Presence({
-  clientId: "894342965772820490"
-}),
+    clientId: "894342965772820490"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -20,10 +19,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing filler list:";
     presenceData.state = selectClean;
   } else if (document.location.pathname.includes("/shows")) {
-
     presenceData.details = "Browsing for anime filler list...";
   } else if (document.location.pathname.includes("/search/node/")) {
-
     const search = document.location.pathname,
       splitPath = search.split("/"),
       selectPath = splitPath[splitPath.length - 1],
@@ -46,7 +43,6 @@ presence.on("UpdateData", async () => {
         url: `https://${document.location.hostname}/users/${user.textContent}`
       }
     ];
-
   } else if (document.location.pathname.includes("/contact")) {
     presenceData.details = "Contacting with the page...";
   } else if (document.location.pathname.includes("/changelog")) {
@@ -59,5 +55,4 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
-
 });
