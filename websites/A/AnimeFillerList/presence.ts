@@ -9,16 +9,16 @@ presence.on("UpdateData", async () => {
   };
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.pathname === "/") 
+  if (document.location.pathname === "/")
     presenceData.details = "In home page...";
-  else if (document.location.pathname.includes("/shows/latest-updates")) 
+  else if (document.location.pathname.includes("/shows/latest-updates"))
     presenceData.details = "Viewing Lastest updates...";
   else if (document.location.pathname.includes("/shows/")) {
     const select = document.querySelector(".Right > h1"),
       selectClean = select.textContent.replace("Filler List", " ");
     presenceData.details = "Viewing filler list:";
     presenceData.state = selectClean;
-  } else if (document.location.pathname.includes("/shows")) 
+  } else if (document.location.pathname.includes("/shows"))
     presenceData.details = "Browsing for anime filler list...";
   else if (document.location.pathname.includes("/search/node/")) {
     const search = document.location.pathname,
@@ -27,11 +27,11 @@ presence.on("UpdateData", async () => {
       clean = selectPath.replace(/%20/g, " ");
     presenceData.details = "Searching a filler list:";
     presenceData.state = clean;
-  } else if (document.location.pathname.includes("/user/password")) 
+  } else if (document.location.pathname.includes("/user/password"))
     presenceData.details = "Requesting a new password...";
-  else if (document.location.pathname.includes("/user/register")) 
+  else if (document.location.pathname.includes("/user/register"))
     presenceData.details = "Creating a account...";
-  else if (document.location.pathname.includes("/user/login")) 
+  else if (document.location.pathname.includes("/user/login"))
     presenceData.details = "Logging in...";
   else if (document.location.pathname.includes("/users/")) {
     const user = document.querySelector(".content > h1");
@@ -43,13 +43,12 @@ presence.on("UpdateData", async () => {
         url: `https://${document.location.hostname}/users/${user.textContent}`
       }
     ];
-  } else if (document.location.pathname.includes("/contact")) 
+  } else if (document.location.pathname.includes("/contact"))
     presenceData.details = "Contacting with the page...";
-  else if (document.location.pathname.includes("/changelog")) 
+  else if (document.location.pathname.includes("/changelog"))
     presenceData.details = "Viewing Changelog...";
-  else if (document.location.pathname.includes("/privacy-policy")) 
+  else if (document.location.pathname.includes("/privacy-policy"))
     presenceData.details = "Viewing Privacy Policy...";
-  
 
   if (!presenceData.details) {
     presence.setTrayTitle();
