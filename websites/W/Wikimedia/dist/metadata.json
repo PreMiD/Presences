@@ -43,11 +43,17 @@
     "donate.wikimedia.org",
     "wikispore.wmflabs.org"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/M58Pucd.png",
   "thumbnail": "https://i.imgur.com/keAOFru.png",
   "color": "#000000",
-  "tags": ["encyclopedia", "wiki", "wikimedia-foundation", "wikimedia", "wmf"],
+  "tags": [
+    "encyclopedia",
+    "wiki",
+    "wikimedia-foundation",
+    "wikimedia",
+    "wmf"
+  ],
   "description": {
     "en": "Wikimedia is a global movement whose mission is to bring free educational content to the world. Through various projects, chapters, and the support structure of the non-profit Wikimedia Foundation, Wikimedia strives to bring about a world in which every single human being can freely share in the sum of all knowledge. *For usage in specific projects from the Wikimedia Foundation, please use the appropriate presences instead.*"
   },

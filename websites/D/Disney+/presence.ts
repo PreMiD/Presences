@@ -52,11 +52,8 @@ presence.on("UpdateData", async () => {
     strings = await getStrings();
   }
 
-  if (isHostDP)
-    data.largeImageKey = "disneyplus-logo";
-   else if (isHostHS)
-    data.largeImageKey = "disneyplus-hotstar-logo";
-
+  if (isHostDP) data.largeImageKey = "disneyplus-logo";
+  else if (isHostHS) data.largeImageKey = "disneyplus-hotstar-logo";
 
   // Disney+ video
   if (isHostDP && location.pathname.includes("/video/")) {
@@ -189,7 +186,8 @@ presence.on("UpdateData", async () => {
       document.querySelector(".player-base video");
 
     if (video && !isNaN(video.duration)) {
-      const [startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(video),
+      const [startTimestamp, endTimestamp] =
+          presence.getTimestampsfromMedia(video),
         titleField: HTMLDivElement = document.querySelector(
           ".controls-overlay .primary-title"
         ),
