@@ -4,15 +4,20 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  }),
-  presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+  });
 
 let startTimestamp: number;
 
 presence.on("UpdateData", async () => {
-  const { play, pause } = await strings,
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    buttons: [
+      {
+        label: "Listen",
+        url: "https://live.pramborsfm.com"
+      }
+    ]
+  },
     buttonAction = [
       ...document.querySelector("button[class*='td-player']").classList
     ]
@@ -22,21 +27,13 @@ presence.on("UpdateData", async () => {
   if (buttonAction === "play") {
     startTimestamp = undefined;
     presenceData.smallImageKey = "pause";
-    presenceData.smallImageText = pause;
-    delete presenceData.startTimestamp;
-    delete presenceData.state;
+    presenceData.smallImageText = (await strings).pause;
   } else if (buttonAction === "pause") {
-    if (!startTimestamp) startTimestamp = Date.now();
+    if (!startTimestamp) startTimestamp = Math.floor(Date.now() / 1000);
     presenceData.smallImageKey = "play";
-    presenceData.smallImageText = play;
+    presenceData.smallImageText = (await strings).play;
     presenceData.startTimestamp = startTimestamp;
     presenceData.state = "Listening";
   }
-  presenceData.buttons = [
-    {
-      label: "Listen",
-      url: "https://live.pramborsfm.com"
-    }
-  ];
   presence.setActivity(presenceData);
 });
