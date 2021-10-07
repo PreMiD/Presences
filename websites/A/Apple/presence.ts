@@ -233,10 +233,10 @@ presence.on("UpdateData", async () => {
       buttons: []
     };
 
-    if (!oldLang || oldLang !== newLang) {
-      oldLang = newLang;
-      lang = await getStrings();
-    }
+  if (!oldLang || oldLang !== newLang) {
+    oldLang = newLang;
+    lang = await getStrings();
+  }
 
   function getPSName() {
     return (
