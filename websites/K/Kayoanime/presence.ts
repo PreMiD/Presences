@@ -14,7 +14,6 @@ let video = {
     paused: true,
     isPlaying: false
   },
-  index: { a: 0, b: 1 },
   everPlaying = false;
 
 presence.on("iFrameData", (data: { duration: number; currentTime: number; paused: boolean, isPlaying: boolean }) => {
