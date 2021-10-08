@@ -11,6 +11,7 @@ let startTimestamp: number;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
+    startTimestamp,
     buttons: [
       {
         label: "Listen",
@@ -32,7 +33,6 @@ presence.on("UpdateData", async () => {
     if (!startTimestamp) startTimestamp = Math.floor(Date.now() / 1000);
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = (await strings).play;
-    presenceData.startTimestamp = startTimestamp;
     presenceData.state = "Listening";
   }
   presence.setActivity(presenceData);
