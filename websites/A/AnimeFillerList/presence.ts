@@ -27,8 +27,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = user.textContent;
     presenceData.buttons = [
       {
-        label: "Look user",
-        url: `https://${document.location.hostname}/users/${user.textContent}`
+        label: "View User",
+        url: `${document.URL}`
       }
     ];
   } else if (document.location.pathname.includes("/contact")) presenceData.details = "Contacting with the page...";
