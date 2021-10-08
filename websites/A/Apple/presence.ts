@@ -83,7 +83,7 @@ async function getStrings() {
   );
 }
 
-let lang: LangStrings, oldLang: string;
+let lang: ReturnType<typeof getStrings> extends PromiseLike<infer U> ? U : {}, oldLang: string;
 
 presence.on("UpdateData", async () => {
   const urlpath = window.location.pathname.toLowerCase().split("/"),
