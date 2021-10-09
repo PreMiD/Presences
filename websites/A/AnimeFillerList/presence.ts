@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
     const search = document.location.pathname.split("/");
     presenceData.details = "Searching the filler list";
     presenceData.state = search.at(-1)!.replace(/%20/g, " ");
-  } else if (document.location.pathname.includes("/user/password")) presenceData.details = "Requesting a new password...";
+  } else if (document.location.pathname.includes("/user/password")) presenceData.details = "Requesting a new password";
   else if (document.location.pathname.includes("/user/register")) presenceData.details = "Creating a account...";
   else if (document.location.pathname.includes("/user/login")) presenceData.details = "Logging in";
   else if (document.location.pathname.includes("/users/")) {
