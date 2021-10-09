@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "765735268421468190"
+    clientId: "854817731161489449"
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
   dj = document.querySelector("#presenter-name") as HTMLElement;
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Team Page";
     presenceData.smallImageKey = "reading";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/apply") {
+  } else if (document.location.pathname == "/applications") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Apply to become a presenter";
