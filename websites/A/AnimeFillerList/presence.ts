@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.pathname === "/") presenceData.details = "In home page...";
+  if (document.location.pathname === "/") presenceData.details = "In home page";
   else if (document.location.pathname.includes("/shows/latest-updates")) presenceData.details = "Viewing Lastest updates...";
   else if (document.location.pathname.includes("/shows/")) {
     presenceData.details = "Viewing filler list:";
