@@ -16,16 +16,6 @@ updates:
     labels:
       - "🔼 Dependencies"
     open-pull-requests-limit: 15
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    commit-message:
-      prefix: "🔼"
-      prefix-development: "🔼"
-    labels:
-      - "🔼 Dependencies"
-    open-pull-requests-limit: 15
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
