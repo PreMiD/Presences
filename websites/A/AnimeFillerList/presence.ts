@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/contact")) presenceData.details = "Contacting with the page...";
   else if (document.location.pathname.includes("/changelog")) presenceData.details = "Reading the changelog";
-  else if (document.location.pathname.includes("/privacy-policy")) presenceData.details = "Viewing Privacy Policy...";
+  else if (document.location.pathname.includes("/privacy-policy")) presenceData.details = "Reading the privacy policy";
 
   if (!presenceData.details) {
     presence.setTrayTitle();
