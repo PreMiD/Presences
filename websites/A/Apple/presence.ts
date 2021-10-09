@@ -65,7 +65,7 @@ async function getStrings() {
       statePlaying: "general.playing",
       btnViewProduct: "apple.btnViewProduct",
       btnViewService: "apple.btnViewService",
-      btnViewArticle: "apple.btnViewArticle",
+      btnViewArticle: "general.buttonReadArticle",
       btnViewEvent: "apple.btnViewEvent",
       btnViewOS: "apple.btnViewOS",
       btnViewStudio: "apple.btnViewStudio",
@@ -181,7 +181,7 @@ presence.on("UpdateData", async () => {
     if (urlpath.length === (2 || 3)) presenceData.details = "Home";
     else if (includesProduct) {
       if (urlpath.includes("compare")) {
-        presenceData.details = `${lang.comparing}:`;
+        presenceData.details = lang.comparing;
         presenceData.state = document.title
           .split("-")[0]
           .replace(/ *\([^)]*\) */g, "");
@@ -202,7 +202,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (includesService) {
       const service = getPSName();
-      presenceData.details = `${lang.viewService}:`;
+      presenceData.details = lang.viewService;
       presenceData.state = service;
 
       if (setting.buttons) {
