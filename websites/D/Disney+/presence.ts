@@ -185,7 +185,8 @@ presence.on("UpdateData", async () => {
       document.querySelector(".player-base video");
 
     if (video && !isNaN(video.duration)) {
-      const timestamps = presence.getTimestampsfromMedia(video),
+      const [startTimestamp, endTimestamp] =
+          presence.getTimestampsfromMedia(video),
         titleField: HTMLDivElement = document.querySelector(
           ".controls-overlay .primary-title"
         ),
