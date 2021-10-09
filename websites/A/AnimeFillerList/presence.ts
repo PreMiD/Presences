@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/shows/")) {
     presenceData.details = "Viewing filler list:";
     presenceData.state = document.querySelector(".Right > h1").textContent.replace("Filler List", " ");
-  } else if (document.location.pathname.includes("/shows")) presenceData.details = "Browsing for anime filler list...";
+  } else if (document.location.pathname.includes("/shows")) presenceData.details = "Browsing the list of shows";
   else if (document.location.pathname.includes("/search/node/")) {
     const search = document.location.pathname.split("/");
     presenceData.details = "Searching a filler list:";
