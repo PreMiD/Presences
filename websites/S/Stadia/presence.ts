@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Can't read page";
   
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else
