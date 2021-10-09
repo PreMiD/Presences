@@ -9,8 +9,7 @@ let gameName: HTMLElement,
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    smallImageKey: "small"
+    largeImageKey: "logo"
   };
 
   if (document.location.pathname === "/home") {
@@ -31,6 +30,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/store")) {
     presenceData.details = "Viewing Stadia Store";
     presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/pro")) {
+    presenceData.details = "Viewing Stadia Pro";
+    presenceData.startTimestamp = browsingStamp; 
   } else 
     presenceData.details = "Can't read page";
   
