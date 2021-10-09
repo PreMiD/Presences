@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = search.at(-1)!.replace(/%20/g, " ");
   } else if (document.location.pathname.includes("/user/password")) presenceData.details = "Requesting a new password...";
   else if (document.location.pathname.includes("/user/register")) presenceData.details = "Creating a account...";
-  else if (document.location.pathname.includes("/user/login")) presenceData.details = "Logging in...";
+  else if (document.location.pathname.includes("/user/login")) presenceData.details = "Logging in";
   else if (document.location.pathname.includes("/users/")) {
     const user = document.querySelector(".content > h1");
     presenceData.details = "Viewing user";
