@@ -83,7 +83,10 @@ async function getStrings() {
   );
 }
 
-let lang: ReturnType<typeof getStrings> extends PromiseLike<infer U> ? U : unknown, oldLang: string;
+let lang: ReturnType<typeof getStrings> extends PromiseLike<infer U>
+    ? U
+    : unknown,
+  oldLang: string;
 
 presence.on("UpdateData", async () => {
   const urlpath = window.location.pathname.toLowerCase().split("/"),
@@ -306,13 +309,15 @@ presence.on("UpdateData", async () => {
           "h1.typography-hero-eyebrow.hero-eyebrow.hero-copy-item"
         );
 
-      presenceData.details = general.viewing;
+      presenceData.details = lang.viewing;
       presenceData.state = OS?.textContent || "Unknown";
 
       if (setting.buttons && OS) {
         presenceData.buttons = [
           {
-            label: lang.btnViewOS.replace("{0}", OS.textContent.replace("Preview", "")).substring(0, 30),
+            label: lang.btnViewOS
+              .replace("{0}", OS.textContent.replace("Preview", ""))
+              .substring(0, 30),
             url: window.location.href
           }
         ];
@@ -391,8 +396,7 @@ presence.on("UpdateData", async () => {
     } else if (urlpath[num] === "watch") {
       presenceData.details = "Shop";
 
-      if (urlpath[num + 1] === "bands")
-        presenceData.state = lang.shopBands;
+      if (urlpath[num + 1] === "bands") presenceData.state = lang.shopBands;
       else if (urlpath[num + 1] === "accessories")
         presenceData.state = lang.shopAccessories;
     } else if (urlpath[num + 1] === "accessories") {
@@ -440,8 +444,12 @@ presence.on("UpdateData", async () => {
       const summary = document.querySelector(
         "div.rs-summary-value"
       )?.textContent;
+
       presenceData.details = lang.shopBag;
-      presenceData.state = lang.shopBagSummary.replace("{0}", (!summary) ? "$0" : summary );
+      presenceData.state = lang.shopBagSummary.replace(
+        "{0}",
+        !summary ? "$0" : summary
+      );
     } else {
       presenceData.details = "Shop";
       presenceData.state = lang.other;
@@ -473,9 +481,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = lang.supportArticle;
       presenceData.state =
         document.querySelector("h1#howto-title")?.textContent || "Unknown";
-    } else if (window.location.hostname === "getsupport.apple.com") {
+    } else if (window.location.hostname === "getsupport.apple.com")
       presenceData.details = lang.support;
-    } else {
+    else {
       presenceData.details = lang.support;
       presenceData.state = "Home";
     }
@@ -527,19 +535,24 @@ presence.on("UpdateData", async () => {
 
     if (!urlpath[1]) presenceData.state = "Launchpad";
     else if (urlpath[1] === "mail") presenceData.state = lang.iCloudMail;
-    else if (urlpath[1] === "contacts") presenceData.state = lang.iCloudContacts;
-    else if (urlpath[1] === "calendar") presenceData.state = lang.iCloudCalendar;
+    else if (urlpath[1] === "contacts")
+      presenceData.state = lang.iCloudContacts;
+    else if (urlpath[1] === "calendar")
+      presenceData.state = lang.iCloudCalendar;
     else if (urlpath[1] === "photos") presenceData.state = lang.iCloudPhotos;
     else if (urlpath[1] === "iclouddrive") presenceData.state = "Drive";
     else if (urlpath[1] === "notes") presenceData.state = lang.iCloudNotes;
-    else if (urlpath[1] === "reminders") presenceData.state = lang.iCloudReminders;
+    else if (urlpath[1] === "reminders")
+      presenceData.state = lang.iCloudReminders;
     else if (urlpath[1] === "pages") {
       presenceData.largeImageKey = "pages";
 
       if (urlpath[2]) {
         presenceData.details = "iCloud Pages";
-        if (urlpath[2] === "create") presenceData.state = lang.iCloudPagesCreate;
-        else
+
+        if (urlpath[2] === "create")
+          presenceData.state = lang.iCloudPagesCreate;
+        else {
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
           )?.textContent;
@@ -551,8 +564,10 @@ presence.on("UpdateData", async () => {
 
       if (urlpath[2]) {
         presenceData.details = "iCloud Keynote";
-        if (urlpath[2] === "create") presenceData.state = lang.iCloudPagesCreate;
-        else
+
+        if (urlpath[2] === "create")
+          presenceData.state = lang.iCloudPagesCreate;
+        else {
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
           )?.textContent;
@@ -663,7 +678,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = lang.devDistribution;
       else if (urlpath[1] === "watchos" && urlpath[2] === "features")
         presenceData.state = lang.devFeatures;
-      else
+      else {
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
@@ -689,8 +704,9 @@ presence.on("UpdateData", async () => {
       else if (urlpath[2] === "whats-new") presenceData.state = lang.devNew;
       else if (urlpath[2] === "human-interface-guidelines")
         presenceData.state = lang.devHIG;
-      else if (urlpath[2] === "resources") presenceData.state = dev.devResources;
-      else
+      else if (urlpath[2] === "resources")
+        presenceData.state = lang.devResources;
+      else {
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
@@ -715,7 +731,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("a.localnav-menu-link.current")?.textContent ||
         "Other";
     } else if (urlpath[1] === "testflight") presenceData.state = "Testflight";
-    else if (urlpath[1] === "games") presenceData.state = dev.devGames;
+    else if (urlpath[1] === "games") presenceData.state = lang.devGames;
     else if (urlpath[1] === "forums") {
       presenceData.details = "Forum";
 
@@ -725,20 +741,24 @@ presence.on("UpdateData", async () => {
           document.querySelector("div.header>h1.title")?.textContent ||
           "Unknown";
 
-        presenceData.buttons.push({
-          label: lang.btnViewThread,
-          url: window.location.href
-        });
+        presenceData.buttons = [
+          {
+            label: lang.btnViewThread,
+            url: window.location.href
+          }
+        ];
       } else if (urlpath[2] === "tags") {
         presenceData.details = lang.forumTags;
         presenceData.state =
           document.querySelector("div.tag-content>h2.tag-title")?.textContent ||
           "Unknown";
 
-        presenceData.buttons.push({
-          label: lang.btnViewTags,
-          url: window.location.href
-        });
+        presenceData.buttons = [
+          {
+            label: lang.btnViewTags,
+            url: window.location.href
+          }
+        ];
       } else if (urlpath[2] === "profile" && urlpath[3]) {
         const nickname = document.querySelector(
           "div.user-name>h2.user-nickname"
@@ -746,20 +766,24 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = lang.viewProfile;
 
-        if (urlpath[3] === "preferences") presenceData.state = lang.forumPreferences;
+        if (urlpath[3] === "preferences")
+          presenceData.state = lang.forumPreferences;
         else {
           presenceData.state = nickname || "Unknown";
 
           if (nickname) {
-            presenceData.buttons.push({
-              label: lang.btnViewProfile.replace("{0}", nickname),
-              url: window.location.href
-            });
+            presenceData.buttons = [
+              {
+                label: lang.btnViewProfile.replace("{0}", nickname),
+                url: window.location.href
+              }
+            ];
           }
         }
-      } else if (urlpath[2] === "create") {
+      } else if (urlpath[2] === "create")
         presenceData.state = lang.forumCreateThread;
-      } else if (urlpath[2] === "register") presenceData.state = lang.forumRegister;
+      else if (urlpath[2] === "register")
+        presenceData.state = lang.forumRegister;
 
       if (setting.buttons) {
         if (
@@ -768,15 +792,17 @@ presence.on("UpdateData", async () => {
             "li.menu-item>a.menu-item-link"
           )?.href !== "https://developer.apple.com/forums/login"
         ) {
-          presenceData.buttons.push({
-            label: lang.btnGViewProfile,
-            url:
-              document.querySelector<HTMLAnchorElement>("a.view-profile-link")
-                ?.href ||
-              `https://developer.apple.com/forums/profile/${
-                document.querySelector("span.user-name")?.textContent
-              }`
-          });
+          presenceData.buttons = [
+            {
+              label: lang.btnGViewProfile,
+              url:
+                document.querySelector<HTMLAnchorElement>("a.view-profile-link")
+                  ?.href ||
+                `https://developer.apple.com/forums/profile/${
+                  document.querySelector("span.user-name")?.textContent
+                }`
+            }
+          ];
         }
       }
     } else if (urlpath[1] === "videos") {
@@ -868,8 +894,6 @@ presence.on("UpdateData", async () => {
     !window.location.href.startsWith("https://developer.apple.com/videos/play")
   )
     presenceData.startTimestamp = time;
-
-  if (presenceData.buttons.length === 0) delete presenceData.buttons;
 
   if (!presenceData.details) {
     presence.setTrayTitle();
