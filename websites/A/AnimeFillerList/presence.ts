@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname === "/") presenceData.details = "In home page";
-  else if (document.location.pathname.includes("/shows/latest-updates")) presenceData.details = "Viewing Lastest updates...";
+  else if (document.location.pathname.includes("/shows/latest-updates")) presenceData.details = "Viewing lastest updates";
   else if (document.location.pathname.includes("/shows/")) {
     presenceData.details = "Viewing filler list:";
     presenceData.state = document.querySelector(".Right > h1").textContent.replace("Filler List", " ");
