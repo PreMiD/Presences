@@ -3,91 +3,8 @@ const presence = new Presence({
   }),
   time = Math.floor(Date.now() / 1000);
 
-async function getStrings() {
-  return presence.getStrings(
-    {
-      viewHome: "general.viewHome",
-      viewProduct: "general.viewProduct",
-      viewing: "general.viewing",
-      viewProfile: "general.viewProfile",
-      readingArticle: "general.readingArticle",
-      comparing: "apple.comparing",
-      viewService: "apple.viewService",
-      healthcare: "apple.healthcare",
-      productsPlatform: "apple.productsPlatform",
-      healthRecords: "apple.healthRecords",
-      overview: "apple.overview",
-      purchasingAdvice: "apple.purchasingAdvice",
-      storeFinder: "apple.storeFinder",
-      viewEvent: "apple.viewEvent",
-      supplierResp: "apple.supplierResp",
-      contact: "apple.contact",
-      chooseLang: "apple.chooseLang",
-      other: "apple.other",
-      shopBands: "apple.shopBands",
-      shopAccessories: "apple.shopAccessories",
-      shopStudio: "apple.shopStudio",
-      shopFavorites: "apple.shopFavorites",
-      shopGiftCards: "apple.shopGiftCards",
-      shopPlanVisit: "apple.shopPlanVisit",
-      shopRefurbished: "apple.shopRefurbished",
-      shopBag: "apple.shopBag",
-      shopBagSummary: "apple.shopBagSummary",
-      support: "apple.support",
-      supportArticle: "apple.supportArticle",
-      appStoreCon: "apple.appStoreCon",
-      iCloudMail: "apple.iCloudMail",
-      iCloudContacts: "apple.iCloudContacts",
-      iCloudCalendar: "apple.iCloudCalendar",
-      iCloudPhotos: "apple.iCloudPhotos",
-      iCloudNotes: "apple.iCloudNotes",
-      iCloudReminders: "apple.iCloudReminders",
-      iCloudPagesCreate: "apple.iCloudPagesCreate",
-      iCloudKeynoteWait: "apple.iCloudKeynoteWait",
-      devNew: "apple.devNew",
-      devSubmit: "apple.devSubmit",
-      devPhonePad: "apple.devPhonePad",
-      devDistribution: "apple.devDistribution",
-      devDocs: "apple.devDocs",
-      devHIG: "apple.devHIG",
-      devResources: "apple.devResources",
-      devFeatures: "apple.devFeatures",
-      devGames: "apple.devGames",
-      forumTags: "apple.forumTags",
-      forumPreferences: "apple.forumPreferences",
-      forumCreateThread: "apple.forumCreateThread",
-      forumRegister: "apple.forumRegister",
-      devVideos: "apple.devVideos",
-      devVidTopic: "apple.devVidTopic",
-      devNews: "apple.devNews",
-      devReleases: "apple.devReleases",
-      statePaused: "general.paused",
-      statePlaying: "general.playing",
-      btnViewProduct: "apple.btnViewProduct",
-      btnViewService: "apple.btnViewService",
-      btnViewArticle: "apple.btnViewArticle",
-      btnViewEvent: "apple.btnViewEvent",
-      btnViewOS: "apple.btnViewOS",
-      btnViewStudio: "apple.btnViewStudio",
-      btnViewApp: "apple.btnViewApp",
-      btnViewDeveloper: "apple.btnViewDeveloper",
-      btnViewWWDC: "apple.btnViewWWDC",
-      btnViewThread: "apple.btnViewThread",
-      btnViewTags: "apple.btnViewTags",
-      btnViewProfile: "apple.btnViewProfile",
-      btnViewPage: "general.buttonViewPage",
-      btnGViewProfile: "general.buttonViewProfile",
-      btnGWatchVideo: "general.buttonWatchVideo"
-    },
-    await presence.getSetting("lang").catch(() => "en")
-  );
-}
-
-let lang: ReturnType<typeof getStrings> extends PromiseLike<infer U> ? U : unknown, oldLang: string;
-
 presence.on("UpdateData", async () => {
   const urlpath = window.location.pathname.toLowerCase().split("/"),
-    newLang = await presence.getSetting("lang").catch(() => "en"),
     setting = {
       timeElapsed: await presence.getSetting("timeElapsed"),
       buttons: await presence.getSetting("showButtons"),
@@ -158,11 +75,6 @@ presence.on("UpdateData", async () => {
       buttons: []
     };
 
-  if (!oldLang || oldLang !== newLang) {
-    oldLang = newLang;
-    lang = await getStrings();
-  }
-
   function getPSName() {
     return (
       document.querySelector("div.ac-ln-title>a")?.textContent ||
@@ -181,34 +93,34 @@ presence.on("UpdateData", async () => {
     if (urlpath.length === (2 || 3)) presenceData.details = "Home";
     else if (includesProduct) {
       if (urlpath.includes("compare")) {
-        presenceData.details = `${lang.comparing}:`;
+        presenceData.details = "Comparing:";
         presenceData.state = document.title
           .split("-")[0]
           .replace(/ *\([^)]*\) */g, "");
       } else {
         const product = getPSName();
 
-        presenceData.details = lang.viewProduct;
+        presenceData.details = "Viewing Product:";
         presenceData.state = product;
       }
 
       if (setting.buttons) {
         presenceData.buttons = [
           {
-            label: lang.btnViewProduct,
+            label: "View Product",
             url: window.location.href
           }
         ];
       }
     } else if (includesService) {
       const service = getPSName();
-      presenceData.details = `${lang.viewService}:`;
+      presenceData.details = "Viewing Service:";
       presenceData.state = service;
 
       if (setting.buttons) {
         presenceData.buttons = [
           {
-            label: lang.btnViewService,
+            label: "View Service",
             url: window.location.href
           }
         ];
@@ -227,7 +139,7 @@ presence.on("UpdateData", async () => {
         if (setting.buttons) {
           presenceData.buttons = [
             {
-              label: lang.btnViewArticle,
+              label: "View Article",
               url: window.location.href
             }
           ];
@@ -244,7 +156,7 @@ presence.on("UpdateData", async () => {
         if (setting.buttons) {
           presenceData.buttons = [
             {
-              label: lang.btnViewArticle,
+              label: "View Article",
               url: window.location.href
             }
           ];
@@ -260,7 +172,7 @@ presence.on("UpdateData", async () => {
         if (setting.buttons) {
           presenceData.buttons = [
             {
-              label: lang.btnViewEvent,
+              label: "View Event",
               url: window.location.href
             }
           ];
@@ -276,25 +188,25 @@ presence.on("UpdateData", async () => {
         if (setting.buttons) {
           presenceData.buttons = [
             {
-              label: lang.btnViewArticle,
+              label: "View Article",
               url: window.location.href
             }
           ];
         }
       }
     } else if (urlpath.includes("healthcare")) {
-      presenceData.details = lang.healthcare;
+      presenceData.details = "Healthcare";
 
       if (urlpath.includes("apple-watch")) presenceData.state = "Apple Watch";
       else if (urlpath.includes("products-platform"))
-        presenceData.state = lang.productsPlatform;
+        presenceData.state = "Products and Platform";
       else if (urlpath.includes("health-records"))
-        presenceData.state = lang.healthRecords;
-      else presenceData.state = lang.overview;
+        presenceData.state = "Health records";
+      else presenceData.state = "Overview";
     } else if (urlpath.includes("retail")) {
       if (urlpath.includes("instore-shopping-session"))
-        presenceData.details = lang.purchasingAdvice;
-      else presenceData.details = lang.storeFinder;
+        presenceData.details = "Purchasing advice";
+      else presenceData.details = "Store finder";
     } else if (
       urlpath.includes("ios") ||
       urlpath.includes("watchos") ||
@@ -307,13 +219,16 @@ presence.on("UpdateData", async () => {
           "h1.typography-hero-eyebrow.hero-eyebrow.hero-copy-item"
         );
 
-      presenceData.details = general.viewing;
+      presenceData.details = "Viewing:";
       presenceData.state = OS?.textContent || "Unknown";
 
       if (setting.buttons && OS) {
         presenceData.buttons = [
           {
-            label: lang.btnViewOS.replace("{0}", OS.textContent.replace("Preview", "")).substring(0, 30),
+            label: `View ${OS.textContent.replace("Preview", "")}`.substring(
+              0,
+              30
+            ),
             url: window.location.href
           }
         ];
@@ -323,27 +238,27 @@ presence.on("UpdateData", async () => {
         document.querySelector("h1.hero-headline.typography-headline") ||
         document.querySelector("p.hero-subhead.typography-quote-reduced");
 
-      presenceData.details = event ? `${lang.viewEvent}:` : "Apple Events";
+      presenceData.details = event ? "Viewing Event:" : "Apple Events";
       if (event) presenceData.state = event.textContent;
 
       if (setting.buttons && event) {
         presenceData.buttons = [
           {
-            label: lang.btnViewEvent,
+            label: "View Event",
             url: window.location.href
           }
         ];
       }
     } else if (urlpath.includes("store-opening-letter"))
-      presenceData.details = "Covid‑19 store information";
+      presenceData.details = "COVID‑19 store information";
     else if (urlpath.includes("trade-in"))
       presenceData.details = "Apple Trade In";
     else if (urlpath.includes("supplier-responsibility"))
-      presenceData.details = lang.supplierResp;
-    else if (urlpath.includes("contact")) presenceData.details = lang.contact;
+      presenceData.details = "Supplier Responsibility";
+    else if (urlpath.includes("contact")) presenceData.details = "Contact";
     else if (urlpath.includes("choose-country-region"))
-      presenceData.details = lang.chooseLang;
-    else presenceData.details = lang.other;
+      presenceData.details = "Choosing language...";
+    else presenceData.details = "Other";
   } else if (
     (urlpath[1] === "shop" || urlpath[2] === "shop") &&
     window.location.hostname === "www.apple.com"
@@ -362,13 +277,13 @@ presence.on("UpdateData", async () => {
           ?.textContent ||
         document.querySelector("a.localnav-title")?.textContent;
 
-      presenceData.details = lang.viewProduct;
+      presenceData.details = "Shop - Product";
       presenceData.state = product;
 
       if (setting.buttons) {
         presenceData.buttons = [
           {
-            label: lang.btnViewProduct,
+            label: "View Product",
             url: `https://www.apple.com/shop/${urlpath[num]}/${
               urlpath[num + 1]
             }`
@@ -378,13 +293,13 @@ presence.on("UpdateData", async () => {
     } else if (urlpath[num] === "product") {
       const product = document.querySelector("h1.rf-pdp-title")?.textContent;
 
-      presenceData.details = lang.viewProduct;
+      presenceData.details = "Shop - Product";
       presenceData.state = product;
 
       if (setting.buttons) {
         presenceData.buttons = [
           {
-            label: lang.btnViewProduct,
+            label: "View Product",
             url: window.location.href
           }
         ];
@@ -393,9 +308,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Shop";
 
       if (urlpath[num + 1] === "bands")
-        presenceData.state = lang.shopBands;
+        presenceData.state = "Apple Watch bands";
       else if (urlpath[num + 1] === "accessories")
-        presenceData.state = lang.shopAccessories;
+        presenceData.state = "Apple Accessoriess";
     } else if (urlpath[num + 1] === "accessories") {
       presenceData.details = "Shop";
       presenceData.state =
@@ -405,48 +320,53 @@ presence.on("UpdateData", async () => {
         .querySelector("div.as-designstudio-title>a>img")
         ?.getAttribute("alt");
 
-      presenceData.details = lang.shopStudio;
+      presenceData.details = "Shop - Studio";
       presenceData.state = product;
 
       if (setting.buttons) {
         presenceData.buttons = [
           {
-            label: lang.btnViewStudio.replace("{0}", product),
+            label: `View ${product} Studio`,
             url: `https://www.apple.com/shop/studio/${urlpath[num + 1]}`
           }
         ];
       }
     } else if (urlpath[num] === "favorites") {
       presenceData.details = "Shop";
-      presenceData.state = lang.shopFavorites;
+      presenceData.state = "Favorites";
     } else if (urlpath[num] === "account") {
       presenceData.details = "Shop";
       presenceData.state = "Account";
     } else if (urlpath[num] === "accessories") {
       presenceData.details = "Shop";
-      presenceData.state = lang.shopAccessories;
+      presenceData.state = "Accessories";
     } else if (urlpath[num] === "gift-cards") {
       presenceData.details = "Shop";
-      presenceData.state = lang.shopGiftCards;
+      presenceData.state = "Gift cards";
     } else if (
       urlpath[num] === "browse" &&
       urlpath[num + 2] === "plan_your_visit"
     ) {
       presenceData.details = "Shop";
-      presenceData.state = lang.shopPlanVisit;
+      presenceData.state = "Planing visit";
     } else if (urlpath[num] === "refurbished") {
       presenceData.details = "Shop";
-      presenceData.state = lang.shopRefurbished;
+      presenceData.state = "Certified Refurbished";
     } else if (urlpath[num] === "bag") {
       const summary = document.querySelector(
         "div.rs-summary-value"
       )?.textContent;
 
-      presenceData.details = lang.shopBag;
-      presenceData.state = lang.shopBagSummary.replace("{0}", (!summary) ? "$0" : summary );
+      if (setting.shopCheckout && summary !== undefined) {
+        presenceData.details = "Shop - Bag";
+        presenceData.state = "Summary: " + summary;
+      } else {
+        presenceData.details = "Shop";
+        presenceData.state = "Bag";
+      }
     } else {
       presenceData.details = "Shop";
-      presenceData.state = lang.other;
+      presenceData.state = "Other";
     }
   } else if (
     window.location.hostname === "support.apple.com" ||
@@ -466,19 +386,19 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "apple-support";
 
     if (sProducts.find((e) => urlpath.includes(e))) {
-      presenceData.details = lang.support;
+      presenceData.details = "Apple Support";
       presenceData.state =
         document.querySelector("h1.pageTitle-heading")?.textContent ||
         document.querySelector("h1#main-title")?.textContent ||
         "Unknown";
     } else if (document.querySelector("div.mod-date")) {
-      presenceData.details = lang.supportArticle;
+      presenceData.details = "Apple Support - Article:";
       presenceData.state =
         document.querySelector("h1#howto-title")?.textContent || "Unknown";
     } else if (window.location.hostname === "getsupport.apple.com") {
-      presenceData.details = lang.support;
+      presenceData.details = "Apple Support";
     } else {
-      presenceData.details = lang.support;
+      presenceData.details = "Apple Support";
       presenceData.state = "Home";
     }
   } else if (window.location.hostname === "apps.apple.com") {
@@ -487,7 +407,7 @@ presence.on("UpdateData", async () => {
     if (urlpath.includes("app")) {
       if (document.querySelector("p.we-connecting__instructions")) {
         presenceData.details = "App Store";
-        presenceData.state = lang.appStoreCon;
+        presenceData.state = "Connecting...";
       } else {
         presenceData.details = "App Store - App:";
         presenceData.state = document
@@ -498,7 +418,7 @@ presence.on("UpdateData", async () => {
       if (setting.buttons) {
         presenceData.buttons = [
           {
-            label: lang.btnViewApp,
+            label: "View App",
             url: window.location.href
           }
         ];
@@ -506,7 +426,7 @@ presence.on("UpdateData", async () => {
     } else if (urlpath.includes("developer")) {
       if (document.querySelector("p.we-connecting__instructions")) {
         presenceData.details = "App Store";
-        presenceData.state = lang.appStoreCon;
+        presenceData.state = "Connecting...";
       } else {
         presenceData.details = "App Store - Developer:";
         presenceData.state = document.querySelector(
@@ -517,7 +437,7 @@ presence.on("UpdateData", async () => {
       if (setting.buttons) {
         presenceData.buttons = [
           {
-            label: lang.btnViewDeveloper,
+            label: "View Developer",
             url: window.location.href
           }
         ];
@@ -528,20 +448,20 @@ presence.on("UpdateData", async () => {
     presenceData.details = "iCloud";
 
     if (!urlpath[1]) presenceData.state = "Launchpad";
-    else if (urlpath[1] === "mail") presenceData.state = lang.iCloudMail;
-    else if (urlpath[1] === "contacts") presenceData.state = lang.iCloudContacts;
-    else if (urlpath[1] === "calendar") presenceData.state = lang.iCloudCalendar;
-    else if (urlpath[1] === "photos") presenceData.state = lang.iCloudPhotos;
+    else if (urlpath[1] === "mail") presenceData.state = "Mail";
+    else if (urlpath[1] === "contacts") presenceData.state = "Contacts";
+    else if (urlpath[1] === "calendar") presenceData.state = "Calendar";
+    else if (urlpath[1] === "photos") presenceData.state = "Photos";
     else if (urlpath[1] === "iclouddrive") presenceData.state = "Drive";
-    else if (urlpath[1] === "notes") presenceData.state = lang.iCloudNotes;
-    else if (urlpath[1] === "reminders") presenceData.state = lang.iCloudReminders;
+    else if (urlpath[1] === "notes") presenceData.state = "Notes";
+    else if (urlpath[1] === "reminders") presenceData.state = "Reminders";
     else if (urlpath[1] === "pages") {
       presenceData.largeImageKey = "pages";
 
       if (urlpath[2]) {
         presenceData.details = "iCloud Pages";
 
-        if (urlpath[2] === "create") presenceData.state = lang.iCloudPagesCreate;
+        if (urlpath[2] === "create") presenceData.state = "Creating...";
         else
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
@@ -554,7 +474,7 @@ presence.on("UpdateData", async () => {
       if (urlpath[2]) {
         presenceData.details = "iCloud Keynote";
 
-        if (urlpath[2] === "create") presenceData.state = lang.iCloudPagesCreate;
+        if (urlpath[2] === "create") presenceData.state = "Creating...";
         else
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
@@ -567,7 +487,7 @@ presence.on("UpdateData", async () => {
       presenceData.largeImageKey = "keynote";
 
       if (iframe?.style.display === "none")
-        presenceData.state = lang.iCloudKeynoteWait;
+        presenceData.state = "Waiting room...";
     } else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
     else if (urlpath[1] === "find") presenceData.state = "Find My";
   } else if (window.location.hostname === "card.apple.com") {
@@ -632,7 +552,7 @@ presence.on("UpdateData", async () => {
       if (setting.buttons && wwdc) {
         presenceData.buttons = [
           {
-            label: lang.btnViewWWDC.replace("{0}", wwdc),
+            label: `View ${wwdc}`,
             url: `https://developer.apple.com/${wwdc.toLowerCase()}/`
           }
         ];
@@ -656,15 +576,15 @@ presence.on("UpdateData", async () => {
         document.querySelector("h2.localnav-title>a")?.textContent ||
         "Apple Developer";
 
-      if (!urlpath[2]) presenceData.state = lang.overview;
-      else if (urlpath[2] === "whats-new") presenceData.state = lang.devNew;
-      else if (urlpath[2] === "submit") presenceData.state = lang.devSubmit;
+      if (!urlpath[2]) presenceData.state = "Overview";
+      else if (urlpath[2] === "whats-new") presenceData.state = "What's new";
+      else if (urlpath[2] === "submit") presenceData.state = "Submissions";
       else if (urlpath[1] === "macos" && urlpath[2] === "iphone-and-ipad-apps")
-        presenceData.state = lang.devPhonePad;
+        presenceData.state = "iPhone and iPad apps";
       else if (urlpath[1] === "macos" && urlpath[2] === "distribution")
-        presenceData.state = lang.devDistribution;
+        presenceData.state = "Distributing software";
       else if (urlpath[1] === "watchos" && urlpath[2] === "features")
-        presenceData.state = lang.devFeatures;
+        presenceData.state = "Features";
       else
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
@@ -672,13 +592,13 @@ presence.on("UpdateData", async () => {
     } else if (urlpath[1] === "documentation") {
       const page = document.querySelector("span.current.item");
 
-      presenceData.details = lang.devDocs;
+      presenceData.details = "Documentation";
       presenceData.state = page?.textContent || "Home";
 
       if (setting.buttons && page) {
         presenceData.buttons = [
           {
-            label: lang.btnViewPage,
+            label: "View Page",
             url: window.location.href
           }
         ];
@@ -687,10 +607,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Design";
 
       if (!urlpath[2]) presenceData.state = "Overview";
-      else if (urlpath[2] === "whats-new") presenceData.state = lang.devNew;
+      else if (urlpath[2] === "whats-new") presenceData.state = "What's new";
       else if (urlpath[2] === "human-interface-guidelines")
-        presenceData.state = lang.devHIG;
-      else if (urlpath[2] === "resources") presenceData.state = dev.devResources;
+        presenceData.state = "Human Interface Guidelines";
+      else if (urlpath[2] === "resources") presenceData.state = "Resources";
       else
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
@@ -715,7 +635,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("a.localnav-menu-link.current")?.textContent ||
         "Other";
     } else if (urlpath[1] === "testflight") presenceData.state = "Testflight";
-    else if (urlpath[1] === "games") presenceData.state = dev.devGames;
+    else if (urlpath[1] === "games") presenceData.state = "Games";
     else if (urlpath[1] === "forums") {
       presenceData.details = "Forum";
 
@@ -726,17 +646,17 @@ presence.on("UpdateData", async () => {
           "Unknown";
 
         presenceData.buttons.push({
-          label: lang.btnViewThread,
+          label: "View Thread",
           url: window.location.href
         });
       } else if (urlpath[2] === "tags") {
-        presenceData.details = lang.forumTags;
+        presenceData.details = "Forum - Tags";
         presenceData.state =
           document.querySelector("div.tag-content>h2.tag-title")?.textContent ||
           "Unknown";
 
         presenceData.buttons.push({
-          label: lang.btnViewTags,
+          label: "View Tags",
           url: window.location.href
         });
       } else if (urlpath[2] === "profile" && urlpath[3]) {
@@ -744,22 +664,22 @@ presence.on("UpdateData", async () => {
           "div.user-name>h2.user-nickname"
         )?.textContent;
 
-        presenceData.details = lang.viewProfile;
+        presenceData.details = "Forum - Profile";
 
-        if (urlpath[3] === "preferences") presenceData.state = lang.forumPreferences;
+        if (urlpath[3] === "preferences") presenceData.state = "Preferences";
         else {
           presenceData.state = nickname || "Unknown";
 
           if (nickname) {
             presenceData.buttons.push({
-              label: lang.btnViewProfile.replace("{0}", nickname),
+              label: `View ${nickname}'s Profile`,
               url: window.location.href
             });
           }
         }
       } else if (urlpath[2] === "create") {
-        presenceData.state = lang.forumCreateThread;
-      } else if (urlpath[2] === "register") presenceData.state = lang.forumRegister;
+        presenceData.state = "Creating thread";
+      } else if (urlpath[2] === "register") presenceData.state = "Registration";
 
       if (setting.buttons) {
         if (
@@ -769,7 +689,7 @@ presence.on("UpdateData", async () => {
           )?.href !== "https://developer.apple.com/forums/login"
         ) {
           presenceData.buttons.push({
-            label: lang.btnGViewProfile,
+            label: "View Profile",
             url:
               document.querySelector<HTMLAnchorElement>("a.view-profile-link")
                 ?.href ||
@@ -780,7 +700,7 @@ presence.on("UpdateData", async () => {
         }
       }
     } else if (urlpath[1] === "videos") {
-      presenceData.details = lang.devVideos;
+      presenceData.details = "Videos";
 
       if (
         urlpath[2] === "featured" ||
@@ -792,7 +712,7 @@ presence.on("UpdateData", async () => {
         urlpath[2] === "app-store-and-distribution" ||
         urlpath[2] === "all-videos"
       ) {
-        presenceData.details = lang.devVidTopic;
+        presenceData.details = "Videos - Topic";
         presenceData.state =
           document.querySelector("section.inline-block>h1.collection-title")
             ?.textContent ||
@@ -817,17 +737,17 @@ presence.on("UpdateData", async () => {
 
           if (!vid.paused) {
             presenceData.smallImageKey = "play";
-            presenceData.smallImageText = lang.statePlaying;
+            presenceData.smallImageText = "Playing";
           } else {
             presenceData.smallImageKey = "pause";
-            presenceData.smallImageText = lang.statePaused;
+            presenceData.smallImageText = "Paused";
           }
         }
 
         if (setting.buttons) {
           presenceData.buttons = [
             {
-              label: lang.btnGWatchVideo,
+              label: "View Video",
               url: window.location.href
             }
           ];
@@ -842,9 +762,9 @@ presence.on("UpdateData", async () => {
     } else if (urlpath[1] === "news") {
       const urlParams = new URLSearchParams(window.location.search);
 
-      presenceData.details = lang.devNews;
+      presenceData.details = "News";
 
-      if (urlpath[2] === "releases") presenceData.state = lang.devReleases;
+      if (urlpath[2] === "releases") presenceData.state = "Releases";
 
       if (urlParams.get("id")) {
         presenceData.state =
@@ -853,13 +773,13 @@ presence.on("UpdateData", async () => {
         if (setting.buttons) {
           presenceData.buttons = [
             {
-              label: lang.btnViewArticle,
+              label: "View Article",
               url: window.location.href
             }
           ];
         }
       }
-    } else if (urlpath[1] === "shareplay") presenceData.state = "SharePlay";
+    } else if (urlpath[1] === "shareplay") presenceData.state = "Shareplay";
   }
 
   if (
@@ -870,8 +790,10 @@ presence.on("UpdateData", async () => {
 
   if (presenceData.buttons.length === 0) delete presenceData.buttons;
 
-  if (!presenceData.details) {
+  if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else presence.setActivity(presenceData);
+  } else {
+    presence.setActivity(presenceData);
+  }
 });
