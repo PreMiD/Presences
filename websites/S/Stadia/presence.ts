@@ -32,15 +32,15 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/pro")) {
     presenceData.details = "Viewing Stadia Pro";
-    presenceData.startTimestamp = browsingStamp; 
-  } else 
+    presenceData.startTimestamp = browsingStamp;
+  } else
     presenceData.details = "Can't read page";
   
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
+  } else
     presence.setActivity(presenceData);
   
 });
