@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/shows/latest-updates")) presenceData.details = "Viewing lastest updates";
   else if (document.location.pathname.includes("/shows/")) {
     presenceData.details = "Viewing filler list:";
-    presenceData.state = document.querySelector(".Right > h1").textContent.replace("Filler List", " ");
+    presenceData.state = document.querySelector(".Right > h1").textContent.replace("Filler List", " ").trim();
   } else if (document.location.pathname.includes("/shows")) presenceData.details = "Browsing the list of shows";
   else if (document.location.pathname.includes("/search/node/")) {
     const search = document.location.pathname.split("/");
