@@ -25,9 +25,9 @@ presence.on("UpdateData", async () => {
     gamePrice = document.querySelector("span.rdAlw");
     presenceData.details = `Viewing ${storeName.innerText}`;
     presenceData.state = `${gamePrice.innerText} on the Stadia Store`;
-  } else if (document.location.pathname.includes("/store")) 
+  } else if (document.location.pathname.includes("/store"))
     presenceData.details = "Viewing Stadia Store";
-  else if (document.location.pathname.includes("/pro")) 
+  else if (document.location.pathname.includes("/pro"))
     presenceData.details = "Viewing Stadia Pro";
   else
     presenceData.details = "Can't read page";
