@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/user/login")) presenceData.details = "Logging in...";
   else if (document.location.pathname.includes("/users/")) {
     const user = document.querySelector(".content > h1");
-    presenceData.details = "Viewing a user:";
+    presenceData.details = "Viewing user";
     presenceData.state = user.textContent;
     presenceData.buttons = [
       {
