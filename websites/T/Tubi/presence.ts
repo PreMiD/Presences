@@ -32,9 +32,8 @@ presence.on("UpdateData", async () => {
     );
   if (video && !isNaN(video.duration)) {
     const title = document.querySelector("h1._1PDoZ._1nW6s").textContent,
-      [data.startTimestamp, data.endTimestamp] = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
+      [startTimestamp, endTimestamp] = getTimestamps(
+        video.currentTime, video.duration
       ),
       subtitleCheck = document.querySelector("h2._29XQF._24NNJ")
         ? false
@@ -51,13 +50,15 @@ presence.on("UpdateData", async () => {
     (data.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play),
+    (data.startTimestamp = startTimestamp),
+    (data.endTimestamp = endTimestamp);
 
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
     }
 
-    if (title && subtitle)
+    if (title !== null && subtitle !== null)
       presence.setActivity(data, !video.paused);
     
   } else {
