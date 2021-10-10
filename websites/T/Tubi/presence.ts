@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title && subtitle)
+    if (title !== null && subtitle !== null)
       presence.setActivity(data, !video.paused);
     
   } else {
