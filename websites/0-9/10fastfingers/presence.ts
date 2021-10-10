@@ -8,8 +8,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "typinglogo",
     startTimestamp: browsingStamp
   },
-    timestamps = presence.getTimestamps(presence.timestampFromFormat("00:00"), presence.timestampFromFormat("1:00")),
-    [, end] = timestamps;
+    [,end] = presence.getTimestamps(presence.timestampFromFormat("00:00"), presence.timestampFromFormat("1:00")),
   if (document.location.pathname === "/") presenceData.details = "In home page";
   else if (document.location.pathname.match(/\/typing-test\/.+\/top50/gm)) presenceData.details = "Viewing top 50";
   else if (document.location.pathname.includes("/typing-test/")) {
