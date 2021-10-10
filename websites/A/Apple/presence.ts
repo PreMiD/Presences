@@ -83,7 +83,10 @@ async function getStrings() {
   );
 }
 
-let lang: ReturnType<typeof getStrings> extends PromiseLike<infer U> ? U : unknown, oldLang: string;
+let lang: ReturnType<typeof getStrings> extends PromiseLike<infer U>
+    ? U
+    : unknown,
+  oldLang: string;
 
 presence.on("UpdateData", async () => {
   const urlpath = window.location.pathname.toLowerCase().split("/"),
@@ -313,7 +316,9 @@ presence.on("UpdateData", async () => {
       if (setting.buttons && OS) {
         presenceData.buttons = [
           {
-            label: lang.btnViewOS.replace("{0}", OS.textContent.replace("Preview", "")).substring(0, 30),
+            label: lang.btnViewOS
+              .replace("{0}", OS.textContent.replace("Preview", ""))
+              .substring(0, 30),
             url: window.location.href
           }
         ];
@@ -392,8 +397,7 @@ presence.on("UpdateData", async () => {
     } else if (urlpath[num] === "watch") {
       presenceData.details = "Shop";
 
-      if (urlpath[num + 1] === "bands")
-        presenceData.state = lang.shopBands;
+      if (urlpath[num + 1] === "bands") presenceData.state = lang.shopBands;
       else if (urlpath[num + 1] === "accessories")
         presenceData.state = lang.shopAccessories;
     } else if (urlpath[num + 1] === "accessories") {
@@ -443,7 +447,10 @@ presence.on("UpdateData", async () => {
       )?.textContent;
 
       presenceData.details = lang.shopBag;
-      presenceData.state = lang.shopBagSummary.replace("{0}", (!summary) ? "$0" : summary );
+      presenceData.state = lang.shopBagSummary.replace(
+        "{0}",
+        !summary ? "$0" : summary
+      );
     } else {
       presenceData.details = "Shop";
       presenceData.state = lang.other;
@@ -529,19 +536,23 @@ presence.on("UpdateData", async () => {
 
     if (!urlpath[1]) presenceData.state = "Launchpad";
     else if (urlpath[1] === "mail") presenceData.state = lang.iCloudMail;
-    else if (urlpath[1] === "contacts") presenceData.state = lang.iCloudContacts;
-    else if (urlpath[1] === "calendar") presenceData.state = lang.iCloudCalendar;
+    else if (urlpath[1] === "contacts")
+      presenceData.state = lang.iCloudContacts;
+    else if (urlpath[1] === "calendar")
+      presenceData.state = lang.iCloudCalendar;
     else if (urlpath[1] === "photos") presenceData.state = lang.iCloudPhotos;
     else if (urlpath[1] === "iclouddrive") presenceData.state = "Drive";
     else if (urlpath[1] === "notes") presenceData.state = lang.iCloudNotes;
-    else if (urlpath[1] === "reminders") presenceData.state = lang.iCloudReminders;
+    else if (urlpath[1] === "reminders")
+      presenceData.state = lang.iCloudReminders;
     else if (urlpath[1] === "pages") {
       presenceData.largeImageKey = "pages";
 
       if (urlpath[2]) {
         presenceData.details = "iCloud Pages";
 
-        if (urlpath[2] === "create") presenceData.state = lang.iCloudPagesCreate;
+        if (urlpath[2] === "create")
+          presenceData.state = lang.iCloudPagesCreate;
         else
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
@@ -554,7 +565,8 @@ presence.on("UpdateData", async () => {
       if (urlpath[2]) {
         presenceData.details = "iCloud Keynote";
 
-        if (urlpath[2] === "create") presenceData.state = lang.iCloudPagesCreate;
+        if (urlpath[2] === "create")
+          presenceData.state = lang.iCloudPagesCreate;
         else
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
@@ -690,7 +702,8 @@ presence.on("UpdateData", async () => {
       else if (urlpath[2] === "whats-new") presenceData.state = lang.devNew;
       else if (urlpath[2] === "human-interface-guidelines")
         presenceData.state = lang.devHIG;
-      else if (urlpath[2] === "resources") presenceData.state = dev.devResources;
+      else if (urlpath[2] === "resources")
+        presenceData.state = dev.devResources;
       else
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
@@ -746,7 +759,8 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = lang.viewProfile;
 
-        if (urlpath[3] === "preferences") presenceData.state = lang.forumPreferences;
+        if (urlpath[3] === "preferences")
+          presenceData.state = lang.forumPreferences;
         else {
           presenceData.state = nickname || "Unknown";
 
@@ -759,7 +773,8 @@ presence.on("UpdateData", async () => {
         }
       } else if (urlpath[2] === "create") {
         presenceData.state = lang.forumCreateThread;
-      } else if (urlpath[2] === "register") presenceData.state = lang.forumRegister;
+      } else if (urlpath[2] === "register")
+        presenceData.state = lang.forumRegister;
 
       if (setting.buttons) {
         if (

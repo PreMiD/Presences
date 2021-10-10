@@ -16,10 +16,18 @@ let video = {
   },
   everPlaying = false;
 
-presence.on("iFrameData", (data: { duration: number; currentTime: number; paused: boolean, isPlaying: boolean }) => {
-  video = data;
-  if (data.isPlaying) everPlaying = true;
-});
+presence.on(
+  "iFrameData",
+  (data: {
+    duration: number;
+    currentTime: number;
+    paused: boolean;
+    isPlaying: boolean;
+  }) => {
+    video = data;
+    if (data.isPlaying) everPlaying = true;
+  }
+);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "kayo",
@@ -45,18 +53,28 @@ presence.on("UpdateData", async () => {
     case "/report-dead-links/":
       presenceData.details = "Viewing report dead links";
       break;
-  
+
     default:
       if (document.querySelector(".entry-header-outer > .entry-header > h1 ")) {
-        if (document.querySelector(".tie-fluid-width-video-wrapper") && everPlaying) {
+        if (
+          document.querySelector(".tie-fluid-width-video-wrapper") &&
+          everPlaying
+        ) {
           if (video !== null && !isNaN(video.duration)) {
-            const [start, end] = presence.getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+            const [start, end] = presence.getTimestamps(
+              Math.floor(video.currentTime),
+              Math.floor(video.duration)
+            );
             presenceData.smallImageKey = video.paused ? "pause" : "play";
-            presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+            presenceData.smallImageText = video.paused
+              ? (await strings).pause
+              : (await strings).play;
             presenceData.startTimestamp = start;
             presenceData.endTimestamp = end;
             presenceData.details = details.stream;
-            presenceData.state = document.querySelector(".entry-header-outer > .entry-header > h1 ").textContent;
+            presenceData.state = document.querySelector(
+              ".entry-header-outer > .entry-header > h1 "
+            ).textContent;
             if (video.paused) {
               delete presenceData.startTimestamp;
               delete presenceData.endTimestamp;
@@ -64,7 +82,9 @@ presence.on("UpdateData", async () => {
           }
         } else {
           presenceData.details = details.view;
-          presenceData.state = document.querySelector(".entry-header-outer > .entry-header > h1 ").textContent;
+          presenceData.state = document.querySelector(
+            ".entry-header-outer > .entry-header > h1 "
+          ).textContent;
         }
         break;
       }
@@ -75,8 +95,9 @@ presence.on("UpdateData", async () => {
   if (document.location.search.startsWith("?s")) {
     presenceData.smallImageKey = "search";
     presenceData.details = "Searching for:";
-    presenceData.state = document.querySelector("label input").attributes.getNamedItem("value").textContent;
+    presenceData.state = document
+      .querySelector("label input")
+      .attributes.getNamedItem("value").textContent;
   }
   return presence.setActivity(presenceData, true);
-
 });
