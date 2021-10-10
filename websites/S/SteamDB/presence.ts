@@ -644,8 +644,10 @@ presence.on("UpdateData", async () => {
           ];
           break;
         case "sales":
-          if (document.location.pathname.includes("/history/"))
+          if (document.location.pathname.includes("/history/")) {
             presenceData.details = "Viewing Upcoming & previous sales";
+            presenceData.state = `Next Sale: ${document.getElementsByClassName("sale-name").item(0).textContent}`;
+          }
           else {
             presenceData.details = "Browsing Sales";
             if (
