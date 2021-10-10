@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.match(/\/typing-test\/.+\/top50/gm)) presenceData.details = "Viewing top 50";
   else if (document.location.pathname.includes("/typing-test/")) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer === "1:00") presenceData.details = "Waiting to start a typing Test";
+    if (timer === "1:00") presenceData.details = "Waiting to start a typing test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a typing test:";
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("/advanced-typing-test/")) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer === "1:00") presenceData.details = "Waiting to start an advance Typing Test";
+    if (timer === "1:00") presenceData.details = "Waiting to start an advance Typing test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing an advance typing test:";
@@ -87,11 +87,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/user/")) {
     presenceData.details = "Viewing a user profile:";
     presenceData.state = document.querySelector(".row > h2").lastChild.nodeValue;
-  } else if (document.location.pathname.includes("/email_settings")) presenceData.details = "Viewing email Settings";
+  } else if (document.location.pathname.includes("/email_settings")) presenceData.details = "Viewing email settings";
   else if (document.location.pathname.includes("/active-user-alltime")) presenceData.details = "Viewing all-time records";
-  else if (document.location.pathname.includes("/text-practice/new")) presenceData.details = "Viewing Text practice";
+  else if (document.location.pathname.includes("/text-practice/new")) presenceData.details = "Viewing text practice";
   else if (document.location.pathname.includes("/multiplayer")) presenceData.details = "Doing a multiplayer typing test";
-  else if (document.location.pathname.includes("/faq")) presenceData.details = "Readyng the FAQ";
+  else if (document.location.pathname.includes("/faq")) presenceData.details = "Reading the FAQ";
   else if (document.location.pathname.includes("/forum/")) presenceData.details = "Viewing the forums";
   else if (document.location.pathname.includes("/supporter")) presenceData.details = "Viewing the list of supporters";
   else if (document.location.pathname.includes("/login")) presenceData.details = "Logging in...";
