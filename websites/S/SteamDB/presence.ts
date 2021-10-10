@@ -28,16 +28,15 @@ presence.on("UpdateData", async () => {
               .children.item(0)
               .textContent.includes("Connection opened, listening for changes…")
           ) {
-            presenceData.state = document
+            [ , presenceData.state ] = document
               .getElementById("js-realtime-log")
-              .children.item(0)
-              .textContent.split("—")[1];
+              .children.item(0).textContent.split("—");
             if (
               document
                 .getElementById("js-realtime-log")
                 .children.item(0)
                 .children.item(2) !== null
-            )
+            ) {
               presenceData.buttons = [
                 {
                   label: "View Page",
@@ -52,6 +51,7 @@ presence.on("UpdateData", async () => {
                     .getAttribute("href")}`
                 }
               ];
+            }
           }
           break;
         case "graph":
@@ -59,18 +59,19 @@ presence.on("UpdateData", async () => {
           if (
             (document.getElementById("js-tag-select") as HTMLSelectElement)
               .value !== "0"
-          )
+          ) {
             presenceData.state = `Filter: ${
               (document.getElementById("js-tag-select") as HTMLSelectElement)
                 .options[
-                (document.getElementById("js-tag-select") as HTMLSelectElement)
-                  .selectedIndex
-              ].text
+                  (document.getElementById("js-tag-select") as HTMLSelectElement)
+                    .selectedIndex
+                ].text
             }`;
+          }
           if (
             (document.getElementById("js-category-select") as HTMLSelectElement)
               .value !== "0"
-          )
+          ) {
             presenceData.state = `Filter: ${
               (
                 document.getElementById(
@@ -84,18 +85,20 @@ presence.on("UpdateData", async () => {
                 ).selectedIndex
               ].text
             }`;
+          }
           if (
             (
               document.getElementById("table-apps_filter").firstElementChild
                 .firstElementChild as HTMLInputElement
             ).value !== ""
-          )
+          ) {
             presenceData.state = `Search: ${
               (
                 document.getElementById("table-apps_filter").firstElementChild
                   .firstElementChild as HTMLInputElement
               ).value
             }`;
+          }
           break;
         case "changelist":
           presenceData.details =
@@ -115,7 +118,7 @@ presence.on("UpdateData", async () => {
             presenceData.state = "Selecting User";
           } else {
             presenceData.details = "Viewing Calculator";
-            if (accountValue === 0)
+            if (accountValue === 0) {
               presenceData.state = `${
                 document.getElementsByClassName("player-name").item(0)
                   .textContent
@@ -126,7 +129,7 @@ presence.on("UpdateData", async () => {
                   .innerHTML.split(">")[2]
                   .split("<")[0]
               })`;
-            else if (accountValue === 1)
+            } else if (accountValue === 1) {
               presenceData.state = `${
                 document.getElementsByClassName("player-name").item(0)
                   .textContent
@@ -137,6 +140,7 @@ presence.on("UpdateData", async () => {
                   .innerHTML.split(">")[2]
                   .split("<")[0]
               })`;
+            }
             presenceData.buttons = [
               {
                 label: "View Page",
@@ -163,13 +167,13 @@ presence.on("UpdateData", async () => {
               url: document.location.href
             }
           ];
-          if (document.querySelector("a.tabnav-tab.selected"))
+          if (document.querySelector("a.tabnav-tab.selected")) {
             presenceData.details = `Viewing App ${
               document.querySelector("a.tabnav-tab.selected").childNodes[1]
                 .textContent
             }`;
-          else if (document.location.pathname.includes("/patchnotes/"))
-            presenceData.details = `Viewing App Patchnotes`;
+          } else if (document.location.pathname.includes("/patchnotes/"))
+            presenceData.details = "Viewing App Patchnotes";
           break;
         case "apps":
           presenceData.details = "Browsing Applications";
@@ -251,7 +255,7 @@ presence.on("UpdateData", async () => {
                 "input.ais-SearchBox-input"
               ) as HTMLInputElement
             ).value !== ""
-          )
+          ) {
             presenceData.state = `Search: ${
               (
                 document.querySelector(
@@ -259,6 +263,7 @@ presence.on("UpdateData", async () => {
                 ) as HTMLInputElement
               ).value
             }`;
+          }
           break;
         case "donate":
           presenceData.details = "Viewing How To Help";
@@ -280,13 +285,14 @@ presence.on("UpdateData", async () => {
               document.getElementById("DataTables_Table_0_filter")
                 .firstElementChild.firstElementChild as HTMLInputElement
             ).value !== ""
-          )
+          ) {
             presenceData.state = `Search: ${
               (
                 document.getElementById("DataTables_Table_0_filter")
                   .firstElementChild.firstElementChild as HTMLInputElement
               ).value
             }`;
+          }
           break;
         case "tags":
           presenceData.details = "Browsing Game Tags";
@@ -296,7 +302,7 @@ presence.on("UpdateData", async () => {
                 "input.input-block.search"
               ) as HTMLInputElement
             ).value !== ""
-          )
+          ) {
             presenceData.state = `Search: ${
               (
                 document.querySelector(
@@ -304,6 +310,7 @@ presence.on("UpdateData", async () => {
                 ) as HTMLInputElement
               ).value
             }`;
+          }
           break;
         case "tag":
           presenceData.details = `Browsing Tag: ${
@@ -316,13 +323,14 @@ presence.on("UpdateData", async () => {
               document.getElementById("table-apps_filter").firstElementChild
                 .firstElementChild as HTMLInputElement
             ).value !== ""
-          )
+          ) {
             presenceData.state = `Search: ${
               (
                 document.getElementById("table-apps_filter").firstElementChild
                   .firstElementChild as HTMLInputElement
               ).value
             }`;
+          }
           break;
         case "tech":
           if (document.location.pathname === "/tech/")
@@ -339,13 +347,14 @@ presence.on("UpdateData", async () => {
                 document.getElementById("table-apps_filter").firstElementChild
                   .firstElementChild as HTMLInputElement
               ).value !== ""
-            )
+            ) {
               presenceData.state = `Search: ${
                 (
                   document.getElementById("table-apps_filter").firstElementChild
                     .firstElementChild as HTMLInputElement
                 ).value
               }`;
+            }
             switch (document.location.pathname.split("/")[2]) {
               case "Engine":
                 presenceData.details = `Browsing Engine ${
@@ -393,15 +402,16 @@ presence.on("UpdateData", async () => {
             if (
               document.querySelector("h2.header-subtitle").textContent !==
               "\xa0"
-            )
+            ) {
               presenceData.state = `${
                 document.querySelector("h1.header-title").firstElementChild
                   .textContent
               } ${document.querySelector("h2.header-subtitle").textContent}`;
-            else
+            } else {
               presenceData.state = `${
                 document.querySelector("h1.header-title").textContent
               }`;
+            }
             presenceData.buttons = [
               {
                 label: "View Page",
@@ -423,11 +433,11 @@ presence.on("UpdateData", async () => {
           if (
             document.querySelector("h1.header-title").textContent !==
             "Your watch list"
-          )
+          ) {
             presenceData.details = `Viewing ${
               document.querySelector("h1.header-title").textContent
             }`;
-          else presenceData.details = "Viewing their own watch list";
+          } else presenceData.details = "Viewing their own watch list";
           break;
         case "freepackages":
           presenceData.details = "Viewing Free Packages";
@@ -440,16 +450,17 @@ presence.on("UpdateData", async () => {
           break;
         case "badge":
           presenceData.details = "Viewing Badge";
-          if (document.location.pathname.includes("/foil/"))
+          if (document.location.pathname.includes("/foil/")) {
             presenceData.state = `${
               document
                 .querySelector("h1.header-title.flex-grow")
                 .childNodes.item(4).textContent
             } (Foil)`;
-          else
+          } else {
             presenceData.state = document
               .querySelector("h1.header-title.flex-grow")
               .childNodes.item(4).textContent;
+          }
           presenceData.buttons = [
             {
               label: "View Page",
@@ -482,33 +493,35 @@ presence.on("UpdateData", async () => {
             if (
               (document.getElementById("js-tag-select") as HTMLSelectElement)
                 .value !== "0"
-            )
+            ) {
               presenceData.state = `Filter: ${
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
                   .options[
-                  (
+                    (
                     document.getElementById(
                       "js-tag-select"
                     ) as HTMLSelectElement
-                  ).selectedIndex
-                ].text
+                    ).selectedIndex
+                  ].text
               }`;
+            }
           } else {
             presenceData.details = "Browsing Upcoming Games";
             if (
               (document.getElementById("js-tag-select") as HTMLSelectElement)
                 .value !== "0"
-            )
+            ) {
               presenceData.state = `Filter: ${
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
                   .options[
-                  (
+                    (
                     document.getElementById(
                       "js-tag-select"
                     ) as HTMLSelectElement
-                  ).selectedIndex
-                ].text
+                    ).selectedIndex
+                  ].text
               }`;
+            }
           }
           break;
         case "calendar":
@@ -526,20 +539,20 @@ presence.on("UpdateData", async () => {
                   document.getElementById("table-apps_filter").firstElementChild
                     .firstElementChild as HTMLInputElement
                 ).value !== ""
-              )
+              ) {
                 presenceData.state = `Search: ${
                   (
                     document.getElementById("table-apps_filter")
                       .firstElementChild.firstElementChild as HTMLInputElement
                   ).value
                 }`;
-              else if (
+              } else if (
                 (
                   document.getElementById(
                     "js-category-select"
                   ) as HTMLSelectElement
                 ).value !== "0"
-              )
+              ) {
                 presenceData.state = `Filter: ${
                   (
                     document.getElementById(
@@ -553,6 +566,7 @@ presence.on("UpdateData", async () => {
                     ).selectedIndex
                   ].text
                 }`;
+              }
               break;
             case "mostwished":
               presenceData.details = "Browsing Most Wishlisted Games";
@@ -561,13 +575,14 @@ presence.on("UpdateData", async () => {
                   document.getElementById("table-apps_filter").firstElementChild
                     .firstElementChild as HTMLInputElement
                 ).value !== ""
-              )
+              ) {
                 presenceData.state = `Search: ${
                   (
                     document.getElementById("table-apps_filter")
                       .firstElementChild.firstElementChild as HTMLInputElement
                   ).value
                 }`;
+              }
               break;
             case "gameratings":
               if (document.location.href.includes("?all_types")) {
@@ -577,13 +592,14 @@ presence.on("UpdateData", async () => {
                     document.getElementById("table-apps_filter")
                       .firstElementChild.firstElementChild as HTMLInputElement
                   ).value !== ""
-                )
+                ) {
                   presenceData.state = `Search: ${
                     (
                       document.getElementById("table-apps_filter")
                         .firstElementChild.firstElementChild as HTMLInputElement
                     ).value
                   }`;
+                }
               } else if (document.location.pathname === "/stats/gameratings/") {
                 presenceData.details = "Browsing Top Rated Games";
                 if (
@@ -591,17 +607,19 @@ presence.on("UpdateData", async () => {
                     document.getElementById("table-apps_filter")
                       .firstElementChild.firstElementChild as HTMLInputElement
                   ).value !== ""
-                )
+                ) {
                   presenceData.state = `Search: ${
                     (
                       document.getElementById("table-apps_filter")
                         .firstElementChild.firstElementChild as HTMLInputElement
                     ).value
                   }`;
-              } else if (document.querySelector("button.btn"))
+                }
+              } else if (document.querySelector("button.btn")) {
                 presenceData.details = `Browsing Top Rated Games ${
                   document.querySelector("button.btn").textContent
                 }`;
+              }
               break;
             case "toplevels":
               presenceData.details = "Viewing Top Users By Level";
@@ -611,7 +629,7 @@ presence.on("UpdateData", async () => {
               if (
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
                   .value !== "0"
-              )
+              ) {
                 presenceData.state = `Filter: ${
                   (
                     document.getElementById(
@@ -625,43 +643,47 @@ presence.on("UpdateData", async () => {
                     ).selectedIndex
                   ].text
                 }`;
+              }
               break;
           }
           break;
         case "topsellers":
           presenceData.details = "Weekly Top Sellers";
-          if (document.querySelector("button.btn"))
+          if (document.querySelector("button.btn")) {
             presenceData.state = `${
               document.querySelector("button.btn").textContent
             } ${
               document.querySelector("h2.flex-grow").textContent.split(" ")[8]
             }`;
-          presenceData.buttons = [
-            {
-              label: "View Page",
-              url: document.location.href
-            }
-          ];
+            presenceData.buttons = [
+              {
+                label: "View Page",
+                url: document.location.href
+              }
+            ];
+          }
           break;
         case "sales":
           if (document.location.pathname.includes("/history/")) {
             presenceData.details = "Viewing Upcoming & previous sales";
-            presenceData.state = `Next Sale: ${document.getElementsByClassName("sale-name").item(0).textContent}`;
-          }
-          else {
+            presenceData.state = `Next Sale: ${
+              document.getElementsByClassName("sale-name").item(0).textContent
+            }`;
+          } else {
             presenceData.details = "Browsing Sales";
             if (
               (
                 document.getElementById("DataTables_Table_0_filter")
                   .firstElementChild.firstElementChild as HTMLInputElement
               ).value !== ""
-            )
+            ) {
               presenceData.state = `Search: ${
                 (
                   document.getElementById("DataTables_Table_0_filter")
                     .firstElementChild.firstElementChild as HTMLInputElement
                 ).value
               }`;
+            }
           }
           break;
         case "servers":
@@ -681,25 +703,25 @@ presence.on("UpdateData", async () => {
               } Type: ${
                 (document.getElementById("inputType") as HTMLSelectElement)
                   .options[
-                  (document.getElementById("inputType") as HTMLSelectElement)
-                    .selectedIndex
-                ].textContent
+                    (document.getElementById("inputType") as HTMLSelectElement)
+                      .selectedIndex
+                  ].textContent
               } Category: ${
                 (document.getElementById("inputCategory") as HTMLSelectElement)
                   .options[
-                  (
+                    (
                     document.getElementById(
                       "inputCategory"
                     ) as HTMLSelectElement
-                  ).selectedIndex
-                ].textContent
+                    ).selectedIndex
+                  ].textContent
               }`;
               break;
             case "Packages":
               if (
                 (document.getElementById("inputQuery-sub") as HTMLInputElement)
                   .value
-              )
+              ) {
                 presenceData.state = `Search: ${
                   (
                     document.getElementById(
@@ -707,35 +729,43 @@ presence.on("UpdateData", async () => {
                     ) as HTMLInputElement
                   ).value
                 }`;
+              }
               break;
             case "Bundles":
-              const bundlesName = (
+              if (
                 document.getElementById("inputQuery-bundle") as HTMLInputElement
-              ).value;
-              if (bundlesName) presenceData.state = `Search: ${bundlesName}`;
+              ) {
+                presenceData.state = `Search: ${
+                  (
+                    document.getElementById(
+                      "inputQuery-bundle"
+                    ) as HTMLInputElement
+                  ).value
+                }`;
+              }
               break;
             case "App Keys":
               presenceData.state = `${
                 (document.getElementById("inputType2") as HTMLSelectElement)
                   .options[
-                  (document.getElementById("inputType2") as HTMLSelectElement)
-                    .selectedIndex
-                ].textContent
+                    (document.getElementById("inputType2") as HTMLSelectElement)
+                      .selectedIndex
+                  ].textContent
               } ${
                 (document.getElementById("inputKeyName") as HTMLSelectElement)
                   .options[
-                  (document.getElementById("inputKeyName") as HTMLSelectElement)
-                    .selectedIndex
-                ].textContent
+                    (document.getElementById("inputKeyName") as HTMLSelectElement)
+                      .selectedIndex
+                  ].textContent
               } ${
                 (document.getElementById("inputOperator") as HTMLSelectElement)
                   .options[
-                  (
+                    (
                     document.getElementById(
                       "inputOperator"
                     ) as HTMLSelectElement
-                  ).selectedIndex
-                ].textContent
+                    ).selectedIndex
+                  ].textContent
               } ${
                 (document.getElementById("inputKeyValue") as HTMLInputElement)
                   .value
@@ -751,21 +781,21 @@ presence.on("UpdateData", async () => {
               presenceData.state = `${
                 (document.getElementById("inputKeyName2") as HTMLSelectElement)
                   .options[
-                  (
+                    (
                     document.getElementById(
                       "inputKeyName2"
                     ) as HTMLSelectElement
-                  ).selectedIndex
-                ].textContent
+                    ).selectedIndex
+                  ].textContent
               } ${
                 (document.getElementById("inputOperator2") as HTMLSelectElement)
                   .options[
-                  (
+                    (
                     document.getElementById(
                       "inputOperator2"
                     ) as HTMLSelectElement
-                  ).selectedIndex
-                ].textContent
+                    ).selectedIndex
+                  ].textContent
               } ${
                 (document.getElementById("inputKeyValue2") as HTMLInputElement)
                   .value
@@ -787,19 +817,21 @@ presence.on("UpdateData", async () => {
               }`;
               break;
           }
-          if (document.getElementById("table-sortable_filter"))
+          if (document.getElementById("table-sortable_filter")) {
             if (
               (
                 document.getElementById("table-sortable_filter")
                   .firstElementChild.firstElementChild as HTMLInputElement
               ).value !== ""
-            )
+            ) {
               presenceData.state = `Search: ${
                 (
                   document.getElementById("table-sortable_filter")
                     .firstElementChild.firstElementChild as HTMLInputElement
                 ).value
               }`;
+            }
+          }
           break;
         case "tokendumper":
           presenceData.details = "Viewing Token Dumper";
