@@ -1,13 +1,13 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "$schema": "https://schemas.premid.app/metadata/1.5",
     "service": "10fastfingers",
     "author": {
       "name": "! Yelo",
       "id": "425326889565945856"
     },
     "category": "other",
-    "logo": "https://i.imgur.com/oni7XO4.png",
-    "thumbnail": "https://i.imgur.com/U394pX1.png",
+    "logo": "https://i.imgur.com/W1tKxim.png",
+    "thumbnail": "https://i.imgur.com/WZkmqZe.png",
     "version": "1.0.0",
     "color": "#082333",
     "tags": [
@@ -19,6 +19,7 @@
     ],
     "url": "10fastfingers.com",
     "description": {
-      "en": "Test & Improve your Typing Speed with our free Typing Games"
+      "en": "Test & Improve your Typing Speed with our free Typing Games",
+      "es" : "Pruebe y mejore su velocidad de escritura con nuestros juegos de mecanografía gratuitos"
     }
   }
