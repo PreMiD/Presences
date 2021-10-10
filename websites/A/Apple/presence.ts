@@ -552,10 +552,11 @@ presence.on("UpdateData", async () => {
 
         if (urlpath[2] === "create")
           presenceData.state = lang.iCloudPagesCreate;
-        else
+        else {
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
           )?.textContent;
+        }
       } else presenceData.state = "Pages";
     } else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
     else if (urlpath[1] === "keynote") {
@@ -566,10 +567,11 @@ presence.on("UpdateData", async () => {
 
         if (urlpath[2] === "create")
           presenceData.state = lang.iCloudPagesCreate;
-        else
+        else {
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
           )?.textContent;
+        }
       } else presenceData.state = "Keynote";
     } else if (urlpath[1] === "keynote-live" && urlpath[2]) {
       const iframe = document.querySelector("iframe");
@@ -703,11 +705,12 @@ presence.on("UpdateData", async () => {
       else if (urlpath[2] === "human-interface-guidelines")
         presenceData.state = lang.devHIG;
       else if (urlpath[2] === "resources")
-        presenceData.state = dev.devResources;
-      else
+        presenceData.state = lang.devResources;
+      else {
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
+      }
     } else if (
       urlpath[1] === "safari" ||
       urlpath[1] === "app-store-connect" ||
