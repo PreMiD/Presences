@@ -51,8 +51,6 @@ presence.on("UpdateData", async () => {
     (data.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play),
-    (data.startTimestamp = timestamps[0]),
-    (data.endTimestamp = timestamps[1]);
 
     if (video.paused) {
       delete data.startTimestamp;
