@@ -8,13 +8,12 @@ presence.on("UpdateData", async () => {
     largeImageKey: "typinglogo",
     startTimestamp: browsingStamp
   },
-    timestamps = presence.getTimestamps(presence.timestampFromFormat("00:00"), presence.timestampFromFormat("1:00")),
-    [start, end] = timestamps;
+    timestamps = presence.getTimestamps(presence.timestampFromFormat("00:00"), presence.timestampFromFormat("1:00"))
   if (document.location.pathname === "/") presenceData.details = "In home page";
   else if (document.location.pathname.match(/\/typing-test\/.+\/top50/gm)) presenceData.details = "Viewing top 50";
   else if (document.location.pathname.includes("/typing-test/")) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer === "1:00") presenceData.details = "Waiting to start a Typing Test";
+    if (timer === "1:00") presenceData.details = "Waiting to start a typing Test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a typing test:";
@@ -22,9 +21,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("#switch-typing-test-language").textContent
       } | ${wpM[0]} `;
     } else {
-     
-      presenceData.startTimestamp = start;
-      presenceData.endTimestamp = end;
+      presenceData.endTimestamp = timestamps[1];
       presenceData.details = "Doing a typing test:";
       presenceData.state = `In ${
         document.querySelector("#switch-typing-test-language").textContent
@@ -32,43 +29,41 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("/advanced-typing-test/")) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer === "1:00") presenceData.details = "Waiting to start a Advance Typing Test";
+    if (timer === "1:00") presenceData.details = "Waiting to start an advance Typing Test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
-      presenceData.details = "Finishing a Advance typing test:";
+      presenceData.details = "Finishing an advance typing test:";
       presenceData.state = `In ${
         document.querySelector("#switch-typing-test-language").textContent
       } | ${wpM[0]} `;
     } else {
-      presenceData.startTimestamp = start;
-      presenceData.endTimestamp = end;
-      presenceData.details = "Doing a Advance typing test:";
+      presenceData.endTimestamp = timestamps[1];
+      presenceData.details = "Doing an advance typing test:";
       presenceData.state = `In ${
         document.querySelector("#switch-typing-test-language").textContent
       }`;
     }
   } else if (document.location.pathname.includes("/competition/")) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer === "1:00") presenceData.details = "Waiting to start a Competition";
+    if (timer === "1:00") presenceData.details = "Waiting to start a competition";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
-      presenceData.details = "Finishing a Competition:";
+      presenceData.details = "Finishing a competition:";
       presenceData.state = `${wpM[0]} WPM `;
     } else {
-      presenceData.startTimestamp = start;
-      presenceData.endTimestamp = end;
+      presenceData.endTimestamp = timestamps[1];
       presenceData.details = "Doing a Competition:";
     }
   } else if (document.location.pathname.includes("/text/")) {
     const timer = document.querySelector("#time").textContent;
-    if (timer === "00:00") presenceData.details = "Waiting to start a Text Practice";
+    if (timer === "00:00") presenceData.details = "Waiting to start a text practice";
     else {
       const finalTime = document.querySelector(".col-md-6 > p > strong");
 
       if (finalTime) {
-        presenceData.details = "Finishing a Text Practice";
+        presenceData.details = "Finishing a text practice";
         presenceData.state = `Final time: ${finalTime.textContent}m`;
-      } else presenceData.details = "Doing a Text Practice";
+      } else presenceData.details = "Doing a text practice";
     }
   } else if (
     document.location.pathname.includes("/widget/") ||
@@ -83,35 +78,37 @@ presence.on("UpdateData", async () => {
       timer === "5:00" ||
       timer === "10:00"
     )
-      presenceData.details = "Waiting to start a Custom Typing Test";
+      presenceData.details = "Waiting to start a custom typing test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
-      presenceData.details = "Finishing a Custom Typing Test:";
+      presenceData.details = "Finishing a custom typing test:";
       presenceData.state = `${wpM[0]}`;
-    } else presenceData.details = "Doing a Custom Typing Test";
-  } else if (document.location.pathname.includes("/user/")) presenceData.details = "Viewing a user profile";
-  else if (document.location.pathname.includes("/email_settings")) presenceData.details = "Viewing Email Settings";
-  else if (document.location.pathname.includes("/active-user-alltime")) presenceData.details = "Viewing most active user alltime";
-  else if (document.location.pathname.includes("/text-practice/new")) presenceData.details = "Viewing Text Practice";
-  else if (document.location.pathname.includes("/multiplayer")) presenceData.details = "Doing a Multiplayer Typing Test";
-  else if (document.location.pathname.includes("/faq")) presenceData.details = "Viewing FAQ";
-  else if (document.location.pathname.includes("/forum/")) presenceData.details = "Viewing Forum";
-  else if (document.location.pathname.includes("/supporter")) presenceData.details = "Viewing the supporter users";
-  else if (document.location.pathname.includes("/login")) presenceData.details = "Logging in";
-  else if (document.location.pathname.includes("/create-account")) presenceData.details = "Creating an account";
-  else if (document.location.pathname.includes("/impressum")) presenceData.details = "Viewing Privacy Policy";
-  else if (document.location.pathname.includes("/gdpr")) presenceData.details = "Viewing General Data Protection Regulation";
-  else if (document.location.pathname.includes("/cookie-policy")) presenceData.details = "Viewing Cookie Policy";
-  else if (document.location.pathname.includes("/settings")) presenceData.details = "Viewing Settings";
-  else if (document.location.pathname.includes("/achievements")) presenceData.details = "Viewing Achievements";
-  else if (document.location.pathname.includes("/translations")) presenceData.details = "Viewing Translation";
-  else if (document.location.pathname.includes("/competitions")) presenceData.details = "Viewing the Competitions list";
-  else if (document.location.pathname.includes("/anticheat")) presenceData.details = "Viewing the AntiCheat";
+    } else presenceData.details = " Doing a custom typing test";
+  } else if (document.location.pathname.includes("/user/")) {
+    presenceData.details = "Viewing a user profile:";
+    presenceData.state = document.querySelector(".row > h2").lastChild.nodeValue;
+  } else if (document.location.pathname.includes("/email_settings")) presenceData.details = "Viewing email Settings";
+  else if (document.location.pathname.includes("/active-user-alltime")) presenceData.details = "Viewing all-time records";
+  else if (document.location.pathname.includes("/text-practice/new")) presenceData.details = "Viewing Text practice";
+  else if (document.location.pathname.includes("/multiplayer")) presenceData.details = "Doing a multiplayer typing test";
+  else if (document.location.pathname.includes("/faq")) presenceData.details = "Readyng the FAQ";
+  else if (document.location.pathname.includes("/forum/")) presenceData.details = "Viewing the forums";
+  else if (document.location.pathname.includes("/supporter")) presenceData.details = "Viewing the list of supporters";
+  else if (document.location.pathname.includes("/login")) presenceData.details = "Logging in...";
+  else if (document.location.pathname.includes("/create-account")) presenceData.details = "Creating an account..";
+  else if (document.location.pathname.includes("/impressum")) presenceData.details = "Reading the privacy policy";
+  else if (document.location.pathname.includes("/gdpr")) presenceData.details = "Reading information about GDPR";
+  else if (document.location.pathname.includes("/cookie-policy")) presenceData.details = "Reading the cookie policy";
+  else if (document.location.pathname.includes("/settings")) presenceData.details = "Viewing their settings";
+  else if (document.location.pathname.includes("/achievements")) presenceData.details = "Viewing their achievements";
+  else if (document.location.pathname.includes("/translations")) presenceData.details = "Learning how to translate";
+  else if (document.location.pathname.includes("/competitions")) presenceData.details = "Viewing the list of competitions";
+  else if (document.location.pathname.includes("/anticheat")) presenceData.details = "Viewing the Anti-Cheat";
   else if (document.location.pathname.includes("/top1000/")) {
     const lang = document.location.pathname.split("/");
-    presenceData.details = "Doing Top 1000 Typing test:";
+    presenceData.details = "Doing the top 1000 typing test:";
     presenceData.state = `In ${lang[lang.length - 3]}`;
-  } else if (document.location.pathname.includes("/top1000")) presenceData.details = "Viewing Top 1000 Typing mode";
+  } else if (document.location.pathname.includes("/top1000")) presenceData.details = "Viewing the top 1000 typing mode";
 
   if (!presenceData.details) {
     presence.setTrayTitle();
