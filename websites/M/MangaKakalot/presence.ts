@@ -86,25 +86,6 @@ presence.on("UpdateData", async () => {
 
       break;
     }
-
-    case "readmanganato.com": {
-      if (location.pathname.includes("/chapter")) {
-        const [title, chapterNum] = document
-          .querySelector(".panel-chapter-info-top > h1")
-          .textContent.split("CHAPTER");
-
-        presenceData.details = title;
-        presenceData.state = `CHAPTER ${chapterNum}`;
-        presenceData.smallImageKey = "reading";
-      } else if (document.location.pathname.includes("/manga")) {
-        presenceData.details = "Viewing manga:";
-        presenceData.state = document.querySelector(
-          ".story-info-right > h1"
-        ).textContent;
-      }
-
-      break;
-    }
   }
 
   if (!presenceData.details) {

@@ -5,7 +5,6 @@
     "id": "193714715631812608"
   },
   "url": [
-    "wanikani.com",
     "www.wanikani.com",
     "community.wanikani.com",
     "knowledge.wanikani.com"
@@ -16,7 +15,7 @@
     "nl": "WaniKani is een kanji-leerapplicatie van Tofugu. 2000 kanji. 6000 woordenschatwoorden. Over iets meer dan een jaar."
   },
   "service": "WaniKani",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/NdlB8M5.png",
   "thumbnail": "https://i.imgur.com/8OKXkxY.png",
   "color": "#1BA0ED",

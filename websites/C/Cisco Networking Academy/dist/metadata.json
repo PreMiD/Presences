@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/pvz4KSf.png",
   "thumbnail": "https://i.imgur.com/wSSBD5e.png",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "color": "#005073",
   "tags": [
     "netacad",
@@ -17,12 +17,7 @@
     "cisco-networking",
     "cisco-networking-academy"
   ],
-  "url": [
-    "www.netacad.com",
-    "lms.netacad.com",
-    "assessment.netacad.net",
-    "contenthub.netacad.com"
-  ],
+  "url": "www.netacad.com",
   "description": {
     "en": "Cisco Networking Academy is a global IT and cybersecurity education platform."
   }

@@ -26,10 +26,9 @@
   "url": [
     "mangadex.org",
     "www.mangadex.org",
-    "mangadex.cc",
-    "www.mangadex.cc"
+    "mangadex.cc"
   ],
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/zs8myqz.png",
   "thumbnail": "https://i.imgur.com/xiKNaUJ.png",
   "color": "#F18F1E",
