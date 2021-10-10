@@ -46,7 +46,7 @@ lang.set("en", "English");
 presence.on("UpdateData", async () => {
   const path1 = document.location.pathname;
 
-  if (path1.split("/")[2] === null) {
+  if (!path1.split("/")[2]) {
     if (document.location.pathname.startsWith("/learn")) {
       pageData.details = "Choosing level to learn..";
       presence.setActivity(pageData);

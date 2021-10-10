@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector("h1 span").innerHTML.trim();
     }
   }
-  if (presenceData.state === null) {
+  if (!presenceData.state) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

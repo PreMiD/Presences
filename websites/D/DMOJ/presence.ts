@@ -40,7 +40,6 @@ presence.on("UpdateData", () => {
       presenceData.largeImageKey = "submit";
     } else if (url.includes("submissions")) {
       const problemName = document.querySelectorAll(".tabs > h2 > a")[
-          // hello
           document.querySelectorAll(".tabs > h2 > a").length - 1
         ].textContent.trim(),
         problemSubmissionsURL = `${problemURL}/submissions/`;

@@ -105,7 +105,7 @@ botPresence.on("UpdateData", async () => {
 
   if (!buttons) delete botData.buttons;
 
-  if (botData.details === null) {
+  if (!botData.details) {
     botPresence.setTrayTitle();
     botPresence.setActivity();
   } else botPresence.setActivity(botData);
