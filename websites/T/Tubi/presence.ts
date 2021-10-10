@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
     if (subtitleCheck)
       subtitle = "Movie";
     else
-      subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;    
+      subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
 
     (data.details = title), (data.state = subtitle);
     (data.smallImageKey = video.paused ? "pause" : "play"),
