@@ -11,14 +11,14 @@ const presence = new Presence({
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
  */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+//function getTimestamps(
+//  videoTime: number,
+//  videoDuration: number
+//): Array<number> {
+//  const startTime = Date.now(),
+//    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+//  return [Math.floor(startTime / 1000), endTime];
+//}
 
 let subtitle;
 
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     );
   if (video && !isNaN(video.duration)) {
     const title = document.querySelector("h1._1PDoZ._1nW6s").textContent,
-      [startTimestamp, endTimestamp] = getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         video.currentTime, video.duration
       ),
       subtitleCheck = document.querySelector("h2._29XQF._24NNJ")
@@ -42,8 +42,7 @@ presence.on("UpdateData", async () => {
     if (subtitleCheck)
       subtitle = "Movie";
     else
-      subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
-    
+      subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;    
 
     (data.details = title), (data.state = subtitle);
     (data.smallImageKey = video.paused ? "pause" : "play"),
