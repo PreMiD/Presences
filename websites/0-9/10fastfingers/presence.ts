@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${wpM[0]} WPM `;
     } else {
       presenceData.endTimestamp = end;
-      presenceData.details = "Doing a Competition:";
+      presenceData.details = "Doing a competition";
     }
   } else if (document.location.pathname.includes("/text/")) {
     const timer = document.querySelector("#time").textContent;
