@@ -8,7 +8,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "typinglogo",
     startTimestamp: browsingStamp
   },
-    timestamps = presence.getTimestamps(presence.timestampFromFormat("00:00"), presence.timestampFromFormat("1:00"))
+    timestamps = presence.getTimestamps(presence.timestampFromFormat("00:00"), presence.timestampFromFormat("1:00")),
+    [, end] = timestamps;
   if (document.location.pathname === "/") presenceData.details = "In home page";
   else if (document.location.pathname.match(/\/typing-test\/.+\/top50/gm)) presenceData.details = "Viewing top 50";
   else if (document.location.pathname.includes("/typing-test/")) {
@@ -21,7 +22,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("#switch-typing-test-language").textContent
       } | ${wpM[0]} `;
     } else {
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = end;
       presenceData.details = "Doing a typing test:";
       presenceData.state = `In ${
         document.querySelector("#switch-typing-test-language").textContent
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("#switch-typing-test-language").textContent
       } | ${wpM[0]} `;
     } else {
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = end;
       presenceData.details = "Doing an advance typing test:";
       presenceData.state = `In ${
         document.querySelector("#switch-typing-test-language").textContent
@@ -51,7 +52,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Finishing a competition:";
       presenceData.state = `${wpM[0]} WPM `;
     } else {
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = end;
       presenceData.details = "Doing a Competition:";
     }
   } else if (document.location.pathname.includes("/text/")) {
