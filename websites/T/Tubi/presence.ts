@@ -40,9 +40,9 @@ presence.on("UpdateData", async () => {
         ? false
         : true;
 
-    if (subtitleCheck) 
+    if (subtitleCheck)
       subtitle = "Movie";
-    else 
+    else
       subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
     
 
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title !== null && subtitle !== null) 
+    if (title !== null && subtitle !== null)
       presence.setActivity(data, !video.paused);
     
   } else {
