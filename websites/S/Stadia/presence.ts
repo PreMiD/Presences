@@ -29,13 +29,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Stadia Store";
   else if (document.location.pathname.includes("/pro"))
     presenceData.details = "Viewing Stadia Pro";
-  else
-    presenceData.details = "Can't read page";
-  
+  else presenceData.details = "Can't read page";
 
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
-  
 });
