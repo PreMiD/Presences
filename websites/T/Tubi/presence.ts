@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     );
   if (video && !isNaN(video.duration)) {
     const title = document.querySelector("h1._1PDoZ._1nW6s").textContent,
-      timestamps = getTimestamps(
+      [data.startTimestamp, data.endTimestamp] = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
