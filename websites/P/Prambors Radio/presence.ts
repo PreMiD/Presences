@@ -19,18 +19,18 @@ presence.on("UpdateData", async () => {
       }
     ]
   },
-    buttonAction = [
-      ...document.querySelector("button[class*='td-player']").classList
-    ]
-      .pop()
+    buttonAction = document
+      .querySelector("button[class*='td-player']")
+      .classList
+      .toString()
       .split("--")
       .pop();
-  if (buttonAction === "play") {
-    startTimestamp = undefined;
+  if (buttonAction === "play" || buttonAction === "loading") {
+    startTimestamp &&= null;
     presenceData.smallImageKey = "pause";
     presenceData.smallImageText = (await strings).pause;
   } else if (buttonAction === "pause") {
-    if (!startTimestamp) startTimestamp = Math.floor(Date.now() / 1000);
+    startTimestamp ??= Math.floor(Date.now() / 1000);
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = (await strings).play;
     presenceData.state = "Listening";
