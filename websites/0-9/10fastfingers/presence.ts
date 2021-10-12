@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (
     document.location.pathname.includes("/widget/") ||
-    document.location.pathname.includes("/widgets/")
+  document.location.pathname.includes("/widgets/")
   ) {
     const timer = document.querySelector("#timer").textContent;
     if (timer.match(/([1-25]{1}[0]{0,1}:[0]{2})|(0:30)/)) presenceData.details = "Waiting to start a custom typing test";
@@ -79,28 +79,68 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/user/")) {
     presenceData.details = "Viewing a user profile:";
     presenceData.state = document.querySelector(".row > h2").lastChild.nodeValue;
-  } else if (document.location.pathname.includes("/email_settings")) presenceData.details = "Viewing email settings";
-  else if (document.location.pathname.includes("/active-user-alltime")) presenceData.details = "Viewing all-time records";
-  else if (document.location.pathname.includes("/text-practice/new")) presenceData.details = "Viewing text practice";
-  else if (document.location.pathname.includes("/multiplayer")) presenceData.details = "Doing a multiplayer typing test";
-  else if (document.location.pathname.includes("/faq")) presenceData.details = "Reading the FAQ";
-  else if (document.location.pathname.includes("/forum/")) presenceData.details = "Viewing the forums";
-  else if (document.location.pathname.includes("/supporter")) presenceData.details = "Viewing the list of supporters";
-  else if (document.location.pathname.includes("/login")) presenceData.details = "Logging in...";
-  else if (document.location.pathname.includes("/create-account")) presenceData.details = "Creating an account..";
-  else if (document.location.pathname.includes("/impressum")) presenceData.details = "Reading the privacy policy";
-  else if (document.location.pathname.includes("/gdpr")) presenceData.details = "Reading information about GDPR";
-  else if (document.location.pathname.includes("/cookie-policy")) presenceData.details = "Reading the cookie policy";
-  else if (document.location.pathname.includes("/settings")) presenceData.details = "Viewing their settings";
-  else if (document.location.pathname.includes("/achievements")) presenceData.details = "Viewing their achievements";
-  else if (document.location.pathname.includes("/translations")) presenceData.details = "Learning how to translate";
-  else if (document.location.pathname.includes("/competitions")) presenceData.details = "Viewing the list of competitions";
-  else if (document.location.pathname.includes("/anticheat")) presenceData.details = "Viewing the Anti-Cheat";
-  else if (document.location.pathname.includes("/top1000/")) {
+  } else if (document.location.pathname.includes("/top1000/")) {
     const lang = document.location.pathname.split("/");
     presenceData.details = "Doing the top 1000 typing test:";
     presenceData.state = `In ${lang[lang.length - 3]}`;
-  } else if (document.location.pathname.includes("/top1000")) presenceData.details = "Viewing the top 1000 typing mode";
+  } else {
+    switch (document.location.pathname) {
+      case "/email_settings":
+        presenceData.details = "Viewing email settings";
+        break;
+      case "/active-user-alltime":
+        presenceData.details = "Viewing all-time records";
+        break;
+      case "/text-practice/new":
+        presenceData.details = "Viewing text practice";
+        break;
+      case "/multiplayer":
+        presenceData.details = "Doing a multiplayer typing test";
+        break;
+      case "/faq":
+        presenceData.details = "Reading the FAQ";
+        break;
+      case "/forum/":
+        presenceData.details = "Viewing the forums";
+        break;
+      case "/supporter":
+        presenceData.details = "Viewing the list of supporters";
+        break;
+      case "/login":
+        presenceData.details = "Logging in...";
+        break;
+      case "/create-account":
+        presenceData.details = "Creating an account..";
+        break;
+      case "/impressum":
+        presenceData.details = "Reading the privacy policy";
+        break;
+      case "/gdpr":
+        presenceData.details = "Reading information about GDPR";
+        break;
+      case "/cookie-policy":
+        presenceData.details = "Reading the cookie policy";
+        break;
+      case "/settings":
+        presenceData.details = "Viewing their settings";
+        break;
+      case "/achievements":
+        presenceData.details = "Viewing their achievements";
+        break;
+      case "/translations":
+        presenceData.details = "Learning how to translate";
+        break;
+      case "/anticheat":
+        presenceData.details = "Viewing the Anti-Cheat";
+        break;
+      case "/top1000":
+        presenceData.details = "Viewing the top 1000 typing mode";
+        break;
+      case "/competitions":
+        presenceData.details = "Viewing the list of competitions";
+        break;
+    }
+  }
 
   if (!presenceData.details) {
     presence.setTrayTitle();
