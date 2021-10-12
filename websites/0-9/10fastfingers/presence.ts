@@ -70,8 +70,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/widgets/")
   ) {
     const timer = document.querySelector("#timer").textContent;
-
- if (timer.match(/([1-25]{1}[0]{0,1}:[0]{2})|(0:30)/)) presenceData.details = "Waiting to start a custom typing test";
+    if (timer.match(/([1-25]{1}[0]{0,1}:[0]{2})|(0:30)/)) presenceData.details = "Waiting to start a custom typing test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a custom typing test:";
