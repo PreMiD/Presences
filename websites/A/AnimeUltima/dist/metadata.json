@@ -4,7 +4,6 @@
     "name": "VocalZero",
     "id": "223891083724193792"
   },
-  "contributors": [],
   "service": "AnimeUltima",
   "description": {
     "en": "AnimeUltima has a large catalog of anime that you can stream for free and without registration."
@@ -13,7 +12,7 @@
     "animeultima.to",
     "www1.animeultima.to"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/BAFEKGq.png",
   "thumbnail": "https://i.imgur.com/3K2hG7O.png",
   "color": "#FF3333",
@@ -22,6 +21,5 @@
     "nfsw",
     "video"
   ],
-  "category": "anime",
-  "button": true
+  "category": "anime"
 }
