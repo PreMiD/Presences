@@ -71,7 +71,7 @@ udemy.on("UpdateData", async () => {
     presenceData.state = category?.textContent || "Unknown Category";
   } else if (page.includes("/course/") && video && video.currentTime) {
     const title = document.querySelector(
-        "header a[class*=header--course-title] div.sr-only"
+        "header a[data-purpose=course-header-title]"
       ),
       episode = document.querySelector(
         "li[class*=curriculum-item-link--is-current] span > span"
