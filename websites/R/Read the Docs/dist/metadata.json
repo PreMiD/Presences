@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
-    "name": "marzeq_",
+    "name": "marzeq",
     "id": "500669086947344384"
   },
   "url": "readthedocs.io",
@@ -10,7 +10,7 @@
     "en": "Read the Docs simplifies software documentation by automating building, versioning, and hosting of your docs for you.",
     "nl": "Read the Docs vereenvoudigt softwaredocumentatie door de opbouw, versiebeheer en hosting van uw documenten voor u te automatiseren."
   },
-  "version": "1.0.2",
+  "version": "1.0.3",
   "service": "Read the Docs",
   "logo": "https://i.imgur.com/imTvu2G.png",
   "thumbnail": "https://i.imgur.com/i7xxsx3.png",

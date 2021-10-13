@@ -56,7 +56,9 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.4",
 
     const service = meta.service,
       result = validate(meta, schema),
-      validLangs = (await axios.get("https://api.premid.app/v2/langFile/list")).data,
+      validLangs: string[] = (
+        await axios.get("https://api.premid.app/v2/langFile/list")
+      ).data,
       invalidLangs: string[] = [];
 
     Object.keys(meta.description).forEach((lang) => {
