@@ -76,13 +76,16 @@ udemy.on("UpdateData", async () => {
       episode = document.querySelector(
         "li[class*=curriculum-item-link--is-current] span > span"
       ),
+      episodeFromPlayer = document.querySelector(
+        "#bookmark-portal ~ div:not(:empty)"
+      ),
       [, endTimestamp] = udemy.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
 
     presenceData.details = title?.textContent || "Unknown Course";
-    presenceData.state = episode?.textContent || "Unknown Episode";
+    presenceData.state = episode?.textContent || episodeFromPlayer?.textContent || "Unknown Episode";
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
