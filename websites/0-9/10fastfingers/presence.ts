@@ -5,15 +5,20 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "typinglogo",
-    startTimestamp: browsingStamp
-  },
-    [,end] = presence.getTimestamps(presence.timestampFromFormat("00:00"), presence.timestampFromFormat("1:00"));
+      largeImageKey: "typinglogo",
+      startTimestamp: browsingStamp
+    },
+    [, end] = presence.getTimestamps(
+      presence.timestampFromFormat("00:00"),
+      presence.timestampFromFormat("1:00")
+    );
   if (document.location.pathname === "/") presenceData.details = "In home page";
-  else if (document.location.pathname.match(/\/typing-test\/.+\/top50/gm)) presenceData.details = "Viewing top 50";
+  else if (document.location.pathname.match(/\/typing-test\/.+\/top50/gm))
+    presenceData.details = "Viewing top 50";
   else if (document.location.pathname.includes("/typing-test/")) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer === "1:00") presenceData.details = "Waiting to start a typing test";
+    if (timer === "1:00")
+      presenceData.details = "Waiting to start a typing test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a typing test:";
@@ -29,7 +34,8 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("/advanced-typing-test/")) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer === "1:00") presenceData.details = "Waiting to start an advance Typing test";
+    if (timer === "1:00")
+      presenceData.details = "Waiting to start an advance Typing test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing an advance typing test:";
@@ -45,7 +51,8 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("/competition/")) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer === "1:00") presenceData.details = "Waiting to start a competition";
+    if (timer === "1:00")
+      presenceData.details = "Waiting to start a competition";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a competition:";
@@ -56,7 +63,8 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("/text/")) {
     const timer = document.querySelector("#time").textContent;
-    if (timer === "00:00") presenceData.details = "Waiting to start a text practice";
+    if (timer === "00:00")
+      presenceData.details = "Waiting to start a text practice";
     else {
       const finalTime = document.querySelector(".col-md-6 > p > strong");
 
@@ -67,10 +75,11 @@ presence.on("UpdateData", async () => {
     }
   } else if (
     document.location.pathname.includes("/widget/") ||
-  document.location.pathname.includes("/widgets/")
+    document.location.pathname.includes("/widgets/")
   ) {
     const timer = document.querySelector("#timer").textContent;
-    if (timer.match(/([125]{1}[0]{0,1}:[0]{2})|(0:30)/)) presenceData.details = "Waiting to start a custom typing test";
+    if (timer.match(/([125]{1}[0]{0,1}:[0]{2})|(0:30)/))
+      presenceData.details = "Waiting to start a custom typing test";
     else if (timer === "0:00") {
       const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a custom typing test:";
@@ -78,7 +87,8 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = " Doing a custom typing test";
   } else if (document.location.pathname.includes("/user/")) {
     presenceData.details = "Viewing a user profile:";
-    presenceData.state = document.querySelector(".row > h2").lastChild.nodeValue;
+    presenceData.state =
+      document.querySelector(".row > h2").lastChild.nodeValue;
   } else if (document.location.pathname.includes("/top1000/")) {
     const lang = document.location.pathname.split("/");
     presenceData.details = "Doing the top 1000 typing test:";
