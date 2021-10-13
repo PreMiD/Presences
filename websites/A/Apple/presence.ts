@@ -219,11 +219,11 @@ presence.on("UpdateData", async () => {
     } else if (urlpath.includes("newsroom")) {
       presenceData.details = "Newsroom";
 
-      if (urlpath.includes("topics")) {
-presenceData.state = document
+      if (urlpath.includes("topics"))
+        presenceData.state = document
           .querySelector("h1.section-head")
           ?.getAttribute("aria-label");
-} else {
+      else {
         presenceData.state =
           document.querySelector(".hero-headline")?.textContent;
 
@@ -482,9 +482,9 @@ presenceData.state = document
       presenceData.details = lang.supportArticle;
       presenceData.state =
         document.querySelector("h1#howto-title")?.textContent || "Unknown";
-    } else if (window.location.hostname === "getsupport.apple.com") 
+    } else if (window.location.hostname === "getsupport.apple.com") {
       presenceData.details = lang.support;
-     else {
+    } else {
       presenceData.details = lang.support;
       presenceData.state = "Home";
     }
@@ -553,11 +553,10 @@ presenceData.state = document
 
         if (urlpath[2] === "create")
           presenceData.state = lang.iCloudPagesCreate;
-        else {
-presenceData.state = document.querySelector(
+        else
+          presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
           )?.textContent;
-}
       } else presenceData.state = "Pages";
     } else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
     else if (urlpath[1] === "keynote") {
@@ -568,11 +567,10 @@ presenceData.state = document.querySelector(
 
         if (urlpath[2] === "create")
           presenceData.state = lang.iCloudPagesCreate;
-        else {
-presenceData.state = document.querySelector(
+        else
+          presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
           )?.textContent;
-}
       } else presenceData.state = "Keynote";
     } else if (urlpath[1] === "keynote-live" && urlpath[2]) {
       const iframe = document.querySelector("iframe");
@@ -615,20 +613,20 @@ presenceData.state = document.querySelector(
     presenceData.details = "Apple Developer";
     presenceData.state = "Home";
 
-    if (dPages.find((e) => urlpath[1] === e)) {
-presenceData.state =
-        document.querySelector(`a.ac-gn-link.ac-gn-link-${cpage}>span`)
+    if (dPages.find((e) => urlpath[1] === e))
+      presenceData.state =
+        document.querySelector("a.ac-gn-link.ac-gn-link-" + cpage + ">span")
           ?.textContent ||
         document.querySelector("section.section-hero>h1.section-headline")
           ?.textContent ||
         document.querySelector("h2.localnav-title>a")?.textContent ||
         "Unknown";
-} else if (urlpath[1] === "custom-apps") {
-presenceData.state =
+    else if (urlpath[1] === "custom-apps")
+      presenceData.state =
         document.querySelector("h2.localnav-title>a")?.textContent ||
         document.querySelector("h1.typography-headline")?.textContent ||
         "Unknown";
-} else if (urlpath[1].startsWith("wwdc")) {
+    else if (urlpath[1].startsWith("wwdc")) {
       const wwdc = document
         .querySelector("a.ac-ln-title-logo>img")
         ?.getAttribute("alt");
@@ -679,11 +677,10 @@ presenceData.state =
         presenceData.state = lang.devDistribution;
       else if (urlpath[1] === "watchos" && urlpath[2] === "features")
         presenceData.state = lang.devFeatures;
-      else {
-presenceData.state =
+      else
+        presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
-}
     } else if (urlpath[1] === "documentation") {
       const page = document.querySelector("span.current.item");
 
@@ -707,11 +704,10 @@ presenceData.state =
         presenceData.state = lang.devHIG;
       else if (urlpath[2] === "resources")
         presenceData.state = dev.devResources;
-      else {
-presenceData.state =
+      else
+        presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
-}
     } else if (
       urlpath[1] === "safari" ||
       urlpath[1] === "app-store-connect" ||
@@ -725,7 +721,7 @@ presenceData.state =
         document.querySelector("h2.localnav-title>a")?.textContent ||
         "Apple Developer";
       presenceData.state =
-        document.querySelector(`a.localnav-menu-link.link-${cpage}`)
+        document.querySelector("a.localnav-menu-link.link-" + cpage)
           ?.textContent ||
         document.querySelector("span.localnav-menu-link.current")
           ?.textContent ||
@@ -775,9 +771,9 @@ presenceData.state =
             });
           }
         }
-      } else if (urlpath[2] === "create") 
+      } else if (urlpath[2] === "create") {
         presenceData.state = lang.forumCreateThread;
-       else if (urlpath[2] === "register")
+      } else if (urlpath[2] === "register")
         presenceData.state = lang.forumRegister;
 
       if (setting.buttons) {
@@ -851,14 +847,13 @@ presenceData.state =
             }
           ];
         }
-      } else {
-presenceData.state =
+      } else
+        presenceData.state =
           document.querySelector("section.inline-block>h1.collection-title")
             ?.textContent ||
           document.querySelector("span.localnav-menu-link.current")
             ?.textContent ||
           "Other";
-}
     } else if (urlpath[1] === "news") {
       const urlParams = new URLSearchParams(window.location.search);
 
