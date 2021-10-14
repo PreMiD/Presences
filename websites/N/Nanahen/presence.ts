@@ -87,7 +87,7 @@ switch (
       presenceData.details = `Viewing a page...`;
       presenceData.state = `${name}`;
       presenceData.buttons = [
-        { label: `Join with me`, url: document.location.href }
+        { label: `View Manga`, url: document.location.href }
       ];
     }
     const readmanga = document.querySelector(".reader-area");
@@ -100,7 +100,7 @@ switch (
       presenceData.details = `Reading ${manga}`;
       presenceData.state = `${chapter}`;
       presenceData.buttons = [
-        { label: "Join Read", url: document.location.href }
+        { label: "Read Manga", url: document.location.href }
       ];
     }
     break;
