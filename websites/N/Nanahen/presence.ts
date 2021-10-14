@@ -85,7 +85,7 @@ switch (
         "body > main > div > div > div.container > div > div.series-flexright > div.series-title > h2"
       ).textContent;
       presenceData.details = `Viewing a page...`;
-      presenceData.state = `${name}`
+      presenceData.state = `${name}`;
       presenceData.buttons = [
         { label: `Join with me`, url: document.location.href }
       ];
