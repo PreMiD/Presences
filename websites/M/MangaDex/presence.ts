@@ -38,14 +38,14 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = browsingStamp;
       }
     } else {
-    const manga = document.querySelector("head > title").textContent
-      .replace(" - MangaDex", "");
-    if (document.location.pathname.endsWith("/random"))
-      data.details = "Viewing a Random Manga:";
-    else
-      data.details = "Viewing a Manga:";
-    data.state = manga;
-    data.startTimestamp = browsingStamp;
+      const manga = document.querySelector("head > title").textContent
+        .replace(" - MangaDex", "");
+      if (document.location.pathname.endsWith("/random"))
+        data.details = "Viewing a Random Manga:";
+      else
+        data.details = "Viewing a Manga:";
+      data.state = manga;
+      data.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/chapter")) {
     const title = document.querySelector(".text-primary").textContent.trim(),
