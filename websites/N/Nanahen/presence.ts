@@ -77,7 +77,7 @@ switch (
         "body > main > div > div > h2"
       ).textContent;
       presenceData.details = "Viewing archive authors...";
-      presenceData.state = `${genres}`;
+      presenceData.state = genres;
       presenceData.smallImageKey = "search";
     }
     if (document.location.pathname.startsWith("/show/series/")) {
