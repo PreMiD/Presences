@@ -15,9 +15,7 @@ const latestMetadataSchema = async (): Promise<string> => {
     )
       .filter((c) => c.name.endsWith(".json"))
       .map((c) => c.name.match(/\d.\d/g)[0]);
-    return `https://schemas.premid.app/metadata/${
-      versions[versions.pop()]
-    }`;
+    return `https://schemas.premid.app/metadata/${versions.pop()}`;
   },
   stats = {
     validated: 0,
