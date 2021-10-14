@@ -20,7 +20,7 @@ switch (
     presenceData.details = "Viewing homepage...";
     break;
   case "/bookmark":
-    presenceData.details = "Viewing my bookmark...";
+    presenceData.details = "Viewing my bookmarks...";
     break;
   case "/all-series":
     presenceData.details = "Viewing all series...";
