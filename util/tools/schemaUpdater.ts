@@ -28,14 +28,14 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
     const versions = (
       (
         await axios.get(
-          "https://github.com/PreMiD/Schemas/tree/main/schemas/metadata"
+          "https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
         )
-      ).data as string
+      ).data as {name: string}[]
     )
-      .match(/>\d.\d.json<\/a>/g)
-      .map((c) => c.match(/\d.\d/g)[0]);
+      .filter((c) => c.name.endsWith(".json"))
+      .map((c) => c.name.match(/\d.\d/g)[0]);
     return `https://schemas.premid.app/metadata/${
-      versions[versions.length - 1]
+      versions[versions.pop()]
     }`;
   },
   write = (path: string, code: Metadata): void =>
