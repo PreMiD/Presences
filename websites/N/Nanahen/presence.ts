@@ -69,7 +69,7 @@ switch (
         "body > main > div > div > h2"
       ).textContent;
       presenceData.details = "Searching by parody...";
-      presenceData.state = `${genres}`;
+      presenceData.state = genres;
       presenceData.smallImageKey = "search";
     }
     if (document.location.pathname.includes("/show/authors/")) {
