@@ -57,9 +57,9 @@ presence.on("UpdateData", async () => {
     strings = await getStrings();
   }
 
-  if (isHostSP) {
+  if (isHostSP)
     data.largeImageKey = "starplus-logo";
-  }
+  
 
   // Star+ videos
   if (isHostSP && location.pathname.includes("/video/")) {
@@ -82,8 +82,8 @@ presence.on("UpdateData", async () => {
       }
 
       const titleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .title-field"
-        ),
+        ".btm-media-overlays-container .title-field"
+      ),
         subtitleField: HTMLDivElement = document.querySelector(
           ".btm-media-overlays-container .subtitle-field"
         );
@@ -95,11 +95,11 @@ presence.on("UpdateData", async () => {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = "In a GroupWatch";
       } else {
-        if (privacy)
+        if (privacy) {
           data.state = subtitle
             ? strings.watchingSeries
             : strings.watchingMovie;
-        else {
+        } else {
           data.details = title;
           data.state = subtitle || "Movie";
         }
@@ -145,44 +145,43 @@ presence.on("UpdateData", async () => {
 
   //Star+ Livestreams
   } else if (isHostSP && location.pathname.includes("/live-event/")) {
-      const video: HTMLVideoElement = document.querySelector(
-        ".btm-media-clients video"
-      );
+    const video: HTMLVideoElement = document.querySelector(
+      ".btm-media-clients video"
+    );
   
-      if (video && !isNaN(video.duration)) {
-  
-        const titleField: HTMLDivElement = document.querySelector(
-            ".btm-media-overlays-container .title-field"
-          ),
-          subtitleField: HTMLDivElement = document.querySelector(
-            ".btm-media-overlays-container .subtitle-field"
-          );
-  
-        title = titleField?.textContent;
-        subtitle = subtitleField?.textContent; // episode or empty if it's a movie
-  
-        if (!privacy) {
-          data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
-          data.state = strings.watchLive;
-        } else {
-          if (privacy)
-            data.state = strings.watchingLive
-        }
-  
-        data.smallImageKey = video.paused ? "pause" : "play";
-        data.smallImageText = video.paused ? strings.pause : strings.play;
-  
-        // add buttons, if enabled
-        if (!privacy && buttons) {
-          data.buttons = [
-            {
-              label: strings.watchStream,
-              url: `https://www.starplus.com${location.pathname}`
-            }
-          ];
-        }
-        if (title) presence.setActivity(data, !video.paused);
+    if (video && !isNaN(video.duration)) {
+      const titleField: HTMLDivElement = document.querySelector(
+          ".btm-media-overlays-container .title-field"
+        ),
+        subtitleField: HTMLDivElement = document.querySelector(
+          ".btm-media-overlays-container .subtitle-field"
+        );
+
+      title = titleField?.textContent;
+      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+
+      if (!privacy) {
+        data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+        data.state = strings.watchLive;
+      } else {
+        if (privacy)
+          data.state = strings.watchingLive;
       }
+  
+      data.smallImageKey = video.paused ? "pause" : "play";
+      data.smallImageText = video.paused ? strings.pause : strings.play;
+  
+      // add buttons, if enabled
+      if (!privacy && buttons) {
+        data.buttons = [
+          {
+            label: strings.watchStream,
+            url: `https://www.starplus.com${location.pathname}`
+          }
+        ];
+      }
+      if (title) presence.setActivity(data, !video.paused);
+    }
 
   // GroupWatch lobby
   } else if (
