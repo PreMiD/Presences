@@ -107,8 +107,7 @@ presence.on("UpdateData", async () => {
 
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused ? strings.pause : strings.play;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      [data.startTimestamp, data.endTimestamp] = timestamps;
 
       // remove timestamps if video is paused or user disabled timestamps
       if (video.paused || !time) {
