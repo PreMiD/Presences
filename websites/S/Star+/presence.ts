@@ -151,8 +151,8 @@ presence.on("UpdateData", async () => {
   
     if (video && !isNaN(video.duration)) {
       const titleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .title-field"
-        ),
+        ".btm-media-overlays-container .title-field"
+      ),
         subtitleField: HTMLDivElement = document.querySelector(
           ".btm-media-overlays-container .subtitle-field"
         );
