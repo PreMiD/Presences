@@ -90,8 +90,8 @@ switch (
         { label: `View Manga`, url: document.location.href }
       ];
     }
-    const ReadManga = document.querySelector(".reader-area");
-      if (ReadManga) {
+    const readManga = document.querySelector(".reader-area");
+      if (readManga) {
         const manga = document.querySelector(
           "#chapnav > div > div.infox > span.title").textContent,
         chapter = document.querySelector(
