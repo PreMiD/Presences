@@ -90,19 +90,19 @@ switch (
         { label: `View Manga`, url: document.location.href }
       ];
     }
-    const readmanga = document.querySelector(".reader-area");
-    if (readmanga) {
-      const manga = document.querySelector(
+    const ReadManga = document.querySelector(".reader-area");
+      if (ReadManga) {
+        const manga = document.querySelector(
           "#chapnav > div > div.infox > span.title").textContent,
         chapter = document.querySelector(
           "#chapnav > div > div.infox > span.chapter"
         ).textContent;
-      presenceData.details = `Reading ${manga}`;
-      presenceData.state = `${chapter}`;
-      presenceData.buttons = [
-        { label: "Read Manga", url: document.location.href }
-      ];
-    }
+        presenceData.details = `Reading ${manga}`;
+        presenceData.state = chapter;
+        presenceData.buttons = [
+          { label: "Read Manga", url: document.location.href }
+        ];
+      }
     break;
   }
 }
