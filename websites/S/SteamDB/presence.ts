@@ -28,9 +28,10 @@ presence.on("UpdateData", async () => {
               .children.item(0)
               .textContent.includes("Connection opened, listening for changes…")
           ) {
-            [ , presenceData.state ] = document
+            [, presenceData.state] = document
               .getElementById("js-realtime-log")
-              .children.item(0).textContent.split("—");
+              .children.item(0)
+              .textContent.split("—");
             if (
               document
                 .getElementById("js-realtime-log")
@@ -63,9 +64,9 @@ presence.on("UpdateData", async () => {
             presenceData.state = `Filter: ${
               (document.getElementById("js-tag-select") as HTMLSelectElement)
                 .options[
-                  (document.getElementById("js-tag-select") as HTMLSelectElement)
-                    .selectedIndex
-                ].text
+                (document.getElementById("js-tag-select") as HTMLSelectElement)
+                  .selectedIndex
+              ].text
             }`;
           }
           if (
@@ -497,12 +498,12 @@ presence.on("UpdateData", async () => {
               presenceData.state = `Filter: ${
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
                   .options[
-                    (
+                  (
                     document.getElementById(
                       "js-tag-select"
                     ) as HTMLSelectElement
-                    ).selectedIndex
-                  ].text
+                  ).selectedIndex
+                ].text
               }`;
             }
           } else {
@@ -514,12 +515,12 @@ presence.on("UpdateData", async () => {
               presenceData.state = `Filter: ${
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
                   .options[
-                    (
+                  (
                     document.getElementById(
                       "js-tag-select"
                     ) as HTMLSelectElement
-                    ).selectedIndex
-                  ].text
+                  ).selectedIndex
+                ].text
               }`;
             }
           }
@@ -703,18 +704,18 @@ presence.on("UpdateData", async () => {
               } Type: ${
                 (document.getElementById("inputType") as HTMLSelectElement)
                   .options[
-                    (document.getElementById("inputType") as HTMLSelectElement)
-                      .selectedIndex
-                  ].textContent
+                  (document.getElementById("inputType") as HTMLSelectElement)
+                    .selectedIndex
+                ].textContent
               } Category: ${
                 (document.getElementById("inputCategory") as HTMLSelectElement)
                   .options[
-                    (
+                  (
                     document.getElementById(
                       "inputCategory"
                     ) as HTMLSelectElement
-                    ).selectedIndex
-                  ].textContent
+                  ).selectedIndex
+                ].textContent
               }`;
               break;
             case "Packages":
@@ -748,24 +749,24 @@ presence.on("UpdateData", async () => {
               presenceData.state = `${
                 (document.getElementById("inputType2") as HTMLSelectElement)
                   .options[
-                    (document.getElementById("inputType2") as HTMLSelectElement)
-                      .selectedIndex
-                  ].textContent
+                  (document.getElementById("inputType2") as HTMLSelectElement)
+                    .selectedIndex
+                ].textContent
               } ${
                 (document.getElementById("inputKeyName") as HTMLSelectElement)
                   .options[
-                    (document.getElementById("inputKeyName") as HTMLSelectElement)
-                      .selectedIndex
-                  ].textContent
+                  (document.getElementById("inputKeyName") as HTMLSelectElement)
+                    .selectedIndex
+                ].textContent
               } ${
                 (document.getElementById("inputOperator") as HTMLSelectElement)
                   .options[
-                    (
+                  (
                     document.getElementById(
                       "inputOperator"
                     ) as HTMLSelectElement
-                    ).selectedIndex
-                  ].textContent
+                  ).selectedIndex
+                ].textContent
               } ${
                 (document.getElementById("inputKeyValue") as HTMLInputElement)
                   .value
@@ -781,21 +782,21 @@ presence.on("UpdateData", async () => {
               presenceData.state = `${
                 (document.getElementById("inputKeyName2") as HTMLSelectElement)
                   .options[
-                    (
+                  (
                     document.getElementById(
                       "inputKeyName2"
                     ) as HTMLSelectElement
-                    ).selectedIndex
-                  ].textContent
+                  ).selectedIndex
+                ].textContent
               } ${
                 (document.getElementById("inputOperator2") as HTMLSelectElement)
                   .options[
-                    (
+                  (
                     document.getElementById(
                       "inputOperator2"
                     ) as HTMLSelectElement
-                    ).selectedIndex
-                  ].textContent
+                  ).selectedIndex
+                ].textContent
               } ${
                 (document.getElementById("inputKeyValue2") as HTMLInputElement)
                   .value

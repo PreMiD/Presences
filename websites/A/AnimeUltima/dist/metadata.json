@@ -4,7 +4,6 @@
     "name": "VocalZero",
     "id": "223891083724193792"
   },
-  "contributors": [],
   "service": "AnimeUltima",
   "description": {
     "en": "AnimeUltima has a large catalog of anime that you can stream for free and without registration."
@@ -22,6 +21,5 @@
     "nfsw",
     "video"
   ],
-  "category": "anime",
-  "button": true
+  "category": "anime"
 }

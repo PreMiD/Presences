@@ -5,6 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
+  browsingStamp = Math.floor(Date.now() / 1000),
   { language } = window.navigator; //Make this change-able with presence settings
 //en = English
 //nl = Nederlands
@@ -136,8 +137,6 @@ function getTranslation(stringName: string): string {
   }
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-
 let user, title, search;
 
 presence.on("UpdateData", async () => {
@@ -147,21 +146,16 @@ presence.on("UpdateData", async () => {
 
   if (document.querySelector("#plex") !== null) {
     if (document.querySelector("#plex > div:nth-child(4) > div") !== null) {
-      const video: HTMLVideoElement = document.querySelector(
+      const { currentTime, duration, paused } =
+        document.querySelector<HTMLVideoElement>(
           "#plex > div:nth-child(4) > div > div:nth-child(1) > video"
-        ),
-        { currentTime } = video,
-        { duration } = video,
-        { paused } = video,
-        timestamps = presence.getTimestamps(
-          Math.floor(currentTime),
-          Math.floor(duration)
         );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
       user =
         document.querySelector(
           "#plex > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a"
@@ -235,7 +229,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Library");
       presenceData.state = document.querySelector(
-        "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > a > div:nth-child(1)"
+        "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a > div:nth-child(1)"
       ).textContent;
     } else if (document.URL.includes("content.collections")) {
       presenceData.startTimestamp = browsingStamp;
@@ -271,6 +265,7 @@ presence.on("UpdateData", async () => {
       document.URL === "https://app.plex.tv/" ||
       document.URL === "https://app.plex.tv/desktop" ||
       document.URL === "https://app.plex.tv/desktop#" ||
+      document.URL === "https://app.plex.tv/desktop/#!/" ||
       document.location.pathname === "/web/index.html" ||
       document.location.pathname === "/web/index.html#"
     ) {
