@@ -61,7 +61,7 @@ switch (
         "body > main > div > div > h2"
       ).textContent;
       presenceData.details = "Searching by tags...";
-      presenceData.state = `${genres}`;
+      presenceData.state = genres;
       presenceData.smallImageKey = "search";
     }
     if (document.location.pathname.includes("/show/parody/")) {
