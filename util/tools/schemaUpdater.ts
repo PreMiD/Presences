@@ -34,9 +34,7 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
     )
       .filter((c) => c.name.endsWith(".json"))
       .map((c) => c.name.match(/\d.\d/g)[0]);
-    return `https://schemas.premid.app/metadata/${
-      versions[versions.pop()]
-    }`;
+    return `https://schemas.premid.app/metadata/${versions.pop()}`;
   },
   write = (path: string, code: Metadata): void =>
     writeFile(path, JSON.stringify(code, null, 2), {
