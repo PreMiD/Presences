@@ -6,7 +6,7 @@
     "id": "425326889565945856"
   },
   "category": "anime",
-  "logo": "https://i.imgur.com/ruUHGNI.png",
+  "logo": "https://i.imgur.com/orEOyFL.png",
   "thumbnail": "https://i.imgur.com/My1SFjM.png",
   "version": "1.0.0",
   "color": "#2957ba",
@@ -21,7 +21,7 @@
           "biggestchef.com",
           "indalchef.com"],
   "description": {
-    "en": "Read Manga in Spanish",
-    "es": "Lee Manga en Castellano"
+    "en": "Lectormanga.com is the same Tumangaonline but in its lighter version and compatible with most browsers.",
+    "es": "Lectormanga.com es la misma Tumangaonline pero en su versión más ligera y compatible con la mayoría de navegadores."
   }
 }
