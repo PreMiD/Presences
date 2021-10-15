@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Iniciando sesión...";
           break;
         case "/contact":
-          presenceData.details = "";
+          presenceData.details = "Viendo la página de contacto";
           break;
         case "/rules":
           presenceData.details = "Leyendo las normas";
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else 
