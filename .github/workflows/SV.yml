@@ -1,4 +1,4 @@
-name: SV
+name: Schema Validation Check
 on:
   push:
     branches:
@@ -28,9 +28,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
       - name: Prep SV
-        run: |
-          yarn
-          yarn sv:compile
+        run: yarn
       - name: Find Changed Files (direct push)
         if: github.event_name == 'push'
         run: |

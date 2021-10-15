@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "MauriceX",
     "id": "268768664411439115"
@@ -13,7 +14,7 @@
     "s.to",
     "serienstream.sx"
   ],
-  "version": "1.6.4",
+  "version": "1.6.6",
   "logo": "https://i.imgur.com/AJbaeCC.png",
   "thumbnail": "https://i.imgur.com/L0Zqja4.png",
   "color": "#0000ff",

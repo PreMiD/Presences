@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Kinue",
     "id": "634246091293851649"
@@ -13,7 +14,7 @@
     "docln.net",
     "ln.hako.re"
   ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/rkmqU73.png",
   "thumbnail": "https://i.imgur.com/tn5PhoK.png",
   "color": "#1e5069",

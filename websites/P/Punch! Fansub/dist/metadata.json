@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "uDaanilo",
     "id": "285080902864732160"
@@ -10,7 +11,7 @@
     "nl": "Punch! Fansub is een Braziliaanse fansub en anime-streamingwebsite"
   },
   "url": "punchsubs.net",
-  "version": "2.2.6",
+  "version": "2.2.8",
   "logo": "https://i.imgur.com/pyU2frB.png",
   "thumbnail": "https://i.imgur.com/z14DdrT.png",
   "color": "#002e5e",

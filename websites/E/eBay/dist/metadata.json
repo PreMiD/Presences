@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -17,11 +17,14 @@
     "nl": "Koop en verkoop elektronica, auto's, mode, verzamelobjecten, sportartikelen, digitale camera's, babyartikelen, kortingsbonnen en al het andere op eBay, 's werelds online marktplaats."
   },
   "regExp": "([a-z0-9-]+[.])*ebay([.][a-z]+)+[/]",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "logo": "https://i.imgur.com/FuSdtYk.png",
   "thumbnail": "https://i.imgur.com/WajY5CI.png",
   "color": "#e53238",
-  "tags": ["store", "shopping"],
+  "tags": [
+    "store",
+    "shopping"
+  ],
   "category": "other",
   "settings": [
     {

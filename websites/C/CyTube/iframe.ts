@@ -1,10 +1,8 @@
-// Note: Domain not restricted because cytube allows custom urls and a boatload of supported services
-
 const iframe = new iFrame();
 
 let sendback: {
   audio: boolean;
-  current_time: number;
+  currentTime: number;
   duration: number;
   paused: boolean;
   site: string;
@@ -17,11 +15,11 @@ function send(): void {
 iframe.on("UpdateData", () => {
   const link = document.location;
 
-  if (document.getElementsByTagName("video").length != 0) {
-    const video: HTMLVideoElement = document.getElementsByTagName("video")[0];
+  if (document.getElementsByTagName("video").length !== 0) {
+    const [video] = document.getElementsByTagName("video");
     sendback = {
       audio: false,
-      current_time: video.currentTime,
+      currentTime: video.currentTime,
       duration: video.duration,
       paused: video.paused,
       site: link.href

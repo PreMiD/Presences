@@ -115,12 +115,10 @@ presence.on("UpdateData", () => {
           let activeGrammarPoint: HTMLDivElement;
 
           activeGrammarPoint = document.querySelector(
-            `.grammar-point-study[style*="display: block"]`
+            '.grammar-point-study[style*="display: block"]'
           );
 
-          if (!activeGrammarPoint) {
-            activeGrammarPoint = document.querySelector(".grammar-point-study");
-          }
+          activeGrammarPoint ??= document.querySelector(".grammar-point-study");
 
           const grammarPointElement: HTMLSpanElement =
               activeGrammarPoint.querySelector(
@@ -182,9 +180,7 @@ presence.on("UpdateData", () => {
 
           details = "Viewing Dashboard";
           state = `${reviewsCount} reviews`;
-        } else {
-          details = "Browsing Pages";
-        }
+        } else details = "Browsing Pages";
 
         break;
       }
@@ -198,7 +194,7 @@ presence.on("UpdateData", () => {
   if (level) {
     data.smallImageKey = getLevelIcon(level);
 
-    if (!smallImageText) smallImageText = `Level ${level}`;
+    smallImageText ??= `Level ${level}`;
   }
   if (smallImageText) data.smallImageText = smallImageText;
 

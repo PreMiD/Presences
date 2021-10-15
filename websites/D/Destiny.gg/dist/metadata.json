@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "mmatt",
     "id": "308000668181069824"
@@ -13,7 +13,7 @@
     "nl": "Streaming website voor de streamer Steven \"Destiny\" Bonnell II"
   },
   "service": "Destiny.gg",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/pSEZ2Cm.png",
   "thumbnail": "https://i.imgur.com/UAGQHuC.png",
   "color": "#568FCA",

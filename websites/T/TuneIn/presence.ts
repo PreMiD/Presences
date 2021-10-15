@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       : false;
     if (playerCheck) {
       const liveCheck =
-        document.querySelector("#scrubberElapsed").textContent == "LIVE"
+        document.querySelector("#scrubberElapsed").textContent === "LIVE"
           ? true
           : false;
 

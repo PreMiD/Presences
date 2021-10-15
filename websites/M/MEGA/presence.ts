@@ -16,9 +16,9 @@ presence.on("UpdateData", () => {
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
-  if (page == "/" || page.includes("startpage") || page.includes("start")) {
+  if (page === "/" || page.includes("startpage") || page.includes("start"))
     presenceData.details = "Homepage";
-  } else if (page.includes("fm")) {
+  else if (page.includes("fm")) {
     presenceData.details = "Viewing:";
     presenceData.state = "File Manager";
   } else if (page.includes("chat")) {
@@ -29,8 +29,8 @@ presence.on("UpdateData", () => {
     fileExtension = document.querySelector("span.extension");
 
     if (
-      (fileName == null && fileExtension == null) ||
-      (fileName.innerText == "" && fileExtension.innerText == "")
+      (fileName === null && fileExtension === null) ||
+      (fileName.innerText === "" && fileExtension.innerText === "")
     ) {
       details = "Entering Decryption Key...";
       state = "Holding...";
@@ -79,10 +79,8 @@ presence.on("UpdateData", () => {
     presenceData.state = "mega.nz";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

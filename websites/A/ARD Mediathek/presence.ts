@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

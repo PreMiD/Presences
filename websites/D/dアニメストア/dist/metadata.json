@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Eai",
     "id": "132779412771962880"
@@ -12,7 +13,7 @@
     "nl": "De beste anime streaming website in Japan! Eerste maand gratis! Onbeperkt bekijken van meer dan 2900 animes voor 400 yen per maand (exclusief belasting)! U kunt andere dan DoCoMo mobiele apparaten ook gebruiken. Nog betere kwaliteit op tablets, pc's, Chromecasts en Fire TV!"
   },
   "url": "anime.dmkt-sp.jp",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/6sp3k8m.png",
   "thumbnail": "https://i.imgur.com/DDdRgoz.jpg",
   "color": "#ea552a",

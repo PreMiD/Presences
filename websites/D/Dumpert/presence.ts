@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
           ).textContent
         ),
         timestamps = presence.getTimestamps(currentTime, durationss);
-      presenceData.endTimestamp = timestamps[1];
+      [, presenceData.endTimestamp] = timestamps;
       presenceData.smallImageKey = "play";
     }
 
@@ -93,10 +93,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "The Latest";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     const presenceData: PresenceData = {
       details: "browsing the Homepage",
       largeImageKey: "logo"

@@ -1,49 +1,33 @@
 const presence = new Presence({
-  clientId: "669254632400355358"
-});
+    clientId: "669254632400355358"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean,
   currentTime: number,
   duration: number,
   paused: boolean,
-  playback;
-let pageNumber;
-let videoName;
-let videoEpisode;
-let fullName: string;
-let timestamps: number[];
+  playback,
+  pageNumber,
+  videoName,
+  videoEpisode,
+  fullName: string,
+  timestamps: number[];
 
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.duration;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, duration, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
     }
   }
 );
@@ -53,7 +37,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "asnew"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     data.smallImageKey = "home";
     data.smallImageText = "Homepage";
     data.details = "Nella homepage";
@@ -74,11 +58,11 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/animeincorso")) {
     if (document.location.href.includes("?page=")) {
-      pageNumber = document.location.href.split("=")[1].split("#")[0];
+      [pageNumber] = document.location.href.split("=")[1].split("#");
       data.smallImageKey = "schedule";
       data.smallImageText = "Anime in corso";
       data.details = "Sfoglia gli anime in corso";
-      data.state = "Pagina: " + pageNumber;
+      data.state = `Pagina: ${pageNumber}`;
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     } else {
@@ -91,11 +75,11 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.startsWith("/newest")) {
     if (document.location.href.includes("?page=")) {
-      pageNumber = document.location.href.split("=")[1].split("#")[0];
+      [pageNumber] = document.location.href.split("=")[1].split("#");
       data.smallImageKey = "new";
       data.smallImageText = "Nuove aggiunte";
       data.details = "Sfoglia le nuove aggiunte";
-      data.state = "Pagina: " + pageNumber;
+      data.state = `Pagina: ${pageNumber}`;
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     } else {
@@ -108,11 +92,11 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.startsWith("/upcoming")) {
     if (document.location.href.includes("?page=")) {
-      pageNumber = document.location.href.split("=")[1].split("#")[0];
+      [pageNumber] = document.location.href.split("=")[1].split("#");
       data.smallImageKey = "schedule";
       data.smallImageText = "Prossime uscite";
       data.details = "Sfoglia le prossime uscite";
-      data.state = "Pagina: " + pageNumber;
+      data.state = `Pagina: ${pageNumber}`;
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     } else {
@@ -138,75 +122,69 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/anime")) {
-    videoName = document.title
+    [videoName] = document.title
       .split("AnimeSaturn - ")[1]
-      .split(" Streaming ")[0];
-    if (videoName.includes(" (ITA)")) {
+      .split(" Streaming ");
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    }
+
     data.smallImageKey = "viewing";
-    data.smallImageText = "Scheda di: " + videoName;
+    data.smallImageText = `Scheda di: ${videoName}`;
     data.details = "Guarda la scheda di:";
     data.state = videoName;
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/ep/")) {
-    videoName = document.title
-      .split("AnimeSaturn - ")[1]
-      .split(" Episodio ")[0];
-    if (videoName.includes(" (ITA)")) {
+    [videoName] = document.title.split("AnimeSaturn - ")[1].split(" Episodio ");
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    }
-    videoEpisode = document.title
-      .split(" Episodio ")[1]
-      .split(" Streaming ")[0];
+
+    [videoEpisode] = document.title.split(" Episodio ")[1].split(" Streaming ");
     data.smallImageKey = "watching";
-    data.smallImageText = "Sta per guardare: " + videoName;
-    data.details = "Sta per guardare:\n" + videoName;
-    data.state = "Episodio: " + videoEpisode;
+    data.smallImageText = `Sta per guardare: ${videoName}`;
+    data.details = `Sta per guardare:\n${videoName}`;
+    data.state = `Episodio: ${videoEpisode}`;
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/movie/")) {
-    videoName = document.title.split("AnimeSaturn - ")[1].split(" Movie ")[0];
-    if (videoName.includes(" Movie")) {
+    [videoName] = document.title.split("AnimeSaturn - ")[1].split(" Movie ");
+    if (videoName.includes(" Movie"))
       videoName = videoName.replace(" Movie", "");
-    }
-    if (videoName.includes(" (ITA)")) {
+
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    }
+
     data.smallImageKey = "watching";
-    data.smallImageText = "Sta per guardare il film: " + videoName;
+    data.smallImageText = `Sta per guardare il film: ${videoName}`;
     data.details = "Sta per guardare il film:";
     data.state = videoName;
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/oav/")) {
-    videoName = document.title.split("AnimeSaturn - ")[1].split(" OVA ")[0];
-    if (videoName.includes(" OVA")) {
-      videoName = videoName.replace(" OVA", "");
-    }
-    if (videoName.includes(" OAV")) {
-      videoName = videoName.replace(" OAV", "");
-    }
-    if (videoName.includes(" (ITA)")) {
+    [videoName] = document.title.split("AnimeSaturn - ")[1].split(" OVA ");
+    if (videoName.includes(" OVA")) videoName = videoName.replace(" OVA", "");
+
+    if (videoName.includes(" OAV")) videoName = videoName.replace(" OAV", "");
+
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    }
+
     data.smallImageKey = "watching";
-    data.smallImageText = "Sta per guardare l'ova: " + videoName;
+    data.smallImageText = `Sta per guardare l'ova: ${videoName}`;
     data.details = "Sta per guardare l'ova:";
     data.state = videoName;
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/special/")) {
-    videoName = document.title.split("AnimeSaturn - ")[1].split(" Special ")[0];
-    if (videoName.includes(" Specials")) {
+    [videoName] = document.title.split("AnimeSaturn - ")[1].split(" Special ");
+    if (videoName.includes(" Specials"))
       videoName = videoName.replace(" Specials", "");
-    }
-    if (videoName.includes(" (ITA)")) {
+
+    if (videoName.includes(" (ITA)"))
       videoName = videoName.replace(" (ITA)", "");
-    }
+
     data.smallImageKey = "watching";
-    data.smallImageText = "Sta per guardare lo special: " + videoName;
+    data.smallImageText = `Sta per guardare lo special: ${videoName}`;
     data.details = "Sta per guardare lo special:";
     data.state = videoName;
     data.startTimestamp = browsingStamp;
@@ -246,97 +224,94 @@ presence.on("UpdateData", async () => {
         .replace("Server 2", "");
     }
     if (iFrameVideo === true) {
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      );
     }
+
     if (document.location.href.endsWith("=alt")) {
       // Alternative
       if (fullName.includes(" Special")) {
         if (fullName.includes(" Specials Episodio ")) {
           // Specials OLD
 
-          videoName = fullName.split(" Specials Episodio ")[0];
-          videoEpisode = fullName.split(" Specials Episodio ")[1];
-          if (videoName.includes(" (ITA)")) {
+          [videoName] = fullName.split(" Specials Episodio ");
+          [videoEpisode] = fullName.split(" Specials Episodio ");
+          if (videoName.includes(" (ITA)"))
             videoName = videoName.replace(" (ITA)", "");
-          }
 
           data.smallImageKey = paused ? "pause" : "play";
           data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
-          data.details = "Guarda: " + videoName;
+          data.details = `Guarda: ${videoName}`;
           data.state = paused
-            ? videoEpisode + "° Special｜In pausa"
-            : videoEpisode + "° Special｜In riproduzione";
+            ? `${videoEpisode}° Special｜In pausa`
+            : `${videoEpisode}° Special｜In riproduzione`;
           presence.setActivity(data);
         } else {
           // Specials NEW
 
-          videoName = fullName.split(" Special ")[0];
-          videoEpisode = fullName.split(" Special ")[1];
-          if (videoName.includes(" Special")) {
+          [videoName] = fullName.split(" Special ");
+          [videoEpisode] = fullName.split(" Special ");
+          if (videoName.includes(" Special"))
             videoName = videoName.replace(" Special", "");
-          }
-          if (videoName.includes(" (ITA)")) {
+
+          if (videoName.includes(" (ITA)"))
             videoName = videoName.replace(" (ITA)", "");
-          }
 
           data.smallImageKey = paused ? "pause" : "play";
           data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
-          data.details = "Guarda: " + videoName;
+          data.details = `Guarda: ${videoName}`;
           data.state = paused
-            ? videoEpisode + "° Special｜In pausa"
-            : videoEpisode + "° Special｜In riproduzione";
+            ? `${videoEpisode}° Special｜In pausa`
+            : `${videoEpisode}° Special｜In riproduzione`;
           presence.setActivity(data);
         }
       } else if (fullName.includes(" Movie ")) {
         // Movies
 
-        videoName = fullName.split(" Movie ")[0];
-        if (videoName.includes(" Movie")) {
+        [videoName] = fullName.split(" Movie ");
+        if (videoName.includes(" Movie"))
           videoName = videoName.replace(" Movie", "");
-        }
-        if (videoName.includes(" (ITA)")) {
+
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        }
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
-        data.details = "Guarda: " + videoName;
+        data.details = `Guarda: ${videoName}`;
         data.state = paused ? "Film｜In pausa" : "Film｜In riproduzione";
         presence.setActivity(data);
       } else if (fullName.includes(" OVA ")) {
         //OVA
 
-        videoName = fullName.split(" OVA ")[0];
-        videoEpisode = fullName.split(" OVA ")[1];
-        if (videoName.includes(" OVA")) {
+        [videoName, videoEpisode] = fullName.split(" OVA ");
+        if (videoName.includes(" OVA"))
           videoName = videoName.replace(" OVA", "");
-        }
-        if (videoName.includes(" (ITA)")) {
+
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        }
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
-        data.details = "Guarda: " + videoName;
+        data.details = `Guarda: ${videoName}`;
         data.state = paused
-          ? videoEpisode + "° OVA｜In pausa"
-          : videoEpisode + "° OVA｜In riproduzione";
+          ? `${videoEpisode}° OVA｜In pausa`
+          : `${videoEpisode}° OVA｜In riproduzione`;
         presence.setActivity(data);
       } else {
         // Anime
 
-        videoName = fullName.split(" Episodio ")[0];
-        videoEpisode = fullName.split(" Episodio ")[1];
-        if (videoName.includes(" (ITA)")) {
+        [videoName, videoEpisode] = fullName.split(" Episodio ");
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        }
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
-        data.details = "Guarda: " + videoName;
+        data.details = `Guarda: ${videoName}`;
         data.state = paused
-          ? "Ep. " + videoEpisode + "｜In pausa"
-          : "Ep. " + videoEpisode + "｜In riproduzione";
+          ? `Ep. ${videoEpisode}｜In pausa`
+          : `Ep. ${videoEpisode}｜In riproduzione`;
         presence.setActivity(data);
       }
     } else {
@@ -345,89 +320,80 @@ presence.on("UpdateData", async () => {
         if (fullName.includes(" Specials Episodio ")) {
           // Specials OLD
 
-          videoName = fullName.split(" Specials Episodio ")[0];
-          videoEpisode = fullName.split(" Specials Episodio ")[1];
-          if (videoName.includes(" (ITA)")) {
+          [videoName, videoEpisode] = fullName.split(" Specials Episodio ");
+          if (videoName.includes(" (ITA)"))
             videoName = videoName.replace(" (ITA)", "");
-          }
 
           data.smallImageKey = paused ? "pause" : "play";
           data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
-          data.details = "Guarda: " + videoName;
+          data.details = `Guarda: ${videoName}`;
           data.state = paused
-            ? videoEpisode + "° Special｜In pausa"
-            : videoEpisode + "° Special｜In riproduzione";
+            ? `${videoEpisode}° Special｜In pausa`
+            : `${videoEpisode}° Special｜In riproduzione`;
           presence.setActivity(data);
         } else {
           // Specials NEW
 
-          videoName = fullName.split(" Special ")[0];
-          videoEpisode = fullName.split(" Special ")[1];
-          if (videoName.includes(" Special")) {
+          [videoName, videoEpisode] = fullName.split(" Special ");
+          if (videoName.includes(" Special"))
             videoName = videoName.replace(" Special", "");
-          }
-          if (videoName.includes(" (ITA)")) {
+
+          if (videoName.includes(" (ITA)"))
             videoName = videoName.replace(" (ITA)", "");
-          }
 
           data.smallImageKey = paused ? "pause" : "play";
           data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
-          data.details = "Guarda: " + videoName;
+          data.details = `Guarda: ${videoName}`;
           data.state = paused
-            ? videoEpisode + "° Special｜In pausa"
-            : videoEpisode + "° Special｜In riproduzione";
+            ? `${videoEpisode}° Special｜In pausa`
+            : `${videoEpisode}° Special｜In riproduzione`;
           presence.setActivity(data);
         }
       } else if (fullName.includes(" Movie ")) {
         // Movies
 
-        videoName = fullName.split(" Movie ")[0];
-        if (videoName.includes(" Movie")) {
+        [videoName] = fullName.split(" Movie ");
+        if (videoName.includes(" Movie"))
           videoName = videoName.replace(" Movie", "");
-        }
-        if (videoName.includes(" (ITA)")) {
+
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        }
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
-        data.details = "Guarda: " + videoName;
+        data.details = `Guarda: ${videoName}`;
         data.state = paused ? "Film｜In pausa" : "Film｜In riproduzione";
         presence.setActivity(data);
       } else if (fullName.includes(" OVA ")) {
         //OVA
 
-        videoName = fullName.split(" OVA ")[0];
-        videoEpisode = fullName.split(" OVA ")[1];
-        if (videoName.includes(" OVA")) {
+        [videoName, videoEpisode] = fullName.split(" OVA ");
+        if (videoName.includes(" OVA"))
           videoName = videoName.replace(" OVA", "");
-        }
-        if (videoName.includes(" (ITA)")) {
+
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        }
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
-        data.details = "Guarda: " + videoName;
+        data.details = `Guarda: ${videoName}`;
         data.state = paused
-          ? videoEpisode + "° OVA｜In pausa"
-          : videoEpisode + "° OVA｜In riproduzione";
+          ? `${videoEpisode}° OVA｜In pausa`
+          : `${videoEpisode}° OVA｜In riproduzione`;
         presence.setActivity(data);
       } else {
         // Anime
 
-        videoName = fullName.split(" Episodio ")[0];
-        videoEpisode = fullName.split(" Episodio ")[1];
-        if (videoName.includes(" (ITA)")) {
+        [videoName, videoEpisode] = fullName.split(" Episodio ");
+        if (videoName.includes(" (ITA)"))
           videoName = videoName.replace(" (ITA)", "");
-        }
 
         data.smallImageKey = paused ? "pause" : "play";
         data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
-        data.details = "Guarda: " + videoName;
+        data.details = `Guarda: ${videoName}`;
         data.state = paused
-          ? "Ep. " + videoEpisode + "｜In pausa"
-          : "Ep. " + videoEpisode + "｜In riproduzione";
+          ? `Ep. ${videoEpisode}｜In pausa`
+          : `Ep. ${videoEpisode}｜In riproduzione`;
         presence.setActivity(data);
       }
     }

@@ -1,4 +1,4 @@
-name: SE
+name: Syntax Enforcer
 on:
   schedule:
     - cron: 0 0 */3 * *
@@ -19,10 +19,8 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-      - name: Install Deps
+      - name: Prep SE
         run: yarn
-      - name: Compile Script
-        run: yarn se:compile
       - name: Start SE
         run: |
           git config --global core.quotePath false

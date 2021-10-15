@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "643777046731816962"
   }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/giris": "Giriş",
     "/kayit": "Kayıt",
     "/ilanlarim": "İlanlarım",
@@ -93,7 +93,10 @@ presence.on("UpdateData", async () => {
         "#container > div > div.categoryPageLeft > div:nth-child(1) > div.uiInlineBoxTitle > h1"
       );
 
-  if (page.includes("/kategori/") || (category && category.textContent != "")) {
+  if (
+    page.includes("/kategori/") ||
+    (category && category.textContent !== "")
+  ) {
     presence.setActivity({
       largeImageKey: "s-logo",
       details: "Bir kategoriye göz atıyor:",
@@ -102,7 +105,7 @@ presence.on("UpdateData", async () => {
     });
   } else if (
     page.includes("/kelime-ile-arama") ||
-    (searchingFor && searchingFor.textContent != "")
+    (searchingFor && searchingFor.textContent !== "")
   ) {
     presence.setActivity({
       largeImageKey: "s-logo",
@@ -126,10 +129,10 @@ presence.on("UpdateData", async () => {
       largeImageKey: "s-logo",
       details: "Bir ilana göz atıyor:",
       state:
-        stuff && stuff.textContent != ""
+        stuff && stuff.textContent !== ""
           ? `${stuff.textContent.trim()} ${
-              price && price.textContent != ""
-                ? "(" + price.textContent.trim().split(" ")[0] + " TL)"
+              price && price.textContent !== ""
+                ? `(${price.textContent.trim().split(" ")[0]} TL)`
                 : ""
             }`
           : "Belirsiz",
@@ -143,8 +146,8 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (
-    document.location.hostname == "banaozel.sahibinden.com" &&
-    document.location.pathname == "/"
+    document.location.hostname === "banaozel.sahibinden.com" &&
+    document.location.pathname === "/"
   ) {
     presence.setActivity({
       largeImageKey: "s-logo",

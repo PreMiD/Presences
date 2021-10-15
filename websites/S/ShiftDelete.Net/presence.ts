@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "643821029940133898"
   }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/": "Ana Sayfa",
     "/galeri": "Galeri",
     "/ukt": "UKT",
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
   const host = document.location.hostname,
     page = document.location.pathname;
 
-  if (host == "shiftdelete.net") {
+  if (host === "shiftdelete.net") {
     const title = document.querySelector(
         "body > div.wrapper > section > div > div.left.harber > h1"
       ),
@@ -73,9 +73,9 @@ presence.on("UpdateData", async () => {
       title &&
       author &&
       time &&
-      title.textContent != "" &&
-      author.textContent != "" &&
-      time.textContent != ""
+      title.textContent !== "" &&
+      author.textContent !== "" &&
+      time.textContent !== ""
     ) {
       presence.setActivity({
         largeImageKey: "sd-logo",
@@ -121,12 +121,12 @@ presence.on("UpdateData", async () => {
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     }
-  } else if (host == "forum.shiftdelete.net") {
+  } else if (host === "forum.shiftdelete.net") {
     const user = document.querySelector(
       "#top > div.p-body > div > div.p-body-main.p-body-main--withSidebar > div.p-body-content > div > div > div > div > div > div.memberHeader-main > div > h1 > span"
     );
 
-    if (page.includes("/members/") && user && user.textContent != "") {
+    if (page.includes("/members/") && user && user.textContent !== "") {
       presence.setActivity({
         largeImageKey: "sd-logo",
         details: "Bir kullanıcıya bakıyor:",
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "sd-logo",
         details: "Yeni bir forum gönderisi açıyor:",
         state:
-          newTitle && newTitle.value != ""
+          newTitle && newTitle.value !== ""
             ? newTitle.value
             : "Henüz Başlık Girilmemiş",
         startTimestamp: Math.floor(Date.now() / 1000)
@@ -173,16 +173,14 @@ presence.on("UpdateData", async () => {
       presence.setActivity({
         largeImageKey: "sd-logo",
         details:
-          title && title.textContent != ""
+          title && title.textContent !== ""
             ? title.textContent
             : "Belirsiz Gönderi",
         state: `Yazar: ${
-          author && author.textContent != ""
+          author && author.textContent !== ""
             ? author.textContent
             : "Belirsiz Gönderi Sahibi"
-        } ${
-          time && time.textContent != "" ? "(" + time.textContent + ")" : ""
-        }`,
+        } ${time && time.textContent !== "" ? `(${time.textContent})` : ""}`,
         smallImageKey: "forum",
         smallImageText: "Bir forum gönderisi okuyor.",
         startTimestamp: Math.floor(Date.now() / 1000)
@@ -196,7 +194,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "sd-logo",
         details: "Forumda bir gönderi arıyor:",
         state:
-          searchingFor && searchingFor.textContent != ""
+          searchingFor && searchingFor.textContent !== ""
             ? searchingFor.textContent
             : "Belirsiz",
         smallImageKey: "search",

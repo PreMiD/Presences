@@ -12,8 +12,8 @@ let title: string,
   seasonEpi: string,
   movTitle: string,
   vidMdTl: Element,
-  elapsed: number = undefined,
-  oldUrl: string = undefined;
+  elapsed: number,
+  oldUrl: string;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null;
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    href = window.location.href,
+    { href } = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -128,19 +128,13 @@ presence.on("UpdateData", async () => {
       document.querySelector('[type="application/ld+json"]').innerHTML
     );
     if (vidArea) {
-      if (path.includes("/movies")) {
-        movTitle = jsonData.name;
-      } else if (path.includes("/video")) {
+      if (path.includes("/movies")) movTitle = jsonData.name;
+      else if (path.includes("/video")) {
         title = jsonData.partOfSeries.name;
 
         seasonEpi =
-          "S" +
-          jsonData.partOfSeason.seasonNumber +
-          ":" +
-          "E" +
-          jsonData.episodeNumber +
-          " " +
-          jsonData.name;
+          `S${jsonData.partOfSeason.seasonNumber}:` +
+          `E${jsonData.episodeNumber} ${jsonData.name}`;
       }
 
       const content = seasonEpi,
@@ -157,15 +151,14 @@ presence.on("UpdateData", async () => {
 
       if (path.includes("/news/")) {
         presenceData.details = "Watching News Content";
-        presenceData.state = jsonData.partOfSeries.name + ": " + jsonData.name;
+        presenceData.state = `${jsonData.partOfSeries.name}: ${jsonData.name}`;
       }
 
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (video.paused) {
         delete presenceData.startTimestamp;

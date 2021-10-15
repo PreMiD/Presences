@@ -1,15 +1,14 @@
 const presence = new Presence({
-  clientId: "683031551193514047"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "683031551193514047"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Forum list";
   } else if (document.location.pathname.includes("/help")) {
@@ -122,10 +121,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Era Clear";
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

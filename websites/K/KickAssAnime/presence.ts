@@ -47,11 +47,11 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   oldLang: string = null;
 
 function checkIfMovie() {
-  nextEpisodeElement == null && previousEpisodeElement == null
+  nextEpisodeElement === null && previousEpisodeElement === null
     ? (isMovie = true)
-    : nextEpisodeElement !== null && previousEpisodeElement == null
+    : nextEpisodeElement !== null && previousEpisodeElement === null
     ? (isMovie = false)
-    : nextEpisodeElement == null && previousEpisodeElement !== null
+    : nextEpisodeElement === null && previousEpisodeElement !== null
     ? (isMovie = false)
     : nextEpisodeElement !== null && previousEpisodeElement !== null
     ? (isMovie = false)
@@ -59,7 +59,9 @@ function checkIfMovie() {
 
   !isMovie
     ? presence.getPageletiable("appData").then((appData) => {
-        isMovie = appData.anime.types?.find((x) => x.name === "Movie")
+        isMovie = appData.anime.types?.find(
+          (x: { name: string }) => x.name === "Movie"
+        )
           ? true
           : false;
       })
@@ -74,13 +76,9 @@ presence.on(
     video = data;
     playback = video.duration !== null ? true : false;
 
-    if (playback) {
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
-    }
+    if (playback) ({ currentTime, duration, paused } = video);
 
-    if (lastPlaybackState != playback) {
+    if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
       browsingStamp = Math.floor(Date.now() / 1000);
     }
@@ -100,9 +98,8 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -112,24 +109,22 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/episode")
   ) {
     checkIfMovie();
-    if (playback == true && !isNaN(duration)) {
+    if (playback === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
       currentAnimeTitle =
         document.querySelector("a.ka-url-wrapper").textContent;
-      currentAnimeEpisode = document.location.pathname
+      [, currentAnimeEpisode] = document.location.pathname
         .split("/")[3]
-        .split("-")[1];
+        .split("-");
       if (!isMovie) {
-        if (currentAnimeEpisode[0] == "0") {
+        if (currentAnimeEpisode[0] === "0")
           episodeNumber = currentAnimeEpisode.replace("0", "");
-        } else {
-          episodeNumber = currentAnimeEpisode;
-        }
+        else episodeNumber = currentAnimeEpisode;
+
         currentAnimeEpisode = `Episode ${episodeNumber}`;
 
         if (buttons) {
@@ -171,15 +166,14 @@ presence.on("UpdateData", async () => {
     } else {
       currentAnimeTitle =
         document.querySelector("a.ka-url-wrapper").textContent;
-      currentAnimeEpisode = document.location.pathname
+      [, currentAnimeEpisode] = document.location.pathname
         .split("/")[3]
-        .split("-")[1];
+        .split("-");
       if (!isMovie) {
-        if (currentAnimeEpisode[0] == "0") {
+        if (currentAnimeEpisode[0] === "0")
           episodeNumber = currentAnimeEpisode.replace("0", "");
-        } else {
-          episodeNumber = currentAnimeEpisode;
-        }
+        else episodeNumber = currentAnimeEpisode;
+
         currentAnimeEpisode = `Episode ${episodeNumber}`;
 
         if (buttons) {
@@ -221,7 +215,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (
     document.location.pathname.includes("/anime/") &&
-    document.location.pathname.includes("/episode") == false
+    document.location.pathname.includes("/episode") === false
   ) {
     currentAnimeTitle = document.querySelector("h1.title").textContent;
     presenceData.details = "Looking at:";
@@ -252,7 +246,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Looking at:";
     presenceData.state = "Watch History";
     presenceData.smallImageKey = "searching";
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Looking at:";
     presenceData.state = "Home Page";
     presenceData.smallImageKey = "searching";

@@ -77,8 +77,8 @@ presence.on("UpdateData", async () => {
     browsingStamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -99,8 +99,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (video.paused) {
         delete presenceData.startTimestamp;
@@ -242,7 +241,7 @@ presence.on("UpdateData", async () => {
 
       if (!showButtons) delete presenceData.buttons;
 
-      if (presenceData.details == null) {
+      if (!presenceData.details) {
         presence.setActivity();
         presence.setTrayTitle();
       } else presence.setActivity(presenceData, !video.paused);

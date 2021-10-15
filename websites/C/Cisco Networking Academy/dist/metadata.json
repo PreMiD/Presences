@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Cisco Networking Academy",
+  "author": {
+    "name": "YJJcoolcool",
+    "id": "300929818231308288"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/pvz4KSf.png",
+  "thumbnail": "https://i.imgur.com/wSSBD5e.png",
+  "version": "1.0.3",
+  "color": "#005073",
+  "tags": [
+    "netacad",
+    "cisco-netacad",
+    "cisco",
+    "cisco-networking",
+    "cisco-networking-academy"
+  ],
+  "url": [
+    "www.netacad.com",
+    "lms.netacad.com",
+    "assessment.netacad.net",
+    "contenthub.netacad.com"
+  ],
+  "description": {
+    "en": "Cisco Networking Academy is a global IT and cybersecurity education platform."
+  }
+}

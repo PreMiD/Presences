@@ -12,20 +12,6 @@ let video = {
   paused: true
 };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on(
   "iFrameData",
   (data: { duration: number; currentTime: number; paused: boolean }) => {
@@ -38,8 +24,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "m4"
   };
 
-  if (video != null && !isNaN(video.duration) && video.duration > 0) {
-    const timestamps = getTimestamps(
+  if (video !== null && !isNaN(video.duration) && video.duration > 0) {
+    [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -53,9 +39,7 @@ presence.on("UpdateData", async () => {
     (data.smallImageKey = video.paused ? "pause" : "play"),
       (data.smallImageText = video.paused
         ? (await strings).pause
-        : (await strings).play),
-      (data.startTimestamp = timestamps[0]),
-      (data.endTimestamp = timestamps[1]);
+        : (await strings).play);
 
     if (video.paused) {
       delete data.startTimestamp;

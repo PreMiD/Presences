@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "Genie Music",
   "author": {
     "name": "건유1019",
@@ -8,7 +8,7 @@
   "category": "music",
   "logo": "https://i.imgur.com/A9rYYB4.png",
   "thumbnail": "https://i.imgur.com/7dYcjLS.png",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "color": "#0096FF",
   "tags": [
     "korean",

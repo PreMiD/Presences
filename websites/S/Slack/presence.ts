@@ -1,10 +1,13 @@
-var presence = new Presence({
-  clientId: "617113314572369973" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var group: any, typing: any, chat: any, user: any, search: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "617113314572369973" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let group: HTMLElement,
+  typing: HTMLElement,
+  chat: HTMLElement,
+  user: HTMLElement,
+  search: HTMLElement,
+  path: string[];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,7 +16,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.hostname == "app.slack.com") {
+  if (document.location.hostname === "app.slack.com") {
     group = document.querySelector(
       "#team-menu-trigger > div.p-classic_nav__team_header__team > div.p-classic_nav__team_header__team__name"
     );
@@ -27,16 +30,14 @@ presence.on("UpdateData", async () => {
     if (user !== null) {
       if (!typing.className.includes("ql-blank")) {
         presenceData.details = "Typing in DMs to:";
-        presenceData.state =
-          user.innerText + " (Workspace: " + group.innerText + ")";
+        presenceData.state = `${user.innerText} (Workspace: ${group.innerText})`;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading DMs from:";
-        presenceData.state =
-          user.innerText + " (Workspace: " + group.innerText + ")";
+        presenceData.state = `${user.innerText} (Workspace: ${group.innerText})`;
 
         presenceData.smallImageKey = "reading";
 
@@ -45,16 +46,14 @@ presence.on("UpdateData", async () => {
     } else if (chat !== null) {
       if (!typing.className.includes("ql-blank")) {
         presenceData.details = "Typing in channel:";
-        presenceData.state =
-          "#" + chat.innerText + " (Workspace: " + group.innerText + ")";
+        presenceData.state = `#${chat.innerText} (Workspace: ${group.innerText})`;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading channel messages:";
-        presenceData.state =
-          "#" + chat.innerText + " (Workspace: " + group.innerText + ")";
+        presenceData.state = `#${chat.innerText} (Workspace: ${group.innerText})`;
 
         presenceData.smallImageKey = "reading";
 
@@ -65,56 +64,56 @@ presence.on("UpdateData", async () => {
       presence.setTrayTitle();
     }
   } else if (
-    document.location.hostname == "slackhq.com" &&
+    document.location.hostname === "slackhq.com" &&
     document.location.pathname.includes("/search/")
   ) {
-    search = document.location.pathname.split("/", 7);
+    path = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = "Searching for: " + search[2];
+    presenceData.state = `Searching for: ${path[2]}`;
 
     presenceData.smallImageKey = "search";
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slackhq.com" &&
+    document.location.hostname === "slackhq.com" &&
     document.location.pathname.includes("/role/")
   ) {
-    search = document.location.pathname.split("/", 7);
+    path = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = "Searching with role: " + search[2];
+    presenceData.state = `Searching with role: ${path[2]}`;
 
     presenceData.smallImageKey = "search";
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slackhq.com" &&
+    document.location.hostname === "slackhq.com" &&
     document.location.pathname.includes("/tags/")
   ) {
-    search = document.location.pathname.split("/", 7);
+    path = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = "Searching with tag: " + search[2];
+    presenceData.state = `Searching with tag: ${path[2]}`;
 
     presenceData.smallImageKey = "search";
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slackhq.com" &&
+    document.location.hostname === "slackhq.com" &&
     document.location.pathname.includes("/categories/")
   ) {
-    search = document.location.pathname.split("/", 7);
+    path = document.location.pathname.split("/", 7);
     presenceData.details = "Slack Blog";
-    presenceData.state = "Searching with category: " + search[2];
+    presenceData.state = `Searching with category: ${path[2]}`;
 
     presenceData.smallImageKey = "search";
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "slackhq.com") {
+  } else if (document.location.hostname === "slackhq.com") {
     group = document.querySelector(
       "#main > article > header > div > div > div > h1"
     );
     if (group !== null) {
       presenceData.details = "Slack Blog";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -128,45 +127,45 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
   } else if (
-    document.location.hostname == "get.slack.help" &&
+    document.location.hostname === "get.slack.help" &&
     document.location.pathname.includes("/categories/")
   ) {
     search = document.querySelector(
       "body > main > section > div.banner_container > h1"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = "Browsing through category: " + search.innerText;
+    presenceData.state = `Browsing through category: ${search.innerText}`;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "get.slack.help" &&
+    document.location.hostname === "get.slack.help" &&
     document.location.pathname.includes("/articles/")
   ) {
     search = document.querySelector(
       "body > main > div.article_page.has_sidenav > div.article_container > div.content_col > h1"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = "Reading article: " + search.innerText;
+    presenceData.state = `Reading article: ${search.innerText}`;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "get.slack.help" &&
+    document.location.hostname === "get.slack.help" &&
     document.location.pathname.includes("/search")
   ) {
     search = document.querySelector(
       "body > main > section.banner.banner_search_results > div > h1 > span.hidden.query_val"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = "Searching for: " + search.innerText;
+    presenceData.state = `Searching for: ${search.innerText}`;
 
     presenceData.smallImageKey = "search";
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "get.slack.help") {
+  } else if (document.location.hostname === "get.slack.help") {
     presenceData.details = "Slack Help Center";
     presenceData.state = "Home page";
 
@@ -174,7 +173,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "api.slack.com" &&
+    document.location.hostname === "api.slack.com" &&
     document.location.pathname.includes("/apps")
   ) {
     presenceData.details = "Slack api";
@@ -183,11 +182,11 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "api.slack.com") {
+  } else if (document.location.hostname === "api.slack.com") {
     group = document.querySelector("#api_main_content > h1");
     if (group !== null) {
       presenceData.details = "Slack api";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -200,7 +199,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "slackdemo.com") {
+  } else if (document.location.hostname === "slackdemo.com") {
     presenceData.details = "Slack Demo";
     presenceData.state = "Trying out Slack";
 
@@ -208,7 +207,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/pricing")
   ) {
     presenceData.details = "Slack";
@@ -218,7 +217,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/enterprise")
   ) {
     presenceData.details = "Slack";
@@ -228,14 +227,14 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/resources")
   ) {
-    group = document.location.pathname.split("/", 9);
-    if (group[4] !== null) {
+    path = document.location.pathname.split("/", 9);
+    if (path[4] !== null) {
       group = document.querySelector("#main > div:nth-child(1) > h1");
       presenceData.details = "Slack";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -245,14 +244,14 @@ presence.on("UpdateData", async () => {
       presence.setTrayTitle();
     }
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/slack-tips")
   ) {
-    group = document.location.pathname.split("/", 9);
-    if (group[4] !== null) {
+    path = document.location.pathname.split("/", 9);
+    if (path[4] !== null) {
       group = document.querySelector("#main > section > div > header > h1");
       presenceData.details = "Slack";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -262,16 +261,16 @@ presence.on("UpdateData", async () => {
       presence.setTrayTitle();
     }
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/solutions")
   ) {
-    group = document.location.pathname.split("/", 9);
-    if (group[4] !== null) {
+    path = document.location.pathname.split("/", 9);
+    if (path[4] !== null) {
       group = document.querySelector(
         "#main > section.c-billboard > div > header > h1"
       );
       presenceData.details = "Slack";
-      presenceData.state = "Reading article: " + group.innerText;
+      presenceData.state = `Reading article: ${group.innerText}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -281,7 +280,7 @@ presence.on("UpdateData", async () => {
       presence.setTrayTitle();
     }
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/features")
   ) {
     presenceData.details = "Slack";
@@ -291,7 +290,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/security")
   ) {
     presenceData.details = "Slack";
@@ -301,7 +300,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/customer-stories")
   ) {
     presenceData.details = "Slack";
@@ -311,7 +310,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/about")
   ) {
     presenceData.details = "Slack";
@@ -321,7 +320,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/partners")
   ) {
     presenceData.details = "Slack";
@@ -331,7 +330,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/newsroom")
   ) {
     presenceData.details = "Slack";
@@ -341,7 +340,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/media-kit")
   ) {
     presenceData.details = "Slack";
@@ -351,7 +350,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/careers")
   ) {
     presenceData.details = "Slack";
@@ -361,7 +360,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "slack.com" &&
+    document.location.hostname === "slack.com" &&
     document.location.pathname.includes("/intl")
   ) {
     presenceData.details = "Slack";

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Alexx",
     "id": "604182077088202784"
@@ -14,7 +15,7 @@
     "nl": "Edgenuity is een online lesprogramma dat wordt gebruikt om leerlingen via online methodes te leren wat ze moeten leren."
   },
   "service": "Edgenuity",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/FDv2y9V.png",
   "thumbnail": "https://i.imgur.com/sEMMqUf.png",
   "color": "#FF0000",

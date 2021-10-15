@@ -45,7 +45,7 @@ presence.on("UpdateData", async function () {
       showButtons: await presence.getSetting("showButtons")
     },
     urlpath = window.location.pathname.split("/"),
-    video = document.querySelector("div video");
+    video: HTMLVideoElement = document.querySelector("div video");
 
   if (!oldLang || oldLang !== newLang) {
     oldLang = newLang;
@@ -58,16 +58,19 @@ presence.on("UpdateData", async function () {
   ) {
     if (document.querySelector(".lk71lm-0.htJLsh")) {
       presenceData.details = lang.searching;
-      presenceData.state = document.querySelector(".search-input").value;
+      presenceData.state = (
+        document.querySelector(".search-input") as HTMLElement
+      ).textContent;
     } else if (
       (urlpath[1] === "" || document.location.pathname.includes("/#home")) &&
-      urlpath[2] != ""
-    ) {
+      urlpath[2] !== ""
+    )
       presenceData.details = lang.browsing;
-    } else if (urlpath[1] === "compilation") {
+    else if (urlpath[1] === "compilation") {
       const compilation = document.querySelector(".artLogo");
       presenceData.details = "Viewing Compilation:";
-      if (compilation) presenceData.state = compilation.alt;
+      if (compilation)
+        presenceData.state = (compilation as HTMLImageElement).alt;
       if (!compilation)
         presenceData.state = document.querySelector(".hXdaOG").textContent;
 
@@ -75,14 +78,14 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: "Watch Compilation",
-            url: "https://www.joyn.de/compilation/" + urlpath[2]
+            url: `https://www.joyn.de/compilation/${urlpath[2]}`
           }
         ];
       }
     } else if (urlpath[1] === "filme") {
       const film = document.querySelector(".artLogo");
       presenceData.details = lang.viewMovie;
-      if (film) presenceData.state = film.alt;
+      if (film) presenceData.state = (film as HTMLImageElement).alt;
       if (!film)
         presenceData.state = document.querySelector(".hXdaOG").textContent;
 
@@ -90,14 +93,14 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: lang.watchMovie,
-            url: "https://www.joyn.de/filme/" + urlpath[2]
+            url: `https://www.joyn.de/filme/${urlpath[2]}`
           }
         ];
       }
     } else if (urlpath[1] === "serien") {
       const serie = document.querySelector(".artLogo");
       presenceData.details = "Viewing Series:";
-      if (serie) presenceData.state = serie.alt;
+      if (serie) presenceData.state = (serie as HTMLImageElement).alt;
       if (!serie)
         presenceData.state = document.querySelector(".hXdaOG").textContent;
 
@@ -105,32 +108,32 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: lang.watchSeries,
-            url: "https://www.joyn.de/serien/" + urlpath[2]
+            url: `https://www.joyn.de/serien/${urlpath[2]}`
           }
         ];
       }
     } else if (
-      urlpath[1] != "play" &&
+      urlpath[1] !== "play" &&
       (document.location.pathname.includes("/serien") ||
         document.location.pathname.includes("/filme") ||
         document.location.pathname.includes("/sport"))
-    ) {
+    )
       presenceData.details = lang.browsing;
-    } else if (urlpath[1] === "channels") {
+    else if (urlpath[1] === "channels") {
       presenceData.details = lang.browsing;
       presenceData.state = document.querySelector(".bISbKZ").textContent;
     } else if (urlpath[1] === "play" && urlpath[2] === "filme") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.title.replace("streamen | Joyn", "");
       presenceData.state = "Movie";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;
@@ -142,22 +145,22 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: lang.watchMovie,
-            url: "https://www.joyn.de/filme/" + urlpath[3]
+            url: `https://www.joyn.de/filme/${urlpath[3]}`
           }
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "serien") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.title.replace("streamen", "");
       presenceData.state = "Series";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;
@@ -170,22 +173,22 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: lang.watchSeries,
-            url: "https://www.joyn.de/serien/" + urlpath[3]
+            url: `https://www.joyn.de/serien/${urlpath[3]}`
           }
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "trailer") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.title.replace("Trailer | Joyn", "");
       presenceData.state = "Trailer";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;
@@ -211,17 +214,17 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "compilation") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.title.replace("| Joyn", "");
       presenceData.state = "Compilation";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;
@@ -234,14 +237,14 @@ presence.on("UpdateData", async function () {
         presenceData.buttons = [
           {
             label: "Watch Compilation",
-            url: "https://www.joyn.de/compilation/" + urlpath[3]
+            url: `https://www.joyn.de/compilation/${urlpath[3]}`
           }
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "sport") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
+      const videoStartTime = Date.now(),
+        videoEndTime =
+          Math.floor(videoStartTime / 1000) -
           video.currentTime +
           video.duration;
       presenceData.details = document.querySelector(
@@ -250,8 +253,8 @@ presence.on("UpdateData", async function () {
       presenceData.state = "Sport";
       if (!video.paused) {
         if (setting.timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
+          presenceData.startTimestamp = videoStartTime;
+          presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = lang.play;

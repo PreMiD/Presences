@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "icon"
   };
 
-  if (document.location.hostname == "milkandcookies.games") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "milkandcookies.games") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viendo la página principal";
     } else if (document.location.pathname.includes("/awards")) {
@@ -20,10 +20,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viendo la sección de Postulaciones";
     }
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

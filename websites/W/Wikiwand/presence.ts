@@ -51,11 +51,10 @@ const updateCallback = {
     title = titleFromURL();
   }
 
-  if (currentPath[0] === "") {
-    presenceData.details = "On the main page";
-  } else if (document.querySelector(".error_content")) {
+  if (currentPath[0] === "") presenceData.details = "On the main page";
+  else if (document.querySelector(".error_content"))
     presenceData.details = "On a non-existent page";
-  } else if (title) {
+  else if (title) {
     presenceData.details = "Reading a wiki page";
     presenceData.state = title;
     if (currentPath[0] !== "en") presenceData.state += ` (${currentPath[0]})`;

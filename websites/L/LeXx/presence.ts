@@ -8,8 +8,8 @@ presence.on("UpdateData", () => {
     largeImageKey: "lexx"
   };
 
-  if (document.location.hostname == "lexx.app") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "lexx.app") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the homepage";
     } else if (document.location.pathname.includes("/legal")) {
@@ -43,24 +43,22 @@ presence.on("UpdateData", () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the homepage";
     }
-  } else if (document.location.hostname == "beta.lexx.app") {
+  } else if (document.location.hostname === "beta.lexx.app") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the beta page";
-  } else if (document.location.hostname == "alpha.lexx.app") {
+  } else if (document.location.hostname === "alpha.lexx.app") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the alpha page";
-  } else if (document.location.hostname == "dev.lexx.app") {
+  } else if (document.location.hostname === "dev.lexx.app") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the development page";
-  } else if (document.location.hostname == "status.lexx.app") {
+  } else if (document.location.hostname === "status.lexx.app") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the status page";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

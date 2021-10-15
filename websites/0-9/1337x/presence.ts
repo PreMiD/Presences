@@ -1,11 +1,8 @@
-var presence = new Presence({
-  clientId: "636588416854917130"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any;
-var search: any;
+const presence = new Presence({
+    clientId: "636588416854917130"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,8 +10,8 @@ presence.on("UpdateData", async () => {
   };
 
   if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/home/"
+    document.location.pathname === "/" ||
+    document.location.pathname === "/home/"
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
@@ -99,10 +96,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

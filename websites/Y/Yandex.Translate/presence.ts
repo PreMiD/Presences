@@ -10,18 +10,19 @@ presence.on("UpdateData", async () => {
     largeImageKey: "yt"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     typet = "Text";
     from = document.querySelector("#srcLangButton").innerHTML;
     to = document.querySelector("#dstLangButton").innerHTML;
   } else if (
-    document.location.pathname == "/translate" ||
-    document.location.pathname == "/doc"
+    document.location.pathname === "/translate" ||
+    document.location.pathname === "/doc"
   ) {
-    typet = document.location.pathname == "/translate" ? "Website" : "Document";
+    typet =
+      document.location.pathname === "/translate" ? "Website" : "Document";
     from = document.querySelector("#srcLangButton > #sourceLangText").innerHTML;
     to = document.querySelector("#dstLangButton > #targetLangText").innerHTML;
-  } else if (document.location.pathname == "/ocr") {
+  } else if (document.location.pathname === "/ocr") {
     typet = "Image";
     from = document.querySelector("#sourceLangButton").innerHTML;
     to = document.querySelector("#targetLangButton").innerHTML;
@@ -35,7 +36,7 @@ presence.on("UpdateData", async () => {
     showType: boolean = await presence.getSetting("type");
 
   presenceData.startTimestamp = showTime ? browsingStamp : null;
-  if (presenceData.startTimestamp == null) delete presenceData.startTimestamp;
+  if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
 
   if (showType) {
     presenceData.details = `Translating: ${typet}`;

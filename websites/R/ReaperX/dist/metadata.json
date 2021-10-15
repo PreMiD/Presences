@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Mxgic",
     "id": "237747645790027780"
@@ -10,7 +11,7 @@
     "nl": "ReaperX is een Robux Shop (R$) met onze professionele service, onze service is de meest populaire en laagst geprijsdeReaperX is een Robux Shop (R$) met onze professionele service, onze service is de meest populaire en laagst geprijsde"
   },
   "url": "reaperx.in.th",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "logo": "https://i.imgur.com/tvquFhV.jpeg",
   "thumbnail": "https://i.imgur.com/ANijzlW.png",
   "color": "#d61515",

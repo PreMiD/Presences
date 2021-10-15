@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Aesthetic",
     "id": "268914030528299008"
@@ -17,7 +17,7 @@
     "nl": "In tegenstelling tot veel andere websites heeft AnimeKisa een klein aantal advertenties. Vind streambare servers en bekijk de anime waar je van houdt, ondertiteld of nagesynchroniseerd in HD."
   },
   "url": "animekisa.tv",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "iframe": true,
   "logo": "https://i.imgur.com/ac0KCKY.png",
   "thumbnail": "https://i.imgur.com/mgcsfhc.png",

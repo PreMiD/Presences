@@ -19,9 +19,8 @@ presence.on("UpdateData", () => {
       .trim();
     presenceData.details = "Viewing a genre";
     presenceData.state = genre;
-  } else if (path("/explore")) {
-    presenceData.details = "Exploring lyrics";
-  } else if (path("/lyrics/")) {
+  } else if (path("/explore")) presenceData.details = "Exploring lyrics";
+  else if (path("/lyrics/")) {
     const name = document
         .querySelector("#site h1")
         .textContent.replace("Lyrics", ""),
@@ -29,9 +28,8 @@ presence.on("UpdateData", () => {
     presenceData.details = name;
     presenceData.state = artist;
     presenceData.smallImageKey = "reading";
-  } else if (path("/community")) {
-    presenceData.details = "Viewing community";
-  } else if (path("/profile/")) {
+  } else if (path("/community")) presenceData.details = "Viewing community";
+  else if (path("/profile/")) {
     const user = document.querySelector("h1").textContent;
     presenceData.details = "Viewing the profile:";
     presenceData.state = user;

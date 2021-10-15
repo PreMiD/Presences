@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 let points: string, progress: string;
 presence.on("iFrameData", (data: IFrameData) => {
-  (points = data.info.points), (progress = data.info.progress);
+  ({ points, progress } = data.info);
 });
 
 presence.on("UpdateData", async () => {
@@ -14,12 +14,10 @@ presence.on("UpdateData", async () => {
   presenceData.details = `Contributing to: ${points}`;
   presenceData.state = `Project Progress: ${progress}`;
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
 
 interface IFrameData {

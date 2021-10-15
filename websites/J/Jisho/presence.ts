@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "715912352561627246"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "715912352561627246"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -16,24 +15,24 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Home";
     } else if (document.location.pathname.startsWith("/search")) {
-      if (document.querySelector("#result_area > div.kanji > div") == null) {
+      if (document.querySelector("#result_area > div.kanji > div") === null) {
         presenceData.details = "Searching:";
         presenceData.state = decodeURIComponent(
           document.location.pathname.substr(8)
         );
-        console.log("searching");
+        presence.info("searching");
       } else {
         presenceData.details = "Viewing a kanji:";
         const kanji = document.querySelector(
-          "#result_area > div.kanji > div > div > div > div > h1.character"
-        ).innerHTML;
-        const meaning = document
-          .querySelector(
-            "#result_area > div.kanji > div > div > div > div > div.kanji-details__main-meanings"
-          )
-          .innerHTML.trim();
-        presenceData.state = kanji + " - " + meaning;
-        console.log(kanji + " - " + meaning);
+            "#result_area > div.kanji > div > div > div > div > h1.character"
+          ).innerHTML,
+          meaning = document
+            .querySelector(
+              "#result_area > div.kanji > div > div > div > div > div.kanji-details__main-meanings"
+            )
+            .innerHTML.trim();
+        presenceData.state = `${kanji} - ${meaning}`;
+        presence.info(`${kanji} - ${meaning}`);
       }
     } else if (document.location.pathname.startsWith("/word")) {
       presenceData.details = "Viewing a word:";
@@ -67,11 +66,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "About";
     }
-  } else if (document.location.hostname === "classic.jisho.org") {
+  } else if (document.location.hostname === "classic.jisho.org")
     presenceData.details = "Jisho Classic";
-  }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     //This will fire if you do not set presence details
     presence.setTrayTitle(); //Clears the tray title for mac users
     presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/

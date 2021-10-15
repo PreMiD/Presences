@@ -12,7 +12,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const live: boolean =
-      document.querySelector(".MovieTitle__Title-s181dg2v-4") != null,
+      document.querySelector(".MovieTitle__Title-s181dg2v-4") !== null,
     video: HTMLVideoElement = document.querySelector(
       live ? ".openrec-video" : "#capture-play"
     );
@@ -47,8 +47,7 @@ presence.on("UpdateData", async () => {
       : video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
     presence.setTrayTitle(video.paused ? "" : title.textContent);
 
@@ -57,9 +56,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (title !== null && game !== null) {
+    if (title !== null && game !== null)
       presence.setActivity(presenceData, !video.paused);
-    }
   } else {
     const pageData: PresenceData = {
       details: "Browsing..",

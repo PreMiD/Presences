@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "619963616489242645"
 });
 
@@ -11,11 +11,8 @@ presence.on("UpdateData", async () => {
         document.getElementsByClassName("page-header__title")[0].textContent;
     } catch (err) {
       const errCode = "KMNNWIKI_WIKIEN_GETPAGETITLE";
-      console.log(
-        "An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   " +
-          errCode +
-          "   :::   " +
-          err
+      presence.error(
+        `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
       );
     }
     const presenceData: PresenceData = {

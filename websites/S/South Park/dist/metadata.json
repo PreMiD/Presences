@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Slowlife",
     "id": "374905512661221377"
@@ -15,7 +15,7 @@
     "es": "South Park. Cada episodio de este programa galardonado y aclamado por las críticas está repleto de aventuras inolvidables, una sátira grosera y absurdidad graciosa."
   },
   "service": "South Park",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/h6b3eEW.jpg",
   "thumbnail": "https://i.imgur.com/No75MzW.jpg",
   "color": "#b6122a",

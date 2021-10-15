@@ -19,17 +19,14 @@ presence.on("UpdateData", async () => {
       categ = categspan.getElementsByClassName(
         "gf-outlined-menu-button-content"
       )[0].textContent;
-    if (categ === " Categories ") {
-      presenceData.state = "All categories";
-    } else {
+    if (categ === " Categories ") presenceData.state = "All categories";
+    else {
       if (categ.includes("+")) {
         const UrlResearch = new URL(document.location.href).searchParams,
           Urlcategories = UrlResearch.get("category"),
           reg = /,/gi;
-        presenceData.state = "Categories: " + Urlcategories.replace(reg, ", ");
-      } else {
-        presenceData.state = "Category: " + categ;
-      }
+        presenceData.state = `Categories: ${Urlcategories.replace(reg, ", ")}`;
+      } else presenceData.state = `Category: ${categ}`;
     }
     presenceData.details = "Browsing fonts";
   } else if (path.includes("/specimen")) {
@@ -38,8 +35,8 @@ presence.on("UpdateData", async () => {
       ).textContent,
       fontMenu = document.getElementsByClassName("gf-nav__link--active")[0]
         .textContent;
-    presenceData.details = "Looking at font: " + fontName;
-    presenceData.state = 'Viewing the "' + fontMenu.trim() + '" tab';
+    presenceData.details = `Looking at font: ${fontName}`;
+    presenceData.state = `Viewing the "${fontMenu.trim()}" tab`;
     if (showButton) {
       presenceData.buttons = [
         {
@@ -48,9 +45,9 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-  } else if (path === "/featured") {
+  } else if (path === "/featured")
     presenceData.details = "Looking at the featured fonts";
-  } else if (path.includes("/featured/")) {
+  else if (path.includes("/featured/")) {
     let featuredFonts;
     if (document.getElementsByClassName("gmat-headline-1")[0]) {
       featuredFonts =
@@ -91,14 +88,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Searching for icons";
       presenceData.state = `Search query: ${iconSearch}`;
     }
-  } else if (path === "/about") {
-    presenceData.details = "Viewing the about page";
-  }
+  } else if (path === "/about") presenceData.details = "Viewing the about page";
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

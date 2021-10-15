@@ -9,114 +9,97 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (window.location.hostname.startsWith("status")) {
+  if (window.location.hostname.startsWith("status"))
     presenceData.details = "Status Page";
-  } else {
-    if (window.location.pathname === "/") {
-      presenceData.details = "Home Page";
-    } else if (
-      window.location.pathname.startsWith("/markets/cryptocurrencies")
-    ) {
+  else {
+    if (window.location.pathname === "/") presenceData.details = "Home Page";
+    else if (window.location.pathname.startsWith("/markets/cryptocurrencies")) {
       presenceData.details = "Cryptocurrency Market";
-      if (window.location.pathname.includes("/ideas")) {
+      if (window.location.pathname.includes("/ideas"))
         presenceData.state = "Ideas";
-      } else if (window.location.pathname.includes("/prices-all")) {
+      else if (window.location.pathname.includes("/prices-all"))
         presenceData.state = "Prices";
-      } else if (window.location.pathname.includes("/prices")) {
-        presenceData.state =
-          "Prices: " +
-          document
-            .querySelector(
-              "#js-category-content > header > div > div.tv-category-header__title-line > div > h1"
-            )
-            .textContent.trim();
-      } else if (window.location.pathname.includes("/global-charts")) {
+      else if (window.location.pathname.includes("/prices")) {
+        presenceData.state = `Prices: ${document
+          .querySelector(
+            "#js-category-content > header > div > div.tv-category-header__title-line > div > h1"
+          )
+          .textContent.trim()}`;
+      } else if (window.location.pathname.includes("/global-charts"))
         presenceData.state = "Market Cap";
-      } else {
-        presenceData.state = "Overview";
-      }
+      else presenceData.state = "Overview";
     } else if (window.location.pathname.startsWith("/markets/currencies")) {
       presenceData.details = "Forex Market";
-      if (window.location.pathname.includes("/ideas")) {
+      if (window.location.pathname.includes("/ideas"))
         presenceData.state = "Ideas";
-      } else if (window.location.pathname.includes("/rates-all")) {
+      else if (window.location.pathname.includes("/rates-all"))
         presenceData.state = "Rates";
-      } else if (window.location.pathname.includes("/rates-major")) {
+      else if (window.location.pathname.includes("/rates-major"))
         presenceData.state = "Rates: Major";
-      } else if (window.location.pathname.includes("/rates-minor")) {
+      else if (window.location.pathname.includes("/rates-minor"))
         presenceData.state = "Rates: Minor";
-      } else if (window.location.pathname.includes("/rates-exotic")) {
+      else if (window.location.pathname.includes("/rates-exotic"))
         presenceData.state = "Rates: Exotic";
-      } else if (window.location.pathname.includes("/rates-americas")) {
+      else if (window.location.pathname.includes("/rates-americas"))
         presenceData.state = "Rates: Americas";
-      } else if (window.location.pathname.includes("/rates-europe")) {
+      else if (window.location.pathname.includes("/rates-europe"))
         presenceData.state = "Rates: Europe";
-      } else if (window.location.pathname.includes("/rates-asia")) {
+      else if (window.location.pathname.includes("/rates-asia"))
         presenceData.state = "Rates: Asia";
-      } else if (window.location.pathname.includes("/rates-pacific")) {
+      else if (window.location.pathname.includes("/rates-pacific"))
         presenceData.state = "Rates: Pacific";
-      } else if (window.location.pathname.includes("/rates-middle-east")) {
+      else if (window.location.pathname.includes("/rates-middle-east"))
         presenceData.state = "Rates: Middle East";
-      } else if (window.location.pathname.includes("/rates-africa")) {
+      else if (window.location.pathname.includes("/rates-africa"))
         presenceData.state = "Rates: Africa";
-      } else if (window.location.pathname.includes("/cross-rates")) {
+      else if (window.location.pathname.includes("/cross-rates"))
         presenceData.state = "Cross Rates";
-      } else if (window.location.pathname.includes("/indices")) {
+      else if (window.location.pathname.includes("/indices"))
         presenceData.state = "Currency Indices";
-      } else if (window.location.pathname.includes("/economic-calendar")) {
+      else if (window.location.pathname.includes("/economic-calendar"))
         presenceData.state = "Economic Calendar";
-      } else {
-        presenceData.state = "Overview";
-      }
+      else presenceData.state = "Overview";
     } else if (window.location.pathname.startsWith("/markets/stocks")) {
       presenceData.details = document
         .querySelector(
           "#js-category-content > header > div > div.tv-category-header__title-line > div > span > span > h1"
         )
         .textContent.trim();
-      if (window.location.pathname.includes("/ideas")) {
+      if (window.location.pathname.includes("/ideas"))
         presenceData.state = "Ideas";
-      } else if (window.location.pathname.includes("/market-movers")) {
+      else if (window.location.pathname.includes("/market-movers"))
         presenceData.state = "Market Movers";
-      } else if (window.location.pathname.includes("/highs-and-lows")) {
+      else if (window.location.pathname.includes("/highs-and-lows"))
         presenceData.state = "Highs & Lows";
-      } else if (window.location.pathname.includes("/earnings")) {
+      else if (window.location.pathname.includes("/earnings"))
         presenceData.state = "Earnings Calendar";
-      } else if (window.location.pathname.includes("/sectorandindustry")) {
+      else if (window.location.pathname.includes("/sectorandindustry"))
         presenceData.state = "Sector & Industry";
-      } else {
-        presenceData.state = "Overview";
-      }
+      else presenceData.state = "Overview";
     } else if (window.location.pathname.startsWith("/markets/indices")) {
       presenceData.details = "Market Indices";
-      if (window.location.pathname.includes("/ideas")) {
+      if (window.location.pathname.includes("/ideas"))
         presenceData.state = "Ideas";
-      } else if (window.location.pathname.includes("/quotes")) {
+      else if (window.location.pathname.includes("/quotes"))
         presenceData.state = "Quotes";
-      } else {
-        presenceData.state = "Overview";
-      }
+      else presenceData.state = "Overview";
     } else if (window.location.pathname.startsWith("/markets/futures")) {
       presenceData.details = "Futures Market";
-      if (window.location.pathname.includes("/ideas")) {
+      if (window.location.pathname.includes("/ideas"))
         presenceData.state = "Ideas";
-      } else if (window.location.pathname.includes("/quotes")) {
+      else if (window.location.pathname.includes("/quotes"))
         presenceData.state = "Quotes";
-      } else {
-        presenceData.state = "Overview";
-      }
+      else presenceData.state = "Overview";
     } else if (window.location.pathname.startsWith("/markets/bonds")) {
       presenceData.details = "Bond Market";
-      if (window.location.pathname.includes("/ideas")) {
+      if (window.location.pathname.includes("/ideas"))
         presenceData.state = "Ideas";
-      } else if (window.location.pathname.includes("/rates")) {
+      else if (window.location.pathname.includes("/rates"))
         presenceData.state = "Rates";
-      } else {
-        presenceData.state = "Overview";
-      }
-    } else if (window.location.pathname.startsWith("/markets")) {
+      else presenceData.state = "Overview";
+    } else if (window.location.pathname.startsWith("/markets"))
       presenceData.details = "Markets";
-    } else if (window.location.pathname.startsWith("/symbols")) {
+    else if (window.location.pathname.startsWith("/symbols")) {
       presenceData.details = "Viewing Market...";
       presenceData.state = document
         .querySelector(
@@ -146,30 +129,28 @@ presence.on("UpdateData", async () => {
           )
           ?.textContent?.trim();
 
-      if (title) {
-        presenceData.state = title;
-      }
-    } else if (window.location.pathname.startsWith("/script")) {
+      if (title) presenceData.state = title;
+    } else if (window.location.pathname.startsWith("/script"))
       presenceData.details = "Viewing Script...";
-    } else if (window.location.pathname.startsWith("/ideas")) {
+    else if (window.location.pathname.startsWith("/ideas"))
       presenceData.details = "Trading Ideas";
-    } else if (window.location.pathname.startsWith("/education")) {
+    else if (window.location.pathname.startsWith("/education"))
       presenceData.details = "Educational Ideas";
-    } else if (window.location.pathname.startsWith("/scripts")) {
+    else if (window.location.pathname.startsWith("/scripts"))
       presenceData.details = "Scripts";
-    } else if (window.location.pathname.startsWith("/screener")) {
+    else if (window.location.pathname.startsWith("/screener"))
       presenceData.details = "Stock Screener";
-    } else if (window.location.pathname.startsWith("/forex-screener")) {
+    else if (window.location.pathname.startsWith("/forex-screener"))
       presenceData.details = "Forex Screener";
-    } else if (window.location.pathname.startsWith("/crypto-screener")) {
+    else if (window.location.pathname.startsWith("/crypto-screener"))
       presenceData.details = "Crypto Screener";
-    } else if (window.location.pathname.startsWith("/streams")) {
+    else if (window.location.pathname.startsWith("/streams"))
       presenceData.details = "Streams";
-    } else if (window.location.pathname.startsWith("/broker-awards")) {
+    else if (window.location.pathname.startsWith("/broker-awards"))
       presenceData.details = "Broker Awards";
-    } else if (window.location.pathname.startsWith("/brokers")) {
+    else if (window.location.pathname.startsWith("/brokers"))
       presenceData.details = "Brokers";
-    } else if (window.location.pathname.startsWith("/broker/")) {
+    else if (window.location.pathname.startsWith("/broker/")) {
       presenceData.details = "Broker Profile";
       presenceData.state = document
         .querySelector(
@@ -183,32 +164,29 @@ presence.on("UpdateData", async () => {
           "#tv-profile > div > div > div.tv-profile__name-block > span > h1"
         )
         .textContent.trim();
-    } else if (window.location.pathname.startsWith("/chat")) {
+    } else if (window.location.pathname.startsWith("/chat"))
       presenceData.details = "Chatting...";
-    } else if (window.location.pathname.startsWith("/contacts")) {
+    else if (window.location.pathname.startsWith("/contacts"))
       presenceData.details = "About";
-    } else if (window.location.pathname.startsWith("/policies")) {
+    else if (window.location.pathname.startsWith("/policies"))
       presenceData.details = "Terms of Use";
-    } else if (window.location.pathname.startsWith("/privacy-policy")) {
+    else if (window.location.pathname.startsWith("/privacy-policy"))
       presenceData.details = "Privacy Policy";
-    } else if (window.location.pathname.startsWith("/cookies-policy")) {
+    else if (window.location.pathname.startsWith("/cookies-policy"))
       presenceData.details = "Cookies Policy";
-    } else if (window.location.pathname.startsWith("/disclaimer")) {
+    else if (window.location.pathname.startsWith("/disclaimer"))
       presenceData.details = "Disclaimer";
-    } else if (window.location.pathname.startsWith("/moderators")) {
+    else if (window.location.pathname.startsWith("/moderators"))
       presenceData.details = "Moderators";
-    } else if (window.location.pathname.startsWith("/people")) {
+    else if (window.location.pathname.startsWith("/people"))
       presenceData.details = "Top Authors";
-    } else if (window.location.pathname.startsWith("/house-rules")) {
+    else if (window.location.pathname.startsWith("/house-rules"))
       presenceData.details = "TradingView House Rules";
-    } else if (window.location.pathname.startsWith("/blog")) {
+    else if (window.location.pathname.startsWith("/blog"))
       presenceData.details = "TradingView Blog";
-    }
   }
 
-  if (presenceData.details == null) {
-    presenceData.details = "Browsing...";
-  }
+  presenceData.details ??= "Browsing...";
 
   presence.setActivity(presenceData);
 });

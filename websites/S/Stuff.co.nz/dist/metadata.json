@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Cairo",
     "id": "208105877838888960"
@@ -9,7 +10,7 @@
     "nl": "Nieuws uit Nieuw-Zeeland en de wereld: het laatste nieuws, video's, sport, rugby, politiek, zaken, entertainment, lifestyle, reizen en onroerend goed."
   },
   "service": "Stuff.co.nz",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/BvHIX05.png",
   "thumbnail": "https://i.imgur.com/BvUwqSy.png",
   "color": "#000000",

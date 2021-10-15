@@ -12,9 +12,8 @@ presence.on("UpdateData", async () => {
     pmap = await presence.getSetting("pmap");
 
   presenceData.startTimestamp = browsingStamp;
-  if (privacy) {
-    presenceData.details = "Browsing";
-  } else {
+  if (privacy) presenceData.details = "Browsing";
+  else {
     if (window.location.pathname.endsWith("me")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Profil";
@@ -58,23 +57,22 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.details = "Viewing a page:";
       presenceData.state = document.title.replace(" - BuildTheEarth", "");
-      if (window.location.pathname.length != 1) {
+      if (window.location.pathname.length !== 1) {
         presenceData.details = "Viewing a BuildTeam:";
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View the team",
               url: document.URL
             }
           ];
+        }
       }
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
