@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Viendo su perfil";
           break;
       }
-    } 
+    }
   } else {
     if(document.querySelector("section > div > div > h1").textContent) {
       const cap = document.querySelector("section > div > div > h2").textContent.split(":")[0].split(" ");
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
+  } else
     presence.setActivity(presenceData);
   
 });
