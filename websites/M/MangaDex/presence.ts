@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.pathname == "/") 
+  if (document.location.pathname === "/")
     data.details = "Viewing the Homepage";
   else if (document.location.pathname.endsWith("/settings"))
     data.details = "Viewing the Settings Page";
