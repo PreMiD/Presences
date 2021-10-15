@@ -1,40 +1,33 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "608043966285348944"
 });
+let lastPlaybackState = null,
+  reading,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var lastPlaybackState = null;
-var reading;
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-if (lastPlaybackState != reading) {
+if (lastPlaybackState !== reading) {
   lastPlaybackState = reading;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {};
+
   reading =
     document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
 
-  var something: any, a: any, b: any;
-
   if (reading) {
-    something = document.querySelectorAll(".margin-bottom-12 h1 a");
-    a = something[0];
-    b = something[1];
+    const [a, b] = document.querySelectorAll<HTMLElement>(
+        ".margin-bottom-12 h1 a"
+      ),
+      page = (
+        document.querySelector(".page-jump.text-center") as HTMLInputElement
+      ).value;
 
-    var page = document
-      .querySelector(".page-jump.text-center")
-      .getAttribute("value");
-
-    const presenceData: PresenceData = {
-      details: a.innerText,
-      state: b.innerText + " [Page: " + page + "]",
-      largeImageKey: "lg"
-    };
-
+    presenceData.details = a.innerText;
+    presenceData.state = `${b.innerText} [Page: ${page}]`;
+    presenceData.largeImageKey = "lg";
     presenceData.startTimestamp = browsingStamp;
-
-    presence.setActivity(presenceData, true);
   } else {
     const presenceData: PresenceData = {
       largeImageKey: "lg"
@@ -42,10 +35,10 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
-
-    presence.setActivity(presenceData, true);
   }
+
+  if (!presenceData.details) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
 });

@@ -1,46 +1,39 @@
 const presence = new Presence({
-  clientId: "708082807775428678"
-});
+    clientId: "708082807775428678"
+  }),
+  strings = presence.getStrings({
+    playing: "presence.playback.playing",
+    paused: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
+  }),
+  startTimestamp = Math.floor(Date.now() / 1000);
 
-const strings = presence.getStrings({
-  playing: "presence.playback.playing",
-  paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
-});
+let video: IFrameData;
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+interface IFrameData {
+  duration: number;
+  paused: boolean;
+  currentTime: number;
 }
 
-const startTimestamp = Math.floor(Date.now() / 1000);
-
-let video: HTMLVideoElement;
-
-presence.on("iFrameData", async (msg) => {
-  if (!msg) return;
-  video = msg;
+presence.on("iFrameData", async (data: IFrameData) => {
+  if (!data) return;
+  video = data;
 });
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "aniturk"
-  };
+      largeImageKey: "aniturk"
+    },
+    title = document.querySelector(
+      "html > body > div.konter > a > div.icerik-bilgi"
+    ),
+    episode = document.querySelector(
+      "html > body > div.konter > div.icerik-baslik"
+    );
 
-  const title = document.querySelector(
-    "html > body > div.konter > a > div.icerik-bilgi"
-  );
-  const episode = document.querySelector(
-    "html > body > div.konter > div.icerik-baslik"
-  );
+  if (!title || !episode) video = null;
 
-  if (!title || !episode) {
-    video = null;
-  }
   //Episode part
   if (title && episode) {
     data.details = title.textContent;
@@ -48,9 +41,8 @@ presence.on("UpdateData", async () => {
       title.textContent.split(" ").slice(1).join(" "),
       ""
     );
-  }
-  //Home page part
-  else {
+  } else {
+    //Home page part
     data.details = (await strings).browsing;
     data.startTimestamp = startTimestamp;
   }
@@ -62,12 +54,10 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const timestamps = getTimestamps(
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
     }
   }
 

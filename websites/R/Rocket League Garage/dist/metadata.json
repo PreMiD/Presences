@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,7 +11,7 @@
     "zh_CN": "'世界第一火箭联盟狂热爱好者。"
   },
   "url": "rocket-league.com",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/axSJ7wX.png",
   "thumbnail": "https://i.imgur.com/qu30NON.png",
   "color": "#6963b7",

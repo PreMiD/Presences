@@ -18,8 +18,8 @@ function getSubdomain(): string {
 function setCookie(cname: string, cvalue: string, exdays = 1): void {
   const d = new Date();
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  const expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  const expires = `expires=${d.toUTCString()}`;
+  document.cookie = `${cname}=${cvalue};${expires};path=/`;
 }
 
 /**
@@ -27,17 +27,14 @@ function setCookie(cname: string, cvalue: string, exdays = 1): void {
  * @see {@link https://www.w3schools.com/js/js_cookies.asp}
  */
 function getCookie(cname: string): string {
-  const name = cname + "=";
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(";");
+  const name = `${cname}=`,
+    decodedCookie = decodeURIComponent(document.cookie),
+    ca = decodedCookie.split(";");
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
+    while (c.charAt(0) === " ") c = c.substring(1);
+
+    if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
   }
   return "";
 }
@@ -50,7 +47,7 @@ function idleChecker(
 ): void {
   /* If the last activity is the current activity and idleStart isnt set
    *  Set the idle start cookie else reset idle start cookie and set last activity to current activity*/
-  if (lastActivity == activity && !idleStart)
+  if (lastActivity === activity && !idleStart)
     setCookie("PMD_IDLE_START", `${new Date().getTime()}`);
   else if (lastActivity !== activity) {
     setCookie("PMD_IDLE_START", "null");
@@ -66,35 +63,30 @@ setCookie("PMD_LAST_ACTIVITY", "null"); // "Last activity" cookie
 // UpdateData event
 presence.on("UpdateData", async () => {
   // Get cookies for processing
-  const lastActivity: string = getCookie("PMD_LAST_ACTIVITY");
-  const idleStartVal: string = getCookie("PMD_IDLE_START");
-
-  // Get date, if the date cookie is null set date to null
-  const idleStart: Date | null =
-    idleStartVal !== "" && idleStartVal !== "null"
-      ? new Date(parseInt(idleStartVal))
-      : null;
-
-  // Create presence data
-  const presenceData: PresenceData = {
-    largeImageKey: "logo_main" // Default Logo
-  };
-
-  // Get subdomain and path from window.location
-  const subdomain = getSubdomain();
-  const path = window.location.pathname;
+  const lastActivity: string = getCookie("PMD_LAST_ACTIVITY"),
+    idleStartVal: string = getCookie("PMD_IDLE_START"),
+    // Get date, if the date cookie is null set date to null
+    idleStart: Date | null =
+      idleStartVal !== "" && idleStartVal !== "null"
+        ? new Date(parseInt(idleStartVal))
+        : null,
+    // Create presence data
+    presenceData: PresenceData = {
+      largeImageKey: "logo_main" // Default Logo
+    },
+    // Get subdomain and path from window.location
+    subdomain = getSubdomain(),
+    path = window.location.pathname;
 
   // Set presence data up depending on site/paths
-  if (subdomain == "beta") {
+  if (subdomain === "beta") {
     presenceData.smallImageKey = "logo_beta"; // Beta logo as small image
     presenceData.smallImageText = "Beta Website"; // Text for when hovering over small logo
-  } else {
-    presenceData.smallImageKey = "logo_main"; // Main logo as small image
-  }
+  } else presenceData.smallImageKey = "logo_main"; // Main logo as small image
 
   // Presence for all /dashboard routes
   if (path.startsWith("/dashboard")) {
-    presenceData.details = `Managing Guild`; // Default details
+    presenceData.details = "Managing Guild"; // Default details
 
     if (path.includes("monitors")) {
       // Monitors pages
@@ -147,7 +139,7 @@ presence.on("UpdateData", async () => {
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle(); // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(presenceData);

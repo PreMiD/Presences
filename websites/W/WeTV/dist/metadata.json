@@ -1,6 +1,6 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
-  "version": "1.0.1",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "version": "1.0.3",
   "service": "WeTV",
   "author": {
     "name": "Slowlife",

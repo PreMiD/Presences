@@ -6,13 +6,13 @@ const presence = new Presence({ clientId: "658192386899312651" }),
   };
 
 function makeRPC(title: string, category: string): void {
-  if (category == "kategori") {
+  if (category === "kategori") {
     presenceData.details = "Bir kategoriye göz atıyor:";
     presenceData.state = title;
-  } else if (category == "etiket") {
+  } else if (category === "etiket") {
     presenceData.details = "Bir etikete göz atıyor:";
     presenceData.state = title;
-  } else if (category == "author") {
+  } else if (category === "author") {
     presenceData.details = "Bir yazara göz atıyor:";
     presenceData.state = title;
   }
@@ -69,9 +69,7 @@ presence.on("UpdateData", () => {
     presenceData.state = new URLSearchParams(window.location.search).get("s");
   }
 
-  if (page.startsWith("/ara")) {
-    presenceData.details = "Arama bölümünde...";
-  }
+  if (page.startsWith("/ara")) presenceData.details = "Arama bölümünde...";
 
   if (
     ["/kunye", "/iletisim", "/gizlilik-politikasi"].some((pac) =>
@@ -89,13 +87,11 @@ presence.on("UpdateData", () => {
     )?.textContent;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity({
       largeImageKey: "buk-logo",
       details: "Bilinmeyen bir sayfada..."
     });
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

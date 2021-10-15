@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp
     };
 
-  if (valor == 1) {
+  if (valor === 1) {
     data.details = "Creating a room";
     data.smallImageKey = "home";
     data.smallImageText = "On homepage";
@@ -26,9 +26,8 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "playing";
     data.smallImageText = "On game";
 
-    if (players.length > numLimit) {
+    if (players.length > numLimit)
       data.state = `(${numLimit} of ${numLimit} players)`;
-    }
   }
 
   const typing = document.getElementById("writeEntryundefined"),
@@ -39,22 +38,16 @@ presence.on("UpdateData", async () => {
     waitlist = document.getElementsByClassName("waitingSet rounded"),
     waitValue = waitlist.length;
 
-  if (typing) {
-    data.details = "Typing...";
-  }
-  if (valueDraw >= 1) {
-    data.details = "Drawing";
-  }
-  if (presentingValue >= 1) {
-    data.details = "Viewing the presentation";
-  }
-  if (waitValue >= 1) {
-    data.details = "On waitlist";
-  }
-  if (data.details == null) {
+  if (typing) data.details = "Typing...";
+
+  if (valueDraw >= 1) data.details = "Drawing";
+
+  if (presentingValue >= 1) data.details = "Viewing the presentation";
+
+  if (waitValue >= 1) data.details = "On waitlist";
+
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(data);
-  }
+  } else presence.setActivity(data);
 });

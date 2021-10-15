@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "714194261679276094"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "714194261679276094"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     const presenceData: PresenceData = {
       details: "play.gardenmc.fr",
       state: "https://gardenmc.fr",
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/p/rules") {
+  } else if (document.location.pathname === "/p/rules") {
     const presenceData: PresenceData = {
       state: "Règles",
       details: "Lit les règles",
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/vote") {
+  } else if (document.location.pathname === "/vote") {
     const presenceData: PresenceData = {
       details: "En train de Voter",
       state: "Vote",
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/message") {
+  } else if (document.location.pathname === "/message") {
     const presenceData: PresenceData = {
       details: "Consulte ses messages",
       state: "MP",
@@ -59,14 +59,14 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/support") {
+  } else if (document.location.pathname === "/support") {
     const presenceData: PresenceData = {
       details: "Consulte le support",
       state: "Support",
       largeImageKey: "gardenpresence"
     };
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/support/create") {
+  } else if (document.location.pathname === "/support/create") {
     const presenceData: PresenceData = {
       details: "Écrit un ticket au support",
       state: "Support",
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/message/new") {
+  } else if (document.location.pathname === "/message/new") {
     const presenceData: PresenceData = {
       details: "Écrit un message privé",
       state: "MP",
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/list") {
+  } else if (document.location.pathname === "/list") {
     const presenceData: PresenceData = {
       details: "Consulte la liste des membres",
       state: "List",
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/stats") {
+  } else if (document.location.pathname === "/stats") {
     const presenceData: PresenceData = {
       details: "Consultes les stats du site",
       state: "Statistiques",
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/profile") {
+  } else if (document.location.pathname === "/profile") {
     const presenceData: PresenceData = {
       details: "Consulte son profil",
       state: "Profil",
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/shop") {
+  } else if (document.location.pathname === "/shop") {
     const presenceData: PresenceData = {
       details: "Consulte la boutique",
       state: "Shop",
@@ -114,7 +114,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/faq") {
+  } else if (document.location.pathname === "/faq") {
     const presenceData: PresenceData = {
       largeImageKey: "gardenpresence",
       state: "F.A.Q",
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
     //Forum
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum") {
+  } else if (document.location.pathname === "/forum") {
     const presenceData: PresenceData = {
       details: "Consulte le forum",
       state: "Forum",
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Informations.4/") {
+  } else if (document.location.pathname === "/forum/Informations.4/") {
     const presenceData: PresenceData = {
       details: "Consulte les infos",
       state: "Informations",
@@ -215,7 +215,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Taverne.12/") {
+  } else if (document.location.pathname === "/forum/Taverne.12/") {
     const presenceData: PresenceData = {
       largeImageKey: "gardenpresence",
       state: "Taverne",

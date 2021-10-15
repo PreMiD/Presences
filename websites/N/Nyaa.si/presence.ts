@@ -1,11 +1,10 @@
 const presence = new Presence({
-  clientId: "635213174144237601"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "635213174144237601"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let title;
-const viewString = "Viewing ";
-const torrentString = "'s torrents";
+const viewString = "Viewing ",
+  torrentString = "'s torrents";
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -17,7 +16,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching for:";
     presenceData.state = document.querySelector("input").value;
     presenceData.smallImageKey = "search";
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname.includes("/rules")) {
@@ -45,10 +44,8 @@ presence.on("UpdateData", async () => {
       torrentString;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

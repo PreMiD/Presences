@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
     "#vimmi_video_player_html5_api"
   );
 
-  if (video != undefined && !isNaN(video.duration)) {
+  if (video && !isNaN(video.duration)) {
     iframe.send({
       current: video.currentTime,
       duration: video.duration,

@@ -14,8 +14,7 @@ const presence = new Presence({
 let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", () => {
-  let details = undefined,
-    state = undefined;
+  let details, state;
 
   if (window.location.href !== oldUrl) {
     oldUrl = window.location.href;
@@ -27,23 +26,21 @@ presence.on("UpdateData", () => {
     exercise = document.querySelector("#completedExercisesNo");
 
   if (language) {
-    details = "Learning " + capitalize(language.textContent.toLowerCase());
+    details = `Learning ${capitalize(language.textContent.toLowerCase())}`;
     if (whitelist.some((lang) => lang === language.textContent))
-      details = "Learning " + language.textContent;
+      details = `Learning ${language.textContent}`;
   }
 
-  if (lesson) {
-    state = lesson.textContent;
-  }
+  if (lesson) state = lesson.textContent;
 
   if (exercise) {
     details = `${capitalize(window.location.pathname.split("/")[1])} Exercise`;
-    state = exercise.textContent.match("[0-9](.*)[0-9]")[0];
+    [state] = exercise.textContent.match("[0-9](.*)[0-9]");
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "w3schools",
     startTimestamp: elapsed
   };

@@ -17,9 +17,8 @@ import { sync as glob } from "glob";
 function execShellCommand(cmd: string[]) {
   return new Promise<string>((resolve) => {
     exec(cmd.join(" "), (error, stdout, stderr) => {
-      if (error) {
-        console.warn(error);
-      }
+      if (error) console.warn(error);
+
       resolve(stdout ? stdout : stderr);
     });
   });
@@ -115,10 +114,11 @@ const readFile = (path: string): string =>
   },
   // Main function that calls the other functions above
   main = async (): Promise<void> => {
-    if (!process.env.GITHUB_ACTIONS)
+    if (!process.env.GITHUB_ACTIONS) {
       console.log(
         "\nPlease note that this script is ONLY supposed to run on a CI environment\n"
       );
+    }
 
     // A clear splitter before prettify
     console.log(

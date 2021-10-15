@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -11,11 +12,14 @@
     "ga_IE": "Zalando | Ceannaigh bróga ar líne: Bróga ó na brandaí is fearr."
   },
   "url": "www.zalando.com",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/APLPI4i.png",
   "thumbnail": "https://i.imgur.com/lFWmRc9.png",
   "color": "#f47127",
-  "tags": ["shop", "fashion"],
+  "tags": [
+    "shop",
+    "fashion"
+  ],
   "category": "other",
   "regExp": "([a-z0-9-]+[.])*zalando([.][a-z]+)+[/]"
 }

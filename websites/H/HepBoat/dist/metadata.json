@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Lacking",
     "id": "132693143173857281"
@@ -9,7 +10,7 @@
     "nl": "HepBoat is een vork van b1nzy's roeiboot, een utilitaire en administratieve assistent voor Discord."
   },
   "url": "mod.teamhydra.dev",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/ekuyFww.png",
   "thumbnail": "https://i.imgur.com/ECTw8rL.png",
   "color": "#7289da",

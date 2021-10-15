@@ -8,20 +8,17 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     },
-    pathname = document.location.pathname;
+    { pathname } = document.location;
 
-  if (pathname === "/" && document.location.search.substr(0, 2) == "?q") {
+  if (pathname === "/" && document.location.search.substr(0, 2) === "?q") {
     const query = document.querySelector(".caption").textContent;
     data.details = "Searching:";
     data.state = query;
     data.smallImageKey = "search";
-  } else if (pathname === "/") {
-    data.details = "Viewing the Homepage";
-  } else if (pathname.startsWith("/app")) {
-    data.details = "Viewing app page";
-  } else if (pathname.startsWith("/ads")) {
-    data.details = "Viewing ads page";
-  } else if (pathname.startsWith("/podcast")) {
+  } else if (pathname === "/") data.details = "Viewing the Homepage";
+  else if (pathname.startsWith("/app")) data.details = "Viewing app page";
+  else if (pathname.startsWith("/ads")) data.details = "Viewing ads page";
+  else if (pathname.startsWith("/podcast")) {
     const title = document.querySelector(".caption").textContent,
       link = window.location.href;
     data.details = "Viewing:";
@@ -48,7 +45,7 @@ presence.on("UpdateData", async () => {
     data.details = title;
     data.state = episode;
     if (!playPause.classList.contains("fa-play-circle")) {
-      data.endTimestamp = timestamps[1];
+      [, data.endTimestamp] = timestamps;
       data.smallImageKey = "play";
     } else data.smallImageKey = "pause";
   }

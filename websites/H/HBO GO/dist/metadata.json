@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "ririxi",
     "id": "192490421308489731"
@@ -22,7 +23,7 @@
     "hbogo.sk",
     "hbogola.com"
   ],
-  "version": "2.2.8",
+  "version": "2.2.10",
   "logo": "https://i.imgur.com/TTHQtBH.png",
   "thumbnail": "https://i.imgur.com/vvAp3GI.png",
   "color": "#011921",

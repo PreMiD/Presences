@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.details = "GoFundMe Causes";
     data.state = "Justice & Equality";
-  } else if (pathname.startsWith(`/s`)) {
+  } else if (pathname.startsWith("/s")) {
     data.details = "Searching for a fundraiser:";
     data.state = searchParams;
   }

@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "630093952342687794" // CLIENT ID FOR YOUR PRESENCE
   }),
   strings = presence.getStrings({
@@ -6,75 +6,74 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let browsingStamp = Math.floor(Date.now() / 1000),
+  title: HTMLElement,
+  views: HTMLElement,
+  air: HTMLElement,
+  search: string,
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState: boolean,
+  playback: boolean;
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any, views: any, air: any, search: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-var lastPlaybackState = null;
-var playback;
-
-if (lastPlaybackState != playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
 if (
-  document.querySelector(
-    "#view-wrapper > div:nth-child(2) > div > div.episode"
-  ) != null
+  document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode")
 ) {
-  presence.on("iFrameData", (data) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+  presence.on("iFrameData", (data: IFrameData) => {
+    playback = data.iframeVideo.dur !== null ? true : false;
 
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
     }
   });
 }
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  if (lastPlaybackState !== playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
+  }
+  const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "aniflix",
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
+      startTimestamp,
+      endTimestamp
     };
 
-  search = document.querySelector("#searchbar > div > input[type=text]");
-  search = search.value;
+  search = document.querySelector<HTMLInputElement>(
+    "#searchbar > div > input[type=text]"
+  ).value;
   if (
     document.querySelector(
       "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > h1"
-    ) != null
+    ) !== null
   ) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       title = document.querySelector(
         "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > div > a"
       );
       views = document.querySelector(
         "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > div > div.episode-number"
       );
-      presenceData.state = title.innerText + " (" + views.innerText + ")";
+      presenceData.state = `${title.innerText} (${views.innerText})`;
 
       air = document.querySelector(
         "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > h1"
@@ -87,7 +86,7 @@ presence.on("UpdateData", async () => {
       }
 
       presence.setActivity(presenceData);
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       delete presenceData.endTimestamp;
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
@@ -97,13 +96,13 @@ presence.on("UpdateData", async () => {
       views = document.querySelector(
         "#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > div > div.episode-number"
       );
-      presenceData.state = title.innerText + " (" + views.innerText + ")";
+      presenceData.state = `${title.innerText} (${views.innerText})`;
       delete presenceData.smallImageText;
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
     }
-  } else if (search != "" && search.length >= 2) {
+  } else if (search !== "" && search.length >= 2) {
     presenceData.details = "Searching for:";
     presenceData.state = search;
     delete presenceData.endTimestamp;
@@ -138,7 +137,7 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/airing") {
+  } else if (document.location.pathname === "/airing") {
     presenceData.details = "Viewing the calendar";
     delete presenceData.state;
     delete presenceData.endTimestamp;
@@ -147,7 +146,7 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/all") {
+  } else if (document.location.pathname === "/all") {
     presenceData.details = "Viewing the list";
     presenceData.state = "of all shows";
     delete presenceData.endTimestamp;
@@ -156,7 +155,7 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/about") {
+  } else if (document.location.pathname === "/about") {
     presenceData.details = "Viewing the about page";
     delete presenceData.state;
     delete presenceData.endTimestamp;
@@ -165,7 +164,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing the main page";
     delete presenceData.state;
     delete presenceData.endTimestamp;

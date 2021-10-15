@@ -7,9 +7,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: Date.now()
     },
-    baslik: string = document.querySelector("h1.title");
+    baslik: Element = document.querySelector("h1.title");
 
-  if (path == "/") presenceData.details = "Ana Sayfa";
+  if (path === "/") presenceData.details = "Ana Sayfa";
   else if (path.startsWith("/ekrem-imamoglu-kimdir"))
     presenceData.details = "Ekrem İmamoğlu Kimdir?";
   else if (path.startsWith("/16-milyon-icin-calisiyoruz"))
@@ -19,22 +19,23 @@ presence.on("UpdateData", async () => {
   else if (path.startsWith("/galeri")) presenceData.details = "Galeri";
   else if (path.startsWith("/aile-galerisi"))
     (presenceData.details = "Galeri:"), (presenceData.state = "Aile Galerisi");
-  else if (path.startsWith("/imamoglu-ve-siz"))
+  else if (path.startsWith("/imamoglu-ve-siz")) {
     (presenceData.details = "Galeri:"),
       (presenceData.state = "İmamoğlu ve Siz");
-  else if (path.startsWith("/imamoglu-ve-muhtarlar"))
+  } else if (path.startsWith("/imamoglu-ve-muhtarlar")) {
     (presenceData.details = "Galeri:"),
       (presenceData.state = "İmamoğlu ve Muhtarlar");
-  else if (
+  } else if (
     ayrac[1] !== "" &&
     baslik &&
     !path.startsWith("/imamoglu-ve-muhtarlar") &&
     !path.startsWith("/imamoglu-ve-siz") &&
     !path.startsWith("/aile-galerisi") &&
     !path.startsWith("/galeri")
-  )
+  ) {
     (presenceData.details = "Bir yazı okuyor:"),
       (presenceData.state = baslik.textContent);
+  }
 
   presence.setActivity(presenceData);
 });

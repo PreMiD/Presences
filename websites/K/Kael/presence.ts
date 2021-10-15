@@ -39,9 +39,8 @@ presence.on("UpdateData", () => {
         : "Servidor Desconhecido";
 
     if (path === "/") presenceData.state = "Seleção de Servidores";
-    if (DASH_CATEGORIES_REGEX.test(path)) {
+    if (DASH_CATEGORIES_REGEX.test(path))
       presenceData.state = `Selecionando uma categoria no servidor ${serverName}`;
-    }
 
     if (DASH_CATEGORY_REGEX.test(path)) {
       const [, , category = ""] = DASH_CATEGORY_REGEX.exec(path),

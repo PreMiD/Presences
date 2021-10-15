@@ -157,8 +157,7 @@ presence.on("UpdateData", async () => {
     includesProduct = products.find((e) => urlpath.includes(e)),
     includesService = services.find((e) => urlpath.includes(e)),
     presenceData: PresenceData = {
-      largeImageKey: logoArr[setting.logo] || "logo",
-      buttons: []
+      largeImageKey: logoArr[setting.logo] || "logo"
     };
 
   if (!oldLang || oldLang !== newLang) {
@@ -219,11 +218,11 @@ presence.on("UpdateData", async () => {
     } else if (urlpath.includes("newsroom")) {
       presenceData.details = "Newsroom";
 
-      if (urlpath.includes("topics"))
+      if (urlpath.includes("topics")) {
         presenceData.state = document
           .querySelector("h1.section-head")
           ?.getAttribute("aria-label");
-      else {
+      } else {
         presenceData.state =
           document.querySelector(".hero-headline")?.textContent;
 
@@ -310,7 +309,7 @@ presence.on("UpdateData", async () => {
           "h1.typography-hero-eyebrow.hero-eyebrow.hero-copy-item"
         );
 
-      presenceData.details = general.viewing;
+      presenceData.details = lang.viewing;
       presenceData.state = OS?.textContent || "Unknown";
 
       if (setting.buttons && OS) {
@@ -482,9 +481,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = lang.supportArticle;
       presenceData.state =
         document.querySelector("h1#howto-title")?.textContent || "Unknown";
-    } else if (window.location.hostname === "getsupport.apple.com") {
+    } else if (window.location.hostname === "getsupport.apple.com")
       presenceData.details = lang.support;
-    } else {
+    else {
       presenceData.details = lang.support;
       presenceData.state = "Home";
     }
@@ -553,10 +552,11 @@ presence.on("UpdateData", async () => {
 
         if (urlpath[2] === "create")
           presenceData.state = lang.iCloudPagesCreate;
-        else
+        else {
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
           )?.textContent;
+        }
       } else presenceData.state = "Pages";
     } else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
     else if (urlpath[1] === "keynote") {
@@ -567,10 +567,11 @@ presence.on("UpdateData", async () => {
 
         if (urlpath[2] === "create")
           presenceData.state = lang.iCloudPagesCreate;
-        else
+        else {
           presenceData.state = document.querySelector(
             "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
           )?.textContent;
+        }
       } else presenceData.state = "Keynote";
     } else if (urlpath[1] === "keynote-live" && urlpath[2]) {
       const iframe = document.querySelector("iframe");
@@ -613,20 +614,20 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Apple Developer";
     presenceData.state = "Home";
 
-    if (dPages.find((e) => urlpath[1] === e))
+    if (dPages.find((e) => urlpath[1] === e)) {
       presenceData.state =
-        document.querySelector("a.ac-gn-link.ac-gn-link-" + cpage + ">span")
+        document.querySelector(`a.ac-gn-link.ac-gn-link-${cpage}>span`)
           ?.textContent ||
         document.querySelector("section.section-hero>h1.section-headline")
           ?.textContent ||
         document.querySelector("h2.localnav-title>a")?.textContent ||
         "Unknown";
-    else if (urlpath[1] === "custom-apps")
+    } else if (urlpath[1] === "custom-apps") {
       presenceData.state =
         document.querySelector("h2.localnav-title>a")?.textContent ||
         document.querySelector("h1.typography-headline")?.textContent ||
         "Unknown";
-    else if (urlpath[1].startsWith("wwdc")) {
+    } else if (urlpath[1].startsWith("wwdc")) {
       const wwdc = document
         .querySelector("a.ac-ln-title-logo>img")
         ?.getAttribute("alt");
@@ -677,10 +678,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = lang.devDistribution;
       else if (urlpath[1] === "watchos" && urlpath[2] === "features")
         presenceData.state = lang.devFeatures;
-      else
+      else {
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
+      }
     } else if (urlpath[1] === "documentation") {
       const page = document.querySelector("span.current.item");
 
@@ -703,11 +705,12 @@ presence.on("UpdateData", async () => {
       else if (urlpath[2] === "human-interface-guidelines")
         presenceData.state = lang.devHIG;
       else if (urlpath[2] === "resources")
-        presenceData.state = dev.devResources;
-      else
+        presenceData.state = lang.devResources;
+      else {
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
+      }
     } else if (
       urlpath[1] === "safari" ||
       urlpath[1] === "app-store-connect" ||
@@ -721,14 +724,14 @@ presence.on("UpdateData", async () => {
         document.querySelector("h2.localnav-title>a")?.textContent ||
         "Apple Developer";
       presenceData.state =
-        document.querySelector("a.localnav-menu-link.link-" + cpage)
+        document.querySelector(`a.localnav-menu-link.link-${cpage}`)
           ?.textContent ||
         document.querySelector("span.localnav-menu-link.current")
           ?.textContent ||
         document.querySelector("a.localnav-menu-link.current")?.textContent ||
         "Other";
     } else if (urlpath[1] === "testflight") presenceData.state = "Testflight";
-    else if (urlpath[1] === "games") presenceData.state = dev.devGames;
+    else if (urlpath[1] === "games") presenceData.state = lang.devGames;
     else if (urlpath[1] === "forums") {
       presenceData.details = "Forum";
 
@@ -738,20 +741,24 @@ presence.on("UpdateData", async () => {
           document.querySelector("div.header>h1.title")?.textContent ||
           "Unknown";
 
-        presenceData.buttons.push({
-          label: lang.btnViewThread,
-          url: window.location.href
-        });
+        presenceData.buttons = [
+          {
+            label: lang.btnViewThread,
+            url: window.location.href
+          }
+        ];
       } else if (urlpath[2] === "tags") {
         presenceData.details = lang.forumTags;
         presenceData.state =
           document.querySelector("div.tag-content>h2.tag-title")?.textContent ||
           "Unknown";
 
-        presenceData.buttons.push({
-          label: lang.btnViewTags,
-          url: window.location.href
-        });
+        presenceData.buttons = [
+          {
+            label: lang.btnViewTags,
+            url: window.location.href
+          }
+        ];
       } else if (urlpath[2] === "profile" && urlpath[3]) {
         const nickname = document.querySelector(
           "div.user-name>h2.user-nickname"
@@ -765,15 +772,17 @@ presence.on("UpdateData", async () => {
           presenceData.state = nickname || "Unknown";
 
           if (nickname) {
-            presenceData.buttons.push({
-              label: lang.btnViewProfile.replace("{0}", nickname),
-              url: window.location.href
-            });
+            presenceData.buttons = [
+              {
+                label: lang.btnViewProfile.replace("{0}", nickname),
+                url: window.location.href
+              }
+            ];
           }
         }
-      } else if (urlpath[2] === "create") {
+      } else if (urlpath[2] === "create")
         presenceData.state = lang.forumCreateThread;
-      } else if (urlpath[2] === "register")
+      else if (urlpath[2] === "register")
         presenceData.state = lang.forumRegister;
 
       if (setting.buttons) {
@@ -783,15 +792,17 @@ presence.on("UpdateData", async () => {
             "li.menu-item>a.menu-item-link"
           )?.href !== "https://developer.apple.com/forums/login"
         ) {
-          presenceData.buttons.push({
-            label: lang.btnGViewProfile,
-            url:
-              document.querySelector<HTMLAnchorElement>("a.view-profile-link")
-                ?.href ||
-              `https://developer.apple.com/forums/profile/${
-                document.querySelector("span.user-name")?.textContent
-              }`
-          });
+          presenceData.buttons = [
+            {
+              label: lang.btnGViewProfile,
+              url:
+                document.querySelector<HTMLAnchorElement>("a.view-profile-link")
+                  ?.href ||
+                `https://developer.apple.com/forums/profile/${
+                  document.querySelector("span.user-name")?.textContent
+                }`
+            }
+          ];
         }
       }
     } else if (urlpath[1] === "videos") {
@@ -821,14 +832,14 @@ presence.on("UpdateData", async () => {
         )?.textContent;
 
         if (vid) {
-          const video_startTime = Date.now(),
-            video_endTime =
-              Math.floor(video_startTime / 1000) -
+          const videoStartTime = Date.now(),
+            videoEndTime =
+              Math.floor(videoStartTime / 1000) -
               vid.currentTime +
               vid.duration +
               1;
 
-          presenceData.endTimestamp = video_endTime;
+          presenceData.endTimestamp = videoEndTime;
 
           if (!vid.paused) {
             presenceData.smallImageKey = "play";
@@ -847,13 +858,14 @@ presence.on("UpdateData", async () => {
             }
           ];
         }
-      } else
+      } else {
         presenceData.state =
           document.querySelector("section.inline-block>h1.collection-title")
             ?.textContent ||
           document.querySelector("span.localnav-menu-link.current")
             ?.textContent ||
           "Other";
+      }
     } else if (urlpath[1] === "news") {
       const urlParams = new URLSearchParams(window.location.search);
 
@@ -882,8 +894,6 @@ presence.on("UpdateData", async () => {
     !window.location.href.startsWith("https://developer.apple.com/videos/play")
   )
     presenceData.startTimestamp = time;
-
-  if (presenceData.buttons.length === 0) delete presenceData.buttons;
 
   if (!presenceData.details) {
     presence.setTrayTitle();

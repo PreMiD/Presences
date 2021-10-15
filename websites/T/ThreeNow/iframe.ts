@@ -4,7 +4,7 @@ iframe.on("UpdateData", () => {
   const video: HTMLVideoElement = document.querySelector(
     "#mw-player_player_html5_api"
   );
-  if (video != undefined) {
+  if (video) {
     if (!isNaN(video.duration)) {
       iframe.send({
         iFrameVideo: true,

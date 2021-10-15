@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "/home/achbarou",
     "id": "563804458526441639"
@@ -10,7 +10,7 @@
     "nl": "Game-Linter is een bestand delen en een torrent index en een magneet link provider."
   },
   "url": "game-linter.com",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/tQrygFc.png",
   "thumbnail": "https://i.imgur.com/ISdHrQA.png",
   "color": "#30ACCE",

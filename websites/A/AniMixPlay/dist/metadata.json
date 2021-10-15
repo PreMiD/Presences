@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Jack Hansen",
     "id": "140590672657776641"
@@ -10,7 +11,7 @@
     "nl": "AniMixPlay is een website waarmee je gratis anime van over de hele wereld kunt bekijken."
   },
   "url": "animixplay.to",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "logo": "https://i.imgur.com/eMXyO0Y.png",
   "thumbnail": "https://i.imgur.com/XcEtF5e.png",
   "color": "#3AACE7",

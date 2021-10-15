@@ -2,18 +2,15 @@ const presence = new Presence({
   clientId: "691406198091677737"
 });
 
-function parseQueryString(queryString?: string): any {
-  if (!queryString) {
-    queryString = window.location.search.substring(1);
-  }
-  const params = {};
-  const queries = queryString.split("&");
+function parseQueryString(queryString?: string) {
+  queryString ??= window.location.search.substring(1);
+
+  const params: { [queryKey: string]: string } = {},
+    queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
-    const indexPair = indexQuery.split("=");
-    const queryKey = decodeURIComponent(indexPair[0]);
-    const queryValue = decodeURIComponent(
-      indexPair.length > 1 ? indexPair[1] : ""
-    );
+    const indexPair = indexQuery.split("="),
+      queryKey = decodeURIComponent(indexPair[0]),
+      queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
     params[queryKey] = queryValue;
   });
   return params;
@@ -21,20 +18,18 @@ function parseQueryString(queryString?: string): any {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-
-  var route = document.location.pathname.split("/");
+      largeImageKey: "logo"
+    },
+    route = document.location.pathname.split("/");
 
   presenceData.smallImageKey = "reading";
-  presenceData.smallImageText =
-    "Language : " +
+  presenceData.smallImageText = `Language : ${
     document.querySelector("a.site-header-nav-item.bordered.lang-select-button")
-      .textContent;
+      .textContent
+  }`;
 
-  if (document.location.pathname === "/") {
-    presenceData.details = "Home";
-  } else if (document.location.pathname.includes("/apps")) {
+  if (document.location.pathname === "/") presenceData.details = "Home";
+  else if (document.location.pathname.includes("/apps")) {
     if (!route[2]) {
       presenceData.details = "Apps";
       presenceData.state = !parseQueryString(document.location.hash).q
@@ -105,12 +100,14 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.pathname.includes("/blog")) {
-    if (!route[2]) {
+    if (!route[2])
       presenceData.details = document.querySelector("h1.f00-light").textContent;
-    } else {
-      var title = document.querySelector("title").textContent.split(" | ");
-      presenceData.details = title[1];
-      presenceData.state = title[0];
+    else {
+      const [title, TitleOne] = document
+        .querySelector("title")
+        .textContent.split(" | ");
+      presenceData.details = title;
+      presenceData.state = TitleOne;
     }
   } else if (document.location.pathname.includes("/releases/")) {
     presenceData.details = document.querySelector(
@@ -125,15 +122,14 @@ presence.on("UpdateData", async () => {
         ? " | Page : 1"
         : ` | Page : ${parseQueryString(document.location.hash).page}`
     }`;
-  } else {
+  } else
     presenceData.details = document.querySelector("h1.f00-light").textContent;
-  }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
-    if (presenceData.state == null) presenceData.state = "Navigating...";
+    presenceData.state ??= "Navigating...";
     presence.setActivity(presenceData);
   }
 });

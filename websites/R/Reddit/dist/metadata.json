@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Viruz",
     "id": "158973226465230848"
@@ -10,7 +11,16 @@
     }
   ],
   "service": "Reddit",
-  "altnames": ["Редит", "ردیت", "ريديت", "रेडिट", "রেডিট", "ਰੈਡਿਟ", "เรดดิต", "레딧"],
+  "altnames": [
+    "Редит",
+    "ردیت",
+    "ريديت",
+    "रेडिट",
+    "রেডিট",
+    "ਰੈਡਿਟ",
+    "เรดดิต",
+    "레딧"
+  ],
   "description": {
     "en": "Reddit gives you the best of the internet in one place. Get a constantly updating feed of breaking news, fun stories, pics, memes, and videos just for you.",
     "de": "Reddit bietet dir das Beste aus dem Internet an einem Ort. Bekomme einen ständig aktualisierten Feed mit aktuellen Nachrichten, lustigen Geschichten, Bildern, Memes und Videos, nur für dich.",
@@ -23,7 +33,7 @@
     "www.reddit.com",
     "old.reddit.com"
   ],
-  "version": "3.0.0",
+  "version": "3.0.2",
   "logo": "https://i.imgur.com/Yzr4SeJ.png",
   "thumbnail": "https://i.imgur.com/fPUwXN5.png",
   "color": "#ff4500",

@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
   };
 
   if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/home/"
+    document.location.pathname === "/" ||
+    document.location.pathname === "/home/"
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the homepage.";
@@ -37,10 +37,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "chat_icon";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

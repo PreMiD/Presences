@@ -87,11 +87,14 @@ TRanimeizle.on("UpdateData", async () => {
     const episode = document
         .querySelector(".container .playlist-title h1")
         ?.textContent?.replace("İzle", ""),
-      timestamps = TRanimeizle.getTimestamps(video.currentTime, video.duration);
+      [startTimestamp, endTimestamp] = TRanimeizle.getTimestamps(
+        video.currentTime,
+        video.duration
+      );
 
     // Set timestamps
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.startTimestamp = startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
 
     if (video.paused) {
       delete presenceData.startTimestamp;

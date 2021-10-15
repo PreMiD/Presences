@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
       .querySelector("div.ntah h1")
       .textContent.replace("Hasil Pencarian", "")
       .replace(/\t|\n/g, "");
-    presenceData.details = `Searching:`;
+    presenceData.details = "Searching:";
     presenceData.state = search;
   } else if (document.location.pathname.startsWith("/genre/")) {
     const genre = document

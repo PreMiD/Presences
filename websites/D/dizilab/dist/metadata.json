@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -10,9 +11,9 @@
     "nl": "dizilab is een van de grootste aanbieders van Turkse buitenlandse TV-programma's op internet."
   },
   "url": "dizilab.pw",
-  "version": "1.4.7",
-  "logo": "https://premid.is-inside.me/7h01itFO.png",
-  "thumbnail": "https://premid.is-inside.me/ObIqC0NJ.png",
+  "version": "1.4.9",
+  "logo": "https://i.imgur.com/GjvOgOB.png",
+  "thumbnail": "https://i.imgur.com/gcvbjxO.png",
   "color": "#444f53",
   "tags": [
     "video",

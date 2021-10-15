@@ -21,11 +21,12 @@ class AppleTV extends Presence {
         .shadowRoot.querySelector("div.info__eyebrow")?.textContent;
 
       if (title || eyebrow) return title;
-      else
+      else {
         return document
           .querySelector("apple-tv-plus-player")
           .shadowRoot.querySelector("amp-video-player-internal")
           .shadowRoot.querySelector("div.info__title")?.textContent;
+      }
     }
     const title = document.querySelector(
       "div.product-header__image-logo.clr-primary-text-on-dark > a > h2"
@@ -82,8 +83,9 @@ presence.on("UpdateData", async () => {
     "/(show|episode)/([a-zA-Z0-9-]+)": {
       setPresenceData() {
         if (presence.isWatching()) {
-          const video = presence.getVideo(),
-            timestamps = presence.getTimestampsfromMedia(video);
+          const video = presence.getVideo();
+          [, presenceData.endTimestamp] =
+            presence.getTimestampsfromMedia(video);
 
           if (presence.getTitle(true)) {
             presenceData.details = presence.getTitle();
@@ -105,8 +107,6 @@ presence.on("UpdateData", async () => {
             }
           ];
 
-          presenceData.endTimestamp = timestamps[1];
-
           if (video.paused) {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
@@ -127,8 +127,9 @@ presence.on("UpdateData", async () => {
     "/movie/([a-zA-Z0-9-]+)": {
       setPresenceData() {
         if (presence.isWatching()) {
-          const video = presence.getVideo(),
-            timestamps = presence.getTimestampsfromMedia(video);
+          const video = presence.getVideo();
+          [, presenceData.endTimestamp] =
+            presence.getTimestampsfromMedia(video);
 
           presenceData.details = presence.getTitle();
           presenceData.state = "Movie";
@@ -142,8 +143,6 @@ presence.on("UpdateData", async () => {
               url: document.URL
             }
           ];
-
-          presenceData.endTimestamp = timestamps[1];
 
           if (video.paused) {
             delete presenceData.startTimestamp;
@@ -190,16 +189,16 @@ presence.on("UpdateData", async () => {
     }
   ];
 
-  for (const [pathname, PData] of Object.entries(data.presence)) {
+  for (const [pathname, PData] of Object.entries(data.presence))
     if (document.location.pathname.match(pathname)) PData.setPresenceData();
-  }
 
   for (const setting of data.settings) {
     const settingValue = await presence.getSetting(setting.id);
 
-    if (!settingValue && setting.delete)
+    if (!settingValue && setting.delete) {
       for (const PData of setting.data)
         delete presenceData[PData as keyof PresenceData];
+    }
   }
 
   presence.setActivity(presenceData);

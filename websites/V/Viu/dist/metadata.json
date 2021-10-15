@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "SlowLife",
     "id": "374905512661221377"
@@ -11,7 +11,7 @@
     "nl": "Viu levert inhoud in verschillende genres van de belangrijkste inhoudleveranciers van Azië met ondertitels in de lokale taal, evenals originele productieseries onder het 'Viu Original'-initiatief."
   },
   "service": "Viu",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "logo": "https://i.imgur.com/IyPu6Yf.png",
   "thumbnail": "https://i.imgur.com/ThcGMw3.png",
   "color": "#ffbf00",

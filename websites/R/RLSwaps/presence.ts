@@ -1,10 +1,9 @@
-var presence = new Presence({
-  clientId: "636614830698004480"
-});
+const presence = new Presence({
+    clientId: "636614830698004480"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var title: any;
+let user: HTMLElement | Element, title: HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -17,20 +16,22 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname.includes("/history")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing their history";
-  } else if (title.innerText !== "0.00" || user.innerText !== "0.00") {
+  } else if (
+    (title as HTMLElement).innerText !== "0.00" ||
+    (user as HTMLElement).innerText !== "0.00"
+  ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Trading...";
-    presenceData.state =
-      title.innerText + " keys worth for " + user.innerText + "worth of items";
+    presenceData.state = `${(title as HTMLElement).innerText} keys worth for ${
+      (user as HTMLElement).innerText
+    }worth of items`;
   } else {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Going to trade...";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

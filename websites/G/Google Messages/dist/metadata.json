@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Paulé",
     "id": "376812375795302402"
@@ -10,7 +10,7 @@
     "nl": "Google Berichten is een eenvoudige, handige berichten-app waarmee u in contact blijft met de mensen die er het meest toe doen. Sms iedereen overal en op verschillende apparaten."
   },
   "url": "messages.google.com",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/lkQjuwL.png",
   "thumbnail": "https://i.imgur.com/ja7iISJ.jpg",
   "color": "#1a73e8",

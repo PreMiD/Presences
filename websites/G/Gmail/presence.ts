@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "logo"
     },
     path = window.location.href,
-    emailCheck = window.location.href.split("/").length == 7 ? false : true;
+    emailCheck = window.location.href.split("/").length === 7 ? false : true;
 
   if (emailCheck) {
     if (path.endsWith("#category/social")) {
@@ -26,7 +26,7 @@ presence.on("UpdateData", () => {
     } else if (path.match("/#label/")) {
       const labelname = document.querySelector("head > title").textContent;
       presenceData.details = "In the Label: ";
-      presenceData.state = labelname.replace('"', "").split('" - ')[0];
+      [presenceData.state] = labelname.replace('"', "").split('" - ');
       presenceData.startTimestamp = elapsed;
     } else if (path.endsWith("/#settings/general")) {
       presenceData.details = "In the General settings";
@@ -114,10 +114,8 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

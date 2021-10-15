@@ -9,12 +9,11 @@ presence.on("UpdateData", async () => {
     ),
     sections = document.querySelector(
       "#news-content > div.content-column.xs-mt2.lg-mt0.md-mb4 > h1 > span"
-    );
-
-  const presenceData: PresenceData = {
-    largeImageKey: "bfnews-logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
+    ),
+    presenceData: PresenceData = {
+      largeImageKey: "bfnews-logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
+    };
 
   if (page.includes("/section")) {
     presenceData.details = "Viewing To Section:";
@@ -27,10 +26,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Homepage";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

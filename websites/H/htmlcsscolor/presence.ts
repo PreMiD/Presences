@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "630441527826579467"
 });
 
@@ -26,9 +26,9 @@ presence.on("UpdateData", async () => {
   // Wheel. Since its on main page the main page is also considered wheel.
   if (
     document.location.href.endsWith("/#wheel") ||
-    document.location.pathname == "/"
+    document.location.pathname === "/"
   ) {
-    Data.details = `Viewing on wheel`;
+    Data.details = "Viewing on wheel";
     Data.state = `${
       (document.querySelector("#cntMain_txtColor") as HTMLInputElement).value
     }`;
@@ -36,28 +36,28 @@ presence.on("UpdateData", async () => {
 
   // Sub pages
   if (document.location.pathname.startsWith("/html-color-names")) {
-    Data.details = `Viewing the list of`;
-    Data.state = `html color names.`;
+    Data.details = "Viewing the list of";
+    Data.state = "html color names.";
   }
   if (document.location.pathname.startsWith("/color-names-rgb-values")) {
-    Data.details = `Viewing the list of`;
-    Data.state = `RGB color names.`;
+    Data.details = "Viewing the list of";
+    Data.state = "RGB color names.";
   }
   if (document.location.pathname.startsWith("/web-safe-colors")) {
-    Data.details = `Viewing the list of`;
-    Data.state = `web save colors.`;
+    Data.details = "Viewing the list of";
+    Data.state = "web save colors.";
   }
   if (document.location.pathname.startsWith("/random-colors")) {
-    Data.details = `Viewing a list of`;
-    Data.state = `random colors.`;
+    Data.details = "Viewing a list of";
+    Data.state = "random colors.";
   }
   if (document.location.pathname.startsWith("/color-gradient")) {
-    Data.details = `Generating a`;
-    Data.state = `color gradient.`;
+    Data.details = "Generating a";
+    Data.state = "color gradient.";
   }
   if (document.location.pathname.startsWith("/contacts")) {
-    Data.details = `Viewing the`;
-    Data.state = `contacts page.`;
+    Data.details = "Viewing the";
+    Data.state = "contacts page.";
   }
 
   presence.setActivity(Data);
