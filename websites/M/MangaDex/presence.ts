@@ -7,36 +7,28 @@ let username: string;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "mangadex-logo"
+    largeImageKey: "mangadex-logo",
+    startTimestamp: browsingStamp
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname == "/") 
     data.details = "Viewing the Homepage";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/settings")) {
+  else if (document.location.pathname.endsWith("/settings"))
     data.details = "Viewing the Settings Page";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/about")) {
+  else if (document.location.pathname.endsWith("/about"))
     data.details = "Viewing About Page";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/rules")) {
+  else if (document.location.pathname.endsWith("/rules"))
     data.details = "Viewing Rules";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/title")) {
+  else if (document.location.pathname.startsWith("/title")) {
     if (document.location.pathname.startsWith("/titles")) {
-      if (document.location.pathname.endsWith("/latest")) {
+      if (document.location.pathname.endsWith("/latest"))
         data.details = "Browsing Latest Manga";
-        data.startTimestamp = browsingStamp;
-      } else if (document.location.pathname.endsWith("/feed")) {
+      else if (document.location.pathname.endsWith("/feed"))
         data.details = "Viewing Feed";
-        data.startTimestamp = browsingStamp;
-      } else if (document.location.pathname.endsWith("/follows")) {
+      else if (document.location.pathname.endsWith("/follows"))
         data.details = "Viewing Library";
-        data.startTimestamp = browsingStamp;
-      } else {
+      else
         data.details = "Browsing Manga";
-        data.startTimestamp = browsingStamp;
-      }
     } else {
       const manga = document.querySelector("head > title").textContent
         .replace(" - MangaDex", "");
@@ -45,7 +37,6 @@ presence.on("UpdateData", async () => {
       else
         data.details = "Viewing a Manga:";
       data.state = manga;
-      data.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/chapter")) {
     const title = document.querySelector(".text-primary").textContent.trim(),
@@ -53,44 +44,37 @@ presence.on("UpdateData", async () => {
         .replace(` - ${title} - MangaDex`, "");
     data.details = `Reading ${title}`;
     data.state = `Page ${chapter}`;
-    data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.startsWith("/tag")) {
     const tag = document.querySelector("head > title").textContent
       .replace(" - MangaDex", "");
     data.details = "Viewing a Tag";
     data.state = tag;
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/history")) {
+  } else if (document.location.pathname.endsWith("/history"))
     data.details = "Viewing History";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/lists")) {
+  else if (document.location.pathname.endsWith("/lists"))
     data.details = "Viewing Lists";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/list")) {
+  else if (document.location.pathname.startsWith("/list"))
     data.details = "Viewing an MDList";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/user")) {
-    if (document.location.pathname.startsWith("/users")) {
+  else if (document.location.pathname.startsWith("/user")) {
+    if (document.location.pathname.endsWith("/users"))
       data.details = "Viewing Users";
-      data.startTimestamp = browsingStamp;
-    } else {
+    else {
       username = document.querySelector("head > title").textContent
         .replace(" - MangaDex", "");
       data.details = "Viewing User Profile";
       data.state = username;
-      data.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/group")) {
-    if (document.location.pathname.startsWith("/groups")) {
+    if (document.location.pathname.endsWith("/groups"))
       data.details = "Viewing Groups";
-      data.startTimestamp = browsingStamp;
-    } else {
+    else {
       username = document.querySelector("head > title").textContent
         .replace(" - MangaDex", "");
       data.details = "Viewing a Group";
       data.state = username;
-      data.startTimestamp = browsingStamp;
     }
-  }
+  } else if (document.location.pathname.startsWith("/my/groups"))
+    data.details = "Viewing Followed Groups";
+
   presence.setActivity(data);
 });
