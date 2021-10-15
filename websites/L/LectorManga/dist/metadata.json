@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "LectorManga",
+  "author": {
+    "name": "!Yelo",
+    "id": "425326889565945856"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/ruUHGNI.png",
+  "thumbnail": "https://i.imgur.com/My1SFjM.png",
+  "version": "1.0.0",
+  "color": "#2957ba",
+  "tags": [
+    "anime",
+    "manga",
+    "readmanga",
+    "spanish"
+  ],
+  "url": ["lectormanga.com",
+          "recipesandcook.com",
+          "biggestchef.com",
+          "indalchef.com"],
+  "description": {
+    "en": "Read Manga in Spanish",
+    "es": "Lee Manga en Castellano"
+  }
+}
