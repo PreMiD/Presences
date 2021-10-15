@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Leyendo las normas";
           break;
         case "/collaborate":
-          presenceData.details = "Como colaborar";
+          presenceData.details = "Viendo como colaborar";
           break;
         case "/guide":
           presenceData.details = "Leyendo la guía";
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Viendo Sobre TuMangaOnline";
           break;
         case "/faq":
-          presenceData.details = "Leyendo las preguntas preguntas frecuentes";
+          presenceData.details = "Leyendo las preguntas frecuentes";
           break;
         case "/library":
           presenceData.details = "Viendo la librería";
