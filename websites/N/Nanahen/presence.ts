@@ -106,5 +106,6 @@ switch (
     break;
   }
 }
+
 presence.setActivity(presenceData);
 });
