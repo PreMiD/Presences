@@ -12,7 +12,7 @@ interface LangStrings {
   watchEpisode: string;
   watchVideo: string;
   watchLive: string;
-  watchStream: string
+  watchStream: string;
 }
 
 async function getStrings(): Promise<LangStrings> {
@@ -57,9 +57,7 @@ presence.on("UpdateData", async () => {
     strings = await getStrings();
   }
 
-  if (isHostSP)
-    data.largeImageKey = "starplus-logo";
-  
+  if (isHostSP) data.largeImageKey = "starplus-logo";
 
   // Star+ videos
   if (isHostSP && location.pathname.includes("/video/")) {
@@ -82,8 +80,8 @@ presence.on("UpdateData", async () => {
       }
 
       const titleField: HTMLDivElement = document.querySelector(
-        ".btm-media-overlays-container .title-field"
-      ),
+          ".btm-media-overlays-container .title-field"
+        ),
         subtitleField: HTMLDivElement = document.querySelector(
           ".btm-media-overlays-container .subtitle-field"
         );
@@ -142,16 +140,16 @@ presence.on("UpdateData", async () => {
       if (title) presence.setActivity(data, !video.paused);
     }
 
-  //Star+ Livestreams
+    //Star+ Livestreams
   } else if (isHostSP && location.pathname.includes("/live-event/")) {
     const video: HTMLVideoElement = document.querySelector(
       ".btm-media-clients video"
     );
-  
+
     if (video && !isNaN(video.duration)) {
       const titleField: HTMLDivElement = document.querySelector(
-        ".btm-media-overlays-container .title-field"
-      ),
+          ".btm-media-overlays-container .title-field"
+        ),
         subtitleField: HTMLDivElement = document.querySelector(
           ".btm-media-overlays-container .subtitle-field"
         );
@@ -163,13 +161,12 @@ presence.on("UpdateData", async () => {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = strings.watchLive;
       } else {
-        if (privacy)
-          data.state = strings.watchingLive;
+        if (privacy) data.state = strings.watchingLive;
       }
-  
+
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused ? strings.pause : strings.play;
-  
+
       // add buttons, if enabled
       if (!privacy && buttons) {
         data.buttons = [
@@ -182,7 +179,7 @@ presence.on("UpdateData", async () => {
       if (title) presence.setActivity(data, !video.paused);
     }
 
-  // GroupWatch lobby
+    // GroupWatch lobby
   } else if (
     isHostSP &&
     !privacy &&
@@ -224,8 +221,8 @@ presence.on("UpdateData", async () => {
     }
 
     if (title) presence.setActivity(data, false);
-  
-  //Browsing
+
+    //Browsing
   } else {
     data.details = strings.browsing;
     presence.setActivity(data);
