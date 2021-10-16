@@ -8,19 +8,21 @@ presence.on("UpdateData", () => {
       largeImageKey: "logo",
       startTimestamp: timeStamp
     },
-    page = document.location.pathname;
-  if (page.startsWith("/learn/")) {
-    presenceData.details = "Learning:";
-    presenceData.state = "Writing Code!";
-  } else if (page.startsWith("/login")) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = "Signing In";
-  } else if (page.startsWith("/news/")) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = "Reading the news";
-  } else if (page.startsWith("/learn")) {
-    presenceData.details = "Deciding:";
-    presenceData.state = "Choosing what to learn today 🤔";
-  }
+    page = document.location.pathname,
+    title = document.title;
+  const details = (page, title) => {
+    return page === "/" ? "Viewing:"
+      : page.startsWith("/learn") ? "Learning:"
+      : page.startsWith("/news") ? "Viewing page:" : "";
+  };
+
+  const state = (page, title) => {
+    return page === "/" ? "The Main Page"
+      : page.startsWith("/learn") && !title.startsWith("Learn to Code") ? title.slice(0, title.length - 19) // gets rid of " | freeCodeCamp.org"
+      : page.startsWith("/learn") && title.startsWith("Learn to Code") ? "Selecting Course"
+      : page.startsWith("/news") ? title : "";
+  };
+  presenceData.details = details(page, title);
+  presenceData.state = state(page, title);
   presence.setActivity(presenceData);
 });
