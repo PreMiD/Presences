@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
     },
     page = document.location.pathname,
     title = document.title;
-  const details = (page, title) => {
+  const details = page => {
     return page === "/" ? "Viewing:"
       : page.startsWith("/learn") ? "Learning:"
       : page.startsWith("/news") ? "Viewing page:" : "";
@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
       : page.startsWith("/learn") && title.startsWith("Learn to Code") ? "Selecting Course"
       : page.startsWith("/news") ? title : "";
   };
-  presenceData.details = details(page, title);
+  presenceData.details = details(page);
   presenceData.state = state(page, title);
   presence.setActivity(presenceData);
 });
