@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
       }
     }
   } else {
-    if(document.querySelector("section > div > div > h1").textContent) {
+    if(document.querySelector("section > div > div > h1")) {
       const cap = document.querySelector("section > div > div > h2").textContent.split(":")[0].split(" ");
       presenceData.details = `Leyendo ${document.querySelector("section > div > div > h1").textContent}:`;
       presenceData.state = `${cap[1]} ${cap[2]}`;
