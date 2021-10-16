@@ -14,13 +14,13 @@ presence.on("UpdateData", async () => {
         presenceData.state = "On the dashboard";
         if (document.location.pathname.includes("/dashboard")) {
             const serverName = document.querySelector("#app > div > div.dash-div.fill-height > main > div > div.dash-div.fill-height > div > section > div:nth-child(2) > div.container.container--fluid > div > div > div.row.flex-nowrap > div > div > div > div > div.sc-side.d-flex.flex-column.justify-space-between.align-center.flex-direction-center.col-sm.col-xl-3.col-12 > div > div:nth-child(1) > div");
-            if (serverName) 
+            if (serverName)
                 presenceData.state = `Editing ${
                     serverName.innerHTML
                 }`;
             
         }
-        if (document.location.pathname.includes("/servers")) 
+        if (document.location.pathname.includes("/servers"))
             presenceData.state = "Viewing the servers";
         
     } else if (document.location.hostname === "shop.minehut.com") {
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
             const c = f[f.indexOf("collections") + 1];
             presenceData.state = `Viewing collection ${c}`;
         }
-        if (document.location.pathname.includes("/products/")) 
+        if (document.location.pathname.includes("/products/"))
             if (ok) {
                 const p = f[f.indexOf("products") + 1];
                 presenceData.state = `Viewing product ${p}`;
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
                 } credits)` : "");
             presenceData.state = `Viewing cart${a}`;
         }
-        if (document.location.pathname.includes("/pages/wishlist")) 
+        if (document.location.pathname.includes("/pages/wishlist"))
             presenceData.state = "Viewing wishlist";
         
         if (document.location.pathname.includes("/search")) {
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
     if (! presenceData.details) {
         presence.setTrayTitle();
         presence.setActivity();
-    } else 
+    } else
         presence.setActivity(presenceData);
     
 });
