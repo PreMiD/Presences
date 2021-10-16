@@ -35,7 +35,7 @@ presence.on("UpdateData", () => {
   }
 
   presence.setActivity({
-    state: state,
+    state,
     details: page,
     largeImageKey: "icon",
     startTimestamp: browsingStamp

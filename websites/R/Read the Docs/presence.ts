@@ -10,9 +10,9 @@ presence.on("UpdateData", async () => {
   ): Promise<string> {
     let str: string = await pres.getSetting(id);
 
-    for (const [key, value] of Object.entries(values)) {
+    for (const [key, value] of Object.entries(values))
       str = str.replace(RegExp(`%${key}%`, "g"), value);
-    }
+
     return str;
   }
   const presenceData: PresenceData = {
@@ -29,18 +29,19 @@ presence.on("UpdateData", async () => {
       "$1"
     ); // get subdomain
 
-    if (name === "docs")
+    if (name === "docs") {
       presenceData.details = await getStringFromSettings(
         presence,
         "viewing_main_docs",
         {}
       );
-    else
+    } else {
       presenceData.details = await getStringFromSettings(
         presence,
         "viewing_docs",
-        { name: name }
+        { name }
       );
+    }
 
     if (loc.match(/search/g)) {
       // if searching on docs
@@ -50,12 +51,13 @@ presence.on("UpdateData", async () => {
       ); // get search term
 
       if (term.endsWith("#")) term = term.slice(0, -1); // remove trailing hashtag
-      if (!loc.endsWith("/search") && !loc.endsWith("/search.html"))
+      if (!loc.endsWith("/search") && !loc.endsWith("/search.html")) {
         presenceData.state = await getStringFromSettings(
           presence,
           "searching_for",
-          { term: term }
+          { term }
         );
+      }
     }
   } else if (loc.endsWith(".io") || loc.endsWith(".org"))
     presenceData.details = await getStringFromSettings(presence, "main", {});
@@ -65,18 +67,18 @@ presence.on("UpdateData", async () => {
     presenceData.details = await getStringFromSettings(presence, "login", {});
   else if (loc.match(/accounts/))
     presenceData.details = await getStringFromSettings(presence, "manage", {});
-  else if (loc.match(/profiles/))
+  else if (loc.match(/profiles/)) {
     presenceData.details = await getStringFromSettings(presence, "profile", {
       name: loc.split("/")[loc.split("/").length - 1]
     });
-  else if (loc.endsWith("dashboard"))
+  } else if (loc.endsWith("dashboard")) {
     presenceData.details = await getStringFromSettings(
       presence,
       "dashboard",
       {}
     );
-  // if searching for docs with the search term in the url
-  else if (loc.match(/search/)) {
+    // if searching for docs with the search term in the url
+  } else if (loc.match(/search/)) {
     if (!loc.endsWith("/search")) {
       const term = loc.replace(
         /https?:\/\/readthedocs[.](io|org)\/search\/\?q=([^&]+).*/g,
@@ -85,7 +87,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = await getStringFromSettings(
         presence,
         "searching_for",
-        { term: term }
+        { term }
       );
     }
 
@@ -96,7 +98,7 @@ presence.on("UpdateData", async () => {
     );
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

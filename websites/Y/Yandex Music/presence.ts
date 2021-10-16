@@ -30,7 +30,8 @@ const getData = async (): Promise<void> => {
     startedAt = Date.now() - getMillisecondsFromString(progress),
     endAt = startedAt + getMillisecondsFromString(trackLength),
     playing =
-      document.getElementsByClassName("player-controls__btn_pause").length == 2;
+      document.getElementsByClassName("player-controls__btn_pause").length ===
+      2;
 
   let artists;
   if (isPodcast()) {
@@ -64,9 +65,8 @@ setInterval(getData, 1000);
 presence.on("UpdateData", () => {
   const title = document.getElementsByClassName("track__title");
 
-  if (title.length != 0) {
-    presence.setActivity(presenceData);
-  } else {
+  if (title.length !== 0) presence.setActivity(presenceData);
+  else {
     presence.setTrayTitle();
     presence.setActivity();
   }

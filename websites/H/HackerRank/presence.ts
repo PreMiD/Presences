@@ -13,9 +13,8 @@ presence.on("UpdateData", () => {
     },
     title = document.querySelector("h1").textContent;
 
-  if (path("/dashboard")) {
-    presenceData.details = "In dashboard";
-  } else if (path("/domains")) {
+  if (path("/dashboard")) presenceData.details = "In dashboard";
+  else if (path("/domains")) {
     presenceData.details = "Viewing challenges:";
     presenceData.state = title;
   } else if (path("/challenges")) {
@@ -28,11 +27,10 @@ presence.on("UpdateData", () => {
   } else if (path("/competitions")) {
     presenceData.details = "Viewing a competition:";
     presenceData.state = title;
-  } else if (path("/inbox")) {
-    presenceData.details = "Viewing inbox";
-  } else if (path("/notifications")) {
+  } else if (path("/inbox")) presenceData.details = "Viewing inbox";
+  else if (path("/notifications"))
     presenceData.details = "Viewing notifications";
-  } else if (
+  else if (
     document.querySelector(
       "#content button.ui-btn.ui-btn-normal.ui-btn-primary.profile-btn-follow.ui-btn-styled"
     )
@@ -49,9 +47,8 @@ presence.on("UpdateData", () => {
   ) {
     presenceData.details = "Viewing a job:";
     presenceData.state = title;
-  } else if (path("/jobs/")) {
-    presenceData.details = "Viewing jobs";
-  } else if (path("/companies")) {
+  } else if (path("/jobs/")) presenceData.details = "Viewing jobs";
+  else if (path("/companies")) {
     const company = document.querySelector("p").textContent;
     presenceData.details = "Viewing a company:";
     presenceData.state = company.split("More about")[1].trim();

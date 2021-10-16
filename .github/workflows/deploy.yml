@@ -18,10 +18,8 @@ jobs:
         with:
           node-version: 16
           cache: "yarn"
-      - name: Install Deps
+      - name: Prep PU
         run: yarn
-      - name: Compile Script
-        run: yarn pu:compile
       - name: Update Presences
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}

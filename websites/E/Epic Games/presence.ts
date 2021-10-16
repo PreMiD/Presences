@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     },
-    pathname = document.location.pathname,
-    hostname = document.location.hostname;
+    { pathname } = document.location,
+    { hostname } = document.location;
 
   if (hostname === "epicgames.com" || hostname === "www.epicgames.com") {
     // Epic Games Store
@@ -53,9 +53,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "About Page";
     }
 
-    if (pathname.includes("/store/") && pathname.includes("/redeem")) {
+    if (pathname.includes("/store/") && pathname.includes("/redeem"))
       presenceData.details = "Redeeming";
-    }
 
     // Epic Games Site
 
@@ -92,19 +91,16 @@ presence.on("UpdateData", async () => {
       const helpHeading = document.querySelector(
         "#epicGamesReactWrapper > div > div.eg-content > div > div.sspgrid-container > div.Layout2Cols__wrapper.LayoutCol7Col4__wrapper > div > div.Layout2Cols__body-col--main.sspgrid-col-lg-7 > div.Article__wrapper > h1"
       );
-      if (helpHeading === null) {
-        presenceData.details = null;
-      } else {
+      if (helpHeading === null) presenceData.details = null;
+      else {
         presenceData.details = "Viewing help article:";
         presenceData.state = helpHeading.textContent;
       }
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

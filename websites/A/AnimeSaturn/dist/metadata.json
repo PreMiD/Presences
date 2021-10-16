@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Tellen",
     "id": "535214819520020510"
@@ -12,7 +13,7 @@
     "nl": "Op onze website AnimeSaturn vind je Anime (Ondertiteld in ITA). Download of stream je favoriete serie helemaal gratis."
   },
   "url": "www.animesaturn.io",
-  "version": "3.0.10",
+  "version": "3.0.12",
   "logo": "https://i.imgur.com/7jVKxPj.png",
   "thumbnail": "https://i.imgur.com/remIE0w.png",
   "color": "#dbc1ff",

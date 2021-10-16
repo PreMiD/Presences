@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "LeoSight",
   "author": {
     "name": "Dzardys",
@@ -8,7 +8,7 @@
   "category": "games",
   "logo": "https://i.imgur.com/HOmso2n.png",
   "thumbnail": "https://i.imgur.com/KR8f71Y.png",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "color": "#595959",
   "tags": [
     "mta",

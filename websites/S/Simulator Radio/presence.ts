@@ -1,6 +1,7 @@
 const presence = new Presence({
-  clientId: "651455140477272065"
-});
+    clientId: "651455140477272065"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let currentTitle = "Simulator Radio",
   currentArtist = "Your #1 Simulation Station",
@@ -10,7 +11,7 @@ let currentTitle = "Simulator Radio",
 function newStats(): void {
   fetch("https://apiv2.simulatorradio.com/metadata/combined?premid").then(
     (response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         response.json().then((data) => {
           currentTitle = data.now_playing.title;
           currentArtist = data.now_playing.artists;
@@ -23,13 +24,13 @@ function newStats(): void {
 }
 
 function pushMusicPresence(presenceData: PresenceData): void {
-  presenceData.details = currentTitle + " - " + currentArtist;
-  presenceData.state = "Listening to " + currentDj;
+  presenceData.details = `${currentTitle} - ${currentArtist}`;
+  presenceData.state = `Listening to ${currentDj}`;
   presenceData.smallImageText =
-    currentListeners != 0 ? "Listeners: " + currentListeners : "";
+    currentListeners !== 0 ? `Listeners: ${currentListeners}` : "";
   presenceData.smallImageKey = "play";
 
-  if (lastTitle != currentTitle) {
+  if (lastTitle !== currentTitle) {
     lastTitle = currentTitle;
     lastTimeStart = Math.floor(Date.now() / 1000);
   }
@@ -40,9 +41,8 @@ function pushMusicPresence(presenceData: PresenceData): void {
 setInterval(newStats, 10000);
 newStats();
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var lastTitle = "";
-var lastTimeStart = Math.floor(Date.now() / 1000);
+let lastTitle = "",
+  lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", function () {
   const presenceData: PresenceData = {
@@ -61,14 +61,14 @@ presence.on("UpdateData", function () {
     } else if (document.location.pathname.includes("/timetable")) {
       presenceData.details = "Viewing the Timetable";
       presenceData.state = document.querySelector("#timetable-day").textContent;
-    } else if (document.location.pathname.includes("/home")) {
+    } else if (document.location.pathname.includes("/home"))
       pushMusicPresence(presenceData);
-    } else if (
+    else if (
       document.location.pathname.includes("/articles") ||
       document.location.pathname.includes("/news")
-    ) {
+    )
       presenceData.details = "Browsing the Blog";
-    } else if (
+    else if (
       document.location.pathname.includes("/post") ||
       document.location.pathname.includes("/blog")
     ) {
@@ -77,24 +77,20 @@ presence.on("UpdateData", function () {
 
       presenceData.details = "Reading Blog Post";
       presenceData.state =
-        possibilityOne != null
+        possibilityOne !== null
           ? possibilityOne.textContent
           : possibilityTwo.textContent;
       presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/team")) {
+    } else if (document.location.pathname.includes("/team"))
       presenceData.details = "Viewing the Team";
-    } else if (document.location.pathname.includes("/changelog")) {
+    else if (document.location.pathname.includes("/changelog")) {
       presenceData.details = "Reading the Changelog";
       presenceData.smallImageKey = "reading";
     }
-  } else {
-    pushMusicPresence(presenceData);
-  }
+  } else pushMusicPresence(presenceData);
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

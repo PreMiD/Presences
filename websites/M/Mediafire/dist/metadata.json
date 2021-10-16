@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Dark_Ville",
     "id": "638080361179512853"
@@ -15,7 +15,7 @@
     "nl": "Bestanden delen en opslag is simpel gemaakt"
   },
   "service": "Mediafire",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/nIZ0XtN.png",
   "thumbnail": "https://i.imgur.com/DwfSIyG.jpg",
   "color": "#FF0000",

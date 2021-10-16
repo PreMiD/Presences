@@ -10,9 +10,9 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/")
     presenceData.details = "Starting Flacless";
-  } else if (document.location.pathname.includes("/search")) {
+  else if (document.location.pathname.includes("/search")) {
     const title = document.title
       .split(" | ")[0]
       .replace("on Flacless", "")
@@ -25,13 +25,11 @@ presence.on("UpdateData", async () => {
         .querySelector("meta[property='article:tag']")
         .getAttribute("content");
     presenceData.details = title;
-    presenceData.state = "by " + artist;
+    presenceData.state = `by ${artist}`;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

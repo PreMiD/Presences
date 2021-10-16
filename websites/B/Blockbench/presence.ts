@@ -22,7 +22,7 @@ Blockbench.on("UpdateData", async () => {
     header = document.querySelector(
       ".type-post .page-header .entry-title"
     )?.textContent,
-    sub = location.host.split(".")[0];
+    [sub] = location.host.split(".");
   if (sub === "web") {
     const activity =
         document
@@ -76,8 +76,8 @@ Blockbench.on("UpdateData", async () => {
     presenceData.details = "Reading a blog post:";
     presenceData.smallImageKey = "reading";
     presenceData.state = header;
-  } else if (pages[page]) {
+  } else if (pages[page])
     presenceData.details = `Looking at the ${pages[page]} page`;
-  }
+
   Blockbench.setActivity(presenceData);
 });

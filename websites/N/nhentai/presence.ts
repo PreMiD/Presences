@@ -1,36 +1,31 @@
 const presence = new Presence({
-  clientId: "612653415419609088"
-});
+    clientId: "612653415419609088"
+  }),
+  pattern = "- Page",
+  searchURL = new URL(document.location.href),
+  searchResult = searchURL.searchParams.get("q"),
+  truncateAfter = function (str: string, pattern: string): string {
+    return str.slice(0, str.indexOf(pattern));
+  };
 
-let lastPlaybackState = null;
-let reading;
-let browsingStamp = Math.floor(Date.now() / 1000);
-
-let title: any,
-  title2: any,
-  currentPage: any,
-  pageNumber: any,
-  tabTitle: any,
-  homeCurrentPage: any,
-  favoriteCurrentPage: HTMLElement;
-
-const pattern = "- Page";
-
-let character: any,
-  parody: any,
+let lastPlaybackState = null,
+  reading,
+  browsingStamp = Math.floor(Date.now() / 1000),
+  title: HTMLElement,
+  title2: HTMLElement | string,
+  currentPage: HTMLElement,
+  pageNumber: HTMLElement,
+  tabTitle: string,
+  homeCurrentPage: HTMLElement,
+  favoriteCurrentPage: HTMLElement,
+  character: HTMLElement,
+  parody: HTMLElement,
   group: HTMLElement,
   user: HTMLElement,
   tag: HTMLElement,
   artist: HTMLElement;
 
-const searchURL = new URL(document.location.href);
-const searchResult = searchURL.searchParams.get("q");
-
-const truncateAfter = function (str: string, pattern: string): string {
-  return str.slice(0, str.indexOf(pattern));
-};
-
-if (lastPlaybackState != reading) {
+if (lastPlaybackState !== reading) {
   lastPlaybackState = reading;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -44,14 +39,14 @@ presence.on("UpdateData", async () => {
 
   title = document.querySelector("#info > h1 > span.pretty");
 
-  if (document.location.pathname == "/" || !document.location.pathname) {
+  if (document.location.pathname === "/" || !document.location.pathname) {
     homeCurrentPage = document.querySelector(
       "#content > section.pagination > a.page.current"
     );
 
     presenceData.details = "Home";
 
-    presenceData.state = "Page: " + homeCurrentPage.innerText;
+    presenceData.state = `Page: ${homeCurrentPage.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/g/")) {
@@ -66,18 +61,15 @@ presence.on("UpdateData", async () => {
 
       title2 = truncateAfter(tabTitle, pattern);
 
-      presenceData.details = "Reading: " + title2;
+      presenceData.details = `Reading: ${title2}`;
 
-      presenceData.state =
-        "Current page: " + currentPage.innerText + "/" + pageNumber.innerText;
+      presenceData.state = `Current page: ${currentPage.innerText}/${pageNumber.innerText}`;
 
       presenceData.startTimestamp = browsingStamp;
     } else if (title.innerText.length > 0) {
-      if (title.innerText.length > 128) {
+      if (title.innerText.length > 128)
         presenceData.state = "Title longer than 128 characters.";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      else presenceData.state = title.innerText;
 
       presenceData.details = "Viewing a page: ";
 
@@ -125,7 +117,7 @@ presence.on("UpdateData", async () => {
     );
     presenceData.details = "Favorites";
 
-    presenceData.state = "Page: " + favoriteCurrentPage.innerText;
+    presenceData.state = `Page: ${favoriteCurrentPage.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/search/")) {

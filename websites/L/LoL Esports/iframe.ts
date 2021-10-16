@@ -8,7 +8,5 @@ iframe.on("UpdateData", async () => {
       duration: video.duration,
       paused: video.paused
     });
-  } else {
-    iframe.send({ iframevideo: false });
-  }
+  } else iframe.send({ iframevideo: false });
 });

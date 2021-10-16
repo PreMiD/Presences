@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "Mugzone",
   "author": {
     "name": "Himori",
@@ -8,7 +8,7 @@
   "category": "games",
   "logo": "https://i.imgur.com/5phtiVk.png",
   "thumbnail": "https://i.imgur.com/LiUGZxS.png",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "color": "#b1b8cd",
   "tags": [
     "malody",

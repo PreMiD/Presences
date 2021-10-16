@@ -7,14 +7,14 @@ presence.on("UpdateData", async function () {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    set_timeElapsed = await presence.getSetting("timeElapsed"),
-    set_showButtons = await presence.getSetting("showButtons"),
-    set_smallImages = await presence.getSetting("showSmallImages"),
+    setTimeElapsed = await presence.getSetting("timeElapsed"),
+    setShowButtons = await presence.getSetting("showButtons"),
+    setSmallImages = await presence.getSetting("showSmallImages"),
     urlpath = window.location.pathname.split("/"),
     langs = ["nl", "fr", "de"],
     urlpNum = new RegExp(langs.join("|")).test(urlpath[1]) ? 1 : 0;
 
-  if (set_timeElapsed) presenceData.startTimestamp = browsingStamp;
+  if (setTimeElapsed) presenceData.startTimestamp = browsingStamp;
 
   if (!urlpath[urlpNum + 1]) presenceData.details = "Home";
   else if (urlpath[urlpNum + 1] === "c") {
@@ -33,7 +33,7 @@ presence.on("UpdateData", async function () {
         .getAttribute("data-name");
       if (urlpath[num + 1]) presenceData.state = category;
     }
-    if (set_showButtons) {
+    if (setShowButtons) {
       presenceData.buttons = [
         {
           label: "View Category",
@@ -49,10 +49,11 @@ presence.on("UpdateData", async function () {
       presenceData.details = "Accessoires";
     else if (urlpath[urlpNum + 2] === "brands") {
       presenceData.details = "Brands";
-      if (urlpath[urlpNum + 3])
+      if (urlpath[urlpNum + 3]) {
         presenceData.state = document.querySelector(
           "li.b-breadcrumb-item>span.b-breadcrumb-text"
         ).textContent;
+      }
     } else if (urlpath[urlpNum + 2] === "sale") presenceData.details = "Sale";
     else if (urlpath[urlpNum + 2] === "deals") presenceData.details = "Deals";
     else if (urlpath[urlpNum + 2] === "musthaves")
@@ -74,7 +75,7 @@ presence.on("UpdateData", async function () {
         .replace(brand, "")
         .replace(/\s+/g, " ")
         .trim();
-    if (set_showButtons) {
+    if (setShowButtons) {
       presenceData.buttons = [
         {
           label: "View Product",
@@ -90,7 +91,7 @@ presence.on("UpdateData", async function () {
     presenceData.details = "Search:";
     presenceData.state = urlParams.get("q");
 
-    if (set_showButtons) {
+    if (setShowButtons) {
       presenceData.buttons = [
         {
           label: "View Results",
@@ -129,20 +130,18 @@ presence.on("UpdateData", async function () {
     .replace("www.snipes.", "")
     .replace("www.snipesusa.", "");
 
-  if (set_smallImages) {
+  if (setSmallImages) {
     if (smallimage === "com") {
       smallimage =
         document.location.hostname === "www.snipesusa.com" ? "usa" : "de";
     }
 
     presenceData.smallImageKey = smallimage;
-    presenceData.smallImageText = "SNIPES " + smallimage.toUpperCase();
+    presenceData.smallImageText = `SNIPES ${smallimage.toUpperCase()}`;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "632914600949710868"
   }),
-  pages = {
+  pages: { [page: string]: string } = {
     "/yildiz-firsatlar": "Yıldız Fırsatlar",
     "/tum-kampanyalar": "Tüm Kampanyalar",
     "/cadde": "Cadde",
@@ -34,17 +34,16 @@ presence.on("UpdateData", async () => {
       ) as HTMLElement),
     seller = document.querySelector(
       "#store-page-title > div.store-name > h1"
-    ) as HTMLElement;
+    ) as HTMLElement,
+    data: { [k: string]: string | number } = {
+      largeImageKey: "gg-logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
+    };
 
-  const data: { [k: string]: any } = {
-    largeImageKey: "gg-logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
-
-  if (productName && productName.textContent != "") {
+  if (productName && productName.textContent !== "") {
     data.details = "Bir ürüne göz atıyor:";
     data.state = `${productName.textContent}${
-      price ? " - " + price.textContent.trim() : ""
+      price ? ` - ${price.textContent.trim()}` : ""
     }`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     // We are using slice(0, -1) here to slice the last "/" and check if there's a record on pages variable.
@@ -57,7 +56,7 @@ presence.on("UpdateData", async () => {
         ? document.title.replace(" - GittiGidiyor", "")
         : "";
     data.smallImageKey = "search";
-  } else if (seller && seller.textContent != "") {
+  } else if (seller && seller.textContent !== "") {
     data.details = "Bir mağazaya göz atıyor:";
     data.state = seller.textContent.trim();
   } else {
@@ -65,6 +64,5 @@ presence.on("UpdateData", async () => {
     data.state = "Ana Sayfa";
   }
 
-  if (data.details && data.state && data.details != "" && data.state != "")
-    presence.setActivity(data);
+  if (data.details && data.state) presence.setActivity(data);
 });

@@ -13,15 +13,15 @@ presence.on("UpdateData", async () => {
     },
     path = document.location.pathname;
 
-  if (path == "/") {
+  if (path === "/") {
     presenceData.startTimestamp = startBrowsingStamp;
-    presenceData.details = `Смотрит домашнюю страницу`;
-  } else if (path == "/anime") {
+    presenceData.details = "Смотрит домашнюю страницу";
+  } else if (path === "/anime") {
     presenceData.startTimestamp = startBrowsingStamp;
-    presenceData.details = `Выбирает аниме`;
-  } else if (path == "/manga") {
+    presenceData.details = "Выбирает аниме";
+  } else if (path === "/manga") {
     presenceData.startTimestamp = startBrowsingStamp;
-    presenceData.details = `Выбирает мангу`;
+    presenceData.details = "Выбирает мангу";
   } else {
     const mangaTitle = document.getElementById("the_manga_title");
 
@@ -75,10 +75,11 @@ presence.on("UpdateData", async () => {
         nameArray.splice(nameArray.indexOf("сезон") - 1, season ? 4 : 2);
         presenceData.details = nameArray.join(" ");
 
-        if (episode)
+        if (episode) {
           presenceData.state = `${
             season ? `${season} сезон ` : ""
           }${episode} серия`;
+        }
       }
 
       const namePreview = document.querySelector(

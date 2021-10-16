@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "MMDDKK",
     "id": "259984855503339520"
@@ -10,7 +10,7 @@
     "pt": "A melhor maneira de assistir animes e filmes online totalmente de graça, basta dar play e ver seus animes favoritos com a melhor qualidade possível (FULLHD), além das ótimas fansubs que legendam nossos episódios."
   },
   "url": "animes.gg",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/hkqIL8Q.png",
   "thumbnail": "http://i.imgur.com/Mw0gNnG.png",
   "color": "#f59f16",

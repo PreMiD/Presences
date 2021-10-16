@@ -1,7 +1,7 @@
 const presence = new Presence({
-  clientId: "709526684428271687"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "709526684428271687"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let owner, title, presenceprivate;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Viewing ${title.textContent}`;
     } else presenceData.details = "Viewing Unknown";
   } else presenceData.details = "Viewing Unknown";
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     //This will fire if you do not set presence details
     presence.setTrayTitle();
     presence.setActivity();

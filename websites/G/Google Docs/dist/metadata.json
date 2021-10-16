@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
@@ -18,7 +19,7 @@
     "nl": "Google Documenten is een gratis webgebaseerde tekstverwerker die deel uitmaakt van een virtueel kantoor aangeboden door Google binnen de Google Drive-service. Deze dienst bevat ook onder andere Google Spreadsheets en Google Presentaties."
   },
   "url": "docs.google.com",
-  "version": "1.4.8",
+  "version": "1.4.10",
   "logo": "https://i.imgur.com/m768cDN.png",
   "thumbnail": "https://i.imgur.com/jbuIiwv.jpg",
   "color": "#3a404a",

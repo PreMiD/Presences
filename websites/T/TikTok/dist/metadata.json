@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -19,7 +20,7 @@
     "nl": "TikTok - trends beginnen hier. Kijkers kunnen op mobiele apparaten of op het web miljoenen gepersonaliseerde korte video's bekijken."
   },
   "url": "www.tiktok.com",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "logo": "https://i.imgur.com/KBAjCOX.png",
   "thumbnail": "https://i.imgur.com/QAxUXB4.png",
   "color": "#000000",

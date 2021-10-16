@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const presence = new Presence({ clientId: "821776987570962532" }),
   timestamp = Math.floor(Date.now() / 1000),
   newStats = async () =>

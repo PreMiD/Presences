@@ -1,5 +1,6 @@
 {
-  "version": "1.0.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "version": "1.0.5",
   "service": "Kael",
   "category": "other",
   "color": "#eb798d",

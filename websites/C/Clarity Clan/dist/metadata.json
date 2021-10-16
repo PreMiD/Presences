@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Leonardo Jacon#0001",
     "id": "600148454668369930"
@@ -10,7 +10,7 @@
     "nl": "Clarity Clan is een Minecraft-clan die groeit in de gemeenschap van MCC."
   },
   "service": "Clarity Clan",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/LGdKN10.png",
   "thumbnail": "https://i.imgur.com/76lDRgL.png",
   "color": "#1F1F1F",

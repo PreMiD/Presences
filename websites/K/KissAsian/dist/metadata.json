@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -16,7 +17,7 @@
   },
   "url": "kissasian.li",
   "regExp": "kissasian([.][a-z]+)+[/]",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "logo": "https://i.imgur.com/B8evsEL.png",
   "thumbnail": "https://i.imgur.com/AG3nCsQ.png",
   "color": "#f5d80b",

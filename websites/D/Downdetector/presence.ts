@@ -1,14 +1,14 @@
 const presence = new Presence({
-  clientId: "656574682916585473"
-});
+    clientId: "656574682916585473"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 function decodeReq(entity: Element): string {
-  var txt = document.createElement("textarea");
+  const txt = document.createElement("textarea");
   txt.innerHTML = entity.textContent;
   return txt.value;
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
 let title;
 
 presence.on("UpdateData", () => {
@@ -16,11 +16,11 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.host == "downdetector.com") {
+  if (document.location.host === "downdetector.com") {
     presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname.startsWith("/search/")) {
       presenceData.details = "Searching for:";
-      const item = document.location.href.split("?q=")[1];
+      const [, item] = document.location.href.split("?q=");
       presenceData.state = item;
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/archive/")) {
@@ -37,7 +37,7 @@ presence.on("UpdateData", () => {
       presenceData.state = decodeReq(title);
     } else if (document.location.pathname.includes("/map/")) {
       presenceData.details = "Viewing outage map for:";
-      title = document.title.split("outage")[0];
+      [title] = document.title.split("outage");
       presenceData.state = title;
     } else if (document.location.pathname.includes("/status/")) {
       presenceData.details = "Viewing a status for:";
@@ -60,10 +60,8 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

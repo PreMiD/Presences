@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Snowy ✨",
     "id": "693445343332794408"
@@ -11,7 +12,7 @@
     "nl": "WoxeBot is een Discord-bot die u aan uw server kunt toevoegen om deze gemakkelijk en met vertrouwen te beheren!"
   },
   "url": "panel.woxe.me",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/bPgn0X2.png",
   "thumbnail": "https://i.imgur.com/bPgn0X2.png",
   "color": "#49ABE3",

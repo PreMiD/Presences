@@ -20,15 +20,15 @@ presence.on("UpdateData", () => {
   if (
     (document.querySelector("#search_query") &&
       Array.from(document.querySelectorAll("#search_query")).some(
-        (elem) => elem.value.length > 0
+        (elem: HTMLInputElement) => elem.value.length > 0
       )) ||
     (["input", "textarea"].indexOf(
       document.activeElement.tagName.toLowerCase()
     ) !== -1 &&
-      document.activeElement.value.length > 0)
+      (document.activeElement as HTMLInputElement).value.length > 0)
   ) {
     details = "Searching for accounts";
-    state = `at ${document.activeElement.value}`;
+    state = `at ${(document.activeElement as HTMLInputElement).value}`;
     smallImageKey = "search";
   }
   if (Path.startsWith("/view/")) {
@@ -63,10 +63,10 @@ presence.on("UpdateData", () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "bugmenot",
-    smallImageKey: smallImageKey,
+    smallImageKey,
     startTimestamp: elapsed,
     smallImageText: location.host + location.pathname
   };

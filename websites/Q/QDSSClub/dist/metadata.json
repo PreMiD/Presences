@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Tellen",
     "id": "535214819520020510"
@@ -20,7 +21,7 @@
     "qdssclub.com",
     "www.qdssclub.com"
   ],
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/R10jnF3.png",
   "thumbnail": "https://i.imgur.com/G0CHGdM.png",
   "color": "#9A12D6",

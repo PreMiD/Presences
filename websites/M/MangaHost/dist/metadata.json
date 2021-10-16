@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Striter Alfa",
     "id": "288834890772905984"
@@ -14,7 +14,7 @@
     "nl": "De meest complete en goed georganiseerde online reader waar je verhalen en mangás in de Portugese taal kunt vinden."
   },
   "service": "MangaHost",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/t04Xe6q.png",
   "thumbnail": "https://i.imgur.com/b7YuC1M.png",
   "color": "#56e0ff",

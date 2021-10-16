@@ -151,9 +151,9 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
-  } else if (document.location.pathname === "/u/dashboard") {
+  } else if (document.location.pathname === "/u/dashboard")
     presenceData.details = "Viewing 👤 dashboard";
-  } else if (document.location.pathname === "/emoji-list") {
+  else if (document.location.pathname === "/emoji-list") {
     presenceData.details = "Viewing 😃 Emoji list";
     presenceData.buttons = [
       {
@@ -323,7 +323,7 @@ presence.on("UpdateData", async () => {
   if (!showButtons) delete presenceData.buttons;
   if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

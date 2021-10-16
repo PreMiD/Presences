@@ -3,12 +3,10 @@ const presence = new Presence({
 });
 
 function displayPresence(presenceData: PresenceData) {
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 }
 
 presence.on("UpdateData", async () => {
@@ -71,16 +69,15 @@ presence.on("UpdateData", async () => {
     }
 
     if (!presenceData.state) {
-      if (path.startsWith("/admin")) {
+      if (path.startsWith("/admin"))
         presenceData.state = "Viewing an admin page";
-      } else if (/[a-zA-Z0-9]{8}/.test(path)) {
+      else if (/[a-zA-Z0-9]{8}/.test(path)) {
         const imageOwner = document.getElementById("image-owner").innerText;
         presenceData.state = `Viewing an upload by ${imageOwner}`;
       }
     }
-  }
-  // beta site
-  else if (document.location.hostname === "beta.pays.host") {
+  } else if (document.location.hostname === "beta.pays.host") {
+    // beta site
     const siteVersionElement = document.querySelector(
       "body div.row div.sidebar-header a"
     );
@@ -95,8 +92,8 @@ presence.on("UpdateData", async () => {
     const hiddenUsernameSetting = await presence.getSetting("usernameHidden");
 
     if (!hiddenUsernameSetting) {
-      const welcomeMessageElement =
-        document.getElementsByClassName("welcomeText")[0];
+      const [welcomeMessageElement] =
+        document.getElementsByClassName("welcomeText");
 
       if (welcomeMessageElement) {
         const welcomeMessage = welcomeMessageElement.textContent,
@@ -215,17 +212,17 @@ presence.on("UpdateData", async () => {
       const decodedPath = decodeURIComponent(path.substr(1)), // Decode URI path without leading /
         invisiblePath = /[\u200B\u200C]+/.test(decodeURIComponent(decodedPath)); // Test if the path uses invisible chars
 
-      if (path.startsWith("/admin")) {
+      if (path.startsWith("/admin"))
         presenceData.state = "Viewing an admin page";
-      } else if (path.startsWith("/changelog/")) {
+      else if (path.startsWith("/changelog/")) {
         const changelogVersion = path.replace("/changelog/", "");
         presenceData.state = `Viewing ${changelogVersion} changelog`;
-      }
-      // User pages follow format of "/user/UID"
-      else if (
+      } else if (
         path.startsWith("/user/") &&
         /\d+\/?$/.test(path.replace("/user/", ""))
       ) {
+        // User pages follow format of "/user/UID"
+
         const usernameElement = document.querySelector("main h2");
 
         if (usernameElement) {
@@ -235,12 +232,11 @@ presence.on("UpdateData", async () => {
           presenceData.state = "Page not found";
           return displayPresence(presenceData);
         }
-      }
-      // User admin pages follow format of "/user/UID/admin"
-      else if (
+      } else if (
         path.startsWith("/user/") &&
         /\d+\/admin\/?/.test(path.replace("/user/", ""))
       ) {
+        // User admin pages follow format of "/user/UID/admin"
         const usernameElement = document.querySelector("main h2");
 
         if (usernameElement) {
@@ -250,9 +246,9 @@ presence.on("UpdateData", async () => {
           presenceData.state = "Page not found";
           return displayPresence(presenceData);
         }
-      }
-      // Image path IDs are alphanumeric and 8 characters in length, or uses invisible characters
-      else if (/\b[a-zA-Z0-9]{8}\b/.test(path) || invisiblePath) {
+      } else if (/\b[a-zA-Z0-9]{8}\b/.test(path) || invisiblePath) {
+        // Image path IDs are alphanumeric and 8 characters in length, or uses invisible characters
+
         if (invisiblePath) {
           let id;
           const binaryString = decodedPath
@@ -260,10 +256,11 @@ presence.on("UpdateData", async () => {
               .replace(/\u200c/g, "1"),
             bytes = binaryString.match(/.{8}/g);
 
-          if (bytes)
+          if (bytes) {
             id = bytes
               .map((bin) => String.fromCharCode(parseInt(bin, 2)))
               .join("");
+          }
 
           // Check the decoded invisible path does not follow valid image ID format
           if (!/\b[a-zA-Z0-9]{8}\b/.test(id)) {
@@ -279,13 +276,10 @@ presence.on("UpdateData", async () => {
           const imageOwner = imageOwnerElement.textContent;
           presenceData.state = `Viewing an upload by ${imageOwner}`;
         }
-      } else {
-        presenceData.state = "Page not found";
-      }
+      } else presenceData.state = "Page not found";
     }
-  }
-  // status page
-  else if (document.location.hostname === "status.pays.host") {
+  } else if (document.location.hostname === "status.pays.host") {
+    // status page
     presenceData.details = "Browsing pays.host status";
     presenceData.state =
       document.getElementsByClassName("statusbar-text")[0].textContent;

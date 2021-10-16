@@ -6,21 +6,19 @@ const presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  if (data.details == null) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(data);
-  }
+  } else presence.setActivity(data);
 });
 
 function RefreshData() {
   if (document.getElementById("video-comment")) {
     const mvPlay = document.getElementById("mv-pl"),
       mvTime = document.getElementById("mv-tm"),
-      mvPlaying = mvPlay.style.visibility != "visible",
+      mvPlaying = mvPlay.style.visibility !== "visible",
       mvCaptionElement = document.getElementById("video-comment"),
-      mvCaptionH1 = mvCaptionElement.getElementsByTagName("h1")[0],
+      [mvCaptionH1] = mvCaptionElement.getElementsByTagName("h1"),
       videoName = mvCaptionH1 ? mvCaptionH1.textContent : "Unknown video";
 
     if (mvTime) {
@@ -40,16 +38,12 @@ function RefreshData() {
     actualUrl = actualUrl.replace("mesiac/", "");
     actualUrl = actualUrl.replace("celkovo/", "");
 
-    if (actualUrl == "") {
-      data.details = "Hlavná stránka";
-    } else if (!actualTitle.startsWith("Videá - mojeVideo.sk")) {
+    if (actualUrl === "") data.details = "Hlavná stránka";
+    else if (!actualTitle.startsWith("Videá - mojeVideo.sk")) {
       if (actualTitle.includes(".strana")) {
         const titlePieces = actualTitle.split(" - ");
-        data.details = titlePieces[0];
-        data.state = titlePieces[1];
-      } else {
-        data.details = actualTitle;
-      }
+        [data.details, data.state] = titlePieces;
+      } else data.details = actualTitle;
     } else {
       let extraPage = "Hlavná stránka",
         extraPageNumber = 0;
@@ -66,7 +60,7 @@ function RefreshData() {
       if (actualUrl.includes("prihlasenie")) extraPage = "Prihlásenie";
       else if (actualUrl.includes("registracia")) extraPage = "Registrácia";
       data.details = extraPage;
-      if (extraPageNumber != 0) data.state = extraPageNumber + ".strana";
+      if (extraPageNumber !== 0) data.state = `${extraPageNumber}.strana`;
     }
   }
   data.largeImageKey = "mojevideo";

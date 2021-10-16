@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
       }
       presenceData.startTimestamp = browsingStamp;
       if (slideshow.getSlides().length) {
-        presence.info(`Removing all cards from SlideShow.`);
+        presence.info("Removing all cards from SlideShow.");
         slideshow.deleteAllSlides();
       }
     } else {
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
         if (team !== lastTeamLog) {
           browsingStamp = Math.floor(Date.now() / 1000);
           slideshow.deleteAllSlides();
-          presence.info(`Removing all cards from SlideShow.`);
+          presence.info("Removing all cards from SlideShow.");
           lastTeamLog = team;
         }
       }
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 
       if (color !== currentlySetColor) {
         slideshow.deleteAllSlides();
-        presence.info(`Removing all cards from SlideShow.`);
+        presence.info("Removing all cards from SlideShow.");
         currentlySetColor = color;
       }
 
@@ -144,9 +144,7 @@ presence.on("UpdateData", async () => {
         if (currentClueData.length) {
           presenceData.details = "Spectating... Current clue:";
           presenceData.state = `${currentClueData[0].firstElementChild.textContent} (Matches ${currentClueData[0].children[1].textContent} cards)`;
-        } else {
-          presenceData.details = "Spectating...";
-        }
+        } else presenceData.details = "Spectating...";
       } else if (document.querySelector("input")) {
         //* is spymaster and has to put in a clue rn
         presenceData.details = "Giving a clue";
@@ -168,7 +166,7 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.startTimestamp = browsingStamp;
     if (slideshow.getSlides().length) {
-      presence.info(`Removing all cards from SlideShow.`);
+      presence.info("Removing all cards from SlideShow.");
       slideshow.deleteAllSlides();
     }
 
@@ -192,9 +190,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-    } else {
-      presenceData.details = "Browsing...";
-    }
+    } else presenceData.details = "Browsing...";
   }
   presence.setActivity(presenceData);
 });

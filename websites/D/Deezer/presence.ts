@@ -41,8 +41,8 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -86,8 +86,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (buttons) {
         presenceData.buttons = [
@@ -109,12 +108,9 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData, !paused);
     } else {
-      title = document
+      [episode, title] = document
         .querySelector("div.marquee-content")
-        .textContent.split(" · ")[1];
-      episode = document
-        .querySelector("div.marquee-content")
-        .textContent.split(" · ")[0];
+        .textContent.split(" · ");
       showLink = albumLink = document.querySelector("div.marquee-content")
         .children[0] as HTMLAnchorElement;
       presenceData.details = title;
@@ -124,8 +120,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (showLink) {
         if (buttons) {

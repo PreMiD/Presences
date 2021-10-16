@@ -50,7 +50,7 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const host = location.host,
+  const { host } = location,
     path = location.pathname.replace(/\/?$/, "/"),
     showSearch = await presence.getSetting("search"),
     showTimestamps = await presence.getSetting("timestamp");
@@ -70,11 +70,8 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
-      data = { ...data, ...v };
-    }
-  }
+  for (const [k, v] of Object.entries(statics))
+    if (path.match(k)) data = { ...data, ...v };
 
   if (path === "/") {
     data.details = "Browsing...";
@@ -128,7 +125,7 @@ presence.on("UpdateData", async () => {
   if (path.includes("/UserRun/")) {
     data.details = "Viewing Performance Report...";
 
-    const id = path.split("/").slice(-2)[0];
+    const [id] = path.split("/").slice(-2);
     data.state = `${id} - ${getElement(".pg-head-toption-post")}`;
   }
 

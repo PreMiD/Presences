@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Arda",
     "id": "403225819222245377"
@@ -13,7 +14,7 @@
     "nl": "Log.com.tr is een technologieblog, net als Webtekno en ShiftDelete.Net."
   },
   "service": "Log.com.tr",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/4LtbS4t.png",
   "thumbnail": "https://i.imgur.com/DJAeZmF.png",
   "color": "#FFFFFF",

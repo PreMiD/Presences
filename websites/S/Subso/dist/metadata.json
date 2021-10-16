@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
@@ -13,7 +14,7 @@
     "www.sub.so",
     "creators.sub.so"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/4b8AEvp.png",
   "thumbnail": "https://i.imgur.com/rbbMigG.jpg",
   "color": "#32a852",

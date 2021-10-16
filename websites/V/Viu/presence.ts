@@ -47,10 +47,10 @@ presence.on("UpdateData", async () => {
     title = null;
   }
 
-  if (!videoData) videoData = await presence.getPageletiable("GA_DIMENSIONS");
+  videoData ??= await presence.getPageletiable("GA_DIMENSIONS");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

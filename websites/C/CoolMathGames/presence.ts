@@ -29,49 +29,41 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  let details = undefined,
-    state = undefined;
+  let details, state;
 
   const startTimestamp = elapsed,
     path = window.location.pathname;
 
-  if (path === "/") {
-    details = "Browsing...";
-  } else if (path.match("/user") || path.match("/signup")) {
-    if (path.match("signup")) {
-      details = "Signing up...";
-    } else {
-      details = "Logging in...";
-    }
-  } else if (path.match("/terms-use")) {
-    details = "Viewing Terms of Use";
-  } else if (path.match("/trivia")) {
+  if (path === "/") details = "Browsing...";
+  else if (path.match("/user") || path.match("/signup")) {
+    if (path.match("signup")) details = "Signing up...";
+    else details = "Logging in...";
+  } else if (path.match("/terms-use")) details = "Viewing Terms of Use";
+  else if (path.match("/trivia")) {
     details = "Viewing Trivia";
 
     const title = document.querySelector("#start-the-quiz-title");
-    if (title) {
-      state = title.textContent;
-    }
+    if (title) state = title.textContent;
   } else {
     const playlists = document.querySelector(".playlists-queue-wrapper"),
       breadcrumb = document.querySelector(".pane-content > .breadcrumb > ol"),
-      breadcrumb_last = document.querySelector(
+      breadcrumbLast = document.querySelector(
         ".pane-content > .breadcrumb > ol > li:last-child > span"
       ),
       difficulty = document.querySelector("a.active");
-    if (breadcrumb && breadcrumb_last && difficulty) {
+    if (breadcrumb && breadcrumbLast && difficulty) {
       details = "Viewing Jigsaw Puzzle";
-      state = `${breadcrumb_last.textContent} (${difficulty.textContent})`;
-    } else if (breadcrumb && breadcrumb_last) {
+      state = `${breadcrumbLast.textContent} (${difficulty.textContent})`;
+    } else if (breadcrumb && breadcrumbLast) {
       details = "Viewing Jigsaw Puzzles";
-      state = breadcrumb_last.textContent;
+      state = breadcrumbLast.textContent;
     } else if (playlists) {
       details = "Viewing Category";
       state = "Jigsaw Puzzles";
     } else {
-      const parsedData = parse(path),
-        type = parseInt(parsedData[0]),
-        name = parsedData[1];
+      const [parsedInt, parsedName] = parse(path),
+        type = parseInt(parsedInt),
+        name = parsedName;
 
       switch (type) {
         case PageType.Category:
@@ -90,10 +82,10 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "coolmathgames",
-    startTimestamp: startTimestamp
+    startTimestamp
   };
 
   presence.setActivity(data);
