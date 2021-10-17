@@ -1,7 +1,8 @@
+//@ts-nocheck
 const presence = new Presence({ clientId: "817772461109018664" }),
   timestamp = Math.floor(Date.now() / 1000),
   newStats = async () =>
-    (data = await (await window.fetch("https://azura.itsbeats.net/api/nowplaying/1")).json());
+    (data = await (await window.fetch("https://radio.itsbeats.net/stats")).json());
 
 let data: {
   listeners: {
@@ -24,10 +25,7 @@ newStats();
 
 presence.on("UpdateData", async () => {
   const settings = {
-      details: (await presence.getSetting("details")).replace(
-        "%listeners%",
-        data.listeners.total ?? "Listeners"
-      ),
+      details: (await presence.getSetting("details")).replace("%listeners%", data.listeners.total),
       state: (await presence.getSetting("state"))
         .replace("%artist%", data.now_playing.song.artist || "Artist")
         .replace("%songText%", `${data.now_playing.song.artist} - ${data.now_playing.song.title}`)
