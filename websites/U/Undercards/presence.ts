@@ -1,3 +1,4 @@
+/* eslint-disable no-eval */
 const undercards = new Presence({
     clientId: "799885664538853417"
   }),

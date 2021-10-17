@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Team Page";
     presenceData.smallImageKey = "reading";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/applications") {
+  } else if (document.location.pathname === "/applications") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Apply to become a presenter";
