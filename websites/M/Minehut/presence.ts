@@ -26,17 +26,19 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Viewing the Market";
     if (document.location.pathname.includes("/collections/") && ok) {
       const c = f[f.indexOf("collections") + 1];
-      presenceData.state = `Viewing collection ${c}`;
-      presenceData.buttons = [
-        {
-          label: `View ${c}`,
-          url: location.origin + location.pathname
-        }
-      ];
+      if (c) {
+        presenceData.state = `Viewing collection ${c}`;
+        presenceData.buttons = [
+          {
+            label: `View ${c}`,
+            url: location.origin + location.pathname
+          }
+        ];
+      }
     }
-    if (document.location.pathname.includes("/products/"))
-      if (ok) {
-        const p = f[f.indexOf("products") + 1];
+    if (document.location.pathname.includes("/products/") && ok) {
+      const p = f[f.indexOf("products") + 1];
+      if (p) {
         presenceData.state = `Viewing product ${p}`;
         presenceData.buttons = [
           {
@@ -45,7 +47,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-
+    }
     if (document.location.pathname.includes("/cart")) {
       const priceA = document.querySelector(
           "#shopify-section-cart--template > section > div > form > div.cart__footer > div.cart__footer-right > p > span"
