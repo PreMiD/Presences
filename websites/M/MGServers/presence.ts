@@ -2,7 +2,6 @@ const presence = new Presence({
   clientId: "899051140157681726"
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
-
 const forumurl = "mgservers.de"
 const panelurl = "webinterface.mgservers.de"
 const panelserverurl = "webinterface.mgservers.de/server/"
