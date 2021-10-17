@@ -37,8 +37,6 @@
       "mgservers"
     ],
   "category": "other",
-  "readLogs": false,
-  "warning": false,
   "settings": [
     {
       "id": "werbung",
