@@ -2,9 +2,9 @@ const presence = new Presence({
   clientId: "899051140157681726"
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
-const forumurl = "mgservers.de"
-const panelurl = "webinterface.mgservers.de"
-const panelserverurl = "webinterface.mgservers.de/server/"
+const forumurl = "mgservers.de",
+ panelurl = "webinterface.mgservers.de",
+ panelserverurl = "webinterface.mgservers.de/server/";
 
 presence.on("UpdateData", async () => {
     const privacy = await presence.getSetting("privacy");
