@@ -4,30 +4,27 @@
     "name": "Callum",
     "id": "506899274748133376"
   },
-  "service": "Bounce",
+  "service": "Beats",
   "description": {
-    "en": "Bounce Radio is a 24/7 international hit music station that provides hit music to everyone. Made by gamers for gamers.",
-    "fr": "Bounce Radio est une station de musique à succès internationale 24/7 qui fournit de la musique à succès à tout le monde. Fabriqué par des joueurs pour des joueurs.",
-    "nl": "Bounce Radio is een 24/7 internationaal hitmuziekstation dat iedereen hitmuziek biedt. Gemaakt door gamers voor gamers.",
-    "ga_IE": "Is stáisiún ceoil idirnáisiúnta buailte é Bounce Radio a chuireann ceol buailte ar fáil do gach duine. Déanta ag gamers do gamers."
+    "en": "Beats Radio is a 24/7 international hit music station that provides hit music to everyone. Made by gamers for gamers.",
+    "fr": "Beats Radio est une station de musique à succès internationale 24/7 qui fournit de la musique à succès à tout le monde. Fabriqué par des joueurs pour des joueurs.",
+    "nl": "Beats Radio is een 24/7 internationaal hitmuziekstation dat iedereen hitmuziek biedt. Gemaakt door gamers voor gamers.",
+    "ga_IE": "Is stáisiún ceoil idirnáisiúnta buailte é Beats Radio a chuireann ceol buailte ar fáil do gach duine. Déanta ag gamers do gamers."
   },
   "url": [
-    "itsbounce.net",
-    "itsbounce.com",
-    "itsbounce.uk",
-    "wearebounce.co.uk"
+    "itsbeats.net"
   ],
-  "version": "3.0.3",
-  "logo": "https://i.imgur.com/ZXbdFGq.png",
-  "thumbnail": "https://i.imgur.com/FZQsMTt.png",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/36Ln5RE.png",
+  "thumbnail": "https://i.imgur.com/audBuMC.png",
   "color": "#32a852",
   "tags": [
     "music",
     "radio",
     "gamers",
     "community",
-    "bounce",
-    "bounceradio"
+    "beats",
+    "beatsradio"
   ],
   "category": "music",
   "settings": [
@@ -52,5 +49,5 @@
       "placeholder": "%artist% - %song%"
     }
   ],
-  "regExp": "([a-z0-9-]+[.])*(itsbounce[.]net|itsbounce[.]com|itsbounce[.]uk|wearebounce[.]co[.]uk)[/]"
+  "regExp": "([a-z0-9-]+[.])*(itsbeats[.]net)[/]"
 }
