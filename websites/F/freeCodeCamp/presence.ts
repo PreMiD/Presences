@@ -25,7 +25,7 @@ presence.on("UpdateData", () => {
         .join(" "),
     details = (page, title) => {
       if (page === "/") return "Viewing:";
-      if (page.match(/^\/news|^\/settings/)) return "Viewing page:";
+      if (page.match(/^\/news|^\/settings|^\/donate/)) return "Viewing page:";
       if (page.startsWith("/learn")) {
         return arr.length == 1 ? "Learning:" : capitalize(arr[1]) + ":";
       }
@@ -33,7 +33,7 @@ presence.on("UpdateData", () => {
     },
     state = (page, title) => {
       if (page === "/") return "The Main Page";
-      if (page.match(/^\/news|^\/settings/))
+      if (page.match(/^\/news|^\/settings|^\/donate/))
         return arr[1] ? title : capitalize(arr[0]);
       if (page.startsWith("/learn")) {
         return arr[2] ? capitalize(arr[2])
