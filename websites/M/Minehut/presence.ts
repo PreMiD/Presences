@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
       const serverName = document.querySelector(
         "#app > div > div.dash-div.fill-height > main > div > div.dash-div.fill-height > div > section > div:nth-child(2) > div.container.container--fluid > div > div > div.row.flex-nowrap > div > div > div > div > div.sc-side.d-flex.flex-column.justify-space-between.align-center.flex-direction-center.col-sm.col-xl-3.col-12 > div > div:nth-child(1) > div"
       );
-      if (serverName) presenceData.state = `Editing ${serverName.innerHTML}`;
+      if (serverName) presenceData.state = `Editing ${serverName.textContent}`;
     }
     if (document.location.pathname.includes("/servers"))
       presenceData.state = "Viewing the servers";
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
       const priceA = document.querySelector(
           "#shopify-section-cart--template > section > div > form > div.cart__footer > div.cart__footer-right > p > span"
         ),
-        a = priceA ? ` (${priceA.innerHTML} credits)` : "";
+        a = priceA ? ` (${priceA.textContent} credits)` : "";
       presenceData.state = `Viewing cart${a}`;
     }
     if (document.location.pathname.includes("/pages/wishlist"))
