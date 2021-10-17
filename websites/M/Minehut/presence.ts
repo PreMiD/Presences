@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         {
           label: `View ${c}`,
-          url: document.location.pathname
+          url: location.origin + location.pathname
         }
       ];
     }
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: `View ${p}`,
-            url: document.location.pathname
+            url: location.origin + location.pathname
           }
         ];
       }
