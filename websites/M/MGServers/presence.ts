@@ -9,7 +9,6 @@ const panelserverurl = "webinterface.mgservers.de/server/"
 presence.on("UpdateData", async () => {
     const privacy = await presence.getSetting("privacy");
     const werbung = await presence.getSetting("werbung");
-
     const presenceData: PresenceData = {
         details: "Dein Server Hoster",
         largeImageKey: "mgs-normal",
