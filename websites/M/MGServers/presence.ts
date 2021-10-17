@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
                 if (getpathserver(`/startup`)) presenceData.details = "Verwaltet Startparameter"
                 if (getpathserver(`/subdomain`)) presenceData.details = "Verwaltet Subdomains"
                 if (getpathserver(`/staff`)) presenceData.details = "Verwaltet Zugriffsanfragen"
-                if (getpathserver(`/settings`)) presenceData.details = "Server Einstellungen"   
+                if (getpathserver(`/settings`)) presenceData.details = "Server Einstellungen"
             }
 
             if (getpath("/admin")) presenceData.details = "Admininterface", delete presenceData.state;
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
                 {
                     label: "Aktuelle Seite",
                     url: `${document.URL}`
-                }   
+                }
             ]
             if(document.URL.includes("conversation")) presenceData.state = `Ließt eine Konversationen`
             if(document.URL.includes("global-jcoins-statement-list")) presenceData.state = `Kontoauszüge`
