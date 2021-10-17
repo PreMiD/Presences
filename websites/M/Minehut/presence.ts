@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     },
     f = document.location.pathname.split("/");
   if (document.location.hostname === "minehut.com") {
-    presenceData.details = "Minehut Dashboard";
+    presenceData.details = "Dashboard";
     presenceData.state = "On the dashboard";
     if (document.location.pathname.includes("/dashboard")) {
       const serverName = document.querySelector(
@@ -22,16 +22,28 @@ presence.on("UpdateData", async () => {
         "body > div.page > div.container > div > h1"
       ),
       ok = rd ? !rd.textContent.includes("404") : true;
-    presenceData.details = "Minehut Market";
+    presenceData.details = "Market";
     presenceData.state = "Viewing the Market";
     if (document.location.pathname.includes("/collections/") && ok) {
       const c = f[f.indexOf("collections") + 1];
       presenceData.state = `Viewing collection ${c}`;
+      presenceData.buttons = [
+        {
+          label: `View ${c}`,
+          url: document.location.pathname
+        }
+      ];
     }
     if (document.location.pathname.includes("/products/"))
       if (ok) {
         const p = f[f.indexOf("products") + 1];
         presenceData.state = `Viewing product ${p}`;
+        presenceData.buttons = [
+          {
+            label: `View ${p}`,
+            url: document.location.pathname
+          }
+        ];
       }
 
     if (document.location.pathname.includes("/cart")) {
@@ -54,7 +66,6 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
