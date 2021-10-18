@@ -9,7 +9,6 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "caards_logo",
       details: "Viewing unsupported page"
-
     };
 
   if (document.location.hostname === "www.caards.me") {
