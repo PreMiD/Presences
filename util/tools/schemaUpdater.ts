@@ -30,7 +30,6 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
         await axios.get(
           "https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
         )
-      ).data as {name: string}[]
       ).data as { name: string }[]
     )
       .filter((c) => c.name.endsWith(".json"))
