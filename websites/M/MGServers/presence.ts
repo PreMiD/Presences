@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
     }
     else presence.setActivity(presenceData);
 
-})
+});
 
 function getUrl(url: string) {
     return window.location.href.toLowerCase().includes(`${url}`)
