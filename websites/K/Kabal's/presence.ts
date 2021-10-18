@@ -4,11 +4,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  const page = window.location.pathname;
+      largeImageKey: "logo"
+    },
+    browsingStamp = Math.floor(Date.now() / 1000),
+    page = window.location.pathname;
 
   if (page.endsWith("panel")) {
     presenceData.details = "Bir sayfayı görüntülüyor:";
@@ -33,10 +32,8 @@ presence.on("UpdateData", () => {
     presenceData.state = "İrtibat";
     presenceData.startTimestamp = browsingStamp;
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

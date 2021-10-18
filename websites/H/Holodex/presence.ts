@@ -402,7 +402,7 @@ presence.on("UpdateData", async () => {
       }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

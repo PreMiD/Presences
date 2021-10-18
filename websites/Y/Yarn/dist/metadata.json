@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Deleted 7.12i",
     "id": "591702135310385157"
@@ -11,7 +12,7 @@
     "nl": "Garen is een pakketbeheerder die ook dienst doet als projectmanager."
   },
   "service": "Yarn",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/n6fsGyJ.png",
   "thumbnail": "https://i.imgur.com/vyNPYsU.png",
   "color": "#2188b6",

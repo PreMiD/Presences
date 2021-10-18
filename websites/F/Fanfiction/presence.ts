@@ -1,23 +1,20 @@
 const presence = new Presence({
-  clientId: "630790482804473857"
-});
-
-var tags = [
-  "/anime/",
-  "/book/",
-  "/cartoon/",
-  "/comic/",
-  "/game/",
-  "/misc/",
-  "/movie/",
-  "/play/",
-  "tv"
-];
-var anime;
-var crossover = [];
-for (let i = 0; i < tags.length; i++) {
-  crossover.push(["/crossovers" + tags[i]]);
-}
+    clientId: "630790482804473857"
+  }),
+  crossover: unknown[] = [],
+  tags = [
+    "/anime/",
+    "/book/",
+    "/cartoon/",
+    "/comic/",
+    "/game/",
+    "/misc/",
+    "/movie/",
+    "/play/",
+    "tv"
+  ];
+let anime;
+for (let i = 0; i < tags.length; i++) crossover.push([`/crossovers${tags[i]}`]);
 
 const elapsed = Math.floor(Date.now() / 1000);
 
@@ -28,7 +25,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = elapsed;
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Browing fanfics";
     presenceData.state = "at Homepage";
     presenceData.smallImageKey = "logo";
@@ -42,7 +39,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = document.location.href;
   } else if (document.location.pathname.startsWith("/s/")) {
-    var current = document.location.pathname
+    const current = document.location.pathname
       .replace("/s/", "")
       .split("/")
       .join("")
@@ -74,23 +71,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = `Looking for ${anime} `;
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = document.location.href;
-  } else if (/\d/.test(document.location.pathname)) {
-    anime = document.location.pathname
-      .split("/")
-      .join("")
-      .replace(/\d+/, "")
-      .replace("crossovers", "");
-
-    presenceData.details = "Exploring Fanfics";
-    presenceData.state = `Looking for ${anime} `;
-    presenceData.smallImageKey = "logo";
-    presenceData.smallImageText = document.location.href;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

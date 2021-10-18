@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "690593200473243759"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "690593200473243759"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -68,27 +67,25 @@ presence.on("UpdateData", () => {
           presenceData.state = "Cart review & checkout";
           break;
       }
-    } else if (document.location.pathname.endsWith("supporttickets.php")) {
+    } else if (document.location.pathname.endsWith("supporttickets.php"))
       presenceData.details = "Viewing the tickets";
-    } else if (document.location.pathname.endsWith("/announcements")) {
+    else if (document.location.pathname.endsWith("/announcements"))
       presenceData.details = "Viewing the announcements";
-    } else if (document.location.pathname.endsWith("/knowledgebase")) {
+    else if (document.location.pathname.endsWith("/knowledgebase"))
       presenceData.details = "Viewing the knowledgebase";
-    } else if (document.location.pathname.endsWith("/download")) {
+    else if (document.location.pathname.endsWith("/download"))
       presenceData.details = "Viewing the downloads";
-    } else if (document.location.pathname.endsWith("/serverstatus.php")) {
+    else if (document.location.pathname.endsWith("/serverstatus.php"))
       presenceData.details = "Viewing the server status";
-    } else if (document.location.pathname.endsWith("/submitticket.php")) {
+    else if (document.location.pathname.endsWith("/submitticket.php"))
       presenceData.details = "Opening a new ticket";
-    } else if (document.location.pathname.endsWith("/clientarea.php")) {
+    else if (document.location.pathname.endsWith("/clientarea.php")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Client Area";
     }
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

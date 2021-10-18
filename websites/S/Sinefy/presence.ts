@@ -67,26 +67,27 @@ sinefy.on("UpdateData", async () => {
     if (episode) activity.state = episode.replace("izle", "");
 
     if (Object.keys(video || {}).length > 0) {
-      const timestamps = sinefy.getTimestamps(
+      const [startTimestamp, endTimestamp] = sinefy.getTimestamps(
         video.currentTime,
         video.duration
       );
 
-      activity.startTimestamp = timestamps[0];
-      activity.endTimestamp = timestamps[1];
+      activity.startTimestamp = startTimestamp;
+      activity.endTimestamp = endTimestamp;
 
       if (video.paused) {
         delete activity.startTimestamp;
         delete activity.endTimestamp;
       }
 
-      if (settings.buttons)
+      if (settings.buttons) {
         activity.buttons = [
           {
             label: "Filmi/Diziyi İzle",
             url: location.href
           }
         ];
+      }
 
       activity.smallImageKey = video.paused ? "pause" : "play";
       activity.smallImageText = video.paused
@@ -112,13 +113,14 @@ sinefy.on("UpdateData", async () => {
     activity.details = "Bir kullanıcıya göz atıyor:";
     activity.state = username;
 
-    if (settings.buttons === true)
+    if (settings.buttons === true) {
       activity.buttons = [
         {
           label: "Kullanıcıyı Görüntüle",
           url: location.href
         }
       ];
+    }
 
     sinefy.setActivity(activity);
   } else if (page.includes("/oyuncu/")) {
@@ -129,13 +131,14 @@ sinefy.on("UpdateData", async () => {
     activity.details = "Bir oyuncuya göz atıyor:";
     activity.state = name;
 
-    if (settings.buttons === true)
+    if (settings.buttons === true) {
       activity.buttons = [
         {
           label: "Oyuncuyu Görüntüle",
           url: location.href
         }
       ];
+    }
 
     sinefy.setActivity(activity);
   } else if (page.includes("/forum/")) {
@@ -146,13 +149,14 @@ sinefy.on("UpdateData", async () => {
     activity.details = "Forum gönderisi:";
     activity.state = entry;
 
-    if (settings.buttons === true)
+    if (settings.buttons === true) {
       activity.buttons = [
         {
           label: "Gönderiyi Görüntüle",
           url: location.href
         }
       ];
+    }
 
     sinefy.setActivity(activity);
   } else if (pages[page] || pages[page.slice(0, -1)]) {

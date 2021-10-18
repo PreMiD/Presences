@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -12,7 +13,7 @@
     "ga_IE": "Siopadóireacht ar líne ón rogha is mó ar domhan de leabhair, irisí, ceol, DVDanna, físeáin, leictreonaic, ríomhairí, bogearraí, éadaí & gabhálais, bróga, seodra, uirlisí & crua-earraí, earraí tí, troscán, earraí spóirt, áilleacht & cúram pearsanta, leathanbhanda & dsl, bia gourmet & díreach faoi rud ar bith eile."
   },
   "url": "www.amazon.com",
-  "version": "1.5.7",
+  "version": "1.5.9",
   "logo": "https://i.imgur.com/qPBCqNA.png",
   "thumbnail": "https://i.imgur.com/Y6njoa3.png",
   "color": "#ff9900",

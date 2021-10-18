@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "LeoSight",
+  "author": {
+    "name": "Dzardys",
+    "id": "523468146183634971"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/HOmso2n.png",
+  "thumbnail": "https://i.imgur.com/KR8f71Y.png",
+  "version": "1.0.5",
+  "color": "#595959",
+  "tags": [
+    "mta",
+    "skimo",
+    "leosight",
+    "community",
+    "fun"
+  ],
+  "url": [
+    "leosight.cz",
+    "artic.leosight.cz",
+    "ctf.leosight.cz",
+    "eco.leosight.cz",
+    "guard.leosight.cz"
+  ],
+  "description": {
+    "cs_CZ": "Discordové RPC pro stránku LeoSight, které vám umožní sdílet vaši aktivitu s přáteli.",
+    "en": "Discord RPC for LeoSight, which can show your activity to your friends."
+  }
+}

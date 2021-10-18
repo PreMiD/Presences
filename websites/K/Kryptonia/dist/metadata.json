@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "Kryptonia",
   "author": {
     "name": "Amaury",
@@ -8,7 +8,7 @@
   "category": "games",
   "logo": "https://i.imgur.com/mWyID87.png",
   "thumbnail": "https://i.imgur.com/EsJ99aG.png",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "color": "#12d968",
   "tags": [
     "kryptonia",

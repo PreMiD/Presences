@@ -6,22 +6,13 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-let lastPlaybackState = null,
-  previousTitle = null as HTMLElement,
+let lastPlaybackState,
+  previousTitle: HTMLElement,
   playback,
   browsingStamp = Math.floor(Date.now() / 1000);
 const urlRegex = /watch\/.*?\/(\d+)\/(\d+)/;
 
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -46,7 +37,7 @@ presence.on("UpdateData", async () => {
     // If an anime card is on the screen it'll use the last seen title.
     presenceData.details =
       document.querySelector("div.aninfobox-content-body") && previousTitle
-        ? "Viewing " + previousTitle.textContent
+        ? `Viewing ${previousTitle.textContent}`
         : "Browsing...";
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData, true);
@@ -58,8 +49,9 @@ presence.on("UpdateData", async () => {
       ) as HTMLElement,
       matched = location.href.match(urlRegex),
       seasonNumber = matched ? matched[1] : null,
-      episodeNumber = matched ? matched[2] : null,
-      timestamps = getTimestamps(
+      episodeNumber = matched ? matched[2] : null;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -68,8 +60,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
 
     presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
 
@@ -87,8 +77,6 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (videoTitle !== null) {
-      presence.setActivity(presenceData, !video.paused);
-    }
+    if (videoTitle !== null) presence.setActivity(presenceData, !video.paused);
   }
 });

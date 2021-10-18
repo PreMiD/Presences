@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -31,7 +32,7 @@
     "pt": "Ritmo está apenas a um *clique* de distância! Com Ouendan/EBA, Taiko e modos de jogo originais, como também um editor de níveis totalmente funcional."
   },
   "url": "osu.ppy.sh",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "logo": "https://i.imgur.com/IWWqSYR.png",
   "thumbnail": "https://i.imgur.com/6YEJ9sY.png",
   "color": "#FF66AA",

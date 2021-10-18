@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "Anime-D",
   "author": {
     "name": "Faelayis",
@@ -7,7 +8,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/mD1fANc.jpg",
   "thumbnail": "https://i.imgur.com/2wyv3S9.jpg",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "color": "#cc6d00",
   "tags": [
     "anime",

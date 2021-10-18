@@ -62,7 +62,7 @@ const updateCallback = {
 
     /*
 	
-		This part figures out the page type. 
+		This part figures out the page type.
 		There are three ways for getting it's type.
 
 		The old structure are done as below.

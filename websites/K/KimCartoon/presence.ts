@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640253556078673951"
   }),
   strings = presence.getStrings({
@@ -6,46 +6,44 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+let browsingStamp = Math.floor(Date.now() / 1000),
+  title: HTMLElement,
+  air: HTMLInputElement,
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState: boolean,
+  playback: boolean;
+
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any, air: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-var lastPlaybackState = null;
-var playback;
-
-if (lastPlaybackState != playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
-}
-
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+presence.on("iFrameData", (data: IFrameData) => {
+  if (lastPlaybackState !== playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
+  }
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    ({ iFrameVideo, paused } = data.iframeVideo);
+    currentTime = data.iframeVideo.currTime;
+    duration = data.iframeVideo.dur;
   }
 });
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "kim"
     };
@@ -53,13 +51,12 @@ presence.on("UpdateData", async () => {
   if (
     document.querySelector("#adsIfrme > div > div > div > h1 > strong") !== null
   ) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       title = document.querySelector(
         "#adsIfrme > div > div > div > h1 > strong"
@@ -68,13 +65,13 @@ presence.on("UpdateData", async () => {
 
       air = document.querySelector("#selectServer");
 
-      presenceData.state = "Server: " + air.value;
+      presenceData.state = `Server: ${air.value}`;
 
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
@@ -84,7 +81,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.innerText;
       presenceData.smallImageKey = "reading";
     }
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing main page";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/CartoonList")) {
@@ -101,10 +98,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

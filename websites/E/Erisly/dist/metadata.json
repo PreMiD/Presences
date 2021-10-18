@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -14,7 +15,7 @@
     "translate.erisly.com",
     "wiki.erisly.com"
   ],
-  "version": "1.1.2",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/kN9Y2bv.png",
   "thumbnail": "https://i.imgur.com/MxsShw4.png",
   "color": "#FF6394",

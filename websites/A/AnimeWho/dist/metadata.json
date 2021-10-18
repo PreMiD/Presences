@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Prenses",
     "id": "244508250630782977"
@@ -20,7 +21,7 @@
     "www.animewho.com",
     "animewho.com"
   ],
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/y0RA8SX.jpg",
   "thumbnail": "https://i.imgur.com/HmLMCzv.png",
   "color": "#fc0043",

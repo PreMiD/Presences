@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -17,7 +18,7 @@
     "pt_BR": "No dailymotion, você pode descobrir e assistir novas músicas, noticías, esportes, e trailers dos melhores criadores do dailymotion, marcas e canais"
   },
   "url": "www.dailymotion.com",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/3qXaosP.png",
   "thumbnail": "https://i.imgur.com/9xKEAPt.png",
   "color": "#005CCC",

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Vasilis",
+    "id": "241929388403195914"
+  },
+  "service": "Wolvesville",
+  "description": {
+    "en": "Wolvesville is a multiplayer game for up to 16 players. Each game has different teams such as villagers or werewolves all fighting to be the last team standing. Use special abilities to uncover the roles of other players and convince your fellow players to work with you."
+  },
+  "url": [
+    "www.wolvesville.com",
+    "wolvesville.com",
+    "blog.wolvesville.com",
+    "legal.wolvesville.com",
+    "heroes.wolvesville.com",
+    "voting.wolvesville.com",
+    "app.wolvesville.com"
+  ],
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/8zN53ti.png",
+  "thumbnail": "https://i.imgur.com/qdIQk1n.png",
+  "color": "#FF4181",
+  "tags": [
+    "wolvesville",
+    "werewolf",
+    "online",
+    "wov",
+    "wwo"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "username",
+      "title": "Show Username",
+      "icon": "fas fa-user",
+      "value": true
+    },
+    {
+      "id": "menuDetail",
+      "title": "Show Menu State",
+      "icon": "fas fa-compass",
+      "value": true
+    },
+    {
+      "id": "playerCount",
+      "title": "Show Player Count",
+      "icon": "fas fa-users",
+      "value": true
+    },
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fad fa-images",
+      "value": 0,
+      "values": [
+        "Normal",
+        "No Background",
+        "Tiled",
+        "Simplified (Web)",
+        "Blue",
+        "Red",
+        "Orange",
+        "Yellow",
+        "Green",
+        "Purple",
+        "Pink",
+        "White"
+      ]
+    }
+  ]
+}

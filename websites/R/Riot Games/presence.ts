@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
   if (location.hostname.includes("riotgames.com")) {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + location.hostname, "")
+        .replace(`https://${location.hostname}`, "")
         .replace("?", "/"),
       statics: {
         [name: string]: PresenceData;
@@ -29,26 +29,27 @@ presence.on("UpdateData", async () => {
         },
         "/news/": {
           details: "Looking at News:",
-          state:
+          state: `${
             Array.from(document.querySelectorAll("div")).find((c) =>
               c.className?.includes("style__Title")
-            )?.textContent + " | Riot Games"
+            )?.textContent
+          } | Riot Games`
         },
         "/category/": {
           details: "Browsing Store:",
-          state: document.querySelector("h1")?.textContent + " | Riot Merch"
+          state: `${document.querySelector("h1")?.textContent} | Riot Merch`
         },
         "/product/": {
           details: "Looking at Product:",
-          state: document.querySelector("h1")?.textContent + " | Riot Merch"
+          state: `${document.querySelector("h1")?.textContent} | Riot Merch`
         },
         "/account/": {
           details: "Looking at Account:",
-          state: document.querySelector("h1")?.textContent + " | Riot Merch"
+          state: `${document.querySelector("h1")?.textContent} | Riot Merch`
         },
         "/cart/": {
           details: "Looking at Cart:",
-          state: document.querySelector("h1")?.textContent + " | Riot Merch"
+          state: `${document.querySelector("h1")?.textContent} | Riot Merch`
         }
       };
     for (const [k, v] of Object.entries(statics)) {
@@ -57,10 +58,10 @@ presence.on("UpdateData", async () => {
         presenceData = { ...presenceData, ...v };
       }
     }
-  } else if (location.hostname == "teamfighttactics.leagueoflegends.com") {
+  } else if (location.hostname === "teamfighttactics.leagueoflegends.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + location.hostname, "")
+        .replace(`https://${location.hostname}`, "")
         .replace("?", "/"),
       statics: {
         [name: string]: PresenceData;
@@ -70,10 +71,11 @@ presence.on("UpdateData", async () => {
         },
         "/news/": {
           details: "Looking at News:",
-          state:
+          state: `${
             Array.from(document.querySelectorAll("div")).find((c) =>
               c.className?.includes("style__Title")
-            )?.textContent + " | TfT"
+            )?.textContent
+          } | TfT`
         },
         "/set-overview/": {
           details: "Looking at:",
@@ -86,10 +88,10 @@ presence.on("UpdateData", async () => {
         presenceData = { ...presenceData, ...v };
       }
     }
-  } else if (location.hostname == "wildrift.leagueoflegends.com") {
+  } else if (location.hostname === "wildrift.leagueoflegends.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + location.hostname, "")
+        .replace(`https://${location.hostname}`, "")
         .replace("?", "/"),
       statics: {
         [name: string]: PresenceData;
@@ -99,7 +101,7 @@ presence.on("UpdateData", async () => {
         },
         "/news/": {
           details: "Looking at News:",
-          state: document.querySelector("h1")?.textContent + " | LoL: Wild Rift"
+          state: `${document.querySelector("h1")?.textContent} | LoL: Wild Rift`
         },
         "/game-overview/": {
           details: "Looking at:",
@@ -107,7 +109,7 @@ presence.on("UpdateData", async () => {
         },
         "/champions/": {
           details: "Looking at Champion:",
-          state: document.querySelector("h3")?.textContent + " | LoL: Wild Rift"
+          state: `${document.querySelector("h3")?.textContent} | LoL: Wild Rift`
         }
       };
     for (const [k, v] of Object.entries(statics)) {
@@ -116,10 +118,10 @@ presence.on("UpdateData", async () => {
         presenceData = { ...presenceData, ...v };
       }
     }
-  } else if (location.hostname == "playvalorant.com") {
+  } else if (location.hostname === "playvalorant.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + location.hostname, "")
+        .replace(`https://${location.hostname}`, "")
         .replace("?", "/"),
       statics: {
         [name: string]: PresenceData;
@@ -129,7 +131,7 @@ presence.on("UpdateData", async () => {
         },
         "/news/": {
           details: "Looking at News:",
-          state: document.querySelector("h2")?.textContent + " | VALORANT"
+          state: `${document.querySelector("h2")?.textContent} | VALORANT`
         },
         "/maps/": {
           details: "Looking at:",
@@ -137,10 +139,11 @@ presence.on("UpdateData", async () => {
         },
         "/agents/": {
           details: "Looking at:",
-          state:
+          state: `${
             document.querySelector(
               ".slick-slide.slick-active.slick-center.slick-current > div > div > h2"
-            )?.textContent + " | VALORANT" //ENTER HEADER
+            )?.textContent
+          } | VALORANT` //ENTER HEADER
         },
         "/media/": {
           details: "Browsing Media",
@@ -168,7 +171,7 @@ presence.on("UpdateData", async () => {
   } else if (location.hostname.includes("leagueoflegends.com")) {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + location.hostname, "")
+        .replace(`https://${location.hostname}`, "")
         .replace("?", "/"),
       statics: {
         [name: string]: PresenceData;
@@ -182,21 +185,23 @@ presence.on("UpdateData", async () => {
         },
         "/champions/": {
           details: "Looking at Champion:",
-          state: document.querySelector("strong")?.textContent + " | LoL"
+          state: `${document.querySelector("strong")?.textContent} | LoL`
         },
         "/champion/": {
           details: "Looking at Champion:",
-          state:
+          state: `${
             Array.from(document.querySelectorAll("span")).find((c) =>
               c.className?.includes("title")
-            )?.textContent + " | LoL"
+            )?.textContent
+          } | LoL`
         },
         "/news/": {
           details: "Looking at News:",
-          state:
+          state: `${
             Array.from(document.querySelectorAll("div")).find((c) =>
               c.className?.includes("style__Title")
-            )?.textContent + " | LoL"
+            )?.textContent
+          } | LoL`
         },
         "/news/tags/patch-notes/": {
           details: "Looking at:",
@@ -208,18 +213,19 @@ presence.on("UpdateData", async () => {
         },
         "/story/": {
           details: "Reading Story:",
-          state: document.querySelector("h1")?.textContent + " | LoL"
+          state: `${document.querySelector("h1")?.textContent} | LoL`
         },
         "/regions/": {
           details: "Looking at Region:",
-          state:
+          state: `${
             Array.from(document.querySelectorAll("span")).find((c) =>
               c.className?.includes("title")
-            )?.textContent + " | LoL"
+            )?.textContent
+          } | LoL`
         },
         "/comic/": {
           details: "LoL - Reading comic:",
-          state: document.querySelector("h1")?.textContent + " | LoL"
+          state: `${document.querySelector("h1")?.textContent} | LoL`
         },
         "/kda/": {
           details: "Alt Universe:",
@@ -247,7 +253,7 @@ presence.on("UpdateData", async () => {
   } else if (location.hostname.includes("playruneterra.com")) {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + location.hostname, "")
+        .replace(`https://${location.hostname}`, "")
         .replace("?", "/"),
       statics: {
         [name: string]: PresenceData;
@@ -257,14 +263,15 @@ presence.on("UpdateData", async () => {
         },
         "/news/": {
           details: "Looking at news:",
-          state:
+          state: `${
             Array.from(document.querySelectorAll("div")).find((c) =>
               c.className?.includes("style__Title")
-            )?.textContent + " | LoR"
+            )?.textContent
+          } | LoR`
         },
         "/news/competitive/": {
           details: "Tournaments:",
-          state: document.querySelector("h1")?.textContent + " | LoR"
+          state: `${document.querySelector("h1")?.textContent} | LoR`
         }
       };
     for (const [k, v] of Object.entries(statics)) {
@@ -274,10 +281,8 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

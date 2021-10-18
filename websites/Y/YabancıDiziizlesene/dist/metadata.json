@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Kabal",
     "id": "269581360316940299"
@@ -11,7 +12,7 @@
     "nl": "YabancıDiziizlesene is een online site voor het bekijken van series en films die de mogelijkheid biedt om 1080p te bekijken."
   },
   "url": "yabancidiziizlesene.com",
-  "version": "1.1.9",
+  "version": "1.1.11",
   "logo": "https://i.imgur.com/vypcMxL.png",
   "thumbnail": "https://i.imgur.com/2PnNeRa.png",
   "color": "#FFCC74",

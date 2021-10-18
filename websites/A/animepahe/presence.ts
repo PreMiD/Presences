@@ -5,7 +5,7 @@ const presence = new Presence({
     clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
   }),
   waitStrings = async (lang: string) =>
-    await presence.getStrings(
+    presence.getStrings(
       {
         play: "presence.playback.playing",
         pause: "presence.playback.paused",

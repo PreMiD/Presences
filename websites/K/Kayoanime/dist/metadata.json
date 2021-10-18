@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Aizuu",
+    "id": "271576733168173057"
+  },
+  "service": "Kayoanime",
+  "description": {
+    "en": "Kayoanime is a website where you can download anime in dual audio 1080p through Google drive."
+  },
+  "url": "kayoanime.com",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/aEsTuLn.png",
+  "thumbnail": "https://i.imgur.com/z7BnqDr.png",
+  "color": "#FFFFFF",
+  "tags": [
+    "anime",
+    "video",
+    "kayoanime"
+  ],
+  "category": "anime",
+  "iframe": true
+}

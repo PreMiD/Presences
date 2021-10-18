@@ -424,20 +424,21 @@ presence.on("UpdateData", async () => {
     docsSelector =
       ".current.tsd-kind-namespace > a, .current.tsd-parent-kind-namespace > a";
 
-  if (document.location.pathname.startsWith("/docs/changelog")) {
+  if (document.location.pathname.startsWith("/docs/changelog"))
     presenceData.details = "Viewing the changelog";
-  } else if (document.location.pathname.startsWith("/docs/reference")) {
+  else if (document.location.pathname.startsWith("/docs/reference")) {
     presenceData.details = "Viewing the SDK reference";
     if (
       document.querySelector(docsSelector) &&
       (await presence.getSetting("docname"))
-    )
+    ) {
       presenceData.state = Array.from(document.querySelectorAll(docsSelector))
         .map((el) => el.textContent)
         .join(" - ");
-  } else if (document.location.pathname.startsWith("/docs/")) {
+    }
+  } else if (document.location.pathname.startsWith("/docs/"))
     presenceData.details = "Looking at the docs";
-  } else if (document.location.pathname.startsWith("/studio")) {
+  else if (document.location.pathname.startsWith("/studio")) {
     presenceData.details = "Studio";
     if (document.location.pathname.endsWith("editor")) {
       presenceData.smallImageKey = "pylon-d";
@@ -495,10 +496,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

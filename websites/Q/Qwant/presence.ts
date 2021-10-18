@@ -6,30 +6,27 @@ interface ItemMap {
   [key: string]: string;
 }
 
-const browsingTimestamp = Math.floor(Date.now() / 1000);
-
-const searchTypeMap: ItemMap = {
-  web: "Searching on the web",
-  news: "Searching the news",
-  images: "Searching images",
-  videos: "Searching videos",
-  social: "Searching social media",
-  shopping: "Searching for products"
-};
-
-const searchMusicTypeMap: ItemMap = {
-  overview: "Searching music",
-  albums: "Searching music albums",
-  artists: "Searching music artists",
-  songs: "Searching songs"
-};
-
-const searchJuniorTypeMap: ItemMap = {
-  web: "Searching on the web",
-  images: "Searching images",
-  videos: "Searching videos",
-  education: "Searching educational content"
-};
+const browsingTimestamp = Math.floor(Date.now() / 1000),
+  searchTypeMap: ItemMap = {
+    web: "Searching on the web",
+    news: "Searching the news",
+    images: "Searching images",
+    videos: "Searching videos",
+    social: "Searching social media",
+    shopping: "Searching for products"
+  },
+  searchMusicTypeMap: ItemMap = {
+    overview: "Searching music",
+    albums: "Searching music albums",
+    artists: "Searching music artists",
+    songs: "Searching songs"
+  },
+  searchJuniorTypeMap: ItemMap = {
+    web: "Searching on the web",
+    images: "Searching images",
+    videos: "Searching videos",
+    education: "Searching educational content"
+  };
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -40,7 +37,7 @@ presence.on("UpdateData", async () => {
   let query: URLSearchParams = null;
 
   if (location.hostname === "www.qwant.com") {
-    const firstPath = location.pathname.split("/")[1];
+    const [, firstPath] = location.pathname.split("/");
     switch (firstPath) {
       case "":
         query = new URLSearchParams(location.search);
@@ -72,8 +69,9 @@ presence.on("UpdateData", async () => {
     switch (location.pathname) {
       case "/":
         if (query.has("q")) {
-          data.details =
-            searchJuniorTypeMap[query.get("type")] + " in Qwant Junior";
+          data.details = `${
+            searchJuniorTypeMap[query.get("type")]
+          } in Qwant Junior`;
           data.state = query.get("q");
         } else data.details = "Junior Home";
         break;
@@ -89,7 +87,7 @@ presence.on("UpdateData", async () => {
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (data.details == null) {
+  if (!data.details) {
     presence.setTrayTitle(); // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);

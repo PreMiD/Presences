@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     changestate = await presence.getSetting("changestate"),
     changesmalltext = await presence.getSetting("changesmalltext");
 
-  if (lastTitle != sname) {
+  if (lastTitle !== sname) {
     lastTitle = sname;
     lastTimeStart = Math.floor(Date.now() / 1000);
   }
@@ -48,40 +48,31 @@ presence.on("UpdateData", async () => {
   if (!sname) {
     lastTitle = "Loading...";
     sname = "Loading...";
-  } else if (!sartist) {
-    sartist = "Loading...";
-  } else if (!aquapresenter) {
-    aquapresenter = "Loading...";
-  } else if (!aqualisteners) {
-    aqualisteners = "Loading...";
   }
+  sartist ??= "Loading...";
+  aquapresenter ??= "Loading...";
+  aqualisteners ??= "Loading...";
 
   if (aquapresenter !== "AutoDJ") {
     if (changedetails) {
       presenceData.details = changedetails
         .replace("%song%", sname)
         .replace("%artist%", sartist);
-    } else {
-      presenceData.details = "🎵 | " + sartist + " - " + sname;
-    }
-    if (changestate) {
+    } else presenceData.details = `🎵 | ${sartist} - ${sname}`;
+
+    if (changestate)
       presenceData.state = changestate.replace("%presenter%", aquapresenter);
-    } else {
-      presenceData.state = "🎙️ | " + aquapresenter;
-    }
+    else presenceData.state = `🎙️ | ${aquapresenter}`;
   } else {
     if (changedetails) {
       presenceData.details = changedetails
         .replace("%song%", sname)
         .replace("%artist%", sartist);
-    } else {
-      presenceData.details = "🎵 | " + sartist + " - " + sname;
-    }
-    if (changestate) {
+    } else presenceData.details = `🎵 | ${sartist} - ${sname}`;
+
+    if (changestate)
       presenceData.state = changestate.replace("%presenter%", "AutoDJ");
-    } else {
-      presenceData.state = "🎙️ | " + "AutoDJ";
-    }
+    else presenceData.state = "🎙️ | " + "AutoDJ";
   }
 
   if (changesmalltext) {
@@ -89,9 +80,7 @@ presence.on("UpdateData", async () => {
       "%listeners%",
       aqualisteners
     );
-  } else {
-    presenceData.smallImageText = "Listeners: " + aqualisteners;
-  }
+  } else presenceData.smallImageText = `Listeners: ${aqualisteners}`;
 
   presence.setActivity(presenceData, true);
   presence.setTrayTitle();

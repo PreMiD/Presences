@@ -1,7 +1,9 @@
 const presence = new Presence({
     clientId: "650492842615242765"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/trending": "Trending ",
     "/lol": "Lol ",
     "/win": "Win ",
@@ -20,13 +22,13 @@ presence.on("UpdateData", async () => {
     ),
     user = document.querySelector(
       "body > main > div > div > div > div.user-info.xs-px2.sm-p0.xs-mb3.md-mb4 > div > div.xs-ml2.xs-flex.xs-flex-column > div > h1"
-    );
-  const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
+    ),
+    presenceData: PresenceData = {
+      largeImageKey: "logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
+    };
 
-  if (posttitle && posttitle.textContent != "") {
+  if (posttitle && posttitle.textContent !== "") {
     presenceData.details = "Reads a Post:";
     presenceData.state = `${posttitle.textContent}`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
@@ -36,7 +38,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching:";
     presenceData.state = document.title;
     presenceData.smallImageKey = "logo";
-  } else if (user && user.textContent != "") {
+  } else if (user && user.textContent !== "") {
     presenceData.details = "Viewing User Profile:";
     presenceData.state = user.textContent;
   } else {
@@ -44,10 +46,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Homepage";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

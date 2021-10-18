@@ -35,12 +35,10 @@ presence.on("UpdateData", async () => {
       if (document.location.search.startsWith("?s")) {
         const params = document.location.search.substring(1),
           { s } = JSON.parse(
-            '{"' +
-              decodeURI(params)
-                .replace(/"/g, '\\"')
-                .replace(/&/g, '","')
-                .replace(/=/g, '":"') +
-              '"}'
+            `{"${decodeURI(params)
+              .replace(/"/g, '\\"')
+              .replace(/&/g, '","')
+              .replace(/=/g, '":"')}"}`
           );
         presenceData.details = "Searching for:";
         presenceData.state = s;

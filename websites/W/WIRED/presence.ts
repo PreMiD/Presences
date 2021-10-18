@@ -2,11 +2,11 @@ const presence = new Presence({
   clientId: "645051733961211934"
 });
 
-var elapsed, oldURL;
+let elapsed: number, oldURL: string;
 
 presence.on("UpdateData", async () => {
   let details, state;
-  const title = document.title;
+  const { title } = document;
 
   if (window.location.href !== oldURL) {
     oldURL = window.location.href;
@@ -27,9 +27,9 @@ presence.on("UpdateData", async () => {
     state = title.replace(" | WIRED", "");
   }
 
-  var data: PresenceData = {
-    details: details,
-    state: state,
+  const data: PresenceData = {
+    details,
+    state,
     largeImageKey: "wired",
     startTimestamp: elapsed
   };

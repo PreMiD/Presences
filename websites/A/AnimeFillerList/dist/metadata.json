@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "AnimeFillerList",
+  "author": {
+    "name": "!Yelo",
+    "id": "425326889565945856"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/NAG50Oi.png",
+  "thumbnail": "https://i.imgur.com/rYaZaYT.png",
+  "version": "1.0.2",
+  "color": "#E56E2E",
+  "tags": [
+    "anime",
+    "manga",
+    "fillerlist"
+  ],
+  "url": "www.animefillerlist.com",
+  "description": {
+    "en": "Community created filler lists that help you get to the good stuff."
+  }
+}

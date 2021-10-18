@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "10fastfingers",
+  "author": {
+    "name": "!Yelo",
+    "id": "425326889565945856"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/OE0fMrX.png",
+  "thumbnail": "https://i.imgur.com/Z8sPB3q.png",
+  "version": "1.0.1",
+  "color": "#082333",
+  "tags": [
+    "wordsperminute",
+    "wpm",
+    "typing",
+    "typing-test",
+    "type-test"
+  ],
+  "url": "10fastfingers.com",
+  "description": {
+    "en": "Test & Improve your Typing Speed with our free Typing Games",
+    "es": "Pruebe y mejore su velocidad de escritura con nuestros juegos de mecanografía gratuitos"
+  }
+}

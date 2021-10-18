@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -12,7 +13,7 @@
     "ga_IE": "Ardán beochana go hiomlán saor in aisce."
   },
   "url": "ani.gamer.com.tw",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/24VLERu.png",
   "thumbnail": "https://i.imgur.com/atthc8l.png",
   "color": "#58bec9",

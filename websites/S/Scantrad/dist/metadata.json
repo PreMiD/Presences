@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Kozou",
     "id": "379362415428632576"
@@ -10,7 +11,7 @@
     "nl": "Scantrad is een gratis franse website waar u de laatste scans van het moment kunt lezen."
   },
   "url": "scantrad.net",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/SJmPvgX.png",
   "thumbnail": "https://i.imgur.com/BMhCrx7.png",
   "color": "#cf4104",

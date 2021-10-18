@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Coding",
     "id": "276544649148235776"
@@ -10,7 +10,7 @@
     "nl": "Reis door de ruimte terwijl je naar geweldige muziek luistert op een website die is ontwikkeld door voormalige Discord-medewerkers en Senior Ratelimiter B1nzy!"
   },
   "service": "Take B1nzy To Space",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/httSU0V.png",
   "thumbnail": "https://i.imgur.com/Zf7Dl4W.png",
   "color": "#060A22",

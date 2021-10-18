@@ -7,14 +7,13 @@ const presence = new Presence({
   });
 
 function stripText(element: HTMLElement, id = "None", log = true) {
-  if (element && element.firstChild) {
-    return element.firstChild.textContent;
-  } else {
-    if (log)
+  if (element && element.firstChild) return element.firstChild.textContent;
+  else {
+    if (log) {
       presence.info(
-        "%cPandora%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-          id
+        `%cPandora%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: ${id}`
       );
+    }
     return null;
   }
 }
@@ -29,7 +28,6 @@ presence.on("UpdateData", async () => {
     audioTime,
     audioDuration,
     details,
-    timestamps,
     status,
     audioElement: HTMLAudioElement = document.querySelector("audio:last-child");
   audioElement === null
@@ -47,21 +45,18 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(".Tuner__Audio__TrackDetail__title");
       artist = document.querySelector(".Tuner__Audio__TrackDetail__artist");
 
-      if (title === null && artist === null) {
-        return;
-      } else {
+      if (title === null && artist === null) return;
+      else {
         details = stripText(title, "Title");
         status = stripText(artist, "Title");
       }
 
       smallImageKey = "play";
       smallImageText = (await strings).play;
-      timestamps = presence.getTimestamps(
+      [audioTime, audioDuration] = presence.getTimestamps(
         Math.floor(audioElement.currentTime),
         Math.floor(audioElement.duration)
       );
-      audioTime = timestamps[0];
-      audioDuration = timestamps[1];
       break;
 
     default:
@@ -70,11 +65,11 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    details: details,
+    details,
     state: status,
     largeImageKey: "pandora",
-    smallImageKey: smallImageKey,
-    smallImageText: smallImageText,
+    smallImageKey,
+    smallImageText,
     startTimestamp: audioTime,
     endTimestamp: audioDuration
   };

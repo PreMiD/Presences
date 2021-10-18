@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "Joining a meeting...";
   } else presenceData.details = await presence.getSetting("noMessage");
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

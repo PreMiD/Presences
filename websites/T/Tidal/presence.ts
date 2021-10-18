@@ -125,8 +125,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     };
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getLanguages();
   }

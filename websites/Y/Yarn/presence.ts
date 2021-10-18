@@ -2,18 +2,19 @@ const presence = new Presence({
   clientId: "690635264124518493"
 });
 
-function parseQueryString(queryString?: string): any {
-  if (!queryString) {
-    queryString = window.location.search.substring(1);
-  }
-  const params = {};
-  const queries = queryString.split("&");
+function parseQueryString(queryString?: string): {
+  [name: string]: string;
+} {
+  queryString ??= window.location.search.substring(1);
+
+  const params: {
+      [name: string]: string;
+    } = {},
+    queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
-    const indexPair = indexQuery.split("=");
-    const queryKey = decodeURIComponent(indexPair[0]);
-    const queryValue = decodeURIComponent(
-      indexPair.length > 1 ? indexPair[1] : ""
-    );
+    const indexPair = indexQuery.split("="),
+      queryKey = decodeURIComponent(indexPair[0]),
+      queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
     params[queryKey] = queryValue;
   });
   return params;
@@ -21,12 +22,11 @@ function parseQueryString(queryString?: string): any {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+      largeImageKey: "logo"
+    },
+    route = document.location.pathname.split("/");
 
-  var route = document.location.pathname.split("/");
-
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Home";
     presenceData.state = parseQueryString(document.location.hash).q
       ? `Searching ${parseQueryString(document.location.hash).q} (page ${
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
             ? parseQueryString(document.location.hash).p
             : "0"
         })`
-      : `Navigate...`;
+      : "Navigate...";
     presenceData.smallImageKey = parseQueryString(document.location.hash).q
       ? "search"
       : null;
@@ -46,20 +46,13 @@ presence.on("UpdateData", async () => {
       : document.querySelector("header h2").textContent;
   } else if (document.location.pathname.includes("/getting-started")) {
     presenceData.details = "Getting Started";
-    if (route[2] === "install") {
-      presenceData.state = "Installation";
-    } else if (route[2] === "usage") {
-      presenceData.state = "Usage";
-    } else {
-      presenceData.state = "Introduction";
-    }
+    if (route[2] === "install") presenceData.state = "Installation";
+    else if (route[2] === "usage") presenceData.state = "Usage";
+    else presenceData.state = "Introduction";
   } else if (document.location.pathname.includes("/configuration/")) {
     presenceData.details = "Configuration";
-    if (route[2] === "manifest") {
-      presenceData.state = "Manifests";
-    } else if (route[2] === "yarnrc") {
-      presenceData.state = "Yarnrc files";
-    }
+    if (route[2] === "manifest") presenceData.state = "Manifests";
+    else if (route[2] === "yarnrc") presenceData.state = "Yarnrc files";
   } else if (document.location.pathname.includes("/features/")) {
     presenceData.details = "Features";
     presenceData.state = document.querySelector("article h1").textContent;
@@ -71,10 +64,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector("article h1").textContent;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

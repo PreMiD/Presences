@@ -2,22 +2,12 @@ const presence = new Presence({
   clientId: "645290651604221999"
 });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "itv_logo",
-    startTimestamp: new Date().getTime()
-  };
-
-  const path = document.location.pathname;
+      largeImageKey: "itv_logo",
+      startTimestamp: new Date().getTime()
+    },
+    path = document.location.pathname;
 
   if (path === "/") {
     presenceData.details = "Browsing ITV Hub";
@@ -73,23 +63,21 @@ presence.on("UpdateData", () => {
     // Last path is a valid hex (Show ID)
     delete presenceData.startTimestamp;
     const showDetails = {
-      name: document.getElementById("programme-title").innerText,
-      episode: document
-        .getElementsByClassName("episode-info__episode-title")[0]
-        .textContent.trim()
-    };
-
-    const video = document.getElementsByTagName("video")[0];
+        name: document.getElementById("programme-title").innerText,
+        episode: document
+          .getElementsByClassName("episode-info__episode-title")[0]
+          .textContent.trim()
+      },
+      [video] = document.getElementsByTagName("video");
     if (!video.paused) {
-      const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
 
       presenceData.details = `Watching ${showDetails.name}`;
       presenceData.state = showDetails.episode;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
     } else {
@@ -100,10 +88,8 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

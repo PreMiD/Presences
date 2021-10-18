@@ -1,39 +1,39 @@
 const presence = new Presence({
-  clientId: "630418879411126282"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "630418879411126282"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "habbologo"
   };
   presenceData.startTimestamp = browsingStamp;
 
-  if (window.location.pathname.toLowerCase().includes("/client")) {
+  if (window.location.pathname.toLowerCase().includes("/client"))
     presenceData.state = "Playing Hangout Hotel";
-  }
+
   if (
     window.location.pathname.toLowerCase().startsWith("/community/articles")
   ) {
     presenceData.details = "Reading an article:";
-    presenceData.state =
-      "Article number: " +
-      window.location.pathname.replace("/community/articles/", "");
+    presenceData.state = `Article number: ${window.location.pathname.replace(
+      "/community/articles/",
+      ""
+    )}`;
   }
   if (window.location.pathname.toLowerCase() === "/community/articles") {
     presenceData.details = "Community:";
     presenceData.state = "Articles";
   }
-  if (window.location.pathname.toLowerCase() === "/community") {
+  if (window.location.pathname.toLowerCase() === "/community")
     presenceData.details = "Community";
-  }
+
   if (window.location.pathname.toLowerCase() === "/community/articles/") {
     presenceData.details = "Community:";
     presenceData.state = "Articles";
   }
-  if (window.location.pathname.toLowerCase() === "/community/") {
+  if (window.location.pathname.toLowerCase() === "/community/")
     presenceData.details = "Community";
-  }
+
   if (window.location.pathname.toLowerCase().startsWith("/community/photos")) {
     presenceData.details = "Community:";
     presenceData.state = "Photos";
@@ -59,12 +59,12 @@ presence.on("UpdateData", () => {
     presenceData.details = "Store:";
     presenceData.state = "Ranks";
   }
-  if (window.location.pathname.toLowerCase() === "/settings") {
+  if (window.location.pathname.toLowerCase() === "/settings")
     presenceData.details = "Settings";
-  }
-  if (window.location.pathname.toLowerCase() === "/settings/") {
+
+  if (window.location.pathname.toLowerCase() === "/settings/")
     presenceData.details = "Settings";
-  }
+
   if (window.location.pathname.toLowerCase().startsWith("/settings/password")) {
     presenceData.details = "Settings:";
     presenceData.state = "Changing password";
@@ -73,17 +73,14 @@ presence.on("UpdateData", () => {
     presenceData.details = "Home:";
     presenceData.state = document.title.replace("Hangout - ", "");
   }
-  if (window.location.pathname.toLowerCase().startsWith("/me")) {
+  if (window.location.pathname.toLowerCase().startsWith("/me"))
     presenceData.details = "Home";
-  }
-  if (window.location.pathname.toLowerCase().startsWith("/login")) {
-    presenceData.details = "Logging in";
-  }
 
-  if (presenceData.details == null) {
+  if (window.location.pathname.toLowerCase().startsWith("/login"))
+    presenceData.details = "Logging in";
+
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

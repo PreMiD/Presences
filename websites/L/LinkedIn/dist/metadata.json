@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "isladot",
     "id": "385895205406244865"
@@ -11,7 +11,7 @@
     "nl": "Beheer uw professionele identiteit. Bouw en maak contact met uw professionele netwerk. Toegang krijgen tot kennis, inzichten en kansen."
   },
   "service": "LinkedIn",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/2E9VuHw.png",
   "thumbnail": "https://i.imgur.com/b4LpEa9.png",
   "color": "#2867B2",

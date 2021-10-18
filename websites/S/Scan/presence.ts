@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
 
   if (
-    document.location.pathname == "/" ||
+    document.location.pathname === "/" ||
     (document.location.pathname.includes("/shop/") &&
       document.location.pathname.length <= 25)
   ) {

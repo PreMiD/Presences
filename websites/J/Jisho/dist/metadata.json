@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "SagaFreya",
     "id": "316314134990028810"
@@ -12,7 +13,7 @@
     "jisho.org",
     "classic.jisho.org"
   ],
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/nAtEXHe.png",
   "thumbnail": "https://i.imgur.com/Kk2NUkd.png",
   "color": "#0bba17",

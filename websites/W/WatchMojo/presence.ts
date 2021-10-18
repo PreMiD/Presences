@@ -32,12 +32,10 @@ const presence = new Presence({
       let newStr = "";
       for (let i = 0; i < s.split("-").length; i++) {
         const str = s.split("-")[i];
-        newStr += str.charAt(0).toUpperCase() + str.slice(1) + " ";
+        newStr += `${str.charAt(0).toUpperCase() + str.slice(1)} `;
       }
       return newStr;
-    } else {
-      return s.charAt(0).toUpperCase() + s.slice(1);
-    }
+    } else return s.charAt(0).toUpperCase() + s.slice(1);
   };
 
 let browsingStamp = Math.floor(Date.now() / 1000),
@@ -81,16 +79,15 @@ presence.on("UpdateData", async () => {
     browsingStamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   const path = location.href
       .replace(/\/?$/, "/")
-      .replace("https://" + document.location.hostname, "")
+      .replace(`https://${document.location.hostname}`, "")
       .replace("?", "/")
       .replace("=", "/"),
     statics: {
@@ -239,7 +236,5 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) {
     presence.setActivity();
     presence.setTrayTitle();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

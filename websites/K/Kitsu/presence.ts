@@ -1,9 +1,9 @@
 const presence = new Presence({
-  clientId: "629413852391669791"
-});
-const presenceData: PresenceData = {
-  largeImageKey: "kitsu_lg"
-};
+    clientId: "629413852391669791"
+  }),
+  presenceData: PresenceData = {
+    largeImageKey: "kitsu_lg"
+  };
 
 let path, user: string;
 const strings = presence.getStrings({
@@ -13,7 +13,7 @@ const strings = presence.getStrings({
 presence.on("UpdateData", async () => {
   path = window.location.pathname;
 
-  if (path == "/" || path.startsWith("/explore")) {
+  if (path === "/" || path.startsWith("/explore")) {
     presenceData.details = (await strings).browsing;
     delete presenceData.state;
   } else if (path.includes("/users")) {

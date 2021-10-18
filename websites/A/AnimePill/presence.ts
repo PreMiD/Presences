@@ -12,14 +12,6 @@ interface VideoContext {
   currentTime: number;
   paused: boolean;
 }
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 const pages: PageContext[] = [
     {
@@ -51,7 +43,7 @@ const pages: PageContext[] = [
       ) => {
         if (!context) return null;
         if (video && video.video) {
-          const [start, end] = getTimestamps(
+          const [start, end] = presence.getTimestamps(
             Math.floor(video.currentTime),
             Math.floor(video.duration)
           );
@@ -100,16 +92,15 @@ const pages: PageContext[] = [
     } else if (
       !lastIframeData ||
       (Date.now() - lastIframeData.getTime()) / 1000 / 60 > 10
-    ) {
+    )
       currentVideo = null;
-    }
   });
   presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "logo",
       largeImageText: "AnimePill"
     } as PresenceData;
-    if (document.location.hostname == "animepill.com") {
+    if (document.location.hostname === "animepill.com") {
       const strings: { [key: string]: string } = await presence.getStrings({
           play: "presence.playback.playing",
           pause: "presence.playback.paused",
@@ -121,23 +112,18 @@ const pages: PageContext[] = [
         context.exec(presence, presenceData, { strings, video: currentVideo })
       );
       return result.then((data) => {
-        if (data.details == null) {
+        if (!data.details) {
           data.details = strings.browsing;
           presence.setTrayTitle();
           presence.setActivity();
-        } else {
-          if (data) presence.setActivity(data);
-          else presence.setActivity();
-        }
+        } else presence.setActivity(data);
         return data;
       });
     }
 
-    if (presenceData.details == null) {
+    if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
-      presence.setActivity(presenceData);
-    }
+    } else presence.setActivity(presenceData);
   });
 })();

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "め Kerem",
     "id": "665482610859966464"
@@ -16,7 +17,7 @@
     "nl": "Vrienden maken en chatten met miljoenen in een virtuele wereld"
   },
   "url": "runo.pw",
-  "version": "2.1.5",
+  "version": "2.1.7",
   "logo": "https://i.imgur.com/utrvCGI.png",
   "thumbnail": "https://i.imgur.com/6CXFU3R.png",
   "color": "#ffff00",
