@@ -36,16 +36,16 @@ presence.on("UpdateData", async () => {
 
             if (document.URL.includes("conversation")) {
               presenceData.state = `Liest eine Konversation`;
-              presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}];
+              presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
             } else if (document.URL.includes("global-jcoins-statement-list")) {
               presenceData.state = `Kontoauszüge`;
-              presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}];
-            } else if (document.URL.includes("acp")) 
+              presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
+            } else if (document.URL.includes("acp"))
               presenceData.state = `Administrationsoberfläche`;
-              presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}];
+              presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
             } else if (document.URL.includes("moderation-list")) {
               presenceData.state = `Moderation`;
-              presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}];
+              presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
             }
         }
         if (getUrl(panelurl)) {
