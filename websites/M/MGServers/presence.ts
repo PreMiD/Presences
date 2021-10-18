@@ -63,8 +63,7 @@ presence.on("UpdateData", async () => {
             if (getUrl(panelserverurl)) {
                 [presenceData.state] = document.querySelector("title").textContent.split(' |');
 
-                if (getPathServer(``)) presenceData.details = "Server-Konsole";
-                else if (getPathServer(`/files`)) presenceData.details = "Ist im Dateimanager";
+                if (getPathServer(`/files`)) presenceData.details = "Ist im Dateimanager";
                 else if (getPathServer(`/databases`)) presenceData.details = "Bearbeitet Datenbanken";
                 else if (getPathServer(`/schedules`)) presenceData.details = "Verwaltet Aufgaben";
                 else if (getPathServer(`/user`)) presenceData.details = "Verwaltet Subuser";
@@ -74,6 +73,7 @@ presence.on("UpdateData", async () => {
                 else if (getPathServer(`/subdomain`)) presenceData.details = "Verwaltet Subdomains";
                 else if (getPathServer(`/staff`)) presenceData.details = "Verwaltet Zugriffsanfragen";
                 else if (getPathServer(`/settings`)) presenceData.details = "Servereinstellungen";
+                else if (getPathServer(``)) presenceData.details = "Server-Konsole";
             }
 
             if (getPath("/admin")) {
