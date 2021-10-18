@@ -84,10 +84,10 @@ switch (
       const name = document.querySelector(
         "body > main > div > div > div.container > div > div.series-flexright > div.series-title > h2"
       ).textContent;
-      presenceData.details = `Viewing a page...`;
+      presenceData.details = "Viewing a page...";
       presenceData.state = name;
       presenceData.buttons = [
-        { label: `View Manga`, url: document.location.href }
+        { label: "View Manga", url: document.location.href }
       ];
     }
     const readManga = document.querySelector(".reader-area");
