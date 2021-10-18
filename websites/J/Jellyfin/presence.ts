@@ -291,8 +291,8 @@ let ApiClient: ApiClient, presence: Presence;
 async function handleAudioPlayback(): Promise<void> {
   // sometimes the buttons are not created fast enough
   try {
-    const audioElem = document.getElementsByTagName("audio")[0],
-      infoContainer = document.getElementsByClassName("nowPlayingBar")[0],
+    const [audioElem] = document.getElementsByTagName("audio"),
+      [infoContainer] = document.getElementsByClassName("nowPlayingBar"),
       title: HTMLAnchorElement = infoContainer
         .getElementsByClassName("nowPlayingBarText")[0]
         .querySelector("a"),
@@ -311,8 +311,8 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp =
-          presence.getTimestampsfromMedia(audioElem)[1];
+        [, presenceData.endTimestamp] =
+          presence.getTimestampsfromMedia(audioElem);
       }
 
       // paused
@@ -379,7 +379,7 @@ function getUserId(): string {
     if (location.hash.indexOf("?") > 0) {
       for (const param of location.hash.split("?")[1].split("&")) {
         if (param.startsWith("serverId")) {
-          const serverId = param.split("=")[1];
+          const [, serverId] = param.split("=");
 
           for (const server of servers)
             if (server.Id === serverId) return server.UserId;
@@ -500,8 +500,8 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp =
-          presence.getTimestampsfromMedia(videoPlayerElem)[1];
+        [, presenceData.endTimestamp] =
+          presence.getTimestampsfromMedia(videoPlayerElem);
       }
 
       // paused
@@ -528,7 +528,7 @@ async function handleItemDetails(): Promise<void> {
 
   for (const param of params) {
     if (param.startsWith("id=")) {
-      id = param.split("=")[1];
+      [, id] = param.split("=");
       break;
     }
   }
@@ -717,7 +717,7 @@ async function setDefaultsToPresence(): Promise<void> {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isJellyfinWebClient(): Promise<boolean> {
-  if (!ApiClient) ApiClient = await presence.getPageletiable("ApiClient");
+  ApiClient ??= await presence.getPageletiable("ApiClient");
 
   if (ApiClient && typeof ApiClient === "object")
     if (ApiClient._appName && ApiClient._appName === APP_NAME) return true;

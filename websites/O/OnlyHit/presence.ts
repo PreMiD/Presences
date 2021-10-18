@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     showElapsed = await presence.getSetting("tElapsed");
 
   //! Only needed due to a bug PreMiD has atm
-  if (info == undefined) {
+  if (info === undefined) {
     format1 = '"%song%"';
     format2 = "by %artist%";
     info = true;
@@ -30,21 +30,19 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {};
 
   //! Merch website
-  if (document.location.hostname == "onlyhit.merchforall.com") {
+  if (document.location.hostname === "onlyhit.merchforall.com") {
     //* Show timestamp if the setting is enabled and set largeImageKey
-    if (showElapsed) {
-      presenceData.startTimestamp = browsingStamp;
-    } else {
-      delete presenceData.startTimestamp;
-    }
+    if (showElapsed) presenceData.startTimestamp = browsingStamp;
+    else delete presenceData.startTimestamp;
+
     presenceData.largeImageKey = "logo_onlyhit";
     presenceData.smallImageKey = "reading";
 
     //* If they have site information enabled
     if (info) {
-      if (document.location.hash.includes("/cart")) {
+      if (document.location.hash.includes("/cart"))
         presenceData.details = "Store - Viewing cart";
-      } else if (document.location.pathname == "/") {
+      else if (document.location.pathname === "/") {
         if (document.querySelector(".popup-container.active") !== null) {
           presenceData.details = "Store - Viewing product:";
           presenceData.state = document.querySelector(
@@ -79,7 +77,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(".title").textContent,
       paused =
         (document.querySelector(".fa-pause.pause-button") as HTMLElement).style
-          .cssText == "display: none;";
+          .cssText === "display: none;";
 
     //* Set state details and image to track information.
     presenceData.details = format1
@@ -101,11 +99,8 @@ presence.on("UpdateData", async () => {
     }
 
     //* Show timestamp if the setting is enabled
-    if (showElapsed) {
-      presenceData.startTimestamp = songTimestamp;
-    } else {
-      delete presenceData.startTimestamp;
-    }
+    if (showElapsed) presenceData.startTimestamp = songTimestamp;
+    else delete presenceData.startTimestamp;
 
     //* If they have site information enabled
     if (info) {
@@ -115,11 +110,8 @@ presence.on("UpdateData", async () => {
         !document.location.pathname.includes("video-version")
       ) {
         //* Show timestamp if the setting is enabled
-        if (showElapsed) {
-          presenceData.startTimestamp = browsingStamp;
-        } else {
-          delete presenceData.startTimestamp;
-        }
+        if (showElapsed) presenceData.startTimestamp = browsingStamp;
+        else delete presenceData.startTimestamp;
 
         //* Get page title, and set smallImageText to track information
         const page = document.querySelector(".main_title").textContent.trim();
@@ -164,7 +156,7 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = "reading";
         } else if (document.location.pathname.includes("/search")) {
           presenceData.details = "Searching for:";
-          presenceData.state = page.split(`"`)[1];
+          [, presenceData.state] = page.split('"');
           presenceData.smallImageKey = "search";
         } else {
           //* Show normal page information if there isn't a "special" one set above
@@ -177,10 +169,8 @@ presence.on("UpdateData", async () => {
   }
 
   //* Sets the presenceData, if there is no details it sets empty data (Which will still show "Playing OnlyHit")
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

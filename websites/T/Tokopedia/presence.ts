@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "tokopedia"
     },
     elapsed = Math.floor(Date.now() / 1000);
-  if (document.location.hostname == "www.tokopedia.com") {
+  if (document.location.hostname === "www.tokopedia.com") {
     if (document.location.pathname.includes("/p?nref=")) {
       presenceData.details = "Viewing Product List....";
       presenceData.startTimestamp = elapsed;
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = elapsed;
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "seller.tokopedia.com") {
+  } else if (document.location.hostname === "seller.tokopedia.com") {
     if (document.location.pathname.includes("/edu")) {
       presenceData.details = "Viewing a Seller Education Center....";
       presenceData.startTimestamp = elapsed;

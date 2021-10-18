@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "icon"
   };
-  if (document.location.hostname == "reaperx.net") {
+  if (document.location.hostname === "reaperx.net") {
     if (path.includes("/home") || path2.startsWith("?page=home")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.state = "หน้าหลัก";
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   }

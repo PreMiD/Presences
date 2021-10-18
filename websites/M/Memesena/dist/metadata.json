@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "AyamDobhal",
     "id": "379269487532310530"
@@ -9,7 +10,7 @@
     "nl": "De perfecte plek voor memers waar we Desi en Engelse meme-sjablonen, meme-artikelen, meme-kunsten, copypasta's, emojipasta's en meme-bots hebben."
   },
   "url": "memesena.com",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/ycc0TEL.png",
   "thumbnail": "https://i.imgur.com/lof7cPb.png",
   "color": "#FF9100",

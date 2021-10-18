@@ -1,10 +1,9 @@
-var presence = new Presence({
-  clientId: "617500416887881748" // CLIENT ID FOR YOUR PRESENCE
-});
+const presence = new Presence({
+    clientId: "617500416887881748" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var typing: any, user: any, bot: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let typing: HTMLElement, user: HTMLElement, bot: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,7 +12,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.hostname == "web.skype.com") {
+  if (document.location.hostname === "web.skype.com") {
     user = document.querySelector(
       "body > div.app-container > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > button > div > div"
     );
@@ -24,7 +23,7 @@ presence.on("UpdateData", async () => {
       "body > div.app-container > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > button > div > div"
     );
     if (user !== null) {
-      if (typing == null) {
+      if (typing === null) {
         presenceData.details = "Typing in chat:";
         presenceData.state = user.innerText;
 
@@ -40,7 +39,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       }
     } else if (bot !== null) {
-      if (typing == null) {
+      if (typing === null) {
         presenceData.details = "Typing in chat:";
         presenceData.state = bot.innerText;
 
@@ -59,7 +58,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "preview.web.skype.com") {
+  } else if (document.location.hostname === "preview.web.skype.com") {
     user = document.querySelector(
       "body > div.app-container > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > button > div > div"
     );
@@ -86,7 +85,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "www.skype.com") {
+  } else if (document.location.hostname === "www.skype.com") {
     presenceData.details = "Skype";
     presenceData.state = "Browsing...";
 

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Nanashin",
     "id": "330030557457022986"
@@ -11,7 +12,7 @@
     "nl": "Een van de giganten fansubs in Brazilië waar ze vertalen en verspreiden onder het publiek, ook bekend om het vertalen van Solo Leveling en andere beroemde manga."
   },
   "url": "neoxscans.com",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "logo": "https://i.imgur.com/L5sBw6j.png",
   "thumbnail": "https://i.imgur.com/ljNKCp1.png",
   "color": "#079ac7",

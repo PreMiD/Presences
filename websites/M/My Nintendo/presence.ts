@@ -7,11 +7,11 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const path = window.location.pathname.split("/").slice(1);
-  const presenceData: PresenceData = {
-    details: "My Nintendo",
-    largeImageKey: "logo_big"
-  };
+  const path = window.location.pathname.split("/").slice(1),
+    presenceData: PresenceData = {
+      details: "My Nintendo",
+      largeImageKey: "logo_big"
+    };
 
   if (path.length > 0) {
     //Subpages
@@ -24,10 +24,11 @@ presence.on("UpdateData", async () => {
         presenceData.details =
           document.getElementsByClassName("PageHeader_title")[0].textContent;
 
-        if (path.length > 1)
+        if (path.length > 1) {
           presenceData.state = document.getElementsByClassName(
             "PageSubHeader_title"
           )[0].textContent;
+        }
         break;
       //Rewards
       case "rewards":
@@ -38,11 +39,12 @@ presence.on("UpdateData", async () => {
           presenceData.details =
             document.getElementsByClassName("PageHeader_title")[0].textContent;
 
-          if (path.length > 1)
+          if (path.length > 1) {
             presenceData.state =
               document.getElementsByClassName(
                 "RewardHeader_title"
               )[0].textContent;
+          }
         }
         break;
       //Missions

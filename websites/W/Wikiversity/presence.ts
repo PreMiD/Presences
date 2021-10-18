@@ -45,13 +45,13 @@ const updateCallback = {
   };
 
 ((): void => {
-  if (currentURL.hostname === "www.wikiversity.org") {
+  if (currentURL.hostname === "www.wikiversity.org")
     presenceData.details = "On the home page";
-  } else {
+  else {
     let title: string;
     const actionResult = (): string =>
         getURLParam("action") || getURLParam("veaction"),
-      lang = currentURL.hostname.split(".")[0],
+      [lang] = currentURL.hostname.split("."),
       titleFromURL = (): string => {
         const raw =
           currentPath[1] === "index.php"
@@ -131,13 +131,13 @@ const updateCallback = {
           document.querySelector("#p-navigation a") ||
           document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement
       ).href === currentURL.href
-    ) {
+    )
       presenceData.details = "On the main page";
-    } else if (document.querySelector("#wpLoginAttempt")) {
+    else if (document.querySelector("#wpLoginAttempt"))
       presenceData.details = "Logging in";
-    } else if (document.querySelector("#wpCreateaccount")) {
+    else if (document.querySelector("#wpCreateaccount"))
       presenceData.details = "Creating an account";
-    } else if (document.querySelector(".searchresults")) {
+    else if (document.querySelector(".searchresults")) {
       presenceData.details = "Searching for a page";
       presenceData.state = (
         document.querySelector("input[type=search]") as HTMLInputElement
@@ -161,11 +161,9 @@ const updateCallback = {
           : `${title} (${titleFromURL()})`
       }`;
       updateCallback.function = (): void => {
-        if (actionResult() === "edit" || actionResult() === "editsource") {
+        if (actionResult() === "edit" || actionResult() === "editsource")
           presenceData.details = "Editing a page";
-        } else {
-          presenceData.details = namespaceDetails();
-        }
+        else presenceData.details = namespaceDetails();
       };
     } else {
       if (actionResult() === "edit") {

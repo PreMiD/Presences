@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "iBroadcast",
   "author": {
     "name": "वाह्य",
@@ -8,7 +8,7 @@
   "category": "music",
   "logo": "https://i.imgur.com/o9rFoCG.png",
   "thumbnail": "https://i.imgur.com/HkLnasC.jpg",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "color": "#53abee",
   "tags": [
     "music",

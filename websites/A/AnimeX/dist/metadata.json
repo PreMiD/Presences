@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "NotMarek",
     "id": "206299359007080450"
@@ -11,7 +12,7 @@
     "nl": "AnimeX is een gratis anime streaming-site zonder advertenties."
   },
   "url": "animex.tech",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/xnMXUG6.png",
   "thumbnail": "https://i.imgur.com/tzhIFIW.png",
   "color": "#FC0036",

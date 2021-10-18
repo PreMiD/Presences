@@ -39,11 +39,10 @@ presence.on("UpdateData", () => {
       presenceData.state = problemName;
       presenceData.largeImageKey = "submit";
     } else if (url.includes("submissions")) {
-      const problemName = document
-          .querySelectorAll(".tabs > h2 > a")
-          [
-            document.querySelectorAll(".tabs > h2 > a").length - 1
-          ].textContent.trim(),
+      const problemName = document.querySelectorAll(".tabs > h2 > a")[
+          // eslint messed up the next line
+          document.querySelectorAll(".tabs > h2 > a").length - 1
+        ].textContent.trim(),
         problemSubmissionsURL = `${problemURL}/submissions/`;
 
       presenceData.details = "Viewing submissions to problem:";

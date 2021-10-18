@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "Stream en koop officiële anime inclusief My Hero Academia, Drifters en Fairy Tail. Bekijk gratis anime online of abonneer je op meer."
   },
   "url": "www.funimation.com",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/WYKbg0v.png",
   "thumbnail": "https://i.imgur.com/PI37V2S.png",
   "color": "#42009c",

@@ -37,17 +37,16 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp,
       details: (await strings).browse
     },
-    pathname = document.location.pathname,
+    { pathname } = document.location,
     newLang = await presence.getSetting("lang"),
     showButton = await presence.getSetting("Buttons"),
     showSearch = await presence.getSetting("searchQuery"),
     pDetail = await presence.getSetting("detail");
 
-  if (!videoData) videoData = await presence.getPageletiable("ghtEnv");
+  videoData ??= await presence.getPageletiable("ghtEnv");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -67,7 +66,7 @@ presence.on("UpdateData", async () => {
             .toLowerCase()
             .includes("highlight") ||
           videoData.sClipTitle.toLowerCase().includes("highlight"),
-        isLowerThan1_5mins: video ? video.duration < 90 : false,
+        isLowerThan15mins: video ? video.duration < 90 : false,
         episodes: null,
         buttonLabel: (await strings).viewEpisode,
         smallImagePlay: "play",
@@ -81,11 +80,12 @@ presence.on("UpdateData", async () => {
 
     if (videoD.title.includes("["))
       videoD.title = videoD.title.replace(/(\[.+\])/g, "");
-    if (videoD.title.includes("EP."))
+    if (videoD.title.includes("EP.")) {
       videoD.title = videoD.title.replace(
         /(ตอนต่อไป EP.[1-9]?[0-9]?[0-9]|EP.[1-9]?[0-9]?[0-9])/,
         ""
       );
+    }
     if (videoD.title.match(/ \| | \|(?!.)/))
       videoD.title = videoD.title.replace(/ \| | \|(?!.)/, " ");
     if (videoD.title.match(/(highlight)/i))
@@ -94,17 +94,19 @@ presence.on("UpdateData", async () => {
       videoD.aTitle.match(
         /(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9])/g
       )
-    )
+    ) {
       videoD.episodes = videoD.aTitle.match(
         /(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9]|\([1-9]\/[1-9]\))/g
       );
-    if (videoD.episodes)
+    }
+    if (videoD.episodes) {
       videoD.epText =
         videoD.episodes[0].includes("[") || videoD.episodes[0].includes("(")
           ? ` ${videoD.episodes[0]}`
           : ` ${videoD.episodes[0].match(/[1-9]?[0-9]?[0-9]/)[0]}${
               videoD.episodes.length > 1 ? ` | ${videoD.episodes[1]}` : ""
             }`;
+    }
 
     if (video) {
       if (videoD.isTrailer) videoD.genre = "TRAILER";
@@ -115,7 +117,7 @@ presence.on("UpdateData", async () => {
         videoD.genre = "HIGHLIGHT_";
       else if (videoData.sLiveStatus) videoD.genre = "LIVE";
       else if (
-        videoD.isLowerThan1_5mins &&
+        videoD.isLowerThan15mins &&
         !videoD.isHighligh &&
         !videoD.isTrailer &&
         video.currentTime &&
@@ -238,8 +240,7 @@ presence.on("UpdateData", async () => {
           break;
       }
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       presenceData.smallImageKey = video.paused
         ? "pause"
@@ -283,9 +284,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${resutls} matching ${
         resutls > 1 ? "results" : "result"
       }`;
-    } else {
-      presenceData.state = "No matching result";
-    }
+    } else presenceData.state = "No matching result";
   }
 
   presence.setActivity(presenceData);
@@ -297,7 +296,7 @@ interface VideoDType {
   isTrailer: boolean;
   isHighligh: boolean;
   isTeaser: boolean;
-  isLowerThan1_5mins: boolean;
+  isLowerThan15mins: boolean;
   episodes: string[];
   playList: string;
   buttonLabel: string;

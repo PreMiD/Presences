@@ -234,15 +234,12 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.search.includes("sl=")) {
-    type = document.location.search.split("&")[3];
+    [, , , type] = document.location.search.split("&");
     from = document.location.search.split("&")[0].replace("?sl=", "");
     to = document.location.search.split("&")[1].replace("tl=", "");
-    if (type.replace("op=", "") === "translate") {
-      typet = "Text";
-    }
-    if (type.replace("op=", "") === "docs") {
-      typet = "Documents";
-    }
+    if (type.replace("op=", "") === "translate") typet = "Text";
+
+    if (type.replace("op=", "") === "docs") typet = "Documents";
   } else {
     typet = "Text";
     from = "Detecting";
@@ -252,7 +249,7 @@ presence.on("UpdateData", async () => {
   const showTime: boolean = await presence.getSetting("stamp");
 
   presenceData.startTimestamp = showTime ? browsingStamp : null;
-  if (presenceData.startTimestamp == null) delete presenceData.startTimestamp;
+  if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
 
   const showType: boolean = await presence.getSetting("type");
 

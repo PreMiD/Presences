@@ -12,9 +12,9 @@ presence.on("UpdateData", async () => {
 
   switch (window.location.pathname) {
     case "/":
-      presenceData.state =
-        document.querySelector("div.contentContainer > span")
-          .childElementCount + " Coins";
+      presenceData.state = `${
+        document.querySelector("div.contentContainer > span").childElementCount
+      } Coins`;
       presenceData.details = "Charts Overview";
       break;
 
@@ -49,8 +49,7 @@ presence.on("UpdateData", async () => {
             "div.mainContent > div.mainContainer.flex.flex-wrap > div.card.cardSpec > div > div:nth-child(4) > div.miningBShortCell.ctr.cbold.tooltip.tooltipx > span:nth-child(1)"
           ).textContent;
 
-          presenceData.state =
-            "24h Revenue: " + wallet24Revenue + " " + currencyTitle;
+          presenceData.state = `24h Revenue: ${wallet24Revenue} ${currencyTitle}`;
           currencyTitle += " Wallet";
         } else {
           currencyEffort = document.querySelector(
@@ -61,11 +60,10 @@ presence.on("UpdateData", async () => {
             "body > div.layout > div.contentWrapper > div.mainContent > div.typeSelection > div.typeSelectionRight.flexEqual > div > div.baseTab.activeTab"
           ).textContent;
 
-          presenceData.state =
-            "Effort (" + effortType + "): " + currencyEffort + "%";
+          presenceData.state = `Effort (${effortType}): ${currencyEffort}%`;
         }
         presenceData.details = currencyTitle;
-        presenceData.smallImageKey = window.location.pathname.split("/")[2];
+        [, , presenceData.smallImageKey] = window.location.pathname.split("/");
         presenceData.smallImageText = currencyTitle;
       } else {
         presenceData.startTimestamp = browsingStamp;
@@ -73,10 +71,8 @@ presence.on("UpdateData", async () => {
       }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Charts Overview";
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "NMW03",
     "id": "534099893979971584"
@@ -18,7 +19,7 @@
     "ga_IE": "An bot slándála Discpoint agus seicphointe is fearr!"
   },
   "url": "altdentifier.com",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/GT29NDe.png",
   "thumbnail": "https://i.imgur.com/Pbld3Tr.png",
   "color": "#7289D9",

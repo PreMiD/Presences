@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Vasilis",
     "id": "241929388403195914"
@@ -16,7 +17,7 @@
     "voting.wolvesville.com",
     "app.wolvesville.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/8zN53ti.png",
   "thumbnail": "https://i.imgur.com/qdIQk1n.png",
   "color": "#FF4181",

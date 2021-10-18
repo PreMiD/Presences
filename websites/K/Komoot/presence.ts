@@ -87,7 +87,7 @@ presence.on("UpdateData", async function () {
     )?.textContent;
   }
 
-  function checkPublic(q, a) {
+  function checkPublic(q: string, a: string) {
     const url = window.location.hostname,
       wl = (() => {
         if (url === "www.komoot.com") return "visible to: anyone";

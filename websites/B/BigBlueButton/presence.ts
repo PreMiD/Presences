@@ -26,7 +26,7 @@ function getData() {
     document.querySelectorAll("div").forEach((el) => {
       if (el.className.startsWith("userListColumn")) {
         const txt = el.querySelector("h2").textContent,
-          count = txt.split("(")[1].split(")")[0];
+          [count] = txt.split("(")[1].split(")");
 
         userCount = parseInt(count);
       }
@@ -34,7 +34,7 @@ function getData() {
 
     inCall = userCount !== null;
 
-    if (roomName && joinedRoomName != roomName) {
+    if (roomName && joinedRoomName !== roomName) {
       joinedRoomName = roomName;
       joinedRoomTimestamp = new Date().getTime();
     }
@@ -81,13 +81,12 @@ function getData() {
         return;
       }
     });
-    if (document.querySelector("#room_access_code")) {
+    if (document.querySelector("#room_access_code"))
       userState = "Entering the room passcode";
-    } else if (document.querySelector(".form-control.join-form")) {
+    else if (document.querySelector(".form-control.join-form"))
       userState = "Entering the name";
-    } else if (document.querySelector(".col-3 .loader")) {
+    else if (document.querySelector(".col-3 .loader"))
       userState = "Waiting for the session to start...";
-    }
   }
 }
 
@@ -95,17 +94,17 @@ setInterval(getData, 1000);
 
 presence.on("UpdateData", async () => {
   const userStateText =
-      userState == "screen"
+      userState === "screen"
         ? "Sharing screen..."
-        : userState == "presentation"
+        : userState === "presentation"
         ? "Presenting..."
-        : userState == "video"
+        : userState === "video"
         ? "Video call"
-        : userState == "microphone"
+        : userState === "microphone"
         ? "Speaking..."
-        : userState == "muted"
+        : userState === "muted"
         ? "Muted"
-        : userState == "headphones"
+        : userState === "headphones"
         ? "Listening..."
         : "Disconnected",
     presenceData = {
@@ -122,10 +121,8 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) delete presenceData.details;
   if (!presenceData.state) delete presenceData.state;
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

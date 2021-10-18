@@ -29,7 +29,9 @@ presence.on("UpdateData", async () => {
         .replace("%artist%", data.nowplaying?.artist || "Artist")
         .replace(
           "%songText%",
-          `${data.nowplaying?.artist} - ${data.nowplaying?.title}` || "Song"
+          data.nowplaying
+            ? `${data.nowplaying.artist} - ${data.nowplaying.title}`
+            : "Song"
         )
         .replace("%title%", data.nowplaying?.title || "Title"),
       timestamp: await presence.getSetting("timestamp")

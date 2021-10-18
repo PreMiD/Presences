@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -21,7 +22,7 @@
   },
   "url": "translate.google.com",
   "regExp": "translate.google([.][a-z]+)+[/]",
-  "version": "2.0.6",
+  "version": "2.0.8",
   "logo": "https://i.imgur.com/TblAuvW.png",
   "thumbnail": "https://i.imgur.com/HSrkJq0.png",
   "color": "#4c8bf5",

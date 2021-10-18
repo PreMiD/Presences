@@ -1,15 +1,14 @@
 const presence = new Presence({
-  clientId: "721266123282317333"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "721266123282317333"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "spiderum"
   };
 
-  if (document.location.hostname == "spiderum.com") {
+  if (document.location.hostname === "spiderum.com") {
     presenceData.startTimestamp = browsingStamp;
     if (
       document.location.pathname.includes("/bai-dang/viet-bai") ||
@@ -42,11 +41,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "read";
     } else if (document.location.pathname.includes("/nguoi-dung/")) {
       presenceData.details = "Đang xem trang cá nhân:";
-      presenceData.state =
-        document.querySelector(".display-name").textContent +
-        " (" +
-        document.querySelector(".nickname").textContent +
-        ")";
+      presenceData.state = `${
+        document.querySelector(".display-name").textContent
+      } (${document.querySelector(".nickname").textContent})`;
     } else if (document.location.pathname.includes("/s/all/")) {
       presenceData.details = "Đang xem:";
       presenceData.state = "Tất cả bài viết";
@@ -167,10 +164,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

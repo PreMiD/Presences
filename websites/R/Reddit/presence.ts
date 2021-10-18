@@ -41,8 +41,8 @@ presence.on("UpdateData", async () => {
   setPresence();
   const newLang = await presence.getSetting("lang").catch(() => "en"),
     buttons = await presence.getSetting("buttons");
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

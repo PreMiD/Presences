@@ -1,19 +1,17 @@
-var presence = new Presence({
-  clientId: "640963335826833418"
-});
+const presence = new Presence({
+    clientId: "640963335826833418"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var search: any;
+let user: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "tumblr"
   };
 
-  if (document.location.hostname == "www.tumblr.com") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.tumblr.com") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/u/")) {
@@ -105,10 +103,8 @@ presence.on("UpdateData", async () => {
     ).textContent;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
       const groupWatchId = new URLSearchParams(location.search).get(
           "groupWatchId"
         ),
-        [startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(video);
+        timestamps = presence.getTimestampsfromMedia(video);
 
       if (!privacy && groupWatchId) {
         groupWatchCount = Number(
@@ -101,8 +101,7 @@ presence.on("UpdateData", async () => {
 
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused ? strings.pause : strings.play;
-      data.startTimestamp = startTimestamp;
-      data.endTimestamp = endTimestamp;
+      [data.startTimestamp, data.endTimestamp] = timestamps;
 
       // remove timestamps if video is paused or user disabled timestamps
       if (video.paused || !time) {
@@ -186,9 +185,9 @@ presence.on("UpdateData", async () => {
       document.querySelector(".player-base video");
 
     if (video && !isNaN(video.duration)) {
-      const [startTimestamp, endTimestamp] =
-          presence.getTimestampsfromMedia(video),
-        titleField: HTMLDivElement = document.querySelector(
+      [data.startTimestamp, data.endTimestamp] =
+        presence.getTimestampsfromMedia(video);
+      const titleField: HTMLDivElement = document.querySelector(
           ".controls-overlay .primary-title"
         ),
         subtitleField: HTMLDivElement = document.querySelector(
@@ -206,8 +205,6 @@ presence.on("UpdateData", async () => {
       }
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused ? strings.pause : strings.play;
-      data.startTimestamp = startTimestamp;
-      data.endTimestamp = endTimestamp;
 
       if (video.paused || !time) {
         delete data.startTimestamp;

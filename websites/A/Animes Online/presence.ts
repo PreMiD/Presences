@@ -1,37 +1,20 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "641243628903333900"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "ao"
   };
 
-  if (document.location.hostname == "www.animesonline.cz") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.animesonline.cz") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/animes-dublado/")) {
@@ -60,31 +43,26 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing a genre...";
     } else if (document.location.pathname.includes("/videos/")) {
-      var currentTime: any,
-        duration: any,
-        paused: any,
-        timestamps: any,
-        video: HTMLVideoElement;
-      video = document.querySelector(
-        "#playersdbeta > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-      );
-      title = document.querySelector(
-        "#wrapper > div.container > div:nth-child(1) > div:nth-child(2) > h1"
-      ).textContent;
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+      const video = document.querySelector(
+          "#playersdbeta > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+        ) as HTMLVideoElement,
+        title = document.querySelector(
+          "#wrapper > div.container > div:nth-child(1) > div:nth-child(2) > h1"
+        ).textContent,
+        { currentTime, duration, paused } = video,
+        timestamps = presence.getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        );
       if (!isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.smallImageText = paused
           ? (await strings).pause
           : (await strings).play;
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
-        presenceData.details = title.split("-")[0];
-        presenceData.state = title.replace(title.split("-")[0] + "- ", "");
+        [presenceData.details] = title.split("-");
+        presenceData.state = title.replace(`${title.split("-")[0]}- `, "");
 
         if (paused) {
           delete presenceData.startTimestamp;
@@ -98,10 +76,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

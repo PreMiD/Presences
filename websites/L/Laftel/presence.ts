@@ -8,15 +8,6 @@ type Detail = {
   name?: string;
 };
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let last: Detail = {};
 
 type Episode = {
@@ -29,12 +20,10 @@ let lastEpisode: Episode = {};
 function getQuery() {
   const search = location.search.substring(1),
     query = JSON.parse(
-      '{"' +
-        decodeURI(search)
-          .replace(/"/g, '\\"')
-          .replace(/&/g, '","')
-          .replace(/=/g, '":"') +
-        '"}'
+      `{"${decodeURI(search)
+        .replace(/"/g, '\\"')
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"')}"}`
     );
   return query;
 }
@@ -44,16 +33,15 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (window.location.pathname === "/") {
-    presenceData.details = "메인";
-  } else if (window.location.pathname.startsWith("/search")) {
+  if (window.location.pathname === "/") presenceData.details = "메인";
+  else if (window.location.pathname.startsWith("/search")) {
     const query = getQuery();
     presenceData.details = "검색";
     presenceData.state = query.keyword;
   } else if (window.location.pathname.match(/^\/item\/\d/)) {
-    if (prev === window.location.pathname && last.name) {
+    if (prev === window.location.pathname && last.name)
       presenceData.details = last.name;
-    } else {
+    else {
       prev = window.location.pathname;
       last = await (
         await fetch(
@@ -96,13 +84,12 @@ presence.on("UpdateData", async () => {
         !video.ended &&
         video.readyState > 2
       ) {
-        const timestamps = getTimestamps(
+        const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
         presenceData.smallImageKey = "play";
       } else {
         presenceData.startTimestamp = null;

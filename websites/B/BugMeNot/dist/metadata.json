@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Verify.",
     "id": "297961554673008641"
@@ -12,7 +13,7 @@
     "bugmenot.com",
     "www.bugmenot.com"
   ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/I8ZDjmA.png",
   "thumbnail": "https://i.imgur.com/75lVUGU.png",
   "color": "#fa3631",

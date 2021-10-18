@@ -66,7 +66,7 @@ async function getStrings(): Promise<LangStrings> {
       listening: "general.listeningMusic",
       show: "general.viewShow"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -78,8 +78,8 @@ presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("lang"),
     privacy = await presence.getSetting("privacy"),
     time = await presence.getSetting("time");
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -212,7 +212,7 @@ presence.on("UpdateData", async () => {
       control === null ||
       control.dataset.testid === "control-button-play"
     ) {
-      if (presenceData.details === null) {
+      if (!presenceData.details) {
         presence.setTrayTitle();
         presence.setActivity();
       } else {

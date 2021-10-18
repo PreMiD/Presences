@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "Exacte tijd, elke tijdzone. 7 miljoen locaties, 46 talen, gesynchroniseerd met atoomkloktijd."
   },
   "url": "time.is",
-  "version": "2.1.5",
+  "version": "2.1.7",
   "logo": "https://i.imgur.com/L1202fr.png",
   "thumbnail": "https://i.imgur.com/8uPyLfC.png",
   "color": "#cc3355",

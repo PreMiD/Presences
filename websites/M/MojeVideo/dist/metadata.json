@@ -1,11 +1,11 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Robin",
     "id": "284370397535666188"
   },
   "url": "www.mojevideo.sk",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": {
     "en": "MojeVideo is a Slovak video streaming/sharing website mostly with funny, short videos",
     "sk": "Nové zábavné videá každý deň, zabavte sa, zasmejte sa, alebo nám pošlite vaše videá",

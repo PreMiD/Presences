@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Kedi",
     "id": "238668511222693888"
@@ -15,7 +15,7 @@
     "play.hbomax.com",
     "help.hbomax.com"
   ],
-  "version": "2.0.1",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/UxH7DDE.png",
   "thumbnail": "https://i.imgur.com/d1bktD4.jpg",
   "color": "#c600ff",

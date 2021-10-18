@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "bossatossa",
     "id": "514756351327731729"
@@ -20,7 +21,7 @@
     "nl": "De meest moe radio in Brazilië"
   },
   "url": "www.animu.com.br",
-  "version": "1.2.8",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/SHAH0WR.png",
   "thumbnail": "https://i.imgur.com/YS3pllQ.png",
   "color": "#2c004b",

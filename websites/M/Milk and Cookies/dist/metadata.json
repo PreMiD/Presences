@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Jeffrey.",
     "id": "540294552372772884"
@@ -11,7 +11,7 @@
     "nl": "Discord Community voor iedereen!"
   },
   "service": "Milk and Cookies",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/g2C5xmp.png",
   "thumbnail": "https://i.imgur.com/rmO4baN.png",
   "color": "#FF0098",

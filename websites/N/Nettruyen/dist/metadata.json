@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Kinue",
     "id": "634246091293851649"
@@ -13,7 +14,7 @@
     "www.nettruyen.com",
     "nettruyen.com"
   ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/h9AaSGw.png",
   "thumbnail": "https://i.imgur.com/eGhdGi5.png",
   "color": "#3d3665",

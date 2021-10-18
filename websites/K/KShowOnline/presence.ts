@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "614389710625964045"
   }),
   strings = presence.getStrings({
@@ -6,49 +6,48 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let browsingStamp = Math.floor(Date.now() / 1000),
+  title: HTMLElement,
+  views: HTMLElement,
+  air: HTMLElement,
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState = null,
+  playback: boolean;
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any, views: any, air: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-var lastPlaybackState = null;
-var playback;
-
-if (lastPlaybackState != playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
 if (document.location.pathname.includes("/kshow/")) {
-  presence.on("iFrameData", (data) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+  if (lastPlaybackState !== playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
+  }
+  presence.on("iFrameData", (data: IFrameData) => {
+    playback = data.iframeVideo.dur !== null ? true : false;
 
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
     }
   });
 }
 
 presence.on("UpdateData", async () => {
   // Get the video
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "kshowonline",
       smallImageKey: paused ? "pause" : "play",
@@ -63,7 +62,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
     presence.setTrayTitle();
   } else if (document.location.pathname.includes("/kshow/")) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       title = document.querySelector(
         "#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div:nth-child(3) > h4"
       );
@@ -76,12 +75,9 @@ presence.on("UpdateData", async () => {
       views = document.querySelector(
         "#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div:nth-child(3) > div.row.panel-info > div.col.s12.m9 > table > tbody > tr:nth-child(5) > td"
       );
-      if (air !== null) {
-        presenceData.state =
-          "Subbed by: " + views.innerText + ", Aired on: " + air.innerText;
-      } else {
-        presenceData.state = views.innerText;
-      }
+      if (air !== null)
+        presenceData.state = `Subbed by: ${views.innerText}, Aired on: ${air.innerText}`;
+      else presenceData.state = views.innerText;
 
       // Set presence state to views value
 
@@ -91,7 +87,7 @@ presence.on("UpdateData", async () => {
       }
 
       presence.setActivity(presenceData);
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       delete presenceData.endTimestamp;
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
@@ -105,7 +101,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Browsing through";
     presenceData.state = "the main page";
     delete presenceData.endTimestamp;
@@ -114,7 +110,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/list/view") {
+  } else if (document.location.pathname === "/list/view") {
     presenceData.details = "Browsing through";
     presenceData.state = "the most viewed shows";
     delete presenceData.endTimestamp;
@@ -123,7 +119,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/list/rate") {
+  } else if (document.location.pathname === "/list/rate") {
     presenceData.details = "Browsing through";
     presenceData.state = "the highest rated shows";
     delete presenceData.endTimestamp;
@@ -132,7 +128,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/list") {
+  } else if (document.location.pathname === "/list") {
     presenceData.details = "Browsing through";
     presenceData.state = "the latest shows";
     delete presenceData.endTimestamp;
@@ -141,7 +137,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
 
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/show-list") {
+  } else if (document.location.pathname === "/show-list") {
     presenceData.details = "Browsing through";
     presenceData.state = "a list of all shows";
     delete presenceData.endTimestamp;

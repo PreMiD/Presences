@@ -8,29 +8,27 @@ presence.on("UpdateData", () => {
   };
 
   if (document.location.pathname.includes("/bot/")) {
-    presenceData.details = `Viewing A Discord Bot:`;
+    presenceData.details = "Viewing A Discord Bot:";
     presenceData.state = document.querySelector(
       "#main-container > div.hero-static > div > div > div > center > h1 > span"
     ).textContent;
   } else if (document.location.pathname.includes("/user/")) {
-    presenceData.details = `Viewing a profile:`;
+    presenceData.details = "Viewing a profile:";
     presenceData.state = document.querySelector(
       "#main-container > div.hero-static > div > div > div > h1 > span.white-white"
     ).textContent;
   } else if (document.location.pathname.includes("/api")) {
-    presenceData.details = `Viewing Page:`;
-    presenceData.state = `Devine Discord Bots Api`;
-  } else if (document.location.pathname.includes("/add/bot")) {
-    presenceData.details = `Adding Discord Bot`;
-  } else {
-    presenceData.details = `Viewing Page:`;
-    presenceData.state = `Discord Bot List`;
+    presenceData.details = "Viewing Page:";
+    presenceData.state = "Devine Discord Bots Api";
+  } else if (document.location.pathname.includes("/add/bot"))
+    presenceData.details = "Adding Discord Bot";
+  else {
+    presenceData.details = "Viewing Page:";
+    presenceData.state = "Discord Bot List";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

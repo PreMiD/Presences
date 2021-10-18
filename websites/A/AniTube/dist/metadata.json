@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Fujisawa Yuu",
     "id": "316989384077475841"
@@ -13,7 +13,7 @@
     "nl": "Gratis Online Anime bekijken was nog nooit zo makkelijk, op Anitube kan je Naruto Shippuden, Bleach Online, en nog veel meer andere Ondertitelde Anime bekijken"
   },
   "url": "www.anitube.site",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/HgVnakc.png",
   "thumbnail": "https://i.imgur.com/3h85tmP.png",
   "color": "#BE1515",

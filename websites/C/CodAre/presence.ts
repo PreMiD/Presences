@@ -24,15 +24,16 @@ presence.on("UpdateData", () => {
   } else if (window.location.pathname.toLowerCase().includes("/profil")) {
     presenceData.details = "Bir kullanıcı profili görüntülüyor:";
     presenceData.state =
-      document.querySelector(
-        "#page-top > div.container-fluid > div > div.col-lg-4 > div > div > div > a"
-      ).innerHTML +
-      " " +
-      "(" +
-      document.querySelector(
-        "#page-top > div.container-fluid > div > div.col > div > div.card-body > h4:nth-child(4) > span"
-      ).innerHTML +
-      ")";
+      `${
+        document.querySelector(
+          "#page-top > div.container-fluid > div > div.col-lg-4 > div > div > div > a"
+        ).innerHTML
+      } ` +
+      `(${
+        document.querySelector(
+          "#page-top > div.container-fluid > div > div.col > div > div.card-body > h4:nth-child(4) > span"
+        ).innerHTML
+      })`;
   } else if (document.location.pathname.toLowerCase().includes("/arama")) {
     presenceData.details = "Bir kod arıyor:";
     if (!searchCategory) {
@@ -41,19 +42,17 @@ presence.on("UpdateData", () => {
         searchResult.slice(1).toLocaleString();
     } else {
       presenceData.state =
-        searchCategory
+        `${searchCategory
           .replace("html", "HTML")
           .replace("jsplus", "Javascript+")
           .replace("diger", "Diğer")
           .replace("altyapi", "Altyapı")
           .replace("booster", "Booster")
           .replace("py", "PYTHON")
-          .replace("js", "Javascript") +
-        " adlı kategoride" +
-        " " +
-        searchResult.charAt(0).toUpperCase() +
-        searchResult.slice(1).toLocaleString() +
-        " adlı kodu arıyor";
+          .replace("js", "Javascript")} adlı kategoride` +
+        ` ${searchResult.charAt(0).toUpperCase()}${searchResult
+          .slice(1)
+          .toLocaleString()} adlı kodu arıyor`;
     }
   } else if (window.location.pathname.toLowerCase().includes("/uptime")) {
     presenceData.details = "Bir sayfa görüntülüyor:";
@@ -94,10 +93,8 @@ presence.on("UpdateData", () => {
     presenceData.details = "Bir kategori görüntülüyor:";
     presenceData.state = "Altyapı";
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
