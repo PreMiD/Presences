@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
             }
 
             if (getPath("/admin")) {
-                presenceData.details = "Admininterface" 
+                presenceData.details = "Admininterface"
                 delete presenceData.state;
             }
             if (document.querySelector("title").textContent.toLowerCase() === "forbidden") {
