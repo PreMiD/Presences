@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "899051140157681726"
 }),
-browsingStamp = Math.floor(Date.now() / 1000);
-const forumurl = "mgservers.de",
+browsingStamp = Math.floor(Date.now() / 1000),
+ forumurl = "mgservers.de",
  panelurl = "webinterface.mgservers.de",
  panelserverurl = "webinterface.mgservers.de/server/";
 
@@ -10,11 +10,10 @@ presence.on("UpdateData", async () => {
     const privacy = await presence.getSetting("privacy"),
      werbung = await presence.getSetting("werbung"),
      presenceData: PresenceData = {
-        details: "Dein Server Hoster",
         largeImageKey: "mgs-normal",
         smallImageKey: "mgs-normal",
         smallImageText: "MGS",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
     };
 
     if (privacy) {
@@ -35,7 +34,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "mgs-normal";
             presenceData.state = `${document.querySelector("title").textContent.split(' - MGServers')[0]}`
 
-            if(document.URL.includes("conversation")) presenceData.state = `Ließt eine Konversationen`, presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}]
+            if(document.URL.includes("conversation")) presenceData.state = `Liest eine Konversation`, presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}]
             if(document.URL.includes("global-jcoins-statement-list")) presenceData.state = `Kontoauszüge`, presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}]
             if(document.URL.includes("acp")) presenceData.state = `Administrationsoberfläche`, presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}]
             if(document.URL.includes("moderation-list")) presenceData.state = `Moderation`, presenceData.buttons = [{label: "Forum",url: `https://${forumurl}/forum`}]
@@ -49,7 +48,7 @@ presence.on("UpdateData", async () => {
             if (getPath("/")) presenceData.details = "Serverliste";
             if (getPath("/auth/login")) presenceData.details = "Panel-Login";
             if (getPath("/auth/password")) presenceData.details = "Hat sein Passwort vergessen...";
-            if (getPath("/account")) presenceData.details = "Schaut seinen Panel Account an";
+            if (getPath("/account")) presenceData.details = "Schaut seinen Panel-Account an";
             if (getPath("/account/api")) presenceData.details = "Schaut seine API-Keys an";
             if (getPath("/staff")) presenceData.details = "Stellt eine Zugriffsanfrage"
 
@@ -59,7 +58,7 @@ presence.on("UpdateData", async () => {
 
                 if (getPathServer(``)) presenceData.details = "Server-Konsole"
                 if (getPathServer(`/files`)) presenceData.details = "Ist im Dateimanager"
-                if (getPathServer(`/databases`)) presenceData.details = "Brarbeitet Datenbanken"
+                if (getPathServer(`/databases`)) presenceData.details = "Bearbeitet Datenbanken"
                 if (getPathServer(`/schedules`)) presenceData.details = "Verwaltet Aufgaben"
                 if (getPathServer(`/user`)) presenceData.details = "Verwaltet Subuser"
                 if (getPathServer(`/backups`)) presenceData.details = "Verwaltet Backups"
@@ -67,11 +66,17 @@ presence.on("UpdateData", async () => {
                 if (getPathServer(`/startup`)) presenceData.details = "Verwaltet Startparameter"
                 if (getPathServer(`/subdomain`)) presenceData.details = "Verwaltet Subdomains"
                 if (getPathServer(`/staff`)) presenceData.details = "Verwaltet Zugriffsanfragen"
-                if (getPathServer(`/settings`)) presenceData.details = "Server Einstellungen"
+                if (getPathServer(`/settings`)) presenceData.details = "Servereinstellungen"
             }
 
-            if (getPath("/admin")) presenceData.details = "Admininterface", delete presenceData.state;
-            if (document.querySelector("title").textContent.toLowerCase() === "forbidden") presenceData.details = "Wünscht sich cool zu sein!", delete presenceData.state;
+            if (getPath("/admin")) {
+                presenceData.details = "Admininterface" 
+                delete presenceData.state;
+            }
+            if (document.querySelector("title").textContent.toLowerCase() === "forbidden") {
+                presenceData.details = "Wünscht sich, cool zu sein!"
+                delete presenceData.state;
+            }
         }
     }
 
@@ -87,11 +92,11 @@ presence.on("UpdateData", async () => {
                     url: `${document.URL}`
                 }
             ]
-            if(document.URL.includes("conversation")) presenceData.state = `Ließt eine Konversationen`
+            if(document.URL.includes("conversation")) presenceData.state = `Liest eine Konversation`
             if(document.URL.includes("global-jcoins-statement-list")) presenceData.state = `Kontoauszüge`
             if(document.URL.includes("acp")) presenceData.state = `Administrationsoberfläche`
             if(document.URL.includes("moderation-list")) presenceData.state = `Moderation`
-        }else {
+        } else {
             presenceData.buttons = [
                 {
                     label: "Forum",
@@ -112,22 +117,18 @@ presence.on("UpdateData", async () => {
         presence.setTrayTitle();
         presence.setActivity(presenceData);
     }
-    else {
-        presence.setActivity(presenceData);
-    }
+    else presence.setActivity(presenceData);
 
 })
 
-function getUrl(url: any) {
+function getUrl(url: string) {
     return window.location.href.toLowerCase().includes(`${url}`)
 }
 
-function getPath(path: any) {
+function getPath(path: string) {
     return window.location.pathname.toLowerCase().includes(`${path}`)
 }
 
-function getPathServer(path: any) {
-    const complete_server_url = window.location.href.toLocaleLowerCase().toString()
-    const server_url = complete_server_url.replace(`${panelserverurl}`, "")
-    return server_url.toLowerCase().includes(`${path}`)
+function getPathServer(path: string) {
+    return window.location.href.toLocaleLowerCase().replace(`${panelserverurl}`, "").includes(`${path}`)
 }
