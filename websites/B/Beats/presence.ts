@@ -36,13 +36,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       details: settings.details,
       state: settings.state,
-      smallImageText: `${data.live.is_live ? data.live.streamer_name : "AutoDJ"} is live!`,
-      buttons: [
-        {
-          label: "Tune in",
-          url: "https://radio.itsbeats.net"
-        }
-      ]
+      smallImageText: `${data.live.is_live ? data.live.streamer_name : "AutoDJ"} is live!`
     };
 
   if (settings.timestamp) presenceData.startTimestamp = timestamp;
