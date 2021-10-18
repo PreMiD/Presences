@@ -7,9 +7,9 @@
   },
   "regExp": "([a-z0-9-]+[.])*tweakers[.]net[/]",
   "category": "other",
-  "logo": "https://i.imgur.com/z0QlXZS.png",
+  "logo": "https://i.imgur.com/k1GDxDq.png",
   "thumbnail": "https://i.imgur.com/jYndPxq.png",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "color": "#a11a3a",
   "tags": [
     "tweakers",
