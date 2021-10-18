@@ -21,8 +21,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Ist im Forum";
             presenceData.smallImageText = "Forum";
             presenceData.smallImageKey = "mgs-normal";
-        }
-        if (getUrl(panelurl)) {
+        } else if (getUrl(panelurl)) {
             presenceData.details = "Ist im Webinterface";
             presenceData.smallImageText = "Webinterface";
             presenceData.smallImageKey = "wi-normal";
@@ -40,7 +39,7 @@ presence.on("UpdateData", async () => {
             } else if (document.URL.includes("global-jcoins-statement-list")) {
               presenceData.state = `Kontoauszüge`;
               presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
-            } else if (document.URL.includes("acp"))
+            } else if (document.URL.includes("acp")) {
               presenceData.state = `Administrationsoberfläche`;
               presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
             } else if (document.URL.includes("moderation-list")) {
@@ -62,7 +61,7 @@ presence.on("UpdateData", async () => {
             else if (getPath("/staff")) presenceData.details = "Stellt eine Zugriffsanfrage";
 
             if (getUrl(panelserverurl)) {
-                presenceData.state = `${document.querySelector("title").textContent.split(' |')[0]}`;
+                [presenceData.state] = document.querySelector("title").textContent.split(' |');
 
                 if (getPathServer(``)) presenceData.details = "Server-Konsole";
                 else if (getPathServer(`/files`)) presenceData.details = "Ist im Dateimanager";
@@ -124,17 +123,16 @@ presence.on("UpdateData", async () => {
         presence.setTrayTitle();
         presence.setActivity(presenceData);
     } else presence.setActivity(presenceData);
-
 });
 
 function getUrl(url: string) {
-    return window.location.href.toLowerCase().includes(url)
+    return window.location.href.toLowerCase().includes(url);
 }
 
 function getPath(path: string) {
-    return window.location.pathname.toLowerCase().includes(path)
+    return window.location.pathname.toLowerCase().includes(path);
 }
 
 function getPathServer(path: string) {
-    return window.location.href.toLocaleLowerCase().replace(panelserverurl, "").includes(path)
+    return window.location.href.toLocaleLowerCase().replace(panelserverurl, "").includes(path);
 }
