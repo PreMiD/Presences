@@ -148,8 +148,8 @@ presence.on("UpdateData", async () => {
     if (document.querySelector("#plex > div:nth-child(4) > div") !== null) {
       const { currentTime, duration, paused } =
         document.querySelector<HTMLVideoElement>(
-          "#plex > div:nth-child(4) > div > div:nth-child(1) > video"
-        );
+            "#plex > div:nth-child(4) > div > div:nth-child(1) > video"
+         ) || document.querySelector<HTMLAudioElement>("#plex > div:nth-child(4) > div > div:nth-child(1) > audio");
       [presenceData.startTimestamp, presenceData.endTimestamp] =
         presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
       presenceData.smallImageKey = paused ? "pause" : "play";
