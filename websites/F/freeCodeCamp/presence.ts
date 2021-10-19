@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const {
       title,
-      location: { pathname: page },
+      location: { pathname: page }
     } = document,
     presenceData: PresenceData = {
       largeImageKey: "logo",
@@ -32,16 +32,19 @@ presence.on("UpdateData", () => {
       if (page.match(/^\/news|^\/settings|^\/donate/))
         return arr[1] ? title : capitalize(arr[0]);
       if (page.startsWith("/learn")) {
-        return arr[2] ? capitalize(arr[2])
-          : arr[1] ? "Selecting Lesson"
+        return arr[2]
+          ? capitalize(arr[2])
+          : arr[1]
+          ? "Selecting Lesson"
           : "Selecting Course";
       }
       if (title.startsWith("Profile")) return arr[0];
     };
-  if (page !== "/")
+  if (page !== "/") {
     presenceData.buttons = [
       { label: "Visit Page", url: `https://freecodecamp.org${page}` }
     ];
+  }
   presenceData.details = details(page, title);
   presenceData.state = state(page, title);
   presence.setActivity(presenceData);

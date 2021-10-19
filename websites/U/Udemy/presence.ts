@@ -71,10 +71,13 @@ udemy.on("UpdateData", async () => {
     presenceData.state = category?.textContent || "Unknown Category";
   } else if (page.includes("/course/") && video && video.currentTime) {
     const title = document.querySelector(
-        "header a[class*=header--course-title] div.sr-only"
+        "header a[data-purpose=course-header-title]"
       ),
       episode = document.querySelector(
         "li[class*=curriculum-item-link--is-current] span > span"
+      ),
+      episodeFromPlayer = document.querySelector(
+        "#bookmark-portal ~ div:not(:empty)"
       ),
       [, endTimestamp] = udemy.getTimestamps(
         Math.floor(video.currentTime),
@@ -82,7 +85,10 @@ udemy.on("UpdateData", async () => {
       );
 
     presenceData.details = title?.textContent || "Unknown Course";
-    presenceData.state = episode?.textContent || "Unknown Episode";
+    presenceData.state =
+      episode?.textContent ||
+      episodeFromPlayer?.textContent ||
+      "Unknown Episode";
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused

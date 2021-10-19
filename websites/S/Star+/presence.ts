@@ -160,9 +160,7 @@ presence.on("UpdateData", async () => {
       if (!privacy) {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = strings.watchLive;
-      } else {
-        if (privacy) data.state = strings.watchingLive;
-      }
+      } else if (privacy) data.state = strings.watchingLive;
 
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused ? strings.pause : strings.play;
