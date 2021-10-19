@@ -2,7 +2,9 @@
 const presence = new Presence({ clientId: "817772461109018664" }),
   timestamp = Math.floor(Date.now() / 1000),
   newStats = async () =>
-    (data = await (await window.fetch("https://radio.itsbeats.net/stats")).json());
+    (data = await (
+      await window.fetch("https://radio.itsbeats.net/stats")
+    ).json());
 
 let data: {
   listeners: {
@@ -12,7 +14,7 @@ let data: {
     song: {
       artist: string;
       title: string;
-    }
+    };
   };
   live: {
     is_live: boolean;
@@ -25,10 +27,16 @@ newStats();
 
 presence.on("UpdateData", async () => {
   const settings = {
-      details: (await presence.getSetting("details")).replace("%listeners%", data.listeners.total),
+      details: (await presence.getSetting("details")).replace(
+        "%listeners%",
+        data.listeners.total
+      ),
       state: (await presence.getSetting("state"))
         .replace("%artist%", data.now_playing.song.artist || "Artist")
-        .replace("%songText%", `${data.now_playing.song.artist} - ${data.now_playing.song.title}`)
+        .replace(
+          "%songText%",
+          `${data.now_playing.song.artist} - ${data.now_playing.song.title}`
+        )
         .replace("%title%", data.now_playing.song.title || "Title"),
       timestamp: await presence.getSetting("timestamp")
     },
@@ -36,7 +44,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       details: settings.details,
       state: settings.state,
-      smallImageText: `${data.live.is_live ? data.live.streamer_name : "AutoDJ"} is live!`
+      smallImageText: `${
+        data.live.is_live ? data.live.streamer_name : "AutoDJ"
+      } is live!`
     };
 
   if (settings.timestamp) presenceData.startTimestamp = timestamp;

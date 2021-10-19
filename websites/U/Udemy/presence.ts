@@ -85,7 +85,10 @@ udemy.on("UpdateData", async () => {
       );
 
     presenceData.details = title?.textContent || "Unknown Course";
-    presenceData.state = episode?.textContent || episodeFromPlayer?.textContent || "Unknown Episode";
+    presenceData.state =
+      episode?.textContent ||
+      episodeFromPlayer?.textContent ||
+      "Unknown Episode";
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
