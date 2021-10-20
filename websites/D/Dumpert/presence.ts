@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     privacy = await presence.getSetting("privacy");
 
-  if (pageh === "https://www.dumpert.nl/" || pageh === "https://dumpert.nl/") {
+  if (page === "/" && !location.search) {
     presenceData.details = "Bekijkt:";
     presenceData.state = "De Home Pagina";
     if (!privacy && buttons) {
