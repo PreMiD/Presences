@@ -1,11 +1,6 @@
-const presence = new Presence({ clientId: "843058220398542878" });
-
-let channelName: HTMLElement,
-  channelNumber: HTMLElement,
-  songName: HTMLElement,
-  songArtist: HTMLElement,
-  searchTerm: HTMLElement,
-  categoryTerm: HTMLElement;
+const presence = new Presence({
+   clientId: "843058220398542878" 
+});
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -24,47 +19,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Talk Home";
   else if (document.location.pathname === "/home/howard")
     presenceData.details = "Viewing Howard Stern Home";
-  else if (
-    document.querySelector("p.now-playing-info-label__text").textContent ===
-    "On Air Show"
-  ) {
-    channelName = document.querySelector("p.channel-name");
-    channelNumber = document.querySelector("p.channel-number");
-    songName = document.querySelector("span.track-name");
-    songArtist = document.querySelector("span.artist-name");
-
-    presenceData.details = `${songName.innerText} - ${songArtist.innerText}`;
-    presenceData.state = `${channelName.innerText} - ${channelNumber.innerText}`;
-  } else if (
-    document.querySelector("p.now-playing-info-label__text").textContent ===
-    "Xtra Channel"
-  ) {
-    channelName = document.querySelector("p.channel-name");
-    songName = document.querySelector("span.track-name");
-    songArtist = document.querySelector("span.artist-name");
-
-    presenceData.details = `${songName.innerText} - ${songArtist.innerText}`;
-    presenceData.state = `${channelName.innerText} - Xtra Channel`;
-  } else if (
-    document.querySelector("p.now-playing-info-label__text").textContent ===
-    "Episode"
-  ) {
-    songName = document.querySelector("p.track-name");
-    songArtist = document.querySelector("p.show-title");
-
-    presenceData.details = `${songName.innerText} - ${songArtist.innerText}`;
-    presenceData.state = "On Demand Episode";
-  } else if (
-    document.querySelector("p.now-playing-info-label__text").textContent ===
-    "Pandora Station"
-  ) {
-    channelName = document.querySelector("p.channel-name");
-    songName = document.querySelector("span.track-name");
-    songArtist = document.querySelector("span.artist-name");
-
-    presenceData.details = `${songName.innerText} - ${songArtist.innerText}`;
-    presenceData.state = `${channelName.innerText} - Pandora Station`;
-  } else if (document.location.pathname === "/favorites/channels")
+  else if (document.location.pathname === "/favorites/channels")
     presenceData.details = "Viewing Favorite Channels";
   else if (document.location.pathname === "/favorites/shows")
     presenceData.details = "Viewing Favorite Shows";
@@ -75,16 +30,31 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/query")
     presenceData.details = "Searching SiriusXM";
   else if (document.location.pathname.includes("/query")) {
-    searchTerm = document.querySelector("h2.search-page-header");
+    const searchTerm = document.querySelector<HTMLInputElement>('[name="searchText"]').value;
 
     presenceData.details = "Viewing: ";
-    presenceData.state = searchTerm.innerText;
+    presenceData.state = searchTerm;
   } else if (document.location.pathname.includes("/category-listing")) {
-    categoryTerm = document.querySelector("span.sxm-breadcrumb__text");
+    const categoryTerm = document.querySelector("span.sxm-breadcrumb__text");
 
     presenceData.details = "Viewing Category: ";
-    presenceData.state = categoryTerm.innerText;
-  } else presenceData.details = "Can't read page";
+    presenceData.state = categoryTerm.TextContent;
+  } else presenceData.details = "Unknown page";
+
+  if (document.querySelector(".sxm-player-controls.no-select")) {
+    const data = {
+      channel: document.querySelector(".channel-number")?.textContent,
+      track: document.querySelector(".track-name")?.textContent ?? "Loading",
+      artist: document.querySelector(".artist-name")?.textContent ?? "Loading"
+    };
+
+    if (data.track === data.artist) presenceData.details = data.track; 
+    else if (data.channel) presenceData.details = `${data.track} - ${data.artist}`;
+    else presenceData.details = data.track;
+
+    if (data.channel) presenceData.state = data.channel;
+    else presenceData.state = data.artist;
+  }
 
   if (!presenceData.details) {
     presence.setTrayTitle();
