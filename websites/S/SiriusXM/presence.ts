@@ -1,5 +1,5 @@
 const presence = new Presence({
-   clientId: "843058220398542878" 
+  clientId: "843058220398542878"
 });
 
 presence.on("UpdateData", async () => {
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
       artist: document.querySelector(".artist-name")?.textContent ?? "Loading"
     };
 
-    if (data.track === data.artist) presenceData.details = data.track; 
+    if (data.track === data.artist) presenceData.details = data.track;
     else if (data.channel) presenceData.details = `${data.track} - ${data.artist}`;
     else presenceData.details = data.track;
 
