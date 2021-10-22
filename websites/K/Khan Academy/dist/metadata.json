@@ -6,16 +6,17 @@
       "id": "616761152331841550"
     },
     "category": "other",
-    "logo": "https://assets.clever.com/resource-icons/apps/543588dda77fdffc0f000be9/icon_59e7167.png",
-    "thumbnail": "https://assets.clever.com/resource-icons/apps/543588dda77fdffc0f000be9/icon_59e7167.png",
+    "logo": "https://imgur.com/a/FrD9Lmm",
+    "thumbnail": "https://imgur.com/a/SzTMXy0",
     "version": "1.0.0",
     "color": "#4de682",
     "tags": [
       "education",
       "learning",
       "learn",
+      "study",
       "class",
-      "classes"
+      "school"
     ],
     "url": [
       "khanacademy.org",
@@ -23,7 +24,7 @@
       "es.khanacademy.org"
     ],
     "description": {
-      "es": "Khan Academy es un sitio de aprendizaje online.",
-      "en": "Khan Academy is a online learning site."
+      "es": "Un recurso de aprendizaje personalizado, para todas las edades. Khan Academy ofrece ejercicios de práctica, videos instructivos y un panel de aprendizaje personalizado que permite a los estudiantes aprender a su propio ritmo, dentro y fuera del salón de clases.",
+      "en": "Khan Academy offers practice exercises, instructional videos, and a personalized learning dashboard that empower learners to study at their own pace in and outside of the classroom."
     }
   }
