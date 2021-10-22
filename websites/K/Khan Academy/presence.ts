@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
     details: (await strings).watching
   };
 
-  if (!document.location.pathname) data.state = `🏠 ${(await strings).homepage}`
+  if (document.location.pathname === "/") data.state = `🏠 ${(await strings).homepage}`
   else if (document.location.pathname.includes("/courses")) data.state = "📚 Courses"
   else if (document.location.pathname.includes("/progress")) data.state = "📊 Progress"
   else if (document.location.pathname.includes("/teachers")) data.state = "🎓 Teachers"
