@@ -45,11 +45,10 @@ presence.on("UpdateData", () => {
       data.details = "Viewing Comic";
       data.state = document.querySelector(".post-title h1").textContent;
       data.smallImageKey = "view";
-      const viewComicButton: ButtonData = {
+      data.buttons = [{
         label: "Visit Comic Page",
         url: origin + pathname
-      };
-      data.buttons = [viewComicButton];
+      }];
     } else if (/^\/series\/[0-9a-z-]+\/+(chapter|ch)-[0-9]+\/?$/i.test(pathname)) {
       const comicLink = (document.querySelector("ol.breadcrumb li:nth-child(3) a") as HTMLAnchorElement).href,
         chapter = document.querySelector("ol.breadcrumb li:nth-child(4)").textContent;
