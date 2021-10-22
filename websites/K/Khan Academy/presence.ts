@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 
       if (document.location.pathname.includes("/v/")) data.smallImageKey = "video"
       else if (document.location.pathname.includes("/a/")) data.smallImageKey = "article"
-      else if (["/e/", "/quiz/"]) data.smallImageKey = "exercise"
+      else if (["/e/", "/quiz/"].includes(document.location.pathname)) data.smallImageKey = "exercise"
     }
   }
 
