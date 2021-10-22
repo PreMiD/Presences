@@ -18,8 +18,8 @@
       "class",
       "classes"
     ],
-    "regExp": "[a-z]+[.]khanacademy[.]org",
-    "url": "khanacademy.org",
+    "regExp": "([a-z]+[.])+khanacademy[.]org[/]",
+    "url": "www.khanacademy.org",
     "description": {
       "es": "Un recurso de aprendizaje personalizado, para todas las edades. Khan Academy ofrece ejercicios de práctica, videos instructivos y un panel de aprendizaje personalizado que permite a los estudiantes aprender a su propio ritmo, dentro y fuera del salón de clases.",
       "en": "Khan Academy offers practice exercises, instructional videos, and a personalized learning dashboard that empower learners to study at their own pace in and outside of the classroom."
