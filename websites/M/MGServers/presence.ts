@@ -17,14 +17,15 @@ presence.on("UpdateData", async () => {
     };
 
     if (privacy) {
-        if (getUrl(forumurl)) {
-            presenceData.details = "Ist im Forum";
-            presenceData.smallImageText = "Forum";
-            presenceData.smallImageKey = "mgs-normal";
-        } else if (getUrl(panelurl)) {
+        if (getUrl(panelurl) || getUrl(panelserverurl)) {
             presenceData.details = "Ist im Webinterface";
             presenceData.smallImageText = "Webinterface";
             presenceData.smallImageKey = "wi-normal";
+        }
+        else if (getUrl(forumurl)) {
+          presenceData.details = "Ist im Forum";
+          presenceData.smallImageText = "Forum";
+          presenceData.smallImageKey = "mgs-normal";
         }
     } else {
         if (getUrl(forumurl)) {
@@ -51,14 +52,20 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageText = "Webinterface";
             presenceData.smallImageKey = "wi-normal";
             presenceData.details = "Serverliste";
+            delete presenceData.buttons
+            delete presenceData.state
             
-            if (getPath("")) presenceData.details = "Serverliste";
-            else if (getPath("/")) presenceData.details = "Serverliste";
-            else if (getPath("/auth/login")) presenceData.details = "Panel-Login";
-            else if (getPath("/auth/password")) presenceData.details = "Hat sein Passwort vergessen...";
-            else if (getPath("/account")) presenceData.details = "Schaut seinen Panel-Account an";
+            if (getPath("/auth/login")) presenceData.details = "Panel-Login";
             else if (getPath("/account/api")) presenceData.details = "Schaut seine API-Keys an";
+            else if (getPath("/account")) presenceData.details = "Schaut seinen Panel-Account an";
             else if (getPath("/staff")) presenceData.details = "Stellt eine Zugriffsanfrage";
+            else if (document.querySelector("title").textContent.toLowerCase() === "forbidden") {
+              presenceData.details = "Wünscht sich, cool zu sein!";
+            }
+            else if (getPath("/admin")) {
+              presenceData.details = "Admininterface";
+            }
+            else presenceData.details = "Serverliste";
 
             if (getUrl(panelserverurl)) {
                 [presenceData.state] = document.querySelector("title").textContent.split(' |');
@@ -75,14 +82,6 @@ presence.on("UpdateData", async () => {
                 else if (getPathServer("/settings")) presenceData.details = "Servereinstellungen";
                 else presenceData.details = "Server-Konsole";
             }
-
-            if (getPath("/admin")) {
-                presenceData.details = "Admininterface";
-                delete presenceData.state;
-            } else if (document.querySelector("title").textContent.toLowerCase() === "forbidden") {
-                presenceData.details = "Wünscht sich, cool zu sein!";
-                delete presenceData.state;
-            }
         }
     }
 
@@ -98,10 +97,22 @@ presence.on("UpdateData", async () => {
                     url: document.URL
                 }
             ]
-            if (document.URL.includes("conversation")) presenceData.state = "Liest eine Konversation";
-            else if (document.URL.includes("global-jcoins-statement-list")) presenceData.state = "Kontoauszüge";
-            else if (document.URL.includes("acp")) presenceData.state = "Administrationsoberfläche";
-            else if (document.URL.includes("moderation-list")) presenceData.state = "Moderation";
+            if (document.URL.includes("conversation")) {
+              presenceData.state = "Liest eine Konversation";
+              presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
+            }
+            else if (document.URL.includes("global-jcoins-statement-list")) {
+              presenceData.state = "Kontoauszüge";
+              presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
+            }
+            else if (document.URL.includes("acp")) {
+              presenceData.state = "Administrationsoberfläche";
+              presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
+            }
+            else if (document.URL.includes("moderation-list")) {
+              presenceData.state = "Moderation";
+              presenceData.buttons = [{label: "Forum", url: `https://${forumurl}/forum`}];
+            }
         } else {
             presenceData.buttons = [
                 {
