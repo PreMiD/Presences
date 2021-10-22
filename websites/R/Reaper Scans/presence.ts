@@ -10,47 +10,46 @@ presence.on("UpdateData", () => {
       largeImageKey: "logo"
     };
 
-  let state, details, smallImageKey, buttons: [ButtonData, ButtonData?];
   if (document.querySelector(".search-main-menu").classList.contains("active")) {
-    details = "Searching:";
-    state = (document.querySelector(".manga-search-field") as HTMLInputElement).value;
-    smallImageKey = "search";
+    data.details = "Searching:";
+    data.state = (document.querySelector(".manga-search-field") as HTMLInputElement).value;
+    data.smallImageKey = "search";
   } else {
 
-    if (/^\/$/.test(pathname)) details = "Viewing Home Page";
+    if (/^\/$/.test(pathname)) data.details = "Viewing Home Page";
     else if (/^\/home1\/?$/.test(pathname)) {
       // Counting comics
       let comics = document.querySelectorAll(".page-listing-item .row .col-4").length;
-      details = "Viewing Comic List";
-      state = "📋 " + comics.toString() + " comics found";
+      data.details = "Viewing Comic List";
+      data.state = "📋 " + comics.toString() + " comics found";
     }
     else if (/^\/all-series\/novels+\/?$/.test(pathname)) {
       // Counting novels
       let comics = document.querySelectorAll(".page-listing-item .row .col-6").length;
-      details = "Viewing Novel List";
-      state = "📋 " + comics.toString() + " novels found";
+      data.details = "Viewing Novel List";
+      data.state = "📋 " + comics.toString() + " novels found";
     }
     else if (/^\/all-series\/comics\/manhwas\/?$/.test(pathname)) {
       // Counting manhwa
       let comics = document.querySelectorAll(".page-listing-item .row .col-6").length;
-      details = "Viewing Manhwa List";
-      state = "📋 " + comics.toString() + " manhwa found";
+      data.details = "Viewing Manhwa List";
+      data.state = "📋 " + comics.toString() + " manhwa found";
     }
     else if (/^\/all-series\/comics\/manhuas\/?$/.test(pathname)) {
       // Counting manhua
       let comics = document.querySelectorAll(".page-listing-item .row .col-4").length;
-      details = "Viewing Manhua List";
-      state = "📋 " + comics.toString() + " manhua found";
+      data.details = "Viewing Manhua List";
+      data.state = "📋 " + comics.toString() + " manhua found";
     }
     else if (/^\/series\/[0-9a-z-]+\/?$/i.test(pathname)) {
-      details = "Viewing Comic";
-      state = document.querySelector(".post-title h1").textContent;
-      smallImageKey = "view";
+      data.details = "Viewing Comic";
+      data.state = document.querySelector(".post-title h1").textContent;
+      data.smallImageKey = "view";
       const viewComicButton: ButtonData = {
         label: "Visit Comic Page",
         url: origin + pathname
       };
-      buttons = [viewComicButton];
+      data.buttons = [viewComicButton];
     } else if (/^\/series\/[0-9a-z-]+\/+(chapter|ch)-[0-9]+\/?$/i.test(pathname)) {
       const comicLink = (document.querySelector("ol.breadcrumb li:nth-child(3) a") as HTMLAnchorElement).href,
       chapter = document.querySelector("ol.breadcrumb li:nth-child(4)").textContent;
@@ -63,9 +62,9 @@ presence.on("UpdateData", () => {
       progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
 
 
-      details = document.querySelector("ol.breadcrumb li:nth-child(3)").textContent;
-      state = `📖 ${chapter} 🔸 ${progress}%`;
-      smallImageKey = "read";
+      data.details = document.querySelector("ol.breadcrumb li:nth-child(3)").textContent;
+      data.state = `📖 ${chapter} 🔸 ${progress}%`;
+      data.smallImageKey = "read";
       const viewComicButton: ButtonData = {
         label: "Visit Comic Page",
         url: origin + comicLink
@@ -74,18 +73,14 @@ presence.on("UpdateData", () => {
           label: "Visit Chapter",
           url: origin + pathname
         };
-      buttons = [viewComicButton, visitChapterButton];
+      data.buttons = [viewComicButton, visitChapterButton];
     } else {
-      details = "Browsing Reaper Scans";
-      state = document.title;
+      data.details = "Browsing Reaper Scans";
+      data.state = document.title;
 
     }
   }
 
-  data.details = details;
-  data.state = state;
-  data.buttons = buttons;
-  data.smallImageKey = smallImageKey;
 
   if (data.details) presence.setActivity(data);
 });
