@@ -4,24 +4,34 @@
     "name": "HuckinB",
     "id": "228575716214702080"
   },
+  "contributors": [{
+    "name": "KylePython",
+    "id": "136959324349136896"
+  }],
   "url": [
     "simulatorhits.com",
-    "panel.simulatorhits.com"
+    "panel.simulatorhits.com",
+    "simulatorhits.dev"
   ],
   "description": {
     "en": "Your Number 1 Hit Simulation Radio",
-    "nl": "Uw Nummer 1 Hit Simulatie Radio"
+    "nl": "Uw Nummer 1 Hit Simulatie Radio",
+    "ge": "Ihr Nummer-1-Hit-Simulationsradio",
+    "sv": "Din nummer 1 träffsimuleringsradio"
   },
   "service": "SimulatorHits",
-  "version": "1.0.5",
-  "logo": "https://i.imgur.com/an0EarG.png",
-  "thumbnail": "https://i.imgur.com/HFpEiPB.png",
-  "color": "#D4426E",
+  "version": "2.0.1",
+  "logo": "https://i.imgur.com/txJayic.jpg",
+  "thumbnail": "https://i.imgur.com/IEYKig2.png",
+  "color": "#DC2424",
   "tags": [
+    "trucking",
     "ets2",
     "ats",
     "fs19",
-    "simhits"
+    "radio",
+    "simulator",
+    "simulatorhits"
   ],
   "category": "music"
 }
