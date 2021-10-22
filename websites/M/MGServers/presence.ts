@@ -30,8 +30,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Webinterface";
       presenceData.smallImageKey = "wi-normal";
       presenceData.details = "Serverliste";
-      delete presenceData.buttons
-      delete presenceData.state
             
       if (getPath("/auth/login")) presenceData.details = "Panel-Login";
       else if (getPath("/account/api")) presenceData.details = "Schaut seine API-Keys an";
