@@ -9,7 +9,6 @@ import ora, { Ora } from "ora";
  * Translation Tool for PreMiD Presences.
  * @author callumok2004 <callumokane123@gmail.com>
  * @author Bas950 <me@bas950.com>
- * @author ririxidev <mail@ririxi.dev>
  */
 
 debug.enable("Translator:*");
