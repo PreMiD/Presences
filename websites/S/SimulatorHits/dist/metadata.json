@@ -15,9 +15,9 @@
   ],
   "description": {
     "en": "Your Number 1 Hit Simulation Radio",
-    "nl": "Uw Nummer 1 Hit Simulatie Radio",
-    "ge": "Ihr Nummer-1-Hit-Simulationsradio",
-    "sv": "Din nummer 1 träffsimuleringsradio"
+    "nl_NL": "Uw Nummer 1 Hit Simulatie Radio",
+    "de_DE": "Ihr Nummer-1-Hit-Simulationsradio",
+    "sv_SE": "Din nummer 1 träffsimuleringsradio"
   },
   "service": "SimulatorHits",
   "version": "2.0.1",
