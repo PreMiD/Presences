@@ -98,10 +98,10 @@ presence.on("UpdateData", async () => {
                     url: document.URL
                 }
             ]
-            if (document.URL.includes("conversation")) presenceData.state = `Liest eine Konversation`;
-            else if (document.URL.includes("global-jcoins-statement-list")) presenceData.state = `Kontoauszüge`;
-            else if (document.URL.includes("acp")) presenceData.state = `Administrationsoberfläche`;
-            else if (document.URL.includes("moderation-list")) presenceData.state = `Moderation`;
+            if (document.URL.includes("conversation")) presenceData.state = "Liest eine Konversation";
+            else if (document.URL.includes("global-jcoins-statement-list")) presenceData.state = "Kontoauszüge";
+            else if (document.URL.includes("acp")) presenceData.state = "Administrationsoberfläche";
+            else if (document.URL.includes("moderation-list")) presenceData.state = "Moderation";
         } else {
             presenceData.buttons = [
                 {
