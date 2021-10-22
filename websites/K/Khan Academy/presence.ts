@@ -25,10 +25,10 @@ presence.on("UpdateData", async () => {
   }
   else if (document.location.pathname.includes("/settings")) data.state = `⚙️ ${(await strings).settings}`
   else if (document.location.pathname.includes("/search")) data.state = `🔍 Searching for '${document.location.pathname.split('page_search_query=')[1]}'`
-  else if (document.location.hostname.includes("support")) data.state = `💡 Support`
   else if (document.location.pathname.includes("/topics")) data.state = `🔍 Community`
   else if (document.location.pathname.includes("/posts")) data.state = `🔍 Community Post`
   else if (document.location.pathname.includes("/requests/new")) data.state = `⚠️ Submitting a Request`
+  else if (document.location.hostname.includes("support")) data.state = `💡 Support`
   else if (document.location.pathname.split('/').length < 3) data.state = `📖 ${document.querySelector('._aemo2b3').textContent}`
   else {
     data.details = document.querySelector('._io410w6, span._cmfzobe:nth-child(3) > a:nth-child(2)').textContent
@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
       data.smallImageText = `${(await strings).reading} ${document.querySelector('._1l44zfj, #uid-dialog-0-title > span:nth-child(2)').textContent}`
     }
     else if (document.location.pathname.includes("/quiz/")) {
-      data.smallImageKey = "article"
-      data.smallImageText = `${(await strings).reading} Quiz`
+      data.smallImageKey = "exercise"
+      data.smallImageText = `${(await strings).writing} Quiz`
     }
   }
 
