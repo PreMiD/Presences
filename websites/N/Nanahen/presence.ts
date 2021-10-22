@@ -48,7 +48,7 @@ switch (
       presenceData.details = "Searching doujin...";
       presenceData.smallImageKey = "search";
     }
-    if (document.location.pathname.includes("/show/genre/")) {
+    else if (document.location.pathname.includes("/show/genre/")) {
       const genres = document.querySelector(
         "body > main > div > div > h2"
       ).textContent;
@@ -56,7 +56,7 @@ switch (
       presenceData.state = genres;
       presenceData.smallImageKey = "search";
     }
-    if (document.location.pathname.includes("/show/tags/")) {
+    else if (document.location.pathname.includes("/show/tags/")) {
       const genres = document.querySelector(
         "body > main > div > div > h2"
       ).textContent;
@@ -64,7 +64,7 @@ switch (
       presenceData.state = genres;
       presenceData.smallImageKey = "search";
     }
-    if (document.location.pathname.includes("/show/parody/")) {
+    else if (document.location.pathname.includes("/show/parody/")) {
       const genres = document.querySelector(
         "body > main > div > div > h2"
       ).textContent;
@@ -72,7 +72,7 @@ switch (
       presenceData.state = genres;
       presenceData.smallImageKey = "search";
     }
-    if (document.location.pathname.includes("/show/authors/")) {
+    else if (document.location.pathname.includes("/show/authors/")) {
       const genres = document.querySelector(
         "body > main > div > div > h2"
       ).textContent;
@@ -80,7 +80,7 @@ switch (
       presenceData.state = genres;
       presenceData.smallImageKey = "search";
     }
-    if (document.location.pathname.startsWith("/show/series/")) {
+    else if (document.location.pathname.startsWith("/show/series/")) {
       const name = document.querySelector(
         "body > main > div > div > div.container > div > div.series-flexright > div.series-title > h2"
       ).textContent;
