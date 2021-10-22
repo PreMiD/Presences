@@ -1,15 +1,16 @@
 const presence = new Presence({
-    clientId: "843711390539841577"
-  }),
+  clientId: "843711390539841577"
+}),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "dscgg",
-    startTimestamp: browsingStamp,
-    details: "Viewing 📰 page:",
-    state: "🛑 Unsupported"
-  };
+  const showTimestamp: boolean = await presence.getSetting("timestamp"),
+    showButtons: boolean = await presence.getSetting("buttons"),
+    presenceData: PresenceData = {
+      largeImageKey: "dscgg",
+      details: "Viewing 📰 page:",
+      state: "🛑 Unsupported"
+    };
 
   if (document.location.hostname === "dsc.gg") {
     if (document.location.pathname === "/") presenceData.state = "🏡 Home";
@@ -59,14 +60,13 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/dashboard/l/")) {
       const [, link] = document.location.pathname.split("/dashboard/l/");
       presenceData.details = `Editing 🔗 ${link} link`;
-      presenceData.state = `🏓 Tab: ${
-        location.href.includes("#tab")
-          ? location.href.replace(
-              `https://dsc.gg/dashboard/l/${link}#tab=`,
-              " "
-            )
-          : "basic"
-      }`;
+      presenceData.state = `🏓 Tab: ${location.href.includes("#tab")
+        ? location.href.replace(
+          `https://dsc.gg/dashboard/l/${link}#tab=`,
+          " "
+        )
+        : "basic"
+        }`;
       presenceData.buttons = [
         {
           label: "Visit Link",
@@ -81,29 +81,29 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname === "/") {
       const contentsTab = location.href.replace("https://docs.dsc.gg/#", " ");
       presenceData.details = "Viewing 📑 Documentation";
-      presenceData.state = `🌐 Content: ${
-        location.href.includes("#") ? contentsTab : "📧 Introduction"
-      }`;
+      presenceData.state = `🌐 Content: ${location.href.includes("#") ? contentsTab : "📧 Introduction"
+        }`;
     } else if (document.location.pathname === "/endpoints") {
       const contentsTab = location.href.replace(
         "https://docs.dsc.gg/endpoints#",
         " "
       );
       presenceData.details = "Viewing 🔗 endpoints";
-      presenceData.state = `🌐 Content: ${
-        location.href.includes("#") ? contentsTab : "None"
-      }`;
+      presenceData.state = `🌐 Content: ${location.href.includes("#") ? contentsTab : "None"
+        }`;
     } else if (document.location.pathname === "/widgets") {
       const contentsTab = location.href.replace(
         "https://docs.dsc.gg/widgets#",
         " "
       );
       presenceData.details = "Viewing 🖼️ widgets";
-      presenceData.state = `🌐 Content: ${
-        location.href.includes("#") ? contentsTab : "None"
-      }`;
+      presenceData.state = `🌐 Content: ${location.href.includes("#") ? contentsTab : "None"
+        }`;
     }
   }
+
+  if (!showButtons) delete presenceData.buttons;
+  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
   if (!presenceData.details) {
     presence.setTrayTitle();
