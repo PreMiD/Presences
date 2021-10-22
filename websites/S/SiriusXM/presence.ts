@@ -30,7 +30,9 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/query")
     presenceData.details = "Searching SiriusXM";
   else if (document.location.pathname.includes("/query")) {
-    const searchTerm = document.querySelector<HTMLInputElement>('[name="searchText"]').value;
+    const searchTerm = document.querySelector<HTMLInputElement>(
+      '[name="searchText"]'
+    ).value;
 
     presenceData.details = "Viewing: ";
     presenceData.state = searchTerm;
@@ -49,7 +51,8 @@ presence.on("UpdateData", async () => {
     };
 
     if (data.track === data.artist) presenceData.details = data.track;
-    else if (data.channel) presenceData.details = `${data.track} - ${data.artist}`;
+    else if (data.channel)
+      presenceData.details = `${data.track} - ${data.artist}`;
     else presenceData.details = data.track;
 
     if (data.channel) presenceData.state = data.channel;

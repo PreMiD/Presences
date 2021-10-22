@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "887975742812590120"
-}),
+    clientId: "887975742812590120"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -35,7 +35,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("feed"))
       presenceData.details = "Viewing feed";
     else if (document.location.pathname.includes("/u/")) {
-      const username = document.querySelector("span.Name.text-3xl")?.textContent;
+      const username =
+        document.querySelector("span.Name.text-3xl")?.textContent;
       presenceData.smallImageKey = "reading";
       presenceData.details = "Viewing profile:";
       presenceData.state = `${username || "Unknown"}`;
@@ -73,7 +74,9 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname === "/signin") {
       const username = document.querySelector("input")?.value;
       presenceData.details = "Signing In:";
-      username ? presenceData.state = `To ${username}` : presenceData.state = "To Unknown";
+      username
+        ? (presenceData.state = `To ${username}`)
+        : (presenceData.state = "To Unknown");
     } else if (document.location.pathname === "/privacy") {
       presenceData.details = "Viewing:";
       presenceData.state = "Privacy Policy";
@@ -93,7 +96,6 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname === "/")
       presenceData.details = "Viewing status page";
   }
-
 
   if (!showButtons) delete presenceData.buttons;
   if (showTimestamp) presenceData.startTimestamp = browsingStamp;
