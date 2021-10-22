@@ -34,21 +34,12 @@ presence.on("UpdateData", async () => {
     data.details = document.querySelector('._io410w6, span._cmfzobe:nth-child(3) > a:nth-child(2)').textContent
     data.state = `📋 ${document.querySelector('._1eqoe4n8, span._cmfzobe:nth-child(2) > a:nth-child(2)').textContent.replace(/.*?\:\s+/, "")}`
 
-    if (document.location.pathname.includes("/v/")) {
-      data.smallImageKey = "video"
-      data.smallImageText = `${(await strings).watching} ${document.querySelector('._1l44zfj, #uid-dialog-0-title > span:nth-child(2)').textContent}`
-    }
-    else if (document.location.pathname.includes("/e/")) {
-      data.smallImageKey = "exercise"
-      data.smallImageText = `${(await strings).writing} ${document.querySelector('._1l44zfj, #uid-dialog-0-title > span:nth-child(2)').textContent}`
-    }
-    else if (document.location.pathname.includes("/a/")) {
-      data.smallImageKey = "article"
-      data.smallImageText = `${(await strings).reading} ${document.querySelector('._1l44zfj, #uid-dialog-0-title > span:nth-child(2)').textContent}`
-    }
-    else if (document.location.pathname.includes("/quiz/")) {
-      data.smallImageKey = "exercise"
-      data.smallImageText = `${(await strings).writing} Quiz`
+    if (["/v/", "/e/", "/a/", "/quiz/"].includes(document.location.pathname)) {
+      data.smallImageText = `${(await strings).watching} ${document.querySelector('._o87mc2h, #uid-dialog-0-title > span:nth-child(2)').textContent}`
+
+      if (document.location.pathname.includes("/v/")) data.smallImageKey = "video"
+      else if (document.location.pathname.includes("/a/")) data.smallImageKey = "article"
+      else if (["/e/", "/quiz/"]) data.smallImageKey = "exercise"
     }
   }
 
