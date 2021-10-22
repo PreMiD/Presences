@@ -64,15 +64,13 @@ presence.on("UpdateData", () => {
       data.details = document.querySelector("ol.breadcrumb li:nth-child(3)").textContent;
       data.state = `📖 ${chapter} 🔸 ${progress}%`;
       data.smallImageKey = "read";
-      const viewComicButton: ButtonData = {
+      data.buttons = [{
         label: "Visit Comic Page",
         url: origin + comicLink
-      },
-        visitChapterButton: ButtonData = {
-          label: "Visit Chapter",
-          url: origin + pathname
-        };
-      data.buttons = [viewComicButton, visitChapterButton];
+      }, {
+        label: "Visit Chapter",
+        url: origin + pathname
+      }];
     } else {
       data.details = "Browsing Reaper Scans";
       data.state = document.title;
