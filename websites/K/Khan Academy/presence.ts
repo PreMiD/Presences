@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 
     if (document.location.pathname.match(/\/(v|a|e|quiz)\//)) {
       data.smallImageText = `${(await strings).watching} ${
-        document.querySelector("._1l44zfj, ._o87mc2h, ._1ysxbwjs").textContent
+        document.querySelector("._1l44zfj, ._1fvz8ou").textContent
       }`;
 
       if (document.location.pathname.includes("/v/"))
