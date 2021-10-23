@@ -4,8 +4,7 @@ const presence = new Presence({
 
 let title = "Loading SimulatorHits",
  artist = "",
- presenter = "AutoDJ",
- listeners = 0;
+ presenter = "AutoDJ";
 
 function getSongData(): void {
   fetch("https://api.simulatorhits.dev/now-playing?override").then(
@@ -14,7 +13,6 @@ function getSongData(): void {
         response.json().then((data) => {
           title = data.song.title;
           artist = data.song.artist;
-          listeners = data.listeners;
           presenter = data.presenter.username;
         });
       }
@@ -26,22 +24,12 @@ getSongData();
 
 const currentTime = Math.floor(Date.now() / 1000),
 
-  WebsiteButton = {
-  label: "Visit Website",
-  url: "https://simulatorhits.com"
-},
- DiscordButton = {
-  label: "Join Discord",
-  url: "https://discord.gg/8NvhJb6kGH"
-};
-
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     smallImageText: `Current Presenter: ${presenter}`,
     smallImageKey: "play",
-    startTimestamp: currentTime,
-    buttons: [WebsiteButton, DiscordButton]
+    startTimestamp: currentTime
   };
 
   if (document.location.hostname === "simulatorhits.com") {
