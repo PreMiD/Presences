@@ -135,7 +135,8 @@ presence.on("UpdateData", async () => {
       "airpods-2nd-generation",
       "airpods-3rd-generation",
       "homepod-mini",
-      "ipod-touch"
+      "ipod-touch",
+      "apple-tv-4k"
     ],
     services = [
       "apple-fitness-plus",
@@ -143,7 +144,6 @@ presence.on("UpdateData", async () => {
       "apple-tv-plus",
       "airplay",
       "apple-tv-app",
-      "apple-tv-4k",
       "apple-arcade",
       "icloud",
       "apple-news",
