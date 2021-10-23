@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
       "mac-mini",
       "pro-display-xdr",
       "watch",
-      "apple-watch-series-6",
+      "apple-watch-series-7",
       "apple-watch-se",
       "apple-watch-series-3",
       "apple-watch-nike",
