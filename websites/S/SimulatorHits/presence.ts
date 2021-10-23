@@ -36,7 +36,7 @@ presence.on("UpdateData", () => {
     if (document.location.pathname === "/schedule") {
       presenceData.details = "Viewing Schedule";
       presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname === "/news" || document.location.pathname === "/news/*") {
+    } else if (document.location.pathname === "/news") {
       presenceData.details = "Reading News";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname === "/about/meet-the-team") {
