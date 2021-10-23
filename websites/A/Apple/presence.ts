@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
       "mac",
       "macbook-air",
       "macbook-pro-13",
-      "macbook-pro-16",
+      "macbook-pro-14-and-16",
       "imac-24",
       "imac-27",
       "mac-pro",
