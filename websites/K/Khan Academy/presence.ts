@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
     if (["/v/", "/e/", "/a/", "/quiz/"].includes(document.location.pathname)) {
       data.smallImageText = `${(await strings).watching} ${
         document.querySelector(
-          "._o87mc2h, #uid-dialog-0-title > span:nth-child(2)"
+          "#uid-dialog-0-title > span:nth-child(2)"
         ).textContent
       }`;
 
