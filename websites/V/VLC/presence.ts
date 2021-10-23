@@ -308,7 +308,7 @@ const getStatus = setLoop(function () {
             clearInterval(getStatus);
             media.state = "stopped";
             alert(
-              `Something went wrong with the request, please contact ririxi#2721 at https://discord.premid.app with the following infos (RES: ${req.status} / S: ${req.readyState})`
+              `Something went wrong with the request, please contact other people at https://discord.premid.app with the following infos (RES: ${req.status} / S: ${req.readyState})`
             );
           }
         }

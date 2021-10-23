@@ -323,7 +323,7 @@ If you have some suggestions about our guidelines, you should contact us @ [PreM
 `Revision 3` of the guidelines was written and was contributed to by the following individuals:
 
 <div>
-<a href="https://github.com/ririxidev"><img src="https://github.com/ririxidev.png?size=2048" width="48px" style="max-width:100%; border-radius: 50%;"/></a>
+<a href="https://github.com/PreMiD"><img src="https://github.com/PreMiD.png?size=2048" width="48px" style="max-width:100%; border-radius: 50%;"/></a>
 </div>
 
 `Revision 2` of the guidelines was written and was contributed to by the following individuals:
