@@ -52,20 +52,15 @@ presence.on("UpdateData", async () => {
       .textContent.replace(/.*?:\s+/, "")}`;
 
     if (document.location.pathname.match(/\/(v|a|e|quiz)\//)) {
-      data.smallImageText = `${(await strings).watching} ${
-        document.querySelector(
+      data.smallImageText = document.querySelector(
           '._1l44zfj, [role="dialog"] [data-test-id="modal-title"]'
-        ).textContent
-      }`;
+        ).textContent;
 
       if (document.location.pathname.includes("/v/"))
         data.smallImageKey = "video";
       else if (document.location.pathname.includes("/a/"))
         data.smallImageKey = "article";
-      else if (
-        document.location.pathname.includes("/e/") ||
-        document.location.pathname.includes("/quiz/")
-      )
+      else if (document.location.pathname.match(/\/(e|quiz)\//))
         data.smallImageKey = "exercise";
     }
   }
