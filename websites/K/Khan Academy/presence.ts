@@ -52,11 +52,9 @@ presence.on("UpdateData", async () => {
       .textContent.replace(/.*?:\s+/, "")}`;
 
     if (document.location.pathname.match(/\/(v|a|e|quiz)\//)) {
-      data.smallImageText = `${(await strings).watching} ${
-        document.querySelector(
+      data.smallImageText = document.querySelector(
           '._1l44zfj, [role="dialog"] [data-test-id="modal-title"]'
-        ).textContent
-      }`;
+        ).textContent;
 
       if (document.location.pathname.includes("/v/"))
         data.smallImageKey = "video";
