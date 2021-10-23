@@ -22,7 +22,7 @@ function getSongData(): void {
 setInterval(getSongData, 10000);
 getSongData();
 
-const currentTime = Math.floor(Date.now() / 1000),
+const currentTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
