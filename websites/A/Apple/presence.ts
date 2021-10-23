@@ -109,7 +109,6 @@ presence.on("UpdateData", async () => {
       "ipad-keyboards",
       "airpods",
       "iphone",
-      "iphone-12-pro",
       "iphone-12",
       "iphone-se",
       "airtag",
