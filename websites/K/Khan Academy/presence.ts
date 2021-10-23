@@ -60,8 +60,7 @@ presence.on("UpdateData", async () => {
         data.smallImageKey = "video";
       else if (document.location.pathname.includes("/a/"))
         data.smallImageKey = "article";
-      else 
-        data.smallImageKey = "exercise";
+      else data.smallImageKey = "exercise";
     }
   }
 
