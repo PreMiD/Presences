@@ -11,8 +11,7 @@ function getSongData(): void {
     (response) => {
       if (response.status === 200) {
         response.json().then((data) => {
-          title = data.song.title;
-          artist = data.song.artist;
+          ({title, artist} = data.song); 
           presenter = data.presenter.username;
         });
       }
