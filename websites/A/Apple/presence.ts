@@ -133,6 +133,7 @@ presence.on("UpdateData", async () => {
       "airpods-pro",
       "airpods-max",
       "airpods-2nd-generation",
+      "airpods-3rd-generation",
       "homepod",
       "homepod-mini",
       "ipod-touch"
