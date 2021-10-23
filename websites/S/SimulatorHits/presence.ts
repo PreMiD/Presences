@@ -61,8 +61,8 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Streamers";
       presenceData.smallImageKey = "reading";
     } else {
-      presenceData.details = `${title}`;
-      presenceData.state = `${artist}`;
+      presenceData.details = title;
+      presenceData.state = artist;
     }
   }
 
