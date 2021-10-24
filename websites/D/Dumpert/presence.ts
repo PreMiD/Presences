@@ -116,19 +116,19 @@ presence.on("UpdateData", async () => {
       presenceData.details = content;
     } else {
       title2 = document.querySelector("[id*='vjs_video_']");
-      if (!title2) {
+      if (!title2) 
         presenceData.details = "Bekijkt een foto";
-      } else if (title2.className.includes("paused")) {
+       else if (title2.className.includes("paused")) 
         presenceData.details = "Bekijkt een video";
-      }
+      
     }
   } else if (page.includes("toppers")) {
     presenceData.details = "Bekijkt:";
     presenceData.state = "De Toppers";
   } else if (page.includes("/zoek/")) {
-    if (privacy) {
+    if (privacy) 
       presenceData.details = "Is aan het zoeken";
-    } else {
+     else {
       if (buttons) {
         presenceData.buttons = [
           {
