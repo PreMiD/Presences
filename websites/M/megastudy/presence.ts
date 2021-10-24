@@ -76,9 +76,9 @@ presence.on("UpdateData", async () => {
     )
       presenceData.details = "메가선생님";
     else if (document.location.pathname.includes("/teacher_v2/main.asp")) {
-      [presenceData.details, presenceData.state] = (
-        document.querySelector(".lnb_tit") as HTMLElement
-      ).innerText.split("\n");
+      [presenceData.details, presenceData.state] = (document.querySelector(
+        ".lnb_tit"
+      ) as HTMLElement).innerText.split("\n");
     } else if (
       document.location.pathname.includes("/Mypage/mp_2017/main/main.asp")
     )

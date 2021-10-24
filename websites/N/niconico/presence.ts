@@ -77,8 +77,9 @@ presence.on("UpdateData", async () => {
 
         const [videoId] = location.pathname.match(/..\d+$/),
           isPlaying = !!document.querySelector(".PlayerPauseButton"),
-          video: HTMLVideoElement =
-            document.querySelector(".VideoPlayer video"),
+          video: HTMLVideoElement = document.querySelector(
+            ".VideoPlayer video"
+          ),
           elapsedSec = Math.floor(video.currentTime),
           presenceData: PresenceData = {
             details: title,

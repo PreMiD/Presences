@@ -276,9 +276,8 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/templates/id/")) {
-    const templateName = document.querySelector(
-      "h1.font-semibold.truncate"
-    )?.textContent;
+    const templateName = document.querySelector("h1.font-semibold.truncate")
+      ?.textContent;
     presenceData.largeImageKey = "discordtemplates_logo";
     presenceData.details = "Viewing Template:";
     presenceData.state = `${templateName ? templateName : "Unknown"}`;
@@ -289,9 +288,8 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/templates/users/")) {
-    const userName = document.querySelector(
-      "h1.text-3xl.font-semibold"
-    )?.textContent;
+    const userName = document.querySelector("h1.text-3xl.font-semibold")
+      ?.textContent;
     presenceData.largeImageKey = "discordtemplates_logo";
     presenceData.details = "Viewing User:";
     presenceData.state = `${userName ? userName : "Unknown"}`;

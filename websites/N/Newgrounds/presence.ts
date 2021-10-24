@@ -106,8 +106,10 @@ presence.on("UpdateData", async () => {
               document.querySelector("#audio-listen-progress").textContent,
               document.querySelector("#audio-listen-duration").textContent
             );
-            [presenceData.startTimestamp, presenceData.endTimestamp] =
-              timestamps;
+            [
+              presenceData.startTimestamp,
+              presenceData.endTimestamp
+            ] = timestamps;
           }
           presenceData.smallImageKey = "audio_play";
           presenceData.smallImageText = "Audio - Playing";
@@ -167,8 +169,10 @@ presence.on("UpdateData", async () => {
                     document.querySelector('[data-value="total-time"]')
                       .textContent
                   );
-                  [presenceData.startTimestamp, presenceData.endTimestamp] =
-                    timestamps;
+                  [
+                    presenceData.startTimestamp,
+                    presenceData.endTimestamp
+                  ] = timestamps;
                 }
                 presenceData.smallImageKey = "movies_play";
                 presenceData.smallImageText = "Movies - Playing";
@@ -239,9 +243,8 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.startsWith("/collection")) {
       presenceData.details = "Browsing collections";
       if (document.location.pathname.split("/")[2]) {
-        const itemName = document.querySelector(
-          ".column.wide .pod-head h2"
-        ).textContent;
+        const itemName = document.querySelector(".column.wide .pod-head h2")
+          .textContent;
         presenceData.details = "Viewing a collection";
         if (await presence.getSetting("itemname")) {
           presenceData.state =
@@ -267,9 +270,8 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.startsWith("/playlists")) {
       presenceData.details = "Browsing playlists";
       if (document.location.pathname.startsWith("/playlists/view")) {
-        const itemName = document.querySelector(
-          ".column.wide .pod-head h2"
-        ).textContent;
+        const itemName = document.querySelector(".column.wide .pod-head h2")
+          .textContent;
         presenceData.details = "Viewing a playlist";
         if (await presence.getSetting("itemname")) {
           presenceData.state =
@@ -297,9 +299,8 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.startsWith("/rankings"))
       presenceData.details = "Viewing the rankings";
     else if (document.location.pathname.startsWith("/wiki")) {
-      const itemName = document.querySelector(
-          ".column.wide .pod-head h2"
-        ).textContent,
+      const itemName = document.querySelector(".column.wide .pod-head h2")
+          .textContent,
         [, ...subNameSplit] = itemName.split(": ");
       presenceData.details = "in Newgrounds Wiki";
       presenceData.state = subNameSplit.join(": ");

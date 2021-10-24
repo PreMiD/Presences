@@ -19,8 +19,8 @@ async function getProfileDetails() {
     btnfriendcheck = document.querySelector(
       "div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary"
     ).textContent,
-    viewingprofilename =
-      document.querySelector("div.col-md-12 > h2").textContent;
+    viewingprofilename = document.querySelector("div.col-md-12 > h2")
+      .textContent;
   if (privacymode === false) {
     if (btnfriendcheck.includes("Unfriend")) {
       presenceData.details = "Viewing Friend:";
@@ -110,8 +110,8 @@ presence.on("UpdateData", async () => {
           presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/world")) {
           /* Viewing a specific world*/
-          const worldname =
-            document.querySelector(".col-md-12 > h3").textContent;
+          const worldname = document.querySelector(".col-md-12 > h3")
+            .textContent;
           presenceData.details = "Viewing World:";
           if (privacymode === false) presenceData.state = worldname;
           else presenceData.details = "Viewing a world";
@@ -147,8 +147,8 @@ presence.on("UpdateData", async () => {
           }
         } else if (document.location.pathname.includes("/avatar")) {
           /* Viewing a specific avatar*/
-          const avatarname =
-              document.querySelector("div.col-12 > h3").textContent,
+          const avatarname = document.querySelector("div.col-12 > h3")
+              .textContent,
             avatarpublicstatus = document.querySelector(
               "div.col-12.col-md-8 > h4 > span > small"
             ).textContent;
@@ -206,9 +206,8 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else {
         /* Not viewing a post, display category */
-        const category = document.querySelector(
-          "div.optionContent > div"
-        ).textContent;
+        const category = document.querySelector("div.optionContent > div")
+          .textContent;
         presenceData.details = "Browsing feedback...";
         presenceData.state = category;
         presence.setActivity(presenceData);

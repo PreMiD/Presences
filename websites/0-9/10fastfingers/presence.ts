@@ -87,8 +87,9 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = " Doing a custom typing test";
   } else if (document.location.pathname.includes("/user/")) {
     presenceData.details = "Viewing a user profile:";
-    presenceData.state =
-      document.querySelector(".row > h2").lastChild.nodeValue;
+    presenceData.state = document.querySelector(
+      ".row > h2"
+    ).lastChild.nodeValue;
   } else if (document.location.pathname.includes("/top1000/")) {
     const lang = document.location.pathname.split("/");
     presenceData.details = "Doing the top 1000 typing test:";

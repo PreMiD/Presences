@@ -25,18 +25,16 @@ yaay.on("UpdateData", () => {
     userPage = document.querySelector(".profile_container");
 
   if (page.includes("/category/")) {
-    const categoryName = document.querySelector(
-      ".category_name > .text"
-    )?.textContent;
+    const categoryName = document.querySelector(".category_name > .text")
+      ?.textContent;
 
     presenceData.details = "Bir kategoriye göz atıyor:";
     presenceData.state = categoryName || "Bilinmeyen Kategori";
 
     yaay.setActivity(presenceData);
   } else if (page.includes("/explore/tag")) {
-    const tagName = document.querySelector(
-      ".feed_content > .hashtagpage_title"
-    )?.textContent;
+    const tagName = document.querySelector(".feed_content > .hashtagpage_title")
+      ?.textContent;
 
     presenceData.details = "Bir başlığa göz atıyor:";
     presenceData.state = tagName || "Bilinmeyen Başlık";
@@ -54,9 +52,8 @@ yaay.on("UpdateData", () => {
 
     yaay.setActivity(presenceData);
   } else if (page.includes("/messages/")) {
-    const receipent = document.querySelector(
-      ".feed_content .username"
-    )?.textContent;
+    const receipent = document.querySelector(".feed_content .username")
+      ?.textContent;
 
     presenceData.details = "Bir kişiyle mesajlaşıyor:";
     presenceData.state = receipent || "Bilinmeyen Kullanıcı";

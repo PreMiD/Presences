@@ -17,8 +17,9 @@ presence.on("UpdateData", async () => {
       ),
       show = document.querySelector(".header h3 a").textContent,
       epTitle = document.querySelector(".sub-header h1").textContent;
-    let epNumber: string | Element | HTMLElement =
-      document.querySelector(".meta span");
+    let epNumber: string | Element | HTMLElement = document.querySelector(
+      ".meta span"
+    );
     epNumber &&= `${(epNumber as HTMLElement).textContent
       .replace("Season ", "S")
       .replace(" Ep ", ":E")} `;

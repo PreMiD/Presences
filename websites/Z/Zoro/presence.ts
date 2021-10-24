@@ -26,8 +26,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp
     },
     { pathname } = document.location,
-    pages =
-      /\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/,
+    pages = /\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/,
     buttons: boolean = await presence.getSetting("buttons");
 
   if (pathname === "/" || pathname === "/home")
@@ -76,8 +75,9 @@ presence.on("UpdateData", async () => {
     if (pathname === "/watch2gether/")
       presenceData.details = "Looking for anime rooms";
     else {
-      const filmName: HTMLHeadingElement =
-        document.querySelector("h2.film-name");
+      const filmName: HTMLHeadingElement = document.querySelector(
+        "h2.film-name"
+      );
       presenceData.details = "In a room";
       if (filmName) presenceData.state = `Watching ${filmName.innerText}`;
       if (data) {

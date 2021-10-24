@@ -48,11 +48,13 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    [presenceData.startTimestamp, presenceData.endTimestamp] =
-      presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+    [
+      presenceData.startTimestamp,
+      presenceData.endTimestamp
+    ] = presence.getTimestamps(
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
 
     presence.setTrayTitle(
       video.paused

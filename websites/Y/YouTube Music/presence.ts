@@ -49,25 +49,21 @@ function getAuthorString(): string {
     authorString = (document.querySelector(
       "span yt-formatted-string.ytmusic-player-bar a"
     ) as HTMLAnchorElement)
-      ? (
-          document.querySelector(
-            "span yt-formatted-string.ytmusic-player-bar a"
-          ) as HTMLAnchorElement
-        ).innerText
-      : (
-          document.querySelector(
-            "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
-          ) as HTMLAnchorElement
-        ).innerText;
+      ? (document.querySelector(
+          "span yt-formatted-string.ytmusic-player-bar a"
+        ) as HTMLAnchorElement).innerText
+      : (document.querySelector(
+          "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
+        ) as HTMLAnchorElement).innerText;
   }
 
   return authorString;
 }
 
 presence.on("UpdateData", async () => {
-  const title = (
-      document.querySelector(".ytmusic-player-bar.title") as HTMLElement
-    ).innerText,
+  const title = (document.querySelector(
+      ".ytmusic-player-bar.title"
+    ) as HTMLElement).innerText,
     video = document.querySelector(".video-stream") as HTMLVideoElement,
     progressBar = document.querySelector("#progress-bar") as HTMLElement,
     repeatMode = document

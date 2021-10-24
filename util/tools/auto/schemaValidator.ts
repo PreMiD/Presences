@@ -6,13 +6,11 @@ import { readFileSync } from "fs";
 import { validate } from "jsonschema";
 
 const latestMetadataSchema = async (): Promise<string> => {
-    const versions = (
-      (
-        await axios.get(
-          "https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
-        )
-      ).data as { name: string }[]
-    )
+    const versions = ((
+      await axios.get(
+        "https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
+      )
+    ).data as { name: string }[])
       .filter((c) => c.name.endsWith(".json"))
       .map((c) => c.name.match(/\d.\d/g)[0]);
     return `https://schemas.premid.app/metadata/${versions.pop()}`;

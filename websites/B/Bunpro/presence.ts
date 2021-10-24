@@ -18,8 +18,9 @@ function getLevelIcon(level: number) {
 }
 
 function getLevelInHeader() {
-  const levelElement: HTMLDivElement =
-    document.querySelector(".navbar-user-level");
+  const levelElement: HTMLDivElement = document.querySelector(
+    ".navbar-user-level"
+  );
 
   if (!levelElement) return null;
 
@@ -49,8 +50,9 @@ presence.on("UpdateData", () => {
       lessonProgressElement: HTMLDivElement = document.querySelector(
         ".header__lesson-progress"
       ),
-      [lessonType, lessonProgress] =
-        lessonProgressElement.innerText.split(": ");
+      [lessonType, lessonProgress] = lessonProgressElement.innerText.split(
+        ": "
+      );
 
     state = `Learning ${grammarPoint}`;
 
@@ -120,13 +122,13 @@ presence.on("UpdateData", () => {
 
           activeGrammarPoint ??= document.querySelector(".grammar-point-study");
 
-          const grammarPointElement: HTMLSpanElement =
-              activeGrammarPoint.querySelector(
-                ".grammar-point__title.grammar-point__title--default"
-              ),
+          const grammarPointElement: HTMLSpanElement = activeGrammarPoint.querySelector(
+              ".grammar-point__title.grammar-point__title--default"
+            ),
             grammarPoint = grammarPointElement.innerText,
-            lessonProgressElement: HTMLDivElement =
-              activeGrammarPoint.querySelector(".header__lesson-progress"),
+            lessonProgressElement: HTMLDivElement = activeGrammarPoint.querySelector(
+              ".header__lesson-progress"
+            ),
             lessonProgress = lessonProgressElement.innerText,
             activeTabElement: HTMLLIElement = activeGrammarPoint.querySelector(
               ".navbar_option--active-tab"
@@ -141,8 +143,9 @@ presence.on("UpdateData", () => {
         break;
       }
       case "/cram": {
-        const cramStartElement: HTMLDivElement =
-          document.querySelector(".cram-start");
+        const cramStartElement: HTMLDivElement = document.querySelector(
+          ".cram-start"
+        );
 
         if (cramStartElement.style.display !== "none") {
           details = "Browsing Grammar";

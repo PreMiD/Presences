@@ -26,9 +26,8 @@ presence.on("UpdateData", async () => {
 
   if (path.startsWith("/video/") || path.startsWith("/live/")) {
     // Streaming
-    const videoTitle = document.querySelector(
-        ".H2-sc-1h18a06-3.fZOeKY"
-      ).innerHTML,
+    const videoTitle = document.querySelector(".H2-sc-1h18a06-3.fZOeKY")
+        .innerHTML,
       video: HTMLVideoElement = document.querySelector(
         ".ardplayer-mediacanvas"
       ),

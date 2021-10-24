@@ -124,11 +124,13 @@ presence.on("UpdateData", async () => {
                 ? (await strings).pause
                 : (await strings).play;
 
-              [presenceData.startTimestamp, presenceData.endTimestamp] =
-                presence.getTimestamps(
-                  Math.floor(currentTime),
-                  Math.floor(duration)
-                );
+              [
+                presenceData.startTimestamp,
+                presenceData.endTimestamp
+              ] = presence.getTimestamps(
+                Math.floor(currentTime),
+                Math.floor(duration)
+              );
             }
           } else if (paused) {
             delete presenceData.startTimestamp;

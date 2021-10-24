@@ -117,11 +117,13 @@ presence.on("UpdateData", async () => {
 
     presenceData.largeImageKey = currentService.imageKey;
 
-    [presenceData.startTimestamp, presenceData.endTimestamp] =
-      presence.getTimestamps(
-        Math.floor(data.currentTime),
-        Math.floor(data.duration)
-      );
+    [
+      presenceData.startTimestamp,
+      presenceData.endTimestamp
+    ] = presence.getTimestamps(
+      Math.floor(data.currentTime),
+      Math.floor(data.duration)
+    );
 
     if (data.paused) {
       presenceData.startTimestamp = null;

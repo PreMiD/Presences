@@ -157,8 +157,9 @@ presence.on("UpdateData", async () => {
       service: "DAUM_BLOG",
       setPresenceData() {
         presenceData.details = "Reading blog:";
-        presenceData.state =
-          document.querySelector("a.link-title")?.textContent;
+        presenceData.state = document.querySelector(
+          "a.link-title"
+        )?.textContent;
 
         presenceData.buttons = [
           {
@@ -177,8 +178,9 @@ presence.on("UpdateData", async () => {
         );
 
         presenceData.details = "Watching video:";
-        presenceData.state =
-          document.querySelector("strong.tit_vod")?.textContent;
+        presenceData.state = document.querySelector(
+          "strong.tit_vod"
+        )?.textContent;
 
         presenceData.smallImageKey = video?.paused ? "pause" : "play";
         presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
@@ -202,8 +204,9 @@ presence.on("UpdateData", async () => {
       service: "DAUM_AUTO",
       setPresenceData() {
         presenceData.details = "Viewing car:";
-        presenceData.state =
-          document.querySelector("h3.tit_model")?.textContent;
+        presenceData.state = document.querySelector(
+          "h3.tit_model"
+        )?.textContent;
 
         presenceData.buttons = [
           {
@@ -217,8 +220,9 @@ presence.on("UpdateData", async () => {
       service: "DAUM_MOVIE",
       setPresenceData() {
         presenceData.details = "Viewing movie:";
-        presenceData.state =
-          document.querySelector("span.txt_tit")?.textContent;
+        presenceData.state = document.querySelector(
+          "span.txt_tit"
+        )?.textContent;
 
         presenceData.buttons = [
           {
@@ -232,8 +236,9 @@ presence.on("UpdateData", async () => {
       service: "DAUM_MOVIE",
       setPresenceData() {
         presenceData.details = "Viewing actor:";
-        presenceData.state =
-          document.querySelector("span.txt_tit")?.textContent;
+        presenceData.state = document.querySelector(
+          "span.txt_tit"
+        )?.textContent;
 
         presenceData.buttons = [
           {
@@ -253,8 +258,9 @@ presence.on("UpdateData", async () => {
           );
 
           presenceData.details = "Watching video:";
-          presenceData.state =
-            document.querySelector("strong.tit_player")?.textContent;
+          presenceData.state = document.querySelector(
+            "strong.tit_player"
+          )?.textContent;
 
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Playing";
@@ -284,8 +290,9 @@ presence.on("UpdateData", async () => {
         );
 
         presenceData.details = "Watching video:";
-        presenceData.state =
-          document.querySelector("strong.tit_vod")?.textContent;
+        presenceData.state = document.querySelector(
+          "strong.tit_vod"
+        )?.textContent;
 
         presenceData.smallImageKey = video?.paused ? "pause" : "play";
         presenceData.smallImageText = video?.paused ? "Paused" : "Playing";

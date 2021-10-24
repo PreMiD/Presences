@@ -59,9 +59,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = `CHAPTER ${chapterNum}`;
         presenceData.smallImageKey = "reading";
       } else if (location.pathname.includes("/manga")) {
-        const title = document.querySelector(
-          ".story-info-right > h1"
-        ).textContent;
+        const title = document.querySelector(".story-info-right > h1")
+          .textContent;
 
         presenceData.details = "Viewing manga:";
         presenceData.state = title;

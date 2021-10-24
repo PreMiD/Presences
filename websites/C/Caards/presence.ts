@@ -35,8 +35,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("feed"))
       presenceData.details = "Viewing feed";
     else if (document.location.pathname.includes("/u/")) {
-      const username =
-        document.querySelector("span.Name.text-3xl")?.textContent;
+      const username = document.querySelector("span.Name.text-3xl")
+        ?.textContent;
       presenceData.smallImageKey = "reading";
       presenceData.details = "Viewing profile:";
       presenceData.state = `${username || "Unknown"}`;

@@ -136,7 +136,8 @@ presence.on("UpdateData", async () => {
           presenceData.buttons = [
             {
               label: (await strings).play,
-              url: "https://support.deezer.com/hc/en-gb/articles/115004221605-Uploading-MP3s-to-Deezer"
+              url:
+                "https://support.deezer.com/hc/en-gb/articles/115004221605-Uploading-MP3s-to-Deezer"
             }
           ];
         }

@@ -130,8 +130,8 @@ presence.on("UpdateData", async () => {
       data.state = profile;
     }
   } else {
-    const playerCount =
-      document.querySelector(".rankingTable").childElementCount;
+    const playerCount = document.querySelector(".rankingTable")
+      .childElementCount;
 
     data.details = "Playing Game";
     data.state = document.title;

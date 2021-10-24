@@ -2,7 +2,9 @@ const presence = new Presence({
   clientId: "690635264124518493"
 });
 
-function parseQueryString(queryString?: string): {
+function parseQueryString(
+  queryString?: string
+): {
   [name: string]: string;
 } {
   queryString ??= window.location.search.substring(1);

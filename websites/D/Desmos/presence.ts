@@ -40,11 +40,11 @@ presence.on("UpdateData", async () => {
     graphing = 1; // "Using Desmos Scientific/Fourfunction etc. "
     if (pageType === "Scientific" || pageType === "Fourfunction") {
       // These three use a different container for equations
-      numEquations =
-        document.getElementsByClassName("dcg-basic-list")[0].childElementCount;
+      numEquations = document.getElementsByClassName("dcg-basic-list")[0]
+        .childElementCount;
     } else if (pageType === "Matrix") {
-      numEquations =
-        document.getElementsByClassName("dcg-matrix-list")[0].childElementCount;
+      numEquations = document.getElementsByClassName("dcg-matrix-list")[0]
+        .childElementCount;
     } else numEquations = 0;
   } else graphing = 0;
   // Setting Presence

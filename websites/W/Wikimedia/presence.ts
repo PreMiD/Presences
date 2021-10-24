@@ -73,9 +73,9 @@ const updateCallback = {
         }
       } else {
         presenceData.details = "Viewing a page";
-        [presenceData.state] = (
-          document.querySelector("meta[property='og:title']") as HTMLMetaElement
-        ).content.split(" – ");
+        [presenceData.state] = (document.querySelector(
+          "meta[property='og:title']"
+        ) as HTMLMetaElement).content.split(" – ");
       }
     } else if (
       currentURL.hostname === "diff.wikimedia.org" ||
@@ -106,11 +106,9 @@ const updateCallback = {
         presenceData.details = "Viewing a page";
         presenceData.state = document.querySelector("h1")
           ? document.querySelector("h1").textContent
-          : (
-              document.querySelector(
-                "meta[property='og:title']"
-              ) as HTMLMetaElement
-            ).content.split(" – ")[0];
+          : (document.querySelector(
+              "meta[property='og:title']"
+            ) as HTMLMetaElement).content.split(" – ")[0];
       }
 
       if (presenceData.state) presenceData.state += ` | ${siteName}`;
@@ -456,9 +454,9 @@ const updateCallback = {
         presenceData.details = "Creating an account";
       else if (document.querySelector(".searchresults")) {
         presenceData.details = "Searching for a page";
-        presenceData.state = (
-          document.querySelector("input[type=search]") as HTMLInputElement
-        ).value;
+        presenceData.state = (document.querySelector(
+          "input[type=search]"
+        ) as HTMLInputElement).value;
       } else if (actionResult() === "history") {
         presenceData.details = "Viewing revision history";
         presenceData.state = titleFromURL();

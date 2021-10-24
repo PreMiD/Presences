@@ -299,11 +299,9 @@ presence.on("UpdateData", async () => {
           },
           {
             label: (await strings).viewChannelButton,
-            url: (
-              document.querySelector(
-                "#top-row > ytd-video-owner-renderer > a"
-              ) as HTMLLinkElement
-            ).href
+            url: (document.querySelector(
+              "#top-row > ytd-video-owner-renderer > a"
+            ) as HTMLLinkElement).href
           }
         ];
       }

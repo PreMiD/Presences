@@ -23,8 +23,9 @@ presence.on("UpdateData", async () => {
       EpAndSeason = SouthParkData.children[0].props.title.text
         .split(" - ")[1]
         .match(/([1-9]?[0-9]?[0-9])/g),
-      [title, , EpTitle] =
-        SouthParkData.children[0].props.title.text.split(" - "),
+      [title, , EpTitle] = SouthParkData.children[0].props.title.text.split(
+        " - "
+      ),
       timestamps = presence.getTimestamps(
         presence.timestampFromFormat(
           document.querySelector("div.edge-gui-current-time")?.textContent

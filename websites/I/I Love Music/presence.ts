@@ -42,8 +42,8 @@ presence.on("UpdateData", async () => {
     },
     playing = parseInt(document.querySelector("#playstop").textContent);
   if (playing > 0) {
-    const station =
-      document.getElementsByClassName("channelname")[0].textContent;
+    const station = document.getElementsByClassName("channelname")[0]
+      .textContent;
     switch (language) {
       case "de":
         presenceData.details = "Spielt gerade";
@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     try {
-      const channelstation =
-        document.querySelector("#content > h1").textContent;
+      const channelstation = document.querySelector("#content > h1")
+        .textContent;
       switch (language) {
         case "de":
           presenceData.details = "Stöbert durch";

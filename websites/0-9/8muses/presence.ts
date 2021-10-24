@@ -22,15 +22,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/category/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing a category:";
-    presenceData.state = (
-      document.querySelector(
-        "#top-menu > div.top-menu-breadcrumb > ol > li:nth-child(2) > a"
-      ) as HTMLAnchorElement
-    ).text;
+    presenceData.state = (document.querySelector(
+      "#top-menu > div.top-menu-breadcrumb > ol > li:nth-child(2) > a"
+    ) as HTMLAnchorElement).text;
   } else if (document.location.href.includes("/#")) {
-    const comicName = (
-        document.querySelector("head > meta:nth-child(17)") as HTMLMetaElement
-      ).content,
+    const comicName = (document.querySelector(
+        "head > meta:nth-child(17)"
+      ) as HTMLMetaElement).content,
       issueName = document.location.pathname.split("/")[2].replace(/_/g, " "),
       issueNumber = document
         .querySelector("#left-menu > ol > li:nth-child(3) > div > span")

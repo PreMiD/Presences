@@ -311,8 +311,9 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        [, presenceData.endTimestamp] =
-          presence.getTimestampsfromMedia(audioElem);
+        [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+          audioElem
+        );
       }
 
       // paused
@@ -371,9 +372,8 @@ function getUserId(): string {
   try {
     return ApiClient._currentUser.Id;
   } catch (e) {
-    const servers = JSON.parse(
-      localStorage.getItem("jellyfin_credentials")
-    ).Servers;
+    const servers = JSON.parse(localStorage.getItem("jellyfin_credentials"))
+      .Servers;
 
     // server id available on browser location
     if (location.hash.indexOf("?") > 0) {
@@ -500,8 +500,9 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        [, presenceData.endTimestamp] =
-          presence.getTimestampsfromMedia(videoPlayerElem);
+        [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+          videoPlayerElem
+        );
       }
 
       // paused

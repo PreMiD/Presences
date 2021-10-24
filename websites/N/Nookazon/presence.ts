@@ -71,9 +71,8 @@ presence.on("UpdateData", async () => {
       break;
     case "products":
       try {
-        department = document.querySelector(
-          ".nav-bottom .selected"
-        ).textContent;
+        department = document.querySelector(".nav-bottom .selected")
+          .textContent;
       } catch {
         department = "All Products";
       }

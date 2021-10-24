@@ -55,8 +55,9 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageText = (await strings).reading;
 
               presenceData.details = "Library";
-              presenceData.state =
-                document.getElementsByClassName("story-title")[0].textContent;
+              presenceData.state = document.getElementsByClassName(
+                "story-title"
+              )[0].textContent;
             }
             break;
           //Case studies
@@ -68,8 +69,9 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageText = (await strings).reading;
 
               presenceData.details = "Case studies";
-              presenceData.state =
-                document.getElementsByClassName("story-title")[0].textContent;
+              presenceData.state = document.getElementsByClassName(
+                "story-title"
+              )[0].textContent;
             }
             break;
           //Testimonials
@@ -131,8 +133,9 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = "reading";
           presenceData.smallImageText = (await strings).browsing;
 
-          presenceData.details =
-            document.getElementsByClassName("connection-title")[0].textContent;
+          presenceData.details = document.getElementsByClassName(
+            "connection-title"
+          )[0].textContent;
           presenceData.state = document
             .getElementsByClassName("owner by-and-author-link")[0]
             .textContent.replace("\n", " ");
@@ -195,11 +198,13 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Creating an Applet";
           if (document.getElementsByClassName("header").length > 0) {
             presenceData.smallImageKey = "writing";
-            presenceData.smallImageText =
-              document.getElementsByClassName("user-step")[0].textContent;
+            presenceData.smallImageText = document.getElementsByClassName(
+              "user-step"
+            )[0].textContent;
 
-            presenceData.state =
-              document.getElementsByClassName("header")[0].textContent;
+            presenceData.state = document.getElementsByClassName(
+              "header"
+            )[0].textContent;
           }
           break;
         //Activity

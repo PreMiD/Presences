@@ -110,8 +110,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = b;
     if (video.paused === false) {
       const { duration, currentTime } = video;
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(currentTime, duration);
+      [
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestamps(currentTime, duration);
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Assistindo";
       presence.setActivity(presenceData);

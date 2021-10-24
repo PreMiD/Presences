@@ -55,8 +55,10 @@ const readFile = (path: string): string =>
 
     allDiagnostics.forEach((diagnostic) => {
       if (diagnostic.file) {
-        const { line, character } =
-            diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!),
+        const {
+            line,
+            character
+          } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!),
           message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
         console.log(
           `${diagnostic.file.fileName} (${line + 1},${

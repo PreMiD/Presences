@@ -11,9 +11,9 @@ presence.on("UpdateData", () => {
 
   if (document.location.pathname.includes("/dashboard")) {
     presenceData.details = "Managing Server";
-    const title = (
-      document.querySelector("div.user-profile > div > div") as HTMLElement
-    ).innerText;
+    const title = (document.querySelector(
+      "div.user-profile > div > div"
+    ) as HTMLElement).innerText;
     presenceData.state = title;
   } else if (document.location.pathname.includes("/commands")) {
     presenceData.details = "Viewing a page:";

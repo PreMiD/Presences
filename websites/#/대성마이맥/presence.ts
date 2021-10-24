@@ -79,9 +79,9 @@ presence.on("UpdateData", async () => {
     )
       presenceData.details = "마이맥선생님";
     else if (document.location.pathname.includes("/tcher/eachTcherMain.ds")) {
-      const temp: string[] = (
-        document.querySelector(".tcher_modal") as HTMLElement
-      ).innerText.split("\n");
+      const temp: string[] = (document.querySelector(
+        ".tcher_modal"
+      ) as HTMLElement).innerText.split("\n");
       [presenceData.details, presenceData.state] = [
         temp[0].replace("영역", " 영역"),
         temp[1].replace("선생님", " 선생님")

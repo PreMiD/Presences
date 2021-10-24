@@ -58,8 +58,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Looking at group";
     presenceData.state = name.innerText;
   } else if (pathname.startsWith("/search")) {
-    const tags: NodeListOf<HTMLDivElement> =
-      document.querySelectorAll("h1.mb-3 > div");
+    const tags: NodeListOf<HTMLDivElement> = document.querySelectorAll(
+      "h1.mb-3 > div"
+    );
     presenceData.details = "Searching";
     for (const t of tags) {
       if (t.innerText) {

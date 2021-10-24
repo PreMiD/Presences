@@ -106,14 +106,15 @@ presence.on("UpdateData", async () => {
               )
                 browsingStamp = Math.floor(Date.now() / 1000);
               presenceData.startTimestamp = browsingStamp;
-              lastRadio =
-                document.getElementsByClassName("song-name")[0].textContent;
+              lastRadio = document.getElementsByClassName("song-name")[0]
+                .textContent;
 
               presenceData.smallImageKey = "play";
               presenceData.smallImageText = (await strings).play;
 
-              presenceData.details =
-                document.getElementsByClassName("song-name")[0].textContent;
+              presenceData.details = document.getElementsByClassName(
+                "song-name"
+              )[0].textContent;
             } else {
               //Radio is stopped
               browsingStamp = 0;
@@ -121,8 +122,9 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageKey = "pause";
               presenceData.smallImageText = (await strings).pause;
 
-              presenceData.details =
-                document.getElementsByClassName("song-name")[0].textContent;
+              presenceData.details = document.getElementsByClassName(
+                "song-name"
+              )[0].textContent;
             }
           } else {
             //Player inactive
@@ -191,14 +193,15 @@ presence.on("UpdateData", async () => {
             )
               browsingStamp = Math.floor(Date.now() / 1000);
             presenceData.startTimestamp = browsingStamp;
-            lastRadio =
-              document.getElementsByClassName("song-name")[0].textContent;
+            lastRadio = document.getElementsByClassName("song-name")[0]
+              .textContent;
 
             presenceData.smallImageKey = "play";
             presenceData.smallImageText = (await strings).play;
 
-            presenceData.details =
-              document.getElementsByClassName("song-name")[0].textContent;
+            presenceData.details = document.getElementsByClassName(
+              "song-name"
+            )[0].textContent;
           } else {
             //Radio is stopped
             browsingStamp = 0;
@@ -206,8 +209,9 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "pause";
             presenceData.smallImageText = (await strings).pause;
 
-            presenceData.details =
-              document.getElementsByClassName("song-name")[0].textContent;
+            presenceData.details = document.getElementsByClassName(
+              "song-name"
+            )[0].textContent;
           }
         } else {
           //Player is inactive

@@ -167,9 +167,8 @@ presence.on("UpdateData", async () => {
     if (document.getElementsByClassName("js-anime-edit-info-button")[0]) {
       const presenceData: PresenceData = {
         details: "Viewing an anime",
-        state:
-          document.getElementsByClassName("header-right")[0].parentNode
-            .childNodes[1].textContent,
+        state: document.getElementsByClassName("header-right")[0].parentNode
+          .childNodes[1].textContent,
         largeImageKey: "lg-mal"
       };
       presence.setActivity(presenceData);
@@ -185,9 +184,8 @@ presence.on("UpdateData", async () => {
     if (document.getElementsByClassName("js-manga-edit-info-button")[0]) {
       const presenceData: PresenceData = {
         details: "Viewing a manga",
-        state:
-          document.getElementsByClassName("header-right")[0].parentNode
-            .childNodes[1].textContent,
+        state: document.getElementsByClassName("header-right")[0].parentNode
+          .childNodes[1].textContent,
         largeImageKey: "lg-mal"
       };
       presence.setActivity(presenceData);

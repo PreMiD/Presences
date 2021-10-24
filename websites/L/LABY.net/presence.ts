@@ -25,9 +25,8 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/settings"))
     presenceData.details = "Viewing profile settings";
   else if (document.location.pathname.startsWith("/server")) {
-    const server = document.querySelector(
-      "div.server-info-wrapper>h1"
-    ).textContent;
+    const server = document.querySelector("div.server-info-wrapper>h1")
+      .textContent;
     presenceData.details = "Viewing server:";
     presenceData.state = server;
   } else if (document.location.pathname.startsWith("/badge")) {

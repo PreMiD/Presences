@@ -52,8 +52,10 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
+      [
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
       presenceData.details = document.querySelector(
         "#video-details > div > div:nth-child(2) > div > div:nth-child(1) > h1"

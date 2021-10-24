@@ -76,8 +76,9 @@ presence.on("UpdateData", async () => {
   else if (pathname === "/notifications/")
     presenceData.details = "Viewing Notifications";
   else if (pathname.startsWith("/playlist/")) {
-    const playlistName =
-      document.querySelector<HTMLHeadingElement>("h1#playlist-title");
+    const playlistName = document.querySelector<HTMLHeadingElement>(
+      "h1#playlist-title"
+    );
     presenceData.details = "Viewing Playlist";
     if (playlistName) presenceData.state = playlistName.textContent;
   } else if (pathname.includes("monetization"))

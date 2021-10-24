@@ -20,9 +20,9 @@ presence.on("UpdateData", async () => {
     const [a, b] = document.querySelectorAll<HTMLElement>(
         ".margin-bottom-12 h1 a"
       ),
-      page = (
-        document.querySelector(".page-jump.text-center") as HTMLInputElement
-      ).value;
+      page = (document.querySelector(
+        ".page-jump.text-center"
+      ) as HTMLInputElement).value;
 
     presenceData.details = a.innerText;
     presenceData.state = `${b.innerText} [Page: ${page}]`;

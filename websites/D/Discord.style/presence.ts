@@ -13,10 +13,10 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
   else if (document.location.pathname.includes("/results")) {
-    const search =
-        document.querySelectorAll("span.font-semibold")[1]?.textContent,
-      resultsAmount =
-        document.querySelectorAll("span.font-semibold")[0]?.textContent;
+    const search = document.querySelectorAll("span.font-semibold")[1]
+        ?.textContent,
+      resultsAmount = document.querySelectorAll("span.font-semibold")[0]
+        ?.textContent;
     presenceData.details = `🔍 Searching for: ${search || "Nothing"}`;
     presenceData.state = `📖 ${resultsAmount} result(s)`;
   } else if (document.location.pathname.includes("/template/")) {
@@ -60,9 +60,8 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/latest")) {
-    const page = document.querySelector(
-      "h2.text-lg.font-semibold.text-white"
-    )?.textContent;
+    const page = document.querySelector("h2.text-lg.font-semibold.text-white")
+      ?.textContent;
     presenceData.details = "Viewing latest templates";
     presenceData.state = `📖 Page ${page}`;
     presenceData.buttons = [
@@ -91,9 +90,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Creating 🎨 new template";
   else if (document.location.pathname.includes("/browse")) {
     const [tag] = document.location.href.split("tag=")[1].split("&"),
-      page = document.querySelector(
-        "h2.text-lg.font-semibold.text-white"
-      )?.textContent;
+      page = document.querySelector("h2.text-lg.font-semibold.text-white")
+        ?.textContent;
     presenceData.details = `Viewing ${tag ? `${`${tag} tag`}` : "Nothing"}`;
     presenceData.state = `📖 Page ${page}`;
     presenceData.buttons = [

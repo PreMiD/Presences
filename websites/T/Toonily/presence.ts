@@ -71,8 +71,9 @@ presence.on("UpdateData", async () => {
     const title = document.querySelector<HTMLHeadingElement>(
         "div.post-title > h1"
       ),
-      chapterHeading =
-        document.querySelector<HTMLHeadingElement>("h1#chapter-heading");
+      chapterHeading = document.querySelector<HTMLHeadingElement>(
+        "h1#chapter-heading"
+      );
     if (chapterHeading) {
       const [title, chapter] = chapterHeading.textContent.split("-");
       presenceData.details = `Reading ${title}`;

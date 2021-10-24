@@ -138,8 +138,10 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Playing";
           if (!video.paused) {
-            [presenceData.startTimestamp, presenceData.endTimestamp] =
-              timestamps;
+            [
+              presenceData.startTimestamp,
+              presenceData.endTimestamp
+            ] = timestamps;
             presenceData.details = "Playing";
             presenceData.state = `${title.innerText} ${chapter.innerText}`;
           } else {

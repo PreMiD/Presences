@@ -74,38 +74,32 @@ presence.on("UpdateData", async () => {
               .value !== "0"
           ) {
             presenceData.state = `Filter: ${
-              (
-                document.getElementById(
+              (document.getElementById(
+                "js-category-select"
+              ) as HTMLSelectElement).options[
+                (document.getElementById(
                   "js-category-select"
-                ) as HTMLSelectElement
-              ).options[
-                (
-                  document.getElementById(
-                    "js-category-select"
-                  ) as HTMLSelectElement
-                ).selectedIndex
+                ) as HTMLSelectElement).selectedIndex
               ].text
             }`;
           }
           if (
-            (
-              document.getElementById("table-apps_filter").firstElementChild
-                .firstElementChild as HTMLInputElement
-            ).value !== ""
+            (document.getElementById("table-apps_filter").firstElementChild
+              .firstElementChild as HTMLInputElement).value !== ""
           ) {
             presenceData.state = `Search: ${
-              (
-                document.getElementById("table-apps_filter").firstElementChild
-                  .firstElementChild as HTMLInputElement
-              ).value
+              (document.getElementById("table-apps_filter").firstElementChild
+                .firstElementChild as HTMLInputElement).value
             }`;
           }
           break;
         case "changelist":
-          presenceData.details =
-            document.querySelector("h1.header-title").textContent;
-          presenceData.state =
-            document.querySelector("h2.header-subtitle").textContent;
+          presenceData.details = document.querySelector(
+            "h1.header-title"
+          ).textContent;
+          presenceData.state = document.querySelector(
+            "h2.header-subtitle"
+          ).textContent;
           presenceData.buttons = [
             {
               label: "View Page",
@@ -151,8 +145,9 @@ presence.on("UpdateData", async () => {
           }
           break;
         case "app":
-          presenceData.state =
-            document.querySelector("h1").lastChild.textContent;
+          presenceData.state = document.querySelector(
+            "h1"
+          ).lastChild.textContent;
           presenceData.smallImageKey = document
             .querySelector("tbody")
             .children.item(1)
@@ -178,12 +173,14 @@ presence.on("UpdateData", async () => {
           break;
         case "apps":
           presenceData.details = "Browsing Applications";
-          presenceData.state =
-            document.querySelector("h2.header-title").textContent;
+          presenceData.state = document.querySelector(
+            "h2.header-title"
+          ).textContent;
           break;
         case "sub":
-          presenceData.state =
-            document.querySelector("h1").lastChild.textContent;
+          presenceData.state = document.querySelector(
+            "h1"
+          ).lastChild.textContent;
           presenceData.buttons = [
             {
               label: "View Page",
@@ -197,13 +194,15 @@ presence.on("UpdateData", async () => {
           break;
         case "subs":
           presenceData.details = "Browsing Packages";
-          presenceData.state =
-            document.querySelector("h2.header-title").textContent;
+          presenceData.state = document.querySelector(
+            "h2.header-title"
+          ).textContent;
           break;
         case "bundle":
           presenceData.details = "Viewing Bundle";
-          presenceData.state =
-            document.querySelector("h1").lastChild.textContent;
+          presenceData.state = document.querySelector(
+            "h1"
+          ).lastChild.textContent;
           presenceData.buttons = [
             {
               label: "View Page",
@@ -235,8 +234,9 @@ presence.on("UpdateData", async () => {
             ];
           } else {
             presenceData.details = "Viewing Blog Post";
-            presenceData.state =
-              document.getElementById("blog-post-title").textContent;
+            presenceData.state = document.getElementById(
+              "blog-post-title"
+            ).textContent;
             presenceData.buttons = [
               {
                 label: "View Page",
@@ -251,18 +251,14 @@ presence.on("UpdateData", async () => {
         case "instantsearch":
           presenceData.details = "Instant Search";
           if (
-            (
-              document.querySelector(
-                "input.ais-SearchBox-input"
-              ) as HTMLInputElement
-            ).value !== ""
+            (document.querySelector(
+              "input.ais-SearchBox-input"
+            ) as HTMLInputElement).value !== ""
           ) {
             presenceData.state = `Search: ${
-              (
-                document.querySelector(
-                  "input.ais-SearchBox-input"
-                ) as HTMLInputElement
-              ).value
+              (document.querySelector(
+                "input.ais-SearchBox-input"
+              ) as HTMLInputElement).value
             }`;
           }
           break;
@@ -282,34 +278,27 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Viewing App Price Changes";
           else presenceData.details = "Viewing Package Price Changes";
           if (
-            (
-              document.getElementById("DataTables_Table_0_filter")
-                .firstElementChild.firstElementChild as HTMLInputElement
-            ).value !== ""
+            (document.getElementById("DataTables_Table_0_filter")
+              .firstElementChild.firstElementChild as HTMLInputElement)
+              .value !== ""
           ) {
             presenceData.state = `Search: ${
-              (
-                document.getElementById("DataTables_Table_0_filter")
-                  .firstElementChild.firstElementChild as HTMLInputElement
-              ).value
+              (document.getElementById("DataTables_Table_0_filter")
+                .firstElementChild.firstElementChild as HTMLInputElement).value
             }`;
           }
           break;
         case "tags":
           presenceData.details = "Browsing Game Tags";
           if (
-            (
-              document.querySelector(
-                "input.input-block.search"
-              ) as HTMLInputElement
-            ).value !== ""
+            (document.querySelector(
+              "input.input-block.search"
+            ) as HTMLInputElement).value !== ""
           ) {
             presenceData.state = `Search: ${
-              (
-                document.querySelector(
-                  "input.input-block.search"
-                ) as HTMLInputElement
-              ).value
+              (document.querySelector(
+                "input.input-block.search"
+              ) as HTMLInputElement).value
             }`;
           }
           break;
@@ -320,16 +309,12 @@ presence.on("UpdateData", async () => {
               .textContent.split("»")[1]
           }`;
           if (
-            (
-              document.getElementById("table-apps_filter").firstElementChild
-                .firstElementChild as HTMLInputElement
-            ).value !== ""
+            (document.getElementById("table-apps_filter").firstElementChild
+              .firstElementChild as HTMLInputElement).value !== ""
           ) {
             presenceData.state = `Search: ${
-              (
-                document.getElementById("table-apps_filter").firstElementChild
-                  .firstElementChild as HTMLInputElement
-              ).value
+              (document.getElementById("table-apps_filter").firstElementChild
+                .firstElementChild as HTMLInputElement).value
             }`;
           }
           break;
@@ -344,16 +329,12 @@ presence.on("UpdateData", async () => {
               }
             ];
             if (
-              (
-                document.getElementById("table-apps_filter").firstElementChild
-                  .firstElementChild as HTMLInputElement
-              ).value !== ""
+              (document.getElementById("table-apps_filter").firstElementChild
+                .firstElementChild as HTMLInputElement).value !== ""
             ) {
               presenceData.state = `Search: ${
-                (
-                  document.getElementById("table-apps_filter").firstElementChild
-                    .firstElementChild as HTMLInputElement
-                ).value
+                (document.getElementById("table-apps_filter").firstElementChild
+                  .firstElementChild as HTMLInputElement).value
               }`;
             }
             switch (document.location.pathname.split("/")[2]) {
@@ -479,8 +460,9 @@ presence.on("UpdateData", async () => {
               url: document.location.href
             }
           ];
-          presenceData.state =
-            document.querySelector("h1").lastChild.textContent;
+          presenceData.state = document.querySelector(
+            "h1"
+          ).lastChild.textContent;
           presenceData.details = `Viewing Depot ${
             document.querySelector("a.tabnav-tab.selected").childNodes[1]
               .textContent
@@ -498,11 +480,9 @@ presence.on("UpdateData", async () => {
               presenceData.state = `Filter: ${
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
                   .options[
-                  (
-                    document.getElementById(
-                      "js-tag-select"
-                    ) as HTMLSelectElement
-                  ).selectedIndex
+                  (document.getElementById(
+                    "js-tag-select"
+                  ) as HTMLSelectElement).selectedIndex
                 ].text
               }`;
             }
@@ -515,11 +495,9 @@ presence.on("UpdateData", async () => {
               presenceData.state = `Filter: ${
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
                   .options[
-                  (
-                    document.getElementById(
-                      "js-tag-select"
-                    ) as HTMLSelectElement
-                  ).selectedIndex
+                  (document.getElementById(
+                    "js-tag-select"
+                  ) as HTMLSelectElement).selectedIndex
                 ].text
               }`;
             }
@@ -536,35 +514,26 @@ presence.on("UpdateData", async () => {
             case "mostfollowed":
               presenceData.details = "Browsing Most Followed Games";
               if (
-                (
-                  document.getElementById("table-apps_filter").firstElementChild
-                    .firstElementChild as HTMLInputElement
-                ).value !== ""
+                (document.getElementById("table-apps_filter").firstElementChild
+                  .firstElementChild as HTMLInputElement).value !== ""
               ) {
                 presenceData.state = `Search: ${
-                  (
-                    document.getElementById("table-apps_filter")
-                      .firstElementChild.firstElementChild as HTMLInputElement
-                  ).value
+                  (document.getElementById("table-apps_filter")
+                    .firstElementChild.firstElementChild as HTMLInputElement)
+                    .value
                 }`;
               } else if (
-                (
-                  document.getElementById(
-                    "js-category-select"
-                  ) as HTMLSelectElement
-                ).value !== "0"
+                (document.getElementById(
+                  "js-category-select"
+                ) as HTMLSelectElement).value !== "0"
               ) {
                 presenceData.state = `Filter: ${
-                  (
-                    document.getElementById(
+                  (document.getElementById(
+                    "js-category-select"
+                  ) as HTMLSelectElement).options[
+                    (document.getElementById(
                       "js-category-select"
-                    ) as HTMLSelectElement
-                  ).options[
-                    (
-                      document.getElementById(
-                        "js-category-select"
-                      ) as HTMLSelectElement
-                    ).selectedIndex
+                    ) as HTMLSelectElement).selectedIndex
                   ].text
                 }`;
               }
@@ -572,16 +541,13 @@ presence.on("UpdateData", async () => {
             case "mostwished":
               presenceData.details = "Browsing Most Wishlisted Games";
               if (
-                (
-                  document.getElementById("table-apps_filter").firstElementChild
-                    .firstElementChild as HTMLInputElement
-                ).value !== ""
+                (document.getElementById("table-apps_filter").firstElementChild
+                  .firstElementChild as HTMLInputElement).value !== ""
               ) {
                 presenceData.state = `Search: ${
-                  (
-                    document.getElementById("table-apps_filter")
-                      .firstElementChild.firstElementChild as HTMLInputElement
-                  ).value
+                  (document.getElementById("table-apps_filter")
+                    .firstElementChild.firstElementChild as HTMLInputElement)
+                    .value
                 }`;
               }
               break;
@@ -589,31 +555,27 @@ presence.on("UpdateData", async () => {
               if (document.location.href.includes("?all_types")) {
                 presenceData.details = "Browsing Top Rated Apps";
                 if (
-                  (
-                    document.getElementById("table-apps_filter")
-                      .firstElementChild.firstElementChild as HTMLInputElement
-                  ).value !== ""
+                  (document.getElementById("table-apps_filter")
+                    .firstElementChild.firstElementChild as HTMLInputElement)
+                    .value !== ""
                 ) {
                   presenceData.state = `Search: ${
-                    (
-                      document.getElementById("table-apps_filter")
-                        .firstElementChild.firstElementChild as HTMLInputElement
-                    ).value
+                    (document.getElementById("table-apps_filter")
+                      .firstElementChild.firstElementChild as HTMLInputElement)
+                      .value
                   }`;
                 }
               } else if (document.location.pathname === "/stats/gameratings/") {
                 presenceData.details = "Browsing Top Rated Games";
                 if (
-                  (
-                    document.getElementById("table-apps_filter")
-                      .firstElementChild.firstElementChild as HTMLInputElement
-                  ).value !== ""
+                  (document.getElementById("table-apps_filter")
+                    .firstElementChild.firstElementChild as HTMLInputElement)
+                    .value !== ""
                 ) {
                   presenceData.state = `Search: ${
-                    (
-                      document.getElementById("table-apps_filter")
-                        .firstElementChild.firstElementChild as HTMLInputElement
-                    ).value
+                    (document.getElementById("table-apps_filter")
+                      .firstElementChild.firstElementChild as HTMLInputElement)
+                      .value
                   }`;
                 }
               } else if (document.querySelector("button.btn")) {
@@ -632,16 +594,12 @@ presence.on("UpdateData", async () => {
                   .value !== "0"
               ) {
                 presenceData.state = `Filter: ${
-                  (
-                    document.getElementById(
+                  (document.getElementById(
+                    "js-tag-select"
+                  ) as HTMLSelectElement).options[
+                    (document.getElementById(
                       "js-tag-select"
-                    ) as HTMLSelectElement
-                  ).options[
-                    (
-                      document.getElementById(
-                        "js-tag-select"
-                      ) as HTMLSelectElement
-                    ).selectedIndex
+                    ) as HTMLSelectElement).selectedIndex
                   ].text
                 }`;
               }
@@ -673,16 +631,14 @@ presence.on("UpdateData", async () => {
           } else {
             presenceData.details = "Browsing Sales";
             if (
-              (
-                document.getElementById("DataTables_Table_0_filter")
-                  .firstElementChild.firstElementChild as HTMLInputElement
-              ).value !== ""
+              (document.getElementById("DataTables_Table_0_filter")
+                .firstElementChild.firstElementChild as HTMLInputElement)
+                .value !== ""
             ) {
               presenceData.state = `Search: ${
-                (
-                  document.getElementById("DataTables_Table_0_filter")
-                    .firstElementChild.firstElementChild as HTMLInputElement
-                ).value
+                (document.getElementById("DataTables_Table_0_filter")
+                  .firstElementChild.firstElementChild as HTMLInputElement)
+                  .value
               }`;
             }
           }
@@ -710,11 +666,9 @@ presence.on("UpdateData", async () => {
               } Category: ${
                 (document.getElementById("inputCategory") as HTMLSelectElement)
                   .options[
-                  (
-                    document.getElementById(
-                      "inputCategory"
-                    ) as HTMLSelectElement
-                  ).selectedIndex
+                  (document.getElementById(
+                    "inputCategory"
+                  ) as HTMLSelectElement).selectedIndex
                 ].textContent
               }`;
               break;
@@ -724,11 +678,9 @@ presence.on("UpdateData", async () => {
                   .value
               ) {
                 presenceData.state = `Search: ${
-                  (
-                    document.getElementById(
-                      "inputQuery-sub"
-                    ) as HTMLInputElement
-                  ).value
+                  (document.getElementById(
+                    "inputQuery-sub"
+                  ) as HTMLInputElement).value
                 }`;
               }
               break;
@@ -737,11 +689,9 @@ presence.on("UpdateData", async () => {
                 document.getElementById("inputQuery-bundle") as HTMLInputElement
               ) {
                 presenceData.state = `Search: ${
-                  (
-                    document.getElementById(
-                      "inputQuery-bundle"
-                    ) as HTMLInputElement
-                  ).value
+                  (document.getElementById(
+                    "inputQuery-bundle"
+                  ) as HTMLInputElement).value
                 }`;
               }
               break;
@@ -761,41 +711,33 @@ presence.on("UpdateData", async () => {
               } ${
                 (document.getElementById("inputOperator") as HTMLSelectElement)
                   .options[
-                  (
-                    document.getElementById(
-                      "inputOperator"
-                    ) as HTMLSelectElement
-                  ).selectedIndex
+                  (document.getElementById(
+                    "inputOperator"
+                  ) as HTMLSelectElement).selectedIndex
                 ].textContent
               } ${
                 (document.getElementById("inputKeyValue") as HTMLInputElement)
                   .value
               } Raw: ${
-                (
-                  document.querySelector(
-                    "input[name='display_value']"
-                  ) as HTMLInputElement
-                ).checked
+                (document.querySelector(
+                  "input[name='display_value']"
+                ) as HTMLInputElement).checked
               }`;
               break;
             case "Package Keys":
               presenceData.state = `${
                 (document.getElementById("inputKeyName2") as HTMLSelectElement)
                   .options[
-                  (
-                    document.getElementById(
-                      "inputKeyName2"
-                    ) as HTMLSelectElement
-                  ).selectedIndex
+                  (document.getElementById(
+                    "inputKeyName2"
+                  ) as HTMLSelectElement).selectedIndex
                 ].textContent
               } ${
                 (document.getElementById("inputOperator2") as HTMLSelectElement)
                   .options[
-                  (
-                    document.getElementById(
-                      "inputOperator2"
-                    ) as HTMLSelectElement
-                  ).selectedIndex
+                  (document.getElementById(
+                    "inputOperator2"
+                  ) as HTMLSelectElement).selectedIndex
                 ].textContent
               } ${
                 (document.getElementById("inputKeyValue2") as HTMLInputElement)
@@ -804,32 +746,26 @@ presence.on("UpdateData", async () => {
               break;
             case "Patch Notes":
               presenceData.state = `${
-                (
-                  document.getElementById(
-                    "patchnotes_query"
-                  ) as HTMLInputElement
-                ).value
+                (document.getElementById(
+                  "patchnotes_query"
+                ) as HTMLInputElement).value
               } AppID: ${
-                (
-                  document.getElementById(
-                    "patchnotes_appid"
-                  ) as HTMLInputElement
-                ).value || "All"
+                (document.getElementById(
+                  "patchnotes_appid"
+                ) as HTMLInputElement).value || "All"
               }`;
               break;
           }
           if (document.getElementById("table-sortable_filter")) {
             if (
-              (
-                document.getElementById("table-sortable_filter")
-                  .firstElementChild.firstElementChild as HTMLInputElement
-              ).value !== ""
+              (document.getElementById("table-sortable_filter")
+                .firstElementChild.firstElementChild as HTMLInputElement)
+                .value !== ""
             ) {
               presenceData.state = `Search: ${
-                (
-                  document.getElementById("table-sortable_filter")
-                    .firstElementChild.firstElementChild as HTMLInputElement
-                ).value
+                (document.getElementById("table-sortable_filter")
+                  .firstElementChild.firstElementChild as HTMLInputElement)
+                  .value
               }`;
             }
           }

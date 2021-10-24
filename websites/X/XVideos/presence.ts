@@ -9,9 +9,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
   if (video !== null && !isNaN(video.duration)) {
-    const title = (
-        document.querySelector(".video-page #main .page-title") as HTMLElement
-      )?.innerText,
+    const title = (document.querySelector(
+        ".video-page #main .page-title"
+      ) as HTMLElement)?.innerText,
       uploader = document.querySelector(
         ".video-page #main .video-metadata .uploader-tag .name"
       ),

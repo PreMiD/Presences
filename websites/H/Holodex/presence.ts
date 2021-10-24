@@ -38,9 +38,8 @@ const /**
     },
     watch: () => {
       return {
-        title:
-          document.querySelectorAll(".v-card__title")[0].children[0]
-            .textContent,
+        title: document.querySelectorAll(".v-card__title")[0].children[0]
+          .textContent,
         channel: document
           .querySelector(".uploader-data-list>div:nth-child(1)")
           .textContent.split("  ")[0]

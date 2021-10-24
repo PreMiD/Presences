@@ -24,9 +24,8 @@ presence.on("UpdateData", async () => {
       ).textContent;
       try {
         presenceData.details = `Player: ${playerNickname}`;
-        const playerClan = document.querySelector(
-          "#s4db-player-view-clan > a"
-        ).textContent;
+        const playerClan = document.querySelector("#s4db-player-view-clan > a")
+          .textContent;
         presenceData.details += `(${playerClan})`;
       } catch {
         presenceData.details = `Player: ${playerNickname}`;

@@ -128,8 +128,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).watch;
     presenceData.state = title;
     if (video && !isNaN(video.duration)) {
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestampsfromMedia(video);
+      [
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestampsfromMedia(video);
 
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused

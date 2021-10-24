@@ -172,9 +172,8 @@ presence.on("UpdateData", async () => {
 
               // Searching
             } else if (path[2] === "search") {
-              const searchText = document.querySelector(
-                "disco-search__query"
-              )?.textContent;
+              const searchText = document.querySelector("disco-search__query")
+                ?.textContent;
               presenceData.state = `Searching for: ${searchText}`;
               presenceData.smallImageKey = "search";
 

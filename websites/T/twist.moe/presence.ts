@@ -35,9 +35,9 @@ presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector(".AT-player video");
 
   if (video !== null && !isNaN(video.duration)) {
-    const videoTitle = (
-        document.querySelector(".series-title span") as HTMLElement
-      )?.innerText,
+    const videoTitle = (document.querySelector(
+        ".series-title span"
+      ) as HTMLElement)?.innerText,
       seasonepisode = (document.querySelector(".series-episode") as HTMLElement)
         ?.innerText,
       [startTimestamp, endTimestamp] = presence.getTimestamps(

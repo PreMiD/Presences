@@ -70,11 +70,13 @@ presence.on("UpdateData", () => {
       },
       [video] = document.getElementsByTagName("video");
     if (!video.paused) {
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        );
+      [
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
       presenceData.details = `Watching ${showDetails.name}`;
       presenceData.state = showDetails.episode;

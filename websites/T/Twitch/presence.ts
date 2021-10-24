@@ -207,8 +207,10 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = (await strings).play;
 
-          const [startTimestamp, endTimestamp] =
-            presence.getTimestampsfromMedia(video);
+          const [
+            startTimestamp,
+            endTimestamp
+          ] = presence.getTimestampsfromMedia(video);
           presenceData.startTimestamp = startTimestamp;
           presenceData.endTimestamp = endTimestamp;
 
@@ -666,14 +668,16 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).brandWatch;
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = (await strings).play;
-        [presenceData.startTimestamp, presenceData.endTimestamp] =
-          presence.getTimestamps(
-            presence.timestampFromFormat(
-              document.querySelector(".c-controls__time.plyr__time--current")
-                .textContent
-            ),
-            presence.timestampFromFormat("01:30")
-          );
+        [
+          presenceData.startTimestamp,
+          presenceData.endTimestamp
+        ] = presence.getTimestamps(
+          presence.timestampFromFormat(
+            document.querySelector(".c-controls__time.plyr__time--current")
+              .textContent
+          ),
+          presence.timestampFromFormat("01:30")
+        );
       } else if (path === "/") presenceData.details = (await strings).brand;
 
       if (privacy) {

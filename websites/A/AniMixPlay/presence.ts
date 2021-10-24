@@ -56,9 +56,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Exploring...";
     } else if (urlParams.get("season") && urlParams.get("year")) {
       presenceData.details = "Currently exploring...";
-      presenceData.state = `${urlParams.get("season").toLowerCase()} ${urlParams
-        .get("year")
-        .toLowerCase()} anime`;
+      presenceData.state = `${urlParams
+        .get("season")
+        .toLowerCase()} ${urlParams.get("year").toLowerCase()} anime`;
       presenceData.smallImageKey = "browsing-v1";
       presenceData.smallImageText = "Exploring...";
     } else {
@@ -82,9 +82,8 @@ presence.on("UpdateData", async () => {
         Math.floor(duration)
       );
     }
-    const title = document.querySelector(
-        "#aligncenter > span.animetitle"
-      ).textContent,
+    const title = document.querySelector("#aligncenter > span.animetitle")
+        .textContent,
       episode = document
         .querySelector("#eptitle > span#eptitleplace")
         .textContent.replace(/\D/g, "");
@@ -110,8 +109,8 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (location.pathname.includes("/anime/")) {
-    const animePageTitle =
-        document.querySelector("#animepagetitle").textContent,
+    const animePageTitle = document.querySelector("#animepagetitle")
+        .textContent,
       animePageType = document
         .querySelector("#addInfo")
         .textContent.split(" ")[5]

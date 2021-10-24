@@ -300,11 +300,13 @@ presence.on("UpdateData", async () => {
     const video: HTMLVideoElement = document.querySelector("video");
 
     if (video !== null && !isNaN(video.duration)) {
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        );
+      [
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       presenceData.largeImageKey = "chess";
       presenceData.details = "Watching video";
       presenceData.state = document.title;

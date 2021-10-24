@@ -38,11 +38,11 @@ presence.on("UpdateData", async () => {
     }
 
     if (document.querySelector('.universal-search[data-status="expanded"]')) {
-      const searchTerm = (
-          document.querySelector(".universal-search-input") as HTMLInputElement
-        ).value,
-        searchCount =
-          document.querySelector(".padlet-cards-list").children.length;
+      const searchTerm = (document.querySelector(
+          ".universal-search-input"
+        ) as HTMLInputElement).value,
+        searchCount = document.querySelector(".padlet-cards-list").children
+          .length;
 
       presenceData.details = `Searching: ${searchTerm}`;
       presenceData.state = `${searchCount} Results`;

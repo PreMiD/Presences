@@ -83,9 +83,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "eBay Sell";
       presenceData.state = "Listing an item";
     } else if (location.pathname.includes("/b/")) {
-      const category = document.querySelector(
-        ".b-pageheader__text"
-      ).textContent;
+      const category = document.querySelector(".b-pageheader__text")
+        .textContent;
 
       presenceData.details = "Viewing category:";
       presenceData.state = category;
@@ -133,11 +132,9 @@ presence.on("UpdateData", async () => {
   } else if (location.hostname.startsWith("community.")) {
     if (document.querySelector(".lia-message-subject")) {
       const title = document.querySelector(".lia-message-subject")?.textContent,
-        author = (
-          document.querySelector(
-            ".lia-component-message-view-widget-author-username > a"
-          ) as HTMLAnchorElement
-        )?.href;
+        author = (document.querySelector(
+          ".lia-component-message-view-widget-author-username > a"
+        ) as HTMLAnchorElement)?.href;
 
       presenceData.details = "eBay Forum, Viewing:";
       presenceData.state = title;
@@ -153,9 +150,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = author;
       presenceData.buttons = [{ label: "View Author", url: location.href }];
     } else if (location.pathname.includes("/searchpage/")) {
-      const search = (
-        document.querySelector(".lia-search-input-message") as HTMLInputElement
-      )?.value;
+      const search = (document.querySelector(
+        ".lia-search-input-message"
+      ) as HTMLInputElement)?.value;
 
       presenceData.details = "eBay Forum Search:";
       presenceData.state = search;

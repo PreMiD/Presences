@@ -19,9 +19,8 @@ Blockbench.on("UpdateData", async () => {
       largeImageKey: "blockbench-logo",
       startTimestamp
     },
-    header = document.querySelector(
-      ".type-post .page-header .entry-title"
-    )?.textContent,
+    header = document.querySelector(".type-post .page-header .entry-title")
+      ?.textContent,
     [sub] = location.host.split(".");
   if (sub === "web") {
     const activity =

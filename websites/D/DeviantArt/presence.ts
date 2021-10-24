@@ -132,11 +132,9 @@ const updateCallback = {
               }
             } else {
               try {
-                return (
-                  lastItem(
-                    document.querySelectorAll("h1 .author .u .u")
-                  ) as Element
-                ).textContent;
+                return (lastItem(
+                  document.querySelectorAll("h1 .author .u .u")
+                ) as Element).textContent;
               } catch {
                 return document.querySelector("h1 .u .u").textContent;
               }
@@ -234,11 +232,9 @@ const updateCallback = {
                 .join(" ");
             } else if (currentPath[0] === "daily-deviations") {
               presenceData.details = "Viewing daily deviations";
-              presenceData.state = (
-                document.querySelector(
-                  "#daily-deviation-picker"
-                ) as HTMLSelectElement
-              ).value;
+              presenceData.state = (document.querySelector(
+                "#daily-deviation-picker"
+              ) as HTMLSelectElement).value;
             } else if (currentPath[0] === "journals") {
               presenceData.details = "Viewing daily deviations";
               if (currentPath[1]) {
@@ -392,8 +388,9 @@ const updateCallback = {
 
               /* The functions below are vaild for users only. */
             } else if (currentPath[1] === "print") {
-              presenceData.details =
-                document.querySelector("h1 .title").textContent;
+              presenceData.details = document.querySelector(
+                "h1 .title"
+              ).textContent;
               presenceData.state = getName(true);
             } else if (currentPath[1] === "prints") {
               presenceData.details = "Viewing a user's prints";
@@ -411,8 +408,9 @@ const updateCallback = {
               presenceData.state = getName();
             } else if (currentPath[1] === "journal") {
               if (currentPath[2]) {
-                presenceData.details =
-                  document.querySelector("._2-k1X").textContent;
+                presenceData.details = document.querySelector(
+                  "._2-k1X"
+                ).textContent;
                 presenceData.state = `${getName()} (journal)`;
               } else {
                 /* This part is only valid on the old theme. */
@@ -421,11 +419,13 @@ const updateCallback = {
               }
             } else if (currentPath[1] === "poll") {
               try {
-                presenceData.details =
-                  document.querySelector("._1ddsf").textContent;
+                presenceData.details = document.querySelector(
+                  "._1ddsf"
+                ).textContent;
               } catch {
-                presenceData.details =
-                  document.querySelector(".gfMBk").textContent;
+                presenceData.details = document.querySelector(
+                  ".gfMBk"
+                ).textContent;
               }
               presenceData.state = getName();
             } else if (currentPath[1] === "critique") {

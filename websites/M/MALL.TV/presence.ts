@@ -18,8 +18,9 @@ presence.on("UpdateData", async () => {
     }),
     path: string = document.location.pathname.toLowerCase(),
     channel: HTMLHeadingElement = document.querySelector("h1.text-ellipsis"),
-    videoElement: HTMLVideoElement =
-      document.querySelector("#vp-player > video"),
+    videoElement: HTMLVideoElement = document.querySelector(
+      "#vp-player > video"
+    ),
     videoTitle: HTMLHeadingElement = document.querySelector(
       "h1.video__info-title"
     ),
@@ -35,8 +36,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = strings.browsing;
     presenceData.smallImageKey = "malltvbrowsing";
   } else if (videoTitle !== null && videoChannel !== null) {
-    const videoLive: HTMLButtonElement =
-      document.querySelector("button.vp-live");
+    const videoLive: HTMLButtonElement = document.querySelector(
+      "button.vp-live"
+    );
     presenceData.details = videoTitle.textContent;
     presenceData.state = videoChannel.textContent;
     presenceData.buttons = [
@@ -56,8 +58,10 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "malltvlive";
       presenceData.smallImageText = strings.live;
     } else if (!videoElement.paused) {
-      ([presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestampsfromMedia(videoElement)),
+      ([
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestampsfromMedia(videoElement)),
         (presenceData.smallImageKey = "malltvplaying");
       presenceData.smallImageText = strings.playing;
     } else {

@@ -58,9 +58,9 @@ presence.on("UpdateData", async function () {
   ) {
     if (document.querySelector(".lk71lm-0.htJLsh")) {
       presenceData.details = lang.searching;
-      presenceData.state = (
-        document.querySelector(".search-input") as HTMLElement
-      ).textContent;
+      presenceData.state = (document.querySelector(
+        ".search-input"
+      ) as HTMLElement).textContent;
     } else if (
       (urlpath[1] === "" || document.location.pathname.includes("/#home")) &&
       urlpath[2] !== ""

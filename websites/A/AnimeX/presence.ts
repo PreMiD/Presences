@@ -33,11 +33,13 @@ presence.on("UpdateData", async () => {
         .iterateNext(),
       episode: Array<string> = videoTitle.textContent.split(" - Episode ");
     if (!video.paused) {
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        );
+      [
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
     } else {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;

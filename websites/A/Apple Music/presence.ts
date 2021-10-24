@@ -42,9 +42,8 @@ presence.on("UpdateData", async () => {
           ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
         )
         ?.textContent.split("—")[0],
-      audioTime = document.querySelector(
-        ".web-chrome-playback-lcd__time-end"
-      ).textContent,
+      audioTime = document.querySelector(".web-chrome-playback-lcd__time-end")
+        .textContent,
       paused = document.querySelector(
         ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
       )

@@ -29,9 +29,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = truncateString(video, 128);
   } else if (document.location.pathname.includes("/test/")) {
     const test = document.querySelector(".gameHeaderBanner__title").textContent,
-      note = document.querySelector(
-        ".bloc-avis-testeur > .note > strong"
-      ).textContent;
+      note = document.querySelector(".bloc-avis-testeur > .note > strong")
+        .textContent;
     presenceData.details = "Lis un test";
     presenceData.state = `${truncateString(test, 128)} (${note}/20)`;
   } else if (document.location.pathname.includes("/messages-prives/"))
@@ -40,9 +39,8 @@ presence.on("UpdateData", async () => {
     const forum = document.querySelector(
         "#forum-main-col > .titre-head-bloc > .titre-bloc-forum"
       ).textContent,
-      connected = document.querySelector(
-        ".panel-heading > .nb-connect-fofo"
-      ).textContent;
+      connected = document.querySelector(".panel-heading > .nb-connect-fofo")
+        .textContent;
     presenceData.details = truncateString(forum, 64);
     presenceData.state = connected;
   } else if (document.location.pathname.includes("/forums/")) {

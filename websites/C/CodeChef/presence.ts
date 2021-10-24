@@ -36,8 +36,9 @@ presence.on("UpdateData", async () => {
       // ? https://discuss.codechef.com
       presenceData.details = "Viewing Discussions";
       if (location.pathname.split("/")[1] === "t") {
-        const discussionTopicHeading: string =
-          document.querySelector(".fancy-title").textContent;
+        const discussionTopicHeading: string = document.querySelector(
+          ".fancy-title"
+        ).textContent;
         presenceData.details = "Reading Discussions:";
         presenceData.state = discussionTopicHeading;
         presenceData.smallImageKey = "reading";
@@ -52,8 +53,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing:";
         presenceData.state = "Problems By Tag Name";
       } else if (location.pathname.split("/").includes("problems")) {
-        const contestName: string =
-            document.querySelector(".breadcrumbs").lastElementChild.textContent,
+        const contestName: string = document.querySelector(".breadcrumbs")
+            .lastElementChild.textContent,
           [problemName] = document.title.split("|");
         presenceData.details = contestName;
         presenceData.state = `Solving: ${problemName}`;
@@ -62,9 +63,9 @@ presence.on("UpdateData", async () => {
         // ? https://codechef.com
         switch (location.pathname.split("/")[1]) {
           case "ide": {
-            const compilerName: string =
-              document.querySelector(".chosen-single").childNodes[0]
-                .textContent;
+            const compilerName: string = document.querySelector(
+              ".chosen-single"
+            ).childNodes[0].textContent;
             presenceData.details = "Using IDE";
             presenceData.state = `Editing ${compilerName} file`;
             presenceData.smallImageKey = "code";
@@ -90,8 +91,8 @@ presence.on("UpdateData", async () => {
           }
 
           case "certification": {
-            const pageHeading: string =
-              document.querySelector(".page-title").childNodes[3].textContent;
+            const pageHeading: string = document.querySelector(".page-title")
+              .childNodes[3].textContent;
             presenceData.details = "Viewing Certification: ";
             presenceData.state = pageHeading;
             break;
@@ -109,16 +110,17 @@ presence.on("UpdateData", async () => {
           }
 
           case "wiki": {
-            const wikiTopicHeading: string =
-              document.querySelector(".ns-heading").textContent;
+            const wikiTopicHeading: string = document.querySelector(
+              ".ns-heading"
+            ).textContent;
             presenceData.details = "Viewing Wiki:";
             presenceData.state = wikiTopicHeading;
             break;
           }
 
           case "users": {
-            const displayName: string =
-                document.querySelector("header > h2").textContent,
+            const displayName: string = document.querySelector("header > h2")
+                .textContent,
               [userName] = document.title.split("|");
             presenceData.details = "Viewing Profile:";
             presenceData.state = `${userName} (${displayName})`;

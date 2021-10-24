@@ -52,8 +52,9 @@ presence.on("UpdateData", () => {
     (presenceData.details = "Viewing hot beatmaps"),
       (presenceData.state = pageText3);
   } else if (document.location.pathname.startsWith("/genre")) {
-    const [pageGen2, pageGen3, pageGen1] =
-        document.getElementsByClassName("title"),
+    const [pageGen2, pageGen3, pageGen1] = document.getElementsByClassName(
+        "title"
+      ),
       [pageGen4, pageGen5] = document.getElementsByClassName("selitem active");
     if (pageGen1 !== null) {
       const pageText4 = `Listening: ${pageGen1.textContent}`;

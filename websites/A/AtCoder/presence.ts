@@ -38,8 +38,9 @@ presence.on("UpdateData", async () => {
             presenceData.state = `${document.title.split("-")[1]}`;
 
             if (location.pathname.split("/").length === 5) {
-              presenceData.details =
-                document.querySelector(".contest-title").textContent;
+              presenceData.details = document.querySelector(
+                ".contest-title"
+              ).textContent;
               presenceData.state = document.title;
             }
             break;
@@ -72,15 +73,17 @@ presence.on("UpdateData", async () => {
               presenceData.details = "Viewing my Submissions";
             else presenceData.details = "Viewing All Submissions";
 
-            presenceData.state =
-              document.querySelector(".contest-title").textContent;
+            presenceData.state = document.querySelector(
+              ".contest-title"
+            ).textContent;
             break;
           }
 
           case "score": {
             presenceData.details = "Viewing my Score";
-            presenceData.state =
-              document.querySelector(".contest-title").textContent;
+            presenceData.state = document.querySelector(
+              ".contest-title"
+            ).textContent;
             break;
           }
 
@@ -159,8 +162,8 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Browsing Post Archive...";
         else {
           {
-            const topicHeading =
-              document.querySelector(".panel-title").childNodes[0].textContent;
+            const topicHeading = document.querySelector(".panel-title")
+              .childNodes[0].textContent;
             presenceData.details = "Reading Post";
             presenceData.state = topicHeading;
           }

@@ -103,8 +103,9 @@ const updateCallback = {
       else if (currentPath[0] === "maps") {
         if (document.querySelector(".map-block__title")) {
           presenceData.details = "Viewing a map";
-          presenceData.state =
-            document.querySelector(".map-block__title").textContent;
+          presenceData.state = document.querySelector(
+            ".map-block__title"
+          ).textContent;
         } else presenceData.details = "Looking for a map";
       } else if (currentPath[0] === "user") {
         presenceData.details = "Viewing a user profile";

@@ -46,11 +46,9 @@ presence.on("UpdateData", () => {
       }
     } else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching support";
-      presenceData.state = (
-        document.querySelector(
-          ".form-control.form-control__result.input-lg"
-        ) as HTMLInputElement | null
-      )?.value;
+      presenceData.state = (document.querySelector(
+        ".form-control.form-control__result.input-lg"
+      ) as HTMLInputElement | null)?.value;
       presenceData.smallImageKey = "search";
     } else {
       presenceData.details = "Reading support article";
@@ -72,9 +70,9 @@ presence.on("UpdateData", () => {
       presenceData.details = isApp ? "Viewing app" : "Browsing apps";
       presenceData.state =
         document.querySelector(".product-single__title")?.textContent ||
-        (
-          document.querySelector("[role=text]") as HTMLElement | null
-        )?.innerText.split("\n")?.[1];
+        (document.querySelector(
+          "[role=text]"
+        ) as HTMLElement | null)?.innerText.split("\n")?.[1];
       if (isApp) {
         presenceData.buttons = [
           {
@@ -85,9 +83,9 @@ presence.on("UpdateData", () => {
       }
     } else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching the store";
-      presenceData.state = (
-        document.querySelector(".search__input") as HTMLInputElement | null
-      )?.value;
+      presenceData.state = (document.querySelector(
+        ".search__input"
+      ) as HTMLInputElement | null)?.value;
       presenceData.smallImageKey = "search";
     }
   } else if (document.location.host === "status.crowdin.com") {
@@ -112,9 +110,9 @@ presence.on("UpdateData", () => {
       ];
     } else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching the blog";
-      presenceData.state = (
-        document.querySelector(".form-control") as HTMLInputElement | null
-      )?.value;
+      presenceData.state = (document.querySelector(
+        ".form-control"
+      ) as HTMLInputElement | null)?.value;
       presenceData.smallImageKey = "search";
     } else if (document.querySelector(".hero > h1")) {
       presenceData.details = "Reading blog post";
@@ -218,16 +216,14 @@ presence.on("UpdateData", () => {
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/resources")) {
       presenceData.details = "Viewing resources";
-      presenceData.state = (
-        document.querySelector(".active") as HTMLLIElement | null
-      )?.innerText;
+      presenceData.state = (document.querySelector(
+        ".active"
+      ) as HTMLLIElement | null)?.innerText;
     } else if (document.location.pathname === "/release-notes") {
       presenceData.details = "Reading release notes";
-      presenceData.state = (
-        document.querySelector(
-          ".selected-release-item"
-        ) as HTMLAnchorElement | null
-      )?.innerText;
+      presenceData.state = (document.querySelector(
+        ".selected-release-item"
+      ) as HTMLAnchorElement | null)?.innerText;
       presenceData.smallImageKey = "reading";
       presenceData.buttons = [
         {

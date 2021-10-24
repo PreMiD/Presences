@@ -12,8 +12,9 @@ presence.on("UpdateData", async () => {
     readerArea: HTMLDivElement = document.querySelector("div#readerarea");
 
   if (pathname === "/") {
-    const searchQuery: HTMLHeadingElement =
-      document.querySelector("div.releases > h1");
+    const searchQuery: HTMLHeadingElement = document.querySelector(
+      "div.releases > h1"
+    );
     if (!searchQuery) presenceData.details = "Melihat Homepage";
     else {
       const { innerText } = searchQuery;
@@ -30,10 +31,12 @@ presence.on("UpdateData", async () => {
     presenceData.state = `Genre: ${genres}`;
     presenceData.smallImageKey = "search";
   } else if (readerArea !== null) {
-    const mangaName: HTMLHeadingElement =
-        document.querySelector("h1.entry-title"),
-      chapterNumber: HTMLSelectElement =
-        document.querySelector("select#chapter"),
+    const mangaName: HTMLHeadingElement = document.querySelector(
+        "h1.entry-title"
+      ),
+      chapterNumber: HTMLSelectElement = document.querySelector(
+        "select#chapter"
+      ),
       pageNumber: HTMLSelectElement = document.querySelector(
         "select#select-paged"
       );
@@ -52,8 +55,9 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (pathname.startsWith("/manga/")) {
-    const mangaName: HTMLHeadingElement =
-      document.querySelector("h1.entry-title");
+    const mangaName: HTMLHeadingElement = document.querySelector(
+      "h1.entry-title"
+    );
     presenceData.details =
       pathname === "/manga/" ? "Melihat Daftar Manga" : "Melihat Detail Manga";
     if (mangaName) presenceData.state = mangaName.innerText;

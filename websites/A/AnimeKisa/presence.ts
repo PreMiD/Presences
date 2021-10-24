@@ -34,11 +34,13 @@ presence.on("UpdateData", async () => {
     document.querySelector("#iframemain") !== null
   ) {
     // on page of a episode
-    [presenceData.startTimestamp, presenceData.endTimestamp] =
-      presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+    [
+      presenceData.startTimestamp,
+      presenceData.endTimestamp
+    ] = presence.getTimestamps(
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
 
     presenceData.details = document.querySelector(".infoan2").textContent;
     [, presenceData.state] = document

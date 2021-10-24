@@ -23,7 +23,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     productName = document.querySelector("#product-name"),
-    attr = document.querySelector("#offering-price").attributes as unknown as {
+    attr = (document.querySelector("#offering-price")
+      .attributes as unknown) as {
       [name: string]: HTMLElement;
     },
     price =

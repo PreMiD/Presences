@@ -63,9 +63,8 @@ presence.on("UpdateData", async () => {
     if (privacyMode)
       presenceData.details = `Watching a ${isLive ? "live" : "video"}`;
     else {
-      const username = document.querySelector(
-        "span.nc684nl6 > span"
-      )?.textContent;
+      const username = document.querySelector("span.nc684nl6 > span")
+        ?.textContent;
 
       presenceData.details = `Watching a ${isLive ? "live" : "video"} on:`;
       presenceData.state = `${username}'s profile`;
@@ -85,9 +84,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/photo/")) {
     if (privacyMode) presenceData.details = "Viewing a photo";
     else {
-      const username = document.querySelector(
-        "span.nc684nl6 > span"
-      )?.textContent;
+      const username = document.querySelector("span.nc684nl6 > span")
+        ?.textContent;
 
       presenceData.details = "Viewing a photo on:";
       presenceData.state = `${username}'s profile'`;
@@ -99,9 +97,8 @@ presence.on("UpdateData", async () => {
     if (!videoId && !search) {
       const videoFrame = Array.from(
         document.querySelectorAll('div[class="l9j0dhe7"]')
-      ).find(
-        (x) => !x.parentElement.querySelector("video")?.paused
-      )?.parentElement;
+      ).find((x) => !x.parentElement.querySelector("video")?.paused)
+        ?.parentElement;
 
       if (videoFrame) {
         const video = videoFrame.querySelector("video"),

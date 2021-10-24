@@ -9,9 +9,8 @@ presence.on("UpdateData", () => {
   };
 
   if (window.location.pathname === "/") {
-    const size = document
-        .getElementById("stats-hud")
-        .innerHTML.split("|").length,
+    const size = document.getElementById("stats-hud").innerHTML.split("|")
+        .length,
       hstats = document.getElementById("stats-hud").innerHTML.split(" | "),
       mass = document
         .getElementById("stats-hud")

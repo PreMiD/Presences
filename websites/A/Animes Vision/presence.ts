@@ -40,8 +40,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = (await strings).episode.replace("{0}", episode[0]);
     if (!video.paused) {
       const { duration, currentTime } = video;
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(currentTime, duration);
+      [
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestamps(currentTime, duration);
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).playing;
     } else if (video.currentTime > 0) {

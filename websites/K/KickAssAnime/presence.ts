@@ -115,8 +115,8 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
-      currentAnimeTitle =
-        document.querySelector("a.ka-url-wrapper").textContent;
+      currentAnimeTitle = document.querySelector("a.ka-url-wrapper")
+        .textContent;
       [, currentAnimeEpisode] = document.location.pathname
         .split("/")[3]
         .split("-");
@@ -164,8 +164,8 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else {
-      currentAnimeTitle =
-        document.querySelector("a.ka-url-wrapper").textContent;
+      currentAnimeTitle = document.querySelector("a.ka-url-wrapper")
+        .textContent;
       [, currentAnimeEpisode] = document.location.pathname
         .split("/")[3]
         .split("-");

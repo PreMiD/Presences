@@ -53,10 +53,10 @@ presence.on("UpdateData", async () => {
         } else {
           title = document.querySelector("#playerTitle").textContent;
           author = document.querySelector("#playerSubtitle").textContent;
-          const audioTime =
-              document.querySelector("#scrubberElapsed").textContent,
-            audioDuration =
-              document.querySelector("#scrubberElapsed").innerHTML,
+          const audioTime = document.querySelector("#scrubberElapsed")
+              .textContent,
+            audioDuration = document.querySelector("#scrubberElapsed")
+              .innerHTML,
             timestamp1 = presence.timestampFromFormat(audioTime),
             timestamp2 = presence.timestampFromFormat(audioDuration),
             timestamps = presence.getTimestamps(timestamp1, timestamp2),

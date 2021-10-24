@@ -19,8 +19,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Procurando anime...";
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/projeto/")) {
-    let vid: HTMLIFrameElement | HTMLVideoElement =
-      document.querySelector<HTMLIFrameElement>("#playerIframe");
+    let vid:
+      | HTMLIFrameElement
+      | HTMLVideoElement = document.querySelector<HTMLIFrameElement>(
+      "#playerIframe"
+    );
     [vid] = vid.contentDocument.getElementsByTagName("video");
     const [anime] = document.querySelectorAll<HTMLElement>(
       ".content-heading h3"

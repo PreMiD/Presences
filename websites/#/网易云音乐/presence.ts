@@ -28,12 +28,12 @@ presence.on("UpdateData", async () => {
     author = document.querySelector(
       "#g_player > div.play > div.j-flag.words > span > span"
     ).textContent;
-    audioTime = document.querySelector(
+    audioTime = (document.querySelector(
       "#g_player > div.play > div.m-pbar > span > em"
-    ).textContent as unknown as number;
-    audioDuration = audioTimeLeft
+    ).textContent as unknown) as number;
+    audioDuration = (audioTimeLeft
       .replace(/(.*)(?=\/)/, "")
-      .replace("/ ", "") as unknown as number;
+      .replace("/ ", "") as unknown) as number;
 
     const timestamps = presence.getTimestamps(audioTime, audioDuration),
       data: PresenceData = {

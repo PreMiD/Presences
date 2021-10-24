@@ -53,9 +53,8 @@ presence.on("UpdateData", async () => {
     : false;
 
   if (playerCheck) {
-    const title = document.querySelector(
-        ".meta-title[ng-bind='details.title']"
-      )?.textContent,
+    const title = document.querySelector(".meta-title[ng-bind='details.title']")
+        ?.textContent,
       video: HTMLVideoElement = document.querySelector("video#arxPlayer"),
       { paused, currentTime, duration } = video,
       timestamps = presence.getTimestamps(

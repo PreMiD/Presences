@@ -54,8 +54,8 @@ presence.on("UpdateData", async () => {
   } else if (page.includes("/anime/")) {
     const isEpisode = page.includes("/episodio");
     if (isEpisode) {
-      const animeTitleWatching =
-          document.querySelector("#anime_title").innerHTML,
+      const animeTitleWatching = document.querySelector("#anime_title")
+          .innerHTML,
         video = document.querySelector(
           "#video > div > div > video"
         ) as HTMLMediaElement,
@@ -76,11 +76,10 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else {
-      const animeTitleAbout =
-          document.querySelector(".ani_titulo > h1").innerHTML,
-        animeTitleFull = document.querySelector(
-          ".ani_titulo_original"
-        ).innerHTML,
+      const animeTitleAbout = document.querySelector(".ani_titulo > h1")
+          .innerHTML,
+        animeTitleFull = document.querySelector(".ani_titulo_original")
+          .innerHTML,
         showFullName = await presence.getSetting("fullName");
       data.details = "Vendo sobre um anime";
       if (showFullName && animeTitleFull)
@@ -92,8 +91,8 @@ presence.on("UpdateData", async () => {
     data.details = "Vendo a página de um usuário";
     data.state = `Vendo a página do ${username}`;
   } else if (page.startsWith("/filme")) {
-    const animeTitleAbout =
-        document.querySelector(".ani_titulo > h1").innerHTML,
+    const animeTitleAbout = document.querySelector(".ani_titulo > h1")
+        .innerHTML,
       animeTitleFull = document.querySelector(".ani_titulo_original").innerHTML,
       showFullName = await presence.getSetting("fullName"),
       video = document.querySelector(

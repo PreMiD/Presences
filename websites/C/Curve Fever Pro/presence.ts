@@ -107,8 +107,8 @@ function getActualGamePage() {
   else if (document.getElementsByClassName("post-game-rewards__title")[0])
     return "in_game_finished";
   else if (document.getElementsByClassName("popup-header")[0]) {
-    const popupCaption =
-      document.getElementsByClassName("popup-header")[0].textContent;
+    const popupCaption = document.getElementsByClassName("popup-header")[0]
+      .textContent;
     if (popupCaption === "Room settings") return "creating_match";
     else if (popupCaption === "Crates") return "opening_crates";
     else if (popupCaption === "XP progression") return "in_progress";

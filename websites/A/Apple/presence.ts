@@ -224,8 +224,9 @@ presence.on("UpdateData", async () => {
           .querySelector("h1.section-head")
           ?.getAttribute("aria-label");
       } else {
-        presenceData.state =
-          document.querySelector(".hero-headline")?.textContent;
+        presenceData.state = document.querySelector(
+          ".hero-headline"
+        )?.textContent;
 
         if (setting.buttons) {
           presenceData.buttons = [
@@ -402,8 +403,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = lang.shopAccessories;
     } else if (urlpath[num + 1] === "accessories") {
       presenceData.details = "Shop";
-      presenceData.state =
-        document.querySelector("a.localnav-title")?.textContent;
+      presenceData.state = document.querySelector(
+        "a.localnav-title"
+      )?.textContent;
     } else if (urlpath[num] === "studio") {
       const product = document
         .querySelector("div.as-designstudio-title>a>img")
@@ -442,9 +444,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Shop";
       presenceData.state = lang.shopRefurbished;
     } else if (urlpath[num] === "bag") {
-      const summary = document.querySelector(
-        "div.rs-summary-value"
-      )?.textContent;
+      const summary = document.querySelector("div.rs-summary-value")
+        ?.textContent;
 
       presenceData.details = lang.shopBag;
       presenceData.state = lang.shopBagSummary.replace(
@@ -875,8 +876,9 @@ presence.on("UpdateData", async () => {
       if (urlpath[2] === "releases") presenceData.state = lang.devReleases;
 
       if (urlParams.get("id")) {
-        presenceData.state =
-          document.querySelector("h2.article-title")?.textContent;
+        presenceData.state = document.querySelector(
+          "h2.article-title"
+        )?.textContent;
 
         if (setting.buttons) {
           presenceData.buttons = [

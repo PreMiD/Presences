@@ -42,9 +42,8 @@ presence.on("UpdateData", async () => {
       data.details = "Setting-up a new Story";
       data.startTimestamp = browsingStamp;
     } else {
-      story = document.querySelector(
-        "div.works-item-metadata span.h4"
-      ).textContent;
+      story = document.querySelector("div.works-item-metadata span.h4")
+        .textContent;
       data.details = "Viewing their Story";
       data.state = story;
       data.startTimestamp = browsingStamp;

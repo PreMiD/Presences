@@ -61,8 +61,9 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Viewing Competition archive";
           else {
             presenceData.details = "Viewing Competition archive";
-            presenceData.state =
-              document.querySelector(".headline-2").textContent;
+            presenceData.state = document.querySelector(
+              ".headline-2"
+            ).textContent;
           }
           break;
         }
@@ -76,9 +77,8 @@ presence.on("UpdateData", async () => {
             const [round] = document
                 .querySelector(".headline-5")
                 .textContent.split("-"),
-              problem = document.querySelector(
-                "#problem-select-selected-text"
-              ).textContent;
+              problem = document.querySelector("#problem-select-selected-text")
+                .textContent;
 
             if (!location.hash || location.hash.includes("#problem")) {
               presenceData.details = `Solving: ${round}`;
@@ -97,8 +97,9 @@ presence.on("UpdateData", async () => {
             document.querySelector(".rounds-header__container > p > b")
               .textContent
           }`;
-          presenceData.state =
-            document.querySelector(".headline-2").textContent;
+          presenceData.state = document.querySelector(
+            ".headline-2"
+          ).textContent;
           break;
         }
       }
@@ -137,8 +138,9 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Viewing Competition archive";
           else {
             presenceData.details = "Viewing Competition archive";
-            presenceData.state =
-              document.querySelector(".headline-2").textContent;
+            presenceData.state = document.querySelector(
+              ".headline-2"
+            ).textContent;
           }
           break;
         }
@@ -152,9 +154,8 @@ presence.on("UpdateData", async () => {
             const [round] = document
                 .querySelector(".headline-5")
                 .textContent.split("-"),
-              problem = document.querySelector(
-                "#problem-select-selected-text"
-              ).textContent;
+              problem = document.querySelector("#problem-select-selected-text")
+                .textContent;
 
             if (!location.hash || location.hash.includes("#problem")) {
               presenceData.details = `Solving: ${round}`;
@@ -173,8 +174,9 @@ presence.on("UpdateData", async () => {
             document.querySelector(".rounds-header__container > p > b")
               .textContent
           }`;
-          presenceData.state =
-            document.querySelector(".headline-2").textContent;
+          presenceData.state = document.querySelector(
+            ".headline-2"
+          ).textContent;
           break;
         }
       }
@@ -218,8 +220,9 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Viewing Competition archive";
           else {
             presenceData.details = "Viewing Scoreboard";
-            presenceData.state =
-              document.querySelector(".headline-2").textContent;
+            presenceData.state = document.querySelector(
+              ".headline-2"
+            ).textContent;
           }
           break;
         }

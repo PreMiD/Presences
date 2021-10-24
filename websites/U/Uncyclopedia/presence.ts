@@ -11,9 +11,9 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  title = (
-    document.querySelector("h1#firstHeading.firstHeading") as HTMLElement
-  ).innerText;
+  title = (document.querySelector(
+    "h1#firstHeading.firstHeading"
+  ) as HTMLElement).innerText;
   const actionResult = actionURL.searchParams.get("action"),
     title2Result = title2URL.searchParams.get("title");
   if (document.location.pathname === "/wiki/Main_Page") {

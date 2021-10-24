@@ -13,9 +13,8 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
   else if (document.location.pathname.includes("/u/")) {
-    const username = document.querySelector(
-        "p.text-5xl.text-white"
-      )?.textContent,
+    const username = document.querySelector("p.text-5xl.text-white")
+        ?.textContent,
       userLikes = document.getElementById("likes-count")?.textContent;
     presenceData.details = "Viewing user:";
     presenceData.state = `${username || "Unknown"} - ❤️ ${userLikes || 0}`;

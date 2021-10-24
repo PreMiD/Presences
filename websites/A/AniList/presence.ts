@@ -46,8 +46,9 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "Browsing the forum";
   } else if (pathname.startsWith("/studio")) {
     presenceData.details = "Viewing a studio";
-    presenceData.state =
-      document.querySelector("div.container > h1").textContent;
+    presenceData.state = document.querySelector(
+      "div.container > h1"
+    ).textContent;
   } else if (pathname.startsWith("/review")) {
     const title = document.querySelector("a.title").textContent.trim();
     presenceData.details = `Reading a '${title}' review`;

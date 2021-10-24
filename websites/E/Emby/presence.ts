@@ -375,8 +375,9 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        [, presenceData.endTimestamp] =
-          presence.getTimestampsfromMedia(audioElem);
+        [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+          audioElem
+        );
       } else delete presenceData.endTimestamp;
 
       // paused
@@ -400,9 +401,8 @@ function getUserId(): string {
   try {
     return ApiClient._currentUser.Id;
   } catch (e) {
-    const servers = JSON.parse(
-      localStorage.getItem("servercredentials3")
-    ).Servers;
+    const servers = JSON.parse(localStorage.getItem("servercredentials3"))
+      .Servers;
 
     // server id available on browser location
     if (location.hash.indexOf("?") > 0) {
@@ -496,9 +496,14 @@ async function handleVideoPlayback(): Promise<void> {
   // no background image, we're playing live tv
   if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
     // with this url we can obtain the id of the item we are playing back
-    const [, , , , , mediaId] = (
-      videoPlayerContainerElem as HTMLVideoElement
-    ).style.backgroundImage
+    const [
+      ,
+      ,
+      ,
+      ,
+      ,
+      mediaId
+    ] = (videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage
       .split('"')[1]
       .split("/");
 
@@ -540,8 +545,9 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        [, presenceData.endTimestamp] =
-          presence.getTimestampsfromMedia(videoPlayerElem);
+        [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+          videoPlayerElem
+        );
       } else delete presenceData.endTimestamp;
 
       // paused

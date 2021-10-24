@@ -92,8 +92,9 @@ presence.on("UpdateData", async () => {
     const hiddenUsernameSetting = await presence.getSetting("usernameHidden");
 
     if (!hiddenUsernameSetting) {
-      const [welcomeMessageElement] =
-        document.getElementsByClassName("welcomeText");
+      const [welcomeMessageElement] = document.getElementsByClassName(
+        "welcomeText"
+      );
 
       if (welcomeMessageElement) {
         const welcomeMessage = welcomeMessageElement.textContent,
@@ -281,8 +282,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "status.pays.host") {
     // status page
     presenceData.details = "Browsing pays.host status";
-    presenceData.state =
-      document.getElementsByClassName("statusbar-text")[0].textContent;
+    presenceData.state = document.getElementsByClassName(
+      "statusbar-text"
+    )[0].textContent;
   }
 
   return displayPresence(presenceData);

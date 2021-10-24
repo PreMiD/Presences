@@ -84,9 +84,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).play;
 
-      const videoInfoTag = document.querySelector(
-          ".zdfplayer-teaser-title"
-        ).innerHTML,
+      const videoInfoTag = document.querySelector(".zdfplayer-teaser-title")
+          .innerHTML,
         showTitleTag = videoInfoTag.substring(
           videoInfoTag.indexOf(">") + 1,
           videoInfoTag.lastIndexOf("<")

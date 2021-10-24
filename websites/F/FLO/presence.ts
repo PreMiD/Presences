@@ -19,8 +19,9 @@ presence.on("UpdateData", async () => {
     player = document.querySelector(".playbar_wrap"),
     playerBar: HTMLInputElement = player.querySelector("input.progress");
   if (!playerBar.disabled) {
-    const playButton: HTMLButtonElement =
-        player.querySelector("button.icon-player"),
+    const playButton: HTMLButtonElement = player.querySelector(
+        "button.icon-player"
+      ),
       title = player.querySelector("p.title").textContent,
       artist = player.querySelector("p.artist").textContent,
       allTime = player.querySelector(".time_all").textContent,
@@ -99,9 +100,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "앨범";
       presenceData.state = `${title} - ${artist}`;
     } else if (location.pathname === "/browse") {
-      const title = document.querySelector(
-        ".chart_content_head>h4"
-      ).textContent;
+      const title = document.querySelector(".chart_content_head>h4")
+        .textContent;
 
       presenceData.smallImageKey = "search";
       presenceData.details = title;

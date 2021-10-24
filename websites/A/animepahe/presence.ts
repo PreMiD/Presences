@@ -71,8 +71,9 @@ class AnimeStorage {
   }
 
   constructor() {
-    let storage: storeType | string | null =
-      localStorage.getItem("presence_data");
+    let storage: storeType | string | null = localStorage.getItem(
+      "presence_data"
+    );
 
     if (storage) {
       storage = JSON.parse(atob(storage));
@@ -174,9 +175,8 @@ presence.on("UpdateData", async () => {
       {
         presenceData.details = strings.latest;
 
-        let page = new URLSearchParams(document.location.href)
-          .values()
-          .next().value;
+        let page = new URLSearchParams(document.location.href).values().next()
+          .value;
 
         if (page === "") page = "1";
 
@@ -190,8 +190,9 @@ presence.on("UpdateData", async () => {
         // browsing a-z all
         if (path.length === 1) {
           presenceData.details = `${viewing} A-Z:`;
-          presenceData.state =
-            document.querySelector("a.nav-link.active").textContent;
+          presenceData.state = document.querySelector(
+            "a.nav-link.active"
+          ).textContent;
           presenceData.smallImageKey = "presence_browsing_all";
           presenceData.smallImageText = strings.browse;
         } else {
@@ -209,8 +210,9 @@ presence.on("UpdateData", async () => {
               {
                 // viewing anime/time season
                 presenceData.details = `${viewing} Anime ${strings.timeSeason}:`;
-                presenceData.state =
-                  document.getElementsByTagName("h1")[0].textContent;
+                presenceData.state = document.getElementsByTagName(
+                  "h1"
+                )[0].textContent;
                 presenceData.smallImageKey = "presence_browsing_time";
                 presenceData.smallImageText = strings.browse;
               }
@@ -224,8 +226,8 @@ presence.on("UpdateData", async () => {
                 // viewing a misc. category (eg. Airing, TV, etc)
                 presenceData.details = strings.viewCategory;
 
-                const heading =
-                  document.getElementsByTagName("h1")[0].textContent;
+                const heading = document.getElementsByTagName("h1")[0]
+                  .textContent;
                 presenceData.state =
                   heading.indexOf(" ") !== -1
                     ? heading
@@ -238,12 +240,11 @@ presence.on("UpdateData", async () => {
               } else {
                 // viewing specific
                 const info = parseInfo(
-                    document.getElementsByClassName("anime-info")[0]
-                      .children as unknown as HTMLParagraphElement[]
+                    (document.getElementsByClassName("anime-info")[0]
+                      .children as unknown) as HTMLParagraphElement[]
                   ),
-                  title =
-                    document.getElementsByClassName("title-wrapper")[0]
-                      .children[1].textContent,
+                  title = document.getElementsByClassName("title-wrapper")[0]
+                    .children[1].textContent,
                   listing = (() => {
                     const links = info.external_links as HTMLAnchorElement[];
 
@@ -300,9 +301,8 @@ presence.on("UpdateData", async () => {
         const movie: boolean =
             document.getElementsByClassName("anime-status")[0].firstElementChild
               .textContent === "Movie",
-          title =
-            document.getElementsByClassName("theatre-info")[0].children[1]
-              .children[1].textContent,
+          title = document.getElementsByClassName("theatre-info")[0].children[1]
+            .children[1].textContent,
           episode = parseInt(
             document
               .getElementById("episodeMenu")

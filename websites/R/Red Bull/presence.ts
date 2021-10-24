@@ -71,8 +71,9 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (pathname.includes("athlete")) {
-    const name =
-      document.querySelector<HTMLHeadingElement>(".person-hero__name");
+    const name = document.querySelector<HTMLHeadingElement>(
+      ".person-hero__name"
+    );
     if (name) {
       presenceData.details = "Looking at Athlete";
       presenceData.state = name.textContent;

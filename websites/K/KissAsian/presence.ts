@@ -32,8 +32,10 @@ presence.on("UpdateData", async () => {
     } else if (!isNaN(video?.duration) && (videoTitle || selectEpisode)) {
       delete presenceData.startTimestamp;
       if (videoTitle) {
-        [presenceData.details, presenceData.state] =
-          videoTitle.textContent.split(" » ");
+        [
+          presenceData.details,
+          presenceData.state
+        ] = videoTitle.textContent.split(" » ");
       } else {
         presenceData.details = document
           .querySelector("#navsubbar > p > a")

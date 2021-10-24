@@ -54,8 +54,9 @@ presence.on("UpdateData", async () => {
       break;
     case "/my/stories/pages/":
       presenceData.smallImageKey = "writing";
-      presenceData.state =
-        document.querySelector("a#storyname.major").innerHTML;
+      presenceData.state = document.querySelector(
+        "a#storyname.major"
+      ).innerHTML;
       break;
     case "/achievements/":
       presenceData.state = `User: ${
@@ -63,12 +64,14 @@ presence.on("UpdateData", async () => {
       }`;
       break;
     case "/log/":
-      presenceData.state =
-        document.querySelector("a#storyname.major").innerHTML;
+      presenceData.state = document.querySelector(
+        "a#storyname.major"
+      ).innerHTML;
       break;
     case "/search/":
-      presenceData.state =
-        document.querySelector("a#storyname.major").innerHTML;
+      presenceData.state = document.querySelector(
+        "a#storyname.major"
+      ).innerHTML;
       break;
     default:
       break;

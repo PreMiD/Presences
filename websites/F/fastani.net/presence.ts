@@ -50,11 +50,13 @@ presence.on("UpdateData", async () => {
       matched = location.href.match(urlRegex),
       seasonNumber = matched ? matched[1] : null,
       episodeNumber = matched ? matched[2] : null;
-    [presenceData.startTimestamp, presenceData.endTimestamp] =
-      presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+    [
+      presenceData.startTimestamp,
+      presenceData.endTimestamp
+    ] = presence.getTimestamps(
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused

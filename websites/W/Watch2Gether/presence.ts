@@ -33,8 +33,9 @@ presence.on("UpdateData", async () => {
 
       for (const msg of chatMessages) {
         if (msg.querySelector(".w2g-chat-item-actions")) {
-          const chatBubble: HTMLDivElement =
-            msg.querySelector(".w2g-chat-bubble");
+          const chatBubble: HTMLDivElement = msg.querySelector(
+            ".w2g-chat-bubble"
+          );
           title = chatBubble.innerText.substring(
             0,
             chatBubble.innerText.indexOf("\n")
@@ -78,8 +79,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = title.innerText;
       }
     } else if (pathname.startsWith("/u/")) {
-      const username: HTMLHeadingElement =
-        document.querySelector("h1.full-name");
+      const username: HTMLHeadingElement = document.querySelector(
+        "h1.full-name"
+      );
       if (username)
         presenceData.details = `Looking at user ${username.innerText}`;
     } else {

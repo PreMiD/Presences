@@ -70,12 +70,15 @@ presence.on("UpdateData", async () => {
       break;
     }
     case "/AdvanceSearch": {
-      const comicName =
-          document.querySelector<HTMLInputElement>("input#comicName"),
-        include =
-          document.querySelectorAll<HTMLAnchorElement>("label > a.include"),
-        exclude =
-          document.querySelectorAll<HTMLAnchorElement>("label > a.exclude"),
+      const comicName = document.querySelector<HTMLInputElement>(
+          "input#comicName"
+        ),
+        include = document.querySelectorAll<HTMLAnchorElement>(
+          "label > a.include"
+        ),
+        exclude = document.querySelectorAll<HTMLAnchorElement>(
+          "label > a.exclude"
+        ),
         status = document.querySelector<HTMLSelectElement>("select#status");
 
       presenceData.details = "Advanced Search";
@@ -104,8 +107,9 @@ presence.on("UpdateData", async () => {
             1
           );
         } else {
-          [presenceData.details, presenceData.state] =
-            getCookie("PMD_searchQuery").split(":");
+          [presenceData.details, presenceData.state] = getCookie(
+            "PMD_searchQuery"
+          ).split(":");
         }
       }
       break;
@@ -123,15 +127,17 @@ presence.on("UpdateData", async () => {
       } else if (pathname.startsWith("/Comic")) {
         const reading = !!document.querySelector("div#divImage");
         if (reading) {
-          const title =
-              document.querySelector<HTMLAnchorElement>("#navsubbar > p > a"),
+          const title = document.querySelector<HTMLAnchorElement>(
+              "#navsubbar > p > a"
+            ),
             episode =
               document.querySelector<HTMLSelectElement>(
                 "select#selectEpisode"
               ) ||
               document.querySelector<HTMLSelectElement>("select.selectEpisode"),
-            page =
-              document.querySelector<HTMLSelectElement>("select#selectPage");
+            page = document.querySelector<HTMLSelectElement>(
+              "select#selectPage"
+            );
           if (title) {
             presenceData.details = title.innerText.substring(
               6,

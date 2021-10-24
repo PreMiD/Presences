@@ -51,8 +51,13 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      ([presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(Math.floor(currentTime), Math.floor(duration))),
+      ([
+        presenceData.startTimestamp,
+        presenceData.endTimestamp
+      ] = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      )),
         (title = document.querySelector("#episode > div.h1 > h1"));
       if (title.textContent.includes(" – ")) {
         [presenceData.details] = title.textContent.split(" – ");

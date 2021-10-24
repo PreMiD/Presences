@@ -34,9 +34,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname === "/movie/results/") {
     // Searching Part
-    search = document.querySelector(
-      "#content > div.results-info > h5 > span"
-    ).textContent;
+    search = document.querySelector("#content > div.results-info > h5 > span")
+      .textContent;
     presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
@@ -44,9 +43,8 @@ presence.on("UpdateData", async () => {
   } else if (
     document.location.pathname === "/movie-clip/results/music-video/"
   ) {
-    search = document.querySelector(
-      "#content > div.results-info > h5 > span"
-    ).textContent;
+    search = document.querySelector("#content > div.results-info > h5 > span")
+      .textContent;
     presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
@@ -54,17 +52,15 @@ presence.on("UpdateData", async () => {
   } else if (
     document.location.pathname === "/movie-clip/playlist/results/music-video/"
   ) {
-    search = document.querySelector(
-      "#content > div.results-info > h5 > span"
-    ).textContent;
+    search = document.querySelector("#content > div.results-info > h5 > span")
+      .textContent;
     presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
     presenceData.state = "Music Video Playlist";
   } else if (document.location.pathname === "/movie-clip/results/clip/") {
-    search = document.querySelector(
-      "#content > div.results-info > h5 > span"
-    ).textContent;
+    search = document.querySelector("#content > div.results-info > h5 > span")
+      .textContent;
     presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";
@@ -72,9 +68,8 @@ presence.on("UpdateData", async () => {
   } else if (
     document.location.pathname === "/movie-clip/playlist/results/clip/"
   ) {
-    search = document.querySelector(
-      "#content > div.results-info > h5 > span"
-    ).textContent;
+    search = document.querySelector("#content > div.results-info > h5 > span")
+      .textContent;
     presenceData.details = `Searching: ${search}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "searching";

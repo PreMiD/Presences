@@ -90,9 +90,8 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "div._2SdHzo12ISmrC8H86TgSCp._29WrubtjAcKqzJSPdQqQ4h"
         )?.textContent || "";
-      subReddit = document.querySelector(
-        "span._1GieMuLljOrqnVpRAwz7VP"
-      ).textContent;
+      subReddit = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP")
+        .textContent;
       subReddit =
         subReddit === "Home" &&
         document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] !== null
@@ -107,9 +106,8 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (pathname.startsWith("/user/")) {
-      username = document.querySelector(
-        "span._1GieMuLljOrqnVpRAwz7VP"
-      ).textContent;
+      username = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP")
+        .textContent;
       nickname = document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ")
         ? document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ").textContent
         : "";

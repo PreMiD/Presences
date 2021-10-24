@@ -108,8 +108,10 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageText = paused
                 ? (await strings).pause
                 : (await strings).play;
-              [presenceData.startTimestamp, presenceData.endTimestamp] =
-                timestamps;
+              [
+                presenceData.startTimestamp,
+                presenceData.endTimestamp
+              ] = timestamps;
             }
           } else if (paused) {
             delete presenceData.startTimestamp;

@@ -57,18 +57,17 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("/vod/")) {
     const video = document.querySelector("video"),
-      isMovie = (
-        document.getElementsByName("keywords")[0] as HTMLMetaElement
-      ).content
+      isMovie = (document.getElementsByName(
+        "keywords"
+      )[0] as HTMLMetaElement).content
         .split(", ")
         .some((keyword) => keyword.toLowerCase().includes("movie"));
 
     if (video) {
       const timestamp = presence.getTimestampsfromMedia(video).pop(),
         episode = videoData.dimension2,
-        episodeName = document.querySelector(
-          "h3.video-update-epi-name"
-        ).textContent,
+        episodeName = document.querySelector("h3.video-update-epi-name")
+          .textContent,
         episodeNameRegex = new RegExp(videoData.dimension1),
         hasEpName = episodeName.match(/([1-9]?[0-9]?[0-9])/)
           ? episode !== episodeName.match(/([1-9]?[0-9]?[0-9])/)[0] &&
@@ -201,10 +200,9 @@ presence.on("UpdateData", async () => {
     (document.querySelector("input#search") && document.location.search) ||
     document.querySelector('[name="searchInput"]')
   ) {
-    const searchQuery = (
-      (document.querySelector("input#search") ||
-        document.querySelector('[name="searchInput"]')) as HTMLInputElement
-    ).value;
+    const searchQuery = ((document.querySelector("input#search") ||
+      document.querySelector('[name="searchInput"]')) as HTMLInputElement)
+      .value;
 
     presenceData.details = (await strings).searchFor;
     presenceData.state = searchQueryOn

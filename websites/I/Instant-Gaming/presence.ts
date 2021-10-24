@@ -14,9 +14,8 @@ presence.on("UpdateData", async () => {
         "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
       ).textContent,
       productPrice = document.querySelector("div.price").textContent;
-    let productPlatform = document.querySelector(
-      "div.subinfos > a.platform"
-    ).textContent;
+    let productPlatform = document.querySelector("div.subinfos > a.platform")
+      .textContent;
     if (productPlatform.startsWith("Other")) productPlatform = "N/A";
 
     presenceData.details = "Viewing a product:";

@@ -163,9 +163,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the Gaming Sessions";
   else if (document.location.pathname === "/searchresults.aspx") {
     presenceData.details = "Searching for:";
-    presenceData.state = (
-      document.querySelector("#txtSearchFor") as HTMLInputElement
-    ).value;
+    presenceData.state = (document.querySelector(
+      "#txtSearchFor"
+    ) as HTMLInputElement).value;
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname.includes("/products")) {
     if (document.location.pathname.includes("/latest"))
@@ -197,9 +197,9 @@ presence.on("UpdateData", async () => {
       ).textContent;
     } else if (document.location.pathname.includes("/search.aspx")) {
       presenceData.details = "Forums - Searching for:";
-      presenceData.state = (
-        document.querySelector("#txtSearchFor") as HTMLInputElement
-      ).value;
+      presenceData.state = (document.querySelector(
+        "#txtSearchFor"
+      ) as HTMLInputElement).value;
       presenceData.smallImageKey = "search";
     }
   } else if (document.location.pathname.includes("/leaderboard"))

@@ -7,8 +7,9 @@ presence.on("UpdateData", async () => {
     playerTitle: HTMLDivElement = document.querySelector("div.player-title"),
     playerArtist: HTMLDivElement = document.querySelector("div.player-artist"),
     playerTime: HTMLDivElement = document.querySelector("div.player-time"),
-    playBackStatus: HTMLButtonElement =
-      document.querySelector("button.player-play"),
+    playBackStatus: HTMLButtonElement = document.querySelector(
+      "button.player-play"
+    ),
     listeners: HTMLDivElement = document.querySelector("div.col.cell"),
     header: NodeListOf<HTMLDivElement> = document.querySelectorAll(
       ".window > .inner > .header.header-draggable.noselect"
@@ -16,8 +17,9 @@ presence.on("UpdateData", async () => {
     songInfo: HTMLDivElement = document.querySelector(".p-2.song-info");
 
   if (songInfo) {
-    const details: NodeListOf<HTMLDivElement> =
-        songInfo.querySelectorAll(".mb-1"),
+    const details: NodeListOf<HTMLDivElement> = songInfo.querySelectorAll(
+        ".mb-1"
+      ),
       [artist, album, title] = [...details].map((e) => e.innerText);
     if (artist && album && title) {
       presenceData.details = `Looking at ${title.substring(

@@ -181,12 +181,15 @@ presence.on("UpdateData", async () => {
 
     // Disney+ Hotstar video
   } else if (isHostHS && /\/(tv|movies)\//.test(location.pathname)) {
-    const video: HTMLVideoElement =
-      document.querySelector(".player-base video");
+    const video: HTMLVideoElement = document.querySelector(
+      ".player-base video"
+    );
 
     if (video && !isNaN(video.duration)) {
-      [data.startTimestamp, data.endTimestamp] =
-        presence.getTimestampsfromMedia(video);
+      [
+        data.startTimestamp,
+        data.endTimestamp
+      ] = presence.getTimestampsfromMedia(video);
       const titleField: HTMLDivElement = document.querySelector(
           ".controls-overlay .primary-title"
         ),

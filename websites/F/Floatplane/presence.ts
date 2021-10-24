@@ -12,8 +12,8 @@ presence.on("UpdateData", async () => {
 
   if (!page) {
     //Uploads
-    const subCount =
-        document.querySelector(".simplebar-content")?.children.length,
+    const subCount = document.querySelector(".simplebar-content")?.children
+        .length,
       showCount = await presence.getSetting("subscriptions");
 
     presenceData.details = "Vieweing uploads";
@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Say Hello To Floatplane";
   } else if (page === "browse") {
     //Browsing
-    const searchTerm = (
-        document.querySelector(".search-bar") as HTMLInputElement
-      )?.value,
+    const searchTerm = (document.querySelector(
+        ".search-bar"
+      ) as HTMLInputElement)?.value,
       channelCount = document.querySelector(".creator-cards")?.children.length;
 
     presenceData.details = "Browsing";
@@ -161,9 +161,9 @@ presence.on("UpdateData", async () => {
     //Video
     const title = document.querySelector(".title-text")?.textContent,
       channel = document.querySelector(".channel-title")?.textContent,
-      channelURL = (
-        document.querySelector(".channel-title") as HTMLLinkElement
-      )?.href.toLowerCase(),
+      channelURL = (document.querySelector(
+        ".channel-title"
+      ) as HTMLLinkElement)?.href.toLowerCase(),
       video = document.querySelector("video") as HTMLVideoElement;
 
     //Wait for page to load

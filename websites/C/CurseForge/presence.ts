@@ -26,9 +26,10 @@ presence.on("UpdateData", async () => {
           "body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > div > section > div.px-2.flex-1 > div > div.flex.flex-col.mb-4 > h2"
         );
         presenceData.details = `${game}, Viewing category:`;
-        presenceData.state = `${categoryText} - ${(
-          title as HTMLElement
-        ).innerText.replace("All ", "")}`;
+        presenceData.state = `${categoryText} - ${(title as HTMLElement).innerText.replace(
+          "All ",
+          ""
+        )}`;
 
         delete presenceData.smallImageKey;
 

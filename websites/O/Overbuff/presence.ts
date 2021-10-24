@@ -93,9 +93,8 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Overbuff Blog";
     try {
-      const blogTitle = document.querySelector(
-        "div.post-title > h1.title"
-      ).textContent;
+      const blogTitle = document.querySelector("div.post-title > h1.title")
+        .textContent;
       presenceData.details = "Reading a blog:";
       presenceData.state = blogTitle;
     } catch {

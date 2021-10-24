@@ -22,8 +22,9 @@ const pesquisaText: HTMLInputElement = document.querySelector("#s"),
     "#contenedor > div.module > div.content > header > h1"
   ),
   nomeObraEpisodioText: HTMLElement = document.querySelector("#info > h1"),
-  episodioEpisodioText: HTMLElement =
-    document.querySelector("#info > div > h3"),
+  episodioEpisodioText: HTMLElement = document.querySelector(
+    "#info > div > h3"
+  ),
   filmeNomeText: HTMLElement = document.querySelector(
     "#single > div.content > div.sheader > div.data > h1"
   ),
@@ -80,8 +81,10 @@ presence.on("UpdateData", async () => {
             Math.floor(currentTime),
             Math.floor(duration)
           )),
-          ([presenceData.startTimestamp, presenceData.endTimestamp] =
-            timestamps),
+          ([
+            presenceData.startTimestamp,
+            presenceData.endTimestamp
+          ] = timestamps),
           (presenceData.smallImageKey = "play"),
           (presenceData.smallImageText = "Assistindo"))
         : ((presenceData.smallImageKey = "pause"),
@@ -101,8 +104,10 @@ presence.on("UpdateData", async () => {
               Math.floor(currentTime),
               Math.floor(duration)
             )),
-            ([presenceData.startTimestamp, presenceData.endTimestamp] =
-              timestamps),
+            ([
+              presenceData.startTimestamp,
+              presenceData.endTimestamp
+            ] = timestamps),
             (presenceData.smallImageKey = "play"),
             (presenceData.smallImageText = "Assistindo"))
           : ((presenceData.smallImageKey = "pause"),

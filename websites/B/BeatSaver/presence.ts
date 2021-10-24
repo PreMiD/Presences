@@ -13,28 +13,24 @@ presence.on("UpdateData", async () => {
 
   if (document.location.href.includes("/?q=")) {
     presenceData.details = "Searching Beatmaps";
-    presenceData.state = (
-      document.querySelector("input.form-control") as HTMLInputElement
-    ).value;
+    presenceData.state = (document.querySelector(
+      "input.form-control"
+    ) as HTMLInputElement).value;
   } else if (document.location.pathname.includes("/maps/")) {
     if (document.querySelector("a[class~='active']") !== null) {
       presenceData.smallImageKey =
-        (
-          document
-            .querySelector("a[class~='active']")
-            .childNodes.item(0) as HTMLElement
-        ).title.toLowerCase() +
+        (document
+          .querySelector("a[class~='active']")
+          .childNodes.item(0) as HTMLElement).title.toLowerCase() +
         document
           .querySelector("a[class~='active']")
           .childNodes.item(1)
           .textContent.replace("+", "_")
           .toLowerCase();
       presenceData.smallImageText = `${
-        (
-          document
-            .querySelector("a[class~='active']")
-            .childNodes.item(0) as HTMLElement
-        ).title
+        (document
+          .querySelector("a[class~='active']")
+          .childNodes.item(0) as HTMLElement).title
       } ${
         document.querySelector("a[class~='active']").childNodes.item(1)
           .textContent

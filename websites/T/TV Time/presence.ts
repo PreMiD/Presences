@@ -41,9 +41,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/show")) {
     if (document.location.pathname.includes("/episode/")) {
       const showname = document.querySelector("div.info-box h3 a").textContent,
-        shownumber = document.querySelector(
-          "div.info-box h1 .episode-label"
-        ).textContent;
+        shownumber = document.querySelector("div.info-box h1 .episode-label")
+          .textContent;
       (data.details = "Viewing an Episode"),
         (data.state = `${showname} - ${shownumber}`);
       data.startTimestamp = browsingStamp;
@@ -53,17 +52,15 @@ presence.on("UpdateData", async () => {
         (data.startTimestamp = browsingStamp);
       presence.setActivity(data);
     } else {
-      const show = document.querySelector(
-        "div.info-box.heading-info h1"
-      ).textContent;
+      const show = document.querySelector("div.info-box.heading-info h1")
+        .textContent;
       (data.details = "Viewing a TV Show"), (data.state = show);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     }
   } else if (document.location.pathname.includes("/actor/")) {
-    const actor = document.querySelector(
-      "div#actor-details div.infos h1"
-    ).textContent;
+    const actor = document.querySelector("div#actor-details div.infos h1")
+      .textContent;
     (data.details = "Viewing an Actor Profile"), (data.state = actor);
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
@@ -93,9 +90,8 @@ presence.on("UpdateData", async () => {
         (data.startTimestamp = browsingStamp);
       presence.setActivity(data);
     } else {
-      const article = document.querySelector(
-        "div.article h1.page-header"
-      ).textContent;
+      const article = document.querySelector("div.article h1.page-header")
+        .textContent;
       (data.details = "Viewing an Article"), (data.state = article);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);

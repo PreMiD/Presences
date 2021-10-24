@@ -87,14 +87,18 @@ presence.on("UpdateData", async () => {
           ".video-info__data-title"
         ).textContent;
       } else {
-        title = document.querySelector(
-          ".playkit-video-info__ep-title"
-        ).textContent;
+        title = document.querySelector(".playkit-video-info__ep-title")
+          .textContent;
       }
 
       if (!isNaN(duration)) {
-        [presenceData.startTimestamp, presenceData.endTimestamp] =
-          presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
+        [
+          presenceData.startTimestamp,
+          presenceData.endTimestamp
+        ] = presence.getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        );
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.smallImageText = paused
           ? (await strings).pause

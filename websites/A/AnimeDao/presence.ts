@@ -50,8 +50,10 @@ presence.on("UpdateData", async () => {
     }
     if (played) {
       if (!paused) {
-        [presenceData.startTimestamp, presenceData.endTimestamp] =
-          presence.getTimestamps(current, duration);
+        [
+          presenceData.startTimestamp,
+          presenceData.endTimestamp
+        ] = presence.getTimestamps(current, duration);
       }
 
       presenceData.smallImageKey = paused ? "pause" : "play";

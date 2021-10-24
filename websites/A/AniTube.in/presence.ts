@@ -8,8 +8,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "anitube_logo_",
       startTimestamp: browsingStamp
     },
-    searchContainer: HTMLDivElement =
-      document.querySelector(".searchContainer"),
+    searchContainer: HTMLDivElement = document.querySelector(
+      ".searchContainer"
+    ),
     search: HTMLInputElement = document.querySelector(
       ".searchContainer > form > input"
     ),
@@ -84,8 +85,9 @@ presence.on("UpdateData", async () => {
         }
       ];
       if (!paused && videoElement) {
-        [, presenceData.endTimestamp] =
-          presence.getTimestampsfromMedia(videoElement);
+        [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+          videoElement
+        );
       }
     } else if (pathname === "/contato.php")
       presenceData.details = "At contact us page";

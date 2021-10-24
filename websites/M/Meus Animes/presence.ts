@@ -60,11 +60,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = nomeEpisodio.innerText;
       presenceData.state = numeroEpisodio.innerText;
       if (!video.paused) {
-        [presenceData.startTimestamp, presenceData.endTimestamp] =
-          presence.getTimestamps(
-            Math.floor(video.currentTime),
-            Math.floor(video.duration)
-          );
+        [
+          presenceData.startTimestamp,
+          presenceData.endTimestamp
+        ] = presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = "Assistindo";
       }

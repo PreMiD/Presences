@@ -21,8 +21,9 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).browsing;
 
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
+        presenceData.details = document.getElementsByClassName(
+          "PageHeader_title"
+        )[0].textContent;
 
         if (path.length > 1) {
           presenceData.state = document.getElementsByClassName(
@@ -36,14 +37,14 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).reading;
 
         if (!path.includes("media")) {
-          presenceData.details =
-            document.getElementsByClassName("PageHeader_title")[0].textContent;
+          presenceData.details = document.getElementsByClassName(
+            "PageHeader_title"
+          )[0].textContent;
 
           if (path.length > 1) {
-            presenceData.state =
-              document.getElementsByClassName(
-                "RewardHeader_title"
-              )[0].textContent;
+            presenceData.state = document.getElementsByClassName(
+              "RewardHeader_title"
+            )[0].textContent;
           }
         }
         break;
@@ -52,8 +53,9 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).browsing;
 
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
+        presenceData.details = document.getElementsByClassName(
+          "PageHeader_title"
+        )[0].textContent;
         break;
       //Points
       case "point":
@@ -61,10 +63,9 @@ presence.on("UpdateData", async () => {
           switch (path[1]) {
             //Wallet
             case "wallet":
-              presenceData.details =
-                document.getElementsByClassName(
-                  "PageHeader_title"
-                )[0].textContent;
+              presenceData.details = document.getElementsByClassName(
+                "PageHeader_title"
+              )[0].textContent;
               presenceData.state = document.getElementsByClassName(
                 "PageSubHeader_title"
               )[0].textContent;
@@ -83,15 +84,17 @@ presence.on("UpdateData", async () => {
         break;
       //News
       case "news":
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
+        presenceData.details = document.getElementsByClassName(
+          "PageHeader_title"
+        )[0].textContent;
 
         if (path.length > 1) {
           presenceData.smallImageKey = "reading";
           presenceData.smallImageText = (await strings).reading;
 
-          presenceData.state =
-            document.getElementsByClassName("NewsDetail_title")[0].textContent;
+          presenceData.state = document.getElementsByClassName(
+            "NewsDetail_title"
+          )[0].textContent;
         } else {
           presenceData.smallImageKey = "reading";
           presenceData.smallImageText = (await strings).browsing;
@@ -103,32 +106,36 @@ presence.on("UpdateData", async () => {
         break;
       //Redeem Point Codes
       case "serial_number":
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
+        presenceData.details = document.getElementsByClassName(
+          "PageHeader_title"
+        )[0].textContent;
         break;
       //Getting Started
       case "getting_started":
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).reading;
 
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
+        presenceData.details = document.getElementsByClassName(
+          "PageHeader_title"
+        )[0].textContent;
         break;
       //About Points
       case "about_point":
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).reading;
 
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
+        presenceData.details = document.getElementsByClassName(
+          "PageHeader_title"
+        )[0].textContent;
         break;
       //About Gold Points
       case "about_gold_point":
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).reading;
 
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
+        presenceData.details = document.getElementsByClassName(
+          "PageHeader_title"
+        )[0].textContent;
         break;
       //Unknown
       default:

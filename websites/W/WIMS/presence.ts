@@ -31,9 +31,9 @@ if (!loggedout) {
   // Set Class
   // if (document.querySelector(".wimscenter"))
   if (document.querySelector(".wims_subclasses")) {
-    [, Classname] = (
-      document.querySelector(".wimscenter") as HTMLElement
-    ).innerText.split("\n");
+    [, Classname] = (document.querySelector(
+      ".wimscenter"
+    ) as HTMLElement).innerText.split("\n");
   } else if (document.querySelectorAll("td.small")[1]) {
     Classname = `${
       (document.querySelectorAll("td.small")[1] as HTMLElement).innerText.split(
@@ -78,9 +78,9 @@ if (!loggedout) {
         !document.querySelector(".answer")
       ) {
         [EXNo] = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/);
-        Exercise = `${(
-          document.querySelector(".sheet") as HTMLAnchorElement
-        ).href
+        Exercise = `${(document.querySelector(
+          ".sheet"
+        ) as HTMLAnchorElement).href
           .match(/#ex(.?.?)/)[1]
           .replace(/&|#/g, "")}.${EXNo}: ${
           (document.querySelector(".main_body .titre") as HTMLElement).innerText
@@ -129,9 +129,9 @@ if (!loggedout) {
       ) *
         60 +
         parseInt(
-          (
-            document.querySelector("p#exam_clock") as HTMLElement
-          ).innerText.split(":")[2]
+          (document.querySelector(
+            "p#exam_clock"
+          ) as HTMLElement).innerText.split(":")[2]
         )) *
         1000;
   }

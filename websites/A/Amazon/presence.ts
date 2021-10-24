@@ -114,8 +114,8 @@ presence.on("UpdateData", async () => {
         .getAttribute("data-nav-selected");
       dropdownplus1 = +dropdown + 1;
       dropdownfinal = `#searchDropdownBox > option:nth-child(${dropdownplus1})`;
-      dropdowninnertext =
-        document.querySelector<HTMLElement>(dropdownfinal).innerText;
+      dropdowninnertext = document.querySelector<HTMLElement>(dropdownfinal)
+        .innerText;
       split = document.location.pathname.split("/", 3);
       if (dropdown !== "0" || split[1] !== "") {
         presenceData.details = "Browsing category:"; //general.viewCategory

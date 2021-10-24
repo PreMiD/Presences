@@ -46,14 +46,14 @@ presence.on("UpdateData", async () => {
       .replace(/"/g, "");
   } else if (document.location.href.indexOf("/app/") > -1) {
     presenceData.details = "Looking at a game";
-    [presenceData.state] = (
-      document.querySelector("h1.title") as HTMLElement
-    ).innerText.match(/[^\s*].*[^\s*]/);
+    [presenceData.state] = (document.querySelector(
+      "h1.title"
+    ) as HTMLElement).innerText.match(/[^\s*].*[^\s*]/);
   } else if (document.location.href.indexOf("/bundle/") > -1) {
     presenceData.details = "Looking at a bundle";
-    [presenceData.state] = (
-      document.querySelector("h1.title") as HTMLElement
-    ).innerText.match(/[^\s*].*[^\s*]/);
+    [presenceData.state] = (document.querySelector(
+      "h1.title"
+    ) as HTMLElement).innerText.match(/[^\s*].*[^\s*]/);
   } else if (document.location.href.indexOf("/tracker") > -1)
     presenceData.details = "Tracking game prices";
   else if (document.location.href.indexOf("/publishers") > -1)
@@ -73,9 +73,9 @@ presence.on("UpdateData", async () => {
       (document.querySelector("h3.block_title.no_margintop") as HTMLElement)
         .innerText === "BLOG POST"
     ) {
-      presenceData.state = (
-        document.querySelector("h4.title") as HTMLElement
-      ).innerText;
+      presenceData.state = (document.querySelector(
+        "h4.title"
+      ) as HTMLElement).innerText;
     }
   } else if (document.location.href.indexOf("/faq") > -1)
     presenceData.details = "Reading the FAQ";

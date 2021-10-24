@@ -68,8 +68,8 @@ presence.on("UpdateData", async () => {
     }
 
     case "contestRegistration": {
-      const contestTitle =
-        document.querySelector("#pageContent > h2").textContent;
+      const contestTitle = document.querySelector("#pageContent > h2")
+        .textContent;
 
       presenceData.details = "Registering for";
       presenceData.state = contestTitle;

@@ -20,8 +20,9 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/@")) {
     presenceData.details = "Viewing profile";
     if (document.getElementsByClassName("_3FvGs").length === 1) {
-      presenceData.state =
-        document.getElementsByClassName("_3FvGs")[0].textContent;
+      presenceData.state = document.getElementsByClassName(
+        "_3FvGs"
+      )[0].textContent;
     } else presenceData.state = document.location.pathname.replace("/", "");
   } else if (document.location.pathname.includes("/account"))
     presenceData.details = "Editing their profile";

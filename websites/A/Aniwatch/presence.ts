@@ -59,8 +59,13 @@ presence.on("UpdateData", async () => {
         ); //video player
 
         ({ currentTime, duration, paused } = video);
-        [presenceData.startTimestamp, presenceData.endTimestamp] =
-          presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
+        [
+          presenceData.startTimestamp,
+          presenceData.endTimestamp
+        ] = presence.getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        );
         if (!isNaN(duration)) {
           //I'm borrowing this code from the AnimeLab presence by Bas950 because I'm too dumb to figure out how it works. I hope that's okay
           presenceData.smallImageKey = paused ? "pause" : "play";
@@ -138,8 +143,10 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageText = paused
               ? (await strings).pause
               : (await strings).play;
-            [presenceData.startTimestamp, presenceData.endTimestamp] =
-              timestamps;
+            [
+              presenceData.startTimestamp,
+              presenceData.endTimestamp
+            ] = timestamps;
 
             if (paused) {
               delete presenceData.startTimestamp;

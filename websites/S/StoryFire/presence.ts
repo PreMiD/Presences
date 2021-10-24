@@ -26,9 +26,8 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       uploader = document.querySelector(".user-name").textContent,
-      videoTitle = document.querySelector(
-        ".title > div:not(.series)"
-      ).textContent;
+      videoTitle = document.querySelector(".title > div:not(.series)")
+        .textContent;
 
     presenceData.details = videoTitle;
     presenceData.state = uploader;
