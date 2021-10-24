@@ -8,21 +8,21 @@ const OMGUbuntu = new Presence({
     "/privacy-policy": "Privacy Policy",
     "/tip": "Contact"
   },
-  startTimestamp = Math.round(Date.now() / 1000),
-  header = document
-    .querySelector("div.u--box.content-container > div.loop > header > h2")
-    ?.lastChild.textContent.trim()
-    .replace(/“|”/g, ""),
-  articleHeader = document.querySelector(
-    "div.post__hero-header-container.u--box > header > h1"
-  )?.textContent;
+  startTimestamp = Math.round(Date.now() / 1000);
 
 OMGUbuntu.on("UpdateData", async () => {
   const page = location.pathname,
     presenceData: PresenceData = {
       largeImageKey: "omgubuntu-logo",
       startTimestamp
-    };
+    },
+    header = document
+      .querySelector("div.u--box.content-container > div.loop > header > h2")
+      ?.lastChild.textContent.trim()
+      .replace(/“|”/g, ""),
+    articleHeader = document.querySelector(
+      "div.post__hero-header-container.u--box > header > h1"
+    )?.textContent;
 
   if (page.includes("/tag/")) {
     presenceData.details = "Looking at a tag:";
