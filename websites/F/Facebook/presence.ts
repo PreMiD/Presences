@@ -104,9 +104,9 @@ presence.on("UpdateData", async () => {
       )?.parentElement;
 
       if (videoFrame) {
-        const video = videoFrame?.querySelector("video"),
-          title = videoFrame?.querySelector("div.n1l5q3vz")?.textContent,
-          isLive = !!videoFrame?.querySelector(
+        const video = videoFrame.querySelector("video"),
+          title = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
+          isLive = !!videoFrame.querySelector(
             "div.j83agx80.rgmg9uty.pmk7jnqg.rnx8an3s.fcg2cn6m"
           );
 
