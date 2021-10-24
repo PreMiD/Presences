@@ -38,26 +38,17 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "logo"
     },
-    playerCheck = document.querySelector("div.css-s6sc4j.e14pqrjs0")
-      ? true
-      : false;
+    playerCheck = !!document.querySelector('[data-test="player-container"]');
   if (playerCheck) {
-    const liveCheck = document.querySelector(
-      "div.css-1gs73tw.e1ka8agw0 time[data-test='player-current-time']"
-    )
-      ? false
-      : true;
+    const playerText = document.querySelector('[data-test="player-text"]'),
+     liveCheck = !document.querySelector('[data-test="controls-container"]').children[1];
     if (liveCheck) {
-      const playCheck = document.querySelector(
-        "button.ekca8d00 span[aria-labelledby='Stop']"
-      )
-        ? true
-        : false;
+      const playCheck = !!document.querySelector('[data-test="controls-container"] [data-test-state="PLAYING"]');
       if (playCheck) {
-        title = document.querySelector(".css-19ebljp").textContent;
-        author = document.querySelector(".css-zzaxa6").textContent;
-        song = document.querySelector(".css-9be0f7").textContent;
-        subtitle = `${author} - ${song}`;
+        title = playerText.children[0].textContent;
+        song = playerText.children[1].textContent;
+        author = playerText.children[2]?.textContent;
+        subtitle = `${song}${author ? ` - ${author}` : ""}`;
 
         title = checkLength(title);
         data.details = title;
@@ -75,24 +66,17 @@ presence.on("UpdateData", async () => {
         presence.clearActivity();
       }
     } else {
-      title = document.querySelector(".css-19ebljp").textContent;
-      try {
-        author = document.querySelector(".css-x5q5qs").textContent;
-        song = document.querySelector(".css-9be0f7").textContent;
-        subtitle = `${author} - ${song}`;
-      } catch {
-        author = document.querySelector(".css-x5q5qs").textContent;
-        song = document.querySelector(".css-1uhpu6r").textContent;
-        subtitle = `${song} - ${author}`;
-      }
-      const audioTime = document.querySelector(".css-9dpnv0").textContent,
-        audioDuration = document.querySelector(".css-xf5pff").textContent,
+      const timestamp = document.querySelector('[data-test="controls-container"]').children[1];
+
+      title = playerText.children[0].textContent;
+      song = playerText.children[1].textContent;
+      author = playerText.children[2]?.textContent;
+      subtitle = `${song}${author ? ` - ${author}` : ""}`;
+
+      const audioTime = timestamp.children[0].textContent,
+        audioDuration = timestamp.children[2].textContent,
         parsedTimestamps = parseAudioTimestamps(audioTime, audioDuration),
-        paused = document.querySelector(
-          "button.ekca8d00 span[aria-labelledby='Play']"
-        )
-          ? true
-          : false;
+        paused = !!document.querySelector('[data-test="play-icon"]');
 
       title = checkLength(title);
       data.details = title;
