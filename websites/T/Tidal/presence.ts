@@ -17,6 +17,9 @@ let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
+  if (!document.querySelector("#footerPlayer"))
+    return presence.setActivity({ largeImageKey: "logo" });
+
   const newLang = await presence.getSetting("lang").catch(() => "en");
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -25,13 +28,9 @@ presence.on("UpdateData", async () => {
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-
-  if (!document.querySelector("#footerPlayer"))
-    return presence.setActivity({ largeImageKey: "logo" });
-
-  const songTitle = document.querySelector(
+      largeImageKey: "logo"
+    },
+    songTitle = document.querySelector(
       'div[data-test="footer-track-title"] > a'
     ) as HTMLAnchorElement,
     songArtist = document.querySelector(
