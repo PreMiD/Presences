@@ -75,9 +75,9 @@ presence.on("UpdateData", async () => {
 
   if (onRepeat === "true") {
     presenceData.smallImageKey =
-      repeatType == "Repeat" ? "repeat" : "repeat-one";
+      repeatType === "Repeat" ? "repeat" : "repeat-one";
     presenceData.smallImageText =
-      repeatType == "Repeat" ? "Playlist on loop" : "On loop";
+      repeatType === "Repeat" ? "Playlist on loop" : "On loop";
 
     delete presenceData.endTimestamp;
   }
