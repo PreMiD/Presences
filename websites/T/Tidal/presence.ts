@@ -2,7 +2,28 @@ const presence = new Presence({
   clientId: "901591802342150174"
 });
 
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      viewSong: "general.buttonViewSong"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
+
+let strings = getStrings(),
+  oldLang: string = null;
+
 presence.on("UpdateData", async () => {
+  const newLang = await presence.getSetting("lang").catch(() => "en");
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
@@ -48,7 +69,9 @@ presence.on("UpdateData", async () => {
   if (currentTimeSec > 0 || !paused) {
     presenceData.endTimestamp = endTimestamp;
     presenceData.smallImageKey = paused ? "pause" : "play";
-    presenceData.smallImageText = paused ? "Paused" : "Playing";
+    presenceData.smallImageText = paused
+      ? (await strings).pause
+      : (await strings).play;
   }
 
   if (onRepeat === "true") {
@@ -62,7 +85,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.buttons = [
     {
-      label: "View Song",
+      label: (await strings).viewSong,
       url: songTitle.href
     }
   ];
