@@ -45,10 +45,10 @@ presence.on("UpdateData", async () => {
     data.state = `📖 ${document.querySelector("._aemo2b3").textContent}`;
   else {
     data.details = document.querySelector(
-      "._io410w6, span._cmfzobe:nth-child(3) > a:nth-child(2)"
+      "._io410w6, span._cmfzobe:nth-child(2) > a:nth-child(2)"
     ).textContent;
     data.state = `📋 ${document
-      .querySelector("._1eqoe4n8, span._cmfzobe:nth-child(2) > a:nth-child(2), #uid-dialog-0-title > span:nth-child(1)")
+      .querySelector("._1eqoe4n8, span._cmfzobe:nth-child(3) > a:nth-child(2), #uid-dialog-0-title > span:nth-child(1)")
       .textContent.replace(/.*?:\s+/, "")}`;
 
     if (document.location.pathname.match(/\/(v|a|e|quiz)\//)) {
