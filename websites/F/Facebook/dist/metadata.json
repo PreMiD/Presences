@@ -4,6 +4,12 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Slowlife",
+      "id": "374905512661221377"
+    }
+  ],
   "service": "Facebook",
   "description": {
     "en": "Connect with friends, family and other people you know. Share photos and videos, send messages and get updates.",
@@ -11,7 +17,7 @@
     "zh_CN": "与朋友、家人和其他你认识的人联系。分享照片和视频、发送消息和获取更新。"
   },
   "url": "www.facebook.com",
-  "version": "1.2.8",
+  "version": "2.0.0",
   "logo": "https://i.imgur.com/jWYZLvY.png",
   "thumbnail": "https://i.imgur.com/WcKmon0.png",
   "color": "#4267B2",
@@ -19,5 +25,31 @@
     "friends",
     "family"
   ],
-  "category": "socials"
+  "category": "socials",
+  "settings": [
+    {
+      "icon": "fad fa-user-secret",
+      "title": "Privacy Mode",
+      "id": "privacyMode",
+      "value": false
+    },
+    {
+      "icon": "fas fa-user",
+      "title": "Show Username in Messenger",
+      "id": "messagerUsername",
+      "value": false
+    },
+    {
+      "icon": "fas fa-search",
+      "title": "Show Search Query",
+      "id": "searchQuery",
+      "value": true
+    },
+    {
+      "icon": "fad fa-stopwatch",
+      "title": "Show Timestamps",
+      "id": "timestamp",
+      "value": true
+    }
+  ]
 }
