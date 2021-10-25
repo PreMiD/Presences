@@ -41,9 +41,12 @@ presence.on("UpdateData", async () => {
     playerCheck = !!document.querySelector('[data-test="player-container"]');
   if (playerCheck) {
     const playerText = document.querySelector('[data-test="player-text"]'),
-     liveCheck = !document.querySelector('[data-test="controls-container"]').children[1];
+      liveCheck = !document.querySelector('[data-test="controls-container"]')
+        .children[1];
     if (liveCheck) {
-      const playCheck = !!document.querySelector('[data-test="controls-container"] [data-test-state="PLAYING"]');
+      const playCheck = !!document.querySelector(
+        '[data-test="controls-container"] [data-test-state="PLAYING"]'
+      );
       if (playCheck) {
         title = playerText.children[0].textContent;
         song = playerText.children[1].textContent;
@@ -66,7 +69,9 @@ presence.on("UpdateData", async () => {
         presence.clearActivity();
       }
     } else {
-      const timestamp = document.querySelector('[data-test="controls-container"]').children[1];
+      const timestamp = document.querySelector(
+        '[data-test="controls-container"]'
+      ).children[1];
 
       title = playerText.children[0].textContent;
       song = playerText.children[1].textContent;

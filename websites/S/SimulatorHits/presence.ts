@@ -3,19 +3,20 @@ const presence = new Presence({
 });
 
 let title = "Loading SimulatorHits",
- artist = "",
- presenter = "AutoDJ";
+  artist = "",
+  presenter = "AutoDJ";
 
 function getSongData(): void {
   fetch("https://api.simulatorhits.dev/now-playing?override").then(
     (response) => {
       if (response.status === 200) {
         response.json().then((data) => {
-          ({title, artist} = data.song);
+          ({ title, artist } = data.song);
           presenter = data.presenter.username;
         });
       }
-    });
+    }
+  );
 }
 
 setInterval(getSongData, 10000);
