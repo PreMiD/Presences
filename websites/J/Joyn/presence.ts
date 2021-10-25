@@ -2,19 +2,6 @@ const presence = new Presence({
   clientId: "799629862620758046"
 });
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  browsing: string;
-  live: string;
-  searching: string;
-  viewMovie: string;
-  watchingMovie: string;
-  watchingSeries: string;
-  watchMovie: string;
-  watchSeries: string;
-}
-
 async function getStrings() {
   return presence.getStrings(
     {
@@ -33,7 +20,7 @@ async function getStrings() {
   );
 }
 
-let lang: LangStrings, oldLang: string;
+let lang = getStrings(), oldLang: string;
 
 presence.on("UpdateData", async function () {
   const presenceData: PresenceData = {
@@ -47,10 +34,9 @@ presence.on("UpdateData", async function () {
     urlpath = window.location.pathname.split("/"),
     video: HTMLVideoElement = document.querySelector("div video");
 
-  if (!oldLang || oldLang !== newLang) {
+  if (!oldLang || oldLang !== newLang) 
     oldLang = newLang;
-    lang = await getStrings();
-  }
+  
 
   if (
     document.location.hostname === "www.joyn.de" ||

@@ -2,20 +2,7 @@ const presence: Presence = new Presence({
   clientId: "897325334200975360"
 });
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  browsing: string;
-  watchingMovie: string;
-  watchingSeries: string;
-  watchingLive: string;
-  watchEpisode: string;
-  watchVideo: string;
-  watchLive: string;
-  watchStream: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -33,7 +20,7 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: LangStrings,
+let strings = getStrings(),
   oldLang: string,
   title: string,
   subtitle: string,
@@ -52,10 +39,8 @@ presence.on("UpdateData", async () => {
     } = {};
 
   // Update strings when user sets language
-  if (!oldLang || oldLang !== newLang) {
+  if (!oldLang || oldLang !== newLang) 
     oldLang = newLang;
-    strings = await getStrings();
-  }
 
   if (isHostSP) data.largeImageKey = "starplus-logo";
 
