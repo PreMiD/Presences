@@ -20,7 +20,8 @@ async function getStrings() {
   );
 }
 
-let lang = getStrings(), oldLang: string;
+let lang = getStrings(),
+  oldLang: string = null;
 
 presence.on("UpdateData", async function () {
   const presenceData: PresenceData = {
@@ -34,16 +35,17 @@ presence.on("UpdateData", async function () {
     urlpath = window.location.pathname.split("/"),
     video: HTMLVideoElement = document.querySelector("div video");
 
-  if (!oldLang || oldLang !== newLang) 
+  if (oldLang !== newLang) {
     oldLang = newLang;
-  
+    lang = getStrings();
+  }
 
   if (
     document.location.hostname === "www.joyn.de" ||
     document.location.hostname === "joyn.de"
   ) {
     if (document.querySelector(".lk71lm-0.htJLsh")) {
-      presenceData.details = lang.searching;
+      presenceData.details = (await lang).searching;
       presenceData.state = (
         document.querySelector(".search-input") as HTMLElement
       ).textContent;
@@ -51,7 +53,7 @@ presence.on("UpdateData", async function () {
       (urlpath[1] === "" || document.location.pathname.includes("/#home")) &&
       urlpath[2] !== ""
     )
-      presenceData.details = lang.browsing;
+      presenceData.details = (await lang).browsing;
     else if (urlpath[1] === "compilation") {
       const compilation = document.querySelector(".artLogo");
       presenceData.details = "Viewing Compilation:";
@@ -70,7 +72,7 @@ presence.on("UpdateData", async function () {
       }
     } else if (urlpath[1] === "filme") {
       const film = document.querySelector(".artLogo");
-      presenceData.details = lang.viewMovie;
+      presenceData.details = (await lang).viewMovie;
       if (film) presenceData.state = (film as HTMLImageElement).alt;
       if (!film)
         presenceData.state = document.querySelector(".hXdaOG").textContent;
@@ -78,7 +80,7 @@ presence.on("UpdateData", async function () {
       if (setting.showButtons) {
         presenceData.buttons = [
           {
-            label: lang.watchMovie,
+            label: (await lang).watchMovie,
             url: `https://www.joyn.de/filme/${urlpath[2]}`
           }
         ];
@@ -93,7 +95,7 @@ presence.on("UpdateData", async function () {
       if (setting.showButtons) {
         presenceData.buttons = [
           {
-            label: lang.watchSeries,
+            label: (await lang).watchSeries,
             url: `https://www.joyn.de/serien/${urlpath[2]}`
           }
         ];
@@ -104,9 +106,9 @@ presence.on("UpdateData", async function () {
         document.location.pathname.includes("/filme") ||
         document.location.pathname.includes("/sport"))
     )
-      presenceData.details = lang.browsing;
+      presenceData.details = (await lang).browsing;
     else if (urlpath[1] === "channels") {
-      presenceData.details = lang.browsing;
+      presenceData.details = (await lang).browsing;
       presenceData.state = document.querySelector(".bISbKZ").textContent;
     } else if (urlpath[1] === "play" && urlpath[2] === "filme") {
       const videoStartTime = Date.now(),
@@ -122,15 +124,15 @@ presence.on("UpdateData", async function () {
           presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = lang.play;
+        presenceData.smallImageText = (await lang).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = lang.pause;
+        presenceData.smallImageText = (await lang).pause;
       }
       if (setting.showButtons) {
         presenceData.buttons = [
           {
-            label: lang.watchMovie,
+            label: (await lang).watchMovie,
             url: `https://www.joyn.de/filme/${urlpath[3]}`
           }
         ];
@@ -149,16 +151,16 @@ presence.on("UpdateData", async function () {
           presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = lang.play;
+        presenceData.smallImageText = (await lang).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = lang.pause;
+        presenceData.smallImageText = (await lang).pause;
       }
 
       if (setting.showButtons) {
         presenceData.buttons = [
           {
-            label: lang.watchSeries,
+            label: (await lang).watchSeries,
             url: `https://www.joyn.de/serien/${urlpath[3]}`
           }
         ];
@@ -177,10 +179,10 @@ presence.on("UpdateData", async function () {
           presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = lang.play;
+        presenceData.smallImageText = (await lang).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = lang.pause;
+        presenceData.smallImageText = (await lang).pause;
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "live-tv") {
       presenceData.details = document.title.replace(
@@ -189,7 +191,7 @@ presence.on("UpdateData", async function () {
       );
       presenceData.state = "Live-TV";
       presenceData.smallImageKey = "live";
-      presenceData.smallImageText = lang.live;
+      presenceData.smallImageText = (await lang).live;
 
       if (setting.showButtons) {
         presenceData.buttons = [
@@ -213,10 +215,10 @@ presence.on("UpdateData", async function () {
           presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = lang.play;
+        presenceData.smallImageText = (await lang).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = lang.pause;
+        presenceData.smallImageText = (await lang).pause;
       }
 
       if (setting.showButtons) {
@@ -243,10 +245,10 @@ presence.on("UpdateData", async function () {
           presenceData.endTimestamp = videoEndTime;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = lang.play;
+        presenceData.smallImageText = (await lang).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = lang.pause;
+        presenceData.smallImageText = (await lang).pause;
       }
 
       if (setting.showButtons) {

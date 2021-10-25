@@ -37,7 +37,10 @@ presence.on("UpdateData", async () => {
     } = {};
 
   // Update strings when user sets language
-  if (!oldLang || oldLang !== newLang) oldLang = newLang;
+  if (!oldLang || oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
 
   if (isHostDP) data.largeImageKey = "disneyplus-logo";
   else if (isHostHS) data.largeImageKey = "disneyplus-hotstar-logo";
@@ -78,8 +81,8 @@ presence.on("UpdateData", async () => {
       } else {
         if (privacy) {
           data.state = subtitle
-            ? strings.watchingSeries
-            : strings.watchingMovie;
+            ? (await strings).watchingSeries
+            : (await strings).watchingMovie;
         } else {
           data.details = title;
           data.state = subtitle || "Movie";
@@ -87,7 +90,7 @@ presence.on("UpdateData", async () => {
       }
 
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused ? strings.pause : strings.play;
+      data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
       [data.startTimestamp, data.endTimestamp] = timestamps;
 
       // remove timestamps if video is paused or user disabled timestamps
@@ -106,7 +109,7 @@ presence.on("UpdateData", async () => {
       if (!privacy && buttons) {
         data.buttons = [
           {
-            label: subtitle ? strings.watchEpisode : strings.watchVideo,
+            label: subtitle ? (await strings).watchEpisode : (await strings).watchVideo,
             url: `https://www.disneyplus.com${location.pathname}`
           }
         ];
@@ -185,13 +188,13 @@ presence.on("UpdateData", async () => {
       subtitle = subtitleField?.innerText; // episode or empty if it's a movie
 
       if (privacy)
-        data.state = subtitle ? strings.watchingSeries : strings.watchingMovie;
+        data.state = subtitle ? (await strings).watchingSeries : (await strings).watchingMovie;
       else {
         data.details = title;
         data.state = subtitle || "Movie";
       }
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused ? strings.pause : strings.play;
+      data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
 
       if (video.paused || !time) {
         delete data.startTimestamp;
@@ -201,7 +204,7 @@ presence.on("UpdateData", async () => {
       if (!privacy && buttons) {
         data.buttons = [
           {
-            label: strings.watchVideo,
+            label: (await strings).watchVideo,
             url: `https://www.hotstar.com${location.pathname}`
           }
         ];
@@ -212,7 +215,7 @@ presence.on("UpdateData", async () => {
 
     // Browsing
   } else {
-    data.details = strings.browsing;
+    data.details = (await strings).browsing;
     presence.setActivity(data);
   }
 });

@@ -69,7 +69,7 @@ const presence = new Presence({
       },
       await presence.getSetting("lang").catch(() => "en")
     );
-  };
+  }
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,

@@ -20,7 +20,7 @@ async function getStrings() {
   );
 }
 
-let strings= = getStrings(),
+let strings = getStrings(),
   oldLang: string = null,
   lastPlaybackState = null,
   playback: boolean,
