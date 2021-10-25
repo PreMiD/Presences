@@ -9,9 +9,9 @@ presence.on("UpdateData", () => {
       startTimestamp: elapsed,
       largeImageKey: "logo"
     };
-
+  
   let comics: number;
-
+  
   if (
     document.querySelector(".search-main-menu").classList.contains("active")
   ) {

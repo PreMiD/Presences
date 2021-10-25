@@ -199,20 +199,17 @@ presence.on("UpdateData", async () => {
     const course: HTMLAnchorElement = document.querySelector(
         ".Header-course-info-content a"
       ),
-      episodeNameHTML: string = document.querySelector(
-        ".Header-class-title h2"
-      ).outerHTML,
+      title: HTMLHeadingElement = document.querySelector(
+        ".Header-class-title h1"
+      ),
+      episodes: HTMLSpanElement = document.querySelector(
+        ".Header-class-title span"
+      ),
       video: HTMLVideoElement = document.querySelector(".vjs-tech"),
-      checkPause: HTMLElement = document.querySelector(".VideoPlayer > div");
+      checkPause: HTMLElement = document.querySelector(".VideoPlayer > div"),
+      episodeName: string = title.textContent,
+      [actualEpisode, finalEpisode]: string[] = episodes.textContent.split("/");
     let timestamps: number[];
-
-    const episodeNameHTMLSplitted: string[] = episodeNameHTML.split(">"),
-      episodeName: string = episodeNameHTMLSplitted[1].replace("<span", ""),
-      actualEpisode: string = episodeNameHTMLSplitted[2].replace(/[<!-]/gi, ""),
-      finalEpisode: string = episodeNameHTMLSplitted[4].replace(
-        /[/<span]/gi,
-        ""
-      );
 
     presenceData.details = `${episodeName} [${actualEpisode}/ ${finalEpisode}]`;
     presenceData.state = `${course.children[0].textContent}`;

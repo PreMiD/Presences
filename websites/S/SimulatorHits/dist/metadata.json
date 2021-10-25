@@ -4,10 +4,12 @@
     "name": "HuckinB",
     "id": "228575716214702080"
   },
-  "contributors": [{
-    "name": "KylePython",
-    "id": "136959324349136896"
-  }],
+  "contributors": [
+    {
+      "name": "KylePython",
+      "id": "136959324349136896"
+    }
+  ],
   "url": [
     "simulatorhits.com",
     "panel.simulatorhits.com",
