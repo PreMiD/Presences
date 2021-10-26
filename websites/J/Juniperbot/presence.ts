@@ -6,23 +6,7 @@ function pathIncludes(string: string): boolean {
 }
 const host = document.location.hostname;
 
-interface LangStrings {
-  reading: string;
-  leaderboard: string;
-  viewMainPage: string;
-  serverdash: string;
-  serverdashname: string;
-  donate: string;
-  servers: string;
-  commands: string;
-  stats: string;
-  usercard: string;
-  terms: string;
-  privacy: string;
-  cookies: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       reading: "general.readingAbout",
@@ -43,7 +27,7 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {

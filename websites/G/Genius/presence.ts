@@ -1,45 +1,29 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  watch: string;
-  search: string;
-  searching: string;
-  profile: string;
-  article: string;
-  reading: string;
-  lyrics: string;
-  viewLyrics: string;
-  home: string;
-  viewAlbum: string;
-  buttonAlbum: string;
-}
-
 const presence = new Presence({
     clientId: "809133308604055622"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        watch: "general.watching",
-        search: "general.searchFor",
-        searching: "general.search",
-        profile: "general.viewProfile",
-        article: "general.readingArticle",
-        reading: "general.reading",
-        lyrics: "genius.lyrics",
-        viewLyrics: "genius.viewLyrics",
-        home: "genius.viewHome",
-        viewAlbum: "genius.viewAlbum",
-        buttonAlbum: "general.buttonViewAlbum"
-      },
-      await presence.getSetting("lang")
-    );
-  };
+  browsingStamp = Math.floor(Date.now() / 1000);
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      watch: "general.watching",
+      search: "general.searchFor",
+      searching: "general.search",
+      profile: "general.viewProfile",
+      article: "general.readingArticle",
+      reading: "general.reading",
+      lyrics: "genius.lyrics",
+      viewLyrics: "genius.viewLyrics",
+      home: "genius.viewHome",
+      viewAlbum: "genius.viewAlbum",
+      buttonAlbum: "general.buttonViewAlbum"
+    },
+    await presence.getSetting("lang")
+  );
+}
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {

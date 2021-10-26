@@ -8,42 +8,7 @@ function pathIncludes(string: string): boolean {
   return document.location.pathname.toLowerCase().includes(string);
 }
 
-interface LangStrings {
-  browsing: string;
-  reading: string;
-  viewPage: string;
-  viewUser: string;
-  viewPresence: string;
-  docs: string;
-  home: string;
-  contributors: string;
-  downloads: string;
-  store: string;
-  cookies: string;
-  privacy: string;
-  terms: string;
-  about: string;
-  sysreq: string;
-  install: string;
-  installFor: string;
-  yikes: string;
-  start: string;
-  api: string;
-  apiPage: string;
-  presenceDev: string;
-  presenceGuide: string;
-  partners: string;
-  viewing: string;
-  incident: string;
-  uptime: string;
-  class: string;
-  slideshow: string;
-  iframe: string;
-  metadata: string;
-  ts: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       browsing: "general.browsing",
@@ -83,7 +48,7 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null,
   host: string;
 

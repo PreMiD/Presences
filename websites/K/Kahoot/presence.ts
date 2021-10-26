@@ -1,30 +1,3 @@
-interface LangStrings {
-  buttonJoinGame: string;
-  joiningGame: string;
-  waiting: string;
-  gameStarting: string;
-  playing: string;
-  questionLoading: string;
-  incorrectAnswer: string;
-  correctAnswer: string;
-  resultsQuestion: string;
-  slideViewing: string;
-  gameOver: string;
-  gameCreate: string;
-  loadingPage: string;
-  firstPlace: string;
-  points: string;
-  questionsCorrect: string;
-  slideShowing: string;
-  questionShowing: string;
-  stString: string;
-  ndString: string;
-  rdString: string;
-  topX: string;
-  of: string;
-  questionNumber: string;
-}
-
 async function findRanking(rankingSelector: HTMLElement) {
   const { stString } = await strings,
     { ndString } = await strings,
@@ -42,45 +15,46 @@ async function findRanking(rankingSelector: HTMLElement) {
 }
 
 const presence = new Presence({
-    clientId: "612793327510749210"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        buttonJoinGame: "kahoot.buttonJoinGame",
-        joiningGame: "kahoot.joiningGame",
-        waiting: "kahoot.waiting",
-        gameStarting: "kahoot.gameStarting",
-        playing: "kahoot.playing",
-        questionLoading: "kahoot.questionLoading",
-        incorrectAnswer: "kahoot.incorrectAnswer",
-        correctAnswer: "kahoot.correctAnswer",
-        resultsQuestion: "kahoot.resultsQuestion",
-        slideViewing: "kahoot.slideViewing",
-        gameOver: "kahoot.gameOver",
-        gameCreate: "kahoot.gameCreate",
-        loadingPage: "kahoot.loadingPage",
-        firstPlace: "kahoot.firstPlace",
-        points: "kahoot.points",
-        questionsCorrect: "kahoot.questionsCorrect",
-        slideShowing: "kahoot.slideShowing",
-        questionShowing: "kahoot.questionShowing",
-        stString: "kahoot.stString",
-        ndString: "kahoot.ndString",
-        rdString: "kahoot.rdString",
-        topX: "kahoot.topX",
-        of: "kahoot.of",
-        questionNumber: "kahoot.questionNumber"
-      },
-      await presence.getSetting("lang")
-    );
-  };
+  clientId: "612793327510749210"
+});
+
+async function getStrings() {
+  return presence.getStrings(
+    {
+      buttonJoinGame: "kahoot.buttonJoinGame",
+      joiningGame: "kahoot.joiningGame",
+      waiting: "kahoot.waiting",
+      gameStarting: "kahoot.gameStarting",
+      playing: "kahoot.playing",
+      questionLoading: "kahoot.questionLoading",
+      incorrectAnswer: "kahoot.incorrectAnswer",
+      correctAnswer: "kahoot.correctAnswer",
+      resultsQuestion: "kahoot.resultsQuestion",
+      slideViewing: "kahoot.slideViewing",
+      gameOver: "kahoot.gameOver",
+      gameCreate: "kahoot.gameCreate",
+      loadingPage: "kahoot.loadingPage",
+      firstPlace: "kahoot.firstPlace",
+      points: "kahoot.points",
+      questionsCorrect: "kahoot.questionsCorrect",
+      slideShowing: "kahoot.slideShowing",
+      questionShowing: "kahoot.questionShowing",
+      stString: "kahoot.stString",
+      ndString: "kahoot.ndString",
+      rdString: "kahoot.rdString",
+      topX: "kahoot.topX",
+      of: "kahoot.of",
+      questionNumber: "kahoot.questionNumber"
+    },
+    await presence.getSetting("lang")
+  );
+}
 
 let currentQuestion: string,
   score: string,
   ranking: string,
   top5: Promise<boolean>,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null,
   rankingSelector: HTMLElement;
 

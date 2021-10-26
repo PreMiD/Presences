@@ -28,28 +28,7 @@ presence.info(
 
 let oldUrl: string, elapsed: number;
 
-interface LangStrings {
-  readTweet: string;
-  viewDms: string;
-  viewTweets: string;
-  viewTweetsWithReplies: string;
-  viewMedia: string;
-  viewLiked: string;
-  viewList: string;
-  bookmarks: string;
-  notifs: string;
-  explore: string;
-  settings: string;
-  terms: string;
-  privacy: string;
-  browsing: string;
-  search: string;
-  searchSomething: string;
-  viewing: string;
-  profile: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       readTweet: "twitter.readTweet",
@@ -75,7 +54,7 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {

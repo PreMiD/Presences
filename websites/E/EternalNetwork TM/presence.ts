@@ -3,16 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-interface LangStrings {
-  buttonViewPage: string;
-  listeningMusic: string;
-  readingPost: string;
-  viewPage: string;
-  viewUser: string;
-  watchingVid: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       buttonViewPage: "general.buttonViewPage",
@@ -26,7 +17,7 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {

@@ -2,20 +2,7 @@ const presence: Presence = new Presence({
   clientId: "897325334200975360"
 });
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  browsing: string;
-  watchingMovie: string;
-  watchingSeries: string;
-  watchingLive: string;
-  watchEpisode: string;
-  watchVideo: string;
-  watchLive: string;
-  watchStream: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -33,8 +20,8 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: LangStrings,
-  oldLang: string,
+let strings = getStrings(),
+  oldLang: string = null,
   title: string,
   subtitle: string,
   groupWatchCount: number;
@@ -52,9 +39,9 @@ presence.on("UpdateData", async () => {
     } = {};
 
   // Update strings when user sets language
-  if (!oldLang || oldLang !== newLang) {
+  if (oldLang !== newLang) {
     oldLang = newLang;
-    strings = await getStrings();
+    strings = getStrings();
   }
 
   if (isHostSP) data.largeImageKey = "starplus-logo";
@@ -95,8 +82,8 @@ presence.on("UpdateData", async () => {
       } else {
         if (privacy) {
           data.state = subtitle
-            ? strings.watchingSeries
-            : strings.watchingMovie;
+            ? (await strings).watchingSeries
+            : (await strings).watchingMovie;
         } else {
           data.details = title;
           data.state = subtitle || "Movie";
@@ -104,7 +91,7 @@ presence.on("UpdateData", async () => {
       }
 
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused ? strings.pause : strings.play;
+      data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
       [data.startTimestamp, data.endTimestamp] = timestamps;
 
       // remove timestamps if video is paused or user disabled timestamps
@@ -123,7 +110,7 @@ presence.on("UpdateData", async () => {
       if (!privacy && buttons) {
         data.buttons = [
           {
-            label: subtitle ? strings.watchEpisode : strings.watchVideo,
+            label: subtitle ? (await strings).watchEpisode : (await strings).watchVideo,
             url: `https://www.starplus.com${location.pathname}`
           }
         ];
@@ -159,17 +146,17 @@ presence.on("UpdateData", async () => {
 
       if (!privacy) {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
-        data.state = strings.watchLive;
-      } else if (privacy) data.state = strings.watchingLive;
+        data.state = (await strings).watchLive;
+      } else if (privacy) data.state = (await strings).watchingLive;
 
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused ? strings.pause : strings.play;
+      data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
 
       // add buttons, if enabled
       if (!privacy && buttons) {
         data.buttons = [
           {
-            label: strings.watchStream,
+            label: (await strings).watchStream,
             url: `https://www.starplus.com${location.pathname}`
           }
         ];
@@ -222,7 +209,7 @@ presence.on("UpdateData", async () => {
 
     //Browsing
   } else {
-    data.details = strings.browsing;
+    data.details = (await strings).browsing;
     presence.setActivity(data);
   }
 });

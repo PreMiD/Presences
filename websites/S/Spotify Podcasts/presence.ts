@@ -9,35 +9,7 @@ let title: string,
   search: HTMLInputElement,
   recentlyCleared = 0;
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  featured: string;
-  bestPodcasts: string;
-  charts: string;
-  genres: string;
-  latest: string;
-  discover: string;
-  browse: string;
-  podcastLike: string;
-  artistLike: string;
-  albumLike: string;
-  songLike: string;
-  forMeh: string;
-  playlist: string;
-  viewPlaylist: string;
-  download: string;
-  viewing: string;
-  account: string;
-  search: string;
-  searchFor: string;
-  searchSomething: string;
-  browsing: string;
-  listening: string;
-  show: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -70,7 +42,7 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {

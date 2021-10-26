@@ -1,24 +1,17 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  viewPlaylist: string;
-  viewArtist: string;
-}
-
 const presence = new Presence({
-    clientId: "808756700022702120"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        viewPlaylist: "general.buttonViewPlaylist",
-        viewArtist: "general.buttonViewArtist"
-      },
-      await presence.getSetting("lang").catch(() => "en")
-    );
-  };
+  clientId: "808756700022702120"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      viewPlaylist: "general.buttonViewPlaylist",
+      viewArtist: "general.buttonViewArtist"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
 
 let fullscreen: boolean,
   player = false,
@@ -28,7 +21,7 @@ let fullscreen: boolean,
   timestamps,
   playlistLink,
   artistLink,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
