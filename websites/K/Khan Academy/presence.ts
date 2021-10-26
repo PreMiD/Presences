@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "900882829154598952",
+    clientId: "900882829154598952"
   }),
   strings = presence.getStrings({
     homepage: "general.viewHome",
@@ -7,13 +7,13 @@ const presence = new Presence({
     watching: "general.watching",
     reading: "general.readingAbout",
     writing: "general.writing",
-    profile: "general.viewProfile",
+    profile: "general.viewProfile"
   });
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "khanacademy",
-    details: (await strings).watching,
+    details: (await strings).watching
   };
 
   if (document.location.pathname === "/")
@@ -48,13 +48,15 @@ presence.on("UpdateData", async () => {
       "._io410w6, span._cmfzobe:nth-child(2) > a:nth-child(2)"
     ).textContent;
     data.state = `📋 ${document
-      .querySelector("._1eqoe4n8, span._cmfzobe:nth-child(3) > a:nth-child(2), #uid-dialog-0-title > span:nth-child(1)")
+      .querySelector(
+        "._1eqoe4n8, span._cmfzobe:nth-child(3) > a:nth-child(2), #uid-dialog-0-title > span:nth-child(1)"
+      )
       .textContent.replace(/.*?:\s+/, "")}`;
 
     if (document.location.pathname.match(/\/(v|a|e|quiz)\//)) {
       data.smallImageText = document.querySelector(
-          '._1l44zfj, [role="dialog"] [data-test-id="modal-title"]'
-        ).textContent;
+        '._1l44zfj, [role="dialog"] [data-test-id="modal-title"]'
+      ).textContent;
 
       if (document.location.pathname.includes("/v/"))
         data.smallImageKey = "video";

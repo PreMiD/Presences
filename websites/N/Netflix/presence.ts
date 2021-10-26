@@ -1,56 +1,35 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  browse: string;
-  viewingMovie: string;
-  viewingSeries: string;
-  account: string;
-  watchingMovie: string;
-  watchingSeries: string;
-  searchFor: string;
-  searchSomething: string;
-  genre: string;
-  viewSeries: string;
-  viewMovies: string;
-  viewEpisode: string;
-  viewList: string;
-  profile: string;
-  latest: string;
-  refer: string;
-}
-
 const presence = new Presence({
-    clientId: "499981204045430784"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        browse: "general.browsing",
-        viewingMovie: "general.viewMovie",
-        viewingSeries: "general.viewSeries",
-        account: "general.viewAccount",
-        watchingMovie: "general.watchingMovie",
-        watchingSeries: "general.watchingSeries",
-        searchFor: "general.searchFor",
-        searchSomething: "general.searchSomething",
-        genre: "general.viewGenre",
-        viewSeries: "general.buttonViewSeries",
-        viewMovies: "general.buttonViewMovie",
-        viewEpisode: "general.buttonViewEpisode",
-        viewList: "netflix.viewList",
-        profile: "netflix.profile",
-        latest: "netflix.latest",
-        refer: "netflix.referral"
-      },
-      await presence.getSetting("lang").catch(() => "en")
-    );
-  };
+  clientId: "499981204045430784"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      browse: "general.browsing",
+      viewingMovie: "general.viewMovie",
+      viewingSeries: "general.viewSeries",
+      account: "general.viewAccount",
+      watchingMovie: "general.watchingMovie",
+      watchingSeries: "general.watchingSeries",
+      searchFor: "general.searchFor",
+      searchSomething: "general.searchSomething",
+      genre: "general.viewGenre",
+      viewSeries: "general.buttonViewSeries",
+      viewMovies: "general.buttonViewMovie",
+      viewEpisode: "general.buttonViewEpisode",
+      viewList: "netflix.viewList",
+      profile: "netflix.profile",
+      latest: "netflix.latest",
+      refer: "netflix.referral"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {

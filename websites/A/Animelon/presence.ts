@@ -1,24 +1,17 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  viewSeries: string;
-  watchEpisode: string;
-}
-
 const presence = new Presence({
-    clientId: "806539630878261328"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        viewSeries: "general.buttonViewSeries",
-        watchEpisode: "general.buttonViewEpisode"
-      },
-      await presence.getSetting("lang")
-    );
-  };
+  clientId: "806539630878261328"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      viewSeries: "general.buttonViewSeries",
+      watchEpisode: "general.buttonViewEpisode"
+    },
+    await presence.getSetting("lang")
+  );
+}
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   video = {
@@ -34,7 +27,7 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   currentAnimeWatching: Array<string>,
   currentAnimeTitle: string,
   currentAnimeEpisode: string,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on(

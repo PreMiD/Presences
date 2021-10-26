@@ -1,32 +1,25 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  viewSeries: string;
-  viewMovie: string;
-  watchEpisode: string;
-}
-
 const presence = new Presence({
     clientId: "802964241179082822"
   }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        viewSeries: "general.buttonViewSeries",
-        viewMovie: "general.buttonViewMovie",
-        watchEpisode: "general.buttonViewEpisode"
-      },
-      await presence.getSetting("lang")
-    );
-  },
   nextEpisodeElement = document.querySelector(
     "div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(1) > a.ka-url-wrapper"
   ),
   previousEpisodeElement = document.querySelector(
     "div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(2) > a.ka-url-wrapper"
   );
+
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      viewSeries: "general.buttonViewSeries",
+      viewMovie: "general.buttonViewMovie",
+      watchEpisode: "general.buttonViewEpisode"
+    },
+    await presence.getSetting("lang")
+  );
+}
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   video = {
@@ -43,7 +36,7 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   currentAnimeEpisode: string,
   isMovie: boolean = null,
   episodeNumber,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 function checkIfMovie() {

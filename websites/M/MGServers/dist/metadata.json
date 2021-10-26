@@ -12,28 +12,28 @@
   ],
   "service": "MGServers",
   "description": {
-      "de": "MGServers ist ein Free-Server-Hoster, welcher unter anderem Terraria- und Minecraftserver kostenlos anbietet. Schau doch mal vorbei :)",
-      "en": "MGServers is a Free-Server-Hoster. They offer among other things Terraria and Minecraftservers for free. Go check them out :)"
-    },
+    "de": "MGServers ist ein Free-Server-Hoster, welcher unter anderem Terraria- und Minecraftserver kostenlos anbietet. Schau doch mal vorbei :)",
+    "en": "MGServers is a Free-Server-Hoster. They offer among other things Terraria and Minecraftservers for free. Go check them out :)"
+  },
   "url": [
       "mgservers.de",
       "webinterface.mgservers.de"
     ],
-  "version": "1.0.0",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/nQS9L0Y.png",
   "thumbnail": "https://i.imgur.com/gleOLQc.png",
   "color": "#335fb3",
-  "tags":  [
-      "hosting",
-      "gameserver",
-      "free",
-      "minecraft",
-      "discordbot",
-      "terraria",
-      "freehoster",
-      "server",
-      "mgservers"
-    ],
+  "tags": [
+    "hosting",
+    "gameserver",
+    "free",
+    "minecraft",
+    "discordbot",
+    "terraria",
+    "freehoster",
+    "server",
+    "mgservers"
+  ],
   "category": "other",
   "settings": [
     {

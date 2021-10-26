@@ -1,72 +1,7 @@
-interface LangStrings {
-  browse: string;
-  writing: string;
-  reading: string;
-  channelReading: string;
-  channelTyping: string;
-  dmReading: string;
-  dmTyping: string;
-  dmGroupReading: string;
-  dmGroupTyping: string;
-  friends: string;
-  nitro: string;
-  voiceConnectedWith: string;
-  voiceConnectedTo: string;
-  inCall: string;
-  calling: string;
-  settings: string;
-  serverSettings: string;
-  invite: string;
-  inviteServer: string;
-  buttonInvite: string;
-  browseThrough: string;
-  download: string;
-  why: string;
-  safety: string;
-  jobs: string;
-  company: string;
-  branding: string;
-  inspiration: string;
-  college: string;
-  newsroom: string;
-  partner: string;
-  verification: string;
-  streamkit: string;
-  opensource: string;
-  security: string;
-  moderation: string;
-  rpc: string;
-  policies: string;
-  portal: string;
-  appsBrowse: string;
-  appsEdit: string;
-  teamsBrowse: string;
-  teamsEdit: string;
-  serversBrowse: string;
-  serversEdit: string;
-  docs: string;
-  status: string;
-  viewing: string;
-  uptime: string;
-  incident: string;
-  incidentView: string;
-  helpCenter: string;
-  viewCategory: string;
-  searchFor: string;
-  searching: string;
-  readingArticle: string;
-  blog: string;
-  merch: string;
-  product: string;
-  collection: string;
-  viewPage: string;
-  shopCart: string;
-}
-
 const presence = new Presence({
     clientId: "616940877042155531"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
+  });
+  async function getStrings() {
     return presence.getStrings(
       {
         browse: "general.browsing",
@@ -134,11 +69,11 @@ const presence = new Presence({
       },
       await presence.getSetting("lang").catch(() => "en")
     );
-  };
+  }
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {

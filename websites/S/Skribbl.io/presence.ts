@@ -1,21 +1,17 @@
-interface LangStrings {
-  buttonJoinGame: string;
+const presence = new Presence({
+  clientId: "808664560936026122"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      buttonJoinGame: "kahoot.buttonJoinGame"
+    },
+    await presence.getSetting("lang")
+  );
 }
 
-const presence = new Presence({
-    clientId: "808664560936026122"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        buttonJoinGame: "kahoot.buttonJoinGame"
-      },
-      await presence.getSetting("lang")
-    );
-  };
-
 let elapsed = Math.floor(Date.now() / 1000),
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
