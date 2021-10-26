@@ -9,7 +9,8 @@ presence.on("UpdateData", () => {
       startTimestamp: elapsed,
       largeImageKey: "logo"
     };
-
+  let comics: number;
+  
   if (
     document.querySelector(".search-main-menu").classList.contains("active")
   ) {
@@ -22,32 +23,32 @@ presence.on("UpdateData", () => {
     if (/^\/$/.test(pathname)) data.details = "Viewing Home Page";
     else if (/^\/home1\/?$/.test(pathname)) {
       // Counting comics
-      let comics = document.querySelectorAll(
+      comics = document.querySelectorAll(
         ".page-listing-item .row .col-4"
       ).length;
       data.details = "Viewing Comic List";
-      data.state = "📋 " + comics.toString() + " comics found";
+      data.state = `📋 ${comics.toString()} comics found`;
     } else if (/^\/all-series\/novels+\/?$/.test(pathname)) {
       // Counting novels
-      let comics = document.querySelectorAll(
+      comics = document.querySelectorAll(
         ".page-listing-item .row .col-6"
       ).length;
       data.details = "Viewing Novel List";
-      data.state = "📋 " + comics.toString() + " novels found";
+      data.state = `📋 ${comics.toString()} novels found`;
     } else if (/^\/all-series\/comics\/manhwas\/?$/.test(pathname)) {
       // Counting manhwa
-      let comics = document.querySelectorAll(
+      comics = document.querySelectorAll(
         ".page-listing-item .row .col-6"
       ).length;
       data.details = "Viewing Manhwa List";
-      data.state = "📋 " + comics.toString() + " manhwa found";
+      data.state = `📋 ${comics.toString()} manhwa found`;
     } else if (/^\/all-series\/comics\/manhuas\/?$/.test(pathname)) {
       // Counting manhua
-      let comics = document.querySelectorAll(
+      comics = document.querySelectorAll(
         ".page-listing-item .row .col-4"
       ).length;
       data.details = "Viewing Manhua List";
-      data.state = "📋 " + comics.toString() + " manhua found";
+      data.state = `📋 ${comics.toString()} manhua found`;
     } else if (/^\/series\/[0-9a-z-]+\/?$/i.test(pathname)) {
       data.details = "Viewing Comic";
       data.state = document.querySelector(".post-title h1").textContent;

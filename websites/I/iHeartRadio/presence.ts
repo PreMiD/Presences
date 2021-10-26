@@ -69,9 +69,9 @@ presence.on("UpdateData", async () => {
         presence.clearActivity();
       }
     } else {
-      const timestamp = document.querySelector(
+      const [, timestamp] = document.querySelector(
         '[data-test="controls-container"]'
-      ).children[1];
+      ).children;
 
       title = playerText.children[0].textContent;
       song = playerText.children[1].textContent;

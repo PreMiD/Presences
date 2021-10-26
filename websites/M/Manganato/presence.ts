@@ -23,7 +23,7 @@ presence.on("UpdateData", () => {
     if (/^\/$/.test(pathname)) data.details = "Viewing Home Page";
     else if (/^\/genre-all\/?$/.test(pathname)) {
       // Counting manga
-      let manga = document.querySelector(".group-qty a").textContent;
+      const manga = document.querySelector(".group-qty a").textContent;
       data.details = "Viewing Manga List";
       data.state = `📋 ${manga.charAt(0).toUpperCase()}${manga
         .slice(1)

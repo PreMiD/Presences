@@ -4,7 +4,7 @@
   "author": "Timeraa",
   "license": "MPL-2.0",
   "scripts": {
-    "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
+    "pretty": "prettier --trailing-comma none --tab-width 2 --use-tabs false --end-of-line lf --prose-wrap always --write **/*.ts **/{metadata,tsconfig}.json",
     "inc": "npm run inc:compile && node ./util/tools/massVer.js",
     "inc:compile": "tsc -p ./util/configs/tsconfig.massVer.json",
     "su": "npm run su:compile && node ./util/tools/schemaUpdater.js",
