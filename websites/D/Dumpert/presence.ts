@@ -17,14 +17,6 @@ presence.on("UpdateData", async () => {
   if (page === "/" && !location.search) {
     presenceData.details = "Bekijkt:";
     presenceData.state = "De Home Pagina";
-    if (!privacy && buttons) {
-      presenceData.buttons = [
-        {
-          label: "Bekijk Homepagina",
-          url: pageh
-        }
-      ];
-    }
   } else if (pageh.includes("plaatjes")) {
     const element = document.querySelector('meta[property~="og:title"]');
     if (!element || privacy) {
