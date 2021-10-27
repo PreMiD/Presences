@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
       break;
     case "/peticiones":
       presenceData.details = "Viendo peticiones";
-      break;   
+      break; 
   }
 
   if (!presenceData.details) {
