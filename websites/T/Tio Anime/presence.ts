@@ -8,21 +8,7 @@ let video = {
   currentTime: 0,
   paused: true
 };
-  
-/**
-   * Get Timestamps
-   * @param {Number} videoTime Current video time seconds
-   * @param {Number} videoDuration Video duration seconds
-   */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-  
+
 presence.on(
   "iFrameData",
   (data: { duration: number; currentTime: number; paused: boolean }) => {
@@ -34,25 +20,32 @@ presence.on("UpdateData", async () => {
     largeImageKey: "tioanimelogo",
     startTimestamp: browsingStamp
   };
-  if (document.location.pathname === "/") presenceData.details = "En la página de inicio";
+  if (document.location.pathname === "/")
+    presenceData.details = "En la página de inicio";
   else if (document.location.pathname.includes("/anime/")) {
     presenceData.details = "Viendo lista de episodios:";
     presenceData.state = document.querySelector(".title").textContent;
   } else if (document.location.pathname.includes("/ver/")) {
     const capt = document.querySelector("h1").textContent;
     presenceData.details = "Viendo Anime:";
-    presenceData.state = `${capt.slice(0, -1)} capítulo ${capt.charAt(capt.length - 1)}`;
-    [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
-    presenceData.smallImageKey = (video.paused) ? "stop" : "play";
-    presenceData.smallImageText = (video.paused) ? "Capítulo pausado" : "Reproduciendo capítulo";
-    if(video.paused) {
+    presenceData.state = `${capt.slice(0, -1)} capítulo ${capt.charAt(
+      capt.length - 1
+    )}`;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
+    presenceData.smallImageKey = video.paused ? "stop" : "play";
+    presenceData.smallImageText = video.paused
+      ? "Capítulo pausado"
+      : "Reproduciendo capítulo";
+    if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-  } switch (document.location.pathname) {
+  }
+  switch (document.location.pathname) {
     case "/directorio":
       presenceData.details = "Viendo el directorio de animes";
       break;
