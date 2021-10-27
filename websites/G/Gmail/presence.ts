@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Promotions Mails";
     } else if (path.match("/#label/")) {
       const labelname = document.querySelector("head > title").textContent,
-      email = labelname.match(/([a-zA-Z][\w\.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z])/);
+      email = labelname.match(/([a-zA-Z][\w.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z.]*[a-zA-Z])/);
       presenceData.details = "In the Label: ";
       [presenceData.state] = labelname.replace('"', "").split('" - ')[0].replace(` - ${email[0]} - Gmail`, "");
     } else if (path.endsWith("/#settings/general")) {
