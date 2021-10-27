@@ -21,24 +21,30 @@
     "stats.truckersmp.com",
     "map.truckersmp.com"
   ],
-  "version": "2.0.2",
+  "version": "3.0.0",
   "logo": "https://i.imgur.com/ptddTU8.png",
   "thumbnail": "https://i.imgur.com/Z8CxsNw.png",
   "color": "#B92025",
-  "tags": [
-    "ets2",
-    "ats",
-    "scs",
-    "drive",
-    "truck"
-  ],
   "category": "games",
+  "tags": ["ets2", "ats", "scs", "drive", "truck"],
   "settings": [
     {
       "id": "buttons",
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
+    },
+    {
+      "id": "timestamp",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
     }
   ]
 }
