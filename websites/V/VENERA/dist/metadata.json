@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "VENERA",
+  "author": {
+    "name": "Dzardys",
+    "id": "523468146183634971"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/2VbemUj.png",
+  "thumbnail": "https://i.imgur.com/ssZD4YO.png",
+  "version": "1.0.0",
+  "color": "#6c05eb",
+  "tags": [
+    "games",
+    "rp",
+    "rpg",
+    "trpg",
+    "czech"
+  ],
+  "url": [
+    "venera.trpg.cz",
+    "trpg.cz"
+  ],
+  "description": {
+    "cz": "Discord RPC pro nové textové RPG VENERA.",
+    "en": "Discord RPC for whole new text RPG VENERA."
+  }
+}
