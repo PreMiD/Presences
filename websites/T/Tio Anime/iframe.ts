@@ -9,5 +9,4 @@ iframe.on("UpdateData", async () => {
       paused: video.paused
     });
   }
-  
 });
