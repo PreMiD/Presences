@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Tio Anime",
+  "author": {
+    "name": "! Yelo",
+    "id": "425326889565945856"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/KJUHptb.png",
+  "thumbnail": "https://i.imgur.com/vNi2bMS.png",
+  "version": "1.0.0",
+  "color": "#18142f",
+  "tags": [
+    "anime"
+  ],
+  "url": "tioanime.com",
+  "description": {
+    "en": "Watch any anime in spanish!",
+    "es": "Mira cualquier anime gratis en español1"
+  },
+  "iframe": true
+}
