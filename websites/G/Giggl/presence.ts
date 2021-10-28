@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "876239113307709493"
-}),
+    clientId: "876239113307709493"
+  }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
