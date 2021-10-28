@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Rune",
+    "id": "270125856679002113"
+  },
+  "contributors": [
+  ],
+  "service": "Nexus Love",
+  "description": {
+    "en": "Lovense Intregration for Duelingnexus.com",
+    "ro": "duelingnexus.com este un simulator gratuit de Yu-Gi-Oh online pentru browsere.",
+    "pt_BR": "duelingnexus.com é um simulador de Yu-Gi-Oh online gratuito para navegadores.",
+    "fr": "duelingnexus.com est un simulateur en ligne gratuit de Yu-Gi-Oh pour les navigateurs.",
+    "uk_UA": "duelingnexus.com не має симулятора, а також відвідає багато навігацій.",
+    "nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers"
+  },
+  "url": "duelingnexus.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/JFzVAdh.png",
+  "thumbnail": "https://i.imgur.com/7NXj9ih.jpg",
+  "color": "#FF4500",
+  "tags": [
+    "game",
+    "yu-gi-oh",
+    "browser",
+    "lovense",
+    "nsfw"
+  ],
+  "category": "games"
+}
