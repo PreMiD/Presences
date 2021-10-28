@@ -1,12 +1,9 @@
 let presence = new Presence({
   clientId: "884153055795372052"
 })
-
 let past: number;
 const browsingStamp = Math.floor(Date.now() / 1000);
-
 let toydata: any;
-
 function setdata(data: any) {
   if (data == {}){
     alert("Wrong toy connection, Please make your lovense connect app and your computer both on same network.")
@@ -18,12 +15,10 @@ function setdata(data: any) {
   localStorage.setItem(`battery`,` ${data[url]["toys"][toyx]["battery"]}`)
   localStorage.setItem("url", `https://${url}:${data[url]["httpsPort"]}`);
 }
-
 function vibrate(lp: number, level: number) {
   fetch(`${localStorage.getItem("url")}/AVibrate?v=${level}&sec=${lp}`)
 }
-const add_html = `
-<head>
+const add_html = `<head>
     <style>
         .xinput {
   background:transparent ;
@@ -64,8 +59,7 @@ const add_html = `
     </p>
     </details>
   </div>
-
-` ;
+`;
 
 let vibrator_count = 0 ;
 
@@ -76,7 +70,6 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "banner",
     startTimestamp: browsingStamp,
-    
   };
   presenceData.details = "DuelingNexus";
   presenceData.state = "playing shadow game";
@@ -86,20 +79,20 @@ presence.on("UpdateData", async () => {
       document.querySelector("#card-column").innerHTML += add_html;
       var xhd = localStorage.getItem("toytype")
       var phd = localStorage.getItem("toynickname")
-      var yhd = localStorage.getItem("battery") 
-      document.getElementById("toydetails").innerHTML ="Toy : "+ xhd + "( "+ phd + ") " + "<br>battery :" + yhd +"%" 
+      var yhd = localStorage.getItem("battery")
+      document.getElementById("toydetails").innerHTML ="Toy : "+ xhd + "( "+ phd + ") " + "<br>battery :" + yhd +"%"
     }
     let lp = document.querySelector("#game-life-player").innerHTML;
     presenceData.details = `with ${lp} LP`;
     if (past > +lp) {
-      var lp4sec = +document.getElementById("lpforsec").innerText ;
+      var lp4sec = +document.getElementById("lpforsec").innerText;
       var strength = +document.getElementById("vibrator-level").innerText * 20/100 ;
 
       console.log(`Lost ${past - (+lp)}`);
       vibrate( Math.ceil((past - (+lp))/lp4sec) , strength)
       vibrator_count+=1
     }
-    past = parseInt(lp)
+    past = parseInt(lp , 10)
     presenceData.details = `Got striked ${vibrator_count} times.`;
     presence.setActivity(presenceData, true);
   }
