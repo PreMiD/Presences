@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.5",
+    "author": {
+        "name": "Darths",
+        "id": "903294796536348702"
+    },
+    "service": "RickBot",
+    "url": "www.rickbot.net",
+    "description": {
+        "en": "RickBot is a very easy Discord bot to operate and manage, get started with rick-rolling your friends"
+    },
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/VY7Bj8g.png",
+    "thumbnail": "https://i.imgur.com/Xs5Za8H.png",
+    "color": "#996967",
+    "tags": [
+        "discord",
+        "bot"
+    ],
+    "category": "other"
+}
