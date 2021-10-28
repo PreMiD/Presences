@@ -91,7 +91,9 @@ presence.on("UpdateData", async () => {
       }
 
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+      data.smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
       [data.startTimestamp, data.endTimestamp] = timestamps;
 
       // remove timestamps if video is paused or user disabled timestamps
@@ -110,7 +112,9 @@ presence.on("UpdateData", async () => {
       if (!privacy && buttons) {
         data.buttons = [
           {
-            label: subtitle ? (await strings).watchEpisode : (await strings).watchVideo,
+            label: subtitle
+              ? (await strings).watchEpisode
+              : (await strings).watchVideo,
             url: `https://www.starplus.com${location.pathname}`
           }
         ];
@@ -150,7 +154,9 @@ presence.on("UpdateData", async () => {
       } else if (privacy) data.state = (await strings).watchingLive;
 
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+      data.smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
 
       // add buttons, if enabled
       if (!privacy && buttons) {
