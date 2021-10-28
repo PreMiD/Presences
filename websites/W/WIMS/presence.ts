@@ -147,6 +147,5 @@ presence.on("UpdateData", async () => {
   };
   if (loggedout) presence.setActivity();
   else presence.setActivity(presenceData);
-  if (EXNo !== undefined)
-    sessionStorage.setItem("TimeStampStorage", timestamp.toString());
+  if (EXNo) sessionStorage.setItem("TimeStampStorage", timestamp.toString());
 });

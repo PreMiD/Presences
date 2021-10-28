@@ -7,10 +7,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo"
   };
 
-  if (
-    document.getElementsByClassName("sics-component__headline__title")[0] ===
-    undefined
-  ) {
+  if (!document.getElementsByClassName("sics-component__headline__title")[0]) {
     if (
       document.URL === "https://www.stuff.co.nz/" ||
       document.URL === "https://www.stuff.co.nz"

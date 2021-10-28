@@ -117,9 +117,7 @@ presence.on("UpdateData", async () => {
         details: (await strings).recentUploads.includes("{0}")
           ? (await strings).recentUploads.split("{0}")[0]
           : (await strings).recentUploads,
-        state: (await strings).recentUploads.includes("{0}")
-          ? (await strings).recentUploads.split("{0}")[1]
-          : undefined,
+        state: (await strings).recentUploads.split("{0}")[1],
         smallImageKey: "reading"
       },
       "/my/": {
@@ -131,9 +129,7 @@ presence.on("UpdateData", async () => {
         details: (await strings).profileEdit.includes("{0}")
           ? (await strings).profileEdit.split("{0}")[0]
           : (await strings).profileEdit,
-        state: (await strings).profileEdit.includes("{0}")
-          ? (await strings).profileEdit.split("{0}")[1]
-          : undefined,
+        state: (await strings).profileEdit.split("{0}")[1],
         smallImageKey: "search"
       },
       "/my/watched/": {

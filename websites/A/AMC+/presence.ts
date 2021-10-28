@@ -15,11 +15,14 @@ presence.on("UpdateData", async () => {
     state: string,
     smallImageKey: string,
     smallImageText: string,
-    startTimestamp: number,
-    endTimestamp: number;
+    startTimestamp: number;
 
   const video: HTMLVideoElement = document.querySelector("video"),
-    { href } = window.location;
+    { href } = window.location,
+    data: PresenceData = {
+      largeImageKey: "amc",
+      details
+    };
 
   if (href !== oldUrl) {
     oldUrl = href;
@@ -29,7 +32,7 @@ presence.on("UpdateData", async () => {
   // Default details
   details = "Browsing catalogue...";
 
-  startTimestamp = elapsed;
+  data.startTimestamp = elapsed;
 
   if (video) {
     const slot1 = document.querySelector(".slot1"),
@@ -60,29 +63,19 @@ presence.on("UpdateData", async () => {
 
     smallImageKey = live ? "live" : video.paused ? "pause" : "play";
 
-    if (live) startTimestamp = elapsed;
-    endTimestamp = live ? undefined : timestamps[1];
+    if (live) data.startTimestamp = elapsed;
+    data.endTimestamp = live ? undefined : timestamps[1];
     if (video.paused) {
-      startTimestamp = undefined;
-      endTimestamp = undefined;
+      delete data.startTimestamp;
+      delete data.endTimestamp;
       if (!isSeries) state = "Paused";
     }
   }
 
-  const data: PresenceData = {
-    largeImageKey: "amc",
-    details
-  };
-
-  if (state !== undefined) data.state = state;
-
-  if (smallImageKey !== undefined) data.smallImageKey = smallImageKey;
-
-  if (smallImageText !== undefined) data.smallImageText = smallImageText;
-
-  if (startTimestamp !== undefined) data.startTimestamp = startTimestamp;
-
-  if (endTimestamp !== undefined) data.endTimestamp = endTimestamp;
+  if (state) data.state = state;
+  if (smallImageKey) data.smallImageKey = smallImageKey;
+  if (smallImageText) data.smallImageText = smallImageText;
+  if (startTimestamp) data.startTimestamp = startTimestamp;
 
   presence.setActivity(data);
   presence.setTrayTitle(details);

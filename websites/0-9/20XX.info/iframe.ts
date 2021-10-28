@@ -19,7 +19,6 @@ iframe.on("UpdateData", async () => {
 
   iframe.send({
     ...infoXX._premidData,
-    component: undefined,
     server:
       infoXX._premidData.page === "serverpage"
         ? infoXX._premidData.component.$data.server.location

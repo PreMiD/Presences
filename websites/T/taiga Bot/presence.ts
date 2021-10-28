@@ -11,7 +11,7 @@ function getRow(row: number) {
       return content === "" ? undefined : content;
     }
   }
-  return undefined;
+  return;
 }
 
 presence.on("UpdateData", async () => {

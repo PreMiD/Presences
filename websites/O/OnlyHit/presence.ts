@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     showElapsed = await presence.getSetting("tElapsed");
 
   //! Only needed due to a bug PreMiD has atm
-  if (info === undefined) {
+  if (!info) {
     format1 = '"%song%"';
     format2 = "by %artist%";
     info = true;

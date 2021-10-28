@@ -48,13 +48,8 @@ presence.on("UpdateData", async () => {
     songPlaying = song ? !song.paused : false;
 
   let data: PresenceData = {
-    details: undefined,
-    state: undefined,
     largeImageKey: "shazam",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
+    startTimestamp: elapsed
   };
 
   if (document.location.href !== prevUrl) {

@@ -22,7 +22,7 @@ let browsingStamp = Math.floor(Date.now() / 1000);
 function getText(selector: string): string {
   if (
     document.querySelector(selector) !== null &&
-    document.querySelector(selector) !== undefined
+    document.querySelector(selector)
   )
     return document.querySelector(selector).textContent;
   else return null;

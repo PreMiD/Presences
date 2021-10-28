@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
     } else x = `Game: ${name[0]}`;
 
     let stated;
-    if (name[1] === undefined) stated = "Platform: Multiple";
+    if (!name[1]) stated = "Platform: Multiple";
     else stated = `Platform: ${name[1]} `;
 
     //var year = document.getElementsByClassName("mw-headline")[1].innerText

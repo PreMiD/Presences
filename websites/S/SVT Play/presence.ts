@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
         "#titel > h1 > span:nth-child(2)"
       ).textContent;
       if (video !== null) {
-        if (video.duration === undefined) {
+        if (!video.duration) {
           time = false;
           live = false;
         } else if (video.duration === 9007199254740991) live = true;

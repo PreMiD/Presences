@@ -105,7 +105,9 @@ const presence = new Presence({
       },
       oldLang
     );
-  };
+  },
+  devLogoArr = ["dev-main", "dev-white", "dev-purple"],
+  logoArr = ["twitch", "black-ops", "white", "purple", "pride"];
 
 let strings = getStrings();
 
@@ -122,9 +124,7 @@ presence.on("UpdateData", async () => {
     streamDetail = await presence.getSetting("streamDetail"),
     streamState = await presence.getSetting("streamState"),
     logo: number = await presence.getSetting("logo"),
-    logoArr = ["twitch", "black-ops", "white", "purple", "pride"],
     devLogo: number = await presence.getSetting("devLogo"),
-    devLogoArr = ["dev-main", "dev-white", "dev-purple"],
     buttons = await presence.getSetting("buttons");
 
   oldLang ??= newLang;

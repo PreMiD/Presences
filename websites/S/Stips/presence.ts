@@ -344,7 +344,6 @@ presence.on("UpdateData", () => {
       ),
     data: PresenceData = {
       details: details || translate(isMale).default,
-      state: undefined,
       largeImageKey: "stips",
       smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",
       startTimestamp: elapsed,
