@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "JKAnime",
+  "author": {
+    "name": "! Yelo",
+    "id": "425326889565945856"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/kpTiwUb.png",
+  "thumbnail": "https://i.imgur.com/0wr2xhY.png",
+  "version": "1.0.0",
+  "color": "#FDA82E",
+  "tags": [
+    "anime",
+    "spanish"
+  ],
+  "url": "jkanime.net",
+  "description": {
+    "en": "The best site to watch Anime Online Free, watch the latest episodes of the anime of the moment without any restriction | watch Online & download",
+    "es": "La mejor pagina para Ver Anime Online Gratis, mira los ultimos capitulos de los animes del momento sin ninguna restriccion | ver Online y descargar"
+  },
+  "iframe": true
+}
