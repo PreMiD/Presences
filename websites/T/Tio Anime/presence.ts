@@ -8,7 +8,6 @@ let video = {
   currentTime: 0,
   paused: true
 };
-  
 /**
    * Get Timestamps
    * @param {Number} videoTime Current video time seconds
