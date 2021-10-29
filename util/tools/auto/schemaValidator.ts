@@ -66,14 +66,14 @@ const latestMetadataSchema = async (): Promise<string> => {
     const { service } = meta,
       result = validate(meta, schema),
       validLangs: string[] = (
-        await axios.post<langFiles>("https://api.premid.app/v3", {
-          query: `{ 
+        await axios.post<LanguageFiles>("https://api.premid.app/v3", {
+          query: `{
               langFiles(project: "presence") {
                 lang
               }
             }`
         })
-      ).data.langFiles.map((l: { lang: string }) => l.lang),
+      ).data.langFiles.map((l) => l.lang),
       invalidLangs: string[] = [];
 
     Object.keys(meta.description).forEach((lang) => {
@@ -126,7 +126,7 @@ interface metadata extends Metadata {
   schema: string;
 }
 
-interface langFiles {
+interface LanguageFiles {
   langFiles: [
     {
       lang: string;
