@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if(document.querySelector(".breadcrumb__links ") !== null) { 
+  if(document.querySelector(".breadcrumb__links ") !== null) {
     presenceData.details = "Viendo Anime:";
     presenceData.state = document.querySelector(".breadcrumb__links > h1").textContent;
     [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
