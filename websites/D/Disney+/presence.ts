@@ -90,7 +90,9 @@ presence.on("UpdateData", async () => {
       }
 
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+      data.smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
       [data.startTimestamp, data.endTimestamp] = timestamps;
 
       // remove timestamps if video is paused or user disabled timestamps
@@ -109,7 +111,9 @@ presence.on("UpdateData", async () => {
       if (!privacy && buttons) {
         data.buttons = [
           {
-            label: subtitle ? (await strings).watchEpisode : (await strings).watchVideo,
+            label: subtitle
+              ? (await strings).watchEpisode
+              : (await strings).watchVideo,
             url: `https://www.disneyplus.com${location.pathname}`
           }
         ];
@@ -188,13 +192,17 @@ presence.on("UpdateData", async () => {
       subtitle = subtitleField?.innerText; // episode or empty if it's a movie
 
       if (privacy)
-        data.state = subtitle ? (await strings).watchingSeries : (await strings).watchingMovie;
+        data.state = subtitle
+          ? (await strings).watchingSeries
+          : (await strings).watchingMovie;
       else {
         data.details = title;
         data.state = subtitle || "Movie";
       }
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+      data.smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
 
       if (video.paused || !time) {
         delete data.startTimestamp;

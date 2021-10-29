@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "logo"
     };
   let comics: number;
-  
+
   if (
     document.querySelector(".search-main-menu").classList.contains("active")
   ) {
