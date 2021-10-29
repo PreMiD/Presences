@@ -57,7 +57,6 @@ presence.on("UpdateData", () => {
     case document.location.hostname === "rickbot.net":
       presenceData.details = "Viewing Home";
       presenceData.state = "In the landing page";
-      break;
 
     // Custom Function Cases
     case getDashboardMenu():
