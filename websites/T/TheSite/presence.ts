@@ -219,11 +219,11 @@ presence.on("UpdateData", async () => {
       data.state = `Requests (${getElement(".nav-tabs > .active")})`;
     }
     if (path.includes("/collections")) {
-      let title = getElement(".page-videolist > h1");
-      title = title === "Loading..." ? undefined : title;
+      const title = getElement(".page-videolist > h1");
+
       data.details = "Browsing";
       data.state = "Collections";
-      if (title) {
+      if (title !== "Loading...") {
         data.details = "Browsing Collection";
         data.state = title;
       }
@@ -331,8 +331,8 @@ presence.on("UpdateData", async () => {
     ) {
       data.details = "Searching";
       data.state = searchText;
-      data.startTimestamp = elapsed ? elapsed : undefined;
-      data.endTimestamp = undefined;
+      data.startTimestamp = elapsed;
+      delete data.endTimestamp;
     }
   }
 

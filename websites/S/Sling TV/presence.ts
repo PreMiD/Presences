@@ -62,11 +62,11 @@ presence.on("UpdateData", async () => {
     video = document.querySelector(".bitmovinplayer-container video");
     if (video) {
       title = document.querySelector("title");
-      const timestamps = presence.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        live = timestamps[1] === Infinity;
+        live = endTimestamp === Infinity;
 
       details = getStateText(video.paused, live);
       if (title) {
@@ -81,8 +81,8 @@ presence.on("UpdateData", async () => {
         : video.paused
         ? (await strings).pause
         : (await strings).play;
-      data.startTimestamp = live ? elapsed : timestamps[0];
-      data.endTimestamp = live ? undefined : timestamps[1];
+      data.startTimestamp = live ? elapsed : startTimestamp;
+      if (!live) data.endTimestamp = endTimestamp;
       if (video.paused) {
         delete data.startTimestamp;
         delete data.endTimestamp;

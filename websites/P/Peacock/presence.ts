@@ -51,11 +51,11 @@ presence.on("UpdateData", async () => {
       title =
         document.querySelector(".playback-header__title") ||
         document.querySelector(".playback-metadata__container-title");
-      const timestamps = presence.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        live = timestamps[1] === Infinity,
+        live = endTimestamp === Infinity,
         desc =
           document.querySelector(
             ".playback-metadata__container-episode-metadata-info"
@@ -79,8 +79,10 @@ presence.on("UpdateData", async () => {
         : video.paused
         ? (await strings).pause
         : (await strings).play;
-      data.startTimestamp = live ? elapsed : timestamps[0];
-      data.endTimestamp = live ? undefined : timestamps[1];
+      data.startTimestamp = live ? elapsed : startTimestamp;
+      data.endTimestamp = endTimestamp;
+
+      if (live) delete data.endTimestamp;
       if (video.paused) {
         delete data.startTimestamp;
         delete data.endTimestamp;

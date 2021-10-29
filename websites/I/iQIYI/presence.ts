@@ -87,10 +87,9 @@ presence.on("UpdateData", async () => {
       isMovie = URLItem.includes("movie"),
       isVShow = URLItem.includes("variety-show"),
       possiblyVShow = document.location.pathname.includes("/intl-common/"),
-      isTrial =
-        document.querySelector(
-          ".iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip"
-        )?.textContent !== undefined,
+      isTrial = document.querySelector(
+        ".iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip"
+      )?.textContent,
       lastestEp: string[] = document
         .querySelector("div.broken-line")
         ?.nextSibling?.nextSibling?.nextSibling?.textContent?.match(

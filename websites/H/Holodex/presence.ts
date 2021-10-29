@@ -242,7 +242,7 @@ const /**
         case "watch":
           return `${getInfo.watch().channel}`;
         case "channel":
-          return path[2] === undefined
+          return !path[2]
             ? getInfo.channels().getCategory()
             : getInfo.channel().title;
         case "home":
