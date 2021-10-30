@@ -259,6 +259,7 @@ declare class Presence {
    * @param trayTitle Tray Title
    * @link https://docs.premid.app/dev/presence/class#settraytitlestring
    * @since 2.0-BETA3
+   * @deprecated since 2.2.3
    */
   setTrayTitle(trayTitle?: string): void;
   /**
