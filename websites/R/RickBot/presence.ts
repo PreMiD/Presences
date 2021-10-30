@@ -21,14 +21,15 @@ function getDashboardMenu(): boolean {
   if (!pathIncludes("/dashboard/s/")) return false;
 
   const dashboardMapper: Record<string, string> = {
-      "#serverInfo": "Viewing Server Info",
-      "#generalSettings": "Configuring Settings",
-      "#soundboard": "Editing Soundboard",
-      "#disabledCommands": "Managing disabled Commands",
-      "#getPremium": "Viewing Premium",
-      "#Vote": "Attempting to Vote"
+      "#serverInfo": "Server Info",
+      "#generalSettings": "General Settings",
+      "#soundboard": "Soundboard",
+      "#disabledCommands": "Disabled Commands",
+      "#getPremium": "Premium",
+      "#Vote": "Voting",
+      "#levels": "Levels"
     },
-    lastPath: string = window.location.pathname.split("/").pop();
+    lastPath: string = window.location.hash;
 
   dashboardState = dashboardMapper[lastPath];
 
@@ -45,22 +46,21 @@ function getSoundboardMenu() {
   return true;
 }
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   // Presence
   const presenceData: PresenceData = {
     largeImageKey: "rickastley",
     startTimestamp: timeElapsed
   };
 
-  switch (true) {
-    // Displays if user is on the landing page
-    case document.location.hostname === "rickbot.net":
-      presenceData.details = "Viewing Home";
-      presenceData.state = "In the landing page";
+  // Default State
+  if (document.location.hostname === "rickbot.net")
+    presenceData.details = "Landing Page";
 
+  switch (true) {
     // Custom Function Cases
     case getDashboardMenu():
-      presenceData.details = "Managing Dashboard:";
+      presenceData.details = "Viewing Dashboard:";
       presenceData.state = dashboardState;
       break;
     case getSoundboardMenu():
@@ -70,30 +70,25 @@ presence.on("UpdateData", () => {
 
     // Standard Cases
     case pathIncludes("/profile"):
-      presenceData.details = "Viewing Profile";
-      presenceData.state = "Looking at my profile";
+      presenceData.details = "Profile";
       break;
     case pathIncludes("/commands"):
-      presenceData.details = "Searching for Commands";
-      presenceData.state = "Looking for commands";
+      presenceData.details = "Commands";
       break;
     case pathIncludes("/player"):
-      presenceData.details = "Managing Player";
-      presenceData.state = "Managing music player";
+      presenceData.details = "Music Player";
       break;
     case pathIncludes("/vote"):
-      presenceData.details = "Attempting to Vote";
-      presenceData.state = "Voting for daily rewards";
+      presenceData.details = "Votes";
       break;
     case pathIncludes("/trends"):
-      presenceData.details = "Viewing RickStats";
-      presenceData.state = "Analysing bot metrics";
+      presenceData.details = "Metrics";
       break;
     case pathIncludes("/soundboards"):
-      presenceData.details = "Searching Soundboards";
+      presenceData.details = "Soundboard";
       break;
     case pathIncludes("/dashboard"):
-      presenceData.details = "Searching Dashboards";
+      presenceData.details = "Dashboard";
       break;
   }
 
