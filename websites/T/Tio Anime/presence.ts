@@ -9,11 +9,11 @@ let video = {
   paused: true
 };
 
-function getTimestamps(videoTime: number, videoDuration: number) {
+/*function getTimestamps(videoTime: number, videoDuration: number) {
   const startTime = Date.now(),
     endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
-}
+}*/
   
 presence.on(
   "iFrameData",
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
       const capt = document.querySelector("h1").textContent;
       presenceData.details = "Viendo Anime:";
       presenceData.state = `${capt.slice(0, -1)} capítulo ${capt.charAt(capt.length - 1)}`;
-      [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
+      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
