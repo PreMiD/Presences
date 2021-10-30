@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
     if (inputSelected) {
       presenceData.details = "Searching for:";
       presenceData.state =
-        inputSelected.value != "" ? inputSelected.value : "Nothing";
+        inputSelected.value !== "" ? inputSelected.value : "Nothing";
       presenceData.smallImageKey = "searching";
     } else {
       presenceData.details = "Viewing...";
@@ -160,11 +160,11 @@ presence.on("UpdateData", async () => {
     if (inputSelected) {
       presenceData.details = "Searching for:";
       presenceData.state =
-        inputSelected.value != "" ? inputSelected.value : "Nothing";
+        inputSelected.value !== "" ? inputSelected.value : "Nothing";
       presenceData.smallImageKey = "searching";
     } else {
       presenceData.details = "Searching...";
-      presenceData.state = presenceData.smallImageKey = "searching";
+      presenceData.smallImageKey = "searching";
     }
   } else if (document.location.pathname.startsWith("/home/account/edit"))
     presenceData.details = "Changing account settings...";
