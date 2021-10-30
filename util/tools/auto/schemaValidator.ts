@@ -73,7 +73,7 @@ const latestMetadataSchema = async (): Promise<string> => {
               }
             }`
         })
-      ).data.langFiles.map((l) => l.lang),
+      ).data.data.langFiles.map((l) => l.lang),
       invalidLangs: string[] = [];
 
     Object.keys(meta.description).forEach((lang) => {
@@ -127,9 +127,11 @@ interface metadata extends Metadata {
 }
 
 interface LanguageFiles {
-  langFiles: [
-    {
-      lang: string;
-    }
-  ];
+  data: {
+    langFiles: [
+      {
+        lang: string;
+      }
+    ];
+  };
 }
