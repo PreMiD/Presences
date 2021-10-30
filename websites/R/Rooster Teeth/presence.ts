@@ -114,7 +114,7 @@ presence.on("UpdateData", () => {
       path.includes("/g/all") ? "All " : ""
     }Groups`;
   }
-  if (video !== undefined) {
+  if (video) {
     if (live) {
       presenceData.smallImageKey = video.paused ? "livepause" : "live";
       presenceData.smallImageText = video.paused

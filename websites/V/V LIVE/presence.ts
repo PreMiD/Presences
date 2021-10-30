@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
     prevUrl = document.location.href;
     elapsed = Math.floor(Date.now() / 1000);
   }
-  const privacy = await presence.getSetting("privacy")
+  const privacy = await presence.getSetting("privacy");
 
   let presenceData: PresenceData = {
     largeImageKey: "vlive2",
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
     (searchPageValue =
       (document.querySelector("#searchForm > input") as HTMLInputElement)
         ?.value ?? "ERROR: NOT FOUND!");
-  };
+  }
 
   const path = location.pathname.replace(/\/?$/, "/"),
     showBrowsing = await presence.getSetting("browse"),

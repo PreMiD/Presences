@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing";
         presenceData.state = "Padlet Drive";
         break;
-      case undefined:
+      case null:
         type = document
           .querySelector(
             'body > div > div > div > div > nav > a[data-selected="true"]'

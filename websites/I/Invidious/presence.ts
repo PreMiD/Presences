@@ -63,11 +63,9 @@ presence.on("UpdateData", async () => {
         .getElementsByTagName("h1")[0]
         .textContent.trim();
       presenceData.state = document.getElementById("channel-name").textContent;
-      presenceData.startTimestamp = document.getElementsByClassName(
-        "vjs-playing"
-      )[0]
-        ? getTime()
-        : undefined;
+      if (document.getElementsByClassName("vjs-playing")[0])
+        presenceData.startTimestamp = getTime();
+
       break;
 
     case "playlist":

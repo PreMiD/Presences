@@ -8,7 +8,7 @@ function getRow(row: number) {
   for (let i = 0; i < metas.length; i++) {
     if (metas[i].getAttribute("property") === `premid:row${row}`) {
       const content = metas[i].getAttribute("content");
-      return content === "" ? undefined : content;
+      return content;
     }
   }
   return;

@@ -140,7 +140,6 @@ presence.on("UpdateData", async () => {
         document.body.className.includes("chatOnly") ||
         !document.getElementById("videowrap")
       ),
-      activeContent = Boolean(iFrameResponse.site),
       [room] = path.split("r/"),
       motd: string = document.getElementById("motd").textContent;
 
@@ -155,7 +154,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = "Waiting";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
-        if (activeContent) setVideo(iFrameResponse);
+        if (iFrameResponse?.site) setVideo(iFrameResponse);
       } else {
         const video = document
           .getElementById("videowrap")

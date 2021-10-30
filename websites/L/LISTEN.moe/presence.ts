@@ -25,10 +25,11 @@ function resetTimestamp() {
 
 function getArtists(): string {
   artists = [];
-  elemt = document.querySelector("span.ja.player-song-artist-container")
-    ? document.querySelector("span.ja.player-song-artist-container").childNodes
-    : undefined;
-  if (elemt !== undefined) {
+  elemt = document.querySelector(
+    "span.ja.player-song-artist-container"
+  )?.childNodes;
+
+  if (elemt) {
     for (let i = 0; i < elemt.length; i++)
       artists.push(elemt[i].textContent.replace(/\s+/g, " ").trim());
 
@@ -69,7 +70,7 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("music")) {
     track = (document.querySelectorAll("input.search")[1] as HTMLInputElement)
       .value;
-    track = track === "" ? undefined : track;
+
     presenceData.details = "Searching for a music";
     presenceData.state = track;
     presenceData.smallImageKey = "search";
