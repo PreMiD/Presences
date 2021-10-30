@@ -8,12 +8,6 @@ let video = {
   currentTime: 0,
   paused: true
 };
-
-/*function getTimestamps(videoTime: number, videoDuration: number) {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}*/
   
 presence.on(
   "iFrameData",
