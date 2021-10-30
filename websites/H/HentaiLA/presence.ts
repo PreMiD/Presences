@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
   if (document.location.pathname === "/") presenceData.details = "En la página de inicio";
-  else if (document.location.pathname.includes("/genero/")) 
+  else if (document.location.pathname.includes("/genero/"))
     presenceData.details = `Viendo género ${document.querySelector(".section-title").textContent.split(":")[1]}`;
   else if (document.location.pathname.includes("/ver/")) {
     presenceData.details = "Viendo Hentai:";
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-  } 
+  }
   if(document.querySelector(".hentai-single")) {
     presenceData.details = "Viendo lista capítulos:";
     presenceData.state = document.querySelector(".h-title").textContent;
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
       break;
     case "/peticiones":
       presenceData.details = "Viendo peticiones";
-      break; 
+      break;
     case "/hentai-sin-censura":
       presenceData.details = "Viendo la lista sin censura";
       break;
