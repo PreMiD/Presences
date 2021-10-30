@@ -48,8 +48,8 @@ presence.on("UpdateData", async () => {
         : video.paused
         ? (await strings).pause
         : (await strings).play),
-      (data.startTimestamp = live ? elapsed : timestamps[0]),
-      (data.endTimestamp = live ? undefined : timestamps[1]);
+      (data.startTimestamp = live ? elapsed : timestamps[0]);
+    if (!live) [, data.endTimestamp] = timestamps;
 
     if (video.paused) {
       delete data.startTimestamp;

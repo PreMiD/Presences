@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "online_sequencer_icon",
     startTimestamp: timestart
   };
-  if (document.getElementsByClassName("fas fa-stop")[0] !== undefined) {
+  if (document.getElementsByClassName("fas fa-stop")[0]) {
     prevPage = currPage;
     currPage = "l";
     presenceData.details = "Listening to a sequence";
@@ -102,9 +102,7 @@ presence.on("UpdateData", async () => {
   } else if (!isNaN(parseInt(document.location.pathname.substr(1)))) {
     prevPage = currPage;
     currPage = "s";
-    if (
-      document.getElementsByClassName("active tooltipstered")[0] === undefined
-    ) {
+    if (document.getElementsByClassName("active tooltipstered")[0]) {
       presenceData.details = "Viewing a sequence";
       presenceData.buttons = [
         { label: "View Sequence", url: window.location.href },

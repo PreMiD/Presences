@@ -130,7 +130,7 @@ presence.on("UpdateData", () => {
           Math.floor(Date.now() / 1000) -
           Math.floor(video.currentTime) +
           Math.floor(video.duration);
-      } else presenceData.startTimestamp = undefined;
+      } else delete presenceData.startTimestamp;
     }
   }
 

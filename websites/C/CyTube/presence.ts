@@ -86,7 +86,7 @@ class VideoData {
   paused = true;
   duration = 0;
   currentTime = 0;
-  site: string = undefined;
+  site: string;
 }
 
 let iFrameResponse = new VideoData();
@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
         document.body.className.includes("chatOnly") ||
         !document.getElementById("videowrap")
       ),
-      activeContent: boolean = iFrameResponse.site !== undefined,
+      activeContent = Boolean(iFrameResponse.site),
       [room] = path.split("r/"),
       motd: string = document.getElementById("motd").textContent;
 
