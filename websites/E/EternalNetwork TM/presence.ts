@@ -13,7 +13,7 @@ async function getStrings() {
       viewUser: "general.viewUser",
       watchingVid: "general.watchingVid"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en"),
   );
 }
 
@@ -21,7 +21,7 @@ let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang"),
+  const newLang: string = await presence.getSetting("lang").catch(() => "en"),
     showTimestamps = await presence.getSetting("timestamp"),
     showSubdomain = await presence.getSetting("subdomain"),
     bigicon = await presence.getSetting("bigicon"),
