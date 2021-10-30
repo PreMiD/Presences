@@ -26,7 +26,10 @@ presence.on("UpdateData", () => {
           /([a-zA-Z][\w.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z.]*[a-zA-Z])/
         );
       presenceData.details = "In the Label: ";
-      presenceData.state = labelname.replace('"', "").split('" - ')[0].replace(` - ${email[0]} - Gmail`, "");
+      presenceData.state = labelname
+        .replace('"', "")
+        .split('" - ')[0]
+        .replace(` - ${email[0]} - Gmail`, "");
     } else if (path.endsWith("/#settings/general"))
       presenceData.details = "In the General settings";
     else if (path.endsWith("/#settings/labels"))

@@ -77,7 +77,7 @@ const latestMetadataSchema = async (): Promise<string> => {
             }`
           }
         })
-      ).data.langFiles.map(l => l.lang),
+      ).data.langFiles.map((l) => l.lang),
       invalidLangs: string[] = [];
 
     Object.keys(meta.description).forEach((lang) => {
