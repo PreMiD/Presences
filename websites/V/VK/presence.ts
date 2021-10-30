@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "514771696134389760"
   }),
-  localeStrings: { [stringPath: string]: object } = {
+  localeStrings: { [stringPath: string]: Record<string, string> } = {
     en: {
       Chatting: "Browsing PM's...",
       Watching: "Watching",

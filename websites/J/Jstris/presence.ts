@@ -136,7 +136,7 @@ function getUsername() {
       .getElementsByClassName("dropdown-toggle")[1]
       .textContent.replace(/\n/g, "");
   } catch (err) {
-    return undefined;
+    return;
   }
 }
 

@@ -17,8 +17,7 @@ presence.on("UpdateData", () => {
     const testActive =
       document.querySelector("#resultsContent").textContent === "";
 
-    if (live.chrOk === undefined || (live.chrOk === 0 && live.chrKo === 0))
-      presenceData.state = vars.ready;
+    if (live?.chrOk === 0 && live?.chrKo === 0) presenceData.state = vars.ready;
     else
       presenceData.state = `${live.worPm} wpm, ${live.points} ${vars.points}, ${live.chrAcc}% ${vars.accuracy}`;
 

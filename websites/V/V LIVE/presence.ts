@@ -94,9 +94,7 @@ presence.on("UpdateData", async () => {
     productPageChannel = document.querySelector("a.name")
       ? document.querySelector("a.name").textContent
       : "ERROR: NOT FOUND!",
-    searchPageValue = privacy
-      ? undefined
-      : document.querySelector("#searchForm > input")
+    searchPageValue = document.querySelector("#searchForm > input")
       ? (document.querySelector("#searchForm > input") as HTMLInputElement)
           .value
       : "ERROR: NOT FOUND!",

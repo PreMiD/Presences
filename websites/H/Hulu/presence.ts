@@ -33,7 +33,6 @@ presence.on("UpdateData", async () => {
   }
 
   details = "Browsing";
-  state = undefined;
   startTimestamp = elapsed;
 
   if (path.includes("/hub")) {

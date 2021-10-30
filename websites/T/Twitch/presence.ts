@@ -6,9 +6,7 @@ const presence = new Presence({
     clientId: "802958789555781663"
   }),
   getElement = (query: string): string | undefined => {
-    return document.querySelector(query)
-      ? document.querySelector(query).textContent
-      : undefined;
+    return document.querySelector(query)?.textContent;
   },
   getStrings = async () => {
     return presence.getStrings(
@@ -155,20 +153,18 @@ presence.on("UpdateData", async () => {
             game =
               document.querySelector("a[data-a-target='stream-game-link']")
                 ?.textContent || "Just Chatting";
-          presenceData.details =
-            title && streamer
-              ? streamDetail
-                  .replace("%title%", title)
-                  .replace("%streamer%", streamer)
-                  .replace("%game%", game)
-              : undefined;
-          presenceData.state =
-            title && streamer
-              ? streamState
-                  .replace("%title%", title)
-                  .replace("%streamer%", streamer)
-                  .replace("%game%", game)
-              : undefined;
+
+          if (title && streamer) {
+            presenceData.details = streamDetail
+              .replace("%title%", title)
+              .replace("%streamer%", streamer)
+              .replace("%game%", game);
+
+            presenceData.state = streamState
+              .replace("%title%", title)
+              .replace("%streamer%", streamer)
+              .replace("%game%", game);
+          }
           presenceData.smallImageKey = "live";
           presenceData.smallImageText = (await strings).live;
           if (buttons) {
@@ -190,20 +186,18 @@ presence.on("UpdateData", async () => {
             game =
               document.querySelector("a[data-a-target='stream-game-link']")
                 ?.textContent || "Just Chatting";
-          presenceData.details =
-            title && uploader
-              ? vidDetail
-                  .replace("%title%", title)
-                  .replace("%uploader%", uploader)
-                  .replace("%game%", game)
-              : undefined;
-          presenceData.state =
-            title && uploader
-              ? vidState
-                  .replace("%title%", title)
-                  .replace("%uploader%", uploader)
-                  .replace("%game%", game)
-              : undefined;
+
+          if (title && uploader) {
+            presenceData.details = vidDetail
+              .replace("%title%", title)
+              .replace("%uploader%", uploader)
+              .replace("%game%", game);
+
+            presenceData.state = vidState
+              .replace("%title%", title)
+              .replace("%uploader%", uploader)
+              .replace("%game%", game);
+          }
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = (await strings).play;
 
@@ -412,7 +406,7 @@ presence.on("UpdateData", async () => {
         ) as HTMLInputElement;
 
         presenceData.details = (await strings).searchingFor;
-        presenceData.state = search ? search.value : undefined;
+        presenceData.state = search?.value;
         presenceData.smallImageKey = "search";
       }
 
@@ -699,9 +693,7 @@ presence.on("UpdateData", async () => {
           details: `${(await strings).blogs} | ${
             (await strings).readingArticle
           }`,
-          state: document.querySelector(".c-page-heading__text")
-            ? document.querySelector(".c-page-heading__text").textContent
-            : undefined
+          state: document.querySelector(".c-page-heading__text")?.textContent
         }
       };
 
@@ -731,17 +723,13 @@ presence.on("UpdateData", async () => {
         },
         "/s/topic/": {
           details: (await strings).helpTopic,
-          state: document.querySelector(".headlineTitle")
-            ? document.querySelector(".headlineTitle").textContent
-            : undefined
+          state: document.querySelector(".headlineTitle")?.textContent
         },
         "/s/article/": {
           details: `${(await strings).help} | ${
             (await strings).readingArticle
           }`,
-          state: document.querySelector(".articleTitle")
-            ? document.querySelector(".articleTitle").textContent
-            : undefined
+          state: document.querySelector(".articleTitle")?.textContent
         }
       };
 
@@ -801,9 +789,7 @@ presence.on("UpdateData", async () => {
           details: `${(await strings).devDocs} | ${
             (await strings).readingAbout
           }`,
-          state: document.querySelector(".text-content > h1")
-            ? document.querySelector(".text-content > h1").textContent
-            : undefined
+          state: document.querySelector(".text-content > h1")?.textContent
         }
       };
 
@@ -835,25 +821,19 @@ presence.on("UpdateData", async () => {
           details: `${(await strings).dev} (${(await strings).forums}) | ${
             (await strings).viewCategory
           }`,
-          state: document.querySelector(".category-name")
-            ? document.querySelector(".category-name").textContent
-            : undefined
+          state: document.querySelector(".category-name")?.textContent
         },
         "/t/": {
           details: `${(await strings).dev} (${(await strings).forums}) | ${
             (await strings).thread
           }`,
-          state: document.querySelector(".fancy-title")
-            ? document.querySelector(".fancy-title").textContent
-            : undefined
+          state: document.querySelector(".fancy-title")?.textContent
         },
         "/u/": {
           details: `${(await strings).dev} (${(await strings).forums}) | ${
             (await strings).user
           }`,
-          state: document.querySelector(".username")
-            ? document.querySelector(".username").textContent
-            : undefined
+          state: document.querySelector(".username")?.textContent
         }
       };
 
@@ -885,9 +865,7 @@ presence.on("UpdateData", async () => {
         },
         "/incidents/": {
           details: `Status page | ${(await strings).viewing}`,
-          state: document.querySelector(".page-title > div")
-            ? document.querySelector(".page-title > div").textContent
-            : undefined
+          state: document.querySelector(".page-title > div")?.textContent
         },
         "/history/": {
           details: `Status page | ${(await strings).viewing}`,

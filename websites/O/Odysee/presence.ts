@@ -59,16 +59,12 @@ presence.on("UpdateData", async () => {
           : document.querySelector(
               "div.media__subtitle > a.button--uri-indicator"
             ),
-        uploaderTag: HTMLElement = floatingViewer
-          ? undefined
-          : document.querySelector(
-              "div.card__main-actions div.media__subtitle  span.channel-name"
-            );
+        uploaderTag = document.querySelector(
+          "div.card__main-actions div.media__subtitle  span.channel-name"
+        )?.textContent;
       if (title && uploaderName) {
         presenceData.details = title.textContent;
-        presenceData.state =
-          uploaderName.textContent +
-          (uploaderTag ? ` ${uploaderTag.textContent}` : "");
+        presenceData.state = uploaderName.textContent + uploaderTag;
         presenceData.smallImageKey = "paused";
         presenceData.smallImageText = "Paused";
 
