@@ -8,6 +8,10 @@
     {
       "name": "TheSlowly",
       "id": "505071508851523599"
+    },
+    {
+      "name": "Dark_Ville",
+      "id": "638080361179512853"
     }
   ],
   "service": "osu!ppy",
@@ -36,8 +40,6 @@
   "logo": "https://i.imgur.com/IWWqSYR.png",
   "thumbnail": "https://i.imgur.com/6YEJ9sY.png",
   "color": "#FF66AA",
-  "tags": [
-    "games"
-  ],
+  "tags": ["games"],
   "category": "games"
 }
