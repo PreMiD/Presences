@@ -80,19 +80,19 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-        presenceData.buttons = [
-          {
-            label: `Watch ${isLive ? "live" : "video"}`,
-            url: window.location.href
-          }
-        ];
-
         if (video.paused) dontShowTmp = true;
         else
           presenceData.endTimestamp = presence
             .getTimestampsfromMedia(video)
             .pop();
       }
+
+      presenceData.buttons = [
+        {
+          label: `Watch ${isLive ? "live" : "video"}`,
+          url: window.location.href
+        }
+      ];
     }
   } else if (document.location.pathname.includes("/photo/")) {
     if (privacyMode) presenceData.details = "Viewing a photo";
