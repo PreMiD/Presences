@@ -28,6 +28,8 @@ presence.on("UpdateData", async () => {
     showSeachQuery = await presence.getSetting("searchQuery"),
     messagerUsername = await presence.getSetting("messagerUsername");
 
+  let dontShowTmp = false;
+
   if (document.location.pathname.includes("/messages/")) {
     presenceData.largeImageKey = "messenger";
 
@@ -63,9 +65,10 @@ presence.on("UpdateData", async () => {
     if (privacyMode)
       presenceData.details = `Watching a ${isLive ? "live" : "video"}`;
     else {
-      const username = document.querySelector(
-        "span.nc684nl6 > span"
-      )?.textContent;
+      const username =
+        document.querySelector("span.nc684nl6 > span")?.textContent ||
+        document.querySelector("span.nc684nl6 > a > strong > span")
+          ?.textContent;
 
       presenceData.details = `Watching a ${isLive ? "live" : "video"} on:`;
       presenceData.state = `${username}'s profile`;
@@ -77,20 +80,37 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-        presenceData.endTimestamp = presence
-          .getTimestampsfromMedia(video)
-          .pop();
+        if (video.paused) dontShowTmp = true;
+        else
+          presenceData.endTimestamp = presence
+            .getTimestampsfromMedia(video)
+            .pop();
       }
+
+      presenceData.buttons = [
+        {
+          label: `Watch ${isLive ? "live" : "video"}`,
+          url: window.location.href
+        }
+      ];
     }
   } else if (document.location.pathname.includes("/photo/")) {
     if (privacyMode) presenceData.details = "Viewing a photo";
     else {
-      const username = document.querySelector(
-        "span.nc684nl6 > span"
-      )?.textContent;
+      const username =
+        document.querySelector("span.nc684nl6 > span")?.textContent ||
+        document.querySelector("span.nc684nl6 > a > strong > span")
+          ?.textContent;
 
       presenceData.details = "Viewing a photo on:";
       presenceData.state = `${username}'s profile'`;
+
+      presenceData.buttons = [
+        {
+          label: "View photo",
+          url: window.location.href
+        }
+      ];
     }
   } else if (document.location.pathname.includes("/watch")) {
     const search = new URLSearchParams(location.search).get("q"),
@@ -105,7 +125,10 @@ presence.on("UpdateData", async () => {
 
       if (videoFrame) {
         const video = videoFrame.querySelector("video"),
-          title = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
+          user = videoFrame.querySelector(
+            "span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5"
+          )?.textContent,
+          description = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
           isLive = !!videoFrame.querySelector(
             "div.j83agx80.rgmg9uty.pmk7jnqg.rnx8an3s.fcg2cn6m"
           );
@@ -117,13 +140,13 @@ presence.on("UpdateData", async () => {
         } else {
           if (isLive) {
             presenceData.details = "Wattch - Watching a live:";
-            presenceData.state = title;
+            presenceData.state = description || user;
 
             presenceData.smallImageKey = "live";
             presenceData.smallImageText = "Live";
           } else {
-            presenceData.details = "Watch - Watcing a video:";
-            presenceData.state = title;
+            presenceData.details = "Watch - Watching a video:";
+            presenceData.state = description || user;
 
             presenceData.smallImageText = "Playing";
             presenceData.smallImageKey = "play";
@@ -212,6 +235,73 @@ presence.on("UpdateData", async () => {
         } else presenceData.details = "Groups";
       }
     }
+  } else if (document.location.pathname.includes("/friends")) {
+    presenceData.details = "Friends";
+
+    if (document.location.pathname.includes("/friends/requests")) {
+      if (
+        document.querySelector(
+          "div.cjfnh4rs.l9j0dhe7.du4w35lb.j83agx80.cbu4d94t"
+        )
+      )
+        presenceData.state = "Sent requests";
+      else presenceData.state = "Requests";
+    } else if (document.location.pathname.includes("/friends/suggestions"))
+      presenceData.state = "Suggestions";
+    else if (document.location.pathname.includes("/friends/list"))
+      presenceData.state = "All friends";
+    else if (document.location.pathname.includes("/friends/birthdays"))
+      presenceData.state = "Birthdays";
+    else if (document.location.pathname.includes("/friends/friendlist"))
+      presenceData.state = "Custom lists";
+    else if (presenceData.state) delete presenceData.state;
+  } else if (document.location.pathname.includes("/events")) {
+    presenceData.details = "Events";
+    presenceData.state = "Home";
+
+    if (document.location.pathname.includes("/events/calendar/"))
+      presenceData.state = "Calendar";
+    else if (document.location.pathname.includes("/events/going"))
+      presenceData.state = "Confirmed";
+    else if (document.location.pathname.includes("/events/invites"))
+      presenceData.state = "Invites";
+    else if (document.location.pathname.includes("/events/interested"))
+      presenceData.state = "Interested";
+    else if (document.location.pathname.includes("/events/hosting"))
+      presenceData.state = "Self-hosted events";
+    else if (document.location.pathname.includes("/events/past"))
+      presenceData.state = "Past events";
+    else if (document.location.pathname.includes("/events/birthdays"))
+      presenceData.state = "Birthdays";
+    else if (document.location.pathname.includes("/events/notifications"))
+      presenceData.state = "Notifications";
+    else if (document.location.pathname.includes("/events/create"))
+      presenceData.state = "Creating event";
+    else if (document.location.pathname.includes("/events/search")) {
+      if (!privacyMode) {
+        presenceData.details = "Events - Search";
+        presenceData.state = document.querySelectorAll<HTMLInputElement>(
+          "label.rq0escxv.a8c37x1j.a5nuqjux.l9j0dhe7.k4urcfbm > input.oajrlxb2.rq0escxv.f1sip0of.hidtqoto[type='search']"
+        )?.[1]?.value;
+      } else presenceData.state = "Search";
+    } else if (/events\/[0-9]/g.test(document.location.pathname)) {
+      if (!privacyMode) {
+        presenceData.details = "Events - Viewing";
+        presenceData.state = document.querySelector(
+          "span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.pby63qed"
+        )?.textContent;
+
+        presenceData.buttons = [
+          {
+            label: "View Event",
+            url: `https://www.facebook.com/events/${document.location.pathname.replace(
+              /^\D+/g,
+              ""
+            )}`
+          }
+        ];
+      } else presenceData.state = "Viewing event";
+    }
   } else if (document.location.pathname.includes("/pages/"))
     presenceData.details = "Pages - Browsing";
   else if (document.location.pathname.includes("/oculus/"))
@@ -220,9 +310,81 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Events - Browsing";
   else if (document.location.pathname.includes("/games/"))
     presenceData.details = "Games - Browsing";
-  else if (document.location.pathname.includes("/gaming/"))
-    presenceData.details = "Gaming - Browsing";
-  else if (document.location.pathname.includes("/salegroups/"))
+  else if (document.location.pathname.includes("/gaming/")) {
+    presenceData.details = "Gaming";
+
+    if (document.location.pathname.includes("/gaming/feed"))
+      presenceData.state = "Feed";
+    else if (document.location.pathname.includes("/gaming/following"))
+      presenceData.state = "Following";
+    else if (document.location.pathname.includes("/gaming/browse/")) {
+      presenceData.details = "Gaming - Browsing";
+
+      if (document.location.pathname.includes("/gaming/browse/games"))
+        presenceData.state = "Games";
+      else if (document.location.pathname.includes("/gaming/browse/live"))
+        presenceData.state = "Livestreams";
+      else if (document.location.pathname.includes("/gaming/browse/streamers"))
+        presenceData.state = "Streamers";
+    } else if (document.location.pathname.includes("/gaming/recent/")) {
+      presenceData.details = "Gaming - Recent";
+
+      if (document.location.pathname.includes("/gaming/recent/activity"))
+        presenceData.state = "Activity";
+      else if (document.location.pathname.includes("/gaming/recent/streamers"))
+        presenceData.state = "Streamer";
+      else if (document.location.pathname.includes("/gaming/recent/history"))
+        presenceData.state = "Videos";
+    } else if (document.location.pathname.includes("/gaming/tournaments")) {
+      presenceData.details = "Gaming - Tournaments";
+
+      if (document.location.pathname.includes("/gaming/tournaments/hosted"))
+        presenceData.state = "Self-hosted";
+      else if (
+        document.location.pathname.includes("/gaming/tournaments/registered")
+      )
+        presenceData.state = "Participated";
+      else if (
+        document.location.pathname.includes("/gaming/tournaments/completed")
+      )
+        presenceData.state = "Completed";
+      else {
+        presenceData.details = "Gaming";
+        presenceData.state = "Tournaments";
+      }
+    } else if (document.location.pathname.includes("/gaming/play")) {
+      presenceData.details = "Gaming - Play";
+
+      if (/gaming\/play\/[0-9]/g.test(document.location.pathname)) {
+        if (!privacyMode) {
+          presenceData.state = document.querySelector(
+            "span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5.ojkyduve"
+          )?.textContent;
+
+          presenceData.buttons = [
+            {
+              label: "Play Game",
+              url: `https://www.facebook.com/gaming/play/${document.location.pathname.replace(
+                /^\D+/g,
+                ""
+              )}`
+            }
+          ];
+        } else {
+          presenceData.details = "Gaming";
+          presenceData.state = "Play";
+        }
+      } else if (document.location.pathname.includes("/gaming/play/registered"))
+        presenceData.state = "Participated";
+      else if (document.location.pathname.includes("/gaming/play/completed"))
+        presenceData.state = "Completed";
+      else {
+        presenceData.details = "Gaming";
+        presenceData.state = "Play";
+      }
+    } else if (document.location.pathname.includes("/gaming/instantgames/"))
+      presenceData.state = "Instant games";
+  } else if (document.location.pathname.includes("/salegroups/"))
     presenceData.details = "SaleGroups - Browsing";
   else if (document.location.pathname.includes("/jobs/"))
     presenceData.details = "Jobs - Browsing";
@@ -238,6 +400,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Recommendations - Browsing";
   else if (document.location.pathname.includes("/bookmarks"))
     presenceData.details = "Bookmarks - Browsing";
+  else if (document.location.pathname.includes("/news"))
+    presenceData.details = "News - Browsing";
   else if (document.location.pathname.includes("/search")) {
     const query = new URLSearchParams(location.search).get("q");
 
@@ -264,10 +428,14 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = `Viewing ${hasCheckInTab ? "user" : "page"}:`;
     presenceData.state = name;
-  } else if (document.location.pathname === "/")
+  } else if (document.location.pathname.includes("/settings"))
+    presenceData.details = "Settings";
+  else if (document.location.pathname.includes("/places"))
+    presenceData.details = "Places";
+  else if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
 
-  if (!showTimestamp) {
+  if (!showTimestamp || dontShowTmp) {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }
