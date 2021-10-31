@@ -2,7 +2,7 @@ name: DePloY
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "**.ts"
       - "**.json"
