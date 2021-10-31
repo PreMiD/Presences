@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.buttons = [
         {
-          label: `View photo`,
+          label: "View photo",
           url: window.location.href
         }
       ];
