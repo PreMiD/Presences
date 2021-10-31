@@ -22,16 +22,21 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Promotions Mails";
     else if (path.match("/#label/")) {
       const labelname = document.querySelector("head > title").textContent,
-      email = labelname.match(/([a-zA-Z][\w.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z.]*[a-zA-Z])/);
+        email = labelname.match(
+          /([a-zA-Z][\w.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z.]*[a-zA-Z])/
+        );
       presenceData.details = "In the Label: ";
-      presenceData.state = labelname.replace('"', "").split('" - ')[0].replace(` - ${email[0]} - Gmail`, "");
+      presenceData.state = labelname
+        .replace('"', "")
+        .split('" - ')[0]
+        .replace(` - ${email[0]} - Gmail`, "");
     } else if (path.endsWith("/#settings/general"))
       presenceData.details = "In the General settings";
     else if (path.endsWith("/#settings/labels"))
       presenceData.details = "In the Labels settings";
     else if (path.endsWith("/#settings/inbox")) {
       presenceData.details = "In the settings of the";
-      presenceData.state = "Inbox Mails"
+      presenceData.state = "Inbox Mails";
     } else if (path.endsWith("/#settings/accounts"))
       presenceData.details = "In the Account settings";
     else if (path.endsWith("/#settings/filters"))
@@ -52,30 +57,20 @@ presence.on("UpdateData", () => {
     else if (path.match("/#search/"))
       presenceData.details = "Looking for a mail";
     else presenceData.details = "Viewing an Email";
-  } else if (path.endsWith("inbox"))
-    presenceData.details = "Viewing Inbox";
+  } else if (path.endsWith("inbox")) presenceData.details = "Viewing Inbox";
   else if (path.endsWith("compose=new"))
     presenceData.details = "Composing a New Email";
-  else if (path.endsWith("starred"))
-    presenceData.details = "Viewing Starred";
-  else if (path.endsWith("snoozed"))
-    presenceData.details = "Viewing Snoozed";
-  else if (path.endsWith("sent"))
-    presenceData.details = "Viewing Sent";
-  else if (path.endsWith("drafts"))
-    presenceData.details = "Viewing Drafts";
-  else if (path.endsWith("imp"))
-    presenceData.details = "Viewing Important";
-  else if (path.endsWith("chats"))
-    presenceData.details = "Viewing Chats";
+  else if (path.endsWith("starred")) presenceData.details = "Viewing Starred";
+  else if (path.endsWith("snoozed")) presenceData.details = "Viewing Snoozed";
+  else if (path.endsWith("sent")) presenceData.details = "Viewing Sent";
+  else if (path.endsWith("drafts")) presenceData.details = "Viewing Drafts";
+  else if (path.endsWith("imp")) presenceData.details = "Viewing Important";
+  else if (path.endsWith("chats")) presenceData.details = "Viewing Chats";
   else if (path.endsWith("scheduled"))
     presenceData.details = "Viewing Scheduled";
-  else if (path.endsWith("all"))
-    presenceData.details = "Viewing All Mail";
-  else if (path.endsWith("spam"))
-    presenceData.details = "Viewing Spam";
-  else if (path.endsWith("trash"))
-    presenceData.details = "Viewing Trash";
+  else if (path.endsWith("all")) presenceData.details = "Viewing All Mail";
+  else if (path.endsWith("spam")) presenceData.details = "Viewing Spam";
+  else if (path.endsWith("trash")) presenceData.details = "Viewing Trash";
   else if (path.endsWith("#category/social"))
     presenceData.details = "Viewing Social Mails";
   else presenceData.details = "Viewing Mail";

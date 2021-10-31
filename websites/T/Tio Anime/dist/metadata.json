@@ -8,7 +8,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/KJUHptb.png",
   "thumbnail": "https://i.imgur.com/vNi2bMS.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#18142f",
   "tags": [
     "anime"
@@ -20,16 +20,16 @@
   },
   "settings": [
     {
-      "id" : "privacy",
+      "id": "privacy",
       "title": "Modo Incógnito",
       "icon": "fad fa-user-secret",
-      "value" : false
+      "value": false
     },
     {
-      "id" : "buttons",
+      "id": "buttons",
       "title": "Mostrar botones",
       "icon": "fas fa-compress-arrows-alt",
-      "value" : true
+      "value": true
     }
   ],
   "iframe": true
