@@ -280,9 +280,11 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/events/search")) {
       if (!privacyMode) {
         presenceData.details = "Events - Search";
-        presenceData.state = document.querySelectorAll(
-          "label.rq0escxv.a8c37x1j.a5nuqjux.l9j0dhe7.k4urcfbm > input.oajrlxb2.rq0escxv.f1sip0of.hidtqoto[type='search']"
-        )?.[1]?.value;
+        presenceData.state = (<HTMLInputElement>(
+          document.querySelectorAll(
+            "label.rq0escxv.a8c37x1j.a5nuqjux.l9j0dhe7.k4urcfbm > input.oajrlxb2.rq0escxv.f1sip0of.hidtqoto[type='search']"
+          )?.[1]
+        )).value;
       } else presenceData.state = "Search";
     } else if (/events\/[0-9]/g.test(document.location.pathname)) {
       if (!privacyMode) {
