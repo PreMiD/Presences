@@ -28,6 +28,8 @@ presence.on("UpdateData", async () => {
     showSeachQuery = await presence.getSetting("searchQuery"),
     messagerUsername = await presence.getSetting("messagerUsername");
 
+  let dontShowTmp = false;
+
   if (document.location.pathname.includes("/messages/")) {
     presenceData.largeImageKey = "messenger";
 
@@ -63,9 +65,7 @@ presence.on("UpdateData", async () => {
     if (privacyMode)
       presenceData.details = `Watching a ${isLive ? "live" : "video"}`;
     else {
-      const username = document.querySelector(
-        "span.nc684nl6 > span"
-      )?.textContent;
+      const username = document.querySelector("span.nc684nl6 > span")?.textContent || document.querySelector("span.nc684nl6 > a > strong > span")?.textContent;
 
       presenceData.details = `Watching a ${isLive ? "live" : "video"} on:`;
       presenceData.state = `${username}'s profile`;
@@ -77,9 +77,19 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-        presenceData.endTimestamp = presence
-          .getTimestampsfromMedia(video)
-          .pop();
+        presenceData.buttons = [
+          {
+            label: `Watch ${isLive ? "live" : "video"}`,
+            url: window.location.href
+          }
+        ];
+
+        if (video.paused)
+          dontShowTmp = true;
+        else
+          presenceData.endTimestamp = presence
+            .getTimestampsfromMedia(video)
+            .pop();
       }
     }
   } else if (document.location.pathname.includes("/photo/")) {
@@ -105,7 +115,8 @@ presence.on("UpdateData", async () => {
 
       if (videoFrame) {
         const video = videoFrame.querySelector("video"),
-          title = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
+          user = videoFrame.querySelector("span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5")?.textContent,
+          description = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
           isLive = !!videoFrame.querySelector(
             "div.j83agx80.rgmg9uty.pmk7jnqg.rnx8an3s.fcg2cn6m"
           );
@@ -117,13 +128,13 @@ presence.on("UpdateData", async () => {
         } else {
           if (isLive) {
             presenceData.details = "Wattch - Watching a live:";
-            presenceData.state = title;
+            presenceData.state = description || user;
 
             presenceData.smallImageKey = "live";
             presenceData.smallImageText = "Live";
           } else {
             presenceData.details = "Watch - Watching a video:";
-            presenceData.state = title;
+            presenceData.state = description || user;
 
             presenceData.smallImageText = "Playing";
             presenceData.smallImageKey = "play";
@@ -267,7 +278,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
 
-  if (!showTimestamp) {
+  if (!showTimestamp || dontShowTmp) {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }
