@@ -223,6 +223,48 @@ presence.on("UpdateData", async () => {
         } else presenceData.details = "Groups";
       }
     }
+  } else if (document.location.pathname.includes("/friends")) {
+    presenceData.details = "Friends";
+
+    if (document.location.pathname.includes("/friends/requests")) {
+      if (document.querySelector("div.cjfnh4rs.l9j0dhe7.du4w35lb.j83agx80.cbu4d94t")) presenceData.state = "Sent requests";
+      else presenceData.state = "Requests";
+    } else if (document.location.pathname.includes("/friends/suggestions")) presenceData.state = "Suggestions";
+    else if (document.location.pathname.includes("/friends/list")) presenceData.state = "All friends";
+    else if (document.location.pathname.includes("/friends/birthdays")) presenceData.state = "Birthdays";
+    else if (document.location.pathname.includes("/friends/friendlist")) presenceData.state = "Custom lists";
+    else if (presenceData.state) delete presenceData.state;
+  } else if (document.location.pathname.includes("/events")) {
+    presenceData.details = "Events";
+    presenceData.state = "Home";
+
+    if (document.location.pathname.includes("/events/calendar/")) presenceData.state = "Calendar";
+    else if (document.location.pathname.includes("/events/going")) presenceData.state = "Confirmed";
+    else if (document.location.pathname.includes("/events/invites")) presenceData.state = "Invites";
+    else if (document.location.pathname.includes("/events/interested")) presenceData.state = "Interested";
+    else if (document.location.pathname.includes("/events/hosting")) presenceData.state = "Self-hosted events";
+    else if (document.location.pathname.includes("/events/past")) presenceData.state = "Past events";
+    else if (document.location.pathname.includes("/events/birthdays")) presenceData.state = "Birthdays";
+    else if (document.location.pathname.includes("/events/notifications")) presenceData.state = "Notifications";
+    else if (document.location.pathname.includes("/events/create")) presenceData.state = "Creating event";
+    else if (document.location.pathname.includes("/events/search")) {
+      if (!privacyMode) {
+        presenceData.details = "Events - Search";
+        presenceData.state = document.querySelectorAll("label.rq0escxv.a8c37x1j.a5nuqjux.l9j0dhe7.k4urcfbm > input.oajrlxb2.rq0escxv.f1sip0of.hidtqoto[type='search']")?.[1]?.value;
+      } else presenceData.state = "Search";
+    } else if (/events\/[0-9]/g.test(document.location.pathname)) {
+      if (!privacyMode) {
+        presenceData.details = "Events - Viewing";
+        presenceData.state = document.querySelector("span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.pby63qed")?.textContent;
+
+        presenceData.buttons = [
+          {
+            label: "View Event",
+            url: `https://www.facebook.com/events/${document.location.pathname.replace(/^\D+/g, "")}`
+          }
+        ];
+      } else presenceData.state = "Viewing event";
+    }
   } else if (document.location.pathname.includes("/pages/"))
     presenceData.details = "Pages - Browsing";
   else if (document.location.pathname.includes("/oculus/"))
