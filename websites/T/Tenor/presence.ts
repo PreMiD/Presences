@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(".partnername").textContent;
     presenceData.buttons = [
       {
-        label: "Look user",
+        label: "View User",
         url: document.URL
       }
     ];
