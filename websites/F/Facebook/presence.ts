@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "live";
             presenceData.smallImageText = "Live";
           } else {
-            presenceData.details = "Watch - Watcing a video:";
+            presenceData.details = "Watch - Watching a video:";
             presenceData.state = title;
 
             presenceData.smallImageText = "Playing";
