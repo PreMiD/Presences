@@ -58,9 +58,5 @@ presence.on("UpdateData", async () => {
         break;
     }
   }
-
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
