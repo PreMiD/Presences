@@ -30,7 +30,16 @@ presence.on("UpdateData", async () => {
     extra = "...";
 
   const { href } = window.location,
-    path = window.location.pathname;
+    path = window.location.pathname,
+    data: PresenceData = {
+      details,
+      state,
+      largeImageKey: "slingtv",
+      smallImageKey,
+      smallImageText,
+      startTimestamp,
+      endTimestamp
+    };
 
   if (href !== oldUrl) {
     oldUrl = href;
@@ -47,50 +56,40 @@ presence.on("UpdateData", async () => {
 
   if (path.includes("/browse/search")) details = "Searching...";
 
-  state = undefined;
-  startTimestamp = elapsed;
+  data.startTimestamp = elapsed;
 
   if (path.includes("/watch")) {
     video = document.querySelector(".bitmovinplayer-container video");
     if (video) {
       title = document.querySelector("title");
-      const timestamps = presence.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        live = timestamps[1] === Infinity;
+        live = endTimestamp === Infinity;
 
       details = getStateText(video.paused, live);
       if (title) {
         details = title.textContent
           .replace(/^Watching\s/i, "")
           .replace("| Sling TV", "");
-        state = getStateText(video.paused, live);
+        data.state = getStateText(video.paused, live);
       }
-      smallImageKey = live ? "live" : video.paused ? "pause" : "play";
-      smallImageText = live
+      data.smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+      data.smallImageText = live
         ? (await strings).live
         : video.paused
         ? (await strings).pause
         : (await strings).play;
-      startTimestamp = live ? elapsed : timestamps[0];
-      endTimestamp = live ? undefined : timestamps[1];
+      data.startTimestamp = live ? elapsed : startTimestamp;
+      if (!live) data.endTimestamp = endTimestamp;
       if (video.paused) {
-        startTimestamp = undefined;
-        endTimestamp = undefined;
+        delete data.startTimestamp;
+        delete data.endTimestamp;
       }
     }
   }
 
-  const data: PresenceData = {
-    details,
-    state,
-    largeImageKey: "slingtv",
-    smallImageKey,
-    smallImageText,
-    startTimestamp,
-    endTimestamp
-  };
   presence.setActivity(data, video ? !video.paused : true);
   presence.setTrayTitle(details);
 });

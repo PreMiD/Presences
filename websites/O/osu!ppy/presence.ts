@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "The Download Page";
     presenceData.smallImageKey = "searching";
   } else if (document.location.pathname.startsWith("/home/news")) {
-    if (document.location.pathname.split("/")[3] !== undefined) {
+    if (document.location.pathname.split("/")[3]) {
       presenceData.details = "Reading...";
       presenceData.state = "An osu! News Page";
       presenceData.smallImageKey = "reading";

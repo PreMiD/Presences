@@ -32,7 +32,7 @@ let strings = getStrings(),
   paused: boolean;
 
 presence.on("iFrameData", (data: IFrameData) => {
-  playback = data.iframeVideo?.duration !== undefined ? true : false;
+  playback = data.iframeVideo?.duration ? true : false;
 
   if (playback) ({ duration, currentTime, paused } = data.iframeVideo);
 });

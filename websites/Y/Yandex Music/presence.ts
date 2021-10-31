@@ -14,7 +14,7 @@ function getMillisecondsFromString(timeString: string): number {
 }
 
 function isPodcast(): boolean {
-  return document.getElementsByClassName("track__podcast")[0] !== undefined;
+  return !!document.getElementsByClassName("track__podcast")[0];
 }
 
 const getData = async (): Promise<void> => {

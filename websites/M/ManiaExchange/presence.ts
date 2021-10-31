@@ -132,7 +132,7 @@ const updateCallback = {
         "Searching for a map"
       );
       updateCallback.function = (): void => {
-        presenceData.state = getURLParam("trackname") || undefined;
+        presenceData.state = getURLParam("trackname");
       };
     } else if (
       currentPath[0] === "tracksearch" ||
@@ -158,7 +158,7 @@ const updateCallback = {
       // Valid on TrackMania² and Trackmania (2020) only
       updateCallback.function = (): void => {
         presenceData.details = "Searching for a mappack";
-        presenceData.state = getURLParam("name") || undefined;
+        presenceData.state = getURLParam("name");
       };
     } else if (currentPath[0] === "mappack") {
       // Valid on TrackMania² and Trackmania (2020) only
@@ -182,7 +182,7 @@ const updateCallback = {
       // Valid on TrackMania² and Trackmania (2020) only
       presenceData.details = "Searching for a record";
       updateCallback.function = (): void => {
-        presenceData.state = getURLParam("name") || undefined;
+        presenceData.state = getURLParam("name");
       };
     } else if (currentPath[0] === "leaderboard") {
       // Valid on TrackMania² and Trackmania (2020) only
@@ -261,7 +261,7 @@ const updateCallback = {
       presenceData.details = "Viewing a page";
       presenceData.state = "Support";
     } else if (currentPath[0] === "messaging") {
-      if (currentPath[1] === "index" || currentPath[1] === undefined)
+      if (currentPath[1] === "index" || !currentPath[1])
         presenceData.details = "Viewing thier private messages";
       else if (currentPath[1] === "compose")
         presenceData.details = "Writing a private message";
@@ -308,12 +308,12 @@ const updateCallback = {
     } else if (currentPath[0] === "itemsearch") {
       presenceData.details = "Searching for an item";
       updateCallback.function = (): void => {
-        presenceData.state = getURLParam("itemname") || undefined;
+        presenceData.state = getURLParam("itemname");
       };
     } else if (currentPath[0] === "setsearch") {
       presenceData.details = "Searching for a set";
       updateCallback.function = (): void => {
-        presenceData.state = getURLParam("setname") || undefined;
+        presenceData.state = getURLParam("setname");
       };
     } else if (currentPath[0] === "blocks")
       presenceData.details = "Searching for a block";
@@ -350,7 +350,7 @@ const updateCallback = {
       } else if (currentPath[1] === "edit")
         presenceData.details = "Editing their account information";
     } else if (currentPath[0] === "messaging") {
-      if (currentPath[1] === "index" || currentPath[1] === undefined)
+      if (currentPath[1] === "index" || !currentPath[1])
         presenceData.details = "Viewing thier private messages";
       else if (currentPath[1] === "compose")
         presenceData.details = "Writing a private message";

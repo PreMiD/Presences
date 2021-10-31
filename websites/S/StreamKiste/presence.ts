@@ -189,7 +189,7 @@ function getQuery() {
       return result
         .then((data) => {
           if (
-            lastPageIndex !== undefined &&
+            lastPageIndex &&
             lastPageIndex !== pageIndex &&
             pages[lastPageIndex] &&
             typeof pages[lastPageIndex].destroy === "function"

@@ -191,11 +191,11 @@ presence.on("UpdateData", async () => {
       title = titleField?.innerText;
       subtitle = subtitleField?.innerText; // episode or empty if it's a movie
 
-      if (privacy)
+      if (privacy) {
         data.state = subtitle
           ? (await strings).watchingSeries
           : (await strings).watchingMovie;
-      else {
+      } else {
         data.details = title;
         data.state = subtitle || "Movie";
       }

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "514771696134389760"
   }),
-  localeStrings: { [stringPath: string]: string } = {
+  localeStrings: { [stringPath: string]: Record<string, string> } = {
     en: {
       Chatting: "Browsing PM's...",
       Watching: "Watching",
@@ -21,11 +21,8 @@ function getLocale(): string {
   return window.navigator.language.replace("-", "_").toLowerCase();
 }
 
-function getLocalizedString(stringPath): string {
-  if (
-    localeStrings[getLocale()] !== undefined &&
-    localeStrings[getLocale()][stringPath] !== undefined
-  )
+function getLocalizedString(stringPath: string): string {
+  if (localeStrings[getLocale()] && localeStrings[getLocale()][stringPath])
     return localeStrings[getLocale()][stringPath];
   else {
     presence.info(`Language for [${stringPath}] was not found!`);

@@ -181,13 +181,7 @@ presence.on("UpdateData", async () => {
     showBrowseInfo = await presence.getSetting("browse"),
     showVideoInfo = await presence.getSetting("video"),
     data: PresenceData = {
-      details: undefined,
-      state: undefined,
-      largeImageKey: "thesite",
-      smallImageKey: undefined,
-      smallImageText: undefined,
-      startTimestamp: undefined,
-      endTimestamp: undefined
+      largeImageKey: "thesite"
     };
 
   if (oldUrl !== path) {
@@ -225,11 +219,11 @@ presence.on("UpdateData", async () => {
       data.state = `Requests (${getElement(".nav-tabs > .active")})`;
     }
     if (path.includes("/collections")) {
-      let title = getElement(".page-videolist > h1");
-      title = title === "Loading..." ? undefined : title;
+      const title = getElement(".page-videolist > h1");
+
       data.details = "Browsing";
       data.state = "Collections";
-      if (title) {
+      if (title !== "Loading...") {
         data.details = "Browsing Collection";
         data.state = title;
       }
@@ -337,8 +331,8 @@ presence.on("UpdateData", async () => {
     ) {
       data.details = "Searching";
       data.state = searchText;
-      data.startTimestamp = elapsed ? elapsed : undefined;
-      data.endTimestamp = undefined;
+      data.startTimestamp = elapsed;
+      delete data.endTimestamp;
     }
   }
 

@@ -37,9 +37,7 @@ let oldLang: string = null,
 
 presence.on("iFrameData", (data: IFrameData) => {
   playback =
-    (data.iframeVideo?.duration || data.iframeAudio.duration) !== undefined
-      ? true
-      : false;
+    data.iframeVideo?.duration || data.iframeAudio.duration ? true : false;
   if (playback) {
     VideoMedia = data.iframeVideo;
     SoundMedia = data.iframeAudio;

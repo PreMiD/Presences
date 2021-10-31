@@ -62,13 +62,8 @@ presence.on("UpdateData", async () => {
     showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
-    details: undefined,
-    state: undefined,
     largeImageKey: "sololearn",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
+    startTimestamp: elapsed
   };
 
   if (document.location.href !== prevUrl) {

@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       document.querySelector<HTMLImageElement>(
         ".av-detail-section > div > h1 > div > img"
       )?.alt;
-  if (title !== undefined || title2 !== undefined) {
+  if (title || title2) {
     let video: HTMLVideoElement = document.querySelector(
       ".scalingVideoContainer > div.scalingVideoContainerBottom > div > video"
     );
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "playing";
         presenceData.smallImageText = (await strings).playing;
       }
-    } else if (title2 !== undefined) {
+    } else if (title2) {
       presenceData.details = "Viewing:";
       presenceData.state = title2;
     } else if (document.location.pathname.includes("shop"))

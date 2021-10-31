@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading Wiki";
     // don't include state for wiki creation discussion etc.
     if (
-      document.getElementById("page-title") !== undefined &&
+      document.getElementById("page-title") &&
       !document.location.pathname.includes("index.php") &&
       !hideDetails
     )

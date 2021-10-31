@@ -176,7 +176,7 @@ function getQuery() {
           })
         );
         return result.then((data) => {
-          if (data?.details === undefined) {
+          if (!data?.details) {
             data.details = strings.browsing;
             presence.setTrayTitle();
             presence.setActivity();

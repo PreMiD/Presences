@@ -475,9 +475,7 @@ const updateCallback = {
               /* The page is not supported. Whoops. */
             } else logHandler.pageNotSupported(true);
 
-            // console.groupEnd()
             presence.success("Done!");
-            // console.info(`Presence:\n${presenceData.details}\n${presenceData.state}\n\ncurrentPath: ${currentURL.pathname}\nloadedPath: ${loadedPath}\nBoth values same?: ${loadedPath === currentURL.pathname}\nforceUpdate: ${forceUpdate}\n\n${loadedPath === currentURL.pathname || forceUpdate}`)
             presenceDataPlaced = presenceData;
             forceUpdate = false;
             retries = 0;
@@ -486,11 +484,8 @@ const updateCallback = {
             retries++;
             resetData();
             presenceData.details = "Loading...";
-            // if (retries === 1) console.groupCollapsed("Loading or retrying...")
-            // console.log(`${retries}/30`)
-
             if (retries === 30) {
-              updateCallback.function = (): void => undefined;
+              updateCallback.function = (): void => void 0;
               logHandler.fatalError(error);
             }
           }
@@ -515,7 +510,6 @@ const updateCallback = {
               loadedChannel = channel();
               try {
                 presenceData.state = channel();
-                // console.groupEnd()
                 presenceDataPlaced = presenceData;
                 forceUpdate = false;
                 retries = 0;
@@ -524,10 +518,8 @@ const updateCallback = {
                 retries++;
                 resetData();
                 presenceData.details = "Loading...";
-                // if (retries === 1) console.groupCollapsed("Loading or retrying...")
-                // console.log(`${retries}/30`)
                 if (retries === 30) {
-                  updateCallback.function = (): void => undefined;
+                  updateCallback.function = (): void => void 0;
                   logHandler.fatalError(error);
                 }
               }
@@ -541,7 +533,6 @@ const updateCallback = {
       currentURL.hostname === "portfolio.deviantart.com"
     )
       presenceData.details = "Creating a portfolio";
-    // } else if (currentURL.hostname === "*.daportfolio.com") { /* Trying to avoid using regex, for this time. */
     else if (currentURL.hostname === "shop.deviantart.com") {
       if (getURLParam("q")) {
         presenceData.details = "Searching something on the shop";
@@ -552,8 +543,7 @@ const updateCallback = {
           ".browse-facet-product ul li .selected"
         );
         li.forEach((v) => {
-          if (presenceData.state === undefined)
-            presenceData.state = v.textContent;
+          if (!presenceData.state) presenceData.state = v.textContent;
           else presenceData.state += ` > ${v.textContent}`;
         });
       }
@@ -627,7 +617,6 @@ const updateCallback = {
                   throw new Error("No title found on Sta.sh");
             }
 
-            // console.groupEnd()
             presenceDataPlaced = presenceData;
             forceUpdate = false;
             retries = 0;
@@ -636,11 +625,8 @@ const updateCallback = {
             retries++;
             resetData();
             presenceData.details = "Loading...";
-            // if (retries === 1) console.groupCollapsed("Loading or retrying...")
-            // console.log(`${retries}/30`)
-
             if (retries === 30) {
-              updateCallback.function = (): void => undefined;
+              updateCallback.function = (): void => void 0;
               logHandler.fatalError(error);
             }
           }

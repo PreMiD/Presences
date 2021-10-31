@@ -44,7 +44,6 @@
     "template-curly-spacing": "warn",
     "no-console": "error",
     "no-var": "error",
-    "no-undef": "off",
     "no-restricted-syntax": [
       "error",
       {
@@ -53,8 +52,9 @@
       }
     ],
     "@typescript-eslint/no-explicit-any": "error",
-    "radix": 0,
-    "no-eval": "warn"
+    "no-eval": "warn",
+    "no-undefined": "error",
+    "no-eq-null": "error"
   },
   "overrides": [
     {

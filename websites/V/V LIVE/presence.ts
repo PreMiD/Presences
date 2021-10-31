@@ -58,11 +58,18 @@ presence.on("UpdateData", async () => {
     prevUrl = document.location.href;
     elapsed = Math.floor(Date.now() / 1000);
   }
+  const privacy = await presence.getSetting("privacy");
 
   let presenceData: PresenceData = {
-    largeImageKey: "vlive2",
-    startTimestamp: elapsed
-  };
+      largeImageKey: "vlive2",
+      startTimestamp: elapsed
+    },
+    searchPageValue: string;
+  if (!privacy) {
+    searchPageValue =
+      (document.querySelector("#searchForm > input") as HTMLInputElement)
+        ?.value ?? "ERROR: NOT FOUND!";
+  }
 
   const path = location.pathname.replace(/\/?$/, "/"),
     showBrowsing = await presence.getSetting("browse"),
@@ -70,7 +77,6 @@ presence.on("UpdateData", async () => {
     showVideo = await presence.getSetting("video"),
     showTimestamps = await presence.getSetting("timestamp"),
     newLang = await presence.getSetting("lang"),
-    privacy = await presence.getSetting("privacy"),
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
     streamDetail = await presence.getSetting("streamDetail"),
@@ -94,12 +100,6 @@ presence.on("UpdateData", async () => {
     productPageChannel = document.querySelector("a.name")
       ? document.querySelector("a.name").textContent
       : "ERROR: NOT FOUND!",
-    searchPageValue = privacy
-      ? undefined
-      : document.querySelector("#searchForm > input")
-      ? (document.querySelector("#searchForm > input") as HTMLInputElement)
-          .value
-      : "ERROR: NOT FOUND!",
     statics: {
       [name: string]: PresenceData;
     } = {
@@ -117,9 +117,7 @@ presence.on("UpdateData", async () => {
         details: (await strings).recentUploads.includes("{0}")
           ? (await strings).recentUploads.split("{0}")[0]
           : (await strings).recentUploads,
-        state: (await strings).recentUploads.includes("{0}")
-          ? (await strings).recentUploads.split("{0}")[1]
-          : undefined,
+        state: (await strings).recentUploads.split("{0}")[1],
         smallImageKey: "reading"
       },
       "/my/": {
@@ -131,9 +129,7 @@ presence.on("UpdateData", async () => {
         details: (await strings).profileEdit.includes("{0}")
           ? (await strings).profileEdit.split("{0}")[0]
           : (await strings).profileEdit,
-        state: (await strings).profileEdit.includes("{0}")
-          ? (await strings).profileEdit.split("{0}")[1]
-          : undefined,
+        state: (await strings).profileEdit.split("{0}")[1],
         smallImageKey: "search"
       },
       "/my/watched/": {

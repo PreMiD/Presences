@@ -75,7 +75,7 @@ setInterval(getVideoPlayer, 1000); // If I was dumb enough to run this every fra
 presence.on("UpdateData", () => {
   // Video doesn't exist, and there's no metadata either.
   // Aka, user isn't watching anything.
-  if (videoPlayer !== null && metadata !== undefined) {
+  if (videoPlayer !== null && metadata) {
     // When the video pauses
     if (videoPlayer.paused) {
       // Only run this once

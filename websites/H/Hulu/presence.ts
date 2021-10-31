@@ -33,7 +33,6 @@ presence.on("UpdateData", async () => {
   }
 
   details = "Browsing";
-  state = undefined;
   startTimestamp = elapsed;
 
   if (path.includes("/hub")) {
@@ -137,11 +136,9 @@ presence.on("UpdateData", async () => {
         : video.paused
         ? (await strings).pause
         : (await strings).play;
-      startTimestamp = live ? elapsed : timestamps[0];
-      endTimestamp = live ? undefined : timestamps[1];
-      if (video.paused) {
-        startTimestamp = undefined;
-        endTimestamp = undefined;
+      if (!video.paused) {
+        if (!live) [startTimestamp, endTimestamp] = timestamps;
+        else startTimestamp = elapsed;
       }
     } else {
       video = document.querySelector("video#content-video-player");
@@ -170,11 +167,9 @@ presence.on("UpdateData", async () => {
           : video.paused
           ? (await strings).pause
           : (await strings).play;
-        startTimestamp = live ? elapsed : timestamps[0];
-        endTimestamp = live ? undefined : timestamps[1];
-        if (video.paused) {
-          startTimestamp = undefined;
-          endTimestamp = undefined;
+        if (!video.paused) {
+          if (!live) [startTimestamp, endTimestamp] = timestamps;
+          else startTimestamp = elapsed;
         }
       }
     }

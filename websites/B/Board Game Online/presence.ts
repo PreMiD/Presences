@@ -7,7 +7,7 @@ const presence = new Presence({
   getElement = (query: string): string => {
     const element = document.querySelector(query);
     if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
-    else return undefined;
+    else return;
   };
 
 function setObject(path: string) {

@@ -81,7 +81,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Searching for pens";
     presenceData.state = `Looking for ${location.search.replace("?q=", "")}`;
   } else {
-    if (document.getElementsByClassName("title-header")[0] === undefined) {
+    if (!document.getElementsByClassName("title-header")[0]) {
       presenceData.details = "Looking at page";
       presenceData.state = document.title;
     } else {

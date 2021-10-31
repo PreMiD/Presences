@@ -208,7 +208,7 @@ presence.on("UpdateData", async () => {
       type = fullPath.slice(13); //tab we are currently on
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = `Looking at ${username} profile`;
-      if (types[parseInt(type)] === undefined) {
+      if (!types[parseInt(type)]) {
         //if there aren't any parameters in the url, then we are on the default profile tab
         presenceData.state = "Overview";
       } else {

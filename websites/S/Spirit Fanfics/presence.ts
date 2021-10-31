@@ -72,16 +72,16 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/home")) presenceData.state = "Home";
   else if (pathname.startsWith("/aulas")) {
     presenceData.details = "Vendo aulas";
-    presenceData.state = nav !== "Aulas" ? nav : undefined;
+    if (nav !== "Aulas") presenceData.state = nav;
   } else if (pathname.startsWith("/generos")) {
     presenceData.details = "Navegando por gênero";
-    presenceData.state = nav !== "Gêneros" ? nav : undefined;
+    if (nav !== "Gêneros") presenceData.state = nav;
   } else if (pathname.startsWith("/categorias")) {
     presenceData.details = "Navegando por categorias";
-    presenceData.state = nav !== "Categorias" ? nav : undefined;
+    if (nav !== "Categorias") presenceData.state = nav;
   } else if (pathname.startsWith("/tags")) {
     presenceData.details = "Navegando por tags";
-    presenceData.state = nav !== "Tags populares" ? nav : undefined;
+    if (nav !== "Tags populares") presenceData.state = nav;
   } else if (pathname.startsWith("/historico"))
     presenceData.details = "Vendo o histórico";
   else if (pathname.startsWith("/grupos")) presenceData.state = "Vendo grupos";

@@ -112,8 +112,7 @@ const updateCallback = {
           ".profile-summary__nick"
         ).textContent;
       } else if (currentPath[0] === "me") {
-        if (currentPath[2] === undefined)
-          presenceData.details = "Viewing their own profile";
+        if (!currentPath[2]) presenceData.details = "Viewing their own profile";
         else {
           const pageNames: { [index: string]: string } = {
             settings: "Settings",

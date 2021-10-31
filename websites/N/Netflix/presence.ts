@@ -277,9 +277,7 @@ presence.on("UpdateData", async () => {
           details: (await strings).latest.includes("{0}")
             ? (await strings).latest.split("{0}")[0]
             : (await strings).latest,
-          state: (await strings).latest.includes("{0}")
-            ? (await strings).latest.split("{0}")[1]
-            : undefined
+          state: (await strings).latest.split("{0}")[1]
         },
         "/search/": {
           details: (await strings).searchFor,
@@ -310,9 +308,7 @@ presence.on("UpdateData", async () => {
           details: (await strings).refer.includes("{0}")
             ? (await strings).refer.split("{0}")[0]
             : (await strings).refer,
-          state: (await strings).refer.includes("{0}")
-            ? (await strings).refer.split("{0}")[1]
-            : undefined
+          state: (await strings).refer.split("{0}")[1]
         },
         "/profiles/manage/": {
           details: (await strings).profile
