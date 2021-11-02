@@ -12,10 +12,10 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/view/")) {
     presenceData.details = "Viewing a gif:";
     presenceData.state = document.querySelector("h1").textContent;
-  } else if(document.location.pathname.includes("/search/")) {
+  } else if (document.location.pathname.includes("/search/")) {
     presenceData.details = "Searching a GIF:";
     presenceData.state = document.querySelector("h1").textContent;
-  } else if(document.location.pathname.includes("/users/")) {
+  } else if (document.location.pathname.includes("/users/")) {
     presenceData.details = "Viewing user profile:";
     presenceData.state = document.querySelector(".partnername").textContent;
     presenceData.buttons = [
