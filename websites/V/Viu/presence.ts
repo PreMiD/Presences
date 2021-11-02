@@ -13,20 +13,20 @@ const presence = new Presence({
         viewPage: "general.viewPage",
         viewingShow: "general.viewShow",
         viewingMovie: "general.viewMovie",
-        watchMovie: "general.buttonViewMovie",
+        watchMovie: "general.buttonWatchMovie",
         watchEpisode: "general.buttonViewEpisode",
         searching: "general.search"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  oldPath = document.location.pathname;
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let strings = getStrings(),
   oldLang: string = null,
-  videoData: VideoData = null,
   episodeData: EpisodeData = null,
-  title: string = null;
+  title: string = null,
+  videoData: VideoData = null,
+  oldPath = document.location.pathname;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -34,20 +34,23 @@ presence.on("UpdateData", async () => {
       smallImageKey: "reading",
       startTimestamp: browsingStamp
     },
-    newLang = await presence.getSetting("lang"),
-    buttonsOn = await presence.getSetting("buttons"),
-    searchQueryOn = await presence.getSetting("searchQ"),
+    newLang: string = await presence.getSetting("lang").catch(() => "en"),
+    buttonsOn:  boolean = await presence.getSetting("buttons"),
+    searchQueryOn: boolean = await presence.getSetting("searchQ"),
     PresenceLogo: number = await presence.getSetting("logo"),
     logos = ["viu_logo", "viu_logo_text"];
 
   presenceData.largeImageKey = logos[PresenceLogo];
 
   if (oldPath !== document.location.pathname) {
+    oldPath = document.location.pathname;
+    videoData = await getMeta();
     episodeData = null;
     title = null;
   }
 
-  videoData ??= await presence.getPageletiable("GA_DIMENSIONS");
+  if (location.pathname.includes("/vod/"))
+    videoData ??= await getMeta();
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -75,10 +78,8 @@ presence.on("UpdateData", async () => {
             !episodeNameRegex.test(episodeName)
           : true,
         part = episodeName.match(/([1-9]\/[1-9])/g),
-        isTrailer = videoData.dimension1.match(/(trailer?:? )/i) ? true : false,
-        isHighlight = videoData.dimension1.match(/(highlight?:? )/i)
-          ? true
-          : false;
+        isTrailer = !!videoData.dimension1.match(/(trailer?:? )/i),
+        isHighlight = !!videoData.dimension1.match(/(highlight?:? )/i);
 
       presenceData.details = videoData.dimension1.replace(
         /(trailer?:? |highlight?:? )/i,
@@ -219,6 +220,10 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
+
+async function getMeta () {
+  return await presence.getPageletiable("GA_DIMENSIONS").catch(() => null);
+}
 
 interface VideoData {
   dimension1?: string;
