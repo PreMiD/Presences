@@ -29,9 +29,8 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (path.includes("/home")) 
-    presenceData.details = "Page d'accueil";
-   else if (path.startsWith("/explorer")) {
+  if (path.includes("/home")) presenceData.details = "Page d'accueil";
+  else if (path.startsWith("/explorer")) {
     presenceData.details = "Regarde la page :";
     presenceData.state = "Explorer";
     switch (document.location.search) {
@@ -59,9 +58,9 @@ presence.on("UpdateData", async () => {
   } else if ((genre || menu) && title) {
     presenceData.details = `Regarde la page ${genre.textContent} de :`;
     presenceData.state = title.textContent;
-  } else if (path.includes("/parametre")) 
+  } else if (path.includes("/parametre"))
     presenceData.details = "Configure ses paramètres";
-   else if (path.includes("/feedback/")) {
+  else if (path.includes("/feedback/")) {
     presenceData.details = "Regarde la page :";
     presenceData.state = "Suggestions";
   } else if (path.includes("/@")) {
