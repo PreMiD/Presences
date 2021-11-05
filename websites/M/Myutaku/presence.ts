@@ -29,39 +29,39 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (path.includes("/home")) {
+  if (path.includes("/home")) 
     presenceData.details = "Page d'accueil";
-  } else if (path.startsWith("/explorer")) {
+   else if (path.startsWith("/explorer")) {
     presenceData.details = "Regarde la page :";
     presenceData.state = "Explorer";
     switch (document.location.search) {
       case "?type=manga":
-        presenceData.details = `Explore les mangas`;
+        presenceData.details = "Explore les mangas";
         delete presenceData.state;
         break;
       case "?type=film":
-        presenceData.details = `Explore les films`;
+        presenceData.details = "Explore les films";
         delete presenceData.state;
         break;
       case "?type=tv":
-        presenceData.details = `Explore les animes`;
+        presenceData.details = "Explore les animes";
         delete presenceData.state;
         break;
       case "?type=oav":
-        presenceData.details = `Explore les OAVs`;
+        presenceData.details = "Explore les OAVs";
         delete presenceData.state;
         break;
       case "?type=special":
-        presenceData.details = `Explore les animes spéciaux`;
+        presenceData.details = "Explore les animes spéciaux";
         delete presenceData.state;
         break;
     }
   } else if ((genre || menu) && title) {
     presenceData.details = `Regarde la page ${genre.textContent} de :`;
     presenceData.state = title.textContent;
-  } else if (path.includes("/parametre")) {
+  } else if (path.includes("/parametre")) 
     presenceData.details = "Configure ses paramètres";
-  } else if (path.includes("/feedback/")) {
+   else if (path.includes("/feedback/")) {
     presenceData.details = "Regarde la page :";
     presenceData.state = "Suggestions";
   } else if (path.includes("/@")) {
