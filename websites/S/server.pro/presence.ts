@@ -17,16 +17,22 @@ presence.on("UpdateData", async () => {
       presenceData.state = "My Servers"
     }
     if(document.querySelector("body > div#app > div#wrap > main > section#section-main > section#section-content > div.container > div.row > div.col-md-6 > h3")) {
-      presenceData.details = "Server Panel, Viewing";
+      presenceData.details = "Server Panel";
       presenceData.state = "Server Details";
+      presenceData.smallImageKey = "viewing";
+      presenceData.smallImageText = "Viewing";
     }
     if(document.querySelector("body > div#app > div#wrap > main > section#section-main > section#section-content > div.container > div.row > div.col-12 > h3")) {
-      presenceData.details = "Server Panel, Viewing";
+      presenceData.details = "Server Panel";
+      presenceData.smallImageKey = "viewing";
+      presenceData.smallImageText = "Viewing";
       presenceData.state = "VPS Details";
     }
     if(document.querySelector("body > div#app > div#wrap > main > section#section-main > section#section-content > div.container > div.row > div.col-12 > h2")) {
-      presenceData.details = "Server Panel, Viewing";
+      presenceData.details = "Server Panel";
       presenceData.state = "VPS Configuration";
+      presenceData.smallImageKey = "viewing";
+      presenceData.smallImageText = "Viewing";
     }
     if(document.querySelector("body > div#app > div#wrap > main > section#section-main > section#section-content > div > div.landing > div > div.landing-centerer > div.container > div.row > div.col-xl-8 > h1")) {
       presenceData.details = "Home";
@@ -34,61 +40,95 @@ presence.on("UpdateData", async () => {
     }
   }
   if(document.location.pathname.includes("/advanced-settings")) {
-    presenceData.details = "Server Panel, Editing";
+    presenceData.details = "Server Panel";
     presenceData.state = "Advanced Settings";
+    presenceData.smallImageKey = "editing";
+    presenceData.smallImageText = "Editing";
   } else if(document.location.pathname.includes("/files")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Server Files";
   } else if(document.location.pathname.includes("/console")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Server Console";
   } else if(document.location.pathname.includes("/shell")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Shell";
   } else if(document.location.pathname.includes("/players")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Server Players";
   } else if(document.location.pathname.includes("/plugins")) {
     presenceData.details = "Server Panel, Installing";
     presenceData.state = "Plugins";
   } else if(document.location.pathname.includes("/scheduler")) {
-    presenceData.details = "Server Panel, Editing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "editing";
+    presenceData.smallImageText = "Editing";
     presenceData.state = "Scheduled Tasks"
   } else if(document.location.pathname.includes("/worlds")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Worlds"
   } else if(document.location.pathname.includes("/server-page")) {
-    presenceData.details = "Server Panel, Editing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "editing";
+    presenceData.smallImageText = "Editing";
     presenceData.state = "Server Page"
   } else if(document.location.pathname.includes("/ftp")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "FTP Details";
   } else if(document.location.pathname.includes("/mysql")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "MySQL Details"
   } else if(document.location.pathname.includes("/backups")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Server Backups";
   } else if(document.location.pathname.includes("/error-log")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Error Log";
   } else if(document.location.pathname.includes("/reinstall")) {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Reinstalling Page";
   } else if(document.location.pathname.includes("/create-service")) {
     presenceData.details = "Server Panel";
     presenceData.state = "Creating a Service";
   } else if(document.location.pathname.includes("/firewall")) {
-    presenceData.details = "Server Panel, Editing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "editing";
+    presenceData.smallImageText = "Editing";
     presenceData.state = "Firewall";
   } else if(document.location.pathname.includes("/reset"))  {
-    presenceData.details = "Server Panel, Viewing";
+    presenceData.details = "Server Panel";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Reset Page";
   } else if(document.location.pathname.includes("/account")) {
-    presenceData.details = "Home, Editing";
+    presenceData.details = "Home";
+    presenceData.smallImageKey = "editing";
+    presenceData.smallImageText = "Editing";
     presenceData.state = "Account"
   } else if(document.location.pathname.includes("/support")) {
-    presenceData.details = "Home, Viewing";
+    presenceData.details = "Home";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Support Page"
   } else if(document.location.pathname.includes("/contact")) {
     presenceData.details = "Home, Contacting";
@@ -97,19 +137,26 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Home, Viewing";
     presenceData.state = "About Us"
   } else if(document.location.pathname.includes("/pricing")) {
-    presenceData.details = "Home, Viewing";
+    presenceData.details = "Home";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Pricing Plans"
   } else if(document.location.pathname.includes("/create")) {
     presenceData.details = "Home, Creating";
     presenceData.state = "Server";
   } else if(document.location.pathname.includes("/jobs")) {
-    presenceData.details = "Home, Viewing";
+    presenceData.details = "Home";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Jobs Page";
   } else if(document.location.pathname.includes("/terms")) {
-    presenceData.details = "Home, Viewing";
+    presenceData.details = "Home";
+    presenceData.smallImageKey = "viewing";
     presenceData.state = "Terms of Service";
   } else if(document.location.pathname.includes("/hytale")) {
-    presenceData.details = "Home, Viewing";
+    presenceData.details = "Home";
+    presenceData.smallImageKey = "viewing";
+    presenceData.smallImageText = "Viewing";
     presenceData.state = "Hytale Server Hosting"
   }
   if (!presenceData.details) {
