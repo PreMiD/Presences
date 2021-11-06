@@ -4,9 +4,7 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement,
-  title: HTMLElement,
-  replace: HTMLElement,
-  search: HTMLElement;
+  title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
