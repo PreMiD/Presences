@@ -28,9 +28,9 @@ presence.on("UpdateData", async () => {
     } else {
       const post = !!document.querySelector(".post-title");
       if (post) {
-        if (privacyMode === false) {
+        if (!privacyMode) {
           data.details = "Reading a blog post:";
-          data.state = document.querySelector(".post-title").textContent;
+          data.state = document.querySelector(".post-title")?.textContent;
           data.buttons = [
             {
               label: "Read Post",
@@ -70,8 +70,8 @@ presence.on("UpdateData", async () => {
       document.location.href.includes("list?role") ||
       document.location.href.includes("list.html?role")
     ) {
-      if (privacyMode === false) {
-        const role = document.querySelector("#staff_member_name").textContent;
+      if (!privacyMode) {
+        const role = document.querySelector("#staff_member_name")?.textContent;
         data.state = `Viewing the ${role} role`;
       } else {
         data.state = "Viewing a role";
@@ -80,8 +80,9 @@ presence.on("UpdateData", async () => {
       document.location.href.includes("list?member") ||
       document.location.href.includes("list.html?member")
     ) {
-      if (privacyMode === false) {
-        const member = document.querySelector("#staff_member_name").textContent;
+      if (!privacyMode) {
+        const member =
+          document.querySelector("#staff_member_name")?.textContent;
         data.state = `Viewing ${member}`;
       } else {
         data.state = "Viewing a member";
@@ -95,7 +96,7 @@ presence.on("UpdateData", async () => {
     const submissionView = !!document.querySelector(".css-757v71");
 
     if (submissionView) {
-      if (privacyMode === false) {
+      if (!privacyMode) {
         const author = document.querySelector(".css-757v71")?.textContent;
         data.state = `Viewing submission by ${author}`;
       } else {
@@ -137,14 +138,13 @@ presence.on("UpdateData", async () => {
     if (menu) {
       data.details = "At the main menu";
 
-      if (privacyMode === false) {
+      if (!privacyMode) {
+        //Username
         const username = document.querySelectorAll(
           "div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u"
         );
         data.state = username[0]?.textContent;
-      }
 
-      if (privacyMode === false) {
         //Inventory
         document.querySelector(
           "div.css-1dbjc4n.r-kdyh1x.r-eqz5dr.r-1pi2tsx.r-a2tzq0.r-1ybube5"
@@ -197,7 +197,7 @@ presence.on("UpdateData", async () => {
         );
 
         if (chat) {
-          if (privacyChat === false) {
+          if (!privacyChat) {
             const user = document.querySelector(
               "div.css-1dbjc4n.r-19u6a5r > div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-f1odvy > div.css-901oao.r-jwli3a.r-1x35g6.r-vw2c0b"
             )?.textContent;
@@ -237,7 +237,7 @@ presence.on("UpdateData", async () => {
         ? (data.details = "In a friends lobby")
         : (data.details = "In a custom lobby");
 
-      if (privacyMode === false) {
+      if (!privacyMode) {
         const loading = document.querySelector(
           "div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-1777fci.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-1pozq62 > div.css-1dbjc4n.r-1awozwy.r-1777fci > div.css-1dbjc4n.r-17bb2tj.r-1muvv40.r-127358a.r-1ldzwu0.r-1r8g8re.r-1acpoxo"
         )
@@ -284,18 +284,18 @@ presence.on("UpdateData", async () => {
           if (preGameLobby) {
             lobbyChar = document.querySelector(
               "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
-            ).textContent;
+            )?.textContent;
           }
         } else {
           lobbyChar = document.querySelector(
             "div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-1loqt21.r-sga3zk.r-1sbahrg.r-1otgn73.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao"
-          ).textContent;
+          )?.textContent;
         }
 
         if (preGameLobby && lobbyChar === "") {
           data.details = "In pre-game lobby";
 
-          if (privacyMode === false) {
+          if (!privacyMode) {
             let playerCountPreGame = document.querySelectorAll(
               "div.css-1dbjc4n.r-kdyh1x.r-1loqt21.r-13awgt0.r-1064s9p.r-1udh08x.r-1otgn73.r-lrvibr[tabindex='0']"
             )?.length;
@@ -325,7 +325,7 @@ presence.on("UpdateData", async () => {
             : false;
 
           //Player count
-          if (privacyMode === false) {
+          if (!privacyMode) {
             const playerCount = document.querySelectorAll(
               "div.css-1dbjc4n.r-obd0qt.r-1p6tffz.r-17s6mgv.r-l4djrs.r-5kp9u6.r-12vffkv.r-u8s1d.r-1xce0ei.r-1s3egr7"
             )?.length;
@@ -349,7 +349,7 @@ presence.on("UpdateData", async () => {
         }
       } else {
         data.details = "In pre-game lobby";
-        if (privacyMode === false) {
+        if (!privacyMode) {
           data.state = "Loading...";
         }
       }
