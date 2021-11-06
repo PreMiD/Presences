@@ -186,6 +186,11 @@ presence.on("UpdateData", async () => {
           ? (data.state = "Settings")
           : false;
 
+        //Mentor chat
+        document.querySelector("iframe[title='Mentor Chat']")
+          ? (data.state = "Mentor chat")
+          : false;
+
         //Chat
         const chat = !!document.querySelector(
           "div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-1pi2tsx.r-13qz1uu > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
@@ -207,11 +212,6 @@ presence.on("UpdateData", async () => {
           "div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-13awgt0 > div.css-1dbjc4n.r-13awgt0.r-wk8lta > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
         )
           ? (data.state = "Clan chat")
-          : false;
-
-        //Mentor chat
-        document.querySelector("iframe[title='Mentor Chat']")
-          ? (data.state = "Mentor chat")
           : false;
       }
     }
