@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "ShiroKazane",
+  "author": {
+    "name": "Shiro Kazane",
+    "id": "745277804039634944"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/ZzjhsWG.png",
+  "thumbnail": "https://i.imgur.com/qYHhPON.png",
+  "version": "1.0.0",
+  "color": "#306ceb",
+  "tags": [
+    "anime",
+    "images",
+    "download",
+    "other"
+  ],
+  "url": "shirokazane.blogspot.com",
+  "description": {
+    "en": "ShiroKazane is a Website that provides Anime Wallpapers for download.",
+    "id": "ShiroKazane adalah Website yang menyediakan Wallpaper Anime untuk di download.",
+    "nl": "ShiroKazane is een website die anime-achtergronden biedt om te downloaden."
+  }
+}
