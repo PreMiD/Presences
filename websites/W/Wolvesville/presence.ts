@@ -37,14 +37,12 @@ presence.on("UpdateData", async () => {
               url: document.URL
             }
           ];
-        } else {
-          data.state = "Reading a post";
-        }
+        } else data.state = "Reading a post";
       }
     }
-  }
-  //Legal
-  else if (document.location.href.includes("legal.wolvesville.com")) {
+
+    //Legal
+  } else if (document.location.href.includes("legal.wolvesville.com")) {
     data.details = "Legal";
     if (document.location.pathname.includes("tos"))
       data.state = "Reading the Terms of Service";
@@ -52,9 +50,9 @@ presence.on("UpdateData", async () => {
       data.state = "Reading the Privacy Policy";
     else if (document.location.pathname.includes("imprint"))
       data.state = "Reading the imprint";
-  }
-  //Wolvesvile Heroes
-  else if (document.location.href.includes("heroes.wolvesville.com")) {
+
+    //Wolvesvile Heroes
+  } else if (document.location.href.includes("heroes.wolvesville.com")) {
     data.details = "Wolvesville Heroes";
     data.state = "Home page";
     data.smallImageKey = "wov_heroes";
@@ -73,9 +71,7 @@ presence.on("UpdateData", async () => {
       if (!privacyMode) {
         const role = document.querySelector("#staff_member_name")?.textContent;
         data.state = `Viewing the ${role} role`;
-      } else {
-        data.state = "Viewing a role";
-      }
+      } else data.state = "Viewing a role";
     } else if (
       document.location.href.includes("list?member") ||
       document.location.href.includes("list.html?member")
@@ -84,13 +80,11 @@ presence.on("UpdateData", async () => {
         const member =
           document.querySelector("#staff_member_name")?.textContent;
         data.state = `Viewing ${member}`;
-      } else {
-        data.state = "Viewing a member";
-      }
+      } else data.state = "Viewing a member";
     }
-  }
-  //Voting Gallery
-  else if (document.location.href.includes("voting.wolvesville.com")) {
+
+    //Voting Gallery
+  } else if (document.location.href.includes("voting.wolvesville.com")) {
     data.details = "Voting Gallery";
 
     const submissionView = !!document.querySelector(".css-757v71");
@@ -99,23 +93,20 @@ presence.on("UpdateData", async () => {
       if (!privacyMode) {
         const author = document.querySelector(".css-757v71")?.textContent;
         data.state = `Viewing submission by ${author}`;
-      } else {
-        data.state = "Viewing a submission";
-      }
+      } else data.state = "Viewing a submission";
     } else data.state = "Browsing...";
-  }
-  //App info page
-  else if (document.location.href.includes("app.wolvesville.com")) {
+
+    //App info page
+  } else if (document.location.href.includes("app.wolvesville.com"))
     data.details = "App page";
-  }
   //Vouchers
   else if (document.location.href.includes("vouchers.wolvesville.com")) {
     data.details = "Redeeming a code";
     data.smallImageKey = "vouchers";
     data.smallImageText = "Redeem";
-  }
-  //Game
-  else if (document.location.href.includes("wolvesville.com")) {
+
+    //Game
+  } else if (document.location.href.includes("wolvesville.com")) {
     //Loading Screen
     document.querySelector(
       "div.css-1dbjc4n.r-1p0dtai.r-18u37iz.r-1777fci.r-1d2f490.r-98ikmy.r-u8s1d.r-zchlnj > div.css-1dbjc4n.r-1ffj0ar.r-z2wwpe.r-18u37iz.r-1w6e6rj.r-1777fci.r-1l7z4oj.r-gu0qjt.r-85oauj.r-95jzfe > div.css-1dbjc4n.r-1awozwy.r-1777fci > div.css-1dbjc4n.r-17bb2tj.r-1muvv40.r-127358a.r-1ldzwu0.r-z80fyv.r-19wmn03"
@@ -202,9 +193,7 @@ presence.on("UpdateData", async () => {
               "div.css-1dbjc4n.r-19u6a5r > div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-f1odvy > div.css-901oao.r-jwli3a.r-1x35g6.r-vw2c0b"
             )?.textContent;
             data.state = `Chatting with ${user}`;
-          } else {
-            data.state = `Chatting with a friend`;
-          }
+          } else data.state = "Chatting with a friend";
         }
 
         //Clan chat
@@ -251,9 +240,7 @@ presence.on("UpdateData", async () => {
           if (playerCountLobby === 1)
             data.state = `${playerCountLobby} player connected`;
           else data.state = `${playerCountLobby} players connected`;
-        } else {
-          data.state = "Loading...";
-        }
+        } else data.state = "Loading...";
       }
     }
 
@@ -349,9 +336,7 @@ presence.on("UpdateData", async () => {
         }
       } else {
         data.details = "In pre-game lobby";
-        if (!privacyMode) {
-          data.state = "Loading...";
-        }
+        if (!privacyMode) data.state = "Loading...";
       }
     }
   }
