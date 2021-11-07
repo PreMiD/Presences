@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Vexot",
+    "id": "702007645976133693"
+  },
+  "service": "Roblox Devforum",
+  "description": {
+    "en": "A place where Roblox's developer community can share their thoughts about creating experiences and get updates from staff members.",
+    "es": "Un lugar en el cual la comunidad de desarrolladores de Roblox puede compartir sus opiniones acerca de la creación de experiencias y recibir actualizaciones del personal.",
+    "ca": "Un lloc on la comunitat de desenvolupadors de Roblox pot compartir les seves opinions sobre la creació d'experiències i rebre actualitzacions de l'equip personal."
+  },
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/76AO77L.png",
+  "thumbnail": "https://i.imgur.com/WAubQKF.png",
+  "color": "#009efd",
+  "tags": [
+    "devforum",
+    "roblox",
+    "community",
+    "social",
+    "forum"
+  ],
+  "url": "devforum.roblox.com",
+  "category": "socials",
+  "contributors": [
+    {
+      "name": "Incapaz",
+      "id": "302707500745097218"
+    }
+  ],
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-low-vision",
+      "value": true
+    }
+  ]
+}
