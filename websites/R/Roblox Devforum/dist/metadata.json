@@ -7,8 +7,7 @@
   "service": "Roblox Devforum",
   "description": {
     "en": "A place where Roblox's developer community can share their thoughts about creating experiences and get updates from staff members.",
-    "es": "Un lugar en el cual la comunidad de desarrolladores de Roblox puede compartir sus opiniones acerca de la creación de experiencias y recibir actualizaciones del personal.",
-    "ca": "Un lloc on la comunitat de desenvolupadors de Roblox pot compartir les seves opinions sobre la creació d'experiències i rebre actualitzacions de l'equip personal."
+    "es": "Un lugar en el cual la comunidad de desarrolladores de Roblox puede compartir sus opiniones acerca de la creación de experiencias y recibir actualizaciones del personal."
   },
   "version": "1.0.0",
   "logo": "https://i.imgur.com/76AO77L.png",
