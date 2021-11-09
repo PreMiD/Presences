@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Protonmail",
+  "author": {
+    "name": "jvnxs7",
+    "id": "209945797918195712"
+  },
+  "category": "other",
+  "logo": "https://play-lh.googleusercontent.com/wU1g-jkRI73WEWNUKt--vdvZMzbjCgrVbJd9zRrpy63a85G-hXsv0px9mEA6W2l49J8",
+  "thumbnail": "https://heise.cloudimg.io/width/696/q50.png-lossy-50.webp-lossy-50.foil1/_www-heise-de_/imgs/18/2/9/8/3/2/3/6/row-5772fbab8a24b5b3.jpeg",
+  "version": "1.0.0",
+  "color": "#354b5e",
+  "tags": [
+    "mail",
+    "protonmail",
+    "proton"
+  ],
+  "url": "mail.protonmail.com",
+  "description": {
+    "en": "Proton mail client"
+  }
+}
