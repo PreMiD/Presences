@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "OMG! Ubuntu!",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "category": "other",
   "author": {
     "name": "tuhana",
