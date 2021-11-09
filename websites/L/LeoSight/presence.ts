@@ -230,17 +230,22 @@ else if (window.location.href.includes("artic")) {
   else if (path.includes("vaos.ic"))
     presenceData.state = "Veterinární a odchytová služba";
   else if (path.includes("writer.ic")) presenceData.state = "Writer";
-  else if (path.includes("iris.ic")) {
+  else if (path.includes("iris.ic/")) {
     presenceData.details = "Iris";
-    presenceData.state = "Hlavní stránka";
-    if (path.includes("settings")) presenceData.state = "Nastavení";
-    else if (path == "iris.ic/box" || path == "iris.ic/box/")
-      presenceData.state = "Schránka";
-    else if (path.includes("iris.ic/") && path != "iris.ic/") {
+    if (path == "/iris.ic/" || path == "/iris.ic")
+      presenceData.state = "Hlavní stránka";
+    else if (path.includes("settings")) presenceData.state = "Nastavení";
+    else if (path.includes("iris.ic/box")) presenceData.state = "Schránka";
+    else if (
+      path.includes("iris.ic/") &&
+      path != "iris.ic/" &&
+      !path.includes("/users")
+    ) {
       item = path.replace("/iris.ic/", "");
-      presenceData.details = "[Iris] Prohlíží si profil uživatele:";
+      presenceData.details = "Iris uživatelský profil:";
       presenceData.state = item;
-    }
+    } else if (path.includes("users"))
+      presenceData.state = "Seznam uživatelů";
   }
 } else if (window.location.href.includes("ctf")) {
   presenceData.smallImageKey = "ctf";
