@@ -20,9 +20,12 @@ OMGUbuntu.on("UpdateData", async () => {
       .querySelector("div.u--box.content-container > div.loop > header > h2")
       ?.lastChild.textContent.trim()
       .replace(/“|”/g, ""),
-    articleHeader = document.querySelector(
-      "div.post__hero-header-container.u--box > header > h1"
-    )?.textContent;
+    articleHeader =
+      document.querySelector("div.post__hero > div.u--box > header > h1")
+        ?.textContent ||
+      document.querySelector(
+        "div.u--box > div.primary > article.type-post > header > h1"
+      )?.textContent;
 
   if (page.includes("/tag/")) {
     presenceData.details = "Looking at a tag:";
