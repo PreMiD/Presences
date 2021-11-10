@@ -19,7 +19,8 @@
     "ecmaVersion": 2021,
     "project": "./tsconfig.json"
   },
-  "rules": {
+    "rules": {
+      "no-tabs": ["error", {"allowIndentationTabs": true}],
     "prettier/prettier": "error",
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",

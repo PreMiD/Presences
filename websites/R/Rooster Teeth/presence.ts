@@ -68,12 +68,10 @@ presence.on("UpdateData", () => {
 			if (document.getElementsByClassName("schedule-day").hasOwnProperty(x)) {
 				const position = document
 					.getElementsByClassName("schedule-day")
-					// eslint-disable-next-line no-unexpected-multiline
 					[x].getBoundingClientRect();
 				if (position.top < window.innerHeight && position.bottom >= 0) {
 					presenceData.state = document
 						.getElementsByClassName("schedule-day")
-						// eslint-disable-next-line no-unexpected-multiline
 						[x].querySelector(".schedule-day__heading")
 						.textContent.toLowerCase();
 					presenceData.state =
