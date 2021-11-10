@@ -1,22 +1,22 @@
 const pPresence = new Presence({
-    clientId: "819865300173324288"
-  }),
-  pBrowsing = Math.floor(Date.now() / 1000);
+		clientId: "819865300173324288"
+	}),
+	pBrowsing = Math.floor(Date.now() / 1000);
 
 pPresence.on("UpdateData", async () => {
-  const pData: PresenceData = {
-      largeImageKey: "icon2",
-      startTimestamp: pBrowsing
-    },
-    title: string = document
-      .getElementsByTagName("h1")[0]
-      .textContent.replace("#", "");
+	const pData: PresenceData = {
+			largeImageKey: "icon2",
+			startTimestamp: pBrowsing
+		},
+		title: string = document
+			.getElementsByTagName("h1")[0]
+			.textContent.replace("#", "");
 
-  pData.details = "Viewing Docs";
-  pData.state = `Page: ${title}`;
+	pData.details = "Viewing Docs";
+	pData.state = `Page: ${title}`;
 
-  if (!pData.details) {
-    pPresence.setTrayTitle();
-    pPresence.setActivity();
-  } else pPresence.setActivity(pData);
+	if (!pData.details) {
+		pPresence.setTrayTitle();
+		pPresence.setActivity();
+	} else pPresence.setActivity(pData);
 });

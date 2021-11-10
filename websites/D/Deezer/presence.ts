@@ -1,183 +1,183 @@
 const presence = new Presence({
-  clientId: "607651992567021580"
+	clientId: "607651992567021580"
 });
 
 async function getStrings() {
-  return presence.getStrings(
-    {
-      play: "general.playing",
-      pause: "general.paused",
-      viewAlbum: "general.buttonViewAlbum",
-      viewArtist: "general.buttonViewArtist",
-      viewPodcast: "general.buttonViewPodcast"
-    },
-    await presence.getSetting("lang")
-  );
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			viewAlbum: "general.buttonViewAlbum",
+			viewArtist: "general.buttonViewArtist",
+			viewPodcast: "general.buttonViewPodcast"
+		},
+		await presence.getSetting("lang")
+	);
 }
 
 let currentTime,
-  duration,
-  title,
-  artist,
-  episode,
-  albumLink,
-  artistLink,
-  showLink,
-  strings = getStrings(),
-  oldLang: string = null;
+	duration,
+	title,
+	artist,
+	episode,
+	albumLink,
+	artistLink,
+	showLink,
+	strings = getStrings(),
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const player = document.querySelector(".page-player"),
-    presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang");
+	const player = document.querySelector(".page-player"),
+		presenceData: PresenceData = {
+			largeImageKey: "logo"
+		},
+		buttons = await presence.getSetting("buttons"),
+		newLang = await presence.getSetting("lang");
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
-  }
+	oldLang ??= newLang;
+	if (oldLang !== newLang) {
+		oldLang = newLang;
+		strings = getStrings();
+	}
 
-  if (player) {
-    artistLink = document.querySelector("div.marquee-content")
-      .children[1] as HTMLAnchorElement;
-    albumLink = document.querySelector("div.marquee-content")
-      .children[0] as HTMLAnchorElement;
+	if (player) {
+		artistLink = document.querySelector("div.marquee-content")
+			.children[1] as HTMLAnchorElement;
+		albumLink = document.querySelector("div.marquee-content")
+			.children[0] as HTMLAnchorElement;
 
-    const paused2 = document.querySelector(
-      "#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path"
-    ).outerHTML;
-    let paused: boolean;
-    if (paused2 === '<path d="m5 2 18 10L5 22V2z"></path>') paused = true;
-    else paused = false;
+		const paused2 = document.querySelector(
+			"#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path"
+		).outerHTML;
+		let paused: boolean;
+		if (paused2 === '<path d="m5 2 18 10L5 22V2z"></path>') paused = true;
+		else paused = false;
 
-    currentTime = document.querySelector(
-      "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
-    ).textContent;
-    duration = document.querySelector(
-      "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
-    ).textContent;
+		currentTime = document.querySelector(
+			"div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
+		).textContent;
+		duration = document.querySelector(
+			"div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
+		).textContent;
 
-    const timestamps = presence.getTimestamps(
-        presence.timestampFromFormat(currentTime),
-        presence.timestampFromFormat(duration)
-      ),
-      show =
-        document.querySelector(".track-link:nth-child(2)") === null
-          ? true
-          : false;
+		const timestamps = presence.getTimestamps(
+				presence.timestampFromFormat(currentTime),
+				presence.timestampFromFormat(duration)
+			),
+			show =
+				document.querySelector(".track-link:nth-child(2)") === null
+					? true
+					: false;
 
-    if (!show) {
-      title = document.querySelector(".track-link:nth-child(1)").textContent;
-      artist = document.querySelector(".track-link:nth-child(2)").textContent;
-      presenceData.details = title;
-      presenceData.state = artist;
-      presenceData.largeImageKey = "deezer";
-      presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+		if (!show) {
+			title = document.querySelector(".track-link:nth-child(1)").textContent;
+			artist = document.querySelector(".track-link:nth-child(2)").textContent;
+			presenceData.details = title;
+			presenceData.state = artist;
+			presenceData.largeImageKey = "deezer";
+			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageText = paused
+				? (await strings).pause
+				: (await strings).play;
+			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
-      if (buttons) {
-        presenceData.buttons = [
-          {
-            label: (await strings).viewArtist,
-            url: artistLink.href
-          },
-          {
-            label: (await strings).viewAlbum,
-            url: albumLink.href
-          }
-        ];
-      }
+			if (buttons) {
+				presenceData.buttons = [
+					{
+						label: (await strings).viewArtist,
+						url: artistLink.href
+					},
+					{
+						label: (await strings).viewAlbum,
+						url: albumLink.href
+					}
+				];
+			}
 
-      if (paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
+			if (paused) {
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
 
-      presence.setActivity(presenceData, !paused);
-    } else {
-      [episode, title] = document
-        .querySelector("div.marquee-content")
-        .textContent.split(" · ");
-      showLink = albumLink = document.querySelector("div.marquee-content")
-        .children[0] as HTMLAnchorElement;
-      presenceData.details = title;
-      presenceData.state = episode;
-      presenceData.largeImageKey = "deezer";
-      presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+			presence.setActivity(presenceData, !paused);
+		} else {
+			[episode, title] = document
+				.querySelector("div.marquee-content")
+				.textContent.split(" · ");
+			showLink = albumLink = document.querySelector("div.marquee-content")
+				.children[0] as HTMLAnchorElement;
+			presenceData.details = title;
+			presenceData.state = episode;
+			presenceData.largeImageKey = "deezer";
+			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageText = paused
+				? (await strings).pause
+				: (await strings).play;
+			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
-      if (showLink) {
-        if (buttons) {
-          presenceData.buttons = [
-            {
-              label: (await strings).viewPodcast,
-              url: showLink.href
-            }
-          ];
-        }
-      } else {
-        if (buttons) {
-          presenceData.buttons = [
-            {
-              label: (await strings).play,
-              url: "https://support.deezer.com/hc/en-gb/articles/115004221605-Uploading-MP3s-to-Deezer"
-            }
-          ];
-        }
-      }
-      if (paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
+			if (showLink) {
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: (await strings).viewPodcast,
+							url: showLink.href
+						}
+					];
+				}
+			} else {
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: (await strings).play,
+							url: "https://support.deezer.com/hc/en-gb/articles/115004221605-Uploading-MP3s-to-Deezer"
+						}
+					];
+				}
+			}
+			if (paused) {
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
 
-      presence.setActivity(presenceData, !paused);
-    }
-  } else {
-    const { pathname } = document.location,
-      presenceData: PresenceData = {
-        largeImageKey: "deezer"
-      };
-    if (pathname.includes("shows")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "Shows";
-    } else if (pathname.includes("channels")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "Channels";
-    } else if (pathname.includes("loved")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Loved";
-    } else if (pathname.includes("playlists")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Playlists";
-    } else if (pathname.includes("albums")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Albums";
-    } else if (pathname.includes("artists")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Artists";
-    } else if (pathname.includes("podcasts")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Podcasts";
-    } else if (pathname.includes("playlist")) {
-      presenceData.details = "Looking at...";
-      presenceData.state = "A Playlist";
-    } else if (pathname.includes("album")) {
-      presenceData.details = "Looking at...";
-      presenceData.state = "An Album";
-    } else if (pathname.includes("artist")) {
-      presenceData.details = "Looking at...";
-      presenceData.state = "An Artist";
-    } else presenceData.details = "Browsing...";
+			presence.setActivity(presenceData, !paused);
+		}
+	} else {
+		const { pathname } = document.location,
+			presenceData: PresenceData = {
+				largeImageKey: "deezer"
+			};
+		if (pathname.includes("shows")) {
+			presenceData.details = "Browsing...";
+			presenceData.state = "Shows";
+		} else if (pathname.includes("channels")) {
+			presenceData.details = "Browsing...";
+			presenceData.state = "Channels";
+		} else if (pathname.includes("loved")) {
+			presenceData.details = "Browsing...";
+			presenceData.state = "User's Loved";
+		} else if (pathname.includes("playlists")) {
+			presenceData.details = "Browsing...";
+			presenceData.state = "User's Playlists";
+		} else if (pathname.includes("albums")) {
+			presenceData.details = "Browsing...";
+			presenceData.state = "User's Albums";
+		} else if (pathname.includes("artists")) {
+			presenceData.details = "Browsing...";
+			presenceData.state = "User's Artists";
+		} else if (pathname.includes("podcasts")) {
+			presenceData.details = "Browsing...";
+			presenceData.state = "User's Podcasts";
+		} else if (pathname.includes("playlist")) {
+			presenceData.details = "Looking at...";
+			presenceData.state = "A Playlist";
+		} else if (pathname.includes("album")) {
+			presenceData.details = "Looking at...";
+			presenceData.state = "An Album";
+		} else if (pathname.includes("artist")) {
+			presenceData.details = "Looking at...";
+			presenceData.state = "An Artist";
+		} else presenceData.details = "Browsing...";
 
-    presence.setActivity(presenceData);
-  }
+		presence.setActivity(presenceData);
+	}
 });

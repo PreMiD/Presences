@@ -7,7 +7,8 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:eqeqeq-fix/recommended"
+    "plugin:eqeqeq-fix/recommended",
+    "plugin:prettier/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -19,6 +20,9 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
     "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
     "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
     "quotes": ["warn", "double", { "avoidEscape": true }],
@@ -71,5 +75,5 @@
   ],
   "reportUnusedDisableDirectives": true,
   "noInlineConfig": false,
-  "plugins": ["@typescript-eslint"]
+  "plugins": ["@typescript-eslint", "prettier"]
 }
