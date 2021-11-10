@@ -16,7 +16,6 @@ presence.on("UpdateData", async () => {
       )
     )
       presenceData.details = "Viewing my servers";
-
     if (
       document.querySelector(
         "body > div#app > div#wrap > main > section#section-main > section#section-content > div.container > div.row > div.col-md-6 > h3"
@@ -59,8 +58,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "editing";
   } else if (document.location.pathname.includes("/files")) {
     presenceData.details = "Server Panel:";
-    presenceData.smallImageKey = "viewing";
     presenceData.state = "Server Files";
+    presenceData.smallImageKey = "viewing";
   } else if (document.location.pathname.includes("/console")) {
     presenceData.details = "Server Panel:";
     presenceData.smallImageKey = "viewing";
