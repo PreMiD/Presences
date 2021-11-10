@@ -82,10 +82,10 @@ presence.on("UpdateData", async () => {
 
         if (video.paused) dontShowTmp = true;
         else {
-presenceData.endTimestamp = presence
+          presenceData.endTimestamp = presence
             .getTimestampsfromMedia(video)
             .pop();
-}
+        }
       }
 
       presenceData.buttons = [
