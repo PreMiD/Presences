@@ -230,11 +230,27 @@ presence.on("UpdateData", async () => {
     else if (path.includes("vaos.ic"))
       presenceData.state = "Veterinární a odchytová služba";
     else if (path.includes("writer.ic")) presenceData.state = "Writer";
+    else if (path.includes("iris.ic/")) {
+      presenceData.details = "Iris";
+      if (path == "/iris.ic/" || path == "/iris.ic")
+        presenceData.state = "Hlavní stránka";
+      else if (path.includes("settings")) presenceData.state = "Nastavení";
+      else if (path.includes("iris.ic/box")) presenceData.state = "Schránka";
+      else if (
+        path.includes("iris.ic/") &&
+        path != "iris.ic/" &&
+        !path.includes("/users")
+      ) {
+        item = path.replace("/iris.ic/", "");
+        presenceData.details = "Iris uživatelský profil:";
+        presenceData.state = item;
+      } else if (path.includes("users"))
+        presenceData.state = "Seznam uživatelů";
+    }
   } else if (window.location.href.includes("ctf")) {
     presenceData.smallImageKey = "ctf";
     presenceData.smallImageText = "ctf.leosight.cz";
     presenceData.details = "Leosight CTF";
-
     if (path.includes("login.php")) presenceData.state = "Přihlášení";
     else if (path.includes("index.php"))
       presenceData.state = "Odvařuje si mozek";
@@ -246,7 +262,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "guard";
     presenceData.smallImageText = "guard.leosight.cz";
     presenceData.details = "Leosigh Guard";
-
     if (path === "" || path === "/") presenceData.state = "Seznam serverů";
     if (path.includes("hive.php")) presenceData.state = "LSG - Hive";
     else if (path.includes("skimose")) presenceData.state = "Skimo SE - API";
