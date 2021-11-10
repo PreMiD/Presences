@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp
     },
     newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    buttonsOn:  boolean = await presence.getSetting("buttons"),
+    buttonsOn: boolean = await presence.getSetting("buttons"),
     searchQueryOn: boolean = await presence.getSetting("searchQ"),
     PresenceLogo: number = await presence.getSetting("logo"),
     logos = ["viu_logo", "viu_logo_text"];
@@ -49,8 +49,7 @@ presence.on("UpdateData", async () => {
     title = null;
   }
 
-  if (location.pathname.includes("/vod/"))
-    videoData ??= await getMeta();
+  if (location.pathname.includes("/vod/")) videoData ??= await getMeta();
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -221,7 +220,7 @@ presence.on("UpdateData", async () => {
   presence.setActivity(presenceData);
 });
 
-async function getMeta () {
+async function getMeta() {
   return await presence.getPageletiable("GA_DIMENSIONS").catch(() => null);
 }
 
