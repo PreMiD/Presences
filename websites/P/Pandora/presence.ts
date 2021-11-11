@@ -33,12 +33,9 @@ presence.on("UpdateData", async () => {
   audioElement === null
     ? (audioElement = document.querySelector("audio"))
     : null;
-
-  const audioBar: HTMLElement = document.querySelector(
-    ".Tuner__Audio__NowPlayingHitArea"
-  );
-
-  audioElement && audioBar ? (state = "music") : (state = null);
+  audioElement && document.querySelector(".Tuner__Audio__NowPlayingHitArea")
+    ? (state = "music")
+    : (state = null);
 
   switch (state) {
     case "music":

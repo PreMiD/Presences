@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "887996093189742612"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const showTimestamp: boolean = await presence.getSetting("timestamp"),
@@ -14,11 +14,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing home page";
   else if (document.location.pathname.includes("/u/")) {
     const username = document.querySelector(
-        "p.text-5xl.text-white"
-      )?.textContent,
-      userLikes = document.getElementById("likes-count")?.textContent;
+      "p.text-5xl.text-white"
+    )?.textContent;
     presenceData.details = "Viewing user:";
-    presenceData.state = `${username || "Unknown"} - ❤️ ${userLikes || 0}`;
+    presenceData.state = `${username || "Unknown"} - ❤️ ${
+      document.getElementById("likes-count")?.textContent || 0
+    }`;
     presenceData.buttons = [
       {
         label: `View ${username}`,
@@ -49,7 +50,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Registering...";
 
   if (!showButtons) delete presenceData.buttons;
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
   presence.setActivity(presenceData);
 });

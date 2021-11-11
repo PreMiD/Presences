@@ -5,23 +5,20 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "logo"
-    },
-    gameLink = document.location.pathname.split("/")[1].match(/^\d/)
-      ? true
-      : false;
-  if (gameLink) {
-    const user = document.querySelector(
-        "div.user.proprio .dados span"
-      ).textContent,
-      points = document.querySelector(
-        "div.user.proprio .dados pre"
-      ).textContent,
-      lobby = document.querySelector("title").innerText;
-    data.details = `${user} - ${points.split("pontos")[0].trim()} points`;
-    data.state = `Lobby: ${lobby.split("-")[0]}`;
+    largeImageKey: "logo"
+  };
+  if (document.location.pathname.split("/")[1].match(/^\d/) ? true : false) {
+    presenceData.details = `${
+      document.querySelector("div.user.proprio .dados span").textContent
+    } - ${document
+      .querySelector("div.user.proprio .dados pre")
+      .textContent.split("pontos")[0]
+      .trim()} points`;
+    data.state = `Lobby: ${
+      document.querySelector("title").textContent.split("-")[0]
+    }`;
     data.startTimestamp = elapsed;
-  } else data.details = "Not in-game";
+  } else presenceData.details = "Not in-game";
 
   presence.setActivity(data);
 });

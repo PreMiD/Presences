@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "629413450774347786"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "mcstacker"
   };
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (
     document.location.hostname === "bimbimma.com" &&
     document.URL.includes("/mcstacker/2014-08-31.php")
@@ -181,10 +181,8 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

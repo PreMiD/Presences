@@ -9,17 +9,15 @@ presence.on("UpdateData", async () => {
     gameInfo = document.querySelector("#curGameInfo");
 
   if (gameInfo) {
-    const className = document.querySelector("#menuClassName"),
-      classSubtext = document.querySelector("#menuClassSubtext"),
-      playerInfo = `${className.textContent} (${classSubtext.textContent})`;
-
-    data.details = gameInfo.textContent.replace("on ", " on ");
-    data.state = playerInfo;
+    presenceData.details = gameInfo.textContent.replace("on ", " on ");
+    data.state = `${document.querySelector("#menuClassName").textContent} (${
+      document.querySelector("#menuClassSubtext").textContent
+    })`;
     data.startTimestamp = Date.now();
 
     presence.setActivity(data);
   } else {
-    data.details = "In the menus";
+    presenceData.details = "In the menus";
     data.startTimestamp = Date.now();
 
     presence.setActivity(data);

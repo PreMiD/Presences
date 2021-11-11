@@ -8,10 +8,11 @@ function parseQueryString(queryString?: string) {
   const params: { [queryKey: string]: string } = {},
     queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
-    const indexPair = indexQuery.split("="),
-      queryKey = decodeURIComponent(indexPair[0]),
-      queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
-    params[queryKey] = queryValue;
+    const indexPair = indexQuery.split("=");
+
+    params[decodeURIComponent(indexPair[0])] = decodeURIComponent(
+      indexPair.length > 1 ? indexPair[1] : ""
+    );
   });
   return params;
 }
@@ -126,7 +127,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = document.querySelector("h1.f00-light").textContent;
 
   if (!presenceData.details) {
-    presence.setTrayTitle();
     presence.setActivity();
   } else {
     presenceData.state ??= "Navigating...";

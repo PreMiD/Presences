@@ -90,9 +90,11 @@ presence.on("UpdateData", async () => {
     } else delete presenceData.state;
   } else if (pathname.startsWith("/reviews")) {
     presenceData.details = "Completing reviews";
-    const kanji = document.querySelector("#current-kanji"),
-      progress = document.querySelector("#progress-bar-wrapper");
-    if (kanji !== null && progress !== null) {
+    const progress = document.querySelector("#progress-bar-wrapper");
+    if (
+      document.querySelector("#current-kanji") !== null &&
+      progress !== null
+    ) {
       presenceData.state = `${kanji.textContent} ・ ${
         Math.round(
           (parseFloat(progress.getAttribute("progress")) + Number.EPSILON) * 100
@@ -112,8 +114,6 @@ presence.on("UpdateData", async () => {
     } else delete presenceData.state;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

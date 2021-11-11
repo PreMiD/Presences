@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
   if (video !== null && !isNaN(video.duration)) {
     const title = (
         document.querySelector(".video-page #main .page-title") as HTMLElement
-      )?.innerText,
+      )?.textContent,
       uploader = document.querySelector(
         ".video-page #main .video-metadata .uploader-tag .name"
       ),
@@ -45,6 +45,5 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !video.paused);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

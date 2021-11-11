@@ -1,20 +1,20 @@
 const presence = new Presence({ clientId: "714822481286004778" }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let gameArea: HTMLElement, pauseMenu: HTMLElement;
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") {
     gameArea = document.querySelector("#game-area > canvas");
     pauseMenu = document.querySelector("#pause-menu");
-    const pausedHidden = pauseMenu.getAttribute("hidden");
+
     if (gameArea !== null) {
       presenceData.details = "Clicking circles";
-      if (pausedHidden === null) {
+      if (pauseMenu.getAttribute("hidden") === null) {
         presenceData.details = "Clicking circles";
         presenceData.state = "Paused menu";
       }
@@ -56,14 +56,11 @@ presence.on("UpdateData", () => {
         document.getElementsByClassName("title"),
       [pageGen4, pageGen5] = document.getElementsByClassName("selitem active");
     if (pageGen1 !== null) {
-      const pageText4 = `Listening: ${pageGen1.textContent}`;
       (presenceData.details = "Searching by categories"),
-        (presenceData.state = pageText4);
+        (presenceData.state = `Listening: ${pageGen1.textContent}`);
     } else {
-      const pageText5 = `${pageGen2.textContent}: ${pageGen4.textContent} ${pageGen3.textContent}: ${pageGen5.textContent}`;
-
       (presenceData.details = "Searching by categories"),
-        (presenceData.state = pageText5);
+        (presenceData.state = `${pageGen2.textContent}: ${pageGen4.textContent} ${pageGen3.textContent}: ${pageGen5.textContent}`);
     }
   } else if (document.location.pathname.startsWith("/search")) {
     const [pageSch1] = document.getElementsByClassName("title"),
@@ -99,8 +96,6 @@ presence.on("UpdateData", () => {
     (presenceData.details = "Viewing settings"),
       (presenceData.state = "Changing...");
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

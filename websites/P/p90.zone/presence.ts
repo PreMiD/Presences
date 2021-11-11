@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "633714339999645737"
 });
 
-function getTimestamps(curr: number, dura: number): Array<number> {
+function getTimestamps(curr: number, dura: number): number[] {
   const startTime = Math.floor(Date.now() / 1000),
     duration = Math.floor(startTime - curr + dura);
   return [startTime, duration];

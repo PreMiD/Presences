@@ -5,7 +5,7 @@ const presence = new Presence({ clientId: "778715860638367804" }),
     browsing: "presence.activity.browsing",
     anime: "general.anime"
   }),
-  startTimestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement, tags: HTMLElement;
 
@@ -15,7 +15,7 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "anizm"
     },
     title = document.querySelector(
@@ -52,37 +52,36 @@ presence.on("UpdateData", async () => {
       );
     }
 
-    data.state = `${tags.innerText} panelinde!`;
+    presenceData.state = `${tags.textContent} panelinde!`;
   } else if (document.location.pathname.includes("/profil")) {
-    data.details = "Profile Göz atıyor...";
+    presenceData.details = "Profile Göz atıyor...";
     tags = document.querySelector(
       "#pageContent > div > div.profileCoverArea.autoPosterSize.anizm_round > div.info.pfull > div > div > div:nth-child(1) > div.profileNickname"
     );
-    data.state = tags.innerText.split("@").slice(1).join(" ");
+    presenceData.state = tags.textContent.split("@").slice(1).join(" ");
   } else if (document.location.pathname.includes("/ayarlar"))
-    data.details = "Ayarlara Göz atıyor...";
+    presenceData.details = "Ayarlara Göz atıyor...";
   else if (document.location.pathname.includes("/ara")) {
-    data.details = "Aranıyor: ";
+    presenceData.details = "Aranıyor: ";
     tags = document.querySelector("#pageContent > div > h2 > span");
-    data.state = tags.innerText.split("Aranan: ").slice(1).join(" ");
+    presenceData.state = tags.textContent.split("Aranan: ").slice(1).join(" ");
   } else if (document.location.pathname.includes("/girisyap"))
-    data.details = "Giriş yapıyor...";
+    presenceData.details = "Giriş yapıyor...";
   else if (document.location.pathname.includes("/uyeol"))
-    data.details = "Üye oluyor...";
+    presenceData.details = "Üye oluyor...";
   else if (window.location.href.indexOf("?sayfa=") > 1) {
-    const pageNum = document.URL.split("?sayfa=")[1]
+    presenceData.details = (await strings).browsing;
+    presenceData.state = `Sayfa: ${document.URL.split("?sayfa=")[1]
       .split("#episodes")
       .slice(0)
-      .join(" ");
-    data.details = (await strings).browsing;
-    data.state = `Sayfa: ${pageNum}`;
+      .join(" ")}`;
   }
 
   //Episode part
   if (title && episode) {
-    data.details = title.textContent;
-    data.state = episode.textContent.split("/ ").slice(1).join(" ");
-    data.buttons = [
+    presenceData.details = title.textContent;
+    presenceData.state = episode.textContent.split("/ ").slice(1).join(" ");
+    presenceData.buttons = [
       {
         label: "Bölümü İzle",
         url: document.URL.split("&")[0]
@@ -94,8 +93,8 @@ presence.on("UpdateData", async () => {
     ];
   } else if (title) {
     //Series part
-    data.details = title.textContent;
-    data.buttons = [
+    presenceData.details = title.textContent;
+    presenceData.buttons = [
       {
         label: (await strings).anime,
         url: animeSeries
@@ -120,25 +119,26 @@ presence.on("UpdateData", async () => {
     window.location.href.indexOf("?sayfa=") > 1
   )
     //Home page part
-    data.startTimestamp = startTimestamp;
+    presenceData.startTimestamp = browsingTimestamp;
   else {
-    data.details = (await strings).browsing;
-    data.startTimestamp = startTimestamp;
+    presenceData.details = (await strings).browsing;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
   if (video) {
-    data.smallImageKey = video.paused ? "stop" : "resume";
-    data.smallImageText = video.paused
+    presenceData.smallImageKey = video.paused ? "stop" : "resume";
+    presenceData.smallImageText = video.paused
       ? (await strings).paused
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
     }
   }
 
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

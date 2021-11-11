@@ -62,17 +62,16 @@ enum ResourceNames {
   info = "info",
   group = "group"
 }
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: ResourceNames.logo,
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     pathName = window.location.pathname,
     video = document.querySelector("video");
   function DefaultPresence(): void {
-    if (!data.details) {
-      presence.setTrayTitle();
+    if (!presenceData.details) {
       presence.setActivity();
     } else presence.setActivity(data);
   }
@@ -108,17 +107,17 @@ presence.on("UpdateData", async () => {
       }
     } else if (await presence.getSetting(SettingsId.showVideosLTime))
       data.smallImageKey = ResourceNames.stop;
-    [data.details] = value;
+    [presenceData.details] = value;
     data.state = `Episódio ${value[1]}`;
     if (genders && !genders.textContent.toLowerCase().includes("carregando"))
       data.smallImageText = genders.textContent;
     if (!(await presence.getSetting(SettingsId.showVideosName))) {
-      data.details = "Assistindo Anime:";
+      presenceData.details = "Assistindo Anime:";
       delete data.smallImageText;
     }
     if (!(await presence.getSetting(SettingsId.showVideosEpisode))) {
       delete data.state;
-      data.details = data.details.replace(":", "");
+      presenceData.details = presenceData.details.replace(":", "");
     }
     if (
       (await presence.getSetting(SettingsId.showVideosReport)) &&
@@ -140,7 +139,7 @@ presence.on("UpdateData", async () => {
       (await presence.getSetting(SettingsId.showVideosName)) &&
       !(await presence.getSetting(SettingsId.showVideosEpisode))
     ) {
-      data.details = "Assistindo Anime:";
+      presenceData.details = "Assistindo Anime:";
       [data.state] = value;
     }
     if (
@@ -149,7 +148,7 @@ presence.on("UpdateData", async () => {
       !isNaN(video.duration) &&
       timestamps[0] === timestamps[1]
     ) {
-      data.details = data.details.replace(/^/, "✔ ");
+      presenceData.details = presenceData.details.replace(/^/, "✔ ");
       data.smallImageKey = ResourceNames.stop;
     }
   } else if (
@@ -177,39 +176,39 @@ presence.on("UpdateData", async () => {
       (await presence.getSetting(SettingsId.showProfileSelection))
     )
       title[0] += ` - ${selected.childNodes[1].textContent.trim()}`;
-    [data.details, data.state] = title;
+    [presenceData.details, data.state] = title;
     if (!(await presence.getSetting(SettingsId.showProfileUsername))) {
       delete data.state;
-      data.details = title[0].replace(":", "");
-    } else data.details += ":";
+      presenceData.details = title[0].replace(":", "");
+    } else presenceData.details += ":";
   } else if (
     pathName.startsWith(PathNames.forum) &&
     (await presence.getSetting(SettingsId.showForum)) &&
     !NotFound()
   ) {
     const [Thread] = document.getElementsByClassName("thread"),
-      ThreadTitle = document
-        .querySelector("head>title")
-        .textContent.replace(" - Tópico", ""),
       NonThread = document.querySelector("#main>article>div>h1>b");
     if (pathName.split("/").join("") === PathNames.forum.split("/").join("")) {
-      data.details = "Fórum";
+      presenceData.details = "Fórum";
       if (await presence.getSetting(SettingsId.showForumCategory)) {
         data.state = "Categorias";
         data.smallImageKey = ResourceNames.search;
       }
     } else if (Thread) {
-      data.details = (await presence.getSetting(SettingsId.showForumCategory))
+      presenceData.details = (await presence.getSetting(
+        SettingsId.showForumCategory
+      ))
         ? `Fórum - ${
             Thread.parentElement.firstChild.textContent.match(/\[(.*?\])/)[0]
           }`
         : "Fórum";
-      const ThreadAuthor = document.querySelector(
-          "div.flexContent.thread>div>div>a"
-        ).textContent,
-        textarea = document.querySelector("div.chill.fill");
+      const textarea = document.querySelector("div.chill.fill");
       if (await presence.getSetting(SettingsId.showForumTitle)) {
-        data.state = `${ThreadAuthor}: ${ThreadTitle}`;
+        data.state = `${
+          document.querySelector("div.flexContent.thread>div>div>a").textContent
+        }: ${document
+          .querySelector("head>title")
+          .textContent.replace(" - Tópico", "")}`;
         data.smallImageKey = ResourceNames.reading;
         data.smallImageText = `Thread Id: ${Thread.getAttribute("id").replace(
           "t",
@@ -225,7 +224,7 @@ presence.on("UpdateData", async () => {
         data.smallImageText = "Respondendo...";
       }
     } else if (!pathName.endsWith(PathNames.newTopic)) {
-      data.details = "Fórum";
+      presenceData.details = "Fórum";
       if (await presence.getSetting(SettingsId.showForumCategory)) {
         data.state = `Categoria: ${NonThread.childNodes[
           NonThread.childNodes.length - 1
@@ -233,12 +232,12 @@ presence.on("UpdateData", async () => {
         data.smallImageKey = ResourceNames.search;
       }
     } else {
-      data.details = "Fórum";
+      presenceData.details = "Fórum";
       if (await presence.getSetting(SettingsId.showForumNewTopic)) {
-        data.details += " - [Novo Tópico]";
-        const category = document.querySelector("select"),
-          selectedCategory =
-            category.options[category.selectedIndex].textContent;
+        presenceData.details += " - [Novo Tópico]";
+        const selectedCategory =
+          document.querySelector("select").options[category.selectedIndex]
+            .textContent;
         if (await presence.getSetting(SettingsId.showForumCategory)) {
           data.state = `Categoria: ${
             isNaN(parseInt(selectedCategory)) ? selectedCategory : "..."
@@ -252,16 +251,15 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showSocial)) &&
     !NotFound()
   ) {
-    const title = document.querySelector("head>title").textContent;
-    data.details = isNaN(parseInt(pathName.split("/").slice(-1)[0]))
+    data.state = document.querySelector("head>title").textContent;
+    presenceData.details = isNaN(parseInt(pathName.split("/").slice(-1)[0]))
       ? "Visualizando Publicações"
       : "Visualizando Postagem";
     if (
       !isNaN(parseInt(pathName.split("/").slice(-1)[0])) &&
       (await presence.getSetting(SettingsId.showSocialTitle))
     ) {
-      data.details += ":";
-      data.state = title;
+      presenceData.details += ":";
       data.smallImageText = `Post Id: ${pathName.split("/").slice(-1)[0]}`;
     }
     data.smallImageKey = ResourceNames.reading;
@@ -284,37 +282,36 @@ presence.on("UpdateData", async () => {
     if (await presence.getSetting(SettingsId.showAnimeReview)) {
       if (modal && modal.textContent.toLowerCase().includes("resenha")) {
         selected && (await presence.getSetting(SettingsId.showAnimeSelection))
-          ? (data.details = `Criando Resenha - ${selected.textContent}:`)
-          : (data.details = "Criando Resenha:");
+          ? (presenceData.details = `Criando Resenha - ${selected.textContent}:`)
+          : (presenceData.details = "Criando Resenha:");
       }
     }
     if (await presence.getSetting(SettingsId.showAnimeTrailer)) {
       if (modal && modal.textContent.toLowerCase().includes("trailer")) {
         selected && (await presence.getSetting(SettingsId.showAnimeSelection))
-          ? (data.details = `Assistindo Trailer - ${selected.textContent}:`)
-          : (data.details = "Assistindo Trailer:");
+          ? (presenceData.details = `Assistindo Trailer - ${selected.textContent}:`)
+          : (presenceData.details = "Assistindo Trailer:");
       }
     }
-    if (!data.details) {
+    if (!presenceData.details) {
       selected && (await presence.getSetting(SettingsId.showAnimeSelection))
-        ? (data.details = `Visualizando Anime - ${selected.textContent}:`)
-        : (data.details = "Visualizando Anime:");
+        ? (presenceData.details = `Visualizando Anime - ${selected.textContent}:`)
+        : (presenceData.details = "Visualizando Anime:");
     }
     if (await presence.getSetting(SettingsId.showAnimeName))
       data.state = animeName ? animeName.textContent : "...";
     else {
-      data.details = data.details.replace(":", "");
+      presenceData.details = presenceData.details.replace(":", "");
       delete data.smallImageText;
     }
   } else if (
     pathName.startsWith(PathNames.room) &&
     (await presence.getSetting(SettingsId.showRoom))
   ) {
-    const usersCount = document.querySelector("#main>article>div>div>b"),
-      animeNameEP = document.querySelector("#main>article>h1");
+    const usersCount = document.querySelector("#main>article>div>div>b");
     let timestamps: number[] = [];
     const value = ["...", "..."];
-    if (animeNameEP) {
+    if (document.querySelector("#main>article>h1")) {
       value[0] = animeNameEP.textContent.replace(
         animeNameEP.textContent.match(/ - \d+/g).slice(-1)[0],
         ""
@@ -324,7 +321,7 @@ presence.on("UpdateData", async () => {
         .slice(-1)[0]
         .match(/\d+/g);
     }
-    data.details = !(await presence.getSetting(SettingsId.showRoomName))
+    presenceData.details = !(await presence.getSetting(SettingsId.showRoomName))
       ? "Assistindo em Grupo:"
       : value[0];
     data.state = `Episódio ${value[1]}`;
@@ -357,7 +354,7 @@ presence.on("UpdateData", async () => {
       !(await presence.getSetting(SettingsId.showRoomName))
     ) {
       delete data.state;
-      data.details = data.details.replace(":", "");
+      presenceData.details = presenceData.details.replace(":", "");
     }
   } else if (!NotFound()) {
     try {
@@ -380,9 +377,9 @@ presence.on("UpdateData", async () => {
           pathName.startsWith(splitItem[0]) &&
           pathsFromCustom.indexOf(splitItem[0]) !== -1
         )
-          [, data.details] = splitItem;
+          [, presenceData.details] = splitItem;
         if (pathName === "/" && pathsFromCustom.indexOf("/") !== -1)
-          data.details = "Início";
+          presenceData.details = "Início";
       });
     } finally {
       DefaultPresence();

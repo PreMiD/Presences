@@ -93,8 +93,6 @@ presence.on("UpdateData", () => {
     presenceData.details = "Bir kategori görüntülüyor:";
     presenceData.state = "Altyapı";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

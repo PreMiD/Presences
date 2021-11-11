@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 
   // Support - support.something.host
   if (window.location.hostname === "support.something.host") {
-    data.details = "Helpdesk";
+    presenceData.details = "Helpdesk";
 
     if (window.location.pathname.includes("/article")) {
       data.state = `Article: ${
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 
   // Landing Site - something.host
   if (window.location.hostname === "something.host") {
-    data.details = "Landing Site";
+    presenceData.details = "Landing Site";
 
     if (
       document.querySelector("head > title").textContent ===
@@ -44,15 +44,15 @@ presence.on("UpdateData", async () => {
 
   // CDN - content.something.host
   if (window.location.hostname === "content.something.host")
-    data.details = "Content";
+    presenceData.details = "Content";
 
   // Files - files.something.host
   if (window.location.hostname === "files.something.host")
-    data.details = "File Manager";
+    presenceData.details = "File Manager";
 
   // Control Panel - cp.something.host
   if (window.location.hostname === "cp.something.host") {
-    data.details = "Control Panel";
+    presenceData.details = "Control Panel";
 
     if (window.location.pathname.startsWith("/profile")) data.state = "Profile";
     else {

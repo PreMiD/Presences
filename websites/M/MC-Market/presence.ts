@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "626148940927991829" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement | Element | string,
   search: HTMLElement | Element | string,
   title: HTMLElement | Element | string;
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "mc-market"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "www.mc-market.org") {
     if (document.location.pathname.includes("/chat/")) {
       presenceData.details = "Reading the";
@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/private-accounts/")) {
       presence.setActivity();
-      presence.setTrayTitle();
     } else if (document.location.pathname.includes("/advertising/")) {
       presenceData.details = "Viewing the";
       presenceData.state = "advertising page";
@@ -36,7 +35,7 @@ presence.on("UpdateData", async () => {
       );
       if (search !== null) {
         presenceData.details = "Searching for:";
-        presenceData.state = (search as HTMLElement).innerText;
+        presenceData.state = (search as HTMLElement).textContent;
 
         presenceData.smallImageKey = "search";
 
@@ -55,12 +54,12 @@ presence.on("UpdateData", async () => {
       );
       if (title !== null) {
         presenceData.details = "Resources, viewing:";
-        if ((title as HTMLElement).innerText.length > 128) {
-          presenceData.state = `${(title as HTMLElement).innerText.substring(
+        if ((title as HTMLElement).textContent.length > 128) {
+          presenceData.state = `${(title as HTMLElement).textContent.substring(
             0,
             125
           )}...`;
-        } else presenceData.state = (title as HTMLElement).innerText;
+        } else presenceData.state = (title as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
 
@@ -70,7 +69,7 @@ presence.on("UpdateData", async () => {
           "#content > div > div > div.titleBar > h1"
         );
         presenceData.details = "Resources, viewing";
-        presenceData.state = `category: ${(title as HTMLElement).innerText
+        presenceData.state = `category: ${(title as HTMLElement).textContent
           .replace("Add Resource", "")
           .replace("Sell your OG", "")
           .replace("Sell your Semi-OG", "")
@@ -122,7 +121,7 @@ presence.on("UpdateData", async () => {
         );
         if (user !== null) {
           presenceData.details = "Resources, viewing author:";
-          presenceData.state = (user as HTMLElement).innerText.replace(
+          presenceData.state = (user as HTMLElement).textContent.replace(
             "Resources from ",
             ""
           );
@@ -166,7 +165,7 @@ presence.on("UpdateData", async () => {
         );
       }
       presenceData.details = "Wiki, viewing:";
-      presenceData.state = (title as HTMLElement).innerText;
+      presenceData.state = (title as HTMLElement).textContent;
 
       delete presenceData.smallImageKey;
 
@@ -182,17 +181,16 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#content > div > div > div.titleBar > h1"
       );
-      if ((title as HTMLElement).innerText.includes("Private OG")) {
+      if ((title as HTMLElement).textContent.includes("Private OG")) {
         presence.setActivity();
-        presence.setTrayTitle();
       } else {
         presenceData.details = "Reading thread:";
-        if ((title as HTMLElement).innerText.length > 128) {
-          presenceData.state = `${(title as HTMLElement).innerText.substring(
+        if ((title as HTMLElement).textContent.length > 128) {
+          presenceData.state = `${(title as HTMLElement).textContent.substring(
             0,
             125
           )}...`;
-        } else presenceData.state = (title as HTMLElement).innerText;
+        } else presenceData.state = (title as HTMLElement).textContent;
 
         presenceData.smallImageKey = "reading";
 
@@ -203,7 +201,7 @@ presence.on("UpdateData", async () => {
         "#content > div > div > div.titleBar > h1"
       );
       presenceData.details = "Viewing category:";
-      presenceData.state = (title as HTMLElement).innerText
+      presenceData.state = (title as HTMLElement).textContent
         .replace("Post New Thread", "")
         .replace("Sell your OG", "")
         .replace("Sell your Semi-OG", "")
@@ -253,7 +251,7 @@ presence.on("UpdateData", async () => {
         "#content > div > div > div.titleBar > h1"
       );
       presenceData.details = "Viewing category:";
-      presenceData.state = (title as HTMLElement).innerText;
+      presenceData.state = (title as HTMLElement).textContent;
 
       delete presenceData.smallImageKey;
 
@@ -317,7 +315,7 @@ presence.on("UpdateData", async () => {
           "#content > div > div > div.profilePage > div.mainProfileColumn > div > div > h1"
         );
         presenceData.details = "Viewing user:";
-        presenceData.state = (user as HTMLElement).innerText;
+        presenceData.state = (user as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
 
@@ -386,7 +384,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading conversation:";
-        presenceData.state = (title as HTMLElement).innerText;
+        presenceData.state = (title as HTMLElement).textContent;
 
         presenceData.smallImageKey = "reading";
 
@@ -394,7 +392,6 @@ presence.on("UpdateData", async () => {
       }
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (document.location.hostname === "status.mc-market.org") {
     presenceData.details = "Viewing MC-Market Status";
@@ -405,6 +402,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

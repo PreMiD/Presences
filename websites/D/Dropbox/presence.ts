@@ -6,7 +6,6 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "dropbox_logo"
     },
-    websiteLoadTimestamp = Math.floor(Date.now() / 1000),
     showFileNames = await presence.getSetting("showFileNames");
 
   if (document.location.pathname === "/")
@@ -48,15 +47,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Dropbox Paper";
   else if (document.location.pathname.startsWith("/scl")) {
     presenceData.details = "Working on paper";
-    presenceData.startTimestamp = websiteLoadTimestamp;
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     if (showFileNames) presenceData.state = document.title;
   } else if (document.location.pathname.startsWith("/landing/hellosign"))
     presenceData.details = "Dropbox HelloSign";
   else if (document.location.pathname.startsWith("/apps"))
     presenceData.details = "Browsing AppStore";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

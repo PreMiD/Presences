@@ -194,7 +194,7 @@ const /**
   dataUpdater = {
     updateAll: async () => {
       data.smallimage = await dataUpdater.getSmallImage();
-      data.details = dataUpdater.getDetails();
+      presenceData.details = dataUpdater.getDetails();
       data.state = dataUpdater.getState();
     },
     getDetails: () => {
@@ -369,7 +369,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "largeimage",
     smallImageKey: data.smallimage.image,
     smallImageText: data.smallimage.hover,
-    details: data.details,
+    details: presenceData.details,
     startTimestamp: data.startTime
   };
 
@@ -402,8 +402,6 @@ presence.on("UpdateData", async () => {
       }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -11,8 +11,8 @@ interface iFrameData {
 }
 
 presence.on("iFrameData", (data: iFrameData) => {
-  const playback = data.duration !== null ? true : false;
-  if (playback) ({ currentTime, duration, paused } = data);
+  if (data.duration !== null ? true : false)
+    ({ currentTime, duration, paused } = data);
 });
 
 presence.on("UpdateData", () => {
@@ -85,8 +85,6 @@ presence.on("UpdateData", () => {
     presenceData.state = "Checking out information for fans!";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

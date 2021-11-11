@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "813518808634621952"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let details: string,
   state: string,
@@ -88,11 +88,9 @@ presence.on("UpdateData", async () => {
     smallImageKey,
     details,
     state,
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

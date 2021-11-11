@@ -16,7 +16,6 @@ presence.on("UpdateData", async () => {
       watchStream: "general.buttonWatchStream",
       viewChannel: "general.buttonViewChannel"
     }),
-    path: string = document.location.pathname.toLowerCase(),
     channel: HTMLHeadingElement = document.querySelector("h1.text-ellipsis"),
     videoElement: HTMLVideoElement =
       document.querySelector("#vp-player > video"),
@@ -26,7 +25,7 @@ presence.on("UpdateData", async () => {
     videoChannel: HTMLAnchorElement = document.querySelector(
       "a.influencer__info-link"
     );
-  if (path === "/") {
+  if (document.location.pathname.toLowerCase() === "/") {
     presenceData.details = strings.homepage;
     presenceData.state = strings.browsing;
     presenceData.smallImageKey = "malltvbrowsing";
@@ -65,8 +64,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = strings.paused;
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

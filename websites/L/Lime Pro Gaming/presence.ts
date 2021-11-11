@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "863173597941727282"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let productName, productBrand, blogTitle, blogAuthor;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (window.location.pathname === "/")
@@ -119,7 +119,6 @@ presence.on("UpdateData", async () => {
 
     if (blogAuthor) presenceData.smallImageKey = "reading";
   } else {
-    presence.setTrayTitle();
     presence.setActivity();
   }
 

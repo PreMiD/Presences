@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "642119548803219466"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -10,11 +10,11 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "flipanim.com") {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page";
       presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/anim")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing anim:";
       presenceData.state = `${
         document.querySelector("#mainDivActive > div:nth-child(6) > div")
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       }`;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/profile")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing profile of:";
       presenceData.state = document.querySelector(
         "#mainDivActive > div:nth-child(4) > div.profileAvatar > div.text_normal"
@@ -35,8 +35,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

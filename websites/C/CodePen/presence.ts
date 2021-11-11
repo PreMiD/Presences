@@ -25,16 +25,17 @@ presence.on("UpdateData", () => {
     }`;
   } else if (window.location.pathname.includes("/collection/")) {
     presenceData.details = `Looking at collection ${
-      document.getElementById("collection-name").innerText
+      document.getElementById("collection-name").textContent
     }`;
-    if (document.getElementById("collection-desc").innerText === "") {
+    if (document.getElementById("collection-desc").textContent === "") {
       presenceData.state = `Collection by ${
         document
           .getElementsByClassName("content-author")[0]
           .textContent.split("\n")[0]
       }`;
     } else
-      presenceData.state = document.getElementById("collection-desc").innerText;
+      presenceData.state =
+        document.getElementById("collection-desc").textContent;
   } else if (window.location.pathname.includes("/topic/")) {
     presenceData.details = `Looking at topic ${
       document.getElementsByClassName("Topics_topicTitle-3OfJU")[0].textContent
@@ -80,20 +81,16 @@ presence.on("UpdateData", () => {
   } else if (window.location.pathname.includes("/search/")) {
     presenceData.details = "Searching for pens";
     presenceData.state = `Looking for ${location.search.replace("?q=", "")}`;
+  } else if (!document.getElementsByClassName("title-header")[0]) {
+    presenceData.details = "Looking at page";
+    presenceData.state = document.title;
   } else {
-    if (!document.getElementsByClassName("title-header")[0]) {
-      presenceData.details = "Looking at page";
-      presenceData.state = document.title;
-    } else {
-      presenceData.details = "Looking at page";
-      [presenceData.state] = document
-        .getElementsByClassName("title-header")[0]
-        .textContent.split("\n");
-    }
+    presenceData.details = "Looking at page";
+    [presenceData.state] = document
+      .getElementsByClassName("title-header")[0]
+      .textContent.split("\n");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

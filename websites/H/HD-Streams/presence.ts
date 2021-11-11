@@ -23,16 +23,14 @@ interface VideoContext {
   paused: boolean;
 }
 function getQuery() {
-  const queryString = location.search.split("?", 2),
-    query =
-      queryString && queryString.length > 0 && queryString[1]
-        ? queryString[1].split("&").reduce(function (l, r) {
-            const entry = r ? r.split("=", 2) : null;
-            if (entry === null) return l;
-            return Object.assign(l, { [entry[0]]: entry[1] });
-          }, {})
-        : {};
-  return query;
+  const queryString = location.search.split("?", 2);
+  return queryString && queryString.length > 0 && queryString[1]
+    ? queryString[1].split("&").reduce(function (l, r) {
+        const entry = r ? r.split("=", 2) : null;
+        if (entry === null) return l;
+        return Object.assign(l, { [entry[0]]: entry[1] });
+      }, {})
+    : {};
 }
 (function () {
   const matchYoutubeUrl = (url: string): boolean =>
@@ -59,7 +57,7 @@ function getQuery() {
               : partName === "movies"
               ? "movie"
               : "other";
-          data.details = !frame
+          presenceData.details = !frame
             ? strings.browsing
             : type === "movie"
             ? strings.watchingMovie
@@ -81,7 +79,7 @@ function getQuery() {
               frame.currentTime,
               frame.duration
             );
-            data.details = strings.playing;
+            presenceData.details = strings.playing;
             data.smallImageKey = frame.paused ? images.PAUSE : images.PLAY;
             data.smallImageText = `${strings.playing} ${data.state}`;
             if (!frame.paused) {
@@ -124,7 +122,7 @@ function getQuery() {
           ),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          data.details = strings.viewPage;
+          presenceData.details = strings.viewPage;
           data.state = document
             .querySelector(".v-main__wrap .v-breadcrumbs > li:last-child > a")
             ?.textContent.trim();
@@ -151,7 +149,7 @@ function getQuery() {
           const [, type] = location.pathname.match(
             /^\/(movies|series|seasons|actors|popular|cinema)$/i
           );
-          data.details = strings.searching;
+          presenceData.details = strings.searching;
           data.state = {
             movies: "Movies",
             series: "Series",
@@ -168,7 +166,7 @@ function getQuery() {
         middleware: (ref) => !!ref.location.hostname.match(/hd-streams/i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          data.details = strings.browsing;
+          presenceData.details = strings.browsing;
           delete data.state;
           data.smallImageKey = images.BROWSE;
           return data;
@@ -214,10 +212,7 @@ function getQuery() {
           newLang
         );
       }
-      const presenceData: PresenceData = {
-          largeImageKey: IMAGES.LOGO
-        },
-        query: { [key: string]: unknown } = getQuery(),
+      const query: { [key: string]: unknown } = getQuery(),
         pageIndex = pages.findIndex((x) => x.middleware(window, [query])),
         context = pages[pageIndex];
       if (!context) return false;
@@ -228,15 +223,21 @@ function getQuery() {
         frameData
       )
         frameData = null;
-      const result = Promise.resolve(
-        context.exec(app, presenceData, {
-          frame: frameData,
-          strings: localizedStrings,
-          query,
-          images: IMAGES
-        })
-      );
-      return result
+
+      return Promise.resolve(
+        context.exec(
+          app,
+          {
+            largeImageKey: IMAGES.LOGO
+          },
+          {
+            frame: frameData,
+            strings: localizedStrings,
+            query,
+            images: IMAGES
+          }
+        )
+      )
         .then((data) => {
           if (
             lastPageIndex &&
@@ -248,13 +249,12 @@ function getQuery() {
             lastPageIndex = pageIndex;
           }
           if (!data) {
-            presence.setTrayTitle();
             presence.setActivity({
               largeImageKey: IMAGES.LOGO,
               state: localizedStrings.browsing
             });
           } else {
-            if (data.details) presence.setActivity(data);
+            if (presenceData.details) presence.setActivity(data);
             if (data.buttons && (data.buttons.length as number) === 0)
               delete data.buttons;
             else {

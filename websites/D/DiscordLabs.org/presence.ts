@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "660894911331172372"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let priceEls;
 
 presence.on("UpdateData", () => {
@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "bots.discordlabs.org") {
     presenceData.details = "Viewing Page:";
@@ -21,9 +21,8 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/profile/")) {
       priceEls = document.getElementsByClassName("uname");
       for (let i = 0; i < priceEls.length; i++) {
-        const profilename = (priceEls[i] as HTMLElement).innerText;
         presenceData.details = "Viewing a profile:";
-        presenceData.state = profilename;
+        presenceData.state = (priceEls[i] as HTMLElement).textContent;
       }
     } else if (document.location.pathname.includes("/submit/")) {
       presenceData.details = "Viewing Page:";
@@ -39,14 +38,11 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/bot/")) {
       priceEls = document.getElementsByClassName("botname");
       for (let i = 0; i < priceEls.length; i++) {
-        const botname = (priceEls[i] as HTMLElement).innerText;
         presenceData.details = "Viewing a Discord bot:";
-        presenceData.state = botname;
+        presenceData.state = (priceEls[i] as HTMLElement).textContent;
       }
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

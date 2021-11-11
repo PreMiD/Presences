@@ -56,28 +56,28 @@ presence.on("UpdateData", async () => {
     };
 
   if (productName && productName.textContent !== "") {
-    data.details = "Bir ürüne göz atıyor:";
+    presenceData.details = "Bir ürüne göz atıyor:";
     data.state = `${productName.textContent.trim()}${
       price ? ` - ${price} TL` : ""
     }`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
-    data.details = "Bir sayfaya göz atıyor:";
+    presenceData.details = "Bir sayfaya göz atıyor:";
     data.state = pages[page] || pages[page.slice(0, -1)];
   } else if (
     page.includes("/arama") &&
     document.location.search !== "?s=GOB2CGlobal"
   ) {
-    data.details = "Bir şey arıyor:";
+    presenceData.details = "Bir şey arıyor:";
     data.state =
       document.title && document.title.includes(" - n11.com")
         ? document.title.replace(" - n11.com", "")
         : "";
     data.smallImageKey = "search";
   } else if (document.location.search === "?s=GOB2CGlobal") {
-    data.details = "Bir sayfaya göz atıyor:";
+    presenceData.details = "Bir sayfaya göz atıyor:";
     data.state = "Yurt Dışından Ürünler";
   } else if (page.includes("/magaza/")) {
-    data.details = "Bir mağazaya göz atıyor:";
+    presenceData.details = "Bir mağazaya göz atıyor:";
     data.state = document.querySelector(
       "#contentSellerShop > div > section.shopHeader > div.sellerInfo > div.sellerDetail > div.title > h1"
     )
@@ -86,9 +86,9 @@ presence.on("UpdateData", async () => {
         ).textContent
       : "Belirsiz";
   } else {
-    data.details = "Bir sayfaya göz atıyor:";
+    presenceData.details = "Bir sayfaya göz atıyor:";
     data.state = "Ana Sayfa";
   }
 
-  if (data.details && data.state) presence.setActivity(data);
+  if (presenceData.details && data.state) presence.setActivity(data);
 });

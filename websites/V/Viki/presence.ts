@@ -11,7 +11,7 @@ let title: HTMLElement | HTMLInputElement,
   // the video variable is a html video element
   video: HTMLVideoElement;
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let playback: boolean;
 
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "viki"
     };
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (
       document.location.hostname === "www.viki.com" &&
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Browsing through genre:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Browsing through country:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Browsing through";
       presenceData.smallImageKey = "reading";
-      presenceData.state = `schedules: ${title.innerText}`;
+      presenceData.state = `schedules: ${title.textContent}`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -114,15 +114,16 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > div.page-wrapper > div.main-container > div > div.row > div.col.s12.m12.l8 > div.card.card-highlight > div > h2"
       );
-      const search = document.querySelector(
-        "body > div.page-wrapper > div.main-container > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
-      );
 
       presenceData.details = "Browsing the collection:";
       presenceData.smallImageKey = "reading";
 
-      if (title !== null) presenceData.state = title.innerText;
-      else presenceData.state = search.textContent;
+      if (title !== null) presenceData.state = title.textContent;
+      else {
+        presenceData.state = document.querySelector(
+          "body > div.page-wrapper > div.main-container > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
+        ).textContent;
+      }
 
       presence.setActivity(presenceData);
     } else if (
@@ -172,7 +173,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the profile of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -186,7 +187,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the about of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = `${title.innerText}'s profile`;
+      presenceData.state = `${title.textContent}'s profile`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -200,7 +201,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the badges of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -214,7 +215,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the contributions";
       presenceData.smallImageKey = "reading";
-      presenceData.state = `of: ${title.innerText}`;
+      presenceData.state = `of: ${title.textContent}`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -228,7 +229,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the reviews by:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -242,7 +243,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the collections by:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -256,7 +257,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the connections";
       presenceData.smallImageKey = "reading";
-      presenceData.state = `of: ${title.innerText}`;
+      presenceData.state = `of: ${title.textContent}`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -270,7 +271,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing all the things";
       presenceData.smallImageKey = "reading";
-      presenceData.state = `${title.innerText} follows`;
+      presenceData.state = `${title.textContent} follows`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -302,7 +303,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the works of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -316,7 +317,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the awards of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -329,7 +330,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the celeb profile";
       presenceData.smallImageKey = "reading";
-      presenceData.state = `of: ${title.innerText}`;
+      presenceData.state = `of: ${title.textContent}`;
 
       presence.setActivity(presenceData);
     } else if (
@@ -342,7 +343,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Browsing through genre:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -407,7 +408,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing the profile page of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -419,7 +420,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Reading blog post:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -463,7 +464,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Searching for:";
       presenceData.smallImageKey = "search";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (document.location.hostname === "support.viki.com") {
@@ -488,12 +489,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Browsing for episodes of:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   }
 

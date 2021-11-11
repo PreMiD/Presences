@@ -20,15 +20,11 @@ function getTime(list: string[]): number {
   return ret;
 }
 
-function getTimestamps(
-  audioTime: number,
-  audioDuration: string
-): Array<number> {
-  const splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime = audioTime + parsedAudioDuration * 1000;
-  return [startTime, endTime];
+function getTimestamps(audioTime: number, audioDuration: string): number[] {
+  return [
+    Date.now(),
+    audioTime + getTime(audioDuration.split(":").reverse()) * 1000
+  ];
 }
 
 presence.on("UpdateData", async () => {
@@ -45,7 +41,7 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  data.details = (await strings).browsing;
+  presenceData.details = (await strings).browsing;
   data.smallImageKey = "search";
   data.smallImageText = (await strings).browsing;
   data.startTimestamp = elapsed;
@@ -77,7 +73,7 @@ presence.on("UpdateData", async () => {
 
     const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
 
-    data.details = "En jeu";
+    presenceData.details = "En jeu";
 
     data.smallImageKey = "live";
     data.smallImageText = (await strings).play;

@@ -54,10 +54,8 @@ presence.on("UpdateData", async () => {
 
     if (video && !isNaN(video.duration)) {
       const groupWatchId = new URLSearchParams(location.search).get(
-          "groupWatchId"
-        ),
-        timestamps: number[] = presence.getTimestampsfromMedia(video);
-
+        "groupWatchId"
+      );
       if (!privacy && groupWatchId) {
         groupWatchCount = Number(
           document.querySelector(
@@ -65,36 +63,31 @@ presence.on("UpdateData", async () => {
           )?.textContent
         );
       }
-
-      const titleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .title-field"
-        ),
-        subtitleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .subtitle-field"
-        );
-
-      title = titleField?.textContent;
-      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+      title = document.querySelector(
+        ".btm-media-overlays-container .title-field"
+      )?.textContent;
+      subtitle = document.querySelector(
+        ".btm-media-overlays-container .subtitle-field"
+      )?.textContent; // episode or empty if it's a movie
 
       if (!privacy && groupWatchId) {
-        data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+        presenceData.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = "In a GroupWatch";
+      } else if (privacy) {
+        data.state = subtitle
+          ? (await strings).watchingSeries
+          : (await strings).watchingMovie;
       } else {
-        if (privacy) {
-          data.state = subtitle
-            ? (await strings).watchingSeries
-            : (await strings).watchingMovie;
-        } else {
-          data.details = title;
-          data.state = subtitle || "Movie";
-        }
+        presenceData.details = title;
+        data.state = subtitle || "Movie";
       }
 
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      [data.startTimestamp, data.endTimestamp] = timestamps;
+      [data.startTimestamp, data.endTimestamp] =
+        presence.getTimestampsfromMedia(video);
 
       // remove timestamps if video is paused or user disabled timestamps
       if (video.paused || !time) {
@@ -138,18 +131,15 @@ presence.on("UpdateData", async () => {
     );
 
     if (video && !isNaN(video.duration)) {
-      const titleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .title-field"
-        ),
-        subtitleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .subtitle-field"
-        );
-
-      title = titleField?.textContent;
-      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+      title = document.querySelector(
+        ".btm-media-overlays-container .title-field"
+      )?.textContent;
+      subtitle = document.querySelector(
+        ".btm-media-overlays-container .subtitle-field"
+      )?.textContent; // episode or empty if it's a movie
 
       if (!privacy) {
-        data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+        presenceData.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = (await strings).watchLive;
       } else if (privacy) data.state = (await strings).watchingLive;
 
@@ -189,13 +179,12 @@ presence.on("UpdateData", async () => {
       title = seriesFields[0]?.textContent;
       subtitle = seriesFields[1]?.textContent;
     } else {
-      const movieField: HTMLImageElement = document.querySelector(
+      title = document.querySelector(
         "#webAppScene main #group + div:not([id]) img[alt]"
-      );
-      title = movieField?.alt;
+      )?.alt;
     }
 
-    data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+    presenceData.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
     data.state = "Starting a GroupWatch";
     // set GroupWatch participants size
     data.partySize = groupWatchCount;
@@ -215,7 +204,7 @@ presence.on("UpdateData", async () => {
 
     //Browsing
   } else {
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     presence.setActivity(data);
   }
 });

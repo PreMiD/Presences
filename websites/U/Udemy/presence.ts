@@ -53,41 +53,32 @@ udemy.on("UpdateData", async () => {
     };
 
   if (page.includes("/courses/search")) {
-    const searching = new URLSearchParams(location.search)
-      .get("q")
-      ?.split("+")
-      ?.join(" ");
-
     presenceData.details = "Searching for:";
     presenceData.smallImageKey = "search";
-    presenceData.state = searching || "Something";
+    presenceData.state =
+      new URLSearchParams(location.search).get("q")?.split("+")?.join(" ") ||
+      "Something";
   } else if (page.includes("/courses/")) {
-    const category = document.querySelector(
-      "div h1[class*=category--heading-primary]"
-    );
-
     presenceData.details = "Browsing courses:";
     presenceData.smallImageKey = "search";
-    presenceData.state = category?.textContent || "Unknown Category";
-  } else if (page.includes("/course/") && video && video.currentTime) {
-    const title = document.querySelector(
-        "header a[data-purpose=course-header-title]"
-      ),
-      episode = document.querySelector(
-        "li[class*=curriculum-item-link--is-current] span > span"
-      ),
-      episodeFromPlayer = document.querySelector(
-        "#bookmark-portal ~ div:not(:empty)"
-      ),
-      [, endTimestamp] = udemy.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
-
-    presenceData.details = title?.textContent || "Unknown Course";
     presenceData.state =
-      episode?.textContent ||
-      episodeFromPlayer?.textContent ||
+      document.querySelector("div h1[class*=category--heading-primary]")
+        ?.textContent || "Unknown Category";
+  } else if (page.includes("/course/") && video && video.currentTime) {
+    const [, endTimestamp] = udemy.getTimestamps(
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
+
+    presenceData.details =
+      document.querySelector("header a[data-purpose=course-header-title]")
+        ?.textContent || "Unknown Course";
+    presenceData.state =
+      document.querySelector(
+        "li[class*=curriculum-item-link--is-current] span > span"
+      )?.textContent ||
+      document.querySelector("#bookmark-portal ~ div:not(:empty)")
+        ?.textContent ||
       "Unknown Episode";
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
@@ -102,12 +93,10 @@ udemy.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
   } else if (page.includes("/course/") && !video) {
-    const courseTitle = document.querySelector(
-      ".clp-component-render h1.clp-lead__title"
-    );
-
     presenceData.details = "Viewing a course:";
-    presenceData.state = courseTitle?.textContent || "Unknown Course";
+    presenceData.state =
+      document.querySelector(".clp-component-render h1.clp-lead__title")
+        ?.textContent || "Unknown Course";
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     presenceData.details = "Viewing a page:";
     presenceData.state = pages[page] || pages[page.slice(0, -1)];

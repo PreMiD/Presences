@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "811965557184135179"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: Element;
 
 presence.on("UpdateData", async () => {
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     page = window.location.pathname,
     host = document.location.hostname;
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (host === "www.mediafire.com") {
     if (page === "/") presenceData.details = "Viewing the homepage";
 
@@ -130,12 +130,12 @@ presence.on("UpdateData", async () => {
     } else {
       search = document.querySelector("#query");
       if (search.value !== "") {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Helpdesk searching for:";
         presenceData.state = search.value;
         presenceData.smallImageKey = "searching";
       } else {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Checking out the helpdesk";
       }
     }
@@ -151,8 +151,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

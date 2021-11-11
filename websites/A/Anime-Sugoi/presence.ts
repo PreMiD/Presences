@@ -6,15 +6,15 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  title = document.querySelector(
-    "body > div:nth-child(3) > div > div.col-lg-9 > div > div.panel-heading > h3"
-  ),
-  ep = document.querySelector(
-    "body > div:nth-child(3) > div > div.col-lg-9 > div > div.panel-body > center:nth-child(2) > h3"
-  ),
-  title1 = title?.textContent ?? "ไม่ทราบชื่อ",
-  ep1 = ep?.textContent ?? "ไม่ทราบชื่อตอน",
+  browsingTimestamp = Math.floor(Date.now() / 1000),
+  title1 =
+    document.querySelector(
+      "body > div:nth-child(3) > div > div.col-lg-9 > div > div.panel-heading > h3"
+    )?.textContent ?? "ไม่ทราบชื่อ",
+  ep1 =
+    document.querySelector(
+      "body > div:nth-child(3) > div > div.col-lg-9 > div > div.panel-body > center:nth-child(2) > h3"
+    )?.textContent ?? "ไม่ทราบชื่อตอน",
   path = document.location;
 
 let video = {
@@ -32,35 +32,28 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "icon"
+    largeImageKey: "icon",
+    startTimestamp: browsingTimestamp
   };
 
   // Presence
   if (path.hostname === "anime-sugoi.com" || path.hostname.includes("www.")) {
-    if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+    if (document.location.pathname === "/")
       presenceData.details = "อนิเมะอัพเดตล่าสุด";
-    } else if (path.pathname.includes("index.html")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (path.pathname.includes("index.html"))
       presenceData.details = "อนิเมะอัพเดตล่าสุด";
-    } else if (path.pathname.includes("catalog")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (path.pathname.includes("catalog")) {
       presenceData.details = "หมวดหมู่ ";
       presenceData.state = title1;
     } else if (path.pathname.includes("tag")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "หมวดหมู่ ";
       presenceData.state = title1;
     } else if (path.search.includes("search")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "ค้นหา ";
       presenceData.state = title1;
     } else if (path.pathname.includes("play")) {
       let episode;
-      const timestamps = presence.getTimestamps(
-        Math.floor(video.current),
-        Math.floor(video.duration)
-      );
+
       if (title1.includes("ตอนที่")) {
         const info = title1.split("ตอนที่");
         episode = info.pop();
@@ -89,10 +82,14 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      if (!video.paused)
-        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      if (!video.paused) {
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(
+            Math.floor(video.current),
+            Math.floor(video.duration)
+          );
+      }
     } else if (path.href) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "เลือกตอน ";
       presenceData.state = ep1;
     } else {
@@ -101,9 +98,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
-  //console.log(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

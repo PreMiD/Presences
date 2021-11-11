@@ -4,7 +4,7 @@ const presence = new Presence({
   presenceData: PresenceData = {
     largeImageKey: "logo"
   },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let customData = false,
   user: HTMLElement,
   title: HTMLElement,
@@ -19,10 +19,10 @@ presence.on("UpdateData", async () => {
   customData = false;
 
   if (document.location.pathname === "/") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Home Page";
   } else if (document.location.pathname.includes("/leaderboard")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Browsing Leaderboard";
 
     url = new URL(document.location.href);
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
         break;
     }
   } else if (document.location.pathname.includes("/clans")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Browsing Clans";
 
     url = new URL(document.location.href);
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
         break;
     }
   } else if (document.location.pathname.includes("/register")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Registering account";
   } else if (document.location.pathname.includes("/u")) {
     user = document.querySelector(
@@ -80,9 +80,9 @@ presence.on("UpdateData", async () => {
     countryrank = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.right.aligned"
     );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = `${user.innerText}'s profile`;
-    presenceData.state = `${rank.innerText} | ${pp.innerText}pp | ${subtitle.innerText}(${countryrank.innerText})`;
+    presenceData.startTimestamp = browsingTimestamp;
+    presenceData.details = `${user.textContent}'s profile`;
+    presenceData.state = `${rank.textContent} | ${pp.textContent}pp | ${subtitle.textContent}(${countryrank.textContent})`;
   } else if (document.location.pathname.includes("/c")) {
     title = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div.ui.top.attached.segment.overflow.auto.aligned > div > div > h1"
@@ -96,33 +96,33 @@ presence.on("UpdateData", async () => {
     subtitle = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div.ui.top.attached.segment.overflow.auto.aligned > div > div > div"
     );
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing Clans";
-    presenceData.state = `${title.innerText + subtitle.innerText} | ${
-      pp.innerText
-    }pp(${rank.innerText})`;
+    presenceData.state = `${title.textContent + subtitle.textContent} | ${
+      pp.textContent
+    }pp(${rank.textContent})`;
   } else if (document.location.pathname.includes("/about")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing About";
   } else if (document.location.pathname.includes("/doc")) {
     title = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div > div:nth-child(1) > h1"
     );
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing Documentation";
-    presenceData.state = title.innerText;
+    presenceData.state = title.textContent;
   } else if (document.location.pathname === "/beatmaps") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing beatmaps";
   } else if (document.location.pathname.includes("/beatmaps/rank_request")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing beatmaps";
     presenceData.state = "Request beatmap ranking";
   } else if (document.location.pathname.includes("/friends")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing friends";
   } else if (document.location.pathname.includes("/settings")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing their settings";
   }
 

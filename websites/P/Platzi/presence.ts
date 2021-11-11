@@ -22,20 +22,18 @@ presence.on("UpdateData", async () => {
     { pathname } = document.location;
 
   if (pathname.includes("/home")) {
-    const SearchInputs: NodeListOf<HTMLInputElement> =
-        document.querySelectorAll(".SearchBar input"),
-      InputValues: string[] = [...SearchInputs]
-        .map((input) => input.value)
-        .filter(Boolean);
+    const InputValues: string[] = [
+      ...document.querySelectorAll(".SearchBar input")
+    ]
+      .map((input) => input.value)
+      .filter(Boolean);
 
     presenceData.state = "Página de inicio";
 
     if (InputValues.length > 0) {
-      const rp: string = InputValues[0].replace(/[ ]/gi, "");
-
       presenceData.state = "Página de inicio";
 
-      if (rp !== "") {
+      if (InputValues[0].replace(/[ ]/gi, "") !== "") {
         presenceData.details = "Página de inicio";
         presenceData.state = `Buscando: ${InputValues[0]}`;
       }
@@ -49,13 +47,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viendo el Blog";
 
     if (Input.value) {
-      const rp: string = Input.value.replace(/[ ]/gi, "");
-
       presenceData.state = "Viendo el Blog";
 
       if (BlogPage) presenceData.state = `Página ${BlogPage.textContent}`;
 
-      if (rp !== "") {
+      if (Input.value.replace(/[ ]/gi, "") !== "") {
         BlogPage
           ? (presenceData.state = `Buscando: ${Input.value} [Pagina ${BlogPage.textContent}]`)
           : (presenceData.state = `Buscando: ${Input.value}`);
@@ -64,46 +60,32 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/blog/")) {
     presenceData.details = "Viendo el Blog";
 
-    const splittedPathname: string[] = pathname.split("/").filter(Boolean);
-
-    if (splittedPathname.length > 1) {
-      const ArticleTitle: HTMLHeadingElement = document.querySelector(
-          ".Discussion-title h1"
-        ),
-        ArticleOwner: HTMLAnchorElement = document.querySelector(
-          ".DiscussionInfo-user a"
-        ),
-        ArticleOwnerPoints: HTMLSpanElement = document.querySelector(
-          ".DiscussionInfo span"
-        ),
-        ArticleDate: HTMLParagraphElement = document.querySelector(
-          ".DiscussionInfo-time"
-        );
-
-      presenceData.details = `Blog: ${ArticleTitle.textContent}`;
-      presenceData.state = `de ${ArticleOwner.textContent} [${ArticleOwnerPoints.textContent} pts] ${ArticleDate.textContent}`;
+    if (pathname.split("/").filter(Boolean).length > 1) {
+      presenceData.details = `Blog: ${
+        document.querySelector(".Discussion-title h1").textContent
+      }`;
+      presenceData.state = `de ${
+        document.querySelector(".DiscussionInfo-user a").textContent
+      } [${document.querySelector(".DiscussionInfo span").textContent} pts] ${
+        document.querySelector(".DiscussionInfo-time").textContent
+      }`;
       presenceData.buttons = [
         { label: "Ver el Artículo", url: `https://platzi.com${pathname}` }
       ];
     }
   } else if (pathname.startsWith("/foro/")) {
-    const Input: HTMLInputElement = document.querySelector(
-        ".CustomSearchInput-search-input"
-      ),
-      ForumPage: HTMLAnchorElement = document.querySelector(
-        ".Paginator-number.is-current"
-      );
+    const ForumPage: HTMLAnchorElement = document.querySelector(
+      ".Paginator-number.is-current"
+    );
 
     presenceData.details = "Viendo el Foro";
 
-    if (Input.value) {
-      const rp: string = Input.value.replace(/[ ]/gi, "");
-
+    if (document.querySelector(".CustomSearchInput-search-input").value) {
       presenceData.state = "Viendo el Foro";
 
       if (ForumPage) presenceData.state = `Página ${ForumPage.textContent}`;
 
-      if (rp !== "") {
+      if (Input.value.replace(/[ ]/gi, "") !== "") {
         ForumPage
           ? (presenceData.state = `Buscando: ${Input.value} [Pagina ${ForumPage.textContent}]`)
           : (presenceData.state = `Buscando: ${Input.value}`);
@@ -115,10 +97,8 @@ presence.on("UpdateData", async () => {
   else if (pathname.startsWith("/empresas/"))
     presenceData.state = "Viendo el plan para empresas";
   else if (pathname.startsWith("/comprar/")) {
-    const planName = document.querySelector(".Details-name");
-
     presenceData.details = "Comprando un plan...";
-    presenceData.state = planName.textContent;
+    presenceData.state = document.querySelector(".Details-name").textContent;
   } else if (pathname.startsWith("/clases/notificaciones/")) {
     presenceData.details = "Viendo sus notificaciones";
 
@@ -129,30 +109,24 @@ presence.on("UpdateData", async () => {
     if (NotificationPage)
       presenceData.state = `Página ${NotificationPage.textContent}`;
   } else if (pathname.startsWith("/p/")) {
-    const UserFullName: HTMLElement = document.querySelector(
-        ".ProfileHeader-name"
-      ),
-      UserPoints: HTMLElement = document.querySelector(
-        ".ProfileScore-number.is-green"
-      ),
-      UserFlag: HTMLElement = document.querySelector(
+    const UserFlag: HTMLElement = document.querySelector(
         "div.ProfileHeader-username > figure > img"
       ),
-      UserLink: HTMLAnchorElement = document.querySelector(".UserUrl-link"),
-      isUserProfile = [...document.querySelectorAll(".SingleTab")].filter(
-        (tab) => tab.textContent === "Mi Portafolio"
-      );
-
+      UserLink: HTMLAnchorElement = document.querySelector(".UserUrl-link");
     let FinalString = "";
 
-    FinalString += ` ${UserFullName.textContent} `;
+    FinalString += ` ${
+      document.querySelector(".ProfileHeader-name").textContent
+    } `;
     if (UserFlag) {
       FinalString += ` ${stripPlatziProfileFlags(
         UserFlag.getAttribute("src")
       )} `;
     }
 
-    FinalString += ` [${UserPoints.textContent} pts] `;
+    FinalString += ` [${
+      document.querySelector(".ProfileScore-number.is-green").textContent
+    } pts] `;
 
     if (UserLink) {
       presenceData.buttons = [
@@ -162,7 +136,12 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viendo el perfil de";
 
-    if (isUserProfile.length > 0) presenceData.details = "Viendo su perfil";
+    if (
+      [...document.querySelectorAll(".SingleTab")].filter(
+        (tab) => tab.textContent === "Mi Portafolio"
+      ).length > 0
+    )
+      presenceData.details = "Viendo su perfil";
 
     presenceData.state = FinalString;
   } else if (pathname === "/agenda/") presenceData.state = "Viendo la Agenda";
@@ -176,15 +155,12 @@ presence.on("UpdateData", async () => {
     pathname.includes("/clases/") &&
     pathname.split("/").filter(Boolean).length === 2
   ) {
-    const course: HTMLHeadingElement = document.querySelector(
-        ".CourseDetail-left-title"
-      ),
-      teacher: HTMLSpanElement = document.querySelector(
-        ".TeacherList-full-name"
-      );
-
-    presenceData.state = `de ${teacher.textContent}`;
-    presenceData.details = course.textContent;
+    presenceData.state = `de ${
+      document.querySelector(".TeacherList-full-name").textContent
+    }`;
+    presenceData.details = document.querySelector(
+      ".CourseDetail-left-title"
+    ).textContent;
     presenceData.buttons = [
       {
         label: "Ver curso",
@@ -199,19 +175,15 @@ presence.on("UpdateData", async () => {
     const course: HTMLAnchorElement = document.querySelector(
         ".Header-course-info-content a"
       ),
-      title: HTMLHeadingElement = document.querySelector(
-        ".Header-class-title h1"
-      ),
-      episodes: HTMLSpanElement = document.querySelector(
-        ".Header-class-title span"
-      ),
       video: HTMLVideoElement = document.querySelector(".vjs-tech"),
-      checkPause: HTMLElement = document.querySelector(".VideoPlayer > div"),
-      episodeName: string = title.textContent,
-      [actualEpisode, finalEpisode]: string[] = episodes.textContent.split("/");
+      [actualEpisode, finalEpisode]: string[] = document
+        .querySelector(".Header-class-title span")
+        .textContent.split("/");
     let timestamps: number[];
 
-    presenceData.details = `${episodeName} [${actualEpisode}/ ${finalEpisode}]`;
+    presenceData.details = `${
+      document.querySelector(".Header-class-title h1").textContent
+    } [${actualEpisode}/ ${finalEpisode}]`;
     presenceData.state = `${course.children[0].textContent}`;
     presenceData.buttons = [
       {
@@ -224,7 +196,9 @@ presence.on("UpdateData", async () => {
     if (
       video !== null &&
       !isNaN(video.duration) &&
-      checkPause.className.includes("vjs-playing")
+      document
+        .querySelector(".VideoPlayer > div")
+        .className.includes("vjs-playing")
     ) {
       timestamps = presence.getTimestampsfromMedia(video);
 
@@ -232,30 +206,25 @@ presence.on("UpdateData", async () => {
     }
   } else if (pathname.includes("/cursos/")) {
     //NEW UI, SAME PRESENCE /CLASES/
-    const pathNameSplitted: string[] = pathname.split("/").filter(Boolean);
-    if (pathNameSplitted.length >= 2) {
-      const course: HTMLHeadingElement = document.querySelector(
-          ".Hero-content-title"
-        ),
-        teacher: HTMLElement = document.querySelector(
-          ".Hero-teacher-name strong"
-        );
 
-      presenceData.state = `de ${teacher.textContent}`;
-      presenceData.details = course.textContent;
+    if (pathname.split("/").filter(Boolean).length >= 2) {
+      presenceData.state = `de ${
+        document.querySelector(".Hero-teacher-name strong").textContent
+      }`;
+      presenceData.details = document.querySelector(
+        ".Hero-content-title"
+      ).textContent;
     } else {
       presenceData.state = "Buscando cursos...";
       presenceData.startTimestamp = estimatedTime;
     }
   } else if (pathname.includes("/categorias/")) {
-    const pathNameSplitted: string[] = pathname.split("/").filter(Boolean);
-    if (pathNameSplitted.length >= 2) {
-      const categoryTitle: HTMLSpanElement = document.querySelector(
-          ".HeroCoursesItem-title span"
-        ),
-        learningPaths: NodeListOf<HTMLAnchorElement> =
-          document.querySelectorAll(".LearningPathItem");
-      presenceData.state = categoryTitle.textContent;
+    if (pathname.split("/").filter(Boolean).length >= 2) {
+      const learningPaths: NodeListOf<HTMLAnchorElement> =
+        document.querySelectorAll(".LearningPathItem");
+      presenceData.state = document.querySelector(
+        ".HeroCoursesItem-title span"
+      ).textContent;
       presenceData.details = activeCategory;
 
       if (activeCategory !== "") presenceData.details = activeCategory;
@@ -270,61 +239,49 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (pathname.includes("/tutoriales/")) {
-    const CourseName: HTMLAnchorElement = document.querySelector(
+    presenceData.details = document.querySelector(
       ".Breadcrumb-desktop span:nth-child(2) a"
-    );
-
-    presenceData.details = CourseName.textContent;
+    ).textContent;
     presenceData.state = "Viendo un tutorial...";
   } else if (pathname.split("/").filter(Boolean).includes("examen")) {
     if (pathname.includes("tomar_examen")) {
-      const CourseName: HTMLHeadingElement = document.querySelector(
-          ".ExamProgress-top-title"
+      presenceData.details = document.querySelector(
+        ".ExamProgress-top-title"
+      ).textContent;
+      presenceData.state = `${
+        document.querySelector(".QuestionSelector-title").textContent
+      } [${document
+        .querySelector(".ExamProgress-top-count > span")
+        .textContent.replace(/de /gi, "")
+        .split(" ")
+        .join("-")}]`;
+    } else if (pathname.includes("review")) {
+      presenceData.details = document.querySelector(
+        ".ExamProgress-top-title"
+      ).textContent;
+      presenceData.state = "Revisando sus respuestas...";
+    } else if (pathname.includes("resultados")) {
+      const Score: number = parseFloat(
+          document.querySelector(".ExamResults-score-grade").textContent
         ),
-        QuestionNumbers: string[] = document
-          .querySelector(".ExamProgress-top-count > span")
-          .textContent.replace(/de /gi, "")
-          .split(" "),
-        Question: HTMLHeadingElement = document.querySelector(
-          ".QuestionSelector-title"
-        );
+        [, Questions] = document
+          .querySelector(".ExamResults-score-answers")
+          .textContent.split("/");
 
-      presenceData.details = CourseName.textContent;
-      presenceData.state = `${Question.textContent} [${QuestionNumbers.join(
-        "-"
-      )}]`;
+      presenceData.details =
+        document.querySelector(".CourseRow-title").textContent;
+      presenceData.state = `Examen ${
+        Score >= 9 ? "aprovado" : "no aprovado"
+      }. [${Score} en ${Questions} preguntas]`;
     } else {
-      if (pathname.includes("review")) {
-        const CourseName: HTMLHeadingElement = document.querySelector(
-          ".ExamProgress-top-title"
-        );
-        presenceData.details = CourseName.textContent;
-        presenceData.state = "Revisando sus respuestas...";
-      } else if (pathname.includes("resultados")) {
-        const CourseName: HTMLParagraphElement =
-            document.querySelector(".CourseRow-title"),
-          Score: number = parseFloat(
-            document.querySelector(".ExamResults-score-grade").textContent
-          ),
-          [, Questions] = document
-            .querySelector(".ExamResults-score-answers")
-            .textContent.split("/");
-
-        presenceData.details = CourseName.textContent;
-        presenceData.state = `Examen ${
-          Score >= 9 ? "aprovado" : "no aprovado"
-        }. [${Score} en ${Questions} preguntas]`;
-      } else {
-        const CourseName: HTMLHeadingElement = document.querySelector(
-            ".StartExamOverview-course-title"
-          ),
-          ExamQuestions: HTMLLIElement = document.querySelector(
-            ".StartExamOverview-list-item:nth-child(2) > strong"
-          );
-
-        presenceData.details = CourseName.textContent;
-        presenceData.state = `Empezando el exámen [${ExamQuestions.textContent}]`;
-      }
+      presenceData.details = document.querySelector(
+        ".StartExamOverview-course-title"
+      ).textContent;
+      presenceData.state = `Empezando el exámen [${
+        document.querySelector(
+          ".StartExamOverview-list-item:nth-child(2) > strong"
+        ).textContent
+      }]`;
     }
   } else if (pathname.startsWith("/direct-messages/u/soporte-platzi"))
     presenceData.state = "Hablando con el Soporte Platzi";
@@ -335,24 +292,22 @@ presence.on("UpdateData", async () => {
   else if (pathname.startsWith("/mi-suscripcion/beneficiario/"))
     presenceData.state = "Viendo su Beneficiario";
   else if (pathname.startsWith("/mi-suscripcion/facturas/")) {
-    const FullName: HTMLDivElement =
-        document.querySelector(".ProfileMenu-name"),
-      Pts: HTMLDivElement = document.querySelector(".ProfileMenu-rank"),
-      NOfPayments: HTMLHeadingElement = document.querySelector(
-        ".InvoicesList-title"
-      );
-    presenceData.details = `Viendo sus ${NOfPayments.textContent}`;
-    presenceData.state = `${FullName.textContent} [${Pts.textContent}]`;
+    presenceData.details = `Viendo sus ${
+      document.querySelector(".InvoicesList-title").textContent
+    }`;
+    presenceData.state = `${
+      document.querySelector(".ProfileMenu-name").textContent
+    } [${document.querySelector(".ProfileMenu-rank").textContent}]`;
   } else if (pathname.startsWith("/mi-suscripcion/referidos/")) {
-    const Input: HTMLInputElement = document.querySelector("#copyUrl");
-
     presenceData.state = "Viendo sus referidos";
-    presenceData.buttons = [{ label: "Referido", url: `${Input.value}` }];
+    presenceData.buttons = [
+      { label: "Referido", url: `${document.querySelector("#copyUrl").value}` }
+    ];
   } else if (pathname.startsWith("/mi--suscripcion/")) {
-    const SubscriptionName: HTMLDivElement =
-      document.querySelector(".CurrentPlan-name");
     presenceData.details = "Viendo su suscripcion";
-    presenceData.state = `${SubscriptionName.textContent}`;
+    presenceData.state = `${
+      document.querySelector(".CurrentPlan-name").textContent
+    }`;
   }
 
   presence.setActivity(presenceData);

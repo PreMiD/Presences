@@ -41,16 +41,14 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (pathname.includes("/trailer/")) {
-    const video = document.querySelector("video"),
-      timestamps = presence.getTimestampsfromMedia(video);
-
+    const video = document.querySelector("video");
     presenceData.details = findElement("span", "Tr-title")?.textContent;
     presenceData.state = "Trailer";
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-    [, presenceData.endTimestamp] = timestamps;
+    [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
     presenceData.buttons = [
       {
@@ -69,15 +67,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing their account";
   else if (pathname.includes("/watch/")) {
     const video = document.querySelector("video"),
-      isSeries = !!findElement("span", "Mr-text"),
-      timestamps = presence.getTimestampsfromMedia(video);
-
+      isSeries = !!findElement("span", "Mr-text");
     presenceData.details = findElement("span", "Tr-title")?.textContent;
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-    [, presenceData.endTimestamp] = timestamps;
+    [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
     if (isSeries) {
       presenceData.state = `${findElement(

@@ -1,8 +1,8 @@
 const presence = new Presence({ clientId: "655480486046466098" }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   presenceData: PresenceData = {
     largeImageKey: "gly-logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
 presence.on("UpdateData", () => {
@@ -31,9 +31,10 @@ presence.on("UpdateData", () => {
 
   // Users
   if (page.startsWith("/@")) {
-    const profile = document.querySelector("#profiletop_username")?.textContent;
     presenceData.details = "Bir profile göz atıyor...";
-    presenceData.state = profile;
+    presenceData.state = document.querySelector(
+      "#profiletop_username"
+    )?.textContent;
   }
 
   // Server Errors
@@ -60,7 +61,7 @@ presence.on("UpdateData", () => {
   else {
     presence.setActivity({
       details: "Bilinmeyen bir sayfada...",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingTimestamp,
       largeImageKey: "gly-logo"
     });
   }

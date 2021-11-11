@@ -10,19 +10,20 @@ presence.on("UpdateData", async () => {
     },
     path = document.location.pathname;
   if (path === "/") {
-    data.details = "Viewing Homepage";
+    presenceData.details = "Viewing Homepage";
     elapsed = null;
   } else if (path.startsWith("/teambuilder")) {
-    data.details = "Building a Team";
+    presenceData.details = "Building a Team";
     elapsed = null;
   } else if (path.startsWith("/ladder")) {
-    data.details = "Viewing a Ladder";
+    presenceData.details = "Viewing a Ladder";
     elapsed = null;
   } else if (path.includes("battle")) {
-    const title = document.querySelector("a.roomtab i.text").textContent,
-      users = document.querySelector("a.roomtab.button.cur span").textContent;
-    data.details = title;
-    data.state = users;
+    presenceData.details =
+      document.querySelector("a.roomtab i.text").textContent;
+    data.state = document.querySelector(
+      "a.roomtab.button.cur span"
+    ).textContent;
     data.buttons = [
       {
         label: "Spectate",
@@ -33,7 +34,7 @@ presence.on("UpdateData", async () => {
 
     data.startTimestamp = elapsed;
   } else {
-    data.details = "Somewhere on-site";
+    presenceData.details = "Somewhere on-site";
     elapsed = null;
   }
   presence.setActivity(data);

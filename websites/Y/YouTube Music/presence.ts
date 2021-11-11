@@ -11,7 +11,7 @@ function getAuthorString(): string {
   const authors = document.querySelectorAll(
     "span yt-formatted-string.ytmusic-player-bar a"
   ) as NodeListOf<HTMLAnchorElement>;
-  let authorsArray: Array<HTMLAnchorElement>, authorString: string;
+  let authorsArray: HTMLAnchorElement[], authorString: string;
 
   //* Author tags more than one => YouTube Music Song listing with release year etc.
   if (authors.length > 1) {
@@ -34,16 +34,16 @@ function getAuthorString(): string {
       //* Build output string
       authorString = `${authorsArray
         .slice(0, authorsArray.length - 1)
-        .map((a) => a.innerText)
+        .map((a) => a.textContent)
         .join(", ")} - ${
-        authorsArray[authorsArray.length - 1].innerText
+        authorsArray[authorsArray.length - 1].textContent
       } (${year})`;
     } else {
       //* Build output string
       authorString = `${authorsArray
         .slice(0, authorsArray.length - 1)
-        .map((a) => a.innerText)
-        .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
+        .map((a) => a.textContent)
+        .join(", ")} - ${authorsArray[authorsArray.length - 1].textContent}`;
     }
   } else {
     authorString = (document.querySelector(
@@ -53,12 +53,12 @@ function getAuthorString(): string {
           document.querySelector(
             "span yt-formatted-string.ytmusic-player-bar a"
           ) as HTMLAnchorElement
-        ).innerText
+        ).textContent
       : (
           document.querySelector(
             "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
           ) as HTMLAnchorElement
-        ).innerText;
+        ).textContent;
   }
 
   return authorString;
@@ -67,7 +67,7 @@ function getAuthorString(): string {
 presence.on("UpdateData", async () => {
   const title = (
       document.querySelector(".ytmusic-player-bar.title") as HTMLElement
-    ).innerText,
+    ).textContent,
     video = document.querySelector(".video-stream") as HTMLVideoElement,
     progressBar = document.querySelector("#progress-bar") as HTMLElement,
     repeatMode = document
@@ -76,58 +76,50 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     time = await presence.getSetting("time");
   if (title !== "" && !isNaN(video.duration)) {
-    const remainingLength =
+    const presenceData: PresenceData = {
+      details: title,
+      state: getAuthorString(),
+      largeImageKey: "ytm_lg",
+      smallImageKey: video.paused
+        ? "pause"
+        : repeatMode === "ONE"
+        ? "repeat-one"
+        : repeatMode === "ALL"
+        ? "repeat"
+        : "play",
+      smallImageText: video.paused
+        ? (await strings).pause
+        : repeatMode === "ONE"
+        ? "On loop"
+        : repeatMode === "ALL"
+        ? "Playlist on loop"
+        : (await strings).play,
+      endTimestamp:
+        Date.now() +
         Number(progressBar.getAttribute("aria-valuemax")) * 1000 -
-        Number(progressBar.getAttribute("value")) * 1000,
-      endTimestamp = Date.now() + remainingLength,
-      [, watchID] = document
-        .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
-        .href.match(/v=([^&#]{5,})/),
-      presenceData: PresenceData = {
-        details: title,
-        state: getAuthorString(),
-        largeImageKey: "ytm_lg",
-        smallImageKey: video.paused
-          ? "pause"
-          : repeatMode === "ONE"
-          ? "repeat-one"
-          : repeatMode === "ALL"
-          ? "repeat"
-          : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : repeatMode === "ONE"
-          ? "On loop"
-          : repeatMode === "ALL"
-          ? "Playlist on loop"
-          : (await strings).play,
-        endTimestamp
-      };
+        Number(progressBar.getAttribute("value")) * 1000
+    };
 
     if (buttons) {
       presenceData.buttons = [
         {
           label: "Listen Along",
-          url: `https://music.youtube.com/watch?v=${watchID}`
+          url: `https://music.youtube.com/watch?v=${
+            document
+              .querySelector<HTMLAnchorElement>(
+                "a.ytp-title-link.yt-uix-sessionlink"
+              )
+              .href.match(/v=([^&#]{5,})/)[1]
+          }`
         }
       ];
     }
 
     if (!time) delete presenceData.endTimestamp;
 
-    if (buttons) {
-      presenceData.buttons = [
-        {
-          label: "Listen Along",
-          url: `https://music.youtube.com/watch?v=${watchID}`
-        }
-      ];
-    }
-
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
-      presence.setTrayTitle();
     } else presence.setTrayTitle(title);
 
     presence.setActivity(presenceData);

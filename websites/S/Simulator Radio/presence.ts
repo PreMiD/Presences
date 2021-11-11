@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "651455140477272065"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let currentTitle = "Simulator Radio",
   currentArtist = "Your #1 Simulation Station",
@@ -53,7 +53,7 @@ presence.on("UpdateData", function () {
     document.querySelector(".fas.fa-play") !== null ||
     document.querySelector(".fa.fa-play") !== null /*Paused*/
   ) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (document.location.pathname.includes("/request")) {
       presenceData.details = "Requesting...";
@@ -72,14 +72,12 @@ presence.on("UpdateData", function () {
       document.location.pathname.includes("/post") ||
       document.location.pathname.includes("/blog")
     ) {
-      const possibilityOne = document.querySelector(".blog-title"),
-        possibilityTwo = document.querySelector(".blog-page-title");
-
+      const possibilityOne = document.querySelector(".blog-title");
       presenceData.details = "Reading Blog Post";
       presenceData.state =
         possibilityOne !== null
           ? possibilityOne.textContent
-          : possibilityTwo.textContent;
+          : document.querySelector(".blog-page-title").textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/team"))
       presenceData.details = "Viewing the Team";
@@ -89,8 +87,6 @@ presence.on("UpdateData", function () {
     }
   } else pushMusicPresence(presenceData);
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

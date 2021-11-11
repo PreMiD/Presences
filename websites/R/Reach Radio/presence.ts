@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "748698437720997888"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
       "https://radiopanel.s3.nl-ams.scw.cloud/c9a65443-eed1-41ed-b9d2-743223b5ee75/a01dadcd-df3d-484b-8d20-4923156ce77a.svg";
 
   if (info && paused) {
-    if (elapsed) presenceData.startTimestamp = browsingStamp;
+    if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 
     if (document.querySelector("#message > div") !== null) {
       presenceData.details = "Requesting a song";
@@ -63,12 +63,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Listening to podcast:";
       presenceData.state = document.querySelector(".pod-name").textContent;
 
-      const podcastPause =
+      if (
         document.querySelector(
           "#__layout > div > div.page > section > div > div.pod-player > div > div > div > button:nth-child(1)"
-        ).className === "plyr__controls__item plyr__control";
-
-      if (podcastPause) {
+        ).className === "plyr__controls__item plyr__control"
+      ) {
         presenceData.smallImageKey = "pause";
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
@@ -108,7 +107,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     } else {
       presenceData.smallImageKey = "play";
-      if (elapsed) presenceData.startTimestamp = browsingStamp;
+      if (elapsed) presenceData.startTimestamp = browsingTimestamp;
     }
 
     const [artist, title] = document
@@ -160,8 +159,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Browsing...";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

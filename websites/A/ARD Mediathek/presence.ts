@@ -31,18 +31,10 @@ presence.on("UpdateData", async () => {
       ).innerHTML,
       video: HTMLVideoElement = document.querySelector(
         ".ardplayer-mediacanvas"
-      ),
-      timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
       );
-
     if (path.startsWith("/live/")) {
       // Livestream
-      const mediathekLivechannel = document.title
-          .replace(/Livestream \| ARD-Mediathek/, "")
-          .replace(/ Livestream national \| ARD-Mediathek/g, ""),
-        channelLinkA = document.querySelector(".LogoLink-pae2yt-13.eOVFv");
+      const channelLinkA = document.querySelector(".LogoLink-pae2yt-13.eOVFv");
       if (channelLinkA !== null) {
         presenceData.largeImageKey = channelLinkA
           .getAttribute("href")
@@ -61,7 +53,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.smallImageKey = "live";
       presenceData.smallImageText = "Live";
-      presenceData.details = `${mediathekLivechannel} Live`;
+      presenceData.details = `${document.title
+        .replace(/Livestream \| ARD-Mediathek/, "")
+        .replace(/ Livestream national \| ARD-Mediathek/g, "")} Live`;
       presenceData.state = videoTitle;
       presenceData.startTimestamp = elapsed;
       presenceData.buttons = [
@@ -82,7 +76,10 @@ presence.on("UpdateData", async () => {
         videoDateDIV.innerHTML.indexOf("∙") - 1
       )}`;
 
-      [, presenceData.endTimestamp] = timestamps;
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       presenceData.buttons = [
         { label: (await strings).buttonWatchVideo, url: prevUrl }
       ];
@@ -102,8 +99,6 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

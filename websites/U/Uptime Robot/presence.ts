@@ -3,14 +3,14 @@ const presence = new Presence({
 });
 
 let user: HTMLElement, title: HTMLElement;
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "uptimerobot"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "uptimerobot.com") {
     if (document.location.pathname.includes("/login"))
       presenceData.details = "Logging in";
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
       user = document.querySelector(
         "#main-content > div.row-fluid.page-head > h2 > span"
       );
-      presenceData.state = user.innerText;
+      presenceData.state = user.textContent;
     } else if (document.location.pathname.includes("/support"))
       presenceData.details = "Viewing the support page";
     else if (document.location.pathname.includes("/faq"))
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
           "#top > div.p-body > div > div > div > div.p-body-content > div > div.block > div > div > div > div > div > h1 > span > span"
         );
         presenceData.details = "Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
       } else if (
         document.querySelector(
           "#top > div.p-body > div > div > div > div.p-body-content > div > div.block > div > div > div > div > div > h1 > span"
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
           "#top > div.p-body > div > div > div > div.p-body-content > div > div.block > div > div > div > div > div > h1 > span"
         );
         presenceData.details = "Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
       } else presenceData.details = "Viewing overview of members";
     } else if (document.location.pathname.includes("/forums/")) {
       title = document.querySelector(
@@ -96,13 +96,11 @@ presence.on("UpdateData", async () => {
       );
       if (title !== null) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
       } else presenceData.details = "Forums, Browsing...";
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

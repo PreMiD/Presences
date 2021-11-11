@@ -77,9 +77,6 @@ presence.on("UpdateData", async () => {
 
         const [videoId] = location.pathname.match(/..\d+$/),
           isPlaying = !!document.querySelector(".PlayerPauseButton"),
-          video: HTMLVideoElement =
-            document.querySelector(".VideoPlayer video"),
-          elapsedSec = Math.floor(video.currentTime),
           presenceData: PresenceData = {
             details: title,
             state: `${owner} - ${videoId}`,
@@ -88,7 +85,11 @@ presence.on("UpdateData", async () => {
             smallImageText: isPlaying
               ? (await strings).play
               : (await strings).pause,
-            startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
+            startTimestamp:
+              Math.floor(Date.now() / 1000) -
+              Math.floor(
+                document.querySelector(".VideoPlayer video").currentTime
+              )
           };
 
         if (isPlaying) presence.setTrayTitle(title);
@@ -102,28 +103,28 @@ presence.on("UpdateData", async () => {
     case "live.nicovideo.jp":
     case "live2.nicovideo.jp": {
       if (location.pathname.startsWith("/watch/lv")) {
-        const title = document.querySelector(
+        const [liveId] = location.pathname.match(/lv\d+/);
+
+        presence.setActivity({
+          details: document.querySelector(
             " [class^='___program-title___'] span "
           ).textContent,
-          ownerElement =
+          state: `${
             document.querySelector("[class^='___channel-name-anchor___']") ||
-            document.querySelector("[class^='___group-name-anchor___']"),
-          owner = ownerElement.textContent,
-          [liveId] = location.pathname.match(/lv\d+/),
-          elapsed = document.querySelector(
-            " span[class^='___time-score___'] span[class^='___value___'] "
-          ).textContent,
-          presenceData: PresenceData = {
-            details: title,
-            state: `${owner} - ${liveId}`,
-            largeImageKey: "niconico",
-            smallImageKey: "live",
-            smallImageText: (await strings).live,
-            startTimestamp:
-              Math.floor(Date.now() / 1000) - getTimesec(elapsed).elapsedSec
-          };
-
-        presence.setActivity(presenceData);
+            document.querySelector("[class^='___group-name-anchor___']")
+              .textContent
+          } - ${liveId}`,
+          largeImageKey: "niconico",
+          smallImageKey: "live",
+          smallImageText: (await strings).live,
+          startTimestamp:
+            Math.floor(Date.now() / 1000) -
+            getTimesec(
+              document.querySelector(
+                " span[class^='___time-score___'] span[class^='___value___'] "
+              ).textContent
+            ).elapsedSec
+        });
       } else presence.clearActivity();
 
       break;
@@ -131,29 +132,25 @@ presence.on("UpdateData", async () => {
 
     case "seiga.nicovideo.jp": {
       if (location.pathname.startsWith("/seiga/im")) {
-        const title = document.querySelector(".title").textContent,
-          owner = document.querySelector(
-            "#ko_watchlist_header.user .user_name strong"
-          ).textContent,
-          [seigaId] = location.pathname.match(/im\d+/),
-          presenceData: PresenceData = {
-            details: title,
-            state: `${owner} - ${seigaId}`,
-            largeImageKey: "niconico"
-          };
-
-        presence.setActivity(presenceData);
+        const [seigaId] = location.pathname.match(/im\d+/);
+        presence.setActivity({
+          details: document.querySelector(".title").textContent,
+          state: `${
+            document.querySelector(
+              "#ko_watchlist_header.user .user_name strong"
+            ).textContent
+          } - ${seigaId}`,
+          largeImageKey: "niconico"
+        });
       } else if (location.pathname.startsWith("/watch/mg")) {
-        const title = document.querySelector(".title").textContent,
-          owner = document.querySelector(".author_name").textContent,
-          [mangaId] = location.pathname.match(/mg\d+/),
-          presenceData: PresenceData = {
-            details: title,
-            state: `${owner} - ${mangaId}`,
-            largeImageKey: "niconico"
-          };
-
-        presence.setActivity(presenceData);
+        const [mangaId] = location.pathname.match(/mg\d+/);
+        presence.setActivity({
+          details: document.querySelector(".title").textContent,
+          state: `${
+            document.querySelector(".author_name").textContent
+          } - ${mangaId}`,
+          largeImageKey: "niconico"
+        });
       } else presence.clearActivity();
 
       break;

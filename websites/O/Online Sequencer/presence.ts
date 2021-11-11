@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing member:";
     presenceData.state = (
       document.getElementsByClassName("profile_header")[0] as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname.startsWith("/import")) {
     prevPage = currPage;
     currPage = "i";
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Forum Thread:";
     const threadtitle = (
       document.getElementsByClassName("thead")[0] as HTMLElement
-    ).innerText;
+    ).textContent;
     if (threadtitle.includes("Thread Modes"))
       presenceData.state = threadtitle.substr(13);
     else presenceData.state = threadtitle;
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Forum Announcement:";
     presenceData.state = (
       document.getElementsByClassName("thead")[0] as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname.startsWith("/forum/forumdisplay")) {
     prevPage = currPage;
     currPage = "fd";
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
       document.getElementsByClassName(
         "pull-left navbar-header"
       )[0] as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname.startsWith("/forum/memberlist")) {
     prevPage = currPage;
     currPage = "fm";
@@ -130,8 +130,6 @@ presence.on("UpdateData", async () => {
 
   if (prevPage !== currPage) refreshTime();
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

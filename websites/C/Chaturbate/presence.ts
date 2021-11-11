@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-    data.details = "Broadcasting as";
+    presenceData.details = "Broadcasting as";
     [, , data.state] = path.split("/");
     data.smallImageKey = "live";
     data.smallImageText = (await strings).live;
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
     !video &&
     document.querySelector("#header div.logo-zone") !== null
   ) {
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     data.smallImageKey = "search";
     data.smallImageText = (await strings).browsing;
 
@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
         case "/affiliates/":
         case "/privacy/":
         case "/law_enforcement/":
-          data.details = "Reading";
+          presenceData.details = "Reading";
           data.state = "Law and meta pages";
           data.smallImageKey = "reading";
           data.smallImageText = "Reading";
@@ -173,7 +173,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/photo_videos/")) {
     if (!video && path.includes("/photo_videos/photo/")) {
-      data.details = "Looking at a photo";
+      presenceData.details = "Looking at a photo";
       data.state = document.querySelector("h1").textContent;
       data.smallImageKey = "search";
       data.smallImageText = (await strings).browsing;
@@ -183,7 +183,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       );
 
-      data.details = "Watching a clip";
+      presenceData.details = "Watching a clip";
       data.state = document.querySelector("h1").textContent;
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused
@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
     } else {
-      data.details = (await strings).browsing;
+      presenceData.details = (await strings).browsing;
       data.state = "Photosets";
       data.smallImageKey = "search";
       data.smallImageText = (await strings).browsing;
@@ -207,7 +207,7 @@ presence.on("UpdateData", async () => {
     }
 
     data.startTimestamp = elapsed;
-    [, data.details] = path.split("/");
+    [, presenceData.details] = path.split("/");
 
     if (video && !video.paused) {
       data.smallImageKey = "live";
@@ -218,7 +218,7 @@ presence.on("UpdateData", async () => {
       data.state = (await strings).browsing;
     }
   } else {
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     data.state = "Cams";
     data.smallImageKey = "search";
     data.smallImageText = (await strings).browsing;

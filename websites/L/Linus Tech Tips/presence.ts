@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "754742129221173278"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let item;
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "linustechtips"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "linustechtips.com") {
     if (document.location.pathname === "/") {
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
       item = document.querySelector("h1") as HTMLElement;
 
       presenceData.details = "Browsing Category";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       presenceData.smallImageKey = "search";
       presence.setActivity(presenceData);
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
       item = document.querySelector("h1.ipsType_pageTitle") as HTMLElement;
 
       presenceData.details = "Viewing Thread";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
@@ -40,12 +40,11 @@ presence.on("UpdateData", async () => {
       ) as HTMLElement;
 
       presenceData.details = "Viewing Profile";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   }
 });

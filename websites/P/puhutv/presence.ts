@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
                       .querySelector<HTMLElement>(
                         "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
                       )
-                      .innerText.replace("\n", ": ")
+                      .textContent.replace("\n", ": ")
                   : null
               }`,
         smallImageKey: video.paused ? "paused" : "playing",

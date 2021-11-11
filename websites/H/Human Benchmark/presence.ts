@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "799635921522655262"
   }),
-  browsingStamp: number = Math.floor(Date.now() / 1000);
+  browsingTimestamp: number = Math.floor(Date.now() / 1000);
 
 let details: string,
   state: string,
@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
     },
     showTime: boolean = await presence.getSetting("stamp");
 
-  presenceData.startTimestamp = showTime ? browsingStamp : null;
+  presenceData.startTimestamp = showTime ? browsingTimestamp : null;
   if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
 
   if (document.location.pathname === "/") {

@@ -96,9 +96,7 @@ for (let i = 0; i < messages.finish.length; i++)
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname === "/") {
-    const choosen = document.getElementById("choose").style.display !== "none";
-
-    if (choosen) {
+    if (document.getElementById("choose").style.display !== "none") {
       elapsed = Math.floor(Date.now() / 1000);
       const presenceData = {
         details: "Preparing to Edge",
@@ -111,7 +109,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       let presenceData;
-      const msg = document.getElementById("message").innerText;
+      const msg = document.getElementById("message").textContent;
       if (gomsgs.includes(msg)) {
         const cr = findParents(messages.go, msg) as [string, number, string];
         presenceData = {
@@ -149,13 +147,13 @@ presence.on("UpdateData", async () => {
         document.getElementById("message").children[0].innerHTML
       ) {
         elapsed = Math.floor(Date.now() / 1000);
-        const presenceData = {
+
+        presence.setActivity({
           details: "jerking of slowly for edging",
           //largeImageKey: "banner",
           largeImageKey: "logo",
           startTimestamp: elapsed
-        };
-        presence.setActivity(presenceData);
+        });
       }
     }
   }

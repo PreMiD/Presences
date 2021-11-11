@@ -9,32 +9,29 @@ const presence = new Presence({
     return !!document.location.pathname.match(
       /\/courses\/[\w-_]{1,}\/[\w-_]{1,}/g
     );
-  },
-  setCourseInfo = () => {
-    // Sets course info from page
-    if (pathStartsWith("/courses")) {
-      if (isInCourse()) {
-        courseName = document.getElementsByTagName("h4")[0].innerText;
-        [courseCompletion] = document
-          .getElementsByClassName("whitespace-pre-wrap")[0]
-          .getElementsByTagName("span")[0]
-          .innerText.split("%");
-        const [lessonEl] = document
-            .getElementsByClassName("bePFDW")[0]
-            .getElementsByTagName("span"),
-          lesson = lessonEl.innerText,
-          chapter = lessonEl
-            .closest(".CollectionSidebarCategory-sc-15b6owa-0")
-            .getElementsByTagName("h5")[0].innerText,
-          seperator = lesson && chapter ? " - " : "";
-        chapterName = chapter + seperator + lesson;
-      } else courseName = document.getElementsByTagName("h1")[0].innerText;
-    }
   };
-
 let courseName: string, chapterName: string, courseCompletion: string;
 
-setInterval(setCourseInfo, 2000);
+setInterval(() => {
+  // Sets course info from page
+  if (pathStartsWith("/courses")) {
+    if (isInCourse()) {
+      courseName = document.getElementsByTagName("h4")[0].textContent;
+      [courseCompletion] = document
+        .getElementsByClassName("whitespace-pre-wrap")[0]
+        .getElementsByTagName("span")[0]
+        .textContent.split("%");
+      const [lessonEl] = document
+          .getElementsByClassName("bePFDW")[0]
+          .getElementsByTagName("span"),
+        lesson = lessonEl.textContent,
+        chapter = lessonEl
+          .closest(".CollectionSidebarCategory-sc-15b6owa-0")
+          .getElementsByTagName("h5")[0].textContent;
+      chapterName = chapter + lesson && chapter ? " - " : `${lesson}`;
+    } else courseName = document.getElementsByTagName("h1")[0].textContent;
+  }
+}, 2000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -64,8 +61,6 @@ presence.on("UpdateData", () => {
     delete presenceData.state;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

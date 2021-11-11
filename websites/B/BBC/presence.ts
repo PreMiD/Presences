@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "658230518520741915"
   }),
-  startsTime = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   getStrings = async () =>
     presence.getStrings(
       {
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
     largeImageKey: "bbc_logo",
     details: (await strings).browse,
-    startTimestamp: startsTime
+    startTimestamp: browsingTimestamp
   };
 
   if (path.includes("/iplayer")) {
@@ -191,11 +191,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).browse;
     presenceData.smallImageKey = "reading";
 
-    const title = document.querySelector("h1")?.textContent,
-      selectedMenu = document.querySelector(
-        "li.sp-c-sport-navigation__item.sp-c-sport-navigation__item--secondary-selected"
-      )?.textContent;
-
+    const title = document.querySelector("h1")?.textContent;
     if (path.includes("/sport/formula1")) {
       presenceData.details = (await strings).viewPage;
       presenceData.state = "Formula 1";
@@ -287,7 +283,11 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).viewTeam;
         presenceData.state = title;
         presenceData.smallImageText = "Cricket Team";
-      } else if (selectedMenu === "Squad") {
+      } else if (
+        document.querySelector(
+          "li.sp-c-sport-navigation__item.sp-c-sport-navigation__item--secondary-selected"
+        )?.textContent === "Squad"
+      ) {
         presenceData.details = (await strings).viewPage;
         presenceData.state = title;
       } else if (path.includes("/counties")) {
@@ -298,15 +298,15 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Women's Cricket";
       } else if (path.includes("/scorecard/")) {
         presenceData.details = "Viewing scoredcard of:";
-
-        const Team1 = document.querySelector(
+        presenceData.state = `${
+          document.querySelector(
             "span.sp-c-fixture__team.sp-c-fixture__team--time.sp-c-fixture__team--time-home.gel-long-primer > span > span"
-          )?.textContent,
-          Team2 = document.querySelector(
+          )?.textContent
+        } & ${
+          document.querySelector(
             "div.sp-c-fixture__wrapper > span.sp-c-fixture__team.sp-c-fixture__team--time.sp-c-fixture__team--time-away.gel-long-primer > span > span"
-          )?.textContent;
-
-        presenceData.state = `${Team1} & ${Team2}`;
+          )?.textContent
+        }`;
       } else if (path.includes("/sport/cricket/")) {
         presenceData.details = (await strings).readingArticle;
         presenceData.state = title;
@@ -484,28 +484,17 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "bbcweather_logo";
     presenceData.details = (await strings).browse;
 
-    const searchValue = document.querySelector<HTMLInputElement>(
-        "input.location-search-input__input"
-      )?.value,
-      [location] = document
+    const [location] = document
         .querySelector("h1#wr-location-name-id")
         ?.textContent.split(" - ") || [null],
-      title = (
-        document.querySelector("h2#wr-c-regional-forecast-slice__title") ||
-        document.querySelector("h1")
-      )?.textContent,
-      time = (
-        document.querySelector("time>span") || document.querySelector("b")
-      )?.textContent,
-      weather = document.querySelector(
-        "div.wr-day-summary > div > span"
-      )?.textContent,
       weatherPages: {
         [key: string]: PresenceData;
       } = {
         "/weather/search": {
           details: (await strings).searchFor,
-          state: searchValue,
+          state: document.querySelector<HTMLInputElement>(
+            "input.location-search-input__input"
+          )?.value,
           smallImageKey: "search"
         },
         "/weather/map": {
@@ -516,7 +505,9 @@ presence.on("UpdateData", async () => {
         "/weather/([0-9])": {
           details: "Viewing weather of:",
           state: location,
-          smallImageText: weather,
+          smallImageText: document.querySelector(
+            "div.wr-day-summary > div > span"
+          )?.textContent,
           smallImageKey: "reading",
           buttons: [
             {
@@ -527,7 +518,10 @@ presence.on("UpdateData", async () => {
         },
         "/weather/features/([0-9])": {
           details: (await strings).readingArticle,
-          state: title,
+          state: (
+            document.querySelector("h2#wr-c-regional-forecast-slice__title") ||
+            document.querySelector("h1")
+          )?.textContent,
           smallImageKey: "reading",
           buttons: [
             {
@@ -549,7 +543,9 @@ presence.on("UpdateData", async () => {
         );
 
         presenceData.details = title;
-        presenceData.state = time;
+        presenceData.state = (
+          document.querySelector("time>span") || document.querySelector("b")
+        )?.textContent;
 
         presenceData.startTimestamp = startTimestamp;
         presenceData.endTimestamp = endTimestamp;
@@ -570,77 +566,76 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).browse;
     presenceData.smallImageKey = "reading";
 
-    const title = document.querySelector("h1")?.textContent,
-      newsPages: {
-        [key: string]: PresenceData;
-      } = {
-        "/have_your_say": {
-          details: (await strings).viewPage,
-          state: "Your Coronavirus Stories"
-        },
-        "/coronavirus": {
-          details: (await strings).viewPage,
-          state: "Coronavirus pandemic"
-        },
-        "(-|/)([0-9])": {
-          details: (await strings).readingArticle,
-          state: title,
-          buttons: [
-            {
-              label: "Read Article",
-              url: document.baseURI
-            }
-          ]
-        },
-        "/in_pictures": {
-          details: (await strings).viewPage,
-          state: "In Pictures"
-        },
-        "/reality_check": {
-          details: (await strings).viewPage,
-          state: "Reality Check"
-        },
-        "/the_reporters": {
-          details: (await strings).viewPage,
-          state: "Long Reads"
-        },
-        "/newsbeat": {
-          details: (await strings).readingArticle,
-          state: "Newsbeat"
-        },
-        "/blogs": {
-          details: (await strings).viewPage,
-          state: "Blogs"
-        },
-        "/technology": {
-          details: (await strings).viewPage,
-          state: "Technology news"
-        },
-        "/science-environment": {
-          details: (await strings).viewPage,
-          state: "Technology news"
-        },
-        "/stories": {
-          details: (await strings).viewPage,
-          state: "Stories"
-        },
-        "/entertainment_and_arts": {
-          details: (await strings).viewPage,
-          state: "Entertainment and arts"
-        },
-        "/health": {
-          details: (await strings).viewPage,
-          state: "Health news"
-        },
-        "/world": {
-          details: (await strings).viewPage,
-          state: "World news"
-        },
-        "/business": {
-          details: (await strings).viewPage,
-          state: "Business news"
-        }
-      };
+    const newsPages: {
+      [key: string]: PresenceData;
+    } = {
+      "/have_your_say": {
+        details: (await strings).viewPage,
+        state: "Your Coronavirus Stories"
+      },
+      "/coronavirus": {
+        details: (await strings).viewPage,
+        state: "Coronavirus pandemic"
+      },
+      "(-|/)([0-9])": {
+        details: (await strings).readingArticle,
+        state: document.querySelector("h1")?.textContent,
+        buttons: [
+          {
+            label: "Read Article",
+            url: document.baseURI
+          }
+        ]
+      },
+      "/in_pictures": {
+        details: (await strings).viewPage,
+        state: "In Pictures"
+      },
+      "/reality_check": {
+        details: (await strings).viewPage,
+        state: "Reality Check"
+      },
+      "/the_reporters": {
+        details: (await strings).viewPage,
+        state: "Long Reads"
+      },
+      "/newsbeat": {
+        details: (await strings).readingArticle,
+        state: "Newsbeat"
+      },
+      "/blogs": {
+        details: (await strings).viewPage,
+        state: "Blogs"
+      },
+      "/technology": {
+        details: (await strings).viewPage,
+        state: "Technology news"
+      },
+      "/science-environment": {
+        details: (await strings).viewPage,
+        state: "Technology news"
+      },
+      "/stories": {
+        details: (await strings).viewPage,
+        state: "Stories"
+      },
+      "/entertainment_and_arts": {
+        details: (await strings).viewPage,
+        state: "Entertainment and arts"
+      },
+      "/health": {
+        details: (await strings).viewPage,
+        state: "Health news"
+      },
+      "/world": {
+        details: (await strings).viewPage,
+        state: "World news"
+      },
+      "/business": {
+        details: (await strings).viewPage,
+        state: "Business news"
+      }
+    };
 
     for (const [key, value] of Object.entries(newsPages)) {
       if (
@@ -694,11 +689,9 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (path === "/search") {
-    const searchValue =
-      document.querySelector<HTMLInputElement>("#search-input")?.value;
-
     presenceData.details = (await strings).searchFor;
-    presenceData.state = searchValue;
+    presenceData.state =
+      document.querySelector<HTMLInputElement>("#search-input")?.value;
     presenceData.smallImageKey = "search";
   }
 

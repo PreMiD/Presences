@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "823408394098311178"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const privacy = await presence.getSetting("privacy"),
@@ -10,10 +10,10 @@ presence.on("UpdateData", async () => {
     };
   if (privacy) {
     presenceData.details = "Browsing Malody Website";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presence.setActivity(presenceData);
   } else {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (document.location.pathname === "/")
       presenceData.details = "Malody Main Page";
     else if (document.location.pathname === "/index") {
@@ -160,37 +160,43 @@ presence.on("UpdateData", async () => {
           document.querySelector("#header > div > a:nth-child(4) > b")
             .textContent
         ) {
-          const a = document.querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
-            ).textContent,
-            b = document.querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
-            ).textContent,
-            c = document.querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
-            ).textContent,
-            d = document.querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
-            ).textContent,
-            e = document.querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank"
-            ).textContent,
-            f = document.querySelector(
-              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(6) > div > p.rank"
-            ).textContent,
-            a1: number = +a.replace("#", ""),
-            b1: number = +b.replace("#", ""),
-            c1: number = +c.replace("#", ""),
-            d1: number = +d.replace("#", ""),
-            e1: number = +e.replace("#", ""),
-            f1: number = +f.replace("#", ""),
-            Top = Math.min(a1, b1, c1, d1, e1, f1);
           presenceData.details = `User: ${
             document.querySelector(
               "#content > div.user_head.g_rblock > div.right > p.name > span"
             ).textContent
           }`;
-          presenceData.state = `Best Rank: ${Top}`;
+          presenceData.state = `Best Rank: ${Math.min(
+            +document
+              .querySelector(
+                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
+              )
+              .textContent.replace("#", ""),
+            +document
+              .querySelector(
+                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
+              )
+              .textContent.replace("#", ""),
+            +document
+              .querySelector(
+                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
+              )
+              .textContent.replace("#", ""),
+            +document
+              .querySelector(
+                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
+              )
+              .textContent.replace("#", ""),
+            +document
+              .querySelector(
+                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank"
+              )
+              .textContent.replace("#", ""),
+            +document
+              .querySelector(
+                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(6) > div > p.rank"
+              )
+              .textContent.replace("#", "")
+          )}`;
           presenceData.smallImageKey = "user";
           presenceData.buttons = [
             {

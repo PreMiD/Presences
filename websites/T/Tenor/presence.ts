@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "904304152048439296"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "tenor",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.pathname === "/") presenceData.details = "In home page";
   else if (document.location.pathname.includes("/view/")) {

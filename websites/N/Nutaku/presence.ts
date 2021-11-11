@@ -36,16 +36,14 @@ function getGameEntity(): GameEntity {
   return JSON.parse(object);
 }
 function getQuery() {
-  const queryString = location.search.split("?", 2),
-    query =
-      queryString && queryString.length > 0 && queryString[1]
-        ? queryString[1].split("&").reduce(function (l, r) {
-            const entry = r ? r.split("=", 2) : null;
-            if (entry === null) return l;
-            return Object.assign(l, { [entry[0]]: entry[1] });
-          }, {})
-        : {};
-  return query;
+  const queryString = location.search.split("?", 2);
+  return queryString && queryString.length > 0 && queryString[1]
+    ? queryString[1].split("&").reduce(function (l, r) {
+        const entry = r ? r.split("=", 2) : null;
+        if (entry === null) return l;
+        return Object.assign(l, { [entry[0]]: entry[1] });
+      }, {})
+    : {};
 }
 (function () {
   const timers: { [key: string]: Date } = {},
@@ -60,7 +58,7 @@ function getQuery() {
           };
           timers.playing ??= new Date();
           data.startTimestamp = timers.playing.getTime();
-          data.details = strings.playing;
+          presenceData.details = strings.playing;
           data.state = game.name;
           data.smallImageKey = images.PLAY;
           data.smallImageText = game.name;
@@ -83,7 +81,7 @@ function getQuery() {
           !!document.querySelector(".cnt-game-catalog > .game-search"),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          data.details = strings.searching;
+          presenceData.details = strings.searching;
           const search = document.querySelector<HTMLInputElement>(
             ".modal.open input.search-field[data-search-url]"
           )?.value;
@@ -105,7 +103,7 @@ function getQuery() {
           if (!context) return null;
           const game = getGameEntity();
           if (!game) return null;
-          data.details = strings.browsing;
+          presenceData.details = strings.browsing;
           data.state = game.name;
           data.smallImageKey = images.BROWSE;
           data.smallImageText = game.name;
@@ -125,7 +123,7 @@ function getQuery() {
           if (!context) return null;
           timers.readingArticle ??= new Date();
           data.startTimestamp = timers.readingArticle.getTime();
-          data.details = strings.readingArticle;
+          presenceData.details = strings.readingArticle;
           data.state = document.title;
           data.smallImageKey = images.BROWSE;
           data.smallImageText = `${strings.readingArticle} ${document.title}`;
@@ -147,7 +145,7 @@ function getQuery() {
           !!ref.location.pathname.match(/^\/news-(page|updates)/i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          data.details = strings.browsing;
+          presenceData.details = strings.browsing;
           data.state = "News";
           data.smallImageKey = images.BROWSE;
           data.smallImageText = "News";
@@ -158,7 +156,7 @@ function getQuery() {
         middleware: (ref) => !!ref.location.hostname.match(/nutaku.net/i),
         exec: (context, data, { strings }: ExecutionArguments) => {
           if (!context) return null;
-          data.details = strings.browsing;
+          presenceData.details = strings.browsing;
           delete data.state;
           if (data.smallImageKey) delete data.smallImageKey;
           return data;
@@ -196,22 +194,24 @@ function getQuery() {
           newLang
         );
       }
-      const presenceData: PresenceData = {
-          largeImageKey: IMAGES.LOGO
-        },
-        query: { [key: string]: unknown } = getQuery(),
+      const query: { [key: string]: unknown } = getQuery(),
         pageIndex = pages.findIndex((x) => x.middleware(window, [query])),
         context = pages[pageIndex];
       if (!context) return false;
 
-      const result = Promise.resolve(
-        context.exec(app, presenceData, {
-          strings: localizedStrings,
-          query,
-          images: IMAGES
-        })
-      );
-      return result
+      return Promise.resolve(
+        context.exec(
+          app,
+          {
+            largeImageKey: IMAGES.LOGO
+          },
+          {
+            strings: localizedStrings,
+            query,
+            images: IMAGES
+          }
+        )
+      )
         .then((data) => {
           if (
             lastPageIndex &&
@@ -223,13 +223,12 @@ function getQuery() {
             lastPageIndex = pageIndex;
           }
           if (!data) {
-            presence.setTrayTitle();
             presence.setActivity({
               largeImageKey: IMAGES.LOGO,
               state: localizedStrings.browsing
             });
           } else {
-            if (data.details) presence.setActivity(data);
+            if (presenceData.details) presence.setActivity(data);
             if (data.buttons && data.buttons.length >= 0) delete data.buttons;
           }
           return data;

@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "699961797041455174"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "simlive"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.host === "laut.fm") {
     if (
@@ -80,7 +80,6 @@ presence.on("UpdateData", async () => {
     }
 
     if (!presenceData.details) {
-      presence.setTrayTitle();
       presence.setActivity();
     } else presence.setActivity(presenceData);
   }

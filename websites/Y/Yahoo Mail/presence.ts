@@ -10,23 +10,23 @@ presence.on("UpdateData", async () => {
     path = document.location.pathname;
   if (path.includes("/folders/") || path.includes("/search/")) {
     if (path.includes("messages")) {
-      data.details = "Viewing an Email";
+      presenceData.details = "Viewing an Email";
       data.startTimestamp = elapsed;
     } else {
-      data.details = "Viewing Mail";
+      presenceData.details = "Viewing Mail";
       data.startTimestamp = elapsed;
     }
   } else if (path.includes("/compose/")) {
-    data.details = "Composing a New Email";
+    presenceData.details = "Composing a New Email";
     data.startTimestamp = elapsed;
   } else if (path.includes("/settings/")) {
-    data.details = "Viewing Settings";
+    presenceData.details = "Viewing Settings";
     data.startTimestamp = elapsed;
   } else if (path.includes("/contacts")) {
-    data.details = "Viewing Contacts";
+    presenceData.details = "Viewing Contacts";
     data.startTimestamp = elapsed;
   } else {
-    data.details = "Viewing Mail";
+    presenceData.details = "Viewing Mail";
     data.startTimestamp = elapsed;
   }
   presence.setActivity(data);

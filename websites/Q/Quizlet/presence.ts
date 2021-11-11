@@ -29,15 +29,15 @@ presence.on("UpdateData", async () => {
     const pathSplits = qzData.layer.path.split("/");
     switch (pathSplits[0]) {
       case "StudyFeed":
-        data.details = "Dashboard";
+        presenceData.details = "Dashboard";
         actionTimestamp = null;
         break;
       case "Settings":
-        data.details = "Settings";
+        presenceData.details = "Settings";
         actionTimestamp = null;
         break;
       case "Profile":
-        data.details = "Viewing profile";
+        presenceData.details = "Viewing profile";
         data.state = document.querySelector(
           ".ProfileHeader-username"
         ).textContent;
@@ -52,14 +52,14 @@ presence.on("UpdateData", async () => {
         actionTimestamp = null;
         break;
       case "Topic":
-        data.details = "Browsing sets on";
+        presenceData.details = "Browsing sets on";
         data.state = document.querySelector("h1").textContent;
         actionTimestamp = null;
         break;
       case "Search":
         data.smallImageKey = "search";
         data.smallImageText = "Searching";
-        data.details = "Searching";
+        presenceData.details = "Searching";
         data.state = qzData.searchLayer.search_term;
         actionTimestamp = null;
         break;
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
         switch (pathSplits[1]) {
           case "show":
             actionTimestamp ??= Date.now();
-            data.details = "Viewing a set";
+            presenceData.details = "Viewing a set";
             data.state = qzData.layer.studyableTitle;
             if (buttons) {
               data.buttons = [
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
             }
             break;
           case "new":
-            data.details = "Creating a set";
+            presenceData.details = "Creating a set";
             actionTimestamp = null;
             break;
         }
@@ -88,56 +88,56 @@ presence.on("UpdateData", async () => {
         actionTimestamp ??= Date.now();
         data.smallImageKey = "gravity";
         data.smallImageText = "Gravity";
-        data.details = "Playing Gravity";
+        presenceData.details = "Playing Gravity";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "Match": // Set > Match
         actionTimestamp ??= Date.now();
         data.smallImageKey = "match";
         data.smallImageText = "Match";
-        data.details = "Playing Match";
+        presenceData.details = "Playing Match";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "LiveGame": // Set > Live
         actionTimestamp ??= Date.now();
         data.smallImageKey = "live";
         data.smallImageText = "Quizlet Live";
-        data.details = "Hosting a live game";
+        presenceData.details = "Hosting a live game";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "Assistant": // Set > Learn
         actionTimestamp ??= Date.now();
         data.smallImageKey = "learn";
         data.smallImageText = "Learn";
-        data.details = "Learning set";
+        presenceData.details = "Learning set";
         data.state = qzData.layer.studyableTitle;
         break;
       case "Cards": // Set > Flashcards
         actionTimestamp ??= Date.now();
         data.smallImageKey = "flashcards";
         data.smallImageText = "Flashcards";
-        data.details = "Reviewing flashcards";
+        presenceData.details = "Reviewing flashcards";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Test": // Set > Test
         actionTimestamp ??= Date.now();
         data.smallImageKey = "test";
         data.smallImageText = "Test";
-        data.details = "Testing";
+        presenceData.details = "Testing";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Learn": // Set > Write
         actionTimestamp ??= Date.now();
         data.smallImageKey = "write";
         data.smallImageText = "Writing";
-        data.details = "Writing";
+        presenceData.details = "Writing";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Spell": // Set > Spell
         actionTimestamp ??= Date.now();
         data.smallImageKey = "spell";
         data.smallImageText = "Spell";
-        data.details = "Spelling";
+        presenceData.details = "Spelling";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
     }
@@ -145,8 +145,8 @@ presence.on("UpdateData", async () => {
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!data.details) {
-    presence.setTrayTitle(); // Clear tray
+  if (!presenceData.details) {
+    // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);
 });

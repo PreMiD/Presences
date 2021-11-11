@@ -25,8 +25,10 @@ function getData() {
 
     document.querySelectorAll("div").forEach((el) => {
       if (el.className.startsWith("userListColumn")) {
-        const txt = el.querySelector("h2").textContent,
-          [count] = txt.split("(")[1].split(")");
+        const [count] = el
+          .querySelector("h2")
+          .textContent.split("(")[1]
+          .split(")");
 
         userCount = parseInt(count);
       }
@@ -93,8 +95,11 @@ function getData() {
 setInterval(getData, 1000);
 
 presence.on("UpdateData", async () => {
-  const userStateText =
-      userState === "screen"
+  const presenceData = {
+    largeImageKey: "logo",
+    smallImageKey: inCall ? userState : "logo",
+    smallImageText: inCall
+      ? userState === "screen"
         ? "Sharing screen..."
         : userState === "presentation"
         ? "Presenting..."
@@ -106,23 +111,18 @@ presence.on("UpdateData", async () => {
         ? "Muted"
         : userState === "headphones"
         ? "Listening..."
-        : "Disconnected",
-    presenceData = {
-      largeImageKey: "logo",
-      smallImageKey: inCall ? userState : "logo",
-      smallImageText: inCall ? userStateText : userState,
-      details: roomName ? roomName : userState,
-      state: inCall ? `${userCount} users` : roomName ? userState : null,
-      startTimestamp: joinedRoomTimestamp
-        ? joinedRoomTimestamp
-        : new Date().getTime()
-    };
+        : "Disconnected"
+      : userState,
+    details: roomName ? roomName : userState,
+    state: inCall ? `${userCount} users` : roomName ? userState : null,
+    startTimestamp: joinedRoomTimestamp
+      ? joinedRoomTimestamp
+      : new Date().getTime()
+  };
 
   if (!presenceData.details) delete presenceData.details;
   if (!presenceData.state) delete presenceData.state;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

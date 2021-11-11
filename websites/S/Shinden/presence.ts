@@ -12,7 +12,7 @@ let iFrameVideo: boolean,
   paused: boolean,
   lastPlaybackState = false,
   playback: boolean,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 interface IFrameData {
   iframeVideo: {
@@ -37,11 +37,11 @@ presence.on("UpdateData", async () => {
     largeImageKey: "shinden"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (lastPlaybackState !== playback) {
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (document.location.host === "shinden.pl") {
@@ -192,8 +192,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

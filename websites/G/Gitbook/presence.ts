@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
       const dashName = document.querySelector(
         "[class*=--dashboardMenu-] [class*=--headerText-]"
       );
-      data.details = dashName
+      presenceData.details = dashName
         ? `In ${dashName.textContent}'s Dashboard`
         : "In a Dashboard";
       actionTimestamp = null;
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
         pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
       actionTimestamp ??= Date.now();
-      if (docName) data.details = `Editing ${docName.textContent}`;
+      if (docName) presenceData.details = `Editing ${docName.textContent}`;
       if (pageName) data.state = `on ${pageName.textContent}`;
       data.startTimestamp = actionTimestamp;
     }
@@ -39,14 +39,14 @@ presence.on("UpdateData", async () => {
       pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
     actionTimestamp ??= Date.now();
-    if (docName) data.details = `Viewing ${docName.textContent}`;
+    if (docName) presenceData.details = `Viewing ${docName.textContent}`;
     if (pageName) data.state = `on ${pageName.textContent}`;
     data.startTimestamp = actionTimestamp;
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!data.details) {
-    presence.setTrayTitle(); // Clear tray
+  if (!presenceData.details) {
+    // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);
 });

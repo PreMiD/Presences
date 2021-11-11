@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "868085258371870820"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 // Presence On
 presence.on("UpdateData", async () => {
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       details: "Page not Supported", // If the page cannot be recognized
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (document.location.href === "https://komiku.id/")
@@ -35,12 +35,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/bookmark/history.html"))
     presenceData.details = "Viewing History";
   else if (document.location.pathname.startsWith("/manga/")) {
-    const name = document
-        .querySelector("header#Judul h1")
-        .textContent.replace(/\t|\n/g, ""),
-      type = document.querySelector("section#Informasi b").textContent;
+    const type = document.querySelector("section#Informasi b").textContent;
     presenceData.details = `Viewing ${type}`;
-    presenceData.state = name;
+    presenceData.state = document
+      .querySelector("header#Judul h1")
+      .textContent.replace(/\t|\n/g, "");
     // View Manga Buttons
     if (buttons) {
       presenceData.buttons = [
@@ -51,15 +50,14 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.pathname.startsWith("/ch/")) {
-    const title = document
-        .querySelector("header#Judul h1")
-        .textContent.replace(/\t|\n/g, "")
-        .replace(/Chapter \d+/, ""),
-      chapter = document.location.pathname
-        .match(/chapter-\d+/)[0]
-        .replace("c", "C")
-        .replace("-", " ");
-    presenceData.details = title;
+    const chapter = document.location.pathname
+      .match(/chapter-\d+/)[0]
+      .replace("c", "C")
+      .replace("-", " ");
+    presenceData.details = document
+      .querySelector("header#Judul h1")
+      .textContent.replace(/\t|\n/g, "")
+      .replace(/Chapter \d+/, "");
     presenceData.state = chapter;
     // View Manga & Chapter Buttons
     if (buttons) {
@@ -78,18 +76,16 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.pathname.startsWith("/cari/")) {
-    const search = document
+    presenceData.details = "Searching:";
+    presenceData.state = document
       .querySelector("div.ntah h1")
       .textContent.replace("Hasil Pencarian", "")
       .replace(/\t|\n/g, "");
-    presenceData.details = "Searching:";
-    presenceData.state = search;
   } else if (document.location.pathname.startsWith("/genre/")) {
-    const genre = document
+    presenceData.details = `Viewing Genre${document
       .querySelector("div.ntah h1")
       .textContent.replace("Genre", "")
-      .replace(/\t|\n/g, "");
-    presenceData.details = `Viewing Genre${genre}`;
+      .replace(/\t|\n/g, "")}`;
   }
 
   // Show Timestamps

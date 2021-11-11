@@ -4,28 +4,7 @@ const presence = new Presence({
   presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: ~~(Date.now() / 1000)
-  },
-  pages: { [key: string]: string } = {
-    "/": "Homepage",
-    "/waze-app/": "Mobile App",
-    "/waze/": "Features",
-    "/carpool/": "Waze Carpool",
-    "/events/": "Events",
-    "/partners/": "Partners",
-    "/wazeforcities/": "Waze for Cities",
-    "/product-partners/": "Product Partners",
-    "/ads/": "Waze Ads",
-    "/carpool/companies/": "Carpool Partners",
-    "/editor/": "Map Editor",
-    "/about/": "About Us",
-    "/careers/": "Waze Careers",
-    "/contact/": "Contact Us",
-    "/communities": "Waze Communities",
-    "/legal/tos/": "Terms of Use",
-    "/legal/privacy/": "Privacy Policy",
-    "/legal/copyright/": "Copyright Policy"
   };
-
 let path: string, start: string, end: string;
 
 function fnd() {
@@ -39,19 +18,39 @@ function fnd() {
         document.querySelector(
           "div.wz-search-container.is-origin > div > div > div.wm-search__selected > span.wm-search__primary"
         ) as HTMLSpanElement
-      )?.innerText ?? "somewhere";
+      )?.textContent ?? "somewhere";
     end =
       (
         document.querySelector(
           "div.wz-search-container.is-destination > div > div > div.wm-search__selected > span.wm-search__primary"
         ) as HTMLSpanElement
-      )?.innerText ?? "somewhere";
+      )?.textContent ?? "somewhere";
 
     presenceData.details = "Planning a route";
     presenceData.state = `From ${start} to ${end}`;
   } else {
     presenceData.details = "Browsing";
-    presenceData.state = pages[path] ?? null;
+    presenceData.state =
+      {
+        "/": "Homepage",
+        "/waze-app/": "Mobile App",
+        "/waze/": "Features",
+        "/carpool/": "Waze Carpool",
+        "/events/": "Events",
+        "/partners/": "Partners",
+        "/wazeforcities/": "Waze for Cities",
+        "/product-partners/": "Product Partners",
+        "/ads/": "Waze Ads",
+        "/carpool/companies/": "Carpool Partners",
+        "/editor/": "Map Editor",
+        "/about/": "About Us",
+        "/careers/": "Waze Careers",
+        "/contact/": "Contact Us",
+        "/communities": "Waze Communities",
+        "/legal/tos/": "Terms of Use",
+        "/legal/privacy/": "Privacy Policy",
+        "/legal/copyright/": "Copyright Policy"
+      }[path] ?? null;
   }
 }
 fnd();

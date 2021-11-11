@@ -40,12 +40,10 @@ TRanimeizle.on("UpdateData", async () => {
     };
 
   if (page.includes("/arama/")) {
-    const searchingFor = document
+    presenceData.details = "Bir şey arıyor:";
+    presenceData.state = document
       .querySelector(".post-head .title strong")
       ?.textContent.replace(/"/g, "");
-
-    presenceData.details = "Bir şey arıyor:";
-    presenceData.state = searchingFor;
     presenceData.smallImageKey = "search";
   } else if (page.includes("/harfler/")) {
     const letter = document.querySelector(
@@ -55,42 +53,31 @@ TRanimeizle.on("UpdateData", async () => {
     presenceData.details = "Bir harfe göz atıyor:";
     presenceData.state = letter ? `Harf: ${letter}` : "Bilinmeyen Harf";
   } else if (page.includes("/tur/")) {
-    const category =
+    presenceData.details = "Bir kategoriye göz atıyor:";
+    presenceData.state =
       document.querySelector(".post-head .title strong")?.textContent ||
       "Bilinmeyen Kategori";
-
-    presenceData.details = "Bir kategoriye göz atıyor:";
-    presenceData.state = category;
   } else if (page.includes("/anime/")) {
-    const animeName = document
+    presenceData.details = "Bir animeye göz atıyor:";
+    presenceData.state = document
       .querySelector(".container .playlist-title h1")
       ?.textContent?.replace("İzle", "");
-
-    presenceData.details = "Bir animeye göz atıyor:";
-    presenceData.state = animeName;
   } else if (page.includes("/haberler/")) {
-    const title =
+    presenceData.details =
       document.querySelector(".post-header h1")?.textContent ||
       "Bilinmeyen Gönderi";
-
-    presenceData.details = title;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = "Bir gönderi okuyor";
   } else if (page.includes("/BanaOzel/")) {
-    const list =
+    presenceData.details = "Bir listeye göz atıyor:";
+    presenceData.state =
       document.querySelector(".post-head .title")?.textContent ||
       "Bilinmeyen Liste";
-
-    presenceData.details = "Bir listeye göz atıyor:";
-    presenceData.state = list;
   } else if (Object.keys(video || {}).length > 0) {
-    const episode = document
-        .querySelector(".container .playlist-title h1")
-        ?.textContent?.replace("İzle", ""),
-      [startTimestamp, endTimestamp] = TRanimeizle.getTimestamps(
-        video.currentTime,
-        video.duration
-      );
+    const [startTimestamp, endTimestamp] = TRanimeizle.getTimestamps(
+      video.currentTime,
+      video.duration
+    );
 
     // Set timestamps
     presenceData.startTimestamp = startTimestamp;
@@ -114,7 +101,9 @@ TRanimeizle.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
 
-    presenceData.state = episode;
+    presenceData.state = document
+      .querySelector(".container .playlist-title h1")
+      ?.textContent?.replace("İzle", "");
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     presenceData.details = "Bir sayfaya göz atıyor:";
     presenceData.state = pages[page] || pages[page.slice(0, -1)];

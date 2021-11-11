@@ -99,7 +99,6 @@ async function sendRequestToDomainAPI(): Promise<Response> {
 
 async function checkDomain(): Promise<DomainCheckState> {
   const result: DomainCheckState = { invalid: true, validDomains: null },
-    cookies = parseCookieString(document.cookie),
     cookieName = "PMD_GOGOANIME_VALID_DOMAINS";
   let currentDomain = document.location.hostname;
   if (currentDomain.split(".").length > 2) {
@@ -108,11 +107,13 @@ async function checkDomain(): Promise<DomainCheckState> {
     ); // ignore the subdomain;
   }
 
-  for (let i = 0; i < cookies.length; i++) {
+  for (let i = 0; i < parseCookieString(document.cookie).length; i++) {
     if (cookies[i].key === cookieName) {
-      const cachedValidDomains = (result.validDomains =
-        cookies[i].value.split("-"));
-      if (cachedValidDomains.includes(currentDomain)) {
+      if (
+        (result.validDomains = cookies[i].value
+          .split("-")
+          .includes(currentDomain))
+      ) {
         result.invalid = false;
         return result;
       }
@@ -166,10 +167,12 @@ presence.on("UpdateData", async () => {
   const currentPath = document.location.pathname;
   let detail: string,
     state: string[] = states.BROWSING;
-  const is404 =
+
+  if (
     document.querySelector("#wrapper_bg > section h1.entry-title")
-      ?.textContent === "404";
-  if (is404) state = states.NOTFOUND;
+      ?.textContent === "404"
+  )
+    state = states.NOTFOUND;
   else if (currentPath === "/") {
     const sel = document.querySelector(
       "#load_recent_release > div.anime_name.recent_release > h2"
@@ -206,47 +209,53 @@ presence.on("UpdateData", async () => {
   else if (currentPath === "/requested-list.html")
     detail = "The requested anime list";
   else if (currentPath === "/upcoming-anime") detail = "Upcoming anime";
-  else if (currentPath.includes("/genre/")) {
-    const genre = currentPath.split("/").pop();
-    detail = `Anime genre: ${upperCaseFirstChar(genre)}`;
-  } else if (currentPath.includes("/category/")) {
-    const animeTitle = document.querySelector(
+  else if (currentPath.includes("/genre/"))
+    detail = `Anime genre: ${upperCaseFirstChar(currentPath.split("/").pop())}`;
+  else if (currentPath.includes("/category/")) {
+    // use the url path as fallback
+    detail = `Anime: ${
+      document.querySelector(
         "#wrapper_bg > section > section.content_left > div.main_body > div:nth-child(2) > div.anime_info_body_bg > h1"
-      )?.textContent,
-      anime = animeTitle ?? formatStr(currentPath.split("/").pop().split("-")); // use the url path as fallback
-    detail = `Anime: ${anime}`;
+      )?.textContent ?? formatStr(currentPath.split("/").pop().split("-"))
+    }`;
   } else if (
     currentPath.includes("/sub-category/") ||
     currentPath.includes("/season/")
-  ) {
-    const cat = currentPath.split("/").pop().split("-");
-    detail = `${formatStr(cat)}`;
-  } else if (currentPath === "/announcement.html") detail = "Announcements";
+  )
+    detail = `${formatStr(currentPath.split("/").pop().split("-"))}`;
+  else if (currentPath === "/announcement.html") detail = "Announcements";
   else if (currentPath === "/news.html") detail = "Latest News";
   else if (currentPath.includes("/requested/")) {
-    const animeTitle = document.querySelector(
+    // use the url path as fallback
+    detail = `Requested anime: ${
+      document.querySelector(
         "#wrapper_bg > section > section.content_left > div > div.anime_info_body > div > h1"
-      )?.textContent,
-      anime = animeTitle ?? formatStr(currentPath.split("/").pop().split("-")); // use the url path as fallback
-    detail = `Requested anime: ${anime}`;
+      )?.textContent ?? formatStr(currentPath.split("/").pop().split("-"))
+    }`;
   } else if (currentPath.includes("/announcement/")) {
     state = states.READING;
-    const announcement = document.querySelector(
-      "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-    ).textContent;
-    detail = `Announcement: ${announcement}`;
+
+    detail = `Announcement: ${
+      document.querySelector(
+        "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+      ).textContent
+    }`;
   } else if (currentPath.includes("/reviews/")) {
     state = states.READING;
-    const review = document.querySelector(
-      "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-    ).textContent;
-    detail = `Review Of: ${review}`;
+
+    detail = `Review Of: ${
+      document.querySelector(
+        "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+      ).textContent
+    }`;
   } else if (currentPath.includes("/news/")) {
     state = states.READING;
-    const news = document.querySelector(
-      "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-    ).textContent;
-    detail = `News: ${news}`;
+
+    detail = `News: ${
+      document.querySelector(
+        "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+      ).textContent
+    }`;
   } else if (currentPath.includes("/privacy.html")) {
     state = states.READING;
     detail = "The website's privacy notes";
@@ -255,32 +264,36 @@ presence.on("UpdateData", async () => {
     detail = "The website's about us";
   } else if (currentPath.includes("/request-anime.html")) {
     state = states.REQUESTING;
-    const anime = (document.getElementsByName("title")[0] as HTMLInputElement)
-      ?.value;
-    detail = `Anime: ${anime}`;
+
+    detail = `Anime: ${
+      (document.getElementsByName("title")[0] as HTMLInputElement)?.value
+    }`;
   } else if (currentPath === "contact-us.html") state = states.CONTACTING;
   else if (currentPath === "/login.html") state = states.LOGIN;
   else if (currentPath === "/register.html") state = states.SIGNUP;
   else if (currentPath === "/user/bookmark") state = states.BOOKMARK;
   else if (currentPath === "//search.html") {
     state = states.SEARCHING;
-    const word = new URLSearchParams(window.location.search)
-      .get("keyword")
-      .split(" ");
-    detail = `Keyword: ${formatStr(word)}`;
+
+    detail = `Keyword: ${formatStr(
+      new URLSearchParams(window.location.search).get("keyword").split(" ")
+    )}`;
   } else if (currentPath.includes("/trailers/")) {
     state = states.WATCHING;
-    const anime = document.querySelector(
-      "#wrapper_bg > section > section.content_right.block_mb > div:nth-child(1) > div > div.related_right.center_col1 > div > ul > li > div.name > a > h4"
-    ).textContent;
-    detail = `Trailer Of: ${anime}`;
+
+    detail = `Trailer Of: ${
+      document.querySelector(
+        "#wrapper_bg > section > section.content_right.block_mb > div:nth-child(1) > div > div.related_right.center_col1 > div > ul > li > div.name > a > h4"
+      ).textContent
+    }`;
   } else {
     state = states.WATCHING;
-    const anime = currentPath.split("/").pop().split("-"),
-      episode = `${anime[anime.length - 2]} ${anime[anime.length - 1]}`;
+    const anime = currentPath.split("/").pop().split("-");
     detail = `${formatStr(
       anime.slice(0, anime.length - 2)
-    )}: ${upperCaseFirstChar(episode)}`;
+    )}: ${upperCaseFirstChar(
+      `${anime[anime.length - 2]} ${anime[anime.length - 1]}`
+    )}`;
   }
 
   const presenceData: PresenceData = {

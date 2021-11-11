@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "614583717951963137" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let board: HTMLElement, profile: string;
 
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     },
     displayPrivateBoards = await presence.getSetting("displayPrivateBoards");
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "trello.com") {
     if (document.location.pathname.includes("/b/")) {
@@ -171,8 +171,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     search: "presence.activity.searching"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let iFrameVideo: boolean,
   currentTime: number,
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 
   let title;
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname.includes("/serie")) {
     title = document.querySelector(".bd-hd");
@@ -44,13 +44,14 @@ presence.on("UpdateData", async () => {
       const year = document.querySelector(".bd-hd > span");
       title = title.textContent.replace(year.textContent, "");
 
-      const seasonList = document
-          .querySelector(".tabs > ul > li.active")
-          .textContent.includes("Temporadas"),
-        season = document.querySelector(".accordion > li.open > div");
+      const season = document.querySelector(".accordion > li.open > div");
 
-      if (seasonList && season !== null) {
-        const sseason = season.textContent.replace("ª Temporada", "");
+      if (
+        document
+          .querySelector(".tabs > ul > li.active")
+          .textContent.includes("Temporadas") &&
+        season !== null
+      ) {
         if (document.querySelector("body > .modal.fade.in") !== null) {
           presenceData.details = title;
           presenceData.state = season.textContent;
@@ -69,7 +70,10 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageText = (await strings).pause;
           }
         } else {
-          presenceData.details = `Vendo temporada ${sseason} da série:`;
+          presenceData.details = `Vendo temporada ${season.textContent.replace(
+            "ª Temporada",
+            ""
+          )} da série:`;
           presenceData.state = title;
         }
       } else {
@@ -80,10 +84,12 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/filme")) {
     title = document.querySelector(".bd-hd");
     if (title !== null) {
-      const year = document.querySelector(".bd-hd > span");
       let rating = document.querySelector(".rate > p > span").textContent;
       rating = `${rating}/10`;
-      title = title.textContent.replace(year.textContent, "");
+      title = title.textContent.replace(
+        document.querySelector(".bd-hd > span").textContent,
+        ""
+      );
 
       if (document.querySelector("body > .modal.fade.in") !== null) {
         presenceData.details = title;
@@ -116,8 +122,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/")
     presenceData.details = "Navegando...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

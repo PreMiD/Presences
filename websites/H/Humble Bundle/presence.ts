@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "633816611022962708"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname === "www.humblebundle.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     search = document.querySelector("#site-search");
     if (document.location.pathname === "/")
       presenceData.details = "Viewing homepage";
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
       if (document.location.pathname.includes("/promo")) {
         presenceData.details = "Viewing promo:";
         title = document.querySelector("head > title");
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
       } else if (document.location.pathname.includes("/search")) {
         presenceData.details = "Searching for something";
         presenceData.state = "in the store";
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
         title = document.querySelector(
           "body > div.page-wrap > div.base-main-wrapper > div.inner-main-wrapper > section > div.main-content > div.full-width-container.js-page-content > div > div.row-view.gray-row.showcase-row > div > div:nth-child(1) > div > div > h1"
         );
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
       }
     } else if (document.location.pathname.includes("/store"))
       presenceData.details = "Browsing the store";
@@ -65,35 +65,33 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.hostname === "jobs.humblebundle.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing jobs at Humble";
   } else if (document.location.hostname === "support.humblebundle.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     title = document.querySelector("head > title");
     if (
       document.location.pathname === "/" ||
-      title.innerText === "Humble Bundle"
+      title.textContent === "Humble Bundle"
     )
       presenceData.details = "Browsing Support Center";
     else {
       presenceData.details = "Support - Reading:";
-      presenceData.state = title.innerText.replace(" – Humble Bundle", "");
+      presenceData.state = title.textContent.replace(" – Humble Bundle", "");
       presenceData.smallImageKey = "reading";
     }
   } else if (document.location.hostname === "blog.humblebundle.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (document.location.pathname === "/")
       presenceData.details = "Browsing Blog";
     else {
       presenceData.details = "Blog - Reading:";
       title = document.querySelector("#main > article > header > h1");
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       presenceData.smallImageKey = "reading";
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

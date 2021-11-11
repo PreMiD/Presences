@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "661150919584514067"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.hostname === "usercord.org") {
     presenceData.details = "Viewing Page:";
@@ -40,15 +40,12 @@ presence.on("UpdateData", () => {
       presenceData.state = "Name: DiscordLabs";
     } else if (document.location.pathname.includes("/u/")) {
       const priceEls = document.getElementsByClassName("usertitle");
-      for (let i = 0; i < priceEls.length; i++) {
-        const profilename = priceEls[i].textContent;
+      for (; i < priceEls.length; i++) {
         presenceData.details = "Viewing a profile:";
-        presenceData.state = profilename;
+        presenceData.state = priceEls[0].textContent;
       }
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

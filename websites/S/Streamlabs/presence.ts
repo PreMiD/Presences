@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "711871296346128395"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   userType = [
     "Viewing the ",
     "Viewing their ",
@@ -26,19 +26,19 @@ presence.on("UpdateData", async () => {
 
   switch (window.location.hostname) {
     case "howto.streamlabs.com":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = `${userType[0]}Forums`;
       break;
     case "support.streamlabs.com":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = `${userType[0]}Support Pages`;
       break;
     case "dev.streamlabs.com":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = `${userType[0]}API Documentation`;
       break;
     case "ideas.streamlabs.com":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = `${userType[0]}Feature Suggestions`;
       break;
   }
@@ -46,19 +46,19 @@ presence.on("UpdateData", async () => {
   if (window.location.hostname === "streamlabs.com") {
     switch (document.location.pathname) {
       case "/":
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Home Page";
         break;
       case "/login":
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Logging in";
         break;
       case "/clips":
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = `${userType[1]}Clips`;
         break;
       case "/best-donation-clips":
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = `${userType[0]}Best Clips`;
         break;
     }
@@ -118,11 +118,11 @@ presence.on("UpdateData", async () => {
           //Streamlabs rewards does not captilise first string of the teir.
           break;
       }
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = titleDashboard;
     } else if (document.location.pathname.includes("/editor")) {
       titleSiteCreator = `${userType[3]}Site`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = titleSiteCreator;
     }
   }
@@ -187,16 +187,14 @@ presence.on("UpdateData", async () => {
         //Streamlabs rewards does not captilise first string of the teir.
         break;
     }
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = titleDashboard;
   } else if (document.location.pathname.includes("/editor")) {
     titleSiteCreator = `${userType[3]}Site`;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = titleSiteCreator;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

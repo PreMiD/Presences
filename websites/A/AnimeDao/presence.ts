@@ -74,9 +74,8 @@ presence.on("UpdateData", async () => {
     } else if (pathname.startsWith("/popular-anime"))
       presenceData.details = "Viewing popular anime";
     else if (pathname.startsWith("/anime")) {
-      const title = document.querySelector("h2");
       presenceData.details = "Viewing an anime";
-      presenceData.state = title?.textContent.trim();
+      presenceData.state = document.querySelector("h2")?.textContent.trim();
     } else if (pathname.startsWith("/search")) {
       presenceData.details = "Searching";
       presenceData.smallImageKey = "search";

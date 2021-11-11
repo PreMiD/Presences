@@ -48,11 +48,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Looking at past matches";
     presenceData.startTimestamp = time;
   } else if (path.includes("/vod/")) {
-    const timestamps = presence.getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    );
-    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
     presenceData.smallImageKey = paused ? "pause" : "play";
     if (paused) {
       delete presenceData.startTimestamp;
@@ -74,8 +71,6 @@ presence.on("UpdateData", async () => {
       url: document.URL
     }
   ];
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

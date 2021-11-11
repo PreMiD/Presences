@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "803366782722244638"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -12,13 +12,13 @@ presence.on("UpdateData", async () => {
 
   if (window.location.hostname.includes("garticphone")) {
     if (window.location.pathname.endsWith("lobby")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Awaiting the launch of the game...";
     } else if (window.location.pathname.endsWith("start")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Start a story";
     } else if (window.location.pathname.endsWith("draw")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       if (privacyDraw === true) presenceData.details = "Drawing...";
       else {
         presenceData.details = "Drawing:";
@@ -27,10 +27,10 @@ presence.on("UpdateData", async () => {
         }`;
       }
     } else if (window.location.pathname.endsWith("write")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Writing...";
     } else if (window.location.pathname.endsWith("book")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       if (privacyAlbum === true) presenceData.details = "Look at the album";
       else {
         presenceData.details = "Look at the album of:";
@@ -39,13 +39,11 @@ presence.on("UpdateData", async () => {
         }`;
       }
     } else {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Browsing the home page";
       presenceData.endTimestamp; // Reset timestamp if not in game
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

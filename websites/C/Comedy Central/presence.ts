@@ -13,10 +13,9 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.startsWith("/episodes")) {
     const player: HTMLVideoElement = document.querySelector(
-        ".edge-player-content-element"
-      ),
-      show = document.querySelector(".header h3 a").textContent,
-      epTitle = document.querySelector(".sub-header h1").textContent;
+      ".edge-player-content-element"
+    );
+
     let epNumber: string | Element | HTMLElement =
       document.querySelector(".meta span");
     epNumber &&= `${(epNumber as HTMLElement).textContent
@@ -29,8 +28,9 @@ presence.on("UpdateData", async () => {
       Math.floor(player.duration)
     );
 
-    data.details = show;
-    data.state = epNumber + epTitle;
+    presenceData.details = document.querySelector(".header h3 a").textContent;
+    data.state =
+      epNumber + document.querySelector(".sub-header h1").textContent;
     data.smallImageKey = player.paused ? "pause" : "play";
     data.smallImageText = player.paused
       ? (await strings).pause
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data);
   } else {
-    data.details = "Browsing...";
+    presenceData.details = "Browsing...";
     data.startTimestamp = Date.now();
 
     presence.setActivity(data);

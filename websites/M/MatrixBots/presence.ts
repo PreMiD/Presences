@@ -15,13 +15,6 @@ matrixPresence.on("UpdateData", async () => {
     matrixPData.smallImageKey = "browsing";
     matrixPData.smallImageText = "Browsing Bots";
   } else if (matrixPage.includes("/bots")) {
-    const bot: string = document.evaluate(
-      "/html/body/div[4]/h2/text()",
-      document,
-      null,
-      XPathResult.FIRST_ORDERED_NODE_TYPE,
-      null
-    ).singleNodeValue.textContent;
     matrixPData.buttons = [
       {
         label: "View Bot",
@@ -29,13 +22,18 @@ matrixPresence.on("UpdateData", async () => {
       }
     ];
     matrixPData.details = "Watching Bot:";
-    matrixPData.state = bot;
+    matrixPData.state = document.evaluate(
+      "/html/body/div[4]/h2/text()",
+      document,
+      null,
+      XPathResult.FIRST_ORDERED_NODE_TYPE,
+      null
+    ).singleNodeValue.textContent;
     matrixPData.smallImageText = "Browsing Bot";
     matrixPData.smallImageKey = "browsing";
   } else if (matrixPage === "/me") {
-    const username: string = document.getElementsByTagName("h1")[0].innerHTML;
     matrixPData.details = "Watching Profile:";
-    matrixPData.state = username;
+    matrixPData.state = document.getElementsByTagName("h1")[0].innerHTML;
   } else if (matrixPage === "/add") {
     matrixPData.details = "Adding Bot";
     matrixPData.smallImageKey = "writing";

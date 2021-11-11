@@ -38,13 +38,13 @@ presence.on("UpdateData", async () => {
     };
 
   if ((page && pages[page]) || (page && pages[page.slice(0, -1)])) {
-    data.details = "Viewing a page:";
+    presenceData.details = "Viewing a page:";
     data.state = pages[page] || pages[page.slice(0, -1)];
   } else if (page.includes("/training/")) {
-    data.details = "Viewing a page:";
+    presenceData.details = "Viewing a page:";
     data.state = "Training";
   } else if (page.includes("/@/")) {
-    data.details = "Searching for:";
+    presenceData.details = "Searching for:";
     data.state = document.title.replace(" • lichess.org", "");
     data.smallImageKey = "search";
   } else if (
@@ -53,12 +53,12 @@ presence.on("UpdateData", async () => {
     game &&
     game.textContent !== ""
   ) {
-    data.details = game.textContent.trim();
+    presenceData.details = game.textContent.trim();
     data.state = status.textContent.trim();
   } else if (!status && game && game.textContent !== "") {
-    data.details = "Playing a game:";
+    presenceData.details = "Playing a game:";
     data.state = game.textContent.trim();
   }
 
-  if (data.details && data.state) presence.setActivity(data);
+  if (presenceData.details && data.state) presence.setActivity(data);
 });

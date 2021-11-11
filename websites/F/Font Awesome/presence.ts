@@ -14,10 +14,9 @@ pPresence.on("UpdateData", async () => {
     pData.details = "Browsing Page:";
     pData.state = "Main";
   } else if (pPage.includes("/icons")) {
-    const urlParams: URLSearchParams = new URLSearchParams(
-        window.location.search
-      ),
-      myParam: string = urlParams.get("q");
+    const myParam: string = new URLSearchParams(window.location.search).get(
+      "q"
+    );
 
     if (myParam === null) {
       const icon: HTMLElement = document.querySelector(

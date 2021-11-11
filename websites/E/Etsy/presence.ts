@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "620721262112538625" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let item: HTMLElement;
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "etsy"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "investors.etsy.com") {
     presenceData.details = "Viewing page:";
@@ -32,9 +32,9 @@ presence.on("UpdateData", async () => {
         "#listing-page-cart > div > div.listing-page-title-component > h1"
       ) as HTMLElement;
       presenceData.details = "Viewing product:";
-      if (item.innerText.length > 128)
-        presenceData.state = `${item.innerText.substring(0, 125)}...`;
-      else presenceData.state = item.innerText;
+      if (item.textContent.length > 128)
+        presenceData.state = `${item.textContent.substring(0, 125)}...`;
+      else presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
         "#content > div > div > div > div > div > h1"
       );
       presenceData.details = "Viewing category:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = "Viewing shop:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = "Viewing profile:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
         );
 
         presenceData.details = "Reading DMs with:";
-        presenceData.state = item.innerText;
+        presenceData.state = item.textContent;
 
         presenceData.smallImageKey = "reading";
 
@@ -231,10 +231,8 @@ presence.on("UpdateData", async () => {
       }
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

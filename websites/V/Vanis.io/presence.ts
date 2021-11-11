@@ -37,10 +37,10 @@ presence.on("UpdateData", async () => {
   }
 
   if (overlay.style.display !== "none" && Mass.startsWith("0")) {
-    data.details = "Main menu";
+    presenceData.details = "Main menu";
     data.startTimestamp = getTimeStamp();
   } else {
-    data.details = `Playing on server: ${Region} | ${Server}`;
+    presenceData.details = `Playing on server: ${Region} | ${Server}`;
     data.state = `Player: ${Nickname} | Mass: ${Mass}`;
     data.startTimestamp = getTimeStamp();
   }

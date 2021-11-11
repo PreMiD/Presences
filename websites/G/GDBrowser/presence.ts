@@ -15,16 +15,14 @@ presence.on("UpdateData", async () => {
         window.location.pathname.toLowerCase() === "/daily") ||
       window.location.pathname.toLowerCase() === "/weekly"
     ) {
-      const downloads = document.getElementsByClassName(
-          "inline smaller spaced"
-        )[0].innerHTML,
-        likes = document.getElementsByClassName("inline smaller spaced")[1]
-          .innerHTML,
-        orbs = document.getElementsByClassName("orbs")[1].innerHTML;
-      presenceData.state = `🔽 ${downloads} | 👍 ${likes} | 🔵 ${orbs}`;
+      presenceData.state = `🔽 ${
+        document.getElementsByClassName("inline smaller spaced")[0].innerHTML
+      } | 👍 ${
+        document.getElementsByClassName("inline smaller spaced")[1].innerHTML
+      } | 🔵 ${document.getElementsByClassName("orbs")[1].innerHTML}`;
       presenceData.details = `${
-        document.getElementsByTagName("h1")[0].innerText
-      } ${document.getElementById("authorLink").innerText}`;
+        document.getElementsByTagName("h1")[0].textContent
+      } ${document.getElementById("authorLink").textContent}`;
       presenceData.smallImageKey = `diff_${document
         .getElementById("difficultytext")
         .innerHTML.toLowerCase()

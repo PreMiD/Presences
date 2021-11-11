@@ -69,11 +69,9 @@ presence.on("UpdateData", async () => {
             presenceData.state =
               document.querySelector(".content-title-big").textContent;
           }
-          const timestamps = presence.getTimestamps(
-            video.currentTime,
-            video.duration
-          );
-          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+
+          [presenceData.startTimestamp, presenceData.endTimestamp] =
+            presence.getTimestamps(video.currentTime, video.duration);
           if (video.paused) {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
@@ -86,10 +84,11 @@ presence.on("UpdateData", async () => {
         }
       }
       if (document.location.pathname.startsWith("/live/")) {
-        const video = document.querySelector(
-          "#livestreaming-player__player_html5_api"
-        ) as HTMLVideoElement;
-        if (video) {
+        if (
+          document.querySelector(
+            "#livestreaming-player__player_html5_api"
+          ) as HTMLVideoElement
+        ) {
           presenceData.details = document.getElementsByClassName(
             "b-livestreaming-detail__title section__title"
           )[1].textContent;

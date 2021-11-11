@@ -41,28 +41,28 @@ presence.on("UpdateData", async () => {
     };
 
   if (productName && productName.textContent !== "") {
-    data.details = "Bir ürüne göz atıyor:";
+    presenceData.details = "Bir ürüne göz atıyor:";
     data.state = `${productName.textContent}${
       price ? ` - ${price.textContent.trim()}` : ""
     }`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     // We are using slice(0, -1) here to slice the last "/" and check if there's a record on pages variable.
-    data.details = "Bir sayfaya göz atıyor:";
+    presenceData.details = "Bir sayfaya göz atıyor:";
     data.state = pages[page] || pages[page.slice(0, -1)];
   } else if (page.includes("/arama")) {
-    data.details = "Bir şey arıyor:";
+    presenceData.details = "Bir şey arıyor:";
     data.state =
       document.title && document.title.includes(" - GittiGidiyor")
         ? document.title.replace(" - GittiGidiyor", "")
         : "";
     data.smallImageKey = "search";
   } else if (seller && seller.textContent !== "") {
-    data.details = "Bir mağazaya göz atıyor:";
+    presenceData.details = "Bir mağazaya göz atıyor:";
     data.state = seller.textContent.trim();
   } else {
-    data.details = "Bir sayfaya göz atıyor:";
+    presenceData.details = "Bir sayfaya göz atıyor:";
     data.state = "Ana Sayfa";
   }
 
-  if (data.details && data.state) presence.setActivity(data);
+  if (presenceData.details && data.state) presence.setActivity(data);
 });

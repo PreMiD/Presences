@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
         video.currentTime,
         video.duration
       );
-    data.details = episodeName
+    presenceData.details = episodeName
       .replace(`${episode}.Bölüm`, "")
       .replace(`Episode ${episode}`, "");
     data.state = (await strings).episode.replace("{0}", episode);
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     }
   } else {
     data.startTimestamp = startTimestamp;
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     if (document.location.pathname.indexOf("detail") > -1)
       data.state = document.querySelector(".title").textContent;
   }

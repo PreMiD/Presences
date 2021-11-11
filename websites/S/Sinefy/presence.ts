@@ -53,17 +53,14 @@ sinefy.on("UpdateData", async () => {
     };
 
   if (page.includes("/izle/")) {
-    const title =
-        document.querySelector(".bg-cover-faker a h1.page-title")
-          ?.textContent ||
-        document.querySelector(".bg-cover-faker h1.page-title a")
-          ?.textContent ||
-        "Bilinmeyen Dizi/Film",
-      episode =
-        document.querySelector(".bg-cover-faker h1.page-title span")
-          ?.textContent || null;
+    const episode =
+      document.querySelector(".bg-cover-faker h1.page-title span")
+        ?.textContent || null;
 
-    activity.details = title.replace(episode, "");
+    activity.details =
+      document.querySelector(".bg-cover-faker a h1.page-title")?.textContent ||
+      document.querySelector(".bg-cover-faker h1.page-title a")?.textContent ||
+      "Bilinmeyen Dizi/Film".replace(episode, "");
     if (episode) activity.state = episode.replace("izle", "");
 
     if (Object.keys(video || {}).length > 0) {
@@ -97,21 +94,17 @@ sinefy.on("UpdateData", async () => {
 
     sinefy.setActivity(activity);
   } else if (page.includes("/gozat/")) {
-    const title =
+    activity.details = "Bir kategoriye göz atıyor:";
+    activity.state =
       document.querySelector(".bg-cover-faker h1.page-title")?.textContent ||
       "Bilinmeyen Kategori";
 
-    activity.details = "Bir kategoriye göz atıyor:";
-    activity.state = title;
-
     sinefy.setActivity(activity);
   } else if (page.includes("/profil/")) {
-    const username =
+    activity.details = "Bir kullanıcıya göz atıyor:";
+    activity.state =
       document.querySelector(".generic-box h2.title-secondary a")
         ?.textContent || "Bilinmeyen Kullanıcı";
-
-    activity.details = "Bir kullanıcıya göz atıyor:";
-    activity.state = username;
 
     if (settings.buttons === true) {
       activity.buttons = [
@@ -124,12 +117,10 @@ sinefy.on("UpdateData", async () => {
 
     sinefy.setActivity(activity);
   } else if (page.includes("/oyuncu/")) {
-    const name =
+    activity.details = "Bir oyuncuya göz atıyor:";
+    activity.state =
       document.querySelector(".bg-cover-faker h1.page-title")?.textContent ||
       "Bilinmeyen Kategori";
-
-    activity.details = "Bir oyuncuya göz atıyor:";
-    activity.state = name;
 
     if (settings.buttons === true) {
       activity.buttons = [
@@ -142,12 +133,10 @@ sinefy.on("UpdateData", async () => {
 
     sinefy.setActivity(activity);
   } else if (page.includes("/forum/")) {
-    const entry =
+    activity.details = "Forum gönderisi:";
+    activity.state =
       document.querySelector(".story-detail .story-header h1.title-primary")
         ?.textContent || "Bilinmeyen Kategori";
-
-    activity.details = "Forum gönderisi:";
-    activity.state = entry;
 
     if (settings.buttons === true) {
       activity.buttons = [

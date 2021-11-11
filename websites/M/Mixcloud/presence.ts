@@ -10,11 +10,7 @@ const presence = new Presence({
 let author: string, title: string, url: string, openUrlText: string;
 
 presence.on("UpdateData", async () => {
-  const player = document.querySelector(
-    "[class^='PlayerControls__PlayerContainer']"
-  );
-
-  if (player) {
+  if (document.querySelector("[class^='PlayerControls__PlayerContainer']")) {
     const normalIsPlaying: boolean =
         document
           .querySelector("div[class^='PlayButton__PlayerControl']")
@@ -67,7 +63,6 @@ presence.on("UpdateData", async () => {
     if (isPlaying) presence.setActivity(data);
     else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   }
 });

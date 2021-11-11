@@ -22,7 +22,7 @@ const presence = new Presence({
       },
       await presence.getSetting("lang").catch(() => "en")
     ),
-  startsTime = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let strings = getStrings(),
   oldLang: string = null,
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "animep_logo",
     details: (await strings).browse,
     smallImageKey: "reading",
-    startTimestamp: startsTime
+    startTimestamp: browsingTimestamp
   };
 
   const path = document.location.pathname,
@@ -222,8 +222,6 @@ presence.on("UpdateData", async () => {
       .trim();
 
     if (!isNaN(duration)) {
-      const timestamps = presence.getTimestamps(currentTime, duration);
-
       presenceData.details = AnimeDetails.replace(
         "%title%",
         content.title
@@ -236,7 +234,8 @@ presence.on("UpdateData", async () => {
         `EP.${content.episode.ep} ${content.episode.title ?? ""}`
       );
 
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(currentTime, duration);
 
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused

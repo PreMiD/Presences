@@ -225,7 +225,7 @@ function languageCode(language: string): string {
   }
 }
 
-const browsingStamp: number = Math.floor(Date.now() / 1000);
+const browsingTimestamp: number = Math.floor(Date.now() / 1000);
 let type: string, from: string, to: string, typet: string;
 
 presence.on("UpdateData", async () => {
@@ -248,7 +248,7 @@ presence.on("UpdateData", async () => {
 
   const showTime: boolean = await presence.getSetting("stamp");
 
-  presenceData.startTimestamp = showTime ? browsingStamp : null;
+  presenceData.startTimestamp = showTime ? browsingTimestamp : null;
   if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
 
   const showType: boolean = await presence.getSetting("type");

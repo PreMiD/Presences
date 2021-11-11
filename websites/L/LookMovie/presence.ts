@@ -14,13 +14,8 @@ presence.on("UpdateData", async () => {
     video: HTMLVideoElement = document.querySelector("video");
 
   if (video !== null && !isNaN(video.duration)) {
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
-
     if (document.location.pathname.includes("/shows/view")) {
-      data.details = `${
+      presenceData.details = `${
         document.querySelector(".watch-heading > h1 > span").previousSibling
           .textContent
       }(${document.querySelector(".watch-heading > h1 > span").textContent})`;
@@ -28,7 +23,7 @@ presence.on("UpdateData", async () => {
         document.querySelector(".seasons-switcher > span").textContent
       } ${document.querySelector(".episodes-switcher > span").textContent}`;
     } else if (document.location.pathname.includes("/movies/view")) {
-      data.details = document.querySelector(
+      presenceData.details = document.querySelector(
         ".watch-heading > h1 > span"
       ).previousSibling.textContent;
       data.state = document.querySelector(
@@ -39,7 +34,11 @@ presence.on("UpdateData", async () => {
     data.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     if (video.paused) {
       delete data.startTimestamp;
@@ -48,7 +47,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data, !video.paused);
   } else {
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     data.smallImageKey = "search";
     data.smallImageText = (await strings).browsing;
     presence.setActivity(data);

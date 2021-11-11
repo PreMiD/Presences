@@ -8,7 +8,7 @@ const presence = new Presence({
     view: "Viewing",
     read: "Reading"
   },
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   modes = ["CW", "LSB", "USB", "AM", "FM", "AMsync"];
 
 let frequency: string,
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "favicon",
     //smallImageKey: "key",
     smallImageText: "University of Twente SDR",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") {

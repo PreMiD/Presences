@@ -14,54 +14,54 @@ function getTime(list: string[]): number {
   return ret;
 }
 
-function getTimestamps(audioDuration: string): Array<number> {
-  const splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
+function getTimestamps(audioDuration: string): number[] {
+  const startTime = Date.now();
+  return [
+    Math.floor(startTime / 1000),
+    Math.floor(startTime / 1000) + getTime(audioDuration.split(":").reverse())
+  ];
 }
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "applemusic-logo"
-    },
-    playerCheck = document.querySelector(
+  const presenceData: PresenceData = {
+    largeImageKey: "applemusic-logo"
+  };
+  if (
+    document.querySelector(
       ".web-chrome-playback-controls__playback-btn[disabled]"
     )
       ? false
-      : true;
-  if (playerCheck) {
-    const title = document
-        .querySelector(
-          ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
-        )
-        ?.textContent.trim(),
-      author = document
-        .querySelector(
-          ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
-        )
-        ?.textContent.split("—")[0],
-      audioTime = document.querySelector(
-        ".web-chrome-playback-lcd__time-end"
-      ).textContent,
-      paused = document.querySelector(
-        ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
-      )
-        ? true
-        : false;
+      : true
+  ) {
+    const paused = document.querySelector(
+      ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
+    )
+      ? true
+      : false;
 
-    data.details = title;
-    data.state = author;
-    data.smallImageKey = paused ? "pause" : "play";
-    data.smallImageText = paused ? (await strings).pause : (await strings).play;
-    [data.startTimestamp, data.endTimestamp] = getTimestamps(audioTime);
+    presenceData.details = document
+      .querySelector(
+        ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+      )
+      ?.textContent.trim();
+    presenceData.state = document
+      .querySelector(
+        ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
+      )
+      ?.textContent.split("—")[0];
+    presenceData.smallImageKey = paused ? "pause" : "play";
+    presenceData.smallImageText = paused
+      ? (await strings).pause
+      : (await strings).play;
+    [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
+      document.querySelector(".web-chrome-playback-lcd__time-end").textContent
+    );
 
     if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else presence.clearActivity();
 });

@@ -8,7 +8,7 @@ const presence = new Presence({
 
 let lastPlaybackState: boolean,
   lastPath: string,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const playback =
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
   if (lastPath !== curPath || lastPlaybackState !== playback) {
     lastPath = curPath;
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
   if (!playback) {
     if (curPath.startsWith("/entity.php")) {
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
     else if (curPath.startsWith("/reset-password"))
       presenceData.details = "Đang đặt lại mật khẩu...";
     else presenceData.details = "Đang xem trang chủ...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (
       !curPath.startsWith("/entity.php") &&

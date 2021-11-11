@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     search: "presence.activity.searching"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let iFrameVideo: boolean,
   currentTime: number,
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 
   let title;
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname.includes("/serie")) {
     title = document.querySelector("#lp > section > h2");
@@ -90,10 +90,10 @@ presence.on("UpdateData", async () => {
         document.querySelector("#watchMovieButton > div.tit").textContent ===
         "audio"
       ) {
-        const year = document.querySelector(".year").textContent,
-          rating = document.querySelector(".rating").textContent;
         presenceData.details = title.textContent;
-        presenceData.state = `${year} - ${rating}`;
+        presenceData.state = `${
+          document.querySelector(".year").textContent
+        } - ${document.querySelector(".rating").textContent}`;
 
         if (iFrameVideo === true && !isNaN(duration)) {
           const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -131,8 +131,6 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/")
     presenceData.details = "Navegando...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

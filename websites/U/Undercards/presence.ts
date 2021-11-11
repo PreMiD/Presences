@@ -2,8 +2,8 @@
 const undercards = new Presence({
     clientId: "799885664538853417"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  URLMap: { [index: string]: Array<string> } = {
+  browsingTimestamp = Math.floor(Date.now() / 1000),
+  URLMap: { [index: string]: string[] } = {
     SignUp: ['"Registering an account"', '""'],
     AccountValidation: ['"Activating account"', '""'],
     SignIn: ['"Signing in"', '""'],
@@ -49,17 +49,18 @@ undercards.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
   if (document.location.pathname === "/") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing homepage";
   } else {
-    const re = new RegExp("^/([a-zA-Z.]+)"),
-      [, path] = document.location.pathname.match(re);
+    const [, path] = document.location.pathname.match(
+      new RegExp("^/([a-zA-Z.]+)")
+    );
     if (Object.prototype.hasOwnProperty.call(URLMap, path)) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = eval(URLMap[path][0]);
       presenceData.state = eval(URLMap[path][1]);
     } else if (path.endsWith(".jsp")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing page";
       presenceData.state = getText(".mainContent > h2:nth-child(2)");
     } else presenceData.details = "Browsing...";

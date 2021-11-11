@@ -7,21 +7,21 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const playback =
-      document.querySelector(
-        "#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"
-      ) !== null &&
-      document.querySelector("#hbo-sdk--player-title > div.content-title") !==
-        null
-        ? true
-        : false,
-    video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
       "#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"
     ),
     presenceData: PresenceData = {
       largeImageKey: "lg"
     };
-  if (!playback || !video) {
+  if (
+    !document.querySelector(
+      "#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"
+    ) !== null &&
+    document.querySelector("#hbo-sdk--player-title > div.content-title") !==
+      null
+      ? true
+      : false || !video
+  ) {
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
@@ -59,6 +59,5 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !video.paused);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

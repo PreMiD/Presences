@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "685611188306051093"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   searchItems = {
     arch: "architecture",
     edition: "offering",
@@ -19,7 +19,7 @@ const presence = new Presence({
     return s.charAt(0).toUpperCase() + s.slice(1);
   };
 
-let match: Array<string>;
+let match: string[];
 
 presence.on("UpdateData", async () => {
   let url: URL,
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.host === "hub.docker.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (document.location.pathname.match(/^\/(repositories)?$/))
       presenceData.details = "Bowsing own repositories";
@@ -168,22 +168,19 @@ presence.on("UpdateData", async () => {
       match = document.location.pathname.match(
         /^\/support\/(?:(doc)?(contact)?)/
       );
-      const doc: boolean = match[1] && true,
-        contact: boolean = match[2] && true;
+
       presenceData.details = "Reading FAQ";
-      if (doc) {
+      if (match[1] && true) {
         selector =
           document.querySelector(
             "#gatsby-focus-wrapper > div > main > div > div.MuiCardHeader-root > div > span"
           ) || null;
         presenceData.state = (selector && selector.textContent) || null;
-      } else if (contact) presenceData.details = "Contact page";
+      } else if (match[2] && true) presenceData.details = "Contact page";
     } else if (document.location.pathname.match(/^\/billing/))
       presenceData.details = "Checking billing info";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

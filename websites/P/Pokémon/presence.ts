@@ -12,7 +12,7 @@ function settingSetter(): void {
   else presence.hideSetting("pdexID");
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 
   settingSetter();
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.host === "www.pokemon.com") {
     if (
@@ -43,8 +43,8 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/play-pokemon/")) {
       presenceData.largeImageKey = "pokemonplay";
-      const title = document.querySelector(".full-article > h1");
-      if (title !== null) {
+
+      if (document.querySelector(".full-article > h1") !== null) {
         presenceData.details = "Reading article:";
         presenceData.state = title.textContent;
         presenceData.smallImageKey = "reading";
@@ -89,8 +89,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Browsing...";
       }
     } else if (document.location.pathname.includes("/app")) {
-      const title = document.querySelector(".full-article > h1");
-      if (title !== null) {
+      if (document.querySelector(".full-article > h1") !== null) {
         presenceData.details = "Viewing app:";
         presenceData.state = title.textContent;
         presenceData.smallImageKey = "reading";
@@ -102,9 +101,8 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/videogiochi") ||
       document.location.pathname.includes("/videojuegos-pokemon")
     ) {
-      const title = document.querySelector(".full-article > h1");
       presenceData.smallImageKey = "reading";
-      if (title !== null) {
+      if (document.querySelector(".full-article > h1") !== null) {
         presenceData.details = "Reading about game:";
         presenceData.state = title.textContent;
       } else if (
@@ -154,8 +152,7 @@ presence.on("UpdateData", async () => {
         document.location.pathname.includes("/product-gallery") ||
         document.location.pathname.includes("/Produktgalerie")
       ) {
-        const title = document.querySelector(".full-article > h1");
-        if (title !== null) {
+        if (document.querySelector(".full-article > h1") !== null) {
           presenceData.details = "Viewing product:";
           presenceData.state = title.textContent;
         } else {
@@ -323,19 +320,17 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.startTimestamp = startTimestamp;
       presenceData.endTimestamp = endTimestamp;
-      const season = document
-          .querySelector(".header-bar-small > span:nth-child(2)")
-          .textContent.trim(),
-        episode = document
-          .querySelector(".header-bar-small > span:nth-child(4)")
-          .textContent.split(" - ")[0]
-          .trim(),
-        title = document
-          .querySelector(".header-bar-small > span:nth-child(4)")
-          .textContent.split(" - ")[1]
-          .trim();
-      presenceData.details = `${season} - ${episode}`;
-      presenceData.state = title;
+
+      presenceData.details = `${document
+        .querySelector(".header-bar-small > span:nth-child(2)")
+        .textContent.trim()} - ${document
+        .querySelector(".header-bar-small > span:nth-child(4)")
+        .textContent.split(" - ")[0]
+        .trim()}`;
+      presenceData.state = document
+        .querySelector(".header-bar-small > span:nth-child(4)")
+        .textContent.split(" - ")[1]
+        .trim();
 
       if (video.paused) {
         delete presenceData.startTimestamp;
@@ -351,21 +346,22 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
       presenceData.details = "Reading article:";
 
-      const title = document.querySelector(".section-title"),
-        tag = document.querySelector(".section-title > span"),
+      const tag = document.querySelector(".section-title > span"),
         publish = document.querySelector(".section-title > small");
       if (tag !== null) {
         presenceData.state = title.textContent
           .replace(tag.textContent, "")
           .replace(publish.textContent, "");
-      } else
-        presenceData.state = title.textContent.replace(publish.textContent, "");
+      } else {
+        presenceData.state = document
+          .querySelector(".section-title")
+          .textContent.replace(publish.textContent, "");
+      }
     } else if (document.location.pathname.includes("/news")) {
       presenceData.details = "Viewing the recent";
       presenceData.state = "News and Announcements";
     } else if (document.location.pathname.includes("/game/")) {
-      const title = document.querySelector(".medium-title");
-      if (title !== null) {
+      if (document.querySelector(".medium-title") !== null) {
         presenceData.details = "Viewing game:";
         presenceData.state = title.textContent;
       } else if (document.location.pathname.includes("/category/")) {
@@ -413,16 +409,15 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Browsing...";
       }
     } else if (document.location.pathname.includes("/animation")) {
-      const title = document.querySelector(".medium-title");
-      if (title !== null) {
+      if (document.querySelector(".medium-title") !== null) {
         presenceData.details = "Reading about animation:";
         presenceData.state = title.textContent;
         presenceData.smallImageKey = "reading";
       } else presenceData.details = "Viewing Pokémon's animations";
     } else if (document.location.pathname.includes("/product")) {
       presenceData.largeImageKey = "storekr";
-      const title = document.querySelector(".medium-title");
-      if (title !== null) {
+
+      if (document.querySelector(".medium-title") !== null) {
         presenceData.details = "Viewing product:";
         presenceData.state = title.textContent;
       } else {
@@ -438,15 +433,18 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
       presenceData.details = "Reading article:";
 
-      const title = document.querySelector(".section-title"),
-        tag = document.querySelector(".section-title > span"),
-        publish = document.querySelector(".section-title > small");
-      if (tag !== null) {
+      if (document.querySelector(".section-title > span") !== null) {
         presenceData.state = title.textContent
           .replace(tag.textContent, "")
           .replace(publish.textContent, "");
-      } else
-        presenceData.state = title.textContent.replace(publish.textContent, "");
+      } else {
+        presenceData.state = document
+          .querySelector(".section-title")
+          .textContent.replace(
+            document.querySelector(".section-title > small").textContent,
+            ""
+          );
+      }
     } else if (document.location.pathname.includes("/news")) {
       presenceData.details = "Viewing the recent";
       presenceData.state = "News and Announcements";
@@ -473,14 +471,14 @@ presence.on("UpdateData", async () => {
         presenceData.state =
           document.querySelector(".medium-title").textContent;
       } else if (document.location.pathname.includes("/cards")) {
-        const input = document.querySelector(
-          "#search_text"
-        ) as HTMLInputElement;
         if (document.location.pathname.includes("/detail")) {
           presenceData.details = "Viewing card:";
           presenceData.state =
             document.querySelector(".card-hp.title").textContent;
-        } else if (input.value !== "") {
+        } else if (
+          (document.querySelector("#search_text") as HTMLInputElement.value) !==
+          ""
+        ) {
           if (input.value.length > 2) {
             presenceData.details = "Searching for:";
             presenceData.state = input.value;
@@ -537,10 +535,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Pokémon Events";
     else if (document.location.pathname.includes("/anime")) {
       presenceData.largeImageKey = "pokemontv";
-      const title =
+
+      if (
         document.querySelector(".m-ttl-top") ||
-        document.querySelector(".m-ttl-dot");
-      if (title !== null) {
+        document.querySelector(".m-ttl-dot") !== null
+      ) {
         presenceData.details = "Viewing show:";
         presenceData.state = title.textContent;
       } else presenceData.details = "Viewing Pokémon TV/Movies";
@@ -561,8 +560,7 @@ presence.on("UpdateData", async () => {
           .trim();
       } else presenceData.details = "Viewing Pokémon Centers";
     } else if (document.location.pathname.includes("/sp")) {
-      const title = document.querySelector(".m-ttl-top");
-      if (title !== null) {
+      if (document.querySelector(".m-ttl-top") !== null) {
         presenceData.details = "Viewing Upcoming Pokémon Center:";
         presenceData.state = title.textContent
           .split("、")[0]
@@ -571,8 +569,8 @@ presence.on("UpdateData", async () => {
       } else presenceData.details = "Viewing Upcoming Pokémon Centers";
     } else if (document.location.pathname.includes("/goods")) {
       presenceData.smallImageKey = "storejp";
-      const title = document.querySelector(".m-ttl-hd");
-      if (title !== null) {
+
+      if (document.querySelector(".m-ttl-hd") !== null) {
         presenceData.details = "Viewing Pokémon Goods";
         presenceData.state = `in category: ${title.textContent}`;
       } else presenceData.details = "Viewing Pokémon Goods";
@@ -760,17 +758,17 @@ presence.on("UpdateData", async () => {
       ) as HTMLInputElement;
 
       if (document.querySelector(".pokemon-detail__profile") !== null) {
-        const pdexID = await presence.getSetting("pdexID"),
-          name = document.querySelector(
-            ".pokemon-slider__main-name"
-          ).textContent,
-          number = document.querySelector(
-            ".pokemon-slider__main-no"
-          ).textContent;
-
+        const pdexID = await presence.getSetting("pdexID");
         presenceData.details = "Viewing Pokémon:";
-        if (pdexID) presenceData.state = `${name} (#${number})`;
-        else presenceData.state = name;
+        if (pdexID) {
+          presenceData.state = `${name} (#${
+            document.querySelector(".pokemon-slider__main-no").textContent
+          })`;
+        } else {
+          presenceData.state = document.querySelector(
+            ".pokemon-slider__main-name"
+          ).textContent;
+        }
       } else if (search !== null && search.value !== "") {
         if (search.value.length > 2) {
           presenceData.details = "Pokédex - Searching for:";
@@ -806,8 +804,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

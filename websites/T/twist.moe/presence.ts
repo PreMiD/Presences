@@ -8,11 +8,11 @@ const presence = new Presence({
 
 let lastPlaybackState = null,
   playback,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 
   if (!playback) {
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -37,9 +37,7 @@ presence.on("UpdateData", async () => {
   if (video !== null && !isNaN(video.duration)) {
     const videoTitle = (
         document.querySelector(".series-title span") as HTMLElement
-      )?.innerText,
-      seasonepisode = (document.querySelector(".series-episode") as HTMLElement)
-        ?.innerText,
+      )?.textContent,
       [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -55,7 +53,9 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle(video.paused ? "" : videoTitle);
 
     presenceData.details = videoTitle ?? "Title not found...";
-    presenceData.state = seasonepisode ?? "Episode not found...";
+    presenceData.state =
+      (document.querySelector(".series-episode") as HTMLElement)?.textContent ??
+      "Episode not found...";
 
     if (video.paused) {
       delete presenceData.startTimestamp;

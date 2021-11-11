@@ -11,7 +11,7 @@ interface Channel {
 const presence = new Presence({
     clientId: "748660637021896835"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let totalListeners: number,
   channels: Channel[] = [];
@@ -21,7 +21,7 @@ function newStats(): void {
     .then((response) => response.json())
     .then((data) => {
       totalListeners = data.all_listeners;
-      const channelList: Array<string> = data.sequence,
+      const channelList: string[] = data.sequence,
         channelArray: Channel[] = [];
       channelList.forEach((channel) => {
         channelArray.push({
@@ -81,19 +81,19 @@ presence.on("UpdateData", async () => {
     format3 = await presence.getSetting("sListeners"),
     buttons = await presence.getSetting("buttons"),
     logo: number = await presence.getSetting("logo"),
-    logoArr = [
-      "reywhitebacksmall",
-      "reyblackbacksmall",
-      "reycolorbacksmall",
-      "reywhiteback",
-      "reyblackback",
-      "reycolorback",
-      "reywhite",
-      "reyblack",
-      "rey"
-    ],
     presenceData: PresenceData = {
-      largeImageKey: logoArr[logo] || "reywhitebacksmall",
+      largeImageKey:
+        [
+          "reywhitebacksmall",
+          "reyblackbacksmall",
+          "reycolorbacksmall",
+          "reywhiteback",
+          "reyblackback",
+          "reycolorback",
+          "reywhite",
+          "reyblack",
+          "rey"
+        ][logo] || "reywhitebacksmall",
       smallImageKey: "reading"
     };
 
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (elapsed) presenceData.startTimestamp = browsingStamp;
+  if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (
     document.location.hostname === "www.reyfm.de" &&
@@ -146,13 +146,13 @@ presence.on("UpdateData", async () => {
       (document.querySelector("#player") as HTMLElement).style.cssText !==
       "display: none;"
     ) {
-      const paused = (
-        document.querySelector("#miniplayer-play") as HTMLImageElement
-      ).src.includes("play.png");
-
       let track: string, artist: string;
 
-      if (!paused) {
+      if (
+        !(
+          document.querySelector("#miniplayer-play") as HTMLImageElement
+        ).src.includes("play.png")
+      ) {
         const channelID = findChannel();
         if (channelID !== "YOU FAILED") {
           const channel = channels.find((channel) => channel.id === channelID);
@@ -243,8 +243,6 @@ presence.on("UpdateData", async () => {
 
   if (!buttons) delete presenceData.buttons;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "875631338663870485"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "bitchute_logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = location,
     [privacy, buttons, time] = await Promise.all(
@@ -60,8 +60,7 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [{ label: "View Channel", url: location.href }];
     } else presenceData.details = "Viewing All Channels";
   } else if (pathname.startsWith("/category")) {
-    const name = document.querySelector<HTMLHeadingElement>("h1.page-title");
-    if (name) {
+    if (document.querySelector<HTMLHeadingElement>("h1.page-title")) {
       presenceData.details = `Viewing Category: ${name.textContent}`;
       const tab = document.querySelector<HTMLLIElement>(
         "ul.nav.nav-tabs.nav-tabs-list > li.active"
@@ -92,8 +91,6 @@ presence.on("UpdateData", async () => {
     )}`;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

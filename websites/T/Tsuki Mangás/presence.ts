@@ -37,7 +37,7 @@ function getPagination(pagN: number): number[] {
   }
   return [current, max];
 }
-let browsingStamp = Math.floor(Date.now() / 1000);
+let browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const pathName = window.location.pathname,
     notfound =
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: await Resource(ResourceNames.logo)
     };
   if (await presence.getSetting("resetTimestamp"))
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   if (pathName === "/") {
     let lancamentos = "...";
     const qlancamentos = document.querySelectorAll("div.leflist > div");
@@ -57,17 +57,17 @@ presence.on("UpdateData", async () => {
           lancamentos = item.textContent;
       });
     }
-    data.details = "Início";
+    presenceData.details = "Início";
     data.state = `Lançamentos: ${lancamentos}`;
-    data.startTimestamp = browsingStamp;
+    data.startTimestamp = browsingTimestamp;
   } else if (pathName.startsWith("/login") && !notfound) {
-    data.details = "Logando...";
-    data.startTimestamp = browsingStamp;
+    presenceData.details = "Logando...";
+    data.startTimestamp = browsingTimestamp;
   } else if (pathName.startsWith("/registrar") && !notfound) {
-    data.details = "Registrando...";
-    data.startTimestamp = browsingStamp;
+    presenceData.details = "Registrando...";
+    data.startTimestamp = browsingTimestamp;
   } else if (pathName.startsWith("/lista-mangas") && !notfound) {
-    data.details = `Lista de Mangás - Página ${getPagination(0)[0]}/${
+    presenceData.details = `Lista de Mangás - Página ${getPagination(0)[0]}/${
       getPagination(0)[1]
     }`;
     let Generos = "";
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
       });
     }
     data.state = `Gêneros: ${!Generos.trim() ? "Todos" : Generos}`;
-    data.startTimestamp = browsingStamp;
+    data.startTimestamp = browsingTimestamp;
   } else if (pathName.startsWith("/perfil/") && !notfound) {
     const username = document.querySelector("#capapl > b"),
       [sessionUsername] = (
@@ -119,10 +119,10 @@ presence.on("UpdateData", async () => {
       usernameValue[0] = 0;
       if (usernameValue[3]) [usernameValue[1]] = pathName.split("/").slice(-2);
     }
-    data.details =
+    presenceData.details =
       usernameValue[0] === 0 ? "Vizualizando Perfil:" : "Editando Perfil:";
     data.state = usernameValue[1].toString();
-    data.startTimestamp = browsingStamp;
+    data.startTimestamp = browsingTimestamp;
   } else if (pathName.startsWith("/manga/") && !notfound) {
     const MangaDefaultName = document.querySelector(
         "#app > div.manga.mtopmanga > div.all > div.rigt > div.tity > h2 > b"
@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
         MangaAltNames = ` (${qMangaAltNames.textContent})`;
       MangaName = MangaDefaultName.textContent + MangaAltNames;
     }
-    data.details = "Visualizando Mangá:";
+    presenceData.details = "Visualizando Mangá:";
     data.state = MangaName;
     const qgender = document.querySelector("div.mtop>span");
     let gender = "";
@@ -152,7 +152,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = await Resource(ResourceNames.search);
       data.smallImageText = gender;
     }
-    data.startTimestamp = browsingStamp;
+    data.startTimestamp = browsingTimestamp;
   } else if (pathName.startsWith("/leitor/") && !notfound) {
     const overlay = document.querySelector(
         "#app > div.manga > div.v--modal-overlay"
@@ -173,7 +173,7 @@ presence.on("UpdateData", async () => {
     }
     data.smallImageKey = await Resource(ResourceNames.reading);
     data.smallImageText = "Lendo...";
-    data.details = manga.trim() ? manga : "...";
+    presenceData.details = manga.trim() ? manga : "...";
     if (chapter.trim() && chapter.includes("-")) {
       chapter = chapter.replace(/^\s+|\s+$/g, "");
       chapter = `${chapter.split(" - ")[0]} - "${chapter.split(" - ")[1]}"`;
@@ -194,7 +194,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = await Resource(ResourceNames.info);
       data.smallImageText = "Reportando...";
     }
-    data.startTimestamp = browsingStamp;
+    data.startTimestamp = browsingTimestamp;
   } else if (
     pathName.startsWith("/scan/") &&
     pathName !== "/scan/" &&
@@ -210,13 +210,13 @@ presence.on("UpdateData", async () => {
     qscanMembers > 0
       ? (scanMembers = ` - ${qscanMembers.toString()} Membros`)
       : (scanMembers = " - 0 Membros");
-    data.details = "Visualizando Grupo:";
+    presenceData.details = "Visualizando Grupo:";
     data.state = `${
       (scanName !== null && scanName.textContent.trim()
         ? scanName.textContent
         : "...") + scanMembers
     } - Página ${getPagination(0)[0]}/${getPagination(0)[1]}`;
-    data.startTimestamp = browsingStamp;
+    data.startTimestamp = browsingTimestamp;
   }
   if (
     (await presence.getSetting("showHistory")) &&
@@ -229,9 +229,6 @@ presence.on("UpdateData", async () => {
           .parentElement.style.width.replace("%", "")
       ) !== 0
     ) {
-      const hCategory = document
-        .getElementsByClassName("activmancap")[0]
-        .textContent.replace(/^\s+|\s+$/g, "");
       let hSession;
       document.querySelectorAll("div.selecths").forEach((item) => {
         if (item.classList[item.classList.length - 1].includes("selecths"))
@@ -241,8 +238,10 @@ presence.on("UpdateData", async () => {
       let user = qUser
         ? (qUser as HTMLLinkElement).href.split("/").slice(-1)[0]
         : "...";
-      data.details = "Vizualizando Histórico:";
-      data.state = `${hCategory} - ${hSession} - Página ${
+      presenceData.details = "Vizualizando Histórico:";
+      data.state = `${document
+        .getElementsByClassName("activmancap")[0]
+        .textContent.replace(/^\s+|\s+$/g, "")} - ${hSession} - Página ${
         getPagination(0)[0]
       }/${getPagination(0)[1]}`;
       if (!(await presence.getSetting("showUserName"))) user = "👁‍🗨👁‍🗨";
@@ -250,8 +249,7 @@ presence.on("UpdateData", async () => {
       data.smallImageText = `Username: ${user}`;
     }
   }
-  if (!data.details) {
-    presence.setTrayTitle();
+  if (!presenceData.details) {
     presence.setActivity();
   } else presence.setActivity(data);
 });

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "858408468854997052"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("time"),
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     accountValue = await presence.getSetting("accountValue"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   switch (document.location.hostname) {

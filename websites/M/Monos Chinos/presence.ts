@@ -81,10 +81,9 @@ presence.on("UpdateData", async () => {
 
   if (action === null) Object.assign(data, browsingData);
   else if (action.id === "episode") {
-    const detailsPattern = /^([^\d]+).* (\d+).+$/,
-      detailsMatch = document
-        .querySelector(".Title-epi")
-        .textContent.match(detailsPattern);
+    const detailsMatch = document
+      .querySelector(".Title-epi")
+      .textContent.match(/^([^\d]+).* (\d+).+$/);
 
     if (!detailsMatch) return presence.setActivity(browsingData);
 

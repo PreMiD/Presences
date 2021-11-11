@@ -454,8 +454,10 @@ presence.on("UpdateData", async () => {
               if (currentFile.textContent.endsWith(key)) return true;
               const match = /^\/(.*)\/([mgiy]+)$/.exec(key);
               if (!match) return false;
-              const regex = new RegExp(match[1], match[2]);
-              return regex.test(currentFile.textContent);
+
+              return new RegExp(match[1], match[2]).test(
+                currentFile.textContent
+              );
             })
           ];
 
@@ -487,17 +489,15 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Idling";
       }
     } else if (document.location.pathname.startsWith("/studio/guilds/")) {
-      const guildName = document.querySelector(
-        "#root > div:nth-child(4) > div.📦h_130px.📦box-szg_border-box > div.📦flt_left.📦w_340px.📦box-szg_border-box > div > div.📦flt_left.📦pl_0px.📦w_100prcnt.📦box-szg_border-box > div.📦flt_left.📦w_60prcnt.📦box-szg_border-box > div.PageStudioGuild_guildName__tgbvT"
-      ).textContent;
       presenceData.details += ": Viewing Server";
-      if (await presence.getSetting("studioguildname"))
-        presenceData.state = guildName;
+      if (await presence.getSetting("studioguildname")) {
+        presenceData.state = document.querySelector(
+          "#root > div:nth-child(4) > div.📦h_130px.📦box-szg_border-box > div.📦flt_left.📦w_340px.📦box-szg_border-box > div > div.📦flt_left.📦pl_0px.📦w_100prcnt.📦box-szg_border-box > div.📦flt_left.📦w_60prcnt.📦box-szg_border-box > div.PageStudioGuild_guildName__tgbvT"
+        ).textContent;
+      }
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "633801594541965334"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname === "dyno.gg") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (document.location.pathname.includes("/bot")) {
       presenceData.details = "Reading about the bot";
       presenceData.smallImageKey = "reading";
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#dashboard-mount > div > div.column.nav-sidebar > aside > div.guild-header > h3 > div > div"
       );
-      presenceData.state = `server: ${title.innerText}`;
+      presenceData.state = `server: ${title.textContent}`;
       presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/servers")) {
       presenceData.details = "Browsing through the";
@@ -37,8 +37,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Dyno Premium Plans";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

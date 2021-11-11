@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "817385570912174121"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -28,18 +28,18 @@ presence.on("UpdateData", async () => {
           document.querySelector(".result-item-download .result-data")
             .textContent +
           document.querySelector(".result-item-download .result-data-unit")
-            .textContent,
-        upload =
-          document.querySelector(".result-item-upload .result-data")
-            .textContent +
-          document.querySelector(".result-item-upload .result-data-unit")
             .textContent;
       let isp = document.querySelector(
         ".result-item-icon.result-item-isp .result-label"
       ).textContent;
       if (!showISP) isp = "Hidden";
       // 27 & 29 = nothing + unit
-      if (upload.length === 29) {
+      if (
+        document.querySelector(".result-item-upload .result-data").textContent +
+          document.querySelector(".result-item-upload .result-data-unit")
+            .textContent.length ===
+        29
+      ) {
         presenceData.details = `Live results - Ping ${
           ping.length === 27 ? "Testing" : ping
         } | Download ${
@@ -47,17 +47,8 @@ presence.on("UpdateData", async () => {
         } | Upload Testing`;
         presenceData.state = `ISP: ${isp} | Server: ${server}`;
       } else presenceData.details = "Browsing the homepage";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/result")) {
-      const server = `${
-        document.querySelector(
-          ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label"
-        ).textContent
-      } - ${
-        document.querySelector(
-          ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label .result-name"
-        ).textContent
-      }`;
       let isp = document.querySelector(
         ".result-item-icon.result-item-isp .result-label"
       ).textContent;
@@ -91,17 +82,25 @@ presence.on("UpdateData", async () => {
           ).textContent
         } Mbps`;
       }
-      presenceData.state = `ISP: ${isp} | Server: ${server}`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `ISP: ${isp} | Server: ${`${
+        document.querySelector(
+          ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label"
+        ).textContent
+      } - ${
+        document.querySelector(
+          ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label .result-name"
+        ).textContent
+      }`}`;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/ookla-5g-map")) {
       presenceData.details = "Navigate on the 5G map";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/apps")) {
       presenceData.details = "Watching apps";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.endsWith("/insights")) {
       presenceData.details = "Browsing insights";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/insights/blog")) {
       presenceData.details = "Browsing blog";
       if (window.location.pathname !== "/insights/blog/") {
@@ -109,34 +108,34 @@ presence.on("UpdateData", async () => {
           "#speedtest .header .header-wrap h1"
         ).textContent;
       }
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/global-index")) {
       presenceData.details = "Browsing Speedtest Global Index";
       presenceData.state = document.querySelector(
         ".section .page-header"
       ).textContent;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/speedtest-servers")) {
       presenceData.details = "Look how to host a server";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/enterprise")) {
       presenceData.details = "Look entreprise solutions";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/about")) {
       presenceData.details = "About Ookla";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/login")) {
       presenceData.details = "Log in";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/register")) {
       presenceData.details = "Creating an account";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/settings")) {
       presenceData.details = "Browsing settings";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (window.location.pathname.includes("/help")) {
       presenceData.details = "Browsing help QA";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else {
       const server = `${
           document.querySelector(
@@ -155,17 +154,19 @@ presence.on("UpdateData", async () => {
           document.querySelector(".result-item-download .result-data")
             .textContent +
           document.querySelector(".result-item-download .result-data-unit")
-            .textContent,
-        upload =
-          document.querySelector(".result-item-upload .result-data")
-            .textContent +
-          document.querySelector(".result-item-upload .result-data-unit")
             .textContent;
-      let isp = document.querySelector(
-        ".result-item-icon.result-item-isp .result-label"
-      ).textContent;
-      if (!showISP) isp = "Hidden";
-      if (upload.length === 29) {
+
+      if (!showISP) {
+        document.querySelector(
+          ".result-item-icon.result-item-isp .result-label"
+        ).textContent = "Hidden";
+      }
+      if (
+        document.querySelector(".result-item-upload .result-data").textContent +
+          document.querySelector(".result-item-upload .result-data-unit")
+            .textContent.length ===
+        29
+      ) {
         presenceData.details = `Live results - Ping ${
           ping.length === 27 ? "Testing" : ping
         } | Download ${
@@ -173,11 +174,9 @@ presence.on("UpdateData", async () => {
         } | Upload Testing`;
         presenceData.state = `ISP: ${isp} | Server: ${server}`;
       } else presenceData.details = "Browsing the homepage";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

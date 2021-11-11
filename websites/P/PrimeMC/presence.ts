@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "630023998767497217" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
@@ -10,16 +10,16 @@ presence.on("UpdateData", async () => {
     largeImageKey: "primemc"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "primemc.org") {
     if (document.location.pathname.includes("/threads/")) {
       title = document.querySelector(
         "#top > div.p-body > div > div.uix_titlebar > div > div > div.p-title > h1"
       );
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128)
-        presenceData.state = `${title.innerText.substring(0, 125)}...`;
-      else presenceData.state = title.innerText;
+      if (title.textContent.length > 128)
+        presenceData.state = `${title.textContent.substring(0, 125)}...`;
+      else presenceData.state = title.textContent;
 
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
         "body > div.pagewrapper > div.container > div > div.col-md-2 > div > h2"
       );
       presenceData.details = "Viewing the history of:";
-      presenceData.state = user.innerText;
+      presenceData.state = user.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -104,9 +104,9 @@ presence.on("UpdateData", async () => {
           "#top > div.p-body > div > div.uix_titlebar > div > div > div.p-title > h1"
         );
         presenceData.details = "Forums, Reading DM:";
-        if (title.innerText.length > 128)
-          presenceData.state = `${title.innerText.substring(0, 125)}...`;
-        else presenceData.state = title.innerText;
+        if (title.textContent.length > 128)
+          presenceData.state = `${title.textContent.substring(0, 125)}...`;
+        else presenceData.state = title.textContent;
 
         presenceData.smallImageKey = "reading";
 
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
       );
       if (search !== null) {
         presenceData.details = "Forums, searching for:";
-        presenceData.state = search.innerText;
+        presenceData.state = search.textContent;
 
         presenceData.smallImageKey = "search";
 
@@ -213,7 +213,7 @@ presence.on("UpdateData", async () => {
           "#top > div.p-body > div > div > div > div.p-body-content > div > div.block > div > div > div > div > div > h1 > span > span"
         );
         presenceData.details = "Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         delete presenceData.smallImageKey;
 
@@ -227,7 +227,7 @@ presence.on("UpdateData", async () => {
           "#top > div.p-body > div > div > div > div.p-body-content > div > div.block > div > div > div > div > div > h1 > span"
         );
         presenceData.details = "Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         delete presenceData.smallImageKey;
 
@@ -246,7 +246,7 @@ presence.on("UpdateData", async () => {
       );
       if (title !== null) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
 
         delete presenceData.smallImageKey;
 
@@ -261,18 +261,16 @@ presence.on("UpdateData", async () => {
       }
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (document.location.hostname === "buy.primemc.org") {
     title = document.querySelector("head > title");
     presenceData.details = "Store, viewing:";
-    presenceData.state = title.innerText.replace(" | Prime Network", "");
+    presenceData.state = title.textContent.replace(" | Prime Network", "");
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

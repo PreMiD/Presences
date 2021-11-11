@@ -17,12 +17,10 @@ presence.on("UpdateData", async () => {
     document.querySelector("span#elements-body");
 
   presenceData.details = formula.value;
-  presenceData.state = formulaName.innerText;
+  presenceData.state = formulaName.textContent;
 
   presenceData.startTimestamp = startStamp;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

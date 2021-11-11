@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "843058683100266526"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let moduleName: HTMLElement;
 
 // checkmate javascript
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/") {
     presenceData.state = "Viewing Deno.land Home";
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/manual")) {
     presenceData.state = "Docs";
     presenceData.smallImageKey = "reading";
@@ -60,22 +60,20 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "doc.deno.land") {
     presenceData.state = "Viewing Deno API";
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/std")) {
     presenceData.details = "Deno Standard Modules";
     moduleName = document.querySelector("span.ml-2.font-medium");
-    presenceData.state = `Viewing: ${moduleName.innerText}`;
+    presenceData.state = `Viewing: ${moduleName.textContent}`;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/x")) {
     presenceData.details = "Deno Third-Party Modules";
     moduleName = document.querySelector("span.ml-2.font-medium");
     presenceData.state = `Viewing "${document.title.split(" | Deno")[0]}"`;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

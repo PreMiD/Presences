@@ -11,7 +11,6 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const path: string = document.location.pathname,
-    ayrac: string[] = path.split("/"),
     presenceData: PresenceData = {
       largeImageKey: "dizimag"
     };
@@ -20,9 +19,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Üye Ol";
     presenceData.startTimestamp = Date.now();
   } else if (path.startsWith("/profil")) {
-    const name: string = document.querySelector("span.text-medium").textContent;
     presenceData.details = "Profilini inceliyor:";
-    presenceData.state = name || "Bulunamadı";
+    presenceData.state =
+      document.querySelector("span.text-medium").textContent || "Bulunamadı";
     presenceData.startTimestamp = Date.now();
   } else if (path === "/") {
     presenceData.details = "Bir sayfaya bakıyor:";
@@ -49,21 +48,19 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Trendler";
     presenceData.startTimestamp = Date.now();
   } else if (path.startsWith("/uye")) {
-    const name: string = document.querySelector("span.text-white").textContent;
     presenceData.details = "Bir profile bakıyor:";
-    presenceData.state = name;
+    presenceData.state = document.querySelector("span.text-white").textContent;
     presenceData.startTimestamp = Date.now();
   } else if (path.startsWith("/oyuncu")) {
-    const name: string = document.querySelector(
-      "div.text-orange > div.pull-left"
-    ).textContent;
     presenceData.details = "Bir oyuncuya bakıyor:";
-    presenceData.state = name || "Bulunamadı";
+    presenceData.state =
+      document.querySelector("div.text-orange > div.pull-left").textContent ||
+      "Bulunamadı";
     presenceData.startTimestamp = Date.now();
-  } else if (path.startsWith("/dizi") && ayrac[3] === "") {
-    const name: string = document.querySelector("h1.text-nowrap").textContent;
+  } else if (path.startsWith("/dizi") && path.split("/")[3] === "") {
     presenceData.details = "Bir diziye bakıyor:";
-    presenceData.state = name || "Bulunamadı";
+    presenceData.state =
+      document.querySelector("h1.text-nowrap").textContent || "Bulunamadı";
     presenceData.startTimestamp = Date.now();
   } else if (
     !isNaN(stream.duration) &&
@@ -92,11 +89,6 @@ presence.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     } else {
-      const timestamps = presence.getTimestamps(
-        Math.floor(stream.currentTime),
-        Math.floor(stream.duration)
-      );
-
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Oynatılıyor";
       presenceData.buttons = [
@@ -108,7 +100,11 @@ presence.on("UpdateData", async () => {
           }/${document.location.pathname.split("/")[2]}`
         }
       ];
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(stream.currentTime),
+          Math.floor(stream.duration)
+        );
     }
   }
 

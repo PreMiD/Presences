@@ -76,10 +76,9 @@ presence.on("UpdateData", async () => {
 
     if (pageTypeType === "live") {
       //Stream
-      const title = document.querySelector(".title-text")?.textContent,
-        video = document.querySelector("video") as HTMLVideoElement;
-
-      if (!title || !video) return;
+      const title = document.querySelector(".title-text")?.textContent;
+      if (!title || (!document.querySelector("video") as HTMLVideoElement))
+        return;
 
       delete presenceData.startTimestamp;
 
@@ -118,14 +117,12 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Support pages";
   } else if (page === "support") {
     //Support Pages
-    const searchTerm = (document.querySelector("#search") as HTMLInputElement)
-        .value,
-      faqCount = document.querySelectorAll(".question-answer").length;
+    const faqCount = document.querySelectorAll(".question-answer").length;
 
     presenceData.details = "Viewing FAQ";
     presenceData.state = `${faqCount} topics`;
 
-    if (searchTerm) {
+    if ((document.querySelector("#search") as HTMLInputElement).value) {
       let stringFormated;
 
       switch (faqCount) {
@@ -159,24 +156,23 @@ presence.on("UpdateData", async () => {
     ];
   } else if (page === "post") {
     //Video
-    const title = document.querySelector(".title-text")?.textContent,
-      channel = document.querySelector(".channel-title")?.textContent,
-      channelURL = (
-        document.querySelector(".channel-title") as HTMLLinkElement
-      )?.href.toLowerCase(),
-      video = document.querySelector("video") as HTMLVideoElement;
+    const video = document.querySelector("video") as HTMLVideoElement;
 
     //Wait for page to load
     if (!video) return;
 
-    const timestamps = presence.getTimestampsfromMedia(video),
-      [, endTS] = timestamps;
+    const [, endTS] = presence.getTimestampsfromMedia(video);
 
     delete presenceData.startTimestamp;
 
-    presenceData.details = title;
-    presenceData.state = channel;
-    presenceData.largeImageKey = channelURL?.split("/").slice(-1)[0];
+    presenceData.details = document.querySelector(".title-text")?.textContent;
+    presenceData.state = document.querySelector(".channel-title")?.textContent;
+    presenceData.largeImageKey = (
+      document.querySelector(".channel-title") as HTMLLinkElement
+    )?.href
+      .toLowerCase()
+      ?.split("/")
+      .slice(-1)[0];
     presenceData.endTimestamp = endTS;
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
@@ -201,8 +197,6 @@ presence.on("UpdateData", async () => {
 
   if (!showButtons) delete presenceData.buttons;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

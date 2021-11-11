@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
           (artistHTML) => {
             if (Array.from(artistHTML.querySelectorAll("a"))[1]) {
               artists.push(
-                Array.from(artistHTML.querySelectorAll("a"))[1].innerText
+                Array.from(artistHTML.querySelectorAll("a"))[1].textContent
               );
             }
           }
@@ -38,10 +38,10 @@ presence.on("UpdateData", async () => {
       }
 
       if (document.querySelector(".sidebar .status-notice div[id^=pool]")) {
-        const PoolName = document
+        
+        presenceData.details = `Viewing ${document
           .querySelector(".sidebar .status-notice div[id^=pool]")
-          .querySelector("p").innerText;
-        presenceData.details = `Viewing ${PoolName} (#${
+          .querySelector("p").textContent} (#${
           document.location.pathname.split("/post/show/")[1]
         })`;
         presenceData.state = `by ${artists}`;
@@ -64,11 +64,11 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/user/show")) {
     presenceData.details = "Viewing user";
 
-    const HTMLElement = document.querySelector(
-      "#userpage div h2"
-    ) as HTMLBaseElement;
+    
 
-    [presenceData.state] = HTMLElement.innerHTML.split("<span");
+    [presenceData.state] = document.querySelector(
+      "#userpage div h2"
+    ) as HTMLBaseElement.innerHTML.split("<span");
   } else
     presenceData.details = `Viewing "${document.title.split(" - e621")[0]}"`;
 

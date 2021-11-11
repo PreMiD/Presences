@@ -9,7 +9,7 @@ const presence = new Presence({
   });
 
 let lastPath = "", //Last played radio station or podcast
-  browsingStamp = 0; //Timestamp when started listening to a radio station
+  browsingTimestamp = 0; //Timestamp when started listening to a radio station
 
 presence.on("UpdateData", async () => {
   //Current path
@@ -29,33 +29,33 @@ presence.on("UpdateData", async () => {
     //Podcast
     case "s":
     case "p": {
-      if (path[1] !== lastPath || browsingStamp === 0) {
-        browsingStamp = Math.round(Date.now() / 1000);
+      if (path[1] !== lastPath || browsingTimestamp === 0) {
+        browsingTimestamp = Math.round(Date.now() / 1000);
         [, lastPath] = path;
       }
 
-      //Player State
-      const playerIcon = document.querySelector(
-          ".player__animate-icon"
-        ) as HTMLElement,
-        //Current Song / Episode
-        info = document.querySelector("div.player__song") as HTMLElement,
-        //Player Status
-        status = document.querySelector(".player__info-wrap") as HTMLElement;
+      const status = document.querySelector(
+        ".player__info-wrap"
+      ) as HTMLElement;
 
-      if (playerIcon.style.display !== "none") {
+      if (
+        (document.querySelector(".player__animate-icon") as HTMLElement).style
+          .display !== "none"
+      ) {
         //Playing
-        presenceData.details = header.innerText;
-        presenceData.state = info.innerText;
+        presenceData.details = header.textContent;
+        presenceData.state = (
+          document.querySelector("div.player__song") as HTMLElement
+        ).textContent;
 
         presenceData.smallImageText = (await strings).play;
         presenceData.smallImageKey = "play";
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
 
         //Get the podcast play position
         if (path[0] === "p") {
-          presenceData.endTimestamp = browsingStamp;
+          presenceData.endTimestamp = browsingTimestamp;
 
           //Get the start / current position
           const [start, end] = (
@@ -85,17 +85,17 @@ presence.on("UpdateData", async () => {
         }
       } else {
         //Paused
-        browsingStamp = 0;
+        browsingTimestamp = 0;
 
-        presenceData.details = header.innerText;
+        presenceData.details = header.textContent;
 
         presenceData.smallImageText = (await strings).pause;
         presenceData.smallImageKey = "pause";
 
         if (status.style.display !== "none") {
           //Player status is being displayed (example: BUFFERING)
-          const adlength = status.innerText.match(/\d+/g)
-            ? parseInt(status.innerText.match(/\d+/g)[0])
+          const adlength = status.textContent.match(/\d+/g)
+            ? parseInt(status.textContent.match(/\d+/g)[0])
             : 0;
 
           if (adlength > 0) {
@@ -103,20 +103,20 @@ presence.on("UpdateData", async () => {
 
             presenceData.startTimestamp = Math.floor(Date.now() / 1000);
             presenceData.endTimestamp = presenceData.startTimestamp + adlength;
-          } else presenceData.state = status.innerText;
+          } else presenceData.state = status.textContent;
         } else {
           //Player is inactive (no status is being displayed)
-          const tags = (document.querySelector(".z7kxsz-11") as HTMLElement)
-            .textContent;
-          presenceData.state = tags;
+          presenceData.state = (
+            document.querySelector(".z7kxsz-11") as HTMLElement
+          ).textContent;
         }
       }
       break;
     }
     //Search
     case "search": {
-      browsingStamp = 0;
-      const [results] = header.innerText.match(/\d+/g);
+      browsingTimestamp = 0;
+      const [results] = header.textContent.match(/\d+/g);
 
       presenceData.details = new URLSearchParams(window.location.search).get(
         "q"
@@ -139,9 +139,9 @@ presence.on("UpdateData", async () => {
     case "city":
     case "local-stations":
     case "top-stations": {
-      browsingStamp = 0;
+      browsingTimestamp = 0;
 
-      presenceData.details = header.innerText;
+      presenceData.details = header.textContent;
 
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = (await strings).browsing;
@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
     case "privacy-policy":
     case "imprint":
     case "contact": {
-      browsingStamp = 0;
+      browsingTimestamp = 0;
 
       presenceData.details = title;
       break;
@@ -176,14 +176,13 @@ presence.on("UpdateData", async () => {
     case "android":
     case "windowsphone":
     case "blackberry": {
-      browsingStamp = 0;
+      browsingTimestamp = 0;
 
       presenceData.details = title;
       break;
     }
     //Unknown
     default: {
-      presence.setTrayTitle();
       presence.setActivity();
       return;
     }

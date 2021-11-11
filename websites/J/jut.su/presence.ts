@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "general.paused"
   }),
-  startBrowsingStamp = Math.floor(Date.now() / 1000);
+  startbrowsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -14,43 +14,43 @@ presence.on("UpdateData", async () => {
     path = document.location.pathname;
 
   if (path === "/") {
-    presenceData.startTimestamp = startBrowsingStamp;
+    presenceData.startTimestamp = startbrowsingTimestamp;
     presenceData.details = "Смотрит домашнюю страницу";
   } else if (path === "/anime") {
-    presenceData.startTimestamp = startBrowsingStamp;
+    presenceData.startTimestamp = startbrowsingTimestamp;
     presenceData.details = "Выбирает аниме";
   } else if (path === "/manga") {
-    presenceData.startTimestamp = startBrowsingStamp;
+    presenceData.startTimestamp = startbrowsingTimestamp;
     presenceData.details = "Выбирает мангу";
   } else {
     const mangaTitle = document.getElementById("the_manga_title");
 
     if (mangaTitle) {
       const nameArray = mangaTitle.childNodes[0].nodeValue
-          .trim()
-          .substring(0, mangaTitle.childNodes[0].nodeValue.trim().length - 1)
-          .split(" "),
-        chapter = nameArray[nameArray.indexOf("глава") - 1];
-      presenceData.state = `${chapter} глава`;
+        .trim()
+        .substring(0, mangaTitle.childNodes[0].nodeValue.trim().length - 1)
+        .split(" ");
+      presenceData.state = `${nameArray[nameArray.indexOf("глава") - 1]} глава`;
 
-      const mangaName = nameArray.splice(nameArray.indexOf("манги") + 1);
-      presenceData.details = mangaName.join(" ");
+      presenceData.details = nameArray
+        .splice(nameArray.indexOf("манги") + 1)
+        .join(" ");
     } else {
       const video = document.querySelector("#my-player_html5_api");
 
       if (video) {
         const timestamps = presence.getTimestampsfromMedia(
-            video as HTMLMediaElement
-          ),
-          isVideoPlaying = (video: HTMLVideoElement) =>
+          video as HTMLMediaElement
+        );
+        if (
+          (video: HTMLVideoElement) =>
             !!(
               video.currentTime > 0 &&
               !video.paused &&
               !video.ended &&
               video.readyState > 2
-            );
-
-        if (isVideoPlaying(video as HTMLVideoElement)) {
+            )(video as HTMLVideoElement)
+        ) {
           presenceData.endTimestamp = Number.isNaN(timestamps[1])
             ? null
             : timestamps[1];

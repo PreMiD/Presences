@@ -228,41 +228,42 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else if (isVideoData) {
     const title =
-        document.querySelector(
-          "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span"
-        ) ||
-        document.querySelector(
-          "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span"
-        ),
-      episodeX =
-        document.querySelector(
-          "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
-        ) &&
-        document.querySelector(
-          "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
-        ).textContent
-          ? document.querySelector(
-              "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
-            ).textContent
-          : null ||
-            (document.querySelector(
+      document.querySelector(
+        "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span"
+      ) ||
+      document.querySelector(
+        "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span"
+      );
+    if (
+      title &&
+      title.textContent !== "" &&
+      document.querySelector(
+        "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
+      ) &&
+      document.querySelector(
+        "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
+      ).textContent
+        ? document.querySelector(
+            "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div"
+          ).textContent
+        : null ||
+          (document.querySelector(
+            "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span"
+          ) &&
+            document.querySelector(
+              "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
+            ))
+        ? `${document
+            .querySelector(
               "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span"
-            ) &&
-              document.querySelector(
-                "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
-              ))
-          ? `${document
-              .querySelector(
-                "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span"
-              )
-              .textContent.trim()}. Sezon ${
-              document.querySelector(
-                "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
-              ).textContent
-            }. Bölüm`
-          : null;
-
-    if (title && title.textContent !== "" && episodeX) {
+            )
+            .textContent.trim()}. Sezon ${
+            document.querySelector(
+              "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
+            ).textContent
+          }. Bölüm`
+        : null
+    ) {
       const fixedEpisodeName = episodeX
           .replace(/\n/g, "")
           .replace(/-/g, "")

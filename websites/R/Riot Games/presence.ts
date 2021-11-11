@@ -163,126 +163,134 @@ presence.on("UpdateData", async () => {
         }
       };
     for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
+      if (
+        location.href
+          .replace(/\/?$/, "/")
+          .replace(`https://${location.hostname}`, "")
+          .replace("?", "/")
+          .match(k)
+      ) {
         presenceData.largeImageKey = "valorant_v";
         presenceData = { ...presenceData, ...v };
       }
     }
   } else if (location.hostname.includes("leagueoflegends.com")) {
-    const path = location.href
-        .replace(/\/?$/, "/")
-        .replace(`https://${location.hostname}`, "")
-        .replace("?", "/"),
-      statics: {
-        [name: string]: PresenceData;
-      } = {
-        "/": {
-          details: "Idling..."
-        },
-        "/how-to-play/": {
-          details: "Looking at:",
-          state: "How to Play! | LoL"
-        },
-        "/champions/": {
-          details: "Looking at Champion:",
-          state: `${document.querySelector("strong")?.textContent} | LoL`
-        },
-        "/champion/": {
-          details: "Looking at Champion:",
-          state: `${
-            Array.from(document.querySelectorAll("span")).find((c) =>
-              c.className?.includes("title")
-            )?.textContent
-          } | LoL`
-        },
-        "/news/": {
-          details: "Looking at News:",
-          state: `${
-            Array.from(document.querySelectorAll("div")).find((c) =>
-              c.className?.includes("style__Title")
-            )?.textContent
-          } | LoL`
-        },
-        "/news/tags/patch-notes/": {
-          details: "Looking at:",
-          state: "Patch notes Overview | LoL"
-        },
-        "/featured/": {
-          details: "Looking at:",
-          state: "League Displays | LoL"
-        },
-        "/story/": {
-          details: "Reading Story:",
-          state: `${document.querySelector("h1")?.textContent} | LoL`
-        },
-        "/regions/": {
-          details: "Looking at Region:",
-          state: `${
-            Array.from(document.querySelectorAll("span")).find((c) =>
-              c.className?.includes("title")
-            )?.textContent
-          } | LoL`
-        },
-        "/comic/": {
-          details: "LoL - Reading comic:",
-          state: `${document.querySelector("h1")?.textContent} | LoL`
-        },
-        "/kda/": {
-          details: "Alt Universe:",
-          state: "K/DA | LoL"
-        },
-        "/star-guardian/": {
-          details: "Alt Universe:",
-          state: "Star Guardians | LoL"
-        },
-        "/odyssey/": {
-          details: "Alt Universe:",
-          state: "Odyssey | LoL"
-        },
-        "/explore/": {
-          details: "Searching through:",
-          state: "Everything League | LoL"
-        }
-      };
+    const statics: {
+      [name: string]: PresenceData;
+    } = {
+      "/": {
+        details: "Idling..."
+      },
+      "/how-to-play/": {
+        details: "Looking at:",
+        state: "How to Play! | LoL"
+      },
+      "/champions/": {
+        details: "Looking at Champion:",
+        state: `${document.querySelector("strong")?.textContent} | LoL`
+      },
+      "/champion/": {
+        details: "Looking at Champion:",
+        state: `${
+          Array.from(document.querySelectorAll("span")).find((c) =>
+            c.className?.includes("title")
+          )?.textContent
+        } | LoL`
+      },
+      "/news/": {
+        details: "Looking at News:",
+        state: `${
+          Array.from(document.querySelectorAll("div")).find((c) =>
+            c.className?.includes("style__Title")
+          )?.textContent
+        } | LoL`
+      },
+      "/news/tags/patch-notes/": {
+        details: "Looking at:",
+        state: "Patch notes Overview | LoL"
+      },
+      "/featured/": {
+        details: "Looking at:",
+        state: "League Displays | LoL"
+      },
+      "/story/": {
+        details: "Reading Story:",
+        state: `${document.querySelector("h1")?.textContent} | LoL`
+      },
+      "/regions/": {
+        details: "Looking at Region:",
+        state: `${
+          Array.from(document.querySelectorAll("span")).find((c) =>
+            c.className?.includes("title")
+          )?.textContent
+        } | LoL`
+      },
+      "/comic/": {
+        details: "LoL - Reading comic:",
+        state: `${document.querySelector("h1")?.textContent} | LoL`
+      },
+      "/kda/": {
+        details: "Alt Universe:",
+        state: "K/DA | LoL"
+      },
+      "/star-guardian/": {
+        details: "Alt Universe:",
+        state: "Star Guardians | LoL"
+      },
+      "/odyssey/": {
+        details: "Alt Universe:",
+        state: "Odyssey | LoL"
+      },
+      "/explore/": {
+        details: "Searching through:",
+        state: "Everything League | LoL"
+      }
+    };
     for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
+      if (
+        location.href
+          .replace(/\/?$/, "/")
+          .replace(`https://${location.hostname}`, "")
+          .replace("?", "/")
+          .match(k)
+      ) {
         presenceData.largeImageKey = "lol_l";
         presenceData = { ...presenceData, ...v };
       }
     }
   } else if (location.hostname.includes("playruneterra.com")) {
-    const path = location.href
-        .replace(/\/?$/, "/")
-        .replace(`https://${location.hostname}`, "")
-        .replace("?", "/"),
-      statics: {
-        [name: string]: PresenceData;
-      } = {
-        "/": {
-          details: "Idling..."
-        },
-        "/news/": {
-          details: "Looking at news:",
-          state: `${
-            Array.from(document.querySelectorAll("div")).find((c) =>
-              c.className?.includes("style__Title")
-            )?.textContent
-          } | LoR`
-        },
-        "/news/competitive/": {
-          details: "Tournaments:",
-          state: `${document.querySelector("h1")?.textContent} | LoR`
-        }
-      };
+    const statics: {
+      [name: string]: PresenceData;
+    } = {
+      "/": {
+        details: "Idling..."
+      },
+      "/news/": {
+        details: "Looking at news:",
+        state: `${
+          Array.from(document.querySelectorAll("div")).find((c) =>
+            c.className?.includes("style__Title")
+          )?.textContent
+        } | LoR`
+      },
+      "/news/competitive/": {
+        details: "Tournaments:",
+        state: `${document.querySelector("h1")?.textContent} | LoR`
+      }
+    };
     for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
+      if (
+        location.href
+          .replace(/\/?$/, "/")
+          .replace(`https://${location.hostname}`, "")
+          .replace("?", "/")
+          .match(k)
+      ) {
         presenceData.largeImageKey = "lor_r";
         presenceData = { ...presenceData, ...v };
       }
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

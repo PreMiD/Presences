@@ -1,22 +1,24 @@
 const presence = new Presence({
     clientId: "783068812635013180"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
-    const startTime = Date.now(),
-      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
+  browsingTimestamp = Math.floor(Date.now() / 1000),
+  getTimestamps = (videoTime: number, videoDuration: number): number[] => {
+    const startTime = Date.now();
+    return [
+      Math.floor(startTime / 1000),
+      Math.floor(startTime / 1000) - videoTime + videoDuration
+    ];
   };
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     pathname: string = document.location.pathname.toLowerCase();
 
   if (pathname === "/") {
-    data.details = "Przegląda:";
+    presenceData.details = "Przegląda:";
     data.state = "Stronę Główną";
     data.smallImageKey = "browsing";
   } else if (
@@ -24,20 +26,26 @@ presence.on("UpdateData", async () => {
     document.querySelector("#naglowek > span > span > h1")
   ) {
     const title = document.querySelector(
-        "#naglowek > span > span > h1"
-      ).textContent,
-      ad = document.querySelector(
-        "#player > div > div > div > div > div > div > span.pb-video-player-wrap > span.pb-video-ad-container"
-      ),
-      uploader = document.querySelector(
+      "#naglowek > span > span > h1"
+    ).textContent;
+
+    presenceData.details = title;
+    data.state = `Przesłał: ${
+      document.querySelector(
         "#leftCol > div:nth-child(2) > div.DescrVID > div.DescrVID-left > div > div > div > div:nth-child(1) > a > span > span"
-      ).textContent;
-    data.details = title;
-    data.state = `Przesłał: ${uploader}`;
+      ).textContent
+    }`;
     if (
-      window.getComputedStyle(ad, null).getPropertyValue("display") === "block"
+      window
+        .getComputedStyle(
+          document.querySelector(
+            "#player > div > div > div > div > div > div > span.pb-video-player-wrap > span.pb-video-ad-container"
+          ),
+          null
+        )
+        .getPropertyValue("display") === "block"
     ) {
-      data.details = `(Reklama) ${title}`;
+      presenceData.details = `(Reklama) ${title}`;
       delete data.startTimestamp;
     } else {
       const video: HTMLVideoElement = document.querySelector("video");
@@ -53,26 +61,25 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (pathname === "/video") {
-    data.details = "Przegląda:";
+    presenceData.details = "Przegląda:";
     data.state = "Filmy";
     data.smallImageKey = "reading";
   } else if (pathname.includes("/gry-online")) {
-    data.details = "Przegląda:";
+    presenceData.details = "Przegląda:";
     data.state = "Gry";
     data.smallImageKey = "reading";
   } else if (pathname.includes("/info")) {
     const [, , searchData] = pathname.split("/");
-    data.details = "Szuka:";
+    presenceData.details = "Szuka:";
     data.state = searchData;
     data.smallImageKey = "search";
   } else if (pathname === "/premium") {
-    data.details = "Przegląda:";
+    presenceData.details = "Przegląda:";
     data.state = "Filmy premium";
     data.smallImageKey = "reading";
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
+  if (!presenceData.details) {
     presence.setActivity();
   } else presence.setActivity(data);
 });

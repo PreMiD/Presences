@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
     if (path.match(k)) data = { ...data, ...v };
 
   if (showSong && songPlaying) {
-    data.details = getElement(".track .heading");
+    presenceData.details = getElement(".track .heading");
     data.state = getElement(".track .subheading");
     data.smallImageKey = "play";
     data.smallImageText = (await strings).play;
@@ -76,25 +76,25 @@ presence.on("UpdateData", async () => {
 
   if (!songPlaying) {
     if (path.includes("/charts/")) {
-      data.details = "Viewing Charts...";
+      presenceData.details = "Viewing Charts...";
       data.state = getElement(".quicklinks-content > li:not(.show-link)");
     }
 
     if (path.includes("/track/")) {
-      data.details = "Viewing Track...";
+      presenceData.details = "Viewing Track...";
       data.state = `${getElement(".details h1")} by ${getElement(
         ".details h2"
       )}`;
     }
 
     if (path.includes("/artist/")) {
-      data.details = "Viewing Artist...";
+      presenceData.details = "Viewing Artist...";
       data.state = getElement(".details h1");
     }
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;
     }
@@ -106,6 +106,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

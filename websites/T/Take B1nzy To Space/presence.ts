@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "735314055861895288"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000), // Time Ratelimited
+  browsingTimestamp = Math.floor(Date.now() / 1000), // Time Ratelimited
   path = document.location; // Website URL
 
 /* When Website Updates */
@@ -12,12 +12,13 @@ presence.on("UpdateData", async () => {
 
   /* Update Presence */
   if (path.hostname === "takeb1nzyto.space") {
-    const song = document.querySelector("#song").textContent,
-      ratelimited = document.querySelector("#ratelimited-time").textContent;
-
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = `Playing ${song}`;
-    presenceData.state = `Ratelimited for ${ratelimited}s`;
+    presenceData.startTimestamp = browsingTimestamp;
+    presenceData.details = `Playing ${
+      document.querySelector("#song").textContent
+    }`;
+    presenceData.state = `Ratelimited for ${
+      document.querySelector("#ratelimited-time").textContent
+    }s`;
     presence.setActivity(presenceData);
   }
 });

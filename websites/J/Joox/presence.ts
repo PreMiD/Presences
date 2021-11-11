@@ -10,18 +10,14 @@ function getTime(list: string[]): number {
   return ret;
 }
 
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const splitAudioTime = audioTime.split(":").reverse(),
-    splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioTime = getTime(splitAudioTime),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
+function getTimestamps(audioTime: string, audioDuration: string): number[] {
+  const startTime = Date.now();
+  return [
+    Math.floor(startTime / 1000),
+    Math.floor(startTime / 1000) -
+      getTime(audioTime.split(":").reverse()) +
+      getTime(audioDuration.split(":").reverse())
+  ];
 }
 
 presence.on("UpdateData", async () => {
@@ -39,11 +35,12 @@ presence.on("UpdateData", async () => {
       author = document.querySelector(
         "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span"
       ).textContent,
-      audioTime = document.querySelector("#currentTime").textContent,
-      audioDuration = document.querySelector(
-        "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq"
-      ).textContent,
-      timestamps = getTimestamps(audioTime, audioDuration),
+      timestamps = getTimestamps(
+        document.querySelector("#currentTime").textContent,
+        document.querySelector(
+          "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq"
+        ).textContent
+      ),
       data: PresenceData = {
         details: title,
         state: author,

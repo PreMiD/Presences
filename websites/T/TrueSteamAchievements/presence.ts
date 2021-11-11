@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "701044403405324348"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "tsa"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname.includes("/gamer/")) {
     const user = document.querySelector(".tabs > ul > li").textContent;
@@ -173,8 +173,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/")
     presenceData.details = "Browsing...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

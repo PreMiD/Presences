@@ -49,9 +49,10 @@ const presence = new Presence({
       {
         path: /^\/mangas\/\d+\/(.*)+\/[0-9.]+\/(.*)$/,
         run: () => {
-          const pages = document.querySelectorAll('[id^="page_"]').length,
-            readingTime = pages * AVERAGE_READING_TIME,
-            endTimestamp = readingTime + Date.now();
+          const endTimestamp =
+            document.querySelectorAll('[id^="page_"]').length *
+              AVERAGE_READING_TIME +
+            Date.now();
 
           data.endTimestamp = endTimestamp / 1000;
 
@@ -151,20 +152,22 @@ if (searchInput) {
 presence.on("UpdateData", async () => {
   const showTimestamp: boolean = await presence.getSetting(Settings.TIMESTAMP),
     showButtons: boolean = await presence.getSetting(Settings.BUTTONS),
-    logo: number = await presence.getSetting(Settings.LOGO),
-    logoArr = [Logos.LIGHT, Logos.DARK];
-
-  let data: PresenceData = { largeImageKey: logoArr[logo] || Logos.LIGHT };
+    logo: number = await presence.getSetting(Settings.LOGO);
+  let data: PresenceData = {
+    largeImageKey: [Logos.LIGHT, Logos.DARK][logo] || Logos.LIGHT
+  };
 
   if (showTimestamp) data.startTimestamp = startTimestamp;
 
-  const path = location.href.replace(`https://${location.hostname}`, ""),
-    route = router({ data, path });
+  const route = router({
+    data,
+    path: location.href.replace(`https://${location.hostname}`, "")
+  });
 
   if (!route) return presence.setActivity(data);
 
   if (route.run) data = route.run();
-  if (route.details) data.details = route.details();
+  if (route.details) presenceData.details = route.details();
   if (route.buttons && showButtons) data.buttons = route.buttons();
   if (route.largeImageKey) data.largeImageKey = route.largeImageKey();
 

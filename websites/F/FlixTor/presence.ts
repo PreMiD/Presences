@@ -8,11 +8,11 @@ const presence = new Presence({
 
 let lastPlaybackState,
   playback: boolean,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 
   if (!playback) {
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     presence.setActivity(presenceData);
   }
@@ -58,22 +58,22 @@ presence.on("UpdateData", async () => {
       video.paused
         ? ""
         : videoTitle !== null
-        ? videoTitle.innerText
+        ? videoTitle.textContent
         : "Title not found..."
     );
 
     if (season && episode) {
       presenceData.details =
-        videoTitle !== null ? videoTitle.innerText : "Title not found...";
-      presenceData.state = `Season ${season.innerText}, Episode ${episode.innerText}`;
+        videoTitle !== null ? videoTitle.textContent : "Title not found...";
+      presenceData.state = `Season ${season.textContent}, Episode ${episode.textContent}`;
     } else if (!season && episode) {
       presenceData.details =
-        videoTitle !== null ? videoTitle.innerText : "Title not found...";
-      presenceData.state = `Episode ${episode.innerText}`;
+        videoTitle !== null ? videoTitle.textContent : "Title not found...";
+      presenceData.state = `Episode ${episode.textContent}`;
     } else {
       presenceData.details = "Watching";
       presenceData.state =
-        videoTitle !== null ? videoTitle.innerText : "Title not found...";
+        videoTitle !== null ? videoTitle.textContent : "Title not found...";
     }
 
     if (video.paused) {

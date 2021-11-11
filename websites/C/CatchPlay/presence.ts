@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      data.details = ` ${
+      presenceData.details = ` ${
         document.querySelector(".CPplayer-header-title span").textContent
       }`;
       (data.smallImageKey = video.paused ? "pause" : "play"),
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data, !video.paused);
     }
   } else {
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     presence.setActivity(data);
   }
 });

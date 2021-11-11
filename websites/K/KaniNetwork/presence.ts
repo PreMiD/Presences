@@ -6,10 +6,10 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    browsingStamp = Math.floor(Date.now() / 1000),
+    browsingTimestamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
     sprivacy = await presence.getSetting("super-privacy");
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (sprivacy || window.location.host === "kaniwork.com:8080")
     presenceData.details = "Browsing";
   else {
@@ -53,8 +53,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

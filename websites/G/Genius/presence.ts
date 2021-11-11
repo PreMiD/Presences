@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "809133308604055622"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 async function getStrings() {
   return presence.getStrings(
     {
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
       largeImageKey: "genius",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     path = document.location.pathname;
 
@@ -73,22 +73,22 @@ presence.on("UpdateData", async () => {
     document.querySelector("div[class*='SongPageGrid']") !== null ||
     document.querySelector(".song_body-lyrics") !== null
   ) {
-    const song =
-        document
-          .querySelector("h1[class*='SongHeader__Title-sc']")
-          ?.textContent.trim() ||
-        document
-          .querySelector("h1.header_with_cover_art-primary_info-title")
-          ?.textContent.trim(),
-      artist =
-        document
-          .querySelector("a[class*='SongHeader__Artist']")
-          ?.textContent.trim() ||
-        document
-          .querySelector("a.header_with_cover_art-primary_info-primary_artist")
-          ?.textContent.trim();
     presenceData.details = (await strings).lyrics;
-    presenceData.state = `${artist} - ${song}`;
+    presenceData.state = `${
+      document
+        .querySelector("a[class*='SongHeader__Artist']")
+        ?.textContent.trim() ||
+      document
+        .querySelector("a.header_with_cover_art-primary_info-primary_artist")
+        ?.textContent.trim()
+    } - ${
+      document
+        .querySelector("h1[class*='SongHeader__Title-sc']")
+        ?.textContent.trim() ||
+      document
+        .querySelector("h1.header_with_cover_art-primary_info-title")
+        ?.textContent.trim()
+    }`;
     if (buttons) {
       presenceData.buttons = [
         {
@@ -134,8 +134,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = (await strings).searching;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

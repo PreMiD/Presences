@@ -6,13 +6,14 @@ const presence = new Presence({
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing",
     episode: "presence.media.info.episode"
-  });
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "anvlogo",
       details: (await strings).browsing,
-      startTimestamp: Math.floor(Date.now() / 1000)
+      startTimestamp: browsingTimestamp
     },
     path = window.location.pathname;
   if (path.endsWith("/equipe"))
@@ -30,13 +31,12 @@ presence.on("UpdateData", async () => {
   else if (path.endsWith("/legendado")) {
     const episode = document
         .getElementById("current_episode_name")
-        .innerText.match(/\d+/g),
-      title = document
-        .querySelectorAll(".active h1")[0]
-        .textContent.replace(" - Episodio ", "")
-        .replace(/[0-9]/g, ""),
+        .textContent.match(/\d+/g),
       video = document.querySelector("video");
-    presenceData.details = title;
+    presenceData.details = document
+      .querySelectorAll(".active h1")[0]
+      .textContent.replace(" - Episodio ", "")
+      .replace(/[0-9]/g, "");
     presenceData.state = (await strings).episode.replace("{0}", episode[0]);
     if (!video.paused) {
       const { duration, currentTime } = video;

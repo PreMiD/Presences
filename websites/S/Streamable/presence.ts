@@ -19,15 +19,14 @@ presence.on("UpdateData", async () => {
     player: HTMLVideoElement = document.querySelector(".video-player-tag");
 
   if (player) {
-    const title = document.querySelector(".metadata #title").textContent,
-      views = document.querySelector(".metadata #visits").textContent,
-      [startTimestamp, endTimestamp] = presence.getTimestamps(
-        Math.floor(player.currentTime),
-        Math.floor(player.duration)
-      );
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      Math.floor(player.currentTime),
+      Math.floor(player.duration)
+    );
 
-    data.details = title;
-    data.state = views;
+    presenceData.details =
+      document.querySelector(".metadata #title").textContent;
+    data.state = document.querySelector(".metadata #visits").textContent;
     data.startTimestamp = startTimestamp;
     data.endTimestamp = endTimestamp;
     data.smallImageKey = player.paused ? "pause" : "play";
@@ -42,7 +41,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data);
   } else {
-    data.details = "Browsing...";
+    presenceData.details = "Browsing...";
     data.startTimestamp = Date.now();
 
     presence.setActivity(data);

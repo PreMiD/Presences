@@ -13,13 +13,11 @@ presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector("#dmp_Video");
   if (video !== null && !isNaN(video.duration)) {
     const title = document.querySelector(".VideoInfoTitle__videoTitle___3WLlw"),
-      uploader = document.querySelector(".ChannelLine__channelName___3JE1B"),
-      timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      uploader = document.querySelector(".ChannelLine__channelName___3JE1B");
     presenceData.details =
-      title !== null ? (title as HTMLElement).innerText : "Title not found...";
+      title !== null
+        ? (title as HTMLElement).textContent
+        : "Title not found...";
     presenceData.state =
       uploader !== null
         ? (uploader as HTMLElement).textContent
@@ -29,7 +27,11 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     presence.setTrayTitle(video.paused ? "" : title.textContent);
 
@@ -41,10 +43,9 @@ presence.on("UpdateData", async () => {
     if (title !== null && uploader !== null)
       presence.setActivity(presenceData, !video.paused);
   } else {
-    const pageData: PresenceData = {
+    presence.setActivity({
       details: "Browsing..",
       largeImageKey: "logo"
-    };
-    presence.setActivity(pageData);
+    });
   }
 });

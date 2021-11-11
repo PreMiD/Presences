@@ -68,20 +68,20 @@ dizibox.on("UpdateData", async () => {
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (document.location.search.includes("?s=")) {
-      const searchingFor =
-        document.querySelector("#search > div.title > h1 > span.text-muted") &&
-        document.querySelector("#search > div.title > h1 > span.text-muted")
-          .textContent
-          ? document
-              .querySelector("#search > div.title > h1 > span.text-muted")
-              .textContent.replace("(", "")
-              .replace(")", "")
-          : null;
-
       dizibox.setActivity({
         largeImageKey: "db-logo",
         details: "Bir dizi arıyor:",
-        state: searchingFor || "Belirsiz",
+        state:
+          document.querySelector(
+            "#search > div.title > h1 > span.text-muted"
+          ) &&
+          document.querySelector("#search > div.title > h1 > span.text-muted")
+            .textContent
+            ? document
+                .querySelector("#search > div.title > h1 > span.text-muted")
+                .textContent.replace("(", "")
+                .replace(")", "")
+            : null || "Belirsiz",
         smallImageKey: "search",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
@@ -104,83 +104,81 @@ dizibox.on("UpdateData", async () => {
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     }
-  } else {
-    if (_video && _video.currentTime) {
-      const title = document.querySelector(
-          "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-archive > span"
-        ),
-        episode = document.querySelector(
-          "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-episode"
-        ),
-        timestamps = dizibox.getTimestamps(
-          Math.floor(_video.currentTime),
-          Math.floor(_video.duration)
-        ),
-        data: PresenceData = {
-          largeImageKey: "db-logo",
-          details: title && title.textContent ? title.textContent : "Belirsiz",
-          state:
-            episode && episode.textContent ? episode.textContent : "Belirsiz",
-          smallImageKey: _video.paused ? "pause" : "play",
-          smallImageText: _video.paused
-            ? (await strings).pause
-            : (await strings).play
-        };
+  } else if (_video && _video.currentTime) {
+    const title = document.querySelector(
+        "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-archive > span"
+      ),
+      episode = document.querySelector(
+        "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-episode"
+      ),
+      timestamps = dizibox.getTimestamps(
+        Math.floor(_video.currentTime),
+        Math.floor(_video.duration)
+      ),
+      data: PresenceData = {
+        largeImageKey: "db-logo",
+        details: title && title.textContent ? title.textContent : "Belirsiz",
+        state:
+          episode && episode.textContent ? episode.textContent : "Belirsiz",
+        smallImageKey: _video.paused ? "pause" : "play",
+        smallImageText: _video.paused
+          ? (await strings).pause
+          : (await strings).play
+      };
 
-      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
-        [data.startTimestamp, data.endTimestamp] = timestamps;
+    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
+      [data.startTimestamp, data.endTimestamp] = timestamps;
 
-      if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
-      }
-
-      dizibox.setTrayTitle(
-        _video.paused
-          ? ""
-          : `${title && title.textContent ? title.textContent : "Belirsiz"} - ${
-              episode && episode.textContent ? episode.textContent : "Belirsiz"
-            }`
-      );
-      dizibox.setActivity(data);
-    } else if (isVideoData && video && video.currentTime) {
-      const title = document.querySelector(
-          "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-archive > span"
-        ),
-        episode = document.querySelector(
-          "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-episode"
-        ),
-        timestamps = dizibox.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        ),
-        data: PresenceData = {
-          largeImageKey: "db-logo",
-          details: title && title.textContent ? title.textContent : "Belirsiz",
-          state:
-            episode && episode.textContent ? episode.textContent : "Belirsiz",
-          smallImageKey: video.paused ? "pause" : "play",
-          smallImageText: video.paused
-            ? (await strings).pause
-            : (await strings).play
-        };
-
-      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
-        [data.startTimestamp, data.endTimestamp] = timestamps;
-
-      if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
-      }
-
-      dizibox.setTrayTitle(
-        video.paused
-          ? ""
-          : `${title && title.textContent ? title.textContent : "Belirsiz"} - ${
-              episode && episode.textContent ? episode.textContent : "Belirsiz"
-            }`
-      );
-      dizibox.setActivity(data);
+    if (video.paused) {
+      delete data.startTimestamp;
+      delete data.endTimestamp;
     }
+
+    dizibox.setTrayTitle(
+      _video.paused
+        ? ""
+        : `${title && title.textContent ? title.textContent : "Belirsiz"} - ${
+            episode && episode.textContent ? episode.textContent : "Belirsiz"
+          }`
+    );
+    dizibox.setActivity(data);
+  } else if (isVideoData && video && video.currentTime) {
+    const title = document.querySelector(
+        "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-archive > span"
+      ),
+      episode = document.querySelector(
+        "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-episode"
+      ),
+      timestamps = dizibox.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      ),
+      data: PresenceData = {
+        largeImageKey: "db-logo",
+        details: title && title.textContent ? title.textContent : "Belirsiz",
+        state:
+          episode && episode.textContent ? episode.textContent : "Belirsiz",
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play
+      };
+
+    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
+      [data.startTimestamp, data.endTimestamp] = timestamps;
+
+    if (video.paused) {
+      delete data.startTimestamp;
+      delete data.endTimestamp;
+    }
+
+    dizibox.setTrayTitle(
+      video.paused
+        ? ""
+        : `${title && title.textContent ? title.textContent : "Belirsiz"} - ${
+            episode && episode.textContent ? episode.textContent : "Belirsiz"
+          }`
+    );
+    dizibox.setActivity(data);
   }
 });

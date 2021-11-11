@@ -68,10 +68,9 @@ presence.on("UpdateData", async () => {
 
     if (title !== null) presence.setActivity(data, !video.paused);
   } else {
-    const browsingPresence: PresenceData = {
+    presence.setActivity({
       details: "Browsing...",
       largeImageKey: "logo"
-    };
-    presence.setActivity(browsingPresence);
+    });
   }
 });

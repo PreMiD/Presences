@@ -48,11 +48,11 @@ class AnimeStorage {
     if (this.list[title] && this.list[title].listing) return this.list[title];
     else if (!listing) return;
     else {
-      const shareLink = document.getElementsByClassName("modal-body")[1]
-        .lastElementChild.lastElementChild as HTMLAnchorElement;
+      
 
       this.list[title] = {
-        id: parseInt(shareLink.href.split("/a/")[1]),
+        id: parseInt(document.getElementsByClassName("modal-body")[1]
+        .lastElementChild.lastElementChild as HTMLAnchorElement.href.split("/a/")[1]),
         listing,
         time: Date.now()
       };
@@ -164,8 +164,8 @@ presence.on("UpdateData", async () => {
     strings = await waitStrings(
       await presence.getSetting("lang").catch(() => "en")
     ),
-    viewing = strings.viewing.slice(0, -1),
-    watching = strings.watching.slice(0, -1);
+    viewing = strings.viewing.slice(0, -1)
+    ;
   let playback = false;
 
   switch (path[0]) {
@@ -311,7 +311,7 @@ presence.on("UpdateData", async () => {
           );
 
         if (!movie)
-          presenceData.details = `${watching} ${strings.episode} ${episode}`;
+          presenceData.details = `${strings.watching.slice(0, -1)} ${strings.episode} ${episode}`;
         else presenceData.details = strings.watchingMovie;
 
         presenceData.state = title;

@@ -20,13 +20,12 @@ presence.on("UpdateData", async () => {
       [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      ),
-      subtitleCheck = document.querySelector("h2._29XQF._24NNJ") ? false : true;
-
-    if (subtitleCheck) subtitle = "Movie";
+      );
+    if (document.querySelector("h2._29XQF._24NNJ") ? false : true)
+      subtitle = "Movie";
     else subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
 
-    data.details = title;
+    presenceData.details = title;
     data.state = subtitle;
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused
@@ -42,7 +41,7 @@ presence.on("UpdateData", async () => {
 
     if (title && subtitle) presence.setActivity(data, !video.paused);
   } else {
-    data.details = "Browsing...";
+    presenceData.details = "Browsing...";
     presence.setActivity(data);
   }
 });

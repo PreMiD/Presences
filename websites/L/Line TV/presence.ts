@@ -20,7 +20,7 @@ const presence = new Presence({
       },
       await presence.getSetting("lang")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let oldLang: string = null,
   strings = getStrings(),
@@ -34,7 +34,7 @@ let oldLang: string = null,
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "linetv_logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingTimestamp,
       details: (await strings).browse
     },
     { pathname } = document.location,
@@ -73,11 +73,7 @@ presence.on("UpdateData", async () => {
         epText: null,
         id: videoData.nClipNo,
         genre: videoData.sCategoryCode
-      },
-      timestamps = video
-        ? presence.getTimestampsfromMedia(video)
-        : [browsingStamp, null];
-
+      };
     if (videoD.title.includes("["))
       videoD.title = videoD.title.replace(/(\[.+\])/g, "");
     if (videoD.title.includes("EP.")) {
@@ -240,7 +236,9 @@ presence.on("UpdateData", async () => {
           break;
       }
 
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] = video
+        ? presence.getTimestampsfromMedia(video)
+        : [browsingTimestamp, null];
 
       presenceData.smallImageKey = video.paused
         ? "pause"
@@ -271,11 +269,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).reading;
     }
   } else if (pathname.includes("/search")) {
-    const query = decodeURI(document.location.search.replace("?query=", "")),
-      resutls = parseInt(document.querySelector("em.ea")?.textContent, 10);
+    const resutls = parseInt(document.querySelector("em.ea")?.textContent, 10);
 
     presenceData.details = `${(await strings).searchFor} ${
-      showSearch ? query : "(Hidden)"
+      showSearch
+        ? decodeURI(document.location.search.replace("?query=", ""))
+        : "(Hidden)"
     }`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = (await strings).searching;

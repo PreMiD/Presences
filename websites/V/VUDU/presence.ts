@@ -27,26 +27,25 @@ function grabMetadata(): void {
   if (!closeButton) return;
 
   // Get the parent
-  const metaParent = closeButton.parentElement;
 
   // Get all the elements inside of the parent that are span (there should only be one) and get the innerHTML
-  metadata = metaParent.getElementsByTagName("span")[0].innerHTML;
+  metadata =
+    closeButton.parentElement.getElementsByTagName("span")[0].innerHTML;
 }
 
 // Get the video player element
 function getVideoPlayer(): void {
   // VUDU plays movies in an iFrame. Cool! Let's get that iFrame
   const VUDUIFrame = document.getElementById(
-      "contentPlayerFrame"
-    ) as HTMLIFrameElement,
-    // Now let's get the content INSIDE of that.
-    VUDUIFrameContent =
-      VUDUIFrame.contentDocument || VUDUIFrame.contentWindow.document;
-
+    "contentPlayerFrame"
+  ) as HTMLIFrameElement;
+  // Now let's get the content INSIDE of that.
   // Finally... get the video
-  videoPlayer = VUDUIFrameContent.getElementById(
-    "videoPlayer"
-  ) as HTMLVideoElement;
+  videoPlayer =
+    VUDUIFrame.contentDocument ||
+    (VUDUIFrame.contentWindow.document.getElementById(
+      "videoPlayer"
+    ) as HTMLVideoElement);
 
   videoDuration = videoPlayer.duration; // duration of movie in seconds
 
@@ -109,7 +108,7 @@ presence.on("UpdateData", () => {
     presence.setActivity(presenceData);
   } else {
     // Clear activity
-    presence.setTrayTitle();
+
     presence.setActivity();
   }
 });

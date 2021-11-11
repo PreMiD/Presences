@@ -10,13 +10,13 @@ if (
     const presence = new Presence({
         clientId: "644400074008297512"
       }),
-      browsingStamp = Math.floor(Date.now() / 1000);
+      browsingTimestamp = Math.floor(Date.now() / 1000);
     let currentURL = new URL(document.location.href),
       currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
       presenceData: PresenceData = {
         details: "Viewing an unsupported page",
         largeImageKey: "lg",
-        startTimestamp: browsingStamp
+        startTimestamp: browsingTimestamp
       };
     const updateCallback = {
         _function: null as () => void,
@@ -37,7 +37,7 @@ if (
         defaultData: PresenceData = {
           details: "Viewing an unsupported page",
           largeImageKey: "lg",
-          startTimestamp: browsingStamp
+          startTimestamp: browsingTimestamp
         }
       ): void => {
         currentURL = new URL(document.location.href);
@@ -91,10 +91,9 @@ if (
                   .querySelector(".jw-icon-playback")
                   .getAttribute("aria-label") === "Pause"
               ) {
-                const video: HTMLVideoElement =
-                    document.querySelector(".jw-video"),
-                  timestamps = presence.getTimestampsfromMedia(video);
-                [, presenceData.endTimestamp] = timestamps;
+                [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+                  document.querySelector(".jw-video")
+                );
               } else delete presenceData.endTimestamp;
             } catch (e) {
               delete presenceData.endTimestamp;
@@ -139,14 +138,14 @@ if (
             getURLParam("action") || getURLParam("veaction"),
           lang = currentPath[0] === "wiki" ? "en" : currentPath[0],
           titleFromURL = (): string => {
-            const raw: string =
+            //let lang: string = currentPath[0]
+            return decodeURIComponent(
               currentPath[0] === "index.php"
                 ? getURLParam("title")
                 : currentPath[0] === "wiki"
                 ? currentPath.slice(1).join("/")
-                : currentPath.slice(2).join("/");
-            //let lang: string = currentPath[0]
-            return decodeURIComponent(raw.replace(/_/g, " "));
+                : currentPath.slice(2).join("/").replace(/_/g, " ")
+            );
           };
 
         try {
@@ -273,20 +272,18 @@ if (
               presenceData.details = "Editing a page";
             else presenceData.details = namespaceDetails();
           };
+        } else if (actionResult() === "edit") {
+          presenceData.details = document.querySelector("#ca-edit")
+            ? "Editing a page"
+            : "Viewing source";
+          presenceData.state = titleFromURL();
         } else {
-          if (actionResult() === "edit") {
-            presenceData.details = document.querySelector("#ca-edit")
-              ? "Editing a page"
-              : "Viewing source";
-            presenceData.state = titleFromURL();
-          } else {
-            presenceData.details = namespaceDetails();
-            presenceData.state = `${
-              title.toLowerCase() === titleFromURL().toLowerCase()
-                ? `${title}`
-                : `${title} (${titleFromURL()})`
-            }`;
-          }
+          presenceData.details = namespaceDetails();
+          presenceData.state = `${
+            title.toLowerCase() === titleFromURL().toLowerCase()
+              ? `${title}`
+              : `${title} (${titleFromURL()})`
+          }`;
         }
 
         if (presenceData.state) presenceData.state += ` | ${sitename}`;

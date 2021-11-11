@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 let lastPath: string,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const curPath = document.location.pathname,
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 
   if (lastPath !== curPath) {
     lastPath = curPath;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (curPath.startsWith("/hot"))
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
         .innerHTML.substr(2)}`;
     }
   } else presenceData.details = "Đang xem trang chủ...";
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (
     !curPath.startsWith("/truyen-tranh") &&

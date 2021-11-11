@@ -28,12 +28,8 @@ botPresence.on("UpdateData", async () => {
         }
       ];
     } else if (botPage === "/bots/tag") {
-      const urlParams: URLSearchParams = new URLSearchParams(
-          window.location.search
-        ),
-        myParam: string = urlParams.get("tag");
       botData.details = "Searching Tag:";
-      botData.state = myParam;
+      botData.state = new URLSearchParams(window.location.search).get("tag");
       botData.buttons = [
         {
           label: "View Tag",
@@ -42,9 +38,8 @@ botPresence.on("UpdateData", async () => {
       ];
     } else if (botPage === "/login_err/") botData.details = "Login In Page";
     else if (botPage.includes("/users/")) {
-      const username: string = document.querySelector("#Username").textContent;
       botData.details = "Viewing Profile:";
-      botData.state = username;
+      botData.state = document.querySelector("#Username").textContent;
       botData.buttons = [
         {
           label: "View Profile",
@@ -75,9 +70,8 @@ botPresence.on("UpdateData", async () => {
           }
         ];
       } else {
-        const botName: string = document.getElementById("botname").textContent;
         botData.details = "Viewing Bot:";
-        botData.state = botName;
+        botData.state = document.getElementById("botname").textContent;
         botData.buttons = [
           {
             label: "View Bot",
@@ -94,11 +88,12 @@ botPresence.on("UpdateData", async () => {
       botData.details = "Viewing Privacy Policy";
     else if (botPage === "/Imprint/") botData.details = "Viewing Imprint";
   } else if (botHost === "docs.discord-botlist.eu") {
-    const page = document.querySelector(
-      "#__GITBOOK__ROOT__CLIENT__ > div.reset-3c756112--body-68cac36c > div.reset-3c756112--bodyContent-2f98451b > div > div.reset-3c756112--wholeContentBody-554be184 > div.reset-3c756112--wholeContentPage-6c3f1fc5 > div > div.reset-3c756112--pageContainer-544d6e9c > div.reset-3c756112 > div.reset-3c756112--pageHeader-15724735 > div > div > div.reset-3c756112--horizontalFlex-5a0077e0 > div.reset-3c756112--pageHeaderIntro-0c1463da > h1 > span"
-    ).textContent;
     botData.details = "Viewing Docs";
-    botData.state = `Page: ${page}`;
+    botData.state = `Page: ${
+      document.querySelector(
+        "#__GITBOOK__ROOT__CLIENT__ > div.reset-3c756112--body-68cac36c > div.reset-3c756112--bodyContent-2f98451b > div > div.reset-3c756112--wholeContentBody-554be184 > div.reset-3c756112--wholeContentPage-6c3f1fc5 > div > div.reset-3c756112--pageContainer-544d6e9c > div.reset-3c756112 > div.reset-3c756112--pageHeader-15724735 > div > div > div.reset-3c756112--horizontalFlex-5a0077e0 > div.reset-3c756112--pageHeaderIntro-0c1463da > h1 > span"
+      ).textContent
+    }`;
   }
 
   if (!sSubmit && botData.details === "Adding a Bot") delete botData.details;

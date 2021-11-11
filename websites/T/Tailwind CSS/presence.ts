@@ -12,13 +12,11 @@ Tailwind.on("UpdateData", async () => {
     presenceData.details = "Viewing page:";
     if (path.includes("/components")) {
       if (path.includes("/components/")) {
-        const pathnames = location.pathname.split("/"),
-          category = pathnames[pathnames.length - 2]
-            .replace(/-/g, " ")
-            .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
-
+        const pathnames = location.pathname.split("/");
         presenceData.details = "Viewing component:";
-        presenceData.state = `${category} - ${
+        presenceData.state = `${pathnames[pathnames.length - 2]
+          .replace(/-/g, " ")
+          .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())} - ${
           document.querySelector("main .max-w-8xl h2")?.textContent ||
           "Unknown component"
         }`;

@@ -17,15 +17,15 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/flyte/")
     presenceData.details = "Getting to know edo/flyte";
   else {
-    const blogTitle = document.querySelector("h1.post-title"),
-      blogData = (presenceData = {
+    blogCheck = true;
+    presence.setActivity(
+      (presenceData = {
         details: "Looking at a Blog Post",
-        state: blogTitle.innerHTML,
+        state: document.querySelector("h1.post-title").innerHTML,
         startTimestamp: startBrowse,
         largeImageKey: "logo"
-      });
-    blogCheck = true;
-    presence.setActivity(blogData);
+      })
+    );
   }
 
   if (!blogCheck) presence.setActivity(presenceData);

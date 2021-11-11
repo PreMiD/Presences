@@ -36,8 +36,7 @@ const data: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
-  if (!data.details) {
-    presence.setTrayTitle();
+  if (!presenceData.details) {
     presence.setActivity();
   } else presence.setActivity(data);
 });
@@ -55,7 +54,7 @@ function RefreshData() {
         : "skin_unknown",
       lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 
-    data.details = "Picking Powers";
+    presenceData.details = "Picking Powers";
     data.state = `In Lobby, ${lobbyName} (${userRows.length}/6)`;
 
     if (skinNames.has(skinName)) {
@@ -66,22 +65,25 @@ function RefreshData() {
     lastlobbyName = lobbyName;
   } else if (statePage === "in_lobby_ready") {
     const [groupTitle] = document.getElementsByClassName("group-name__title"),
-      userRows = document.getElementsByClassName("group-players-list__row"),
       lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
     let playerCount = 0;
-    for (let i = 0; i < userRows.length; i++) {
-      if (!userRows[i].className.includes("group-players-list__row--empty"))
+    for (
+      ;
+      i < document.getElementsByClassName("group-players-list__row").length;
+      i++
+    ) {
+      if (!userRows[0].className.includes("group-players-list__row--empty"))
         playerCount++;
     }
 
-    data.details = "Ready In Lobby";
+    presenceData.details = "Ready In Lobby";
     data.state = `${lobbyName} (${playerCount}/6)`;
     lastlobbyName = lobbyName;
   } else if (statePage === "in_game") {
-    data.details = "Playing";
+    presenceData.details = "Playing";
     data.state = lastlobbyName;
   } else if (statePage === "in_game_finished") {
-    data.details = "Checking Match Results";
+    presenceData.details = "Checking Match Results";
     data.state = lastlobbyName;
   } else {
     const [nickElement] = document.getElementsByClassName("c-user__name");
@@ -89,15 +91,21 @@ function RefreshData() {
     data.state = lastName;
   }
 
-  if (statePage === "in_menu") data.details = "Main Menu";
-  else if (statePage === "browsing_lobbies") data.details = "Browsing Lobbies";
-  else if (statePage === "in_shop") data.details = "In Shop";
-  else if (statePage === "in_leaderboard") data.details = "In Leaderboards";
-  else if (statePage === "in_locker") data.details = "In Locker";
-  else if (statePage === "in_battlepass") data.details = "In Battlepass";
-  else if (statePage === "in_progress") data.details = "Checking XP Progress";
-  else if (statePage === "opening_crates") data.details = "Opening Crates";
-  else if (statePage === "creating_match") data.details = "Creating Match";
+  if (statePage === "in_menu") presenceData.details = "Main Menu";
+  else if (statePage === "browsing_lobbies")
+    presenceData.details = "Browsing Lobbies";
+  else if (statePage === "in_shop") presenceData.details = "In Shop";
+  else if (statePage === "in_leaderboard")
+    presenceData.details = "In Leaderboards";
+  else if (statePage === "in_locker") presenceData.details = "In Locker";
+  else if (statePage === "in_battlepass")
+    presenceData.details = "In Battlepass";
+  else if (statePage === "in_progress")
+    presenceData.details = "Checking XP Progress";
+  else if (statePage === "opening_crates")
+    presenceData.details = "Opening Crates";
+  else if (statePage === "creating_match")
+    presenceData.details = "Creating Match";
 
   data.largeImageKey = "index";
 }

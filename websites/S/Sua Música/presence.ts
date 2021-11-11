@@ -44,8 +44,8 @@ function getArtistPlaying(): string {
  * @returns {string} play if music is playing, pause if music stop
  */
 function actionPlay(): string {
-  const element = document.querySelector("a.btnPlayer.playPause.pause");
-  if (elementExist(element)) return "play";
+  if (elementExist(document.querySelector("a.btnPlayer.playPause.pause")))
+    return "play";
   else return "pause";
 }
 
@@ -60,8 +60,6 @@ presence.on("UpdateData", async () => {
     endTimestamp: 0
   };
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -8,92 +8,89 @@ presence.on("UpdateData", async () => {
   };
 
   //Startseite
-  if (document.location.pathname === "/") data.details = "| Startseite";
+  if (document.location.pathname === "/") presenceData.details = "| Startseite";
   //Serien
   else if (document.location.pathname.includes("/search"))
-    data.details = "| Erweiterte Suche";
+    presenceData.details = "| Erweiterte Suche";
   else if (document.location.pathname.includes("/read/")) {
-    const chapter = document
-        .querySelector(
-          "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > ul > li.active > a"
-        )
-        .textContent.replace("Seite", "Kapitel"),
-      [manganame] = document
-        .querySelector("head > title")
-        .textContent.split("- Kapitel "),
-      seite = document.querySelector(".page-text").textContent;
-    data.details = manganame;
-    data.state = `${chapter} | ${seite}`;
+    const [manganame] = document
+      .querySelector("head > title")
+      .textContent.split("- Kapitel ");
+    presenceData.details = manganame;
+    data.state = `${document
+      .querySelector(
+        "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > ul > li.active > a"
+      )
+      .textContent.replace("Seite", "Kapitel")} | ${
+      document.querySelector(".page-text").textContent
+    }`;
     data.smallImageKey = "manga";
   } else if (document.location.pathname.startsWith("/series/")) {
-    const name = document.querySelector(".series-title").textContent;
-    data.details = "| Serie";
-    data.state = name;
+    presenceData.details = "| Serie";
+    data.state = document.querySelector(".series-title").textContent;
   } else if (document.location.pathname.startsWith("/series"))
-    data.details = "| Serien";
+    presenceData.details = "| Serien";
   else if (document.location.pathname.includes("/serieslist")) {
     const [serieslist] = document
       .querySelector("head > title")
       .textContent.split("- Manga-Tube");
-    data.details = "| Serienliste";
+    presenceData.details = "| Serienliste";
     data.state = serieslist;
 
     //Community
   } else if (document.location.pathname.includes("/team"))
-    data.details = "| Team";
+    presenceData.details = "| Team";
   else if (document.location.pathname.startsWith("/partner"))
-    data.details = "| Partner";
+    presenceData.details = "| Partner";
   else if (document.location.pathname.startsWith("/gewinnspiel")) {
     const [giveaway] = document
       .querySelector("head > title")
       .textContent.split(" - Manga-Tube");
-    data.details = "| Gewinnspiel";
+    presenceData.details = "| Gewinnspiel";
     data.state = giveaway;
   } else if (document.location.pathname.startsWith("/join"))
-    data.details = "| Bewerben";
+    presenceData.details = "| Bewerben";
   else if (document.location.pathname.startsWith("/faq"))
-    data.details = "| FAQ";
+    presenceData.details = "| FAQ";
   //Profilbar
   else if (document.location.pathname.startsWith("/poll")) {
     if (document.location.pathname.endsWith("/poll/"))
-      data.details = "| Laufende Umfragen";
+      presenceData.details = "| Laufende Umfragen";
     else {
-      const poll = document.querySelector("div.poll-question").textContent;
-      data.details = "| Umfrage";
-      data.state = poll;
+      presenceData.details = "| Umfrage";
+      data.state = document.querySelector("div.poll-question").textContent;
     }
   } else if (document.location.pathname.includes("/write/")) {
-    data.details = "| Postfach";
+    presenceData.details = "| Postfach";
     data.state = "Nachricht Verfassen";
   } else if (document.location.pathname.includes("/inbox")) {
     if (document.location.pathname.includes("/message/")) {
-      data.details = "| Postfach";
+      presenceData.details = "| Postfach";
       data.state = "Nachricht";
     } else {
-      data.details = "| Postfach";
+      presenceData.details = "| Postfach";
       data.state = "Übersicht";
     }
   } else if (document.location.pathname.includes("/edit")) {
-    data.details = "| Profil";
+    presenceData.details = "| Profil";
     data.state = "Bearbteiten";
   } else if (document.location.pathname.startsWith("/profile/")) {
-    const profile = document.querySelector("b").textContent,
-      level = document.querySelector("#user_level").textContent;
-    data.details = "| Profil";
-    data.state = `${profile} | ${level}`;
+    presenceData.details = "| Profil";
+    data.state = `${document.querySelector("b").textContent} | ${
+      document.querySelector("#user_level").textContent
+    }`;
   } else if (document.location.pathname.includes("/blog/")) {
-    const blog = document.querySelector("h3").textContent;
-    data.details = "| Blog";
-    data.state = blog;
+    presenceData.details = "| Blog";
+    data.state = document.querySelector("h3").textContent;
 
     //Datenschutz & Impressum
   } else if (document.location.pathname.startsWith("/impressum"))
-    data.details = "| Impressum";
+    presenceData.details = "| Impressum";
   else if (document.location.pathname.startsWith("/datenschutz"))
-    data.details = "| Datenschutz";
+    presenceData.details = "| Datenschutz";
   //Login
   else if (document.location.pathname.startsWith("/login"))
-    data.details = "| Login";
+    presenceData.details = "| Login";
 
   //setActivity
   presence.setActivity(data);

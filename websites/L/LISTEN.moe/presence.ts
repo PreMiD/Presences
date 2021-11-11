@@ -30,8 +30,8 @@ function getArtists(): string {
   )?.childNodes;
 
   if (elemt) {
-    for (let i = 0; i < elemt.length; i++)
-      artists.push(elemt[i].textContent.replace(/\s+/g, " ").trim());
+    for (; i < elemt.length; i++)
+      artists.push(elemt[0].textContent.replace(/\s+/g, " ").trim());
 
     artist = artists.join(" ");
   }

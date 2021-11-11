@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "656574682916585473"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function decodeReq(entity: Element): string {
   const txt = document.createElement("textarea");
@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
   };
 
   if (document.location.host === "downdetector.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (document.location.pathname.startsWith("/search/")) {
       presenceData.details = "Searching for:";
       const [, item] = document.location.href.split("?q=");
@@ -60,8 +60,6 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -27,7 +27,7 @@ const presence = new Presence({
     settings?: {
       id: string;
       delete?: boolean;
-      data: Array<string>;
+      data: string[];
     }[];
     presence: {
       [key: string]: {

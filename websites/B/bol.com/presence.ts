@@ -56,8 +56,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.toLowerCase().includes("account"))
     presenceData.details = "Beheert account";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

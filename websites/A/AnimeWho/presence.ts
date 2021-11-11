@@ -17,25 +17,26 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "animewho",
-      details: "Ana Sayfada Anime Arıyor",
-      startTimestamp
-    },
-    title = document.querySelector("head > title"),
-    anime = title.textContent
-      .replace("Türkçe İzle - AnimeWho? Anime", "")
-      .replace("Türkçe Oku - AnimeWho? Manga", "")
-      .replace("AnimeWho?", "")
-      .replace(" Türkçe İzle ve İndir", "");
-  presenceData.details = anime;
+    largeImageKey: "animewho",
+    details: "Ana Sayfada Anime Arıyor",
+    startTimestamp
+  };
+
+  presenceData.details = document
+    .querySelector("head > title")
+    .textContent.replace("Türkçe İzle - AnimeWho? Anime", "")
+    .replace("Türkçe Oku - AnimeWho? Manga", "")
+    .replace("AnimeWho?", "")
+    .replace(" Türkçe İzle ve İndir", "");
   if (document.location.pathname === "/") {
     presenceData.details = "Ana Sayfada";
     presenceData.state = "Anime & Manga Arıyor";
   } else if (new RegExp("izle/[a-zA-Z0_9]+").test(document.location.pathname)) {
-    const bolum = document.querySelector(
-      "div.MuiBox-root > button.MuiButton-outlinedSecondary > span.MuiButton-label"
-    );
-    presenceData.state = `${bolum.innerHTML}'ü İzliyor`;
+    presenceData.state = `${
+      document.querySelector(
+        "div.MuiBox-root > button.MuiButton-outlinedSecondary > span.MuiButton-label"
+      ).innerHTML
+    }'ü İzliyor`;
   } else if (new RegExp("oku/[0-9]+/[0-9]+").test(document.location.pathname)) {
     const readType = document.querySelector(
         "div.MuiGrid-root > div.MuiBox-root > button.MuiButtonBase-root > span.MuiButton-label"
@@ -55,10 +56,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Ekip Alımları";
     presenceData.state = "Potansiyel Ekip Üyesi";
   } else if (document.location.pathname.includes("/ara")) {
-    const tur = document.querySelector(
-      "div.MuiGrid-root > div.MuiBox-root > button.MuiButton-outlinedPrimary > span.MuiButton-label"
-    );
-    if (tur.innerHTML === "Anime")
+    if (
+      document.querySelector(
+        "div.MuiGrid-root > div.MuiBox-root > button.MuiButton-outlinedPrimary > span.MuiButton-label"
+      ).innerHTML === "Anime"
+    )
       presenceData.state = "Ne İzlesem Diye Bakıyor";
     else presenceData.state = "Ne Okusam Diye Bakıyor";
   } else if (document.location.pathname.includes("/destek-ol")) {

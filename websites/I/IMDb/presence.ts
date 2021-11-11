@@ -14,14 +14,12 @@ presence.on("UpdateData", async () => {
     },
     url = document.URL;
   if (url.includes("/videoplayer/")) {
-    const [video] = document.getElementsByTagName("video"),
-      title = document.querySelectorAll("h1.title")[0].textContent,
-      authorElement = document.getElementsByClassName(
-        "primary-relation-name"
-      )[0] as HTMLElement,
-      author = authorElement.innerText;
-    presenceData.details = title;
-    presenceData.state = author;
+    const [video] = document.getElementsByTagName("video");
+
+    presenceData.details = document.querySelectorAll("h1.title")[0].textContent;
+    presenceData.state = document.getElementsByClassName(
+      "primary-relation-name"
+    )[0] as HTMLElement.textContent;
     presenceData.largeImageKey = "large_img";
     presenceData.smallImageKey = video.paused ? "paused" : "playing";
     presenceData.smallImageText = video.paused

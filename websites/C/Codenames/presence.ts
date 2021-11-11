@@ -30,7 +30,7 @@ const presence = new Presence({
     beige: ["beige1", "beige2", "beige3", "beige4", "beige5", "beige6"]
   };
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   lastTeamLog: availableColors = "beige",
   currentlySetColor: availableColors = "beige";
 
@@ -55,10 +55,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Waiting for game";
       presenceData.state = "to start...";
       if (lastTeamLog !== "beige") {
-        browsingStamp = Math.floor(Date.now() / 1000);
+        browsingTimestamp = Math.floor(Date.now() / 1000);
         lastTeamLog = "beige";
       }
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       if (slideshow.getSlides().length) {
         presence.info("Removing all cards from SlideShow.");
         slideshow.deleteAllSlides();
@@ -72,13 +72,13 @@ presence.on("UpdateData", async () => {
           .children[logDataLength - 1].className.split("team-")[1]
           .split(" ")[0] as availableColors;
         if (team !== lastTeamLog) {
-          browsingStamp = Math.floor(Date.now() / 1000);
+          browsingTimestamp = Math.floor(Date.now() / 1000);
           slideshow.deleteAllSlides();
           presence.info("Removing all cards from SlideShow.");
           lastTeamLog = team;
         }
       }
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       const allCards = Array.from(document.querySelectorAll("section")).filter(
           (s) => s.className?.includes("items-center")
         ),
@@ -130,8 +130,7 @@ presence.on("UpdateData", async () => {
         }
       });
       foundCards.forEach((card) => {
-        const name = card.textContent;
-        if (slideshow.hasSlide(name)) {
+        if (slideshow.hasSlide(card.textContent)) {
           presence.info(`Removing ${name} card from SlideShow.`);
           slideshow.deleteSlide(name);
         }
@@ -164,7 +163,7 @@ presence.on("UpdateData", async () => {
       }
     }
   } else {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (slideshow.getSlides().length) {
       presence.info("Removing all cards from SlideShow.");
       slideshow.deleteAllSlides();

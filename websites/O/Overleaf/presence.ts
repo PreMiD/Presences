@@ -15,18 +15,17 @@ presence.on("UpdateData", async () => {
   if (pth === "/project" || pth === "/project/") {
     presenceData.details = "Browsing Projects";
     //Selecting lateral menu
-    const menu = document.getElementsByClassName("project-list-sidebar"),
-      //Selcting active section
-      actif = menu[0].getElementsByClassName("active"),
+    const //Selcting active section
+      actif = document
+        .getElementsByClassName("project-list-sidebar")[0]
+        .getElementsByClassName("active"),
       //Take care of custom folders
       maybecustom = actif[0].getElementsByClassName("name ng-binding");
     if (maybecustom.length !== 0)
       presenceData.state = maybecustom[0].textContent;
     //Take care of (i) logo
-    else {
-      const fnl = actif[0].getElementsByTagName("a");
-      presenceData.state = fnl[0].textContent;
-    }
+    else presenceData.state = actif[0].getElementsByTagName("a")[0].textContent;
+
     presenceData.startTimestamp = elapsed;
   } else if (pth.includes("/project")) {
     //Project page
@@ -35,12 +34,11 @@ presence.on("UpdateData", async () => {
       ""
     );
     //Isolating lateral menu
-    const menu = document.getElementsByClassName("file-tree-list"),
-      //Selecting selected element
-      actif = menu[0].getElementsByClassName("selected"),
-      //Selecting current file name
-      filename = actif[0].getElementsByTagName("span")[0].textContent;
-    presenceData.state = filename;
+
+    presenceData.state = document
+      .getElementsByClassName("file-tree-list")[0]
+      .getElementsByClassName("selected")[0]
+      .getElementsByTagName("span")[0].textContent;
     presenceData.startTimestamp = elapsed;
   } else if (pth.includes("/learn")) {
     //Documentation
@@ -63,8 +61,6 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

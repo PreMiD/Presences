@@ -24,11 +24,11 @@ let strings = getStrings(),
   oldLang: string = null,
   lastPlaybackState = null,
   playback: boolean,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 let iFrameVideo: boolean,
@@ -71,24 +71,21 @@ presence.on("UpdateData", async () => {
 
   if (!playback && document.location.pathname.includes("/manga")) {
     if (document.location.pathname.includes("/read")) {
-      const title = document.querySelector(".chapter-header a").innerHTML,
-        [currChapter] = document
-          .querySelector(".chapter-header")
-          .innerHTML.split("</a>")[1]
-          .split("\n"),
-        lastPage = document.querySelector(".images").children.length,
-        currPage =
-          document.querySelector(".first-page-number").innerHTML === ""
-            ? "1"
-            : document.querySelector(".first-page-number").innerHTML;
+      const [currChapter] = document
+        .querySelector(".chapter-header")
+        .innerHTML.split("</a>")[1]
+        .split("\n");
 
-      presenceData.details = title;
+      presenceData.details =
+        document.querySelector(".chapter-header a").innerHTML;
       presenceData.state = `${(await strings).reading} ${currChapter}`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "book_open";
-      presenceData.smallImageText = `${
-        (await strings).page
-      } ${currPage}/${lastPage}`;
+      presenceData.smallImageText = `${(await strings).page} ${
+        document.querySelector(".first-page-number").innerHTML === ""
+          ? "1"
+          : document.querySelector(".first-page-number").innerHTML
+      }/${document.querySelector(".images").children.length}`;
       presenceData.buttons = [
         {
           label: `Read ${(await strings).chapter}`,
@@ -110,7 +107,7 @@ presence.on("UpdateData", async () => {
       ];
     } else {
       presenceData.details = (await strings).browse;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
 
       delete presenceData.state;
       delete presenceData.smallImageKey;
@@ -121,7 +118,7 @@ presence.on("UpdateData", async () => {
 
   if (!playback && !document.location.pathname.includes("/manga")) {
     presenceData.details = (await strings).browse;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -151,11 +148,12 @@ presence.on("UpdateData", async () => {
       videoTitle = seasonName;
     } else {
       series = document.querySelector(".ellipsis .text-link");
-      videoTitle = series.innerText;
+      videoTitle = series.textContent;
       seriesLink = series.getAttribute("href");
-      const episod = document.querySelectorAll("#showmedia_about_media h4"),
-        epName = document.querySelector("h4#showmedia_about_name");
-      episode = `${episod[1].innerHTML} - ${epName.innerHTML}`;
+
+      episode = `${
+        document.querySelectorAll("#showmedia_about_media h4")[1].innerHTML
+      } - ${document.querySelector("h4#showmedia_about_name").innerHTML}`;
     }
     const [, endTimestamp] = presence.getTimestamps(
       Math.floor(currentTime),

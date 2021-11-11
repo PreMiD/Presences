@@ -15,9 +15,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing...";
     if (locationPath === "/") presenceData.details = "Viewing Home Page";
     else if (locationPath.match("/streams/")) {
-      const category = document.title.replace(" - Glimesh", "");
       presenceData.details = "Viewing Category";
-      presenceData.state = category;
+      presenceData.state = document.title.replace(" - Glimesh", "");
     } else if (locationPath === "/users" || locationPath === "/users/")
       presenceData.details = "Viewing All Users";
     else if (locationPath.match("users/settings"))
@@ -61,13 +60,12 @@ presence.on("UpdateData", async () => {
           presenceData.state = "Live Streams";
       }
     } else if (locationPath.match("/profile")) {
-      const username = document.title.replace("'s Profile - Glimesh", "");
       presenceData.details = `Viewing${
         !(await presence.getSetting("show_details")) ? " a " : " "
       }Profile`;
 
       if (await presence.getSetting("show_details"))
-        presenceData.state = username;
+        presenceData.state = document.title.replace("'s Profile - Glimesh", "");
 
       if (
         (await presence.getSetting("show_buttons")) &&
@@ -81,14 +79,11 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (document.getElementById("video-column") !== null) {
-      const username = document.querySelector("h3"),
-        title = document.title.replace(" - Glimesh", "");
-
       presenceData.details = (await presence.getSetting("show_details"))
-        ? title
+        ? document.title.replace(" - Glimesh", "")
         : "Watching a Stream";
       if (await presence.getSetting("show_details"))
-        presenceData.state = username.textContent;
+        presenceData.state = document.querySelector("h3").textContent;
 
       const video = document.querySelector("video");
 
@@ -96,13 +91,12 @@ presence.on("UpdateData", async () => {
         (await presence.getSetting("show_buttons")) &&
         (await presence.getSetting("show_details"))
       ) {
-        const profileURL: HTMLAnchorElement = document.querySelector(
-          "#video-column > div > div.card-footer.p-1.d-none.d-sm-block > div > div.col-8.d-inline-flex.align-items-center > a"
-        );
         presenceData.buttons = [
           {
             label: "View Profile",
-            url: profileURL.href
+            url: document.querySelector(
+              "#video-column > div > div.card-footer.p-1.d-none.d-sm-block > div > div.col-8.d-inline-flex.align-items-center > a"
+            ).href
           }
         ];
       }
@@ -143,15 +137,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Blogs";
 
     if (locationPath.match("/posts")) {
-      const blogPost = document.querySelector(
-        "body > div > div > div > h1 > a"
-      ).textContent;
-
       presenceData.details = `Reading${
         !(await presence.getSetting("show_details")) ? " a " : " "
       }Blog`;
-      if (await presence.getSetting("show_details"))
-        presenceData.state = blogPost;
+      if (await presence.getSetting("show_details")) {
+        presenceData.state = document.querySelector(
+          "body > div > div > div > h1 > a"
+        ).textContent;
+      }
 
       if (
         (await presence.getSetting("show_buttons")) &&
@@ -167,8 +160,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

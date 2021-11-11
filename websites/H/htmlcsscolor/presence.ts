@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
   // State: tells you what they are doing with the action (viewing blah/generating blah/listening blah/etc)
 
   if (document.location.pathname.startsWith("/hex")) {
-    Data.details = `Viewing ${
+    presenceData.details = `Viewing ${
       document.querySelector("#uscBootStrapHeader_lblTitle > strong")
         .textContent
     }`;
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
     document.location.href.endsWith("/#wheel") ||
     document.location.pathname === "/"
   ) {
-    Data.details = "Viewing on wheel";
+    presenceData.details = "Viewing on wheel";
     Data.state = `${
       (document.querySelector("#cntMain_txtColor") as HTMLInputElement).value
     }`;
@@ -36,27 +36,27 @@ presence.on("UpdateData", async () => {
 
   // Sub pages
   if (document.location.pathname.startsWith("/html-color-names")) {
-    Data.details = "Viewing the list of";
+    presenceData.details = "Viewing the list of";
     Data.state = "html color names.";
   }
   if (document.location.pathname.startsWith("/color-names-rgb-values")) {
-    Data.details = "Viewing the list of";
+    presenceData.details = "Viewing the list of";
     Data.state = "RGB color names.";
   }
   if (document.location.pathname.startsWith("/web-safe-colors")) {
-    Data.details = "Viewing the list of";
+    presenceData.details = "Viewing the list of";
     Data.state = "web save colors.";
   }
   if (document.location.pathname.startsWith("/random-colors")) {
-    Data.details = "Viewing a list of";
+    presenceData.details = "Viewing a list of";
     Data.state = "random colors.";
   }
   if (document.location.pathname.startsWith("/color-gradient")) {
-    Data.details = "Generating a";
+    presenceData.details = "Generating a";
     Data.state = "color gradient.";
   }
   if (document.location.pathname.startsWith("/contacts")) {
-    Data.details = "Viewing the";
+    presenceData.details = "Viewing the";
     Data.state = "contacts page.";
   }
 

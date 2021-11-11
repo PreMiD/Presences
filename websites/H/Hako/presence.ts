@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 let lastPath: string,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const curPath = document.location.pathname,
@@ -12,12 +12,10 @@ presence.on("UpdateData", async () => {
     };
   if (lastPath !== curPath) {
     lastPath = curPath;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
   const truyen = curPath.startsWith("/truyen"),
-    sangTac = curPath.startsWith("/sang-tac"),
-    convert = curPath.startsWith("/convert");
-
+    sangTac = curPath.startsWith("/sang-tac");
   if (curPath.startsWith("/ke-sach"))
     presenceData.details = "Đang xem tủ sách...";
   else if (curPath.startsWith("/thong-bao"))
@@ -44,10 +42,11 @@ presence.on("UpdateData", async () => {
     }`;
   } else if (curPath.startsWith("/xuat-ban")) {
     const title = document.querySelector(".volume-title>a"),
-      author = document.querySelector(".info-value>a"),
-      publisher = document.querySelector(".publisher-name>a");
+      author = document.querySelector(".info-value>a");
     if (title !== null) {
-      presenceData.details = `Đang xem: ${title.innerHTML} (${publisher.innerHTML} phát hành)`;
+      presenceData.details = `Đang xem: ${title.innerHTML} (${
+        document.querySelector(".publisher-name>a").innerHTML
+      } phát hành)`;
       presenceData.state = `Tác giả: ${author.innerHTML}`;
     } else presenceData.details = "Đang tìm truyện bản quyền...";
   } else if (curPath.startsWith("/action"))
@@ -59,30 +58,32 @@ presence.on("UpdateData", async () => {
         40
       )}`;
     } else presenceData.details = "Đang xem danh sách nhóm dịch...";
-  } else if (truyen || sangTac || convert) {
-    const name = document.querySelector(".series-name-group>.series-name>a"),
-      title = document.querySelector(".rd_sidebar-name>h5>a"),
-      chap = document.querySelector(".title-top>h4");
-    if (name !== null || title !== null) {
+  } else if (truyen || sangTac || curPath.startsWith("/convert")) {
+    if (
+      document.querySelector(".series-name-group>.series-name>a") !== null ||
+      document.querySelector(".rd_sidebar-name>h5>a") !== null
+    ) {
       presenceData.details =
         name !== null
           ? "Đang chọn chap..."
           : `Đang đọc truyện: ${title.innerHTML}`;
-      presenceData.state = name !== null ? name.innerHTML : chap.innerHTML;
+      presenceData.state =
+        name !== null
+          ? name.innerHTML
+          : document.querySelector(".title-top>h4").innerHTML;
     } else {
       presenceData.details = `Đang tìm ${
         truyen ? "truyện" : sangTac ? "sáng tác" : "convert"
       } ...`;
     }
   } else if (curPath.startsWith("/thao-luan")) {
-    const title = document.querySelector(".sect-title>a"),
-      author = document.querySelector(".author_name>a");
-    if (title !== null) {
+    const author = document.querySelector(".author_name>a");
+    if (document.querySelector(".sect-title>a") !== null) {
       presenceData.details = `Đang đọc: ${title.innerHTML}`;
       presenceData.state = `Tác giả: ${author.innerHTML}`;
     } else presenceData.details = "Đang xem danh sách thảo luận...";
   } else presenceData.details = "Đang xem trang chủ...";
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   presence.setActivity(presenceData);
 });

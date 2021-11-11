@@ -1,51 +1,47 @@
 const presence = new Presence({
     clientId: "835652520637890620"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location;
 
   if (pathname === "/" && document.location.search.substr(0, 2) === "?q") {
-    const query = document.querySelector(".caption").textContent;
-    data.details = "Searching:";
-    data.state = query;
+    presenceData.details = "Searching:";
+    data.state = document.querySelector(".caption").textContent;
     data.smallImageKey = "search";
-  } else if (pathname === "/") data.details = "Viewing the Homepage";
-  else if (pathname.startsWith("/app")) data.details = "Viewing app page";
-  else if (pathname.startsWith("/ads")) data.details = "Viewing ads page";
+  } else if (pathname === "/") presenceData.details = "Viewing the Homepage";
+  else if (pathname.startsWith("/app"))
+    presenceData.details = "Viewing app page";
+  else if (pathname.startsWith("/ads"))
+    presenceData.details = "Viewing ads page";
   else if (pathname.startsWith("/podcast")) {
-    const title = document.querySelector(".caption").textContent,
-      link = window.location.href;
-    data.details = "Viewing:";
-    data.state = title;
+    presenceData.details = "Viewing:";
+    data.state = document.querySelector(".caption").textContent;
     data.smallImageKey = "view";
-    data.buttons = [{ label: "View Podcast", url: link }];
+    data.buttons = [{ label: "View Podcast", url: window.location.href }];
   } else if (pathname.startsWith("/episode")) {
-    const title = document.querySelector(".pure-button").innerHTML,
-      episode = document.querySelector(".title").textContent,
-      playPause = document.querySelector("#play-pause-button"),
-      link = window.location.href,
-      remainingTime = presence.timestampFromFormat(
-        document.querySelector("#remainingTime").textContent.substr(1)
-      ),
-      elapsedTime = presence.timestampFromFormat(
-        document.querySelector("#elapsedTime").textContent
-      ),
-      timestamps = presence.getTimestamps(
+    const elapsedTime = presence.timestampFromFormat(
+      document.querySelector("#elapsedTime").textContent
+    );
+    data.buttons = [{ label: "Listen Along", url: window.location.href }];
+    presenceData.details = document.querySelector(".pure-button").innerHTML;
+    data.state = document.querySelector(".title").textContent;
+    if (
+      !document
+        .querySelector("#play-pause-button")
+        .classList.contains("fa-play-circle")
+    ) {
+      [, data.endTimestamp] = presence.getTimestamps(
         elapsedTime,
-        remainingTime + elapsedTime
+        presence.timestampFromFormat(
+          document.querySelector("#remainingTime").textContent.substr(1)
+        ) + elapsedTime
       );
-
-    data.buttons = [{ label: "Listen Along", url: link }];
-    data.details = title;
-    data.state = episode;
-    if (!playPause.classList.contains("fa-play-circle")) {
-      [, data.endTimestamp] = timestamps;
       data.smallImageKey = "play";
     } else data.smallImageKey = "pause";
   }

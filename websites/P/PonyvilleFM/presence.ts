@@ -19,28 +19,26 @@ presence.on("UpdateData", async () => {
     )
       (stationStatus = "Paused on PVFM One"), (listeningCheck = "No");
     else {
-      (stationStatus = `Listening on PVFM One with${otherListeners.innerText} others`),
+      (stationStatus = `Listening on PVFM One with${otherListeners.textContent} others`),
         (listeningCheck = "Yes");
     }
     onAir = document.querySelector(
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3#mane_onair.ng-binding"
     );
     if (listeningCheck === "No") {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
-      };
-      presence.setActivity(presenceData);
+      });
     } else {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: stationStatus,
-        state: `On air: ${onAir.innerText}`,
+        state: `On air: ${onAir.textContent}`,
         largeImageKey: "pvfm",
         smallImageKey: "play",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     }
   } else if (document.location.pathname === "/player/two") {
     otherListeners = document.querySelector(
@@ -53,28 +51,26 @@ presence.on("UpdateData", async () => {
     )
       (stationStatus = "Paused on PVFM Two"), (listeningCheck = "No");
     else {
-      (stationStatus = `Listening on PVFM Two with${otherListeners.innerText} others`),
+      (stationStatus = `Listening on PVFM Two with${otherListeners.textContent} others`),
         (listeningCheck = "Yes");
     }
     onAir = document.querySelector(
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3"
     );
     if (listeningCheck === "No") {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
-      };
-      presence.setActivity(presenceData);
+      });
     } else {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: stationStatus,
-        state: `On air: ${onAir.innerText}`,
+        state: `On air: ${onAir.textContent}`,
         largeImageKey: "pvfm",
         smallImageKey: "play",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     }
   } else if (document.location.pathname === "/player/free") {
     otherListeners = document.querySelector(
@@ -87,28 +83,26 @@ presence.on("UpdateData", async () => {
     )
       (stationStatus = "Paused on PVFM Free"), (listeningCheck = "No");
     else {
-      (stationStatus = `Listening on PVFM Free with${otherListeners.innerText} others`),
+      (stationStatus = `Listening on PVFM Free with${otherListeners.textContent} others`),
         (listeningCheck = "Yes");
     }
     onAir = document.querySelector(
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3"
     );
     if (listeningCheck === "No") {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
-      };
-      presence.setActivity(presenceData);
+      });
     } else {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: stationStatus,
-        state: `On air: ${onAir.innerText}`,
+        state: `On air: ${onAir.textContent}`,
         largeImageKey: "pvfm",
         smallImageKey: "play",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     }
   }
 });

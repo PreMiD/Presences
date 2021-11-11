@@ -5,35 +5,30 @@ const presence = new Presence({
     paused: "presence.playback.paused",
     playing: "presence.playback.playing"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 /**
  * Get Timestamps
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
  */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+function getTimestamps(videoTime: number, videoDuration: number): number[] {
+  const startTime = Date.now();
+  return [
+    Math.floor(startTime / 1000),
+    Math.floor(startTime / 1000) - videoTime + videoDuration
+  ];
 }
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "pvid" };
-  presenceData.startTimestamp = browsingStamp;
-  const titleElement: HTMLElement =
+  presenceData.startTimestamp = browsingTimestamp;
+  const title: string =
       document.querySelector(
         ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h1"
-      ) || document.querySelector(".atvwebplayersdk-title-text"),
-    title2Element: HTMLElement = document.querySelector(
-      ".av-detail-section > div > h1"
-    ),
-    title: string = titleElement?.textContent,
+      ) || document.querySelector(".atvwebplayersdk-title-text")?.textContent,
     title2: string =
-      title2Element?.textContent ||
+      document.querySelector(".av-detail-section > div > h1")?.textContent ||
       document.querySelector<HTMLImageElement>(
         ".av-detail-section > div > h1 > div > img"
       )?.alt;
@@ -121,8 +116,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

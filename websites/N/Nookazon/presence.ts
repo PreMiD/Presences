@@ -32,9 +32,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "icon",
       startTimestamp: elapsed
     },
-    useChatNames: boolean = await presence.getSetting("useChatNames"),
-    urlVars = new URLSearchParams(document.location.search);
-
+    useChatNames: boolean = await presence.getSetting("useChatNames");
   let department: string,
     category: string,
     tag: string,
@@ -85,15 +83,16 @@ presence.on("UpdateData", async () => {
         category = "";
       }
       try {
-        tag = urlVars.get("tag").capitalize();
+        tag = new URLSearchParams(document.location.search)
+          .get("tag")
+          .capitalize();
       } catch {
         tag = "";
       }
       try {
-        const element = document.querySelector(
+        diy = document.querySelector(
           ".search-diy-filter"
-        ) as HTMLInputElement;
-        diy = element.checked;
+        ) as HTMLInputElement.checked;
       } catch {
         diy = false;
       }

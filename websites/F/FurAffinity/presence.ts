@@ -10,85 +10,82 @@ let showBrowsingArt: boolean,
   showBrowsingNotes: boolean,
   showBrowsingSearch: boolean;
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function checkCurrentPage() {
   if (document.location.hostname === "www.furaffinity.net") {
     if (document.location.pathname === "/")
       presenceData.details = "Viewing home page";
     else if (document.location.pathname.includes("/view/") && showBrowsingArt) {
-      const title = document.querySelector(".submission-title>h2>p").innerHTML,
-        user = document.querySelector(
+      presenceData.details = `Viewing Art: '${
+        document.querySelector(".submission-title>h2>p").innerHTML
+      }' by ${
+        document.querySelector(
           '.submission-id-sub-container a[href*="user"] strong'
-        ).innerHTML;
-      presenceData.details = `Viewing Art: '${title}' by ${user}`;
+        ).innerHTML
+      }`;
     } else if (
       document.location.pathname.includes("/msg/submissions") &&
       showBrowsingSubmissions
     ) {
-      const submissionCount = parseInt(
+      presenceData.details = "Viewing latest submissions";
+      presenceData.state = `${parseInt(
         document.querySelector(
           '.notification-container.inline[href*="submissions"]'
         ).innerHTML
-      );
-      presenceData.details = "Viewing latest submissions";
-      presenceData.state = `${submissionCount} Submissions`;
+      )} Submissions`;
     } else if (
       document.location.pathname.includes("/browse") &&
       showBrowsingCategory
     ) {
       const category = document.querySelector(
-          "select[name=cat] option[selected]"
-        ).innerHTML,
-        searchPage = parseInt(
-          document
-            .querySelector(".page-number strong")
-            .innerHTML.replace("Browse Page #", "")
-        );
+        "select[name=cat] option[selected]"
+      ).innerHTML;
       presenceData.details = "Browsing through FA";
-      presenceData.state = `Page ${searchPage}`;
+      presenceData.state = `Page ${parseInt(
+        document
+          .querySelector(".page-number strong")
+          .innerHTML.replace("Browse Page #", "")
+      )}`;
       if (category !== "All")
         presenceData.state += ` in category "${category}"`;
     } else if (
       document.location.pathname.includes("/user/") &&
       showBrowsingProfile
     ) {
-      const user = document
+      presenceData.details = "Viewing user: ";
+      presenceData.state = `@${document
         .querySelector(".username h2 span")
         .innerHTML.replace(/~/, "")
-        .trim();
-      presenceData.details = "Viewing user: ";
-      presenceData.state = `@${user}`;
+        .trim()}`;
     } else if (
       document.location.pathname.includes("/gallery/") &&
       showBrowsingProfile
     ) {
-      const user = document
+      presenceData.details = "Viewing gallery of user: ";
+      presenceData.state = `@${document
         .querySelector(".username h2 span")
         .innerHTML.replace(/~/, "")
-        .trim();
-      presenceData.details = "Viewing gallery of user: ";
-      presenceData.state = `@${user}`;
+        .trim()}`;
     } else if (
       document.location.pathname.includes("/search/") &&
       showBrowsingSearch
     ) {
       let searchTerm = document.location.search.replace("?q=", "");
-      const searchResults = parseInt(
-          document.querySelector("#query-stats>div span:nth-child(2)").innerHTML
-        ),
-        searchPage = parseInt(
-          document
-            .querySelector(".pagination strong")
-            .innerHTML.replace("Search Result Page #", "")
-        );
+
       if (searchTerm === "") {
         searchTerm = document
           .querySelector(".search_string_input")
           .getAttribute("value");
       }
       presenceData.details = `Searching for: "${searchTerm}"`;
-      presenceData.state = `${searchResults} results on page ${searchPage}`;
+      presenceData.state = `${parseInt(
+        document.querySelector("#query-stats>div span:nth-child(2)").innerHTML
+      )} results on page ${parseInt(
+        document
+          .querySelector(".pagination strong")
+          .innerHTML.replace("Search Result Page #", "")
+      )}`;
     } else if (
       document.location.pathname.includes("/controls/journal") &&
       showCreateJournal &&
@@ -136,9 +133,7 @@ presence.on("UpdateData", async () => {
   showBrowsingSubmissions = await presence.getSetting("submissions");
   showBrowsingSearch = await presence.getSetting("search");
   showBrowsingCategory = await presence.getSetting("category");
-  presenceData.startTimestamp = browsingStamp;
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  presenceData.startTimestamp = browsingTimestamp;
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

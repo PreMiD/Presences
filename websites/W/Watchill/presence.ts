@@ -43,15 +43,14 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (page.includes("/search/")) {
-    const searchingFor = decodeURI(page.replace("/search/", ""))
-      .split(" ")
-      .map((i) => i[0].toUpperCase() + i.slice(1).toLowerCase())
-      .join(" ");
-
     presence.setActivity({
       largeImageKey: "wh-logo",
       details: "Bir şey arıyor:",
-      state: searchingFor || "Bilinmeyen",
+      state:
+        decodeURI(page.replace("/search/", ""))
+          .split(" ")
+          .map((i) => i[0].toUpperCase() + i.slice(1).toLowerCase())
+          .join(" ") || "Bilinmeyen",
       startTimestamp: Math.floor(Date.now() / 1000),
       smallImageKey: "search"
     });
@@ -122,23 +121,7 @@ presence.on("UpdateData", async () => {
       [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      ),
-      data: { [k: string]: string | number } = {
-        largeImageKey: "wh-logo",
-        details:
-          showName && showName.textContent !== ""
-            ? showName.textContent.trim()
-            : "Bilinmeyen",
-        state:
-          episode && episode.textContent !== ""
-            ? episode.textContent.trim()
-            : "Bilinmeyen",
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play
-      };
-
+      );
     if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
       data.startTimestamp = startTimestamp;
       data.endTimestamp = endTimestamp;
@@ -151,7 +134,21 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle(
       video.paused ? "" : `${showName.textContent} - ${episode.textContent}`
     );
-    presence.setActivity(data);
+    presence.setActivity({
+      largeImageKey: "wh-logo",
+      details:
+        showName && showName.textContent !== ""
+          ? showName.textContent.trim()
+          : "Bilinmeyen",
+      state:
+        episode && episode.textContent !== ""
+          ? episode.textContent.trim()
+          : "Bilinmeyen",
+      smallImageKey: video.paused ? "pause" : "play",
+      smallImageText: video.paused
+        ? (await strings).pause
+        : (await strings).play
+    });
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     presence.setActivity({
       largeImageKey: "wh-logo",

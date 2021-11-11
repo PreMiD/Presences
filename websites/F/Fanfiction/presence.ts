@@ -14,7 +14,7 @@ const presence = new Presence({
     "tv"
   ];
 let anime;
-for (let i = 0; i < tags.length; i++) crossover.push([`/crossovers${tags[i]}`]);
+for (; i < tags.length; i++) crossover.push([`/crossovers${tags[0]}`]);
 
 const elapsed = Math.floor(Date.now() / 1000);
 
@@ -39,17 +39,15 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = document.location.href;
   } else if (document.location.pathname.startsWith("/s/")) {
-    const current = document.location.pathname
+    presenceData.details = "Reading Fanfiction..";
+    presenceData.state = `title: ${document.location.pathname
       .replace("/s/", "")
       .split("/")
       .join("")
       .replace(/\d+/, "")
       .replace("crossovers", "")
       .split("-")
-      .join(" ");
-
-    presenceData.details = "Reading Fanfiction..";
-    presenceData.state = `title: ${current} `;
+      .join(" ")} `;
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = document.location.href;
     presence.setActivity(presenceData);
@@ -73,8 +71,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = document.location.href;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

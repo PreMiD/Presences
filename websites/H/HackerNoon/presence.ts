@@ -13,9 +13,6 @@ presence.on("UpdateData", async () => {
     posttitle = document.querySelector(
       "#root > div.story.story-container > h1"
     ),
-    search: HTMLInputElement = document.querySelector(
-      "#searchbox > div > form > input"
-    ),
     presenceData: PresenceData = {
       largeImageKey: "hn-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
@@ -29,7 +26,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = posttitle.textContent;
   } else if (page.includes("/search")) {
     presenceData.details = "Searching:";
-    presenceData.state = search.value;
+    presenceData.state = document.querySelector(
+      "#searchbox > div > form > input"
+    ).value;
     presenceData.smallImageKey = "hn-logo";
   } else if (user && user.textContent !== "") {
     presenceData.details = "Viewing User Profile:";
@@ -39,8 +38,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Homepage";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

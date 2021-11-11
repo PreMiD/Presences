@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
       );
       presenceData.details = "Viewing anime:";
       presenceData.smallImageKey = "reading";
-      presenceData.state = user.innerText;
+      presenceData.state = user.textContent;
     } else if (document.location.pathname.includes("/animes"))
       presenceData.details = "Browsing for animes";
     else if (document.location.pathname.includes("/myanimes"))
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/articles/category")) {
       title = document.querySelector("head > title");
       presenceData.details = "Viewing articles category:";
-      presenceData.state = title.innerText
+      presenceData.state = title.textContent
         .replace("Anime-News: ", "")
         .replace(" | Anime on Demand", "");
     } else if (document.location.pathname.includes("/articles"))
@@ -38,12 +38,10 @@ presence.on("UpdateData", async () => {
         "body > div.l-off-canvas-container > div.l-mainsection > div > h1"
       );
       presenceData.details = "Reading article:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

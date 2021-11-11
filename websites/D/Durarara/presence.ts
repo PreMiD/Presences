@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "712269360206708766"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname === "drrr.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (document.location.pathname.includes("/lounge")) {
       presenceData.details = "Searching for a room";
       presenceData.state = `Username: ${
@@ -29,8 +29,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

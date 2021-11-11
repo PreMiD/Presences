@@ -2,7 +2,6 @@ const presence = new Presence({ clientId: "778648674699706410" });
 
 presence.on("UpdateData", async () => {
   const path: string = document.location.pathname,
-    ayrac: string[] = document.location.pathname.split("/"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: Date.now()
@@ -26,7 +25,7 @@ presence.on("UpdateData", async () => {
     (presenceData.details = "Galeri:"),
       (presenceData.state = "İmamoğlu ve Muhtarlar");
   } else if (
-    ayrac[1] !== "" &&
+    document.location.pathname.split("/")[1] !== "" &&
     baslik &&
     !path.startsWith("/imamoglu-ve-muhtarlar") &&
     !path.startsWith("/imamoglu-ve-siz") &&

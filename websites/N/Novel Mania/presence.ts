@@ -20,8 +20,7 @@ presence.on("UpdateData", async () => {
     NovelTitle: HTMLElement = document.querySelector(
       "body > div:nth-child(4) > main > section.landing.novel-single > div.novel-head.pt-3 > div > div > div:nth-child(2) > div > h1 > a"
     ),
-    PagTitle: HTMLElement = document.querySelector("h2"),
-    favoritar: HTMLElement = document.querySelector("#myTab");
+    PagTitle: HTMLElement = document.querySelector("h2");
   if (path === "/" || !path) {
     presenceData.details = "Na página inicial"; /* at home */
     presenceData.state =
@@ -29,27 +28,26 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = time;
   } else if (path.includes("/noticias/")) {
     presenceData.details = "Lendo Notícia:"; /* reading a notice */
-    presenceData.state = novelName.innerText;
+    presenceData.state = novelName.textContent;
   } else if (path.includes("/novels/")) {
-    if (document.body.contains(favoritar)) {
+    if (document.body.contains(document.querySelector("#myTab"))) {
       presenceData.details = "No Indice da Novel:"; /* At the novels's indice */
-      presenceData.state = novelName.innerText;
+      presenceData.state = novelName.textContent;
       presenceData.startTimestamp = time;
     } else if (document.body.contains(VolNumb)) {
-      presenceData.details = `Lendo ${NovelTitle.innerText} || ${VolNumb.innerText}`; /* reading volume */
-      presenceData.state = `Em ${porcent.innerText} do ${currentChapTitle.innerText}`; /*in X% of... novel chapter*/
+      presenceData.details = `Lendo ${NovelTitle.textContent} || ${VolNumb.textContent}`; /* reading volume */
+      presenceData.state = `Em ${porcent.textContent} do ${currentChapTitle.textContent}`; /*in X% of... novel chapter*/
       presenceData.startTimestamp = time;
     } else {
-      presenceData.details = `Lendo${NovelTitle.innerText}`; /* reading *novel**/
-      presenceData.state = `Em ${porcent.innerText}do${currentChapTitle.innerText}`; /*in X% of... novel chapter*/
+      presenceData.details = `Lendo${NovelTitle.textContent}`; /* reading *novel**/
+      presenceData.state = `Em ${porcent.textContent}do${currentChapTitle.textContent}`; /*in X% of... novel chapter*/
       presenceData.startTimestamp = time;
     }
   } else if (path.includes("/u/")) {
-    const perf: HTMLElement = document.querySelector(
-      "body > div > main > section.profile-top > div > div > div > div.col-sm-8.col-md-9.d-flex.align-items-center > div > ul > li.admin-name > h5"
-    );
     presenceData.details = "Bisbilhotando:"; /* Seeing the * user profile */
-    presenceData.state = perf.innerText;
+    presenceData.state = document.querySelector(
+      "body > div > main > section.profile-top > div > div > div > div.col-sm-8.col-md-9.d-flex.align-items-center > div > ul > li.admin-name > h5"
+    ).textContent;
     presenceData.startTimestamp = time;
   } else if (
     path.includes("/editoria") ||
@@ -59,7 +57,7 @@ presence.on("UpdateData", async () => {
     path.includes("contato")
   ) {
     presenceData.details = "Lendo Página: "; /* reading page */
-    presenceData.state = PagTitle.innerText;
+    presenceData.state = PagTitle.textContent;
     presenceData.startTimestamp = time;
   } else if (
     path.includes("/genero/") ||
@@ -70,7 +68,7 @@ presence.on("UpdateData", async () => {
     path.includes("/americana")
   ) {
     presenceData.details = "Procurando:"; /* searching for */
-    presenceData.state = PagTitle.innerText;
+    presenceData.state = PagTitle.textContent;
     presenceData.startTimestamp = time;
   } else {
     presenceData.details = "Buscando..."; /* searching... */

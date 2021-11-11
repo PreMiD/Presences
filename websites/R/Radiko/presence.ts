@@ -14,28 +14,23 @@ let radioStation = "",
 presence.on("UpdateData", async () => {
   // code
   const preStrings = await _preStrings,
-    streamPlayer = document.getElementById("stream-player") as HTMLElement,
-    whenPlayerIsOn = streamPlayer.style.display,
     state: PresenceData = {
       largeImageKey: "largeimage"
     };
 
   // In Radio
-  if (whenPlayerIsOn === "block") {
-    const _showTitle = document.querySelector(
-        "a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"
-      ) as HTMLElement,
-      showTitle = _showTitle.textContent,
-      [codeChannel] = document
-        .querySelector("a.slick-slide:nth-child(1)")
-        .getAttribute("href")
-        .split("/")
-        .slice(-1),
-      ifPlayed = document
-        .querySelector(".icon--play-02")
-        .classList.contains("on");
+  if (
+    (document.getElementById("stream-player") as HTMLElement).style.display ===
+    "block"
+  ) {
+    const [codeChannel] = document
+      .querySelector("a.slick-slide:nth-child(1)")
+      .getAttribute("href")
+      .split("/")
+      .slice(-1);
+
     // If play
-    if (ifPlayed) {
+    if (document.querySelector(".icon--play-02").classList.contains("on")) {
       // This logic make timestamp can't changed.
       if (codeChannel !== radioStation) {
         radioStation = codeChannel;
@@ -43,7 +38,11 @@ presence.on("UpdateData", async () => {
       }
 
       state.details = `Listening to ${radioStation} channel.`;
-      state.state = showTitle;
+      state.state = (
+        document.querySelector(
+          "a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"
+        ) as HTMLElement
+      ).textContent;
       state.smallImageKey = "spiriteplay";
       state.smallImageText = preStrings.play;
       state.startTimestamp = startTimeStamp;

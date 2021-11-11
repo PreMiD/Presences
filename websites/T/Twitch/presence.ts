@@ -143,98 +143,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.twitch.tv") {
     //* Main website
-    const parseVideo = async (video: HTMLVideoElement): Promise<void> => {
-        const live = video.duration >= 1073741824;
-
-        if (showLive && live) {
-          //* Live
-          const title = getElement(".channel-info-content h2"),
-            streamer = getElement(".channel-info-content h1"),
-            game =
-              document.querySelector("a[data-a-target='stream-game-link']")
-                ?.textContent || "Just Chatting";
-          if (title && streamer) {
-            presenceData.details = streamDetail
-              .replace("%title%", title)
-              .replace("%streamer%", streamer)
-              .replace("%game%", game);
-          }
-          if (title && streamer) {
-            presenceData.state = streamState
-              .replace("%title%", title)
-              .replace("%streamer%", streamer)
-              .replace("%game%", game);
-          }
-          presenceData.smallImageKey = "live";
-          presenceData.smallImageText = (await strings).live;
-          if (buttons) {
-            presenceData.buttons = [
-              {
-                label: (await strings).watchStream,
-                url: document.URL.split("?")[0]
-              }
-            ];
-          }
-        }
-
-        if (showVideo && !live) {
-          //* Video or Clips
-          const title = getElement(".channel-info-content h2")
-              .split("•")
-              .shift(),
-            uploader = getElement(".channel-info-content h1"),
-            game =
-              document.querySelector("a[data-a-target='stream-game-link']")
-                ?.textContent || "Just Chatting";
-          if (title && uploader) {
-            presenceData.details = vidDetail
-              .replace("%title%", title)
-              .replace("%uploader%", uploader)
-              .replace("%game%", game);
-          }
-          if (title && uploader) {
-            presenceData.state = vidState
-              .replace("%title%", title)
-              .replace("%uploader%", uploader)
-              .replace("%game%", game);
-          }
-          presenceData.smallImageKey = "play";
-          presenceData.smallImageText = (await strings).play;
-
-          const [startTimestamp, endTimestamp] =
-            presence.getTimestampsfromMedia(video);
-          presenceData.startTimestamp = startTimestamp;
-          presenceData.endTimestamp = endTimestamp;
-
-          if (buttons) {
-            presenceData.buttons = [
-              {
-                label: (await strings).watchVideo,
-                url: document.URL.split("?")[0]
-              }
-            ];
-          }
-        }
-
-        if (((showLive && live) || (showVideo && !live)) && video.paused) {
-          delete presenceData.startTimestamp;
-          delete presenceData.endTimestamp;
-          presenceData.smallImageKey = "pause";
-          presenceData.smallImageText = (await strings).pause;
-        }
-
-        //* Privacy mode enabled.
-        if (privacy && showLive && live) {
-          presenceData.details = (await strings).watchingLive;
-          delete presenceData.state;
-        } else if (privacy && showVideo && !live) {
-          presenceData.details = (await strings).watchingVid;
-          delete presenceData.state;
-        } else if (showBrowsing && (!showVideo || !showLive)) {
-          presenceData.details = (await strings).browse;
-          delete presenceData.state;
-        }
-      },
+    const 
       statics = {
         "/downloads/": {
           details: (await strings).viewPage,
@@ -517,7 +426,98 @@ presence.on("UpdateData", async () => {
       ),
       channelRoot: HTMLDivElement = document.querySelector(".channel-root"),
       video: HTMLVideoElement = document.querySelector("video");
-    if (!homeCarousel && channelRoot && video) await parseVideo(video);
+    if (!homeCarousel && channelRoot && video) await async (video: HTMLVideoElement): Promise<void> => {
+        const live = video.duration >= 1073741824;
+
+        if (showLive && live) {
+          //* Live
+          const title = getElement(".channel-info-content h2"),
+            streamer = getElement(".channel-info-content h1"),
+            game =
+              document.querySelector("a[data-a-target='stream-game-link']")
+                ?.textContent || "Just Chatting";
+          if (title && streamer) {
+            presenceData.details = streamDetail
+              .replace("%title%", title)
+              .replace("%streamer%", streamer)
+              .replace("%game%", game);
+          }
+          if (title && streamer) {
+            presenceData.state = streamState
+              .replace("%title%", title)
+              .replace("%streamer%", streamer)
+              .replace("%game%", game);
+          }
+          presenceData.smallImageKey = "live";
+          presenceData.smallImageText = (await strings).live;
+          if (buttons) {
+            presenceData.buttons = [
+              {
+                label: (await strings).watchStream,
+                url: document.URL.split("?")[0]
+              }
+            ];
+          }
+        }
+
+        if (showVideo && !live) {
+          //* Video or Clips
+          const title = getElement(".channel-info-content h2")
+              .split("•")
+              .shift(),
+            uploader = getElement(".channel-info-content h1"),
+            game =
+              document.querySelector("a[data-a-target='stream-game-link']")
+                ?.textContent || "Just Chatting";
+          if (title && uploader) {
+            presenceData.details = vidDetail
+              .replace("%title%", title)
+              .replace("%uploader%", uploader)
+              .replace("%game%", game);
+          }
+          if (title && uploader) {
+            presenceData.state = vidState
+              .replace("%title%", title)
+              .replace("%uploader%", uploader)
+              .replace("%game%", game);
+          }
+          presenceData.smallImageKey = "play";
+          presenceData.smallImageText = (await strings).play;
+
+          const [startTimestamp, endTimestamp] =
+            presence.getTimestampsfromMedia(video);
+          presenceData.startTimestamp = startTimestamp;
+          presenceData.endTimestamp = endTimestamp;
+
+          if (buttons) {
+            presenceData.buttons = [
+              {
+                label: (await strings).watchVideo,
+                url: document.URL.split("?")[0]
+              }
+            ];
+          }
+        }
+
+        if (((showLive && live) || (showVideo && !live)) && video.paused) {
+          delete presenceData.startTimestamp;
+          delete presenceData.endTimestamp;
+          presenceData.smallImageKey = "pause";
+          presenceData.smallImageText = (await strings).pause;
+        }
+
+        //* Privacy mode enabled.
+        if (privacy && showLive && live) {
+          presenceData.details = (await strings).watchingLive;
+          delete presenceData.state;
+        } else if (privacy && showVideo && !live) {
+          presenceData.details = (await strings).watchingVid;
+          delete presenceData.state;
+        } else if (showBrowsing && (!showVideo || !showLive)) {
+          presenceData.details = (await strings).browse;
+          delete presenceData.state;
+        }
+      }(video);
   } else if (document.location.hostname === "dashboard.twitch.tv") {
     //* Creator Dashboard
     if (showBrowsing) {
@@ -901,6 +901,6 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
+  
   }
 });

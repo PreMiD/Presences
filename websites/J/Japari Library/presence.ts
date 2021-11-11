@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "670669014363668481"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   actionURL = new URL(document.location.href),
   title2URL = new URL(document.location.href);
 let title: HTMLElement;
@@ -19,15 +19,15 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/wiki/Main_Page") {
     presenceData.state = "Main Page | Home";
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     delete presenceData.details;
   } else if (title && document.location.pathname.includes("/wiki/")) {
     presenceData.details = "Reading about:";
 
-    presenceData.state = title.innerText;
+    presenceData.state = title.textContent;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     actionResult === "history" &&
     title2Result &&
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title2Result.replace(/_/g, " ");
     else presenceData.state = title2Result;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     actionResult === "edit" &&
     title2Result &&
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title2Result.replace(/_/g, " ");
     else presenceData.state = title2Result;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     actionResult === "formedit" &&
     title2Result &&
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title2Result.replace(/_/g, " ");
     else presenceData.state = title2Result;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
   presence.setActivity(presenceData);

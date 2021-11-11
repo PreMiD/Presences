@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "863866805184626708"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "manacube"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "manacube.com")
     presenceData.details = "Forums";
 
@@ -191,8 +191,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = `Viewing ${user.textContent}`;
     } else presenceData.details = "Bans, Browsing...";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

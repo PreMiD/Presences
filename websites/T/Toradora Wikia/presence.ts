@@ -20,17 +20,15 @@ englishPresence.on("UpdateData", async () => {
         page =
           document.getElementsByClassName("page-header__title")[0].textContent;
       } catch (err) {
-        const errCode = "TWIKI_WIKIEN_GETPAGETITLE";
         englishPresence.info(
-          `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
+          `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${"TWIKI_WIKIEN_GETPAGETITLE"}   :::   ${err}`
         );
       }
-      const presenceData: PresenceData = {
+      englishPresence.setActivity({
         details: "Viewing a page...",
         state: page,
         largeImageKey: "lg-twiki"
-      };
-      englishPresence.setActivity(presenceData);
+      });
     }
   }
   germanPresence.on("UpdateData", async () => {
@@ -38,23 +36,21 @@ englishPresence.on("UpdateData", async () => {
       // German Wiki
       if (document.location.pathname.startsWith("/de/wiki/")) {
         // Making 100% sure it's the german wiki
-        let page = "N/A";
+
         try {
           page =
             document.getElementsByClassName("page-header__title")[0]
               .textContent;
         } catch (err) {
-          const errCode = "TWIKI_WIKIDE_GETPAGETITLE";
           germanPresence.info(
-            `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
+            `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${"TWIKI_WIKIDE_GETPAGETITLE"}   :::   ${err}`
           );
         }
-        const presenceData: PresenceData = {
+        germanPresence.setActivity({
           details: "Schaut eine Seite an...",
-          state: page,
+          state: "N/A",
           largeImageKey: "lg-twiki"
-        };
-        germanPresence.setActivity(presenceData);
+        });
       }
     }
   });

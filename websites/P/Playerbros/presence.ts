@@ -66,16 +66,14 @@ presence.on("UpdateData", async () => {
       number =
         tag && tag.textContent !== ""
           ? tag.textContent.split(" ").length - 1
-          : null,
-      fixedTag =
-        tag && tag.textContent !== ""
-          ? tag.textContent.split(" ")[number].replace(/"/g, "")
           : null;
-
     presence.setActivity({
       largeImageKey: "pb-logo",
       details: "Bir etikete göz atıyor:",
-      state: fixedTag || "Belirsiz",
+      state:
+        tag && tag.textContent !== ""
+          ? tag.textContent.split(" ")[number].replace(/"/g, "")
+          : null || "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (document.location.search.includes("?s=")) {
@@ -85,16 +83,14 @@ presence.on("UpdateData", async () => {
       number =
         searchingFor && searchingFor.textContent !== ""
           ? searchingFor.textContent.split(" ").length - 1
-          : null,
-      fixedSearch =
-        searchingFor && searchingFor.textContent !== ""
-          ? searchingFor.textContent.split(" ")[number].replace(/"/g, "")
           : null;
-
     presence.setActivity({
       largeImageKey: "pb-logo",
       details: "Bir şey arıyor:",
-      state: fixedSearch || "Belirsiz",
+      state:
+        searchingFor && searchingFor.textContent !== ""
+          ? searchingFor.textContent.split(" ")[number].replace(/"/g, "")
+          : null || "Belirsiz",
       smallImageKey: "search",
       startTimestamp: Math.floor(Date.now() / 1000)
     });

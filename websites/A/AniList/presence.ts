@@ -1,7 +1,7 @@
 const presence: Presence = new Presence({
     clientId: "614220272790274199"
   }),
-  startTimestamp: number = Math.floor(Date.now() / 1000),
+  browsingTimestamp: number = Math.floor(Date.now() / 1000),
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
     reading: "presence.activity.reading"
@@ -10,7 +10,7 @@ const presence: Presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "anilist_lg",
-      startTimestamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = window.location;
   if (pathname.startsWith("/home")) {
@@ -28,13 +28,15 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Searching";
   } else if (pathname.startsWith("/anime")) {
-    const title = document.querySelector("div.content > h1").textContent.trim();
     presenceData.details = "Viewing an anime";
-    presenceData.state = title;
+    presenceData.state = document
+      .querySelector("div.content > h1")
+      .textContent.trim();
   } else if (pathname.startsWith("/manga")) {
-    const title = document.querySelector("div.content > h1").textContent.trim();
     presenceData.details = "Viewing a manga";
-    presenceData.state = title;
+    presenceData.state = document
+      .querySelector("div.content > h1")
+      .textContent.trim();
   } else if (pathname.startsWith("/forum")) {
     if (pathname.split("/").length > 3) {
       presenceData.details = "Reading a forum post";
@@ -49,13 +51,14 @@ presence.on("UpdateData", async () => {
     presenceData.state =
       document.querySelector("div.container > h1").textContent;
   } else if (pathname.startsWith("/review")) {
-    const title = document.querySelector("a.title").textContent.trim();
-    presenceData.details = `Reading a '${title}' review`;
-    const author = document
+    presenceData.details = `Reading a '${document
+      .querySelector("a.title")
+      .textContent.trim()}' review`;
+
+    presenceData.state = `${document
       .querySelector("a.author")
       .textContent.trim()
-      .replace("a review ", "");
-    presenceData.state = `${author}`;
+      .replace("a review ", "")}`;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).reading;
   } else if (pathname.startsWith("/notifications"))

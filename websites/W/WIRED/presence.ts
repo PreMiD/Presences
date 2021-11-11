@@ -26,13 +26,10 @@ presence.on("UpdateData", async () => {
     details = "Browsing: ";
     state = title.replace(" | WIRED", "");
   }
-
-  const data: PresenceData = {
+  presence.setActivity({
     details,
     state,
     largeImageKey: "wired",
     startTimestamp: elapsed
-  };
-
-  presence.setActivity(data);
+  });
 });

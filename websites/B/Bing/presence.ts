@@ -60,12 +60,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = await handleFormatting("newsSearch");
     else {
       presenceData.details = await handleFormatting("standardSearch");
-      presenceData.state = queryResults().innerText;
+      presenceData.state = queryResults().textContent;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

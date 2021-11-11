@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let title: HTMLElement,
   currentTime: number,
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (isNaN(duration)) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
         "body > now-root > now-seo > article > h1 > font > font"
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing main page";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/serien/")) {
     const [state] = document
       .querySelector("head > title")
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing serie:";
     presenceData.state = state;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/shows/")) {
     const [state] = document
       .querySelector("head > title")
@@ -94,13 +94,13 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing show:";
     presenceData.state = state;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.URL.includes("/serien")) {
     presenceData.details = "Viewing all series";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.URL.includes("/shows")) {
     presenceData.details = "Viewing all shows";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/filme/")) {
     const [state] = document
       .querySelector("head > title")
@@ -108,14 +108,12 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing show:";
     presenceData.state = state;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.URL.includes("/filme")) {
     presenceData.details = "Viewing all series";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

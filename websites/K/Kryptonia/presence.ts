@@ -8,14 +8,14 @@ presence.on("UpdateData", async () => {
   };
   // Landing Site - kryptonia.fr
   if (window.location.hostname === "kryptonia.fr") {
-    data.details = "Navigue sur le site";
+    presenceData.details = "Navigue sur le site";
     data.state = document
       .querySelector("head > title")
       .textContent.replace("- Kryptonia", "");
   }
   // Forum - forum.kryptonia.fr
   if (window.location.hostname === "forum.kryptonia.fr") {
-    data.details = "Navigue sur le forum";
+    presenceData.details = "Navigue sur le forum";
     if (window.location.pathname.startsWith("/threads/")) {
       data.state = `📝${
         document.querySelector(

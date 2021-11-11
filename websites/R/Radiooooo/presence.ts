@@ -9,7 +9,7 @@ const presence = new Presence({
       },
       await presence.getSetting("lang")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let oldLang: string = null,
   strings = getStrings();
@@ -18,13 +18,12 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "radiooooo_logo",
       details: "Idling",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     audio = document.querySelector("audio");
 
   if (audio) {
-    const timestamps = presence.getTimestampsfromMedia(audio),
-      { paused } = audio,
+    const { paused } = audio,
       title = document.querySelector("div.info > div.title").textContent,
       artist = document.querySelector(
         "div.field.artist > span:nth-child(2)"
@@ -57,7 +56,8 @@ presence.on("UpdateData", async () => {
       .replace("%place%", place)
       .replace("%year%", year);
 
-    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestampsfromMedia(audio);
 
     if (paused) {
       delete presenceData.startTimestamp;

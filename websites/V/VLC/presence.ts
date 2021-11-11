@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
         if (media.title && media.album && media.title === media.album)
           media.album = null;
 
-        data.details =
+        presenceData.details =
           (media.title
             ? media.title
             : media.trackNumber
@@ -80,21 +80,21 @@ presence.on("UpdateData", async () => {
           : delete data.state;
       } else if (isShow) {
         media.showName
-          ? (data.details = media.showName)
+          ? (presenceData.details = media.showName)
           : media.title
-          ? (data.details = media.title)
+          ? (presenceData.details = media.title)
           : media.filename
-          ? (data.details = media.filename)
-          : (data.details = "some TV");
+          ? (presenceData.details = media.filename)
+          : (presenceData.details = "some TV");
         data.state = `S${media.seasonNumber}E${media.episodeNumber}`;
       } else {
         media.showName
-          ? (data.details = media.showName)
+          ? (presenceData.details = media.showName)
           : media.title
-          ? (data.details = media.title)
+          ? (presenceData.details = media.title)
           : media.filename
-          ? (data.details = media.filename)
-          : (data.details = "something");
+          ? (presenceData.details = media.filename)
+          : (presenceData.details = "something");
         media.seasonNumber
           ? (data.state = `season ${media.seasonNumber}`)
           : media.episodeNumber
@@ -102,8 +102,8 @@ presence.on("UpdateData", async () => {
           : delete data.state;
       }
 
-      if (data.details && data.details.length > 100)
-        data.details = data.details.substring(0, 127);
+      if (presenceData.details && presenceData.details.length > 100)
+        presenceData.details = presenceData.details.substring(0, 127);
       if (data.state && data.state.length > 100)
         data.state = data.state.substring(0, 127);
 
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity(data, false);
       }
     } else if (media.state === "stopped") {
-      data.details = "standby";
+      presenceData.details = "standby";
       delete data.state;
       delete data.smallImageKey;
       delete data.smallImageText;

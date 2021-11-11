@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const presence = new Presence({ clientId: "817772461109018664" }),
-  timestamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   newStats = async () =>
     (data = await (
       await window.fetch("https://radio.itsbeats.net/stats")
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
       } is live!`
     };
 
-  if (settings.timestamp) presenceData.startTimestamp = timestamp;
+  if (settings.timestamp) presenceData.startTimestamp = browsingTimestamp;
   if (data.live.is_live) presenceData.smallImageKey = "live";
   else delete presenceData.smallImageText;
 

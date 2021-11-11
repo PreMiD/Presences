@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
     artistName &&
     artistName.textContent !== ""
   ) {
-    data.details = songName.textContent;
+    presenceData.details = songName.textContent;
     data.state = artistName.textContent.trim();
     if (!playing) {
       delete data.startTimestamp;

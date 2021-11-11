@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     data.state = `Canvas: ${
       document.getElementById("current-pixel-count").innerHTML
     }`;
-    data.details = `All time: ${
+    presenceData.details = `All time: ${
       document.getElementById("alltime-pixel-count").innerHTML
     }`;
     presence.setActivity(data);

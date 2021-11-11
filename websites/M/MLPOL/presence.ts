@@ -1,4 +1,4 @@
-const browsingStamp = Math.floor(Date.now() / 1000),
+const browsingTimestamp = Math.floor(Date.now() / 1000),
   presence = new Presence({
     clientId: "781944209770151997"
   });
@@ -68,6 +68,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "/a/ - Anime and Manga";
 
   presenceData.largeImageKey = "logo";
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   presence.setActivity(presenceData);
 });

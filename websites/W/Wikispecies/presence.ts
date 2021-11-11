@@ -4,11 +4,11 @@ const presence = new Presence({
 
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -29,7 +29,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -49,11 +49,11 @@ const updateCallback = {
   const actionResult = (): string =>
       getURLParam("action") || getURLParam("veaction"),
     titleFromURL = (): string => {
-      const raw =
+      return decodeURI(
         currentPath[1] === "index.php"
           ? getURLParam("title")
-          : currentPath.slice(1).join("/");
-      return decodeURI(raw.replace(/_/g, " "));
+          : currentPath.slice(1).join("/").replace(/_/g, " ")
+      );
     };
 
   try {
@@ -144,20 +144,18 @@ const updateCallback = {
         presenceData.details = "Editing a page";
       else presenceData.details = namespaceDetails();
     };
+  } else if (actionResult() === "edit") {
+    presenceData.details = document.querySelector("#ca-edit")
+      ? "Editing a page"
+      : "Viewing source";
+    presenceData.state = titleFromURL();
   } else {
-    if (actionResult() === "edit") {
-      presenceData.details = document.querySelector("#ca-edit")
-        ? "Editing a page"
-        : "Viewing source";
-      presenceData.state = titleFromURL();
-    } else {
-      presenceData.details = namespaceDetails();
-      presenceData.state = `${
-        title.toLowerCase() === titleFromURL().toLowerCase()
-          ? `${title}`
-          : `${title} (${titleFromURL()})`
-      }`;
-    }
+    presenceData.details = namespaceDetails();
+    presenceData.state = `${
+      title.toLowerCase() === titleFromURL().toLowerCase()
+        ? `${title}`
+        : `${title} (${titleFromURL()})`
+    }`;
   }
 })();
 

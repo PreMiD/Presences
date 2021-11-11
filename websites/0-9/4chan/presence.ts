@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "706956748329713685"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let pathname: string,
   query1: HTMLElement | string | Element | boolean,
   query2: HTMLElement | string | Element | boolean,
@@ -48,7 +48,7 @@ presence.on("UpdateData", () => {
     presenceData: PresenceData = {
       details: getTitle(),
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
   if (pathname === "/") presenceData.details = "Home";
   else if (pathname && pathname.includes("/thread/")) {
@@ -61,9 +61,7 @@ presence.on("UpdateData", () => {
     presenceData.smallImageKey = "writing";
     presenceData.smallImageText = "Replying/Posting";
   }
-  presenceData.startTimestamp = browsingStamp;
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  presenceData.startTimestamp = browsingTimestamp;
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

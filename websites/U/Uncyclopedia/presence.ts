@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "643159616498171934"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: string;
 const actionURL = new URL(document.location.href),
   title2URL = new URL(document.location.href);
@@ -13,19 +13,19 @@ presence.on("UpdateData", async () => {
 
   title = (
     document.querySelector("h1#firstHeading.firstHeading") as HTMLElement
-  ).innerText;
+  ).textContent;
   const actionResult = actionURL.searchParams.get("action"),
     title2Result = title2URL.searchParams.get("title");
   if (document.location.pathname === "/wiki/Main_Page") {
     presenceData.state = "Main Page | Home";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     (title && document.location.pathname.includes("/wiki/")) ||
     (title && document.location.pathname.includes("/stupi/"))
   ) {
     presenceData.details = "Reading about:";
     presenceData.state = title;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     actionResult === "history" &&
     title2Result &&
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title2Result.replace(/_/g, " ");
     else presenceData.state = title2Result;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     actionResult === "edit" &&
     title2Result &&
@@ -47,11 +47,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = title2Result.replace(/_/g, " ");
     else presenceData.state = title2Result;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

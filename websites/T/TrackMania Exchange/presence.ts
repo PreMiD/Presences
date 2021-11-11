@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "721986767322087464"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
   presenceData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 const updateCallback = {
     _function: null as () => void,
@@ -28,7 +28,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -131,26 +131,22 @@ const updateCallback = {
           pageType = currentPath[0] || null;
         }
       }
+    } else if (
+      getURLParam("action") !== null &&
+      getURLParam("action") !== "auto#auto"
+    )
+      pageType = getURLParam("action");
+    else if (document.querySelector(".BookmarkCell a")) {
+      currentURL = new URL(
+        document.querySelector(".BookmarkCell a").textContent
+      );
+      pageType = getURLParam("action");
     } else {
-      if (
-        getURLParam("action") !== null &&
-        getURLParam("action") !== "auto#auto"
-      )
-        pageType = getURLParam("action");
-      else if (document.querySelector(".BookmarkCell a")) {
-        currentURL = new URL(
-          document.querySelector(".BookmarkCell a").textContent
-        );
-        pageType = getURLParam("action");
-      } else {
-        try {
-          pageType =
-            locationType[
-              document.querySelector(".NavigatorCell b").textContent
-            ];
-        } catch (e) {
-          pageType = null;
-        }
+      try {
+        pageType =
+          locationType[document.querySelector(".NavigatorCell b").textContent];
+      } catch (e) {
+        pageType = null;
       }
     }
 

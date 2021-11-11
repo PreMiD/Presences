@@ -18,27 +18,27 @@ interface ExecutionArguments {
 }
 
 function getQuery() {
-  const queryString = location.search.split("?", 2),
-    query =
-      queryString && queryString.length > 0 && queryString[1]
-        ? queryString[1].split("&").reduce(function (l, r) {
-            const entry = r ? r.split("=", 2) : null;
-            if (entry === null) return l;
-            return Object.assign(l, { [entry[0]]: entry[1] });
-          }, {})
-        : {};
-  return query;
+  const queryString = location.search.split("?", 2);
+  return queryString && queryString.length > 0 && queryString[1]
+    ? queryString[1].split("&").reduce(function (l, r) {
+        const entry = r ? r.split("=", 2) : null;
+        if (entry === null) return l;
+        return Object.assign(l, { [entry[0]]: entry[1] });
+      }, {})
+    : {};
 }
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-const matchYoutubeUrl = (url: string): boolean =>
-  !!url.match(
-    /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm
-  );
+
 function getSourceLink(url: string): { label: string; url: string }[] {
   if (!url) return [];
-  if (matchYoutubeUrl(url)) {
+  if (
+    (url: string): boolean =>
+      !!url.match(
+        /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm
+      )(url)
+  ) {
     return [
       {
         label: "Watch Youtube Source",
@@ -78,15 +78,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               document.querySelector<HTMLElement>(
                 ".page__content .story__header"
               ),
-            isWeekly = !!document.querySelector(
-              ".page__content .page-menu.weekly__menu"
-            ),
-            isPlaying = activeMedia.querySelector("video")?.paused === false,
-            isBestOfTheYear = location.pathname.startsWith("/best"),
             isCoubPicks = location.pathname.startsWith("/royal.coubs"),
-            isLiked = !!activeMedia.querySelector(
-              ".coub__like-button[widget-like-button].-on"
-            ),
             activeTabTitle =
               activeTab?.textContent?.trim() ||
               activeTab?.dataset?.title ||
@@ -106,16 +98,25 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             pageType?.length > 0 &&
             activeTabTitle.toLowerCase() !== pageType[0].toLowerCase()
               ? ` in ${pageType[0]}`
-              : isWeekly
+              : document.querySelector(".page__content .page-menu.weekly__menu")
               ? " in Weekly"
-              : isBestOfTheYear
+              : location.pathname.startsWith("/best")
               ? " in Best of the Year"
               : isCoubPicks
               ? " in Coub Picks"
               : ""
           }`;
-          data.details = `${title}${isLiked ? " (❤)" : ""}`;
-          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
+          presenceData.details = `${title}${
+            activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            )
+              ? " (❤)"
+              : ""
+          }`;
+          data.smallImageKey =
+            activeMedia.querySelector("video")?.paused === false
+              ? images.PLAY
+              : images.PAUSE;
           const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
             ".description__stamp a.description__stamp__source"
           );
@@ -161,19 +162,25 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ) ||
               document.querySelector<HTMLElement>(
                 ".page__content .story__header"
-              ),
-            isLiked = !!activeMedia.querySelector(
-              ".coub__like-button[widget-like-button].-on"
-            ),
-            isPlaying = activeMedia.querySelector("video")?.paused === false,
-            activeTabTitle =
-              activeTab?.textContent.trimStart().split("\n")[0]?.trim() ||
-              activeTab?.dataset?.title ||
-              "Feed";
+              );
+
           if (!title || !userName) return null;
-          data.state = `Browsing ${activeTabTitle} from ${userName}`;
-          data.details = `${title}${isLiked ? " (❤)" : ""}`;
-          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
+          data.state = `Browsing ${
+            activeTab?.textContent.trimStart().split("\n")[0]?.trim() ||
+            activeTab?.dataset?.title ||
+            "Feed"
+          } from ${userName}`;
+          presenceData.details = `${title}${
+            activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            )
+              ? " (❤)"
+              : ""
+          }`;
+          data.smallImageKey =
+            activeMedia.querySelector("video")?.paused === false
+              ? images.PLAY
+              : images.PAUSE;
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -205,17 +212,22 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             document.querySelector<HTMLElement>(".coub[coub-block]");
           if (!activeMedia) return null;
           const title = activeMedia
-              .querySelector(".coub__description h5.description__title")
-              ?.textContent?.trim(),
-            isLiked = !!activeMedia.querySelector(
-              ".coub__like-button[widget-like-button].-on"
-            ),
-            isPlaying = activeMedia.querySelector("video")?.paused === false;
+            .querySelector(".coub__description h5.description__title")
+            ?.textContent?.trim();
 
           if (!title) return null;
           data.state = strings.watching;
-          data.details = `${title}${isLiked ? " (❤)" : ""}`;
-          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
+          presenceData.details = `${title}${
+            activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            )
+              ? " (❤)"
+              : ""
+          }`;
+          data.smallImageKey =
+            activeMedia.querySelector("video")?.paused === false
+              ? images.PLAY
+              : images.PAUSE;
           const sourceLink =
             activeMedia.parentElement.querySelector<HTMLAnchorElement>(
               '.coub__info .media-block__item > a[type="embedPopup"]'
@@ -254,17 +266,19 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ?.textContent?.trim(),
             title = activeMedia
               .querySelector(".description__title")
-              ?.textContent?.trim(),
-            isPlaying = activeMedia.querySelector("video")?.paused === false,
-            activeTabTitle =
-              communityParent.parentElement.querySelector<HTMLElement>(
-                ".page-menu.hot__menu > .page-menu__inner > .page-menu__item.-active"
-              )?.dataset?.title || "Hot";
+              ?.textContent?.trim();
 
           if (!communityTitle || !title) return null;
-          data.state = `Browsing ${communityTitle} in ${activeTabTitle}`;
-          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
-          data.details = `${title}`;
+          data.state = `Browsing ${communityTitle} in ${
+            communityParent.parentElement.querySelector<HTMLElement>(
+              ".page-menu.hot__menu > .page-menu__inner > .page-menu__item.-active"
+            )?.dataset?.title || "Hot"
+          }`;
+          data.smallImageKey =
+            activeMedia.querySelector("video")?.paused === false
+              ? images.PLAY
+              : images.PAUSE;
+          presenceData.details = `${title}`;
           const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
             ".description__stamp a.description__stamp__source"
           );
@@ -292,7 +306,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         ) => {
           if (!context) return null;
           data.state = strings.browsing;
-          data.details = "";
+          presenceData.details = "";
           if (data.smallImageKey) delete data.smallImageKey;
           return data;
         }
@@ -322,32 +336,34 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           newLang
         );
       }
-      const presenceData: PresenceData = {
-          largeImageKey: "logo"
-        },
-        query: { [key: string]: unknown } = getQuery(),
+      const query: { [key: string]: unknown } = getQuery(),
         context = pages.find((x) => x.middleware(window, [query]));
       if (!context) return false;
 
       const result = Promise.resolve(
-        context.exec(app, presenceData, {
-          strings: localizedStrings,
-          query,
-          images: IMAGES,
-          showWatch: await app
-            .getSetting("show_button_watching")
-            .then((x) => !!x)
-            .catch(() => true)
-        })
+        context.exec(
+          app,
+          {
+            largeImageKey: "logo"
+          },
+          {
+            strings: localizedStrings,
+            query,
+            images: IMAGES,
+            showWatch: await app
+              .getSetting("show_button_watching")
+              .then((x) => !!x)
+              .catch(() => true)
+          }
+        )
       );
       return result.then((data) => {
         if (!data) {
-          presence.setTrayTitle();
           presence.setActivity({
             largeImageKey: "logo",
             state: localizedStrings.browsing
           });
-        } else if (data.details) presence.setActivity(data);
+        } else if (presenceData.details) presence.setActivity(data);
         return data;
       });
     });

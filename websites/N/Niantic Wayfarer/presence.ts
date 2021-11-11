@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "684174415415476240"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "nwbig"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname.includes("/review")) {
     const title = document.querySelector(
@@ -50,8 +50,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/")
     presenceData.details = "Viewing the showcased wayspots...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

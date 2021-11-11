@@ -7,35 +7,39 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "logo"
     },
-    path = document.location.pathname,
-    gameLink = document.location.pathname.split("/")[1].match(/^\d/)
-      ? true
-      : false;
+    path = document.location.pathname;
   if (path === "/") {
-    data.details = "Viewing the Homepage";
+    presenceData.details = "Viewing the Homepage";
     data.startTimestamp = elapsed;
   } else if (path === "/rooms") {
-    data.details = "Viewing Rooms";
+    presenceData.details = "Viewing Rooms";
     data.startTimestamp = elapsed;
-  } else if (gameLink || path === "/room") {
-    const inSetup = document.querySelector(".infosUsers") ? true : false;
-    if (inSetup) {
-      const players = document.querySelector(
-        ".infosRoom li:last-child span strong"
-      ).textContent;
-      data.details = "Setting up Info to Join";
-      data.state = `Players: ${players}`;
+  } else if (
+    document.location.pathname.split("/")[1].match(/^\d/)
+      ? true
+      : false || path === "/room"
+  ) {
+    if (document.querySelector(".infosUsers") ? true : false) {
+      presenceData.details = "Setting up Info to Join";
+      data.state = `Players: ${
+        document.querySelector(".infosRoom li:last-child span strong")
+          .textContent
+      }`;
       data.startTimestamp = elapsed;
     } else {
-      const user = document.querySelector(".you .nick").textContent,
-        points = document.querySelector(".you .points").textContent,
-        lobby = document.querySelector("title").innerText;
-      data.details = `${user} - ${points.split("pts")[0].trim()} points`;
-      data.state = `Lobby: ${lobby.split("-")[0]}`;
+      presenceData.details = `${
+        document.querySelector(".you .nick").textContent
+      } - ${document
+        .querySelector(".you .points")
+        .textContent.split("pts")[0]
+        .trim()} points`;
+      data.state = `Lobby: ${
+        document.querySelector("title").textContent.split("-")[0]
+      }`;
       data.startTimestamp = elapsed;
     }
   } else {
-    data.details = "Somewhere on-site";
+    presenceData.details = "Somewhere on-site";
     data.startTimestamp = elapsed;
   }
   presence.setActivity(data);

@@ -14,7 +14,7 @@ function presenceSet(): void {
   }
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presenceSet();
 
@@ -23,7 +23,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "dashnet"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   presenceSet();
 
@@ -79,8 +79,6 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.includes("/mailtopia/"))
     presenceData.details = "Playing mailtopia";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

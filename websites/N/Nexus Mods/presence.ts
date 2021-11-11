@@ -13,7 +13,7 @@ let presenceData: PresenceData;
  * @returns {boolean} True if the game is valid, false otherwise.
  */
 function isValidGame(name: string): boolean {
-  const validGames = [
+  return [
     "morrowind",
     "oblivion",
     "shadowrunreturns",
@@ -915,8 +915,7 @@ function isValidGame(name: string): boolean {
     "metalunit",
     "plagueincevolved",
     "mountandblade2bannerlord"
-  ];
-  return validGames.includes(name);
+  ].includes(name);
 }
 
 /**
@@ -1010,7 +1009,7 @@ function getCategorizedPresenceData(
   return presenceData;
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const [subdomain] = window.location.host.split("."),
@@ -1018,7 +1017,7 @@ presence.on("UpdateData", () => {
   presenceData = {
     largeImageKey: "logo",
     smallImageKey: "reading",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   // Main entry point
@@ -1037,7 +1036,7 @@ presence.on("UpdateData", () => {
       // Domain: https://wiki.nexusmods.com/
       let wikiTitle;
       try {
-        wikiTitle = document.getElementById("firstHeading").innerText;
+        wikiTitle = document.getElementById("firstHeading").textContent;
 
         if (parseInt(wikiTitle) > 128)
           wikiTitle = `${wikiTitle.substring(0, 125)}...`;
@@ -1212,8 +1211,6 @@ presence.on("UpdateData", () => {
   }
 
   // Set presence.
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

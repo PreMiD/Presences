@@ -4,10 +4,10 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   let paused = true;
   const { children } = document.getElementById("audioPlayer-controls-buttons");
-  for (let i = 0; i < children.length; i++)
-    if (children[i].id === "stopButton") paused = false;
+  for (; i < children.length; i++)
+    if (children[0].id === "stopButton") paused = false;
 
-  const presenceData: PresenceData = {
+  presence.setActivity({
     largeImageKey: "lg",
     smallImageKey: paused ? "pause" : "play",
     smallImageText: paused ? "Pausiert" : "Spielt",
@@ -17,6 +17,5 @@ presence.on("UpdateData", () => {
     state: `${
       document.getElementsByClassName("trackInfos-artist")[0].textContent
     } - ${document.getElementsByClassName("trackInfos-title")[0].textContent}`
-  };
-  presence.setActivity(presenceData);
+  });
 });

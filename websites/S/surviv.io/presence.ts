@@ -10,7 +10,7 @@ let gametypequery: string,
   alivecount: string,
   place: string;
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -19,16 +19,15 @@ presence.on("UpdateData", async () => {
     broadcasttc = await presence.getSetting("broadcasttc"),
     active =
       window.getComputedStyle(document.getElementById("start-menu-wrapper"))
-        .display === "none",
-    end = document.querySelector(".ui-stats-current") !== null;
-  data.startTimestamp = browsingStamp;
+        .display === "none";
+  data.startTimestamp = browsingTimestamp;
 
-  if (end) {
+  if (document.querySelector(".ui-stats-current") !== null) {
     // Player is looking at match results, this needs to be before checking if active due to the way the active variable is set up
     place = document.querySelector(
       ".ui-stats-current .ui-stats-player-rank"
     ).textContent;
-    data.details = `Placed ${place}`;
+    presenceData.details = `Placed ${place}`;
   } else if (!active) {
     gametypequery = 'div[id="index-play-type-selected"]';
     gamemodequery = 'div[id="index-play-mode-selected"]';
@@ -53,20 +52,19 @@ presence.on("UpdateData", async () => {
 
     gametype = document.querySelector(gametypequery).textContent;
     gamemode = document.querySelector(gamemodequery).textContent;
-    data.details = "In the menus...";
+    presenceData.details = "In the menus...";
   } else if (active) {
     // Player is in-game
     data.smallImageText = `Playing ${gametype}s`;
     alivecount = document.querySelector(".ui-players-alive").textContent;
     killcount = document.querySelector(".ui-player-kills").textContent;
 
-    data.details = `${killcount} kill${
+    presenceData.details = `${killcount} kill${
       parseInt(killcount) !== 1 ? "s" : ""
     } with ${alivecount} alive`;
     data.state = `${gamemode !== "50v50" ? `${gametype} - ` : ""}${gamemode}`;
   }
-  if (!data.details) {
-    presence.setTrayTitle();
+  if (!presenceData.details) {
     presence.setActivity();
   } else presence.setActivity(data);
 });

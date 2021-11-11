@@ -2,8 +2,9 @@ const presence = new Presence({
     clientId: "802958757909889054"
   }),
   capitalize = (text: string): string => {
-    const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
-    return texts
+    return text
+      .replace(/[[{(_)}\]]/g, " ")
+      .split(" ")
       .map((str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
       })
@@ -156,11 +157,10 @@ presence.on("UpdateData", async () => {
   }
 
   if (window.location.href.match("tweetdeck.twitter.com/")) {
-    const container =
+    title = `Tweetdeck (${
       document.querySelector("#container > div") ||
-      document.createElement("HTMLDivElement");
-
-    title = `Tweetdeck (${container.childElementCount} Columns)`;
+      document.createElement("HTMLDivElement").childElementCount
+    } Columns)`;
     image = "tweetdeck";
 
     const header = document.querySelector(".mdl-header-title"),

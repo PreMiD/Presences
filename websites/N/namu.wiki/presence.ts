@@ -95,8 +95,8 @@ presence.on("UpdateData", async () => {
     showTimestamp = await presence.getSetting("showTimestamp"),
     path = document.location.pathname,
     params = document.location.search,
-    parsedUrl = path.split("/"), // It's a very bad design, but they have a slash document.
-    [, action] = parsedUrl,
+    // It's a very bad design, but they have a slash document.
+    [, action] = path.split("/"),
     details = boardTypeMapping[action],
     presenceData: PresenceData = { largeImageKey: "namu" };
 
@@ -180,7 +180,6 @@ presence.on("UpdateData", async () => {
    *
    */
   if (!presenceData.details) {
-    presence.setTrayTitle();
     presence.setActivity();
   } else {
     if (showTimestamp) presenceData.startTimestamp = currentTime;

@@ -15,15 +15,13 @@ function getTime(list: string[]): number {
   return ret;
 }
 
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const aT = getTime(audioTime.split(":").reverse()),
-    aD = getTime(audioDuration.split(":").reverse()),
-    endTime = Math.floor(Date.now() / 1000) - aT + aD;
-
-  return [Math.floor(Date.now() / 1000), endTime];
+function getTimestamps(audioTime: string, audioDuration: string): number[] {
+  return [
+    Math.floor(Date.now() / 1000),
+    Math.floor(Date.now() / 1000) -
+      getTime(audioTime.split(":").reverse()) +
+      getTime(audioDuration.split(":").reverse())
+  ];
 }
 
 presence.on("UpdateData", async () => {
@@ -35,18 +33,13 @@ presence.on("UpdateData", async () => {
   if (playback) {
     const selectors: NodeListOf<Node> =
         document.querySelectorAll(".duration-text"),
-      current: string =
-        (selectors[0] && selectors[0].textContent.trim()) || "0:0",
-      length: string =
-        (selectors[1] && selectors[1].textContent.trim()) || "0:0",
-      timestamps = getTimestamps(current, length),
       playing: boolean =
         document.querySelector("anghami-player anghami-icon.icon.pause") !==
         null;
     let selector: Node = document.querySelector(
       "anghami-player .action-title .trim"
     );
-    data.details = (selector && selector.textContent) || null;
+    presenceData.details = (selector && selector.textContent) || null;
     selector = document.querySelector("anghami-player .action-artist .trim");
     data.state = (selector && selector.textContent) || null;
 
@@ -54,7 +47,10 @@ presence.on("UpdateData", async () => {
     data.smallImageText = playing
       ? (await strings).play
       : (await strings).pause;
-    [data.startTimestamp, data.endTimestamp] = timestamps;
+    [data.startTimestamp, data.endTimestamp] = getTimestamps(
+      (selectors[0] && selectors[0].textContent.trim()) || "0:0",
+      (selectors[1] && selectors[1].textContent.trim()) || "0:0"
+    );
 
     if (!playing) {
       delete data.startTimestamp;
@@ -63,7 +59,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data, playback);
   } else {
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     data.smallImageKey = "search";
     data.smallImageText = (await strings).browsing;
     presence.setActivity(data);

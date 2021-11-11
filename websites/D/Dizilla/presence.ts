@@ -49,45 +49,38 @@ dizilla.on("UpdateData", async () => {
     };
 
   if (path.startsWith("/dizi/")) {
-    const showTitle = document.querySelector(
-      "div.content > div > div.top-sticky-content div > h1 > a"
-    );
-
     object.details = "Bir diziye göz atıyor:";
-    object.state = showTitle?.textContent || "Bilinmeyen Dizi";
+    object.state =
+      document.querySelector(
+        "div.content > div > div.top-sticky-content div > h1 > a"
+      )?.textContent || "Bilinmeyen Dizi";
 
     dizilla.setActivity(object);
   } else if (path.startsWith("/oyuncular/")) {
-    const actorName = document.querySelector(
-      "div.content > div > div.top-sticky-content div > span"
-    );
-
     object.details = "Bir oyuncuya göz atıyor:";
-    object.state = actorName?.textContent || "Bilinmeyen Oyuncu";
+    object.state =
+      document.querySelector(
+        "div.content > div > div.top-sticky-content div > span"
+      )?.textContent || "Bilinmeyen Oyuncu";
 
     dizilla.setActivity(object);
   } else if (path.startsWith("/dizi-turu/")) {
-    const genre = document.querySelector(
-      "div.content > div > div.top-sticky-content div > h1"
-    );
-
     object.details = "Bir türe göz atıyor:";
-    object.state = genre?.textContent || "Bilinmeyen Tür";
+    object.state =
+      document.querySelector(
+        "div.content > div > div.top-sticky-content div > h1"
+      )?.textContent || "Bilinmeyen Tür";
 
     dizilla.setActivity(object);
   } else if (path.startsWith("/kanal/")) {
-    const title: string = document.title.slice(
-      0,
-      document.title.indexOf("arşivleri")
-    );
-
     object.details = "Bir kanala göz atıyor:";
-    object.state = title || "Bilinmeyen Kanal";
+    object.state =
+      document.title.slice(0, document.title.indexOf("arşivleri")) ||
+      "Bilinmeyen Kanal";
 
     dizilla.setActivity(object);
   } else if (path.startsWith("/arsiv/")) {
-    const url: URL = new URL(document.location.href),
-      query = url.searchParams.get("q");
+    const query = new URL(document.location.href).searchParams.get("q");
 
     if (query) {
       object.details = "Bir şey arıyor:";
@@ -107,7 +100,7 @@ dizilla.on("UpdateData", async () => {
     dizilla.setActivity(object);
   } else if (
     !isNaN(video?.duration) &&
-    showName?.innerText &&
+    showName?.textContent &&
     episode?.textContent
   ) {
     const [, endTimestamp] = dizilla.getTimestamps(
@@ -115,7 +108,7 @@ dizilla.on("UpdateData", async () => {
       Math.floor(video?.duration)
     );
 
-    object.details = showName?.innerText || "Bilinmeyen Dizi";
+    object.details = showName?.textContent || "Bilinmeyen Dizi";
     object.state = episode?.textContent || "Bilinmeyen Bölüm";
 
     object.smallImageKey = video?.paused ? "pause" : "play";
@@ -130,7 +123,7 @@ dizilla.on("UpdateData", async () => {
       delete object.endTimestamp;
     }
 
-    dizilla.setTrayTitle(showName?.innerText);
+    dizilla.setTrayTitle(showName?.textContent);
     dizilla.setActivity(object);
   } else dizilla.setActivity();
 });

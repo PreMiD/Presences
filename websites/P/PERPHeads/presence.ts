@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "798312419260104705"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "perp"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "perpheads.com") {
     title = document.querySelector(
       "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       presenceData.details = "Forums, viewing thread:";
 
       delete presenceData.smallImageKey;
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       presenceData.details = "Forums, viewing category:";
 
       delete presenceData.smallImageKey;
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
     );
     if (search !== null) {
       presenceData.details = "Forums, searching for:";
-      presenceData.state = search.innerText;
+      presenceData.state = search.textContent;
 
       presenceData.smallImageKey = "search";
 
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
       "div.p-body-content > div.block > div.block-container > div.block-body > div.memberHeader > div.memberProfileBanner > div.memberHeader-mainContent > div.memberHeader-content > h1 > span > span > span > span"
     );
     presenceData.details = "Forums, viewing user:";
-    presenceData.state = user.innerText;
+    presenceData.state = user.textContent;
 
     delete presenceData.smallImageKey;
 
@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       presenceData.details = "Forums, Reading a DM";
       presenceData.state = `${title}...`;
 
@@ -161,6 +161,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

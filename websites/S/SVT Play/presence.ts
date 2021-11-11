@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: string, title: string;
 
 presence.on("UpdateData", async () => {
@@ -15,11 +15,11 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.svtplay.se") {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page";
       presenceData.details = "Navigerar landnings sidan";
     } else if (document.location.pathname.includes("/program/")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing program genres";
       presenceData.details = "Navigerar program kategorier";
     } else if (document.location.pathname.includes("/kanaler/")) {
@@ -40,12 +40,12 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = `Kollar live på kanalen: ${
           document.querySelector("head > title").textContent.split("|")[0]
         }`;
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
 
         presenceData.details = title;
         presenceData.state = user;
       } else {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Looing at channel:";
         presenceData.details = "Kollar på kanalen:";
         [presenceData.state] = document
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
           .textContent.split("|");
       }
     } else if (document.location.pathname.includes("/kanaler")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Browsing for channels...";
       presenceData.details = "Söker efter kanaler...";
     } else if (document.location.pathname.includes("/video/")) {
@@ -63,16 +63,18 @@ presence.on("UpdateData", async () => {
         time: boolean,
         live: boolean,
         timestamps: number[];
-      const video: HTMLVideoElement = document.querySelector(
-        "#js-play_video__fullscreen-container > div > div > video"
-      );
+
       title = document.querySelector(
         "#titel > h1 > span:nth-child(1)"
       ).textContent;
       user = document.querySelector(
         "#titel > h1 > span:nth-child(2)"
       ).textContent;
-      if (video !== null) {
+      if (
+        document.querySelector(
+          "#js-play_video__fullscreen-container > div > div > video"
+        ) !== null
+      ) {
         if (!video.duration) {
           time = false;
           live = false;
@@ -105,7 +107,7 @@ presence.on("UpdateData", async () => {
             "#js-play_video__fullscreen-container > div > div > div.svp_ui-error.svp_js-error > div > div.svp_ui-error__live-clock.svp_js-error--live-clock"
           ) !== null
         ) {
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.startTimestamp = browsingTimestamp;
           presenceData.details = "Waiting for:";
           presenceData.details = "Väntar på:";
           presenceData.state = title;
@@ -114,19 +116,19 @@ presence.on("UpdateData", async () => {
           presenceData.state = user;
           presenceData.smallImageKey = "live";
         } else {
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.startTimestamp = browsingTimestamp;
           presenceData.details = "Looing at:";
           presenceData.details = "Kollar på:";
           presenceData.state = title;
         }
       } else {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Looing at:";
         presenceData.details = "Kollar på:";
         presenceData.state = title;
       }
     } else if (document.location.pathname.includes("/sok")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Searching for:";
       presenceData.details = " Söker på:";
       presenceData.state = document.querySelector(
@@ -136,8 +138,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

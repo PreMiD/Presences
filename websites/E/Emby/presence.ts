@@ -25,7 +25,7 @@ interface ApiClient {
       HidePlayedInLatest: boolean;
       // LatestItemsExcludes: Array; // don't know type of content of the array
       // MyMediaExcludes: Array; // don't know type of content of the array
-      OrderedViews: Array<string>;
+      OrderedViews: string[];
       PlayDefaultAudioTrack: boolean;
       RememberAudioSelections: boolean;
       RememberSubtitleSelections: boolean;
@@ -159,7 +159,7 @@ interface MediaSource {
   RequiresLooping: boolean;
   SupportsProbing: true;
   VideoType: string;
-  MediaStreams: Array<MediaStream>;
+  MediaStreams: MediaStream[];
   MediaAttachments: [];
   Formats: [];
   Bitrate: number;
@@ -208,8 +208,8 @@ interface MediaInfo {
   Container: string;
   SortName: string;
   PremiereDate: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
-  ExternalUrls: Array<ExternalUrl>;
-  MediaSources: Array<MediaSource>;
+  ExternalUrls: ExternalUrl[];
+  MediaSources: MediaSource[];
   Path: string;
   EnableMediaSourceDisplay: boolean;
   Overview: string;
@@ -229,11 +229,11 @@ interface MediaInfo {
   IsFolder: boolean;
   ParentId: number;
   Type: string;
-  People: Array<Person>;
+  People: Person[];
   // Studios: Array;
   // GenreItems: Array;
   ParentBackdropItemId: string;
-  ParentBackdropImageTags: Array<string>;
+  ParentBackdropImageTags: string[];
   LocalTrailerCount: number;
   UserData: UserData;
   RecursiveItemCount: number;
@@ -247,7 +247,7 @@ interface MediaInfo {
   PrimaryImageAspectRatio: number;
   SeriesPrimaryImageTag: string;
   SeasonName: string;
-  MediaStreams: Array<MediaStream>;
+  MediaStreams: MediaStream[];
   VideoType: string;
   ImageTags: {
     Primary: string;
@@ -255,7 +255,7 @@ interface MediaInfo {
   // BackdropImageTags: Array;
   // ScreenshotImageTags: Array;
   SeriesStudio: string;
-  Chapters: Array<Chapter>;
+  Chapters: Chapter[];
   LocationType: string;
   MediaType: string;
   // LockedFields: Array;
@@ -267,7 +267,7 @@ interface MediaInfo {
 const // official website
   EMBY_URL = "emby.media",
   // web client app name
-  APP_NAME = "Emby Web",
+
   // all the presence art assets uploaded to discord
   PRESENCE_ART_ASSETS = {
     download: "downloading",
@@ -347,7 +347,7 @@ async function isEmbyWebClient(): Promise<boolean> {
   ApiClient ??= await getApiClient();
 
   if (typeof ApiClient === "object")
-    if (ApiClient._appName && ApiClient._appName === APP_NAME) return true;
+    if (ApiClient._appName && ApiClient._appName === "Emby Web") return true;
 
   return false;
 }
@@ -443,13 +443,11 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
 
   media[itemId] = pending;
 
-  const basePath = location.pathname.replace(
-      location.pathname.split("/").slice(-2).join("/"),
-      ""
-    ),
-    baseLocation = `${location.protocol}//${location.host}${basePath}`,
-    res = await fetch(
-      `${baseLocation}emby/Users/${getUserId()}/Items/${itemId}?` +
+  const res = await fetch(
+      `${`${location.protocol}//${location.host}${location.pathname.replace(
+        location.pathname.split("/").slice(-2).join("/"),
+        ""
+      )}`}emby/Users/${getUserId()}/Items/${itemId}?` +
         `X-Emby-Client=${ApiClient._appName}&` +
         `X-Emby-Device-Name=${ApiClient._deviceName}&` +
         `X-Emby-Device-Id=${ApiClient._deviceId}&` +
@@ -480,8 +478,7 @@ async function handleVideoPlayback(): Promise<void> {
   let title, subtitle;
 
   // title on the header
-  const headerTitleElem = videoPlayerPage.querySelector("h3.videoOsdTitle"),
-    // title on the osdControls
+  const // title on the osdControls
     osdParentTitleElem = videoPlayerPage.querySelector(
       "h2.videoOsdParentTitle"
     );
@@ -517,7 +514,9 @@ async function handleVideoPlayback(): Promise<void> {
         subtitle = osdParentTitleElem.textContent;
         break;
       case "Series":
-        title = `Watching ${headerTitleElem.textContent}`;
+        title = `Watching ${
+          videoPlayerPage.querySelector("h3.videoOsdTitle").textContent
+        }`;
         subtitle = osdParentTitleElem.textContent;
         break;
       case "TvChannel":
@@ -563,10 +562,9 @@ async function handleVideoPlayback(): Promise<void> {
  * handleItemDetails - handles the presence when the user is viewing the details of an item
  */
 async function handleItemDetails(): Promise<void> {
-  const params = location.hash.split("?")[1].split("&");
   let id;
 
-  for (const param of params) {
+  for (const param of location.hash.split("?")[1].split("&")) {
     if (param.startsWith("id=")) {
       [id] = param.split("=");
       break;
@@ -775,7 +773,6 @@ async function updateData(): Promise<void> {
   // if emby is detected init/update the presence status
   if (showPresence) {
     if (!presenceData.details) {
-      presence.setTrayTitle();
       presence.setActivity();
     } else presence.setActivity(presenceData);
   }

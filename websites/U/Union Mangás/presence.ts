@@ -18,9 +18,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Procurando";
   } else if (pathname.startsWith("/manga")) {
-    const mangaName = document.querySelector("div.col-md-12 > h2").textContent;
     presenceData.details = "Olhando um mangá";
-    presenceData.state = mangaName;
+    presenceData.state =
+      document.querySelector("div.col-md-12 > h2").textContent;
   } else if (pathname.startsWith("/leitor")) {
     const [mangaName, mangaChapter] = document
       .querySelector(".titulo-leitura")
@@ -32,10 +32,10 @@ presence.on("UpdateData", async () => {
         .getAttribute("style")
         .match(/display:\Wnone/)
     ) {
-      const mangaPage =
+      presenceData.state = `${mangaChapter} - Página ${
         (document.querySelector("#paginas") as HTMLSelectElement).options
-          .selectedIndex + 1;
-      presenceData.state = `${mangaChapter} - Página ${mangaPage}`;
+          .selectedIndex + 1
+      }`;
     } else presenceData.state = mangaChapter;
 
     presenceData.smallImageKey = "reading";

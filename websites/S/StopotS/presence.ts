@@ -8,19 +8,20 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: elapsed
     },
-    path = document.location.pathname,
-    inGame = document.querySelector(".ctUsers") ? true : false;
-  if (inGame) {
-    const user = document.querySelector(".you .nick").textContent,
-      points = document.querySelector(".you span").textContent,
-      roundCurrent = document.querySelector(".rounds span").textContent,
-      roundEnd = document.querySelector(".rounds p:nth-child(3)").textContent;
-
-    data.details = `${user} - ${points.split("pts")[0].trim()} points`;
-    data.state = `${"Round: " + " "}${roundCurrent}${roundEnd}`;
-  } else if (path === "/create") data.details = "Creating a Room";
-  else if (path === "/search") data.details = "Viewing Rooms";
-  else data.details = "Not in-game";
+    path = document.location.pathname;
+  if (document.querySelector(".ctUsers") ? true : false) {
+    presenceData.details = `${
+      document.querySelector(".you .nick").textContent
+    } - ${document
+      .querySelector(".you span")
+      .textContent.split("pts")[0]
+      .trim()} points`;
+    data.state = `${"Round: " + " "}${
+      document.querySelector(".rounds span").textContent
+    }${document.querySelector(".rounds p:nth-child(3)").textContent}`;
+  } else if (path === "/create") presenceData.details = "Creating a Room";
+  else if (path === "/search") presenceData.details = "Viewing Rooms";
+  else presenceData.details = "Not in-game";
 
   presence.setActivity(data);
 });

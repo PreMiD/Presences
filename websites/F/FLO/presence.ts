@@ -3,9 +3,8 @@ const presence = new Presence({
 });
 
 function getQuery() {
-  const search = location.search.substring(1);
   return JSON.parse(
-    `{"${decodeURI(search)
+    `{"${decodeURI(location.search.substring(1))
       .replace(/"/g, '\\"')
       .replace(/&/g, '","')
       .replace(/=/g, '":"')}"}`
@@ -16,33 +15,31 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "flo-logo"
     },
-    player = document.querySelector(".playbar_wrap"),
-    playerBar: HTMLInputElement = player.querySelector("input.progress");
-  if (!playerBar.disabled) {
+    player = document.querySelector(".playbar_wrap");
+  if (!player.querySelector("input.progress").disabled) {
     const playButton: HTMLButtonElement =
         player.querySelector("button.icon-player"),
-      title = player.querySelector("p.title").textContent,
-      artist = player.querySelector("p.artist").textContent,
-      allTime = player.querySelector(".time_all").textContent,
-      allHiddenTime = player
-        .querySelector(".time_all")
-        .querySelector("span.hidden").textContent,
-      currentTime = player.querySelector(".time_current").textContent,
-      currentHiddenTime = player
-        .querySelector(".time_current")
-        .querySelector("span.hidden").textContent,
+      
+      
       allDate = presence.timestampFromFormat(
-        allTime.replace(allHiddenTime, "")
-      ),
-      currentDate = presence.timestampFromFormat(
-        currentTime.replace(currentHiddenTime, "")
+        player.querySelector(".time_all").textContent.replace(
+          player.querySelector(".time_all").querySelector("span.hidden")
+            .textContent,
+          ""
+        )
       );
-
     [, presenceData.endTimestamp] = presence.getTimestamps(
-      currentDate,
+      presence.timestampFromFormat(player.querySelector(".time_current").textContent.replace(player
+          player.querySelector(".time_current").querySelector("span.hidden")
+            .textContent,
+          ""
+        )
+      ),
       allDate
     );
-    presenceData.details = `${title} - ${artist}`;
+    presenceData.details = `${player.querySelector("p.title").textContent} - ${
+      player.querySelector("p.artist").textContent
+    }`;
     if (playButton.className.indexOf("btn-player-play") !== -1) {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "일시 정지";
@@ -86,25 +83,20 @@ presence.on("UpdateData", async () => {
       else if (location.pathname.indexOf("/help/qna") === 0)
         presenceData.state = "1:1 문의";
     } else if (location.pathname.indexOf("/detail/channel") === 0) {
-      const title = document.querySelector("p.title").textContent;
-
       presenceData.smallImageKey = "search";
       presenceData.details = "테마리스트";
-      presenceData.state = title;
+      presenceData.state = document.querySelector("p.title").textContent;
     } else if (location.pathname.indexOf("/detail/album") === 0) {
-      const title = document.querySelector("p.title").textContent,
-        artist = document.querySelector("p.artist").textContent;
-
       presenceData.smallImageKey = "search";
       presenceData.details = "앨범";
-      presenceData.state = `${title} - ${artist}`;
+      presenceData.state = `${
+        document.querySelector("p.title").textContent
+      } - ${document.querySelector("p.artist").textContent}`;
     } else if (location.pathname === "/browse") {
-      const title = document.querySelector(
+      presenceData.smallImageKey = "search";
+      presenceData.details = document.querySelector(
         ".chart_content_head>h4"
       ).textContent;
-
-      presenceData.smallImageKey = "search";
-      presenceData.details = title;
     } else if (location.pathname.indexOf("/storage") === 0) {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "보관함";

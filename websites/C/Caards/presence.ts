@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "887975742812590120"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const showTimestamp: boolean = await presence.getSetting("timestamp"),
@@ -35,11 +35,11 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("feed"))
       presenceData.details = "Viewing feed";
     else if (document.location.pathname.includes("/u/")) {
-      const username =
-        document.querySelector("span.Name.text-3xl")?.textContent;
       presenceData.smallImageKey = "reading";
       presenceData.details = "Viewing profile:";
-      presenceData.state = `${username || "Unknown"}`;
+      presenceData.state = `${
+        document.querySelector("span.Name.text-3xl")?.textContent || "Unknown"
+      }`;
       presenceData.buttons = [
         {
           label: "View Profile",
@@ -98,10 +98,8 @@ presence.on("UpdateData", async () => {
   }
 
   if (!showButtons) delete presenceData.buttons;
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

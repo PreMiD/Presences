@@ -25,12 +25,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (video !== null && !isNaN(video.duration) && video.duration > 0) {
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
-
-    data.details = document.querySelector(
+    presenceData.details = document.querySelector(
       "body div.summary-block > p > a"
     ).textContent;
     if (
@@ -52,7 +47,10 @@ presence.on("UpdateData", async () => {
     data.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    [data.startTimestamp, data.endTimestamp] = timestamps;
+    [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
 
     if (video.paused) {
       delete data.startTimestamp;
@@ -61,7 +59,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data, !video.paused);
   } else {
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     data.smallImageKey = "search";
     data.smallImageText = (await strings).browsing;
 

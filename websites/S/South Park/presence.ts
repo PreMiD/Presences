@@ -17,10 +17,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (path.includes("/episodes/") || path.includes("/episodios/")) {
-    const Url = path.includes("/episodios/")
-        ? "https://www.southpark.lat/episodios"
-        : "https://www.southparkstudios.com/episodes",
-      EpAndSeason = SouthParkData.children[0].props.title.text
+    const EpAndSeason = SouthParkData.children[0].props.title.text
         .split(" - ")[1]
         .match(/([1-9]?[0-9]?[0-9])/g),
       [title, , EpTitle] =
@@ -48,7 +45,11 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         {
           label: "Watch Episode",
-          url: `${Url}/${document.location.pathname.split("/")[2]}`
+          url: `${
+            path.includes("/episodios/")
+              ? "https://www.southpark.lat/episodios"
+              : "https://www.southparkstudios.com/episodes"
+          }/${document.location.pathname.split("/")[2]}`
         }
       ];
 
@@ -61,16 +62,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = `S${EpAndSeason[0]}:E${EpAndSeason[1]} ${EpTitle}`;
     }
   } else if (path.includes("/seasons/")) {
-    const season = document.URL.match(/(season-[1-9]?[0-9])/)[0].replace(
-      "season-",
-      ""
-    );
-
     presenceData.details = "Viewing Episodes of:";
-    presenceData.state = `Season ${season}`;
+    presenceData.state = `Season ${document.URL.match(
+      /(season-[1-9]?[0-9])/
+    )[0].replace("season-", "")}`;
   } else if (path.includes("/collections/")) {
     const [title] = SouthParkData.children[0].props.title.text.split(" - "),
-      EpTilte = document.querySelector("div.header > span").textContent,
       EpAndSeason = document
         .querySelector("div > div.sub-header > span")
         .textContent.match(/([1-9]?[0-9]?[0-9])/g),
@@ -78,7 +75,9 @@ presence.on("UpdateData", async () => {
 
     if (video) {
       presenceData.details = title;
-      presenceData.state = `S${EpAndSeason[0]}:E${EpAndSeason[1]} ${EpTilte}`;
+      presenceData.state = `S${EpAndSeason[0]}:E${EpAndSeason[1]} ${
+        document.querySelector("div.header > span").textContent
+      }`;
 
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused ? "Paused" : "Playing";
@@ -104,58 +103,56 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  const headline = document.querySelector("h1")?.textContent,
-    forum = document.querySelector("h2")?.textContent,
-    pages: {
-      [key: string]: PresenceData;
-    } = {
-      "/create-account/step-1": {
-        details: "Creating an account",
-        state: "Step 1 of 2",
-        smallImageKey: "writing"
-      },
-      "/create-account/step-2": {
-        details: "Creating an account",
-        state: "Step 2 of 2",
-        smallImageKey: "writing"
-      },
-      "/settings": {
-        details: "Viewing their:",
-        state: "Account details"
-      },
-      "/email-verification": {
-        details: "Viewing page:",
-        state: "Email verification"
-      },
-      "/news": {
-        details: "Viewing page:",
-        state: "The news page"
-      },
-      "/news/": {
-        details: "Reading article:",
-        state: headline,
-        buttons: [
-          {
-            label: "Read article",
-            url: `https://www.southparkstudios.com/news/${
-              document.location.pathname.split("/")[2]
-            }`
-          }
-        ]
-      },
-      "/avatar": {
-        details: "Viewing page:",
-        state: "Avatar creator"
-      },
-      "/forum/v": {
-        details: "Reading forum:",
-        state: forum
-      },
-      "/wiki": {
-        details: "Viewing page:",
-        state: "Wiki"
-      }
-    };
+  const pages: {
+    [key: string]: PresenceData;
+  } = {
+    "/create-account/step-1": {
+      details: "Creating an account",
+      state: "Step 1 of 2",
+      smallImageKey: "writing"
+    },
+    "/create-account/step-2": {
+      details: "Creating an account",
+      state: "Step 2 of 2",
+      smallImageKey: "writing"
+    },
+    "/settings": {
+      details: "Viewing their:",
+      state: "Account details"
+    },
+    "/email-verification": {
+      details: "Viewing page:",
+      state: "Email verification"
+    },
+    "/news": {
+      details: "Viewing page:",
+      state: "The news page"
+    },
+    "/news/": {
+      details: "Reading article:",
+      state: document.querySelector("h1")?.textContent,
+      buttons: [
+        {
+          label: "Read article",
+          url: `https://www.southparkstudios.com/news/${
+            document.location.pathname.split("/")[2]
+          }`
+        }
+      ]
+    },
+    "/avatar": {
+      details: "Viewing page:",
+      state: "Avatar creator"
+    },
+    "/forum/v": {
+      details: "Reading forum:",
+      state: document.querySelector("h2")?.textContent
+    },
+    "/wiki": {
+      details: "Viewing page:",
+      state: "Wiki"
+    }
+  };
 
   for (const [key, value] of Object.entries(pages))
     if (path.match(key)) presenceData = { ...presenceData, ...value };

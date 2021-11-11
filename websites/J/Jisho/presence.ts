@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "715912352561627246"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "favicon",
     smallImageText: "Jisho Japanese Dictionary",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.hostname === "jisho.org") {
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 
   if (!presenceData.details) {
     //This will fire if you do not set presence details
-    presence.setTrayTitle(); //Clears the tray title for mac users
+    //Clears the tray title for mac users
     presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
   } else {
     //This will fire if you set presence details

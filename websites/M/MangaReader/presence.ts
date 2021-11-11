@@ -8,7 +8,7 @@ const presence = new Presence({
     searchFor: "general.searchFor",
     genre: "general.viewGenre"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -17,15 +17,15 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname === "/" || !document.location.pathname)
-    data.details = (await strings).searchSomething;
+    presenceData.details = (await strings).searchSomething;
   else if (document.location.pathname.includes("/search")) {
     data.state = `"${
       document.querySelector(".block_area-header i").textContent
     }"`;
   } else if (document.location.pathname.includes("/home"))
-    data.details = (await strings).homepage;
+    presenceData.details = (await strings).homepage;
   else if (document.location.pathname.includes("/genre")) {
-    data.details = (await strings).genre;
+    presenceData.details = (await strings).genre;
     data.state = `📔 ${
       document.querySelector(".block_area-header").textContent
     }`;
@@ -44,13 +44,13 @@ presence.on("UpdateData", async () => {
       document.querySelector(".block_area-header").textContent
     }s`;
   } else if (document.location.pathname.includes("/character")) {
-    data.details = "Viewing Character:";
+    presenceData.details = "Viewing Character:";
     data.state = document.querySelector(".name").textContent;
   } else if (document.location.pathname.includes("/author")) {
-    data.details = "Viewing Author:";
+    presenceData.details = "Viewing Author:";
     data.state = document.querySelector(".name").textContent;
   } else {
-    data.details = document.querySelector(".manga-name").textContent;
+    presenceData.details = document.querySelector(".manga-name").textContent;
     data.buttons = [
       {
         label: "Read Manga",
@@ -59,18 +59,19 @@ presence.on("UpdateData", async () => {
     ];
 
     if (document.location.pathname.includes("/read")) {
-      data.details = `${(await strings).reading} ${data.details}`;
+      presenceData.details = `${(await strings).reading} ${
+        presenceData.details
+      }`;
       data.state = `${document
         .querySelector("#current-chapter")
         .textContent.replace(" ", " #️")} | ${document
         .querySelector("#c-selected-lang, #v-selected-lang")
         .textContent.replace("Language: ", "")}`;
-      data.startTimestamp = browsingStamp;
+      data.startTimestamp = browsingTimestamp;
     }
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
+  if (!presenceData.details) {
     presence.setActivity();
   } else presence.setActivity(data);
 });

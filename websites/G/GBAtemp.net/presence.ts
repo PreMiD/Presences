@@ -22,166 +22,155 @@ presence.on("UpdateData", async () => {
     );
     newsAuthor = document.querySelector("div.news-author > a.username > b");
     if (authorName === null) {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: `Reading a news post by ${
-          (newsAuthor as HTMLElement).innerText
+          (newsAuthor as HTMLElement).textContent
         }`,
-        state: (threadName as HTMLElement).innerText,
+        state: (threadName as HTMLElement).textContent,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     } else {
-      const presenceData: PresenceData = {
-        details: `Reading a thread by ${(authorName as HTMLElement).innerText}`,
-        state: (threadName as HTMLElement).innerText,
+      presence.setActivity({
+        details: `Reading a thread by ${
+          (authorName as HTMLElement).textContent
+        }`,
+        state: (threadName as HTMLElement).textContent,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     }
   } else if (document.location.pathname.startsWith("/game")) {
     gName = document.querySelector("h1.dynamicTitle");
-    if ((gName as HTMLElement).innerText === "GBAtemp Game Center Home") {
-      const presenceData: PresenceData = {
+    if ((gName as HTMLElement).textContent === "GBAtemp Game Center Home") {
+      presence.setActivity({
         details: "Browsing...",
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     } else {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: "Reading about a game",
-        state: (gName as HTMLElement).innerText,
+        state: (gName as HTMLElement).textContent,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     }
   } else if (document.location.pathname.startsWith("/platform")) {
     pName = document.querySelector("h1.dynamicTitle");
-    if ((pName as HTMLElement).innerText === "Game Center Platform List") {
-      const presenceData: PresenceData = {
+    if ((pName as HTMLElement).textContent === "Game Center Platform List") {
+      presence.setActivity({
         details: "Browsing...",
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
-    } else if ((pName as HTMLElement).innerText === "Game Database") {
-      const presenceData: PresenceData = {
+      });
+    } else if ((pName as HTMLElement).textContent === "Game Database") {
+      presence.setActivity({
         details: "Browsing...",
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     } else {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: "Reading about a platform",
-        state: (pName as HTMLElement).innerText,
+        state: (pName as HTMLElement).textContent,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     }
   } else if (document.location.pathname.startsWith("/company")) {
     cName = document.querySelector("h1.dynamicTitle");
-    if ((cName as HTMLElement).innerText === "List of video game companies") {
-      const presenceData: PresenceData = {
+    if ((cName as HTMLElement).textContent === "List of video game companies") {
+      presence.setActivity({
         details: "Browsing...",
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     } else {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: "Reading about a company",
-        state: (cName as HTMLElement).innerText,
+        state: (cName as HTMLElement).textContent,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     }
   } else if (document.location.pathname.startsWith("/questions")) {
     threadName = document.querySelector("h1.blueHeader");
-    const presenceData: PresenceData = {
+
+    presence.setActivity({
       details: "Reading a question",
-      state: (threadName as HTMLElement).innerText,
+      state: (threadName as HTMLElement).textContent,
       largeImageKey: "tempy",
       startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    });
   } else if (document.location.pathname.startsWith("/members")) {
     profileName = document.querySelector(
       "div.mainText.secondaryContent > h1.username"
     );
     if (profileName === null) {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: "Browsing...",
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     } else {
-      const presenceData: PresenceData = {
+      presence.setActivity({
         details: `Looking at ${
-          (profileName as HTMLElement).innerText
+          (profileName as HTMLElement).textContent
         }'s profile`,
         largeImageKey: "tempy",
         startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      });
     }
   } else if (document.location.pathname.startsWith("/chat")) {
-    const presenceData: PresenceData = {
+    presence.setActivity({
       details: "Chatting in IRC",
       largeImageKey: "tempy",
       startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    });
   } else if (document.location.pathname.startsWith("/shoutbox")) {
-    const presenceData: PresenceData = {
+    presence.setActivity({
       details: "Chatting in the Shoutbox",
       largeImageKey: "tempy",
       startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    });
   } else if (document.location.pathname.startsWith("/search")) {
-    const presenceData: PresenceData = {
+    presence.setActivity({
       details: "Searching...",
       largeImageKey: "tempy",
       startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    });
   } else if (document.location.pathname.startsWith("/review")) {
     reviewAuthor = document.querySelector("span.review_author > a.username");
     reviewTitle = document.querySelector("h1#review_title > a");
-    const presenceData: PresenceData = {
-      details: `Reading a review by ${(reviewAuthor as HTMLElement).innerText}`,
-      state: (reviewTitle as HTMLElement).innerText,
+
+    presence.setActivity({
+      details: `Reading a review by ${
+        (reviewAuthor as HTMLElement).textContent
+      }`,
+      state: (reviewTitle as HTMLElement).textContent,
       largeImageKey: "tempy",
       startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    });
   } else if (document.location.pathname.startsWith("/entry")) {
     blogAuthor = document.querySelector(
       "span.postedBy > span.posted.iconKey > a.username"
     );
     blogTitle = document.querySelector("a.newsTitle");
-    const presenceData: PresenceData = {
+
+    presence.setActivity({
       details: `Reading a blog post by ${
-        (blogAuthor as HTMLElement).innerText
+        (blogAuthor as HTMLElement).textContent
       }`,
-      state: (blogTitle as HTMLElement).innerText,
+      state: (blogTitle as HTMLElement).textContent,
       largeImageKey: "tempy",
       startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    });
   } else {
-    const presenceData: PresenceData = {
+    presence.setActivity({
       details: "Browsing...",
       largeImageKey: "tempy",
       startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    });
   }
 });

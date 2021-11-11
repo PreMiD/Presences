@@ -221,19 +221,9 @@ yabancidizi.on("UpdateData", async () => {
       movieTitle.textContent !== ""
     ) {
       const [startTimestamp, endTimestamp] = yabancidizi.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        ),
-        data: PresenceData = {
-          largeImageKey: "yd-logo",
-          details: "Bir film izliyor:",
-          state: movieTitle.textContent,
-          smallImageKey: video.paused ? "pause" : "play",
-          smallImageText: video.paused
-            ? (await strings).pause
-            : (await strings).play
-        };
-
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
         data.startTimestamp = startTimestamp;
         data.endTimestamp = endTimestamp;
@@ -244,7 +234,15 @@ yabancidizi.on("UpdateData", async () => {
       }
 
       yabancidizi.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
-      yabancidizi.setActivity(data);
+      yabancidizi.setActivity({
+        largeImageKey: "yd-logo",
+        details: "Bir film izliyor:",
+        state: movieTitle.textContent,
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play
+      });
     } else if (
       page.includes("/dizi/") &&
       showName2 &&
@@ -253,19 +251,9 @@ yabancidizi.on("UpdateData", async () => {
       episode.textContent !== ""
     ) {
       const [startTimestamp, endTimestamp] = yabancidizi.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        ),
-        data: PresenceData = {
-          largeImageKey: "yd-logo",
-          details: showName2.textContent,
-          state: episode.textContent,
-          smallImageKey: video.paused ? "pause" : "play",
-          smallImageText: video.paused
-            ? (await strings).pause
-            : (await strings).play
-        };
-
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
         data.startTimestamp = startTimestamp;
         data.endTimestamp = endTimestamp;
@@ -278,7 +266,15 @@ yabancidizi.on("UpdateData", async () => {
       yabancidizi.setTrayTitle(
         video.paused ? "" : `${showName2.textContent} - ${episode.textContent}`
       );
-      yabancidizi.setActivity(data);
+      yabancidizi.setActivity({
+        largeImageKey: "yd-logo",
+        details: showName2.textContent,
+        state: episode.textContent,
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play
+      });
     }
   } else {
     yabancidizi.setActivity({

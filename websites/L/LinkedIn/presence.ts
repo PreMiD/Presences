@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "785263902321541181" //Presence Application ID on Discord Developers.
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function unescapeHTML(string: string): string {
   const textarea = document.createElement("textarea");
@@ -19,18 +19,19 @@ presence.on("UpdateData", async () => {
     //Homepage.
     if (path === "/feed/") {
       presenceData.details = "Browsing Feed.";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.includes("/feed/hashtag/")) {
       //Feed hashtag subsection.
-      const hashtagName = document
-        .querySelector(
-          "div.application-outlet > div.authentication-outlet > div > div > div > div > section > div > div:first-child > div > h3 > span > span:last-child"
-        )
-        .innerHTML.trim();
 
       presenceData.details = "Browsing Feed:";
-      presenceData.state = `#${unescapeHTML(hashtagName)}.`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `#${unescapeHTML(
+        document
+          .querySelector(
+            "div.application-outlet > div.authentication-outlet > div > div > div > div > section > div > div:first-child > div > h3 > span > span:last-child"
+          )
+          .innerHTML.trim()
+      )}.`;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.includes("/feed/")) {
       //Feed follow subsections.
       enum feedSubSection {
@@ -62,11 +63,11 @@ presence.on("UpdateData", async () => {
           ] || "All"
         }.`;
       }
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.includes("/mynetwork/")) {
       //My Network section & subsections.
       presenceData.details = "Managing Network:";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
 
       //Invitations subsection.
       if (path.includes("/invitation-manager/"))
@@ -104,7 +105,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (path.includes("/jobs/") || path === "/my-items/saved-jobs/") {
       //Jobs section.
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
 
       //Application settings subsection.
       if (path.endsWith("application-settings/")) {
@@ -123,34 +124,33 @@ presence.on("UpdateData", async () => {
           const showJobsQuery = await presence.getSetting("showJobsQuery");
 
           if (showJobsQuery) {
-            const jobsQuery = decodeURI(
+            presenceData.state = `Searching for a "${decodeURI(
               document.location.search
                 .split("keywords=")
                 .pop()
                 .split("&")
                 .shift()
-            );
-
-            presenceData.state = `Searching for a "${jobsQuery}" position.`;
+            )}" position.`;
           } else presenceData.state = "Searching for a job.";
         } else presenceData.state = "Homepage.";
         //Homepage.
       }
     } else if (path.includes("/interview-prep/")) {
       //Interview prep section (Jobs related section with a different path).
-      const interviewPrepArg = document
-        .querySelector(
-          "div.application-outlet > div.authentication-outlet > main > div > section > section > header > div > div:first-child > h2"
-        )
-        .innerHTML.trim();
 
       presenceData.details = "Taking an Interview Prep:";
-      presenceData.state = `${unescapeHTML(interviewPrepArg)}.`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `${unescapeHTML(
+        document
+          .querySelector(
+            "div.application-outlet > div.authentication-outlet > main > div > section > section > header > div > div:first-child > h2"
+          )
+          .innerHTML.trim()
+      )}.`;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.includes("/messaging/")) {
       //Messaging section.
       presenceData.details = "Messaging:";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
 
       //New message subsection.
       if (path === "/messaging/thread/new/")
@@ -164,19 +164,19 @@ presence.on("UpdateData", async () => {
         const showChatUsername = await presence.getSetting("showChatUsername");
 
         if (showChatUsername) {
-          const charUsername = document
-            .querySelector(
-              "div.application-outlet > div.authentication-outlet > #messaging > div > div > div:nth-child(2) > div:first-child > div > a > div > div > dl > dt > #thread-detail-jump-target"
-            )
-            .innerHTML.trim();
-
-          presenceData.state = `Chatting with ${unescapeHTML(charUsername)}.`;
+          presenceData.state = `Chatting with ${unescapeHTML(
+            document
+              .querySelector(
+                "div.application-outlet > div.authentication-outlet > #messaging > div > div > div:nth-child(2) > div:first-child > div > a > div > div > dl > dt > #thread-detail-jump-target"
+              )
+              .innerHTML.trim()
+          )}.`;
         } else presenceData.state = "Chatting with someone.";
       }
     } else if (path === "/notifications/") {
       //Notifications section.
       presenceData.details = "Viewing Notifications.";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.match(/\/in\/[A-Za-z0-9-]+\/$/)) {
       //Profile page section.
       const userName = document
@@ -187,7 +187,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing a profile:";
       presenceData.state = `${userName}.`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.match(/\/in\/[A-Za-z0-9-]+\//)) {
       //Profile subsections.
       const userName =
@@ -204,7 +204,7 @@ presence.on("UpdateData", async () => {
               .innerHTML.trim()
               .replace("’s Activity", "");
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
 
       //Profile detail subsection.
       if (path.includes("/detail/")) {
@@ -214,13 +214,6 @@ presence.on("UpdateData", async () => {
           interests = "Interests",
           "contact-info" = "Contact Info"
         }
-
-        const subsection: string = path
-          .split(/\/in\/[A-Za-z0-9-]+\/detail\//)
-          .pop()
-          .split("/")
-          .shift() as keyof typeof detailSubSection;
-
         //If the user is editing skills (the only edit related subsection with "detail" path).
         if (path === "/in/luca-biagetti/detail/skills/add/") {
           presenceData.details = "Editing profile:";
@@ -229,7 +222,13 @@ presence.on("UpdateData", async () => {
           //Actually detail subsections.
           presenceData.details = "Viewing user details:";
           presenceData.state = `${unescapeHTML(userName)}'s ${
-            detailSubSection[subsection as keyof typeof detailSubSection]
+            detailSubSection[
+              path
+                .split(/\/in\/[A-Za-z0-9-]+\/detail\//)
+                .pop()
+                .split("/")
+                .shift() as keyof typeof detailSubSection as keyof typeof detailSubSection
+            ]
           }.`;
         }
       } else if (path.includes("/edit/")) {
@@ -255,57 +254,58 @@ presence.on("UpdateData", async () => {
           "secondary-language" = "Secondary language.",
           "contact-info" = "Contact info."
         }
-
-        const subsection: string = path
-          .split(/\/in\/[A-Za-z0-9-]+\/edit\//)
-          .pop()
-          .replace("forms/", "")
-          .split("/")
-          .shift();
-
         presenceData.details = "Editing profile:";
         presenceData.state =
-          editSubSection[subsection as keyof typeof editSubSection];
+          editSubSection[
+            path
+              .split(/\/in\/[A-Za-z0-9-]+\/edit\//)
+              .pop()
+              .replace("forms/", "")
+              .split("/")
+              .shift() as keyof typeof editSubSection
+          ];
       }
     } else if (path.match(/\/company\/[A-Za-z0-9-]+\//)) {
       //Company page section.
-      const companyName = document
-        .querySelector(
-          "div.application-outlet > div.authentication-outlet > div > div:nth-child(3) > div:first-child > section > div > div > div:nth-child(2) > div:first-child > div:first-child > div:nth-child(2) > div > h1 > span"
-        )
-        .innerHTML.trim();
 
       presenceData.details = "Viewing a company:";
-      presenceData.state = `${unescapeHTML(companyName)}.`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `${unescapeHTML(
+        document
+          .querySelector(
+            "div.application-outlet > div.authentication-outlet > div > div:nth-child(3) > div:first-child > section > div > div > div:nth-child(2) > div:first-child > div:first-child > div:nth-child(2) > div > h1 > span"
+          )
+          .innerHTML.trim()
+      )}.`;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.match(/\/school\/[A-Za-z0-9-]+\//)) {
       //School page section.
-      const schoolName = document
-        .querySelector(
-          "div.application-outlet > div.authentication-outlet > div > div:nth-child(3) > div:first-child > section > div > div > div:nth-child(2) > div:first-child > div:first-child > div:nth-child(2) > div > h1 > span"
-        )
-        .innerHTML.trim();
 
       presenceData.details = "Viewing a school:";
-      presenceData.state = `${unescapeHTML(schoolName)}.`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `${unescapeHTML(
+        document
+          .querySelector(
+            "div.application-outlet > div.authentication-outlet > div > div:nth-child(3) > div:first-child > section > div > div > div:nth-child(2) > div:first-child > div:first-child > div:nth-child(2) > div > h1 > span"
+          )
+          .innerHTML.trim()
+      )}.`;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.startsWith("/groups/")) {
       //Groups section.
       //Group page subsection.
       if (path.match(/\/groups\/[0-9]+\//)) {
-        const groupName = document
-          .querySelector(
-            "div.application-outlet > div.authentication-outlet > div > div:nth-child(2) > main > div:first-child > section > div > h1 > span"
-          )
-          .innerHTML.trim()
-          .replace(/<!---->/g, "");
-
         presenceData.details = "Viewing a group:";
-        presenceData.state = `${unescapeHTML(groupName)}.`;
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.state = `${unescapeHTML(
+          document
+            .querySelector(
+              "div.application-outlet > div.authentication-outlet > div > div:nth-child(2) > main > div:first-child > section > div > h1 > span"
+            )
+            .innerHTML.trim()
+            .replace(/<!---->/g, "")
+        )}.`;
+        presenceData.startTimestamp = browsingTimestamp;
       } else {
         presenceData.details = "Browsing Groups:";
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
 
         //Requested groups subsection.
         if (path === "/groups/requests/")
@@ -316,28 +316,26 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("/psettings/")) {
       //Settings section.
       presenceData.details = "Editing settings.";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path === "/my-items/") {
       //My Items section.
       presenceData.details = "Browsing My Items.";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path === "/post/new/") {
       //New Post section.
       presenceData.details = "Writing a New Post.";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (path.includes("/search/results/")) {
       //Searching for something section.
       presenceData.details = "Searching for something.";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else {
       //Others sections in "Work" category not supported atm.
       presenceData.details = "Doing stuffs.";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

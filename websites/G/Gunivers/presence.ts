@@ -6,11 +6,11 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    browsingStamp = Math.floor(Date.now() / 1000),
+    browsingTimestamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
     button = await presence.getSetting("button");
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (privacy) presenceData.details = "Browsing";
   else if (document.location.hostname === "gunivers.net") {
     if (window.location.pathname.startsWith("/articles")) {
@@ -141,8 +141,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

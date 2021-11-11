@@ -30,9 +30,10 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = "in game";
   } else if (document.location.pathname.includes("/editor")) {
-    const d = document.getElementsByTagName("strong")[0].textContent;
     presenceData.details = "Building Decks";
-    presenceData.state = `Editing: ${d}`;
+    presenceData.state = `Editing: ${
+      document.getElementsByTagName("strong")[0].textContent
+    }`;
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = "in game";
   } else if (document.location.pathname.includes("/game")) {
@@ -99,8 +100,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "in game";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

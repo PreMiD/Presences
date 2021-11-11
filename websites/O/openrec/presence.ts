@@ -24,12 +24,7 @@ presence.on("UpdateData", async () => {
       ),
       game = document.querySelector(
         live ? ".TagButton__Button-otjf40-0" : ".text-hover"
-      ),
-      timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
       );
-
     presenceData.details =
       title !== null
         ? (title as HTMLElement).textContent
@@ -47,7 +42,11 @@ presence.on("UpdateData", async () => {
       : video.paused
       ? (await strings).pause
       : (await strings).play;
-    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     presence.setTrayTitle(video.paused ? "" : title.textContent);
 
@@ -59,10 +58,9 @@ presence.on("UpdateData", async () => {
     if (title !== null && game !== null)
       presence.setActivity(presenceData, !video.paused);
   } else {
-    const pageData: PresenceData = {
+    presence.setActivity({
       details: "Browsing..",
       largeImageKey: "logo"
-    };
-    presence.setActivity(pageData);
+    });
   }
 });

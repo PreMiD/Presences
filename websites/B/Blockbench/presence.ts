@@ -11,13 +11,13 @@ const Blockbench = new Presence({
     "/imprint": "Imprint",
     "/privacy-policy": "Privacy Policy"
   },
-  startTimestamp = Math.round(Date.now() / 1000);
+  browsingTimestamp = Math.round(Date.now() / 1000);
 
 Blockbench.on("UpdateData", async () => {
   const page = location.pathname,
     presenceData: PresenceData = {
       largeImageKey: "blockbench-logo",
-      startTimestamp
+      startTimestamp: browsingTimestamp
     },
     [sub] = location.host.split("."),
     pluginHeader = document.querySelector(
@@ -25,13 +25,9 @@ Blockbench.on("UpdateData", async () => {
     )?.textContent;
 
   if (sub === "web") {
-    const activity =
-        document
-          .querySelector("#main_toolbar #mode_selector li.selected")
-          ?.textContent.toLowerCase() || "Unknown",
-      modelType = document.querySelectorAll<HTMLDivElement>(
-        "#page_wrapper #status_bar div[title]:not(.f_left)"
-      )[1]?.title;
+    const modelType = document.querySelectorAll<HTMLDivElement>(
+      "#page_wrapper #status_bar div[title]:not(.f_left)"
+    )[1]?.title;
 
     switch (modelType?.toLowerCase()) {
       case "generic model":
@@ -57,7 +53,12 @@ Blockbench.on("UpdateData", async () => {
     }
 
     presenceData.details = "Web App";
-    switch (activity) {
+    switch (
+      document
+        .querySelector("#main_toolbar #mode_selector li.selected")
+        ?.textContent.toLowerCase() ||
+      "Unknown"
+    ) {
       case "Unknown":
         presenceData.state = "Just started";
         break;
@@ -78,16 +79,15 @@ Blockbench.on("UpdateData", async () => {
     presenceData.state = pluginHeader;
     presenceData.buttons = [{ label: "View Plugin", url: location.href }];
   } else if (page.includes("/wiki")) {
-    const wikiHeader =
-      document.querySelector(
-        "#wiki_wrapper div.content > div.nuxt-content > h1"
-      )?.textContent ||
-      document.querySelector("#wiki_wrapper div.content > h1")?.textContent;
-
     presenceData.details = "Blockbench Wiki";
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = "Reading";
-    presenceData.state = wikiHeader || "Unknown Wiki Page";
+    presenceData.state =
+      document.querySelector(
+        "#wiki_wrapper div.content > div.nuxt-content > h1"
+      )?.textContent ||
+      document.querySelector("#wiki_wrapper div.content > h1")?.textContent ||
+      "Unknown Wiki Page";
     presenceData.buttons = [{ label: "Read Wiki", url: location.href }];
   } else if (pages[page])
     presenceData.details = `Looking at the ${pages[page]} page`;

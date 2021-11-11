@@ -14,21 +14,19 @@ presence.on("UpdateData", async () => {
   artistName = document.querySelector<HTMLElement>(
     "p#cardArtist.playerText.truncate"
   );
-  if (albumName.innerText === "Press the Play button to start the radio") {
-    const presenceData: PresenceData = {
+  if (albumName.textContent === "Press the Play button to start the radio") {
+    presence.setActivity({
       details: "Not tuned in.",
       largeImageKey: "clouds",
       smallImageKey: "pause"
-    };
-    presence.setActivity(presenceData);
+    });
   } else {
-    const presenceData: PresenceData = {
-      details: songName.innerText,
-      state: `${artistName.innerText} - ${albumName.innerText}`,
+    presence.setActivity({
+      details: songName.textContent,
+      state: `${artistName.textContent} - ${albumName.textContent}`,
       largeImageKey: "clouds",
       smallImageKey: "live",
       startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    });
   }
 });

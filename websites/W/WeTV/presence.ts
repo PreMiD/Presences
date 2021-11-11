@@ -4,15 +4,9 @@ class WeTV extends Presence {
   }
 
   getTitle() {
-    const JSONData: {
-      "@graph": {
-        name: string;
-      }[];
-    } = JSON.parse(
+    return JSON.parse(
       document.querySelector('[type="application/ld+json"]').textContent
-    );
-
-    return JSONData["@graph"][0].name;
+    )["@graph"][0].name;
   }
 
   getMovieTitle() {
@@ -69,11 +63,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Movie";
 
         if (presence.isClip()) presenceData.state = "Clip";
-      } else {
-        if (presence.getEpisodeNumber())
-          presenceData.state = `Episode ${presence.getEpisodeNumber()}`;
-        else presenceData.state = presence.getEpisodeTitle();
-      }
+      } else if (presence.getEpisodeNumber())
+        presenceData.state = `Episode ${presence.getEpisodeNumber()}`;
+      else presenceData.state = presence.getEpisodeTitle();
     } else {
       presenceData.details = "Viewing:";
       presenceData.state = presence.getTitle();

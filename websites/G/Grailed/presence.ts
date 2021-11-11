@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "786739998011293717"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   userName = document.querySelector(
     "#wardrobe > div > div.UserInfo > div.--header > div.--info > div.--user-container > div.--user-info > div.--username-container > span"
   );
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "grailedlogo"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "www.grailed.com") {
     if (document.location.href.includes("www.grailed.com/listings/")) {
@@ -212,7 +212,6 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   }
 });

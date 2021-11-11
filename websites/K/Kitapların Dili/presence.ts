@@ -59,41 +59,37 @@ kitaplarinDili.on("UpdateData", async () => {
       startTimestamp: Date.now()
     });
   } else if (page.includes("/search")) {
-    const term = document.title.replace(" - Kitapların Dili", "");
-
     kitaplarinDili.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir şey arıyor:",
-      state: term || "Bilinmeyen Terim",
+      state:
+        document.title.replace(" - Kitapların Dili", "") || "Bilinmeyen Terim",
       smallImageKey: "search",
       startTimestamp: Date.now()
     });
   } else if (page.includes("/country/")) {
-    const languageName = document
-      .querySelector(".breadcrumb > .active")
-      ?.textContent?.split(" ")
-      ?.map(
-        (text) =>
-          text[0]?.toUpperCase() + text.slice(1, text.length)?.toLowerCase()
-      )
-      ?.join(" ");
-
     kitaplarinDili.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir dili inceliyor:",
-      state: languageName || "Bilinmeyen Dil",
+      state:
+        document
+          .querySelector(".breadcrumb > .active")
+          ?.textContent?.split(" ")
+          ?.map(
+            (text) =>
+              text[0]?.toUpperCase() + text.slice(1, text.length)?.toLowerCase()
+          )
+          ?.join(" ") || "Bilinmeyen Dil",
       smallImageKey: "search",
       startTimestamp: Date.now()
     });
   } else if (page.includes("/star/")) {
-    const starName =
-      document.querySelector(".page-title > font")?.textContent?.trim() ||
-      "Bilinmeyen Yazar";
-
     kitaplarinDili.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir yazarı inceliyor:",
-      state: starName,
+      state:
+        document.querySelector(".page-title > font")?.textContent?.trim() ||
+        "Bilinmeyen Yazar",
       startTimestamp: Date.now()
     });
   } else if (page.includes("/watch/")) {

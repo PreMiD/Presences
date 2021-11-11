@@ -46,10 +46,10 @@ medium.on("UpdateData", async () => {
     href.match("[^/]*$")[0].includes("@") &&
     href.match("[^/]*$")[0] === href.slice(-href.match("[^/]*$")[0].length)
   ) {
-    const user = document.querySelector("div div div div h2");
-
     presenceData.details = "Viewing a profile:";
-    presenceData.state = user?.textContent || "Unknown User";
+    presenceData.state =
+      document.querySelector("div div div div h2")?.textContent ||
+      "Unknown User";
   } else if (
     (title?.textContent && author?.textContent) ||
     (author?.textContent && document.title.includes(`${author?.textContent}-`))
@@ -62,10 +62,9 @@ medium.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = "Reading a story...";
   } else if (page.includes("/search")) {
-    const searchingFor = new URLSearchParams(location.search).get("q");
-
     presenceData.details = "Searching for:";
-    presenceData.state = searchingFor || "Something...";
+    presenceData.state =
+      new URLSearchParams(location.search).get("q") || "Something...";
 
     presenceData.smallImageKey = "search";
   } else {

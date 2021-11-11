@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "617113314572369973" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let group: HTMLElement,
   typing: HTMLElement,
   chat: HTMLElement,
@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "slack"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "app.slack.com") {
     group = document.querySelector(
@@ -30,14 +30,14 @@ presence.on("UpdateData", async () => {
     if (user !== null) {
       if (!typing.className.includes("ql-blank")) {
         presenceData.details = "Typing in DMs to:";
-        presenceData.state = `${user.innerText} (Workspace: ${group.innerText})`;
+        presenceData.state = `${user.textContent} (Workspace: ${group.textContent})`;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading DMs from:";
-        presenceData.state = `${user.innerText} (Workspace: ${group.innerText})`;
+        presenceData.state = `${user.textContent} (Workspace: ${group.textContent})`;
 
         presenceData.smallImageKey = "reading";
 
@@ -46,14 +46,14 @@ presence.on("UpdateData", async () => {
     } else if (chat !== null) {
       if (!typing.className.includes("ql-blank")) {
         presenceData.details = "Typing in channel:";
-        presenceData.state = `#${chat.innerText} (Workspace: ${group.innerText})`;
+        presenceData.state = `#${chat.textContent} (Workspace: ${group.textContent})`;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading channel messages:";
-        presenceData.state = `#${chat.innerText} (Workspace: ${group.innerText})`;
+        presenceData.state = `#${chat.textContent} (Workspace: ${group.textContent})`;
 
         presenceData.smallImageKey = "reading";
 
@@ -61,7 +61,6 @@ presence.on("UpdateData", async () => {
       }
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (
     document.location.hostname === "slackhq.com" &&
@@ -113,7 +112,7 @@ presence.on("UpdateData", async () => {
     );
     if (group !== null) {
       presenceData.details = "Slack Blog";
-      presenceData.state = `Reading article: ${group.innerText}`;
+      presenceData.state = `Reading article: ${group.textContent}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -134,7 +133,7 @@ presence.on("UpdateData", async () => {
       "body > main > section > div.banner_container > h1"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = `Browsing through category: ${search.innerText}`;
+    presenceData.state = `Browsing through category: ${search.textContent}`;
 
     delete presenceData.smallImageKey;
 
@@ -147,7 +146,7 @@ presence.on("UpdateData", async () => {
       "body > main > div.article_page.has_sidenav > div.article_container > div.content_col > h1"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = `Reading article: ${search.innerText}`;
+    presenceData.state = `Reading article: ${search.textContent}`;
 
     delete presenceData.smallImageKey;
 
@@ -160,7 +159,7 @@ presence.on("UpdateData", async () => {
       "body > main > section.banner.banner_search_results > div > h1 > span.hidden.query_val"
     );
     presenceData.details = "Slack Help Center";
-    presenceData.state = `Searching for: ${search.innerText}`;
+    presenceData.state = `Searching for: ${search.textContent}`;
 
     presenceData.smallImageKey = "search";
 
@@ -186,7 +185,7 @@ presence.on("UpdateData", async () => {
     group = document.querySelector("#api_main_content > h1");
     if (group !== null) {
       presenceData.details = "Slack api";
-      presenceData.state = `Reading article: ${group.innerText}`;
+      presenceData.state = `Reading article: ${group.textContent}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -234,14 +233,13 @@ presence.on("UpdateData", async () => {
     if (path[4] !== null) {
       group = document.querySelector("#main > div:nth-child(1) > h1");
       presenceData.details = "Slack";
-      presenceData.state = `Reading article: ${group.innerText}`;
+      presenceData.state = `Reading article: ${group.textContent}`;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (
     document.location.hostname === "slack.com" &&
@@ -251,14 +249,13 @@ presence.on("UpdateData", async () => {
     if (path[4] !== null) {
       group = document.querySelector("#main > section > div > header > h1");
       presenceData.details = "Slack";
-      presenceData.state = `Reading article: ${group.innerText}`;
+      presenceData.state = `Reading article: ${group.textContent}`;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (
     document.location.hostname === "slack.com" &&
@@ -270,14 +267,13 @@ presence.on("UpdateData", async () => {
         "#main > section.c-billboard > div > header > h1"
       );
       presenceData.details = "Slack";
-      presenceData.state = `Reading article: ${group.innerText}`;
+      presenceData.state = `Reading article: ${group.textContent}`;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (
     document.location.hostname === "slack.com" &&
@@ -372,7 +368,7 @@ presence.on("UpdateData", async () => {
   } else if (document.querySelector("#header_team_name > a") !== null) {
     group = document.querySelector("#header_team_name > a");
     presenceData.details = "Viewing admin pages for:";
-    presenceData.state = group.innerText;
+    presenceData.state = group.textContent;
 
     delete presenceData.smallImageKey;
 
@@ -386,7 +382,7 @@ presence.on("UpdateData", async () => {
       "#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > div > div > div > div > div.c-menu_select__label"
     );
     presenceData.details = "Viewing admin pages for:";
-    presenceData.state = group.innerText;
+    presenceData.state = group.textContent;
 
     delete presenceData.smallImageKey;
 
@@ -400,13 +396,12 @@ presence.on("UpdateData", async () => {
       "#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > span"
     );
     presenceData.details = "Viewing admin pages for:";
-    presenceData.state = group.innerText;
+    presenceData.state = group.textContent;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

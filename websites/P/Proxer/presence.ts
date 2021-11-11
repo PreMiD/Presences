@@ -14,7 +14,7 @@ presence.on("iFrameData", (data: VideoData) => {
   videoData = data;
 });
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -25,12 +25,7 @@ presence.on("UpdateData", () => {
     path = document.location.pathname;
 
   if (path.startsWith("/watch")) {
-    const name =
-        getByXpath(
-          "//*[@id='wContainer']//*[@class='wName']",
-          (e) => e.textContent
-        ) || "Unknown Anime",
-      ep = getByXpath(
+    const ep = getByXpath(
         "//*[@id='wContainer']//*[@class='wEp']",
         (e) => e.textContent
       ),
@@ -40,10 +35,6 @@ presence.on("UpdateData", () => {
       lang = getByXpath(
         "//*[@id='wContainer']//*[@class='wLanguage']",
         (e) => e.textContent
-      ),
-      missing = getByXpath(
-        "//*[@id='wContainer']//*[@class='wStream']/div/@style",
-        (e) => e.textContent.includes("/images/misc/streamfehlt.png")
       ),
       now = Date.now() / 1000;
 
@@ -55,14 +46,22 @@ presence.on("UpdateData", () => {
           now + videoData.duration - videoData.time
         );
       } else presenceData.details = "Paused";
-    } else {
-      if (missing) presenceData.details = "Awaiting";
-      else {
-        presenceData.details = "Watching";
-        presenceData.startTimestamp = browsingStamp;
-      }
+    } else if (
+      getByXpath("//*[@id='wContainer']//*[@class='wStream']/div/@style", (e) =>
+        e.textContent.includes("/images/misc/streamfehlt.png")
+      )
+    )
+      presenceData.details = "Awaiting";
+    else {
+      presenceData.details = "Watching";
+      presenceData.startTimestamp = browsingTimestamp;
     }
-    presenceData.details += ` ${name}`;
+    presenceData.details += ` ${
+      getByXpath(
+        "//*[@id='wContainer']//*[@class='wName']",
+        (e) => e.textContent
+      ) || "Unknown Anime"
+    }`;
 
     presenceData.state = "";
     if (ep) {
@@ -81,8 +80,10 @@ presence.on("UpdateData", () => {
     }
     */
   } else if (path.startsWith("/info")) {
-    const info = document.title.replace(/ - Proxer\.Me$/, "");
-    presenceData.details = `Checking out ${info}`;
+    presenceData.details = `Checking out ${document.title.replace(
+      / - Proxer\.Me$/,
+      ""
+    )}`;
   } else if (path.startsWith("/anime") || path.startsWith("/season"))
     presenceData.details = "Checking out Anime";
   else if (path.startsWith("/chat")) presenceData.details = "Chatting";
@@ -92,23 +93,21 @@ presence.on("UpdateData", () => {
     presenceData.details = "Checking the gallery";
   else if (path.startsWith("/news")) presenceData.details = "Checking the news";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 function getByXpath<T>(xpath: string, extractor?: (e: Node) => T): T | Node {
-  const transformer =
-    extractor ||
-    function (e: Node) {
-      return e;
-    };
   try {
-    return transformer(
-      document
-        .evaluate(xpath, document, null, XPathResult.ANY_TYPE, null)
-        .iterateNext()
+    return (
+      extractor ||
+      (function (e: Node) {
+        return e;
+      })(
+        document
+          .evaluate(xpath, document, null, XPathResult.ANY_TYPE, null)
+          .iterateNext()
+      )
     );
   } catch (e) {
     return null;

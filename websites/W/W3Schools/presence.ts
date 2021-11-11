@@ -2,8 +2,9 @@ const presence = new Presence({
     clientId: "630239297521319953"
   }),
   capitalize = (text: string): string => {
-    const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
-    return texts
+    return text
+      .replace(/[[{(_)}\]]/g, " ")
+      .split(" ")
       .map((str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
       })
@@ -38,12 +39,10 @@ presence.on("UpdateData", () => {
     [state] = exercise.textContent.match("[0-9](.*)[0-9]");
   }
 
-  const data: PresenceData = {
+  presence.setActivity({
     details,
     state,
     largeImageKey: "w3schools",
     startTimestamp: elapsed
-  };
-
-  presence.setActivity(data);
+  });
 });

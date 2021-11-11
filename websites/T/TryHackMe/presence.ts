@@ -5,12 +5,12 @@ const presence = new Presence({
   presenceData: PresenceData = {
     largeImageKey: "icon"
   },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let customData = false;
 
 presence.on("UpdateData", async () => {
   customData = false;
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname === "/dashboard")
     presenceData.details = "Viewing the Dashboard!";
@@ -22,13 +22,12 @@ presence.on("UpdateData", async () => {
     if (title !== null) {
       customData = true;
 
-      const roomData: PresenceData = {
+      presence.setActivity({
         details: "Completing room:",
-        state: (title as HTMLElement).innerText,
+        state: (title as HTMLElement).textContent,
         largeImageKey: "icon",
-        startTimestamp: browsingStamp
-      };
-      presence.setActivity(roomData);
+        startTimestamp: browsingTimestamp
+      });
     } else presenceData.details = "Looking at rooms!";
   } else if (
     document.location.pathname === "/upload" ||
@@ -39,7 +38,7 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Managing a room!";
     presenceData.state = `Page: ${document.location.pathname}`;
-    //presenceData.startTimestamp = browsingStamp;
+    //presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname === "/leaderboards")
     presenceData.details = "Checking the leaderboards!";
   else presenceData.details = "Breaking stuff!";

@@ -1,12 +1,13 @@
 const presence = new Presence({
     clientId: "795125406264066099"
   }),
-  presenceData: PresenceData = {
-    largeImageKey: "anichart",
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "anichart",
+    startTimestamp: browsingTimestamp
+  };
   switch (
     document.location.pathname.endsWith("/") &&
     document.location.pathname.length > 1

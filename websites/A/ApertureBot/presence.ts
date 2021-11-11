@@ -2,7 +2,8 @@ const presence = new Presence({ clientId: "653156362548805652" }),
   pages: { [key: string]: string } = {
     "/docs": "Documention",
     "/login": "Login Page"
-  };
+  },
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
@@ -11,7 +12,7 @@ presence.on("UpdateData", async () => {
     ),
     presenceData: PresenceData = {
       largeImageKey: "ap-logo_new",
-      startTimestamp: Math.floor(Date.now() / 1000)
+      startTimestamp: browsingTimestamp
     };
 
   if (pages[page] || pages[page.slice(0, -1)])
@@ -26,8 +27,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Guild Info Page";
   else presenceData.details = "Read to Documentation";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

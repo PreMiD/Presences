@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "617500416887881748" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let typing: HTMLElement, user: HTMLElement, bot: HTMLElement;
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "fror_why"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "web.skype.com") {
     user = document.querySelector(
@@ -25,14 +25,14 @@ presence.on("UpdateData", async () => {
     if (user !== null) {
       if (typing === null) {
         presenceData.details = "Typing in chat:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading chat:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         presenceData.smallImageKey = "reading";
 
@@ -41,14 +41,14 @@ presence.on("UpdateData", async () => {
     } else if (bot !== null) {
       if (typing === null) {
         presenceData.details = "Typing in chat:";
-        presenceData.state = bot.innerText;
+        presenceData.state = bot.textContent;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading chat:";
-        presenceData.state = bot.innerText;
+        presenceData.state = bot.textContent;
 
         presenceData.smallImageKey = "reading";
 
@@ -56,7 +56,6 @@ presence.on("UpdateData", async () => {
       }
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (document.location.hostname === "preview.web.skype.com") {
     user = document.querySelector(
@@ -68,14 +67,14 @@ presence.on("UpdateData", async () => {
     if (user !== null) {
       if (typing !== null) {
         presenceData.details = "Typing in chat:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading chat:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         presenceData.smallImageKey = "reading";
 
@@ -83,7 +82,6 @@ presence.on("UpdateData", async () => {
       }
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (document.location.hostname === "www.skype.com") {
     presenceData.details = "Skype";
@@ -94,6 +92,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

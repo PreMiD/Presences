@@ -574,26 +574,22 @@ presence.on("UpdateData", async () => {
       smallImageKey: "gh",
       smallImageText: "GitHub Codespaces"
     },
-    isPreparing = document.querySelector(".vscs-splash-screen-steps-pane"),
     activeTab = document.querySelector(".tab.active"),
     editorMode = document.getElementById("status.editor.mode");
 
   // Preparing Screen
-  if (isPreparing) {
+  if (document.querySelector(".vscs-splash-screen-steps-pane")) {
     data.largeImageKey = "gh-lg";
-    data.details = "Preparing a codespace...";
+    presenceData.details = "Preparing a codespace...";
     delete data.smallImageKey;
 
     if (document.querySelector(".vso-splash-screen__button"))
-      data.details = "Inactive Codespace";
+      presenceData.details = "Inactive Codespace";
     // Idle/Start Screen
   } else if (activeTab && editorMode) {
-    const scmTabs = Array.from(
-        document.querySelectorAll("#status\\.scm")
-      ).reverse(),
-      scmTab = scmTabs.find(
-        (scmTab) => scmTab && scmTab.hasAttribute("aria-label")
-      ),
+    const scmTab = Array.from(document.querySelectorAll("#status\\.scm"))
+        .reverse()
+        .find((scmTab) => scmTab && scmTab.hasAttribute("aria-label")),
       workspace = scmTab
         ? scmTab.getAttribute("aria-label").split("(Git)")[0]
         : null,
@@ -606,8 +602,8 @@ presence.on("UpdateData", async () => {
             if (filename.endsWith(key)) return true;
             const match = /^\/(.*)\/([mgiy]+)$/.exec(key);
             if (!match) return false;
-            const regex = new RegExp(match[1], match[2]);
-            return regex.test(filename);
+
+            return new RegExp(match[1], match[2]).test(filename);
           })
         ] ?? (syntaxMode in langMap ? langMap[syntaxMode] : null);
 
@@ -618,7 +614,7 @@ presence.on("UpdateData", async () => {
 
     data.startTimestamp = lastFileChange;
     data.largeImageKey = largeImageKey ? largeImageKey.image : "txt";
-    data.details = (await presence.getSetting("details"))
+    presenceData.details = (await presence.getSetting("details"))
       .replace(/%file%/g, filename)
       .replace(/%path%/g, filepath)
       .replace(/%folder%/g, filepath.split("/").reverse()[1])
@@ -646,11 +642,10 @@ presence.on("UpdateData", async () => {
       );
   } else if (!editorMode) {
     data.largeImageKey = "idle";
-    data.details = "Idling";
+    presenceData.details = "Idling";
   }
 
   if (!data.largeImageKey) {
-    presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(data);
 });

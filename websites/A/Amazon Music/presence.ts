@@ -44,10 +44,11 @@ presence.on("UpdateData", async () => {
     : false;
 
   if (player) {
-    const exitFSButton = document.querySelector(
+    document.querySelector(
       "div._2kGtEHAlQ5t5sY3jvz-wwl > div._1Wgs9MKFGuL58IFgKSM811 > div._2HXusrWftEtKAYukKt5IuO > music-button"
-    );
-    exitFSButton ? (fullscreen = true) : (fullscreen = false);
+    )
+      ? (fullscreen = true)
+      : (fullscreen = false);
     if (fullscreen) {
       const title = document
           .querySelector(
@@ -57,13 +58,16 @@ presence.on("UpdateData", async () => {
           .getAttribute("title"),
         [artist] = document
           .querySelector("a.music-primary-text")
-          .textContent.split(" - "),
-        pausedIcon = document
+          .textContent.split(" - ");
+      paused =
+        document
           .querySelector(
             "#transport > div._2EZickYBrNGgbqeaZ5l5hr.box > music-button:nth-child(3)"
           )
-          .shadowRoot.querySelector("button > music-icon");
-      paused = pausedIcon.attributes[1].value === "pause" ? false : true;
+          .shadowRoot.querySelector("button > music-icon").attributes[1]
+          .value === "pause"
+          ? false
+          : true;
       currentTime = document.querySelector(
         "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
       ).textContent;
@@ -120,13 +124,16 @@ presence.on("UpdateData", async () => {
           .shadowRoot.querySelector(
             "div.item.parent-undefined > div.center > span"
           )
-          .textContent.split("-"),
-        pausedIcon = document
+          .textContent.split("-");
+      paused =
+        document
           .querySelector(
             "#transport > div._2EZickYBrNGgbqeaZ5l5hr.box > music-button:nth-child(3)"
           )
-          .shadowRoot.querySelector("button > music-icon");
-      paused = pausedIcon.attributes[1].value === "pause" ? false : true;
+          .shadowRoot.querySelector("button > music-icon").attributes[1]
+          .value === "pause"
+          ? false
+          : true;
       [currentTime] = document
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
         .textContent.split(" - ");

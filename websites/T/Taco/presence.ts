@@ -4,12 +4,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "taco"
-    },
-    pathSplits = location.pathname.split("/");
-  switch (pathSplits[1]) {
+    largeImageKey: "taco"
+  };
+  switch (location.pathname.split("/")[1]) {
     case "guide":
-      data.details = "Reading the guide";
+      presenceData.details = "Reading the guide";
       data.state = [
         document.querySelector(".sidebar-links > li > a.active")
           ? document.querySelector(".sidebar-links > li > a.active").textContent
@@ -22,7 +21,7 @@ presence.on("UpdateData", async () => {
         .join(" ― ");
       break;
     default:
-      data.details = "Homepage";
+      presenceData.details = "Homepage";
       break;
   }
   presence.setActivity(data);

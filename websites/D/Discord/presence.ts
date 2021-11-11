@@ -71,7 +71,7 @@ async function getStrings() {
   );
 }
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
   strings = getStrings(),
   oldLang: string = null;
@@ -84,16 +84,15 @@ presence.on("UpdateData", async () => {
     privacy: boolean = await presence.getSetting("privacy"),
     showCalls: boolean = await presence.getSetting("call"),
     newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    logo: number = await presence.getSetting("logo"),
-    logoArr = ["discordwhite", "discord", "discordblack"];
-
+    logo: number = await presence.getSetting("logo");
   let presenceData: PresenceData = {
-    largeImageKey: logoArr[logo] || "discordwhite"
+    largeImageKey:
+      ["discordwhite", "discord", "discordblack"][logo] || "discordwhite"
   };
 
   if (document.location.href !== prevUrl) {
     prevUrl = document.location.href;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   oldLang ??= newLang;
@@ -108,25 +107,6 @@ presence.on("UpdateData", async () => {
         .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
-      voiceConnected = Array.from(document.querySelectorAll("div")).find((c) =>
-        c.className?.includes("rtcConnectionStatus")
-      )
-        ? true
-        : false,
-      settingsOpened = Array.from(
-        document.querySelectorAll("div[aria-controls]")
-      ).find((c) =>
-        Object.values(c.attributes).find((a) => a.value === "My Account-tab")
-      )
-        ? true
-        : false,
-      serverSettingsOpened = Array.from(
-        document.querySelectorAll("div[aria-controls]")
-      ).find((c) =>
-        Object.values(c.attributes).find((a) => a.value === "OVERVIEW-tab")
-      )
-        ? true
-        : false,
       dmsTyping =
         Array.from(document.querySelectorAll("div[contenteditable=true]")).find(
           (c) =>
@@ -402,7 +382,14 @@ presence.on("UpdateData", async () => {
         }
       };
 
-    if (showCalls && voiceConnected) {
+    if (
+      showCalls &&
+      Array.from(document.querySelectorAll("div")).find((c) =>
+        c.className?.includes("rtcConnectionStatus")
+      )
+        ? true
+        : false
+    ) {
       if (privacy) {
         presenceData.details = (await strings).inCall;
         presenceData.smallImageKey = "call";
@@ -462,32 +449,42 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).browse;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).browse;
+      } else if (
+        Array.from(document.querySelectorAll("div[aria-controls]")).find((c) =>
+          Object.values(c.attributes).find((a) => a.value === "My Account-tab")
+        )
+          ? true
+          : false
+      ) {
+        presenceData.details = (await strings).settings;
+        presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (await strings).browse;
+      } else if (
+        Array.from(document.querySelectorAll("div[aria-controls]")).find((c) =>
+          Object.values(c.attributes).find((a) => a.value === "OVERVIEW-tab")
+        )
+          ? true
+          : false
+      ) {
+        const server =
+          Array.from(document.querySelectorAll("h1")).find((c) =>
+            c.className?.includes("name")
+          )?.textContent || "Undefined";
+        presenceData.details = (await strings).serverSettings
+          .split("{0}")[0]
+          .replace("{1}", server);
+        presenceData.state = (await strings).serverSettings
+          .split("{0}")[1]
+          ?.replace("{1}", server);
+        presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (await strings).browse;
       } else {
-        if (settingsOpened) {
-          presenceData.details = (await strings).settings;
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
-        } else if (serverSettingsOpened) {
-          const server =
-            Array.from(document.querySelectorAll("h1")).find((c) =>
-              c.className?.includes("name")
-            )?.textContent || "Undefined";
-          presenceData.details = (await strings).serverSettings
-            .split("{0}")[0]
-            .replace("{1}", server);
-          presenceData.state = (await strings).serverSettings
-            .split("{0}")[1]
-            ?.replace("{1}", server);
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
-        } else {
-          for (const [k, v] of Object.entries(statics)) {
-            if (path.match(k)) {
-              presenceData = { ...presenceData, ...v };
-              if (!presenceData.smallImageKey) {
-                presenceData.smallImageKey = "reading";
-                presenceData.smallImageText = (await strings).browse;
-              }
+        for (const [k, v] of Object.entries(statics)) {
+          if (path.match(k)) {
+            presenceData = { ...presenceData, ...v };
+            if (!presenceData.smallImageKey) {
+              presenceData.smallImageKey = "reading";
+              presenceData.smallImageText = (await strings).browse;
             }
           }
         }
@@ -714,10 +711,8 @@ presence.on("UpdateData", async () => {
 
   if (!presenceData.buttons?.length) delete presenceData.buttons;
   if (!showButtons) delete presenceData.buttons;
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

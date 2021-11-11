@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentTime: number,
   duration: number,
   paused: boolean,
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "kisscartoon"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (
     document.location.pathname === "/" ||
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (isNaN(duration)) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Looking at:";
       presenceData.state = `${document
         .querySelector("#adsIfrme > div > div > div > h1 > strong")
@@ -89,8 +89,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "writing";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

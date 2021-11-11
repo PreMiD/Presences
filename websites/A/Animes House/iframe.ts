@@ -6,11 +6,10 @@ iframe.on("UpdateData", async () => {
       "video.jw-video.jw-reset"
     );
     if (video !== null) {
-      const played = video.duration !== 0;
       iframe.send({
         currentTime: video.currentTime,
         duration: video.duration,
-        played,
+        played: video.duration !== 0,
         paused: video.paused
       });
     }

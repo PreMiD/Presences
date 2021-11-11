@@ -46,8 +46,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = user;
     } else {
       // own profile
-      const trash: string = document.querySelector("h1 a").innerHTML;
-      presenceData.state = user.replace(trash, "");
+
+      presenceData.state = user.replace(
+        document.querySelector("h1 a").innerHTML,
+        ""
+      );
     }
   } else if (document.location.pathname.includes("/author/show/")) {
     presenceData.details = "Viewing an author:";

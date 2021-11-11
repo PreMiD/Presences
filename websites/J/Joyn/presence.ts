@@ -138,11 +138,8 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "serien") {
-      const videoStartTime = Date.now(),
-        videoEndTime =
-          Math.floor(videoStartTime / 1000) -
-          video.currentTime +
-          video.duration;
+      const videoEndTime =
+        Math.floor(Date.now() / 1000) - video.currentTime + video.duration;
       presenceData.details = document.title.replace("streamen", "");
       presenceData.state = "Series";
       if (!video.paused) {
@@ -166,11 +163,8 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "trailer") {
-      const videoStartTime = Date.now(),
-        videoEndTime =
-          Math.floor(videoStartTime / 1000) -
-          video.currentTime +
-          video.duration;
+      const videoEndTime =
+        Math.floor(Date.now() / 1000) - video.currentTime + video.duration;
       presenceData.details = document.title.replace("Trailer | Joyn", "");
       presenceData.state = "Trailer";
       if (!video.paused) {
@@ -202,11 +196,8 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "compilation") {
-      const videoStartTime = Date.now(),
-        videoEndTime =
-          Math.floor(videoStartTime / 1000) -
-          video.currentTime +
-          video.duration;
+      const videoEndTime =
+        Math.floor(Date.now() / 1000) - video.currentTime + video.duration;
       presenceData.details = document.title.replace("| Joyn", "");
       presenceData.state = "Compilation";
       if (!video.paused) {
@@ -230,11 +221,8 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "sport") {
-      const videoStartTime = Date.now(),
-        videoEndTime =
-          Math.floor(videoStartTime / 1000) -
-          video.currentTime +
-          video.duration;
+      const videoEndTime =
+        Math.floor(Date.now() / 1000) - video.currentTime + video.duration;
       presenceData.details = document.querySelector(
         ".metadataWrapper .metadataTitle"
       ).textContent;
@@ -290,8 +278,6 @@ presence.on("UpdateData", async function () {
       presenceData.details = "Privacy policy";
     else if (urlpath[1] === "agb") presenceData.details = "Terms of service";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

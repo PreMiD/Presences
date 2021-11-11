@@ -4,23 +4,21 @@ const presence = new Presence({
   strings = presence.getStrings({
     search: "presence.activity.searching"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
   };
   if (new URLSearchParams(window.location.search).has("s")) {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Searching for:";
     presenceData.state = document.title.split(" -").shift();
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = (await strings).search;
-  } else if (document.location.pathname === "/") {
-    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname === "/")
     presenceData.details = "Browsing Homepage";
-  } else if (document.location.pathname.includes("/category/")) {
-    presenceData.startTimestamp = browsingStamp;
+  else if (document.location.pathname.includes("/category/")) {
     presenceData.details = "Viewing a category:";
     presenceData.state = (
       document.querySelector(
@@ -31,24 +29,21 @@ presence.on("UpdateData", async () => {
     const comicName = (
         document.querySelector("head > meta:nth-child(17)") as HTMLMetaElement
       ).content,
-      issueName = document.location.pathname.split("/")[2].replace(/_/g, " "),
       issueNumber = document
         .querySelector("#left-menu > ol > li:nth-child(3) > div > span")
         .textContent.trim();
     if (document.location.pathname.split("/")[2].includes("")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = `${comicName} - ${issueName}`;
+      presenceData.details = `${comicName} - ${document.location.pathname
+        .split("/")[2]
+        .replace(/_/g, " ")}`;
       presenceData.state = issueNumber;
       presenceData.smallImageKey = "reading";
     } else {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = comicName;
       presenceData.state = issueNumber;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

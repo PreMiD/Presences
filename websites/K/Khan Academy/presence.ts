@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/teachers"))
     data.state = "🎓 Teachers";
   else if (document.location.pathname.includes("/profile")) {
-    data.details = (await strings).profile;
+    presenceData.details = (await strings).profile;
     data.state = `👀 ${document.querySelector("._o77ufew").textContent}`;
   } else if (document.location.pathname.includes("/settings"))
     data.state = `⚙️ ${(await strings).settings}`;
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.split("/").length < 3)
     data.state = `📖 ${document.querySelector("._aemo2b3").textContent}`;
   else {
-    data.details = document.querySelector(
+    presenceData.details = document.querySelector(
       "._io410w6, span._cmfzobe:nth-child(2) > a:nth-child(2)"
     ).textContent;
     data.state = `📋 ${document
@@ -66,8 +66,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
+  if (!presenceData.details) {
     presence.setActivity();
   } else presence.setActivity(data);
 });

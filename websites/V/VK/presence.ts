@@ -37,11 +37,11 @@ function getVKTrackTimeLeft(): string[] {
 
   let timeLeft;
 
-  if (playerDuration.innerText.startsWith("-"))
-    timeLeft = playerDuration.innerText;
+  if (playerDuration.textContent.startsWith("-"))
+    timeLeft = playerDuration.textContent;
   else {
     playerDuration.click();
-    timeLeft = playerDuration.innerText;
+    timeLeft = playerDuration.textContent;
     playerDuration.click();
   }
 
@@ -58,11 +58,11 @@ function getVKTrackTimePassed(): string[] {
 
   let timePassed;
 
-  if (!playerDuration.innerText.startsWith("-"))
-    timePassed = playerDuration.innerText;
+  if (!playerDuration.textContent.startsWith("-"))
+    timePassed = playerDuration.textContent;
   else {
     playerDuration.click();
-    timePassed = playerDuration.innerText;
+    timePassed = playerDuration.textContent;
     playerDuration.click();
   }
 
@@ -83,12 +83,8 @@ function getVKTrackLength(): number[] {
   ];
 
   //* Checking if overall time have more than 60 seconds and adding 1 minute if it does.
-  if (Number(overallTime[1]) > 60) {
-    const t1 = overallTime[0] + 1,
-      t2 = overallTime[1] - 60;
-
-    overallTime = [t1, t2];
-  }
+  if (Number(overallTime[1]) > 60)
+    overallTime = [overallTime[0] + 1, overallTime[1] - 60];
 
   return overallTime;
 }
@@ -108,15 +104,6 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/audios") ||
     document.querySelector(".audio_layer_container")
   ) {
-    const title: string = (
-        document.querySelector(".audio_page_player_title_song") as HTMLElement
-      ).textContent,
-      author: string = (
-        document.querySelector(
-          ".audio_page_player_title_performer a"
-        ) as HTMLElement
-      ).textContent;
-
     if (document.querySelector(".audio_playing") === null) isPlaying = true;
     else isPlaying = false;
 
@@ -130,8 +117,14 @@ presence.on("UpdateData", async () => {
       )
     );
 
-    presenceData.details = title;
-    presenceData.state = author;
+    presenceData.details = (
+      document.querySelector(".audio_page_player_title_song") as HTMLElement
+    ).textContent;
+    presenceData.state = (
+      document.querySelector(
+        ".audio_page_player_title_performer a"
+      ) as HTMLElement
+    ).textContent;
     presenceData.smallImageKey = isPlaying ? "pause" : "play";
     presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
     presenceData.startTimestamp = isPlaying ? null : timestamps[0];
@@ -144,17 +137,12 @@ presence.on("UpdateData", async () => {
       ? (isPlaying = true)
       : (isPlaying = false);
 
-    const videoTitle = (document.querySelector(".mv_title") as HTMLElement)
-        .innerText,
-      videoCurrentTime = (
+    const videoCurrentTime = (
         document.querySelector("._time_current") as HTMLElement
-      ).innerText.split(":"),
+      ).textContent.split(":"),
       videoDuration = (
         document.querySelector("._time_duration") as HTMLElement
-      ).innerText.split(":"),
-      videoAuthor = (document.querySelector(".mv_author_name a") as HTMLElement)
-        .innerText;
-
+      ).textContent.split(":");
     timestamps = presence.getTimestamps(
       Math.floor(
         Number(videoCurrentTime[0]) * 60 + Number(videoCurrentTime[1])
@@ -162,8 +150,12 @@ presence.on("UpdateData", async () => {
       Math.floor(Number(videoDuration[0]) * 60 + Number(videoDuration[1]))
     );
 
-    presenceData.details = `${getLocalizedString("Watching")} ${videoTitle}`;
-    presenceData.state = videoAuthor;
+    presenceData.details = `${getLocalizedString("Watching")} ${
+      (document.querySelector(".mv_title") as HTMLElement).textContent
+    }`;
+    presenceData.state = (
+      document.querySelector(".mv_author_name a") as HTMLElement
+    ).textContent;
     presenceData.smallImageKey = isPlaying ? "pause" : "play";
     presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
     presenceData.startTimestamp = isPlaying ? null : timestamps[0];
@@ -171,10 +163,9 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData, true);
   } else if (document.querySelector(".page_name") !== null) {
-    const pageTitle = (document.querySelector(".page_name") as HTMLElement)
-      .innerText;
-
-    presenceData.details = pageTitle;
+    presenceData.details = (
+      document.querySelector(".page_name") as HTMLElement
+    ).textContent;
     presenceData.startTimestamp = browsingTimestamp;
 
     presence.setActivity(presenceData, true);

@@ -3,14 +3,9 @@ const presence = new Presence({
 });
 
 function translate(isMale: boolean) {
-  const refferGender = (arr: Array<string>): string =>
-      isMale ? arr[0] : arr[1],
+  const refferGender = (arr: string[]): string => (isMale ? arr[0] : arr[1]),
     reporting: string = refferGender(["מדווח", "מדווחת"]),
     removingQuestion: string = refferGender(["מוחק שאלה", "מוחקת שאלה"]),
-    removingPenfriends: string = refferGender([
-      "מוחק מסר בחברים לעט",
-      "מוחקת מסר בחברים לעט"
-    ]),
     removingAnswer: string = refferGender(["מוחק תשובה", "מוחקת תשובה"]),
     editingQuestion: string = refferGender(["עורך שאלה", "עורכת שאלה"]),
     editingAnswer: string = refferGender(["עורך תשובה", "עורכת תשובה"]);
@@ -59,7 +54,7 @@ function translate(isMale: boolean) {
     },
     "pen-friends": {
       main: "בחברים לעט",
-      remove: removingPenfriends,
+      remove: refferGender(["מוחק מסר בחברים לעט", "מוחקת מסר בחברים לעט"]),
       write: refferGender(["כותב מסר בחברים לעט", "כותבת מסר בחברים לעט"])
     },
     reports: {
@@ -329,8 +324,12 @@ presence.on("UpdateData", () => {
       action = `${Path} & ${details}`;
       break;
   }
-
-  const smallImageText =
+  presence.setActivity({
+    details: details || translate(isMale).default,
+    largeImageKey: "stips",
+    smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",
+    startTimestamp: elapsed,
+    smallImageText:
       location.host +
       decodeURI(
         location.pathname.split("/").length === 4
@@ -341,14 +340,6 @@ presence.on("UpdateData", () => {
           : location.pathname === "/"
           ? ""
           : location.pathname
-      ),
-    data: PresenceData = {
-      details: details || translate(isMale).default,
-      largeImageKey: "stips",
-      smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",
-      startTimestamp: elapsed,
-      smallImageText
-    };
-
-  presence.setActivity(data);
+      )
+  });
 });

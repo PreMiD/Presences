@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "821104573329440848"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     buttons = await presence.getSetting("buttons");
 
@@ -49,19 +49,20 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Creating a VTC";
     } else if (document.location.pathname.includes("/vtc/")) {
       presenceData.details = "Viewing a VTC";
-      presenceData.state = document.querySelector("h2").innerText;
+      presenceData.state = document.querySelector("h2").textContent;
       presenceData.buttons = [{ label: "View VTC", url: document.URL }];
     } else if (document.location.pathname.includes("/members/")) {
       presenceData.details = "Viewing VTC members";
-      presenceData.state = document.querySelector("h2").innerText;
+      presenceData.state = document.querySelector("h2").textContent;
     } else if (document.location.pathname === "/blog") {
       delete presenceData.smallImageKey;
       presenceData.smallImageKey = "search";
       presenceData.details = "Browsing the blog";
     } else if (document.location.pathname.includes("/blog/")) {
-      const blogTitle = document.querySelector("div.container-fluid > h1");
       presenceData.details = "Reading the blog:";
-      presenceData.state = `${blogTitle.innerHTML.substring(0, 125)}...`;
+      presenceData.state = `${document
+        .querySelector("div.container-fluid > h1")
+        .innerHTML.substring(0, 125)}...`;
       presenceData.buttons = [
         { label: "Read News Article", url: document.URL }
       ];
@@ -83,7 +84,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Searching for an event";
     } else if (document.location.pathname.includes("/events/")) {
       presenceData.details = "Viewing an event";
-      presenceData.state = document.querySelectorAll("h1")[1].innerText;
+      presenceData.state = document.querySelectorAll("h1")[1].textContent;
       presenceData.buttons = [{ label: "View Event", url: document.URL }];
     }
   } else if (document.location.hostname === "forum.truckersmp.com") {

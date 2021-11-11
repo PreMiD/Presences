@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "836962986451140609"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const logo = await presence.getSetting("logo"),
     buttons = await presence.getSetting("buttons"),
     data: PresenceData = {
       largeImageKey: !logo ? "logo" : "logo-v2",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location;
 
@@ -20,24 +20,23 @@ presence.on("UpdateData", async () => {
       [results] = document
         .querySelector(".c-blog__heading > .h4")
         .textContent.split(" ");
-    data.details = "Searching:";
+    presenceData.details = "Searching:";
     data.state = `${search} 🔸 ${results} results`;
     data.smallImageKey = "search";
-  } else if (pathname === "/") data.details = "Viewing the homepage";
+  } else if (pathname === "/") presenceData.details = "Viewing the homepage";
   else if (pathname.endsWith("/webtoons/")) {
-    const results = document.querySelector(
-      ".c-blog__heading > .h4"
-    ).textContent;
-    data.details = "Browsing all webtoons";
-    data.state = results;
+    presenceData.details = "Browsing all webtoons";
+    data.state = document.querySelector(".c-blog__heading > .h4").textContent;
   } else if (pathname.startsWith("/webtoon-genre/")) {
-    const genre = document.querySelector(".item-title").textContent,
-      results = document.querySelector(".c-blog__heading > .h4").textContent;
-    data.details = `Browsing ${genre} webtoons`;
-    data.state = `📋 ${results}`;
+    presenceData.details = `Browsing ${
+      document.querySelector(".item-title").textContent
+    } webtoons`;
+    data.state = `📋 ${
+      document.querySelector(".c-blog__heading > .h4").textContent
+    }`;
     data.smallImageKey = "search";
   } else if (pathname === "/completed-webtoons/") {
-    data.details = "Browsing:";
+    presenceData.details = "Browsing:";
     data.state = "Completed webtoons";
     data.smallImageKey = "search";
   } else if (pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0) {
@@ -50,7 +49,7 @@ presence.on("UpdateData", async () => {
           window.innerHeight)) *
       100;
     progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
-    data.details = title;
+    presenceData.details = title;
     data.state = `📖 ${chapter} 🔸 ${progress}%`;
     data.largeImageKey = title.includes("Solo Leveling")
       ? "solo"
@@ -62,7 +61,7 @@ presence.on("UpdateData", async () => {
       data.buttons = [{ label: "Read Webtoon", url: window.location.href }];
   } else if (pathname.startsWith("/read")) {
     const title = document.querySelector(".post-title").textContent;
-    data.details = "Viewing:";
+    presenceData.details = "Viewing:";
     data.state = title;
     data.smallImageKey = "view";
     data.largeImageKey = title.includes("Solo Leveling")
@@ -76,19 +75,19 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "settings";
     switch (window.location.search) {
       case "?tab=history":
-        data.details = "User settings:";
+        presenceData.details = "User settings:";
         data.state = "History";
         break;
       case "?tab=bookmark":
-        data.details = "User settings:";
+        presenceData.details = "User settings:";
         data.state = "Bookmarks";
         break;
       case "?tab=account-settings":
-        data.details = "User settings:";
+        presenceData.details = "User settings:";
         data.state = "Account settings";
         break;
       default:
-        data.details = "User settings:";
+        presenceData.details = "User settings:";
         data.state = "Bookmarks";
     }
   }

@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
       (songNameS = songNameS.replace("<span>", "")),
       (songNameS = songNameS.replace("</span>", ""));
     if (songNameS === "") songNameS = "None";
-  } else if (songName !== null) songNameS = songName.innerText;
+  } else if (songName !== null) songNameS = songName.textContent;
 
   songArtist = document.querySelector(
     "header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Artist-Text"
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       (songArtistS = songArtistS.replace("</span>", ""));
     if (songNameS === "") songArtistS = "None";
   } else if (songArtist !== null) {
-    (songArtistS = songArtist.innerText),
+    (songArtistS = songArtist.textContent),
       (songArtistS = songArtistS.replace("&amp;", "&"));
   }
 
@@ -53,8 +53,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = songArtistS;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

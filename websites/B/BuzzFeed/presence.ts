@@ -13,7 +13,8 @@ const presence = new Presence({
     "/tvandmovies": "Tv & Movies ",
     "/celebrity": "Celebrity ",
     "/newsletters": "Newsletter "
-  };
+  },
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
@@ -25,7 +26,7 @@ presence.on("UpdateData", async () => {
     ),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: Math.floor(Date.now() / 1000)
+      startTimestamp: browsingTimestamp
     };
 
   if (posttitle && posttitle.textContent !== "") {
@@ -46,8 +47,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Homepage";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

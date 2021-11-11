@@ -25,12 +25,12 @@ presence.on("UpdateData", async () => {
       const ts = Math.round(new Date().getTime() / 1000),
         elapsedSeconds = parseLength(
           document.querySelector(".oG0wpe").children[0].innerHTML
-        ),
-        totalSeconds = parseLength(
-          document.querySelector(".oG0wpe").children[1].innerHTML
         );
       presenceData.startTimestamp = ts - elapsedSeconds;
-      presenceData.endTimestamp = ts + totalSeconds - elapsedSeconds;
+      presenceData.endTimestamp =
+        ts +
+        parseLength(document.querySelector(".oG0wpe").children[1].innerHTML) -
+        elapsedSeconds;
     }
   } else if (document.location.pathname === "/")
     presenceData.details = "Browsing Podcasts";
@@ -49,10 +49,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.location.pathname.replace("/search/", "");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 // Function that convert lengths like 01:13 to seconds like 73

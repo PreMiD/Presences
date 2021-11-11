@@ -5,12 +5,11 @@ iframe.on("UpdateData", async () => {
     ),
     videoElement: HTMLVideoElement = document.querySelector("#player video");
   if (!titleElement || !videoElement) return;
-  const title = titleElement.textContent,
-    duration = videoElement.duration ? videoElement.duration : null,
+  const duration = videoElement.duration ? videoElement.duration : null,
     { currentTime } = videoElement,
     { paused } = videoElement;
   iframe.send({
-    title,
+    title: titleElement.textContent,
     currentTime,
     duration,
     paused

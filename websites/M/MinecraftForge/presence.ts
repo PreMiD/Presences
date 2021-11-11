@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "626462884649500686" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: Element | HTMLElement | string,
   search: Element | HTMLElement | string,
   title: Element | HTMLElement | string;
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "forge"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "www.minecraftforge.net") {
     if (document.location.pathname.includes("/topic/")) {
       title = document.querySelector(
@@ -19,12 +19,12 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = "Forums, viewing thread:";
-      if ((title as HTMLElement).innerText.length > 128) {
-        presenceData.state = `${(title as HTMLElement).innerText.substring(
+      if ((title as HTMLElement).textContent.length > 128) {
+        presenceData.state = `${(title as HTMLElement).textContent.substring(
           0,
           125
         )}...`;
-      } else presenceData.state = (title as HTMLElement).innerText;
+      } else presenceData.state = (title as HTMLElement).textContent;
 
       delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
         "body > main > div > div:nth-child(2) > div.ipsResponsive_hidePhone.ipsResponsive_block.ipsPageHeader > p"
       );
       presenceData.details = "Forums, searching for:";
-      [presenceData.state] = (search as HTMLElement).innerText.split("'");
+      [presenceData.state] = (search as HTMLElement).textContent.split("'");
 
       presenceData.smallImageKey = "search";
 
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
         "#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1"
       );
       presenceData.details = "Forums, viewing user:";
-      presenceData.state = (user as HTMLElement).innerText;
+      presenceData.state = (user as HTMLElement).textContent;
 
       delete presenceData.smallImageKey;
 
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
       );
       if (title !== null) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = (title as HTMLElement).innerText;
+        presenceData.state = (title as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
 
@@ -83,7 +83,6 @@ presence.on("UpdateData", async () => {
       }
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (document.location.hostname === "files.minecraftforge.net") {
     title = document.querySelector(
@@ -91,7 +90,7 @@ presence.on("UpdateData", async () => {
     );
     if (title !== null) {
       presenceData.details = "Files, viewing Forge for:";
-      presenceData.state = (title as HTMLElement).innerText.replace(
+      presenceData.state = (title as HTMLElement).textContent.replace(
         "Downloads for Minecraft Forge - ",
         ""
       );
@@ -112,7 +111,7 @@ presence.on("UpdateData", async () => {
       "body > main > div.sidebar-sticky-wrapper-content > article > h1"
     );
     presenceData.details = "Docs, reading:";
-    presenceData.state = (title as HTMLElement).innerText;
+    presenceData.state = (title as HTMLElement).textContent;
 
     presenceData.smallImageKey = "reading";
 
@@ -130,7 +129,7 @@ presence.on("UpdateData", async () => {
         "body > div:nth-child(18) > div > div.ant-modal-wrap.ant-modal-centered > div > div.ant-modal-content > div.ant-modal-body > div.creatorhub__product-modal-content > div > div.creatorhub__product-modal-title-wrapper > h1"
       );
       presenceData.details = "Merch, viewing:";
-      presenceData.state = (title as HTMLElement).innerText;
+      presenceData.state = (title as HTMLElement).textContent;
 
       delete presenceData.smallImageKey;
 
@@ -145,6 +144,5 @@ presence.on("UpdateData", async () => {
     }
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

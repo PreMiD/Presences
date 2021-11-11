@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "833644176967991346"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("time"),
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (document.location.pathname.includes("/global")) {

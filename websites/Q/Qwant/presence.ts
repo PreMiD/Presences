@@ -42,9 +42,9 @@ presence.on("UpdateData", async () => {
       case "":
         query = new URLSearchParams(location.search);
         if (query.has("q")) {
-          data.details = searchTypeMap[query.get("t")];
+          presenceData.details = searchTypeMap[query.get("t")];
           data.state = query.get("q");
-        } else data.details = "Home";
+        } else presenceData.details = "Home";
         break;
       case "music":
         data.smallImageKey = "music";
@@ -52,15 +52,15 @@ presence.on("UpdateData", async () => {
         if (location.pathname === "/music/search") {
           query = new URLSearchParams(location.search);
           if (query.has("q")) {
-            data.details = searchMusicTypeMap[query.get("t")];
+            presenceData.details = searchMusicTypeMap[query.get("t")];
             data.state = query.get("q");
           }
-        } else data.details = "Music Home";
+        } else presenceData.details = "Music Home";
         break;
       case "maps":
         data.smallImageKey = "maps";
         data.smallImageText = "Qwant Maps";
-        data.details = "Looking at maps";
+        presenceData.details = "Looking at maps";
         break;
     }
   } else if (location.hostname === "www.qwantjunior.com") {
@@ -69,26 +69,26 @@ presence.on("UpdateData", async () => {
     switch (location.pathname) {
       case "/":
         if (query.has("q")) {
-          data.details = `${
+          presenceData.details = `${
             searchJuniorTypeMap[query.get("type")]
           } in Qwant Junior`;
           data.state = query.get("q");
-        } else data.details = "Junior Home";
+        } else presenceData.details = "Junior Home";
         break;
       case "/news":
         data.smallImageKey = "news";
         data.smallImageText = "Qwant Junior News";
         if (query.has("q")) {
-          data.details = "Searching the news on Qwant Junior";
+          presenceData.details = "Searching the news on Qwant Junior";
           data.state = query.get("q");
-        } else data.details = "Junior News Home";
+        } else presenceData.details = "Junior News Home";
         break;
     }
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!data.details) {
-    presence.setTrayTitle(); // Clear tray
+  if (!presenceData.details) {
+    // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);
 });

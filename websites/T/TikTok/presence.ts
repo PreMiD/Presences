@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "809093093600133165"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
   return presence.getStrings(
@@ -24,7 +24,7 @@ let strings = getStrings(),
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "tiktok",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     newLang = await presence.getSetting("lang").catch(() => "en"),
     [, page, pageType] = location.pathname.split("/");
@@ -46,18 +46,19 @@ presence.on("UpdateData", async () => {
     if (pageType === "video") {
       //Video
 
-      const author = document.querySelector(".user-username")?.textContent,
-        otherAuthor = document.querySelector(".author-uniqueId")?.textContent,
-        caption = document.querySelector(".video-meta-title:nth-child(1)")
-          ?.firstElementChild?.textContent,
-        otherCaption = document.querySelector(".tt-video-meta-caption")
-          ?.firstElementChild?.textContent,
-        video = document.querySelector(".video-player") as HTMLVideoElement,
+      const video = document.querySelector(".video-player") as HTMLVideoElement,
         [, endTimestamp] = await presence.getTimestampsfromMedia(video);
 
       delete presenceData.startTimestamp;
-      presenceData.details = caption ?? otherCaption;
-      presenceData.state = `@${author ?? otherAuthor}`;
+      presenceData.details =
+        document.querySelector(".video-meta-title:nth-child(1)")
+          ?.firstElementChild?.textContent ??
+        document.querySelector(".tt-video-meta-caption")?.firstElementChild
+          ?.textContent;
+      presenceData.state = `@${
+        document.querySelector(".user-username")?.textContent ??
+        document.querySelector(".author-uniqueId")?.textContent
+      }`;
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.endTimestamp = !video.paused ? endTimestamp : 0;
       presenceData.buttons = [
@@ -72,13 +73,11 @@ presence.on("UpdateData", async () => {
       ];
     } else if (pageType === "live") {
       //Live
-
-      const author = document.querySelector(".user-uniqueId")?.textContent,
-        caption = document.querySelector(".live-title")?.textContent;
-
       delete presenceData.startTimestamp;
-      presenceData.details = caption;
-      presenceData.state = `@${author}`;
+      presenceData.details = document.querySelector(".live-title")?.textContent;
+      presenceData.state = `@${
+        document.querySelector(".user-uniqueId")?.textContent
+      }`;
       presenceData.smallImageKey = "live";
 
       presenceData.buttons = [
@@ -92,13 +91,12 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else {
-      const author = document
-          .querySelector(".share-sub-title")
-          ?.textContent.trim(),
-        username = document.querySelector(".share-title")?.textContent.trim();
-
       presenceData.details = (await strings).viewProfile;
-      presenceData.state = `${author} (@${username})`;
+      presenceData.state = `${document
+        .querySelector(".share-sub-title")
+        ?.textContent.trim()} (@${document
+        .querySelector(".share-title")
+        ?.textContent.trim()})`;
       presenceData.buttons = [
         {
           label: (await strings).buttonViewProfile,

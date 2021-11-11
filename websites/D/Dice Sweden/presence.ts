@@ -168,8 +168,6 @@ presence.on("UpdateData", async () => {
 
   if (!showTimestamps) delete presenceData.startTimestamp;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

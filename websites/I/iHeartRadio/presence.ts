@@ -15,17 +15,18 @@ function checkLength(string: string): string {
 function parseAudioTimestamps(
   audioTime: string,
   audioDuration: string
-): Array<number> {
+): number[] {
   const splitAudioTime = audioTime.split(":"),
     splitAudioDuration = audioDuration.split(":"),
-    parsedAudioTime =
-      parseInt(splitAudioTime[0]) * 60 + parseInt(splitAudioTime[1]),
-    parsedAudioDuration =
-      parseInt(splitAudioDuration[0]) * 60 + parseInt(splitAudioDuration[1]),
-    startTime = Date.now(),
-    endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
+    startTime = Date.now();
+  return [
+    Math.floor(startTime / 1000),
+    Math.floor(startTime / 1000) -
+      parseInt(splitAudioTime[0]) * 60 +
+      parseInt(splitAudioTime[1]) +
+      parseInt(splitAudioDuration[0]) * 60 +
+      parseInt(splitAudioDuration[1])
+  ];
 }
 
 let elapsed = Math.floor(Date.now() / 1000),
@@ -36,25 +37,25 @@ let elapsed = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "logo"
-    },
-    playerCheck = !!document.querySelector('[data-test="player-container"]');
-  if (playerCheck) {
-    const playerText = document.querySelector('[data-test="player-text"]'),
-      liveCheck = !document.querySelector('[data-test="controls-container"]')
-        .children[1];
-    if (liveCheck) {
-      const playCheck = !!document.querySelector(
-        '[data-test="controls-container"] [data-test-state="PLAYING"]'
-      );
-      if (playCheck) {
+    largeImageKey: "logo"
+  };
+  if (document.querySelector('[data-test="player-container"]')) {
+    const playerText = document.querySelector('[data-test="player-text"]');
+    if (
+      !document.querySelector('[data-test="controls-container"]').children[1]
+    ) {
+      if (
+        document.querySelector(
+          '[data-test="controls-container"] [data-test-state="PLAYING"]'
+        )
+      ) {
         title = playerText.children[0].textContent;
         song = playerText.children[1].textContent;
         author = playerText.children[2]?.textContent;
         subtitle = `${song}${author ? ` - ${author}` : ""}`;
 
         title = checkLength(title);
-        data.details = title;
+        presenceData.details = title;
         subtitle = checkLength(subtitle);
         data.state = subtitle;
 
@@ -78,13 +79,14 @@ presence.on("UpdateData", async () => {
       author = playerText.children[2]?.textContent;
       subtitle = `${song}${author ? ` - ${author}` : ""}`;
 
-      const audioTime = timestamp.children[0].textContent,
-        audioDuration = timestamp.children[2].textContent,
-        parsedTimestamps = parseAudioTimestamps(audioTime, audioDuration),
+      const parsedTimestamps = parseAudioTimestamps(
+          timestamp.children[0].textContent,
+          timestamp.children[2].textContent
+        ),
         paused = !!document.querySelector('[data-test="play-icon"]');
 
       title = checkLength(title);
-      data.details = title;
+      presenceData.details = title;
       subtitle = checkLength(subtitle);
       data.state = subtitle;
       (data.smallImageKey = paused ? "pause" : "play"),
@@ -104,7 +106,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data);
     }
   } else {
-    data.details = "Browsing...";
+    presenceData.details = "Browsing...";
     presence.setActivity(data);
   }
 });

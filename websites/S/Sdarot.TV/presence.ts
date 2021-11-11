@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: string,
   title: string,
@@ -24,10 +24,10 @@ presence.on("UpdateData", async () => {
     document.location.pathname === "/" ||
     document.location.pathname === "/index"
   ) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "צופה בדף הבית";
   } else if (document.location.pathname === "/series") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "צופה ברשימת הסדרות";
   } else if (document.location.pathname.includes("/watch/")) {
     let video = document.querySelector(
@@ -65,14 +65,12 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (isNaN(duration)) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = ":צופה ב";
       presenceData.state = `${title} - ${user}`;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

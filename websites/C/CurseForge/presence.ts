@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "626536244670889985"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement | string | Element,
   search: HTMLElement,
@@ -28,19 +28,19 @@ presence.on("UpdateData", async () => {
         presenceData.details = `${game}, Viewing category:`;
         presenceData.state = `${categoryText} - ${(
           title as HTMLElement
-        ).innerText.replace("All ", "")}`;
+        ).textContent.replace("All ", "")}`;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else {
         presenceData.details = `${game}, Viewing ${categoryTextSingle}:`;
-        if ((title as HTMLElement).innerText.length > 128) {
-          presenceData.state = `${(title as HTMLElement).innerText.substring(
+        if ((title as HTMLElement).textContent.length > 128) {
+          presenceData.state = `${(title as HTMLElement).textContent.substring(
             0,
             125
           )}...`;
-        } else presenceData.state = (title as HTMLElement).innerText;
+        } else presenceData.state = (title as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
 
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "www.curseforge.com") {
     if (document.location.pathname.includes("/minecraft/")) {
       if (document.location.pathname.includes("/modpacks"))
@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
         "body > div.flex.flex-col.min-h-full.min-h-screen > main > section > div > div.text-base > div.username.text-xl"
       );
       presenceData.details = "Viewing user:";
-      presenceData.state = (user as HTMLElement).innerText;
+      presenceData.state = (user as HTMLElement).textContent;
 
       delete presenceData.smallImageKey;
 
@@ -197,7 +197,6 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (
     document.location.hostname === "minecraft.curseforge.com" ||
@@ -207,7 +206,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector("#content > section > div > header > h2");
       if (title !== null) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = (title as HTMLElement).innerText;
+        presenceData.state = (title as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
 
@@ -221,12 +220,12 @@ presence.on("UpdateData", async () => {
           "#content > section > div > div > header > h2"
         );
         presenceData.details = "Forums, reading thread:";
-        if ((title as HTMLElement).innerText.length > 128) {
-          presenceData.state = `${(title as HTMLElement).innerText.substring(
+        if ((title as HTMLElement).textContent.length > 128) {
+          presenceData.state = `${(title as HTMLElement).textContent.substring(
             0,
             125
           )}...`;
-        } else presenceData.state = (title as HTMLElement).innerText;
+        } else presenceData.state = (title as HTMLElement).textContent;
 
         presenceData.smallImageKey = "reading";
         presence.setActivity(presenceData);
@@ -344,7 +343,7 @@ presence.on("UpdateData", async () => {
           "#content > section > section > div.p-user-info > ul.p-user-details > li.username"
         );
         presenceData.details = "Forums, Viewing user:";
-        presenceData.state = (user as HTMLElement).innerText;
+        presenceData.state = (user as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
 
@@ -374,13 +373,12 @@ presence.on("UpdateData", async () => {
       "#content > section > div.featured-site-info-container > div > h2"
     );
     presenceData.details = "Viewing game:";
-    presenceData.state = (title as HTMLElement).innerText;
+    presenceData.state = (title as HTMLElement).textContent;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

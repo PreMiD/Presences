@@ -1,11 +1,12 @@
 const presence = new Presence({
     clientId: "765876503161733140"
   }),
-  websiteLoadTimestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "zoom_logo"
+    largeImageKey: "zoom_logo",
+    startTimestamp: browsingTimestamp
   };
   if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
@@ -50,14 +51,11 @@ presence.on("UpdateData", async () => {
           memberCount() > 1 ? "s" : ""
         } in room`;
       }
-      presenceData.startTimestamp = websiteLoadTimestamp;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });
 
 function videoEnabled() {
@@ -74,8 +72,7 @@ function videoEnabled() {
 
 function memberCount() {
   const counter = document.querySelector(
-      ".footer-button__participants-icon > .footer-button__number-counter > span"
-    ),
-    res = counter === null ? null : Number(counter.innerHTML);
-  return res;
+    ".footer-button__participants-icon > .footer-button__number-counter > span"
+  );
+  return counter === null ? null : Number(counter.innerHTML);
 }

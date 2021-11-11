@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
   const { host } = location,
     path = location.pathname.replace(/\/?$/, "/"),
     detailsObj = setObject(path),
-    data: PresenceData = {
+    presenceData: PresenceData = {
       details: detailsObj.details,
       state: detailsObj.state,
       largeImageKey: "byte"
@@ -87,11 +87,11 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) data.startTimestamp = elapsed;
+  if (elapsed) presenceData.startTimestamp = elapsed;
 
   if (host === "community.byte.co") {
-    data.details = "Browsing Community";
-    data.largeImageKey = "bytecom";
+    presenceData.details = "Browsing Community";
+    presenceData.largeImageKey = "bytecom";
 
     if (
       path.match("/categories/") ||
@@ -99,104 +99,100 @@ presence.on("UpdateData", async () => {
       path.match("/top/") ||
       path.match("/unread/")
     )
-      data.state = getElement(".active");
+      presenceData.state = getElement(".active");
 
-    if (path.match("/new/")) data.state = "Newest";
+    if (path.match("/new/")) presenceData.state = "Newest";
 
     if (path.match("/badges/")) {
-      data.details = "Viewing Badges";
-      data.state = getElement(".show-badge-details .badge-link");
+      presenceData.details = "Viewing Badges";
+      presenceData.state = getElement(".show-badge-details .badge-link");
     }
 
-    if (path.match("/tags/")) data.state = "Tags";
+    if (path.match("/tags/")) presenceData.state = "Tags";
 
     if (path.match("/tag/")) {
-      data.details = "Viewing Tag";
-      data.state = getElement(".discourse-tag");
+      presenceData.details = "Viewing Tag";
+      presenceData.state = getElement(".discourse-tag");
     }
 
     if (path.match("/cakeday/")) {
-      data.details = "Viewing Cakedays";
-      data.state = `${getElement(".nav-pills .active")} (${getElement(
+      presenceData.details = "Viewing Cakedays";
+      presenceData.state = `${getElement(".nav-pills .active")} (${getElement(
         ".anniversaries .nav-pills .active"
       )})`;
     }
 
     if (path.match("/c/")) {
-      data.details = "Viewing Category";
-      data.state = getElement(".selected-name .category-name");
+      presenceData.details = "Viewing Category";
+      presenceData.state = getElement(".selected-name .category-name");
 
       const tag = getElement(".active");
-      if (tag) data.details += `'s ${tag}`;
+      if (tag) presenceData.details += `'s ${tag}`;
     }
 
     if (path.match("/t/")) {
-      data.details = "Viewing Thread";
-      data.state = getElement(".fancy-title");
+      presenceData.details = "Viewing Thread";
+      presenceData.state = getElement(".fancy-title");
     }
 
     if (path.match("/u/")) {
-      data.details = "Viewing Users";
+      presenceData.details = "Viewing Users";
 
       if (document.querySelector(".details")) {
-        data.details = "Viewing User";
-        data.state = `${getElement(".username")} (${getElement(".full-name")})`;
+        presenceData.details = "Viewing User";
+        presenceData.state = `${getElement(".username")} (${getElement(
+          ".full-name"
+        )})`;
 
         const tag = getElement(".active");
-        if (tag) data.details += `'s ${tag}`;
+        if (tag) presenceData.details += `'s ${tag}`;
       }
     }
 
     if (path.match("/g/")) {
-      data.details = "Viewing Group";
-      data.state = `${getElement(".group-info-name")} (${getElement(
+      presenceData.details = "Viewing Group";
+      presenceData.state = `${getElement(".group-info-name")} (${getElement(
         ".group-info-full-name"
       )})`;
 
       const tag = getElement(".active");
-      if (tag) data.details += `'s ${tag}`;
+      if (tag) presenceData.details += `'s ${tag}`;
     }
 
     if (path.match("/search/")) {
-      data.details = "Searching";
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).search;
-
-      const search = document.querySelector("input");
-
-      data.state = search.value;
+      presenceData.details = "Searching";
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = (await strings).search;
+      presenceData.state = document.querySelector("input").value;
     }
   }
 
   if (host === "help.byte.co") {
-    data.details = "Browsing Help";
-    data.largeImageKey = "bytehelp";
+    presenceData.details = "Browsing Help";
+    presenceData.largeImageKey = "bytehelp";
 
     if (path.match("/sections/")) {
-      data.details = "Viewing Section";
-      data.state = getElement("h1");
+      presenceData.details = "Viewing Section";
+      presenceData.state = getElement("h1");
     }
 
     if (path.match("/articles/")) {
-      data.details = "Viewing Article";
-      data.state = getElement(".article-title");
+      presenceData.details = "Viewing Article";
+      presenceData.state = getElement(".article-title");
     }
 
     if (path.match("/requests/new/")) {
-      data.details = "Creating";
-      data.state = "New Request";
+      presenceData.details = "Creating";
+      presenceData.state = "New Request";
     }
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = (await strings).browse;
     }
 
-    presence.setActivity(data);
-  } else {
-    presence.setTrayTitle();
-    presence.setActivity();
-  }
+    presence.setActivity(presenceData);
+  } else presence.setActivity();
 });

@@ -24,10 +24,9 @@ presence.on("UpdateData", async () => {
       ).textContent;
       try {
         presenceData.details = `Player: ${playerNickname}`;
-        const playerClan = document.querySelector(
-          "#s4db-player-view-clan > a"
-        ).textContent;
-        presenceData.details += `(${playerClan})`;
+        presenceData.details += `(${
+          document.querySelector("#s4db-player-view-clan > a").textContent
+        })`;
       } catch {
         presenceData.details = `Player: ${playerNickname}`;
       }
@@ -54,17 +53,20 @@ presence.on("UpdateData", async () => {
       presenceData.state = "News";
     }
   } else if (document.location.pathname.includes("/clan")) {
-    const clanName = document.querySelector(
+    presenceData.details = `Clan: ${
+      document.querySelector(
         "#player-profile-header-heading > div.medium.normal-color-name"
-      ).textContent,
-      clanMembers = document.querySelector(
-        "#clan-data-container > div > div.col-sm-3 > div > div.xero-pane-body > ul > li"
-      ).lastChild.textContent,
-      clanLeader = document.querySelector(
+      ).textContent
+    }`;
+    presenceData.state = `Leader: ${
+      document.querySelector(
         "#clan-data-container > div > div.col-sm-9 > div:nth-child(2) > div > div > a > div.media-body.ml-2 > div.bold"
-      ).textContent;
-    presenceData.details = `Clan: ${clanName}`;
-    presenceData.state = `Leader: ${clanLeader}, ${clanMembers}`;
+      ).textContent
+    }, ${
+      document.querySelector(
+        "#clan-data-container > div > div.col-sm-3 > div > div.xero-pane-body > ul > li"
+      ).lastChild.textContent
+    }`;
   } else if (document.location.pathname.includes("/leaderboards")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Leaderboards";
@@ -82,11 +84,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Careers";
     if (document.location.pathname.includes("/careers/position/")) {
-      const careersPosition = document.querySelector(
-        "#uniteddb-content > div.container.news-container > div.news-heading.with-button"
-      ).textContent;
       presenceData.details = "Careers";
-      presenceData.state = `Viewing ${careersPosition}`;
+      presenceData.state = `Viewing ${
+        document.querySelector(
+          "#uniteddb-content > div.container.news-container > div.news-heading.with-button"
+        ).textContent
+      }`;
     } else if (document.location.pathname.includes("/careers/application/")) {
       presenceData.details = "Careers";
       presenceData.state = "Viewing applications";
@@ -95,22 +98,24 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Download";
   } else if (document.location.pathname.includes("/challenge")) {
-    const challengesTitle = document.querySelector(
-      "#settings-data-container > div.xero-header-standalone"
-    ).textContent;
     presenceData.details = "Viewing a page:";
-    presenceData.state = `Challenges (${challengesTitle})`;
+    presenceData.state = `Challenges (${
+      document.querySelector(
+        "#settings-data-container > div.xero-header-standalone"
+      ).textContent
+    })`;
   } else if (document.location.pathname.includes("/notifications")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Notifications";
   } else if (document.location.pathname.includes("/chat")) {
     if (showChat) {
       try {
-        const chatOpponent = document.querySelector(
-          "#s4db-chat-content-header-name > a"
-        ).textContent;
         presenceData.details = "Chatting with";
-        presenceData.state = chatOpponent;
+        presenceData.state = (
+          document.querySelector(
+            "#s4db-chat-content-header-name > a"
+          ) as HTMLAnchorElement
+        ).textContent;
       } catch {
         presenceData.details = "Chatting in";
         presenceData.state = "a group chat";
@@ -153,8 +158,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Terms of Service";
   } else presenceData.details = (await strings).browsing;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

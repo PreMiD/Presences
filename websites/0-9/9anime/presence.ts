@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    data.details = document.querySelector("#info .title").textContent;
+    presenceData.details = document.querySelector("#info .title").textContent;
     data.state = tv
       ? `${
           document.querySelector(
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data, !video.paused);
   } else {
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     data.smallImageKey = "search";
     data.smallImageText = (await strings).browsing;
     presence.setActivity(data);

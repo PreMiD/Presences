@@ -5,15 +5,13 @@ const pPresence = new Presence({
 
 pPresence.on("UpdateData", async () => {
   const pData: PresenceData = {
-      largeImageKey: "icon2",
-      startTimestamp: pBrowsing
-    },
-    title: string = document
-      .getElementsByTagName("h1")[0]
-      .textContent.replace("#", "");
-
+    largeImageKey: "icon2",
+    startTimestamp: pBrowsing
+  };
   pData.details = "Viewing Docs";
-  pData.state = `Page: ${title}`;
+  pData.state = `Page: ${document
+    .getElementsByTagName("h1")[0]
+    .textContent.replace("#", "")}`;
 
   if (!pData.details) {
     pPresence.setTrayTitle();

@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
   }
 
   // Default details
-  data.details = "Browsing catalogue...";
+  presenceData.details = "Browsing catalogue...";
 
   data.startTimestamp = elapsed;
 
@@ -33,12 +33,12 @@ presence.on("UpdateData", async () => {
       slot3 = document.querySelector(".slot3"),
       isSeries = slot2 && slot3;
 
-    data.details = slot1.textContent;
+    presenceData.details = slot1.textContent;
 
     if (isSeries) {
       // A series has slot1 (the series name), slot2 (the episode)
       // and slot3 (the episode name)
-      data.details += `: ${slot2.textContent}`;
+      presenceData.details += `: ${slot2.textContent}`;
       data.state = slot3.textContent;
     } else {
       // A movie only has slot1 (the title)
@@ -68,8 +68,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
+  if (!presenceData.details) {
     presence.setActivity();
   } else presence.setActivity(data);
 });

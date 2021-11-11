@@ -6,7 +6,6 @@ let gameData: PresenceData = null;
 
 presence.on("UpdateData", async () => {
   if (!gameData || gameData.details === null) {
-    presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(gameData);
 });

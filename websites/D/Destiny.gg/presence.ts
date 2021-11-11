@@ -1,4 +1,4 @@
-const browsingStamp = Math.floor(Date.now() / 1000),
+const browsingTimestamp = Math.floor(Date.now() / 1000),
   presence = new Presence({
     clientId: "759921592926339072"
   });
@@ -13,32 +13,30 @@ presence.on("UpdateData", async () => {
     document.location.pathname === "/" ||
     document.location.pathname === "/home/"
   ) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing the homepage.";
   } else if (document.location.pathname.includes("/bigscreen")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Watching Destiny.";
     presenceData.smallImageKey = "play_icon";
   } else if (document.location.pathname.includes("/donate")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Donating to Destiny.";
     presenceData.smallImageKey = "money_icon";
   } else if (document.location.pathname.includes("/subscribe")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Subscribing to Destiny.";
     presenceData.smallImageKey = "money_icon";
   } else if (document.location.pathname.includes("/profile")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Editing D.gg profile.";
     presenceData.smallImageKey = "profile_icon";
   } else if (document.location.pathname.includes("/embed/chat")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Chatting";
     presenceData.smallImageKey = "chat_icon";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

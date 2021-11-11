@@ -15,20 +15,19 @@ presence.on("UpdateData", () => {
         .split("/")
         .filter((elm) => elm !== "").length === 1
     ) {
-      const user = Path.replace("/@", "");
       presenceData.details = "Viewing a user's profile";
-      presenceData.state = user;
+      presenceData.state = Path.replace("/@", "");
     } else {
-      const fileType: string = (
+      presenceData.details = `Editing ${
+        (
           document.querySelector(
             "#workspace-root > div > div.jsx-132086333.content > div.jsx-77352756.workspace-page-wrapper.desktop > div > div > div:nth-child(1) > header > div > div.jsx-2650114939.left > div > div > div.jsx-2652062152.workspace-header-info > div.jsx-2652062152.language-icon-container > img"
           ) as HTMLImageElement
-        ).alt,
-        projectName = `${Path.split("/").filter((elm) => elm !== "")[1]}${
-          window.location.hash ? ` - ${window.location.hash.substr(1)}` : ""
-        }`;
-      presenceData.details = `Editing ${fileType} repl`;
-      presenceData.state = projectName;
+        ).alt
+      } repl`;
+      presenceData.state = `${Path.split("/").filter((elm) => elm !== "")[1]}${
+        window.location.hash ? ` - ${window.location.hash.substr(1)}` : ""
+      }`;
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     }
   } else if (Path.startsWith("/notifications"))
@@ -37,11 +36,11 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browsing languages:";
     presenceData.state = "All languages";
   } else if (Path.startsWith("/new")) {
-    const language: string = (
-      document.querySelector("#languageSelector-input") as HTMLInputElement
-    ).value;
     presenceData.details = "Creating new repl:";
-    presenceData.state = `${language}`;
+    presenceData.state = `${
+      (document.querySelector("#languageSelector-input") as HTMLInputElement)
+        .value
+    }`;
   } else if (Path.startsWith("/repls")) {
     const repls: HTMLDivElement = document.querySelector(
         "#__next > div > div > div.jsx-2888589246.content > div.jsx-1264267603.repl-content > div.jsx-4064465542 > div:nth-child(3)"
@@ -69,7 +68,7 @@ presence.on("UpdateData", () => {
         presenceData.state = `${postType
           .charAt(0)
           .toUpperCase()}${postType.substr(1)}${
-          postElement ? ` : ${postElement.innerText}` : ""
+          postElement ? ` : ${postElement.textContent}` : ""
         }`;
         break;
     }

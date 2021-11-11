@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   title: Element,
   air: Element,
   iFrameVideo: boolean,
@@ -27,7 +27,7 @@ presence.on(
       paused: boolean;
     };
   }) => {
-    playback = data.iframeVideo.dur !== null ? true : false;
+    playback = data.iframeVideo.dur ? true : false;
 
     if (playback) {
       ({ iFrameVideo, paused } = data.iframeVideo);
@@ -36,7 +36,7 @@ presence.on(
     }
     if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
-      browsingStamp = Math.floor(Date.now() / 1000);
+      browsingTimestamp = Math.floor(Date.now() / 1000);
     }
   }
 );
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (iFrameVideo === null && isNaN(duration)) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
         "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
@@ -102,11 +102,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/movie")) {
     presenceData.details = "Browsing through";
     presenceData.state = "all movies";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/anime")) {
     presenceData.details = "Browsing through";
     presenceData.state = "all animes";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.URL.includes("/search")) {
     search = document.querySelector(
       "body > div.content-block.container.clearfix > div.search-block-wrapper.main-search.clearfix > form > input.search"
@@ -114,15 +114,15 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching for:";
     presenceData.state = search.textContent;
     presenceData.smallImageKey = "search";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/ongoing")) {
     presenceData.details = "Browsing through";
     presenceData.state = "ongoing animes";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/anime-updates")) {
     presenceData.details = "Browsing through";
     presenceData.state = "anime updates";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/post/")) {
     presenceData.details = "Reaing post:";
     title = document.querySelector(
@@ -135,21 +135,19 @@ presence.on("UpdateData", async () => {
     }
     presenceData.state = title.textContent;
     presenceData.smallImageKey = "reading";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/post")) {
     presenceData.details = "Viewing posts";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/top")) {
     presenceData.details = "Viewing the top";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.URL === "https://otakustream.tv/") {
     presenceData.details = "Browsing...";
     presenceData.smallImageKey = "reading";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

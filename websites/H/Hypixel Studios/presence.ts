@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "812069625067077662"
   }),
-  browsingStamp = Math.round(Date.now() / 1000);
+  browsingTimestamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "hypixel_studios_logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/")
@@ -59,8 +59,8 @@ presence.on("UpdateData", async () => {
       .replace(".pdf", "")
       .replace("press-release-", "")
       .split("-");
-    for (let i = 0; i < docName.length; i++)
-      docName[i] = docName[i].charAt(0).toUpperCase() + docName[i].slice(1);
+    for (; i < docName.length; i++)
+      docName[0] = docName[i].charAt(0).toUpperCase() + docName[i].slice(1);
     presenceData.details = "Reading the document";
     presenceData.state = docName.join(" ");
     presenceData.smallImageKey = "reading";
@@ -97,8 +97,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Unknown page";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,9 +1,9 @@
 const iframe = new iFrame();
 
 interface QuizletWindow {
-  dataLayer?: Array<{
+  dataLayer?: {
     event: string;
-  }>;
+  }[];
 }
 
 iframe.on("UpdateData", async () => {

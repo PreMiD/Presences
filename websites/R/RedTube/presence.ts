@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       presenceData: PresenceData = {
-        details: title ? title.innerText : "Title not found...",
+        details: title ? title.textContent : "Title not found...",
         state: uploader ? uploader.textContent : "Uploader not found...",
         largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
         endTimestamp: timestamps[1]
       };
 
-    presence.setTrayTitle(video.paused ? "" : title.innerText);
+    presence.setTrayTitle(video.paused ? "" : title.textContent);
 
     //* Remove timestamps if paused
     if (video.paused) {
@@ -43,6 +43,5 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !video.paused);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

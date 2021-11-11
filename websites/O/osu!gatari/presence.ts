@@ -20,46 +20,43 @@ presence.on("UpdateData", async () => {
     if (title !== null && act !== null) {
       customData = true;
 
-      const beatmapData: PresenceData = {
+      presence.setActivity({
         details: "Looking at the beatmap:",
-        state: `${(act as HTMLElement).innerText} - ${
-          (title as HTMLElement).innerText
+        state: `${(act as HTMLElement).textContent} - ${
+          (title as HTMLElement).textContent
         }`,
         largeImageKey: "logo"
-      };
-      presence.setActivity(beatmapData);
+      });
     } else presenceData.details = "Searching for new beatmaps";
   } else if (document.location.pathname.startsWith("/s/")) {
-    const title = document.querySelector(".map-title"),
-      act = document.querySelector(".map-artist");
-
-    if (title !== null && act !== null) {
+    if (
+      document.querySelector(".map-title") !== null &&
+      document.querySelector(".map-artist") !== null
+    ) {
       customData = true;
 
-      const beatmapData: PresenceData = {
+      presence.setActivity({
         details: "Looking at the beatmap:",
-        state: `${(act as HTMLElement).innerText} - ${
-          (title as HTMLElement).innerText
+        state: `${(act as HTMLElement).textContent} - ${
+          (title as HTMLElement).textContent
         }`,
         largeImageKey: "logo"
-      };
-      presence.setActivity(beatmapData);
+      });
     } else presenceData.details = "Searching for new beatmaps";
   } else if (document.location.pathname.startsWith("/b/")) {
-    const title = document.querySelector(".map-title"),
-      act = document.querySelector(".map-artist");
-
-    if (title !== null && act !== null) {
+    if (
+      document.querySelector(".map-title") !== null &&
+      document.querySelector(".map-artist") !== null
+    ) {
       customData = true;
 
-      const beatmapData: PresenceData = {
+      presence.setActivity({
         details: "Looking at the beatmap:",
-        state: `${(act as HTMLElement).innerText} - ${
-          (title as HTMLElement).innerText
+        state: `${(act as HTMLElement).textContent} - ${
+          (title as HTMLElement).textContent
         }`,
         largeImageKey: "logo"
-      };
-      presence.setActivity(beatmapData);
+      });
     } else presenceData.details = "Searching for new beatmaps";
   } else if (document.location.pathname.startsWith("/leaderboard/osu")) {
     presenceData.details = "Browsing rankings";
@@ -93,18 +90,15 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/about"))
     presenceData.details = "Browsing About";
   else if (document.location.pathname.startsWith("/docs/")) {
-    const doc = document.querySelector(".ban-stroke1"),
-      title = document.querySelector(".ban-stroke2");
-
-    if (doc !== null && title !== null) {
+    const doc = document.querySelector(".ban-stroke1");
+    if (doc !== null && document.querySelector(".ban-stroke2") !== null) {
       customData = true;
 
-      const beatmapData: PresenceData = {
-        details: `Browsing ${(doc as HTMLElement).innerText}`,
-        state: (title as HTMLElement).innerText,
+      presence.setActivity({
+        details: `Browsing ${(doc as HTMLElement).textContent}`,
+        state: (title as HTMLElement).textContent,
         largeImageKey: "logo"
-      };
-      presence.setActivity(beatmapData);
+      });
     } else presenceData.details = "Browsing Documentation";
   } else if (document.location.pathname.startsWith("/user/notifications"))
     presenceData.details = "Browsing Notifications";
@@ -134,18 +128,18 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/team"))
     presenceData.details = "Look at Garati Team";
   else if (document.location.pathname.startsWith("/u")) {
-    const name: string = (document.querySelector(".user-name") as HTMLElement)
-      .innerText;
     customData = true;
-    const profileData: PresenceData = {
-      details: `Looking at ${name}'s Profile`,
+
+    presence.setActivity({
+      details: `Looking at ${
+        (document.querySelector(".user-name") as HTMLElement).textContent
+      }'s Profile`,
       state: `Performance: ${
         (document.querySelector("#chart1 > div > span") as HTMLElement)
-          .innerText
+          .textContent
       }`,
       largeImageKey: "logo"
-    };
-    presence.setActivity(profileData);
+    });
   }
 
   if (!customData) presence.setActivity(presenceData);

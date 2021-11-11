@@ -9,12 +9,11 @@ iframe.on("UpdateData", async () => {
   ) {
     const video = document.querySelector("video");
     if (video !== null) {
-      const played = video.currentTime !== 0;
       iframe.send({
         current: video.currentTime,
         duration: video.duration,
         paused: video.paused,
-        played
+        played: video.currentTime !== 0
       });
     }
   }

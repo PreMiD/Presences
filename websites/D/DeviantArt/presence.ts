@@ -4,11 +4,11 @@ const presence = new Presence({
 
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -29,7 +29,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -115,7 +115,7 @@ const updateCallback = {
       if (document.querySelector("#group")) profileType = "group";
       else profileType = "user";
 
-      const lastItem = (array: NodeList | Array<unknown>): unknown => {
+      const lastItem = (array: NodeList | unknown[]): unknown => {
           return array[array.length - 1];
         },
         getName = (override = false): string => {
@@ -367,28 +367,24 @@ const updateCallback = {
                 presenceData.state = `${
                   document.querySelector("h2.uUWfu").textContent
                 } by ${getName()}`;
-              } else {
-                if (profileType === "group" && !currentPath[2])
-                  presenceData.state = getName(true);
-                else {
-                  if (!document.querySelector(".gallery .active")) {
-                    presenceData.state = `${
-                      document.querySelector(".folder-title").textContent
-                    } by ${getName(true)}`;
-                  } else if (
-                    document
-                      .querySelector(".gallery .active")
-                      .textContent.slice(1) === "Featured"
-                  )
-                    presenceData.state = `Featured by ${getName(true)}`;
-                  else if (
-                    document
-                      .querySelector(".gallery .active")
-                      .textContent.slice(1) === "All"
-                  )
-                    presenceData.state = `All by ${getName(true)}`;
-                }
-              }
+              } else if (profileType === "group" && !currentPath[2])
+                presenceData.state = getName(true);
+              else if (!document.querySelector(".gallery .active")) {
+                presenceData.state = `${
+                  document.querySelector(".folder-title").textContent
+                } by ${getName(true)}`;
+              } else if (
+                document
+                  .querySelector(".gallery .active")
+                  .textContent.slice(1) === "Featured"
+              )
+                presenceData.state = `Featured by ${getName(true)}`;
+              else if (
+                document
+                  .querySelector(".gallery .active")
+                  .textContent.slice(1) === "All"
+              )
+                presenceData.state = `All by ${getName(true)}`;
 
               /* The functions below are vaild for users only. */
             } else if (currentPath[1] === "print") {

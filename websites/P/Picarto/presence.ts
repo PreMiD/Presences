@@ -8,7 +8,7 @@ const presence = new Presence({
   presenceData: PresenceData = {
     largeImageKey: "logo"
   },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector(
@@ -20,7 +20,9 @@ presence.on("UpdateData", async () => {
         "#userbar-name .d-flex .d-inline-block"
       );
     presenceData.details =
-      title !== null ? (title as HTMLElement).innerText : "Title not found...";
+      title !== null
+        ? (title as HTMLElement).textContent
+        : "Title not found...";
     presenceData.state =
       uploader !== null
         ? (uploader as HTMLElement).textContent
@@ -30,9 +32,11 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
-    presence.setTrayTitle(video.paused ? "" : (title as HTMLElement).innerText);
+    presence.setTrayTitle(
+      video.paused ? "" : (title as HTMLElement).textContent
+    );
 
     if (video.paused) {
       delete presenceData.startTimestamp;
@@ -42,10 +46,9 @@ presence.on("UpdateData", async () => {
     if (title !== null && uploader !== null)
       presence.setActivity(presenceData, !video.paused);
   } else {
-    const pageData: PresenceData = {
+    presence.setActivity({
       details: "Browsing..",
       largeImageKey: "logo"
-    };
-    presence.setActivity(pageData);
+    });
   }
 });

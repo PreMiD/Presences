@@ -35,12 +35,12 @@ function getQuery() {
           }
         ) => {
           if (!context) return null;
-          const pageType = (
-            document.querySelector<HTMLElement>("header.listing-header>h1")
-              .innerText as string
-          )?.trim();
+
           data.state = strings.browsing;
-          data.details = `${pageType}, Page ${query?.page || 1}`;
+          presenceData.details = `${(
+            document.querySelector<HTMLElement>("header.listing-header>h1")
+              .textContent as string
+          )?.trim()}, Page ${query?.page || 1}`;
           return data;
         }
       },
@@ -63,10 +63,10 @@ function getQuery() {
             document.querySelector<HTMLElement>(
               "#forums-title .forum-thread-title>a"
             )
-          )?.innerText as string;
+          )?.textContent as string;
           if (!pageTitle) return;
           data.state = strings.reading;
-          data.details = `${pageTitle}`;
+          presenceData.details = `${pageTitle}`;
           delete data.buttons;
           return data;
         }
@@ -86,9 +86,9 @@ function getQuery() {
         ) => {
           if (!context) return null;
           data.state = strings.searching;
-          data.details = `${decodeURIComponent(
+          presenceData.details = `${decodeURIComponent(
             document.querySelector<HTMLElement>("span.search-term")
-              ?.innerText ??
+              ?.textContent ??
               query?.q ??
               "Invalid Search Term"
           )}, Page ${query?.page || 1}`;
@@ -111,9 +111,9 @@ function getQuery() {
           if (!context) return null;
           const tags = Array.from(
             document.querySelectorAll<HTMLElement>("#tags>.tag-sfw") || []
-          ).map((x) => x.innerText);
+          ).map((x) => x.textContent);
           data.state = "Viewing...";
-          data.details =
+          presenceData.details =
             tags.length > 0
               ? tags.slice(0, 3).join(", ")
               : "Wallpaper has no tags";
@@ -139,7 +139,7 @@ function getQuery() {
         ) => {
           if (!context) return null;
           data.state = strings.browsing;
-          data.details = "";
+          presenceData.details = "";
           return data;
         }
       }
@@ -177,13 +177,11 @@ function getQuery() {
         );
         return result.then((data) => {
           if (!data?.details) {
-            data.details = strings.browsing;
-            presence.setTrayTitle();
+            presenceData.details = strings.browsing;
+
             presence.setActivity();
-          } else {
-            if (data) presence.setActivity(data);
-            else presence.setActivity();
-          }
+          } else if (data) presence.setActivity(data);
+          else presence.setActivity();
           return data;
         });
       }

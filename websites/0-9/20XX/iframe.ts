@@ -19,7 +19,7 @@ interface Main20XX {
     };
     ui: {
       score: {
-        scores: Array<Score20XX>;
+        scores: Score20XX[];
       };
     };
   };
@@ -49,8 +49,8 @@ interface Map20XX {
     x: number;
     y: number;
   };
-  spawns: Array<Spawn20XX>;
-  doodads: Array<Dooads>;
+  spawns: Spawn20XX[];
+  doodads: Dooads[];
 }
 
 interface Dooads {
@@ -75,38 +75,42 @@ interface Spawn20XX {
 
 // Since maps don't have IDs in the game object, we can infer
 // what map is being played by it's data.
-const guessKeys: ItemMap = {
-  // 'xBound:yBound:camPosX:camPosY:spawnCount:doodadCount': 'mapID'
-  "32:32:11:15.75:24:36": "attack",
-  "32:32:15.5:15.5:29:88": "combat",
-  "24:48:11.5:23.5:43:106": "battle",
-  "48:48:23:22:62:337": "big",
-  "32:32:15.5:15.5:39:78": "final",
-  "32:32:14.5:5.5:44:84": "area",
-  "32:32:n:48:49": "location",
-  "32:32:15:15:56:66": "position",
-  "32:32:15.5:15.5:39:57": "point",
-  "48:28:23.5:13.5:55:160": "platform",
-  "32:32:15.5:15.5:58:57": "vector",
-  "32:32:n:33:163": "dig",
-  "48:48:23.5:23.5:44:101": "war",
-  "32:32:15.5:15.25:46:72": "unearth",
-  "48:48:23:23:46:492": "excavate"
-};
 
 // Guesses the map via the map object
 function guessMap(map: Map20XX): string {
-  const camera = map.spawns.find((spawn: Spawn20XX) => spawn.type === "camera"),
-    cameraKey = camera ? `${camera.pos.x}:${camera.pos.y}` : "n",
-    guessKey = `${map.size.x}:${map.size.y}:${cameraKey}:${map.spawns.length}:${map.doodads.length}`;
-  return guessKeys[guessKey] || null;
+  const camera = map.spawns.find((spawn: Spawn20XX) => spawn.type === "camera");
+
+  return (
+    {
+      // 'xBound:yBound:camPosX:camPosY:spawnCount:doodadCount': 'mapID'
+      "32:32:11:15.75:24:36": "attack",
+      "32:32:15.5:15.5:29:88": "combat",
+      "24:48:11.5:23.5:43:106": "battle",
+      "48:48:23:22:62:337": "big",
+      "32:32:15.5:15.5:39:78": "final",
+      "32:32:14.5:5.5:44:84": "area",
+      "32:32:n:48:49": "location",
+      "32:32:15:15:56:66": "position",
+      "32:32:15.5:15.5:39:57": "point",
+      "48:28:23.5:13.5:55:160": "platform",
+      "32:32:15.5:15.5:58:57": "vector",
+      "32:32:n:33:163": "dig",
+      "48:48:23.5:23.5:44:101": "war",
+      "32:32:15.5:15.25:46:72": "unearth",
+      "48:48:23:23:46:492": "excavate"
+    }[
+      `${map.size.x}:${map.size.y}:${
+        camera ? `${camera.pos.x}:${camera.pos.y}` : "n"
+      }:${map.spawns.length}:${map.doodads.length}`
+    ] || null
+  );
 }
 
 iframe.on("UpdateData", async () => {
   const { main } = window as Window20XX;
   if (!main) return;
 
-  const data = {
+  iframe.send({
     user: main.net.user
       ? {
           displayName: main.net.display,
@@ -133,7 +137,5 @@ iframe.on("UpdateData", async () => {
         }
       : null,
     nav: main.menu.lastNav
-  };
-
-  iframe.send(data);
+  });
 });

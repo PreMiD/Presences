@@ -50,6 +50,151 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
+  const 
+    path = location.pathname.replace(/\/?$/, "/"),
+    showSearch = await presence.getSetting("search"),
+    showTimestamps = await presence.getSetting("timestamp");
+
+  let data: PresenceData = {
+    largeImageKey: "userbenchmark",
+    startTimestamp: elapsed
+  };
+
+  if (document.location.href !== prevUrl) {
+    prevUrl = document.location.href;
+    elapsed = Math.floor(Date.now() / 1000);
+  }
+
+  for (const [k, v] of Object.entries(statics))
+    if (path.match(k)) data = { ...data, ...v };
+
+  if (path === "/") {
+    presenceData.details = "Browsing...";
+    data.state = "Home";
+  }
+
+  if (path.includes("/Compare/")) {
+    presenceData.details = `Comparing ${getElement(".fastinslowout.active")}s...`;
+
+    const parseComparison = (text: string, date: string): string => {
+        return date ? text : "Unspecified";
+      },
+      comp1 = getElement("#select2-chosen-1"),
+      comp2 = getElement("#select2-chosen-2"),
+      compDate1 = getElement(".cmp-cpt-l"),
+      compDate2 = getElement(".cmp-cpt-r");
+
+    data.state = `${parseComparison(comp1, compDate1)} vs ${parseComparison(
+      comp2,
+      compDate2
+    )}`;
+  }
+
+  if (path.includes("/EFps/")) {
+    presenceData.details = "Comparing PC with EFps...";
+
+    const games = [
+        "Counter Strike: Global Offensive",
+        "Grand Theft Auto 5",
+        "Overwatch",
+        "PlayerUnknown's Battlegrounds",
+        "Fortnite"
+      ],
+      activeBtn = document.querySelector(
+        ".btn-group-justified > .btn.btn-default.active"
+      ),
+      btnId = Array.from(activeBtn.parentNode.children).indexOf(activeBtn);
+
+    data.state = games[btnId];
+  }
+
+  if (path.includes("/User/")) {
+    presenceData.details = "Viewing Profile...";
+    data.state = `${getElement(".lightblacktext > span")} (${getElement(
+      "li.active > a"
+    )
+      .split(" ")
+      .shift()})`;
+  }
+
+  if (path.includes("/UserRun/")) {
+    presenceData.details = "Viewing Performance Report...";
+
+    const [id] = path.split("/").slice(-2);
+    data.state = `${id} - ${getElement(".pg-head-toption-post")}`;
+  }
+
+  if (path.includes("/PCGame/")) {
+    presenceData.details = "Viewing PC Game...";
+    data.state = getElement(".stealthlink");
+  }
+
+  if (showSearch && path.includes("/Search/")) {
+    presenceData.details = "Searching...";
+
+    const searchBox: HTMLInputElement = document.querySelector(
+      ".top-menu-search-input"
+    );
+    data.state = searchBox.value;
+  }
+
+  if (path.includes("/Faq/")) {
+    presenceData.details = "Viewing FAQ...";
+    data.state = getElement(".stealthlink");
+  }
+
+  if (const presence = new Presence({
+    clientId: "735229766701154357"
+  }),
+  strings = presence.getStrings({
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
+  getElement = (query: string): string | undefined => {
+    return document.querySelector(query)?.textContent;
+  };
+
+let elapsed = Math.floor(Date.now() / 1000),
+  prevUrl = document.location.href;
+
+const statics = {
+  "/pages/global/pagegone.jsf/": {
+    details: "404",
+    state: "Not Found"
+  },
+  "/page/login/": {
+    details: "Logging In..."
+  },
+  "/page/register/": {
+    details: "Registering..."
+  },
+  "/page/about/": {
+    details: "Viewing Page...",
+    state: "About"
+  },
+  "/page/guide/": {
+    details: "Viewing Page...",
+    state: "User Guide"
+  },
+  "/page/privacy/": {
+    details: "Viewing Page...",
+    state: "Privacy Policy"
+  },
+  "/page/developer/": {
+    details: "Viewing Page...",
+    state: "Developer Resources"
+  },
+  "/Top/": {
+    details: "Viewing Page...",
+    state: "Top Hardware"
+  },
+  "/Software/": {
+    details: "Viewing Page...",
+    state: "PC Software"
+  }
+};
+
+presence.on("UpdateData", async () => {
   const { host } = location,
     path = location.pathname.replace(/\/?$/, "/"),
     showSearch = await presence.getSetting("search"),
@@ -69,12 +214,12 @@ presence.on("UpdateData", async () => {
     if (path.match(k)) data = { ...data, ...v };
 
   if (path === "/") {
-    data.details = "Browsing...";
+    presenceData.details = "Browsing...";
     data.state = "Home";
   }
 
   if (path.includes("/Compare/")) {
-    data.details = `Comparing ${getElement(".fastinslowout.active")}s...`;
+    presenceData.details = `Comparing ${getElement(".fastinslowout.active")}s...`;
 
     const parseComparison = (text: string, date: string): string => {
         return date ? text : "Unspecified";
@@ -91,7 +236,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (path.includes("/EFps/")) {
-    data.details = "Comparing PC with EFps...";
+    presenceData.details = "Comparing PC with EFps...";
 
     const games = [
         "Counter Strike: Global Offensive",
@@ -109,7 +254,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (path.includes("/User/")) {
-    data.details = "Viewing Profile...";
+    presenceData.details = "Viewing Profile...";
     data.state = `${getElement(".lightblacktext > span")} (${getElement(
       "li.active > a"
     )
@@ -118,19 +263,19 @@ presence.on("UpdateData", async () => {
   }
 
   if (path.includes("/UserRun/")) {
-    data.details = "Viewing Performance Report...";
+    presenceData.details = "Viewing Performance Report...";
 
     const [id] = path.split("/").slice(-2);
     data.state = `${id} - ${getElement(".pg-head-toption-post")}`;
   }
 
   if (path.includes("/PCGame/")) {
-    data.details = "Viewing PC Game...";
+    presenceData.details = "Viewing PC Game...";
     data.state = getElement(".stealthlink");
   }
 
   if (showSearch && path.includes("/Search/")) {
-    data.details = "Searching...";
+    presenceData.details = "Searching...";
 
     const searchBox: HTMLInputElement = document.querySelector(
       ".top-menu-search-input"
@@ -139,13 +284,13 @@ presence.on("UpdateData", async () => {
   }
 
   if (path.includes("/Faq/")) {
-    data.details = "Viewing FAQ...";
+    presenceData.details = "Viewing FAQ...";
     data.state = getElement(".stealthlink");
   }
 
   if (host === "www.userbenchmark.com") {
     if (path.includes("/PCBuilder/")) {
-      data.details = "Building PC...";
+      presenceData.details = "Building PC...";
 
       const compCount = document.querySelector(
         ".container-fluid table > tbody:nth-child(2)"
@@ -154,7 +299,7 @@ presence.on("UpdateData", async () => {
     }
 
     if (path.includes("/System/")) {
-      data.details = "Viewing Motherboard...";
+      presenceData.details = "Viewing Motherboard...";
       data.state = `${getElement(".pg-head-toption > a")} ${getElement(
         ".stealthlink"
       )}`;
@@ -162,17 +307,17 @@ presence.on("UpdateData", async () => {
   } else {
     const product = getElement(".pg-head-title .stealthlink");
     if (product) {
-      data.details = `Viewing ${getElement(".fastinslowout.active")}...`;
+      presenceData.details = `Viewing ${getElement(".fastinslowout.active")}...`;
       data.state = `${getElement(".pg-head-toption > a")} ${product}`;
     }
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;
     }
-    if (data.details.match("(Searching)")) {
+    if (presenceData.details.match("(Searching)")) {
       data.smallImageKey = "search";
       data.smallImageText = (await strings).search;
     }
@@ -190,6 +335,56 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
+  
+  }
+});
+ === "www.userbenchmark.com") {
+    if (path.includes("/PCBuilder/")) {
+      presenceData.details = "Building PC...";
+
+      
+      data.state = `${document.querySelector(
+        ".container-fluid table > tbody:nth-child(2)"
+      )?.childElementCount} Components`;
+    }
+
+    if (path.includes("/System/")) {
+      presenceData.details = "Viewing Motherboard...";
+      data.state = `${getElement(".pg-head-toption > a")} ${getElement(
+        ".stealthlink"
+      )}`;
+    }
+  } else {
+    const product = getElement(".pg-head-title .stealthlink");
+    if (product) {
+      presenceData.details = `Viewing ${getElement(".fastinslowout.active")}...`;
+      data.state = `${getElement(".pg-head-toption > a")} ${product}`;
+    }
+  }
+
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
+      data.smallImageKey = "reading";
+      data.smallImageText = (await strings).browse;
+    }
+    if (presenceData.details.match("(Searching)")) {
+      data.smallImageKey = "search";
+      data.smallImageText = (await strings).search;
+    }
+    if (!showTimestamps) {
+      delete data.startTimestamp;
+      delete data.endTimestamp;
+    }
+
+    if (path === "/" && !host.startsWith("www")) {
+      const hardware = host.split(".").shift();
+      data.smallImageKey = hardware;
+      data.smallImageText = hardware.toUpperCase();
+    }
+
+    presence.setActivity(data);
+  } else {
+    presence.setActivity();
+  
   }
 });

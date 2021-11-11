@@ -1,16 +1,15 @@
 const presence = new Presence({
     clientId: "815515385326469131"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
-    page = window.location.pathname,
-    expage = window.location.href;
+    page = window.location.pathname;
   if (page === "/") {
     search = document.querySelector(
       "#masthead > div.header-search-wrap > div > form > label > input"
@@ -38,11 +37,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viendo Noticia Sobre:";
     presenceData.state = title.textContent;
   } else if (page.includes("/members/")) {
-    const titles = document.querySelector(
-      "#item-header-content > div > div > div.flex.align-items-center.member-title-wrap > h2"
-    );
     presenceData.details = "Viendo:";
-    presenceData.state = `${titles.textContent}'s Perfil`;
+    presenceData.state = `${
+      (
+        document.querySelector(
+          "#item-header-content > div > div > div.flex.align-items-center.member-title-wrap > h2"
+        ) as HTMLHeadingElement
+      ).textContent
+    }'s Perfil`;
   } else if (page.includes("/category/")) {
     title = document.querySelector("#main > header > h1 > span");
     presenceData.details = "Viendo Categoría:";
@@ -54,10 +56,12 @@ presence.on("UpdateData", async () => {
   } else if (page === "/contacto/") {
     presenceData.details = "Viendo:";
     presenceData.state = "Contacto";
-  } else if (expage.includes("/wp-login.php?action=lostpassword")) {
+  } else if (
+    window.location.href.includes("/wp-login.php?action=lostpassword")
+  ) {
     presenceData.details = "Viendo:";
     presenceData.state = "Contraseña Olvidada";
-  } else if (expage === "https://worldhideaway.com/wp-login.php")
+  } else if (window.location.href === "https://worldhideaway.com/wp-login.php")
     presenceData.details = "Conectar";
   else if (page === "/register/") presenceData.details = "Registro";
   else if (page === "/logros/") {
@@ -97,8 +101,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

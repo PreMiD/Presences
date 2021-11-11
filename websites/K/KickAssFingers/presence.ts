@@ -14,14 +14,11 @@ presence.on("UpdateData", () => {
   presenceData.details = vars.details;
 
   if (vars.page === "test") {
-    const testActive =
-      document.querySelector("#resultsContent").textContent === "";
-
     if (live?.chrOk === 0 && live?.chrKo === 0) presenceData.state = vars.ready;
     else
       presenceData.state = `${live.worPm} wpm, ${live.points} ${vars.points}, ${live.chrAcc}% ${vars.accuracy}`;
 
-    if (testActive) {
+    if (document.querySelector("#resultsContent").textContent === "") {
       if (vars.testType === 0) {
         const residualTime = document
           .querySelector("#premIdVars")
@@ -30,10 +27,8 @@ presence.on("UpdateData", () => {
           presenceData.endTimestamp =
             Math.floor(Date.now() / 1000) + (parseInt(residualTime) + 1);
         }
-      } else {
-        if (presenceData.state !== vars.ready)
-          presenceData.state += `, ${Math.round(live.time)} ${vars.seconds}`;
-      }
+      } else if (presenceData.state !== vars.ready)
+        presenceData.state += `, ${Math.round(live.time)} ${vars.seconds}`;
     } else {
       presenceData.details = vars.finished;
 
@@ -51,8 +46,6 @@ presence.on("UpdateData", () => {
     delete presenceData.state;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

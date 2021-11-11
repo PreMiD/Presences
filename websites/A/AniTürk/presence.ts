@@ -36,14 +36,14 @@ presence.on("UpdateData", async () => {
 
   //Episode part
   if (title && episode) {
-    data.details = title.textContent;
+    presenceData.details = title.textContent;
     data.state = episode.textContent.replace(
       title.textContent.split(" ").slice(1).join(" "),
       ""
     );
   } else {
     //Home page part
-    data.details = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
     data.startTimestamp = startTimestamp;
   }
 

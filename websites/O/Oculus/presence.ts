@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "837833278777065503"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 /**
  * Replaces "-" with " ", optional first letter of every word in uppercase (the first letter will be always uppercase)
@@ -24,7 +24,7 @@ function splitOnDashes(input: string, everyFirstLetterUppercase = false) {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "oculus-logo3",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     hostName = document.location.hostname.replace("www.", ""),
     path = window.location.pathname.split("/").slice(1),
@@ -148,10 +148,10 @@ presence.on("UpdateData", async () => {
             if (path[2] === "" || !path[2]) presenceData.state = "Home";
             // Section aka showcases
             else if (path[2] === "section") {
-              const showCase = document.getElementsByClassName(
-                "section-header__title"
-              )[0]?.textContent;
-              presenceData.state = `Showcase: ${showCase ?? "Loading..."}`;
+              presenceData.state = `Showcase: ${
+                document.getElementsByClassName("section-header__title")[0]
+                  ?.textContent ?? "Loading..."
+              }`;
               presenceData.buttons.push({
                 label: "View showcase",
                 url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
@@ -172,10 +172,9 @@ presence.on("UpdateData", async () => {
 
               // Searching
             } else if (path[2] === "search") {
-              const searchText = document.querySelector(
-                "disco-search__query"
-              )?.textContent;
-              presenceData.state = `Searching for: ${searchText}`;
+              presenceData.state = `Searching for: ${
+                document.querySelector("disco-search__query")?.textContent
+              }`;
               presenceData.smallImageKey = "search";
 
               // Bundles
@@ -183,10 +182,11 @@ presence.on("UpdateData", async () => {
               document.querySelector("div.bundle-detail-page__description > h1")
                 ?.textContent
             ) {
-              const bundle = document.querySelector(
-                "div.bundle-detail-page__description > h1"
-              )?.textContent;
-              presenceData.state = `Bundle: ${bundle ?? "Loading..."}`;
+              presenceData.state = `Bundle: ${
+                document.querySelector(
+                  "div.bundle-detail-page__description > h1"
+                )?.textContent ?? "Loading..."
+              }`;
               presenceData.buttons.push({
                 label: "View bundle",
                 url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
@@ -194,10 +194,10 @@ presence.on("UpdateData", async () => {
 
               // Games
             } else {
-              const game = document.getElementsByClassName(
-                "app-description__title"
-              )[0]?.textContent;
-              presenceData.state = `Game: ${game ?? "Loading..."}`;
+              presenceData.state = `Game: ${
+                document.getElementsByClassName("app-description__title")[0]
+                  ?.textContent ?? "Loading..."
+              }`;
               presenceData.buttons.push({
                 label: "View game",
                 url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
@@ -227,7 +227,6 @@ presence.on("UpdateData", async () => {
   }
 
   if (!presenceData.details) {
-    presence.setTrayTitle();
     presence.setActivity();
   } else {
     // Delete button(s) / timestamp relating to the setting

@@ -1,7 +1,7 @@
 ﻿const presence = new Presence({
     clientId: "839924185278840853"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const elapsed = await presence.getSetting("elapsed"),
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (document.location.pathname.includes("/bs-viewer/")) {

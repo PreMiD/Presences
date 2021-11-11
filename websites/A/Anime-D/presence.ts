@@ -14,7 +14,7 @@ let video = {
   },
   Sub: string;
 // Const thing
-const browsingStamp = Math.floor(Date.now() / 1000),
+const browsingTimestamp = Math.floor(Date.now() / 1000),
   title =
     document.querySelector(".panel-heading")?.textContent ?? "ไม่ทราบชื่อ",
   titlemovie =
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "site",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   // Presence
@@ -50,24 +50,17 @@ presence.on("UpdateData", async () => {
   else if (path.pathname.includes("index.html"))
     presenceData.state = "อนิเมะอัพเดตล่าสุด";
   else if (path.pathname.includes("genre")) {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "ประเภท ";
     presenceData.state = title;
   } else if (path.pathname.includes("catalog")) {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "หมวดหมู่ ";
     presenceData.state = title;
   } else if (path.search.includes("search")) {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "ค้นหา ";
     presenceData.state = title;
   } else if (path.pathname.includes("play")) {
     let episode, Movie;
-    presenceData.startTimestamp = browsingStamp;
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.current),
-      Math.floor(video.duration)
-    );
+
     if (playvdo.includes("ตอนที่")) {
       const info = playvdo.split("ตอนที่");
       episode = info.pop();
@@ -109,7 +102,12 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    if (!video.paused) [, presenceData.endTimestamp] = timestamps;
+    if (!video.paused) {
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        Math.floor(video.current),
+        Math.floor(video.duration)
+      );
+    }
     if (buttons) {
       presenceData.buttons = [
         {
@@ -134,8 +132,6 @@ presence.on("UpdateData", async () => {
     delete presenceData.details;
     delete presenceData.buttons;
   }
-  if (!presenceData.state) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

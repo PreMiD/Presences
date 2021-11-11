@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "715667985267949649"
 });
 let title, subTitle, chapter, quiz, search;
-const browsingStamp = Math.floor(Date.now() / 1000),
+const browsingTimestamp = Math.floor(Date.now() / 1000),
   path = document.location.pathname;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   };
   if (path === "/") {
     presenceData.details = "Viewing Home";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (path.includes("/literature/")) {
     title = document.querySelector(
       "#mainTag > section > div:nth-child(1) > div.small-12.medium-9.columns > div.title-wrapper > h1"
@@ -23,27 +23,27 @@ presence.on("UpdateData", async () => {
     ) as HTMLTextAreaElement;
     quiz = document.querySelector("#headerid");
     if (title && chapter) {
-      presenceData.details = title.innerText;
-      presenceData.state = chapter.innerText;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = title.textContent;
+      presenceData.state = chapter.textContent;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "read";
       presenceData.smallImageText = "Reading";
     } else if (title && subTitle) {
-      presenceData.details = title.innerText;
-      presenceData.state = subTitle.innerText;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = title.textContent;
+      presenceData.state = subTitle.textContent;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "read";
       presenceData.smallImageText = "Reading";
     } else if (quiz) {
       presenceData.details = "Taking a Quiz";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else {
       title = document.querySelector(
         "#mainTag > div.row.background-white > div.small-12.medium-9.columns.left-rail-column.clear-padding-for-small-only > div > div.small-12.medium-9.columns > div > div > div > div.small-12.medium-12.columns.clear-padding > article > h2"
       ) as HTMLTextAreaElement;
       if (title) {
-        presenceData.details = title.innerText;
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = title.textContent;
+        presenceData.startTimestamp = browsingTimestamp;
       }
     }
   } else if (path.includes("/test-prep")) {
@@ -58,23 +58,23 @@ presence.on("UpdateData", async () => {
     ) as HTMLTextAreaElement;
     quiz = document.querySelector("#headerid");
     if (title && chapter) {
-      presenceData.details = title.innerText;
-      presenceData.state = chapter.innerText;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = title.textContent;
+      presenceData.state = chapter.textContent;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "read";
       presenceData.smallImageText = "Reading";
     } else if (title && subTitle) {
-      presenceData.details = title.innerText;
-      presenceData.state = subTitle.innerText;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = title.textContent;
+      presenceData.state = subTitle.textContent;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "read";
       presenceData.smallImageText = "Reading";
     } else if (quiz) {
       presenceData.details = "Taking a Quiz";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else {
       presenceData.details = "Viewing Test Prep";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   } else if (path.includes("/study-guides/")) {
     title = document.querySelector(
@@ -88,23 +88,23 @@ presence.on("UpdateData", async () => {
     ) as HTMLTextAreaElement;
     quiz = document.querySelector("#headerid");
     if (title && chapter) {
-      presenceData.details = title.innerText;
-      presenceData.state = chapter.innerText;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = title.textContent;
+      presenceData.state = chapter.textContent;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "read";
       presenceData.smallImageText = "Reading";
     } else if (title && subTitle) {
-      presenceData.details = title.innerText;
-      presenceData.state = subTitle.innerText;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = title.textContent;
+      presenceData.state = subTitle.textContent;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "read";
       presenceData.smallImageText = "Reading";
     } else if (quiz) {
       presenceData.details = "Taking a Quiz";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else {
       presenceData.details = "Viewing Study Guides";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   } else if (path.includes("/search")) {
     search = document.querySelector(
@@ -112,8 +112,8 @@ presence.on("UpdateData", async () => {
     ) as HTMLTextAreaElement;
     if (search) {
       presenceData.details = "Searching:";
-      presenceData.state = search.innerText;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = search.textContent;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
     }
@@ -121,17 +121,15 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "#mainTag > section > div:nth-child(1) > div > div > h1"
     ) as HTMLTextAreaElement;
-    presenceData.details = `Viewing ${title.innerText}`;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = `Viewing ${title.textContent}`;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (path === "/disclaimer") {
     presenceData.details = "Viewing Disclaimer";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing a Special Page";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

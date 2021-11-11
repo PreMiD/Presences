@@ -24,19 +24,19 @@ presence.on("UpdateData", async () => {
     // In game?
     if (!document.querySelector(".end[style*=flex],.menu:not([style*=none])")) {
       // Spectating?
-      if (tsData.cellCount === 0) data.details = "Spectating";
+      if (tsData.cellCount === 0) presenceData.details = "Spectating";
       else {
-        data.details = `Playing as ${
+        presenceData.details = `Playing as ${
           localStorage.getItem("nick") || "TrickSplit.io"
         } (#${tsData.pos})`;
         data.startTimestamp = tsData.aliveTime;
       }
-    } else data.details = "Main Menu";
-  } else data.details = "Connecting...";
+    } else presenceData.details = "Main Menu";
+  } else presenceData.details = "Connecting...";
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!data.details) {
-    presence.setTrayTitle(); // Clear tray
+  if (!presenceData.details) {
+    // Clear tray
     presence.setActivity(); // Clear activity
   } else presence.setActivity(data);
 });

@@ -70,23 +70,21 @@ presence.on("UpdateData", async () => {
       !document.location.pathname
     )
       presence.setActivity(pageData);
-  } else {
-    if (
-      path1.length > 1 &&
-      path1.split("/")[2] !== null &&
-      path1.split("/")[2].length === 2
-    ) {
-      let language: string;
-      for (const value of lang.keys()) {
-        if (path1.split("/")[2] === value) {
-          language = lang.get(value);
-          break;
-        }
+  } else if (
+    path1.length > 1 &&
+    path1.split("/")[2] !== null &&
+    path1.split("/")[2].length === 2
+  ) {
+    let language: string;
+    for (const value of lang.keys()) {
+      if (path1.split("/")[2] === value) {
+        language = lang.get(value);
+        break;
       }
-      presenceData.details = "Taking a lesson";
-      presenceData.state = `Language: ${language}`;
-      presenceData.largeImageKey = "logo";
-      presence.setActivity(presenceData);
     }
+    presenceData.details = "Taking a lesson";
+    presenceData.state = `Language: ${language}`;
+    presenceData.largeImageKey = "logo";
+    presence.setActivity(presenceData);
   }
 });

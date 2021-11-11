@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 
   if (path.includes("/m/registrar/")) {
     const domainName = getElement(".domain-header-title > span");
-    data.details = domainName ? "Browsing Domain..." : "Browsing...";
+    presenceData.details = domainName ? "Browsing Domain..." : "Browsing...";
 
     const tab =
       getElement(".dreg-ogb-menu-item-selected") ||
@@ -51,29 +51,29 @@ presence.on("UpdateData", async () => {
   }
 
   if (path.includes("/m/registrar/cart/")) {
-    data.details = "Viewing Cart...";
+    presenceData.details = "Viewing Cart...";
     data.state = getElement(".item-count")?.slice(1, -1);
   }
 
   if (path.includes("/m/registrar/checkout/"))
-    data.details = "Viewing Checkout...";
+    presenceData.details = "Viewing Checkout...";
 
   if (path.includes("/m/registrar/search/")) {
-    data.details = "Searching...";
+    presenceData.details = "Searching...";
     data.state = showSearch && document.querySelector("input")?.value;
   }
 
   if (path.includes("/m/registrar/search/favorites/")) {
-    data.details = "Viewing Favorites...";
+    presenceData.details = "Viewing Favorites...";
     data.state = getElement(".mat-tab-label-active");
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;
     }
-    if (data.details.match("(Searching)")) {
+    if (presenceData.details.match("(Searching)")) {
       data.smallImageKey = "search";
       data.smallImageText = (await strings).search;
     }
@@ -87,6 +87,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

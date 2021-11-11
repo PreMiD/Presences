@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname === "/translator") {
-    const presenceData: PresenceData = {
+    presence.setActivity({
       details:
         document.getElementsByClassName("translate_from")[0].parentNode
           .textContent,
@@ -16,12 +16,10 @@ presence.on("UpdateData", async () => {
         document.getElementsByClassName("translate_to")[0].parentNode
           .textContent,
       largeImageKey: "lg-deepl"
-    };
-    presence.setActivity(presenceData);
+    });
   } else {
-    const presenceData: PresenceData = {
+    presence.setActivity({
       largeImageKey: "lg-deepl"
-    };
-    presence.setActivity(presenceData);
+    });
   }
 });

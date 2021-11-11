@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "619561001234464789",
     injectOnComplete: true
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let title: string,
   uploader: string,
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
     podcast = true;
 
   if (!podcast) {
-    if (time) presenceData.startTimestamp = browsingStamp;
+    if (time) presenceData.startTimestamp = browsingTimestamp;
     presenceData.smallImageKey = "reading";
     if (document.location.hostname === "open.spotify.com") {
       if (document.location.pathname.includes("browse/featured")) {
@@ -185,34 +185,32 @@ presence.on("UpdateData", async () => {
       control.dataset.testid === "control-button-play"
     ) {
       if (!presenceData.details) {
-        presence.setTrayTitle();
         presence.setActivity();
-      } else {
-        if (privacy) {
-          if (searching) {
-            presenceData.details = (await strings).searchSomething;
-            delete presenceData.state;
-          } else {
-            presenceData.details = (await strings).browsing;
-            delete presenceData.state;
-            delete presenceData.smallImageKey;
-          }
-          presence.setActivity(presenceData);
-        } else presence.setActivity(presenceData);
-      }
+      } else if (privacy) {
+        if (searching) {
+          presenceData.details = (await strings).searchSomething;
+          delete presenceData.state;
+        } else {
+          presenceData.details = (await strings).browsing;
+          delete presenceData.state;
+          delete presenceData.smallImageKey;
+        }
+        presence.setActivity(presenceData);
+      } else presence.setActivity(presenceData);
     } else {
       if (recentlyCleared < Date.now() - 1000) presence.clearActivity();
 
       recentlyCleared = Date.now();
     }
   } else {
-    const currentTime = presence.timestampFromFormat(
+    const [, endTimestamp] = presence.getTimestamps(
+      presence.timestampFromFormat(
         document.querySelector(".playback-bar").children[0].textContent
       ),
-      duration = presence.timestampFromFormat(
+      presence.timestampFromFormat(
         document.querySelector(".playback-bar").children[2].textContent
-      ),
-      [, endTimestamp] = presence.getTimestamps(currentTime, duration);
+      )
+    );
 
     let pause: boolean;
 

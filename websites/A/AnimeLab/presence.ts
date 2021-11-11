@@ -25,17 +25,14 @@ presence.on("UpdateData", async () => {
         ) as HTMLVideoElement,
         title = document.querySelector(".primary-title").textContent,
         user = document.querySelector(".secondary-title").textContent,
-        { currentTime, duration, paused } = video,
-        timestamps = presence.getTimestamps(
-          Math.floor(currentTime),
-          Math.floor(duration)
-        );
+        { currentTime, duration, paused } = video;
       if (!isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.smallImageText = paused
           ? (await strings).pause
           : (await strings).play;
-        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
         presenceData.details = title;
         presenceData.state = user;
@@ -81,8 +78,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing their profile...";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

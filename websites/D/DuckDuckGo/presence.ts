@@ -70,13 +70,11 @@ presence.on("UpdateData", async () => {
         "stockSearch",
         document
           .getElementsByClassName("stocks__header")[0]
-          .getElementsByTagName("a")[0].innerText
+          .getElementsByTagName("a")[0].textContent
       );
     } else presenceData.details = await handleFormatting("standardSearch");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

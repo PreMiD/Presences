@@ -80,9 +80,9 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     },
     timestamps = presence.getTimestamps(currentTime, timeEnd);
-  if (page === "/") data.details = "Betrachtet die Startseite";
+  if (page === "/") presenceData.details = "Betrachtet die Startseite";
   else if (page.startsWith("/anime/")) {
-    data.details = `${animeName.textContent}`;
+    presenceData.details = `${animeName.textContent}`;
     data.state = `${episode.textContent
       .split("Staffel")[0]
       .replace("Filme von", " ")
@@ -117,55 +117,58 @@ presence.on("UpdateData", async () => {
 
     //Obere Reiter
   } else if (page === "/animes") {
-    data.details = pages[page];
+    presenceData.details = pages[page];
     data.state = `Sortiert nach: ${genre.textContent}`;
   } else if (page === "/beliebte-animes")
     data.state = `${beliebteanime.textContent.split("|")[0]}`;
   else if (page === "/support/anleitung") {
-    data.details = pages[page];
+    presenceData.details = pages[page];
     data.state = "Die Anleitung";
   } else if (page.includes("/search")) {
-    data.details = "Sucht nach:";
+    presenceData.details = "Sucht nach:";
     data.state = `${search.textContent}`;
   } else if (page === "/animekalender") {
-    data.details = pages[page];
+    presenceData.details = pages[page];
     data.state = `${animekalender.textContent}`;
-  } else if (page === "/zufall") data.details = pages[page];
-  else if (page === "/random") data.details = pages[page];
+  } else if (page === "/zufall") presenceData.details = pages[page];
+  else if (page === "/random") presenceData.details = pages[page];
   // UNTERE REITER
-  else if (page === "/neu") data.details = pages[page];
-  else if (page === "/support/regeln") data.details = pages[page];
-  else if (page === "/dmca") data.details = pages[page];
-  else if (page === "/animewuensche") data.details = pages[page];
+  else if (page === "/neu") presenceData.details = pages[page];
+  else if (page === "/support/regeln") presenceData.details = pages[page];
+  else if (page === "/dmca") presenceData.details = pages[page];
+  else if (page === "/animewuensche") presenceData.details = pages[page];
   //Sign In & Sign Up
-  else if (page === "/login") data.details = pages[page];
-  else if (page === "/registrierung") data.details = pages[page];
+  else if (page === "/login") presenceData.details = pages[page];
+  else if (page === "/registrierung") presenceData.details = pages[page];
   //User Leiste
-  else if (page === "/account") data.details = pages[page];
+  else if (page === "/account") presenceData.details = pages[page];
   else if (page.startsWith("/user/profil/")) {
-    data.details = "Betrachtet ein Profil";
+    presenceData.details = "Betrachtet ein Profil";
     data.state = `${user.textContent}`;
     data.smallImageKey = "user";
     data.smallImageText = `${rank.textContent}`;
-  } else if (page === "/account/nachrichten") data.details = pages[page];
-  else if (page === "/account/notifications") data.details = pages[page];
-  else if (page === "/account/support") data.details = pages[page];
-  else if (page === "/account/watchlist") data.details = pages[page];
-  else if (page === "/account/subscribed") data.details = pages[page];
-  else if (page === "/account/settings") data.details = pages[page];
+  } else if (page === "/account/nachrichten")
+    presenceData.details = pages[page];
+  else if (page === "/account/notifications")
+    presenceData.details = pages[page];
+  else if (page === "/account/support") presenceData.details = pages[page];
+  else if (page === "/account/watchlist") presenceData.details = pages[page];
+  else if (page === "/account/subscribed") presenceData.details = pages[page];
+  else if (page === "/account/settings") presenceData.details = pages[page];
   //MORE PROFILE SETTINGS --
   //BUGGY 1.0.5 ??
-  else if (page.startsWith("/support/fragen")) data.details = pages[page];
-  else if (page === "/support") data.details = pages[page];
-  else if (page === "/edit:information") data.details = pages[page];
+  else if (page.startsWith("/support/fragen"))
+    presenceData.details = pages[page];
+  else if (page === "/support") presenceData.details = pages[page];
+  else if (page === "/edit:information") presenceData.details = pages[page];
   else if (page.startsWith("/katalog/"))
-    data.details = `Betrachtet Animes mit ${katalog.textContent}`;
+    presenceData.details = `Betrachtet Animes mit ${katalog.textContent}`;
   else if (page.startsWith("/support/frage/")) {
-    data.details = `Frage von ${forumname.textContent}`;
+    presenceData.details = `Frage von ${forumname.textContent}`;
     data.state = `${forum.textContent}`;
   } else if (page.startsWith("/genre/"))
-    data.details = `Sucht nach ${genre2.textContent}`;
-  else data.details = "Befindet sich auf einer Unbekannte Seite";
+    presenceData.details = `Sucht nach ${genre2.textContent}`;
+  else presenceData.details = "Befindet sich auf einer Unbekannte Seite";
 
-  if (data.details && data.state) presence.setActivity(data);
+  if (presenceData.details && data.state) presence.setActivity(data);
 });

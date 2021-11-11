@@ -21,7 +21,7 @@ async function getStrings() {
   );
 }
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   video = {
     duration: 0,
     currentTime: 0,
@@ -73,23 +73,19 @@ presence.on(
 
     if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
-      browsingStamp = Math.floor(Date.now() / 1000);
+      browsingTimestamp = Math.floor(Date.now() / 1000);
     }
   }
 );
 
 presence.on("UpdateData", async () => {
-  const timestamps = presence.getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    ),
-    presenceData: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "kaa"
     },
     buttons = await presence.getSetting("buttons"),
     newLang = await presence.getSetting("lang");
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -107,7 +103,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
       currentAnimeTitle =
         document.querySelector("a.ka-url-wrapper").textContent;
       [, currentAnimeEpisode] = document.location.pathname

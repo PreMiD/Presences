@@ -85,8 +85,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("dashboard/account"))
     presenceData.details = "Editing account settings";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
