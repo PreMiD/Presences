@@ -76,8 +76,7 @@ presence.on("UpdateData", async () => {
         if (!video.paused) {
             presenceData.startTimestamp = timestamps[0],
             presenceData.endTimestamp = timestamps[1]
-      }
-      //I want to thank the guys who made HBO Max Presence, most part of my code i've based on their code
+        }
       }
     break
 
