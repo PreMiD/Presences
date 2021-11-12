@@ -4,8 +4,8 @@
     "name": "SlowLife",
     "id": "374905512661221377"
   },
-  "service": "Apple TV",
-  "version": "1.0.3",
+  "service": "Apple TV+",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/9yI21cv.png",
   "thumbnail": "https://i.imgur.com/i7Vt4uR.png",
   "description": {
@@ -20,6 +20,7 @@
   ],
   "tags": [
     "apple-tv",
+    "apple-tv-plus",
     "movie",
     "drama"
   ],
