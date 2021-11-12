@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "jvnxs7",
+    "id": "209945797918195712"
+  },
+  "service": "Protonmail",
+  "description": {
+    "en": "ProtonMail is a free email service that encrypts users' messages.",
+    "de": "ProtonMail ist ein kostenfreier E-Mail-Dienst, der die Nachrichten der Nutzer verschlüsselt."
+  },
+  "url": "www.mail.protonmail.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/N1x321d.png",
+  "thumbnail": "https://i.imgur.com/ScRbpU2.jpeg",
+  "color": "#354B5E",
+  "tags": [
+    "mail",
+    "proton"
+  ],
+  "category": "other"
+}
