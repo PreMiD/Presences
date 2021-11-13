@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -11,7 +12,7 @@
     "ga_IE": "Féach ar anime Vietsub ardchaighdeáin ar líne saor in aisce le tarchur tapa, déantar HOT anime a nuashonrú is luaithe i Vítneam i gcónaí."
   },
   "url": "vuighe.net",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/Iikp0zo.png",
   "thumbnail": "https://i.imgur.com/bQoGS01.png",
   "color": "#d80f16",

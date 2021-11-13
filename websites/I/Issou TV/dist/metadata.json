@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Deleted 7.12i",
     "id": "591702135310385157"
@@ -13,8 +14,8 @@
     "nl": "IssouTv is een community-videohostingplatform. Humor, onbehagen, muziek, games, volwassenen ... er is voor elk wat wils."
   },
   "service": "Issou TV",
-  "version": "1.0.6",
-  "logo": "https://i.imgur.com/bDaeC8K.png",
+  "version": "1.0.9",
+  "logo": "https://i.imgur.com/eOauOMV.png",
   "thumbnail": "https://i.imgur.com/MOwagyo.png",
   "color": "#637076",
   "tags": [

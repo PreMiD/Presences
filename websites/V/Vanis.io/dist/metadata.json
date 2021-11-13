@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Mirax",
     "id": "223355525826347018"
@@ -13,7 +14,7 @@
     "vanis.io",
     "skins.vanis.io"
   ],
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/V8Cerrx.png",
   "thumbnail": "https://i.imgur.com/bNZOUoi.png",
   "color": "#ce3239",

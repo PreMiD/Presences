@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Nekolen",
     "id": "270125856679002113"
@@ -18,7 +19,7 @@
     "ga_IE": "Is oideas DIY agus láithreán faisnéise blas é alltheflavors.com."
   },
   "url": "alltheflavors.com",
-  "version": "1.4.5",
+  "version": "1.4.7",
   "thumbnail": "https://i.imgur.com/ncLBJMx.png",
   "logo": "https://i.imgur.com/y9Bj4mt.png",
   "color": "#FF6347",

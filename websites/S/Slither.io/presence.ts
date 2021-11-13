@@ -9,11 +9,11 @@ presence.on("UpdateData", () => {
 
   if (document.querySelector('[style="opacity: .8; font-weight: bold;"]')) {
     const length = document.querySelector(
-      '[style="opacity: .8; font-weight: bold;"]'
-    ).innerHTML;
-    const rank = document.querySelector('[style="opacity: .35;"]').innerHTML;
-    presenceData.details = "Length: " + length;
-    presenceData.state = "Rank: " + rank;
+        '[style="opacity: .8; font-weight: bold;"]'
+      ).innerHTML,
+      rank = document.querySelector('[style="opacity: .35;"]').innerHTML;
+    presenceData.details = `Length: ${length}`;
+    presenceData.state = `Rank: ${rank}`;
   }
 
   presence.setActivity(presenceData);

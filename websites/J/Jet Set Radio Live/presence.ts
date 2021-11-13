@@ -11,9 +11,11 @@ const presence = new Presence({
     return [Math.floor(startTime / 1000), endTime];
   },
   stationIDMap: { [key: string]: string } = {
+    outerspace: "Outer Space",
     classic: "Classic",
     future: "Future",
     ultraremixes: "Ultra Remixes",
+    garage: "The Garage",
     ggs: "GG's",
     noisetanks: "Noise Tanks",
     poisonjam: "Poison Jam",
@@ -24,18 +26,26 @@ const presence = new Presence({
     goldenrhinos: "Golden Rhinos",
     ganjah: "Ganjah",
     lofi: "Lo-Fi",
-    siivagunner: "SilvaGunner x JSR",
+    chiptunes: "Chiptunes",
+    retroremix: "Retro Remix",
+    classical: "Classical Remix",
+    revolution: "Revolution",
+    endofdays: "End of Days",
     silvagunner: "SilvaGunner x JSR",
     futuregeneration: "Future Generation",
     jetmashradio: "Jet Mash Radio",
-    djchidow: "DJ Chidow",
+    crazytaxi: "Crazy Taxi",
+    ollieking: "Ollie King",
+    toejamandearl: "Toe Jam & Earl",
     hover: "Hover",
     butterflies: "Butterflies",
-    toejamandearl: "Toe Jam & Earl",
-    ollieking: "Ollie King",
-    crazytaxi: "Crazy Taxi",
-    revolution: "Revolution",
-    endofdays: "End of Days"
+    bonafidebloom: "BonafideBloom",
+    djchidow: "DJ Chidow",
+    verafx: "VeraFX",
+    summer: "Summer",
+    halloween: "Halloween",
+    christmas: "Christmas",
+    snowfi: "Snow-Fi"
   };
 
 presence.on("UpdateData", async () => {
@@ -56,9 +66,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "pause";
     presenceData.smallImageText = (await strings).pause;
   } else {
-    const stationID = (<HTMLImageElement>(
+    const [, , , , , stationID] = (<HTMLImageElement>(
         document.querySelector("#graffitiSoul")
-      )).src.split("/")[5],
+      )).src.split("/"),
       timestamps = getTimestamps(
         Math.floor(audio.currentTime),
         Math.floor(audio.duration)
@@ -68,10 +78,8 @@ presence.on("UpdateData", async () => {
     if (!audio.paused && !loadingSong) {
       if (await presence.getSetting("song"))
         presenceData.details = songName.textContent;
-      if (await presence.getSetting("timestamp")) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
-      }
+      if (await presence.getSetting("timestamp"))
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).play;
     } else {
@@ -80,19 +88,18 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).pause;
     }
 
-    if (buttons)
+    if (buttons) {
       presenceData.buttons = [
         {
           label: "Tune In",
           url: document.URL
         }
       ];
+    }
   }
 
-  if (presenceData.details == null && presenceData.state == null) {
+  if (!presenceData.details && presenceData.state === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

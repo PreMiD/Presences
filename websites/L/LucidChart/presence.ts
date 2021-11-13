@@ -4,11 +4,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: new Date().getTime()
-  };
-
-  const path = document.location.pathname;
+      largeImageKey: "logo",
+      startTimestamp: new Date().getTime()
+    },
+    path = document.location.pathname;
 
   if (path === "/pages" || path === "/pages/") {
     presenceData.details = "Browsing LucidChart";
@@ -58,10 +57,8 @@ presence.on("UpdateData", () => {
     presenceData.state = title;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

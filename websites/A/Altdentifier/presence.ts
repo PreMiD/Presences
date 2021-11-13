@@ -1,31 +1,30 @@
-var presence = new Presence({
-  clientId: "656152542429839380"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "656152542429839380"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
-  if (document.location.hostname == "altdentifier.com") {
+  if (document.location.hostname === "altdentifier.com") {
     presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname.includes("/dashboard")) {
       presenceData.details = "Viewing a servers";
       if (document.location.pathname.includes("/dashboard/")) {
         presenceData.details = "Managing the settings of";
-        var server = document
+        const server = document
           .querySelector("#body > h1")
           .textContent.replace("Managing ", "");
-        presenceData.state = "server: " + server;
+        presenceData.state = `server: ${server}`;
       }
     } else if (document.location.pathname.includes("/blog")) {
       presenceData.details = "Reading a blog";
       presenceData.smallImageKey = "reading";
       if (document.location.pathname.includes("/blog/")) {
         presenceData.details = "Reading a blog article:";
-        var title = document
+        const title = document
           .querySelector("body > h1")
           .textContent.toUpperCase();
         presenceData.state = title;
@@ -49,10 +48,8 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -4,24 +4,21 @@ let oldLang: string = null,
   strings: LangStrings;
 
 function getMeta(metaName: string): string {
-  metaName = "PreMiD_" + metaName;
+  metaName = `PreMiD_${metaName}`;
   const metas = document.getElementsByTagName("meta");
   for (let i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute("name") === metaName) {
+    if (metas[i].getAttribute("name") === metaName)
       return metas[i].getAttribute("content");
-    }
   }
   return "";
 }
 
 function hasMeta(metaName: string): boolean {
-  metaName = "PreMiD_" + metaName;
+  metaName = `PreMiD_${metaName}`;
   const metas = document.getElementsByTagName("meta");
-  for (let i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute("name") === metaName) {
-      return true;
-    }
-  }
+  for (let i = 0; i < metas.length; i++)
+    if (metas[i].getAttribute("name") === metaName) return true;
+
   return false;
 }
 
@@ -51,7 +48,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "img_logo"
   };
 
-  if (showTimestamp == true) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp === true) presenceData.startTimestamp = browsingStamp;
 
   if (incognito === false) {
     if (
@@ -63,9 +60,10 @@ presence.on("UpdateData", async () => {
         presenceData.state = strings.state || getMeta("state");
       if (hasMeta("smallImageKey"))
         presenceData.smallImageKey = getMeta("smallImageKey");
-      if (hasMeta("smallImageText"))
+      if (hasMeta("smallImageText")) {
         presenceData.smallImageText =
           strings.smallImageText || getMeta("smallImageText");
+      }
       if (hasMeta("largeImageKey"))
         presenceData.largeImageKey = getMeta("largeImageKey");
       if (showButtons === true) {
@@ -73,17 +71,19 @@ presence.on("UpdateData", async () => {
           (hasMeta("button_1_Label") && hasMeta("button_1_Url")) ||
           (hasMeta("button_2_Label") && hasMeta("button_2_Url"))
         )
-          presenceData.buttons = [];
-        if (hasMeta("button_1_Label") && hasMeta("button_1_Url"))
+          delete presenceData.buttons;
+        if (hasMeta("button_1_Label") && hasMeta("button_1_Url")) {
           presenceData.buttons.push({
             label: getMeta("button_1_Label"),
             url: getMeta("button_1_Url")
           });
-        if (hasMeta("button_2_Label") && hasMeta("button_2_Url"))
+        }
+        if (hasMeta("button_2_Label") && hasMeta("button_2_Url")) {
           presenceData.buttons.push({
             label: getMeta("button_2_Label"),
             url: getMeta("button_2_Url")
           });
+        }
       }
     } else if (window.location.hostname === "docs.voidbots.net") {
       presenceData.details = `${strings.docsViewer1.slice(
@@ -95,16 +95,12 @@ presence.on("UpdateData", async () => {
       presenceData.state =
         document.querySelector("title").textContent || "Home";
     }
-  } else {
-    presenceData.details = strings.privacyVisit;
-  }
+  } else presenceData.details = strings.privacyVisit;
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
 
 interface LangStrings {

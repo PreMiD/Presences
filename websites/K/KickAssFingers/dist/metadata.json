@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Beckrs",
+    "id": "777552923177386025"
+  },
+  "service": "KickAssFingers",
+  "description": {
+    "en": "Test your typing speed on a different typing tests, earn points, win medals and climb the rankings.",
+    "it": "Testa tua velocità di battitura in diversi tipi di test, guadagna punti, vinci medaglie e scala le classifiche."
+  },
+  "url": [
+    "kickassfingers.com",
+    "www.kickassfingers.com"
+  ],
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/9eu1lO1.png",
+  "thumbnail": "https://i.imgur.com/iBVW8mA.png",
+  "color": "#976398",
+  "tags": [
+    "typing",
+    "test",
+    "game",
+    "keyboard",
+    "multilanguage"
+  ],
+  "category": "games"
+}

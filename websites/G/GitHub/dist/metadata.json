@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -18,7 +19,7 @@
     "pl": "GitHub to system do zarządzania projektami i wersjonowania kodu, a także platforma społecznościowa stworzona dla programistów."
   },
   "url": "github.com",
-  "version": "2.8.1",
+  "version": "2.8.6",
   "logo": "https://i.imgur.com/cr3bzXB.png",
   "thumbnail": "https://i.imgur.com/G816tlo.png",
   "color": "#000000",

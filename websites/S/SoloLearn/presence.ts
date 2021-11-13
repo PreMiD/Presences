@@ -54,7 +54,7 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const host = location.host,
+  const { host } = location,
     path = location.pathname.replace(/\/?$/, "/"),
     showBrowsing = await presence.getSetting("browse"),
     showCourses = await presence.getSetting("course"),
@@ -62,13 +62,8 @@ presence.on("UpdateData", async () => {
     showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
-    details: undefined,
-    state: undefined,
     largeImageKey: "sololearn",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
+    startTimestamp: elapsed
   };
 
   if (document.location.href !== prevUrl) {
@@ -78,11 +73,8 @@ presence.on("UpdateData", async () => {
 
   if (showBrowsing) {
     if (host === "www.sololearn.com") {
-      for (const [k, v] of Object.entries(statics)) {
-        if (path.match(k)) {
-          data = { ...data, ...v };
-        }
-      }
+      for (const [k, v] of Object.entries(statics))
+        if (path.match(k)) data = { ...data, ...v };
 
       if (path === "/") {
         data.details = "Browsing...";
@@ -153,7 +145,7 @@ presence.on("UpdateData", async () => {
   if (data.details) {
     if (data.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
+      data.smallImageText = (await strings).browsing;
     }
     if (!showTimestamps) {
       delete data.startTimestamp;
@@ -161,7 +153,5 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(data);
-  } else {
-    presence.setActivity();
-  }
+  } else presence.setActivity();
 });

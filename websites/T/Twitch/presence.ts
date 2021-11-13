@@ -1,104 +1,14 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  live: string;
-  browse: string;
-  viewPage: string;
-  home: string;
-  download: string;
-  jobs: string;
-  turbo: string;
-  partners: string;
-  press: string;
-  security: string;
-  access: string;
-  ads: string;
-  guidelines: string;
-  terms: string;
-  privacy: string;
-  cookie: string;
-  watchingLive: string;
-  watchingVid: string;
-  viewProfile: string;
-  viewCategory: string;
-  viewWallet: string;
-  viewEsports: string;
-  viewFollow: string;
-  viewTeam: string;
-  viewDropsInv: string;
-  viewDropsComp: string;
-  viewing: string;
-  searchingFor: string;
-  searchingSomething: string;
-  viewSettings: string;
-  viewFriends: string;
-  subs: string;
-  squad: string;
-  modStreamer: string;
-  readingAbout: string;
-  redeem: string;
-  camp: string;
-  campBasic: string;
-  campSetup: string;
-  campLevel: string;
-  campConnect: string;
-  campReward: string;
-  campMusic: string;
-  campLive: string;
-  dashboard: string;
-  dashboardManage: string;
-  manageRoles: string;
-  produce: string;
-  viewTheir: string;
-  channelAnaly: string;
-  streamSum: string;
-  achievements: string;
-  activity: string;
-  followList: string;
-  colls: string;
-  clips: string;
-  channelSettings: string;
-  moderationSettings: string;
-  dropsSettings: string;
-  tools: string;
-  extensions: string;
-  brand: string;
-  brandReal: string;
-  brandMadness: string;
-  brandExpression: string;
-  brandTogether: string;
-  brandWatch: string;
-  blogArchive: string;
-  readingArticle: string;
-  blogBrowse: string;
-  blogs: string;
-  help: string;
-  helpTopic: string;
-  helpTopicCatalog: string;
-  affiliate: string;
-  dev: string;
-  devProduct: string;
-  devShowcase: string;
-  devSupport: string;
-  devDocs: string;
-  incident: string;
-  uptime: string;
-  forums: string;
-  thread: string;
-  user: string;
-  watchStream: string;
-  watchVideo: string;
-}
+let elapsed = Math.floor(Date.now() / 1000),
+  prevUrl = document.location.href,
+  oldLang = "en";
 
 const presence = new Presence({
     clientId: "802958789555781663"
   }),
   getElement = (query: string): string | undefined => {
-    return document.querySelector(query)
-      ? document.querySelector(query).textContent
-      : undefined;
+    return document.querySelector(query)?.textContent;
   },
-  getStrings = async (): Promise<LangStrings> => {
+  getStrings = async () => {
     return presence.getStrings(
       {
         play: "general.playing",
@@ -191,14 +101,13 @@ const presence = new Presence({
         watchStream: "general.buttonWatchStream",
         watchVideo: "general.buttonWatchVideo"
       },
-      await presence.getSetting("lang")
+      oldLang
     );
-  };
+  },
+  devLogoArr = ["dev-main", "dev-white", "dev-purple"],
+  logoArr = ["twitch", "black-ops", "white", "purple", "pride"];
 
-let elapsed = Math.floor(Date.now() / 1000),
-  prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
-  oldLang: string = null;
+let strings = getStrings();
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
@@ -206,21 +115,18 @@ presence.on("UpdateData", async () => {
     showLive = await presence.getSetting("live"),
     showVideo = await presence.getSetting("video"),
     showTimestamps = await presence.getSetting("timestamp"),
-    newLang = await presence.getSetting("lang"),
+    newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
     streamDetail = await presence.getSetting("streamDetail"),
     streamState = await presence.getSetting("streamState"),
     logo: number = await presence.getSetting("logo"),
-    logoArr = ["twitch", "black-ops", "white", "purple", "pride"],
     devLogo: number = await presence.getSetting("devLogo"),
-    devLogoArr = ["dev-main", "dev-white", "dev-purple"],
     buttons = await presence.getSetting("buttons");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -235,7 +141,7 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (document.location.hostname == "www.twitch.tv") {
+  if (document.location.hostname === "www.twitch.tv") {
     //* Main website
     const parseVideo = async (video: HTMLVideoElement): Promise<void> => {
         const live = video.duration >= 1073741824;
@@ -243,24 +149,22 @@ presence.on("UpdateData", async () => {
         if (showLive && live) {
           //* Live
           const title = getElement(".channel-info-content h2"),
-            streamer = getElement(".channel-info-content .tw-c-text-base"),
+            streamer = getElement(".channel-info-content h1"),
             game =
               document.querySelector("a[data-a-target='stream-game-link']")
                 ?.textContent || "Just Chatting";
-          presenceData.details =
-            title && streamer
-              ? streamDetail
-                  .replace("%title%", title)
-                  .replace("%streamer%", streamer)
-                  .replace("%game%", game)
-              : undefined;
-          presenceData.state =
-            title && streamer
-              ? streamState
-                  .replace("%title%", title)
-                  .replace("%streamer%", streamer)
-                  .replace("%game%", game)
-              : undefined;
+          if (title && streamer) {
+            presenceData.details = streamDetail
+              .replace("%title%", title)
+              .replace("%streamer%", streamer)
+              .replace("%game%", game);
+          }
+          if (title && streamer) {
+            presenceData.state = streamState
+              .replace("%title%", title)
+              .replace("%streamer%", streamer)
+              .replace("%game%", game);
+          }
           presenceData.smallImageKey = "live";
           presenceData.smallImageText = (await strings).live;
           if (buttons) {
@@ -278,30 +182,29 @@ presence.on("UpdateData", async () => {
           const title = getElement(".channel-info-content h2")
               .split("•")
               .shift(),
-            uploader = getElement(".channel-info-content .tw-c-text-base"),
-            game = document.querySelector(
-              "a[data-a-target='stream-game-link']"
-            );
-          presenceData.details =
-            title && uploader
-              ? vidDetail
-                  .replace("%title%", title)
-                  .replace("%uploader%", uploader)
-                  .replace("%game%", game)
-              : undefined;
-          presenceData.state =
-            title && uploader
-              ? vidState
-                  .replace("%title%", title)
-                  .replace("%uploader%", uploader)
-                  .replace("%game%", game)
-              : undefined;
+            uploader = getElement(".channel-info-content h1"),
+            game =
+              document.querySelector("a[data-a-target='stream-game-link']")
+                ?.textContent || "Just Chatting";
+          if (title && uploader) {
+            presenceData.details = vidDetail
+              .replace("%title%", title)
+              .replace("%uploader%", uploader)
+              .replace("%game%", game);
+          }
+          if (title && uploader) {
+            presenceData.state = vidState
+              .replace("%title%", title)
+              .replace("%uploader%", uploader)
+              .replace("%game%", game);
+          }
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = (await strings).play;
 
-          const timestamps = presence.getTimestampsfromMedia(video);
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          const [startTimestamp, endTimestamp] =
+            presence.getTimestampsfromMedia(video);
+          presenceData.startTimestamp = startTimestamp;
+          presenceData.endTimestamp = endTimestamp;
 
           if (buttons) {
             presenceData.buttons = [
@@ -413,35 +316,35 @@ presence.on("UpdateData", async () => {
           state: "Artists"
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/learn-the-basics/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campBasic
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/setting-up-your-stream/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campSetup
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/level-up/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campLevel
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/connect-and-engage/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campConnect
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/get-rewarded/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campReward
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/twitch-music-getting-started/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campMusic
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/live/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).campLive
         },
         "/creatorcamp/(\\w*|\\w*-\\w*)/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
+          details: `${(await strings).camp} | ${(await strings).viewPage}`,
           state: (await strings).home
         }
       };
@@ -503,13 +406,12 @@ presence.on("UpdateData", async () => {
         ) as HTMLInputElement;
 
         presenceData.details = (await strings).searchingFor;
-        presenceData.state = search ? search.value : undefined;
+        presenceData.state = search?.value;
         presenceData.smallImageKey = "search";
       }
 
-      if (path.includes("/drops/inventory/")) {
+      if (path.includes("/drops/inventory/"))
         presenceData.details = (await strings).viewDropsInv;
-      }
 
       if (path.includes("/drops/campaigns/")) {
         presenceData.details = (await strings).viewDropsComp;
@@ -520,15 +422,8 @@ presence.on("UpdateData", async () => {
         let activeDrop = null;
 
         for (const drop of drops) {
-          if (!drop.children[1].className.includes("tw-hide")) {
-            activeDrop =
-              drop.firstElementChild.firstElementChild.firstElementChild
-                .children[1].firstElementChild.children[0].textContent +
-              " (" +
-              drop.firstElementChild.firstElementChild.firstElementChild
-                .children[1].firstElementChild.children[1].textContent +
-              ")";
-          }
+          if (!drop.children[1].className.includes("tw-hide"))
+            activeDrop = `${drop.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.children[0].textContent} (${drop.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.children[1].textContent})`;
         }
 
         if (activeDrop) presenceData.state = activeDrop;
@@ -538,16 +433,15 @@ presence.on("UpdateData", async () => {
         const tab = getElement(".tw-tab__link--active");
 
         presenceData.details = (await strings).subs;
-        presenceData.state = !tab.includes("Your")
-          ? tab.replace("Subscriptions", "")
-          : undefined;
+        if (!tab.includes("Your"))
+          presenceData.state = tab.replace("Subscriptions", "");
       }
 
       if (path.includes("/wallet/")) {
         const tab = getElement(".tw-c-text-link");
 
         presenceData.details = (await strings).viewWallet;
-        presenceData.state = !tab.includes("Wallet") ? tab : undefined;
+        if (!tab.includes("Wallet")) presenceData.state = tab;
       }
 
       if (path.includes("/directory/")) {
@@ -562,7 +456,7 @@ presence.on("UpdateData", async () => {
           tab = getElement(".tw-c-text-link");
 
         presenceData.details = (await strings).viewCategory;
-        presenceData.state = category && category + ` (${tab})`;
+        presenceData.state = category && `${category} (${tab})`;
       }
 
       if (path.includes("/directory/esports/")) {
@@ -578,7 +472,7 @@ presence.on("UpdateData", async () => {
         const tab = getElement(".tw-c-text-link");
 
         presenceData.details = (await strings).viewFollow;
-        presenceData.state = !tab.includes("Overview") ? tab : undefined;
+        if (!tab.includes("Overview")) presenceData.state = tab;
       }
 
       if (privacy && searching) {
@@ -623,15 +517,13 @@ presence.on("UpdateData", async () => {
       ),
       channelRoot: HTMLDivElement = document.querySelector(".channel-root"),
       video: HTMLVideoElement = document.querySelector("video");
-    if (!homeCarousel && channelRoot && video) {
-      await parseVideo(video);
-    }
-  } else if (document.location.hostname == "dashboard.twitch.tv") {
+    if (!homeCarousel && channelRoot && video) await parseVideo(video);
+  } else if (document.location.hostname === "dashboard.twitch.tv") {
     //* Creator Dashboard
     if (showBrowsing) {
       const statics = {
         "/home/": {
-          details: (await strings).dashboard + " | " + (await strings).viewPage,
+          details: `${(await strings).dashboard} | ${(await strings).viewPage}`,
           state: (await strings).home
         },
         "/stream-manager/": {
@@ -639,18 +531,21 @@ presence.on("UpdateData", async () => {
           state: (await strings).dashboardManage
         },
         "/channel-analytics/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).channelAnaly
         },
         "/stream-summary/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).streamSum
         },
         "/achievements/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).achievements
         },
         "/community/roles/": {
@@ -658,13 +553,15 @@ presence.on("UpdateData", async () => {
           state: (await strings).manageRoles
         },
         "/community/activity/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).activity
         },
         "/community/followers-list/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).followList
         },
         "/content/video-producer/": {
@@ -672,28 +569,33 @@ presence.on("UpdateData", async () => {
           state: (await strings).produce
         },
         "/content/collections/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).colls
         },
         "/content/clips/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).clips
         },
         "/settings/channel/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).channelSettings
         },
         "/settings/moderation/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).moderationSettings
         },
         "/drops/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
+          details: `${(await strings).dashboard} | ${
+            (await strings).viewTheir
+          }`,
           state: (await strings).dropsSettings
         },
         "/broadcast/": {
@@ -720,7 +622,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "brand.twitch.tv") {
+  } else if (document.location.hostname === "brand.twitch.tv") {
     //* Brand website
     if (showBrowsing) {
       const statics = {
@@ -757,18 +659,15 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).brandWatch;
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = (await strings).play;
-        const timestamps = presence.getTimestamps(
-          presence.timestampFromFormat(
-            document.querySelector(".c-controls__time.plyr__time--current")
-              .textContent
-          ),
-          presence.timestampFromFormat("01:30")
-        );
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
-      } else if (path === "/") {
-        presenceData.details = (await strings).brand;
-      }
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(
+            presence.timestampFromFormat(
+              document.querySelector(".c-controls__time.plyr__time--current")
+                .textContent
+            ),
+            presence.timestampFromFormat("01:30")
+          );
+      } else if (path === "/") presenceData.details = (await strings).brand;
 
       if (privacy) {
         presenceData.details = (await strings).browse;
@@ -776,7 +675,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "blog.twitch.tv") {
+  } else if (document.location.hostname === "blog.twitch.tv") {
     //* Blog website
     if (showBrowsing) {
       const statics = {
@@ -790,11 +689,10 @@ presence.on("UpdateData", async () => {
           )
         },
         "/(\\w*|\\w*-\\w*)/(\\d*)/(\\d*)/(\\d*)/((\\w*|\\w*-\\w*)*)/": {
-          details:
-            (await strings).blogs + " | " + (await strings).readingArticle,
-          state: document.querySelector(".c-page-heading__text")
-            ? document.querySelector(".c-page-heading__text").textContent
-            : undefined
+          details: `${(await strings).blogs} | ${
+            (await strings).readingArticle
+          }`,
+          state: document.querySelector(".c-page-heading__text")?.textContent
         }
       };
 
@@ -812,28 +710,25 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "help.twitch.tv") {
+  } else if (document.location.hostname === "help.twitch.tv") {
     //* Help website
     if (showBrowsing) {
       const statics = {
         "/s/": {
-          details: (await strings).help + " | " + (await strings).browse
+          details: `${(await strings).help} | ${(await strings).browse}`
         },
         "/s/topiccatalog/": {
           details: (await strings).helpTopicCatalog
         },
         "/s/topic/": {
           details: (await strings).helpTopic,
-          state: document.querySelector(".headlineTitle")
-            ? document.querySelector(".headlineTitle").textContent
-            : undefined
+          state: document.querySelector(".headlineTitle")?.textContent
         },
         "/s/article/": {
-          details:
-            (await strings).help + " | " + (await strings).readingArticle,
-          state: document.querySelector(".articleTitle")
-            ? document.querySelector(".articleTitle").textContent
-            : undefined
+          details: `${(await strings).help} | ${
+            (await strings).readingArticle
+          }`,
+          state: document.querySelector(".articleTitle")?.textContent
         }
       };
 
@@ -851,7 +746,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "affiliate.twitch.tv") {
+  } else if (document.location.hostname === "affiliate.twitch.tv") {
     //* Help website
     if (showBrowsing) {
       presenceData.details = (await strings).readingAbout;
@@ -865,24 +760,24 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "dev.twitch.tv") {
+  } else if (document.location.hostname === "dev.twitch.tv") {
     //* Dev docs
     presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
     if (showBrowsing) {
       const statics = {
         "/": {
-          details: (await strings).dev + " | " + (await strings).browse
+          details: `${(await strings).dev} | ${(await strings).browse}`
         },
         "/products/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
+          details: `${(await strings).dev} | ${(await strings).viewing}`,
           state: (await strings).devProduct
         },
         "/showcase/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
+          details: `${(await strings).dev} | ${(await strings).viewing}`,
           state: (await strings).devShowcase
         },
         "/support/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
+          details: `${(await strings).dev} | ${(await strings).viewing}`,
           state: (await strings).devSupport
         },
         "/docs/": {
@@ -890,11 +785,10 @@ presence.on("UpdateData", async () => {
           state: (await strings).browse
         },
         "/docs/(\\w*|\\w*-\\w*)/": {
-          details:
-            (await strings).devDocs + " | " + (await strings).readingAbout,
-          state: document.querySelector(".text-content > h1")
-            ? document.querySelector(".text-content > h1").textContent
-            : undefined
+          details: `${(await strings).devDocs} | ${
+            (await strings).readingAbout
+          }`,
+          state: document.querySelector(".text-content > h1")?.textContent
         }
       };
 
@@ -912,51 +806,33 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "discuss.dev.twitch.tv") {
+  } else if (document.location.hostname === "discuss.dev.twitch.tv") {
     //! Development forums
     presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
     if (showBrowsing) {
       const statics = {
         "/": {
-          details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
+          details: `${(await strings).dev} (${(await strings).forums}) | ${
             (await strings).browse
+          }`
         },
         "/c/": {
-          details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).viewCategory,
-          state: document.querySelector(".category-name")
-            ? document.querySelector(".category-name").textContent
-            : undefined
+          details: `${(await strings).dev} (${(await strings).forums}) | ${
+            (await strings).viewCategory
+          }`,
+          state: document.querySelector(".category-name")?.textContent
         },
         "/t/": {
-          details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).thread,
-          state: document.querySelector(".fancy-title")
-            ? document.querySelector(".fancy-title").textContent
-            : undefined
+          details: `${(await strings).dev} (${(await strings).forums}) | ${
+            (await strings).thread
+          }`,
+          state: document.querySelector(".fancy-title")?.textContent
         },
         "/u/": {
-          details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).user,
-          state: document.querySelector(".username")
-            ? document.querySelector(".username").textContent
-            : undefined
+          details: `${(await strings).dev} (${(await strings).forums}) | ${
+            (await strings).user
+          }`,
+          state: document.querySelector(".username")?.textContent
         }
       };
 
@@ -975,29 +851,27 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (
-    document.location.hostname == "devstatus.twitch.tv" ||
-    document.location.hostname == "status.twitch.tv"
+    document.location.hostname === "devstatus.twitch.tv" ||
+    document.location.hostname === "status.twitch.tv"
   ) {
     //* Status pages
-    if (document.location.hostname == "devstatus.twitch.tv")
+    if (document.location.hostname === "devstatus.twitch.tv")
       presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
     if (showBrowsing) {
       const statics = {
         "/": {
-          details: "Status page | " + (await strings).browse
+          details: `Status page | ${(await strings).browse}`
         },
         "/incidents/": {
-          details: "Status page | " + (await strings).viewing,
-          state: document.querySelector(".page-title > div")
-            ? document.querySelector(".page-title > div").textContent
-            : undefined
+          details: `Status page | ${(await strings).viewing}`,
+          state: document.querySelector(".page-title > div")?.textContent
         },
         "/history/": {
-          details: "Status page | " + (await strings).viewing,
+          details: `Status page | ${(await strings).viewing}`,
           state: (await strings).incident
         },
         "/uptime/": {
-          details: "Status page | " + (await strings).viewing,
+          details: `Status page | ${(await strings).viewing}`,
           state: (await strings).uptime
         }
       };

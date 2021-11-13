@@ -23,20 +23,6 @@ const kitaplarinDili = new Presence({
     "/my-account/change-password": "Şifre Değiştir"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 kitaplarinDili.on("UpdateData", async () => {
   const page = document.location.pathname;
 
@@ -63,9 +49,7 @@ kitaplarinDili.on("UpdateData", async () => {
       startTimestamp: Date.now()
     });
   } else if (page.includes("/az-list/")) {
-    const letter = page
-      ?.split("/")
-      ?.[page.split("/").length - 1]?.toUpperCase();
+    const letter = page.split("/")?.[page.split("/").length - 1]?.toUpperCase();
 
     kitaplarinDili.setActivity({
       largeImageKey: "kd-logo",
@@ -109,7 +93,7 @@ kitaplarinDili.on("UpdateData", async () => {
     kitaplarinDili.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir yazarı inceliyor:",
-      state: starName || "Bilinmeyen Yazar",
+      state: starName,
       startTimestamp: Date.now()
     });
   } else if (page.includes("/watch/")) {
@@ -118,36 +102,36 @@ kitaplarinDili.on("UpdateData", async () => {
         "Bilinmeyen Kitap",
       video: HTMLVideoElement = document.querySelector("video.vjs-tech");
 
-    if (!video)
+    if (!video) {
       return kitaplarinDili.setActivity({
         largeImageKey: "kd-logo",
-        details: bookName || "Bilinmeyen Kitap",
+        details: bookName,
         smallImageKey: "question",
         smallImageText: "Video verisi alınamıyor"
       });
-
-    const timestamps = getTimestamps(
-      Math.floor(video?.currentTime),
-      Math.floor(video?.duration)
-    );
-
-    const object = {
-      largeImageKey: "kd-logo",
-      details: bookName || "Bilinmeyen Kitap",
-      smallImageKey: video?.paused ? "pause" : "play",
-      smallImageText: video?.paused
-        ? (await strings).pause
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
-
-    if (video?.paused) {
-      delete object.startTimestamp;
-      delete object.endTimestamp;
     }
 
-    kitaplarinDili.setActivity(object);
+    const timestamps = kitaplarinDili.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      ),
+      presenceData: PresenceData = {
+        largeImageKey: "kd-logo",
+        details: bookName,
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play,
+        startTimestamp: timestamps[0],
+        endTimestamp: timestamps[1]
+      };
+
+    if (video.paused) {
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+    }
+
+    kitaplarinDili.setActivity(presenceData);
   } else if (
     kitapPages[page] ||
     kitapPages[page.slice(0, -1)] ||

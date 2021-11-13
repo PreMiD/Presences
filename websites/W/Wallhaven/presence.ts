@@ -12,7 +12,7 @@ function getQuery() {
       queryString && queryString.length > 0 && queryString[1]
         ? queryString[1].split("&").reduce(function (l, r) {
             const entry = r ? r.split("=", 2) : null;
-            if (entry == null) return l;
+            if (entry === null) return l;
             return Object.assign(l, { [entry[0]]: entry[1] });
           }, {})
         : {};
@@ -41,7 +41,6 @@ function getQuery() {
           )?.trim();
           data.state = strings.browsing;
           data.details = `${pageType}, Page ${query?.page || 1}`;
-          data.buttons = [];
           return data;
         }
       },
@@ -68,7 +67,7 @@ function getQuery() {
           if (!pageTitle) return;
           data.state = strings.reading;
           data.details = `${pageTitle}`;
-          data.buttons = [];
+          delete data.buttons;
           return data;
         }
       },
@@ -87,13 +86,12 @@ function getQuery() {
         ) => {
           if (!context) return null;
           data.state = strings.searching;
-          data.details =
-            decodeURIComponent(
-              document.querySelector<HTMLElement>("span.search-term")
-                ?.innerText ??
-                query?.q ??
-                "Invalid Search Term"
-            ) + `, Page ${query?.page || 1}`;
+          data.details = `${decodeURIComponent(
+            document.querySelector<HTMLElement>("span.search-term")
+              ?.innerText ??
+              query?.q ??
+              "Invalid Search Term"
+          )}, Page ${query?.page || 1}`;
 
           return data;
         }
@@ -127,9 +125,7 @@ function getQuery() {
                 url: document.URL
               }
             ];
-          } else {
-            data.buttons = [];
-          }
+          } else delete data.buttons;
 
           return data;
         }
@@ -158,7 +154,7 @@ function getQuery() {
         largeImageKey: "logo",
         largeImageText: "Wallhaven"
       } as PresenceData;
-      if (document.location.hostname == "wallhaven.cc") {
+      if (document.location.hostname === "wallhaven.cc") {
         const query: { [key: string]: unknown } = getQuery(),
           strings: { [key: string]: string } = await app.getStrings({
             play: "presence.playback.playing",
@@ -180,7 +176,7 @@ function getQuery() {
           })
         );
         return result.then((data) => {
-          if (data?.details == null) {
+          if (!data?.details) {
             data.details = strings.browsing;
             presence.setTrayTitle();
             presence.setActivity();
@@ -192,12 +188,10 @@ function getQuery() {
         });
       }
 
-      if (presenceData.details == null) {
+      if (!presenceData.details) {
         app.setTrayTitle();
         app.setActivity();
-      } else {
-        app.setActivity(presenceData);
-      }
+      } else app.setActivity(presenceData);
     });
   })(presence);
 })();

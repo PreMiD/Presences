@@ -12,32 +12,32 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp
     };
 
-  if (document.location.pathname.includes("/global"))
+  if (document.location.pathname.includes("/global")) {
     if (document.location.href.includes("search=")) {
       presenceData.details = "Searching Users";
       presenceData.state = document
         .querySelector("input.input")
         .getAttribute("value");
     } else if (document.location.href.includes("country=")) {
-      presenceData.details =
-        "Browsing " +
-        document.location.href.split("=")[1].toUpperCase() +
-        " Rankings";
-      if (!document.location.href.includes("?country="))
-        presenceData.state =
-          "Page " + document.location.href.split("/")[4].split("&")[0];
-      else presenceData.state = "Page 1";
+      presenceData.details = `Browsing ${document.location.href
+        .split("=")[1]
+        .toUpperCase()} Rankings`;
+      if (!document.location.href.includes("?country=")) {
+        presenceData.state = `Page ${
+          document.location.href.split("/")[4].split("&")[0]
+        }`;
+      } else presenceData.state = "Page 1";
     } else {
       presenceData.details = "Browsing Global Rankings";
       if (document.location.href.includes("/global/"))
-        presenceData.state = "Page " + document.location.href.split("/")[4];
+        presenceData.state = `Page ${document.location.href.split("/")[4]}`;
       else presenceData.state = "Page 1";
     }
-  else if (document.location.pathname.includes("/rankings"))
+  } else if (document.location.pathname.includes("/rankings"))
     presenceData.details = "Browsing Global Rankings";
   else if (document.location.pathname.includes("/faq"))
     presenceData.details = "Viewing FAQ";
-  else if (document.location.pathname.includes("/leaderboard"))
+  else if (document.location.pathname.includes("/leaderboard")) {
     if (document.location.pathname.includes("/leaderboard/")) {
       presenceData.details = "Viewing Leaderboard";
       presenceData.state = document.querySelector("h4 > a").textContent;
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else presenceData.details = "Viewing Leaderboard";
-  else if (document.location.pathname.includes("/ranking/requests"))
+  } else if (document.location.pathname.includes("/ranking/requests"))
     presenceData.details = "Browsing Rank Requests";
   else if (document.location.pathname.includes("/ranking/request")) {
     presenceData.details = "Viewing Rank Request";
@@ -77,22 +77,20 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/u/")) {
     presenceData.details = "Viewing User";
-    presenceData.state =
-      document.querySelector("h5.title.is-5 > a").textContent.slice(0, -9) +
-      "(" +
-      document
-        .querySelectorAll("div.column > ul > li")
-        .item(1)
-        .textContent.split(":")[1]
-        .slice(1) +
-      ")";
+    presenceData.state = `${document
+      .querySelector("h5.title.is-5 > a")
+      .textContent.slice(0, -9)}(${document
+      .querySelectorAll("div.column > ul > li")
+      .item(1)
+      .textContent.split(":")[1]
+      .slice(1)})`;
     presenceData.buttons = [
       {
         label: "View Page",
         url: document.location.href
       }
     ];
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     if (document.location.href.includes("search=")) {
       presenceData.details = "Searching Leaderboards";
       presenceData.state = document
@@ -105,9 +103,7 @@ presence.on("UpdateData", async () => {
 
   if (!buttons) delete presenceData.buttons;
 
-  if (privacy) {
-    delete presenceData.state, delete presenceData.buttons;
-  }
+  if (privacy) delete presenceData.state, delete presenceData.buttons;
 
   presence.setActivity(presenceData);
 });

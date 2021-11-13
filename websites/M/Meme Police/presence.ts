@@ -5,12 +5,10 @@ const presence = new Presence({
 let gameData: PresenceData = null;
 
 presence.on("UpdateData", async () => {
-  if (!gameData || gameData.details == null) {
+  if (!gameData || gameData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(gameData);
-  }
+  } else presence.setActivity(gameData);
 });
 
 presence.on("iFrameData", (data: PresenceData) => (gameData = data));

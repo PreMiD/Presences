@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     },
-    pathname = document.location.pathname;
+    { pathname } = document.location;
   if (pathname === "/") data.details = "Viewing the Homepage";
   else if (pathname === "/popular-manga") {
     data.details = "Looking at";
@@ -21,16 +21,16 @@ presence.on("UpdateData", async () => {
     pathname.endsWith("/completed")
   ) {
     data.details = "Looking at";
-    data.state = "Completed Manga on " + pathname.split("/")[2].toUpperCase();
+    data.state = `Completed Manga on ${pathname.split("/")[2].toUpperCase()}`;
   } else if (
     pathname.startsWith("/manga-list") &&
     pathname.endsWith("/ongoing")
   ) {
     data.details = "Looking at";
-    data.state = "Ongoing Manga on " + pathname.split("/")[2].toUpperCase();
+    data.state = `Ongoing Manga on ${pathname.split("/")[2].toUpperCase()}`;
   } else if (pathname.startsWith("/manga-list")) {
     data.details = "Viewing:";
-    data.state = "Manga on " + pathname.split("/")[2].toUpperCase();
+    data.state = `Manga on ${pathname.split("/")[2].toUpperCase()}`;
   } else if (pathname === "/manga-list/hash/ongoing") {
     data.details = "Looking at";
     data.state = "Ongoing Manga List";
@@ -44,9 +44,9 @@ presence.on("UpdateData", async () => {
     data.details = "Viewing:";
     data.state = "Collections";
   } else if (pathname.startsWith("/collection")) {
-    const collection_name = document.querySelector(".page-title").textContent;
+    const collectionName = document.querySelector(".page-title").textContent;
     data.details = "Viewing collection:";
-    data.state = collection_name;
+    data.state = collectionName;
   } else if (pathname === "/advanced-search") {
     const query = (<HTMLInputElement>(
       document.querySelector('[name="manga-name"]')

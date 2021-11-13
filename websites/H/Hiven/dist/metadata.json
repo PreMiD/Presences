@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "CRUGG",
+    "id": "228965621478588416"
+  },
+  "service": "Hiven",
+  "description": {
+    "en": "Hiven connects you to friends, fans and new exciting communties. From private, to public, to monetized groups - Hiven's where it happens."
+  },
+  "url": [
+    "hiven.io",
+    "app.hiven.io"
+  ],
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/3S9suBH.jpg",
+  "thumbnail": "https://i.imgur.com/NtkbuT6.png",
+  "color": "#ff0083",
+  "tags": [
+    "chat",
+    "voice"
+  ],
+  "category": "socials",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ]
+}

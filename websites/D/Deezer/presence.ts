@@ -1,26 +1,19 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  viewAlbum: string;
-  viewArtist: string;
-  viewPodcast: string;
-}
-
 const presence = new Presence({
-    clientId: "607651992567021580"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        viewAlbum: "general.buttonViewAlbum",
-        viewArtist: "general.buttonViewArtist",
-        viewPodcast: "general.buttonViewPodcast"
-      },
-      await presence.getSetting("lang")
-    );
-  };
+  clientId: "607651992567021580"
+});
+
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      viewAlbum: "general.buttonViewAlbum",
+      viewArtist: "general.buttonViewArtist",
+      viewPodcast: "general.buttonViewPodcast"
+    },
+    await presence.getSetting("lang")
+  );
+}
 
 let currentTime,
   duration,
@@ -30,7 +23,7 @@ let currentTime,
   albumLink,
   artistLink,
   showLink,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -41,9 +34,8 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -54,10 +46,13 @@ presence.on("UpdateData", async () => {
     albumLink = document.querySelector("div.marquee-content")
       .children[0] as HTMLAnchorElement;
 
-    const paused =
-      document.querySelector(
-        ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
-      ) === null;
+    const paused2 = document.querySelector(
+      "#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path"
+    ).outerHTML;
+    let paused: boolean;
+    if (paused2 === '<path d="m5 2 18 10L5 22V2z"></path>') paused = true;
+    else paused = false;
+
     currentTime = document.querySelector(
       "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
     ).textContent;
@@ -84,8 +79,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (buttons) {
         presenceData.buttons = [
@@ -107,12 +101,9 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData, !paused);
     } else {
-      title = document
+      [episode, title] = document
         .querySelector("div.marquee-content")
-        .textContent.split(" · ")[1];
-      episode = document
-        .querySelector("div.marquee-content")
-        .textContent.split(" · ")[0];
+        .textContent.split(" · ");
       showLink = albumLink = document.querySelector("div.marquee-content")
         .children[0] as HTMLAnchorElement;
       presenceData.details = title;
@@ -122,16 +113,26 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
-      if (buttons) {
-        presenceData.buttons = [
-          {
-            label: (await strings).viewPodcast,
-            url: showLink.href
-          }
-        ];
+      if (showLink) {
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).viewPodcast,
+              url: showLink.href
+            }
+          ];
+        }
+      } else {
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).play,
+              url: "https://support.deezer.com/hc/en-gb/articles/115004221605-Uploading-MP3s-to-Deezer"
+            }
+          ];
+        }
       }
       if (paused) {
         delete presenceData.startTimestamp;
@@ -141,7 +142,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !paused);
     }
   } else {
-    const pathname = document.location.pathname,
+    const { pathname } = document.location,
       presenceData: PresenceData = {
         largeImageKey: "deezer"
       };
@@ -175,9 +176,8 @@ presence.on("UpdateData", async () => {
     } else if (pathname.includes("artist")) {
       presenceData.details = "Looking at...";
       presenceData.state = "An Artist";
-    } else {
-      presenceData.details = "Browsing...";
-    }
+    } else presenceData.details = "Browsing...";
+
     presence.setActivity(presenceData);
   }
 });

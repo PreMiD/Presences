@@ -4,30 +4,30 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
-  const set_timeElapsed = await presence.getSetting("timeElapsed"),
-    set_showButtons = await presence.getSetting("showButtons"),
-    set_privacy = await presence.getSetting("privacy"),
-    set_logo = await presence.getSetting("logo"),
-    presenceData = {
-      largeImageKey: set_logo === 0 ? "logo" : "logo2"
+  const setTimeElapsed = await presence.getSetting("timeElapsed"),
+    setShowButtons = await presence.getSetting("showButtons"),
+    setPrivacy = await presence.getSetting("privacy"),
+    setLogo = await presence.getSetting("logo"),
+    presenceData: PresenceData = {
+      largeImageKey: setLogo === 0 ? "logo" : "logo2"
     },
     urlpath = window.location.pathname.split("/");
 
-  if (set_timeElapsed) presenceData.startTimestamp = browsingStamp;
+  if (setTimeElapsed) presenceData.startTimestamp = browsingStamp;
 
-  if (!urlpath[1]) {
-    presenceData.details = "Home";
-  } else if (urlpath[1] === "rooms") {
+  if (!urlpath[1]) presenceData.details = "Home";
+  else if (urlpath[1] === "rooms") {
     if (urlpath[2]) {
-      presenceData.details = set_privacy
+      presenceData.details = setPrivacy
         ? "In room"
         : document.querySelector("div.roomName.noselect").textContent;
-      if (!set_privacy)
+      if (!setPrivacy) {
         presenceData.state = document.querySelector(
           "div.userCount.noselect"
         ).textContent;
+      }
 
-      if (set_showButtons) {
+      if (setShowButtons) {
         presenceData.buttons = [
           {
             label: "Join room",
@@ -35,16 +35,11 @@ presence.on("UpdateData", async function () {
           }
         ];
       }
-    } else {
-      presenceData.details = "Browsing rooms";
-    }
-  } else {
-    presenceData.details = "Other";
-  }
-  if (presenceData.details == null) {
+    } else presenceData.details = "Browsing rooms";
+  } else presenceData.details = "Other";
+
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     },
     path = document.location.pathname;
-  if (path == "/") {
+  if (path === "/") {
     data.details = "Viewing Homepage";
     elapsed = null;
   } else if (path.startsWith("/teambuilder")) {
@@ -29,9 +29,8 @@ presence.on("UpdateData", async () => {
         url: document.baseURI
       }
     ];
-    if (elapsed == null) {
-      elapsed = Math.floor(Date.now() / 1000);
-    }
+    if (elapsed === null) elapsed = Math.floor(Date.now() / 1000);
+
     data.startTimestamp = elapsed;
   } else {
     data.details = "Somewhere on-site";

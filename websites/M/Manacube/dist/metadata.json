@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Jackelele",
+    "id": "377175513372033024"
+  },
+  "service": "Manacube",
+  "description": {
+    "en": "ManaCube is a premium Minecraft network with a range of feature-rich gamemodes."
+  },
+  "url": "manacube.com",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/sBgHblJ.png",
+  "thumbnail": "https://i.imgur.com/D04YmVN.png",
+  "color": "#06D1DF",
+  "tags": [
+    "minecraft",
+    "manacube",
+    "gaming"
+  ],
+  "category": "games",
+  "regExp": "([a-z0-9-]+[.])*manacube[.]com[/]"
+}

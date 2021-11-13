@@ -1,75 +1,47 @@
-interface LangStrings {
-  browse: string;
-  names: string;
-  skinsFeatured: string;
-  skinsTop: string;
-  skinsNew: string;
-  skinsRandom: string;
-  skinsTagged: string;
-  skinsTag: string;
-  capes: string;
-  viewCape: string;
-  servers: string;
-  viewServer: string;
-  claim: string;
-  profileEdit: string;
-  viewFriends: string;
-  viewSkins: string;
-  viewEmoji: string;
-  viewProfile: string;
-  viewing: string;
-  privacy: string;
-  search: string;
-  buttonViewServer: string;
-  buttonViewProfile: string;
-  viewSkin: string;
-}
-
 const presence = new Presence({
     clientId: "809067572061405246"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        browse: "general.browsing",
-        names: "namemc.upcomingNames",
-        skinsFeatured: "namemc.skinsTrending",
-        skinsTop: "namemc.skinsTop",
-        skinsNew: "namemc.skinsNew",
-        skinsRandom: "namemc.skinsRandom",
-        skinsTagged: "namemc.skinsTagged",
-        skinsTag: "namemc.skinsTag",
-        capes: "namemc.capes",
-        viewCape: "namemc.viewCape",
-        servers: "namemc.servers",
-        viewServer: "namemc.viewServer",
-        claim: "namemc.claim",
-        profileEdit: "namemc.profileEdit",
-        viewFriends: "namemc.viewFriends",
-        viewSkins: "namemc.viewSkins",
-        viewEmoji: "namemc.viewEmojis",
-        viewProfile: "general.viewProfile",
-        viewing: "general.viewing",
-        privacy: "general.privacy",
-        search: "general.searchFor",
-        buttonViewServer: "namemc.buttonViewServer",
-        buttonViewProfile: "general.buttonViewProfile",
-        viewSkin: "namemc.viewSkin"
-      },
-      await presence.getSetting("lang")
-    );
-  };
+  browsingStamp = Math.floor(Date.now() / 1000);
+async function getStrings() {
+  return presence.getStrings(
+    {
+      browse: "general.browsing",
+      names: "namemc.upcomingNames",
+      skinsFeatured: "namemc.skinsTrending",
+      skinsTop: "namemc.skinsTop",
+      skinsNew: "namemc.skinsNew",
+      skinsRandom: "namemc.skinsRandom",
+      skinsTagged: "namemc.skinsTagged",
+      skinsTag: "namemc.skinsTag",
+      capes: "namemc.capes",
+      viewCape: "namemc.viewCape",
+      servers: "namemc.servers",
+      viewServer: "namemc.viewServer",
+      claim: "namemc.claim",
+      profileEdit: "namemc.profileEdit",
+      viewFriends: "namemc.viewFriends",
+      viewSkins: "namemc.viewSkins",
+      viewEmoji: "namemc.viewEmojis",
+      viewProfile: "general.viewProfile",
+      viewing: "general.viewing",
+      privacy: "general.privacy",
+      search: "general.searchFor",
+      buttonViewServer: "namemc.buttonViewServer",
+      buttonViewProfile: "general.buttonViewProfile",
+      viewSkin: "namemc.viewSkin"
+    },
+    await presence.getSetting("lang")
+  );
+}
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("lang"),
     buttons = await presence.getSetting("buttons");
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -81,7 +53,7 @@ presence.on("UpdateData", async () => {
 
   const path = location.href
       .replace(/\/?$/, "/")
-      .replace("https://" + location.hostname, "")
+      .replace(`https://${location.hostname}`, "")
       .replace("?", "/"),
     statics: {
       [name: string]: PresenceData;
@@ -124,10 +96,11 @@ presence.on("UpdateData", async () => {
       },
       "/cape/": {
         details: (await strings).viewCape,
-        state:
+        state: `${
           document
             .querySelector(".default-skin main.container h1")
-            ?.textContent.split("\n")[1] + " Cape"
+            ?.textContent.split("\n")[1]
+        } Cape`
       },
       "/minecraft-servers/": {
         details: (await strings).servers

@@ -28,11 +28,11 @@ presence.on("UpdateData", async () => {
   else if (curPath.startsWith("/tim-truyen-nang-cao"))
     presenceData.details = "Tìm truyện nâng cao...";
   else if (curPath.startsWith("/tim-truyen")) {
-    presenceData.state =
-      "Thể loại: " +
+    presenceData.state = `Thể loại: ${
       document.querySelector(
         "#ctl00_divRight > div > .ModuleContent > .nav > .active > a"
-      ).innerHTML;
+      ).innerHTML
+    }`;
     presenceData.details = "Đang tìm truyện...";
   } else if (curPath.startsWith("/truyen-con-gai"))
     presenceData.details = "Đang tìm truyện con gái...";
@@ -65,8 +65,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Đang chọn chap...";
     } else {
       presenceData.details = tmp.querySelector("a").innerHTML;
-      presenceData.state =
-        "Đang đọc: " + tmp.querySelector("span").innerHTML.substr(2);
+      presenceData.state = `Đang đọc: ${tmp
+        .querySelector("span")
+        .innerHTML.substr(2)}`;
     }
   } else presenceData.details = "Đang xem trang chủ...";
   presenceData.startTimestamp = browsingStamp;

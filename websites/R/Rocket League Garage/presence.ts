@@ -1,9 +1,8 @@
-var presence = new Presence({
-  clientId: "636622538356686871"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+const presence = new Presence({
+    clientId: "636622538356686871"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -12,7 +11,7 @@ presence.on("UpdateData", async () => {
 
   title = document.querySelector("#offer-balance");
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the home page";
   } else if (document.location.pathname.includes("/latestnews")) {
@@ -83,10 +82,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = title.innerText;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

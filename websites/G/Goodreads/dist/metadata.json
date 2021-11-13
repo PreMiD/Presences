@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Goodreads",
+  "author": {
+    "name": "ThiaudioTT3.2V6BITURBO",
+    "id": "258926263132094464"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/DtHgzGt.png",
+  "thumbnail": "https://i.imgur.com/susc3Ij.png",
+  "version": "1.0.4",
+  "color": "#b5ae84",
+  "tags": [
+    "books"
+  ],
+  "url": "www.goodreads.com",
+  "description": {
+    "en": "Goodreads is an American social cataloging website that allows individuals to search its database of books, annotations, quotes, and reviews."
+  }
+}

@@ -3,8 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
   path = document.location.pathname,
-  pathSplit = path.split("/"),
-  mangaName = pathSplit[2];
+  [, , mangaName] = path.split("/");
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -26,7 +25,7 @@ presence.on("UpdateData", async () => {
         topicName = document.querySelector(".DiscussionHero-title").textContent;
 
       presenceData.details = "Lis un topic du forum :";
-      presenceData.state = "[" + groupName + "] " + topicName;
+      presenceData.state = `[${groupName}] ${topicName}`;
       presenceData.smallImageKey = "reading";
     }
   } else if (path.includes("mangas/") + mangaName) {
@@ -46,8 +45,8 @@ presence.on("UpdateData", async () => {
       },
       manga = upperCaseWords(fullMangaName);
 
-    presenceData.details = "Entrain de lire " + manga + " :";
-    presenceData.state = chapter + " | " + page;
+    presenceData.details = `Entrain de lire ${manga} :`;
+    presenceData.state = `${chapter} | ${page}`;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = "Lis un scan";
     presenceData.buttons = [
@@ -76,10 +75,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Page d'accueil";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

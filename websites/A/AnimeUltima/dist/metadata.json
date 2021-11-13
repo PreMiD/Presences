@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "VocalZero",
+    "id": "223891083724193792"
+  },
+  "service": "AnimeUltima",
+  "description": {
+    "en": "AnimeUltima has a large catalog of anime that you can stream for free and without registration."
+  },
+  "url": [
+    "animeultima.to",
+    "www1.animeultima.to"
+  ],
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/yL5SICQ.png",
+  "thumbnail": "https://i.imgur.com/3K2hG7O.png",
+  "color": "#FF3333",
+  "tags": [
+    "anime",
+    "nfsw",
+    "video"
+  ],
+  "category": "anime"
+}

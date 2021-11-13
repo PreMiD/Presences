@@ -1,15 +1,14 @@
 const presence = new Presence({
-  clientId: "721986767322087464"
-});
-
+    clientId: "721986767322087464"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
-let presenceData: PresenceData = {
-  details: "Viewing an unsupported page",
-  largeImageKey: "lg",
-  startTimestamp: browsingStamp
-};
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
+  presenceData: PresenceData = {
+    details: "Viewing an unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
+  };
 const updateCallback = {
     _function: null as () => void,
     get function(): () => void {
@@ -48,75 +47,110 @@ const updateCallback = {
   if (
     currentURL.hostname === "tm-exchange.com" ||
     currentURL.hostname === "www.tm-exchange.com"
-  ) {
+  )
     presenceData.details = "On the home page";
-  } else if (currentURL.hostname === "blog.tm-exchange.com") {
+  else if (currentURL.hostname === "blog.tm-exchange.com") {
     if (currentPath[0] === "post") {
       presenceData.details = "Reading a blog post";
       presenceData.state = document.querySelector(".WindowHeader1").textContent;
-    } else if (currentPath[0] === "archive.aspx") {
+    } else if (currentPath[0] === "archive.aspx")
       presenceData.details = "Viewing the blog archive";
-    } else {
-      presenceData.details = "Viewing the blog";
-    }
+    else presenceData.details = "Viewing the blog";
   } else {
     let pageType: string,
       idPrefix = "ctl03";
 
     /*
 	
-		This part figures out the page type. 
+		This part figures out the page type.
 		There are three ways for getting it's type.
+
+		The old structure are done as below.
 	
 		1. From the "action" parameter on the current URL.
 		2. From the "action" parameter on the URL located on the "External Link" part on the top left corner.
 		3. From the "Location" part on the top left corner, specifically the bolded part.
 	
+		The new structure (only TMNF and TMUF) are done as below.
+
+		1. From the "action" path on the URL located on the "External Link" part on the top left corner.
+		2. From the "Location" part on the top left corner, specifically the bolded part.
+		3. From the "action" path on the current URL. (This is done last because the unrealibilty of the URL in some cases.)
+
 		*/
 
+    const locationType: { [index: string]: string } = {
+      Home: "home",
+      Login: "login", // action guessed
+      Registration: "register", // action guessed
+      "Lost Login": "forget", // action guessed
+      "Track Info": "trackshow",
+      "Search Tracks": "tracksearch",
+      "Nadeo Tracks": "tracksearch",
+      "Your AOI": "tracksearch",
+      "User's Tracks": "tracksearch",
+      "Track Signs": "tracksigns",
+      "Track Upload": "trackuploadtrack",
+      "Submit Replays": "recordmassupload",
+      Leaderboards: "userrecords",
+      "Your Tracks": "tracksearch",
+      "Your Replays": "tracksearch",
+      "Your Downloads": "tracksearch",
+      PlayPal: "playpal",
+      "PlayPal On-Line": "playpalonline",
+      TrackBeta: "trackbeta",
+      "Find Users": "usersearch",
+      "User Info": "usershow",
+      "User Packs": "trackpacksearch",
+      "Pack Info": "trackpackshow",
+      "Your Account": "usershow",
+      "Send Private Message": "postupdate",
+      "Edit Post": "postedit",
+      "Report Problem": "reportproblem",
+      "News Archive": "newssearch",
+      "Track Replay Info": "trackreplayshow"
+    };
+
     if (
-      getURLParam("action") !== null &&
-      getURLParam("action") !== "auto#auto"
+      currentURL.host === "united.tm-exchange.com" ||
+      currentURL.host === "tmnforever.tm-exchange.com"
     ) {
-      pageType = getURLParam("action");
-    } else if (document.querySelector(".BookmarkCell a") !== null) {
-      currentURL = new URL(
-        document.querySelector(".BookmarkCell a").textContent
-      );
-      pageType = getURLParam("action");
+      if (document.querySelector(".BookmarkCell a")) {
+        currentURL = new URL(
+          document.querySelector(".BookmarkCell a").textContent
+        );
+        currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+        [pageType] = currentPath;
+      } else {
+        try {
+          pageType =
+            locationType[
+              document.querySelector(".NavigatorCell b").textContent
+            ];
+        } catch (e) {
+          pageType = currentPath[0] || null;
+        }
+      }
     } else {
-      const locationType: { [index: string]: string } = {
-        Home: "home",
-        Login: "login", // action guessed
-        Registration: "register", // action guessed
-        "Lost Login": "forget", // action guessed
-        "Track Info": "trackshow",
-        "Search Tracks": "tracksearch",
-        "Nadeo Tracks": "tracksearch",
-        "Your AOI": "tracksearch",
-        "Track Signs": "tracksigns",
-        "Track Upload": "trackuploadtrack",
-        "Submit Replays": "recordmassupload",
-        Leaderboards: "userrecords",
-        "Your Tracks": "tracksearch",
-        "Your Replays": "tracksearch",
-        "Your Downloads": "tracksearch",
-        PlayPal: "playpal",
-        "PlayPal On-Line": "playpalonline",
-        TrackBeta: "trackbeta",
-        "Find Users": "usersearch",
-        "User Info": "usershow",
-        "User Packs": "userpacks", // action guessed
-        "Your Account": "usershow",
-        "Send Private Message": "postupdate",
-        "Edit Post": "postedit",
-        "Report Problem": "reportproblem"
-      };
-      try {
-        pageType =
-          locationType[document.querySelector(".NavigatorCell b").textContent];
-      } catch (e) {
-        pageType = null;
+      if (
+        getURLParam("action") !== null &&
+        getURLParam("action") !== "auto#auto"
+      )
+        pageType = getURLParam("action");
+      else if (document.querySelector(".BookmarkCell a")) {
+        currentURL = new URL(
+          document.querySelector(".BookmarkCell a").textContent
+        );
+        pageType = getURLParam("action");
+      } else {
+        try {
+          pageType =
+            locationType[
+              document.querySelector(".NavigatorCell b").textContent
+            ];
+        } catch (e) {
+          pageType = null;
+        }
       }
     }
 
@@ -128,12 +162,13 @@ const updateCallback = {
     switch (currentURL.host) {
       case "united.tm-exchange.com":
         presenceData.smallImageKey = "united";
-        presenceData.smallImageText = "United";
-        idPrefix = "_ctl3";
+        presenceData.smallImageText = "United (TMUF-X)";
+        idPrefix = "_ctl1";
         break;
       case "tmnforever.tm-exchange.com":
         presenceData.smallImageKey = "nforever";
-        presenceData.smallImageText = "Nations Forever";
+        presenceData.smallImageText = "Nations Forever (TMNF-X)";
+        idPrefix = "ctl01";
         break;
       case "nations.tm-exchange.com":
         presenceData.smallImageKey = "nations";
@@ -151,17 +186,22 @@ const updateCallback = {
 
     /* This part sets the details to be given to PreMID. */
 
-    if (currentPath[0] === "error") {
+    if (
+      currentPath[0] === "error" ||
+      currentPath[0] === "errorhandler" ||
+      (document.querySelector(".WindowTitle") &&
+        document.querySelector(".WindowTitle").textContent === "Error") ||
+      (document.querySelector("h1") &&
+        document.querySelector("h1").textContent === "Server Error")
+    )
       presenceData.details = "On a non-existent page";
-    } else if (pageType === "home") {
-      presenceData.details = "On the home page";
-    } else if (pageType === "login") {
-      presenceData.details = "Logging in";
-    } else if (pageType === "register") {
+    else if (pageType === "home") presenceData.details = "On the home page";
+    else if (pageType === "login") presenceData.details = "Logging in";
+    else if (pageType === "register")
       presenceData.details = "Registering an account";
-    } else if (pageType === "forget") {
+    else if (pageType === "forget")
       presenceData.details = "Figuring out the password";
-    } else if (pageType === "trackshow") {
+    else if (pageType === "trackshow") {
       presenceData.details = document.querySelector(
         `#${idPrefix}_ShowTrackName`
       ).textContent;
@@ -173,93 +213,98 @@ const updateCallback = {
       if (
         document.querySelector(`#${idPrefix}_ShowSummary > b:nth-child(1)`)
           .textContent === "tracks"
-      )
+      ) {
         searchSummary = document
           .querySelector(`#${idPrefix}_ShowSummary`)
           .textContent.slice(15, this.length - 4);
-      else
+      } else {
         searchSummary = document
           .querySelector(`#${idPrefix}_ShowSummary`)
           .textContent.slice(8, this.length - 4);
+      }
       presenceData.details = "Searching for a track";
-      if (document.querySelector(".TextFilter"))
+      if (document.querySelector(".TextFilter")) {
         presenceData.state = `${document
           .querySelector(".TextFilter")
           .textContent.slice(9, this.length - 1)}, ${searchSummary}`;
-      else
+      } else {
         presenceData.state =
           searchSummary[0].toUpperCase() + searchSummary.slice(1);
-    } else if (pageType === "tracksigns") {
+      }
+    } else if (pageType === "tracksigns")
       presenceData.details = "Viewing track signs";
-    } else if (pageType === "trackuploadtrack") {
+    else if (pageType === "trackuploadtrack")
       presenceData.details = "Uploading a track";
-    } else if (pageType === "recordmassupload") {
+    else if (pageType === "recordmassupload")
       presenceData.details = "Submitting replays";
-    } else if (pageType === "userrecords") {
+    else if (pageType === "userrecords") {
       const searchSummary = document
         .querySelector(`#${idPrefix}_ShowSummary`)
-        .textContent.slice(17, this.length - 4);
+        .textContent.slice(16, this.length - 4);
       presenceData.details = "Viewing the leaderboards";
       if (
         (document.querySelector(`#${idPrefix}_GetUser`) as HTMLInputElement)
           .value
-      )
+      ) {
         presenceData.state = `${
           (document.querySelector(`#${idPrefix}_GetUser`) as HTMLInputElement)
             .value
         }, ${searchSummary}`;
-      else
+      } else {
         presenceData.state =
           searchSummary[0].toUpperCase() + searchSummary.slice(1);
+      }
     } else if (pageType === "forumshow" || pageType === "forumsshow") {
       presenceData.details = "Viewing the forums";
-      if (pageType === "forumshow")
+      if (pageType === "forumshow") {
         presenceData.state = document
           .querySelector(".WindowTitle")
           .textContent.trim();
+      }
     } else if (pageType === "threadshow") {
       presenceData.details = "Viewing a thread";
       presenceData.state = document.querySelector(
         `#${idPrefix}_ShowSubject`
       ).textContent;
-    } else if (pageType === "playpal") {
-      presenceData.details = "Viewing PlayPal";
-    } else if (pageType === "playpalonline") {
+    } else if (pageType === "playpal") presenceData.details = "Viewing PlayPal";
+    else if (pageType === "playpalonline")
       presenceData.details = "Viewing PlayPal Online";
-    } else if (pageType === "trackbeta") {
+    else if (pageType === "trackbeta")
       presenceData.details = "Viewing TrackBeta";
-    } else if (pageType === "usersearch") {
+    else if (pageType === "usersearch") {
       const searchSummary = document
         .querySelector(`#${idPrefix}_ShowSummary`)
         .textContent.slice(15, this.length - 4);
       presenceData.details = "Searching for a user";
-      if (document.querySelector(`#${idPrefix}_ShowName`))
+      if (document.querySelector(`#${idPrefix}_ShowName`)) {
         presenceData.state = `${
           document.querySelector(`#${idPrefix}_ShowName`).textContent
         }, ${searchSummary}`;
-      else
+      } else {
         presenceData.state =
           searchSummary[0].toUpperCase() + searchSummary.slice(1);
+      }
     } else if (pageType === "usershow") {
       presenceData.details = "Viewing a user's info";
       presenceData.state = document.querySelector(
         `#${idPrefix}_ShowLoginId`
       ).textContent;
-    } else if (pageType === "userpacks") {
+    } else if (pageType === "trackpacksearch") {
       const searchSummary = document
         .querySelector(`#${idPrefix}_ShowSummary`)
         .textContent.slice(20, this.length - 4);
       presenceData.details = "Searching for a user pack";
-      if (document.querySelector(`#${idPrefix}_ShowName`))
+      if (document.querySelector(`#${idPrefix}_ShowName`)) {
         presenceData.state = `${
           document.querySelector(`#${idPrefix}_ShowName`).textContent
         }, ${searchSummary}`;
-      else
+      } else {
         presenceData.state =
           searchSummary[0].toUpperCase() + searchSummary.slice(1);
-    } else if (pageType === "postupdate") {
+      }
+    } else if (pageType === "postupdate")
       presenceData.details = "Writing a private message";
-    } else if (pageType === "trackpackshow") {
+    else if (pageType === "trackpackshow") {
       presenceData.details = "Viewing a track pack";
       presenceData.state = `${
         document.querySelector(`#${idPrefix}_ShowPackName`).textContent
@@ -268,10 +313,16 @@ const updateCallback = {
           "#Table7 > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > a:nth-child(3)"
         ).textContent
       }`;
-    } else if (pageType === "postedit") {
-      presenceData.details = "Editing a post";
-    } else if (pageType === "reportproblem") {
+    } else if (pageType === "postedit") presenceData.details = "Editing a post";
+    else if (pageType === "reportproblem")
       presenceData.details = "Reporting something";
+    else if (pageType === "newssearch")
+      presenceData.details = "Viewing the news archive";
+    else if (pageType === "trackreplayshow") {
+      presenceData.details = "Viewing the replay history";
+      presenceData.state = document.querySelector(
+        `#${idPrefix}_Windowrow10 a`
+      ).textContent;
     }
   }
 })();

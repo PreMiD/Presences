@@ -4,19 +4,16 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  const page = window.location.pathname;
+      largeImageKey: "logo"
+    },
+    browsingStamp = Math.floor(Date.now() / 1000),
+    page = window.location.pathname;
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (page.includes("search")) {
-    presenceData.details = "Searching something";
-  } else if (page.endsWith("/add")) {
-    presenceData.details = "Adding a new bot";
-  } else if (page.startsWith("/bots/")) {
+  if (page.includes("search")) presenceData.details = "Searching something";
+  else if (page.endsWith("/add")) presenceData.details = "Adding a new bot";
+  else if (page.startsWith("/bots/")) {
     presenceData.details = "Viewing a bot:";
     presenceData.state = document.querySelector(
       "#__layout > div > main > div > section.bot__header > div > div > div > div.bot__name"
@@ -37,10 +34,8 @@ presence.on("UpdateData", () => {
     presenceData.state = "API Documentation";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

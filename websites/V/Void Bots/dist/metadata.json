@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "DanPlayz",
     "id": "209796601357533184"
@@ -14,7 +15,7 @@
     "beta.voidbots.net",
     "docs.voidbots.net"
   ],
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/JZWaUA6.png",
   "thumbnail": "https://i.imgur.com/eQfwKHr.png",
   "color": "#B04BEC",

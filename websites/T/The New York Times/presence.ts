@@ -5,11 +5,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   let details, state;
-  const title = document.title;
+  const { title } = document;
 
-  if (window.location.href === "https://www.nytimes.com/") {
+  if (window.location.href === "https://www.nytimes.com/")
     details = "Viewing Home Page";
-  } else if (document.location.pathname.includes("/interactive/")) {
+  else if (document.location.pathname.includes("/interactive/")) {
     details = "Viewing an Interactive: ";
     state = title.replace(" - The New York Times", "");
   } else if (
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
     state = title.replace(" - The New York Times", "");
   } else if (document.location.pathname.includes("/podcasts/the-daily/")) {
     details = "Viewing a Podcast: ";
-    state = "The Daily: " + title.replace(" - The New York Times", "");
+    state = `The Daily: ${title.replace(" - The New York Times", "")}`;
   } else {
     details = "Viewing an Article: ";
     state = title.replace(" - The New York Times", "");
@@ -49,18 +49,15 @@ presence.on("UpdateData", async () => {
     buttons: [{ label: "View Page", url: document.URL }]
   };
 
-  if (data.state == null) {
-    delete data.state;
-  }
+  if (!data.state) delete data.state;
 
   if (
     !(await presence.getSetting("buttons")) ||
     window.location.href === "https://www.nytimes.com/"
-  ) {
+  )
     delete data.buttons;
-  }
 
-  if (data.details == null) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

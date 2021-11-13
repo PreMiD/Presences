@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -17,7 +17,7 @@
     "nl": "nhentai is een hentai-site die pornografische hentai en doujinshi-manga host met verschillende titels in verschillende vertaalde talen."
   },
   "url": "nhentai.net",
-  "version": "2.4.3",
+  "version": "2.4.5",
   "logo": "https://i.imgur.com/xRqpOcL.png",
   "thumbnail": "https://i.imgur.com/Z3EG4lT.png",
   "color": "#eb2754",

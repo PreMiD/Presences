@@ -18,7 +18,7 @@ async function getStrings() {
       classmembers: "google classroom.classmembers",
       settings: "google classroom.settings"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -32,26 +32,22 @@ presence.on("UpdateData", async () => {
     },
     path: string[] = document.location.pathname.split("/"),
     privacy = await presence.getSetting("privacy"),
-    newLang = await presence.getSetting("lang");
+    newLang = await presence.getSetting("lang").catch(() => "en");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   path.shift();
-  if (path[0] === "u") {
-    path.splice(0, 2);
-  }
-  if (path[0] === "h") {
-    presenceData.details = (await strings).home;
-  } else if (path[0] === "calendar") {
+  if (path[0] === "u") path.splice(0, 2);
+
+  if (path[0] === "h") presenceData.details = (await strings).home;
+  else if (path[0] === "calendar")
     presenceData.details = (await strings).calendar;
-  } else if (path[0] === "a") {
-    presenceData.details = (await strings).todo;
-  } else if (path[0] === "c") {
+  else if (path[0] === "a") presenceData.details = (await strings).todo;
+  else if (path[0] === "c") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
     )
@@ -63,9 +59,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = privacy
         ? (await strings).assignmentPrivate
         : (await strings).assignment;
-    } else {
-      presenceData.details = (await strings).class;
-    }
+    } else presenceData.details = (await strings).class;
+
     if (!privacy) presenceData.state = classroom;
   } else if (path[0] === "w") {
     const classroom: string = document.querySelector(
@@ -92,8 +87,7 @@ presence.on("UpdateData", async () => {
       : (await strings).classmembers;
 
     if (!privacy) presenceData.state = classroom;
-  } else if (path[0] === "s") {
-    presenceData.details = (await strings).settings;
-  }
+  } else if (path[0] === "s") presenceData.details = (await strings).settings;
+
   presence.setActivity(presenceData);
 });

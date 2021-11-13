@@ -22,7 +22,7 @@ let browsingStamp = Math.floor(Date.now() / 1000);
 function getText(selector: string): string {
   if (
     document.querySelector(selector) !== null &&
-    document.querySelector(selector) !== undefined
+    document.querySelector(selector)
   )
     return document.querySelector(selector).textContent;
   else return null;
@@ -34,19 +34,18 @@ presence.on("UpdateData", async () => {
     },
     showPrivButton = await presence.getSetting("privateRoom"),
     showButtons = await presence.getSetting("showButtons"),
-    header = getText(SelectorMap["header"]),
-    status = getText(SelectorMap["status"]),
-    game = getText(SelectorMap["game"]),
-    roomID = getText(SelectorMap["roomid"]),
-    replay = getText(SelectorMap["replay"]);
-  let buttons: Array<{ label: string; url: string }> = [];
+    header = getText(SelectorMap.header),
+    status = getText(SelectorMap.status),
+    game = getText(SelectorMap.game),
+    roomID = getText(SelectorMap.roomid),
+    replay = getText(SelectorMap.replay);
   if (
     status.includes("Idle") ||
     status.includes("Busy") ||
     status.includes("Offline")
-  ) {
+  )
     presenceData.details = status;
-  } else {
+  else {
     if (menuPrincipal.includes(header)) {
       browsingStamp = Math.floor(Date.now() / 1000);
       presenceData.details = header;
@@ -72,16 +71,21 @@ presence.on("UpdateData", async () => {
       presenceData.state = status.replace(/([a-z]+) .* ([a-z]+)/i, "$1 $2");
       presenceData.smallImageKey = "ct";
       presenceData.smallImageText = game;
-      if (status.includes("public"))
-        buttons.push({
-          label: "Enter Public Room",
-          url: "https://tetr.io/" + roomID
-        });
-      else if (showPrivButton)
-        buttons.push({
-          label: "Enter Private Room",
-          url: "https://tetr.io/" + roomID
-        });
+      if (status.includes("public")) {
+        presenceData.buttons = [
+          {
+            label: "Enter Public Room",
+            url: `https://tetr.io/${roomID}`
+          }
+        ];
+      } else if (showPrivButton) {
+        presenceData.buttons = [
+          {
+            label: "Enter Private Room",
+            url: `https://tetr.io/${roomID}`
+          }
+        ];
+      }
     } else if (status.includes("QUICK")) {
       if (status.includes("game")) presenceData.startTimestamp = browsingStamp;
       else browsingStamp = Math.floor(Date.now() / 1000);
@@ -125,23 +129,20 @@ presence.on("UpdateData", async () => {
     }
   }
   if (
-    getText(SelectorMap["username"]) !== "" &&
-    !getText(SelectorMap["username"]).includes("guest-") &&
+    getText(SelectorMap.username) !== "" &&
+    !getText(SelectorMap.username).includes("guest-") &&
     showButtons
   ) {
-    buttons.push({
-      label: "View Profile",
-      url: "https://ch.tetr.io/u/" + getText(SelectorMap["username"])
-    });
-    presenceData.buttons = buttons;
-  } else {
-    buttons = [];
-    delete presenceData.buttons;
-  }
-  if (presenceData.details == null) {
+    presenceData.buttons = [
+      {
+        label: "View Profile",
+        url: `https://ch.tetr.io/u/${getText(SelectorMap.username)}`
+      }
+    ];
+  } else delete presenceData.buttons;
+
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Hans5958",
+    "id": "850759953718575224"
+  },
+  "service": "Wikia.org",
+  "url": "wikia.org",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/qvLS6QI.png",
+  "thumbnail": "https://i.imgur.com/3Ikm2IH.png",
+  "color": "#39424D",
+  "tags": [
+    "encyclopedia",
+    "informations",
+    "wiki",
+    "wikia",
+    "wikicities",
+    "fandom"
+  ],
+  "description": {
+    "en": "Wikia.org shines a light on some of the world's most important topics, creating a platform for passionate people to share information about history, social, causes, politics, and more."
+  },
+  "category": "other",
+  "regExp": "([a-z0-9-]+[.])?wikia[.]org[/]"
+}

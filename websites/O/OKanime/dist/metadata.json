@@ -1,7 +1,8 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
-    "name": "ririxi",
-    "id": "192490421308489731"
+    "name": "PreMiD",
+    "id": "503557087041683458"
   },
   "service": "OKanime",
   "description": {
@@ -12,7 +13,7 @@
     "okanime.tv",
     "www.okanime.tv"
   ],
-  "version": "1.1.10",
+  "version": "1.1.13",
   "logo": "https://i.imgur.com/mhjMnnU.png",
   "thumbnail": "https://i.imgur.com/NAiM77y.png",
   "color": "#a5173b",

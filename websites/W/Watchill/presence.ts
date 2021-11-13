@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  pages = {
+  pages: { [page: string]: string } = {
     "/": "Ana Sayfa",
     "/login": "Giriş Yap",
     "/series": "Diziler",
@@ -16,20 +16,6 @@ const presence = new Presence({
     "/profile": "Profilim"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     video = document.querySelector("video") as HTMLVideoElement,
@@ -38,7 +24,7 @@ presence.on("UpdateData", async () => {
     ),
     username = document.querySelector("#profile_fullname");
 
-  if (page.includes("/show/") && showTitle && showTitle.textContent != "") {
+  if (page.includes("/show/") && showTitle && showTitle.textContent !== "") {
     presence.setActivity({
       largeImageKey: "wh-logo",
       details: "Bir diziyi inceliyor:",
@@ -48,7 +34,7 @@ presence.on("UpdateData", async () => {
   } else if (
     page.includes("/user/") &&
     username &&
-    username.textContent != ""
+    username.textContent !== ""
   ) {
     presence.setActivity({
       largeImageKey: "wh-logo",
@@ -78,7 +64,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "wh-logo",
       details: "Bir kategoriye göz atıyor:",
       state:
-        categoryName && categoryName.textContent != ""
+        categoryName && categoryName.textContent !== ""
           ? categoryName.textContent.replace("Dizileri", "")
           : "Bilinmeyen",
       startTimestamp: Math.floor(Date.now() / 1000)
@@ -90,27 +76,26 @@ presence.on("UpdateData", async () => {
       IMDb = document.querySelector(
         "body > div.wrapper > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(1) > button > span"
       ),
-      timestamps = getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      );
+      ),
+      data: PresenceData = {
+        largeImageKey: "wh-logo",
+        details:
+          title && title.textContent !== "" ? title.textContent : "Bilinmeyen",
+        state: `IMDb: ${
+          IMDb && IMDb.textContent !== "" ? IMDb.textContent : "Bilinmiyor"
+        }`,
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play
+      };
 
-    const data: { [k: string]: any } = {
-      largeImageKey: "wh-logo",
-      details:
-        title && title.textContent != "" ? title.textContent : "Bilinmeyen",
-      state: `IMDb: ${
-        IMDb && IMDb.textContent != "" ? IMDb.textContent : "Bilinmiyor"
-      }`,
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play
-    };
-
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+    if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
+      data.startTimestamp = startTimestamp;
+      data.endTimestamp = endTimestamp;
     }
     if (video.paused) {
       delete data.startTimestamp;
@@ -134,30 +119,29 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "body > div.wrapper > div.fw.playBotAll > div > div > div.playTopInfo > ul > li.desc"
         ),
-      timestamps = getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      );
+      ),
+      data: { [k: string]: string | number } = {
+        largeImageKey: "wh-logo",
+        details:
+          showName && showName.textContent !== ""
+            ? showName.textContent.trim()
+            : "Bilinmeyen",
+        state:
+          episode && episode.textContent !== ""
+            ? episode.textContent.trim()
+            : "Bilinmeyen",
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play
+      };
 
-    const data: { [k: string]: any } = {
-      largeImageKey: "wh-logo",
-      details:
-        showName && showName.textContent != ""
-          ? showName.textContent.trim()
-          : "Bilinmeyen",
-      state:
-        episode && episode.textContent != ""
-          ? episode.textContent.trim()
-          : "Bilinmeyen",
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play
-    };
-
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+    if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
+      data.startTimestamp = startTimestamp;
+      data.endTimestamp = endTimestamp;
     }
     if (video.paused) {
       delete data.startTimestamp;

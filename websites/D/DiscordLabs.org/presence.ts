@@ -1,7 +1,7 @@
 const presence = new Presence({
-  clientId: "660894911331172372"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "660894911331172372"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let priceEls;
 
 presence.on("UpdateData", () => {
@@ -11,7 +11,7 @@ presence.on("UpdateData", () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.hostname == "bots.discordlabs.org") {
+  if (document.location.hostname === "bots.discordlabs.org") {
     presenceData.details = "Viewing Page:";
     presenceData.state = "DiscordLabs Bot List";
 
@@ -20,8 +20,8 @@ presence.on("UpdateData", () => {
       presenceData.state = "DiscordLabs Partners";
     } else if (document.location.pathname.includes("/profile/")) {
       priceEls = document.getElementsByClassName("uname");
-      for (var i = 0; i < priceEls.length; i++) {
-        var profilename = priceEls[i].innerText;
+      for (let i = 0; i < priceEls.length; i++) {
+        const profilename = (priceEls[i] as HTMLElement).innerText;
         presenceData.details = "Viewing a profile:";
         presenceData.state = profilename;
       }
@@ -32,23 +32,21 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Page:";
       presenceData.state = "DiscordLabs Bot Sumbit";
     } else if (document.location.pathname.includes("/search/")) {
-      presenceData.details = `Search for:`;
+      presenceData.details = "Search for:";
       presenceData.state = window.location.href
         .slice(39)
         .replace(/\+|%20/g, " ");
     } else if (document.location.pathname.includes("/bot/")) {
       priceEls = document.getElementsByClassName("botname");
-      for (var i = 0; i < priceEls.length; i++) {
-        var botname = priceEls[i].innerText;
+      for (let i = 0; i < priceEls.length; i++) {
+        const botname = (priceEls[i] as HTMLElement).innerText;
         presenceData.details = "Viewing a Discord bot:";
         presenceData.state = botname;
       }
     }
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

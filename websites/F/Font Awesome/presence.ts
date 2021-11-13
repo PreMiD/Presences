@@ -10,7 +10,7 @@ pPresence.on("UpdateData", async () => {
     },
     pPage = window.location.pathname;
 
-  if (pPage == "/") {
+  if (pPage === "/") {
     pData.details = "Browsing Page:";
     pData.state = "Main";
   } else if (pPage.includes("/icons")) {
@@ -40,27 +40,25 @@ pPresence.on("UpdateData", async () => {
       pData.details = "Searching:";
       pData.state = myParam;
     }
-  } else if (pPage == "/start") {
+  } else if (pPage === "/start") {
     pData.details = "Browsing Page:";
     pData.state = "Start";
-  } else if (pPage == "/support") {
+  } else if (pPage === "/support") {
     pData.details = "Browsing Page:";
     pData.state = "Support";
-  } else if (pPage == "/plans") {
+  } else if (pPage === "/plans") {
     pData.details = "Browsing Page:";
     pData.state = "Plans";
-  } else if (pPage == "/plans/standard") {
+  } else if (pPage === "/plans/standard") {
     pData.details = "Browsing Page:";
     pData.state = "Plan Standard";
-  } else if (pPage == "/sessions/sign-in") {
+  } else if (pPage === "/sessions/sign-in") {
     pData.details = "Browsing Page:";
     pData.state = "Sign In";
   }
 
-  if (pData.details == null) {
+  if (!pData.details) {
     pPresence.setTrayTitle();
     pPresence.setActivity();
-  } else {
-    pPresence.setActivity(pData);
-  }
+  } else pPresence.setActivity(pData);
 });

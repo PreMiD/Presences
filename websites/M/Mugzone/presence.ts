@@ -14,9 +14,9 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     presenceData.startTimestamp = browsingStamp;
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/")
       presenceData.details = "Malody Main Page";
-    } else if (document.location.pathname == "/index") {
+    else if (document.location.pathname === "/index") {
       presenceData.smallImageKey = "home";
       presenceData.details = "Viewing Home Page";
     } else if (document.location.pathname.endsWith("/chart")) {
@@ -81,9 +81,21 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (document.location.pathname.startsWith("/store")) {
-      if (document.location.pathname.includes("/skin")) {
+      if (document.location.pathname.endsWith("/skin")) {
         presenceData.smallImageKey = "skin";
         presenceData.details = "Browsing Skin Store";
+      } else if (document.location.pathname.includes("/skin/detail")) {
+        presenceData.smallImageKey = "skin";
+        presenceData.details = "Viewing a skin:";
+        presenceData.state = document.querySelector(
+          "#content > div.song_title.g_rblock > div.right > h2.textfix.title"
+        ).textContent;
+        presenceData.buttons = [
+          {
+            label: "View Skin",
+            url: document.URL
+          }
+        ];
       } else if (document.location.pathname.endsWith("/all")) {
         presenceData.smallImageKey = "store";
         presenceData.details = "Browsing Item Store";
@@ -94,9 +106,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.startsWith("/talk")) {
       if (document.location.pathname.includes("/topic")) {
         presenceData.smallImageKey = "chat";
-        presenceData.details =
-          "Viewing topic: " +
-          document.querySelector("#chead > div > a").textContent;
+        presenceData.details = `Viewing topic: ${
+          document.querySelector("#chead > div > a").textContent
+        }`;
         presenceData.state = document.querySelector(
           "#g_talk > div.g_talk_title > p > span"
         ).textContent;
@@ -125,14 +137,74 @@ presence.on("UpdateData", async () => {
         }
       }
     } else if (document.location.pathname.startsWith("/accounts")) {
-      if (document.location.pathname.includes("/login")) {
+      if (document.location.pathname.includes("/login"))
         presenceData.details = "Logging in";
+      else if (document.location.pathname.endsWith("/accounts/limit")) {
+        presenceData.smallImageKey = "jail";
+        presenceData.details = "Visiting the Jail";
+        presenceData.state = "What Is This Place Anyway?";
+        presenceData.buttons = [
+          {
+            label: `Go with ${
+              document.querySelector("#header > div > a:nth-child(4) > b")
+                .textContent
+            }`,
+            url: document.URL
+          }
+        ];
       } else if (document.location.pathname.includes("/user")) {
-        presenceData.details = "Viewing User: ";
-        presenceData.state = document.querySelector(
-          "#content > div.user_head.g_rblock > div.right > p.name > span"
-        ).textContent;
-        presenceData.smallImageKey = "user";
+        if (
+          document.querySelector(
+            "#content > div.user_head.g_rblock > div.right > p.name > span"
+          ).textContent ===
+          document.querySelector("#header > div > a:nth-child(4) > b")
+            .textContent
+        ) {
+          const a = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
+            ).textContent,
+            b = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
+            ).textContent,
+            c = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
+            ).textContent,
+            d = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
+            ).textContent,
+            e = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank"
+            ).textContent,
+            f = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(6) > div > p.rank"
+            ).textContent,
+            a1: number = +a.replace("#", ""),
+            b1: number = +b.replace("#", ""),
+            c1: number = +c.replace("#", ""),
+            d1: number = +d.replace("#", ""),
+            e1: number = +e.replace("#", ""),
+            f1: number = +f.replace("#", ""),
+            Top = Math.min(a1, b1, c1, d1, e1, f1);
+          presenceData.details = `User: ${
+            document.querySelector(
+              "#content > div.user_head.g_rblock > div.right > p.name > span"
+            ).textContent
+          }`;
+          presenceData.state = `Best Rank: ${Top}`;
+          presenceData.smallImageKey = "user";
+          presenceData.buttons = [
+            {
+              label: "Visit My Profile!",
+              url: document.URL
+            }
+          ];
+        } else {
+          presenceData.details = "Viewing User: ";
+          presenceData.state = document.querySelector(
+            "#content > div.user_head.g_rblock > div.right > p.name > span"
+          ).textContent;
+          presenceData.smallImageKey = "user";
+        }
       } else if (document.location.pathname.endsWith("/friend")) {
         presenceData.smallImageKey = "user";
         presenceData.details = "Viewing Friends List";
@@ -142,9 +214,9 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/page/userpage/edit/")) {
       presenceData.smallImageKey = "edit";
-      presenceData.details =
-        document.querySelector("#content > div.g_title").textContent +
-        "profile";
+      presenceData.details = `${
+        document.querySelector("#content > div.g_title").textContent
+      }profile`;
     } else if (document.location.pathname.includes("/page/search")) {
       presenceData.smallImageKey = "search";
       presenceData.details = document.querySelector(

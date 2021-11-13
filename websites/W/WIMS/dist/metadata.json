@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Migush",
     "id": "123859829453357056"
@@ -17,7 +18,7 @@
     "wims-schaersvoorde.nl",
     "85.148.206.56"
   ],
-  "version": "2.3.8",
+  "version": "2.3.11",
   "logo": "https://i.imgur.com/E9FdAjM.png",
   "thumbnail": "https://i.imgur.com/OLvrsMo.png",
   "color": "#f4f8d7",
