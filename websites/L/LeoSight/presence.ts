@@ -232,13 +232,13 @@ presence.on("UpdateData", async () => {
     else if (path.includes("writer.ic")) presenceData.state = "Writer";
     else if (path.includes("iris.ic/")) {
       presenceData.details = "Iris";
-      if (path == "/iris.ic/" || path == "/iris.ic")
+      if (path === "/iris.ic/" || path === "/iris.ic")
         presenceData.state = "Hlavní stránka";
       else if (path.includes("settings")) presenceData.state = "Nastavení";
       else if (path.includes("iris.ic/box")) presenceData.state = "Schránka";
       else if (
         path.includes("iris.ic/") &&
-        path != "iris.ic/" &&
+        path !== "iris.ic/" &&
         !path.includes("/users")
       ) {
         item = path.replace("/iris.ic/", "");
