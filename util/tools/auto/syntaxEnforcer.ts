@@ -94,7 +94,7 @@ const readFile = (path: string): string =>
       )
     );
 
-    await execShellCommand(["yarn", "pretty"]);
+    await execShellCommand(["yarn", "lint"]);
 
     // A clear splitter between TypeScript compilation and semver bumps
     console.log(

@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 
   if (video) {
     const title = document.querySelector(".player-controls-title")?.textContent,
-      timestamps = presence.getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
@@ -42,14 +42,16 @@ presence.on("UpdateData", async () => {
       );
 
     (data.details = title), (data.state = state);
-    (data.smallImageKey = live ? "live" : video.paused ? "pause" : "play"),
-      (data.smallImageText = live
-        ? (await strings).live
-        : video.paused
-        ? (await strings).pause
-        : (await strings).play),
-      (data.startTimestamp = live ? elapsed : timestamps[0]),
-      (data.endTimestamp = live ? undefined : timestamps[1]);
+    data.smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+    data.smallImageText = live
+      ? (await strings).live
+      : video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    data.startTimestamp = live ? elapsed : startTimestamp;
+    data.endTimestamp = endTimestamp;
+
+    if (live) delete data.endTimestamp;
 
     if (video.paused) {
       delete data.startTimestamp;

@@ -190,7 +190,7 @@ presence.on("UpdateData", () => {
     ) {
       const [, , , page] = window.location.pathname.toLowerCase().split("/");
       let nbpage = page;
-      if (nbpage === undefined) nbpage = "1";
+      if (!nbpage) nbpage = "1";
 
       presenceData.details = "Forum - Sujet";
       presenceData.state = `Lit le sujet : ${window.document.title

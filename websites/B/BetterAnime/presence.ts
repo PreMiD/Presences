@@ -367,8 +367,7 @@ presence.on("UpdateData", async () => {
       .catch(() => null);
 
     if (
-      ((!settingValue && setting.value === undefined) ||
-        settingValue === setting.value) &&
+      ((!settingValue && !setting.value) || settingValue === setting.value) &&
       setting.delete &&
       !setting.presence
     ) {

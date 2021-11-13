@@ -2,12 +2,12 @@ name: Schema Validation Check
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "**/metadata.json"
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - "**/metadata.json"
 jobs:

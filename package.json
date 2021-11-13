@@ -4,7 +4,7 @@
   "author": "Timeraa",
   "license": "MPL-2.0",
   "scripts": {
-    "pretty": "prettier --trailing-comma none --tab-width 2 --use-tabs false --end-of-line lf --prose-wrap always --write **/*.ts **/{metadata,tsconfig}.json",
+    "lint": "eslint --fix . && prettier --write **/*.ts **/{metadata,tsconfig}.json",
     "inc": "npm run inc:compile && node ./util/tools/massVer.js",
     "inc:compile": "tsc -p ./util/configs/tsconfig.massVer.json",
     "su": "npm run su:compile && node ./util/tools/schemaUpdater.js",
@@ -31,7 +31,7 @@
     "@types/semver": "^7.3.8",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
-    "axios": "^0.22.0",
+    "axios": "^0.24.0",
     "chalk": "^4.1.2",
     "debug": "^4.3.2",
     "enquirer": "^2.3.6",

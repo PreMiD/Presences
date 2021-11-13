@@ -11,11 +11,8 @@
     "ga_IE": "Is ardán cluiche é Tráth na gCeist Ceoil Anime a ligeann do chairde dul san iomaíocht i gcoinne a chéile ar eolas faoi cheol anime.",
     "nl": "Anime Music Quiz is een spelplatform waarmee vrienden het tegen elkaar kunnen opnemen op hun anime-muziekkennis."
   },
-  "url": [
-    "www.animemusicquiz.com",
-    "animemusicquiz.com"
-  ],
-  "version": "1.0.12",
+  "url": "animemusicquiz.com",
+  "version": "1.0.13",
   "logo": "https://i.imgur.com/oaRshoy.png",
   "thumbnail": "https://i.imgur.com/8tXZEqG.png",
   "color": "#DF6975",

@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
     if (path.match("/likes")) title = (await strings).viewLiked;
   }
 
-  if (objHeader === undefined && path.match("/status/")) {
+  if (!objHeader && path.match("/status/")) {
     title = (await strings).readTweet;
     [info] = stripText(
       document.querySelectorAll(
@@ -161,7 +161,6 @@ presence.on("UpdateData", async () => {
       document.createElement("HTMLDivElement");
 
     title = `Tweetdeck (${container.childElementCount} Columns)`;
-    info = undefined;
     image = "tweetdeck";
 
     const header = document.querySelector(".mdl-header-title"),

@@ -8,7 +8,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/zP76GVO.png",
   "thumbnail": "https://i.imgur.com/d0l7u4C.png",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "color": "#4165b3",
   "tags": [
     "comics",
@@ -17,12 +17,7 @@
     "komiku",
     "other"
   ],
-  "url": [
-    "komiku.id",
-    "data1.komiku.id",
-    "data2.komiku.id",
-    "data3.komiku.id"
-  ],
+  "url": "komiku.id",
   "description": {
     "en": "Komiku is a comic reading platform with the most complete list of comics in Indonesia.",
     "id": "Komiku adalah platform baca komik dengan daftar komik paling lengkap di Indonesia."

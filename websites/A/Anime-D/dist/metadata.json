@@ -8,12 +8,13 @@
   "category": "anime",
   "logo": "https://i.imgur.com/mD1fANc.jpg",
   "thumbnail": "https://i.imgur.com/2wyv3S9.jpg",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "color": "#cc6d00",
   "tags": [
     "anime",
     "videos",
-    "thai"
+    "thai",
+    "nsfw"
   ],
   "regExp": "([a-z0-9-]+[.])*anime-d[.]com[/]",
   "url": "anime-d.com",

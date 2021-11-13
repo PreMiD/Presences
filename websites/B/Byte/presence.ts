@@ -8,7 +8,7 @@ const presence = new Presence({
   getElement = (query: string): string => {
     const element = document.querySelector(query);
     if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
-    else return undefined;
+    else return;
   };
 
 let oldUrl: string, elapsed: number;
@@ -79,11 +79,7 @@ presence.on("UpdateData", async () => {
     data: PresenceData = {
       details: detailsObj.details,
       state: detailsObj.state,
-      largeImageKey: "byte",
-      smallImageKey: undefined,
-      smallImageText: undefined,
-      startTimestamp: undefined,
-      endTimestamp: undefined
+      largeImageKey: "byte"
     };
 
   if (oldUrl !== path) {
@@ -168,7 +164,7 @@ presence.on("UpdateData", async () => {
 
       const search = document.querySelector("input");
 
-      data.state = search.value !== "" ? search.value : undefined;
+      data.state = search.value;
     }
   }
 

@@ -42,16 +42,17 @@ presence.on("UpdateData", async () => {
       ),
       live = endTimestamp === Infinity;
 
-    (data.details = title), (data.state = getStateText(video.paused, live));
-    (data.smallImageKey = live ? "live" : video.paused ? "pause" : "play"),
-      (data.smallImageText = live
-        ? (await strings).live
-        : video.paused
-        ? (await strings).pause
-        : (await strings).play),
-      (data.startTimestamp = live ? elapsed : startTimestamp),
-      (data.endTimestamp = live ? undefined : endTimestamp);
-
+    data.details = title;
+    data.state = getStateText(video.paused, live);
+    data.smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+    data.smallImageText = live
+      ? (await strings).live
+      : video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    data.startTimestamp = live ? elapsed : startTimestamp;
+    if (!live) data.endTimestamp = endTimestamp;
+    if (live) delete data.endTimestamp;
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;

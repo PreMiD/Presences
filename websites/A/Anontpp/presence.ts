@@ -26,13 +26,7 @@ presence.on("UpdateData", async () => {
     showBrowseInfo = await presence.getSetting("browse"),
     showVideoInfo = await presence.getSetting("video"),
     data: PresenceData = {
-      details: undefined,
-      state: undefined,
-      largeImageKey: "anontpp",
-      smallImageKey: undefined,
-      smallImageText: undefined,
-      startTimestamp: undefined,
-      endTimestamp: undefined
+      largeImageKey: "anontpp"
     };
 
   if (oldUrl !== path) {

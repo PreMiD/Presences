@@ -30,10 +30,7 @@ presence.on("UpdateData", () => {
       .split("/");
     details = `Reading #${comicNumber}`;
     state = title;
-  } else {
-    details = "Browsing XKCD";
-    state = undefined;
-  }
+  } else details = "Browsing XKCD";
 
   const data: PresenceData = {
     details,

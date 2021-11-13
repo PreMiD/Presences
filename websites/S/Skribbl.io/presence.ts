@@ -4,14 +4,14 @@ const presence = new Presence({
 async function getStrings() {
   return presence.getStrings(
     {
-      buttonJoinGame: "kahoot.buttonJoinGame"
+      buttonJoinGame: "kahoot.buttonJoinGame",
+      viewHome: "general.viewHome"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
-let elapsed = Math.floor(Date.now() / 1000),
-  strings = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -22,9 +22,10 @@ presence.on("UpdateData", async () => {
       document.querySelector("#containerGamePlayers").textContent === ""
         ? false
         : true,
-    inLobby = document.querySelector("#round").textContent ? false : true,
+    inLobby =
+      document.querySelector("#round").textContent === "" ? false : true,
     buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang");
+    newLang = await presence.getSetting("lang").catch(() => "en");
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -43,13 +44,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-
-    if (elapsed === null) elapsed = Math.floor(Date.now() / 1000);
-
-    presenceData.startTimestamp = elapsed;
-  } else {
-    presenceData.details = "Viewing the Homepage";
-    elapsed = null;
-  }
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+  } else presenceData.details = (await strings).viewHome;
   presence.setActivity(presenceData);
 });

@@ -8,11 +8,11 @@ const presence = new Presence({ clientId: "655480486046466098" }),
 presence.on("UpdateData", () => {
   const page = document.location.pathname;
 
-  if (page.startsWith("/feed") || page === "/") {
+  if (page === "/") presenceData.details = "Ana sayfa";
+
+  if (page.startsWith("/feed")) {
     presenceData.details = "Ana sayfa";
-    page.startsWith("/feed")
-      ? (presenceData.state = "Duvarını kontrol ediyor...")
-      : undefined;
+    presenceData.state = "Duvarını kontrol ediyor...";
   }
 
   // Explore

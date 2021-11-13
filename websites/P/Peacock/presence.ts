@@ -21,7 +21,11 @@ presence.on("UpdateData", async () => {
     extra = "...";
 
   const { href } = window.location,
-    path = window.location.pathname;
+    path = window.location.pathname,
+    data: PresenceData = {
+      largeImageKey: "peacock",
+      details
+    };
 
   if (href !== oldUrl) {
     oldUrl = href;
@@ -39,7 +43,7 @@ presence.on("UpdateData", async () => {
 
   if (path.includes("/watch/search")) details = "Searching...";
 
-  startTimestamp = elapsed;
+  data.startTimestamp = elapsed;
 
   if (path.includes("/watch/playback") || path.includes("/watch/asset")) {
     video = document.querySelector(".video-player-component video");
@@ -47,11 +51,11 @@ presence.on("UpdateData", async () => {
       title =
         document.querySelector(".playback-header__title") ||
         document.querySelector(".playback-metadata__container-title");
-      const timestamps = presence.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        live = timestamps[1] === Infinity,
+        live = endTimestamp === Infinity,
         desc =
           document.querySelector(
             ".playback-metadata__container-episode-metadata-info"
@@ -75,29 +79,22 @@ presence.on("UpdateData", async () => {
         : video.paused
         ? (await strings).pause
         : (await strings).play;
-      startTimestamp = live ? elapsed : timestamps[0];
-      endTimestamp = live ? undefined : timestamps[1];
+      data.startTimestamp = live ? elapsed : startTimestamp;
+      data.endTimestamp = endTimestamp;
+
+      if (live) delete data.endTimestamp;
       if (video.paused) {
-        startTimestamp = undefined;
-        endTimestamp = undefined;
+        delete data.startTimestamp;
+        delete data.endTimestamp;
       }
     }
   }
 
-  const data: PresenceData = {
-    largeImageKey: "peacock",
-    details
-  };
-
-  if (state !== undefined) data.state = state;
-
-  if (smallImageKey !== undefined) data.smallImageKey = smallImageKey;
-
-  if (smallImageText !== undefined) data.smallImageText = smallImageText;
-
-  if (startTimestamp !== undefined) data.startTimestamp = startTimestamp;
-
-  if (endTimestamp !== undefined) data.endTimestamp = endTimestamp;
+  data.state = state;
+  data.smallImageKey = smallImageKey;
+  data.smallImageText = smallImageText;
+  data.startTimestamp = startTimestamp;
+  data.endTimestamp = endTimestamp;
 
   presence.setActivity(data, video ? !video.paused : true);
   presence.setTrayTitle(details);
