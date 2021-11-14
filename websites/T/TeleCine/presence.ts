@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "842620457655730207"
+  clientId: "842620457655730207",
 });
 const strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  browsing: "presence.playback.browsing"
+  browsing: "presence.playback.browsing",
 });
 
 presence.on("UpdateData", async () => {
@@ -12,31 +12,31 @@ presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector(
     "body > div > div > div > div > div > video"
   );
-  const path = document.location.pathname;
-  const pegarNome = () => {
-    if (path.startsWith("/filmes/") && !path.endsWith("documentarios")) {
+  function pegarNome() {
+    if (
+      document.location.pathname.startsWith("/filmes/") &&
+      !document.location.pathname.endsWith("documentarios")
+    ) {
       const genero = document.querySelector(
         "body > div > div > div > section > div > section > h1"
       ).textContent;
       const generoRegEx = /\s[A-Za-záàâãéèêíïóôõöúçÁÀÂÃÉÈÍÏÓÔÕÖÚÇ-]{3,}/;
       const regEx = new RegExp(generoRegEx);
-      const generoNome = genero.match(regEx).shift();
-      return generoNome;
-    } else if (path.includes("/filmes")) {
-      return undefined;
+      return genero?.match(regEx);
     }
   };
 
   switch (true) {
-    case path.endsWith("/mylist"): // LISTA
+    // LISTA
+    case document.location.pathname.endsWith("/mylist"):
       presenceData.details = "Visualizando lista...";
       break;
-
-    case path.includes("/franquias"): // FRANQUIAS
+    // FRANQUIAS
+    case document.location.pathname.includes("/franquias"):
       presenceData.details = "Visualizando franquias...";
       break;
 
-    case path.includes("/franquia/"): {
+    case document.location.pathname.includes("/franquia/"): {
       const franquia = document.querySelector(
         "body > div > div > div > section > div > h1"
       ).textContent;
@@ -44,12 +44,13 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Visualizando a franquia...";
       break;
     }
-
-    case path.includes("/cinelists"): // CINELISTS
+    // CINELISTS
+    case document.location.pathname.includes("/cinelists"):
       presenceData.details = "Visualizando cinelists...";
       break;
 
-    case path.includes("/cinelist/") || path.includes("/dc"): {
+    case document.location.pathname.includes("/cinelist/") ||
+      document.location.pathname.includes("/dc"): {
       const cinelist = document.querySelector(
         "body > div > div > div > section > div > h1"
       ).textContent;
@@ -57,29 +58,28 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Visualizando cinelist...";
       break;
     }
-    case path.endsWith("documentarios"): // DOCUMENTÁRIOS
+    // DOCUMENTÁRIOS
+    case document.location.pathname.endsWith("documentarios"):
       presenceData.details = "Vendo documentários...";
       break;
-
-    case path.startsWith("/filmes/") && !path.endsWith("documentarios"): // FILMES
+    // FILMES
+    case document.location.pathname.startsWith("/filmes/") &&
+      !document.location.pathname.endsWith("documentarios"):
       presenceData.details = "Vendo filmes por gênero:" + pegarNome();
       break;
 
-    case path.includes("/filmes"):
+    case document.location.pathname.includes("/filmes"):
       presenceData.details = "Vendo filmes por gênero...";
       break;
 
-    case path.startsWith("/filme/"): {
+    case document.location.pathname.startsWith("/filme/"): {
       const movie = document.querySelector(
         "body > div > div > div > div > section > div > div > h1"
       ).textContent;
       presenceData.details = movie;
       presenceData.state = "Visualizando página do filme...";
       if (video) {
-        const filmeRolando = document.querySelector(
-          "body > div > div > div > div > section > div > div > h1"
-        ).textContent;
-        presenceData.details = filmeRolando;
+        presenceData.details = movie;
         presenceData.state = "Assistindo filme...";
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
@@ -92,11 +92,12 @@ presence.on("UpdateData", async () => {
       }
       break;
     }
-    case path.includes("/account"): // CONTA
+    // CONTA
+    case document.location.pathname.includes("/account"):
       presenceData.details = "Visualizando informações da conta...";
       break;
-
-    case path.includes("/programacao"): // PROGRAMAÇÃO
+    // PROGRAMAÇÃO
+    case document.location.pathname.includes("/programacao"):
       presenceData.details = "Visualizando programação...";
       break;
   }
