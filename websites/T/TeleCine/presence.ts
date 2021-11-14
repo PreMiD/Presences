@@ -1,31 +1,31 @@
 const presence = new Presence({
-  clientId: "842620457655730207",
-});
-const strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  browsing: "presence.playback.browsing",
-});
+    clientId: "842620457655730207"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browsing: "presence.playback.browsing"
+  });
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = { largeImageKey: "logo" };
-  const video: HTMLVideoElement = document.querySelector(
-    "body > div > div > div > div > div > video"
-  );
+  const presenceData: PresenceData = { largeImageKey: "logo" },
+    video: HTMLVideoElement = document.querySelector(
+      "body > div > div > div > div > div > video"
+    );
   function pegarNome() {
     if (
       document.location.pathname.startsWith("/filmes/") &&
       !document.location.pathname.endsWith("documentarios")
     ) {
       const genero = document.querySelector(
-        "body > div > div > div > section > div > section > h1"
-      ).textContent;
-      const generoRegEx = /\s[A-Za-záàâãéèêíïóôõöúçÁÀÂÃÉÈÍÏÓÔÕÖÚÇ-]{3,}/;
-      const regEx = new RegExp(generoRegEx);
+          "body > div > div > div > section > div > section > h1"
+        ).textContent,
+        generoRegEx = /\s[A-Za-záàâãéèêíïóôõöúçÁÀÂÃÉÈÍÏÓÔÕÖÚÇ-]{3,}/,
+        regEx = new RegExp(generoRegEx);
       return genero?.match(regEx);
     }
-  };
-  
+  }
+
   switch (true) {
     // LISTA
     case document.location.pathname.endsWith("/mylist"):
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
     // FILMES
     case document.location.pathname.startsWith("/filmes/") &&
       !document.location.pathname.endsWith("documentarios"):
-      presenceData.details = "Vendo filmes por gênero:" + pegarNome();
+      presenceData.details = `Vendo filmes por gênero:${pegarNome()}`;
       break;
 
     case document.location.pathname.includes("/filmes"):
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
         const wachingMovie = document.querySelector(
           "body > div > div > div > div > section > div > div > h1"
         ).textContent;
-        presenceData.details =wachingMovie;
+        presenceData.details = wachingMovie;
         presenceData.state = "Assistindo filme...";
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
