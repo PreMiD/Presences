@@ -63,8 +63,8 @@ presence.on("UpdateData", async () => {
    else if (page.endsWith("/build") && titleSite) {
     presenceData.details = "Managing Website:";
     presenceData.state = titleSite.textContent;
-  } else if (page.endsWith("/domain")) {
-    if (titleSite) presenceData.details = "Managing Domains For:";
+  } else if (page.endsWith("/domain") && titleSite) {
+    presenceData.details = "Managing Domains For:";
   } else if (page.endsWith("/files"))
     presenceData.details = "Managing Files For:";
    else if (page.endsWith("/database"))
