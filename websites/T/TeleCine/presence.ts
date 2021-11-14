@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
       return genero?.match(regEx);
     }
   };
-
+  
   switch (true) {
     // LISTA
     case document.location.pathname.endsWith("/mylist"):
