@@ -56,16 +56,16 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "Browsing Through The Forum";
   } else if (page.includes("/free-website-sign-up")) 
     presenceData.details = "Signing up";
-   else if (page.includes("members/website/list")) 
+   else if (page.includes("members/website/list"))
     presenceData.details = "Viewing All Websites";
-   else if (page.includes("/members/store")) 
+   else if (page.includes("/members/store"))
     presenceData.details = "Viewing the Store";
-   else if (page.endsWith("/build") && titleSite) {
+   else if (page.endsWith("/build") && titleSite){
     presenceData.details = "Managing Website:";
     presenceData.state = titleSite.textContent;
-  } else if (page.endsWith("/domain") && titleSite) {
+  } else if (page.endsWith("/domain") && titleSite)
     presenceData.details = "Managing Domains For:";
-  } else if (page.endsWith("/files"))
+    else if (page.endsWith("/files"))
     presenceData.details = "Managing Files For:";
    else if (page.endsWith("/database"))
     presenceData.details = "Managing Database For:";
