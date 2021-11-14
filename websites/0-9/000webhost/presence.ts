@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else presenceData.details = "Browsing Through The Forum";
-  } else if (page.includes("/free-website-sign-up")) 
+  } else if (page.includes("/free-website-sign-up"))
     presenceData.details = "Signing up";
    else if (page.includes("members/website/list"))
     presenceData.details = "Viewing All Websites";
