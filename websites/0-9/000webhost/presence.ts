@@ -2,24 +2,24 @@ const presence = new Presence({
     clientId: "840489095767261194"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLElement,
   title2: HTMLElement,
   titleSite: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
     },
     page = window.location.pathname,
     buttons = await presence.getSetting("buttons");
 
-  presenceData.startTimestamp = browsingStamp;
   titleSite = document.querySelector(
     "#nav-container > div > div.sidebar__header.flex.flex-col > a.sidebar-header__app-link.text-color-white.text-bold.disabled-link.sidebar-header__app-link--disabled > span"
   );
   if (titleSite) presenceData.state = titleSite.textContent;
-  if (page === "/") 
-    presenceData.details = "Viewing the Homepage";
+  if (page === "/") presenceData.details = "Viewing the Homepage";
    else if (page.includes("/forum")) {
     if (page.includes("/t/")) {
       title = document.querySelector("head > title");
@@ -53,43 +53,37 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-    } else 
-      presenceData.details = "Browsing Through The Forum";
-    
+    } else presenceData.details = "Browsing Through The Forum";
   } else if (page.includes("/free-website-sign-up")) 
     presenceData.details = "Signing up";
    else if (page.includes("members/website/list")) 
     presenceData.details = "Viewing All Websites";
    else if (page.includes("/members/store")) 
     presenceData.details = "Viewing the Store";
-   else if (page.endsWith("/build")) {
-    if (titleSite) {
-      presenceData.details = "Managing Website:";
-      presenceData.state = titleSite.textContent;
-    }
+   else if (page.endsWith("/build") && titleSite) {
+    presenceData.details = "Managing Website:";
+    presenceData.state = titleSite.textContent;
   } else if (page.endsWith("/domain")) {
-    if (titleSite) 
-      presenceData.details = "Managing Domains For:";
-    
-  } else if (page.endsWith("/files")) 
+    if (titleSite) presenceData.details = "Managing Domains For:";
+  } else if (page.endsWith("/files"))
     presenceData.details = "Managing Files For:";
-   else if (page.endsWith("/database")) 
+   else if (page.endsWith("/database"))
     presenceData.details = "Managing Database For:";
-   else if (page.endsWith("/email")) 
+   else if (page.endsWith("/email"))
     presenceData.details = "Managing Email For:";
-   else if (page.endsWith("/settings")) 
+   else if (page.endsWith("/settings"))
     presenceData.details = "Managing Settings For:";
-   else if (page.endsWith("/stats")) 
+   else if (page.endsWith("/stats"))
     presenceData.details = "Viewing Stats For:";
-   else if (page.endsWith("/security")) 
+   else if (page.endsWith("/security"))
     presenceData.details = "Managing Security Settings For:";
-   else if (page.endsWith("/cron-jobs")) 
+   else if (page.endsWith("/cron-jobs"))
     presenceData.details = "Managing Cron-Jobs For:";
-   else if (page.endsWith("/redirect")) 
+   else if (page.endsWith("/redirect"))
     presenceData.details = "Managing Redirects For:";
-   else if (page.endsWith("/logs")) 
+   else if (page.endsWith("/logs"))
     presenceData.details = "Viewing Logs For:";
-   else if (page.endsWith("/backup")) 
+   else if (page.endsWith("/backup"))
     presenceData.details = "Managing Backups For:";
   
   if (!presenceData.details) {
