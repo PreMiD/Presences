@@ -12,7 +12,6 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
-    //disini semua url dari komikcast 
   if (document.location.href === "https://komikcast.com/")
     presenceData.details = "Viewing Homepage";
   else if (document.location.pathname.endsWith("/daftar-komik/"))
