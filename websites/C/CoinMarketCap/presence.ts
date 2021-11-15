@@ -39,18 +39,18 @@ presence.on("UpdateData", async () => {
   else if (path.includes("/events/"))
     presenceData.details = "Browsing in crypto events calendar";
   else if (path.includes("/account/my-diamonds/")) {
-    presenceData.details = "Checking diamonds:"
+    presenceData.details = "Checking diamonds:";
 
     presenceData.state = document.querySelector(
       "#__next > div > div > div.sc-57oli2-0.comDeo.cmc-body-wrapper > div > div > div > div:nth-child(2) > div > div.sc-1snuar3-1.hyjDAL > div.sc-1snuar3-2.gqljHA > h1 > span"
-    ).textContent
-  } else if (path.includes("/nft/")) {
+    ).textContent;
+  } else if (path.includes("/nft/")) 
     presenceData.details = "Browsing NFTs...";
-  } else if (path.includes("/watchlist/")) {
+   else if (path.includes("/watchlist/")) 
     presenceData.details = "Browsing watchlist...";
-  } else if (path.includes("/airdrop/")) {
+   else if (path.includes("/airdrop/")) 
     presenceData.details = "Looking at Airdrop";
-  } else if (path.includes("/referral/"))
+   else if (path.includes("/referral/"))
     presenceData.details = "Checking out the referral program";
   else if (path.includes("/api/"))
     presenceData.details = "Browsing API page...";
