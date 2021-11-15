@@ -27,5 +27,5 @@
     "hosting"
   ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*shardhosting[.](co.uk)[/]|([a-z0-9-]+[.])*web-ore-01[.](com|us)"
+  "regExp": "([a-z0-9-]+[.])*shardhosting[.](co.uk)[/]|([a-z0-9-]+[.])*web-ore-01[.](co.uk)"
 }
