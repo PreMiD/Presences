@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
     const firstType: string = personalityTypeEl.innerText?.split(" - ")[0];
 
     presenceData.startTimestamp = browsingStamp;
-    presenceData.smallImageKey = "reading";
+    presenceData.smallImageKey = "view";
     presenceData.details = "Viewing:";
 
     trayTitle = `${presenceData.details} ${titleEl.innerText}`;
