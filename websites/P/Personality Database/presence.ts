@@ -30,25 +30,22 @@ presence.on("UpdateData", async () => {
 
     if (firstType) {
       /**
-       * if user choose to show only first personality type
-       * example shown:
+       * if user choose to show only first personality type, example:
        * Viewing:
        * John Lennon - ENFP
        */
       if (useOnlyFirstPersonalityType)
         presenceData.state = `${titleEl.innerText} - ${firstType}`;
       /**
-       * if user choose to show all first personality type
-       * example shown:
+       * if user choose to show all personality type, example:
        * Viewing: John Lennon
        * ENFP - 4w3 - sx/so - 485 - ILE - SLUEI - VELF - Melancholic-Choleric
        */ else {
-        presenceData.details = `Viewing: ${titleEl.innerText}`;
+        presenceData.details = `Viewings: ${titleEl.innerText}`;
         presenceData.state = `${personalityTypeEl.innerText}`;
       }
       /**
-       * if user choose to not show any personality type
-       * example shown:
+       * if user choose to not show any personality type, example:
        * John Lennon
        */
     } else presenceData.state = titleEl.innerText;
