@@ -22,52 +22,52 @@ let state;
 
 presence.on("UpdateData", async () => {
   // Define presence data
-  let data: PresenceData = {};
+  const data: PresenceData = {};
 
   // Set default data
-  data.details = "Browsing..."
+  data.details = "Browsing...";
   data.largeImageKey = "pandora";
 
   // Define whether or not we're currently playing
-  let isPlaying: boolean = true;
+  const isPlaying = true,
 
   // Fetch audio bar
-  let audioBar: HTMLElement = document.querySelector(".Tuner__Audio__NowPlayingHitArea");
+   audioBar: HTMLElement = document.querySelector(".Tuner__Audio__NowPlayingHitArea");
   
   // If the audio bar exists, assume we're listening to something
   if (audioBar !== null) {
     // Fetch title and artist
-    let title: HTMLElement = document.querySelector(".Tuner__Audio__TrackDetail__title");
-    let artist: HTMLElement =  document.querySelector(".Tuner__Audio__TrackDetail__artist");
+    const title: HTMLElement = document.querySelector(".Tuner__Audio__TrackDetail__title"),
+     artist: HTMLElement = document.querySelector(".Tuner__Audio__TrackDetail__artist");
 
     // Return if either of them are null
-    if (title === null || artist === null) {
+    if (title === null || artist === null) 
       return;
-    }
+    
 
     // Set them to the presence
     data.details = stripText(title, "Title");
     data.state = stripText(artist, "Artist");
 
     // Get duration control
-    let timeElapsed: HTMLElement = document.querySelector(".VolumeDurationControl__Duration [data-qa=elapsed_time]");
-    let timeRemaining: HTMLElement = document.querySelector(".VolumeDurationControl__Duration [data-qa=remaining_time]");
+    const timeElapsed: HTMLElement = document.querySelector(".VolumeDurationControl__Duration [data-qa=elapsed_time]"),
+     timeRemaining: HTMLElement = document.querySelector(".VolumeDurationControl__Duration [data-qa=remaining_time]");
 
     // Return if either are null
-    if (timeElapsed == null || timeRemaining == null) {
+    if (timeElapsed === null || timeRemaining === null) 
       return;
-    }
+    
 
     // Fetch play button
-    let playButton: HTMLElement = document.querySelector(".Tuner__Control__Play__Button");
+    const playButton: HTMLElement = document.querySelector(".Tuner__Control__Play__Button");
 
     // Return if null
-    if (playButton === null) {
+    if (playButton === null) 
       return;
-    }
+    
 
     // Check if we're paused or playing
-    let isPlaying = playButton.getAttribute("aria-checked") === "true";
+    const isPlaying = playButton.getAttribute("aria-checked") === "true";
 
     // If we're not paused, set the small image to playing and fetch the timestamps
     // Otherwise, set the small image to paused
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
       data.smallImageText = (await strings).play;
 
       // Get timestamps
-      let [startTime, endTime] = presence.getTimestamps(
+      const [startTime, endTime] = presence.getTimestamps(
         presence.timestampFromFormat(stripText(timeElapsed, "Time Elapsed")),
         presence.timestampFromFormat(stripText(timeRemaining, "Time Remaining"))
       );
