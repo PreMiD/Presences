@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       // Set them to the presence
       data.details = stripText(title, "Title");
       data.state = stripText(artist, "Artist");
-    } else 
+    } else
       presence.error("Title and artist are null!");
     
 
@@ -71,14 +71,14 @@ presence.on("UpdateData", async () => {
             presence.timestampFromFormat(stripText(timeElapsed, "Time Elapsed")),
             presence.timestampFromFormat(stripText(timeRemaining, "Time Remaining"))
           );
-        } else 
+        } else
           presence.error("Timestamps are null!");
         
       } else {
         data.smallImageKey = "pause";
         data.smallImageText = (await strings).pause;
       }
-    } else 
+    } else
       presence.error("Play button is null!");
     
   }
