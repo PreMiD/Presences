@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
       "#__next > div > div > div.sc-57oli2-0.comDeo.cmc-body-wrapper > div > div > div > div:nth-child(2) > div > div.sc-1snuar3-1.hyjDAL > div.sc-1snuar3-2.gqljHA > h1 > span"
     ).textContent
   } else if (path.includes("/nft/")) {
-    presenceData.details = "Looking at NFTs:";
+    presenceData.details = "Browsing NFTs...";
   } else if (path.includes("/watchlist/")) {
     presenceData.details = "Browsing watchlist...";
   } else if (path.includes("/airdrop/")) {
