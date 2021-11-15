@@ -1,16 +1,15 @@
 const presence = new Presence({
     clientId: "909694033251688449"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-// Presence On
 presence.on("UpdateData", async () => {
   const buttons = await presence.getSetting("buttons"),
     time = await presence.getSetting("timestamps"),
     presenceData: PresenceData = {
       details: "Page not Supported", // If the page cannot be recognized
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
   if (document.location.href === "https://komikcast.com/")
     presenceData.details = "Viewing Homepage";
@@ -43,15 +42,14 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.pathname.startsWith("/chapter/")) {
-    const title = document
-        .querySelector("div.chapter_headpost h1")
-        .textContent.replace(/\t|\n/g, "")
-        .replace(/Chapter \d+/, ""),
-      chapter = document.location.pathname
-        .match(/chapter-\d+/)[0]
-        .replace("c", "C")
-        .replace("-", " ");
-    presenceData.details = title;
+    const chapter = document.location.pathname
+      .match(/chapter-\d+/)[0]
+      .replace("c", "C")
+      .replace("-", " ");
+    presenceData.details = document
+      .querySelector("div.chapter_headpost h1")
+      .textContent.replace(/\t|\n/g, "")
+      .replace(/Chapter \d+/, "");
     presenceData.state = chapter;
     if (buttons) {
       presenceData.buttons = [
@@ -69,13 +67,12 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.href.includes("?s=")) {
-    const search = document
+    presenceData.state = document
       .querySelector("div.list-update-search-header h1")
       .textContent.replace("SEARCH", "")
       .replace(/\t|\n/g, "");
     presenceData.smallImageKey = "search";
     presenceData.details = "Doing:";
-    presenceData.state = search;
   }
   if (!time) {
     delete presenceData.startTimestamp;
