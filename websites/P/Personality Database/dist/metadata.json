@@ -1,13 +1,13 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "Personality Database",
   "author": {
     "name": "JustArya",
     "id": "281770836283883530"
   },
   "category": "socials",
-  "logo": "https://i.ibb.co/hBss0jV/b-EL4-Xt-Bri-Mz-Cnfg-T2hvez5w-Ns-Uzfc-Bg-ZKK9-Ij-Ene-ARw-TOh-Fd-Jir-Cphx9-A9ru-TMW6-C-w.png",
-  "thumbnail": "https://i.ibb.co/2WZZc0j/Screen-Shot-2021-11-14-at-17-58-31.png",
+  "logo": "https://i.imgur.com/hcw43Xf.png",
+  "thumbnail": "https://i.imgur.com/0pBs69u.png",
   "version": "1.0.0",
   "color": "#2e96a5",
   "tags": [
