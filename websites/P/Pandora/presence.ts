@@ -18,8 +18,6 @@ function stripText(element: HTMLElement, id = "None", log = true) {
   }
 }
 
-let state;
-
 presence.on("UpdateData", async () => {
   // Define presence data
   const data: PresenceData = {};
