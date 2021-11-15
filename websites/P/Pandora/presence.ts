@@ -41,7 +41,6 @@ presence.on("UpdateData", async () => {
     // Return if either of them are null
     if (title === null || artist === null) 
       return;
-    
 
     // Set them to the presence
     data.details = stripText(title, "Title");
@@ -54,7 +53,6 @@ presence.on("UpdateData", async () => {
     // Return if either are null
     if (timeElapsed === null || timeRemaining === null) 
       return;
-    
 
     // Fetch play button
     const playButton: HTMLElement = document.querySelector(".Tuner__Control__Play__Button");
@@ -62,7 +60,6 @@ presence.on("UpdateData", async () => {
     // Return if null
     if (playButton === null) 
       return;
-    
 
     // Check if we're paused or playing
     const isPlaying = playButton.getAttribute("aria-checked") === "true";
