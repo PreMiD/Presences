@@ -92,8 +92,6 @@ presence.on("UpdateData", async () => {
   else if (path.includes("/trending-cryptocurrencies/"))
     presenceData.details = "Browsing the trending cryptocurrencies";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });
