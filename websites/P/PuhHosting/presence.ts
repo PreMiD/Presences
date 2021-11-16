@@ -7,12 +7,9 @@ presence1.on("UpdateData", () => {
     startTimestamp: browsingStamp1
   };
 
-  if (document.location.pathname.includes("/cp")) {
+  if (document.location.pathname.includes("/cp/")) {
     presenceData.details = "Control Panel";
-    const title = (
-      document.querySelector("div.user-profile > div > div") as HTMLElement
-    ).innerText;
-    presenceData.state = title;
+    presenceData.state="Editing Profil";
   } else if (document.location.pathname.includes("/team")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Team";
@@ -21,10 +18,10 @@ presence1.on("UpdateData", () => {
     presenceData.state = "Partner";
   } else if (document.location.pathname.includes("/about")) {
     presenceData.details = "Viewing a page:";
-    presenceData.state = "Über uns";
+    presenceData.state = "About us";
   } else if (document.location.pathname.includes("/legal/parents")) {
     presenceData.details = "Viewing a page:";
-    presenceData.state = "Elterninformation";
+    presenceData.state = "Parentsinformations";
   } else if (document.location.pathname.includes("/p/webspace")) {
     presenceData.details = "Viewing a product:";
     presenceData.state = "Webspace";
