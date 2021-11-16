@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
   // principal code
   if (document.location.pathname.includes("/following")) { // if path contain a type...
     if (document.location.pathname.includes("/search")) { // ...and 'search'
-      search("following"); 
+      search("following");
     } else {
       presenceData.details = "Viewing page :";
       shotsTypes("following" );
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing page :";
       shotsTypes("recent" );
     }
-  } else if (document.location.pathname.includes("/search")) { 
+  } else if (document.location.pathname.includes("/search")) {
     search("");
   } else if (document.body.id === 'profile') { // view a profile
     let profilePath = path;
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
     console.log(profileName);
     presenceData.details = "Viewing personal profile :";
     presenceData.state = `- ${profileName} -`;
-  } 
+  }
   
 
 if (!presenceData.details) presence.setActivity();
