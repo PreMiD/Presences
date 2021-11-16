@@ -200,7 +200,7 @@ function checkLearningPages(path: string[]) {
             return;
         }
 
-        const checkpoint = parseInt(path[2]) + 1;
+        const checkpoint = parseInt(path[2], 10) + 1;
         if (path[3] === 'practice') {
             return set(`Practicing Checkpoint ${checkpoint}`);
         }
