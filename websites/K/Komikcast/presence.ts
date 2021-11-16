@@ -26,11 +26,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Download APK Komikcast";
   else if (document.location.pathname.startsWith("/komik/")) {
     presenceData.state = document
-        .querySelector(".komik_info-content-body-title")
-        .textContent.replace(/\t|\n/g, "");
-      const type = document
-        .querySelector(".komik_info-content-info-type b")
-        .textContent.replace("Type:", "Comics");
+      .querySelector(".komik_info-content-body-title")
+      .textContent.replace(/\t|\n/g, "");
+    const type = document
+      .querySelector(".komik_info-content-info-type b")
+      .textContent.replace("Type:", "Comics");
     presenceData.details = `Viewing ${type}`;
     if (buttons) {
       presenceData.buttons = [
