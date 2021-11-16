@@ -42,8 +42,7 @@ presence.on("UpdateData", async () => {
       // Set them to the presence
       data.details = stripText(title, "Title");
       data.state = stripText(artist, "Artist");
-    } else
-      presence.error("Title and artist are null!");
+    } else presence.error("Title and artist are null!");
     
 
     // Fetch play button
@@ -71,17 +70,15 @@ presence.on("UpdateData", async () => {
             presence.timestampFromFormat(stripText(timeElapsed, "Time Elapsed")),
             presence.timestampFromFormat(stripText(timeRemaining, "Time Remaining"))
           );
-        } else
-          presence.error("Timestamps are null!");
+        } else presence.error("Timestamps are null!");
         
       } else {
         data.smallImageKey = "pause";
         data.smallImageText = (await strings).pause;
       }
-    } else
-      presence.error("Play button is null!");
+    } else presence.error("Play button is null!");
     
   }
 
-  presence.setActivity(data, isPlaying);
+  presence.setActivity(data);
 });
