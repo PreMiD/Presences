@@ -79,10 +79,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = movie;
       presenceData.state = "Visualizando página do filme...";
       if (video) {
-        const wachingMovie = document.querySelector(
+        const watchingMovie = document.querySelector(
           "body > div > div > div > div > section > div > div > h1"
         ).textContent;
-        presenceData.details = wachingMovie;
+        presenceData.details = watchingMovie;
         presenceData.state = "Assistindo filme...";
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
