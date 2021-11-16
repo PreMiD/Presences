@@ -8,15 +8,9 @@
   "category": "games",
   "logo": "https://i.imgur.com/HOmso2n.png",
   "thumbnail": "https://i.imgur.com/KR8f71Y.png",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "color": "#595959",
-  "tags": [
-    "mta",
-    "skimo",
-    "leosight",
-    "community",
-    "fun"
-  ],
+  "tags": ["mta", "skimo", "leosight", "community", "fun"],
   "url": [
     "leosight.cz",
     "artic.leosight.cz",
