@@ -6,19 +6,17 @@
       "id": "537278495882215425"
     },
     "category": "other",
-    "logo": "https://media.discordapp.net/attachments/849680697954271284/909536399542333480/PuhHosting.png",
-    "thumbnail": "https://media.discordapp.net/attachments/849680697954271284/910262672195469343/PuhHostingBanner.png",
+    "logo": "https://cdn.puh.hosting/logo.png",
+    "thumbnail": "https://cdn.puh.hosting/banner-1-smaller.png",
     "version": "1.0.0",
     "color": "#1896f7",
     "tags": [
-      "hosting",
-      "domain",
-      "technik"
+      "hosting"
     ],
     "url": "www.puh.hosting",
     "description": {
-      "en": "Domains, webspaces, VServer and more",
-      "de": "Domains, WebHosting, V-Server und mehr"
+      "en": "Get your Product at PuhHosting today and change the world.",
+      "de": "Hol dir noch heute dein Produkt bei PuhHosting und verändere die Welt."
     }
   }
   
