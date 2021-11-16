@@ -11,7 +11,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     };
-  if (document.location.href === "https://komikcast.com/")
+
+  if (document.location.href === "https://komikcast.com")
     presenceData.details = "Viewing Homepage";
   else if (document.location.pathname.endsWith("/daftar-komik/"))
     presenceData.details = "Viewing Komikcast Manga List";
@@ -23,7 +24,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Bookmark";
   else if (document.location.pathname.endsWith("/download-aplikasi-komikcast/"))
     presenceData.details = "Download APK Komikcast";
-  // Added button
   else if (document.location.pathname.startsWith("/komik/")) {
     presenceData.state = document
         .querySelector(".komik_info-content-body-title")
