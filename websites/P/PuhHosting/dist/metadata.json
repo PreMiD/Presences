@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "PuhHosting",
+    "author": {
+      "name": "ToXy ツ",
+      "id": "537278495882215425"
+    },
+    "category": "other",
+    "logo": "https://media.discordapp.net/attachments/849680697954271284/909536399542333480/PuhHosting.png?width=473&height=473",
+    "thumbnail": "https://www.puh.hosting/assets/img/puhhosting/svg/banner-1.svg",
+    "version": "1.0.0",
+    "color": "#1896f7",
+    "tags": [
+      "hosting",
+      "domain",
+      "technik"
+    ],
+    "url": "www.puh.hosting",
+    "description": {
+      "en": "Domains, webspaces, VServer and more",
+      "de": "Domains, WebHosting, V-Server und mehr"
+    }
+  }
+  
