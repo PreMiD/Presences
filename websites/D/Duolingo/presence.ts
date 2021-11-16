@@ -76,7 +76,7 @@ function checkBasicPages(path: string[]) {
         return;
     }
     if (path[0] === 'courses') {
-        presenceData.details = `Viewing available courses`;
+        presenceData.details = 'Viewing available courses';
         return;
     }
     if (path[0] === 'abc') {
