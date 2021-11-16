@@ -44,7 +44,6 @@ presence.on("UpdateData", async () => {
       data.state = stripText(artist, "Artist");
     } else presence.error("Title and artist are null!");
     
-
     // Fetch play button
     const playButton: HTMLElement = document.querySelector(".Tuner__Control__Play__Button");
 
@@ -71,13 +70,11 @@ presence.on("UpdateData", async () => {
             presence.timestampFromFormat(stripText(timeRemaining, "Time Remaining"))
           );
         } else presence.error("Timestamps are null!");
-        
       } else {
         data.smallImageKey = "pause";
         data.smallImageText = (await strings).pause;
       }
     } else presence.error("Play button is null!");
-    
   }
 
   presence.setActivity(data);
