@@ -25,14 +25,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Download APK Komikcast";
   // Added button
   else if (document.location.pathname.startsWith("/komik/")) {
-    const name = document
+    presenceData.state = document
         .querySelector(".komik_info-content-body-title")
-        .textContent.replace(/\t|\n/g, ""),
-      type = document
+        .textContent.replace(/\t|\n/g, "");
+      const type = document
         .querySelector(".komik_info-content-info-type b")
         .textContent.replace("Type:", "Comics");
     presenceData.details = `Viewing ${type}`;
-    presenceData.state = name;
     if (buttons) {
       presenceData.buttons = [
         {
