@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -20,8 +21,8 @@
     "nl": "Gmail is een gratis e-mailservice van Google. Gebruikers hebben toegang tot Gmail via beveiligde webmail of via het POP3- of IMAP4-protocol."
   },
   "url": "mail.google.com",
-  "version": "1.3.7",
-  "logo": "https://i.imgur.com/RFFiUCL.png",
+  "version": "1.3.13",
+  "logo": "https://i.imgur.com/ZvjZHER.png",
   "thumbnail": "https://i.imgur.com/zLejTHm.png",
   "color": "#DD4B3E",
   "tags": [

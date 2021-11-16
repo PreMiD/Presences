@@ -62,57 +62,95 @@ const updateCallback = {
 
     /*
 	
-		This part figures out the page type. 
+		This part figures out the page type.
 		There are three ways for getting it's type.
+
+		The old structure are done as below.
 	
 		1. From the "action" parameter on the current URL.
 		2. From the "action" parameter on the URL located on the "External Link" part on the top left corner.
 		3. From the "Location" part on the top left corner, specifically the bolded part.
 	
+		The new structure (only TMNF and TMUF) are done as below.
+
+		1. From the "action" path on the URL located on the "External Link" part on the top left corner.
+		2. From the "Location" part on the top left corner, specifically the bolded part.
+		3. From the "action" path on the current URL. (This is done last because the unrealibilty of the URL in some cases.)
+
 		*/
 
-    if (getURLParam("action") !== null && getURLParam("action") !== "auto#auto")
-      pageType = getURLParam("action");
-    else if (document.querySelector(".BookmarkCell a")) {
-      currentURL = new URL(
-        document.querySelector(".BookmarkCell a").textContent
-      );
-      pageType = getURLParam("action");
+    const locationType: { [index: string]: string } = {
+      Home: "home",
+      Login: "login", // action guessed
+      Registration: "register", // action guessed
+      "Lost Login": "forget", // action guessed
+      "Track Info": "trackshow",
+      "Search Tracks": "tracksearch",
+      "Nadeo Tracks": "tracksearch",
+      "Your AOI": "tracksearch",
+      "User's Tracks": "tracksearch",
+      "Track Signs": "tracksigns",
+      "Track Upload": "trackuploadtrack",
+      "Submit Replays": "recordmassupload",
+      Leaderboards: "userrecords",
+      "Your Tracks": "tracksearch",
+      "Your Replays": "tracksearch",
+      "Your Downloads": "tracksearch",
+      PlayPal: "playpal",
+      "PlayPal On-Line": "playpalonline",
+      TrackBeta: "trackbeta",
+      "Find Users": "usersearch",
+      "User Info": "usershow",
+      "User Packs": "trackpacksearch",
+      "Pack Info": "trackpackshow",
+      "Your Account": "usershow",
+      "Send Private Message": "postupdate",
+      "Edit Post": "postedit",
+      "Report Problem": "reportproblem",
+      "News Archive": "newssearch",
+      "Track Replay Info": "trackreplayshow"
+    };
+
+    if (
+      currentURL.host === "united.tm-exchange.com" ||
+      currentURL.host === "tmnforever.tm-exchange.com"
+    ) {
+      if (document.querySelector(".BookmarkCell a")) {
+        currentURL = new URL(
+          document.querySelector(".BookmarkCell a").textContent
+        );
+        currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+        [pageType] = currentPath;
+      } else {
+        try {
+          pageType =
+            locationType[
+              document.querySelector(".NavigatorCell b").textContent
+            ];
+        } catch (e) {
+          pageType = currentPath[0] || null;
+        }
+      }
     } else {
-      const locationType: { [index: string]: string } = {
-        Home: "home",
-        Login: "login", // action guessed
-        Registration: "register", // action guessed
-        "Lost Login": "forget", // action guessed
-        "Track Info": "trackshow",
-        "Search Tracks": "tracksearch",
-        "Nadeo Tracks": "tracksearch",
-        "Your AOI": "tracksearch",
-        "Track Signs": "tracksigns",
-        "Track Upload": "trackuploadtrack",
-        "Submit Replays": "recordmassupload",
-        Leaderboards: "userrecords",
-        "Your Tracks": "tracksearch",
-        "Your Replays": "tracksearch",
-        "Your Downloads": "tracksearch",
-        PlayPal: "playpal",
-        "PlayPal On-Line": "playpalonline",
-        TrackBeta: "trackbeta",
-        "Find Users": "usersearch",
-        "User Info": "usershow",
-        "User Packs": "userpacks", // action guessed
-        "Your Account": "usershow",
-        "Send Private Message": "postupdate",
-        "Edit Post": "postedit",
-        "Report Problem": "reportproblem",
-        "News Archive": "newssearch",
-        "Track Replay Info": "trackreplayshow"
-      };
-      try {
-        pageType =
-          locationType[document.querySelector(".NavigatorCell b").textContent];
-      } catch (e) {
-        pageType = null;
+      if (
+        getURLParam("action") !== null &&
+        getURLParam("action") !== "auto#auto"
+      )
+        pageType = getURLParam("action");
+      else if (document.querySelector(".BookmarkCell a")) {
+        currentURL = new URL(
+          document.querySelector(".BookmarkCell a").textContent
+        );
+        pageType = getURLParam("action");
+      } else {
+        try {
+          pageType =
+            locationType[
+              document.querySelector(".NavigatorCell b").textContent
+            ];
+        } catch (e) {
+          pageType = null;
+        }
       }
     }
 
@@ -124,12 +162,12 @@ const updateCallback = {
     switch (currentURL.host) {
       case "united.tm-exchange.com":
         presenceData.smallImageKey = "united";
-        presenceData.smallImageText = "United";
+        presenceData.smallImageText = "United (TMUF-X)";
         idPrefix = "_ctl1";
         break;
       case "tmnforever.tm-exchange.com":
         presenceData.smallImageKey = "nforever";
-        presenceData.smallImageText = "Nations Forever";
+        presenceData.smallImageText = "Nations Forever (TMNF-X)";
         idPrefix = "ctl01";
         break;
       case "nations.tm-exchange.com":
@@ -150,6 +188,7 @@ const updateCallback = {
 
     if (
       currentPath[0] === "error" ||
+      currentPath[0] === "errorhandler" ||
       (document.querySelector(".WindowTitle") &&
         document.querySelector(".WindowTitle").textContent === "Error") ||
       (document.querySelector("h1") &&
@@ -250,7 +289,7 @@ const updateCallback = {
       presenceData.state = document.querySelector(
         `#${idPrefix}_ShowLoginId`
       ).textContent;
-    } else if (pageType === "userpacks") {
+    } else if (pageType === "trackpacksearch") {
       const searchSummary = document
         .querySelector(`#${idPrefix}_ShowSummary`)
         .textContent.slice(20, this.length - 4);

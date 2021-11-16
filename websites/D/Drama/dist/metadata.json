@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Drama",
+  "author": {
+    "name": "Toki",
+    "id": "401067750354845727"
+  },
+  "category": "socials",
+  "logo": "https://i.imgur.com/tA4eeXJ.png",
+  "thumbnail": "https://i.imgur.com/TDjianL.png",
+  "version": "1.0.3",
+  "color": "#32f597",
+  "tags": [
+    "forum",
+    "social",
+    "drama"
+  ],
+  "url": "drama.gg",
+  "description": {
+    "en": "Drama.gg is a community for exposing fraudulent companies and businesses."
+  }
+}

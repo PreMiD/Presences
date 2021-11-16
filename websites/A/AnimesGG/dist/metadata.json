@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "MMDDKK",
+    "id": "259984855503339520"
+  },
+  "service": "AnimesGG",
+  "description": {
+    "en": "The best way to watch anime and movies online completely for free, just play and watch your favorite animes in the best possible quality (FULLHD), in addition to the great fansubs that subtitle our episodes.",
+    "pt": "A melhor maneira de assistir animes e filmes online totalmente de graça, basta dar play e ver seus animes favoritos com a melhor qualidade possível (FULLHD), além das ótimas fansubs que legendam nossos episódios."
+  },
+  "url": "animes.gg",
+  "version": "1.0.5",
+  "logo": "https://i.imgur.com/hkqIL8Q.png",
+  "thumbnail": "http://i.imgur.com/Mw0gNnG.png",
+  "color": "#f59f16",
+  "tags": [
+    "anime",
+    "streaming"
+  ],
+  "category": "anime",
+  "settings": [
+    {
+      "id": "fullName",
+      "title": "Mostrar nome completo/original do anime.",
+      "value": false
+    }
+  ]
+}

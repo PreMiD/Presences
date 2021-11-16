@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "manish",
     "id": "332177981214818315"
@@ -9,7 +10,7 @@
     "nl": "IMDb (Internet Movie Database) is een online database met informatie met betrekking tot films, televisieprogramma's, homevideo's, videogames en online streaming-inhoud - inclusief cast, productieploeg en persoonlijke biografieën, samenvattingen van plot, trivia, fan- en kritische recensies, en waarderingen."
   },
   "url": "www.imdb.com",
-  "version": "1.2.8",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/OCAWBbv.png",
   "thumbnail": "https://i.imgur.com/hPrMgUE.png",
   "color": "#e6b91e",

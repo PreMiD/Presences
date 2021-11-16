@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "670047125656043536"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "670047125656043536"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -11,13 +10,14 @@ presence.on("UpdateData", () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     if (document.location.href.match("/?s=")) {
       const search1 = document.querySelector("head > title").textContent;
       presenceData.details = "In ricerca";
-      presenceData.state =
-        "Ha cercato:" +
-        search1.replace(": Risultati della ricerca | Salvatore Aranzulla", "");
+      presenceData.state = `Ha cercato:${search1.replace(
+        ": Risultati della ricerca | Salvatore Aranzulla",
+        ""
+      )}`;
     } else presenceData.details = "Nella Homepage";
   } else if (
     document.location.pathname.startsWith(
@@ -55,19 +55,17 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/page")) {
     const search2 = document.querySelector("head > title").textContent;
     presenceData.details = "In ricerca";
-    presenceData.state =
-      "Ha cercato:" +
-      search2.replace(" Risultati della ricerca (", "").split("pagina")[0];
+    presenceData.state = `Ha cercato:${
+      search2.replace(" Risultati della ricerca (", "").split("pagina")[0]
+    }`;
   } else {
     const guidename = document.querySelector("head > title").textContent;
     presenceData.details = "Guarda la guida:";
     presenceData.state = guidename.replace(" | Salvatore Aranzulla", "");
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

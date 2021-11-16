@@ -18,11 +18,10 @@ presence.on("UpdateData", async () => {
         "div.user.proprio .dados pre"
       ).textContent,
       lobby = document.querySelector("title").innerText;
-    data.details = user + " - " + points.split("pontos")[0].trim() + " points";
-    data.state = "Lobby: " + lobby.split("-")[0];
+    data.details = `${user} - ${points.split("pontos")[0].trim()} points`;
+    data.state = `Lobby: ${lobby.split("-")[0]}`;
     data.startTimestamp = elapsed;
-  } else {
-    data.details = "Not in-game";
-  }
+  } else data.details = "Not in-game";
+
   presence.setActivity(data);
 });

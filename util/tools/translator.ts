@@ -1,17 +1,15 @@
+import axios from "axios";
+import { gray, green, hex, red, white, yellow } from "chalk";
+import debug from "debug";
+import { prompt } from "enquirer";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
+import ora, { Ora } from "ora";
+
 /**
  * Translation Tool for PreMiD Presences.
  * @author callumok2004 <callumokane123@gmail.com>
  * @author Bas950 <me@bas950.com>
- * @author ririxidev <mail@ririxi.dev>
  */
-
-import { existsSync, readFileSync, readdirSync, writeFileSync } from "fs";
-import { gray, green, hex, red, white, yellow } from "chalk";
-import ora, { Ora } from "ora";
-
-import axios from "axios";
-import debug from "debug";
-import { prompt } from "enquirer";
 
 debug.enable("Translator:*");
 let loadSpinner: Ora,
@@ -46,11 +44,12 @@ const spinnerSettings = {
   loadFiles = async (lang: string): Promise<boolean> => {
     language = lang;
     info("Loading and caching files.");
-    const src = `./websites/`;
-    if (!existsSync(src))
+    const src = "./websites/";
+    if (!existsSync(src)) {
       return (
         error("Presences folder could not be found... exiting."), process.exit()
       );
+    }
 
     readdirSync(src).forEach((letter) => {
       readdirSync(`${src}/${letter}/`).forEach(async (presence) => {
@@ -79,7 +78,7 @@ const spinnerSettings = {
   },
   main = async () => {
     const langLoadSpinner = ora({
-      text: green(`Loading languages…`)
+      text: green("Loading languages…")
     });
     langLoadSpinner.spinner = spinnerSettings;
     langLoadSpinner.start();
@@ -96,7 +95,7 @@ const spinnerSettings = {
     ).data.data.langFiles
       .map((c: { lang: string }) => c.lang)
       .filter((c: string) => c !== "en");
-    langLoadSpinner.succeed(green(` Loaded all languages.`));
+    langLoadSpinner.succeed(green(" Loaded all languages."));
     const language: string = await prompt([
         {
           type: "autocomplete",
@@ -113,7 +112,7 @@ const spinnerSettings = {
         .then((answer: { selectedLang: string }) => answer.selectedLang)
         .catch(() => process.exit()),
       loadFilesSpinner = ora({
-        text: green(`Loading presences... \n`)
+        text: green("Loading presences... \n")
       });
 
     loadSpinner = loadFilesSpinner;
@@ -237,7 +236,7 @@ const spinnerSettings = {
     for await (const file of files) {
       counter--;
       const data = file[1],
-        path = data.path,
+        { path } = data,
         check = JSON.parse(await readFileSync(data.path).toString());
 
       if (check.description[language]) {
@@ -250,10 +249,10 @@ const spinnerSettings = {
           message:
             green("Please translate the following description of ") +
             yellow(file[0]) +
-            green(`:\n"`) +
-            hex("#bebebe")(file[1].description["en"]) +
-            green(`":\n`) +
-            hex("#bebebe")(`(Type "skip" to skip or "stop" to stop)`),
+            green(':\n"') +
+            hex("#bebebe")(file[1].description.en) +
+            green('":\n') +
+            hex("#bebebe")('(Type "skip" to skip or "stop" to stop)'),
           name: "translatedDes"
         })
           .then((answer: { translatedDes: string }) => answer.translatedDes)
@@ -280,10 +279,13 @@ const spinnerSettings = {
           filesMap.delete(file[0]);
           await checkCount();
 
-          if (!JSON.parse(readFileSync(path).toString()).description[language])
+          if (
+            !JSON.parse(readFileSync(path).toString()).description[language]
+          ) {
             error(
               `An error occured while saving the file. Please manually add the translation to: ${language}. The version was automatically bumped.`
             );
+          }
         }
       }
     }

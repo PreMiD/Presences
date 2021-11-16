@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Verify.",
     "id": "297961554673008641"
@@ -14,7 +15,7 @@
     "www.stips.co.il",
     "stipscdn-stips.netdna-ssl.com"
   ],
-  "version": "1.0.4",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/xARdqan.png",
   "thumbnail": "https://i.imgur.com/JwKSAnv.png",
   "color": "#04d09d",

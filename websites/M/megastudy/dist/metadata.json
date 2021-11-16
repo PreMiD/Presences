@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "megastudy",
+  "altnames": [
+    "메가스터디"
+  ],
+  "author": {
+    "name": "1LUXION",
+    "id": "249098414674018304"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/hC6q0vV.png",
+  "thumbnail": "https://i.imgur.com/Sg2E8R0.png",
+  "version": "1.0.4",
+  "color": "#0082ff",
+  "tags": [
+    "megastudy",
+    "메가스터디",
+    "인강"
+  ],
+  "url": "www.megastudy.net",
+  "description": {
+    "ko_KR": "메가스터디는 대한민국의 온라인 교육 서비스 기업이다. 본사 및 계열사를 통해 초중고 학생과 일반 성인 등을 대상으로 출판 콘텐츠 사업과 온오프라인 교육사업, 단체급식사업 및 투자사업을 영위하고 있다.",
+    "en": "Megastudy is a South Korean online education service company. Through its headquarters and affiliates, it is conducting publishing content projects, online and offline education projects, group meals projects, and investment projects for elementary, middle and high school students and ordinary adults."
+  },
+  "iframe": true
+}

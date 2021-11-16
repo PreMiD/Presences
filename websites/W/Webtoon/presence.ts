@@ -20,11 +20,10 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
   } else if (path.includes("viewer")) {
     webtoon = document.querySelector("div.subj_info > a.subj").textContent;
-    chapter =
-      document.querySelector("div.subj_info > .subj_episode").textContent +
-      " - " +
-      document.querySelector(".tx").textContent;
-    presenceData.details = "Reading " + webtoon;
+    chapter = `${
+      document.querySelector("div.subj_info > .subj_episode").textContent
+    } - ${document.querySelector(".tx").textContent}`;
+    presenceData.details = `Reading ${webtoon}`;
     presenceData.state = chapter;
     delete presenceData.smallImageKey;
   } else if (path.includes("dailySchedule")) {
@@ -34,11 +33,11 @@ presence.on("UpdateData", async () => {
       .includes("on")
       ? "completed"
       : "ongoing";
-    presenceData.details = "Looking through the " + seriesPage + " series";
+    presenceData.details = `Looking through the ${seriesPage} series`;
     delete presenceData.smallImageKey;
-  } else if (path.includes("top")) {
+  } else if (path.includes("top"))
     presenceData.details = "Looking through popular series";
-  } else if (path.includes("genre")) {
+  else if (path.includes("genre")) {
     presenceData.details = "Looking through genres";
     delete presenceData.smallImageKey;
   } else if (path.includes("search")) {

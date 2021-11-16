@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Lacking",
     "id": "132693143173857281"
@@ -9,7 +10,7 @@
     "nl": "Snelle en eenvoudige videostreaming voor bloggers en uitgevers."
   },
   "url": "streamable.com",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/D38h5SR.png",
   "thumbnail": "https://i.imgur.com/ErpMpF3.png",
   "color": "#0f90fa",

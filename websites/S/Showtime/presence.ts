@@ -28,20 +28,20 @@ presence.on("UpdateData", async () => {
       ).textContent;
     }
 
-    if (description == null || description.trim() == title) {
+    if (description === null || description.trim() === title)
       description = "Movie";
-    }
 
-    const [, endTimestamp] = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+    let [, endTimestamp] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      ),
+      currentState: string,
+      smallImageKey: string,
+      smallImageText: string;
 
-    let currentState: string, smallImageKey: string, smallImageText: string;
     if (description.includes("ON NOW")) {
       currentState = "Live TV";
-      timestamps[0] = 0;
-      timestamps[1] = 0;
+      endTimestamp = 0;
       smallImageKey = "live";
       smallImageText = (await strings).live;
     } else {
@@ -56,9 +56,9 @@ presence.on("UpdateData", async () => {
       details: title,
       state: currentState,
       largeImageKey: "logo",
-      smallImageKey: smallImageKey,
-      smallImageText: smallImageText,
-      endTimestamp: endTimestamp
+      smallImageKey,
+      smallImageText,
+      endTimestamp
     };
 
     if (video.paused) {
@@ -66,9 +66,7 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title !== null) {
-      presence.setActivity(data, !video.paused);
-    }
+    if (title !== null) presence.setActivity(data, !video.paused);
   } else {
     const browsingPresence: PresenceData = {
       details: "Browsing...",

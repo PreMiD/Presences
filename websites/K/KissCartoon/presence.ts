@@ -1,39 +1,33 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "698231292172435567"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let currentTime: number,
+  duration: number,
+  paused: boolean,
+  playback: boolean,
+  timestamps: number[];
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-let currentTime: any,
-  duration: any,
-  paused: any,
-  playback: any,
-  timestamps: any;
-
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    currentTime = data.iframeVideo.currTime;
+    duration = data.iframeVideo.dur;
+    ({ paused } = data.iframeVideo);
   }
 });
 
@@ -45,19 +39,21 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
 
   if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/kisscartoon.html"
-  ) {
+    document.location.pathname === "/" ||
+    document.location.pathname === "/kisscartoon.html"
+  )
     presenceData.details = "Viewing home page";
-  } else if (document.querySelector(".full.watch_container") !== null) {
-    timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+  else if (document.querySelector(".full.watch_container") !== null) {
+    timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    );
     if (!isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       presenceData.details = document
         .querySelector("#adsIfrme > div > div > div > h1 > strong")
@@ -74,17 +70,16 @@ presence.on("UpdateData", async () => {
     } else if (isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at:";
-      presenceData.state =
-        document
-          .querySelector("#adsIfrme > div > div > div > h1 > strong")
-          .textContent.replace("Watch ", "")
-          .replace(" online free", "") +
-        " " +
-        document.querySelector("#selectEpisode").textContent.trim();
+      presenceData.state = `${document
+        .querySelector("#adsIfrme > div > div > div > h1 > strong")
+        .textContent.replace("Watch ", "")
+        .replace(" online free", "")} ${document
+        .querySelector("#selectEpisode")
+        .textContent.trim()}`;
     }
-  } else if (document.location.pathname.includes("/CartoonList")) {
+  } else if (document.location.pathname.includes("/CartoonList"))
     presenceData.details = "Viewing the Cartoon List";
-  } else if (document.location.pathname.includes("/Cartoon")) {
+  else if (document.location.pathname.includes("/Cartoon")) {
     presenceData.details = "Viewing Cartoon:";
     presenceData.state = document.querySelector(
       "#leftside > div:nth-child(2) > div.barContent.full > div.full > h1 > a"
@@ -94,10 +89,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "writing";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

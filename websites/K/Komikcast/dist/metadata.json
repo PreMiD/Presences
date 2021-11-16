@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Komikcast",
+  "author": {
+    "name": "FenisMonjaa",
+    "id": "477771037929635861"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/qN2A1XG.png",
+  "thumbnail": "https://i.imgur.com/v7eUTgw.png",
+  "version": "1.0.1",
+  "color": "#3262d1",
+  "tags": ["manga", "manhwa", "manhua", "anime", "komikcast"],
+  "url": "komikcast.com",
+  "description": {
+    "en": "Komikcast is a comic reading platform with the most complete list of comics in Indonesia.",
+    "id": "Komikcast adalah platform baca komik dengan daftar komik paling lengkap di Indonesia."
+  }
+}

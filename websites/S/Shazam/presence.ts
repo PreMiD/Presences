@@ -48,13 +48,8 @@ presence.on("UpdateData", async () => {
     songPlaying = song ? !song.paused : false;
 
   let data: PresenceData = {
-    details: undefined,
-    state: undefined,
     largeImageKey: "shazam",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
+    startTimestamp: elapsed
   };
 
   if (document.location.href !== prevUrl) {
@@ -62,11 +57,8 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
-      data = { ...data, ...v };
-    }
-  }
+  for (const [k, v] of Object.entries(statics))
+    if (path.match(k)) data = { ...data, ...v };
 
   if (showSong && songPlaying) {
     data.details = getElement(".track .heading");
@@ -74,9 +66,12 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "play";
     data.smallImageText = (await strings).play;
 
-    const timestamps = presence.getTimestamps(song.currentTime, song.duration);
-    data.startTimestamp = timestamps[0];
-    data.endTimestamp = timestamps[1];
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      song.currentTime,
+      song.duration
+    );
+    data.startTimestamp = startTimestamp;
+    data.endTimestamp = endTimestamp;
   }
 
   if (!songPlaying) {

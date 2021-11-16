@@ -1,13 +1,11 @@
 import "source-map-support/register";
 
 import { coerce, inc } from "semver";
-import { green, yellow } from "chalk";
-import { join, normalize, relative, resolve, sep } from "path";
-import { format as prettier, resolveConfig } from "prettier";
+import { yellow } from "chalk";
+import { join, normalize, resolve, sep } from "path";
 import { readFileSync, writeFileSync } from "fs";
 
 import { exec } from "child_process";
-import { sync as glob } from "glob";
 
 /**
  * Executes a shell command and return it as a Promise.
@@ -17,9 +15,8 @@ import { sync as glob } from "glob";
 function execShellCommand(cmd: string[]) {
   return new Promise<string>((resolve) => {
     exec(cmd.join(" "), (error, stdout, stderr) => {
-      if (error) {
-        console.warn(error);
-      }
+      if (error) console.warn(error);
+
       resolve(stdout ? stdout : stderr);
     });
   });
@@ -31,13 +28,6 @@ function execShellCommand(cmd: string[]) {
  */
 const readFile = (path: string): string =>
     readFileSync(path, { encoding: "utf8" }),
-  /**
-   * Helper function to write any data to disk
-   * @param data Data to write
-   * @param path Path to write the data to
-   */
-  writeFile = (path: string, data: string): void =>
-    writeFileSync(path, data, { encoding: "utf8" }),
   /**
    * Helper function to read a JSON file into memory
    * @param jsonPath Path to the JSON file
@@ -52,34 +42,6 @@ const readFile = (path: string): string =>
     writeFileSync(jsonPath, JSON.stringify(data, null, 2), {
       encoding: "utf8"
     }),
-  prettify = async (): Promise<void> => {
-    console.time("pretty_time");
-    // Grab all TS files and JSON files
-    const tsFiles = glob("./{websites,programs}/*/*/*.ts", {
-      ignore: ["**/node_modules/**", "**/@types/**"],
-      absolute: true
-    });
-
-    for (const fileToPrettify of tsFiles) {
-      // Get the raw data from the file
-      const fileContent = readFile(fileToPrettify),
-        // Format the file using Prettier
-        formatted = prettier(fileContent, {
-          ...(await resolveConfig(fileToPrettify)),
-          filepath: fileToPrettify
-        });
-
-      // If the file content is not the same as the formatted content
-      if (formatted !== fileContent) {
-        // Write the file to the system
-        writeFile(fileToPrettify, formatted);
-        // And log the name with a green colour to indicate it did change
-        console.log(green(relative(__dirname, fileToPrettify)));
-      }
-    }
-
-    console.timeEnd("pretty_time");
-  },
   increaseSemver = async (filesToBump: string[]): Promise<void> => {
     console.time("semver_bump_time");
 
@@ -115,10 +77,11 @@ const readFile = (path: string): string =>
   },
   // Main function that calls the other functions above
   main = async (): Promise<void> => {
-    if (!process.env.GITHUB_ACTIONS)
+    if (!process.env.GITHUB_ACTIONS) {
       console.log(
         "\nPlease note that this script is ONLY supposed to run on a CI environment\n"
       );
+    }
 
     // A clear splitter before prettify
     console.log(
@@ -131,7 +94,7 @@ const readFile = (path: string): string =>
       )
     );
 
-    await prettify();
+    await execShellCommand(["yarn", "lint"]);
 
     // A clear splitter between TypeScript compilation and semver bumps
     console.log(

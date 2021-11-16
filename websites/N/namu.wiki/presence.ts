@@ -20,11 +20,13 @@ const boardTypeMapping: interfaceMapping = {
     edit: "Editing",
     move: "Move Document",
     delete: "Delete Confirm",
+    // eslint-disable-next-line camelcase
     new_edit_request: "Create New Edit Request",
 
     // discuss
     discuss: "Dicsussing",
     thread: "View Discuss",
+    // eslint-disable-next-line camelcase
     edit_request: "Edit Request",
 
     // recent
@@ -47,11 +49,15 @@ const boardTypeMapping: interfaceMapping = {
   validateMembershipUrl = /\/member\/(.+)/,
   membersMapping: interfaceMapping = {
     login: "Login",
+    // eslint-disable-next-line camelcase
     recover_password: "Recover Password",
     signup: "Sign Up",
     mypage: "My Page",
+    // eslint-disable-next-line camelcase
     change_email: "Change Email",
+    // eslint-disable-next-line camelcase
     change_password: "Change Password",
+    // eslint-disable-next-line camelcase
     activate_otp: "Activate OTP"
   },
   // /RecentChanges?logtype=(search)
@@ -64,12 +70,19 @@ const boardTypeMapping: interfaceMapping = {
   },
   // /RecentDiscuss?logtype=(search)
   discussMapping: interfaceMapping = {
+    // eslint-disable-next-line camelcase
     normal_thread: "Normal Thread",
+    // eslint-disable-next-line camelcase
     old_thread: "Old Thread",
+    // eslint-disable-next-line camelcase
     closed_thread: "Closed Thread",
+    // eslint-disable-next-line camelcase
     open_editrequest: "Opened Edit Request",
+    // eslint-disable-next-line camelcase
     accepted_editrequest: "Accepted Edit Request",
+    // eslint-disable-next-line camelcase
     closed_editrequest: "Closed Edit Request",
+    // eslint-disable-next-line camelcase
     old_editrequest: "Old Edit Request"
   },
   // /contribution/(type)/(username)/(contributeType)
@@ -83,7 +96,7 @@ presence.on("UpdateData", async () => {
     path = document.location.pathname,
     params = document.location.search,
     parsedUrl = path.split("/"), // It's a very bad design, but they have a slash document.
-    action = parsedUrl[1],
+    [, action] = parsedUrl,
     details = boardTypeMapping[action],
     presenceData: PresenceData = { largeImageKey: "namu" };
 
@@ -92,14 +105,16 @@ presence.on("UpdateData", async () => {
    * Setting Details & State
    *
    */
-  presenceData.details = details === undefined ? "Unknown Action" : details;
+  presenceData.details = !details ? "Unknown Action" : details;
 
-  let page;
+  let page: RegExpExecArray | string = validateContributeUrl.exec(path);
   /* View Contribute */
-  if ((page = validateContributeUrl.exec(path)))
+  if (page) {
     if (page[1] === "author") page = `User: ${page[2]}`;
     else page = "IP User";
-  /* View Membership */ else if ((page = validateMembershipUrl.exec(path))) {
+  } else if (validateMembershipUrl.exec(path)) {
+    page = validateMembershipUrl.exec(path);
+    /* View Membership */
     presenceData.details = "Member Page";
     page = membersMapping[page[1]];
 
@@ -118,27 +133,30 @@ presence.on("UpdateData", async () => {
     action === "thread" ||
     action === "edit_request"
   )
-    page = document.querySelector(`h1 > a`).textContent;
+    page = document.querySelector("h1 > a").textContent;
   // H1 Tag Only one
-  /* Other */ else if (details !== undefined)
+  /* Other */ else if (details)
     page = decodeURI(path.substring(`/${action}/`.length));
   else page = null;
 
-  if (action === "w")
+  if (action === "w") {
     presenceData.buttons = [
       { label: "View Page", url: document.location.href }
     ];
-  if (page !== null && page !== undefined)
-    presenceData.state = page.length > 128 ? `${page.slice(0, 120)}...` : page;
+  }
+  if (page) {
+    presenceData.state =
+      page.length > 128 ? `${page.slice(0, 120)}...` : (page as string);
+  }
 
   /**
    *
    * Login Status
    *
    */
-  if (details !== undefined) {
+  if (details) {
     const members = document.querySelectorAll(
-      `#app > div > div > nav > ul[class=r] > li > div > div > div`
+      "#app > div > div > nav > ul[class=r] > li > div > div > div"
     );
     if (members[1].textContent.indexOf("Please login!") === -1) {
       presenceData.smallImageKey = "user";
@@ -161,7 +179,7 @@ presence.on("UpdateData", async () => {
    * Apply
    *
    */
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
@@ -14,8 +15,8 @@
     "support.glitch.com",
     "status.glitch.com"
   ],
-  "version": "1.8.7",
-  "logo": "https://i.imgur.com/zU6eBwQ.png",
+  "version": "1.8.10",
+  "logo": "https://i.imgur.com/YFnN57M.png",
   "thumbnail": "https://i.imgur.com/mnilDhS.png",
   "color": "#f003fc",
   "tags": [

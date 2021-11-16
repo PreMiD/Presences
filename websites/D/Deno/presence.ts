@@ -1,7 +1,7 @@
 const presence = new Presence({
-  clientId: "843058683100266526"
-}),
-browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "843058683100266526"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let moduleName: HTMLElement;
 
 // checkmate javascript
@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.state = "Viewing Deno.land Home";
 
     presenceData.startTimestamp = browsingStamp;
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/std")) {
     presenceData.details = "Deno Standard Modules";
     moduleName = document.querySelector("span.ml-2.font-medium");
-    presenceData.state = "Viewing: " + moduleName.innerText;
+    presenceData.state = `Viewing: ${moduleName.innerText}`;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/x")) {
@@ -74,11 +74,8 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-}
-else {
-    presence.setActivity(presenceData);
-}
+  } else presence.setActivity(presenceData);
 });

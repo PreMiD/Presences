@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "AnimeHeaven",
   "author": {
     "name": "Tenri",
@@ -14,7 +14,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/K5IdObW.png",
   "thumbnail": "https://i.imgur.com/jy7RZMJ.png",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "color": "#e61d2f",
   "tags": [
     "video",

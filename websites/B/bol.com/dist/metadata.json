@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "QkeleQ10",
     "id": "807917674477649943"
@@ -9,7 +10,7 @@
     "nl": "Bol.com is een webwinkel in Nederland en België met meer dan 20 miljoen artikelen."
   },
   "url": "www.bol.com",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/HWwm0q0.png",
   "thumbnail": "https://i.imgur.com/pxhPD9e.png",
   "color": "#0000a4",

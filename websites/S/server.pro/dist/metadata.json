@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Jackelele",
+    "id": "377175513372033024"
+  },
+  "service": "server.pro",
+  "description": {
+    "en": "Powerful game server hosting for serious gamers. Try our free plan before deciding. Up and running in 55 seconds."
+  },
+  "url": "server.pro",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/EhKZen3.png",
+  "thumbnail": "https://i.imgur.com/akAwZ0m.png",
+  "color": "#418AC9",
+  "tags": [
+    "minecraft",
+    "hosting",
+    "vps",
+    "server"
+  ],
+  "category": "games",
+  "regExp": "([a-z0-9-]+[.])*server[.]pro[/]"
+}

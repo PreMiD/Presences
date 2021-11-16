@@ -1,20 +1,16 @@
-var presence = new Presence({
-  clientId: "639568013590528030"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
-var search: any;
+const presence = new Presence({
+    clientId: "639568013590528030"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement, title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "bs"
   };
 
-  if (document.location.hostname == "bs.to") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "bs.to") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/serie/")) {
@@ -32,20 +28,19 @@ presence.on("UpdateData", async () => {
       );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
-      presenceData.state = search.value;
+      presenceData.state = (search as HTMLInputElement).value;
       presenceData.smallImageKey = "search";
     }
-  } else if (document.location.hostname == "board.bs.to") {
+  } else if (document.location.hostname === "board.bs.to") {
     if (document.URL.includes("/topic/")) {
       title = document.querySelector(
         "#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span"
       );
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.innerText.length > 128)
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+      else presenceData.state = title.innerText;
+
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
     } else if (document.URL.includes("/trending/")) {
@@ -85,14 +80,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = "news feed";
 
       presence.setActivity(presenceData);
-    } else if (
-      document.URL.includes("/whats-new/") &&
-      document.URL.includes("/news-feed")
-    ) {
-      presenceData.details = "Forums, Viewing the";
-      presenceData.state = "latest activity";
-
-      presence.setActivity(presenceData);
     } else if (document.URL.includes("/whats-new/")) {
       presenceData.details = "Forums, Viewing whats new";
 
@@ -113,7 +100,7 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#ipsLayout_mainArea > div > div.ipsResponsive_hidePhone.ipsResponsive_block.ipsPageHeader > p"
       );
-      if (search != null) {
+      if (search !== null) {
         presenceData.details = "Forums, searching for:";
         presenceData.state = search.innerText
           .replace("Showing results for '", "")
@@ -174,19 +161,15 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > header > h1"
       );
-      if (title != null) {
+      if (title !== null) {
         presenceData.details = "Forums, viewing category:";
         presenceData.state = title.innerText;
-      } else {
-        presenceData.details = "Forums, Browsing...";
-      }
+      } else presenceData.details = "Forums, Browsing...";
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

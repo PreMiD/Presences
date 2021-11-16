@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Arda",
     "id": "403225819222245377"
@@ -13,7 +14,7 @@
     "nl": "Glynet is een website voor sociale media die onlangs is gelanceerd."
   },
   "service": "Glynet",
-  "version": "1.2.7",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/IOeHPUb.png",
   "thumbnail": "https://i.imgur.com/cu1nhUj.png",
   "color": "#FFFFFF",

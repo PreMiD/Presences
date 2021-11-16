@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Jackelele",
     "id": "377175513372033024"
@@ -9,7 +10,7 @@
     "nl": "Een geweldige Garry's Mod-community"
   },
   "url": "perpheads.com",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/Zbr5ofa.png",
   "thumbnail": "https://i.imgur.com/xeeFig2.png",
   "color": "#FFA500",

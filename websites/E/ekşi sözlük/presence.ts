@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
       state: pages[page] || pages[page.slice(0, -1)],
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (entry && entry.textContent != "") {
+  } else if (entry && entry.textContent !== "") {
     presence.setActivity({
       largeImageKey: "es-logo",
       details: "Bir entry'e göz atıyor:",

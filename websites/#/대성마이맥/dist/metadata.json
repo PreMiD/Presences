@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "대성마이맥",
+  "altnames": [
+    "mimacstudy"
+  ],
+  "author": {
+    "name": "1LUXION",
+    "id": "249098414674018304"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/hsnSDNo.png",
+  "thumbnail": "https://i.imgur.com/pK5SkdB.png",
+  "version": "1.0.3",
+  "color": "#2581c4",
+  "tags": [
+    "mimacstudy",
+    "대성마이맥",
+    "인강"
+  ],
+  "url": "www.mimacstudy.com",
+  "description": {
+    "ko_KR": "디지털대성은 최고 품질의 교육 콘텐츠를 제공하는 국내 대표 교육 기업입니다. 초ㆍ중ㆍ고 및 대입 수험생을 대상으로 온ㆍ오프라인 강의부터 테스트, 논술, 입시컨설팅 등 교육 토탈 서비스를 제공하고 있습니다.",
+    "en": "Digital Daesung is Korea's leading educational company that provides the highest quality educational content. It provides total education services to elementary, middle, high school and college students, from online and offline lectures to testing, essay writing, and college entrance consulting."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "sexnine",
+    "id": "807958370887270400"
+  },
+  "service": "Educative",
+  "description": {
+    "en": "Interactive Courses for Software Developers"
+  },
+  "url": [
+    "educative.io",
+    "www.educative.io"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/vYEoDm5.png",
+  "thumbnail": "https://i.imgur.com/VOUPf7V.png",
+  "color": "#5553ff",
+  "tags": [
+    "learning",
+    "coding",
+    "programming",
+    "educative"
+  ],
+  "category": "other"
+}

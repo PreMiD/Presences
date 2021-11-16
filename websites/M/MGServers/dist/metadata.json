@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "thevalleyy",
+    "id": "506746108345843713"
+  },
+  "contributors": [
+    {
+      "name": "Masti",
+      "id": "765574410119282749"
+    }
+  ],
+  "service": "MGServers",
+  "description": {
+    "de": "MGServers ist ein Free-Server-Hoster, welcher unter anderem Terraria- und Minecraftserver kostenlos anbietet. Schau doch mal vorbei :)",
+    "en": "MGServers is a Free-Server-Hoster. They offer among other things Terraria and Minecraftservers for free. Go check them out :)"
+  },
+  "url": [
+      "mgservers.de",
+      "webinterface.mgservers.de"
+    ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/nQS9L0Y.png",
+  "thumbnail": "https://i.imgur.com/gleOLQc.png",
+  "color": "#335fb3",
+  "tags": [
+    "hosting",
+    "gameserver",
+    "free",
+    "minecraft",
+    "discordbot",
+    "terraria",
+    "freehoster",
+    "server",
+    "mgservers"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "werbung",
+      "title": "Verlinke Forum seite",
+      "icon": "fas fa-comment-alt-edit",
+      "value": true
+    },
+    {
+      "id": "privacy",
+      "title": "Inkognito Modus",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Timolia",
+  "author": {
+    "name": "Lennart™",
+    "id": "398101340322136075"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/NkFEsHW.png",
+  "thumbnail": "https://i.imgur.com/6FY2UOz.png",
+  "version": "1.0.2",
+  "color": "#6b6b6b",
+  "tags": [
+    "timolia",
+    "minecraft",
+    "timolia-de",
+    "minecraft-server"
+  ],
+  "url": "timolia.de",
+  "description": {
+    "de": "Timolia ist einer der größten deutschen Minecraft Server. Spiele noch heute einzigartige Minispiele!",
+    "en": "Timolia is one of the largest German Minecraft servers. Play unique minigames today!"
+  },
+  "regExp": "([a-z0-9-]+[.])*timolia[.]de[/]"
+}

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "fjar",
     "id": "334358518570287104"
@@ -13,7 +13,7 @@
     "nl": "CatchPlay is een Taiwanees multimediabedrijf opgericht in 2007, met activiteiten als OTT VOD-streamingdienst, beheer van lineaire televisiekanalen (CatchPlay Movie Channel) en bioscoopfilmdistributie."
   },
   "service": "CatchPlay",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/hAt97QK.png",
   "thumbnail": "https://i.imgur.com/vaaItvT.png",
   "color": "#F26F21",

@@ -20,22 +20,21 @@ let browsingStamp = Math.floor(Date.now() / 1000),
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
       iFrameVideo: boolean;
       currTime: number;
       dur: number;
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.dur !== null ? true : false;
+    playback = data.iframeVideo.dur !== null ? true : false;
 
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
     }
-    if (lastPlaybackState != playback) {
+    if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
       browsingStamp = Math.floor(Date.now() / 1000);
     }
@@ -43,7 +42,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const timestamps = presence.getTimestamps(
+  const [startTimestamp, endTimestamp] = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     ),
@@ -52,13 +51,13 @@ presence.on("UpdateData", async () => {
     };
 
   if (document.location.pathname.includes("/item")) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
 
       title = document.querySelector(
         "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
@@ -81,15 +80,17 @@ presence.on("UpdateData", async () => {
       }
 
       if (air !== null) {
-        presenceData.state =
-          "Aired on: " + air.textContent.replace("AIRED :", "");
+        presenceData.state = `Aired on: ${air.textContent.replace(
+          "AIRED :",
+          ""
+        )}`;
       }
 
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
@@ -127,7 +128,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "body > div.content-block.container.clearfix > div.content > div > div.post-title > font > font"
     );
-    if (title == null) {
+    if (title === null) {
       title = document.querySelector(
         "body > div.content-block.container.clearfix > div.content > div > div.post-title"
       );
@@ -141,16 +142,14 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/top")) {
     presenceData.details = "Viewing the top";
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.URL == "https://otakustream.tv/") {
+  } else if (document.URL === "https://otakustream.tv/") {
     presenceData.details = "Browsing...";
     presenceData.smallImageKey = "reading";
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

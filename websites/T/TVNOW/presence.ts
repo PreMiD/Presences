@@ -1,32 +1,23 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640275259282686015"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any;
-var currentTime: any, video: HTMLVideoElement, duration: any, paused: any;
+let title: HTMLElement,
+  currentTime: number,
+  video: HTMLVideoElement,
+  duration: number,
+  paused: boolean;
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "tv"
     };
@@ -35,22 +26,21 @@ presence.on("UpdateData", async () => {
     document.querySelector("#bitmovinplayer-video-player_container") !== null
   ) {
     video = document.querySelector("#bitmovinplayer-video-player_container");
-    currentTime = video.currentTime;
-    duration = video.duration;
-    paused = video.paused;
+    ({ currentTime, duration, paused } = video);
     if (!isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
 
       title = document.querySelector(
         "body > now-root > now-seo > article > h1 > font > font"
       );
       if (title !== null) {
-        presenceData.details = title.textContent.split("-")[0];
+        const [details] = title.textContent.split("-");
+        presenceData.details = details;
       } else {
         title = document.querySelector(
           "body > now-root > now-seo > article > h1"
@@ -71,35 +61,39 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > now-root > now-seo > article > h1 > font > font"
       );
-      if (title !== null) {
-        presenceData.state = title.textContent.split("-")[0];
+      if (title) {
+        const [state] = title.textContent.split("-");
+        presenceData.state = state;
       } else {
         title = document.querySelector(
           "body > now-root > now-seo > article > h1"
         );
-        presenceData.state =
+        presenceData.state = `${
           document.querySelector(
             "body > now-root > now-footer > footer > now-breadcrumb > ul > li:nth-child(3) > a > span"
-          ).textContent +
-          " - " +
-          title.textContent;
+          ).textContent
+        } - ${title.textContent}`;
       }
       presenceData.smallImageKey = "reading";
     }
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing main page";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/serien/")) {
-    presenceData.details = "Viewing serie:";
-    presenceData.state = document
+    const [state] = document
       .querySelector("head > title")
-      .textContent.split(" - ")[0];
+      .textContent.split(" - ");
+
+    presenceData.details = "Viewing serie:";
+    presenceData.state = state;
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/shows/")) {
-    presenceData.details = "Viewing show:";
-    presenceData.state = document
+    const [state] = document
       .querySelector("head > title")
-      .textContent.split(" - ")[0];
+      .textContent.split(" - ");
+
+    presenceData.details = "Viewing show:";
+    presenceData.state = state;
     presenceData.startTimestamp = browsingStamp;
   } else if (document.URL.includes("/serien")) {
     presenceData.details = "Viewing all series";
@@ -108,20 +102,20 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing all shows";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/filme/")) {
-    presenceData.details = "Viewing show:";
-    presenceData.state = document
+    const [state] = document
       .querySelector("head > title")
-      .textContent.split(" - ")[0];
+      .textContent.split(" - ");
+
+    presenceData.details = "Viewing show:";
+    presenceData.state = state;
     presenceData.startTimestamp = browsingStamp;
   } else if (document.URL.includes("/filme")) {
     presenceData.details = "Viewing all series";
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

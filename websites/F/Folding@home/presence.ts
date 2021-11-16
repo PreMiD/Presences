@@ -1,12 +1,9 @@
 const presence = new Presence({
   clientId: "812025934617509949"
 });
-let points: string,
-  progress: string;
+let points: string, progress: string;
 presence.on("iFrameData", (data: IFrameData) => {
-  points = data.info.points,
-  progress = data.info.progress;
-
+  ({ points, progress } = data.info);
 });
 
 presence.on("UpdateData", async () => {
@@ -14,15 +11,13 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-    presenceData.details = `Contributing to: ${points}`;
-    presenceData.state = `Project Progress: ${progress}`;
-    
-  if (presenceData.details == null) {
+  presenceData.details = `Contributing to: ${points}`;
+  presenceData.state = `Project Progress: ${progress}`;
+
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
 
 interface IFrameData {

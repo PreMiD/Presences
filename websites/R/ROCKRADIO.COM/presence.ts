@@ -1,20 +1,19 @@
-var presence = new Presence({
-  clientId: "639616115873546261"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var title: any;
-var replace: any;
-var playing: any;
+const presence = new Presence({
+    clientId: "639616115873546261"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement,
+  title: HTMLElement,
+  replace: HTMLElement,
+  playing: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "rock"
   };
 
-  if (document.location.hostname == "www.rockradio.com") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.rockradio.com") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";
     } else if (
@@ -32,9 +31,9 @@ presence.on("UpdateData", async () => {
         "#now-playing > div.info-container > div.title-container > div > span > span.track-name"
       );
       presenceData.details = title.innerText + replace.innerText;
-      presenceData.state = user.innerText.replace("-", "") + " left";
+      presenceData.state = `${user.innerText.replace("-", "")} left`;
       playing =
-        document.querySelector("#play-button > div > a").className ==
+        document.querySelector("#play-button > div > a").className ===
         "ico icon-pause"
           ? "play"
           : "pause";
@@ -47,10 +46,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

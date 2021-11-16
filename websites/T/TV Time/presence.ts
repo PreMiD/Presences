@@ -1,6 +1,7 @@
 const presence = new Presence({
-  clientId: "844109006679179265"
-}), browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "844109006679179265"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -8,13 +9,13 @@ presence.on("UpdateData", async () => {
   };
 
   if (
-    document.location.pathname == "/en" ||
-    document.location.pathname == "/fr" ||
-    document.location.pathname == "/es" ||
-    document.location.pathname == "/it" ||
-    document.location.pathname == "/pt_PT" ||
-    document.location.pathname == "/pt_BR" ||
-    document.location.pathname == "/de"
+    document.location.pathname === "/en" ||
+    document.location.pathname === "/fr" ||
+    document.location.pathname === "/es" ||
+    document.location.pathname === "/it" ||
+    document.location.pathname === "/pt_PT" ||
+    document.location.pathname === "/pt_BR" ||
+    document.location.pathname === "/de"
   ) {
     (data.details = "Viewing Watchlist"), (data.startTimestamp = browsingStamp);
     presence.setActivity(data);
@@ -26,9 +27,9 @@ presence.on("UpdateData", async () => {
       (data.startTimestamp = browsingStamp);
     presence.setActivity(data);
   } else if (document.location.pathname.endsWith("/profile")) {
-    const user = document
+    const [user] = document
       .querySelector(".profile-infos h1.name")
-      .textContent.split("Follow")[0];
+      .textContent.split("Follow");
     (data.details = "Viewing a User Profile"),
       (data.state = user),
       (data.startTimestamp = browsingStamp);
@@ -40,11 +41,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/show")) {
     if (document.location.pathname.includes("/episode/")) {
       const showname = document.querySelector("div.info-box h3 a").textContent,
-      shownumber = document.querySelector(
-        "div.info-box h1 .episode-label"
-      ).textContent;
+        shownumber = document.querySelector(
+          "div.info-box h1 .episode-label"
+        ).textContent;
       (data.details = "Viewing an Episode"),
-        (data.state = showname + " - " + shownumber);
+        (data.state = `${showname} - ${shownumber}`);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     } else if (document.location.pathname.endsWith("/explore")) {

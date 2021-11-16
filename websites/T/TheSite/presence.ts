@@ -9,9 +9,8 @@ const presence = new Presence({
   }),
   getElement = (query: string): string => {
     const element = document.querySelector(query);
-    if (element) {
-      return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return "Loading...";
+    if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
+    else return "Loading...";
   },
   videoStatus = (video: HTMLVideoElement): string => {
     return video.paused ? "pause" : "play";
@@ -182,13 +181,7 @@ presence.on("UpdateData", async () => {
     showBrowseInfo = await presence.getSetting("browse"),
     showVideoInfo = await presence.getSetting("video"),
     data: PresenceData = {
-      details: undefined,
-      state: undefined,
-      largeImageKey: "thesite",
-      smallImageKey: undefined,
-      smallImageText: undefined,
-      startTimestamp: undefined,
-      endTimestamp: undefined
+      largeImageKey: "thesite"
     };
 
   if (oldUrl !== path) {
@@ -196,21 +189,18 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) {
-    data.startTimestamp = elapsed;
-  }
+  if (elapsed) data.startTimestamp = elapsed;
 
   const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
     data.smallImageKey = status;
-    data.smallImageText = (await strings)[status];
     if (status === "play") {
-      const timestamps = presence.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
         video.currentTime,
         video.duration
       );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      data.startTimestamp = startTimestamp;
+      data.endTimestamp = endTimestamp;
     }
   };
 
@@ -229,11 +219,11 @@ presence.on("UpdateData", async () => {
       data.state = `Requests (${getElement(".nav-tabs > .active")})`;
     }
     if (path.includes("/collections")) {
-      let title = getElement(".page-videolist > h1");
-      title = title === "Loading..." ? undefined : title;
+      const title = getElement(".page-videolist > h1");
+
       data.details = "Browsing";
       data.state = "Collections";
-      if (title) {
+      if (title !== "Loading...") {
         data.details = "Browsing Collection";
         data.state = title;
       }
@@ -247,10 +237,10 @@ presence.on("UpdateData", async () => {
   /* Video Info */
   if (showVideoInfo) {
     const wl = path.includes("/list"),
-      wl_movie = wl && getElement(".media-body .genre"),
-      wl_show = wl && !wl_movie;
+      wlMovie = wl && getElement(".media-body .genre"),
+      wlShow = wl && !wlMovie;
 
-    if (wl_movie || path.includes("/movies")) {
+    if (wlMovie || path.includes("/movies")) {
       const menu: HTMLElement = document.querySelector(".mv-movie-info"),
         title: string = getElement(".mv-movie-title > span");
 
@@ -274,8 +264,8 @@ presence.on("UpdateData", async () => {
         setting = await presence.getSetting("show-format"),
         title: string = getElement(".mv-movie-title > span > a");
       if (title !== "Loading...") {
-        const season = regex.groups.season,
-          episode = regex.groups.episode,
+        const { season } = regex.groups,
+          { episode } = regex.groups,
           state = setting
             .replace("%show%", title)
             .replace("%season%", season)
@@ -297,7 +287,7 @@ presence.on("UpdateData", async () => {
       }
     }
     /* Watch Later */
-    if (wl_show) {
+    if (wlShow) {
       const menu: HTMLElement = document.querySelector(".mv-movie-info"),
         regex: RegExpMatchArray = getElement(
           ".full-title > .content > .seq > em"
@@ -305,8 +295,8 @@ presence.on("UpdateData", async () => {
         setting = await presence.getSetting("show-format"),
         title: string = getElement(".full-title > .content > .title");
       if (title !== "Loading...") {
-        const season = regex.groups.season,
-          episode = regex.groups.episode,
+        const { season } = regex.groups,
+          { episode } = regex.groups,
           state = setting
             .replace("%show%", title)
             .replace("%season%", season)
@@ -331,7 +321,7 @@ presence.on("UpdateData", async () => {
 
   /* Search Info */
   if (showSearchInfo) {
-    if (search.value != searchText) {
+    if (search.value !== searchText) {
       searchText = search.value;
       searchElapsed = Date.now();
     }
@@ -341,12 +331,12 @@ presence.on("UpdateData", async () => {
     ) {
       data.details = "Searching";
       data.state = searchText;
-      data.startTimestamp = elapsed ? elapsed : undefined;
-      data.endTimestamp = undefined;
+      data.startTimestamp = elapsed;
+      delete data.endTimestamp;
     }
   }
 
-  if (data.details !== undefined) {
+  if (data.details) {
     if (data.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;

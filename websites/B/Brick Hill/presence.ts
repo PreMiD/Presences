@@ -12,8 +12,8 @@ presence.on("UpdateData", async () => {
 
   // Main Presence
   if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/dashboard"
+    document.location.pathname === "/" ||
+    document.location.pathname === "/dashboard"
   ) {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Dashboard";
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
     );
     presenceData.details = "Viewing User:";
     presenceData.state = userName.textContent;
-  } else if (document.location.pathname == "/forum/") {
+  } else if (document.location.pathname === "/forum/") {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Forum";
   } else if (document.location.pathname.includes("/membership/")) {
@@ -115,9 +115,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else 
-    presence.setActivity(presenceData);
+  } else presence.setActivity(presenceData);
 });

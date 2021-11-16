@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "CTK WARRIOR",
+    "id": "450634297871695896"
+  },
+  "service": "Autocode",
+  "description": {
+    "en": "New user notifications. Purchase alerts. Scheduled jobs. Community bots. SQL queries. Internal tooling. Create whatever you want with JavaScript and APIs."
+  },
+  "url": "autocode.com",
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/KNLjAwu.jpg",
+  "thumbnail": "https://i.imgur.com/iojaJvv.jpg",
+  "color": "#ffffff",
+  "tags": [
+    "code",
+    "ide",
+    "editor"
+  ],
+  "category": "other"
+}

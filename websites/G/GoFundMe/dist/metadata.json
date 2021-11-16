@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "GoFundMe",
+  "author": {
+    "name": "rushia",
+    "id": "398752205043400724"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/5z37NtP.png",
+  "thumbnail": "https://i.imgur.com/EytuDmf.png",
+  "version": "1.0.3",
+  "color": "#00b640",
+  "tags": [
+    "fundraiser",
+    "donate",
+    "donation",
+    "fundraising",
+    "charity"
+  ],
+  "url": "gofundme.com",
+  "regExp": "([a-z0-9]+)[.]gofundme[.]com",
+  "description": {
+    "en": "GoFundMe is an American for-profit crowdfunding platform that allows people to raise money for events ranging from life events such as celebrations and graduations to challenging circumstances like accidents and illnesses. "
+  }
+}

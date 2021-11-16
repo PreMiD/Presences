@@ -3,22 +3,21 @@ const presence = new Presence({
 });
 
 function setTime(a: number): number {
-  var time = new Date(Date.now());
+  const time = new Date(Date.now());
   time.setSeconds(time.getSeconds() + a);
-  return Math.floor((time as any) / 1000);
+  return Math.floor(time.getTime() / 1000);
 }
 
-function findParents(b: string | any[], a: string): number {
-  var r: any;
-  for (let i = 0; i < b.length; i++) {
-    if (b[i][0] == a) {
-      r = b[i];
-    }
-  }
+function findParents(b: (string | [string, number, string])[], a: string) {
+  let r;
+  for (let i = 0; i < b.length; i++) if (b[i][0] === a) r = b[i];
+
   return r;
 }
 
-var messages = {
+const messages: {
+  [name: string]: ([string, number, string] | string)[];
+} = {
   finish: [
     [
       "STOP! Sorry, no cumshot for you. <br />Try again, maybe you will get lucky next time... Now get your hands off your dick until this is over.",
@@ -86,31 +85,24 @@ var messages = {
   ]
 };
 
-var gomsgs = [];
-var stopmsgs = [];
-var finishmsgs = [];
-var elapsed;
+let gomsgs: string, stopmsgs: string, finishmsgs: string, elapsed;
 
-for (let i = 0; i < messages["go"].length; i++) {
-  (gomsgs as any) += messages["go"][i][0];
-}
+for (let i = 0; i < messages.go.length; i++) gomsgs += messages.go[i][0];
 
-for (let i = 0; i < messages["stop"].length; i++) {
-  (stopmsgs as any) += messages["stop"][i][0];
-}
-for (let i = 0; i < messages["finish"].length; i++) {
-  (finishmsgs as any) += messages["finish"][i][0];
-}
+for (let i = 0; i < messages.stop.length; i++) stopmsgs += messages.stop[i][0];
+
+for (let i = 0; i < messages.finish.length; i++)
+  finishmsgs += messages.finish[i][0];
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
-    var choosen = document.getElementById("choose").style.display != "none";
+  if (document.location.pathname === "/") {
+    const choosen = document.getElementById("choose").style.display !== "none";
 
     if (choosen) {
-      elapsed = Math.floor((Date.now as any) / 1000);
+      elapsed = Math.floor(Date.now() / 1000);
       const presenceData = {
         details: "Preparing to Edge",
-        state: `choosing settings `,
+        state: "choosing settings ",
         //largeImageKey: "banner",
         largeImageKey: "logo",
         startTimestamp: elapsed
@@ -119,9 +111,9 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       let presenceData;
-      var msg = document.getElementById("message").innerText;
+      const msg = document.getElementById("message").innerText;
       if (gomsgs.includes(msg)) {
-        var cr = findParents(messages["go"], msg);
+        const cr = findParents(messages.go, msg) as [string, number, string];
         presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
@@ -130,7 +122,11 @@ presence.on("UpdateData", async () => {
         };
         presence.setActivity(presenceData);
       } else if (finishmsgs.includes(msg)) {
-        var cr = findParents(messages["finish"], msg);
+        const cr = findParents(messages.finish, msg) as [
+          string,
+          number,
+          string
+        ];
         presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
@@ -139,7 +135,7 @@ presence.on("UpdateData", async () => {
         };
         presence.setActivity(presenceData);
       } else if (stopmsgs.includes(msg)) {
-        var cr = findParents(messages["stop"], msg);
+        const cr = findParents(messages.stop, msg) as [string, number, string];
         presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
@@ -149,10 +145,10 @@ presence.on("UpdateData", async () => {
 
         presence.setActivity(presenceData);
       } else if (
-        messages["first"][0] ==
+        messages.first[0] ===
         document.getElementById("message").children[0].innerHTML
       ) {
-        elapsed = Math.floor((Date.now as any) / 1000);
+        elapsed = Math.floor(Date.now() / 1000);
         const presenceData = {
           details: "jerking of slowly for edging",
           //largeImageKey: "banner",

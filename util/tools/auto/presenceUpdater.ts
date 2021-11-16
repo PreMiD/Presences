@@ -1,25 +1,24 @@
 import "source-map-support/register";
 
+import { transformFileAsync as transform } from "@babel/core";
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { sync as glob } from "glob";
+import {
+  DeleteWriteOpResultObject,
+  MongoClient,
+  UpdateWriteOpResult
+} from "mongodb";
+import { join, normalize, resolve as rslv, sep } from "path";
+import { valid } from "semver";
+import { minify as terser } from "terser";
 import {
   CompilerOptions,
   createProgram,
   flattenDiagnosticMessageText,
   getPreEmitDiagnostics
 } from "typescript";
-import {
-  DeleteWriteOpResultObject,
-  MongoClient,
-  UpdateWriteOpResult
-} from "mongodb";
-import { existsSync, readFileSync, writeFileSync } from "fs";
-import { join, normalize, resolve as rslv, sep } from "path";
 
-import { sync as glob } from "glob";
-import { minify as terser } from "terser";
-import { transformFileAsync as transform } from "@babel/core";
-import { valid } from "semver";
-
-const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
+const url = process.env.MONGO_URL,
   dbname = "PreMiD";
 let extendedRun = false,
   exitCode = 0,
@@ -56,19 +55,16 @@ const readFile = (path: string): string =>
 
     allDiagnostics.forEach((diagnostic) => {
       if (diagnostic.file) {
-        const {
-            line,
-            character
-          } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!),
+        const { line, character } =
+            diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!),
           message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
         console.log(
           `${diagnostic.file.fileName} (${line + 1},${
             character + 1
           }): ${message}`
         );
-      } else {
+      } else
         console.log(flattenDiagnosticMessageText(diagnostic.messageText, "\n"));
-      }
     });
 
     if (emitResult.emitSkipped) appCode = 1;
@@ -100,7 +96,12 @@ const readFile = (path: string): string =>
     }
   },
   compile = async (filesToCompile: string[]): Promise<void> => {
-    const premidTypings = join(__dirname, "../../../@types", "premid", "index.d.ts"),
+    const premidTypings = join(
+        __dirname,
+        "../../../@types",
+        "premid",
+        "index.d.ts"
+      ),
       { compilerOptions: baseTsConfig } = readJson<{
         compilerOptions: CompilerOptions;
       }>(rslv(__dirname, "../../../tsconfig.json"));
@@ -124,10 +125,11 @@ const readFile = (path: string): string =>
     }
   },
   main = async (): Promise<void> => {
-    if (!process.env.GITHUB_ACTIONS)
+    if (!process.env.GITHUB_ACTIONS) {
       console.log(
         "\nPlease note that this script is ONLY supposed to run on a CI environment"
       );
+    }
 
     console.log("\nFETCHING...\n");
 
@@ -148,7 +150,7 @@ const readFile = (path: string): string =>
           const file = readFile(`${pF}/dist/metadata.json`);
           if (isValidJSON(file)) {
             const data = JSON.parse(file);
-            delete data["$schema"];
+            delete data.$schema;
             return [data, pF];
           } else {
             console.error(
@@ -211,7 +213,7 @@ const readFile = (path: string): string =>
 
         if (
           !metadataFile ||
-          (metadataFile && valid(metadataFile.version) == null)
+          (metadataFile && valid(metadataFile.version) === null)
         ) {
           const meta =
             metadataFile && metadataFile.service
@@ -229,9 +231,7 @@ const readFile = (path: string): string =>
         await compile(sources);
 
         const jsFiles = glob(`${path}dist/*.js`);
-        for (const file of jsFiles) {
-          await polyfill(file);
-        }
+        for (const file of jsFiles) await polyfill(file);
 
         if (!existsSync(`${path}dist/presence.js`)) {
           const meta = metadataFile.service ? metadataFile.service : path;

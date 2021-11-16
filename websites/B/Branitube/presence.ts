@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "611657413350654010"
   }),
   strings = presence.getStrings({
@@ -6,25 +6,11 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let lastPlaybackState = null,
+  playback,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -49,20 +35,18 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  var video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
     "#player > div.jw-media.jw-reset > video"
   );
 
   if (video !== null) {
-    var videoTitle: any;
-
-    videoTitle = document.querySelector(
-      "div > div.episodeInfo > div.nomeAnime"
-    );
-    var episode: any = document.querySelector(
+    const videoTitle = document.querySelector(
+        "div > div.episodeInfo > div.nomeAnime"
+      ) as HTMLElement,
+      episode = document.querySelector(
         "div > div.episodeInfo > div.epInfo"
-      ),
-      timestamps = getTimestamps(
+      ) as HTMLElement,
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
@@ -74,8 +58,8 @@ presence.on("UpdateData", async () => {
         smallImageText: video.paused
           ? (await strings).pause
           : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
+        startTimestamp,
+        endTimestamp
       };
 
     presence.setTrayTitle(videoTitle.innerText);

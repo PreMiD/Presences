@@ -9,36 +9,19 @@ const presence = new Presence({
   });
 let prev: string, elapsed: number, path: string, gender: string;
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "chb"
-  };
+      largeImageKey: "chb"
+    },
+    video: HTMLVideoElement = document.querySelector("video[id$='_html5_api']");
 
   path = document.location.pathname;
-
-  const video: HTMLVideoElement = document.querySelector(
-    "video[id$='_html5_api']"
-  );
 
   if (
     path.includes("/b/") &&
     document.querySelector("#broadcaster_intro") &&
     (document.querySelector("#broadcaster_intro") as HTMLElement).style
-      .display == "none"
+      .display === "none"
   ) {
     if (window.location.href !== prev) {
       prev = window.location.href;
@@ -46,13 +29,13 @@ presence.on("UpdateData", async () => {
     }
 
     data.details = "Broadcasting as";
-    data.state = path.split("/")[2];
+    [, , data.state] = path.split("/");
     data.smallImageKey = "live";
     data.smallImageText = (await strings).live;
     data.startTimestamp = elapsed;
   } else if (
     !video &&
-    document.querySelector("#header div.logo-zone") != null
+    document.querySelector("#header div.logo-zone") !== null
   ) {
     data.details = (await strings).browsing;
     data.smallImageKey = "search";
@@ -61,17 +44,16 @@ presence.on("UpdateData", async () => {
     if (path.includes("/p/")) {
       // Whoever editing this file in the future, keep this as it is for the sake of user's privacy
       data.state = "Accounts";
-    } else if (path.includes("/b/")) {
-      data.state = "Broadcast page";
-    } else if (path.includes("/tag/")) {
+    } else if (path.includes("/b/")) data.state = "Broadcast page";
+    else if (path.includes("/tag/")) {
       if (
         typeof path.split("/")[3] === "undefined" ||
-        path.split("/")[3] == null ||
+        path.split("/")[3] === null ||
         path.split("/")[3] === "" ||
         path.split("/")[3].length > 1
       ) {
         // Different checks to prevent "undefined" gender strings.
-        data.state = "Tag : " + path.split("/")[2];
+        data.state = `Tag : ${path.split("/")[2]}`;
       } else {
         switch (path.split("/")[3]) {
           case "f":
@@ -87,7 +69,7 @@ presence.on("UpdateData", async () => {
             gender = "trans";
         }
 
-        data.state = "Tag : " + path.split("/")[2] + " (" + gender + ")";
+        data.state = `Tag : ${path.split("/")[2]} (${gender})`;
       }
     } else {
       switch (path) {
@@ -196,7 +178,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "search";
       data.smallImageText = (await strings).browsing;
     } else if (video && path.includes("/photo_videos/photo/")) {
-      const timestamps = getTimestamps(
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -207,8 +189,6 @@ presence.on("UpdateData", async () => {
       data.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
 
       if (video.paused) {
         delete data.startTimestamp;
@@ -220,14 +200,14 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "search";
       data.smallImageText = (await strings).browsing;
     }
-  } else if (path.split("/")[2] == null || path.split("/")[2].length == 0) {
+  } else if (path.split("/")[2] === null || path.split("/")[2].length === 0) {
     if (window.location.href !== prev) {
       prev = window.location.href;
       elapsed = Math.floor(Date.now() / 1000);
     }
 
     data.startTimestamp = elapsed;
-    data.details = path.split("/")[1];
+    [, data.details] = path.split("/");
 
     if (video && !video.paused) {
       data.smallImageKey = "live";

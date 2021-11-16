@@ -7,31 +7,28 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let timestamps: number[],
-  video: HTMLVideoElement,
+let video: HTMLVideoElement,
   currentTime: number,
   duration: number,
   paused: boolean,
   iFrameVideo: boolean,
   playback: boolean,
-  anime_breadcumb: string;
+  animeBreadcumb: string;
 
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iFrameVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iFrameVideo.duration !== null ? true : false;
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.duration;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, duration, paused } = data.iFrameVideo);
+      currentTime = data.iFrameVideo.currTime;
     }
   }
 );
@@ -42,9 +39,9 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp
     },
     title = document.title.slice(0, -13); //title of the page
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/")
     presenceData.details = "Exploring Genoanime";
-  } else if (document.location.pathname.includes("/browse")) {
+  else if (document.location.pathname.includes("/browse")) {
     presenceData.details = "Exploring Genoanime library";
     presenceData.buttons = [
       {
@@ -53,17 +50,17 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/details")) {
-    presenceData.details = `Checking Synopsis`;
+    presenceData.details = "Checking Synopsis";
     presenceData.state = document.querySelector(
       ".anime__details__title h3"
     ).textContent;
-    anime_breadcumb = document.querySelector<HTMLAnchorElement>(
+    animeBreadcumb = document.querySelector<HTMLAnchorElement>(
       "#container > section > div > div.anime__details__content > div > div.col-lg-9 > div > div.anime__details__btn > a.watch-btn"
     ).href;
     presenceData.buttons = [
       {
         label: "Watch It",
-        url: anime_breadcumb
+        url: animeBreadcumb
       },
       {
         label: "Check Synopsis",
@@ -72,9 +69,10 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/watch")) {
     presenceData.details = title;
-    presenceData.state =
-      "Episode " + document.location.href.split("episode=")[1];
-    anime_breadcumb = document.querySelector<HTMLAnchorElement>(
+    presenceData.state = `Episode ${
+      document.location.href.split("episode=")[1]
+    }`;
+    animeBreadcumb = document.querySelector<HTMLAnchorElement>(
       "#anime_details_breadcrumbs"
     ).href;
     presenceData.buttons = [
@@ -84,21 +82,19 @@ presence.on("UpdateData", async () => {
       },
       {
         label: "Check Synopsis",
-        url: anime_breadcumb
+        url: animeBreadcumb
       }
     ];
     if (iFrameVideo) {
-      timestamps = presence.getTimestamps(
+      [, presenceData.endTimestamp] = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
     } else {
       video = document.querySelector("div > div.plyr__video-wrapper > video");
       if (video) {
-        (currentTime = video.currentTime),
-          (duration = video.duration),
-          (paused = video.paused),
-          (timestamps = presence.getTimestamps(
+        ({ currentTime, duration, paused } = video),
+          ([, presenceData.endTimestamp] = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
           ));
@@ -110,10 +106,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.endTimestamp = timestamps[1];
-      if (paused) {
-        delete presenceData.endTimestamp;
-      }
+      if (paused) delete presenceData.endTimestamp;
     }
   } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching For...";
@@ -128,9 +121,9 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
-  } else if (document.location.pathname.includes("/favorite")) {
+  } else if (document.location.pathname.includes("/favorite"))
     presenceData.details = "Browsing Favourites";
-  } else if (document.location.pathname.includes("/schedule")) {
+  else if (document.location.pathname.includes("/schedule")) {
     presenceData.details = "Checking Schedule";
     presenceData.state = document.querySelector(
       "#container > section > div > div:nth-child(1) > div > h3"
@@ -142,10 +135,8 @@ presence.on("UpdateData", async () => {
       }
     ];
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

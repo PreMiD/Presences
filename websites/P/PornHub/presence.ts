@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   //* If user is on /view_video...
-  if (window.location.pathname == "/view_video.php") {
+  if (window.location.pathname === "/view_video.php") {
     const video: HTMLVideoElement =
         document.querySelector(".mgp_videoWrapper video") ?? null,
       showTime = await presence.getSetting("time");
@@ -36,14 +36,11 @@ presence.on("UpdateData", async () => {
       presence.setTrayTitle(video.paused ? "" : title.innerText);
 
       //* Remove timestamps if paused or not show timestamps
-      if (video.paused || !showTime) {
-        delete presenceData.endTimestamp;
-      }
+      if (video.paused || !showTime) delete presenceData.endTimestamp;
 
       //* If tags are not "null"
-      if (title && uploader) {
-        presence.setActivity(presenceData, !video.paused);
-      } else {
+      if (title && uploader) presence.setActivity(presenceData, !video.paused);
+      else {
         presence.setActivity();
         presence.setTrayTitle();
       }

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Ben",
     "id": "781285747058933790"
@@ -10,7 +11,7 @@
     "nl": "Een online radiostation gemaakt door de community voor de community."
   },
   "url": "itsaqua.net",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/dBqeZ3q.png",
   "thumbnail": "https://i.imgur.com/y1Uot2b.png",
   "color": "#2980b9",

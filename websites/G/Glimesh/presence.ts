@@ -11,19 +11,18 @@ presence.on("UpdateData", async () => {
       largeImageKey: "glimesh_logo"
     };
 
-  if (locationHost == "glimesh.tv") {
+  if (locationHost === "glimesh.tv") {
     presenceData.details = "Browsing...";
-    if (locationPath == "/") {
-      presenceData.details = "Viewing Home Page";
-    } else if (locationPath.match("/streams/")) {
+    if (locationPath === "/") presenceData.details = "Viewing Home Page";
+    else if (locationPath.match("/streams/")) {
       const category = document.title.replace(" - Glimesh", "");
       presenceData.details = "Viewing Category";
       presenceData.state = category;
-    } else if (locationPath == "/users" || locationPath == "/users/") {
+    } else if (locationPath === "/users" || locationPath === "/users/")
       presenceData.details = "Viewing All Users";
-    } else if (locationPath.match("users/settings")) {
+    else if (locationPath.match("users/settings"))
       presenceData.details = "Viewing Settings";
-    } else if (locationPath.match("/about")) {
+    else if (locationPath.match("/about")) {
       presenceData.details = "Reading about Glimesh";
       if (locationPath.match("alpha")) {
         presenceData.details = "Reading About";
@@ -31,13 +30,13 @@ presence.on("UpdateData", async () => {
       } else if (locationPath.match("streaming")) {
         presenceData.details = "Reading About";
         presenceData.state = "Streaming";
-      } else if (locationPath.match("team")) {
+      } else if (locationPath.match("team"))
         presenceData.details = "Viewing the Team";
-      } else if (locationPath.match("mission")) {
+      else if (locationPath.match("mission"))
         presenceData.details = "Reading the Mission";
-      } else if (locationPath.match("credits")) {
+      else if (locationPath.match("credits"))
         presenceData.details = "Reading the Credits";
-      } else if (locationPath.match("dmca")) {
+      else if (locationPath.match("dmca")) {
         presenceData.details = "Reading About";
         presenceData.state = "DMCA Policy";
       } else if (locationPath.match("faq")) {
@@ -56,22 +55,19 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Open Data";
         presenceData.state = "Platform User Growth";
 
-        if (locationPath.match("subscriptions")) {
+        if (locationPath.match("subscriptions"))
           presenceData.state = "Recurring Subscriptions";
-        } else if (locationPath.match("streams")) {
+        else if (locationPath.match("streams"))
           presenceData.state = "Live Streams";
-        }
       }
     } else if (locationPath.match("/profile")) {
       const username = document.title.replace("'s Profile - Glimesh", "");
-      presenceData.details =
-        "Viewing" +
-        (!(await presence.getSetting("show_details")) ? " a " : " ") +
-        "Profile";
+      presenceData.details = `Viewing${
+        !(await presence.getSetting("show_details")) ? " a " : " "
+      }Profile`;
 
-      if (await presence.getSetting("show_details")) {
+      if (await presence.getSetting("show_details"))
         presenceData.state = username;
-      }
 
       if (
         (await presence.getSetting("show_buttons")) &&
@@ -84,16 +80,15 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-    } else if (document.getElementById("video-column") != null) {
+    } else if (document.getElementById("video-column") !== null) {
       const username = document.querySelector("h3"),
         title = document.title.replace(" - Glimesh", "");
 
       presenceData.details = (await presence.getSetting("show_details"))
         ? title
         : "Watching a Stream";
-      if (await presence.getSetting("show_details")) {
+      if (await presence.getSetting("show_details"))
         presenceData.state = username.textContent;
-      }
 
       const video = document.querySelector("video");
 
@@ -112,7 +107,7 @@ presence.on("UpdateData", async () => {
         ];
       }
 
-      if (video != null && !isNaN(video.duration)) {
+      if (video !== null && !isNaN(video.duration)) {
         if (
           (await presence.getSetting("show_buttons")) &&
           (await presence.getSetting("show_details"))
@@ -124,31 +119,27 @@ presence.on("UpdateData", async () => {
         }
 
         if (!video.paused) {
-          if (elapsedTime == null) {
-            elapsedTime = Math.floor(Date.now() / 1000);
-          }
+          if (elapsedTime === null) elapsedTime = Math.floor(Date.now() / 1000);
 
           presenceData.smallImageKey = "playing";
           presenceData.smallImageText = "Live!";
 
-          if (await presence.getSetting("show_timestamps")) {
+          if (await presence.getSetting("show_timestamps"))
             presenceData.startTimestamp = elapsedTime;
-          }
         } else {
           presenceData.smallImageKey = "paused";
           presenceData.smallImageText = "Paused";
 
-          if (await presence.getSetting("show_timestamps")) {
+          if (await presence.getSetting("show_timestamps"))
             presenceData.startTimestamp = 0;
-          }
         }
       }
     }
-  } else if (locationHost == "glim.shop") {
+  } else if (locationHost === "glim.shop")
     presenceData.details = "Viewing Merch Store";
-  } else if (locationHost == "support.glimesh.tv") {
+  else if (locationHost === "support.glimesh.tv")
     presenceData.details = "Viewing Support";
-  } else if (locationHost == "blog.glimesh.tv") {
+  else if (locationHost === "blog.glimesh.tv") {
     presenceData.details = "Viewing Blogs";
 
     if (locationPath.match("/posts")) {
@@ -156,10 +147,9 @@ presence.on("UpdateData", async () => {
         "body > div > div > div > h1 > a"
       ).textContent;
 
-      presenceData.details =
-        "Reading" +
-        (!(await presence.getSetting("show_details")) ? " a " : " ") +
-        "Blog";
+      presenceData.details = `Reading${
+        !(await presence.getSetting("show_details")) ? " a " : " "
+      }Blog`;
       if (await presence.getSetting("show_details"))
         presenceData.state = blogPost;
 
@@ -177,10 +167,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

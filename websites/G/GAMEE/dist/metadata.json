@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "GAMEE",
+  "author": {
+    "name": "rushia",
+    "id": "398752205043400724"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/kJCKhkE.png",
+  "thumbnail": "https://i.imgur.com/cUAhgyh.png",
+  "version": "1.0.3",
+  "color": "#afee70",
+  "tags": [
+    "paid-to-play",
+    "play-to-win",
+    "play-to-win-real-money",
+    "games",
+    "cash",
+    "prizes"
+  ],
+  "url": "www.gamee.com",
+  "description": {
+    "en": "Play games, get tickets and WIN $$$. More tickets, more chances to WIN!"
+  }
+}

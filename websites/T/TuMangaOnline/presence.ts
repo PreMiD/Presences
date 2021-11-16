@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "tmo"
   };
 
-  if (document.location.hostname == "lectortmo.com") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "lectortmo.com") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";
     } else if (document.location.pathname.includes("/library/manga/")) {
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
         "#app > section:nth-child(2) > div > div > h1"
       ).textContent;
     }
-  } else if (document.location.hostname == "tmocommunity.com") {
+  } else if (document.location.hostname === "tmocommunity.com") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing the forums...";
     if (document.location.pathname.includes("/d/")) {
@@ -60,10 +60,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

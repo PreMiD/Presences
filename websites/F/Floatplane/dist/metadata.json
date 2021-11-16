@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Floatplane",
+  "author": {
+    "name": "The Gamerzs",
+    "id": "730142125181894657"
+  },
+  "url": "www.floatplane.com",
+  "description": {
+    "en": "Floatplane is a streaming service that offers a wide variety of content from shows to reviews and more! All viewable on thousands of internet-connected devices."
+  },
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/tXncd0U.png",
+  "thumbnail": "https://i.imgur.com/b4eo89T.png",
+  "color": "#ffffff",
+  "tags": [
+    "streaming",
+    "vod",
+    "video",
+    "media"
+  ],
+  "category": "videos",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "subscriptions",
+      "title": "Subscription Count",
+      "icon": "fas fa-dollar-sign",
+      "value": true
+    }
+  ]
+}

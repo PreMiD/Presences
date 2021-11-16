@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "sks316",
     "id": "226098403304538122"
@@ -9,9 +10,9 @@
     "nl": "PonyvilleFM is een van de oudste Brony en Pony EDM-radiostations met live mixen en optredens van onze zeer getalenteerde line-up van dj's."
   },
   "url": "ponyvillefm.com",
-  "version": "1.2.6",
-  "logo": "https://sks316.s-ul.eu/Sm3JjQe0.png",
-  "thumbnail": "https://sks316.s-ul.eu/N9SKruqx.png",
+  "version": "1.2.8",
+  "logo": "https://i.imgur.com/WAIEF55.png",
+  "thumbnail": "https://i.imgur.com/yK2PQRq.png",
   "color": "#4D0F80",
   "tags": [
     "music",
