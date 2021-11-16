@@ -235,15 +235,30 @@ presence.on("UpdateData", async () => {
       if (path === "/iris.ic/" || path === "/iris.ic")
         presenceData.state = "Hlavní stránka";
       else if (path.includes("settings")) presenceData.state = "Nastavení";
-      else if (path.includes("iris.ic/box")) presenceData.state = "Schránka";
-      else if (
+      else if (path.includes("ic/box")) presenceData.state = "Schránka";
+      else if (path.includes("chat")) presenceData.state = "Chat";
+      else if (path.includes("hashtag")) {
+        if (path === "/iris.ic/hashtag" || path === "/iris.ic/hashtag/")
+          presenceData.state = "Hashtagy";
+        else if (path.includes("/hashtag/")) {
+          presenceData.details = "Iris - Hashtagy";
+          item = path.replace("/iris.ic/hashtag/", "");
+          presenceData.state = "#" + item;
+        }
+      } else if (
         path.includes("iris.ic/") &&
         path !== "iris.ic/" &&
         !path.includes("/users")
       ) {
-        item = path.replace("/iris.ic/", "");
         presenceData.details = "Iris uživatelský profil:";
-        presenceData.state = item;
+        if (!path.includes("www")) {
+          item = path.replace("/iris.ic/", "");
+          presenceData.state = "@" + item;
+        } else if (path.includes("www")) {
+          item = path.replace("/www/iris.ic/", "");
+          item = item.replace(".php", "");
+          presenceData.state = "@" + item;
+        }
       } else if (path.includes("users"))
         presenceData.state = "Seznam uživatelů";
     }
