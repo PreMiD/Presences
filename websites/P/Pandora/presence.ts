@@ -11,7 +11,7 @@ function stripText(element: HTMLElement, id = "None", log = true) {
   else {
     if (log) {
       presence.error(
-        `An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: ${id}`
+        `An error occurred while stripping data off the page. Please contact FireController1847 on the PreMiD Discord server, and send him a screenshot of this error. ID: ${id}`
       );
     }
     return null;
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
   };
 
   // Define whether or not we're currently playing
-  let isPlaying = true;
+  let isPlaying = false;
 
   // Fetch audio bar
   const audioBar: HTMLElement = document.querySelector(".Tuner__Audio__NowPlayingHitArea");
