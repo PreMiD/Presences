@@ -16,7 +16,8 @@
     "es": "¡Hacemos realidad tus ídeas de la manera más brillante!"
   },
   "service": "Shard Hosting",
-  "version": "1.0",
+  "version": "1.0.0",
+
   "logo": "https://i.imgur.com/LypmDBX.png",
   "thumbnail": "https://i.imgur.com/LypmDBX.png",
   "color": "#f47c8c",
