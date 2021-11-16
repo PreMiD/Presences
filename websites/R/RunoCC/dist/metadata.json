@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "twn",
+    "id": "665482610859966464"
+  },
+  "contributors": [
+    {
+      "name": "WoCean",
+      "id": "701832254644551774"
+    }
+  ],
+  "service": "RunoCC",
+  "description": {
+    "en": "Make Friends & Chat With Millions In A Virtual World",
+    "tr": "Müthiş İnsanlarla Dolu İlginç Bir Yer",
+    "nl": "Vrienden maken en chatten met miljoenen in een virtuele wereld"
+  },
+  "url": "runo.cc",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/89wo0y0.png",
+  "thumbnail": "https://i.imgur.com/6CXFU3R.png",
+  "color": "#ffff00",
+  "tags": [
+    "runo",
+    "habbo",
+    "runocc"
+  ],
+  "category": "games"
+}
