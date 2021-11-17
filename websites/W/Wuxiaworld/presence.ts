@@ -9,10 +9,8 @@ presence.on("UpdateData", () => {
       startTimestamp: elapsed,
       largeImageKey: "logo"
     };
-  let comics: number;
-
   if (
-    document.querySelector('.navbar-form input') == document.activeElement
+    document.querySelector(".navbar-form input") === document.activeElement
   ) {
     data.details = "Searching:";
     data.state = (
@@ -20,21 +18,14 @@ presence.on("UpdateData", () => {
     ).value;
     data.smallImageKey = "search";
   } else {
-  if (pathname.includes('emperors-domination'))
-    data.largeImageKey = "emperor"
+  if (pathname.includes("emperors-domination"))
+    data.largeImageKey = "emperor";
   if (/^\/$/.test(pathname)) data.details = "Viewing Home Page";
   else if (/^\/novels\/?$/.test(pathname)) {
     // Counting comics
-    let novels = document.querySelectorAll('.novel-item').length;
+    const novels = document.querySelectorAll(".novel-item").length;
     data.details = "Viewing Novels List";
     data.state = `📋 ${novels.toString()} novels found`;
-  } else if (/^\/all-series\/novels+\/?$/.test(pathname)) {
-    // Counting novels
-    comics = document.querySelectorAll(
-      ".page-listing-item .row .col-6"
-    ).length;
-    data.details = "Viewing Novel List";
-    data.state = `📋 ${comics.toString()} novels found`;
   } else if (/^\/novel\/[0-9a-z-]+\/?$/i.test(pathname)) {
     data.details = "Viewing Novel";
     data.state = document.querySelector(".novel-body h2").textContent;
