@@ -24,8 +24,8 @@ setInterval(fetchStats, 10000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logobg",
-    smallImageKey: "nobg_white"
+    largeImageKey: "default",
+    smallImageKey: "live"
   };
 
   if(document.location.hash.startsWith("#/")) {
