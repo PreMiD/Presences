@@ -37,7 +37,7 @@ presence.on("UpdateData", () => {
       }
     ];
   } else if (
-    /^\/novel\/([^;]*)+\/+[a-zA-Z]+\-chapter-[0-9]+\/?/i.test(pathname)
+    /^\/novel\/([^;]*)+\/+[a-zA-Z]+-chapter-[0-9]+\/?/i.test(pathname)
   ) {
     const novelLink = (
       document.querySelector(
