@@ -1,9 +1,5 @@
 const presence = new Presence({
     clientId: "463151177836658699"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
   });
 
 function getAuthorString(): string {
@@ -95,12 +91,12 @@ presence.on("UpdateData", async () => {
           ? "repeat"
           : "play",
         smallImageText: video.paused
-          ? (await strings).pause
+          ? "Paused"
           : repeatMode === "ONE"
           ? "On loop"
           : repeatMode === "ALL"
           ? "Playlist on loop"
-          : (await strings).play,
+          : "Play",
         endTimestamp
       };
 
