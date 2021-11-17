@@ -82,54 +82,55 @@ function updateLanguage() {
 updateLanguage();
 setInterval(updateLanguage, 1000);
 
-function checkBasicPages(path: string[]) {
+function checkBasicPages(path: string[]): boolean {
   if (path.length === 0) {
-    const url = new URL(document.location.href);
-    if (url.searchParams.get("isLoggingIn") === "true") {
+    if (
+      new URL(document.location.href).searchParams.get("isLoggingIn") === "true"
+    ) {
       presenceData.details = "Logging in";
-      return;
+      return true;
     }
     presenceData.details = "Viewing the home page";
-    return;
+    return true;
   }
   if (INFO_PAGES.includes(path[0])) {
     presenceData.details = `Viewing the ${path[0]} page`;
-    return;
+    return true;
   }
   if (path[0] === "courses") {
     presenceData.details = "Viewing available courses";
-    return;
+    return true;
   }
   if (path[0] === "abc") {
     presenceData.details = "Looking into Duolingo ABC";
-    return;
+    return true;
   }
   if (path[0] === "plus") {
     presenceData.details = "Looking into Duolingo Plus";
-    return;
+    return true;
   }
   if (path[0] === "dictionary") {
     presenceData.details = "Looking up a word";
     if (path.length >= 3) presenceData.state = `${path[1]}: ${path[2]}`;
-    return;
+    return true;
   }
   if (path[0] === "profile") {
-    if (path.length < 2) return;
+    if (path.length < 2) return true;
     presenceData.details = "Viewing a profile";
     [, presenceData.state] = path;
     if (path.length >= 3) {
       presenceData.details += " section";
       presenceData.state += `'s ${path[2]}`;
     }
-    return;
+    return true;
   }
   if (path[0] === "friend-updates") {
     presenceData.details = "Viewing friend updates";
-    return;
+    return true;
   }
   if (path[0] === "user-search") {
     presenceData.details = "Searching for a user";
-    return;
+    return true;
   }
   if (path[0] === "settings") {
     presenceData.details = "Adjusting settings";
@@ -138,24 +139,27 @@ function checkBasicPages(path: string[]) {
       page = page.charAt(0).toUpperCase() + page.slice(1);
       presenceData.state = `Section: ${page}`;
     }
-    return;
+    return true;
   }
   if (document.title.startsWith("Error")) {
     presenceData.details = "Watching Duo cry :(";
     presenceData.state = document.title;
-    return;
+    return true;
   }
   if (API_ENDPOINTS.includes(path[0])) {
     presenceData.details = "Viewing an API response";
     presenceData.state = `Endpoint: /${path[0]}`;
-    return;
+    return true;
   }
+
+  return false;
 }
 
-function checkLearningPages(path: string[]) {
+function checkLearningPages(path: string[]): boolean {
   function set(details: string) {
     presenceData.details = details;
     presenceData.state = `Learning ${language.name}`;
+    return true;
   }
 
   if (path[0] === "learn") {
@@ -184,9 +188,10 @@ function checkLearningPages(path: string[]) {
 
     const selector = `body > ${"div > ".repeat(11)} .phrase`,
       phrases = document.querySelectorAll(selector);
-    let storyName = "";
     if (phrases.length !== 0) {
-      for (const phrase of phrases) storyName += phrase.textContent;
+      const storyName = Array.from(phrases)
+        .map((p) => p.textContent)
+        .join(" ");
       return set(`Reading ${storyName}`);
     }
     return set("Reading a story");
@@ -202,17 +207,28 @@ function checkLearningPages(path: string[]) {
       return set(`Taking the Checkpoint ${checkpoint} test`);
     return;
   }
+
+  return false;
 }
 
-function checkStartingPages(path: string[]) {
+function checkStartingPages(path: string[]): boolean {
   function set(state: string) {
     presenceData.details = "Getting started";
     presenceData.state = state;
+    return true;
   }
 
   if (path[0] === "register") return set("Choosing a language");
   if (path[0] === "welcome") return set("Answering some questions");
   if (path[0] === "placement") return set("Taking the placement test");
+
+  return false;
+}
+
+function determineText(path: string[]) {
+  if (checkBasicPages(path)) return;
+  if (checkLearningPages(path)) return;
+  if (checkStartingPages(path)) return;
 }
 
 presence.on("UpdateData", async () => {
@@ -224,9 +240,6 @@ presence.on("UpdateData", async () => {
   let path = decodeURI(window.location.pathname).split("/");
   path = path.filter((p) => p !== "");
 
-  checkBasicPages(path);
-  checkLearningPages(path);
-  checkStartingPages(path);
-
+  determineText(path);
   presence.setActivity(presenceData);
 });
