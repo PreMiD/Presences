@@ -63,7 +63,10 @@ const presence = new Presence({
     largeImageKey: "icon",
     startTimestamp: Math.floor(Date.now() / 1000)
   },
-  language = { imageKey: "icon", name: "nothing (yet!)" };
+  language = {
+    imageKey: null as string,
+    name: null as string
+  };
 
 function updateLanguage() {
   const state = JSON.parse(window.localStorage.getItem("duo.state")),
@@ -76,8 +79,8 @@ function updateLanguage() {
   const languageId = course.learningLanguage;
   if (FLAG_ICONS.includes(languageId)) language.imageKey = `flag_${languageId}`;
   else if (languageId) language.imageKey = "flag_unknown";
-  else language.imageKey = "icon";
-  language.name = course.title ?? "nothing (yet!)";
+  else language.imageKey = null;
+  language.name = course.title ?? null;
 }
 updateLanguage();
 setInterval(updateLanguage, 1000);
@@ -232,8 +235,13 @@ function determineText(path: string[]) {
 }
 
 presence.on("UpdateData", async () => {
-  presenceData.smallImageKey = language.imageKey;
-  presenceData.smallImageText = `Learning ${language.name}`;
+  if (!language.imageKey || !language.name) {
+    delete presenceData.smallImageKey;
+    delete presenceData.smallImageText;
+  } else {
+    presenceData.smallImageKey = language.imageKey;
+    presenceData.smallImageText = `Learning ${language.name}`;
+  }
   delete presenceData.details;
   delete presenceData.state;
 
