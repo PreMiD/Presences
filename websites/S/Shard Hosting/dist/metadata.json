@@ -8,6 +8,10 @@
     {
       "name": "AshiePleb",
       "id": "732299294098587709"
+    },
+    {
+      "name": "James",
+      "id": "693076083528171601"
     }
   ],
   "url": "shardhosting.co.uk",
@@ -18,8 +22,8 @@
   "service": "Shard Hosting",
   "version": "1.0.0",
 
-  "logo": "https://i.imgur.com/LypmDBX.png",
-  "thumbnail": "https://i.imgur.com/LypmDBX.png",
+  "logo": "https://imgur.com/a/m9PQykf",
+  "thumbnail": "https://i.imgur.com/U9eCt4s.png",
   "color": "#f47c8c",
   "tags": [
     "web",
