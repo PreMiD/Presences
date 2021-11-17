@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Drull",
     "id": "244953147154366464"
@@ -10,7 +11,7 @@
     "nl": "Google Meet is een communicatieplatform ontwikkeld door Google en heeft de mogelijkheid om te chatten, te (video)bellen en te sms'en."
   },
   "service": "Google Meet",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/LyrRnRS.png",
   "thumbnail": "https://i.imgur.com/6BRZ63d.png",
   "color": "#308574",

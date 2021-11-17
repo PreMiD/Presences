@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "MMDDKK",
+    "id": "259984855503339520"
+  },
+  "service": "AnimeSuge",
+  "description": {
+    "en": "AnimeSuge is a free streaming anime website that allows you to watch anime online in English subbed and dubbed."
+  },
+  "url": "animesuge.io",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/TQPRXrN.png",
+  "thumbnail": "https://i.imgur.com/stBappT.png",
+  "color": "#161616",
+  "tags": [
+    "anime",
+    "streaming",
+    "free"
+  ],
+  "category": "anime",
+  "iframe": true
+}

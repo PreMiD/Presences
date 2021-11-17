@@ -7,8 +7,8 @@ iframe.on("UpdateData", async () => {
   if (!titleElement || !videoElement) return;
   const title = titleElement.textContent,
     duration = videoElement.duration ? videoElement.duration : null,
-    currentTime = videoElement.currentTime,
-    paused = videoElement.paused;
+    { currentTime } = videoElement,
+    { paused } = videoElement;
   iframe.send({
     title,
     currentTime,

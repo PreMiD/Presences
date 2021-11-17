@@ -22,13 +22,11 @@ function pathIncludes(string: string): boolean {
 }
 
 function isShop(): boolean {
-  if (document.location.host.includes("shop")) {
-    return true;
-  }
+  if (document.location.host.includes("shop")) return true;
 }
 
 function isProfile(): boolean {
-  if (document.getElementsByClassName("profile-header__meta").length == 1) {
+  if (document.getElementsByClassName("profile-header__meta").length === 1) {
     authorUrl = document.location.href.toString();
     authorName = document.querySelector(
       "#page-content-inner > div.brand-bg > div > header > div.profile-header__details > h1"
@@ -39,8 +37,8 @@ function isProfile(): boolean {
 }
 function isArticle(): boolean {
   if (
-    document.getElementsByClassName("article-wrapper").length == 1 &&
-    document.getElementsByClassName("crayons-article__video").length == 0
+    document.getElementsByClassName("article-wrapper").length === 1 &&
+    document.getElementsByClassName("crayons-article__video").length === 0
   ) {
     articleTitle = document.querySelector(
       "#main-title > div.crayons-article__header__meta > h1"
@@ -60,8 +58,8 @@ function isArticle(): boolean {
 
 function isVideo(): boolean {
   if (
-    document.getElementsByClassName("article-wrapper").length == 1 &&
-    document.getElementsByClassName("crayons-article__video").length == 1
+    document.getElementsByClassName("article-wrapper").length === 1 &&
+    document.getElementsByClassName("crayons-article__video").length === 1
   ) {
     articleTitle = document.querySelector(
       "#main-title > div.crayons-article__header__meta > h1"
@@ -81,7 +79,7 @@ function isVideo(): boolean {
 
 function isPodcast(): boolean {
   if (
-    document.getElementsByClassName("podcast-episode-container").length == 1
+    document.getElementsByClassName("podcast-episode-container").length === 1
   ) {
     podcastTitle = document.querySelector("h1").textContent;
     authorName = document.querySelector("div.title > h2 > a").textContent;
@@ -109,20 +107,21 @@ presence.on("UpdateData", async () => {
       presenceData.details = authorName;
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "Profile";
-      if (buttons)
+      if (buttons) {
         presenceData.buttons = [
           {
             label: "View Profile",
             url: document.location.origin + authorUrl
           }
         ];
+      }
       break;
     case isArticle():
       presenceData.details = articleTitle;
       presenceData.state = authorName;
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = "Reading";
-      if (buttons)
+      if (buttons) {
         presenceData.buttons = [
           {
             label: "View Article",
@@ -133,11 +132,12 @@ presence.on("UpdateData", async () => {
             url: document.location.origin + authorUrl
           }
         ];
+      }
       break;
     case isVideo():
       presenceData.details = articleTitle;
       presenceData.state = authorName;
-      if (buttons)
+      if (buttons) {
         presenceData.buttons = [
           {
             label: "View Video",
@@ -148,6 +148,7 @@ presence.on("UpdateData", async () => {
             url: document.location.origin + authorUrl
           }
         ];
+      }
       contentStateKey = (<HTMLVideoElement>document.querySelector("video"))
         ?.paused
         ? "pause"
@@ -157,12 +158,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = contentStateKey;
       presenceData.smallImageText = contentStateText;
 
-      endTimestamp = presence.getTimestampsfromMedia(
+      [, endTimestamp] = presence.getTimestampsfromMedia(
         document.querySelector("video")
-      )[1];
-      if (contentStateKey === "play" && endTimestamp > 0) {
+      );
+      if (contentStateKey === "play" && endTimestamp > 0)
         presenceData.endTimestamp = endTimestamp;
-      } else {
+      else {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
@@ -171,7 +172,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = podcastTitle;
       presenceData.state = authorName;
 
-      if (buttons)
+      if (buttons) {
         presenceData.buttons = [
           {
             label: "View Podcast",
@@ -182,6 +183,7 @@ presence.on("UpdateData", async () => {
             url: document.location.origin + authorUrl
           }
         ];
+      }
       contentStateKey = (<HTMLAudioElement>document.getElementById("audio"))
         .paused
         ? "pause"
@@ -191,12 +193,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = contentStateKey;
       presenceData.smallImageText = contentStateText;
 
-      endTimestamp = presence.getTimestampsfromMedia(
+      [, endTimestamp] = presence.getTimestampsfromMedia(
         document.querySelector("#audio")
-      )[1];
-      if (contentStateKey === "play" && endTimestamp > 0) {
+      );
+      if (contentStateKey === "play" && endTimestamp > 0)
         presenceData.endTimestamp = endTimestamp;
-      } else {
+      else {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
@@ -205,11 +207,11 @@ presence.on("UpdateData", async () => {
       feedTop = document.querySelector(
         "#main-content > header > nav > a.crayons-tabs__item.crayons-tabs__item--current"
       ).textContent;
-      presenceData.details = feedTop + " Feed";
+      presenceData.details = `${feedTop} Feed`;
       break;
     case pathIncludes("/t/"):
       feedTag = document.querySelector("h1").textContent;
-      presenceData.details = feedTag + " Articles";
+      presenceData.details = `${feedTag} Articles`;
       break;
     case pathIncludes("/tags"):
       presenceData.details = "Tags";
@@ -242,21 +244,22 @@ presence.on("UpdateData", async () => {
     case pathIncludes("/series"):
       authorName = document.querySelector("h1").textContent;
       presenceData.details = authorName;
-      if (buttons)
+      if (buttons) {
         presenceData.buttons = [
           {
             label: "View Series",
             url: document.location.href
           }
         ];
+      }
       break;
     case pathIncludes("/search"):
       searchTerm = (<HTMLInputElement>(
         document.querySelector(".crayons-textfield")
       )).value;
       searchLength = document.querySelector("#substories").children.length;
-      presenceData.details = "Search: " + searchTerm;
-      presenceData.state = searchLength + " Results";
+      presenceData.details = `Search: ${searchTerm}`;
+      presenceData.state = `${searchLength} Results`;
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching...";
       break;

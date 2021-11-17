@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "bris",
     "id": "656165298818514946"
@@ -12,7 +13,7 @@
     "docs.botsfordiscord.com",
     "botsfordiscord.com"
   ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/bk2PPfW.png",
   "thumbnail": "https://i.imgur.com/skUsdmA.png",
   "color": "#7289da",

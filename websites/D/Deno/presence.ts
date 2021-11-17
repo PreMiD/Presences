@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.state = "Viewing Deno.land Home";
 
     presenceData.startTimestamp = browsingStamp;
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   }
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

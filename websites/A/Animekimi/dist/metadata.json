@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "Animekimi",
   "author": {
     "name": "Faelayis",
@@ -7,7 +8,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/tSmgmK1.jpg",
   "thumbnail": "https://i.imgur.com/eeLOziv.jpg",
-  "version": "1.1.1",
+  "version": "1.1.3",
   "color": "#e67e22",
   "tags": [
     "anime",
@@ -22,7 +23,7 @@
   },
   "iframe": true,
   "settings": [
-            {
+    {
       "id": "privacy",
       "title": "Privacy Mode",
       "icon": "fad fa-user-secret",

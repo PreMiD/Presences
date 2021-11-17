@@ -1,14 +1,14 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "Indiachan",
   "author": {
     "name": "natto",
     "id": "874685117891739749"
   },
   "category": "other",
-  "logo": "https://i.imgur.com/hYySiGD.png",
+  "logo": "https://i.imgur.com/caelFBx.png",
   "thumbnail": "https://i.imgur.com/EBTNFKT.png",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "color": "#ef8e00",
   "tags": [
     "imageboard",

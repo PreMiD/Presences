@@ -4,11 +4,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "large_logo",
-    startTimestamp: new Date().getTime()
-  };
-
-  const path = document.location.pathname;
+      largeImageKey: "large_logo",
+      startTimestamp: new Date().getTime()
+    },
+    path = document.location.pathname;
 
   if (path === "/") {
     presenceData.details = "Browing Domino's Pizza";
@@ -71,33 +70,27 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browing Domino's Pizza";
     presenceData.state = "Contacting support";
   } else if (path === "/basketdetails/show") {
-    const price = document.getElementsByClassName(
-      "new-basket-total-price basket-price"
-    )[0];
-    const saving = document.getElementsByClassName(
-      "new-basket-total-price basket-alt-price"
-    )[0];
+    const [price] = document.getElementsByClassName(
+        "new-basket-total-price basket-price"
+      ),
+      [saving] = document.getElementsByClassName(
+        "new-basket-total-price basket-alt-price"
+      );
 
     let priceText, savingText;
 
-    if (price) {
-      priceText = price.innerHTML;
-    }
-    if (saving) {
-      savingText = saving.innerHTML;
-    }
+    if (price) priceText = price.innerHTML;
+
+    if (saving) savingText = saving.innerHTML;
+
     presenceData.details = "Viewing cart";
     presenceData.state = `Total: ${priceText} ${
       saving ? `(${savingText} saved)` : ""
     }`;
-  } else {
-    presenceData.details = "Browing Domino's Pizza";
-  }
+  } else presenceData.details = "Browing Domino's Pizza";
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

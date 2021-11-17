@@ -1,56 +1,35 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  browse: string;
-  viewingMovie: string;
-  viewingSeries: string;
-  account: string;
-  watchingMovie: string;
-  watchingSeries: string;
-  searchFor: string;
-  searchSomething: string;
-  genre: string;
-  viewSeries: string;
-  viewMovies: string;
-  viewEpisode: string;
-  viewList: string;
-  profile: string;
-  latest: string;
-  refer: string;
-}
-
 const presence = new Presence({
-    clientId: "499981204045430784"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        browse: "general.browsing",
-        viewingMovie: "general.viewMovie",
-        viewingSeries: "general.viewSeries",
-        account: "general.viewAccount",
-        watchingMovie: "general.watchingMovie",
-        watchingSeries: "general.watchingSeries",
-        searchFor: "general.searchFor",
-        searchSomething: "general.searchSomething",
-        genre: "general.viewGenre",
-        viewSeries: "general.buttonViewSeries",
-        viewMovies: "general.buttonViewMovie",
-        viewEpisode: "general.buttonViewEpisode",
-        viewList: "netflix.viewList",
-        profile: "netflix.profile",
-        latest: "netflix.latest",
-        refer: "netflix.referral"
-      },
-      await presence.getSetting("lang").catch(() => "en")
-    );
-  };
+  clientId: "499981204045430784"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      browse: "general.browsing",
+      viewingMovie: "general.viewMovie",
+      viewingSeries: "general.viewSeries",
+      account: "general.viewAccount",
+      watchingMovie: "general.watchingMovie",
+      watchingSeries: "general.watchingSeries",
+      searchFor: "general.searchFor",
+      searchSomething: "general.searchSomething",
+      genre: "general.viewGenre",
+      viewSeries: "general.buttonViewSeries",
+      viewMovies: "general.buttonViewMovie",
+      viewEpisode: "general.buttonViewEpisode",
+      viewList: "netflix.viewList",
+      profile: "netflix.profile",
+      latest: "netflix.latest",
+      refer: "netflix.referral"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -77,8 +56,8 @@ presence.on("UpdateData", async () => {
     browsingStamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -99,8 +78,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (video.paused) {
         delete presenceData.startTimestamp;
@@ -242,7 +220,7 @@ presence.on("UpdateData", async () => {
 
       if (!showButtons) delete presenceData.buttons;
 
-      if (presenceData.details == null) {
+      if (!presenceData.details) {
         presence.setActivity();
         presence.setTrayTitle();
       } else presence.setActivity(presenceData, !video.paused);
@@ -299,9 +277,7 @@ presence.on("UpdateData", async () => {
           details: (await strings).latest.includes("{0}")
             ? (await strings).latest.split("{0}")[0]
             : (await strings).latest,
-          state: (await strings).latest.includes("{0}")
-            ? (await strings).latest.split("{0}")[1]
-            : undefined
+          state: (await strings).latest.split("{0}")[1]
         },
         "/search/": {
           details: (await strings).searchFor,
@@ -332,9 +308,7 @@ presence.on("UpdateData", async () => {
           details: (await strings).refer.includes("{0}")
             ? (await strings).refer.split("{0}")[0]
             : (await strings).refer,
-          state: (await strings).refer.includes("{0}")
-            ? (await strings).refer.split("{0}")[1]
-            : undefined
+          state: (await strings).refer.split("{0}")[1]
         },
         "/profiles/manage/": {
           details: (await strings).profile

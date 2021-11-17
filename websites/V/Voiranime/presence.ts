@@ -18,7 +18,7 @@ let video = {
 presence.on(
   "iFrameData",
   (data: { duration: number; currentTime: number; paused: boolean }) => {
-    const playback: boolean = data?.duration !== undefined ? true : false;
+    const playback: boolean = data?.duration ? true : false;
     if (playback) video = data;
   }
 );

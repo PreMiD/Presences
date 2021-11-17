@@ -1,24 +1,17 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  viewPlaylist: string;
-  viewArtist: string;
-}
-
 const presence = new Presence({
-    clientId: "808756700022702120"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        viewPlaylist: "general.buttonViewPlaylist",
-        viewArtist: "general.buttonViewArtist"
-      },
-      await presence.getSetting("lang").catch(() => "en")
-    );
-  };
+  clientId: "808756700022702120"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      viewPlaylist: "general.buttonViewPlaylist",
+      viewArtist: "general.buttonViewArtist"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
 
 let fullscreen: boolean,
   player = false,
@@ -28,7 +21,7 @@ let fullscreen: boolean,
   timestamps,
   playlistLink,
   artistLink,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -39,8 +32,8 @@ presence.on("UpdateData", async () => {
     newLang = await presence.getSetting("lang").catch(() => "en"),
     showPlaylist = await presence.getSetting("showPlaylist");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -98,7 +91,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
 
-      if (title !== null && artist !== null) presence.setActivity(presenceData);
+      if (title && artist) presence.setActivity(presenceData);
     } else {
       playlistLink = document
         .querySelector(
@@ -180,7 +173,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
 
-      if (title !== null && artist !== null) presence.setActivity(presenceData);
+      if (title && artist) presence.setActivity(presenceData);
     }
   } else {
     presenceData.details = "Browsing...";

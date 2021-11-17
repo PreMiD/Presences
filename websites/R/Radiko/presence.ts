@@ -26,11 +26,11 @@ presence.on("UpdateData", async () => {
         "a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"
       ) as HTMLElement,
       showTitle = _showTitle.textContent,
-      codeChannel = document
+      [codeChannel] = document
         .querySelector("a.slick-slide:nth-child(1)")
         .getAttribute("href")
         .split("/")
-        .slice(-1)[0],
+        .slice(-1),
       ifPlayed = document
         .querySelector(".icon--play-02")
         .classList.contains("on");
@@ -47,9 +47,8 @@ presence.on("UpdateData", async () => {
       state.smallImageKey = "spiriteplay";
       state.smallImageText = preStrings.play;
       state.startTimestamp = startTimeStamp;
-    }
-    // If pause
-    else {
+    } else {
+      // If pause
       if (codeChannel !== "___PAUSED___") {
         radioStation = "___PAUSED___";
         startTimeStamp = new Date().getTime();
@@ -60,9 +59,8 @@ presence.on("UpdateData", async () => {
       state.smallImageKey = "spiritepause";
       state.smallImageText = preStrings.pause;
     }
-  }
-  // Idling state
-  else {
+  } else {
+    // Idling state
     state.details = "Idling";
     state.smallImageKey = "spiriteidling";
     state.smallImageText = preStrings.browsing;

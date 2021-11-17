@@ -33,20 +33,18 @@ presence.on("UpdateData", async () => {
         "#leftCol > div:nth-child(2) > div.DescrVID > div.DescrVID-left > div > div > div > div:nth-child(1) > a > span > span"
       ).textContent;
     data.details = title;
-    data.state = "Przesłał: " + uploader;
+    data.state = `Przesłał: ${uploader}`;
     if (
       window.getComputedStyle(ad, null).getPropertyValue("display") === "block"
     ) {
-      data.details = "(Reklama) " + title;
+      data.details = `(Reklama) ${title}`;
       delete data.startTimestamp;
     } else {
-      const video: HTMLVideoElement = document.querySelector("video"),
-        timestamps = getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      const video: HTMLVideoElement = document.querySelector("video");
+      [data.startTimestamp, data.endTimestamp] = getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       data.smallImageKey = video.paused ? "paused" : "play";
       data.smallImageText = video.paused ? "Pauza" : "Odtwarzanie";
       if (video.paused) {
@@ -63,7 +61,7 @@ presence.on("UpdateData", async () => {
     data.state = "Gry";
     data.smallImageKey = "reading";
   } else if (pathname.includes("/info")) {
-    const searchData = pathname.split("/")[2];
+    const [, , searchData] = pathname.split("/");
     data.details = "Szuka:";
     data.state = searchData;
     data.smallImageKey = "search";
@@ -76,7 +74,5 @@ presence.on("UpdateData", async () => {
   if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(data);
-  }
+  } else presence.setActivity(data);
 });

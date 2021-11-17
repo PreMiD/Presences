@@ -49,38 +49,34 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = setTimestamp();
     presenceData.smallImageKey = "search";
 
-    if (document.location.href.includes("iaxm=maps")) {
+    if (document.location.href.includes("iaxm=maps"))
       presenceData.details = await handleFormatting("mapSearch");
-    } else if (document.location.href.includes("iax=images")) {
+    else if (document.location.href.includes("iax=images"))
       presenceData.details = await handleFormatting("imageSearch");
-    } else if (document.location.href.includes("iax=videos")) {
+    else if (document.location.href.includes("iax=videos"))
       presenceData.details = await handleFormatting("videoSearch");
-    } else if (document.location.href.includes("iar=news")) {
+    else if (document.location.href.includes("iar=news"))
       presenceData.details = await handleFormatting("newsSearch");
-    } else if (document.location.href.includes("ia=meanings")) {
+    else if (document.location.href.includes("ia=meanings"))
       presenceData.details = await handleFormatting("meaningsSearch");
-    } else if (document.location.href.includes("ia=definition")) {
+    else if (document.location.href.includes("ia=definition"))
       presenceData.details = await handleFormatting("definitonSearch");
-    } else if (document.location.href.includes("ia=shopping")) {
+    else if (document.location.href.includes("ia=shopping"))
       presenceData.details = await handleFormatting("shoppingSearch");
-    } else if (document.location.href.includes("ia=recipes")) {
+    else if (document.location.href.includes("ia=recipes"))
       presenceData.details = await handleFormatting("recipeSearch");
-    } else if (document.location.href.includes("&ia=stock")) {
+    else if (document.location.href.includes("&ia=stock")) {
       presenceData.details = await handleFormatting(
         "stockSearch",
         document
           .getElementsByClassName("stocks__header")[0]
           .getElementsByTagName("a")[0].innerText
       );
-    } else {
-      presenceData.details = await handleFormatting("standardSearch");
-    }
+    } else presenceData.details = await handleFormatting("standardSearch");
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

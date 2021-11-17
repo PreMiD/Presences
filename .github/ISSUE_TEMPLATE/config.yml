@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Official Discord server
+  - name: Official Discord Server
     url: https://discord.premid.app
-    about: Please use our ticket system for urgent requests!
+    about: If you are experiencing issues with your PreMiD, go to our support in our Discord server.
+  - name: Feature Requests & Presence Requests
+    url: https://github.com/PreMiD/Presences/discussions
+    about: Suggestions for new presences or feature requests should be on Discussions

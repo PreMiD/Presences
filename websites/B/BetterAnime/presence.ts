@@ -98,8 +98,8 @@ presence.on("UpdateData", async () => {
   )
     data.presenceData.startTimestamp = data.startedSince;
 
-  if (!data.oldLang) data.oldLang = newLang;
-  else if (data.oldLang !== newLang) {
+  data.oldLang ??= newLang;
+  if (data.oldLang !== newLang) {
     data.oldLang = newLang;
     strings = getStrings();
   }
@@ -367,8 +367,7 @@ presence.on("UpdateData", async () => {
       .catch(() => null);
 
     if (
-      ((!settingValue && setting.value === undefined) ||
-        settingValue === setting.value) &&
+      ((!settingValue && !setting.value) || settingValue === setting.value) &&
       setting.delete &&
       !setting.presence
     ) {

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -17,20 +18,10 @@
     "zh_TW": "bilibili是大陸知名的具有彈幕功能的影片串流網站，這裡有最即時的動漫新番，最棒的ACG氛圍，最有創意的實況主。大家可以在這裡找到許多歡樂。"
   },
   "url": [
-    "www.bilibili.com",
-    "vc.bilibili.com",
-    "t.bilibili.com",
-    "space.bilibili.com",
-    "live.bilibili.com",
-    "game.bilibili.com",
-    "show.bilibili.com",
-    "member.bilibili.com",
-    "message.bilibili.com",
-    "search.bilibili.com",
-    "account.bilibili.com",
+    "bilibili.com",
     "biligame.com"
   ],
-  "version": "2.2.6",
+  "version": "2.3.3",
   "logo": "https://i.imgur.com/w7q6IS0.png",
   "thumbnail": "https://i.imgur.com/wKnEEei.jpg",
   "color": "#05acff",
@@ -39,6 +30,5 @@
     "anime"
   ],
   "category": "anime",
-  "regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com[/]",
-  "iframe": true
+  "regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com[/]"
 }

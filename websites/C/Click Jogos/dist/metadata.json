@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "fror",
     "id": "515668127829458945"
@@ -10,9 +11,9 @@
     "nl": "Click Jogos, opgericht in 2004, is nu het grootste online gamingportaal in Brazilië. Alle titels zijn gratis en vereisen geen registratie. Ons doel is om een ongelooflijke entertainmentervaring te bieden."
   },
   "url": "www.clickjogos.com.br",
-  "version": "1.1.6",
-  "logo": "https://menma.is-inside.me/yGUXY2D1.png",
-  "thumbnail": "https://menma.is-inside.me/6QupqAZ2.png",
+  "version": "1.1.8",
+  "logo": "https://i.imgur.com/UraU4Hh.png",
+  "thumbnail": "https://i.imgur.com/covKWhX.png",
   "color": "#FF9902",
   "tags": [
     "games",

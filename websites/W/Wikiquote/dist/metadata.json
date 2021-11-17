@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.1",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
@@ -14,7 +14,7 @@
     "nl": "Wikiquote is een online verzameling citaten van opmerkelijke mensen en creatieve werken in meer dan 75 talen. Het bevat ook spreekwoorden, geheugensteuntjes en slogans."
   },
   "url": "wikiquote.org",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/WCkNcSb.png",
   "thumbnail": "https://i.imgur.com/MZrut8J.png",
   "color": "#f9f9f9",

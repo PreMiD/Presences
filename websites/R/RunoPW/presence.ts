@@ -1,15 +1,14 @@
 const presence = new Presence({
-  clientId: "702935358395908168"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "702935358395908168"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "runo3",
     startTimestamp: browsingStamp
   };
-  if (document.location.hostname == "runo.pw") {
+  if (document.location.hostname === "runo.pw") {
     if (document.location.pathname.startsWith("/index")) {
       presenceData.details = "Şuanda İndex Sayfasında,";
       presenceData.state = "Hesabına Giriş Yapıyor...";
@@ -47,8 +46,9 @@ presence.on("UpdateData", () => {
       presenceData.details = document.title;
       presenceData.state = "Adlı Habere Bakıyor...";
     } else if (document.location.pathname.includes("/home/")) {
-      presenceData.details =
-        "Şuanda " + document.location.pathname.split("/")[2] + " Adlı";
+      presenceData.details = `Şuanda ${
+        document.location.pathname.split("/")[2]
+      } Adlı`;
       presenceData.state = "Kişinin Profiline Bakıyor...";
     } else if (document.location.pathname.startsWith("/xler")) {
       presenceData.details = "Şuanda BüyükElçiler Sayfasında,";
@@ -74,10 +74,8 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

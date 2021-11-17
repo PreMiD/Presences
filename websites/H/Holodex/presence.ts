@@ -242,7 +242,7 @@ const /**
         case "watch":
           return `${getInfo.watch().channel}`;
         case "channel":
-          return path[2] === undefined
+          return !path[2]
             ? getInfo.channels().getCategory()
             : getInfo.channel().title;
         case "home":
@@ -402,7 +402,7 @@ presence.on("UpdateData", async () => {
       }
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

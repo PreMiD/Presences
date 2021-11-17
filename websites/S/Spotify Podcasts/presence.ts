@@ -9,35 +9,7 @@ let title: string,
   search: HTMLInputElement,
   recentlyCleared = 0;
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  featured: string;
-  bestPodcasts: string;
-  charts: string;
-  genres: string;
-  latest: string;
-  discover: string;
-  browse: string;
-  podcastLike: string;
-  artistLike: string;
-  albumLike: string;
-  songLike: string;
-  forMeh: string;
-  playlist: string;
-  viewPlaylist: string;
-  download: string;
-  viewing: string;
-  account: string;
-  search: string;
-  searchFor: string;
-  searchSomething: string;
-  browsing: string;
-  listening: string;
-  show: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -66,11 +38,11 @@ async function getStrings(): Promise<LangStrings> {
       listening: "general.listeningMusic",
       show: "general.viewShow"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -78,8 +50,8 @@ presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("lang"),
     privacy = await presence.getSetting("privacy"),
     time = await presence.getSetting("time");
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -212,7 +184,7 @@ presence.on("UpdateData", async () => {
       control === null ||
       control.dataset.testid === "control-button-play"
     ) {
-      if (presenceData.details === null) {
+      if (!presenceData.details) {
         presence.setTrayTitle();
         presence.setActivity();
       } else {

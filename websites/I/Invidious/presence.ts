@@ -7,11 +7,9 @@ function getTime() {
     .getElementsByClassName("vjs-current-time-display")[0]
     .textContent.split(":")
     .map((n) => Number(n));
-  if (time.length === 3) {
+  if (time.length === 3)
     return Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;
-  } else {
-    return Date.now() - (time[0] * 60 + time[1]) * 1000;
-  }
+  else return Date.now() - (time[0] * 60 + time[1]) * 1000;
 }
 
 presence.on("UpdateData", async () => {
@@ -65,11 +63,9 @@ presence.on("UpdateData", async () => {
         .getElementsByTagName("h1")[0]
         .textContent.trim();
       presenceData.state = document.getElementById("channel-name").textContent;
-      presenceData.startTimestamp = document.getElementsByClassName(
-        "vjs-playing"
-      )[0]
-        ? getTime()
-        : undefined;
+      if (document.getElementsByClassName("vjs-playing")[0])
+        presenceData.startTimestamp = getTime();
+
       break;
 
     case "playlist":
@@ -92,7 +88,5 @@ presence.on("UpdateData", async () => {
   if (clear) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

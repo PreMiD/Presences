@@ -80,9 +80,12 @@ presence.on("UpdateData", async () => {
       min2 = min2 * 60;
       time2 = min2 + sec2;
 
-      const timestamps = presence.getTimestamps(time, time2);
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
+        time,
+        time2
+      );
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
 
@@ -163,9 +166,12 @@ presence.on("UpdateData", async () => {
       min2 = min2 * 60;
       time2 = min2 + sec2;
 
-      const timestamps = presence.getTimestamps(time, time2);
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
+        time,
+        time2
+      );
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
 
@@ -228,9 +234,12 @@ presence.on("UpdateData", async () => {
       min2 = min2 * 60;
       time2 = min2 + sec2;
 
-      const timestamps = presence.getTimestamps(time, time2);
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
+        time,
+        time2
+      );
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
 

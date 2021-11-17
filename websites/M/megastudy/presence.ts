@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
     else presenceData.details = "합격 불변의 법칙";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

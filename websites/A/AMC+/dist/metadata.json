@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "AMC+",
+  "author": {
+    "name": "Kedi",
+    "id": "238668511222693888"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/7CtmhnE.png",
+  "thumbnail": "https://i.imgur.com/oiMRne7.png",
+  "version": "1.0.4",
+  "color": "#10efe6",
+  "tags": [
+    "amc",
+    "video",
+    "media"
+  ],
+  "url": [
+    "www.amcplus.com",
+    "amcplus.com"
+  ],
+  "description": {
+    "en": "Award-winning shows and fan favorite movies – AMC+ is your destination for genre-defying storytelling. Ad Free and On Demand with new shows and movies added every week."
+  }
+}

@@ -2,20 +2,7 @@ const presence = new Presence({
   clientId: "608065709741965327"
 });
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  browse: string;
-  reading: string;
-  viewManga: string;
-  watchEpisode: string;
-  viewSeries: string;
-  manga: string;
-  chapter: string;
-  page: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "presence.playback.playing",
@@ -33,7 +20,7 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null,
   lastPlaybackState = null,
   playback: boolean,

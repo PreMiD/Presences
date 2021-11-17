@@ -2,13 +2,13 @@ const presence = new Presence({
   clientId: "715667985267949649"
 });
 let title, subTitle, chapter, quiz, search;
-const browsingStamp = Math.floor(Date.now() / 1000);
-const path = document.location.pathname;
+const browsingStamp = Math.floor(Date.now() / 1000),
+  path = document.location.pathname;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  if (path == "/") {
+  if (path === "/") {
     presenceData.details = "Viewing Home";
     presenceData.startTimestamp = browsingStamp;
   } else if (path.includes("/literature/")) {
@@ -121,19 +121,17 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "#mainTag > section > div:nth-child(1) > div > div > h1"
     ) as HTMLTextAreaElement;
-    presenceData.details = "Viewing " + title.innerText;
+    presenceData.details = `Viewing ${title.innerText}`;
     presenceData.startTimestamp = browsingStamp;
-  } else if (path == "/disclaimer") {
+  } else if (path === "/disclaimer") {
     presenceData.details = "Viewing Disclaimer";
     presenceData.startTimestamp = browsingStamp;
   } else {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing a Special Page";
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

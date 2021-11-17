@@ -1,21 +1,17 @@
-interface LangStrings {
-  buttonJoinGame: string;
+const presence = new Presence({
+  clientId: "808664560936026122"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      buttonJoinGame: "kahoot.buttonJoinGame",
+      viewHome: "general.viewHome"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
 }
 
-const presence = new Presence({
-    clientId: "808664560936026122"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        buttonJoinGame: "kahoot.buttonJoinGame"
-      },
-      await presence.getSetting("lang")
-    );
-  };
-
-let elapsed = Math.floor(Date.now() / 1000),
-  strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -26,13 +22,13 @@ presence.on("UpdateData", async () => {
       document.querySelector("#containerGamePlayers").textContent === ""
         ? false
         : true,
-    inLobby = document.querySelector("#round").textContent ? false : true,
+    inLobby =
+      document.querySelector("#round").textContent === "" ? false : true,
     buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang");
+    newLang = await presence.getSetting("lang").catch(() => "en");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -48,14 +44,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-
-    if (elapsed == null) {
-      elapsed = Math.floor(Date.now() / 1000);
-    }
-    presenceData.startTimestamp = elapsed;
-  } else {
-    presenceData.details = "Viewing the Homepage";
-    elapsed = null;
-  }
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+  } else presenceData.details = (await strings).viewHome;
   presence.setActivity(presenceData);
 });

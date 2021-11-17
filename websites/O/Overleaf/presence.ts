@@ -20,19 +20,16 @@ presence.on("UpdateData", async () => {
       actif = menu[0].getElementsByClassName("active"),
       //Take care of custom folders
       maybecustom = actif[0].getElementsByClassName("name ng-binding");
-    if (maybecustom.length != 0) {
+    if (maybecustom.length !== 0)
       presenceData.state = maybecustom[0].textContent;
-    }
     //Take care of (i) logo
     else {
       const fnl = actif[0].getElementsByTagName("a");
       presenceData.state = fnl[0].textContent;
     }
     presenceData.startTimestamp = elapsed;
-  }
-
-  //Project page
-  else if (pth.includes("/project")) {
+  } else if (pth.includes("/project")) {
+    //Project page
     presenceData.details = document.title.replace(
       "- Online LaTeX Editor Overleaf",
       ""
@@ -45,24 +42,19 @@ presence.on("UpdateData", async () => {
       filename = actif[0].getElementsByTagName("span")[0].textContent;
     presenceData.state = filename;
     presenceData.startTimestamp = elapsed;
-  }
-
-  //Documentation
-  else if (pth.includes("/learn")) {
+  } else if (pth.includes("/learn")) {
+    //Documentation
     presenceData.details = "Browsing Documentation";
-    if (pth === "/learn" || pth === "/learn/") {
-      presenceData.state = "Main Page";
-    } else {
+    if (pth === "/learn" || pth === "/learn/") presenceData.state = "Main Page";
+    else {
       presenceData.state = document.title.replace(
         "- Overleaf, Online LaTeX Editor",
         ""
       );
     }
     presenceData.startTimestamp = elapsed;
-  }
-
-  //Random other pages
-  else {
+  } else {
+    //Random other pages
     presenceData.details = "Browsing:";
     presenceData.state = document.title.replace(
       "- Overleaf, Online LaTeX Editor",
@@ -71,10 +63,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

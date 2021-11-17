@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "sks316",
     "id": "226098403304538122"
@@ -10,9 +11,9 @@
     "nl": "Videogamemuziek online radio, inclusief remixen en originele soundtracks! Stem op de liedjes die je wilt horen!"
   },
   "url": "rainwave.cc",
-  "version": "1.1.7",
-  "logo": "https://sks316.s-ul.eu/9WjgnZ6W.png",
-  "thumbnail": "https://sks316.s-ul.eu/ScXsp0ui.png",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/XJb9wAx.png",
+  "thumbnail": "https://i.imgur.com/popvf2S.png",
   "color": "#D17C2B",
   "tags": [
     "music",

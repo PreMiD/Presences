@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Browsing Anime News";
     presenceData.state = "at Homepage";
   } else if (
@@ -40,32 +40,30 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/preview-guide/") ||
     document.location.pathname.startsWith("/episode-review/")
   ) {
-    presenceData.details = `Browsing Animes`;
+    presenceData.details = "Browsing Animes";
     presenceData.state = `in ${capitalize(
       document.location.pathname.split("/")[1].split("-").join(" ")
     )}`;
   } else if (document.location.pathname.startsWith("/review/")) {
     data = document.location.pathname.split("/");
-    presenceData.details = `Browsing Reviews`;
+    presenceData.details = "Browsing Reviews";
     presenceData.state = `for ${capitalize(
       data[2].split("-").join(" ")
     )} (${data[3].split("-").join(" ")})`;
   } else if (document.location.pathname.startsWith("/encyclopedia/")) {
-    presenceData.details = `Browsing Encyclopedia`;
+    presenceData.details = "Browsing Encyclopedia";
     presenceData.state = `for ${
       document.getElementById("page_header").innerText
     }`;
   } else if (document.location.pathname.startsWith("/MyAnime/")) {
-    presenceData.details = `Browsing Animes`;
+    presenceData.details = "Browsing Animes";
     presenceData.state = `for ${
       document.getElementById("page_header").innerText
     }`;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -19,7 +19,10 @@ presence.on("UpdateData", async () => {
       episode = episodeName.split(".Bölüm")[0].split(" ")[
         episodeName.split(".Bölüm")[0].split(" ").length - 1
       ],
-      timestamps = presence.getTimestamps(video.currentTime, video.duration);
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
+        video.currentTime,
+        video.duration
+      );
     data.details = episodeName
       .replace(`${episode}.Bölüm`, "")
       .replace(`Episode ${episode}`, "");
@@ -27,8 +30,8 @@ presence.on("UpdateData", async () => {
     if (!video.paused) {
       data.smallImageKey = "playing";
       data.smallImageText = (await strings).playing;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      data.startTimestamp = startTimestamp;
+      data.endTimestamp = endTimestamp;
     } else {
       data.smallImageKey = "paused";
       data.smallImageText = (await strings).paused;

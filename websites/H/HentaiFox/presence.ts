@@ -2,11 +2,10 @@ const presence = new Presence({
   clientId: "732982987905302570"
 });
 
-let lastPlaybackState = null;
-let reading;
-let browsingStamp = Math.floor(Date.now() / 1000);
-
-let title: HTMLElement,
+let lastPlaybackState = null,
+  reading,
+  browsingStamp = Math.floor(Date.now() / 1000),
+  title: HTMLElement,
   title2: string,
   tabTitle: string,
   pathname: boolean,
@@ -22,16 +21,14 @@ let title: HTMLElement,
   homeCurrentPage: HTMLElement,
   artist: HTMLElement;
 
-const pattern = "- Page";
+const pattern = "- Page",
+  searchURL = new URL(document.location.href),
+  searchResult = searchURL.searchParams.get("q"),
+  truncateAfter = function (str: string, pattern: string): string {
+    return str.slice(0, str.indexOf(pattern));
+  };
 
-const searchURL = new URL(document.location.href);
-const searchResult = searchURL.searchParams.get("q");
-
-const truncateAfter = function (str: string, pattern: string): string {
-  return str.slice(0, str.indexOf(pattern));
-};
-
-if (lastPlaybackState != reading) {
+if (lastPlaybackState !== reading) {
   lastPlaybackState = reading;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -56,15 +53,13 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/artists/") ||
     document.location.pathname.includes("/group/") ||
     document.location.pathname.includes("/groups/")
-  ) {
+  )
     pathname = false;
-  } else if (document.location.pathname.includes("/pag/")) {
-    pathname = false;
-  }
+  else if (document.location.pathname.includes("/pag/")) pathname = false;
 
   if (
-    document.location.pathname == "/" ||
-    pathname == true ||
+    document.location.pathname === "/" ||
+    pathname === true ||
     !document.location.pathname
   ) {
     homeCurrentPage = document.querySelector(
@@ -72,7 +67,7 @@ presence.on("UpdateData", async () => {
     );
 
     data.details = "Home";
-    data.state = "Page: " + homeCurrentPage.innerText;
+    data.state = `Page: ${homeCurrentPage.innerText}`;
     data.startTimestamp = browsingStamp;
   } else if (
     document.location.pathname.includes("/gallery/") ||
@@ -89,18 +84,15 @@ presence.on("UpdateData", async () => {
 
       title2 = truncateAfter(tabTitle, pattern);
 
-      data.details = "Reading: " + title2;
+      data.details = `Reading: ${title2}`;
 
-      data.state =
-        "Current page: " + currentPage.innerText + "/" + pageNumber.innerText;
+      data.state = `Current page: ${currentPage.innerText}/${pageNumber.innerText}`;
 
       data.startTimestamp = browsingStamp;
     } else if (title.innerText.length > 0) {
-      if (title.innerText.length > 128) {
+      if (title.innerText.length > 128)
         data.state = "Title longer than 128 characters.";
-      } else {
-        data.state = title.innerText;
-      }
+      else data.state = title.innerText;
 
       data.details = "Viewing a page: ";
 
@@ -112,7 +104,7 @@ presence.on("UpdateData", async () => {
     tags = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Tag: " + tags.innerText;
+    data.state = `Tag: ${tags.innerText}`;
 
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/artist/")) {
@@ -121,7 +113,7 @@ presence.on("UpdateData", async () => {
     artist = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Artist: " + artist.innerText;
+    data.state = `Artist: ${artist.innerText}`;
 
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/character/")) {
@@ -130,7 +122,7 @@ presence.on("UpdateData", async () => {
     character = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Character: " + character.innerText;
+    data.state = `Character: ${character.innerText}`;
 
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/parody/")) {
@@ -139,7 +131,7 @@ presence.on("UpdateData", async () => {
     parody = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Parody: " + parody.innerText;
+    data.state = `Parody: ${parody.innerText}`;
 
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/group/")) {
@@ -148,7 +140,7 @@ presence.on("UpdateData", async () => {
     groups = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Group: " + groups.innerText;
+    data.state = `Group: ${groups.innerText}`;
 
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/language/")) {
@@ -157,7 +149,7 @@ presence.on("UpdateData", async () => {
     language = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Language: " + language.innerText;
+    data.state = `Language: ${language.innerText}`;
 
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/category/")) {
@@ -166,7 +158,7 @@ presence.on("UpdateData", async () => {
     category = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Category: " + category.innerText;
+    data.state = `Category: ${category.innerText}`;
 
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/parodies/")) {

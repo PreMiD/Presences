@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
   } else if (path.startsWith("/hesabim")) {
     presenceData.details = "Bir sayfaya bakıyor:";
     presenceData.state = "Hesabım";
-  } else if (path == "/") {
+  } else if (path === "/") {
     presenceData.details = "Bir sayfaya bakıyor:";
     presenceData.state = "Ana Sayfa";
   } else if (document.getElementById("archive-page")) {
@@ -31,7 +31,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector("div.top > h1").textContent;
   } else if (document.getElementsByClassName("episode-detail").length > 0) {
     presenceData.details =
-      document.getElementsByClassName("series-name")[0].title || "Bulunamadı";
+      (document.getElementsByClassName("series-name")[0] as HTMLElement)
+        .title || "Bulunamadı";
     presenceData.state = `${
       document.querySelector("div.select-season > a").textContent
         ? document.querySelector("div.select-season > a").textContent
@@ -45,10 +46,9 @@ presence.on("UpdateData", async () => {
       { label: "İzle", url: document.location.href },
       {
         label: "Diziyi Görüntüle",
-        url:
-          document.location.origin +
-          "/" +
+        url: `${document.location.origin}/${
           document.location.pathname.split("/")[1]
+        }`
       }
     ];
     const timestamps = presence.getTimestamps(
@@ -57,10 +57,8 @@ presence.on("UpdateData", async () => {
     );
     presenceData.smallImageKey = stream.paused ? "pause" : "play";
     presenceData.smallImageText = stream.paused ? "Durduruldu" : "Oynatılıyor";
-    if (!stream.paused) {
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-    }
+    if (!stream.paused)
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
   } else {
     presenceData.details = "Bir sayfayı inceliyor:";
     presenceData.state = "Bilinmeyen Sayfa";

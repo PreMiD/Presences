@@ -13,25 +13,24 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing DBL Staff section:";
     presenceData.largeImageKey = "dblstaff";
 
-    if (window.location.pathname == "/moderation") {
+    if (window.location.pathname === "/moderation") {
       const personalquota =
-        document.getElementsByClassName("quotaindiv")[0].textContent;
-      const botamount = personalquota.substring(
-        personalquota.indexOf("reviewed") + 9,
-        personalquota.indexOf("/")
-      );
-      presenceData.state = "Reviewed " + botamount + " bots this week";
-    } else if (window.location.pathname == "/moderation/approve") {
+          document.getElementsByClassName("quotaindiv")[0].textContent,
+        botamount = personalquota.substring(
+          personalquota.indexOf("reviewed") + 9,
+          personalquota.indexOf("/")
+        );
+      presenceData.state = `Reviewed ${botamount} bots this week`;
+    } else if (window.location.pathname === "/moderation/approve")
       presenceData.state = "Verification Queue";
-    } else if (window.location.pathname == "/moderation/certify") {
+    else if (window.location.pathname === "/moderation/certify")
       presenceData.state = "Certification Queue";
-    } else if (window.location.pathname == "/moderation/reports") {
+    else if (window.location.pathname === "/moderation/reports")
       presenceData.state = "Reports Queue";
-    } else if (window.location.pathname == "/moderation/reviews") {
+    else if (window.location.pathname === "/moderation/reviews")
       presenceData.state = "Reviews Dashboard";
-    } else if (window.location.pathname.startsWith("/moderation/decline")) {
+    else if (window.location.pathname.startsWith("/moderation/decline"))
       presenceData.state = document.querySelector("#botlistitle").textContent;
-    }
   } else if (window.location.pathname.startsWith("/bot/")) {
     if (window.location.pathname.endsWith("/edit")) {
       presenceData.details = "Editing a Discord bot:";
@@ -46,12 +45,12 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.endsWith("/report")) {
       //Might not be the smartest idea to expose someone reporting bots
       presenceData.state = "Discord Bot List";
-    } else if (window.location.pathname.endsWith("/new")) {
+    } else if (window.location.pathname.endsWith("/new"))
       presenceData.state = "Add a bot";
-    } else if (document.querySelector(".entity-queue-message__indicator")) {
-      presenceData.details =
-        "Viewing a Discord bot: " +
-        document.querySelector(".entity-header__name").textContent.trim();
+    else if (document.querySelector(".entity-queue-message__indicator")) {
+      presenceData.details = `Viewing a Discord bot: ${document
+        .querySelector(".entity-header__name")
+        .textContent.trim()}`;
       presenceData.largeImageKey = "dblstaff";
       presenceData.state = "Bot isn't approved yet";
     } else {
@@ -74,14 +73,12 @@ presence.on("UpdateData", async () => {
       .trim();
   } else if (
     window.location.pathname.startsWith("/user/") ||
-    window.location.pathname == "/me"
+    window.location.pathname === "/me"
   ) {
     presenceData.details = "Viewing a profile:";
     presenceData.state = document.querySelector(".header").textContent;
-  } else if (window.location.pathname.startsWith("/api/docs")) {
+  } else if (window.location.pathname.startsWith("/api/docs"))
     presenceData.state = "Discord Bot List API Documentation";
-  }
-
   //Discord Server List
   else if (window.location.pathname.startsWith("/servers")) {
     presenceData.largeImageKey = "dslregular";
@@ -107,22 +104,16 @@ presence.on("UpdateData", async () => {
       presenceData.state = document
         .querySelector("#botlistitle")
         .textContent.substring(8);
-    } else if (window.location.pathname.startsWith("/servers/new")) {
+    } else if (window.location.pathname.startsWith("/servers/new"))
       presenceData.details = "Adding a new Discord server...";
-    } else if (window.location.pathname.startsWith("/servers/me")) {
+    else if (window.location.pathname.startsWith("/servers/me"))
       presenceData.state = "My servers";
-    } else {
-      presenceData.state = "Discord Servers";
-    }
-  }
-
-  //If it doesn't fit to anything
-  else if (document.querySelector("#botlistitle")) {
+    else presenceData.state = "Discord Servers";
+  } else if (document.querySelector("#botlistitle")) {
+    //If it doesn't fit to anything
     presenceData.state = document.querySelector("#botlistitle").textContent;
-  }
-
-  //If it really finds nothing
-  else {
+  } else {
+    //If it really finds nothing
     presenceData.details = "Viewing something...";
   }
 

@@ -7,11 +7,13 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo",
     startTimestamp
   };
-  if (document.location.hostname == "pxls.space") {
-    data.state =
-      "Canvas: " + document.getElementById("current-pixel-count").innerHTML;
-    data.details =
-      "All time: " + document.getElementById("alltime-pixel-count").innerHTML;
+  if (document.location.hostname === "pxls.space") {
+    data.state = `Canvas: ${
+      document.getElementById("current-pixel-count").innerHTML
+    }`;
+    data.details = `All time: ${
+      document.getElementById("alltime-pixel-count").innerHTML
+    }`;
     presence.setActivity(data);
   }
 });

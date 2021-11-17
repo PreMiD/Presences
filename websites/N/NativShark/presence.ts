@@ -34,12 +34,11 @@ presence.on("UpdateData", async () => {
       .innerText.split("\n");
 
     if (unitInfo.length === 2) {
-      let unitText = unitInfo[0];
-      const unitStatus = unitInfo[1];
+      let [unitText] = unitInfo;
+      const [, unitStatus] = unitInfo;
 
-      if (unitText === "All Units") {
-        unitText = "Today's units";
-      }
+      if (unitText === "All Units") unitText = "Today's units";
+
       presenceData.details = "Viewing the dashboard";
       presenceData.state = `${unitText}: ${unitStatus}`;
     }
@@ -68,10 +67,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData, true);
-  }
+  } else presence.setActivity(presenceData, true);
 });

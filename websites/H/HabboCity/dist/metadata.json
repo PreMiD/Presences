@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Cold",
     "id": "254638264076468234"
@@ -15,7 +16,7 @@
     "habbocity.fr",
     "www.habbocity.fr"
   ],
-  "version": "1.1.9",
+  "version": "1.1.12",
   "logo": "https://i.imgur.com/IC0Md4k.png",
   "thumbnail": "https://i.imgur.com/plMx986.png",
   "color": "#FFEE51",

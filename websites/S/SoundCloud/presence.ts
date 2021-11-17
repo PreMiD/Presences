@@ -109,13 +109,8 @@ presence.on("UpdateData", async () => {
     showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
-    details: undefined,
-    state: undefined,
     largeImageKey: "soundcloud",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
+    startTimestamp: elapsed
   };
 
   if (document.location.href !== prevUrl) {
@@ -144,14 +139,17 @@ presence.on("UpdateData", async () => {
         )
       ],
       [currentTime, duration] = timer,
-      timestamps = presence.getTimestamps(currentTime, duration),
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
+        currentTime,
+        duration
+      ),
       pathLinkSong = document
         .querySelector(
           "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a"
         )
         .getAttribute("href");
-    data.startTimestamp = timestamps[0];
-    data.endTimestamp = timestamps[1];
+    data.startTimestamp = startTimestamp;
+    data.endTimestamp = endTimestamp;
     data.smallImageKey = playing ? "play" : "pause";
     data.smallImageText = (await strings)[playing ? "play" : "pause"];
     data.buttons = [
@@ -172,7 +170,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("/charts/")) {
       data.details = "Browsing Charts...";
 
-      const heading = path.split("/").slice(-2)[0];
+      const [heading] = path.split("/").slice(-2);
       data.state =
         heading && !heading.includes("charts") && capitalize(heading);
     } else if (path.includes("/you/")) {

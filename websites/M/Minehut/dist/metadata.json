@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Minehut",
+    "author": {
+      "name": "Echology",
+      "id": "272875632088842240"
+    },
+    "category": "games",
+    "logo": "https://i.imgur.com/FOvZNY6.png",
+    "thumbnail": "https://i.imgur.com/o38mcIN.png",
+    "version": "1.0.0",
+    "color": "#488aff",
+    "tags": [
+      "minecraft"
+    ],
+    "url": [
+      "minehut.com",
+      "shop.minehut.com"
+    ],
+    "description": {
+      "en": "Minehut provides unlimited free server hosting for the Minecraft Community."
+    }
+  }

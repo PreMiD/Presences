@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "Een volledig aanpasbare servermoderatie Discord-bot voor uw Discord-server met een eenvoudig en intuïtief webdashboard. Serverbeheer is nu een stuk eenvoudiger geworden."
   },
   "url": "dyno.gg",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/IW9vsn2.png",
   "thumbnail": "https://i.imgur.com/aVvA17u.png",
   "color": "#337fd5",

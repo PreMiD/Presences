@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
     broadcasttc = await presence.getSetting("broadcasttc"),
     active =
       window.getComputedStyle(document.getElementById("start-menu-wrapper"))
-        .display == "none",
+        .display === "none",
     end = document.querySelector(".ui-stats-current") !== null;
   data.startTimestamp = browsingStamp;
 
@@ -28,16 +28,16 @@ presence.on("UpdateData", async () => {
     place = document.querySelector(
       ".ui-stats-current .ui-stats-player-rank"
     ).textContent;
-    data.details = "Placed " + place;
+    data.details = `Placed ${place}`;
   } else if (!active) {
     gametypequery = 'div[id="index-play-type-selected"]';
     gamemodequery = 'div[id="index-play-mode-selected"]';
     if (
-      window.getComputedStyle(document.querySelector("#team-menu")).display ==
+      window.getComputedStyle(document.querySelector("#team-menu")).display ===
       "block"
     ) {
       // If the player made a team
-      if (broadcasttc && (gametype == "Duo" || gametype == "Squad")) {
+      if (broadcasttc && (gametype === "Duo" || gametype === "Squad")) {
         data.buttons = [
           {
             label: "Join Game",
@@ -56,19 +56,17 @@ presence.on("UpdateData", async () => {
     data.details = "In the menus...";
   } else if (active) {
     // Player is in-game
-    data.smallImageText = "Playing " + gametype + "s";
+    data.smallImageText = `Playing ${gametype}s`;
     alivecount = document.querySelector(".ui-players-alive").textContent;
     killcount = document.querySelector(".ui-player-kills").textContent;
 
     data.details = `${killcount} kill${
-      parseInt(killcount) != 1 ? "s" : ""
+      parseInt(killcount) !== 1 ? "s" : ""
     } with ${alivecount} alive`;
-    data.state = `${gamemode != "50v50" ? gametype + " - " : ""}${gamemode}`;
+    data.state = `${gamemode !== "50v50" ? `${gametype} - ` : ""}${gamemode}`;
   }
-  if (data.details == null) {
+  if (!data.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(data);
-  }
+  } else presence.setActivity(data);
 });
