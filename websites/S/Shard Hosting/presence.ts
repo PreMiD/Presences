@@ -119,8 +119,6 @@ presence.on("UpdateData", async () => {
     }
 
     if (!presenceData.details) {
-        presenceData.details = "Server Hosting";
-        presenceData.state = "Starting at $0.75";
         presenceData.startTimestamp = browsingStamp;
         presence.setActivity(presenceData);
     } else {
