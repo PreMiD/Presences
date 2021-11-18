@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "908721185863397426"
 }),
-  elapsed = Math.floor(Date.now() / 1e3);
+  browsingTimestamp = Math.floor(Date.now() / 1e3);
 
 presence.on("UpdateData", () => {
   const { pathname, origin } = window.location,
