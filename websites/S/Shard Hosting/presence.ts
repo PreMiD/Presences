@@ -121,8 +121,4 @@ presence.on("UpdateData", async () => {
     if (!presenceData.details) {
         presenceData.startTimestamp = browsingStamp;
         presence.setActivity(presenceData);
-    } else {
-        presenceData.startTimestamp = browsingStamp;
-        presence.setActivity(presenceData);
-    }
 });
