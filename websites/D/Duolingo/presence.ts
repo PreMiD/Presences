@@ -95,29 +95,23 @@ function checkBasicPages(path: string[]): boolean {
     }
     presenceData.details = "Viewing the home page";
     return true;
-  }
-  if (INFO_PAGES.includes(path[0])) {
+  } else if (INFO_PAGES.includes(path[0])) {
     presenceData.details = `Viewing the ${path[0]} page`;
     return true;
-  }
-  if (path[0] === "courses") {
+  } else if (path[0] === "courses") {
     presenceData.details = "Viewing available courses";
     return true;
-  }
-  if (path[0] === "abc") {
+  } else if (path[0] === "abc") {
     presenceData.details = "Looking into Duolingo ABC";
     return true;
-  }
-  if (path[0] === "plus") {
+  } else if (path[0] === "plus") {
     presenceData.details = "Looking into Duolingo Plus";
     return true;
-  }
-  if (path[0] === "dictionary") {
+  } else if (path[0] === "dictionary") {
     presenceData.details = "Looking up a word";
     if (path.length >= 3) presenceData.state = `${path[1]}: ${path[2]}`;
     return true;
-  }
-  if (path[0] === "profile") {
+  } else if (path[0] === "profile") {
     if (path.length < 2) return true;
     presenceData.details = "Viewing a profile";
     [, presenceData.state] = path;
@@ -126,16 +120,13 @@ function checkBasicPages(path: string[]): boolean {
       presenceData.state += `'s ${path[2]}`;
     }
     return true;
-  }
-  if (path[0] === "friend-updates") {
+  } else if (path[0] === "friend-updates") {
     presenceData.details = "Viewing friend updates";
     return true;
-  }
-  if (path[0] === "user-search") {
+  } else if (path[0] === "user-search") {
     presenceData.details = "Searching for a user";
     return true;
-  }
-  if (path[0] === "settings") {
+  } else if (path[0] === "settings") {
     presenceData.details = "Adjusting settings";
     if (path.length >= 2) {
       let [, page] = path;
@@ -143,13 +134,11 @@ function checkBasicPages(path: string[]): boolean {
       presenceData.state = `Section: ${page}`;
     }
     return true;
-  }
-  if (document.title.startsWith("Error")) {
+  } else if (document.title.startsWith("Error")) {
     presenceData.details = "Watching Duo cry :(";
     presenceData.state = document.title;
     return true;
-  }
-  if (API_ENDPOINTS.includes(path[0])) {
+  } else if (API_ENDPOINTS.includes(path[0])) {
     presenceData.details = "Viewing an API response";
     presenceData.state = `Endpoint: /${path[0]}`;
     return true;
@@ -169,9 +158,9 @@ function checkLearningPages(path: string[]): boolean {
     // Update the language in case the user just logged in
     updateLanguage();
     return set("Choosing something to learn");
-  }
-  if (path[0] === "practice") return set("Practicing everything learned");
-  if (path[0] === "skill") {
+  } else if (path[0] === "practice")
+    return set("Practicing everything learned");
+  else if (path[0] === "skill") {
     if (path.length < 3) return;
 
     const lesson = path[2]
@@ -179,14 +168,13 @@ function checkLearningPages(path: string[]): boolean {
       .replace(/-(\d)/g, "$1");
     if (path.length >= 4) {
       if (path[3] === "tips") return set(`Reading tips for ${lesson}`);
-      if (path[3] === "practice") return set(`Practicing ${lesson}`);
-      if (path[3] === "test") return set(`Testing out of ${lesson}`);
+      else if (path[3] === "practice") return set(`Practicing ${lesson}`);
+      else if (path[3] === "test") return set(`Testing out of ${lesson}`);
     }
     return set(`In a lesson: ${lesson}`);
-  }
-  if (path[0] === "shop") return set("In the shop");
-  if (path[0] === "words") return set("Viewing all learned words");
-  if (path[0] === "stories") {
+  } else if (path[0] === "shop") return set("In the shop");
+  else if (path[0] === "words") return set("Viewing all learned words");
+  else if (path[0] === "stories") {
     if (path.length < 2) return set("Choosing a story to read");
 
     const selector = `body > ${"div > ".repeat(11)} .phrase`,
@@ -198,15 +186,15 @@ function checkLearningPages(path: string[]): boolean {
       return set(`Reading ${storyName}`);
     }
     return set("Reading a story");
-  }
-  if (path[0] === "mistakes-review") return set("Reviewing past mistakes");
-  if (path[0] === "checkpoint") {
+  } else if (path[0] === "mistakes-review")
+    return set("Reviewing past mistakes");
+  else if (path[0] === "checkpoint") {
     if (path.length < 4) return;
 
     const checkpoint = parseInt(path[2], 10) + 1;
     if (path[3] === "practice")
       return set(`Practicing Checkpoint ${checkpoint}`);
-    if (path[3] === "bigtest")
+    else if (path[3] === "bigtest")
       return set(`Taking the Checkpoint ${checkpoint} test`);
     return;
   }
@@ -222,16 +210,16 @@ function checkStartingPages(path: string[]): boolean {
   }
 
   if (path[0] === "register") return set("Choosing a language");
-  if (path[0] === "welcome") return set("Answering some questions");
-  if (path[0] === "placement") return set("Taking the placement test");
+  else if (path[0] === "welcome") return set("Answering some questions");
+  else if (path[0] === "placement") return set("Taking the placement test");
 
   return false;
 }
 
 function determineText(path: string[]) {
   if (checkBasicPages(path)) return;
-  if (checkLearningPages(path)) return;
-  if (checkStartingPages(path)) return;
+  else if (checkLearningPages(path)) return;
+  else if (checkStartingPages(path)) return;
 }
 
 presence.on("UpdateData", async () => {
