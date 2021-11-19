@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "608109837657702566"
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "608109837657702566"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused"
+  });
 
 function stripText(element: HTMLElement, id = "None", log = true) {
   if (element && element.firstChild) return element.firstChild.textContent;
@@ -29,13 +29,19 @@ presence.on("UpdateData", async () => {
   let isPlaying = false;
 
   // Fetch audio bar
-  const audioBar: HTMLElement = document.querySelector(".Tuner__Audio__NowPlayingHitArea");
-  
+  const audioBar: HTMLElement = document.querySelector(
+    ".Tuner__Audio__NowPlayingHitArea"
+  );
+
   // If the audio bar exists, assume we're listening to something
   if (audioBar) {
     // Fetch title and artist
-    const title: HTMLElement = document.querySelector(".Tuner__Audio__TrackDetail__title"),
-     artist: HTMLElement = document.querySelector(".Tuner__Audio__TrackDetail__artist");
+    const title: HTMLElement = document.querySelector(
+        ".Tuner__Audio__TrackDetail__title"
+      ),
+      artist: HTMLElement = document.querySelector(
+        ".Tuner__Audio__TrackDetail__artist"
+      );
 
     // Only apply them to presence if they're not null
     if (title !== null && artist !== null) {
@@ -43,9 +49,11 @@ presence.on("UpdateData", async () => {
       data.details = stripText(title, "Title");
       data.state = stripText(artist, "Artist");
     } else presence.error("Title and artist are null!");
-    
+
     // Fetch play button
-    const playButton: HTMLElement = document.querySelector(".Tuner__Control__Play__Button");
+    const playButton: HTMLElement = document.querySelector(
+      ".Tuner__Control__Play__Button"
+    );
 
     // Return if null
     if (playButton !== null) {
@@ -59,15 +67,23 @@ presence.on("UpdateData", async () => {
         data.smallImageText = (await strings).play;
 
         // Get duration control
-        const timeElapsed: HTMLElement = document.querySelector(".VolumeDurationControl__Duration [data-qa=elapsed_time]"),
-              timeRemaining: HTMLElement = document.querySelector(".VolumeDurationControl__Duration [data-qa=remaining_time]");
+        const timeElapsed: HTMLElement = document.querySelector(
+            ".VolumeDurationControl__Duration [data-qa=elapsed_time]"
+          ),
+          timeRemaining: HTMLElement = document.querySelector(
+            ".VolumeDurationControl__Duration [data-qa=remaining_time]"
+          );
 
         // Return if either are null
         if (timeElapsed !== null && timeRemaining !== null) {
           // Get timestamps
           [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-            presence.timestampFromFormat(stripText(timeElapsed, "Time Elapsed")),
-            presence.timestampFromFormat(stripText(timeRemaining, "Time Remaining"))
+            presence.timestampFromFormat(
+              stripText(timeElapsed, "Time Elapsed")
+            ),
+            presence.timestampFromFormat(
+              stripText(timeRemaining, "Time Remaining")
+            )
           );
         } else presence.error("Timestamps are null!");
       } else {
