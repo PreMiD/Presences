@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     const presenceData = {
       largeImageKey: "icon",
       startTimestamp:  browsingStamp
-    }
+    };
 
     if (document.location.hostname === "shardhosting.co.uk") {
         if (document.location.pathname.includes("/web-hosting")) {
@@ -121,4 +121,4 @@ presence.on("UpdateData", async () => {
 
     if (!presenceData.details) presence.setActivity();
     else presence.setActivity(presenceData);
-}
+};
