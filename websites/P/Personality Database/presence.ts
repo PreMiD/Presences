@@ -3,7 +3,6 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let trayTitle: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -31,7 +30,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "poll";
     presenceData.details = "Viewing:";
 
-    trayTitle = `${presenceData.details} ${profileName}`;
 
     const firstType: string = profilePersonality?.split(" - ")[0];
 
@@ -145,6 +143,5 @@ presence.on("UpdateData", async () => {
   if (!presenceData.details) presence.setActivity();
   else {
     presence.setActivity(presenceData);
-    presence.setTrayTitle(trayTitle);
   }
 });
