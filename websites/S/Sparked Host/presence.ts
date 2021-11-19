@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "icon"
+    largeImageKey: "icon",
+    startTimestamp: browsingStamp
   };
 
   if (document.location.hostname === "sparkedhost.com") {
@@ -152,13 +153,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Managing cPanel";
   }
 
-  if (!presenceData.details) {
-    presenceData.details = "Server Hosting";
-    presenceData.state = "Starting at $1";
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else {
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  }
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

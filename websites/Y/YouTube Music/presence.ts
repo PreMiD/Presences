@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
           ? "On loop"
           : repeatMode === "ALL"
           ? "Playlist on loop"
-          : "Play",
+          : "Playing",
         endTimestamp
       };
 
