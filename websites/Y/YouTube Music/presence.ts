@@ -1,6 +1,6 @@
 const presence = new Presence({
-    clientId: "463151177836658699"
-  });
+  clientId: "463151177836658699"
+});
 
 function getAuthorString(): string {
   //* Get authors

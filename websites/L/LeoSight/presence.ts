@@ -243,7 +243,7 @@ presence.on("UpdateData", async () => {
         else if (path.includes("/hashtag/")) {
           presenceData.details = "Iris - Hashtagy";
           item = path.replace("/iris.ic/hashtag/", "");
-          presenceData.state = "#" + item;
+          presenceData.state = `#${item}`;
         }
       } else if (
         path.includes("iris.ic/") &&
@@ -253,11 +253,11 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Iris uživatelský profil:";
         if (!path.includes("www")) {
           item = path.replace("/iris.ic/", "");
-          presenceData.state = "@" + item;
+          presenceData.state = `@${item}`;
         } else if (path.includes("www")) {
           item = path.replace("/www/iris.ic/", "");
           item = item.replace(".php", "");
-          presenceData.state = "@" + item;
+          presenceData.state = `@${item}`;
         }
       } else if (path.includes("users"))
         presenceData.state = "Seznam uživatelů";
