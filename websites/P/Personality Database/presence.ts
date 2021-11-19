@@ -3,6 +3,10 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
+/**
+ * Note: a few icon used for smallImageKey in this presence are from
+ * fontAwesome: https://fontawesome.com/v5.15/icons
+ */
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -138,6 +142,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = title;
   }
 
+  /**
+   * timestamp is started when the user opened the website
+   * and ended when the webiste is closed it
+   */
   presenceData.startTimestamp = browsingStamp;
 
   if (!presenceData.details) presence.setActivity();
