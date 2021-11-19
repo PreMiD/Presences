@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const { pathname, origin } = window.location,
     data: PresenceData = {
-      startTimestamp: elapsed,
+      startTimestamp: browsingTimestamp,
       largeImageKey: "logo"
     };
   if (
