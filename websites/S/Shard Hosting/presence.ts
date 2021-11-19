@@ -4,9 +4,10 @@ const presence = new Presence({
     browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-    const presenceData: PresenceData = {
-        largeImageKey: "icon"
-    };
+    const presenceData = {
+      largeImageKey: "icon",
+      startTimestamp:  browsingStamp
+    }
 
     if (document.location.hostname === "shardhosting.co.uk") {
         if (document.location.pathname.includes("/web-hosting")) {
@@ -118,7 +119,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Managing cPanel";
     }
 
-    if (!presenceData.details) {
-        presenceData.startTimestamp = browsingStamp;
-        presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
 };
