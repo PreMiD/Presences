@@ -42,6 +42,7 @@ const presence = new Presence({
   INFO_PAGES = [
     "approach",
     "contact",
+    "cookies",
     "efficacy",
     "guidelines",
     "info",
@@ -84,6 +85,10 @@ function updateLanguage() {
 }
 updateLanguage();
 setInterval(updateLanguage, 1000);
+
+function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 function checkBasicPages(path: string[]): boolean {
   if (path.length === 0) {
@@ -129,9 +134,8 @@ function checkBasicPages(path: string[]): boolean {
   } else if (path[0] === "settings") {
     presenceData.details = "Adjusting settings";
     if (path.length >= 2) {
-      let [, page] = path;
-      page = page.charAt(0).toUpperCase() + page.slice(1);
-      presenceData.state = `Section: ${page}`;
+      const [, page] = path;
+      presenceData.state = `Section: ${capitalize(page)}`;
     }
     return true;
   } else if (document.title.startsWith("Error")) {
@@ -141,6 +145,20 @@ function checkBasicPages(path: string[]): boolean {
   } else if (API_ENDPOINTS.includes(path[0])) {
     presenceData.details = "Viewing an API response";
     presenceData.state = `Endpoint: /${path[0]}`;
+    return true;
+  } else if (path[0] === "log-in") {
+    presenceData.details = "Logging in";
+    return true;
+  } else if (["forgot_password", "reset_password"].includes(path[0])) {
+    presenceData.details = "Resetting their password";
+    return true;
+  } else if (path[0] === "course") {
+    presenceData.details = "Considering a course";
+    if (path.length < 4) return true;
+
+    const courseSplit = path[3].split("-");
+    if (courseSplit.length < 2) return true;
+    presenceData.state = capitalize(courseSplit[1]);
     return true;
   }
 
