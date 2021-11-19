@@ -2,31 +2,38 @@ const presence = new Presence({
     clientId: "909403157686288414"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let titleEl: HTMLElement, personalityTypeEl: HTMLElement, trayTitle: string;
+
+let trayTitle: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "personality-database"
     },
-    useOnlyFirstPersonalityType = await presence.getSetting(
-      "onlyFirstPersonalityType"
+    useOnlyFirstPersonalityType: boolean = await presence.getSetting(
+      "useOnlyFirstPersonalityType"
+    ),
+    showUserNameInUserProfile: boolean = await presence.getSetting(
+      "showUserNameInUserProfile"
     );
 
   if (document.location.pathname.includes("/profile/")) {
-    titleEl = document.querySelector(
-      "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-name"
-    );
-    personalityTypeEl = document.querySelector(
-      "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-personality"
-    );
+    const profileName: string = (<HTMLElement>(
+        document.querySelector(
+          "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-name"
+        )
+      ))?.innerText,
+      profilePersonality: string = (<HTMLElement>(
+        document.querySelector(
+          "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-personality"
+        )
+      ))?.innerText;
 
-    const firstType: string = personalityTypeEl.innerText?.split(" - ")[0];
-
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.smallImageKey = "view";
+    presenceData.smallImageKey = "poll";
     presenceData.details = "Viewing:";
 
-    trayTitle = `${presenceData.details} ${titleEl.innerText}`;
+    trayTitle = `${presenceData.details} ${profileName}`;
+
+    const firstType: string = profilePersonality?.split(" - ")[0];
 
     if (firstType) {
       /**
@@ -35,20 +42,20 @@ presence.on("UpdateData", async () => {
        * John Lennon - ENFP
        */
       if (useOnlyFirstPersonalityType)
-        presenceData.state = `${titleEl.innerText} - ${firstType}`;
+        presenceData.state = `${profileName} - ${firstType}`;
       /**
        * if user choose to show all personality type, example:
        * Viewing: John Lennon
        * ENFP - 4w3 - sx/so - 485 - ILE - SLUEI - VELF - Melancholic-Choleric
        */ else {
-        presenceData.details = `Viewings: ${titleEl.innerText}`;
-        presenceData.state = `${personalityTypeEl.innerText}`;
+        presenceData.details = `Viewing: ${profileName}`;
+        presenceData.state = `${profilePersonality}`;
       }
       /**
        * if user choose to not show any personality type, example:
        * John Lennon
        */
-    } else presenceData.state = titleEl.innerText;
+    } else presenceData.state = profileName;
 
     /**
      * add button for visiting user profile
@@ -59,7 +66,81 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
+  } else if (document.location.pathname === "/search") {
+    const urlParams = new URLSearchParams(window.location.search),
+      search: string = urlParams.get("keyword") || urlParams.get("q");
+
+    presenceData.smallImageKey = "search";
+    presenceData.details = "Searching:";
+    presenceData.state = search;
+  } else if (document.location.pathname === "/vote") {
+    /**
+     * condition when viewing homepage
+     */
+    presenceData.smallImageKey = "home";
+    presenceData.details = "Viewing homepage";
+  } else if (document.location.pathname.includes("/profile")) {
+    /**
+     * condition when viewing category
+     */
+    const category: string = document.title?.split(" | ")[0];
+    presenceData.smallImageKey = "list";
+    presenceData.details = "Viewing category:";
+    presenceData.state = category;
+  } else if (document.location.pathname.includes("/community")) {
+    /**
+     * condition when viewing community feed
+     */
+    presenceData.smallImageKey = "group";
+    presenceData.details = "Viewing community feed";
+  } else if (document.location.pathname.includes("/topic")) {
+    /**
+     * condition when viewing specific topic
+     */
+    const topic: string = document.title?.split(" | ")[0];
+    presenceData.smallImageKey = "star";
+    presenceData.details = "Viewing topic:";
+    presenceData.state = topic;
+  } else if (document.location.pathname.includes("/notification")) {
+    /**
+     * condition when viewing notification
+     */
+    presenceData.smallImageKey = "notification";
+    presenceData.details = "Viewing notification";
+  } else if (document.location.pathname.includes("/user/")) {
+    /**
+     * condition when viewing other or own user's profile page
+     *
+     * FYI: only show userName when user sets showUserNameInUserProfile to true
+     * Because, not all people like being exposed of viewing/stalking other's profile
+     */
+    if (showUserNameInUserProfile) {
+      const userName: string = document.title?.split(" | ")[0];
+      presenceData.details = "Viewing user's profile:";
+      presenceData.state = userName;
+
+      /**
+       * add button for visiting user profile
+       */
+      presenceData.buttons = [
+        {
+          label: `Visit ${userName}'s profile`,
+          url: document.location.href
+        }
+      ];
+    } else presenceData.details = "Viewing user's profile";
+    presenceData.smallImageKey = "user";
+  } else {
+    /**
+     * show when viewing static or unrecognized pages
+     * ex: FAQ, Help, Community Guidelines
+     */
+    const title: string = document.title?.split(" | ")[0];
+    presenceData.details = "Viewing page:";
+    presenceData.state = title;
   }
+
+  presenceData.startTimestamp = browsingStamp;
 
   if (!presenceData.details) presence.setActivity();
   else {

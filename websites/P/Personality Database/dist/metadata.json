@@ -25,10 +25,16 @@
   "regExp": "([a-z0-9-]+[.])*personality-database[.]com[/]",
   "settings": [
     {
-      "id": "onlyFirstPersonalityType",
+      "id": "useOnlyFirstPersonalityType",
       "title": "Show only first type",
       "icon": "fas fa-head-side-brain",
       "value": true
+    },
+    {
+      "id": "showUserNameInUserProfile",
+      "title": "Show user's names when visiting other user profile",
+      "icon": "fas fa-user",
+      "value": false
     }
   ]
 }
