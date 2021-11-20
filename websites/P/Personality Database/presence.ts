@@ -10,7 +10,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "personality-database"
+      largeImageKey: "personality-database",
+      startTimestamp: browsingStamp,
     },
     useOnlyFirstPersonalityType: boolean = await presence.getSetting(
       "useOnlyFirstPersonalityType"
@@ -85,10 +86,9 @@ presence.on("UpdateData", async () => {
     /**
      * condition when viewing category
      */
-    const category: string = document.title?.split(" | ")[0];
     presenceData.smallImageKey = "list";
     presenceData.details = "Viewing category:";
-    presenceData.state = category;
+    presenceData.state = document.title?.split(" | ")[0];
   } else if (document.location.pathname.includes("/community")) {
     /**
      * condition when viewing community feed
@@ -99,10 +99,9 @@ presence.on("UpdateData", async () => {
     /**
      * condition when viewing specific topic
      */
-    const topic: string = document.title?.split(" | ")[0];
     presenceData.smallImageKey = "star";
     presenceData.details = "Viewing topic:";
-    presenceData.state = topic;
+    presenceData.state = document.title?.split(" | ")[0];
   } else if (document.location.pathname.includes("/notification")) {
     /**
      * condition when viewing notification
@@ -137,19 +136,10 @@ presence.on("UpdateData", async () => {
      * show when viewing static or unrecognized pages
      * ex: FAQ, Help, Community Guidelines
      */
-    const title: string = document.title?.split(" | ")[0];
     presenceData.details = "Viewing page:";
-    presenceData.state = title;
+    presenceData.state = document.title?.split(" | ")[0];;
   }
-
-  /**
-   * timestamp is started when the user opened the website
-   * and ended when the webiste is closed it
-   */
-  presenceData.startTimestamp = browsingStamp;
 
   if (!presenceData.details) presence.setActivity();
-  else {
-    presence.setActivity(presenceData);
-  }
+  else presence.setActivity(presenceData);
 });
