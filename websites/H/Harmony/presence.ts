@@ -32,31 +32,19 @@ presence.on("UpdateData", async () => {
       presenceData.details = `🎶 ➜ ${npTitle}`;
       presenceData.state = `🎤 ➜ ${npArtist}`;
     } else if (document.location.hash.startsWith("#/User")) {
-      const username = document.querySelector(
-        "body > div.page-container > div > div.p-container > p"
-      ).textContent;
-      presenceData.details = `📰 ➜ Viewing user: ${username}`;
+      presenceData.details = `📰 ➜ Viewing user: ${document.querySelector("body > div.page-container > div > div.p-container > p").textContent}`;
       presenceData.state = `💿 ➜ ${npOnAir}`;
     } else if (document.location.hash.startsWith("#/Song")) {
-      const songName = document.querySelector(".sp-title").textContent,
-        songArtist = document.querySelector(".sp-artist").textContent;
-      presenceData.details = `📰 ➜ Viewing song: ${songName}`;
-      presenceData.state = `🎤 ➜ ${songArtist}`;
+      presenceData.details = `📰 ➜ Viewing song: ${document.querySelector(".sp-title").textContent}`;
+      presenceData.state = `🎤 ➜ ${document.querySelector(".sp-artist").textContent}`;
     } else if (document.location.hash.startsWith("#/Library")) {
-      const libOwner = (
-        document.querySelector(".mlib") || document.querySelector(".olib")
-      ).textContent;
-      presenceData.details = `📰 ➜ Viewing page: ${libOwner}`;
+      presenceData.details = `📰 ➜ Viewing page: ${(document.querySelector(".mlib") || document.querySelector(".olib")).textContent}`;
       presenceData.state = `💿 ➜ ${npOnAir}`;
     } else if (document.location.hash.startsWith("#/Special.Blank")) {
-      const usernameTop = document.querySelector(
-        "#navbar > ul.dropdown.ubox > div > h1"
-      ).textContent;
-      presenceData.details = `📰 ➜ ${usernameTop} got FUNKY TOWNED!`;
+      presenceData.details = `📰 ➜ ${document.querySelector("#navbar > ul.dropdown.ubox > div > h1").textContent} got FUNKY TOWNED!`;
       presenceData.state = `💿 ➜ ${npOnAir}`;
     } else {
-      const [location] = document.location.hash.slice(2).split("?");
-      presenceData.details = `📰 ➜ Viewing page: ${location}`;
+      presenceData.details = `📰 ➜ Viewing page: ${document.location.hash.slice(2).split("?")[0]}`;
       presenceData.state = `💿 ➜ ${npOnAir}`;
     }
   }
