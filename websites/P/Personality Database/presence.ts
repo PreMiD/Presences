@@ -11,7 +11,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "personality-database",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     },
     useOnlyFirstPersonalityType: boolean = await presence.getSetting(
       "useOnlyFirstPersonalityType"
@@ -34,7 +34,6 @@ presence.on("UpdateData", async () => {
 
     presenceData.smallImageKey = "poll";
     presenceData.details = "Viewing:";
-
 
     const firstType: string = profilePersonality?.split(" - ")[0];
 
@@ -137,7 +136,7 @@ presence.on("UpdateData", async () => {
      * ex: FAQ, Help, Community Guidelines
      */
     presenceData.details = "Viewing page:";
-    presenceData.state = document.title?.split(" | ")[0];;
+    presenceData.state = document.title?.split(" | ")[0];
   }
 
   if (!presenceData.details) presence.setActivity();

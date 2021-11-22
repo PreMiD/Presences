@@ -1,14 +1,14 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.5",
-    "author": {
-        "name": "anãø",
-        "id": "269498173259644931"
-    },
-    "service": "TeleCine",
-    "category": "videos",
-    "logo": "https://i.imgur.com/CwWONeF.png",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "anãø",
+    "id": "269498173259644931"
+  },
+  "service": "TeleCine",
+  "category": "videos",
+  "logo": "https://i.imgur.com/CwWONeF.png",
   "thumbnail": "https://i.imgur.com/9TD9Gzg.jpg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#071aa6",
   "tags": [
     "video",
