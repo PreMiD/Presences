@@ -115,7 +115,10 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "#__next > div > div.wrapper.-spacing > div.player-block.d-flex > div > div.desc-nowrap.d-flex > div.desc-block.title-middle > div > h1"
         )?.textContent ?? null,
-      result = title.replace("ดูช่อง ", "").replace("ออนไลน์", "").split("–");
+      result =
+        title === null
+          ? title.replace("ดูช่อง ", "").replace("ออนไลน์", "").split("–")
+          : null;
     switch (true) {
       case path.pathname.includes("live"):
         presenceData.details = `${
