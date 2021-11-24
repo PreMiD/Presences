@@ -155,22 +155,6 @@ presence.on("UpdateData", async () => {
             )
               presenceData.details = "Reading Reviews of:";
 
-            console.log(
-              isInViewport(
-                document.querySelector(
-                  "h2.rbpbduva.slrhy5ou.sw32xbbe.jma5w017.pvc73czq.dos3uok6.bsc86jdp.sj117cy1.e5fbeixf.o5uldogj.c7pcq5cm.i13o4lny.l4s1jwut.thcaz4uc.tcjo4660.mm8y8im2.mnbq7hy4"
-                )
-              ) ||
-                isInViewport(
-                  document.querySelector(
-                    ".b52kj89e.sq39p0kj.rbj7b54s.pjumf6uq.a0585srg.i92ihv9n.baw4mjhw.ptamchqq.j0w2kb1n.i2wm47ke.qol2cro8.okr54ooa.klsajntx.rd0pab4s.oq0i6scd.ayos5gsh.h21vdxyh.og1bctnk.crbex1nj.plgazb4k.tr6l6ww2.e7vbqoz9.r49rl50p.q8abdh1i.tcghoajs.cp4ljrx1.a0avu08k.anf3k8p9.q2mnpuig.nqouel9a.k5dtgqef.aawx349i"
-                  )
-                ) ||
-                isInViewport(
-                  document.querySelector("div > div.a5eizvf9.rm933jvs")
-                )
-            );
-
             presenceData.buttons = [
               {
                 label: "View Product",
