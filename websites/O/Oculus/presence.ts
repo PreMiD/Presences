@@ -429,10 +429,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
+  if (!presenceData.details) presence.clearActivity();
+  else {
     // Delete button(s) / timestamp relating to the setting
     if (presenceData.buttons && !setting.showButtons)
       delete presenceData.buttons;
