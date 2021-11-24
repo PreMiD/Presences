@@ -306,13 +306,14 @@ presence.on("UpdateData", async () => {
                 // Developer posts
               } else if (path[2] === "developer-post") {
                 const title =
-                  document.querySelector("_9cq4")?.textContent ??
-                  "Unknown dev-post";
-                presenceData.state = `Dev-post: ${
+                  document.querySelector("._9cq4")?.textContent ?? "Unknown";
+
+                presenceData.state = `Dev-Post: ${
                   title.length > 118 ? `${title.slice(0, 115)}...` : title
                 }`;
+
                 presenceData.buttons.push({
-                  label: "Read dev-post",
+                  label: "Read Dev-Post",
                   url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
                 });
 
@@ -363,6 +364,7 @@ presence.on("UpdateData", async () => {
                   url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
                 });
               }
+
               break;
             }
           }
@@ -422,6 +424,7 @@ presence.on("UpdateData", async () => {
           }
         }
       }
+
       break;
     }
   }
