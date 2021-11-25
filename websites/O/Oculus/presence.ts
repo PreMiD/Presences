@@ -180,13 +180,14 @@ presence.on("UpdateData", async () => {
               path[1] !== "rift-s" &&
               path[1] !== "rift" &&
               path[1] !== "go"
-            )
+            ) {
               presenceData.buttons = [
                 {
                   label: "View Accessory",
                   url: `https://${hostName}/accessories/${path[1]}`
                 }
               ];
+            }
 
             break;
           }
