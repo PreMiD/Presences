@@ -16,12 +16,15 @@ presence.on("UpdateData", async () => {
     startTimestamp: startsTime
   };
 
-  if (path.includes("/episodes/")) {
-    const EpAndSeason = SouthParkData.children[0].props.title.text
+  if (path.includes("/episodes/") || path.includes("/episodios/")) {
+    const Url = path.includes("/episodios/")
+        ? "https://www.southpark.lat/episodios"
+        : "https://www.southparkstudios.com/episodes",
+      EpAndSeason = SouthParkData.children[0].props.title.text
         .split(" - ")[1]
         .match(/([1-9]?[0-9]?[0-9])/g),
-      EpTitle = SouthParkData.children[0].props.title.text.split(" - ")[2],
-      title = SouthParkData.children[0].props.title.text.split(" - ")[0],
+      [title, , EpTitle] =
+        SouthParkData.children[0].props.title.text.split(" - "),
       timestamps = presence.getTimestamps(
         presence.timestampFromFormat(
           document.querySelector("div.edge-gui-current-time")?.textContent
@@ -40,15 +43,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText =
         video.paused || isNaN(video.duration) ? "Paused" : "Playing";
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       presenceData.buttons = [
         {
           label: "Watch Episode",
-          url: `https://www.southparkstudios.com/episodes/${
-            document.location.pathname.split("/")[2]
-          }`
+          url: `${Url}/${document.location.pathname.split("/")[2]}`
         }
       ];
 
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Episodes of:";
     presenceData.state = `Season ${season}`;
   } else if (path.includes("/collections/")) {
-    const title = SouthParkData.children[0].props.title.text.split(" - ")[0],
+    const [title] = SouthParkData.children[0].props.title.text.split(" - "),
       EpTilte = document.querySelector("div.header > span").textContent,
       EpAndSeason = document
         .querySelector("div > div.sub-header > span")
@@ -83,8 +83,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       presenceData.buttons = [
         {
@@ -158,11 +157,8 @@ presence.on("UpdateData", async () => {
       }
     };
 
-  for (const [key, value] of Object.entries(pages)) {
-    if (path.match(key)) {
-      presenceData = { ...presenceData, ...value };
-    }
-  }
+  for (const [key, value] of Object.entries(pages))
+    if (path.match(key)) presenceData = { ...presenceData, ...value };
 
   if (!buttons) delete presenceData.buttons;
 

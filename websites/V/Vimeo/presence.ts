@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     ".vp-video-wrapper .vp-video video"
   );
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     const browsingPresence: PresenceData = {
       details: "Browsing...",
       largeImageKey: "logo"
@@ -42,9 +42,8 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      if (title !== null && uploader !== null) {
+      if (title !== null && uploader !== null)
         presence.setActivity(data, !video.paused);
-      }
     } else {
       const browsingPresence: PresenceData = {
         details: "Browsing...",

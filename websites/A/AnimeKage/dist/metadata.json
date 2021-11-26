@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -12,7 +13,7 @@
     "ga_IE": "Sraith anime ar líne aistrithe go Rómáinis. Naruto, Naruto Shippuden, Bleach, Gintama, agus go leor eile. Ár suíomh as aistriúcháin chuig na céadta fotheideal anime agus manga sa Rómáinis."
   },
   "url": "ak151.anime-kage.eu",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/zVbpanX.png",
   "thumbnail": "https://i.imgur.com/0pir8CX.png",
   "color": "#2bb4ba",

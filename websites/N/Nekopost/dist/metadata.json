@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "Nekopost",
   "author": {
     "name": "NPC_B",
@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/uoFY9IP.png",
   "thumbnail": "https://i.imgur.com/iZcmtnY.png",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "color": "#e7dca5",
   "tags": [
     "manga",

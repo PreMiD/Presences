@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "651454408768487441"
   }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/questions": "Questions ",
     "/tags": "Tags ",
     "/users": "Users ",
@@ -14,14 +14,13 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "#user-card > div > div.grid--cell.fl1.wmn0 > div > div.grid--cell.fl1.w0.overflow-x-hidden.overflow-y-auto.pr16.profile-user--about.about > div > div:nth-child(1) > h2 > div"
     ),
-    searchresult = document.querySelector("#bigsearch > div > input");
+    searchresult = document.querySelector("#bigsearch > div > input"),
+    presenceData: PresenceData = {
+      largeImageKey: "logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
+    };
 
-  const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
-
-  if (title && title.textContent != "") {
+  if (title && title.textContent !== "") {
     presenceData.details = "Reads a Question:";
     presenceData.state = `${title.textContent}`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
@@ -39,10 +38,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Homepage";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

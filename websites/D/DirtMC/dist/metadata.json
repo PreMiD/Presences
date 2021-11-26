@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -12,7 +13,7 @@
     "dirtmc.net",
     "buy.dirtmc.net"
   ],
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/hevy5Kg.png",
   "thumbnail": "https://i.imgur.com/uJxqhBB.png",
   "color": "#eb2025",

@@ -28,7 +28,7 @@ function getQuery() {
       queryString && queryString.length > 0 && queryString[1]
         ? queryString[1].split("&").reduce(function (l, r) {
             const entry = r ? r.split("=", 2) : null;
-            if (entry == null) return l;
+            if (entry === null) return l;
             return Object.assign(l, { [entry[0]]: entry[1] });
           }, {})
         : {};
@@ -45,7 +45,7 @@ function getQuery() {
           { strings, images, frame }: ExecutionArguments
         ) => {
           if (!context) return null;
-          const partName = location.pathname.match(/^\/(movie|serie)\//i)[1];
+          const [, partName] = location.pathname.match(/^\/(movie|serie)\//i);
           if (!partName) return null;
           const type: "movie" | "series" | "other" =
             partName === "serie"
@@ -106,17 +106,16 @@ function getQuery() {
           data.details = strings.searching;
           if (
             document
-              .querySelector(`.category .arg > .type`)
+              .querySelector(".category .arg > .type")
               ?.textContent.toLowerCase()
               .indexOf("genre") === 0
           ) {
             data.state = `${strings.viewGenre} ${
-              document.querySelector(`.category .arg > .q.arg_category`)
+              document.querySelector(".category .arg > .q.arg_category")
                 ?.textContent
             }`;
-          } else {
-            delete data.state;
-          }
+          } else delete data.state;
+
           data.smallImageKey = images.SEARCH;
           return data;
         }
@@ -187,10 +186,10 @@ function getQuery() {
           images: IMAGES
         })
       );
-      return await result
+      return result
         .then((data) => {
           if (
-            lastPageIndex !== undefined &&
+            lastPageIndex &&
             lastPageIndex !== pageIndex &&
             pages[lastPageIndex] &&
             typeof pages[lastPageIndex].destroy === "function"
@@ -206,8 +205,14 @@ function getQuery() {
             });
           } else {
             if (data.details) presence.setActivity(data);
-            if (data.buttons && data.buttons.length === 0) delete data.buttons;
-            else data.buttons = data.buttons?.slice(0, 2);
+            if (data.buttons && (data.buttons.length as number) === 0)
+              delete data.buttons;
+            else {
+              data.buttons = data.buttons?.slice(0, 2) as [
+                ButtonData,
+                ButtonData
+              ];
+            }
           }
           return data;
         })

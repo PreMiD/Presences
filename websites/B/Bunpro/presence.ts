@@ -21,6 +21,8 @@ function getLevelInHeader() {
   const levelElement: HTMLDivElement =
     document.querySelector(".navbar-user-level");
 
+  if (!levelElement) return null;
+
   return +levelElement.innerText.slice(6);
 }
 
@@ -87,13 +89,13 @@ presence.on("UpdateData", () => {
       case "/learn": {
         startTimestamp = Date.now();
 
-        const checkQuizzElement: HTMLDivElement = document.querySelector(
+        const checkQuizElement: HTMLDivElement = document.querySelector(
             "#learn-new-grammar-page"
           ),
-          isOnQuizz = checkQuizzElement.style.display === "block";
+          isOnQuiz = checkQuizElement.style.display === "block";
 
-        if (isOnQuizz) {
-          details = "Learning New Grammar (Quizz)";
+        if (isOnQuiz) {
+          details = "Learning New Grammar (Quiz)";
 
           const grammarPointElement: HTMLDivElement = document.querySelector(
               ".study-question-english-hint"
@@ -113,12 +115,10 @@ presence.on("UpdateData", () => {
           let activeGrammarPoint: HTMLDivElement;
 
           activeGrammarPoint = document.querySelector(
-            `.grammar-point-study[style*="display: block"]`
+            '.grammar-point-study[style*="display: block"]'
           );
 
-          if (!activeGrammarPoint) {
-            activeGrammarPoint = document.querySelector(".grammar-point-study");
-          }
+          activeGrammarPoint ??= document.querySelector(".grammar-point-study");
 
           const grammarPointElement: HTMLSpanElement =
               activeGrammarPoint.querySelector(
@@ -180,9 +180,7 @@ presence.on("UpdateData", () => {
 
           details = "Viewing Dashboard";
           state = `${reviewsCount} reviews`;
-        } else {
-          details = "Browsing Pages";
-        }
+        } else details = "Browsing Pages";
 
         break;
       }
@@ -196,7 +194,7 @@ presence.on("UpdateData", () => {
   if (level) {
     data.smallImageKey = getLevelIcon(level);
 
-    if (!smallImageText) smallImageText = `Level ${level}`;
+    smallImageText ??= `Level ${level}`;
   }
   if (smallImageText) data.smallImageText = smallImageText;
 

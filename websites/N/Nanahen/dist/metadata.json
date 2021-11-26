@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Watambeee",
+    "id": "338418945620967434"
+  },
+  "service": "Nanahen",
+  "description": {
+    "en": "Nanahen is an doujinshi scanlation website with indonesian languange",
+    "id": "Nanahen adalah website scanlation doujinshi bahasa indonesia"
+  },
+  "url": "nanahen.com",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/q7Q01Bh.png",
+  "thumbnail": "https://i.imgur.com/vNpw9NQ.png",
+  "color": "#d8345f",
+  "tags": [
+    "manga",
+    "comics",
+    "nsfw"
+  ],
+  "category": "other"
+}

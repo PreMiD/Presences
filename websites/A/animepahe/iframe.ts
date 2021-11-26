@@ -4,7 +4,7 @@
 const iframe = new iFrame();
 
 let sendback: {
-  current_time: number;
+  currentTime: number;
   duration: number;
   paused: boolean;
 };
@@ -17,7 +17,7 @@ iframe.on("UpdateData", () => {
   if (document.querySelector("#kwikPlayer")) {
     const video: HTMLVideoElement = document.querySelector("#kwikPlayer");
     sendback = {
-      current_time: video.currentTime,
+      currentTime: video.currentTime,
       duration: video.duration,
       paused: video.paused
     };

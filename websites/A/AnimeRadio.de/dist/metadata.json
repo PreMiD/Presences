@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -22,7 +23,7 @@
     "www.animefestival.de",
     "www.animetickets.de"
   ],
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/9q7Vuqr.png",
   "thumbnail": "https://i.imgur.com/nBe7Cfw.jpg",
   "color": "#ccf5fd",

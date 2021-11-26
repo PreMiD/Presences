@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "Ontdek muziek, bekijk de nieuwste trending video's en 24/7 samengestelde inhoud! Probeer ListenOnRepeat vandaag nog."
   },
   "url": "listenonrepeat.com",
-  "version": "2.0.4",
+  "version": "2.0.6",
   "logo": "https://i.imgur.com/F7W7Vnn.png",
   "thumbnail": "https://i.imgur.com/jhah8BE.png",
   "color": "#ff0066",

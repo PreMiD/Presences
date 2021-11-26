@@ -1,29 +1,28 @@
 const presence = new Presence({
-  clientId: "714416728448434218"
-});
-
-// Const thing
-const browsingStamp = Math.floor(Date.now() / 1000);
-const tag = document.querySelector(
-  "#__next > div > div > div:nth-child(4) > div > div > nav > div > a:nth-child(2)"
-);
-const forum = document.querySelector(
-  "#__next > div > div > div:nth-child(4) > div > div > nav > div > a"
-);
-const topic = document.querySelector("head > title");
-const message = document.querySelector(
-  "#main-body-content > div.content > div.container-outer.container-liquid > div.display-post-wrapper.main-post.main-post-msg > div > div:nth-child(1) > h2"
-);
-const club = document.querySelector(
-  "#main-body-content > div.content > div.container-wrap.bottombdr.bottomspc > div > div > ul > li"
-);
-//Changer
-const tag1 = tag?.textContent ?? "เเท็กที่ไม่ทราบ";
-const forum1 = forum?.textContent ?? "ห้องที่ไม่ทราบ";
-const topic1 = topic?.textContent ?? "หัวข้อที่ไม่ทราบ";
-const message1 = message?.textContent ?? "ไม่ทราบข้อความ";
-const club1 = club?.textContent ?? "คลับที่ไม่ทราบ";
-const path = document.location;
+    clientId: "714416728448434218"
+  }),
+  // Const thing
+  browsingStamp = Math.floor(Date.now() / 1000),
+  tag = document.querySelector(
+    "#__next > div > div > div:nth-child(4) > div > div > nav > div > a:nth-child(2)"
+  ),
+  forum = document.querySelector(
+    "#__next > div > div > div:nth-child(4) > div > div > nav > div > a"
+  ),
+  topic = document.querySelector("head > title"),
+  message = document.querySelector(
+    "#main-body-content > div.content > div.container-outer.container-liquid > div.display-post-wrapper.main-post.main-post-msg > div > div:nth-child(1) > h2"
+  ),
+  club = document.querySelector(
+    "#main-body-content > div.content > div.container-wrap.bottombdr.bottomspc > div > div > ul > li"
+  ),
+  //Changer
+  tag1 = tag?.textContent ?? "เเท็กที่ไม่ทราบ",
+  forum1 = forum?.textContent ?? "ห้องที่ไม่ทราบ",
+  topic1 = topic?.textContent ?? "หัวข้อที่ไม่ทราบ",
+  message1 = message?.textContent ?? "ไม่ทราบข้อความ",
+  club1 = club?.textContent ?? "คลับที่ไม่ทราบ",
+  path = document.location;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -32,10 +31,10 @@ presence.on("UpdateData", async () => {
 
   // Presence
   if (
-    path.hostname == "pantip.com" ||
+    path.hostname === "pantip.com" ||
     path.hostname.includes("([a-z0-9-]+[.])*")
   ) {
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "หน้าหลัก";
     } else if (path.pathname.includes("index.php")) {
@@ -154,9 +153,6 @@ presence.on("UpdateData", async () => {
       } else if (path.href.includes("#inbox")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "กล่องข้อความ ";
-      } else if (path.href.includes("#inbox")) {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "กล่องข้อความ ";
       } else if (path.href) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "อยู่ในสนทนา ";
@@ -180,10 +176,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

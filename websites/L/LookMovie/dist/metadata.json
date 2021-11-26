@@ -1,7 +1,8 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
-    "name": "ririxi",
-    "id": "192490421308489731"
+    "name": "PreMiD",
+    "id": "503557087041683458"
   },
   "service": "LookMovie",
   "description": {
@@ -9,7 +10,7 @@
     "nl": "Bekijk gratis alle nieuwe en oude films online in HD-kwaliteit en ondertitels."
   },
   "url": "lookmovie.io",
-  "version": "1.2.10",
+  "version": "1.2.13",
   "logo": "https://i.imgur.com/vlSumUl.png",
   "thumbnail": "https://i.imgur.com/nseTbMZ.png",
   "color": "#ffcc00",

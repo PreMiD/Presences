@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Vasilis",
+    "id": "241929388403195914"
+  },
+  "service": "Cosmote TV",
+  "description": {
+    "en": "The new COSMOTE TV OTT service upgrades your TV viewing experience with new features that reveal the unsurpassed content of COSMOTE TV."
+  },
+  "url": "www.cosmotetvott.gr",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/JhRi5x4.png",
+  "thumbnail": "https://i.imgur.com/ztezV2q.png",
+  "color": "#14D900",
+  "tags": [
+    "cosmote",
+    "cosmote-tv",
+    "live",
+    "tv",
+    "television",
+    "greece",
+    "greek",
+    "series",
+    "movies"
+  ],
+  "category": "videos"
+}

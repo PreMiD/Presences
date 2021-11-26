@@ -1,144 +1,79 @@
-interface LangStrings {
-  browse: string;
-  writing: string;
-  reading: string;
-  channelReading: string;
-  channelTyping: string;
-  dmReading: string;
-  dmTyping: string;
-  dmGroupReading: string;
-  dmGroupTyping: string;
-  friends: string;
-  nitro: string;
-  voiceConnectedWith: string;
-  voiceConnectedTo: string;
-  inCall: string;
-  calling: string;
-  settings: string;
-  serverSettings: string;
-  invite: string;
-  inviteServer: string;
-  buttonInvite: string;
-  browseThrough: string;
-  download: string;
-  why: string;
-  safety: string;
-  jobs: string;
-  company: string;
-  branding: string;
-  inspiration: string;
-  college: string;
-  newsroom: string;
-  partner: string;
-  verification: string;
-  streamkit: string;
-  opensource: string;
-  security: string;
-  moderation: string;
-  rpc: string;
-  policies: string;
-  portal: string;
-  appsBrowse: string;
-  appsEdit: string;
-  teamsBrowse: string;
-  teamsEdit: string;
-  serversBrowse: string;
-  serversEdit: string;
-  docs: string;
-  status: string;
-  viewing: string;
-  uptime: string;
-  incident: string;
-  incidentView: string;
-  helpCenter: string;
-  viewCategory: string;
-  searchFor: string;
-  searching: string;
-  readingArticle: string;
-  blog: string;
-  merch: string;
-  product: string;
-  collection: string;
-  viewPage: string;
-  shopCart: string;
-}
-
 const presence = new Presence({
-    clientId: "616940877042155531"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        browse: "general.browsing",
-        writing: "general.writing",
-        reading: "general.reading",
-        channelReading: "discord.channelReading",
-        channelTyping: "discord.channelTyping",
-        dmReading: "discord.dmReading",
-        dmTyping: "discord.dmTyping",
-        dmGroupReading: "discord.dmGroupReading",
-        dmGroupTyping: "discord.dmGroupTyping",
-        friends: "discord.friends",
-        nitro: "discord.nitro",
-        voiceConnectedWith: "discord.voiceConnectedWith",
-        voiceConnectedTo: "discord.voiceConnectedTo",
-        inCall: "general.inCall",
-        calling: "general.calling",
-        settings: "discord.settings",
-        serverSettings: "discord.serverSettings",
-        invite: "discord.invite",
-        inviteServer: "discord.inviteServer",
-        buttonInvite: "discord.buttonInvite",
-        browseThrough: "discord.browseThrough",
-        download: "discord.download",
-        why: "discord.why",
-        safety: "discord.safety",
-        jobs: "discord.jobs",
-        company: "discord.company",
-        branding: "discord.branding",
-        inspiration: "discord.inspiration",
-        college: "discord.college",
-        newsroom: "discord.newsroom",
-        partner: "discord.partner",
-        verification: "discord.verification",
-        streamkit: "discord.streamkit",
-        opensource: "discord.opensource",
-        security: "discord.security",
-        moderation: "discord.moderation",
-        rpc: "discord.rpc",
-        policies: "discord.policies",
-        portal: "discord.devs.portal",
-        appsBrowse: "discord.devs.appsBrowse",
-        appsEdit: "discord.devs.appsEdit",
-        teamsBrowse: "discord.devs.teamsBrowse",
-        teamsEdit: "discord.devs.teamsEdit",
-        serversBrowse: "discord.devs.serversBrowse",
-        serversEdit: "discord.devs.serversEdit",
-        docs: "discord.devs.docs",
-        status: "discord.status",
-        viewing: "general.viewing",
-        uptime: "general.uptimeHistory",
-        incident: "general.incidentHistory",
-        incidentView: "general.incidentView",
-        helpCenter: "discord.support",
-        viewCategory: "general.viewCategory",
-        searchFor: "general.searchFor",
-        searching: "general.search",
-        readingArticle: "general.readingArticle",
-        blog: "discord.blog",
-        merch: "discord.merch",
-        product: "general.viewProduct",
-        collection: "discord.merch.collection",
-        viewPage: "general.viewPage",
-        shopCart: "general.shopCart"
-      },
-      await presence.getSetting("lang").catch(() => "en")
-    );
-  };
+  clientId: "616940877042155531"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      browse: "general.browsing",
+      writing: "general.writing",
+      reading: "general.reading",
+      channelReading: "discord.channelReading",
+      channelTyping: "discord.channelTyping",
+      dmReading: "discord.dmReading",
+      dmTyping: "discord.dmTyping",
+      dmGroupReading: "discord.dmGroupReading",
+      dmGroupTyping: "discord.dmGroupTyping",
+      friends: "discord.friends",
+      nitro: "discord.nitro",
+      voiceConnectedWith: "discord.voiceConnectedWith",
+      voiceConnectedTo: "discord.voiceConnectedTo",
+      inCall: "general.inCall",
+      calling: "general.calling",
+      settings: "discord.settings",
+      serverSettings: "discord.serverSettings",
+      invite: "discord.invite",
+      inviteServer: "discord.inviteServer",
+      buttonInvite: "discord.buttonInvite",
+      browseThrough: "discord.browseThrough",
+      download: "discord.download",
+      why: "discord.why",
+      safety: "discord.safety",
+      jobs: "discord.jobs",
+      company: "discord.company",
+      branding: "discord.branding",
+      inspiration: "discord.inspiration",
+      college: "discord.college",
+      newsroom: "discord.newsroom",
+      partner: "discord.partner",
+      verification: "discord.verification",
+      streamkit: "discord.streamkit",
+      opensource: "discord.opensource",
+      security: "discord.security",
+      moderation: "discord.moderation",
+      rpc: "discord.rpc",
+      policies: "discord.policies",
+      portal: "discord.devs.portal",
+      appsBrowse: "discord.devs.appsBrowse",
+      appsEdit: "discord.devs.appsEdit",
+      teamsBrowse: "discord.devs.teamsBrowse",
+      teamsEdit: "discord.devs.teamsEdit",
+      serversBrowse: "discord.devs.serversBrowse",
+      serversEdit: "discord.devs.serversEdit",
+      docs: "discord.devs.docs",
+      status: "discord.status",
+      viewing: "general.viewing",
+      uptime: "general.uptimeHistory",
+      incident: "general.incidentHistory",
+      incidentView: "general.incidentView",
+      helpCenter: "discord.support",
+      viewCategory: "general.viewCategory",
+      searchFor: "general.searchFor",
+      searching: "general.search",
+      readingArticle: "general.readingArticle",
+      blog: "discord.blog",
+      merch: "discord.merch",
+      product: "general.viewProduct",
+      collection: "discord.merch.collection",
+      viewPage: "general.viewPage",
+      shopCart: "general.shopCart"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -161,9 +96,8 @@ presence.on("UpdateData", async () => {
     browsingStamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -171,7 +105,7 @@ presence.on("UpdateData", async () => {
   if (document.location.hostname === "discord.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       voiceConnected = Array.from(document.querySelectorAll("div")).find((c) =>
@@ -319,6 +253,8 @@ presence.on("UpdateData", async () => {
                 .split("{0}")[1]
                 ?.replace("{1}", document.title),
           smallImageKey: "reading",
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-expect-error
           buttons: showInvites
             ? [
                 {
@@ -560,7 +496,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "discordstatus.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -572,11 +508,11 @@ presence.on("UpdateData", async () => {
         },
         "/uptime/": {
           details: (await strings).status,
-          state: (await strings).viewing + " " + (await strings).uptime
+          state: `${(await strings).viewing} ${(await strings).uptime}`
         },
         "/history/": {
           details: (await strings).status,
-          state: (await strings).viewing + " " + (await strings).incident
+          state: `${(await strings).viewing} ${(await strings).incident}`
         },
         "/incidents/": {
           details: (await strings).status,
@@ -604,7 +540,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "support.discord.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -616,26 +552,23 @@ presence.on("UpdateData", async () => {
         },
         "/categories/": {
           details: (await strings).helpCenter,
-          state:
-            (await strings).viewCategory +
-            " " +
+          state: `${(await strings).viewCategory} ${
             document.querySelector("h1")?.textContent
+          }`
         },
         "/search/": {
           details: (await strings).helpCenter,
-          state:
-            (await strings).searchFor +
-            " " +
-            (document.querySelector("#query") as HTMLInputElement)?.value,
+          state: `${(await strings).searchFor} ${
+            (document.querySelector("#query") as HTMLInputElement)?.value
+          }`,
           smallImageKey: "search",
           smallImageText: (await strings).searching
         },
         "/articles/": {
           details: (await strings).helpCenter,
-          state:
-            (await strings).readingArticle +
-            " " +
-            document.querySelector("h1")?.textContent.trim(),
+          state: `${(await strings).readingArticle} ${document
+            .querySelector("h1")
+            ?.textContent.trim()}`,
           smallImageKey: "reading",
           smallImageText: (await strings).reading
         }
@@ -661,7 +594,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "blog.discord.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -671,30 +604,30 @@ presence.on("UpdateData", async () => {
           details: (await strings).blog,
           state:
             document.querySelector("h1")?.textContent !== "Discord Blog"
-              ? (await strings).readingArticle +
-                " " +
-                document.querySelector("h1").textContent
+              ? `${(await strings).readingArticle} ${
+                  document.querySelector("h1").textContent
+                }`
               : (await strings).browse
         },
         "/product-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Product posts"
+          state: `${(await strings).viewCategory} Product posts`
         },
         "/company-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Company posts"
+          state: `${(await strings).viewCategory} Company posts`
         },
         "/education-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Education posts"
+          state: `${(await strings).viewCategory} Education posts`
         },
         "/community-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Community posts"
+          state: `${(await strings).viewCategory} Community posts`
         },
         "/engineering-posts/": {
           details: (await strings).blog,
-          state: (await strings).viewCategory + " Engineering posts"
+          state: `${(await strings).viewCategory} Engineering posts`
         }
       };
     if (showBrowsing) {
@@ -718,7 +651,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "discordmerch.com") {
     const path = location.href
         .replace(/\/?$/, "/")
-        .replace("https://" + document.location.hostname, "")
+        .replace(`https://${document.location.hostname}`, "")
         .replace("?", "/")
         .replace("=", "/"),
       statics: {
@@ -730,35 +663,31 @@ presence.on("UpdateData", async () => {
         },
         "/products/": {
           details: (await strings).merch,
-          state:
-            (await strings).product +
-            " " +
+          state: `${(await strings).product} ${
             document.querySelector("h1")?.textContent
+          }`
         },
         "/collections/": {
           details: (await strings).merch,
-          state:
-            (await strings).collection +
-            " " +
+          state: `${(await strings).collection} ${
             document.querySelector("h1")?.textContent
+          }`
         },
         "/pages/": {
           details: (await strings).merch,
-          state:
-            (await strings).viewPage +
-            " " +
+          state: `${(await strings).viewPage} ${
             document.querySelector("h1")?.textContent
+          }`
         },
         "/cart/": {
           details: (await strings).merch,
-          state: (await strings).viewing + " " + (await strings).shopCart
+          state: `${(await strings).viewing} ${(await strings).shopCart}`
         },
         "/search/": {
           details: (await strings).merch,
-          state:
-            (await strings).searchFor +
-            " " +
-            (document.querySelector("input") as HTMLInputElement)?.value,
+          state: `${(await strings).searchFor} ${
+            (document.querySelector("input") as HTMLInputElement)?.value
+          }`,
           smallImageKey: "search",
           smallImageText: (await strings).searching
         }
@@ -787,10 +716,8 @@ presence.on("UpdateData", async () => {
   if (!showButtons) delete presenceData.buttons;
   if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -8,19 +8,20 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     },
-    pathname = document.location.pathname;
+    { pathname } = document.location;
 
   if (pathname === "/") data.details = "Ana Sayfa";
-  else if (pathname == "/fansublar") data.details = "Çeviri Gruplarına Bakıyor";
+  else if (pathname === "/fansublar")
+    data.details = "Çeviri Gruplarına Bakıyor";
   else if (pathname.startsWith("/fansub")) {
     const tlgroup = document.querySelector(".d-table > .d-cell > h1").innerHTML;
     data.details = "Çeviri Grubu Görüntüleniyor:";
     data.state = tlgroup;
-  } else if (pathname == "/sikca-sorulan-sorular")
+  } else if (pathname === "/sikca-sorulan-sorular")
     data.details = "Çeviri Sıkça Sorulan Sorular";
   else if (
     pathname.startsWith("/manga/") &&
-    window.location.search.substr(0, 5) == "?page"
+    window.location.search.substr(0, 5) === "?page"
   ) {
     const title = document.querySelector(".back").textContent,
       page = document
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
       link = window.location.href;
 
     data.details = title;
-    data.state = "📖 Bölüm " + lastItem + " 📄 " + page;
+    data.state = `📖 Bölüm ${lastItem} 📄 ${page}`;
     data.smallImageKey = "read";
     data.buttons = [{ label: "Sayfaya Git", url: link }];
   } else if (pathname.startsWith("/manga/")) {
@@ -43,19 +44,19 @@ presence.on("UpdateData", async () => {
     data.state = title;
     data.smallImageKey = "view";
   } else if (
-    pathname == "/mangalar" &&
-    document.location?.search?.substr(0, 7) == "?search"
+    pathname === "/mangalar" &&
+    document.location?.search?.substr(0, 7) === "?search"
   ) {
     const urlParams = new URLSearchParams(document.location.search),
       search = urlParams.get("search");
     data.details = "Arıyor:";
     data.state = search;
     data.smallImageKey = "search";
-  } else if (pathname == "/mangalar") data.details = "Mangaya Göz Atıyor";
+  } else if (pathname === "/mangalar") data.details = "Mangaya Göz Atıyor";
   else if (pathname.startsWith("/kategori")) {
     const ganre = document.querySelector(".page__title").textContent;
     data.details = "Mangaya Göz Atıyor";
-    data.state = "Tür: " + ganre;
+    data.state = `Tür: ${ganre}`;
   }
   presence.setActivity(data);
 });

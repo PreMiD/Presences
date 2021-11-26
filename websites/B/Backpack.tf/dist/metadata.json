@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Backpack.tf",
+  "author": {
+    "name": "a＠a",
+    "id": "405028899798384640"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/YtdujIW.png",
+  "thumbnail": "https://i.imgur.com/uQCICM4.png",
+  "version": "1.0.3",
+  "color": "#757575",
+  "tags": [
+    "steam",
+    "tf2",
+    "trading",
+    "price"
+  ],
+  "url": "backpack.tf",
+  "description": {
+    "en": "The PriMiD Presence for Backpack.tf! Backpack.tf is the main service to get the latest item prices related to the best war-themed hat simulator game, TF2!"
+  }
+}

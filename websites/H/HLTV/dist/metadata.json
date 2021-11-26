@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "De beste CS:GO website ter wereld, met nieuws, demo's, foto's, statistieken, on-site dekking en nog veel meer!"
   },
   "url": "www.hltv.org",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/ATYXE8g.png",
   "thumbnail": "https://i.imgur.com/xKUNEbz.png",
   "color": "#3e6ea0",

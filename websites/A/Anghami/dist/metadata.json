@@ -1,7 +1,8 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
-    "name": "ririxi",
-    "id": "192490421308489731"
+    "name": "PreMiD",
+    "id": "503557087041683458"
   },
   "service": "Anghami",
   "description": {
@@ -12,7 +13,7 @@
     "nl": "Alle muziek waar je van houdt, alle vrijheid die je nodig hebt. Arabisch en internationaal op één plek"
   },
   "url": "play.anghami.com",
-  "version": "1.2.11",
+  "version": "1.2.14",
   "logo": "https://i.imgur.com/hfJSnzq.png",
   "thumbnail": "https://i.imgur.com/61ks2yh.png",
   "color": "#d3369f",

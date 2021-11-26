@@ -18,28 +18,13 @@ const dizibox = new Presence({
     "/izleyeceklerim": "İzleyeceklerim",
     "/yorumlarim": "Yorumlarım",
     "/hesap-ayarlari": "Hesap Ayarları"
-  };
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const video: {
-  dataAvailable?: boolean;
-  currentTime?: number;
-  duration?: number;
-  paused?: boolean;
-} = {};
+  },
+  video: {
+    dataAvailable?: boolean;
+    currentTime?: number;
+    duration?: number;
+    paused?: boolean;
+  } = {};
 
 dizibox.on(
   "iFrameData",
@@ -66,8 +51,8 @@ dizibox.on("UpdateData", async () => {
   if (!_video && !isVideoData) {
     if (
       (page.includes("/diziler/") &&
-        document.location.pathname != "/diziler/") ||
-      (page.includes("/diziler") && document.location.pathname != "/diziler")
+        document.location.pathname !== "/diziler/") ||
+      (page.includes("/diziler") && document.location.pathname !== "/diziler")
     ) {
       const showName = document.querySelector(
         "#single-diziler > div.tv-overview.bg-dark > div.title-terms > h1 > a"
@@ -77,7 +62,7 @@ dizibox.on("UpdateData", async () => {
         largeImageKey: "db-logo",
         details: "Bir diziye göz atıyor:",
         state:
-          showName && showName.textContent != ""
+          showName && showName.textContent !== ""
             ? showName.textContent
             : "Belirsiz",
         startTimestamp: Math.floor(Date.now() / 1000)
@@ -127,7 +112,7 @@ dizibox.on("UpdateData", async () => {
         episode = document.querySelector(
           "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-episode"
         ),
-        timestamps = getTimestamps(
+        timestamps = dizibox.getTimestamps(
           Math.floor(_video.currentTime),
           Math.floor(_video.duration)
         ),
@@ -142,10 +127,9 @@ dizibox.on("UpdateData", async () => {
             : (await strings).play
         };
 
-      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-        data.startTimestamp = timestamps[0];
-        data.endTimestamp = timestamps[1];
-      }
+      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
+        [data.startTimestamp, data.endTimestamp] = timestamps;
+
       if (video.paused) {
         delete data.startTimestamp;
         delete data.endTimestamp;
@@ -166,7 +150,7 @@ dizibox.on("UpdateData", async () => {
         episode = document.querySelector(
           "#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-episode"
         ),
-        timestamps = getTimestamps(
+        timestamps = dizibox.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
@@ -181,10 +165,9 @@ dizibox.on("UpdateData", async () => {
             : (await strings).play
         };
 
-      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-        data.startTimestamp = timestamps[0];
-        data.endTimestamp = timestamps[1];
-      }
+      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
+        [data.startTimestamp, data.endTimestamp] = timestamps;
+
       if (video.paused) {
         delete data.startTimestamp;
         delete data.endTimestamp;

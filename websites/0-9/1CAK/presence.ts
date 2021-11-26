@@ -1,9 +1,9 @@
 const presence = new Presence({
-  clientId: "634332519398899724"
-});
-const presenceData: PresenceData = {
-  largeImageKey: "logo"
-};
+    clientId: "634332519398899724"
+  }),
+  presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
 
 presence.on("UpdateData", async () => {
   const startTimestamp: number = Date.now();
@@ -78,13 +78,11 @@ presence.on("UpdateData", async () => {
       .querySelector("#content > h3")
       .textContent.trim();
   } else if (document.location.pathname.slice(1).startsWith("saved")) {
-    if (!document.querySelector("#content > p")) {
+    if (!document.querySelector("#content > p"))
       presenceData.details = "My saved funs";
-    }
   } else if (document.location.pathname.slice(1).startsWith("voteof")) {
-    if (!document.querySelector("#content > p")) {
+    if (!document.querySelector("#content > p"))
       presenceData.details = "My funned funs";
-    }
   } else if (!isNaN(parseInt(document.location.pathname.slice(1)))) {
     const author = document
       .querySelector(
@@ -92,9 +90,9 @@ presence.on("UpdateData", async () => {
       )
       .textContent.trim();
     presenceData.details = `Viewing ${author}'s fun`;
-  } else if (document.location.pathname.slice(1).startsWith("legendary")) {
+  } else if (document.location.pathname.slice(1).startsWith("legendary"))
     presenceData.details = "Viewing the most legendary fun";
-  } else if (document.location.pathname.slice(1).startsWith("search")) {
+  else if (document.location.pathname.slice(1).startsWith("search")) {
     const query = document.location.pathname.slice(
       10,
       document.location.pathname.length

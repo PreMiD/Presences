@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "qwerty142",
     "id": "455167347464863746"
@@ -12,8 +13,8 @@
     "www.honeygain.com",
     "dashboard.honeygain.com"
   ],
-  "version": "1.1.6",
-  "logo": "https://i.imgur.com/fjaT2cF.jpg",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/GUMs8VF.png",
   "thumbnail": "https://i.imgur.com/pThjE43.png",
   "color": "#fad63a",
   "tags": [

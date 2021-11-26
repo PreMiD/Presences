@@ -1,19 +1,9 @@
 /* Global variables */
 const presence = new Presence({
-  clientId: "650569876993343529"
-});
-var profile: any, title: any;
-var browsingStamp = Math.floor(Date.now() / 1000);
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
-function PMD_error(message): void {
-  console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
-  );
-}
+    clientId: "650569876993343529"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let profile: HTMLElement, title: HTMLElement;
 
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
@@ -25,11 +15,11 @@ presence.on("UpdateData", async () => {
     /* Home Page */
     if (
       document.location.pathname.includes("index.php") ||
-      document.location.pathname == "/"
+      document.location.pathname === "/"
     ) {
       profile = document.querySelector("#panel strong");
       presenceData.details = "Viewing Homepage";
-      presenceData.state = "Logged in as " + profile.innerText;
+      presenceData.state = `Logged in as ${profile.innerText}`;
       presenceData.smallImageKey = "twemoji-house-1024x";
     } else if (document.location.pathname.includes("showthread.php")) {
       /* Viewing Thread*/
@@ -40,7 +30,7 @@ presence.on("UpdateData", async () => {
 
       /* User is replying to thread using quick-reply box. */
       const textarea = document.querySelector("form #message");
-      if (textarea != null && textarea == document.activeElement) {
+      if (textarea !== null && textarea === document.activeElement) {
         presenceData.details = "Replying to Thread:";
         presenceData.state = title.innerText;
         presenceData.smallImageKey = "twemoji-memo-1024x";
@@ -66,22 +56,22 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Profile:";
       presenceData.state = profile.innerText;
       presenceData.smallImageKey = "twemoji-spy-1024x";
-    } else if (document.location.pathname == "/siterules.php") {
+    } else if (document.location.pathname === "/siterules.php") {
       /* Viewing rules page */
       presenceData.details = "Viewing Rules";
       delete presenceData.state;
       presenceData.smallImageKey = "twemoji-paper-1024x";
-    } else if (document.location.pathname == "/usercp.php") {
+    } else if (document.location.pathname === "/usercp.php") {
       /* Editing settings */
       profile = document.querySelector("#panel strong");
       presenceData.details = "User Control Panel";
-      presenceData.state = "Logged in as " + profile.innerText;
+      presenceData.state = `Logged in as ${profile.innerText}`;
       presenceData.smallImageKey = "twemoji-cog-1024x";
     } else if (document.location.pathname.includes("search.php")) {
       /* Searching */
       profile = document.querySelector("#panel strong");
       presenceData.details = "Searching site";
-      presenceData.state = "Logged in as " + profile.innerText;
+      presenceData.state = `Logged in as ${profile.innerText}`;
     } else if (document.location.pathname.includes("pages.php")) {
       /* Other page fallback */
       const page = document.URL.substring(document.URL.indexOf(".php") + 10);
@@ -91,11 +81,9 @@ presence.on("UpdateData", async () => {
     }
   }
   /* Unknown site location */
-  if (presenceData.details == null) {
-    PMD_error("Unable to determine location.");
+  if (!presenceData.details) {
+    presence.error("Unable to determine location.");
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

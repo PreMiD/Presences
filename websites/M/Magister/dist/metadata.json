@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "QkeleQ10",
     "id": "807917674477649943"
@@ -10,7 +10,7 @@
     "en": "Magister 6 is a popular student information system in the Netherlands.",
     "nl": "Magister 6 is een populair leerlingvolgsysteem in Nederland."
   },
-  "version": "1.0.3",
+  "version": "1.0.6",
   "service": "Magister",
   "logo": "https://i.imgur.com/jk4XMSO.png",
   "thumbnail": "https://i.imgur.com/TVjDmC4.png",

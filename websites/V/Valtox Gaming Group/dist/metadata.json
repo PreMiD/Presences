@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,7 +11,7 @@
     "ga_IE": "Is Pobal Cearrbhachais é Grúpa Cearrbhachais Valtox a chruthaíonn eispéireas nua."
   },
   "url": "valtoxgaminggroup.com",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/N9hqBPt.png",
   "thumbnail": "https://i.imgur.com/voX96Tr.png",
   "color": "#ff0000",

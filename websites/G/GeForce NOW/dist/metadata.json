@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "AsyncSenpai",
+    "id": "93973697643155456"
+  },
+  "service": "GeForce NOW",
+  "description": {
+    "en": "GeForce Now is the brand used by Nvidia for its cloud gaming service."
+  },
+  "url": "play.geforcenow.com",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/a1L2Mi2.png",
+  "thumbnail": "https://i.imgur.com/JCyb4zk.png",
+  "color": "#76B918",
+  "tags": [
+    "gaming",
+    "streaming"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
+}

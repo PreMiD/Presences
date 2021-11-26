@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Timeraa",
     "id": "223238938716798978"
@@ -17,13 +18,27 @@
     "ga_IE": "Seirbhís nua ceoil le halbaim oifigiúla, singles, físeáin, remixes, léirithe beo agus go leor eile do Android, iOS agus deasc. Tá sé ar fad anseo."
   },
   "url": "music.youtube.com",
-  "version": "2.5.11",
-  "logo": "https://i.imgur.com/cIZnPDy.png",
+  "version": "2.6.2",
+  "logo": "https://i.imgur.com/31gvH2b.png",
   "thumbnail": "https://i.imgur.com/iQ8MA50.png",
   "color": "#E40813",
   "tags": [
     "audio",
     "music"
   ],
-  "category": "music"
+  "category": "music",
+  "settings": [
+    {
+      "id": "time",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }

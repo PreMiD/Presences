@@ -39,10 +39,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = usuarioNome.innerText.slice(11);
   }
 
-  if (path == "/") {
-    if (pesquisatexto == null) {
-      presenceData.details = "Página inicial";
-    } else {
+  if (path === "/") {
+    if (pesquisatexto === null) presenceData.details = "Página inicial";
+    else {
       presenceData.details = "Pesquisando";
       presenceData.state = pesquisatexto.value;
     }
@@ -52,20 +51,18 @@ presence.on("UpdateData", async () => {
       title.innerText.indexOf("Mark") - 2
     )}`;
 
-    if (filtroprojetos !== null) {
+    if (filtroprojetos !== null)
       presenceData.state = `Filtro: ${filtroprojetos.innerText}`;
-    } else {
-      presenceData.state = "Filtro: Nenhum";
-    }
+    else presenceData.state = "Filtro: Nenhum";
   } else if (path.includes("/manga/")) {
     const opcoes = {
-      0: function () {
+      0() {
         presenceData.state = `${title.innerText.slice(
           title.innerText.indexOf("- Capítulo") + 2,
           title.innerText.indexOf("- Mark") - 1
         )}`;
       },
-      1: function () {
+      1() {
         presenceData.state = `${title.innerText.slice(
           title.innerText.indexOf("- Capítulo") + 2,
           title.innerText.indexOf("- Mark") - 1
@@ -74,27 +71,28 @@ presence.on("UpdateData", async () => {
     };
 
     if (
-      (tituloobra != null && !tituloobra.textContent.includes("Privado:")) ||
+      (tituloobra !== null && !tituloobra.textContent.includes("Privado:")) ||
       !title.innerText.includes("Privado:")
     ) {
-      if (path.split("/").length - 1 != 3) {
+      if (path.split("/").length - 1 !== 3) {
         presenceData.details = title.innerText.slice(
           0,
           title.innerText.indexOf("- Capítulo") - 1
         );
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-expect-error
         opcoes[selecaoLeitura.selectedIndex]();
       } else {
         presenceData.details = tituloobra.textContent;
         presenceData.state = `${tipoobra.textContent} | ${primeirogeneroobra.textContent}`;
       }
     }
-  } else if (path.includes("/mangas/")) {
+  } else if (path.includes("/mangas/"))
     presenceData.details = "Todos os projetos";
-  } else if (path.includes("/meu-perfil/")) {
+  else if (path.includes("/meu-perfil/")) {
     presenceData.details = "Meu perfil";
     presenceData.state = paginaLogin.innerText;
-  } else {
-    presenceData.details = "Navegando...";
-  }
+  } else presenceData.details = "Navegando...";
+
   presence.setActivity(presenceData);
 });

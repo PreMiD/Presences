@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "AtCoder",
   "author": {
     "name": "Palskie",
@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/sljarC4.png",
   "thumbnail": "https://i.imgur.com/zuvLy06.png",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "color": "#101010",
   "tags": [
     "coding",

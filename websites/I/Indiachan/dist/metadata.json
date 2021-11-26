@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Indiachan",
+  "author": {
+    "name": "natto",
+    "id": "874685117891739749"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/caelFBx.png",
+  "thumbnail": "https://i.imgur.com/EBTNFKT.png",
+  "version": "1.0.5",
+  "color": "#ef8e00",
+  "tags": [
+    "imageboard",
+    "anime",
+    "manga",
+    "politics",
+    "sports",
+    "discussions",
+    "forum",
+    "community"
+  ],
+  "url": [
+    "indiachan.com",
+    "www.indiachan.com",
+    "pajeet.top"
+  ],
+  "description": {
+    "hi_IN": "इंडियाचैन एक साधारण इमेजबोर्ड है जहां कोई भी किसी भी विषय के बारे में टिप्पणियां एवं चित्रों की सहायता से संवाद कर सकता है। आपको पोस्ट करने के लिए पंजीकरण करने की आवश्यकता नहीं है। इंडियाचैन विज्ञापनों या ट्रैकिंग का उपयोग नहीं करता है।",
+    "en": "Indiachan is a simple imageboard where anyone can post comments and share images about any topic. You do not need to register to post. Indiachan does not use ads or tracking. "
+  }
+}

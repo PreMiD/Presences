@@ -14,41 +14,40 @@ presence.on("UpdateData", async () => {
 
   if (player) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details =
-      "Listening to " + title.textContent + " by " + artist.textContent;
-    presenceData.state = "Presented by " + dj.innerText;
+    presenceData.details = `Listening to ${title.textContent} by ${artist.textContent}`;
+    presenceData.state = `Presented by ${dj.innerText}`;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Recently Played";
     presenceData.smallImageKey = "reading";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/request") {
+  } else if (document.location.pathname === "/request") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Typing";
     presenceData.state = "A Request";
     presenceData.smallImageKey = "reading";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/timetable") {
+  } else if (document.location.pathname === "/timetable") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Timetable";
     presenceData.smallImageKey = "reading";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/team") {
+  } else if (document.location.pathname === "/team") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Team Page";
     presenceData.smallImageKey = "reading";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/apply") {
+  } else if (document.location.pathname === "/apply") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Apply to become a presenter";
     presenceData.smallImageKey = "reading";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/contact-us") {
+  } else if (document.location.pathname === "/contact-us") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Contact Page";

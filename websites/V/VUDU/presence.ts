@@ -4,34 +4,30 @@ const presence = new Presence({
 });
 
 // Global variables
-let startTime = Date.now();
-
-let videoPlayer;
-let videoDuration;
-let cuTime;
-
-let endTime;
-let videoState = "paused"; // Default
-
-let metadata;
-
-// Set the default presence data for when the video is loading
-let presenceData: PresenceData = {
-  largeImageKey:
-    "vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-  details: "Browsing VUDU"
-};
+let startTime = Date.now(),
+  videoPlayer: HTMLVideoElement,
+  videoDuration: number,
+  cuTime: number,
+  endTime: number,
+  videoState = "paused", // Default
+  metadata: string,
+  // Set the default presence data for when the video is loading
+  presenceData: PresenceData = {
+    largeImageKey:
+      "vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
+    details: "Browsing VUDU"
+  };
 
 // Get the title
 function grabMetadata(): void {
   // Get the close button first (Don't worry this will make sense)
-  var closeButton = document.querySelector('[aria-label="Close"]');
+  const closeButton = document.querySelector('[aria-label="Close"]');
 
   // If there's not a close button, then the user isn't watching anything
   if (!closeButton) return;
 
   // Get the parent
-  var metaParent = closeButton.parentElement;
+  const metaParent = closeButton.parentElement;
 
   // Get all the elements inside of the parent that are span (there should only be one) and get the innerHTML
   metadata = metaParent.getElementsByTagName("span")[0].innerHTML;
@@ -40,14 +36,17 @@ function grabMetadata(): void {
 // Get the video player element
 function getVideoPlayer(): void {
   // VUDU plays movies in an iFrame. Cool! Let's get that iFrame
-  var VUDUIFrame: any = document.getElementById("contentPlayerFrame");
-
-  // Now let's get the content INSIDE of that.
-  var VUDUIFrameContent =
-    VUDUIFrame.contentDocument || VUDUIFrame.contentWindow.document;
+  const VUDUIFrame = document.getElementById(
+      "contentPlayerFrame"
+    ) as HTMLIFrameElement,
+    // Now let's get the content INSIDE of that.
+    VUDUIFrameContent =
+      VUDUIFrame.contentDocument || VUDUIFrame.contentWindow.document;
 
   // Finally... get the video
-  videoPlayer = VUDUIFrameContent.getElementById("videoPlayer");
+  videoPlayer = VUDUIFrameContent.getElementById(
+    "videoPlayer"
+  ) as HTMLVideoElement;
 
   videoDuration = videoPlayer.duration; // duration of movie in seconds
 
@@ -76,26 +75,22 @@ setInterval(getVideoPlayer, 1000); // If I was dumb enough to run this every fra
 presence.on("UpdateData", () => {
   // Video doesn't exist, and there's no metadata either.
   // Aka, user isn't watching anything.
-  if (videoPlayer != null && metadata != undefined) {
+  if (videoPlayer !== null && metadata) {
     // When the video pauses
     if (videoPlayer.paused) {
       // Only run this once
-      if (videoState != "paused") {
-        pausePresence();
-      }
+      if (videoState !== "paused") pausePresence();
 
       // Discord says "hey nice pause"
       presenceData = {
         largeImageKey:
           "vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-        details: "Watching " + metadata, //The upper section of the presence text
+        details: `Watching ${metadata}`, //The upper section of the presence text
         state: "Paused"
       };
     } else {
       // Only run this once
-      if (videoState != "playing") {
-        calculateEndTime();
-      }
+      if (videoState !== "playing") calculateEndTime();
 
       // Set presence to movie data
       presenceData = {
@@ -104,7 +99,7 @@ presence.on("UpdateData", () => {
         smallImageKey:
           "vudusmall" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
         smallImageText: "Watching movies", //The text which is displayed when hovering over the small image
-        details: "Watching " + metadata, //The upper section of the presence text
+        details: `Watching ${metadata}`, //The upper section of the presence text
         startTimestamp: startTime, //The unix epoch timestamp for when to start counting from
         endTimestamp: endTime //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
       };

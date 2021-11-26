@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.1",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
@@ -14,7 +14,7 @@
     "nl": "Wikibooks heeft tot doel een verzameling gratis bronnen voor e-boeken op te bouwen, waaronder tekstboeken, geannoteerde teksten, instructiehandleidingen en handleidingen."
   },
   "url": "wikibooks.org",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/Y6Z6NKa.png",
   "thumbnail": "https://i.imgur.com/zhJBMJe.png",
   "color": "#f9f9f9",

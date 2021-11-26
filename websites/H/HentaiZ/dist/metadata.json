@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Kinue",
     "id": "634246091293851649"
@@ -13,7 +14,7 @@
     "hentaiz.net",
     "www.hentaiz.net"
   ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/685u3IG.png",
   "thumbnail": "https://i.imgur.com/3XfELvO.png",
   "color": "#1f1f1f",

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Arda",
     "id": "403225819222245377"
@@ -13,8 +14,8 @@
     "nl": "Teknobuk is een technologieblog, net als Webtekno ve ShiftDelete.Net."
   },
   "service": "Teknobuk",
-  "version": "1.2.7",
-  "logo": "https://i.imgur.com/MwXwxFr.png",
+  "version": "1.2.10",
+  "logo": "https://i.imgur.com/QK47Q4Y.png",
   "thumbnail": "https://i.imgur.com/CngdOQf.png",
   "color": "#FABD1B",
   "tags": [

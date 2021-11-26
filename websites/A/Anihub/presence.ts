@@ -1,21 +1,16 @@
 const presence = new Presence({
   clientId: "715045665796915250"
 });
-function MediaTimestamps(mediaTimes: number, mediaDuration: number): number[] {
-  const startTime = Math.floor(Date.now() / 1000);
-  const endTime = Math.floor(startTime - mediaTimes + mediaDuration);
-  return [startTime, endTime];
-}
 function NotFound(): boolean {
   const q = document.querySelector("#content>div>div>h1");
-  if (window.location.pathname == "/404") return true;
-  else if (q) if (q.textContent == "Página não encontrada!") return true;
+  if (window.location.pathname === "/404") return true;
+  else if (q) if (q.textContent === "Página não encontrada!") return true;
   return false;
 }
 enum PathNames {
   watch = "/videos",
   profile = "/perfil",
-  anime_info = "/anime",
+  animeInfo = "/anime",
   social = "/postagens",
   forum = "/forum",
   history = "/minha-lista",
@@ -43,7 +38,7 @@ enum SettingsId {
   /* PathNames.social */
   showSocial = "showSocial",
   showSocialTitle = "showSocialTitle",
-  /* PathNames.anime_info */
+  /* PathNames.animeInfo */
   showAnime = "showAnime",
   showAnimeReview = "showAnimeReview",
   showAnimeTrailer = "showAnimeTrailer",
@@ -76,7 +71,7 @@ presence.on("UpdateData", async () => {
     pathName = window.location.pathname,
     video = document.querySelector("video");
   function DefaultPresence(): void {
-    if (data.details == null) {
+    if (!data.details) {
       presence.setTrayTitle();
       presence.setActivity();
     } else presence.setActivity(data);
@@ -86,35 +81,34 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showVideos)) &&
     !NotFound()
   ) {
-    const value = ["...", "..."];
-    const animeNameEP = document.querySelector("#main>article>h1");
-    const comment = document.querySelector("textarea");
-    const report = document.querySelector("div.modal-header>h1");
-    const genders = document.querySelectorAll("div.autofill>span")[1];
+    const value = ["...", "..."],
+      animeNameEP = document.querySelector("#main>article>h1"),
+      comment = document.querySelector("textarea"),
+      report = document.querySelector("div.modal-header>h1"),
+      [, genders] = document.querySelectorAll("div.autofill>span");
     let timestamps: number[] = [];
     if (animeNameEP) {
       value[0] = animeNameEP.textContent.replace(
         animeNameEP.textContent.match(/ - \d+/g).slice(-1)[0],
         ""
       );
-      value[1] = animeNameEP.textContent
+      [value[1]] = animeNameEP.textContent
         .match(/ - \d+/g)
         .slice(-1)[0]
-        .match(/\d+/g)[0];
+        .match(/\d+/g);
     }
     if (video && !isNaN(video.duration)) {
-      timestamps = MediaTimestamps(video.currentTime, video.duration);
+      timestamps = presence.getTimestamps(video.currentTime, video.duration);
       if (await presence.getSetting(SettingsId.showVideosLTime)) {
         if (!video.paused && video.readyState >= 1) {
-          data.startTimestamp = timestamps[0];
-          data.endTimestamp = timestamps[1];
+          [data.startTimestamp, data.endTimestamp] = timestamps;
           data.smallImageKey = ResourceNames.play;
         } else if (video.readyState >= 1)
           data.smallImageKey = ResourceNames.pause;
       }
     } else if (await presence.getSetting(SettingsId.showVideosLTime))
       data.smallImageKey = ResourceNames.stop;
-    data.details = value[0];
+    [data.details] = value;
     data.state = `Episódio ${value[1]}`;
     if (genders && !genders.textContent.toLowerCase().includes("carregando"))
       data.smallImageText = genders.textContent;
@@ -147,13 +141,13 @@ presence.on("UpdateData", async () => {
       !(await presence.getSetting(SettingsId.showVideosEpisode))
     ) {
       data.details = "Assistindo Anime:";
-      data.state = value[0];
+      [data.state] = value;
     }
     if (
       (await presence.getSetting(SettingsId.showVideosLTime)) &&
       video &&
       !isNaN(video.duration) &&
-      timestamps[0] == timestamps[1]
+      timestamps[0] === timestamps[1]
     ) {
       data.details = data.details.replace(/^/, "✔ ");
       data.smallImageKey = ResourceNames.stop;
@@ -163,19 +157,17 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showProfile)) &&
     !NotFound()
   ) {
-    const title = ["Visualizando Perfil", "..."];
-    const username = document.querySelector("h1>b>font");
-    const selected = document.querySelector(
-      "#main > div.black.flexContent.subNav.p1 > a.btn.router-link-active"
-    );
-    const selfUsername = document.querySelector(
-      "#menu-links>ul>li>div>div>li>a"
-    );
+    const title = ["Visualizando Perfil", "..."],
+      username = document.querySelector("h1>b>font"),
+      selected = document.querySelector(
+        "#main > div.black.flexContent.subNav.p1 > a.btn.router-link-active"
+      ),
+      selfUsername = document.querySelector("#menu-links>ul>li>div>div>li>a");
     if (
       pathName.startsWith(PathNames.profile) &&
       pathName.includes("/editar") &&
       selfUsername &&
-      username.textContent.toLowerCase() ==
+      username.textContent.toLowerCase() ===
         selfUsername.getAttribute("href").split("/").slice(-1)[0].toLowerCase()
     )
       title[0] = "Editando Perfil";
@@ -185,8 +177,7 @@ presence.on("UpdateData", async () => {
       (await presence.getSetting(SettingsId.showProfileSelection))
     )
       title[0] += ` - ${selected.childNodes[1].textContent.trim()}`;
-    data.details = title[0];
-    data.state = title[1];
+    [data.details, data.state] = title;
     if (!(await presence.getSetting(SettingsId.showProfileUsername))) {
       delete data.state;
       data.details = title[0].replace(":", "");
@@ -196,12 +187,12 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showForum)) &&
     !NotFound()
   ) {
-    const Thread = document.getElementsByClassName("thread")[0];
-    const ThreadTitle = document
-      .querySelector("head>title")
-      .textContent.replace(" - Tópico", "");
-    const NonThread = document.querySelector("#main>article>div>h1>b");
-    if (pathName.split("/").join("") == PathNames.forum.split("/").join("")) {
+    const [Thread] = document.getElementsByClassName("thread"),
+      ThreadTitle = document
+        .querySelector("head>title")
+        .textContent.replace(" - Tópico", ""),
+      NonThread = document.querySelector("#main>article>div>h1>b");
+    if (pathName.split("/").join("") === PathNames.forum.split("/").join("")) {
       data.details = "Fórum";
       if (await presence.getSetting(SettingsId.showForumCategory)) {
         data.state = "Categorias";
@@ -214,9 +205,9 @@ presence.on("UpdateData", async () => {
           }`
         : "Fórum";
       const ThreadAuthor = document.querySelector(
-        "div.flexContent.thread>div>div>a"
-      ).textContent;
-      const textarea = document.querySelector("div.chill.fill");
+          "div.flexContent.thread>div>div>a"
+        ).textContent,
+        textarea = document.querySelector("div.chill.fill");
       if (await presence.getSetting(SettingsId.showForumTitle)) {
         data.state = `${ThreadAuthor}: ${ThreadTitle}`;
         data.smallImageKey = ResourceNames.reading;
@@ -245,13 +236,14 @@ presence.on("UpdateData", async () => {
       data.details = "Fórum";
       if (await presence.getSetting(SettingsId.showForumNewTopic)) {
         data.details += " - [Novo Tópico]";
-        const category = document.querySelector("select");
-        const selectedCategory =
-          category.options[category.selectedIndex].textContent;
-        if (await presence.getSetting(SettingsId.showForumCategory))
+        const category = document.querySelector("select"),
+          selectedCategory =
+            category.options[category.selectedIndex].textContent;
+        if (await presence.getSetting(SettingsId.showForumCategory)) {
           data.state = `Categoria: ${
             isNaN(parseInt(selectedCategory)) ? selectedCategory : "..."
           }`;
+        }
         data.smallImageKey = ResourceNames.writing;
       }
     }
@@ -274,16 +266,14 @@ presence.on("UpdateData", async () => {
     }
     data.smallImageKey = ResourceNames.reading;
   } else if (
-    pathName.startsWith(PathNames.anime_info) &&
-    !pathName.startsWith(PathNames.anime_info + "s") &&
+    pathName.startsWith(PathNames.animeInfo) &&
+    !pathName.startsWith(`${PathNames.animeInfo}s`) &&
     (await presence.getSetting(SettingsId.showAnime)) &&
     !NotFound()
   ) {
-    const animeName = document.querySelector("h1>b");
-    const modal = document.querySelector("div.modal-header>h1");
-    const selected = document.querySelector(
-      "a.p1.din.router-link-exact-active"
-    );
+    const animeName = document.querySelector("h1>b"),
+      modal = document.querySelector("div.modal-header>h1"),
+      selected = document.querySelector("a.p1.din.router-link-exact-active");
     document.querySelectorAll("div.aniinfos>span").forEach((item) => {
       if (item.previousElementSibling.textContent.includes("Gêneros")) {
         data.smallImageKey = ResourceNames.search;
@@ -292,21 +282,24 @@ presence.on("UpdateData", async () => {
     });
 
     if (await presence.getSetting(SettingsId.showAnimeReview)) {
-      if (modal && modal.textContent.toLowerCase().includes("resenha"))
+      if (modal && modal.textContent.toLowerCase().includes("resenha")) {
         selected && (await presence.getSetting(SettingsId.showAnimeSelection))
           ? (data.details = `Criando Resenha - ${selected.textContent}:`)
-          : (data.details = `Criando Resenha:`);
+          : (data.details = "Criando Resenha:");
+      }
     }
     if (await presence.getSetting(SettingsId.showAnimeTrailer)) {
-      if (modal && modal.textContent.toLowerCase().includes("trailer"))
+      if (modal && modal.textContent.toLowerCase().includes("trailer")) {
         selected && (await presence.getSetting(SettingsId.showAnimeSelection))
           ? (data.details = `Assistindo Trailer - ${selected.textContent}:`)
-          : (data.details = `Assistindo Trailer:`);
+          : (data.details = "Assistindo Trailer:");
+      }
     }
-    if (!data.details)
+    if (!data.details) {
       selected && (await presence.getSetting(SettingsId.showAnimeSelection))
         ? (data.details = `Visualizando Anime - ${selected.textContent}:`)
-        : (data.details = `Visualizando Anime:`);
+        : (data.details = "Visualizando Anime:");
+    }
     if (await presence.getSetting(SettingsId.showAnimeName))
       data.state = animeName ? animeName.textContent : "...";
     else {
@@ -317,8 +310,8 @@ presence.on("UpdateData", async () => {
     pathName.startsWith(PathNames.room) &&
     (await presence.getSetting(SettingsId.showRoom))
   ) {
-    const usersCount = document.querySelector("#main>article>div>div>b");
-    const animeNameEP = document.querySelector("#main>article>h1");
+    const usersCount = document.querySelector("#main>article>div>div>b"),
+      animeNameEP = document.querySelector("#main>article>h1");
     let timestamps: number[] = [];
     const value = ["...", "..."];
     if (animeNameEP) {
@@ -326,24 +319,24 @@ presence.on("UpdateData", async () => {
         animeNameEP.textContent.match(/ - \d+/g).slice(-1)[0],
         ""
       );
-      value[1] = animeNameEP.textContent
+      [value[1]] = animeNameEP.textContent
         .match(/ - \d+/g)
         .slice(-1)[0]
-        .match(/\d+/g)[0];
+        .match(/\d+/g);
     }
     data.details = !(await presence.getSetting(SettingsId.showRoomName))
       ? "Assistindo em Grupo:"
       : value[0];
     data.state = `Episódio ${value[1]}`;
     data.smallImageKey = ResourceNames.group;
-    if (usersCount && (await presence.getSetting(SettingsId.showRoomUsers)))
+    if (usersCount && (await presence.getSetting(SettingsId.showRoomUsers))) {
       data.smallImageText =
-        usersCount.textContent.split(" ")[0] == "1"
+        usersCount.textContent.split(" ")[0] === "1"
           ? "Assistindo sozinho(a)"
           : `Assistindo com ${
               parseInt(usersCount.textContent.split(" ")[0]) - 1
             } usuário(s)`;
-    else if (
+    } else if (
       !(await presence.getSetting(SettingsId.showRoomUsers)) &&
       (await presence.getSetting(SettingsId.showRoomName))
     )
@@ -353,11 +346,9 @@ presence.on("UpdateData", async () => {
       !isNaN(video.duration) &&
       (await presence.getSetting(SettingsId.showRoomLTime))
     ) {
-      timestamps = MediaTimestamps(video.currentTime, video.duration);
-      if (!video.paused && video.readyState >= 1) {
-        data.startTimestamp = timestamps[0];
-        data.endTimestamp = timestamps[1];
-      }
+      timestamps = presence.getTimestamps(video.currentTime, video.duration);
+      if (!video.paused && video.readyState >= 1)
+        [data.startTimestamp, data.endTimestamp] = timestamps;
     }
     if (!(await presence.getSetting(SettingsId.showRoomEpisode)))
       delete data.state;
@@ -371,28 +362,26 @@ presence.on("UpdateData", async () => {
   } else if (!NotFound()) {
     try {
       const pathsAndStrings = [
-        "/login=Logando",
-        "/registro=Registrando...",
-        "/changelogs=Changelogs",
-        "/loja=Loja",
-        "/caixa-da-sorte",
-        "/politica=Políticas do Site",
-        "/equipe-membros=Membros da Equipe",
-        "/conquistas=Lista de Conquistas",
-        "/animes=Lista de Animes"
-      ];
-      const customPaths: string = await presence.getSetting("customPaths");
-      const pathsFromCustom = eval(
-        `[${customPaths.toLowerCase().replace(/[\s\n]+/g, "")}]`
-      );
+          "/login=Logando",
+          "/registro=Registrando...",
+          "/changelogs=Changelogs",
+          "/loja=Loja",
+          "/caixa-da-sorte",
+          "/politica=Políticas do Site",
+          "/equipe-membros=Membros da Equipe",
+          "/conquistas=Lista de Conquistas",
+          "/animes=Lista de Animes"
+        ],
+        customPaths: string = await presence.getSetting("customPaths"),
+        pathsFromCustom = [customPaths.toLowerCase().replace(/[\s\n]+/g, "")];
       pathsAndStrings.forEach((item: string) => {
         const splitItem = item.split("=");
         if (
           pathName.startsWith(splitItem[0]) &&
-          pathsFromCustom.indexOf(splitItem[0]) != -1
+          pathsFromCustom.indexOf(splitItem[0]) !== -1
         )
-          data.details = splitItem[1];
-        if (pathName == "/" && pathsFromCustom.indexOf("/") != -1)
+          [, data.details] = splitItem;
+        if (pathName === "/" && pathsFromCustom.indexOf("/") !== -1)
           data.details = "Início";
       });
     } finally {

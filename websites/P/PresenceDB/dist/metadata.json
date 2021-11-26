@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "vasc",
+    "id": "346977366569910274"
+  },
+  "service": "PresenceDB",
+  "description": {
+    "en": "Tracks and saves the playtime of your Discord activities.",
+    "de": "Verfolgt und speichert die Spielzeit Ihrer Discord Aktivitäten."
+  },
+  "url": [
+    "www.presencedb.com",
+    "preview.presencedb.com"
+  ],
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/6SyDAmT.png",
+  "thumbnail": "https://i.imgur.com/P20KlQh.png",
+  "color": "#fff",
+  "tags": [
+    "presencedb",
+    "database"
+  ],
+  "category": "other",
+  "regExp": "(www|preview)[.]presencedb[.]com[/]",
+  "settings": [
+    {
+      "id": "lang",
+      "title": "Language",
+      "icon": "fas fa-language",
+      "value": 0,
+      "values": [
+        "English",
+        "German"
+      ]
+    }
+  ]
+}
