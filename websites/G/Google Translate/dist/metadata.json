@@ -12,6 +12,10 @@
     {
       "name": "Striker",
       "id": "215509157837537280"
+    },
+    {
+      "name": "Vasilis",
+      "id": "241929388403195914"
     }
   ],
   "service": "Google Translate",
@@ -22,7 +26,7 @@
   },
   "url": "translate.google.com",
   "regExp": "translate.google([.][a-z]+)+[/]",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "logo": "https://i.imgur.com/TblAuvW.png",
   "thumbnail": "https://i.imgur.com/HSrkJq0.png",
   "color": "#4c8bf5",

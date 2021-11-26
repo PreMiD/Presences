@@ -4,6 +4,8 @@ const presence = new Presence({
 
 function languageCode(language: string): string {
   switch (language) {
+    case "auto":
+      return "Auto Detect";
     case "ar":
       return "Arabic";
     case "af":
@@ -26,7 +28,7 @@ function languageCode(language: string): string {
       return "Bosnian";
     case "bg":
       return "Bulgarian";
-    case "cl":
+    case "ca":
       return "Catalan";
     case "ceb":
       return "Cebuano";
@@ -166,6 +168,8 @@ function languageCode(language: string): string {
       return "Serbian";
     case "st":
       return "Sesotho";
+    case "sn":
+      return "Shona";
     case "sd":
       return "Sindhi";
     case "si":
@@ -226,7 +230,7 @@ function languageCode(language: string): string {
 }
 
 const browsingStamp: number = Math.floor(Date.now() / 1000);
-let type: string, from: string, to: string, typet: string;
+let type: string, from: string, to: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -234,14 +238,22 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.search.includes("sl=")) {
-    [, , , type] = document.location.search.split("&");
-    from = document.location.search.split("&")[0].replace("?sl=", "");
-    to = document.location.search.split("&")[1].replace("tl=", "");
-    if (type.replace("op=", "") === "translate") typet = "Text";
-
-    if (type.replace("op=", "") === "docs") typet = "Documents";
+    from = document.location.search
+      .split("&")[
+        document.location.search.split("&").findIndex((v) => v.includes("sl="))
+      ].replace("sl=", "");
+    to = document.location.search
+      .split("&")[
+        document.location.search.split("&").findIndex((v) => v.includes("tl="))
+      ].replace("tl=", "");
+    type = document.location.search
+      .split("&")[
+        document.location.search.split("&").findIndex((v) => v.includes("op="))
+      ].replace("op=", "");
+    if (type === "docs") type = "Documents";
+    if (type === "translate") type = "Text";
   } else {
-    typet = "Text";
+    type = "Text";
     from = "Detecting";
     to = "Choosing...";
   }
@@ -254,7 +266,7 @@ presence.on("UpdateData", async () => {
   const showType: boolean = await presence.getSetting("type");
 
   if (showType) {
-    presenceData.details = `Translating: ${typet}`;
+    presenceData.details = `Translating: ${type}`;
     presenceData.state = `From: ${languageCode(from)} - To: ${languageCode(
       to
     )}`;
