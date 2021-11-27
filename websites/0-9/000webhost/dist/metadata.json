@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/FiCZfzh.png",
   "thumbnail": "https://i.imgur.com/coiMeKE.jpg",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "color": "#ff5c62",
   "tags": [
     "000webhost",
@@ -18,10 +18,8 @@
     "free-web-hosting",
     "free"
   ],
-  "url": [
-    "www.000webhost.com",
-    "000webhost.com"
-  ],
+  "regExp": "([a-z0-9-]+[.])*000webhost[.]com[\\/]",
+  "url": ["www.000webhost.com", "000webhost.com"],
   "settings": [
     {
       "id": "buttons",
