@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     lang = path.pathname.substring(1, 6),
     presenceData: PresenceData = {
       largeImageKey: "index",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (path.hostname === "home.trueid.net")
