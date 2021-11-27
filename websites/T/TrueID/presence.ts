@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "912784051801301053"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("timestamps"),
