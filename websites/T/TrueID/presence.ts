@@ -161,6 +161,6 @@ presence.on("UpdateData", async () => {
     delete presenceData.state;
     delete presenceData.buttons;
   }
-  if (!presenceData.details) presence.setActivity();
-  else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
