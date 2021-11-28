@@ -41,6 +41,6 @@ presence.on("UpdateData", async () => {
       "#truyen > div.csstransforms3d > div > div.col-xs-12.col-info-desc > div.col-xs-12.col-sm-8.col-md-8.desc > h3"
     ).textContent;
   }
-  if (!presenceData.details) presence.setActivity();
-  else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
