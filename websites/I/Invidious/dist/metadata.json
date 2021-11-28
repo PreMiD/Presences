@@ -9,13 +9,17 @@
     "en": "Invidious is an alternative front-end to YouTube.",
     "de": "Invidious ist eine alternative Oberfläche für YouTube.",
     "nl": "Invidious is een alternatieve front-end voor YouTube."
+    "fr": "Invidious est une alternative front-end à YouTube."
   },
   "url": [
     "iteroni.com",
     "invidious.fdn.fr",
     "invidious.snopyta.org",
     "vid.mint.lgbt",
-    "yewtu.be"
+    "yewtu.be", 
+    "yt.artemislena.com",
+    "invidio.xamh.de",
+    "invidious.namazso.eu"
   ],
   "version": "1.0.8",
   "logo": "https://i.imgur.com/Cfm6lRV.png",
