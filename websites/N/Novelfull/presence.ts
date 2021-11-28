@@ -2,16 +2,14 @@ const presence = new Presence({
     clientId: "914175371744800779"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
     },
-    page = window.location.pathname;
-
-  presenceData.startTimestamp = browsingStamp;
-  search = document.querySelector("#search-input");
+    page = window.location.pathname,
+    search: HTMLInputElement = document.querySelector("#search-input");
   if (search.value !== "") {
     presenceData.details = "Searching for:";
     presenceData.state = search.value;
@@ -26,7 +24,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "#chapter > div > div > h2 > a > span"
     ).textContent;
-    presenceData.startTimestamp;
   } else if (page.includes("latest-release-novel"))
     presenceData.details = "Latest Releases";
   else if (page.includes("hot-novel")) presenceData.details = "Hot Novels";
@@ -43,7 +40,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "#truyen > div.csstransforms3d > div > div.col-xs-12.col-info-desc > div.col-xs-12.col-sm-8.col-md-8.desc > h3"
     ).textContent;
-    presenceData.startTimestamp;
   }
   if (!presenceData.details) presence.setActivity();
   else presence.setActivity(presenceData);
