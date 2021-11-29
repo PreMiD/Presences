@@ -57,6 +57,8 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname === "/" || !document.location.pathname)
     presenceData.details = "Home";
+  else if (document.location.pathname.startsWith("/login"))
+    presenceData.details = "Logging in";
   else if (document.location.pathname.startsWith("/settings"))
     presenceData.details = "Settings";
   else if (
