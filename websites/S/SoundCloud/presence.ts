@@ -126,19 +126,25 @@ presence.on("UpdateData", async () => {
       ".playbackSoundBadge__titleLink > span:nth-child(2)"
     );
     data.state = getElement(".playbackSoundBadge__lightLink");
-    const timer = [
-        presence.timestampFromFormat(
-          document.querySelector(
-            "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__timePassed > span:nth-child(2)"
-          ).textContent
-        ),
-        presence.timestampFromFormat(
-          document.querySelector(
-            "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__duration > span:nth-child(2)"
-          ).textContent
-        )
+    const timePassed = document.querySelector(
+        "div.playbackTimeline__timePassed > span:nth-child(2)"
+      ).textContent,
+      durationString = document.querySelector(
+        "div.playbackTimeline__duration > span:nth-child(2)"
+      ).textContent,
+      [currentTime, duration] = [
+        presence.timestampFromFormat(timePassed),
+        (() => {
+          if (!durationString.startsWith("-"))
+            return presence.timestampFromFormat(durationString);
+          else {
+            return (
+              presence.timestampFromFormat(durationString.slice(1)) +
+              presence.timestampFromFormat(timePassed)
+            );
+          }
+        })()
       ],
-      [currentTime, duration] = timer,
       [startTimestamp, endTimestamp] = presence.getTimestamps(
         currentTime,
         duration
