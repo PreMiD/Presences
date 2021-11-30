@@ -28,21 +28,21 @@ presence.on("UpdateData", async () => {
         .querySelectorAll('[data-testid="player-status-stopped"]')
         ? true
         : false;
-      if (playCheck) {
-        title = document.querySelector("#playerTitle").textContent;
-        author = document.querySelector("#playerSubtitle").textContent;
+      title = document.querySelector("#playerTitle").textContent;
+      author = document.querySelector("#playerSubtitle").textContent;
 
-        presenceData.details = title;
-        if (title.length > 128)
-          presenceData.details = `${title.substring(0, 125)}...`;
+      presenceData.details = title;
+      if (title.length > 128)
+        presenceData.details = `${title.substring(0, 125)}...`;
 
-        presenceData.state = author;
-        if (author.length > 128)
-          presenceData.state = `${author.substring(0, 125)}...`;
+      presenceData.state = author;
+      if (author.length > 128)
+        presenceData.state = `${author.substring(0, 125)}...`;
 
-        presenceData.smallImageKey = "live";
-        presenceData.smallImageText = (await strings).live;
-      }
+      presenceData.smallImageKey = playCheck ? "live" : "pause";
+      presenceData.smallImageText = playCheck
+        ? (await strings).live
+        : (await strings).pause;
     } else {
       title = document.querySelector("#playerTitle").textContent;
       author = document.querySelector("#playerSubtitle").textContent;
