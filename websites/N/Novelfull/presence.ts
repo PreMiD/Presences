@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     page = window.location.pathname,
     search: HTMLInputElement = document.querySelector("#search-input");
