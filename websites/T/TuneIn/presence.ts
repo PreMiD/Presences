@@ -23,9 +23,9 @@ presence.on("UpdateData", async () => {
     const liveCheck = document.querySelector("#scrubberElapsed");
     if (!liveCheck) return presence.setActivity();
     if (liveCheck.textContent === "LIVE") {
-      const playCheck = document
+      const pauseCheck = document
         .querySelector("#innerAppContent")
-        .querySelectorAll('[data-testid="player-status-stopped"]')
+        .querySelectorAll('[data-testid="player-status-stopped"]')[0]
         ? true
         : false;
       title = document.querySelector("#playerTitle").textContent;
@@ -39,10 +39,10 @@ presence.on("UpdateData", async () => {
       if (author.length > 128)
         presenceData.state = `${author.substring(0, 125)}...`;
 
-      presenceData.smallImageKey = playCheck ? "live" : "pause";
-      presenceData.smallImageText = playCheck
-        ? (await strings).live
-        : (await strings).pause;
+      presenceData.smallImageKey = pauseCheck ? "pause" : "live";
+      presenceData.smallImageText = pauseCheck
+        ? (await strings).pause
+        : (await strings).live;
     } else {
       title = document.querySelector("#playerTitle").textContent;
       author = document.querySelector("#playerSubtitle").textContent;
