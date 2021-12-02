@@ -27,7 +27,7 @@ function getTimestamps(
 presence.on("UpdateData", async () => {
   const player = document
     .querySelector(
-      "#__next > sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div.sc-jAaTju.bjlsCh > div.sc-gzVnrw.jgaZgQ > button.sc-jDwBTQ.frbSYQ > i"
+      "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div.sc-jAaTju.bjlsCh > div.sc-gzVnrw.jgaZgQ > button.sc-jDwBTQ.frbSYQ > i"
     )
     .getAttribute("class");
 
