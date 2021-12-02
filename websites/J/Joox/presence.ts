@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
       ).textContent,
       audioTime = document.querySelector("#currentTime").textContent,
       audioDuration = document.querySelector(
-        "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-EHOje.nuMkL > small.sc-gzVnrw sc-htoDjs.guSSOC"
+        "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-EHOje.nuMkL > small.sc-gzVnrw.sc-htoDjs.guSSOC"
       ).textContent,
       timestamps = getTimestamps(audioTime, audioDuration),
       data: PresenceData = {
