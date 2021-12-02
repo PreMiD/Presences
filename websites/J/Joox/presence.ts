@@ -34,10 +34,10 @@ presence.on("UpdateData", async () => {
   if (player) {
     const paused = player.includes("pause") === false,
       title = document.querySelector(
-        "#__next >  div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div > div.sc-kpOJdX.YCPsB > b > a"
+        "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div > div.sc-kpOJdX.YCPsB > b > a"
       ).textContent,
       author = document.querySelector(
-        "#__next >  div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div > div.sc-kpOJdX.YCPsB > span"
+        "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div > div.sc-kpOJdX.YCPsB > span"
       ).textContent,
       audioTime = document.querySelector("#currentTime").textContent,
       audioDuration = document.querySelector(
