@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Formula 1 TV",
+  "altnames": ["F1 TV"],
+  "author": {
+    "name": "AnOmniMoose",
+    "id": "180867904135233536"
+  },
+  "category": "other",
+  "logo": "https://play-lh.googleusercontent.com/t4hEPJzQKCk0ediMjy5fpveGeWQiE16yEmVusA3_znrjfPqAY97Fcj1yppXD8SYGmp0=s180-rw",
+  "thumbnail": "https://racer.com/wp-content/uploads/sites/85/2021/03/3-Pit-Lane-Channel-pic.jpeg",
+  "version": "1.0.0",
+  "color": "#e10600",
+  "tags": [
+    "formula1",
+    "racing",
+    "driving"
+  ],
+  "url": "f1tv.formula1.com",
+  "description": {
+    "en": "Watch F1 live & on demand. Every F1 race live and on demand. With exclusive access to on-board cameras, team radio and live timing."
+  }
+}
