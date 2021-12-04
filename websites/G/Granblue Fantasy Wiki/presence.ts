@@ -11,10 +11,39 @@ presence.on("UpdateData", () => {
   
   if (document.location.pathname === "/Main_Page")
     presenceData.details = "Viewing Wiki home page";
-  else if (document.querySelector(".firstHeading") !== null) {
-    presenceData.details = "Viewing page:";
+  else if (document.querySelector("#wpLoginAttempt"))
+    presenceData.details = "Logging in";
+  else if (document.querySelector("#wpCreateaccount"))
+    presenceData.details = "Creating an account";
+  else if (document.location.pathname === "/Collection_Tracker")
+    presenceData.details = "Making a collection tracker";
+  else if (document.querySelector(".searchresults")) {
+    presenceData.details = "Searching for:";
+    presenceData.state = (
+      document.querySelector("input[type=search]")as HTMLInputElement
+      ).value;
+    }
+  else if (document.location.href.indexOf ("Special:Preferences") > -1) {
+    presenceData.details = "Editing preferences";
+  }
+  else if (document.location.href.indexOf ("Special:Watchlist") > -1) {
+    presenceData.details = "Viewing watchlist";
+  }
+  else if (document.location.href.indexOf ("Special:Contributions") > -1) {
+    presenceData.details = "Looking up contributions";
+  }
+  else if (document.location.href.indexOf("history") > -1) {
+    presenceData.details = "Viewing revision history of:";
     presenceData.state = document.querySelector(".firstHeading").textContent;
   }
-
+  else if (document.location.href.indexOf("edit") > -1) {
+    presenceData.details = "Editing:";
+    presenceData.state = document.querySelector(".firstHeading").textContent;
+  }
+  else if (document.querySelector(".firstHeading") !== null) {
+    presenceData.details = "Viewing page:"; 
+    presenceData.state = document.querySelector(".firstHeading").textContent;
+  }
+  
   presence.setActivity(presenceData);
 });
