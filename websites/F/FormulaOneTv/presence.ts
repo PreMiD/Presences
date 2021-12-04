@@ -23,26 +23,21 @@ const presenceData: PresenceData = {
 };
 
 async function setWatchingVideoActivity() {
-  const videoContainer = document.querySelector(".player-container.main"),
-    titleText = videoContainer.querySelector(
-      ".bmpui-label-metadata-title"
-    )?.textContent;
+  const titleText = document.querySelector(".media-body h5")?.textContent;
   presenceData.details = titleText
     ? `Watching ${titleText}`
     : "Watching a race";
 
   // Video is playing
-  if (
-    videoContainer.querySelector(".bmpui-ui-playbacktogglebutton")
-      ?.ariaPressed === "true"
-  ) {
+  const playButton = document.querySelector(".bmpui-ui-playbacktogglebutton");
+  if (playButton?.ariaPressed === "true") {
     delete presenceData.state;
 
     presenceData.startTimestamp = getEpochInMs();
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = (await strings).play;
 
-    const [currentTime, videoLength] = videoContainer
+    const [currentTime, videoLength] = document
       .querySelector(".bmpui-container-wrapper")
       .getElementsByClassName("bmpui-ui-playbacktimelabel");
 
