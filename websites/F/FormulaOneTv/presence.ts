@@ -42,8 +42,8 @@ async function setWatchingVideoActivity() {
       .getElementsByClassName("bmpui-ui-playbacktimelabel");
 
     if (videoLength && currentTime) {
-      const lengthInMs = parseTimeToMilliseconds(videoLength?.textContent),
-        currentTimeInMs = parseTimeToMilliseconds(currentTime?.textContent);
+      const lengthInMs = parseTimeToMilliseconds(videoLength.textContent),
+        currentTimeInMs = parseTimeToMilliseconds(currentTime.textContent);
 
       presenceData.endTimestamp = getEpochInMs() + lengthInMs - currentTimeInMs;
     }
