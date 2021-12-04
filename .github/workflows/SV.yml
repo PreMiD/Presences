@@ -22,11 +22,7 @@ jobs:
         uses: actions/setup-node@v2.4.1
         with:
           node-version: 16
-      - name: Restore CI Cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
+          cache: "yarn"
       - name: Prep SV
         run: yarn
       - name: Find Changed Files (direct push)

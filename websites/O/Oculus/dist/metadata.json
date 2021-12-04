@@ -5,25 +5,33 @@
     "name": "Bjarne",
     "id": "357553061155307523"
   },
+  "contributors": [
+    {
+      "name": "N0chteil ^^",
+      "id": "495901098926669825"
+    }
+  ],
   "category": "games",
   "logo": "https://i.imgur.com/jzoFzDA.jpg",
   "thumbnail": "https://i.imgur.com/E2oERhP.png",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "color": "#ffffff",
   "tags": [
     "games",
     "vr",
     "gaming",
     "quest",
-    "rift"
+    "rift",
+    "meta"
   ],
   "url": [
     "www.oculus.com",
-    "support.oculus.com"
+    "support.oculus.com",
+    "secure.oculus.com"
   ],
   "description": {
-    "en": "Oculus is a brand of Facebook that produces virtual reality headsets.",
-    "de": "Oculus ist eine Marke von Facebook, die Virtual-Reality-Headsets herstellt."
+    "en": "Oculus is a brand of Meta that produces virtual reality headsets.",
+    "de": "Oculus ist eine Marke von Meta, die Virtual-Reality-Headsets herstellt."
   },
   "settings": [
     {
@@ -36,6 +44,12 @@
       "id": "timestamp",
       "title": "Show Timestamp",
       "icon": "fas fa-clock",
+      "value": true
+    },
+    {
+      "id": "shop_total",
+      "title": "Show shop total",
+      "icon": "fas fa-shopping-cart",
       "value": true
     }
   ]
