@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "vyrnball"
   };
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   
   if (document.location.pathname === "/Main_Page")
     presenceData.details = "Viewing Wiki home page";
