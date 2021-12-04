@@ -13,7 +13,7 @@ function parseTimeToMilliseconds(length: string): number {
   const [seconds, minutes, hours] = length
     .split(":")
     .reverse()
-    .map((val) => parseInt(val));
+    .map((val) => parseInt(val, 10));
 
   return seconds + (minutes || 0) * 60 + (hours || 0) * 3600;
 }
