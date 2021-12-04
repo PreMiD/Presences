@@ -106,10 +106,4 @@ presence.on("UpdateData", async () => {
   }
   if (data.details && data.state)
     presence.setActivity(data);
-  else 
-    presence.setActivity({
-      largeImageKey: "animesuge",
-      state: "aba",
-      details: "oba"
-    })
 });
