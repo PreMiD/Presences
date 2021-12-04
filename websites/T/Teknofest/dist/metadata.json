@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Pxsty",
+    "id": "571041849326698496"
+  },
+  "url": "teknofest.org",
+  "description": {
+    "tr": "Teknofest",
+    "en":"Teknofest"
+  },
+  "service": "Teknofest",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/JLWpgQR.png",
+  "thumbnail": "https://i.imgur.com/JLWpgQR.png",
+  "color": "#3b1b8a",
+  "tags": [
+    "teknofest",
+    "t3vakfı"
+  ],
+  "category": "other"
+}
