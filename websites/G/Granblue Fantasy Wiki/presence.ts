@@ -41,7 +41,7 @@ presence.on("UpdateData", () => {
     presenceData.state = document.querySelector(".firstHeading").textContent;
   }
   else if (document.querySelector(".firstHeading") !== null) {
-    presenceData.details = "Viewing page:"; 
+    presenceData.details = "Viewing page:";
     presenceData.state = document.querySelector(".firstHeading").textContent;
   }
   
