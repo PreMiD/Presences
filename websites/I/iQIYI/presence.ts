@@ -59,8 +59,9 @@ presence.on("UpdateData", async () => {
   ) {
     const data = {
         title: (
-          document.querySelector("h1 a") || document.querySelector("title")
-        )?.textContent,
+          document.querySelector("h1 > a > span > span") ||
+          document.querySelector("title")
+        )?.textContent?.trim(),
         ep: (
           document.querySelector("h1") ||
           document.querySelector(".topice-source-list-item.item-active")

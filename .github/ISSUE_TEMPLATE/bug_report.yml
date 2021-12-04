@@ -31,7 +31,7 @@ body:
     attributes:
       label: Expected Behavior
       description: Describe what was expected to happen
-  - type: input
+  - type: textarea
     validations:
       required: false
     attributes:
