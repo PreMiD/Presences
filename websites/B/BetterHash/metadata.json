@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Rhys19",
+    "id": "675080159736365097"
+  },
+  "service": "BetterHash",
+  "description": {
+    "en": "BetterHash is a cryptocurrency miner. It uses the power of your PC to validate cryptocurrency transfers. You may think of it like a virtual notary. Depending on your CPU and video adapter performance, you can earn hundreds of dollars each month."
+  },
+  "url": "www.betterhash.net",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/6HRdHAj.png",
+  "thumbnail": "https://i.imgur.com/6HRdHAj.png",
+  "color": "#1751f0",
+  "tags": [
+    "coin",
+    "currency",
+    "miner"
+  ],
+  "category": "other"
+}
