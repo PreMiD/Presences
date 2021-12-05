@@ -6,9 +6,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "vyrnball"
+    largeImageKey: "vyrnball",
+    startTimestamp: browsingTimestamp
   };
-  presenceData.startTimestamp = browsingTimestamp;
   
   if (document.location.pathname === "/Main_Page")
     presenceData.details = "Viewing Wiki home page";
