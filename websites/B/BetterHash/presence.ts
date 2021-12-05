@@ -11,7 +11,7 @@ const presence = new Presence({
     const presenceData: PresenceData = {
     largeImageKey: "betterhash_1024x1024",
     startTimestamp: time
-  }; 
+  };
 
   if (document.location.pathname === "/" || !document.location.pathname)
    presenceData.details = "Browsing...";
