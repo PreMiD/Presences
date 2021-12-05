@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Rhys19",
+    "id": "675080159736365097"
+  },
+  "service": "nicehash",
+  "description": {
+    "en": "Nicehash is a crypto currency miner & a hashpower marketplace!"
+  },
+  "url": "www.nicehash.com",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/HwIp8xr.png",
+  "thumbnail": "https://i.imgur.com/HwIp8xr.png",
+  "color": "#1751f0",
+  "tags": [
+    "coin",
+    "currency"
+  ],
+  "category": "other"
+}
