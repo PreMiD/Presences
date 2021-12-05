@@ -41,7 +41,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Editing:";
     presenceData.state = document.querySelector(".firstHeading").textContent;
   }
-  else if (document.querySelector(".firstHeading") !== null) {
+  else if (document.querySelector(".firstHeading")) {
     presenceData.details = "Viewing page:";
     presenceData.state = document.querySelector(".firstHeading").textContent;
   }
