@@ -5,7 +5,7 @@ const presence = new Presence({
       play: "presence.playback.playing",
       pause: "presence.playback.paused"
     }),
-  time = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
   presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
