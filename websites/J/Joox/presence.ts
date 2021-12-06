@@ -2,48 +2,30 @@ const presence = new Presence({
   clientId: "715116675346989096"
 });
 
-function getTime(list: string[]): number {
-  let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--)
-    ret += parseInt(list[index]) * 60 ** index;
-
-  return ret;
-}
-
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const splitAudioTime = audioTime.split(":").reverse(),
-    splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioTime = getTime(splitAudioTime),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
-  const player = document
-    .querySelector(
-      "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div.sc-jAaTju.bjlsCh > button.sc-jDwBTQ.frbSYQ > i"
+  const player = Array.from(document.querySelectorAll("i")).find((x) =>
+    ["playerIcon playerIcon--play", "playerIcon playerIcon--pause"].includes(
+      x.className
     )
-    .getAttribute("class");
+  );
 
   if (player) {
-    const paused = player.includes("pause") === false,
-      title = document.querySelector(
-        "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div > div.sc-kpOJdX.YCPsB > b > a"
-      ).textContent,
-      author = document.querySelector(
-        "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-htpNat.XpRxm > div > div.sc-kpOJdX.YCPsB > span"
-      ).textContent,
+    const paused = player.className.includes("pause") === false,
+      currentSong = Array.from(document.querySelectorAll("div")).find(
+        (x) =>
+          x.children.length === 2 &&
+          x.children[0].tagName === "B" &&
+          x.children[1].tagName === "SPAN"
+      ),
+      title = currentSong.children[0].textContent,
+      author = currentSong.children[1].textContent,
       audioTime = document.querySelector("#currentTime").textContent,
-      audioDuration = document.querySelector(
-        "#__next > div.sc-kgoBCf.bxQECy > div.sc-kGXeez.gsplsd > div.sc-EHOje.nuMkL > small.sc-gzVnrw.sc-htoDjs.guSSOC"
-      ).textContent,
-      timestamps = getTimestamps(audioTime, audioDuration),
+      audioDuration =
+        document.querySelector("#currentTime").nextSibling.textContent,
+      timestamps = presence.getTimestamps(
+        presence.timestampFromFormat(audioTime),
+        presence.timestampFromFormat(audioDuration)
+      ),
       data: PresenceData = {
         details: title,
         state: author,
