@@ -10,7 +10,7 @@ const presence = new Presence({
   presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
     largeImageKey: "betterhash_1024x1024",
-    startTimestamp: time
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/" || !document.location.pathname)
