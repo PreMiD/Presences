@@ -18,11 +18,7 @@ function parseTimeToMilliseconds(length: string): number {
   return seconds + (minutes || 0) * 60 + (hours || 0) * 3600;
 }
 
-const presenceData: PresenceData = {
-  largeImageKey: "logo_512"
-};
-
-async function setWatchingVideoActivity() {
+async function setWatchingVideoActivity(presenceData: PresenceData) {
   const titleText = document.querySelector(".media-body h5")?.textContent;
   presenceData.details = titleText
     ? `Watching ${titleText}`
@@ -57,7 +53,7 @@ async function setWatchingVideoActivity() {
   }
 }
 
-async function setBrowsingActivity() {
+async function setBrowsingActivity(presenceData: PresenceData) {
   delete presenceData.state;
   delete presenceData.endTimestamp;
 
@@ -68,11 +64,15 @@ async function setBrowsingActivity() {
 }
 
 presence.on("UpdateData", async () => {
+  let presenceData: PresenceData = {
+    largeImageKey: "logo_512"
+  };
+
   // Watching video
   if (document.location.href.includes("detail"))
-    await setWatchingVideoActivity();
+    await setWatchingVideoActivity(presenceData);
   // Browsing
-  else await setBrowsingActivity();
+  else await setBrowsingActivity(presenceData);
 
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
