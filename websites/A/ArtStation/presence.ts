@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingTimestamp
   };
 
-  if (document.location.pathname === "/messages")
+  if (document.location.pathname.startsWith("/messages"))
     presenceData.details = "Checking inbox";
   // (not functional)
     // else if (document.querySelector("user-profile")) {
