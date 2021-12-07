@@ -80,7 +80,7 @@ const updateData = () => {
         // update this global variable
         // if the page has fully loaded
         // with video player element
-        if (player && !pageLoaded) pageLoaded = true;
+        if (!!player && !pageLoaded) pageLoaded = true;
     }
     else pageLoaded = true;
 }
