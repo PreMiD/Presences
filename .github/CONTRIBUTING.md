@@ -253,7 +253,7 @@ Here is a list of rules you must follow when writing your `presence.ts` file:
 
 In some situations, presences may behave unexpectedly or could use some minor changes to improve their functionality. Here is a list of rules that you **must** follow while modifiying presences.
 
-- If the presence author hasn't made the required changes within a month, you may contact a reviewer to see if you can to modify the presence.
+- If the presence author hasn't been contactable in over a month, you may contact a reviewer to see if you can modify the presence.
 - If you make modifications to a presence and change at least a **quarter** of the presence's codebase, you are allowed to add yourself as a contributor. Contact a reviewer for more information about this subject.
 - Anyone may create PRs to fix bugs. Do **not** change images if they are not outdated and are in specifications.
 
