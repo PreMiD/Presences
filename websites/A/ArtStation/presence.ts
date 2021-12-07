@@ -9,16 +9,21 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingTimestamp
   };
 
-  if (document.location.pathname.startsWith("/messages"))
+  if (document.location.pathname.startsWith("/messages")) {
     presenceData.details = "Checking inbox";
+    presenceData.smallImageKey = "inbox";
+    presenceData.smallImageText = "Checking inbox";
+  }
   // (not functional)
-    // else if (document.querySelector("user-profile")) {
+  // else if (document.querySelector("ArtistController")) {
     // presenceData.details = "Viewing a profile";
     // presenceData.state = document.querySelector('meta[property="og:title"]').getAttribute("content");
   // }
   else if (document.location.pathname.startsWith("/artwork")) {
     presenceData.details = "Viewing an artwork";
     presenceData.state = document.title;
+    presenceData.smallImageKey = "artwork";
+    presenceData.smallImageText = "Viewing artwork";
   }
   else if (document.location.pathname.startsWith("/marketplace"))
     presenceData.details = "Surfing the marketplace";
@@ -27,6 +32,8 @@ presence.on("UpdateData", () => {
   else if ((document.location.href.indexOf("/jobs") > -1)) {
     presenceData.details = "Viewing jobs";
     presenceData.state = document.querySelector('meta[property="og:title"]').getAttribute("content");
+    presenceData.smallImageKey = "searchjob";
+    presenceData.smallImageText = "Viewing jobs";
   }
   else if (document.location.pathname === "/blogs")
     presenceData.details = "Reading blogs";
@@ -44,39 +51,61 @@ presence.on("UpdateData", () => {
     presenceData.details = "Finding a podcast";
   else if (document.location.pathname === "/guides")
     presenceData.details = "Looking for guides";
-  else if (document.location.pathname === "/learning")
+  else if (document.location.pathname === "/learning") {
     presenceData.details = "Learning";
+    presenceData.smallImageKey = "learning";
+    presenceData.smallImageText = "Learning";
+  }
   else if (document.location.href.indexOf("courses") > -1) {
     presenceData.details = "Viewing a course";
     presenceData.state = document.title;
+    presenceData.smallImageKey = "learning";
+    presenceData.smallImageText = "Learning";
   }
   else if (document.location.href.indexOf("series") > -1) {
     presenceData.details = "Viewing a series";
     presenceData.state = document.title;
+    presenceData.smallImageKey = "learning";
+    presenceData.smallImageText = "Learning";
   }
   else if (document.location.href.indexOf("instructors") > -1) {
     presenceData.details = "Viewing an instructor";
     presenceData.state = document.title;
+    presenceData.smallImageKey = "learning";
+    presenceData.smallImageText = "Learning";
   }
   else if (document.location.href.indexOf("playlists") > -1) {
     presenceData.details = "Viewing a playlist";
     presenceData.state = document.title;
+    presenceData.smallImageKey = "learning";
+    presenceData.smallImageText = "Learning";
   }
   else if (document.location.href.indexOf("settings") > -1)
     presenceData.details = "Changing settings";
-  else if (document.location.href.indexOf("profile/edit") > -1)
+  else if (document.location.href.indexOf("profile/edit") > -1) {
     presenceData.details = "Editing profile";
-  else if (document.location.href.indexOf("project/new") > -1)
+    presenceData.smallImageKey = "editprofile";
+    presenceData.smallImageText = "Editing profile";
+  }
+  else if (document.location.href.indexOf("project/new") > -1) {
     presenceData.details = "Uploading an artwork";
+    presenceData.smallImageKey = "login";
+    presenceData.smallImageText = "Logging in";
+  }
   else if (document.location.hostname === "magazine.artstation.com") {
     presenceData.details = "Reading magazines";
     presenceData.state = document.title;
   }
-  else if (document.location.hostname == "www.artstation.com")
-    presenceData.details = "Exploring artworks"
+  else if (document.location.hostname == "www.artstation.com") {
+    presenceData.details = "Exploring artworks";
+    presenceData.smallImageKey = "artwork";
+    presenceData.smallImageText = "Exploring artworks";
+  }
   else {
     presenceData.details = "Viewing a portfolio of:";
     presenceData.state = document.querySelector('meta[property="og:site_name"]').getAttribute("content");
+    presenceData.smallImageKey = "portfolio";
+    presenceData.smallImageText = "Viewing portfolio";
   }
   presence.setActivity(presenceData);
 });
