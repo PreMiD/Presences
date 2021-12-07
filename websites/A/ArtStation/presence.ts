@@ -89,8 +89,8 @@ presence.on("UpdateData", () => {
   }
   else if (document.location.href.indexOf("project/new") > -1) {
     presenceData.details = "Uploading an artwork";
-    presenceData.smallImageKey = "login";
-    presenceData.smallImageText = "Logging in";
+    presenceData.smallImageKey = "upload";
+    presenceData.smallImageText = "Uploading artwork";
   }
   else if (document.location.hostname === "magazine.artstation.com") {
     presenceData.details = "Reading magazines";
