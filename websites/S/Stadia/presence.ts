@@ -10,7 +10,7 @@ let gameName: HTMLElement,
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
 
   if (document.location.pathname.includes("home")) {
