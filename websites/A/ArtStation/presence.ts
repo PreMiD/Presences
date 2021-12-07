@@ -68,8 +68,10 @@ presence.on("UpdateData", () => {
     presenceData.details = "Editing profile";
   else if (document.location.href.indexOf("project/new") > -1)
     presenceData.details = "Uploading an artwork";
-  else if (document.location.hostname === "magazine.artstation.com")
+  else if (document.location.hostname === "magazine.artstation.com") {
     presenceData.details = "Reading magazines";
+    presenceData.state = document.title;
+  }
   else if (document.location.hostname == "www.artstation.com")
     presenceData.details = "Exploring artworks"
   else {
