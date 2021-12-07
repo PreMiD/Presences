@@ -15,7 +15,11 @@
   "color": "#13AFF0",
   "tags": [
     "art",
-    "station"
+    "artwork",
+    "station",
+    "creative",
+    "community",
+    "professional"
    ],
   "category": "socials",
   "regExp": "([a-z0-9-_]+)[.]artstation[.]com"
