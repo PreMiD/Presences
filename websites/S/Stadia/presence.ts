@@ -10,10 +10,10 @@ let gameName: HTMLElement,
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingStamp,
   };
 
-  if (document.location.pathname === "/home") {
+  if (document.location.pathname.includes("home")) {
     presenceData.details = "Viewing Stadia Home";
     userName = document.querySelector("span.VY8blf.fSorq");
     presenceData.smallImageText = userName.innerText;
