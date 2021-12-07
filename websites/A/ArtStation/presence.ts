@@ -1,0 +1,80 @@
+const presence = new Presence({
+    clientId: "917417055458852865"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+
+presence.on("UpdateData", () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "artstation",
+    startTimestamp: browsingTimestamp
+  };
+
+  if (document.location.pathname === "/messages")
+    presenceData.details = "Checking inbox";
+  // (not functional)
+    // else if (document.querySelector("user-profile")) {
+    // presenceData.details = "Viewing a profile";
+    // presenceData.state = document.querySelector('meta[property="og:title"]').getAttribute("content");
+  // }
+  else if (document.location.pathname.startsWith("/artwork")) {
+    presenceData.details = "Viewing an artwork";
+    presenceData.state = document.title;
+  }
+  else if (document.location.pathname.startsWith("/marketplace"))
+    presenceData.details = "Surfing the marketplace";
+  else if (document.location.pathname.startsWith("/studios"))
+      presenceData.details = "Visiting studios";
+  else if ((document.location.href.indexOf("/jobs") > -1)) {
+    presenceData.details = "Viewing jobs";
+    presenceData.state = document.querySelector('meta[property="og:title"]').getAttribute("content");
+  }
+  else if (document.location.pathname === "/blogs")
+    presenceData.details = "Reading blogs";
+  else if (document.location.pathname.startsWith("/blogs")) {
+      presenceData.details = "Reading a blog";
+      presenceData.state = document.title;
+  }
+  else if (document.location.pathname === "/contests")
+    presenceData.details = "Looking for challenges";
+  else if (document.location.pathname.startsWith("/contests")) {
+      presenceData.details = "Viewing a challenge";
+      presenceData.state = document.title;
+  }
+  else if (document.location.pathname === "/podcast")
+    presenceData.details = "Finding a podcast";
+  else if (document.location.pathname === "/guides")
+    presenceData.details = "Looking for guides";
+  else if (document.location.pathname === "/learning")
+    presenceData.details = "Learning";
+  else if (document.location.href.indexOf("courses") > -1) {
+    presenceData.details = "Viewing a course";
+    presenceData.state = document.title;
+  }
+  else if (document.location.href.indexOf("series") > -1) {
+    presenceData.details = "Viewing a series";
+    presenceData.state = document.title;
+  }
+  else if (document.location.href.indexOf("instructors") > -1) {
+    presenceData.details = "Viewing an instructor";
+    presenceData.state = document.title;
+  }
+  else if (document.location.href.indexOf("playlists") > -1) {
+    presenceData.details = "Viewing a playlist";
+    presenceData.state = document.title;
+  }
+  else if (document.location.href.indexOf("settings") > -1)
+    presenceData.details = "Changing settings";
+  else if (document.location.href.indexOf("profile/edit") > -1)
+    presenceData.details = "Editing profile";
+  else if (document.location.href.indexOf("project/new") > -1)
+    presenceData.details = "Uploading an artwork";
+  else if (document.location.hostname === ("www.magazine.artstation.com"))
+    presenceData.details = "Reading magazines";
+  else if (document.location.hostname == "www.artstation.com")
+    presenceData.details = "Exploring artworks"
+  else {
+    presenceData.details = "Viewing a portfolio of:";
+    presenceData.state = document.querySelector('meta[property="og:site_name"]').getAttribute("content");
+  }
+  presence.setActivity(presenceData);
+});
