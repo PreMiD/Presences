@@ -24,6 +24,17 @@ presence.on("UpdateData", async () => {
       }
     ]
   }
+  else if (path === "/category") {
+    const categoryName = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
+    presenceData.details = "Смотрит категорию";
+    presenceData.state = categoryName;
+    presenceData.buttons = [
+      {
+        label: "Перейти в категорию",
+        url: document.URL
+      }
+    ]
+  }
   else if (path === "/search") {
     presenceData.details = "В поисках статьи";
   }
@@ -33,7 +44,7 @@ presence.on("UpdateData", async () => {
   else if (path === "/edit") {
     const pageTitle = document.querySelector("title").textContent;
     const articleTitle = pageTitle.slice(2, pageTitle.length - 12);
-    presenceData.details = `Редактирует статью`;
+    presenceData.details = "Редактирует статью";
     presenceData.state = articleTitle;
   }
   else if (path === "/portal") {
