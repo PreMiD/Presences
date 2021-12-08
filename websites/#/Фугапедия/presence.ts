@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 
   const path = document.location.pathname;
   if (path === "/") {
-    presenceData.details = "На главной странице"
+    presenceData.details = "На главной странице";
   }
   else if (path === "/view") {
     const articleTitle = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
@@ -61,6 +61,9 @@ presence.on("UpdateData", async () => {
       }
     ]
   }
+  else if (path === "/book-create") {
+    presenceData.details = "Создаёт книгу";
+  }
   else if (path === "/user") {
     const nickname = document.querySelector("p.text-2xl.text-black.font-medium.ml-4.place-self-center").firstChild.textContent;
     const name = document.querySelector("p.text-lg.text-gray-600.ml-4.place-self-center").textContent;
@@ -72,6 +75,30 @@ presence.on("UpdateData", async () => {
         url: document.URL
       }
     ]
+  }
+  else if (path === "/account") {
+    presenceData.details = "Редактирует свой аккаунт";
+  }
+  else if (path === "/sub") {
+    presenceData.details = "Собирается купить подписку";
+  }
+  else if (path === "/upload") {
+    presenceData.details = "Загружает изображение";
+  }
+  else if (path === "/api.php") {
+    presenceData.details = "Читает документацию API";
+  }
+  else if (path === "/privacypolicy") {
+    presenceData.details = "Читает политику";
+    presenceData.state = "конфиденциальности";
+  }
+  else if (path === "/termsofuse") {
+    presenceData.details = "Читает условия";
+    presenceData.state = "использования";
+  }
+  else if (path === "/ad") {
+    presenceData.details = "Читает условия";
+    presenceData.state = "размещения рекламы";
   }
   else {
     presenceData.details = "Что-то делает на Фугапедии";
