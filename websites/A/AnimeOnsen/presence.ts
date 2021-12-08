@@ -18,7 +18,7 @@ const presence = new Presence({
 
 // get basic information
 // such as current page
- page = window.location.pathname.split("/")[1],
+ [, page] = window.location.pathname.split("/"),
 
 // shorthand for querySelectorAll
  $ = (selectors: string) => document.querySelectorAll(selectors),
