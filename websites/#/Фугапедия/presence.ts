@@ -10,9 +10,7 @@ presence.on("UpdateData", async () => {
   }
 
   const path = document.location.pathname;
-  if (path === "/") {
-    presenceData.details = "На главной странице";
-  }
+  if (path === "/") presenceData.details = "На главной странице";
   else if (path === "/view") {
     const articleTitle = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
     presenceData.details = "Читает статью";
@@ -35,12 +33,8 @@ presence.on("UpdateData", async () => {
       }
     ]
   }
-  else if (path === "/search") {
-    presenceData.details = "В поисках статьи";
-  }
-  else if (path === "/create") {
-    presenceData.details = "Создаёт статью";
-  }
+  else if (path === "/search") presenceData.details = "В поисках статьи";
+  else if (path === "/create") presenceData.details = "Создаёт статью";
   else if (path === "/edit") {
     const pageTitle = document.querySelector("title").textContent;
     const articleTitle = pageTitle.slice(2, pageTitle.length - 12);
@@ -58,9 +52,7 @@ presence.on("UpdateData", async () => {
       }
     ]
   }
-  else if (path === "/books") {
-    presenceData.details = "В поисках книги";
-  }
+  else if (path === "/books") presenceData.details = "В поисках книги";
   else if (path === "/book") {
     const bookName = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
     presenceData.details = "Читает книгу";
@@ -72,9 +64,7 @@ presence.on("UpdateData", async () => {
       }
     ]
   }
-  else if (path === "/book-create") {
-    presenceData.details = "Создаёт книгу";
-  }
+  else if (path === "/book-create") presenceData.details = "Создаёт книгу";
   else if (path === "/user") {
     const nickname = document.querySelector("p.text-2xl.text-black.font-medium.ml-4.place-self-center").firstChild.textContent;
     const name = document.querySelector("p.text-lg.text-gray-600.ml-4.place-self-center").textContent;
@@ -86,18 +76,6 @@ presence.on("UpdateData", async () => {
         url: document.URL
       }
     ]
-  }
-  else if (path === "/account") {
-    presenceData.details = "Редактирует свой аккаунт";
-  }
-  else if (path === "/sub") {
-    presenceData.details = "Собирается купить подписку";
-  }
-  else if (path === "/upload") {
-    presenceData.details = "Загружает изображение";
-  }
-  else if (path === "/api.php") {
-    presenceData.details = "Читает документацию API";
   }
   else if (path === "/privacypolicy") {
     presenceData.details = "Читает политику";
@@ -111,9 +89,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Читает условия";
     presenceData.state = "размещения рекламы";
   }
-  else {
-    presenceData.details = "Что-то делает на Фугапедии";
-  }
+  else if (path === "/account") presenceData.details = "Редактирует свой аккаунт";
+  else if (path === "/sub") presenceData.details = "Собирается купить подписку";
+  else if (path === "/upload") presenceData.details = "Загружает изображение";
+  else if (path === "/api.php") presenceData.details = "Читает документацию API";
+  else presenceData.details = "Что-то делает на Фугапедии";
 
   presence.setActivity(presenceData);
 })
