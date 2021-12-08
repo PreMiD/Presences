@@ -19,14 +19,16 @@ function parseTimeToMilliseconds(length: string): number {
 }
 
 async function setWatchingVideoActivity(presenceData: PresenceData) {
-  const titleText = document.querySelector(".media-body h5")?.textContent;
-  presenceData.details = titleText
-    ? `Watching ${titleText}`
-    : "Watching a race";
+  // Get video title
+  presenceData.details = `Watching ${
+    document.querySelector(".media-body h5")?.textContent || "a race"
+  }`;
 
-  // Video is playing
-  const playButton = document.querySelector(".bmpui-ui-playbacktogglebutton");
-  if (playButton?.ariaPressed === "true") {
+  // Video is playing / play button is pressed
+  if (
+    document.querySelector(".bmpui-ui-playbacktogglebutton")?.ariaPressed ===
+    "true"
+  ) {
     delete presenceData.state;
 
     presenceData.startTimestamp = getEpochInMs();
@@ -64,7 +66,7 @@ async function setBrowsingActivity(presenceData: PresenceData) {
 }
 
 presence.on("UpdateData", async () => {
-  let presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo_512"
   };
 
