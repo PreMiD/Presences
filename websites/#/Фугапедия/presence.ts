@@ -1,16 +1,17 @@
 const presence = new Presence({
-  clientId: "917868456232230932"
-})
-const startTimestamp = Math.floor(Date.now() / 1000)
+    clientId: "917868456232230932"
+  }),
+  startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp
   }
-  const path = document.location.pathname
+
+  const path = document.location.pathname;
   if (path === "/view") {
-    const articleTitle = document.querySelector("p.text-4xl.font-bold.font-3").textContent
+    const articleTitle = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
     presenceData.details = `Читает статью: ${articleTitle}`,
     presenceData.buttons = [
       {
@@ -20,7 +21,7 @@ presence.on("UpdateData", async () => {
     ]
   }
   else if (path === "/user") {
-    const username = document.querySelector("p.text-2xl.text-black.font-medium.ml-4.place-self-center").firstChild.textContent
+    const username = document.querySelector("p.text-2xl.text-black.font-medium.ml-4.place-self-center").firstChild.textContent;
     presenceData.details = `Смотрит профиль: ${username}`,
     presenceData.buttons = [
       {
@@ -30,7 +31,7 @@ presence.on("UpdateData", async () => {
     ]
   }
   else {
-    presenceData.details = "Что-то делает на Фугапедии"
+    presenceData.details = "Что-то делает на Фугапедии";
   }
 
   presence.setActivity(presenceData);
