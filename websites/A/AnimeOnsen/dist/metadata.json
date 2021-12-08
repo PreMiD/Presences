@@ -20,6 +20,4 @@
     ],
     "category": "anime",
     "regExp": "(www.)?(animeonsen.xyz)",
-    "iframe": false,
-    "readLogs": false
 }
