@@ -31,7 +31,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Stadia Pro";
   else presenceData.details = "Can't read page";
 
-  if (!presenceData.details) {
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
