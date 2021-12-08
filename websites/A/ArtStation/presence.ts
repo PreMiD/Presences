@@ -14,11 +14,6 @@ presence.on("UpdateData", () => {
     presenceData.smallImageKey = "inbox";
     presenceData.smallImageText = "Checking inbox";
   }
-  // (not functional)
-  // else if (document.querySelector("ArtistController")) {
-    // presenceData.details = "Viewing a profile";
-    // presenceData.state = document.querySelector('meta[property="og:title"]').getAttribute("content");
-  // }
   else if (document.location.pathname.startsWith("/artwork")) {
     presenceData.details = "Viewing an artwork";
     presenceData.state = document.title;
