@@ -19,6 +19,7 @@ presence.on("UpdateData", () => {
     presenceData.state = document.title;
     presenceData.smallImageKey = "artwork";
     presenceData.smallImageText = "Viewing artwork";
+    presenceData.buttons = [{label: "View Artwork", url: document.location.href}];
   }
   else if (document.location.pathname.startsWith("/marketplace"))
     presenceData.details = "Surfing the marketplace";
