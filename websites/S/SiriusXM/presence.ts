@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 
   if (document.querySelector(".sxm-player-controls.no-select")) {
     const data = {
-      channel: document.querySelector(".channel-number")?.textContent,
+      channel: document.querySelector(".channel-name")?.textContent,
       track: document.querySelector(".track-name")?.textContent ?? "Loading",
       artist: document.querySelector(".artist-name")?.textContent ?? "Loading"
     };
