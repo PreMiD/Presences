@@ -9,9 +9,7 @@ const presence = new Presence({
     "/contact": "Reading the contacts",
     "/user/settings": "Changing the settings",
     "/user/watchlist": "Looking at their watchlist",
-    "/user/import": "Importing their MAL list to Animesuge!"
-  },
-  pagesSearching: { [k: string]: string } = {
+    "/user/import": "Importing their MAL list to Animesuge!",
     "/": "At the homepage",
     "/newest": "Searching for the newest animes",
     "/updated": "Searching for recently updated animes",
@@ -50,7 +48,7 @@ presence.on("UpdateData", async () => {
       document.location.search.substring(1)
     ),
     timestamps = presence.getTimestamps(currentTime, timeEnd);
-  if (page in pagesSearching) {
+  if (page in pages) {
     data.details = pages[page];
     data.state = "Searching animes";
   } else if (page.includes("/anime")) {
@@ -71,7 +69,7 @@ presence.on("UpdateData", async () => {
     data.buttons = [
       {
         label: "Watch Episode",
-        url: `http://animesuge.io${page}`
+        url: `http://animesuge.to${page}`
       }
     ];
   } else if (page.includes("/genre")) {
@@ -106,5 +104,6 @@ presence.on("UpdateData", async () => {
     data.details = "Looking at an unknown page";
     data.state = "Unknown";
   }
-  if (data.details && data.state) presence.setActivity(data);
+  if (data.details && data.state)
+    presence.setActivity(data);
 });
