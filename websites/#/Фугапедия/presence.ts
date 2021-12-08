@@ -41,6 +41,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Редактирует статью";
     presenceData.state = articleTitle;
   }
+  else if (path === "/history") {
+    const pageTitle = document.querySelector("title").textContent;
+    const articleTitle = pageTitle.slice(2, pageTitle.length - 12);
+    presenceData.details = "Смотрит историю статьи";
+    presenceData.state = articleTitle;
+  }
   else if (path === "/portal") {
     const portalName = document.querySelector("p.text-5xl.font-bold.text-black.place-self-center.ml-8").textContent;
     presenceData.details = "В портале";
