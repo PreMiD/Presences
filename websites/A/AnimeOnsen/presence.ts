@@ -13,8 +13,7 @@ interface PlayerData {
 
 // create new presence
 const presence = new Presence({
-    clientId: "826806766033174568",
-    appMode: true
+    clientId: "826806766033174568"
 }),
 
 // get basic information
@@ -150,5 +149,5 @@ presence.on("UpdateData", () => {
     }
 
     // update presence activity
-    presence.setActivity(presenceData, true);
+    presence.setActivity(presenceData);
 });

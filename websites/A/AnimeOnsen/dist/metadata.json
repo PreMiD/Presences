@@ -19,5 +19,5 @@
         "streaming"
     ],
     "category": "anime",
-    "regExp": "(www.)?(animeonsen.xyz)",
+    "regExp": "(www.)?(animeonsen.xyz)"
 }
