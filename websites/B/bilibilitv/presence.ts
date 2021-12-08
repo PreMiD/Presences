@@ -13,8 +13,13 @@ const presence = new Presence({
   },
 
   getEpisode = (query: string): string | undefined => {
-    episode = document.querySelector(query)?.textContent;
-    return episode.split("-E")[1]
+    if (episode != null) {
+      episode = document.querySelector(query)?.textContent;
+      return episode.split("-E")[1]
+    } else {
+      return undefined
+    }
+    
   };
 
 presence.on("UpdateData", async() => {
