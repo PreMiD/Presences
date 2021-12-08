@@ -9,7 +9,7 @@ const presence = new Presence({
   
     if ((await presence.getSetting("incognito")) === false) {
       presenceData.details = document.getElementById("premid").innerText;
-      if ((await presence.getSetting("showTimestamp")) === true) 
+      if ((await presence.getSetting("showTimestamp")) === true)
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     }
     if ((await presence.getSetting("buttons")) === true) {
