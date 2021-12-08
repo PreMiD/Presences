@@ -1,6 +1,3 @@
-let episode: string,
-    creator: string;
-
 const presence = new Presence({
     clientId: "543380687466528772"
   }),
@@ -13,8 +10,7 @@ const presence = new Presence({
   },
 
   getEpisode = (query: string): string | undefined => {
-    episode = document.querySelector(query)?.textContent;
-    return episode.split("-E")[1]
+    return document.querySelector(query)?.textContent.split("-E")[1];
   };
 
 presence.on("UpdateData", async() => {
@@ -36,7 +32,7 @@ presence.on("UpdateData", async() => {
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = "Watching a show";
     presenceData.details = getElement("h1.video-info__title");
-    presenceData.state = "Episode " + getEpisode("title");
+    presenceData.state = `Episode ${getEpisode("title")}`;
     presenceData.startTimestamp = browsingStamp;
     presenceData.buttons = [
         {
@@ -48,7 +44,7 @@ presence.on("UpdateData", async() => {
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = "Watching a video";
     presenceData.details = getElement("h1.video-info__title");
-    presenceData.state = "by " + getElement(".video-info__creator--nickname");
+    presenceData.state = `by ${getElement(".video-info__creator--nickname")}`;
     presenceData.startTimestamp = browsingStamp;
     presenceData.buttons = [
         {
@@ -58,7 +54,7 @@ presence.on("UpdateData", async() => {
       ];
   } else if (path.startsWith("/en/space")) {
     presenceData.smallImageText = "Viewing Space";
-    presenceData.details = "Viewing " + getElement("h1.user-title");
+    presenceData.details = `Viewing ${getElement("h1.user-title")}`;
     presenceData.state = getElement("p.user-data__number");
     presenceData.buttons = [
         {
@@ -81,7 +77,7 @@ presence.on("UpdateData", async() => {
   }
 
   // Studio
-  if (document.location.hostname == "studio.bilibili.tv") {
+  if (document.location.hostname === "studio.bilibili.tv") {
     if (path.startsWith("/archive/new")) {
         presenceData.details = "Uploading a video";
         presenceData.state = "Bilibili Studio";
@@ -91,10 +87,10 @@ presence.on("UpdateData", async() => {
     } else if (path.startsWith("/data-analysis")) {
         presenceData.details = "Checking analytics";
         presenceData.state = "Bilibili Studio";
-    }  else if (path.startsWith("/reply")) {
+    } else if (path.startsWith("/reply")) {
         presenceData.details = "Replying to comments";
         presenceData.state = "Bilibili Studio";
-    }  else {
+    } else {
         presenceData.details = "Viewing dashboard";
         presenceData.state = "Bilibili Studio";
     }
