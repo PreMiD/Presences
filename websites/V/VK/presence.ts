@@ -37,11 +37,12 @@ function getVKTrackTimePassed(duration: number) {
 
   let timePassed;
 
-  if (!playerDuration.startsWith("-"))
+  if (!playerDuration?.startsWith("-"))
     timePassed = presence.timestampFromFormat(playerDuration);
-  else
+  else {
     timePassed =
       duration - presence.timestampFromFormat(playerDuration.slice(1));
+  }
 
   return timePassed;
 }
