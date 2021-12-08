@@ -14,8 +14,7 @@ const presence = new Presence({
 
   getEpisode = (query: string): string | undefined => {
     episode = document.querySelector(query)?.textContent;
-    episode = episode.split("-E")[1]
-    return episode
+    return episode.split("-E")[1]
   };
 
 presence.on("UpdateData", async() => {
