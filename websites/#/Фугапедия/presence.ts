@@ -5,10 +5,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingTimestamp
-  },
-   path = document.location.pathname;
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
+    },
+    path = document.location.pathname;
+
   if (path === "/") presenceData.details = "На главной странице";
   else if (path === "/view") {
     const articleTitle = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
@@ -34,12 +35,12 @@ presence.on("UpdateData", () => {
   else if (path === "/create") presenceData.details = "Создаёт статью";
   else if (path === "/edit") {
     const pageTitle = document.querySelector("title").textContent,
-     articleTitle = pageTitle.slice(2, pageTitle.length - 12);
+      articleTitle = pageTitle.slice(2, pageTitle.length - 12);
     presenceData.details = "Редактирует статью";
     presenceData.state = articleTitle;
   } else if (path === "/history") {
     const pageTitle = document.querySelector("title").textContent,
-     articleTitle = pageTitle.slice(2, pageTitle.length - 12);
+      articleTitle = pageTitle.slice(2, pageTitle.length - 12);
     presenceData.details = "Смотрит историю статьи";
     presenceData.state = articleTitle;
   } else if (path === "/portal") {
@@ -66,7 +67,7 @@ presence.on("UpdateData", () => {
   } else if (path === "/book-create") presenceData.details = "Создаёт книгу";
   else if (path === "/user") {
     const nickname = document.querySelector("p.text-2xl.text-black.font-medium.ml-4.place-self-center").firstChild.textContent,
-     name = document.querySelector("p.text-lg.text-gray-600.ml-4.place-self-center").textContent;
+      name = document.querySelector("p.text-lg.text-gray-600.ml-4.place-self-center").textContent;
     presenceData.details = "Смотрит профиль";
     presenceData.state = `${nickname} (${name})`;
     presenceData.buttons = [
