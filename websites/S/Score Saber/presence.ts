@@ -129,9 +129,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "People read this?!";
   } else if (document.location.pathname.includes("/team"))
     presenceData.details = "Viewing ScoreSaber Team";
-  else if (document.location.pathname === "/") {
+  else if (document.location.pathname === "/")
     presenceData.details = "Viewing Homepage";
-  }
 
   if (!time) delete presenceData.startTimestamp;
 
