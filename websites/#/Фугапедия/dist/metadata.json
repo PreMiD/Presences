@@ -11,7 +11,10 @@
   "thumbnail": "https://i.imgur.com/ZRXkQlr.jpg",
   "version": "1.0.0",
   "color": "#ffffff",
-  "url": "fugapedia.xyz",
+  "url": [
+    "fugapedia.xyz",
+    "www.fugapedia.xyz"
+  ],
   "tags": [
     "russian",
     "minecraft",
