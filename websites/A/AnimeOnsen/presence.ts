@@ -1,4 +1,3 @@
-// typescript: interface
 interface PlayerData {
     time: {
         progress: number,
@@ -11,19 +10,11 @@ interface PlayerData {
     playbackState: string
 }
 
-// create new presence
 const presence = new Presence({
     clientId: "826806766033174568"
 }),
-
-// get basic information
-// such as current page
  [, page] = window.location.pathname.split("/"),
-
-// shorthand for querySelectorAll
  $ = (selectors: string) => document.querySelectorAll(selectors),
-
-// declare global variables
  initEpoch = Date.now(),
  rpaImage = {
     general: {
@@ -40,24 +31,15 @@ const presence = new Presence({
 let playerData: PlayerData,
  pageLoaded = false;
 
-// log to console
 presence.info("PreMiD extension has loaded");
 
-// buff function
 const updateData = () => {
     if (page === "watch") {
-        // get video player element
         const player = <HTMLVideoElement>$("video#ao-video")[0],
-
-        // get player metadata
          title = $('meta[name="ao-api-malsync-title"]')[0].getAttribute("value"),
          episode = Number($('meta[name="ao-api-malsync-episode"]')[0].getAttribute("value")),
-
-        // get video player element metadata
          { paused, currentTime: progress, duration } = player,
          snowflake = presence.getTimestamps(progress, duration);
-
-        // update global variables
         playerData = {
             time: {
                 progress,
@@ -69,23 +51,13 @@ const updateData = () => {
             episodeName: "",
             playbackState: paused ? "paused" : "playing"
         };
-
-        // update this global variable
-        // if the page has fully loaded
-        // with video player element
         if (document.body.contains(player) && !pageLoaded) pageLoaded = true;
     } else pageLoaded = true;
 };
-// update data every 1s
 setInterval(updateData, 1e3);
 
-// update presence information
 presence.on("UpdateData", () => {
-    // return empty presence object
-    // if page hasn't loaded yet
     if (pageLoaded === false) return;
-
-    // declare presence data object
     let presenceData: PresenceData = {
         largeImageKey: "main-logo",
         smallImageKey: rpaImage.general.browse,
@@ -93,19 +65,13 @@ presence.on("UpdateData", () => {
         details: "Browsing",
         startTimestamp: initEpoch
     };
-
     switch (page) {
         case "watch": {
-            // deconstruct playerData object
             const { title, episode, episodeName, playbackState, time } = playerData,
-
-            // filter out watch url
              currentUrl = new URL(window.location.href),
              episodeUrl = new URL("https://animeonsen.xyz/watch");
             episodeUrl.searchParams.append("v", currentUrl.searchParams.get("v"));
             episodeUrl.searchParams.append("ep", episode.toString());
-
-            // update presence data
             presenceData = {
                 ...presenceData,
                 smallImageKey: rpaImage.player[playbackState === "paused" ? "pause" : "play"],
@@ -130,8 +96,6 @@ presence.on("UpdateData", () => {
             presenceData.smallImageText = "Account Page";
             break;
         }
-
-        // static pages
         case "about": {
             presenceData.details = "Reading";
             presenceData.smallImageKey = rpaImage.general.read;
@@ -144,10 +108,7 @@ presence.on("UpdateData", () => {
             presenceData.smallImageText = "Cookies Page";
             break;
         }
-
         default: break;
     }
-
-    // update presence activity
     presence.setActivity(presenceData);
 });
