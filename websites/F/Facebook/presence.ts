@@ -427,8 +427,8 @@ presence.on("UpdateData", async () => {
         .querySelector("div.bi6gxh9e.aov4n071 span")
         .textContent.trim();
 
-    presenceData.details = `Viewing ${hasCheckInTab ? "user" : "page"}:`;
-    presenceData.state = name;
+    presenceData.details = `Viewing ${hasCheckInTab ? "user" : "page"}${privacyMode ? "" : ":"}`;
+    if (!privacyMode) presenceData.state = name;
   } else if (document.location.pathname.includes("/settings"))
     presenceData.details = "Settings";
   else if (document.location.pathname.includes("/places"))
