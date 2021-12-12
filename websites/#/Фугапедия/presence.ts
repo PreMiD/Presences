@@ -99,10 +99,9 @@ presence.on("UpdateData", () => {
     presenceData.details = "Читает условия";
     presenceData.state = "размещения рекламы";
   } else if (path === "/account") {
-    if (document.querySelector('#admintools')) presenceData.details = "Что-то делает в админ-панели";
+    if (document.querySelector("#admintools")) presenceData.details = "Что-то делает в админ-панели";
     else presenceData.details = "Редактирует свой аккаунт";
-  }
-  else if (path === "/sub") presenceData.details = "Собирается купить подписку";
+  } else if (path === "/sub") presenceData.details = "Собирается купить подписку";
   else if (path === "/upload") presenceData.details = "Загружает изображение";
   else if (path === "/api.php") presenceData.details = "Читает документацию API";
   else presenceData.details = "Что-то делает на Фугапедии";
