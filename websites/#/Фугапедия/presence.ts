@@ -21,6 +21,16 @@ presence.on("UpdateData", () => {
         url: document.URL
       }
     ];
+  } else if (path === "/view_c") {
+    const editTitle = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
+    presenceData.details = "Смотрит правку";
+    presenceData.state = editTitle;
+    presenceData.buttons = [
+      {
+        label: "Перейти к правке",
+        url: document.URL
+      }
+    ];
   } else if (path === "/category") {
     const categoryName = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
     presenceData.details = "Смотрит категорию";
