@@ -48,6 +48,9 @@ presence.on("UpdateData", () => {
       articleTitle = pageTitle.slice(2, pageTitle.length - 12);
     presenceData.details = "Редактирует статью";
     presenceData.state = articleTitle;
+  } else if (path === "/edits") {
+    presenceData.details = "Смотрит список правок";
+    presenceData.state = "на всей вики";
   } else if (path === "/history") {
     const pageTitle = document.querySelector("title").textContent,
       articleTitle = pageTitle.slice(2, pageTitle.length - 12);
