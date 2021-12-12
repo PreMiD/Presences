@@ -63,9 +63,9 @@ presence.on("UpdateData", async () => {
     } to spend!`;
   } else if (document.location.pathname.includes("/redeem")) {
     presenceData.details = "Redeeming a coupon!";
-    if (document.getElementsByTagName("h1")[0].innerText.includes("sussy"))
-      presenceData.state = "Uh oh, the coupon is invalid!";
-    else presenceData.state = "Yay, its a valid coupon!";
+    if (document.body.style.backgroundImage == 'url("https://i.imgur.com/NlGok01.png")')
+      presenceData.state = "Yay, it's a valid coupon!";
+    else presenceData.state = "Uh oh, the coupon is invalid!";
   }
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
