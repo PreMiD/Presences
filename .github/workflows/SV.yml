@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 16
           cache: "yarn"
-      - name: Prep SV
+      - name: Install dependencies
         run: yarn
       - name: Find Changed Files (direct push)
         if: github.event_name == 'push'
