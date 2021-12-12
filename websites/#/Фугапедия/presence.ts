@@ -57,7 +57,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Смотрит историю статьи";
     presenceData.state = articleTitle;
   } else if (path === "/portal") {
-    const portalName = document.querySelector("p.text-5xl.font-bold.text-black.place-self-center.ml-8").textContent;
+    const portalName = document.querySelector("p.text-4xl.font-semibold.text-white").textContent;
     presenceData.details = "В портале";
     presenceData.state = portalName;
     presenceData.buttons = [
