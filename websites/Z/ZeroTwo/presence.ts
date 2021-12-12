@@ -13,14 +13,6 @@ const presence = new Presence({
       if ((await presence.getSetting("showTimestamp")) === true)
         presenceData.startTimestamp = browsingTimestamp;
     }
-    if ((await presence.getSetting("buttons")) === true) {
-      presenceData.buttons = [
-        {
-          label: "Invite ZeroTwo",
-          url: "https://zerotwo.wtf/invite"
-        }
-      ];
-    }
     if (!presenceData.details) presence.setActivity();
       else presence.setActivity(presenceData);
     
