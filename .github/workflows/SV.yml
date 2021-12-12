@@ -1,21 +1,14 @@
 name: Schema Validation Check
-on:
-  push:
-    paths:
-      - "**/metadata.json"
-  pull_request:
-    paths:
-      - "**/metadata.json"
+on: [push, pull_request]
 jobs:
   validate:
     name: Schema Validation Check
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'PreMiD'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
       - name: Use Node.js 16
-        uses: actions/setup-node@v2.5.0
+        uses: actions/setup-node@v2
         with:
           node-version: 16
           cache: "yarn"
