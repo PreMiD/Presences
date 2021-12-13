@@ -23,5 +23,28 @@
   "description": {
     "en": "Encyclopedia about the League of Cubism and universe of the servers of #SC.",
     "ru": "Энциклопедия про Лигу Кубизма и вселенную серверов #СП."
-  }
+  },
+  "settings": [
+    {
+      "icon": "fad fa-user-secret",
+      "title": "Приватный режим",
+      "id": "privacyMode",
+      "value": false
+    },
+    {
+      "icon": "fad fa-stopwatch",
+      "title": "Показывать время",
+      "id": "showTime",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "if": {
+        "privacyMode": false
+      },
+      "title": "Показывать кнопки",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }
