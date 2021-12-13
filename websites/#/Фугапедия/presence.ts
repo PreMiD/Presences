@@ -4,9 +4,15 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const privacyMode = await presence.getSetting("privacyMode"),
-    showTime = await presence.getSetting("showTime"),
-    showButtons = await presence.getSetting("showButtons"),
+  const [
+      privacyMode,
+      showTime,
+      showButtons
+    ] = await Promise.all([
+      presence.getSetting("privacyMode"),
+      presence.getSetting("showTime"),
+      presence.getSetting("showButtons")
+    ]),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: showTime ? browsingTimestamp : null
