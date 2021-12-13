@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Slowlife",
+    "id": "374905512661221377"
+  },
+  "url": "www.last.fm",
+  "description": {
+    "en": "We bring together your favourite music services and join up listening, watching and sharing to connect your musical world."
+  },
+  "service": "Last.fm",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/ZmDhLly.png",
+  "thumbnail": "https://i.imgur.com/AWs9C6r.png",
+  "color": "#E31B23",
+  "tags": [
+    "song",
+    "music",
+    "artist"
+  ],
+  "category": "music"
+}

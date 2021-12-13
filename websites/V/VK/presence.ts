@@ -30,70 +30,51 @@ function getLocalizedString(stringPath: string): string {
   }
 }
 
-function getVKTrackTimeLeft(): string[] {
+function getVKTrackTimePassed(duration: number) {
   const playerDuration = document.querySelector(
     ".audio_page_player_duration"
-  ) as HTMLElement;
-
-  let timeLeft;
-
-  if (playerDuration.innerText.startsWith("-"))
-    timeLeft = playerDuration.innerText;
-  else {
-    playerDuration.click();
-    timeLeft = playerDuration.innerText;
-    playerDuration.click();
-  }
-
-  //* Removing the `-` symbol.
-  timeLeft = timeLeft.slice(1);
-
-  return timeLeft.split(":");
-}
-
-function getVKTrackTimePassed(): string[] {
-  const playerDuration = document.querySelector(
-    ".audio_page_player_duration"
-  ) as HTMLElement;
+  )?.textContent;
 
   let timePassed;
 
-  if (!playerDuration.innerText.startsWith("-"))
-    timePassed = playerDuration.innerText;
+  if (!playerDuration?.startsWith("-"))
+    timePassed = presence.timestampFromFormat(playerDuration);
   else {
-    playerDuration.click();
-    timePassed = playerDuration.innerText;
-    playerDuration.click();
+    timePassed =
+      duration - presence.timestampFromFormat(playerDuration.slice(1));
   }
 
-  return timePassed.split(":");
+  return timePassed;
 }
 
-//* Returns VK track length.
-function getVKTrackLength(): number[] {
-  let overallTime;
+function getAudioPlayer() {
+  return new Promise<any>((resolve) => {
+    const script = document.createElement("script"),
+      _listener = (data: CustomEvent) => {
+        script.remove();
+        resolve(JSON.parse(data.detail));
 
-  const timeLeft = getVKTrackTimeLeft(),
-    timePassed = getVKTrackTimePassed();
+        window.removeEventListener("PreMiD_Pageletiable", _listener, true);
+      };
 
-  //* Summing minutes and seconds from time passed and left.
-  overallTime = [
-    Number(timePassed[0]) + Number(timeLeft[0]),
-    Number(timePassed[1]) + Number(timeLeft[1])
-  ];
+    window.addEventListener("PreMiD_Pageletiable", _listener);
 
-  //* Checking if overall time have more than 60 seconds and adding 1 minute if it does.
-  if (Number(overallTime[1]) > 60) {
-    const t1 = overallTime[0] + 1,
-      t2 = overallTime[1] - 60;
+    script.id = "PreMiD_Pageletiables";
+    script.appendChild(
+      document.createTextNode(`
+        var pmdPL = new CustomEvent("PreMiD_Pageletiable", {detail: JSON.stringify(window["getAudioPlayer"]()._currentAudio)});
+        window.dispatchEvent(pmdPL);
+      `)
+    );
 
-    overallTime = [t1, t2];
-  }
-
-  return overallTime;
+    (document.body || document.head || document.documentElement).appendChild(
+      script
+    );
+  });
 }
 
-let browsingTimestamp = Math.floor(Date.now() / 1000);
+let browsingTimestamp = Math.floor(Date.now() / 1000),
+  audioPlayer: [{ duration: number }];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -117,17 +98,16 @@ presence.on("UpdateData", async () => {
         ) as HTMLElement
       ).textContent;
 
+    audioPlayer ??= await getAudioPlayer();
+
     if (document.querySelector(".audio_playing") === null) isPlaying = true;
     else isPlaying = false;
 
+    const {duration} = audioPlayer.find((x) => x.duration);
+
     timestamps = presence.getTimestamps(
-      Math.floor(
-        Number(getVKTrackTimePassed()[0]) * 60 +
-          Number(getVKTrackTimePassed()[1])
-      ),
-      Math.floor(
-        Number(getVKTrackLength()[0]) * 60 + Number(getVKTrackLength()[1])
-      )
+      getVKTrackTimePassed(duration),
+      duration
     );
 
     presenceData.details = title;

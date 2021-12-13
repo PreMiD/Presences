@@ -40,12 +40,12 @@ presence.on("UpdateData", async () => {
     const categoryTerm = document.querySelector("span.sxm-breadcrumb__text");
 
     presenceData.details = "Viewing Category: ";
-    presenceData.state = categoryTerm.TextContent;
+    presenceData.state = categoryTerm.textContent;
   } else presenceData.details = "Unknown page";
 
   if (document.querySelector(".sxm-player-controls.no-select")) {
     const data = {
-      channel: document.querySelector(".channel-number")?.textContent,
+      channel: document.querySelector(".channel-name")?.textContent,
       track: document.querySelector(".track-name")?.textContent ?? "Loading",
       artist: document.querySelector(".artist-name")?.textContent ?? "Loading"
     };

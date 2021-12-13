@@ -11,43 +11,62 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
-
-  if (document.location.pathname.includes("/global")) {
-    if (document.location.href.includes("search=")) {
-      presenceData.details = "Searching Users";
-      presenceData.state = document
-        .querySelector("input.input")
-        .getAttribute("value");
-    } else if (document.location.href.includes("country=")) {
-      presenceData.details = `Browsing ${document.location.href
-        .split("=")[1]
-        .toUpperCase()} Rankings`;
-      if (!document.location.href.includes("?country=")) {
-        presenceData.state = `Page ${
-          document.location.href.split("/")[4].split("&")[0]
-        }`;
-      } else presenceData.state = "Page 1";
-    } else {
-      presenceData.details = "Browsing Global Rankings";
-      if (document.location.href.includes("/global/"))
-        presenceData.state = `Page ${document.location.href.split("/")[4]}`;
-      else presenceData.state = "Page 1";
+  if (document.querySelector("[class*='is-visible']")) {
+    presenceData.details = "Searching";
+    presenceData.state = (
+      document
+        .querySelector("[class^='search-box']")
+        .children.item(1) as HTMLInputElement
+    ).value;
+  } else if (document.location.pathname.includes("/rankings")) {
+    presenceData.details = "Browsing Rankings";
+    if (
+      document.querySelector<HTMLInputElement>(
+        "[class^='ss-input'] > div > input"
+      ).value !== ""
+    ) {
+presenceData.state = `Search: ${
+        document.querySelector<HTMLInputElement>(
+          "[class^='ss-input'] > div > input"
+        ).value
+      }`;
+} else if (document.querySelector("[class^='chip']")) {
+      let filters = "";
+      document.querySelectorAll("[class^='chip']").forEach(function (element) {
+        filters += `${element.textContent.slice(0, -2)},`;
+      });
+      presenceData.state = `${filters.slice(0, -1)}`;
     }
-  } else if (document.location.pathname.includes("/rankings"))
-    presenceData.details = "Browsing Global Rankings";
-  else if (document.location.pathname.includes("/faq"))
-    presenceData.details = "Viewing FAQ";
-  else if (document.location.pathname.includes("/leaderboard")) {
-    if (document.location.pathname.includes("/leaderboard/")) {
+  } else if (document.location.pathname.includes("/leaderboard")) {
+    if (document.location.pathname.includes("/leaderboards")) {
+      presenceData.details = "Browsing Leaderboards";
+      if (
+        (
+          document.querySelector(
+            "[class^='ss-input'] > div > input"
+          ) as HTMLInputElement
+        ).value !== ""
+      ) {
+presenceData.state = `Search: ${
+          (
+            document.querySelector(
+              "[class^='ss-input'] > div > input"
+            ) as HTMLInputElement
+          ).value
+        }`;
+}
+    } else if (document.location.pathname.includes("/leaderboard/")) {
       presenceData.details = "Viewing Leaderboard";
-      presenceData.state = document.querySelector("h4 > a").textContent;
+      presenceData.state = document.querySelector(
+        "div.title.is-5.mb-0 > a"
+      ).textContent;
       presenceData.smallImageKey = document
-        .querySelector("li.is-active > a > span")
+        .querySelector("[class*='selected'] > span")
         .textContent.toLowerCase()
         .replace("+", "_");
-      presenceData.smallImageText = document.querySelector(
-        "li.is-active > a > span"
-      ).textContent;
+      presenceData.smallImageText = `${
+        document.querySelector("[class*='selected'] > span").textContent
+      } (${document.querySelector("[class^='tag mb-2']").textContent})`;
       presenceData.buttons = [
         {
           label: "View Page",
@@ -55,19 +74,22 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else presenceData.details = "Viewing Leaderboard";
-  } else if (document.location.pathname.includes("/ranking/requests"))
+  } else if (document.location.pathname.includes("/ranking/requests")) {
     presenceData.details = "Browsing Rank Requests";
-  else if (document.location.pathname.includes("/ranking/request")) {
+    presenceData.state = `${
+      document.querySelector("[class^='title level-color']").textContent
+    } ${document.querySelector("p.heading").textContent}`;
+  } else if (document.location.pathname.includes("/ranking/request")) {
     presenceData.details = "Viewing Rank Request";
     presenceData.state = document.querySelector(
-      "h4.title.is-5.songInfos > a"
+      "div.title.is-5.mb-0 > a"
     ).textContent;
     presenceData.smallImageKey = document
-      .querySelector("li.is-active > a > span")
+      .querySelector("[class*='selected'] > span")
       .textContent.toLowerCase()
       .replace("+", "_");
     presenceData.smallImageText = document.querySelector(
-      "li.is-active > a > span"
+      "[class*='selected'] > span"
     ).textContent;
     presenceData.buttons = [
       {
@@ -77,27 +99,40 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/u/")) {
     presenceData.details = "Viewing User";
-    presenceData.state = `${document
-      .querySelector("h5.title.is-5 > a")
-      .textContent.slice(0, -9)}(${document
-      .querySelectorAll("div.column > ul > li")
-      .item(1)
-      .textContent.split(":")[1]
-      .slice(1)})`;
     presenceData.buttons = [
       {
         label: "View Page",
         url: document.location.href
       }
     ];
-  } else if (document.location.pathname === "/") {
-    if (document.location.href.includes("search=")) {
-      presenceData.details = "Searching Leaderboards";
-      presenceData.state = document
-        .querySelector("input.input")
-        .getAttribute("value");
-    } else presenceData.details = "Browsing Leaderboards";
-  }
+    if (
+      document.querySelector(
+        "[class^='title is-5 player has-text-centered-mobile'] > a > span"
+      )
+    ) {
+presenceData.state = `${
+        (document.querySelector("[class^='country']") as HTMLImageElement).alt
+      } ${
+        document.querySelector(
+          "[class^='title is-5 player has-text-centered-mobile'] > a > span"
+        ).textContent
+      } (${document.querySelector("[class^='title-header pp']").textContent})`;
+} else {
+presenceData.state = `${
+        (document.querySelector("[class^='country']") as HTMLImageElement).alt
+      } ${
+        document.querySelector(
+          "[class^='title is-5 player has-text-centered-mobile'] > span"
+        ).textContent
+      } (${document.querySelector("[class^='title-header pp']").textContent})`;
+}
+  } else if (document.location.pathname.includes("/legal/privacy")) {
+    presenceData.details = "Reading Privacy Policy?";
+    presenceData.state = "People read this?!";
+  } else if (document.location.pathname.includes("/team"))
+    presenceData.details = "Viewing ScoreSaber Team";
+  else if (document.location.pathname === "/")
+    presenceData.details = "Viewing Homepage";
 
   if (!time) delete presenceData.startTimestamp;
 
