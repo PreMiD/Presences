@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "danbooru",
       startTimestamp: browsingTimestamp
     },
-    shortTitle = document.title.split(/[|]/, 1)[0],
+    [shortTitle] = document.title.split(/[|]/, 1),
     path = document.location.pathname;
 
   if (path === "/posts") {
