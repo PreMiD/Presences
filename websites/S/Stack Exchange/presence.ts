@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "919817726195814431"
   }),
-  startTimestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "stackexchange",
-      startTimestamp
+      startTimestamp: browsingTimestamp
     },
     { pathname, hostname } = window.location;
 
@@ -30,12 +30,11 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "superuser";
     presenceData.details = "Super User Meta";
   } else {
-    const subStack = document.querySelector("meta[property='og:site_name']"),
-      imageKey = hostname.replace(".stackexchange.com", "");
+    const imageKey = hostname.replace(".stackexchange.com", "");
     if (imageKey === "meta") presenceData.smallImageKey = imageKey;
     else presenceData.smallImageKey = imageKey.replace(".meta", "");
 
-    presenceData.smallImageText = subStack
+    presenceData.smallImageText = document.querySelector("meta[property='og:site_name']")
       .getAttribute("content")
       .replace("Stack Exchange", "");
     if (pathname.includes("/questions"))
@@ -56,8 +55,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Main Page";
     else presenceData.details = "Main Page";
   } else if (pathname.includes("/questions")) {
-    const titleElem = document.querySelector(".question-hyperlink");
-    presenceData.state = titleElem.textContent;
+    presenceData.state = document.querySelector(".question-hyperlink").textContent;
   } else if (
     [
       "serverfault.com",
