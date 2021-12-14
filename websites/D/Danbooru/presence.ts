@@ -5,11 +5,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "danbooru",
-    startTimestamp: browsingTimestamp
-  },
-  shortTitle = document.title.split(/[|]/,1)[0],
-  path = document.location.pathname;
+      largeImageKey: "danbooru",
+      startTimestamp: browsingTimestamp
+    },
+    shortTitle = document.title.split(/[|]/, 1)[0],
+    path = document.location.pathname;
 
   if (path === "/posts") {
     presenceData.details = "Browsing posts";
@@ -20,57 +20,55 @@ presence.on("UpdateData", () => {
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "artwork";
     presenceData.smallImageText = "Viewing artworks";
-    presenceData.buttons = [{label: "View Artwork", url: document.location.href}];
+    presenceData.buttons = [
+      { label: "View Artwork", url: document.location.href }
+    ];
   } else if (path.startsWith("/post_versions"))
     presenceData.details = "Searching for post versions";
-  else if (path === "/comments")
-    presenceData.details = "Reading comments";
-  else if (path === "/notes")
-    presenceData.details = "Reading notes";
-  else if (path === "/wiki_pages")
-    presenceData.details = "Browsing the wiki";
+  else if (path === "/comments") presenceData.details = "Reading comments";
+  else if (path === "/notes") presenceData.details = "Reading notes";
+  else if (path === "/wiki_pages") presenceData.details = "Browsing the wiki";
   else if (path === "/wiki_pages/search")
     presenceData.details = "Searching the wiki";
   else if (path.startsWith("/wiki_pages")) {
     presenceData.details = "Reading a wiki page";
     presenceData.state = shortTitle;
-} else if (path === "/artists") {
+  } else if (path === "/artists") {
     presenceData.details = "Browsing artists";
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "Viewing a profile";
-} else if (path.startsWith("/artists")) {
+  } else if (path.startsWith("/artists")) {
     presenceData.details = "Viewing an artist";
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "Viewing a profile";
-    presenceData.buttons = [{label: "View Artist", url: document.location.href}];
-} else if (path === "/users") {
+    presenceData.buttons = [
+      { label: "View Artist", url: document.location.href }
+    ];
+  } else if (path === "/users") {
     presenceData.details = "Looking up users";
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "Viewing a profile";
-} else if (path.startsWith("/users")) {
+  } else if (path.startsWith("/users")) {
     presenceData.details = "Viewing a user";
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "Viewing a profile";
-} else if (path === "/tags")
-    presenceData.details = "Browsing tags";
-  else if (path === "/pools")
-    presenceData.details = "Browsing pools";
+  } else if (path === "/tags") presenceData.details = "Browsing tags";
+  else if (path === "/pools") presenceData.details = "Browsing pools";
   else if (path.includes("pools/gallery"))
     presenceData.details = "Browsing the pool gallery";
   else if (path.startsWith("/pools")) {
     presenceData.details = "Viewing a pool";
     presenceData.state = shortTitle;
-} else if (path === "/forum_topics")
+  } else if (path === "/forum_topics")
     presenceData.details = "Browsing forum topics";
   else if (path.startsWith("/forum_topic")) {
     presenceData.details = "Viewing a forum topic";
     presenceData.state = shortTitle;
-} else if (path === "/forum_posts")
+  } else if (path === "/forum_posts")
     presenceData.details = "Browsing forum posts";
-  else
-    presenceData.details = "Browsing the site";
+  else presenceData.details = "Browsing the site";
 
   presence.setActivity(presenceData);
 });
