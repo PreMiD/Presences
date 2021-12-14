@@ -10,11 +10,9 @@
     "thumbnail": "https://i.imgur.com/5C3VsD2.png",
     "version": "1.0.0",
     "color": "#1b1c1c",
-    "tags": [
-      "anime"
-    ],
+    "tags": ["anime"],
     "url": "tiermaker.com",
     "description": {
       "en": "A tier list is a ranking system that allows you to rank anything in tiers from the best to worst. Using a tier list allows you to group similar ranked items together and it's quick and easy to create a tier list. Tiermaker allows you to create your own tier list!"
     }
-  }
+}
