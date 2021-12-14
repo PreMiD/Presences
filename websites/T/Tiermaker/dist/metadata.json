@@ -1,6 +1,6 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.3",
-    "service": "tiermaker",
+    "$schema": "https://schemas.premid.app/metadata/1.5",
+    "service": "Tiermaker",
     "author": {
       "name": "Eason",
       "id": "462456154266796032"
