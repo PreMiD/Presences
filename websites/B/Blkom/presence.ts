@@ -8,15 +8,6 @@ let video = {
   paused: true
 };
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on(
   "iFrameData",
   (data: { duration: number; currentTime: number; paused: boolean }) => {
@@ -31,7 +22,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (location.pathname.startsWith("/watch")) {
-    const timestamps = getTimestamps(
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -44,8 +35,8 @@ presence.on("UpdateData", async () => {
 
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused ? "Paused" : "Played";
-    data.startTimestamp = timestamps[0];
-    data.endTimestamp = timestamps[1];
+    data.startTimestamp = startTimestamp;
+    data.endTimestamp = endTimestamp;
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
@@ -61,14 +52,14 @@ presence.on("UpdateData", async () => {
     if (
       document.querySelectorAll(".content").length &&
       document.querySelectorAll(".page-item").length
-    )
+    ) {
       data.state = `Results: ${
         document.querySelectorAll(".content").length *
         (document.querySelectorAll(".page-item").length - 3)
       } and More..`;
-    else if (document.querySelectorAll(".content").length)
+    } else if (document.querySelectorAll(".content").length)
       data.state = `Results: ${document.querySelectorAll(".content").length}`;
-    else data.state = `Results: Nothing`;
+    else data.state = "Results: Nothing";
     presence.setActivity(data);
   } else if (location.pathname.includes("/download")) {
     data.smallImageKey = "download";
@@ -144,7 +135,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.smallImageKey = "profile";
     data.smallImageText = "Viewing";
-    data.details = `Ratings List`;
+    data.details = "Ratings List";
     data.state = `Viewing ${document
       .querySelector(".profile-usertitle-name")
       .textContent.trim()}'s Profile`;
@@ -155,7 +146,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.smallImageKey = "profile";
     data.smallImageText = "Viewing";
-    data.details = `Watching List`;
+    data.details = "Watching List";
     data.state = `Viewing ${document
       .querySelector(".profile-usertitle-name")
       .textContent.trim()}'s Profile`;
@@ -166,7 +157,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.smallImageKey = "profile";
     data.smallImageText = "Viewing";
-    data.details = `Completed List`;
+    data.details = "Completed List";
     data.state = `Viewing ${document
       .querySelector(".profile-usertitle-name")
       .textContent.trim()}'s Profile`;
@@ -177,7 +168,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.smallImageKey = "profile";
     data.smallImageText = "Viewing";
-    data.details = `On-Hold List`;
+    data.details = "On-Hold List";
     data.state = `Viewing ${document
       .querySelector(".profile-usertitle-name")
       .textContent.trim()}'s Profile`;
@@ -188,7 +179,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.smallImageKey = "profile";
     data.smallImageText = "Viewing";
-    data.details = `Dropped List`;
+    data.details = "Dropped List";
     data.state = `Viewing ${document
       .querySelector(".profile-usertitle-name")
       .textContent.trim()}'s Profile`;
@@ -199,7 +190,7 @@ presence.on("UpdateData", async () => {
   ) {
     data.smallImageKey = "profile";
     data.smallImageText = "Viewing";
-    data.details = `Planned List`;
+    data.details = "Planned List";
     data.state = `Viewing ${document
       .querySelector(".profile-usertitle-name")
       .textContent.trim()}'s Profile`;
@@ -207,7 +198,7 @@ presence.on("UpdateData", async () => {
   } else if (location.pathname.startsWith("/user")) {
     data.smallImageKey = "profile";
     data.smallImageText = "Viewing";
-    data.details = `Main Page`;
+    data.details = "Main Page";
     data.state = `Viewing ${document
       .querySelector(".profile-usertitle-name")
       .textContent.trim()}'s Profile`;

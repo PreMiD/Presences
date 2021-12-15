@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Zen",
     "id": "725331428962992131"
@@ -10,7 +11,7 @@
     "nl": "Zoek, volg en deel aankomende anime-series en films uit volgend seizoen op AniChart.net"
   },
   "url": "anichart.net",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/8jwNL3C.png",
   "thumbnail": "https://i.imgur.com/C1DeRp2.png",
   "color": "#ffffff",

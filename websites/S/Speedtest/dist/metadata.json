@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Nevylish",
     "id": "343847696483745794"
@@ -13,8 +13,8 @@
     "nl": "De wereldwijde breedbandsnelheidstest"
   },
   "service": "Speedtest",
-  "version": "1.0.2",
-  "logo": "https://i.imgur.com/MOxmNLG.png",
+  "version": "1.0.5",
+  "logo": "https://i.imgur.com/CFAKdIH.png",
   "thumbnail": "https://i.imgur.com/JXIDlOL.png",
   "color": "#141526",
   "tags": [

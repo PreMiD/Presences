@@ -31,8 +31,8 @@ presence.on("UpdateData", async () => {
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -59,8 +59,9 @@ presence.on("UpdateData", async () => {
   ) {
     const data = {
         title: (
-          document.querySelector("h1 a") || document.querySelector("title")
-        )?.textContent,
+          document.querySelector("h1 > a > span > span") ||
+          document.querySelector("title")
+        )?.textContent?.trim(),
         ep: (
           document.querySelector("h1") ||
           document.querySelector(".topice-source-list-item.item-active")
@@ -87,10 +88,9 @@ presence.on("UpdateData", async () => {
       isMovie = URLItem.includes("movie"),
       isVShow = URLItem.includes("variety-show"),
       possiblyVShow = document.location.pathname.includes("/intl-common/"),
-      isTrial =
-        document.querySelector(
-          ".iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip"
-        )?.textContent !== undefined,
+      isTrial = document.querySelector(
+        ".iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip"
+      )?.textContent,
       lastestEp: string[] = document
         .querySelector("div.broken-line")
         ?.nextSibling?.nextSibling?.nextSibling?.textContent?.match(
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
         }`;
       } else data.ep = "Variety show";
 
-      data.title = (data.title.match(/.+?(?=\s{2})/g) || [null])[0];
+      [data.title] = data.title.match(/.+?(?=\s{2})/g) || [null];
     }
     if (isVShow && !possiblyVShow) data.ep = "Variety show";
     if (!isVShow && !possiblyVShow && !isMovie && contentEp !== null)

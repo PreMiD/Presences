@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Kyrie",
+    "id": "368399721494216706"
+  },
+  "service": "ArtStation",
+  "description": {
+    "en": "ArtStation is a community that was shaped with the goal of empowering artists and creating opportunities for success. It's the place for artists to connect with each other and showcase their work with others. The more you work and post, the more you get noticed by the community."
+  },
+  "url": "www.artstation.com",
+  "version": "1.1.0",
+  "logo": "https://i.imgur.com/hHlsZac.png",
+  "thumbnail": "https://i.imgur.com/bQ4qzHO.jpg",
+  "color": "#13AFF0",
+  "tags": [
+    "art",
+    "artwork",
+    "station",
+    "creative",
+    "community",
+    "professional"
+   ],
+  "category": "socials",
+  "regExp": "([a-z0-9-_]+)[.]artstation[.]com"
+}

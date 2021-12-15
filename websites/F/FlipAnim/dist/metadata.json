@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "Maak flipbook-animaties online!"
   },
   "url": "flipanim.com",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/BXd1SBE.png",
   "thumbnail": "https://i.imgur.com/D0tVFhI.png",
   "color": "#f2a012",

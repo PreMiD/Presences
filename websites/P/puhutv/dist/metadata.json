@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -10,9 +11,9 @@
     "nl": "puhutv is een Turkse service voor entertainment en video op aanvraag!"
   },
   "url": "puhutv.com",
-  "version": "1.1.8",
-  "logo": "https://premid.is-inside.me/ivb6ZOak.jpg",
-  "thumbnail": "https://premid.is-inside.me/ZaHJ2qz5.png",
+  "version": "1.1.11",
+  "logo": "https://i.imgur.com/Sgp6UhI.png",
+  "thumbnail": "https://i.imgur.com/PPc6zIe.png",
   "color": "#232527",
   "tags": [
     "puhutv",

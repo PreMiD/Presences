@@ -6,6 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   });
+
 let video = {
   duration: 0,
   currentTime: 0,
@@ -33,22 +34,21 @@ presence.on("UpdateData", async () => {
     document.querySelector("#iframemain") !== null
   ) {
     // on page of a episode
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     presenceData.details = document.querySelector(".infoan2").textContent;
-    presenceData.state = document
+    [, presenceData.state] = document
       .querySelector("#main > div.now2 > div")
-      .textContent.split(" - ")[1];
+      .textContent.split(" - ");
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
 
     if (video.paused) {
       delete presenceData.startTimestamp;
@@ -60,9 +60,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/categories/")) {
     presenceData.details = "Viewing category:";
-    presenceData.state = document
+    [, presenceData.state] = document
       .querySelector(".lisbg")
-      .textContent.split(": ")[1];
+      .textContent.split(": ");
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/categories")) {
     presenceData.details = "Browsing through";
@@ -93,12 +93,10 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presenceData.details = (await strings).browsing;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).browsing;
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

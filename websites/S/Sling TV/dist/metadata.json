@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Kedi",
     "id": "238668511222693888"
@@ -13,7 +13,7 @@
     "sling.com",
     "watch.sling.com"
   ],
-  "version": "1.0.2",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/iTHexWR.png",
   "thumbnail": "https://i.imgur.com/5q37Xgd.png",
   "color": "#008FCE",

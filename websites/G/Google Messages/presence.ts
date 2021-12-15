@@ -15,9 +15,7 @@ presence.on("UpdateData", async () => {
   if (path === "/" || path.includes("/intl/")) {
     presenceData.largeImageKey = "icon";
     presenceData.details = "Home page";
-  }
-  // Auth page
-  else if (path === "/web/authentication") {
+  } else if (path === "/web/authentication") {
     presenceData.largeImageKey = "icon";
     presenceData.details = "Authentication page";
   } else if (path === "/web/conversations") {
@@ -28,9 +26,9 @@ presence.on("UpdateData", async () => {
     path !== "/web/conversations/new"
   ) {
     // checking parameters
-    if (!showcon) {
+    if (!showcon)
       presenceData.state = "Hidden (adjustable in Presence settings)";
-    } else {
+    else {
       const itl = document
         .getElementsByClassName("title-container")[0]
         .querySelector("h2 > span > span").textContent;
@@ -48,10 +46,8 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "icon";
     presenceData.details = "Browsing on Google Messages";
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

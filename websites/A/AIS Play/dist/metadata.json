@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Holfz",
     "id": "405397046691102740"
@@ -11,7 +11,7 @@
     "nl": "AIS Play is een streamingdienst in Thailand die series, televisieaanbieders, anime en nog veel meer aanbied."
   },
   "url": "aisplay.ais.co.th",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/HQs4uPj.png",
   "thumbnail": "https://i.imgur.com/ZYS9jRi.png",
   "color": "#B0B72A",

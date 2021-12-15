@@ -23,21 +23,18 @@ presence.on("UpdateData", () => {
   ) {
     title = document.getElementById("ctitle").textContent;
     alt = document.querySelector("#comic > img").getAttribute("title");
-    comicNumber = document
+    [comicNumber] = document
       .querySelector('[property="og:url"]')
       .getAttribute("content")
       .split("xkcd.com/")[1]
-      .split("/")[0];
+      .split("/");
     details = `Reading #${comicNumber}`;
     state = title;
-  } else {
-    details = "Browsing XKCD";
-    state = undefined;
-  }
+  } else details = "Browsing XKCD";
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "logo",
     smallImageKey: "help",
     smallImageText: alt,

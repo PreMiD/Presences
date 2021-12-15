@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "DMOJ",
   "author": {
     "name": "yolo",
@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/ahPqTyU.png",
   "thumbnail": "https://i.imgur.com/5OmbMhc.png",
-  "version": "2.0.1",
+  "version": "2.0.5",
   "color": "#fcdb05",
   "tags": [
     "coding",

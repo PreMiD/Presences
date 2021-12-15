@@ -10,7 +10,7 @@ let iFrameVideo: boolean,
   duration: number,
   paused: boolean,
   video: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
@@ -28,7 +28,7 @@ let iFrameVideo: boolean,
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
       currTime: number;
@@ -36,12 +36,11 @@ presence.on(
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
     if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      paused = data.iframe_video.paused;
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
       video = data;
     }
   }
@@ -52,46 +51,38 @@ presence.on("UpdateData", async () => {
     elapsed = await presence.getSetting("sTE"),
     videoTime = await presence.getSetting("sVT"),
     buttons = await presence.getSetting("buttons");
-  if (videoTime) {
-    if (lastPlaybackState !== playback) {
-      lastPlaybackState = playback;
-    }
-  }
-  if (elapsed) {
-    browsingStamp = Math.floor(Date.now() / 1000);
-  }
-  const timestamps = presence.getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    ),
-    presenceData: PresenceData = {
-      largeImageKey: "logo"
-    };
+  if (videoTime)
+    if (lastPlaybackState !== playback) lastPlaybackState = playback;
+
+  if (elapsed) browsingStamp = Math.floor(Date.now() / 1000);
+
+  const presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
   if (info) {
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page or recently subbed";
-    } else if (document.location.pathname == "/recently-added-raw") {
+    } else if (document.location.pathname === "/recently-added-raw") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the recently added raw";
-    } else if (document.location.pathname == "/recently-added-dub") {
+    } else if (document.location.pathname === "/recently-added-dub") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the recently added dub";
-    } else if (document.location.pathname == "/movies") {
+    } else if (document.location.pathname === "/movies") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the anime movies";
-    } else if (document.location.pathname == "/new-season") {
+    } else if (document.location.pathname === "/new-season") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the new anime seasons.";
-    } else if (document.location.pathname == "/popular") {
+    } else if (document.location.pathname === "/popular") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the popular anime.";
-    } else if (document.location.pathname == "/ongoing-series") {
+    } else if (document.location.pathname === "/ongoing-series") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the ongoing series.";
-    }
-    //Used for the video files (Needs some work done here)
-    else if (document.location.pathname.includes("/videos/")) {
+    } else if (document.location.pathname.includes("/videos/")) {
+      //Used for the video files (Needs some work done here)
       title = document.querySelector(
         "body > #wrapper_bg > #wrapper > #main_bg > div > div > div.video-info-left > h1"
       );
@@ -103,9 +94,9 @@ presence.on("UpdateData", async () => {
           ).children.length;
           firstVideo = document
             .querySelector(
-              "#main_bg > div:nth-child(5) > div > div.video-info-left > ul > li:nth-child(" +
-                (childLength - 1) +
-                ")"
+              `#main_bg > div:nth-child(5) > div > div.video-info-left > ul > li:nth-child(${
+                childLength - 1
+              })`
             )
             .firstElementChild.getAttribute("href");
           presenceData.buttons = [
@@ -115,12 +106,12 @@ presence.on("UpdateData", async () => {
             },
             {
               label: "First Episode",
-              url: "https://gogo-stream.com" + firstVideo
+              url: `https://gogo-stream.com${firstVideo}`
             }
           ];
         }
         if (
-          iFrameVideo == true &&
+          iFrameVideo === true &&
           !isNaN(duration) &&
           title !== null &&
           video !== null
@@ -132,8 +123,12 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageText = paused
                 ? (await strings).pause
                 : (await strings).play;
-              presenceData.startTimestamp = timestamps[0];
-              presenceData.endTimestamp = timestamps[1];
+
+              [presenceData.startTimestamp, presenceData.endTimestamp] =
+                presence.getTimestamps(
+                  Math.floor(currentTime),
+                  Math.floor(duration)
+                );
             }
           } else if (paused) {
             delete presenceData.startTimestamp;
@@ -141,7 +136,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Paused:";
             presenceData.smallImageKey = "pause";
           }
-        } else if (iFrameVideo == null && isNaN(duration) && title !== null) {
+        } else if (iFrameVideo === null && isNaN(duration) && title !== null) {
           presenceData.details = "Viewing:";
           presenceData.state = title.innerText;
           presenceData.startTimestamp = browsingStamp;
@@ -165,7 +160,7 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector(
         "#main_bg > div:nth-child(5) > div > div.section-header > h3"
-      ).textContent == " Result search"
+      ).textContent === " Result search"
     ) {
       presenceData.details = "Searching:";
       presenceData.state = document.location.href
@@ -174,15 +169,15 @@ presence.on("UpdateData", async () => {
         .join(" ");
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
-    } //If it can't get the page it will output an error
-    else {
+    } else {
+      //If it can't get the page it will output an error
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Error 01: Can't Read Page";
       presenceData.smallImageKey = "search";
       presence.error("Can't read page.");
     }
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     //This will fire if you do not set presence details
     presence.setTrayTitle();
     presence.setActivity();

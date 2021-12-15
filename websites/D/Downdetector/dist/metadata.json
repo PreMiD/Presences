@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "NMW03",
     "id": "534099893979971584"
@@ -9,8 +10,8 @@
     "nl": "Real-time probleem- en uitvalbewaking"
   },
   "service": "Downdetector",
-  "version": "1.2.5",
-  "logo": "https://i.imgur.com/STs8Nfw.png",
+  "version": "1.2.8",
+  "logo": "https://i.imgur.com/ba5AI1b.png",
   "thumbnail": "https://i.imgur.com/Qy1lbXE.png",
   "color": "#FF160A",
   "tags": [

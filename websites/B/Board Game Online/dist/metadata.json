@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -20,8 +21,8 @@
     "boardgame-online.com",
     "www.boardgame-online.com"
   ],
-  "version": "1.1.10",
-  "logo": "https://i.imgur.com/MhNYI8n.png",
+  "version": "1.1.14",
+  "logo": "https://i.imgur.com/L6BgeAa.png",
   "thumbnail": "https://i.imgur.com/QTDzIqh.png",
   "color": "#EF3A26",
   "tags": [

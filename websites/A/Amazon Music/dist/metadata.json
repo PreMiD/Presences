@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -22,7 +23,7 @@
     "nl": "Amazon Music is een muziekstreamingplatform en een online muziekwinkel die wordt beheerd door Amazon.com. Gelanceerd in openbare bèta op 25 september 2007, werd het in januari 2008 de eerste muziekwinkel die muziek verkocht zonder beheer van digitale rechten van de vier grote muzieklabels, evenals vele onafhankelijke."
   },
   "url": "music.amazon.com",
-  "version": "2.0.8",
+  "version": "2.0.11",
   "logo": "https://i.imgur.com/AUKbzxX.png",
   "thumbnail": "https://i.imgur.com/htSGR6k.png",
   "color": "#21293C",

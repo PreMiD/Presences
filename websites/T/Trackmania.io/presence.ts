@@ -101,9 +101,9 @@ presence.on("UpdateData", async () => {
       presenceData.details =
         document.getElementsByClassName("title")[1].textContent;
       presenceData.state = "Leaderboard";
-    } else if (window.location.hash.startsWith("#/matches")) {
+    } else if (window.location.hash.startsWith("#/matches"))
       presenceData.state = "Matches";
-    } else if (window.location.hash.startsWith("#/match")) {
+    else if (window.location.hash.startsWith("#/match")) {
       presenceData.state = "Matches";
       if (!window.location.hash.endsWith("match")) {
         presenceData.details = "Match";

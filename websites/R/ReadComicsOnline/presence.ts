@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 
   switch (pathname) {
     case "/":
-      presenceData.details = "Looking for somthing to read";
+      presenceData.details = "Looking for something to read";
       break;
     case "/ComicList":
       presenceData.details = "Browsing Comic List";

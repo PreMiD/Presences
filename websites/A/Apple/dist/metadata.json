@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "N0chteil ^^",
     "id": "495901098926669825"
@@ -22,10 +23,11 @@
     "en": "Apple Inc. is an American multinational company that aims to design and market consumer electronics, computer software and personal computers.",
     "ga_IE": "Is cuideachta ilnáisiúnta Meiriceánach é Apple Inc. a bhfuil sé mar aidhm aige leictreonaic tomhaltóra, bogearraí ríomhaireachta agus ríomhairí pearsanta a dhearadh agus a mhargú.",
     "de": "Apple Inc. ist ein amerikanisches multinationales Unternehmen, das sich mit der Entwicklung und Vermarktung von Unterhaltungselektronik, Computersoftware und Personal Computern beschäftigt.",
-    "nl": "Apple Inc. is een Amerikaans multinationaal bedrijf die tot doel heeft consumentenelektronica, computersoftware en personal computers te ontwerpen en op de markt te brengen."
+    "nl": "Apple Inc. is een Amerikaans multinationaal bedrijf die tot doel heeft consumentenelektronica, computersoftware en personal computers te ontwerpen en op de markt te brengen.",
+    "ko_KR": "Apple Inc. 가전 제품, 컴퓨터 소프트웨어, 개인용 컴퓨터를 디자인하고 판매하는 것을 목표로 하는 미국의 다국적 기업입니다."
   },
   "service": "Apple",
-  "version": "2.1.5",
+  "version": "2.1.10",
   "logo": "https://i.imgur.com/rBAusA5.png",
   "thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
   "color": "#606C80",

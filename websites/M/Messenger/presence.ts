@@ -1,10 +1,8 @@
-var presence = new Presence({
-  clientId: "630896385889271819"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var typing: any;
+const presence = new Presence({
+    clientId: "630896385889271819"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement | Element | string, typing: HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {};
@@ -15,14 +13,14 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "#u_0_0 > div.r30xiam5.m0q0jmkx.alrytcbg.hp5uecnq.g2121wdl > div > div:nth-child(5) > div > div > div > div > div.prklkq8o.t7elcel3.sd0tyowg.ocjcko58.p3f4w9ai.f5zavhip.foed1vyy > div > div > div.ocjcko58.foed1vyy > div > p"
     );
-    if (user == null || user.innerText == null) {
+    if (!user || !(user as HTMLElement).innerText) {
       //presenceData.details = "In a video call or";
       user = "user not found.";
       presenceData.details = "In videocall with someone";
       presenceData.smallImageKey = "videocall";
     } else {
       //presenceData.details = "In call with:";
-      user = user.innerText;
+      user = (user as HTMLElement).innerText;
       presenceData.details = "In call with someone";
       presenceData.smallImageKey = "call";
     }
@@ -35,7 +33,7 @@ presence.on("UpdateData", async () => {
     typing = document.querySelector(
       "body > div > div > div > div:nth-child(2) > span > div._20bp > div._4_j4 > div._4rv3._7og6 > div > div._7kpk > div > div > div:nth-child(1) > div > div > div > div > div > div > span > span"
     );
-    if (typing == null) {
+    if (typing === null) {
       presenceData.details = "Reading messages from:";
       presenceData.smallImageKey = "reading";
     } else {

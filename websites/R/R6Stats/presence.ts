@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
     const selects = document.querySelectorAll("select"),
       labels = [];
 
-    if (selects[0].selectedIndex == 0) {
+    if (selects[0].selectedIndex === 0) {
       labels.push("General");
       labels.push(selects[2].options[selects[2].selectedIndex].label); // Stat Type
       labels.push(selects[1].options[selects[1].selectedIndex].label); // Platform
@@ -64,9 +64,7 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname.includes("/privacy-policy")) {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Privacy Policy";
-  } else {
-    presenceData.details = "Browsing...";
-  }
+  } else presenceData.details = "Browsing...";
 
   presence.setActivity(presenceData);
 });

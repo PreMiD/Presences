@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -21,8 +22,8 @@
       "id": "506899274748133376"
     },
     {
-    "name": "EGGSY",
-    "id": "162969778699501569"
+      "name": "EGGSY",
+      "id": "162969778699501569"
     }
   ],
   "service": "PreMiD",
@@ -40,7 +41,7 @@
     "beta.premid.app",
     "status.premid.app"
   ],
-  "version": "3.0.2",
+  "version": "3.0.5",
   "logo": "https://i.imgur.com/eYLI4hf.png",
   "thumbnail": "https://i.imgur.com/OYxIOZ8.png",
   "color": "#7289DA",

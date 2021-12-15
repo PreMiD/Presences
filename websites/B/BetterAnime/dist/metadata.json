@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "SlowLife",
     "id": "374905512661221377"
@@ -12,7 +12,7 @@
     "betteranime"
   ],
   "url": "betteranime.net",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "color": "#ffffff",
   "category": "anime",
   "description": {

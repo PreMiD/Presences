@@ -7,7 +7,7 @@ setInterval(function () {
         ? document.querySelector("#player0")
         : document.querySelector("#player_html5_api");
 
-    if (video !== undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
         iFrameVideoData: {
           iFrameVideo: true,

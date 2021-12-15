@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Marino",
     "id": "598953747963707409"
@@ -13,7 +13,7 @@
     "nl": "Epic Games, Inc. is een Amerikaanse ontwikkelaar en uitgever van videospelletjes en software, gevestigd in Cary, North Carolina."
   },
   "service": "Epic Games",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/CAsgHOc.png",
   "thumbnail": "https://i.imgur.com/sLgae3U.png",
   "color": "#2A2A2A",

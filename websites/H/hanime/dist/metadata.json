@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -18,7 +19,7 @@
     "hanime.tv",
     "members.hanime.tv"
   ],
-  "version": "1.2.2",
+  "version": "1.2.4",
   "logo": "https://i.imgur.com/LXjbZoN.png",
   "thumbnail": "https://i.imgur.com/zeoWi1W.png",
   "color": "#000000",

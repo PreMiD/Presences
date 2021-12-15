@@ -31,10 +31,8 @@ presence.on("UpdateData", () => {
     presenceData.state = "Lootboxes";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

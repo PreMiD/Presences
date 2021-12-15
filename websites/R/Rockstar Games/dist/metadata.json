@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Rockstar Games",
+  "author": {
+    "name": "BobsterJS 💗",
+    "id": "359755774873960450"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/EYSTLt6.png",
+  "thumbnail": "https://i.imgur.com/1pthcL3.png",
+  "version": "1.0.4",
+  "color": "#fbff00",
+  "tags": [
+    "rockstargames",
+    "rockstar",
+    "gaming"
+  ],
+  "url": [
+    "www.rockstargames.com",
+    "support.rockstargames.com",
+    "store.rockstargames.com",
+    "socialclub.rockstargames.com",
+    "signin.rockstargames.com"
+  ],
+  "description": {
+    "en": "Rockstar Games is a game development studio"
+  }
+}

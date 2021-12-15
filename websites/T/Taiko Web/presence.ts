@@ -10,9 +10,11 @@ const presence = new Presence({
     5: "Extreme"
   };
 interface Song {
+  // eslint-disable-next-line camelcase
   category_id: number;
   id: number;
   title: string;
+  // eslint-disable-next-line camelcase
   title_lang: Record<string, string>;
   category: string;
 }

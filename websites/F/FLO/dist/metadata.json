@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "service": "FLO",
   "author": {
     "name": "건유1019",
@@ -8,7 +8,7 @@
   "category": "music",
   "logo": "https://i.imgur.com/1EEUg5a.png",
   "thumbnail": "https://i.imgur.com/EgI8zOz.png",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "color": "#3f3fff",
   "tags": [
     "korean",

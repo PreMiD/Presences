@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.hostname == "hacktoberfest.digitalocean.com") {
+  if (document.location.hostname === "hacktoberfest.digitalocean.com") {
     if (document.location.pathname.includes("/faq")) {
       presenceData.details = "Reading Page:";
       presenceData.state = "FAQ";
@@ -34,10 +34,8 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

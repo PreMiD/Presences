@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Lacking",
     "id": "132693143173857281"
@@ -9,7 +10,7 @@
     "nl": "Krunker.io is een gratis io Multiplayer First Person Shooter. Geen download browser FPS! Vrij!"
   },
   "url": "krunker.io",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/pvjY5Ox.png",
   "thumbnail": "https://i.imgur.com/TiNwU7O.png",
   "color": "#ffc147",

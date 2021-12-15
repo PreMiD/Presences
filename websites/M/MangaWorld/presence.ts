@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
       if (chapterInt < 10) chapter = chapter0n.replace("0", "");
 
       let chapterString = "Capitolo";
-      if (chapter0n === undefined) (chapterString = "Oneshot"), (chapter = "");
+      if (!chapter0n) (chapterString = "Oneshot"), (chapter = "");
 
       data.smallImageKey = "book3";
       data.smallImageText = mangaName;

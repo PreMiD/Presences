@@ -1,4 +1,4 @@
-name: SE
+name: Syntax Enforcer
 on:
   schedule:
     - cron: 0 0 */3 * *
@@ -10,19 +10,13 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
-      - name: Use Node.js 12
-        uses: actions/setup-node@v2.4.0
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2.5.0
         with:
-          node-version: 12
-      - name: Restore CI Cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-      - name: Install Deps
+          node-version: 16
+          cache: "yarn"
+      - name: Prep SE
         run: yarn
-      - name: Compile Script
-        run: yarn se:compile
       - name: Start SE
         run: |
           git config --global core.quotePath false
@@ -43,7 +37,7 @@ jobs:
             git config --local user.name "${GITHUB_USER}";
             git checkout -b semid/qa/`date +%F-%H-%M`;
             git commit -sam "♻️ Refactoring";
-            hub pull-request -p -m "🤖 Semi-weekly SE" -m "*beep boop* I've prettified and refactored some Presences...";
+            hub pull-request -b "PreMiD:main" -p -m "🤖 Semi-weekly SE" -m "*beep boop* I've prettified and refactored some Presences...";
           fi
         env:
           GITHUB_USER: SeMiD

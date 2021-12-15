@@ -33,9 +33,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing packages pricing";
       break;
     default: {
-      if (document.location.pathname.startsWith("/dashboard")) {
+      if (document.location.pathname.startsWith("/dashboard"))
         presenceData.details = "Viewing account dashbaord";
-      }
+
       if (document.location.pathname.startsWith("/categories")) {
         presenceData.details = `Viewing ${toTitleCase(
           document.location.pathname
@@ -58,21 +58,22 @@ presence.on("UpdateData", async () => {
         if (video) {
           const title = document.querySelector(".video-property__title");
           if (title) presenceData.details = title.textContent;
-          else
+          else {
             presenceData.details = document.querySelector(
               ".content-title-season"
             ).textContent;
+          }
           const series = document.querySelector(".user-name.video-channel");
           if (series) presenceData.state = series.textContent;
-          else
+          else {
             presenceData.state =
               document.querySelector(".content-title-big").textContent;
+          }
           const timestamps = presence.getTimestamps(
             video.currentTime,
             video.duration
           );
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
           if (video.paused) {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;

@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    search = document.location.search;
+    { search } = document.location;
 
   if (lastPath !== curPath || lastPlaybackState !== playback) {
     lastPath = curPath;
@@ -38,26 +38,25 @@ presence.on("UpdateData", async () => {
   }
 
   if (!playback) {
-    if (curPath.includes("/login")) {
-      presenceData.details = "Đang đăng nhập";
-    } else if (search.startsWith("?s=")) {
+    if (curPath.includes("/login")) presenceData.details = "Đang đăng nhập";
+    else if (search.startsWith("?s=")) {
       presenceData.details = "Đang tìm kiếm";
-      presenceData.state = "Từ khoá: " + search.split("?s=")[1];
+      presenceData.state = `Từ khoá: ${search.split("?s=")[1]}`;
     } else if (curPath.includes("/category")) {
       const title = document.querySelector("title");
       presenceData.details = "Đang tìm phim";
-      presenceData.state = title.textContent.split(" - ")[0];
-    } else if (curPath.includes("/hentai-uncensored")) {
+      [presenceData.state] = title.textContent.split(" - ");
+    } else if (curPath.includes("/hentai-uncensored"))
       presenceData.details = "Đang tìm phim Uncensored";
-    } else if (curPath.includes("/completed-hentai")) {
+    else if (curPath.includes("/completed-hentai"))
       presenceData.details = "Đang tìm phim đã hoàn thành";
-    } else if (curPath.includes("/trailer-hentai")) {
+    else if (curPath.includes("/trailer-hentai"))
       presenceData.details = "Đang tìm trailer";
-    } else if (curPath.includes("/favorite-hentai")) {
+    else if (curPath.includes("/favorite-hentai"))
       presenceData.details = "Đang tìm danh đã thích";
-    } else if (curPath.includes("/images-gallery")) {
+    else if (curPath.includes("/images-gallery"))
       presenceData.details = "Đang tìm ảnh";
-    } else {
+    else {
       const title = document.querySelector(".anime-name>h1");
       presenceData.details = title ? title.innerHTML : "Đang ở trang chủ";
       if (title) presenceData.state = "Đang chọn tập";
@@ -82,12 +81,11 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
     presence.setTrayTitle(video.paused ? "" : title);
 
-    presenceData.details = "Đang xem: " + title;
+    presenceData.details = `Đang xem: ${title}`;
     presenceData.state = brand;
 
     if (video.paused) {

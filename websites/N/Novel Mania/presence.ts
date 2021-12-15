@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
     ),
     PagTitle: HTMLElement = document.querySelector("h2"),
     favoritar: HTMLElement = document.querySelector("#myTab");
-  if (path == "/" || !path) {
+  if (path === "/" || !path) {
     presenceData.details = "Na página inicial"; /* at home */
     presenceData.state =
       "Só olhando... Que estranho!"; /* Juist lookin, how strange! */
@@ -36,25 +36,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = novelName.innerText;
       presenceData.startTimestamp = time;
     } else if (document.body.contains(VolNumb)) {
-      presenceData.details =
-        "Lendo " +
-        NovelTitle.innerText +
-        " || " +
-        VolNumb.innerText; /* reading volume */
-      presenceData.state =
-        "Em " +
-        porcent.innerText +
-        " do " +
-        currentChapTitle.innerText; /*in X% of... novel chapter*/
+      presenceData.details = `Lendo ${NovelTitle.innerText} || ${VolNumb.innerText}`; /* reading volume */
+      presenceData.state = `Em ${porcent.innerText} do ${currentChapTitle.innerText}`; /*in X% of... novel chapter*/
       presenceData.startTimestamp = time;
     } else {
-      presenceData.details =
-        "Lendo" + NovelTitle.innerText; /* reading *novel**/
-      presenceData.state =
-        "Em " +
-        porcent.innerText +
-        "do" +
-        currentChapTitle.innerText; /*in X% of... novel chapter*/
+      presenceData.details = `Lendo${NovelTitle.innerText}`; /* reading *novel**/
+      presenceData.state = `Em ${porcent.innerText}do${currentChapTitle.innerText}`; /*in X% of... novel chapter*/
       presenceData.startTimestamp = time;
     }
   } else if (path.includes("/u/")) {

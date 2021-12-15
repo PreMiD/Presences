@@ -1,18 +1,17 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "642714892201230336"
 });
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "time"
-  };
+      largeImageKey: "time"
+    },
+    clock =
+      document.querySelector("#clock0_bg") ||
+      document.querySelector("#time_section > div:nth-child(2) > div");
 
-  var clock =
-    document.querySelector("#clock0_bg") ||
-    document.querySelector("#time_section > div:nth-child(2) > div");
-
-  if (document.location.hostname == "time.is") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "time.is") {
+    if (document.location.pathname === "/") {
       presenceData.details = "My time is:";
       presenceData.state = clock.textContent;
     } else if (clock !== null) {
@@ -21,10 +20,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

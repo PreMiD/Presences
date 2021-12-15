@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
     if (
-      document.getElementsByClassName("ListItem_isPlaying__E3wWB").length == 1
+      document.getElementsByClassName("ListItem_isPlaying__E3wWB").length === 1
     ) {
       presenceData.smallImageKey = "statusplay";
       presenceData.smallImageText = "Playing";
@@ -24,14 +24,14 @@ presence.on("UpdateData", async () => {
       presenceData.state = state.innerText;
       presenceData.startTimestamp = elapsed;
     } else if (
-      document.getElementsByClassName("ListItem_isLoading__2rDhr").length == 1
+      document.getElementsByClassName("ListItem_isLoading__2rDhr").length === 1
     ) {
       presenceData.smallImageKey = "statusplay";
       presenceData.smallImageText = "Tuning";
       presenceData.details = "Tuning";
       delete presenceData.startTimestamp;
     } else if (
-      document.getElementsByClassName("ListItem_isPaused__3xqrt").length == 1
+      document.getElementsByClassName("ListItem_isPaused__3xqrt").length === 1
     ) {
       presenceData.smallImageKey = "statusstop";
       presenceData.smallImageText = "Stopped";

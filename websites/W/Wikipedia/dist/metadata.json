@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.1",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -22,8 +22,8 @@
     "ga_IE": "Ciclipéid ilteangach ar líne é Wikipedia, bunaithe ar chomhoibriú oscailte trí chóras eagarthóireachta ábhar bunaithe ar wiki."
   },
   "url": "wikipedia.org",
-  "version": "2.7.8",
-  "logo": "https://i.imgur.com/JyyHKLB.png",
+  "version": "2.7.11",
+  "logo": "https://i.imgur.com/4OX6OZi.png",
   "thumbnail": "https://i.imgur.com/vJiuzZy.png",
   "color": "#f9f9f9",
   "tags": [

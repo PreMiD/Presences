@@ -34,7 +34,7 @@ sezonlukDizi.on("UpdateData", async () => {
       startTimestamp
     },
     page = document.location.pathname,
-    search = document.location.search;
+    { search } = document.location;
 
   if (search.includes("?tur=")) {
     const titleReplaced = document.title.slice(
@@ -112,7 +112,7 @@ sezonlukDizi.on("UpdateData", async () => {
       episode = document.querySelector(
         ".content strong h1.header small"
       )?.textContent,
-      timestamps = sezonlukDizi.getTimestamps(
+      [startTimestamp, endTimestamp] = sezonlukDizi.getTimestamps(
         video.currentTime,
         video.duration
       );
@@ -120,8 +120,8 @@ sezonlukDizi.on("UpdateData", async () => {
     presenceData.details = showTitle;
     presenceData.state = episode;
 
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.startTimestamp = startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
 
     if (video.paused) {
       delete presenceData.startTimestamp;

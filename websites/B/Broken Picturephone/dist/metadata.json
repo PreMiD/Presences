@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Luis Gabriel",
     "id": "403648338286870529"
@@ -10,7 +10,7 @@
     "nl": "Een online spel waar je kunt tekenen, raden en woorden naar je vrienden kunt sturen."
   },
   "service": "Broken Picturephone",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/34NoyFW.png",
   "thumbnail": "https://i.imgur.com/kzYyxMn.png",
   "color": "#FC6807",

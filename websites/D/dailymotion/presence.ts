@@ -29,8 +29,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
     presence.setTrayTitle(video.paused ? "" : title.textContent);
 
@@ -39,9 +38,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (title !== null && uploader !== null) {
+    if (title !== null && uploader !== null)
       presence.setActivity(presenceData, !video.paused);
-    }
   } else {
     const pageData: PresenceData = {
       details: "Browsing..",
