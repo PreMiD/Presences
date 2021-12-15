@@ -66,12 +66,12 @@ presence.on("UpdateData", () => {
     presenceData.details = "Finding blogs";
     presenceData.smallImageKey = "blogs";
     presenceData.smallImageText = "Viewing blogs";
-    presenceData.buttons = [{ label: "Read Blog", url: document.URL }];
   } else if (document.location.pathname.startsWith("/blog")) {
     presenceData.details = "Reading a blog:";
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "blogs";
     presenceData.smallImageText = "Viewing blogs";
+    presenceData.buttons = [{ label: "Read Blog", url: document.URL }];
   } else if (document.location.href.indexOf("gear-builder") > -1) {
     presenceData.details = "Making a Gear Builder template";
     presenceData.smallImageKey = "gearbuilder";
