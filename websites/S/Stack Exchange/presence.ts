@@ -17,12 +17,6 @@ presence.on("UpdateData", async () => {
   } else if (hostname === "meta.serverfault.com") {
     presenceData.largeImageKey = "serverfault";
     presenceData.details = "Server Fault Meta";
-  } else if (hostname === "askubuntu.com") {
-    presenceData.largeImageKey = "askubuntu";
-    presenceData.details = "Ask Ubuntu";
-  } else if (hostname === "meta.askubuntu.com") {
-    presenceData.largeImageKey = "askubuntu";
-    presenceData.details = "Ask Ubuntu Meta";
   } else if (hostname === "superuser.com") {
     presenceData.largeImageKey = "superuser";
     presenceData.details = "Super User";
@@ -47,9 +41,7 @@ presence.on("UpdateData", async () => {
         "serverfault.com",
         "meta.serverfault.com",
         "superuser.com",
-        "meta.superuser.com",
-        "askubuntu.com",
-        "meta.askubuntu.com"
+        "meta.superuser.com"
       ].includes(hostname)
     )
       presenceData.state = "Main Page";
@@ -61,9 +53,7 @@ presence.on("UpdateData", async () => {
       "serverfault.com",
       "meta.serverfault.com",
       "superuser.com",
-      "meta.superuser.com",
-      "askubuntu.com",
-      "meta.askubuntu.com"
+      "meta.superuser.com"
     ].includes(hostname)
   )
     presenceData.state = "Browsing";

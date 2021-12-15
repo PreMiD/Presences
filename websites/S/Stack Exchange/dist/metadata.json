@@ -4,8 +4,8 @@
       "name": "AcidEpicice",
       "id": "249992970235936768"
     },
-    "url": ["stackexchange.com", "serverfault.com", "askubuntu.com", "superuser.com"],
-    "regExp": "(.*\\.)*(stackexchange\\.com|superuser\\.com|askubuntu\\.com|serverfault\\.com)",
+    "url": ["stackexchange.com", "serverfault.com", "superuser.com"],
+    "regExp": "(.*\\.)*(stackexchange\\.com|superuser\\.com|serverfault\\.com)",
     "description": {
       "en": "Stack Exchange is a network of question-and-answer websites on topics in diverse fields, each site covering a specific topic, where questions, answers, and users are subject to a reputation award process. The reputation system allows the sites to be self-moderating."
     },
