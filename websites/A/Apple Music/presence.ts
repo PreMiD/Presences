@@ -26,32 +26,38 @@ function getTimestamps(audioDuration: string): Array<number> {
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "applemusic-logo"
-  };
+      largeImageKey: "applemusic-logo"
+    },
+    playerCheck = document.querySelector(
+      "div.web-chrome-playback-lcd__playback-description.playback-description-not-loaded"
+    )
+      ? false
+      : true;
 
-  const playerCheck = document.querySelector("div.web-chrome-playback-lcd__playback-description.playback-description-not-loaded")
-    ? false
-    : true;
   if (playerCheck) {
     const title = document
-      .querySelector(
-        ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+        .querySelector(
+          ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+        )
+        ?.textContent.trim(),
+      author =
+        document
+          .querySelector(
+            ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
+          )
+          ?.textContent.split("—")[0] ||
+        document.querySelector(
+          ".ember-view.web-chrome-playback-lcd__sub-copy-scroll-link"
+        )?.textContent,
+      audioTime = document.querySelector(
+        ".web-chrome-playback-lcd__time-end"
+      )?.textContent,
+      timestamps = getTimestamps(audioTime),
+      paused = document.querySelector(
+        ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
       )
-      ?.textContent.trim();
-    const author = document
-      .querySelector(
-        ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
-      )
-      ?.textContent.split("—")[0] || document.querySelector(".ember-view.web-chrome-playback-lcd__sub-copy-scroll-link")?.textContent;
-    const audioTime = document.querySelector(
-      ".web-chrome-playback-lcd__time-end"
-    )?.textContent;
-    const timestamps = getTimestamps(audioTime);
-    const paused = document.querySelector(
-      ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
-    )
-      ? true
-      : false;
+        ? true
+        : false;
 
     data.details = title;
     data.state = author;
@@ -67,8 +73,7 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    presence.setActivity(data);
-  } else {
-    presence.clearActivity();
-  }
+    if (!data.details) presence.clearActivity();
+    else presence.setActivity(data);
+  } else presence.clearActivity();
 });
