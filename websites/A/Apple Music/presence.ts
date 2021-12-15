@@ -27,24 +27,29 @@ presence.on("UpdateData", async () => {
       largeImageKey: "applemusic-logo"
     },
     playerCheck = document.querySelector(
-      ".web-chrome-playback-controls__playback-btn[disabled]"
+      "div.web-chrome-playback-lcd__playback-description.playback-description-not-loaded"
     )
       ? false
       : true;
+
   if (playerCheck) {
     const title = document
         .querySelector(
           ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
         )
         ?.textContent.trim(),
-      author = document
-        .querySelector(
-          ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
-        )
-        ?.textContent.split("—")[0],
+      author =
+        document
+          .querySelector(
+            ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
+          )
+          ?.textContent.split("—")[0] ||
+        document.querySelector(
+          ".ember-view.web-chrome-playback-lcd__sub-copy-scroll-link"
+        )?.textContent,
       audioTime = document.querySelector(
         ".web-chrome-playback-lcd__time-end"
-      ).textContent,
+      )?.textContent,
       paused = document.querySelector(
         ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
       )
@@ -62,6 +67,7 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    presence.setActivity(data);
+    if (!data.details) presence.clearActivity();
+    else presence.setActivity(data);
   } else presence.clearActivity();
 });
