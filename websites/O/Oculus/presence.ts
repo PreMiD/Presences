@@ -248,8 +248,23 @@ presence.on("UpdateData", async () => {
             break;
           }
           case "vr-for-good": {
-            presenceData.details = "Viewing Page:";
-            presenceData.state = "VR for Good";
+            if (path[1] === "stories" && path[2]) {
+              presenceData.details = "VR for Good - Story:";
+              presenceData.state =
+                document.querySelector(
+                  "h1._2e90._2e93._2e94.article-hero__title"
+                )?.textContent || splitOnDashes(path[2]);
+
+              presenceData.buttons = [
+                {
+                  label: "Read Story",
+                  url: `https://${hostName}/vr-for-good/stories/${path[2]}`
+                }
+              ];
+            } else {
+              presenceData.details = "Viewing Page:";
+              presenceData.state = "VR for Good";
+            }
 
             break;
           }
