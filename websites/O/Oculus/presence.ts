@@ -154,6 +154,13 @@ presence.on("UpdateData", async () => {
               )
             )
               presenceData.details = "Reading Reviews of:";
+            else if (path[1]) {
+              presenceData.details = `Product - ${splitOnDashes(path[0])}`;
+              presenceData.state =
+                document.querySelector(
+                  "h1.rbpbduva.slrhy5ou.sw32xbbe.tssb32rf.q8m3c5hr.sjvld55j.h2xm5abc.t2genh0f.aiyvpu16.d29ffpmv.ecv66445.mm8y8im2.i7qx9w64.rhjqn6gv.p5bjl15m.rz0v8pod.mnbq7hy4"
+                )?.textContent || "Unknown";
+            }
 
             presenceData.buttons = [
               {
