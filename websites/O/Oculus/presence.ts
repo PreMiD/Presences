@@ -238,10 +238,10 @@ presence.on("UpdateData", async () => {
 
             presenceData.details = "Comparing Headsets:";
             presenceData.state = `${
-              headset.left?.options[headset.left?.selectedIndex]?.text ||
+              headset.left?.options[headset.left.selectedIndex]?.text ||
               "Unknown"
             } x ${
-              headset.right?.options[headset.right?.selectedIndex]?.text ||
+              headset.right?.options[headset.right.selectedIndex]?.text ||
               "Unknown"
             }`;
 
