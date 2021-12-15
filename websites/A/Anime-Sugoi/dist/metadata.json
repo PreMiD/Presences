@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Yusaki",
     "id": "439582316873121793"
@@ -11,8 +12,8 @@
     "nl": "Anime-Sugoi streamt je favoriete anime volledig gratis met thai-sub en thai sound! ​ Deze website heeft mogelijk een VPN verbinding nodig voor toegang, andere landen dab thailand worden geblokkeerd!"
   },
   "url": "www.anime-sugoi.com",
-  "version": "1.0.9",
-  "logo": "https://i.imgur.com/7mAxf63.png",
+  "version": "1.0.12",
+  "logo": "https://i.imgur.com/DfHT5E8.png",
   "thumbnail": "https://i.imgur.com/3wTOxd0.jpg",
   "color": "#ff6666",
   "tags": [

@@ -26,13 +26,8 @@ presence.on("UpdateData", async () => {
     showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
-    details: undefined,
-    state: undefined,
     largeImageKey: "googledomains",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
+    startTimestamp: elapsed
   };
 
   if (document.location.href !== prevUrl) {
@@ -40,11 +35,8 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
-      data = { ...data, ...v };
-    }
-  }
+  for (const [k, v] of Object.entries(statics))
+    if (path.match(k)) data = { ...data, ...v };
 
   if (path.includes("/m/registrar/")) {
     const domainName = getElement(".domain-header-title > span");
@@ -63,9 +55,8 @@ presence.on("UpdateData", async () => {
     data.state = getElement(".item-count")?.slice(1, -1);
   }
 
-  if (path.includes("/m/registrar/checkout/")) {
+  if (path.includes("/m/registrar/checkout/"))
     data.details = "Viewing Checkout...";
-  }
 
   if (path.includes("/m/registrar/search/")) {
     data.details = "Searching...";

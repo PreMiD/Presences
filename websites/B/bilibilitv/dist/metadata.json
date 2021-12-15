@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "bilibilitv",
+    "author": {
+      "name": "Eason",
+      "id": "462456154266796032"
+    },
+    "category": "anime",
+    "logo": "https://i.imgur.com/BY7MROC.png",
+    "thumbnail": "https://i.imgur.com/eMifMYk.png",
+    "version": "1.0.0",
+    "color": "#2e62ff",
+    "tags": [
+      "anime"
+    ],
+    "url": [
+        "www.bilibili.tv",
+        "studio.bilibili.tv"
+    ],
+    "description": {
+      "en": "bilibili.tv is an ad-free anime streaming website."
+    }
+  }

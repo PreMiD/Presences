@@ -8,19 +8,17 @@ const presence = new Presence({
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--)
     ret += parseInt(list[index]) * 60 ** index;
-  }
+
   return ret;
 }
 
 function getTimestamps(audioDuration: string): Array<number> {
-  const splitAudioDuration = audioDuration?.split(":").reverse();
-
-  const parsedAudioDuration = getTime(splitAudioDuration);
-
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
+  const splitAudioDuration = audioDuration.split(":").reverse(),
+    parsedAudioDuration = getTime(splitAudioDuration),
+    startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -52,7 +50,6 @@ presence.on("UpdateData", async () => {
       audioTime = document.querySelector(
         ".web-chrome-playback-lcd__time-end"
       )?.textContent,
-      timestamps = getTimestamps(audioTime),
       paused = document.querySelector(
         ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
       )
@@ -61,12 +58,9 @@ presence.on("UpdateData", async () => {
 
     data.details = title;
     data.state = author;
-    (data.smallImageKey = paused ? "pause" : "play"),
-      (data.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play),
-      (data.startTimestamp = timestamps[0]),
-      (data.endTimestamp = timestamps[1]);
+    data.smallImageKey = paused ? "pause" : "play";
+    data.smallImageText = paused ? (await strings).pause : (await strings).play;
+    [data.startTimestamp, data.endTimestamp] = getTimestamps(audioTime);
 
     if (paused) {
       delete data.startTimestamp;

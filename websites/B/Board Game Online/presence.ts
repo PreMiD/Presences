@@ -6,9 +6,8 @@ const presence = new Presence({
   }),
   getElement = (query: string): string => {
     const element = document.querySelector(query);
-    if (element) {
-      return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return undefined;
+    if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
+    else return;
   };
 
 function setObject(path: string) {
@@ -107,7 +106,7 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "boardgameonline"
     },
-    host = location.host,
+    { host } = location,
     path = location.pathname,
     query = location.search,
     queryString = query && query.split("page=")[1].split("&")[0],
@@ -118,7 +117,7 @@ presence.on("UpdateData", async () => {
       (data.details = detailsObj.details), (data.state = detailsObj.state);
 
     const header = getElement(".page_wrapper.show > .page_content > h2");
-    if (header !== undefined) {
+    if (header) {
       data.details = "Viewing";
       data.state = header;
     }
@@ -126,7 +125,7 @@ presence.on("UpdateData", async () => {
     const profile = getElement(
       ".page_wrapper.show > .page_content > #profile_name_title > .userName"
     );
-    if (profile !== undefined) {
+    if (profile) {
       data.details = "Viewing Profile";
       data.state = profile;
     }
@@ -137,12 +136,11 @@ presence.on("UpdateData", async () => {
     data.details = "Playing Game";
     data.state = document.title;
 
-    if (playerCount) {
-      data.state = document.title + ` (${playerCount - 1} Players)`;
-    }
+    if (playerCount)
+      data.state = `${document.title} (${playerCount - 1} Players)`;
   }
 
-  if (data.details !== undefined) {
+  if (data.details) {
     if (data.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;

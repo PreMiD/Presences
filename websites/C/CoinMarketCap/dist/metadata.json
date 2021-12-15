@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "jvnxs7",
+    "id": "209945797918195712"
+  },
+  "service": "CoinMarketCap",
+  "description": {
+    "en": "CoinMarketCap is the world's most-referenced price-tracking website for cryptoassets in the rapidly growing cryptocurrency space.",
+    "de": "CoinMarketCap ist die weltweit am meisten referenzierte Preisverfolgungs-Website für Krypto-Assets im schnell wachsenden Kryptowährungsraum."
+  },
+  "url": [
+    "coinmarketcap.com",
+    "www.coinmarketcap.com"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/tGicpVW.png",
+  "thumbnail": "https://i.imgur.com/aUGhAIe.png",
+  "color": "#2C6CFC",
+  "tags": [
+    "coin",
+    "currency"
+  ],
+  "category": "other"
+}

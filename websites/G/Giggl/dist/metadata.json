@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "CRUGG",
+    "id": "228965621478588416"
+  },
+  "contributors": [
+    {
+      "name": "Encrypted",
+      "id": "564434085708038144"
+    }
+  ],
+  "service": "Giggl",
+  "description": {
+    "en": "Watch & browse the web, together - From hosting virtual movie nights, browsing the web with friends or watching anime with your long-distance partner: Giggl lets you do that together in real-time."
+  },
+  "url": [
+    "giggl.app",
+    "canary.giggl.app",
+    "status.giggl.app"
+  ],
+  "version": "2.0.1",
+  "logo": "https://i.imgur.com/k1TnUGL.jpg",
+  "thumbnail": "https://i.imgur.com/i5j8A6k.png",
+  "color": "#FF0099",
+  "tags": [
+    "voice",
+    "browsing",
+    "watching",
+    "media"
+  ],
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "time",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
+}

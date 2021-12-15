@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Vyrek",
     "id": "538421122920742942"
@@ -11,7 +11,7 @@
     "nl": "De webdocumenten van MDN, hier vind je JS-documenten en meer..."
   },
   "service": "MDN Web Docs",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/SmC65Yu.png",
   "thumbnail": "https://i.imgur.com/TkKC4bK.png",
   "color": "#84d4f4",

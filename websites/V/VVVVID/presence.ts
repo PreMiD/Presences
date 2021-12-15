@@ -1,32 +1,24 @@
-var presence = new Presence({
-  clientId: "639916600031707149"
-});
+const presence = new Presence({
+    clientId: "639916600031707149"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var hour: number, min: number, sec: number, time: number;
-var hour2: number, min2: number, sec2: number, time2: number;
-var paused: any, timestamps: any;
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let hour: number,
+  min: number,
+  sec: number,
+  time: number,
+  hour2: number,
+  min2: number,
+  sec2: number,
+  time2: number,
+  paused: boolean;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "vid"
   };
 
-  if (document.location.hostname == "www.vvvvid.it") {
+  if (document.location.hostname === "www.vvvvid.it") {
     if (
       document.querySelector(
         "#pl_controls > div.ppcontroltime > div.pptimeleft"
@@ -76,13 +68,16 @@ presence.on("UpdateData", async () => {
         ) !== null
           ? false
           : true;
-      if (paused == true) {
+      if (paused === true) {
         presenceData.smallImageKey = "pause";
         presenceData.smallImageText = "In pausa";
       } else {
-        timestamps = getTimestamps(time, time2);
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        const [startTimestamp, endTimestamp] = presence.getTimestamps(
+          time,
+          time2
+        );
+        presenceData.startTimestamp = startTimestamp;
+        presenceData.endTimestamp = endTimestamp;
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = "Riproducendo";
       }
@@ -114,10 +109,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

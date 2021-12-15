@@ -1,86 +1,60 @@
-interface LangStrings {
-  buttonJoinGame: string;
-  joiningGame: string;
-  waiting: string;
-  gameStarting: string;
-  playing: string;
-  questionLoading: string;
-  incorrectAnswer: string;
-  correctAnswer: string;
-  resultsQuestion: string;
-  slideViewing: string;
-  gameOver: string;
-  gameCreate: string;
-  loadingPage: string;
-  firstPlace: string;
-  points: string;
-  questionsCorrect: string;
-  slideShowing: string;
-  questionShowing: string;
-  stString: string;
-  ndString: string;
-  rdString: string;
-  topX: string;
-  of: string;
-  questionNumber: string;
-}
-
 async function findRanking(rankingSelector: HTMLElement) {
-  const stString = (await strings).stString,
-    ndString = (await strings).ndString,
-    rdString = (await strings).rdString,
-    topX = (await strings).topX;
+  const { stString } = await strings,
+    { ndString } = await strings,
+    { rdString } = await strings,
+    { topX } = await strings;
 
   if (
-    rankingSelector.textContent == stString ||
-    rankingSelector.textContent == ndString ||
-    rankingSelector.textContent == rdString ||
-    rankingSelector.textContent == topX
+    rankingSelector.textContent === stString ||
+    rankingSelector.textContent === ndString ||
+    rankingSelector.textContent === rdString ||
+    rankingSelector.textContent === topX
   )
     return true;
   else return false;
 }
 
 const presence = new Presence({
-    clientId: "612793327510749210"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        buttonJoinGame: "kahoot.buttonJoinGame",
-        joiningGame: "kahoot.joiningGame",
-        waiting: "kahoot.waiting",
-        gameStarting: "kahoot.gameStarting",
-        playing: "kahoot.playing",
-        questionLoading: "kahoot.questionLoading",
-        incorrectAnswer: "kahoot.incorrectAnswer",
-        correctAnswer: "kahoot.correctAnswer",
-        resultsQuestion: "kahoot.resultsQuestion",
-        slideViewing: "kahoot.slideViewing",
-        gameOver: "kahoot.gameOver",
-        gameCreate: "kahoot.gameCreate",
-        loadingPage: "kahoot.loadingPage",
-        firstPlace: "kahoot.firstPlace",
-        points: "kahoot.points",
-        questionsCorrect: "kahoot.questionsCorrect",
-        slideShowing: "kahoot.slideShowing",
-        questionShowing: "kahoot.questionShowing",
-        stString: "kahoot.stString",
-        ndString: "kahoot.ndString",
-        rdString: "kahoot.rdString",
-        topX: "kahoot.topX",
-        of: "kahoot.of",
-        questionNumber: "kahoot.questionNumber"
-      },
-      await presence.getSetting("lang")
-    );
-  };
+  clientId: "612793327510749210"
+});
+
+async function getStrings() {
+  return presence.getStrings(
+    {
+      buttonJoinGame: "kahoot.buttonJoinGame",
+      joiningGame: "kahoot.joiningGame",
+      waiting: "kahoot.waiting",
+      gameStarting: "kahoot.gameStarting",
+      playing: "kahoot.playing",
+      questionLoading: "kahoot.questionLoading",
+      incorrectAnswer: "kahoot.incorrectAnswer",
+      correctAnswer: "kahoot.correctAnswer",
+      resultsQuestion: "kahoot.resultsQuestion",
+      slideViewing: "kahoot.slideViewing",
+      gameOver: "kahoot.gameOver",
+      gameCreate: "kahoot.gameCreate",
+      loadingPage: "kahoot.loadingPage",
+      firstPlace: "kahoot.firstPlace",
+      points: "kahoot.points",
+      questionsCorrect: "kahoot.questionsCorrect",
+      slideShowing: "kahoot.slideShowing",
+      questionShowing: "kahoot.questionShowing",
+      stString: "kahoot.stString",
+      ndString: "kahoot.ndString",
+      rdString: "kahoot.rdString",
+      topX: "kahoot.topX",
+      of: "kahoot.of",
+      questionNumber: "kahoot.questionNumber"
+    },
+    await presence.getSetting("lang")
+  );
+}
 
 let currentQuestion: string,
   score: string,
   ranking: string,
   top5: Promise<boolean>,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null,
   rankingSelector: HTMLElement;
 
@@ -91,9 +65,8 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -101,13 +74,16 @@ presence.on("UpdateData", async () => {
   if (document.location.href.match("https://kahoot.it")) {
     const path = document.location.pathname;
 
-    if (path == "/" || path.includes("/join") || path == "/v2/") {
-      presenceData.details = (await strings).joiningGame; // Joining Game...
-    } else if (path.includes("/instructions")) {
-      presenceData.details = (await strings).waiting; // Waiting to Start...
-    } else if (path.includes("/start")) {
-      presenceData.details = (await strings).gameStarting; // Game Starting!
-    } else if (path.includes("/gameblock")) {
+    if (path === "/" || path.includes("/join") || path === "/v2/")
+      presenceData.details = (await strings).joiningGame;
+    // Joining Game...
+    else if (path.includes("/instructions"))
+      presenceData.details = (await strings).waiting;
+    // Waiting to Start...
+    else if (path.includes("/start"))
+      presenceData.details = (await strings).gameStarting;
+    // Game Starting!
+    else if (path.includes("/gameblock")) {
       currentQuestion = document.querySelector(
         "div.top-bar__QuestionNumber-sc-186o9v8-2"
       ).textContent;
@@ -142,9 +118,10 @@ presence.on("UpdateData", async () => {
         : (await strings).correctAnswer; // Correct Answer
       presenceData.details = (await strings).resultsQuestion; // Looking at Results:
       presenceData.state = result;
-    } else if (path.includes("/contentblock")) {
-      presenceData.details = (await strings).slideViewing; // Looking at Slide with Content:
-    } else if (path.includes("/ranking")) {
+    } else if (path.includes("/contentblock"))
+      presenceData.details = (await strings).slideViewing;
+    // Looking at Slide with Content:
+    else if (path.includes("/ranking")) {
       rankingSelector = document.querySelector(
         "p.shadow-text__Text-sc-1mgpgij-1"
       );
@@ -164,15 +141,14 @@ presence.on("UpdateData", async () => {
             "{0}",
             ""
           )} ${score}`; // Game Over | Points:
-    } else {
-      presenceData.details = (await strings).loadingPage;
-    }
+    } else presenceData.details = (await strings).loadingPage;
+
     presence.setActivity(presenceData);
   } else if (document.location.href.match("https://play.kahoot.it")) {
     const path = document.location.pathname;
-    if (path == "/v2/") {
-      presenceData.details = (await strings).gameCreate; // Creating a Game...
-    } else if (path.includes("/lobby")) {
+    if (path === "/v2/") presenceData.details = (await strings).gameCreate;
+    // Creating a Game...
+    else if (path.includes("/lobby")) {
       presenceData.details = (await strings).waiting; // Waiting to Start...
 
       if (buttons) {
@@ -184,7 +160,7 @@ presence.on("UpdateData", async () => {
                 "div.headerstyles__GamePinGrouped-jk6b9n-9"
               ).textContent
             )}`, // Join Game: ID
-            url: `https://kahoot.it/`
+            url: "https://kahoot.it/"
           }
         ];
       }
@@ -239,9 +215,8 @@ presence.on("UpdateData", async () => {
         "{0}",
         ""
       )} ${questionNo}`; // Question: 1 of 3
-    } else {
-      presenceData.details = (await strings).loadingPage; // Loading Page:
-    }
+    } else presenceData.details = (await strings).loadingPage; // Loading Page:
+
     presence.setActivity(presenceData);
   }
 });

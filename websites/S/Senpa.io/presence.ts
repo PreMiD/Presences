@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "691669470057594940"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "691669470057594940"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -10,9 +9,8 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.host.split(".")[0] !== "forum") {
-    if (document.location.pathname === "/") {
-      presenceData.details = "Home";
-    } else if (document.location.pathname.includes("/web/")) {
+    if (document.location.pathname === "/") presenceData.details = "Home";
+    else if (document.location.pathname.includes("/web/")) {
       const profile = JSON.parse(localStorage.getItem("senpaio:profiles"));
       presenceData.details = `Playing on server : ${localStorage.getItem(
         "senpaio:region"
@@ -20,24 +18,25 @@ presence.on("UpdateData", async () => {
         document.querySelector("#room-stats-hud").textContent
       }`;
       presenceData.state =
-        `Player : ${profile.tag == "" ? "" : `[${profile.tag}]`} ${
-          profile.list[profile.selected].nick == ""
+        `Player : ${profile.tag === "" ? "" : `[${profile.tag}]`} ${
+          profile.list[profile.selected].nick === ""
             ? "no nick"
             : profile.list[profile.selected].nick
         }` + ` | ${document.querySelector("#stats-hud").textContent}`;
       presenceData.startTimestamp = browsingStamp;
     } else {
-      presenceData.details = document
+      const [, details] = document
         .querySelector("title")
-        .textContent.split("-")[1];
+        .textContent.split("-");
+      presenceData.details = details;
       presenceData.smallImageKey = "reading";
     }
 
-    if (presenceData.details == null) {
+    if (!presenceData.details) {
       presence.setTrayTitle();
       presence.setActivity();
     } else {
-      if (presenceData.state == null) presenceData.state = "Navigating...";
+      if (!presenceData.state) presenceData.state = "Navigating...";
       presence.setActivity(presenceData);
     }
   }

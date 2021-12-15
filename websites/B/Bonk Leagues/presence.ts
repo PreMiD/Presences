@@ -19,23 +19,19 @@ presence.on("UpdateData", async () => {
       presenceData.state = skinCategory
         ? `Adding a ${skinCategory.textContent} skin`
         : "Adding a skin";
-    } else if (document.querySelector(addBonkIOSkinSelector)) {
+    } else if (document.querySelector(addBonkIOSkinSelector))
       presenceData.state = "Adding a bonk2.io skin";
-    }
-  } else if (document.location.pathname.startsWith("/editor.html")) {
+  } else if (document.location.pathname.startsWith("/editor.html"))
     presenceData.details = "in Skin Editor";
-  } else if (document.location.pathname.startsWith("/xpchecker.html")) {
+  else if (document.location.pathname.startsWith("/xpchecker.html"))
     presenceData.details = "in Player XP Checker";
-  } else if (document.location.pathname.startsWith("/mapchecker.html")) {
+  else if (document.location.pathname.startsWith("/mapchecker.html"))
     presenceData.details = "in Quick Play Map Checker";
-  } else if (document.location.pathname.startsWith("/serverstatus.html")) {
+  else if (document.location.pathname.startsWith("/serverstatus.html"))
     presenceData.details = "Viewing Server Status";
-  }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

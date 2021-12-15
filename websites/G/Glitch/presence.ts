@@ -46,9 +46,9 @@ presence.on("UpdateData", () => {
     }
   } else {
     presenceData.details = "Viewing a page:";
-    if (window.location.pathname.toLowerCase() === "/") {
+    if (window.location.pathname.toLowerCase() === "/")
       presenceData.state = "Homepage";
-    } else if (window.location.pathname.toLowerCase().includes("/questions")) {
+    else if (window.location.pathname.toLowerCase().includes("/questions")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Questions";
     } else if (window.location.pathname.toLowerCase().includes("/create")) {
@@ -80,7 +80,7 @@ presence.on("UpdateData", () => {
     } else delete presenceData.details;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

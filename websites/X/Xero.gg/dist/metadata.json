@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Dekirai",
     "id": "146743774909825024"
@@ -10,8 +11,8 @@
     "nl": "xero.gg is een website Player- en Clan-database voor een privéserver van het spel S4 League."
   },
   "url": "xero.gg",
-  "version": "1.1.4",
-  "logo": "https://i.imgur.com/7GG8BKZ.png",
+  "version": "1.1.7",
+  "logo": "https://i.imgur.com/opZJy1Y.png",
   "thumbnail": "https://i.imgur.com/zQcNcIm.png",
   "color": "#428DE3",
   "tags": [

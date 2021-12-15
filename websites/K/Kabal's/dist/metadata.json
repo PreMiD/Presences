@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Eren",
     "id": "478937019758673931"
@@ -10,8 +11,8 @@
     "nl": "De bot van Kabal biedt sociale aspecten, waaronder een ledenprofiel, leuke dingen en moderatie."
   },
   "url": "bot.emirkabal.com",
-  "version": "1.2.6",
-  "logo": "https://i.imgur.com/8V5NfYD.png",
+  "version": "1.2.9",
+  "logo": "https://i.imgur.com/FIkYpzN.png",
   "thumbnail": "https://i.imgur.com/nitFxle.png",
   "color": "#2942BF",
   "tags": [

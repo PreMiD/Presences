@@ -84,7 +84,7 @@ const presence = new Presence({
 let blog: string, cafeTitle: string;
 
 presence.on("iFrameData", (data: { blog: string }) => {
-  blog = data.blog;
+  ({ blog } = data);
 });
 
 presence.on("UpdateData", async () => {
@@ -538,8 +538,7 @@ presence.on("UpdateData", async () => {
             }
           ];
         } else if (data.service === "NAVER_CAFE") {
-          if (!cafeTitle)
-            cafeTitle = document.querySelector("h1.d-none")?.textContent;
+          cafeTitle ??= document.querySelector("h1.d-none")?.textContent;
           if (cafeTitle) {
             presenceData.details = "Viewing cafe:";
             presenceData.state = cafeTitle;
@@ -608,10 +607,11 @@ presence.on("UpdateData", async () => {
   if (data.settings) {
     for (const setting of data.settings) {
       if (!(await presence.getSetting(setting.id))) {
-        if (setting.delete)
+        if (setting.delete) {
           setting.data.forEach((x) => {
             delete presenceData[<"state">x];
           });
+        }
       }
     }
   }

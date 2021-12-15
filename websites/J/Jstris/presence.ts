@@ -41,11 +41,9 @@ presence.on("UpdateData", async () => {
         switch (queryObj.play) {
           case "1":
             presenceData.details = "Sprint";
-            if (queryObj.rule) {
-              presenceData.state = "Special Ruleset";
-            } else {
-              presenceData.state = sprintLineMode(queryObj.mode);
-            }
+            if (queryObj.rule) presenceData.state = "Special Ruleset";
+            else presenceData.state = sprintLineMode(queryObj.mode);
+
             break;
           case "2":
             presenceData.details = "Practice";
@@ -61,7 +59,7 @@ presence.on("UpdateData", async () => {
             break;
           case "6":
             presenceData.details = "Playing Custom Map";
-            presenceData.state = "Map ID: " + queryObj.map;
+            presenceData.state = `Map ID: ${queryObj.map}`;
             if (tempButtons.length !== 2) {
               tempButtons.unshift({
                 label: "Play Map",
@@ -76,9 +74,8 @@ presence.on("UpdateData", async () => {
             presenceData.details = "PC Mode";
             break;
         }
-      } else {
-        presenceData.details = "Live";
-      }
+      } else presenceData.details = "Live";
+
       break;
     //Leaderboards
     case "sprint":
@@ -104,13 +101,14 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing Maps";
       break;
     case "map":
-      presenceData.details =
-        "Viewing Map: " + document.querySelector("h1").innerText;
-      presenceData.state = "Map ID: " + pathname[1];
+      presenceData.details = `Viewing Map: ${
+        document.querySelector("h1").innerText
+      }`;
+      presenceData.state = `Map ID: ${pathname[1]}`;
       break;
     //User
     case "u":
-      presenceData.details = "Viewing User: " + pathname[1];
+      presenceData.details = `Viewing User: ${pathname[1]}`;
       presenceData.state = (<HTMLElement>(
         document.querySelector(".col-md-8")
       )).innerText;
@@ -122,16 +120,13 @@ presence.on("UpdateData", async () => {
   }
 
   //Sets the buttons:
-  if (tempButtons.length !== 0 && tempButtons.length <= 2) {
+  if (tempButtons.length !== 0 && tempButtons.length <= 2)
     presenceData.buttons = tempButtons;
-  }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
 
 function getUsername() {
@@ -141,13 +136,13 @@ function getUsername() {
       .getElementsByClassName("dropdown-toggle")[1]
       .textContent.replace(/\n/g, "");
   } catch (err) {
-    return undefined;
+    return;
   }
 }
 
 function parseQuery(search: string) {
   return JSON.parse(
-    '{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
+    `{"${search.replace(/&/g, '","').replace(/=/g, '":"')}"}`,
     function (key, value) {
       return key === "" ? value : decodeURIComponent(value);
     }
@@ -155,7 +150,7 @@ function parseQuery(search: string) {
 }
 
 function leaderboardText(innerText: string) {
-  return "Browsing " + innerText + " Leaderboards";
+  return `Browsing ${innerText} Leaderboards`;
 }
 
 function sprintLineMode(mode: string) {

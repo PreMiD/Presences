@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "BitChute",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "videos",
+  "logo": "https://i.imgur.com/ugI6cCC.png",
+  "thumbnail": "https://i.imgur.com/9L0dyfo.png",
+  "version": "1.0.3",
+  "color": "#ffa500",
+  "tags": [
+    "bitchute",
+    "video",
+    "yt-alt",
+    "nsfw"
+  ],
+  "url": "www.bitchute.com",
+  "description": {
+    "en": "BitChute is a peer-to-peer content sharing platform."
+  },
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "time",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "Het is gratis TV."
   },
   "url": "pluto.tv",
-  "version": "1.3.6",
+  "version": "1.3.8",
   "logo": "https://i.imgur.com/oIasj8d.png",
   "thumbnail": "https://i.imgur.com/ySBvYkV.png",
   "color": "#ffffff",

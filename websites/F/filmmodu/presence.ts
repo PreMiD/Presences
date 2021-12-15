@@ -1,11 +1,13 @@
 const presence = new Presence({
     clientId: "634816982843129857"
   }),
-  strings: any = presence.getStrings({
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/film-arsivi": "Film Arşivi",
     "/en-cok-izlenen-filmler": "En Çok İzlenen Filmler",
     "/boxset-filmler": "Seri Filmleri",
@@ -17,20 +19,6 @@ const presence = new Presence({
     "/kayit-ol": "Kayıt Ol",
     "/iletisim": "İletişim"
   };
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
@@ -56,7 +44,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Bir listeye göz atıyor:",
       state:
-        listName && listName.textContent != ""
+        listName && listName.textContent !== ""
           ? listName.textContent
           : "Belirsiz"
     });
@@ -65,7 +53,7 @@ presence.on("UpdateData", async () => {
         "body > main > div.row.category-head > div > h2"
       ) as HTMLElement,
       fixedSearching =
-        searching && searching.textContent != ""
+        searching && searching.textContent !== ""
           ? searching.textContent.replace(/"/g, "").replace(" Sonuçları", "")
           : "Belirsiz";
 
@@ -74,7 +62,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Bir şey arıyor:",
       state:
-        fixedSearching != "Belirsiz"
+        fixedSearching !== "Belirsiz"
           ? fixedSearching[0].toUpperCase() + fixedSearching.slice(1)
           : "Belirsiz",
       smallImageKey: "search"
@@ -89,37 +77,35 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Bir kategoriyi inceliyor:",
       state:
-        categoryName && categoryName.textContent != ""
+        categoryName && categoryName.textContent !== ""
           ? categoryName.textContent
           : "Belirsiz"
     });
-  } else if (title && title.textContent != "" && !video) {
+  } else if (title && title.textContent !== "" && !video) {
     presence.setActivity({
       largeImageKey: "fm-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Bir filmi inceliyor:",
       state: title.textContent
     });
-  } else if (title && title.textContent != "" && video) {
-    const timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+  } else if (title && title.textContent !== "" && video) {
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      ),
+      data: { [k: string]: string | number } = {
+        largeImageKey: "fm-logo",
+        details: "Bir film izliyor:",
+        state: title.textContent,
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play
+      };
 
-    const data: { [k: string]: any } = {
-      largeImageKey: "fm-logo",
-      details: "Bir film izliyor:",
-      state: title.textContent,
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play
-    };
+    data.startTimestamp = startTimestamp;
+    data.endTimestamp = endTimestamp;
 
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
-    }
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;

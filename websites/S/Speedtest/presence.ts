@@ -11,14 +11,15 @@ presence.on("UpdateData", async () => {
 
   if (window.location.hostname.includes("speedtest")) {
     if (window.location.pathname.includes("/run")) {
-      const server =
+      const server = `${
           document.querySelector(
             ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label"
-          ).textContent +
-          " - " +
+          ).textContent
+        } - ${
           document.querySelector(
             ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label .result-name"
-          ).textContent,
+          ).textContent
+        }`,
         ping =
           document.querySelector(".result-item-ping .result-data").textContent +
           document.querySelector(".result-item-ping .result-data-unit")
@@ -38,24 +39,25 @@ presence.on("UpdateData", async () => {
       ).textContent;
       if (!showISP) isp = "Hidden";
       // 27 & 29 = nothing + unit
-      if (upload.length == 29) {
+      if (upload.length === 29) {
         presenceData.details = `Live results - Ping ${
-          ping.length == 27 ? "Testing" : ping
-        } | Download ${download.length == 29 ? "Testing" : download} | Upload ${
-          upload.length == 29 ? "Testing" : upload
-        }`;
+          ping.length === 27 ? "Testing" : ping
+        } | Download ${
+          download.length === 29 ? "Testing" : download
+        } | Upload Testing`;
         presenceData.state = `ISP: ${isp} | Server: ${server}`;
-      } else presenceData.details = `Browsing the homepage`;
+      } else presenceData.details = "Browsing the homepage";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/result")) {
-      const server =
+      const server = `${
         document.querySelector(
           ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label"
-        ).textContent +
-        " - " +
+        ).textContent
+      } - ${
         document.querySelector(
           ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label .result-name"
-        ).textContent;
+        ).textContent
+      }`;
       let isp = document.querySelector(
         ".result-item-icon.result-item-isp .result-label"
       ).textContent;
@@ -92,57 +94,59 @@ presence.on("UpdateData", async () => {
       presenceData.state = `ISP: ${isp} | Server: ${server}`;
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/ookla-5g-map")) {
-      presenceData.details = `Navigate on the 5G map`;
+      presenceData.details = "Navigate on the 5G map";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/apps")) {
-      presenceData.details = `Watching apps`;
+      presenceData.details = "Watching apps";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.endsWith("/insights")) {
-      presenceData.details = `Browsing insights`;
+      presenceData.details = "Browsing insights";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/insights/blog")) {
-      presenceData.details = `Browsing blog`;
-      if (window.location.pathname !== "/insights/blog/")
+      presenceData.details = "Browsing blog";
+      if (window.location.pathname !== "/insights/blog/") {
         presenceData.state = document.querySelector(
           "#speedtest .header .header-wrap h1"
         ).textContent;
+      }
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/global-index")) {
-      presenceData.details = `Browsing Speedtest Global Index`;
+      presenceData.details = "Browsing Speedtest Global Index";
       presenceData.state = document.querySelector(
         ".section .page-header"
       ).textContent;
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/speedtest-servers")) {
-      presenceData.details = `Look how to host a server`;
+      presenceData.details = "Look how to host a server";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/enterprise")) {
-      presenceData.details = `Look entreprise solutions`;
+      presenceData.details = "Look entreprise solutions";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/about")) {
-      presenceData.details = `About Ookla`;
+      presenceData.details = "About Ookla";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/login")) {
-      presenceData.details = `Log in`;
+      presenceData.details = "Log in";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/register")) {
-      presenceData.details = `Creating an account`;
+      presenceData.details = "Creating an account";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/settings")) {
-      presenceData.details = `Browsing settings`;
+      presenceData.details = "Browsing settings";
       presenceData.startTimestamp = browsingStamp;
     } else if (window.location.pathname.includes("/help")) {
-      presenceData.details = `Browsing help QA`;
+      presenceData.details = "Browsing help QA";
       presenceData.startTimestamp = browsingStamp;
     } else {
-      const server =
+      const server = `${
           document.querySelector(
             ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label"
-          ).textContent +
-          " - " +
+          ).textContent
+        } - ${
           document.querySelector(
             ".result-item-icon.result-item-host .result-data, .result-item-icon.result-item-host .result-label .result-name"
-          ).textContent,
+          ).textContent
+        }`,
         ping =
           document.querySelector(".result-item-ping .result-data").textContent +
           document.querySelector(".result-item-ping .result-data-unit")
@@ -161,21 +165,19 @@ presence.on("UpdateData", async () => {
         ".result-item-icon.result-item-isp .result-label"
       ).textContent;
       if (!showISP) isp = "Hidden";
-      if (upload.length == 29) {
+      if (upload.length === 29) {
         presenceData.details = `Live results - Ping ${
-          ping.length == 27 ? "Testing" : ping
-        } | Download ${download.length == 29 ? "Testing" : download} | Upload ${
-          upload.length == 29 ? "Testing" : upload
-        }`;
+          ping.length === 27 ? "Testing" : ping
+        } | Download ${
+          download.length === 29 ? "Testing" : download
+        } | Upload Testing`;
         presenceData.state = `ISP: ${isp} | Server: ${server}`;
-      } else presenceData.details = `Browsing the homepage`;
+      } else presenceData.details = "Browsing the homepage";
       presenceData.startTimestamp = browsingStamp;
     }
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

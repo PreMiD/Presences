@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "622436057866043434"
   }),
   presenceData: PresenceData = {
@@ -6,9 +6,9 @@ var presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  var audio: HTMLAudioElement = document.querySelector("#jp_audio_0");
+  const audio: HTMLAudioElement = document.querySelector("#jp_audio_0");
   if (audio !== null) {
-    var title: HTMLElement = document.querySelector(".brg-player-title");
+    const title: HTMLElement = document.querySelector(".brg-player-title");
 
     presenceData.details =
       title !== null ? (title as HTMLElement).innerText : "Title not found...";
@@ -16,11 +16,9 @@ presence.on("UpdateData", async () => {
 
     presence.setTrayTitle(audio.paused ? "" : title.innerText);
 
-    if (title !== null) {
-      presence.setActivity(presenceData, !audio.paused);
-    }
+    if (title !== null) presence.setActivity(presenceData, !audio.paused);
   } else {
-    var pageData: PresenceData = {
+    const pageData: PresenceData = {
       details: "Browsing..",
       largeImageKey: "logo"
     };

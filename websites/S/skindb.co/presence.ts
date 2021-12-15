@@ -16,9 +16,8 @@ presence.on("UpdateData", async () => {
       const shopDate = document.querySelector(".shop-date-small");
       data.details = "Viewing item shop";
       data.state = shopDate.textContent;
-    } else if (path === "/cosmetics") {
-      data.details = "Viewing all cosmetics";
-    } else if (
+    } else if (path === "/cosmetics") data.details = "Viewing all cosmetics";
+    else if (
       path.startsWith("/backpack") ||
       path.startsWith("/banner") ||
       path.startsWith("/bundle") ||
@@ -38,39 +37,30 @@ presence.on("UpdateData", async () => {
     ) {
       const itemTitle = document.querySelector(".item-title"),
         itemType = document.querySelector(".type-rarity-string");
-      data.details = "Viewing " + itemTitle.textContent;
-      data.state =
-        itemType.childNodes[1].textContent +
-        " " +
-        itemType.firstChild.textContent;
-    } else if (path === "/upcoming") {
+      data.details = `Viewing ${itemTitle.textContent}`;
+      data.state = `${itemType.childNodes[1].textContent} ${itemType.firstChild.textContent}`;
+    } else if (path === "/upcoming")
       data.details = "Viewing upcoming cosmetics";
-    } else if (path === "/sets") {
-      data.details = "Viewing item sets";
-    } else if (path.startsWith("/sets/")) {
+    else if (path === "/sets") data.details = "Viewing item sets";
+    else if (path.startsWith("/sets/")) {
       const setName = document.querySelector(".item-title");
       data.details = "Viewing item set";
       data.state = setName.textContent;
-    } else {
-      data.details = "Viewing " + path.substring(1);
-    }
+    } else data.details = `Viewing ${path.substring(1)}`;
   } else if (path.startsWith("/valorant")) {
     data.largeImageKey = "valorant";
     path = path.substring(9);
     if (path.length === 0) {
       data.details = "Viewing homepage";
       data.state = "Valorant";
-    } else if (path === "/all") {
-      data.details = "Viewing all skins";
-    } else if (path === "/weapons") {
-      data.details = "Viewing weapons";
-    } else if (path.startsWith("/weapons/")) {
+    } else if (path === "/all") data.details = "Viewing all skins";
+    else if (path === "/weapons") data.details = "Viewing weapons";
+    else if (path.startsWith("/weapons/")) {
       const title = document.querySelector(".weapon-detail h1");
       data.details = "Viewing weapon";
       data.state = title.textContent.replace(" Skins", "");
-    } else if (path === "/collections") {
-      data.details = "Viewing collections";
-    } else if (path.startsWith("/collections/")) {
+    } else if (path === "/collections") data.details = "Viewing collections";
+    else if (path.startsWith("/collections/")) {
       const collectionName = document.querySelector(".item-title");
       data.details = "Viewing collection";
       data.state = collectionName.textContent;
@@ -87,20 +77,16 @@ presence.on("UpdateData", async () => {
       const skinName = document.querySelector(".skin-detail h1");
       data.details = "Viewing skin";
       data.state = skinName.textContent;
-    } else {
-      data.details = "Viewing " + path.substring(1);
-    }
+    } else data.details = `Viewing ${path.substring(1)}`;
   } else if (path.startsWith("/fallguys")) {
     data.largeImageKey = "fallguys";
     path = path.substring(9);
     if (path.length === 0) {
       data.details = "Viewing homepage";
       data.state = "Fall Guys";
-    } else if (path === "/all") {
-      data.details = "Viewing all skins";
-    } else if (path === "/unreleased") {
-      data.details = "Viewing unreleased skins";
-    } else if (path === "/shop") {
+    } else if (path === "/all") data.details = "Viewing all skins";
+    else if (path === "/unreleased") data.details = "Viewing unreleased skins";
+    else if (path === "/shop") {
       const shopDate = document.querySelector(".shop-date-small");
       data.details = "Viewing item shop";
       data.state = shopDate.textContent;
@@ -118,16 +104,13 @@ presence.on("UpdateData", async () => {
         skinRarity = document.querySelector(
           ".skin-rarity-string > .rarity-label"
         );
-      data.details = "Viewing " + skinName.textContent;
-      data.state = skinRarity.textContent + " " + skinType.textContent;
+      data.details = `Viewing ${skinName.textContent}`;
+      data.state = `${skinRarity.textContent} ${skinType.textContent}`;
     }
   } else {
     data.largeImageKey = "skindb";
-    if (path === "/") {
-      data.details = "Viewing homepage";
-    } else {
-      data.details = "Viewing " + path.substring(1);
-    }
+    if (path === "/") data.details = "Viewing homepage";
+    else data.details = `Viewing ${path.substring(1)}`;
   }
   presence.setActivity(data);
 });

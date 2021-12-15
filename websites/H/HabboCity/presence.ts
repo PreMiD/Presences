@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "473155249763385345"
-});
-
-const browsingTime = Math.floor(Date.now() / 1000);
+    clientId: "473155249763385345"
+  }),
+  browsingTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -24,9 +23,8 @@ presence.on("UpdateData", () => {
     const registername = (
       window.document.getElementById("registerusername") as HTMLInputElement
     ).value;
-    if (registername && registername != "") {
-      presenceData.state = "S'inscrit sur HabboCity - " + registername;
-    }
+    if (registername)
+      presenceData.state = `S'inscrit sur HabboCity - ${registername}`;
   }
 
   if (window.location.pathname.toLowerCase() === "/conditions") {
@@ -40,8 +38,10 @@ presence.on("UpdateData", () => {
   }
 
   if (window.location.pathname.toLowerCase() === "/profil") {
-    presenceData.details =
-      "Profil - " + window.document.title.replace("HabboCity:", "");
+    presenceData.details = `Profil - ${window.document.title.replace(
+      "HabboCity:",
+      ""
+    )}`;
     presenceData.state = "Regarde sa page personnelle";
   }
 
@@ -51,8 +51,8 @@ presence.on("UpdateData", () => {
   }
 
   if (window.location.pathname.toLowerCase().startsWith("/profil/")) {
-    presenceData.details = "Profil - " + window.document.title;
-    presenceData.state = "Regarde le profil de " + window.document.title;
+    presenceData.details = `Profil - ${window.document.title}`;
+    presenceData.state = `Regarde le profil de ${window.document.title}`;
     if (
       window.document.getElementById("profil87") &&
       window.document.getElementById("profil87").style.display === "block"
@@ -61,16 +61,13 @@ presence.on("UpdateData", () => {
         if (
           window.document.getElementById("profil121").innerText ===
           "Mes apparts"
-        ) {
-          presenceData.state =
-            "Regarde les appartements de " + window.document.title;
-        } else if (
+        )
+          presenceData.state = `Regarde les appartements de ${window.document.title}`;
+        else if (
           window.document.getElementById("profil121").innerText ===
           "Mes groupes"
-        ) {
-          presenceData.state =
-            "Regarde les groupes de " + window.document.title;
-        }
+        )
+          presenceData.state = `Regarde les groupes de ${window.document.title}`;
       }
     }
   }
@@ -86,9 +83,9 @@ presence.on("UpdateData", () => {
     const meet = (
       window.document.getElementById("meetSearch") as HTMLInputElement
     ).value;
-    if (meet != "") {
-      presenceData.details = "Meet - " + meet;
-      presenceData.state = "Regarde les relations de " + meet;
+    if (meet !== "") {
+      presenceData.details = `Meet - ${meet}`;
+      presenceData.state = `Regarde les relations de ${meet}`;
     }
   }
 
@@ -102,16 +99,16 @@ presence.on("UpdateData", () => {
       const search = (
         window.document.getElementById("search3") as HTMLInputElement
       ).value;
-      if (search != "") {
+      if (search !== "") {
         presenceData.details = "Nouveautés - Recherche";
-        presenceData.state = "Recherche l'article : \"" + search + '"';
+        presenceData.state = `Recherche l'article : "${search}"`;
       }
     }
   }
 
   if (window.location.pathname.toLowerCase().startsWith("/news/")) {
     presenceData.details = "Nouveautés - Article";
-    presenceData.state = "Lit l'article : " + window.document.title;
+    presenceData.state = `Lit l'article : ${window.document.title}`;
   }
 
   if (window.location.pathname.toLowerCase() === "/community/team") {
@@ -130,9 +127,8 @@ presence.on("UpdateData", () => {
       const nameorga = (
         window.document.querySelector(".sfdnom") as HTMLInputElement
       ).value;
-      if (nameorga != "") {
-        presenceData.state = "Propose son organisation - " + nameorga;
-      }
+      if (nameorga !== "")
+        presenceData.state = `Propose son organisation - ${nameorga}`;
     }
   }
 
@@ -142,10 +138,8 @@ presence.on("UpdateData", () => {
     const titlearticle = (
       window.document.getElementById("arttitre") as HTMLInputElement
     ).value;
-    if (titlearticle != "") {
-      presenceData.state =
-        "Ajoute un article à la page organisations - " + titlearticle;
-    }
+    if (titlearticle !== "")
+      presenceData.state = `Ajoute un article à la page organisations - ${titlearticle}`;
   }
 
   if (window.location.pathname.toLowerCase() === "/organisationteam") {
@@ -183,9 +177,9 @@ presence.on("UpdateData", () => {
       const search = (
         window.document.getElementById("search3") as HTMLInputElement
       ).value;
-      if (search != "") {
+      if (search !== "") {
         presenceData.details = "Forum - Recherche";
-        presenceData.state = 'Recherche le sujet : "' + search + '"';
+        presenceData.state = `Recherche le sujet : "${search}"`;
       }
     }
   }
@@ -194,80 +188,70 @@ presence.on("UpdateData", () => {
     if (
       !window.location.pathname.toLowerCase().startsWith("/forum/categorie")
     ) {
-      const page = window.location.pathname.toLowerCase().split("/");
-      let nbpage = page[3];
-      if (nbpage === undefined) {
-        nbpage = "1";
-      }
+      const [, , , page] = window.location.pathname.toLowerCase().split("/");
+      let nbpage = page;
+      if (!nbpage) nbpage = "1";
+
       presenceData.details = "Forum - Sujet";
-      presenceData.state =
-        "Lit le sujet : " +
-        window.document.title
-          .replace("- HabboCity", "")
-          .replace("Page " + nbpage, "") +
-        " - Page " +
-        nbpage;
+      presenceData.state = `Lit le sujet : ${window.document.title
+        .replace("- HabboCity", "")
+        .replace(`Page ${nbpage}`, "")} - Page ${nbpage}`;
     }
   }
 
   if (window.location.pathname.toLowerCase().startsWith("/forum/categorie")) {
     presenceData.details = "Forum - Catégories";
-    if (window.document.title === "Forum de HabboCity") {
+    if (window.document.title === "Forum de HabboCity")
       presenceData.state = "Regarde la liste des sujets";
-    } else {
-      const page = window.location.pathname.toLowerCase().split("/");
-      const nbpage = page[4];
-      presenceData.state =
-        "Regarde la liste des sujets - " +
-        window.document.title.replace("HabboCity:", "") +
-        " - Page " +
-        nbpage;
+    else {
+      const [, , , , page] = window.location.pathname.toLowerCase().split("/"),
+        nbpage = page;
+      presenceData.state = `Regarde la liste des sujets - ${window.document.title.replace(
+        "HabboCity:",
+        ""
+      )} - Page ${nbpage}`;
     }
   }
 
   if (
     window.location.pathname.toLowerCase().startsWith("/forum/categorie/com/")
   ) {
-    const page = window.location.pathname.toLowerCase().split("/");
-    const nbpage = page[4];
+    const [, , , , nbpage] = window.location.pathname.toLowerCase().split("/");
     presenceData.details = "Forum - Mes sujets commentés";
-    presenceData.state = "Regarde ses sujets commentés - Page " + nbpage;
+    presenceData.state = `Regarde ses sujets commentés - Page ${nbpage}`;
   }
 
   if (
     window.location.pathname.toLowerCase().startsWith("/forum/categorie/mes/")
   ) {
-    const page = window.location.pathname.toLowerCase().split("/");
-    const nbpage = page[4];
+    const [, , , , nbpage] = window.location.pathname.toLowerCase().split("/");
     presenceData.details = "Forum - Mes sujets";
-    presenceData.state = "Regarde ses sujets - Page " + nbpage;
+    presenceData.state = `Regarde ses sujets - Page ${nbpage}`;
   }
 
   if (window.location.pathname.toLowerCase() === "/forum/new-sujet") {
     const title = (
-      window.document.getElementById("topictitl") as HTMLInputElement
-    ).value;
-    const category = (
-      window.document.getElementById("topiccategory") as HTMLInputElement
-    ).value;
-    const nbcategory = {
-      "1": "Discussion générale",
-      "138": "Débats & sondages",
-      "4": "Idées & suggestions",
-      "8": "RPG & Sites de fans",
-      "5": "Économie & Casinos",
-      "9": "Jeux & événements",
-      "7": "Artistique",
-      "137": "Tutoriels",
-      "136": "Aide"
-    };
+        window.document.getElementById("topictitl") as HTMLInputElement
+      ).value,
+      category = (
+        window.document.getElementById("topiccategory") as HTMLInputElement
+      ).value,
+      nbcategory: { [key: string]: string } = {
+        1: "Discussion générale",
+        138: "Débats & sondages",
+        4: "Idées & suggestions",
+        8: "RPG & Sites de fans",
+        5: "Économie & Casinos",
+        9: "Jeux & événements",
+        7: "Artistique",
+        137: "Tutoriels",
+        136: "Aide"
+      };
     presenceData.details = "Forum - Nouveau sujet";
-    if (title != "") {
-      presenceData.state =
-        "Crée un nouveau sujet dans " + nbcategory[category] + " - " + title;
-    } else {
-      presenceData.state = "Crée un nouveau sujet dans " + nbcategory[category];
-    }
+    if (title !== "")
+      presenceData.state = `Crée un nouveau sujet dans ${nbcategory[category]} - ${title}`;
+    else
+      presenceData.state = `Crée un nouveau sujet dans ${nbcategory[category]}`;
   }
 
   if (window.location.pathname.toLowerCase() === "/boutique") {
@@ -287,9 +271,8 @@ presence.on("UpdateData", () => {
       window.document.getElementById("boutiqueload").style.display ===
         "block" &&
       window.document.getElementById("b168")
-    ) {
+    )
       presenceData.state = "Achète un coffre";
-    }
   }
 
   if (window.location.pathname.toLowerCase() === "/boutique/bonamigo") {
@@ -384,12 +367,12 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase().startsWith("/boutique")) {
     if (
       window.document.getElementById("b101") &&
-      (window.document.getElementById("b101") as HTMLInputElement).value != ""
+      (window.document.getElementById("b101") as HTMLInputElement).value !== ""
     ) {
       presenceData.details = "Boutique - Mon inventaire";
-      presenceData.state =
-        "Recherche : " +
-        (window.document.getElementById("b101") as HTMLInputElement).value;
+      presenceData.state = `Recherche : ${
+        (window.document.getElementById("b101") as HTMLInputElement).value
+      }`;
     }
     if (
       window.document.getElementById("boutiqueload").style.display ===
@@ -421,13 +404,15 @@ presence.on("UpdateData", () => {
       window.document.getElementById("b106")
     ) {
       if (window.document.getElementById("b106").style.display === "block") {
-        const badgetitle = document.getElementById("b110nom").innerText;
-        const badgecode = (
-          document.getElementById("b109") as HTMLImageElement
-        ).src.replace("https://swf.habbocity.me/c_images/album1584/", "");
+        const badgetitle = document.getElementById("b110nom").innerText,
+          badgecode = (
+            document.getElementById("b109") as HTMLImageElement
+          ).src.replace("https://swf.habbocity.me/c_images/album1584/", "");
         presenceData.details = "Boutique - Mon inventaire";
-        presenceData.state =
-          "Vend le badge " + badgetitle + " - " + badgecode.replace(".gif", "");
+        presenceData.state = `Vend le badge ${badgetitle} - ${badgecode.replace(
+          ".gif",
+          ""
+        )}`;
       }
     }
     if (
@@ -453,16 +438,12 @@ presence.on("UpdateData", () => {
     ) {
       if (window.document.getElementById("b210").style.display === "block") {
         presenceData.details = "Boutique - Mon inventaire";
-        const apparttitle = document.getElementById("b215").innerText;
-        const sendto = (document.getElementById("b219") as HTMLInputElement)
-          .value;
-        if (sendto !== "") {
-          presenceData.state =
-            "Transfère l'appartement \"" + apparttitle + '" à ' + sendto;
-        } else {
-          presenceData.state =
-            "Vend l'appartement \"" + apparttitle + '" sur le marché';
-        }
+        const apparttitle = document.getElementById("b215").innerText,
+          sendto = (document.getElementById("b219") as HTMLInputElement).value;
+        if (sendto !== "")
+          presenceData.state = `Transfère l'appartement "${apparttitle}" à ${sendto}`;
+        else
+          presenceData.state = `Vend l'appartement "${apparttitle}" sur le marché`;
       }
     }
   }
@@ -482,30 +463,26 @@ presence.on("UpdateData", () => {
         if (
           window.document.getElementById("fil36").parentNode.children[0].id ===
           "fil34"
-        ) {
+        )
           presenceData.state = "Regarde le fil d'actualité";
-        }
+
         if (
           window.document.getElementById("fil36").parentNode.children[0].id ===
           "fil35"
-        ) {
+        )
           presenceData.state = "Regarde ses notifications";
-        }
-      } else {
-        presenceData.state = "Regarde les nouveautés";
-      }
+      } else presenceData.state = "Regarde les nouveautés";
     }
     if (window.document.getElementById("fil25")) {
       if (
-        (window.document.getElementById("fil25") as HTMLInputElement).value !=
+        (window.document.getElementById("fil25") as HTMLInputElement).value !==
           "" &&
-        (window.document.getElementById("fil25") as HTMLInputElement).value !=
+        (window.document.getElementById("fil25") as HTMLInputElement).value !==
           "écrire quelque chose..."
       ) {
-        presenceData.state =
-          'Écrit un Tweet - "' +
-          (window.document.getElementById("fil25") as HTMLInputElement).value +
-          '"';
+        presenceData.state = `Écrit un Tweet - "${
+          (window.document.getElementById("fil25") as HTMLInputElement).value
+        }"`;
       }
     }
   }
@@ -516,9 +493,9 @@ presence.on("UpdateData", () => {
   ) {
     presenceData.details = "City Stories";
     if (window.document.getElementById("str4")) {
-      presenceData.state =
-        "Regarde la story de " +
-        window.document.getElementById("str4").innerText;
+      presenceData.state = `Regarde la story de ${
+        window.document.getElementById("str4").innerText
+      }`;
     }
   }
 
@@ -529,10 +506,9 @@ presence.on("UpdateData", () => {
     presenceData.details = "City Stories - Mes photos";
     presenceData.state = "Regarde ses photos";
     if (window.document.getElementById("str46")) {
-      presenceData.state =
-        'Édite une photo : "' +
-        window.document.getElementById("str46").innerText +
-        '"';
+      presenceData.state = `Édite une photo : "${
+        window.document.getElementById("str46").innerText
+      }"`;
     }
   }
 
@@ -544,7 +520,7 @@ presence.on("UpdateData", () => {
       window.document.getElementById("Parrainage-Link") as HTMLInputElement
     ).value;
     presenceData.details = "Parrainage";
-    presenceData.state = "Parraine ses amis - https://" + link;
+    presenceData.state = `Parraine ses amis - https://${link}`;
   }
 
   if (
@@ -568,11 +544,9 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presenceData.details = "Erreur - 404";
     presenceData.state = "Page introuvable";
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Slowftw",
     "id": "325046217904226306"
@@ -15,7 +16,7 @@
     "ga_IE": "Is suíomh Gréasáin Brasaíleach é Anihub chun áit a sholáthar chun féachaint ar ábhar anime saor in aisce, ar líne agus as líne agus gan aon fhógraí maslacha."
   },
   "url": "anihub.tv",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "logo": "https://i.imgur.com/HClem6o.png",
   "thumbnail": "https://i.imgur.com/ehkk7qZ.png",
   "color": "#1997C6",

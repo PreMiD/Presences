@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Viruz",
     "id": "158973226465230848"
@@ -10,9 +11,9 @@
     "nl": "Spirit Fanfics is een platform voor zelfpublicatie van boeken, of ze nu in Fanfic- of Original Story-formaat zijn."
   },
   "url": "www.spiritfanfiction.com",
-  "version": "1.2.5",
-  "logo": "https://viruz.s-ul.eu/5p0UEvnZ",
-  "thumbnail": "https://viruz.s-ul.eu/e3cMyaWe",
+  "version": "1.2.8",
+  "logo": "https://i.imgur.com/RDZSlTX.png",
+  "thumbnail": "https://i.imgur.com/yo3y40n.png",
   "color": "#008080",
   "tags": [
     "fanfic",

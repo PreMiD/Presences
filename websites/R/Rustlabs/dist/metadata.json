@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Venøm",
     "id": "186084682797023233"
@@ -9,8 +10,8 @@
     "nl": "Rust Labs is een betrouwbare database voor het videospel, Rust. Het biedt wekelijkse updates en herziene statistische informatie voor items en spelmechanica."
   },
   "url": "rustlabs.com",
-  "version": "1.0.2",
-  "logo": "https://i.imgur.com/Yp2IGUO.png?1",
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/Yp2IGUO.png",
   "thumbnail": "https://i.imgur.com/ECb6rlA.jpg",
   "color": "#c98b29",
   "tags": [

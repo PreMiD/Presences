@@ -1,97 +1,56 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  live: string;
-  browse: string;
-  watchingLive: string;
-  watchingVid: string;
-  waitingVid: string;
-  waitingVidThe: string;
-  waitingLive: string;
-  waitingLiveThe: string;
-  readingPost: string;
-  readingAbout: string;
-  searchFor: string;
-  searchSomething: string;
-  browseThrough: string;
-  newVid: string;
-  charts: string;
-  upcoming: string;
-  channelList: string;
-  events: string;
-  store: string;
-  recentUploads: string;
-  ofChannel: string;
-  channelHome: string;
-  channelSchedule: string;
-  channelMy: string;
-  channelStore: string;
-  channelBoard: string;
-  product: string;
-  profileEdit: string;
-  viewTheir: string;
-  profile: string;
-  watched: string;
-  purchases: string;
-  coins: string;
-  devices: string;
-  followed: string;
-  policies: string;
-}
-
 const presence = new Presence({
-    clientId: "614386371532161054",
-    injectOnComplete: true
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        live: "general.live",
-        browse: "general.browsing",
-        watchingLive: "general.watchingLive",
-        watchingVid: "general.watchingVid",
-        waitingVid: "general.waitingVid",
-        waitingVidThe: "general.waitingVidThe",
-        waitingLive: "general.waitingLive",
-        waitingLiveThe: "general.waitingLiveThe",
-        readingPost: "general.readingPost",
-        readingAbout: "general.readingAbout",
-        searchFor: "general.searchFor",
-        searchSomething: "general.searchSomething",
-        browseThrough: "v live.browseThrough",
-        newVid: "v live.newVid",
-        charts: "v live.charts",
-        upcoming: "v live.upcoming",
-        channelList: "v live.channelList",
-        events: "v live.events",
-        store: "v live.store",
-        recentUploads: "v live.recentUploads",
-        ofChannel: "v live.ofChannel",
-        channelHome: "v live.channelHome",
-        channelSchedule: "v live.channelSchedule",
-        channelMy: "v live.channelMy",
-        channelStore: "v live.channelStore",
-        channelBoard: "v live.channelBoard",
-        product: "v live.product",
-        profileEdit: "v live.profileEdit",
-        viewTheir: "v live.viewTheir",
-        profile: "v live.profile",
-        watched: "v live.watched",
-        purchases: "v live.purchases",
-        coins: "v live.coins",
-        devices: "v live.devices",
-        followed: "v live.followed",
-        policies: "v live.policies"
-      },
-      await presence.getSetting("lang")
-    );
-  };
+  clientId: "614386371532161054",
+  injectOnComplete: true
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      live: "general.live",
+      browse: "general.browsing",
+      watchingLive: "general.watchingLive",
+      watchingVid: "general.watchingVid",
+      waitingVid: "general.waitingVid",
+      waitingVidThe: "general.waitingVidThe",
+      waitingLive: "general.waitingLive",
+      waitingLiveThe: "general.waitingLiveThe",
+      readingPost: "general.readingPost",
+      readingAbout: "general.readingAbout",
+      searchFor: "general.searchFor",
+      searchSomething: "general.searchSomething",
+      browseThrough: "v live.browseThrough",
+      newVid: "v live.newVid",
+      charts: "v live.charts",
+      upcoming: "v live.upcoming",
+      channelList: "v live.channelList",
+      events: "v live.events",
+      store: "v live.store",
+      recentUploads: "v live.recentUploads",
+      ofChannel: "v live.ofChannel",
+      channelHome: "v live.channelHome",
+      channelSchedule: "v live.channelSchedule",
+      channelMy: "v live.channelMy",
+      channelStore: "v live.channelStore",
+      channelBoard: "v live.channelBoard",
+      product: "v live.product",
+      profileEdit: "v live.profileEdit",
+      viewTheir: "v live.viewTheir",
+      profile: "v live.profile",
+      watched: "v live.watched",
+      purchases: "v live.purchases",
+      coins: "v live.coins",
+      devices: "v live.devices",
+      followed: "v live.followed",
+      policies: "v live.policies"
+    },
+    await presence.getSetting("lang")
+  );
+}
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
+  strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -99,11 +58,18 @@ presence.on("UpdateData", async () => {
     prevUrl = document.location.href;
     elapsed = Math.floor(Date.now() / 1000);
   }
+  const privacy = await presence.getSetting("privacy");
 
   let presenceData: PresenceData = {
-    largeImageKey: "vlive2",
-    startTimestamp: elapsed
-  };
+      largeImageKey: "vlive2",
+      startTimestamp: elapsed
+    },
+    searchPageValue: string;
+  if (!privacy) {
+    searchPageValue =
+      (document.querySelector("#searchForm > input") as HTMLInputElement)
+        ?.value ?? "ERROR: NOT FOUND!";
+  }
 
   const path = location.pathname.replace(/\/?$/, "/"),
     showBrowsing = await presence.getSetting("browse"),
@@ -111,7 +77,6 @@ presence.on("UpdateData", async () => {
     showVideo = await presence.getSetting("video"),
     showTimestamps = await presence.getSetting("timestamp"),
     newLang = await presence.getSetting("lang"),
-    privacy = await presence.getSetting("privacy"),
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
     streamDetail = await presence.getSetting("streamDetail"),
@@ -135,12 +100,6 @@ presence.on("UpdateData", async () => {
     productPageChannel = document.querySelector("a.name")
       ? document.querySelector("a.name").textContent
       : "ERROR: NOT FOUND!",
-    searchPageValue = privacy
-      ? undefined
-      : document.querySelector("#searchForm > input")
-      ? (document.querySelector("#searchForm > input") as HTMLInputElement)
-          .value
-      : "ERROR: NOT FOUND!",
     statics: {
       [name: string]: PresenceData;
     } = {
@@ -158,9 +117,7 @@ presence.on("UpdateData", async () => {
         details: (await strings).recentUploads.includes("{0}")
           ? (await strings).recentUploads.split("{0}")[0]
           : (await strings).recentUploads,
-        state: (await strings).recentUploads.includes("{0}")
-          ? (await strings).recentUploads.split("{0}")[1]
-          : undefined,
+        state: (await strings).recentUploads.split("{0}")[1],
         smallImageKey: "reading"
       },
       "/my/": {
@@ -172,9 +129,7 @@ presence.on("UpdateData", async () => {
         details: (await strings).profileEdit.includes("{0}")
           ? (await strings).profileEdit.split("{0}")[0]
           : (await strings).profileEdit,
-        state: (await strings).profileEdit.includes("{0}")
-          ? (await strings).profileEdit.split("{0}")[1]
-          : undefined,
+        state: (await strings).profileEdit.split("{0}")[1],
         smallImageKey: "search"
       },
       "/my/watched/": {
@@ -267,24 +222,20 @@ presence.on("UpdateData", async () => {
         smallImageKey: "reading"
       },
       "/about/": {
-        details: (await strings).readingAbout + " V LIVE",
+        details: `${(await strings).readingAbout} V LIVE`,
         smallImageKey: "reading"
       }
     };
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   if (showBrowsing) {
-    for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
-        presenceData = { ...presenceData, ...v };
-      }
-    }
+    for (const [k, v] of Object.entries(statics))
+      if (path.match(k)) presenceData = { ...presenceData, ...v };
 
     if (privacy) {
       presenceData.details = (await strings).browse;
@@ -333,9 +284,7 @@ presence.on("UpdateData", async () => {
             .replace("%title%", title)
             .replace("%streamer%", channelPageChannelName);
 
-          if (video.paused) {
-            delete presenceData.startTimestamp;
-          }
+          if (video.paused) delete presenceData.startTimestamp;
         }
 
         //* Privacy mode enabled.
@@ -351,8 +300,7 @@ presence.on("UpdateData", async () => {
         //* Is a a normal video
         if (showVideo) {
           const timestamps = presence.getTimestampsfromMedia(video);
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused
             ? (await strings).pause
@@ -454,8 +402,7 @@ presence.on("UpdateData", async () => {
       //* Has video
       if (showVideo) {
         const timestamps = presence.getTimestampsfromMedia(video);
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
           ? (await strings).pause
@@ -483,8 +430,9 @@ presence.on("UpdateData", async () => {
       }
     } else if (postTitle && postPoster) {
       //* Normal text post
-      presenceData.details =
-        (await strings).readingPost + " (" + postPoster.textContent + ")";
+      presenceData.details = `${(await strings).readingPost} (${
+        postPoster.textContent
+      })`;
       presenceData.state = postTitle.textContent;
       presenceData.smallImageKey = "reading";
     }

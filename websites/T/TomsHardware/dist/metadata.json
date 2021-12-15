@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "TomsHardware",
+  "author": {
+    "name": "bakzkndd",
+    "id": "343103632453009408"
+  },
+  "regExp": "([a-z0-9-]+[.])*tomshardware[.]com[/]",
+  "category": "other",
+  "logo": "https://i.imgur.com/FSoJXWn.png",
+  "thumbnail": "https://i.imgur.com/58nUSBf.png",
+  "version": "1.0.2",
+  "color": "#e03c3c",
+  "tags": [
+    "tomshardware",
+    "technology",
+    "electronics",
+    "reviews",
+    "hardware",
+    "software"
+  ],
+  "url": "tomshardware.com",
+  "description": {
+    "nl": "TomsHardware is de leidende bestemming voor technologie fans van alle skill levels.",
+    "en": "TomsHardware is the leading destination for tech enthusiasts of all skill levels."
+  }
+}

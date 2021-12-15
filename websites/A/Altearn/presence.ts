@@ -10,16 +10,17 @@ presence.on("UpdateData", async () => {
     privacy = await presence.getSetting("privacy"),
     button = await presence.getSetting("button");
   presenceData.startTimestamp = browsingStamp;
-  if (privacy) {
-    presenceData.details = "Browsing";
-  } else {
+  if (privacy) presenceData.details = "Browsing";
+  else {
     if (window.location.pathname.startsWith("/articles")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Activities";
     } else if (window.location.pathname.startsWith("/category/")) {
       presenceData.details = "Searching an article:";
-      presenceData.state =
-        "in category " + document.title.replace(" | Altearn", "");
+      presenceData.state = `in category ${document.title.replace(
+        " | Altearn",
+        ""
+      )}`;
       if (window.location.pathname.endsWith("category/ag/")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "General Assembly";
@@ -29,52 +30,56 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.title
         .replace(" | Altearn", "")
         .replace("Assemblée Générale - ", "");
-      if (button)
+      if (button) {
         presenceData.buttons = [
           {
             label: "View General Assembly",
             url: document.URL
           }
         ];
+      }
     } else if (window.location.pathname.endsWith("/notre-organisation/")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Our organisation";
     } else if (
       window.location.pathname.startsWith("/") &&
-      window.location.pathname.length != 1
+      window.location.pathname.length !== 1
     ) {
       presenceData.details = "Reading an article:";
       presenceData.state = document.title.replace(" | Altearn", "");
-      if (button)
+      if (button) {
         presenceData.buttons = [
           {
             label: "View article",
             url: document.URL
           }
         ];
+      }
       if (window.location.pathname.includes("/author/")) {
         presenceData.details = "Looking for an user:";
         presenceData.state = document.title.replace(" | Altearn", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View user",
               url: document.URL
             }
           ];
+        }
       }
       if (document.title.includes("Fiche de poste:")) {
         presenceData.details = "Viewing a place as";
         presenceData.state = document.title
           .replace(" | Altearn", "")
           .replace("Fiche de poste:", "");
-        if (button)
+        if (button) {
           presenceData.buttons = [
             {
               label: "View place",
               url: document.URL
             }
           ];
+        }
       }
     } else if (window.location.pathname.length === 1) {
       presenceData.details = "Viewing a page:";
@@ -82,10 +87,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Hans5958",
+    "id": "850759953718575224"
+  },
+  "service": "Miraheze",
+  "url": "www.miraheze.org",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/LAkD3vB.png",
+  "thumbnail": "https://i.imgur.com/Yygo8FE.png",
+  "color": "#2F5782",
+  "tags": ["encyclopedia", "informations", "wiki"],
+  "description": {
+    "en": "Miraheze is a non-profit wiki farm with the goal of providing everyone high quality wiki hosting with flexibility."
+  },
+  "category": "other",
+  "regExp": "([a-z0-9-]+[.])?miraheze[.](org|wiki)[/]"
+}

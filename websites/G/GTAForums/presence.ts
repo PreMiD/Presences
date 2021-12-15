@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Browsing the home page...";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     presenceData.smallImageKey = "home";
@@ -68,11 +68,11 @@ presence.on("UpdateData", async () => {
     delete presenceData.details;
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "search";
-    presenceData.state =
-      "Looking" +
+    presenceData.state = `Looking${
       document
         .getElementsByClassName("ipsType_reset ipsType_large")[0]
-        .textContent.split("results")[1];
+        .textContent.split("results")[1]
+    }`;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   } else {
     delete presenceData.details;

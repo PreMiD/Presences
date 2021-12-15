@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -14,9 +15,9 @@
     "urun.gittigidiyor.com",
     "gittigidiyor.com"
   ],
-  "version": "1.1.7",
-  "logo": "https://premid.is-inside.me/503lev8R.png",
-  "thumbnail": "https://premid.is-inside.me/RqUQ2C2R.png",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/4XOmMIy.png",
+  "thumbnail": "https://i.imgur.com/NtQEokm.png",
   "color": "#2a6bb0",
   "tags": [
     "gittigidiyor",

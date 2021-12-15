@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
@@ -10,7 +11,7 @@
     "nl": "Bied 24/7 non-stop muziek aan"
   },
   "url": "bladefm.com.au",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/Sjj3gx6.png",
   "thumbnail": "https://i.imgur.com/DWa62sw.png",
   "color": "#203391",

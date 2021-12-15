@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Vukkybox",
+  "author": {
+    "name": "Mitchellonii",
+    "id": "490664749315653642"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/dIpE7wX.png",
+  "thumbnail": "https://i.imgur.com/uS5AFMi.png",
+  "version": "1.0.2",
+  "color": "#5ea1c0",
+  "tags": [
+    "gacha",
+    "game",
+    "vukky",
+    "vukkybox",
+    "box",
+    "litdevs",
+    "vukkies"
+  ],
+  "url": "vukkybox.com",
+  "description": {
+    "en": "The online gacha game that lets you collect mysterious creatures known as Vukkies!"
+  }
+}

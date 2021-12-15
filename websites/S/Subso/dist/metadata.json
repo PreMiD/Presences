@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Callum",
+    "id": "506899274748133376"
+  },
+  "service": "Subso",
+  "description": {
+    "en": "Subso helps you navigate the vast content landscape by joining all creators' socials into one.",
+    "ga_IE": "Cuidíonn Subso leat nascleanúint a dhéanamh ar an tírdhreach mór ábhair trí na sóisialaithe cruthaitheoirí uile a cheangal le chéile."
+  },
+  "url": [
+    "sub.so",
+    "www.sub.so",
+    "creators.sub.so"
+  ],
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/4b8AEvp.png",
+  "thumbnail": "https://i.imgur.com/rbbMigG.jpg",
+  "color": "#32a852",
+  "tags": [
+    "socialmedia",
+    "community",
+    "social",
+    "videos",
+    "subscriptions"
+  ],
+  "category": "socials",
+  "regExp": "([a-z0-9-]+[.])*sub[.]so[/]"
+}

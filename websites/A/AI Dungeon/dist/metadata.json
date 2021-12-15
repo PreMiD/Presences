@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "GURRMAN375D",
     "id": "446528923535278082"
@@ -11,7 +11,7 @@
     "nl": "AI Dungeon is een open-source tekstavonturenspel dat het GPT-2-tekstvoorspellingsmodel gebruikt dat is gemaakt door OpenAI om effectief grenzeloze verhaallijnen met een open einde te genereren."
   },
   "service": "AI Dungeon",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "logo": "https://i.imgur.com/570X8KK.png",
   "thumbnail": "https://i.imgur.com/LOh8Cbf.png",
   "color": "#484848",

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Zen",
     "id": "725331428962992131"
@@ -8,9 +9,9 @@
     "en": "Download, watch and stream anime with Indonesian subtitle and with 240p, 360p, 480p, & 720p resolution with MP4 format & MKV along with the batch.",
     "nl": "Download, bekijk en stream anime met Indonesische ondertiteling en met 240p, 360p, 480p en 720p resolutie met MP4-formaat en MKV samen met de batch."
   },
-  "url": "otakudesu.moe",
-  "version": "1.0.4",
-  "logo": "https://i.imgur.com/RrlRhIJ.png",
+  "url": "otakudesu.vip",
+  "version": "1.0.8",
+  "logo": "https://i.imgur.com/OZNNQyi.png",
   "thumbnail": "https://i.imgur.com/wHfvj2a.png",
   "color": "#ffffff",
   "tags": [

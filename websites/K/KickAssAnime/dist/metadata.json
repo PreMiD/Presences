@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -12,7 +13,7 @@
     "kickassanime.rs",
     "kickassanime.lol"
   ],
-  "version": "1.0.7",
+  "version": "1.0.10",
   "logo": "https://i.imgur.com/TGgZkKQ.png",
   "thumbnail": "https://i.imgur.com/c2vGXuN.png",
   "color": "#c7c95b",

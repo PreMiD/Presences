@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "The Gamerzs",
+    "id": "730142125181894657"
+  },
+  "url": "limeprogaming.com",
+  "description": {
+    "en": "Here at LIME, we have some of the best gaming equipment and accessories."
+  },
+  "service": "Lime Pro Gaming",
+  "altnames": [
+    "LPG"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/IZlOaJU.png",
+  "thumbnail": "https://i.imgur.com/FUBK77b.png",
+  "color": "#9bda45",
+  "tags": [
+    "gaming",
+    "retail",
+    "drinks",
+    "distributor"
+  ],
+  "category": "other"
+}

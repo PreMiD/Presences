@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "QkeleQ10",
     "id": "807917674477649943"
@@ -15,7 +16,7 @@
     "nl": "JUKE is een verzamelingssite voor radiostations. JUKE is een merk van Talpa Network."
   },
   "url": "juke.nl",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/axm6M00.png",
   "thumbnail": "https://i.imgur.com/kVj50nG.png",
   "color": "#38af85",

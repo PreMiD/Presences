@@ -21,7 +21,7 @@ async function getStrings() {
       browsingPresentation: "google docs.browsingPresentation",
       vieiwngPresentation: "google docs.viewingPresentation"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -33,10 +33,10 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp
     },
     privacy = await presence.getSetting("privacy"),
-    newLang = await presence.getSetting("lang");
+    newLang = await presence.getSetting("lang").catch(() => "en");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }

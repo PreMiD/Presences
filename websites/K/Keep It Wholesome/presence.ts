@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "lg"
   };
 
-  if (document.location.pathname == "/" || !document.location.pathname) {
+  if (document.location.pathname === "/" || !document.location.pathname) {
     presenceData.state = "Home | Shop";
 
     presenceData.startTimestamp = browsingStamp;
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.details;
-  } else if (document.location.pathname == "/cart") {
+  } else if (document.location.pathname === "/cart") {
     presenceData.state = "In cart";
 
     presenceData.startTimestamp = browsingStamp;

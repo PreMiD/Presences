@@ -63,10 +63,10 @@ yaay.on("UpdateData", () => {
 
     yaay.setActivity(presenceData);
   } else if (userPage) {
-    const username = userPage?.getAttribute("data-user");
+    const username = userPage.getAttribute("data-user");
 
     presenceData.details = "Bir profile göz atıyor:";
-    presenceData.state = `@${username}` || "Bilinmeyen Kullanıcı";
+    presenceData.state = username ? `@${username}` : "Bilinmeyen Kullanıcı";
 
     yaay.setActivity(presenceData);
   } else if (page.includes("/search")) {

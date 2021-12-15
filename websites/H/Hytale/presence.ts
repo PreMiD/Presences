@@ -9,11 +9,11 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.pathname === "/") {
+  if (document.location.pathname === "/")
     presenceData.details = "Viewing the main page";
-  } else if (document.location.pathname === "/news") {
+  else if (document.location.pathname === "/news")
     presenceData.details = "Browsing Blog Posts";
-  } else if (document.location.pathname.includes("/news/archive/")) {
+  else if (document.location.pathname.includes("/news/archive/")) {
     presenceData.details = "Browsing Blog Archives";
     presenceData.state = `From ${
       document.querySelector(".subHeading").textContent
@@ -24,28 +24,27 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/media") {
     presenceData.details = "Browsing Hytale media";
-    if (document.location.hash.includes("#screenshots")) {
+    if (document.location.hash.includes("#screenshots"))
       presenceData.state = "Screenshot";
-    } else if (document.location.hash.includes("#desktopWallpapers")) {
+    else if (document.location.hash.includes("#desktopWallpapers"))
       presenceData.state = "Desktop Wallpaper";
-    } else if (document.location.hash.includes("#mobileWallpapers")) {
+    else if (document.location.hash.includes("#mobileWallpapers"))
       presenceData.state = "Mobile Wallpaper";
-    } else if (document.location.hash.includes("#conceptArt")) {
+    else if (document.location.hash.includes("#conceptArt"))
       presenceData.state = "Concept Art";
-    } else if (document.location.hash.includes("#videos")) {
+    else if (document.location.hash.includes("#videos"))
       presenceData.state = "Video";
-    } else if (document.location.hash.includes("#clips")) {
+    else if (document.location.hash.includes("#clips"))
       presenceData.state = "Clip";
-    }
   } else if (document.location.pathname === "/game") {
     presenceData.details = "Learning more about";
     presenceData.state = "the game";
   } else if (document.location.pathname === "/community") {
     presenceData.details = "Viewing the";
     presenceData.state = "Community page";
-  } else if (document.location.pathname === "/jobs") {
+  } else if (document.location.pathname === "/jobs")
     presenceData.details = "Viewing Job Openings";
-  } else if (document.location.pathname === "/jobs/data-protection-statement") {
+  else if (document.location.pathname === "/jobs/data-protection-statement") {
     presenceData.details = "Reading the";
     presenceData.state = "Data protection statement";
     presenceData.smallImageKey = "reading";
@@ -68,21 +67,20 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/cookie-policy") {
     presenceData.details = "Reading the Cookie Policy";
     presenceData.smallImageKey = "reading";
-    if (document.location.hash === "#what-is-cookie") {
+    if (document.location.hash === "#what-is-cookie")
       presenceData.state = "What is a Cookie?";
-    } else if (document.location.hash === "#why-are-cookies-used") {
+    else if (document.location.hash === "#why-are-cookies-used")
       presenceData.state = "Why are Cookies used?";
-    } else if (document.location.hash === "#who-places-cookies") {
+    else if (document.location.hash === "#who-places-cookies")
       presenceData.state = "Who places Cookies";
-    } else if (document.location.hash === "#how-manage-cookies") {
+    else if (document.location.hash === "#how-manage-cookies")
       presenceData.state = "How can I manage cookies?";
-    } else if (document.location.hash === "#do-not-track-signals") {
+    else if (document.location.hash === "#do-not-track-signals")
       presenceData.state = "Do-not-track signals";
-    } else if (document.location.hash === "#policy-updates") {
+    else if (document.location.hash === "#policy-updates")
       presenceData.state = "Policy updates";
-    } else if (document.location.hash === "#contact-us") {
+    else if (document.location.hash === "#contact-us")
       presenceData.state = "Contact us";
-    }
   } else if (document.location.pathname === "/privacy") {
     presenceData.details = "Viewing the";
     presenceData.state = "Privacy Policy";
@@ -103,10 +101,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Unknown page";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

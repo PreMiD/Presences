@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -12,7 +13,7 @@
     "ga_IE": "Tá na grianghraif greannmhar, gifs, físeáin, cearrbhachas, anime, manga, scannán, teilifís, cosplay, spórt, bia, memes, gleoite, teip, grianghraif wtf ar an idirlíon ag 9GAG!"
   },
   "url": "9gag.com",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/t2BG2Fj.png",
   "thumbnail": "https://i.imgur.com/CmOz6oG.png",
   "color": "#ffffff",

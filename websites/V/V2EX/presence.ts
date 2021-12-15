@@ -2,16 +2,15 @@ const presence = new Presence({
   clientId: "699318388270301284"
 });
 
-let title: any;
+let title: HTMLVideoElement;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "v2ex-logo",
-    startTimestamp: browsingStamp
-  };
-
-  const path = document.location.pathname;
+      largeImageKey: "v2ex-logo",
+      startTimestamp: browsingStamp
+    },
+    path = document.location.pathname;
 
   if (path === "/") {
     presenceData.state = "Home";
@@ -26,11 +25,9 @@ presence.on("UpdateData", async () => {
       document
         .querySelector("#reply-box")
         .classList.contains("reply-box-sticky")
-    ) {
+    )
       presenceData.details = "Replying post";
-    } else {
-      presenceData.details = "Reading post";
-    }
+    else presenceData.details = "Reading post";
   } else if (path.includes("/member/")) {
     title = document.querySelector("#Main > div.box h1");
     presenceData.state = title.innerText.trim();
@@ -50,10 +47,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "famous_2";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

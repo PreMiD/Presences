@@ -1,0 +1,68 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "EternalNetwork TM",
+  "author": {
+    "name": "TheDjRider",
+    "id": "149202464590004224"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/Saq6ADh.png",
+  "thumbnail": "https://i.imgur.com/8pBRB2e.png",
+  "version": "1.1.6",
+  "color": "#c005e6",
+  "tags": [
+    "community",
+    "network",
+    "gaming",
+    "news",
+    "radio",
+    "forum"
+  ],
+  "url": [
+    "eternalnetworktm.com",
+    "forum.eternalnetworktm.com",
+    "radio.eternalnetworktm.com",
+    "status.eternalnetworktm.com"
+  ],
+  "description": {
+    "bg": "Общностна мрежа за новини, уроци и споделяне.",
+    "en": "Community Network website for news, tutorials and sharing.",
+    "de": "Community Network-Website für Neuigkeiten, Tutorials und Austausch.",
+    "es": "Sitio web de Community Network para noticias, tutoriales y compartir."
+  },
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fas fa-clock",
+      "value": true
+    },
+    {
+      "id": "subdomain",
+      "title": "Show Small icon info",
+      "icon": "fas fa-browser",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "bigicon",
+      "title": "Icon",
+      "icon": "fas fa-cog",
+      "value": 0,
+      "values": [
+        "Full",
+        "Icon",
+        "Text"
+      ]
+    }
+  ]
+}

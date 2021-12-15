@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Yokkkoso && Baka",
     "id": "190762645316567040"
@@ -10,7 +11,7 @@
     "nl": "Jut.su is een Russische anime-website"
   },
   "url": "jut.su",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/f3zxOuL.png",
   "thumbnail": "https://i.imgur.com/NlBgvR0.png",
   "color": "#c9e58b",
