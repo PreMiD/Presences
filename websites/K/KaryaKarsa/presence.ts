@@ -1,107 +1,107 @@
 const presence = new Presence({
-  clientId: "920135248006754394",
+  clientId: "920135248006754394"
 }),
 timestamp = Math.floor(Date.now() / 1000),
 pathData = {
   user: [
     {
       name: "supports",
-      state: "My Subscriptions History",
+      state: "My Subscriptions History"
     },
     {
       name: "edit",
-      state: "Editing my details",
-    },
+      state: "Editing my details"
+    }
   ],
   dashboard: [
     {
       name: "overview",
-      state: "My Overview",
+      state: "My Overview"
     },
     {
       name: "onboarding",
-      state: "Starting Up",
+      state: "Starting Up"
     },
     {
       name: "goal",
-      state: "My Goal",
+      state: "My Goal"
     },
     {
       name: "tiers",
       paths: [
         {
           name: "",
-          state: "My Support Tiers",
+          state: "My Support Tiers"
         },
         {
           name: "setup",
-          state: "Setting up Supporter Tiers...",
+          state: "Setting up Supporter Tiers..."
         },
         {
           name: "add",
-          state: "Adding new Supporter Tier...",
+          state: "Adding new Supporter Tier..."
         },
         {
           name: "*",
-          state: "Editing Supporter Tier...",
-        },
-      ],
+          state: "Editing Supporter Tier..."
+        }
+      ]
     },
     {
       name: "posts",
       paths: [
         {
           name: "",
-          state: "My Posts",
+          state: "My Posts"
         },
         {
           name: "add",
-          state: "Making new post...",
+          state: "Making new post..."
         },
         {
           name: "*",
-          state: "Editing my post...",
-        },
-      ],
+          state: "Editing my post..."
+        }
+      ]
     },
     {
       name: "vouchers",
       paths: [
         {
           name: "",
-          state: "My Vouchers",
+          state: "My Vouchers"
         },
         {
           name: "add",
-          state: "Making new Voucher...",
+          state: "Making new Voucher..."
         },
         {
           name: "*",
-          state: "Editing my Voucher...",
-        },
-      ],
+          state: "Editing my Voucher..."
+        }
+      ]
     },
     {
       name: "overlay",
-      state: "Stream Overlay",
+      state: "Stream Overlay"
     },
     {
       name: "supports",
-      state: "Supports History",
+      state: "Supports History"
     },
     {
       name: "bank",
-      state: "Payment",
+      state: "Payment"
     },
     {
       name: "profile",
-      state: "Editing Profile",
+      state: "Editing Profile"
     },
     {
       name: "settings",
-      state: "Settings",
-    },
-  ],
+      state: "Settings"
+    }
+  ]
 },
 getUserHeader = ".q-page-container.q-pb-xl.main",
 getUserHeaderHome =
@@ -130,8 +130,8 @@ stateSetter = (
 presence.on("UpdateData", () => {
 const presenceData: PresenceData = {
   largeImageKey: "main",
+  startTimestamp: timestamp
 };
-presenceData.startTimestamp = timestamp;
 
 const paths: string[] = window.location.pathname.split("/").splice(1);
 
@@ -191,8 +191,8 @@ switch (paths[0].toLowerCase()) {
         presenceData.buttons = [
           {
             label: "Visit Creator",
-            url: window.location.href,
-          },
+            url: window.location.href
+          }
         ];
       }
     }
@@ -219,8 +219,8 @@ switch (paths[0].toLowerCase()) {
         presenceData.buttons = [
           {
             label: "View Post",
-            url: window.location.href,
-          },
+            url: window.location.href
+          }
         ];
       }
     }
