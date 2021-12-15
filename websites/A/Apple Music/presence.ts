@@ -23,7 +23,7 @@ function getTimestamps(audioDuration: string): Array<number> {
 }
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "applemusic-logo"
     },
     playerCheck = document.querySelector(
@@ -56,18 +56,18 @@ presence.on("UpdateData", async () => {
         ? true
         : false;
 
-    data.details = title;
-    data.state = author;
-    data.smallImageKey = paused ? "pause" : "play";
-    data.smallImageText = paused ? (await strings).pause : (await strings).play;
-    if (audioTime) [data.startTimestamp, data.endTimestamp] = getTimestamps(audioTime);
+    presenceData.details = title;
+    presenceData.state = author;
+    presenceData.smallImageKey = paused ? "pause" : "play";
+    presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+    if (audioTime) [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(audioTime);
 
     if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    if (!data.details) presence.clearActivity();
-    else presence.setActivity(data);
+    if (!presenceData.details) presence.clearActivity();
+    else presence.setActivity(presenceData);
   } else presence.clearActivity();
 });
