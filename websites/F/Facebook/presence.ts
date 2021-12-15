@@ -439,8 +439,8 @@ presence.on("UpdateData", async () => {
         )
         ?.textContent.trim();
 
-    presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}:`;
-    presenceData.state = name || "Unknown";
+    presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${privacyMode ? "" : ":"}`;
+    if (!privacyMode) presenceData.state = name || "Unknown";
   } else if (document.location.pathname.includes("/settings"))
     presenceData.details = "Settings";
   else if (document.location.pathname.includes("/places"))
