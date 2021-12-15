@@ -221,8 +221,12 @@ presence.on("UpdateData", async () => {
           }
           case "compare": {
             const headset = {
-              left: <HTMLSelectElement>document.querySelector("div._9erd select._9ere"),
-              right: <HTMLSelectElement>document.querySelectorAll("div._9erd select._9ere")[1]
+              left: <HTMLSelectElement>(
+                document.querySelector("div._9erd select._9ere")
+              ),
+              right: <HTMLSelectElement>(
+                document.querySelectorAll("div._9erd select._9ere")[1]
+              )
             };
 
             presenceData.details = "Comparing Headsets:";
