@@ -220,13 +220,26 @@ presence.on("UpdateData", async () => {
             break;
           }
           case "compare": {
-            presenceData.details = "Viewing Page:";
-            presenceData.state = "Compare Headsets";
+            const headset = {
+              left: <HTMLSelectElement>document.querySelector("div._9erd select._9ere"),
+              right: <HTMLSelectElement>document.querySelectorAll("div._9erd select._9ere")[1]
+            };
+
+            presenceData.details = "Comparing Headsets:";
+            presenceData.state = `${
+              headset.left?.options[headset.left?.selectedIndex]?.text ||
+              "Unknown"
+            } x ${
+              headset.right?.options[headset.right?.selectedIndex]?.text ||
+              "Unknown"
+            }`;
+
             break;
           }
           case "vr-for-good": {
             presenceData.details = "Viewing Page:";
             presenceData.state = "VR for Good";
+
             break;
           }
           case "safety-center": {
