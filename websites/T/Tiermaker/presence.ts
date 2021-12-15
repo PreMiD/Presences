@@ -1,4 +1,4 @@
-let Title: string, Category: string, CurrentState: string;
+let title: string;
 
 const presence = new Presence({
     clientId: "919901175640358983"
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Creating a Tierlist Template";
     presenceData.smallImageKey = "tm-create";
     presenceData.smallImageText = "Creating";
-    presenceData.state = `Creating: ${Title}`;
+    presenceData.state = `Creating: ${title}`;
   } else if (path.startsWith("/categories/")) {
     if (urlpath[2]) {
       presenceData.details = "Viewing Category";
