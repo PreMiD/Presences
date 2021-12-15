@@ -1,15 +1,12 @@
-let ctitle: string,
-  ccategory: string,
-  cstateNum: number,
-  ccurrentState: string;
+let Title: string,
+  Category: string,
+  CurrentState: string;
 
 const presence = new Presence({
     clientId: "919901175640358983"
   }),
-
   browsingTimestamp = Math.floor(Date.now() / 1000),
   urlpath = document.location.pathname.split("/"),
-
   getElement = (query: string) => document.querySelector(query)?.textContent;
 
 presence.on("UpdateData", async() => {
@@ -26,9 +23,8 @@ presence.on("UpdateData", async() => {
       presenceData.details = "Viewing Homepage"
       presenceData.smallImageKey = "tm-view"
       presenceData.smallImageText = "Viewing"
-      presenceData.startTimestamp = browsingTimestamp
   } else if (path.startsWith("/create/")) {
-      if (!!urlpath[2]) {
+      if (urlpath[2]) {
         presenceData.details = "Creating a Tierlist"
         presenceData.state = getElement("h1")
         presenceData.smallImageKey = "tm-star"
@@ -49,12 +45,12 @@ presence.on("UpdateData", async() => {
       presenceData.details = "Creating a Tierlist Template"
       presenceData.smallImageKey = "tm-create"
       presenceData.smallImageText = "Creating"
-      presenceData.state = "Creating: " + ctitle
+      presenceData.state = `Creating: ${Title}`
       presenceData.startTimestamp = browsingTimestamp
   } else if (path.startsWith("/categories/")) {
-      if (!!urlpath[2]) {
+      if (urlpath[2]) {
         presenceData.details = "Viewing Category"
-        presenceData.state = "Category: " + getElement("h1")
+        presenceData.state = `Category: ${getElement("h1")}`
         presenceData.smallImageKey = "tm-view"
         presenceData.smallImageText = "Viewing"
       } else {
@@ -66,7 +62,6 @@ presence.on("UpdateData", async() => {
       presenceData.details = "Browsing Community Rankings"
       presenceData.smallImageKey = "tm-view"
       presenceData.smallImageText = "Viewing"
-      presenceData.startTimestamp = browsingTimestamp
    }
 
   if (presenceData.details) presence.setActivity(presenceData);
