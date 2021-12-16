@@ -5,7 +5,9 @@ import { blue, green, red, yellow } from "chalk";
 import { readFileSync } from "fs";
 import { validate } from "jsonschema";
 
-const latestMetadataSchema = async (): Promise<string> => {
+import ParseJSON, { ObjectNode } from "json-to-ast";
+
+const latestMetadataSchema = async (): Promise<string[]> => {
     const versions = (
       (
         await axios.get(
@@ -15,7 +17,7 @@ const latestMetadataSchema = async (): Promise<string> => {
     )
       .filter((c) => c.name.endsWith(".json"))
       .map((c) => c.name.match(/\d.\d/g)[0]);
-    return `https://schemas.premid.app/metadata/${versions.pop()}`;
+    return [`https://schemas.premid.app/metadata/${versions.at(-1)}`, versions.at(-1)];
   },
   stats = {
     validated: 0,
@@ -27,13 +29,15 @@ const latestMetadataSchema = async (): Promise<string> => {
     stats.validated++;
   },
   validatedWithWarnings = (service: string, warning: string): void => {
-    console.log(yellow(`✔ ${service} (${warning})`));
+    console.log(yellow(`✔ ${service}`));
+    console.log(warning);
     stats.validatedWithWarnings++;
   },
   failedToValidate = (service: string, errors: string[]): void => {
-    console.log(
-      red(`✘ ${service}\n${errors.map((e) => `  -> ${e}`).join("\n")}`)
-    );
+    console.log(red(`✖ ${service}`));
+    console.log(`::group::${service}`);
+    console.log(errors.join("\n"));
+    console.log("::endgroup::");
     stats.failedToValidate++;
   },
   loadMetadata = (path: string): metadata => {
@@ -49,7 +53,7 @@ const latestMetadataSchema = async (): Promise<string> => {
 (async (): Promise<void> => {
   console.log(blue("Getting latest schema..."));
 
-  const latestSchema = await latestMetadataSchema(),
+  const [latestSchema, latestSchemaVersion] = await latestMetadataSchema(),
     schema = (await axios.get(latestSchema)).data;
 
   console.log(blue(`Beginning validation of ${metaFiles.length} presences...`));
@@ -59,7 +63,7 @@ const latestMetadataSchema = async (): Promise<string> => {
       folder = metaFile.split("/")[2];
 
     if (!meta) {
-      failedToValidate(folder, ["Invalid JSON"]);
+      failedToValidate(folder, [`::error file=${metaFile},title=Invalid JSON::Unable to parse the JSON file`]);
       continue;
     }
 
@@ -81,26 +85,95 @@ const latestMetadataSchema = async (): Promise<string> => {
       if (index === -1) invalidLangs.push(lang);
     });
 
-    if (result.valid && !invalidLangs.length && folder === meta.service) {
-      if (meta.schema && meta.schema !== latestSchema)
-        validatedWithWarnings(service, "Using out of date schema");
+    if (result.valid && !invalidLangs.length && folder === service) {
+      if (meta.$schema && meta.$schema !== latestSchema)
+        validatedWithWarnings(
+          service,
+          `::warning file=${metaFile},line=${getLine(
+            "$schema"
+          )},title=instance.$schema::Using out of date schema, the latest version is ${latestSchemaVersion}`
+        );
       else validated(service);
     } else {
       const errors: string[] = [];
+      if (folder !== service)
+        errors.push(
+          `::error file=${metaFile},line=${getLine(
+            "service"
+          )},title=instance.service::does not equal to the folder name`
+        );
 
-      if (folder !== meta.service)
-        errors.push("service name does not equal to the name of the folder!");
+      for (const error of result.errors) {
+        let property = error.property.split(".").at(1);
 
-      for (const error of result.errors)
-        errors.push(`${error.message} @ ${error.property}`);
+        if (!property) {
+          property = error.message.match(/"(.*)"/g)[0].replace(/"/g, "");
+          errors.push(
+            `::error file=${metaFile},line=${getLine(
+              property
+            )},title=instance.${property}::${error.message} @ ${error.property}`
+          );
+        } else {
+          if (property.match(/\[([0-9]+)\]/)) {
+            const index = property.match(/\[([0-9]+)\]/)![1];
+
+            errors.push(
+              `::error file=${metaFile},line=${getLine(
+                property.replace(/\[([0-9]+)\]/, ""),
+                parseInt(index)
+              )},title=${error.property}::${error.message} @ ${error.property}`
+            );
+          } else {
+            errors.push(
+              `::error file=${metaFile},line=${getLine(property)},title=${
+                error.property
+              }::${error.message} @ ${error.property}`
+            );
+          }
+        }
+      }
 
       for (const invalidLang of invalidLangs) {
         errors.push(
-          `"${invalidLang}" is not a valid language! Valid languages can be found here: https://api.premid.app/v2/langFile/list`
+          `::error file=${metaFile},line=${
+            getLine("description", invalidLang)
+          },title=instance.description.${invalidLang}::"${invalidLang}" is not a valid language or is a unsupported language`
         );
       }
 
       failedToValidate(service, errors);
+    }
+
+    function getLine(line: string, value?: string | number) {
+      const AST = ParseJSON(JSON.stringify(meta, null, 2), {
+        loc: true,
+        source: metaFile
+      }) as ObjectNode;
+
+      if (value) {
+        const node = AST.children.find((c) => c.key.value === line).value;
+
+        switch (node.type) {
+          case "Literal":
+            return node.loc.start.line;
+          case "Object":
+            return node.children.find((c) => c.key.value === value).loc.start.line;
+          case "Array": {
+            if (typeof value === "number")
+              return node.children[value].loc.start.line;
+            else {
+              return node.children.find((c) => {
+                switch (c.type) {
+                  case "Literal":
+                    return c.value === value;
+                  case "Object":
+                    return c.children.find((c) => c.key.value === value);
+                }
+              }).loc.start.line;
+            }
+          }
+        }
+      } else return AST.children.find((c) => c.key.value === line)?.loc?.start?.line ?? 0;
     }
   }
 
@@ -123,7 +196,7 @@ const latestMetadataSchema = async (): Promise<string> => {
 })();
 
 interface metadata extends Metadata {
-  schema: string;
+  $schema: string;
 }
 
 interface LanguageFiles {
