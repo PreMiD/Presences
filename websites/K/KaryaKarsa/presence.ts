@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "920135248006754394"
 }),
-timestamp = Math.floor(Date.now() / 1000),
+browsingTimestamp = Math.floor(Date.now() / 1000),
 pathData = {
   user: [
     {
@@ -130,7 +130,7 @@ stateSetter = (
 presence.on("UpdateData", () => {
 const presenceData: PresenceData = {
   largeImageKey: "main",
-  startTimestamp: timestamp
+  startTimestamp: browsingTimestamp
 };
 
 const paths: string[] = window.location.pathname.split("/").splice(1);
