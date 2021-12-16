@@ -413,22 +413,34 @@ presence.on("UpdateData", async () => {
       presenceData.state = showSeachQuery ? query : "(Hidded)";
     }
   } else if (
-    document.querySelector("div.bi6gxh9e.aov4n071 span") &&
     document.querySelector(
-      "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.i1fnvgqd.gs1a9yip.owycx6da.btwxx1t3.pxsmfnpt.pedkr2u6.n1dktuyu.dvqrsczn.l23jz15m.d4752i1f > div > div > div > div > div > div"
+      "span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5.ojkyduve"
+    ) ||
+    document.querySelector(
+      "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
+    ) ||
+    document.querySelector(
+      "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
     )
   ) {
-    const hasCheckInTab = !!Array.from(
-        document.querySelector(
-          "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.i1fnvgqd.gs1a9yip.owycx6da.btwxx1t3.pxsmfnpt.pedkr2u6.n1dktuyu.dvqrsczn.l23jz15m.d4752i1f > div > div > div > div > div > div"
-        ).children
-      ).find((x: HTMLAnchorElement) => x.href?.endsWith("/map")),
-      name = document
-        .querySelector("div.bi6gxh9e.aov4n071 span")
-        .textContent.trim();
+    const hasCommentInput = document.querySelector(
+      "div.m9osqain.a5q79mjw.gy2v8mqq.jm1wdb64.k4urcfbm.qv66sw1b span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7"
+    );
+    let name = document
+      .querySelector(
+        "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
+      )
+      ?.textContent.trim();
 
-    presenceData.details = `Viewing ${hasCheckInTab ? "user" : "page"}${privacyMode ? "" : ":"}`;
-    if (!privacyMode) presenceData.state = name;
+    if (!hasCommentInput)
+      name = document
+        .querySelector(
+          "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
+        )
+        ?.textContent.trim();
+
+    presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${privacyMode ? "" : ":"}`;
+    if (!privacyMode) presenceData.state = name || "Unknown";
   } else if (document.location.pathname.includes("/settings"))
     presenceData.details = "Settings";
   else if (document.location.pathname.includes("/places"))
