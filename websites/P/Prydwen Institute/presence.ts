@@ -39,7 +39,7 @@ presence.on("UpdateData", () => {
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "ships";
     presenceData.smallImageText = "Viewing ships";
-    presenceData.buttons = [{ label: "View Employee", url: document.URL }];
+    presenceData.buttons = [{ label: "View Ship", url: document.URL }];
   } else if (document.location.pathname === "/skins") {
     presenceData.details = "Viewing skins";
     presenceData.smallImageKey = "skins";
