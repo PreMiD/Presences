@@ -145,13 +145,13 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     }
 
     function getLine(line: string, value?: string | number) {
-      const ASTTree = ParseJSON(JSON.stringify(meta, null, 2), {
+      const AST = ParseJSON(JSON.stringify(meta, null, 2), {
         loc: true,
         source: metaFile
       }) as ObjectNode;
 
       if (value) {
-        const node = ASTTree.children.find((c) => c.key.value === line).value;
+        const node = AST.children.find((c) => c.key.value === line).value;
 
         switch (node.type) {
           case "Literal":
@@ -173,7 +173,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
             }
           }
         }
-      } else return ASTTree.children.find((c) => c.key.value === line)?.loc?.start?.line ?? 0;
+      } else return AST.children.find((c) => c.key.value === line)?.loc?.start?.line ?? 0;
     }
   }
 
