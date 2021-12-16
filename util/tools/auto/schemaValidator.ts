@@ -63,7 +63,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       folder = metaFile.split("/")[2];
 
     if (!meta) {
-      failedToValidate(folder, ["Invalid JSON"]);
+      failedToValidate(folder, [`::error file=${metaFile},title=Invalid JSON::Unable to parse the JSON file`]);
       continue;
     }
 
