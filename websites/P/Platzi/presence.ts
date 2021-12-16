@@ -312,7 +312,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = CourseName.textContent;
         presenceData.state = `Examen ${
-          Score >= 9 ? "aprovado" : "no aprovado"
+          Score >= 9 ? "aprobado" : "no aprobado"
         }. [${Score} en ${Questions} preguntas]`;
       } else {
         const CourseName: HTMLHeadingElement = document.querySelector(
@@ -323,7 +323,7 @@ presence.on("UpdateData", async () => {
           );
 
         presenceData.details = CourseName.textContent;
-        presenceData.state = `Empezando el exámen [${ExamQuestions.textContent}]`;
+        presenceData.state = `Empezando el examen [${ExamQuestions.textContent}]`;
       }
     }
   } else if (pathname.startsWith("/direct-messages/u/soporte-platzi"))
@@ -351,7 +351,7 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/mi--suscripcion/")) {
     const SubscriptionName: HTMLDivElement =
       document.querySelector(".CurrentPlan-name");
-    presenceData.details = "Viendo su suscripcion";
+    presenceData.details = "Viendo su suscripción";
     presenceData.state = `${SubscriptionName.textContent}`;
   }
 
