@@ -23,8 +23,8 @@ presence.on("UpdateData", async () => {
   else if (path === "/view") {
     presenceData.details = "Читает статью";
     if (!privacyMode) {
-      const articleTitle = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
-      presenceData.state = articleTitle;
+      // An article title
+      presenceData.state = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
   } else if (path === "/view_c") {
     presenceData.details = "Смотрит правку";
     if (!privacyMode) {
-      const editTitle = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
-      presenceData.state = editTitle;
+      // An edit title
+      presenceData.state = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -51,8 +51,8 @@ presence.on("UpdateData", async () => {
   } else if (path === "/category") {
     presenceData.details = "Смотрит категорию";
     if (!privacyMode) {
-      const categoryName = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
-      presenceData.state = categoryName;
+      // A category name
+      presenceData.state = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -67,9 +67,9 @@ presence.on("UpdateData", async () => {
   else if (path === "/edit") {
     presenceData.details = "Редактирует статью";
     if (!privacyMode) {
-      const pageTitle = document.querySelector("title").textContent,
-        articleTitle = pageTitle.slice(2, pageTitle.length - 12);
-      presenceData.state = articleTitle;
+      const pageTitle = document.querySelector("title").textContent;
+      // An article title
+      presenceData.state = pageTitle.slice(2, pageTitle.length - 12);
     }
   } else if (path === "/edits") {
     presenceData.details = "Смотрит список правок";
@@ -77,15 +77,15 @@ presence.on("UpdateData", async () => {
   } else if (path === "/history") {
     presenceData.details = "Смотрит историю статьи";
     if (!privacyMode) {
-      const pageTitle = document.querySelector("title").textContent,
-        articleTitle = pageTitle.slice(2, pageTitle.length - 12);
-      presenceData.state = articleTitle;
+      const pageTitle = document.querySelector("title").textContent;
+      // An article title
+      presenceData.state = pageTitle.slice(2, pageTitle.length - 12);
     }
   } else if (path === "/portal") {
     presenceData.details = "В портале";
     if (!privacyMode) {
-      const portalName = document.querySelector("p.text-4xl.font-semibold.text-white").textContent;
-      presenceData.state = portalName;
+      // A portal name
+      presenceData.state = document.querySelector("p.text-4xl.font-semibold.text-white").textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -99,8 +99,8 @@ presence.on("UpdateData", async () => {
   else if (path === "/book") {
     presenceData.details = "Читает книгу";
     if (!privacyMode) {
-      const bookName = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
-      presenceData.state = bookName;
+      // A book name
+      presenceData.state = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -114,9 +114,13 @@ presence.on("UpdateData", async () => {
   else if (path === "/user") {
     presenceData.details = "Смотрит профиль";
     if (!privacyMode) {
-      const nickname = document.querySelector("p.text-2xl.text-black.font-medium.ml-4.place-self-center").firstChild.textContent,
-        name = document.querySelector("p.text-lg.text-gray-600.ml-4.place-self-center").textContent;
-      presenceData.state = `${nickname} (${name})`;
+      presenceData.state = `${
+        // A user nickname
+        document.querySelector("p.text-2xl.text-black.font-medium.ml-4.place-self-center").firstChild.textContent
+      } (${
+        // A user name
+        document.querySelector("p.text-lg.text-gray-600.ml-4.place-self-center").textContent
+      })`;
       if (showButtons) {
         presenceData.buttons = [
           {
