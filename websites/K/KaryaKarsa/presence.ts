@@ -145,7 +145,8 @@ presence.on("UpdateData", () => {
     case "profile":
       presenceData.details = "Looking at Profile";
       break;
-    case "about" || "terms":
+    case "about":
+    case "terms":
       presenceData.details = "Looking at Terms of Service";
       break;
     case "dashboard":
