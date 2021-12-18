@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
   else if (path === "/poukaz") presenceData.details = "Uplatnit poukaz";
   else if (path === "/vip") presenceData.details = "VIP";
   else if (path === "/premium") presenceData.details = "PREMIUM";
-  else if (path === "/team") presenceData.details = "Praisuje AT";
+  else if (path === "/team") presenceData.details = "Admin-Team";
   else if (path === "/statistiky") presenceData.details = "Statistiky";
   else if (path === "/pravidla") presenceData.details = "Pravidla portálu";
   else if (path.includes("/tym")) {
