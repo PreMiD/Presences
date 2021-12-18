@@ -180,7 +180,6 @@ presence.on("UpdateData", async () => {
       else if (path.includes("nic.ic")) presenceData.state = "IC.NIC";
       else if (path.includes("garver.ic")) presenceData.state = "Garver Auction House";
       else if (path.includes("sanwave.ic")) presenceData.state = "SanWave";
-      else if (path.includes("burza.ic")) presenceData.state = "Burza";
       else if (path.includes("antares.ic")) presenceData.state = "ANTARES";
       else if (path.includes("belleville.ic")) presenceData.state = "Belleville";
       else if (path.includes("krypta.ic")) presenceData.state = "Krypta - online kasíno";
