@@ -19,11 +19,11 @@ presence.on("UpdateData", () => {
     presenceData.state = `
     ${
       document.querySelector("#prices > div:nth-child(2) > a > span.pull-left")
-        .innerHTML
+        .textContent
     }:
     ${
       document.querySelector("#prices > div:nth-child(2) > a > span.pull-right")
-        .innerHTML
+        .textContent
     }`;
     presenceData.smallImageKey = "skins";
     presenceData.smallImageText = "Viewing skins";
@@ -42,7 +42,7 @@ presence.on("UpdateData", () => {
     presenceData.details = `Viewing case: ${shortTitle}`;
     presenceData.state = document.querySelector(
       "body > div.container.main-content > div:nth-child(3) > div > div:nth-child(1) > div > a.btn.btn-default.market-button-item"
-    ).innerHTML;
+    ).textContent;
     presenceData.smallImageKey = "case";
     presenceData.smallImageText = "Viewing cases";
     presenceData.buttons = [{ label: "View Case", url: document.URL }];
@@ -72,7 +72,7 @@ presence.on("UpdateData", () => {
     presenceData.details = `Viewing the ${shortTitle}`;
     presenceData.state = document.querySelector(
       "body > div.container.main-content > div:nth-child(3) > div > div:nth-child(1) > div > a.btn.btn-default.market-button-item"
-    ).innerHTML;
+    ).textContent;
     presenceData.smallImageKey = "capsule";
     presenceData.smallImageText = "Viewing capsules";
     presenceData.buttons = [{ label: "View Capsule", url: document.URL }];
@@ -82,7 +82,7 @@ presence.on("UpdateData", () => {
     ${
       document.querySelector(
         "body > div.container.main-content > div.row.text-center > div.col-md-8.col-widen > div > div:nth-child(2) > div.col-md-6.col-md-6-collapse-top-margin > div:nth-child(2) > a > span.pull-right"
-      ).innerHTML
+      ).textContent
     }`;
     presenceData.smallImageKey = "sticker";
     presenceData.smallImageText = "Viewing stickers";
@@ -96,11 +96,11 @@ presence.on("UpdateData", () => {
     presenceData.state = `
     ${
       document.querySelector("#prices > div:nth-child(2) > a > span.pull-left")
-        .innerHTML
+        .textContent
     }:
     ${
       document.querySelector("#prices > div:nth-child(2) > a > span.pull-right")
-        .innerHTML
+        .textContent
     }`;
     presenceData.smallImageKey = "glove";
     presenceData.smallImageText = "Viewing gloves";
@@ -115,7 +115,7 @@ presence.on("UpdateData", () => {
     ${
       document.querySelector(
         "body > div.container.main-content > div.row.text-center > div.col-md-8.col-widen > div > div:nth-child(2) > div.col-md-6.col-md-6-collapse-top-margin > div:nth-child(2) > a > span.pull-right"
-      ).innerHTML
+      ).textContent
     }`;
     presenceData.buttons = [{ label: "View Agent", url: document.URL }];
   } else if (path.startsWith("/patches")) {
@@ -127,7 +127,7 @@ presence.on("UpdateData", () => {
     ${
       document.querySelector(
         "body > div.container.main-content > div.row.text-center > div.col-md-8.col-widen > div > div:nth-child(2) > div.col-md-6.col-md-6-collapse-top-margin > div:nth-child(2) > a > span.pull-right"
-      ).innerHTML
+      ).textContent
     }`;
     presenceData.buttons = [{ label: "View Patch", url: document.URL }];
   } else if (path === "/graffiti") presenceData.details = "Browsing graffitis";
@@ -143,7 +143,7 @@ presence.on("UpdateData", () => {
     ${
       document.querySelector(
         "body > div.container.main-content > div:nth-child(3) > div > div:nth-child(1) > div > a.btn.btn-default.market-button-item"
-      ).innerHTML
+      ).textContent
     }`;
     presenceData.buttons = [{ label: "View Graffiti Box", url: document.URL }];
   } else if (path.startsWith("/graffiti")) {
@@ -152,7 +152,7 @@ presence.on("UpdateData", () => {
     ${
       document.querySelector(
         "body > div.container.main-content > div.row.text-center > div.col-md-8.col-widen > div > div:nth-child(2) > div.col-md-6.col-md-6-collapse-top-margin > div:nth-child(2) > a > span.pull-right"
-      ).innerHTML
+      ).textContent
     }`;
     presenceData.buttons = [{ label: "View Graffiti", url: document.URL }];
   } else if (path === "/items") {
@@ -165,7 +165,7 @@ presence.on("UpdateData", () => {
     ${
       document.querySelector(
         "body > div.container.main-content > div.row.text-center > div.col-md-8.col-widen > div > div:nth-child(2) > div.col-md-6.col-md-6-collapse-top-margin > div:nth-child(2) > a > span.pull-right"
-      ).innerHTML
+      ).textContent
     }`;
     presenceData.smallImageKey = "items";
     presenceData.smallImageText = "Viewing items";
@@ -174,7 +174,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Searching for:";
     presenceData.state = document.querySelector(
       "#___gcse_0 > div > div > div > div.gsc-wrapper > div.gsc-resultsbox-visible > div > div > div.gcsc-more-maybe-branding-root > a > div > span.gcsc-find-more-on-google-query"
-    ).innerHTML;
+    ).textContent;
   } else if (document.location.href === "https://csgostash.com")
     presenceData.details = "Home page";
   else presenceData.details = "Browsing...";
