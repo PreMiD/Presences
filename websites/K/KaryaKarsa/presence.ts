@@ -131,9 +131,8 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "main",
     startTimestamp: browsingTimestamp
-  };
-
-  const paths: string[] = window.location.pathname.split("/").splice(1);
+  },
+  paths: string[] = window.location.pathname.split("/").splice(1);
 
   switch (paths[0].toLowerCase()) {
     case "":
