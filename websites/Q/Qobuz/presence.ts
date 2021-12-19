@@ -32,7 +32,8 @@ presence.on("UpdateData", async () => {
 		},
 		songTitle = document.querySelector("a.player__track-name") as HTMLAnchorElement,
 		songArtist = document.querySelector('div[class="player__track-album"] > a'),
-		fromPlaylist = document.querySelectorAll('div[class="player__track-album"] a')[2] !== null,
+		// eslint-disable-next-line no-eq-null
+		fromPlaylist = document.querySelectorAll('div[class="player__track-album"] a')[2] != null,
 		currentTime = (document.querySelector("span.player__track-time-text") as HTMLElement).innerText.split(":"),
 		endTime = (document.querySelectorAll('span[class="player__track-time-text"]')[1] as HTMLElement).innerText.split(":"),
 		currentTimeSec = (parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000,
