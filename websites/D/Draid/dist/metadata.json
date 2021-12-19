@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.5",
+    "author": {
+        "name": "ItsMateo20",
+        "id": "630812692659044352"
+    },
+    "service": "Draid",
+    "description": {
+        "en": "Draid is packed with the most needed and fun commands that you will ever desire "
+    },
+    "url": "draid.ddns.net",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/c2d9yYs.png",
+    "thumbnail": "https://i.imgur.com/iYDKZsG.png",
+    "color": "#63c8ff",
+    "category": "other",
+    "tags": [
+        "discord-bot"
+    ],
+    "contributors": [
+        {
+            "name": "Waret#1567",
+            "id": "434669571685744662"
+        },
+        {
+            "name": "ItsMateo20#3304",
+            "id": "630812692659044352"
+        }
+    ]
+}
