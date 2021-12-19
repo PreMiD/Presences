@@ -5,46 +5,54 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "artstation",
-    startTimestamp: browsingTimestamp
-  },
-  shortTitle = document.title.split(/-(.+)/)[1];
+      largeImageKey: "artstation",
+      startTimestamp: browsingTimestamp
+    },
+    shortTitle = document.title.split(/-(.+)/)[1];
 
   if (document.location.pathname.startsWith("/messages")) {
     presenceData.details = "Checking inbox";
     presenceData.smallImageKey = "inbox";
     presenceData.smallImageText = "Checking inbox";
-  } else if (document.querySelector<HTMLDivElement>("body > div.wrapper > div.wrapper-main > div > div > div.user-profile")) {
+  } else if (
+    document.querySelector<HTMLDivElement>(
+      "body > div.wrapper > div.wrapper-main > div > div > div.user-profile"
+    )
+  ) {
     presenceData.details = "Viewing an artist's profile";
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "Viewing profile";
-    presenceData.buttons = [{label: "View Artist", url: document.URL}];
+    presenceData.buttons = [{ label: "View Artist", url: document.URL }];
   } else if (document.location.pathname.startsWith("/artwork")) {
     presenceData.details = "Viewing an artwork";
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "artwork";
     presenceData.smallImageText = "Viewing artwork";
-    presenceData.buttons = [{label: "View Artwork", url: document.location.href}];
+    presenceData.buttons = [
+      { label: "View Artwork", url: document.location.href }
+    ];
   } else if (document.location.pathname.startsWith("/marketplace"))
     presenceData.details = "Surfing the marketplace";
   else if (document.location.pathname.startsWith("/studios"))
-      presenceData.details = "Visiting studios";
-  else if ((document.location.href.indexOf("/jobs") > -1)) {
+    presenceData.details = "Visiting studios";
+  else if (document.location.href.indexOf("/jobs") > -1) {
     presenceData.details = "Viewing jobs";
-    presenceData.state = document.querySelector('meta[property="og:title"]').getAttribute("content");
+    presenceData.state = document
+      .querySelector('meta[property="og:title"]')
+      .getAttribute("content");
     presenceData.smallImageKey = "searchjob";
     presenceData.smallImageText = "Viewing jobs";
   } else if (document.location.pathname === "/blogs")
     presenceData.details = "Reading blogs";
   else if (document.location.pathname.startsWith("/blogs")) {
-      presenceData.details = "Reading a blog";
-      presenceData.state = shortTitle;
+    presenceData.details = "Reading a blog";
+    presenceData.state = shortTitle;
   } else if (document.location.pathname === "/contests")
     presenceData.details = "Looking for challenges";
   else if (document.location.pathname.startsWith("/contests")) {
-      presenceData.details = "Viewing a challenge";
-      presenceData.state = shortTitle;
+    presenceData.details = "Viewing a challenge";
+    presenceData.state = shortTitle;
   } else if (document.location.pathname === "/podcast")
     presenceData.details = "Finding a podcast";
   else if (document.location.pathname === "/guides")
@@ -92,7 +100,9 @@ presence.on("UpdateData", () => {
     presenceData.smallImageText = "Exploring artworks";
   } else {
     presenceData.details = "Viewing a portfolio of:";
-    presenceData.state = document.querySelector('meta[property="og:site_name"]').getAttribute("content");
+    presenceData.state = document
+      .querySelector('meta[property="og:site_name"]')
+      .getAttribute("content");
     presenceData.smallImageKey = "portfolio";
     presenceData.smallImageText = "Viewing portfolio";
   }
