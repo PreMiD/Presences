@@ -40,6 +40,22 @@ presence.on("UpdateData", () => {
     presenceData.smallImageKey = "ships";
     presenceData.smallImageText = "Viewing ships";
     presenceData.buttons = [{ label: "View Ship", url: document.URL }];
+  } else if (document.querySelector("body > div.fade.modal-backdrop.show")) {
+    presenceData.details = "Viewing skin";
+    presenceData.state = document
+      .querySelector(
+        "body > div.fade.skin-viewer.modal.show > div > div > div.modal-body > div.details > div.name"
+      )
+      .textContent.substring(
+        0,
+        document
+          .querySelector(
+            "body > div.fade.skin-viewer.modal.show > div > div > div.modal-body > div.details > div.name"
+          )
+          .textContent.lastIndexOf("-") - 1
+      );
+    presenceData.smallImageKey = "skins";
+    presenceData.smallImageText = "Viewing skins";
   } else if (document.location.pathname === "/skins") {
     presenceData.details = "Viewing skins";
     presenceData.smallImageKey = "skins";
