@@ -29,6 +29,18 @@
     {
       "id": "lang",
       "multiLanguage": true
+    },
+    {
+      "id": "enablecover",
+      "title": "Show Cover",
+      "icon": "fad fa-user-secret",
+      "value": true
+    },
+    {
+      "id": "enabletime",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
     }
   ]
 }

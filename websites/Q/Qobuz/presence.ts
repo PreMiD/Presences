@@ -21,19 +21,25 @@ presence.on("UpdateData", async () => {
   if (!document.querySelector("#root"))
     return presence.setActivity({ largeImageKey: "logo" });
 
-  const newLang = await presence.getSetting("lang").catch(() => "en");
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
+    enabletime = await presence.getSetting("enabletime"),
+    enablecover = await presence.getSetting("enablecover");
   oldLang ??= newLang;
   if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
-  const presenceData: PresenceData = {
-      largeImageKey: "logo"
+  const songCover = document.querySelector<HTMLImageElement>(
+      'div[class="player__track-cover"] img'
+    ),
+    presenceData: PresenceData = {
+      largeImageKey:
+        enablecover === true ? songCover.src.replaceAll("230", "600") : "logo"
     },
-    songTitle = document.querySelector(
+    songTitle = document.querySelector<HTMLAnchorElement>(
       'a[class="player__track-name"]'
-    ) as HTMLAnchorElement,
+    ),
     songArtist = document.querySelector('div[class="player__track-album"] > a'),
     fromPlaylist = !!document.querySelectorAll(
       'div[class="player__track-album"] a'
@@ -51,19 +57,18 @@ presence.on("UpdateData", async () => {
     endTimestamp = Date.now() + (endTimeSec - currentTimeSec),
     paused = !!document.querySelector(
       'span[class="player__action-play pct pct-player-play "] '
-    );
-
-  const elm = document.querySelector(".player__action-repeat.pct");
-  const obj = {
-    repeatType: elm.classList.contains("pct-repeat-once")
-      ? "loopTrack"
-      : elm.classList.contains("player__action-repeat--active")
-      ? "loopQueue"
-      : "deactivated",
-    songPlaylist: document.querySelectorAll(
-      'div[class="player__track-album"] a'
-    )[2] as HTMLAnchorElement
-  };
+    ),
+    elm = document.querySelector(".player__action-repeat.pct"),
+    obj = {
+      repeatType: elm.classList.contains("pct-repeat-once")
+        ? "loopTrack"
+        : elm.classList.contains("player__action-repeat--active")
+        ? "loopQueue"
+        : "deactivated",
+      songPlaylist: document.querySelectorAll(
+        'div[class="player__track-album"] a'
+      )[2] as HTMLAnchorElement
+    };
 
   let playliststring = "";
   if (fromPlaylist) playliststring = ` | From: ${obj.songPlaylist.textContent}`;
@@ -77,6 +82,11 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = paused
       ? (await strings).pause
       : (await strings).play;
+  }
+
+  if (paused || !enabletime) {
+    delete presenceData.startTimestamp;
+    delete presenceData.endTimestamp;
   }
 
   if (obj.repeatType !== "deactivated" && !paused) {
