@@ -429,12 +429,13 @@ presence.on("UpdateData", async () => {
       )
       ?.textContent.trim();
 
-    if (!hasCommentInput)
+    if (!hasCommentInput) {
       name = document
         .querySelector(
           "h2.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.d2edcug0.hpfvmrgz span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
         )
         ?.textContent.trim();
+    }
 
     presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${
       privacyMode ? "" : ":"

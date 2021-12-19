@@ -17,7 +17,10 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     )
       .filter((c) => c.name.endsWith(".json"))
       .map((c) => c.name.match(/\d.\d/g)[0]);
-    return [`https://schemas.premid.app/metadata/${versions.at(-1)}`, versions.at(-1)];
+    return [
+      `https://schemas.premid.app/metadata/${versions.at(-1)}`,
+      versions.at(-1)
+    ];
   },
   stats = {
     validated: 0,
@@ -63,7 +66,9 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       folder = metaFile.split("/")[2];
 
     if (!meta) {
-      failedToValidate(folder, [`::error file=${metaFile},title=Invalid JSON::Unable to parse the JSON file`]);
+      failedToValidate(folder, [
+        `::error file=${metaFile},title=Invalid JSON::Unable to parse the JSON file`
+      ]);
       continue;
     }
 
@@ -135,9 +140,10 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 
       for (const invalidLang of invalidLangs) {
         errors.push(
-          `::error file=${metaFile},line=${
-            getLine("description", invalidLang)
-          },title=instance.description.${invalidLang}::"${invalidLang}" is not a valid language or is a unsupported language`
+          `::error file=${metaFile},line=${getLine(
+            "description",
+            invalidLang
+          )},title=instance.description.${invalidLang}::"${invalidLang}" is not a valid language or is a unsupported language`
         );
       }
 
@@ -157,7 +163,8 @@ const latestMetadataSchema = async (): Promise<string[]> => {
           case "Literal":
             return node.loc.start.line;
           case "Object":
-            return node.children.find((c) => c.key.value === value).loc.start.line;
+            return node.children.find((c) => c.key.value === value).loc.start
+              .line;
           case "Array": {
             if (typeof value === "number")
               return node.children[value].loc.start.line;
@@ -173,7 +180,10 @@ const latestMetadataSchema = async (): Promise<string[]> => {
             }
           }
         }
-      } else return AST.children.find((c) => c.key.value === line)?.loc?.start?.line ?? 0;
+      } else
+        return (
+          AST.children.find((c) => c.key.value === line)?.loc?.start?.line ?? 0
+        );
     }
   }
 
