@@ -212,8 +212,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Doručené";
       if (path.includes("sent")) presenceData.state = "Odeslané";
       else if (path.includes("read")) presenceData.state = "Čte e-mail";
-    }
-    else if (path.includes("iris.ic/")) {
+    } else if (path.includes("iris.ic/")) {
       presenceData.details = "Iris";
       if (path === "/iris.ic/" || path === "/iris.ic")
         presenceData.state = "Hlavní stránka";
