@@ -3,9 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
   pageInput: HTMLInputElement = document.querySelector("#lst-ib"),
-  homepageInput: HTMLInputElement = document.querySelector(
-    "input[name=\"q\"]"
-  ),
+  homepageInput: HTMLInputElement = document.querySelector('input[name="q"]'),
   homepageImage: HTMLElement = document.querySelector("#hplogo"),
   imgInput: HTMLInputElement = document.querySelector("#REsRA");
 

@@ -28,7 +28,8 @@ presence.on("UpdateData", async () => {
     if (imageKey === "meta") presenceData.smallImageKey = imageKey;
     else presenceData.smallImageKey = imageKey.replace(".meta", "");
 
-    presenceData.smallImageText = document.querySelector("meta[property='og:site_name']")
+    presenceData.smallImageText = document
+      .querySelector("meta[property='og:site_name']")
       .getAttribute("content")
       .replace("Stack Exchange", "");
     if (pathname.includes("/questions"))
@@ -46,9 +47,11 @@ presence.on("UpdateData", async () => {
     )
       presenceData.state = "Main Page";
     else presenceData.details = "Main Page";
-  } else if (pathname.includes("/questions")) {
-    presenceData.state = document.querySelector(".question-hyperlink").textContent;
-  } else if (
+  } else if (pathname.includes("/questions"))
+    presenceData.state = document.querySelector(
+      ".question-hyperlink"
+    ).textContent;
+  else if (
     [
       "serverfault.com",
       "meta.serverfault.com",
