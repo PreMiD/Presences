@@ -21,9 +21,15 @@ presence.on("UpdateData", async () => {
   if (!document.querySelector("#root"))
     return presence.setActivity({ largeImageKey: "logo" });
 
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    enabletime = await presence.getSetting("enabletime"),
-    enablecover = await presence.getSetting("enablecover");
+  const values = await Promise.all([
+      presence.getSetting("lang").catch(() => "en"),
+      presence.getSetting("enabletime"),
+      presence.getSetting("enablecover")
+    ]),
+    newLang = values[0],
+    enabletime = values[1],
+    enablecover = values[2];
+
   oldLang ??= newLang;
   if (oldLang !== newLang) {
     oldLang = newLang;
@@ -34,13 +40,13 @@ presence.on("UpdateData", async () => {
       'div[class="player__track-cover"] img'
     ),
     presenceData: PresenceData = {
-      largeImageKey:
-        enablecover === true ? songCover.src.replaceAll("230", "600") : "logo"
+      largeImageKey: enablecover
+        ? songCover.src.replaceAll("230", "600")
+        : "logo"
     },
     songTitle = document.querySelector<HTMLAnchorElement>(
       'a[class="player__track-name"]'
     ),
-    songArtist = document.querySelector('div[class="player__track-album"] > a'),
     fromPlaylist = !!document.querySelectorAll(
       'div[class="player__track-album"] a'
     )[2],
@@ -54,7 +60,6 @@ presence.on("UpdateData", async () => {
       (parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000,
     endTimeSec =
       (parseFloat(endTime[0]) * 60 + parseFloat(endTime[1]) + 1) * 1000,
-    endTimestamp = Date.now() + (endTimeSec - currentTimeSec),
     paused = !!document.querySelector(
       'span[class="player__action-play pct pct-player-play "] '
     ),
@@ -74,10 +79,12 @@ presence.on("UpdateData", async () => {
   if (fromPlaylist) playliststring = ` | From: ${obj.songPlaylist.textContent}`;
 
   presenceData.details = songTitle.textContent;
-  presenceData.state = songArtist.textContent + playliststring;
+  presenceData.state =
+    document.querySelector('div[class="player__track-album"] > a').textContent +
+    playliststring;
 
   if (currentTimeSec > 0 || !paused) {
-    presenceData.endTimestamp = endTimestamp;
+    presenceData.endTimestamp = Date.now() + (endTimeSec - currentTimeSec);
     presenceData.smallImageKey = paused ? "pause" : "play";
     presenceData.smallImageText = paused
       ? (await strings).pause
