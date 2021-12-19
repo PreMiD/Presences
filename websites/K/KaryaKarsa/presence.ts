@@ -6,7 +6,7 @@ const presence = new Presence({
     user: [
       {
         name: "supports",
-        state: "My Subscriptions History"
+        state: "My subscriptions history"
       },
       {
         name: "edit",
@@ -16,44 +16,38 @@ const presence = new Presence({
     dashboard: [
       {
         name: "overview",
-        state: "My Overview"
+        state: "My overview"
       },
       {
         name: "onboarding",
-        state: "Starting Up"
+        state: "Starting up"
       },
       {
         name: "goal",
-        state: "My Goal"
+        state: "My goal"
       },
       {
         name: "tiers",
+        state: "My support tiers",
         paths: [
           {
-            name: "",
-            state: "My Support Tiers"
-          },
-          {
             name: "setup",
-            state: "Setting up Supporter Tiers..."
+            state: "Setting up supporter tiers..."
           },
           {
             name: "add",
-            state: "Adding new Supporter Tier..."
+            state: "Adding new supporter tier..."
           },
           {
             name: "*",
-            state: "Editing Supporter Tier..."
+            state: "Editing supporter tier..."
           }
         ]
       },
       {
         name: "posts",
+        state: "My posts",
         paths: [
-          {
-            name: "",
-            state: "My Posts"
-          },
           {
             name: "add",
             state: "Making new post..."
@@ -66,28 +60,25 @@ const presence = new Presence({
       },
       {
         name: "vouchers",
+        state: "My vouchers",
         paths: [
           {
-            name: "",
-            state: "My Vouchers"
-          },
-          {
             name: "add",
-            state: "Making new Voucher..."
+            state: "Making new voucher..."
           },
           {
             name: "*",
-            state: "Editing my Voucher..."
+            state: "Editing my voucher..."
           }
         ]
       },
       {
         name: "overlay",
-        state: "Stream Overlay"
+        state: "Stream overlay"
       },
       {
         name: "supports",
-        state: "Supports History"
+        state: "Supports history"
       },
       {
         name: "bank",
@@ -95,7 +86,7 @@ const presence = new Presence({
       },
       {
         name: "profile",
-        state: "Editing Profile"
+        state: "Editing profile"
       },
       {
         name: "settings",
@@ -109,80 +100,75 @@ const presence = new Presence({
   // This function act like switch function but for objects Array (yea its a lil bit complicated)
   stateSetter = (
     paths: string[],
-    arrayPath: Array<{
+    arrayPath: {
       name: string;
-      state?: string;
-      paths?: Array<{
+      state: string;
+      paths?: {
         name?: string;
         state?: string;
-      }>;
-    }>
+      }[];
+    }[]
   ): string => {
-    const result = arrayPath.find((p) => p.name === (paths[1] || ""));
-    if (result.state) return result.state;
-    return result.paths.find((p) => {
-      const b: boolean = p.name === (paths[2] || "");
-      if (!b && !!paths[2]) return p.name === "*";
-      return b;
-    }).state;
+    const result = arrayPath.find((p) => p.name === paths[1]);
+    return (
+      result.paths?.find((p) => {
+        const b: boolean = p.name === (paths[2] ?? "");
+        if (!b && !!paths[2]) return p.name === "*";
+        return b;
+      })?.state ?? result.state
+    );
   };
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "main",
-    startTimestamp: browsingTimestamp
-  },
-  paths: string[] = window.location.pathname.split("/").splice(1);
+      largeImageKey: "main",
+      startTimestamp: browsingTimestamp
+    },
+    paths: string[] = window.location.pathname.split("/").splice(1);
 
   switch (paths[0].toLowerCase()) {
     case "":
-      presenceData.details = "Looking at HomePage";
+      presenceData.details = "Looking at the home page";
       break;
     case "feed":
-      presenceData.details = "Looking at Feeds";
+      presenceData.details = "Looking at the feeds";
       break;
     case "profile":
-      presenceData.details = "Looking at Profile";
+      presenceData.details = "Looking at their profile";
       break;
     case "about":
     case "terms":
-      presenceData.details = "Looking at Terms of Service";
+      presenceData.details = "Reading Terms of Service";
       break;
     case "dashboard":
-      presenceData.details = "Looking at Dashboard";
+      presenceData.details = "Looking at the dashboard";
       presenceData.state = stateSetter(paths, pathData.dashboard);
       break;
     case "discover": {
-      presenceData.details = "Looking at Discover / Search";
-      const searchBar = <HTMLInputElement>(
-        document.querySelector(
-          ".q-field.q-input.q-field--filled.q-field--square.q-field--float.q-validation-component input.q-field__native.q-placeholder"
-        )
+      presenceData.details = "Looking at the discover / search";
+      const searchBar = document.querySelector<HTMLInputElement>(
+        ".q-field.q-input.q-field--filled.q-field--square.q-field--float.q-validation-component input.q-field__native.q-placeholder"
       );
       if (searchBar?.value)
         presenceData.state = `Searching for "${searchBar.value}"`;
       break;
     }
     case "user":
-      presenceData.details = "Looking at My Detail";
+      presenceData.details = "Looking at My detail";
       presenceData.state = stateSetter(paths, pathData.user);
       break;
     default: {
-      // Default (If the path isnt defined here. Will be replaced with this!)
-      presenceData.details = "Browsing Pages";
+      presenceData.details = "Browsing pages";
 
-      // if no path detected, mean it on homepage
-      if (!paths[0]) presenceData.details = "Looking at HomePage";
+      if (!paths[0]) presenceData.details = "Looking at the home page";
 
       // if user Looking at user page
       {
-        const titleUser = <HTMLElement>(
-            document.querySelector(`${getUserHeader} .q-px-md.q-py-md div`)
+        const titleUser = document.querySelector<HTMLElement>(
+            `${getUserHeader} .q-px-md.q-py-md div`
           ),
-          roleUser = <HTMLElement>(
-            document.querySelector(
-              `${getUserHeader} .q-px-md.q-py-md .text-caption.text-grey-7`
-            )
+          roleUser = document.querySelector<HTMLElement>(
+            `${getUserHeader} .q-px-md.q-py-md .text-caption.text-grey-7`
           );
 
         if (titleUser && roleUser) {
@@ -199,18 +185,13 @@ presence.on("UpdateData", () => {
 
       // if user Looking at user post
       {
-        const titleUser = <HTMLElement>(
-            document.querySelector(getUserHeaderHome)
+        const titleUser =
+            document.querySelector<HTMLElement>(getUserHeaderHome),
+          tagUser = document.querySelector<HTMLElement>(
+            "#q-app > div > div > div.q-page-container.main.q-pb-xl.bordered-desktop.post-page > div.post-date.text-body2.q-px-md.q-pt-md.q-pb-sm.post-content > a"
           ),
-          tagUser = <HTMLElement>(
-            document.querySelector(
-              "#q-app > div > div > div.q-page-container.main.q-pb-xl.bordered-desktop.post-page > div.post-date.text-body2.q-px-md.q-pt-md.q-pb-sm.post-content > a"
-            )
-          ),
-          postTitle = <HTMLElement>(
-            document.querySelector(
-              "#q-app > div > div > div.q-page-container.main.q-pb-xl.bordered-desktop.post-page > h1"
-            )
+          postTitle = document.querySelector<HTMLElement>(
+            "#q-app > div > div > div.q-page-container.main.q-pb-xl.bordered-desktop.post-page > h1"
           );
 
         if (titleUser && tagUser && postTitle) {
@@ -218,7 +199,7 @@ presence.on("UpdateData", () => {
           presenceData.state = postTitle.innerText;
           presenceData.buttons = [
             {
-              label: "View Post",
+              label: "View post",
               url: window.location.href
             }
           ];
