@@ -50,8 +50,8 @@ presence.on("UpdateData", async () => {
 		songPlaylist: document.querySelectorAll('div[class="player__track-album"] a')[2] as HTMLAnchorElement
 	};
 
-    let playliststring = "";
-	if (fromPlaylist === true) 
+  let playliststring = "";
+	if (fromPlaylist === true)
 		playliststring = ` | From: ${obj.songPlaylist.textContent}`;
 	
 
