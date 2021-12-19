@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.5",
+    "author": {
+      "name": "MrNover",
+      "id": "847555305843327029"
+    },
+    "service": "Frogverse",
+    "description": {
+      "en": "We work hard to develop games worthy of the 21st Century. We also develop Discord Bots, YouTube Videos, Twitch Streams and loads more amazing content!"
+    },
+    "url": "frogverse.co.uk",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/Fj2y82C.png",
+    "thumbnail": "https://i.imgur.com/B2aSRvo.png",
+    "color": "#00FF00",
+    "category": "other",
+    "tags": [
+    "Frogverse"
+    ]
+  }
