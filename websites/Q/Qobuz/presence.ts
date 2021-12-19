@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "921861694190407730",
+	clientId: "921861694190407730"
 });
 
 async function getStrings() {
@@ -8,7 +8,7 @@ async function getStrings() {
 			play: "general.playing",
 			pause: "general.paused",
 			viewAlbum: "general.buttonViewAlbum",
-			viewPlaylist: "general.buttonViewPlaylist",
+			viewPlaylist: "general.buttonViewPlaylist"
 		},
 		await presence.getSetting("lang").catch(() => "en")
 	);
@@ -28,11 +28,11 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "logo"
 		},
 		songTitle = document.querySelector("a.player__track-name") as HTMLAnchorElement,
 		songArtist = document.querySelector('div[class="player__track-album"] > a'),
-		fromPlaylist = document.querySelectorAll('div[class="player__track-album"] a')[2] !== undefined,
+		fromPlaylist = document.querySelectorAll('div[class="player__track-album"] a')[2] !== null,
 		currentTime = (document.querySelector("span.player__track-time-text") as HTMLElement).innerText.split(":"),
 		endTime = (document.querySelectorAll('span[class="player__track-time-text"]')[1] as HTMLElement).innerText.split(":"),
 		currentTimeSec = (parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000,
@@ -40,21 +40,20 @@ presence.on("UpdateData", async () => {
 		endTimestamp = Date.now() + (endTimeSec - currentTimeSec),
 		paused = document.querySelector('span[class="player__action-play pct pct-player-play "] ') !== null;
 
-	var elm = document.querySelector(".player__action-repeat.pct");
-	var obj = {
+	const elm = document.querySelector(".player__action-repeat.pct");
+	const obj = {
 		repeatType: elm.classList.contains("pct-repeat-once")
 			? "loopTrack"
 			: elm.classList.contains("player__action-repeat--active")
 			? "loopQueue"
 			: "deactivated",
-		songPlaylist: document.querySelectorAll('div[class="player__track-album"] a')[2] as HTMLAnchorElement,
+		songPlaylist: document.querySelectorAll('div[class="player__track-album"] a')[2] as HTMLAnchorElement
 	};
 
-	if (fromPlaylist === true) {
-		var playliststring = ` | From: ${obj.songPlaylist.textContent}`;
-	} else if (fromPlaylist === false) {
-		var playliststring = "";
-	}
+    let playliststring = "";
+	if (fromPlaylist === true) 
+		playliststring = ` | From: ${obj.songPlaylist.textContent}`;
+	
 
 	presenceData.details = songTitle.textContent;
 	presenceData.state = songArtist.textContent + playliststring;
@@ -75,13 +74,14 @@ presence.on("UpdateData", async () => {
 	presenceData.buttons = [
 		{
 			label: (await strings).viewAlbum,
-			url: songTitle.href,
-		},
+			url: songTitle.href
+		}
 	];
-	if (fromPlaylist === true)
-		presenceData.buttons.push({
+	if (fromPlaylist === true) {
+        presenceData.buttons.push({
 			label: (await strings).viewPlaylist,
-			url: obj.songPlaylist.href,
+			url: obj.songPlaylist.href
 		});
+    }
 	presence.setActivity(presenceData);
 });
