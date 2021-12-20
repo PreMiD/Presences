@@ -1,23 +1,23 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.5",
-    "author": {
-        "name": "Mist8kenGAS",
-        "id": "275272170807099399"
-    },
-    "service": "AnimeOnsen",
-    "description": {
-        "en": "AnimeOnsen is a video streaming platform for anime shows and movies."
-    },
-    "url": "animeonsen.xyz",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/O99W6aY.png",
-    "thumbnail": "https://i.imgur.com/KdbSpCP.png",
-    "color": "#1a1a1a",
-    "tags": [
-        "anime",
-        "video",
-        "streaming"
-    ],
-    "category": "anime",
-    "regExp": "(www.)?(animeonsen.xyz)"
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Mist8kenGAS",
+    "id": "275272170807099399"
+  },
+  "service": "AnimeOnsen",
+  "description": {
+    "en": "AnimeOnsen is a video streaming platform for anime shows and movies."
+  },
+  "url": "animeonsen.xyz",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/O99W6aY.png",
+  "thumbnail": "https://i.imgur.com/KdbSpCP.png",
+  "color": "#1a1a1a",
+  "tags": [
+    "anime",
+    "video",
+    "streaming"
+  ],
+  "category": "anime",
+  "regExp": "(www.)?(animeonsen.xyz)"
 }

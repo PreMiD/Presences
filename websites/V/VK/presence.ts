@@ -48,7 +48,7 @@ function getVKTrackTimePassed(duration: number) {
 }
 
 function getAudioPlayer() {
-  return new Promise<any>((resolve) => {
+  return new Promise<[{ duration: number }]>((resolve) => {
     const script = document.createElement("script"),
       _listener = (data: CustomEvent) => {
         script.remove();
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
     if (document.querySelector(".audio_playing") === null) isPlaying = true;
     else isPlaying = false;
 
-    const {duration} = audioPlayer.find((x) => x.duration);
+    const { duration } = audioPlayer.find((x) => x.duration);
 
     timestamps = presence.getTimestamps(
       getVKTrackTimePassed(duration),

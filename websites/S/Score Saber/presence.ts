@@ -25,12 +25,12 @@ presence.on("UpdateData", async () => {
         "[class^='ss-input'] > div > input"
       ).value !== ""
     ) {
-presenceData.state = `Search: ${
+      presenceData.state = `Search: ${
         document.querySelector<HTMLInputElement>(
           "[class^='ss-input'] > div > input"
         ).value
       }`;
-} else if (document.querySelector("[class^='chip']")) {
+    } else if (document.querySelector("[class^='chip']")) {
       let filters = "";
       document.querySelectorAll("[class^='chip']").forEach(function (element) {
         filters += `${element.textContent.slice(0, -2)},`;
@@ -47,14 +47,14 @@ presenceData.state = `Search: ${
           ) as HTMLInputElement
         ).value !== ""
       ) {
-presenceData.state = `Search: ${
+        presenceData.state = `Search: ${
           (
             document.querySelector(
               "[class^='ss-input'] > div > input"
             ) as HTMLInputElement
           ).value
         }`;
-}
+      }
     } else if (document.location.pathname.includes("/leaderboard/")) {
       presenceData.details = "Viewing Leaderboard";
       presenceData.state = document.querySelector(
@@ -110,22 +110,22 @@ presenceData.state = `Search: ${
         "[class^='title is-5 player has-text-centered-mobile'] > a > span"
       )
     ) {
-presenceData.state = `${
+      presenceData.state = `${
         (document.querySelector("[class^='country']") as HTMLImageElement).alt
       } ${
         document.querySelector(
           "[class^='title is-5 player has-text-centered-mobile'] > a > span"
         ).textContent
       } (${document.querySelector("[class^='title-header pp']").textContent})`;
-} else {
-presenceData.state = `${
+    } else {
+      presenceData.state = `${
         (document.querySelector("[class^='country']") as HTMLImageElement).alt
       } ${
         document.querySelector(
           "[class^='title is-5 player has-text-centered-mobile'] > span"
         ).textContent
       } (${document.querySelector("[class^='title-header pp']").textContent})`;
-}
+    }
   } else if (document.location.pathname.includes("/legal/privacy")) {
     presenceData.details = "Reading Privacy Policy?";
     presenceData.state = "People read this?!";

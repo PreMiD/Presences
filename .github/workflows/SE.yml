@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 16
           cache: "yarn"
-      - name: Prep SE
+      - name: Install dependencies
         run: yarn
       - name: Start SE
         run: |

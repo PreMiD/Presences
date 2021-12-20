@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
   else if (path === "/poukaz") presenceData.details = "Uplatnit poukaz";
   else if (path === "/vip") presenceData.details = "VIP";
   else if (path === "/premium") presenceData.details = "PREMIUM";
-  else if (path === "/team") presenceData.details = "Praisuje AT";
+  else if (path === "/team") presenceData.details = "Admin-Team";
   else if (path === "/statistiky") presenceData.details = "Statistiky";
   else if (path === "/pravidla") presenceData.details = "Pravidla portálu";
   else if (path.includes("/tym")) {
@@ -103,21 +103,17 @@ presence.on("UpdateData", async () => {
   else if (path === "/logs") presenceData.details = "Logy";
   else if (path === "/ukoly") presenceData.details = "Denní úkoly";
   else if (path === "/rychlobitva") presenceData.details = "Rychlobitva!";
-  else if (path === "/rychlobitva/karty")
-    presenceData.details = "Seznam karet Rychlobitvy";
+  else if (path === "/rychlobitva/karty") presenceData.details = "Seznam karet Rychlobitvy";
+  else if (path === "/advent") presenceData.details = "Adventní kalendář";
   else if (path === "/chat") presenceData.details = "Chatuje";
   else if (path === "/upozorneni") presenceData.details = "Upozornění";
   else if (path === "/znamky") presenceData.details = "Katalog známek";
-  else if (path === "/banlist")
-    presenceData.details = "Seznam zabanovaných uživatelů";
+  else if (path === "/banlist") presenceData.details = "Seznam zabanovaných uživatelů";
   else if (path === "/faktury") presenceData.details = "Faktury";
   else if (path === "/nastaveni") presenceData.details = "Nastavení účtu";
-  else if (path === "/dashboard")
-    presenceData.details = "Provádí adminskou magii";
-  else if (path === "/modlog")
-    presenceData.details = "Provádí ještě adminštější magii";
-  else if (path === "/kodex-at")
-    presenceData.details = "Studuje adminskou Bibli";
+  else if (path === "/dashboard") presenceData.details = "Provádí adminskou magii";
+  else if (path === "/modlog") presenceData.details = "Provádí ještě adminštější magii";
+  else if (path === "/kodex-at") presenceData.details = "Studuje adminskou Bibli";
   else if (path.includes("/skimo")) {
     presenceData.details = "Skimo rozcestník";
     if (path.includes("postavy")) presenceData.state = "Moje postavy";
@@ -131,8 +127,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = item.innerText;
       }
     } else if (path.includes("/auta")) presenceData.state = "Seznam vozidel";
-    else if (path.includes("/interiery"))
-      presenceData.state = "Seznam interiérů";
+    else if (path.includes("/interiery")) presenceData.state = "Seznam interiérů";
     else if (path.includes("/skiny")) presenceData.state = "Seznam skinů";
     else if (path.includes("/radia")) presenceData.state = "Seznam rádií";
     else if (path.includes("/banlist")) presenceData.state = "Seznam banů";
@@ -140,8 +135,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Obtěžuje autora tohoto";
     presenceData.state = "RPC";
   } else if (path === "/profil/1") presenceData.details = "Obtěžuje Ratáže.";
-  else if (path.includes("uzivatele"))
-    presenceData.details = "Seznam uživatelů";
+  else if (path.includes("uzivatele")) presenceData.details = "Seznam uživatelů";
   else if (path.includes("/profil/")) {
     item = document.querySelector(".on-pname") as HTMLElement;
     presenceData.details = "Prohlíží si profil uživatele:";
@@ -163,23 +157,16 @@ presence.on("UpdateData", async () => {
         else if (path.includes("apb")) presenceData.state = "APB";
         else if (path.includes("warrants")) presenceData.state = "Zatykače";
         else if (path.includes("osoba")) presenceData.state = "Vyhledává osobu";
-        else if (path.includes("vozidlo"))
-          presenceData.state = "Vyhledává vozidlo";
-        else if (path.includes("nemovitost"))
-          presenceData.state = "Vyhledává nemovitost";
+        else if (path.includes("vozidlo")) presenceData.state = "Vyhledává vozidlo";
+        else if (path.includes("nemovitost")) presenceData.state = "Vyhledává nemovitost";
         else if (path.includes("firma")) presenceData.state = "Vyhledává firmu";
-        else if (path.includes("smazane"))
-          presenceData.state = "Smazané záznamy";
-        else if (path.includes("odtahy"))
-          presenceData.state = "Odtažená vozidla";
-        else if (path.includes("handbook"))
-          presenceData.state = "Úvod příručky";
+        else if (path.includes("smazane")) presenceData.state = "Smazané záznamy";
+        else if (path.includes("odtahy")) presenceData.state = "Odtažená vozidla";
+        else if (path.includes("handbook")) presenceData.state = "Úvod příručky";
         else if (path.includes("slovnik")) presenceData.state = "Slovník";
         else if (path.includes("codes")) presenceData.state = "Kódy";
-        else if (path.includes("sazebnik"))
-          presenceData.state = "Sazebník trestů";
-        else if (path.includes("stop"))
-          presenceData.state = "Zastavovací techniky";
+        else if (path.includes("sazebnik")) presenceData.state = "Sazebník trestů";
+        else if (path.includes("stop")) presenceData.state = "Zastavovací techniky";
         else if (path.includes("law")) presenceData.state = "Zákon o policii";
         else if (path.includes("directive")) presenceData.state = "Směrnice";
         else if (path.includes("teams")) presenceData.state = "Hierarchie PSA";
@@ -189,34 +176,26 @@ presence.on("UpdateData", async () => {
       if (path.includes("katalog")) presenceData.state = "Katalog webů";
       else if (path.includes("burza.ic")) presenceData.state = "Burza";
       else if (path.includes("invest.ic")) presenceData.state = "CE Invest";
-      else if (path.includes("hzs.ic"))
-        presenceData.state = "Hasičský záchranný sbor";
+      else if (path.includes("hzs.ic")) presenceData.state = "Hasičský záchranný sbor";
       else if (path.includes("nic.ic")) presenceData.state = "IC.NIC";
-      else if (path.includes("krypta.ic"))
-        presenceData.state = "Krypta - online kasíno";
-      else if (path.includes("katastr.ic"))
-        presenceData.state = "Katastr nemovitostí";
-      else if (path.includes("lemongate.ic"))
-        presenceData.state = "LemonGate - hlavní stránka";
-      else if (path.includes("e6ftf4.lemon"))
-        presenceData.state = "LemonGate - rozcestník";
-      else if (path.includes("board4.lemon"))
-        presenceData.state = "LemonGate - Board4";
-      else if (path.includes("b3s4f3.lemon"))
-        presenceData.state = "LemonGate - kryptografie";
-      else if (path.includes("irc4na.lemon"))
-        presenceData.state = "LemonGate - Ircana";
-      else if (path.includes("1trade.lemon"))
-        presenceData.state = "LemonGate - AceTrade";
-      else if (path.includes("blockchain.ic"))
-        presenceData.state = "NC Blockchain";
+      else if (path.includes("garver.ic")) presenceData.state = "Garver Auction House";
+      else if (path.includes("sanwave.ic")) presenceData.state = "SanWave";
+      else if (path.includes("antares.ic")) presenceData.state = "ANTARES";
+      else if (path.includes("belleville.ic")) presenceData.state = "Belleville";
+      else if (path.includes("krypta.ic")) presenceData.state = "Krypta - online kasíno";
+      else if (path.includes("katastr.ic")) presenceData.state = "Katastr nemovitostí";
+      else if (path.includes("lemongate.ic")) presenceData.state = "LemonGate - hlavní stránka";
+      else if (path.includes("e6ftf4.lemon")) presenceData.state = "LemonGate - rozcestník";
+      else if (path.includes("board4.lemon")) presenceData.state = "LemonGate - Board4";
+      else if (path.includes("b3s4f3.lemon")) presenceData.state = "LemonGate - kryptografie";
+      else if (path.includes("irc4na.lemon")) presenceData.state = "LemonGate - Ircana";
+      else if (path.includes("1trade.lemon")) presenceData.state = "LemonGate - AceTrade";
+      else if (path.includes("blockchain.ic")) presenceData.state = "NC Blockchain";
       else if (path.includes("nomelcoin.ic")) presenceData.state = "NomelCoin";
       else if (path.includes("oilrig.ic")) presenceData.state = "OilRig";
-      else if (path.includes("kiwi.ic"))
-        presenceData.state = "Kiwi - internetové reklamy";
+      else if (path.includes("kiwi.ic")) presenceData.state = "Kiwi - internetové reklamy";
       else if (path.includes("spay.ic")) presenceData.state = "SPay";
-      else if (path.includes("sherwood.ic"))
-        presenceData.state = "Sherwood Corporation";
+      else if (path.includes("sherwood.ic")) presenceData.state = "Sherwood Corporation";
     } else if (path.includes("smail.ic")) {
       presenceData.details = "Smail";
       presenceData.state = "Hlavní stránka";
@@ -224,13 +203,16 @@ presence.on("UpdateData", async () => {
       else if (path.includes("napsat")) presenceData.state = "Napsat e-mail";
       else if (path.includes("odeslane")) presenceData.state = "Odeslané";
       else if (path.includes("nastaveni")) presenceData.state = "Nastavení";
-    } else if (path.includes("tcu.ic"))
-      presenceData.state = "Tax Compliance Unit";
+    } else if (path.includes("tcu.ic")) presenceData.state = "Tax Compliance Unit";
     else if (path.includes("mining.ic")) presenceData.state = "Těžba kryptoměn";
-    else if (path.includes("vaos.ic"))
-      presenceData.state = "Veterinární a odchytová služba";
+    else if (path.includes("vaos.ic")) presenceData.state = "Veterinární a odchytová služba";
     else if (path.includes("writer.ic")) presenceData.state = "Writer";
-    else if (path.includes("iris.ic/")) {
+    else if (path.includes("post.ic/")) {
+      presenceData.details = "Post";
+      presenceData.state = "Doručené";
+      if (path.includes("sent")) presenceData.state = "Odeslané";
+      else if (path.includes("read")) presenceData.state = "Čte e-mail";
+    } else if (path.includes("iris.ic/")) {
       presenceData.details = "Iris";
       if (path === "/iris.ic/" || path === "/iris.ic")
         presenceData.state = "Hlavní stránka";
@@ -280,15 +262,11 @@ presence.on("UpdateData", async () => {
     if (path === "" || path === "/") presenceData.state = "Seznam serverů";
     if (path.includes("hive.php")) presenceData.state = "LSG - Hive";
     else if (path.includes("skimose")) presenceData.state = "Skimo SE - API";
-    else if (path.includes("dokumentace.php"))
-      presenceData.state = "Skimo SE - Public API";
-    else if (path.includes("servery.php"))
-      presenceData.state = "LSEC ServerList";
-    else if (path.includes("license.php"))
-      presenceData.state = "LSG LicesnseList";
+    else if (path.includes("dokumentace.php")) presenceData.state = "Skimo SE - Public API";
+    else if (path.includes("servery.php")) presenceData.state = "LSEC ServerList";
+    else if (path.includes("license.php")) presenceData.state = "LSG LicesnseList";
     else if (path.includes("breach.php")) presenceData.state = "LSG-Breach";
-    else if (path.includes("prospect.php"))
-      presenceData.state = "Leosight Prospect";
+    else if (path.includes("prospect.php")) presenceData.state = "Leosight Prospect";
     else if (path.includes("/prospect/")) {
       presenceData.details = "LeoSight rádio";
       if (path.includes("radio_mobile.php"))

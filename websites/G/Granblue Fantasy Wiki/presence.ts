@@ -24,7 +24,7 @@ presence.on("UpdateData", () => {
     presenceData.smallImageKey = "tierlist";
     presenceData.smallImageText = "Viewing tier list";
   } else if (document.location.pathname === "/Collection_Tracker")
-      presenceData.details = "Making a collection tracker";
+    presenceData.details = "Making a collection tracker";
   else if (document.location.pathname.startsWith("/search"))
     presenceData.details = "Making a collection tracker";
   else if (document.querySelector(".searchresults")) {
