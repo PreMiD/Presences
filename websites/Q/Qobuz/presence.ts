@@ -33,12 +33,13 @@ presence.on("UpdateData", async () => {
     strings = getStrings();
   }
 
-  const songCover = document.querySelector<HTMLImageElement>(
-      'div[class="player__track-cover"] img'
-    ),
-    presenceData: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: enablecover
-        ? songCover.src.replaceAll("230", "600")
+        ? document
+            .querySelector<HTMLImageElement>(
+              'div[class="player__track-cover"] img'
+            )
+            .src.replaceAll("230", "600")
         : "logo"
     },
     songTitle = document.querySelector<HTMLAnchorElement>(
