@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Kyrie",
+    "id": "368399721494216706"
+  },
+  "service": "CS Money",
+  "altnames": ["CS.Money"],
+  "description": {
+    "en": "A better way to trade CS:GO skins. Buy, sell, and trade skins easier and faster. All deals are secured with the highest level protection methods."
+  },
+  "url": ["cs.money","3d.cs.money","wiki.cs.money"],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/y7THfIx.png",
+  "thumbnail": "https://i.imgur.com/Ob8gt4E.png",
+  "color": "#4214AC",
+  "tags": [
+    "cs",
+    "go",
+    "money",
+    "trade",
+    "market",
+    "skins"
+   ],
+  "category": "games"
+}
