@@ -21,14 +21,11 @@ presence.on("UpdateData", async () => {
   if (!document.querySelector("#root"))
     return presence.setActivity({ largeImageKey: "logo" });
 
-  const values = await Promise.all([
-      presence.getSetting("lang").catch(() => "en"),
-      presence.getSetting("enabletime"),
-      presence.getSetting("enablecover")
-    ]),
-    newLang = values[0],
-    enabletime = values[1],
-    enablecover = values[2];
+  const [newLang, enabletime, enablecover] = await Promise.all([
+    presence.getSetting("lang").catch(() => "en"),
+    presence.getSetting("enabletime"),
+    presence.getSetting("enablecover")
+  ]);
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
