@@ -22,10 +22,9 @@ body:
       description:
         Provide clear and unambiguous steps on how to reproduce the bug
       placeholder: |
-        1. go here
-        2. do this
-        3. do that
-        4. see this incorrect behavior
+        1. Go to this link
+        2. Click on this
+        3. Observe that
   - type: textarea
     validations:
       required: false
