@@ -156,6 +156,12 @@ presence.on("UpdateData", async () => {
         .getAttribute("href");
     data.startTimestamp = startTimestamp;
     data.endTimestamp = endTimestamp;
+    [data.largeImageKey] = document
+      .querySelector<HTMLElement>(
+        ".playbackSoundBadge__avatar.sc-media-image > div > span"
+      )
+      .style.backgroundImage.match(/"(.*)"/)
+      ?.slice(1) ?? ["soundcloud"];
     data.smallImageKey = playing ? "play" : "pause";
     data.smallImageText = (await strings)[playing ? "play" : "pause"];
     data.buttons = [
