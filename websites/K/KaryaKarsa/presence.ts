@@ -172,8 +172,8 @@ presence.on("UpdateData", () => {
           );
 
         if (titleUser && roleUser) {
-          presenceData.details = titleUser.innerText;
-          presenceData.state = roleUser.innerText;
+          presenceData.details = titleUser.textContent;
+          presenceData.state = roleUser.textContent;
           presenceData.buttons = [
             {
               label: "Visit Creator",
@@ -195,8 +195,8 @@ presence.on("UpdateData", () => {
           );
 
         if (titleUser && tagUser && postTitle) {
-          presenceData.details = `${titleUser.innerText} (${tagUser.innerText})`;
-          presenceData.state = postTitle.innerText;
+          presenceData.details = `${titleUser.textContent} (${tagUser.textContent})`;
+          presenceData.state = postTitle.textContent;
           presenceData.buttons = [
             {
               label: "View post",
