@@ -30,13 +30,7 @@ const presence = new Presence({
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings: {
-    play: string;
-    pause: string;
-    browse: string;
-    search: string;
-    listen: string;
-  } = null,
+  strings: Awaited<ReturnType<typeof getStrings>> = null,
   oldLang: string = null;
 
 const statics = {
