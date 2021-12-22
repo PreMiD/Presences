@@ -42,7 +42,8 @@ async function getStrings() {
   );
 }
 
-let oldLang: string = null;
+let strings: Awaited<ReturnType<typeof getStrings>> = null,
+  oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
@@ -53,9 +54,6 @@ presence.on("UpdateData", async () => {
     presence.getSetting("cover")
   ]);
 
-  let strings = await getStrings();
-
-  oldLang ??= newLang;
   if (oldLang !== newLang) {
     oldLang = newLang;
     strings = await getStrings();
