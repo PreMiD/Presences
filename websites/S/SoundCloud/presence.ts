@@ -1,12 +1,18 @@
 const presence = new Presence({
     clientId: "802958833214423081"
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    browse: "presence.activity.browsing",
-    search: "presence.activity.searching"
-  }),
+  getStrings = async () => {
+    return presence.getStrings(
+      {
+        play: "general.playing",
+        pause: "general.paused",
+        browse: "general.browsing",
+        search: "general.searchSomething",
+        listen: "general.buttonListenAlong"
+      },
+      await presence.getSetting("lang").catch(() => "en")
+    );
+  },
   getElement = (query: string): string | undefined => {
     let text = "";
 
@@ -23,7 +29,15 @@ const presence = new Presence({
   };
 
 let elapsed = Math.floor(Date.now() / 1000),
-  prevUrl = document.location.href;
+  prevUrl = document.location.href,
+  strings: {
+    play: string;
+    pause: string;
+    browse: string;
+    search: string;
+    listen: string;
+  } = null,
+  oldLang: string = null;
 
 const statics = {
   "/stream/": {
@@ -104,13 +118,20 @@ const statics = {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-    [showBrowsing, showSong, showTimestamps, cover] = await Promise.all([
-      presence.getSetting("browse"),
-      presence.getSetting("song"),
-      presence.getSetting("timestamp"),
-      presence.getSetting("cover")
-    ]),
+    [showBrowsing, showSong, showTimestamps, cover, newLang] =
+      await Promise.all([
+        presence.getSetting("browse"),
+        presence.getSetting("song"),
+        presence.getSetting("timestamp"),
+        presence.getSetting("cover"),
+        presence.getSetting("lang")
+      ]),
     playing = Boolean(document.querySelector(".playControls__play.playing"));
+
+  if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = await getStrings();
+  }
 
   let presenceData: PresenceData = {
     largeImageKey: "soundcloud",
@@ -169,11 +190,11 @@ presence.on("UpdateData", async () => {
         .replace("-t50x50.jpg", "-t500x500.jpg");
     }
     presenceData.smallImageKey = playing ? "play" : "pause";
-    presenceData.smallImageText = (await strings)[playing ? "play" : "pause"];
+    presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
     presenceData.buttons = [
       {
-        label: "Listen Along",
+        label: strings.listen,
         url: `https://soundcloud.com${pathLinkSong}`
       }
     ];
@@ -244,10 +265,10 @@ presence.on("UpdateData", async () => {
   if (presenceData.details) {
     if (presenceData.details.match("(Browsing|Viewing|Discovering)")) {
       presenceData.smallImageKey = "reading";
-      presenceData.smallImageText = (await strings).browse;
+      presenceData.smallImageText = strings.browse;
     } else if (presenceData.details.match("(Searching)")) {
       presenceData.smallImageKey = "search";
-      presenceData.smallImageText = (await strings).search;
+      presenceData.smallImageText = strings.search;
     } else if (presenceData.details.match("(Uploading)")) {
       presenceData.smallImageKey = "uploading";
       presenceData.smallImageText = "Uploading..."; // no string available
