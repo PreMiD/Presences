@@ -22,7 +22,8 @@ async function getStrings() {
   );
 }
 
-let oldLang: string = null;
+let strings: Awaited<ReturnType<typeof getStrings>> = null,
+  oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -35,9 +36,6 @@ presence.on("UpdateData", async () => {
       presence.getSetting("privacy")
     ]);
 
-  let strings = await getStrings();
-
-  oldLang ??= newLang;
   if (oldLang !== newLang) {
     oldLang = newLang;
     strings = await getStrings();
