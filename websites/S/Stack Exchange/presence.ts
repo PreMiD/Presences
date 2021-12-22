@@ -47,11 +47,11 @@ presence.on("UpdateData", async () => {
     )
       presenceData.state = "Main Page";
     else presenceData.details = "Main Page";
-  } else if (pathname.includes("/questions"))
+  } else if (pathname.includes("/questions")) {
     presenceData.state = document.querySelector(
       ".question-hyperlink"
     ).textContent;
-  else if (
+  } else if (
     [
       "serverfault.com",
       "meta.serverfault.com",

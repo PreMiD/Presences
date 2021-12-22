@@ -14,7 +14,7 @@
     "en": "Stack Exchange is a network of question-and-answer websites on topics in diverse fields, each site covering a specific topic, where questions, answers, and users are subject to a reputation award process. The reputation system allows the sites to be self-moderating."
   },
   "service": "Stack Exchange",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/WCho2QO.png",
   "thumbnail": "https://i.imgur.com/Xax7CJQ.png",
   "color": "#1E5397",
