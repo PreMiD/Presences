@@ -154,6 +154,13 @@ presence.on("UpdateData", async () => {
               )
             )
               presenceData.details = "Reading Reviews of:";
+            else if (path[1]) {
+              presenceData.details = `Product - ${splitOnDashes(path[0])}`;
+              presenceData.state =
+                document.querySelector(
+                  "h1.rbpbduva.slrhy5ou.sw32xbbe.tssb32rf.q8m3c5hr.sjvld55j.h2xm5abc.t2genh0f.aiyvpu16.d29ffpmv.ecv66445.mm8y8im2.i7qx9w64.rhjqn6gv.p5bjl15m.rz0v8pod.mnbq7hy4"
+                )?.textContent || "Unknown";
+            }
 
             presenceData.buttons = [
               {
@@ -220,13 +227,45 @@ presence.on("UpdateData", async () => {
             break;
           }
           case "compare": {
-            presenceData.details = "Viewing Page:";
-            presenceData.state = "Compare Headsets";
+            const headset = {
+              left: <HTMLSelectElement>(
+                document.querySelector("div._9erd select._9ere")
+              ),
+              right: <HTMLSelectElement>(
+                document.querySelectorAll("div._9erd select._9ere")[1]
+              )
+            };
+
+            presenceData.details = "Comparing Headsets:";
+            presenceData.state = `${
+              headset.left?.options[headset.left.selectedIndex]?.text ||
+              "Unknown"
+            } x ${
+              headset.right?.options[headset.right.selectedIndex]?.text ||
+              "Unknown"
+            }`;
+
             break;
           }
           case "vr-for-good": {
-            presenceData.details = "Viewing Page:";
-            presenceData.state = "VR for Good";
+            if (path[1] === "stories" && path[2]) {
+              presenceData.details = "VR for Good - Story:";
+              presenceData.state =
+                document.querySelector(
+                  "h1._2e90._2e93._2e94.article-hero__title"
+                )?.textContent || splitOnDashes(path[2]);
+
+              presenceData.buttons = [
+                {
+                  label: "Read Story",
+                  url: `https://${hostName}/vr-for-good/stories/${path[2]}`
+                }
+              ];
+            } else {
+              presenceData.details = "Viewing Page:";
+              presenceData.state = "VR for Good";
+            }
+
             break;
           }
           case "safety-center": {

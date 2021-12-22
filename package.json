@@ -5,6 +5,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "lint": "eslint --fix . && prettier --write **/*.ts **/{metadata,tsconfig}.json",
+    "lint:ci": "eslint . && prettier **/*.ts **/{metadata,tsconfig}.json",
     "inc": "npm run inc:compile && node ./util/tools/massVer.js",
     "inc:compile": "tsc -p ./util/configs/tsconfig.massVer.json",
     "su": "npm run su:compile && node ./util/tools/schemaUpdater.js",
@@ -39,6 +40,7 @@
     "eslint-plugin-eqeqeq-fix": "^1.0.3",
     "glob": "^7.2.0",
     "jsonschema": "^1.4.0",
+    "json-to-ast": "^2.1.0",
     "mongodb": "^3.6.9",
     "ora": "^6.0.1",
     "prettier": "^2.4.1",

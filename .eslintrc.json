@@ -24,7 +24,6 @@
     "quotes": ["warn", "double", { "avoidEscape": true }],
     "camelcase": ["warn", { "properties": "always" }],
     "curly": ["warn", "multi-or-nest"],
-    "eqeqeq": ["error", "always"],
     "comma-dangle": ["warn", "never"],
     "one-var": ["warn", "consecutive"],
     "linebreak-style": ["warn", "unix"],
