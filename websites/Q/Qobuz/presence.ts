@@ -49,18 +49,18 @@ async function getStrings() {
       fromPlaylist = !!document.querySelectorAll(
         'div[class="player__track-album"] a'
       )[2],
-      currentTime = document
-        .querySelector<HTMLElement>('span[class="player__track-time-text"]')
-        .innerText.split(":"),
-      endTime = document
-        .querySelectorAll<HTMLElement>(
-          'span[class="player__track-time-text"]'
-        )[1]
-        .innerText.split(":"),
       currentTimeSec =
-        (parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000,
+        presence.timestampFromFormat(
+          document.querySelector<HTMLElement>(
+            'span[class="player__track-time-text"]'
+          ).textContent
+        ) * 1000,
       endTimeSec =
-        (parseFloat(endTime[0]) * 60 + parseFloat(endTime[1]) + 1) * 1000,
+        presence.timestampFromFormat(
+          document.querySelectorAll<HTMLElement>(
+            'span[class="player__track-time-text"]'
+          )[1].textContent
+        ) * 1000,
       paused = !!document.querySelector(
         'span[class="player__action-play pct pct-player-play "] '
       ),
