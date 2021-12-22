@@ -47,6 +47,12 @@ body:
     validations:
       required: true
     attributes:
+      label: Page URL
+      description: The URL you were visiting when the bug happens
+  - type: input
+    validations:
+      required: true
+    attributes:
       label: Operating System (OS)
       description: E.g. Windows 11, macOS 12, etc
   - type: input
