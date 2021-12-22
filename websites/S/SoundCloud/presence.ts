@@ -176,12 +176,13 @@ presence.on("UpdateData", async () => {
     presenceData.endTimestamp = endTimestamp;
 
     if (cover) {
-      presenceData.largeImageKey = document
-        .querySelector<HTMLSpanElement>(
-          ".playbackSoundBadge__avatar.sc-media-image > div > span"
-        )
-        .style.backgroundImage.match(/"(.*)"/)[1]
-        .replace("-t50x50.jpg", "-t500x500.jpg");
+      presenceData.largeImageKey =
+        document
+          .querySelector<HTMLSpanElement>(
+            ".playbackSoundBadge__avatar.sc-media-image > div > span"
+          )
+          .style.backgroundImage.match(/"(.*)"/)?.[1]
+          .replace("-t50x50.jpg", "-t500x500.jpg") ?? "soundcloud";
     }
     presenceData.smallImageKey = playing ? "play" : "pause";
     presenceData.smallImageText = strings[playing ? "play" : "pause"];
