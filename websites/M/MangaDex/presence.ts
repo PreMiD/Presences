@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "619455837198483459"
+    clientId: "808749649325719562"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let username: string;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "mangadex-logo",
+    largeImageKey: "logo",
     startTimestamp: browsingStamp
   };
 
