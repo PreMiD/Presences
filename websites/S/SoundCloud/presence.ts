@@ -104,11 +104,15 @@ const statics = {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-    showBrowsing = await presence.getSetting("browse"),
-    showSong = await presence.getSetting("song"),
-    showTimestamps = await presence.getSetting("timestamp");
+    [showBrowsing, showSong, showTimestamps, cover] = await Promise.all([
+      presence.getSetting("browse"),
+      presence.getSetting("song"),
+      presence.getSetting("timestamp"),
+      presence.getSetting("cover")
+    ]),
+    playing = Boolean(document.querySelector(".playControls__play.playing"));
 
-  let data: PresenceData = {
+  let presenceData: PresenceData = {
     largeImageKey: "soundcloud",
     startTimestamp: elapsed
   };
@@ -118,14 +122,12 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  const playButton = document.querySelector(".playControls__play.playing"),
-    playing = playButton ? true : false;
-
   if ((playing || (!playing && !showBrowsing)) && showSong) {
-    data.details = getElement(
+    presenceData.details = getElement(
       ".playbackSoundBadge__titleLink > span:nth-child(2)"
     );
-    data.state = getElement(".playbackSoundBadge__lightLink");
+    presenceData.state = getElement(".playbackSoundBadge__lightLink");
+
     const timePassed = document.querySelector(
         "div.playbackTimeline__timePassed > span:nth-child(2)"
       ).textContent,
@@ -154,11 +156,22 @@ presence.on("UpdateData", async () => {
           "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a"
         )
         .getAttribute("href");
-    data.startTimestamp = startTimestamp;
-    data.endTimestamp = endTimestamp;
-    data.smallImageKey = playing ? "play" : "pause";
-    data.smallImageText = (await strings)[playing ? "play" : "pause"];
-    data.buttons = [
+
+    presenceData.startTimestamp = startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
+
+    if (cover) {
+      presenceData.largeImageKey = document
+        .querySelector<HTMLSpanElement>(
+          ".playbackSoundBadge__avatar.sc-media-image > div > span"
+        )
+        .style.backgroundImage.match(/"(.*)"/)[1]
+        .replace("-t50x50.jpg", "-t500x500.jpg");
+    }
+    presenceData.smallImageKey = playing ? "play" : "pause";
+    presenceData.smallImageText = (await strings)[playing ? "play" : "pause"];
+
+    presenceData.buttons = [
       {
         label: "Listen Along",
         url: `https://soundcloud.com${pathLinkSong}`
@@ -168,83 +181,81 @@ presence.on("UpdateData", async () => {
 
   if ((!playing || !showSong) && showBrowsing) {
     for (const [k, v] of Object.entries(statics))
-      if (path.match(k)) data = { ...data, ...v };
+      if (path.match(k)) presenceData = { ...presenceData, ...v };
 
     if (path === "/") {
-      data.details = "Browsing...";
-      data.state = "Home";
+      presenceData.details = "Browsing...";
+      presenceData.state = "Home";
     } else if (path.includes("/charts/")) {
-      data.details = "Browsing Charts...";
+      presenceData.details = "Browsing Charts...";
 
       const [heading] = path.split("/").slice(-2);
-      data.state =
+      presenceData.state =
         heading && !heading.includes("charts") && capitalize(heading);
     } else if (path.includes("/you/")) {
-      data.details = "Browsing My Content...";
+      presenceData.details = "Browsing My Content...";
 
       const heading = location.pathname.split("/").pop();
-      data.state = heading && capitalize(heading);
+      presenceData.state = heading && capitalize(heading);
     } else if (path.includes("/settings/")) {
-      data.details = "Browsing Settings...";
-      data.state = getElement(".g-tabs-link.active");
+      presenceData.details = "Browsing Settings...";
+      presenceData.state = getElement(".g-tabs-link.active");
     } else if (path.includes("/search/")) {
-      data.details = "Searching...";
+      presenceData.details = "Searching...";
 
       const searchBox: HTMLInputElement = document.querySelector(
         ".headerSearch__input"
       );
-      data.state = searchBox && searchBox.value;
+      presenceData.state = searchBox && searchBox.value;
     } else if (path.includes("/discover/")) {
-      data.details = "Discovering...";
-      data.state = "Music";
+      presenceData.details = "Discovering...";
+      presenceData.state = "Music";
 
       const setLabel = getElement(".fullHero__titleTextLineBig > span");
       if (setLabel) {
-        data.details = "Browsing Set...";
-        data.state = setLabel;
+        presenceData.details = "Browsing Set...";
+        presenceData.state = setLabel;
       }
     } else if (path.includes("/stats/")) {
-      data.details = "Viewing Stats...";
-      data.state = getElement(".statsNavigation .g-tabs-link.active");
+      presenceData.details = "Viewing Stats...";
+      presenceData.state = getElement(".statsNavigation .g-tabs-link.active");
     }
 
     const username =
       getElement(".profileHeaderInfo__userName") ||
       getElement(".userNetworkTop__title > a");
     if (username) {
-      data.details = "Viewing Profile...";
-      data.state = `${username} (${getElement(".g-tabs-link.active")})`;
+      presenceData.details = "Viewing Profile...";
+      presenceData.state = `${username} (${getElement(".g-tabs-link.active")})`;
     }
 
     const waveform = document.querySelector(".fullListenHero .waveform__layer");
     if (waveform) {
-      if (waveform.childElementCount >= 3) data.details = "Viewing Song...";
-      else data.details = "Browsing Playlist/Album...";
+      if (waveform.childElementCount >= 3)
+        presenceData.details = "Viewing Song...";
+      else presenceData.details = "Browsing Playlist/Album...";
 
-      data.state = `${getElement(".soundTitle__title > span")} by ${getElement(
-        ".soundTitle__username"
-      )}`;
+      presenceData.state = `${getElement(
+        ".soundTitle__title > span"
+      )} by ${getElement(".soundTitle__username")}`;
     }
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing|Discovering)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
-    } else if (data.details.match("(Searching)")) {
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).search;
-    } else if (data.details.match("(Uploading)")) {
-      data.smallImageKey = "uploading";
-      data.smallImageText = "Uploading..."; // no string available
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing|Discovering)")) {
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = (await strings).browse;
+    } else if (presenceData.details.match("(Searching)")) {
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = (await strings).search;
+    } else if (presenceData.details.match("(Uploading)")) {
+      presenceData.smallImageKey = "uploading";
+      presenceData.smallImageText = "Uploading..."; // no string available
     } else if (!showTimestamps || (!playing && !showBrowsing)) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setActivity(data);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+    presence.setActivity(presenceData);
+  } else presence.setActivity();
 });
