@@ -31,13 +31,13 @@
       "multiLanguage": true
     },
     {
-      "id": "enablecover",
+      "id": "cover",
       "title": "Show Cover",
       "icon": "fad fa-user-secret",
       "value": true
     },
     {
-      "id": "enabletime",
+      "id": "timestamps",
       "title": "Show timestamps",
       "icon": "fad fa-stopwatch",
       "value": true
