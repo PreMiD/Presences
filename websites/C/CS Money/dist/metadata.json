@@ -26,5 +26,5 @@
     "skins"
    ],
   "category": "games",
-  "regExp": "([a-z0-9-_]+)[.]cs[.]money"
+  "regExp": "([a-z0-9])?[.]?cs[.]money"
 }
