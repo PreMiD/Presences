@@ -1,22 +1,20 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
-    "name": "ririxi",
-    "id": "192490421308489731"
+    "name": "PreMiD",
+    "id": "503557087041683458"
   },
   "service": "LookMovie",
   "description": {
-    "en": "Watch all new and old movies on line in FHD quality and subtitles for free."
+    "en": "Watch all new and old movies on line in FHD quality and subtitles for free.",
+    "nl": "Bekijk gratis alle nieuwe en oude films online in HD-kwaliteit en ondertitels."
   },
-  "url": [
-    "lookmovie.ag",
-    "www.lookmovie.ag"
-  ],
-  "version": "1.2.8",
+  "url": "lookmovie.io",
+  "version": "1.2.13",
   "logo": "https://i.imgur.com/vlSumUl.png",
   "thumbnail": "https://i.imgur.com/nseTbMZ.png",
   "color": "#ffcc00",
   "tags": [
-    "dedicated-server",
     "lookmovie",
     "streaming"
   ],

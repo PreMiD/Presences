@@ -10,6 +10,27 @@ presence.on("UpdateData", async () => {
     pathname = document.location.pathname.split("/").splice(1),
     queryString = document.location.search.substring(1);
   presenceData.startTimestamp = browsingStamp;
+
+  //Sets BaseUrl
+  const BaseUrl = "https://jstris.jezevec10.com",
+    //Inits temporary button array that is to be applied to presenceData later.
+    tempButtons = new Array(0),
+    //Sets button for joining.
+    joinLinkArr = document.getElementsByClassName("joinLink"),
+    //Sets username
+    username = getUsername();
+
+  if (joinLinkArr.length !== 0) {
+    const joinUrl = joinLinkArr[joinLinkArr.length - 1].innerHTML;
+    tempButtons.push({ label: "Join", url: joinUrl });
+  }
+  //Sets button for viewing profile.
+
+  if (typeof username !== "undefined") {
+    const profileUrl = `${BaseUrl}/u/${username}`;
+    tempButtons.push({ label: "View Profile", url: profileUrl });
+  }
+
   switch (pathname[0]) {
     //Play Modes
     case "":
@@ -20,14 +41,12 @@ presence.on("UpdateData", async () => {
         switch (queryObj.play) {
           case "1":
             presenceData.details = "Sprint";
-            if (queryObj.rule) {
-              presenceData.state = "Special Ruleset";
-            } else {
-              presenceData.state = sprintLineMode(queryObj.mode);
-            }
+            if (queryObj.rule) presenceData.state = "Special Ruleset";
+            else presenceData.state = sprintLineMode(queryObj.mode);
+
             break;
           case "2":
-            presenceData.details = "Practise";
+            presenceData.details = "Practice";
             break;
           case "3":
             presenceData.details = "Cheese Race";
@@ -40,7 +59,13 @@ presence.on("UpdateData", async () => {
             break;
           case "6":
             presenceData.details = "Playing Custom Map";
-            presenceData.state = "Map ID: " + queryObj.map;
+            presenceData.state = `Map ID: ${queryObj.map}`;
+            if (tempButtons.length !== 2) {
+              tempButtons.unshift({
+                label: "Play Map",
+                url: `${BaseUrl}/?play=6&map=${queryObj.map}`
+              });
+            }
             break;
           case "7":
             presenceData.details = "20TSD";
@@ -49,9 +74,8 @@ presence.on("UpdateData", async () => {
             presenceData.details = "PC Mode";
             break;
         }
-      } else {
-        presenceData.details = "Live";
-      }
+      } else presenceData.details = "Live";
+
       break;
     //Leaderboards
     case "sprint":
@@ -77,13 +101,14 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing Maps";
       break;
     case "map":
-      presenceData.details =
-        "Viewing Map: " + document.querySelector("h1").innerText;
-      presenceData.state = "Map ID: " + pathname[1];
+      presenceData.details = `Viewing Map: ${
+        document.querySelector("h1").innerText
+      }`;
+      presenceData.state = `Map ID: ${pathname[1]}`;
       break;
     //User
     case "u":
-      presenceData.details = "Viewing User: " + pathname[1];
+      presenceData.details = `Viewing User: ${pathname[1]}`;
       presenceData.state = (<HTMLElement>(
         document.querySelector(".col-md-8")
       )).innerText;
@@ -94,25 +119,40 @@ presence.on("UpdateData", async () => {
       break;
   }
 
-  if (presenceData.details == null) {
+  //Sets the buttons:
+  if (tempButtons.length !== 0 && tempButtons.length <= 2)
+    presenceData.buttons = tempButtons;
+
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
+
+function getUsername() {
+  try {
+    return document
+      .getElementsByClassName("navbar-right")[0]
+      .getElementsByClassName("dropdown-toggle")[1]
+      .textContent.replace(/\n/g, "");
+  } catch (err) {
+    return;
+  }
+}
 
 function parseQuery(search: string) {
   return JSON.parse(
-    '{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
+    `{"${search.replace(/&/g, '","').replace(/=/g, '":"')}"}`,
     function (key, value) {
       return key === "" ? value : decodeURIComponent(value);
     }
   );
 }
+
 function leaderboardText(innerText: string) {
-  return "Browsing " + innerText + " Leaderboards";
+  return `Browsing ${innerText} Leaderboards`;
 }
+
 function sprintLineMode(mode: string) {
   switch (mode) {
     case "1":

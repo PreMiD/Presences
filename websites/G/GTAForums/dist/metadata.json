@@ -1,14 +1,16 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Pequeno",
     "id": "323577179814494209"
   },
   "service": "GTAForums",
   "description": {
-    "en": "GTAForums is the largest and ever-growing fan forum dedicated to the Grand Theft Auto series and Rockstar Games."
+    "en": "GTAForums is the largest and ever-growing fan forum dedicated to the Grand Theft Auto series and Rockstar Games.",
+    "nl": "GTAForums is het grootste en steeds groter wordende fanforum gewijd aan de Grand Theft Auto-serie en Rockstar Games."
   },
   "url": "gtaforums.com",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/9iQgDdN.png",
   "thumbnail": "https://i.imgur.com/ZQHcc96.png",
   "color": "#244052",

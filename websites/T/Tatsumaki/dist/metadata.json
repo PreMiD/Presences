@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Eren",
     "id": "478937019758673931"
@@ -6,10 +7,11 @@
   "service": "Tatsumaki",
   "description": {
     "tr": "Tatsumaki, en büyük botlardan biri olmakla birlikte içinde kullanıcı profilleri, seviyeler ve basit moderasyon sistemi bulunmakta.",
-    "en": "Tatsumaki is providing social aspects including member profiles, levels, fun stuff & simple moderation."
+    "en": "Tatsumaki is providing social aspects including member profiles, levels, fun stuff & simple moderation.",
+    "nl": "Tatsumaki biedt sociale aspecten, waaronder ledenprofielen, niveaus, leuke dingen en eenvoudige moderatie."
   },
   "url": "tatsu.gg",
-  "version": "1.2.10",
+  "version": "1.2.13",
   "logo": "https://i.imgur.com/di7LB5b.png",
   "thumbnail": "https://i.imgur.com/8Ofdw6h.png",
   "color": "#3FA549",

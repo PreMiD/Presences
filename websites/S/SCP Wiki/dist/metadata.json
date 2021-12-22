@@ -1,14 +1,22 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "ry",
     "id": "421371986824921109"
   },
+  "contributors": [
+    {
+      "name": "MrBartusek",
+      "id": "212988300137463809"
+    }
+  ],
   "service": "SCP Wiki",
   "description": {
-    "en": "Operating clandestine and worldwide, the Foundation operates beyond jurisdiction, empowered and entrusted by every major national government with the task of containing anomalous objects, entities, and phenomena."
+    "en": "Operating clandestine and worldwide, the Foundation operates beyond jurisdiction, empowered and entrusted by every major national government with the task of containing anomalous objects, entities, and phenomena.",
+    "nl": "De Stichting opereert clandestien en wereldwijd, buiten jurisdictie, gemachtigd en toevertrouwd door elke grote nationale regering met de taak om afwijkende objecten, entiteiten en fenomenen in toom te houden."
   },
   "url": [
-    "www.scp-wiki.net",
+    "scp-wiki.wikidot.com",
     "scp-wiki-cn.wikidot.com",
     "scp-cs.wikidot.com",
     "fondationscp.wikidot.com",
@@ -27,8 +35,8 @@
     "scp-sandbox-3.wikidot.com",
     "www.scpwiki.com"
   ],
-  "version": "1.2.5",
-  "logo": "https://i.imgur.com/S00mP8l.png",
+  "version": "1.2.9",
+  "logo": "https://i.imgur.com/sZutlAu.png",
   "thumbnail": "https://i.imgur.com/el9c68A.png",
   "color": "#BB0011",
   "tags": [

@@ -1,102 +1,97 @@
 const presence = new Presence({
-  clientId: "608109837657702566"
-});
-const strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "608109837657702566"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused"
+  });
 
-function stripText(element: HTMLElement, id = "None", log = true): any {
-  if (element && element.firstChild) {
-    return element.firstChild.textContent;
-  } else {
-    if (log)
-      console.log(
-        "%cPandora%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-          id,
-        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 25px 0 0 25px; background: #596cae;",
-        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 0 25px 25px 0; background: #ff5050;",
-        "color: unset;"
+function stripText(element: HTMLElement, id = "None", log = true) {
+  if (element && element.firstChild) return element.firstChild.textContent;
+  else {
+    if (log) {
+      presence.error(
+        `An error occurred while stripping data off the page. Please contact FireController1847 on the PreMiD Discord server, and send him a screenshot of this error. ID: ${id}`
       );
+    }
     return null;
   }
 }
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var state;
-
 presence.on("UpdateData", async () => {
-  var title, artist, smallImageKey, smallImageText, audioTime, audioDuration;
+  // Define presence data
+  const data: PresenceData = {
+    details: "Browsing...",
+    largeImageKey: "pandora"
+  };
 
-  var audioElement: HTMLAudioElement = document.querySelector(
-    "audio:last-child"
-  );
-  audioElement === null
-    ? (audioElement = document.querySelector("audio"))
-    : null;
+  // Define whether or not we're currently playing
+  let isPlaying = false;
 
-  var audioBar: HTMLElement = document.querySelector(
+  // Fetch audio bar
+  const audioBar: HTMLElement = document.querySelector(
     ".Tuner__Audio__NowPlayingHitArea"
   );
 
-  audioElement && audioBar ? (state = "music") : (state = null);
-
-  switch (state) {
-    case "music":
-      title = document.querySelector(".Tuner__Audio__TrackDetail__title");
-      artist = document.querySelector(".Tuner__Audio__TrackDetail__artist");
-
-      if (title === null && artist === null) {
-        return;
-      } else {
-        title = stripText(title, "Title");
-        artist = stripText(artist, "Title");
-      }
-
-      smallImageKey = "play";
-      smallImageText = (await strings).play;
-      var timestamps = getTimestamps(
-        Math.floor(audioElement.currentTime),
-        Math.floor(audioElement.duration)
+  // If the audio bar exists, assume we're listening to something
+  if (audioBar) {
+    // Fetch title and artist
+    const title: HTMLElement = document.querySelector(
+        ".Tuner__Audio__TrackDetail__title"
+      ),
+      artist: HTMLElement = document.querySelector(
+        ".Tuner__Audio__TrackDetail__artist"
       );
-      audioTime = timestamps[0];
-      audioDuration = timestamps[1];
-      break;
 
-    default:
-      title = "Browsing...";
-      break;
+    // Only apply them to presence if they're not null
+    if (title !== null && artist !== null) {
+      // Set them to the presence
+      data.details = stripText(title, "Title");
+      data.state = stripText(artist, "Artist");
+    } else presence.error("Title and artist are null!");
+
+    // Fetch play button
+    const playButton: HTMLElement = document.querySelector(
+      ".Tuner__Control__Play__Button"
+    );
+
+    // Return if null
+    if (playButton !== null) {
+      // Check if we're paused or playing
+      isPlaying = playButton.getAttribute("aria-checked") === "true";
+
+      // If we're not paused, set the small image to playing and fetch the timestamps
+      // Otherwise, set the small image to paused
+      if (isPlaying) {
+        data.smallImageKey = "play";
+        data.smallImageText = (await strings).play;
+
+        // Get duration control
+        const timeElapsed: HTMLElement = document.querySelector(
+            ".VolumeDurationControl__Duration [data-qa=elapsed_time]"
+          ),
+          timeRemaining: HTMLElement = document.querySelector(
+            ".VolumeDurationControl__Duration [data-qa=remaining_time]"
+          );
+
+        // Return if either are null
+        if (timeElapsed !== null && timeRemaining !== null) {
+          // Get timestamps
+          [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
+            presence.timestampFromFormat(
+              stripText(timeElapsed, "Time Elapsed")
+            ),
+            presence.timestampFromFormat(
+              stripText(timeRemaining, "Time Remaining")
+            )
+          );
+        } else presence.error("Timestamps are null!");
+      } else {
+        data.smallImageKey = "pause";
+        data.smallImageText = (await strings).pause;
+      }
+    } else presence.error("Play button is null!");
   }
 
-  var data: PresenceData = {
-    details: title,
-    state: artist,
-    largeImageKey: "pandora",
-    smallImageKey: smallImageKey,
-    smallImageText: smallImageText,
-    startTimestamp: audioTime,
-    endTimestamp: audioDuration
-  };
-
-  if (state && audioElement && audioElement.paused) {
-    delete data.startTimestamp;
-    delete data.endTimestamp;
-    data.smallImageKey = "pause";
-    data.smallImageText = (await strings).pause;
-  }
-
-  presence.setActivity(data, audioElement ? !audioElement.paused : true);
+  presence.setActivity(data);
 });

@@ -1,26 +1,39 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "HuckinB",
     "id": "228575716214702080"
   },
+  "contributors": [
+    {
+      "name": "KylePython",
+      "id": "136959324349136896"
+    }
+  ],
   "url": [
     "simulatorhits.com",
-    "panel.simulatorhits.com"
+    "panel.simulatorhits.com",
+    "simulatorhits.dev"
   ],
   "description": {
-    "en": "Your Number 1 Hit Simulation Radio"
+    "en": "Your Number 1 Hit Simulation Radio",
+    "nl": "Uw Nummer 1 Hit Simulatie Radio",
+    "de": "Ihr Nummer-1-Hit-Simulationsradio",
+    "sv_SE": "Din nummer 1 träffsimuleringsradio"
   },
   "service": "SimulatorHits",
-  "version": "1.0.2",
-  "logo": "https://panel.simulatorhits.com/img/SH_Logo.jpg",
-  "thumbnail": "https://simulatorhits.com/assets/img/front-page.png",
-  "color": "#D4426E",
+  "version": "2.0.1",
+  "logo": "https://i.imgur.com/txJayic.jpg",
+  "thumbnail": "https://i.imgur.com/IEYKig2.png",
+  "color": "#DC2424",
   "tags": [
+    "trucking",
     "ets2",
     "ats",
     "fs19",
-    "simhits"
+    "radio",
+    "simulator",
+    "simulatorhits"
   ],
   "category": "music"
 }

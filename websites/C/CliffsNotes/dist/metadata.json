@@ -1,16 +1,17 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Gurrman375D",
     "id": "446528923535278082"
   },
   "url": "www.cliffsnotes.com",
   "description": {
-    "en": "CliffsNotes study guides are written by real teachers and professors, so no matter what you're studying, CliffsNotes can ease your homework headaches and help you score high on exams."
+    "en": "CliffsNotes study guides are written by real teachers and professors, so no matter what you're studying, CliffsNotes can ease your homework headaches and help you score high on exams.",
+    "nl": "CliffsNotes-studiegidsen zijn geschreven door echte leraren en professoren, dus wat je ook studeert, CliffsNotes kan je huiswerkhoofdpijn verlichten en je helpen hoog te scoren op examens."
   },
   "service": "CliffsNotes",
-  "version": "1.0.2",
-  "logo": "https://i.imgur.com/qLjfR9U.png",
+  "version": "1.0.6",
+  "logo": "https://i.imgur.com/t370zFk.png",
   "thumbnail": "https://i.imgur.com/XFCwrCc.png",
   "color": "#FFE500",
   "tags": [

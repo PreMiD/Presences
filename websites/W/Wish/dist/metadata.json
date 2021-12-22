@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "MauriceX",
     "id": "268768664411439115"
@@ -6,11 +7,13 @@
   "service": "Wish",
   "description": {
     "en": "Buy many products with 80% discount.",
-    "de": "Kaufe viele Produkte mit 80% Rabatt."
+    "de": "Kaufe viele Produkte mit 80% Rabatt.",
+    "ga_IE": "Ceannaigh go leor táirgí le lascaine 80%.",
+    "nl": "Koop veel producten met 80% korting."
   },
   "url": "www.wish.com",
-  "version": "1.4.6",
-  "logo": "https://i.imgur.com/XsZ2IOn.jpg",
+  "version": "1.4.11",
+  "logo": "https://i.imgur.com/SMaNfT2.png",
   "thumbnail": "https://i.imgur.com/R7AkWiP.png",
   "color": "#48c0eb",
   "tags": [

@@ -2,7 +2,7 @@
 const presence = new Presence({
   clientId: "477919120789078026"
 });
-let language = navigator.language;
+let { language } = navigator;
 
 switch (language) {
   // By ACertainCoder#9011
@@ -38,13 +38,12 @@ switch (language) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-
-  const playing = parseInt(document.querySelector("#playstop").textContent);
+      largeImageKey: "logo"
+    },
+    playing = parseInt(document.querySelector("#playstop").textContent);
   if (playing > 0) {
-    const station = document.getElementsByClassName("channelname")[0]
-      .textContent;
+    const station =
+      document.getElementsByClassName("channelname")[0].textContent;
     switch (language) {
       case "de":
         presenceData.details = "Spielt gerade";
@@ -58,8 +57,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     try {
-      const channelstation = document.querySelector("#content > h1")
-        .textContent;
+      const channelstation =
+        document.querySelector("#content > h1").textContent;
       switch (language) {
         case "de":
           presenceData.details = "Stöbert durch";
@@ -74,7 +73,7 @@ presence.on("UpdateData", async () => {
       //nothing
     }
     // __________________________________________________________________ Path's
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/") {
       // --------------------- Home
       switch (language) {
         case "de":
@@ -87,7 +86,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/voting/") {
+    } else if (document.location.pathname === "/voting/") {
       //--------- Voting for Songs
       switch (language) {
         case "de":
@@ -100,7 +99,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/the-battle/") {
+    } else if (document.location.pathname === "/the-battle/") {
       //------- Voting for The Battle
       switch (language) {
         case "de":
@@ -113,7 +112,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/charts/") {
+    } else if (document.location.pathname === "/charts/") {
       // ----------- Charts
       switch (language) {
         case "de":
@@ -124,7 +123,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/dance/") {
+    } else if (document.location.pathname === "/dance/") {
       // ------------- Dance & DJ's
       switch (language) {
         case "de":
@@ -136,7 +135,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/hiphop/") {
+    } else if (document.location.pathname === "/hiphop/") {
       // ------------- Hip Hop
       switch (language) {
         case "de":
@@ -147,7 +146,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/channels/") {
+    } else if (document.location.pathname === "/channels/") {
       // ------------- Channellist
       switch (language) {
         case "de":
@@ -160,7 +159,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/streams/") {
+    } else if (document.location.pathname === "/streams/") {
       // --------------- Streams
       switch (language) {
         case "de":
@@ -173,7 +172,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/datenschutz/") {
+    } else if (document.location.pathname === "/datenschutz/") {
       // ------------- Privacy policy
       switch (language) {
         case "de":
@@ -184,7 +183,7 @@ presence.on("UpdateData", async () => {
           break;
       }
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/impressum/") {
+    } else if (document.location.pathname === "/impressum/") {
       // ---------------- Imprint
       switch (language) {
         case "de":

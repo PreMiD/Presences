@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "joerkig",
+    "id": "205984221859151873"
+  },
+  "service": "BeatSaver",
+  "description": {
+    "en": "Beat Saber's #1 unofficial beatmap distributor!",
+    "nl": "Beat Saber's #1 onofficiële beatmap verdeler!"
+  },
+  "url": "beatsaver.com",
+  "version": "2.0.3",
+  "logo": "https://i.imgur.com/1dBCcdI.png",
+  "thumbnail": "https://i.imgur.com/BpXZEqW.png",
+  "color": "#FF0090",
+  "tags": [
+    "beatsaver",
+    "beatsaber",
+    "gaming"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "time",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

@@ -107,30 +107,23 @@ const updateCallback = {
     );
   };
 
-  //
-  // Important note:
-  //
-  // When checking for the current location, avoid using the URL.
-  // The URL is going to be different in other languages.
-  // Use the elements on the page instead.
-  //
-
   if (
-    ((document.querySelector("#n-mainpage a") ||
-      document.querySelector("#p-navigation a") ||
-      document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement).href ===
-    currentURL.href
-  ) {
+    (
+      (document.querySelector("#n-mainpage a") ||
+        document.querySelector("#p-navigation a") ||
+        document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement
+    ).href === currentURL.href
+  )
     presenceData.details = "On the main page";
-  } else if (document.querySelector("#wpLoginAttempt")) {
+  else if (document.querySelector("#wpLoginAttempt"))
     presenceData.details = "Logging in";
-  } else if (document.querySelector("#wpCreateaccount")) {
+  else if (document.querySelector("#wpCreateaccount"))
     presenceData.details = "Creating an account";
-  } else if (document.querySelector(".searchresults")) {
+  else if (document.querySelector(".searchresults")) {
     presenceData.details = "Searching for a page";
-    presenceData.state = (document.querySelector(
-      "input[type=search]"
-    ) as HTMLInputElement).value;
+    presenceData.state = (
+      document.querySelector("input[type=search]") as HTMLInputElement
+    ).value;
   } else if (actionResult() === "history") {
     presenceData.details = "Viewing revision history";
     presenceData.state = titleFromURL();
@@ -147,11 +140,9 @@ const updateCallback = {
         : `${title} (${titleFromURL()})`
     }`;
     updateCallback.function = (): void => {
-      if (actionResult() === "edit" || actionResult() === "editsource") {
+      if (actionResult() === "edit" || actionResult() === "editsource")
         presenceData.details = "Editing a page";
-      } else {
-        presenceData.details = namespaceDetails();
-      }
+      else presenceData.details = namespaceDetails();
     };
   } else {
     if (actionResult() === "edit") {

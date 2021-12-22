@@ -1,20 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Holfz",
     "id": "405397046691102740"
   },
   "service": "Animelizm",
   "description": {
-    "en": "Watch Thai subbed/dubbed Animes Online for free."
+    "en": "Watch Thai subbed/dubbed Animes Online for free.",
+    "ga_IE": "Féach ar Animes Online subbed / dubáilte Téalainnis saor in aisce.",
+    "nl": "Bekijk gratis Thai ondertitelde/nagesynchroniseerde Animes Online."
   },
   "url": "www.animelizm.com",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/zgNeFww.png",
   "thumbnail": "https://i.imgur.com/DosCQw9.png",
   "color": "#0F62E0",
   "tags": [
-    "anime"
+    "anime",
+    "nsfw"
   ],
   "iframe": true,
   "category": "anime"

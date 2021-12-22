@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -6,12 +7,13 @@
   "service": "dizilab",
   "description": {
     "en": "dizilab is one of the biggest Turkish foreign TV show providers on internet.",
-    "tr": "dizilab, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir."
+    "tr": "dizilab, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir.",
+    "nl": "dizilab is een van de grootste aanbieders van Turkse buitenlandse TV-programma's op internet."
   },
-  "url": "dizilab.pw",
-  "version": "1.4.6",
-  "logo": "https://premid.is-inside.me/7h01itFO.png",
-  "thumbnail": "https://premid.is-inside.me/ObIqC0NJ.png",
+  "url": "dizilab.io",
+  "version": "1.4.10",
+  "logo": "https://i.imgur.com/GjvOgOB.png",
+  "thumbnail": "https://i.imgur.com/gcvbjxO.png",
   "color": "#444f53",
   "tags": [
     "video",

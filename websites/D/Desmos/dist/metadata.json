@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Desmos",
+  "author": {
+    "name": "Anshroid",
+    "id": "434312233023963137"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/MVpfVss.jpg",
+  "thumbnail": "https://i.imgur.com/FkLdvtA.png",
+  "version": "1.0.4",
+  "color": "#158f47",
+  "tags": [
+    "graphing",
+    "maths",
+    "calculator"
+  ],
+  "url": "www.desmos.com",
+  "description": {
+    "en": "Desmos Graphing Calculator lets you graph functions, plot data, evaluate equations, explore transformations, and much more— all for free. "
+  }
+}

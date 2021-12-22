@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "639578071338582021"
   }),
   strings = presence.getStrings({
@@ -6,64 +6,63 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
+  title: Element,
+  air: Element,
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState: boolean = null,
+  playback,
+  search: Element;
 
-var title: any, air: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframeVideo: {
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframeVideo.dur !== null ? true : false;
 
-var lastPlaybackState = null;
-var playback;
-
-var search: any;
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
-
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    if (playback) {
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
+    }
+    if (lastPlaybackState !== playback) {
+      lastPlaybackState = playback;
+      browsingStamp = Math.floor(Date.now() / 1000);
+    }
   }
-  if (lastPlaybackState != playback) {
-    lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
-  }
-});
+);
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "ya"
     };
 
   if (document.location.pathname.includes("/item")) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
 
       title = document.querySelector(
-        "body > div.content-block.container.clearfix > div.content > div > h1"
+        "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
       );
-      presenceData.details = title.innerText;
+      presenceData.details = title.textContent;
 
       air = document.querySelector(
         "body > div.content-block.container.clearfix > div.content > div > ul.content-main-info > li:nth-child(3) > font > font"
@@ -81,21 +80,23 @@ presence.on("UpdateData", async () => {
       }
 
       if (air !== null) {
-        presenceData.state =
-          "Aired on: " + air.innerText.replace("AIRED :", "");
+        presenceData.state = `Aired on: ${air.textContent.replace(
+          "AIRED :",
+          ""
+        )}`;
       }
 
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
-        "body > div.content-block.container.clearfix > div.content > div > h1"
+        "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
       );
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       presenceData.smallImageKey = "reading";
     }
   } else if (document.location.pathname.includes("/movie")) {
@@ -111,7 +112,7 @@ presence.on("UpdateData", async () => {
       "body > div.content-block.container.clearfix > div.search-block-wrapper.main-search.clearfix > form > input.search"
     );
     presenceData.details = "Searching for:";
-    presenceData.state = search.value;
+    presenceData.state = search.textContent;
     presenceData.smallImageKey = "search";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/ongoing")) {
@@ -127,12 +128,12 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "body > div.content-block.container.clearfix > div.content > div > div.post-title > font > font"
     );
-    if (title == null) {
+    if (title === null) {
       title = document.querySelector(
         "body > div.content-block.container.clearfix > div.content > div > div.post-title"
       );
     }
-    presenceData.state = title.innerText;
+    presenceData.state = title.textContent;
     presenceData.smallImageKey = "reading";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/post")) {
@@ -141,16 +142,14 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/top")) {
     presenceData.details = "Viewing the top";
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.URL == "https://otakustream.tv/") {
+  } else if (document.URL === "https://otakustream.tv/") {
     presenceData.details = "Browsing...";
     presenceData.smallImageKey = "reading";
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

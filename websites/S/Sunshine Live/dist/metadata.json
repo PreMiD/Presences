@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "CRUGG",
     "id": "228965621478588416"
@@ -6,12 +7,13 @@
   "service": "Sunshine Live",
   "description": {
     "en": "German radio station with many channels like Charts, Summer, 90s, House and much more",
-    "de": "Deutscher Radiosender mit vielen Kanälen wie Charts, Sommer, 90er, House und viel mehr"
+    "de": "Deutscher Radiosender mit vielen Kanälen wie Charts, Sommer, 90er, House und viel mehr",
+    "nl": "Duits radiostation met veel kanalen zoals Charts, Summer, 90s, House en nog veel meer"
   },
   "url": "www.sunshine-live.de",
-  "version": "1.1.5",
-  "logo": "https://crugg.de/premid/ssllogo.png",
-  "thumbnail": "https://crugg.de/premid/sslbanner.png",
+  "version": "1.1.10",
+  "logo": "https://i.imgur.com/EHQLUof.png",
+  "thumbnail": "https://i.imgur.com/OzkoYZT.png",
   "color": "#F47216",
   "tags": [
     "music",

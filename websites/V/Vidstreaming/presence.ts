@@ -1,89 +1,120 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "696085711148941344"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
-var iFrameVideo, currentTime, duration, paused;
-var video;
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title;
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  video: {
+    iframeVideo: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  },
+  lastPlaybackState: boolean,
+  playback: boolean,
+  browsingStamp: number,
+  title: HTMLTextAreaElement,
+  firstVideo: string,
+  childLength: number;
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
-    video = data;
-  }
-});
-
-function getTimestamps(videoTime, videoDuration): any {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sSI");
-  const elapsed = await presence.getSetting("sTE");
-  const videoTime = await presence.getSetting("sVT");
-  if (videoTime) {
-    if (lastPlaybackState != playback) {
-      lastPlaybackState = playback;
-      browsingStamp = Math.floor(Date.now() / 1000);
+presence.on(
+  "iFrameData",
+  (data: {
+    iframeVideo: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframeVideo.duration !== null ? true : false;
+    if (playback) {
+      ({ iFrameVideo, paused } = data.iframeVideo);
+      currentTime = data.iframeVideo.currTime;
+      duration = data.iframeVideo.dur;
+      video = data;
     }
   }
-  if (elapsed) {
-    browsingStamp = Math.floor(Date.now() / 1000);
-    console.log("Elapsed is on");
-  }
+);
 
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-  var presenceData: PresenceData = {
+presence.on("UpdateData", async () => {
+  const info = await presence.getSetting("sSI"),
+    elapsed = await presence.getSetting("sTE"),
+    videoTime = await presence.getSetting("sVT"),
+    buttons = await presence.getSetting("buttons");
+  if (videoTime)
+    if (lastPlaybackState !== playback) lastPlaybackState = playback;
+
+  if (elapsed) browsingStamp = Math.floor(Date.now() / 1000);
+
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   if (info) {
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page or recently subbed";
-    } else if (document.location.pathname == "/recently-added-raw") {
+    } else if (document.location.pathname === "/recently-added-raw") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the recently added raw";
-    } else if (document.location.pathname == "/recently-added-dub") {
+    } else if (document.location.pathname === "/recently-added-dub") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the recently added dub";
-    } else if (document.location.pathname == "/movies") {
+    } else if (document.location.pathname === "/movies") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the anime movies";
-    } else if (document.location.pathname == "/new-season") {
+    } else if (document.location.pathname === "/new-season") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the new anime seasons.";
-    } else if (document.location.pathname == "/popular") {
+    } else if (document.location.pathname === "/popular") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the popular anime.";
-    } else if (document.location.pathname == "/ongoing-series") {
+    } else if (document.location.pathname === "/ongoing-series") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the ongoing series.";
-    }
-    //Used for the video files (Needs some work done here)
-    else if (document.location.pathname.includes("/videos/")) {
+    } else if (document.location.pathname.includes("/videos/")) {
+      //Used for the video files (Needs some work done here)
       title = document.querySelector(
         "body > #wrapper_bg > #wrapper > #main_bg > div > div > div.video-info-left > h1"
       );
-      if (title != null) {
+      if (title !== null) {
         presenceData.state = title.innerText;
-
+        if (buttons) {
+          childLength = document.querySelector(
+            "#main_bg > div:nth-child(5) > div > div.video-info-left > ul"
+          ).children.length;
+          firstVideo = document
+            .querySelector(
+              `#main_bg > div:nth-child(5) > div > div.video-info-left > ul > li:nth-child(${
+                childLength - 1
+              })`
+            )
+            .firstElementChild.getAttribute("href");
+          presenceData.buttons = [
+            {
+              label: "Current Episode",
+              url: document.location.href
+            },
+            {
+              label: "First Episode",
+              url: `https://gogo-stream.com${firstVideo}`
+            }
+          ];
+        }
         if (
-          iFrameVideo == true &&
+          iFrameVideo === true &&
           !isNaN(duration) &&
-          title != null &&
-          video != null
+          title !== null &&
+          video !== null
         ) {
           if (!paused) {
             presenceData.details = "Watching:";
@@ -92,8 +123,12 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageText = paused
                 ? (await strings).pause
                 : (await strings).play;
-              presenceData.startTimestamp = timestamps[0];
-              presenceData.endTimestamp = timestamps[1];
+
+              [presenceData.startTimestamp, presenceData.endTimestamp] =
+                presence.getTimestamps(
+                  Math.floor(currentTime),
+                  Math.floor(duration)
+                );
             }
           } else if (paused) {
             delete presenceData.startTimestamp;
@@ -101,7 +136,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Paused:";
             presenceData.smallImageKey = "pause";
           }
-        } else if (iFrameVideo == null && isNaN(duration) && title != null) {
+        } else if (iFrameVideo === null && isNaN(duration) && title !== null) {
           presenceData.details = "Viewing:";
           presenceData.state = title.innerText;
           presenceData.startTimestamp = browsingStamp;
@@ -111,24 +146,38 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = browsingStamp;
           presenceData.smallImageKey = "search";
           presenceData.smallImageText = "Error 3";
+          presence.error(
+            "Can't tell what you are watching. Fix a variable or line of code."
+          );
         }
       } else {
         //Can't get the basic site information
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Error 02: Watching unknown anime.";
         presenceData.smallImageKey = "search";
+        presence.error("Watching an unknown show.");
       }
-    } //If it can't get the page it will output an error
-    else {
+    } else if (
+      document.querySelector(
+        "#main_bg > div:nth-child(5) > div > div.section-header > h3"
+      ).textContent === " Result search"
+    ) {
+      presenceData.details = "Searching:";
+      presenceData.state = document.location.href
+        .replace("https://gogo-stream.com/search.html?keyword=", "")
+        .split("%20")
+        .join(" ");
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = "Searching";
+    } else {
+      //If it can't get the page it will output an error
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Error 01: Can't Read Page";
       presenceData.smallImageKey = "search";
+      presence.error("Can't read page.");
     }
-  } else {
-    presence.setActivity(presenceData);
-    return;
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     //This will fire if you do not set presence details
     presence.setTrayTitle();
     presence.setActivity();

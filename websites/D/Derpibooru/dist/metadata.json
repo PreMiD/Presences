@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "TheSlowly",
     "id": "505071508851523599"
@@ -10,7 +11,7 @@
     "nl": "Derpibooru is een afbeeldingsrepository waarmee mensen kunst van over het hele internet kunnen samenbrengen, de afbeeldingen kunnen voorzien worden met tags en een originele URL voor eenvoudig zoeken en de kunstwerken te kunnen bespreken."
   },
   "url": "derpibooru.org",
-  "version": "1.2.5",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/XWZYhJA.png",
   "thumbnail": "https://i.imgur.com/en2ygta.png",
   "color": "#3D92D0",

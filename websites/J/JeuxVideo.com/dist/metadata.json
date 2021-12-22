@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "jordanamr",
     "id": "621796333669449749"
@@ -6,10 +7,11 @@
   "service": "JeuxVideo.com",
   "description": {
     "en": "JVC (jeuxvideo.com) is a famous french board and news site about video games.",
-    "fr": "JVC (jeuxvideo.com) est un forum et site d'actualité populaire sur les jeux vidéos."
+    "fr": "JVC (jeuxvideo.com) est un forum et site d'actualité populaire sur les jeux vidéos.",
+    "nl": "JVC (jeuxvideo.com) is een beroemde Franse bord- en nieuwssite over videogames."
   },
   "url": "www.jeuxvideo.com",
-  "version": "1.2.5",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/EnEXs1P.jpg",
   "thumbnail": "https://i.imgur.com/VRpec9o.png",
   "color": "#FF582E",

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Genie Music",
+  "author": {
+    "name": "건유1019",
+    "id": "340373909339635725"
+  },
+  "category": "music",
+  "logo": "https://i.imgur.com/A9rYYB4.png",
+  "thumbnail": "https://i.imgur.com/7dYcjLS.png",
+  "version": "1.0.3",
+  "color": "#0096FF",
+  "tags": [
+    "korean",
+    "audio"
+  ],
+  "altnames": [
+    "지니뮤직"
+  ],
+  "url": "www.genie.co.kr",
+  "description": {
+    "ko_KR": "국내 최다 음원 보유, FLAC 고음질, 지니차트, 최신음악, 앨범, 뮤직비디오, 오늘의 선곡, TV속음악, 시대별음악, 지니라이프 등 제공.",
+    "en": "Korea's largest music source, FLAC high-quality, genie chart, latest music, album, music video, today's selection, music in TV, music by age, genie life, etc. are provided."
+  }
+}

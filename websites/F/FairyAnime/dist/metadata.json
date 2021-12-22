@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Yusaki",
     "id": "439582316873121793"
@@ -6,11 +7,12 @@
   "service": "FairyAnime",
   "description": {
     "en": "FairyAnime stream your favorite anime completely for free with thai-sub and thai sound!",
-    "th": "FairyAnime เว็ปไซต์สตรีมมิ่งอนิเมะที่ทุกคนชื่นชอบ ฟรีเเละมีซับไทย"
+    "th": "FairyAnime เว็ปไซต์สตรีมมิ่งอนิเมะที่ทุกคนชื่นชอบ ฟรีเเละมีซับไทย",
+    "nl": "FairyAnime streamt uw favoriete anime helemaal gratis met thai-sub en thais geluid!"
   },
   "url": "fairyanime.com",
-  "version": "1.0.2",
-  "logo": "https://i.imgur.com/VHH4EsR.png",
+  "version": "1.0.6",
+  "logo": "https://i.imgur.com/WBzbjlK.png",
   "thumbnail": "https://i.imgur.com/QvrAmhs.png",
   "color": "#f7a1f3",
   "tags": [

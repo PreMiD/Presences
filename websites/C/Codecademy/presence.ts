@@ -111,9 +111,10 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = videoPaused
           ? (await strings).pause
           : (await strings).play;
-        if (videoDuration && !videoPaused)
+        if (videoDuration && !videoPaused) {
           presenceData.endTimestamp =
             Date.now() + (videoDuration - videoCurrentTime) * 1000;
+        }
       } else {
         presenceData.startTimestamp = start;
         const bodyHeading = document.querySelector(
@@ -150,9 +151,8 @@ presence.on("UpdateData", async () => {
           .replace(" ", "_")
           .replace("+", "plus")
           .replace("#", "sharp");
-        presenceData.smallImageText = document.querySelector(
-          "#catalog-heading"
-        ).textContent;
+        presenceData.smallImageText =
+          document.querySelector("#catalog-heading").textContent;
       } else if (pathArray[1] === "subject") {
         presenceData.details = "Looking at a subject";
         presenceData.state = `"${
@@ -171,11 +171,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Exploring...";
       break;
     case "":
-      if (window.location.hostname === "news.codecademy.com") {
+      if (window.location.hostname === "news.codecademy.com")
         presenceData.details = "Browsing articles";
-      } else {
-        presenceData.details = "At the homepage";
-      }
+      else presenceData.details = "At the homepage";
+
       break;
     case "pricing":
       presenceData.details = "Checking out the";
@@ -191,9 +190,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = `"${
           document.querySelector("[class^=articleHeader__]").textContent
         }"`;
-      } else {
-        presenceData.details = "Browsing articles";
-      }
+      } else presenceData.details = "Browsing articles";
+
       break;
     default:
       if (window.location.hostname === "news.codecademy.com") {
@@ -204,10 +202,8 @@ presence.on("UpdateData", async () => {
       } else presenceData.details = "Idle";
       break;
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

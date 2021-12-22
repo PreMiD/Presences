@@ -6,26 +6,12 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   });
+
 let video = {
-  video: false,
   duration: 0,
   currentTime: 0,
   paused: true
 };
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on(
   "iFrameData",
@@ -43,29 +29,26 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "akisa"
   };
-
   if (
     document.querySelector(".infoan2") !== null &&
-    document.querySelector("#iframemain") !== null &&
-    video.video
+    document.querySelector("#iframemain") !== null
   ) {
     // on page of a episode
-    const timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     presenceData.details = document.querySelector(".infoan2").textContent;
-    presenceData.state = document
+    [, presenceData.state] = document
       .querySelector("#main > div.now2 > div")
-      .textContent.split(" - ")[1];
+      .textContent.split(" - ");
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
 
     if (video.paused) {
       delete presenceData.startTimestamp;
@@ -77,9 +60,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/categories/")) {
     presenceData.details = "Viewing category:";
-    presenceData.state = document
+    [, presenceData.state] = document
       .querySelector(".lisbg")
-      .textContent.split(": ")[1];
+      .textContent.split(": ");
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/categories")) {
     presenceData.details = "Browsing through";
@@ -110,12 +93,10 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presenceData.details = (await strings).browsing;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).browsing;
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

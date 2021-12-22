@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Marino",
     "id": "598953747963707409"
@@ -9,10 +9,11 @@
     "en.onlinesoccermanager.com"
   ],
   "description": {
-    "en": "Manage your favorite football team in Online Soccer Manager (OSM)! This free-to-play game contains all real and authentic football leagues, clubs and players in the world."
+    "en": "Manage your favorite football team in Online Soccer Manager (OSM)! This free-to-play game contains all real and authentic football leagues, clubs and players in the world.",
+    "nl": "Beheer je favoriete voetbalteam in Online Soccer Manager (OSM)! Deze gratis te spelen game bevat alle echte en authentieke voetbalcompetities, clubs en spelers ter wereld."
   },
   "service": "Online Soccer Manager",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/SZFDa07.png",
   "thumbnail": "https://i.imgur.com/G9nRkaR.png",
   "color": "#FF971B",

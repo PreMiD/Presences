@@ -1,22 +1,21 @@
-var presence = new Presence({
-  clientId: "619286440353726465"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "844109006679179265"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "tvtime-logo"
+    largeImageKey: "logo"
   };
 
   if (
-    document.location.pathname == "/en" ||
-    document.location.pathname == "/fr" ||
-    document.location.pathname == "/es" ||
-    document.location.pathname == "/it" ||
-    document.location.pathname == "/pt_PT" ||
-    document.location.pathname == "/pt_BR" ||
-    document.location.pathname == "/de"
+    document.location.pathname === "/en" ||
+    document.location.pathname === "/fr" ||
+    document.location.pathname === "/es" ||
+    document.location.pathname === "/it" ||
+    document.location.pathname === "/pt_PT" ||
+    document.location.pathname === "/pt_BR" ||
+    document.location.pathname === "/de"
   ) {
     (data.details = "Viewing Watchlist"), (data.startTimestamp = browsingStamp);
     presence.setActivity(data);
@@ -28,9 +27,9 @@ presence.on("UpdateData", async () => {
       (data.startTimestamp = browsingStamp);
     presence.setActivity(data);
   } else if (document.location.pathname.endsWith("/profile")) {
-    var user = document
+    const [user] = document
       .querySelector(".profile-infos h1.name")
-      .textContent.split("Follow")[0];
+      .textContent.split("Follow");
     (data.details = "Viewing a User Profile"),
       (data.state = user),
       (data.startTimestamp = browsingStamp);
@@ -41,11 +40,12 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else if (document.location.pathname.includes("/show")) {
     if (document.location.pathname.includes("/episode/")) {
-      var showname = document.querySelector("div.info-box h3 a").textContent;
-      var shownumber = document.querySelector("div.info-box h1 .episode-label")
-        .textContent;
+      const showname = document.querySelector("div.info-box h3 a").textContent,
+        shownumber = document.querySelector(
+          "div.info-box h1 .episode-label"
+        ).textContent;
       (data.details = "Viewing an Episode"),
-        (data.state = showname + " - " + shownumber);
+        (data.state = `${showname} - ${shownumber}`);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     } else if (document.location.pathname.endsWith("/explore")) {
@@ -53,15 +53,17 @@ presence.on("UpdateData", async () => {
         (data.startTimestamp = browsingStamp);
       presence.setActivity(data);
     } else {
-      var show = document.querySelector("div.info-box.heading-info h1")
-        .textContent;
+      const show = document.querySelector(
+        "div.info-box.heading-info h1"
+      ).textContent;
       (data.details = "Viewing a TV Show"), (data.state = show);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     }
   } else if (document.location.pathname.includes("/actor/")) {
-    var actor = document.querySelector("div#actor-details div.infos h1")
-      .textContent;
+    const actor = document.querySelector(
+      "div#actor-details div.infos h1"
+    ).textContent;
     (data.details = "Viewing an Actor Profile"), (data.state = actor);
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
@@ -91,8 +93,9 @@ presence.on("UpdateData", async () => {
         (data.startTimestamp = browsingStamp);
       presence.setActivity(data);
     } else {
-      var article = document.querySelector("div.article h1.page-header")
-        .textContent;
+      const article = document.querySelector(
+        "div.article h1.page-header"
+      ).textContent;
       (data.details = "Viewing an Article"), (data.state = article);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);

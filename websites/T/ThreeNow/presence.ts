@@ -2,35 +2,27 @@ const presence = new Presence({
   clientId: "691491207356088320"
 });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+let currentTime: number, duration: number, paused: boolean;
+
+interface iFrameData {
+  currentTime: number;
+  duration: number;
+  paused: boolean;
 }
 
-let currentTime, duration, paused;
-
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", (data: iFrameData) => {
   const playback = data.duration !== null ? true : false;
-  if (playback) {
-    currentTime = data.currentTime;
-    duration = data.duration;
-    paused = data.paused;
-  }
+  if (playback) ({ currentTime, duration, paused } = data);
 });
 
 presence.on("UpdateData", () => {
-  const timestamps = getTimestamps(
-    Math.floor(currentTime),
-    Math.floor(duration)
-  );
-
-  const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+  const [startTimestamps, endTimestamps] = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
+    presenceData: PresenceData = {
+      largeImageKey: "logo"
+    };
 
   if (document.URL === "https://www.threenow.co.nz/") {
     presenceData.details = "Browsing the main page";
@@ -39,9 +31,9 @@ presence.on("UpdateData", () => {
     if (
       document.getElementsByClassName("EpisodeSynopsis-subtitle").length >= 1
     ) {
-      if (!isNaN(timestamps[1])) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+      if (!isNaN(endTimestamps)) {
+        presenceData.startTimestamp = startTimestamps;
+        presenceData.endTimestamp = endTimestamps;
       }
 
       presenceData.state = document.getElementsByClassName(
@@ -59,32 +51,26 @@ presence.on("UpdateData", () => {
       }
     } else {
       presenceData.details = "Viewing a show";
-      presenceData.state = document.getElementsByClassName(
-        "HeroSynopsis-title"
-      )[0].textContent;
+      presenceData.state =
+        document.getElementsByClassName("HeroSynopsis-title")[0].textContent;
     }
   } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching shows";
-    presenceData.state = (document.getElementsByClassName(
-      "SearchInput-input"
-    )[0] as HTMLInputElement).value;
+    presenceData.state = (
+      document.getElementsByClassName(
+        "SearchInput-input"
+      )[0] as HTMLInputElement
+    ).value;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  } else if (document.URL === "https://www.threenow.co.nz/live-tv-guide") {
+  } else if (document.URL === "https://www.threenow.co.nz/live-tv-guide")
     presenceData.details = "Viewing the Live TV guide";
-  } else if (
-    document.URL === "https://www.threenow.co.nz/live-tv-guide/three"
-  ) {
+  else if (document.URL === "https://www.threenow.co.nz/live-tv-guide/three") {
     presenceData.details = "Watching Three Live";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   } else if (
     document.URL === "https://www.threenow.co.nz/live-tv-guide/three-life"
   ) {
     presenceData.details = "Watching ThreeLife Live";
-    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  } else if (
-    document.URL === "https://www.threenow.co.nz/live-tv-guide/bravo"
-  ) {
-    presenceData.details = "Watching Bravo Live";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   } else if (
     document.URL === "https://www.threenow.co.nz/live-tv-guide/bravo"
@@ -99,10 +85,8 @@ presence.on("UpdateData", () => {
     presenceData.state = "Checking out information for fans!";
   }
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,154 +1,139 @@
-var presence = new Presence({
-    clientId: "611544256758153225"
-  }),
-  presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+const presence = new Presence({
+  clientId: "611544256758153225"
+});
+let presenceData: PresenceData = {
+  largeImageKey: "logo"
+};
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/")
     presenceData.details = "Viewing the homepage";
-  } else if (document.location.pathname.startsWith("/users/sign_in")) {
+  else if (document.location.pathname.startsWith("/users/sign_in"))
     presenceData.details = "Logging in";
-  } else if (document.location.pathname.startsWith("/users/sign_up")) {
+  else if (document.location.pathname.startsWith("/users/sign_up"))
     presenceData.details = "Registering";
-  } else if (document.location.pathname.startsWith("/store")) {
+  else if (document.location.pathname.startsWith("/store"))
     presenceData.details = "Browsing through the store";
-  } else if (document.location.pathname.startsWith("/rankings")) {
+  else if (document.location.pathname.startsWith("/rankings"))
     presenceData.details = "Browsing through the rankings";
-  } else if (document.location.pathname.startsWith("/settings")) {
+  else if (document.location.pathname.startsWith("/settings"))
     presenceData.details = "Editing settings";
-  } else if (document.location.pathname.startsWith("/galleries")) {
+  else if (document.location.pathname.startsWith("/galleries"))
     presenceData.details = "Browsing through the Gallerie";
-  } else if (document.location.pathname.startsWith("/commissions")) {
+  else if (document.location.pathname.startsWith("/commissions"))
     presenceData.details = "Browsing through commissions";
-  } else if (document.location.pathname.startsWith("/channels")) {
+  else if (document.location.pathname.startsWith("/channels"))
     presenceData.details = "Browsing through livestreams";
-  } else if (document.location.pathname.startsWith("/tags/ratings")) {
+  else if (document.location.pathname.startsWith("/tags/ratings"))
     presenceData.details = "Browsing through the tag ratings";
-  } else if (document.location.pathname.startsWith("/pages/tags")) {
+  else if (document.location.pathname.startsWith("/pages/tags"))
     presenceData.details = "Looking at the tag guide";
-  } else if (document.location.pathname.startsWith("/tags/aliases")) {
+  else if (document.location.pathname.startsWith("/tags/aliases"))
     presenceData.details = "Going through the tag aliases";
-  } else if (document.location.pathname == "/art") {
+  else if (document.location.pathname === "/art")
     presenceData.details = "Browsing through art chats";
-  } else if (document.location.pathname.startsWith("/art/")) {
+  else if (document.location.pathname.startsWith("/art/")) {
     presenceData.details = "Reading the post:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname.startsWith("/writing")) {
+    presenceData.state = (
+      document.querySelector(".layout--narrow h1") as HTMLElement
+    ).innerText;
+  } else if (document.location.pathname.startsWith("/writing"))
     presenceData.details = "Browsing through Fanfictions";
-  } else if (document.location.pathname == "/dis") {
+  else if (document.location.pathname === "/dis")
     presenceData.details = "Browsing through Discussions";
-  } else if (document.location.pathname.startsWith("/dis/")) {
+  else if (document.location.pathname.startsWith("/dis/")) {
     presenceData.details = "Reading the general discussion:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname == "/generals") {
+    presenceData.state = (
+      document.querySelector(".layout--narrow h1") as HTMLElement
+    ).innerText;
+  } else if (document.location.pathname === "/generals")
     presenceData.details = "Looking at general posts";
-  } else if (document.location.pathname.startsWith("/generals/")) {
+  else if (document.location.pathname.startsWith("/generals/"))
     presenceData.details = "test <work in progress>";
-  } else if (document.location.pathname == "/pony") {
+  else if (document.location.pathname === "/pony")
     presenceData.details = "Browsing through pony discussion";
-  } else if (document.location.pathname.startsWith("/pony/")) {
+  else if (document.location.pathname.startsWith("/pony/")) {
     presenceData.details = "Reading the pony discussion:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname == "/rp") {
+    presenceData.state = (
+      document.querySelector(".layout--narrow h1") as HTMLElement
+    ).innerText;
+  } else if (document.location.pathname === "/rp")
     presenceData.details = "Browsing through rp's";
-  } else if (document.location.pathname.startsWith("/rp/")) {
+  else if (document.location.pathname.startsWith("/rp/")) {
     presenceData.details = "Reading the rp chat:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname == "/meta") {
+    presenceData.state = (
+      document.querySelector(".layout--narrow h1") as HTMLElement
+    ).innerText;
+  } else if (document.location.pathname === "/meta")
     presenceData.details = "Browsing through the website policy";
-  } else if (document.location.pathname.startsWith("/meta/")) {
+  else if (document.location.pathname.startsWith("/meta/")) {
     presenceData.details = "Reading the information post:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname == "/tagging") {
+    presenceData.state = (
+      document.querySelector(".layout--narrow h1") as HTMLElement
+    ).innerText;
+  } else if (document.location.pathname === "/tagging")
     presenceData.details = "Browsing through tagging discussions";
-  } else if (document.location.pathname.startsWith("/tagging/")) {
+  else if (document.location.pathname.startsWith("/tagging/")) {
     presenceData.details = "Reading the tagging discussion:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname == "/uppers") {
+    presenceData.state = (
+      document.querySelector(".layout--narrow h1") as HTMLElement
+    ).innerText;
+  } else if (document.location.pathname === "/uppers")
     presenceData.details = "Browsing through uploader discussions";
-  } else if (document.location.pathname.startsWith("/uppers/")) {
+  else if (document.location.pathname.startsWith("/uppers/")) {
     presenceData.details = "Reading the uploader discussion:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname == "/tagging") {
-    presenceData.details = "Browsing through tagging discussions";
-  } else if (document.location.pathname.startsWith("/tagging/")) {
-    presenceData.details = "Reading the tagging discussion:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname == "/forums") {
+    presenceData.state = (
+      document.querySelector(".layout--narrow h1") as HTMLElement
+    ).innerText;
+  } else if (document.location.pathname === "/forums")
     presenceData.details = "Browsing through the forum";
-  } else if (document.location.pathname.startsWith("/forums")) {
+  else if (document.location.pathname.startsWith("/forums")) {
     presenceData.details = "Reading the forum post:";
-    presenceData.state = (document.querySelector(
-      ".layout--narrow h1"
-    ) as HTMLElement).innerText;
-  } else if (document.location.pathname.startsWith("/activity")) {
+    presenceData.state = (
+      document.querySelector(".layout--narrow h1") as HTMLElement
+    ).innerText;
+  } else if (document.location.pathname.startsWith("/activity"))
     presenceData.details = "Browsing recently uploaded pictures";
-  } else if (document.location.pathname.startsWith("/lists")) {
+  else if (document.location.pathname.startsWith("/lists"))
     presenceData.details = "Browsing through top scores";
-  } else if (document.location.pathname.startsWith("/posts")) {
+  else if (document.location.pathname.startsWith("/posts"))
     presenceData.details = "Browsing through global posts";
-  } else if (document.location.pathname.startsWith("/search")) {
+  else if (document.location.pathname.startsWith("/search"))
     presenceData.details = "Searching something";
-  } else if (document.location.pathname.startsWith("/filters")) {
+  else if (document.location.pathname.startsWith("/filters"))
     presenceData.details = "Changing their filter settings";
-  } else if (document.location.pathname.startsWith("/settings")) {
-    presenceData.details = "Changing their settings";
-  } else if (document.location.pathname.startsWith("/pages/rules")) {
+  else if (document.location.pathname.startsWith("/pages/rules"))
     presenceData.details = "Reading the rules";
-  } else if (document.location.pathname.startsWith("/pages/privacy")) {
+  else if (document.location.pathname.startsWith("/pages/privacy"))
     presenceData.details = "Reading the privacy informations";
-  } else if (document.location.pathname.startsWith("/pages/takedowns")) {
+  else if (document.location.pathname.startsWith("/pages/takedowns"))
     presenceData.details = "Reading about takedowns";
-  } else if (document.location.pathname.startsWith("/dnp")) {
+  else if (document.location.pathname.startsWith("/dnp"))
     presenceData.details = "Reading through the Do-Not-Post List";
-  } else if (document.location.pathname.startsWith("/changelog")) {
+  else if (document.location.pathname.startsWith("/changelog"))
     presenceData.details = "Reading the changelog";
-  } else if (document.location.pathname.startsWith("/pages/faq")) {
+  else if (document.location.pathname.startsWith("/pages/faq"))
     presenceData.details = "Reading the FAQ";
-  } else if (document.location.pathname.startsWith("/pages/api")) {
+  else if (document.location.pathname.startsWith("/pages/api"))
     presenceData.details = "Reading about the API";
-  } else if (document.location.pathname.startsWith("/pages/shortcuts")) {
+  else if (document.location.pathname.startsWith("/pages/shortcuts"))
     presenceData.details = "Reading about the keyboard shortcuts";
-  } else if (document.location.pathname.startsWith("/pages/advertising")) {
+  else if (document.location.pathname.startsWith("/pages/advertising"))
     presenceData.details = "Reading about their advertising";
-  } else if (document.location.pathname.startsWith("/pages/onion")) {
+  else if (document.location.pathname.startsWith("/pages/onion"))
     presenceData.details = "Reading about onions";
-  } else if (document.location.pathname.startsWith("/pages/stats")) {
+  else if (document.location.pathname.startsWith("/pages/stats"))
     presenceData.details = "Watching the website stats";
-  } else if (document.location.pathname.startsWith("/pages/staff")) {
+  else if (document.location.pathname.startsWith("/pages/staff"))
     presenceData.details = "Looking at the staff list";
-  } else if (document.location.pathname.startsWith("/images")) {
-    if (document.location.pathname.startsWith("/images/new")) {
+  else if (document.location.pathname.startsWith("/images")) {
+    if (document.location.pathname.startsWith("/images/new"))
       presenceData.details = "uploading a new picture";
-    } else {
-      presenceData.details = "Browsing through all pictures";
-    }
+    else presenceData.details = "Browsing through all pictures";
   } else {
     presenceData = {
       largeImageKey: "logo"
     };
   }
   presence.setActivity(presenceData);
-});
-
-presence.on("iFrameData", function (data) {
-  console.log(data);
 });

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -17,7 +18,7 @@
     "nl": "Pokémon zijn wezens in alle soorten en maten die in het wild of naast mensen leven. Voor het grootste deel spreken Pokémon niet, behalve om hun namen uit te spreken. Er zijn momenteel meer dan 700 wezens die het Pokémon-universum bewonen."
   },
   "url": "www.pokemon.com",
-  "version": "1.1.6",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/1BcRgET.png",
   "thumbnail": "https://i.imgur.com/WBJfQkW.jpg",
   "color": "#ffcb05",

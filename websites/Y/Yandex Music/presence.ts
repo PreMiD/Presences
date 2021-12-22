@@ -14,33 +14,34 @@ function getMillisecondsFromString(timeString: string): number {
 }
 
 function isPodcast(): boolean {
-  return document.getElementsByClassName("track__podcast")[0] !== undefined;
+  return !!document.getElementsByClassName("track__podcast")[0];
 }
 
 const getData = async (): Promise<void> => {
-  const title = (document.getElementsByClassName(
-      "track__title"
-    )[0] as HTMLElement).innerText,
-    progress = (document.getElementsByClassName(
-      "progress__left"
-    )[0] as HTMLElement).innerText,
-    trackLength = (document.getElementsByClassName(
-      "progress__right"
-    )[0] as HTMLElement).innerText,
+  const title = (
+      document.getElementsByClassName("track__title")[0] as HTMLElement
+    ).innerText,
+    progress = (
+      document.getElementsByClassName("progress__left")[0] as HTMLElement
+    ).innerText,
+    trackLength = (
+      document.getElementsByClassName("progress__right")[0] as HTMLElement
+    ).innerText,
     startedAt = Date.now() - getMillisecondsFromString(progress),
     endAt = startedAt + getMillisecondsFromString(trackLength),
     playing =
-      document.getElementsByClassName("player-controls__btn_pause").length == 2;
+      document.getElementsByClassName("player-controls__btn_pause").length ===
+      2;
 
   let artists;
   if (isPodcast()) {
-    artists = (document.getElementsByClassName(
-      "track__podcast"
-    )[0] as HTMLElement).innerText;
+    artists = (
+      document.getElementsByClassName("track__podcast")[0] as HTMLElement
+    ).innerText;
   } else {
-    artists = (document.getElementsByClassName(
-      "track__artists"
-    )[0] as HTMLElement).innerText;
+    artists = (
+      document.getElementsByClassName("track__artists")[0] as HTMLElement
+    ).innerText;
   }
 
   presenceData = {
@@ -64,9 +65,8 @@ setInterval(getData, 1000);
 presence.on("UpdateData", () => {
   const title = document.getElementsByClassName("track__title");
 
-  if (title.length != 0) {
-    presence.setActivity(presenceData);
-  } else {
+  if (title.length !== 0) presence.setActivity(presenceData);
+  else {
     presence.setTrayTitle();
     presence.setActivity();
   }

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -6,12 +7,13 @@
   "service": "Playerbros",
   "description": {
     "en": "Playerbros is a Turkish e-sport news website.",
-    "tr": "Playerbros, Türkçe espor haberleri ve bu konuda özel videolar oluşturan bir internet sitesidir."
+    "tr": "Playerbros, Türkçe espor haberleri ve bu konuda özel videolar oluşturan bir internet sitesidir.",
+    "nl": "Playerbros is een Turkse nieuwswebsite over e-sport."
   },
   "url": "playerbros.com",
-  "version": "1.1.5",
-  "logo": "https://premid.is-inside.me/BtTHUYUy.png",
-  "thumbnail": "https://premid.is-inside.me/vclpbbNG.png",
+  "version": "1.1.8",
+  "logo": "https://i.imgur.com/OowJF1h.png",
+  "thumbnail": "https://i.imgur.com/yFE0IjA.png",
   "color": "#f15a22",
   "tags": [
     "playerbros",

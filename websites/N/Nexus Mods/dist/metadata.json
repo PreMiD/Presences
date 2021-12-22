@@ -1,15 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bob Ross",
     "id": "104726244964196352"
   },
   "url": "nexusmods.com",
   "description": {
-    "en": "We support modding for all PC games. If you can mod it, we'll host it."
+    "en": "We support modding for all PC games. If you can mod it, we'll host it.",
+    "nl": "We ondersteunen modding voor alle pc-games. Als je het kunt aanpassen, zullen we het hosten."
   },
   "service": "Nexus Mods",
-  "version": "1.2.4",
-  "logo": "https://i.imgur.com/An5OwGg.png",
+  "version": "1.2.8",
+  "logo": "https://i.imgur.com/1C3hyW0.png",
   "thumbnail": "https://i.imgur.com/RCC92Ny.png",
   "color": "#DA8E35",
   "tags": [

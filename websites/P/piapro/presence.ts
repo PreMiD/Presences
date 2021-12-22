@@ -1,35 +1,24 @@
-var presence = new Presence({
-  clientId: "641416608790609942"
-});
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var search: any;
-var min: number, sec: number, time: number;
-var min2: number, sec2: number, time2: number;
-var paused: any, timestamps: any;
+const presence = new Presence({
+    clientId: "641416608790609942"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let search: HTMLInputElement,
+  min: number,
+  sec: number,
+  time: number,
+  min2: number,
+  sec2: number,
+  time2: number,
+  paused: boolean,
+  timestamps: number[];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "pia"
   };
 
-  if (document.location.hostname == "piapro.jp") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "piapro.jp") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/html5_player_popup/")) {
@@ -70,21 +59,17 @@ presence.on("UpdateData", async () => {
         !document
           .querySelector("#jp_container_1")
           .className.includes("jp-state-playing")
-      ) {
+      )
         paused = true;
-      } else {
-        paused = false;
-      }
+      else paused = false;
 
-      timestamps = getTimestamps(time, time2);
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      timestamps = presence.getTimestamps(time, time2);
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
 
-      presenceData.details = document.querySelector(
-        "body > header > h1"
-      ).textContent;
+      presenceData.details =
+        document.querySelector("body > header > h1").textContent;
       presenceData.state = document.querySelector(
         "body > header > div > p.artist"
       ).textContent;
@@ -97,13 +82,12 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/t/")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details =
-        "Viewing " +
+      presenceData.details = `Viewing ${
         document
           .querySelector("head > title")
           .textContent.split("|")[1]
-          .split("「")[0] +
-        ":";
+          .split("「")[0]
+      }:`;
       presenceData.state = document.querySelector(
         "#main > div.cd_works-whole.illust > div.cd_works-mainclm > h1"
       ).textContent;
@@ -136,9 +120,8 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/collabo/")) {
       presenceData.details = "Viewing collab:";
-      presenceData.state = document.querySelector(
-        "#main_name > h2"
-      ).textContent;
+      presenceData.state =
+        document.querySelector("#main_name > h2").textContent;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/collabo_list/")) {
       presenceData.details = "Viewing collab list";
@@ -156,10 +139,8 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     }
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

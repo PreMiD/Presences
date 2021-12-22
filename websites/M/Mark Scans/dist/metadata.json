@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Nanashin",
     "id": "330030557457022986"
@@ -7,11 +8,12 @@
   "description": {
     "en": "A brazilian scanlator that make webtoons and mangas",
     "pt_BR": "Uma scan brasileira fazendo webtoons e mangás",
-    "pt": "Uma scan brasileira fazendo webtoons e mangás"
+    "pt": "Uma scan brasileira fazendo webtoons e mangás",
+    "nl": "Een Braziliaanse scanlator die webtoons en manga's maakt"
   },
   "url": "markscans.online",
-  "version": "1.0.1",
-  "logo": "https://i.imgur.com/jBlCITq.png",
+  "version": "1.0.5",
+  "logo": "https://i.imgur.com/yDmQsYg.png",
   "thumbnail": "https://i.imgur.com/QEdn2iJ.png",
   "tags": [
     "scan",

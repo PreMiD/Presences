@@ -1,17 +1,19 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Alexx",
     "id": "604182077088202784"
   },
   "service": "Kodi",
   "description": {
-    "en": "Kodi presence for PreMiD! Please read [this page](https://github.com/PreMiD/Presences/blob/master/websites/K/Kodi/readme.md) to get started!"
+    "en": "Kodi presence for PreMiD! Please read [this page](https://github.com/PreMiD/Presences/blob/master/websites/K/Kodi/readme.md) to get started!",
+    "nl": "Kodi-aanwezigheid voor PreMiD! Lees [deze pagina] (https://github.com/PreMiD/Presences/blob/master/websites/K/Kodi/readme.md) om te beginnen!"
   },
   "url": [
     "localhost",
     "127.0.0.1"
   ],
-  "version": "1.0.5",
+  "version": "1.0.11",
   "logo": "https://i.imgur.com/PKrgfd3.png",
   "thumbnail": "https://i.imgur.com/TlpZA7D.png",
   "color": "#ff7c00",

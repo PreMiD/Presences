@@ -1,62 +1,79 @@
-var presence = new Presence({
-    clientId: "630480510753308694"
+const presence = new Presence({
+    clientId: "808758769424138252"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector("video.vjs-tech");
+  const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
+    presenceData: PresenceData = {
+      largeImageKey: "logo"
+    },
+    buttons = await presence.getSetting("buttons");
 
-  if (video && !isNaN(video.duration)) {
-    var title = document.querySelector(".adn-player-header a").textContent;
-    var subtitle = document.querySelector(".adn-player-header span")
-      .textContent;
-    var timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
+  if (document.location.pathname.includes("video") && video) {
+    const episode = JSON.parse(
+      document.querySelector('[type="application/ld+json"]').textContent
     );
-
-    const data: PresenceData = {
-      details: title,
-      state: subtitle,
-      largeImageKey: "adn-logo",
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
+    if (!isNaN(video.duration)) {
+      const timestamps = presence.getTimestampsfromMedia(video);
+      presenceData.details = episode.partOfSeries.name;
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused
         ? (await strings).pause
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+        : (await strings).play;
+      [, presenceData.endTimestamp] = timestamps;
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "Watch Episode",
+            url: document.location.href
+          }
+        ];
+      }
 
-    if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      if (video.paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
+    } else {
+      presenceData.details = "Looking at";
+      presenceData.state = episode.partOfSeries.name;
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "View Page",
+            url: document.location.href
+          }
+        ];
+      }
     }
+  } else if (document.location.pathname.includes("video") && !video) {
+    const catalogue = document.querySelector(
+      "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
+    );
+    if (catalogue) presenceData.details = "Browsing...";
+    else {
+      const episode = JSON.parse(
+        document.querySelector('[type="application/ld+json"]').textContent
+      );
+      presenceData.details = "Looking at";
+      presenceData.state = episode.name;
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "View Page",
+            url: document.location.href
+          }
+        ];
+      }
+    }
+  } else presenceData.details = "Browsing...";
 
-    if (title !== null && subtitle !== null) {
-      presence.setActivity(data, !video.paused);
-    }
-  } else {
-    const browsingPresence: PresenceData = {
-      details: "Browsing...",
-      largeImageKey: "adn-logo"
-    };
-    presence.setActivity(browsingPresence);
-  }
+  if (!presenceData.details) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
 });

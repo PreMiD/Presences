@@ -1,19 +1,18 @@
 const presence = new Presence({
-  clientId: "672143036767272961"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-const url = new URLSearchParams(window.location.search).get("site");
+    clientId: "672143036767272961"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  url = new URLSearchParams(window.location.search).get("site");
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
-  if (url == "0") {
+  if (url === "0") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "viewing site A";
-  } else if (url == "1") {
+  } else if (url === "1") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "viewing site B";
   } else if (new URLSearchParams(window.location.search).has("id")) {
@@ -25,12 +24,11 @@ presence.on("UpdateData", async () => {
   } else if (new URLSearchParams(window.location.search).has("tag")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "viewing an tag:";
-    presenceData.state = document.querySelector(
-      "body > center > h1"
-    ).textContent;
+    presenceData.state =
+      document.querySelector("body > center > h1").textContent;
   } else if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/index.html"
+    document.location.pathname === "/" ||
+    document.location.pathname === "/index.html"
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "index";
@@ -42,10 +40,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "giving feedback";
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "630874255990587402"
   }),
   strings = presence.getStrings({
@@ -6,43 +6,27 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "gfycat"
   };
 
   if (document.location.pathname.startsWith("/discover")) {
-    var section = document.querySelector(".multiple-view__title").textContent;
-    if (section) {
-      data.state = section;
-    }
+    const section = document.querySelector(".multiple-view__title").textContent;
+    if (section) data.state = section;
 
     data.details = "Browsing...";
     data.startTimestamp = Date.now();
 
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/gifs/search")) {
-    var searchText = document.querySelector(".feed-with-player__title")
-      .textContent;
+    const searchText = document.querySelector(
+      ".feed-with-player__title"
+    ).textContent;
 
     data.details = "Searching...";
-    if (searchText) {
-      data.state = searchText;
-    }
+    if (searchText) data.state = searchText;
+
     data.startTimestamp = Date.now();
     data.smallImageKey = "search";
     data.smallImageText = "Searching";
@@ -57,7 +41,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/@")) {
-    var profile = document.querySelector(
+    const profile = document.querySelector(
       ".profile-container .profile-info-container .name"
     ).textContent;
 
@@ -72,22 +56,20 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data);
   } else {
-    var player: HTMLVideoElement = document.querySelector(
+    const player: HTMLVideoElement = document.querySelector(
       ".video-player-wrapper video"
     );
 
     if (player) {
-      var title = document.querySelector(".gif-info .title").textContent;
-      var views = document.querySelector(".gif-info .gif-views").textContent;
-      var timestamps = getTimestamps(
+      const title = document.querySelector(".gif-info .title").textContent,
+        views = document.querySelector(".gif-info .gif-views").textContent;
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
         Math.floor(player.currentTime),
         Math.floor(player.duration)
       );
 
       data.details = title;
       data.state = views;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
       data.smallImageKey = player.paused ? "pause" : "play";
       data.smallImageText = player.paused
         ? (await strings).pause

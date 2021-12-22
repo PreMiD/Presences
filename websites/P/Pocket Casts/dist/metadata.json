@@ -1,15 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "ry",
     "id": "421371986824921109"
   },
   "service": "Pocket Casts",
   "description": {
-    "en": "All the features you need in a podcasting app without any of the bloat. Podcast listening turned up to 11."
+    "en": "All the features you need in a podcasting app without any of the bloat. Podcast listening turned up to 11.",
+    "nl": "Alle functies die je nodig hebt in een podcasting-app zonder een opgeblazen gevoel. Podcast luisteren is op 11 gezet."
   },
   "url": "play.pocketcasts.com",
-  "version": "1.2.4",
-  "logo": "https://i.imgur.com/dyQLFDS.png",
+  "version": "1.2.9",
+  "logo": "https://i.imgur.com/5tOAWM7.png",
   "thumbnail": "https://i.imgur.com/AJS6zcg.png",
   "color": "#F43E37",
   "tags": [

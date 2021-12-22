@@ -3,37 +3,68 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const playerTime = document.getElementById("player-time").textContent;
-  if (playerTime == "Welcome back") return;
+  const presenceData: PresenceData = { largeImageKey: "icon" },
+    playerTitle: HTMLDivElement = document.querySelector("div.player-title"),
+    playerArtist: HTMLDivElement = document.querySelector("div.player-artist"),
+    playerTime: HTMLDivElement = document.querySelector("div.player-time"),
+    playBackStatus: HTMLButtonElement =
+      document.querySelector("button.player-play"),
+    listeners: HTMLDivElement = document.querySelector("div.col.cell"),
+    header: NodeListOf<HTMLDivElement> = document.querySelectorAll(
+      ".window > .inner > .header.header-draggable.noselect"
+    ),
+    songInfo: HTMLDivElement = document.querySelector(".p-2.song-info");
 
-  const playBackStatus =
-    document.querySelector(".player-play").textContent == "Stop"
-      ? "play"
-      : "pause";
-  const presenceData: presenceData = {
-    state: document.querySelector(".player-title").textContent,
-    details: document.querySelector(".player-artist").textContent,
-    largeImageKey: "icon",
-    smallImageKey: playBackStatus
-  };
-
-  if (playBackStatus == "play") {
-    const ts = playerTime
-      .substring(0, 5)
-      .split(":")
-      .map((n) => Number(n));
-    const te = playerTime
-      .substring(8, 13)
-      .split(":")
-      .map((n) => Number(n));
-
-    presenceData.startTimestamp = Date.now() - (ts[0] * 60 + ts[1]) * 1000;
-    presenceData.endTimestamp =
-      Date.now() - (ts[0] * 60 + ts[1]) * 1000 + (te[0] * 60 + te[1]) * 1000;
+  if (songInfo) {
+    const details: NodeListOf<HTMLDivElement> =
+        songInfo.querySelectorAll(".mb-1"),
+      [artist, album, title] = [...details].map((e) => e.innerText);
+    if (artist && album && title) {
+      presenceData.details = `Looking at ${title.substring(
+        8
+      )} by ${artist.substring(10)}`;
+      presenceData.state = `Album: ${album.substring(8)}`;
+    }
+  } else if (header.length === 2) {
+    let rating: HTMLButtonElement;
+    if (header[1].innerText === "Ratings")
+      rating = document.querySelector("button.active");
+    presenceData.details = `Looking at ${rating ? rating.innerText : ""} ${
+      header[1].innerText
+    }`;
   } else {
-    delete presenceData.startTimestamp;
-    delete presenceData.endTimestamp;
+    if (playerTitle) presenceData.state = playerTitle.innerText;
+    if (playerArtist) presenceData.details = playerArtist.innerText;
+
+    if (playBackStatus) {
+      switch (playBackStatus.innerText) {
+        case "Play": {
+          presenceData.smallImageKey = "play";
+          if (listeners) presenceData.smallImageText = listeners.innerText;
+          break;
+        }
+        case "Stop": {
+          presenceData.smallImageKey = "pause";
+          if (listeners) presenceData.smallImageText = listeners.innerText;
+          break;
+        }
+        default:
+          break;
+      }
+    }
+
+    if (playerTime) {
+      const [currentTime, duration] = playerTime.innerText
+          .split("/")
+          .map((time) => presence.timestampFromFormat(time)),
+        timestamps = presence.getTimestamps(currentTime, duration);
+
+      [, presenceData.endTimestamp] = timestamps;
+    }
   }
 
-  presence.setActivity(presenceData);
+  if (!presenceData.details) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else presence.setActivity(presenceData);
 });

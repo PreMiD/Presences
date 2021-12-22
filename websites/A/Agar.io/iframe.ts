@@ -41,7 +41,8 @@ iframe.on("UpdateData", async () => {
     state: agar.home.$options.components.Home.store.getters.gameState,
     gameMode: agar.home.$options.components.Home.store.getters.gameMode,
     nick: agar.home.$options.components.Home.store.getters.settings.lastNick,
-    connecting: agar.home.$options.components.Home.components.mainmenu.components.play.computed.connecting()
+    connecting:
+      agar.home.$options.components.Home.components.mainmenu.components.play.computed.connecting()
   };
 
   iframe.send(data);

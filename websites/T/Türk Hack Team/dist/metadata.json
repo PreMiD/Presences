@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "AlbaySIMSEK",
     "id": "432476132609228800"
@@ -8,9 +9,9 @@
     "turkhackteam.org",
     "www.turkhackteam.org"
   ],
-  "version": "1.2.4",
-  "logo": "https://albaysimsek.is-inside.me/miozfJuY.png",
-  "thumbnail": "https://albaysimsek.is-inside.me/tk1xeAM6.png",
+  "version": "1.2.7",
+  "logo": "https://i.imgur.com/8Lcggfs.png",
+  "thumbnail": "https://i.imgur.com/2d23kLw.png",
   "color": "#1c1c1c",
   "tags": [
     "forum",
@@ -18,7 +19,8 @@
   ],
   "description": {
     "en": "Türk Hack Team Turkey is one of the popular webmaster forum.",
-    "tr": "Türk Hack Team, Türkiye'nin popüler yazılım geliştirme forumlarından birisidir."
+    "tr": "Türk Hack Team, Türkiye'nin popüler yazılım geliştirme forumlarından birisidir.",
+    "nl": "Türk Hack Team Turkije is een van de populaire webmasterforums."
   },
   "category": "other"
 }

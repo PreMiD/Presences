@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Yusaki",
     "id": "439582316873121793"
@@ -6,13 +7,14 @@
   "service": "SnowBoltz",
   "description": {
     "en": "SnowBoltz The best shop for buying R$ in Thailand Easy Fast Secure",
-    "th": "SnowBoltz ร้านรับเติม ROBUX (R$, โรบัค) ในเกม ROBLOX ที่ใช้ง่าย บริการจัดส่งอัตโนมัติรวดเร็วทันใจ เรทสุดคุ้ม 4 - 6 เเบบกลุ่มเเละ ID - Pass เรท 5 - 8"
+    "th": "SnowBoltz ร้านรับเติม ROBUX (R$, โรบัค) ในเกม ROBLOX ที่ใช้ง่าย บริการจัดส่งอัตโนมัติรวดเร็วทันใจ เรทสุดคุ้ม 4 - 6 เเบบกลุ่มเเละ ID - Pass เรท 5 - 8",
+    "nl": "SnowBoltz De beste winkel om R$ te kopen in Thailand Gemakkelijk Snel Veilig"
   },
   "url": [
     "snowboltz.net",
     "shop.snowboltz.net"
   ],
-  "version": "1.1.1",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/xMeXqcE.png",
   "thumbnail": "https://i.imgur.com/yYdlVDA.png",
   "color": "#00ccff",

@@ -10,7 +10,7 @@ In this folder you can find resource images which you can use to display the sta
 | <img src="pause.png" style="background-color: rgba(0,0,0,25);" height="50px">       | [pause.png](pause.png)             |
 | <img src="stop.png" style="background-color: rgba(0,0,0,25);" height="50px">        | [stop.png](stop.png)               |
 | <img src="search.png" style="background-color: rgba(0,0,0,25);" height="50px">      | [search.png](search.png)           |
-| <img src="question.png" style="background-color: rgba(0,0,0,25);" height="50px">      | [question.png](question.png)           |
+| <img src="question.png" style="background-color: rgba(0,0,0,25);" height="50px">    | [question.png](question.png)       |
 | <img src="live.png" style="background-color: rgba(0,0,0,25);" height="50px">        | [live.png](live.png)               |
 | <img src="reading.png" style="background-color: rgba(0,0,0,25);" height="50px">     | [reading.png](reading.png)         |
 | <img src="writing.png" style="background-color: rgba(0,0,0,25);" height="50px">     | [writing.png](writing.png)         |

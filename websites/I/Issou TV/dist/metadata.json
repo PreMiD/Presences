@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Deleted 7.12i",
     "id": "591702135310385157"
@@ -9,11 +10,12 @@
   ],
   "description": {
     "fr": "IssouTv est une plateforme d'hébergement de vidéos communautaire. Humour, malaise, musique, jeux, adulte... Il y en a pour tous les goûts.",
-    "en": "IssouTv is a community video hosting platform. Humor, unease, music, games, adults ... there is something for everyone."
+    "en": "IssouTv is a community video hosting platform. Humor, unease, music, games, adults ... there is something for everyone.",
+    "nl": "IssouTv is een community-videohostingplatform. Humor, onbehagen, muziek, games, volwassenen ... er is voor elk wat wils."
   },
   "service": "Issou TV",
-  "version": "1.0.5",
-  "logo": "https://i.imgur.com/bDaeC8K.png",
+  "version": "1.0.9",
+  "logo": "https://i.imgur.com/eOauOMV.png",
   "thumbnail": "https://i.imgur.com/MOwagyo.png",
   "color": "#637076",
   "tags": [

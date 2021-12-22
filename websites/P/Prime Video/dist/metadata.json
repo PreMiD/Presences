@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -16,7 +17,7 @@
     "nl": "Geniet van exclusieve Amazon Originals en populaire films en tv-programma's. Bekijk altijd en overal. Start uw gratis proefperiode."
   },
   "url": "www.primevideo.com",
-  "version": "2.1.1",
+  "version": "2.1.8",
   "logo": "https://i.imgur.com/OgbBS7a.png",
   "thumbnail": "https://i.imgur.com/AkSVbml.jpg",
   "color": "#FFFFFF",

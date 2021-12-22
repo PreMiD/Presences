@@ -19,34 +19,28 @@ presence.on("UpdateData", async () => {
   songName = document.querySelector(
     "header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Title-Text"
   );
-  if (songName == null) {
+  if (songName === null) {
     (songNameS = document.getElementById("marquee1").innerHTML),
       (songNameS = songNameS.replace("<span>", "")),
       (songNameS = songNameS.replace("</span>", ""));
-    if (songNameS == "") {
-      songNameS = "None";
-    }
-  } else if (songName != null) {
-    songNameS = songName.innerText;
-  }
+    if (songNameS === "") songNameS = "None";
+  } else if (songName !== null) songNameS = songName.innerText;
 
   songArtist = document.querySelector(
     "header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Artist-Text"
   );
-  if (songArtist == null) {
+  if (songArtist === null) {
     (songArtistS = document.getElementById("marquee2").innerHTML),
       (songArtistS = songArtistS.replace(/&amp;/g, "&")),
       (songArtistS = songArtistS.replace('<span class="artist">', "")),
       (songArtistS = songArtistS.replace("</span>", ""));
-    if (songNameS == "") {
-      songArtistS = "None";
-    }
-  } else if (songArtist != null) {
+    if (songNameS === "") songArtistS = "None";
+  } else if (songArtist !== null) {
     (songArtistS = songArtist.innerText),
       (songArtistS = songArtistS.replace("&amp;", "&"));
   }
 
-  if ((songNameS == "None" && songArtistS == "None") || songArtistS == "") {
+  if ((songNameS === "None" && songArtistS === "None") || songArtistS === "") {
     presenceData.smallImageKey = "paused";
     presenceData.smallImageText = "PauseChamp";
 
@@ -59,10 +53,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = songArtistS;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

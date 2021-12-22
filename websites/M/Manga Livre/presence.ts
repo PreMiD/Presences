@@ -1,40 +1,37 @@
-var presence = new Presence({
-  clientId: "641409342566039558"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "641409342566039558"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "ml"
   };
 
-  if (document.location.hostname == "mangalivre.net") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "mangalivre.net") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";
     } else if (
       document.querySelector(".page-navigation > span > em:nth-child(1)") !==
       null
     ) {
-      presenceData.details =
-        "Reading '" + document.querySelector(".title").textContent + "'";
-      presenceData.state =
-        "Chapter " +
-        document
-          .querySelector(".current-chapter")
-          .textContent.replace("Chap ", "") +
-        " - Page " +
+      presenceData.details = `Reading '${
+        document.querySelector(".title").textContent
+      }'`;
+      presenceData.state = `Chapter ${document
+        .querySelector(".current-chapter")
+        .textContent.replace("Chap ", "")} - Page ${
         document.querySelector(".page-navigation > span > em:nth-child(1)")
-          .textContent;
+          .textContent
+      }`;
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/manga/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing the manga:";
-      presenceData.state = document.querySelector(
-        ".series-title > h1"
-      ).textContent;
+      presenceData.state =
+        document.querySelector(".series-title > h1").textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/lista-de-mangas")) {
       presenceData.startTimestamp = browsingStamp;
@@ -66,10 +63,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

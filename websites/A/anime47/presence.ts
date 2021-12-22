@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640990409224486971"
   }),
   strings = presence.getStrings({
@@ -6,46 +6,43 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+let browsingStamp = Math.floor(Date.now() / 1000),
+  title: string,
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState: boolean,
+  playback: boolean;
+
+interface IFrameData {
+  iframeVideo: {
+    dur: number;
+    iFrameVideo: boolean;
+    paused: boolean;
+    currTime: number;
+  };
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-var lastPlaybackState = null;
-var playback;
-
-if (lastPlaybackState != playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
-}
-
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = data.iframeVideo.dur !== null ? true : false;
 
   if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    ({ iFrameVideo, paused } = data.iframeVideo);
+    currentTime = data.iframeVideo.currTime;
+    duration = data.iframeVideo.dur;
   }
 });
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  if (lastPlaybackState !== playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
+  }
+  const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "anime47"
     };
@@ -66,26 +63,23 @@ presence.on("UpdateData", async () => {
       "body > div.container > ol > li:nth-child(5) > a > span"
     ) !== null
   ) {
-    if (iFrameVideo == true && !isNaN(duration)) {
+    if (iFrameVideo === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
 
-      presenceData.details = document
+      [presenceData.details, presenceData.state] = document
         .querySelector("head > title")
-        .textContent.split("- ")[0];
-      presenceData.state = document
-        .querySelector("head > title")
-        .textContent.split("- ")[1];
+        .textContent.split("- ");
 
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (iFrameVideo == null && isNaN(duration)) {
+    } else if (iFrameVideo === null && isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Đang xem: ";
       title = document.querySelector("head > title").textContent;
@@ -93,7 +87,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title;
       presenceData.smallImageKey = "reading";
     }
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Đang xem trang chủ";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.URL.includes("/the-loai/")) {
@@ -111,10 +105,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector("head > title").textContent;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

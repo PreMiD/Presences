@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -6,12 +7,13 @@
   "service": "ekşi sözlük",
   "description": {
     "en": "ekşi sözlük is a collaborative hypertext 'dictionary' based on the concept of web sites built up on user contribution.",
-    "tr": "ekşi sözlük, topluluk tarafından oluşturulan, bir çok konunun ele alındığı 'sözlük' sitesidir."
+    "tr": "ekşi sözlük, topluluk tarafından oluşturulan, bir çok konunun ele alındığı 'sözlük' sitesidir.",
+    "nl": "ekşi sözlük is een collaboratief hypertext-'woordenboek', gebaseerd op het concept van websites die zijn opgebouwd uit bijdragen van gebruikers."
   },
   "url": "eksisozluk.com",
-  "version": "1.1.4",
-  "logo": "https://premid.is-inside.me/wle1r8yg.png",
-  "thumbnail": "https://premid.is-inside.me/n3fXa9P0.png",
+  "version": "1.1.7",
+  "logo": "https://i.imgur.com/wGmQ6dB.png",
+  "thumbnail": "https://i.imgur.com/QLHVxVT.png",
   "color": "#82c24a",
   "tags": [
     "eksi",

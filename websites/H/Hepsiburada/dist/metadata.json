@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -6,15 +7,16 @@
   "service": "Hepsiburada",
   "description": {
     "en": "Hepsiburada is a popular shopping website in Turkey.",
-    "tr": "Hepsiburada, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir."
+    "tr": "Hepsiburada, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir.",
+    "nl": "Hepsiburada is een populaire winkelwebsite in Turkije."
   },
   "url": [
     "www.hepsiburada.com",
     "hepsiburada.com"
   ],
-  "version": "1.2.6",
-  "logo": "https://premid.is-inside.me/TSOUCLm9.png",
-  "thumbnail": "https://premid.is-inside.me/uLqeYMMA.png",
+  "version": "1.2.9",
+  "logo": "https://i.imgur.com/5AozcKg.png",
+  "thumbnail": "https://i.imgur.com/WnZo2SR.png",
   "color": "#ff6000",
   "tags": [
     "hepsiburada",

@@ -1,15 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Dream",
     "id": "257521982021566464"
   },
   "service": "Kitsu",
   "description": {
-    "en": "Share anime and manga experiences, get recommendations and see what friends are watching or reading."
+    "en": "Share anime and manga experiences, get recommendations and see what friends are watching or reading.",
+    "nl": "Deel anime- en manga-ervaringen, ontvang aanbevelingen en kijk wat vrienden kijken of lezen."
   },
   "url": "kitsu.io",
-  "version": "1.3.5",
-  "logo": "https://i.imgur.com/UpVUQCQ.png",
+  "version": "1.3.9",
+  "logo": "https://i.imgur.com/LlascQj.png",
   "thumbnail": "https://i.imgur.com/0yjRrph.png",
   "color": "#FD755C",
   "tags": [

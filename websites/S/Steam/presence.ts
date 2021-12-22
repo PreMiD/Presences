@@ -1,21 +1,17 @@
-var presence = new Presence({
-  clientId: "612299892764966923"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var AppName: any,
-  topicTitle: any,
-  topicAuthor: any,
-  broadcastTitle: any,
-  broadcaster: any,
-  itemName: any,
-  itemPrice: any,
-  workshop: any;
-
-var homeURL = new URL(document.location.href);
-
-var subsection = homeURL.searchParams.get("subsection");
+const presence = new Presence({
+    clientId: "612299892764966923"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  homeURL = new URL(document.location.href),
+  subsection = homeURL.searchParams.get("subsection");
+let AppName: HTMLElement,
+  topicTitle: HTMLElement,
+  topicAuthor: HTMLElement,
+  broadcastTitle: HTMLElement,
+  broadcaster: HTMLElement,
+  itemName: HTMLElement,
+  itemPrice: HTMLElement,
+  workshop: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -23,12 +19,12 @@ presence.on("UpdateData", async () => {
     largeImageKey: "lg"
   };
 
-  if (document.location.hostname == "steamcommunity.com") {
+  if (document.location.hostname === "steamcommunity.com") {
     presenceData.details = "Steam Community";
 
-    if (document.location.pathname == "/" || !document.location.pathname) {
+    if (document.location.pathname === "/" || !document.location.pathname) {
       if (subsection) {
-        presenceData.state = "Browsing " + subsection + ".";
+        presenceData.state = `Browsing ${subsection}.`;
 
         presenceData.startTimestamp = browsingStamp;
       } else {
@@ -40,7 +36,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Browsing follwing games.";
 
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname == "/discussions/") {
+    } else if (document.location.pathname === "/discussions/") {
       presenceData.state = "Browsing discussions.";
 
       presenceData.startTimestamp = browsingStamp;
@@ -50,9 +46,9 @@ presence.on("UpdateData", async () => {
       topicAuthor = document.querySelector("div.authorline > a");
 
       if (topicTitle && topicAuthor) {
-        presenceData.details = "Topic: " + topicTitle.innerText;
+        presenceData.details = `Topic: ${topicTitle.innerText}`;
 
-        presenceData.state = "Author: " + topicAuthor.innerText;
+        presenceData.state = `Author: ${topicAuthor.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else {
@@ -61,11 +57,12 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       }
     } else if (document.location.pathname.includes("/search/users")) {
-      var input: any = document.querySelector("#search_text_box");
+      const input =
+        document.querySelector<HTMLInputElement>("#search_text_box");
 
       presenceData.details = "Searching for a user: ";
 
-      presenceData.state = "Username: " + input.value;
+      presenceData.state = `Username: ${input.value}`;
 
       presenceData.startTimestamp = browsingStamp;
 
@@ -78,7 +75,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = "Steam Workshop";
 
-        presenceData.state = "Home - " + AppName.innerText;
+        presenceData.state = `Home - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/discussions")) {
@@ -86,7 +83,7 @@ presence.on("UpdateData", async () => {
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = "Discussions - " + AppName.innerText;
+        presenceData.state = `Discussions - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/screenshots")) {
@@ -94,7 +91,7 @@ presence.on("UpdateData", async () => {
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = "Screenshots - " + AppName.innerText;
+        presenceData.state = `Screenshots - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/images")) {
@@ -102,7 +99,7 @@ presence.on("UpdateData", async () => {
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = "Artwork - " + AppName.innerText;
+        presenceData.state = `Artwork - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/broadcasts")) {
@@ -110,7 +107,7 @@ presence.on("UpdateData", async () => {
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = "Broadcasts - " + AppName.innerText;
+        presenceData.state = `Broadcasts - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/videos")) {
@@ -118,7 +115,7 @@ presence.on("UpdateData", async () => {
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = "Videos - " + AppName.innerText;
+        presenceData.state = `Videos - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/allnews")) {
@@ -126,7 +123,7 @@ presence.on("UpdateData", async () => {
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = "News - " + AppName.innerText;
+        presenceData.state = `News - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/guides")) {
@@ -134,7 +131,7 @@ presence.on("UpdateData", async () => {
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = "Guides - " + AppName.innerText;
+        presenceData.state = `Guides - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/reviews")) {
@@ -142,7 +139,7 @@ presence.on("UpdateData", async () => {
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = "Reviews - " + AppName.innerText;
+        presenceData.state = `Reviews - ${AppName.innerText}`;
 
         presenceData.startTimestamp = browsingStamp;
       } else {
@@ -163,11 +160,10 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Watching a broadcast.";
 
-      presenceData.state =
-        broadcastTitle.innerText + " - " + broadcaster.innerText;
+      presenceData.state = `${broadcastTitle.innerText} - ${broadcaster.innerText}`;
 
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname == "/market") {
+    } else if (document.location.pathname === "/market") {
       presenceData.state = "Community Market.";
 
       presenceData.startTimestamp = browsingStamp;
@@ -180,11 +176,10 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Community Market.";
 
-      presenceData.state =
-        itemName.innerText + " (" + itemPrice.innerText + ").";
+      presenceData.state = `${itemName.innerText} (${itemPrice.innerText}).`;
 
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname == "/workshop/") {
+    } else if (document.location.pathname === "/workshop/") {
       presenceData.details = "Steam Workshop";
 
       presenceData.state = "Home";
@@ -207,7 +202,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Steam Workshop";
 
-      presenceData.state = "Discussions - " + AppName.innerText;
+      presenceData.state = `Discussions - ${AppName.innerText}`;
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/workshop/about")) {
@@ -217,14 +212,14 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Steam Workshop";
 
-      presenceData.state = "About - " + AppName.innerText;
+      presenceData.state = `About - ${AppName.innerText}`;
 
       presenceData.startTimestamp = browsingStamp;
     }
-  } else if (document.location.hostname == "store.steampowered.com") {
+  } else if (document.location.hostname === "store.steampowered.com") {
     presenceData.details = "Steam Store";
 
-    if (document.location.pathname == "/" || !document.location.pathname) {
+    if (document.location.pathname === "/" || !document.location.pathname) {
       presenceData.state = "Home";
 
       presenceData.startTimestamp = browsingStamp;
@@ -253,10 +248,10 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/genre")) {
-      var parts = document.location.href.split("/");
-      var result = parts[parts.length - 2].replace(/%20/g, " ");
+      const parts = document.location.href.split("/"),
+        result = parts[parts.length - 2].replace(/%20/g, " ");
 
-      presenceData.state = "Genre: " + result;
+      presenceData.state = `Genre: ${result}`;
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/demos")) {
@@ -272,10 +267,10 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/tags")) {
-      const parts = document.location.href.split("/");
-      const result = parts[parts.length - 2]
-        .replace(/%20/g, " ")
-        .replace(/%26/g, "&");
+      const parts = document.location.href.split("/"),
+        result = parts[parts.length - 2]
+          .replace(/%20/g, " ")
+          .replace(/%26/g, "&");
 
       presenceData.state = result;
 
@@ -329,10 +324,10 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/search")) {
-      var searchURL = new URL(document.location.href);
-      var searchResult = searchURL.searchParams.get("term");
+      const searchURL = new URL(document.location.href),
+        searchResult = searchURL.searchParams.get("term");
 
-      presenceData.state = "Searching for " + searchResult;
+      presenceData.state = `Searching for ${searchResult}`;
 
       presenceData.startTimestamp = browsingStamp;
 

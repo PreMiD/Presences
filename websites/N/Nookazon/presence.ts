@@ -1,9 +1,9 @@
 const presence = new Presence({
-  clientId: "717505812964048986"
-});
+    clientId: "717505812964048986"
+  }),
+  elapsed = Math.floor(Date.now() / 1000);
 
-const elapsed = Math.floor(Date.now() / 1000);
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface String {
   capitalize(): string;
 }
@@ -12,9 +12,8 @@ String.prototype.capitalize = function (d = /[ -]/): string {
   let r = "";
   const a = this.toString().split(d);
   for (let i = 0; i < a.length; i++) {
-    if (i == 0) {
-      r = a[i].charAt(0).toUpperCase() + a[i].slice(1);
-    } else {
+    if (i === 0) r = a[i].charAt(0).toUpperCase() + a[i].slice(1);
+    else {
       r =
         r +
         this.toString().substring(
@@ -30,13 +29,11 @@ String.prototype.capitalize = function (d = /[ -]/): string {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "icon",
-    startTimestamp: elapsed
-  };
-
-  const useChatNames: boolean = await presence.getSetting("useChatNames");
-
-  const urlVars = new URLSearchParams(document.location.search);
+      largeImageKey: "icon",
+      startTimestamp: elapsed
+    },
+    useChatNames: boolean = await presence.getSetting("useChatNames"),
+    urlVars = new URLSearchParams(document.location.search);
 
   let department: string,
     category: string,
@@ -74,8 +71,9 @@ presence.on("UpdateData", async () => {
       break;
     case "products":
       try {
-        department = document.querySelector(".nav-bottom .selected")
-          .textContent;
+        department = document.querySelector(
+          ".nav-bottom .selected"
+        ).textContent;
       } catch {
         department = "All Products";
       }
@@ -100,35 +98,29 @@ presence.on("UpdateData", async () => {
         diy = false;
       }
       filter = "None";
-      if (category !== "") {
-        filter = category;
-      }
+      if (category !== "") filter = category;
+
       if (tag !== "") {
-        if (filter == "None") {
-          filter = tag;
-        } else {
-          filter = filter + ", " + tag;
-        }
+        if (filter === "None") filter = tag;
+        else filter = `${filter}, ${tag}`;
       }
       if (diy) {
-        if (filter == "None") {
-          filter = "DIY";
-        } else {
-          filter = filter + ", " + "DIY";
-        }
+        if (filter === "None") filter = "DIY";
+        else filter = `${filter}, ` + "DIY";
       }
-      presenceData.details = "Looking For " + department;
-      presenceData.state = "Filters: " + filter;
+      presenceData.details = `Looking For ${department}`;
+      presenceData.state = `Filters: ${filter}`;
       break;
     case "profile":
-      presenceData.details =
-        document.querySelector(".profile-name").textContent + "'s Profile";
+      presenceData.details = `${
+        document.querySelector(".profile-name").textContent
+      }'s Profile`;
       try {
-        presenceData.state =
-          "Viewing " +
-          document.querySelector("a.profile-tab-active").textContent;
+        presenceData.state = `Viewing ${
+          document.querySelector("a.profile-tab-active").textContent
+        }`;
       } catch {
-        console.log(
+        presence.error(
           "No active profile tab - State parameter will not be reported to PreMiD."
         );
       }
@@ -137,22 +129,18 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Chats";
       if (document.querySelector(".chat-info") !== null) {
         if (useChatNames) {
-          presenceData.state =
-            "Chatting With " +
-            document
-              .querySelector(".chat-info")
-              .textContent.replace("Report User", "");
-        } else {
-          presenceData.state = "Chatting With A User";
-        }
-      } else {
-        presenceData.state = "No Chats";
-      }
+          presenceData.state = `Chatting With ${document
+            .querySelector(".chat-info")
+            .textContent.replace("Report User", "")}`;
+        } else presenceData.state = "Chatting With A User";
+      } else presenceData.state = "No Chats";
+
       break;
     case "cart":
       presenceData.details = "Viewing Cart";
-      presenceData.state =
-        document.querySelector(".profile-tab-active").textContent + " Offers";
+      presenceData.state = `${
+        document.querySelector(".profile-tab-active").textContent
+      } Offers`;
       break;
     case "product":
       presenceData.details = "Viewing A Product";

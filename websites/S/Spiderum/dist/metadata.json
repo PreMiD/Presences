@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Dawkin Nguyen",
     "id": "414274321779916800"
@@ -6,10 +7,11 @@
   "service": "Spiderum",
   "description": {
     "en": "Vietnamese writing community",
-    "vi_VN": "Nền tảng chia sẻ - thảo luận dành cho người Việt. Nơi tập trung những nội dung thú vị và hữu ích nhất do người dùng đóng góp và bình chọn."
+    "vi_VN": "Nền tảng chia sẻ - thảo luận dành cho người Việt. Nơi tập trung những nội dung thú vị và hữu ích nhất do người dùng đóng góp và bình chọn.",
+    "nl": "Vietnamese schrijfgemeenschap"
   },
   "url": "spiderum.com",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/b1NnqZa.jpg",
   "thumbnail": "https://i.imgur.com/Ko4785o.png",
   "color": "#2a9bd5",

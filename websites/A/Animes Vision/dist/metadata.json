@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "FelipeSazz",
     "id": "326123612153053184"
@@ -6,11 +7,13 @@
   "url": "animesvision.biz",
   "description": {
     "en": "Animes Vision is one of the largest Brazilian anime sites.",
-    "pt_BR": "Animes Vision é um dos maiores sites brasileiros de anime."
+    "pt_BR": "Animes Vision é um dos maiores sites brasileiros de anime.",
+    "ga_IE": "Tá Animes Vision ar cheann de na suíomhanna anime Brasaíle is mó.",
+    "nl": "Animes Vision is een van de grootste Braziliaanse anime sites."
   },
   "service": "Animes Vision",
-  "version": "1.0.5",
-  "logo": "https://i.imgur.com/LRZPULY.png",
+  "version": "1.0.10",
+  "logo": "https://i.imgur.com/mzqXcKZ.png",
   "thumbnail": "https://i.imgur.com/OIHNhHg.png",
   "color": "#0EAFC1",
   "tags": [

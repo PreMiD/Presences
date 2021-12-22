@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Deleted 7.12i",
     "id": "591702135310385157"
@@ -9,11 +10,12 @@
   ],
   "description": {
     "en": "The Best Dual Agario Unblocked io Private Server.",
-    "fr": "Le meilleur serveur privé io Dual Agario Unblocked."
+    "fr": "Le meilleur serveur privé io Dual Agario Unblocked.",
+    "nl": "De beste Dual Agario Unblocked io Private Server."
   },
   "service": "Senpa.io",
-  "version": "1.4.2",
-  "logo": "https://i.imgur.com/kP7R8IU.png",
+  "version": "1.4.6",
+  "logo": "https://i.imgur.com/smf7r3R.png",
   "thumbnail": "https://i.imgur.com/R4BjG18.png",
   "color": "#e67bbe",
   "tags": [

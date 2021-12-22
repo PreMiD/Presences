@@ -1,107 +1,129 @@
 const presence = new Presence({
-    clientId: "463151177836658699"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "463151177836658699"
+});
 
 function getAuthorString(): string {
   //* Get authors
-  const authors = document.querySelectorAll(
-    "span yt-formatted-string.ytmusic-player-bar a"
-  ) as NodeListOf<HTMLAnchorElement>;
-  let authorsArray: Array<HTMLAnchorElement>, authorString: string;
-
-  //* Author tags more than one => YouTube Music Song listing with release year etc.
-  if (authors.length > 1) {
-    //* Get release year of song
-    let year = document.querySelector(
-      "span yt-formatted-string.ytmusic-player-bar"
-    ).textContent;
-    year = year.slice(year.length - 4, year.length);
-
+  const authors = document.querySelectorAll<HTMLAnchorElement>(
+      "span yt-formatted-string.ytmusic-player-bar a"
+    ),
     //* Convert to js array for .map function
     authorsArray = Array.from(authors);
 
-    //* Build output string
-    authorString = `${authorsArray
-      .slice(0, authorsArray.length - 1)
-      .map((a) => a.innerText)
-      .join(", ")} - ${
-      authorsArray[authorsArray.length - 1].innerText
-    } (${year})`;
+  //* Author tags more than one => YouTube Music Song listing with release year etc.
+  if (authors.length > 1) {
+    //* If song is from a channel and not a video
+    if (
+      document.querySelector(
+        'span yt-formatted-string.ytmusic-player-bar a[href*="channel/"]'
+      ) &&
+      !document.querySelector("ytmusic-player-page[video-mode_]")
+    ) {
+      //* Get release year of song
+      let year = document.querySelector(
+        "span yt-formatted-string.ytmusic-player-bar"
+      ).textContent;
+      year = year.slice(year.length - 4, year.length);
+
+      //* Build output string
+      return `${authorsArray
+        .slice(0, authorsArray.length - 1)
+        .map((a) => a.innerText)
+        .join(", ")} - ${
+        authorsArray[authorsArray.length - 1].innerText
+      } (${year})`;
+    } else {
+      //* Build output string
+      return `${authorsArray
+        .slice(0, authorsArray.length - 1)
+        .map((a) => a.innerText)
+        .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
+    }
+  } else {
+    return (
+      document.querySelector<HTMLAnchorElement>(
+        "span yt-formatted-string.ytmusic-player-bar a"
+      )?.textContent ??
+      document.querySelector<HTMLAnchorElement>(
+        "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
+      ).textContent
+    );
   }
-  //* If from default YouTube music return Uploader
-  else
-    authorString = (document.querySelector(
-      "span yt-formatted-string.ytmusic-player-bar a"
-    ) as HTMLAnchorElement)
-      ? (document.querySelector(
-          "span yt-formatted-string.ytmusic-player-bar a"
-        ) as HTMLAnchorElement).innerText
-      : (document.querySelector(
-          "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
-        ) as HTMLAnchorElement).innerText;
-
-  return authorString;
-}
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
-  const title = (document.querySelector(
+  const title = document.querySelector<HTMLElement>(
       ".ytmusic-player-bar.title"
-    ) as HTMLElement).innerText,
-    video = document.querySelector(".video-stream") as HTMLVideoElement,
+    ).textContent,
+    video = document.querySelector<HTMLVideoElement>(".video-stream"),
+    progressBar = document.querySelector<HTMLElement>("#progress-bar"),
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
-      .getAttribute("repeat-Mode_");
-
+      .getAttribute("repeat-Mode_"),
+    [buttons, timestamps, cover] = await Promise.all([
+      presence.getSetting("buttons"),
+      presence.getSetting("timestamps"),
+      presence.getSetting("cover")
+    ]);
   if (title !== "" && !isNaN(video.duration)) {
-    const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
+    const remainingLength =
+        Number(progressBar.getAttribute("aria-valuemax")) * 1000 -
+        Number(progressBar.getAttribute("value")) * 1000,
+      endTimestamp = Date.now() + remainingLength,
+      [, watchID] = document
+        .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
+        .href.match(/v=([^&#]{5,})/),
       presenceData: PresenceData = {
         details: title,
         state: getAuthorString(),
-        largeImageKey: "ytm_lg",
+        largeImageKey: cover
+          ? document
+              .querySelector<HTMLImageElement>(
+                ".image.style-scope.ytmusic-player-bar"
+              )
+              .src.replace("=w60-h60-l90", "=w600-h600-l900")
+          : "ytm_lg",
         smallImageKey: video.paused
           ? "pause"
-          : repeatMode == "ONE"
+          : repeatMode === "ONE"
           ? "repeat-one"
-          : repeatMode == "ALL"
+          : repeatMode === "ALL"
           ? "repeat"
           : "play",
         smallImageText: video.paused
-          ? (await strings).pause
-          : repeatMode == "ONE"
+          ? "Paused"
+          : repeatMode === "ONE"
           ? "On loop"
-          : repeatMode == "ALL"
+          : repeatMode === "ALL"
           ? "Playlist on loop"
-          : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
+          : "Playing",
+        endTimestamp
       };
+
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${watchID}`
+        }
+      ];
+    }
+
+    if (!timestamps) delete presenceData.endTimestamp;
+
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${watchID}`
+        }
+      ];
+    }
 
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
-      presence.setTrayTitle();
-    } else presence.setTrayTitle(title);
+    }
 
     presence.setActivity(presenceData);
   } else presence.setActivity();

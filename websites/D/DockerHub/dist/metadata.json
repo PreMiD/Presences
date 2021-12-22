@@ -1,14 +1,16 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Non Serviam",
     "id": "154651965022928896"
   },
   "url": "hub.docker.com",
   "description": {
-    "en": "Docker Hub is a service provided by Docker for finding and sharing container images with your team."
+    "en": "Docker Hub is a service provided by Docker for finding and sharing container images with your team.",
+    "nl": "Docker Hub is een dienst van Docker om container images te vinden en te delen met je team."
   },
   "service": "DockerHub",
-  "version": "1.1.6",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/xr2Gulz.png",
   "thumbnail": "https://i.imgur.com/n3Ox5DQ.png",
   "color": "#099CEC",

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bünyamin Öztürk",
     "id": "487515609815580672"
@@ -6,15 +7,16 @@
   "service": "HackerNoon",
   "description": {
     "en": "HackerNoon is an Independent Tech Media Site",
-    "tr": "HackerNoon, Bağımsız bir Teknik Medya Sitesidir"
+    "tr": "HackerNoon, Bağımsız bir Teknik Medya Sitesidir",
+    "nl": "HackerNoon is een onafhankelijke technische mediasite"
   },
   "url": [
     "www.hackernoon.com",
     "hackernoon.com"
   ],
-  "version": "1.2.4",
-  "logo": "https://bunyamin.is-inside.me/DdQYE09Y.png",
-  "thumbnail": "https://bunyamin.is-inside.me/s5uYuU1w.png",
+  "version": "1.2.7",
+  "logo": "https://i.imgur.com/SyFFEUw.png",
+  "thumbnail": "https://i.imgur.com/1W8IrxF.png",
   "color": "#00ff01",
   "tags": [
     "hackernoon",

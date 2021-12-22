@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "612042450785271811"
   }),
   presenceData: PresenceData = {
@@ -6,18 +6,27 @@ var presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  var title: HTMLElement = document.querySelector(
+  const title: HTMLElement = document.querySelector(
     ".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title"
   );
   if (title !== null) {
-    var votes = document.querySelector(".mbxs span strong");
-    presenceData.details = (title as HTMLElement).innerText;
-    presenceData.state = (votes as HTMLElement).innerText;
-    presenceData.largeImageKey = "logo";
+    const link = document.location.href,
+      votes = document.querySelector(".mbxs span strong")
+        ? document.querySelector(".mbxs span strong")
+        : document.querySelector("p.type-weak");
 
+    presenceData.details = (title as HTMLElement).textContent;
+    presenceData.state = (votes as HTMLElement).textContent;
+    presenceData.largeImageKey = "logo";
+    presenceData.buttons = [
+      {
+        label: "View Petition",
+        url: link
+      }
+    ];
     presence.setActivity(presenceData);
   } else {
-    var pageData: PresenceData = {
+    const pageData: PresenceData = {
       details: "Browsing..",
       largeImageKey: "logo"
     };

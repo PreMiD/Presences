@@ -1,27 +1,50 @@
-var presence = new Presence({
-  clientId: "620829310399545344"
+const presence = new Presence({
+  clientId: "808664560936026122"
 });
+async function getStrings() {
+  return presence.getStrings(
+    {
+      buttonJoinGame: "kahoot.buttonJoinGame",
+      viewHome: "general.viewHome"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
+}
 
-var elapsed = Math.floor(Date.now() / 1000);
+let strings = getStrings(),
+  oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "skribblio-logo"
-  };
-  var inGame =
-    document.querySelector("#containerGamePlayers").textContent === ""
-      ? false
-      : true;
-  if (inGame) {
-    var round = document.querySelector("#round").textContent;
-    data.details = round;
-    if (elapsed == null) {
-      elapsed = Math.floor(Date.now() / 1000);
-    }
-    data.startTimestamp = elapsed;
-  } else {
-    data.details = "Viewing the Homepage";
-    elapsed = null;
+  const presenceData: PresenceData = {
+      largeImageKey: "logo"
+    },
+    inGame =
+      document.querySelector("#containerGamePlayers").textContent === ""
+        ? false
+        : true,
+    inLobby =
+      document.querySelector("#round").textContent === "" ? false : true,
+    buttons = await presence.getSetting("buttons"),
+    newLang = await presence.getSetting("lang").catch(() => "en");
+
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
   }
-  presence.setActivity(data);
+
+  if (inGame && !inLobby) {
+    const round = document.querySelector("#round").textContent;
+    presenceData.details = round;
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: (await strings).buttonJoinGame.replace(": {0}", ""),
+          url: document.location.href
+        }
+      ];
+    }
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+  } else presenceData.details = (await strings).viewHome;
+  presence.setActivity(presenceData);
 });

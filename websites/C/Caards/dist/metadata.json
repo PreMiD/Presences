@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Caards",
+  "author": {
+    "name": "Anaxes",
+    "id": "567885938160697377"
+  },
+  "category": "socials",
+  "logo": "https://i.imgur.com/14BIbky.png",
+  "thumbnail": "https://i.imgur.com/J5MWuay.jpg",
+  "version": "1.0.1",
+  "color": "#0F1225",
+  "tags": [
+    "profiles",
+    "socials"
+  ],
+  "url": [
+    "www.caards.me",
+    "help.caards.me",
+    "status.caards.me"
+  ],
+  "description": {
+    "en": "Get people to know you. Now."
+  },
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

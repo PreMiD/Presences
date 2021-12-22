@@ -1,17 +1,17 @@
 const presence = new Presence({
-  clientId: "630462023003799583"
-});
-var strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  live: "presence.activity.live"
-});
+    clientId: "630462023003799583"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    live: "presence.activity.live"
+  });
 
 function getTime(list: string[]): number {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  let ret = 0;
+  for (let index = list.length - 1; index >= 0; index--)
     ret += parseInt(list[index]) * 60 ** index;
-  }
+
   return ret;
 }
 
@@ -19,19 +19,17 @@ function getTimestamps(
   audioTime: string,
   audioDuration: string
 ): Array<number> {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioTime = getTime(splitAudioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  const splitAudioTime = audioTime.split(":").reverse(),
+    splitAudioDuration = audioDuration.split(":").reverse(),
+    parsedAudioTime = getTime(splitAudioTime),
+    parsedAudioDuration = getTime(splitAudioDuration),
+    startTime = Date.now(),
+    endTime =
+      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var elapsed, oldUrl;
+let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
   if (window.location.href !== oldUrl) {
@@ -39,92 +37,82 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  var details = undefined,
-    state = undefined,
-    smallImageKey = undefined,
-    smallImageText = undefined,
+  let details,
+    state,
+    smallImageKey,
+    smallImageText,
     startTimestamp = elapsed,
-    endTimestamp = undefined,
+    endTimestamp,
     playing = true;
 
-  var host = window.location.hostname;
-  var path = window.location.pathname;
+  const host = window.location.hostname,
+    path = window.location.pathname;
 
   try {
     if (host.match("app.getmetastream.com")) {
       if (path === "/") {
         details = "Home";
 
-        var menu_item = document.querySelector(
+        const menuItem = document.querySelector(
           ".MenuTabs__tabItem__2ny6A.MenuTabs__selected__c65wY"
         );
-        if (menu_item) state = `Viewing ${menu_item.textContent}`;
+        if (menuItem) state = `Viewing ${menuItem.textContent}`;
       }
       if (path.match("/settings")) {
         details = "Settings";
 
-        var setting_item = document.querySelector(
+        const settingItem = document.querySelector(
           ".SettingsMenu__tabItem__3ypki.SettingsMenu__selectedTab__OMITL"
         );
-        if (setting_item) {
-          state = `Viewing ${setting_item.textContent}`;
-        }
+        if (settingItem) state = `Viewing ${settingItem.textContent}`;
       }
       if (path.match("/join")) {
-        var connection_info = document.querySelector(".Connect__info__3Vwlv");
-        var disconnection_info = document.querySelector(
-          ".Disconnect__info__3Uejx"
-        );
-        var disconnection_label = document.querySelector(
-          ".Disconnect__info__3Uejx > span"
-        );
-        var menu_header = document.querySelector(".MenuHeader__header__1SYq0");
+        const connectionInfo = document.querySelector(".Connect__info__3Vwlv"),
+          disconnectionInfo = document.querySelector(
+            ".Disconnect__info__3Uejx"
+          ),
+          disconnecctionLabel = document.querySelector(
+            ".Disconnect__info__3Uejx > span"
+          ),
+          menuHeader = document.querySelector(".MenuHeader__header__1SYq0");
 
-        if (connection_info) {
-          details = "Connecting...";
-        } else if (disconnection_info) {
+        if (connectionInfo) details = "Connecting...";
+        else if (disconnectionInfo) {
           details = "Disconnected";
 
-          if (disconnection_label) {
-            state = disconnection_label.textContent;
-          }
-        } else if (menu_header) {
-          details = "Setting up...";
-        } else {
+          if (disconnecctionLabel) state = disconnecctionLabel.textContent;
+        } else if (menuHeader) details = "Setting up...";
+        else {
           smallImageKey = "live";
           smallImageText = (await strings).live;
 
-          var users =
-            document.querySelector(".ListOverlay__list__1epFe") ||
-            document.createElement("HTMLDivElement");
-          var user_button = document.querySelector(".UserItem__menuBtn__1ST9k");
+          const users =
+              document.querySelector(".ListOverlay__list__1epFe") ||
+              document.createElement("HTMLDivElement"),
+            userButton = document.querySelector(".UserItem__menuBtn__1ST9k");
 
-          if (users.childElementCount === 1 || user_button !== null) {
+          if (users.childElementCount === 1 || userButton !== null)
             details = `Hosting (${users.childElementCount} Users)`;
-          } else {
-            details = `Watching (${users.childElementCount} Users)`;
-          }
+          else details = `Watching (${users.childElementCount} Users)`;
 
-          var title = document.querySelector(".TitleBar__title__3VPpW");
+          const title = document.querySelector(".TitleBar__title__3VPpW");
           if (title && title.textContent !== "Metastream") {
             state = title.textContent;
 
-            var current = document.querySelector(
-              ".Timeline__time__gcvG5:nth-child(1)"
-            );
-            var duration = document.querySelector(
-              ".Timeline__time__gcvG5:nth-child(3)"
-            );
+            const current = document.querySelector(
+                ".Timeline__time__gcvG5:nth-child(1)"
+              ),
+              duration = document.querySelector(
+                ".Timeline__time__gcvG5:nth-child(3)"
+              );
             if (current && duration) {
-              var timestamps = getTimestamps(
+              [startTimestamp, endTimestamp] = getTimestamps(
                 current.textContent,
                 duration.textContent
               );
-              startTimestamp = timestamps[0];
-              endTimestamp = timestamps[1];
             }
 
-            var play: SVGUseElement = document.querySelector(
+            const play: SVGUseElement = document.querySelector(
               ".PlaybackControls__button__Q0pbe > svg > use"
             );
             if (play) {
@@ -143,17 +131,17 @@ presence.on("UpdateData", async () => {
       }
     }
   } catch (err) {
-    console.error(err);
+    presence.error(err);
   }
 
-  var data: PresenceData = {
-    details: details,
-    state: state,
+  const data: PresenceData = {
+    details,
+    state,
     largeImageKey: "metastream",
-    smallImageKey: smallImageKey,
-    smallImageText: smallImageText,
-    startTimestamp: startTimestamp,
-    endTimestamp: endTimestamp
+    smallImageKey,
+    smallImageText,
+    startTimestamp,
+    endTimestamp
   };
 
   presence.setActivity(data, playing);

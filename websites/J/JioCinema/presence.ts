@@ -7,29 +7,15 @@ const presence: Presence = new Presence({
   }),
   startTimestamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "large_img",
-    startTimestamp
-  };
-  const url = window.location.href;
+      largeImageKey: "large_img",
+      startTimestamp
+    },
+    url = window.location.href;
   if (url.includes("/watch/")) {
-    const video: HTMLVideoElement = document.getElementsByTagName("video")[0],
-      timestamps = getTimestamps(
+    const [video] = document.getElementsByTagName("video"),
+      timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
@@ -40,22 +26,16 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
     if (url.includes("/tv/")) {
-      const episode = (document.querySelectorAll(
-        "div.now-playing"
-      ) as NodeListOf<HTMLElement>)[0].offsetParent.querySelectorAll(
-        "span.jioTitle"
-      )[1].textContent;
+      const episode = (
+        document.querySelectorAll("div.now-playing") as NodeListOf<HTMLElement>
+      )[0].offsetParent.querySelectorAll("span.jioTitle")[1].textContent;
       presenceData.state = episode.replace("| ", "");
-    } else if (url.includes("/movies/")) {
-      presenceData.state = "Movie";
-    } else if (url.includes("/playlist/")) {
-      presenceData.state = "Music Video";
-    } else {
-      presenceData.state = "Video";
-    }
+    } else if (url.includes("/movies/")) presenceData.state = "Movie";
+    else if (url.includes("/playlist/")) presenceData.state = "Music Video";
+    else presenceData.state = "Video";
+
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
@@ -63,9 +43,7 @@ presence.on("UpdateData", async () => {
   } else if (url.includes("/search/")) {
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "search";
-  } else {
-    presenceData.details = "Browsing";
-  }
+  } else presenceData.details = "Browsing";
 
   presence.setActivity(presenceData, true);
 });

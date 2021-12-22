@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "Beheer je FIFA Ultimate Team (FUT) terwijl je niet achter je console of PC zit."
   },
   "url": "www.easports.com",
-  "version": "1.2.6",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/uXThlTp.png",
   "thumbnail": "https://i.imgur.com/UxPGmuo.png",
   "color": "#FFFFFF",

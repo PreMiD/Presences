@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Personality Database",
+  "author": {
+    "name": "JustArya",
+    "id": "281770836283883530"
+  },
+  "category": "socials",
+  "logo": "https://i.imgur.com/hcw43Xf.png",
+  "thumbnail": "https://i.imgur.com/0pBs69u.png",
+  "version": "1.0.1",
+  "color": "#2e96a5",
+  "tags": [
+    "personality",
+    "psychology",
+    "database",
+    "mbti",
+    "socionics",
+    "enneagram"
+  ],
+  "url": "personality-database.com",
+  "description": {
+    "en": "Personality Database (PDB) is a user-driven, social community based on analytical psychology typing methods as Jungian Cognitive Functions, Myers–Briggs Type Indicators (MBTI), Enneagram, Instinctual Variant, Tritype, Socionics, Big Five Personality Traits, Psychosophy (Attitudinal Psyche), and Temperaments."
+  },
+  "regExp": "([a-z0-9-]+[.])*personality-database[.]com[/]",
+  "settings": [
+    {
+      "id": "useOnlyFirstPersonalityType",
+      "title": "Show only first type",
+      "icon": "fas fa-head-side-brain",
+      "value": true
+    },
+    {
+      "id": "showUserNameInUserProfile",
+      "title": "Show user's names when visiting other user profile",
+      "icon": "fas fa-user",
+      "value": false
+    }
+  ]
+}

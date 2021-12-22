@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.5",
+    "service": "Khan Academy",
+    "author": {
+      "name": "lolilover",
+      "id": "616761152331841550"
+    },
+    "category": "other",
+    "logo": "https://i.imgur.com/747RYiz.png",
+    "thumbnail": "https://i.imgur.com/0oNkO8J.png",
+    "version": "1.1.3",
+    "color": "#4de682",
+    "tags": [
+      "education",
+      "learning",
+      "learn",
+      "study",
+      "class",
+      "classes"
+    ],
+    "regExp": "([a-z]+[.])+khanacademy[.]org[/]",
+    "url": "www.khanacademy.org",
+    "description": {
+      "es": "Un recurso de aprendizaje personalizado, para todas las edades. Khan Academy ofrece ejercicios de práctica, videos instructivos y un panel de aprendizaje personalizado que permite a los estudiantes aprender a su propio ritmo, dentro y fuera del salón de clases.",
+      "en": "Khan Academy offers practice exercises, instructional videos, and a personalized learning dashboard that empower learners to study at their own pace in and outside of the classroom."
+    }
+  }

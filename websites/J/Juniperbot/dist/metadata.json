@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "MrLivixx",
     "id": "502948927809781763"
@@ -11,10 +11,11 @@
   ],
   "description": {
     "ru": "Многофункциональный, полностью настраиваемый бот для платформы Discord, с панелью управления.",
-    "en": "Fluffy Discord Bot (Music, Ranking, Reminder, Vk Community bridge, WikiFur)"
+    "en": "Fluffy Discord Bot (Music, Ranking, Reminder, Vk Community bridge, WikiFur)",
+    "nl": "Fluffy Discord Bot (Muziek, Ranking, Herinnering, Vk Community-brug, WikiFur)"
   },
   "service": "Juniperbot",
-  "version": "1.0.1",
+  "version": "2.0.5",
   "logo": "https://i.imgur.com/YYk1v1F.png",
   "thumbnail": "https://i.imgur.com/XOcpBkV.png",
   "color": "#C27C0E",
@@ -27,22 +28,8 @@
   "category": "other",
   "settings": [
     {
-      "id": "juniper",
-      "title": "To display the status of actions on juniper.bot",
-      "icon": "fas fa-lightbulb",
-      "value": true
-    },
-    {
-      "id": "docs",
-      "title": "To display the status of actions on docs.juniper.bot",
-      "icon": "fas fa-lightbulb",
-      "value": true
-    },
-    {
-      "id": "fback",
-      "title": "To display the status of actions on feedback.juniper.bot",
-      "icon": "fas fa-lightbulb",
-      "value": true
+      "id": "lang",
+      "multiLanguage": true
     }
   ]
 }

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Drull",
     "id": "244953147154366464"
@@ -6,11 +7,12 @@
   "url": "champion.gg",
   "description": {
     "en": "Champion.gg provides League of Legends champion statistics, guides, builds, runes, masteries, skill orders and counters by role - including Win Rate, Ban Rate...",
-    "pt_BR": "Champion.gg fornece estatísticas, guias, builds, runas, masteries, ordens de habilidade e counters de campeões em League of Legends por função - incluindo Win Rate, Ban Rate..."
+    "pt_BR": "Champion.gg fornece estatísticas, guias, builds, runas, masteries, ordens de habilidade e counters de campeões em League of Legends por função - incluindo Win Rate, Ban Rate...",
+    "nl": "Champion.gg biedt League of Legends kampioenstatistieken, gidsen, builds, runen, meesterschap, vaardigheidsopdrachten en tellers per rol - inclusief winstpercentage, banpercentage ..."
   },
   "service": "Championgg",
-  "version": "1.0.6",
-  "logo": "https://i.imgur.com/4vqpAue.jpg",
+  "version": "1.0.10",
+  "logo": "https://i.imgur.com/xsFD9kI.png",
   "thumbnail": "https://i.imgur.com/td3BVmm.png",
   "color": "#02442F",
   "tags": [

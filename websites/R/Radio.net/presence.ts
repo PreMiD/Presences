@@ -8,8 +8,8 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-var lastPath = ""; //Last played radio station or podcast
-var browsingStamp = 0; //Timestamp when started listening to a radio station
+let lastPath = "", //Last played radio station or podcast
+  browsingStamp = 0; //Timestamp when started listening to a radio station
 
 presence.on("UpdateData", async () => {
   //Current path
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo_big"
     },
     //Document title
-    title = document.title,
+    { title } = document,
     //Document header
     header = document.querySelector("h1") as HTMLElement;
 
@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
     //Podcast
     case "s":
     case "p": {
-      if (path[1] != lastPath || browsingStamp == 0) {
+      if (path[1] !== lastPath || browsingStamp === 0) {
         browsingStamp = Math.round(Date.now() / 1000);
-        lastPath = path[1];
+        [, lastPath] = path;
       }
 
       //Player State
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
         //Player Status
         status = document.querySelector(".player__info-wrap") as HTMLElement;
 
-      if (playerIcon.style.display != "none") {
+      if (playerIcon.style.display !== "none") {
         //Playing
         presenceData.details = header.innerText;
         presenceData.state = info.innerText;
@@ -54,37 +54,34 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
 
         //Get the podcast play position
-        if (path[0] == "p") {
+        if (path[0] === "p") {
           presenceData.endTimestamp = browsingStamp;
 
           //Get the start / current position
-          const [start, end] = (document.querySelector(
-            ".player__timing-wrap"
-          ) as HTMLElement).textContent
+          const [start, end] = (
+            document.querySelector(".player__timing-wrap") as HTMLElement
+          ).textContent
             .split("|")
             .map((e) => e.split(":").reverse());
 
           //Add the amount of time the podcast has been playing
-          if (start.length > 0) {
+          if (start.length > 0)
             presenceData.startTimestamp += parseInt(start[0]);
-          }
-          if (start.length > 1) {
+
+          if (start.length > 1)
             presenceData.startTimestamp += parseInt(start[1]) * 60;
-          }
-          if (start.length > 2) {
+
+          if (start.length > 2)
             presenceData.startTimestamp += parseInt(start[2]) * 60 * 24;
-          }
 
           //Add the length of the podcast
-          if (end.length > 0) {
-            presenceData.endTimestamp += parseInt(end[0]);
-          }
-          if (end.length > 1) {
+          if (end.length > 0) presenceData.endTimestamp += parseInt(end[0]);
+
+          if (end.length > 1)
             presenceData.endTimestamp += parseInt(end[1]) * 60;
-          }
-          if (end.length > 2) {
+
+          if (end.length > 2)
             presenceData.endTimestamp += parseInt(end[2]) * 60 * 24;
-          }
         }
       } else {
         //Paused
@@ -95,7 +92,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).pause;
         presenceData.smallImageKey = "pause";
 
-        if (status.style.display != "none") {
+        if (status.style.display !== "none") {
           //Player status is being displayed (example: BUFFERING)
           const adlength = status.innerText.match(/\d+/g)
             ? parseInt(status.innerText.match(/\d+/g)[0])
@@ -106,9 +103,7 @@ presence.on("UpdateData", async () => {
 
             presenceData.startTimestamp = Math.floor(Date.now() / 1000);
             presenceData.endTimestamp = presenceData.startTimestamp + adlength;
-          } else {
-            presenceData.state = status.innerText;
-          }
+          } else presenceData.state = status.innerText;
         } else {
           //Player is inactive (no status is being displayed)
           const tags = (document.querySelector(".z7kxsz-11") as HTMLElement)
@@ -121,7 +116,7 @@ presence.on("UpdateData", async () => {
     //Search
     case "search": {
       browsingStamp = 0;
-      const results = header.innerText.match(/\d+/g)[0];
+      const [results] = header.innerText.match(/\d+/g);
 
       presenceData.details = new URLSearchParams(window.location.search).get(
         "q"

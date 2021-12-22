@@ -1,14 +1,16 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Lacking",
     "id": "132693143173857281"
   },
   "service": "Comedy Central",
   "description": {
-    "en": "Watch the latest Comedy Central shows such as South Park, The Daily Show, and more."
+    "en": "Watch the latest Comedy Central shows such as South Park, The Daily Show, and more.",
+    "nl": "Bekijk de nieuwste Comedy Central-shows zoals South Park, The Daily Show en meer."
   },
   "url": "www.cc.com",
-  "version": "1.2.6",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/NJ6Ezno.png",
   "thumbnail": "https://i.imgur.com/wIrv2wD.png",
   "color": "#f8ba00",

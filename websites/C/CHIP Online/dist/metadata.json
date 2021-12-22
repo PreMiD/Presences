@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Eren",
     "id": "478937019758673931"
@@ -6,12 +7,13 @@
   "service": "CHIP Online",
   "description": {
     "tr": "Teknoloji/spor/gündem ve insanların blog oluşturduğu, Türkiye'de popüler bir site.",
-    "en": "CHIP Online is the independent web portal of the CHIP brand."
+    "en": "CHIP Online is the independent web portal of the CHIP brand.",
+    "nl": "CHIP Online is het onafhankelijke webportaal van het merk CHIP."
   },
   "url": "www.chip.com.tr",
-  "version": "1.4.4",
-  "logo": "https://erens.glitch.me/fBLP.png",
-  "thumbnail": "https://erens.glitch.me/2XIU.png",
+  "version": "1.4.8",
+  "logo": "https://i.imgur.com/e8B18gA.png",
+  "thumbnail": "https://i.imgur.com/r9jJ1vN.png",
   "color": "#F10C0C",
   "tags": [
     "news",

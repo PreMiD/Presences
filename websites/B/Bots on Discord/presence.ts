@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "676821417823830017"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "676821417823830017"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -22,21 +21,20 @@ presence.on("UpdateData", () => {
     presenceData.state = document.querySelector(
       "#content > div > div.page-header > div.info > h1"
     ).textContent;
-  } else if (page.includes("/search")) {
+  } else if (page.includes("/search"))
     presenceData.details = "Searching something...";
-  } else if (page.startsWith("/about")) {
+  else if (page.startsWith("/about")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "About";
-  } else if (page.startsWith("/info/")) {
+  } else if (page.startsWith("/info/"))
     presenceData.details = "Viewing Informations";
-  } else if (page.startsWith("/users/")) {
+  else if (page.startsWith("/users/")) {
     presenceData.details = "Viewing a user";
     presenceData.state = document.querySelector(
       "#content > div > div:nth-child(1) > div > div.right-container > p  "
     ).textContent;
-  } else if (page.endsWith("/create")) {
-    presenceData.details = "Creating a list";
-  } else if (page.startsWith("/lists")) {
+  } else if (page.endsWith("/create")) presenceData.details = "Creating a list";
+  else if (page.startsWith("/lists")) {
     presenceData.details = "Viewing a list:";
     presenceData.state = document.querySelector(
       "#content > div > div:nth-child(1) > div > div.head > h1"
@@ -45,17 +43,14 @@ presence.on("UpdateData", () => {
     if (page.endsWith("/embeds")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Bot Embed Builder";
-    } else if (page.endsWith("/keys")) {
+    } else if (page.endsWith("/keys"))
       presenceData.details = "Viewing API keys";
-    } else if (page.endsWith("/submit")) {
+    else if (page.endsWith("/submit"))
       presenceData.details = "Sumbitting a bot";
-    }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Nekolen",
     "id": "270125856679002113"
@@ -11,11 +12,12 @@
   ],
   "service": "Just Light Novels",
   "description": {
-    "en": "Just Light Novels! Home of All Light Novels"
+    "en": "Just Light Novels! Home of All Light Novels",
+    "nl": "Gewoon lichte romans! Huis van alle lichte romans"
   },
   "url": "justlightnovels.com",
-  "version": "1.2.4",
-  "logo": "https://i.imgur.com/HyOSTGP.png",
+  "version": "1.2.8",
+  "logo": "https://i.imgur.com/O2Xalve.png",
   "thumbnail": "https://i.imgur.com/KWY5wqt.png",
   "color": "#0000ff",
   "tags": [

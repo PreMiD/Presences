@@ -1,19 +1,18 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Deleted 7.12i",
     "id": "591702135310385157"
   },
-  "url": [
-    "koyamie.com",
-    "www.koyamie.com"
-  ],
+  "url": "koya.gg",
   "description": {
     "fr": "Un puissant bot Discord multifonctionnel et configurable.",
-    "en": "A powerful multi-function and configurable Discord bot."
+    "en": "A powerful multi-function and configurable Discord bot.",
+    "nl": "Een krachtige multifunctionele en configureerbare Discord-bot."
   },
   "service": "Koya",
-  "version": "1.2.5",
-  "logo": "https://i.imgur.com/WeKgGeX.png",
+  "version": "1.2.10",
+  "logo": "https://i.imgur.com/utYCZOS.png",
   "thumbnail": "https://i.imgur.com/zQ7KPjZ.png",
   "color": "#7289da",
   "tags": [

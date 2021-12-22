@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "AnimesOnline",
+  "author": {
+    "name": "Faelayis",
+    "id": "328731868096888833"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/5U9jD9W.jpg",
+  "thumbnail": "https://i.imgur.com/4Q65GWB.jpg",
+  "version": "1.0.3",
+  "color": "#e74c3c",
+  "tags": [
+    "animesonline",
+    "videos",
+    "anime"
+  ],
+  "url": "animesonline.org",
+  "description": {
+    "en": "Animes Online in FULLHD, HD and SD, choose the anime of your choice and watch it subtitled or dubbed! Join now it's free!",
+    "pt_BR": "Animes Online em FULLHD, HD e SD, escolha o anime de sua preferencia e assista legendado ou dublado! Acesse agora é gratuito!"
+  },
+  "iframe": true,
+  "settings": [
+    {
+      "id": "timestamps",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -24,8 +25,8 @@
     "jp.redtube.com",
     "fr.redtube.com"
   ],
-  "version": "2.2.6",
-  "logo": "https://i.imgur.com/MlqNqGr.jpg",
+  "version": "2.2.9",
+  "logo": "https://i.imgur.com/YrWWEZC.png",
   "thumbnail": "https://i.imgur.com/6DD83q7.png",
   "color": "#af181f",
   "tags": [

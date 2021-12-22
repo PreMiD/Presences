@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Blockbench",
+  "version": "1.1.0",
+  "category": "other",
+  "author": {
+    "name": "tuhana",
+    "id": "852582281112715284"
+  },
+  "url": [
+    "www.blockbench.net",
+    "web.blockbench.net"
+  ],
+  "description": {
+    "en": "Blockbench is a boxy 3D model editor.",
+    "nl": "Blockbench is een boxy 3D modeleditor."
+  },
+  "logo": "https://i.imgur.com/isuRsRF.png",
+  "thumbnail": "https://i.imgur.com/A4LQrtg.png",
+  "color": "#1E93D9",
+  "tags": [
+    "3d",
+    "modelling"
+  ]
+}

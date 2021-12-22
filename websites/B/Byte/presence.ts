@@ -1,80 +1,93 @@
-var presence = new Presence({
-  clientId: "671199009674756146"
-});
-var strings = presence.getStrings({
-  browse: "presence.activity.browsing",
-  search: "presence.activity.searching"
-});
+const presence = new Presence({
+    clientId: "671199009674756146"
+  }),
+  strings = presence.getStrings({
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
+  getElement = (query: string): string => {
+    const element = document.querySelector(query);
+    if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
+    else return;
+  };
 
-const getElement = (query: string): string => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return undefined;
-};
+let oldUrl: string, elapsed: number;
 
-var oldUrl, elapsed;
+function setObject(path: string) {
+  switch (path) {
+    case "/": {
+      return {
+        details: "Browsing"
+      };
+    }
 
-const statics = {
-  "/": {
-    details: "Browsing"
-  },
-  "/about/": {
-    details: "Viewing",
-    state: "About"
-  },
-  "/faq/": {
-    details: "Viewing",
-    state: "Frequently Asked Questions"
-  },
-  "/terms/": {
-    details: "Viewing",
-    state: "Terms of Service"
-  },
-  "/tos/": {
-    details: "Viewing",
-    state: "Terms of Service"
-  },
-  "/privacy/": {
-    details: "Viewing",
-    state: "Privacy"
-  },
-  "/guidelines/": {
-    details: "Viewing",
-    state: "Guidelines"
-  },
-  "/contact/": {
-    details: "Viewing",
-    state: "Contact"
+    case "/about/": {
+      return {
+        details: "Viewing",
+        state: "About"
+      };
+    }
+
+    case "/faq/": {
+      return {
+        details: "Viewing",
+        state: "Frequently Asked Questions"
+      };
+    }
+
+    case "/terms/": {
+      return {
+        details: "Viewing",
+        state: "Terms of Service"
+      };
+    }
+
+    case "/tos/": {
+      return {
+        details: "Viewing",
+        state: "Terms of Service"
+      };
+    }
+
+    case "/privacy/": {
+      return {
+        details: "Viewing",
+        state: "Privacy"
+      };
+    }
+
+    case "/guidelines/": {
+      return {
+        details: "Viewing",
+        state: "Guidelines"
+      };
+    }
+
+    case "/contact/": {
+      return {
+        details: "Viewing",
+        state: "Contact"
+      };
+    }
   }
-};
+}
 
 presence.on("UpdateData", async () => {
-  const host = location.host;
-  const path = location.pathname.replace(/\/?$/, "/");
-
-  var data: PresenceData = {
-    details: undefined,
-    state: undefined,
-    largeImageKey: "byte",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: undefined,
-    endTimestamp: undefined
-  };
+  const { host } = location,
+    path = location.pathname.replace(/\/?$/, "/"),
+    detailsObj = setObject(path),
+    data: PresenceData = {
+      details: detailsObj.details,
+      state: detailsObj.state,
+      largeImageKey: "byte"
+    };
 
   if (oldUrl !== path) {
     oldUrl = path;
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (path in statics) {
-    data = { ...data, ...statics[path] };
-  }
-
-  if (elapsed) {
-    data.startTimestamp = elapsed;
-  }
+  if (elapsed) data.startTimestamp = elapsed;
 
   if (host === "community.byte.co") {
     data.details = "Browsing Community";
@@ -88,18 +101,14 @@ presence.on("UpdateData", async () => {
     )
       data.state = getElement(".active");
 
-    if (path.match("/new/")) {
-      data.state = "Newest";
-    }
+    if (path.match("/new/")) data.state = "Newest";
 
     if (path.match("/badges/")) {
       data.details = "Viewing Badges";
       data.state = getElement(".show-badge-details .badge-link");
     }
 
-    if (path.match("/tags/")) {
-      data.state = "Tags";
-    }
+    if (path.match("/tags/")) data.state = "Tags";
 
     if (path.match("/tag/")) {
       data.details = "Viewing Tag";
@@ -118,9 +127,7 @@ presence.on("UpdateData", async () => {
       data.state = getElement(".selected-name .category-name");
 
       const tag = getElement(".active");
-      if (tag) {
-        data.details += `'s ${tag}`;
-      }
+      if (tag) data.details += `'s ${tag}`;
     }
 
     if (path.match("/t/")) {
@@ -136,9 +143,7 @@ presence.on("UpdateData", async () => {
         data.state = `${getElement(".username")} (${getElement(".full-name")})`;
 
         const tag = getElement(".active");
-        if (tag) {
-          data.details += `'s ${tag}`;
-        }
+        if (tag) data.details += `'s ${tag}`;
       }
     }
 
@@ -149,9 +154,7 @@ presence.on("UpdateData", async () => {
       )})`;
 
       const tag = getElement(".active");
-      if (tag) {
-        data.details += `'s ${tag}`;
-      }
+      if (tag) data.details += `'s ${tag}`;
     }
 
     if (path.match("/search/")) {
@@ -161,7 +164,7 @@ presence.on("UpdateData", async () => {
 
       const search = document.querySelector("input");
 
-      data.state = search.value !== "" ? search.value : undefined;
+      data.state = search.value;
     }
   }
 
@@ -185,7 +188,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (data.details !== undefined) {
+  if (data.details) {
     if (data.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;

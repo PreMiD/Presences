@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Dsc.gg",
+  "author": {
+    "name": "Anaxes",
+    "id": "567885938160697377"
+  },
+  "category": "socials",
+  "logo": "https://i.imgur.com/YCpohJW.png",
+  "thumbnail": "https://i.imgur.com/8fkvFDo.png",
+  "version": "1.0.0",
+  "color": "#738adb",
+  "tags": [
+    "link-shortener",
+    "discord-link-shortener",
+    "vanity-urls",
+    "dscgg"
+  ],
+  "url": ["dsc.gg", "docs.dsc.gg"],
+  "description": {
+    "en": "Free vanity links for you discord servers, bots and templates!",
+    "nl": "Gratis vanity-links voor je Discord servers, bots en templates!"
+  },
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

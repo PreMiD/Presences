@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Mugzone",
+  "author": {
+    "name": "Himori",
+    "id": "350602512044261386"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/5phtiVk.png",
+  "thumbnail": "https://i.imgur.com/LiUGZxS.png",
+  "version": "2.0.4",
+  "color": "#b1b8cd",
+  "tags": [
+    "malody",
+    "mugzone",
+    "game"
+  ],
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Keep me hidden",
+      "icon": "fas fa-eye-slash",
+      "value": false
+    }
+  ],
+  "url": "m.mugzone.net",
+  "description": {
+    "en": "Malody, cross-platform music game community.",
+    "nl": "Malody, platformonafhankelijke muziekgame-community."
+  }
+}

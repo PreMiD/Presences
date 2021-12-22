@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "Dribbble",
+  "author": {
+    "name": "B.N",
+    "id": "259669086160551937"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/lZ0G2SL.png",
+  "thumbnail": "https://i.imgur.com/BfP9AEk.png",
+  "version": "1.0.0",
+  "color": "#ea4c89",
+  "tags": [
+    "design",
+    "debdesign",
+    "branding",
+    "illustration",
+    "print",
+    "typography",
+    "animation"
+  ],
+  "url": "dribbble.com",
+  "description": {
+    "en": "Dribbble is where designers gain inspiration, feedback, community, and jobs and is your best resource to discover and connect with designers worldwide."
+  }
+}

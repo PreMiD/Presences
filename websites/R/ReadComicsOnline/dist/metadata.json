@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "ReadComicsOnline",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/rOrdlzw.png",
+  "thumbnail": "https://i.imgur.com/EuVcqxz.png",
+  "version": "1.0.4",
+  "color": "#6a0722",
+  "tags": [
+    "comics",
+    "online-reader"
+  ],
+  "url": "readcomiconline.li",
+  "description": {
+    "en": "Read comics online in high quality. Free download high quality comics."
+  },
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "cookies",
+      "title": "Allow Cookies",
+      "icon": "fas fa-cookie-bite",
+      "value": true
+    }
+  ]
+}

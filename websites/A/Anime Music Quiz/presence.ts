@@ -2,13 +2,13 @@ const presence = new Presence({
   clientId: "691494438349832227"
 });
 
-let lobbyNumber;
-let lobbyName;
-let timeRemainingBR;
-let totalRoundNumber;
-let actualRoundNumber;
-let animeName;
-let timeRemaining;
+let lobbyNumber,
+  lobbyName,
+  timeRemainingBR,
+  totalRoundNumber,
+  actualRoundNumber,
+  animeName,
+  timeRemaining;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -16,36 +16,38 @@ presence.on("UpdateData", async () => {
   };
   if (!navigator.language.includes("it-IT")) {
     // English
-    if (document.location.pathname == "/") {
-      if (document.querySelector("#gameChatPage") != null) {
+    if (document.location.pathname === "/") {
+      if (document.querySelector("#gameChatPage") !== null) {
         if (
-          document.querySelector("#roomBrowserPage").className !=
+          document.querySelector("#roomBrowserPage").className !==
           "gamePage text-center hidden"
         ) {
           lobbyNumber = document.querySelector("#rbTotalGameCount").textContent;
           data.smallImageKey = "lobby";
-          data.smallImageText = "Rooms count: " + lobbyNumber;
+          data.smallImageText = `Rooms count: ${lobbyNumber}`;
           data.details = "Browsing the game rooms";
           presence.setActivity(data);
         } else if (
-          document.querySelector("#gameChatPage").className == "gamePage"
+          document.querySelector("#gameChatPage").className === "gamePage"
         ) {
-          if (document.querySelector("#lobbyPage").className == "text-center") {
+          if (
+            document.querySelector("#lobbyPage").className === "text-center"
+          ) {
             lobbyName = document.querySelector("#lobbyRoomName").textContent;
             data.smallImageKey = "room";
-            data.smallImageText = "Room: " + lobbyName;
+            data.smallImageText = `Room: ${lobbyName}`;
             data.details = "In the room:";
             data.state = lobbyName;
             presence.setActivity(data);
           } else {
             if (
-              document.querySelector("#battleRoyalPage").className ==
+              document.querySelector("#battleRoyalPage").className ===
               "text-center"
             ) {
-              timeRemainingBR = document.querySelector("#brTimeLeft")
-                .textContent;
+              timeRemainingBR =
+                document.querySelector("#brTimeLeft").textContent;
               data.smallImageKey = "btr";
-              data.smallImageText = "Time remaining: " + timeRemainingBR;
+              data.smallImageText = `Time remaining: ${timeRemainingBR}`;
               data.details = "Choosing songs for";
               data.state = "battle royale mode";
               presence.setActivity(data);
@@ -58,14 +60,14 @@ presence.on("UpdateData", async () => {
                 .textContent.split("/")[0]
                 .trim();
               if (
-                document.querySelector("#qpAnimeNameHider").className ==
+                document.querySelector("#qpAnimeNameHider").className ===
                 "center-text qpAnimeNameContainer hide"
               ) {
                 animeName = document.querySelector("#qpAnimeName").textContent;
                 data.smallImageKey = "headset";
-                data.smallImageText = "Song from: " + animeName;
-                data.details = "Round " + actualRoundNumber + " ended";
-                data.state = "Song from: " + animeName;
+                data.smallImageText = `Song from: ${animeName}`;
+                data.details = `Round ${actualRoundNumber} ended`;
+                data.state = `Song from: ${animeName}`;
                 presence.setActivity(data);
               } else {
                 if (
@@ -79,25 +81,21 @@ presence.on("UpdateData", async () => {
                   data.state = "Loading...";
                   presence.setActivity(data);
                 } else if (
-                  document.querySelector("#qpHiderText").textContent ==
+                  document.querySelector("#qpHiderText").textContent ===
                   "Answers"
                 ) {
                   data.smallImageKey = "gamepad";
                   data.smallImageText = "Waiting for the results...";
-                  data.details = "Round " + actualRoundNumber + " ended";
+                  data.details = `Round ${actualRoundNumber} ended`;
                   data.state = "Waiting for the results...";
                   presence.setActivity(data);
                 } else {
-                  timeRemaining = document.querySelector("#qpHiderText")
-                    .textContent;
+                  timeRemaining =
+                    document.querySelector("#qpHiderText").textContent;
                   data.smallImageKey = "gamepad";
-                  data.smallImageText =
-                    "Round: " +
-                    actualRoundNumber +
-                    "｜Countdown: " +
-                    timeRemaining;
-                  data.details = "Round: " + totalRoundNumber;
-                  data.state = "Time remaining: " + timeRemaining;
+                  data.smallImageText = `Round: ${actualRoundNumber}｜Countdown: ${timeRemaining}`;
+                  data.details = `Round: ${totalRoundNumber}`;
+                  data.state = `Time remaining: ${timeRemaining}`;
                   presence.setActivity(data);
                 }
               }
@@ -135,37 +133,39 @@ presence.on("UpdateData", async () => {
     }
   } else {
     // Italian
-    if (document.location.pathname == "/") {
-      if (document.querySelector("#gameChatPage") != null) {
+    if (document.location.pathname === "/") {
+      if (document.querySelector("#gameChatPage") !== null) {
         if (
-          document.querySelector("#roomBrowserPage").className !=
+          document.querySelector("#roomBrowserPage").className !==
           "gamePage text-center hidden"
         ) {
           lobbyNumber = document.querySelector("#rbTotalGameCount").textContent;
           data.smallImageKey = "lobby";
-          data.smallImageText = "Numero stanze: " + lobbyNumber;
+          data.smallImageText = `Numero stanze: ${lobbyNumber}`;
           data.details = "Naviga tra le stanze";
           data.state = "di gioco";
           presence.setActivity(data);
         } else if (
-          document.querySelector("#gameChatPage").className == "gamePage"
+          document.querySelector("#gameChatPage").className === "gamePage"
         ) {
-          if (document.querySelector("#lobbyPage").className == "text-center") {
+          if (
+            document.querySelector("#lobbyPage").className === "text-center"
+          ) {
             lobbyName = document.querySelector("#lobbyRoomName").textContent;
             data.smallImageKey = "room";
-            data.smallImageText = "Stanza: " + lobbyName;
+            data.smallImageText = `Stanza: ${lobbyName}`;
             data.details = "Nella stanza:";
             data.state = lobbyName;
             presence.setActivity(data);
           } else {
             if (
-              document.querySelector("#battleRoyalPage").className ==
+              document.querySelector("#battleRoyalPage").className ===
               "text-center"
             ) {
-              timeRemainingBR = document.querySelector("#brTimeLeft")
-                .textContent;
+              timeRemainingBR =
+                document.querySelector("#brTimeLeft").textContent;
               data.smallImageKey = "btr";
-              data.smallImageText = "Tempo rimanente: " + timeRemainingBR;
+              data.smallImageText = `Tempo rimanente: ${timeRemainingBR}`;
               data.details = "Sceglie le canzoni per";
               data.state = "la battle royale";
               presence.setActivity(data);
@@ -178,14 +178,14 @@ presence.on("UpdateData", async () => {
                 .textContent.split("/")[0]
                 .trim();
               if (
-                document.querySelector("#qpAnimeNameHider").className ==
+                document.querySelector("#qpAnimeNameHider").className ===
                 "center-text qpAnimeNameContainer hide"
               ) {
                 animeName = document.querySelector("#qpAnimeName").textContent;
                 data.smallImageKey = "headset";
-                data.smallImageText = "Canzone da: " + animeName;
-                data.details = "Round " + actualRoundNumber + " terminato";
-                data.state = "Canzone da: " + animeName;
+                data.smallImageText = `Canzone da: ${animeName}`;
+                data.details = `Round ${actualRoundNumber} terminato`;
+                data.state = `Canzone da: ${animeName}`;
                 presence.setActivity(data);
               } else {
                 if (
@@ -199,25 +199,21 @@ presence.on("UpdateData", async () => {
                   data.state = "Caricamento...";
                   presence.setActivity(data);
                 } else if (
-                  document.querySelector("#qpHiderText").textContent ==
+                  document.querySelector("#qpHiderText").textContent ===
                   "Answers"
                 ) {
                   data.smallImageKey = "gamepad";
                   data.smallImageText = "Aspettando i risultati...";
-                  data.details = "Round " + actualRoundNumber + " terminato";
+                  data.details = `Round ${actualRoundNumber} terminato`;
                   data.state = "Aspettando i risultati...";
                   presence.setActivity(data);
                 } else {
-                  timeRemaining = document.querySelector("#qpHiderText")
-                    .textContent;
+                  timeRemaining =
+                    document.querySelector("#qpHiderText").textContent;
                   data.smallImageKey = "gamepad";
-                  data.smallImageText =
-                    "Round: " +
-                    actualRoundNumber +
-                    "｜Tempo rimanente: " +
-                    timeRemaining;
-                  data.details = "Round: " + totalRoundNumber;
-                  data.state = "Tempo rimanente: " + timeRemaining;
+                  data.smallImageText = `Round: ${actualRoundNumber}｜Tempo rimanente: ${timeRemaining}`;
+                  data.details = `Round: ${totalRoundNumber}`;
+                  data.state = `Tempo rimanente: ${timeRemaining}`;
                   presence.setActivity(data);
                 }
               }

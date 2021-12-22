@@ -1,19 +1,19 @@
-var presence = new Presence({ clientId: "688752009079160852" }),
+const presence = new Presence({ clientId: "688752009079160852" }),
   presenceData: PresenceData = { largeImageKey: "logo" },
-  customData = false;
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var user: any;
-var pp: any;
-var rank: any;
-var url: URL;
-var mode: number;
+  browsingStamp = Math.floor(Date.now() / 1000);
+let customData = false,
+  title: HTMLElement,
+  user: HTMLElement,
+  pp: HTMLElement,
+  rank: HTMLElement,
+  url: URL,
+  mode: number;
 
 presence.on("UpdateData", async () => {
   customData = false;
 
   // You code here
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Home Page";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/login")) {
@@ -42,9 +42,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(6) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Taiko profile";
-            presenceData.state =
-              rank.innerText + " | " + pp.innerText + "pp(Relax)";
+            presenceData.details = `${user.innerText}'s Taiko profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -53,8 +52,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Taiko profile";
-            presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
+            presenceData.details = `${user.innerText}'s Taiko profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
             break;
         }
         break;
@@ -69,9 +68,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(7) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Catch profile";
-            presenceData.state =
-              rank.innerText + " | " + pp.innerText + "pp(Relax)";
+            presenceData.details = `${user.innerText}'s Catch profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -80,8 +78,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(3) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Catch profile";
-            presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
+            presenceData.details = `${user.innerText}'s Catch profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
             break;
         }
         break;
@@ -92,8 +90,8 @@ presence.on("UpdateData", async () => {
         pp = document.querySelector(
           "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(4) > table > tbody > tr:nth-child(1) > td.right.aligned"
         );
-        presenceData.details = user.innerText + "'s Mania profile";
-        presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
+        presenceData.details = `${user.innerText}'s Mania profile`;
+        presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
         break;
       default:
         url = new URL(document.location.href);
@@ -106,9 +104,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(5) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Standard profile";
-            presenceData.state =
-              rank.innerText + " | " + pp.innerText + "pp(Relax)";
+            presenceData.details = `${user.innerText}'s Standard profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -117,8 +114,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(1) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = user.innerText + "'s Standard profile";
-            presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
+            presenceData.details = `${user.innerText}'s Standard profile`;
+            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
             break;
         }
         break;
@@ -213,44 +210,35 @@ presence.on("UpdateData", async () => {
     if (title !== null) presenceData.details = "Viewing Documentation";
     presenceData.state = title.innerText;
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/login")) {
-    presenceData.details = "Regitstering account";
-    presenceData.startTimestamp = browsingStamp;
   }
 
-  if (document.location.hostname == "vinse.ripple.moe") {
+  if (document.location.hostname === "vinse.ripple.moe") {
     presenceData.details = "Browsing Multiplayer history";
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (document.location.hostname == "fokabot.ripple.moe") {
+  if (document.location.hostname === "fokabot.ripple.moe") {
     presenceData.details = "Viewing Documentation";
     presenceData.state = "FokaBot Commands";
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (document.location.hostname == "support.ripple.moe") {
+  if (document.location.hostname === "support.ripple.moe") {
     presenceData.details = "Ripple Support";
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (document.location.hostname == "status.ripple.moe") {
+  if (document.location.hostname === "status.ripple.moe") {
     presenceData.details = "Checking server status";
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (document.location.hostname == "blog.ripple.moe") {
+  if (document.location.hostname === "blog.ripple.moe") {
     title = document.querySelector("head > title");
     presenceData.details = "Reading Blog";
     presenceData.state = title.innerText;
     presenceData.startTimestamp = browsingStamp;
   }
 
-  if (!customData) {
-    presence.setActivity(presenceData);
-  }
-});
-
-presence.on("iFrameData", function (data) {
-  console.log(data);
+  if (!customData) presence.setActivity(presenceData);
 });

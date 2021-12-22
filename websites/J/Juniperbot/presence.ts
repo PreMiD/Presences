@@ -1,69 +1,137 @@
 const presence = new Presence({ clientId: "739908991274057870" }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
+function pathIncludes(string: string): boolean {
+  return document.location.pathname.toLowerCase().includes(string);
+}
+const host = document.location.hostname;
+
+async function getStrings() {
+  return presence.getStrings(
+    {
+      reading: "general.readingAbout",
+      leaderboard: "juniperbot.leaderboard",
+      viewMainPage: "juniperbot.mainpage",
+      serverdash: "juniperbot.serverdash",
+      serverdashname: "juniperbot.serverdashname",
+      donate: "juniperbot.donate",
+      servers: "juniperbot.servers",
+      commands: "juniperbot.commands",
+      stats: "juniperbot.stats",
+      usercard: "juniperbot.usercard",
+      terms: "general.terms",
+      privacy: "general.privacy",
+      cookies: "juniperbot.cookies"
+    },
+    await presence.getSetting("lang")
+  );
+}
+
+let strings = getStrings(),
+  oldLang: string = null;
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "logo" },
-    juniper: boolean = await presence.getSetting("juniper"),
-    docs: boolean = await presence.getSetting("docs"),
-    fback: boolean = await presence.getSetting("fback");
+    newLang = await presence.getSetting("lang");
 
-  if (document.location.hostname == "juniper.bot") {
-    if (juniper) {
-      presenceData.startTimestamp = browsingStamp;
-      if (document.location.pathname.includes("/ranking")) {
-        presenceData.details = "Looks at the server's leaderboard:";
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+
+  if (host === "juniper.bot") {
+    presenceData.startTimestamp = browsingStamp;
+
+    switch (true) {
+      case pathIncludes("/ranking/"):
+        presenceData.details = (await strings).leaderboard;
         presenceData.state = document.querySelector(
           ".guild--info h1.font-weight-thin.display-2"
         ).innerHTML;
         presenceData.smallImageKey = "list";
-      } else if (document.location.pathname.includes("/dashboard/")) {
-        presenceData.details = "In dashboard";
-        presenceData.state = `Guild: ${
+        break;
+      case pathIncludes("/dashboard/"):
+        presenceData.details = (await strings).serverdash;
+        presenceData.state = (await strings).serverdashname.replace(
+          "{0}",
           document.querySelector(".guild--info h1.font-weight-thin.display-2")
             .innerHTML
-        }`;
-      } else if (document.location.pathname.includes("/donate")) {
-        presenceData.details = "Reads information about the donation";
+        );
+        break;
+
+      case pathIncludes("/donate"):
+        presenceData.details = (await strings).donate;
         presenceData.smallImageKey = "donate";
-      } else if (document.location.pathname == "/") {
-        presenceData.details = "Main page";
-      } else if (document.location.pathname == "/servers") {
-        presenceData.details = "Selects the server";
+        break;
+
+      case pathIncludes("/servers"):
+        presenceData.details = (await strings).servers;
         presenceData.smallImageKey = "list";
-      } else if (document.location.pathname == "/commands") {
-        presenceData.details = "Looks at the list of commands";
+        break;
+
+      case pathIncludes("/commands"):
+        presenceData.details = (await strings).commands;
         presenceData.smallImageKey = "list";
-      } else if (document.location.pathname == "/status") {
-        presenceData.details = "Looks at the bot's statistics";
+        break;
+
+      case pathIncludes("/status"):
+        presenceData.details = (await strings).stats;
         presenceData.smallImageKey = "stats";
-      } else if (document.location.pathname == "/user/card") {
-        presenceData.details = "Changes the rank card";
-      }
+        break;
+
+      case pathIncludes("/user/card"):
+        presenceData.details = (await strings).usercard;
+        break;
+
+      case pathIncludes("/terms"):
+        presenceData.details = `${(await strings).reading} ${
+          (await strings).terms
+        }`;
+        presenceData.smallImageKey = "list";
+        break;
+
+      case pathIncludes("/cookie"):
+        presenceData.details = `${(await strings).reading} ${
+          (await strings).cookies
+        }`;
+        presenceData.smallImageKey = "list";
+        break;
+
+      case pathIncludes("/privacy"):
+        presenceData.details = `${(await strings).reading} ${
+          (await strings).privacy
+        }`;
+        presenceData.smallImageKey = "list";
+        break;
+
+      default:
+        presenceData.details = "Main page";
+        break;
     }
-  } else if (docs) {
-    if (document.location.hostname == "docs.juniper.bot") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = document.title;
-      presenceData.state = "docs.juniper.bot";
-      presenceData.smallImageKey = "list";
-    }
-  } else if (fback) {
-    if (document.location.hostname == "feedback.juniper.bot") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.state = "feedback.juniper.bot";
-      if (document.location.pathname == "/") {
-        presenceData.details = "Main page.";
-      } else if (document.location.pathname.includes("/posts")) {
-        presenceData.details = `Читает: ${
+  }
+  if (host === "docs.juniper.bot") {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = document.title;
+    presenceData.state = "docs.juniper.bot";
+    presenceData.smallImageKey = "list";
+  }
+  if (host === "feedback.juniper.bot") {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = "feedback.juniper.bot";
+    switch (true) {
+      case pathIncludes("/posts/"):
+        presenceData.details = `${(await strings).reading} ${
           document.querySelector(".post-header h1").innerHTML
         }`;
-      }
+        break;
+      default:
+        presenceData.details = (await strings).viewMainPage;
+        break;
     }
   }
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

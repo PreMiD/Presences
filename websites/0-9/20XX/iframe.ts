@@ -50,7 +50,11 @@ interface Map20XX {
     y: number;
   };
   spawns: Array<Spawn20XX>;
-  doodads: Array<object>;
+  doodads: Array<Dooads>;
+}
+
+interface Dooads {
+  name: string;
 }
 
 interface Score20XX {
@@ -92,14 +96,14 @@ const guessKeys: ItemMap = {
 
 // Guesses the map via the map object
 function guessMap(map: Map20XX): string {
-  const camera = map.spawns.find((spawn: Spawn20XX) => spawn.type === "camera");
-  const cameraKey = camera ? `${camera.pos.x}:${camera.pos.y}` : "n";
-  const guessKey = `${map.size.x}:${map.size.y}:${cameraKey}:${map.spawns.length}:${map.doodads.length}`;
+  const camera = map.spawns.find((spawn: Spawn20XX) => spawn.type === "camera"),
+    cameraKey = camera ? `${camera.pos.x}:${camera.pos.y}` : "n",
+    guessKey = `${map.size.x}:${map.size.y}:${cameraKey}:${map.spawns.length}:${map.doodads.length}`;
   return guessKeys[guessKey] || null;
 }
 
 iframe.on("UpdateData", async () => {
-  const main = (window as Window20XX)["main"];
+  const { main } = window as Window20XX;
   if (!main) return;
 
   const data = {

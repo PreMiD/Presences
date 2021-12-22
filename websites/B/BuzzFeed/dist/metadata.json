@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bünyamin Öztürk",
     "id": "487515609815580672"
@@ -13,7 +14,7 @@
     "www.buzzfeed.com",
     "buzzfeed.com"
   ],
-  "version": "1.7.4",
+  "version": "1.7.6",
   "logo": "https://i.imgur.com/RpYIaJm.png",
   "thumbnail": "https://i.imgur.com/MFtWP9z.png",
   "color": "#ed3624",

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "CRUGG",
     "id": "228965621478588416"
@@ -6,10 +7,11 @@
   "service": "Gelbooru",
   "description": {
     "en": "NSFW Anime Image board running on Gelbooru",
-    "de": "NSFW Anime Image board running on Gelbooru"
+    "de": "NSFW Anime Image board running on Gelbooru",
+    "nl": "NSFW Anime Afbeeldingen bord loopt op Gelbooru"
   },
   "url": "gelbooru.com",
-  "version": "1.2.4",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/CgGzxXy.png",
   "thumbnail": "https://i.imgur.com/T7ge6JO.png",
   "color": "#0773FB",

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,7 +11,7 @@
     "sv_SE": "Se dina favoritprogram när du vill i SVT Play - fri television på nätet."
   },
   "url": "www.svtplay.se",
-  "version": "1.2.6",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/QckmKnj.png",
   "thumbnail": "https://i.imgur.com/QggYFa4.png",
   "color": "#00c901",

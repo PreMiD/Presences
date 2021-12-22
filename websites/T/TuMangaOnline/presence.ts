@@ -1,23 +1,20 @@
-var presence = new Presence({
-  clientId: "640980262750126080"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
+const presence = new Presence({
+    clientId: "640980262750126080"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "tmo"
   };
 
-  if (document.location.hostname == "tmofans.com") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "lectortmo.com") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";
     } else if (document.location.pathname.includes("/library/manga/")) {
       presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector(
+      const user = document.querySelector(
         "#app > section > header > section > div > div > div:nth-child(3) > h1"
       );
       presenceData.details = "Viewing manga:";
@@ -46,12 +43,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing groups";
     } else if (document.location.pathname.includes("/viewer/")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing manga:";
+      presenceData.details = "Reading manga:";
+      presenceData.smallImageKey = "reading";
       presenceData.state = document.querySelector(
         "#app > section:nth-child(2) > div > div > h1"
       ).textContent;
     }
-  } else if (document.location.hostname == "tmocommunity.com") {
+  } else if (document.location.hostname === "tmocommunity.com") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing the forums...";
     if (document.location.pathname.includes("/d/")) {
@@ -62,10 +60,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

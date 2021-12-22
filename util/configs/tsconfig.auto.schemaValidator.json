@@ -1,0 +1,4 @@
+{
+  "extends": "../tools/auto/tsconfig.auto.json",
+  "files": ["../tools/auto/schemaValidator.ts"]
+}

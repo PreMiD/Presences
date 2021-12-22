@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "lolilover",
+    "id": "616761152331841550"
+  },
+  "service": "MangaReader",
+  "description": {
+    "en": "MangaReader.to is a free tool for everyone, where users from different regions can read Manga completely free. There is an extensive collection of Manga for every age group, which allows users from other areas to find their favorite stories. The most crucial part of MangaReader.to is that you won’t get ads on the page to have a peaceful reading."
+  },
+  "url": ["mangareader.to", "www.mangareader.to"],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/TEB9rWf.png",
+  "thumbnail": "https://i.imgur.com/8MhY0Ov.png",
+  "color": "#6241B0",
+  "tags": ["manga", "books", "book", "reading"],
+  "category": "anime"
+}

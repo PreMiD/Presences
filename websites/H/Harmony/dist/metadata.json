@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.5",
+    "service": "Harmony",
+    "author": {
+      "name": "marino!",
+      "id": "598953747963707409"
+    },
+    "category": "music",
+    "logo": "https://i.imgur.com/lI0bLxr.png",
+    "thumbnail": "https://i.imgur.com/MqPDsUl.png",
+    "version": "1.0.0",
+    "color": "#4c1eff",
+    "tags": [
+      "music",
+      "harmony",
+      "radio"
+    ],
+    "url": "weareharmony.net",
+    "description": {
+      "en": "Harmony broadcasts from all over the world and we all have the same desire to play the biggest hits!"
+    }
+}

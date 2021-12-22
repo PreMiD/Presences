@@ -1,15 +1,16 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Gurrman375D",
     "id": "446528923535278082"
   },
   "url": "www.sparknotes.com",
   "description": {
-    "en": "Your source for help with Shakespeare and English literature, plus history, math, biology, and more."
+    "en": "Your source for help with Shakespeare and English literature, plus history, math, biology, and more.",
+    "nl": "Uw bron voor hulp met Shakespeare en Engelse literatuur, plus geschiedenis, wiskunde, biologie, en meer."
   },
   "service": "Sparknotes",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/jZEhnvk.png",
   "thumbnail": "https://i.imgur.com/Ex3iuwk.png",
   "color": "#363EE6",

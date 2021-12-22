@@ -1,16 +1,18 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
   },
   "url": "yaay.com.tr",
   "description": {
+    "en": "Yaay, new Turkish social media with many features!",
     "tr": "Yerli sosyal medya uygulaması Yaay için PreMiD eklentisi.",
-    "en": "Yaay, new Turkish social media with many features!"
+    "ga_IE": "Yaay, new Turkish social media with many features!",
+    "nl": "Yaay, nieuwe Turkse sociale media met veel functies!"
   },
   "service": "Yaay",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/KbcxoIV.png",
   "thumbnail": "https://i.imgur.com/mgHnMIf.png",
   "color": "#0076f6",

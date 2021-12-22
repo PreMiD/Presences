@@ -15,24 +15,23 @@ presence.on("UpdateData", async () => {
     ),
     search: HTMLInputElement = document.querySelector(
       "#searchbox > div > form > input"
-    );
+    ),
+    presenceData: PresenceData = {
+      largeImageKey: "hn-logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
+    };
 
-  const presenceData: PresenceData = {
-    largeImageKey: "hn-logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
-
-  if (page.includes("/tagged") && tagged && tagged.textContent != "") {
+  if (page.includes("/tagged") && tagged && tagged.textContent !== "") {
     presenceData.details = "Viewing Tag:";
     presenceData.state = `${tagged.textContent}`;
-  } else if (posttitle && posttitle.textContent != "") {
+  } else if (posttitle && posttitle.textContent !== "") {
     presenceData.details = "Reads a Post:";
     presenceData.state = posttitle.textContent;
   } else if (page.includes("/search")) {
     presenceData.details = "Searching:";
     presenceData.state = search.value;
     presenceData.smallImageKey = "hn-logo";
-  } else if (user && user.textContent != "") {
+  } else if (user && user.textContent !== "") {
     presenceData.details = "Viewing User Profile:";
     presenceData.state = user.textContent;
   } else {
@@ -40,10 +39,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Homepage";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

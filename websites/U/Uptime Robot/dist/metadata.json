@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Jonax",
     "id": "394799641192824834"
@@ -11,10 +12,11 @@
   ],
   "service": "Uptime Robot",
   "description": {
-    "en": "Uptime Robot is all about helping you to keep your websites up."
+    "en": "Uptime Robot is all about helping you to keep your websites up.",
+    "nl": "Uptime Robot helpt u uw websites up-to-date te houden."
   },
   "url": "uptimerobot.com",
-  "version": "1.4.4",
+  "version": "1.4.7",
   "logo": "https://i.imgur.com/D2RsWKt.jpg",
   "thumbnail": "https://i.imgur.com/9uhpjDJ.png",
   "color": "#7FFF00",

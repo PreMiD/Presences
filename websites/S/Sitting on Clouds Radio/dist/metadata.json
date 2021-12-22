@@ -1,17 +1,19 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "sks316",
     "id": "226098403304538122"
   },
   "service": "Sitting on Clouds Radio",
   "description": {
-    "en": "Video game music radio from the Sitting on Clouds Soundtrack Collection"
+    "en": "Video game music radio from the Sitting on Clouds Soundtrack Collection",
+    "nl": "Video game muziek radio van de Sitting on Clouds Soundtrack Collectie"
   },
   "url": [
     "squid-radio.net",
     "www.squid-radio.net"
   ],
-  "version": "1.1.5",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/pAEVAX8.png",
   "thumbnail": "https://i.imgur.com/a73vtbs.png",
   "color": "#67bdff",

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "め Kerem",
     "id": "665482610859966464"
@@ -12,11 +13,12 @@
   "service": "RunoPW",
   "description": {
     "en": "Make Friends & Chat With Millions In A Virtual World",
-    "tr": "Müthiş İnsanlarla Dolu İlginç Bir Yer"
+    "tr": "Müthiş İnsanlarla Dolu İlginç Bir Yer",
+    "nl": "Vrienden maken en chatten met miljoenen in een virtuele wereld"
   },
   "url": "runo.pw",
-  "version": "2.1.4",
-  "logo": "https://i.imgur.com/utrvCGI.png",
+  "version": "2.1.8",
+  "logo": "https://i.imgur.com/0ZL1dXI.png",
   "thumbnail": "https://i.imgur.com/6CXFU3R.png",
   "color": "#ffff00",
   "tags": [

@@ -1,16 +1,16 @@
-var presence = new Presence({
-  clientId: "636654506607771680"
-});
+const presence = new Presence({
+    clientId: "636654506607771680"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "rlinsider"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the home page";
   } else if (document.location.pathname.includes("/search")) {
@@ -32,10 +32,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the price changes";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -6,16 +7,17 @@
   "service": "sahibinden.com",
   "description": {
     "en": "sahibinden.com is a website that you can buy any kind of used/not used props, cars, electronic stuff and much more.",
-    "tr": "sahibinden.com, her türlü ürünün sıfır veya ikinci elini bulup satın alabileceğiniz internet sitesidir."
+    "tr": "sahibinden.com, her türlü ürünün sıfır veya ikinci elini bulup satın alabileceğiniz internet sitesidir.",
+    "nl": "sahibinden.com is een website waar u alle soorten gebruikte/niet gebruikte rekwisieten, auto's, elektronische spullen en nog veel meer kunt kopen."
   },
   "url": [
     "www.sahibinden.com",
     "secure.sahibinden.com",
     "banaozel.sahibinden.com"
   ],
-  "version": "1.1.4",
-  "logo": "https://premid.is-inside.me/HaZkV37U.png",
-  "thumbnail": "https://premid.is-inside.me/tMlRFq7w.png",
+  "version": "1.1.7",
+  "logo": "https://i.imgur.com/lutK4xu.png",
+  "thumbnail": "https://i.imgur.com/slIYKIe.png",
   "color": "#ffe800",
   "tags": [
     "sahibinden",

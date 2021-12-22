@@ -10,33 +10,29 @@ presence.on("UpdateData", async () => {
     largeImageKey: "instantgaming"
   };
   try {
-    const product_title = document.querySelector(
-      "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
+    const productTitle = document.querySelector(
+        "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
+      ).textContent,
+      productPrice = document.querySelector("div.price").textContent;
+    let productPlatform = document.querySelector(
+      "div.subinfos > a.platform"
     ).textContent;
-    const product_price = document.querySelector("div.price").textContent;
-    var product_platform = document.querySelector("div.subinfos > a.platform")
-      .textContent;
-    if (product_platform.startsWith("Other")) {
-      product_platform = "N/A";
-    }
+    if (productPlatform.startsWith("Other")) productPlatform = "N/A";
+
     presenceData.details = "Viewing a product:";
-    presenceData.state = `[${product_platform}] ${product_title} (${product_price})`;
+    presenceData.state = `[${productPlatform}] ${productTitle} (${productPrice})`;
   } catch {
     if (window.location.pathname.includes("/user/")) {
-      const profile_name = document.querySelector(
+      const profileName = document.querySelector(
         "div.ig-profile-info-nick > span"
       ).textContent;
       presenceData.details = "Viewing a profile:";
-      presenceData.state = profile_name;
-    } else {
-      presenceData.details = (await strings).browsing;
-    }
+      presenceData.state = profileName;
+    } else presenceData.details = (await strings).browsing;
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

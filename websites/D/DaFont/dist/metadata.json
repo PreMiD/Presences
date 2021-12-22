@@ -1,15 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Jake.",
     "id": "480407581085532180"
   },
   "service": "DaFont",
   "description": {
-    "en": "Archive of freely downloadable fonts. Browse by alphabetical listing, by style, by author or by popularity."
+    "en": "Archive of freely downloadable fonts. Browse by alphabetical listing, by style, by author or by popularity.",
+    "nl": "Archief van gratis downloadbare lettertypen. Blader door alfabetische lijst, stijl, auteur of populariteit."
   },
   "url": "www.dafont.com",
-  "version": "1.3.4",
-  "logo": "https://i.imgur.com/rc9ODvW.png",
+  "version": "1.3.8",
+  "logo": "https://i.imgur.com/PScrApw.png",
   "thumbnail": "https://i.imgur.com/OTjFjMj.jpg",
   "color": "#eb4034",
   "tags": [

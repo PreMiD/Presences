@@ -1,29 +1,19 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "641969062083035146"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
+let user: string,
+  title: string,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  startTimestamp: number,
+  endTimestamp: number;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -31,36 +21,32 @@ presence.on("UpdateData", async () => {
   };
 
   if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/index"
+    document.location.pathname === "/" ||
+    document.location.pathname === "/index"
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "צופה בדף הבית";
-  } else if (document.location.pathname == "/series") {
+  } else if (document.location.pathname === "/series") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "צופה ברשימת הסדרות";
   } else if (document.location.pathname.includes("/watch/")) {
-    var currentTime: any,
-      duration: any,
-      paused: any,
-      timestamps: any,
-      video: HTMLVideoElement;
-    video = document.querySelector("#playerDiv > div > video");
-    if (video == null) {
-      video = document.querySelector("#videojs_html5_api");
-    }
-    title = document.querySelector("#watchEpisode > div.poster > div > h1")
-      .textContent;
+    let video = document.querySelector(
+      "#playerDiv > div > video"
+    ) as HTMLVideoElement;
+    if (video === null) video = document.querySelector("#videojs_html5_api");
+
+    title = document.querySelector(
+      "#watchEpisode > div.poster > div > h1"
+    ).textContent;
     user = document.querySelector("#player > div.head > p").textContent;
-    if (user.includes(" - ")) {
-      user = user.split(" - ")[1];
-    }
+    if (user.includes(" - ")) [, user] = user.split(" - ");
 
     if (video !== null) {
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+      ({ currentTime, duration, paused } = video);
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      );
     }
 
     if (!isNaN(duration)) {
@@ -68,8 +54,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
 
       presenceData.details = title;
       presenceData.state = user;
@@ -81,14 +67,12 @@ presence.on("UpdateData", async () => {
     } else if (isNaN(duration)) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = ":צופה ב";
-      presenceData.state = title + " - " + user;
+      presenceData.state = `${title} - ${user}`;
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

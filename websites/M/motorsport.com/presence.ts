@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "728904519055966228"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "728904519055966228"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -13,29 +12,28 @@ presence.on("UpdateData", () => {
   };
 
   function checkSubPage(): void {
-    if (document.location.pathname.endsWith("/news/")) {
+    if (document.location.pathname.endsWith("/news/"))
       presenceData.details = "Reading the news";
-    } else if (document.location.pathname.includes("/photos/")) {
+    else if (document.location.pathname.includes("/photos/")) {
       presenceData.details = "Looking at photos";
       presenceData.smallImageKey = "photo";
       presenceData.smallImageText = "Photos";
-    } else if (document.location.pathname.includes("/videos")) {
+    } else if (document.location.pathname.includes("/videos"))
       presenceData.details = "Searching for videos";
-    } else if (document.location.pathname.includes("/video/")) {
+    else if (document.location.pathname.includes("/video/")) {
       presenceData.details = "Watching a video";
       presenceData.smallImageKey = "play-icon";
       presenceData.smallImageText = "Watching";
-    } else if (document.location.pathname.includes("/schedule")) {
+    } else if (document.location.pathname.includes("/schedule"))
       presenceData.details = "Looking at schedules";
-    } else if (document.location.pathname.includes("/results")) {
+    else if (document.location.pathname.includes("/results"))
       presenceData.details = "Looking at results";
-    } else if (document.location.pathname.includes("/standings/")) {
+    else if (document.location.pathname.includes("/standings/"))
       presenceData.details = "Looking at the Standings";
-    } else if (document.location.pathname.includes("/drivers/")) {
+    else if (document.location.pathname.includes("/drivers/"))
       presenceData.details = "Looking at Drivers";
-    } else if (document.location.pathname.includes("/teams/")) {
+    else if (document.location.pathname.includes("/teams/"))
       presenceData.details = "Looking at teams";
-    }
   }
 
   function articleCheck(): void {
@@ -51,7 +49,7 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (document.location.hostname == "www.motorsport.com") {
+  if (document.location.hostname === "www.motorsport.com") {
     presenceData.details = "Viewing a Page";
     presenceData.state = "Home Page";
 
@@ -59,23 +57,20 @@ presence.on("UpdateData", () => {
     if (document.location.pathname.startsWith("/category/")) {
       presenceData.details = "Viewing a Category";
       checkSubPage();
-      if (document.location.pathname.startsWith("/category/motogp/")) {
+      if (document.location.pathname.startsWith("/category/motogp/"))
         presenceData.state = "Moto GP Series";
-      } else if (document.location.pathname.startsWith("/category/nascar/")) {
+      else if (document.location.pathname.startsWith("/category/nascar/"))
         presenceData.state = "NASCAR Series";
-      } else if (
-        document.location.pathname.startsWith("/category/openwheel/")
-      ) {
+      else if (document.location.pathname.startsWith("/category/openwheel/"))
         presenceData.state = "Openwheel Series";
-      } else if (document.location.pathname.startsWith("/category/sportcar/")) {
+      else if (document.location.pathname.startsWith("/category/sportcar/"))
         presenceData.state = "Sportscar Series";
-      } else if (document.location.pathname.startsWith("/category/touring/")) {
+      else if (document.location.pathname.startsWith("/category/touring/"))
         presenceData.state = "Touring Series";
-      } else if (document.location.pathname.startsWith("/category/rally/")) {
+      else if (document.location.pathname.startsWith("/category/rally/"))
         presenceData.state = "Rally Series";
-      } else if (document.location.pathname.startsWith("/category/more/")) {
+      else if (document.location.pathname.startsWith("/category/more/"))
         presenceData.state = "More Categories";
-      }
     }
 
     // /all/xyz/
@@ -301,10 +296,8 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

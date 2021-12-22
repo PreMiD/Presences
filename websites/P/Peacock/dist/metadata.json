@@ -1,18 +1,19 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Kedi",
     "id": "238668511222693888"
   },
   "service": "Peacock",
   "description": {
-    "en": "Watch TV shows and movies online with Peacock. Stream iconic shows and movies, exclusive Peacock originals, live news and sports and more."
+    "en": "Watch TV shows and movies online with Peacock. Stream iconic shows and movies, exclusive Peacock originals, live news and sports and more.",
+    "nl": "Bekijk tv-programma's en films online met Peacock. Stream iconische shows en films, exclusieve Peacock-originelen, live nieuws en sport en meer."
   },
   "url": [
     "www.peacocktv.com",
     "peacocktv.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/6t52fkP.png",
   "thumbnail": "https://i.imgur.com/63bMEv5.png",
   "color": "#FCCC12",

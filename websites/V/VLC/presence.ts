@@ -17,7 +17,7 @@ const presence = new Presence({
     title: null,
     album: null,
     artist: null,
-    track_number: null,
+    trackNumber: null,
     showName: null,
     seasonNumber: null,
     episodeNumber: null
@@ -28,21 +28,7 @@ let isShow = false,
   elapsed: number,
   i: number;
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function setLoop(f: Function, ms: number): number {
+function setLoop(f: () => void, ms: number): number {
   f();
   return setInterval(f, ms);
 }
@@ -58,9 +44,8 @@ function getTag(
   collection: HTMLCollectionOf<Element>,
   tagName: string
 ): Element {
-  for (const tag of collection) {
+  for (const tag of collection)
     if (tag.getAttribute("name") === tagName) return tag;
-  }
 }
 
 presence.on("UpdateData", async () => {
@@ -69,28 +54,27 @@ presence.on("UpdateData", async () => {
     document.querySelector(".footer").textContent.includes("VLC")
   ) {
     const data: PresenceData = {
-        largeImageKey: "vlc"
-      },
-      timestamps = getTimestamps(Number(media.time), Number(media.length));
+      largeImageKey: "vlc"
+    };
 
     if (media.state !== prev) {
       prev = media.state;
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-    if (media.state == "playing" || media.state == "paused") {
+    if (media.state === "playing" || media.state === "paused") {
       if (isSong) {
-        if (media.title && media.album && media.title == media.album) {
+        if (media.title && media.album && media.title === media.album)
           media.album = null;
-        }
+
         data.details =
           (media.title
             ? media.title
-            : media.track_number
-            ? "Track N°" + media.track_number
-            : "A song") + (media.album ? " on " + media.album : "");
+            : media.trackNumber
+            ? `Track N°${media.trackNumber}`
+            : "A song") + (media.album ? ` on ${media.album}` : "");
         media.artist
-          ? (data.state = "by " + media.artist)
+          ? (data.state = `by ${media.artist}`)
           : media.filename
           ? (data.state = media.filename)
           : delete data.state;
@@ -102,7 +86,7 @@ presence.on("UpdateData", async () => {
           : media.filename
           ? (data.details = media.filename)
           : (data.details = "some TV");
-        data.state = "S" + media.seasonNumber + "E" + media.episodeNumber;
+        data.state = `S${media.seasonNumber}E${media.episodeNumber}`;
       } else {
         media.showName
           ? (data.details = media.showName)
@@ -112,9 +96,9 @@ presence.on("UpdateData", async () => {
           ? (data.details = media.filename)
           : (data.details = "something");
         media.seasonNumber
-          ? (data.state = "season " + media.seasonNumber)
+          ? (data.state = `season ${media.seasonNumber}`)
           : media.episodeNumber
-          ? (data.state = "episode " + media.episodeNumber)
+          ? (data.state = `episode ${media.episodeNumber}`)
           : delete data.state;
       }
 
@@ -145,17 +129,18 @@ presence.on("UpdateData", async () => {
           ? (await strings).play
           : (await strings).pause;
 
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
+        Number(media.time),
+        Number(media.length)
+      );
 
-      if (media.state == "playing") {
-        presence.setActivity(data, true);
-      } else {
+      if (media.state === "playing") presence.setActivity(data, true);
+      else {
         delete data.startTimestamp;
         delete data.endTimestamp;
         presence.setActivity(data, false);
       }
-    } else if (media.state == "stopped") {
+    } else if (media.state === "stopped") {
       data.details = "standby";
       delete data.state;
       delete data.smallImageKey;
@@ -183,24 +168,19 @@ const getStatus = setLoop(function () {
 
           req.responseXML.getElementsByTagName("state")[0].textContent.length >
           0
-            ? (media.state = req.responseXML.getElementsByTagName(
-                "state"
-              )[0].textContent)
+            ? (media.state =
+                req.responseXML.getElementsByTagName("state")[0].textContent)
             : (media.state = "stopped");
 
           if (media.state !== "stopped") {
-            media.time = req.responseXML.getElementsByTagName(
-              "time"
-            )[0].textContent;
-            media.length = req.responseXML.getElementsByTagName(
-              "length"
-            )[0].textContent;
-            media.loop = req.responseXML.getElementsByTagName(
-              "loop"
-            )[0].textContent;
-            media.repeat = req.responseXML.getElementsByTagName(
-              "repeat"
-            )[0].textContent;
+            media.time =
+              req.responseXML.getElementsByTagName("time")[0].textContent;
+            media.length =
+              req.responseXML.getElementsByTagName("length")[0].textContent;
+            media.loop =
+              req.responseXML.getElementsByTagName("loop")[0].textContent;
+            media.repeat =
+              req.responseXML.getElementsByTagName("repeat")[0].textContent;
           } else {
             media.time = null;
             media.length = null;
@@ -237,11 +217,11 @@ const getStatus = setLoop(function () {
               media.album = null;
             }
 
-            getTag(collection, "track_number")
-              ? (media.track_number = decodeReq(
-                  getTag(collection, "track_number")
+            getTag(collection, "trackNumber")
+              ? (media.trackNumber = decodeReq(
+                  getTag(collection, "trackNumber")
                 ))
-              : (media.track_number = null);
+              : (media.trackNumber = null);
 
             if (
               getTag(collection, "seasonNumber") &&
@@ -297,11 +277,11 @@ const getStatus = setLoop(function () {
               media.album = null;
             }
 
-            req.responseXML.getElementsByName("track_number")[0]
-              ? (media.track_number = decodeReq(
-                  req.responseXML.getElementsByName("track_number")[0]
+            req.responseXML.getElementsByName("trackNumber")[0]
+              ? (media.trackNumber = decodeReq(
+                  req.responseXML.getElementsByName("trackNumber")[0]
                 ))
-              : (media.track_number = null);
+              : (media.trackNumber = null);
 
             if (
               req.responseXML.getElementsByName("seasonNumber")[0] &&
@@ -328,11 +308,7 @@ const getStatus = setLoop(function () {
             clearInterval(getStatus);
             media.state = "stopped";
             alert(
-              "Something went wrong with the request, please contact ririxi#2721 at https://discord.premid.app with the following infos (RES: " +
-                req.status +
-                " / S: " +
-                req.readyState +
-                ")"
+              `Something went wrong with the request, please contact other people at https://discord.premid.app with the following infos (RES: ${req.status} / S: ${req.readyState})`
             );
           }
         }
@@ -345,12 +321,9 @@ const getStatus = setLoop(function () {
 
     req.open(
       "GET",
-      document.location.protocol +
-        "//" +
-        document.location.hostname +
-        ":" +
-        (document.location.port ? document.location.port : "") +
-        "/requests/status.xml",
+      `${document.location.protocol}//${document.location.hostname}:${
+        document.location.port ? document.location.port : ""
+      }/requests/status.xml`,
       true
     );
     req.send();
@@ -367,7 +340,7 @@ interface MediaObj {
   title?: string;
   album?: string;
   artist?: string;
-  track_number?: string;
+  trackNumber?: string;
   showName?: string;
   seasonNumber?: string;
   episodeNumber?: string;

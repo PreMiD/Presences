@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,7 +10,7 @@
     "nl": "TrueTrophies is de plaats voor Playstation nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
   },
   "url": "www.truetrophies.com",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/bCSGyWh.png",
   "thumbnail": "https://i.imgur.com/WQSwVVv.png",
   "color": "#2e94d8",

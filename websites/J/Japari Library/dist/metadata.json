@@ -1,15 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Flashlight",
     "id": "158418656861093888"
   },
   "url": "japari-library.com",
   "description": {
-    "en": "Japari Library is a wiki based around the Kemono Friends multimedia franchise."
+    "en": "Japari Library is a wiki based around the Kemono Friends multimedia franchise.",
+    "nl": "Japari Library is een wiki die is gebaseerd op de multimediafranchise Kemono Friends."
   },
   "service": "Japari Library",
-  "version": "1.1.6",
-  "logo": "https://i.imgur.com/Y3BtrFi.png",
+  "version": "1.1.10",
+  "logo": "https://i.imgur.com/9tsqblt.png",
   "thumbnail": "https://i.imgur.com/nGO9Amx.png",
   "color": "#4CC5FF",
   "category": "anime",

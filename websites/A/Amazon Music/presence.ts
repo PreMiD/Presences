@@ -1,63 +1,183 @@
-var presence = new Presence({
-    clientId: "619041735795802112"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-function getTime(list: string[]): number {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
+const presence = new Presence({
+  clientId: "808756700022702120"
+});
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      viewPlaylist: "general.buttonViewPlaylist",
+      viewArtist: "general.buttonViewArtist"
+    },
+    await presence.getSetting("lang").catch(() => "en")
+  );
 }
 
-function getTimestamps(audioDuration: string): Array<number> {
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let fullscreen: boolean,
+  player = false,
+  paused,
+  currentTime,
+  timeLeft,
+  timestamps,
+  playlistLink,
+  artistLink,
+  strings = getStrings(),
+  oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  var player = document.querySelector(".playbackActive");
+  const presenceData: PresenceData = {
+      largeImageKey: "logo"
+    },
+    buttons = await presence.getSetting("buttons"),
+    newLang = await presence.getSetting("lang").catch(() => "en"),
+    showPlaylist = await presence.getSetting("showPlaylist");
+
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+  player = document.querySelector(
+    "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
+  )
+    ? true
+    : false;
+
   if (player) {
-    var title = document.querySelector(".trackTitle span").textContent;
-    var artist = document.querySelector(".trackArtist span").textContent;
-    var durationTime = document.querySelector(
-      ".listViewDurationContextButton .listViewDuration"
-    ).textContent;
-    var timestamps = getTimestamps(durationTime.replace("-", ""));
-    const paused = document.querySelector(
-      ".playbackControls span.playerIconPause"
-    )
-      ? false
-      : true;
+    const exitFSButton = document.querySelector(
+      "div._2kGtEHAlQ5t5sY3jvz-wwl > div._1Wgs9MKFGuL58IFgKSM811 > div._2HXusrWftEtKAYukKt5IuO > music-button"
+    );
+    exitFSButton ? (fullscreen = true) : (fullscreen = false);
+    if (fullscreen) {
+      const title = document
+          .querySelector(
+            "#transport > div._3l2xsX5-KkYUgDHJDu-L0r.box > music-horizontal-item"
+          )
+          .shadowRoot.querySelector("div > div.center > music-link")
+          .getAttribute("title"),
+        [artist] = document
+          .querySelector("a.music-primary-text")
+          .textContent.split(" - "),
+        pausedIcon = document
+          .querySelector(
+            "#transport > div._2EZickYBrNGgbqeaZ5l5hr.box > music-button:nth-child(3)"
+          )
+          .shadowRoot.querySelector("button > music-icon");
+      paused = pausedIcon.attributes[1].value === "pause" ? false : true;
+      currentTime = document.querySelector(
+        "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
+      ).textContent;
+      timeLeft = document
+        .querySelector("div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(2)")
+        .textContent.replace(" - ", "");
 
-    var data: PresenceData = {
-      details: title,
-      state: artist,
-      largeImageKey: "amazonmusic-logo",
-      smallImageKey: paused ? "pause" : "play",
-      smallImageText: paused ? (await strings).pause : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+      timestamps = presence.getTimestamps(
+        presence.timestampFromFormat(currentTime),
+        presence.timestampFromFormat(timeLeft) +
+          presence.timestampFromFormat(currentTime)
+      );
 
-    if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
+      presenceData.details = title;
+      presenceData.state = artist;
+      presenceData.smallImageKey = paused ? "pause" : "play";
+      presenceData.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).play;
+      presenceData.largeImageKey = "logo";
+      presenceData.endTimestamp = timestamps.pop();
 
-    if (title !== null && artist !== null) {
-      presence.setActivity(data, !paused);
+      if (paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
+
+      if (title && artist) presence.setActivity(presenceData);
+    } else {
+      playlistLink = document
+        .querySelector(
+          "music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
+        )
+        ?.shadowRoot.querySelector("div > div > span")
+        .children[2]?.querySelector("a")?.href;
+
+      artistLink = document
+        .querySelector(
+          "music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
+        )
+        ?.shadowRoot.querySelector("div > div > span")
+        .children[0]?.querySelector("a")?.href;
+      const title = document
+          .querySelector(
+            "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
+          )
+          .shadowRoot.querySelector(
+            "div.item.parent-undefined > div.center > music-link.hydrated > a"
+          ).textContent,
+        [artist] = document
+          .querySelector(
+            "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
+          )
+          .shadowRoot.querySelector(
+            "div.item.parent-undefined > div.center > span"
+          )
+          .textContent.split("-"),
+        pausedIcon = document
+          .querySelector(
+            "#transport > div._2EZickYBrNGgbqeaZ5l5hr.box > music-button:nth-child(3)"
+          )
+          .shadowRoot.querySelector("button > music-icon");
+      paused = pausedIcon.attributes[1].value === "pause" ? false : true;
+      [currentTime] = document
+        .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
+        .textContent.split(" - ");
+      [, timeLeft] = document
+        .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
+        .textContent.split(" - ");
+      timestamps = presence.getTimestamps(
+        presence.timestampFromFormat(currentTime),
+        presence.timestampFromFormat(timeLeft) +
+          presence.timestampFromFormat(currentTime)
+      );
+
+      presenceData.details = title;
+      presenceData.state = artist;
+      presenceData.largeImageKey = "logo";
+      presenceData.smallImageKey = paused ? "pause" : "play";
+      presenceData.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).play;
+      presenceData.endTimestamp = timestamps.pop();
+
+      if (showPlaylist && buttons && artistLink && playlistLink) {
+        presenceData.buttons = [
+          {
+            label: (await strings).viewArtist,
+            url: artistLink
+          },
+          {
+            label: (await strings).viewPlaylist,
+            url: playlistLink
+          }
+        ];
+      } else if (artistLink) {
+        presenceData.buttons = [
+          {
+            label: (await strings).viewArtist,
+            url: artistLink
+          }
+        ];
+      }
+
+      if (paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
+
+      if (title && artist) presence.setActivity(presenceData);
     }
   } else {
-    presence.clearActivity();
+    presenceData.details = "Browsing...";
+    presenceData.largeImageKey = "logo";
+    presence.setActivity(presenceData);
   }
 });

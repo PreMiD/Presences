@@ -1,11 +1,13 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "fror",
     "id": "515668127829458945"
   },
   "service": "Uncyclopedia",
   "description": {
-    "en": "Uncyclopedia is a satirical website that parodies Wikipedia. Founded in 2005, the project currently has versions in more than 75 languages."
+    "en": "Uncyclopedia is a satirical website that parodies Wikipedia. Founded in 2005, the project currently has versions in more than 75 languages.",
+    "nl": "Uncyclopedia is een satirische website die Wikipedia parodieert. Het project is opgericht in 2005 en heeft momenteel versies in meer dan 75 talen."
   },
   "url": [
     "en.uncyclopedia.co",
@@ -92,9 +94,9 @@
     "uncyclopedia.ca",
     "desciclopedia.ws"
   ],
-  "version": "1.4.4",
-  "logo": "https://menma.is-inside.me/Z65P02WL.png",
-  "thumbnail": "https://menma.is-inside.me/KpYlBQsB.png",
+  "version": "1.4.8",
+  "logo": "https://i.imgur.com/e8b5Yvs.png",
+  "thumbnail": "https://i.imgur.com/jpqBDOR.png",
   "color": "#A1825C",
   "tags": [
     "encyclopedia",

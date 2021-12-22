@@ -1,18 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "service": "DMOJ",
   "author": {
-    "name": "yolo!",
+    "name": "yolo",
     "id": "277507281652940800"
   },
+  "category": "other",
+  "logo": "https://i.imgur.com/ahPqTyU.png",
+  "thumbnail": "https://i.imgur.com/5OmbMhc.png",
+  "version": "2.0.5",
+  "color": "#fcdb05",
+  "tags": [
+    "coding",
+    "programming",
+    "code"
+  ],
   "url": "dmoj.ca",
   "description": {
-    "en": "The DMOJ is a modern contest platform and archive of programming problems."
-  },
-  "service": "DMOJ",
-  "version": "1.0.1",
-  "logo": "https://i.imgur.com/wrX7Tpu.png",
-  "thumbnail": "https://i.imgur.com/5OmbMhc.png",
-  "color": "#FCDB05",
-  "tags": ["coding"],
-  "category": "other"
+    "en": "The DMOJ is a modern contest platform and archive of programming problems.",
+    "nl": "De DMOJ is een modern wedstrijdplatform en een archief van programmeringsproblemen."
+  }
 }

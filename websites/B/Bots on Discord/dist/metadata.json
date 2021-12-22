@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Eren",
     "id": "478937019758673931"
@@ -6,11 +7,12 @@
   "service": "Bots on Discord",
   "description": {
     "en": "Bots on Discord is listing discord bots.",
-    "tr": "Bots on Discord, disscord botlarını listeler."
+    "tr": "Bots on Discord, disscord botlarını listeler.",
+    "nl": "Bots on Discord maakt een lijst van bots."
   },
   "url": "bots.ondiscord.xyz",
-  "version": "1.2.4",
-  "logo": "https://imgur.com/xHbTLj5.png",
+  "version": "1.2.8",
+  "logo": "https://i.imgur.com/5nbGMhE.png",
   "thumbnail": "https://i.imgur.com/TZOWrzr.png",
   "color": "#089BEF",
   "tags": [

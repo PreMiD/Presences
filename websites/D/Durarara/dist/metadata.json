@@ -1,15 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Dawkin Nguyen",
     "id": "414274321779916800"
   },
   "service": "Durarara",
   "description": {
-    "en": "Durarara!! fan community, DOLLARS Chatroom."
+    "en": "Durarara!! fan community, DOLLARS Chatroom.",
+    "nl": "Durarara!! fan gemeenschap, DOLLARS chatroom."
   },
   "url": "drrr.com",
-  "version": "1.0.2",
-  "logo": "https://i.imgur.com/BBE7mHc.jpg",
+  "version": "1.0.6",
+  "logo": "https://i.imgur.com/8E6QIMT.png",
   "thumbnail": "https://i.imgur.com/h4NdSYG.png",
   "color": "#696969",
   "tags": [

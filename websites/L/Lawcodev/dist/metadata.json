@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "mon",
     "id": "608817245417898004"
@@ -6,11 +7,12 @@
   "service": "Lawcodev",
   "description": {
     "es": "Lawcodev, red social para programadores, puedes compartir videos sobre programación, fotos y publicaciones.",
-    "en": "Lawcodev, social network for programmers, you can share videos about programming, photos and publications."
+    "en": "Lawcodev, social network for programmers, you can share videos about programming, photos and publications.",
+    "nl": "Lawcodev, sociaal netwerk voor programmeurs, u kunt video's over programmeren, foto's en publicaties delen."
   },
   "url": "www.lawcodev.com",
-  "version": "1.4.4",
-  "logo": "https://i.imgur.com/YehQEpz.png",
+  "version": "1.4.8",
+  "logo": "https://i.imgur.com/vADndhN.png",
   "thumbnail": "https://i.imgur.com/tT2mENc.png",
   "color": "#131313",
   "tags": [

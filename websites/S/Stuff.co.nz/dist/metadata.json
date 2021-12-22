@@ -1,15 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Cairo",
     "id": "208105877838888960"
   },
   "url": "www.stuff.co.nz",
   "description": {
-    "en": "News from New Zealand and the world: breaking news, videos, sport, rugby, politics, business, entertainment, lifestyle, travel, and property."
+    "en": "News from New Zealand and the world: breaking news, videos, sport, rugby, politics, business, entertainment, lifestyle, travel, and property.",
+    "nl": "Nieuws uit Nieuw-Zeeland en de wereld: het laatste nieuws, video's, sport, rugby, politiek, zaken, entertainment, lifestyle, reizen en onroerend goed."
   },
   "service": "Stuff.co.nz",
-  "version": "1.2.4",
-  "logo": "https://i.imgur.com/BvHIX05.png",
+  "version": "1.2.9",
+  "logo": "https://i.imgur.com/g1ncFAD.png",
   "thumbnail": "https://i.imgur.com/BvUwqSy.png",
   "color": "#000000",
   "tags": [

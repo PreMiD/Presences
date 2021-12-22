@@ -14,9 +14,9 @@ let path,
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
+  for (let index = list.length - 1; index >= 0; index--)
+    ret += (parseInt(list[index]) * 60) ** index;
+
   return ret;
 }
 
@@ -52,13 +52,13 @@ presence.on("UpdateData", async () => {
 
   if (
     path.includes("/articles/") &&
-    path.split("/")[2] != null &&
+    path.split("/")[2] !== null &&
     path.split("/")[2].length > 1
-  ) {
+  )
     data.state = document.querySelector("body h1").textContent;
-  } else if (
+  else if (
     path.includes("/game/") &&
-    path.split("/")[2] != null &&
+    path.split("/")[2] !== null &&
     path.split("/")[2].length > 1
   ) {
     data.state = document
@@ -70,22 +70,21 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
       prevState = data.state;
       cp = Date.now();
-      currTime = document.querySelector("#chat div.timeState.timer")
-        .textContent;
+      currTime = document.querySelector(
+        "#chat div.timeState.timer"
+      ).textContent;
     }
 
-    const timestamps = getTimestamps(cp, currTime);
+    const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
 
     data.details = "En jeu";
 
     data.smallImageKey = "live";
     data.smallImageText = (await strings).play;
     if (currTime && currTime.includes(":")) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
-    } else {
-      data.startTimestamp = cp;
-    }
+      data.startTimestamp = startTimestamp;
+      data.endTimestamp = endTimestamp;
+    } else data.startTimestamp = cp;
   } else {
     switch (path) {
       case "/settings":

@@ -3,340 +3,327 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async () => {
+presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "dmoj"
-  };
+      smallImageKey: "icon",
+      smallImageText: "DMOJ: Modern Online Judge"
+    },
+    url = document.location.pathname.split("/");
 
-  // HOME
-  if (document.location.pathname == "/") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing home page";
-    presenceData.smallImageKey = "home";
-    presenceData.smallImageText = "Home";
-  } else if (document.location.pathname.includes("/post/")) {
-    presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingStamp;
+
+  if (url.includes("post")) {
+    const postName = document.querySelector("#content > h2").textContent.trim(),
+      [, , postCode] = url,
+      postURL = `https://dmoj.ca/post/${postCode}`;
+
     presenceData.details = "Viewing post:";
-    presenceData.state = document.querySelector(
-      "body > div > main > h2"
-    ).textContent;
-    presenceData.smallImageKey = "home";
-    presenceData.smallImageText = "Home";
-  }
-
-  // PROBLEM
-  else if (document.location.pathname.includes("/problems")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = postName;
+    presenceData.largeImageKey = "post";
+    presenceData.buttons = [{ label: "View Post", url: postURL }];
+  } else if (url.includes("problems")) {
     presenceData.details = "Browsing problems";
-    presenceData.smallImageKey = "problem";
-    presenceData.smallImageText = "Problem";
-  } else if (
-    document.location.pathname.includes("/problem/") &&
-    document.location.pathname.includes("/submit")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Submitting to problem:";
-    presenceData.state = document.querySelector(
-      "body > div > main > h2 > a"
-    ).textContent;
-    presenceData.smallImageKey = "submit";
-    presenceData.smallImageText = "Submission";
-  } else if (
-    document.location.pathname.includes("/problem/") &&
-    document.location.pathname.includes("/resubmit")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Submitting to problem:";
-    presenceData.state = document.querySelector(
-      "body > div > main > h2 > a"
-    ).textContent;
-    presenceData.smallImageKey = "submit";
-    presenceData.smallImageText = "Submission";
-  } else if (
-    document.location.pathname.includes("/problem/") &&
-    document.location.pathname.includes("/editorial")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing editorial for problem:";
-    presenceData.state = document.querySelector(
-      "body > div > main > h2 > a"
-    ).textContent;
-    presenceData.smallImageKey = "problem";
-    presenceData.smallImageText = "Problem";
-  } else if (
-    document.location.pathname.includes("/problem/") &&
-    document.location.pathname.includes("/submissions")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing submissions to problem:";
-    presenceData.state = document.querySelectorAll(
-      "body > div > main > div > div > h2 > a"
-    )[-1].textContent;
-    presenceData.smallImageKey = "submit";
-    presenceData.smallImageText = "Submission";
-  } else if (
-    document.location.pathname.includes("/problem/") &&
-    document.location.pathname.includes("/rank/")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing best submissions to problem:";
-    presenceData.state = document.querySelector(
-      "body > div > main > div > div > h2 > a"
-    ).textContent;
-    presenceData.smallImageKey = "submit";
-    presenceData.smallImageText = "Submission";
-  } else if (
-    document.location.pathname.includes("/problem/") &&
-    document.location.pathname.includes("/tickets/new")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reporting issue for problem:";
-    presenceData.state = document.querySelector(
-      "body > div > main > h2 > a"
-    ).textContent;
-    presenceData.smallImageKey = "report";
-    presenceData.smallImageText = "Report";
-  } else if (document.location.pathname.includes("/problem/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing problem:";
-    if (
-      document.querySelector(".pi-value").textContent.split("\n", 2)[1] == "1 "
-    ) {
-      presenceData.state = `${
-        document.querySelector("body > div > main > div > h2").textContent
-      } (${
-        document.querySelector(".pi-value").textContent.split("\n", 2)[1]
-      }point)`;
-    } else {
-      presenceData.state = `${
-        document.querySelector("body > div > main > div > h2").textContent
-      } (${
-        document
-          .querySelector(".pi-value")
-          .textContent.split("\n", 2)[1]
-          .split(" ", 2)[0]
-      } points)`;
-    }
+    presenceData.largeImageKey = "problem_list";
+  } else if (url.includes("problem")) {
+    const [, , problemCode] = url,
+      problemURL = `https://dmoj.ca/problem/${problemCode}`;
 
-    presenceData.smallImageKey = "problem";
-    presenceData.smallImageText = "Problem";
-  } else if (document.location.pathname.includes("/submissions/user")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Browsing submissions by user:";
-    if (
-      document.querySelector("body > div > main > div > div > h2")
-        .textContent != "All my submissions"
-    ) {
-      presenceData.state = document.querySelector(
-        "body > div > main > div > div > h2 > a"
-      ).textContent;
+    presenceData.buttons = [{ label: "View Problem", url: problemURL }];
+
+    if (url.includes("submit")) {
+      const problemName = document
+        .querySelector("#content > h2 > a")
+        .textContent.trim();
+
+      presenceData.details = "Submitting to problem:";
+      presenceData.state = problemName;
+      presenceData.largeImageKey = "submit";
+    } else if (url.includes("submissions")) {
+      const problemName = document.querySelectorAll(".tabs > h2 > a")[
+          // eslint messed up the next line
+          document.querySelectorAll(".tabs > h2 > a").length - 1
+        ].textContent.trim(),
+        problemSubmissionsURL = `${problemURL}/submissions/`;
+
+      presenceData.details = "Viewing submissions to problem:";
+      presenceData.state = problemName;
+      presenceData.largeImageKey = "submission_list";
+      presenceData.buttons.push({
+        label: "View Submissions",
+        url: problemSubmissionsURL
+      });
+    } else if (url.includes("rank")) {
+      const problemName = document
+          .querySelector(".tabs > h2 > a")
+          .textContent.trim(),
+        problemBestSubmissionsURL = `${problemURL}/rank/`;
+
+      presenceData.details = "Viewing best submissions to problem:";
+      presenceData.state = problemName;
+      presenceData.largeImageKey = "submission_list";
+      presenceData.buttons.push({
+        label: "View Best Submissions",
+        url: problemBestSubmissionsURL
+      });
+    } else if (url.includes("editorial")) {
+      const problemName = document
+          .querySelector("#content > h2 > a")
+          .textContent.trim(),
+        problemEditorialURL = `${problemURL}/editorial/`;
+
+      presenceData.details = "Viewing editorial for problem:";
+      presenceData.state = problemName;
+      presenceData.largeImageKey = "editorial";
+      presenceData.buttons.push({
+        label: "View Editorial",
+        url: problemEditorialURL
+      });
+    } else if (url.includes("tickets") && url.includes("new")) {
+      const problemName = document
+        .querySelector("#content > h2 > a")
+        .textContent.trim();
+
+      presenceData.details = "Creating a ticket for problem:";
+      presenceData.state = problemName;
+      presenceData.largeImageKey = "ticket";
     } else {
-      presenceData.state = document.querySelector(
-        "body > nav > div > span > ul > li > a > span > span > b"
-      ).textContent;
+      const problemName = document
+          .querySelector(".problem-title > h2")
+          .textContent.trim(),
+        problemPoints = document.querySelector(".pi-value").textContent.trim();
+
+      presenceData.details = "Viewing problem:";
+      presenceData.largeImageKey = "problem";
+
+      if (problemPoints === "1")
+        presenceData.state = `${problemName} (${problemPoints} point)`;
+      else presenceData.state = `${problemName} (${problemPoints} points)`;
     }
-    presenceData.smallImageKey = "user";
-    presenceData.smallImageText = "User";
-  } else if (document.location.pathname.includes("/submissions")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Browsing submissions";
-    presenceData.smallImageKey = "submit";
-    presenceData.smallImageText = "Submission";
-  } else if (document.location.pathname.includes("/submission/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = `Viewing submission of problem: ${
-      document.querySelector("body > div > main > h2 > a").textContent
-    }`;
-    presenceData.state = `By user: ${
-      document.querySelectorAll("body > div > main > h2 > a")[1].textContent
-    }`;
-    presenceData.smallImageKey = "user";
-    presenceData.smallImageText = "User";
-  } else if (document.location.pathname.includes("/src/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = `Viewing submission source of problem: ${
-      document.querySelector("body > div > main > h2 > a").textContent
-    }`;
-    presenceData.state = `By user: ${
-      document.querySelectorAll("body > div > main > h2 > a")[1].textContent
-    }`;
-    presenceData.smallImageKey = "user";
-    presenceData.smallImageText = "User";
-  } else if (
-    document.location.pathname.includes("/organization/") &&
-    document.location.pathname.includes("/users")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing members in organization:";
-    presenceData.state = document
-      .querySelector("body > div > main > h2")
-      .textContent.split(" Members")[0];
-    presenceData.smallImageKey = "organization";
-    presenceData.smallImageText = "Organization";
-  } else if (document.location.pathname.includes("/users")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Browsing leaderboard";
-    presenceData.smallImageKey = "user";
-    presenceData.smallImageText = "User";
-  } else if (
-    document.location.pathname.includes("/user/") &&
-    document.location.pathname.includes("/solved")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Browsing problems solved by user:";
-    if (document.querySelector(".tabs > h2").textContent != "My account") {
-      presenceData.state = `${
-        document.querySelector(".tabs > h2").textContent.split(" ")[1]
-      } (Rank #${
-        document
-          .querySelectorAll(".user-sidebar > div")[2]
-          .textContent.split("#", 2)[1]
-      })`;
+  } else if (url.includes("submissions")) {
+    if (url.includes("user")) {
+      const submissionHeader = document
+        .querySelector(".tabs > h2")
+        .textContent.trim();
+
+      presenceData.details = "Viewing submissions by user:";
+
+      if (submissionHeader === "All my submissions") {
+        const user = document
+            .querySelector("#user-links > ul > li > a > span > span > b")
+            .textContent.trim(),
+          userSubmissionsURL = `https://dmoj.ca/submissions/user/${user}`,
+          userURL = `https://dmoj.ca/user/${user}`;
+
+        presenceData.state = user;
+        presenceData.largeImageKey = "submission_list";
+        presenceData.buttons = [
+          { label: "View Submissions", url: userSubmissionsURL },
+          { label: "View User", url: userURL }
+        ];
+      } else {
+        const user = document
+            .querySelector(".tabs > h2 > a")
+            .textContent.trim(),
+          userSubmissionsURL = `https://dmoj.ca/submissions/user/${user}`,
+          userURL = `https://dmoj.ca/user/${user}`;
+
+        presenceData.state = user;
+        presenceData.largeImageKey = "submission_list";
+        presenceData.buttons = [
+          { label: "View Submissions", url: userSubmissionsURL },
+          { label: "View User", url: userURL }
+        ];
+      }
     } else {
-      presenceData.state = `${
-        document.querySelector(
-          "body > nav > div > span > ul > li > a > span > span > b"
-        ).textContent
-      } (Rank #${
-        document
-          .querySelectorAll(".user-sidebar > div")[2]
-          .textContent.split("#", 2)[1]
-      })`;
+      presenceData.details = "Browsing submissions";
+      presenceData.largeImageKey = "submission_list";
     }
-    presenceData.smallImageKey = "user";
-    presenceData.smallImageText = "User";
-  } else if (document.location.pathname.includes("/user")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing user:";
-    if (document.querySelector(".tabs > h2").textContent != "My account") {
-      presenceData.state = `${
-        document.querySelector(".tabs > h2").textContent.split(" ")[1]
-      } (Rank #${
-        document
-          .querySelectorAll(".user-sidebar > div")[2]
-          .textContent.split("#", 2)[1]
-      })`;
-    } else {
-      presenceData.state = `${
-        document.querySelector(
-          "body > nav > div > span > ul > li > a > span > span > b"
-        ).textContent
-      } (Rank #${
-        document
-          .querySelectorAll(".user-sidebar > div")[2]
-          .textContent.split("#", 2)[1]
-      })`;
-    }
-    presenceData.smallImageKey = "user";
-    presenceData.smallImageText = "User";
-  } else if (document.location.pathname.includes("/edit/profile")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Editing profile";
-    presenceData.smallImageKey = "user";
-    presenceData.smallImageText = "User";
-  } else if (document.location.pathname.includes("/organizations")) {
-    presenceData.startTimestamp = browsingStamp;
+  } else if (url.includes("submission")) {
+    const problemName = document
+        .querySelector("#content > h2 > a")
+        .textContent.trim(),
+      [, , submissionCode] = url,
+      submissionURL = `https://dmoj.ca/submission/${submissionCode}`;
+
+    presenceData.details = "Viewing submission to problem:";
+    presenceData.state = problemName;
+    presenceData.largeImageKey = "submission";
+    presenceData.buttons = [{ label: "View Submission", url: submissionURL }];
+  } else if (url.includes("src")) {
+    const problemName = document
+      .querySelector("#content > h2 > a")
+      .textContent.trim();
+
+    presenceData.details = "Viewing submission source to problem:";
+    presenceData.state = problemName;
+    presenceData.largeImageKey = "source";
+  } else if (url.includes("organizations")) {
     presenceData.details = "Browsing organizations";
-    presenceData.smallImageKey = "organization";
-    presenceData.smallImageText = "Organization";
-  } else if (document.location.pathname.includes("/organization/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing organization:";
-    presenceData.state = document.querySelector(
-      "body > div > main > h2"
-    ).textContent;
-    presenceData.smallImageKey = "organization";
-    presenceData.smallImageText = "Organization";
-  }
+    presenceData.largeImageKey = "organization";
+  } else if (url.includes("organization")) {
+    const [, , organizationCode] = url,
+      organizationURL = `https://dmoj.ca/organization/${organizationCode}`,
+      organizationMembersURL = `${organizationURL}/users`,
+      organizationName = document
+        .querySelector("#content > h2")
+        .textContent.trim()
+        .replace(" Members", "");
 
-  // CONTESTS
-  else if (document.location.pathname.includes("/contests")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = organizationName;
+    presenceData.buttons = [
+      { label: "View Organization", url: organizationURL },
+      { label: "View Members", url: organizationMembersURL }
+    ];
+
+    if (url.includes("users")) {
+      presenceData.details = "Viewing members of organization:";
+      presenceData.largeImageKey = "users";
+    } else {
+      presenceData.details = "Viewing organization:";
+      presenceData.largeImageKey = "organization";
+    }
+  } else if (url.includes("users")) {
+    presenceData.details = "Viewing leaderboard";
+    presenceData.largeImageKey = "leaderboard";
+  } else if (url.includes("user")) {
+    const userHeader = document.querySelector(".tabs > h2").textContent.trim();
+
+    if (url.includes("solved")) {
+      const [, userRank] = document
+        .querySelectorAll(".user-sidebar > div")[2]
+        .textContent.trim()
+        .split("#");
+
+      presenceData.details = "Viewing problems solved by:";
+
+      if (userHeader === "My account") {
+        const user = document
+            .querySelector("#user-links > ul > li > a > span > span > b")
+            .textContent.trim(),
+          userURL = `https://dmoj.ca/user/${user}`,
+          userSolvedProblemsURL = `${userURL}/solved`;
+
+        presenceData.state = `${user} (Rank: #${userRank})`;
+        presenceData.largeImageKey = "submission_list";
+        presenceData.buttons = [
+          { label: "View User", url: userURL },
+          { label: "View Solved Problems", url: userSolvedProblemsURL }
+        ];
+      } else {
+        const [, user] = document
+            .querySelector(".tabs > h2")
+            .textContent.trim()
+            .split(" "),
+          userURL = `https://dmoj.ca/user/${user}`,
+          userSolvedProblemsURL = `${userURL}/solved`;
+
+        presenceData.state = `${user} (Rank: #${userRank})`;
+        presenceData.largeImageKey = "submission_list";
+        presenceData.buttons = [
+          { label: "View User", url: userURL },
+          { label: "View Solved Problems", url: userSolvedProblemsURL }
+        ];
+      }
+    } else {
+      const [, userRank] = document
+        .querySelectorAll(".user-sidebar > div")[2]
+        .textContent.trim()
+        .split("#");
+
+      presenceData.details = "Viewing user:";
+
+      if (userHeader === "My account") {
+        const user = document
+            .querySelector("#user-links > ul > li > a > span > span > b")
+            .textContent.trim(),
+          userURL = `https://dmoj.ca/user/${user}`;
+
+        presenceData.state = `${user} (Rank: #${userRank})`;
+        presenceData.largeImageKey = "user";
+        presenceData.buttons = [{ label: "View User", url: userURL }];
+      } else {
+        const [, user] = document
+            .querySelector(".tabs > h2")
+            .textContent.trim()
+            .split(" "),
+          userURL = `https://dmoj.ca/user/${user}`;
+
+        presenceData.state = `${user} (Rank: #${userRank})`;
+        presenceData.largeImageKey = "user";
+        presenceData.buttons = [{ label: "View User", url: userURL }];
+      }
+    }
+  } else if (url.includes("edit") && url.includes("profile")) {
+    const user = document
+      .querySelector("#user-links > ul > li > a > span > span > b")
+      .textContent.trim();
+
+    presenceData.details = "Editing profile:";
+    presenceData.state = user;
+    presenceData.largeImageKey = "edit_profile";
+  } else if (url.includes("contests")) {
     presenceData.details = "Browsing contests";
-    presenceData.smallImageKey = "contest";
-    presenceData.smallImageText = "Contest";
-  } else if (
-    document.location.pathname.includes("/contest/") &&
-    document.location.pathname.includes("/stats")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing statistics of contest:";
-    presenceData.state = document.querySelector(".tabs > h2").textContent;
-    presenceData.smallImageKey = "contest";
-    presenceData.smallImageText = "Contest";
-  } else if (
-    document.location.pathname.includes("/contest/") &&
-    document.location.pathname.includes("/ranking")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing rankings of contest:";
-    presenceData.state = document.querySelector(".tabs > h2").textContent;
-    presenceData.smallImageKey = "contest";
-    presenceData.smallImageText = "Contest";
-  } else if (
-    document.location.pathname.includes("/contest/") &&
-    document.location.pathname.includes("/participations")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing participation of contest:";
-    presenceData.state = document.querySelector(".tabs > h2").textContent;
-    presenceData.smallImageKey = "contest";
-    presenceData.smallImageText = "Contest";
-  } else if (
-    document.location.pathname.includes("/contest/") &&
-    document.location.pathname.includes("/rank/")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing best submissions to problem:";
-    presenceData.state = document.querySelector(
-      "body > div > main > div > div > h2 > a"
-    ).textContent;
-    presenceData.smallImageKey = "submit";
-    presenceData.smallImageText = "Submission";
-  } else if (document.location.pathname.includes("/contest/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing contest:";
-    presenceData.state = document.querySelector(".tabs > h2").textContent;
-    presenceData.smallImageKey = "contest";
-    presenceData.smallImageText = "Contest";
+    presenceData.largeImageKey = "contest";
+  } else if (url.includes("contest")) {
+    const [, , contestCode] = url,
+      contestURL = `https://dmoj.ca/contests/${contestCode}`,
+      contestName = document.querySelector(".tabs > h2").textContent.trim();
+
+    presenceData.state = contestName;
+    presenceData.buttons = [{ label: "View Contest", url: contestURL }];
+
+    if (url.includes("stats")) {
+      const statisticsURL = `${contestURL}/stats`;
+
+      presenceData.details = "Viewing statistics of contest:";
+      presenceData.largeImageKey = "statistics";
+      presenceData.buttons.push({
+        label: "View Statistics",
+        url: statisticsURL
+      });
+    } else if (url.includes("ranking")) {
+      const rankingsURL = `${contestURL}/ranking`;
+
+      presenceData.details = "Viewing rankings of contest:";
+      presenceData.largeImageKey = "leaderboard";
+      presenceData.buttons.push({ label: "View Rankings", url: rankingsURL });
+    } else if (url.includes("participations")) {
+      const participationURL = `${contestURL}/participations`;
+
+      presenceData.details = "Viewing participation of contest:";
+      presenceData.largeImageKey = "users";
+      presenceData.buttons.push({
+        label: "View Participation",
+        url: participationURL
+      });
+    } else {
+      presenceData.details = "Viewing contest:";
+      presenceData.largeImageKey = "contest";
+    }
+  } else if (url.includes("about")) {
+    presenceData.details = "Viewing about page";
+    presenceData.largeImageKey = "about";
+  } else if (url.includes("status")) {
+    presenceData.details = "Viewing status";
+    presenceData.largeImageKey = "status";
+  } else if (url.includes("runtimes")) {
+    if (url.includes("matrix")) {
+      presenceData.details = "Viewing version matrix";
+      presenceData.largeImageKey = "source";
+    } else {
+      presenceData.details = "Viewing runtimes";
+      presenceData.largeImageKey = "source";
+    }
+  } else if (url.includes("tips")) {
+    presenceData.details = "Viewing tips";
+    presenceData.largeImageKey = "about";
+  } else if (url.includes("api")) {
+    presenceData.details = "Viewing API";
+    presenceData.largeImageKey = "source";
+  } else {
+    presenceData.details = "Viewing home page";
+    presenceData.largeImageKey = "home";
   }
 
-  // ABOUT
-  else if (document.location.pathname.includes("/about")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing about page";
-    presenceData.smallImageKey = "about";
-    presenceData.smallImageText = "About";
-  } else if (document.location.pathname.includes("/status")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing status";
-    presenceData.smallImageKey = "about";
-    presenceData.smallImageText = "About";
-  } else if (document.location.pathname.includes("/runtimes/matrix/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing version matrix";
-    presenceData.smallImageKey = "about";
-    presenceData.smallImageText = "About";
-  } else if (document.location.pathname.includes("/runtimes")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing runtimes";
-    presenceData.smallImageKey = "about";
-    presenceData.smallImageText = "About";
-  } else if (document.location.pathname.includes("/tips")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing tips";
-    presenceData.smallImageKey = "about";
-    presenceData.smallImageText = "About";
-  } else if (document.location.pathname.includes("/api")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing API";
-    presenceData.smallImageKey = "about";
-    presenceData.smallImageText = "About";
-  }
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  presence.setActivity(presenceData);
 });

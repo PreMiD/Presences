@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "author": {
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
+  },
+  "service": "Dumpert",
+  "description": {
+    "en": "The place for your daily entertainment. With the best videos and photos for when you don't feel like doing work, studying or human contact. Main sponsor of Dutch attic rooms.",
+    "nl": "De plek voor je dagelijkse entertainment. Met de leukste filmpjes en foto's voor als je even geen zin hebt in werk, studie of menselijk contact. Hoofdsponsor van Nederlandse zolderkamers."
+  },
+  "url": ["dumpert.nl", "www.dumpert.nl"],
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/uAjw09t.png",
+  "thumbnail": "https://i.imgur.com/qxQsVF6.jpg",
+  "color": "#00ff2a",
+  "tags": ["nl", "nederlands", "dutch", "dumpert"],
+  "category": "socials",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fas fa-user-secret",
+      "value": false
+    }
+  ]
+}

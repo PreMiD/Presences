@@ -1,14 +1,13 @@
 const presence = new Presence({
-  clientId: "735878480318955660"
-});
-const strings = presence.getStrings({
-  browse: "presence.activity.browsing",
-  search: "presence.activity.searching"
-});
-
-const getElement = (query: string): string | undefined => {
-  return document.querySelector(query)?.textContent.trim();
-};
+    clientId: "735878480318955660"
+  }),
+  strings = presence.getStrings({
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
+  getElement = (query: string): string | undefined => {
+    return document.querySelector(query)?.textContent.trim();
+  };
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
@@ -21,20 +20,14 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const path = location.pathname.replace(/\/?$/, "/");
-
-  const showDomain = await presence.getSetting("domain");
-  const showSearch = await presence.getSetting("search");
-  const showTimestamps = await presence.getSetting("timestamp");
+  const path = location.pathname.replace(/\/?$/, "/"),
+    showDomain = await presence.getSetting("domain"),
+    showSearch = await presence.getSetting("search"),
+    showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
-    details: undefined,
-    state: undefined,
     largeImageKey: "googledomains",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
+    startTimestamp: elapsed
   };
 
   if (document.location.href !== prevUrl) {
@@ -42,11 +35,8 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
-      data = { ...data, ...v };
-    }
-  }
+  for (const [k, v] of Object.entries(statics))
+    if (path.match(k)) data = { ...data, ...v };
 
   if (path.includes("/m/registrar/")) {
     const domainName = getElement(".domain-header-title > span");
@@ -65,9 +55,8 @@ presence.on("UpdateData", async () => {
     data.state = getElement(".item-count")?.slice(1, -1);
   }
 
-  if (path.includes("/m/registrar/checkout/")) {
+  if (path.includes("/m/registrar/checkout/"))
     data.details = "Viewing Checkout...";
-  }
 
   if (path.includes("/m/registrar/search/")) {
     data.details = "Searching...";

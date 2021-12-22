@@ -1,14 +1,16 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Owen",
     "id": "246778942323818506"
   },
   "service": "htmlcsscolor",
   "description": {
-    "en": "The ultimate color collection!"
+    "en": "The ultimate color collection!",
+    "nl": "De ultieme kleurencollectie!"
   },
   "url": "www.htmlcsscolor.com",
-  "version": "1.2.5",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/Kk099mM.png",
   "thumbnail": "https://i.imgur.com/qCP9Sxb.png",
   "color": "#93C54B",

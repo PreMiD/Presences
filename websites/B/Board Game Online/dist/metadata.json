@@ -1,11 +1,19 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "Board Game Online",
   "description": {
-    "en": "BG Online is an online interactive website where you can play many classical board games with other users."
+    "en": "BG Online is an online interactive website where you can play many classical board games with other users.",
+    "nl": "BG Online is een online interactieve website waar je veel klassieke bordspellen kunt spelen met andere gebruikers."
   },
   "url": [
     "s1.boardgame-online.com",
@@ -13,8 +21,8 @@
     "boardgame-online.com",
     "www.boardgame-online.com"
   ],
-  "version": "1.1.6",
-  "logo": "https://i.imgur.com/MhNYI8n.png",
+  "version": "1.1.14",
+  "logo": "https://i.imgur.com/L6BgeAa.png",
   "thumbnail": "https://i.imgur.com/QTDzIqh.png",
   "color": "#EF3A26",
   "tags": [

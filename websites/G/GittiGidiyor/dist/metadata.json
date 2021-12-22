@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -6,16 +7,17 @@
   "service": "GittiGidiyor",
   "description": {
     "en": "GittiGidiyor is a popular shopping website in Turkey. It is the sub organization of eBay in Turkey.",
-    "tr": "GittiGidiyor, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir. Ayrıca eBay'in de Türkiye'de faaliyet gösteren markasıdır."
+    "tr": "GittiGidiyor, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir. Ayrıca eBay'in de Türkiye'de faaliyet gösteren markasıdır.",
+    "nl": "GittiGidiyor is een populaire winkelwebsite in Turkije. Het is de suborganisatie van eBay in Turkije."
   },
   "url": [
     "www.gittigidiyor.com",
     "urun.gittigidiyor.com",
     "gittigidiyor.com"
   ],
-  "version": "1.1.6",
-  "logo": "https://premid.is-inside.me/503lev8R.png",
-  "thumbnail": "https://premid.is-inside.me/RqUQ2C2R.png",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/4XOmMIy.png",
+  "thumbnail": "https://i.imgur.com/NtQEokm.png",
   "color": "#2a6bb0",
   "tags": [
     "gittigidiyor",

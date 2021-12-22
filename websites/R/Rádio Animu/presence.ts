@@ -1,22 +1,19 @@
 const presence = new Presence({
-    clientId: "691794350081966080"
+    clientId: "828278673680498699"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing"
-  });
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let artist: string, title: string, playing: boolean;
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-let artist;
-let title;
-let playing;
-
-presence.on("iFrameData", (data) => {
-  playing = data.iframe_radio.playing;
-  if (playing) {
-    artist = data.iframe_radio.artist;
-    title = data.iframe_radio.title;
+presence.on(
+  "iFrameData",
+  (data: { playing: boolean; artist: string; title: string }) => {
+    ({ playing } = data);
+    if (playing) ({ artist, title } = data);
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -50,15 +47,16 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/suafansingaqui/")) {
     presenceData.details = "Sua Fansing Aqui";
     presenceData.smallImageKey = "reading";
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/historia/") {
+    presenceData.details = "História";
+    presenceData.smallImageKey = "reading";
+  } else if (document.location.pathname === "/") {
     presenceData.details = "Página inicial";
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

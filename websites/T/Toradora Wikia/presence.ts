@@ -3,12 +3,12 @@
   This is probably caused by the two presences. If anyone has an idea how to fix, be happy to do a pull request or tell me on Discord CRUGG#0001
 */
 
-var englishPresence = new Presence({
-  clientId: "613417749489778689"
-});
-var germanPresence = new Presence({
-  clientId: "613418400042975329"
-});
+const englishPresence = new Presence({
+    clientId: "613417749489778689"
+  }),
+  germanPresence = new Presence({
+    clientId: "613418400042975329"
+  });
 
 englishPresence.on("UpdateData", async () => {
   if (document.location.href.includes("tora-dora.fandom.com")) {
@@ -17,15 +17,12 @@ englishPresence.on("UpdateData", async () => {
       // Making 100% sure it's the english wiki
       let page = "N/A";
       try {
-        page = document.getElementsByClassName("page-header__title")[0]
-          .textContent;
+        page =
+          document.getElementsByClassName("page-header__title")[0].textContent;
       } catch (err) {
         const errCode = "TWIKI_WIKIEN_GETPAGETITLE";
-        console.log(
-          "An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   " +
-            errCode +
-            "   :::   " +
-            err
+        englishPresence.info(
+          `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
         );
       }
       const presenceData: PresenceData = {
@@ -43,15 +40,13 @@ englishPresence.on("UpdateData", async () => {
         // Making 100% sure it's the german wiki
         let page = "N/A";
         try {
-          page = document.getElementsByClassName("page-header__title")[0]
-            .textContent;
+          page =
+            document.getElementsByClassName("page-header__title")[0]
+              .textContent;
         } catch (err) {
           const errCode = "TWIKI_WIKIDE_GETPAGETITLE";
-          console.log(
-            "An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   " +
-              errCode +
-              "   :::   " +
-              err
+          germanPresence.info(
+            `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
           );
         }
         const presenceData: PresenceData = {

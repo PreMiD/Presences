@@ -1,15 +1,17 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "SherlockSec",
     "id": "231061378075590656"
   },
   "url": "tryhackme.com",
   "description": {
-    "en": "TryHackMe takes the pain out of learning and teaching Cybersecurity."
+    "en": "TryHackMe takes the pain out of learning and teaching Cybersecurity.",
+    "nl": "TryHackMe haalt de pijn uit het leren en onderwijzen van cyberbeveiliging."
   },
   "service": "TryHackMe",
-  "version": "1.1.5",
-  "logo": "https://i.imgur.com/nYQ4R2R.png",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/gqL7pDD.png",
   "thumbnail": "https://i.imgur.com/jojxLOU.png",
   "color": "#343C42",
   "tags": [

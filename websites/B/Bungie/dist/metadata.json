@@ -1,12 +1,13 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "RedBird16.com",
     "id": "444872133504663552"
   },
   "service": "Bungie",
   "description": {
-    "en": "Bungie.net is the home for all your Destiny/Destiny Two needs!"
+    "en": "Bungie.net is the home for all your Destiny/Destiny Two needs!",
+    "nl": "Bungie.net is de thuisbasis voor al uw Destiny/Destiny Two behoeften!"
   },
   "url": [
     "www.bungie.net",
@@ -14,8 +15,8 @@
     "comics.bungie.net",
     "bungiestore.com"
   ],
-  "version": "1.0.2",
-  "logo": "https://i.imgur.com/7N4tOFk.jpg",
+  "version": "1.0.6",
+  "logo": "https://i.imgur.com/QQWLe6D.png",
   "thumbnail": "https://i.imgur.com/ivK2Uww.png",
   "color": "#12171C",
   "tags": [

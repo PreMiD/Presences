@@ -1,16 +1,17 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "azure",
     "id": "296846046217240582"
   },
   "url": "www.motorsport.com",
   "description": {
-    "en": "Motorsport.com is a website specializing in motor racing news. Sports like Formula 1, NASCAR, IndyCar, MotoGP, and WEC."
+    "en": "Motorsport.com is a website specializing in motor racing news. Sports like Formula 1, NASCAR, IndyCar, MotoGP, and WEC.",
+    "nl": "Motorsport.com is een website die gespecialiseerd is in nieuws over autoraces. Sporten zoals Formule 1, NASCAR, IndyCar, MotoGP en WEC."
   },
   "service": "motorsport.com",
-  "version": "1.0.2",
-  "logo": "https://i.imgur.com/Dvs107P.png",
+  "version": "1.0.6",
+  "logo": "https://i.imgur.com/u6MICx7.png",
   "thumbnail": "https://i.imgur.com/7ha5AqJ.jpg",
   "color": "#E7FF7B",
   "tags": [

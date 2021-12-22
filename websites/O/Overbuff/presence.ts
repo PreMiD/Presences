@@ -9,11 +9,11 @@ presence.on("UpdateData", () => {
 
   if (window.location.pathname.includes("/players/")) {
     const nickname = document.querySelector(
-      "div.layout-header-primary-bio > h1"
-    ).firstChild.textContent;
-    const level = document.querySelector(
-      "div.image-with-corner > div.corner.corner-text"
-    ).textContent;
+        "div.layout-header-primary-bio > h1"
+      ).firstChild.textContent,
+      level = document.querySelector(
+        "div.image-with-corner > div.corner.corner-text"
+      ).textContent;
     if (window.location.pathname.includes("pc")) {
       presenceData.smallImageKey = "windows";
       presenceData.smallImageText = "Playing on PC";
@@ -30,8 +30,8 @@ presence.on("UpdateData", () => {
       presenceData.details = `Viewing ${nickname}`;
       presenceData.state = "Browsing heroes";
       try {
-        const get_hero = document.querySelector("div.name > a").textContent;
-        presenceData.state += ` (${get_hero})`;
+        const getHero = document.querySelector("div.name > a").textContent;
+        presenceData.state += ` (${getHero})`;
       } catch {
         //Catch nothing
       }
@@ -44,39 +44,35 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.includes("/activity")) {
       presenceData.details = `Viewing ${nickname}`;
       presenceData.state = "Browsing activity";
-    } else if (window.location.pathname.includes("/trends")) {
-      presenceData.details = `Viewing ${nickname}`;
-      presenceData.state = "Browsing trends";
     }
   } else if (window.location.pathname.includes("/heroes")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Heroes";
     try {
-      const hero_name = document.querySelector(
-        "div.layout-header-primary-bio > div > h1"
-      ).firstChild.textContent;
-      const hero_role = document.querySelector(
-        "div.layout-header-primary-bio > div > h1 > small"
-      ).textContent;
+      const heroName = document.querySelector(
+          "div.layout-header-primary-bio > div > h1"
+        ).firstChild.textContent,
+        heroRole = document.querySelector(
+          "div.layout-header-primary-bio > div > h1 > small"
+        ).textContent;
       presenceData.details = "Viewing a Hero:";
-      presenceData.state = `${hero_name} (${hero_role})`;
+      presenceData.state = `${heroName} (${heroRole})`;
     } catch {
-      console.log("That's not a Hero profile.");
+      presence.error("That's not a Hero profile.");
     }
   } else if (window.location.pathname.includes("/roles")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Roles";
     try {
-      const role_name = document.querySelector(
+      const roleName = document.querySelector(
         "div.layout-header-primary-bio > div > h1"
       ).firstChild.textContent;
       presenceData.details = "Viewing a role:";
-      presenceData.state = role_name;
-      if (window.location.pathname.includes("/rankings")) {
-        presenceData.state = `${role_name} ranking`;
-      }
+      presenceData.state = roleName;
+      if (window.location.pathname.includes("/rankings"))
+        presenceData.state = `${roleName} ranking`;
     } catch {
-      console.log("That's not a Hero profile.");
+      presence.error("That's not a Hero profile.");
     }
   } else if (window.location.pathname.includes("/verified")) {
     presenceData.details = "Viewing a page:";
@@ -97,12 +93,13 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Overbuff Blog";
     try {
-      const blog_title = document.querySelector("div.post-title > h1.title")
-        .textContent;
+      const blogTitle = document.querySelector(
+        "div.post-title > h1.title"
+      ).textContent;
       presenceData.details = "Reading a blog:";
-      presenceData.state = blog_title;
+      presenceData.state = blogTitle;
     } catch {
-      console.log("That's not a blog post.");
+      presence.error("That's not a blog post.");
     }
   } else if (window.location.pathname.includes("/about")) {
     presenceData.details = "Viewing a page:";
@@ -124,10 +121,8 @@ presence.on("UpdateData", () => {
     presenceData.state = "Front page";
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
