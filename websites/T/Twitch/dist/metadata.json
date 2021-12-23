@@ -127,7 +127,7 @@
     },
     {
       "id": "profilePic",
-      "title": "Show Streamer's Profile Picture",
+      "title": "Show Streamer's Picture",
       "icon": "fad fa-images",
       "value": false
     },
