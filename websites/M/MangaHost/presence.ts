@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "753818401541193859"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "mh_l",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location,
     { hostname } = document.location;
@@ -24,9 +24,8 @@ presence.on("UpdateData", async () => {
     if (pathname.startsWith("/scans")) {
       const [pathsplitted] = pathname.split("/").slice(-1);
       if (!pathsplitted.includes("scans")) {
-        const scanName = document.querySelector("h1").textContent;
         presenceData.details = "Vendo Scan:";
-        presenceData.state = scanName;
+        presenceData.state = document.querySelector("h1").textContent;
       } else {
         presenceData.details = "Vendo:";
         presenceData.state = "Lista de Scanlators";
@@ -39,9 +38,8 @@ presence.on("UpdateData", async () => {
     }
 
     if (pathname.startsWith("/profile")) {
-      const username = document.querySelector("h1").textContent;
       presenceData.details = "Vendo Perfil:";
-      presenceData.state = username;
+      presenceData.state = document.querySelector("h1").textContent;
     }
 
     if (pathname.startsWith("/find")) {
@@ -58,13 +56,12 @@ presence.on("UpdateData", async () => {
     if (pathname.startsWith("/mangas")) {
       const [pathsplitted] = pathname.split("/").slice(-1);
       if (!pathsplitted.startsWith("mangas")) {
-        const information = pathsplitted
+        presenceData.details = "Vendo Mangás:";
+        presenceData.state = pathsplitted
           .replace("-", " ")
           .replace(/(\w)(\w*)/g, function (_, g1, g2) {
             return g1.toUpperCase() + g2.toLowerCase();
           });
-        presenceData.details = "Vendo Mangás:";
-        presenceData.state = information;
       } else {
         presenceData.details = "Vendo:";
         presenceData.state = "Lista de Mangás";
@@ -79,16 +76,12 @@ presence.on("UpdateData", async () => {
     if (pathname.startsWith("/manga/") && pathname.includes("-mh")) {
       const [pathsplitted] = pathname.split("/").slice(-1);
       if (!pathsplitted.includes("-mh")) {
-        const mangaName = document.querySelector("h1 a").textContent,
-          [chapterNumber] = pathsplitted.split("#"),
-          e = document.getElementById("capitulos-3") as HTMLSelectElement,
-          sel = e.selectedIndex,
-          opt = e.options[sel],
-          curText = (<HTMLOptionElement>opt).text,
-          pageNumber = curText;
+        const e = document.getElementById("capitulos-3") as HTMLSelectElement;
 
-        presenceData.details = mangaName;
-        presenceData.state = `Capítulo ${chapterNumber} - Pg ${pageNumber}`;
+        presenceData.details = document.querySelector("h1 a").textContent;
+        presenceData.state = `Capítulo ${pathsplitted.split("#")[0]} - Pg ${
+          (<HTMLOptionElement>e.options[e.selectedIndex]).text
+        }`;
       } else {
         presenceData.details = "Vendo Informações:";
         presenceData.state = document.querySelector("h1.title").textContent;
@@ -96,8 +89,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

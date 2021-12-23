@@ -5,30 +5,31 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const { pathname, origin } = window.location,
-    data: PresenceData = {
+    presenceData: PresenceData = {
       startTimestamp: browsingTimestamp,
       largeImageKey: "logo"
     };
   if (document.querySelector(".navbar-form input") === document.activeElement) {
-    data.details = "Searching:";
-    data.state = (
+    presenceData.details = "Searching:";
+    presenceData.state = (
       document.querySelector(".navbar-form input") as HTMLInputElement
     ).value;
-    data.smallImageKey = "search";
+    presenceData.smallImageKey = "search";
   } else {
     if (pathname.includes("emperors-domination"))
-      data.largeImageKey = "emperor";
-    if (/^\/$/.test(pathname)) data.details = "Viewing Home Page";
+      presenceData.largeImageKey = "emperor";
+    if (/^\/$/.test(pathname)) presenceData.details = "Viewing Home Page";
     else if (/^\/novels\/?$/.test(pathname)) {
       // Counting comics
-      const novels = document.querySelectorAll(".novel-item").length;
-      data.details = "Viewing Novels List";
-      data.state = `📋 ${novels.toString()} novels found`;
+      presenceData.details = "Viewing Novels List";
+      presenceData.state = `📋 ${
+        document.querySelectorAll(".novel-item").length
+      } novels found`;
     } else if (/^\/novel\/[0-9a-z-]+\/?$/i.test(pathname)) {
-      data.details = "Viewing Novel";
-      data.state = document.querySelector(".novel-body h2").textContent;
-      data.smallImageKey = "eye";
-      data.buttons = [
+      presenceData.details = "Viewing Novel";
+      presenceData.state = document.querySelector(".novel-body h2").textContent;
+      presenceData.smallImageKey = "eye";
+      presenceData.buttons = [
         {
           label: "Visit Novel Page",
           url: origin + pathname
@@ -37,13 +38,6 @@ presence.on("UpdateData", () => {
     } else if (
       /^\/novel\/([^;]*)+\/+[a-zA-Z]+-chapter-[0-9]+\/?/i.test(pathname)
     ) {
-      const novelLink = (
-          document.querySelector(".caption a") as HTMLAnchorElement
-        ).href,
-        chapter = document.querySelector(
-          "#chapter-outer .caption h4"
-        ).textContent;
-
       let progress =
         (document.documentElement.scrollTop /
           (document.querySelector("#chapter-outer").scrollHeight -
@@ -51,13 +45,18 @@ presence.on("UpdateData", () => {
         100;
       progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
 
-      data.details = document.querySelector(".caption a h4").textContent;
-      data.state = `📖 ${chapter} 🔸 ${progress}%`;
-      data.smallImageKey = "read";
-      data.buttons = [
+      presenceData.details =
+        document.querySelector(".caption a h4").textContent;
+      presenceData.state = `📖 ${
+        document.querySelector("#chapter-outer .caption h4").textContent
+      } 🔸 ${progress}%`;
+      presenceData.smallImageKey = "read";
+      presenceData.buttons = [
         {
           label: "Visit Novel Page",
-          url: origin + novelLink
+          url:
+            origin +
+            (document.querySelector(".caption a") as HTMLAnchorElement).href
         },
         {
           label: "Visit Chapter",
@@ -65,9 +64,9 @@ presence.on("UpdateData", () => {
         }
       ];
     } else {
-      data.details = "Browsing Wuxiaworld";
-      data.state = document.title;
+      presenceData.details = "Browsing Wuxiaworld";
+      presenceData.state = document.title;
     }
   }
-  if (data.details) presence.setActivity(data);
+  if (presenceData.details) presence.setActivity(presenceData);
 });

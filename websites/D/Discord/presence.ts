@@ -71,7 +71,7 @@ async function getStrings() {
   );
 }
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
   strings = getStrings(),
   oldLang: string = null;
@@ -84,16 +84,16 @@ presence.on("UpdateData", async () => {
     privacy: boolean = await presence.getSetting("privacy"),
     showCalls: boolean = await presence.getSetting("call"),
     newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    logo: number = await presence.getSetting("logo"),
-    logoArr = ["discordwhite", "discord", "discordblack"];
+    logo: number = await presence.getSetting("logo");
 
   let presenceData: PresenceData = {
-    largeImageKey: logoArr[logo] || "discordwhite"
+    largeImageKey:
+      ["discordwhite", "discord", "discordblack"][logo] || "discordwhite"
   };
 
   if (document.location.href !== prevUrl) {
     prevUrl = document.location.href;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   oldLang ??= newLang;
@@ -103,35 +103,11 @@ presence.on("UpdateData", async () => {
   }
 
   if (document.location.hostname === "discord.com") {
-    const path = location.href
-        .replace(/\/?$/, "/")
-        .replace(`https://${document.location.hostname}`, "")
-        .replace("?", "/")
-        .replace("=", "/"),
-      voiceConnected = Array.from(document.querySelectorAll("div")).find((c) =>
-        c.className?.includes("rtcConnectionStatus")
-      )
-        ? true
-        : false,
-      settingsOpened = Array.from(
-        document.querySelectorAll("div[aria-controls]")
-      ).find((c) =>
-        Object.values(c.attributes).find((a) => a.value === "My Account-tab")
-      )
-        ? true
-        : false,
-      serverSettingsOpened = Array.from(
-        document.querySelectorAll("div[aria-controls]")
-      ).find((c) =>
-        Object.values(c.attributes).find((a) => a.value === "OVERVIEW-tab")
-      )
-        ? true
-        : false,
-      dmsTyping =
+    const dmsTyping =
         Array.from(document.querySelectorAll("div[contenteditable=true]")).find(
-          (c) =>
-            Object.values(c.attributes).find((a) =>
-              a.value?.includes(document.querySelector("h3")?.textContent)
+          c =>
+            Object.values(c.attributes).find(a =>
+              a.textContent?.includes(document.querySelector("h3")?.textContent)
             )
         )?.parentElement.children.length === 1
           ? true
@@ -148,9 +124,9 @@ presence.on("UpdateData", async () => {
         : `@${document.querySelector("h3")?.textContent || "Undefined"}`,
       serverTyping =
         Array.from(document.querySelectorAll("div[contenteditable=true]")).find(
-          (c) =>
-            c.attributes[0].value?.includes(
-              Array.from(document.querySelectorAll("h3")).find((c) =>
+          c =>
+            c.attributes[0].textContent?.includes(
+              Array.from(document.querySelectorAll("h3")).find(c =>
                 c.className?.includes("title")
               )?.textContent
             )
@@ -158,12 +134,12 @@ presence.on("UpdateData", async () => {
           ? true
           : false,
       serverChannel = `#${
-        Array.from(document.querySelectorAll("h3")).find((c) =>
+        Array.from(document.querySelectorAll("h3")).find(c =>
           c.className?.includes("title")
         )?.textContent || "Undefined"
       }`,
       serverServerName =
-        Array.from(document.querySelectorAll("h1")).find((c) =>
+        Array.from(document.querySelectorAll("h1")).find(c =>
           c.className?.includes("name")
         )?.textContent || "Undefined",
       statics: {
@@ -362,7 +338,7 @@ presence.on("UpdateData", async () => {
           details: (await strings).portal,
           state: (await strings).appsEdit.replace(
             "{0}",
-            Array.from(document.querySelectorAll("div")).find((c) =>
+            Array.from(document.querySelectorAll("div")).find(c =>
               c.className?.includes("appDetails")
             )?.textContent
           ),
@@ -388,7 +364,7 @@ presence.on("UpdateData", async () => {
           details: (await strings).portal,
           state: (await strings).serversEdit.replace(
             "{0}",
-            Array.from(document.querySelectorAll("div")).find((c) =>
+            Array.from(document.querySelectorAll("div")).find(c =>
               c.className.includes("itemName")
             )?.textContent
           ),
@@ -402,7 +378,12 @@ presence.on("UpdateData", async () => {
         }
       };
 
-    if (showCalls && voiceConnected) {
+    if (
+      showCalls &&
+      Array.from(document.querySelectorAll("div")).find(c =>
+        c.className?.includes("rtcConnectionStatus")
+      )
+    ) {
       if (privacy) {
         presenceData.details = (await strings).inCall;
         presenceData.smallImageKey = "call";
@@ -410,9 +391,9 @@ presence.on("UpdateData", async () => {
       } else {
         const connectedTo = Array.from(
             Array.from(document.querySelectorAll("div"))
-              .find((c) => c.className?.includes("rtcConnectionStatus"))
+              .find(c => c.className?.includes("rtcConnectionStatus"))
               ?.parentElement.querySelector("a")?.children || []
-          ).find((c) => c.className?.includes("channel")),
+          ).find(c => c.className?.includes("channel")),
           connectedToDm = (
             connectedTo?.parentElement as HTMLLinkElement
           )?.href.includes("/@me/")
@@ -462,63 +443,75 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).browse;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).browse;
+      } else if (
+        Array.from(document.querySelectorAll("div[aria-controls]")).find(c =>
+          Object.values(c.attributes).find(
+            a => a.textContent === "My Account-tab"
+          )
+        )
+      ) {
+        presenceData.details = (await strings).settings;
+        presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (await strings).browse;
+      } else if (
+        Array.from(document.querySelectorAll("div[aria-controls]")).find(c =>
+          Object.values(c.attributes).find(
+            a => a.textContent === "OVERVIEW-tab"
+          )
+        )
+      ) {
+        const server =
+          Array.from(document.querySelectorAll("h1")).find(c =>
+            c.className?.includes("name")
+          )?.textContent || "Undefined";
+        presenceData.details = (await strings).serverSettings
+          .split("{0}")[0]
+          .replace("{1}", server);
+        presenceData.state = (await strings).serverSettings
+          .split("{0}")[1]
+          ?.replace("{1}", server);
+        presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (await strings).browse;
       } else {
-        if (settingsOpened) {
-          presenceData.details = (await strings).settings;
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
-        } else if (serverSettingsOpened) {
-          const server =
-            Array.from(document.querySelectorAll("h1")).find((c) =>
-              c.className?.includes("name")
-            )?.textContent || "Undefined";
-          presenceData.details = (await strings).serverSettings
-            .split("{0}")[0]
-            .replace("{1}", server);
-          presenceData.state = (await strings).serverSettings
-            .split("{0}")[1]
-            ?.replace("{1}", server);
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
-        } else {
-          for (const [k, v] of Object.entries(statics)) {
-            if (path.match(k)) {
-              presenceData = { ...presenceData, ...v };
-              if (!presenceData.smallImageKey) {
-                presenceData.smallImageKey = "reading";
-                presenceData.smallImageText = (await strings).browse;
-              }
+        for (const [k, v] of Object.entries(statics)) {
+          if (
+            location.href
+              .replace(/\/?$/, "/")
+              .replace(`https://${document.location.hostname}`, "")
+              .replace("?", "/")
+              .replace("=", "/")
+              .match(k)
+          ) {
+            presenceData = { ...presenceData, ...v };
+            if (!presenceData.smallImageKey) {
+              presenceData.smallImageKey = "reading";
+              presenceData.smallImageText = (await strings).browse;
             }
           }
         }
       }
     }
   } else if (document.location.hostname === "discordstatus.com") {
-    const path = location.href
-        .replace(/\/?$/, "/")
-        .replace(`https://${document.location.hostname}`, "")
-        .replace("?", "/")
-        .replace("=", "/"),
-      statics: {
-        [name: string]: PresenceData;
-      } = {
-        "/": {
-          details: (await strings).status,
-          state: (await strings).browse
-        },
-        "/uptime/": {
-          details: (await strings).status,
-          state: `${(await strings).viewing} ${(await strings).uptime}`
-        },
-        "/history/": {
-          details: (await strings).status,
-          state: `${(await strings).viewing} ${(await strings).incident}`
-        },
-        "/incidents/": {
-          details: (await strings).status,
-          state: (await strings).incidentView
-        }
-      };
+    const statics: {
+      [name: string]: PresenceData;
+    } = {
+      "/": {
+        details: (await strings).status,
+        state: (await strings).browse
+      },
+      "/uptime/": {
+        details: (await strings).status,
+        state: `${(await strings).viewing} ${(await strings).uptime}`
+      },
+      "/history/": {
+        details: (await strings).status,
+        state: `${(await strings).viewing} ${(await strings).incident}`
+      },
+      "/incidents/": {
+        details: (await strings).status,
+        state: (await strings).incidentView
+      }
+    };
     if (showBrowsing) {
       if (privacy) {
         presenceData.details = (await strings).status;
@@ -527,7 +520,14 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).browse;
       } else {
         for (const [k, v] of Object.entries(statics)) {
-          if (path.match(k)) {
+          if (
+            location.href
+              .replace(/\/?$/, "/")
+              .replace(`https://${document.location.hostname}`, "")
+              .replace("?", "/")
+              .replace("=", "/")
+              .match(k)
+          ) {
             presenceData = { ...presenceData, ...v };
             if (!presenceData.smallImageKey) {
               presenceData.smallImageKey = "reading";
@@ -538,41 +538,36 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.hostname === "support.discord.com") {
-    const path = location.href
-        .replace(/\/?$/, "/")
-        .replace(`https://${document.location.hostname}`, "")
-        .replace("?", "/")
-        .replace("=", "/"),
-      statics: {
-        [name: string]: PresenceData;
-      } = {
-        "/": {
-          details: (await strings).helpCenter,
-          state: (await strings).browse
-        },
-        "/categories/": {
-          details: (await strings).helpCenter,
-          state: `${(await strings).viewCategory} ${
-            document.querySelector("h1")?.textContent
-          }`
-        },
-        "/search/": {
-          details: (await strings).helpCenter,
-          state: `${(await strings).searchFor} ${
-            (document.querySelector("#query") as HTMLInputElement)?.value
-          }`,
-          smallImageKey: "search",
-          smallImageText: (await strings).searching
-        },
-        "/articles/": {
-          details: (await strings).helpCenter,
-          state: `${(await strings).readingArticle} ${document
-            .querySelector("h1")
-            ?.textContent.trim()}`,
-          smallImageKey: "reading",
-          smallImageText: (await strings).reading
-        }
-      };
+    const statics: {
+      [name: string]: PresenceData;
+    } = {
+      "/": {
+        details: (await strings).helpCenter,
+        state: (await strings).browse
+      },
+      "/categories/": {
+        details: (await strings).helpCenter,
+        state: `${(await strings).viewCategory} ${
+          document.querySelector("h1")?.textContent
+        }`
+      },
+      "/search/": {
+        details: (await strings).helpCenter,
+        state: `${(await strings).searchFor} ${
+          (document.querySelector("#query") as HTMLInputElement)?.value
+        }`,
+        smallImageKey: "search",
+        smallImageText: (await strings).searching
+      },
+      "/articles/": {
+        details: (await strings).helpCenter,
+        state: `${(await strings).readingArticle} ${document
+          .querySelector("h1")
+          ?.textContent.trim()}`,
+        smallImageKey: "reading",
+        smallImageText: (await strings).reading
+      }
+    };
     if (showBrowsing) {
       if (privacy) {
         presenceData.details = (await strings).helpCenter;
@@ -581,7 +576,14 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).browse;
       } else {
         for (const [k, v] of Object.entries(statics)) {
-          if (path.match(k)) {
+          if (
+            location.href
+              .replace(/\/?$/, "/")
+              .replace(`https://${document.location.hostname}`, "")
+              .replace("?", "/")
+              .replace("=", "/")
+              .match(k)
+          ) {
             presenceData = { ...presenceData, ...v };
             if (!presenceData.smallImageKey) {
               presenceData.smallImageKey = "reading";
@@ -592,44 +594,39 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.hostname === "blog.discord.com") {
-    const path = location.href
-        .replace(/\/?$/, "/")
-        .replace(`https://${document.location.hostname}`, "")
-        .replace("?", "/")
-        .replace("=", "/"),
-      statics: {
-        [name: string]: PresenceData;
-      } = {
-        "/": {
-          details: (await strings).blog,
-          state:
-            document.querySelector("h1")?.textContent !== "Discord Blog"
-              ? `${(await strings).readingArticle} ${
-                  document.querySelector("h1").textContent
-                }`
-              : (await strings).browse
-        },
-        "/product-posts/": {
-          details: (await strings).blog,
-          state: `${(await strings).viewCategory} Product posts`
-        },
-        "/company-posts/": {
-          details: (await strings).blog,
-          state: `${(await strings).viewCategory} Company posts`
-        },
-        "/education-posts/": {
-          details: (await strings).blog,
-          state: `${(await strings).viewCategory} Education posts`
-        },
-        "/community-posts/": {
-          details: (await strings).blog,
-          state: `${(await strings).viewCategory} Community posts`
-        },
-        "/engineering-posts/": {
-          details: (await strings).blog,
-          state: `${(await strings).viewCategory} Engineering posts`
-        }
-      };
+    const statics: {
+      [name: string]: PresenceData;
+    } = {
+      "/": {
+        details: (await strings).blog,
+        state:
+          document.querySelector("h1")?.textContent !== "Discord Blog"
+            ? `${(await strings).readingArticle} ${
+                document.querySelector("h1").textContent
+              }`
+            : (await strings).browse
+      },
+      "/product-posts/": {
+        details: (await strings).blog,
+        state: `${(await strings).viewCategory} Product posts`
+      },
+      "/company-posts/": {
+        details: (await strings).blog,
+        state: `${(await strings).viewCategory} Company posts`
+      },
+      "/education-posts/": {
+        details: (await strings).blog,
+        state: `${(await strings).viewCategory} Education posts`
+      },
+      "/community-posts/": {
+        details: (await strings).blog,
+        state: `${(await strings).viewCategory} Community posts`
+      },
+      "/engineering-posts/": {
+        details: (await strings).blog,
+        state: `${(await strings).viewCategory} Engineering posts`
+      }
+    };
     if (showBrowsing) {
       if (privacy) {
         presenceData.details = (await strings).blog;
@@ -638,7 +635,14 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).browse;
       } else {
         for (const [k, v] of Object.entries(statics)) {
-          if (path.match(k)) {
+          if (
+            location.href
+              .replace(/\/?$/, "/")
+              .replace(`https://${document.location.hostname}`, "")
+              .replace("?", "/")
+              .replace("=", "/")
+              .match(k)
+          ) {
             presenceData = { ...presenceData, ...v };
             if (!presenceData.smallImageKey) {
               presenceData.smallImageKey = "reading";
@@ -649,49 +653,44 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.hostname === "discordmerch.com") {
-    const path = location.href
-        .replace(/\/?$/, "/")
-        .replace(`https://${document.location.hostname}`, "")
-        .replace("?", "/")
-        .replace("=", "/"),
-      statics: {
-        [name: string]: PresenceData;
-      } = {
-        "/": {
-          details: (await strings).merch,
-          state: (await strings).browse
-        },
-        "/products/": {
-          details: (await strings).merch,
-          state: `${(await strings).product} ${
-            document.querySelector("h1")?.textContent
-          }`
-        },
-        "/collections/": {
-          details: (await strings).merch,
-          state: `${(await strings).collection} ${
-            document.querySelector("h1")?.textContent
-          }`
-        },
-        "/pages/": {
-          details: (await strings).merch,
-          state: `${(await strings).viewPage} ${
-            document.querySelector("h1")?.textContent
-          }`
-        },
-        "/cart/": {
-          details: (await strings).merch,
-          state: `${(await strings).viewing} ${(await strings).shopCart}`
-        },
-        "/search/": {
-          details: (await strings).merch,
-          state: `${(await strings).searchFor} ${
-            (document.querySelector("input") as HTMLInputElement)?.value
-          }`,
-          smallImageKey: "search",
-          smallImageText: (await strings).searching
-        }
-      };
+    const statics: {
+      [name: string]: PresenceData;
+    } = {
+      "/": {
+        details: (await strings).merch,
+        state: (await strings).browse
+      },
+      "/products/": {
+        details: (await strings).merch,
+        state: `${(await strings).product} ${
+          document.querySelector("h1")?.textContent
+        }`
+      },
+      "/collections/": {
+        details: (await strings).merch,
+        state: `${(await strings).collection} ${
+          document.querySelector("h1")?.textContent
+        }`
+      },
+      "/pages/": {
+        details: (await strings).merch,
+        state: `${(await strings).viewPage} ${
+          document.querySelector("h1")?.textContent
+        }`
+      },
+      "/cart/": {
+        details: (await strings).merch,
+        state: `${(await strings).viewing} ${(await strings).shopCart}`
+      },
+      "/search/": {
+        details: (await strings).merch,
+        state: `${(await strings).searchFor} ${
+          (document.querySelector("input") as HTMLInputElement)?.value
+        }`,
+        smallImageKey: "search",
+        smallImageText: (await strings).searching
+      }
+    };
     if (showBrowsing) {
       if (privacy) {
         presenceData.details = (await strings).status;
@@ -700,7 +699,14 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).browse;
       } else {
         for (const [k, v] of Object.entries(statics)) {
-          if (path.match(k)) {
+          if (
+            location.href
+              .replace(/\/?$/, "/")
+              .replace(`https://${document.location.hostname}`, "")
+              .replace("?", "/")
+              .replace("=", "/")
+              .match(k)
+          ) {
             presenceData = { ...presenceData, ...v };
             if (!presenceData.smallImageKey) {
               presenceData.smallImageKey = "reading";
@@ -714,10 +720,8 @@ presence.on("UpdateData", async () => {
 
   if (!presenceData.buttons?.length) delete presenceData.buttons;
   if (!showButtons) delete presenceData.buttons;
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

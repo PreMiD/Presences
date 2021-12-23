@@ -1,25 +1,25 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "SlowLife",
     "id": "374905512661221377"
   },
   "service": "BetterAnime",
-  "logo": "https://i.imgur.com/zIAmJZs.png",
-  "thumbnail": "https://i.imgur.com/lpAk9DH.png",
-  "tags": [
-    "anime",
-    "betteranime"
-  ],
-  "url": "betteranime.net",
-  "version": "1.0.8",
-  "color": "#ffffff",
-  "category": "anime",
   "description": {
     "en": "Come watch and download all Anime and Movie Episodes in high quality up to FullHD! Watch several anime online for free on BetterAnime!",
     "pt_BR": "Vem assistir e baixar todos os Episódios de Animes e Filmes em alta qualidade até FullHD! Assista vários animes online de graça no BetterAnime!",
     "nl": "Bekijk en download alle anime- en filmafleveringen in hoge kwaliteit tot FullHD! Bekijk gratis verschillende anime online op BetterAnime!"
   },
+  "url": "betteranime.net",
+  "version": "1.0.9",
+  "logo": "https://i.imgur.com/zIAmJZs.png",
+  "thumbnail": "https://i.imgur.com/lpAk9DH.png",
+  "color": "#ffffff",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "betteranime"
+  ],
   "iframe": true,
   "settings": [
     {

@@ -8,11 +8,11 @@ const presence = new Presence({
 
 let lastPlaybackState,
   playback: boolean,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
@@ -24,16 +24,16 @@ presence.on("UpdateData", async () => {
       "#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
-  playback = video !== null ? true : false;
+  playback = !!video;
 
   if (!playback) {
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     presence.setActivity(presenceData);
   }
 
-  if (video !== null && !isNaN(video.duration)) {
+  if (video && !isNaN(video.duration)) {
     const videoTitle: HTMLElement = document.querySelector(
         "div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
       ),
@@ -54,26 +54,21 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       );
 
-    presence.setTrayTitle(
-      video.paused
-        ? ""
-        : videoTitle !== null
-        ? videoTitle.innerText
-        : "Title not found..."
-    );
-
     if (season && episode) {
-      presenceData.details =
-        videoTitle !== null ? videoTitle.innerText : "Title not found...";
-      presenceData.state = `Season ${season.innerText}, Episode ${episode.innerText}`;
+      presenceData.details = videoTitle
+        ? videoTitle.textContent
+        : "Title not found...";
+      presenceData.state = `Season ${season.textContent}, Episode ${episode.textContent}`;
     } else if (!season && episode) {
-      presenceData.details =
-        videoTitle !== null ? videoTitle.innerText : "Title not found...";
-      presenceData.state = `Episode ${episode.innerText}`;
+      presenceData.details = videoTitle
+        ? videoTitle.textContent
+        : "Title not found...";
+      presenceData.state = `Episode ${episode.textContent}`;
     } else {
       presenceData.details = "Watching";
-      presenceData.state =
-        videoTitle !== null ? videoTitle.innerText : "Title not found...";
+      presenceData.state = videoTitle
+        ? videoTitle.textContent
+        : "Title not found...";
     }
 
     if (video.paused) {
@@ -81,6 +76,6 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (videoTitle !== null) presence.setActivity(presenceData, !video.paused);
+    if (videoTitle) presence.setActivity(presenceData, !video.paused);
   }
 });

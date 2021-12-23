@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "VocalZero",
     "id": "223891083724193792"
@@ -12,14 +12,14 @@
     "animeultima.to",
     "www1.animeultima.to"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/yL5SICQ.png",
   "thumbnail": "https://i.imgur.com/3K2hG7O.png",
   "color": "#FF3333",
+  "category": "anime",
   "tags": [
     "anime",
     "nfsw",
     "video"
-  ],
-  "category": "anime"
+  ]
 }

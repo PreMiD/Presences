@@ -1,39 +1,39 @@
 const presence = new Presence({
     clientId: "671599195462959104"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "gcalendar"
+    largeImageKey: "gcalendar",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname === "/")
     presenceData.details = "In the Homepage";
   else if (document.location.pathname.startsWith("/calendar/")) {
     if (document.location.pathname.startsWith("/calendar/r/day")) {
-      const dated = document.querySelector("head > title").textContent;
       presenceData.details = "Viewing the day schedule:";
-      presenceData.state = dated
-        .replace("Google Calendar - ", "")
+      presenceData.state = document
+        .querySelector("head > title")
+        .textContent.replace("Google Calendar - ", "")
         .replace(/,/g, " -");
     } else if (document.location.pathname.startsWith("/calendar/r/week")) {
-      const datew = document.querySelector("head > title").textContent;
       presenceData.details = "Viewing the week schedule:";
-      presenceData.state = datew
-        .replace("Google Calendar - ", "")
+      presenceData.state = document
+        .querySelector("head > title")
+        .textContent.replace("Google Calendar - ", "")
         .replace(/,/g, " -");
     } else if (document.location.pathname.startsWith("/calendar/r/month")) {
-      const datem = document.querySelector("head > title").textContent;
       presenceData.details = "Viewing the month schedule:";
-      presenceData.state = datem.replace("Google Calendar - ", "");
+      presenceData.state = document
+        .querySelector("head > title")
+        .textContent.replace("Google Calendar - ", "");
     } else if (document.location.pathname.startsWith("/calendar/r/year")) {
-      const datey = document.querySelector("head > title").textContent;
       presenceData.details = "Viewing the year schedule:";
-      [, presenceData.state] = datey
-        .replace("Google Calendar - ", "")
+      [, presenceData.state] = document
+        .querySelector("head > title")
+        .textContent.replace("Google Calendar - ", "")
         .split(" ");
     } else if (document.location.pathname.startsWith("/calendar/r/agenda"))
       presenceData.details = "Browsing in the schedule";
@@ -43,9 +43,8 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.startsWith("/calendar/r/eventedit"))
       presenceData.details = "Editing a event";
     else if (document.location.pathname.startsWith("/calendar/r/search")) {
-      const eventsearch = document.location.href;
       presenceData.details = "Searching the event:";
-      presenceData.state = eventsearch
+      presenceData.state = document.location.href
         .replace("https://calendar.google.com/calendar/r/search?q=", "")
         .replace(/%20/g, " ");
     } else if (document.location.pathname.startsWith("/calendar/r/trash"))
@@ -87,9 +86,8 @@ presence.on("UpdateData", () => {
         "https://calendar.google.com/calendar/embed?"
       )
     ) {
-      const calendarn = document.querySelector("head > title").textContent;
       presenceData.details = "Browsing the calendar:";
-      presenceData.state = calendarn;
+      presenceData.state = document.querySelector("head > title").textContent;
     } else if (
       document.location.href.startsWith(
         "https://calendar.google.com/calendar/embedhelper?"
@@ -99,8 +97,6 @@ presence.on("UpdateData", () => {
     else presenceData.details = "Viewing the calendar";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

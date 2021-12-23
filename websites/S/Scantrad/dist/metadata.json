@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Kozou",
     "id": "379362415428632576"
@@ -11,15 +11,15 @@
     "nl": "Scantrad is een gratis franse website waar u de laatste scans van het moment kunt lezen."
   },
   "url": "scantrad.net",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "logo": "https://i.imgur.com/SJmPvgX.png",
   "thumbnail": "https://i.imgur.com/BMhCrx7.png",
   "color": "#cf4104",
+  "category": "other",
   "tags": [
     "scantrad",
     "manga",
     "scan",
     "reading"
-  ],
-  "category": "other"
+  ]
 }

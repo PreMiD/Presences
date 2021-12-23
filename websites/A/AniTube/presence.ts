@@ -9,14 +9,10 @@ presence.on("UpdateData", async () => {
     titulo = document.title;
 
   if (titulo.includes("Resultados da pesquisa")) {
-    const result = document.querySelector(
-      "body > div.pagAniTitulo > div > h1"
-    ).textContent;
     presenceData.details = "Página de Busca";
-    presenceData.state = `Pesquisando: ${result.replace(
-      "Você pesquisou por:",
-      ""
-    )}`;
+    presenceData.state = `Pesquisando: ${document
+      .querySelector("body > div.pagAniTitulo > div > h1")
+      .textContent.replace("Você pesquisou por:", "")}`;
     presenceData.startTimestamp = tempo;
   } else if (path === "/lista-de-animes-online/") {
     presenceData.details = "Animes Legendados";
@@ -31,14 +27,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Calendário de Animes";
     presenceData.startTimestamp = tempo;
   } else if (titulo.includes("Todos os Epi")) {
-    const nameAni = document.querySelector(
-        "body > div.pagAniTitulo > div > h1"
-      ).textContent,
-      genrAni = document.querySelector(
-        "#anime > div.animeFlexContainer > div.right > div > div:nth-child(2)"
-      ).textContent;
-    presenceData.details = nameAni.replace(" – Todos os Episódios", "");
-    presenceData.state = genrAni;
+    presenceData.details = document
+      .querySelector("body > div.pagAniTitulo > div > h1")
+      .textContent.replace(" – Todos os Episódios", "");
+    presenceData.state = document.querySelector(
+      "#anime > div.animeFlexContainer > div.right > div > div:nth-child(2)"
+    ).textContent;
     presenceData.startTimestamp = tempo;
   } else if (titulo.includes(" – Episód")) {
     const AniN = document
@@ -59,9 +53,7 @@ presence.on("UpdateData", async () => {
 
     const video: HTMLVideoElement = document.querySelector(".jw-video");
 
-    if (video !== null && !isNaN(video.duration)) {
-      const videoTitle = AniN,
-        seasonepisode = AniEp.replace("– ", "").replace(" [SEM CENSURA]", "");
+    if (video && !isNaN(video.duration)) {
       [presenceData.startTimestamp, presenceData.endTimestamp] =
         presence.getTimestamps(
           Math.floor(video.currentTime),
@@ -69,8 +61,10 @@ presence.on("UpdateData", async () => {
         );
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused ? "Pausado" : "Assistindo";
-      presence.setTrayTitle(video.paused ? "" : videoTitle);
-      presenceData.state = seasonepisode;
+      presenceData.state = AniEp.replace("– ", "").replace(
+        " [SEM CENSURA]",
+        ""
+      );
 
       if (video.paused) {
         delete presenceData.startTimestamp;
@@ -79,8 +73,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

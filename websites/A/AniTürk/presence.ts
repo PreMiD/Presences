@@ -22,7 +22,7 @@ presence.on("iFrameData", async (data: IFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "aniturk"
     },
     title = document.querySelector(
@@ -36,30 +36,31 @@ presence.on("UpdateData", async () => {
 
   //Episode part
   if (title && episode) {
-    data.details = title.textContent;
-    data.state = episode.textContent.replace(
+    presenceData.details = title.textContent;
+    presenceData.state = episode.textContent.replace(
       title.textContent.split(" ").slice(1).join(" "),
       ""
     );
   } else {
     //Home page part
-    data.details = (await strings).browsing;
-    data.startTimestamp = startTimestamp;
+    presenceData.details = (await strings).browsing;
+    presenceData.startTimestamp = startTimestamp;
   }
 
   if (video) {
-    data.smallImageKey = video.paused ? "stop" : "resume";
-    data.smallImageText = video.paused
+    presenceData.smallImageKey = video.paused ? "stop" : "resume";
+    presenceData.smallImageText = video.paused
       ? (await strings).paused
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
     }
   }
 
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

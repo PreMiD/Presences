@@ -16,6 +16,5 @@ presence.on("UpdateData", async () => {
   )
     presenceData.details = "/index";
 
-  presence.setTrayTitle(`Terminal 00 - ${presenceData.details}`);
   presence.setActivity(presenceData);
 });

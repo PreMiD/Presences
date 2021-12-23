@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Dark_Ville",
     "id": "638080361179512853"
@@ -20,13 +20,13 @@
     "nl": "StopotS, het stop spel op het internet. Speel dit populaire spel gratis en zonder downloads."
   },
   "url": "stopots.com",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "logo": "https://i.imgur.com/ciqA1gc.png",
   "thumbnail": "https://i.imgur.com/Bg869KE.png",
   "color": "#FFBE55",
+  "category": "games",
   "tags": [
     "stopots",
     "games"
-  ],
-  "category": "games"
+  ]
 }

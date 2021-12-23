@@ -3,39 +3,39 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "vector"
   };
 
   // Support - support.something.host
   if (window.location.hostname === "support.something.host") {
-    data.details = "Helpdesk";
+    presenceData.details = "Helpdesk";
 
     if (window.location.pathname.includes("/article")) {
-      data.state = `Article: ${
+      presenceData.state = `Article: ${
         document.querySelector("html > body > nav > div > div >div > div > h1")
           .textContent
       }`;
     } else if (window.location.pathname.includes("/category")) {
-      data.state = `Category: ${
+      presenceData.state = `Category: ${
         document.querySelector(
           "body > nav > div > div > div > div > span.csh-navigation-title-list-subject > span.csh-category-badge.csh-font-sans-semibold"
         ).textContent
       }`;
-    } else data.state = "Browsing";
+    } else presenceData.state = "Browsing";
   }
 
   // Landing Site - something.host
   if (window.location.hostname === "something.host") {
-    data.details = "Landing Site";
+    presenceData.details = "Landing Site";
 
     if (
       document.querySelector("head > title").textContent ===
       "Home || SomethingHost"
     )
-      data.state = "Home";
+      presenceData.state = "Home";
     else {
-      data.state = document
+      presenceData.state = document
         .querySelector("head > title")
         .textContent.replace("SomethingHost", "")
         .replace("|", "");
@@ -44,22 +44,23 @@ presence.on("UpdateData", async () => {
 
   // CDN - content.something.host
   if (window.location.hostname === "content.something.host")
-    data.details = "Content";
+    presenceData.details = "Content";
 
   // Files - files.something.host
   if (window.location.hostname === "files.something.host")
-    data.details = "File Manager";
+    presenceData.details = "File Manager";
 
   // Control Panel - cp.something.host
   if (window.location.hostname === "cp.something.host") {
-    data.details = "Control Panel";
+    presenceData.details = "Control Panel";
 
-    if (window.location.pathname.startsWith("/profile")) data.state = "Profile";
+    if (window.location.pathname.startsWith("/profile"))
+      presenceData.state = "Profile";
     else {
-      data.state = document
+      presenceData.state = document
         .querySelector("head > title")
         .textContent.replace("SomethingCP - ", "");
     }
   }
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

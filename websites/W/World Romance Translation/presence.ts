@@ -1,19 +1,18 @@
 const presence = new Presence({
     clientId: "857964031700238356"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "wrt_icon",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
-    { pathname } = document.location,
-    readerArea: HTMLDivElement = document.querySelector("div#readerarea");
+    { pathname } = document.location;
 
   if (pathname === "/") {
-    const searchQuery: HTMLHeadingElement =
-      document.querySelector("div.releases > h1");
+    const searchQuery =
+      document.querySelector<HTMLHeadingElement>("div.releases > h1");
     if (!searchQuery) presenceData.details = "Melihat Homepage";
     else {
       const { innerText } = searchQuery;
@@ -23,26 +22,26 @@ presence.on("UpdateData", async () => {
       )}`;
     }
   } else if (pathname.startsWith("/genres/")) {
-    const genres = document.querySelector(
-      "div.wrapper > div > div > div.releases > h1"
-    ).textContent;
     presenceData.details = "Filter Berdasarkan Genre...";
-    presenceData.state = `Genre: ${genres}`;
+    presenceData.state = `Genre: ${
+      document.querySelector("div.wrapper > div > div > div.releases > h1")
+        .textContent
+    }`;
     presenceData.smallImageKey = "search";
-  } else if (readerArea !== null) {
-    const mangaName: HTMLHeadingElement =
-        document.querySelector("h1.entry-title"),
-      chapterNumber: HTMLSelectElement =
-        document.querySelector("select#chapter"),
-      pageNumber: HTMLSelectElement = document.querySelector(
+  } else if (document.querySelector("div#readerarea")) {
+    const mangaName =
+        document.querySelector<HTMLHeadingElement>("h1.entry-title"),
+      chapterNumber =
+        document.querySelector<HTMLSelectElement>("select#chapter"),
+      pageNumber = document.querySelector<HTMLSelectElement>(
         "select#select-paged"
       );
-    if (mangaName !== null && chapterNumber !== null && pageNumber !== null) {
-      presenceData.details = `Membaca ${mangaName.innerText.substring(
+    if (mangaName && chapterNumber && pageNumber) {
+      presenceData.details = `Membaca ${mangaName.textContent.substring(
         0,
-        mangaName.innerText.indexOf("Chapter")
+        mangaName.textContent.indexOf("Chapter")
       )}`;
-      presenceData.state = `${chapterNumber.selectedOptions[0].innerText} Slide ${pageNumber.selectedOptions[0].innerText}`;
+      presenceData.state = `${chapterNumber.selectedOptions[0].textContent} Slide ${pageNumber.selectedOptions[0].textContent}`;
     }
 
     presenceData.buttons = [
@@ -52,11 +51,11 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (pathname.startsWith("/manga/")) {
-    const mangaName: HTMLHeadingElement =
-      document.querySelector("h1.entry-title");
+    const mangaName =
+      document.querySelector<HTMLHeadingElement>("h1.entry-title");
     presenceData.details =
       pathname === "/manga/" ? "Melihat Daftar Manga" : "Melihat Detail Manga";
-    if (mangaName) presenceData.state = mangaName.innerText;
+    if (mangaName) presenceData.state = mangaName.textContent;
     presenceData.buttons = [
       {
         label:
@@ -77,8 +76,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Melihat Kebijakan Privasi";
   else if (pathname === "/dmca/") presenceData.details = "Melihat DMCA";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

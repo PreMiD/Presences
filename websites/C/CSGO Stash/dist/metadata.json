@@ -1,19 +1,22 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Kyrie",
     "id": "368399721494216706"
   },
   "service": "CSGO Stash",
-  "altnames": ["CS:GO Stash"],
+  "altnames": [
+    "CS:GO Stash"
+  ],
   "description": {
     "en": "Browse all CS:GO skins, knives, gloves, cases, collections, stickers, music kits, and more. Check prices, market stats, previews, and more for every CS:GO items"
   },
   "url": "csgostash.com",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/1jY4wvb.png",
   "thumbnail": "https://i.imgur.com/C7bWRwD.png",
   "color": "#13AFF0",
+  "category": "games",
   "tags": [
     "cs",
     "go",
@@ -24,6 +27,5 @@
     "market",
     "marketplace",
     "valve"
-  ],
-  "category": "games"
+  ]
 }

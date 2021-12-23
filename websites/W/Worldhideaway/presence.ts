@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "815515385326469131"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     page = window.location.pathname,
     expage = window.location.href;
@@ -38,11 +38,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viendo Noticia Sobre:";
     presenceData.state = title.textContent;
   } else if (page.includes("/members/")) {
-    const titles = document.querySelector(
-      "#item-header-content > div > div > div.flex.align-items-center.member-title-wrap > h2"
-    );
     presenceData.details = "Viendo:";
-    presenceData.state = `${titles.textContent}'s Perfil`;
+    presenceData.state = `${
+      document.querySelector(
+        "#item-header-content > div > div > div.flex.align-items-center.member-title-wrap > h2"
+      ).textContent
+    }'s Perfil`;
   } else if (page.includes("/category/")) {
     title = document.querySelector("#main > header > h1 > span");
     presenceData.details = "Viendo Categoría:";
@@ -97,8 +98,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,13 +10,13 @@
     "nl": "Skillshare is een leerplatform met online lessen gegeven door 's werelds best practitioners."
   },
   "url": "www.skillshare.com",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/WTfjamG.png",
   "thumbnail": "https://i.imgur.com/PdormPN.png",
   "color": "#2abfc6",
+  "category": "videos",
   "tags": [
     "share",
     "skills"
-  ],
-  "category": "videos"
+  ]
 }

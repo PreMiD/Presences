@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "843781235494486046"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
   const setting = {
@@ -13,7 +13,7 @@ presence.on("UpdateData", async function () {
       largeImageKey: "logo"
     };
 
-  if (setting.timeElapsed) presenceData.startTimestamp = browsingStamp;
+  if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (!urlpath[1]) presenceData.details = "Home";
   else if (urlpath[1] === "news" && urlpath[2]) {
@@ -102,8 +102,6 @@ presence.on("UpdateData", async function () {
     )?.value;
   } else presenceData.details = "Other";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

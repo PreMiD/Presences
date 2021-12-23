@@ -8,11 +8,11 @@ const presence = new Presence({
 
 let lastPlaybackState = null,
   playback,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
@@ -23,11 +23,11 @@ presence.on("UpdateData", async () => {
 
   if (!playback) {
     const presenceData: PresenceData = {
-      largeImageKey: "lg"
+      largeImageKey: "lg",
+      startTimestamp: browsingTimestamp
     };
 
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     "#player > div.jw-media.jw-reset > video"
   );
 
-  if (video !== null) {
+  if (video) {
     const videoTitle = document.querySelector(
         "div > div.episodeInfo > div.nomeAnime"
       ) as HTMLElement,
@@ -51,8 +51,8 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       presenceData: PresenceData = {
-        details: videoTitle.innerText,
-        state: episode.innerText,
+        details: videoTitle.textContent,
+        state: episode.textContent,
         largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
@@ -62,12 +62,8 @@ presence.on("UpdateData", async () => {
         endTimestamp
       };
 
-    presence.setTrayTitle(videoTitle.innerText);
-
-    presenceData.details = videoTitle.innerText;
-    presenceData.state = episode.innerText;
-    presenceData.startTimestamp = browsingStamp;
-
+    presenceData.details = videoTitle.textContent;
+    presenceData.state = episode.textContent;
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;

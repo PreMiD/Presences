@@ -19,7 +19,7 @@ const presence = new Presence({
       },
       await presence.getSetting("lang").catch(() => "en")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let strings = getStrings(),
   oldLang: string = null,
@@ -32,15 +32,16 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       details: (await strings).browse,
       smallImageKey: "reading",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     newLang: string = await presence.getSetting("lang").catch(() => "en"),
     buttonsOn: boolean = await presence.getSetting("buttons"),
     searchQueryOn: boolean = await presence.getSetting("searchQ"),
-    PresenceLogo: number = await presence.getSetting("logo"),
+    presenceLogo: number = await presence.getSetting("logo"),
+    // eslint-disable-next-line no-one-time-vars/no-one-time-vars
     logos = ["viu_logo", "viu_logo_text"];
 
-  presenceData.largeImageKey = logos[PresenceLogo];
+  presenceData.largeImageKey = logos[presenceLogo];
 
   if (oldPath !== document.location.pathname) {
     oldPath = document.location.pathname;
@@ -63,22 +64,18 @@ presence.on("UpdateData", async () => {
         document.getElementsByName("keywords")[0] as HTMLMetaElement
       ).content
         .split(", ")
-        .some((keyword) => keyword.toLowerCase().includes("movie"));
+        .some(keyword => keyword.toLowerCase().includes("movie"));
 
     if (video) {
-      const timestamp = presence.getTimestampsfromMedia(video).pop(),
-        episode = videoData.dimension2,
+      const episode = videoData.dimension2,
         episodeName = document.querySelector(
           "h3.video-update-epi-name"
         ).textContent,
-        episodeNameRegex = new RegExp(videoData.dimension1),
         hasEpName = episodeName.match(/([1-9]?[0-9]?[0-9])/)
           ? episode !== episodeName.match(/([1-9]?[0-9]?[0-9])/)[0] &&
-            !episodeNameRegex.test(episodeName)
+            !new RegExp(videoData.dimension1).test(episodeName)
           : true,
-        part = episodeName.match(/([1-9]\/[1-9])/g),
-        isTrailer = !!videoData.dimension1.match(/(trailer?:? )/i),
-        isHighlight = !!videoData.dimension1.match(/(highlight?:? )/i);
+        part = episodeName.match(/([1-9]\/[1-9])/g);
 
       presenceData.details = videoData.dimension1.replace(
         /(trailer?:? |highlight?:? )/i,
@@ -86,11 +83,11 @@ presence.on("UpdateData", async () => {
       );
 
       if (isMovie) presenceData.state = "Movie";
-      else if (isHighlight) {
+      else if (videoData.dimension1.match(/(highlight?:? )/i)) {
         presenceData.state = `Highlight • EP.${episode}${
           part ? ` • ${part[0]} ` : ""
         }${hasEpName ? ` • ${episodeName}` : ""}`;
-      } else if (isTrailer) {
+      } else if (videoData.dimension1.match(/(trailer?:? )/i)) {
         presenceData.state = `Trailer • EP.${episode}${
           part ? ` • ${part[0]} ` : ""
         }${hasEpName ? ` • ${episodeName}` : ""}`;
@@ -105,7 +102,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
 
-      presenceData.endTimestamp = timestamp;
+      presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
 
       if (buttonsOn) {
         presenceData.buttons = [
@@ -135,13 +132,11 @@ presence.on("UpdateData", async () => {
     let unknownType = false;
 
     if (video) {
-      const timestamp = presence.getTimestampsfromMedia(video).pop();
-
       if (!episodeData && !isMovie) {
         const episodeCard = Array.from(
           document.querySelectorAll(".CN-episodeCard")
         ).find(
-          (x) =>
+          x =>
             x.querySelector("img")?.alt ===
             document.querySelector(".ep_title").textContent
         );
@@ -174,7 +169,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
 
-      presenceData.endTimestamp = timestamp;
+      presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
 
       if (buttonsOn) {
         presenceData.buttons = [

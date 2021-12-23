@@ -12,7 +12,7 @@ let iFrameVideo: boolean,
   paused: boolean,
   lastPlaybackState = false,
   playback: boolean,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 interface IFrameData {
   iframeVideo: {
@@ -24,8 +24,7 @@ interface IFrameData {
 }
 
 presence.on("iFrameData", (data: IFrameData) => {
-  playback = data.iframeVideo.dur !== null ? true : false;
-  if (playback) {
+  if (data.iframeVideo.dur) {
     ({ iFrameVideo, paused } = data.iframeVideo);
     currentTime = data.iframeVideo.currTime;
     duration = data.iframeVideo.dur;
@@ -37,11 +36,11 @@ presence.on("UpdateData", async () => {
     largeImageKey: "shinden"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (lastPlaybackState !== playback) {
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (document.location.host === "shinden.pl") {
@@ -51,7 +50,7 @@ presence.on("UpdateData", async () => {
     )
       presenceData.details = "Browsing...";
     else if (document.location.pathname.includes("/news/")) {
-      if (document.querySelector(".box-title") !== null) {
+      if (document.querySelector(".box-title")) {
         presenceData.details = "Reading article:";
         presenceData.state = document
           .querySelector(".box-title")
@@ -67,7 +66,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       } else presenceData.details = "Viewing recent articles";
     } else if (document.location.pathname.includes("/series")) {
-      if (document.querySelector(".page-title") !== null) {
+      if (document.querySelector(".page-title")) {
         if (document.location.pathname.includes("/episodes"))
           presenceData.details = "Viewing episodes of serie:";
         else if (document.location.pathname.includes("/characters"))
@@ -124,7 +123,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = `of serie: ${serie}`;
       }
     } else if (document.location.pathname.includes("/manga")) {
-      if (document.querySelector(".page-title") !== null) {
+      if (document.querySelector(".page-title")) {
         if (document.location.pathname.includes("/chapters"))
           presenceData.details = "Viewing chapters of manga:";
         else if (document.location.pathname.includes("/characters"))
@@ -142,12 +141,12 @@ presence.on("UpdateData", async () => {
           .textContent.replace("Manga: ", "");
       } else presenceData.details = "Browsing mangas...";
     } else if (document.location.pathname.includes("/character")) {
-      if (document.querySelector(".page-title") !== null) {
+      if (document.querySelector(".page-title")) {
         presenceData.details = "Viewing character:";
         presenceData.state = document.querySelector(".page-title").textContent;
       } else presenceData.details = "Viewing characters";
     } else if (document.location.pathname.includes("/staff")) {
-      if (document.querySelector(".page-title") !== null) {
+      if (document.querySelector(".page-title")) {
         presenceData.details = "Viewing staff member:";
         presenceData.state = document.querySelector(".page-title").textContent;
       } else presenceData.details = "Viewing staff members";
@@ -180,7 +179,7 @@ presence.on("UpdateData", async () => {
       if (
         document.querySelector(
           "#content > div > div.pageContent > div.mainContainer > div > div.titleBar > h1"
-        ) !== null
+        )
       ) {
         presenceData.details = "Viewing group:";
         presenceData.state = document
@@ -192,8 +191,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

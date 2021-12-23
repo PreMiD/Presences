@@ -8,17 +8,15 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const host = window.location.hostname.replace("www.", ""),
-    path = window.location.pathname.split("/").slice(1),
+  const path = window.location.pathname.split("/").slice(1),
     presenceData: PresenceData = {
       details: "IFTTT",
       largeImageKey: "logo_big"
     };
 
-  switch (host) {
+  switch (window.location.hostname.replace("www.", "")) {
     //IFTTT URL Shortener (for the Help Center)
     case "ift.tt":
-      presence.setTrayTitle();
       presence.setActivity();
       return;
 
@@ -40,7 +38,7 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageText = (await strings).reading;
 
               presenceData.details = "Documentation";
-              presenceData.state = document.querySelector("h1").innerText;
+              presenceData.state = document.querySelector("h1").textContent;
             } else {
               presenceData.smallImageKey = "reading";
               presenceData.smallImageText = (await strings).browsing;
@@ -98,7 +96,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "reading";
             presenceData.smallImageText = (await strings).reading;
 
-            presenceData.state = document.querySelector("h1").innerText;
+            presenceData.state = document.querySelector("h1").textContent;
             break;
           //Categories
           case "categories":
@@ -106,7 +104,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "reading";
             presenceData.smallImageText = (await strings).browsing;
 
-            presenceData.state = document.querySelector("h1").innerText;
+            presenceData.state = document.querySelector("h1").textContent;
             break;
           //Search
           case "search":
@@ -160,7 +158,6 @@ presence.on("UpdateData", async () => {
                 break;
             }
           } else {
-            presence.setTrayTitle();
             presence.setActivity();
             return;
           }
@@ -208,7 +205,7 @@ presence.on("UpdateData", async () => {
           if (path.length > 1) {
             switch (path[1]) {
               case "service":
-                presenceData.state = document.querySelector("h1").innerText;
+                presenceData.state = document.querySelector("h1").textContent;
                 break;
             }
           }
@@ -223,7 +220,7 @@ presence.on("UpdateData", async () => {
         case "weather":
         case "maker_webhooks":
           presenceData.details = "My Services";
-          presenceData.state = document.querySelector("h1").innerText;
+          presenceData.state = document.querySelector("h1").textContent;
           break;
         case "my_services":
           presenceData.details = "My Services";
@@ -267,9 +264,8 @@ presence.on("UpdateData", async () => {
         default:
           if (document.getElementsByClassName("brand-section").length > 0) {
             presenceData.details = "Services";
-            presenceData.state = document.querySelector("h1").innerText;
+            presenceData.state = document.querySelector("h1").textContent;
           } else {
-            presence.setTrayTitle();
             presence.setActivity();
             return;
           }

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "859440340683325491"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let data: {
   currTime: number;
@@ -23,35 +23,36 @@ presence.on(
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location,
-    pages =
-      /\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/,
     buttons: boolean = await presence.getSetting("buttons");
 
   if (pathname === "/" || pathname === "/home")
     presenceData.details = "Exploring Zoro.to";
-  else if (pages.test(pathname)) {
+  else if (
+    /\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/.test(
+      pathname
+    )
+  ) {
     const heading: HTMLHeadElement = document.querySelector("h2.cat-heading");
-    if (heading) presenceData.details = `Looking at ${heading.innerText}`;
+    if (heading) presenceData.details = `Looking at ${heading.textContent}`;
   } else if (pathname.startsWith("/news")) {
     presenceData.details = "Looking at Anime news";
     if (pathname !== "/news") {
       const title: HTMLHeadingElement = document.querySelector("h2.news-title");
-      if (title) presenceData.state = title.innerText;
+      if (title) presenceData.state = title.textContent;
     }
   } else if (pathname === "/search") {
     presenceData.details = "Searching";
-    const { search } = document.location;
-    presenceData.state = search.substring(9);
+    presenceData.state = document.location.search.substring(9);
   } else if (pathname.startsWith("/user")) {
     const profile: HTMLDivElement = document.querySelector("div.ph-title"),
       link: HTMLAnchorElement = document
         .querySelector("ul.nav.nav-tabs.pre-tabs")
         .querySelector("a.nav-link.active");
-    if (profile) presenceData.details = `Viewing User: ${profile.innerText}`;
-    if (link) presenceData.state = `At ${link.innerText}`;
+    if (profile) presenceData.details = `Viewing User: ${profile.textContent}`;
+    if (link) presenceData.state = `At ${link.textContent}`;
   } else if (
     pathname.startsWith("people") ||
     pathname.startsWith("character")
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Looking at ${
         pathname.startsWith("/people") ? "People" : "Character"
       }`;
-      presenceData.state = name.innerText;
+      presenceData.state = name.textContent;
     }
   } else if (pathname.startsWith("/az-list")) {
     presenceData.details = "Looking at Anime list";
@@ -79,7 +80,7 @@ presence.on("UpdateData", async () => {
       const filmName: HTMLHeadingElement =
         document.querySelector("h2.film-name");
       presenceData.details = "In a room";
-      if (filmName) presenceData.state = `Watching ${filmName.innerText}`;
+      if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
       if (data) {
         if (!data.paused) {
           [, presenceData.endTimestamp] = presence.getTimestamps(
@@ -104,8 +105,8 @@ presence.on("UpdateData", async () => {
       episode: HTMLSpanElement = document.querySelector(
         "span#cm-episode-number"
       );
-    if (title) presenceData.details = title.innerText;
-    if (episode) presenceData.state = `Episode ${episode.innerText}`;
+    if (title) presenceData.details = title.textContent;
+    if (episode) presenceData.state = `Episode ${episode.textContent}`;
     if (data) {
       if (!data.paused) {
         [, presenceData.endTimestamp] = presence.getTimestamps(
@@ -126,15 +127,15 @@ presence.on("UpdateData", async () => {
   else if (pathname.startsWith("/event/")) {
     const title: HTMLDivElement = document.querySelector("div.title"),
       description: HTMLDivElement = document.querySelector("div.description");
-    if (title) presenceData.details = `Event: ${title.innerText}`;
-    if (description) presenceData.state = description.innerText;
+    if (title) presenceData.details = `Event: ${title.textContent}`;
+    if (description) presenceData.state = description.textContent;
   } else {
     const title: HTMLHeadingElement = document.querySelector(
       "h2.film-name.dynamic-name"
     );
     if (title) {
       presenceData.details = "Checking Synopsis";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       if (buttons) {
         presenceData.buttons = [
           {
@@ -146,8 +147,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,6 +1,6 @@
-const Tailwind = new Presence({ clientId: "818756651279450144" });
+const presence = new Presence({ clientId: "818756651279450144" });
 
-Tailwind.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   const path = location.pathname,
     [subdomain] = location.host.split("."),
     presenceData: PresenceData = {
@@ -12,13 +12,11 @@ Tailwind.on("UpdateData", async () => {
     presenceData.details = "Viewing page:";
     if (path.includes("/components")) {
       if (path.includes("/components/")) {
-        const pathnames = location.pathname.split("/"),
-          category = pathnames[pathnames.length - 2]
-            .replace(/-/g, " ")
-            .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
-
+        const pathnames = location.pathname.split("/");
         presenceData.details = "Viewing component:";
-        presenceData.state = `${category} - ${
+        presenceData.state = `${pathnames[pathnames.length - 2]
+          .replace(/-/g, " ")
+          .replace(/(^\w|\s\w)/g, m => m.toUpperCase())} - ${
           document.querySelector("main .max-w-8xl h2")?.textContent ||
           "Unknown component"
         }`;
@@ -53,5 +51,5 @@ Tailwind.on("UpdateData", async () => {
     presenceData.state = "Resources";
   } else presenceData.details = "Viewing an unknown page";
 
-  Tailwind.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });

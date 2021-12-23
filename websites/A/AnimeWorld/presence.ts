@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "678265146883178519"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let iFrameVideo: boolean,
   currentTime: number,
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "pokemonlogo" // Bas has been here
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname === "/") {
     // Homepage
@@ -333,9 +333,6 @@ presence.on("UpdateData", async () => {
       ).textContent,
       studio = document.querySelector(
         "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(10) > a"
-      ).textContent,
-      episode = document.querySelector(
-        "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(2) > dd:nth-child(6)"
       ).textContent;
     let vote = document.querySelector(
       "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(2) > dd:nth-child(10)"
@@ -343,7 +340,7 @@ presence.on("UpdateData", async () => {
     const visual = document.querySelector(
       "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(2) > dd:nth-child(10)"
     ).textContent;
-    if (document.querySelector("#unavailable") !== null) {
+    if (document.querySelector("#unavailable")) {
       let [newname] = document.title
         .split("AnimeWorld - ")[1]
         .split(" Streaming & ");
@@ -354,7 +351,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Guarda l'annunciato:\n${newname}`;
       presenceData.state =
         `${"Più informazioni quì 📌\n" + "\nUscirà il: "}${releaseDate}\n` +
-        `Episodi: ${episode}\n` +
+        `Episodi: ${
+          document.querySelector(
+            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(2) > dd:nth-child(6)"
+          ).textContent
+        }\n` +
         `Studio: ${studio}\n` +
         `Voto: ${vote}\n` +
         `Visualizzazioni: ${visual}`;
@@ -451,7 +452,7 @@ presence.on("UpdateData", async () => {
             `Studio: ${studio}\n` +
             `Voto: ${vote}\n` +
             `Visualizzazioni: ${visual}`;
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.startTimestamp = browsingTimestamp;
         } // OAV
       } else if (
         document
@@ -653,8 +654,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Navigando...";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -59,12 +59,12 @@ presence.on("UpdateData", () => {
     ) {
       if (window.document.getElementById("profil121")) {
         if (
-          window.document.getElementById("profil121").innerText ===
+          window.document.getElementById("profil121").textContent ===
           "Mes apparts"
         )
           presenceData.state = `Regarde les appartements de ${window.document.title}`;
         else if (
-          window.document.getElementById("profil121").innerText ===
+          window.document.getElementById("profil121").textContent ===
           "Mes groupes"
         )
           presenceData.state = `Regarde les groupes de ${window.document.title}`;
@@ -313,7 +313,7 @@ presence.on("UpdateData", () => {
       window.document.getElementById("settings38")
     ) {
       if (
-        window.document.getElementById("settings38").innerText ===
+        window.document.getElementById("settings38").textContent ===
         "Mon mot de passe"
       ) {
         presenceData.details = "Paramètres - Mot de passe";
@@ -325,7 +325,7 @@ presence.on("UpdateData", () => {
       window.document.getElementById("settings38")
     ) {
       if (
-        window.document.getElementById("settings38").innerText ===
+        window.document.getElementById("settings38").textContent ===
         "Mon adresse email"
       ) {
         presenceData.details = "Paramètres - E-mail";
@@ -337,7 +337,7 @@ presence.on("UpdateData", () => {
       window.document.getElementById("settings20")
     ) {
       if (
-        window.document.getElementById("settings20").innerText === "Mes amis"
+        window.document.getElementById("settings20").textContent === "Mes amis"
       ) {
         presenceData.details = "Paramètres - Amis";
         presenceData.state = "Gère sa liste d'amis";
@@ -348,7 +348,7 @@ presence.on("UpdateData", () => {
       window.document.getElementById("settings38")
     ) {
       if (
-        window.document.getElementById("settings38").innerText === "Code pin"
+        window.document.getElementById("settings38").textContent === "Code pin"
       ) {
         presenceData.details = "Paramètres - Code PIN";
         presenceData.state = "Modifie son code PIN";
@@ -404,15 +404,12 @@ presence.on("UpdateData", () => {
       window.document.getElementById("b106")
     ) {
       if (window.document.getElementById("b106").style.display === "block") {
-        const badgetitle = document.getElementById("b110nom").innerText,
-          badgecode = (
-            document.getElementById("b109") as HTMLImageElement
-          ).src.replace("https://swf.habbocity.me/c_images/album1584/", "");
         presenceData.details = "Boutique - Mon inventaire";
-        presenceData.state = `Vend le badge ${badgetitle} - ${badgecode.replace(
-          ".gif",
-          ""
-        )}`;
+        presenceData.state = `Vend le badge ${
+          document.getElementById("b110nom").textContent
+        } - ${(document.getElementById("b109") as HTMLImageElement).src
+          .replace("https://swf.habbocity.me/c_images/album1584/", "")
+          .replace(".gif", "")}`;
       }
     }
     if (
@@ -438,7 +435,7 @@ presence.on("UpdateData", () => {
     ) {
       if (window.document.getElementById("b210").style.display === "block") {
         presenceData.details = "Boutique - Mon inventaire";
-        const apparttitle = document.getElementById("b215").innerText,
+        const apparttitle = document.getElementById("b215").textContent,
           sendto = (document.getElementById("b219") as HTMLInputElement).value;
         if (sendto !== "")
           presenceData.state = `Transfère l'appartement "${apparttitle}" à ${sendto}`;
@@ -494,7 +491,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "City Stories";
     if (window.document.getElementById("str4")) {
       presenceData.state = `Regarde la story de ${
-        window.document.getElementById("str4").innerText
+        window.document.getElementById("str4").textContent
       }`;
     }
   }
@@ -507,7 +504,7 @@ presence.on("UpdateData", () => {
     presenceData.state = "Regarde ses photos";
     if (window.document.getElementById("str46")) {
       presenceData.state = `Édite une photo : "${
-        window.document.getElementById("str46").innerText
+        window.document.getElementById("str46").textContent
       }"`;
     }
   }
@@ -516,11 +513,11 @@ presence.on("UpdateData", () => {
     window.document.getElementById("Parrainage") &&
     window.document.getElementById("Parrainage").style.display === "block"
   ) {
-    const link = (
-      window.document.getElementById("Parrainage-Link") as HTMLInputElement
-    ).value;
     presenceData.details = "Parrainage";
-    presenceData.state = `Parraine ses amis - https://${link}`;
+    presenceData.state = `Parraine ses amis - https://${
+      (window.document.getElementById("Parrainage-Link") as HTMLInputElement)
+        .value
+    }`;
   }
 
   if (
@@ -529,15 +526,15 @@ presence.on("UpdateData", () => {
   ) {
     const titlehelp = window.document.getElementById("ai5");
     if (titlehelp) {
-      if (titlehelp.innerText === "Centre d'aide") {
+      if (titlehelp.textContent === "Centre d'aide") {
         presenceData.details = "Centre d'aide";
         presenceData.state = "Parcoure le centre d'aide";
       }
-      if (titlehelp.innerText === "Service client") {
+      if (titlehelp.textContent === "Service client") {
         presenceData.details = "Centre d'aide - Support";
         presenceData.state = "Contacte le support";
       }
-      if (titlehelp.innerText === "Mon ticket") {
+      if (titlehelp.textContent === "Mon ticket") {
         presenceData.details = "Centre d'aide - Mes tickets";
         presenceData.state = "Regarde ses tickets";
       }

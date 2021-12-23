@@ -13,7 +13,7 @@ let lastPlaybackState: boolean,
     currentTime: 0,
     paused: true
   },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on(
   "iFrameData",
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
   if (lastPath !== curPath || lastPlaybackState !== playback) {
     lastPath = curPath;
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (!playback) {
@@ -58,35 +58,33 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Đang tìm ảnh";
     else {
       const title = document.querySelector(".anime-name>h1");
-      presenceData.details = title ? title.innerHTML : "Đang ở trang chủ";
+      presenceData.details = title ? title.textContent : "Đang ở trang chủ";
       if (title) presenceData.state = "Đang chọn tập";
     }
 
     if (!search.startsWith("?s=") && !curPath.includes("/category"))
       delete presenceData.state;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presence.setActivity(presenceData, false);
     return;
   }
 
-  if (video !== null && !isNaN(video.duration)) {
-    const title = document.querySelector("h1").innerHTML,
-      brand = document.querySelector("#nhasx").innerHTML,
-      timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+  if (video && !isNaN(video.duration)) {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
-    presence.setTrayTitle(video.paused ? "" : title);
-
-    presenceData.details = `Đang xem: ${title}`;
-    presenceData.state = brand;
+    presenceData.details = `Đang xem: ${
+      document.querySelector("h1").textContent
+    }`;
+    presenceData.state = document.querySelector("#nhasx").textContent;
 
     if (video.paused) {
       delete presenceData.startTimestamp;

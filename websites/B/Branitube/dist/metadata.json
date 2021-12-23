@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -13,14 +13,14 @@
     "nl": "Branitube is een braziliaanse anime streaming website."
   },
   "url": "www.branitube.net",
-  "version": "2.5.8",
+  "version": "2.5.9",
   "logo": "https://i.imgur.com/x5yDUF9.png",
   "thumbnail": "https://i.imgur.com/c3ELKV2.png",
   "color": "#1384c3",
+  "category": "anime",
   "tags": [
     "anime",
     "hentai",
     "nsfw"
-  ],
-  "category": "anime"
+  ]
 }

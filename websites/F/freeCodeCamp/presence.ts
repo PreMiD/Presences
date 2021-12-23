@@ -13,21 +13,19 @@ presence.on("UpdateData", () => {
       startTimestamp: timeStamp
     },
     arr = page.split("/").filter(String),
-    capitalize = (str) =>
+    capitalize = (str: string) =>
       str
         .split("-")
-        .map((item) =>
-          item.replace(item.charAt(0), item.charAt(0).toUpperCase())
-        )
+        .map(item => item.replace(item.charAt(0), item.charAt(0).toUpperCase()))
         .join(" "),
-    details = (page, title) => {
+    details = (page: string, title: string) => {
       if (page === "/") return "Viewing:";
       if (page.match(/^\/news|^\/settings|^\/donate/)) return "Viewing page:";
       if (page.startsWith("/learn"))
         return arr.length === 1 ? "Learning:" : `${capitalize(arr[1])}:`;
       if (title.startsWith("Profile")) return "Viewing Profile:";
     },
-    state = (page, title) => {
+    state = (page: string, title: string) => {
       if (page === "/") return "The Main Page";
       if (page.match(/^\/news|^\/settings|^\/donate/))
         return arr[1] ? title : capitalize(arr[0]);

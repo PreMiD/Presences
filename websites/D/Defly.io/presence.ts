@@ -1,14 +1,13 @@
 const presence = new Presence({
     clientId: "685054359200858241"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "deflyicon"
+    largeImageKey: "deflyicon",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname.includes("/gamemode-rules"))
     presenceData.details = "Viewing the game rules";
@@ -30,8 +29,6 @@ presence.on("UpdateData", () => {
     } else presenceData.details = "Viewing home page";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

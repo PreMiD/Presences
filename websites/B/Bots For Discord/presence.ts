@@ -1,27 +1,27 @@
 const presence = new Presence({
-  clientId: "806926545771167774"
-});
+    clientId: "806926545771167774"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    browsingStamp = Math.floor(Date.now() / 1000);
-  presenceData.startTimestamp = browsingStamp;
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
+  };
   if (window.location.hostname === "botsfordiscord.com") {
     presenceData.details = "Viewing page:";
     if (
       document
         .querySelector("head > title")
-        .innerHTML.split("|")[0]
+        .textContent.split("|")[0]
         .trim()
         .startsWith("Error")
     ) {
       presenceData.state = `${document
         .querySelector("#errortitle")
-        .innerHTML.trim()} (${document
+        .textContent.trim()} (${document
         .querySelector("#errorsubtitle")
-        .innerHTML.trim()})`;
+        .textContent.trim()})`;
     } else if (window.location.pathname.toLowerCase() === "/")
       presenceData.state = "Homepage";
     else if (window.location.pathname.toLowerCase() === "/bots")
@@ -39,11 +39,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a profile:";
       presenceData.state = document
         .querySelectorAll("div.container #highlight")[1]
-        .innerHTML.trim();
+        .textContent.trim();
     } else if (window.location.pathname.toLowerCase() === "/me/favorites") {
       presenceData.state = `${document
         .querySelectorAll("div.navbar-item a")[8]
-        .innerHTML.split("#")[0]
+        .textContent.split("#")[0]
         .trim()} favorite bots`;
     } else if (window.location.pathname.toLowerCase() === "/me/history")
       presenceData.state = "Voting history";
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing bots with tag:";
       presenceData.state = document
         .querySelector("div.container h1")
-        .innerHTML.split("</i>")[1]
+        .textContent.split("</i>")[1]
         .trim();
     } else if (window.location.pathname.toLowerCase() === "/login")
       presenceData.state = "Login";
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a bot:";
       presenceData.state = document
         .querySelectorAll("div.container #highlight")[0]
-        .innerHTML.split("<a")[0]
+        .textContent.split("<a")[0]
         .trim();
     } else if (window.location.pathname.startsWith("/bots/search/")) {
       presenceData.state =
@@ -80,11 +80,9 @@ presence.on("UpdateData", async () => {
   } else if (window.location.hostname === "docs.botsfordiscord.com") {
     if (window.location.pathname.startsWith("/")) {
       presenceData.details = "API Docs | Viewing page:";
-      presenceData.state = document.querySelector("h1 span").innerHTML.trim();
+      presenceData.state = document.querySelector("h1 span").textContent.trim();
     }
   }
-  if (!presenceData.state) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (!presenceData.state) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

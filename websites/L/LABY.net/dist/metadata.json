@@ -1,15 +1,19 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "LABY.net",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Northernside",
     "id": "434417514332815370"
   },
-  "category": "games",
+  "service": "LABY.net",
+  "description": {
+    "en": "A modern & fast Minecraft profile search. Find skins, capes, servers, statistics and more on LABY.net"
+  },
+  "url": "laby.net",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/VQVUkii.png",
   "thumbnail": "https://i.imgur.com/E6AroOr.png",
-  "version": "1.0.4",
   "color": "#000000",
+  "category": "games",
   "tags": [
     "minecraft",
     "labymod",
@@ -24,9 +28,5 @@
     "game",
     "gaming",
     "lookup"
-  ],
-  "url": "laby.net",
-  "description": {
-    "en": "A modern & fast Minecraft profile search. Find skins, capes, servers, statistics and more on LABY.net"
-  }
+  ]
 }

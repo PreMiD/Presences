@@ -45,7 +45,6 @@ presence.on("UpdateData", async () => {
       : (await strings).pause;
     playing ? (data.smallImageKey = "play") : (data.smallImageKey = "pause");
 
-    presence.setTrayTitle(songName.textContent);
     presence.setActivity(data);
   }
 });

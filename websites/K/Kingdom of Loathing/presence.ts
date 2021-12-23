@@ -60,17 +60,17 @@ const classNames = {
 } as { [id: number]: string };
 
 function formatDetails() {
-  const path = Number(kolStatus.path),
-    classId = kolStatus.class,
-    className = classId in classNames ? classNames[classId] : "Unknown Class";
-
-  if (path > 0) {
-    const hardcore = Number(kolStatus.hardcore) === 1 ? "HC" : "SC",
-      pathName = kolStatus.pathname;
-    return `[${kolStatus.turnsthisrun}/${kolStatus.daysthisrun}] ${hardcore} ${pathName}`;
+  if (Number(kolStatus.path) > 0) {
+    return `[${kolStatus.turnsthisrun}/${kolStatus.daysthisrun}] ${
+      Number(kolStatus.hardcore) === 1 ? "HC" : "SC"
+    } ${kolStatus.pathname}`;
   }
 
-  return `Level ${kolStatus.level} ${className}`;
+  return `Level ${kolStatus.level} ${
+    kolStatus.class in classNames
+      ? classNames[kolStatus.class]
+      : "Unknown Class"
+  }`;
 }
 
 function generateButtons() {
@@ -130,7 +130,6 @@ presence.on("iFrameData", async (action: Action) => {
       setActivity("Thinking carefully");
       break;
     default:
-      presence.setTrayTitle();
       presence.setActivity();
       break;
   }

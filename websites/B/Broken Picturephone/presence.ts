@@ -3,51 +3,42 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const browsingStamp = Math.floor(Date.now() / 1000),
-    button = document.getElementsByTagName("button"),
-    valor = button.length,
+  const browsingTimestamp = Math.floor(Date.now() / 1000),
+    valor = document.getElementsByTagName("button").length,
     players = document.getElementsByClassName("userActive"),
-    data: PresenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "large_image",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (valor === 1) {
-    data.details = "Creating a room";
-    data.smallImageKey = "home";
-    data.smallImageText = "On homepage";
+    presenceData.details = "Creating a room";
+    presenceData.smallImageKey = "home";
+    presenceData.smallImageText = "On homepage";
   }
   if (valor >= 6) {
-    const limitPlayers = document.querySelector(".line b").textContent,
-      numLimit = parseFloat(limitPlayers),
-      nump = `(${players.length} of ${numLimit})`;
-    data.details = "Waiting";
-    data.state = `Playing ${nump}`;
-    data.smallImageKey = "playing";
-    data.smallImageText = "On game";
+    const numLimit = parseFloat(document.querySelector(".line b").textContent);
+    presenceData.details = "Waiting";
+    presenceData.state = `Playing ${`(${players.length} of ${numLimit})`}`;
+    presenceData.smallImageKey = "playing";
+    presenceData.smallImageText = "On game";
 
     if (players.length > numLimit)
-      data.state = `(${numLimit} of ${numLimit} players)`;
+      presenceData.state = `(${numLimit} of ${numLimit} players)`;
   }
 
-  const typing = document.getElementById("writeEntryundefined"),
-    drawing = document.getElementsByClassName("ptro-crp-el"),
-    valueDraw = drawing.length,
-    presenting = document.getElementsByClassName("presentationSection"),
-    presentingValue = presenting.length,
-    waitlist = document.getElementsByClassName("waitingSet rounded"),
-    waitValue = waitlist.length;
+  if (document.getElementById("writeEntryundefined"))
+    presenceData.details = "Typing...";
 
-  if (typing) data.details = "Typing...";
+  if (document.getElementsByClassName("ptro-crp-el").length >= 1)
+    presenceData.details = "Drawing";
 
-  if (valueDraw >= 1) data.details = "Drawing";
+  if (document.getElementsByClassName("presentationSection").length >= 1)
+    presenceData.details = "Viewing the presentation";
 
-  if (presentingValue >= 1) data.details = "Viewing the presentation";
+  if (document.getElementsByClassName("waitingSet rounded").length >= 1)
+    presenceData.details = "On waitlist";
 
-  if (waitValue >= 1) data.details = "On waitlist";
-
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

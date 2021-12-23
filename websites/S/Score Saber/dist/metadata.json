@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "joerkig",
     "id": "205984221859151873"
@@ -10,16 +10,16 @@
     "nl": "Beat Sabers grootste leaderboard systeem voor aangepaste liedjes"
   },
   "url": "scoresaber.com",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/paPCAuE.png",
   "thumbnail": "https://i.imgur.com/3SmQEc2.png",
   "color": "#ffde1a",
+  "category": "games",
   "tags": [
     "scoresaber",
     "beatsaber",
     "gaming"
   ],
-  "category": "games",
   "settings": [
     {
       "id": "time",

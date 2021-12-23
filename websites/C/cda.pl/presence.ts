@@ -1,78 +1,81 @@
 const presence = new Presence({
     clientId: "783068812635013180"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
-    const startTime = Date.now(),
-      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
+  browsingTimestamp = Math.floor(Date.now() / 1000),
+  getTimestamps = (videoTime: number, videoDuration: number): number[] => {
+    return [
+      Math.floor(Date.now() / 1000),
+      Math.floor(Date.now() / 1000) - videoTime + videoDuration
+    ];
   };
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     pathname: string = document.location.pathname.toLowerCase();
 
   if (pathname === "/") {
-    data.details = "Przegląda:";
-    data.state = "Stronę Główną";
-    data.smallImageKey = "browsing";
+    presenceData.details = "Przegląda:";
+    presenceData.state = "Stronę Główną";
+    presenceData.smallImageKey = "browsing";
   } else if (
     pathname.includes("/video") &&
     document.querySelector("#naglowek > span > span > h1")
   ) {
     const title = document.querySelector(
-        "#naglowek > span > span > h1"
-      ).textContent,
-      ad = document.querySelector(
-        "#player > div > div > div > div > div > div > span.pb-video-player-wrap > span.pb-video-ad-container"
-      ),
-      uploader = document.querySelector(
+      "#naglowek > span > span > h1"
+    ).textContent;
+    presenceData.details = title;
+    presenceData.state = `Przesłał: ${
+      document.querySelector(
         "#leftCol > div:nth-child(2) > div.DescrVID > div.DescrVID-left > div > div > div > div:nth-child(1) > a > span > span"
-      ).textContent;
-    data.details = title;
-    data.state = `Przesłał: ${uploader}`;
+      ).textContent
+    }`;
     if (
-      window.getComputedStyle(ad, null).getPropertyValue("display") === "block"
+      window
+        .getComputedStyle(
+          document.querySelector(
+            "#player > div > div > div > div > div > div > span.pb-video-player-wrap > span.pb-video-ad-container"
+          ),
+          null
+        )
+        .getPropertyValue("display") === "block"
     ) {
-      data.details = `(Reklama) ${title}`;
-      delete data.startTimestamp;
+      presenceData.details = `(Reklama) ${title}`;
+      delete presenceData.startTimestamp;
     } else {
       const video: HTMLVideoElement = document.querySelector("video");
-      [data.startTimestamp, data.endTimestamp] = getTimestamps(
+      [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      data.smallImageKey = video.paused ? "paused" : "play";
-      data.smallImageText = video.paused ? "Pauza" : "Odtwarzanie";
+      presenceData.smallImageKey = video.paused ? "paused" : "play";
+      presenceData.smallImageText = video.paused ? "Pauza" : "Odtwarzanie";
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
     }
   } else if (pathname === "/video") {
-    data.details = "Przegląda:";
-    data.state = "Filmy";
-    data.smallImageKey = "reading";
+    presenceData.details = "Przegląda:";
+    presenceData.state = "Filmy";
+    presenceData.smallImageKey = "reading";
   } else if (pathname.includes("/gry-online")) {
-    data.details = "Przegląda:";
-    data.state = "Gry";
-    data.smallImageKey = "reading";
+    presenceData.details = "Przegląda:";
+    presenceData.state = "Gry";
+    presenceData.smallImageKey = "reading";
   } else if (pathname.includes("/info")) {
-    const [, , searchData] = pathname.split("/");
-    data.details = "Szuka:";
-    data.state = searchData;
-    data.smallImageKey = "search";
+    presenceData.details = "Szuka:";
+    [, , presenceData.state] = pathname.split("/");
+    presenceData.smallImageKey = "search";
   } else if (pathname === "/premium") {
-    data.details = "Przegląda:";
-    data.state = "Filmy premium";
-    data.smallImageKey = "reading";
+    presenceData.details = "Przegląda:";
+    presenceData.state = "Filmy premium";
+    presenceData.smallImageKey = "reading";
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

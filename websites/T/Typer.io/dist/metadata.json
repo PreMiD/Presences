@@ -1,23 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Typer.io",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Dzlandis",
     "id": "259708781166985217"
   },
-  "category": "games",
+  "service": "Typer.io",
+  "description": {
+    "en": "Online Multiplayer Typing Test - Improve your typing speed and race your friends. Practice on different texts and learn how to type faster."
+  },
+  "url": "typer.io",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/VzZmH6P.png",
   "thumbnail": "https://i.imgur.com/F7mDpmK.png",
-  "version": "1.0.2",
   "color": "#4e6edd",
+  "category": "games",
   "tags": [
     "typing",
     "competition",
     "typerio",
     "race"
-  ],
-  "url": "typer.io",
-  "description": {
-    "en": "Online Multiplayer Typing Test - Improve your typing speed and race your friends. Practice on different texts and learn how to type faster."
-  }
+  ]
 }

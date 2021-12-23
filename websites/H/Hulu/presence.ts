@@ -175,15 +175,16 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  const data: PresenceData = {
-    details,
-    state,
-    largeImageKey: "hulu",
-    smallImageKey,
-    smallImageText,
-    startTimestamp,
-    endTimestamp
-  };
-  presence.setActivity(data, video ? !video.paused : true);
-  presence.setTrayTitle(details);
+  presence.setActivity(
+    {
+      details,
+      state,
+      largeImageKey: "hulu",
+      smallImageKey,
+      smallImageText,
+      startTimestamp,
+      endTimestamp
+    },
+    video ? !video.paused : true
+  );
 });

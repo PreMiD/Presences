@@ -15,18 +15,14 @@ function getTime(list: string[]): number {
   return ret;
 }
 
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const splitAudioTime = audioTime.split(":").reverse(),
-    splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioTime = getTime(splitAudioTime),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
+function getTimestamps(audioTime: string, audioDuration: string): number[] {
+  const startTime = Date.now();
+  return [
+    Math.floor(startTime / 1000),
+    Math.floor(startTime / 1000) -
+      getTime(audioTime.split(":").reverse()) +
+      getTime(audioDuration.split(":").reverse())
+  ];
 }
 
 let elapsed: number, oldUrl: string;
@@ -45,11 +41,10 @@ presence.on("UpdateData", async () => {
     endTimestamp,
     playing = true;
 
-  const host = window.location.hostname,
-    path = window.location.pathname;
+  const path = window.location.pathname;
 
   try {
-    if (host.match("app.getmetastream.com")) {
+    if (window.location.hostname.match("app.getmetastream.com")) {
       if (path === "/") {
         details = "Home";
 
@@ -67,31 +62,30 @@ presence.on("UpdateData", async () => {
         if (settingItem) state = `Viewing ${settingItem.textContent}`;
       }
       if (path.match("/join")) {
-        const connectionInfo = document.querySelector(".Connect__info__3Vwlv"),
-          disconnectionInfo = document.querySelector(
-            ".Disconnect__info__3Uejx"
-          ),
-          disconnecctionLabel = document.querySelector(
-            ".Disconnect__info__3Uejx > span"
-          ),
-          menuHeader = document.querySelector(".MenuHeader__header__1SYq0");
+        const disconnecctionLabel = document.querySelector(
+          ".Disconnect__info__3Uejx > span"
+        );
 
-        if (connectionInfo) details = "Connecting...";
-        else if (disconnectionInfo) {
+        if (document.querySelector(".Connect__info__3Vwlv"))
+          details = "Connecting...";
+        else if (document.querySelector(".Disconnect__info__3Uejx")) {
           details = "Disconnected";
 
           if (disconnecctionLabel) state = disconnecctionLabel.textContent;
-        } else if (menuHeader) details = "Setting up...";
+        } else if (document.querySelector(".MenuHeader__header__1SYq0"))
+          details = "Setting up...";
         else {
           smallImageKey = "live";
           smallImageText = (await strings).live;
 
           const users =
-              document.querySelector(".ListOverlay__list__1epFe") ||
-              document.createElement("HTMLDivElement"),
-            userButton = document.querySelector(".UserItem__menuBtn__1ST9k");
+            document.querySelector(".ListOverlay__list__1epFe") ||
+            document.createElement("HTMLDivElement");
 
-          if (users.childElementCount === 1 || userButton !== null)
+          if (
+            users.childElementCount === 1 ||
+            document.querySelector(".UserItem__menuBtn__1ST9k") !== null
+          )
             details = `Hosting (${users.childElementCount} Users)`;
           else details = `Watching (${users.childElementCount} Users)`;
 
@@ -134,15 +128,16 @@ presence.on("UpdateData", async () => {
     presence.error(err);
   }
 
-  const data: PresenceData = {
-    details,
-    state,
-    largeImageKey: "metastream",
-    smallImageKey,
-    smallImageText,
-    startTimestamp,
-    endTimestamp
-  };
-
-  presence.setActivity(data, playing);
+  presence.setActivity(
+    {
+      details,
+      state,
+      largeImageKey: "metastream",
+      smallImageKey,
+      smallImageText,
+      startTimestamp,
+      endTimestamp
+    },
+    playing
+  );
 });
