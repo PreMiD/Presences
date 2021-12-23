@@ -5,13 +5,13 @@ const presence = new Presence({
     play: "presence.playback.playing"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
-let artist: string, title: string, playing: boolean;
+let artist: string, title: string, artwork: string, playing: boolean;
 
 presence.on(
   "iFrameData",
-  (data: { playing: boolean; artist: string; title: string }) => {
+  (data: { playing: boolean; artist: string; title: string; artwork: string }) => {
     ({ playing } = data);
-    if (playing) ({ artist, title } = data);
+    if (playing) ({ artist, title, artwork } = data);
   }
 );
 
@@ -26,6 +26,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = title;
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = (await strings).play;
+    presenceData.largeImageKey = artwork;
   } else if (document.location.pathname.includes("/grade/")) {
     presenceData.details = "Grade de Programação";
     presenceData.smallImageKey = "reading";
