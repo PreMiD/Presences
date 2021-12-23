@@ -25,6 +25,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "animu",
     startTimestamp: browsingTimestamp
   };
+
   if (playing) {
     presenceData.details = artist;
     presenceData.state = title;
@@ -60,6 +61,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (presenceData.details) presence.setActivity(presenceData);
-  else presence.setActivity();
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });
