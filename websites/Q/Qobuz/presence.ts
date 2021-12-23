@@ -69,9 +69,9 @@ presence.on("UpdateData", async () => {
         : elm.classList.contains("player__action-repeat--active")
         ? "loopQueue"
         : "deactivated",
-      songPlaylist: document.querySelectorAll(
+      songPlaylist: document.querySelectorAll<HTMLAnchorElement>(
         'div[class="player__track-album"] a'
-      )[2] as HTMLAnchorElement
+      )[2]
     };
 
   let playliststring = "";
