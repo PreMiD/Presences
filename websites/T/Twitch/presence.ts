@@ -121,6 +121,7 @@ presence.on("UpdateData", async () => {
     vidState = await presence.getSetting("vidState"),
     streamDetail = await presence.getSetting("streamDetail"),
     streamState = await presence.getSetting("streamState"),
+    pfp = await presence.getSetting("profilePic"),
     logo: number = await presence.getSetting("logo"),
     devLogo: number = await presence.getSetting("devLogo"),
     buttons = await presence.getSetting("buttons");
@@ -273,11 +274,19 @@ presence.on("UpdateData", async () => {
 
       let user = getElement(".home-header-sticky .tw-title");
       if (user) {
-        const tab = getElement(".tw-c-text-link");
+        const tab = getElement(".tw-c-text-link"),
+          profilePic = document
+            .querySelector<HTMLImageElement>(
+              ".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+            )
+            .src.replace("profile_image-70x70", "profile_image-600x600");
         user += tab ? ` (${tab})` : "";
 
         presenceData.details = (await strings).viewProfile;
         presenceData.state = user;
+        if (pfp)
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
       }
 
       if (path.includes("/team/")) {
@@ -422,7 +431,12 @@ presence.on("UpdateData", async () => {
           streamer = getElement(".channel-info-content h1"),
           game =
             getElement("a[data-a-target='stream-game-link']") ||
-            "Just Chatting";
+            "Just Chatting",
+          profilePic = document
+            .querySelector<HTMLImageElement>(
+              ".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+            )
+            .src.replace("profile_image-70x70", "profile_image-600x600");
         if (title && streamer) {
           presenceData.details = streamDetail
             .replace("%title%", title)
@@ -437,6 +451,9 @@ presence.on("UpdateData", async () => {
         }
         presenceData.smallImageKey = "live";
         presenceData.smallImageText = (await strings).live;
+        if (pfp)
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
         if (buttons) {
           presenceData.buttons = [
             {
@@ -453,7 +470,12 @@ presence.on("UpdateData", async () => {
           uploader = getElement(".channel-info-content h1"),
           game =
             getElement("a[data-a-target='stream-game-link']") ||
-            "Just Chatting";
+            "Just Chatting",
+          profilePic = document
+            .querySelector<HTMLImageElement>(
+              ".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+            )
+            .src.replace("profile_image-70x70", "profile_image-600x600");
         if (title && uploader) {
           presenceData.details = vidDetail
             .replace("%title%", title)
@@ -468,7 +490,9 @@ presence.on("UpdateData", async () => {
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = (await strings).play;
-
+        if (pfp)
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
         const [startTimestamp, endTimestamp] =
           presence.getTimestampsfromMedia(video);
         presenceData.startTimestamp = startTimestamp;
