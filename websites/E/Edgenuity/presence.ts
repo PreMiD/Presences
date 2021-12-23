@@ -25,16 +25,14 @@ presence.on("UpdateData", async () => {
         lessonActivity = document.querySelector(
           "[data-bind='html: ActivityName']"
         );
-        presenceData.details = courseName.innerText;
-        presenceData.state = `${lessonName.innerText} - ${lessonActivity.innerText}`;
+        presenceData.details = courseName.textContent;
+        presenceData.state = `${lessonName.textContent} - ${lessonActivity.textContent}`;
       }
     } else if (document.location.pathname === "/Player/")
       presenceData.details = "Working on Classwork";
     else presenceData.details = "Can't read page";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

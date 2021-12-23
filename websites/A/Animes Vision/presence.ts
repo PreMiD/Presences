@@ -28,23 +28,23 @@ presence.on("UpdateData", async () => {
   else if (path.endsWith("/animes"))
     presenceData.details = "Vendo a lista de animes";
   else if (path.endsWith("/legendado")) {
-    const episode = document
+    const video: HTMLVideoElement = document.querySelector("video");
+    presenceData.details = document
+      .querySelectorAll(".active h1")[0]
+      .textContent.replace(" - Episodio ", "")
+      .replace(/[0-9]/g, "");
+    presenceData.state = (await strings).episode.replace(
+      "{0}",
+      document
         .getElementById("current_episode_name")
-        .innerText.match(/\d+/g),
-      title = document
-        .querySelectorAll(".active h1")[0]
-        .textContent.replace(" - Episodio ", "")
-        .replace(/[0-9]/g, ""),
-      video = document.querySelector("video");
-    presenceData.details = title;
-    presenceData.state = (await strings).episode.replace("{0}", episode[0]);
+        .textContent.match(/\d+/g)[0]
+    );
     if (!video.paused) {
-      const { duration, currentTime } = video;
       [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(currentTime, duration);
+        presence.getTimestamps(video.currentTime, video.duration);
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).playing;
-    } else if (video.currentTime > 0) {
+    } else if (document.querySelector("video").currentTime > 0) {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = (await strings).paused;
     }

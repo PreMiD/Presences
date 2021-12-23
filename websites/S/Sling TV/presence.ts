@@ -20,18 +20,18 @@ function getStateText(paused: boolean, live: boolean) {
 let elapsed: number, oldUrl: string, title;
 
 presence.on("UpdateData", async () => {
+  /* eslint-disable no-one-time-vars/no-one-time-vars */
   let video: HTMLVideoElement = null,
     details,
     state,
     smallImageKey,
     smallImageText,
     startTimestamp,
-    endTimestamp,
-    extra = "...";
+    endTimestamp;
+  /* eslint-enable no-one-time-vars/no-one-time-vars */
 
   const { href } = window.location,
-    path = window.location.pathname,
-    data: PresenceData = {
+    presenceData: PresenceData = {
       details,
       state,
       largeImageKey: "slingtv",
@@ -46,19 +46,9 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (path.includes("/browse/my-tv")) extra = ' "My TV"';
-  else if (path.includes("/browse/guide")) extra = ' "Guide"';
-  else if (path.includes("/browse/dynamic/shows")) extra = ' "On Demand"';
-  else if (path.includes("/browse/dynamic/sports")) extra = ' "Sports"';
-  else if (path.includes("/browse/movie-rentals")) extra = ' "Rentals"';
+  presenceData.startTimestamp = elapsed;
 
-  details = `Browsing${extra}`;
-
-  if (path.includes("/browse/search")) details = "Searching...";
-
-  data.startTimestamp = elapsed;
-
-  if (path.includes("/watch")) {
+  if (window.location.pathname.includes("/watch")) {
     video = document.querySelector(".bitmovinplayer-container video");
     if (video) {
       title = document.querySelector("title");
@@ -68,28 +58,26 @@ presence.on("UpdateData", async () => {
         ),
         live = endTimestamp === Infinity;
 
-      details = getStateText(video.paused, live);
-      if (title) {
-        details = title.textContent
-          .replace(/^Watching\s/i, "")
-          .replace("| Sling TV", "");
-        data.state = getStateText(video.paused, live);
-      }
-      data.smallImageKey = live ? "live" : video.paused ? "pause" : "play";
-      data.smallImageText = live
+      if (title) presenceData.state = getStateText(video.paused, live);
+
+      presenceData.smallImageKey = live
+        ? "live"
+        : video.paused
+        ? "pause"
+        : "play";
+      presenceData.smallImageText = live
         ? (await strings).live
         : video.paused
         ? (await strings).pause
         : (await strings).play;
-      data.startTimestamp = live ? elapsed : startTimestamp;
-      if (!live) data.endTimestamp = endTimestamp;
+      presenceData.startTimestamp = live ? elapsed : startTimestamp;
+      if (!live) presenceData.endTimestamp = endTimestamp;
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
     }
   }
 
-  presence.setActivity(data, video ? !video.paused : true);
-  presence.setTrayTitle(details);
+  presence.setActivity(presenceData, video ? !video.paused : true);
 });

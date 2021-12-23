@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "629428243061145640"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: Element | HTMLElement | string,
   search: Element | HTMLElement | string,
   title: Element | HTMLElement | string;
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "pinterest"
   };
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "help.pinterest.com") {
     presenceData.details = "Viewing Help Center";
     delete presenceData.state;
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
       "#HeaderContent > div > div > div > div > div > div > div > div > div > div > input"
     );
     presenceData.details = "Searching for:";
-    presenceData.state = (search as HTMLInputElement).value;
+    presenceData.state = (search as HTMLInputElement).textContent;
 
     presenceData.smallImageKey = "search";
 
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
       "body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
     );
     presenceData.details = "Viewing user:";
-    presenceData.state = (user as HTMLElement).innerText;
+    presenceData.state = (user as HTMLElement).textContent;
 
     delete presenceData.smallImageKey;
 
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
       );
     }
     presenceData.details = "Viewing user:";
-    presenceData.state = (user as HTMLElement).innerText;
+    presenceData.state = (user as HTMLElement).textContent;
 
     delete presenceData.smallImageKey;
 
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
       );
     }
     presenceData.details = "Viewing board:";
-    presenceData.state = (title as HTMLElement).innerText;
+    presenceData.state = (title as HTMLElement).textContent;
 
     delete presenceData.smallImageKey;
 
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
   } else {
     title = document.querySelector("head > title");
     presenceData.details = "Viewing:";
-    presenceData.state = (title as HTMLElement).innerText;
+    presenceData.state = (title as HTMLElement).textContent;
 
     delete presenceData.smallImageKey;
 

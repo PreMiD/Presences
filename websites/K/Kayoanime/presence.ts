@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
           document.querySelector(".tie-fluid-width-video-wrapper") &&
           everPlaying
         ) {
-          if (video !== null && !isNaN(video.duration)) {
+          if (video && !isNaN(video.duration)) {
             const [start, end] = presence.getTimestamps(
               Math.floor(video.currentTime),
               Math.floor(video.duration)
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching for:";
     presenceData.state = document
       .querySelector("label input")
-      .attributes.getNamedItem("value").textContent;
+      .attributes.getNamedItem("value").value;
   }
   return presence.setActivity(presenceData, true);
 });

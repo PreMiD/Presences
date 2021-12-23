@@ -47,7 +47,7 @@ const presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "lg"
     },
     video: HTMLVideoElement = document.querySelector("video"),
@@ -57,12 +57,12 @@ presence.on("UpdateData", async () => {
 
   switch (true) {
     case path === "/profileSelect":
-      Object.assign(data, {
+      Object.assign(presenceData, {
         details: "Selecting a profile"
       });
       break;
     case path === "/search":
-      Object.assign(data, {
+      Object.assign(presenceData, {
         details: "Searching",
         smallImageKey: "search",
         smallImageText: (await strings).browsing
@@ -72,13 +72,13 @@ presence.on("UpdateData", async () => {
       (titles = Array.from(
         document.querySelectorAll("[role=heading]:first-child span span")
       )
-        .map((z) => z.textContent)
-        .filter((z) => z.length > 1 && !/\d \/ \d+/.test(z))), // Test for "d / d" ex.: 01:45 / 01:30:00
+        .map(z => z.textContent)
+        .filter(z => z.length > 1 && !/\d \/ \d+/.test(z))), // Test for "d / d" ex.: 01:45 / 01:30:00
         (hasEpisode = titles.length > 1);
 
       timestamps = presence.getTimestampsfromMedia(video);
 
-      Object.assign(data, {
+      Object.assign(presenceData, {
         details: titles[0],
         state: hasEpisode ? titles[1] : "Watching movie",
         smallImageKey: video.paused ? "pause" : "play",
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
           : (await strings).play
       });
       if (!video.paused) {
-        Object.assign(data, {
+        Object.assign(presenceData, {
           startTimestamp: timestamps[0],
           endTimestamp: timestamps[1]
         });
@@ -95,15 +95,15 @@ presence.on("UpdateData", async () => {
       break;
 
     default: {
-      Object.assign(data, { details: "Browsing" });
-      pageSlug = Object.keys(slugs).find((z) =>
+      Object.assign(presenceData, { details: "Browsing" });
+      pageSlug = Object.keys(slugs).find(z =>
         window.location.href.includes(`:page:${z}`)
       );
 
-      if (pageSlug) Object.assign(data, { state: slugs[pageSlug] });
+      if (pageSlug) Object.assign(presenceData, { state: slugs[pageSlug] });
 
       break;
     }
   }
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

@@ -1,24 +1,24 @@
 const presence = new Presence({
     clientId: "872421983554502717"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "large_image",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.hostname === "www.timolia.de") {
     if (document.location.pathname === "/") {
-      const player = document.querySelector("#liveplayercount").textContent;
       presenceData.details = "Viewing home page";
       presenceData.smallImageKey = "minecraft";
-      presenceData.smallImageText = `${player} online players`;
+      presenceData.smallImageText = `${
+        document.querySelector("#liveplayercount").textContent
+      } online players`;
     } else if (document.location.pathname.startsWith("/stats")) {
-      const stats = document.querySelector("#playername").textContent;
       presenceData.details = "Viewing stats from:";
-      presenceData.state = stats;
+      presenceData.state = document.querySelector("#playername").textContent;
     } else if (document.location.pathname.includes("/games"))
       presenceData.details = "Viewing gamemodes";
     else if (document.location.pathname.includes("/account"))
@@ -39,23 +39,20 @@ presence.on("UpdateData", () => {
   } else if (document.location.hostname === "forum.timolia.de") {
     presenceData.details = "Viewing forum start page";
     if (document.location.pathname.startsWith("/members")) {
-      const user = document.querySelector(
+      presenceData.details = "Viewing forum profile of:";
+      presenceData.state = document.querySelector(
         "#content > div.pageWidth > div > div > div.mainProfileColumn > div > div > h1 > span"
       ).textContent;
-      presenceData.details = "Viewing forum profile of:";
-      presenceData.state = user;
     } else if (document.location.pathname.startsWith("/threads")) {
-      const thread = document.querySelector(
-        "#content > div.pageWidth > div > div.titleBar > h1"
-      ).textContent;
       presenceData.details = "Viewing thread:";
-      presenceData.state = thread;
-    } else if (document.location.pathname.startsWith("/forums")) {
-      const forum = document.querySelector(
+      presenceData.state = document.querySelector(
         "#content > div.pageWidth > div > div.titleBar > h1"
       ).textContent;
+    } else if (document.location.pathname.startsWith("/forums")) {
       presenceData.details = "Viewing forum:";
-      presenceData.state = forum;
+      presenceData.state = document.querySelector(
+        "#content > div.pageWidth > div > div.titleBar > h1"
+      ).textContent;
     }
   } else if (document.location.hostname.includes("wi.timolia.de"))
     presenceData.details = "Viewing Webinterface";
@@ -64,8 +61,6 @@ presence.on("UpdateData", () => {
     presenceData.smallImageKey = "gitlab";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

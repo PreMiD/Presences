@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Deivid",
     "id": "406184197405802497"
@@ -11,16 +11,16 @@
     "nl": "Discord.js is een krachtige node.js module die je toelaat om zeer eenvoudig te interageren met de Discord API."
   },
   "url": "discord.js.org",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/v4Qb6IT.png",
   "thumbnail": "https://i.imgur.com/lXDvidg.png",
   "color": "#8dd6f1",
+  "category": "other",
   "tags": [
     "other",
     "development",
     "discord-js",
     "d-js",
     "programming"
-  ],
-  "category": "other"
+  ]
 }

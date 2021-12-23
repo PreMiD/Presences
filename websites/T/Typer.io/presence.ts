@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "854448403273351202"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   // typer.io/play presence (aka quick play)
@@ -23,14 +23,12 @@ presence.on("UpdateData", () => {
     }
 
     try {
-      const quickplayWPMUnmerged = document
+      const quickplayWPM = `${document
           .querySelector("#PreMiD-WPM")
-          .textContent.trim(),
-        quickplayWPM = `${quickplayWPMUnmerged} WPM`,
-        quickplayAccuracyUnmerged = document
+          .textContent.trim()} WPM`,
+        quickplayAccuracy = `${document
           .querySelector("#PreMiD-ACC")
-          .textContent.trim(),
-        quickplayAccuracy = `${quickplayAccuracyUnmerged} acc`,
+          .textContent.trim()} acc`,
         quickplayRaceStatus = document
           .querySelector(
             "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3"
@@ -83,14 +81,12 @@ presence.on("UpdateData", () => {
     }
 
     try {
-      const soloWPMUnmerged = document
+      const soloWPM = `${document
           .querySelector("#PreMiD-WPM")
-          .textContent.trim(),
-        soloWPM = `${soloWPMUnmerged} WPM`,
-        soloAccuracyUnmerged = document
+          .textContent.trim()} WPM`,
+        soloAccuracy = `${document
           .querySelector("#PreMiD-ACC")
-          .textContent.trim(),
-        soloAccuracy = `${soloAccuracyUnmerged} acc`,
+          .textContent.trim()} acc`,
         soloRaceTime = document
           .querySelector("#PreMiD-TIME")
           .textContent.trim();
@@ -117,32 +113,26 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/lobby")) {
     // typer.io/lobby (aka custom play or group play)
     try {
-      const lobbyInfo = document
+      presenceData.details = document
         .querySelector(
           "#__next > main > div > div.Lobby_container__1Y-Os > div.Banner_root__thCyZ > h3"
         )
         .textContent.trim();
-      presenceData.details = lobbyInfo;
     } catch {
       const playingStatus = document
           .querySelector(
             "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3"
           )
           .textContent.trim(),
-        privateWPMUnmerged = document
+        privateWPM = `${document
           .querySelector("#PreMiD-WPM")
-          .textContent.trim(),
-        privateWPM = `${privateWPMUnmerged} WPM`,
-        privateAccuracyUnmerged = document
-          .querySelector("#PreMiD-ACC")
-          .textContent.trim(),
+          .textContent.trim()} WPM`,
         privateRacePlace = document
           .querySelector("#PreMiD-RANK")
           .textContent.trim(),
-        privateAccuracy = `${privateAccuracyUnmerged} acc`,
-        privateRaceTime = document
-          .querySelector("#PreMiD-TIME")
-          .textContent.trim();
+        privateAccuracy = `${document
+          .querySelector("#PreMiD-ACC")
+          .textContent.trim()} acc`;
 
       if (playingStatus === "Get Ready..." || playingStatus === "Get Set...") {
         presenceData.details = "In a private lobby race:";
@@ -156,7 +146,9 @@ presence.on("UpdateData", () => {
 
       if (privateRacePlace !== "-" || playingStatus === "Game has Ended") {
         presenceData.details = `Placed ${privateRacePlace} in a private race!`;
-        presenceData.state = `${privateWPM}, ${privateAccuracy}, ${privateRaceTime}`;
+        presenceData.state = `${privateWPM}, ${privateAccuracy}, ${document
+          .querySelector("#PreMiD-TIME")
+          .textContent.trim()}`;
       }
 
       if (privateRacePlace === "-" && playingStatus === "Game has Ended") {
@@ -167,13 +159,12 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/forum/post/")) {
     // typer.io/forum/posts (when viewing individual posts)
     try {
-      const postName = document
+      presenceData.details = "Reading a post on the forum:";
+      presenceData.state = document
         .querySelector(
           "#__next > div.Post_root__ivA4B > div > div.Post_postContainer__oful_ > div.Post_postContent__2KI4z > div.Post_header__19SiQ > h1"
         )
         .textContent.trim();
-      presenceData.details = "Reading a post on the forum:";
-      presenceData.state = postName;
     } catch {
       presenceData.details = "Reading a post on the forum.";
     }
@@ -189,12 +180,11 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.startsWith("/u/")) {
     // typer.io/u/(username) (when viewing a users profile)
     try {
-      const user = document
+      presenceData.details = `Viewing ${document
         .querySelector(
           "#__next > div.Profile_root__2QIUs > div.Profile_headerContainer__IYvIA > div.Profile_profileContainer__k2Fu9 > div.Profile_wrapper__3Ghk7 > div.Profile_content__rWK4h > h3"
         )
-        .textContent.trim();
-      presenceData.details = `Viewing ${user}'s profile.`;
+        .textContent.trim()}'s profile.`;
     } catch {
       presenceData.details = "Viewing a user profile.";
     }
@@ -210,10 +200,9 @@ presence.on("UpdateData", () => {
   else {
     // When viewing a 404 page
     try {
-      const pageNotFoundText = document
+      presenceData.details = document
         .querySelector("#__next > main > h1")
         .textContent.trim();
-      presenceData.details = pageNotFoundText;
     } catch {
       // When viewing a page which does not have 404 text.
       presenceData.details = "Viewing an unsupported page.";

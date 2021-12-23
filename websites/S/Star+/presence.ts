@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
     buttons: boolean = await presence.getSetting("buttons"),
     groupWatchBtn: boolean = await presence.getSetting("groupWatchBtn"),
     isHostSP = /(www\.)?starplus\.com/.test(location.hostname),
-    data: PresenceData & {
+    presenceData: PresenceData & {
       partySize?: number;
       partyMax?: number;
     } = {};
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     strings = getStrings();
   }
 
-  if (isHostSP) data.largeImageKey = "starplus-logo";
+  if (isHostSP) presenceData.largeImageKey = "starplus-logo";
 
   // Star+ videos
   if (isHostSP && location.pathname.includes("/video/")) {
@@ -54,9 +54,8 @@ presence.on("UpdateData", async () => {
 
     if (video && !isNaN(video.duration)) {
       const groupWatchId = new URLSearchParams(location.search).get(
-          "groupWatchId"
-        ),
-        timestamps: number[] = presence.getTimestampsfromMedia(video);
+        "groupWatchId"
+      );
 
       if (!privacy && groupWatchId) {
         groupWatchCount = Number(
@@ -66,51 +65,47 @@ presence.on("UpdateData", async () => {
         );
       }
 
-      const titleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .title-field"
-        ),
-        subtitleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .subtitle-field"
-        );
-
-      title = titleField?.textContent;
-      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+      title = document.querySelector<HTMLDivElement>(
+        ".btm-media-overlays-container .title-field"
+      )?.textContent;
+      subtitle = document.querySelector<HTMLDivElement>(
+        ".btm-media-overlays-container .subtitle-field"
+      )?.textContent; // episode or empty if it's a movie
 
       if (!privacy && groupWatchId) {
-        data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
-        data.state = "In a GroupWatch";
+        presenceData.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+        presenceData.state = "In a GroupWatch";
+      } else if (privacy) {
+        presenceData.state = subtitle
+          ? (await strings).watchingSeries
+          : (await strings).watchingMovie;
       } else {
-        if (privacy) {
-          data.state = subtitle
-            ? (await strings).watchingSeries
-            : (await strings).watchingMovie;
-        } else {
-          data.details = title;
-          data.state = subtitle || "Movie";
-        }
+        presenceData.details = title;
+        presenceData.state = subtitle || "Movie";
       }
 
-      data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      [data.startTimestamp, data.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestampsfromMedia(video);
 
       // remove timestamps if video is paused or user disabled timestamps
       if (video.paused || !time) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
       // set GroupWatch participants size
       if (!privacy && groupWatchId) {
-        data.partySize = groupWatchCount;
-        data.partyMax = 7;
+        presenceData.partySize = groupWatchCount;
+        presenceData.partyMax = 7;
       }
 
       // add buttons, if enabled
       if (!privacy && buttons) {
-        data.buttons = [
+        presenceData.buttons = [
           {
             label: subtitle
               ? (await strings).watchEpisode
@@ -121,14 +116,14 @@ presence.on("UpdateData", async () => {
 
         // change button if GroupWatch is active and user enabled the button
         if (groupWatchId && groupWatchBtn) {
-          data.buttons.push({
+          presenceData.buttons.push({
             label: "Join GroupWatch",
             url: `https://www.starplus.com/groupwatch/${groupWatchId}`
           });
         }
       }
 
-      if (title) presence.setActivity(data, !video.paused);
+      if (title) presence.setActivity(presenceData, !video.paused);
     }
 
     //Star+ Livestreams
@@ -138,36 +133,33 @@ presence.on("UpdateData", async () => {
     );
 
     if (video && !isNaN(video.duration)) {
-      const titleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .title-field"
-        ),
-        subtitleField: HTMLDivElement = document.querySelector(
-          ".btm-media-overlays-container .subtitle-field"
-        );
-
-      title = titleField?.textContent;
-      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
+      title = document.querySelector<HTMLDivElement>(
+        ".btm-media-overlays-container .title-field"
+      )?.textContent;
+      subtitle = document.querySelector<HTMLDivElement>(
+        ".btm-media-overlays-container .subtitle-field"
+      )?.textContent; // episode or empty if it's a movie
 
       if (!privacy) {
-        data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
-        data.state = (await strings).watchLive;
-      } else if (privacy) data.state = (await strings).watchingLive;
+        presenceData.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+        presenceData.state = (await strings).watchLive;
+      } else if (privacy) presenceData.state = (await strings).watchingLive;
 
-      data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
 
       // add buttons, if enabled
       if (!privacy && buttons) {
-        data.buttons = [
+        presenceData.buttons = [
           {
             label: (await strings).watchStream,
             url: `https://www.starplus.com${location.pathname}`
           }
         ];
       }
-      if (title) presence.setActivity(data, !video.paused);
+      if (title) presence.setActivity(presenceData, !video.paused);
     }
 
     // GroupWatch lobby
@@ -189,21 +181,20 @@ presence.on("UpdateData", async () => {
       title = seriesFields[0]?.textContent;
       subtitle = seriesFields[1]?.textContent;
     } else {
-      const movieField: HTMLImageElement = document.querySelector(
+      title = document.querySelector<HTMLImageElement>(
         "#webAppScene main #group + div:not([id]) img[alt]"
-      );
-      title = movieField?.alt;
+      )?.alt;
     }
 
-    data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
-    data.state = "Starting a GroupWatch";
+    presenceData.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+    presenceData.state = "Starting a GroupWatch";
     // set GroupWatch participants size
-    data.partySize = groupWatchCount;
-    data.partyMax = 7;
+    presenceData.partySize = groupWatchCount;
+    presenceData.partyMax = 7;
 
     // add button, if enabled
     if (buttons && groupWatchBtn) {
-      data.buttons = [
+      presenceData.buttons = [
         {
           label: "Join GroupWatch",
           url: location.pathname
@@ -211,11 +202,11 @@ presence.on("UpdateData", async () => {
       ];
     }
 
-    if (title) presence.setActivity(data, false);
+    if (title) presence.setActivity(presenceData, false);
 
     //Browsing
   } else {
-    data.details = (await strings).browsing;
-    presence.setActivity(data);
+    presenceData.details = (await strings).browsing;
+    presence.setActivity(presenceData);
   }
 });

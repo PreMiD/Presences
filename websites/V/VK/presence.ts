@@ -48,7 +48,7 @@ function getVKTrackTimePassed(duration: number) {
 }
 
 function getAudioPlayer() {
-  return new Promise<[{ duration: number }]>((resolve) => {
+  return new Promise<[{ duration: number }]>(resolve => {
     const script = document.createElement("script"),
       _listener = (data: CustomEvent) => {
         script.remove();
@@ -89,51 +89,45 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/audios") ||
     document.querySelector(".audio_layer_container")
   ) {
-    const title: string = (
-        document.querySelector(".audio_page_player_title_song") as HTMLElement
-      ).textContent,
-      author: string = (
-        document.querySelector(
-          ".audio_page_player_title_performer a"
-        ) as HTMLElement
-      ).textContent;
-
     audioPlayer ??= await getAudioPlayer();
 
     if (document.querySelector(".audio_playing") === null) isPlaying = true;
     else isPlaying = false;
 
-    const { duration } = audioPlayer.find((x) => x.duration);
+    const { duration } = audioPlayer.find(x => x.duration);
 
     timestamps = presence.getTimestamps(
       getVKTrackTimePassed(duration),
       duration
     );
 
-    presenceData.details = title;
-    presenceData.state = author;
-    presenceData.smallImageKey = isPlaying ? "pause" : "play";
-    presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
-    presenceData.startTimestamp = isPlaying ? null : timestamps[0];
-    presenceData.endTimestamp = isPlaying ? null : timestamps[1];
+    presenceData.details = document.querySelector<HTMLElement>(
+      ".audio_page_player_title_song"
+    ).textContent;
+    presenceData.state = document.querySelector<HTMLElement>(
+      ".audio_page_player_title_performer a"
+    ).textContent;
+    if (isPlaying) {
+      presenceData.smallImageKey = "pause";
+      presenceData.smallImageText = gstrings.pause;
+    } else {
+      presenceData.smallImageKey = "play";
+      presenceData.smallImageText = gstrings.play;
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    }
 
     presence.setActivity(presenceData, true);
   } else if (window.location.href.match(/https:\/\/vk.com\/.*?z=video.*/)) {
-    document.querySelector(".videoplayer_ui").getAttribute("data-state") ===
-    "paused"
-      ? (isPlaying = true)
-      : (isPlaying = false);
+    isPlaying =
+      document.querySelector(".videoplayer_ui").getAttribute("data-state") ===
+      "paused";
 
-    const videoTitle = (document.querySelector(".mv_title") as HTMLElement)
-        .innerText,
-      videoCurrentTime = (
-        document.querySelector("._time_current") as HTMLElement
-      ).innerText.split(":"),
-      videoDuration = (
-        document.querySelector("._time_duration") as HTMLElement
-      ).innerText.split(":"),
-      videoAuthor = (document.querySelector(".mv_author_name a") as HTMLElement)
-        .innerText;
+    const videoCurrentTime = document
+        .querySelector<HTMLElement>("._time_current")
+        .textContent.split(":"),
+      videoDuration = document
+        .querySelector<HTMLElement>("._time_duration")
+        .textContent.split(":");
 
     timestamps = presence.getTimestamps(
       Math.floor(
@@ -142,19 +136,23 @@ presence.on("UpdateData", async () => {
       Math.floor(Number(videoDuration[0]) * 60 + Number(videoDuration[1]))
     );
 
-    presenceData.details = `${getLocalizedString("Watching")} ${videoTitle}`;
-    presenceData.state = videoAuthor;
-    presenceData.smallImageKey = isPlaying ? "pause" : "play";
-    presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
-    presenceData.startTimestamp = isPlaying ? null : timestamps[0];
-    presenceData.endTimestamp = isPlaying ? null : timestamps[1];
-
+    presenceData.details = `${getLocalizedString("Watching")} ${
+      document.querySelector<HTMLElement>(".mv_title").textContent
+    }`;
+    presenceData.state =
+      document.querySelector<HTMLElement>(".mv_author_name a").textContent;
+    if (isPlaying) {
+      presenceData.smallImageKey = "pause";
+      presenceData.smallImageText = gstrings.pause;
+    } else {
+      presenceData.smallImageKey = "play";
+      presenceData.smallImageText = gstrings.play;
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    }
     presence.setActivity(presenceData, true);
-  } else if (document.querySelector(".page_name") !== null) {
-    const pageTitle = (document.querySelector(".page_name") as HTMLElement)
-      .innerText;
-
-    presenceData.details = pageTitle;
+  } else if (document.querySelector(".page_name")) {
+    presenceData.details =
+      document.querySelector<HTMLElement>(".page_name").textContent;
     presenceData.startTimestamp = browsingTimestamp;
 
     presence.setActivity(presenceData, true);

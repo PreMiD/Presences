@@ -13,8 +13,6 @@ function send(): void {
 }
 
 iframe.on("UpdateData", () => {
-  const link = document.location;
-
   if (document.getElementsByTagName("video").length !== 0) {
     const [video] = document.getElementsByTagName("video");
     sendback = {
@@ -22,7 +20,7 @@ iframe.on("UpdateData", () => {
       currentTime: video.currentTime,
       duration: video.duration,
       paused: video.paused,
-      site: link.href
+      site: document.location.href
     };
   }
   send();

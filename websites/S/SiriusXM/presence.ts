@@ -30,17 +30,15 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/query")
     presenceData.details = "Searching SiriusXM";
   else if (document.location.pathname.includes("/query")) {
-    const searchTerm = document.querySelector<HTMLInputElement>(
+    presenceData.details = "Viewing: ";
+    presenceData.state = document.querySelector<HTMLInputElement>(
       '[name="searchText"]'
     ).value;
-
-    presenceData.details = "Viewing: ";
-    presenceData.state = searchTerm;
   } else if (document.location.pathname.includes("/category-listing")) {
-    const categoryTerm = document.querySelector("span.sxm-breadcrumb__text");
-
     presenceData.details = "Viewing Category: ";
-    presenceData.state = categoryTerm.textContent;
+    presenceData.state = document.querySelector(
+      "span.sxm-breadcrumb__text"
+    ).textContent;
   } else presenceData.details = "Unknown page";
 
   if (document.querySelector(".sxm-player-controls.no-select")) {
@@ -59,8 +57,6 @@ presence.on("UpdateData", async () => {
     else presenceData.state = data.artist;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "888726220571811914"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const showTimestamp: boolean = await presence.getSetting("timestamp"),
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
   }
 
   // Start Browsing Timestamp
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
   // If Buttons option is off, delete buttons
   if (!showButtons) delete presenceData.buttons;

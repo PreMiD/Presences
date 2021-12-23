@@ -293,7 +293,7 @@ presence.on("UpdateData", async () => {
           .split("/")
           .pop()
           .split("_")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
       }
 
@@ -393,7 +393,7 @@ presence.on("UpdateData", async () => {
       const squad = document.querySelectorAll(".squad-stream-channel-card a"),
         squadNames: string[] = [];
 
-      squad.forEach((squadUser) => {
+      squad.forEach(squadUser => {
         squadNames.push(squadUser.textContent);
       });
 

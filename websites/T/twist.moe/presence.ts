@@ -7,16 +7,16 @@ const presence = new Presence({
   });
 
 let lastPlaybackState = null,
-  playback,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  playback: boolean,
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-  playback = document.querySelector(".AT-player video") !== null ? true : false;
+  playback = !!document.querySelector(".AT-player video");
 
   const presenceData: PresenceData = {
     largeImageKey: "lg"
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 
   if (!playback) {
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -32,14 +32,11 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  const video: HTMLVideoElement = document.querySelector(".AT-player video");
+  const video = document.querySelector<HTMLVideoElement>(".AT-player video");
 
-  if (video !== null && !isNaN(video.duration)) {
-    const videoTitle = (
-        document.querySelector(".series-title span") as HTMLElement
-      )?.innerText,
-      seasonepisode = (document.querySelector(".series-episode") as HTMLElement)
-        ?.innerText,
+  if (video && !isNaN(video.duration)) {
+    const videoTitle =
+        document.querySelector<HTMLElement>(".series-title span")?.textContent,
       [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -52,10 +49,10 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = startTimestamp;
     presenceData.endTimestamp = endTimestamp;
 
-    presence.setTrayTitle(video.paused ? "" : videoTitle);
-
     presenceData.details = videoTitle ?? "Title not found...";
-    presenceData.state = seasonepisode ?? "Episode not found...";
+    presenceData.state =
+      document.querySelector<HTMLElement>(".series-episode")?.textContent ??
+      "Episode not found...";
 
     if (video.paused) {
       delete presenceData.startTimestamp;

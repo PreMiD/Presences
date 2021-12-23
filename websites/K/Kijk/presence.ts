@@ -1,16 +1,16 @@
 const presence = new Presence({
     clientId: "812413011502825504"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: HTMLElement, title2: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
     },
     page = window.location.pathname;
 
-  presenceData.startTimestamp = browsingStamp;
   if (page === "/") {
     search = document.querySelector(
       "#__next > div > div > div.SearchModalstyle__SearchModalStyle-sc-1h6b5wy-0.knmuVj > div.SearchModalstyle__SearchModalHeaderStyle-sc-1h6b5wy-1.kNvWZE > div > div:nth-child(2) > div.SearchModalstyle__SearchModalInputWrapperStyle-sc-1h6b5wy-5.iwOFOK > input"
@@ -32,43 +32,43 @@ presence.on("UpdateData", async () => {
   }
   if (page.includes("/films/video/")) {
     delete presenceData.startTimestamp;
-    const showname = document.getElementsByClassName(
-      "Textstyle__VideoMetaDataTitle-sc-2ihbn2-17"
-    ) as HTMLCollection;
-    presenceData.details = showname[0].textContent;
+
+    presenceData.details = (
+      document.getElementsByClassName(
+        "Textstyle__VideoMetaDataTitle-sc-2ihbn2-17"
+      ) as HTMLCollection
+    )[0].textContent;
     title2 = document.querySelector("#player");
     if (title2.className.includes("paused")) {
       delete presenceData.endTimestamp;
       presenceData.smallImageKey = "pause";
     } else if (title2.className.includes("playing")) {
-      const currentTime = presence.timestampFromFormat(
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        presence.timestampFromFormat(
           document.querySelector(
             "#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-elapsed"
           ).textContent
         ),
-        durationss = presence.timestampFromFormat(
+        presence.timestampFromFormat(
           document.querySelector(
             "#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-duration"
           ).textContent
-        ),
-        timestamps = presence.getTimestamps(currentTime, durationss);
-      [, presenceData.endTimestamp] = timestamps;
+        )
+      );
       presenceData.smallImageKey = "play";
     }
   }
   if (page.includes("/afleveringen/video/")) {
     delete presenceData.startTimestamp;
     const titles = document.querySelector(
-        'meta[name="og:title"]'
-      ) as HTMLMetaElement,
-      rp23 = titles.content.replace(/[^0-9.]/g, ""),
-      rp2 = rp23.length + 21,
-      rp = titles.content.slice(-rp2);
+      'meta[name="og:title"]'
+    ) as HTMLMetaElement;
     presenceData.details = titles.content
       .replace("Seizoen", "")
       .replace("aflevering", "")
       .replace(/[0-9]/g, "");
-    presenceData.state = rp
+    presenceData.state = titles.content
+      .slice(-titles.content.replace(/[^0-9.]/g, "").length + 21)
       .replace(/,/g, ":")
       .replace("Seizoen", "S")
       .replace("aflevering", ":E")
@@ -78,18 +78,18 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
       presenceData.smallImageKey = "pause";
     } else if (title2.className.includes("playing")) {
-      const currentTime = presence.timestampFromFormat(
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        presence.timestampFromFormat(
           document.querySelector(
             "#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-elapsed"
           ).textContent
         ),
-        durationss = presence.timestampFromFormat(
+        presence.timestampFromFormat(
           document.querySelector(
             "#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-duration"
           ).textContent
-        ),
-        timestamps = presence.getTimestamps(currentTime, durationss);
-      [, presenceData.endTimestamp] = timestamps;
+        )
+      );
       presenceData.smallImageKey = "play";
     } else {
       title = document.querySelector(
@@ -101,8 +101,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

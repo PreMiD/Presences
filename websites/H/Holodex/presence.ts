@@ -12,19 +12,9 @@ presence.on("iFrameData", (data: { video: { isPaused: boolean } }) => {
   iFrameVideo = data.video;
 });
 
-/**
- * Functions to get some common info
- */
-const /**
-   * The object that stores the functions that get information from the DOM
-   */
-  getInfo = {
+const getInfo = {
     generic: () => {
       return {
-        /**
-         * Gets the specified url parameter
-         * https://stackoverflow.com/a/11582513/13343832 thanks :)
-         */
         getURLParameter: (name: string) => {
           return (
             decodeURIComponent(
@@ -402,8 +392,6 @@ presence.on("UpdateData", async () => {
       }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

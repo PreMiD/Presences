@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "640234287525920834"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   lastPath: string;
 
 const typeURL = new URL(document.location.href),
@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     },
     curPath = document.location.pathname;
   if (lastPath !== curPath) {
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
     lastPath = curPath;
   }
 
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing user:";
       presenceData.state = document.querySelector(
         "#root > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div > h1"
-      ).innerHTML;
+      ).textContent;
     } else if (curPath.includes("/tags")) {
       presenceData.details = "Viewing tags:";
       presenceData.state = `${
@@ -49,20 +49,20 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing Feed";
       presenceData.state = document.querySelector<HTMLElement>(
         "#stacc_center_title"
-      ).innerText;
+      ).textContent;
     } else if (curPath.includes("/fanbox"))
       presenceData.details = "Viewing fanbox";
     else if (curPath.includes("/event")) {
       const title = document.querySelector(
         "#contents > div.pane.full.group > h1"
       );
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing event:";
         presenceData.state = title.textContent;
       } else presenceData.details = "Browsing events...";
     } else if (curPath.includes("/ranking")) {
       presenceData.details = "Viewing ranking:";
-      presenceData.state = document.querySelector(".current").innerHTML;
+      presenceData.state = document.querySelector(".current").textContent;
     } else if (curPath.includes("/history.php"))
       presenceData.details = "Browsing History";
     else if (curPath.includes("/bookmark"))
@@ -140,15 +140,18 @@ presence.on("UpdateData", async () => {
       })`;
     } else if (curPath.includes("/novel/")) {
       const title = document.querySelector(
-          "#root > div > div:nth-child(2) > div > div > main > section > div > div:nth-child(2) > div:nth-child(2)"
-        ),
-        author = document.querySelector(
-          "#root > div > div:nth-child(2) > div > div > aside > section > h2 > div > div > a"
-        );
-      presenceData.details =
-        title !== null ? "Viewing novel:" : "Browsing for novels...";
-      if (title !== null)
-        presenceData.state = `${title.textContent} (${author.textContent})`;
+        "#root > div > div:nth-child(2) > div > div > main > section > div > div:nth-child(2) > div:nth-child(2)"
+      );
+      presenceData.details = title
+        ? "Viewing novel:"
+        : "Browsing for novels...";
+      if (title) {
+        presenceData.state = `${title.textContent} (${
+          document.querySelector(
+            "#root > div > div:nth-child(2) > div > div > aside > section > h2 > div > div > a"
+          ).textContent
+        })`;
+      }
     } else if (curPath.startsWith("/") || curPath.startsWith("/en/"))
       presenceData.details = "Viewing home page";
 
@@ -158,11 +161,11 @@ presence.on("UpdateData", async () => {
     if (curPath === "/" || curPath.includes("/public"))
       presenceData.details = "Viewing sketch page";
     else if (curPath.includes("/lives/")) {
-      const title = document.querySelector<HTMLElement>(
-        "#LiveSidebarLiveUser > div.name"
-      );
       presenceData.details = "Sketch- Viewing livestream";
-      presenceData.state = `by user: ${title.innerText}`;
+      presenceData.state = `by user: ${
+        document.querySelector<HTMLElement>("#LiveSidebarLiveUser > div.name")
+          .textContent
+      }`;
       presenceData.smallImageKey = "live";
     } else if (curPath.includes("/lives"))
       presenceData.details = "Sketch- Browsing livestreams";
@@ -179,13 +182,12 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Sketch- Viewing tag:";
       presenceData.state = document.querySelector<HTMLElement>(
         "#TagHeader > div > div.CarouselOverlay > div > div"
-      ).innerText;
+      ).textContent;
     }
   }
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (!presenceData.details) {
-    presence.setTrayTitle();
     presence.setActivity();
     return;
   }

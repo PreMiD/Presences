@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
   if (songInfo) {
     const details: NodeListOf<HTMLDivElement> =
         songInfo.querySelectorAll(".mb-1"),
-      [artist, album, title] = [...details].map((e) => e.innerText);
+      [artist, album, title] = [...details].map(e => e.textContent);
     if (artist && album && title) {
       presenceData.details = `Looking at ${title.substring(
         8
@@ -27,25 +27,25 @@ presence.on("UpdateData", async () => {
     }
   } else if (header.length === 2) {
     let rating: HTMLButtonElement;
-    if (header[1].innerText === "Ratings")
+    if (header[1].textContent === "Ratings")
       rating = document.querySelector("button.active");
-    presenceData.details = `Looking at ${rating ? rating.innerText : ""} ${
-      header[1].innerText
+    presenceData.details = `Looking at ${rating ? rating.textContent : ""} ${
+      header[1].textContent
     }`;
   } else {
-    if (playerTitle) presenceData.state = playerTitle.innerText;
-    if (playerArtist) presenceData.details = playerArtist.innerText;
+    if (playerTitle) presenceData.state = playerTitle.textContent;
+    if (playerArtist) presenceData.details = playerArtist.textContent;
 
     if (playBackStatus) {
-      switch (playBackStatus.innerText) {
+      switch (playBackStatus.textContent) {
         case "Play": {
           presenceData.smallImageKey = "play";
-          if (listeners) presenceData.smallImageText = listeners.innerText;
+          if (listeners) presenceData.smallImageText = listeners.textContent;
           break;
         }
         case "Stop": {
           presenceData.smallImageKey = "pause";
-          if (listeners) presenceData.smallImageText = listeners.innerText;
+          if (listeners) presenceData.smallImageText = listeners.textContent;
           break;
         }
         default:
@@ -54,17 +54,17 @@ presence.on("UpdateData", async () => {
     }
 
     if (playerTime) {
-      const [currentTime, duration] = playerTime.innerText
-          .split("/")
-          .map((time) => presence.timestampFromFormat(time)),
-        timestamps = presence.getTimestamps(currentTime, duration);
+      const [currentTime, duration] = playerTime.textContent
+        .split("/")
+        .map(time => presence.timestampFromFormat(time));
 
-      [, presenceData.endTimestamp] = timestamps;
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        currentTime,
+        duration
+      );
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

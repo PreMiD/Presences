@@ -3,9 +3,8 @@ const presence = new Presence({
 });
 
 function getQuery() {
-  const search = location.search.substring(1);
   return JSON.parse(
-    `{"${decodeURI(decodeURIComponent(search))
+    `{"${decodeURI(decodeURIComponent(location.search.substring(1)))
       .replace(/"/g, '\\"')
       .replace(/&/g, '","')
       .replace(/=/g, '":"')}"}`
@@ -17,21 +16,15 @@ function getGenre(code: string) {
     endCode = code.substr(1);
   if (firstCode === "E") return "EDM";
   else if (firstCode === "L" && endCode === "0107") return "트롯";
-  else {
-    if (endCode.startsWith("01")) return "가요";
-    else if (
-      endCode.startsWith("02") &&
-      endCode !== "0207" &&
-      endCode !== "0208"
-    )
-      return "POP";
-    else if (endCode.startsWith("03")) return "OST";
-    else if (endCode.startsWith("04")) return "JPOP";
-    else if (endCode.startsWith("05")) return "JAZZ";
-    else if (endCode.startsWith("06")) return "클래식";
-    else if (endCode.startsWith("08")) return "CCM";
-    else return "그 외 장르";
-  }
+  else if (endCode.startsWith("01")) return "가요";
+  else if (endCode.startsWith("02") && endCode !== "0207" && endCode !== "0208")
+    return "POP";
+  else if (endCode.startsWith("03")) return "OST";
+  else if (endCode.startsWith("04")) return "JPOP";
+  else if (endCode.startsWith("05")) return "JAZZ";
+  else if (endCode.startsWith("06")) return "클래식";
+  else if (endCode.startsWith("08")) return "CCM";
+  else return "그 외 장르";
 }
 
 presence.on("UpdateData", async () => {
@@ -41,21 +34,23 @@ presence.on("UpdateData", async () => {
     { location } = window;
   // If player
   if (location.pathname === "/player/fPlayer") {
-    const trackInfo = document.querySelector("div.track-info"),
-      title = trackInfo.querySelector("strong#SongTitleArea").textContent,
-      artist = trackInfo.querySelector("span#ArtistNameArea").textContent,
-      playBar = document.querySelector("div.fp-ui"),
-      playButton = playBar.querySelector("a.fp-playbtn").textContent,
-      currentTime = playBar.querySelector("span.fp-elapsed").textContent,
-      allTime = playBar.querySelector("span.fp-duration").textContent,
-      currentDate = presence.timestampFromFormat(currentTime),
-      allDate = presence.timestampFromFormat(allTime);
-
+    const playBar = document.querySelector("div.fp-ui"),
+      playButton = playBar.querySelector("a.fp-playbtn").textContent;
     [, presenceData.endTimestamp] = presence.getTimestamps(
-      currentDate,
-      allDate
+      presence.timestampFromFormat(
+        playBar.querySelector("span.fp-elapsed").textContent
+      ),
+      presence.timestampFromFormat(
+        playBar.querySelector("span.fp-duration").textContent
+      )
     );
-    presenceData.details = `${title} - ${artist}`;
+    presenceData.details = `${
+      document.querySelector("strong#SongTitleArea").textContent
+    } - ${
+      document
+        .querySelector<HTMLDivElement>("div.track-info")
+        .querySelector("span#ArtistNameArea").textContent
+    }`;
     if (playButton === "재생") {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "일시 정지";
@@ -64,18 +59,17 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "재생";
     }
   } else if (location.pathname === "/detail/mediaInfo") {
-    const title = document.querySelector("h2.videoTitle").textContent,
-      video: HTMLVideoElement = document
-        .querySelector("div.fp-player")
-        .querySelector("video.fp-engine"),
-      currentDate = video.currentTime,
-      allDate = video.duration;
+    const video: HTMLVideoElement = document
+      .querySelector("div.fp-player")
+      .querySelector("video.fp-engine");
 
     [, presenceData.endTimestamp] = presence.getTimestamps(
-      currentDate,
-      allDate
+      video.currentTime,
+      video.duration
     );
-    presenceData.details = `${title}`;
+    presenceData.details = `${
+      document.querySelector("h2.videoTitle").textContent
+    }`;
     if (video.paused) {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "일시 정지";
@@ -88,11 +82,9 @@ presence.on("UpdateData", async () => {
     }
   } else if (location.pathname === "/") presenceData.details = "메인";
   else if (location.pathname.indexOf("/search") === 0) {
-    const keyword = getQuery();
-
     presenceData.smallImageKey = "search";
     presenceData.details = "검색";
-    presenceData.state = keyword.query;
+    presenceData.state = getQuery().query;
     if (location.pathname === "/search/searchMain")
       presenceData.details += "(통합검색)";
     else if (location.pathname === "/search/searchArtist")
@@ -127,10 +119,11 @@ presence.on("UpdateData", async () => {
     else if (location.pathname === "/newest/album")
       presenceData.details += "(앨범)";
   } else if (location.pathname.startsWith("/genre")) {
-    const code = location.pathname.replace("/genre/", "");
     presenceData.smallImageKey = "music";
     presenceData.details = "장르음악";
-    presenceData.details += `(${getGenre(code)})`;
+    presenceData.details += `(${getGenre(
+      location.pathname.replace("/genre/", "")
+    )})`;
   } else if (location.pathname.startsWith("/genietv")) {
     presenceData.smallImageKey = "tv";
     presenceData.details = "지니TV";
@@ -209,8 +202,7 @@ presence.on("UpdateData", async () => {
     else if (location.pathname === "/myMusic/syncPlaylist")
       presenceData.details += "(동기화 재생목록)";
     else if (location.pathname === "/myMusic/myPlaylist") {
-      const query = getQuery(),
-        { category } = query;
+      const { category } = getQuery();
       if (category === "A") presenceData.details += "(많이 들은 아티스트)";
       else if (category === "M") presenceData.details += "(많이 들은 곡)";
       else if (category === "R") presenceData.details += "(최근 감상 곡)";

@@ -1,18 +1,20 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Duolingo",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Luke",
     "id": "279622919242514432"
   },
-  "category": "other",
-  "logo": "https://i.imgur.com/YKAf42L.png",
-  "thumbnail": "https://i.imgur.com/M3nbjZJ.png",
-  "version": "2.0.0",
-  "color": "#58cc02",
-  "tags": ["education", "games", "languages"],
-  "regExp": "(www|(\\w{2}-)?\\w{2})\\.duolingo\\.(com|cn)",
-  "url": "www.duolingo.com",
+  "contributors": [
+    {
+      "name": "TheSlowly",
+      "id": "505071508851523599"
+    },
+    {
+      "name": "narpi",
+      "id": "321665259842830336"
+    }
+  ],
+  "service": "Duolingo",
   "description": {
     "ar_SA": "‏الطريقة الممتعة والفعّالة لتعلّم لغة جديدة!",
     "cs_CZ": "Bezplatný, zábavný a účinný způsob, jak se naučit jazyk!",
@@ -38,14 +40,16 @@
     "vi_VN": "Cách học ngôn ngữ miễn phí, vui nhộn và hiệu quả!",
     "zh_CN": "学习外语，寓教于乐"
   },
-  "contributors": [
-    {
-      "name": "TheSlowly",
-      "id": "505071508851523599"
-    },
-    {
-      "name": "narpi",
-      "id": "321665259842830336"
-    }
+  "url": "www.duolingo.com",
+  "regExp": "(www|(\\w{2}-)?\\w{2})\\.duolingo\\.(com|cn)",
+  "version": "2.0.1",
+  "logo": "https://i.imgur.com/YKAf42L.png",
+  "thumbnail": "https://i.imgur.com/M3nbjZJ.png",
+  "color": "#58cc02",
+  "category": "other",
+  "tags": [
+    "education",
+    "games",
+    "languages"
   ]
 }

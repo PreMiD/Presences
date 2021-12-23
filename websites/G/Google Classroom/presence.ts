@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "632293282847784973"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
   return presence.getStrings(
@@ -28,9 +28,9 @@ let strings: Awaited<ReturnType<typeof getStrings>> = null,
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
-    path: string[] = document.location.pathname.split("/"),
+    path = document.location.pathname.split("/"),
     [newLang, privacy] = await Promise.all([
       presence.getSetting("lang").catch(() => "en"),
       presence.getSetting("privacy")
@@ -48,9 +48,7 @@ presence.on("UpdateData", async () => {
   else if (path[0] === "calendar") presenceData.details = strings.calendar;
   else if (path[0] === "a") presenceData.details = strings.todo;
   else if (path[0] === "c") {
-    const classroom: string = document.querySelector(
-      'span[class="YVvGBb dDKhVc"]'
-    )
+    const classroom = document.querySelector('span[class="YVvGBb dDKhVc"]')
       ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
           document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
         }`
@@ -63,9 +61,7 @@ presence.on("UpdateData", async () => {
 
     if (!privacy) presenceData.state = classroom;
   } else if (path[0] === "w") {
-    const classroom: string = document.querySelector(
-      'span[class="YVvGBb dDKhVc"]'
-    )
+    const classroom = document.querySelector('span[class="YVvGBb dDKhVc"]')
       ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
           document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
         }`
@@ -75,9 +71,7 @@ presence.on("UpdateData", async () => {
       : strings.classwork;
     if (!privacy) presenceData.state = classroom;
   } else if (path[0] === "r") {
-    const classroom: string = document.querySelector(
-      'span[class="YVvGBb dDKhVc"]'
-    )
+    const classroom = document.querySelector('span[class="YVvGBb dDKhVc"]')
       ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
           document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
         }`

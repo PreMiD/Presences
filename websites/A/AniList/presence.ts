@@ -28,13 +28,15 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Searching";
   } else if (pathname.startsWith("/anime")) {
-    const title = document.querySelector("div.content > h1").textContent.trim();
     presenceData.details = "Viewing an anime";
-    presenceData.state = title;
+    presenceData.state = document
+      .querySelector("div.content > h1")
+      .textContent.trim();
   } else if (pathname.startsWith("/manga")) {
-    const title = document.querySelector("div.content > h1").textContent.trim();
     presenceData.details = "Viewing a manga";
-    presenceData.state = title;
+    presenceData.state = document
+      .querySelector("div.content > h1")
+      .textContent.trim();
   } else if (pathname.startsWith("/forum")) {
     if (pathname.split("/").length > 3) {
       presenceData.details = "Reading a forum post";
@@ -49,13 +51,13 @@ presence.on("UpdateData", async () => {
     presenceData.state =
       document.querySelector("div.container > h1").textContent;
   } else if (pathname.startsWith("/review")) {
-    const title = document.querySelector("a.title").textContent.trim();
-    presenceData.details = `Reading a '${title}' review`;
-    const author = document
+    presenceData.details = `Reading a '${document
+      .querySelector("a.title")
+      .textContent.trim()}' review`;
+    presenceData.state = `${document
       .querySelector("a.author")
       .textContent.trim()
-      .replace("a review ", "");
-    presenceData.state = `${author}`;
+      .replace("a review ", "")}`;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).reading;
   } else if (pathname.startsWith("/notifications"))

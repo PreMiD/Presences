@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "648494004870184981"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let title: string;
 
@@ -12,29 +12,27 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.4gamers.com.tw") {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/new")) {
-      title = document.getElementsByClassName("news-header-title")[0].innerHTML;
-      const category = document.getElementsByClassName(
-        "news-header-category "
-      )[0].innerHTML;
+      title =
+        document.getElementsByClassName("news-header-title")[0].textContent;
       presenceData.details = title;
-      presenceData.state = `Category: ${category}`;
+      presenceData.state = `Category: ${
+        document.getElementsByClassName("news-header-category ")[0].textContent
+      }`;
     } else if (document.location.pathname.includes("magazine")) {
       title = document.getElementsByClassName("magazine-content-title")[0]
-        .innerHTML;
-      const time = document.getElementsByClassName("magazine-content-time")[0]
-        .innerHTML;
+        .textContent;
       presenceData.details = title;
-      presenceData.state = `Publish Date: ${time}`;
+      presenceData.state = `Publish Date: ${
+        document.getElementsByClassName("magazine-content-time")[0].textContent
+      }`;
     } else if (document.location.pathname.includes("tournament"))
       presenceData.details = "賽事專欄";
   }
   if (!presenceData.details) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing site:";
-    presenceData.state = "4gamers";
+    presenceData.startTimestamp = browsingTimestamp;
     presence.setActivity(presenceData);
   } else presence.setActivity(presenceData);
 });

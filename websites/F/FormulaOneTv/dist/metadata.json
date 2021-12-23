@@ -1,26 +1,26 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "AnOmniMoose",
+    "id": "180867904135233536"
+  },
   "service": "FormulaOneTv",
   "altnames": [
     "Formula 1 TV",
     "F1 TV"
   ],
-  "author": {
-    "name": "AnOmniMoose",
-    "id": "180867904135233536"
+  "description": {
+    "en": "Watch F1 live & on demand. Every F1 race live and on demand. With exclusive access to on-board cameras, team radio and live timing."
   },
-  "category": "other",
+  "url": "f1tv.formula1.com",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/opuHbca.png",
   "thumbnail": "https://i.imgur.com/uDxWlhL.jpg",
-  "version": "1.0.0",
   "color": "#e10600",
+  "category": "other",
   "tags": [
     "formula1",
     "racing",
     "driving"
-  ],
-  "url": "f1tv.formula1.com",
-  "description": {
-    "en": "Watch F1 live & on demand. Every F1 race live and on demand. With exclusive access to on-board cameras, team radio and live timing."
-  }
+  ]
 }

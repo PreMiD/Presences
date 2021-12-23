@@ -1,14 +1,13 @@
 const presence = new Presence({
     clientId: "687352219598585905"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "animeradio"
+    largeImageKey: "animeradio",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.host === "www.animeradio.de") {
     if (document.location.pathname.includes("/webplayer/")) {
@@ -61,7 +60,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("#content > header > h1 > a").textContent
       }`;
     } else if (document.location.pathname.includes("/Search/")) {
-      if (document.querySelector("#errorMessage") !== null) {
+      if (document.querySelector("#errorMessage")) {
         presenceData.details = `Sucht nach ${
           document
             .querySelector("#errorMessage")
@@ -136,7 +135,7 @@ presence.on("UpdateData", async () => {
     const product = document.querySelector(
       ".product-info-title-desktop > span"
     );
-    if (product !== null) {
+    if (product) {
       presenceData.details = "Betrachtet Produkt:";
       presenceData.state = product.textContent;
     } else if (document.location.pathname.includes("/advanced_search_result")) {
@@ -149,8 +148,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

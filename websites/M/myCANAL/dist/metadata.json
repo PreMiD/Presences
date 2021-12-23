@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Dark_Ville",
     "id": "638080361179512853"
@@ -20,14 +20,14 @@
     "nl": "Canal + is een Franse abonnementsaanbieder die is gekoppeld aan het kanaal met dezelfde naam. Het is eigendom van Vivendi met een aandeel van honderd procent."
   },
   "url": "www.canalplus.com",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "logo": "https://i.imgur.com/H3IXznl.png",
   "thumbnail": "https://i.imgur.com/xRKwqvI.png",
   "color": "#000",
+  "category": "videos",
   "tags": [
     "mycanal",
     "video",
     "media"
-  ],
-  "category": "videos"
+  ]
 }

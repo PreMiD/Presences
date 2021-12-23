@@ -1,19 +1,19 @@
-const startTimestamp = Math.floor(Date.now() / 1000),
+const browsingTimestamp = Math.floor(Date.now() / 1000),
   presence = new Presence({
     clientId: "785958064192749600"
   });
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.hostname === "pxls.space") {
-    data.state = `Canvas: ${
-      document.getElementById("current-pixel-count").innerHTML
+    presenceData.state = `Canvas: ${
+      document.getElementById("current-pixel-count").textContent
     }`;
-    data.details = `All time: ${
-      document.getElementById("alltime-pixel-count").innerHTML
+    presenceData.details = `All time: ${
+      document.getElementById("alltime-pixel-count").textContent
     }`;
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   }
 });

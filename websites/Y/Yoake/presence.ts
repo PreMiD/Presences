@@ -8,12 +8,12 @@ const presence = new Presence({
 
 let lastPlaybackState: boolean,
   lastPath: string,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const playback =
-      document.getElementById("title") !== null ||
-      (document.getElementsByTagName("video").length !== 0 &&
+      !!document.getElementById("title") ||
+      (document.getElementsByTagName("video").length &&
         document.getElementsByTagName("video")[0].className !== "previewVideo"),
     curPath = document.location.pathname,
     presenceData: PresenceData = {
@@ -23,11 +23,11 @@ presence.on("UpdateData", async () => {
   if (lastPath !== curPath || lastPlaybackState !== playback) {
     lastPath = curPath;
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
   if (!playback) {
     if (curPath.startsWith("/entity.php")) {
-      presenceData.details = document.getElementById("entityTitle").innerHTML;
+      presenceData.details = document.getElementById("entityTitle").textContent;
       presenceData.state = "Đang chọn tập...";
     } else if (curPath.startsWith("/profile.php"))
       presenceData.details = "Đang xem profile...";
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Đang đăng ký...";
     else if (curPath.startsWith("/genres.php")) {
       presenceData.state = `Thể loại: ${
-        document.querySelector(".genreh2").innerHTML
+        document.querySelector(".genreh2").textContent
       }`;
       presenceData.details = "Đang chọn phim...";
     } else if (curPath.startsWith("/history.php"))
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
     else if (curPath.startsWith("/reset-password"))
       presenceData.details = "Đang đặt lại mật khẩu...";
     else presenceData.details = "Đang xem trang chủ...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (
       !curPath.startsWith("/entity.php") &&
@@ -64,10 +64,10 @@ presence.on("UpdateData", async () => {
 
   const [video] = document.getElementsByTagName("video");
 
-  if (video !== null && !isNaN(video.duration)) {
+  if (video && !isNaN(video.duration)) {
     const [titleArrOne, titleArrTwo] = (
-        document.getElementById("title") !== null
-          ? document.getElementById("title").innerHTML
+        document.getElementById("title")
+          ? document.getElementById("title").textContent
           : "Không thấy tên phim!... - Tập ?"
       ).split(" - "),
       [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -80,8 +80,6 @@ presence.on("UpdateData", async () => {
       : (await strings).play;
     presenceData.startTimestamp = startTimestamp;
     presenceData.endTimestamp = endTimestamp;
-
-    presence.setTrayTitle(video.paused ? "" : titleArrOne);
 
     presenceData.details = `Đang xem: ${titleArrOne}`;
     presenceData.state = titleArrTwo;

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Jackelele",
     "id": "377175513372033024"
@@ -10,14 +10,14 @@
     "nl": "Een geweldige Garry's Mod-community"
   },
   "url": "perpheads.com",
-  "version": "1.0.4",
+  "regExp": "([a-z0-9-]+[.])*perpheads[.]com[/]",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/Zbr5ofa.png",
   "thumbnail": "https://i.imgur.com/xeeFig2.png",
   "color": "#FFA500",
+  "category": "games",
   "tags": [
     "garrysmod",
     "perpheads"
-  ],
-  "category": "games",
-  "regExp": "([a-z0-9-]+[.])*perpheads[.]com[/]"
+  ]
 }

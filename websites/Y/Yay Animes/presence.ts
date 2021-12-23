@@ -1,7 +1,6 @@
 const presence: Presence = new Presence({
     clientId: "613510331066482699"
   }),
-  startedBrowsing: number = Math.floor(Date.now() / 1000),
   path: string = window.location.pathname,
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
@@ -10,7 +9,7 @@ const presence: Presence = new Presence({
   }),
   presenceData: PresenceData = {
     largeImageKey: "yay_lg",
-    startTimestamp: startedBrowsing
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 let playback: boolean,
   video: HTMLVideoElement,

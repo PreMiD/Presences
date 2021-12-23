@@ -4,11 +4,11 @@ const presence = new Presence({
 
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -29,7 +29,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -53,11 +53,12 @@ const updateCallback = {
         getURLParam("action") || getURLParam("veaction"),
       [lang] = currentURL.hostname.split("."),
       titleFromURL = (): string => {
-        const raw =
-          currentPath[1] === "index.php"
+        return decodeURI(
+          (currentPath[1] === "index.php"
             ? getURLParam("title")
-            : currentPath.slice(1).join("/");
-        return decodeURI(raw.replace(/_/g, " "));
+            : currentPath.slice(1).join("/")
+          ).replace(/_/g, " ")
+        );
       };
 
     try {
@@ -101,7 +102,7 @@ const updateCallback = {
       return (
         details[
           [...document.querySelector("body").classList]
-            .filter((v) => /ns--?\d/.test(v))[0]
+            .filter(v => /ns--?\d/.test(v))[0]
             .slice(3)
         ] || "Viewing a page"
       );
@@ -117,9 +118,9 @@ const updateCallback = {
 
     if (
       (
-        (document.querySelector("#n-mainpage a") ||
-          document.querySelector("#p-navigation a") ||
-          document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement
+        document.querySelector<HTMLAnchorElement>("#n-mainpage a") ??
+        document.querySelector<HTMLAnchorElement>("#p-navigation a") ??
+        document.querySelector<HTMLAnchorElement>(".mw-wiki-logo")
       ).href === currentURL.href
     )
       presenceData.details = "On the main page";
@@ -129,9 +130,8 @@ const updateCallback = {
       presenceData.details = "Creating an account";
     else if (document.querySelector(".searchresults")) {
       presenceData.details = "Searching for a page";
-      presenceData.state = (
-        document.querySelector("input[type=search]") as HTMLInputElement
-      ).value;
+      presenceData.state =
+        document.querySelector<HTMLInputElement>("input[type=search]").value;
     } else if (actionResult() === "history") {
       presenceData.details = "Viewing revision history";
       presenceData.state = titleFromURL();
@@ -155,20 +155,18 @@ const updateCallback = {
           presenceData.details = "Editing a page";
         else presenceData.details = namespaceDetails();
       };
+    } else if (actionResult() === "edit") {
+      presenceData.details = document.querySelector("#ca-edit")
+        ? "Editing a page"
+        : "Viewing source";
+      presenceData.state = titleFromURL();
     } else {
-      if (actionResult() === "edit") {
-        presenceData.details = document.querySelector("#ca-edit")
-          ? "Editing a page"
-          : "Viewing source";
-        presenceData.state = titleFromURL();
-      } else {
-        presenceData.details = namespaceDetails();
-        presenceData.state = `${
-          title.toLowerCase() === titleFromURL().toLowerCase()
-            ? `${title}`
-            : `${title} (${titleFromURL()})`
-        }`;
-      }
+      presenceData.details = namespaceDetails();
+      presenceData.state = `${
+        title.toLowerCase() === titleFromURL().toLowerCase()
+          ? `${title}`
+          : `${title} (${titleFromURL()})`
+      }`;
     }
 
     if (lang !== "en") {

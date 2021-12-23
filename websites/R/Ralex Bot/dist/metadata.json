@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Snowy ✨",
     "id": "693445343332794408"
@@ -11,16 +11,16 @@
     "nl": "Ralex is een Turkse Discord-bot, hij is volledig instelbaar met zijn dashboard, voeg deze geweldige bot toe aan je server!"
   },
   "url": "bot.ralex.xyz",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/VEX5zcU.jpg",
   "thumbnail": "https://i.imgur.com/AIjqBrT.png",
   "color": "#FFBA00",
+  "category": "other",
   "tags": [
     "discord",
     "bot",
     "bots",
     "ralex",
     "ralexbot"
-  ],
-  "category": "other"
+  ]
 }

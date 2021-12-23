@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "639916600031707149"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let hour: number,
   min: number,
@@ -89,19 +89,19 @@ presence.on("UpdateData", async () => {
         "#player-video-info > div.player-info-container > div.player-info-title"
       ).textContent;
     } else if (document.location.pathname.includes("/show/")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Guardando una serie:";
       presenceData.state = document.querySelector(
         "#content-body > div.show-container.fillParent > div > div > div.show-inside-container > div.show-top-container > div.show-title"
       ).textContent;
     } else if (document.location.pathname.includes("/fandom")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Guardando un fandom:";
       presenceData.state = document.querySelector(
         "#content-body > div.show-container.fillParent > div > div > div.show-inside-container > div.show-top-container > div.show-title"
       ).textContent;
     } else if (document.location.pathname.includes("/profile/")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Visualizzando un utente:";
       presenceData.state = document.querySelector(
         "#content-body > div.profile-container-opaque.text-shadow.open > div.profile-friend-content > div > div.profile-friend-top > div.profile-friend-top-right > div.profile-friend-name-container > div"
@@ -109,8 +109,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

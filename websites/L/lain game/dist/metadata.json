@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "fror",
     "id": "515668127829458945"
@@ -10,15 +10,15 @@
     "nl": "lain game is een website die probeert de PlayStation-game 'Serial Experiments Lain' uit 1998 in webvorm te reproduceren."
   },
   "url": "laingame.net",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/0Ewrhd9.png",
   "thumbnail": "https://i.imgur.com/46bZwMI.png",
   "color": "#000000",
+  "category": "games",
   "tags": [
     "serial-experiments-lain",
     "games",
     "doesnt-have-gameplay",
     "based-on-an-anime"
-  ],
-  "category": "games"
+  ]
 }

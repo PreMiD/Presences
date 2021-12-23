@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "631122124630654979"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname === "/") {
     presenceData.details = "Browing Homepage";
     presenceData.state = "at Homepage";
@@ -27,8 +27,9 @@ presence.on("UpdateData", async () => {
     let dstate;
 
     if (document.location.search !== "") {
-      const urlParams = new URLSearchParams(document.location.search);
-      dstate = `searching for ${urlParams.get("name_like")}`;
+      dstate = `searching for ${new URLSearchParams(
+        document.location.search
+      ).get("name_like")}`;
     } else dstate = "browsing list";
 
     presenceData.details = `Browing ${document.location.pathname.replace(
@@ -77,8 +78,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "browsing";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

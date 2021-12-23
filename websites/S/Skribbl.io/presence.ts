@@ -18,14 +18,9 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    inGame =
-      document.querySelector("#containerGamePlayers").textContent === ""
-        ? false
-        : true,
-    inLobby =
-      document.querySelector("#round").textContent === "" ? false : true,
     buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang").catch(() => "en");
+    newLang = await presence.getSetting("lang").catch(() => "en"),
+    round = document.querySelector("#round").textContent;
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -33,8 +28,7 @@ presence.on("UpdateData", async () => {
     strings = getStrings();
   }
 
-  if (inGame && !inLobby) {
-    const round = document.querySelector("#round").textContent;
+  if (document.querySelector("#containerGamePlayers").textContent && !round) {
     presenceData.details = round;
     if (buttons) {
       presenceData.buttons = [

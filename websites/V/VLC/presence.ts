@@ -36,8 +36,8 @@ function setLoop(f: () => void, ms: number): number {
 function decodeReq(entity: Element): string {
   // decoding HTML entities the stackoverflow way
   const txt = document.createElement("textarea");
-  txt.innerHTML = entity.textContent;
-  return txt.value;
+  txt.textContent = entity.textContent;
+  return txt.textContent;
 }
 
 function getTag(
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
     document.querySelector(".footer") &&
     document.querySelector(".footer").textContent.includes("VLC")
   ) {
-    const data: PresenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "vlc"
     };
 
@@ -67,47 +67,47 @@ presence.on("UpdateData", async () => {
         if (media.title && media.album && media.title === media.album)
           media.album = null;
 
-        data.details =
+        presenceData.details =
           (media.title
             ? media.title
             : media.trackNumber
             ? `Track N°${media.trackNumber}`
             : "A song") + (media.album ? ` on ${media.album}` : "");
         media.artist
-          ? (data.state = `by ${media.artist}`)
+          ? (presenceData.state = `by ${media.artist}`)
           : media.filename
-          ? (data.state = media.filename)
-          : delete data.state;
+          ? (presenceData.state = media.filename)
+          : delete presenceData.state;
       } else if (isShow) {
         media.showName
-          ? (data.details = media.showName)
+          ? (presenceData.details = media.showName)
           : media.title
-          ? (data.details = media.title)
+          ? (presenceData.details = media.title)
           : media.filename
-          ? (data.details = media.filename)
-          : (data.details = "some TV");
-        data.state = `S${media.seasonNumber}E${media.episodeNumber}`;
+          ? (presenceData.details = media.filename)
+          : (presenceData.details = "some TV");
+        presenceData.state = `S${media.seasonNumber}E${media.episodeNumber}`;
       } else {
         media.showName
-          ? (data.details = media.showName)
+          ? (presenceData.details = media.showName)
           : media.title
-          ? (data.details = media.title)
+          ? (presenceData.details = media.title)
           : media.filename
-          ? (data.details = media.filename)
-          : (data.details = "something");
+          ? (presenceData.details = media.filename)
+          : (presenceData.details = "something");
         media.seasonNumber
-          ? (data.state = `season ${media.seasonNumber}`)
+          ? (presenceData.state = `season ${media.seasonNumber}`)
           : media.episodeNumber
-          ? (data.state = `episode ${media.episodeNumber}`)
-          : delete data.state;
+          ? (presenceData.state = `episode ${media.episodeNumber}`)
+          : delete presenceData.state;
       }
 
-      if (data.details && data.details.length > 100)
-        data.details = data.details.substring(0, 127);
-      if (data.state && data.state.length > 100)
-        data.state = data.state.substring(0, 127);
+      if (presenceData.details && presenceData.details.length > 100)
+        presenceData.details = presenceData.details.substring(0, 127);
+      if (presenceData.state && presenceData.state.length > 100)
+        presenceData.state = presenceData.state.substring(0, 127);
 
-      data.smallImageKey =
+      presenceData.smallImageKey =
         media.state === "paused"
           ? "pause"
           : media.loop === "true" && media.repeat === "false"
@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
           ? "play"
           : "pause";
 
-      data.smallImageText =
+      presenceData.smallImageText =
         media.state === "paused"
           ? (await strings).pause
           : media.loop === "true" && media.repeat === "false"
@@ -129,26 +129,24 @@ presence.on("UpdateData", async () => {
           ? (await strings).play
           : (await strings).pause;
 
-      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-        Number(media.time),
-        Number(media.length)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(Number(media.time), Number(media.length));
 
-      if (media.state === "playing") presence.setActivity(data, true);
+      if (media.state === "playing") presence.setActivity(presenceData, true);
       else {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
-        presence.setActivity(data, false);
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+        presence.setActivity(presenceData, false);
       }
     } else if (media.state === "stopped") {
-      data.details = "standby";
-      delete data.state;
-      delete data.smallImageKey;
-      delete data.smallImageText;
-      data.startTimestamp = elapsed;
-      delete data.endTimestamp;
+      presenceData.details = "standby";
+      delete presenceData.state;
+      delete presenceData.smallImageKey;
+      delete presenceData.smallImageText;
+      presenceData.startTimestamp = elapsed;
+      delete presenceData.endTimestamp;
 
-      presence.setActivity(data, false);
+      presence.setActivity(presenceData, false);
     }
   }
 });

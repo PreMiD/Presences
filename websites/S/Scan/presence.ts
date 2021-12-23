@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "755542346367631362"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let item;
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "scan"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (
     document.location.pathname === "/" ||
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
     ) as HTMLElement;
 
     presenceData.details = "Browsing";
-    presenceData.state = item.innerText;
+    presenceData.state = item.textContent;
     presenceData.smallImageKey = "search";
 
     presence.setActivity(presenceData);
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
     ) as HTMLElement;
 
     presenceData.details = "Browsing";
-    presenceData.state = item.innerText;
+    presenceData.state = item.textContent;
     presenceData.smallImageKey = "search";
 
     presence.setActivity(presenceData);
@@ -45,12 +45,9 @@ presence.on("UpdateData", async () => {
     ) as HTMLElement;
 
     presenceData.details = "Viewing";
-    presenceData.state = item.innerText;
+    presenceData.state = item.textContent;
     presenceData.smallImageKey = "reading";
 
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

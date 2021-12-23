@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "655534149871992845"
   }),
-  startTimestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp
+      startTimestamp: browsingTimestamp
     },
     path = (text: string) => {
       return document.location.pathname.includes(text);
@@ -36,11 +36,10 @@ presence.on("UpdateData", () => {
     )
   ) {
     // profiles
-    const username = document.querySelector(
-      "#content p.profile-username-heading"
-    ).textContent;
     presenceData.details = "Viewing profile of:";
-    presenceData.state = `${title} (${username})`;
+    presenceData.state = `${title} (${
+      document.querySelector("#content p.profile-username-heading").textContent
+    })`;
   } else if (
     document.location.pathname.match(/\/companies\/.*?\/jobs/g) &&
     title !== "Find Your Dream Job"
@@ -49,13 +48,16 @@ presence.on("UpdateData", () => {
     presenceData.state = title;
   } else if (path("/jobs/")) presenceData.details = "Viewing jobs";
   else if (path("/companies")) {
-    const company = document.querySelector("p").textContent;
     presenceData.details = "Viewing a company:";
-    presenceData.state = company.split("More about")[1].trim();
+    presenceData.state = document
+      .querySelector("p")
+      .textContent.split("More about")[1]
+      .trim();
   } else if (path("/leaderboard")) {
-    const name = document.querySelector("span.selected-track-name").textContent;
     presenceData.details = "Viewing a leaderboard:";
-    presenceData.state = name;
+    presenceData.state = document.querySelector(
+      "span.selected-track-name"
+    ).textContent;
   }
   presence.setActivity(presenceData);
 });

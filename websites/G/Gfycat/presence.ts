@@ -7,85 +7,85 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "gfycat"
   };
 
   if (document.location.pathname.startsWith("/discover")) {
     const section = document.querySelector(".multiple-view__title").textContent;
-    if (section) data.state = section;
+    if (section) presenceData.state = section;
 
-    data.details = "Browsing...";
-    data.startTimestamp = Date.now();
+    presenceData.details = "Browsing...";
+    presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/gifs/search")) {
     const searchText = document.querySelector(
       ".feed-with-player__title"
     ).textContent;
 
-    data.details = "Searching...";
-    if (searchText) data.state = searchText;
+    presenceData.details = "Searching...";
+    if (searchText) presenceData.state = searchText;
 
-    data.startTimestamp = Date.now();
-    data.smallImageKey = "search";
-    data.smallImageText = "Searching";
+    presenceData.startTimestamp = Date.now();
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Searching";
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith("/upload") ||
     document.location.pathname.startsWith("/create")
   ) {
-    data.details = "Uploading...";
-    data.startTimestamp = Date.now();
+    presenceData.details = "Uploading...";
+    presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/@")) {
-    const profile = document.querySelector(
+    presenceData.details = "Viewing profile";
+    presenceData.state = document.querySelector(
       ".profile-container .profile-info-container .name"
     ).textContent;
+    presenceData.startTimestamp = Date.now();
 
-    data.details = "Viewing profile";
-    data.state = profile;
-    data.startTimestamp = Date.now();
-
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/jobs")) {
-    data.details = "Browsing jobs";
-    data.startTimestamp = Date.now();
+    presenceData.details = "Browsing jobs";
+    presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else {
     const player: HTMLVideoElement = document.querySelector(
       ".video-player-wrapper video"
     );
 
     if (player) {
-      const title = document.querySelector(".gif-info .title").textContent,
-        views = document.querySelector(".gif-info .gif-views").textContent;
-      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-        Math.floor(player.currentTime),
-        Math.floor(player.duration)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(player.currentTime),
+          Math.floor(player.duration)
+        );
 
-      data.details = title;
-      data.state = views;
-      data.smallImageKey = player.paused ? "pause" : "play";
-      data.smallImageText = player.paused
+      presenceData.details =
+        document.querySelector(".gif-info .title").textContent;
+      presenceData.state = document.querySelector(
+        ".gif-info .gif-views"
+      ).textContent;
+      presenceData.smallImageKey = player.paused ? "pause" : "play";
+      presenceData.smallImageText = player.paused
         ? (await strings).pause
         : (await strings).play;
 
       if (player.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
-      presence.setActivity(data);
+      presence.setActivity(presenceData);
     } else {
-      data.details = "Browsing...";
-      data.startTimestamp = Date.now();
+      presenceData.details = "Browsing...";
+      presenceData.startTimestamp = Date.now();
 
-      presence.setActivity(data);
+      presence.setActivity(presenceData);
     }
   }
 });

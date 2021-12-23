@@ -4,19 +4,17 @@ const presence = new Presence({
   elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const urlParams = new URLSearchParams(window.location.search),
-    path = window.location.pathname;
   let video: HTMLVideoElement, live;
-  const presenceData: PresenceData = {
-    largeImageKey: "roosterteeth",
-    details: "Browsing Rooster Teeth",
-    startTimestamp: elapsed
-  };
+  const path = window.location.pathname,
+    presenceData: PresenceData = {
+      largeImageKey: "roosterteeth",
+      details: "Browsing Rooster Teeth",
+      startTimestamp: elapsed
+    };
   if (window.location.hash.includes("#search?term=")) {
     presenceData.details = "Searching For:";
-    presenceData.state = (
-      document.querySelector(".search__input") as HTMLInputElement
-    ).value;
+    presenceData.state =
+      document.querySelector<HTMLInputElement>(".search__input").value;
   } else if (path.includes("/live/rt-tv")) {
     video = document.querySelector(".vjs-tech");
     presenceData.details = document
@@ -68,12 +66,12 @@ presence.on("UpdateData", () => {
       if (document.getElementsByClassName("schedule-day").hasOwnProperty(x)) {
         const position = document
           .getElementsByClassName("schedule-day")
-          // eslint-disable-next-line no-unexpected-multiline
+
           [x].getBoundingClientRect();
         if (position.top < window.innerHeight && position.bottom >= 0) {
           presenceData.state = document
             .getElementsByClassName("schedule-day")
-            // eslint-disable-next-line no-unexpected-multiline
+
             [x].querySelector(".schedule-day__heading")
             .textContent.toLowerCase();
           presenceData.state =
@@ -94,7 +92,7 @@ presence.on("UpdateData", () => {
       .textContent.split("RECENT EPISODES FROM ");
   } else if (path.includes("/series")) presenceData.details = "Browsing Series";
   else if (path.includes("/episodes")) {
-    if (urlParams.get("channel_id")) {
+    if (new URLSearchParams(window.location.search).get("channel_id")) {
       presenceData.details = "Browsing Episodes Of:";
       presenceData.state = document
         .querySelector(".dropdown-label")
@@ -134,8 +132,6 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

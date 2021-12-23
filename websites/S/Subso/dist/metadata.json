@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
@@ -14,17 +14,17 @@
     "www.sub.so",
     "creators.sub.so"
   ],
-  "version": "1.0.3",
+  "regExp": "([a-z0-9-]+[.])*sub[.]so[/]",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/4b8AEvp.png",
   "thumbnail": "https://i.imgur.com/rbbMigG.jpg",
   "color": "#32a852",
+  "category": "socials",
   "tags": [
     "socialmedia",
     "community",
     "social",
     "videos",
     "subscriptions"
-  ],
-  "category": "socials",
-  "regExp": "([a-z0-9-]+[.])*sub[.]so[/]"
+  ]
 }
