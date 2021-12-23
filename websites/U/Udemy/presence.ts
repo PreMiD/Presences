@@ -63,7 +63,7 @@ udemy.on("UpdateData", async () => {
     presenceData.state = searching || "Something";
   } else if (page.includes("/courses/")) {
     const category = document.querySelector(
-      "div h1[class*=category--heading-primary]"
+      "div h1[class*=category--heading-primary] a"
     );
 
     presenceData.details = "Browsing courses:";
@@ -71,7 +71,7 @@ udemy.on("UpdateData", async () => {
     presenceData.state = category?.textContent || "Unknown Category";
   } else if (page.includes("/course/") && video && video.currentTime) {
     const title = document.querySelector(
-        "header a[data-purpose=course-header-title]"
+        "header h1[data-purpose=course-header-title] a"
       ),
       episode = document.querySelector(
         "li[class*=curriculum-item-link--is-current] span > span"
