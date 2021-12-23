@@ -68,6 +68,7 @@ presence.on("UpdateData", () => {
           )
           .textContent.lastIndexOf("-") - 1
       );
+    presenceData.largeImageKey = "ships";
     presenceData.smallImageKey = "skins";
     presenceData.smallImageText = "Viewing skins";
   } else if (document.location.pathname === "/skins") {
