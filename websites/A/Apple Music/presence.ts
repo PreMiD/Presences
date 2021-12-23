@@ -36,7 +36,12 @@ presence.on("UpdateData", async () => {
       )?.textContent,
       paused = document.querySelector(
         ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
-      );
+      ),
+      artwork = document
+        .querySelector(".media-artwork-v2 > picture > source")
+        ?.getAttribute("srcset")
+        .split(" ")[0]
+        .replace("44x44bb", "1024x1024bb");
 
     presenceData.details = document
       .querySelector(
@@ -56,6 +61,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = paused
       ? (await strings).pause
       : (await strings).play;
+    presenceData.largeImageKey = artwork ?? "applemusic-logo";
     if (audioTime) {
       [presenceData.startTimestamp, presenceData.endTimestamp] =
         getTimestamps(audioTime);
