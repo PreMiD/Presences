@@ -6,18 +6,12 @@
   "scripts": {
     "lint": "eslint --fix . && prettier --write **/*.ts **/{metadata,tsconfig}.json",
     "lint:ci": "eslint . && prettier **/*.ts **/{metadata,tsconfig}.json",
-    "inc": "npm run inc:compile && node ./util/tools/massVer.js",
-    "inc:compile": "tsc -p ./util/configs/tsconfig.massVer.json",
-    "su": "npm run su:compile && node ./util/tools/schemaUpdater.js",
-    "su:compile": "tsc -p ./util/configs/tsconfig.schemaUpdater.json",
-    "se": "npm run se:compile && node ./util/tools/auto/syntaxEnforcer.js",
-    "se:compile": "tsc -p ./util/configs/tsconfig.auto.syntaxEnforcer.json",
-    "sv": "npm run sv:compile && node ./util/tools/auto/schemaValidator.js",
-    "sv:compile": "tsc -p ./util/configs/tsconfig.auto.schemaValidator.json",
-    "pu": "npm run pu:compile && node ./util/tools/auto/presenceUpdater.js",
-    "pu:compile": "tsc -p ./util/configs/tsconfig.auto.presenceUpdater.json",
-    "translator": "npm run translator:compile && node ./util/tools/translator.js",
-    "translator:compile": "tsc -p ./util/configs/tsconfig.translator.json"
+    "inc": "tsc -p ./util/configs/tsconfig.massVer.json && node ./util/tools/massVer.js",
+    "su": "tsc -p ./util/configs/tsconfig.schemaUpdater.json && node ./util/tools/schemaUpdater.js",
+    "se": "tsc -p ./util/configs/tsconfig.auto.syntaxEnforcer.json && node ./util/tools/auto/syntaxEnforcer.js",
+    "sv": "tsc -p ./util/configs/tsconfig.auto.schemaValidator.json && node ./util/tools/auto/schemaValidator.js",
+    "pu": "tsc -p ./util/configs/tsconfig.auto.presenceUpdater.json && node ./util/tools/auto/presenceUpdater.js",
+    "translator": "tsc -p ./util/configs/tsconfig.translator.json && node ./util/tools/translator.js"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
