@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
   } else if (page.includes("/courses/")) {
     presenceData.smallImageKey = "search";
     presenceData.state =
-      document.querySelector("div h1[class*=category--heading-primary]")
+      document.querySelector("div h1[class*=category--heading-primary] a")
         ?.textContent || "Unknown Category";
   } else if (page.includes("/course/") && video && video.currentTime) {
     const [, endTimestamp] = presence.getTimestamps(
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
     );
 
     presenceData.details =
-      document.querySelector("header a[data-purpose=course-header-title]")
+      document.querySelector("header h1[data-purpose=course-header-title] a")
         ?.textContent || "Unknown Course";
     presenceData.state =
       document.querySelector(
