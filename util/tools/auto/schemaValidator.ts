@@ -3,9 +3,8 @@ import "source-map-support/register";
 import axios from "axios";
 import { blue, green, red, yellow } from "chalk";
 import { readFileSync } from "fs";
-import { validate } from "jsonschema";
-
 import ParseJSON, { ObjectNode } from "json-to-ast";
+import { validate } from "jsonschema";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
     const versions = (
@@ -98,7 +97,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
         })
       ).data.data,
       validLangs = langFiles.map(l => l.lang),
-      oldVersion = presences[0].metadata.version,
+      oldVersion = presences[0]?.metadata.version,
       invalidLangs: string[] = [];
 
     Object.keys(meta.description).forEach(lang => {
@@ -110,7 +109,8 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       result.valid &&
       !invalidLangs.length &&
       folder === service &&
-      isVersionBumped(oldVersion, newVersion)
+      ((!oldVersion && newVersion === "1.0.0") ||
+        isVersionBumped(oldVersion, newVersion))
     ) {
       if (meta.$schema && meta.$schema !== latestSchema)
         validatedWithWarnings(
@@ -123,11 +123,19 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     } else {
       const errors: string[] = [];
 
-      if (!isVersionBumped(oldVersion, newVersion)) {
+      if (oldVersion && !isVersionBumped(oldVersion, newVersion)) {
         errors.push(
           `::error file=${metaFile},line=${getLine(
             "version"
           )},title=instance.version::The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`
+        );
+      }
+
+      if (!oldVersion && newVersion !== "1.0.0") {
+        errors.push(
+          `::error file=${metaFile},line=${getLine(
+            "version"
+          )},title=instance.version::The version of a new presence must start at "1.0.0".`
         );
       }
 
