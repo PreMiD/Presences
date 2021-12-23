@@ -7,6 +7,7 @@ presence.on("UpdateData", async () => {
   const time = await presence.getSetting("time"),
     privacy = await presence.getSetting("privacy"),
     buttons = await presence.getSetting("buttons"),
+    cover = await presence.getSetting("cover"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
@@ -69,6 +70,10 @@ presence.on("UpdateData", async () => {
           url: document.location.href
         }
       ];
+      if (cover)
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+          "[class^='map-cover']"
+        ).src;
     } else presenceData.details = "Viewing Leaderboard";
   } else if (document.location.pathname.includes("/ranking/requests")) {
     presenceData.details = "Browsing Rank Requests";
