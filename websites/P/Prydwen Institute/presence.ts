@@ -21,7 +21,7 @@ presence.on("UpdateData", () => {
       "#gatsby-focus-wrapper > div > main > div > div > div > div.unit-header.align-items-center.d-flex.flex-wrap > div:nth-child(1) > span > a > div > div > picture > img"
     ).src;
     presenceData.smallImageKey = "ships";
-    presenceData.smallImageText = "Prydwen Institude";
+    presenceData.smallImageText = "Prydwen Institute";
     presenceData.buttons = [{ label: "View Employee", url: document.URL }];
   } else if (document.location.pathname === "/operators") {
     presenceData.details = "Viewing operators";
