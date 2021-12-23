@@ -116,7 +116,9 @@ presence.on("UpdateData", () => {
   } else if (document.location.href === "https://www.prydwen.co/") {
     presenceData.details = "Viewing home page";
     presenceData.largeImageKey = "ships";
-  } else presenceData.details = "Browsing the wiki";
-
+  } else {
+    presenceData.details = "Browsing the wiki";
+    presenceData.largeImageKey = "ships";
+  }
   presence.setActivity(presenceData);
 });
