@@ -326,7 +326,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
 
         presenceData.largeImageKey = (
-          document.getElementsByClassName("anime-poster")[0] as HTMLImageElement
+          document.getElementsByClassName<HTMLImageElement>("anime-poster")[0]
         ).src.replace(".th", "");
 
         presenceData.smallImageKey = `presence_playback_${
