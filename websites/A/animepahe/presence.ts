@@ -275,9 +275,9 @@ presence.on("UpdateData", async () => {
                 presenceData.state = title;
 
                 presenceData.largeImageKey = (
-                  document.getElementsByClassName(
+                  document.getElementsByClassName<HTMLAnchorElement>(
                     "youtube-preview"
-                  )[0] as HTMLAnchorElement
+                  )[0]
                 ).href;
 
                 presenceData.smallImageKey = "presence_browsing_season";
