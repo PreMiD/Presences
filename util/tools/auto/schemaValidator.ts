@@ -22,6 +22,15 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       versions.at(-1)
     ];
   },
+  isVersionBumped = (oldVer: string, newVer: string) => {
+    const oldVerSplit = oldVer.split(".").map(Number),
+      newVerSplit = newVer.split(".").map(Number);
+    for (let i = 0; i < oldVerSplit.length; i++) {
+      if (newVerSplit[i] > oldVerSplit[i]) return true;
+      if (newVerSplit[i] < oldVerSplit[i]) return false;
+    }
+    return false;
+  },
   stats = {
     validated: 0,
     validatedWithWarnings: 0,
@@ -51,7 +60,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     }
   },
   changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
-  metaFiles = changedFiles.filter((f: string) => f.endsWith("metadata.json"));
+  metaFiles = changedFiles.filter(f => f.endsWith("metadata.json"));
 
 (async (): Promise<void> => {
   console.log(blue("Getting latest schema..."));
@@ -72,17 +81,24 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       continue;
     }
 
-    const { service } = meta,
+    const { service, version: newVersion } = meta,
       result = validate(meta, schema),
-      validLangs: string[] = (
-        await axios.post<LanguageFiles>("https://api.premid.app/v3", {
+      { langFiles, presences } = (
+        await axios.post<APIQuery>("https://api.premid.app/v3", {
           query: `{
+              presences(service: "${service}") {
+                metadata {
+                  version
+                }
+              }
               langFiles(project: "presence") {
                 lang
               }
             }`
         })
-      ).data.data.langFiles.map((l) => l.lang),
+      ).data.data,
+      validLangs = langFiles.map(l => l.lang),
+      oldVersion = presences[0].metadata.version,
       invalidLangs: string[] = [];
 
     Object.keys(meta.description).forEach((lang) => {
@@ -90,7 +106,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       if (index === -1) invalidLangs.push(lang);
     });
 
-    if (result.valid && !invalidLangs.length && folder === service) {
+    if (result.valid && !invalidLangs.length && folder === service && isVersionBumped(oldVersion, newVersion)) {
       if (meta.$schema && meta.$schema !== latestSchema)
         validatedWithWarnings(
           service,
@@ -101,6 +117,15 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       else validated(service);
     } else {
       const errors: string[] = [];
+
+      if (!isVersionBumped(oldVersion, newVersion)) {
+        errors.push(
+          `::error file=${metaFile},line=${getLine(
+            "version"
+            )},title=instance.version::The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`
+        );
+      }
+
       if (folder !== service)
         errors.push(
           `::error file=${metaFile},line=${getLine(
@@ -209,8 +234,15 @@ interface metadata extends Metadata {
   $schema: string;
 }
 
-interface LanguageFiles {
+interface APIQuery {
   data: {
+    presences: [
+      {
+        metadata: {
+          version: string;
+        };
+      }
+    ];
     langFiles: [
       {
         lang: string;
