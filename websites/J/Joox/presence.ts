@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const player = Array.from(document.querySelectorAll("i")).find((x) =>
+  const player = Array.from(document.querySelectorAll("i")).find(x =>
     ["playerIcon playerIcon--play", "playerIcon playerIcon--pause"].includes(
       x.className
     )
@@ -12,21 +12,22 @@ presence.on("UpdateData", async () => {
   if (player) {
     const paused = player.className.includes("pause") === false,
       currentSong = Array.from(document.querySelectorAll("div")).find(
-        (x) =>
+        x =>
           x.children.length === 2 &&
           x.children[0].tagName === "B" &&
           x.children[1].tagName === "SPAN"
       ),
       title = currentSong.children[0].textContent,
       author = currentSong.children[1].textContent,
-      audioTime = document.querySelector("#currentTime").textContent,
-      audioDuration =
-        document.querySelector("#currentTime").nextSibling.textContent,
       timestamps = presence.getTimestamps(
-        presence.timestampFromFormat(audioTime),
-        presence.timestampFromFormat(audioDuration)
+        presence.timestampFromFormat(
+          document.querySelector("#currentTime").textContent
+        ),
+        presence.timestampFromFormat(
+          document.querySelector("#currentTime").nextSibling.textContent
+        )
       ),
-      data: PresenceData = {
+      presenceData: PresenceData = {
         details: title,
         state: author,
         largeImageKey: "icon",
@@ -37,10 +38,10 @@ presence.on("UpdateData", async () => {
       };
 
     if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    if (title !== null && author !== null) presence.setActivity(data, !paused);
+    if (title && author) presence.setActivity(presenceData, !paused);
   } else presence.clearActivity();
 });

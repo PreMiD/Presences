@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Holfz",
     "id": "405397046691102740"
@@ -11,14 +11,14 @@
     "nl": "Bekijk gratis Thai ondertitelde/nagesynchroniseerde Animes Online."
   },
   "url": "www.animelizm.com",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/zgNeFww.png",
   "thumbnail": "https://i.imgur.com/DosCQw9.png",
   "color": "#0F62E0",
+  "category": "anime",
   "tags": [
     "anime",
     "nsfw"
   ],
-  "iframe": true,
-  "category": "anime"
+  "iframe": true
 }

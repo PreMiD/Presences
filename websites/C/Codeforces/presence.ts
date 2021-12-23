@@ -26,19 +26,17 @@ presence.on("UpdateData", async () => {
     case "blog": {
       if (path.includes("new")) presenceData.details = "Creating a new blog";
       else if (path.includes("entry")) {
-        const blogTitle = document.querySelector(".title > a > p").textContent,
-          author = document.querySelector(".info > a").textContent;
-
-        presenceData.details = blogTitle;
-        presenceData.state = `By ${author}`;
+        presenceData.details =
+          document.querySelector(".title > a > p").textContent;
+        presenceData.state = `By ${
+          document.querySelector(".info > a").textContent
+        }`;
         presenceData.smallImageKey = "reading";
       } else {
-        const author = document
+        presenceData.details = "Browsing through";
+        presenceData.state = document
           .querySelector("#pageContent")
           .lastElementChild.querySelector("div > h3").textContent;
-
-        presenceData.details = "Browsing through";
-        presenceData.state = author;
       }
 
       break;
@@ -91,10 +89,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = contestTitle;
 
       if (path.includes("problem")) {
-        const problemTitle = document.querySelector(".title").textContent;
-
         presenceData.details = contestTitle;
-        presenceData.state = problemTitle;
+        presenceData.state = document.querySelector(".title").textContent;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Solving";
       } else if (path.includes("submit"))
@@ -115,18 +111,15 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Final Standings";
         presenceData.state = contestTitle.trim();
       } else if (path.includes("ratings")) {
-        const contestTitle = document
+        presenceData.details = "Viewing Rating Changes";
+        presenceData.state = document
           .querySelector(".title")
           .textContent.trim();
-
-        presenceData.details = "Viewing Rating Changes";
-        presenceData.state = contestTitle;
       } else if (path.includes("participant")) {
-        const contestTitle = document.querySelector(".left").textContent,
-          [, , , , user] = path.split("/");
+        const [, , , , user] = path.split("/");
 
         presenceData.details = `Viewing ${user}'s submissions`;
-        presenceData.state = contestTitle;
+        presenceData.state = document.querySelector(".left").textContent;
       } else if (path.includes("submission")) {
         presenceData.details = "Viewing Submission";
         delete presenceData.state;
@@ -144,10 +137,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = gymTitle;
 
       if (path.includes("problem")) {
-        const problemTitle = document.querySelector(".title").textContent;
-
         presenceData.details = gymTitle;
-        presenceData.state = problemTitle;
+        presenceData.state = document.querySelector(".title").textContent;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Solving";
       } else if (path.includes("submit"))
@@ -185,23 +176,17 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Problem Sets";
 
       if (path.includes("problem")) {
-        const contestTitle = document.querySelector(".left").textContent,
-          problemTitle = document.querySelector(".title").textContent;
-
-        presenceData.details = contestTitle;
-        presenceData.state = problemTitle;
+        presenceData.details = document.querySelector(".left").textContent;
+        presenceData.state = document.querySelector(".title").textContent;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Solving";
       } else if (path.includes("submit")) {
-        const contestTitle = document
-            .querySelector("#pageContent")
-            .childNodes[5].textContent.trim(),
-          problemName = document
-            .querySelector(".table-form > tbody > tr")
-            .lastElementChild.textContent.trim();
-
         presenceData.details = "Submitting Solution for";
-        presenceData.state = `${problemName} | ${contestTitle}`;
+        presenceData.state = `${document
+          .querySelector(".table-form > tbody > tr")
+          .lastElementChild.textContent.trim()} | ${document
+          .querySelector("#pageContent")
+          .childNodes[5].textContent.trim()}`;
       } else if (path.includes("status")) {
         presenceData.details = "Viewing";
         presenceData.state = "Contest Status";
@@ -225,10 +210,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Group members";
         presenceData.state = `in ${groupTitle}`;
       } else if (path.includes("problem")) {
-        const problemTitle = document.querySelector(".title").textContent;
-
         presenceData.details = groupTitle;
-        presenceData.state = problemTitle;
+        presenceData.state = document.querySelector(".title").textContent;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Solving";
       } else if (path.includes("submit")) {
@@ -288,52 +271,44 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Edu (Courses)";
 
       if (path.includes("problem")) {
-        const courseTitle = document
-            .querySelector(".eduCoursePath")
-            .textContent.trim(),
-          problemTitle = document.querySelector(".title").textContent;
-
-        presenceData.details = courseTitle;
-        presenceData.state = problemTitle;
+        presenceData.details = document
+          .querySelector(".eduCoursePath")
+          .textContent.trim();
+        presenceData.state = document.querySelector(".title").textContent;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Solving";
       } else if (path.includes("submit")) {
-        const courseTitle = document
+        presenceData.details = "Submitting Solution for";
+        presenceData.state = document
           .querySelector(".eduCoursePath")
           .textContent.trim();
-
-        presenceData.details = "Submitting Solution for";
-        presenceData.state = courseTitle;
       } else if (path.includes("status")) {
-        const courseTitle = document
-            .querySelector(".eduCoursePath")
-            .textContent.trim(),
-          topicTitle = document
-            .querySelector(".eduLessonPath")
-            .textContent.trim();
+        const topicTitle = document
+          .querySelector(".eduLessonPath")
+          .textContent.trim();
 
         presenceData.details = "Viewing Submissions in";
-        presenceData.state = `${topicTitle} | ${courseTitle}`;
+        presenceData.state = `${topicTitle} | ${document
+          .querySelector(".eduCoursePath")
+          .textContent.trim()}`;
       } else if (path.includes("hacks")) {
-        const courseTitle = document
-            .querySelector(".eduCoursePath")
-            .textContent.trim(),
-          topicTitle = document
-            .querySelector(".eduLessonPath")
-            .textContent.trim();
+        const topicTitle = document
+          .querySelector(".eduLessonPath")
+          .textContent.trim();
 
         presenceData.details = "Viewing hacks in";
-        presenceData.state = `${topicTitle} | ${courseTitle}`;
+        presenceData.state = `${topicTitle} | ${document
+          .querySelector(".eduCoursePath")
+          .textContent.trim()}`;
       } else if (path.includes("standings")) {
-        const courseTitle = document
-            .querySelector(".eduCoursePath")
-            .textContent.trim(),
-          topicTitle = document
-            .querySelector(".eduLessonPath")
-            .textContent.trim();
+        const topicTitle = document
+          .querySelector(".eduLessonPath")
+          .textContent.trim();
 
         presenceData.details = "Viewing Final Standings in";
-        presenceData.state = `${topicTitle} | ${courseTitle}`;
+        presenceData.state = `${topicTitle} | ${document
+          .querySelector(".eduCoursePath")
+          .textContent.trim()}`;
       } else if (path.includes("customtest")) {
         presenceData.details = "Performing Custom Test";
         delete presenceData.state;
@@ -343,12 +318,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Edu practice";
         presenceData.state = topicTitle.trim();
       } else if (path.includes("lesson")) {
-        const topicTitle = document
+        presenceData.details = "Taking a lesson";
+        presenceData.state = document
           .querySelector(".eduLessonPath")
           .textContent.trim();
-
-        presenceData.details = "Taking a lesson";
-        presenceData.state = topicTitle;
         presenceData.smallImageKey = "reading";
       } else if (path.split("/")[2] === "courses") {
         presenceData.details = "Browsing through";
@@ -425,8 +398,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

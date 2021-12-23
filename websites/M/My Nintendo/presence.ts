@@ -71,12 +71,10 @@ presence.on("UpdateData", async () => {
               break;
             //Unknown
             default:
-              presence.setTrayTitle();
               presence.setActivity();
               return;
           }
         } else {
-          presence.setTrayTitle();
           presence.setActivity();
           return;
         }
@@ -132,13 +130,12 @@ presence.on("UpdateData", async () => {
         break;
       //Unknown
       default:
-        presence.setTrayTitle();
         presence.setActivity();
         return;
     }
   } else {
     //Homepage
-    presence.setTrayTitle();
+
     presence.setActivity();
     return;
   }

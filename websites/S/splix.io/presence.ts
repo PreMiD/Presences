@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "640321591108042762"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let ui: HTMLElement;
 
 presence.on("UpdateData", async () => {
@@ -12,10 +12,10 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/") {
     ui = document.querySelector("#playUI");
     if (ui.style.cssText === "display: none;") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Getting ready...";
     } else {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = `${
         document.querySelector("#scoreBlock > span:nth-child(5)").textContent
       } ${
@@ -27,8 +27,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

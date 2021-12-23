@@ -13,13 +13,12 @@ presence.on("UpdateData", () => {
   try {
     //log("UpdateData called")
     const loggedIn = !!document.querySelector(".dropdown--account span"),
-      username = loggedIn
-        ? document.querySelector(".dropdown--account span").textContent
-        : "Racing as a guest",
       presenceData: PresenceData = {
         largeImageKey: "nt",
         smallImageKey: loggedIn ? "user" : "guest",
-        smallImageText: username
+        smallImageText: loggedIn
+          ? document.querySelector(".dropdown--account span").textContent
+          : "Racing as a guest"
       },
       path = location.pathname;
     try {
@@ -35,7 +34,7 @@ presence.on("UpdateData", () => {
       else if (path.startsWith("/team/")) {
         presenceData.details = "Looking at Team Info";
         presenceData.state =
-          document.querySelector(".card-teamTag").parentElement.innerText;
+          document.querySelector(".card-teamTag").parentElement.textContent;
       } else if (path.startsWith("/team"))
         presenceData.details = "Looking at Teams";
       else if (path.startsWith("/achievements")) {
@@ -70,21 +69,18 @@ presence.on("UpdateData", () => {
         presenceData.details = "Viewing Stats";
       else if (path.startsWith("/race")) {
         presenceData.details = "Racing";
-        const pos = parseInt(
-            document.querySelector(".dash-pos .tsxxl").textContent
-          ),
-          wpm = document
-            .querySelector(".list--xs > li:nth-child(1) > div:nth-child(1) ")
-            .textContent.split("\n")
-            .reverse()
-            .join("")
-            .toLowerCase(),
-          acc = `${
-            document.querySelector(
-              ".list--xs > li:nth-child(2) > div:nth-child(1) > div:nth-child(2)"
-            ).textContent
-          }acc`;
-        presenceData.state = `${getNumberWithOrdinal(pos)} ${wpm} ${acc}`;
+        presenceData.state = `${getNumberWithOrdinal(
+          parseInt(document.querySelector(".dash-pos .tsxxl").textContent)
+        )} ${document
+          .querySelector(".list--xs > li:nth-child(1) > div:nth-child(1) ")
+          .textContent.split("\n")
+          .reverse()
+          .join("")
+          .toLowerCase()} ${`${
+          document.querySelector(
+            ".list--xs > li:nth-child(2) > div:nth-child(1) > div:nth-child(2)"
+          ).textContent
+        }acc`}`;
         if (document.querySelector(".raceLight-status"))
           presenceData.state = "Waiting for the race to start.";
 
@@ -105,7 +101,7 @@ presence.on("UpdateData", () => {
 
     if (!presenceData.details) {
       presence.error("no presence!");
-      presence.setTrayTitle();
+
       presence.setActivity();
     } else {
       //log(presenceData)

@@ -1,16 +1,15 @@
 const presence = new Presence({
     clientId: "729035228324298852" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let item: HTMLElement, user: HTMLElement, title: HTMLElement | string | Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "labymod"
+    largeImageKey: "labymod",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname === "www.labymod.net") {
     if (document.location.pathname.includes("/download")) {
       presenceData.details = "Viewing downloads";
@@ -30,12 +29,11 @@ presence.on("UpdateData", async () => {
       item = document.querySelector(
         "#content > div > div:nth-child(1) > div > div:nth-child(2) > h3 > label"
       );
-      title = document.querySelector(
+      title = document.querySelector<HTMLElement>(
         "#content > div > div:nth-child(1) > div > div:nth-child(2) > h3"
       );
-      if (item !== null)
-        title = (title as HTMLElement).innerText.replace(item.innerText, "");
-      else title = (title as HTMLElement).innerText;
+      if (item) title = title.textContent.replace(item.textContent, "");
+      else title = title.textContent;
 
       presenceData.details = "Ideas, Viewing:";
       presenceData.state = title;
@@ -57,7 +55,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Shop, Viewing:";
-        presenceData.state = (title as HTMLElement).innerText.replace(
+        presenceData.state = (title as HTMLElement).textContent.replace(
           "LABYMOD",
           ""
         );
@@ -101,10 +99,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
+    } else presence.setActivity();
   } else if (document.location.hostname === "faq.labymod.net") {
     presenceData.details = "Viewing frequently";
     presenceData.state = "asked questions";
@@ -126,7 +121,7 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "body > div > main > div > div.md-sidebar.md-sidebar--primary > div > div > nav > ul > li.md-nav__item.md-nav__item--active.md-nav__item--nested > label"
     );
-    title = `${user.innerText} - ${(title as HTMLElement).innerText}`;
+    title = `${user.textContent} - ${(title as HTMLElement).textContent}`;
     presenceData.details = "Docs viewing:";
     presenceData.state = title;
 
@@ -179,8 +174,5 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
     }
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

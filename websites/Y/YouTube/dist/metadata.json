@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Timeraa",
     "id": "223238938716798978"
@@ -70,11 +70,11 @@
   "logo": "https://i.imgur.com/o5injgg.png",
   "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
   "color": "#E40813",
+  "category": "videos",
   "tags": [
     "video",
     "media"
   ],
-  "category": "videos",
   "settings": [
     {
       "id": "lang",

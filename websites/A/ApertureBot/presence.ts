@@ -6,7 +6,7 @@ const presence = new Presence({ clientId: "653156362548805652" }),
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
-    head = document.querySelector(
+    head: HTMLDivElement = document.querySelector(
       "#page-wrapper > div > div > div > div > div.panel-heading"
     ),
     presenceData: PresenceData = {
@@ -26,8 +26,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Guild Info Page";
   else presenceData.details = "Read to Documentation";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

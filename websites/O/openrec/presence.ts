@@ -11,31 +11,22 @@ const presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  const live: boolean =
-      document.querySelector(".MovieTitle__Title-s181dg2v-4") !== null,
-    video: HTMLVideoElement = document.querySelector(
+  const live = !!document.querySelector(".MovieTitle__Title-s181dg2v-4"),
+    video = document.querySelector<HTMLVideoElement>(
       live ? ".openrec-video" : "#capture-play"
     );
-  if (video !== null && !isNaN(video.duration)) {
-    const title = document.querySelector(
+  if (video && !isNaN(video.duration)) {
+    const title = document.querySelector<HTMLElement>(
         live
           ? ".MovieTitle__Title-s181dg2v-4"
           : ".Component__CaptureTitle-s1nip9ch-16"
       ),
-      game = document.querySelector(
+      game = document.querySelector<HTMLElement>(
         live ? ".TagButton__Button-otjf40-0" : ".text-hover"
-      ),
-      timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
       );
 
-    presenceData.details =
-      title !== null
-        ? (title as HTMLElement).textContent
-        : "Title not found...";
-    presenceData.state =
-      game !== null ? (game as HTMLElement).textContent : "Game not found...";
+    presenceData.details = title ? title.textContent : "Title not found...";
+    presenceData.state = game ? game.textContent : "Game not found...";
     presenceData.largeImageKey = "logo";
     presenceData.smallImageKey = live
       ? "live"
@@ -47,22 +38,22 @@ presence.on("UpdateData", async () => {
       : video.paused
       ? (await strings).pause
       : (await strings).play;
-    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
-
-    presence.setTrayTitle(video.paused ? "" : title.textContent);
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     if (video.paused || live) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
 
-    if (title !== null && game !== null)
-      presence.setActivity(presenceData, !video.paused);
+    if (title && game) presence.setActivity(presenceData, !video.paused);
   } else {
-    const pageData: PresenceData = {
+    presence.setActivity({
       details: "Browsing..",
       largeImageKey: "logo"
-    };
-    presence.setActivity(pageData);
+    });
   }
 });

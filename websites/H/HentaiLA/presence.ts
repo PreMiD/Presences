@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "903690009633247252"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
   duration: 0,
@@ -19,7 +19,7 @@ presence.on(
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "hentaila",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.pathname === "/")
     presenceData.details = "En la página de inicio";

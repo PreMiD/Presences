@@ -1,35 +1,34 @@
-const pPresence = new Presence({
+const presence = new Presence({
     clientId: "820023496934817804"
   }),
   pBrowsing = Math.floor(Date.now() / 1000);
 
-pPresence.on("UpdateData", async () => {
-  const pData: PresenceData = {
+presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
       largeImageKey: "icon2",
       startTimestamp: pBrowsing
     },
     pPage = window.location.pathname;
 
   if (pPage === "/") {
-    pData.details = "Browsing Page:";
-    pData.state = "Main";
+    presenceData.details = "Browsing Page:";
+    presenceData.state = "Main";
   } else if (pPage.includes("/icons")) {
-    const urlParams: URLSearchParams = new URLSearchParams(
-        window.location.search
-      ),
-      myParam: string = urlParams.get("q");
+    const myParam: string = new URLSearchParams(window.location.search).get(
+      "q"
+    );
 
     if (myParam === null) {
       const icon: HTMLElement = document.querySelector(
         "#page-top > div.view.flex.flex-column.min-vh-100.db-pr > div.flex-grow-1.flex-shrink-0.flex-basis-auto > div > div.ph6-l > div > section > header > div.flex.flex-column.flex-row-xl.items-center-xl.justify-between-xl.mb2.mb4-l > h1 > span"
       );
       if (icon === null) {
-        pData.details = "Browsing Page:";
-        pData.state = "Icons";
+        presenceData.details = "Browsing Page:";
+        presenceData.state = "Icons";
       } else {
-        pData.details = "Viewing Icon:";
-        pData.state = icon.textContent;
-        pData.buttons = [
+        presenceData.details = "Viewing Icon:";
+        presenceData.state = icon.textContent;
+        presenceData.buttons = [
           {
             label: "View Icon",
             url: document.URL
@@ -37,28 +36,26 @@ pPresence.on("UpdateData", async () => {
         ];
       }
     } else {
-      pData.details = "Searching:";
-      pData.state = myParam;
+      presenceData.details = "Searching:";
+      presenceData.state = myParam;
     }
   } else if (pPage === "/start") {
-    pData.details = "Browsing Page:";
-    pData.state = "Start";
+    presenceData.details = "Browsing Page:";
+    presenceData.state = "Start";
   } else if (pPage === "/support") {
-    pData.details = "Browsing Page:";
-    pData.state = "Support";
+    presenceData.details = "Browsing Page:";
+    presenceData.state = "Support";
   } else if (pPage === "/plans") {
-    pData.details = "Browsing Page:";
-    pData.state = "Plans";
+    presenceData.details = "Browsing Page:";
+    presenceData.state = "Plans";
   } else if (pPage === "/plans/standard") {
-    pData.details = "Browsing Page:";
-    pData.state = "Plan Standard";
+    presenceData.details = "Browsing Page:";
+    presenceData.state = "Plan Standard";
   } else if (pPage === "/sessions/sign-in") {
-    pData.details = "Browsing Page:";
-    pData.state = "Sign In";
+    presenceData.details = "Browsing Page:";
+    presenceData.state = "Sign In";
   }
 
-  if (!pData.details) {
-    pPresence.setTrayTitle();
-    pPresence.setActivity();
-  } else pPresence.setActivity(pData);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

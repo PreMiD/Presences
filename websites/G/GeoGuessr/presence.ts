@@ -6,11 +6,11 @@ let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname
     .replace(/^\/|\/$|\/index\.html$|.html$/g, "")
     .split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -31,7 +31,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -114,7 +114,8 @@ const updateCallback = {
       } else if (currentPath[0] === "me") {
         if (!currentPath[2]) presenceData.details = "Viewing their own profile";
         else {
-          const pageNames: { [index: string]: string } = {
+          presenceData.details = "Viewing a personal page";
+          presenceData.state = {
             settings: "Settings",
             leagues: "Leagues",
             activities: "Activities",
@@ -123,22 +124,18 @@ const updateCallback = {
             badges: "Badges",
             maps: "My maps",
             "map-maker": "Map Maker"
-          };
-          presenceData.details = "Viewing a personal page";
-          presenceData.state = pageNames[currentURL.pathname.split("/")[2]];
+          }[currentURL.pathname.split("/")[2]];
         }
       } else if (currentPath[0] === "signin")
         presenceData.details = "Signing in";
       else if (currentPath[0] === "signup")
         presenceData.details = "Registering an account";
+      else if (document.title === "GeoGuessr - Let's explore the world!")
+        forceUpdate = true;
       else {
-        if (document.title === "GeoGuessr - Let's explore the world!")
-          forceUpdate = true;
-        else {
-          forceUpdate = false;
-          presenceData.details = "Viewing a page";
-          presenceData.state = document.title.replace(" - GeoGuessr", "");
-        }
+        forceUpdate = false;
+        presenceData.details = "Viewing a page";
+        presenceData.state = document.title.replace(" - GeoGuessr", "");
       }
 
       presenceDataPlaced = presenceData;

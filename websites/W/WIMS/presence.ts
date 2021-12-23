@@ -13,16 +13,16 @@ let loggedout = false;
 if (
   (document.baseURI.match(/module=adm/) &&
     document.baseURI.match(/(type=|classes)/)) ||
-  (document.getElementsByClassName("menuitem")[1] as HTMLElement).innerText ===
-    ""
+  (document.getElementsByClassName("menuitem")[1] as HTMLElement)
+    .textContent === ""
 )
   loggedout = true;
 
-let Classname: string,
-  Worksheet = "...",
+let classname: string,
+  worksheet = "...",
   WSNo: string,
   EXNo: string,
-  Exercise: string,
+  exercise: string,
   timestamp: number,
   timeleft: number;
 
@@ -31,43 +31,44 @@ if (!loggedout) {
   // Set Class
   // if (document.querySelector(".wimscenter"))
   if (document.querySelector(".wims_subclasses")) {
-    [, Classname] = (
-      document.querySelector(".wimscenter") as HTMLElement
-    ).innerText.split("\n");
+    [, classname] = document
+      .querySelector<HTMLElement>(".wimscenter")
+      .textContent.split("\n");
   } else if (document.querySelectorAll("td.small")[1]) {
-    Classname = `${
-      (document.querySelectorAll("td.small")[1] as HTMLElement).innerText.split(
-        " "
-      )[0]
+    classname = `${
+      document
+        .querySelectorAll<HTMLElement>("td.small")[1]
+        .textContent.split(" ")[0]
     } `;
   } else {
-    Classname = `${
-      (document.querySelector(".wimscenter") as HTMLElement).innerText.split(
-        "\n"
-      )[0]
+    classname = `${
+      document
+        .querySelector<HTMLElement>(".wimscenter")
+        .textContent.split("\n")[0]
     } `;
   }
 
   // Set Worksheet
   if (document.baseURI.match(/sh=/)) {
     WSNo = document.baseURI.match(/sh=(.?.?)/)[1].replace(/&|#/g, "");
-    Worksheet = `- ${
-      document.getElementsByClassName("text_item ")[1].innerHTML
+    worksheet = `- ${
+      document.getElementsByClassName("text_item ")[1].textContent
     }${WSNo}`;
-    Exercise = "...";
+    exercise = "...";
   } else if (document.baseURI.match(/(worksheet=|reply)/)) {
     // In Exercise
     // Set Worksheet
-    WSNo = (document.querySelector(".sheet") as HTMLAnchorElement).href
-      .match(/sh=(.?.?)/)[1]
+    WSNo = document
+      .querySelector<HTMLAnchorElement>(".sheet")
+      .href.match(/sh=(.?.?)/)[1]
       .replace(/&|#/g, "");
-    Worksheet = `- ${
-      (document.querySelector(".sheet") as HTMLElement).innerText
+    worksheet = `- ${
+      document.querySelector<HTMLElement>(".sheet").textContent
     } ${WSNo}`;
-    Classname = `${
-      (document.querySelectorAll("td.small")[2] as HTMLElement).innerText.split(
-        " "
-      )[0]
+    classname = `${
+      document
+        .querySelectorAll<HTMLElement>("td.small")[2]
+        .textContent.split(" ")[0]
     } `;
 
     // Set Exercise
@@ -77,17 +78,18 @@ if (!loggedout) {
         document.getElementsByTagName("kbd")[1] &&
         !document.querySelector(".answer")
       ) {
-        [EXNo] = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/);
-        Exercise = `${(
-          document.querySelector(".sheet") as HTMLAnchorElement
-        ).href
-          .match(/#ex(.?.?)/)[1]
+        [EXNo] = document
+          .getElementsByTagName("kbd")[1]
+          .textContent.match(/\d+/);
+        exercise = `${document
+          .querySelector<HTMLAnchorElement>(".sheet")
+          .href.match(/#ex(.?.?)/)[1]
           .replace(/&|#/g, "")}.${EXNo}: ${
-          (document.querySelector(".main_body .titre") as HTMLElement).innerText
+          document.querySelector<HTMLElement>(".main_body .titre").textContent
         }`;
       } else {
-        Exercise = (document.querySelector(".main_body .titre") as HTMLElement)
-          .innerText;
+        exercise =
+          document.querySelector<HTMLElement>(".main_body .titre").textContent;
       } // Results page, so no EXNo
     }
     if (document.querySelector(".oeftitle")) {
@@ -96,14 +98,14 @@ if (!loggedout) {
         document.getElementsByTagName("kbd")[1] &&
         !document.querySelector(".oefanswer")
       ) {
-        [EXNo] = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/);
-        Exercise = `${
-          (document.querySelector(".oeftitle") as HTMLElement).innerText
+        [EXNo] = document
+          .getElementsByTagName("kbd")[1]
+          .textContent.match(/\d+/);
+        exercise = `${
+          document.querySelector<HTMLElement>(".oeftitle").textContent
         }: ${EXNo}`;
-      } else {
-        Exercise = (document.querySelector(".oeftitle") as HTMLElement)
-          .innerText;
-      }
+      } else
+        exercise = document.querySelector<HTMLElement>(".oeftitle").textContent;
     }
     if (EXNo > "1") {
       // If exercise >1 get last time
@@ -117,21 +119,21 @@ if (!loggedout) {
     } else timestamp = Date.now(); // Else reset time
   } else if (document.baseURI.match(/(exam=)/)) {
     // In Exam
-    Worksheet = "";
-    Exercise = (document.querySelector("h1.wims_title font") as HTMLElement)
-      .innerText;
+    worksheet = "";
+    exercise =
+      document.querySelector<HTMLElement>("h1.wims_title font").textContent;
     timeleft =
       Date.now() +
       (parseInt(
-        (document.querySelector("p#exam_clock") as HTMLElement).innerText.split(
-          ":"
-        )[1]
+        document
+          .querySelector<HTMLElement>("p#exam_clock")
+          .textContent.split(":")[1]
       ) *
         60 +
         parseInt(
-          (
-            document.querySelector("p#exam_clock") as HTMLElement
-          ).innerText.split(":")[2]
+          document
+            .querySelector<HTMLElement>("p#exam_clock")
+            .textContent.split(":")[2]
         )) *
         1000;
   }
@@ -139,8 +141,8 @@ if (!loggedout) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    details: Classname + Worksheet,
-    state: Exercise,
+    details: classname + worksheet,
+    state: exercise,
     startTimestamp: timestamp,
     endTimestamp: timeleft,
     largeImageKey: "wims_lg"

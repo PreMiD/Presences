@@ -30,50 +30,50 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    songTitle = document.querySelector(
+    songTitle = document.querySelector<HTMLAnchorElement>(
       'div[data-test="footer-track-title"] > a'
-    ) as HTMLAnchorElement,
-    songArtist = document.querySelector(
-      'div[data-test="left-column-footer-player"] > div:nth-child(2) > div:nth-child(2) > span > span > span'
     ),
-    currentTime = (
-      document.querySelector("time.current-time") as HTMLElement
-    ).innerText.split(":"),
-    endTime = (
-      document.querySelector("time.duration-time") as HTMLElement
-    ).innerText.split(":"),
+    currentTime = document
+      .querySelector<HTMLElement>("time.current-time")
+      .textContent.split(":"),
+    endTime = document
+      .querySelector<HTMLElement>("time.duration-time")
+      .textContent.split(":"),
     currentTimeSec =
       (parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000,
-    endTimeSec =
-      (parseFloat(endTime[0]) * 60 + parseFloat(endTime[1]) + 1) * 1000,
-    endTimestamp = Date.now() + (endTimeSec - currentTimeSec),
     paused =
       document
         .querySelector('div[data-test="play-controls"] div > button')
         .getAttribute("data-test") === "play",
-    onRepeat = document
-      .querySelector(
-        'div[data-test="play-controls"] > button[data-test="repeat"]'
-      )
-      .getAttribute("aria-checked"),
     repeatType = document
       .querySelector(
         'div[data-test="play-controls"] > button[data-test="repeat"]'
       )
       .getAttribute("aria-label");
 
-  presenceData.details = songTitle.innerText;
-  presenceData.state = songArtist.textContent;
+  presenceData.details = songTitle.textContent;
+  presenceData.state = document.querySelector(
+    'div[data-test="left-column-footer-player"] > div:nth-child(2) > div:nth-child(2) > span > span > span'
+  ).textContent;
 
   if (currentTimeSec > 0 || !paused) {
-    presenceData.endTimestamp = endTimestamp;
+    presenceData.endTimestamp =
+      Date.now() +
+      ((parseFloat(endTime[0]) * 60 + parseFloat(endTime[1]) + 1) * 1000 -
+        currentTimeSec);
     presenceData.smallImageKey = paused ? "pause" : "play";
     presenceData.smallImageText = paused
       ? (await strings).pause
       : (await strings).play;
   }
 
-  if (onRepeat === "true") {
+  if (
+    document
+      .querySelector(
+        'div[data-test="play-controls"] > button[data-test="repeat"]'
+      )
+      .getAttribute("aria-checked") === "true"
+  ) {
     presenceData.smallImageKey =
       repeatType === "Repeat" ? "repeat" : "repeat-one";
     presenceData.smallImageText =

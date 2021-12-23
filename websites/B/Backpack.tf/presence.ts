@@ -1,79 +1,101 @@
 const presence = new Presence({
     clientId: "850295838361649153"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
   };
-  presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname === "/")
     presenceData.details = "Viewing Main page";
   else if (document.location.pathname.includes("/overview/")) {
-    const title = document.querySelector(
-      "#page-content > div:nth-child(1) > div.stats-body > div > h1"
-    );
     presenceData.details = "Viewing item stats:";
-    presenceData.state = title.textContent;
+    presenceData.state = (
+      document.querySelector(
+        "#page-content > div:nth-child(1) > div.stats-body > div > h1"
+      ) as HTMLHeadingElement
+    ).textContent;
   } else if (document.location.pathname.includes("/stats/")) {
     if (
       document.location.pathname.includes(
         "Unique/Mann%20Co.%20Supply%20Crate%20Key"
       )
     ) {
-      const title = document.querySelector(
-          "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(1) > div.text > div.value"
-        ),
-        sec = document.querySelector(
-          "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(2) > div.text > div.value"
-        );
       presenceData.details = "Viewing Key price:";
-      presenceData.state = `${title.textContent} | ${sec.textContent}`;
+      presenceData.state = `${
+        (
+          document.querySelector(
+            "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(1) > div.text > div.textContent"
+          ) as HTMLDivElement
+        ).textContent
+      } | ${
+        (
+          document.querySelector(
+            "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(2) > div.text > div.textContent"
+          ) as HTMLDivElement
+        ).textContent
+      }`;
     } else if (document.location.pathname.includes("Unique/Earbuds")) {
-      const title = document.querySelector(
-          "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(1) > div.text > div.value"
-        ),
-        sec = document.querySelector(
-          "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(2) > div.text > div.value"
-        );
       presenceData.details = "Viewing Earbuds price:";
-      presenceData.state = `${title.textContent} | ${sec.textContent}`;
+      presenceData.state = `${
+        (
+          document.querySelector(
+            "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(1) > div.text > div.textContent"
+          ) as HTMLDivElement
+        ).textContent
+      } | ${
+        (
+          document.querySelector(
+            "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-subheader > div.price-boxes > a:nth-child(2) > div.text > div.textContent"
+          ) as HTMLDivElement
+        ).textContent
+      }`;
     } else {
-      const title = document.querySelector(
-        "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-header > div.stats-header-item > div.stats-header-title"
-      );
       presenceData.details = "Viewing item:";
-      presenceData.state = title.textContent;
+      presenceData.state = (
+        document.querySelector(
+          "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-header > div.stats-header-item > div.stats-header-title"
+        ) as HTMLDivElement
+      ).textContent;
     }
   } else if (document.location.pathname.includes("/u/")) {
-    const title = document.querySelector(
-      "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.title > span > a"
-    );
     presenceData.details = "Viewing profile:";
-    presenceData.state = title.textContent;
+    presenceData.state = (
+      document.querySelector(
+        "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.title > span > a"
+      ) as HTMLAnchorElement
+    ).textContent;
   } else if (document.location.pathname.includes("/profiles/")) {
-    const title = document.querySelector(
-      "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.title > span > a"
-    );
     presenceData.details = "Viewing profile:";
-    presenceData.state = title.textContent;
+    presenceData.state = (
+      document.querySelector(
+        "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.title > span > a"
+      ) as HTMLAnchorElement
+    ).textContent;
   } else if (document.location.pathname.includes("/unusual/")) {
-    const title = document.querySelector("head > title");
     presenceData.details = "Viewing Unusual Pricelist:";
-    presenceData.state = title.textContent;
+    presenceData.state = (
+      document.querySelector("head > title") as HTMLHeadElement
+    ).textContent;
   } else if (document.location.pathname.includes("/effect/")) {
-    const title = document.querySelector("head > title");
     presenceData.details = "Viewing Unusual Effects Pricelist:";
-    presenceData.state = title.textContent;
+    presenceData.state = (
+      document.querySelector("head > title") as HTMLHeadElement
+    ).textContent;
   } else if (document.location.pathname.includes("/item/")) {
-    const title = document.querySelector(
-        "#page-content > div > div > div > div.panel-heading > span:nth-child(1)"
-      ),
-      sec = document.querySelector(
+    presenceData.details = `Viewing ${
+      (
+        document.querySelector(
+          "#page-content > div > div > div > div.panel-heading > span:nth-child(1)"
+        ) as HTMLSpanElement
+      ).textContent
+    }:`;
+    presenceData.state = (
+      document.querySelector(
         "#page-content > div > div > div > div.panel-body > div > div.item-wrapper > div.item-text > h2"
-      );
-    presenceData.details = `Viewing ${title.textContent}:`;
-    presenceData.state = sec.textContent;
+      ) as HTMLHeadingElement
+    ).textContent;
   } else if (document.location.pathname.includes("/settings")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Settings";
@@ -148,8 +170,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/top/accurate"))
     presenceData.details = "Viewing The Most Accurate Users";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

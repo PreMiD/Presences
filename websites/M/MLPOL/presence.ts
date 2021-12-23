@@ -1,10 +1,13 @@
-const browsingStamp = Math.floor(Date.now() / 1000),
+const browsingTimestamp = Math.floor(Date.now() / 1000),
   presence = new Presence({
     clientId: "781944209770151997"
   });
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {};
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
+  };
 
   //I was gonna do a bunch of DOM manipulation but I give up on life so I'm just gonna do the most spaghetti way of doing this humanly possible.
 
@@ -67,7 +70,5 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname.startsWith("/a/"))
     presenceData.details = "/a/ - Anime and Manga";
 
-  presenceData.largeImageKey = "logo";
-  presenceData.startTimestamp = browsingStamp;
   presence.setActivity(presenceData);
 });

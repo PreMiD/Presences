@@ -30,10 +30,9 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      tokens = url.split("/"),
-      title = capitalise(tokens[6].split("-"));
+      tokens = url.split("/");
     presenceData = {
-      details: title,
+      details: capitalise(tokens[6].split("-")),
       largeImageKey: "large_img",
       smallImageKey: video.paused ? "pause" : "play",
       smallImageText: video.paused

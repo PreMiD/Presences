@@ -4,30 +4,30 @@ const presence = new Presence({
   elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
     path = document.location.pathname;
   if (path.includes("/folders/") || path.includes("/search/")) {
     if (path.includes("messages")) {
-      data.details = "Viewing an Email";
-      data.startTimestamp = elapsed;
+      presenceData.details = "Viewing an Email";
+      presenceData.startTimestamp = elapsed;
     } else {
-      data.details = "Viewing Mail";
-      data.startTimestamp = elapsed;
+      presenceData.details = "Viewing Mail";
+      presenceData.startTimestamp = elapsed;
     }
   } else if (path.includes("/compose/")) {
-    data.details = "Composing a New Email";
-    data.startTimestamp = elapsed;
+    presenceData.details = "Composing a New Email";
+    presenceData.startTimestamp = elapsed;
   } else if (path.includes("/settings/")) {
-    data.details = "Viewing Settings";
-    data.startTimestamp = elapsed;
+    presenceData.details = "Viewing Settings";
+    presenceData.startTimestamp = elapsed;
   } else if (path.includes("/contacts")) {
-    data.details = "Viewing Contacts";
-    data.startTimestamp = elapsed;
+    presenceData.details = "Viewing Contacts";
+    presenceData.startTimestamp = elapsed;
   } else {
-    data.details = "Viewing Mail";
-    data.startTimestamp = elapsed;
+    presenceData.details = "Viewing Mail";
+    presenceData.startTimestamp = elapsed;
   }
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

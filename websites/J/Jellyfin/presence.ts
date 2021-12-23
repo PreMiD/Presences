@@ -21,11 +21,8 @@ interface ApiClient {
       DisplayMissingEpisodes: boolean;
       EnableLocalPassword: boolean;
       EnableNextEpisodeAutoPlay: boolean;
-      // GroupedFolders: Array; // don't know type of content of the array
       HidePlayedInLatest: boolean;
-      // LatestItemsExcludes: Array; // don't know type of content of the array
-      // MyMediaExcludes: Array; // don't know type of content of the array
-      OrderedViews: Array<string>;
+      OrderedViews: string[];
       PlayDefaultAudioTrack: boolean;
       RememberAudioSelections: boolean;
       RememberSubtitleSelections: boolean;
@@ -40,16 +37,12 @@ interface ApiClient {
     LastLoginDate: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
     Name: string;
     Policy: {
-      // AccessSchedules: Array; // don't know type of content of the array
       AuthenticationProviderId: string;
-      // BlockUnratedItems: Array; // don't know type of content of the array
-      // BlockedTags: Array; // don't know type of content of the array
       EnableAllChannels: boolean;
       EnableAllDevices: boolean;
       EnableAllFolders: boolean;
       EnableAudioPlaybackTranscoding: boolean;
       EnableContentDeletion: boolean;
-      // EnableContentDeletionFromFolders: Array; // don't know type of content of the array
       EnableContentDownloading: boolean;
       EnableLiveTvAccess: boolean;
       EnableLiveTvManagement: boolean;
@@ -63,9 +56,6 @@ interface ApiClient {
       EnableSyncTranscoding: boolean;
       EnableUserPreferenceAccess: boolean;
       EnableVideoPlaybackTranscoding: boolean;
-      // EnabledChannels: Array; // don't know type of content of the array
-      // EnabledDevices: Array; // don't know type of content of the array
-      // EnabledFolders: Array; // don't know type of content of the array
       ForceRemoteSourceTranscoding: boolean;
       InvalidLoginAttemptCount: boolean;
       IsAdministrator: boolean;
@@ -159,7 +149,7 @@ interface MediaSource {
   RequiresLooping: boolean;
   SupportsProbing: true;
   VideoType: string;
-  MediaStreams: Array<MediaStream>;
+  MediaStreams: MediaStream[];
   MediaAttachments: [];
   Formats: [];
   Bitrate: number;
@@ -208,8 +198,8 @@ interface MediaInfo {
   Container: string;
   SortName: string;
   PremiereDate: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
-  ExternalUrls: Array<ExternalUrl>;
-  MediaSources: Array<MediaSource>;
+  ExternalUrls: ExternalUrl[];
+  MediaSources: MediaSource[];
   Path: string;
   EnableMediaSourceDisplay: boolean;
   Overview: string;
@@ -229,11 +219,11 @@ interface MediaInfo {
   IsFolder: boolean;
   ParentId: number;
   Type: string;
-  People: Array<Person>;
+  People: Person[];
   // Studios: Array;
   // GenreItems: Array;
   ParentBackdropItemId: string;
-  ParentBackdropImageTags: Array<string>;
+  ParentBackdropImageTags: string[];
   LocalTrailerCount: number;
   UserData: UserData;
   RecursiveItemCount: number;
@@ -247,7 +237,7 @@ interface MediaInfo {
   PrimaryImageAspectRatio: number;
   SeriesPrimaryImageTag: string;
   SeasonName: string;
-  MediaStreams: Array<MediaStream>;
+  MediaStreams: MediaStream[];
   VideoType: string;
   ImageTags: {
     Primary: string;
@@ -255,7 +245,7 @@ interface MediaInfo {
   // BackdropImageTags: Array;
   // ScreenshotImageTags: Array;
   SeriesStudio: string;
-  Chapters: Array<Chapter>;
+  Chapters: Chapter[];
   LocationType: string;
   MediaType: string;
   // LockedFields: Array;
@@ -266,8 +256,6 @@ interface MediaInfo {
 
 const // official website
   JELLYFIN_URL = "jellyfin.org",
-  // web client app name
-  APP_NAME = "Jellyfin Web",
   // all the presence art assets uploaded to discord
   PRESENCE_ART_ASSETS = {
     download: "downloading",
@@ -301,9 +289,11 @@ async function handleAudioPlayback(): Promise<void> {
       )[0] as HTMLDivElement;
 
     presenceData.details = `Listening to: ${
-      title ? title.innerText : "unknown title"
+      title ? title.textContent : "unknown title"
     }`;
-    presenceData.state = `By: ${artist ? artist.innerText : "unknown artist"}`;
+    presenceData.state = `By: ${
+      artist ? artist.textContent : "unknown artist"
+    }`;
 
     // playing
     if (!audioElem.paused) {
@@ -379,10 +369,8 @@ function getUserId(): string {
     if (location.hash.indexOf("?") > 0) {
       for (const param of location.hash.split("?")[1].split("&")) {
         if (param.startsWith("serverId")) {
-          const [, serverId] = param.split("=");
-
           for (const server of servers)
-            if (server.Id === serverId) return server.UserId;
+            if (server.Id === param.split("=")[1]) return server.UserId;
         }
       }
     } else return servers[0].UserId;
@@ -404,22 +392,23 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   if (media[itemId] && media[itemId] !== pending) return media[itemId];
 
   media[itemId] = pending;
-  const basePath = location.pathname.replace(
-      location.pathname.split("/").slice(-2).join("/"),
-      ""
-    ),
-    baseLocation = `${location.protocol}//${location.host}${basePath}`,
-    res = await fetch(`${baseLocation}Users/${getUserId()}/Items/${itemId}`, {
-      credentials: "include",
-      headers: {
-        "x-emby-authorization":
-          `MediaBrowser Client="${ApiClient._appName}",` +
-          `Device="${ApiClient._deviceName}",` +
-          `DeviceId="${ApiClient._deviceId}",` +
-          `Version="${ApiClient._appVersion}",` +
-          `Token="${ApiClient._serverInfo.AccessToken}"`
+  const res = await fetch(
+      `${`${location.protocol}//${location.host}${location.pathname.replace(
+        location.pathname.split("/").slice(-2).join("/"),
+        ""
+      )}`}Users/${getUserId()}/Items/${itemId}`,
+      {
+        credentials: "include",
+        headers: {
+          "x-emby-authorization":
+            `MediaBrowser Client="${ApiClient._appName}",` +
+            `Device="${ApiClient._deviceName}",` +
+            `DeviceId="${ApiClient._deviceId}",` +
+            `Version="${ApiClient._appVersion}",` +
+            `Token="${ApiClient._serverInfo.AccessToken}"`
+        }
       }
-    }),
+    ),
     mediaInfo = await res.json();
 
   if (media[itemId] === pending) media[itemId] = mediaInfo;
@@ -431,9 +420,7 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
  * handleVideoPlayback - handles the presence when the user is using the video player
  */
 async function handleVideoPlayback(): Promise<void> {
-  const videoPlayerPage = document.getElementById("videoOsdPage");
-
-  if (videoPlayerPage === null) {
+  if (!document.getElementById("videoOsdPage")) {
     // elements not loaded yet
     return;
   }
@@ -455,15 +442,13 @@ async function handleVideoPlayback(): Promise<void> {
 
   // no background image, we're playing live tv
   if (videoPlayerElem?.hasAttribute("poster")) {
-    const backgroundImageUrl = videoPlayerElem.getAttribute("poster");
-
-    mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[4]);
+    mediaInfo = await obtainMediaInfo(
+      videoPlayerElem.getAttribute("poster").split("/")[4]
+    );
   } else if (videoPlayerElem?.src?.match(/(mediaSourceId=)([a-z0-9]{32})/)) {
-    const [itemId] = videoPlayerElem.src
-      .match(/(mediaSourceId=)([a-z0-9]{32})/)
-      .slice(2);
-
-    mediaInfo = await obtainMediaInfo(itemId);
+    mediaInfo = await obtainMediaInfo(
+      videoPlayerElem.src.match(/(mediaSourceId=)([a-z0-9]{32})/).slice(2)[0]
+    );
   }
 
   // display generic info
@@ -475,15 +460,15 @@ async function handleVideoPlayback(): Promise<void> {
     switch (mediaInfo.Type) {
       case "Movie":
         title = "Watching a Movie:";
-        subtitle = headerTitleElem.innerText;
+        subtitle = headerTitleElem.textContent;
         break;
       case "Series":
         title = "Watching a Series:";
-        subtitle = headerTitleElem.innerText;
+        subtitle = headerTitleElem.textContent;
         break;
       case "TvChannel":
         title = "Watching Live Tv";
-        subtitle = headerTitleElem.innerText;
+        subtitle = headerTitleElem.textContent;
         break;
       default:
         title = `Watching ${mediaInfo.Type}`;
@@ -523,10 +508,9 @@ async function handleVideoPlayback(): Promise<void> {
  * handleItemDetails - handles the presence when the user is viewing the details of an item
  */
 async function handleItemDetails(): Promise<void> {
-  const params = location.hash.split("?")[1].split("&");
   let id;
 
-  for (const param of params) {
+  for (const param of location.hash.split("?")[1].split("&")) {
     if (param.startsWith("id=")) {
       [, id] = param.split("=");
       break;
@@ -599,9 +583,8 @@ async function handleWebClient(): Promise<void> {
 
   // obtain the path, on the example would return "login.html"
   // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
-  const path = location.hash.split("?")[0].substr(3);
 
-  switch (path) {
+  switch (location.hash.split("?")[0].substr(3)) {
     case "login.html":
       presenceData.state = "Logging in";
       break;
@@ -719,8 +702,10 @@ async function setDefaultsToPresence(): Promise<void> {
 async function isJellyfinWebClient(): Promise<boolean> {
   ApiClient ??= await presence.getPageletiable("ApiClient");
 
-  if (ApiClient && typeof ApiClient === "object")
-    if (ApiClient._appName && ApiClient._appName === APP_NAME) return true;
+  if (ApiClient && typeof ApiClient === "object") {
+    if (ApiClient._appName && ApiClient._appName === "Jellyfin Web")
+      return true;
+  }
 
   return false;
 }
@@ -753,10 +738,8 @@ async function updateData(): Promise<void> {
 
   // if jellyfin is detected init/update the presence status
   if (showPresence) {
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 }
 
@@ -775,9 +758,9 @@ async function init(): Promise<void> {
     // web client
   } else {
     try {
-      const data = JSON.parse(localStorage.getItem("jellyfin_credentials"));
-
-      for (const server of data.Servers) {
+      for (const server of JSON.parse(
+        localStorage.getItem("jellyfin_credentials")
+      ).Servers) {
         // user has accessed in the last 30 seconds, should be enough for slow connections
         if (
           Date.now() - new Date(server.DateLastAccessed).getTime() <

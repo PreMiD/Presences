@@ -164,9 +164,7 @@ presence.on("UpdateData", async () => {
               uploaderTV.textContent.replace(/\s+/g, ""),
               pattern
             )),
-      timestamps = presence.getTimestampsfromMedia(video),
-      live = Boolean(document.querySelector(".ytp-live")),
-      ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
+      live = Boolean(document.querySelector(".ytp-live"));
     let isPlaylistLoop = false;
 
     if (
@@ -227,8 +225,8 @@ presence.on("UpdateData", async () => {
         unlistedPathElement.getAttribute("d") ===
           unlistedBadgeElement.getAttribute("d"),
       videoId = document
-      .querySelector("#page-manager > ytd-watch-flexy")
-      .getAttribute("video-id"),
+        .querySelector("#page-manager > ytd-watch-flexy")
+        .getAttribute("video-id"),
       presenceData: PresenceData = {
         details: vidDetail
           .replace("%title%", finalTitle)
@@ -236,7 +234,10 @@ presence.on("UpdateData", async () => {
         state: vidState
           .replace("%title%", finalTitle)
           .replace("%uploader%", finalUploader),
-        largeImageKey: unlistedVideo || !thumbnail ? "yt_lg" : `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+        largeImageKey:
+          unlistedVideo || !thumbnail
+            ? "yt_lg"
+            : `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
         smallImageKey: video.paused
           ? "pause"
           : video.loop
@@ -251,7 +252,7 @@ presence.on("UpdateData", async () => {
           : isPlaylistLoop
           ? "Playlist on loop"
           : (await strings).play,
-        endTimestamp: timestamps[1]
+        endTimestamp: presence.getTimestampsfromMedia(video)[1]
       };
 
     if (vidState.includes("{0}")) delete presenceData.state;
@@ -278,7 +279,7 @@ presence.on("UpdateData", async () => {
     }
 
     //* Update title to indicate when an ad is being played
-    if (ads) {
+    if (document.querySelector(".ytp-ad-player-overlay")) {
       presenceData.details = (await strings).ad;
       delete presenceData.state;
     } else if (privacy) {
@@ -570,9 +571,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 });

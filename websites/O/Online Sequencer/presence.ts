@@ -25,8 +25,7 @@ presence.on("UpdateData", async () => {
       { label: "View Sequence", url: window.location.href },
       {
         label: "View Creator",
-        url: (document.querySelector("#titlebar div a") as HTMLAnchorElement)
-          .href
+        url: document.querySelector<HTMLAnchorElement>("#titlebar div a").href
       }
     ];
   } else if (document.location.pathname === "/") {
@@ -42,7 +41,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing sequences";
     if (document.getElementsByTagName("input")[2].value !== "") {
       presenceData.state = `Searching: ${
-        (document.getElementsByTagName("input")[2] as HTMLInputElement).value
+        document.getElementsByTagName("input")[2].value
       }`;
     }
   } else if (document.location.pathname === "/memberlist") {
@@ -51,7 +50,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing members";
     if (document.getElementsByTagName("input")[2].value !== "") {
       presenceData.state = `Searching: ${
-        (document.getElementsByTagName("input")[2] as HTMLInputElement).value
+        document.getElementsByTagName("input")[2].value
       }`;
     }
   } else if (document.location.pathname.startsWith("/members/")) {
@@ -60,7 +59,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing member:";
     presenceData.state = (
       document.getElementsByClassName("profile_header")[0] as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname.startsWith("/import")) {
     prevPage = currPage;
     currPage = "i";
@@ -71,7 +70,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Forum Thread:";
     const threadtitle = (
       document.getElementsByClassName("thead")[0] as HTMLElement
-    ).innerText;
+    ).textContent;
     if (threadtitle.includes("Thread Modes"))
       presenceData.state = threadtitle.substr(13);
     else presenceData.state = threadtitle;
@@ -81,7 +80,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Forum Announcement:";
     presenceData.state = (
       document.getElementsByClassName("thead")[0] as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname.startsWith("/forum/forumdisplay")) {
     prevPage = currPage;
     currPage = "fd";
@@ -90,7 +89,7 @@ presence.on("UpdateData", async () => {
       document.getElementsByClassName(
         "pull-left navbar-header"
       )[0] as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname.startsWith("/forum/memberlist")) {
     prevPage = currPage;
     currPage = "fm";
@@ -108,21 +107,20 @@ presence.on("UpdateData", async () => {
         { label: "View Sequence", url: window.location.href },
         {
           label: "View Creator",
-          url: (document.querySelector("#titlebar div a") as HTMLAnchorElement)
-            .href
+          url: document.querySelector<HTMLAnchorElement>("#titlebar div a").href
         }
       ];
     } else presenceData.details = "Editing a sequence";
 
     const str = (
       document.getElementsByClassName("text")[1] as HTMLElement
-    ).innerHTML.trim();
+    ).textContent.trim();
     if (str.includes("by <a"))
       presenceData.state = `Title: ${str.substring(0, str.indexOf("by <a"))}`;
     else presenceData.state = `Title: ${str}`;
   }
 
-  if (document.getElementById("chatbox") !== null) {
+  if (document.getElementById("chatbox")) {
     prevPage = currPage;
     currPage = "c";
     presenceData.details = "Viewing Chat";
@@ -130,8 +128,6 @@ presence.on("UpdateData", async () => {
 
   if (prevPage !== currPage) refreshTime();
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

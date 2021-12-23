@@ -23,12 +23,12 @@ function getLevelInHeader() {
 
   if (!levelElement) return null;
 
-  return +levelElement.innerText.slice(6);
+  return +levelElement.textContent.slice(6);
 }
 
 presence.on("UpdateData", () => {
   const { pathname } = window.location,
-    data: PresenceData = {
+    presenceData: PresenceData = {
       largeImageKey
     },
     level: number = getLevelInHeader();
@@ -42,17 +42,15 @@ presence.on("UpdateData", () => {
     startTimestamp = Date.now();
     details = "Doing Lessons";
 
-    const grammarPointElement: HTMLSpanElement = document.querySelector(
-        ".grammar-point__title.grammar-point__title--default"
-      ),
-      grammarPoint = grammarPointElement.innerText,
-      lessonProgressElement: HTMLDivElement = document.querySelector(
-        ".header__lesson-progress"
-      ),
-      [lessonType, lessonProgress] =
-        lessonProgressElement.innerText.split(": ");
+    const [lessonType, lessonProgress] = document
+      .querySelector(".header__lesson-progress")
+      .textContent.split(": ");
 
-    state = `Learning ${grammarPoint}`;
+    state = `Learning ${
+      document.querySelector(
+        ".grammar-point__title.grammar-point__title--default"
+      ).textContent
+    }`;
 
     smallImageText = `${lessonType}: ${lessonProgress}`;
   } else {
@@ -61,19 +59,16 @@ presence.on("UpdateData", () => {
         startTimestamp = Date.now();
         details = "Doing reviews";
 
-        const hint: HTMLDivElement = document.querySelector(
+        const hintText = document.querySelector(
             ".study-question-english-hint"
-          ),
-          hintText = hint.innerText,
-          SRS: HTMLDivElement = document.querySelector(
+          ).textContent,
+          SRSLevel = document.querySelector(
             ".review__stats.srs-tracker"
-          ),
-          SRSLevel = SRS.innerText,
-          successRate: HTMLDivElement = document.querySelector(
-            ".review__stats.review-percent"
-          );
+          ).textContent;
 
-        smallImageText = successRate.innerText;
+        smallImageText = document.querySelector(
+          ".review__stats.review-percent"
+        ).textContent;
 
         state = hintText ? `${hintText} (${SRSLevel})` : SRSLevel;
 
@@ -89,26 +84,17 @@ presence.on("UpdateData", () => {
       case "/learn": {
         startTimestamp = Date.now();
 
-        const checkQuizElement: HTMLDivElement = document.querySelector(
-            "#learn-new-grammar-page"
-          ),
-          isOnQuiz = checkQuizElement.style.display === "block";
-
-        if (isOnQuiz) {
+        if (
+          (
+            document.querySelector(
+              "#learn-new-grammar-page"
+            ) as HTMLStyleElement
+          ).style.display === "block"
+        ) {
           details = "Learning New Grammar (Quiz)";
-
-          const grammarPointElement: HTMLDivElement = document.querySelector(
-              ".study-question-english-hint"
-            ),
-            grammarPoint = grammarPointElement.innerText,
-            lessonProgressElement: HTMLDivElement = document.querySelector(
-              ".review__stats#reviews"
-            ),
-            lessonProgress = lessonProgressElement.innerText;
-
-          state = `${grammarPoint}`;
-
-          smallImageText = `${lessonProgress}`;
+          smallImageText = `${
+            document.querySelector(".review__stats#reviews").textContent
+          }`;
         } else {
           details = "Learning New Grammar";
 
@@ -120,31 +106,18 @@ presence.on("UpdateData", () => {
 
           activeGrammarPoint ??= document.querySelector(".grammar-point-study");
 
-          const grammarPointElement: HTMLSpanElement =
-              activeGrammarPoint.querySelector(
-                ".grammar-point__title.grammar-point__title--default"
-              ),
-            grammarPoint = grammarPointElement.innerText,
-            lessonProgressElement: HTMLDivElement =
-              activeGrammarPoint.querySelector(".header__lesson-progress"),
-            lessonProgress = lessonProgressElement.innerText,
-            activeTabElement: HTMLLIElement = activeGrammarPoint.querySelector(
-              ".navbar_option--active-tab"
-            ),
-            activeTab = activeTabElement.innerText;
-
-          state = `${grammarPoint} | ${activeTab}`;
-
-          smallImageText = lessonProgress;
+          smallImageText = activeGrammarPoint.querySelector(
+            ".header__lesson-progress"
+          ).textContent;
         }
 
         break;
       }
       case "/cram": {
-        const cramStartElement: HTMLDivElement =
-          document.querySelector(".cram-start");
-
-        if (cramStartElement.style.display !== "none") {
+        if (
+          (document.querySelector(".cram-start") as HTMLStyleElement).style
+            .display !== "none"
+        ) {
           details = "Browsing Grammar";
           break;
         }
@@ -152,18 +125,13 @@ presence.on("UpdateData", () => {
         startTimestamp = Date.now();
         details = "Doing Cram";
 
-        const grammarPointElement: HTMLDivElement = document.querySelector(
-            ".study-question-english-hint"
-          ),
-          grammarPoint = grammarPointElement.innerText,
-          lessonProgressElement: HTMLDivElement = document.querySelector(
-            ".review__stats#reviews"
-          ),
-          lessonType = lessonProgressElement.innerText;
+        state = `Reviewing ${
+          document.querySelector(".study-question-english-hint").textContent
+        }`;
 
-        state = `Reviewing ${grammarPoint}`;
-
-        smallImageText = `${lessonType}`;
+        smallImageText = document.querySelector(
+          ".review__stats#reviews"
+        ).textContent;
 
         break;
       }
@@ -176,10 +144,8 @@ presence.on("UpdateData", () => {
         );
 
         if (reviews) {
-          const reviewsCount: string = reviews.innerText;
-
           details = "Viewing Dashboard";
-          state = `${reviewsCount} reviews`;
+          state = `${reviews.textContent} reviews`;
         } else details = "Browsing Pages";
 
         break;
@@ -187,18 +153,19 @@ presence.on("UpdateData", () => {
     }
   }
 
-  data.details = details;
+  presenceData.details = details;
 
-  if (state) data.state = state;
+  if (state) presenceData.state = state;
 
   if (level) {
-    data.smallImageKey = getLevelIcon(level);
+    presenceData.smallImageKey = getLevelIcon(level);
 
     smallImageText ??= `Level ${level}`;
   }
-  if (smallImageText) data.smallImageText = smallImageText;
+  if (smallImageText) presenceData.smallImageText = smallImageText;
 
-  if (startTimestamp) data.startTimestamp = Math.round(startTimestamp / 1000);
+  if (startTimestamp)
+    presenceData.startTimestamp = Math.round(startTimestamp / 1000);
 
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

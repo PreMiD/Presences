@@ -8,21 +8,21 @@ const presence = new Presence({
     search: "presence.activity.searching"
   });
 
-let elapsed: number, oldUrl: string, title;
+let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null,
+    // eslint-disable-next-line no-one-time-vars/no-one-time-vars
     details,
     state,
     smallImageKey,
     smallImageText,
     startTimestamp,
-    endTimestamp,
-    extra = "...";
+    endTimestamp;
 
   const { href } = window.location,
     path = window.location.pathname,
-    data: PresenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "peacock",
       details
     };
@@ -32,25 +32,11 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (path.includes("/movies/highlights")) extra = " Movies";
-  else if (path.includes("/watch/tv/highlights")) extra = " TV Shows";
-  else if (path.includes("/watch/kids/highlights")) extra = " Kids";
-  else if (path.includes("/watch/sports/highlights")) extra = " Sports";
-  else if (path.includes("/watch/latino/highlights")) extra = " Latino";
-
-  // By default, details will be "Browsing..."
-  details = `Browsing${extra}`;
-
-  if (path.includes("/watch/search")) details = "Searching...";
-
-  data.startTimestamp = elapsed;
+  presenceData.startTimestamp = elapsed;
 
   if (path.includes("/watch/playback") || path.includes("/watch/asset")) {
     video = document.querySelector(".video-player-component video");
     if (video) {
-      title =
-        document.querySelector(".playback-header__title") ||
-        document.querySelector(".playback-metadata__container-title");
       const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
@@ -67,35 +53,28 @@ presence.on("UpdateData", async () => {
 
       if (desc) state = desc.textContent;
 
-      if (title) {
-        details = title.textContent;
-        if (path.includes("/watch/playback/playlist"))
-          details = `${details} Playlist`;
-      }
-
       smallImageKey = live ? "live" : video.paused ? "pause" : "play";
       smallImageText = live
         ? (await strings).live
         : video.paused
         ? (await strings).pause
         : (await strings).play;
-      data.startTimestamp = live ? elapsed : startTimestamp;
-      data.endTimestamp = endTimestamp;
+      presenceData.startTimestamp = live ? elapsed : startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
 
-      if (live) delete data.endTimestamp;
+      if (live) delete presenceData.endTimestamp;
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
     }
   }
 
-  data.state = state;
-  data.smallImageKey = smallImageKey;
-  data.smallImageText = smallImageText;
-  data.startTimestamp = startTimestamp;
-  data.endTimestamp = endTimestamp;
+  presenceData.state = state;
+  presenceData.smallImageKey = smallImageKey;
+  presenceData.smallImageText = smallImageText;
+  presenceData.startTimestamp = startTimestamp;
+  presenceData.endTimestamp = endTimestamp;
 
-  presence.setActivity(data, video ? !video.paused : true);
-  presence.setTrayTitle(details);
+  presence.setActivity(presenceData, video ? !video.paused : true);
 });

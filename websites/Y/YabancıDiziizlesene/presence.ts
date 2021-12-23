@@ -41,24 +41,21 @@ presence.on("UpdateData", async () => {
   // Series
 
   if (seriesBool) {
-    const seriesTitle = document.querySelector(
+    const [details, state] = document
+      .querySelector(
         "body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__container > div > div.card__content.pb-md-1.pb-0 > div > div.watch__title > div.watch__title__name > div > h2"
-      ).textContent,
-      [details, state] = seriesTitle.split("-");
+      )
+      .textContent.split("-");
 
     presenceData.details = details;
     presenceData.state = state.replace("n", "n |");
   } else if (movieBool) {
-    // Movies
-    const movieTitle = document.querySelector(
-        "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > h2"
-      ).textContent,
-      movieTitle2 = document.querySelector(
-        "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > span"
-      ).textContent;
-
-    presenceData.details = movieTitle;
-    presenceData.state = movieTitle2;
+    presenceData.details = document.querySelector(
+      "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > h2"
+    ).textContent;
+    presenceData.state = document.querySelector(
+      "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > span"
+    ).textContent;
   } else {
     // Browsing
     presenceData.details = (await strings).browsing;

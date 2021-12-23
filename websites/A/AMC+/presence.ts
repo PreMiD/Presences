@@ -13,7 +13,7 @@ let elapsed: number, oldUrl: string;
 presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector("video"),
     { href } = window.location,
-    data: PresenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "amc"
     };
 
@@ -23,53 +23,54 @@ presence.on("UpdateData", async () => {
   }
 
   // Default details
-  data.details = "Browsing catalogue...";
+  presenceData.details = "Browsing catalogue...";
 
-  data.startTimestamp = elapsed;
+  presenceData.startTimestamp = elapsed;
 
   if (video) {
-    const slot1 = document.querySelector(".slot1"),
-      slot2 = document.querySelector(".slot2"),
+    const slot2 = document.querySelector(".slot2"),
       slot3 = document.querySelector(".slot3"),
       isSeries = slot2 && slot3;
 
-    data.details = slot1.textContent;
+    presenceData.details = document.querySelector(".slot1").textContent;
 
     if (isSeries) {
       // A series has slot1 (the series name), slot2 (the episode)
       // and slot3 (the episode name)
-      data.details += `: ${slot2.textContent}`;
-      data.state = slot3.textContent;
+      presenceData.details += `: ${slot2.textContent}`;
+      presenceData.state = slot3.textContent;
     } else {
       // A movie only has slot1 (the title)
-      data.state = "Watching movie";
+      presenceData.state = "Watching movie";
     }
 
     const [startTimestamp, endTimestamp] =
         presence.getTimestampsfromMedia(video),
-      live = timestamps[1] === Infinity;
+      live = endTimestamp === Infinity;
 
-    data.smallImageText = live
+    presenceData.smallImageText = live
       ? (await strings).live
       : video.paused
       ? (await strings).pause
       : (await strings).play;
 
-    data.smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+    presenceData.smallImageKey = live
+      ? "live"
+      : video.paused
+      ? "pause"
+      : "play";
 
-    data.startTimestamp = live ? elapsed : startTimestamp;
-    data.endTimestamp = endTimestamp;
+    presenceData.startTimestamp = live ? elapsed : startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
 
-    if (live) delete data.endTimestamp;
+    if (live) delete presenceData.endTimestamp;
     if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-      if (!isSeries) data.state = "Paused";
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+      if (!isSeries) presenceData.state = "Paused";
     }
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

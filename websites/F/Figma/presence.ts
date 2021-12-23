@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "768942376403075073" //Discord Client ID
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "home" // Banner
   };
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   function figmapresence(
     nome: string,
@@ -249,13 +249,14 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("plugin-docs")) {
     //Figma Developers Docs
 
-    const doctitle = document.querySelector(
-      "body > div.navPusher > div > div.container.mainContainer > div > div.post > header > h1"
-    ).textContent;
     figmapresence(
       "coding",
       "Figma Developers | Figma",
-      `${"Viewing: " + '"'}${doctitle}"`,
+      `${"Viewing: " + '"'}${
+        document.querySelector(
+          "body > div.navPusher > div > div.container.mainContainer > div > div.post > header > h1"
+        ).textContent
+      }"`,
       "In Figma Developers..."
     );
   } else if (document.location.pathname.startsWith("/collaboration")) {
@@ -519,16 +520,17 @@ presence.on("UpdateData", async () => {
     //Figma Users
 
     const username = document.querySelector(
-        "#react-page > div > div > div:nth-child(1) > div.file_browser_view--tabletOptimizedFileBrowserPageViewContainer--1O5aq.file_browser_view--fileBrowserPageViewContainer--1olui > div.file_browser_page_view--tabletOptimizedContainer--2YFqY.file_browser_page_view--container--88Ioi > div > div > div:nth-child(3) > div > div.profile_resources_grid--profileDataContainer--2jkBg.text--fontPos14--3UJ36.text--_fontBase--YWDo0 > div:nth-child(1) > div.profile_resources_grid--profileDataHandle--2m2Km"
-      ).textContent,
-      profilename = document.querySelector(
-        "#react-page > div > div > div:nth-child(1) > div.file_browser_view--tabletOptimizedFileBrowserPageViewContainer--1O5aq.file_browser_view--fileBrowserPageViewContainer--1olui > div.file_browser_page_view--tabletOptimizedContainer--2YFqY.file_browser_page_view--container--88Ioi > div > div > div:nth-child(3) > div > div.profile_resources_grid--profileDataContainer--2jkBg.text--fontPos14--3UJ36.text--_fontBase--YWDo0 > div:nth-child(1) > div.profile_resources_grid--profileDataName--_-XIm.text--fontPos24Whyte--HMiux.text--_fontBaseWhyte--e6y38"
-      ).textContent;
+      "#react-page > div > div > div:nth-child(1) > div.file_browser_view--tabletOptimizedFileBrowserPageViewContainer--1O5aq.file_browser_view--fileBrowserPageViewContainer--1olui > div.file_browser_page_view--tabletOptimizedContainer--2YFqY.file_browser_page_view--container--88Ioi > div > div > div:nth-child(3) > div > div.profile_resources_grid--profileDataContainer--2jkBg.text--fontPos14--3UJ36.text--_fontBase--YWDo0 > div:nth-child(1) > div.profile_resources_grid--profileDataHandle--2m2Km"
+    ).textContent;
 
     figmapresence(
       "user",
       `${username} | Figma Community`,
-      `Viewing ${profilename}'s`,
+      `Viewing ${
+        document.querySelector(
+          "#react-page > div > div > div:nth-child(1) > div.file_browser_view--tabletOptimizedFileBrowserPageViewContainer--1O5aq.file_browser_view--fileBrowserPageViewContainer--1olui > div.file_browser_page_view--tabletOptimizedContainer--2YFqY.file_browser_page_view--container--88Ioi > div > div > div:nth-child(3) > div > div.profile_resources_grid--profileDataContainer--2jkBg.text--fontPos14--3UJ36.text--_fontBase--YWDo0 > div:nth-child(1) > div.profile_resources_grid--profileDataName--_-XIm.text--fontPos24Whyte--HMiux.text--_fontBaseWhyte--e6y38"
+        ).textContent
+      }'s`,
       `${"Profile" + " ("}${username})`
     );
   } else if (document.location.pathname.endsWith("icons")) {
@@ -622,8 +624,6 @@ presence.on("UpdateData", async () => {
     figmapresence("search", "Figma", "Exploring ", "Figma...");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

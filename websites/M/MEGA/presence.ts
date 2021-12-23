@@ -30,13 +30,13 @@ presence.on("UpdateData", () => {
 
     if (
       (fileName === null && fileExtension === null) ||
-      (fileName.innerText === "" && fileExtension.innerText === "")
+      (fileName.textContent === "" && fileExtension.textContent === "")
     ) {
       details = "Entering Decryption Key...";
       state = "Holding...";
     } else {
       details = "Viewing File:";
-      state = fileName.innerText + fileExtension.innerText;
+      state = fileName.textContent + fileExtension.textContent;
     }
     presenceData.details = details;
     presenceData.state = state;
@@ -70,7 +70,7 @@ presence.on("UpdateData", () => {
   } else if (page.includes("help")) {
     helpCategory = document.querySelector("div.section-title");
     presenceData.details = "MEGA Support";
-    presenceData.state = helpCategory.innerText;
+    presenceData.state = helpCategory.textContent;
   } else if (page.includes("register")) {
     presenceData.details = "Registering";
     presenceData.state = "mega.nz";
@@ -79,8 +79,6 @@ presence.on("UpdateData", () => {
     presenceData.state = "mega.nz";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

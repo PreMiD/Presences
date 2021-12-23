@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "612416330003382314"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let profileName,
   profileTabs,
   messageTab,
@@ -14,7 +14,8 @@ let profileName,
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       details: "Unknown page",
-      largeImageKey: "lg"
+      largeImageKey: "lg",
+      startTimestamp: browsingTimestamp
     },
     gameName = <HTMLHeadingElement>(
       document.querySelector(
@@ -26,8 +27,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Current page: ";
 
     presenceData.state = "Home";
-
-    presenceData.startTimestamp = browsingStamp;
   } else if (
     document.location.pathname.includes("/users") &&
     document.location.pathname.includes("/profile")
@@ -42,20 +41,16 @@ presence.on("UpdateData", async () => {
       document.querySelector("#horizontal-tabs li.rbx-tab.active a")
     );
 
-    //console.log(profileTabs.innerText);
+    //console.log(profileTabs.textContent);
 
-    if (profileTabs.innerText === "Creations") {
-      presenceData.details = `Profile: ${profileName.innerText}`;
+    if (profileTabs.textContent === "Creations") {
+      presenceData.details = `Profile: ${profileName.textContent}`;
 
       presenceData.state = "Browsing creations...";
-
-      presenceData.startTimestamp = browsingStamp;
     } else {
       presenceData.details = "Looking on a profile: ";
 
-      presenceData.state = profileName.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = profileName.textContent;
     }
   } else if (document.location.pathname.includes("/my/messages")) {
     messageTab = <HTMLLIElement>(
@@ -66,9 +61,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Messages";
 
-    presenceData.state = `Tab: ${messageTab.innerText}`;
-
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = `Tab: ${messageTab.textContent}`;
   } else if (document.location.pathname.includes("/users/friends")) {
     friendsTab = <HTMLAnchorElement>(
       document.querySelector(".rbx-tab-heading.active")
@@ -76,15 +69,11 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Friends";
 
-    presenceData.state = `Tab: ${friendsTab.innerText}`;
-
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = `Tab: ${friendsTab.textContent}`;
   } else if (document.location.pathname.includes("/my/avatar")) {
     presenceData.details = "Current page: ";
 
     presenceData.state = "Avatar Editor";
-
-    presenceData.startTimestamp = browsingStamp;
   } else if (
     document.location.pathname.includes("/users") &&
     document.location.pathname.includes("/inventory")
@@ -95,13 +84,9 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Inventory";
 
-    presenceData.state = inventoryTab.innerText;
-
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = inventoryTab.textContent;
   } else if (document.location.pathname === "/groups/join") {
     presenceData.details = "Browsing groups...";
-
-    presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
   } else if (
@@ -114,28 +99,23 @@ presence.on("UpdateData", async () => {
       document.querySelector("#horizontal-tabs li.rbx-tab.active")
     );
 
-    presenceData.details = groupName.innerText;
+    presenceData.details = groupName.textContent;
 
-    presenceData.state = `Tab: ${groupTab.innerText}`;
-
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = `Tab: ${groupTab.textContent}`;
   } else if (document.location.pathname.includes("/search/groups")) {
-    const searchURL = new URL(document.location.href),
-      searchResult = searchURL.searchParams.get("keyword");
+    const searchResult = new URL(document.location.href).searchParams.get(
+      "keyword"
+    );
 
     presenceData.details = "Searching for a group:";
 
     presenceData.state = searchResult;
 
     presenceData.smallImageKey = "search";
-
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/feeds")) {
     presenceData.details = "Current page: ";
 
     presenceData.state = "Feed";
-
-    presenceData.startTimestamp = browsingStamp;
   } else if (
     (document.location.pathname === "/games/" ||
       document.location.pathname === "/games") &&
@@ -143,28 +123,23 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Browsing games...";
 
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.state;
   } else if (document.location.pathname.includes("/games/")) {
-    gameTab = <HTMLLIElement>(
-      document.querySelector("#horizontal-tabs li.rbx-tab.active")
+    gameTab = document.querySelector<HTMLLIElement>(
+      "#horizontal-tabs li.rbx-tab.active"
     );
 
-    presenceData.details = `Game: ${gameName.innerText}`;
+    presenceData.details = `Game: ${gameName.textContent}`;
 
-    presenceData.state = `Tab: ${gameTab.innerText}`;
-
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = `Tab: ${gameTab.textContent}`;
   } else if (document.location.pathname.includes("/catalog/")) {
-    const searchURL = new URL(document.location.href),
-      searchResult = searchURL.searchParams.get("Keyword");
+    const searchResult = new URL(document.location.href).searchParams.get(
+      "Keyword"
+    );
 
     presenceData.details = "Current page:";
 
     presenceData.state = "Catalog";
-
-    presenceData.startTimestamp = browsingStamp;
 
     if (searchResult) {
       presenceData.details = "Searching for an item: ";
@@ -174,48 +149,38 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
     }
   } else if (document.location.pathname.includes("/search/users")) {
-    const searchURL = new URL(document.location.href),
-      searchResult = searchURL.searchParams.get("keyword");
-
     presenceData.details = "Searching for an user:";
-
-    presenceData.state = searchResult;
-
+    presenceData.state = new URL(document.location.href).searchParams.get(
+      "keyword"
+    );
     presenceData.smallImageKey = "search";
-
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/develop")) {
     presenceData.details = "Developer Page";
     const developTabs = (<HTMLDivElement>(
       document.querySelector("#DevelopTabs .tab-active")
-    )).innerText;
+    )).textContent;
     if (developTabs === "My Creations") {
       presenceData.state = `Tab: ${developTabs} > ${
         (<HTMLAnchorElement>document.querySelector(".tab-item-selected"))
-          .innerText
+          .textContent
       }`;
     } else if (developTabs === "Library") {
       presenceData.state = `Tab: ${developTabs} > ${
         (<HTMLAnchorElement>document.querySelector(".selectedAssetTypeFilter"))
-          .innerText
+          .textContent
       }`;
     } else presenceData.state = `Tab: ${developTabs}`;
-
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/robux")) {
     presenceData.details = "Current page:";
     presenceData.state = "Robux";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/catalog")) {
     presenceData.details = "Current page:";
     presenceData.state = "Avatar Shop";
-    presenceData.startTimestamp = browsingStamp;
   }
 
-  if (document.querySelector(".notification-stream-container") !== null) {
+  if (document.querySelector(".notification-stream-container")) {
     presenceData.details = "Viewing Notifications";
     delete presenceData.state;
-    presenceData.startTimestamp = browsingStamp;
   }
 
   presence.setActivity(presenceData);

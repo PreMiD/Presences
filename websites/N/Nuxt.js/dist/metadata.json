@@ -1,18 +1,10 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Deleted 7.12i",
     "id": "591702135310385157"
   },
-  "url": [
-    "nuxtjs.org",
-    "fr.nuxtjs.org",
-    "zh.nuxtjs.org",
-    "ja.nuxtjs.org",
-    "ko.nuxtjs.org",
-    "ru.nuxtjs.org",
-    "id.nuxtjs.org"
-  ],
+  "service": "Nuxt.js",
   "description": {
     "fr": "Nuxt.js est un framework pour créer des applications Vue, vous pouvez choisir entre application Universelle, Générée Statiquement ou Monopage.",
     "en": "Nuxt is a progressive framework based on Vue.js to create modern web applications. It is based on Vue.js official libraries (vue, vue-router and vuex) and powerful development tools (webpack, Babel and PostCSS). Nuxt's goal is to make web development powerful and performant with a great developer experience in mind.",
@@ -23,17 +15,25 @@
     "id": "Tanggal 25 Oktober 2016, tim di belakang zeit.co, mengumumkan Next.js, sebuah kerangka kerja untuk aplikasi Bereaksi yang diberikan server. Beberapa jam setelah pengumuman, gagasan untuk membuat aplikasi Vue.js yang dibuat server dengan cara yang sama seperti Next.js sudah jelas: Nuxt.js lahir.",
     "nl": "Nuxt is een progressief framework gebaseerd op Vue.js om moderne webapplicaties te maken. Het is gebaseerd op de officiële bibliotheken van Vue.js (vue, vue-router en vuex) en krachtige ontwikkeltools (webpack, Babel en PostCSS). Het doel van Nuxt is om webontwikkeling krachtig en performant te maken met een geweldige ontwikkelaarservaring in gedachten."
   },
-  "service": "Nuxt.js",
-  "version": "1.2.9",
+  "url": [
+    "nuxtjs.org",
+    "fr.nuxtjs.org",
+    "zh.nuxtjs.org",
+    "ja.nuxtjs.org",
+    "ko.nuxtjs.org",
+    "ru.nuxtjs.org",
+    "id.nuxtjs.org"
+  ],
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/6A7Q1dP.png",
   "thumbnail": "https://i.imgur.com/mlwpfWK.png",
   "color": "#00c58e",
+  "category": "other",
   "tags": [
     "nuxt",
     "nuxt-js",
     "vue-js",
     "framework",
     "application"
-  ],
-  "category": "other"
+  ]
 }

@@ -8,50 +8,50 @@ const presence = new Presence({
     searchFor: "general.searchFor",
     genre: "general.viewGenre"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo",
     details: (await strings).searchFor
   };
 
   if (document.location.pathname === "/" || !document.location.pathname)
-    data.details = (await strings).searchSomething;
+    presenceData.details = (await strings).searchSomething;
   else if (document.location.pathname.includes("/search")) {
-    data.state = `"${
+    presenceData.state = `"${
       document.querySelector(".block_area-header i").textContent
     }"`;
   } else if (document.location.pathname.includes("/home"))
-    data.details = (await strings).homepage;
+    presenceData.details = (await strings).homepage;
   else if (document.location.pathname.includes("/genre")) {
-    data.details = (await strings).genre;
-    data.state = `📔 ${
+    presenceData.details = (await strings).genre;
+    presenceData.state = `📔 ${
       document.querySelector(".block_area-header").textContent
     }`;
   } else if (document.location.pathname.includes("/new-release"))
-    data.state = "✌️ New releases";
+    presenceData.state = "✌️ New releases";
   else if (document.location.pathname.includes("/completed"))
-    data.state = "✅ Completed Manga";
+    presenceData.state = "✅ Completed Manga";
   else if (document.location.pathname.includes("/most-viewed"))
-    data.state = "🔥 Most Viewed";
+    presenceData.state = "🔥 Most Viewed";
   else if (document.location.pathname.includes("/latest-updated"))
-    data.state = "⚡ Latest Updated";
+    presenceData.state = "⚡ Latest Updated";
   else if (document.location.pathname.includes("/az-list"))
-    data.state = "🔠 A-Z List";
+    presenceData.state = "🔠 A-Z List";
   else if (document.location.pathname.includes("/type")) {
-    data.state = `📖 ${
+    presenceData.state = `📖 ${
       document.querySelector(".block_area-header").textContent
     }s`;
   } else if (document.location.pathname.includes("/character")) {
-    data.details = "Viewing Character:";
-    data.state = document.querySelector(".name").textContent;
+    presenceData.details = "Viewing Character:";
+    presenceData.state = document.querySelector(".name").textContent;
   } else if (document.location.pathname.includes("/author")) {
-    data.details = "Viewing Author:";
-    data.state = document.querySelector(".name").textContent;
+    presenceData.details = "Viewing Author:";
+    presenceData.state = document.querySelector(".name").textContent;
   } else {
-    data.details = document.querySelector(".manga-name").textContent;
-    data.buttons = [
+    presenceData.details = document.querySelector(".manga-name").textContent;
+    presenceData.buttons = [
       {
         label: "Read Manga",
         url: document.location.href
@@ -59,18 +59,18 @@ presence.on("UpdateData", async () => {
     ];
 
     if (document.location.pathname.includes("/read")) {
-      data.details = `${(await strings).reading} ${data.details}`;
-      data.state = `${document
+      presenceData.details = `${(await strings).reading} ${
+        presenceData.details
+      }`;
+      presenceData.state = `${document
         .querySelector("#current-chapter")
         .textContent.replace(" ", " #️")} | ${document
         .querySelector("#c-selected-lang, #v-selected-lang")
         .textContent.replace("Language: ", "")}`;
-      data.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

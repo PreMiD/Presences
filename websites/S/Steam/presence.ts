@@ -1,9 +1,8 @@
 const presence = new Presence({
     clientId: "612299892764966923"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  homeURL = new URL(document.location.href),
-  subsection = homeURL.searchParams.get("subsection");
+  browsingTimestamp = Math.floor(Date.now() / 1000),
+  subsection = new URL(document.location.href).searchParams.get("subsection");
 let AppName: HTMLElement,
   topicTitle: HTMLElement,
   topicAuthor: HTMLElement,
@@ -26,45 +25,44 @@ presence.on("UpdateData", async () => {
       if (subsection) {
         presenceData.state = `Browsing ${subsection}.`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else {
         presenceData.state = "Home";
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       }
     } else if (document.location.pathname.includes("/followedgames")) {
       presenceData.state = "Browsing follwing games.";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname === "/discussions/") {
       presenceData.state = "Browsing discussions.";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/discussions/forum")) {
       topicTitle = document.querySelector("div.topic");
 
       topicAuthor = document.querySelector("div.authorline > a");
 
       if (topicTitle && topicAuthor) {
-        presenceData.details = `Topic: ${topicTitle.innerText}`;
+        presenceData.details = `Topic: ${topicTitle.textContent}`;
 
-        presenceData.state = `Author: ${topicAuthor.innerText}`;
+        presenceData.state = `Author: ${topicAuthor.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else {
         presenceData.state = "Browsing Steam Forums.";
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       }
     } else if (document.location.pathname.includes("/search/users")) {
-      const input =
-        document.querySelector<HTMLInputElement>("#search_text_box");
-
       presenceData.details = "Searching for a user: ";
 
-      presenceData.state = `Username: ${input.value}`;
+      presenceData.state = `Username: ${
+        document.querySelector<HTMLInputElement>("#search_text_box").value
+      }`;
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
 
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/app/")) {
@@ -75,81 +73,81 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = "Steam Workshop";
 
-        presenceData.state = `Home - ${AppName.innerText}`;
+        presenceData.state = `Home - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else if (document.location.pathname.includes("/discussions")) {
         AppName = document.querySelector(
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = `Discussions - ${AppName.innerText}`;
+        presenceData.state = `Discussions - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else if (document.location.pathname.includes("/screenshots")) {
         AppName = document.querySelector(
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = `Screenshots - ${AppName.innerText}`;
+        presenceData.state = `Screenshots - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else if (document.location.pathname.includes("/images")) {
         AppName = document.querySelector(
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = `Artwork - ${AppName.innerText}`;
+        presenceData.state = `Artwork - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else if (document.location.pathname.includes("/broadcasts")) {
         AppName = document.querySelector(
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = `Broadcasts - ${AppName.innerText}`;
+        presenceData.state = `Broadcasts - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else if (document.location.pathname.includes("/videos")) {
         AppName = document.querySelector(
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = `Videos - ${AppName.innerText}`;
+        presenceData.state = `Videos - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else if (document.location.pathname.includes("/allnews")) {
         AppName = document.querySelector(
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = `News - ${AppName.innerText}`;
+        presenceData.state = `News - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else if (document.location.pathname.includes("/guides")) {
         AppName = document.querySelector(
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = `Guides - ${AppName.innerText}`;
+        presenceData.state = `Guides - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else if (document.location.pathname.includes("/reviews")) {
         AppName = document.querySelector(
           "div.apphub_HomeHeaderContent > div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = `Reviews - ${AppName.innerText}`;
+        presenceData.state = `Reviews - ${AppName.textContent}`;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       } else {
         AppName = document.querySelector(
           "div.apphub_HeaderTop > div.apphub_AppName.ellipsis"
         );
 
-        presenceData.state = AppName.innerText;
+        presenceData.state = AppName.textContent;
 
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
       }
     } else if (document.location.pathname.includes("/broadcast/watch/")) {
       broadcastTitle = document.querySelector("#BroadcastGame");
@@ -160,13 +158,13 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Watching a broadcast.";
 
-      presenceData.state = `${broadcastTitle.innerText} - ${broadcaster.innerText}`;
+      presenceData.state = `${broadcastTitle.textContent} - ${broadcaster.textContent}`;
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname === "/market") {
       presenceData.state = "Community Market.";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/market/listings")) {
       itemName = document.querySelector("#largeiteminfo_item_name");
 
@@ -176,15 +174,15 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Community Market.";
 
-      presenceData.state = `${itemName.innerText} (${itemPrice.innerText}).`;
+      presenceData.state = `${itemName.textContent} (${itemPrice.textContent}).`;
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname === "/workshop/") {
       presenceData.details = "Steam Workshop";
 
       presenceData.state = "Home";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/workshop/filedetails")) {
       workshop = document.querySelector(
         "#mainContents > div.workshopItemDetailsHeader > div.workshopItemTitle"
@@ -192,9 +190,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Steam Workshop";
 
-      presenceData.state = workshop.innerText;
+      presenceData.state = workshop.textContent;
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/workshop/discussions")) {
       AppName = document.querySelector(
         "div.apphub_HeaderTop.workshop > div.apphub_AppName.ellipsis"
@@ -202,9 +200,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Steam Workshop";
 
-      presenceData.state = `Discussions - ${AppName.innerText}`;
+      presenceData.state = `Discussions - ${AppName.textContent}`;
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/workshop/about")) {
       AppName = document.querySelector(
         "div.apphub_HeaderTop.workshop > div.apphub_AppName.ellipsis"
@@ -212,9 +210,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Steam Workshop";
 
-      presenceData.state = `About - ${AppName.innerText}`;
+      presenceData.state = `About - ${AppName.textContent}`;
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   } else if (document.location.hostname === "store.steampowered.com") {
     presenceData.details = "Steam Store";
@@ -222,114 +220,114 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname === "/" || !document.location.pathname) {
       presenceData.state = "Home";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/app/")) {
       AppName = document.querySelector(
         "div.page_title_area.game_title_area.page_content > div.apphub_HomeHeaderContent > div > div.apphub_AppName"
       );
 
-      presenceData.state = AppName.innerText;
+      presenceData.state = AppName.textContent;
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/cart")) {
       presenceData.state = "Cart";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/checkout")) {
       presenceData.state = "Checkout";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/wishlist")) {
       presenceData.state = "Looking at a wishlist.";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/games")) {
       presenceData.state = "Browsing games...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/genre")) {
-      const parts = document.location.href.split("/"),
-        result = parts[parts.length - 2].replace(/%20/g, " ");
+      const parts = document.location.href.split("/");
 
-      presenceData.state = `Genre: ${result}`;
+      presenceData.state = `Genre: ${parts[parts.length - 2].replace(
+        /%20/g,
+        " "
+      )}`;
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/demos")) {
       presenceData.state = "Browsing demos...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/vr")) {
       presenceData.state = "Browsing VR games...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/pccafe")) {
       presenceData.state = "Browsing PC Cafe games...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/tags")) {
-      const parts = document.location.href.split("/"),
-        result = parts[parts.length - 2]
-          .replace(/%20/g, " ")
-          .replace(/%26/g, "&");
+      const parts = document.location.href.split("/");
 
-      presenceData.state = result;
+      presenceData.state = parts[parts.length - 2]
+        .replace(/%20/g, " ")
+        .replace(/%26/g, "&");
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/macos")) {
       presenceData.state = "Browsing Mac OS X games...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/linux")) {
       presenceData.state = "Browsing Linux + Steam OS games...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/software")) {
       presenceData.state = "Software";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/controller")) {
       presenceData.state = "Steam Controller friendly games.";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/valveindex")) {
       presenceData.state = "Browsing Steam Controllers...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/steamlink")) {
       presenceData.state = "Steam Link";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/news")) {
       presenceData.state = "Reading the news...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/about")) {
       presenceData.state = "About";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/recommended")) {
       presenceData.state = "Browsing recommended games...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/explore")) {
       presenceData.state = "Exploring games...";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/updated")) {
       presenceData.state = "Recently updated games.";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/stats")) {
       presenceData.state = "Steam & Games Stats.";
 
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/search")) {
-      const searchURL = new URL(document.location.href),
-        searchResult = searchURL.searchParams.get("term");
+      presenceData.state = `Searching for ${new URL(
+        document.location.href
+      ).searchParams.get("term")}`;
 
-      presenceData.state = `Searching for ${searchResult}`;
-
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
 
       presenceData.smallImageKey = "search";
     }

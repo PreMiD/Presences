@@ -6,50 +6,49 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
   }),
-  elapsed = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let title;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
     video: HTMLVideoElement = document.querySelector(".aPWk0-TaQEzvggxIT6qvP");
   if (video && !isNaN(video.duration)) {
-    const Ad = document.querySelector("._3uUpH58Juk_Qbizq6j5ThG")
-      ? true
-      : false;
-    if (!Ad) {
-      const path = document.location.pathname;
-      if (path.includes("/live/")) {
+    if (!document.querySelector("._3uUpH58Juk_Qbizq6j5ThG")) {
+      if (document.location.pathname.includes("/live/")) {
         title = document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ").textContent;
-        data.smallImageKey = "live";
-        data.smallImageText = (await strings).live;
-        data.startTimestamp = elapsed;
+        presenceData.smallImageKey = "live";
+        presenceData.smallImageText = (await strings).live;
+        presenceData.startTimestamp = browsingTimestamp;
       } else {
         title = document.querySelector(".bodyTitle___DZEtt").textContent;
-        const [, endTimestamp] = presence.getTimestamps(
+
+        presenceData.smallImageKey = video.paused ? "pause" : "play";
+        presenceData.smallImageText = video.paused
+          ? (await strings).pause
+          : (await strings).play;
+        [, presenceData.endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
-        data.smallImageKey = video.paused ? "pause" : "play";
-        data.smallImageText = video.paused
-          ? (await strings).pause
-          : (await strings).play;
-        data.endTimestamp = endTimestamp;
       }
       const subtitle = document.querySelector(
         "._39WJKEhrSYo7ftwMlFjZtA  ._3tdt8zwgvMCJ6v_sElXneQ"
       ).textContent;
-      data.details = title;
-      data.state = subtitle;
+      presenceData.details = title;
+      presenceData.state = subtitle;
 
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
-      if (title !== null && subtitle !== null)
-        presence.setActivity(data, !video.paused);
-    } else (data.details = "Watching an Ad"), presence.setActivity(data);
-  } else (data.details = "Browsing..."), presence.setActivity(data);
+      if (title && subtitle) presence.setActivity(presenceData, !video.paused);
+    } else {
+      (presenceData.details = "Watching an Ad"),
+        presence.setActivity(presenceData);
+    }
+  } else
+    (presenceData.details = "Browsing..."), presence.setActivity(presenceData);
 });

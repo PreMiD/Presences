@@ -20,38 +20,39 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "animeflv"
   };
 
   if (
-    video !== null &&
+    video &&
     !isNaN(video.duration) &&
     document.location.pathname.includes("/ver")
   ) {
-    [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
-    data.details = document.querySelector(
+    presenceData.details = document.querySelector(
       "#XpndCn .Title, .CapiCnt .Title"
     ).textContent;
-    data.smallImageKey = video.paused ? "pause" : "play";
-    data.smallImageText = video.paused
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
 
     if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setActivity(data, !video.paused);
+    presence.setActivity(presenceData, !video.paused);
   } else {
-    data.details = (await strings).browsing;
-    data.smallImageKey = "search";
-    data.smallImageText = (await strings).browsing;
-    presence.setActivity(data);
+    presenceData.details = (await strings).browsing;
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = (await strings).browsing;
+    presence.setActivity(presenceData);
   }
 });

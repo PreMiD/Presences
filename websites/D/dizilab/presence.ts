@@ -194,12 +194,6 @@ presence.on("UpdateData", async () => {
               ).textContent
             }. Bölüm`
           : "none found",
-      fixedEpisodeName = episodeX
-        .replace(/\n/g, "")
-        .replace(/-/g, "")
-        .replace(title.textContent, "")
-        .replace(" ", "")
-        .trim(),
       timestamps = presence.getTimestamps(
         Math.floor(_video.currentTime),
         Math.floor(_video.duration)
@@ -207,7 +201,12 @@ presence.on("UpdateData", async () => {
       data: { [k: string]: boolean | string | number } = {
         largeImageKey: "dl-logo",
         details: title.textContent,
-        state: fixedEpisodeName,
+        state: episodeX
+          .replace(/\n/g, "")
+          .replace(/-/g, "")
+          .replace(title.textContent, "")
+          .replace(" ", "")
+          .trim(),
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
           ? (await strings).pause
@@ -222,9 +221,6 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    presence.setTrayTitle(
-      video.paused ? "" : `${title.textContent} - ${fixedEpisodeName}`
-    );
     presence.setActivity(data);
   } else if (isVideoData) {
     const title =
@@ -263,20 +259,19 @@ presence.on("UpdateData", async () => {
           : null;
 
     if (title && title.textContent !== "" && episodeX) {
-      const fixedEpisodeName = episodeX
-          .replace(/\n/g, "")
-          .replace(/-/g, "")
-          .replace(title.textContent, "")
-          .replace(" ", "")
-          .trim(),
-        timestamps = presence.getTimestamps(
+      const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        data: PresenceData = {
+        presenceData: PresenceData = {
           largeImageKey: "dl-logo",
           details: title.textContent,
-          state: fixedEpisodeName,
+          state: episodeX
+            .replace(/\n/g, "")
+            .replace(/-/g, "")
+            .replace(title.textContent, "")
+            .replace(" ", "")
+            .trim(),
           smallImageKey: video.paused ? "pause" : "play",
           smallImageText: video.paused
             ? (await strings).pause
@@ -284,17 +279,13 @@ presence.on("UpdateData", async () => {
         };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
-        [data.startTimestamp, data.endTimestamp] = timestamps;
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
-
-      presence.setTrayTitle(
-        video.paused ? "" : `${title.textContent} - ${fixedEpisodeName}`
-      );
-      presence.setActivity(data);
+      presence.setActivity(presenceData);
     } else {
       presence.setActivity({
         largeImageKey: "dl-logo",

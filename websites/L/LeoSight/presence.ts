@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "888141162488143893"
   }),
-  time = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let item, item2;
 presence.on("UpdateData", async () => {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "lslogo",
       smallImageKey: "lsminilogo",
       smallImageText: "leosight.cz",
-      startTimestamp: time
+      startTimestamp: browsingTimestamp
     },
     path = document.location.pathname;
   if (
@@ -33,8 +33,8 @@ presence.on("UpdateData", async () => {
     item2 = document.querySelector(
       "div.col-md-3.pull-left span.authorname"
     ) as HTMLElement;
-    presenceData.details = item.innerText;
-    presenceData.state = `Autor článku: ${item2.innerText}`;
+    presenceData.details = item.textContent;
+    presenceData.state = `Autor článku: ${item2.textContent}`;
   } else if (path.includes("editor/novy"))
     presenceData.details = "Píše nový článek";
   else if (path === "/forum") {
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
   ) {
     item = document.querySelector("div.obsah.text-left h3") as HTMLElement;
     presenceData.details = "Fórum";
-    presenceData.state = item.innerText;
+    presenceData.state = item.textContent;
   } else if (path === "/forum/new") {
     presenceData.details = "Fórum";
     presenceData.state = "Nejnovější témata";
@@ -56,8 +56,8 @@ presence.on("UpdateData", async () => {
     item2 = document.querySelector(
       "div.forum-message div.left a.pname"
     ) as HTMLElement;
-    presenceData.details = item.innerText;
-    presenceData.state = `Autor tématu: ${item2.innerText}`;
+    presenceData.details = item.textContent;
+    presenceData.state = `Autor tématu: ${item2.textContent}`;
   } else if (path === "/forum/43")
     presenceData.state = "Chystá se způsobit adminům deprese.";
   else if (path.includes("/newtopic"))
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
     else if (path.includes("all")) presenceData.state = "Vše";
     else if (path.includes("/shop/")) {
       item = document.querySelector("div.panel-body h3") as HTMLElement;
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
     }
   } else if (path === "/trade") presenceData.details = "Nabídky obchodu";
   else if (path === "/market") presenceData.details = "Tržiště";
@@ -87,10 +87,10 @@ presence.on("UpdateData", async () => {
   else if (path.includes("/tym")) {
     item = document.querySelector("div.obsah.text-center p") as HTMLElement;
     item2 = document.querySelector("div.obsah.text-center h2") as HTMLElement;
-    if (item2.innerText === "Týmy") presenceData.details = "Prohlíží si týmy";
+    if (item2.textContent === "Týmy") presenceData.details = "Prohlíží si týmy";
     else {
       presenceData.details = "Prohlíží si tým:";
-      presenceData.state = `${item.innerText} (${item2.innerText})`;
+      presenceData.state = `${item.textContent} (${item2.textContent})`;
     }
   } else if (path === "/ucp") presenceData.details = "Uživatelský panel";
   else if (path === "/prospect") presenceData.details = "Prospect";
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
           "div.obsah.text-center h2"
         )[1] as HTMLElement;
         presenceData.details = "Prohlíží si frakci";
-        presenceData.state = item.innerText;
+        presenceData.state = item.textContent;
       }
     } else if (path.includes("/auta")) presenceData.state = "Seznam vozidel";
     else if (path.includes("/interiery"))
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
   else if (path.includes("/profil/")) {
     item = document.querySelector(".on-pname") as HTMLElement;
     presenceData.details = "Prohlíží si profil uživatele:";
-    presenceData.state = item.innerText;
+    presenceData.state = item.textContent;
   } else if (path === "/pratele") presenceData.details = "Seznam přátel";
   else if (path === "/avatar") presenceData.details = "Nastavuje si avatar";
   else if (path === "/profil") presenceData.details = "Prohlíží si svůj profil";
