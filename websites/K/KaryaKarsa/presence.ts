@@ -109,9 +109,9 @@ const presence = new Presence({
       }[];
     }[]
   ): string => {
-    const result = arrayPath.find((p) => p.name === paths[1]);
+    const result = arrayPath.find(p => p.name === paths[1]);
     return (
-      result.paths?.find((p) => {
+      result.paths?.find(p => {
         const b: boolean = p.name === (paths[2] ?? "");
         if (!b && !!paths[2]) return p.name === "*";
         return b;
