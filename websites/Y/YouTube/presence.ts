@@ -225,6 +225,9 @@ presence.on("UpdateData", async () => {
         unlistedBadgeElement !== null &&
         unlistedPathElement.getAttribute("d") ===
           unlistedBadgeElement.getAttribute("d"),
+      videoId = document
+      .querySelector("#page-manager > ytd-watch-flexy")
+      .getAttribute("video-id"),
       presenceData: PresenceData = {
         details: vidDetail
           .replace("%title%", finalTitle)
@@ -232,7 +235,7 @@ presence.on("UpdateData", async () => {
         state: vidState
           .replace("%title%", finalTitle)
           .replace("%uploader%", finalUploader),
-        largeImageKey: "yt_lg",
+        largeImageKey: unlistedVideo ? "yt_lg" : `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
         smallImageKey: video.paused
           ? "pause"
           : video.loop
@@ -282,6 +285,7 @@ presence.on("UpdateData", async () => {
       else presenceData.details = (await strings).watchVid;
 
       delete presenceData.state;
+      presenceData.largeImageKey = "yt_lg";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
@@ -293,9 +297,7 @@ presence.on("UpdateData", async () => {
               : (await strings).watchVideoButton,
             url: document.URL.includes("/watch?v=")
               ? document.URL.split("&")[0]
-              : `https://www.youtube.com/watch?v=${document
-                  .querySelector("#page-manager > ytd-watch-flexy")
-                  .getAttribute("video-id")}`
+              : `https://www.youtube.com/watch?v=${videoId}`
           },
           {
             label: (await strings).viewChannelButton,
