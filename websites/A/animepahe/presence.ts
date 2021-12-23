@@ -274,6 +274,8 @@ presence.on("UpdateData", async () => {
 
                 presenceData.state = title;
 
+                presenceData.largeImageKey = (document.getElementsByClassName("youtube-preview")[0] as HTMLAnchorElement).href;
+
                 presenceData.smallImageKey = "presence_browsing_season";
                 presenceData.smallImageText = strings.browse;
 
@@ -318,6 +320,8 @@ presence.on("UpdateData", async () => {
         } else presenceData.details = strings.watchingMovie;
 
         presenceData.state = title;
+
+        presenceData.largeImageKey = (document.getElementsByClassName("anime-poster")[0] as HTMLImageElement).src.replace(".th","");
 
         presenceData.smallImageKey = `presence_playback_${
           iframeResponse.paused ? "paused" : "playing"
