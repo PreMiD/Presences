@@ -34,11 +34,10 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browsing LucidChart Blogs";
     presenceData.state = "Viewing all blogs";
   } else if (path.startsWith("/blog/")) {
-    const title = document
-      .getElementsByClassName("main-article")[0]
-      .getElementsByTagName("h1")[0].innerText;
     presenceData.details = "Reading a LucidChart Blog";
-    presenceData.state = title;
+    presenceData.state = document
+      .getElementsByClassName("main-article")[0]
+      .getElementsByTagName("h1")[0].textContent;
   } else if (path === "/pages/tour") {
     presenceData.details = "Browsing LucidChart";
     presenceData.state = "Viewing examples";
@@ -52,13 +51,10 @@ presence.on("UpdateData", () => {
     presenceData.details = "Editing a document";
     presenceData.state = "Viewing documents";
   } else if (path.startsWith("/documents/edit/")) {
-    const title = document.title.replace(": Lucidchart", "");
     presenceData.details = "Editing a document";
-    presenceData.state = title;
+    presenceData.state = document.title.replace(": Lucidchart", "");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

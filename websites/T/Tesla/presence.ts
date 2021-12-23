@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "829056927227969596"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
   const setTimeElapsed = await presence.getSetting("timeElapsed"),
@@ -52,10 +52,10 @@ presence.on("UpdateData", async function () {
     ],
     urlpNum = new RegExp(langs.join("|")).test(urlpath[1]) ? 2 : 1,
     presenceData: PresenceData = {
-      largeImageKey: logoArr[setLogo] || "logo_red"
+      largeImageKey: logoArr[setLogo] ?? "logo_red"
     };
 
-  if (setTimeElapsed) presenceData.startTimestamp = browsingStamp;
+  if (setTimeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (window.location.hostname === "www.tesla.com") {
     if (!urlpath[urlpNum]) presenceData.details = "Home";
@@ -203,17 +203,15 @@ presence.on("UpdateData", async function () {
     else if (urlpath[urlpNum] === "charging") presenceData.details = "Charging";
     else if (urlpath[urlpNum] === "home-charging")
       presenceData.details = "Wall Connector";
-    else {
-      if (document.querySelector(".error-container>.error-code")) {
-        const error = document.querySelector(
-          ".error-container>.error-code"
-        ).textContent;
-        if (error === "404") {
-          (presenceData.details = "Error 404"),
-            (presenceData.state = "Page not found");
-        }
-      } else presenceData.details = "Other";
-    }
+    else if (document.querySelector(".error-container>.error-code")) {
+      if (
+        document.querySelector(".error-container>.error-code").textContent ===
+        "404"
+      ) {
+        (presenceData.details = "Error 404"),
+          (presenceData.state = "Page not found");
+      }
+    } else presenceData.details = "Other";
   } else if (window.location.hostname === "shop.tesla.com") {
     const num = urlpNum + 1;
 
@@ -246,21 +244,19 @@ presence.on("UpdateData", async function () {
       urlpath[urlpNum] === "checkout" &&
       urlpath[num] === "billing-shipping-info"
     ) {
-      const costs = setShowCheckout
-        ? ` (${
-            document.querySelector(
-              "span.ordersummary__container__order__details__line__total>span.inline-value"
-            ).textContent
-          })`
-        : "";
-
-      presenceData.state = `Checkout${costs}`;
+      presenceData.state = `Checkout${
+        setShowCheckout
+          ? ` (${
+              document.querySelector(
+                "span.ordersummary__container__order__details__line__total>span.inline-value"
+              ).textContent
+            })`
+          : ""
+      }`;
     } else if (urlpath[urlpNum] === "orders")
       presenceData.state = "Order History";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

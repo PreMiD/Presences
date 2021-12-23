@@ -1,4 +1,4 @@
-((iframe) =>
+(iframe =>
   iframe.on("UpdateData", () => {
     const video = document.querySelector("video");
     if (video) {

@@ -1,34 +1,34 @@
 const presence = new Presence({
     clientId: "775356824240128021"
   }),
-  skinNames = new Map<string, string>();
-skinNames.set("Angel", "angel");
-skinNames.set("Blue Racer", "blue_racer");
-skinNames.set("Bumble Bee", "bumble_bee");
-skinNames.set("Candy Cane", "candy_cane");
-skinNames.set("Jack-o'-lantern", "jack-o_-lantern");
-skinNames.set("Joker", "joker");
-skinNames.set("Jungle Leaf", "jungle_leaf");
-skinNames.set("O Christmas Tree", "o_christmas_tree");
-skinNames.set("Poopy", "poopy");
-skinNames.set("Red&Yellow", "red_yellow");
-skinNames.set("Robot", "robot");
-skinNames.set("Spider Curve", "spider_curve");
-skinNames.set("Starfish", "starfish");
-skinNames.set("The Mummy", "the_mummy");
-skinNames.set("Think Pink", "think_pink");
-skinNames.set("Vampire", "vampire");
-skinNames.set("VIP Gold", "vip_gold");
-skinNames.set("Witchy Cauldron", "witchy_cauldron");
-skinNames.set("Zombie Hand", "zombie_hand");
-skinNames.set("Ice-Cream", "ice-cream");
-skinNames.set("Pineapple", "pineapple");
-skinNames.set("Rasta", "rasta");
+  skinNames = new Map<string, string>()
+    .set("Angel", "angel")
+    .set("Blue Racer", "blue_racer")
+    .set("Bumble Bee", "bumble_bee")
+    .set("Candy Cane", "candy_cane")
+    .set("Jack-o'-lantern", "jack-o_-lantern")
+    .set("Joker", "joker")
+    .set("Jungle Leaf", "jungle_leaf")
+    .set("O Christmas Tree", "o_christmas_tree")
+    .set("Poopy", "poopy")
+    .set("Red&Yellow", "red_yellow")
+    .set("Robot", "robot")
+    .set("Spider Curve", "spider_curve")
+    .set("Starfish", "starfish")
+    .set("The Mummy", "the_mummy")
+    .set("Think Pink", "think_pink")
+    .set("Vampire", "vampire")
+    .set("VIP Gold", "vip_gold")
+    .set("Witchy Cauldron", "witchy_cauldron")
+    .set("Zombie Hand", "zombie_hand")
+    .set("Ice-Cream", "ice-cream")
+    .set("Pineapple", "pineapple")
+    .set("Rasta", "rasta");
 
 let lastlobbyName = "",
   lastName = "Unnamed";
 
-const data: PresenceData = {
+const presenceData: PresenceData = {
   largeImageKey: "index",
   startTimestamp: Date.now(),
   details: "Main Menu",
@@ -36,10 +36,8 @@ const data: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });
 
 function RefreshData() {
@@ -55,12 +53,12 @@ function RefreshData() {
         : "skin_unknown",
       lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 
-    data.details = "Picking Powers";
-    data.state = `In Lobby, ${lobbyName} (${userRows.length}/6)`;
+    presenceData.details = "Picking Powers";
+    presenceData.state = `In Lobby, ${lobbyName} (${userRows.length}/6)`;
 
     if (skinNames.has(skinName)) {
-      data.smallImageKey = skinNames.get(skinName);
-      data.smallImageText = `Playing as ${skinName}`;
+      presenceData.smallImageKey = skinNames.get(skinName);
+      presenceData.smallImageText = `Playing as ${skinName}`;
     }
 
     lastlobbyName = lobbyName;
@@ -74,32 +72,38 @@ function RefreshData() {
         playerCount++;
     }
 
-    data.details = "Ready In Lobby";
-    data.state = `${lobbyName} (${playerCount}/6)`;
+    presenceData.details = "Ready In Lobby";
+    presenceData.state = `${lobbyName} (${playerCount}/6)`;
     lastlobbyName = lobbyName;
   } else if (statePage === "in_game") {
-    data.details = "Playing";
-    data.state = lastlobbyName;
+    presenceData.details = "Playing";
+    presenceData.state = lastlobbyName;
   } else if (statePage === "in_game_finished") {
-    data.details = "Checking Match Results";
-    data.state = lastlobbyName;
+    presenceData.details = "Checking Match Results";
+    presenceData.state = lastlobbyName;
   } else {
     const [nickElement] = document.getElementsByClassName("c-user__name");
     lastName = nickElement ? nickElement.textContent : "Unnamed";
-    data.state = lastName;
+    presenceData.state = lastName;
   }
 
-  if (statePage === "in_menu") data.details = "Main Menu";
-  else if (statePage === "browsing_lobbies") data.details = "Browsing Lobbies";
-  else if (statePage === "in_shop") data.details = "In Shop";
-  else if (statePage === "in_leaderboard") data.details = "In Leaderboards";
-  else if (statePage === "in_locker") data.details = "In Locker";
-  else if (statePage === "in_battlepass") data.details = "In Battlepass";
-  else if (statePage === "in_progress") data.details = "Checking XP Progress";
-  else if (statePage === "opening_crates") data.details = "Opening Crates";
-  else if (statePage === "creating_match") data.details = "Creating Match";
+  if (statePage === "in_menu") presenceData.details = "Main Menu";
+  else if (statePage === "browsing_lobbies")
+    presenceData.details = "Browsing Lobbies";
+  else if (statePage === "in_shop") presenceData.details = "In Shop";
+  else if (statePage === "in_leaderboard")
+    presenceData.details = "In Leaderboards";
+  else if (statePage === "in_locker") presenceData.details = "In Locker";
+  else if (statePage === "in_battlepass")
+    presenceData.details = "In Battlepass";
+  else if (statePage === "in_progress")
+    presenceData.details = "Checking XP Progress";
+  else if (statePage === "opening_crates")
+    presenceData.details = "Opening Crates";
+  else if (statePage === "creating_match")
+    presenceData.details = "Creating Match";
 
-  data.largeImageKey = "index";
+  presenceData.largeImageKey = "index";
 }
 
 function getActualGamePage() {

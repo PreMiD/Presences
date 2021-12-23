@@ -14,39 +14,35 @@ let radioStation = "",
 presence.on("UpdateData", async () => {
   // code
   const preStrings = await _preStrings,
-    streamPlayer = document.getElementById("stream-player") as HTMLElement,
-    whenPlayerIsOn = streamPlayer.style.display,
-    state: PresenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "largeimage"
     };
 
   // In Radio
-  if (whenPlayerIsOn === "block") {
-    const _showTitle = document.querySelector(
-        "a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"
-      ) as HTMLElement,
-      showTitle = _showTitle.textContent,
-      [codeChannel] = document
-        .querySelector("a.slick-slide:nth-child(1)")
-        .getAttribute("href")
-        .split("/")
-        .slice(-1),
-      ifPlayed = document
-        .querySelector(".icon--play-02")
-        .classList.contains("on");
+  if (
+    (document.getElementById("stream-player") as HTMLElement).style.display ===
+    "block"
+  ) {
+    const [codeChannel] = document
+      .querySelector("a.slick-slide:nth-child(1)")
+      .getAttribute("href")
+      .split("/")
+      .slice(-1);
     // If play
-    if (ifPlayed) {
+    if (document.querySelector(".icon--play-02").classList.contains("on")) {
       // This logic make timestamp can't changed.
       if (codeChannel !== radioStation) {
         radioStation = codeChannel;
         startTimeStamp = new Date().getTime();
       }
 
-      state.details = `Listening to ${radioStation} channel.`;
-      state.state = showTitle;
-      state.smallImageKey = "spiriteplay";
-      state.smallImageText = preStrings.play;
-      state.startTimestamp = startTimeStamp;
+      presenceData.details = `Listening to ${radioStation} channel.`;
+      presenceData.state = document.querySelector<HTMLElement>(
+        "a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"
+      ).textContent;
+      presenceData.smallImageKey = "spiriteplay";
+      presenceData.smallImageText = preStrings.play;
+      presenceData.startTimestamp = startTimeStamp;
     } else {
       // If pause
       if (codeChannel !== "___PAUSED___") {
@@ -54,17 +50,17 @@ presence.on("UpdateData", async () => {
         startTimeStamp = new Date().getTime();
       }
 
-      state.details = "Paused.";
-      state.state = `${codeChannel} channel.`;
-      state.smallImageKey = "spiritepause";
-      state.smallImageText = preStrings.pause;
+      presenceData.details = "Paused.";
+      presenceData.state = `${codeChannel} channel.`;
+      presenceData.smallImageKey = "spiritepause";
+      presenceData.smallImageText = preStrings.pause;
     }
   } else {
     // Idling state
-    state.details = "Idling";
-    state.smallImageKey = "spiriteidling";
-    state.smallImageText = preStrings.browsing;
+    presenceData.details = "Idling";
+    presenceData.smallImageKey = "spiriteidling";
+    presenceData.smallImageText = preStrings.browsing;
   }
 
-  presence.setActivity(state);
+  presence.setActivity(presenceData);
 });

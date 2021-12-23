@@ -273,8 +273,6 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -10,13 +10,12 @@ iframe.on("UpdateData", async () => {
     hostname === "ninjastream.to"
   ) {
     const video = document.querySelector("video");
-    if (video !== null) {
-      const played = video.currentTime !== 0;
+    if (video) {
       iframe.send({
         currentTime: video.currentTime,
         timeEnd: video.duration,
         paused: video.paused,
-        played
+        played: video.currentTime !== 0
       });
     }
   }

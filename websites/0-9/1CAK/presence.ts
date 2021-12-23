@@ -6,8 +6,7 @@ const presence = new Presence({
   };
 
 presence.on("UpdateData", async () => {
-  const startTimestamp: number = Date.now();
-  presenceData.startTimestamp = startTimestamp;
+  presenceData.startTimestamp = Date.now();
   switch (
     document.location.pathname.endsWith("/") &&
     document.location.pathname.length > 1
@@ -84,21 +83,19 @@ presence.on("UpdateData", async () => {
     if (!document.querySelector("#content > p"))
       presenceData.details = "My funned funs";
   } else if (!isNaN(parseInt(document.location.pathname.slice(1)))) {
-    const author = document
+    presenceData.details = `Viewing ${document
       .querySelector(
         "#content > div > table > tbody > tr > td > div > .blur a > b"
       )
-      .textContent.trim();
-    presenceData.details = `Viewing ${author}'s fun`;
+      .textContent.trim()}'s fun`;
   } else if (document.location.pathname.slice(1).startsWith("legendary"))
     presenceData.details = "Viewing the most legendary fun";
   else if (document.location.pathname.slice(1).startsWith("search")) {
-    const query = document.location.pathname.slice(
+    presenceData.details = "Searching fun:";
+    presenceData.state = document.location.pathname.slice(
       10,
       document.location.pathname.length
     );
-    presenceData.details = "Searching fun:";
-    presenceData.state = query;
   }
   presence.setActivity(presenceData);
 });

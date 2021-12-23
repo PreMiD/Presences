@@ -1,14 +1,13 @@
 const presence = new Presence({
     clientId: "684174415415476240"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "nwbig"
+    largeImageKey: "nwbig",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname.includes("/review")) {
     const title = document.querySelector(
@@ -18,7 +17,7 @@ presence.on("UpdateData", async () => {
         "#descriptionDiv > div.card__body > div > h4"
       ),
       location = document.querySelector(".flex-map-row > span:nth-child(2)");
-    if (title !== null && description !== null && location !== null) {
+    if (title && description && location) {
       presenceData.largeImageKey = "wayfarer";
       presenceData.smallImageKey = "nw";
       presenceData.details = `Reviewing: ${title.textContent}`;
@@ -50,8 +49,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/")
     presenceData.details = "Viewing the showcased wayspots...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

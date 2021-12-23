@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "887975742812590120"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const showTimestamp: boolean = await presence.getSetting("timestamp"),
@@ -88,9 +88,10 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname === "/")
       presenceData.details = "Viewing help page";
     else if (document.location.pathname.includes("/widgets/")) {
-      const [, helpWidget] = document.location.href.split("/widgets/");
       presenceData.details = "Viewing help info...";
-      presenceData.state = `Widget: ${helpWidget}`;
+      presenceData.state = `Widget: ${
+        document.location.href.split("/widgets/")[1]
+      }`;
     }
   } else if (document.location.hostname === "status.caards.me") {
     if (document.location.pathname === "/")
@@ -98,10 +99,8 @@ presence.on("UpdateData", async () => {
   }
 
   if (!showButtons) delete presenceData.buttons;
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

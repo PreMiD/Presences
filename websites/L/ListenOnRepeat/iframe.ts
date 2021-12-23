@@ -1,7 +1,7 @@
 const iframe = new iFrame();
 iframe.on("UpdateData", async () => {
   let video: HTMLVideoElement;
-  if (document.querySelector(".video") !== null) {
+  if (document.querySelector(".video")) {
     video = document.querySelector(".video");
     if (video && !isNaN(video.duration)) {
       iframe.send({
@@ -13,9 +13,7 @@ iframe.on("UpdateData", async () => {
         }
       });
     }
-  } else if (
-    document.querySelector("body > div > div > div > video") !== null
-  ) {
+  } else if (document.querySelector("body > div > div > div > video")) {
     video = document.querySelector("body > div > div > div > video");
     if (video && !isNaN(video.duration)) {
       iframe.send({

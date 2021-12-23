@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "651135297756856339"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let title;
 const actionURL = new URL(document.location.href),
   title2URL = new URL(document.location.href);
@@ -21,11 +21,11 @@ presence.on("UpdateData", async () => {
     document.location.pathname === "/wiki/동방위키:대문"
   ) {
     presenceData.state = "Main Page | Home";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (title && document.location.pathname.includes("/wiki/")) {
     presenceData.details = "Reading about:";
-    presenceData.state = title.innerText;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = title.textContent;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     actionResult === "history" &&
     title2Result &&
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title2Result.replace(/_/g, " ");
     else presenceData.state = title2Result;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     actionResult === "edit" &&
     title2Result &&
@@ -47,11 +47,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = title2Result.replace(/_/g, " ");
     else presenceData.state = title2Result;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

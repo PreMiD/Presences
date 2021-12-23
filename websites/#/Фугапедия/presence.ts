@@ -4,11 +4,7 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const [
-      privacyMode,
-      showTime,
-      showButtons
-    ] = await Promise.all([
+  const [privacyMode, showTime, showButtons] = await Promise.all([
       presence.getSetting("privacyMode"),
       presence.getSetting("showTime"),
       presence.getSetting("showButtons")
@@ -24,7 +20,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Читает статью";
     if (!privacyMode) {
       // An article title
-      presenceData.state = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
+      presenceData.state = document.querySelector(
+        "p.text-4xl.font-bold.font-3"
+      ).textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -38,7 +36,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Смотрит правку";
     if (!privacyMode) {
       // An edit title
-      presenceData.state = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
+      presenceData.state = document.querySelector(
+        "p.text-4xl.font-bold.font-3"
+      ).textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -52,7 +52,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Смотрит категорию";
     if (!privacyMode) {
       // A category name
-      presenceData.state = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
+      presenceData.state = document.querySelector(
+        "p.text-4xl.font-bold.font-3"
+      ).textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -85,7 +87,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "В портале";
     if (!privacyMode) {
       // A portal name
-      presenceData.state = document.querySelector("p.text-4xl.font-semibold.text-white").textContent;
+      presenceData.state = document.querySelector(
+        "p.text-4xl.font-semibold.text-white"
+      ).textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -100,7 +104,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Читает книгу";
     if (!privacyMode) {
       // A book name
-      presenceData.state = document.querySelector("p.text-4xl.font-bold.font-3").textContent;
+      presenceData.state = document.querySelector(
+        "p.text-4xl.font-bold.font-3"
+      ).textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -116,10 +122,13 @@ presence.on("UpdateData", async () => {
     if (!privacyMode) {
       presenceData.state = `${
         // A user nickname
-        document.querySelector("p.text-2xl.text-black.font-medium.ml-4.place-self-center").firstChild.textContent
+        document.querySelector(
+          "p.text-2xl.text-black.font-medium.ml-4.place-self-center"
+        ).firstChild.textContent
       } (${
         // A user name
-        document.querySelector("p.text-lg.text-gray-600.ml-4.place-self-center").textContent
+        document.querySelector("p.text-lg.text-gray-600.ml-4.place-self-center")
+          .textContent
       })`;
       if (showButtons) {
         presenceData.buttons = [
@@ -140,11 +149,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Читает условия";
     presenceData.state = "размещения рекламы";
   } else if (path === "/account") {
-    if (document.querySelector("#admintools")) presenceData.details = "Что-то делает в админ-панели";
+    if (document.querySelector("#admintools"))
+      presenceData.details = "Что-то делает в админ-панели";
     else presenceData.details = "Редактирует свой аккаунт";
-  } else if (path === "/sub") presenceData.details = "Собирается купить подписку";
+  } else if (path === "/sub")
+    presenceData.details = "Собирается купить подписку";
   else if (path === "/upload") presenceData.details = "Загружает изображение";
-  else if (path === "/api.php") presenceData.details = "Читает документацию API";
+  else if (path === "/api.php")
+    presenceData.details = "Читает документацию API";
   else presenceData.details = "Что-то делает на Фугапедии";
 
   presence.setActivity(presenceData);

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "813518808634621952"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let details: string,
   state: string,
@@ -54,13 +54,10 @@ presence.on("UpdateData", async () => {
     state = userCount === 0 ? "Alone" : `With ${userCount} others`;
 
     /* This is executed if the user plays a game that is not in the "Special Activities" Array */
-    if (activityName !== null && !noGames.includes(activityName.textContent)) {
+    if (activityName && !noGames.includes(activityName.textContent)) {
       details = `Playing ${activityName.textContent}`;
       smallImageKey = "gamepad";
-    } else if (
-      activityName !== null &&
-      noGames.includes(activityName.textContent)
-    ) {
+    } else if (activityName && noGames.includes(activityName.textContent)) {
       switch (
         activityName.textContent /* Proper Grammar for the Activities */
       ) {
@@ -88,11 +85,9 @@ presence.on("UpdateData", async () => {
     smallImageKey,
     details,
     state,
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "711175341825064970"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean,
   currentTime: number,
   duration: number,
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo_ds" // Banner
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname === "/") {
     // dreamsub.stream/
@@ -131,10 +131,6 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/search")) {
     // Ricerca per tipo, categoria e nome
 
-    const searching = document.querySelector(
-      "#main-content > center > h3"
-    ).textContent;
-
     if (document.location.href.includes("tv")) {
       // Ricerca TV
 
@@ -201,7 +197,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.href.includes("/search")) {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Cercando:" + "\n";
-      presenceData.details = searching;
+      presenceData.details = document.querySelector(
+        "#main-content > center > h3"
+      ).textContent;
       presenceData.state = "su Dreamsub";
     }
   } else if (
@@ -212,17 +210,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("ona")
   ) {
     //Visualizzazione anime
-    const type = document.querySelector(
-        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(1)"
-      ).textContent,
-      episodes = document.querySelector(
-        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(2)"
-      ).textContent,
-      releaseDate = document.querySelector(
-        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
-      ).textContent,
-      vote = document.querySelector("#vote_percent").textContent,
-      timestamps = presence.getTimestamps(
+    const timestamps = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       ),
@@ -234,8 +222,19 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = animepreviewname;
     presenceData.details = `Sta per guardare:\n${animepreviewname}`;
     presenceData.state =
-      `Per più informazioni 🎦\n${type}\n${episodes}\n${releaseDate}\n` +
-      `Voto: ${vote}`;
+      `Per più informazioni 🎦\n${
+        document.querySelector(
+          "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(1)"
+        ).textContent
+      }\n${
+        document.querySelector(
+          "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(2)"
+        ).textContent
+      }\n${
+        document.querySelector(
+          "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
+        ).textContent
+      }\n` + `Voto: ${document.querySelector("#vote_percent").textContent}`;
 
     if (iFrameVideo === true && !isNaN(duration)) {
       const [newname] = document.title.split(": Episodio"),
@@ -261,17 +260,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("movie")) {
     //Visualizzazione film
-    const type = document.querySelector(
-        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(1)"
-      ).textContent,
-      episodes = document.querySelector(
-        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(2)"
-      ).textContent,
-      releaseDate = document.querySelector(
-        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
-      ).textContent,
-      vote = document.querySelector("#vote_percent").textContent,
-      timestamps = presence.getTimestamps(
+    const timestamps = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       ),
@@ -283,8 +272,19 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = animepreviewname;
     presenceData.details = `Sta per guardare:\n${animepreviewname}`;
     presenceData.state =
-      `Per più informazioni 🎦\n${type}\n${episodes}\n${releaseDate}\n` +
-      `Voto: ${vote}`;
+      `Per più informazioni 🎦\n${
+        document.querySelector(
+          "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(1)"
+        ).textContent
+      }\n${
+        document.querySelector(
+          "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(2)"
+        ).textContent
+      }\n${
+        document.querySelector(
+          "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
+        ).textContent
+      }\n` + `Voto: ${document.querySelector("#vote_percent").textContent}`;
 
     if (iFrameVideo === true && !isNaN(duration)) {
       const newname = document.querySelector(
@@ -313,8 +313,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Navigando...";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

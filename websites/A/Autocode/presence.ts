@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: "858292108195921920" }),
-  supportedLanguages: Array<string> = [
+  supportedLanguages: string[] = [
     "js",
     "md",
     "json",
@@ -53,8 +53,6 @@ presence.on("UpdateData", async () => {
     else presenceData.largeImageKey = "autocode";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

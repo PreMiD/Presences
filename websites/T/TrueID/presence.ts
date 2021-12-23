@@ -111,18 +111,16 @@ presence.on("UpdateData", async () => {
         break;
     }
   } else if (path.hostname === "tv.trueid.net") {
-    const title =
-        document.querySelector(
-          "#__next > div > div.wrapper.-spacing > div.player-block.d-flex > div > div.desc-nowrap.d-flex > div.desc-block.title-middle > div > h1"
-        )?.textContent ?? "",
-      result = title.replace("ดูช่อง ", "").replace("ออนไลน์", "").split("–");
     switch (true) {
       case path.pathname.includes("live"):
         presenceData.details = `${
           lang === "th-th" ? "ดูทีวีออนไลน์" : "TV Online"
         }`;
         presenceData.state = `${lang === "th-th" ? "ช่อง" : "Channel"} ${
-          result[0]
+          document.querySelector(
+            "#__next > div > div.wrapper.-spacing > div.player-block.d-flex > div > div.desc-nowrap.d-flex > div.desc-block.title-middle > div > h1"
+          )?.textContent ??
+          "".replace("ดูช่อง ", "").replace("ออนไลน์", "").split("–")[0]
         }`;
         presenceData.smallImageKey = "live";
         if (buttons) {

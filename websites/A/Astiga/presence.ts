@@ -12,10 +12,7 @@ const presence = new Presence({
     return str.slice(0, str.indexOf(pattern));
   },
   getSeconds = function (minutes: number, seconds: number): number {
-    const minutesToSeconds = Number(Math.floor(minutes * 60)),
-      result = minutesToSeconds + Number(seconds);
-
-    return result;
+    return Number(Math.floor(minutes * 60)) + Number(seconds);
   },
   pattern = ":";
 
@@ -58,7 +55,7 @@ presence.on("UpdateData", async () => {
     "footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-album.menu-item"
   );
 
-  if (musicTitle.innerText.length > 1) {
+  if (musicTitle.textContent.length > 1) {
     play = document.querySelector(
       "footer > div.jp-controls > div.btn-music-container > div:nth-child(2) > a.jp-play.btn.btn-music.btn-sm"
     );
@@ -67,25 +64,28 @@ presence.on("UpdateData", async () => {
       "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time"
     );
 
-    currentMinutes = truncateAfter(currentMinutesString.innerText, pattern);
+    currentMinutes = truncateAfter(currentMinutesString.textContent, pattern);
 
     currentSecondsString = document.querySelector(
       "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time"
     );
 
-    currentSeconds = truncateBefore(currentSecondsString.innerText, pattern);
+    currentSeconds = truncateBefore(currentSecondsString.textContent, pattern);
 
     minutesDurationString = document.querySelector(
       "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration"
     );
 
-    minutesDuration = truncateAfter(minutesDurationString.innerText, pattern);
+    minutesDuration = truncateAfter(minutesDurationString.textContent, pattern);
 
     secondsDurationString = document.querySelector(
       "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration"
     );
 
-    secondsDuration = truncateBefore(secondsDurationString.innerText, pattern);
+    secondsDuration = truncateBefore(
+      secondsDurationString.textContent,
+      pattern
+    );
 
     currentTime = getSeconds(
       parseInt(currentMinutes),
@@ -102,23 +102,26 @@ presence.on("UpdateData", async () => {
       duration
     );
 
-    presenceData.details = `Song: ${musicTitle.innerText}`;
+    presenceData.details = `Song: ${musicTitle.textContent}`;
 
-    if (albumName.innerText.length > 0 && currentArtist.innerText.length > 0)
-      presenceData.state = `${currentArtist.innerText} / ${albumName.innerText}`;
-    else if (
-      albumName.innerText.length === 0 &&
-      currentArtist.innerText.length > 0
+    if (
+      albumName.textContent.length > 0 &&
+      currentArtist.textContent.length > 0
     )
-      presenceData.state = `${currentArtist.innerText} / No album`;
+      presenceData.state = `${currentArtist.textContent} / ${albumName.textContent}`;
     else if (
-      albumName.innerText.length > 0 &&
-      currentArtist.innerText.length === 0
+      albumName.textContent.length === 0 &&
+      currentArtist.textContent.length > 0
     )
-      presenceData.state = `No artist / ${albumName.innerText}`;
+      presenceData.state = `${currentArtist.textContent} / No album`;
     else if (
-      albumName.innerText.length === 0 &&
-      currentArtist.innerText.length === 0
+      albumName.textContent.length > 0 &&
+      currentArtist.textContent.length === 0
+    )
+      presenceData.state = `No artist / ${albumName.textContent}`;
+    else if (
+      albumName.textContent.length === 0 &&
+      currentArtist.textContent.length === 0
     )
       presenceData.state = "No artist / No album";
 
@@ -140,7 +143,7 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.details = "No music playing.";
 
-    presenceData.state = `Logged in user: ${currentUser.innerText}`;
+    presenceData.state = `Logged in user: ${currentUser.textContent}`;
   }
 
   presence.setActivity(presenceData);

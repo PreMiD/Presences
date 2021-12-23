@@ -1,4 +1,4 @@
-const yaay = new Presence({
+const presence = new Presence({
     clientId: "752933383411204196"
   }),
   yaayPages: { [key: string]: string } = {
@@ -16,7 +16,7 @@ const yaay = new Presence({
     "/explore": "Popüler 24"
   };
 
-yaay.on("UpdateData", () => {
+presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
       largeImageKey: "yaay-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
@@ -25,62 +25,56 @@ yaay.on("UpdateData", () => {
     userPage = document.querySelector(".profile_container");
 
   if (page.includes("/category/")) {
-    const categoryName = document.querySelector(
-      ".category_name > .text"
-    )?.textContent;
-
     presenceData.details = "Bir kategoriye göz atıyor:";
-    presenceData.state = categoryName || "Bilinmeyen Kategori";
+    presenceData.state =
+      document.querySelector(".category_name > .text")?.textContent ||
+      "Bilinmeyen Kategori";
 
-    yaay.setActivity(presenceData);
+    presence.setActivity(presenceData);
   } else if (page.includes("/explore/tag")) {
-    const tagName = document.querySelector(
-      ".feed_content > .hashtagpage_title"
-    )?.textContent;
-
     presenceData.details = "Bir başlığa göz atıyor:";
-    presenceData.state = tagName || "Bilinmeyen Başlık";
+    presenceData.state =
+      document.querySelector(".feed_content > .hashtagpage_title")
+        ?.textContent || "Bilinmeyen Başlık";
 
-    yaay.setActivity(presenceData);
+    presence.setActivity(presenceData);
   } else if (page.includes("/post/")) {
     const username =
-        document.querySelector("#postDetail .usernick")?.textContent ||
-        document.querySelector("#postDetail .username")?.textContent ||
-        "Bilinmeyen Kullanıcı",
-      posttime = document.querySelector("#postDetail .posttime")?.textContent;
+      document.querySelector("#postDetail .usernick")?.textContent ||
+      document.querySelector("#postDetail .username")?.textContent ||
+      "Bilinmeyen Kullanıcı";
 
     presenceData.details = "Bir gönderiye bakıyor:";
-    presenceData.state = `${username} ${posttime || ""}`;
+    presenceData.state = `${username} ${
+      document.querySelector("#postDetail .posttime")?.textContent || ""
+    }`;
 
-    yaay.setActivity(presenceData);
+    presence.setActivity(presenceData);
   } else if (page.includes("/messages/")) {
-    const receipent = document.querySelector(
-      ".feed_content .username"
-    )?.textContent;
-
     presenceData.details = "Bir kişiyle mesajlaşıyor:";
-    presenceData.state = receipent || "Bilinmeyen Kullanıcı";
+    presenceData.state =
+      document.querySelector(".feed_content .username")?.textContent ||
+      "Bilinmeyen Kullanıcı";
 
-    yaay.setActivity(presenceData);
+    presence.setActivity(presenceData);
   } else if (userPage) {
     const username = userPage.getAttribute("data-user");
 
     presenceData.details = "Bir profile göz atıyor:";
     presenceData.state = username ? `@${username}` : "Bilinmeyen Kullanıcı";
 
-    yaay.setActivity(presenceData);
+    presence.setActivity(presenceData);
   } else if (page.includes("/search")) {
-    const searchingFor = document.querySelector(".top .text b")?.textContent;
-
     presenceData.smallImageKey = "search";
     presenceData.details = "Bir şey arıyor:";
-    presenceData.state = searchingFor || "Bilinmeyen Arama";
+    presenceData.state =
+      document.querySelector(".top .text b")?.textContent || "Bilinmeyen Arama";
 
-    yaay.setActivity(presenceData);
+    presence.setActivity(presenceData);
   } else if (yaayPages[page] || yaayPages[page.slice(0, -1)]) {
     presenceData.details = "Bir sayfaya göz atıyor:";
     presenceData.state = yaayPages[page] || yaayPages[page.slice(0, -1)];
 
-    yaay.setActivity(presenceData);
+    presence.setActivity(presenceData);
   }
 });

@@ -1,3 +1,4 @@
+/* eslint-disable no-one-time-vars/no-one-time-vars */
 const presence = new Presence({
     clientId: "909577563234508910"
   }),
@@ -195,13 +196,15 @@ function checkLearningPages(path: string[]): boolean {
   else if (path[0] === "stories") {
     if (path.length < 2) return set("Choosing a story to read");
 
-    const selector = `body > ${"div > ".repeat(11)} .phrase`,
-      phrases = document.querySelectorAll(selector);
+    const phrases = document.querySelectorAll(
+      `body > ${"div > ".repeat(11)} .phrase`
+    );
     if (phrases.length !== 0) {
-      const storyName = Array.from(phrases)
-        .map((p) => p.textContent)
-        .join(" ");
-      return set(`Reading ${storyName}`);
+      return set(
+        `Reading ${Array.from(phrases)
+          .map(p => p.textContent)
+          .join(" ")}`
+      );
     }
     return set("Reading a story");
   } else if (path[0] === "mistakes-review")
@@ -252,7 +255,7 @@ presence.on("UpdateData", async () => {
   delete presenceData.state;
 
   let path = decodeURI(window.location.pathname).split("/");
-  path = path.filter((p) => p !== "");
+  path = path.filter(p => p !== "");
 
   determineText(path);
   presence.setActivity(presenceData);

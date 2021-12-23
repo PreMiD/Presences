@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -11,14 +11,14 @@
     "de": "Mit Plex können Sie Ihre persönlichen Medien zusammen mit Premium-Inhalten verwalten und streamen. Genießen Sie Ihre eigenen Inhalte auf all Ihren Geräten, wo immer Sie mit Plex unterwegs sind."
   },
   "url": "www.plex.tv",
-  "version": "1.7.7",
+  "regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)",
+  "version": "1.7.8",
   "logo": "https://i.imgur.com/FPxlGGE.png",
   "thumbnail": "https://i.imgur.com/DQvN7Nx.png",
   "color": "#d78c14",
+  "category": "videos",
   "tags": [
     "video",
     "music"
-  ],
-  "category": "videos",
-  "regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)"
+  ]
 }

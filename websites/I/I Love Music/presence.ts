@@ -38,12 +38,9 @@ switch (language) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    playing = parseInt(document.querySelector("#playstop").textContent);
-  if (playing > 0) {
-    const station =
-      document.getElementsByClassName("channelname")[0].textContent;
+    largeImageKey: "logo"
+  };
+  if (parseInt(document.querySelector("#playstop").textContent) > 0) {
     switch (language) {
       case "de":
         presenceData.details = "Spielt gerade";
@@ -52,13 +49,12 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Listening to";
         break;
     }
-    presenceData.state = station;
+    presenceData.state =
+      document.getElementsByClassName("channelname")[0].textContent;
     presenceData.smallImageKey = "live";
     presence.setActivity(presenceData);
   } else {
     try {
-      const channelstation =
-        document.querySelector("#content > h1").textContent;
       switch (language) {
         case "de":
           presenceData.details = "Stöbert durch";
@@ -67,7 +63,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Browsing through";
           break;
       }
-      presenceData.state = channelstation;
+      presenceData.state = document.querySelector("#content > h1").textContent;
       presence.setActivity(presenceData);
     } catch (e) {
       //nothing

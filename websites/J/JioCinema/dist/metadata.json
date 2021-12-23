@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "manish",
     "id": "332177981214818315"
@@ -10,15 +10,15 @@
     "nl": "JioCinema is een videostreamingdienst aangeboden door Jio waar u films, tv-shows, exclusieve Jio, documentaires en trailers kunt bekijken."
   },
   "url": "www.jiocinema.com",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "logo": "https://i.imgur.com/vP9Hh5d.png",
   "thumbnail": "https://i.imgur.com/uzYoaXO.png",
   "color": "#ec5a7f",
+  "category": "videos",
   "tags": [
     "movies",
     "shows",
     "videos",
     "tv"
-  ],
-  "category": "videos"
+  ]
 }

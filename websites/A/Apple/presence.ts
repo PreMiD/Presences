@@ -98,7 +98,6 @@ presence.on("UpdateData", async () => {
       shopCheckout: await presence.getSetting("shopCheckout"),
       devProfileBtn: await presence.getSetting("devProfileBtn")
     },
-    logoArr = ["logo", "logo-rainbow"],
     products = [
       "ipad",
       "ipad-air",
@@ -155,10 +154,8 @@ presence.on("UpdateData", async () => {
       "apple-music",
       "maps"
     ],
-    includesProduct = products.find((e) => urlpath.includes(e)),
-    includesService = services.find((e) => urlpath.includes(e)),
     presenceData: PresenceData = {
-      largeImageKey: logoArr[setting.logo] || "logo"
+      largeImageKey: ["logo", "logo-rainbow"][setting.logo] || "logo"
     };
 
   if (!oldLang || oldLang !== newLang) {
@@ -182,7 +179,7 @@ presence.on("UpdateData", async () => {
     window.location.hostname === "www.apple.com"
   ) {
     if (urlpath.length === (2 || 3)) presenceData.details = "Home";
-    else if (includesProduct) {
+    else if (products.find(e => urlpath.includes(e))) {
       if (urlpath.includes("compare")) {
         presenceData.details = lang.comparing;
         presenceData.state = document.title
@@ -203,10 +200,9 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-    } else if (includesService) {
-      const service = getPSName();
+    } else if (services.find(e => urlpath.includes(e))) {
       presenceData.details = lang.viewService;
-      presenceData.state = service;
+      presenceData.state = getPSName();
 
       if (setting.buttons) {
         presenceData.buttons = [
@@ -472,7 +468,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.largeImageKey = "apple-support";
 
-    if (sProducts.find((e) => urlpath.includes(e))) {
+    if (sProducts.find(e => urlpath.includes(e))) {
       presenceData.details = lang.support;
       presenceData.state =
         document.querySelector("h1.pageTitle-heading")?.textContent ||
@@ -575,12 +571,10 @@ presence.on("UpdateData", async () => {
         }
       } else presenceData.state = "Keynote";
     } else if (urlpath[1] === "keynote-live" && urlpath[2]) {
-      const iframe = document.querySelector("iframe");
-
       presenceData.details = "iCloud Keynote Live";
       presenceData.largeImageKey = "keynote";
 
-      if (iframe?.style.display === "none")
+      if (document.querySelector("iframe")?.style.display === "none")
         presenceData.state = lang.iCloudKeynoteWait;
     } else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
     else if (urlpath[1] === "find") presenceData.state = "Find My";
@@ -615,7 +609,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Apple Developer";
     presenceData.state = "Home";
 
-    if (dPages.find((e) => urlpath[1] === e)) {
+    if (dPages.find(e => urlpath[1] === e)) {
       presenceData.state =
         document.querySelector(`a.ac-gn-link.ac-gn-link-${cpage}>span`)
           ?.textContent ||
@@ -833,14 +827,8 @@ presence.on("UpdateData", async () => {
         )?.textContent;
 
         if (vid) {
-          const videoStartTime = Date.now(),
-            videoEndTime =
-              Math.floor(videoStartTime / 1000) -
-              vid.currentTime +
-              vid.duration +
-              1;
-
-          presenceData.endTimestamp = videoEndTime;
+          presenceData.endTimestamp =
+            Math.floor(Date.now() / 1000) - vid.currentTime + vid.duration + 1;
 
           if (!vid.paused) {
             presenceData.smallImageKey = "play";
@@ -868,13 +856,11 @@ presence.on("UpdateData", async () => {
           "Other";
       }
     } else if (urlpath[1] === "news") {
-      const urlParams = new URLSearchParams(window.location.search);
-
       presenceData.details = lang.devNews;
 
       if (urlpath[2] === "releases") presenceData.state = lang.devReleases;
 
-      if (urlParams.get("id")) {
+      if (new URLSearchParams(window.location.search).get("id")) {
         presenceData.state =
           document.querySelector("h2.article-title")?.textContent;
 
@@ -896,8 +882,6 @@ presence.on("UpdateData", async () => {
   )
     presenceData.startTimestamp = time;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

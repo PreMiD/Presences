@@ -9,29 +9,26 @@ presence.on("UpdateData", async () => {
     q = new URLSearchParams(window.location.search);
 
   if (window.location.href.includes("gdbrowser.com")) {
-    // Levels
     if (
       (window.location.pathname.toLowerCase() !== "/" &&
         window.location.pathname.toLowerCase() === "/daily") ||
       window.location.pathname.toLowerCase() === "/weekly"
     ) {
-      const downloads = document.getElementsByClassName(
-          "inline smaller spaced"
-        )[0].innerHTML,
-        likes = document.getElementsByClassName("inline smaller spaced")[1]
-          .innerHTML,
-        orbs = document.getElementsByClassName("orbs")[1].innerHTML;
-      presenceData.state = `🔽 ${downloads} | 👍 ${likes} | 🔵 ${orbs}`;
+      presenceData.state = `🔽 ${
+        document.getElementsByClassName("inline smaller spaced")[0].textContent
+      } | 👍 ${
+        document.getElementsByClassName("inline smaller spaced")[1]
+      } | 🔵 ${document.getElementsByClassName("orbs")[1].textContent}`;
       presenceData.details = `${
-        document.getElementsByTagName("h1")[0].innerText
-      } ${document.getElementById("authorLink").innerText}`;
+        document.getElementsByTagName("h1")[0].textContent
+      } ${document.getElementById("authorLink").textContent}`;
       presenceData.smallImageKey = `diff_${document
         .getElementById("difficultytext")
-        .innerHTML.toLowerCase()
+        .textContent.toLowerCase()
         .replace("<br>", "_")}`;
       presenceData.smallImageText = `${document
         .getElementById("difficultytext")
-        .innerHTML.replace("<br>", " ")}`;
+        .textContent.replace("<br>", " ")}`;
     }
 
     // Homepage
@@ -52,11 +49,9 @@ presence.on("UpdateData", async () => {
       else {
         presenceData.details = "Searching for levels";
 
-        // Map Packs
         if (parseInt(q.get("mappack")) === 1)
           presenceData.state = "Viewing a map pack";
 
-        // Quick Search (Now with 100% more switch)
         switch (q.get("type")) {
           case "recent":
             presenceData.state = "🕒 Viewing recent levels";
@@ -123,13 +118,11 @@ presence.on("UpdateData", async () => {
                 break;
               default:
                 presenceData.state = `Searching for ${
-                  document.getElementById("header").innerHTML
+                  document.getElementById("header").textContent
                 }`;
                 break;
             }
         }
-
-        // Diffs (Also with 101% more switch statement)
       }
     }
 

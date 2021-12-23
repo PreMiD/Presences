@@ -26,20 +26,18 @@ presence.on("UpdateData", async () => {
       "h2.h3§3Lep4.fw700§1YAxq.truncate2§d57BK.truncateMobile§1Yywu"
     );
     presenceData.details = "Tuned Into 7plus Live!";
-    presenceData.state = `Watching: ${showName.innerText}`;
+    presenceData.state = `Watching: ${showName.textContent}`;
   } else if (document.location.pathname === "/watch-live-tv") {
     showName = document.querySelector(
       "h2.h3§3Lep4.fw700§1YAxq.truncate2§d57BK.truncateMobile§1Yywu"
     );
     presenceData.details = "Tuned Into 7plus Live!";
-    presenceData.state = `Watching: ${showName.innerText}`;
+    presenceData.state = `Watching: ${showName.textContent}`;
   } else if (document.location.pathname === "/query")
     presenceData.details = "Searching 7plus!";
   else
     presenceData.details = `Viewing "${document.title.split(" | 7plus")[0]}"`;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

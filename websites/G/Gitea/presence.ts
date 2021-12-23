@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "682218734391394338"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "lg",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.pathname === "/")
     presenceData.details = "Viewing the front page...";
@@ -39,94 +39,91 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Creating a new Migration Repository...";
   else if (document.location.pathname.startsWith("/org/create"))
     presenceData.details = "Creating a new Organization...";
-  else {
-    if (document.querySelector(".user.profile")) {
-      // Profile Page
-      const searchParams = new URLSearchParams(window.location.search);
-      presenceData.details = `Viewing Profile: ${
-        document.getElementsByClassName("username")[0].innerHTML
-      }`;
-      if (
+  else if (document.querySelector(".user.profile")) {
+    // Profile Page
+    presenceData.details = `Viewing Profile: ${
+      document.getElementsByClassName("username")[0].textContent
+    }`;
+    if (
+      document.getElementsByClassName("username")[0].parentElement
+        .firstElementChild
+    ) {
+      presenceData.details += ` (${
         document.getElementsByClassName("username")[0].parentElement
-          .firstElementChild
-      ) {
-        presenceData.details += ` (${
-          document.getElementsByClassName("username")[0].parentElement
-            .firstElementChild.textContent
-        })`;
-      }
-      const tab = searchParams.get("tab");
-      if (tab) {
-        if (tab === "activity") presenceData.state = "Tab: Public Activity";
-        else if (tab === "stars")
-          presenceData.state = "Tab: Starred Repositories";
-        else if (tab === "following") presenceData.state = "Tab: Following";
-        else if (tab === "followers") presenceData.state = "Tab: Followers";
-      } else presenceData.state = "Tab: Repositories";
-    } else if (document.querySelector("#org-info")) {
-      // Organization Page
-      const displayName = document
-          .querySelector("#org-info")
-          .querySelector(".ui.header")
-          .textContent.replace(/\s*(?=(shaare))/gm, "")
-          .replace(/(?<=(shaare))\s*/gm, ""),
-        [, orgName] = document.location.pathname.split("/");
-      if (displayName === orgName)
-        presenceData.details = `Viewing Organization: ${orgName}`;
-      else
-        presenceData.details = `Viewing Organization: ${displayName} (${orgName})`;
-    } else if (document.querySelector(".repository")) {
-      // Repository Page
-      presenceData.details = `Viewing Repository: ${
-        document.location.pathname.split("/")[1]
-      }/${document.location.pathname.split("/")[2]}`;
-      if (document.location.pathname.split("/")[3] === "issues") {
-        if (document.getElementById("issue-title")) {
-          presenceData.state = `Viewing an Issue... (${
-            document.querySelector(".index").textContent
-          })`;
-        } else presenceData.state = "Viewing Issues...";
-      } else if (document.location.pathname.split("/")[3] === "pulls") {
-        if (document.getElementById("issue-title")) {
-          presenceData.state = `Viewing a Pull Request... (${
-            document.querySelector(".index").textContent
-          })`;
-        } else presenceData.state = "Viewing Pull Requests...";
-      } else if (document.location.pathname.split("/")[3] === "releases")
-        presenceData.state = "Viewing Releases...";
-      else if (document.location.pathname.split("/")[3] === "wiki") {
-        presenceData.state = "Viewing Wiki...";
-        if (document.querySelector(".basic.small.button")) {
-          presenceData.state += ` (${document
-            .querySelector(".basic.small.button")
-            .firstElementChild.innerHTML.match(/<strong>.*<\/strong>/m)[0]
-            .replace(/(<strong>|<\/strong>)/gm, "")})`;
-        }
-      } else if (document.location.pathname.split("/")[3] === "activity")
-        presenceData.state = "Viewing Activity...";
-      else if (document.location.pathname.split("/")[3] === "src") {
-        const branch =
-          document.getElementsByClassName("octicon-git-branch")[1].parentNode
-            .lastChild.textContent;
-        presenceData.state = `Viewing Files... (${branch} Branch)`;
-      } else if (document.location.pathname.split("/")[3] === "commits") {
-        const branch =
-          document.getElementsByClassName("octicon-git-branch")[1].parentNode
-            .lastChild.textContent;
-        presenceData.state = `Viewing Commits... (${branch} Branch)`;
-      } else if (document.location.pathname.split("/")[3] === "branches")
-        presenceData.state = "Viewing Branches";
-      else if (document.location.pathname.split("/")[3] === "forks")
-        presenceData.state = "Viewing Forks";
-      else if (document.location.pathname.split("/")[3] === "stars")
-        presenceData.state = "Viewing Stargazers";
-      else if (document.location.pathname.split("/")[3] === "watchers")
-        presenceData.state = "Viewing Watchers";
-      else if (document.location.pathname.split("/")[3] === "labels")
-        presenceData.state = "Viewing Labels";
-      else if (!document.location.pathname.split("/")[3])
-        presenceData.state = "Viewing Files... (master Branch)";
+          .firstElementChild.textContent
+      })`;
     }
+    const tab = new URLSearchParams(window.location.search).get("tab");
+    if (tab) {
+      if (tab === "activity") presenceData.state = "Tab: Public Activity";
+      else if (tab === "stars")
+        presenceData.state = "Tab: Starred Repositories";
+      else if (tab === "following") presenceData.state = "Tab: Following";
+      else if (tab === "followers") presenceData.state = "Tab: Followers";
+    } else presenceData.state = "Tab: Repositories";
+  } else if (document.querySelector("#org-info")) {
+    // Organization Page
+    const displayName = document
+        .querySelector("#org-info")
+        .querySelector(".ui.header")
+        .textContent.replace(/\s*(?=(shaare))/gm, "")
+        .replace(/(?<=(shaare))\s*/gm, ""),
+      [, orgName] = document.location.pathname.split("/");
+    if (displayName === orgName)
+      presenceData.details = `Viewing Organization: ${orgName}`;
+    else
+      presenceData.details = `Viewing Organization: ${displayName} (${orgName})`;
+  } else if (document.querySelector(".repository")) {
+    // Repository Page
+    presenceData.details = `Viewing Repository: ${
+      document.location.pathname.split("/")[1]
+    }/${document.location.pathname.split("/")[2]}`;
+    if (document.location.pathname.split("/")[3] === "issues") {
+      if (document.getElementById("issue-title")) {
+        presenceData.state = `Viewing an Issue... (${
+          document.querySelector(".index").textContent
+        })`;
+      } else presenceData.state = "Viewing Issues...";
+    } else if (document.location.pathname.split("/")[3] === "pulls") {
+      if (document.getElementById("issue-title")) {
+        presenceData.state = `Viewing a Pull Request... (${
+          document.querySelector(".index").textContent
+        })`;
+      } else presenceData.state = "Viewing Pull Requests...";
+    } else if (document.location.pathname.split("/")[3] === "releases")
+      presenceData.state = "Viewing Releases...";
+    else if (document.location.pathname.split("/")[3] === "wiki") {
+      presenceData.state = "Viewing Wiki...";
+      if (document.querySelector(".basic.small.button")) {
+        presenceData.state += ` (${document
+          .querySelector(".basic.small.button")
+          .firstElementChild.textContent.match(/<strong>.*<\/strong>/m)[0]
+          .replace(/(<strong>|<\/strong>)/gm, "")})`;
+      }
+    } else if (document.location.pathname.split("/")[3] === "activity")
+      presenceData.state = "Viewing Activity...";
+    else if (document.location.pathname.split("/")[3] === "src") {
+      presenceData.state = `Viewing Files... (${
+        document.getElementsByClassName("octicon-git-branch")[1].parentNode
+          .lastChild.textContent
+      } Branch)`;
+    } else if (document.location.pathname.split("/")[3] === "commits") {
+      presenceData.state = `Viewing Commits... (${
+        document.getElementsByClassName("octicon-git-branch")[1].parentNode
+          .lastChild.textContent
+      } Branch)`;
+    } else if (document.location.pathname.split("/")[3] === "branches")
+      presenceData.state = "Viewing Branches";
+    else if (document.location.pathname.split("/")[3] === "forks")
+      presenceData.state = "Viewing Forks";
+    else if (document.location.pathname.split("/")[3] === "stars")
+      presenceData.state = "Viewing Stargazers";
+    else if (document.location.pathname.split("/")[3] === "watchers")
+      presenceData.state = "Viewing Watchers";
+    else if (document.location.pathname.split("/")[3] === "labels")
+      presenceData.state = "Viewing Labels";
+    else if (!document.location.pathname.split("/")[3])
+      presenceData.state = "Viewing Files... (master Branch)";
   }
   presence.setActivity(presenceData);
 });

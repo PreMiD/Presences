@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "704006227276857385"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   nomeObraLeitor: HTMLElement = document.querySelector(
     "#app > div.theme-container.no-sidebar > main > div.manga-reader > h1"
   ),
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     },
     path = document.location.pathname;
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (path === "/") {
     presenceData.details = "Página inicial";
@@ -41,36 +41,36 @@ presence.on("UpdateData", async () => {
         (presenceData.state = nomeObraLeitor.childNodes[1].nodeValue.slice(
           nomeObraLeitor.childNodes[1].nodeValue.search("Capítulo") - 1
         )))
-      : ((presenceData.details = nomeObraLeitor2.innerText.slice(
+      : ((presenceData.details = nomeObraLeitor2.textContent.slice(
           1,
-          nomeObraLeitor2.innerText.search("Capítulo") - 2
+          nomeObraLeitor2.textContent.search("Capítulo") - 2
         )),
-        (presenceData.state = nomeObraLeitor2.innerText.slice(
-          nomeObraLeitor2.innerText.search("Capítulo") - 1
+        (presenceData.state = nomeObraLeitor2.textContent.slice(
+          nomeObraLeitor2.textContent.search("Capítulo") - 1
         )));
     presenceData.smallImageKey = "lendo";
     presenceData.smallImageText = "Lendo";
   } else if (path.includes("lista-de-mangas")) {
     presenceData.details = "Lista de mangás";
-    paginas.innerText.includes("Gêneros")
-      ? (presenceData.state = `${paginas.innerText.slice(
-          paginas.innerText.search("Página"),
-          paginas.innerText.search("Gêneros") - 2
-        )} | ${paginas.innerText.slice(
-          paginas.innerText.search("Gêneros") + 8,
+    paginas.textContent.includes("Gêneros")
+      ? (presenceData.state = `${paginas.textContent.slice(
+          paginas.textContent.search("Página"),
+          paginas.textContent.search("Gêneros") - 2
+        )} | ${paginas.textContent.slice(
+          paginas.textContent.search("Gêneros") + 8,
           -1
         )}`)
-      : (presenceData.state = paginas.innerText.slice(
-          paginas.innerText.search("Página")
+      : (presenceData.state = paginas.textContent.slice(
+          paginas.textContent.search("Página")
         ));
     presenceData.smallImageKey = "lista";
     presenceData.smallImageText = "Vendo a lista de obras";
   } else if (path.includes("manga")) {
-    presenceData.details = nomeObra.innerText;
-    presenceData.state = generosObra.innerText;
+    presenceData.details = nomeObra.textContent;
+    presenceData.state = generosObra.textContent;
   } else if (path.includes("/tag/")) {
     presenceData.details = "Página de Tag";
-    presenceData.state = tagTexto.innerText.slice(1);
+    presenceData.state = tagTexto.textContent.slice(1);
   } else presenceData.details = "Navegando...";
 
   presence.setActivity(presenceData);

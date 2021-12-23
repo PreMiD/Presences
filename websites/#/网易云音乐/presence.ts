@@ -12,9 +12,7 @@ let title: string,
   playerButton: HTMLButtonElement;
 
 presence.on("UpdateData", async () => {
-  const player = document.querySelector("#g_player");
-
-  if (player) {
+  if (document.querySelector("#g_player")) {
     playerButton = document.querySelector(
       "#g_player > div.btns > a.ply.j-flag"
     );
@@ -36,7 +34,7 @@ presence.on("UpdateData", async () => {
       .replace("/ ", "") as unknown as number;
 
     const timestamps = presence.getTimestamps(audioTime, audioDuration),
-      data: PresenceData = {
+      presenceData: PresenceData = {
         details: title,
         state: author,
         largeImageKey: "logo",
@@ -47,10 +45,10 @@ presence.on("UpdateData", async () => {
       };
 
     if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    if (title !== null && author !== null) presence.setActivity(data, !paused);
+    if (title && author) presence.setActivity(presenceData, !paused);
   } else presence.clearActivity();
 });

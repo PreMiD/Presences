@@ -42,12 +42,13 @@ presence.on("UpdateData", async () => {
     if (document.getElementsByClassName("normal_header")[1]) {
       const presenceData: PresenceData = {
         details: "Viewing an club",
-        state: document.getElementsByClassName("h1")[0].innerHTML,
+        state: document.getElementsByClassName("h1")[0].textContent,
         largeImageKey: "lg-mal"
       };
       presence.setActivity(presenceData);
     } else if (
-      document.getElementsByClassName("h1-title")[0].innerHTML === "Invitations"
+      document.getElementsByClassName("h1-title")[0].textContent ===
+      "Invitations"
     ) {
       const presenceData: PresenceData = {
         details: "Viewing club Invitations",
@@ -55,7 +56,7 @@ presence.on("UpdateData", async () => {
       };
       presence.setActivity(presenceData);
     } else if (
-      document.getElementsByClassName("h1-title")[0].innerHTML === "My Clubs"
+      document.getElementsByClassName("h1-title")[0].textContent === "My Clubs"
     ) {
       const presenceData: PresenceData = {
         details: "Viewing my clubs",
@@ -102,13 +103,13 @@ presence.on("UpdateData", async () => {
     } else {
       const presenceData: PresenceData = {
         details: "Viewing an article",
-        state: document.getElementsByClassName("title")[0].innerHTML,
+        state: document.getElementsByClassName("title")[0].textContent,
         largeImageKey: "lg-mal"
       };
       presence.setActivity(presenceData);
     }
   } else if (document.location.pathname.startsWith("/people")) {
-    if (document.getElementsByClassName("h1")[0].innerHTML === "People") {
+    if (document.getElementsByClassName("h1")[0].textContent === "People") {
       const presenceData: PresenceData = {
         details: "Viewing peoples",
         largeImageKey: "lg-mal"
@@ -119,13 +120,13 @@ presence.on("UpdateData", async () => {
         details: "Viewing a person",
         state: document
           .getElementsByClassName("title-name")[0]
-          .innerHTML.replace(/(<([^>]+)>)/gi, ""),
+          .textContent.replace(/(<([^>]+)>)/gi, ""),
         largeImageKey: "lg-mal"
       };
       presence.setActivity(presenceData);
     }
   } else if (document.location.pathname.startsWith("/character")) {
-    if (document.getElementsByClassName("h1")[0].innerHTML === "Characters") {
+    if (document.getElementsByClassName("h1")[0].textContent === "Characters") {
       const presenceData: PresenceData = {
         details: "Looking for characters",
         largeImageKey: "lg-mal"
@@ -136,7 +137,7 @@ presence.on("UpdateData", async () => {
         details: "Viewing an character",
         state: document
           .getElementsByClassName("normal_header")[2]
-          .innerHTML.replace(/(<([^>]+)>)/gi, ""),
+          .textContent.replace(/(<([^>]+)>)/gi, ""),
         largeImageKey: "lg-mal"
       };
       presence.setActivity(presenceData);

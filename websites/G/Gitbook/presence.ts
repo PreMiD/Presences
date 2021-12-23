@@ -5,7 +5,7 @@ const presence = new Presence({
 let actionTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "gitbookw"
   };
 
@@ -15,38 +15,38 @@ presence.on("UpdateData", async () => {
       const dashName = document.querySelector(
         "[class*=--dashboardMenu-] [class*=--headerText-]"
       );
-      data.details = dashName
+      presenceData.details = dashName
         ? `In ${dashName.textContent}'s Dashboard`
         : "In a Dashboard";
       actionTimestamp = null;
     } else {
-      data.smallImageKey = "writing";
-      data.smallImageText = "Editing";
+      presenceData.smallImageKey = "writing";
+      presenceData.smallImageText = "Editing";
 
       const docName = document.querySelector("[class*='logoText-'] span"),
         pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
       actionTimestamp ??= Date.now();
-      if (docName) data.details = `Editing ${docName.textContent}`;
-      if (pageName) data.state = `on ${pageName.textContent}`;
-      data.startTimestamp = actionTimestamp;
+      if (docName) presenceData.details = `Editing ${docName.textContent}`;
+      if (pageName) presenceData.state = `on ${pageName.textContent}`;
+      presenceData.startTimestamp = actionTimestamp;
     }
   } else {
-    data.smallImageKey = "reading";
-    data.smallImageText = "Viewing";
+    presenceData.smallImageKey = "reading";
+    presenceData.smallImageText = "Viewing";
 
     const docName = document.querySelector("[class*='logoText-'] span"),
       pageName = document.querySelector("[class*=--navButtonOpened-] span");
 
     actionTimestamp ??= Date.now();
-    if (docName) data.details = `Viewing ${docName.textContent}`;
-    if (pageName) data.state = `on ${pageName.textContent}`;
-    data.startTimestamp = actionTimestamp;
+    if (docName) presenceData.details = `Viewing ${docName.textContent}`;
+    if (pageName) presenceData.state = `on ${pageName.textContent}`;
+    presenceData.startTimestamp = actionTimestamp;
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!data.details) {
-    presence.setTrayTitle(); // Clear tray
+  if (!presenceData.details) {
+    // Clear tray
     presence.setActivity(); // Clear activity
-  } else presence.setActivity(data);
+  } else presence.setActivity(presenceData);
 });

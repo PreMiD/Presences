@@ -7,16 +7,12 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  /**
-   * Get search query from HTML form input.
-   */
+  // Get search query from HTML form input.
   function searchQuery(): HTMLInputElement {
     return document.getElementById("search_form_input") as HTMLInputElement;
   }
 
-  /**
-   * Sets the timestamp.
-   */
+  // Sets the timestamp.
   function setTimestamp(): number {
     return Math.floor(Date.now() / 1000);
   }
@@ -70,13 +66,11 @@ presence.on("UpdateData", async () => {
         "stockSearch",
         document
           .getElementsByClassName("stocks__header")[0]
-          .getElementsByTagName("a")[0].innerText
+          .getElementsByTagName("a")[0].textContent
       );
     } else presenceData.details = await handleFormatting("standardSearch");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

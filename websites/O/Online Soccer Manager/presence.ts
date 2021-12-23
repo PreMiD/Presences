@@ -8,12 +8,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "osm",
       startTimestamp: browseTimestamp
     },
-    { pathname } = document.location,
-    // Custom paths
-    teamPath = pathname.slice(11),
-    weeksPath = pathname.slice(14),
-    squadPath = pathname.slice(7),
-    userPath = pathname.slice(7);
+    { pathname } = document.location;
 
   switch (pathname) {
     case "/Register":
@@ -31,7 +26,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "Choosing a league";
       break;
 
-    case `/ChooseTeam${teamPath}`: {
+    case `/ChooseTeam${pathname.slice(11)}`: {
       const teamName = document.querySelector(
         "#selected-league-name > h2 > span"
       );
@@ -136,7 +131,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "League Calendar";
       break;
 
-    case `/League/Weeks/${weeksPath}`: {
+    case `/League/Weeks/${pathname.slice(14)}`: {
       const matchday = document.querySelector(
         "#round-container > div > div > div.col-xs-12.col-h-xs-12.font-lg.semi-bold.center > div > span:nth-child(2)"
       );
@@ -206,39 +201,35 @@ presence.on("UpdateData", () => {
       presenceData.state = "Friends";
       break;
 
-    case `/Squad/${squadPath}`: {
-      const squadName = document.querySelector(
-        "#team-squad-panel > div > div > div:nth-child(2) > div > div > h2"
-      );
+    case `/Squad/${pathname.slice(7)}`: {
       presenceData.details = "Viewing squad:";
-      presenceData.state = squadName.textContent;
+      presenceData.state = document.querySelector(
+        "#team-squad-panel > div > div > div:nth-child(2) > div > div > h2"
+      ).textContent;
       break;
     }
 
     case "/Squad": {
-      const selfSquadName = document.querySelector(
-        "#team-squad-panel > div > div > div:nth-child(2) > div > div > h2"
-      );
       presenceData.details = "Viewing squad:";
-      presenceData.state = selfSquadName.textContent;
+      presenceData.state = document.querySelector(
+        "#team-squad-panel > div > div > div:nth-child(2) > div > div > h2"
+      ).textContent;
       break;
     }
 
-    case `/Users/${userPath}`: {
-      const userName = document.querySelector(
-        "#user-profile-name-container > div:nth-child(2) > div"
-      );
+    case `/Users/${pathname.slice(7)}`: {
       presenceData.details = "Viewing profile:";
-      presenceData.state = userName.textContent;
+      presenceData.state = document.querySelector(
+        "#user-profile-name-container > div:nth-child(2) > div"
+      ).textContent;
       break;
     }
 
     case "/User/Profile": {
-      const SelfuserName = document.querySelector(
-        "#user-profile-name-container > div:nth-child(2) > div"
-      );
       presenceData.details = "Viewing profile:";
-      presenceData.state = SelfuserName.textContent;
+      presenceData.state = document.querySelector(
+        "#user-profile-name-container > div:nth-child(2) > div"
+      ).textContent;
       break;
     }
 
@@ -248,8 +239,6 @@ presence.on("UpdateData", () => {
       break;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

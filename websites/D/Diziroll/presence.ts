@@ -51,14 +51,15 @@ presence.on("UpdateData", async () => {
         }`
       }
     ];
-    const timestamps = presence.getTimestamps(
-      stream.currentTime ? Math.floor(stream.currentTime) : null,
-      stream.duration ? Math.floor(stream.duration) : null
-    );
     presenceData.smallImageKey = stream.paused ? "pause" : "play";
     presenceData.smallImageText = stream.paused ? "Durduruldu" : "Oynatılıyor";
-    if (!stream.paused)
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    if (!stream.paused) {
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          stream.currentTime ? Math.floor(stream.currentTime) : null,
+          stream.duration ? Math.floor(stream.duration) : null
+        );
+    }
   } else {
     presenceData.details = "Bir sayfayı inceliyor:";
     presenceData.state = "Bilinmeyen Sayfa";

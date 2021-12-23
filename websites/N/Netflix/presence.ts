@@ -27,7 +27,7 @@ async function getStrings() {
   );
 }
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
   strings = getStrings(),
   oldLang: string = null;
@@ -44,16 +44,15 @@ presence.on("UpdateData", async () => {
     showButtons: boolean = await presence.getSetting("buttons"),
     privacy = await presence.getSetting("privacy"),
     newLang = await presence.getSetting("lang").catch(() => "en"),
-    logo: number = await presence.getSetting("logo"),
-    logoArr = ["nflix_lg", "noback"];
+    logo: number = await presence.getSetting("logo");
 
   let presenceData: PresenceData = {
-    largeImageKey: logoArr[logo] || "nflix_lg"
+    largeImageKey: ["nflix_lg", "noback"][logo] || "nflix_lg"
   };
 
   if (document.location.href !== prevUrl) {
     prevUrl = document.location.href;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   oldLang ??= newLang;
@@ -67,25 +66,22 @@ presence.on("UpdateData", async () => {
       document.querySelector(".VideoContainer video") ??
       document.querySelector(".watch-video--player-view video");
     if (video && !isNaN(video.duration)) {
-      const showCheck =
-          document.querySelector("[class$='title'] .ellipsize-text span") ||
-          document.querySelector("[data-uia$='video-title'] span")
-            ? true
-            : false,
-        timestamps = presence.getTimestampsfromMedia(video);
-
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestampsfromMedia(video);
 
       if (video.paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
 
-      if (showCheck) {
+      if (
+        document.querySelector("[class$='title'] .ellipsize-text span") ||
+        document.querySelector("[data-uia$='video-title'] span")
+      ) {
         if (showSeries) {
           let state: string;
           if (
@@ -159,7 +155,7 @@ presence.on("UpdateData", async () => {
         } else if (showBrowsing) {
           presenceData.details = (await strings).browse;
           delete presenceData.endTimestamp;
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.startTimestamp = browsingTimestamp;
           presenceData.smallImageKey = "reading";
         }
       } else {
@@ -205,7 +201,7 @@ presence.on("UpdateData", async () => {
         else if (showBrowsing) {
           presenceData.details = (await strings).browse;
           delete presenceData.endTimestamp;
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.startTimestamp = browsingTimestamp;
           presenceData.smallImageKey = "reading";
         }
       }
@@ -220,107 +216,102 @@ presence.on("UpdateData", async () => {
 
       if (!showButtons) delete presenceData.buttons;
 
-      if (!presenceData.details) {
-        presence.setActivity();
-        presence.setTrayTitle();
-      } else presence.setActivity(presenceData, !video.paused);
+      if (!presenceData.details) presence.setActivity();
+      else presence.setActivity(presenceData, !video.paused);
     }
   } else {
-    const path = location.href
-        .replace(/\/?$/, "/")
-        .replace(`https://${document.location.hostname}`, "")
-        .replace("?", "/")
-        .replace("=", "/"),
-      statics: {
-        [name: string]: PresenceData;
-      } = {
-        "/": {
-          details: (await strings).browse
-        },
-        "/browse/genre/(\\d*)/": {
-          details: (await strings).genre,
-          state:
-            document.querySelector(".genreTitle")?.textContent ||
-            document.querySelector(".nm-collections-header-name")?.textContent
-        },
-        "/browse/my-list/": {
-          details: (await strings).viewList
-        },
-        "/title/(\\d*)/": {
-          details: document.querySelector(".btn.btn-get-started")
-            ? document.querySelector(".duration > span")
-              ? (await strings).viewingSeries
-              : (await strings).viewingMovie
-            : document.querySelector(".episodeSelector")
+    const statics: {
+      [name: string]: PresenceData;
+    } = {
+      "/": {
+        details: (await strings).browse
+      },
+      "/browse/genre/(\\d*)/": {
+        details: (await strings).genre,
+        state:
+          document.querySelector(".genreTitle")?.textContent ||
+          document.querySelector(".nm-collections-header-name")?.textContent
+      },
+      "/browse/my-list/": {
+        details: (await strings).viewList
+      },
+      "/title/(\\d*)/": {
+        details: document.querySelector(".btn.btn-get-started")
+          ? document.querySelector(".duration > span")
             ? (await strings).viewingSeries
-            : (await strings).viewingMovie,
-          state:
-            (
-              document.querySelector(
-                ".previewModal--player-titleTreatment-logo"
-              ) as HTMLImageElement
-            )?.title || document.querySelector("h1.title-title")?.textContent,
-          buttons: [
-            {
-              label: document.querySelector(".btn.btn-get-started")
-                ? document.querySelector(".duration > span")
-                  ? (await strings).viewSeries
-                  : (await strings).viewMovies
-                : document.querySelector(".episodeSelector")
+            : (await strings).viewingMovie
+          : document.querySelector(".episodeSelector")
+          ? (await strings).viewingSeries
+          : (await strings).viewingMovie,
+        state:
+          document.querySelector<HTMLImageElement>(
+            ".previewModal--player-titleTreatment-logo"
+          )?.title || document.querySelector("h1.title-title")?.textContent,
+        buttons: [
+          {
+            label: document.querySelector(".btn.btn-get-started")
+              ? document.querySelector(".duration > span")
                 ? (await strings).viewSeries
-                : (await strings).viewMovies,
-              url: document.URL.split("&")[0]
-            }
-          ]
-        },
-        "/latest/": {
-          details: (await strings).latest.includes("{0}")
-            ? (await strings).latest.split("{0}")[0]
-            : (await strings).latest,
-          state: (await strings).latest.split("{0}")[1]
-        },
-        "/search/": {
-          details: (await strings).searchFor,
-          state: (
-            document.querySelector(".searchInput > input") as HTMLInputElement
-          )?.value,
-          smallImageKey: "search"
-        },
-        "jbv/(\\d*)/": {
-          details: document.querySelector(".episodeSelector")
-            ? (await strings).viewingSeries
-            : (await strings).viewingMovie,
-          state: (
-            document.querySelector(
-              ".previewModal--player-titleTreatment-logo"
-            ) as HTMLImageElement
-          )?.title,
-          buttons: [
-            {
-              label: document.querySelector(".episodeSelector")
-                ? (await strings).viewSeries
-                : (await strings).viewMovies,
-              url: document.URL.split("&")[0]
-            }
-          ]
-        },
-        "/referfriends/": {
-          details: (await strings).refer.includes("{0}")
-            ? (await strings).refer.split("{0}")[0]
-            : (await strings).refer,
-          state: (await strings).refer.split("{0}")[1]
-        },
-        "/profiles/manage/": {
-          details: (await strings).profile
-        },
-        "/YourAccount/": {
-          details: (await strings).account
-        }
-      };
+                : (await strings).viewMovies
+              : document.querySelector(".episodeSelector")
+              ? (await strings).viewSeries
+              : (await strings).viewMovies,
+            url: document.URL.split("&")[0]
+          }
+        ]
+      },
+      "/latest/": {
+        details: (await strings).latest.includes("{0}")
+          ? (await strings).latest.split("{0}")[0]
+          : (await strings).latest,
+        state: (await strings).latest.split("{0}")[1]
+      },
+      "/search/": {
+        details: (await strings).searchFor,
+        state: document.querySelector<HTMLInputElement>(".searchInput > input")
+          ?.value,
+        smallImageKey: "search"
+      },
+      "jbv/(\\d*)/": {
+        details: document.querySelector(".episodeSelector")
+          ? (await strings).viewingSeries
+          : (await strings).viewingMovie,
+        state: document.querySelector<HTMLImageElement>(
+          ".previewModal--player-titleTreatment-logo"
+        )?.title,
+        buttons: [
+          {
+            label: document.querySelector(".episodeSelector")
+              ? (await strings).viewSeries
+              : (await strings).viewMovies,
+            url: document.URL.split("&")[0]
+          }
+        ]
+      },
+      "/referfriends/": {
+        details: (await strings).refer.includes("{0}")
+          ? (await strings).refer.split("{0}")[0]
+          : (await strings).refer,
+        state: (await strings).refer.split("{0}")[1]
+      },
+      "/profiles/manage/": {
+        details: (await strings).profile
+      },
+      "/YourAccount/": {
+        details: (await strings).account
+      }
+    };
 
     if (showBrowsing) {
       for (const [k, v] of Object.entries(statics)) {
-        if (path.match(k)) {
+        if (
+          location.href
+            .replace(/\/?$/, "/")
+            .replace(`https://${document.location.hostname}`, "")
+            .replace("?", "/")
+            .replace("=", "/")
+            .match(k)
+        ) {
           presenceData.smallImageKey = "reading";
           presenceData.smallImageText = (await strings).browse;
           presenceData = { ...presenceData, ...v };
@@ -328,7 +319,7 @@ presence.on("UpdateData", async () => {
       }
     }
 
-    if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+    if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
     if (privacy && presenceData.smallImageKey === "search") {
       presenceData.details = (await strings).searchSomething;
@@ -340,9 +331,7 @@ presence.on("UpdateData", async () => {
 
     if (!showButtons || privacy) delete presenceData.buttons;
 
-    if (!showBrowsing) {
-      presence.setActivity();
-      presence.setTrayTitle();
-    } else presence.setActivity(presenceData);
+    if (!showBrowsing) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 });

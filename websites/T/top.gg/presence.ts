@@ -15,12 +15,12 @@ presence.on("UpdateData", async () => {
 
     if (window.location.pathname === "/moderation") {
       const personalquota =
-          document.getElementsByClassName("quotaindiv")[0].textContent,
-        botamount = personalquota.substring(
-          personalquota.indexOf("reviewed") + 9,
-          personalquota.indexOf("/")
-        );
-      presenceData.state = `Reviewed ${botamount} bots this week`;
+        document.getElementsByClassName("quotaindiv")[0].textContent;
+
+      presenceData.state = `Reviewed ${personalquota.substring(
+        personalquota.indexOf("reviewed") + 9,
+        personalquota.indexOf("/")
+      )} bots this week`;
     } else if (window.location.pathname === "/moderation/approve")
       presenceData.state = "Verification Queue";
     else if (window.location.pathname === "/moderation/certify")

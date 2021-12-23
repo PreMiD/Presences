@@ -14,32 +14,32 @@ presence.on("UpdateData", () => {
     document.location.pathname.includes("episode")
   ) {
     const [title] = document
-        .getElementsByClassName("title is-marginless is-paddingless")[0]
-        .getElementsByClassName("is-size-4 is-size-5-touch is-size-6-mobile"),
-      currentEpisode = document.getElementById("currentlyPlaying").textContent;
+      .getElementsByClassName("title is-marginless is-paddingless")[0]
+      .getElementsByClassName("is-size-4 is-size-5-touch is-size-6-mobile");
     presenceData.details = title.textContent ?? "Title not found...";
-    presenceData.state = currentEpisode ?? "Episode not found...";
+    presenceData.state =
+      document.getElementById("currentlyPlaying").textContent ??
+      "Episode not found...";
     presenceData.smallImageKey = "playing";
     presenceData.buttons = [
       { label: "Watch Episode", url: document.location.toString() }
     ];
     presence.setActivity(presenceData, true);
   } else if (document.location.pathname.includes("/a/")) {
-    const [title] = document.getElementsByClassName(
-      "title is-marginless is-paddingless"
-    );
     presenceData.details = "Searching...";
-    presenceData.state = title.textContent;
+    presenceData.state = document.getElementsByClassName(
+      "title is-marginless is-paddingless"
+    )[0].textContent;
     presenceData.smallImageKey = "browsing";
     presenceData.buttons = [
       { label: "View Anime", url: document.location.toString() }
     ];
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/search")) {
-    const params = new URL(document.location.toString()).searchParams,
-      search = params.get("search");
     presenceData.details = "Searching...";
-    presenceData.state = search;
+    presenceData.state = new URL(document.location.toString()).searchParams.get(
+      "search"
+    );
     presenceData.smallImageKey = "searching";
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/ongoing")) {

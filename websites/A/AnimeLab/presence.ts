@@ -5,12 +5,12 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "al",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.hostname === "www.animelab.com") {
@@ -20,36 +20,33 @@ presence.on("UpdateData", async () => {
     )
       presenceData.details = "Viewing home page";
     else if (document.location.pathname.includes("/player/")) {
-      const video = document.querySelector(
-          "#video-component"
-        ) as HTMLVideoElement,
-        title = document.querySelector(".primary-title").textContent,
+      const title = document.querySelector(".primary-title").textContent,
         user = document.querySelector(".secondary-title").textContent,
-        { currentTime, duration, paused } = video,
-        timestamps = presence.getTimestamps(
-          Math.floor(currentTime),
-          Math.floor(duration)
-        );
-      if (!isNaN(duration)) {
-        presenceData.smallImageKey = paused ? "pause" : "play";
-        presenceData.smallImageText = paused
+        video = document.querySelector("#video-component") as HTMLVideoElement;
+      if (!isNaN(video.duration)) {
+        presenceData.smallImageKey = video.paused ? "pause" : "play";
+        presenceData.smallImageText = video.paused
           ? (await strings).pause
           : (await strings).play;
-        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(
+            Math.floor(video.currentTime),
+            Math.floor(video.duration)
+          );
 
         presenceData.details = title;
         presenceData.state = user;
 
-        if (paused) {
+        if (video.paused) {
           delete presenceData.startTimestamp;
           delete presenceData.endTimestamp;
         }
-      } else if (isNaN(duration)) {
+      } else if (isNaN(video.duration)) {
         presenceData.details = "Looing at:";
         presenceData.state = `${title} | ${user}`;
       }
     } else if (document.location.pathname.includes("/shows/")) {
-      if (document.querySelector(".show-title") !== null) {
+      if (document.querySelector(".show-title")) {
         presenceData.details = "Viewing show:";
         presenceData.state = document.querySelector(".show-title").textContent;
       } else if (document.location.pathname.includes("/search")) {
@@ -60,7 +57,7 @@ presence.on("UpdateData", async () => {
           .textContent.replace("Search Results for ", "")
           .replace("'", "");
       } else {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Browsing for shows...";
       }
     } else if (document.location.pathname.includes("/genres/")) {
@@ -81,8 +78,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing their profile...";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

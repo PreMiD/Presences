@@ -8,13 +8,12 @@ presence.on("UpdateData", async () => {
   };
 
   if ((await presence.getSetting("incognito")) === false) {
-    presenceData.details = document.getElementById("premidPageInfo").innerText;
+    presenceData.details =
+      document.getElementById("premidPageInfo").textContent;
     if ((await presence.getSetting("showTimestamp")) === true)
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

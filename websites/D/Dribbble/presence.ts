@@ -1,14 +1,13 @@
 const presence = new Presence({
     clientId: "908758869470216203"
   }),
-  path = document.location.pathname,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       state: "All shots",
       largeImageKey: "dribbble",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     shotsTypes = (type: string) => {
       if (document.location.pathname.includes("/animation"))
@@ -30,11 +29,11 @@ presence.on("UpdateData", async () => {
       else presenceData.state = `All ${type} Shots`;
     },
     search = (type: string) => {
-      const searchTitle = document.querySelector(
-        "body > div#wrap > div.search-header > div.search-results-details > h1"
-      )?.textContent;
-
-      presenceData.details = `Search : "${searchTitle}"`;
+      presenceData.details = `Search : "${
+        document.querySelector(
+          "body > div#wrap > div.search-header > div.search-results-details > h1"
+        )?.textContent
+      }"`;
       shotsTypes(type);
     };
 
@@ -59,8 +58,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/search")) search("");
   else if (document.body.id === "profile") {
     // view a profile
-    const profilePath = path,
-      pathArray = profilePath.split("/"),
+    const pathArray = document.location.pathname.split("/"),
       [, profileName] = pathArray;
     presenceData.details = "Viewing profile :";
     presenceData.state = `- ${profileName} -`;
@@ -68,8 +66,7 @@ presence.on("UpdateData", async () => {
 
   if (document.body.id === "user-profile") {
     // view personal profile
-    const profilePath = path,
-      pathArray = profilePath.split("/"),
+    const pathArray = document.location.pathname.split("/"),
       [, profileName] = pathArray;
     presenceData.details = "Viewing personal profile :";
     presenceData.state = `- ${profileName} -`;

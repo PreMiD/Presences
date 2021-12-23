@@ -1,10 +1,10 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", () => {
-  const video: HTMLVideoElement = document.querySelector(
+  const video = document.querySelector<HTMLVideoElement>(
     "#vjs_video_1_html5_api"
   );
-  if (video !== null) {
+  if (video) {
     if (!isNaN(video.duration)) {
       iframe.send({
         iFrameVideo: true,

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "631990024719695901" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
@@ -10,16 +10,16 @@ presence.on("UpdateData", async () => {
     largeImageKey: "archon"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "thearchon.net") {
     if (document.location.pathname.includes("/threads/")) {
       title = document.querySelector(
         "#top > div.p-body > div > div.p-body-header > div.p-title > h1"
       );
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128)
-        presenceData.state = `${title.innerText.substring(0, 125)}...`;
-      else presenceData.state = title.innerText;
+      if (title.textContent.length > 128)
+        presenceData.state = `${title.textContent.substring(0, 125)}...`;
+      else presenceData.state = title.textContent;
 
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
         "body > div.pagewrapper > div.container > div > div.col-md-2 > div > h2"
       );
       presenceData.details = "Viewing the history of:";
-      presenceData.state = user.innerText;
+      presenceData.state = user.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -99,14 +99,14 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/conversations/")) {
-      if (document.location.pathname.split("/")[4] !== null) {
+      if (document.location.pathname.split("/")[4]) {
         title = document.querySelector(
           "#top > div.p-body > div > div.uix_titlebar > div > div > div.p-title > h1"
         );
         presenceData.details = "Forums, Reading DM:";
-        if (title.innerText.length > 128)
-          presenceData.state = `${title.innerText.substring(0, 125)}...`;
-        else presenceData.state = title.innerText;
+        if (title.textContent.length > 128)
+          presenceData.state = `${title.textContent.substring(0, 125)}...`;
+        else presenceData.state = title.textContent;
 
         presenceData.smallImageKey = "reading";
 
@@ -139,9 +139,9 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#top > div.p-body > div > div.uix_titlebar > div > div > div > h1 > a > em"
       );
-      if (search !== null) {
+      if (search) {
         presenceData.details = "Forums, searching for:";
-        presenceData.state = search.innerText;
+        presenceData.state = search.textContent;
 
         presenceData.smallImageKey = "search";
 
@@ -214,13 +214,13 @@ presence.on("UpdateData", async () => {
       } else if (
         document.querySelector(
           "#top > div.p-body > div > div.p-body-main > div > div > div > div > div > div > div.memberHeader-main > div > h1 > span > span"
-        ) !== null
+        )
       ) {
         user = document.querySelector(
           "#top > div.p-body > div > div.p-body-main > div > div > div > div > div > div > div.memberHeader-main > div > h1 > span > span"
         );
         presenceData.details = "Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         delete presenceData.smallImageKey;
 
@@ -228,13 +228,13 @@ presence.on("UpdateData", async () => {
       } else if (
         document.querySelector(
           "#top > div.p-body > div > div.p-body-main > div > div > div > div > div > div > div.memberHeader-main > div > h1 > span"
-        ) !== null
+        )
       ) {
         user = document.querySelector(
           "#top > div.p-body > div > div.p-body-main > div > div > div > div > div > div > div.memberHeader-main > div > h1 > span"
         );
         presenceData.details = "Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         delete presenceData.smallImageKey;
 
@@ -251,9 +251,9 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#top > div.p-body > div > div.p-body-header > div.p-title > h1"
       );
-      if (title !== null && title.innerText !== "THEARCHON") {
+      if (title && title.textContent !== "THEARCHON") {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
 
         delete presenceData.smallImageKey;
 
@@ -287,20 +287,14 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
+    } else presence.setActivity();
   } else if (document.location.hostname === "shop.thearchon.net") {
     title = document.querySelector("head > title");
     presenceData.details = "Store, viewing:";
-    presenceData.state = title.innerText.replace("TheArchon Store | ", "");
+    presenceData.state = title.textContent.replace("TheArchon Store | ", "");
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

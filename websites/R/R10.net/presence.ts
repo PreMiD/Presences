@@ -30,7 +30,6 @@ presence.on("UpdateData", async () => {
     cevap = document.querySelector(
       "body > main > div > form > div:nth-child(12) > div.head"
     ),
-    head = document.querySelector("head > title"),
     analiz = document.querySelector(
       "body > div.page-header.r10title > div > div > h4 > span"
     ),
@@ -52,7 +51,11 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "body > main > div > div.breadCrumb > div.top > div.left > div:nth-child(2) > span > h2"
     ).textContent;
-  } else if (head.textContent.includes("Profil bilgileri:")) {
+  } else if (
+    document
+      .querySelector("head > title")
+      .textContent.includes("Profil bilgileri:")
+  ) {
     presenceData.details = "Bir kullanıcıyı inceliyor:";
     presenceData.state = document.querySelector(
       "body > main > div.container > div.left > div:nth-child(1) > div > div.top > div.info > div.name > a"
@@ -81,8 +84,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Ana Sayfa";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

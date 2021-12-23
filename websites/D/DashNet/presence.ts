@@ -8,22 +8,21 @@ function presenceSet(): void {
     newID = "676120967159742465";
   }
 
-  if (newID !== latestID && latestID !== null) {
+  if (newID !== latestID && latestID) {
     presence.clearActivity();
     latestID = newID;
   }
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presenceSet();
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "dashnet"
+    largeImageKey: "dashnet",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   presenceSet();
 
@@ -79,8 +78,6 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.includes("/mailtopia/"))
     presenceData.details = "Playing mailtopia";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

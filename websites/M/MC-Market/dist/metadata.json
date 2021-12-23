@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -13,13 +13,13 @@
     "www.mc-market.org",
     "status.mc-market.org"
   ],
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/W9zIBqd.png",
   "thumbnail": "https://i.imgur.com/bF8QEff.png",
   "color": "#3396d9",
+  "category": "games",
   "tags": [
     "minecraft",
     "market"
-  ],
-  "category": "games"
+  ]
 }

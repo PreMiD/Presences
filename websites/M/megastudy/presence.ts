@@ -10,7 +10,7 @@ const presence = new Presence({
     currentTime: 0,
     duration: 0
   },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let isTitleChecked = false,
   title: string;
@@ -46,11 +46,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = title;
 
     if (video.isPlayerPlaying) {
-      const [, endTimestamp] = presence.getTimestamps(
+      [, presenceData.endTimestamp] = presence.getTimestamps(
         video.currentTime,
         video.duration
       );
-      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).play;
     } else {
@@ -59,7 +58,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).pause;
     }
   } else {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (
       document.location.pathname === "/megastudy.asp" ||
@@ -78,7 +77,7 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/teacher_v2/main.asp")) {
       [presenceData.details, presenceData.state] = (
         document.querySelector(".lnb_tit") as HTMLElement
-      ).innerText.split("\n");
+      ).textContent.split("\n");
     } else if (
       document.location.pathname.includes("/Mypage/mp_2017/main/main.asp")
     )
@@ -108,8 +107,6 @@ presence.on("UpdateData", async () => {
     else presenceData.details = "합격 불변의 법칙";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

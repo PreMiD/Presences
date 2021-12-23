@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "698217762660548799"
   }),
-  browsingStamp = ~~(Date.now() / 1000);
+  browsingTimestamp = ~~(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "mangakakalot",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   switch (location.hostname) {
@@ -37,13 +37,11 @@ presence.on("UpdateData", async () => {
       } else if (location.pathname.includes("/latest"))
         presenceData.details = "Viewing the latest mangas";
       else if (document.location.pathname.includes("/search")) {
-        const keyword = document
+        presenceData.details = "Searching for:";
+        presenceData.state = document
           .querySelector(".title.update-title")
           .textContent.split(" ")[1]
           .replace(/_/g, " ");
-
-        presenceData.details = "Searching for:";
-        presenceData.state = keyword;
         presenceData.smallImageKey = "search";
       } else presenceData.details = "Browsing...";
       break;
@@ -59,12 +57,10 @@ presence.on("UpdateData", async () => {
         presenceData.state = `CHAPTER ${chapterNum}`;
         presenceData.smallImageKey = "reading";
       } else if (location.pathname.includes("/manga")) {
-        const title = document.querySelector(
+        presenceData.details = "Viewing manga:";
+        presenceData.state = document.querySelector(
           ".story-info-right > h1"
         ).textContent;
-
-        presenceData.details = "Viewing manga:";
-        presenceData.state = title;
       } else if (location.pathname.includes("/genre")) {
         const [, genre] = document
           .querySelector(".panel-breadcrumb > a:nth-child(3)")
@@ -73,14 +69,12 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing genre:";
         presenceData.state = genre;
       } else if (location.pathname.includes("/search")) {
-        const keyword = document
+        presenceData.details = "Searching for:";
+        presenceData.state = document
           .querySelector(".panel-breadcrumb")
           .childNodes[4].textContent.split(":")[1]
           .trim()
           .replace(/_/g, " ");
-
-        presenceData.details = "Searching for:";
-        presenceData.state = keyword;
         presenceData.smallImageKey = "search";
       } else presenceData.details = "Browsing...";
 
@@ -88,8 +82,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

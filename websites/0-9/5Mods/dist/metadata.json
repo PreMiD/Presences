@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "CRUGG",
     "id": "228965621478588416"
@@ -15,14 +15,14 @@
   },
   "url": "gta5-mods.com",
   "regExp": "([a-z0-9-]+[.])*gta5-mods[.]com[/]",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "logo": "https://i.imgur.com/7IjImjZ.jpg",
   "thumbnail": "https://i.imgur.com/kuJwo0m.jpg",
   "color": "#20ba4e",
+  "category": "games",
   "tags": [
     "mods",
     "gta",
     "gaming"
-  ],
-  "category": "games"
+  ]
 }

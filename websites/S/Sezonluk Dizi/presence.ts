@@ -1,4 +1,4 @@
-const sezonlukDizi = new Presence({
+const presence = new Presence({
     clientId: "800520515315695666"
   }),
   pages: { [key: string]: string } = {
@@ -11,7 +11,7 @@ const sezonlukDizi = new Presence({
     "/uye": "Üye Profili",
     "/dizi-tartisma": "Dizi Tartışma"
   },
-  strings = sezonlukDizi.getStrings({
+  strings = presence.getStrings({
     play: "general.playing",
     pause: "general.paused"
   });
@@ -23,34 +23,29 @@ interface iframeData {
 }
 
 let video: iframeData;
-sezonlukDizi.on("iFrameData", (data: iframeData) => {
+presence.on("iFrameData", (data: iframeData) => {
   if (data) video = data;
 });
 
 const startTimestamp = Math.floor(Date.now() / 1000);
-sezonlukDizi.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "sdlogo",
       startTimestamp
     },
-    page = document.location.pathname,
-    { search } = document.location;
+    { search, pathname: page } = document.location;
 
   if (search.includes("?tur=")) {
-    const titleReplaced = document.title.slice(
+    presenceData.details = "Bir türe göz atıyor:";
+    presenceData.state = document.title.slice(
       0,
       document.title.indexOf("Türündeki")
     );
-
-    presenceData.details = "Bir türe göz atıyor:";
-    presenceData.state = titleReplaced;
-  } else if (search.includes("?adi=") && /\?.*?&/g.test(search) === false) {
-    const searchingFor = search.replace("?adi=", "");
-
+  } else if (search.includes("?adi=") && !/\?.*?&/g.test(search)) {
     presenceData.smallImageKey = "search";
 
     presenceData.details = "Bir şey arıyor";
-    presenceData.state = searchingFor;
+    presenceData.state = search.replace("?adi=", "");
   } else if (
     (page.includes("/diziler") && !page.includes("/diziler.asp")) ||
     page.includes("/bolumler") ||
@@ -58,10 +53,6 @@ sezonlukDizi.on("UpdateData", async () => {
     page.includes("/tartismalar") ||
     page.includes("/yorumlar")
   ) {
-    const showTitle =
-      document.querySelector("#dizibilgisi .content .header")?.textContent ||
-      "Bilinmeyen Dizi";
-
     let currentTabTitle = "Bir diziyi inceliyor:";
     switch (true) {
       case page.includes("/bolumler"):
@@ -85,15 +76,10 @@ sezonlukDizi.on("UpdateData", async () => {
       }
     ];
     presenceData.details = currentTabTitle;
-    presenceData.state = showTitle;
+    presenceData.state =
+      document.querySelector("#dizibilgisi .content .header")?.textContent ??
+      "Bilinmeyen Dizi";
   } else if (page.includes("/dizi-tartisma/")) {
-    const postTitle =
-        document.querySelector(".ui.minimal h1.header")?.textContent ||
-        "Bilinmeyen Gönderi",
-      showTitle =
-        document.querySelector(".ui.stackable.cards .card .content a.header")
-          ?.textContent || "Bilinmeyen Dizi";
-
     presenceData.buttons = [
       {
         label: "Tartışmayı Görüntüle",
@@ -101,24 +87,26 @@ sezonlukDizi.on("UpdateData", async () => {
       }
     ];
 
-    presenceData.details = postTitle;
-    presenceData.state = showTitle;
+    presenceData.details =
+      document.querySelector(".ui.minimal h1.header")?.textContent ??
+      "Bilinmeyen Gönderi";
+    presenceData.state =
+      document.querySelector(".ui.stackable.cards .card .content a.header")
+        ?.textContent ?? "Bilinmeyen Dizi";
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = "Bir tartışma okuyor";
   } else if (Object.keys(video || {}).length > 0) {
-    const showTitle =
-        document.querySelector(".content strong h1.header a")?.textContent ||
-        "Bilinmeyen İsim",
-      episode = document.querySelector(
-        ".content strong h1.header small"
-      )?.textContent,
-      [startTimestamp, endTimestamp] = sezonlukDizi.getTimestamps(
-        video.currentTime,
-        video.duration
-      );
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      video.currentTime,
+      video.duration
+    );
 
-    presenceData.details = showTitle;
-    presenceData.state = episode;
+    presenceData.details =
+      document.querySelector(".content strong h1.header a")?.textContent ??
+      "Bilinmeyen İsim";
+    presenceData.state = document.querySelector(
+      ".content strong h1.header small"
+    )?.textContent;
 
     presenceData.startTimestamp = startTimestamp;
     presenceData.endTimestamp = endTimestamp;
@@ -140,10 +128,6 @@ sezonlukDizi.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
   } else if (page.includes("/uye/")) {
-    const username =
-      document.querySelector(".ui.stackable.cards .card .content div.header")
-        ?.textContent || "Bilinmeyen Üye";
-
     presenceData.buttons = [
       {
         label: "Kullanıcıyı Görüntüle",
@@ -152,13 +136,14 @@ sezonlukDizi.on("UpdateData", async () => {
     ];
 
     presenceData.details = "Bir kullanıcıya göz atıyor:";
-    presenceData.state = username;
+    presenceData.state =
+      document.querySelector(".ui.stackable.cards .card .content div.header")
+        ?.textContent ?? "Bilinmeyen Üye";
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     presenceData.details = "Bir sayfaya göz atıyor:";
     presenceData.state = pages[page] || pages[page.slice(0, -1)];
   }
 
-  if (Object.keys(presenceData).length > 2)
-    sezonlukDizi.setActivity(presenceData);
-  else sezonlukDizi.setActivity();
+  if (Object.keys(presenceData).length > 2) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

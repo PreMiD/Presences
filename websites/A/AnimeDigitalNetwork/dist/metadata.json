@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -18,17 +18,17 @@
     "nl": "Anime Digital Network is het beste van het live geanimeerde Japan! Bekijk alles van Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight en meer."
   },
   "url": "animedigitalnetwork.fr",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "logo": "https://i.imgur.com/JnLqL7n.png",
   "thumbnail": "https://i.imgur.com/1idATDN.png",
   "color": "#0096FF",
+  "category": "anime",
   "tags": [
     "anime-digital-network",
     "video",
     "anime",
     "adn"
   ],
-  "category": "anime",
   "settings": [
     {
       "id": "buttons",

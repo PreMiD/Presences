@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "833644176967991346"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("time"),
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
   if (document.querySelector("[class*='is-visible']")) {
     presenceData.details = "Searching";
@@ -25,12 +25,12 @@ presence.on("UpdateData", async () => {
         "[class^='ss-input'] > div > input"
       ).value !== ""
     ) {
-presenceData.state = `Search: ${
+      presenceData.state = `Search: ${
         document.querySelector<HTMLInputElement>(
           "[class^='ss-input'] > div > input"
         ).value
       }`;
-} else if (document.querySelector("[class^='chip']")) {
+    } else if (document.querySelector("[class^='chip']")) {
       let filters = "";
       document.querySelectorAll("[class^='chip']").forEach(function (element) {
         filters += `${element.textContent.slice(0, -2)},`;
@@ -41,20 +41,16 @@ presenceData.state = `Search: ${
     if (document.location.pathname.includes("/leaderboards")) {
       presenceData.details = "Browsing Leaderboards";
       if (
-        (
-          document.querySelector(
-            "[class^='ss-input'] > div > input"
-          ) as HTMLInputElement
+        document.querySelector<HTMLInputElement>(
+          "[class^='ss-input'] > div > input"
         ).value !== ""
       ) {
-presenceData.state = `Search: ${
-          (
-            document.querySelector(
-              "[class^='ss-input'] > div > input"
-            ) as HTMLInputElement
+        presenceData.state = `Search: ${
+          document.querySelector<HTMLInputElement>(
+            "[class^='ss-input'] > div > input"
           ).value
         }`;
-}
+      }
     } else if (document.location.pathname.includes("/leaderboard/")) {
       presenceData.details = "Viewing Leaderboard";
       presenceData.state = document.querySelector(
@@ -110,22 +106,22 @@ presenceData.state = `Search: ${
         "[class^='title is-5 player has-text-centered-mobile'] > a > span"
       )
     ) {
-presenceData.state = `${
-        (document.querySelector("[class^='country']") as HTMLImageElement).alt
+      presenceData.state = `${
+        document.querySelector<HTMLImageElement>("[class^='country']").alt
       } ${
         document.querySelector(
           "[class^='title is-5 player has-text-centered-mobile'] > a > span"
         ).textContent
       } (${document.querySelector("[class^='title-header pp']").textContent})`;
-} else {
-presenceData.state = `${
-        (document.querySelector("[class^='country']") as HTMLImageElement).alt
+    } else {
+      presenceData.state = `${
+        document.querySelector<HTMLImageElement>("[class^='country']").alt
       } ${
         document.querySelector(
           "[class^='title is-5 player has-text-centered-mobile'] > span"
         ).textContent
       } (${document.querySelector("[class^='title-header pp']").textContent})`;
-}
+    }
   } else if (document.location.pathname.includes("/legal/privacy")) {
     presenceData.details = "Reading Privacy Policy?";
     presenceData.state = "People read this?!";

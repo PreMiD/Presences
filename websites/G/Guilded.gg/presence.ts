@@ -58,29 +58,29 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Guilded Find Players";
   } else if (document.location.pathname.includes("/groups/")) {
-    const edit =
-        document.querySelector(
-          ".StatusContext-container.OptionsMenu-option-content"
-        ) !== null,
-      add =
-        document.querySelector(
-          ".InputControllerWrapper-container.InputControllerWrapper-container-grid.InputControllerWrapper-container-2-columns.RadiosField-panel-inputs.RadiosField-layout-horizontal"
-        ) !== null,
-      status =
-        document.querySelector(
-          ".StatusContext-container.ModalV2-modal-content.ModalV2-modal-content-scrollable"
-        ) !== null;
-    if (add) {
+    if (
+      document.querySelector(
+        ".InputControllerWrapper-container.InputControllerWrapper-container-grid.InputControllerWrapper-container-2-columns.RadiosField-panel-inputs.RadiosField-layout-horizontal"
+      ) !== null
+    ) {
       presenceData.details = "Creating Channel In";
       presenceData.state = document.querySelector(
         "#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.StatusContext-container.AppV2-container > div > div.WebAppSidebar-container.WebAppV2-sidebar > div > div > div.TeamNavHeaderV3-container.TeamPageNavV3-header > div.TeamNavHeaderV3-content > div > div.SkeletonPlaceholder-container.TeamNavHeaderV3-team-name > h2"
       ).textContent;
-    } else if (edit) {
+    } else if (
+      document.querySelector(
+        ".StatusContext-container.OptionsMenu-option-content"
+      ) !== null
+    ) {
       presenceData.details = "Editing";
       presenceData.state = document.querySelector(
         "#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.OverlayStackProvider-container > div.PortalTarget-container.OverlayStackProvider-portal-target > span > div.StatusContext-container.Overlay-status-context > div > div.StatusContext-container.ModalV2-modal-content.ModalV2-modal-content-scrollable > div > div > div > div.OptionsMenu-options-control > div.DesktopOptionsControl-container.OptionsMenu-desktop-options-control > div > div > div.DesktopOptionsControlOptionHeader-container > div"
       ).textContent;
-    } else if (status) {
+    } else if (
+      document.querySelector(
+        ".StatusContext-container.ModalV2-modal-content.ModalV2-modal-content-scrollable"
+      ) !== null
+    ) {
       presenceData.details = "Editing Status To";
       presenceData.state = document.querySelector(
         "#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.OverlayStackProvider-container > div.PortalTarget-container.OverlayStackProvider-portal-target > span > div.StatusContext-container.Overlay-status-context > div > div.StatusContext-container.ModalV2-modal-content.ModalV2-modal-content-scrollable > div > div > div.Editor-container.Editor-container-type-reaction.UserStatusOverlay-editor > div > div.needsclick.SlateEditor-editor.SlateEditor-editor-has-max-height > div > span > span > span"
@@ -96,9 +96,8 @@ presence.on("UpdateData", () => {
       "GH1-container UserProfileName-name"
     );
     for (let i = 0; i < priceEls.length; i++) {
-      const profilename = priceEls[i].textContent;
       presenceData.details = "Viewing a profile:";
-      presenceData.state = profilename;
+      presenceData.state = priceEls[i].textContent;
     }
   } else if (document.location.pathname.includes("/games")) {
     presenceData.details = "Viewing Page:";
@@ -135,8 +134,6 @@ presence.on("UpdateData", () => {
     ).textContent;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -13,24 +13,22 @@
       document.querySelector("#video")
     ) {
       const video: HTMLVideoElement = document.querySelector("#video"),
-        title = document.querySelector(".backInfoTxt1").textContent,
-        episode = document.querySelector(".backInfoTxt2").textContent,
-        epName = document.querySelector(".backInfoTxt3").textContent,
         isPlaying = !video.paused,
-        elapsedSec = Math.floor(video.currentTime),
         presenceData: PresenceData = {
-          details: `${title} - ${episode}`,
-          state: epName,
+          details: `${document.querySelector(".backInfoTxt1").textContent} - ${
+            document.querySelector(".backInfoTxt2").textContent
+          }`,
+          state: document.querySelector(".backInfoTxt3").textContent,
           largeImageKey: "danime",
           smallImageKey: isPlaying ? "play" : "pause",
           smallImageText: isPlaying
             ? (await strings).play
             : (await strings).pause,
-          startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
+          startTimestamp:
+            Math.floor(Date.now() / 1000) - Math.floor(video.currentTime)
         };
 
-      if (isPlaying) presence.setTrayTitle(title);
-      else delete presenceData.startTimestamp;
+      if (!isPlaying) delete presenceData.startTimestamp;
 
       presence.setActivity(presenceData);
     }

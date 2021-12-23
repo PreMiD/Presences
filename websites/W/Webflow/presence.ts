@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
       ".bem-TopBar_Body_ContextLens_Name_Value"
     );
     presenceData.state = pageTitle
-      ? `Editing: ${pageTitle.innerHTML}`
+      ? `Editing: ${pageTitle.textContent}`
       : "Editing Unknown Page";
   } else if (document.location.pathname.includes("discover")) {
     presenceData.details = "Exploring projects showcase";
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading Blog";
   else if (document.querySelector(".full-name")) {
     presenceData.details = "Viewing profile";
-    presenceData.state = document.querySelector(".full-name").innerHTML;
+    presenceData.state = document.querySelector(".full-name").textContent;
   } else if (document.location.pathname.includes("website/add"))
     presenceData.details = "Adding a new website";
   else if (document.location.pathname.includes("dashboard/teams"))
@@ -85,8 +85,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("dashboard/account"))
     presenceData.details = "Editing account settings";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
