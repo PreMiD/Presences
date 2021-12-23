@@ -24,7 +24,7 @@
     "support.spotify.com",
     "podcasters.spotify.com"
   ],
-  "version": "2.1.8",
+  "version": "2.2.0",
   "logo": "https://i.imgur.com/q3tKDRA.png",
   "thumbnail": "https://i.imgur.com/AzNhQ4j.png",
   "color": "#1ed760",
@@ -45,9 +45,15 @@
       "value": false
     },
     {
-      "id": "time",
+      "id": "timestamps",
       "title": "Show timestamps",
       "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "cover",
+      "title": "Show Cover",
+      "icon": "fad fa-images",
       "value": true
     }
   ]
