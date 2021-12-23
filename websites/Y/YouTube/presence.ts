@@ -72,6 +72,7 @@ presence.on("UpdateData", async () => {
     time = await presence.getSetting("time"),
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
+    thumbnail = await presence.getSetting("thumbnail"),
     buttons = await presence.getSetting("buttons");
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -235,7 +236,7 @@ presence.on("UpdateData", async () => {
         state: vidState
           .replace("%title%", finalTitle)
           .replace("%uploader%", finalUploader),
-        largeImageKey: unlistedVideo ? "yt_lg" : `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+        largeImageKey: unlistedVideo || !thumbnail ? "yt_lg" : `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
         smallImageKey: video.paused
           ? "pause"
           : video.loop

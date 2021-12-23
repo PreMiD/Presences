@@ -113,6 +113,15 @@
       "placeholder": "Use %title%, %uploader% or {0} to delete the row completely"
     },
     {
+      "id": "thumbnail",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Thumbnail",
+      "icon": "fad fa-images",
+      "value": false
+    },
+    {
       "id": "buttons",
       "if": {
         "privacy": false
