@@ -274,11 +274,10 @@ presence.on("UpdateData", async () => {
 
                 presenceData.state = title;
 
-                presenceData.largeImageKey = (
-                  document.getElementsByClassName(
-                    "youtube-preview"
-                  )[0] as HTMLAnchorElement
-                ).href;
+                presenceData.largeImageKey =
+                  document.querySelector<HTMLAnchorElement>(
+                    ".youtube-preview"
+                  ).href;
 
                 presenceData.smallImageKey = "presence_browsing_season";
                 presenceData.smallImageText = strings.browse;
@@ -325,9 +324,9 @@ presence.on("UpdateData", async () => {
 
         presenceData.state = title;
 
-        presenceData.largeImageKey = (
-          document.getElementsByClassName("anime-poster")[0] as HTMLImageElement
-        ).src.replace(".th", "");
+        presenceData.largeImageKey = document
+          .querySelector<HTMLImageElement>(".anime-poster")
+          .src.replace(".th", "");
 
         presenceData.smallImageKey = `presence_playback_${
           iframeResponse.paused ? "paused" : "playing"
