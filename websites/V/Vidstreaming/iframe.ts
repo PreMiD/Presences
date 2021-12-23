@@ -4,12 +4,12 @@ iframe.on("UpdateData", async () => {
   if (
     document.querySelector(
       "#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-    ) !== null
+    )
     // document.querySelector("#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video")
   ) {
-    video = document.querySelector(
+    video = document.querySelector<HTMLVideoElement>(
       "#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-    ) as HTMLVideoElement;
+    );
     if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {
@@ -20,8 +20,8 @@ iframe.on("UpdateData", async () => {
         }
       });
     }
-  } else if (document.querySelector("#myVideo") !== null) {
-    video = document.querySelector("#myVideo") as HTMLVideoElement;
+  } else if (document.querySelector("#myVideo")) {
+    video = document.querySelector<HTMLVideoElement>("#myVideo");
     if (video && !isNaN(video.duration)) {
       iframe.send({
         iframeVideo: {

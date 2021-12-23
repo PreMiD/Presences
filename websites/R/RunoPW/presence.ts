@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "702935358395908168"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "runo3",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.hostname === "runo.pw") {
     if (document.location.pathname.startsWith("/index")) {
@@ -74,8 +74,6 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

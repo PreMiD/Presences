@@ -7,8 +7,8 @@ let npTitle: string, npArtist: string, npOnAir: string, npListeners: number;
 
 function fetchStats(): void {
   fetch("https://staff.weareharmony.net/api/nowplaying")
-    .then((result) => result.json())
-    .then((result) => {
+    .then(result => result.json())
+    .then(result => {
       npTitle = result.song.title;
       npArtist = result.song.artist;
       npOnAir = result.onAir.name;

@@ -1,15 +1,14 @@
 const presence = new Presence({
     clientId: "807591728759570453"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp,
+    details: "Viewing Page:"
   };
-
-  presenceData.details = "Viewing Page:";
 
   if (window.location.hostname === "www.binance.com") {
     if (window.location.pathname.includes("/markets"))
@@ -71,12 +70,10 @@ presence.on("UpdateData", async () => {
     else if (window.location.pathname.includes("/loan"))
       presenceData.state = "Crypto Loans";
     else if (window.location.pathname.includes("/stock-token/trade")) {
-      const tradePair = document
+      presenceData.details = "Trading Stock Tokens:";
+      presenceData.state = document
         .querySelector("div.css-vurnku > h1")
         .textContent.trim();
-
-      presenceData.details = "Trading Stock Tokens:";
-      presenceData.state = tradePair;
     } else if (window.location.pathname.includes("/stock-token"))
       presenceData.state = "Stock Tokens";
     else if (window.location.pathname.includes("/swap/liquidity"))
@@ -91,22 +88,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Charts...";
     else if (window.location.pathname.includes("/convert")) {
       presenceData.details = "Converting Crypto:";
-
-      const inputCrypto = document
-          .querySelectorAll("div.css-9wgib6")[0]
-          .textContent.trim(),
-        outputCrypto = document
-          .querySelectorAll("div.css-9wgib6")[1]
-          .textContent.trim();
-
-      presenceData.state = `${inputCrypto} to ${outputCrypto}`;
+      presenceData.state = `${document
+        .querySelectorAll("div.css-9wgib6")[0]
+        .textContent.trim()} to ${document
+        .querySelectorAll("div.css-9wgib6")[1]
+        .textContent.trim()}`;
     } else if (window.location.pathname.includes("/trade")) {
       const tradeLeverage = document
-          .querySelector("div.css-t7ggbb > span")
-          ?.textContent?.trim(),
-        tradePair = document
-          .querySelector("div.css-t7ggbb > div.css-mzoqhr > h1")
-          .textContent.trim();
+        .querySelector("div.css-t7ggbb > span")
+        ?.textContent?.trim();
 
       switch (new URLSearchParams(window.location.search).get("type")) {
         case "spot":
@@ -123,23 +113,21 @@ presence.on("UpdateData", async () => {
           break;
       }
 
-      presenceData.state = tradePair;
+      presenceData.state = document
+        .querySelector("div.css-t7ggbb > div.css-mzoqhr > h1")
+        .textContent.trim();
     } else if (
       window.location.pathname.includes("/futures") ||
       window.location.pathname.includes("/delivery")
     ) {
-      const tradeLeverage = document
-          .querySelector("div.css-1kk0gzs > a:nth-child(2)")
-          .textContent.trim(),
-        tradePair = document
-          .querySelector("div.css-1wd9czp > h1")
-          .textContent.trim(),
-        tradeTerm = document
-          .querySelector("div.css-1wd9czp > div > h1")
-          .textContent.trim();
-
-      presenceData.details = `Futures Trading on ${tradeLeverage}:`;
-      presenceData.state = `${tradePair} ${tradeTerm}`;
+      presenceData.details = `Futures Trading on ${document
+        .querySelector("div.css-1kk0gzs > a:nth-child(2)")
+        .textContent.trim()}:`;
+      presenceData.state = `${document
+        .querySelector("div.css-1wd9czp > h1")
+        .textContent.trim()} ${document
+        .querySelector("div.css-1wd9czp > div > h1")
+        .textContent.trim()}`;
     } else presenceData.details = "Browsing...";
   } else if (window.location.hostname.startsWith("voptions"))
     presenceData.state = "Vanilla Options";

@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "797879854343127040"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData = {
     largeImageKey: "brick-hill",
     details: "Viewing Page:",
     state: "404",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   // Main Presence
@@ -28,30 +28,27 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Page:";
       presenceData.state = "Games";
     } else {
-      const gameName = document.querySelector(
-        "body > div.main-holder.grid > div:nth-child(2) > div:nth-child(1) > div.top.blue"
-      );
       presenceData.details = "Viewing Game:";
-      presenceData.state = gameName.textContent;
+      presenceData.state = document.querySelector(
+        "body > div.main-holder.grid > div:nth-child(2) > div:nth-child(1) > div.top.blue"
+      ).textContent;
     }
   } else if (document.location.pathname.includes("/clans/")) {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Clans";
   } else if (document.location.pathname.includes("/clan/")) {
-    const clanName = document.querySelector(
-      "body > div.main-holder.grid > div:nth-child(2) > div.card > div.top > span"
-    );
     presenceData.details = "Viewing Clan:";
-    presenceData.state = clanName.textContent;
+    presenceData.state = document.querySelector(
+      "body > div.main-holder.grid > div:nth-child(2) > div.card > div.top > span"
+    ).textContent;
   } else if (document.location.pathname.includes("/search/")) {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Search";
   } else if (document.location.pathname.includes("/user/")) {
-    const userName = document.querySelector(
-      "body > div.main-holder.grid > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div > span.ellipsis"
-    );
     presenceData.details = "Viewing User:";
-    presenceData.state = userName.textContent;
+    presenceData.state = document.querySelector(
+      "body > div.main-holder.grid > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div > span.ellipsis"
+    ).textContent;
   } else if (document.location.pathname === "/forum/") {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Forum";
@@ -77,17 +74,15 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Settings";
   } else if (document.location.pathname.includes("/thread/")) {
-    const title = document.querySelector(".top");
     presenceData.details = "Viewing Thread:";
-    presenceData.state = title.textContent;
+    presenceData.state = document.querySelector(".top").textContent;
   } else if (document.location.pathname.includes("/shop/")) {
     if (document.location.pathname === "/shop/") {
       presenceData.details = "Viewing Page:";
       presenceData.state = "Shop";
     } else {
-      const itemName = document.querySelector(".medium-text");
       presenceData.details = "Viewing Item:";
-      presenceData.state = itemName.textContent;
+      presenceData.state = document.querySelector(".medium-text").textContent;
     }
   }
 
@@ -97,13 +92,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Page:";
       presenceData.state = "Blog";
     } else if (document.location.pathname.includes("/author/")) {
-      const authorName = document.querySelector("body > div > section > h1");
       presenceData.details = "Viewing Blog Author:";
-      presenceData.state = authorName.textContent;
+      presenceData.state = document.querySelector(
+        "body > div > section > h1"
+      ).textContent;
     } else if (document.location.pathname.includes("/page/")) {
-      const pageName = document.querySelector("#content > div > nav > span");
       presenceData.details = "Viewing Page:";
-      presenceData.state = `Blog (${pageName.textContent})`;
+      presenceData.state = `Blog (${
+        document.querySelector("#content > div > nav > span").textContent
+      })`;
     }
   }
 
@@ -115,8 +112,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

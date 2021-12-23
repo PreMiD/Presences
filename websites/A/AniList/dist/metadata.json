@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Viruz",
     "id": "158973226465230848"
@@ -15,14 +15,14 @@
     "it": "AniList: Traccia, Scopri, Condividi Anime & Manga - Registrati gratuitamente!"
   },
   "url": "anilist.co",
-  "version": "1.4.12",
+  "version": "1.4.13",
   "logo": "https://i.imgur.com/fqyhsZ5.png",
   "thumbnail": "https://i.imgur.com/ooIBlD5.jpg",
   "color": "#02A9FF",
+  "category": "anime",
   "tags": [
     "anime",
     "manga",
     "list"
-  ],
-  "category": "anime"
+  ]
 }

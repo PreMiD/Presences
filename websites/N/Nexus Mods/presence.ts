@@ -1010,19 +1010,18 @@ function getCategorizedPresenceData(
   return presenceData;
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const [subdomain] = window.location.host.split("."),
-    path = window.location.pathname.split("/").slice(1);
+  const path = window.location.pathname.split("/").slice(1);
   presenceData = {
     largeImageKey: "logo",
     smallImageKey: "reading",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   // Main entry point
-  switch (subdomain) {
+  switch (window.location.host.split(".")[0]) {
     case "help":
       // Domain: https://help.nexusmods.com/
       // Explicitely don't do anything due to privacy being a possible concern.
@@ -1037,7 +1036,7 @@ presence.on("UpdateData", () => {
       // Domain: https://wiki.nexusmods.com/
       let wikiTitle;
       try {
-        wikiTitle = document.getElementById("firstHeading").innerText;
+        wikiTitle = document.getElementById("firstHeading").textContent;
 
         if (parseInt(wikiTitle) > 128)
           wikiTitle = `${wikiTitle.substring(0, 125)}...`;
@@ -1055,7 +1054,7 @@ presence.on("UpdateData", () => {
       try {
         forumTitle = document
           .getElementsByTagName("title")[0]
-          .innerHTML.replace(" - The Nexus Forums", "")
+          .textContent.replace(" - The Nexus Forums", "")
           .replace("The Nexus Forums", "");
 
         if (forumTitle === "") forumTitle = "Home";
@@ -1212,8 +1211,6 @@ presence.on("UpdateData", () => {
   }
 
   // Set presence.
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -31,31 +31,29 @@ presence.on("UpdateData", async () => {
   if (pathname.startsWith("/my-journey")) {
     const unitInfo = document
       .querySelector<HTMLElement>("[class*='SubNavigationDropdown__SNButton']")
-      .innerText.split("\n");
+      .textContent.split("\n");
 
     if (unitInfo.length === 2) {
       let [unitText] = unitInfo;
-      const [, unitStatus] = unitInfo;
 
       if (unitText === "All Units") unitText = "Today's units";
 
       presenceData.details = "Viewing the dashboard";
-      presenceData.state = `${unitText}: ${unitStatus}`;
+      presenceData.state = `${unitText}: ${unitInfo[1]}`;
     }
 
     // Reading a lesson
   } else if (pathname.startsWith("/lessons/")) {
-    const lessonTitle = document.querySelector(
-      "[class*='LessonHeader__Title'] > span"
-    ).textContent;
-    presenceData.details = `Viewing lesson '${lessonTitle}'`;
+    presenceData.details = `Viewing lesson '${
+      document.querySelector("[class*='LessonHeader__Title'] > span")
+        .textContent
+    }'`;
 
     // Reading a dialogue
   } else if (pathname.startsWith("/dialogues/")) {
-    const dialogueTitle = document.querySelector(
-      "[class*='id__DialogueGrid'] > div"
-    ).textContent;
-    presenceData.details = `Reading dialogue '${dialogueTitle}'`;
+    presenceData.details = `Reading dialogue '${
+      document.querySelector("[class*='id__DialogueGrid'] > div").textContent
+    }'`;
 
     // Test all the other path -> details mappings
   } else {
@@ -67,8 +65,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData, true);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData, true);
 });

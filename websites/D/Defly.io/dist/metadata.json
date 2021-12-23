@@ -1,25 +1,25 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Apodemus",
     "id": "223817321695674371"
   },
-  "url": "defly.io",
-  "version": "1.2.7",
+  "service": "Defly.io",
   "description": {
     "en": "Fly your helicopter and shoot at enemies. Build walls to protect yourself and conquer as much territory as possible.",
     "nl": "Vlieg met je helikopter en schiet op vijanden. Bouw muren om jezelf te beschermen en verover zo veel mogelijk grondgebied."
   },
-  "service": "Defly.io",
+  "url": "defly.io",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/vTAH4DD.png",
   "thumbnail": "https://i.imgur.com/BwWCTIf.png",
   "color": "#3D5DFF",
+  "category": "games",
   "tags": [
     "game",
     "defly",
     "multiplayer",
     "defly-io",
     "browser-game"
-  ],
-  "category": "games"
+  ]
 }

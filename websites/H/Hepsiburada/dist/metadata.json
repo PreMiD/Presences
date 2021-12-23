@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -14,14 +14,14 @@
     "www.hepsiburada.com",
     "hepsiburada.com"
   ],
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/5AozcKg.png",
   "thumbnail": "https://i.imgur.com/WnZo2SR.png",
   "color": "#ff6000",
+  "category": "other",
   "tags": [
     "hepsiburada",
     "shopping",
     "turkish"
-  ],
-  "category": "other"
+  ]
 }

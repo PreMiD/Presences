@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "719119956486258749"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -9,42 +9,37 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname === "/") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Home";
   } else if (document.location.pathname.includes("/show/")) {
-    const postTitle = (
-        document.querySelector("#postcontent > h3") as HTMLElement
-      ).innerText,
-      userName = (
-        document.querySelector(
-          "#user-info > div > h4 > a:nth-child(1)"
-        ) as HTMLElement
-      ).innerText,
-      userHandle = (
-        document.querySelector(
-          "#user-info > div > h4 > a:nth-child(2)"
-        ) as HTMLElement
-      ).innerText;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Reading an post";
-    presenceData.state = `${postTitle} by ${userName} (${userHandle})`;
+    presenceData.state = `${
+      document.querySelector<HTMLElement>("#postcontent > h3").textContent
+    } by ${
+      document.querySelector<HTMLElement>(
+        "#user-info > div > h4 > a:nth-child(1)"
+      ).textContent
+    } (${
+      document.querySelector<HTMLElement>(
+        "#user-info > div > h4 > a:nth-child(2)"
+      ).textContent
+    })`;
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/about")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "About";
   } else if (document.location.pathname.includes("/privacy")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Privacy";
   } else if (document.location.pathname.includes("/ad-free")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Ad-free";
   } else if (document.location.pathname.includes("/post")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Writing an Post";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

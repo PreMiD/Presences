@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
     const time = document
       .getElementsByClassName("time-text current-time")[0]
       .textContent.split(":")
-      .map((n) => Number(n));
+      .map(n => Number(n));
     if (time.length === 3) {
       presenceData.startTimestamp =
         Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;

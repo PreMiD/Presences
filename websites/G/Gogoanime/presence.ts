@@ -110,23 +110,27 @@ async function checkDomain(): Promise<DomainCheckState> {
 
   for (let i = 0; i < cookies.length; i++) {
     if (cookies[i].key === cookieName) {
-      const cachedValidDomains = (result.validDomains =
-        cookies[i].value.split("-"));
-      if (cachedValidDomains.includes(currentDomain)) {
+      if (
+        (result.validDomains = cookies[i].textContent.split("-")).includes(
+          currentDomain
+        )
+      ) {
         result.invalid = false;
         return result;
       }
     }
   }
 
-  await sendRequestToDomainAPI().then(async (body) => {
+  await sendRequestToDomainAPI().then(async body => {
     if (body.status !== 200) return;
 
     const data: GogoanimeApiResponse = await body.json();
     if (data) {
-      const domains: string[] = (result.validDomains = data.payload.allDomains);
-      document.cookie = `${cookieName}=${domains.join("-")}; max-age=1800`;
-      if (domains.includes(currentDomain)) result.invalid = false;
+      result.validDomains = data.payload.allDomains;
+      document.cookie = `${cookieName}=${result.validDomains.join(
+        "-"
+      )}; max-age=1800`;
+      if (result.validDomains.includes(currentDomain)) result.invalid = false;
     }
   });
   return result;
@@ -143,7 +147,7 @@ function getTimestampAsString(duration: number, current: number) {
 presence.on("UpdateData", async () => {
   if (!isDomainChecked) {
     isDomainChecked = true;
-    await checkDomain().then((result) => {
+    await checkDomain().then(result => {
       isClone = result.invalid;
       if (isClone) {
         presence.error(
@@ -166,10 +170,11 @@ presence.on("UpdateData", async () => {
   const currentPath = document.location.pathname;
   let detail: string,
     state: string[] = states.BROWSING;
-  const is404 =
+  if (
     document.querySelector("#wrapper_bg > section h1.entry-title")
-      ?.textContent === "404";
-  if (is404) state = states.NOTFOUND;
+      ?.textContent === "404"
+  )
+    state = states.NOTFOUND;
   else if (currentPath === "/") {
     const sel = document.querySelector(
       "#load_recent_release > div.anime_name.recent_release > h2"
@@ -206,47 +211,48 @@ presence.on("UpdateData", async () => {
   else if (currentPath === "/requested-list.html")
     detail = "The requested anime list";
   else if (currentPath === "/upcoming-anime") detail = "Upcoming anime";
-  else if (currentPath.includes("/genre/")) {
-    const genre = currentPath.split("/").pop();
-    detail = `Anime genre: ${upperCaseFirstChar(genre)}`;
-  } else if (currentPath.includes("/category/")) {
-    const animeTitle = document.querySelector(
+  else if (currentPath.includes("/genre/"))
+    detail = `Anime genre: ${upperCaseFirstChar(currentPath.split("/").pop())}`;
+  else if (currentPath.includes("/category/")) {
+    const anime =
+      document.querySelector(
         "#wrapper_bg > section > section.content_left > div.main_body > div:nth-child(2) > div.anime_info_body_bg > h1"
-      )?.textContent,
-      anime = animeTitle ?? formatStr(currentPath.split("/").pop().split("-")); // use the url path as fallback
+      )?.textContent ?? formatStr(currentPath.split("/").pop().split("-")); // use the url path as fallback
     detail = `Anime: ${anime}`;
   } else if (
     currentPath.includes("/sub-category/") ||
     currentPath.includes("/season/")
-  ) {
-    const cat = currentPath.split("/").pop().split("-");
-    detail = `${formatStr(cat)}`;
-  } else if (currentPath === "/announcement.html") detail = "Announcements";
+  )
+    detail = `${formatStr(currentPath.split("/").pop().split("-"))}`;
+  else if (currentPath === "/announcement.html") detail = "Announcements";
   else if (currentPath === "/news.html") detail = "Latest News";
   else if (currentPath.includes("/requested/")) {
-    const animeTitle = document.querySelector(
+    detail = `Requested anime: ${
+      document.querySelector(
         "#wrapper_bg > section > section.content_left > div > div.anime_info_body > div > h1"
-      )?.textContent,
-      anime = animeTitle ?? formatStr(currentPath.split("/").pop().split("-")); // use the url path as fallback
-    detail = `Requested anime: ${anime}`;
+      )?.textContent ?? formatStr(currentPath.split("/").pop().split("-"))
+    }`;
   } else if (currentPath.includes("/announcement/")) {
     state = states.READING;
-    const announcement = document.querySelector(
-      "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-    ).textContent;
-    detail = `Announcement: ${announcement}`;
+    detail = `Announcement: ${
+      document.querySelector(
+        "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+      ).textContent
+    }`;
   } else if (currentPath.includes("/reviews/")) {
     state = states.READING;
-    const review = document.querySelector(
-      "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-    ).textContent;
-    detail = `Review Of: ${review}`;
+    detail = `Review Of: ${
+      document.querySelector(
+        "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+      ).textContent
+    }`;
   } else if (currentPath.includes("/news/")) {
     state = states.READING;
-    const news = document.querySelector(
-      "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-    ).textContent;
-    detail = `News: ${news}`;
+    detail = `News: ${
+      document.querySelector(
+        "#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+      ).textContent
+    }`;
   } else if (currentPath.includes("/privacy.html")) {
     state = states.READING;
     detail = "The website's privacy notes";
@@ -264,10 +270,9 @@ presence.on("UpdateData", async () => {
   else if (currentPath === "/user/bookmark") state = states.BOOKMARK;
   else if (currentPath === "//search.html") {
     state = states.SEARCHING;
-    const word = new URLSearchParams(window.location.search)
-      .get("keyword")
-      .split(" ");
-    detail = `Keyword: ${formatStr(word)}`;
+    detail = `Keyword: ${formatStr(
+      new URLSearchParams(window.location.search).get("keyword").split(" ")
+    )}`;
   } else if (currentPath.includes("/trailers/")) {
     state = states.WATCHING;
     const anime = document.querySelector(
@@ -276,11 +281,12 @@ presence.on("UpdateData", async () => {
     detail = `Trailer Of: ${anime}`;
   } else {
     state = states.WATCHING;
-    const anime = currentPath.split("/").pop().split("-"),
-      episode = `${anime[anime.length - 2]} ${anime[anime.length - 1]}`;
+    const anime = currentPath.split("/").pop().split("-");
     detail = `${formatStr(
       anime.slice(0, anime.length - 2)
-    )}: ${upperCaseFirstChar(episode)}`;
+    )}: ${upperCaseFirstChar(
+      `${anime[anime.length - 2]} ${anime[anime.length - 1]}`
+    )}`;
   }
 
   const presenceData: PresenceData = {

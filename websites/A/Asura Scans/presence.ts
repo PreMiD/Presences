@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const { pathname, origin } = window.location,
-    data: PresenceData = {
+    presenceData: PresenceData = {
       startTimestamp: elapsed,
       largeImageKey: "logo"
     };
@@ -17,33 +17,35 @@ presence.on("UpdateData", () => {
   else if (/^\/comics\/[0-9a-z-]+\/?$/i.test(pathname)) {
     details = "Viewing Comic Page";
     state = document.querySelector(".entry-title").textContent;
-    const viewComicButton: ButtonData = {
-      label: "Visit Comic Page",
-      url: origin + pathname
-    };
-    buttons = [viewComicButton];
+    buttons = [
+      {
+        label: "Visit Comic Page",
+        url: origin + pathname
+      }
+    ];
   } else if (/\/[a-z-19]+(chapter|ch)-[0-9]+\/?$/i.test(pathname)) {
-    const comicLink = (document.querySelector(".allc > a") as HTMLAnchorElement)
-      .href;
     details = "Reading Comic";
     state = document.querySelector(".entry-title").textContent;
-    const viewComicButton: ButtonData = {
+    buttons = [
+      {
         label: "Visit Comic Page",
-        url: origin + comicLink
+        url: `${origin} + ${
+          (document.querySelector(".allc > a") as HTMLAnchorElement).href
+        }`
       },
-      visitChapterButton: ButtonData = {
+      {
         label: "Visit Chapter",
         url: origin + pathname
-      };
-    buttons = [viewComicButton, visitChapterButton];
+      }
+    ];
   } else {
     details = "Browsing Asura Scans";
     state = document.title;
   }
 
-  data.details = details;
-  data.state = state;
-  data.buttons = buttons;
+  presenceData.details = details;
+  presenceData.state = state;
+  presenceData.buttons = buttons;
 
-  if (data.details) presence.setActivity(data);
+  if (presenceData.details) presence.setActivity(presenceData);
 });

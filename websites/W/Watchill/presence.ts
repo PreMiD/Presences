@@ -43,15 +43,14 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (page.includes("/search/")) {
-    const searchingFor = decodeURI(page.replace("/search/", ""))
-      .split(" ")
-      .map((i) => i[0].toUpperCase() + i.slice(1).toLowerCase())
-      .join(" ");
-
     presence.setActivity({
       largeImageKey: "wh-logo",
       details: "Bir şey arıyor:",
-      state: searchingFor || "Bilinmeyen",
+      state:
+        decodeURI(page.replace("/search/", ""))
+          .split(" ")
+          .map(i => i[0].toUpperCase() + i.slice(1).toLowerCase())
+          .join(" ") || "Bilinmeyen",
       startTimestamp: Math.floor(Date.now() / 1000),
       smallImageKey: "search"
     });
@@ -80,7 +79,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      data: PresenceData = {
+      presenceData: PresenceData = {
         largeImageKey: "wh-logo",
         details:
           title && title.textContent !== "" ? title.textContent : "Bilinmeyen",
@@ -94,16 +93,15 @@ presence.on("UpdateData", async () => {
       };
 
     if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
-      data.startTimestamp = startTimestamp;
-      data.endTimestamp = endTimestamp;
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
     }
     if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setTrayTitle(video.paused ? "" : `${title.textContent}`);
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else if (page.includes("/watch/") && video) {
     const showName =
         document.querySelector(
@@ -148,9 +146,6 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    presence.setTrayTitle(
-      video.paused ? "" : `${showName.textContent} - ${episode.textContent}`
-    );
     presence.setActivity(data);
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     presence.setActivity({

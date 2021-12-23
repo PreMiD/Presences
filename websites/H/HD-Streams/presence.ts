@@ -2,10 +2,10 @@ interface PageContext {
   middleware: (ref: Window, ...args: unknown[]) => boolean;
   exec: (
     context: Presence,
-    data: PresenceData,
+    presenceData: PresenceData,
     options?: { [key: string]: unknown }
   ) => Promise<PresenceData> | PresenceData;
-  destroy?: (data?: PresenceData) => void;
+  destroy?: (presenceData?: PresenceData) => void;
 }
 interface LocalizedStrings {
   [key: string]: string;
@@ -41,7 +41,7 @@ function getQuery() {
       ),
     pages: PageContext[] = [
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(
             /^\/(movies|series)\/[a-z0-9]+(?:-[a-z0-9]+)*/i
           ),
@@ -111,14 +111,14 @@ function getQuery() {
           ];
           return data;
         },
-        destroy: (data) => {
+        destroy: data => {
           if (data.startTimestamp) delete data.startTimestamp;
           if (data.endTimestamp) delete data.endTimestamp;
           if (data.state) delete data.state;
         }
       },
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(
             /^\/(actors)\/[a-z0-9]+(?:-[a-z0-9]+)*/i
           ),
@@ -137,20 +137,18 @@ function getQuery() {
           ];
           return data;
         },
-        destroy: (data) => {
+        destroy: data => {
           if (data.buttons) delete data.buttons;
         }
       },
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(
             /^\/(movies|series|seasons|actors|popular|cinema)$/i
           ),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          const [, type] = location.pathname.match(
-            /^\/(movies|series|seasons|actors|popular|cinema)$/i
-          );
+
           data.details = strings.searching;
           data.state = {
             movies: "Movies",
@@ -159,13 +157,17 @@ function getQuery() {
             actors: "Actors",
             popular: "Popular Series/Movies",
             cinema: "Cinema titles"
-          }[type];
+          }[
+            location.pathname.match(
+              /^\/(movies|series|seasons|actors|popular|cinema)$/i
+            )[1]
+          ];
           data.smallImageKey = images.SEARCH;
           return data;
         }
       },
       {
-        middleware: (ref) => !!ref.location.hostname.match(/hd-streams/i),
+        middleware: ref => !!ref.location.hostname.match(/hd-streams/i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
           data.details = strings.browsing;
@@ -214,30 +216,33 @@ function getQuery() {
           newLang
         );
       }
-      const presenceData: PresenceData = {
-          largeImageKey: IMAGES.LOGO
-        },
-        query: { [key: string]: unknown } = getQuery(),
-        pageIndex = pages.findIndex((x) => x.middleware(window, [query])),
+      const query: { [key: string]: unknown } = getQuery(),
+        pageIndex = pages.findIndex(x => x.middleware(window, [query])),
         context = pages[pageIndex];
       if (!context) return false;
       if (
         Array.from(document.querySelectorAll("iframe")).filter(
-          (x) => !matchYoutubeUrl(x.src)
+          x => !matchYoutubeUrl(x.src)
         ).length === 0 &&
         frameData
       )
         frameData = null;
-      const result = Promise.resolve(
-        context.exec(app, presenceData, {
-          frame: frameData,
-          strings: localizedStrings,
-          query,
-          images: IMAGES
-        })
-      );
-      return result
-        .then((data) => {
+      return Promise.resolve(
+        context.exec(
+          app,
+          {
+            largeImageKey: IMAGES.LOGO
+          },
+          {
+            frame: frameData,
+            strings: localizedStrings,
+            query,
+            images: IMAGES
+          }
+        )
+      )
+
+        .then(data => {
           if (
             lastPageIndex &&
             lastPageIndex !== pageIndex &&
@@ -248,7 +253,6 @@ function getQuery() {
             lastPageIndex = pageIndex;
           }
           if (!data) {
-            presence.setTrayTitle();
             presence.setActivity({
               largeImageKey: IMAGES.LOGO,
               state: localizedStrings.browsing

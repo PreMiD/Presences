@@ -45,11 +45,11 @@ presence.on("UpdateData", async () => {
       break;
     default: {
       if (document.location.pathname.includes("/genres/")) {
-        const genres = document.querySelector(
-          "div.wrapper > div > div > div.releases > h1"
-        ).textContent;
         presenceData.details = "Searching by genres...";
-        presenceData.state = `Genre: ${genres}`;
+        presenceData.state = `Genre: ${
+          document.querySelector("div.wrapper > div > div > div.releases > h1")
+            .textContent
+        }`;
         presenceData.smallImageKey = "search";
       }
       if (document.location.pathname.startsWith("/manga")) {
@@ -64,19 +64,16 @@ presence.on("UpdateData", async () => {
           { label: `View ${type}`, url: document.location.href }
         ];
       }
-      const readmanga = document.querySelector(".chapterbody");
-      if (readmanga) {
-        const manga = document.querySelector(
-            "div.headpost > div > a"
-          ).innerHTML,
-          chapter =
-            document.querySelector<HTMLSelectElement>("#chapter")
-              .selectedOptions[0].textContent,
-          lastchapter = document.querySelector(
-            "#chapter > option:nth-child(2)"
-          ).textContent;
-        presenceData.details = `Reading ${manga}`;
-        presenceData.state = `${chapter} of ${lastchapter}`;
+      if (document.querySelector(".chapterbody")) {
+        presenceData.details = `Reading ${
+          document.querySelector("div.headpost > div > a").textContent
+        }`;
+        presenceData.state = `${
+          document.querySelector<HTMLSelectElement>("#chapter")
+            .selectedOptions[0].textContent
+        } of ${
+          document.querySelector("#chapter > option:nth-child(2)").textContent
+        }`;
         presenceData.buttons = [
           { label: "Read Manga", url: document.location.href }
         ];

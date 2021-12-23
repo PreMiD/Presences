@@ -84,12 +84,7 @@ emanate.on("UpdateData", async () => {
       setData();
       break;
     } else if (emanate.isListening()) {
-      const songData = emanate.getSong(),
-        [, timestamps] = emanate.getTimestamps(
-          songData.currentTime,
-          songData.duration
-        );
-
+      const songData = emanate.getSong();
       presenceData.details = (await emanate.getSetting("song_1"))
         .replace("%title%", songData.title)
         .replace("%author%", songData.author);
@@ -97,7 +92,10 @@ emanate.on("UpdateData", async () => {
         .replace("%title%", songData.title)
         .replace("%author%", songData.author);
 
-      presenceData.endTimestamp = timestamps;
+      [, presenceData.endTimestamp] = emanate.getTimestamps(
+        songData.currentTime,
+        songData.duration
+      );
 
       presenceData.smallImageKey = songData.paused ? "pause" : "play";
       presenceData.smallImageText = songData.paused ? "Paused" : "Playing";
@@ -129,8 +127,6 @@ emanate.on("UpdateData", async () => {
   if (!(await emanate.getSetting("buttons")) && presenceData.buttons)
     delete presenceData.buttons;
 
-  if (!presenceData.details) {
-    emanate.setTrayTitle();
-    emanate.setActivity();
-  } else emanate.setActivity(presenceData);
+  if (!presenceData.details) emanate.setActivity();
+  else emanate.setActivity(presenceData);
 });

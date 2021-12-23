@@ -11,13 +11,13 @@ presence.on("UpdateData", async () => {
   if (document.querySelector("span[class*=eC-title]")) {
     presenceData.details = document
       .querySelector("span[class*=eC-title]")
-      .innerHTML.replace("De ", "de ")
+      .textContent.replace("De ", "de ")
       .replace("Het ", "het ")
       .replace("&amp;", "&");
     if (document.querySelector("span[class*=eC-subtitle]")) {
       presenceData.state = document
         .querySelector("span[class*=eC-subtitle]")
-        .innerHTML.replace("De ", "de ")
+        .textContent.replace("De ", "de ")
         .replace("Het ", "het ")
         .replace("&amp;", "&");
     }
@@ -48,8 +48,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Gepauzeerd";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

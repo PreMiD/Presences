@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement | Element | string, title: HTMLElement | Element | string;
 
@@ -16,58 +16,55 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "ani.gamer.com.tw") {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page";
-    } else if (document.querySelector("#ani_video_html5_api") !== null) {
-      const video: HTMLVideoElement = document.querySelector(
-          "#ani_video_html5_api"
-        ),
-        videoDuration = video.duration,
-        videoCurrentTime = video.currentTime,
-        { paused } = video;
+    } else if (document.querySelector("#ani_video_html5_api")) {
+      const video = document.querySelector<HTMLVideoElement>(
+        "#ani_video_html5_api"
+      );
       [presenceData.startTimestamp, presenceData.endTimestamp] =
         presence.getTimestamps(
-          Math.floor(videoCurrentTime),
-          Math.floor(videoDuration)
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
         );
-      if (!isNaN(videoDuration)) {
-        presenceData.smallImageKey = paused ? "pause" : "play";
-        presenceData.smallImageText = paused
+      if (!isNaN(video.duration)) {
+        presenceData.smallImageKey = video.paused ? "pause" : "play";
+        presenceData.smallImageText = video.paused
           ? (await strings).pause
           : (await strings).play;
 
-        title = document.querySelector(
+        title = document.querySelector<HTMLElement>(
           "#BH_background > div.container-player > div.anime-title > div.anime-option > section.videoname > div.anime_name > h1"
         );
-        presenceData.details = (title as HTMLElement).innerText;
+        presenceData.details = title.textContent;
 
-        user = document.querySelector(
+        user = document.querySelector<HTMLElement>(
           "#BH_background > div.container-player > div.anime-title > div.anime-option > section.videoname > div.anime_name > div > p"
         );
 
-        if (user !== null) presenceData.state = (user as HTMLElement).innerText;
+        if (user) presenceData.state = user.textContent;
 
-        if (paused) {
+        if (video.paused) {
           delete presenceData.startTimestamp;
           delete presenceData.endTimestamp;
         }
-      } else if (isNaN(videoDuration)) {
-        presenceData.startTimestamp = browsingStamp;
+      } else if (isNaN(video.duration)) {
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Looking at: ";
         title = document.querySelector(
           "#BH_background > div.container-player > div.anime-title > div.anime-option > section.videoname > div.anime_name > h1"
         );
-        presenceData.state = (title as HTMLElement).innerText;
+        presenceData.state = title.textContent;
         presenceData.smallImageKey = "reading";
       }
     } else if (document.location.pathname.includes("/animeList")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing all animes";
     }
   }
 
   if (!presenceData.details) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing page:";
     presenceData.state = document
       .querySelector("head > title")

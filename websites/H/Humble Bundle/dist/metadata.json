@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,14 +10,14 @@
     "nl": "Betaal wat je wilt. Steun een goede doel. Krijg geweldige games."
   },
   "url": "www.humblebundle.com",
-  "version": "1.2.7",
+  "regExp": "([a-z0-9-]+[.])*humblebundle[.]com[/]",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/BOUZiVY.png",
   "thumbnail": "https://i.imgur.com/nLBIlpU.png",
   "color": "#cc2929",
+  "category": "games",
   "tags": [
     "codes",
     "steam"
-  ],
-  "category": "games",
-  "regExp": "([a-z0-9-]+[.])*humblebundle[.]com[/]"
+  ]
 }

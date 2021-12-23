@@ -7,16 +7,14 @@ let title = "Loading SimulatorHits",
   presenter = "AutoDJ";
 
 function getSongData(): void {
-  fetch("https://api.simulatorhits.dev/now-playing?override").then(
-    (response) => {
-      if (response.status === 200) {
-        response.json().then((data) => {
-          ({ title, artist } = data.song);
-          presenter = data.presenter.username;
-        });
-      }
+  fetch("https://api.simulatorhits.dev/now-playing?override").then(response => {
+    if (response.status === 200) {
+      response.json().then(data => {
+        ({ title, artist } = data.song);
+        presenter = data.presenter.username;
+      });
     }
-  );
+  });
 }
 
 setInterval(getSongData, 10000);
@@ -54,8 +52,6 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

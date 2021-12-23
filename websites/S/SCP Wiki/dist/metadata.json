@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "ry",
     "id": "421371986824921109"
@@ -35,15 +35,15 @@
     "scp-sandbox-3.wikidot.com",
     "www.scpwiki.com"
   ],
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/sZutlAu.png",
   "thumbnail": "https://i.imgur.com/el9c68A.png",
   "color": "#BB0011",
+  "category": "other",
   "tags": [
     "fiction",
     "horror",
     "reading",
     "wiki"
-  ],
-  "category": "other"
+  ]
 }

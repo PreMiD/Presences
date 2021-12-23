@@ -18,22 +18,20 @@ presence.on("UpdateData", () => {
     if (lobbyStartTime === 0) lobbyStartTime = Math.floor(Date.now() / 1000);
     gameStartTime = 0;
 
-    const isHost =
-        document.querySelector(".rules-editor") !== null ||
-        document.querySelector('button[ng-click="$ctrl.editTable()"]') !== null,
-      members = document
-        .querySelector(".participant-list-label")
-        .textContent.trim();
-
-    presenceData.details = `In Lobby: ${members}`;
-    presenceData.state = isHost ? "Host" : null;
+    presenceData.details = `In Lobby: ${document
+      .querySelector(".participant-list-label")
+      .textContent.trim()}`;
+    presenceData.state =
+      document.querySelector(".rules-editor") ||
+      document.querySelector('button[ng-click="$ctrl.editTable()"]')
+        ? "Host"
+        : null;
     presenceData.startTimestamp = lobbyStartTime;
   } else if (document.querySelector(".game-page")) {
     if (gameStartTime === 0) gameStartTime = Math.floor(Date.now() / 1000);
     lobbyStartTime = 0;
 
-    const membersCount = document.querySelectorAll(".spec-list-line").length,
-      logs = document.querySelectorAll(".actual-log");
+    const logs = document.querySelectorAll(".actual-log");
 
     // Find last turn log from end
     for (let i = logs.length - 1; i >= 0; i--) {
@@ -48,7 +46,9 @@ presence.on("UpdateData", () => {
       }
     }
 
-    presenceData.details = `In Game (${membersCount} Players)`;
+    presenceData.details = `In Game (${
+      document.querySelectorAll(".spec-list-line").length
+    } Players)`;
     presenceData.startTimestamp = gameStartTime;
   } else if (
     document.querySelector(".login-page") ||
@@ -61,8 +61,6 @@ presence.on("UpdateData", () => {
     presenceData.details = "Loading...";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

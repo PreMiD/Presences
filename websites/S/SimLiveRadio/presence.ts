@@ -1,20 +1,20 @@
 const presence = new Presence({
     clientId: "699961797041455174"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "simlive"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.host === "laut.fm") {
     if (
       document.querySelector(
         ".player-display--meta.player-display__meta--station-name"
-      ) !== null &&
+      ) &&
       document.querySelector(
         ".player-display--meta.player-display__meta--station-name"
       ).textContent === "SimLiveRadio"
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.host === "simliveradio.net") {
     if (document.location.pathname === "/")
       presenceData.details = "Browsing...";
-    else if (document.querySelector(".entry-title") !== null) {
+    else if (document.querySelector(".entry-title")) {
       presenceData.details = "Reading article:";
       presenceData.state = document.querySelector(".entry-title").textContent;
     } else if (document.location.pathname.includes("/hoeren"))
@@ -79,9 +79,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 });

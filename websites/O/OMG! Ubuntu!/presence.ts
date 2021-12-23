@@ -1,4 +1,4 @@
-const OMGUbuntu = new Presence({
+const presence = new Presence({
     clientId: "901490472046968843"
   }),
   pages: Record<string, string> = {
@@ -10,7 +10,7 @@ const OMGUbuntu = new Presence({
   },
   startTimestamp = Math.round(Date.now() / 1000);
 
-OMGUbuntu.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   const page = location.pathname,
     presenceData: PresenceData = {
       largeImageKey: "omgubuntu-logo",
@@ -34,19 +34,17 @@ OMGUbuntu.on("UpdateData", async () => {
     presenceData.details = "Looking at a category:";
     presenceData.state = header || "Unknown Category";
   } else if (page.includes("/page/")) {
-    const articlesPage = location.pathname.split("/")[2] || "Unknown";
-
     presenceData.details = "Looking at article pages";
-    presenceData.state = `Page: ${articlesPage}`;
+    presenceData.state = `Page: ${
+      location.pathname.split("/")[2] || "Unknown"
+    }`;
   } else if (page === "/" && location.search?.includes("?s=")) {
-    const searching =
-      decodeURI(location.search).replace("?s=", "").replace(/\+/g, " ") ||
-      "Unknown Search";
-
     presenceData.details = "Searching for:";
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Searching";
-    presenceData.state = searching;
+    presenceData.state =
+      decodeURI(location.search).replace("?s=", "").replace(/\+/g, " ") ||
+      "Unknown Search";
   } else if (page.includes("/") && articleHeader) {
     presenceData.details = "Reading an article:";
     presenceData.smallImageKey = "reading";
@@ -56,5 +54,5 @@ OMGUbuntu.on("UpdateData", async () => {
   } else if (pages[page])
     presenceData.details = `Looking at the ${pages[page]} page`;
 
-  OMGUbuntu.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });

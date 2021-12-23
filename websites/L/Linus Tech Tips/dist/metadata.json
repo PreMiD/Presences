@@ -1,19 +1,20 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "DubStepMad",
     "id": "118810952530395136"
   },
-  "url": "linustechtips.com",
+  "service": "Linus Tech Tips",
   "description": {
     "en": "Official Linus Tech Tips forum.",
     "nl": "Officieel Linus Tech Tips-forum."
   },
-  "service": "Linus Tech Tips",
-  "version": "1.0.6",
+  "url": "linustechtips.com",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/qEbuRPv.png",
   "thumbnail": "https://i.imgur.com/dldJFoL.png",
   "color": "#db4105",
+  "category": "socials",
   "tags": [
     "linustechtips",
     "linus",
@@ -21,6 +22,5 @@
     "tips",
     "computing",
     "computerbuilding"
-  ],
-  "category": "socials"
+  ]
 }

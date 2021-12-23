@@ -34,9 +34,9 @@ presence.on("UpdateData", async () => {
         }
         return;
       }
-      title = document.querySelector("title").innerText;
+      title = document.querySelector("title").textContent;
       [, title] = title.split("|");
-      [, author] = document.querySelector("title").innerText;
+      [, author] = document.querySelector("title").textContent;
       presenceData.details = `Viewing: ${title}`;
       presenceData.state = `From: ${author}`;
     } else if (document.location.pathname === "/about")
@@ -69,21 +69,18 @@ presence.on("UpdateData", async () => {
       [, , , , language] = document.location.pathname.split("/");
       presenceData.details = `Viewing the Flickr Help Forums in: ${language}`;
       if (document.location.pathname.split("/").length === 6) {
-        title = document.querySelector("title").innerText;
+        title = document.querySelector("title").textContent;
         [, , title] = title.split(":");
-        //Flickr automatically adds a space in front of the colon
         presenceData.state = `Viewing:${title}`;
       }
     } else if (document.location.pathname.startsWith("/search/")) {
-      searchQuery = document.querySelector("title").innerText;
+      searchQuery = document.querySelector("title").textContent;
       [, searchQuery] = searchQuery.split(":");
       [searchQuery] = searchQuery.split("|");
       presenceData.details = `Searching:${searchQuery}`;
     } else if (document.location.pathname === "/map")
       presenceData.state = "Viewing Flickr's worldmap";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

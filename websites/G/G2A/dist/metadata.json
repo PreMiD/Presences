@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,14 +10,14 @@
     "nl": "Online kopen en verkopen: pc-games, software, cadeaubonnen en meer op G2A.COM"
   },
   "url": "www.g2a.com",
-  "version": "1.2.7",
+  "regExp": "([a-z0-9-]+[.])*g2a[.]com[/]",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/TJO23bI.png",
   "thumbnail": "https://i.imgur.com/z6IBeG6.png",
   "color": "#f05f00",
+  "category": "games",
   "tags": [
     "codes",
     "steam"
-  ],
-  "category": "games",
-  "regExp": "([a-z0-9-]+[.])*g2a[.]com[/]"
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -26,13 +26,13 @@
     "intelgrandslam.eslgaming.com",
     "www.schulmeisterschaft.de"
   ],
-  "version": "2.3.7",
+  "version": "2.3.8",
   "logo": "https://i.imgur.com/wKmn7nB.png",
   "thumbnail": "https://i.imgur.com/76vHTIg.png",
   "color": "#46afe4",
+  "category": "games",
   "tags": [
     "gaming",
     "esport"
-  ],
-  "category": "games"
+  ]
 }

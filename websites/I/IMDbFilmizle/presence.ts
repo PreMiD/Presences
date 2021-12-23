@@ -8,7 +8,7 @@ const presence = new Presence({
   presenceData: PresenceData = {
     largeImageKey: "ifi-logo"
   },
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   pages: { [page: string]: string } = {
     "/": "Ana Sayfa",
     "/turkce-altyazili-film-izle": "Türkçe Altyazılı Filmler",
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
   if (pages[page] || pages[page.slice(0, -1)]) {
     presenceData.details = "Bir sayfaya göz atıyor:";
     presenceData.state = pages[page] || pages[page.slice(0, -1)];
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
   // Categories
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "#sayfa > div.sayfa-sol > div.t-baslik"
     )?.textContent;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (page.startsWith("/diziler/") && document.title.includes(" | ")) {
     presenceData.details = "Bir kategoriye göz atıyor:";
     [presenceData.state] = document.title.split(" | ");
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Bir diziye göz atıyor:";
     else presenceData.details = "Bir filme göz atıyor:";
     presenceData.state = movieTitle;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
   if (
@@ -145,12 +145,12 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "#t1 > li > div.ssag > h1"
     )?.textContent;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
 
   if (!presenceData.details || !presenceData.state) {
     presenceData.details = "Bilinmeyen bir sayfada...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
   presence.setActivity(presenceData);
 });

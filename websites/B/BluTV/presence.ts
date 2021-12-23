@@ -57,11 +57,9 @@ presence.on("UpdateData", async () => {
 
   if (data) {
     if (data.series) {
-      const name = data.series.name
+      presenceData.details = data.series.name
         ? data.series.name
         : seriesName(path.split("/")[3].replace(/-/gi, " "));
-
-      presenceData.details = name;
       presenceData.state = `${data.series.season} | ${data.series.ep}`;
     } else {
       presenceData.details = path.startsWith("/canli-yayin")

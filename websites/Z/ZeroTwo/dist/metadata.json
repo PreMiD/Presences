@@ -1,15 +1,20 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "ZeroTwo",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Connor!",
     "id": "744603004493365330"
   },
-  "category": "other",
+  "service": "ZeroTwo",
+  "description": {
+    "en": "I'm a waifu Discord bot based on ZeroTwo (Darling in the FranXX). I serve a variety of needs and have tons of functionality you can try!",
+    "de": "Ich bin ein Waifu Discord Bot basierend auf ZeroTwo (Darling in the FranXX). Ich erfülle eine Vielzahl von Bedürfnissen und habe jede Menge Funktionen, die Sie ausprobieren können!"
+  },
+  "url": "zerotwo.wtf",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/NmwMLaF.png",
   "thumbnail": "https://i.imgur.com/Pu1DxbM.png",
-  "version": "1.0.0",
   "color": "#ff40ff",
+  "category": "other",
   "tags": [
     "bot",
     "discord-bot",
@@ -21,7 +26,6 @@
     "bot-for-discord",
     "zerotwo-bot-discord"
   ],
-  "url": "zerotwo.wtf",
   "settings": [
     {
       "id": "incognito",
@@ -41,9 +45,5 @@
       "icon": "fas fa-compress-arrows-alt",
       "value": false
     }
-  ],
-  "description": {
-    "en": "I'm a waifu Discord bot based on ZeroTwo (Darling in the FranXX). I serve a variety of needs and have tons of functionality you can try!",
-    "de": "Ich bin ein Waifu Discord Bot basierend auf ZeroTwo (Darling in the FranXX). Ich erfülle eine Vielzahl von Bedürfnissen und habe jede Menge Funktionen, die Sie ausprobieren können!"
-  }
+  ]
 }

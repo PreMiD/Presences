@@ -6,15 +6,14 @@ function capitalize(string: string): string {
   return string.charAt(0).toUpperCase() + string.substring(1);
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let data;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname === "/") {
     presenceData.details = "Browsing Anime News";
@@ -53,17 +52,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/encyclopedia/")) {
     presenceData.details = "Browsing Encyclopedia";
     presenceData.state = `for ${
-      document.getElementById("page_header").innerText
+      document.getElementById("page_header").textContent
     }`;
   } else if (document.location.pathname.startsWith("/MyAnime/")) {
     presenceData.details = "Browsing Animes";
     presenceData.state = `for ${
-      document.getElementById("page_header").innerText
+      document.getElementById("page_header").textContent
     }`;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

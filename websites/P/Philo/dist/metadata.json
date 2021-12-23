@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Kedi",
     "id": "238668511222693888"
@@ -13,14 +13,14 @@
     "www.philo.com",
     "philo.com"
   ],
-  "version": "1.0.6",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/Np5TVJB.png",
   "thumbnail": "https://i.imgur.com/R9ivBkz.jpg",
   "color": "#0C93F2",
+  "category": "videos",
   "tags": [
     "philo",
     "video",
     "media"
-  ],
-  "category": "videos"
+  ]
 }

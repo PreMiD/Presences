@@ -20,14 +20,15 @@ presence.on("UpdateData", async () => {
 
   if (document.querySelector("span[class*=h-boxed][data-test*=title]")) {
     presenceData.details = `Bekijkt '${
-      document.querySelector("span[class*=h-boxed][data-test*=title]").innerHTML
+      document.querySelector("span[class*=h-boxed][data-test*=title]")
+        .textContent
     }'`;
     presenceData.state = `In ${
       document
         .querySelector("ul[class*=breadcrumbs][data-test*=breadcrumb]")
         .lastElementChild.querySelector(
           "span[class*=breadcrumbs][data-test*=breadcrumb-name]"
-        ).innerHTML
+        ).textContent
     }`;
     presenceData.buttons = [
       { label: "Product bekijken", url: document.location.href }
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = `Bekijkt ${
       document.querySelector("h1[class*=bol_header][data-test*=page-title]")
-        .innerHTML
+        .textContent
     }`;
     delete presenceData.state;
     presenceData.buttons = [
@@ -56,8 +57,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.toLowerCase().includes("account"))
     presenceData.details = "Beheert account";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
