@@ -12,17 +12,14 @@ presence.on("UpdateData", async () => {
     video: HTMLVideoElement = document.querySelector(
       "body > div > div > div > div > div > video"
     );
-  function pegarNome() {
+  function getName() {
     if (
       document.location.pathname.startsWith("/filmes/") &&
       !document.location.pathname.endsWith("documentarios")
     ) {
-      const genero = document.querySelector(
-          "body > div > div > div > section > div > section > h1"
-        ).textContent,
-        generoRegEx = /\s[A-Za-záàâãéèêíïóôõöúçÁÀÂÃÉÈÍÏÓÔÕÖÚÇ-]{3,}/,
-        regEx = new RegExp(generoRegEx);
-      return genero?.match(regEx);
+      return document
+        .querySelector("body > div > div > div > section > div > section > h1")
+        .textContent?.match(/\s[A-Za-záàâãéèêíïóôõöúçÁÀÂÃÉÈÍÏÓÔÕÖÚÇ-]{3,}/);
     }
   }
 
@@ -35,12 +32,10 @@ presence.on("UpdateData", async () => {
     case document.location.pathname.includes("/franquias"):
       presenceData.details = "Visualizando franquias...";
       break;
-
     case document.location.pathname.includes("/franquia/"): {
-      const franquia = document.querySelector(
+      presenceData.details = document.querySelector(
         "body > div > div > div > section > div > h1"
       ).textContent;
-      presenceData.details = franquia;
       presenceData.state = "Visualizando a franquia...";
       break;
     }
@@ -51,10 +46,9 @@ presence.on("UpdateData", async () => {
 
     case document.location.pathname.includes("/cinelist/") ||
       document.location.pathname.includes("/dc"): {
-      const cinelist = document.querySelector(
+      presenceData.details = document.querySelector(
         "body > div > div > div > section > div > h1"
       ).textContent;
-      presenceData.details = cinelist;
       presenceData.state = "Visualizando cinelist...";
       break;
     }
@@ -65,7 +59,7 @@ presence.on("UpdateData", async () => {
     // FILMES
     case document.location.pathname.startsWith("/filmes/") &&
       !document.location.pathname.endsWith("documentarios"):
-      presenceData.details = `Vendo filmes por gênero:${pegarNome()}`;
+      presenceData.details = `Vendo filmes por gênero:${getName()}`;
       break;
 
     case document.location.pathname.includes("/filmes"):
@@ -73,16 +67,14 @@ presence.on("UpdateData", async () => {
       break;
 
     case document.location.pathname.startsWith("/filme/"): {
-      const movie = document.querySelector(
+      presenceData.details = document.querySelector(
         "body > div > div > div > div > section > div > div > h1"
       ).textContent;
-      presenceData.details = movie;
       presenceData.state = "Visualizando página do filme...";
       if (video) {
-        const watchingMovie = document.querySelector(
+        presenceData.details = document.querySelector(
           "body > div > div > div > div > section > div > div > h1"
         ).textContent;
-        presenceData.details = watchingMovie;
         presenceData.state = "Assistindo filme...";
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused

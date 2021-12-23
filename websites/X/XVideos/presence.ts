@@ -7,11 +7,11 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
-  if (video !== null && !isNaN(video.duration)) {
-    const title = (
-        document.querySelector(".video-page #main .page-title") as HTMLElement
-      )?.innerText,
+  const video = document.querySelector<HTMLVideoElement>(".video-bg-pic video");
+  if (video && !isNaN(video.duration)) {
+    const title = document.querySelector<HTMLElement>(
+        ".video-page #main .page-title"
+      )?.textContent,
       uploader = document.querySelector(
         ".video-page #main .video-metadata .uploader-tag .name"
       ),
@@ -21,8 +21,7 @@ presence.on("UpdateData", async () => {
       ),
       presenceData: PresenceData = {
         details: title ?? "Title not found...",
-        state:
-          uploader !== null ? uploader.textContent : "Uploader not found...",
+        state: uploader ? uploader.textContent : "Uploader not found...",
         largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
@@ -32,8 +31,6 @@ presence.on("UpdateData", async () => {
         endTimestamp
       };
 
-    presence.setTrayTitle(video.paused ? "" : title);
-
     //* Remove timestamps if paused
     if (video.paused) {
       delete presenceData.startTimestamp;
@@ -41,10 +38,6 @@ presence.on("UpdateData", async () => {
     }
 
     //* If tags are not "null"
-    if (title !== null && uploader !== null)
-      presence.setActivity(presenceData, !video.paused);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+    if (title && uploader) presence.setActivity(presenceData, !video.paused);
+  } else presence.setActivity();
 });

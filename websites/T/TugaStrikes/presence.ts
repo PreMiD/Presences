@@ -1,15 +1,15 @@
 const presence = new Presence({
     clientId: "630098355145539595"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
       largeImageKey: "lg"
     },
-    domain = "https://tugastrikes.com/",
-    url = window.location.href.replace(domain, ""),
-    [page, section] = url.split("/");
+    [page, section] = window.location.href
+      .replace("https://tugastrikes.com/", "")
+      .split("/");
 
   let state;
   if (section === "skins") state = "Skins";
@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
 
   presenceData.state = state;
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   delete presenceData.smallImageKey;
 
   presence.setActivity(presenceData, true);

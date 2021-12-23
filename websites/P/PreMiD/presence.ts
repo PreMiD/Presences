@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "792735245488488458"
   }),
-  timestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 // checkmate javascript
 function pathIncludes(string: string): boolean {
@@ -53,8 +53,10 @@ let strings = getStrings(),
   host: string;
 
 presence.on("UpdateData", async () => {
-  //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang"),
+  const presenceData: PresenceData = {
+      largeImageKey: "lg"
+    },
+    newLang = await presence.getSetting("lang"),
     time = await presence.getSetting("time");
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -62,11 +64,7 @@ presence.on("UpdateData", async () => {
     strings = getStrings();
   }
 
-  const presenceData: PresenceData = {
-    largeImageKey: "lg"
-  };
-
-  if (time) presenceData.startTimestamp = timestamp;
+  if (time) presenceData.startTimestamp = browsingTimestamp;
 
   host = document.location.hostname;
 

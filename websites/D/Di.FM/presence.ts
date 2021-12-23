@@ -10,12 +10,11 @@ presence.on("UpdateData", () => {
     document.getElementById("webplayer-region").getAttribute("data-state") ===
     "playing"
   ) {
-    const tracka = document
-        .getElementsByClassName("artist-name")[0]
-        .innerHTML.replace("-", ""),
-      trackt = document.getElementsByClassName("track-name")[0].innerHTML;
-    presenceData.details = tracka;
-    presenceData.state = trackt;
+    presenceData.details = document
+      .getElementsByClassName("artist-name")[0]
+      .textContent.replace("-", "");
+    presenceData.state =
+      document.getElementsByClassName("track-name")[0].textContent;
     presenceData.smallImageKey = "play";
   } else {
     presenceData.state = "Browsing...";

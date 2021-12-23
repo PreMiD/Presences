@@ -69,11 +69,8 @@ presence.on("UpdateData", async () => {
             presenceData.state =
               document.querySelector(".content-title-big").textContent;
           }
-          const timestamps = presence.getTimestamps(
-            video.currentTime,
-            video.duration
-          );
-          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+          [presenceData.startTimestamp, presenceData.endTimestamp] =
+            presence.getTimestamps(video.currentTime, video.duration);
           if (video.paused) {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
@@ -114,6 +111,6 @@ presence.on("UpdateData", async () => {
 function toTitleCase(string: string) {
   return string
     .split(" ")
-    .map((x) => x.charAt(0).toUpperCase() + x.slice(1))
+    .map(x => x.charAt(0).toUpperCase() + x.slice(1))
     .join(" ");
 }

@@ -64,10 +64,10 @@ presence.on("UpdateData", async () => {
     },
     albumCover =
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "cover-art-link"
+        a => a.dataset?.testid === "cover-art-link"
       ) ||
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "context-link"
+        a => a.dataset?.testid === "context-link"
       );
 
   let podcast = false,
@@ -179,30 +179,26 @@ presence.on("UpdateData", async () => {
         delete presenceData.smallImageKey;
       }
     }
-    const control = document.querySelector(
+    const control = document.querySelector<HTMLButtonElement>(
       "div.player-controls__buttons > button:nth-child(3)"
-    ) as HTMLButtonElement;
+    );
     if (
       document.querySelector(".now-playing-bar-hidden") !== null ||
       control === null ||
       control.dataset.testid === "control-button-play"
     ) {
-      if (!presenceData.details) {
-        presence.setTrayTitle();
-        presence.setActivity();
-      } else {
-        if (privacy) {
-          if (searching) {
-            presenceData.details = strings.searchSomething;
-            delete presenceData.state;
-          } else {
-            presenceData.details = strings.browsing;
-            delete presenceData.state;
-            delete presenceData.smallImageKey;
-          }
-          presence.setActivity(presenceData);
-        } else presence.setActivity(presenceData);
-      }
+      if (!presenceData.details) presence.setActivity();
+      else if (privacy) {
+        if (searching) {
+          presenceData.details = strings.searchSomething;
+          delete presenceData.state;
+        } else {
+          presenceData.details = strings.browsing;
+          delete presenceData.state;
+          delete presenceData.smallImageKey;
+        }
+        presence.setActivity(presenceData);
+      } else presence.setActivity(presenceData);
     } else {
       if (recentlyCleared < Date.now() - 1000) presence.clearActivity();
 
@@ -214,9 +210,7 @@ presence.on("UpdateData", async () => {
       ),
       duration = presence.timestampFromFormat(
         document.querySelector(".playback-bar").children[2].textContent
-      ),
-      [, endTimestamp] = presence.getTimestamps(currentTime, duration);
-
+      );
     let pause: boolean;
 
     if (
@@ -230,7 +224,10 @@ presence.on("UpdateData", async () => {
 
     presenceData.smallImageKey = pause ? "pause" : "play";
     presenceData.smallImageText = pause ? strings.pause : strings.play;
-    presenceData.endTimestamp = endTimestamp;
+    [, presenceData.endTimestamp] = presence.getTimestamps(
+      currentTime,
+      duration
+    );
 
     if (pause || !timestamps) {
       delete presenceData.startTimestamp;
@@ -241,17 +238,17 @@ presence.on("UpdateData", async () => {
 
     title =
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "nowplaying-track-link"
+        a => a.dataset?.testid === "nowplaying-track-link"
       )?.textContent ||
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "context-item-link"
+        a => a.dataset?.testid === "context-item-link"
       )?.textContent;
     uploader =
       Array.from(document.querySelectorAll("div")).find(
-        (a) => a.dataset?.testid === "track-info-artists"
+        a => a.dataset?.testid === "track-info-artists"
       )?.textContent ||
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "context-item-info-show"
+        a => a.dataset?.testid === "context-item-info-show"
       )?.textContent;
     presenceData.details = title;
     presenceData.state = uploader;

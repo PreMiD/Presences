@@ -2,11 +2,10 @@ const presence = new Presence({
     clientId: "630239297521319953"
   }),
   capitalize = (text: string): string => {
-    const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
-    return texts
-      .map((str) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      })
+    return text
+      .replace(/[[{(_)}\]]/g, " ")
+      .split(" ")
+      .map(str => str.charAt(0).toUpperCase() + str.slice(1))
       .join(" ");
   },
   whitelist = ["HTML", "CSS", "SQL", "PHP", "W3.CSS", "JQUERY", "XML"];
@@ -14,36 +13,34 @@ const presence = new Presence({
 let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", () => {
-  let details, state;
-
   if (window.location.href !== oldUrl) {
     oldUrl = window.location.href;
     elapsed = Math.floor(Date.now() / 1000);
   }
-
-  const language = document.querySelector(".w3-bar-item.w3-button.active"),
+  const presenceData: PresenceData = {
+      largeImageKey: "w3schools",
+      startTimestamp: elapsed
+    },
+    language = document.querySelector(".w3-bar-item.w3-button.active"),
     lesson = document.querySelector("#main > h1"),
     exercise = document.querySelector("#completedExercisesNo");
 
   if (language) {
-    details = `Learning ${capitalize(language.textContent.toLowerCase())}`;
-    if (whitelist.some((lang) => lang === language.textContent))
-      details = `Learning ${language.textContent}`;
+    presenceData.details = `Learning ${capitalize(
+      language.textContent.toLowerCase()
+    )}`;
+    if (whitelist.some(lang => lang === language.textContent))
+      presenceData.details = `Learning ${language.textContent}`;
   }
 
-  if (lesson) state = lesson.textContent;
+  if (lesson) presenceData.state = lesson.textContent;
 
   if (exercise) {
-    details = `${capitalize(window.location.pathname.split("/")[1])} Exercise`;
-    [state] = exercise.textContent.match("[0-9](.*)[0-9]");
+    presenceData.details = `${capitalize(
+      window.location.pathname.split("/")[1]
+    )} Exercise`;
+    [presenceData.state] = exercise.textContent.match("[0-9](.*)[0-9]");
   }
 
-  const data: PresenceData = {
-    details,
-    state,
-    largeImageKey: "w3schools",
-    startTimestamp: elapsed
-  };
-
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

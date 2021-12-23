@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "831262912815300638"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "mangahere",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location,
     ganres = [
@@ -49,18 +49,22 @@ presence.on("UpdateData", async () => {
       "mecha"
     ];
 
-  if (pathname === "/") data.details = "Viewing the Homepage";
-  else if (pathname === "/latest/") data.details = "Browsing latest manga";
-  else if (pathname === "/ranking/") data.details = "Browsing by ranking";
+  if (pathname === "/") presenceData.details = "Viewing the Homepage";
+  else if (pathname === "/latest/")
+    presenceData.details = "Browsing latest manga";
+  else if (pathname === "/ranking/")
+    presenceData.details = "Browsing by ranking";
   else if (pathname === "/spoilers/")
-    data.details = "Browsing spoilers and news";
-  else if (pathname === "/directory/") data.details = "Browsing all manga";
-  else if (pathname === "/on_going/") data.details = "Browsing ongoing manga";
+    presenceData.details = "Browsing spoilers and news";
+  else if (pathname === "/directory/")
+    presenceData.details = "Browsing all manga";
+  else if (pathname === "/on_going/")
+    presenceData.details = "Browsing ongoing manga";
   //ganre/new/
   else if (pathname.endsWith("/new/")) {
     const url = pathname,
       splitUrl = url.split("/");
-    data.details =
+    presenceData.details =
       splitUrl[1] === "new"
         ? "Browsing new manga"
         : `Browsing new ${splitUrl[1]} manga`;
@@ -68,7 +72,7 @@ presence.on("UpdateData", async () => {
     //ganre/completed/
     const url = pathname,
       splitUrl = url.split("/");
-    data.details =
+    presenceData.details =
       splitUrl[1] === "completed"
         ? "Browsing completed manga"
         : `Browsing completed ${splitUrl[1]} manga`;
@@ -76,54 +80,50 @@ presence.on("UpdateData", async () => {
     //ganre/on_going/
     const url = pathname,
       splitUrl = url.split("/");
-    data.details =
+    presenceData.details =
       splitUrl[1] === "on_going"
         ? "Browsing ongoing manga"
         : `Browsing ongoing ${splitUrl[1]} manga`;
   } else if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
     //Manga Viewing
-    const title = document.querySelector(
-        ".detail-info-right-title-font"
-      ).textContent,
-      link = window.location.href;
-    data.details = "Viewing manga:";
-    data.state = title;
-    data.buttons = [{ label: "View Manga", url: link }];
-    data.smallImageKey = "viewing";
+    presenceData.details = "Viewing manga:";
+    presenceData.state = document.querySelector(
+      ".detail-info-right-title-font"
+    ).textContent;
+    presenceData.buttons = [{ label: "View Manga", url: window.location.href }];
+    presenceData.smallImageKey = "viewing";
   } else if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
     //Manga Reading
-    const title = document.querySelector(".reader-header-title-1").textContent,
-      chapter = document.querySelector(".reader-header-title-2").textContent,
+    const chapter = document.querySelector(
+        ".reader-header-title-2"
+      ).textContent,
       //setting up page progress
       current = document.querySelector(".pager-list-left span");
-    if (!current) data.state = chapter;
+    if (!current) presenceData.state = chapter;
     else {
-      const len = current.children.length,
-        totalPages = current.children[len - 2].textContent,
-        readingPage = document.querySelector(
-          ".pager-list-left > span > .active"
-        ).textContent,
-        progress = `${readingPage}/${totalPages}`;
-      data.state = `${chapter} page ${progress}`;
+      presenceData.state = `${chapter} page ${`${
+        document.querySelector(".pager-list-left > span > .active").textContent
+      }/${current.children[current.children.length - 2].textContent}`}`;
     }
-    data.details = title;
-    data.smallImageKey = "reading";
+    presenceData.details = document.querySelector(
+      ".reader-header-title-1"
+    ).textContent;
+    presenceData.smallImageKey = "reading";
   } else if (pathname.startsWith("/search")) {
     //Searching
-    const queryString = window.location.search,
-      urlParams = new URLSearchParams(queryString),
-      search = urlParams.get("title"),
-      searchName =
-        search === "" ? urlParams.get("name") : urlParams.get("title");
-    data.details = "Searching:";
-    data.state = searchName;
-    data.smallImageKey = "searching";
+    const urlParams = new URLSearchParams(window.location.search);
+    presenceData.details = "Searching:";
+    presenceData.state =
+      urlParams.get("title") === ""
+        ? urlParams.get("name")
+        : urlParams.get("title");
+    presenceData.smallImageKey = "searching";
   }
   ganres.forEach(function (ganre) {
     if (pathname.substring(1, pathname.length - 1) === ganre) {
-      data.details = "Browsing:";
-      data.state = `${ganre.replace("-", " ")} manga`;
+      presenceData.details = "Browsing:";
+      presenceData.state = `${ganre.replace("-", " ")} manga`;
     }
   });
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

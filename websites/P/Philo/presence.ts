@@ -10,7 +10,7 @@ const presence = new Presence({
 let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "philo"
     },
     { href } = window.location,
@@ -24,16 +24,16 @@ presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector("#player video");
 
   if (video) {
-    const title = document.querySelector(".player-controls-title")?.textContent,
-      [startTimestamp, endTimestamp] = presence.getTimestamps(
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
       seriesEp = document.querySelector(".season-episode-format"),
-      subtitle = document.querySelector(".player-controls-subtitle-text"),
       live = document.querySelector(".flag.flag-live"),
       state = seriesEp
-        ? `${seriesEp.textContent} ${subtitle.textContent}`
+        ? `${seriesEp.textContent} ${
+            document.querySelector(".player-controls-subtitle-text").textContent
+          }`
         : live
         ? "Watching Live"
         : "Watching",
@@ -41,40 +41,47 @@ presence.on("UpdateData", async () => {
         ".player-controls-subtitle img"
       );
 
-    (data.details = title), (data.state = state);
-    data.smallImageKey = live ? "live" : video.paused ? "pause" : "play";
-    data.smallImageText = live
+    (presenceData.details = document.querySelector(
+      ".player-controls-title"
+    )?.textContent),
+      (presenceData.state = state);
+    presenceData.smallImageKey = live
+      ? "live"
+      : video.paused
+      ? "pause"
+      : "play";
+    presenceData.smallImageText = live
       ? (await strings).live
       : video.paused
       ? (await strings).pause
       : (await strings).play;
-    data.startTimestamp = live ? elapsed : startTimestamp;
-    data.endTimestamp = endTimestamp;
+    presenceData.startTimestamp = live ? elapsed : startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
 
-    if (live) delete data.endTimestamp;
+    if (live) delete presenceData.endTimestamp;
 
     if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    if (!data.endTimestamp) delete data.endTimestamp;
+    if (!presenceData.endTimestamp) delete presenceData.endTimestamp;
 
-    if (data.details && data.state.trim()) {
+    if (presenceData.details && presenceData.state.trim()) {
       if (channel && channel.getAttribute("alt"))
-        data.state += ` on ${channel.getAttribute("alt")}`;
+        presenceData.state += ` on ${channel.getAttribute("alt")}`;
 
-      presence.setActivity(data, !video.paused);
+      presence.setActivity(presenceData, !video.paused);
     }
   } else {
-    data.details = "Browsing...";
-    if (path.includes("/guide")) data.details = "Browsing Guide";
+    presenceData.details = "Browsing...";
+    if (path.includes("/guide")) presenceData.details = "Browsing Guide";
 
-    if (path.includes("/saved")) data.details = "Browsing Saved";
+    if (path.includes("/saved")) presenceData.details = "Browsing Saved";
 
-    if (path.includes("/search")) data.details = "Searching...";
+    if (path.includes("/search")) presenceData.details = "Searching...";
 
-    data.startTimestamp = elapsed;
-    presence.setActivity(data);
+    presenceData.startTimestamp = elapsed;
+    presence.setActivity(presenceData);
   }
 });

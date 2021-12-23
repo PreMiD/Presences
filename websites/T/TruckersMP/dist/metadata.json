@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Encrypted",
     "id": "564434085708038144"
@@ -21,12 +21,18 @@
     "stats.truckersmp.com",
     "map.truckersmp.com"
   ],
-  "version": "3.0.0",
+  "version": "3.0.1",
   "logo": "https://i.imgur.com/ptddTU8.png",
   "thumbnail": "https://i.imgur.com/Z8CxsNw.png",
   "color": "#B92025",
   "category": "games",
-  "tags": ["ets2", "ats", "scs", "drive", "truck"],
+  "tags": [
+    "ets2",
+    "ats",
+    "scs",
+    "drive",
+    "truck"
+  ],
   "settings": [
     {
       "id": "buttons",

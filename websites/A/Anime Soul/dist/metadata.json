@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Rick",
     "id": "211982234964590592"
@@ -12,13 +12,13 @@
     "nl": "De grootste Anime Discord server ter wereld!"
   },
   "url": "animesoul.com",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "logo": "https://i.imgur.com/fd4DHxK.png",
   "thumbnail": "https://i.imgur.com/jvhu7Ww.jpg",
   "color": "#7289da",
+  "category": "other",
   "tags": [
     "anime",
     "discord-server"
-  ],
-  "category": "other"
+  ]
 }

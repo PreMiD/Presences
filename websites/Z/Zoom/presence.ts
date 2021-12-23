@@ -54,10 +54,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 function videoEnabled() {
@@ -74,8 +72,7 @@ function videoEnabled() {
 
 function memberCount() {
   const counter = document.querySelector(
-      ".footer-button__participants-icon > .footer-button__number-counter > span"
-    ),
-    res = counter === null ? null : Number(counter.innerHTML);
-  return res;
+    ".footer-button__participants-icon > .footer-button__number-counter > span"
+  );
+  return counter === null ? null : Number(counter.textContent);
 }

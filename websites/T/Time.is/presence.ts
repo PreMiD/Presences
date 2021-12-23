@@ -14,14 +14,12 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname === "/") {
       presenceData.details = "My time is:";
       presenceData.state = clock.textContent;
-    } else if (clock !== null) {
+    } else if (clock) {
       presenceData.details = document.querySelector("#msgdiv > h1").textContent;
       presenceData.state = clock.textContent;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

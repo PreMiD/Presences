@@ -36,23 +36,19 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname.includes("/videos")) {
     if (playback === true && !isNaN(duration)) {
       const videoTitle = document.querySelector(
-          "div > div.title-views.flex.column > h1"
-        ),
-        brand = document.querySelector(
-          "div.hvpi-main.flex.column > div > div > div:nth-child(1) > a"
-        ),
-        timestamps = presence.getTimestamps(
-          Math.floor(currentTime),
-          Math.floor(duration)
-        );
+        "div > div.title-views.flex.column > h1"
+      );
       presenceData.details =
         videoTitle !== null ? videoTitle.textContent : "Title not found";
-      presenceData.state = brand.textContent;
+      presenceData.state = document.querySelector(
+        "div.hvpi-main.flex.column > div > div > div:nth-child(1) > a"
+      ).textContent;
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
       if (paused) {
         delete presenceData.startTimestamp;
@@ -60,14 +56,13 @@ presence.on("UpdateData", async () => {
       }
     } else {
       const videoTitle = document.querySelector(
-          "div > div.title-views.flex.column > h1"
-        ),
-        brand = document.querySelector(
-          "div.hvpi-main.flex.column > div > div > div:nth-child(1) > a"
-        );
+        "div > div.title-views.flex.column > h1"
+      );
       presenceData.details =
         videoTitle !== null ? videoTitle.textContent : "Title not found";
-      presenceData.state = brand.textContent;
+      presenceData.state = document.querySelector(
+        "div.hvpi-main.flex.column > div > div > div:nth-child(1) > a"
+      ).textContent;
     }
   } else presenceData.details = "Browsing..";
 

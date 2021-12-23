@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "703447484025798717"
   }),
-  elapsed = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const path = window.location.pathname,
     presenceData: PresenceData = {
       largeImageKey: "honeygain",
       details: "Browsing Honeygain",
-      startTimestamp: elapsed
+      startTimestamp: browsingTimestamp
     };
 
   if (document.location.hostname === "www.honeygain.com") {
@@ -39,42 +39,38 @@ presence.on("UpdateData", () => {
       presenceData.details = "Seeking Help From Honeygain";
     else if (path.includes("/download"))
       presenceData.details = "Downloading Honeygain";
-  } else {
-    if (path === "/") {
-      presenceData.details = "Viewing Dashboard";
-      presenceData.state = `Balance: ${
-        document
-          .getElementsByClassName("sc-dnqmqq kpUaxq")[0]
-          .textContent.split("Equals to ")[1]
-      }`;
-      presenceData.state += `, Gathered Today: ${
-        document
-          .getElementsByClassName("sc-dnqmqq kpUaxq")[1]
-          .textContent.split("Equals to ")[1]
-      }`;
-    } else if (path.includes("/transactions")) {
-      presenceData.details = "Viewing Transaction History";
-      presenceData.state = `Balance: ${
-        document
-          .getElementsByClassName("sc-dnqmqq kpUaxq")[1]
-          .textContent.split("Equals to ")[1]
-      }`;
-    } else if (path.includes("/referrals")) {
-      presenceData.details = "Viewing Referrals";
-      presenceData.state = `Referral Code: ${
-        (
-          document.getElementsByClassName(
-            "sc-RefOD izklIM sc-bwCtUz gqfLZQ"
-          )[0] as HTMLInputElement
-        ).value.split("https://r.honeygain.money/")[1]
-      }`;
-    } else if (path.includes("/faq")) presenceData.details = "Viewing FAQ";
-    else if (path.includes("/profile"))
-      presenceData.details = "Viewing Profile settings";
-  }
+  } else if (path === "/") {
+    presenceData.details = "Viewing Dashboard";
+    presenceData.state = `Balance: ${
+      document
+        .getElementsByClassName("sc-dnqmqq kpUaxq")[0]
+        .textContent.split("Equals to ")[1]
+    }`;
+    presenceData.state += `, Gathered Today: ${
+      document
+        .getElementsByClassName("sc-dnqmqq kpUaxq")[1]
+        .textContent.split("Equals to ")[1]
+    }`;
+  } else if (path.includes("/transactions")) {
+    presenceData.details = "Viewing Transaction History";
+    presenceData.state = `Balance: ${
+      document
+        .getElementsByClassName("sc-dnqmqq kpUaxq")[1]
+        .textContent.split("Equals to ")[1]
+    }`;
+  } else if (path.includes("/referrals")) {
+    presenceData.details = "Viewing Referrals";
+    presenceData.state = `Referral Code: ${
+      (
+        document.getElementsByClassName(
+          "sc-RefOD izklIM sc-bwCtUz gqfLZQ"
+        )[0] as HTMLInputElement
+      ).value.split("https://r.honeygain.money/")[1]
+    }`;
+  } else if (path.includes("/faq")) presenceData.details = "Viewing FAQ";
+  else if (path.includes("/profile"))
+    presenceData.details = "Viewing Profile settings";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

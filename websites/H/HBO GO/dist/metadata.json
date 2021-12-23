@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "PreMiD",
     "id": "503557087041683458"
@@ -21,13 +21,13 @@
     "hbogo.cz",
     "hbogo.sk"
   ],
-  "version": "2.2.12",
+  "version": "2.2.13",
   "logo": "https://i.imgur.com/TTHQtBH.png",
   "thumbnail": "https://i.imgur.com/vvAp3GI.png",
   "color": "#011921",
+  "category": "videos",
   "tags": [
     "video",
     "media"
-  ],
-  "category": "videos"
+  ]
 }

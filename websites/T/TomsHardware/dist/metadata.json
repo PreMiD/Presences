@@ -1,16 +1,21 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "TomsHardware",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "bakzkndd",
     "id": "343103632453009408"
   },
+  "service": "TomsHardware",
+  "description": {
+    "nl": "TomsHardware is de leidende bestemming voor technologie fans van alle skill levels.",
+    "en": "TomsHardware is the leading destination for tech enthusiasts of all skill levels."
+  },
+  "url": "tomshardware.com",
   "regExp": "([a-z0-9-]+[.])*tomshardware[.]com[/]",
-  "category": "other",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/FSoJXWn.png",
   "thumbnail": "https://i.imgur.com/58nUSBf.png",
-  "version": "1.0.2",
   "color": "#e03c3c",
+  "category": "other",
   "tags": [
     "tomshardware",
     "technology",
@@ -18,10 +23,5 @@
     "reviews",
     "hardware",
     "software"
-  ],
-  "url": "tomshardware.com",
-  "description": {
-    "nl": "TomsHardware is de leidende bestemming voor technologie fans van alle skill levels.",
-    "en": "TomsHardware is the leading destination for tech enthusiasts of all skill levels."
-  }
+  ]
 }

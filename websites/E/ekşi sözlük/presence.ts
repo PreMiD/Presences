@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "643762072626266125"
   }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/": "Ana Sayfa",
     "/giris": "Giriş",
     "/kayit": "Kayıt Ol",

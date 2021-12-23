@@ -1,24 +1,23 @@
 const presence = new Presence({
     clientId: "653372675166568481"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "carllogo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.hostname === "carl.gg") {
     if (document.location.pathname.startsWith("/dashboard/")) {
-      const title = document
+      presenceData.details = "Managing the settings of:";
+      presenceData.state = document
         .querySelector(
           "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
         )
         .textContent.split("Jump to")[0]
         .trim();
-      presenceData.details = "Managing the settings of:";
-      presenceData.state = title;
     } else if (document.location.pathname.startsWith("/servers")) {
       presenceData.details = "Browsing through";
       presenceData.state = "servers";

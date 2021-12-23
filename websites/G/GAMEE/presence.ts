@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "gamee_logo",
       startTimestamp: timer
     },
-    { pathname, href } = location,
+    { pathname } = location,
     [, , IDs] = pathname.split("/");
 
   if (pathname === "/") presenceData.details = "Viewing homepage";
@@ -49,20 +49,16 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: `View ${name.textContent}'s profile`,
-        url: href
+        url: location.href
       }
     ];
   } else if (pathname.includes(`/game/${IDs}`)) {
-    const gameName = document.querySelector(
-      "#root > div.game-page > div.game-detail > div.game-bar > div.game-bar__slot.game-bar__slot--left > h3"
-    );
-
     presenceData.details = "Playing a game:";
-    presenceData.state = gameName.textContent;
+    presenceData.state = document.querySelector(
+      "#root > div.game-page > div.game-detail > div.game-bar > div.game-bar__slot.game-bar__slot--left > h3"
+    ).textContent;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

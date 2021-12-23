@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "theLMGN",
     "id": "158311402677731328"
@@ -13,14 +13,14 @@
     "nitrotype.com",
     "www.nitrotype.com"
   ],
-  "version": "1.2.8",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/CCu7nqD.png",
   "thumbnail": "https://i.imgur.com/6MjQV86.png",
   "color": "#D62F3A",
+  "category": "games",
   "tags": [
     "typing",
     "games",
     "gaming"
-  ],
-  "category": "games"
+  ]
 }

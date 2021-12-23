@@ -9,11 +9,8 @@ presence.on("UpdateData", () => {
 
   if (window.location.pathname.includes("/players/")) {
     const nickname = document.querySelector(
-        "div.layout-header-primary-bio > h1"
-      ).firstChild.textContent,
-      level = document.querySelector(
-        "div.image-with-corner > div.corner.corner-text"
-      ).textContent;
+      "div.layout-header-primary-bio > h1"
+    ).firstChild.textContent;
     if (window.location.pathname.includes("pc")) {
       presenceData.smallImageKey = "windows";
       presenceData.smallImageText = "Playing on PC";
@@ -25,13 +22,17 @@ presence.on("UpdateData", () => {
       presenceData.smallImageText = "Playing on Playstation";
     }
     presenceData.details = "Viewing a player:";
-    presenceData.state = `${nickname} | Level: ${level}`;
+    presenceData.state = `${nickname} | Level: ${
+      document.querySelector("div.image-with-corner > div.corner.corner-text")
+        .textContent
+    }`;
     if (window.location.pathname.includes("/heroes")) {
       presenceData.details = `Viewing ${nickname}`;
       presenceData.state = "Browsing heroes";
       try {
-        const getHero = document.querySelector("div.name > a").textContent;
-        presenceData.state += ` (${getHero})`;
+        presenceData.state += ` (${
+          document.querySelector("div.name > a").textContent
+        })`;
       } catch {
         //Catch nothing
       }
@@ -49,14 +50,15 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Heroes";
     try {
-      const heroName = document.querySelector(
-          "div.layout-header-primary-bio > div > h1"
-        ).firstChild.textContent,
-        heroRole = document.querySelector(
-          "div.layout-header-primary-bio > div > h1 > small"
-        ).textContent;
       presenceData.details = "Viewing a Hero:";
-      presenceData.state = `${heroName} (${heroRole})`;
+      presenceData.state = `${
+        document.querySelector("div.layout-header-primary-bio > div > h1")
+          .firstChild.textContent
+      } (${
+        document.querySelector(
+          "div.layout-header-primary-bio > div > h1 > small"
+        ).textContent
+      })`;
     } catch {
       presence.error("That's not a Hero profile.");
     }
@@ -93,11 +95,10 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Overbuff Blog";
     try {
-      const blogTitle = document.querySelector(
+      presenceData.details = "Reading a blog:";
+      presenceData.state = document.querySelector(
         "div.post-title > h1.title"
       ).textContent;
-      presenceData.details = "Reading a blog:";
-      presenceData.state = blogTitle;
     } catch {
       presence.error("That's not a blog post.");
     }
@@ -121,8 +122,6 @@ presence.on("UpdateData", () => {
     presenceData.state = "Front page";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

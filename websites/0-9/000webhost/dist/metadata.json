@@ -1,15 +1,24 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "000webhost",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Dark_Ville",
     "id": "638080361179512853"
   },
-  "category": "other",
+  "service": "000webhost",
+  "description": {
+    "en": "Free Web Hosting with Zero cost, website hosting with PHP, MySQL, cPanel & no ads!",
+    "nl": "Gratis Web Hosting met Nul kosten, met PHP, MySQL, cPanel & geen ads!"
+  },
+  "url": [
+    "www.000webhost.com",
+    "000webhost.com"
+  ],
+  "regExp": "([a-z0-9-]+[.])*000webhost[.]com[\\/]",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/FiCZfzh.png",
   "thumbnail": "https://i.imgur.com/coiMeKE.jpg",
-  "version": "1.1.0",
   "color": "#ff5c62",
+  "category": "other",
   "tags": [
     "000webhost",
     "webhost",
@@ -18,8 +27,6 @@
     "free-web-hosting",
     "free"
   ],
-  "regExp": "([a-z0-9-]+[.])*000webhost[.]com[\\/]",
-  "url": ["www.000webhost.com", "000webhost.com"],
   "settings": [
     {
       "id": "buttons",
@@ -27,9 +34,5 @@
       "icon": "fas fa-compress-arrows-alt",
       "value": true
     }
-  ],
-  "description": {
-    "en": "Free Web Hosting with Zero cost, website hosting with PHP, MySQL, cPanel & no ads!",
-    "nl": "Gratis Web Hosting met Nul kosten, met PHP, MySQL, cPanel & geen ads!"
-  }
+  ]
 }

@@ -27,12 +27,12 @@ presence.on("UpdateData", () => {
       `${
         document.querySelector(
           "#page-top > div.container-fluid > div > div.col-lg-4 > div > div > div > a"
-        ).innerHTML
+        ).textContent
       } ` +
       `(${
         document.querySelector(
           "#page-top > div.container-fluid > div > div.col > div > div.card-body > h4:nth-child(4) > span"
-        ).innerHTML
+        ).textContent
       })`;
   } else if (document.location.pathname.toLowerCase().includes("/arama")) {
     presenceData.details = "Bir kod arıyor:";
@@ -61,7 +61,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Bir kod görüntülüyor:";
     presenceData.state = document.querySelector(
       "#page-top > div.container-fluid > div > div > div.card.shadow.mb-4 > div.card-header > center > h4"
-    ).innerHTML;
+    ).textContent;
   } else if (window.location.pathname.toLowerCase() === "/admin/paylas") {
     presenceData.details = "Bir admin sayfası görüntülüyor:";
     presenceData.state = "Paylaş";
@@ -93,8 +93,6 @@ presence.on("UpdateData", () => {
     presenceData.details = "Bir kategori görüntülüyor:";
     presenceData.state = "Altyapı";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 
   if (!(await presence.getSetting("incognito"))) {
     presenceData.details = document.getElementById("premid").innerText;
-    if ((await presence.getSetting("showTimestamp")))
+    if (await presence.getSetting("showTimestamp"))
       presenceData.startTimestamp = browsingTimestamp;
   }
   if (!presenceData.details) presence.setActivity();

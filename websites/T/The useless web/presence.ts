@@ -223,8 +223,6 @@ presence.on("UpdateData", () => {
   if (window.location.href.toLowerCase().includes("nooooooooooooooo.com"))
     presenceData.state = "nooooooooooooooo.com";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -5,8 +5,8 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
-let user: HTMLElement, title: HTMLElement;
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -15,10 +15,10 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.gamestar.de") {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Betrachtet die Startseite";
     } else if (document.location.pathname.includes("/artikel/")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       user = document.querySelector(
         "#content > div:nth-child(3) > div > div > div.col-xs-12.div-article-title > div:nth-child(6) > div:nth-child(1) > h1"
       );
@@ -26,33 +26,32 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/videos/")) {
-      const video = document.querySelector(
-        "#playerID > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-      );
-      (title = document.querySelector(
-        "#content > div:nth-child(3) > div > div > div > div:nth-child(3) > div > h1"
-      ).textContent),
-        ({ currentTime, duration, paused } = video),
-        (timestamps = presence.getTimestamps(
-          Math.floor(currentTime),
-          Math.floor(duration)
-        ));
-      if (!isNaN(duration)) {
-        presenceData.smallImageKey = paused ? "pause" : "play";
-        presenceData.smallImageText = paused
+      const video: HTMLVideoElement = document.querySelector(
+          "#playerID > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+        ),
+        title = document.querySelector(
+          "#content > div:nth-child(3) > div > div > div > div:nth-child(3) > div > h1"
+        ).textContent;
+      if (!isNaN(video.duration)) {
+        presenceData.smallImageKey = video.paused ? "pause" : "play";
+        presenceData.smallImageText = video.paused
           ? (await strings).pause
           : (await strings).play;
-        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(
+            Math.floor(video.currentTime),
+            Math.floor(video.duration)
+          );
 
         [presenceData.details] = title.split("-");
         presenceData.state = title.replace(`${title.split("-")[0]}- `, "");
 
-        if (paused) {
+        if (video.paused) {
           delete presenceData.startTimestamp;
           delete presenceData.endTimestamp;
         }
-      } else if (isNaN(duration)) {
-        presenceData.startTimestamp = browsingStamp;
+      } else if (isNaN(video.duration)) {
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Betrachtet:";
         presenceData.state = title;
       }
@@ -60,7 +59,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (!presenceData.details) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Betrachtet Seite:";
     presenceData.state = document.querySelector("head > title").textContent;
     presence.setActivity(presenceData);

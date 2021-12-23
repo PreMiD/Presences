@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -11,15 +11,15 @@
     "nl": "filmmodu is een Turkse dienst die de nieuwste films aanbiedt."
   },
   "url": "www.filmmodu.org",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/JV9Ef1p.png",
   "thumbnail": "https://i.imgur.com/WVtVwEN.png",
   "color": "#ffc526",
+  "category": "videos",
   "tags": [
     "filmmodu",
     "movie",
     "video",
     "turkish"
-  ],
-  "category": "videos"
+  ]
 }

@@ -83,5 +83,4 @@ presence.on("UpdateData", async () => {
   } else presenceData.smallImageText = `Listeners: ${aqualisteners}`;
 
   presence.setActivity(presenceData, true);
-  presence.setTrayTitle();
 });

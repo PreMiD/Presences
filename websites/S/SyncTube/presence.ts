@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "827892428266274857"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
   const setTimeElapsed = await presence.getSetting("timeElapsed"),
@@ -13,7 +13,7 @@ presence.on("UpdateData", async function () {
     },
     urlpath = window.location.pathname.split("/");
 
-  if (setTimeElapsed) presenceData.startTimestamp = browsingStamp;
+  if (setTimeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (!urlpath[1]) presenceData.details = "Home";
   else if (urlpath[1] === "rooms") {
@@ -38,8 +38,6 @@ presence.on("UpdateData", async function () {
     } else presenceData.details = "Browsing rooms";
   } else presenceData.details = "Other";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

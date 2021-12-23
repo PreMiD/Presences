@@ -27,10 +27,8 @@ presence.on("UpdateData", async () => {
     };
 
   if (kategori && kategori.textContent !== "") {
-    const [, state] = kategori.textContent.split(":");
-
     presenceData.details = "Bir kategoriyi inceliyor:";
-    presenceData.state = state;
+    [, presenceData.state] = kategori.textContent.split(":");
   } else if (CevapButon && CevapButon.textContent !== "") {
     presenceData.details = "Bir konuyu inceliyor:";
     presenceData.state = document.querySelector(
@@ -58,8 +56,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Ana Sayfa";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

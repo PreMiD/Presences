@@ -1,11 +1,11 @@
 const presence = new Presence({
   clientId: "611544256758153225"
 });
-let presenceData: PresenceData = {
-  largeImageKey: "logo"
-};
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
   if (document.location.pathname === "/")
     presenceData.details = "Viewing the homepage";
   else if (document.location.pathname.startsWith("/users/sign_in"))
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading the post:";
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname.startsWith("/writing"))
     presenceData.details = "Browsing through Fanfictions";
   else if (document.location.pathname === "/dis")
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading the general discussion:";
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname === "/generals")
     presenceData.details = "Looking at general posts";
   else if (document.location.pathname.startsWith("/generals/"))
@@ -56,42 +56,42 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading the pony discussion:";
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname === "/rp")
     presenceData.details = "Browsing through rp's";
   else if (document.location.pathname.startsWith("/rp/")) {
     presenceData.details = "Reading the rp chat:";
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname === "/meta")
     presenceData.details = "Browsing through the website policy";
   else if (document.location.pathname.startsWith("/meta/")) {
     presenceData.details = "Reading the information post:";
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname === "/tagging")
     presenceData.details = "Browsing through tagging discussions";
   else if (document.location.pathname.startsWith("/tagging/")) {
     presenceData.details = "Reading the tagging discussion:";
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname === "/uppers")
     presenceData.details = "Browsing through uploader discussions";
   else if (document.location.pathname.startsWith("/uppers/")) {
     presenceData.details = "Reading the uploader discussion:";
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname === "/forums")
     presenceData.details = "Browsing through the forum";
   else if (document.location.pathname.startsWith("/forums")) {
     presenceData.details = "Reading the forum post:";
     presenceData.state = (
       document.querySelector(".layout--narrow h1") as HTMLElement
-    ).innerText;
+    ).textContent;
   } else if (document.location.pathname.startsWith("/activity"))
     presenceData.details = "Browsing recently uploaded pictures";
   else if (document.location.pathname.startsWith("/lists"))
@@ -130,10 +130,6 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.startsWith("/images/new"))
       presenceData.details = "uploading a new picture";
     else presenceData.details = "Browsing through all pictures";
-  } else {
-    presenceData = {
-      largeImageKey: "logo"
-    };
   }
   presence.setActivity(presenceData);
 });

@@ -42,7 +42,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a user profile:";
       presenceData.state = document.querySelector(
         "body > section > div > div > div > section > section > div > div > div > div > h2 "
-      ).innerHTML;
+      ).textContent;
     }
   } else {
     presenceData.details = "Viewing a page:";
@@ -70,7 +70,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Editing a project:";
       presenceData.state = document.querySelector(
         "body > div > div > header > nav > button > div > span"
-      ).innerHTML;
+      ).textContent;
     } else if (window.location.pathname.toLowerCase().includes("~")) {
       presenceData.details = "Viewing a project:";
       presenceData.state = window.location.pathname.replace("/", "");
@@ -80,8 +80,6 @@ presence.on("UpdateData", () => {
     } else delete presenceData.details;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

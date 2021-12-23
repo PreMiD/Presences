@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -13,14 +13,14 @@
     "nl": "DashNet van Orteil en Opti, een team van twee mensen dat browsergames, generatoren en andere gekke experimenten maakt."
   },
   "url": "dashnet.org",
-  "version": "1.2.9",
+  "regExp": "([a-z0-9-]+[.])*dashnet[.]org[/]",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/xcK0UqX.png",
   "thumbnail": "https://i.imgur.com/PnsZ4Nv.png",
   "color": "#042B48",
+  "category": "games",
   "tags": [
     "cookie",
     "clicker"
-  ],
-  "category": "games",
-  "regExp": "([a-z0-9-]+[.])*dashnet[.]org[/]"
+  ]
 }

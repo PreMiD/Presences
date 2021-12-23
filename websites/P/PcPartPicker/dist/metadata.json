@@ -1,23 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "PcPartPicker",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "वाह्य",
     "id": "819696394180100106"
   },
-  "category": "other",
+  "service": "PcPartPicker",
+  "description": {
+    "en": "Pick parts. Build your PC. Compare and Share."
+  },
+  "url": "pcpartpicker.com",
+  "regExp": "([a-z]{2}.|)pcpartpicker.com",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/Lpgj0ZZ.png",
   "thumbnail": "https://i.imgur.com/vWF3XN6.png",
-  "version": "1.0.3",
   "color": "#c3a041",
+  "category": "other",
   "tags": [
     "diy",
     "pc-builder",
     "building-guides"
-  ],
-  "url": "pcpartpicker.com",
-  "description": {
-    "en": "Pick parts. Build your PC. Compare and Share."
-  },
-  "regExp": "([a-z]{2}.|)pcpartpicker.com"
+  ]
 }

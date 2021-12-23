@@ -7,9 +7,9 @@ presence.on("UpdateData", () => {
       largeImageKey: "logo"
     },
     page = window.location.pathname,
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (page.endsWith("/editcard"))
     presenceData.details = "Editing their profile card";
@@ -30,8 +30,6 @@ presence.on("UpdateData", () => {
   else if (page.startsWith("/profile"))
     presenceData.details = "Viewing their profile";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -17,18 +17,13 @@ function isPodcast(): boolean {
   return !!document.getElementsByClassName("track__podcast")[0];
 }
 
-const getData = async (): Promise<void> => {
-  const title = (
-      document.getElementsByClassName("track__title")[0] as HTMLElement
-    ).innerText,
-    progress = (
-      document.getElementsByClassName("progress__left")[0] as HTMLElement
-    ).innerText,
-    trackLength = (
-      document.getElementsByClassName("progress__right")[0] as HTMLElement
-    ).innerText,
-    startedAt = Date.now() - getMillisecondsFromString(progress),
-    endAt = startedAt + getMillisecondsFromString(trackLength),
+setInterval(async () => {
+  const startedAt =
+      Date.now() -
+      getMillisecondsFromString(
+        (document.getElementsByClassName("progress__left")[0] as HTMLElement)
+          .textContent
+      ),
     playing =
       document.getElementsByClassName("player-controls__btn_pause").length ===
       2;
@@ -37,37 +32,37 @@ const getData = async (): Promise<void> => {
   if (isPodcast()) {
     artists = (
       document.getElementsByClassName("track__podcast")[0] as HTMLElement
-    ).innerText;
+    ).textContent;
   } else {
     artists = (
       document.getElementsByClassName("track__artists")[0] as HTMLElement
-    ).innerText;
+    ).textContent;
   }
 
   presenceData = {
     largeImageKey: "og-image",
     smallImageKey: playing ? "play" : "pause",
     smallImageText: playing ? (await strings).playing : (await strings).pause,
-    details: title,
+    details: (document.getElementsByClassName("track__title")[0] as HTMLElement)
+      .textContent,
     state: artists,
     startTimestamp: startedAt,
-    endTimestamp: endAt
+    endTimestamp:
+      startedAt +
+      getMillisecondsFromString(
+        (document.getElementsByClassName("progress__right")[0] as HTMLElement)
+          .textContent
+      )
   };
 
   if (!playing) {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }
-};
-
-setInterval(getData, 1000);
+}, 1000);
 
 presence.on("UpdateData", () => {
-  const title = document.getElementsByClassName("track__title");
-
-  if (title.length !== 0) presence.setActivity(presenceData);
-  else {
-    presence.setTrayTitle();
-    presence.setActivity();
-  }
+  if (document.getElementsByClassName("track__title").length !== 0)
+    presence.setActivity(presenceData);
+  else presence.setActivity();
 });

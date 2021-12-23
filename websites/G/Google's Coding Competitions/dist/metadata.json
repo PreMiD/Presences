@@ -1,23 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Google's Coding Competitions",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Palskie",
     "id": "90431685472038912"
   },
-  "category": "other",
+  "service": "Google's Coding Competitions",
+  "description": {
+    "en": "Google's Coding Competitions (Code Jam, Hash Code, and Kick Start) enthrall, challenge, and test coders around the world. Try your hand at one, or all three."
+  },
+  "url": "codingcompetitions.withgoogle.com",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/FWvJrd7.png",
   "thumbnail": "https://i.imgur.com/o6pipXf.png",
-  "version": "1.0.3",
   "color": "#ffffff",
+  "category": "other",
   "tags": [
     "competition",
     "coding",
     "education",
     "programming"
-  ],
-  "url": "codingcompetitions.withgoogle.com",
-  "description": {
-    "en": "Google's Coding Competitions (Code Jam, Hash Code, and Kick Start) enthrall, challenge, and test coders around the world. Try your hand at one, or all three."
-  }
+  ]
 }

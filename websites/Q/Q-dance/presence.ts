@@ -7,24 +7,19 @@ const presence = new Presence({
   elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "logo"
-    },
-    radioCheck = document.querySelector("svg.audioplayer-controls__icon--play")
-      ? false
-      : true;
-  if (radioCheck) {
-    const song = document.querySelector(
-        ".audioplayer-nowplaying__track"
-      ).textContent,
-      artist = document.querySelector(
+  const presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
+  if (document.querySelector("svg.audioplayer-controls__icon--play")) {
+    (presenceData.details = document.querySelector(
+      ".audioplayer-nowplaying__track"
+    ).textContent),
+      (presenceData.state = document.querySelector(
         ".audioplayer-nowplaying__artist"
-      ).textContent;
-    (data.details = song),
-      (data.state = artist),
-      (data.smallImageKey = "live"),
-      (data.smallImageText = (await strings).live);
-    data.startTimestamp = elapsed;
-    presence.setActivity(data);
+      ).textContent),
+      (presenceData.smallImageKey = "live"),
+      (presenceData.smallImageText = (await strings).live);
+    presenceData.startTimestamp = elapsed;
+    presence.setActivity(presenceData);
   } else presence.clearActivity();
 });

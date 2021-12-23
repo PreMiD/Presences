@@ -1,23 +1,22 @@
 const presence = new Presence({
     clientId: "855316349655711744"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.pathname === "/")
     presenceData.details = "Viewing the home page.";
   else if (document.location.pathname.startsWith("/dashboard/")) {
-    const title = document
+    presenceData.details = "Managing the settings of:";
+    presenceData.state = document
       .querySelector(
         "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
       )
       .textContent.trim();
-    presenceData.details = "Managing the settings of:";
-    presenceData.state = title;
   } else if (
     document.location.pathname.toLowerCase().startsWith("/account/register")
   )
@@ -65,21 +64,23 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing Ko-Fi's About Page";
   else if (document.location.pathname.toLowerCase().startsWith("/s/")) {
     try {
-      const shopItem = document
-          .querySelector(
-            "#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > span"
-          )
-          .textContent.trim(),
-        shopOwner = document
-          .querySelector(
-            "#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > div > a > div > span:nth-child(1)"
-          )
-          .textContent.trim(),
-        [, , URLSplit] = document.location.pathname.split("/"),
-        URL = `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`;
-      presenceData.details = `Viewing ${shopItem}`;
-      presenceData.state = `By ${shopOwner}`;
-      presenceData.buttons = [{ label: "View Item", url: URL }];
+      const [, , URLSplit] = document.location.pathname.split("/");
+      presenceData.details = `Viewing ${document
+        .querySelector(
+          "#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > span"
+        )
+        .textContent.trim()}`;
+      presenceData.state = `By ${document
+        .querySelector(
+          "#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > div > a > div > span:nth-child(1)"
+        )
+        .textContent.trim()}`;
+      presenceData.buttons = [
+        {
+          label: "View Item",
+          url: `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`
+        }
+      ];
     } catch {
       presenceData.details = "Viewing a shop item.";
     }
@@ -96,16 +97,19 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.toLowerCase().startsWith("/post")) {
     presenceData.details = "Viewing a post.";
     try {
-      const postName = document
-          .querySelector(
-            "#body-content > div > div.wrapper.wrapper-content.article > div > div > div > div > div:nth-child(4) > div > h1"
-          )
-          .textContent.trim(),
-        [, , URLSplit] = document.location.pathname.split("/"),
-        URL = `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`;
+      const [, , URLSplit] = document.location.pathname.split("/");
       presenceData.details = "Viewing a post:";
-      presenceData.state = postName;
-      presenceData.buttons = [{ label: "View Post", url: URL }];
+      presenceData.state = document
+        .querySelector(
+          "#body-content > div > div.wrapper.wrapper-content.article > div > div > div > div > div:nth-child(4) > div > h1"
+        )
+        .textContent.trim();
+      presenceData.buttons = [
+        {
+          label: "View Post",
+          url: `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`
+        }
+      ];
     } catch {
       presenceData.details = "Viewing a post.";
     }
@@ -138,11 +142,14 @@ presence.on("UpdateData", () => {
       // console.log(userFixed)
 
       if (user !== "undefined") {
-        const userURL = `https://ko-fi.com/${userSplit[1]}?ref=premid_discord_presence`;
-
         presenceData.details = "Viewing this users page:";
         presenceData.state = user;
-        presenceData.buttons = [{ label: "View Page", url: userURL }];
+        presenceData.buttons = [
+          {
+            label: "View Page",
+            url: `https://ko-fi.com/${userSplit[1]}?ref=premid_discord_presence`
+          }
+        ];
       }
 
       if (document.location.pathname.startsWith(`/${userSplit[1]}/gallery`))

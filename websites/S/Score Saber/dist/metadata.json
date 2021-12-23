@@ -14,12 +14,12 @@
   "logo": "https://i.imgur.com/paPCAuE.png",
   "thumbnail": "https://i.imgur.com/3SmQEc2.png",
   "color": "#ffde1a",
+  "category": "games",
   "tags": [
     "scoresaber",
     "beatsaber",
     "gaming"
   ],
-  "category": "games",
   "settings": [
     {
       "id": "time",

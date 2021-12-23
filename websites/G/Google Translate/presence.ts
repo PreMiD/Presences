@@ -481,7 +481,7 @@ function languageCode(language: string): string {
   }
 }
 
-const browsingStamp: number = Math.floor(Date.now() / 1000);
+const browsingTimestamp: number = Math.floor(Date.now() / 1000);
 let from: string, to: string;
 
 presence.on("UpdateData", async () => {
@@ -505,16 +505,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Contribute";
     if (contr) {
       const langs = document
-          .querySelector("c-wiz[jsrenderer=TxVJMc]")
-          .getAttribute("data-p")
-          .split(","),
-        source = langs[1].replaceAll('"', ""),
-        target = langs[2].replaceAll('"', "");
+        .querySelector("c-wiz[jsrenderer=TxVJMc]")
+        .getAttribute("data-p")
+        .split(",");
 
       presenceData.details = "Contributing";
-      presenceData.state = `${languageCode(source)} → ${languageCode(
-        target
-      )}: ${contr.textContent}`;
+      presenceData.state = `${languageCode(
+        langs[1].replaceAll('"', "")
+      )} → ${languageCode(langs[2].replaceAll('"', ""))}: ${contr.textContent}`;
     }
   } else {
     from = document
@@ -529,7 +527,7 @@ presence.on("UpdateData", async () => {
       .replaceAll('"', "");
   }
 
-  presenceData.startTimestamp = showTime ? browsingStamp : null;
+  presenceData.startTimestamp = showTime ? browsingTimestamp : null;
   if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
 
   if (

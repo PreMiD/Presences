@@ -1,6 +1,5 @@
 const presence = new Presence({ clientId: "688752009079160852" }),
-  presenceData: PresenceData = { largeImageKey: "logo" },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let customData = false,
   title: HTMLElement,
   user: HTMLElement,
@@ -10,24 +9,22 @@ let customData = false,
   mode: number;
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
+  };
   customData = false;
 
   // You code here
-  if (document.location.pathname === "/") {
-    presenceData.details = "Home Page";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/login")) {
+  if (document.location.pathname === "/") presenceData.details = "Home Page";
+  else if (document.location.pathname.includes("/login"))
     presenceData.details = "Logging in";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/register")) {
+  else if (document.location.pathname.includes("/register"))
     presenceData.details = "Regitstering account";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/u")) {
+  else if (document.location.pathname.includes("/u")) {
     user = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div.ui.top.attached.segment.overflow.auto > div:nth-child(1) > div:nth-child(2) > h1"
     );
-    presenceData.startTimestamp = browsingStamp;
-
     url = new URL(document.location.href);
     mode = parseInt(url.searchParams.get("mode"));
     switch (mode) {
@@ -42,8 +39,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(6) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = `${user.innerText}'s Taiko profile`;
-            presenceData.state = `${rank.innerText} | ${pp.innerText}pp(Relax)`;
+            presenceData.details = `${user.textContent}'s Taiko profile`;
+            presenceData.state = `${rank.textContent} | ${pp.textContent}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -52,8 +49,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = `${user.innerText}'s Taiko profile`;
-            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
+            presenceData.details = `${user.textContent}'s Taiko profile`;
+            presenceData.state = `${rank.textContent} | ${pp.textContent}pp`;
             break;
         }
         break;
@@ -68,8 +65,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(7) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = `${user.innerText}'s Catch profile`;
-            presenceData.state = `${rank.innerText} | ${pp.innerText}pp(Relax)`;
+            presenceData.details = `${user.textContent}'s Catch profile`;
+            presenceData.state = `${rank.textContent} | ${pp.textContent}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -78,8 +75,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(3) > table > tbody > tr:nth-child(1) > td.right.aligned"
             );
-            presenceData.details = `${user.innerText}'s Catch profile`;
-            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
+            presenceData.details = `${user.textContent}'s Catch profile`;
+            presenceData.state = `${rank.textContent} | ${pp.textContent}pp`;
             break;
         }
         break;
@@ -90,8 +87,8 @@ presence.on("UpdateData", async () => {
         pp = document.querySelector(
           "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(4) > table > tbody > tr:nth-child(1) > td.right.aligned"
         );
-        presenceData.details = `${user.innerText}'s Mania profile`;
-        presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
+        presenceData.details = `${user.textContent}'s Mania profile`;
+        presenceData.state = `${rank.textContent} | ${pp.textContent}pp`;
         break;
       default:
         url = new URL(document.location.href);
@@ -104,8 +101,8 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(5) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = `${user.innerText}'s Standard profile`;
-            presenceData.state = `${rank.innerText} | ${pp.innerText}pp(Relax)`;
+            presenceData.details = `${user.textContent}'s Standard profile`;
+            presenceData.state = `${rank.textContent} | ${pp.textContent}pp(Relax)`;
             break;
           default:
             rank = document.querySelector(
@@ -114,14 +111,13 @@ presence.on("UpdateData", async () => {
             pp = document.querySelector(
               "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(1) > table > tbody > tr:nth-child(3) > td.right.aligned"
             );
-            presenceData.details = `${user.innerText}'s Standard profile`;
-            presenceData.state = `${rank.innerText} | ${pp.innerText}pp`;
+            presenceData.details = `${user.textContent}'s Standard profile`;
+            presenceData.state = `${rank.textContent} | ${pp.textContent}pp`;
             break;
         }
         break;
     }
   } else if (document.location.pathname.includes("/leaderboard")) {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing Leaderboard";
 
     url = new URL(document.location.href);
@@ -173,71 +169,52 @@ presence.on("UpdateData", async () => {
     );
 
     presenceData.details = "Looking at the beatmap:";
-    presenceData.state = title.innerText;
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/beatmaps/rank_request")) {
+    presenceData.state = title.textContent;
+  } else if (document.location.pathname.includes("/beatmaps/rank_request"))
     presenceData.details = "Request beatmap ranking";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/donate")) {
+  else if (document.location.pathname.includes("/donate")) {
     presenceData.details = "Donate";
     presenceData.state = "What are you waiting for?";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/settings")) {
+  } else if (document.location.pathname.includes("/settings"))
     presenceData.details = "Browsing their settings";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/friends")) {
+  else if (document.location.pathname.includes("/friends"))
     presenceData.details = "Browsing their friends";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/changelog")) {
+  else if (document.location.pathname.includes("/changelog"))
     presenceData.details = "Checking changelog";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/team")) {
+  else if (document.location.pathname.includes("/team"))
     presenceData.details = "Viewing osu!ripple team";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/about")) {
+  else if (document.location.pathname.includes("/about")) {
     presenceData.details = "Viewing about";
     presenceData.state = "Welcome to Ripple.";
-    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/doc")) {
     presenceData.details = "Viewing Documentation";
     presenceData.state = "Home Page";
-    presenceData.startTimestamp = browsingStamp;
-
     title = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div > div:nth-child(1) > h1"
     );
 
-    if (title !== null) presenceData.details = "Viewing Documentation";
-    presenceData.state = title.innerText;
-    presenceData.startTimestamp = browsingStamp;
+    if (title) presenceData.details = "Viewing Documentation";
+    presenceData.state = title.textContent;
   }
 
-  if (document.location.hostname === "vinse.ripple.moe") {
+  if (document.location.hostname === "vinse.ripple.moe")
     presenceData.details = "Browsing Multiplayer history";
-    presenceData.startTimestamp = browsingStamp;
-  }
 
   if (document.location.hostname === "fokabot.ripple.moe") {
     presenceData.details = "Viewing Documentation";
     presenceData.state = "FokaBot Commands";
-    presenceData.startTimestamp = browsingStamp;
   }
 
-  if (document.location.hostname === "support.ripple.moe") {
+  if (document.location.hostname === "support.ripple.moe")
     presenceData.details = "Ripple Support";
-    presenceData.startTimestamp = browsingStamp;
-  }
 
-  if (document.location.hostname === "status.ripple.moe") {
+  if (document.location.hostname === "status.ripple.moe")
     presenceData.details = "Checking server status";
-    presenceData.startTimestamp = browsingStamp;
-  }
 
   if (document.location.hostname === "blog.ripple.moe") {
     title = document.querySelector("head > title");
     presenceData.details = "Reading Blog";
-    presenceData.state = title.innerText;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = title.textContent;
   }
 
   if (!customData) presence.setActivity(presenceData);

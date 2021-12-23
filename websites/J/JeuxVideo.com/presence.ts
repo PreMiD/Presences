@@ -20,44 +20,52 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Page d'accueil";
   else if (document.location.pathname.includes("/news/")) {
-    const article = document.querySelector("div.titre-wrapper").textContent;
     presenceData.details = "Lis une actualité";
-    presenceData.state = truncateString(article, 128);
+    presenceData.state = truncateString(
+      document.querySelector("div.titre-wrapper").textContent,
+      128
+    );
   } else if (document.location.pathname.includes("/videos/")) {
-    const video = document.querySelector("div.titre-video").textContent;
     presenceData.details = "Regarde une vidéo";
-    presenceData.state = truncateString(video, 128);
+    presenceData.state = truncateString(
+      document.querySelector("div.titre-video").textContent,
+      128
+    );
   } else if (document.location.pathname.includes("/test/")) {
-    const test = document.querySelector(".gameHeaderBanner__title").textContent,
-      note = document.querySelector(
-        ".bloc-avis-testeur > .note > strong"
-      ).textContent;
     presenceData.details = "Lis un test";
-    presenceData.state = `${truncateString(test, 128)} (${note}/20)`;
+    presenceData.state = `${truncateString(
+      document.querySelector(".gameHeaderBanner__title").textContent,
+      128
+    )} (${
+      document.querySelector(".bloc-avis-testeur > .note > strong").textContent
+    }/20)`;
   } else if (document.location.pathname.includes("/messages-prives/"))
     presenceData.details = "Lis ses MP";
   else if (document.location.pathname.includes("/forums/0-")) {
-    const forum = document.querySelector(
+    presenceData.details = truncateString(
+      document.querySelector(
         "#forum-main-col > .titre-head-bloc > .titre-bloc-forum"
       ).textContent,
-      connected = document.querySelector(
-        ".panel-heading > .nb-connect-fofo"
-      ).textContent;
-    presenceData.details = truncateString(forum, 64);
-    presenceData.state = connected;
+      64
+    );
+    presenceData.state = document.querySelector(
+      ".panel-heading > .nb-connect-fofo"
+    ).textContent;
   } else if (document.location.pathname.includes("/forums/")) {
-    const forum = document.querySelector(
+    presenceData.details = truncateString(
+      document.querySelector(
         ".bloc-fil-ariane-crumb-forum > .fil-ariane-crumb > span:last-of-type > a"
       ).textContent,
-      thread = document.querySelector(
+      64
+    );
+    presenceData.state = truncateString(
+      document.querySelector(
         "#forum-main-col > .titre-head-bloc > .titre-bloc-forum > #bloc-title-forum"
-      ).textContent;
-    presenceData.details = truncateString(forum, 64);
-    presenceData.state = truncateString(thread, 128);
+      ).textContent,
+      128
+    );
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

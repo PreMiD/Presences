@@ -3,14 +3,9 @@ const presence = new Presence({
 });
 
 function translate(isMale: boolean) {
-  const refferGender = (arr: Array<string>): string =>
-      isMale ? arr[0] : arr[1],
+  const refferGender = (arr: string[]): string => (isMale ? arr[0] : arr[1]),
     reporting: string = refferGender(["מדווח", "מדווחת"]),
     removingQuestion: string = refferGender(["מוחק שאלה", "מוחקת שאלה"]),
-    removingPenfriends: string = refferGender([
-      "מוחק מסר בחברים לעט",
-      "מוחקת מסר בחברים לעט"
-    ]),
     removingAnswer: string = refferGender(["מוחק תשובה", "מוחקת תשובה"]),
     editingQuestion: string = refferGender(["עורך שאלה", "עורכת שאלה"]),
     editingAnswer: string = refferGender(["עורך תשובה", "עורכת תשובה"]);
@@ -59,7 +54,7 @@ function translate(isMale: boolean) {
     },
     "pen-friends": {
       main: "בחברים לעט",
-      remove: removingPenfriends,
+      remove: refferGender(["מוחק מסר בחברים לעט", "מוחקת מסר בחברים לעט"]),
       write: refferGender(["כותב מסר בחברים לעט", "כותבת מסר בחברים לעט"])
     },
     reports: {
@@ -116,8 +111,8 @@ let elapsed: number,
 const hasDark: boolean = elemExists("#darkmode");
 
 // get gender
-fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
-  resp.json().then((json) => {
+fetch("https://stips.co.il/api?name=user.get_app_user").then(resp =>
+  resp.json().then(json => {
     if (json.data.appUser.gender === "male") isMale = true;
     else isMale = false;
   })
@@ -331,24 +326,23 @@ presence.on("UpdateData", () => {
   }
 
   const smallImageText =
-      location.host +
-      decodeURI(
-        location.pathname.split("/").length === 4
-          ? location.pathname.replace(
-              `/${location.pathname.split("/").pop()}`,
-              ""
-            )
-          : location.pathname === "/"
-          ? ""
-          : location.pathname
-      ),
-    data: PresenceData = {
-      details: details || translate(isMale).default,
-      largeImageKey: "stips",
-      smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",
-      startTimestamp: elapsed,
-      smallImageText
-    };
+    location.host +
+    decodeURI(
+      location.pathname.split("/").length === 4
+        ? location.pathname.replace(
+            `/${location.pathname.split("/").pop()}`,
+            ""
+          )
+        : location.pathname === "/"
+        ? ""
+        : location.pathname
+    );
 
-  presence.setActivity(data);
+  presence.setActivity({
+    details: details ?? translate(isMale).default,
+    largeImageKey: "stips",
+    smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",
+    startTimestamp: elapsed,
+    smallImageText
+  });
 });

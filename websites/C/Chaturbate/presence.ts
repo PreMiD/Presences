@@ -10,7 +10,7 @@ const presence = new Presence({
 let prev: string, elapsed: number, path: string, gender: string;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "chb"
     },
     video: HTMLVideoElement = document.querySelector("video[id$='_html5_api']");
@@ -28,23 +28,23 @@ presence.on("UpdateData", async () => {
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-    data.details = "Broadcasting as";
-    [, , data.state] = path.split("/");
-    data.smallImageKey = "live";
-    data.smallImageText = (await strings).live;
-    data.startTimestamp = elapsed;
+    presenceData.details = "Broadcasting as";
+    [, , presenceData.state] = path.split("/");
+    presenceData.smallImageKey = "live";
+    presenceData.smallImageText = (await strings).live;
+    presenceData.startTimestamp = elapsed;
   } else if (
     !video &&
     document.querySelector("#header div.logo-zone") !== null
   ) {
-    data.details = (await strings).browsing;
-    data.smallImageKey = "search";
-    data.smallImageText = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = (await strings).browsing;
 
     if (path.includes("/p/")) {
       // Whoever editing this file in the future, keep this as it is for the sake of user's privacy
-      data.state = "Accounts";
-    } else if (path.includes("/b/")) data.state = "Broadcast page";
+      presenceData.state = "Accounts";
+    } else if (path.includes("/b/")) presenceData.state = "Broadcast page";
     else if (path.includes("/tag/")) {
       if (
         typeof path.split("/")[3] === "undefined" ||
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
         path.split("/")[3].length > 1
       ) {
         // Different checks to prevent "undefined" gender strings.
-        data.state = `Tag : ${path.split("/")[2]}`;
+        presenceData.state = `Tag : ${path.split("/")[2]}`;
       } else {
         switch (path.split("/")[3]) {
           case "f":
@@ -69,69 +69,69 @@ presence.on("UpdateData", async () => {
             gender = "trans";
         }
 
-        data.state = `Tag : ${path.split("/")[2]} (${gender})`;
+        presenceData.state = `Tag : ${path.split("/")[2]} (${gender})`;
       }
     } else {
       switch (path) {
         case "/":
-          data.state = "Featured cams";
+          presenceData.state = "Featured cams";
           break;
         case "/female-cams/":
-          data.state = "Female cams";
+          presenceData.state = "Female cams";
           break;
         case "/male-cams/":
-          data.state = "Male cams";
+          presenceData.state = "Male cams";
           break;
         case "/couple-cams/":
-          data.state = "Couple cams";
+          presenceData.state = "Couple cams";
           break;
         case "/trans-cams/":
-          data.state = "Trans cams";
+          presenceData.state = "Trans cams";
           break;
         case "/tags/":
-          data.state = "Tags";
+          presenceData.state = "Tags";
           break;
         case "/accounts/register/":
-          data.state = "Signing up";
+          presenceData.state = "Signing up";
           break;
         case "/auth/login/":
-          data.state = "Logging in";
+          presenceData.state = "Logging in";
           break;
         case "/auth/logout/":
-          data.state = "Logging out";
+          presenceData.state = "Logging out";
           break;
         case "/north-american-cams/":
-          data.state = "North American cams";
+          presenceData.state = "North American cams";
           break;
         case "/other-region-cams/":
-          data.state = "Other region cams";
+          presenceData.state = "Other region cams";
           break;
         case "/euro-russian-cams/":
-          data.state = "Euro Russian cams";
+          presenceData.state = "Euro Russian cams";
           break;
         case "/asian-cams/":
-          data.state = "Asian cams";
+          presenceData.state = "Asian cams";
           break;
         case "/south-american-cams/":
-          data.state = "South American cams";
+          presenceData.state = "South American cams";
           break;
         case "/exhibitionist-cams/":
-          data.state = "Exhibitionist cams";
+          presenceData.state = "Exhibitionist cams";
           break;
         case "/hd-cams/":
-          data.state = "HD cams";
+          presenceData.state = "HD cams";
           break;
         case "/spy-on-cams/":
-          data.state = "Private cams";
+          presenceData.state = "Private cams";
           break;
         case "/new-cams/":
-          data.state = "New cams";
+          presenceData.state = "New cams";
           break;
         case "/mature-cams/":
-          data.state = "Mature cams";
+          presenceData.state = "Mature cams";
           break;
         case "/teen-cams/":
-          data.state = "Teen cams";
+          presenceData.state = "Teen cams";
           break;
         case "/sitemap/":
         case "/2257/":
@@ -144,61 +144,62 @@ presence.on("UpdateData", async () => {
         case "/affiliates/":
         case "/privacy/":
         case "/law_enforcement/":
-          data.details = "Reading";
-          data.state = "Law and meta pages";
-          data.smallImageKey = "reading";
-          data.smallImageText = "Reading";
+          presenceData.details = "Reading";
+          presenceData.state = "Law and meta pages";
+          presenceData.smallImageKey = "reading";
+          presenceData.smallImageText = "Reading";
           break;
         case "/tube/":
-          data.state = "Tube";
+          presenceData.state = "Tube";
           break;
         case "/accounts/welcome/":
-          data.state = "Welcome page";
+          presenceData.state = "Welcome page";
           break;
         case "/my_collection/private_shows/":
-          data.state = "Recorded private shows";
+          presenceData.state = "Recorded private shows";
           break;
         case "/my_collection/photo_videos/":
-          data.state = "Purchased photos/videos";
+          presenceData.state = "Purchased photos/videos";
           break;
         case "/tipping/free_tokens/":
-          data.state = "Free token methods";
+          presenceData.state = "Free token methods";
           break;
         case "/supporter/upgrade/":
-          data.state = "Upgrade page";
+          presenceData.state = "Upgrade page";
           break;
         default:
-          data.state = "Cams";
+          presenceData.state = "Cams";
       }
     }
   } else if (path.includes("/photo_videos/")) {
     if (!video && path.includes("/photo_videos/photo/")) {
-      data.details = "Looking at a photo";
-      data.state = document.querySelector("h1").textContent;
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).browsing;
+      presenceData.details = "Looking at a photo";
+      presenceData.state = document.querySelector("h1").textContent;
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = (await strings).browsing;
     } else if (video && path.includes("/photo_videos/photo/")) {
-      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
 
-      data.details = "Watching a clip";
-      data.state = document.querySelector("h1").textContent;
-      data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused
+      presenceData.details = "Watching a clip";
+      presenceData.state = document.querySelector("h1").textContent;
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
 
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
     } else {
-      data.details = (await strings).browsing;
-      data.state = "Photosets";
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).browsing;
+      presenceData.details = (await strings).browsing;
+      presenceData.state = "Photosets";
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = (await strings).browsing;
     }
   } else if (path.split("/")[2] === null || path.split("/")[2].length === 0) {
     if (window.location.href !== prev) {
@@ -206,23 +207,23 @@ presence.on("UpdateData", async () => {
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-    data.startTimestamp = elapsed;
-    [, data.details] = path.split("/");
+    presenceData.startTimestamp = elapsed;
+    [, presenceData.details] = path.split("/");
 
     if (video && !video.paused) {
-      data.smallImageKey = "live";
-      data.smallImageText = (await strings).live;
+      presenceData.smallImageKey = "live";
+      presenceData.smallImageText = (await strings).live;
     } else {
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).browsing;
-      data.state = (await strings).browsing;
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = (await strings).browsing;
+      presenceData.state = (await strings).browsing;
     }
   } else {
-    data.details = (await strings).browsing;
-    data.state = "Cams";
-    data.smallImageKey = "search";
-    data.smallImageText = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
+    presenceData.state = "Cams";
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = (await strings).browsing;
   }
 
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

@@ -3,9 +3,8 @@ import "source-map-support/register";
 import axios from "axios";
 import { blue, green, red, yellow } from "chalk";
 import { readFileSync } from "fs";
-import { validate } from "jsonschema";
-
 import ParseJSON, { ObjectNode } from "json-to-ast";
+import { validate } from "jsonschema";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
     const versions = (
@@ -15,8 +14,8 @@ const latestMetadataSchema = async (): Promise<string[]> => {
         )
       ).data as { name: string }[]
     )
-      .filter((c) => c.name.endsWith(".json"))
-      .map((c) => c.name.match(/\d.\d/g)[0]);
+      .filter(c => c.name.endsWith(".json"))
+      .map(c => c.name.match(/\d.\d/g)[0]);
     return [
       `https://schemas.premid.app/metadata/${versions.at(-1)}`,
       versions.at(-1)
@@ -98,15 +97,21 @@ const latestMetadataSchema = async (): Promise<string[]> => {
         })
       ).data.data,
       validLangs = langFiles.map(l => l.lang),
-      oldVersion = presences[0].metadata.version,
+      oldVersion = presences[0]?.metadata.version,
       invalidLangs: string[] = [];
 
-    Object.keys(meta.description).forEach((lang) => {
+    Object.keys(meta.description).forEach(lang => {
       const index = validLangs.findIndex((l: string) => l === lang);
       if (index === -1) invalidLangs.push(lang);
     });
 
-    if (result.valid && !invalidLangs.length && folder === service && isVersionBumped(oldVersion, newVersion)) {
+    if (
+      result.valid &&
+      !invalidLangs.length &&
+      folder === service &&
+      ((!oldVersion && newVersion === "1.0.0") ||
+        isVersionBumped(oldVersion, newVersion))
+    ) {
       if (meta.$schema && meta.$schema !== latestSchema)
         validatedWithWarnings(
           service,
@@ -118,11 +123,19 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     } else {
       const errors: string[] = [];
 
-      if (!isVersionBumped(oldVersion, newVersion)) {
+      if (oldVersion && !isVersionBumped(oldVersion, newVersion)) {
         errors.push(
           `::error file=${metaFile},line=${getLine(
             "version"
-            )},title=instance.version::The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`
+          )},title=instance.version::The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`
+        );
+      }
+
+      if (!oldVersion && newVersion !== "1.0.0") {
+        errors.push(
+          `::error file=${metaFile},line=${getLine(
+            "version"
+          )},title=instance.version::The version of a new presence must start at "1.0.0".`
         );
       }
 
@@ -182,24 +195,24 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       }) as ObjectNode;
 
       if (value) {
-        const node = AST.children.find((c) => c.key.value === line).value;
+        const node = AST.children.find(c => c.key.value === line).value;
 
         switch (node.type) {
           case "Literal":
             return node.loc.start.line;
           case "Object":
-            return node.children.find((c) => c.key.value === value).loc.start
+            return node.children.find(c => c.key.value === value).loc.start
               .line;
           case "Array": {
             if (typeof value === "number")
               return node.children[value].loc.start.line;
             else {
-              return node.children.find((c) => {
+              return node.children.find(c => {
                 switch (c.type) {
                   case "Literal":
                     return c.value === value;
                   case "Object":
-                    return c.children.find((c) => c.key.value === value);
+                    return c.children.find(c => c.key.value === value);
                 }
               }).loc.start.line;
             }
@@ -207,7 +220,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
         }
       } else
         return (
-          AST.children.find((c) => c.key.value === line)?.loc?.start?.line ?? 0
+          AST.children.find(c => c.key.value === line)?.loc?.start?.line ?? 0
         );
     }
   }

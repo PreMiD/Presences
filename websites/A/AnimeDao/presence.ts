@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   { pathname } = window.location,
   { hostname } = window.location,
-  startTimestamp = Math.floor(Date.now() / 1000);
+  browsingTimeStamp = Math.floor(Date.now() / 1000);
 
 let episode,
   current: number,
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
   if (pathname.startsWith("/view/")) {
     const title: string = document.querySelector("h2").textContent.trim();
     episode = title.match(/\WEpisode\W\d{1,3}/);
-    if (episode !== null) {
+    if (episode) {
       presenceData.details = title.replace(episode[0], "");
       presenceData.state = `${episode[0]} - ${
         document.querySelector("h4").textContent
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = title;
 
     const video: HTMLVideoElement = document.querySelector("video");
-    if (video !== null) {
+    if (video) {
       played = video.currentTime !== 0;
       ({ duration, paused } = video);
       current = video.currentTime;
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused ? strings.paused : strings.playing;
     }
   } else if (hostname === "animedao.to") {
-    presenceData.startTimestamp = startTimestamp;
+    presenceData.startTimestamp = browsingTimeStamp;
     if (pathname === "/") presenceData.details = (await strings).browsing;
     else if (pathname.startsWith("/animelist"))
       presenceData.details = "Viewing the Animelist";
@@ -74,9 +74,10 @@ presence.on("UpdateData", async () => {
     } else if (pathname.startsWith("/popular-anime"))
       presenceData.details = "Viewing popular anime";
     else if (pathname.startsWith("/anime")) {
-      const title = document.querySelector("h2");
       presenceData.details = "Viewing an anime";
-      presenceData.state = title?.textContent.trim();
+      presenceData.state = (
+        document.querySelector("h2") as HTMLHeadingElement
+      )?.textContent.trim();
     } else if (pathname.startsWith("/search")) {
       presenceData.details = "Searching";
       presenceData.smallImageKey = "search";

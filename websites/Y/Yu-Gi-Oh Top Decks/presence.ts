@@ -4,106 +4,83 @@ const presence = new Presence({
 let deck;
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "banner",
+    smallImageKey: "icon"
+  };
+
   if (document.location.pathname === "/") {
-    const presenceData: PresenceData = {
-      details: "Browsing Decks..",
-      state: "at Homepage",
-      //largeImageKey: "banner",
-      largeImageKey: "banner",
-      smallImageKey: "icon",
-      smallImageText: "browsing"
-    };
-
-    presence.setActivity(presenceData);
+    presenceData.details = "Browsing Decks..";
+    presenceData.state = "at Homepage";
+    presenceData.smallImageText = "browsing";
   } else if (document.location.pathname === "/decklists") {
-    const pagenumber =
-        document.getElementsByClassName("current")[0].firstElementChild
-          .textContent,
-      no1 =
-        document.getElementById("deck_lists").lastElementChild.firstElementChild
-          .children[2].textContent,
-      auth =
-        document.getElementById("deck_lists").lastElementChild.firstElementChild
-          .children[1].ENTITY_NODE,
-      deckurl = (
-        document.getElementById("deck_lists").lastElementChild.firstElementChild
-          .children[2].firstElementChild as HTMLLinkElement
-      ).href,
-      presenceData: PresenceData = {
-        details: "Looking at Decklists",
-        state: `Page: ${pagenumber} top: ${no1} by ${auth}`,
-        //largeImageKey: "banner",
-        largeImageKey: "banner",
-        smallImageKey: "icon",
-        smallImageText: deckurl
-      };
-
-    presence.setActivity(presenceData);
+    presenceData.details = "Looking at Decklists";
+    presenceData.state = `Page: ${
+      document.getElementsByClassName("current")[0].firstElementChild
+        .textContent
+    } top: ${
+      document.getElementById("deck_lists").lastElementChild.firstElementChild
+        .children[2].textContent
+    } by ${
+      document.getElementById("deck_lists").lastElementChild.firstElementChild
+        .children[1].ENTITY_NODE
+    }`;
+    presenceData.smallImageText = (
+      document.getElementById("deck_lists").lastElementChild.firstElementChild
+        .children[2].firstElementChild as HTMLLinkElement
+    ).href;
   } else if (document.location.pathname === "/top_decks") {
-    const top = document
-        .getElementsByClassName("sortable")[0]
-        .children[1].firstElementChild.children[1].textContent.replace(
-          "Most Used Cards",
-          ""
-        ),
-      presenceData: PresenceData = {
-        details: "Looking at Top decks",
-        state: `Current Meta: ${top}`,
-        //largeImageKey: "banner",
-        largeImageKey: "banner",
-        smallImageKey: "icon",
-        smallImageText: "looking"
-      };
-    presence.setActivity(presenceData);
+    presenceData.details = "Looking at Top decks";
+    presenceData.state = `Current Meta: ${document
+      .getElementsByClassName("sortable")[0]
+      .children[1].firstElementChild.children[1].textContent.replace(
+        "Most Used Cards",
+        ""
+      )}`;
+    presenceData.largeImageKey = "banner";
+    presenceData.smallImageKey = "icon";
+    presenceData.smallImageText = "looking";
   } else if (document.location.pathname === "/top_cards") {
-    const top =
-        document.getElementsByClassName("sortable")[0].children[1]
-          .firstElementChild.children[2].textContent,
-      price =
-        document.getElementsByClassName("sortable")[0].children[1]
-          .firstElementChild.children[4].textContent,
-      presenceData: PresenceData = {
-        details: "Looking at Top Cards",
-        state: `Top Card: ${top} Price: ${price}`,
-        //largeImageKey: "banner",
-        largeImageKey: "banner",
-        smallImageKey: "icon",
-        smallImageText: "looking"
-      };
-    presence.setActivity(presenceData);
+    presenceData.details = "Looking at Top Cards";
+    (presenceData.state = `Top Card: ${
+      document.getElementsByClassName("sortable")[0].children[1]
+        .firstElementChild.children[2].textContent
+    } Price: ${
+      document.getElementsByClassName("sortable")[0].children[1]
+        .firstElementChild.children[4].textContent
+    }`),
+      (presenceData.largeImageKey = "banner");
+    presenceData.smallImageKey = "icon";
+    presenceData.smallImageText = "looking";
   } else if (document.location.pathname === "/new_deck") {
     deck = (document.getElementsByName("deck_name")[0] as HTMLInputElement)
       .value;
-    const presenceData: PresenceData = {
-      details: "Building Deck",
-      state: `Editing: ${deck}`,
-      //largeImageKey: "banner",
-      largeImageKey: "banner",
-      smallImageKey: "icon",
-      smallImageText: "creating deck"
-    };
-    presence.setActivity(presenceData);
+    presenceData.details = "Building Deck";
+    presenceData.state = `Editing: ${deck}`;
+    presenceData.largeImageKey = "banner";
+    presenceData.smallImageKey = "icon";
+    presenceData.smallImageText = "creating deck";
   } else if (document.location.pathname.includes("/deck")) {
     if (/\d/.test("/deck/8205")) {
       deck = document.getElementsByClassName("large-12 columns panel")[0]
         .firstElementChild.textContent;
-      const by = document.getElementsByClassName("large-12 columns panel")[0]
-          .children[1].children[1].textContent,
-        archetype = document.getElementsByClassName("large-12 columns panel")[0]
-          .children[1].children[10].textContent,
-        [, value] = document
+      presenceData.details = `Viewing deck: ${deck} (archetype: ${
+        document.getElementsByClassName("large-12 columns panel")[0].children[1]
+          .children[10].textContent
+      })`;
+      presenceData.state = `by: ${
+        document.getElementsByClassName("large-12 columns panel")[0].children[1]
+          .children[1].textContent
+      }, price: ${
+        document
           .getElementsByClassName("large-12 columns panel")[1]
           .children[1].textContent.replace("\n", ":")
-          .split(":"),
-        presenceData: PresenceData = {
-          details: `Viewing deck: ${deck} (archetype: ${archetype})`,
-          state: `by: ${by}, price: ${value}`,
-          //largeImageKey: "banner",
-          largeImageKey: "banner",
-          smallImageKey: "icon",
-          smallImageText: document.location.href
-        };
-      presence.setActivity(presenceData);
+          .split(":")[1]
+      }`;
+      presenceData.largeImageKey = "banner";
+      presenceData.smallImageKey = "icon";
+      presenceData.smallImageText = document.location.href;
     }
   }
+  presence.setActivity(presenceData);
 });
