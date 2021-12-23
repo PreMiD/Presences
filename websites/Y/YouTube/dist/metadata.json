@@ -66,7 +66,7 @@
     "www.youtube.com",
     "studio.youtube.com"
   ],
-  "version": "5.1.11",
+  "version": "5.1.12",
   "logo": "https://i.imgur.com/o5injgg.png",
   "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
   "color": "#E40813",
@@ -111,6 +111,15 @@
       "icon": "fas fa-comment-alt-edit",
       "value": "%uploader%",
       "placeholder": "Use %title%, %uploader% or {0} to delete the row completely"
+    },
+    {
+      "id": "thumbnail",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Thumbnail",
+      "icon": "fad fa-images",
+      "value": false
     },
     {
       "id": "buttons",
