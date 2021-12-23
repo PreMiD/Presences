@@ -275,9 +275,9 @@ presence.on("UpdateData", async () => {
                 presenceData.state = title;
 
                 presenceData.largeImageKey = (
-                  document.getElementsByClassName<HTMLAnchorElement>(
+                  document.getElementsByClassName(
                     "youtube-preview"
-                  )[0]
+                  )[0] as HTMLAnchorElement
                 ).href;
 
                 presenceData.smallImageKey = "presence_browsing_season";
@@ -326,7 +326,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
 
         presenceData.largeImageKey = (
-          document.getElementsByClassName<HTMLImageElement>("anime-poster")[0]
+          document.getElementsByClassName("anime-poster")[0] as HTMLImageElement
         ).src.replace(".th", "");
 
         presenceData.smallImageKey = `presence_playback_${
