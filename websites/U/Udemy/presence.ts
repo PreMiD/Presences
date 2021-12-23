@@ -63,7 +63,7 @@ udemy.on("UpdateData", async () => {
     presenceData.state = searching || "Something";
   } else if (page.includes("/courses/")) {
     const category = document.querySelector(
-      "div h1[class*=category--heading-primary]"
+      "div h1[class*=category--heading-primary] a"
     );
 
     presenceData.details = "Browsing courses:";
