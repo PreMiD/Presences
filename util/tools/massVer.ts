@@ -32,11 +32,11 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
       flag: "w"
     }),
   missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
-    (pF) => !exists(`${pF}/dist/metadata.json`)
+    pF => !exists(`${pF}/dist/metadata.json`)
   ),
   allmeta: Array<[Metadata, string]> = glob(
     "./{websites,programs}/*/*/*/metadata.json"
-  ).map((pF) => {
+  ).map(pF => {
     const file = read(pF);
     if (isValidJSON(file)) return [JSON.parse(file), pF];
     else {

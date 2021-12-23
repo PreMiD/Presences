@@ -1,3 +1,4 @@
+/* eslint-disable no-one-time-vars/no-one-time-vars */
 interface PlayerData {
   time: {
     progress: number;
@@ -33,7 +34,7 @@ let playerData: PlayerData,
 
 presence.info("PreMiD extension has loaded");
 
-const updateData = () => {
+function updateData() {
   if (page === "watch") {
     const player = <HTMLVideoElement>$("video#ao-video")[0],
       title = $('meta[name="ao-api-malsync-title"]')[0].getAttribute("value"),
@@ -55,11 +56,11 @@ const updateData = () => {
     };
     if (document.body.contains(player) && !pageLoaded) pageLoaded = true;
   } else pageLoaded = true;
-};
+}
 setInterval(updateData, 1e3);
 
 presence.on("UpdateData", () => {
-  if (pageLoaded === false) return;
+  if (!pageLoaded) return;
   let presenceData: PresenceData = {
     largeImageKey: "main-logo",
     smallImageKey: rpaImage.general.browse,
@@ -70,9 +71,11 @@ presence.on("UpdateData", () => {
   switch (page) {
     case "watch": {
       const { title, episode, episodeName, playbackState, time } = playerData,
-        currentUrl = new URL(window.location.href),
         episodeUrl = new URL("https://animeonsen.xyz/watch");
-      episodeUrl.searchParams.append("v", currentUrl.searchParams.get("v"));
+      episodeUrl.searchParams.append(
+        "v",
+        new URL(window.location.href).searchParams.get("v")
+      );
       episodeUrl.searchParams.append("ep", episode.toString());
       presenceData = {
         ...presenceData,

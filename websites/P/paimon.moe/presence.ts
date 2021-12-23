@@ -47,9 +47,7 @@ const presence = new Presence({
     "sayu",
     "aloy"
   ],
-  pathname = document.URL,
-  character = pathname.match(/\w+/gi).pop(),
-  validCharacter = characterList.includes(character);
+  validCharacter = characterList.includes(document.URL.match(/\w+/gi).pop());
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -66,11 +64,9 @@ presence.on("UpdateData", async () => {
   if (pathname.includes("/characters") || pathname.includes("/characters/")) {
     presenceData.details = "Viewing the character list/details";
     if (validCharacter) {
-      const string = document.URL,
-        original = string
-          .match(/(\/\w+)/gi)
-          .pop()
-          .substr(1);
+      const original = document.URL.match(/(\/\w+)/gi)
+        .pop()
+        .substr(1);
       if (original === "traveler_anemo") stateText = "Anemo Traveler";
       else if (original === "traveler_geo") stateText = "Geo Traveler";
       else if (original === "kaedehara_kazuha") stateText = "Kaedehara Kazuha";
@@ -117,10 +113,11 @@ presence.on("UpdateData", async () => {
   )
     presenceData.details = "🌏 Global Wish Tally";
   else if (pathname.startsWith("/wish") || pathname.startsWith("/wish/")) {
-    const ww = document.querySelector(
+    const [, , , number] = document
+      .querySelector(
         "#sapper > main > div > div.flex.flex-col.xl\\:flex-row > div.grid.gap-4.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3.max-w-screen-xl > div:nth-child(6) > div.bg-item.rounded-xl.p-4.flex.items-center.w-full.text-white"
-      ),
-      [, , , number] = ww.textContent.split(" ");
+      )
+      .textContent.split(" ");
 
     presenceData.details = "Viewing at the Wish Counter";
     presenceData.state = `Wishes Worth: ✧ ${number}`;
@@ -178,13 +175,13 @@ presence.on("UpdateData", async () => {
     pathname.includes("/timeline") ||
     pathname.includes("/timeline/")
   ) {
-    const servertime = document.querySelector(
-        "#sapper > main > div > div.flex.svelte-15n1215 > div.svelte-15n1215 > div > label"
-      ),
-      finalText = servertime.textContent.match(/(\w(\s+)?)+/gi).pop();
-
     presenceData.details = "Viewing at the Timeline";
-    presenceData.state = `Time of ${finalText}`;
+    presenceData.state = `Time of ${document
+      .querySelector(
+        "#sapper > main > div > div.flex.svelte-15n1215 > div.svelte-15n1215 > div > label"
+      )
+      .textContent.match(/(\w(\s+)?)+/gi)
+      .pop()}`;
   } else if (pathname.includes("/settings") || pathname.includes("/settings/"))
     presenceData.details = "Settings";
   else if (
@@ -196,8 +193,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Reading";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

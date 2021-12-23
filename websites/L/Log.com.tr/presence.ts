@@ -1,10 +1,10 @@
 const presence = new Presence({
     clientId: "657615662537244673"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   presenceData: PresenceData = {
     largeImageKey: "log-logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
 function makeCategoryRPC(title: string): void {
@@ -37,9 +37,10 @@ presence.on("UpdateData", () => {
   }
 
   if (page.includes("/page")) {
-    const pagenum = parseInt(document.location.pathname.split("/")[2]);
     presenceData.details = "Ana Sayfa";
-    presenceData.state = `Sayfa: ${pagenum}`;
+    presenceData.state = `Sayfa: ${parseInt(
+      document.location.pathname.split("/")[2]
+    )}`;
   }
   if (page.includes("/asfalt")) makeCategoryRPC("Asfalt");
   if (page.includes("/teknoloji-haberleri")) makeCategoryRPC("Teknoloji");
@@ -57,8 +58,6 @@ presence.on("UpdateData", () => {
     presenceData.state = tag ? tag.textContent : "Bilinmeyen";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,10 +1,14 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
   },
   "service": "ManiaExchange",
+  "description": {
+    "en": "The content network for Trackmania and Shootmania - driven by the community. This one supports the newer, TrackmaniaExchange, which is for the 2020 Trackmania. For the older one, uses the TrackMania Exchange presence.",
+    "nl": "Het inhoudsnetwerk voor Trackmania en Shootmania - aangestuurd door de gemeenschap. Deze ondersteunt de nieuwere TrackmaniaExchange, die voor de Trackmania 2020 is. Gebruikt voor de oudere versie de aanwezigheid van TrackMania Exchange."
+  },
   "url": [
     "mania-exchange.com",
     "mania.exchange",
@@ -26,10 +30,11 @@
     "trackmania.exchange",
     "blog.mania.exchange"
   ],
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://i.imgur.com/KPcs9y1.png",
   "thumbnail": "https://i.imgur.com/NYitprM.png",
   "color": "#7ad5ff",
+  "category": "games",
   "tags": [
     "cars",
     "gaming",
@@ -45,10 +50,5 @@
     "trackmaniaexchange",
     "trackmania",
     "trackmania2"
-  ],
-  "description": {
-    "en": "The content network for Trackmania and Shootmania - driven by the community. This one supports the newer, TrackmaniaExchange, which is for the 2020 Trackmania. For the older one, uses the TrackMania Exchange presence.",
-    "nl": "Het inhoudsnetwerk voor Trackmania en Shootmania - aangestuurd door de gemeenschap. Deze ondersteunt de nieuwere TrackmaniaExchange, die voor de Trackmania 2020 is. Gebruikt voor de oudere versie de aanwezigheid van TrackMania Exchange."
-  },
-  "category": "games"
+  ]
 }

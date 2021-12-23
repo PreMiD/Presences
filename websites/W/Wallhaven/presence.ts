@@ -21,11 +21,11 @@ function getQuery() {
 (function () {
   const pages: PageContext[] = [
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(/\/(latest|toplist|hot|random)/gi),
         exec: (
           context,
-          data,
+          presenceData,
           {
             strings,
             query
@@ -35,17 +35,15 @@ function getQuery() {
           }
         ) => {
           if (!context) return null;
-          const pageType = (
-            document.querySelector<HTMLElement>("header.listing-header>h1")
-              .innerText as string
-          )?.trim();
-          data.state = strings.browsing;
-          data.details = `${pageType}, Page ${query?.page || 1}`;
-          return data;
+          presenceData.state = strings.browsing;
+          presenceData.details = `${document
+            .querySelector<HTMLElement>("header.listing-header>h1")
+            .textContent?.trim()}, Page ${query?.page || 1}`;
+          return presenceData;
         }
       },
       {
-        middleware: (ref) =>
+        middleware: ref =>
           ref.location.pathname === "/forums" ||
           !!ref.location.pathname.match(/\/forums((\/thread|\/board))/gi),
         exec: (
@@ -63,7 +61,7 @@ function getQuery() {
             document.querySelector<HTMLElement>(
               "#forums-title .forum-thread-title>a"
             )
-          )?.innerText as string;
+          )?.textContent as string;
           if (!pageTitle) return;
           data.state = strings.reading;
           data.details = `${pageTitle}`;
@@ -72,7 +70,7 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) => !!ref.location.pathname.match(/\/search/gi),
+        middleware: ref => !!ref.location.pathname.match(/\/search/gi),
         exec: (
           context,
           data,
@@ -88,7 +86,7 @@ function getQuery() {
           data.state = strings.searching;
           data.details = `${decodeURIComponent(
             document.querySelector<HTMLElement>("span.search-term")
-              ?.innerText ??
+              ?.textContent ??
               query?.q ??
               "Invalid Search Term"
           )}, Page ${query?.page || 1}`;
@@ -97,7 +95,7 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) => !!ref.location.pathname.match(/\/w\/(\w+)/gi),
+        middleware: ref => !!ref.location.pathname.match(/\/w\/(\w+)/gi),
         exec: (
           context,
           data,
@@ -111,7 +109,7 @@ function getQuery() {
           if (!context) return null;
           const tags = Array.from(
             document.querySelectorAll<HTMLElement>("#tags>.tag-sfw") || []
-          ).map((x) => x.innerText);
+          ).map(x => x.textContent);
           data.state = "Viewing...";
           data.details =
             tags.length > 0
@@ -131,7 +129,7 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) => !!ref.window,
+        middleware: ref => !!ref.window,
         exec: (
           context,
           data,
@@ -148,50 +146,46 @@ function getQuery() {
       clientId: "813563332753752112"
     });
 
-  (function (app: Presence) {
-    app.on("UpdateData", async () => {
+  (function (presence: Presence) {
+    presence.on("UpdateData", async () => {
       const presenceData: PresenceData = {
         largeImageKey: "logo",
         largeImageText: "Wallhaven"
       } as PresenceData;
       if (document.location.hostname === "wallhaven.cc") {
         const query: { [key: string]: unknown } = getQuery(),
-          strings: { [key: string]: string } = await app.getStrings({
+          strings: { [key: string]: string } = await presence.getStrings({
             play: "presence.playback.playing",
             pause: "presence.playback.paused",
             browsing: "presence.activity.browsing",
             searching: "presence.activity.searching",
             reading: "presence.activity.reading"
           }),
-          context = pages.find((x) => x.middleware(window, [query]));
+          context = pages.find(x => x.middleware(window, [query]));
         if (!context) return false;
         const result = Promise.resolve(
-          context.exec(app, presenceData, {
+          context.exec(presence, presenceData, {
             strings,
             query,
-            showButtons: await app
+            showButtons: await presence
               .getSetting("buttons")
-              .then((x) => !!x)
+              .then(x => !!x)
               .catch(() => true)
           })
         );
-        return result.then((data) => {
+        return result.then(data => {
           if (!data?.details) {
             data.details = strings.browsing;
-            presence.setTrayTitle();
+
             presence.setActivity();
-          } else {
-            if (data) presence.setActivity(data);
-            else presence.setActivity();
-          }
+          } else if (data) presence.setActivity(data);
+          else presence.setActivity();
           return data;
         });
       }
 
-      if (!presenceData.details) {
-        app.setTrayTitle();
-        app.setActivity();
-      } else app.setActivity(presenceData);
+      if (!presenceData.details) presence.setActivity();
+      else presence.setActivity(presenceData);
     });
   })(presence);
 })();

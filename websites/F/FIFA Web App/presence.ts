@@ -1,23 +1,23 @@
 const presence = new Presence({
     clientId: "690628469746434089"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "fifa"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (
     document.querySelector(
       "body > main > section > nav > button.ut-tab-bar-item.icon-home.selected"
-    ) !== null
+    )
   ) {
     // home page selected
     presenceData.details = "Browsing...";
-    if (document.querySelector(".ut-objectives-list-view") !== null) {
+    if (document.querySelector(".ut-objectives-list-view")) {
       // Home > Objectives
       presenceData.details = "Viewing objectives";
       if (
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
           .className.includes("selected")
       )
         presenceData.state = "Season Objectives";
-    } else if (document.querySelector(".SBCHub") !== null) {
+    } else if (document.querySelector(".SBCHub")) {
       //Home > SBC
       presenceData.details = "Viewing the SBC's";
       if (
@@ -90,42 +90,42 @@ presence.on("UpdateData", async () => {
       )
         presenceData.details = "Viewing upgrade SBC's";
     } else if (
-      document.querySelector(".sbc-status-container") !== null &&
-      document.querySelector(".challenge-content") !== null
+      document.querySelector(".sbc-status-container") &&
+      document.querySelector(".challenge-content")
     ) {
       presenceData.details = "Viewing SBC challange:";
       presenceData.state = document.querySelector(".title").textContent;
-    } else if (document.querySelector(".SBCChallenges") !== null) {
+    } else if (document.querySelector(".SBCChallenges")) {
       presenceData.details = "Viewing SBC challange:";
       presenceData.state = document.querySelector(".title").textContent;
-    } else if (document.querySelector(".ut-transfer-list-view") !== null)
+    } else if (document.querySelector(".ut-transfer-list-view"))
       presenceData.details = "Viewing the transfers";
-    else if (document.querySelector(".ut-squad-overview") !== null) {
+    else if (document.querySelector(".ut-squad-overview")) {
       presenceData.details = "Viewing squad overview of club:";
       presenceData.state = document.querySelector(".title").textContent;
     }
   } else if (
     document.querySelector(
       "body > main > section > nav > button.ut-tab-bar-item.icon-squad.selected"
-    ) !== null
+    )
   ) {
     // On squads page
     presenceData.details = "Browsing Squads...";
-    if (document.querySelector(".totw") !== null)
+    if (document.querySelector(".totw"))
       presenceData.details = "Viewing the squad of the week";
-    else if (document.querySelector(".ut-squad-overview") !== null) {
+    else if (document.querySelector(".ut-squad-overview")) {
       presenceData.details = "Viewing squad overview of club:";
       presenceData.state = document.querySelector(".title").textContent;
-    } else if (document.querySelector(".squad-list") !== null)
+    } else if (document.querySelector(".squad-list"))
       presenceData.details = "Managing their squad";
   } else if (
     document.querySelector(
       "body > main > section > nav > button.ut-tab-bar-item.icon-sbc.selected"
-    ) !== null
+    )
   ) {
     // On SBC page
     presenceData.details = "Browsing SBC...";
-    if (document.querySelector(".SBCHub") !== null) {
+    if (document.querySelector(".SBCHub")) {
       //Home > SBC
       presenceData.details = "Viewing the SBC's";
       if (
@@ -177,33 +177,33 @@ presence.on("UpdateData", async () => {
       )
         presenceData.details = "Viewing upgrade SBC's";
     } else if (
-      document.querySelector(".sbc-status-container") !== null &&
-      document.querySelector(".challenge-content") !== null
+      document.querySelector(".sbc-status-container") &&
+      document.querySelector(".challenge-content")
     ) {
       presenceData.details = "Viewing SBC challange:";
       presenceData.state = document.querySelector(".title").textContent;
-    } else if (document.querySelector(".SBCChallenges") !== null) {
+    } else if (document.querySelector(".SBCChallenges")) {
       presenceData.details = "Viewing SBC challange:";
       presenceData.state = document.querySelector(".title").textContent;
-    } else if (document.querySelector(".ut-transfer-list-view") !== null)
+    } else if (document.querySelector(".ut-transfer-list-view"))
       presenceData.details = "Viewing the transfers";
-    else if (document.querySelector(".ut-squad-overview") !== null) {
+    else if (document.querySelector(".ut-squad-overview")) {
       presenceData.details = "Viewing squad overview of club:";
       presenceData.state = document.querySelector(".title").textContent;
     }
   } else if (
     document.querySelector(
       "body > main > section > nav > button.ut-tab-bar-item.icon-transfer.selected"
-    ) !== null
+    )
   ) {
     // On Transfer page
     presenceData.details = "Browsing Transfers...";
-    if (document.querySelector(".ut-watch-list-view") !== null)
+    if (document.querySelector(".ut-watch-list-view"))
       presenceData.details = "Viewing their transfer targets";
-    else if (document.querySelector(".ut-transfer-list-view") !== null)
+    else if (document.querySelector(".ut-transfer-list-view"))
       presenceData.details = "Viewing their transfer list";
     else if (
-      document.querySelector(".ut-pinned-list-container.SearchResults") !== null
+      document.querySelector(".ut-pinned-list-container.SearchResults")
     ) {
       presenceData.details = "Transfers - Searching for new players";
       presenceData.smallImageKey = "search";
@@ -211,18 +211,18 @@ presence.on("UpdateData", async () => {
   } else if (
     document.querySelector(
       "body > main > section > nav > button.ut-tab-bar-item.icon-store.selected"
-    ) !== null
+    )
   ) {
     // On store page
     presenceData.details = "Browsing Store...";
   } else if (
     document.querySelector(
       "body > main > section > nav > button.ut-tab-bar-item.icon-club.selected"
-    ) !== null
+    )
   ) {
     // On club page
     presenceData.details = "Browsing through their club...";
-    if (document.querySelector(".paginated-item-list") !== null) {
+    if (document.querySelector(".paginated-item-list")) {
       presenceData.details = "Viewing their players";
       if (
         (
@@ -234,7 +234,7 @@ presence.on("UpdateData", async () => {
           .includes("staff")
       )
         presenceData.details = "Viewing their staff";
-      else if (document.querySelector(".consumable") !== null)
+      else if (document.querySelector(".consumable"))
         presenceData.details = "Viewing their consumables";
       else if (
         (
@@ -246,16 +246,16 @@ presence.on("UpdateData", async () => {
           .includes("items")
       )
         presenceData.details = "Viewing their club items";
-      else if (document.querySelector(".ut-undodiscard-status-bar") !== null)
+      else if (document.querySelector(".ut-undodiscard-status-bar"))
         presenceData.details = "Viewing Quick Sell Recovery";
-    } else if (document.querySelector(".consumable-tile") !== null)
+    } else if (document.querySelector(".consumable-tile"))
       presenceData.details = "Viewing their consumables";
-    else if (document.querySelector(".celebrations-tile") !== null)
+    else if (document.querySelector(".celebrations-tile"))
       presenceData.details = "Viewing their club items";
   } else if (
     document.querySelector(
       "body > main > section > nav > button.ut-tab-bar-item.icon-leaderboards.selected"
-    ) !== null
+    )
   ) {
     // On leaderboards page
     presenceData.details = "Viewing the leaderboards";
@@ -291,14 +291,12 @@ presence.on("UpdateData", async () => {
   } else if (
     document.querySelector(
       "body > main > section > nav > button.ut-tab-bar-item.icon-settings.selected"
-    ) !== null
+    )
   ) {
     // On settings page
     presenceData.details = "Viewing their settings";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

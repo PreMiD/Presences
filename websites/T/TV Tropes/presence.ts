@@ -5,8 +5,8 @@ const presence = new Presence({
   whitespaceRegex = /^\s*|\n/gm;
 
 presence.on("UpdateData", () => {
-  const { pathname } = window.location,
-    [, pathCheck, mainPath, namespace] = pathname.split("/"),
+  const [, pathCheck, mainPath, namespace] =
+      window.location.pathname.split("/"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp
@@ -14,25 +14,22 @@ presence.on("UpdateData", () => {
 
   function mainWikiPathDetails(namespace: string) {
     if (namespace === "Main") {
-      const titleText = document
+      presenceData.details = "Viewing a TV Trope";
+      presenceData.state = document
         .querySelector(".entry-title")
         .textContent.replace(whitespaceRegex, "");
-      presenceData.details = "Viewing a TV Trope";
-      presenceData.state = titleText;
     } else {
-      const titleElement = document.querySelector(".entry-title"),
-        namespaceText =
-          namespace === "Main"
-            ? null
-            : titleElement
-                .querySelector("strong")
-                .textContent.replace(/ \/ $/, ""),
-        pageText = titleElement.childNodes[2].textContent.replace(
-          whitespaceRegex,
-          ""
-        );
+      const titleElement = document.querySelector(".entry-title");
       presenceData.details = "Viewing a page";
-      presenceData.state = `${namespaceText} / ${pageText}`;
+      presenceData.state = `${titleElement
+        .querySelector("strong")
+        .textContent.replace(
+          / \/ $/,
+          ""
+        )} / ${titleElement.childNodes[2].textContent.replace(
+        whitespaceRegex,
+        ""
+      )}`;
     }
   }
 
@@ -51,28 +48,25 @@ presence.on("UpdateData", () => {
         break;
       }
       case "conversations.php": {
-        const categoryText = document
+        presenceData.details = "Browsing Forum Category";
+        presenceData.state = document
           .querySelector(".entry-title")
           .childNodes[2].textContent.replace(whitespaceRegex, "");
-        presenceData.details = "Browsing Forum Category";
-        presenceData.state = categoryText;
         break;
       }
       case "posts.php": {
-        const titleText = document
+        presenceData.details = "Browsing Forum Post";
+        presenceData.state = document
           .querySelector(".entry-title")
           .textContent.replace(whitespaceRegex, "");
-        presenceData.details = "Browsing Forum Post";
-        presenceData.state = titleText;
         break;
       }
       case "wysiwyg_source_editor.php": {
-        const { search } = window.location,
-          searchParams = new URLSearchParams(search),
-          groupName = searchParams.get("groupname"),
-          title = searchParams.get("title");
+        const searchParams = new URLSearchParams(window.location.search);
         presenceData.details = "Editing TV Trope Page";
-        presenceData.state = `${groupName} / ${title}`;
+        presenceData.state = `${searchParams.get(
+          "groupname"
+        )} / ${searchParams.get("title")}`;
         break;
       }
       case "createconversation.php": {

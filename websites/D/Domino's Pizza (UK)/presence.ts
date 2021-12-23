@@ -79,9 +79,9 @@ presence.on("UpdateData", () => {
 
     let priceText, savingText;
 
-    if (price) priceText = price.innerHTML;
+    if (price) priceText = price.textContent;
 
-    if (saving) savingText = saving.innerHTML;
+    if (saving) savingText = saving.textContent;
 
     presenceData.details = "Viewing cart";
     presenceData.state = `Total: ${priceText} ${
@@ -89,8 +89,6 @@ presence.on("UpdateData", () => {
     }`;
   } else presenceData.details = "Browing Domino's Pizza";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

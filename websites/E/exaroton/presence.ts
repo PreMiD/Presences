@@ -57,9 +57,8 @@ presence.on("UpdateData", async () => {
             presenceData.state = article.textContent.trim();
           }
         } else if (document.location.pathname.includes("search")) {
-          const article: HTMLInputElement = document.querySelector("#query");
           presenceData.details = "Help Center - Searching:";
-          presenceData.state = article.value;
+          presenceData.state = document.querySelector("#query").textContent;
         } else presenceData.details = "Help Center";
 
         break;

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Kinue",
     "id": "634246091293851649"
@@ -14,14 +14,14 @@
     "www.nettruyenpro.com",
     "nettruyenpro.com"
   ],
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/h9AaSGw.png",
   "thumbnail": "https://i.imgur.com/eGhdGi5.png",
   "color": "#3d3665",
+  "category": "anime",
   "tags": [
     "anime",
     "manga",
     "nettruyen"
-  ],
-  "category": "anime"
+  ]
 }

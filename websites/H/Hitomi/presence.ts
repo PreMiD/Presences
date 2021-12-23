@@ -99,14 +99,13 @@ presence.on("UpdateData", async () => {
     if (title.length > 128) title = `${title.slice(0, 120)}...`;
 
     const selectValue = document.querySelector(
-        "#single-page-select"
-      ) as HTMLSelectElement,
-      totalPage = selectValue.options[selectValue.options.length - 1].value;
+      "#single-page-select"
+    ) as HTMLSelectElement;
     presenceData.details = title;
     presenceData.state = `Reading page ${document.location.hash.replace(
       "#",
       ""
-    )} of ${totalPage} (${
+    )} of ${selectValue.options[selectValue.options.length - 1].textContent} (${
       validateReaderUrl.exec(document.location.pathname)[1]
     })`;
     presenceData.buttons = [
@@ -114,8 +113,6 @@ presence.on("UpdateData", async () => {
     ];
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

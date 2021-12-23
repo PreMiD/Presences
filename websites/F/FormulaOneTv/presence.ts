@@ -13,7 +13,7 @@ function parseTimeToMilliseconds(length: string): number {
   const [seconds, minutes, hours] = length
     .split(":")
     .reverse()
-    .map((val) => parseInt(val, 10));
+    .map(val => parseInt(val, 10));
 
   return seconds + (minutes || 0) * 60 + (hours || 0) * 3600;
 }
@@ -40,10 +40,10 @@ async function setWatchingVideoActivity(presenceData: PresenceData) {
       .getElementsByClassName("bmpui-ui-playbacktimelabel");
 
     if (videoLength && currentTime) {
-      const lengthInMs = parseTimeToMilliseconds(videoLength.textContent),
-        currentTimeInMs = parseTimeToMilliseconds(currentTime.textContent);
-
-      presenceData.endTimestamp = getEpochInMs() + lengthInMs - currentTimeInMs;
+      presenceData.endTimestamp =
+        getEpochInMs() +
+        parseTimeToMilliseconds(videoLength.textContent) -
+        parseTimeToMilliseconds(currentTime.textContent);
     }
   } else {
     delete presenceData.startTimestamp;

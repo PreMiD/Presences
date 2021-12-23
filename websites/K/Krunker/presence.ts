@@ -3,25 +3,23 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "krunker"
     },
     gameInfo = document.querySelector("#curGameInfo");
 
   if (gameInfo) {
-    const className = document.querySelector("#menuClassName"),
-      classSubtext = document.querySelector("#menuClassSubtext"),
-      playerInfo = `${className.textContent} (${classSubtext.textContent})`;
+    presenceData.details = gameInfo.textContent.replace("on ", " on ");
+    presenceData.state = `${
+      document.querySelector("#menuClassName").textContent
+    } (${document.querySelector("#menuClassSubtext").textContent})`;
+    presenceData.startTimestamp = Date.now();
 
-    data.details = gameInfo.textContent.replace("on ", " on ");
-    data.state = playerInfo;
-    data.startTimestamp = Date.now();
-
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else {
-    data.details = "In the menus";
-    data.startTimestamp = Date.now();
+    presenceData.details = "In the menus";
+    presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   }
 });

@@ -26,11 +26,11 @@
   "logo": "https://i.imgur.com/06HbqaF.png",
   "thumbnail": "https://i.imgur.com/dOYmE1u.png",
   "color": "#FA273F",
+  "category": "music",
   "tags": [
     "apple-music",
     "apple",
     "music",
     "media"
-  ],
-  "category": "music"
+  ]
 }

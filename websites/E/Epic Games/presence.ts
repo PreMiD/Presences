@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "749642170813907004"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location,
     { hostname } = document.location;
@@ -20,19 +20,17 @@ presence.on("UpdateData", async () => {
     }
 
     if (pathname.includes("/store/") && pathname.includes("/product")) {
-      const gameName = document.querySelector(
+      presenceData.details = "Viewing game:";
+      presenceData.state = document.querySelector(
         "#dieselReactWrapper > div > div.css-igz6h5-AppPage__bodyContainer > main > div > nav.css-1v9fujt-PageNav__topNav-PageNav__desktopNav-PageNav__themed > div > nav > div > div.css-eizwrh-NavigationBar__contentPrimary > ul > li:nth-child(2) > a > h2 > span"
       ).textContent;
-      presenceData.details = "Viewing game:";
-      presenceData.state = gameName;
     }
 
     if (pathname.includes("/store/") && pathname.includes("/bundles")) {
-      const bundleName = document.querySelector(
+      presenceData.details = "Viewing bundle:";
+      presenceData.state = document.querySelector(
         "#dieselReactWrapper > div > div.css-igz6h5-AppPage__bodyContainer > main > div > nav.css-1v9fujt-PageNav__topNav-PageNav__desktopNav-PageNav__themed > div > nav > div > div.css-eizwrh-NavigationBar__contentPrimary > ul > li:nth-child(2) > a > h2 > span"
       ).textContent;
-      presenceData.details = "Viewing bundle:";
-      presenceData.state = bundleName;
     }
 
     if (pathname.includes("/store/") && pathname.includes("/news")) {
@@ -41,11 +39,10 @@ presence.on("UpdateData", async () => {
     }
 
     if (pathname.startsWith("/store/") && pathname.endsWith("/news/")) {
-      const articleName = document.querySelector(
+      presenceData.details = "Reading article:";
+      presenceData.state = document.querySelector(
         "#storeNews > div > section > div > article > div > div.blog-header-info > div:nth-child(1) > div > h1"
       ).textContent;
-      presenceData.details = "Reading article:";
-      presenceData.state = articleName;
     }
 
     if (pathname.includes("/store/") && pathname.includes("/about")) {
@@ -74,10 +71,10 @@ presence.on("UpdateData", async () => {
     // Epic Games account management & more
 
     if (pathname.startsWith("/account/")) {
-      const nav = document.querySelector(".navigation-section"),
-        activeSetting = nav.querySelector(".active").textContent;
       presenceData.details = "Changing account details:";
-      presenceData.state = activeSetting;
+      presenceData.state = document
+        .querySelector(".navigation-section")
+        .querySelector(".active").textContent;
     }
 
     // Epic Games Help page
@@ -99,8 +96,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

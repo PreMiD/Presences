@@ -26,39 +26,39 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
-    game = document.querySelector(
-      "#main-wrap > main > aside > div > section > div.game__meta__infos > div > div > div"
-    ) as HTMLElement,
-    status = document.querySelector(
-      "#main-wrap > main > aside > div > section.status"
-    ) as HTMLElement,
-    data: PresenceData = {
+    game = document
+      .querySelector<HTMLElement>(
+        "#main-wrap > main > aside > div > section > div.game__meta__infos > div > div > div"
+      )
+      ?.textContent.trim(),
+    status = document
+      .querySelector<HTMLElement>(
+        "#main-wrap > main > aside > div > section.status"
+      )
+      ?.textContent.trim(),
+    presenceData: PresenceData = {
       largeImageKey: "lc-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     };
 
   if ((page && pages[page]) || (page && pages[page.slice(0, -1)])) {
-    data.details = "Viewing a page:";
-    data.state = pages[page] || pages[page.slice(0, -1)];
+    presenceData.details = "Viewing a page:";
+    presenceData.state = pages[page] || pages[page.slice(0, -1)];
   } else if (page.includes("/training/")) {
-    data.details = "Viewing a page:";
-    data.state = "Training";
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Training";
   } else if (page.includes("/@/")) {
-    data.details = "Searching for:";
-    data.state = document.title.replace(" • lichess.org", "");
-    data.smallImageKey = "search";
-  } else if (
-    status &&
-    status.textContent !== "" &&
-    game &&
-    game.textContent !== ""
-  ) {
-    data.details = game.textContent.trim();
-    data.state = status.textContent.trim();
-  } else if (!status && game && game.textContent !== "") {
-    data.details = "Playing a game:";
-    data.state = game.textContent.trim();
+    presenceData.details = "Searching for:";
+    presenceData.state = document.title.replace(" • lichess.org", "");
+    presenceData.smallImageKey = "search";
+  } else if (status && game) {
+    presenceData.details = game;
+    presenceData.state = status;
+  } else if (!status && game) {
+    presenceData.details = "Playing a game:";
+    presenceData.state = game;
   }
 
-  if (data.details && data.state) presence.setActivity(data);
+  if (presenceData.details && presenceData.state)
+    presence.setActivity(presenceData);
 });

@@ -2,10 +2,9 @@ const presence = new Presence({
   clientId: "633714339999645737"
 });
 
-function getTimestamps(curr: number, dura: number): Array<number> {
-  const startTime = Math.floor(Date.now() / 1000),
-    duration = Math.floor(startTime - curr + dura);
-  return [startTime, duration];
+function getTimestamps(curr: number, dura: number): number[] {
+  const startTime = Math.floor(Date.now() / 1000);
+  return [startTime, Math.floor(startTime - curr + dura)];
 }
 
 presence.on("UpdateData", async () => {
@@ -16,7 +15,7 @@ presence.on("UpdateData", async () => {
       browsing: "presence.activity.browsing"
     });
 
-  if (video !== null) {
+  if (video) {
     const timestamps = getTimestamps(video.currentTime, video.duration),
       presenceData: PresenceData = {
         state: document.querySelector("body > div.menu.main > div > h2")

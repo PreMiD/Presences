@@ -1,23 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "rippledwater",
     "id": "752720971089182752"
   },
-  "url": "undercards.net",
+  "service": "Undercards",
   "description": {
     "en": "Undercards is an online turn-based card game.",
     "nl": "Undercards is een online turn-based kaartspel."
   },
-  "service": "Undercards",
-  "version": "1.0.5",
+  "url": "undercards.net",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/xahtF8Y.png",
   "thumbnail": "https://i.imgur.com/D9bWiXU.png",
   "color": "#FF0000",
+  "category": "games",
   "tags": [
     "game",
     "card",
     "turn-based"
-  ],
-  "category": "games"
+  ]
 }

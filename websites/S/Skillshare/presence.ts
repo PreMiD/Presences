@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: string, title: string;
 
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname === "/" ||
       document.location.pathname === "/home"
     ) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/classes/")) {
       let currentTime: number,
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
         endTimestamp: number,
         video: HTMLVideoElement;
       video = document.querySelector("#vjs_video_3_html5_api");
-      if (video === null)
+      if (!video)
         video = document.querySelector(".video-player-module > div > video");
 
       title = document
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
           ""
         );
 
-      if (video !== null) {
+      if (video) {
         ({ currentTime, duration, paused } = video);
         [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(currentTime),
@@ -67,64 +67,62 @@ presence.on("UpdateData", async () => {
           delete presenceData.endTimestamp;
         }
       } else if (isNaN(duration)) {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Viewing class:";
         presenceData.state = title;
         presenceData.smallImageKey = "reading";
       }
     } else if (document.location.pathname.includes("/profile/")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing profile of:";
       presenceData.state = document.querySelector(".full-name").textContent;
     } else if (document.location.pathname.includes("/workshops/")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing workshop:";
       presenceData.state = document.querySelector(".header-text").textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/workshops")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Browsing for workshops...";
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/browse")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Browsing in type:";
       presenceData.state = document.querySelector(".main-header").textContent;
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/search")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Searching for:";
       presenceData.state = document.querySelector(
         "#search-form > div > div > div.search-input-wrapper.clear > div.ellipsis.query-placeholder.left"
       ).textContent;
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/your-classes")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing their classes";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/my-workshops")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing their workshops";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/teach")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Writing their teacher application";
       presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/lists/saved-classes")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing their saved classes";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/lists/watch-history")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing their watch history";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/settings")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Changing their settings...";
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

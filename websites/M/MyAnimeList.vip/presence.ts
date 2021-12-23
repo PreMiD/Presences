@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "861544419005169675"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let iframeData: {
   currTime: number;
@@ -19,7 +19,7 @@ presence.on(
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location;
 
@@ -39,13 +39,12 @@ presence.on("UpdateData", async () => {
     pathname.startsWith("/animes/") ||
     pathname.startsWith("/episodio/")
   ) {
-    const iframe = document.querySelector("iframe");
-    if (!iframe) {
+    if (!document.querySelector("iframe")) {
       const title: HTMLHeadingElement = document.querySelector(
         "section.titlePosts > h1"
       );
       presenceData.details = "Vendo Sinopse";
-      if (title) presenceData.state = title.innerText;
+      if (title) presenceData.state = title.textContent;
       presenceData.buttons = [
         {
           label: "Ver Sinopse",
@@ -57,12 +56,12 @@ presence.on("UpdateData", async () => {
         "section.titlePost > h1"
       );
       if (title) {
-        presenceData.details = title.innerText.substring(
+        presenceData.details = title.textContent.substring(
           0,
-          title.innerText.indexOf("Episódio")
+          title.textContent.indexOf("Episódio")
         );
-        presenceData.state = title.innerText.substring(
-          title.innerText.indexOf("Episódio")
+        presenceData.state = title.textContent.substring(
+          title.textContent.indexOf("Episódio")
         );
       }
       if (iframeData && !iframeData.paused) {
@@ -80,8 +79,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

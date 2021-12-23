@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "666412985513672715"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
   //! Merch website
   if (document.location.hostname === "onlyhit.merchforall.com") {
     //* Show timestamp if the setting is enabled and set largeImageKey
-    if (showElapsed) presenceData.startTimestamp = browsingStamp;
+    if (showElapsed) presenceData.startTimestamp = browsingTimestamp;
     else delete presenceData.startTimestamp;
 
     presenceData.largeImageKey = "logo_onlyhit";
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
     if (document.location.hash.includes("/cart"))
       presenceData.details = "Store - Viewing cart";
     else if (document.location.pathname === "/") {
-      if (document.querySelector(".popup-container.active") !== null) {
+      if (document.querySelector(".popup-container.active")) {
         presenceData.details = "Store - Viewing product:";
         presenceData.state = document.querySelector(
           ".popup-container.active .product-title"
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
     const artist = document.querySelector(".artist").textContent,
       title = document.querySelector(".title").textContent,
       paused =
-        (document.querySelector(".fa-pause.pause-button") as HTMLElement).style
+        document.querySelector<HTMLElement>(".fa-pause.pause-button").style
           .cssText === "display: none;";
 
     //* Set state details and image to track information.
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
       !document.location.pathname.includes("video-version")
     ) {
       //* Show timestamp if the setting is enabled
-      if (showElapsed) presenceData.startTimestamp = browsingStamp;
+      if (showElapsed) presenceData.startTimestamp = browsingTimestamp;
       else delete presenceData.startTimestamp;
 
       //* Get page title, and set smallImageText to track information
@@ -165,8 +165,6 @@ presence.on("UpdateData", async () => {
   }
 
   //* Sets the presenceData, if there is no details it sets empty data (Which will still show "Playing OnlyHit")
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

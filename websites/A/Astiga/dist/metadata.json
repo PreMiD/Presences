@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -12,13 +12,13 @@
     "nl": "Speel eenvoudig de muziek af die is opgeslagen op uw cloudservice, rechtstreeks in uw browser of op uw telefoon."
   },
   "url": "play.asti.ga",
-  "version": "2.6.8",
+  "version": "2.6.9",
   "logo": "https://i.imgur.com/5cNh7kv.png",
   "thumbnail": "https://i.imgur.com/xcbh1rC.png",
   "color": "#605da9",
+  "category": "music",
   "tags": [
     "music",
     "cloud"
-  ],
-  "category": "music"
+  ]
 }

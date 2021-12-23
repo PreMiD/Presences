@@ -1,16 +1,14 @@
 const presence = new Presence({
     clientId: "676821417823830017"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-
-  presenceData.startTimestamp = browsingStamp;
-
-  const page = document.location.pathname;
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
+    },
+    page = document.location.pathname;
   if (page.startsWith("/bots/")) {
     presenceData.details = "Viewing a bot:";
     presenceData.state = document.querySelector(
@@ -49,8 +47,6 @@ presence.on("UpdateData", () => {
       presenceData.details = "Sumbitting a bot";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

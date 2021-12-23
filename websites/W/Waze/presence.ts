@@ -35,17 +35,13 @@ function fnd() {
 
   if (path.includes("/live-map")) {
     start =
-      (
-        document.querySelector(
-          "div.wz-search-container.is-origin > div > div > div.wm-search__selected > span.wm-search__primary"
-        ) as HTMLSpanElement
-      )?.innerText ?? "somewhere";
+      document.querySelector<HTMLSpanElement>(
+        "div.wz-search-container.is-origin > div > div > div.wm-search__selected > span.wm-search__primary"
+      )?.textContent ?? "somewhere";
     end =
-      (
-        document.querySelector(
-          "div.wz-search-container.is-destination > div > div > div.wm-search__selected > span.wm-search__primary"
-        ) as HTMLSpanElement
-      )?.innerText ?? "somewhere";
+      document.querySelector<HTMLSpanElement>(
+        "div.wz-search-container.is-destination > div > div > div.wm-search__selected > span.wm-search__primary"
+      )?.textContent ?? "somewhere";
 
     presenceData.details = "Planning a route";
     presenceData.state = `From ${start} to ${end}`;

@@ -24,14 +24,16 @@ presence.on("UpdateData", async () => {
   if (url.includes("/calculator")) {
     // Graphing Calculator
     graphing = 2; // "Plotting a Graph: "
-    title = document.getElementsByClassName("dcg-variable-title")[0].innerHTML;
+    title =
+      document.getElementsByClassName("dcg-variable-title")[0].textContent;
     numEquations = document.getElementsByClassName(
       "dcg-template-expressioneach"
     )[0].childElementCount;
   } else if (url.includes("/geometry")) {
     // Geometry Tool
     graphing = 1; // "Using Desmos Geometry: "
-    title = document.getElementsByClassName("dcg-variable-title")[0].innerHTML;
+    title =
+      document.getElementsByClassName("dcg-variable-title")[0].textContent;
     pageType = "Geometry";
     numEquations = 0;
   } else if (

@@ -26,11 +26,9 @@ function grabMetadata(): void {
   // If there's not a close button, then the user isn't watching anything
   if (!closeButton) return;
 
-  // Get the parent
-  const metaParent = closeButton.parentElement;
-
   // Get all the elements inside of the parent that are span (there should only be one) and get the innerHTML
-  metadata = metaParent.getElementsByTagName("span")[0].innerHTML;
+  metadata =
+    closeButton.parentElement.getElementsByTagName("span")[0].textContent;
 }
 
 // Get the video player element
@@ -39,14 +37,10 @@ function getVideoPlayer(): void {
   const VUDUIFrame = document.getElementById(
       "contentPlayerFrame"
     ) as HTMLIFrameElement,
-    // Now let's get the content INSIDE of that.
-    VUDUIFrameContent =
-      VUDUIFrame.contentDocument || VUDUIFrame.contentWindow.document;
-
-  // Finally... get the video
-  videoPlayer = VUDUIFrameContent.getElementById(
-    "videoPlayer"
-  ) as HTMLVideoElement;
+    // Finally... get the video
+    videoPlayer = (
+      VUDUIFrame.contentDocument || VUDUIFrame.contentWindow.document
+    ).getElementById("videoPlayer") as HTMLVideoElement;
 
   videoDuration = videoPlayer.duration; // duration of movie in seconds
 
@@ -75,7 +69,7 @@ setInterval(getVideoPlayer, 1000); // If I was dumb enough to run this every fra
 presence.on("UpdateData", () => {
   // Video doesn't exist, and there's no metadata either.
   // Aka, user isn't watching anything.
-  if (videoPlayer !== null && metadata) {
+  if (videoPlayer && metadata) {
     // When the video pauses
     if (videoPlayer.paused) {
       // Only run this once
@@ -109,7 +103,7 @@ presence.on("UpdateData", () => {
     presence.setActivity(presenceData);
   } else {
     // Clear activity
-    presence.setTrayTitle();
+
     presence.setActivity();
   }
 });

@@ -4,20 +4,20 @@ const presence = new Presence({
   timer = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "keep_logo",
       startTimestamp: timer
     },
-    { pathname, hash, href } = location,
-    [, , , , userInt, , LorLNorId] = href.split("/");
+    { hash } = location,
+    [, , , , userInt, , LorLNorId] = location.href.split("/");
 
-  if (pathname === `/u/${userInt}/`) {
-    data.details = "Viewing homepage";
-    data.state = "Notes";
+  if (location.pathname === `/u/${userInt}/`) {
+    presenceData.details = "Viewing homepage";
+    presenceData.state = "Notes";
 
     if (hash === "#home") {
-      data.details = "Viewing Homepage";
-      data.state = "Notes";
+      presenceData.details = "Viewing Homepage";
+      presenceData.state = "Notes";
     } else if (hash === `#LIST/${LorLNorId}`) {
       const listName =
         document.querySelector(
@@ -27,38 +27,34 @@ presence.on("UpdateData", async () => {
           "body > div.VIpgJd-TUo6Hb.XKSfm-L9AdLc.eo9XGd > div > div.IZ65Hb-TBnied.zTETae-h1U9Be-hxXJme > div.IZ65Hb-s2gQvd > div.IZ65Hb-r4nke-haAclf > div.notranslate.IZ65Hb-YPqjbf.fmcmS-x3Eknd.r4nke-YPqjbf"
         );
 
-      data.details = "Reading Tasks:";
+      presenceData.details = "Reading Tasks:";
 
-      if (listName.textContent) data.state = listName.textContent;
-      else if (!listName.textContent) data.state = "Untitled List";
+      if (listName.textContent) presenceData.state = listName.textContent;
+      else if (!listName.textContent) presenceData.state = "Untitled List";
     } else if (hash === `#NOTE/${LorLNorId}`) {
       const noteName = document.querySelector(
         "body > div.VIpgJd-TUo6Hb.XKSfm-L9AdLc.eo9XGd > div > div.IZ65Hb-TBnied.zTETae-h1U9Be-hxXJme > div.IZ65Hb-s2gQvd > div.IZ65Hb-r4nke-haAclf > div.notranslate.IZ65Hb-YPqjbf.fmcmS-x3Eknd.r4nke-YPqjbf"
       );
 
-      data.details = "Reading a Note:";
+      presenceData.details = "Reading a Note:";
 
-      if (noteName.textContent) data.state = noteName.textContent;
-      else if (!noteName.textContent) data.state = "Untitled Note";
+      if (noteName.textContent) presenceData.state = noteName.textContent;
+      else if (!noteName.textContent) presenceData.state = "Untitled Note";
     } else if (hash === "#reminders") {
-      data.details = "Viewing at reminders";
-      delete data.state;
+      presenceData.details = "Viewing at reminders";
+      delete presenceData.state;
     } else if (hash === `#label/${LorLNorId}`) {
-      const formattedName = decodeURIComponent(LorLNorId);
-
-      data.details = "Viewing at a label:";
-      data.state = formattedName;
+      presenceData.details = "Viewing at a label:";
+      presenceData.state = decodeURIComponent(LorLNorId);
     } else if (hash === "#archive") {
-      data.details = "Viewing the archive";
-      delete data.state;
+      presenceData.details = "Viewing the archive";
+      delete presenceData.state;
     } else if (hash === "#trash") {
-      data.details = "Viewing at the trash";
-      delete data.state;
+      presenceData.details = "Viewing at the trash";
+      delete presenceData.state;
     }
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

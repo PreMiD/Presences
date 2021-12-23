@@ -72,6 +72,7 @@ presence.on("UpdateData", async () => {
     time = await presence.getSetting("time"),
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
+    thumbnail = await presence.getSetting("thumbnail"),
     buttons = await presence.getSetting("buttons");
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -163,9 +164,7 @@ presence.on("UpdateData", async () => {
               uploaderTV.textContent.replace(/\s+/g, ""),
               pattern
             )),
-      timestamps = presence.getTimestampsfromMedia(video),
-      live = Boolean(document.querySelector(".ytp-live")),
-      ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
+      live = Boolean(document.querySelector(".ytp-live"));
     let isPlaylistLoop = false;
 
     if (
@@ -225,6 +224,9 @@ presence.on("UpdateData", async () => {
         unlistedBadgeElement !== null &&
         unlistedPathElement.getAttribute("d") ===
           unlistedBadgeElement.getAttribute("d"),
+      videoId = document
+        .querySelector("#page-manager > ytd-watch-flexy")
+        .getAttribute("video-id"),
       presenceData: PresenceData = {
         details: vidDetail
           .replace("%title%", finalTitle)
@@ -232,7 +234,10 @@ presence.on("UpdateData", async () => {
         state: vidState
           .replace("%title%", finalTitle)
           .replace("%uploader%", finalUploader),
-        largeImageKey: "yt_lg",
+        largeImageKey:
+          unlistedVideo || !thumbnail
+            ? "yt_lg"
+            : `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
         smallImageKey: video.paused
           ? "pause"
           : video.loop
@@ -247,7 +252,7 @@ presence.on("UpdateData", async () => {
           : isPlaylistLoop
           ? "Playlist on loop"
           : (await strings).play,
-        endTimestamp: timestamps[1]
+        endTimestamp: presence.getTimestampsfromMedia(video)[1]
       };
 
     if (vidState.includes("{0}")) delete presenceData.state;
@@ -274,7 +279,7 @@ presence.on("UpdateData", async () => {
     }
 
     //* Update title to indicate when an ad is being played
-    if (ads) {
+    if (document.querySelector(".ytp-ad-player-overlay")) {
       presenceData.details = (await strings).ad;
       delete presenceData.state;
     } else if (privacy) {
@@ -282,6 +287,7 @@ presence.on("UpdateData", async () => {
       else presenceData.details = (await strings).watchVid;
 
       delete presenceData.state;
+      presenceData.largeImageKey = "yt_lg";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
@@ -293,9 +299,7 @@ presence.on("UpdateData", async () => {
               : (await strings).watchVideoButton,
             url: document.URL.includes("/watch?v=")
               ? document.URL.split("&")[0]
-              : `https://www.youtube.com/watch?v=${document
-                  .querySelector("#page-manager > ytd-watch-flexy")
-                  .getAttribute("video-id")}`
+              : `https://www.youtube.com/watch?v=${videoId}`
           },
           {
             label: (await strings).viewChannelButton,
@@ -567,9 +571,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 });

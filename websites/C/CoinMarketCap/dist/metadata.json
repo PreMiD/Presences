@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "jvnxs7",
     "id": "209945797918195712"
@@ -13,13 +13,13 @@
     "coinmarketcap.com",
     "www.coinmarketcap.com"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/tGicpVW.png",
   "thumbnail": "https://i.imgur.com/aUGhAIe.png",
   "color": "#2C6CFC",
+  "category": "other",
   "tags": [
     "coin",
     "currency"
-  ],
-  "category": "other"
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "mon",
     "id": "608817245417898004"
@@ -11,10 +11,11 @@
     "nl": "Lawcodev, sociaal netwerk voor programmeurs, u kunt video's over programmeren, foto's en publicaties delen."
   },
   "url": "www.lawcodev.com",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "logo": "https://i.imgur.com/vADndhN.png",
   "thumbnail": "https://i.imgur.com/tT2mENc.png",
   "color": "#131313",
+  "category": "other",
   "tags": [
     "other",
     "development",
@@ -23,6 +24,5 @@
     "discord",
     "guides",
     "javascript"
-  ],
-  "category": "other"
+  ]
 }

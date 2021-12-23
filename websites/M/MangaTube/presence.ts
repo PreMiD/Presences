@@ -3,98 +3,93 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "mangatube"
   };
 
   //Startseite
-  if (document.location.pathname === "/") data.details = "| Startseite";
+  if (document.location.pathname === "/") presenceData.details = "| Startseite";
   //Serien
   else if (document.location.pathname.includes("/search"))
-    data.details = "| Erweiterte Suche";
+    presenceData.details = "| Erweiterte Suche";
   else if (document.location.pathname.includes("/read/")) {
-    const chapter = document
-        .querySelector(
-          "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > ul > li.active > a"
-        )
-        .textContent.replace("Seite", "Kapitel"),
-      [manganame] = document
-        .querySelector("head > title")
-        .textContent.split("- Kapitel "),
-      seite = document.querySelector(".page-text").textContent;
-    data.details = manganame;
-    data.state = `${chapter} | ${seite}`;
-    data.smallImageKey = "manga";
+    presenceData.details = document
+      .querySelector("head > title")
+      .textContent.split("- Kapitel ")
+      .toString();
+    presenceData.state = `${document
+      .querySelector(
+        "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > ul > li.active > a"
+      )
+      .textContent.replace("Seite", "Kapitel")
+      .toString()} | ${document.querySelector(".page-text").textContent}`;
+    presenceData.smallImageKey = "manga";
   } else if (document.location.pathname.startsWith("/series/")) {
-    const name = document.querySelector(".series-title").textContent;
-    data.details = "| Serie";
-    data.state = name;
+    presenceData.details = "| Serie";
+    presenceData.state = document.querySelector(".series-title").textContent;
   } else if (document.location.pathname.startsWith("/series"))
-    data.details = "| Serien";
+    presenceData.details = "| Serien";
   else if (document.location.pathname.includes("/serieslist")) {
-    const [serieslist] = document
+    presenceData.details = "| Serienliste";
+    [presenceData.state] = document
       .querySelector("head > title")
       .textContent.split("- Manga-Tube");
-    data.details = "| Serienliste";
-    data.state = serieslist;
 
     //Community
   } else if (document.location.pathname.includes("/team"))
-    data.details = "| Team";
+    presenceData.details = "| Team";
   else if (document.location.pathname.startsWith("/partner"))
-    data.details = "| Partner";
+    presenceData.details = "| Partner";
   else if (document.location.pathname.startsWith("/gewinnspiel")) {
-    const [giveaway] = document
+    presenceData.details = "| Gewinnspiel";
+    [presenceData.state] = document
       .querySelector("head > title")
       .textContent.split(" - Manga-Tube");
-    data.details = "| Gewinnspiel";
-    data.state = giveaway;
   } else if (document.location.pathname.startsWith("/join"))
-    data.details = "| Bewerben";
+    presenceData.details = "| Bewerben";
   else if (document.location.pathname.startsWith("/faq"))
-    data.details = "| FAQ";
+    presenceData.details = "| FAQ";
   //Profilbar
   else if (document.location.pathname.startsWith("/poll")) {
     if (document.location.pathname.endsWith("/poll/"))
-      data.details = "| Laufende Umfragen";
+      presenceData.details = "| Laufende Umfragen";
     else {
-      const poll = document.querySelector("div.poll-question").textContent;
-      data.details = "| Umfrage";
-      data.state = poll;
+      presenceData.details = "| Umfrage";
+      presenceData.state =
+        document.querySelector("div.poll-question").textContent;
     }
   } else if (document.location.pathname.includes("/write/")) {
-    data.details = "| Postfach";
-    data.state = "Nachricht Verfassen";
+    presenceData.details = "| Postfach";
+    presenceData.state = "Nachricht Verfassen";
   } else if (document.location.pathname.includes("/inbox")) {
     if (document.location.pathname.includes("/message/")) {
-      data.details = "| Postfach";
-      data.state = "Nachricht";
+      presenceData.details = "| Postfach";
+      presenceData.state = "Nachricht";
     } else {
-      data.details = "| Postfach";
-      data.state = "Übersicht";
+      presenceData.details = "| Postfach";
+      presenceData.state = "Übersicht";
     }
   } else if (document.location.pathname.includes("/edit")) {
-    data.details = "| Profil";
-    data.state = "Bearbteiten";
+    presenceData.details = "| Profil";
+    presenceData.state = "Bearbteiten";
   } else if (document.location.pathname.startsWith("/profile/")) {
-    const profile = document.querySelector("b").textContent,
-      level = document.querySelector("#user_level").textContent;
-    data.details = "| Profil";
-    data.state = `${profile} | ${level}`;
+    presenceData.details = "| Profil";
+    presenceData.state = `${document.querySelector("b").textContent} | ${
+      document.querySelector("#user_level").textContent
+    }`;
   } else if (document.location.pathname.includes("/blog/")) {
-    const blog = document.querySelector("h3").textContent;
-    data.details = "| Blog";
-    data.state = blog;
+    presenceData.details = "| Blog";
+    presenceData.state = document.querySelector("h3").textContent;
 
     //Datenschutz & Impressum
   } else if (document.location.pathname.startsWith("/impressum"))
-    data.details = "| Impressum";
+    presenceData.details = "| Impressum";
   else if (document.location.pathname.startsWith("/datenschutz"))
-    data.details = "| Datenschutz";
+    presenceData.details = "| Datenschutz";
   //Login
   else if (document.location.pathname.startsWith("/login"))
-    data.details = "| Login";
+    presenceData.details = "| Login";
 
   //setActivity
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

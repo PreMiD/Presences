@@ -2,7 +2,7 @@ interface PageContext {
   middleware: (ref: Window, ...args: unknown[]) => boolean;
   exec: (
     context: Presence,
-    data: PresenceData,
+    presenceData: PresenceData,
     options?: { [key: string]: unknown }
   ) => Promise<PresenceData> | PresenceData;
 }
@@ -32,10 +32,11 @@ function getQuery() {
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-const matchYoutubeUrl = (url: string): boolean =>
-  !!url.match(
+function matchYoutubeUrl(url: string): boolean {
+  return !!url.match(
     /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm
   );
+}
 function getSourceLink(url: string): { label: string; url: string }[] {
   if (!url) return [];
   if (matchYoutubeUrl(url)) {
@@ -51,7 +52,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
 (function () {
   const pages: PageContext[] = [
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(
             /^\/(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs)/gi
           ) || ref.location.pathname === "/",
@@ -78,15 +79,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               document.querySelector<HTMLElement>(
                 ".page__content .story__header"
               ),
-            isWeekly = !!document.querySelector(
-              ".page__content .page-menu.weekly__menu"
-            ),
-            isPlaying = activeMedia.querySelector("video")?.paused === false,
-            isBestOfTheYear = location.pathname.startsWith("/best"),
             isCoubPicks = location.pathname.startsWith("/royal.coubs"),
-            isLiked = !!activeMedia.querySelector(
-              ".coub__like-button[widget-like-button].-on"
-            ),
             activeTabTitle =
               activeTab?.textContent?.trim() ||
               activeTab?.dataset?.title ||
@@ -95,9 +88,9 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           const pageType = document
             .querySelector(".page__content")
             ?.getAttributeNames()
-            ?.map((x) => x.match(/^pages-(\w+)-page/i))
-            .filter((x) => !!x && x.length > 1 && x[1])
-            .map((x) => capitalizeFirstLetter(x[1]));
+            ?.map(x => x.match(/^pages-(\w+)-page/i))
+            .filter(x => !!x && x.length > 1 && x[1])
+            .map(x => capitalizeFirstLetter(x[1]));
           data.state = `Browsing ${
             isCoubPicks && activeTabTitle.match(/^(\w+)/gi)
               ? activeTabTitle.match(/^(\w+)/gi)[0]
@@ -106,19 +99,25 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             pageType?.length > 0 &&
             activeTabTitle.toLowerCase() !== pageType[0].toLowerCase()
               ? ` in ${pageType[0]}`
-              : isWeekly
+              : document.querySelector(".page__content .page-menu.weekly__menu")
               ? " in Weekly"
-              : isBestOfTheYear
+              : location.pathname.startsWith("/best")
               ? " in Best of the Year"
               : isCoubPicks
               ? " in Coub Picks"
               : ""
           }`;
-          data.details = `${title}${isLiked ? " (❤)" : ""}`;
-          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
-          const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
-            ".description__stamp a.description__stamp__source"
-          );
+          data.details = `${title}${
+            activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            )
+              ? " (❤)"
+              : ""
+          }`;
+          data.smallImageKey =
+            activeMedia.querySelector("video")?.paused === false
+              ? images.PLAY
+              : images.PAUSE;
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -126,7 +125,11 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                   label: strings.watchVideo,
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
                 },
-                ...getSourceLink(sourceLink?.href)
+                ...getSourceLink(
+                  activeMedia.querySelector<HTMLAnchorElement>(
+                    ".description__stamp a.description__stamp__source"
+                  )?.href
+                )
               ]
             );
           }
@@ -134,7 +137,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         }
       },
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.document.querySelector(".hero-cover[channel-id]"),
         exec: (
           context,
@@ -161,19 +164,25 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ) ||
               document.querySelector<HTMLElement>(
                 ".page__content .story__header"
-              ),
-            isLiked = !!activeMedia.querySelector(
-              ".coub__like-button[widget-like-button].-on"
-            ),
-            isPlaying = activeMedia.querySelector("video")?.paused === false,
-            activeTabTitle =
-              activeTab?.textContent.trimStart().split("\n")[0]?.trim() ||
-              activeTab?.dataset?.title ||
-              "Feed";
+              );
+
           if (!title || !userName) return null;
-          data.state = `Browsing ${activeTabTitle} from ${userName}`;
-          data.details = `${title}${isLiked ? " (❤)" : ""}`;
-          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
+          data.state = `Browsing ${
+            activeTab?.textContent.trimStart().split("\n")[0]?.trim() ||
+            activeTab?.dataset?.title ||
+            "Feed"
+          } from ${userName}`;
+          data.details = `${title}${
+            activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            )
+              ? " (❤)"
+              : ""
+          }`;
+          data.smallImageKey =
+            activeMedia.querySelector("video")?.paused === false
+              ? images.PLAY
+              : images.PAUSE;
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -194,7 +203,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         }
       },
       {
-        middleware: (ref) => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
+        middleware: ref => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
         exec: (
           context,
           data,
@@ -205,21 +214,23 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             document.querySelector<HTMLElement>(".coub[coub-block]");
           if (!activeMedia) return null;
           const title = activeMedia
-              .querySelector(".coub__description h5.description__title")
-              ?.textContent?.trim(),
-            isLiked = !!activeMedia.querySelector(
-              ".coub__like-button[widget-like-button].-on"
-            ),
-            isPlaying = activeMedia.querySelector("video")?.paused === false;
+            .querySelector(".coub__description h5.description__title")
+            ?.textContent?.trim();
 
           if (!title) return null;
           data.state = strings.watching;
-          data.details = `${title}${isLiked ? " (❤)" : ""}`;
-          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
-          const sourceLink =
-            activeMedia.parentElement.querySelector<HTMLAnchorElement>(
-              '.coub__info .media-block__item > a[type="embedPopup"]'
-            );
+          data.details = `${title}${
+            activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            )
+              ? " (❤)"
+              : ""
+          }`;
+          data.smallImageKey =
+            activeMedia.querySelector("video")?.paused === false
+              ? images.PLAY
+              : images.PAUSE;
+
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -227,7 +238,11 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                   label: strings.watchVideo,
                   url: document.location.href
                 },
-                ...getSourceLink(sourceLink?.href)
+                ...getSourceLink(
+                  activeMedia.parentElement.querySelector<HTMLAnchorElement>(
+                    '.coub__info .media-block__item > a[type="embedPopup"]'
+                  )?.href
+                )
               ]
             );
           }
@@ -235,7 +250,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         }
       },
       {
-        middleware: (ref) => !!ref.location.pathname.match(/^\/(community)/gi),
+        middleware: ref => !!ref.location.pathname.match(/^\/(community)/gi),
         exec: (
           context,
           data,
@@ -254,20 +269,19 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ?.textContent?.trim(),
             title = activeMedia
               .querySelector(".description__title")
-              ?.textContent?.trim(),
-            isPlaying = activeMedia.querySelector("video")?.paused === false,
-            activeTabTitle =
-              communityParent.parentElement.querySelector<HTMLElement>(
-                ".page-menu.hot__menu > .page-menu__inner > .page-menu__item.-active"
-              )?.dataset?.title || "Hot";
+              ?.textContent?.trim();
 
           if (!communityTitle || !title) return null;
-          data.state = `Browsing ${communityTitle} in ${activeTabTitle}`;
-          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
+          data.state = `Browsing ${communityTitle} in ${
+            communityParent.parentElement.querySelector<HTMLElement>(
+              ".page-menu.hot__menu > .page-menu__inner > .page-menu__item.-active"
+            )?.dataset?.title || "Hot"
+          }`;
+          data.smallImageKey =
+            activeMedia.querySelector("video")?.paused === false
+              ? images.PLAY
+              : images.PAUSE;
           data.details = `${title}`;
-          const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
-            ".description__stamp a.description__stamp__source"
-          );
           if (showWatch) {
             data.buttons.push(
               ...[
@@ -275,7 +289,11 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                   label: strings.watchVideo,
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
                 },
-                ...getSourceLink(sourceLink?.href)
+                ...getSourceLink(
+                  activeMedia.querySelector<HTMLAnchorElement>(
+                    ".description__stamp a.description__stamp__source"
+                  )?.href
+                )
               ]
             );
           }
@@ -284,7 +302,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         }
       },
       {
-        middleware: (ref) => !!ref.window,
+        middleware: ref => !!ref.window,
         exec: (
           context,
           data,
@@ -322,27 +340,29 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           newLang
         );
       }
-      const presenceData: PresenceData = {
-          largeImageKey: "logo"
-        },
-        query: { [key: string]: unknown } = getQuery(),
-        context = pages.find((x) => x.middleware(window, [query]));
+      const query: { [key: string]: unknown } = getQuery(),
+        context = pages.find(x => x.middleware(window, [query]));
       if (!context) return false;
 
       const result = Promise.resolve(
-        context.exec(app, presenceData, {
-          strings: localizedStrings,
-          query,
-          images: IMAGES,
-          showWatch: await app
-            .getSetting("show_button_watching")
-            .then((x) => !!x)
-            .catch(() => true)
-        })
+        context.exec(
+          app,
+          {
+            largeImageKey: "logo"
+          },
+          {
+            strings: localizedStrings,
+            query,
+            images: IMAGES,
+            showWatch: await app
+              .getSetting("show_button_watching")
+              .then(Boolean)
+              .catch(() => true)
+          }
+        )
       );
-      return result.then((data) => {
+      return result.then(data => {
         if (!data) {
-          presence.setTrayTitle();
           presence.setActivity({
             largeImageKey: "logo",
             state: localizedStrings.browsing

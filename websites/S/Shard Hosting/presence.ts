@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "909659570715127848"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "icon",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.hostname === "shardhosting.co.uk") {
@@ -58,50 +58,41 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Opening a Ticket";
     }
   } else if (document.location.hostname === "control.shardhosting.co.uk") {
+    const [serverName] = document.title.split(" | ");
     presenceData.smallImageKey = "pterodactyl";
     presenceData.smallImageText = "Pterodactyl";
     if (document.location.pathname === "/") {
       presenceData.details = "Viewing Servers";
       presenceData.state = "Browsing Services!";
     } else if (document.location.pathname.includes("files")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "File Manager";
     } else if (document.location.pathname.includes("databases")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Databases";
     } else if (document.location.pathname.includes("schedules")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Schedules";
     } else if (document.location.pathname.includes("users")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Subusers";
     } else if (document.location.pathname.includes("backups")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Backups";
     } else if (document.location.pathname.includes("subdomains")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Subdomains";
     } else if (document.location.pathname.includes("network")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Network";
     } else if (document.location.pathname.includes("startup")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Startup";
     } else if (document.location.pathname.includes("settings")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Settings";
     } else if (document.location.pathname.includes("server")) {
-      const serverName = document.title.split(" | ");
-      presenceData.details = `Managing ${serverName[0]}`;
+      presenceData.details = `Managing ${serverName}`;
       presenceData.state = "Watching Console and hunting bugs!";
     } else if (document.location.pathname.includes("account")) {
       presenceData.details = "Account Settings";

@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   title: HTMLElement,
   views: HTMLElement,
   air: HTMLElement,
@@ -29,7 +29,7 @@ interface IFrameData {
 if (document.location.pathname.includes("/kshow/")) {
   if (lastPlaybackState !== playback) {
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
   presence.on("iFrameData", (data: IFrameData) => {
     playback = data.iframeVideo.dur !== null ? true : false;
@@ -58,16 +58,15 @@ presence.on("UpdateData", async () => {
   if (
     document.location.pathname.includes(".html") &&
     document.location.pathname.includes("/pages/")
-  ) {
+  )
     presence.setActivity();
-    presence.setTrayTitle();
-  } else if (document.location.pathname.includes("/kshow/")) {
+  else if (document.location.pathname.includes("/kshow/")) {
     if (iFrameVideo === true && !isNaN(duration)) {
       title = document.querySelector(
         "#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div:nth-child(3) > h4"
       );
       views = document.querySelector("#view");
-      presenceData.details = title.innerText.replace(views.innerText, "");
+      presenceData.details = title.textContent.replace(views.textContent, "");
 
       air = document.querySelector(
         "#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div:nth-child(3) > div.row.panel-info > div.col.s12.m9 > table > tbody > tr:nth-child(6) > td"
@@ -75,9 +74,9 @@ presence.on("UpdateData", async () => {
       views = document.querySelector(
         "#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div:nth-child(3) > div.row.panel-info > div.col.s12.m9 > table > tbody > tr:nth-child(5) > td"
       );
-      if (air !== null)
-        presenceData.state = `Subbed by: ${views.innerText}, Aired on: ${air.innerText}`;
-      else presenceData.state = views.innerText;
+      if (air)
+        presenceData.state = `Subbed by: ${views.textContent}, Aired on: ${air.textContent}`;
+      else presenceData.state = views.textContent;
 
       // Set presence state to views value
 
@@ -89,13 +88,13 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (iFrameVideo === null && isNaN(duration)) {
       delete presenceData.endTimestamp;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
         "#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div:nth-child(3) > h4"
       );
       views = document.querySelector("#view");
-      presenceData.state = title.innerText.replace(views.innerText, "");
+      presenceData.state = title.textContent.replace(views.textContent, "");
       delete presenceData.smallImageText;
       presenceData.smallImageKey = "reading";
 
@@ -105,7 +104,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing through";
     presenceData.state = "the main page";
     delete presenceData.endTimestamp;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     delete presenceData.smallImageText;
     presenceData.smallImageKey = "reading";
 
@@ -114,7 +113,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing through";
     presenceData.state = "the most viewed shows";
     delete presenceData.endTimestamp;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     delete presenceData.smallImageText;
     presenceData.smallImageKey = "reading";
 
@@ -123,7 +122,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing through";
     presenceData.state = "the highest rated shows";
     delete presenceData.endTimestamp;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     delete presenceData.smallImageText;
     presenceData.smallImageKey = "reading";
 
@@ -132,7 +131,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing through";
     presenceData.state = "the latest shows";
     delete presenceData.endTimestamp;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     delete presenceData.smallImageText;
     presenceData.smallImageKey = "reading";
 
@@ -141,7 +140,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing through";
     presenceData.state = "a list of all shows";
     delete presenceData.endTimestamp;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     delete presenceData.smallImageText;
     presenceData.smallImageKey = "reading";
 
@@ -152,11 +151,11 @@ presence.on("UpdateData", async () => {
     );
 
     presenceData.details = "Browsing through all episodes of:";
-    presenceData.state = views.innerText
+    presenceData.state = views.textContent
       .replace("CATEGORY: ", "")
       .replace("▼", "");
     delete presenceData.endTimestamp;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     delete presenceData.smallImageText;
     presenceData.smallImageKey = "reading";
 
@@ -167,16 +166,13 @@ presence.on("UpdateData", async () => {
     );
 
     presenceData.details = "Searching for:";
-    presenceData.state = views.innerText
+    presenceData.state = views.textContent
       .replace("Search by Keywords: ", "")
       .replace("▼", "");
     delete presenceData.endTimestamp;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     delete presenceData.smallImageText;
     presenceData.smallImageKey = "search";
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

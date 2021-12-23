@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,12 +10,12 @@
     "nl": "Een online opslagplaats voor fanfictie geïnspireerd door My Little Pony Friendship is Magic."
   },
   "url": "www.fimfiction.net",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/DctO7hH.png",
   "thumbnail": "https://i.imgur.com/eEIiwDO.png",
   "color": "#cc3355",
+  "category": "other",
   "tags": [
     "stories"
-  ],
-  "category": "other"
+  ]
 }

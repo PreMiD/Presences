@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Vasilis",
     "id": "241929388403195914"
@@ -11,7 +11,7 @@
     "jv_ID": "Wolvesville adalah permainan online multiplayer untuk maksimal 16 pemain. Setiap permainan terdapat tim-tim yang berbeda seperti penduduk desa atau manusia serigala yang semuanya berjuang untuk menjadi tim terakhir yang bertahan. Gunakan kekuatan spesial untuk mengungkapkan peran pemain lain dan meyakinkan sesama pemain untuk bekerja denganmu.",
     "sl_SI": "Wolvesville je igra za do 16 igralcev. Vsaka igra ima različne ekipe, kot so vaščani ali pa volkodlaki, ki se vsi borijo da bi bili zadnja živa ekipa. Uporabite posebne sposobnosti da razkrijete vloge drugih igralcev in prepričate vaše soigralce da sodelujejo z vami.",
     "es": "Hombre Lobo Online es un juego multijugador para hasta 16 jugadores. Cada partida tiene diferentes equipos, como los aldeanos u hombres lobo, todos luchando para ser el último equipo en pie. Utiliza habilidades especiales para descubrir los roles de otros jugadores y convence a tus compañeros a trabajar contigo.",
-    "es_MX": "Hombre Lobo Online es un juego multijugador para hasta 16 jugadores. Cada partida tiene diferentes equipos, como los aldeanos u hombres lobo, todos luchando para ser el último equipo en pie. Utiliza habilidades especiales para descubrir los roles de otros jugadores y convence a tus compañeros a trabajar contigo.",
+    "es_419": "Hombre Lobo Online es un juego multijugador para hasta 16 jugadores. Cada partida tiene diferentes equipos, como los aldeanos u hombres lobo, todos luchando para ser el último equipo en pie. Utiliza habilidades especiales para descubrir los roles de otros jugadores y convence a tus compañeros a trabajar contigo.",
     "lt": "Wolvesville yra grupinis žaidimas skirtas iki 16 žaidėjų. Kiekvienas mačas turi skirtingas komandas, tokias kaip kaimečiai ar vilkolakiai, kurie kovoja, kas išliks paskutiniai gyvi. Naudok specialias galias, kad atskleistum kitų žaidėjų roles ir priversk kitus, tavo komandos narius, dirbti kartu su tavimi.",
     "hi_IN": "वरवोल्फ़ ऑनलाइन को 16 खिलड़ी तक एक साथ खेल सकते हैं। हर खेल में गाँव वाले और वरवोल्फ़ जैसी अलग अलग टीमें होती हैं, जो सब की सब आख़िर तक ज़िंदा रहने के लिये लड़ती हैं। अपनी ख़ास शक्तियों का उपयोग करके दूसरे खिलाड़ियों का रोल पता करें और दूसरे खिलाड़ियों को अपना साथ देनें के लिये मनाएँ।",
     "lv": "Vilkacis Tiešsaistē ir spēle vairākiem spēlētājiem, kas var sasniegt pat 16 spēlētāju skaitu. Katrai spēlei ir savādākas komandas, piemēram, iedzīvotāji vai vilkači, kuras cīnās par izdzīvošanu. Izmanto īpašas spējas, lai atklātu citu spēlētāju lomas un centies pierunāt savus spēles biedrus sadarboties kopā ar tevi.",
@@ -55,10 +55,11 @@
     "voting.wolvesville.com",
     "app.wolvesville.com"
   ],
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/y7daecg.png",
   "thumbnail": "https://i.imgur.com/s5NhKcP.png",
   "color": "#FF4181",
+  "category": "games",
   "tags": [
     "wolvesville",
     "werewolf",
@@ -66,7 +67,6 @@
     "wov",
     "wwo"
   ],
-  "category": "games",
   "settings": [
     {
       "id": "privacy",

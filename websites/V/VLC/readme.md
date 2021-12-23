@@ -30,4 +30,7 @@ Needed for the VLC presence to work.
 
 ![image](https://i.imgur.com/TWeLbfD.png)
 
-_This MD file is an edit of [another one](https://github.com/azrafe7/vlc4youtube/blob/master/instructions/how-to-enable-vlc-web-interface.md) originally meant for a different purpose, but was slightly modified to work for PreMiD. Thanks to them though_
+_This MD file is an edit of
+[another one](https://github.com/azrafe7/vlc4youtube/blob/master/instructions/how-to-enable-vlc-web-interface.md)
+originally meant for a different purpose, but was slightly modified to work for
+PreMiD. Thanks to them though_

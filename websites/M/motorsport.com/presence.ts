@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "728904519055966228"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     smallImageKey: "reading",
     smallImageText: "Reading",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   function checkSubPage(): void {
@@ -41,11 +41,10 @@ presence.on("UpdateData", () => {
       document.location.pathname.includes("/news/") &&
       !document.location.pathname.endsWith("/news/")
     ) {
-      const articleTitle = document.querySelector(
+      presenceData.details = "Reading an article";
+      presenceData.state = document.querySelector(
         ".ms-entity-detail-header_title"
       ).textContent;
-      presenceData.details = "Reading an article";
-      presenceData.state = articleTitle;
     }
   }
 
@@ -296,8 +295,6 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

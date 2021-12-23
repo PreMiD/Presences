@@ -1,22 +1,22 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Emir",
     "id": "466885774621540372"
   },
-  "url": "manga-tube.me",
+  "service": "MangaTube",
   "description": {
     "de": "Deine deutsche Manga-Community. Unterhalte dich mit vielen gleichgesinnten Manga-Fans und wühle dich durch unsere riesige Datenbank mit über 600 Manga",
     "en": "Your German Manga Community. Talk with Manga fans and browse through our huge database with over 600 Manga",
     "nl": "Uw Duitse mangagemeenschap. Praat met Manga-fans en blader door onze enorme database met meer dan 600 Manga"
   },
-  "service": "MangaTube",
-  "version": "1.0.6",
+  "url": "manga-tube.me",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/roeUqz0.png",
   "thumbnail": "https://i.imgur.com/l6i0Jeo.png",
   "color": "#000000",
+  "category": "anime",
   "tags": [
     "manga"
-  ],
-  "category": "anime"
+  ]
 }

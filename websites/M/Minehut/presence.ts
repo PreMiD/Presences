@@ -1,9 +1,9 @@
 const presence = new Presence({ clientId: "898448802829189172" }),
-  timestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "minehut-main",
-      startTimestamp: timestamp
+      startTimestamp: browsingTimestamp
     },
     f = document.location.pathname.split("/");
   if (document.location.hostname === "minehut.com") {
@@ -50,17 +50,19 @@ presence.on("UpdateData", async () => {
     }
     if (document.location.pathname.includes("/cart")) {
       const priceA = document.querySelector(
-          "#shopify-section-cart--template > section > div > form > div.cart__footer > div.cart__footer-right > p > span"
-        ),
-        a = priceA ? ` (${priceA.textContent} credits)` : "";
-      presenceData.state = `Viewing cart${a}`;
+        "#shopify-section-cart--template > section > div > form > div.cart__footer > div.cart__footer-right > p > span"
+      );
+      presenceData.state = `Viewing cart${
+        priceA ? ` (${priceA.textContent} credits)` : ""
+      }`;
     }
     if (document.location.pathname.includes("/pages/wishlist"))
       presenceData.state = "Viewing wishlist";
 
     if (document.location.pathname.includes("/search")) {
-      const q = new URLSearchParams(document.location.search.substring(1)),
-        s = q.get("q");
+      const s = new URLSearchParams(document.location.search.substring(1)).get(
+        "q"
+      );
       if (s) {
         presenceData.state = `Searching for ${s}...`;
         presenceData.smallImageKey = "search";
@@ -68,8 +70,6 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

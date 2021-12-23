@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "artstation",
       startTimestamp: browsingTimestamp
     },
-    shortTitle = document.title.split(/-(.+)/)[1];
+    [, shortTitle] = document.title.split(/-(.+)/);
 
   if (document.location.pathname.startsWith("/messages")) {
     presenceData.details = "Checking inbox";

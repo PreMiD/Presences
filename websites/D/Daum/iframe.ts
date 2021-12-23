@@ -1,15 +1,21 @@
-const IFrame = new iFrame();
+const iframe = new iFrame();
 
-IFrame.on("UpdateData", () => {
+iframe.on("UpdateData", () => {
   if (document.querySelector("video")) {
-    const { duration, currentTime, paused } = document.querySelector("video"),
-      title = document.querySelector("span.link_title")?.textContent;
+    const video = document.querySelector("video");
 
-    IFrame.send({ video: { duration, currentTime, paused, title } });
+    iframe.send({
+      video: {
+        duration: video.duration,
+        currentTime: video.currentTime,
+        paused: video.paused,
+        title: document.querySelector("span.link_title")?.textContent
+      }
+    });
   }
 
   if (document.location.hostname === "cafe.daum.net") {
-    IFrame.send({
+    iframe.send({
       cafe: {
         name: document
           .querySelector("#cafe_info_outer > div.cafename")
