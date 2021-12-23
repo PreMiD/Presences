@@ -96,6 +96,19 @@ const readFile = (path: string): string =>
 
     await execShellCommand(["yarn", "lint"]);
 
+    // A clear splitter before metadata sorting
+    console.log(
+      yellow(
+        [
+          "|-----------------------------------|",
+          "| PROCEEDING TO SORT METADATA FILES |",
+          "|-----------------------------------|"
+        ].join("\n")
+      )
+    )
+
+    await execShellCommand(["yarn", "ms"]);
+
     // A clear splitter between TypeScript compilation and semver bumps
     console.log(
       yellow(
