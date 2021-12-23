@@ -100,6 +100,7 @@ presence.on("UpdateData", () => {
     presenceData.buttons = [{ label: "Read Guide", url: document.URL }];
   } else if (document.location.pathname === "/blog") {
     presenceData.details = "Finding blogs";
+    presenceData.largeImageKey = "ships";
     presenceData.smallImageKey = "blogs";
     presenceData.smallImageText = "Viewing blogs";
   } else if (document.location.pathname.startsWith("/blog")) {
