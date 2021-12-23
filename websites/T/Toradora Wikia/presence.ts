@@ -3,14 +3,14 @@
   This is probably caused by the two presences. If anyone has an idea how to fix, be happy to do a pull request or tell me on Discord CRUGG#0001
 */
 
-const englishPresence = new Presence({
+const presence = new Presence({
     clientId: "613417749489778689"
   }),
   germanPresence = new Presence({
     clientId: "613418400042975329"
   });
 
-englishPresence.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   if (document.location.href.includes("tora-dora.fandom.com")) {
     // English Wiki
     if (document.location.pathname.startsWith("/wiki/")) {
@@ -20,9 +20,8 @@ englishPresence.on("UpdateData", async () => {
         page =
           document.getElementsByClassName("page-header__title")[0].textContent;
       } catch (err) {
-        const errCode = "TWIKI_WIKIEN_GETPAGETITLE";
-        englishPresence.info(
-          `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
+        presence.info(
+          `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   TWIKI_WIKIEN_GETPAGETITLE   :::   ${err}`
         );
       }
       const presenceData: PresenceData = {
@@ -30,7 +29,7 @@ englishPresence.on("UpdateData", async () => {
         state: page,
         largeImageKey: "lg-twiki"
       };
-      englishPresence.setActivity(presenceData);
+      presence.setActivity(presenceData);
     }
   }
   germanPresence.on("UpdateData", async () => {
@@ -44,9 +43,8 @@ englishPresence.on("UpdateData", async () => {
             document.getElementsByClassName("page-header__title")[0]
               .textContent;
         } catch (err) {
-          const errCode = "TWIKI_WIKIDE_GETPAGETITLE";
           germanPresence.info(
-            `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   ${errCode}   :::   ${err}`
+            `An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   TWIKI_WIKIDE_GETPAGETITLE   :::   ${err}`
           );
         }
         const presenceData: PresenceData = {

@@ -1,6 +1,6 @@
-const OneDrive = new Presence({ clientId: "818822000176791553" });
+const presence = new Presence({ clientId: "818822000176791553" });
 
-OneDrive.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   const title = document.title.split("-"),
     [fileName] = title,
     fileType = title[1].replace("Microsoft", "").replace("Online", "").trim(),
@@ -25,5 +25,5 @@ OneDrive.on("UpdateData", async () => {
     } ${fileType} file`;
     presenceData.state = fileName;
   }
-  OneDrive.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });

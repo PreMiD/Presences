@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "In a Portal";
       [presenceData.state] = document
         .querySelector("title")
-        .innerText.split(" • ");
+        .textContent.split(" • ");
     } else if (document.querySelector("svg.feather.feather-phone-missed")) {
       presenceData.smallImageKey = "call";
       presenceData.smallImageText = (await strings).call;

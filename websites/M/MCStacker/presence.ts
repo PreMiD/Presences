@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "629413450774347786"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "mcstacker"
+    largeImageKey: "mcstacker",
+    startTimestamp: browsingTimestamp
   };
-  presenceData.startTimestamp = browsingStamp;
   if (
     document.location.hostname === "bimbimma.com" &&
     document.URL.includes("/mcstacker/2014-08-31.php")
@@ -67,91 +67,91 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (document.location.hostname === "mcstacker.net") {
-    if (document.querySelector("#lootTableContainer") !== null) {
+    if (document.querySelector("#lootTableContainer")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a loot table";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#lootPane") !== null) {
+    } else if (document.querySelector("#lootPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /loot command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#bossbarPane") !== null) {
+    } else if (document.querySelector("#bossbarPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /bossbar command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#scoreboardPane") !== null) {
+    } else if (document.querySelector("#scoreboardPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /scoreboard command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#teamPane") !== null) {
+    } else if (document.querySelector("#teamPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /team command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#particlePane") !== null) {
+    } else if (document.querySelector("#particlePane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /particle command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#soundPane") !== null) {
+    } else if (document.querySelector("#soundPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /playsound command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#replaceItemPane") !== null) {
+    } else if (document.querySelector("#replaceItemPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /replaceitem command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#tellrawPane") !== null) {
+    } else if (document.querySelector("#tellrawPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /tellraw command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#blockPane") !== null) {
+    } else if (document.querySelector("#blockPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /block command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#rootEntity") !== null) {
+    } else if (document.querySelector("#rootEntity")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /entity command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#givePane") !== null) {
+    } else if (document.querySelector("#givePane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /give command";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.querySelector("#effectPane") !== null) {
+    } else if (document.querySelector("#effectPane")) {
       presenceData.details = "MCStacker for latest";
       presenceData.state = "Making a /effect command";
 
@@ -179,12 +179,6 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+    } else presence.setActivity();
+  } else presence.setActivity();
 });

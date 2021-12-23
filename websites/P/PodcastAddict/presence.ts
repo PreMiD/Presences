@@ -1,53 +1,54 @@
 const presence = new Presence({
     clientId: "835652520637890620"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location;
 
   if (pathname === "/" && document.location.search.substr(0, 2) === "?q") {
-    const query = document.querySelector(".caption").textContent;
-    data.details = "Searching:";
-    data.state = query;
-    data.smallImageKey = "search";
-  } else if (pathname === "/") data.details = "Viewing the Homepage";
-  else if (pathname.startsWith("/app")) data.details = "Viewing app page";
-  else if (pathname.startsWith("/ads")) data.details = "Viewing ads page";
+    presenceData.details = "Searching:";
+    presenceData.state = document.querySelector(".caption").textContent;
+    presenceData.smallImageKey = "search";
+  } else if (pathname === "/") presenceData.details = "Viewing the Homepage";
+  else if (pathname.startsWith("/app"))
+    presenceData.details = "Viewing app page";
+  else if (pathname.startsWith("/ads"))
+    presenceData.details = "Viewing ads page";
   else if (pathname.startsWith("/podcast")) {
-    const title = document.querySelector(".caption").textContent,
-      link = window.location.href;
-    data.details = "Viewing:";
-    data.state = title;
-    data.smallImageKey = "view";
-    data.buttons = [{ label: "View Podcast", url: link }];
+    presenceData.details = "Viewing:";
+    presenceData.state = document.querySelector(".caption").textContent;
+    presenceData.smallImageKey = "view";
+    presenceData.buttons = [
+      { label: "View Podcast", url: window.location.href }
+    ];
   } else if (pathname.startsWith("/episode")) {
-    const title = document.querySelector(".pure-button").innerHTML,
-      episode = document.querySelector(".title").textContent,
-      playPause = document.querySelector("#play-pause-button"),
-      link = window.location.href,
-      remainingTime = presence.timestampFromFormat(
-        document.querySelector("#remainingTime").textContent.substr(1)
-      ),
-      elapsedTime = presence.timestampFromFormat(
-        document.querySelector("#elapsedTime").textContent
-      ),
-      timestamps = presence.getTimestamps(
-        elapsedTime,
-        remainingTime + elapsedTime
-      );
+    const elapsedTime = presence.timestampFromFormat(
+      document.querySelector("#elapsedTime").textContent
+    );
 
-    data.buttons = [{ label: "Listen Along", url: link }];
-    data.details = title;
-    data.state = episode;
-    if (!playPause.classList.contains("fa-play-circle")) {
-      [, data.endTimestamp] = timestamps;
-      data.smallImageKey = "play";
-    } else data.smallImageKey = "pause";
+    presenceData.buttons = [
+      { label: "Listen Along", url: window.location.href }
+    ];
+    presenceData.details = document.querySelector(".pure-button").textContent;
+    presenceData.state = document.querySelector(".title").textContent;
+    if (
+      !document
+        .querySelector("#play-pause-button")
+        .classList.contains("fa-play-circle")
+    ) {
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        elapsedTime,
+        presence.timestampFromFormat(
+          document.querySelector("#remainingTime").textContent.substr(1)
+        ) + elapsedTime
+      );
+      presenceData.smallImageKey = "play";
+    } else presenceData.smallImageKey = "pause";
   }
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

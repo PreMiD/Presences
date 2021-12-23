@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: "639591760791732224" }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   urlpath = document.location.pathname.split("/");
 
 let uploader: HTMLElement,
@@ -26,11 +26,10 @@ presence.on("UpdateData", async () => {
       videoPaused = video.paused;
       timestamps = presence.getTimestampsfromMedia(video);
     } else {
-      const playerButton = document.querySelector(
-        ".bilibili-player-video-btn-start"
-      );
       videoPaused =
-        playerButton.classList.contains("video-state-pause") === true;
+        document
+          .querySelector(".bilibili-player-video-btn-start")
+          .classList.contains("video-state-pause") === true;
       (currentTime = presence.timestampFromFormat(
         document.querySelector(".bilibili-player-video-time-now").textContent
       )),
@@ -57,7 +56,7 @@ presence.on("UpdateData", async () => {
         case "video": {
           getTimestamps();
 
-          if (multiUploader !== null) {
+          if (multiUploader) {
             uploader = document.querySelector(
               "#member-container > div:nth-child(1) > div > a"
             );
@@ -87,7 +86,7 @@ presence.on("UpdateData", async () => {
           break;
         }
         default: {
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.startTimestamp = browsingTimestamp;
           break;
         }
       }

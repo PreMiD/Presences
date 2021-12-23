@@ -1,15 +1,15 @@
 const presence = new Presence({
     clientId: "660822610090655755"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo1"
+    largeImageKey: "logo1",
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.hostname === "iloot.it") {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "The gamer earning platform";
     if (document.location.pathname.includes("/partners"))
       presenceData.details = "Looking At Partner Page";
@@ -29,8 +29,6 @@ presence.on("UpdateData", () => {
       presenceData.details = "Looking At Payout Page";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

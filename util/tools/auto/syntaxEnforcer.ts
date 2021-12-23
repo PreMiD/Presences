@@ -13,7 +13,7 @@ import { exec } from "child_process";
  * @return Promise<string>
  */
 function execShellCommand(cmd: string[]) {
-  return new Promise<string>((resolve) => {
+  return new Promise<string>(resolve => {
     exec(cmd.join(" "), (error, stdout, stderr) => {
       if (error) console.warn(error);
 
@@ -105,7 +105,7 @@ const readFile = (path: string): string =>
           "|-----------------------------------|"
         ].join("\n")
       )
-    )
+    );
 
     await execShellCommand(["yarn", "ms"]);
 
@@ -130,7 +130,7 @@ const readFile = (path: string): string =>
       changedPresenceFiles = listOfChangedFiles
         .split("\n")
         .filter(
-          (file) => file.includes("presence.ts") || file.includes("iframe.ts")
+          file => file.includes("presence.ts") || file.includes("iframe.ts")
         );
 
     await increaseSemver(changedPresenceFiles);

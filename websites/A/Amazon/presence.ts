@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "618138980273094695"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let item: HTMLElement,
   dropdown: string,
   dropdownplus1: number,
@@ -11,40 +11,39 @@ let item: HTMLElement,
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "amazon"
+    largeImageKey: "amazon",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   item = document.querySelector(
     "#search > span > h1 > div > div.sg-col-14-of-20.sg-col-26-of-32.sg-col-18-of-24.sg-col.sg-col-22-of-28.s-breadcrumb.sg-col-10-of-16.sg-col-30-of-36.sg-col-6-of-12 > div > div > span.a-color-state.a-text-bold"
   );
 
-  if (document.querySelector("#productTitle") !== null) {
+  if (document.querySelector("#productTitle")) {
     item = document.querySelector("#productTitle");
 
     presenceData.details = "Viewing product:"; //general.viewProduct
-    if (item.innerText.length > 128)
-      presenceData.state = `${item.innerText.substring(0, 125)}...`;
-    else presenceData.state = item.innerText;
-  } else if (document.location.pathname.includes("/s") && item !== null) {
+    if (item.textContent.length > 128)
+      presenceData.state = `${item.textContent.substring(0, 125)}...`;
+    else presenceData.state = item.textContent;
+  } else if (document.location.pathname.includes("/s") && item) {
     presenceData.details = "Searching for:"; //general.searchFor
-    presenceData.state = item.innerText;
+    presenceData.state = item.textContent;
 
     presenceData.smallImageKey = "search";
-  } else if (document.querySelector("#gc-asin-title") !== null) {
+  } else if (document.querySelector("#gc-asin-title")) {
     item = document.querySelector("#gc-asin-title");
 
     presenceData.details = "Viewing product:"; //general.viewProduct
-    if (item.innerText.length > 128)
-      presenceData.state = `${item.innerText.substring(0, 125)}...`;
-    else presenceData.state = item.innerText;
+    if (item.textContent.length > 128)
+      presenceData.state = `${item.textContent.substring(0, 125)}...`;
+    else presenceData.state = item.textContent;
   } else if (document.location.pathname.includes("/profile")) {
     item = document.querySelector(
       "#customer-profile-name-header > div.a-row.a-spacing-none.name-container > span"
     );
     presenceData.details = "Viewing profile:"; //general.viewProfile
-    presenceData.state = item.innerText;
+    presenceData.state = item.textContent;
   } else if (document.location.pathname.includes("/store")) {
     presenceData.details = "Viewing store:"; //amazon.store
     [, presenceData.state] = document.title.split(":");
@@ -107,25 +106,21 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/help/"))
     presenceData.details = "Viewing Help Center";
   //general.viewing + Help Center
-  else {
-    if (document.querySelector("#searchDropdownBox") !== null) {
-      dropdown = document
-        .querySelector("#searchDropdownBox")
-        .getAttribute("data-nav-selected");
-      dropdownplus1 = +dropdown + 1;
-      dropdownfinal = `#searchDropdownBox > option:nth-child(${dropdownplus1})`;
-      dropdowninnertext =
-        document.querySelector<HTMLElement>(dropdownfinal).innerText;
-      split = document.location.pathname.split("/", 3);
-      if (dropdown !== "0" || split[1] !== "") {
-        presenceData.details = "Browsing category:"; //general.viewCategory
-        presenceData.state = dropdowninnertext;
-      }
+  else if (document.querySelector("#searchDropdownBox")) {
+    dropdown = document
+      .querySelector("#searchDropdownBox")
+      .getAttribute("data-nav-selected");
+    dropdownplus1 = +dropdown + 1;
+    dropdownfinal = `#searchDropdownBox > option:nth-child(${dropdownplus1})`;
+    dropdowninnertext =
+      document.querySelector<HTMLElement>(dropdownfinal).textContent;
+    split = document.location.pathname.split("/", 3);
+    if (dropdown !== "0" || split[1] !== "") {
+      presenceData.details = "Browsing category:"; //general.viewCategory
+      presenceData.state = dropdowninnertext;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

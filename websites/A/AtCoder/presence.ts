@@ -54,16 +54,16 @@ presence.on("UpdateData", async () => {
           }
 
           case "submit": {
-            const problemName = document
-                .querySelectorAll(".select2-selection__rendered")
-                .item(0).textContent,
-              compilerName = document
-                .querySelectorAll(".select2-selection__rendered")
-                .item(1).textContent;
             presenceData.details = `Submitting Solution: ${location.pathname
               .split("/")[2]
               .toUpperCase()}`;
-            presenceData.state = `${problemName} [${compilerName}]`;
+            presenceData.state = `${
+              document.querySelectorAll(".select2-selection__rendered").item(0)
+                .textContent
+            } [${
+              document.querySelectorAll(".select2-selection__rendered").item(1)
+                .textContent
+            }]`;
             break;
           }
 
@@ -159,10 +159,9 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Browsing Post Archive...";
         else {
           {
-            const topicHeading =
-              document.querySelector(".panel-title").childNodes[0].textContent;
             presenceData.details = "Reading Post";
-            presenceData.state = topicHeading;
+            presenceData.state =
+              document.querySelector(".panel-title").childNodes[0].textContent;
           }
           break;
         }
@@ -170,8 +169,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

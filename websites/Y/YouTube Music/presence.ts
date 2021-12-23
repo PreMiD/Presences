@@ -28,16 +28,16 @@ function getAuthorString(): string {
       //* Build output string
       return `${authorsArray
         .slice(0, authorsArray.length - 1)
-        .map((a) => a.innerText)
+        .map(a => a.textContent)
         .join(", ")} - ${
-        authorsArray[authorsArray.length - 1].innerText
+        authorsArray[authorsArray.length - 1].textContent
       } (${year})`;
     } else {
       //* Build output string
       return `${authorsArray
         .slice(0, authorsArray.length - 1)
-        .map((a) => a.innerText)
-        .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
+        .map(a => a.textContent)
+        .join(", ")} - ${authorsArray[authorsArray.length - 1].textContent}`;
     }
   } else {
     return (
@@ -66,10 +66,10 @@ presence.on("UpdateData", async () => {
       presence.getSetting("cover")
     ]);
   if (title !== "" && !isNaN(video.duration)) {
-    const remainingLength =
+    const endTimestamp =
+        Date.now() +
         Number(progressBar.getAttribute("aria-valuemax")) * 1000 -
         Number(progressBar.getAttribute("value")) * 1000,
-      endTimestamp = Date.now() + remainingLength,
       [, watchID] = document
         .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
         .href.match(/v=([^&#]{5,})/),

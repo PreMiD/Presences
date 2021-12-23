@@ -21,13 +21,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Preparing to fight";
     presenceData.startTimestamp = time;
   } else if (path.startsWith("/champion")) {
-    const name = path.replace("/champion/", "");
     presenceData.details = "Checking Runes";
-    presenceData.state = name;
+    presenceData.state = path.replace("/champion/", "");
     presenceData.startTimestamp = time;
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

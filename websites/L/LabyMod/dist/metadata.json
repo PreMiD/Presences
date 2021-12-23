@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -16,14 +16,14 @@
     "nl": "Een alles-in-één Minecraft PvP modificatie om uw ingame-ervaring te verbeteren."
   },
   "url": "www.labymod.net",
-  "version": "1.2.9",
+  "regExp": "([a-z0-9-]+[.])*labymod[.]net[/]",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/PHdC5bf.png",
   "thumbnail": "https://i.imgur.com/SDMxfEg.png",
   "color": "#008fe8",
+  "category": "games",
   "tags": [
     "minecraft",
     "labymod"
-  ],
-  "category": "games",
-  "regExp": "([a-z0-9-]+[.])*labymod[.]net[/]"
+  ]
 }

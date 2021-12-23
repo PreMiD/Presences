@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "895022531868774451"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "typinglogo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     [, end] = presence.getTimestamps(
       presence.timestampFromFormat("00:00"),
@@ -20,11 +20,10 @@ presence.on("UpdateData", async () => {
     if (timer === "1:00")
       presenceData.details = "Waiting to start a typing test";
     else if (timer === "0:00") {
-      const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a typing test:";
       presenceData.state = `In ${
         document.querySelector("#switch-typing-test-language").textContent
-      } | ${wpM[0]} `;
+      } | ${document.querySelector("#wpm").textContent.split("(")[0]} `;
     } else {
       presenceData.endTimestamp = end;
       presenceData.details = "Doing a typing test:";
@@ -37,11 +36,10 @@ presence.on("UpdateData", async () => {
     if (timer === "1:00")
       presenceData.details = "Waiting to start an advance Typing test";
     else if (timer === "0:00") {
-      const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing an advance typing test:";
       presenceData.state = `In ${
         document.querySelector("#switch-typing-test-language").textContent
-      } | ${wpM[0]} `;
+      } | ${document.querySelector("#wpm").textContent.split("(")[0]} `;
     } else {
       presenceData.endTimestamp = end;
       presenceData.details = "Doing an advance typing test:";
@@ -54,9 +52,10 @@ presence.on("UpdateData", async () => {
     if (timer === "1:00")
       presenceData.details = "Waiting to start a competition";
     else if (timer === "0:00") {
-      const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a competition:";
-      presenceData.state = `${wpM[0]} WPM `;
+      presenceData.state = `${
+        document.querySelector("#wpm").textContent.split("(")[0]
+      } WPM `;
     } else {
       presenceData.endTimestamp = end;
       presenceData.details = "Doing a competition";
@@ -81,9 +80,10 @@ presence.on("UpdateData", async () => {
     if (timer.match(/([125]{1}[0]{0,1}:[0]{2})|(0:30)/))
       presenceData.details = "Waiting to start a custom typing test";
     else if (timer === "0:00") {
-      const wpM = document.querySelector("#wpm").textContent.split("(");
       presenceData.details = "Finishing a custom typing test:";
-      presenceData.state = `${wpM[0]}`;
+      presenceData.state = `${
+        document.querySelector("#wpm").textContent.split("(")[0]
+      }`;
     } else presenceData.details = " Doing a custom typing test";
   } else if (document.location.pathname.includes("/user/")) {
     presenceData.details = "Viewing a user profile:";
@@ -152,8 +152,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

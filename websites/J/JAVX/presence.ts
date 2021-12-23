@@ -23,30 +23,24 @@ const presence = new Presence({
     const elPagination = document.querySelector("ul.pagination");
     if (!elPagination) return "p.1/1";
 
-    const currentPage = elPagination
-        .querySelector("li.page-item.active > a")
-        .textContent.trim(),
-      lastPage = parseInt(
-        elPagination
-          .querySelector("li.page-item:last-child > a")
-          .getAttribute("href")
-          .split("page/")
-          .pop()
-      );
-
-    return `p.${currentPage}/${lastPage}`;
+    return `p.${elPagination
+      .querySelector("li.page-item.active > a")
+      .textContent.trim()}/${parseInt(
+      elPagination
+        .querySelector("li.page-item:last-child > a")
+        .getAttribute("href")
+        .split("page/")
+        .pop()
+    )}`;
   },
   getEpisode = (): string => {
     const elEpisodes = document.querySelector("#episodes");
     if (!elEpisodes) return "ep.1/1";
 
-    const currentEpisode = elEpisodes
-        .querySelector("button.active")
-        .textContent.replace("Tập", "")
-        .trim(),
-      totalEpisodes = elEpisodes.childNodes.length;
-
-    return `ep.${currentEpisode}/${totalEpisodes}`;
+    return `ep.${elEpisodes
+      .querySelector("button.active")
+      .textContent.replace("Tập", "")
+      .trim()}/${elEpisodes.childNodes.length}`;
   };
 
 let video = { playback: false, currentTime: 0, duration: 0, paused: false };
@@ -97,86 +91,65 @@ presence.on("UpdateData", async () => {
       .querySelector(".navbar .border-left")
       .textContent.trim();
   } else if (pathname.startsWith("/profile")) {
-    const name = document.querySelector("h2").textContent.trim(),
-      role = document.querySelector("p > small").textContent.trim();
-
     presenceData.details = (await strings).viewAccount;
-    presenceData.state = `${upperFirstLetter(role.toLowerCase())}: ${name}`;
+    presenceData.state = `${upperFirstLetter(
+      document.querySelector("p > small").textContent.trim().toLowerCase()
+    )}: ${document.querySelector("h2").textContent.trim()}`;
   } else if (pathname.startsWith("/category")) {
-    const genre = document
-      .querySelector("h2")
-      .textContent.replace(/\(.*\)$/, "")
-      .trim();
-
     presenceData.details = (await strings).viewGenre;
-    presenceData.state = `${genre} ${getPage()}`;
+    presenceData.state = `${document
+      .querySelector("h2")
+      .textContent.replace(/\(.*\)$/, "")
+      .trim()} ${getPage()}`;
   } else if (pathname.startsWith("/tag")) {
-    const tag = document
-      .querySelector("h2")
-      .textContent.replace(/\(.*\)$/, "")
-      .trim();
-
     presenceData.details = (await strings).viewSeries;
-    presenceData.state = `${tag} ${getPage()}`;
-  } else if (~pagesWithoutTermName.findIndex((x) => pathname.startsWith(x))) {
-    const title = document
+    presenceData.state = `${document
       .querySelector("h2")
       .textContent.replace(/\(.*\)$/, "")
-      .trim();
-
+      .trim()} ${getPage()}`;
+  } else if (~pagesWithoutTermName.findIndex(x => pathname.startsWith(x))) {
     presenceData.details = (await strings).viewList;
-    presenceData.state = `${title} ${getPage()}`;
-  } else if (~pagesWithTermName.findIndex((x) => pathname.startsWith(x))) {
-    const title = document
-        .querySelector(".navbar .border-left")
-        .textContent.trim(),
-      name = document
-        .querySelector("h2")
-        .textContent.replace(/\(.*\)$/, "")
-        .trim();
-
+    presenceData.state = `${document
+      .querySelector("h2")
+      .textContent.replace(/\(.*\)$/, "")
+      .trim()} ${getPage()}`;
+  } else if (~pagesWithTermName.findIndex(x => pathname.startsWith(x))) {
     presenceData.details = (await strings).viewList;
-    presenceData.state = `${title} ${name} ${getPage()}`;
+    presenceData.state = `${document
+      .querySelector(".navbar .border-left")
+      .textContent.trim()} ${document
+      .querySelector("h2")
+      .textContent.replace(/\(.*\)$/, "")
+      .trim()} ${getPage()}`;
   } else if (Object.keys(video).length > 0) {
-    const censorship = document
-        .querySelector("#censorship > a")
-        .textContent.trim(),
-      engname = document.querySelector("#title").textContent.trim(),
-      id = document.querySelector("#id .list-inline-item").textContent.trim(),
-      title = censorship === "Porn" ? engname : id,
-      actresses: string[] = [],
+    const actresses: string[] = [],
       studios: string[] = [];
 
     document
       .querySelectorAll("#actresses .stretched-link")
-      .forEach((actress) => actresses.push(actress.textContent.trim()));
+      .forEach(actress => actresses.push(actress.textContent.trim()));
     document
       .querySelectorAll("#studios .stretched-link")
-      .forEach((studio) => studios.push(studio.textContent.trim()));
+      .forEach(studio => studios.push(studio.textContent.trim()));
 
-    const episodes = getEpisode(),
-      strActresses = actresses.join(", "),
-      strStudios = studios.join(", "),
-      strTitle = `${title} ${episodes}`;
+    presenceData.details = `${(await strings).watchingVid}: ${`${
+      document.querySelector("#censorship > a").textContent.trim() === "Porn"
+        ? document.querySelector("#title").textContent.trim()
+        : document.querySelector("#id .list-inline-item").textContent.trim()
+    } ${getEpisode()}`}`;
+    presenceData.state = `${actresses.join(", ")} - ${studios.join(", ")}`;
 
-    presenceData.details = `${(await strings).watchingVid}: ${strTitle}`;
-    presenceData.state = `${strActresses} - ${strStudios}`;
-
-    const { playback, currentTime, duration, paused } = video;
-
-    if (playback) {
-      const timestamps = presence.getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
+    if (video.playback) {
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
       );
-
-      [, presenceData.endTimestamp] = timestamps;
-      presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused
         ? (await strings).paused
         : (await strings).playing;
 
-      if (paused) delete presenceData.endTimestamp;
+      if (video.paused) delete presenceData.endTimestamp;
     }
   } else presenceData.details = (await strings).searchSomething;
 

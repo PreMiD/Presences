@@ -9,7 +9,7 @@ const presence = new Presence({
 let subtitle;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "tubi-logo"
     },
     video: HTMLVideoElement = document.querySelector(
@@ -21,28 +21,28 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      subtitleCheck = document.querySelector("h2._29XQF._24NNJ") ? false : true;
+      subtitleCheck = document.querySelector("h2._29XQF._24NNJ");
 
-    if (subtitleCheck) subtitle = "Movie";
-    else subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
+    if (!subtitleCheck) subtitle = "Movie";
+    else subtitle = subtitleCheck.textContent;
 
-    data.details = title;
-    data.state = subtitle;
-    data.smallImageKey = video.paused ? "pause" : "play";
-    data.smallImageText = video.paused
+    presenceData.details = title;
+    presenceData.state = subtitle;
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    data.startTimestamp = startTimestamp;
-    data.endTimestamp = endTimestamp;
+    presenceData.startTimestamp = startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
 
     if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    if (title && subtitle) presence.setActivity(data, !video.paused);
+    if (title && subtitle) presence.setActivity(presenceData, !video.paused);
   } else {
-    data.details = "Browsing...";
-    presence.setActivity(data);
+    presenceData.details = "Browsing...";
+    presence.setActivity(presenceData);
   }
 });

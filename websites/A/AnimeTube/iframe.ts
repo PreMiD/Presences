@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
     "#videojs-player_html5_api"
   );
 
-  if (video !== null) {
+  if (video) {
     iframe.send({
       currentTime: video.currentTime,
       paused: video.paused,

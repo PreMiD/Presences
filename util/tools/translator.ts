@@ -51,8 +51,8 @@ const spinnerSettings = {
       );
     }
 
-    readdirSync(src).forEach((letter) => {
-      readdirSync(`${src}/${letter}/`).forEach(async (presence) => {
+    readdirSync(src).forEach(letter => {
+      readdirSync(`${src}/${letter}/`).forEach(async presence => {
         const data = JSON.parse(
           readFileSync(
             `${src}/${letter}/${presence}/dist/metadata.json`,
@@ -197,7 +197,7 @@ const spinnerSettings = {
             )
             .catch(() => process.exit());
           files = (Array.from(filesMap) as Files).filter(
-            (f) => f[1].category === category
+            f => f[1].category === category
           );
         }
         break;
@@ -211,7 +211,7 @@ const spinnerSettings = {
               // @ts-expect-error Limit doesn't exist in Options.
               limit: 7,
               multiple: true,
-              choices: (Array.from(filesMap) as Files).map((f) => f[0]),
+              choices: (Array.from(filesMap) as Files).map(f => f[0]),
               footer() {
                 const selectedPresences = this.selected.length;
                 return gray(
@@ -222,7 +222,7 @@ const spinnerSettings = {
           ])
             .then((answer: { selected: string }) => answer.selected)
             .catch(() => process.exit());
-          files = (Array.from(filesMap) as Files).filter((f) =>
+          files = (Array.from(filesMap) as Files).filter(f =>
             selected.includes(f[0])
           );
         }

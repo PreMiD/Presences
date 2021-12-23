@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Nanashin",
     "id": "330030557457022986"
@@ -13,15 +13,15 @@
     "nl": "Een van de meest comfortabele Braziliaanse websites om anime te bekijken"
   },
   "url": "animeshouse.net",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "logo": "https://i.imgur.com/dv1nn7J.png",
   "thumbnail": "https://i.imgur.com/1YqKDfY.png",
   "color": "#079ac7",
-  "iframe": true,
+  "category": "anime",
   "tags": [
     "anime",
     "animes",
     "animeshouse"
   ],
-  "category": "anime"
+  "iframe": true
 }

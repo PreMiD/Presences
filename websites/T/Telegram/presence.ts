@@ -26,9 +26,9 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "Talking to someone";
 
     presenceData.smallImageKey =
-      textArea.value.length >= 1 ? "writing" : "reading";
+      textArea.textContent.length >= 1 ? "writing" : "reading";
     presenceData.smallImageText =
-      textArea.value.length >= 1
+      textArea.textContent.length >= 1
         ? "Typing a message."
         : `Reading ${messages.length} message${
             messages.length > 1 ? "s" : ""

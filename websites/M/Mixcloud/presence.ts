@@ -10,11 +10,7 @@ const presence = new Presence({
 let author: string, title: string, url: string, openUrlText: string;
 
 presence.on("UpdateData", async () => {
-  const player = document.querySelector(
-    "[class^='PlayerControls__PlayerContainer']"
-  );
-
-  if (player) {
+  if (document.querySelector("[class^='PlayerControls__PlayerContainer']")) {
     const normalIsPlaying: boolean =
         document
           .querySelector("div[class^='PlayButton__PlayerControl']")
@@ -50,7 +46,7 @@ presence.on("UpdateData", async () => {
       ).textContent;
     }
 
-    const data: PresenceData = {
+    const presenceData: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "mixcloud",
@@ -60,14 +56,11 @@ presence.on("UpdateData", async () => {
     };
 
     if (liveIsPlaying) {
-      data.smallImageKey = "live";
-      data.smallImageText = (await strings).live;
+      presenceData.smallImageKey = "live";
+      presenceData.smallImageText = (await strings).live;
     }
 
-    if (isPlaying) presence.setActivity(data);
-    else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
+    if (isPlaying) presence.setActivity(presenceData);
+    else presence.setActivity();
   }
 });

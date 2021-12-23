@@ -81,11 +81,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = document.querySelector("h1.Title").textContent;
     presenceData.smallImageKey = "browsing";
     presenceData.smallImageText = (await strings).browsing;
-    presence.setActivity(presenceData);
   } else {
     presenceData.details = (await strings).browsing;
     presenceData.smallImageKey = "browsing";
     presenceData.smallImageText = (await strings).browsing;
-    presence.setActivity(presenceData);
   }
+  presence.setActivity(presenceData);
 });

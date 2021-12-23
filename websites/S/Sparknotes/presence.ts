@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "714628886222209105"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let chapter, titlePage, title, subject;
 const path = document.location.pathname;
 presence.on("UpdateData", async () => {
@@ -13,10 +13,10 @@ presence.on("UpdateData", async () => {
       "body > header.TitleHeader_header.TitleHeader_header--studyGuide > div > div > h1"
     );
     if (path === `/${subject}/`) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = `Viewing ${subject.replace(/-/gi, " ")}`;
     } else if (title) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = title.textContent;
       chapter = document.querySelector(
         "body > header.interior-header > div > div.interior-header__title > div"
@@ -30,24 +30,24 @@ presence.on("UpdateData", async () => {
   );
   if (path === "/") {
     presenceData.details = "Viewing Home";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (path === "/shakespeare/") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing Shakespheare Literature";
   } else if (path === "/lit/") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing All Literature";
   } else if (path.includes("/blog/")) {
     title = document.querySelector("head > title");
     if (title) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing: ";
       presenceData.state = title.textContent.replace(
         " | The SparkNotes Blog",
         ""
       );
     } else {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing Blog";
     }
   } else if (path.includes("/writinghelp/")) {
@@ -55,12 +55,12 @@ presence.on("UpdateData", async () => {
       "body > header.titleHeader--howTo > div > h1"
     );
     if (title) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
     }
   } else if (path === "/othersubjects/") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing Other Subjects";
   } else if (path === "/math/") subjectCondition("math");
   else if (path === "/biology/") subjectCondition("biology");
@@ -75,10 +75,10 @@ presence.on("UpdateData", async () => {
       "body > header.TitleHeader_header.TitleHeader_header--studyGuide > div > div > h1"
     );
     if (path === `/${subject}/`) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing Computer Science";
     } else if (title) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = title.textContent;
       chapter = document.querySelector(
         "body > header.interior-header > div > div.interior-header__title > div"
@@ -98,11 +98,11 @@ presence.on("UpdateData", async () => {
     title = (
       document.querySelector("#results-search-input") as HTMLInputElement
     ).value;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Searching:";
     presenceData.state = title;
   } else if (title) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = `Viewing: ${title.textContent}`;
     chapter = document.querySelector("#section > h3:nth-child(2)");
     titlePage = document.querySelector(
@@ -120,25 +120,23 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "body > header.TitleHeader_header.TitleHeader_header--noFear > div > div > h1"
     );
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = `Viewing: ${title.textContent}`;
     titlePage = document.querySelector(
       "body > header.interior-header > div > div.interior-header__title > div"
     );
     if (titlePage) presenceData.state = titlePage.textContent;
   } else if (path === "/login/") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Login Unavailable";
   } else if (path === "/help/") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Viewing Help";
   } else {
     presenceData.details = "Unable to Read Page";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   }
   // Used To Start The RPC
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

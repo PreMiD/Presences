@@ -1,20 +1,19 @@
 const presence = new Presence({
     clientId: "752464948965408768"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.hostname.includes("itch.io")) {
-    const { hostname } = document.location,
-      { pathname } = document.location;
+    const { pathname } = document.location;
 
-    if (hostname.split(".")[0] !== "itch") {
+    if (document.location.hostname.split(".")[0] !== "itch") {
       if (pathname === "/") {
-        presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing Developer Profile";
         presenceData.state = document.title.replace(" - itch.io", "");
       } else {
@@ -22,7 +21,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = gameName;
         presenceData.state = devName;
         if (document.querySelector(".game_loaded")) {
-          presenceData.startTimestamp = browsingStamp;
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = "Playing";
         }
@@ -32,23 +30,20 @@ presence.on("UpdateData", async () => {
     } else if (
       pathname.startsWith("/board") ||
       pathname.startsWith("/community")
-    ) {
-      presenceData.startTimestamp = browsingStamp;
+    )
       presenceData.details = "In Community Discussion";
-    } else if (
+    else if (
       pathname.startsWith("/jam") &&
       pathname.split("/")[2] &&
       document.querySelector(".jam_header_widget")
     ) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = (
         document.querySelector(".jam_title_header") as HTMLElement
-      ).innerText;
+      ).textContent;
       presenceData.state = `Jam ${
-        (document.querySelector(".jam_host_header") as HTMLElement).innerText
+        (document.querySelector(".jam_host_header") as HTMLElement).textContent
       }`;
     } else {
-      presenceData.startTimestamp = browsingStamp;
       switch (pathname) {
         //Games
         case "/games":
@@ -84,8 +79,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

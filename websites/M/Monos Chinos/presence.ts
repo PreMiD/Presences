@@ -30,7 +30,7 @@ presence.on("iFrameData", async (context: VideoContext) => {
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
     browsingData: PresenceData = {
@@ -79,18 +79,17 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (action === null) Object.assign(data, browsingData);
+  if (action === null) Object.assign(presenceData, browsingData);
   else if (action.id === "episode") {
-    const detailsPattern = /^([^\d]+).* (\d+).+$/,
-      detailsMatch = document
-        .querySelector(".Title-epi")
-        .textContent.match(detailsPattern);
+    const detailsMatch = document
+      .querySelector(".Title-epi")
+      .textContent.match(/^([^\d]+).* (\d+).+$/);
 
     if (!detailsMatch) return presence.setActivity(browsingData);
 
     const [title, episode] = detailsMatch.slice(1);
 
-    Object.assign(data, {
+    Object.assign(presenceData, {
       details: title,
       state: (await strings).episode.replace("{0}", episode),
       smallImageKey: "browsing",
@@ -113,20 +112,21 @@ presence.on("UpdateData", async () => {
       video = null;
     }
 
-    if (!video || (video && video.ended)) return presence.setActivity(data);
+    if (!video || (video && video.ended))
+      return presence.setActivity(presenceData);
 
     const [startTimestamp, endTimestamp] = presence.getTimestamps(
       Math.floor(video.elapsed),
       Math.floor(video.duration)
     );
 
-    Object.assign(data, {
+    Object.assign(presenceData, {
       smallImageKey: video.paused ? "paused" : "playing",
       smallImageText: (await strings)[video.paused ? "paused" : "playing"]
     } as PresenceData);
 
     if (!video.paused) {
-      Object.assign(data, {
+      Object.assign(presenceData, {
         startTimestamp,
         endTimestamp
       });
@@ -136,14 +136,14 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/anime/") &&
       document.querySelector("h1.Title")
     )
-      data.state = document.querySelector("h1.Title").textContent;
+      presenceData.state = document.querySelector("h1.Title").textContent;
 
-    Object.assign(data, {
+    Object.assign(presenceData, {
       details: action.text,
       smallImageKey: action.icon,
       smallImageText: action.text
     } as PresenceData);
   }
 
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

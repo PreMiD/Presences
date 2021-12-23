@@ -4,12 +4,17 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let artist: string, title: string, artwork: string, playing: boolean;
 
 presence.on(
   "iFrameData",
-  (data: { playing: boolean; artist: string; title: string; artwork: string }) => {
+  (data: {
+    playing: boolean;
+    artist: string;
+    title: string;
+    artwork: string;
+  }) => {
     ({ playing } = data);
     if (playing) ({ artist, title, artwork } = data);
   }
@@ -17,10 +22,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "animu"
+    largeImageKey: "animu",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
   if (playing) {
     presenceData.details = artist;
     presenceData.state = title;
@@ -56,8 +60,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

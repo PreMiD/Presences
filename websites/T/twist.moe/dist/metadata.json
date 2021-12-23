@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -14,13 +14,13 @@
     "nl": "twist.moe is een gratis anime streaming-site."
   },
   "url": "twist.moe",
-  "version": "2.2.8",
+  "version": "2.2.9",
   "logo": "https://i.imgur.com/QUWUPTI.jpg",
   "thumbnail": "https://i.imgur.com/S90UKep.png",
   "color": "#0397d6",
+  "category": "anime",
   "tags": [
     "video",
     "anime"
-  ],
-  "category": "anime"
+  ]
 }

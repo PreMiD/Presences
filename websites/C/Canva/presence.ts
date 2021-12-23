@@ -1,14 +1,13 @@
 const presence = new Presence({
     clientId: "670612134878773297"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "canva"
+    largeImageKey: "canva",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname === "/")
     presenceData.details = "In the Homepage";
@@ -34,9 +33,10 @@ presence.on("UpdateData", () => {
     else if (document.location.pathname === "/folder")
       presenceData.details = "Browsing the folders";
     else {
-      const foldername = document.querySelector("head > title").textContent;
       presenceData.details = "Browsing the folder: ";
-      presenceData.state = foldername.replace(" - Canva", "");
+      presenceData.state = document
+        .querySelector("head > title")
+        .textContent.replace(" - Canva", "");
     }
   } else if (document.location.pathname.startsWith("/templates/")) {
     if (document.location.pathname.startsWith("/templates/search/"))
@@ -44,9 +44,10 @@ presence.on("UpdateData", () => {
     else presenceData.details = "Browsing the templates";
   } else if (document.location.pathname.startsWith("/photos/")) {
     if (document.location.pathname.startsWith("/photos/search/")) {
-      const photoname = document.querySelector("head > title").textContent;
       presenceData.details = "Searching photos of:";
-      [presenceData.state] = photoname.split(" - ");
+      [presenceData.state] = document
+        .querySelector("head > title")
+        .textContent.split(" - ");
     } else presenceData.details = "Browsing the photos";
   } else if (document.location.pathname.startsWith("/brand"))
     presenceData.details = "Editing his brand";
@@ -85,20 +86,16 @@ presence.on("UpdateData", () => {
     presenceData.details = "Inviting friends";
   else if (document.location.pathname.startsWith("/design/")) {
     if (document.location.pathname.endsWith("/edit")) {
-      const designe = document.querySelector("head > title").textContent;
       presenceData.details = "Editing the design:";
       presenceData.smallImageKey = "brush";
       presenceData.smallImageText = "Editing";
-      presenceData.state = designe;
+      presenceData.state = document.querySelector("head > title").textContent;
     } else if (document.location.pathname.endsWith("/view")) {
-      const designv = document.querySelector("head > title").textContent;
       presenceData.details = "Watching the design:";
-      presenceData.state = designv;
+      presenceData.state = document.querySelector("head > title").textContent;
     } else presenceData.details = "Viewing a design";
   } else presenceData.details = "Browsing...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

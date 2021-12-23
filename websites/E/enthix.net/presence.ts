@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "662715886662057994"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.hostname === "enthix.net") {
     presenceData.details = "Viewing Home Page";
@@ -17,8 +17,6 @@ presence.on("UpdateData", () => {
     } Players Online`;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

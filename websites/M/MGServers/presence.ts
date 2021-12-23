@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "899051140157681726"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   forumurl = "mgservers.de",
   panelurl = "webinterface.mgservers.de",
   panelserverurl = "webinterface.mgservers.de/server/";
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "mgs-normal",
       smallImageKey: "mgs-normal",
       smallImageText: "MGS",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (privacy) {
@@ -150,10 +150,7 @@ presence.on("UpdateData", async () => {
     ];
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity(presenceData);
-  } else presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
 
 function getUrl(url: string) {

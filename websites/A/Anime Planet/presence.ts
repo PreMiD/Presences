@@ -222,8 +222,6 @@ presence.on("UpdateData", async () => {
       .trim();
 
     if (!isNaN(duration)) {
-      const timestamps = presence.getTimestamps(currentTime, duration);
-
       presenceData.details = AnimeDetails.replace(
         "%title%",
         content.title
@@ -236,7 +234,8 @@ presence.on("UpdateData", async () => {
         `EP.${content.episode.ep} ${content.episode.title ?? ""}`
       );
 
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(currentTime, duration);
 
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused

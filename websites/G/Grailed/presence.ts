@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "786739998011293717"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   userName = document.querySelector(
     "#wardrobe > div > div.UserInfo > div.--header > div.--info > div.--user-container > div.--user-info > div.--username-container > span"
   );
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "grailedlogo"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "www.grailed.com") {
     if (document.location.href.includes("www.grailed.com/listings/")) {
@@ -21,11 +21,11 @@ presence.on("UpdateData", async () => {
         "body > div.container > div > div.show-listing > div.listing-details-wrapper > div.-listing-details-and-likes-wrapper > div.-listing-designer-title-size > h1"
       );
       presenceData.details = "Viewing a listing:";
-      if (item.innerHTML.length > 128) {
-        presenceData.state = `${item.innerHTML
+      if (item.textContent.length > 128) {
+        presenceData.state = `${item.textContent
           .replace(/amp;/g, "")
           .substring(0, 125)}...`;
-      } else presenceData.state = item.innerHTML.replace(/amp;/g, "");
+      } else presenceData.state = item.textContent.replace(/amp;/g, "");
 
       presence.setActivity(presenceData);
     } else if (document.location.href.includes("www.grailed.com/mygrails/")) {
@@ -43,11 +43,11 @@ presence.on("UpdateData", async () => {
         "#designer-collaboration > div.designer-profile-container > div.designer-profile-info-container > div > h1"
       );
       presenceData.details = "Viewing a collaboration:";
-      if (item.innerHTML.length > 128) {
-        presenceData.state = `${item.innerHTML
+      if (item.textContent.length > 128) {
+        presenceData.state = `${item.textContent
           .replace(/amp;/g, "")
           .substring(0, 125)}...`;
-      } else presenceData.state = item.innerHTML.replace(/amp;/g, "");
+      } else presenceData.state = item.textContent.replace(/amp;/g, "");
 
       presence.setActivity(presenceData);
     } else if (
@@ -57,11 +57,11 @@ presence.on("UpdateData", async () => {
       item = document.querySelector(
         "#CapsulePage > div.CapsuleHeader > div.-container._has-hero > div > div.-name-container > h1"
       );
-      if (item.innerHTML.length > 128) {
-        presenceData.state = `${item.innerHTML
+      if (item.textContent.length > 128) {
+        presenceData.state = `${item.textContent
           .replace(/amp;/g, "")
           .substring(0, 125)}...`;
-      } else presenceData.state = item.innerHTML.replace(/amp;/g, "");
+      } else presenceData.state = item.textContent.replace(/amp;/g, "");
 
       presence.setActivity(presenceData);
     } else if (document.location.href.includes("www.grailed.com/collections")) {
@@ -75,22 +75,22 @@ presence.on("UpdateData", async () => {
           item = document.querySelector(
             "#__next > div > main > div:nth-child(2) > div.ProfileWrapper > div > div.DetailPageProfile-Info > div > h1"
           );
-          if (item.innerHTML.length > 128) {
-            presenceData.state = `${item.innerHTML
+          if (item.textContent.length > 128) {
+            presenceData.state = `${item.textContent
               .replace(/amp;/g, "")
               .substring(0, 125)}...`;
-          } else presenceData.state = item.innerHTML.replace(/amp;/g, "");
+          } else presenceData.state = item.textContent.replace(/amp;/g, "");
         } else {
           item = document.querySelector(
             "#designer-category > div.FiltersInstantSearch > div.feed-and-filters > div.right > h2"
           );
           presenceData.details = "Browsing:";
-          if (item.innerHTML.length > 128) {
-            presenceData.state = `${item.innerHTML
+          if (item.textContent.length > 128) {
+            presenceData.state = `${item.textContent
               .replace(/amp;/g, "")
               .substring(29, 125)}...`;
           } else {
-            presenceData.state = item.innerHTML
+            presenceData.state = item.textContent
               .replace(/amp;/g, "")
               .substring(29, item.textContent.length);
           }
@@ -105,11 +105,11 @@ presence.on("UpdateData", async () => {
       item = document.querySelector(
         "#CategoryPage > div.-pageHeader > div > div.DetailPage--Header > div.-details > h1"
       );
-      if (item.innerHTML.length > 128) {
-        presenceData.state = `${item.innerHTML
+      if (item.textContent.length > 128) {
+        presenceData.state = `${item.textContent
           .replace(/amp;/g, "")
           .substring(0, 125)}...`;
-      } else presenceData.state = item.innerHTML.replace(/amp;/g, "");
+      } else presenceData.state = item.textContent.replace(/amp;/g, "");
 
       presence.setActivity(presenceData);
     } else if (
@@ -121,11 +121,11 @@ presence.on("UpdateData", async () => {
       item = document.querySelector(
         "#blog > div.container.tagged-articles > div.filtered-articles-wrapper > h1"
       );
-      if (item.innerHTML.length > 128) {
-        presenceData.state = `${item.innerHTML
+      if (item.textContent.length > 128) {
+        presenceData.state = `${item.textContent
           .replace(/amp;/g, "")
           .substring(0, 125)}...`;
-      } else presenceData.state = item.innerHTML.replace(/amp;/g, "");
+      } else presenceData.state = item.textContent.replace(/amp;/g, "");
 
       presence.setActivity(presenceData);
     } else if (document.location.href.includes("www.grailed.com/products/")) {
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
       item2 = document.querySelector(
         "#ProductPage > div.ProductPageHeader > div.-info > h1.-designers-names"
       );
-      if (item.innerHTML.length > 108) {
+      if (item.textContent.length > 108) {
         presenceData.state = `${item2.textContent.replace(
           /amp;/g,
           ""
@@ -159,18 +159,18 @@ presence.on("UpdateData", async () => {
           "div.heatwave-app > div.Heatwave--Page > div.Editorial--CampaignPageHeroModule._Heatwave > div > div.--title"
         );
         presenceData.details = "Reading:";
-        if (item !== null) {
-          if (item.innerHTML.length > 128) {
-            presenceData.state = `${item.innerHTML
+        if (item) {
+          if (item.textContent.length > 128) {
+            presenceData.state = `${item.textContent
               .replace(/amp;/g, "")
               .substring(0, 125)}...`;
-          } else presenceData.state = item.innerHTML.replace(/amp;/g, "");
-        } else if (item2 !== null) {
-          if (item2.innerHTML.length > 128) {
-            presenceData.state = `${item2.innerHTML
+          } else presenceData.state = item.textContent.replace(/amp;/g, "");
+        } else if (item2) {
+          if (item2.textContent.length > 128) {
+            presenceData.state = `${item2.textContent
               .replace(/amp;/g, "")
               .substring(0, 125)}...`;
-          } else presenceData.state = item2.innerHTML.replace(/amp;/g, "");
+          } else presenceData.state = item2.textContent.replace(/amp;/g, "");
         }
       } else {
         presenceData.details = "Reading:";
@@ -185,14 +185,14 @@ presence.on("UpdateData", async () => {
         item = document.querySelector(
           "#shop > div > div > div.feed-and-filters > div.right > h2"
         );
-        if (item.innerHTML.includes("Available listings related to")) {
+        if (item.textContent.includes("Available listings related to")) {
           presenceData.details = "Searching for:";
-          presenceData.state = item.innerHTML
+          presenceData.state = item.textContent
             .replace(/amp;/g, "")
             .substring(29, 125);
-        } else if (item.innerHTML.endsWith("Listings")) {
+        } else if (item.textContent.endsWith("Listings")) {
           presenceData.details = "Searching for:";
-          presenceData.state = item.innerHTML.replace(/amp;|Listings/g, "");
+          presenceData.state = item.textContent.replace(/amp;|Listings/g, "");
         } else {
           presenceData.details = "Browsing:";
           presenceData.state = "The Feed";
@@ -203,16 +203,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing:";
       presenceData.state = "The Main Page";
       presence.setActivity(presenceData);
-    } else if (userName !== null) {
+    } else if (userName) {
       presenceData.details = "Viewing a User:";
-      if (userName.innerHTML.length > 128)
-        presenceData.state = `${userName.innerHTML.substring(0, 125)}...`;
-      else presenceData.state = userName.innerHTML;
+      if (userName.textContent.length > 128)
+        presenceData.state = `${userName.textContent.substring(0, 125)}...`;
+      else presenceData.state = userName.textContent;
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
+    } else presence.setActivity();
   }
 });

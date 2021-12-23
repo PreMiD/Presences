@@ -4,11 +4,11 @@ const presence = new Presence({
 
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -29,7 +29,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);

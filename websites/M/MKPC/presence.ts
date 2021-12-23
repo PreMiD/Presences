@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "812176837748457483"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (
@@ -26,8 +26,7 @@ presence.on("UpdateData", async () => {
   }
   const elt = document.querySelector("#compteur0 > div") as HTMLElement;
   if (elt) {
-    const lap = elt.innerText.replace(/.+? /g, "");
-    presenceData.details = `Lap ${lap}`;
+    presenceData.details = `Lap ${elt.textContent.replace(/.+? /g, "")}`;
     presenceData.buttons = [
       { label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" }
     ];
@@ -37,14 +36,14 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname === "/category.php") {
     user = document.querySelector("html > body > main > h1");
-    presenceData.details = `Viewing the following category: ${user.innerHTML}`;
+    presenceData.details = `Viewing the following category: ${user.textContent}`;
     presenceData.smallImageKey = "search";
     presenceData.buttons = [
       { label: "View category", url: document.location.href }
     ];
   } else if (document.location.pathname === "/topic.php") {
     user = document.querySelector("html > body > main > h1");
-    presenceData.details = `Viewing: ${user.innerHTML}`;
+    presenceData.details = `Viewing: ${user.textContent}`;
     presenceData.smallImageKey = "search";
     presenceData.buttons = [
       { label: "View topic", url: document.location.href }
@@ -59,14 +58,12 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "body > main > div > div.profile-summary > h1"
     );
-    presenceData.details = `Viewing: ${user.innerHTML}`;
+    presenceData.details = `Viewing: ${user.textContent}`;
     presenceData.smallImageKey = "search";
     presenceData.buttons = [
       { label: "View profile", url: document.location.href }
     ];
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

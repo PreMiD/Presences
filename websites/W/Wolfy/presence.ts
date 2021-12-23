@@ -20,55 +20,51 @@ function getTime(list: string[]): number {
   return ret;
 }
 
-function getTimestamps(
-  audioTime: number,
-  audioDuration: string
-): Array<number> {
-  const splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime = audioTime + parsedAudioDuration * 1000;
-  return [startTime, endTime];
+function getTimestamps(audioTime: number, audioDuration: string): number[] {
+  return [
+    Date.now(),
+    audioTime + getTime(audioDuration.split(":").reverse()) * 1000
+  ];
 }
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "wf"
   };
 
   path = document.location.pathname;
 
   if (window.location.href !== prev && !path.includes("/game/")) {
-    delete data.startTimestamp;
-    delete data.endTimestamp;
+    delete presenceData.startTimestamp;
+    delete presenceData.endTimestamp;
     prev = window.location.href;
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  data.details = (await strings).browsing;
-  data.smallImageKey = "search";
-  data.smallImageText = (await strings).browsing;
-  data.startTimestamp = elapsed;
+  presenceData.details = (await strings).browsing;
+  presenceData.smallImageKey = "search";
+  presenceData.smallImageText = (await strings).browsing;
+  presenceData.startTimestamp = elapsed;
 
   if (
     path.includes("/articles/") &&
     path.split("/")[2] !== null &&
     path.split("/")[2].length > 1
   )
-    data.state = document.querySelector("body h1").textContent;
+    presenceData.state = document.querySelector("body h1").textContent;
   else if (
     path.includes("/game/") &&
     path.split("/")[2] !== null &&
     path.split("/")[2].length > 1
   ) {
-    data.state = document
+    presenceData.state = document
       .querySelector("#chat div.nameState")
       .textContent.toUpperCase();
 
-    if (data.state !== prevState) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-      prevState = data.state;
+    if (presenceData.state !== prevState) {
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+      prevState = presenceData.state;
       cp = Date.now();
       currTime = document.querySelector(
         "#chat div.timeState.timer"
@@ -77,32 +73,32 @@ presence.on("UpdateData", async () => {
 
     const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
 
-    data.details = "En jeu";
+    presenceData.details = "En jeu";
 
-    data.smallImageKey = "live";
-    data.smallImageText = (await strings).play;
+    presenceData.smallImageKey = "live";
+    presenceData.smallImageText = (await strings).play;
     if (currTime && currTime.includes(":")) {
-      data.startTimestamp = startTimestamp;
-      data.endTimestamp = endTimestamp;
-    } else data.startTimestamp = cp;
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
+    } else presenceData.startTimestamp = cp;
   } else {
     switch (path) {
       case "/settings":
-        data.state = "Paramètres";
+        presenceData.state = "Paramètres";
         break;
       case "/shop":
-        data.state = "Boutique";
+        presenceData.state = "Boutique";
         break;
       case "/articles":
-        data.state = "Actualités";
-        data.smallImageKey = "reading";
-        data.smallImageText = "En train de lire";
+        presenceData.state = "Actualités";
+        presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = "En train de lire";
         break;
       case "/play":
       case "/":
       default:
-        data.state = "Page d'accueil";
+        presenceData.state = "Page d'accueil";
     }
   }
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

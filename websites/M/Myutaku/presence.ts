@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "891749178227695678"
   }),
   path = document.location.pathname,
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   genre = document.querySelector("#type-media"),
   title = document.querySelector(
     "#main-fiche > div.fiche-inside.fiche-top > div.fiche-fr > div.fiche-titre > div.dd-flex"
@@ -26,7 +26,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (path.includes("/home")) presenceData.details = "Page d'accueil";

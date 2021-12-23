@@ -48,53 +48,46 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Searching doujin...";
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.includes("/show/genre/")) {
-        const genres = document.querySelector(
+        presenceData.details = "Searching by genres...";
+        presenceData.state = document.querySelector(
           "body > main > div > div > h2"
         ).textContent;
-        presenceData.details = "Searching by genres...";
-        presenceData.state = genres;
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.includes("/show/tags/")) {
-        const genres = document.querySelector(
+        presenceData.details = "Searching by tags...";
+        presenceData.state = document.querySelector(
           "body > main > div > div > h2"
         ).textContent;
-        presenceData.details = "Searching by tags...";
-        presenceData.state = genres;
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.includes("/show/parody/")) {
-        const genres = document.querySelector(
+        presenceData.details = "Searching by parody...";
+        presenceData.state = document.querySelector(
           "body > main > div > div > h2"
         ).textContent;
-        presenceData.details = "Searching by parody...";
-        presenceData.state = genres;
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.includes("/show/authors/")) {
-        const genres = document.querySelector(
+        presenceData.details = "Viewing archive authors...";
+        presenceData.state = document.querySelector(
           "body > main > div > div > h2"
         ).textContent;
-        presenceData.details = "Viewing archive authors...";
-        presenceData.state = genres;
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.startsWith("/show/series/")) {
-        const name = document.querySelector(
+        presenceData.details = "Viewing a page...";
+        presenceData.state = document.querySelector(
           "body > main > div > div > div.container > div > div.series-flexright > div.series-title > h2"
         ).textContent;
-        presenceData.details = "Viewing a page...";
-        presenceData.state = name;
         presenceData.buttons = [
           { label: "View Manga", url: document.location.href }
         ];
       }
-      const readManga = document.querySelector(".reader-area");
-      if (readManga) {
-        const manga = document.querySelector(
-            "#chapnav > div > div.infox > span.title"
-          ).textContent,
-          chapter = document.querySelector(
-            "#chapnav > div > div.infox > span.chapter"
-          ).textContent;
-        presenceData.details = `Reading ${manga}`;
-        presenceData.state = chapter;
+      if (document.querySelector(".reader-area")) {
+        presenceData.details = `Reading ${
+          document.querySelector("#chapnav > div > div.infox > span.title")
+            .textContent
+        }`;
+        presenceData.state = document.querySelector(
+          "#chapnav > div > div.infox > span.chapter"
+        ).textContent;
         presenceData.buttons = [
           { label: "Read Manga", url: document.location.href }
         ];

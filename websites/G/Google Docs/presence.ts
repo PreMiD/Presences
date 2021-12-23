@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "630478614894477337"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let title: string;
 
@@ -30,7 +30,7 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     privacy = await presence.getSetting("privacy"),
     newLang = await presence.getSetting("lang").catch(() => "en");
@@ -79,8 +79,6 @@ presence.on("UpdateData", async () => {
 
   if (!privacy) presenceData.state = title;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

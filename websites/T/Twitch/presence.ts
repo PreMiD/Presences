@@ -143,211 +143,119 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.twitch.tv") {
     //* Main website
-    const parseVideo = async (video: HTMLVideoElement): Promise<void> => {
-        const live = video.duration >= 1073741824;
-
-        if (showLive && live) {
-          //* Live
-          const title = getElement(".channel-info-content h2"),
-            streamer = getElement(".channel-info-content h1"),
-            game =
-              document.querySelector("a[data-a-target='stream-game-link']")
-                ?.textContent || "Just Chatting";
-          if (title && streamer) {
-            presenceData.details = streamDetail
-              .replace("%title%", title)
-              .replace("%streamer%", streamer)
-              .replace("%game%", game);
-          }
-          if (title && streamer) {
-            presenceData.state = streamState
-              .replace("%title%", title)
-              .replace("%streamer%", streamer)
-              .replace("%game%", game);
-          }
-          presenceData.smallImageKey = "live";
-          presenceData.smallImageText = (await strings).live;
-          if (buttons) {
-            presenceData.buttons = [
-              {
-                label: (await strings).watchStream,
-                url: document.URL.split("?")[0]
-              }
-            ];
-          }
-        }
-
-        if (showVideo && !live) {
-          //* Video or Clips
-          const title = getElement(".channel-info-content h2")
-              .split("•")
-              .shift(),
-            uploader = getElement(".channel-info-content h1"),
-            game =
-              document.querySelector("a[data-a-target='stream-game-link']")
-                ?.textContent || "Just Chatting";
-          if (title && uploader) {
-            presenceData.details = vidDetail
-              .replace("%title%", title)
-              .replace("%uploader%", uploader)
-              .replace("%game%", game);
-          }
-          if (title && uploader) {
-            presenceData.state = vidState
-              .replace("%title%", title)
-              .replace("%uploader%", uploader)
-              .replace("%game%", game);
-          }
-          presenceData.smallImageKey = "play";
-          presenceData.smallImageText = (await strings).play;
-
-          const [startTimestamp, endTimestamp] =
-            presence.getTimestampsfromMedia(video);
-          presenceData.startTimestamp = startTimestamp;
-          presenceData.endTimestamp = endTimestamp;
-
-          if (buttons) {
-            presenceData.buttons = [
-              {
-                label: (await strings).watchVideo,
-                url: document.URL.split("?")[0]
-              }
-            ];
-          }
-        }
-
-        if (((showLive && live) || (showVideo && !live)) && video.paused) {
-          delete presenceData.startTimestamp;
-          delete presenceData.endTimestamp;
-          presenceData.smallImageKey = "pause";
-          presenceData.smallImageText = (await strings).pause;
-        }
-
-        //* Privacy mode enabled.
-        if (privacy && showLive && live) {
-          presenceData.details = (await strings).watchingLive;
-          delete presenceData.state;
-        } else if (privacy && showVideo && !live) {
-          presenceData.details = (await strings).watchingVid;
-          delete presenceData.state;
-        } else if (showBrowsing && (!showVideo || !showLive)) {
-          presenceData.details = (await strings).browse;
-          delete presenceData.state;
-        }
+    const statics = {
+      "/downloads/": {
+        details: (await strings).viewPage,
+        state: (await strings).download
       },
-      statics = {
-        "/downloads/": {
-          details: (await strings).viewPage,
-          state: (await strings).download
-        },
-        "/jobs/": {
-          details: (await strings).viewPage,
-          state: (await strings).jobs
-        },
-        "/turbo/": {
-          details: (await strings).viewPage,
-          state: (await strings).turbo
-        },
-        "/broadcast/studio/": {
-          details: (await strings).readingAbout,
-          state: "Twitch Studio"
-        },
-        "/redeem/": {
-          details: (await strings).redeem
-        },
-        "/p/partners/": {
-          details: (await strings).viewPage,
-          state: (await strings).partners
-        },
-        "/p/press-center/": {
-          details: (await strings).viewPage,
-          state: (await strings).press
-        },
-        "/p/security/": {
-          details: (await strings).viewPage,
-          state: (await strings).security
-        },
-        "/p/legal/accessibility/": {
-          details: (await strings).viewPage,
-          state: (await strings).access
-        },
-        "/p/legal/ad-choices/": {
-          details: (await strings).viewPage,
-          state: (await strings).ads
-        },
-        "/p/legal/community-guidelines/": {
-          details: (await strings).viewPage,
-          state: (await strings).guidelines
-        },
-        "/p/legal/cookie-policy/": {
-          details: (await strings).viewPage,
-          state: (await strings).cookie
-        },
-        "/p/legal/privacy-notice/": {
-          details: (await strings).viewPage,
-          state: (await strings).privacy
-        },
-        "/p/legal/terms-of-serice/": {
-          details: (await strings).viewPage,
-          state: (await strings).terms
-        },
-        "/p/(\\w*|\\w*-\\w*)/about/": {
-          details: (await strings).readingAbout,
-          state: "Twitch"
-        },
-        "/p/(\\w*|\\w*-\\w*)/stream/": {
-          details: (await strings).readingAbout,
-          state: "How to stream"
-        },
-        "/p/(\\w*|\\w*-\\w*)/watch/": {
-          details: (await strings).readingAbout,
-          state: "How to watch"
-        },
-        "/p/(\\w*|\\w*-\\w*)/company/": {
-          details: (await strings).readingAbout,
-          state: "The Company"
-        },
-        "/p/(\\w*|\\w*-\\w*)/giftcard/": {
-          details: (await strings).readingAbout,
-          state: "Giftcards"
-        },
-        "/p/(\\w*|\\w*-\\w*)/artists/": {
-          details: (await strings).readingAbout,
-          state: "Artists"
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/learn-the-basics/": {
-          details: `${(await strings).camp} | ${(await strings).viewPage}`,
-          state: (await strings).campBasic
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/setting-up-your-stream/": {
-          details: `${(await strings).camp} | ${(await strings).viewPage}`,
-          state: (await strings).campSetup
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/level-up/": {
-          details: `${(await strings).camp} | ${(await strings).viewPage}`,
-          state: (await strings).campLevel
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/connect-and-engage/": {
-          details: `${(await strings).camp} | ${(await strings).viewPage}`,
-          state: (await strings).campConnect
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/get-rewarded/": {
-          details: `${(await strings).camp} | ${(await strings).viewPage}`,
-          state: (await strings).campReward
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/twitch-music-getting-started/": {
-          details: `${(await strings).camp} | ${(await strings).viewPage}`,
-          state: (await strings).campMusic
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/live/": {
-          details: `${(await strings).camp} | ${(await strings).viewPage}`,
-          state: (await strings).campLive
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/": {
-          details: `${(await strings).camp} | ${(await strings).viewPage}`,
-          state: (await strings).home
-        }
-      };
+      "/jobs/": {
+        details: (await strings).viewPage,
+        state: (await strings).jobs
+      },
+      "/turbo/": {
+        details: (await strings).viewPage,
+        state: (await strings).turbo
+      },
+      "/broadcast/studio/": {
+        details: (await strings).readingAbout,
+        state: "Twitch Studio"
+      },
+      "/redeem/": {
+        details: (await strings).redeem
+      },
+      "/p/partners/": {
+        details: (await strings).viewPage,
+        state: (await strings).partners
+      },
+      "/p/press-center/": {
+        details: (await strings).viewPage,
+        state: (await strings).press
+      },
+      "/p/security/": {
+        details: (await strings).viewPage,
+        state: (await strings).security
+      },
+      "/p/legal/accessibility/": {
+        details: (await strings).viewPage,
+        state: (await strings).access
+      },
+      "/p/legal/ad-choices/": {
+        details: (await strings).viewPage,
+        state: (await strings).ads
+      },
+      "/p/legal/community-guidelines/": {
+        details: (await strings).viewPage,
+        state: (await strings).guidelines
+      },
+      "/p/legal/cookie-policy/": {
+        details: (await strings).viewPage,
+        state: (await strings).cookie
+      },
+      "/p/legal/privacy-notice/": {
+        details: (await strings).viewPage,
+        state: (await strings).privacy
+      },
+      "/p/legal/terms-of-serice/": {
+        details: (await strings).viewPage,
+        state: (await strings).terms
+      },
+      "/p/(\\w*|\\w*-\\w*)/about/": {
+        details: (await strings).readingAbout,
+        state: "Twitch"
+      },
+      "/p/(\\w*|\\w*-\\w*)/stream/": {
+        details: (await strings).readingAbout,
+        state: "How to stream"
+      },
+      "/p/(\\w*|\\w*-\\w*)/watch/": {
+        details: (await strings).readingAbout,
+        state: "How to watch"
+      },
+      "/p/(\\w*|\\w*-\\w*)/company/": {
+        details: (await strings).readingAbout,
+        state: "The Company"
+      },
+      "/p/(\\w*|\\w*-\\w*)/giftcard/": {
+        details: (await strings).readingAbout,
+        state: "Giftcards"
+      },
+      "/p/(\\w*|\\w*-\\w*)/artists/": {
+        details: (await strings).readingAbout,
+        state: "Artists"
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/learn-the-basics/": {
+        details: `${(await strings).camp} | ${(await strings).viewPage}`,
+        state: (await strings).campBasic
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/setting-up-your-stream/": {
+        details: `${(await strings).camp} | ${(await strings).viewPage}`,
+        state: (await strings).campSetup
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/level-up/": {
+        details: `${(await strings).camp} | ${(await strings).viewPage}`,
+        state: (await strings).campLevel
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/connect-and-engage/": {
+        details: `${(await strings).camp} | ${(await strings).viewPage}`,
+        state: (await strings).campConnect
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/get-rewarded/": {
+        details: `${(await strings).camp} | ${(await strings).viewPage}`,
+        state: (await strings).campReward
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/twitch-music-getting-started/": {
+        details: `${(await strings).camp} | ${(await strings).viewPage}`,
+        state: (await strings).campMusic
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/live/": {
+        details: `${(await strings).camp} | ${(await strings).viewPage}`,
+        state: (await strings).campLive
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/": {
+        details: `${(await strings).camp} | ${(await strings).viewPage}`,
+        state: (await strings).home
+      }
+    };
 
     if (showBrowsing) {
       for (const [k, v] of Object.entries(statics)) {
@@ -373,17 +281,13 @@ presence.on("UpdateData", async () => {
       }
 
       if (path.includes("/team/")) {
-        const teamName = document.location.pathname
+        presenceData.details = (await strings).viewTeam;
+        presenceData.state = document.location.pathname
           .split("/")
           .pop()
           .split("_")
-          .map((word) => {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-          })
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
-
-        presenceData.details = (await strings).viewTeam;
-        presenceData.state = teamName;
       }
 
       if (path.includes("/settings/")) {
@@ -401,12 +305,9 @@ presence.on("UpdateData", async () => {
       let searching = false;
       if (path.includes("/search/")) {
         searching = true;
-        const search = document.querySelector(
-          ".tw-combo-input__input > div > input"
-        ) as HTMLInputElement;
 
         presenceData.details = (await strings).searchingFor;
-        presenceData.state = search?.value;
+        presenceData.state = getElement(".tw-combo-input__input > div > input");
         presenceData.smallImageKey = "search";
       }
 
@@ -416,12 +317,10 @@ presence.on("UpdateData", async () => {
       if (path.includes("/drops/campaigns/")) {
         presenceData.details = (await strings).viewDropsComp;
 
-        const drops = document.querySelector(
-          ".drops-root__content > div:nth-child(5)"
-        ).children;
         let activeDrop = null;
-
-        for (const drop of drops) {
+        for (const drop of document.querySelector(
+          ".drops-root__content > div:nth-child(5)"
+        ).children) {
           if (!drop.children[1].className.includes("tw-hide"))
             activeDrop = `${drop.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.children[0].textContent} (${drop.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.children[1].textContent})`;
         }
@@ -460,12 +359,10 @@ presence.on("UpdateData", async () => {
       }
 
       if (path.includes("/directory/esports/")) {
-        const game = getElement(
+        presenceData.details = (await strings).viewEsports;
+        presenceData.state = getElement(
           ".esports-directory-single-category-header__info p"
         );
-
-        presenceData.details = (await strings).viewEsports;
-        presenceData.state = game;
       }
 
       if (path.includes("/directory/following/")) {
@@ -489,7 +386,7 @@ presence.on("UpdateData", async () => {
       const squad = document.querySelectorAll(".squad-stream-channel-card a"),
         squadNames: string[] = [];
 
-      squad.forEach((squadUser) => {
+      squad.forEach(squadUser => {
         squadNames.push(squadUser.textContent);
       });
 
@@ -500,24 +397,112 @@ presence.on("UpdateData", async () => {
     }
 
     if (path.includes("/moderator/")) {
-      const user = getElement(".stream-info-card p > a"),
-        status = getElement(".modview-dock-widget p");
+      const user = getElement(".stream-info-card p > a");
 
       presenceData.details = (await strings).modStreamer;
       presenceData.state = user;
 
-      if (status !== "Offline") {
+      if (getElement(".modview-dock-widget p") !== "Offline") {
         presenceData.smallImageKey = "live";
         presenceData.smallImageText = (await strings).live;
       }
     }
 
-    const homeCarousel: HTMLDivElement = document.querySelector(
-        ".home-carousel-info"
-      ),
-      channelRoot: HTMLDivElement = document.querySelector(".channel-root"),
-      video: HTMLVideoElement = document.querySelector("video");
-    if (!homeCarousel && channelRoot && video) await parseVideo(video);
+    const video = document.querySelector<HTMLVideoElement>("video");
+    if (
+      !document.querySelector<HTMLDivElement>(".home-carousel-info") &&
+      document.querySelector<HTMLDivElement>(".channel-root") &&
+      video
+    ) {
+      const live = video.duration >= 1073741824;
+
+      if (showLive && live) {
+        //* Live
+        const title = getElement(".channel-info-content h2"),
+          streamer = getElement(".channel-info-content h1"),
+          game =
+            getElement("a[data-a-target='stream-game-link']") ||
+            "Just Chatting";
+        if (title && streamer) {
+          presenceData.details = streamDetail
+            .replace("%title%", title)
+            .replace("%streamer%", streamer)
+            .replace("%game%", game);
+        }
+        if (title && streamer) {
+          presenceData.state = streamState
+            .replace("%title%", title)
+            .replace("%streamer%", streamer)
+            .replace("%game%", game);
+        }
+        presenceData.smallImageKey = "live";
+        presenceData.smallImageText = (await strings).live;
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).watchStream,
+              url: document.URL.split("?")[0]
+            }
+          ];
+        }
+      }
+
+      if (showVideo && !live) {
+        //* Video or Clips
+        const title = getElement(".channel-info-content h2").split("•").shift(),
+          uploader = getElement(".channel-info-content h1"),
+          game =
+            getElement("a[data-a-target='stream-game-link']") ||
+            "Just Chatting";
+        if (title && uploader) {
+          presenceData.details = vidDetail
+            .replace("%title%", title)
+            .replace("%uploader%", uploader)
+            .replace("%game%", game);
+        }
+        if (title && uploader) {
+          presenceData.state = vidState
+            .replace("%title%", title)
+            .replace("%uploader%", uploader)
+            .replace("%game%", game);
+        }
+        presenceData.smallImageKey = "play";
+        presenceData.smallImageText = (await strings).play;
+
+        const [startTimestamp, endTimestamp] =
+          presence.getTimestampsfromMedia(video);
+        presenceData.startTimestamp = startTimestamp;
+        presenceData.endTimestamp = endTimestamp;
+
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).watchVideo,
+              url: document.URL.split("?")[0]
+            }
+          ];
+        }
+      }
+
+      if (((showLive && live) || (showVideo && !live)) && video.paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+        presenceData.smallImageKey = "pause";
+        presenceData.smallImageText = (await strings).pause;
+      }
+
+      //* Privacy mode enabled.
+      if (privacy && showLive && live) {
+        presenceData.details = (await strings).watchingLive;
+        delete presenceData.state;
+      } else if (privacy && showVideo && !live) {
+        presenceData.details = (await strings).watchingVid;
+        delete presenceData.state;
+      } else if (showBrowsing && (!showVideo || !showLive)) {
+        presenceData.details = (await strings).browse;
+        delete presenceData.state;
+      }
+    }
   } else if (document.location.hostname === "dashboard.twitch.tv") {
     //* Creator Dashboard
     if (showBrowsing) {
@@ -899,8 +884,5 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

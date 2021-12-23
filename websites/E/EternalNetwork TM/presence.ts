@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "440182142694064129"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
   return presence.getStrings(
@@ -28,12 +28,7 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     { hostname, pathname, search, hash } = document.location,
     etrnl = "eternalnetworktm.com",
-    ttl = document.title,
-    logoArr = [
-      "eternalnetworktm_logo",
-      "eternalnetworktm_logo_2",
-      "eternalnetworktm_logo_3"
-    ];
+    ttl = document.title;
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -43,9 +38,14 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     details: (await strings).viewPage,
-    largeImageKey: logoArr[bigicon] || "eternalnetworktm_logo",
+    largeImageKey:
+      [
+        "eternalnetworktm_logo",
+        "eternalnetworktm_logo_2",
+        "eternalnetworktm_logo_3"
+      ][bigicon] || "eternalnetworktm_logo",
     smallImageText: hostname + pathname,
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingTimestamp,
     buttons: [
       {
         label: (await strings).buttonViewPage,
@@ -93,19 +93,17 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Checking video gallery";
 
     if (search.includes("?mode=view&id=")) {
-      const videoTitle = document.querySelector("h3.first > a").textContent,
-        checkVideoBtn = document
-          .querySelector("div.postbody > div > a > span")
-          .getAttribute("title");
       presenceData.details = `${(await strings).watchingVid}:`;
-      presenceData.state = videoTitle;
+      presenceData.state = document.querySelector("h3.first > a").textContent;
       presenceData.buttons = [
         {
           label: (await strings).buttonViewPage,
           url: window.location.href
         },
         {
-          label: checkVideoBtn,
+          label: document
+            .querySelector("div.postbody > div > a > span")
+            .getAttribute("title"),
           url: document.querySelector("#video_title").getAttribute("value")
         }
       ];

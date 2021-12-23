@@ -33,13 +33,12 @@ presence.on("UpdateData", async () => {
       break;
     default: {
       if (document.location.search.startsWith("?s")) {
-        const params = document.location.search.substring(1),
-          { s } = JSON.parse(
-            `{"${decodeURI(params)
-              .replace(/"/g, '\\"')
-              .replace(/&/g, '","')
-              .replace(/=/g, '":"')}"}`
-          );
+        const { s } = JSON.parse(
+          `{"${decodeURI(document.location.search.substring(1))
+            .replace(/"/g, '\\"')
+            .replace(/&/g, '","')
+            .replace(/=/g, '":"')}"}`
+        );
         presenceData.details = "Searching for:";
         presenceData.state = s;
         presenceData.smallImageKey = "search";
@@ -53,8 +52,7 @@ presence.on("UpdateData", async () => {
           { label: "View anime", url: document.location.href }
         ];
       }
-      const mirrorStream = document.querySelector(".mirrorstream");
-      if (mirrorStream) {
+      if (document.querySelector(".mirrorstream")) {
         presenceData.details = "Watching anime";
         presenceData.state = document
           .querySelector(".posttl")
@@ -63,7 +61,7 @@ presence.on("UpdateData", async () => {
           { label: "Watch Anime", url: document.location.href },
           {
             label: "View Anime",
-            url: [...document.querySelectorAll("a")].find((x) =>
+            url: [...document.querySelectorAll("a")].find(x =>
               /See All Episodes/gi.exec(x.textContent)
             ).href
           }
