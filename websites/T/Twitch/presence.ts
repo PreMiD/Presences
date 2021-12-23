@@ -275,7 +275,7 @@ presence.on("UpdateData", async () => {
       let user = getElement(".home-header-sticky .tw-title");
       if (user) {
         const tab = getElement(".tw-c-text-link"),
-        profilePic = document
+          profilePic = document
             .querySelector<HTMLImageElement>(
               ".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
             )
@@ -284,7 +284,9 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = (await strings).viewProfile;
         presenceData.state = user;
-        if (pfp) presenceData.largeImageKey = profilePic ?? (logoArr[logo] || "twitch");
+        if (pfp)
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
       }
 
       if (path.includes("/team/")) {
@@ -449,7 +451,9 @@ presence.on("UpdateData", async () => {
         }
         presenceData.smallImageKey = "live";
         presenceData.smallImageText = (await strings).live;
-        if (pfp) presenceData.largeImageKey = profilePic ?? (logoArr[logo] || "twitch");
+        if (pfp)
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
         if (buttons) {
           presenceData.buttons = [
             {
@@ -467,7 +471,7 @@ presence.on("UpdateData", async () => {
           game =
             getElement("a[data-a-target='stream-game-link']") ||
             "Just Chatting",
-            profilePic = document
+          profilePic = document
             .querySelector<HTMLImageElement>(
               ".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
             )
@@ -486,7 +490,9 @@ presence.on("UpdateData", async () => {
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = (await strings).play;
-        if (pfp) presenceData.largeImageKey = profilePic ?? (logoArr[logo] || "twitch");
+        if (pfp)
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
         const [startTimestamp, endTimestamp] =
           presence.getTimestampsfromMedia(video);
         presenceData.startTimestamp = startTimestamp;
