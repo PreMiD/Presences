@@ -13,35 +13,35 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browsing ITV Hub";
     presenceData.state = "Home Page";
   } else if (path === "/hub/itv") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITV live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/itv2") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITV2 live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/itvbe") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITVBe live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/itv3") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITV3 live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/itv4") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITV4 live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/citv") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching CITV live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/tv-guide") {
     presenceData.details = "Browsing ITV";
     presenceData.state = "Viewing the TV-Guide";
@@ -52,9 +52,10 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browsing ITV";
     presenceData.state = "Viewing categories";
   } else if (path.startsWith("/hub/categories/")) {
-    const category = path.split("/")[path.split("/").length - 1];
     presenceData.details = "Browsing ITV";
-    presenceData.state = `Viewing ${category} category`;
+    presenceData.state = `Viewing ${
+      path.split("/")[path.split("/").length - 1]
+    } category`;
   } else if (
     /^[-+]?[0-9A-Fa-f]+\.?[0-9A-Fa-f]*?$/.test(
       path.split("/")[path.split("/").length - 1]
@@ -63,7 +64,7 @@ presence.on("UpdateData", () => {
     // Last path is a valid hex (Show ID)
     delete presenceData.startTimestamp;
     const showDetails = {
-        name: document.getElementById("programme-title").innerText,
+        name: document.getElementById("programme-title").textContent,
         episode: document
           .getElementsByClassName("episode-info__episode-title")[0]
           .textContent.trim()
@@ -88,8 +89,6 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

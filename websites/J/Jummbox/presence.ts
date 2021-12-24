@@ -9,8 +9,6 @@ presence.on("UpdateData", async () => {
     state: "Making a Beep"
   };
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

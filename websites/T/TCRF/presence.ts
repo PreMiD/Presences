@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "631259475038175232"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let x: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   if (document.location.pathname === "/The_Cutting_Room_Floor") {
     presenceData.details = "browsing TCRF";
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
   } else {
     const name = document
       .getElementById("firstHeading")
-      .innerText.replace(")", "")
+      .textContent.replace(")", "")
       .split("(");
     if (name[0].startsWith("Prerelease:")) {
       const d = name[0].split(":");
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     if (!name[1]) stated = "Platform: Multiple";
     else stated = `Platform: ${name[1]} `;
 
-    //var year = document.getElementsByClassName("mw-headline")[1].innerText
+    //var year = document.getElementsByClassName("mw-headline")[1].textContent
     presenceData.details = x;
     presenceData.state = stated;
   }

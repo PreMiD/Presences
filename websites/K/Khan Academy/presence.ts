@@ -11,63 +11,65 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "khanacademy",
     details: (await strings).watching
   };
 
   if (document.location.pathname === "/")
-    data.state = `🏠 ${(await strings).homepage}`;
+    presenceData.state = `🏠 ${(await strings).homepage}`;
   else if (document.location.pathname.includes("/courses"))
-    data.state = "📚 Courses";
+    presenceData.state = "📚 Courses";
   else if (document.location.pathname.includes("/progress"))
-    data.state = "📊 Progress";
+    presenceData.state = "📊 Progress";
   else if (document.location.pathname.includes("/teachers"))
-    data.state = "🎓 Teachers";
+    presenceData.state = "🎓 Teachers";
   else if (document.location.pathname.includes("/profile")) {
-    data.details = (await strings).profile;
-    data.state = `👀 ${document.querySelector("._o77ufew").textContent}`;
+    presenceData.details = (await strings).profile;
+    presenceData.state = `👀 ${
+      document.querySelector("._o77ufew").textContent
+    }`;
   } else if (document.location.pathname.includes("/settings"))
-    data.state = `⚙️ ${(await strings).settings}`;
+    presenceData.state = `⚙️ ${(await strings).settings}`;
   else if (document.location.pathname.includes("/search")) {
-    data.state = `🔍 Searching for '${
+    presenceData.state = `🔍 Searching for '${
       document.location.pathname.split("page_search_query=")[1]
     }'`;
   } else if (document.location.pathname.includes("/topics"))
-    data.state = "🔍 Community";
+    presenceData.state = "🔍 Community";
   else if (document.location.pathname.includes("/posts"))
-    data.state = "🔍 Community Post";
+    presenceData.state = "🔍 Community Post";
   else if (document.location.pathname.includes("/requests/new"))
-    data.state = "⚠️ Submitting a Request";
+    presenceData.state = "⚠️ Submitting a Request";
   else if (document.location.hostname.includes("support"))
-    data.state = "💡 Support";
-  else if (document.location.pathname.split("/").length < 3)
-    data.state = `📖 ${document.querySelector("._aemo2b3").textContent}`;
-  else {
-    data.details = document.querySelector(
+    presenceData.state = "💡 Support";
+  else if (document.location.pathname.split("/").length < 3) {
+    presenceData.state = `📖 ${
+      document.querySelector("._aemo2b3").textContent
+    }`;
+  } else {
+    presenceData.details = document.querySelector(
       "._io410w6, span._cmfzobe:nth-child(2) > a:nth-child(2)"
     ).textContent;
-    data.state = `📋 ${document
+    presenceData.state = `📋 ${document
       .querySelector(
         "._1eqoe4n8, span._cmfzobe:nth-child(3) > a:nth-child(2), #uid-dialog-0-title > span:nth-child(1)"
       )
       .textContent.replace(/.*?:\s+/, "")}`;
 
     if (document.location.pathname.match(/\/(v|a|e|quiz)\//)) {
-      data.smallImageText = document.querySelector(
+      presenceData.smallImageText = document.querySelector(
         '._1l44zfj, [role="dialog"] [data-test-id="modal-title"]'
       ).textContent;
 
       if (document.location.pathname.includes("/v/"))
-        data.smallImageKey = "video";
+        presenceData.smallImageKey = "video";
       else if (document.location.pathname.includes("/a/"))
-        data.smallImageKey = "article";
-      else data.smallImageKey = "exercise";
+        presenceData.smallImageKey = "article";
+      else presenceData.smallImageKey = "exercise";
     }
   }
 
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

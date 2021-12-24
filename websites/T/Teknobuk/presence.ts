@@ -1,8 +1,8 @@
 const presence = new Presence({ clientId: "658192386899312651" }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   presenceData: PresenceData = {
     largeImageKey: "buk-logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
 function makeRPC(title: string, category: string): void {
@@ -57,11 +57,12 @@ presence.on("UpdateData", () => {
   }
 
   if (page.startsWith("/yazar")) {
-    const author =
+    makeRPC(
       document.querySelector(
         "#content > div.page-title.hu-pad.group > h1 > span"
-      )?.textContent ?? "Bilinmeyen";
-    makeRPC(author, "author");
+      )?.textContent ?? "Bilinmeyen",
+      "author"
+    );
   }
 
   if (new URLSearchParams(window.location.search).get("s")) {
@@ -72,7 +73,7 @@ presence.on("UpdateData", () => {
   if (page.startsWith("/ara")) presenceData.details = "Arama bölümünde...";
 
   if (
-    ["/kunye", "/iletisim", "/gizlilik-politikasi"].some((pac) =>
+    ["/kunye", "/iletisim", "/gizlilik-politikasi"].some(pac =>
       page.startsWith(pac)
     )
   ) {
@@ -88,7 +89,6 @@ presence.on("UpdateData", () => {
   }
 
   if (!presenceData.details) {
-    presence.setTrayTitle();
     presence.setActivity({
       largeImageKey: "buk-logo",
       details: "Bilinmeyen bir sayfada..."

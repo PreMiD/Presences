@@ -9,11 +9,11 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "roulette.hitmaps.com") {
     presenceData.details = "Playing HITMAPS™ Roulette";
-    if (document.querySelector("h1")?.innerHTML.includes("SELECT MISSION"))
+    if (document.querySelector("h1")?.textContent.includes("SELECT MISSION"))
       presenceData.state = "Choosing a mission";
-    if (document.querySelector("h1")?.innerHTML.includes("CURRENT MISSION")) {
+    if (document.querySelector("h1")?.textContent.includes("CURRENT MISSION")) {
       presenceData.state = `Mission:${
-        document.querySelector("h1").innerHTML.split("CURRENT MISSION:")[1]
+        document.querySelector("h1").textContent.split("CURRENT MISSION:")[1]
       }`;
     }
   } else if (document.location.pathname === "/")
@@ -79,10 +79,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 function capitaliseEachWord(string: string) {

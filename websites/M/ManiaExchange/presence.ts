@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "731069087031230487"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
   presenceData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 const updateCallback = {
     _function: null as () => void,
@@ -28,7 +28,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -47,10 +47,12 @@ const updateCallback = {
    * @param {Number} videoTime Current video time seconds.
    * @param {Number} videoDuration Video duration seconds.
    */
-  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
-    const startTime = Date.now(),
-      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
+  getTimestamps = (videoTime: number, videoDuration: number): number[] => {
+    const startTime = Date.now();
+    return [
+      Math.floor(startTime / 1000),
+      Math.floor(startTime / 1000) - videoTime + videoDuration
+    ];
   };
 
 ((): void => {
@@ -61,12 +63,11 @@ const updateCallback = {
     if (currentPath[0] === "") presenceData.details = "On the portal";
     else {
       presenceData.details = "Viewing a page";
-      const pageNames: { [index: string]: string } = {
+      presenceData.state = {
         tac: "Terms and Conditions",
         privacy: "Privacy Policy",
         logos: "Logos & Signpacks"
-      };
-      presenceData.state = pageNames[currentPath[0]];
+      }[currentPath[0]];
     }
   } else if (
     currentURL.hostname.startsWith("tm.") ||
@@ -330,11 +331,9 @@ const updateCallback = {
         .textContent.trim();
     } else if (currentPath[0] === "usersearch") {
       const details = [];
-      if (
-        (document.querySelector("#username") as HTMLInputElement).textContent
-      ) {
+      if ((document.querySelector("#username") as HTMLInputElement).value) {
         details.push(
-          (document.querySelector("#username") as HTMLInputElement).textContent
+          (document.querySelector("#username") as HTMLInputElement).value
         );
       }
       if (document.querySelector("#s2id_mode").textContent)
@@ -400,12 +399,11 @@ const updateCallback = {
           ) {
             presenceData.smallImageKey = "play";
             presenceData.smallImageText = "TMTube Archive — Playing";
-            const video: HTMLVideoElement = document.querySelector("video"),
-              timestamps = getTimestamps(
-                Math.floor(video.currentTime),
-                Math.floor(video.duration)
-              );
-            [, presenceData.endTimestamp] = timestamps;
+            const video: HTMLVideoElement = document.querySelector("video");
+            [, presenceData.endTimestamp] = getTimestamps(
+              Math.floor(video.currentTime),
+              Math.floor(video.duration)
+            );
           } else {
             presenceData.smallImageKey = "pause";
             presenceData.smallImageText = "TMTube Archive — Paused";

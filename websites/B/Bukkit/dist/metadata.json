@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -15,13 +15,13 @@
     "dev.bukkit.org",
     "bukkit.gamepedia.com"
   ],
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/X785snB.png",
   "thumbnail": "https://i.imgur.com/LTkN2jF.png",
   "color": "#2096e1",
+  "category": "games",
   "tags": [
     "minecraft",
     "bukkit"
-  ],
-  "category": "games"
+  ]
 }

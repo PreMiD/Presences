@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
       diffName = document.querySelector(
         ".beatmapset-header__diff-name"
       ).textContent;
-      if (title !== null && diffName !== null) {
+      if (title && diffName) {
         (beatmapTitle = `${title} [${diffName}]`),
           (presenceData.details = "Looking at the beatmap:");
         presenceData.state = beatmapTitle;
@@ -201,14 +201,12 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Their Watchlists";
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.startsWith("/users")) {
-    profileName = (
-      document.querySelector(
-        "h1.profile-info__name  span.u-ellipsis-pre-overflow"
-      ) as HTMLElement
+    profileName = document.querySelector<HTMLElement>(
+      "h1.profile-info__name  span.u-ellipsis-pre-overflow"
     ).textContent;
-    rank = document.querySelector(".value-display__value").textContent;
+    rank = document.querySelector(".textContent-display__value").textContent;
     pp = document.querySelector(
-      ".value-display--pp .value-display__value"
+      ".textContent-display--pp .textContent-display__value"
     ).textContent;
     profileRanking = `Rank: ${rank} / ${pp}pp`;
     presenceData.details =

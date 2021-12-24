@@ -8,12 +8,13 @@ presence.on("UpdateData", () => {
   };
 
   if (document.querySelector('[style="opacity: .8; font-weight: bold;"]')) {
-    const length = document.querySelector(
-        '[style="opacity: .8; font-weight: bold;"]'
-      ).innerHTML,
-      rank = document.querySelector('[style="opacity: .35;"]').innerHTML;
-    presenceData.details = `Length: ${length}`;
-    presenceData.state = `Rank: ${rank}`;
+    presenceData.details = `Length: ${
+      document.querySelector('[style="opacity: .8; font-weight: bold;"]')
+        .textContent
+    }`;
+    presenceData.state = `Rank: ${
+      document.querySelector('[style="opacity: .35;"]').textContent
+    }`;
   }
 
   presence.setActivity(presenceData);

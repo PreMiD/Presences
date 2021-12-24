@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "717795432251654200"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   // This is better than having a lot of (almost) empty switch cases
   // Assigning details to type any made ESLint scream, and setting it to type string made the compiler scream
   details: { [k: string]: string } = {
@@ -29,7 +29,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
   switch (document.location.pathname) {
     case "/stories/":
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       break;
     case "/user/":
       presenceData.state = `User: ${
-        document.querySelector("h2#username").innerHTML
+        document.querySelector("h2#username").textContent
       }`;
       break;
     case "/my/profile/":
@@ -55,20 +55,20 @@ presence.on("UpdateData", async () => {
     case "/my/stories/pages/":
       presenceData.smallImageKey = "writing";
       presenceData.state =
-        document.querySelector("a#storyname.major").innerHTML;
+        document.querySelector("a#storyname.major").textContent;
       break;
     case "/achievements/":
       presenceData.state = `User: ${
-        document.querySelector("a#username").innerHTML
+        document.querySelector("a#username").textContent
       }`;
       break;
     case "/log/":
       presenceData.state =
-        document.querySelector("a#storyname.major").innerHTML;
+        document.querySelector("a#storyname.major").textContent;
       break;
     case "/search/":
       presenceData.state =
-        document.querySelector("a#storyname.major").innerHTML;
+        document.querySelector("a#storyname.major").textContent;
       break;
     default:
       break;
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     document.location.search !== ""
   ) {
     presenceData.details = "Reading an adventure";
-    presenceData.state = document.querySelector("title").innerText;
+    presenceData.state = document.querySelector("title").textContent;
     presenceData.smallImageKey = "reading";
     let { search } = document.location;
     search = new URLSearchParams(search).get("p");
@@ -91,8 +91,6 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname in details)
     presenceData.details = details[document.location.pathname];
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

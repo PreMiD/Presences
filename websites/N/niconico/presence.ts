@@ -12,43 +12,37 @@ function getTimesec(
   durationString = "00:00",
   separator = ":"
 ): { elapsedSec: number; durationSec: number } {
-  const elapsed = elapsedString.split(separator),
-    duration = durationString.split(separator);
+  const elapsed = elapsedString.split(separator).map(parseInt),
+    duration = durationString.split(separator).map(parseInt);
 
   let elapsedSec: number, durationSec: number;
 
   switch (elapsed.length) {
     case 3: {
-      elapsedSec =
-        parseInt(elapsed[0]) * 60 * 60 +
-        parseInt(elapsed[1]) * 60 +
-        parseInt(elapsed[2]);
+      elapsedSec = elapsed[0] * 60 * 60 + elapsed[1] * 60 + elapsed[2];
       break;
     }
     case 2: {
-      elapsedSec = parseInt(elapsed[0]) * 60 + parseInt(elapsed[1]);
+      elapsedSec = elapsed[0] * 60 + elapsed[1];
       break;
     }
     case 1: {
-      elapsedSec = parseInt(elapsed[0]);
+      [elapsedSec] = elapsed;
       break;
     }
   }
 
   switch (duration.length) {
     case 3: {
-      durationSec =
-        parseInt(duration[0]) * 60 * 60 +
-        parseInt(duration[1]) * 60 +
-        parseInt(duration[2]);
+      durationSec = duration[0] * 60 * 60 + duration[1] * 60 + duration[2];
       break;
     }
     case 2: {
-      durationSec = parseInt(duration[0]) * 60 + parseInt(duration[1]);
+      durationSec = duration[0] * 60 + duration[1];
       break;
     }
     case 1: {
-      durationSec = parseInt(duration[0]);
+      [durationSec] = duration;
       break;
     }
   }
@@ -63,11 +57,10 @@ presence.on("UpdateData", async () => {
         location.pathname.startsWith("/watch/") &&
         document.querySelector(".VideoPlayer video")
       ) {
-        const title = document.querySelector(".VideoTitle").textContent,
-          ownerElement =
-            document.querySelector(".ChannelInfo-pageLink") ||
-            document.querySelector(".VideoOwnerInfo-pageLink") ||
-            null;
+        const ownerElement =
+          document.querySelector(".ChannelInfo-pageLink") ||
+          document.querySelector(".VideoOwnerInfo-pageLink") ||
+          null;
         let owner;
         if (ownerElement) {
           [, owner] = ownerElement.textContent.match(/(.+) さん$/) || [
@@ -75,24 +68,22 @@ presence.on("UpdateData", async () => {
           ];
         } else owner = "Deleted User";
 
-        const [videoId] = location.pathname.match(/..\d+$/),
-          isPlaying = !!document.querySelector(".PlayerPauseButton"),
-          video: HTMLVideoElement =
-            document.querySelector(".VideoPlayer video"),
-          elapsedSec = Math.floor(video.currentTime),
+        const isPlaying = !!document.querySelector(".PlayerPauseButton"),
           presenceData: PresenceData = {
-            details: title,
-            state: `${owner} - ${videoId}`,
+            details: document.querySelector(".VideoTitle").textContent,
+            state: `${owner} - ${location.pathname.match(/..\d+$/)[0]}`,
             largeImageKey: "niconico",
             smallImageKey: isPlaying ? "play" : "pause",
             smallImageText: isPlaying
               ? (await strings).play
               : (await strings).pause,
-            startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
+            startTimestamp:
+              Math.floor(Date.now() / 1000) -
+              Math.floor(
+                document.querySelector<HTMLVideoElement>(".VideoPlayer video")
+                  .currentTime
+              )
           };
-
-        if (isPlaying) presence.setTrayTitle(title);
-        else delete presenceData.startTimestamp;
 
         presence.setActivity(presenceData);
       }
@@ -102,26 +93,27 @@ presence.on("UpdateData", async () => {
     case "live.nicovideo.jp":
     case "live2.nicovideo.jp": {
       if (location.pathname.startsWith("/watch/lv")) {
-        const title = document.querySelector(
+        const presenceData: PresenceData = {
+          details: document.querySelector(
             " [class^='___program-title___'] span "
           ).textContent,
-          ownerElement =
-            document.querySelector("[class^='___channel-name-anchor___']") ||
-            document.querySelector("[class^='___group-name-anchor___']"),
-          owner = ownerElement.textContent,
-          [liveId] = location.pathname.match(/lv\d+/),
-          elapsed = document.querySelector(
-            " span[class^='___time-score___'] span[class^='___value___'] "
-          ).textContent,
-          presenceData: PresenceData = {
-            details: title,
-            state: `${owner} - ${liveId}`,
-            largeImageKey: "niconico",
-            smallImageKey: "live",
-            smallImageText: (await strings).live,
-            startTimestamp:
-              Math.floor(Date.now() / 1000) - getTimesec(elapsed).elapsedSec
-          };
+          state: `${
+            (
+              document.querySelector("[class^='___channel-name-anchor___']") ??
+              document.querySelector("[class^='___group-name-anchor___']")
+            ).textContent
+          } - ${location.pathname.match(/lv\d+/)[0]}`,
+          largeImageKey: "niconico",
+          smallImageKey: "live",
+          smallImageText: (await strings).live,
+          startTimestamp:
+            Math.floor(Date.now() / 1000) -
+            getTimesec(
+              document.querySelector(
+                " span[class^='___time-score___'] span[class^='___value___'] "
+              ).textContent
+            ).elapsedSec
+        };
 
         presence.setActivity(presenceData);
       } else presence.clearActivity();
@@ -130,37 +122,31 @@ presence.on("UpdateData", async () => {
     }
 
     case "seiga.nicovideo.jp": {
+      const presenceData: PresenceData = {
+        largeImageKey: "niconico"
+      };
       if (location.pathname.startsWith("/seiga/im")) {
-        const title = document.querySelector(".title").textContent,
-          owner = document.querySelector(
-            "#ko_watchlist_header.user .user_name strong"
-          ).textContent,
-          [seigaId] = location.pathname.match(/im\d+/),
-          presenceData: PresenceData = {
-            details: title,
-            state: `${owner} - ${seigaId}`,
-            largeImageKey: "niconico"
-          };
+        presenceData.details = document.querySelector(".title").textContent;
+        presenceData.state = `${
+          document.querySelector("#ko_watchlist_header.user .user_name strong")
+            .textContent
+        } - ${location.pathname.match(/im\d+/)[0]}`;
 
         presence.setActivity(presenceData);
       } else if (location.pathname.startsWith("/watch/mg")) {
-        const title = document.querySelector(".title").textContent,
-          owner = document.querySelector(".author_name").textContent,
-          [mangaId] = location.pathname.match(/mg\d+/),
-          presenceData: PresenceData = {
-            details: title,
-            state: `${owner} - ${mangaId}`,
-            largeImageKey: "niconico"
-          };
-
-        presence.setActivity(presenceData);
-      } else presence.clearActivity();
+        presenceData.details = document.querySelector(".title").textContent;
+        presenceData.state = `${
+          document.querySelector(".author_name").textContent
+        } - ${location.pathname.match(/mg\d+/)[0]}`;
+      }
+      if (presenceData.details) presence.setActivity(presenceData);
+      else presence.setActivity();
 
       break;
     }
 
     default:
-      presence.clearActivity();
+      presence.setActivity();
       break;
   }
 });

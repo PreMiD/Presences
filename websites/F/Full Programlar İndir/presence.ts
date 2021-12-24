@@ -18,18 +18,15 @@ presence.on("UpdateData", async () => {
     category = document.querySelector("#icerik > h1");
   if (page.includes("/kategori/") && category && category.textContent !== "") {
     if (page.includes("/page/")) {
-      const location = document.location.pathname.indexOf("page"),
-        pgn = `Sayfa: ${document.location.pathname.slice(
-          location + 5,
-          document.location.pathname.length
-        )}`,
-        category2 = category.textContent
-          .slice(0, category.textContent.length - 27)
-          .trim();
       presence.setActivity({
         largeImageKey: "fp-logo",
         details: "Bir kategoriyi inceliyor:",
-        state: `${category2}(${pgn})`,
+        state: `${category.textContent
+          .slice(0, category.textContent.length - 27)
+          .trim()}(${`Sayfa: ${document.location.pathname.slice(
+          document.location.pathname.indexOf("page") + 5,
+          document.location.pathname.length
+        )}`})`,
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     }
@@ -55,10 +52,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (page.includes(".html")) {
-    const topic = document.querySelector(
-        "#icerik-yazi > div.icerik-baslik > h1 > a"
-      ),
-      published = document.querySelector(
+    const published = document.querySelector(
         "#icerik > div > div.yazi-alt > ul > li.tarih > span"
       ),
       publisher = document.querySelector(
@@ -66,7 +60,10 @@ presence.on("UpdateData", async () => {
       );
     presence.setActivity({
       largeImageKey: "fp-logo",
-      details: topic.textContent.trim() || "Belirsiz",
+      details:
+        document
+          .querySelector("#icerik-yazi > div.icerik-baslik > h1 > a")
+          .textContent.trim() || "Belirsiz",
       state:
         publisher && publisher.textContent !== ""
           ? `${publisher.textContent.trim()} ${

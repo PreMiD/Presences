@@ -4,9 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    route = document.location.pathname.split("/");
+    largeImageKey: "logo"
+  };
 
   if (document.location.pathname === "/") presenceData.details = "Home";
   else if (document.location.pathname.includes("/dashboard")) {
@@ -16,7 +15,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Edit a server : ${
       document.querySelector(".title").textContent
     }`;
-    if (!route[3]) presenceData.state = "Main";
+    if (!document.location.pathname.split("/")[3]) presenceData.state = "Main";
     else presenceData.state = document.querySelector("a.is-active").textContent;
   } else if (document.location.pathname.includes("/status")) {
     presenceData.details = "Status";
@@ -31,10 +30,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Watching premium page";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
+  if (!presenceData.details) presence.setActivity();
+  else {
     presenceData.state ??= "Navigating...";
     presence.setActivity(presenceData);
   }

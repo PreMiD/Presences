@@ -5,10 +5,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const path = document.location.pathname,
     presenceData: PresenceData = {
-      largeImageKey: "paybutik"
+      largeImageKey: "paybutik",
+      startTimestamp: Math.floor(Date.now() / 1000)
     };
-
-  presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
   if (path === "/") presenceData.details = "Ana sayfada geziniyor..";
   else if (path === "/dashboard")

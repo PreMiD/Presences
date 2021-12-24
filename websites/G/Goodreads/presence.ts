@@ -45,13 +45,14 @@ presence.on("UpdateData", async () => {
       //others profiles
       presenceData.state = user;
     } else {
-      // own profile
-      const trash: string = document.querySelector("h1 a").innerHTML;
-      presenceData.state = user.replace(trash, "");
+      presenceData.state = user.replace(
+        document.querySelector("h1 a").textContent,
+        ""
+      );
     }
   } else if (document.location.pathname.includes("/author/show/")) {
     presenceData.details = "Viewing an author:";
-    author = document.querySelector(".authorName span").innerHTML;
+    author = document.querySelector(".authorName span").textContent;
     presenceData.state = author;
   } else if (document.location.pathname.includes("/group/show/")) {
     presenceData.details = "Viewing a group:";
@@ -59,7 +60,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/topic"))
     presenceData.details = "Browsing discussions";
   else if (document.location.pathname.includes("/review/edit/")) {
-    book = document.querySelector("a.bookTitle").innerHTML;
+    book = document.querySelector("a.bookTitle").textContent;
     presenceData.details = "Writing a book review...";
     presenceData.smallImageKey = "writing";
     presenceData.smallImageText = book;

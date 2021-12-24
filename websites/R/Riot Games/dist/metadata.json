@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Kazo",
     "id": "393071912189952011"
@@ -17,10 +17,11 @@
     "playvalorant.com"
   ],
   "regExp": "([a-z0-9-]+[.])*(riotgames|leagueoflegends|playruneterra|playvalorant)[.]com[/]",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/ren8U6k.png",
   "thumbnail": "https://i.imgur.com/rP0vQlr.jpg",
   "color": "#d13639",
+  "category": "games",
   "tags": [
     "lol",
     "leagueoflegends",
@@ -31,6 +32,5 @@
     "legendsofruneterra",
     "teamfighttactics",
     "leagueoflegendswildrift"
-  ],
-  "category": "games"
+  ]
 }

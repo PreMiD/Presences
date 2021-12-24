@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "732586216272429126"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "erisly"
+    largeImageKey: "erisly",
+    startTimestamp: browsingTimestamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname === "erisly.com") {
     if (document.location.pathname.includes("/partners"))
       presenceData.details = "Viewing Erisly's Partners";
@@ -54,8 +54,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = firstHeading;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -53,7 +53,7 @@ const readFile = (path: string): string =>
         emitResult.diagnostics
       );
 
-    allDiagnostics.forEach((diagnostic) => {
+    allDiagnostics.forEach(diagnostic => {
       if (diagnostic.file) {
         const { line, character } =
             diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!),
@@ -145,8 +145,8 @@ const readFile = (path: string): string =>
         .find({}, { projection: { _id: 0, name: 1, "metadata.version": 1 } })
         .toArray(),
       presences: Array<[Metadata, string]> = glob("./{websites,programs}/*/*/")
-        .filter((pF) => existsSync(`${pF}/dist/metadata.json`))
-        .map((pF) => {
+        .filter(pF => existsSync(`${pF}/dist/metadata.json`))
+        .map(pF => {
           const file = readFile(`${pF}/dist/metadata.json`);
           if (isValidJSON(file)) {
             const data = JSON.parse(file);
@@ -161,19 +161,19 @@ const readFile = (path: string): string =>
           }
         }),
       newPresences = presences.filter(
-        (p) => !dbPresences.some((dP) => dP.name === p[0].service)
+        p => !dbPresences.some(dP => dP.name === p[0].service)
       ),
       deletedPresences = dbPresences.filter(
-        (dP) => !presences.some((p) => p[0].service === dP.name)
+        dP => !presences.some(p => p[0].service === dP.name)
       ),
       outdatedPresences = dbPresences
-        .filter((dP) =>
+        .filter(dP =>
           presences.some(
-            (p) =>
+            p =>
               dP.name === p[0].service && p[0].version !== dP.metadata.version
           )
         )
-        .map((dP) => presences.find((p) => p[0].service === dP.name)),
+        .map(dP => presences.find(p => p[0].service === dP.name)),
       dbDiff = outdatedPresences.concat(newPresences);
 
     if (dbDiff.length > 5) {
@@ -193,7 +193,7 @@ const readFile = (path: string): string =>
       oP: Promise<UpdateWriteOpResult>[] = [];
 
     const compiledPresences = await Promise.all(
-      dbDiff.map(async (file) => {
+      dbDiff.map(async file => {
         let metadata: customMetadata = file[0];
         const path = file[1],
           sources = glob(`${path}*.ts`),
@@ -288,11 +288,11 @@ const readFile = (path: string): string =>
         database = client.db(dbname).collection("presences");
       }
 
-      const bulkNp = compiledPresences.filter((e) =>
-          newPresences.some((p) => e && e.name === p[0].service)
+      const bulkNp = compiledPresences.filter(e =>
+          newPresences.some(p => e && e.name === p[0].service)
         ),
-        bulkOp = compiledPresences.filter((e) =>
-          outdatedPresences.some((p) => e && e.name === p[0].service)
+        bulkOp = compiledPresences.filter(e =>
+          outdatedPresences.some(p => e && e.name === p[0].service)
         );
 
       if (bulkNp.length > 0) {
@@ -305,7 +305,7 @@ const readFile = (path: string): string =>
       }
 
       if (deletedPresences.length > 0) {
-        dP = deletedPresences.map((p) => database.deleteOne({ name: p.name }));
+        dP = deletedPresences.map(p => database.deleteOne({ name: p.name }));
         for (const presence of deletedPresences) {
           if (!presence || !presence.name) continue;
           console.log(
@@ -315,9 +315,7 @@ const readFile = (path: string): string =>
       }
 
       if (bulkOp.length > 0) {
-        oP = bulkOp.map((p) =>
-          database.updateOne({ name: p.name }, { $set: p })
-        );
+        oP = bulkOp.map(p => database.updateOne({ name: p.name }, { $set: p }));
         for (const presence of bulkOp) {
           console.log(
             `UPD - "${presence.name}" => ${presence.metadata.version}`
@@ -337,12 +335,12 @@ const readFile = (path: string): string =>
 
 main();
 
-process.on("unhandledRejection", (rejection) => {
+process.on("unhandledRejection", rejection => {
   console.error(rejection);
   process.exit(1);
 });
 
-process.on("uncaughtException", (err) => {
+process.on("uncaughtException", err => {
   console.error(err.stack || err);
   process.exit(1);
 });

@@ -30,8 +30,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "akisa"
   };
   if (
-    document.querySelector(".infoan2") !== null &&
-    document.querySelector("#iframemain") !== null
+    document.querySelector(".infoan2") &&
+    document.querySelector("#iframemain")
   ) {
     // on page of a episode
     [presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-  } else if (document.querySelector(".infodes") !== null) {
+  } else if (document.querySelector(".infodes")) {
     presenceData.details = "Viewing show:";
     presenceData.state = document.querySelector(".infodes").textContent;
     presenceData.smallImageKey = "reading";
@@ -97,6 +97,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).browsing;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).browsing;
-    presence.setActivity(presenceData);
-  } else presence.setActivity(presenceData);
+  }
+  presence.setActivity(presenceData);
 });

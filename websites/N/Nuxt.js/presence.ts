@@ -82,7 +82,7 @@ function parseQueryString(queryString?: string): any {
   if (!queryString) {
     queryString = window.location.search.substring(1);
   }
-  const params = {};
+  const params: {[key: string]: string} = {};
   const queries = queryString.split("&");
   queries.forEach((indexQuery: string) => {
     const indexPair = indexQuery.split("=");

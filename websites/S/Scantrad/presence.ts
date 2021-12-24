@@ -1,52 +1,42 @@
 const presence = new Presence({
     clientId: "817856303719907389"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   path = document.location.pathname,
   [, , mangaName] = path.split("/");
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.body.contains(document.querySelector(".titre"))) {
-    const titre = (<HTMLElement>document.querySelector(".titre")).innerText;
     presenceData.details = "Visite la page du manga :";
-    presenceData.state = titre;
+    presenceData.state =
+      document.querySelector<HTMLElement>(".titre").textContent;
   } else if (path.includes("/forum")) {
     presenceData.details = "Visite une page :";
     presenceData.state = "Page du Forum";
     if (path.includes("/forum/d")) {
-      const groupName = document
-          .querySelector(".TagLabel-text")
-          .textContent.trim(),
-        topicName = document.querySelector(".DiscussionHero-title").textContent;
-
       presenceData.details = "Lis un topic du forum :";
-      presenceData.state = `[${groupName}] ${topicName}`;
+      presenceData.state = `[${document
+        .querySelector(".TagLabel-text")
+        .textContent.trim()}] ${
+        document.querySelector(".DiscussionHero-title").textContent
+      }`;
       presenceData.smallImageKey = "reading";
     }
   } else if (path.includes("mangas/") + mangaName) {
-    const chapter = (<HTMLElement>document.querySelector(".chapitre-main"))
-        .textContent,
-      page = (<HTMLElement>document.querySelector(".pageLinkAct")).textContent,
-      fullMangaName = mangaName.split("-").join(" "),
-      upperCaseWords = (title: string) => {
-        const arr = title.split(" "),
-          result = arr.map(function (value: string) {
-            return value.replace(
-              value.charAt(0),
-              value.charAt(0).toUpperCase()
-            );
-          });
-        return result.join(" ");
-      },
-      manga = upperCaseWords(fullMangaName);
-
-    presenceData.details = `Entrain de lire ${manga} :`;
-    presenceData.state = `${chapter} | ${page}`;
+    presenceData.details = `Entrain de lire ${mangaName
+      .split("-")
+      .map(value =>
+        value.replace(value.charAt(0), value.charAt(0).toUpperCase())
+      )
+      .join(" ")} :`;
+    presenceData.state = `${
+      document.querySelector<HTMLElement>(".chapitre-main").textContent
+    } | ${document.querySelector<HTMLElement>(".pageLinkAct").textContent}`;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = "Lis un scan";
     presenceData.buttons = [
@@ -75,8 +65,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Page d'accueil";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
     if (title.includes("Genres")) {
       presenceData.details = "Selecting a genre";
       presenceData.state = title;
-    } else if (ttl.some((x) => title.includes(x))) {
+    } else if (ttl.some(x => title.includes(x))) {
       presenceData.details = "Viewing a page";
       presenceData.state = title;
     } else presenceData.details = title;

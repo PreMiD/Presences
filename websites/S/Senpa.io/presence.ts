@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "691669470057594940"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -23,19 +23,16 @@ presence.on("UpdateData", async () => {
             ? "no nick"
             : profile.list[profile.selected].nick
         }` + ` | ${document.querySelector("#stats-hud").textContent}`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else {
-      const [, details] = document
+      [, presenceData.details] = document
         .querySelector("title")
         .textContent.split("-");
-      presenceData.details = details;
       presenceData.smallImageKey = "reading";
     }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else {
+    if (!presenceData.details) presence.setActivity();
+    else {
       if (!presenceData.state) presenceData.state = "Navigating...";
       presence.setActivity(presenceData);
     }

@@ -1,12 +1,7 @@
 const presence = new Presence({
-  clientId: "719331723560878091"
-});
-
-interface ItemMap {
-  [key: string]: string;
-}
-
-const browsingTimestamp = Math.floor(Date.now() / 1000),
+    clientId: "719331723560878091"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   searchTypeMap: ItemMap = {
     web: "Searching on the web",
     news: "Searching the news",
@@ -28,8 +23,12 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
     education: "Searching educational content"
   };
 
+interface ItemMap {
+  [key: string]: string;
+}
+
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "qwant",
     startTimestamp: browsingTimestamp
   };
@@ -37,58 +36,57 @@ presence.on("UpdateData", async () => {
   let query: URLSearchParams = null;
 
   if (location.hostname === "www.qwant.com") {
-    const [, firstPath] = location.pathname.split("/");
-    switch (firstPath) {
+    switch (location.pathname.split("/")[1]) {
       case "":
         query = new URLSearchParams(location.search);
         if (query.has("q")) {
-          data.details = searchTypeMap[query.get("t")];
-          data.state = query.get("q");
-        } else data.details = "Home";
+          presenceData.details = searchTypeMap[query.get("t")];
+          presenceData.state = query.get("q");
+        } else presenceData.details = "Home";
         break;
       case "music":
-        data.smallImageKey = "music";
-        data.smallImageText = "Qwant Music";
+        presenceData.smallImageKey = "music";
+        presenceData.smallImageText = "Qwant Music";
         if (location.pathname === "/music/search") {
           query = new URLSearchParams(location.search);
           if (query.has("q")) {
-            data.details = searchMusicTypeMap[query.get("t")];
-            data.state = query.get("q");
+            presenceData.details = searchMusicTypeMap[query.get("t")];
+            presenceData.state = query.get("q");
           }
-        } else data.details = "Music Home";
+        } else presenceData.details = "Music Home";
         break;
       case "maps":
-        data.smallImageKey = "maps";
-        data.smallImageText = "Qwant Maps";
-        data.details = "Looking at maps";
+        presenceData.smallImageKey = "maps";
+        presenceData.smallImageText = "Qwant Maps";
+        presenceData.details = "Looking at maps";
         break;
     }
   } else if (location.hostname === "www.qwantjunior.com") {
-    data.largeImageKey = "qwantjunior";
+    presenceData.largeImageKey = "qwantjunior";
     query = new URLSearchParams(location.search);
     switch (location.pathname) {
       case "/":
         if (query.has("q")) {
-          data.details = `${
+          presenceData.details = `${
             searchJuniorTypeMap[query.get("type")]
           } in Qwant Junior`;
-          data.state = query.get("q");
-        } else data.details = "Junior Home";
+          presenceData.state = query.get("q");
+        } else presenceData.details = "Junior Home";
         break;
       case "/news":
-        data.smallImageKey = "news";
-        data.smallImageText = "Qwant Junior News";
+        presenceData.smallImageKey = "news";
+        presenceData.smallImageText = "Qwant Junior News";
         if (query.has("q")) {
-          data.details = "Searching the news on Qwant Junior";
-          data.state = query.get("q");
-        } else data.details = "Junior News Home";
+          presenceData.details = "Searching the news on Qwant Junior";
+          presenceData.state = query.get("q");
+        } else presenceData.details = "Junior News Home";
         break;
     }
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!data.details) {
-    presence.setTrayTitle(); // Clear tray
+  if (!presenceData.details) {
+    // Clear tray
     presence.setActivity(); // Clear activity
-  } else presence.setActivity(data);
+  } else presence.setActivity(presenceData);
 });

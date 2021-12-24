@@ -32,8 +32,8 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
         )
       ).data as { name: string }[]
     )
-      .filter((c) => c.name.endsWith(".json"))
-      .map((c) => c.name.match(/\d.\d/g)[0]);
+      .filter(c => c.name.endsWith(".json"))
+      .map(c => c.name.match(/\d.\d/g)[0]);
     return `https://schemas.premid.app/metadata/${versions.pop()}`;
   },
   write = (path: string, code: Metadata): void =>
@@ -43,11 +43,11 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
     }),
   main = async () => {
     const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
-        (pF) => !exists(`${pF}/dist/metadata.json`)
+        pF => !exists(`${pF}/dist/metadata.json`)
       ),
       allmeta: Array<[Metadata, string]> = glob(
         "./{websites,programs}/*/*/*/metadata.json"
-      ).map((pF) => {
+      ).map(pF => {
         const file = read(pF);
         if (isValidJSON(file)) return [JSON.parse(file), pF];
         else {

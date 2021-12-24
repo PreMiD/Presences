@@ -7,21 +7,20 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const playback =
-      document.querySelector(
-        "#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"
-      ) !== null &&
-      document.querySelector("#hbo-sdk--player-title > div.content-title") !==
-        null
-        ? true
-        : false,
+  const presenceData: PresenceData = {
+      largeImageKey: "lg"
+    },
     video: HTMLVideoElement = document.querySelector(
       "#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"
-    ),
-    presenceData: PresenceData = {
-      largeImageKey: "lg"
-    };
-  if (!playback || !video) {
+    );
+  if (
+    (document.querySelector(
+      "#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"
+    ) === null &&
+      document.querySelector("#hbo-sdk--player-title > div.content-title") ===
+        null) ||
+    !video
+  ) {
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
@@ -31,22 +30,18 @@ presence.on("UpdateData", async () => {
   if (!isNaN(video.duration)) {
     //* Get required tags
     const title: HTMLElement = document.querySelector(
-        "#hbo-sdk--player-title > div.content-title"
-      ),
-      [, endTimestamp] = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
-
+      "#hbo-sdk--player-title > div.content-title"
+    );
     presenceData.details = "Watching:";
     presenceData.state = title.textContent;
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.endTimestamp = endTimestamp;
-
-    presence.setTrayTitle(video.paused ? "" : title.textContent);
+    [, presenceData.endTimestamp] = presence.getTimestamps(
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
 
     //* Remove timestamps if paused
     if (video.paused) {
@@ -55,10 +50,6 @@ presence.on("UpdateData", async () => {
     }
 
     //* If tags are not "null"
-    if (title.textContent !== null)
-      presence.setActivity(presenceData, !video.paused);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+    if (title.textContent) presence.setActivity(presenceData, !video.paused);
+  } else presence.setActivity();
 });

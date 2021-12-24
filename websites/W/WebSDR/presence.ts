@@ -8,7 +8,7 @@ const presence = new Presence({
     view: "Viewing",
     read: "Reading"
   },
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   modes = ["CW", "LSB", "USB", "AM", "FM", "AMsync"];
 
 let frequency: string,
@@ -19,7 +19,7 @@ function updateMode(): void {
   let i = 0;
   Array.from(
     document.querySelector("div.ctl > form > div.buttonrow").children
-  ).forEach((node) => {
+  ).forEach(node => {
     if ((node as HTMLElement).style.background !== "") {
       mode = i;
       return;
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "favicon",
     //smallImageKey: "key",
     smallImageText: "University of Twente SDR",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") {
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = `${frequency} ${modes[mode]}`;
 
-    if (document.getElementById("recbutton").innerHTML === "stop")
+    if (document.getElementById("recbutton").textContent === "stop")
       presenceData.state = strings.record;
     else if (
       (document.getElementById("mutecheckbox") as HTMLInputElement).checked ===

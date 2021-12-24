@@ -1,15 +1,15 @@
 const presence = new Presence({
     clientId: "626481021843669044"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement, search: HTMLInputElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "bukkit"
+    largeImageKey: "bukkit",
+    startTimestamp: browsingTimestamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
   if (
     document.location.hostname === "bukkit.org" ||
     document.location.hostname === "dl.bukkit.org"
@@ -20,18 +20,18 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128)
-        presenceData.state = `${title.innerText.substring(0, 125)}...`;
-      else presenceData.state = title.innerText;
+      if (title.textContent.length > 128)
+        presenceData.state = `${title.textContent.substring(0, 125)}...`;
+      else presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/forums/")) {
       title = document.querySelector(
         "#content > div.pageWidth > div.pageContent > div.titleBar > h1"
       );
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
 
         presence.setActivity(presenceData);
       } else {
@@ -43,9 +43,9 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#content > div.pageWidth > div.pageContent > div.mainContainer > div > div.titleBar > h1 > a > em"
       );
-      if (search !== null) {
+      if (search) {
         presenceData.details = "Forums, Searching for:";
-        presenceData.state = search.innerText;
+        presenceData.state = search.value;
 
         presenceData.smallImageKey = "search";
 
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
           "#content > div.pageWidth > div.pageContent > div.profilePage > div.mainProfileColumn > div > div > h1"
         );
         presenceData.details = "Forums, Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         presence.setActivity(presenceData);
       } else {
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
         "#content > div.pageWidth > div.pageContent > div.titleBar > h1"
       );
       presenceData.details = "Help Center, reading:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presenceData.smallImageKey = "reading";
 
@@ -120,20 +120,17 @@ presence.on("UpdateData", async () => {
         "#content > div.pageWidth > div.pageContent > div.titleBar > h1"
       );
       presenceData.details = "Forums, reading:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
+    } else presence.setActivity();
   } else if (document.location.hostname === "bukkit.gamepedia.com") {
     title = document.querySelector("#firstHeading");
-    if (title !== null) {
+    if (title) {
       presenceData.details = "Docs, reading:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presenceData.smallImageKey = "reading";
 
@@ -159,7 +156,7 @@ presence.on("UpdateData", async () => {
         "#content > section > section.level-categories.categories-tier > div > div > ul > li.tier-holder > ul > li.level-categories-nav.highlight > a > span"
       );
       presenceData.details = "Devs, viewing plugins in";
-      presenceData.state = `category: ${title.innerText}`;
+      presenceData.state = `category: ${title.textContent}`;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/bukkit-plugins")) {
@@ -170,7 +167,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/search")) {
       search = document.querySelector("#field-search");
       presenceData.details = "Devs, searching for:";
-      presenceData.state = search.value;
+      presenceData.state = search.textContent;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/members/")) {
@@ -178,7 +175,7 @@ presence.on("UpdateData", async () => {
         "#content > section > section > div.p-user-info > ul.p-user-details > li.username"
       );
       presenceData.details = "Devs, viewing user:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/members")) {
@@ -190,17 +187,11 @@ presence.on("UpdateData", async () => {
         "#site-main > section.atf > div > div > div.project-details-container > div > h1 > a > span"
       );
       presenceData.details = "Devs, viewing project:";
-      if (title.innerText.length > 128)
-        presenceData.state = `${title.innerText.substring(0, 125)}...`;
-      else presenceData.state = title.innerText;
+      if (title.textContent.length > 128)
+        presenceData.state = `${title.textContent.substring(0, 125)}...`;
+      else presenceData.state = title.textContent;
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+    } else presence.setActivity();
+  } else presence.setActivity();
 });

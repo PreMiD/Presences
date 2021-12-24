@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -21,11 +21,10 @@ presence.on("UpdateData", async () => {
     const video: HTMLVideoElement = document.querySelector("#video-nplayer-1");
 
     if (!video.paused) {
-      const [, endTimestamp] = presence.getTimestamps(
+      [, presenceData.endTimestamp] = presence.getTimestamps(
         video.currentTime,
         video.duration
       );
-      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).play;
     } else {
@@ -34,7 +33,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).pause;
     }
   } else {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (
       document.location.pathname === "/main/main.ds" ||
@@ -81,7 +80,7 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/tcher/eachTcherMain.ds")) {
       const temp: string[] = (
         document.querySelector(".tcher_modal") as HTMLElement
-      ).innerText.split("\n");
+      ).textContent.split("\n");
       [presenceData.details, presenceData.state] = [
         temp[0].replace("영역", " 영역"),
         temp[1].replace("선생님", " 선생님")
@@ -145,8 +144,6 @@ presence.on("UpdateData", async () => {
     else presenceData.details = "진짜 공부는 지금부터";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

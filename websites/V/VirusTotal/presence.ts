@@ -26,214 +26,196 @@ presence.on("UpdateData", () => {
     presenceData.details = "Sign Up to VirusTotal";
     presence.setActivity(presenceData);
   } else if (document.location.pathname === "/gui/settings") {
-    const nickname = document
+    presenceData.details = "Update their profile...";
+    presenceData.state = document
       .querySelector("body > vt-virustotal-app")
       .shadowRoot.querySelector("#toolbar")
       .shadowRoot.querySelector("#omnibarWrapper > vt-ui-account-widget")
       .shadowRoot.querySelector(
         "#userDropdown > div.avatar-section > span"
       ).textContent;
-    presenceData.details = "Update their profile...";
-    presenceData.state = nickname;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/gui/user/")) {
-    const profilex = document
+    presenceData.details = "Reading profile of...";
+    presenceData.state = document
       .querySelector("body > vt-virustotal-app")
       .shadowRoot.querySelector("#authChecker > user-view")
       .shadowRoot.querySelector(
         "#pageWrapper > div.wrapper > vt-ui-generic-card > div:nth-child(2) > div.avatar-name > div > h3"
       ).textContent;
-    presenceData.details = "Reading profile of...";
-    presenceData.state = profilex;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/gui/top-users")) {
     presenceData.details = "Looking for top users...";
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/gui/domain/")) {
     if (document.location.pathname.endsWith("detection")) {
-      const detectionURL = document
+      presenceData.details = "Reading detections of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.domain-id > span"
-        );
-      presenceData.details = "Reading detections of...";
-      presenceData.state = detectionURL.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("details")) {
-      const detectionURL = document
+      presenceData.details = "Reading details of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.domain-id > span"
-        );
-      presenceData.details = "Reading details of...";
-      presenceData.state = detectionURL.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("relations")) {
-      const detectionURL = document
+      presenceData.details = "Reading relations of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.domain-id > span"
-        );
-      presenceData.details = "Reading relations of...";
-      presenceData.state = detectionURL.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("community")) {
-      const detectionURL = document
+      presenceData.details = "Reading comments of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.domain-id > span"
-        );
-      presenceData.details = "Reading comments of...";
-      presenceData.state = detectionURL.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("summary")) {
-      const detectionURL = document
+      presenceData.details = "Reading summary of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.domain-id > span"
-        );
-      presenceData.details = "Reading summary of...";
-      presenceData.state = detectionURL.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     }
   } else if (document.location.pathname.includes("/gui/file/")) {
     if (document.location.pathname.endsWith("detection")) {
-      const detectionFILE = document
+      presenceData.details = "Reading detections of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-file-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.file-name > a"
-        );
-      presenceData.details = "Reading detections of...";
-      presenceData.state = detectionFILE.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("details")) {
-      const detectionFILE = document
+      presenceData.details = "Reading details of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-file-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.file-name > a"
-        );
-      presenceData.details = "Reading details of...";
-      presenceData.state = detectionFILE.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("community")) {
-      const detectionFILE = document
+      presenceData.details = "Reading comments of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-file-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.file-name > a"
-        );
-      presenceData.details = "Reading comments of...";
-      presenceData.state = detectionFILE.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("summary")) {
-      const detectionFILE = document
+      presenceData.details = "Reading summary of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-file-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.file-name > a"
-        );
-      presenceData.details = "Reading summary of...";
-      presenceData.state = detectionFILE.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("behavior")) {
-      const detectionFILE = document
+      presenceData.details = "Reading behavior of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#authChecker > file-view")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-file-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.file-name > a"
-        );
-      presenceData.details = "Reading behavior of...";
-      presenceData.state = detectionFILE.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     }
   } else if (document.location.pathname.includes("/gui/url/")) {
     if (document.location.pathname.endsWith("detection")) {
-      const detectionURL2 = document
+      presenceData.details = "Reading detections of ...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.parent-domain > a"
-        );
-      presenceData.details = "Reading detections of ...";
-      presenceData.state = detectionURL2.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("details")) {
-      //-------------------------- details
-      const detectionURL2 = document
+      presenceData.details = "Reading details of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.parent-domain > a"
-        );
-      presenceData.details = "Reading details of...";
-      presenceData.state = detectionURL2.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("community")) {
-      const detectionURL2 = document
+      presenceData.details = "Reading comments of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.parent-domain > a"
-        );
-      presenceData.details = "Reading comments of...";
-      presenceData.state = detectionURL2.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("summary")) {
-      const detectionURL2 = document
+      presenceData.details = "Reading summary of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.parent-domain > a"
-        );
-      presenceData.details = "Reading summary of...";
-      presenceData.state = detectionURL2.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("behavior")) {
-      const detectionURL2 = document
+      presenceData.details = "Reading behavior of...";
+      presenceData.state = document
         .querySelector("body > vt-virustotal-app")
         .shadowRoot.querySelector("#domainView")
         .shadowRoot.querySelector("#report")
         .shadowRoot.querySelector("div > header > vt-ui-domain-card")
         .shadowRoot.querySelector(
           "vt-ui-generic-card > div:nth-child(2) > div:nth-child(1) > div.object-id > div.parent-domain > a"
-        );
-      presenceData.details = "Reading behavior of...";
-      presenceData.state = detectionURL2.textContent;
+        ).textContent;
       presence.setActivity(presenceData);
     } else presence.setActivity();
   }

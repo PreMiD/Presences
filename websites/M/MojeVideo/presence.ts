@@ -1,34 +1,34 @@
 const presence = new Presence({
     clientId: "776113876605337660"
   }),
-  data: PresenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "mojevideo"
   };
 
 presence.on("UpdateData", async () => {
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });
 
 function RefreshData() {
   if (document.getElementById("video-comment")) {
-    const mvPlay = document.getElementById("mv-pl"),
-      mvTime = document.getElementById("mv-tm"),
-      mvPlaying = mvPlay.style.visibility !== "visible",
-      mvCaptionElement = document.getElementById("video-comment"),
-      [mvCaptionH1] = mvCaptionElement.getElementsByTagName("h1"),
+    const mvTime = document.getElementById("mv-tm"),
+      [mvCaptionH1] = document
+        .getElementById("video-comment")
+        .getElementsByTagName("h1"),
       videoName = mvCaptionH1 ? mvCaptionH1.textContent : "Unknown video";
 
     if (mvTime) {
-      data.details = videoName;
-      data.state = mvTime.textContent;
+      presenceData.details = videoName;
+      presenceData.state = mvTime.textContent;
     } else {
-      data.details = "Sleduje video";
-      data.state = videoName;
+      presenceData.details = "Sleduje video";
+      presenceData.state = videoName;
     }
-    data.smallImageKey = mvPlaying ? "mvplaying" : "mvpaused";
+    presenceData.smallImageKey =
+      document.getElementById("mv-pl").style.visibility !== "visible"
+        ? "mvplaying"
+        : "mvpaused";
   } else {
     let actualUrl = window.location.toString();
     const actualTitle = document.title;
@@ -38,12 +38,11 @@ function RefreshData() {
     actualUrl = actualUrl.replace("mesiac/", "");
     actualUrl = actualUrl.replace("celkovo/", "");
 
-    if (actualUrl === "") data.details = "Hlavná stránka";
+    if (actualUrl === "") presenceData.details = "Hlavná stránka";
     else if (!actualTitle.startsWith("Videá - mojeVideo.sk")) {
-      if (actualTitle.includes(".strana")) {
-        const titlePieces = actualTitle.split(" - ");
-        [data.details, data.state] = titlePieces;
-      } else data.details = actualTitle;
+      if (actualTitle.includes(".strana"))
+        [presenceData.details, presenceData.state] = actualTitle.split(" - ");
+      else presenceData.details = actualTitle;
     } else {
       let extraPage = "Hlavná stránka",
         extraPageNumber = 0;
@@ -59,11 +58,12 @@ function RefreshData() {
 
       if (actualUrl.includes("prihlasenie")) extraPage = "Prihlásenie";
       else if (actualUrl.includes("registracia")) extraPage = "Registrácia";
-      data.details = extraPage;
-      if (extraPageNumber !== 0) data.state = `${extraPageNumber}.strana`;
+      presenceData.details = extraPage;
+      if (extraPageNumber !== 0)
+        presenceData.state = `${extraPageNumber}.strana`;
     }
   }
-  data.largeImageKey = "mojevideo";
+  presenceData.largeImageKey = "mojevideo";
 }
 
 setInterval(RefreshData, 1000);

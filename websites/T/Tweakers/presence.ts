@@ -101,8 +101,6 @@ presence.on("UpdateData", async () => {
     }'`;
   } else presenceData.details = "Bezoekt de tweakers pagina...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

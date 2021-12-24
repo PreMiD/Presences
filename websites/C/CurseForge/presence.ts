@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "626536244670889985"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement | string | Element,
   search: HTMLElement,
@@ -9,7 +9,8 @@ let user: HTMLElement | string | Element,
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "curseforge"
+    largeImageKey: "curseforge",
+    startTimestamp: browsingTimestamp
   };
   function setStateGame(
     game: string,
@@ -28,42 +29,33 @@ presence.on("UpdateData", async () => {
         presenceData.details = `${game}, Viewing category:`;
         presenceData.state = `${categoryText} - ${(
           title as HTMLElement
-        ).innerText.replace("All ", "")}`;
+        ).textContent.replace("All ", "")}`;
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       } else {
         presenceData.details = `${game}, Viewing ${categoryTextSingle}:`;
-        if ((title as HTMLElement).innerText.length > 128) {
-          presenceData.state = `${(title as HTMLElement).innerText.substring(
+        if ((title as HTMLElement).textContent.length > 128) {
+          presenceData.state = `${(title as HTMLElement).textContent.substring(
             0,
             125
           )}...`;
-        } else presenceData.state = (title as HTMLElement).innerText;
+        } else presenceData.state = (title as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes(`/${categoryURL}`)) {
       presenceData.details = `${game}, Viewing category:`;
       presenceData.state = categoryText;
 
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else {
       presenceData.details = `CurseForge - ${game}`;
       delete presenceData.state;
 
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     }
   }
 
-  presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname === "www.curseforge.com") {
     if (document.location.pathname.includes("/minecraft/")) {
       if (document.location.pathname.includes("/modpacks"))
@@ -85,8 +77,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.state;
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes("/wow/"))
       setStateGame("WoW", "addons", "Addons", "addon");
@@ -106,8 +96,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.state;
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes("/worldoftanks/")) {
       if (document.location.pathname.includes("/wot-mods"))
@@ -119,8 +107,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.state;
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes("/rift/"))
       setStateGame("Rift", "addons", "Addons", "addon");
@@ -152,8 +138,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.state;
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes("/staxel/"))
       setStateGame("Staxel", "staxel-mods", "Mods", "mod");
@@ -162,42 +146,29 @@ presence.on("UpdateData", async () => {
         "body > div.flex.flex-col.min-h-full.min-h-screen > main > section > div > div.text-base > div.username.text-xl"
       );
       presenceData.details = "Viewing user:";
-      presenceData.state = (user as HTMLElement).innerText;
+      presenceData.state = (user as HTMLElement).textContent;
 
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/private-messages")) {
       presenceData.details = "Reading DMs";
       delete presenceData.state;
 
       presenceData.smallImageKey = "reading";
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/account")) {
       presenceData.details = "Viewing account settings";
       delete presenceData.state;
 
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/all-games")) {
       presenceData.details = "Viewing all games";
       delete presenceData.state;
 
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/project/")) {
       presenceData.details = "CurseForge - Projects";
       delete presenceData.state;
 
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
     }
   } else if (
     document.location.hostname === "minecraft.curseforge.com" ||
@@ -205,91 +176,62 @@ presence.on("UpdateData", async () => {
   ) {
     if (document.location.pathname.includes("/forums/")) {
       title = document.querySelector("#content > section > div > header > h2");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = (title as HTMLElement).innerText;
+        presenceData.state = (title as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       } else if (
-        document.querySelector(
-          "#content > section > div > div > header > h2"
-        ) !== null
+        document.querySelector("#content > section > div > div > header > h2")
       ) {
         title = document.querySelector(
           "#content > section > div > div > header > h2"
         );
         presenceData.details = "Forums, reading thread:";
-        if ((title as HTMLElement).innerText.length > 128) {
-          presenceData.state = `${(title as HTMLElement).innerText.substring(
+        if ((title as HTMLElement).textContent.length > 128) {
+          presenceData.state = `${(title as HTMLElement).textContent.substring(
             0,
             125
           )}...`;
-        } else presenceData.state = (title as HTMLElement).innerText;
+        } else presenceData.state = (title as HTMLElement).textContent;
 
         presenceData.smallImageKey = "reading";
-        presence.setActivity(presenceData);
       } else {
         presenceData.details = "Forums, Browsing...";
         delete presenceData.state;
-
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes("/search")) {
       search = document.querySelector("#field-search");
       if ((search as HTMLInputElement).value.length > 1) {
         presenceData.details = "Forums, Searching for:";
         presenceData.state = (search as HTMLInputElement).value;
-
         presenceData.smallImageKey = "search";
-
-        presence.setActivity(presenceData);
       } else {
         presenceData.details = "Forums, Going to search";
         presenceData.state = "something up";
-
         presenceData.smallImageKey = "search";
-
-        presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes("/account")) {
       presenceData.details = "Forums, viewing:";
       presenceData.state = "Account Settings";
-
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/knowledge-base")) {
       presenceData.details = "Forums, viewing:";
       presenceData.state = "Knowledge Base";
-
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/store")) {
       presenceData.details = "Forums, viewing:";
       presenceData.state = "Reward Store";
-
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/dashboard")) {
       presenceData.details = "Forums, viewing:";
       presenceData.state = "Dashboard";
-
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/paste")) {
       presenceData.details = "Forums, viewing:";
       presenceData.state = "Paste";
-
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/members")) {
       if (document.URL.includes("filter-user-sort=")) {
         [title] = document.URL.split("filter-user-sort=")[1].split("&");
@@ -299,40 +241,30 @@ presence.on("UpdateData", async () => {
             presenceData.state = "members in alphabetical order";
 
             delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);
             break;
           case "2":
             presenceData.details = "Forums, Viewing list of";
             presenceData.state = "members with most messages";
 
             delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);
             break;
           case "3":
             presenceData.details = "Forums, Viewing list of";
             presenceData.state = "members which are online";
 
             delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);
             break;
           case "4":
             presenceData.details = "Forums, Viewing the list";
             presenceData.state = "members sorted by newest";
 
             delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);
             break;
           case "5":
             presenceData.details = "Forums, Viewing the list";
             presenceData.state = "members sorted by oldest";
 
             delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);
             break;
         }
       } else if (
@@ -344,26 +276,20 @@ presence.on("UpdateData", async () => {
           "#content > section > section > div.p-user-info > ul.p-user-details > li.username"
         );
         presenceData.details = "Forums, Viewing user:";
-        presenceData.state = (user as HTMLElement).innerText;
+        presenceData.state = (user as HTMLElement).textContent;
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       } else {
         presenceData.details = "Forums, Viewing list of";
         presenceData.state = "members which are online";
 
         delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
       }
     } else {
       presenceData.details = "Forums, Browsing...";
       delete presenceData.state;
 
       delete presenceData.smallImageKey;
-
-      presence.setActivity(presenceData);
     }
   } else if (
     document.querySelector(
@@ -374,13 +300,8 @@ presence.on("UpdateData", async () => {
       "#content > section > div.featured-site-info-container > div > h2"
     );
     presenceData.details = "Viewing game:";
-    presenceData.state = (title as HTMLElement).innerText;
+    presenceData.state = (title as HTMLElement).textContent;
 
     delete presenceData.smallImageKey;
-
-    presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

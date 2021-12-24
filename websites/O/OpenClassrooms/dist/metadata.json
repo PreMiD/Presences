@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Paulé",
     "id": "376812375795302402"
@@ -11,12 +11,12 @@
     "nl": "OpenClassrooms is een educatief platform dat online certificerende cursussen aanbiedt die leiden tot groeiende banen. De inhoud van de website wordt geproduceerd door vrijwilligers, scholen, hogescholen of bedrijven zoals Microsoft of IBM."
   },
   "url": "openclassrooms.com",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/jRkfInn.png",
   "thumbnail": "https://i.imgur.com/dwBBYyp.png",
   "color": "#7451EB",
+  "category": "other",
   "tags": [
     "openclassrooms"
-  ],
-  "category": "other"
+  ]
 }

@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   { language } = window.navigator; //Make this change-able with presence settings
 //en = English
 //nl = Nederlands
@@ -141,11 +141,12 @@ let user, title, search;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "plex"
+    largeImageKey: "plex",
+    startTimestamp: browsingTimestamp
   };
 
-  if (document.querySelector("#plex") !== null) {
-    if (document.querySelector("#plex > div:nth-child(4) > div") !== null) {
+  if (document.querySelector("#plex")) {
+    if (document.querySelector("#plex > div:nth-child(4) > div")) {
       const { currentTime, duration, paused } =
         document.querySelector<HTMLVideoElement>(
           "#plex > div:nth-child(4) > div > div:nth-child(1) > video"
@@ -178,8 +179,9 @@ presence.on("UpdateData", async () => {
         title = (title.textContent || "").split("—");
         presenceData.state = title[1] || title[0];
         if (title.length > 1) {
-          const chapterNumber: string = title[0].replace("·", " - ");
-          presenceData.state = `${chapterNumber} - ${presenceData.state}`;
+          presenceData.state = `${title[0].replace("·", " - ")} - ${
+            presenceData.state
+          }`;
         }
       }
 
@@ -188,35 +190,31 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (document.URL.includes("/tv.plex.provider.webshows")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("WebShows");
       const title = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span"
       );
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing webshow:";
         presenceData.state = title.textContent;
       }
-    } else if (document.URL.includes("/tv.plex.provider.news")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.URL.includes("/tv.plex.provider.news"))
       presenceData.details = getTranslation("News");
-    } else if (document.URL.includes("/tv.plex.provider.podcasts")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.URL.includes("/tv.plex.provider.podcasts")) {
       presenceData.details = getTranslation("Podcasts");
       const title = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span"
       );
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing podcast:";
         presenceData.state = title.textContent;
       }
     } else if (document.URL.includes("/tv.plex.provider.music")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Music");
       const title = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > span"
       );
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing album:";
         presenceData.state = title.textContent;
       }
@@ -224,18 +222,16 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div > div:nth-child(2) > span"
       );
-      presenceData.startTimestamp = browsingStamp;
+
       presenceData.details = getTranslation("Search");
       presenceData.state = search.textContent.split('"')[1].replace('"', "");
       presenceData.smallImageKey = "search";
     } else if (document.URL.includes("/com.plexapp.plugins.library")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Library");
       presenceData.state = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a > div:nth-child(1)"
       ).textContent;
     } else if (document.URL.includes("content.collections")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Collection");
       presenceData.state = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span"
@@ -244,26 +240,22 @@ presence.on("UpdateData", async () => {
       document.URL.includes("content.playlists") &&
       document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span"
-      ) !== null
+      )
     ) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Playlist");
       presenceData.state = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span"
       ).textContent;
     } else if (document.URL.includes("tv.plex.provider.vod")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Vod");
       presenceData.state = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div > span"
       ).textContent;
     } else if (document.URL.includes("/server/")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Vod");
-      const title = document.querySelector(
+      presenceData.state = document.querySelector(
         "#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div > span"
-      );
-      presenceData.state = title.textContent;
+      ).textContent;
     } else if (
       document.URL === "https://app.plex.tv/" ||
       document.URL === "https://app.plex.tv/desktop" ||
@@ -271,14 +263,10 @@ presence.on("UpdateData", async () => {
       document.URL === "https://app.plex.tv/desktop/#!/" ||
       document.location.pathname === "/web/index.html" ||
       document.location.pathname === "/web/index.html#"
-    ) {
-      presenceData.startTimestamp = browsingStamp;
+    )
       presenceData.details = getTranslation("HomePage");
-    }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 });
