@@ -326,6 +326,6 @@ interface CreateAnnotationParams {
   line?: string | number;
   endLine?: string | number;
   col?: string | number;
-  endColumn?: string | number
+  endColumn?: string | number;
   message: string;
 }
