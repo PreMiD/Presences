@@ -64,8 +64,16 @@ presence.on("UpdateData", async () => {
         ];
       }
     }
-  } else if (path === "/search") presenceData.details = "В поисках статьи";
-  else if (path === "/create") presenceData.details = "Создаёт статью";
+  } else if (path === "/search") {
+    presenceData.details = "В поисках статьи";
+    if (!privacyMode) {
+      const searchRequest = new URLSearchParams(document.location.search).get("q");
+      if (searchRequest) {
+        presenceData.details = "В поисках статьи по запросу";
+        presenceData.state = searchRequest;
+      }
+    }
+  } else if (path === "/create") presenceData.details = "Создаёт статью";
   else if (path === "/edit") {
     presenceData.details = "Редактирует статью";
     if (!privacyMode) {
