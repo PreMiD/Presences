@@ -39,6 +39,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("a[class~='active']").childNodes.item(1)
           .textContent
       }`;
+      presenceData.largeImageKey = document.querySelector<HTMLImageElement>("[alt='Cover Image']").src
     }
     if (
       document
