@@ -320,7 +320,7 @@ interface APIQuery {
 }
 
 interface CreateAnnotationParams {
-  type: "warning" | "error";
+  type: "warning" | "error" | "notice";
   title?: string;
   file: string;
   line?: string | number;
