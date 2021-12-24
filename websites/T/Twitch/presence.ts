@@ -284,9 +284,10 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = (await strings).viewProfile;
         presenceData.state = user;
-        if (pfp)
+        if (pfp) {
           presenceData.largeImageKey =
             profilePic ?? (logoArr[logo] || "twitch");
+        }
       }
 
       if (path.includes("/team/")) {
@@ -451,9 +452,10 @@ presence.on("UpdateData", async () => {
         }
         presenceData.smallImageKey = "live";
         presenceData.smallImageText = (await strings).live;
-        if (pfp)
+        if (pfp) {
           presenceData.largeImageKey =
             profilePic ?? (logoArr[logo] || "twitch");
+        }
         if (buttons) {
           presenceData.buttons = [
             {
@@ -490,9 +492,10 @@ presence.on("UpdateData", async () => {
         }
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = (await strings).play;
-        if (pfp)
+        if (pfp) {
           presenceData.largeImageKey =
             profilePic ?? (logoArr[logo] || "twitch");
+        }
         const [startTimestamp, endTimestamp] =
           presence.getTimestampsfromMedia(video);
         presenceData.startTimestamp = startTimestamp;
