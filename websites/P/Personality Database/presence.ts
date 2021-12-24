@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-personality"
         )
-      ))?.innerText,
+      ))?.textContent,
       profilePicture: string = (<HTMLElement>(
         document.querySelector(
           "div.profile-description > div.profile-description-info > div.profile-description-avatar img"
