@@ -17,8 +17,8 @@ presence.on("UpdateData", async () => {
     searchText = document.querySelector("#search-text").textContent;
 
   if (
-    document.querySelector("#search-input-area").getAttribute("display") ===
-      "block" &&
+    document.querySelector<HTMLDivElement>("#search-input-area").style
+      .display === "block" &&
     searchText
   ) {
     presenceData.details = "В поисках статьи по запросу";
