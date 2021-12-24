@@ -40,13 +40,13 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
   oldLang: string = null;
 
 function checkIfMovie() {
-  nextEpisodeElement === null && previousEpisodeElement === null
+  !nextEpisodeElement && !previousEpisodeElement
     ? (isMovie = true)
-    : nextEpisodeElement !== null && previousEpisodeElement === null
+    : nextEpisodeElement && !previousEpisodeElement
     ? (isMovie = false)
-    : nextEpisodeElement === null && previousEpisodeElement !== null
+    : !nextEpisodeElement && previousEpisodeElement
     ? (isMovie = false)
-    : nextEpisodeElement !== null && previousEpisodeElement !== null
+    : nextEpisodeElement && previousEpisodeElement
     ? (isMovie = false)
     : (isMovie = true);
 
@@ -79,12 +79,15 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = { largeImageKey: "kaa" },
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang"),
-    cover = await presence.getSetting("cover");
-
-  presenceData.startTimestamp = browsingTimestamp;
+  const presenceData: PresenceData = {
+      largeImageKey: "kaa",
+      startTimestamp: browsingTimestamp
+    },
+    [buttons, newLang, cover] = await Promise.all([
+      presence.getSetting("buttons"),
+      presence.getSetting("lang"),
+      presence.getSetting("cover")
+    ]);
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -154,8 +157,8 @@ presence.on("UpdateData", async () => {
         }
       }
 
-      presenceData.details = `${currentAnimeTitle}`;
-      presenceData.state = `${currentAnimeEpisode}`;
+      presenceData.details = currentAnimeTitle;
+      presenceData.state = currentAnimeEpisode;
 
       if (paused) {
         delete presenceData.startTimestamp;
