@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
       "block" &&
     searchText
   ) {
-    presenceData.details = "В поисках статьи";
+    presenceData.details = "В поисках статьи по запросу";
     presenceData.state = searchText;
     presence.setActivity(presenceData);
     return;
