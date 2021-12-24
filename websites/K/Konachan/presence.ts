@@ -46,6 +46,11 @@ presence.on("UpdateData", () => {
   else if (path.startsWith("/forum")) {
     presenceData.details = "Viewing a forum";
     presenceData.state = shortTitle;
-  } else presenceData.details = "Browsing the site";
+  } else if (
+    document.location.href === "https://konachan.com/" ||
+    document.location.href === "https://konachan.net/"
+  )
+    presenceData.details = "Home page";
+  else presenceData.details = "Browsing the site";
   presence.setActivity(presenceData);
 });
