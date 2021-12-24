@@ -33,12 +33,12 @@ presence.on("UpdateData", () => {
     presenceData.buttons = [{ label: "View series", url: document.URL }];
   } else if (path.startsWith("/viewer")) {
     presenceData.details = `Reading: ${
-      document.querySelector(
+      document.querySelector<HTMLHeadingElement>(
         "#app > div:nth-child(2) > div.Viewer-module_wrapper_11OpA > div:nth-child(3) > div.Navigation-module_header_37C_9.Navigation-module_appear_30FBL > div.Navigation-module_detailContainer_1aDk8 > a > h1"
       ).textContent
     }`;
     presenceData.state = `Chapter ${
-      document.querySelector(
+      document.querySelector<HTMLParagraphElement>(
         "#app > div:nth-child(2) > div.Viewer-module_wrapper_11OpA > div:nth-child(3) > div.Navigation-module_header_37C_9.Navigation-module_appear_30FBL > div.Navigation-module_detailContainer_1aDk8 > div > p"
       ).textContent
     }`;
