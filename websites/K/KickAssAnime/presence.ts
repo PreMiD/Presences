@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.largeImageKey = cover
           ? document
-              .querySelector<HTMLElement>("div.poster")
+              .querySelector<HTMLElement>("div.info-header")
               .style.backgroundImage.match(/"(.*)"/)[1]
           : "kaa";
       } else {
