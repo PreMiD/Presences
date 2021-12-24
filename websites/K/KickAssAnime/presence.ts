@@ -134,11 +134,8 @@ presence.on("UpdateData", async () => {
 
         presenceData.largeImageKey = cover
           ? document
-              .querySelector<HTMLElement>("div.info-header.p-3.px-2")
-              .style.backgroundImage.replace("url(", "")
-              .replace(")", "")
-              .replace('"', "")
-              .replace('"', "")
+              .querySelector<HTMLElement>("div.poster")
+              .style.backgroundImage.match(/"(.*)"/)[1]
           : "kaa";
       } else {
         currentAnimeEpisode = "Movie";
@@ -225,10 +222,7 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = cover
       ? document
           .querySelector<HTMLElement>("div.poster")
-          .style.backgroundImage.replace("url(", "")
-          .replace(")", "")
-          .replace('"', "")
-          .replace('"', "")
+          .style.backgroundImage.match(/"(.*)"/)[1]
       : "kaa";
 
     if (buttons) {
