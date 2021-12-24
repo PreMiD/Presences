@@ -13,7 +13,19 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: showTime ? browsingTimestamp : null
     },
-    path = document.location.pathname;
+    path = document.location.pathname,
+    searchText = document.querySelector("#search-text").textContent;
+
+  if (
+    document.querySelector("#search-input-area").getAttribute("display") ===
+      "block" &&
+    searchText
+  ) {
+    presenceData.details = "В поисках статьи";
+    presenceData.state = searchText;
+    presence.setActivity(presenceData);
+    return;
+  }
 
   if (path === "/") presenceData.details = "На главной странице";
   else if (path === "/view") {
