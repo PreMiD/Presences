@@ -324,5 +324,8 @@ interface CreateAnnotationParams {
   title?: string;
   file: string;
   line?: string | number;
+  endLine?: string | number;
+  col?: string | number;
+  endColumn?: string | number
   message: string;
 }
