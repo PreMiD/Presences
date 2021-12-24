@@ -2,49 +2,32 @@ const presence = new Presence({
   clientId: "715116675346989096"
 });
 
-function getTime(list: string[]): number {
-  let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--)
-    ret += parseInt(list[index]) * 60 ** index;
-
-  return ret;
-}
-
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const splitAudioTime = audioTime.split(":").reverse(),
-    splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioTime = getTime(splitAudioTime),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
-  const player = document
-    .querySelector(
-      "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-EHOje.kLlKoV > div.sc-gzVnrw.jgaZgQ > button.sc-htpNat.jEJMuB > i"
+  const player = Array.from(document.querySelectorAll("i")).find(x =>
+    ["playerIcon playerIcon--play", "playerIcon playerIcon--pause"].includes(
+      x.className
     )
-    .getAttribute("class");
+  );
 
   if (player) {
-    const paused = player.includes("pause") === false,
-      title = document.querySelector(
-        "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > b > a"
-      ).textContent,
-      author = document.querySelector(
-        "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span"
-      ).textContent,
-      audioTime = document.querySelector("#currentTime").textContent,
-      audioDuration = document.querySelector(
-        "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq"
-      ).textContent,
-      timestamps = getTimestamps(audioTime, audioDuration),
-      data: PresenceData = {
+    const paused = player.className.includes("pause") === false,
+      currentSong = Array.from(document.querySelectorAll("div")).find(
+        x =>
+          x.children.length === 2 &&
+          x.children[0].tagName === "B" &&
+          x.children[1].tagName === "SPAN"
+      ),
+      title = currentSong.children[0].textContent,
+      author = currentSong.children[1].textContent,
+      timestamps = presence.getTimestamps(
+        presence.timestampFromFormat(
+          document.querySelector("#currentTime").textContent
+        ),
+        presence.timestampFromFormat(
+          document.querySelector("#currentTime").nextSibling.textContent
+        )
+      ),
+      presenceData: PresenceData = {
         details: title,
         state: author,
         largeImageKey: "icon",
@@ -55,10 +38,10 @@ presence.on("UpdateData", async () => {
       };
 
     if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    if (title !== null && author !== null) presence.setActivity(data, !paused);
+    if (title && author) presence.setActivity(presenceData, !paused);
   } else presence.clearActivity();
 });

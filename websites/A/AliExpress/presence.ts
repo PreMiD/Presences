@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "618569989842010122"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let item, typing: HTMLElement;
 
 presence.on("UpdateData", async () => {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "aliexpress"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (
     document.location.hostname === "ru.aliexpress.com" ||
@@ -35,9 +35,9 @@ presence.on("UpdateData", async () => {
       ) as HTMLElement;
 
       presenceData.details = "Viewing product:";
-      if (item.innerText.length > 128)
-        presenceData.state = `${item.innerText.substring(0, 125)}...`;
-      else presenceData.state = item.innerText;
+      if (item.textContent.length > 128)
+        presenceData.state = `${item.textContent.substring(0, 125)}...`;
+      else presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
         "#hd > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(1) > span"
       ) as HTMLElement;
       presenceData.details = "Viewing store:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
       ) as HTMLElement;
 
       presenceData.details = "Viewing category:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -75,10 +75,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
+    } else presence.setActivity();
   } else if (
     document.location.hostname === "message.aliexpress.com" ||
     document.location.hostname === "msg.aliexpress.com"
@@ -97,10 +94,10 @@ presence.on("UpdateData", async () => {
       if (typing) {
         if (typing.className.includes("icon-plane disable")) {
           presenceData.details = "Reading dms with:";
-          presenceData.state = item.innerText;
+          presenceData.state = item.textContent;
         } else {
           presenceData.details = "Typing in dms to:";
-          presenceData.state = item.innerText;
+          presenceData.state = item.textContent;
         }
       } else {
         presenceData.details = "Message Center";
@@ -147,10 +144,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
+    } else presence.setActivity();
   } else if (
     document.location.hostname === "home.aliexpress.com" ||
     document.location.hostname === "star.aliexpress.com"
@@ -234,8 +228,5 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

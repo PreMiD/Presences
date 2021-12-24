@@ -6,8 +6,8 @@ body:
   - type: markdown
     attributes:
       value:
-        Before submitting a bug report ensure your bug hasn't already been
-        mentioned. If it has, reply accordingly to the thread.
+        Before submitting a new issue, ensure your bug hasn't already been
+        reported. If it has, reply to the open issue instead.
   - type: textarea
     validations:
       required: true
@@ -21,22 +21,34 @@ body:
       label: Steps to Reproduce
       description:
         Provide clear and unambiguous steps on how to reproduce the bug
-      value: |
-        1.
-        2.
-        3.
+      placeholder: |
+        1. Go to this link
+        2. Click on this
+        3. Observe that
   - type: textarea
-    validations:
-      required: true
-    attributes:
-      label: Expected Behavior
-      description: Describe what was expected to happen
-  - type: input
     validations:
       required: false
     attributes:
       label: "Screenshots"
       description: "Optionally add some screenshots to reinforce your point"
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: Expected Behavior
+      description: Describe what you expected to happen
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: Actual Behavior
+      description: Describe what actually happened
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: Page URL
+      description: The URL you were visiting when the bug happens
   - type: input
     validations:
       required: true

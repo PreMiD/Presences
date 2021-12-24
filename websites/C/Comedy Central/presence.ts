@@ -7,16 +7,14 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "comedycentral"
   };
 
   if (document.location.pathname.startsWith("/episodes")) {
     const player: HTMLVideoElement = document.querySelector(
-        ".edge-player-content-element"
-      ),
-      show = document.querySelector(".header h3 a").textContent,
-      epTitle = document.querySelector(".sub-header h1").textContent;
+      ".edge-player-content-element"
+    );
     let epNumber: string | Element | HTMLElement =
       document.querySelector(".meta span");
     epNumber &&= `${(epNumber as HTMLElement).textContent
@@ -24,28 +22,30 @@ presence.on("UpdateData", async () => {
       .replace(" Ep ", ":E")} `;
     epNumber ??= "";
 
-    [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-      Math.floor(player.currentTime),
-      Math.floor(player.duration)
-    );
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(player.currentTime),
+        Math.floor(player.duration)
+      );
 
-    data.details = show;
-    data.state = epNumber + epTitle;
-    data.smallImageKey = player.paused ? "pause" : "play";
-    data.smallImageText = player.paused
+    presenceData.details = document.querySelector(".header h3 a").textContent;
+    presenceData.state =
+      epNumber + document.querySelector(".sub-header h1").textContent;
+    presenceData.smallImageKey = player.paused ? "pause" : "play";
+    presenceData.smallImageText = player.paused
       ? (await strings).pause
       : (await strings).play;
 
     if (player.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else {
-    data.details = "Browsing...";
-    data.startTimestamp = Date.now();
+    presenceData.details = "Browsing...";
+    presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   }
 });

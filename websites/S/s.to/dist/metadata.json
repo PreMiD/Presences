@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "MauriceX",
     "id": "268768664411439115"
@@ -12,16 +12,18 @@
   },
   "url": [
     "s.to",
-    "serienstream.sx"
+    "serienstream.sx",
+    "serien.sx",
+    "serienstream.to"
   ],
-  "version": "1.6.6",
+  "version": "1.6.8",
   "logo": "https://i.imgur.com/AJbaeCC.png",
   "thumbnail": "https://i.imgur.com/L0Zqja4.png",
   "color": "#0000ff",
+  "category": "videos",
   "tags": [
     "video",
     "movie",
     "serie"
-  ],
-  "category": "videos"
+  ]
 }

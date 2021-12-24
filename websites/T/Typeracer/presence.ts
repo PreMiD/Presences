@@ -4,11 +4,11 @@ const presence = new Presence({
 
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -26,7 +26,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -63,9 +63,8 @@ const updateCallback = {
           gameStatusLabel === "Go!"
         ) {
           const textBox = document.querySelector(
-              "table.gameView > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div > div"
-            ),
-            lettersTotal = textBox.textContent.length;
+            "table.gameView > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div > div"
+          );
           let lettersTyped = 0;
           for (const i in textBox.children) {
             if (
@@ -79,12 +78,12 @@ const updateCallback = {
                 lettersTyped += textBox.children[i].textContent.length;
             }
           }
-          const percentage =
-              Math.round((lettersTyped / lettersTotal) * 10000) / 100,
-            wpm = document
-              .querySelector(".rankPanelWpm-self")
-              .textContent.toUpperCase();
-          presenceData.state = `${percentage}%, ${wpm}`;
+          presenceData.state = `${
+            Math.round((lettersTyped / textBox.textContent.length) * 10000) /
+            100
+          }%, ${document
+            .querySelector(".rankPanelWpm-self")
+            .textContent.toUpperCase()}`;
           if (raceStamp === null) raceStamp = Math.floor(Date.now() / 1000);
           presenceData.startTimestamp = raceStamp;
         } else if (
@@ -92,26 +91,27 @@ const updateCallback = {
           gameStatusLabel.startsWith("You finished")
         ) {
           presenceData.details = "Just finished with a race";
-          const wpm = document
-              .querySelector(".rankPanelWpm-self")
-              .textContent.toUpperCase(),
-            accuracy = document.querySelector(
+          presenceData.state = `${document
+            .querySelector(".rankPanelWpm-self")
+            .textContent.toUpperCase()}, ${
+            document.querySelector(
               ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)"
-            ).textContent,
-            time = document.querySelector(
+            ).textContent
+          } acc., ${
+            document.querySelector(
               ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(2)"
-            ).textContent;
-          presenceData.state = `${wpm}, ${accuracy} acc., ${time}`;
-          presenceData.startTimestamp = browsingStamp;
+            ).textContent
+          }`;
+          presenceData.startTimestamp = browsingTimestamp;
         }
       } else presenceData.details = "Viewing the home page";
     };
   } else if (currentURL.hostname === "data.typeracer.com") {
     /*
-		
+
 		Part 2
 		data.typeracer.com (pit stop and misc. pages)
-		
+
 		*/
 
     if (currentPath[0] === "pit") {
@@ -147,13 +147,11 @@ const updateCallback = {
           presenceData.state = `${strong[1]} ${strong[2]}, ${strong[4]}`;
         else if (option === "month")
           presenceData.state = `${strong[3]} ${strong[4]}`;
-        else if (option === "year") {
-          const [, strong2] = strong;
-          presenceData.state = strong2;
-        }
+        else if (option === "year") [, presenceData.state] = strong;
       } else if (currentPath[1] === "login")
         presenceData.details = "Logging in";
       else {
+        // eslint-disable-next-line no-one-time-vars/no-one-time-vars
         const pageNames: { [index: string]: string } = {
           // eslint-disable-next-line camelcase
           upgrade_account: "Upgrade your account",

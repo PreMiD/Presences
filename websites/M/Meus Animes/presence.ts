@@ -32,10 +32,10 @@ presence.on("UpdateData", async () => {
     path = document.location.pathname;
 
   if (path === "/") {
-    if (pesquisaTitulo !== null) {
-      if (pesquisaTitulo.innerText.includes("VOCÊ PESQUISOU POR")) {
+    if (pesquisaTitulo) {
+      if (pesquisaTitulo.textContent.includes("VOCÊ PESQUISOU POR")) {
         presenceData.details = "Em pesquisa por: ";
-        presenceData.state = pesquisaTitulo.innerText.slice(19);
+        presenceData.state = pesquisaTitulo.textContent.slice(19);
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       }
     } else {
@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Vendo animes";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     } else {
-      presenceData.details = nomeObraAnime.innerText;
-      presenceData.state = `Filtrar por: ${filtroObraAnime.innerText}`;
+      presenceData.details = nomeObraAnime.textContent;
+      presenceData.state = `Filtrar por: ${filtroObraAnime.textContent}`;
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     }
   } else if (path.includes("/video/")) {
@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     } else {
       const video = document.querySelector("video");
-      presenceData.details = nomeEpisodio.innerText;
-      presenceData.state = numeroEpisodio.innerText;
+      presenceData.details = nomeEpisodio.textContent;
+      presenceData.state = numeroEpisodio.textContent;
       if (!video.paused) {
         [presenceData.startTimestamp, presenceData.endTimestamp] =
           presence.getTimestamps(
@@ -71,25 +71,27 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/lista-de-animes-online")) {
     presenceData.details = `${"Animes" + " | Página: "}${
-      paginaAtual.innerText
-    } de ${ultimaPagina.innerText}`;
+      paginaAtual.textContent
+    } de ${ultimaPagina.textContent}`;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     if (
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-expect-error
-      statusLista[statusLista.selectedIndex].innerText !== "Selecione o Status"
+      statusLista[statusLista.selectedIndex].textContent !==
+      "Selecione o Status"
     )
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-expect-error
-      presenceData.state = statusLista[statusLista.selectedIndex].innerText;
+      presenceData.state = statusLista[statusLista.selectedIndex].textContent;
     else if (
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-expect-error
-      generolista[generolista.selectedIndex].innerText !== "Selecione o Gênero"
+      generolista[generolista.selectedIndex].textContent !==
+      "Selecione o Gênero"
     )
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-expect-error
-      presenceData.state = generolista[generolista.selectedIndex].innerText;
+      presenceData.state = generolista[generolista.selectedIndex].textContent;
   } else {
     presenceData.details = "Navegando... ";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);

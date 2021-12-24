@@ -15,57 +15,53 @@ function getTime(list: string[]): number {
   return ret;
 }
 
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const aT = getTime(audioTime.split(":").reverse()),
-    aD = getTime(audioDuration.split(":").reverse()),
-    endTime = Math.floor(Date.now() / 1000) - aT + aD;
-
-  return [Math.floor(Date.now() / 1000), endTime];
+function getTimestamps(audioTime: string, audioDuration: string): number[] {
+  return [
+    Math.floor(Date.now() / 1000),
+    Math.floor(Date.now() / 1000) -
+      getTime(audioTime.split(":").reverse()) +
+      getTime(audioDuration.split(":").reverse())
+  ];
 }
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "anlg"
     },
-    playback: boolean = document.querySelector("anghami-player") !== null;
+    playback = !!document.querySelector("anghami-player");
 
   if (playback) {
     const selectors: NodeListOf<Node> =
         document.querySelectorAll(".duration-text"),
-      current: string =
-        (selectors[0] && selectors[0].textContent.trim()) || "0:0",
-      length: string =
-        (selectors[1] && selectors[1].textContent.trim()) || "0:0",
-      timestamps = getTimestamps(current, length),
       playing: boolean =
         document.querySelector("anghami-player anghami-icon.icon.pause") !==
         null;
     let selector: Node = document.querySelector(
       "anghami-player .action-title .trim"
     );
-    data.details = (selector && selector.textContent) || null;
+    presenceData.details = (selector && selector.textContent) || null;
     selector = document.querySelector("anghami-player .action-artist .trim");
-    data.state = (selector && selector.textContent) || null;
+    presenceData.state = (selector && selector.textContent) || null;
 
-    data.smallImageKey = playing ? "play" : "pause";
-    data.smallImageText = playing
+    presenceData.smallImageKey = playing ? "play" : "pause";
+    presenceData.smallImageText = playing
       ? (await strings).play
       : (await strings).pause;
-    [data.startTimestamp, data.endTimestamp] = timestamps;
+    [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
+      (selectors[0] && selectors[0].textContent.trim()) || "0:0",
+      (selectors[1] && selectors[1].textContent.trim()) || "0:0"
+    );
 
     if (!playing) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setActivity(data, playback);
+    presence.setActivity(presenceData, playback);
   } else {
-    data.details = (await strings).browsing;
-    data.smallImageKey = "search";
-    data.smallImageText = (await strings).browsing;
-    presence.setActivity(data);
+    presenceData.details = (await strings).browsing;
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = (await strings).browsing;
+    presence.setActivity(presenceData);
   }
 });

@@ -76,8 +76,7 @@ presence.on("UpdateData", async () => {
   data.presence = {
     "/programs/([0-9]+)/play": {
       async setPresenceData() {
-        const video = document.querySelector("video"),
-          timestamps = presence.getTimestampsfromMedia(video);
+        const video = document.querySelector("video");
 
         data.meta.title =
           document.querySelector("h1.vjs-metadata.vjs-metadata--title")
@@ -91,7 +90,7 @@ presence.on("UpdateData", async () => {
           ? (await strings).pause
           : (await strings).play;
 
-        [, presenceData.endTimestamp] = timestamps;
+        [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
         presenceData.buttons = [
           {
@@ -240,10 +239,9 @@ presence.on("UpdateData", async () => {
       ((!settingValue && !setting.value) || settingValue === setting.value) &&
       setting.delete &&
       !setting.presence
-    ) {
-      for (const PData of setting.uses)
-        delete presenceData[PData as keyof PresenceData];
-    } else if (setting.presence) {
+    )
+      for (const PData of setting.uses) delete presenceData[PData];
+    else if (setting.presence) {
       for (const presenceSetting of setting.presence) {
         if (document.location.pathname.match(presenceSetting.page)) {
           if (presenceSetting.setTo && !presenceSetting.replace) {
@@ -271,11 +269,5 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-
-  for (const x of ["state", "details"]) {
-    if (presenceData[x as "details"] === "undefined")
-      delete presenceData[x as "details"];
-  }
-
   presence.setActivity(presenceData);
 });

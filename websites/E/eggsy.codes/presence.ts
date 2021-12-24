@@ -3,9 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  /* THIS IS EASY AND EFFICIENT! */
   if (document.location.pathname !== "/projects/premid/custom-status") {
-    // Adding this, probably not needed but it's fine.
     const details = document.querySelector("[name~=premid-details][content]")
         ? (
             document.querySelector(

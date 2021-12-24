@@ -1,187 +1,86 @@
 const presence = new Presence({
     clientId: "632110854543769601"
   }),
-  timeElapsed = Math.floor(Date.now() / 1000);
-let threadName,
-  authorName,
-  newsAuthor,
-  profileName,
-  reviewAuthor,
-  reviewTitle,
-  blogAuthor,
-  blogTitle,
-  gName,
-  pName,
-  cName;
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+let threadName: HTMLElement,
+  authorName: HTMLElement,
+  newsAuthor: HTMLElement,
+  profileName: HTMLElement,
+  gName: HTMLElement,
+  pName: HTMLElement,
+  cName: HTMLElement;
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "tempy",
+    startTimestamp: browsingTimestamp
+  };
   if (document.location.pathname.startsWith("/threads")) {
     threadName = document.querySelector("a#threadTitle");
     authorName = document.querySelector(
       "span.postedBy > span.posted.iconKey > a.username"
     );
     newsAuthor = document.querySelector("div.news-author > a.username > b");
-    if (authorName === null) {
-      const presenceData: PresenceData = {
-        details: `Reading a news post by ${
-          (newsAuthor as HTMLElement).innerText
-        }`,
-        state: (threadName as HTMLElement).innerText,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+    if (!authorName) {
+      presenceData.details = `Reading a news post by ${newsAuthor.textContent}`;
+      presenceData.state = threadName.textContent;
     } else {
-      const presenceData: PresenceData = {
-        details: `Reading a thread by ${(authorName as HTMLElement).innerText}`,
-        state: (threadName as HTMLElement).innerText,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+      presenceData.details = `Reading a thread by ${authorName.textContent}`;
+      presenceData.state = threadName.textContent;
     }
   } else if (document.location.pathname.startsWith("/game")) {
     gName = document.querySelector("h1.dynamicTitle");
-    if ((gName as HTMLElement).innerText === "GBAtemp Game Center Home") {
-      const presenceData: PresenceData = {
-        details: "Browsing...",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
-    } else {
-      const presenceData: PresenceData = {
-        details: "Reading about a game",
-        state: (gName as HTMLElement).innerText,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+    if (gName.textContent === "GBAtemp Game Center Home")
+      presenceData.details = "Browsing...";
+    else {
+      presenceData.details = "Reading about a game";
+      presenceData.state = gName.textContent;
     }
   } else if (document.location.pathname.startsWith("/platform")) {
     pName = document.querySelector("h1.dynamicTitle");
-    if ((pName as HTMLElement).innerText === "Game Center Platform List") {
-      const presenceData: PresenceData = {
-        details: "Browsing...",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
-    } else if ((pName as HTMLElement).innerText === "Game Database") {
-      const presenceData: PresenceData = {
-        details: "Browsing...",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
-    } else {
-      const presenceData: PresenceData = {
-        details: "Reading about a platform",
-        state: (pName as HTMLElement).innerText,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
+    if (
+      pName.textContent === "Game Center Platform List" ||
+      cName.textContent === "List of video game companies" ||
+      pName.textContent === "Game Database"
+    )
+      presenceData.details = "Browsing...";
+    else {
+      presenceData.details = "Reading about a platform";
+      presenceData.state = pName.textContent;
     }
   } else if (document.location.pathname.startsWith("/company")) {
     cName = document.querySelector("h1.dynamicTitle");
-    if ((cName as HTMLElement).innerText === "List of video game companies") {
-      const presenceData: PresenceData = {
-        details: "Browsing...",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
-    } else {
-      const presenceData: PresenceData = {
-        details: "Reading about a company",
-        state: (cName as HTMLElement).innerText,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
-    }
+    presenceData.details = "Reading about a company";
+    presenceData.state = cName.textContent;
   } else if (document.location.pathname.startsWith("/questions")) {
-    threadName = document.querySelector("h1.blueHeader");
-    const presenceData: PresenceData = {
-      details: "Reading a question",
-      state: (threadName as HTMLElement).innerText,
-      largeImageKey: "tempy",
-      startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    presenceData.details = "Reading a question";
+    presenceData.state = document.querySelector("h1.blueHeader").textContent;
   } else if (document.location.pathname.startsWith("/members")) {
     profileName = document.querySelector(
       "div.mainText.secondaryContent > h1.username"
     );
-    if (profileName === null) {
-      const presenceData: PresenceData = {
-        details: "Browsing...",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
-    } else {
-      const presenceData: PresenceData = {
-        details: `Looking at ${
-          (profileName as HTMLElement).innerText
-        }'s profile`,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-      };
-      presence.setActivity(presenceData);
-    }
-  } else if (document.location.pathname.startsWith("/chat")) {
-    const presenceData: PresenceData = {
-      details: "Chatting in IRC",
-      largeImageKey: "tempy",
-      startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.startsWith("/shoutbox")) {
-    const presenceData: PresenceData = {
-      details: "Chatting in the Shoutbox",
-      largeImageKey: "tempy",
-      startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.startsWith("/search")) {
-    const presenceData: PresenceData = {
-      details: "Searching...",
-      largeImageKey: "tempy",
-      startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.startsWith("/review")) {
-    reviewAuthor = document.querySelector("span.review_author > a.username");
-    reviewTitle = document.querySelector("h1#review_title > a");
-    const presenceData: PresenceData = {
-      details: `Reading a review by ${(reviewAuthor as HTMLElement).innerText}`,
-      state: (reviewTitle as HTMLElement).innerText,
-      largeImageKey: "tempy",
-      startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    if (!profileName) presenceData.details = "Browsing...";
+    else
+      presenceData.details = `Looking at ${profileName.textContent}'s profile`;
+  } else if (document.location.pathname.startsWith("/chat"))
+    presenceData.details = "Chatting in IRC";
+  else if (document.location.pathname.startsWith("/shoutbox"))
+    presenceData.details = "Chatting in the Shoutbox";
+  else if (document.location.pathname.startsWith("/search"))
+    presenceData.details = "Searching...";
+  else if (document.location.pathname.startsWith("/review")) {
+    presenceData.details = `Reading a review by ${
+      document.querySelector("h1#review_title > a").textContent
+    }`;
+    presenceData.state = document.querySelector(
+      "span.review_author > a.username"
+    ).textContent;
   } else if (document.location.pathname.startsWith("/entry")) {
-    blogAuthor = document.querySelector(
-      "span.postedBy > span.posted.iconKey > a.username"
-    );
-    blogTitle = document.querySelector("a.newsTitle");
-    const presenceData: PresenceData = {
-      details: `Reading a blog post by ${
-        (blogAuthor as HTMLElement).innerText
-      }`,
-      state: (blogTitle as HTMLElement).innerText,
-      largeImageKey: "tempy",
-      startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-  } else {
-    const presenceData: PresenceData = {
-      details: "Browsing...",
-      largeImageKey: "tempy",
-      startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
+    presenceData.details = `Reading a blog post by ${
+      document.querySelector("span.postedBy > span.posted.iconKey > a.username")
+        .textContent
+    }`;
+    presenceData.state = document.querySelector("a.newsTitle").textContent;
   }
+  presence.setActivity(presenceData);
 });

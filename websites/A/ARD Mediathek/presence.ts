@@ -28,22 +28,15 @@ presence.on("UpdateData", async () => {
     // Streaming
     const videoTitle = document.querySelector(
         ".H2-sc-1h18a06-3.fZOeKY"
-      ).innerHTML,
+      ).textContent,
       video: HTMLVideoElement = document.querySelector(
         ".ardplayer-mediacanvas"
-      ),
-      timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
       );
 
     if (path.startsWith("/live/")) {
       // Livestream
-      const mediathekLivechannel = document.title
-          .replace(/Livestream \| ARD-Mediathek/, "")
-          .replace(/ Livestream national \| ARD-Mediathek/g, ""),
-        channelLinkA = document.querySelector(".LogoLink-pae2yt-13.eOVFv");
-      if (channelLinkA !== null) {
+      const channelLinkA = document.querySelector(".LogoLink-pae2yt-13.eOVFv");
+      if (channelLinkA) {
         presenceData.largeImageKey = channelLinkA
           .getAttribute("href")
           .replace(/\//g, "");
@@ -61,7 +54,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.smallImageKey = "live";
       presenceData.smallImageText = "Live";
-      presenceData.details = `${mediathekLivechannel} Live`;
+      presenceData.details = `${document.title
+        .replace(/Livestream \| ARD-Mediathek/, "")
+        .replace(/ Livestream national \| ARD-Mediathek/g, "")} Live`;
       presenceData.state = videoTitle;
       presenceData.startTimestamp = elapsed;
       presenceData.buttons = [
@@ -76,13 +71,16 @@ presence.on("UpdateData", async () => {
 
       const videoDateDIV = document.querySelector(".Line-epbftj-1.dgMIUj");
       presenceData.state = `${
-        videoDateDIV.children[0].innerHTML
-      } from ${videoDateDIV.innerHTML.substring(
+        videoDateDIV.children[0].textContent
+      } from ${videoDateDIV.textContent.substring(
         0,
-        videoDateDIV.innerHTML.indexOf("∙") - 1
+        videoDateDIV.textContent.indexOf("∙") - 1
       )}`;
 
-      [, presenceData.endTimestamp] = timestamps;
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       presenceData.buttons = [
         { label: (await strings).buttonWatchVideo, url: prevUrl }
       ];
@@ -102,8 +100,6 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

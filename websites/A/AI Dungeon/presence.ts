@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "713563682722021436"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let login,
   register,
   target: string,
@@ -11,7 +11,7 @@ let login,
   textArray;
 const path = document.location.pathname,
   check = window.addEventListener("click", function (event) {
-    target = (event.target as HTMLTextAreaElement).innerText;
+    target = (event.target as HTMLTextAreaElement).textContent;
     if (target) {
       if (target.includes("Home")) {
         bullsEye = target;
@@ -51,12 +51,12 @@ const path = document.location.pathname,
   });
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "ailogo"
+    largeImageKey: "ailogo",
+    startTimestamp: browsingTimestamp
   };
   if (window.location.hostname === "aidungeon.io") {
     presence.info("Online");
     if (path === "/" || path === "") {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Home";
       textArray = document.getElementsByClassName(
         "elementor-headline-dynamic-letter elementor-headline-animation-in"
@@ -77,16 +77,12 @@ presence.on("UpdateData", async () => {
         else if (textArray[0].textContent === "w")
           presenceData.state = "Create your own World";
       }
-    } else if (path === "/play-ai-dungeon/") {
+    } else if (path === "/play-ai-dungeon/")
       presenceData.details = "Selecting Platform to play on";
-      presenceData.startTimestamp = browsingStamp;
-    } else if (path === "/terms-of-service/") {
+    else if (path === "/terms-of-service/")
       presenceData.details = "Reading Terms of Service";
-      presenceData.startTimestamp = browsingStamp;
-    } else if (path === "/privacy-policy/") {
+    else if (path === "/privacy-policy/")
       presenceData.details = "Reading Privacy Policy";
-      presenceData.startTimestamp = browsingStamp;
-    }
   }
   if (window.location.hostname === "play.aidungeon.io") {
     login = document.querySelector(
@@ -103,49 +99,31 @@ presence.on("UpdateData", async () => {
     );
 
     if (login) {
-      if (login.getAttribute("aria-label") === "Login (selected)") {
+      if (login.getAttribute("aria-label") === "Login (selected)")
         presenceData.details = "Logging in";
-        presenceData.startTimestamp = browsingStamp;
-      } else if (
-        register.getAttribute("aria-label") === "Register (selected)"
-      ) {
+      else if (register.getAttribute("aria-label") === "Register (selected)")
         presenceData.details = "Registering";
-        presenceData.startTimestamp = browsingStamp;
-      } else {
-        presenceData.details = "Loading ...";
-        presenceData.startTimestamp = browsingStamp;
-      }
+      else presenceData.details = "Loading ...";
     } else {
       check;
       presence.info(bullsEye);
-      if (bullsEye === "Home" || bullsEye === "home") {
-        presenceData.startTimestamp = browsingStamp;
+      if (bullsEye === "Home" || bullsEye === "home")
         presenceData.details = "Viewing Home";
-      } else if (bullsEye === "Explore" || bullsEye === "explore") {
-        presenceData.startTimestamp = browsingStamp;
+      else if (bullsEye === "Explore" || bullsEye === "explore")
         presenceData.details = "Exploring Scenarios and Adventures";
-      } else if (bullsEye === "My Stuff" || bullsEye === "my stuff") {
-        presenceData.startTimestamp = browsingStamp;
+      else if (bullsEye === "My Stuff" || bullsEye === "my stuff")
         presenceData.details = "Browsing my stuff";
-      } else if (bullsEye === "Premium" || bullsEye === "premium") {
-        presenceData.startTimestamp = browsingStamp;
+      else if (bullsEye === "Premium" || bullsEye === "premium")
         presenceData.details = "Considering Premium";
-      } else if (bullsEye === "Contribute" || bullsEye === "contribute") {
-        presenceData.startTimestamp = browsingStamp;
+      else if (bullsEye === "Contribute" || bullsEye === "contribute")
         presenceData.details = "Reading the Contribute Message";
-      } else if (bullsEye === "Settings" || bullsEye === "settings") {
-        presenceData.startTimestamp = browsingStamp;
+      else if (bullsEye === "Settings" || bullsEye === "settings")
         presenceData.details = "Changing Settings";
-      } else if (bullsEye === "About" || bullsEye === "about") {
-        presenceData.startTimestamp = browsingStamp;
+      else if (bullsEye === "About" || bullsEye === "about")
         presenceData.details = "Looking at the about";
-      } else if (bullsEye === "Profile") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing Profile";
-      } else if (bullsEye === "") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing Menu";
-      } else if (
+      else if (bullsEye === "Profile") presenceData.details = "Viewing Profile";
+      else if (bullsEye === "") presenceData.details = "Viewing Menu";
+      else if (
         bullsEye === "NEW SINGLEPLAYER GAME" ||
         bullsEye === "CONTINUE GAME" ||
         bullsEye === "NEW MULTIPLAYER GAME"
@@ -156,7 +134,6 @@ presence.on("UpdateData", async () => {
             presenceData.state = "Reading";
             presenceData.smallImageKey = "read";
             presenceData.smallImageText = "Reading Current Message";
-            presenceData.startTimestamp = browsingStamp;
           } else {
             presenceData.details = "Playing";
             presenceData.smallImageKey = "play";
@@ -182,7 +159,6 @@ presence.on("UpdateData", async () => {
               presenceData.state = "Reading";
               presenceData.smallImageKey = "read";
               presenceData.smallImageText = "Reading Current Message";
-              presenceData.startTimestamp = browsingStamp;
             } else {
               presenceData.details = "Playing";
               presenceData.smallImageKey = "play";
@@ -201,19 +177,11 @@ presence.on("UpdateData", async () => {
                 delete presenceData.startTimestamp;
               }
             }
-          } else {
-            presenceData.details = "Viewing Home";
-            presenceData.startTimestamp = browsingStamp;
-          }
+          } else presenceData.details = "Viewing Home";
         }
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing Home";
-      }
+      } else presenceData.details = "Viewing Home";
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

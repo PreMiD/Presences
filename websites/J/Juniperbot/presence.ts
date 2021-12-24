@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: "739908991274057870" }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function pathIncludes(string: string): boolean {
   return document.location.pathname.toLowerCase().includes(string);
@@ -41,14 +41,14 @@ presence.on("UpdateData", async () => {
   }
 
   if (host === "juniper.bot") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     switch (true) {
       case pathIncludes("/ranking/"):
         presenceData.details = (await strings).leaderboard;
         presenceData.state = document.querySelector(
           ".guild--info h1.font-weight-thin.display-2"
-        ).innerHTML;
+        ).textContent;
         presenceData.smallImageKey = "list";
         break;
       case pathIncludes("/dashboard/"):
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = (await strings).serverdashname.replace(
           "{0}",
           document.querySelector(".guild--info h1.font-weight-thin.display-2")
-            .innerHTML
+            .textContent
         );
         break;
 
@@ -111,18 +111,18 @@ presence.on("UpdateData", async () => {
     }
   }
   if (host === "docs.juniper.bot") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = document.title;
     presenceData.state = "docs.juniper.bot";
     presenceData.smallImageKey = "list";
   }
   if (host === "feedback.juniper.bot") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.state = "feedback.juniper.bot";
     switch (true) {
       case pathIncludes("/posts/"):
         presenceData.details = `${(await strings).reading} ${
-          document.querySelector(".post-header h1").innerHTML
+          document.querySelector(".post-header h1").textContent
         }`;
         break;
       default:
@@ -130,8 +130,6 @@ presence.on("UpdateData", async () => {
         break;
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

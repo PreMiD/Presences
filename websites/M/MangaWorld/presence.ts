@@ -1,28 +1,29 @@
 const presence = new Presence({
     clientId: "860298084512038964"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "mangaworld_logo_dark"
     },
     /* Query dell'URI - URI query */
-    paramsString = decodeURIComponent(document.location.search)
-      .replace("?", "")
-      .replace(/-/g, " "),
-    searchParams = new URLSearchParams(paramsString);
+    searchParams = new URLSearchParams(
+      decodeURIComponent(document.location.search)
+        .replace("?", "")
+        .replace(/-/g, " ")
+    );
 
   /* Homepage */
   if (document.location.pathname === "/") {
-    data.smallImageKey = "home";
-    data.smallImageText = "Homepage";
-    data.details = "Nella homepage";
+    presenceData.smallImageKey = "home";
+    presenceData.smallImageText = "Homepage";
+    presenceData.details = "Nella homepage";
   } else if (document.location.href.includes("/bookmarks/")) {
     /* Preferiti - Bookmarks*/
-    data.smallImageKey = "bookmark";
-    data.smallImageText = "Preferiti";
-    data.details = "Sfogliando i preferiti";
+    presenceData.smallImageKey = "bookmark";
+    presenceData.smallImageText = "Preferiti";
+    presenceData.details = "Sfogliando i preferiti";
     let filter;
 
     if (document.location.href.endsWith("RE-READING")) filter = "In rilettura";
@@ -34,55 +35,48 @@ presence.on("UpdateData", async () => {
     else if (document.location.href.endsWith("DROPPED")) filter = "Droppati";
     else if (document.location.href.endsWith("READING")) filter = "In lettura";
 
-    data.state = filter;
+    presenceData.state = filter;
   } else if (document.location.href.includes("keyword=")) {
     /* ----- ARCHIVIO - ARCHIVE ----- */
     /* Ricerca per nome - Search by name */
-    const keyword = searchParams.get("keyword");
-    data.smallImageKey = "search";
-    data.smallImageText = "Ricerca";
-    data.details = "Cercando:";
-    data.state = `"${keyword}"`;
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Ricerca";
+    presenceData.details = "Cercando:";
+    presenceData.state = `"${searchParams.get("keyword")}"`;
   } else if (document.location.href.includes("author=")) {
     /* Ricerca per autore - Search by author */
-    const author = searchParams.get("author");
-    data.smallImageKey = "pen";
-    data.smallImageText = "Ricerca per autore";
-    data.details = "Sfogliando i contenuti dell'autore:";
-    data.state = author;
+    presenceData.smallImageKey = "pen";
+    presenceData.smallImageText = "Ricerca per autore";
+    presenceData.details = "Sfogliando i contenuti dell'autore:";
+    presenceData.state = searchParams.get("author");
   } else if (document.location.href.includes("artist=")) {
     /* Ricerca per artista - Search by artist */
-    const artist = searchParams.get("artist");
-    data.smallImageKey = "brush";
-    data.smallImageText = "Ricerca per artista";
-    data.details = "Sfogliando i contenuti dell'artista:";
-    data.state = artist;
+    presenceData.smallImageKey = "brush";
+    presenceData.smallImageText = "Ricerca per artista";
+    presenceData.details = "Sfogliando i contenuti dell'artista:";
+    presenceData.state = searchParams.get("artist");
   } else if (document.location.href.includes("genre=")) {
     /* Ricerca per genere - Search by genre */
-    const rawgenre = searchParams.get("genre"),
-      words = rawgenre.split(" ");
+    const words = searchParams.get("genre").split(" ");
     for (let i = 0; i < words.length; i++)
       words[i] = words[i][0].toUpperCase() + words[i].substr(1);
 
-    const genre = words.join(" ");
-
-    data.smallImageKey = "tags";
-    data.smallImageText = "Ricerca per genere";
-    data.details = "Sfogliando i contenuti del genere:";
-    data.state = genre;
+    presenceData.smallImageKey = "tags";
+    presenceData.smallImageText = "Ricerca per genere";
+    presenceData.details = "Sfogliando i contenuti del genere:";
+    presenceData.state = words.join(" ");
   } else if (document.location.href.includes("year=")) {
     /* Ricerca per anno - Search by year of release */
-    const year = searchParams.get("year");
-    data.smallImageKey = "calendar2";
-    data.smallImageText = "Ricerca per anno";
-    data.details = "Sfogliando i contenuti dell'anno:";
-    data.state = year;
+    presenceData.smallImageKey = "calendar2";
+    presenceData.smallImageText = "Ricerca per anno";
+    presenceData.details = "Sfogliando i contenuti dell'anno:";
+    presenceData.state = searchParams.get("year");
   } else if (document.location.href.includes("status=")) {
     /* Ricerca per stato - Search by status */
     const statusQuery = searchParams.get("status");
-    data.smallImageKey = "slash";
-    data.smallImageText = "Ricerca per stato";
-    data.details = "Sfogliando i contenuti:";
+    presenceData.smallImageKey = "slash";
+    presenceData.smallImageText = "Ricerca per stato";
+    presenceData.details = "Sfogliando i contenuti:";
     let status;
 
     if (statusQuery === "dropped") status = "Droppati";
@@ -91,22 +85,21 @@ presence.on("UpdateData", async () => {
     else if (statusQuery === "paused") status = "In pausa";
     else if (statusQuery === "canceled") status = "Cancellati";
 
-    data.state = status;
+    presenceData.state = status;
   } else if (document.location.href.includes("type=")) {
     /* Ricerca per tipo - Search by type/format */
-    const rawtype = searchParams.get("type"),
-      type = rawtype[0].toUpperCase() + rawtype.substring(1);
+    const rawtype = searchParams.get("type");
 
-    data.smallImageKey = "file3";
-    data.smallImageText = "Ricerca per formato";
-    data.details = "Sfogliando i contenuti in formato:";
-    data.state = type;
+    presenceData.smallImageKey = "file3";
+    presenceData.smallImageText = "Ricerca per formato";
+    presenceData.details = "Sfogliando i contenuti in formato:";
+    presenceData.state = rawtype[0].toUpperCase() + rawtype.substring(1);
   } else if (document.location.href.includes("sort=")) {
     /* Ricerca per ordinamento - Order by */
     const sortQuery = searchParams.get("sort");
-    data.smallImageKey = "sort";
-    data.smallImageText = "Ricerca per ordinamento";
-    data.details = "Sfogliando i contenuti:";
+    presenceData.smallImageKey = "sort";
+    presenceData.smallImageText = "Ricerca per ordinamento";
+    presenceData.details = "Sfogliando i contenuti:";
     let query;
 
     if (sortQuery === "a z") query = "Ordinati dalla A alla Z";
@@ -116,13 +109,13 @@ presence.on("UpdateData", async () => {
     else if (sortQuery === "newest") query = "Più recenti";
     else if (sortQuery === "oldest") query = "Meno recenti";
 
-    data.state = query;
+    presenceData.state = query;
   } else if (document.location.href.includes("archive")) {
     /* Pagina principale - Main page */
-    data.smallImageKey = "archive";
-    data.smallImageText = "Archivio";
-    data.details = "Nell'archivio";
-    data.state = "Sfogliando...";
+    presenceData.smallImageKey = "archive";
+    presenceData.smallImageText = "Archivio";
+    presenceData.details = "Nell'archivio";
+    presenceData.state = "Sfogliando...";
   } else if (document.location.href.includes("/manga/")) {
     /* ----- LETTURA - READING ----- */
     /* Nell'e-reader - In the e-reader */
@@ -133,22 +126,21 @@ presence.on("UpdateData", async () => {
           .split("Capitolo"),
         [, chapter0n] = document.title
           .replace(" Scan ITA - MangaWorld", "")
-          .split("Capitolo"),
-        [, , , , , , page] = document.location.pathname.split("/"),
-        chapterInt = parseInt(chapter0n, 10);
-
+          .split("Capitolo");
       let chapter = chapter0n;
 
-      if (chapterInt < 10) chapter = chapter0n.replace("0", "");
+      if (parseInt(chapter0n, 10) < 10) chapter = chapter0n.replace("0", "");
 
       let chapterString = "Capitolo";
       if (!chapter0n) (chapterString = "Oneshot"), (chapter = "");
 
-      data.smallImageKey = "book3";
-      data.smallImageText = mangaName;
-      data.details = `Leggendo: ${mangaName}`;
-      data.state = `${chapterString + chapter} | Pagina ${page}`;
-      data.buttons = [
+      presenceData.smallImageKey = "book3";
+      presenceData.smallImageText = mangaName;
+      presenceData.details = `Leggendo: ${mangaName}`;
+      presenceData.state = `${chapterString + chapter} | Pagina ${
+        document.location.pathname.split("/")[6]
+      }`;
+      presenceData.buttons = [
         {
           label: "Leggilo anche tu!",
           url: document.location.href.replace(/.$/, "1")
@@ -161,11 +153,11 @@ presence.on("UpdateData", async () => {
     } else {
       /* Nella pagina principale del manga - In the manga's main page */
       const pageName = document.title.replace(" Scan ITA - MangaWorld", "");
-      data.smallImageKey = "eye";
-      data.smallImageText = pageName;
-      data.details = "Visualizzando la pagina di:";
-      data.state = pageName;
-      data.buttons = [
+      presenceData.smallImageKey = "eye";
+      presenceData.smallImageText = pageName;
+      presenceData.details = "Visualizzando la pagina di:";
+      presenceData.state = pageName;
+      presenceData.buttons = [
         {
           label: "Vai alla pagina dell'opera!",
           url: document.location.href
@@ -175,13 +167,13 @@ presence.on("UpdateData", async () => {
   } else {
     /* In qualunque altra pagina - In any other page */
     const pageName = document.title.replace("MangaWorld - ", "");
-    data.smallImageKey = "eye";
-    data.smallImageText = `"${pageName}"`;
-    data.details = "Visualizzando la pagina:";
-    data.state = `"${pageName}"`;
+    presenceData.smallImageKey = "eye";
+    presenceData.smallImageText = `"${pageName}"`;
+    presenceData.details = "Visualizzando la pagina:";
+    presenceData.state = `"${pageName}"`;
   }
-  if (data.details) {
-    data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
+  if (presenceData.details) {
+    presenceData.startTimestamp = browsingTimestamp;
+    presence.setActivity(presenceData);
   }
 });

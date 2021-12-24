@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "644645903973482536"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement, title: HTMLElement, language: string;
 
@@ -90,10 +90,10 @@ presence.on("UpdateData", async () => {
     document.location.pathname === "/" ||
     document.location.pathname.includes("home/")
   ) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = getTranslation("HomePage");
   } else if (document.location.pathname.includes(".html")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     user = document.querySelector(
       ".h-container.h-product-title.topSection.h-align-left > div:nth-child(2) > h1"
     );
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
       "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
     ) !== null
   ) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     user = document.querySelector(
       "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
     );
@@ -118,28 +118,26 @@ presence.on("UpdateData", async () => {
       "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul"
     ) !== null
   ) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     user = document.querySelector(
       "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul"
     );
     presenceData.details = getTranslation("CategoryView");
     presenceData.state = user.textContent;
   } else if (document.location.pathname.includes("/cart/")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = getTranslation("Cart");
   } else if (document.location.pathname.includes("/wishlist/")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = getTranslation("Wishlist");
   } else if (document.location.pathname.includes("/myaccount/")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = getTranslation("AccountSettings");
   } else if (document.location.pathname.includes("/faq/")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = getTranslation("FAQ");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

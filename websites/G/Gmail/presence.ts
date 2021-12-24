@@ -8,10 +8,9 @@ presence.on("UpdateData", () => {
       largeImageKey: "logo",
       startTimestamp: elapsed
     },
-    path = window.location.href,
-    emailCheck = window.location.href.split("/").length === 7 ? false : true;
+    path = window.location.href;
 
-  if (emailCheck) {
+  if (window.location.href.split("/").length === 7) {
     if (path.endsWith("#category/social"))
       presenceData.details = "Viewing Social Mails";
     else if (path.endsWith("#category/updates"))
@@ -21,15 +20,19 @@ presence.on("UpdateData", () => {
     else if (path.endsWith("#category/promotions"))
       presenceData.details = "Viewing Promotions Mails";
     else if (path.match("/#label/")) {
-      const labelname = document.querySelector("head > title").textContent,
-        email = labelname.match(
-          /([a-zA-Z][\w.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z.]*[a-zA-Z])/
-        );
+      const labelname = document.querySelector("head > title").textContent;
       presenceData.details = "In the Label: ";
       presenceData.state = labelname
         .replace('"', "")
         .split('" - ')[0]
-        .replace(` - ${email[0]} - Gmail`, "");
+        .replace(
+          ` - ${
+            labelname.match(
+              /([a-zA-Z][\w.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z.]*[a-zA-Z])/
+            )[0]
+          } - Gmail`,
+          ""
+        );
     } else if (path.endsWith("/#settings/general"))
       presenceData.details = "In the General settings";
     else if (path.endsWith("/#settings/labels"))
@@ -75,8 +78,6 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing Social Mails";
   else presenceData.details = "Viewing Mail";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

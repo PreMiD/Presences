@@ -35,33 +35,34 @@ presence.on("UpdateData", async () => {
     seller = document.querySelector(
       "#productResult > div > div > div > div.col.lg-1.md-1.sm-1.filter-content > section > div > div.title-wrapper.with-bg.for-desktop.brand > h1"
     ) as HTMLElement,
-    data: PresenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "hb-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
     };
 
   if (productName && productName.textContent !== "") {
-    data.details = "Bir ürüne göz atıyor:";
-    data.state = `${productName.textContent.trim()}${
+    presenceData.details = "Bir ürüne göz atıyor:";
+    presenceData.state = `${productName.textContent.trim()}${
       price ? ` - ${price} TL` : ""
     }`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
-    data.details = "Bir sayfaya göz atıyor:";
-    data.state = pages[page] || pages[page.slice(0, -1)];
+    presenceData.details = "Bir sayfaya göz atıyor:";
+    presenceData.state = pages[page] || pages[page.slice(0, -1)];
   } else if (page.includes("/ara")) {
-    data.details = "Bir şey arıyor:";
-    data.state =
+    presenceData.details = "Bir şey arıyor:";
+    presenceData.state =
       document.title && document.title.includes(" - Hepsiburada")
         ? document.title.replace(" - Hepsiburada", "")
         : "";
-    data.smallImageKey = "search";
+    presenceData.smallImageKey = "search";
   } else if (seller && seller.textContent !== "") {
-    data.details = "Bir mağazaya göz atıyor:";
-    data.state = seller.textContent.trim();
+    presenceData.details = "Bir mağazaya göz atıyor:";
+    presenceData.state = seller.textContent.trim();
   } else {
-    data.details = "Bir sayfaya göz atıyor:";
-    data.state = "Ana Sayfa";
+    presenceData.details = "Bir sayfaya göz atıyor:";
+    presenceData.state = "Ana Sayfa";
   }
 
-  if (data.details && data.state) presence.setActivity(data);
+  if (presenceData.details && presenceData.state)
+    presence.setActivity(presenceData);
 });

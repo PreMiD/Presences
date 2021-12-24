@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const { pathname, origin } = window.location,
-    data: PresenceData = {
+    presenceData: PresenceData = {
       startTimestamp: elapsed,
       largeImageKey: "logo"
     };
@@ -14,89 +14,76 @@ presence.on("UpdateData", () => {
   if (
     document.querySelector(".search-main-menu").classList.contains("active")
   ) {
-    data.details = "Searching:";
-    data.state = (
+    presenceData.details = "Searching:";
+    presenceData.state = (
       document.querySelector(".manga-search-field") as HTMLInputElement
-    ).value;
-    data.smallImageKey = "search";
-  } else {
-    if (/^\/$/.test(pathname)) data.details = "Viewing Home Page";
-    else if (/^\/home1\/?$/.test(pathname)) {
-      // Counting comics
-      comics = document.querySelectorAll(
-        ".page-listing-item .row .col-4"
-      ).length;
-      data.details = "Viewing Comic List";
-      data.state = `📋 ${comics.toString()} comics found`;
-    } else if (/^\/all-series\/novels+\/?$/.test(pathname)) {
-      // Counting novels
-      comics = document.querySelectorAll(
-        ".page-listing-item .row .col-6"
-      ).length;
-      data.details = "Viewing Novel List";
-      data.state = `📋 ${comics.toString()} novels found`;
-    } else if (/^\/all-series\/comics\/manhwas\/?$/.test(pathname)) {
-      // Counting manhwa
-      comics = document.querySelectorAll(
-        ".page-listing-item .row .col-6"
-      ).length;
-      data.details = "Viewing Manhwa List";
-      data.state = `📋 ${comics.toString()} manhwa found`;
-    } else if (/^\/all-series\/comics\/manhuas\/?$/.test(pathname)) {
-      // Counting manhua
-      comics = document.querySelectorAll(
-        ".page-listing-item .row .col-4"
-      ).length;
-      data.details = "Viewing Manhua List";
-      data.state = `📋 ${comics.toString()} manhua found`;
-    } else if (/^\/series\/[0-9a-z-]+\/?$/i.test(pathname)) {
-      data.details = "Viewing Comic";
-      data.state = document.querySelector(".post-title h1").textContent;
-      data.smallImageKey = "view";
-      data.buttons = [
-        {
-          label: "Visit Comic Page",
-          url: origin + pathname
-        }
-      ];
-    } else if (
-      /^\/series\/[0-9a-z-]+\/+(chapter|ch)-[0-9]+\/?$/i.test(pathname)
-    ) {
-      const comicLink = (
-          document.querySelector(
+    ).textContent;
+    presenceData.smallImageKey = "search";
+  } else if (/^\/$/.test(pathname)) presenceData.details = "Viewing Home Page";
+  else if (/^\/home1\/?$/.test(pathname)) {
+    // Counting comics
+    comics = document.querySelectorAll(".page-listing-item .row .col-4").length;
+    presenceData.details = "Viewing Comic List";
+    presenceData.state = `📋 ${comics.toString()} comics found`;
+  } else if (/^\/all-series\/novels+\/?$/.test(pathname)) {
+    // Counting novels
+    comics = document.querySelectorAll(".page-listing-item .row .col-6").length;
+    presenceData.details = "Viewing Novel List";
+    presenceData.state = `📋 ${comics.toString()} novels found`;
+  } else if (/^\/all-series\/comics\/manhwas\/?$/.test(pathname)) {
+    // Counting manhwa
+    comics = document.querySelectorAll(".page-listing-item .row .col-6").length;
+    presenceData.details = "Viewing Manhwa List";
+    presenceData.state = `📋 ${comics.toString()} manhwa found`;
+  } else if (/^\/all-series\/comics\/manhuas\/?$/.test(pathname)) {
+    // Counting manhua
+    comics = document.querySelectorAll(".page-listing-item .row .col-4").length;
+    presenceData.details = "Viewing Manhua List";
+    presenceData.state = `📋 ${comics.toString()} manhua found`;
+  } else if (/^\/series\/[0-9a-z-]+\/?$/i.test(pathname)) {
+    presenceData.details = "Viewing Comic";
+    presenceData.state = document.querySelector(".post-title h1").textContent;
+    presenceData.smallImageKey = "view";
+    presenceData.buttons = [
+      {
+        label: "Visit Comic Page",
+        url: origin + pathname
+      }
+    ];
+  } else if (
+    /^\/series\/[0-9a-z-]+\/+(chapter|ch)-[0-9]+\/?$/i.test(pathname)
+  ) {
+    let progress =
+      (document.documentElement.scrollTop /
+        (document.querySelector(".read-container").scrollHeight -
+          window.innerHeight)) *
+      100;
+    progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
+
+    presenceData.details = document.querySelector(
+      "ol.breadcrumb li:nth-child(3)"
+    ).textContent;
+    presenceData.state = `📖 ${
+      document.querySelector("ol.breadcrumb li:nth-child(4)").textContent
+    } 🔸 ${progress}%`;
+    presenceData.smallImageKey = "read";
+    presenceData.buttons = [
+      {
+        label: "Visit Comic Page",
+        url:
+          origin +
+          document.querySelector<HTMLAnchorElement>(
             "ol.breadcrumb li:nth-child(3) a"
-          ) as HTMLAnchorElement
-        ).href,
-        chapter = document.querySelector(
-          "ol.breadcrumb li:nth-child(4)"
-        ).textContent;
-
-      let progress =
-        (document.documentElement.scrollTop /
-          (document.querySelector(".read-container").scrollHeight -
-            window.innerHeight)) *
-        100;
-      progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
-
-      data.details = document.querySelector(
-        "ol.breadcrumb li:nth-child(3)"
-      ).textContent;
-      data.state = `📖 ${chapter} 🔸 ${progress}%`;
-      data.smallImageKey = "read";
-      data.buttons = [
-        {
-          label: "Visit Comic Page",
-          url: origin + comicLink
-        },
-        {
-          label: "Visit Chapter",
-          url: origin + pathname
-        }
-      ];
-    } else {
-      data.details = "Browsing Reaper Scans";
-      data.state = document.title;
-    }
+          ).href
+      },
+      {
+        label: "Visit Chapter",
+        url: origin + pathname
+      }
+    ];
+  } else {
+    presenceData.details = "Browsing Reaper Scans";
+    presenceData.state = document.title;
   }
-  if (data.details) presence.setActivity(data);
+  if (presenceData.details) presence.setActivity(presenceData);
 });

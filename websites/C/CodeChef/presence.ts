@@ -5,12 +5,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: timeElapsed
-    },
-    domain = location.host.split(".");
+    largeImageKey: "logo",
+    startTimestamp: timeElapsed
+  };
 
-  switch (domain[0]) {
+  switch (location.host.split(".")[0]) {
     case "blog": {
       // ? https://blog.codechef.com
       presenceData.details = "Viewing Blogs";
@@ -36,10 +35,8 @@ presence.on("UpdateData", async () => {
       // ? https://discuss.codechef.com
       presenceData.details = "Viewing Discussions";
       if (location.pathname.split("/")[1] === "t") {
-        const discussionTopicHeading: string =
-          document.querySelector(".fancy-title").textContent;
         presenceData.details = "Reading Discussions:";
-        presenceData.state = discussionTopicHeading;
+        presenceData.state = document.querySelector(".fancy-title").textContent;
         presenceData.smallImageKey = "reading";
       }
       break;
@@ -52,21 +49,18 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing:";
         presenceData.state = "Problems By Tag Name";
       } else if (location.pathname.split("/").includes("problems")) {
-        const contestName: string =
-            document.querySelector(".breadcrumbs").lastElementChild.textContent,
-          [problemName] = document.title.split("|");
-        presenceData.details = contestName;
-        presenceData.state = `Solving: ${problemName}`;
+        presenceData.details =
+          document.querySelector(".breadcrumbs").lastElementChild.textContent;
+        presenceData.state = `Solving: ${document.title.split("|")[0]}`;
         presenceData.smallImageKey = "code";
       } else {
         // ? https://codechef.com
         switch (location.pathname.split("/")[1]) {
           case "ide": {
-            const compilerName: string =
-              document.querySelector(".chosen-single").childNodes[0]
-                .textContent;
             presenceData.details = "Using IDE";
-            presenceData.state = `Editing ${compilerName} file`;
+            presenceData.state = `Editing ${
+              document.querySelector(".chosen-single").childNodes[0].textContent
+            } file`;
             presenceData.smallImageKey = "code";
             break;
           }
@@ -90,10 +84,9 @@ presence.on("UpdateData", async () => {
           }
 
           case "certification": {
-            const pageHeading: string =
-              document.querySelector(".page-title").childNodes[3].textContent;
             presenceData.details = "Viewing Certification: ";
-            presenceData.state = pageHeading;
+            presenceData.state =
+              document.querySelector(".page-title").childNodes[3].textContent;
             break;
           }
 
@@ -109,19 +102,17 @@ presence.on("UpdateData", async () => {
           }
 
           case "wiki": {
-            const wikiTopicHeading: string =
-              document.querySelector(".ns-heading").textContent;
             presenceData.details = "Viewing Wiki:";
-            presenceData.state = wikiTopicHeading;
+            presenceData.state =
+              document.querySelector(".ns-heading").textContent;
             break;
           }
 
           case "users": {
-            const displayName: string =
-                document.querySelector("header > h2").textContent,
-              [userName] = document.title.split("|");
             presenceData.details = "Viewing Profile:";
-            presenceData.state = `${userName} (${displayName})`;
+            presenceData.state = `${document.title.split("|")[0]} (${
+              document.querySelector("header > h2").textContent
+            })`;
             break;
           }
         }
@@ -129,8 +120,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

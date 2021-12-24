@@ -401,14 +401,12 @@ presence.on("UpdateData", async () => {
                   }
                 }
               }
-            } else {
-              if (presenceSetting.if.k) {
-                if (presenceSetting.if.delete && !presenceSetting.if.v)
-                  delete data.presenceData[presenceSetting.uses];
-                else if (presenceSetting.if.v) {
-                  data.presenceData[presenceSetting.uses as "details"] =
-                    presenceSetting.if.v;
-                }
+            } else if (presenceSetting.if.k) {
+              if (presenceSetting.if.delete && !presenceSetting.if.v)
+                delete data.presenceData[presenceSetting.uses];
+              else if (presenceSetting.if.v) {
+                data.presenceData[presenceSetting.uses as "details"] =
+                  presenceSetting.if.v;
               }
             }
           }
@@ -422,8 +420,6 @@ presence.on("UpdateData", async () => {
       delete data.presenceData[x as "details"];
   }
 
-  if (!data.presenceData.details) {
-    presence.setActivity();
-    presence.setTrayTitle();
-  } else presence.setActivity(data.presenceData);
+  if (!data.presenceData.details) presence.setActivity();
+  else presence.setActivity(data.presenceData);
 });

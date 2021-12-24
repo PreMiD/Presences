@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Tellen",
     "id": "535214819520020510"
@@ -22,15 +22,15 @@
     "www.aranzulla.it",
     "aranzulla.it"
   ],
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/P47inut.png",
   "thumbnail": "https://i.imgur.com/gZ1Vwml.png",
   "color": "#EE701B",
+  "category": "other",
   "tags": [
     "aranzulla",
     "salvatore-aranzulla",
     "tutorial",
     "guide"
-  ],
-  "category": "other"
+  ]
 }

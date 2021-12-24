@@ -6,12 +6,9 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     search: "presence.activity.searching"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let iFrameVideo: boolean,
-  currentTime: number,
-  duration: number,
-  playback: boolean;
+let iFrameVideo: boolean, currentTime: number, duration: number;
 
 interface IFrameData {
   iframeVideo: {
@@ -22,9 +19,7 @@ interface IFrameData {
 }
 
 presence.on("iFrameData", (data: IFrameData) => {
-  playback = data.iframeVideo.dur !== null ? true : false;
-
-  if (playback) {
+  if (data.iframeVideo.dur) {
     ({ iFrameVideo } = data.iframeVideo);
     currentTime = data.iframeVideo.currTime;
     duration = data.iframeVideo.dur;
@@ -38,12 +33,12 @@ presence.on("UpdateData", async () => {
 
   let title;
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname.includes("/serie")) {
     title = document.querySelector("#lp > section > h2");
 
-    if (title !== null) {
+    if (title) {
       const season = document.querySelector(
           "#seasons > div > div:nth-child(2) > div > div > .owl-item.active > .item.active"
         ),
@@ -54,14 +49,14 @@ presence.on("UpdateData", async () => {
           "#episodes > div > div > div > div > .owl-item.active > div > .poster.active > .title"
         );
 
-      if (season !== null) {
-        if (episodeNumber !== null && episodeName !== null) {
+      if (season) {
+        if (episodeNumber && episodeName) {
           presenceData.details = title.textContent;
           presenceData.state = `S${season.textContent}E${
             episodeNumber.textContent.split(".")[0]
           } - ${episodeName.textContent.split(".")[1]}`;
 
-          if (iFrameVideo === true && !isNaN(duration)) {
+          if (iFrameVideo && !isNaN(duration)) {
             const [startTimestamp, endTimestamp] = presence.getTimestamps(
               Math.floor(currentTime),
               Math.floor(duration)
@@ -85,17 +80,17 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "Navegando pelas séries...";
   } else if (document.location.pathname.includes("/filme")) {
     title = document.querySelector("#ms > div.wrap > section > h2");
-    if (title !== null) {
+    if (title) {
       if (
         document.querySelector("#watchMovieButton > div.tit").textContent ===
         "audio"
       ) {
-        const year = document.querySelector(".year").textContent,
-          rating = document.querySelector(".rating").textContent;
         presenceData.details = title.textContent;
-        presenceData.state = `${year} - ${rating}`;
+        presenceData.state = `${
+          document.querySelector(".year").textContent
+        } - ${document.querySelector(".rating").textContent}`;
 
-        if (iFrameVideo === true && !isNaN(duration)) {
+        if (iFrameVideo && !isNaN(duration)) {
           const [startTimestamp, endTimestamp] = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
@@ -131,8 +126,6 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/")
     presenceData.details = "Navegando...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

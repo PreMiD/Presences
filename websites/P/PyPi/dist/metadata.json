@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Jake.",
     "id": "480407581085532180"
@@ -10,15 +10,15 @@
     "nl": "De Python Package Index (PyPI) is een opslagplaats van software voor de programmeertaal Python."
   },
   "url": "pypi.org",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "logo": "https://i.imgur.com/PWiUxFD.png",
   "thumbnail": "https://i.imgur.com/asXjia1.jpg",
   "color": "#ebcc34",
+  "category": "other",
   "tags": [
     "developing",
     "modules",
     "packages",
     "coding"
-  ],
-  "category": "other"
+  ]
 }

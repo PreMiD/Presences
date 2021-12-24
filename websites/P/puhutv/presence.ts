@@ -14,13 +14,14 @@ presence.on("UpdateData", async () => {
   if (
     document.location.pathname === "/" ||
     !document.location.pathname ||
-    (category && category.innerHTML !== "")
+    (category && category.textContent !== "")
   ) {
     presence.setActivity({
       largeImageKey: "puhu-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Geziniyor...",
-      state: category && category.innerHTML ? category.innerHTML : "Ana Sayfa"
+      state:
+        category && category.textContent ? category.textContent : "Ana Sayfa"
     });
   } else {
     const video = document.querySelector(
@@ -41,18 +42,18 @@ presence.on("UpdateData", async () => {
                 .querySelector(
                   "#widget_video_detail_3 > section.hero.hero--video-detay.hero--subpages > header > div > div.video-detay-header-content > h1"
                 )
-                .innerHTML.replace(`${title.outerHTML} `, "")
+                .textContent.replace(`${title.outerHTML} `, "")
             : null,
         timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
 
-      if (!title || title.innerHTML === "") return;
+      if (!title || title.textContent === "") return;
 
-      const data: PresenceData = {
+      const presenceData: PresenceData = {
         largeImageKey: "puhu-logo",
-        details: title.innerHTML,
+        details: title.textContent,
         state:
           episode !== ""
             ? episode
@@ -64,7 +65,7 @@ presence.on("UpdateData", async () => {
                       .querySelector<HTMLElement>(
                         "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
                       )
-                      .innerText.replace("\n", ": ")
+                      .textContent.replace("\n", ": ")
                   : null
               }`,
         smallImageKey: video.paused ? "paused" : "playing",
@@ -74,14 +75,14 @@ presence.on("UpdateData", async () => {
       };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
-        [data.startTimestamp, data.endTimestamp] = timestamps;
+        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
-      presence.setActivity(data);
+      presence.setActivity(presenceData);
     }
   }
 });

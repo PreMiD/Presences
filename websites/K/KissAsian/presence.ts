@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement;
 
@@ -16,7 +16,7 @@ presence.on("iFrameData", (data: { iframeVideo: HTMLVideoElement }) => {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "ka",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/")
@@ -54,8 +54,6 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("AreYouHuman"))
     presenceData.details = "Completing a captcha...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

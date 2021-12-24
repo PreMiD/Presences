@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -12,15 +12,15 @@
     "ga_IE": "Is suíomh Gréasáin Brasaíle é Vizer chun féachaint ar scannáin / sraitheanna ar líne saor in aisce! Déanann Vizer innéacsú ar ábhar a fhaightear ar an ngréasán go huathoibríoch ag úsáid Robots agus Intleacht Shaorga."
   },
   "url": "vizer.tv",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/Hi3hvJk.png",
   "thumbnail": "https://i.imgur.com/vDiAD3L.png",
   "color": "#fba0a8",
+  "category": "videos",
   "tags": [
     "series",
     "anime",
     "movies"
   ],
-  "category": "videos",
   "iframe": true
 }

@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "860146992284958762"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
   presenceData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 const updateCallback = {
     _function: null as () => void,
@@ -28,7 +28,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -206,7 +206,7 @@ const updateCallback = {
             )
           ]
             .slice(1)
-            .map((element) => element.textContent.trim())
+            .map(element => element.textContent.trim())
             .join(" > ");
         } else {
           presenceData.details = "Viewing a project";
@@ -217,7 +217,7 @@ const updateCallback = {
           ];
           presenceData.state = crumbs
             .slice(1, crumbs.length - 1)
-            .map((element) => element.textContent.trim())
+            .map(element => element.textContent.trim())
             .join(" > ");
         }
       } else if (currentPath[0] === "diffusion") {
@@ -306,7 +306,7 @@ const updateCallback = {
           )
         ]
           .slice(1)
-          .map((element) => element.textContent.trim())
+          .map(element => element.textContent.trim())
           .join(" > ");
       }
     } else if (currentURL.hostname === "xtools.wmflabs.org") {
@@ -368,8 +368,7 @@ const updateCallback = {
         actionResult = (): string =>
           getURLParam("action") || getURLParam("veaction") || mwConfig.wgAction,
         titleFromURL = (): string => {
-          const raw = mwConfig.wgPageName;
-          return decodeURIComponent(raw.replace(/_/g, " "));
+          return decodeURIComponent(mwConfig.wgPageName.replace(/_/g, " "));
         },
         title = document.querySelector("h1")
           ? document.querySelector("h1").textContent
@@ -482,20 +481,18 @@ const updateCallback = {
             presenceData.details = "Editing a page";
           else presenceData.details = namespaceDetails();
         };
+      } else if (actionResult() === "edit") {
+        presenceData.details = document.querySelector("#ca-edit")
+          ? "Editing a page"
+          : "Viewing source";
+        presenceData.state = titleFromURL();
       } else {
-        if (actionResult() === "edit") {
-          presenceData.details = document.querySelector("#ca-edit")
-            ? "Editing a page"
-            : "Viewing source";
-          presenceData.state = titleFromURL();
-        } else {
-          presenceData.details = namespaceDetails();
-          presenceData.state = `${
-            title.toLowerCase() === titleFromURL().toLowerCase()
-              ? `${title}`
-              : `${title} (${titleFromURL()})`
-          }`;
-        }
+        presenceData.details = namespaceDetails();
+        presenceData.state = `${
+          title.toLowerCase() === titleFromURL().toLowerCase()
+            ? `${title}`
+            : `${title} (${titleFromURL()})`
+        }`;
       }
 
       if (presenceData.state) presenceData.state += ` | ${siteName}`;

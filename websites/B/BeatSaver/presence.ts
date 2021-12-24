@@ -1,14 +1,14 @@
 ﻿const presence = new Presence({
     clientId: "837997079208525835"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("time"),
     buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (document.location.href.includes("/?q=")) {
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
       document.querySelector("input.form-control") as HTMLInputElement
     ).value;
   } else if (document.location.pathname.includes("/maps/")) {
-    if (document.querySelector("a[class~='active']") !== null) {
+    if (document.querySelector("a[class~='active']")) {
       presenceData.smallImageKey =
         (
           document
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     if (
       document
         .getElementsByClassName("badge badge-pill badge-danger mr-2")
-        .item(0) !== null
+        .item(0)
     ) {
       presenceData.smallImageKey = "showauto";
       presenceData.smallImageText = "Made by a bot";

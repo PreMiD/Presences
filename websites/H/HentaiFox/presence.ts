@@ -4,7 +4,7 @@ const presence = new Presence({
 
 let lastPlaybackState = null,
   reading,
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   title: HTMLElement,
   title2: string,
   tabTitle: string,
@@ -22,19 +22,18 @@ let lastPlaybackState = null,
   artist: HTMLElement;
 
 const pattern = "- Page",
-  searchURL = new URL(document.location.href),
-  searchResult = searchURL.searchParams.get("q"),
+  searchResult = new URL(document.location.href).searchParams.get("q"),
   truncateAfter = function (str: string, pattern: string): string {
     return str.slice(0, str.indexOf(pattern));
   };
 
 if (lastPlaybackState !== reading) {
   lastPlaybackState = reading;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "largeimage"
   };
 
@@ -66,9 +65,9 @@ presence.on("UpdateData", async () => {
       "ul.pagination > li.page-item.active > a.page-link"
     );
 
-    data.details = "Home";
-    data.state = `Page: ${homeCurrentPage.innerText}`;
-    data.startTimestamp = browsingStamp;
+    presenceData.details = "Home";
+    presenceData.state = `Page: ${homeCurrentPage.textContent}`;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (
     document.location.pathname.includes("/gallery/") ||
     document.location.pathname.includes("/g/")
@@ -84,143 +83,141 @@ presence.on("UpdateData", async () => {
 
       title2 = truncateAfter(tabTitle, pattern);
 
-      data.details = `Reading: ${title2}`;
+      presenceData.details = `Reading: ${title2}`;
 
-      data.state = `Current page: ${currentPage.innerText}/${pageNumber.innerText}`;
+      presenceData.state = `Current page: ${currentPage.textContent}/${pageNumber.textContent}`;
 
-      data.startTimestamp = browsingStamp;
-    } else if (title.innerText.length > 0) {
-      if (title.innerText.length > 128)
-        data.state = "Title longer than 128 characters.";
-      else data.state = title.innerText;
+      presenceData.startTimestamp = browsingTimestamp;
+    } else if (title.textContent.length > 0) {
+      if (title.textContent.length > 128)
+        presenceData.state = "Title longer than 128 characters.";
+      else presenceData.state = title.textContent;
 
-      data.details = "Viewing a page: ";
+      presenceData.details = "Viewing a page: ";
 
-      data.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   } else if (document.location.pathname.includes("/tag/")) {
-    data.details = "Browsing tags...";
+    presenceData.details = "Browsing tags...";
 
     tags = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = `Tag: ${tags.innerText}`;
+    presenceData.state = `Tag: ${tags.textContent}`;
 
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/artist/")) {
-    data.details = "Browsing artists...";
+    presenceData.details = "Browsing artists...";
 
     artist = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = `Artist: ${artist.innerText}`;
+    presenceData.state = `Artist: ${artist.textContent}`;
 
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/character/")) {
-    data.details = "Browsing characters...";
+    presenceData.details = "Browsing characters...";
 
     character = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = `Character: ${character.innerText}`;
+    presenceData.state = `Character: ${character.textContent}`;
 
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/parody/")) {
-    data.details = "Browsing parodies...";
+    presenceData.details = "Browsing parodies...";
 
     parody = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = `Parody: ${parody.innerText}`;
+    presenceData.state = `Parody: ${parody.textContent}`;
 
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/group/")) {
-    data.details = "Browsing groups...";
+    presenceData.details = "Browsing groups...";
 
     groups = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = `Group: ${groups.innerText}`;
+    presenceData.state = `Group: ${groups.textContent}`;
 
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/language/")) {
-    data.details = "Browsing language...";
+    presenceData.details = "Browsing language...";
 
     language = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = `Language: ${language.innerText}`;
+    presenceData.state = `Language: ${language.textContent}`;
 
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/category/")) {
-    data.details = "Browsing category...";
+    presenceData.details = "Browsing category...";
 
     category = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = `Category: ${category.innerText}`;
+    presenceData.state = `Category: ${category.textContent}`;
 
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/parodies/")) {
-    data.details = "Browsing parodies...";
+    presenceData.details = "Browsing parodies...";
 
-    data.startTimestamp = browsingStamp;
-    delete data.state;
+    presenceData.startTimestamp = browsingTimestamp;
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/tags/")) {
-    data.details = "Browsing tags...";
+    presenceData.details = "Browsing tags...";
 
-    data.startTimestamp = browsingStamp;
-    delete data.state;
+    presenceData.startTimestamp = browsingTimestamp;
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/characters/")) {
-    data.details = "Browsing characters...";
+    presenceData.details = "Browsing characters...";
 
-    data.startTimestamp = browsingStamp;
-    delete data.state;
+    presenceData.startTimestamp = browsingTimestamp;
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/artists/")) {
-    data.details = "Browsing artists...";
+    presenceData.details = "Browsing artists...";
 
-    data.startTimestamp = browsingStamp;
-    delete data.state;
+    presenceData.startTimestamp = browsingTimestamp;
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/groups/")) {
-    data.details = "Browsing groups...";
+    presenceData.details = "Browsing groups...";
 
-    data.startTimestamp = browsingStamp;
-    delete data.state;
+    presenceData.startTimestamp = browsingTimestamp;
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/faplist/")) {
-    data.details = "Browsing faplist...";
+    presenceData.details = "Browsing faplist...";
 
-    data.startTimestamp = browsingStamp;
-    delete data.state;
+    presenceData.startTimestamp = browsingTimestamp;
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/contact/")) {
-    data.details = "Browsing contact...";
+    presenceData.details = "Browsing contact...";
 
-    data.startTimestamp = browsingStamp;
-    delete data.state;
+    presenceData.startTimestamp = browsingTimestamp;
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/profile/")) {
     profile = document.querySelector(
       "div.row.profile_block > div.pb_left > h2"
     );
 
-    data.details = "Viewing an profile:";
+    presenceData.details = "Viewing an profile:";
 
-    const ret = profile.innerText.replace("Welcome,", "");
+    presenceData.state = profile.textContent.replace("Welcome,", "");
 
-    data.state = ret;
-
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/search/")) {
-    data.details = "Searching for: ";
+    presenceData.details = "Searching for: ";
 
-    data.state = searchResult;
+    presenceData.state = searchResult;
 
-    data.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
   } else {
-    data.details = "Browsing...";
-    data.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing...";
+    presenceData.startTimestamp = browsingTimestamp;
 
-    delete data.state;
-    delete data.smallImageKey;
+    delete presenceData.state;
+    delete presenceData.smallImageKey;
   }
 
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

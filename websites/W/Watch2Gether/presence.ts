@@ -1,26 +1,22 @@
 const presence = new Presence({
     clientId: "863345026498428968"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { hostname, pathname } = document.location;
 
   if (hostname === "w2g.tv") {
     if (pathname === "/") presenceData.details = "At Homepage";
     else if (pathname.startsWith("/rooms/")) {
-      const paused = !!document.querySelector(
-          "div.w2g-player-menu.w2g-player > div.ui.inverted.tiny.menu > a > i.play"
-        ),
-        playerTime: NodeListOf<HTMLSpanElement> = document.querySelectorAll(
+      const playerTime = document.querySelectorAll<HTMLSpanElement>(
           "#player-time > span"
         ),
-        users = document.querySelectorAll("div.w2g-user-name").length,
-        invite: HTMLInputElement = document.querySelector(
+        invite = document.querySelector<HTMLInputElement>(
           "#w2g-top-inviteurl > input"
         ),
         chatMessages = [
@@ -35,20 +31,27 @@ presence.on("UpdateData", async () => {
         if (msg.querySelector(".w2g-chat-item-actions")) {
           const chatBubble: HTMLDivElement =
             msg.querySelector(".w2g-chat-bubble");
-          title = chatBubble.innerText.substring(
+          title = chatBubble.textContent.substring(
             0,
-            chatBubble.innerText.indexOf("\n")
+            chatBubble.textContent.indexOf("\n")
           );
           break;
         }
       }
 
       presenceData.details = `Watching ${title}`;
-      presenceData.state = `${users} users in the room`;
-      if (playerTime.length === 2 && !paused) {
+      presenceData.state = `${
+        document.querySelectorAll("div.w2g-user-name").length
+      } users in the room`;
+      if (
+        playerTime.length === 2 &&
+        !document.querySelector(
+          "div.w2g-player-menu.w2g-player > div.ui.inverted.tiny.menu > a > i.play"
+        )
+      ) {
         [, presenceData.endTimestamp] = presence.getTimestamps(
-          presence.timestampFromFormat(playerTime[0].innerText),
-          presence.timestampFromFormat(playerTime[1].innerText)
+          presence.timestampFromFormat(playerTime[0].textContent),
+          presence.timestampFromFormat(playerTime[1].textContent)
         );
       }
       if (invite) {
@@ -75,13 +78,13 @@ presence.on("UpdateData", async () => {
       const title: HTMLAnchorElement = document.querySelector("a.fancy-title");
       if (title) {
         presenceData.details = "Looking at thread";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
       }
     } else if (pathname.startsWith("/u/")) {
       const username: HTMLHeadingElement =
         document.querySelector("h1.full-name");
       if (username)
-        presenceData.details = `Looking at user ${username.innerText}`;
+        presenceData.details = `Looking at user ${username.textContent}`;
     } else {
       presenceData.details = `Looking at ${document.title.substring(
         0,
@@ -90,8 +93,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

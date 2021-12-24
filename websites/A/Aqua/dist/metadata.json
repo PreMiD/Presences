@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Ben",
     "id": "781285747058933790"
@@ -11,10 +11,11 @@
     "nl": "Een online radiostation gemaakt door de community voor de community."
   },
   "url": "itsaqua.net",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/dBqeZ3q.png",
   "thumbnail": "https://i.imgur.com/y1Uot2b.png",
   "color": "#2980b9",
+  "category": "music",
   "tags": [
     "radio",
     "aqua",
@@ -23,7 +24,6 @@
     "music",
     "discord"
   ],
-  "category": "music",
   "settings": [
     {
       "id": "changedetails",

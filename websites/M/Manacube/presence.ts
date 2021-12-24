@@ -1,16 +1,15 @@
 const presence = new Presence({
     clientId: "863866805184626708"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "manacube"
+    largeImageKey: "manacube",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname === "manacube.com")
     presenceData.details = "Forums";
 
@@ -18,7 +17,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
     );
-    if (title !== null) {
+    if (title) {
       title = document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
       );
@@ -29,7 +28,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
     );
-    if (title !== null) {
+    if (title) {
       title = document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
       );
@@ -52,7 +51,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1 > a > em"
     );
-    if (search !== null) {
+    if (search) {
       presenceData.details = "Forums, Searching For:";
       presenceData.state = search.textContent;
 
@@ -84,7 +83,7 @@ presence.on("UpdateData", async () => {
     if (
       document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
-      ) !== null
+      )
     ) {
       title = document.querySelector(
         "div.p-pageWrapper > div.p-body > div.p-body-inner > div.p-body-main > div.p-body-content > div.p-body-header > div.p-title > h1"
@@ -191,8 +190,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = `Viewing ${user.textContent}`;
     } else presenceData.details = "Bans, Browsing...";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

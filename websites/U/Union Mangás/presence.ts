@@ -32,10 +32,10 @@ presence.on("UpdateData", async () => {
         .getAttribute("style")
         .match(/display:\Wnone/)
     ) {
-      const mangaPage =
+      presenceData.state = `${mangaChapter} - Página ${
         (document.querySelector("#paginas") as HTMLSelectElement).options
-          .selectedIndex + 1;
-      presenceData.state = `${mangaChapter} - Página ${mangaPage}`;
+          .selectedIndex + 1
+      }`;
     } else presenceData.state = mangaChapter;
 
     presenceData.smallImageKey = "reading";

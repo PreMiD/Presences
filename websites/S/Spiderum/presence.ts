@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "721266123282317333"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname === "spiderum.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (
       document.location.pathname.includes("/bai-dang/viet-bai") ||
       document.location.pathname.includes("/bai-dang/viet-tiep/")
@@ -164,8 +164,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
