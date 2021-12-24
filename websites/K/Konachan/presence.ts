@@ -15,7 +15,6 @@ presence.on("UpdateData", () => {
   else if (path.startsWith("/post")) {
     presenceData.details = "Viewing an artwork";
     presenceData.state = shortTitle;
-
     presenceData.buttons = [
       { label: "View Artwork", url: document.location.href }
     ];
