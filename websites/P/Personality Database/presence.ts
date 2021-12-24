@@ -23,15 +23,21 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname.includes("/profile/")) {
     const profileName: string = (<HTMLElement>(
         document.querySelector(
-          "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-name"
+          "div.profile-description-basic > h1.profile-name"
         )
       ))?.innerText,
       profilePersonality: string = (<HTMLElement>(
         document.querySelector(
           "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-personality"
         )
-      ))?.innerText;
+      ))?.innerText,
+      profilePicture: string = (<HTMLElement>(
+        document.querySelector(
+          "div.profile-description > div.profile-description-info > div.profile-description-avatar img"
+        )
+      ))?.getAttribute("src");
 
+    if (profilePicture) presenceData.largeImageKey = profilePicture;
     presenceData.smallImageKey = "poll";
     presenceData.details = "Viewing:";
 
