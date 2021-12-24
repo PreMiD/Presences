@@ -149,7 +149,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Читает условия";
     presenceData.state = "размещения рекламы";
   } else if (path === "/account") {
-    if (document.querySelector("#admintools"))
+    if (document.location.hash === ("#admintools"))
       presenceData.details = "Что-то делает в админ-панели";
     else presenceData.details = "Редактирует свой аккаунт";
   } else if (path === "/sub")
