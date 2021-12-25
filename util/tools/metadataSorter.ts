@@ -5,8 +5,8 @@ import {
   readFileSync as readFile,
   writeFileSync as writeFile
 } from "node:fs";
+import axios from "axios"
 import { sync as glob } from "glob";
-import { latestMetadataSchema } from "./schemaUpdater";
 
 export function isValidJSON(text: string): boolean {
   try {
@@ -17,15 +17,14 @@ export function isValidJSON(text: string): boolean {
   }
 }
 
-export const read = (path: string): string =>
+const read = (path: string): string =>
     readFile(path, { encoding: "utf8" }),
   write = (path: string, code: Metadata): void =>
     writeFile(path, JSON.stringify(code, null, 2), {
       encoding: "utf8",
       flag: "w"
-    });
-
-export const missingMetadata: string[] = glob(
+    }),
+     missingMetadata: string[] = glob(
     "./{websites,programs}/*/*/"
   ).filter(pF => !exists(`${pF}/dist/metadata.json`)),
   allmeta: Array<[Metadata, string]> = glob(
@@ -37,7 +36,20 @@ export const missingMetadata: string[] = glob(
       console.error(`Error. ${pF} is not a valid metadata file, skipping...`);
       return null;
     }
-  });
+  }),
+latestMetadataSchema = async () => {
+  const latestVersion = (
+    (
+      await axios.get(
+        "https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
+      )
+    ).data as { name: string }[]
+  )
+    .filter(c => c.name.endsWith(".json"))
+    .map(c => c.name.match(/\d.\d/g)[0])
+    .pop() as `${number}.${number}`
+  return `https://schemas.premid.app/metadata/${latestVersion}` as const
+}
 
 if (missingMetadata?.length > 0)
   console.log(
