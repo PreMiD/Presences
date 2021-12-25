@@ -47,8 +47,7 @@ if (missingMetadata?.length > 0)
   );
 
 (async function () {
-  const latestSchema = await latestMetadataSchema()
-  console.log(latestSchema)
+  const latestSchema = await latestMetadataSchema();
   for (const metadata of allmeta) {
     if (metadata) {
       const newData: Metadata = {

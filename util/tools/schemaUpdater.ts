@@ -23,7 +23,8 @@ function isValidJSON(text: string): boolean {
   }
 }
 
-export const read = (path: string): string => readFile(path, { encoding: "utf8" }),
+export const read = (path: string): string =>
+    readFile(path, { encoding: "utf8" }),
   latestMetadataSchema = async () => {
     const latestVersion = (
       (
@@ -33,7 +34,8 @@ export const read = (path: string): string => readFile(path, { encoding: "utf8" 
       ).data as { name: string }[]
     )
       .filter(c => c.name.endsWith(".json"))
-      .map(c => c.name.match(/\d.\d/g)[0]).pop() as `${number}.${number}`;
+      .map(c => c.name.match(/\d.\d/g)[0])
+      .pop() as `${number}.${number}`;
     return `https://schemas.premid.app/metadata/${latestVersion}` as const;
   },
   write = (path: string, code: Metadata): void =>
@@ -83,7 +85,7 @@ export const read = (path: string): string => readFile(path, { encoding: "utf8" 
       }
     }
   }
-});
+})();
 
 interface Metadata {
   $schema: string;
