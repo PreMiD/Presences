@@ -2,8 +2,7 @@ const presence = new Presence({
     clientId: "612416330003382314"
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
-let imagesEnabled,
-  profileName,
+let profileName,
   profileTabs,
   profileAvatar,
   messageTab,
@@ -61,7 +60,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = profileName.textContent;
     }
 
-    if (imagesEnabled && profileAvatar) presenceData.largeImageKey = profileAvatar.src;
+    if (imagesEnabled && profileAvatar)
+      presenceData.largeImageKey = profileAvatar.src;
   } else if (document.location.pathname.includes("/my/messages")) {
     messageTab = <HTMLLIElement>(
       document.querySelector(
@@ -103,7 +103,9 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/groups") &&
     !document.location.pathname.includes("/search")
   ) {
-    groupName = <HTMLHeadingElement>document.querySelector(".group-title .group-name.text-overflow");
+    groupName = <HTMLHeadingElement>(
+      document.querySelector(".group-title .group-name.text-overflow")
+    );
 
     groupTab = <HTMLLIElement>(
       document.querySelector("#horizontal-tabs li.rbx-tab.active")
@@ -117,7 +119,8 @@ presence.on("UpdateData", async () => {
 
     presenceData.state = `Tab: ${groupTab.textContent}`;
 
-    if (imagesEnabled && groupImage) presenceData.largeImageKey = groupImage.src;
+    if (imagesEnabled && groupImage)
+      presenceData.largeImageKey = groupImage.src;
   } else if (document.location.pathname.includes("/search/groups")) {
     const searchResult = new URL(document.location.href).searchParams.get(
       "keyword"
