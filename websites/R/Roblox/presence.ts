@@ -2,12 +2,15 @@ const presence = new Presence({
     clientId: "612416330003382314"
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
-let profileName,
+let imagesEnabled,
+  profileName,
   profileTabs,
+  profileAvatar,
   messageTab,
   friendsTab,
   inventoryTab,
   groupName,
+  groupImage,
   groupTab,
   gameTab;
 
@@ -21,7 +24,8 @@ presence.on("UpdateData", async () => {
       document.querySelector(
         "div.game-calls-to-action > div.game-title-container > h2"
       )
-    );
+    ),
+    imagesEnabled = await presence.getSetting("images");
 
   if (document.location.pathname.includes("/home")) {
     presenceData.details = "Current page: ";
@@ -33,12 +37,16 @@ presence.on("UpdateData", async () => {
   ) {
     profileName = <HTMLHeadingElement>(
       document.querySelector(
-        "div.profile-header-top > div.header-caption > div.header-title > h2"
+        "div.profile-header-top > div.header-caption div.header-title > h2"
       )
     );
 
     profileTabs = <HTMLAnchorElement>(
       document.querySelector("#horizontal-tabs li.rbx-tab.active a")
+    );
+
+    profileAvatar = <HTMLImageElement>(
+      document.querySelector(".avatar-headshot-lg thumbnail-2d img[image-load]")
     );
 
     //console.log(profileTabs.textContent);
@@ -52,6 +60,8 @@ presence.on("UpdateData", async () => {
 
       presenceData.state = profileName.textContent;
     }
+
+    if (imagesEnabled && profileAvatar) presenceData.largeImageKey = profileAvatar.src;
   } else if (document.location.pathname.includes("/my/messages")) {
     messageTab = <HTMLLIElement>(
       document.querySelector(
@@ -93,15 +103,21 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/groups") &&
     !document.location.pathname.includes("/search")
   ) {
-    groupName = <HTMLHeadingElement>document.querySelector(".group-name");
+    groupName = <HTMLHeadingElement>document.querySelector(".group-title .group-name.text-overflow");
 
     groupTab = <HTMLLIElement>(
       document.querySelector("#horizontal-tabs li.rbx-tab.active")
     );
 
+    groupImage = <HTMLImageElement>(
+      document.querySelector(".group-image thumbnail-2d img[image-load]")
+    );
+
     presenceData.details = groupName.textContent;
 
     presenceData.state = `Tab: ${groupTab.textContent}`;
+
+    if (imagesEnabled && groupImage) presenceData.largeImageKey = groupImage.src;
   } else if (document.location.pathname.includes("/search/groups")) {
     const searchResult = new URL(document.location.href).searchParams.get(
       "keyword"
