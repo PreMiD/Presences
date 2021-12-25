@@ -72,7 +72,8 @@ presence.on("UpdateData", async () => {
     time = await presence.getSetting("time"),
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
-    thumbnail = await presence.getSetting("thumbnail"),
+    channelPic = await presence.getSetting("channelPic"),
+    logo = await presence.getSetting("logo"),
     buttons = await presence.getSetting("buttons");
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -86,7 +87,8 @@ presence.on("UpdateData", async () => {
     let oldYouTube: boolean = null,
       YouTubeTV: boolean = null,
       YouTubeEmbed: boolean = null,
-      title: HTMLElement;
+      title: HTMLElement,
+      pfp: string;
 
     //* Checking if user has old YT layout.
     document.querySelector(".watch-title") !== null
@@ -213,6 +215,13 @@ presence.on("UpdateData", async () => {
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
+    if (logo == 2) {
+      pfp = document
+        .querySelector<HTMLImageElement>(
+          "#avatar.ytd-video-owner-renderer > img"
+        )
+        .src.replace("=s88", "=s512");
+    }
     const unlistedPathElement = document.querySelector<SVGPathElement>(
         "g#privacy_unlisted > path"
       ),
@@ -235,9 +244,11 @@ presence.on("UpdateData", async () => {
           .replace("%title%", finalTitle)
           .replace("%uploader%", finalUploader),
         largeImageKey:
-          unlistedVideo || !thumbnail
-            ? "yt_lg"
-            : `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+          unlistedVideo || logo == 0 || pfp == ""
+            ? "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024"
+            : logo == 1
+            ? `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`
+            : pfp,
         smallImageKey: video.paused
           ? "pause"
           : video.loop
@@ -287,7 +298,8 @@ presence.on("UpdateData", async () => {
       else presenceData.details = (await strings).watchVid;
 
       delete presenceData.state;
-      presenceData.largeImageKey = "yt_lg";
+      presenceData.largeImageKey =
+        "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
@@ -324,7 +336,8 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "youtube.com"
   ) {
     const presenceData: PresenceData = {
-        largeImageKey: "yt_lg"
+        largeImageKey:
+          "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024"
       },
       browsingStamp = Math.floor(Date.now() / 1000);
     let searching = false;
@@ -409,6 +422,13 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).viewChannel;
         presenceData.state = user;
         presenceData.startTimestamp = browsingStamp;
+      }
+      if (channelPic) {
+        presenceData.largeImageKey = document
+          .querySelector<HTMLImageElement>(
+            "#avatar.ytd-c4-tabbed-header-renderer > img"
+          )
+          .src.replace("=s176", "=s512");
       }
     } else if (document.location.pathname.includes("/post")) {
       presenceData.details = (await strings).viewCPost;
@@ -510,7 +530,8 @@ presence.on("UpdateData", async () => {
     else presence.setActivity(presenceData);
   } else if (document.location.hostname === "studio.youtube.com") {
     const presenceData: PresenceData = {
-        largeImageKey: "yt_lg",
+        largeImageKey:
+          "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024",
         smallImageKey: "studio",
         smallImageText: "Youtube Studio"
       },
