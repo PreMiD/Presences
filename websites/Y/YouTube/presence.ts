@@ -215,7 +215,7 @@ presence.on("UpdateData", async () => {
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
-    if (logo == 2) {
+    if (logo === 2) {
       pfp = document
         .querySelector<HTMLImageElement>(
           "#avatar.ytd-video-owner-renderer > img"
@@ -244,9 +244,9 @@ presence.on("UpdateData", async () => {
           .replace("%title%", finalTitle)
           .replace("%uploader%", finalUploader),
         largeImageKey:
-          unlistedVideo || logo == 0 || pfp == ""
+          unlistedVideo || logo === 0 || pfp === ""
             ? "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024"
-            : logo == 1
+            : logo === 1
             ? `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`
             : pfp,
         smallImageKey: video.paused
