@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "$schema": "https://schemas.premid.app/metadata/1.5",
   "author": {
     "name": "Timeraa",
     "id": "223238938716798978"
@@ -62,13 +62,19 @@
     "zh_TW": "欣賞您喜歡的影片和音樂，上傳原始內容，並在YouTube上與朋友，家人和世界分享。",
     "ga_IE": "Bain sult as na físeáin agus an ceol is breá leat, uaslódáil ábhar bunaidh, agus déan é a roinnt le cairde, le do mhuintir agus leis an domhan ar YouTube."
   },
-  "url": ["www.youtube.com", "studio.youtube.com"],
+  "url": [
+    "www.youtube.com",
+    "studio.youtube.com"
+  ],
   "version": "5.1.13",
   "logo": "https://i.imgur.com/o5injgg.png",
   "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
   "color": "#E40813",
   "category": "videos",
-  "tags": ["video", "media"],
+  "tags": [
+    "video",
+    "media"
+  ],
   "settings": [
     {
       "id": "lang",
