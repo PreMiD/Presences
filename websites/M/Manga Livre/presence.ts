@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
       null
     ) {
       presenceData.details = `Reading '${
-        document.querySelector(".title").textContent
+        document.querySelector("div.series-title > span.title").textContent
       }'`;
       presenceData.state = `Chapter ${document
         .querySelector(".current-chapter")
