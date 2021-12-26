@@ -1,14 +1,13 @@
 const presence = new Presence({
     clientId: "700596580218175548"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   titulo = document.title,
   pesquisaR = titulo.slice(77),
   tituloLength = titulo.length - 3,
   obraR = titulo.slice(0, tituloLength),
   capituloR = titulo.slice(tituloLength),
-  removeanime = titulo.slice(7),
-  obraanimeR = removeanime.slice(0, titulo.length - 18),
+  obraanimeR = titulo.slice(7).slice(0, titulo.length - 18),
   listaR = titulo.slice(54),
   capitulo =
     document
@@ -22,7 +21,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "axn-logo"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname.indexOf("anime") !== -1) {
     presenceData.details = obraanimeR;
@@ -59,8 +58,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

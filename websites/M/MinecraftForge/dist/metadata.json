@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -15,13 +15,13 @@
     "mcforge.readthedocs.io",
     "forgedev.flocker.tv"
   ],
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/yPLG6pu.png",
   "thumbnail": "https://i.imgur.com/xsz3eWv.png",
   "color": "#d7a664",
+  "category": "games",
   "tags": [
     "minecraft",
     "forge"
-  ],
-  "category": "games"
+  ]
 }

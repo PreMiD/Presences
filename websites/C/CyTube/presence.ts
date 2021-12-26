@@ -74,7 +74,7 @@ function service(service: string): Match {
     imageKey: "cytube_service_uk"
   };
 
-  Object.keys(matches).forEach((key) => {
+  Object.keys(matches).forEach(key => {
     service.includes(key) && (returnMatch = matches[key]);
   });
 
@@ -136,38 +136,32 @@ presence.on("UpdateData", async () => {
   }
 
   if (path.includes("/r/")) {
-    const container = !(
-        document.body.className.includes("chatOnly") ||
-        !document.getElementById("videowrap")
-      ),
-      [room] = path.split("r/"),
-      motd: string = document.getElementById("motd").textContent;
-
-    presenceData.state = `${motd} - /r/${room}`;
-    if (!container) {
+    presenceData.state = `${document.getElementById("motd").textContent} - /r/${
+      path.split("r/")[0]
+    }`;
+    if (
+      document.body.className.includes("chatOnly") ||
+      !document.getElementById("videowrap")
+    ) {
       presenceData.details = "Chatting";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+    } else if (!document.getElementById("videowrap").querySelector("video")) {
+      presenceData.details = "Waiting to Start";
+      presenceData.smallImageKey = "presence_playback_waiting";
+      presenceData.smallImageText = "Waiting";
+      presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+
+      if (iFrameResponse?.site) setVideo(iFrameResponse);
     } else {
-      if (!document.getElementById("videowrap").querySelector("video")) {
-        presenceData.details = "Waiting to Start";
-        presenceData.smallImageKey = "presence_playback_waiting";
-        presenceData.smallImageText = "Waiting";
-        presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+      const video = document.getElementById("videowrap").querySelector("video");
 
-        if (iFrameResponse?.site) setVideo(iFrameResponse);
-      } else {
-        const video = document
-          .getElementById("videowrap")
-          .querySelector("video");
-
-        setVideo({
-          audio: false,
-          currentTime: video.currentTime,
-          duration: video.duration,
-          paused: video.paused,
-          site: video.src
-        });
-      }
+      setVideo({
+        audio: false,
+        currentTime: video.currentTime,
+        duration: video.duration,
+        paused: video.paused,
+        site: video.src
+      });
     }
   } else if (path === "/") {
     presenceData.details = "On Homepage";

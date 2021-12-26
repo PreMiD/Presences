@@ -1,4 +1,4 @@
 {
   "extends": "../tools/auto/tsconfig.auto.json",
-  "files": ["../tools/schemaUpdater.ts"]
+  "files": ["../tools/massCompile.ts"]
 }

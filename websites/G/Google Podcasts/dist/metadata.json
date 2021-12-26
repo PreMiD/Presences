@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "MrBartusek",
     "id": "212988300137463809"
@@ -11,14 +11,14 @@
     "nl": "Met Google Podcasts kunt u gratis podcasts van over de hele wereld zoeken en beluisteren"
   },
   "url": "podcasts.google.com",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/OiPOkMA.png",
   "thumbnail": "https://i.imgur.com/iI3qc0M.jpg",
   "color": "#ffffff",
+  "category": "other",
   "tags": [
     "google",
     "podcast",
     "listen"
-  ],
-  "category": "other"
+  ]
 }

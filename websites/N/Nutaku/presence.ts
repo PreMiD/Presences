@@ -30,7 +30,7 @@ function getGameEntity(): GameEntity {
   const object = Array.from(
     document.querySelectorAll('script[type="application/ld+json"]')
   )
-    .find((x) => x.textContent.indexOf('"@type": "SoftwareApplication"') !== -1)
+    .find(x => x.textContent.indexOf('"@type": "SoftwareApplication"') !== -1)
     ?.textContent.replace(/\r?\n/g, ""); // filter out new lines - required by json
   if (!object) return null;
   return JSON.parse(object);
@@ -51,7 +51,7 @@ function getQuery() {
   const timers: { [key: string]: Date } = {},
     pages: PageContext[] = [
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(/^\/games\/(.*)\/play/i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
@@ -78,7 +78,7 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(/^\/games/i) &&
           !!document.querySelector(".cnt-game-catalog > .game-search"),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
@@ -99,8 +99,7 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) =>
-          !!ref.location.pathname.match(/^\/games\/(.*)\/$/i),
+        middleware: ref => !!ref.location.pathname.match(/^\/games\/(.*)\/$/i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
           const game = getGameEntity();
@@ -119,7 +118,7 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(/^\/news-(page|updates)\/(\d+)\//i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
@@ -143,7 +142,7 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) =>
+        middleware: ref =>
           !!ref.location.pathname.match(/^\/news-(page|updates)/i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
@@ -155,7 +154,7 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) => !!ref.location.hostname.match(/nutaku.net/i),
+        middleware: ref => !!ref.location.hostname.match(/nutaku.net/i),
         exec: (context, data, { strings }: ExecutionArguments) => {
           if (!context) return null;
           data.details = strings.browsing;
@@ -196,23 +195,25 @@ function getQuery() {
           newLang
         );
       }
-      const presenceData: PresenceData = {
-          largeImageKey: IMAGES.LOGO
-        },
-        query: { [key: string]: unknown } = getQuery(),
-        pageIndex = pages.findIndex((x) => x.middleware(window, [query])),
+      const query: { [key: string]: unknown } = getQuery(),
+        pageIndex = pages.findIndex(x => x.middleware(window, [query])),
         context = pages[pageIndex];
       if (!context) return false;
 
-      const result = Promise.resolve(
-        context.exec(app, presenceData, {
-          strings: localizedStrings,
-          query,
-          images: IMAGES
-        })
-      );
-      return result
-        .then((data) => {
+      return Promise.resolve(
+        context.exec(
+          app,
+          {
+            largeImageKey: IMAGES.LOGO
+          },
+          {
+            strings: localizedStrings,
+            query,
+            images: IMAGES
+          }
+        )
+      )
+        .then(data => {
           if (
             lastPageIndex &&
             lastPageIndex !== pageIndex &&
@@ -223,7 +224,6 @@ function getQuery() {
             lastPageIndex = pageIndex;
           }
           if (!data) {
-            presence.setTrayTitle();
             presence.setActivity({
               largeImageKey: IMAGES.LOGO,
               state: localizedStrings.browsing

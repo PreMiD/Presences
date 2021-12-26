@@ -4,62 +4,35 @@ const presence = new Presence({
   presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-let customData = false;
 
 presence.on("UpdateData", async () => {
-  customData = false;
-
   if (document.location.pathname === "/home")
     presenceData.details = "Viewing the homepage";
   else if (document.location.pathname.startsWith("/beatmaps/rank_request"))
     presenceData.details = "Requesting a beatmaps";
   else if (document.location.pathname.startsWith("/beatmaps")) {
-    const title = document.querySelector(".map-title"),
-      act = document.querySelector(".map-artist");
+    const title = document.querySelector<HTMLElement>(".map-title"),
+      act = document.querySelector<HTMLElement>(".map-artist");
 
-    if (title !== null && act !== null) {
-      customData = true;
-
-      const beatmapData: PresenceData = {
-        details: "Looking at the beatmap:",
-        state: `${(act as HTMLElement).innerText} - ${
-          (title as HTMLElement).innerText
-        }`,
-        largeImageKey: "logo"
-      };
-      presence.setActivity(beatmapData);
+    if (title && act) {
+      presenceData.details = "Looking at the beatmap:";
+      presenceData.state = `${act.textContent} - ${title.textContent}`;
     } else presenceData.details = "Searching for new beatmaps";
   } else if (document.location.pathname.startsWith("/s/")) {
-    const title = document.querySelector(".map-title"),
-      act = document.querySelector(".map-artist");
+    const title = document.querySelector<HTMLElement>(".map-title"),
+      act = document.querySelector<HTMLElement>(".map-artist");
 
-    if (title !== null && act !== null) {
-      customData = true;
-
-      const beatmapData: PresenceData = {
-        details: "Looking at the beatmap:",
-        state: `${(act as HTMLElement).innerText} - ${
-          (title as HTMLElement).innerText
-        }`,
-        largeImageKey: "logo"
-      };
-      presence.setActivity(beatmapData);
+    if (title && act) {
+      presenceData.details = "Looking at the beatmap:";
+      presenceData.state = `${act.textContent} - ${title.textContent}`;
     } else presenceData.details = "Searching for new beatmaps";
   } else if (document.location.pathname.startsWith("/b/")) {
-    const title = document.querySelector(".map-title"),
-      act = document.querySelector(".map-artist");
+    const title = document.querySelector<HTMLElement>(".map-title"),
+      act = document.querySelector<HTMLElement>(".map-artist");
 
-    if (title !== null && act !== null) {
-      customData = true;
-
-      const beatmapData: PresenceData = {
-        details: "Looking at the beatmap:",
-        state: `${(act as HTMLElement).innerText} - ${
-          (title as HTMLElement).innerText
-        }`,
-        largeImageKey: "logo"
-      };
-      presence.setActivity(beatmapData);
+    if (title && act) {
+      presenceData.details = "Looking at the beatmap:";
+      presenceData.state = `${act.textContent} - ${title.textContent}`;
     } else presenceData.details = "Searching for new beatmaps";
   } else if (document.location.pathname.startsWith("/leaderboard/osu")) {
     presenceData.details = "Browsing rankings";
@@ -78,11 +51,11 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/clan/")) {
     presenceData.details = "Browsing clans";
     presenceData.state = `${
-      (document.querySelector(".clan-abbr") as HTMLElement).innerHTML +
-      (document.querySelector(".clan-title") as HTMLElement).innerHTML
+      document.querySelector<HTMLElement>(".clan-abbr").textContent +
+      document.querySelector<HTMLElement>(".clan-title").textContent
     }| ${
-      (document.querySelector("div.clan-text-info-block > b") as HTMLElement)
-        .innerHTML
+      document.querySelector<HTMLElement>("div.clan-text-info-block > b")
+        .textContent
     }`;
   } else if (document.location.pathname.startsWith("/community/plays"))
     presenceData.details = "Browsing Top plays";
@@ -93,18 +66,12 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/about"))
     presenceData.details = "Browsing About";
   else if (document.location.pathname.startsWith("/docs/")) {
-    const doc = document.querySelector(".ban-stroke1"),
-      title = document.querySelector(".ban-stroke2");
+    const doc = document.querySelector<HTMLElement>(".ban-stroke1"),
+      title = document.querySelector<HTMLElement>(".ban-stroke2");
 
-    if (doc !== null && title !== null) {
-      customData = true;
-
-      const beatmapData: PresenceData = {
-        details: `Browsing ${(doc as HTMLElement).innerText}`,
-        state: (title as HTMLElement).innerText,
-        largeImageKey: "logo"
-      };
-      presence.setActivity(beatmapData);
+    if (doc && title) {
+      (presenceData.details = `Browsing ${doc.textContent}`),
+        (presenceData.state = title.textContent);
     } else presenceData.details = "Browsing Documentation";
   } else if (document.location.pathname.startsWith("/user/notifications"))
     presenceData.details = "Browsing Notifications";
@@ -134,21 +101,15 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.startsWith("/team"))
     presenceData.details = "Look at Garati Team";
   else if (document.location.pathname.startsWith("/u")) {
-    const name: string = (document.querySelector(".user-name") as HTMLElement)
-      .innerText;
-    customData = true;
-    const profileData: PresenceData = {
-      details: `Looking at ${name}'s Profile`,
-      state: `Performance: ${
-        (document.querySelector("#chart1 > div > span") as HTMLElement)
-          .innerText
-      }`,
-      largeImageKey: "logo"
-    };
-    presence.setActivity(profileData);
+    presenceData.details = `Looking at ${
+      document.querySelector<HTMLElement>(".user-name").textContent
+    }'s profile`;
+    presenceData.state = `Performance: ${
+      document.querySelector<HTMLElement>("#chart1 > div > span").textContent
+    }`;
   }
 
-  if (!customData) presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
 
 if (document.location.hostname === "sig.gatari.pw")

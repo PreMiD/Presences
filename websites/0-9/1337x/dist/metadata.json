@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -21,14 +21,14 @@
     "x1337x.se",
     "1337x.is"
   ],
-  "version": "1.5.8",
+  "regExp": "([a-z0-9-]+[.])*x?1337x([.][a-z]+)+[/]",
+  "version": "1.5.9",
   "logo": "https://i.imgur.com/zc7kuDN.png",
   "thumbnail": "https://i.imgur.com/Ut7qqHx.png",
   "color": "#d63600",
+  "category": "other",
   "tags": [
     "torrents",
     "shows"
-  ],
-  "category": "other",
-  "regExp": "([a-z0-9-]+[.])*x?1337x([.][a-z]+)+[/]"
+  ]
 }

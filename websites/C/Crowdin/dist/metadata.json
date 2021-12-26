@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -24,14 +24,14 @@
     "status.crowdin.com",
     "blog.crowdin.com"
   ],
-  "version": "3.0.2",
+  "version": "3.0.3",
   "logo": "https://i.imgur.com/rtkC4kS.png",
   "thumbnail": "https://i.imgur.com/dJnnzqd.png",
   "color": "#2e3340",
+  "category": "other",
   "tags": [
     "partner",
     "translation",
     "projects"
-  ],
-  "category": "other"
+  ]
 }

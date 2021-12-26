@@ -7,7 +7,8 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:eqeqeq-fix/recommended"
+    "plugin:eqeqeq-fix/recommended",
+    "plugin:prettier/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -24,7 +25,6 @@
     "quotes": ["warn", "double", { "avoidEscape": true }],
     "camelcase": ["warn", { "properties": "always" }],
     "curly": ["warn", "multi-or-nest"],
-    "eqeqeq": ["error", "always"],
     "comma-dangle": ["warn", "never"],
     "one-var": ["warn", "consecutive"],
     "linebreak-style": ["warn", "unix"],
@@ -54,7 +54,14 @@
     "@typescript-eslint/no-explicit-any": "error",
     "no-eval": "warn",
     "no-undefined": "error",
-    "no-eq-null": "error"
+    "no-eq-null": "error",
+    "@typescript-eslint/array-type": ["error", { "default": "array" }],
+    "no-lonely-if": "error",
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
+    "no-one-time-vars/no-one-time-vars": [2, {"ignoredVariables":["browsingTimestamp"]}],
+    "radix": "off"
   },
   "overrides": [
     {
@@ -71,5 +78,5 @@
   ],
   "reportUnusedDisableDirectives": true,
   "noInlineConfig": false,
-  "plugins": ["@typescript-eslint"]
+  "plugins": ["@typescript-eslint", "prettier", "no-one-time-vars"]
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "PreMiD",
     "id": "503557087041683458"
@@ -13,15 +13,15 @@
     "okanime.tv",
     "www.okanime.tv"
   ],
-  "version": "1.1.13",
+  "version": "1.1.14",
   "logo": "https://i.imgur.com/mhjMnnU.png",
   "thumbnail": "https://i.imgur.com/NAiM77y.png",
   "color": "#a5173b",
+  "category": "anime",
   "tags": [
     "embedded-links",
     "okanime",
     "streaming"
   ],
-  "category": "anime",
   "iframe": true
 }

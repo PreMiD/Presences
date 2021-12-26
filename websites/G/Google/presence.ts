@@ -1,28 +1,25 @@
 const presence = new Presence({
     clientId: "612704158826496028"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   pageInput: HTMLInputElement = document.querySelector("#lst-ib"),
-  homepageInput: HTMLInputElement = document.querySelector(
-    "#tsf > div:nth-child(1) > div.A8SBwf > div.RNNXgb > div > div.a4bIc > input"
-  ),
+  homepageInput: HTMLInputElement = document.querySelector('input[name="q"]'),
   homepageImage: HTMLElement = document.querySelector("#hplogo"),
   imgInput: HTMLInputElement = document.querySelector("#REsRA");
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "lg",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if ((homepageInput && homepageImage) || !document.location.pathname) {
     presenceData.state = "Home";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/doodles/")) {
-    const searchURL = new URL(document.location.href),
-      doodleResult = searchURL.searchParams.get("q"),
+    const doodleResult = new URL(document.location.href).searchParams.get("q"),
       doodleTitle: HTMLElement = document.querySelector(
         "#title-card > div > h2"
       );
@@ -30,9 +27,9 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/about")) {
       presenceData.details = "Doodles";
       presenceData.state = "About";
-    } else if (doodleTitle !== null) {
+    } else if (doodleTitle) {
       presenceData.details = "Viewing a doodle:";
-      presenceData.state = doodleTitle.innerText;
+      presenceData.state = doodleTitle.textContent;
     } else if (doodleResult && document.location.pathname === "/doodles/") {
       presenceData.details = "Searching for a doodle:";
       presenceData.state = doodleResult;
@@ -42,15 +39,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Doodles";
     }
   } else if (document.location.pathname.startsWith("/search")) {
-    const searchURL = new URL(document.location.href),
-      searchTab = searchURL.searchParams.get("tbm"),
-      resultsInfo = document.querySelector("#result-stats");
-
+    const searchTab = new URL(document.location.href).searchParams.get("tbm");
     presenceData.smallImageKey = "search";
 
     if (!searchTab) {
       presenceData.details = `Searching for ${homepageInput.value}`;
-      presenceData.state = resultsInfo.textContent;
+      presenceData.state = document.querySelector("#result-stats").textContent;
     } else if (searchTab === "isch") {
       presenceData.details = "Google Images";
       presenceData.state = `Searching for ${imgInput.value}`;

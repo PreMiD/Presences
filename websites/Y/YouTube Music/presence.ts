@@ -4,16 +4,14 @@ const presence = new Presence({
 
 function getAuthorString(): string {
   //* Get authors
-  const authors = document.querySelectorAll(
-    "span yt-formatted-string.ytmusic-player-bar a"
-  ) as NodeListOf<HTMLAnchorElement>;
-  let authorsArray: Array<HTMLAnchorElement>, authorString: string;
-
-  //* Author tags more than one => YouTube Music Song listing with release year etc.
-  if (authors.length > 1) {
+  const authors = document.querySelectorAll<HTMLAnchorElement>(
+      "span yt-formatted-string.ytmusic-player-bar a"
+    ),
     //* Convert to js array for .map function
     authorsArray = Array.from(authors);
 
+  //* Author tags more than one => YouTube Music Song listing with release year etc.
+  if (authors.length > 1) {
     //* If song is from a channel and not a video
     if (
       document.querySelector(
@@ -28,61 +26,65 @@ function getAuthorString(): string {
       year = year.slice(year.length - 4, year.length);
 
       //* Build output string
-      authorString = `${authorsArray
+      return `${authorsArray
         .slice(0, authorsArray.length - 1)
-        .map((a) => a.innerText)
+        .map(a => a.textContent)
         .join(", ")} - ${
-        authorsArray[authorsArray.length - 1].innerText
+        authorsArray[authorsArray.length - 1].textContent
       } (${year})`;
     } else {
       //* Build output string
-      authorString = `${authorsArray
+      return `${authorsArray
         .slice(0, authorsArray.length - 1)
-        .map((a) => a.innerText)
-        .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
+        .map(a => a.textContent)
+        .join(", ")} - ${authorsArray[authorsArray.length - 1].textContent}`;
     }
   } else {
-    authorString = (document.querySelector(
-      "span yt-formatted-string.ytmusic-player-bar a"
-    ) as HTMLAnchorElement)
-      ? (
-          document.querySelector(
-            "span yt-formatted-string.ytmusic-player-bar a"
-          ) as HTMLAnchorElement
-        ).innerText
-      : (
-          document.querySelector(
-            "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
-          ) as HTMLAnchorElement
-        ).innerText;
+    return (
+      document.querySelector<HTMLAnchorElement>(
+        "span yt-formatted-string.ytmusic-player-bar a"
+      )?.textContent ??
+      document.querySelector<HTMLAnchorElement>(
+        "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
+      ).textContent
+    );
   }
-
-  return authorString;
 }
 
+let prevCover: [number, string] = null;
+
 presence.on("UpdateData", async () => {
-  const title = (
-      document.querySelector(".ytmusic-player-bar.title") as HTMLElement
-    ).innerText,
-    video = document.querySelector(".video-stream") as HTMLVideoElement,
-    progressBar = document.querySelector("#progress-bar") as HTMLElement,
+  const title = document.querySelector<HTMLElement>(
+      ".ytmusic-player-bar.title"
+    ).textContent,
+    video = document.querySelector<HTMLVideoElement>(".video-stream"),
+    progressBar = document.querySelector<HTMLElement>("#progress-bar"),
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
       .getAttribute("repeat-Mode_"),
-    buttons = await presence.getSetting("buttons"),
-    time = await presence.getSetting("time");
+    [buttons, timestamps, cover] = await Promise.all([
+      presence.getSetting("buttons"),
+      presence.getSetting("timestamps"),
+      presence.getSetting("cover")
+    ]);
   if (title !== "" && !isNaN(video.duration)) {
-    const remainingLength =
+    const endTimestamp =
+        Date.now() +
         Number(progressBar.getAttribute("aria-valuemax")) * 1000 -
         Number(progressBar.getAttribute("value")) * 1000,
-      endTimestamp = Date.now() + remainingLength,
       [, watchID] = document
         .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
         .href.match(/v=([^&#]{5,})/),
       presenceData: PresenceData = {
         details: title,
         state: getAuthorString(),
-        largeImageKey: "ytm_lg",
+        largeImageKey: cover
+          ? document
+              .querySelector<HTMLImageElement>(
+                ".image.style-scope.ytmusic-player-bar"
+              )
+              .src.replace("=w60-h60-l90", "=w600-h600-l900")
+          : "ytm_lg",
         smallImageKey: video.paused
           ? "pause"
           : repeatMode === "ONE"
@@ -109,7 +111,7 @@ presence.on("UpdateData", async () => {
       ];
     }
 
-    if (!time) delete presenceData.endTimestamp;
+    if (!timestamps) delete presenceData.endTimestamp;
 
     if (buttons) {
       presenceData.buttons = [
@@ -123,8 +125,16 @@ presence.on("UpdateData", async () => {
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
-      presence.setTrayTitle();
-    } else presence.setTrayTitle(title);
+    }
+
+    if (cover) {
+      prevCover ??= [Date.now(), presenceData.largeImageKey];
+      if (prevCover[1] !== presenceData.largeImageKey) {
+        if (Date.now() - prevCover[0] < 20_000)
+          presenceData.largeImageKey = "ytm_lg";
+        else prevCover = [Date.now(), presenceData.largeImageKey];
+      }
+    }
 
     presence.setActivity(presenceData);
   } else presence.setActivity();

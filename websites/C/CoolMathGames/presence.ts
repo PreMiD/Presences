@@ -7,16 +7,16 @@ enum PageType {
   Category = 1
 }
 
-const capitalize = (text: Array<string>): string => {
+const capitalize = (text: string[]): string => {
     return text
-      .map((str) => {
+      .map(str => {
         return str.charAt(0).toUpperCase() + str.slice(1);
       })
       .join(" ");
   },
-  parse = (path: string): Array<string> => {
+  parse = (path: string): string[] => {
     path = path.replace("/", "");
-    const split: Array<string> = path.split("-");
+    const split: string[] = path.split("-");
 
     return [split[0], capitalize(split.slice(1))];
   };
@@ -31,8 +31,7 @@ presence.on("UpdateData", async () => {
 
   let details, state;
 
-  const startTimestamp = elapsed,
-    path = window.location.pathname;
+  const path = window.location.pathname;
 
   if (path === "/") details = "Browsing...";
   else if (path.match("/user") || path.match("/signup")) {
@@ -45,8 +44,9 @@ presence.on("UpdateData", async () => {
     const title = document.querySelector("#start-the-quiz-title");
     if (title) state = title.textContent;
   } else {
-    const playlists = document.querySelector(".playlists-queue-wrapper"),
-      breadcrumb = document.querySelector(".pane-content > .breadcrumb > ol"),
+    const breadcrumb = document.querySelector(
+        ".pane-content > .breadcrumb > ol"
+      ),
       breadcrumbLast = document.querySelector(
         ".pane-content > .breadcrumb > ol > li:last-child > span"
       ),
@@ -57,15 +57,12 @@ presence.on("UpdateData", async () => {
     } else if (breadcrumb && breadcrumbLast) {
       details = "Viewing Jigsaw Puzzles";
       state = breadcrumbLast.textContent;
-    } else if (playlists) {
+    } else if (document.querySelector(".playlists-queue-wrapper")) {
       details = "Viewing Category";
       state = "Jigsaw Puzzles";
     } else {
-      const [parsedInt, parsedName] = parse(path),
-        type = parseInt(parsedInt),
-        name = parsedName;
-
-      switch (type) {
+      const [parsedInt, parsedName] = parse(path);
+      switch (parseInt(parsedInt)) {
         case PageType.Category:
           details = "Viewing Category";
           break;
@@ -77,16 +74,14 @@ presence.on("UpdateData", async () => {
         default:
           break;
       }
-      state = name;
+      state = parsedName;
     }
   }
 
-  const data: PresenceData = {
+  presence.setActivity({
     details,
     state,
     largeImageKey: "coolmathgames",
-    startTimestamp
-  };
-
-  presence.setActivity(data);
+    startTimestamp: elapsed
+  });
 });

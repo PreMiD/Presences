@@ -8,11 +8,10 @@ presence.on("UpdateData", async () => {
     if (page === null) pageText = "Unknown Page";
     else pageText = page.textContent;
 
-    const presenceData: PresenceData = {
+    presence.setActivity({
       details: "Viewing a page...",
       state: pageText,
       largeImageKey: "logo"
-    };
-    presence.setActivity(presenceData);
+    });
   }
 });

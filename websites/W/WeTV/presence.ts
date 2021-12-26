@@ -4,6 +4,7 @@ class WeTV extends Presence {
   }
 
   getTitle() {
+    // eslint-disable-next-line no-one-time-vars/no-one-time-vars
     const JSONData: {
       "@graph": {
         name: string;
@@ -69,11 +70,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Movie";
 
         if (presence.isClip()) presenceData.state = "Clip";
-      } else {
-        if (presence.getEpisodeNumber())
-          presenceData.state = `Episode ${presence.getEpisodeNumber()}`;
-        else presenceData.state = presence.getEpisodeTitle();
-      }
+      } else if (presence.getEpisodeNumber())
+        presenceData.state = `Episode ${presence.getEpisodeNumber()}`;
+      else presenceData.state = presence.getEpisodeTitle();
     } else {
       presenceData.details = "Viewing:";
       presenceData.state = presence.getTitle();

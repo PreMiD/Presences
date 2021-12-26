@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "674236194053160971"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "qdss"
+      largeImageKey: "qdss",
+      startTimestamp: browsingTimestamp
     },
     { href } = document.location;
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname === "/") {
     if (href.startsWith("https://www.qdssclub.com/?page=")) {
@@ -142,14 +142,11 @@ presence.on("UpdateData", async () => {
       ""
     )}`;
   } else if (document.location.pathname.startsWith("/forums/discussion/")) {
-    const discussionname =
-      document.querySelector(".text-center h1").textContent;
     presenceData.details = "Legge la discussione:";
-    presenceData.state = discussionname;
+    presenceData.state = document.querySelector(".text-center h1").textContent;
   } else if (document.location.pathname.startsWith("/articolo")) {
-    const articoloname = document.querySelector(".text-center h3").textContent;
     presenceData.details = "Legge l'articolo:";
-    presenceData.state = articoloname;
+    presenceData.state = document.querySelector(".text-center h3").textContent;
   } else if (document.location.pathname.startsWith("/login")) {
     presenceData.details = "Sta cercando di fare";
     presenceData.state = "l'accesso";
@@ -164,8 +161,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "registrarsi";
   } else presenceData.details = "Navigando...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

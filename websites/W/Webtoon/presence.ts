@@ -1,10 +1,10 @@
 const presence: Presence = new Presence({
     clientId: "612415911877672971"
   }),
-  startedBrowsing: number = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   presenceData: PresenceData = {
     largeImageKey: "webtoon_lg",
-    startTimestamp: startedBrowsing
+    startTimestamp: browsingTimestamp
   },
   strings = presence.getStrings({
     browsing: "presence.activity.browsing"

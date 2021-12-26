@@ -2,25 +2,23 @@ const presence = new Presence({
     clientId: "714733112499896343"
   }),
   // Const thing
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   path = document.location;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "icon"
+    largeImageKey: "icon",
+    startTimestamp: browsingTimestamp
   };
 
   // Presence
   if (path.hostname === "blockdit.com" || path.hostname.includes("www.")) {
     //Home
-    if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+    if (document.location.pathname === "/")
       presenceData.details = "Viewing home page";
-    } else if (path.pathname.includes("/home")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (path.pathname.includes("/home"))
       presenceData.details = "Viewing home page";
-    } else if (path.pathname.includes("articles")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (path.pathname.includes("articles")) {
       if (path.href.includes("bookmark")) {
         presenceData.details = "Viewing on bookmark";
         presenceData.state = "Favorite articles";
@@ -34,19 +32,18 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing on popular";
         presenceData.state = "Trending articles";
       } else if (path.href.includes("pages")) {
-        const page =
-          document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = `${page} | Articles`;
+        presenceData.state = `${
+          document.querySelector("head > title").textContent ?? "Unknow page"
+        } | Articles`;
       } else {
-        const titlen =
-          document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Reading on articles";
-        presenceData.state = `${titlen} | Articles`;
+        presenceData.state = `${
+          document.querySelector("head > title").textContent ?? "Unknow page"
+        } | Articles`;
         presenceData.smallImageKey = "reading";
       } // Videos
     } else if (path.pathname.includes("videos")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.href.includes("bookmark")) {
         presenceData.details = "Viewing on bookmark";
         presenceData.state = "Favorite videos";
@@ -60,19 +57,18 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing on popular";
         presenceData.state = "Trending videos";
       } else if (path.href.includes("pages")) {
-        const page =
-          document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = `${page} | Videos`;
+        presenceData.state = `${
+          document.querySelector("head > title").textContent ?? "Unknow page"
+        } | Videos`;
       } else {
-        const titlen =
-          document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = `${titlen} | Videos`;
+        presenceData.state = `${
+          document.querySelector("head > title").textContent ?? "Unknow page"
+        } | Videos`;
         presenceData.smallImageKey = "playing";
       } // Podcast
     } else if (path.pathname.includes("podcasts")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.href.includes("bookmark")) {
         presenceData.details = "Viewing on bookmark";
         presenceData.state = "Favorite podcasts";
@@ -86,19 +82,16 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing on popular";
         presenceData.state = "Trending podcasts";
       } else if (path.href.includes("pages")) {
-        const page =
-          document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = page;
+        presenceData.state =
+          document.querySelector("head > title").textContent ?? "Unknow page";
       } else {
-        const titlen =
-          document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = titlen;
+        presenceData.state =
+          document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.smallImageKey = "playing";
       } //Series
     } else if (path.pathname.includes("series")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.href.includes("bookmark")) {
         presenceData.details = "Viewing on bookmark";
         presenceData.state = "Favorite series";
@@ -111,34 +104,24 @@ presence.on("UpdateData", async () => {
       } else if (path.href.includes("popular")) {
         presenceData.details = "Viewing on popular";
         presenceData.state = "Trending series";
-      } else if (path.href.includes("pages")) {
-        const page =
-          document.querySelector("head > title").textContent ?? "Unknow page";
-        presenceData.details = "Viewing on page";
-        presenceData.state = `${page} | Series`;
       } else {
-        const titlen =
-          document.querySelector("head > title").textContent ?? "Unknow page";
         presenceData.details = "Viewing on page";
-        presenceData.state = `${titlen} | Series`;
+        presenceData.state = `${
+          document.querySelector("head > title").textContent ?? "Unknow page"
+        } | Series`;
       } //Explore
     } else if (
       path.pathname.includes("explore") ||
       path.pathname.includes("all")
     ) {
-      presenceData.startTimestamp = browsingStamp;
-      const extitle = path.pathname.replace("/explore/", "| ");
       presenceData.details = "Viewing on exploring";
-      presenceData.state = `About ${extitle}`;
+      presenceData.state = `About ${path.pathname.replace("/explore/", "| ")}`;
       presenceData.smallImageKey = "search";
-    } else if (path.pathname.includes("notification")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (path.pathname.includes("notification"))
       presenceData.details = "Viewing on notification";
-    } else if (path.pathname.includes("activity-log")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (path.pathname.includes("activity-log"))
       presenceData.details = "Viewing on activity log";
-    } else if (path.pathname.includes("boost-manager")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (path.pathname.includes("boost-manager")) {
       if (path.pathname.includes("boosts")) {
         presenceData.details = "Viewing on boosts manage";
         presenceData.state = "All boosts";
@@ -150,7 +133,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Unknow boosts manage";
       } //settings
     } else if (path.pathname.includes("sttings")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.pathname.includes("pages")) {
         presenceData.details = "Viewing on page creator";
         presenceData.state = "Settings";
@@ -161,7 +143,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Unknow settings";
       }
     } else if (path.pathname.includes("draft")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.pathname.includes("pages")) {
         presenceData.details = "Viewing on page creator";
         presenceData.state = "All draft";
@@ -170,7 +151,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Draft: Post";
       }
     } else if (path.pathname.includes("schedule")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.pathname.includes("pages")) {
         presenceData.details = "Viewing on page creator";
         presenceData.state = "All schedule";
@@ -179,7 +159,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Schedule: Post";
       }
     } else if (path.pathname.includes("monetize")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.pathname.includes("page")) {
         presenceData.details = "Viewing on page creator";
         presenceData.state = "Page monetize";
@@ -188,7 +167,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Start monetize";
       }
     } else if (path.pathname.includes("insights")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.pathname.includes("page")) {
         presenceData.details = "Viewing on page creator";
         presenceData.state = "Insights: all";
@@ -211,13 +189,10 @@ presence.on("UpdateData", async () => {
         }
       }
     } else if (path.pathname.includes("user")) {
-      const user =
-        document.querySelector("head > title").textContent ?? "Unknow username";
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing on profile";
-      presenceData.state = user;
+      presenceData.state =
+        document.querySelector("head > title").textContent ?? "Unknow username";
     } else if (path.pathname.includes("terms")) {
-      presenceData.startTimestamp = browsingStamp;
       if (path.pathname.includes("ads")) {
         presenceData.details = "Terms of ads and boosts";
         presenceData.smallImageKey = "reading";
@@ -226,43 +201,33 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       }
     } else if (path.pathname.includes("faqs")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "FAQS";
       presenceData.smallImageKey = "reading";
     } else if (path.pathname.includes("brand")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Guild to use brand";
       presenceData.smallImageKey = "reading";
     } else if (path.pathname.includes("search")) {
-      const searchres =
+      presenceData.details = "Searching for:";
+      presenceData.state =
         document
           .querySelector(
             "#__next > div > div.container.flex-grow-1.d-flex.flex-column > div > div.jsx-3959159148.col-12.col-md-8.col-lg-6.col-xl-5.px-0 > div > div:nth-child(2) > div > form > div.jsx-1849148460.d-flex.align-items-center > label > input"
           )
           .getAttribute("value") ?? "Unknow search";
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Searching for:";
-      presenceData.state = searchres;
       presenceData.smallImageKey = "search";
-    } else if (path.pathname.includes("bookmark")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (path.pathname.includes("bookmark"))
       presenceData.details = "Viewing on bookmark";
-    } else if (path.pathname.includes("popular")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (path.pathname.includes("popular")) {
       presenceData.details = "Viewing on popular page";
       presenceData.state = "Trending";
     } else {
-      const titlen =
-        document.querySelector("head > title").textContent ?? "Unknow page";
       presenceData.details = "Viewing on page";
-      presenceData.state = titlen;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state =
+        document.querySelector("head > title").textContent ?? "Unknow page";
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
   //console.log(presenceData);
 });

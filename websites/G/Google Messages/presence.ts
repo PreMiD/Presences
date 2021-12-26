@@ -29,10 +29,9 @@ presence.on("UpdateData", async () => {
     if (!showcon)
       presenceData.state = "Hidden (adjustable in Presence settings)";
     else {
-      const itl = document
+      presenceData.state = document
         .getElementsByClassName("title-container")[0]
         .querySelector("h2 > span > span").textContent;
-      presenceData.state = itl;
     }
     presenceData.details = "Reading messages from:";
     presenceData.largeImageKey = "icon";
@@ -46,8 +45,6 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "icon";
     presenceData.details = "Browsing on Google Messages";
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

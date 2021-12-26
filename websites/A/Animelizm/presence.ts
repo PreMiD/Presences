@@ -31,11 +31,7 @@ presence.on("UpdateData", async () => {
     return presence.setActivity(presenceData);
   }
 
-  const timestamps = presence.getTimestamps(
-      Math.floor(video.current),
-      Math.floor(video.duration)
-    ),
-    Info = document.querySelector(".ez-detail-title").textContent;
+  const Info = document.querySelector(".ez-detail-title").textContent;
   let episode;
 
   if (Info.includes("ตอนที่")) {
@@ -57,9 +53,13 @@ presence.on("UpdateData", async () => {
     ? (await strings).pause
     : (await strings).play;
 
-  if (!video.paused)
-    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
-  else {
+  if (!video.paused) {
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.current),
+        Math.floor(video.duration)
+      );
+  } else {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Dark_Ville",
     "id": "638080361179512853"
@@ -20,15 +20,15 @@
     "nl": "TuneIn In is een Amerikaanse audiostreamingservice die live nieuws, radio, sport, muziek en podcasts levert aan meer dan 60 miljoen maandelijkse actieve gebruikers. Vanaf 2019 heeft TuneIn meer dan 75 miljoen maandelijkse actieve gebruikers. TuneIn wordt beheerd door het bedrijf TuneIn Inc, gevestigd in San Francisco, Californië."
   },
   "url": "tunein.com",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "logo": "https://i.imgur.com/mcwhb4p.png",
   "thumbnail": "https://i.imgur.com/lewvpKU.png",
   "color": "#33B6A8",
+  "category": "music",
   "tags": [
     "tunein",
     "music",
     "radio",
     "media"
-  ],
-  "category": "music"
+  ]
 }

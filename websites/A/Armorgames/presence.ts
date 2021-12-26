@@ -1,18 +1,18 @@
 const presence = new Presence({
     clientId: "827910536049852488"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     page = window.location.pathname;
   if (page === "/") {
     search = document.querySelector("#search-input");
-    if (!search || search.value === "")
+    if (!search || search.textContent === "")
       presenceData.details = "Viewing The Homepage";
     else {
       presenceData.details = "Searching:";
@@ -107,8 +107,6 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [{ label: "Play Game", url: window.location.href }];
   } else presenceData.details = "Page Not Found";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

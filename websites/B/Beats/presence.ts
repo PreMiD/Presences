@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const presence = new Presence({ clientId: "817772461109018664" }),
   timestamp = Math.floor(Date.now() / 1000),
   newStats = async () =>
@@ -21,6 +20,7 @@ let data: {
     streamer_name: string;
   };
 };
+/* eslint-enable camelcase */
 
 setInterval(newStats, 10000);
 newStats();

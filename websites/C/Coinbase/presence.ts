@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "796810487177674822"
   }),
-  time = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "coinbase",
-      startTimestamp: time
+      startTimestamp: browsingTimestamp
     },
     path = document.location.pathname;
   if (path === "/") presenceData.details = "Browsing...";
@@ -27,8 +27,6 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/invite"))
     presenceData.details = "Inviting someone new";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -15,13 +15,13 @@
     "yagpdb.xyz",
     "docs.yagpdb.xyz"
   ],
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/yQShI1r.png",
   "thumbnail": "https://i.imgur.com/7vDKD0t.png",
   "color": "#ec7760",
+  "category": "other",
   "tags": [
     "bot",
     "discord"
-  ],
-  "category": "other"
+  ]
 }

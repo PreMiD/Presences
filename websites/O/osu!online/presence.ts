@@ -1,27 +1,26 @@
 const presence = new Presence({ clientId: "714822481286004778" }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let gameArea: HTMLElement, pauseMenu: HTMLElement;
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") {
     gameArea = document.querySelector("#game-area > canvas");
     pauseMenu = document.querySelector("#pause-menu");
-    const pausedHidden = pauseMenu.getAttribute("hidden");
-    if (gameArea !== null) {
+    if (gameArea) {
       presenceData.details = "Clicking circles";
-      if (pausedHidden === null) {
+      if (!pauseMenu.getAttribute("hidden")) {
         presenceData.details = "Clicking circles";
         presenceData.state = "Paused menu";
       }
     } else {
       const [pageHome] = document.getElementsByClassName("title");
       let pageText1;
-      if (pageHome === null) pageText1 = "Browsing...";
+      if (!pageHome) pageText1 = "Browsing...";
       else pageText1 = `Listening: ${pageHome.textContent}`;
 
       (presenceData.details = "Viewing the homepage"),
@@ -30,7 +29,7 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/index")) {
     const [pageHome] = document.getElementsByClassName("title");
     let pageText1;
-    if (pageHome === null) pageText1 = "Browsing...";
+    if (!pageHome) pageText1 = "Browsing...";
     else pageText1 = `Listening: ${pageHome.textContent}`;
 
     (presenceData.details = "Viewing the homepage"),
@@ -38,7 +37,7 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/new")) {
     const [pageNew] = document.getElementsByClassName("title");
     let pageText2;
-    if (pageNew === null) pageText2 = "Browsing...";
+    if (!pageNew) pageText2 = "Browsing...";
     else pageText2 = `Listening: ${pageNew.textContent}`;
 
     (presenceData.details = "Viewing new beatmaps"),
@@ -46,7 +45,7 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/hot")) {
     const [pageHot] = document.getElementsByClassName("title");
     let pageText3;
-    if (pageHot === null) pageText3 = "Browsing...";
+    if (!pageHot) pageText3 = "Browsing...";
     else pageText3 = `Listening: ${pageHot.textContent}`;
 
     (presenceData.details = "Viewing hot beatmaps"),
@@ -55,28 +54,26 @@ presence.on("UpdateData", () => {
     const [pageGen2, pageGen3, pageGen1] =
         document.getElementsByClassName("title"),
       [pageGen4, pageGen5] = document.getElementsByClassName("selitem active");
-    if (pageGen1 !== null) {
-      const pageText4 = `Listening: ${pageGen1.textContent}`;
+    if (pageGen1) {
       (presenceData.details = "Searching by categories"),
-        (presenceData.state = pageText4);
+        (presenceData.state = `Listening: ${pageGen1.textContent}`);
     } else {
-      const pageText5 = `${pageGen2.textContent}: ${pageGen4.textContent} ${pageGen3.textContent}: ${pageGen5.textContent}`;
-
       (presenceData.details = "Searching by categories"),
-        (presenceData.state = pageText5);
+        (presenceData.state = `${pageGen2.textContent}: ${pageGen4.textContent} ${pageGen3.textContent}: ${pageGen5.textContent}`);
     }
   } else if (document.location.pathname.startsWith("/search")) {
     const [pageSch1] = document.getElementsByClassName("title"),
-      [pageSch2] = document.getElementsByName("q");
+      [pageSch2] = document.getElementsByName(
+        "q"
+      ) as NodeListOf<HTMLInputElement>;
     let pageText6, pageText7;
-    if (pageSch1 !== null) {
+    if (pageSch1) {
       pageText6 = `Listening: ${pageSch1.textContent}`;
       (presenceData.details = "Searching for beatmaps"),
         (presenceData.state = pageText6);
     } else {
-      if ((pageSch2 as HTMLInputElement).value === "")
-        pageText7 = "Browsing...";
-      else pageText7 = `Keyword: ${(pageSch2 as HTMLInputElement).value}`;
+      if (pageSch2.value === "") pageText7 = "Browsing...";
+      else pageText7 = `Keyword: ${pageSch2.value}`;
 
       (presenceData.details = "Searching for beatmaps"),
         (presenceData.state = pageText7);
@@ -84,7 +81,7 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/local")) {
     const [pageFav] = document.getElementsByClassName("title");
     let pageText7;
-    if (pageFav === null) pageText7 = "Browsing...";
+    if (!pageFav) pageText7 = "Browsing...";
     else pageText7 = `Listening: ${pageFav.textContent}`;
 
     (presenceData.details = "Viewing my favourites"),
@@ -99,8 +96,6 @@ presence.on("UpdateData", () => {
     (presenceData.details = "Viewing settings"),
       (presenceData.state = "Changing...");
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

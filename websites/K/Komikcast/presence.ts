@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
   const buttons = await presence.getSetting("buttons"),
     time = await presence.getSetting("timestamps"),
     presenceData: PresenceData = {
-      details: "Page not Supported", // If the page cannot be recognized
+      details: "Page not Supported",
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     };

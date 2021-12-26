@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   iFrameVideo: boolean,
   currentTime: number,
   duration: number,
@@ -27,7 +27,7 @@ presence.on("iFrameData", (data: IFrameData) => {
   playback = data.iFrameVideo.dur !== null ? true : false;
   if (lastPlaybackState !== playback) {
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (playback) {
@@ -40,7 +40,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "fun",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (iFrameVideo === null && isNaN(duration)) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Looking at: ";
       presenceData.state = `${
         document.querySelector(".meta-overlay > div > div > ul > li > h1")

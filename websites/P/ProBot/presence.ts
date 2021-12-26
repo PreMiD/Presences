@@ -1,20 +1,19 @@
 const presence = new Presence({
     clientId: "655050505726197781"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "probot",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname.includes("/dashboard")) {
     presenceData.details = "Managing Server";
-    const title = (
+    presenceData.state = (
       document.querySelector("div.user-profile > div > div") as HTMLElement
-    ).innerText;
-    presenceData.state = title;
+    ).textContent;
   } else if (document.location.pathname.includes("/commands")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Commands";

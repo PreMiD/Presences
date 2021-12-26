@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bünyamin Öztürk",
     "id": "487515609815580672"
@@ -14,14 +14,14 @@
     "www.hackernoon.com",
     "hackernoon.com"
   ],
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/SyFFEUw.png",
   "thumbnail": "https://i.imgur.com/1W8IrxF.png",
   "color": "#00ff01",
+  "category": "other",
   "tags": [
     "hackernoon",
     "digital-media",
     "programming"
-  ],
-  "category": "other"
+  ]
 }

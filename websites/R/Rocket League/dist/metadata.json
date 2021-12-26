@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -14,15 +14,15 @@
     "www.rocketleague.com",
     "www.rocketleagueesports.com"
   ],
-  "version": "1.2.7",
+  "regExp": "([a-z0-9-]+[.])*rocketleague[.]com[/]",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/mW47NQQ.png",
   "thumbnail": "https://i.imgur.com/rAqm5wD.jpg",
   "color": "#0055ab",
+  "category": "games",
   "tags": [
     "rocket-league",
     "cars",
     "soccer"
-  ],
-  "category": "games",
-  "regExp": "([a-z0-9-]+[.])*rocketleague[.]com[/]"
+  ]
 }

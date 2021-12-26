@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Venøm",
     "id": "186084682797023233"
@@ -10,10 +10,11 @@
     "nl": "Houd het een gezond merk. Bewustwording creëren over geestelijke gezondheid en tegelijkertijd een groeiende gemeenschap creëren van mensen die de boodschap van hoop verspreiden naar degenen die het nodig hebben. 20% van alle winst wordt gedoneerd aan liefdadigheidsinstellingen die gespecialiseerd zijn in onderzoek naar psychische aandoeningen, mensen met angst, depressie of andere psychische problemen ondersteunen."
   },
   "url": "keepitwholesome.com",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/2rJQDbA.png",
   "thumbnail": "https://i.imgur.com/7j2cRu4.png",
   "color": "#c98b29",
+  "category": "other",
   "tags": [
     "kiw",
     "keepitwholesome",
@@ -21,6 +22,5 @@
     "simon",
     "clothing",
     "community"
-  ],
-  "category": "other"
+  ]
 }

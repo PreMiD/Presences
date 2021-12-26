@@ -89,13 +89,13 @@ presence.on("UpdateData", async () => {
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (page.includes("/yazar/")) {
-      const title = document.title.split(" "),
-        _author = title.slice(0, title.indexOf("Yazıları")).join(" ");
+      const title = document.title.split(" ");
 
       presence.setActivity({
         largeImageKey: "sd-logo",
         details: "Bir yazara bakıyor:",
-        state: _author || "Belirsiz",
+        state:
+          title.slice(0, title.indexOf("Yazıları")).join(" ") ?? "Belirsiz",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (page.includes("/arama/")) {

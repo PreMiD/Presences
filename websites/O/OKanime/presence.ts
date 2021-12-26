@@ -6,31 +6,30 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   });
-let video = {
+
+interface VideoData {
+  duration: number;
+  currentTime: number;
+  paused: boolean;
+}
+
+let video: VideoData = {
   duration: 0,
   currentTime: 0,
   paused: true
 };
 
-presence.on(
-  "iFrameData",
-  (data: { duration: number; currentTime: number; paused: boolean }) => {
-    video = data;
-  }
-);
+presence.on("iFrameData", (data: VideoData) => {
+  video = data;
+});
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "oa"
   };
 
-  if (video !== null && !isNaN(video.duration) && video.duration > 0) {
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
-
-    data.details = document.querySelector(
+  if (video && !isNaN(video.duration) && video.duration > 0) {
+    presenceData.details = document.querySelector(
       "body div.summary-block > p > a"
     ).textContent;
     if (
@@ -38,7 +37,7 @@ presence.on("UpdateData", async () => {
         .querySelector("body div.summary-block > p")
         ?.firstChild?.textContent.includes("حلقة")
     ) {
-      data.state = document
+      presenceData.state = document
         .querySelector("body div.summary-block > p")
         .firstChild.textContent.substr(
           0,
@@ -48,23 +47,27 @@ presence.on("UpdateData", async () => {
         );
     }
 
-    data.smallImageKey = video.paused ? "pause" : "play";
-    data.smallImageText = video.paused
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    [data.startTimestamp, data.endTimestamp] = timestamps;
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setActivity(data, !video.paused);
+    presence.setActivity(presenceData, !video.paused);
   } else {
-    data.details = (await strings).browsing;
-    data.smallImageKey = "search";
-    data.smallImageText = (await strings).browsing;
+    presenceData.details = (await strings).browsing;
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = (await strings).browsing;
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   }
 });

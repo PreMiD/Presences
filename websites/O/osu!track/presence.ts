@@ -60,9 +60,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "mania";
     presenceData.smallImageText = "osu!mania";
   } else if (pathnames === "/osutrack/b/") {
-    const indexText = document.querySelector("body > h1");
-
-    presenceData.details = `Viewing ${indexText.textContent}`;
+    presenceData.details = `Viewing ${
+      document.querySelector("body > h1").textContent
+    }`;
   } else if (pathnames === "/osutrack/b/ads/")
     presenceData.details = "Viewing About Ads on osu!track";
   else if (pathnames === "/osutrack/b/discord/")
@@ -78,8 +78,6 @@ presence.on("UpdateData", async () => {
   )
     presenceData.details = "Viewing at the IRC Bot's Documentation";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

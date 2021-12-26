@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas1C",
     "id": "303603391941050370"
@@ -15,16 +15,16 @@
     "www.anizm.tv",
     "anizm.tv"
   ],
-  "version": "1.0.7",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/TZZcyOQ.png",
   "thumbnail": "https://i.imgur.com/o4P1a0J.png",
   "color": "#fc9003",
+  "category": "videos",
   "tags": [
     "anime",
     "türk",
     "anizm",
     "anizmtv"
   ],
-  "category": "videos",
   "iframe": true
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Pokey",
     "id": "312269489850941450"
@@ -16,10 +16,11 @@
     "nl": "Simulator Radio: Uw #1 Simulatie Station"
   },
   "url": "simulatorradio.com",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "logo": "https://i.imgur.com/fUvjEoV.png",
   "thumbnail": "https://i.imgur.com/QIy2Kfe.png",
   "color": "#FB352A",
+  "category": "music",
   "tags": [
     "radio",
     "simulation",
@@ -31,6 +32,5 @@
     "gold-rush",
     "derail-valley",
     "fishing-north-atlantic"
-  ],
-  "category": "music"
+  ]
 }

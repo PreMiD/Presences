@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "837833278777065503"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 /**
  * Replaces "-" with " ", optional first letter of every word in uppercase (the first letter will be always uppercase)
@@ -39,7 +39,7 @@ function isInViewport(ele: HTMLElement) {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "oculus-logo-small",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     hostName = document.location.hostname.replace("www.", ""),
     path = window.location.pathname.split("/").slice(1),
@@ -154,6 +154,13 @@ presence.on("UpdateData", async () => {
               )
             )
               presenceData.details = "Reading Reviews of:";
+            else if (path[1]) {
+              presenceData.details = `Product - ${splitOnDashes(path[0])}`;
+              presenceData.state =
+                document.querySelector(
+                  "h1.rbpbduva.slrhy5ou.sw32xbbe.tssb32rf.q8m3c5hr.sjvld55j.h2xm5abc.t2genh0f.aiyvpu16.d29ffpmv.ecv66445.mm8y8im2.i7qx9w64.rhjqn6gv.p5bjl15m.rz0v8pod.mnbq7hy4"
+                )?.textContent || "Unknown";
+            }
 
             presenceData.buttons = [
               {
@@ -220,13 +227,45 @@ presence.on("UpdateData", async () => {
             break;
           }
           case "compare": {
-            presenceData.details = "Viewing Page:";
-            presenceData.state = "Compare Headsets";
+            const headset = {
+              left: <HTMLSelectElement>(
+                document.querySelector("div._9erd select._9ere")
+              ),
+              right: <HTMLSelectElement>(
+                document.querySelectorAll("div._9erd select._9ere")[1]
+              )
+            };
+
+            presenceData.details = "Comparing Headsets:";
+            presenceData.state = `${
+              headset.left?.options[headset.left.selectedIndex]?.text ||
+              "Unknown"
+            } x ${
+              headset.right?.options[headset.right.selectedIndex]?.text ||
+              "Unknown"
+            }`;
+
             break;
           }
           case "vr-for-good": {
-            presenceData.details = "Viewing Page:";
-            presenceData.state = "VR for Good";
+            if (path[1] === "stories" && path[2]) {
+              presenceData.details = "VR for Good - Story:";
+              presenceData.state =
+                document.querySelector(
+                  "h1._2e90._2e93._2e94.article-hero__title"
+                )?.textContent || splitOnDashes(path[2]);
+
+              presenceData.buttons = [
+                {
+                  label: "Read Story",
+                  url: `https://${hostName}/vr-for-good/stories/${path[2]}`
+                }
+              ];
+            } else {
+              presenceData.details = "Viewing Page:";
+              presenceData.state = "VR for Good";
+            }
+
             break;
           }
           case "safety-center": {
@@ -290,14 +329,12 @@ presence.on("UpdateData", async () => {
               if (path[2] === "" || !path[2]) presenceData.state = "Home";
               // Section aka showcases
               else if (path[2] === "section") {
-                const showCase = document.getElementsByClassName(
-                  "section-header__title"
-                )[0]?.textContent;
-
                 presenceData.details = `Store for ${splitOnDashes(
                   path[1]
                 )} - Showcase`;
-                presenceData.state = showCase ?? "Loading...";
+                presenceData.state =
+                  document.getElementsByClassName("section-header__title")[0]
+                    ?.textContent ?? "Loading...";
 
                 presenceData.buttons.push({
                   label: "View Showcase",
@@ -320,14 +357,12 @@ presence.on("UpdateData", async () => {
 
                 // Searching
               } else if (path[2] === "search") {
-                const searchText = document.querySelector(
-                  ".disco-search__query"
-                )?.textContent;
-
                 presenceData.details = `Store for ${splitOnDashes(
                   path[1]
                 )} - Search`;
-                presenceData.state = searchText ?? "Unknown";
+                presenceData.state =
+                  document.querySelector(".disco-search__query")?.textContent ??
+                  "Unknown";
 
                 // Bundles
               } else if (
@@ -335,14 +370,13 @@ presence.on("UpdateData", async () => {
                   "div.bundle-detail-page__description > h1"
                 )?.textContent
               ) {
-                const bundle = document.querySelector(
-                  "div.bundle-detail-page__description > h1"
-                )?.textContent;
-
                 presenceData.details = `Store for ${splitOnDashes(
                   path[1]
                 )} - Bundle`;
-                presenceData.state = bundle ?? "Loading...";
+                presenceData.state =
+                  document.querySelector(
+                    "div.bundle-detail-page__description > h1"
+                  )?.textContent ?? "Loading...";
 
                 presenceData.buttons.push({
                   label: "View bundle",
@@ -351,14 +385,12 @@ presence.on("UpdateData", async () => {
 
                 // Games
               } else {
-                const game = document.getElementsByClassName(
-                  "app-description__title"
-                )[0]?.textContent;
-
                 presenceData.details = `Store for ${splitOnDashes(
                   path[1]
                 )} - Game`;
-                presenceData.state = game ?? "Loading...";
+                presenceData.state =
+                  document.getElementsByClassName("app-description__title")[0]
+                    ?.textContent ?? "Loading...";
 
                 presenceData.buttons.push({
                   label: "View Game",
@@ -430,7 +462,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) presence.clearActivity();
+  if (!presenceData.details) presence.setActivity();
   else {
     // Delete button(s) / timestamp relating to the setting
     if (presenceData.buttons && !setting.showButtons)

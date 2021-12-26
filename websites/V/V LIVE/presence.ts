@@ -88,18 +88,6 @@ presence.on("UpdateData", async () => {
           "#root > div > div > div > nav > div > a > strong"
         ).textContent
       : "ERROR: NOT FOUND!",
-    channelPageBoardTitle = document.querySelector(
-      "#root > div > div > div > div > div > h3"
-    )
-      ? document.querySelector("#root > div > div > div > div > div > h3")
-          .textContent
-      : "ERROR: NOT FOUND!",
-    productPageTitle = document.querySelector("h3.tit")
-      ? document.querySelector("h3.tit").textContent
-      : "ERROR: NOT FOUND!",
-    productPageChannel = document.querySelector("a.name")
-      ? document.querySelector("a.name").textContent
-      : "ERROR: NOT FOUND!",
     statics: {
       [name: string]: PresenceData;
     } = {
@@ -190,7 +178,8 @@ presence.on("UpdateData", async () => {
       "/channel/(\\w*\\d*)/board/": {
         details: (await strings).channelBoard.replace(
           "{0}",
-          channelPageBoardTitle
+          document.querySelector("#root > div > div > div > div > div > h3")
+            ?.textContent ?? "ERROR: NOT FOUND!"
         ),
         state: (await strings).ofChannel.replace("{0}", channelPageChannelName),
         smallImageKey: "reading"
@@ -206,8 +195,12 @@ presence.on("UpdateData", async () => {
         smallImageKey: "reading"
       },
       "/product/(\\w*\\d*)/": {
-        details: (await strings).product.replace("{0}", productPageChannel),
-        state: productPageTitle,
+        details: (await strings).product.replace(
+          "{0}",
+          document.querySelector("a.name")?.textContent ?? "ERROR: NOT FOUND!"
+        ),
+        state:
+          document.querySelector("h3.tit")?.textContent ?? "ERROR: NOT FOUND!",
         smallImageKey: "reading"
       },
       "/search/": {
@@ -247,9 +240,6 @@ presence.on("UpdateData", async () => {
   //* Video page
   if (path.match("/video/(\\d*)/")) {
     const video = document.querySelector("video"),
-      upcoming = document.querySelector(
-        "#root > div > div > div > div > div > div > div > div > div> div > div > div > strong"
-      ),
       badge = document.querySelector(
         "#root > div > div > div > div > div > div > div > div > div > span > em"
       ),
@@ -266,11 +256,11 @@ presence.on("UpdateData", async () => {
         //* Is a livestream
         if (showLive) {
           if (document.querySelector(".timeBox")) {
-            const timestamp = presence.timestampFromFormat(
-              document.querySelector(".timeBox").textContent
-            );
             presenceData.startTimestamp = Math.floor(
-              Date.now() / 1000 - timestamp
+              Date.now() / 1000 -
+                presence.timestampFromFormat(
+                  document.querySelector(".timeBox").textContent
+                )
             );
           }
           presenceData.smallImageKey = video.paused ? "pause" : "live";
@@ -299,8 +289,8 @@ presence.on("UpdateData", async () => {
       } else {
         //* Is a a normal video
         if (showVideo) {
-          const timestamps = presence.getTimestampsfromMedia(video);
-          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+          [presenceData.startTimestamp, presenceData.endTimestamp] =
+            presence.getTimestampsfromMedia(video);
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused
             ? (await strings).pause
@@ -328,7 +318,11 @@ presence.on("UpdateData", async () => {
           delete presenceData.state;
         }
       }
-    } else if (upcoming) {
+    } else if (
+      document.querySelector(
+        "#root > div > div > div > div > div > div > div > div > div> div > div > div > strong"
+      )
+    ) {
       //* Video not out yet...
       if (badge && badge.className.includes("-live--")) {
         //* Will be a livestream
@@ -401,8 +395,8 @@ presence.on("UpdateData", async () => {
     if (video && videoTitle && videoPoster) {
       //* Has video
       if (showVideo) {
-        const timestamps = presence.getTimestampsfromMedia(video);
-        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestampsfromMedia(video);
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
           ? (await strings).pause
@@ -456,7 +450,7 @@ presence.on("UpdateData", async () => {
     }
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
+
     presence.info(
       `Looks like your current page is unsupported!\nPlease contact Bas950#0950 in Discord (https://discord.premid.app/).\nPath: ${path}`
     );

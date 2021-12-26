@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    pathArray: Array<string> = window.location.pathname
+    pathArray: string[] = window.location.pathname
       .replace(/^\/|\/$/g, "")
       .split("/");
   let heading: Element | string =
@@ -202,8 +202,6 @@ presence.on("UpdateData", async () => {
       } else presenceData.details = "Idle";
       break;
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

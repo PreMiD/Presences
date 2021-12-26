@@ -1,7 +1,7 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-  if (document.querySelector("#p_v_player_0") !== null) {
+  if (document.querySelector("#p_v_player_0")) {
     const video: HTMLVideoElement = document.querySelector("#p_v_player_0"),
       audio: HTMLAudioElement = document.querySelector("#p_a_player_0");
 

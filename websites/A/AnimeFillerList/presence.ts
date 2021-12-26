@@ -1,11 +1,11 @@
 const presence = new Presence({
     clientId: "894342965772820490"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "animefillerlistlogo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") presenceData.details = "In home page";
@@ -30,9 +30,10 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/user/login"))
     presenceData.details = "Logging in";
   else if (document.location.pathname.includes("/users/")) {
-    const user = document.querySelector(".content > h1");
     presenceData.details = "Viewing user";
-    presenceData.state = user.textContent;
+    presenceData.state = (
+      document.querySelector(".content > h1") as HTMLHeadingElement
+    ).textContent;
     presenceData.buttons = [
       {
         label: "View User",
@@ -46,8 +47,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/privacy-policy"))
     presenceData.details = "Reading the privacy policy";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

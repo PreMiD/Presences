@@ -1,10 +1,7 @@
 const presence = new Presence({
     clientId: "675322225490001924"
   }),
-  presenceData: PresenceData = {
-    largeImageKey: "logo"
-  },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let customData = false,
   user: HTMLElement,
   title: HTMLElement,
@@ -16,13 +13,14 @@ let customData = false,
   mode: number;
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
+  };
   customData = false;
 
-  if (document.location.pathname === "/") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Home Page";
-  } else if (document.location.pathname.includes("/leaderboard")) {
-    presenceData.startTimestamp = browsingStamp;
+  if (document.location.pathname === "/") presenceData.details = "Home Page";
+  else if (document.location.pathname.includes("/leaderboard")) {
     presenceData.details = "Browsing Leaderboard";
 
     url = new URL(document.location.href);
@@ -42,7 +40,6 @@ presence.on("UpdateData", async () => {
         break;
     }
   } else if (document.location.pathname.includes("/clans")) {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing Clans";
 
     url = new URL(document.location.href);
@@ -61,10 +58,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = "osu!standard";
         break;
     }
-  } else if (document.location.pathname.includes("/register")) {
-    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/register"))
     presenceData.details = "Registering account";
-  } else if (document.location.pathname.includes("/u")) {
+  else if (document.location.pathname.includes("/u")) {
     user = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div.ui.top.attached.segment.overflow.auto > div:nth-child(1) > div:nth-child(2) > h1"
     );
@@ -80,9 +76,8 @@ presence.on("UpdateData", async () => {
     countryrank = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div:nth-child(5) > div > div > div:nth-child(3) > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.right.aligned"
     );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = `${user.innerText}'s profile`;
-    presenceData.state = `${rank.innerText} | ${pp.innerText}pp | ${subtitle.innerText}(${countryrank.innerText})`;
+    presenceData.details = `${user.textContent}'s profile`;
+    presenceData.state = `${rank.textContent} | ${pp.textContent}pp | ${subtitle.textContent}(${countryrank.textContent})`;
   } else if (document.location.pathname.includes("/c")) {
     title = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div.ui.top.attached.segment.overflow.auto.aligned > div > div > h1"
@@ -96,35 +91,27 @@ presence.on("UpdateData", async () => {
     subtitle = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div.ui.top.attached.segment.overflow.auto.aligned > div > div > div"
     );
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing Clans";
-    presenceData.state = `${title.innerText + subtitle.innerText} | ${
-      pp.innerText
-    }pp(${rank.innerText})`;
-  } else if (document.location.pathname.includes("/about")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = `${title.textContent + subtitle.textContent} | ${
+      pp.textContent
+    }pp(${rank.textContent})`;
+  } else if (document.location.pathname.includes("/about"))
     presenceData.details = "Viewing About";
-  } else if (document.location.pathname.includes("/doc")) {
+  else if (document.location.pathname.includes("/doc")) {
     title = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div > div:nth-child(1) > h1"
     );
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing Documentation";
-    presenceData.state = title.innerText;
-  } else if (document.location.pathname === "/beatmaps") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = title.textContent;
+  } else if (document.location.pathname === "/beatmaps")
     presenceData.details = "Viewing beatmaps";
-  } else if (document.location.pathname.includes("/beatmaps/rank_request")) {
-    presenceData.startTimestamp = browsingStamp;
+  else if (document.location.pathname.includes("/beatmaps/rank_request")) {
     presenceData.details = "Viewing beatmaps";
     presenceData.state = "Request beatmap ranking";
-  } else if (document.location.pathname.includes("/friends")) {
-    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/friends"))
     presenceData.details = "Viewing friends";
-  } else if (document.location.pathname.includes("/settings")) {
-    presenceData.startTimestamp = browsingStamp;
+  else if (document.location.pathname.includes("/settings"))
     presenceData.details = "Viewing their settings";
-  }
 
   if (!customData) presence.setActivity(presenceData);
 });

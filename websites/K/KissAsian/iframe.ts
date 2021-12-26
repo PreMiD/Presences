@@ -30,7 +30,7 @@ iframe.on("UpdateData", async () => {
     ) ||
     document.querySelector("video");
 
-  if (video !== null && !isNaN(video.duration)) {
+  if (video && !isNaN(video.duration)) {
     iframe.send({
       iframeVideo: {
         currentTime: video.currentTime,

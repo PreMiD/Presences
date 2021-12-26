@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "906195926299861003"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "serverpro"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
   if (document.location.hostname === "server.pro") {
     if (
       document.querySelector(

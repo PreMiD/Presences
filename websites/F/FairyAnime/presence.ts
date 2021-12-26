@@ -14,7 +14,7 @@ let video = {
 };
 
 // Const thing
-const browsingStamp = Math.floor(Date.now() / 1000),
+const browsingTimestamp = Math.floor(Date.now() / 1000),
   path = document.location;
 
 presence.on(
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
   // Presence
   if (path.hostname === "fairyanime.com" || path.hostname.includes("www.")) {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = (await strings).browsing;
     } else if (path.pathname.includes("watch")) {
       const title =
@@ -83,10 +83,10 @@ presence.on("UpdateData", async () => {
         ),
         rate = document.querySelector("#home > p > span");
       if (!rate || !ep) {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = (await strings).browsing;
       } else {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "เลือกตอน ";
         presenceData.state = `${rate.textContent}⭐ -${ep.textContent
           .replace("ตอนของ", " ")
@@ -96,8 +96,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

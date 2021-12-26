@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "641416608790609942"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement,
   min: number,
   sec: number,
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "piapro.jp") {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/html5_player_popup/")) {
       min = parseInt(
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = "Paused";
       }
     } else if (document.location.pathname.includes("/t/")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = `Viewing ${
         document
           .querySelector("head > title")
@@ -92,40 +92,40 @@ presence.on("UpdateData", async () => {
         "#main > div.cd_works-whole.illust > div.cd_works-mainclm > h1"
       ).textContent;
     } else if (document.location.pathname.includes("/music")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Browsing the";
       presenceData.state = "music category";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/illust")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Browsing the";
       presenceData.state = "illustrations category";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/text")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Browsing the";
       presenceData.state = "text category";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/search/")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Searching for:";
       search = document.querySelector("#keyword");
-      presenceData.state = search.value;
+      presenceData.state = search.textContent;
       presenceData.smallImageKey = "search";
-    } else if (document.querySelector("#user_prof > p:nth-child(2)") !== null) {
+    } else if (document.querySelector("#user_prof > p:nth-child(2)")) {
       presenceData.details = "Viewing user:";
       presenceData.state = document.querySelector(
         "#user_prof > p:nth-child(2)"
       ).textContent;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/collabo/")) {
       presenceData.details = "Viewing collab:";
       presenceData.state =
         document.querySelector("#main_name > h2").textContent;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/collabo_list/")) {
       presenceData.details = "Viewing collab list";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (
       document.location.pathname.includes("/pages/official_collabo/")
     ) {
@@ -133,14 +133,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
         "#main > div.static_path > span"
       ).textContent;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     } else if (document.location.pathname.includes("/official_collabo/")) {
       presenceData.details = "Viewing official collab list";
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

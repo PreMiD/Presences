@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Tellen",
     "id": "535214819520020510"
@@ -12,10 +12,11 @@
     "nl": "Anime Music Quiz is een spelplatform waarmee vrienden het tegen elkaar kunnen opnemen op hun anime-muziekkennis."
   },
   "url": "animemusicquiz.com",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "logo": "https://i.imgur.com/oaRshoy.png",
   "thumbnail": "https://i.imgur.com/8tXZEqG.png",
   "color": "#DF6975",
+  "category": "games",
   "tags": [
     "amq",
     "anime-music-quiz",
@@ -23,6 +24,5 @@
     "music",
     "quiz",
     "games"
-  ],
-  "category": "games"
+  ]
 }

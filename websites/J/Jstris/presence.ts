@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "754149249335296010"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     },
     pathname = document.location.pathname.split("/").splice(1),
     queryString = document.location.search.substring(1);
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   //Sets BaseUrl
   const BaseUrl = "https://jstris.jezevec10.com",
@@ -21,14 +21,18 @@ presence.on("UpdateData", async () => {
     username = getUsername();
 
   if (joinLinkArr.length !== 0) {
-    const joinUrl = joinLinkArr[joinLinkArr.length - 1].innerHTML;
-    tempButtons.push({ label: "Join", url: joinUrl });
+    tempButtons.push({
+      label: "Join",
+      url: joinLinkArr[joinLinkArr.length - 1].textContent
+    });
   }
   //Sets button for viewing profile.
 
   if (typeof username !== "undefined") {
-    const profileUrl = `${BaseUrl}/u/${username}`;
-    tempButtons.push({ label: "View Profile", url: profileUrl });
+    tempButtons.push({
+      label: "View Profile",
+      url: `${BaseUrl}/u/${username}`
+    });
   }
 
   switch (pathname[0]) {
@@ -102,16 +106,15 @@ presence.on("UpdateData", async () => {
       break;
     case "map":
       presenceData.details = `Viewing Map: ${
-        document.querySelector("h1").innerText
+        document.querySelector("h1").textContent
       }`;
       presenceData.state = `Map ID: ${pathname[1]}`;
       break;
     //User
     case "u":
       presenceData.details = `Viewing User: ${pathname[1]}`;
-      presenceData.state = (<HTMLElement>(
-        document.querySelector(".col-md-8")
-      )).innerText;
+      presenceData.state =
+        document.querySelector<HTMLElement>(".col-md-8").textContent;
       break;
     default:
       //Idle
@@ -121,12 +124,10 @@ presence.on("UpdateData", async () => {
 
   //Sets the buttons:
   if (tempButtons.length !== 0 && tempButtons.length <= 2)
-    presenceData.buttons = tempButtons;
+    presenceData.buttons = tempButtons as [ButtonData, ButtonData?];
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 function getUsername() {

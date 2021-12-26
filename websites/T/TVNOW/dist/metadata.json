@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -11,13 +11,13 @@
     "de": "TVNOW bietet Dir spannende Filme und Serien. Auch viele Shows und Dokus sind im Online-Stream zu finden! Deine Lieblingssendung jetzt online anschauen!"
   },
   "url": "www.tvnow.de",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/Z9NwC2O.png",
   "thumbnail": "https://i.imgur.com/2TqBWPd.png",
   "color": "#ffbc2d",
+  "category": "videos",
   "tags": [
     "tv",
     "now"
-  ],
-  "category": "videos"
+  ]
 }
