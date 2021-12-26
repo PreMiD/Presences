@@ -288,43 +288,46 @@ function jellyfinBasenameUrl(): string {
  * handleAudioPlayback - handles the presence when the audio player is active
  */
 async function handleAudioPlayback(): Promise<void> {
-  // sometimes the buttons are not created fast enough
-  try {
-    const [audioElem] = document.getElementsByTagName("audio"),
-      [infoContainer] = document.getElementsByClassName("nowPlayingBar"),
-      title: HTMLAnchorElement = infoContainer
-        .getElementsByClassName("nowPlayingBarText")[0]
-        .querySelector("a"),
-      artist: HTMLDivElement = infoContainer.getElementsByClassName(
-        "nowPlayingBarSecondaryText"
-      )[0] as HTMLDivElement;
+  const [audioElem] = document.getElementsByTagName("audio"),
+    regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElem.src);
 
-    presenceData.details = `Listening to: ${
-      title ? title.textContent : "unknown title"
-    }`;
-    presenceData.state = `By: ${
-      artist ? artist.textContent : "unknown artist"
-    }`;
+  if (!regexResult) {
+    presence.error("Could not obtain audio itemId");
+    return;
+  }
 
-    // playing
-    if (!audioElem.paused) {
-      presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
-      presenceData.smallImageText = "Playing";
+  const [, mediaId] = regexResult,
+    info = await obtainMediaInfo(mediaId);
 
-      if (await presence.getSetting("showMediaTimestamps")) {
-        [, presenceData.endTimestamp] =
-          presence.getTimestampsfromMedia(audioElem);
-      }
+  presenceData.details = `Listening to: ${info.Name ?? "unknown title"}`;
+  presenceData.state = `By: ${info.AlbumArtist ?? "unknown artist"}`;
 
-      // paused
-    } else {
-      presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
-      presenceData.smallImageText = "Paused";
+  if (
+    (await presence.getSetting("showRichImages")) &&
+    (await presence.getSetting("showAlbumart")) &&
+    // some songs might not have albumart
+    document.querySelector<HTMLDivElement>(".nowPlayingImage").style
+      .backgroundImage
+  )
+    presenceData.largeImageKey = `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
+  else presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
 
-      delete presenceData.endTimestamp;
+  // playing
+  if (!audioElem.paused) {
+    presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+    presenceData.smallImageText = "Playing";
+
+    if (await presence.getSetting("showMediaTimestamps")) {
+      [, presenceData.endTimestamp] =
+        presence.getTimestampsfromMedia(audioElem);
     }
-  } catch (e) {
-    // do nothing
+
+    // paused
+  } else {
+    presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+    presenceData.smallImageText = "Paused";
+
+    delete presenceData.endTimestamp;
   }
 }
 
