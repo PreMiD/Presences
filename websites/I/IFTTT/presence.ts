@@ -1,12 +1,3 @@
-/**
- * Language Strings
- */
-interface LangStrings {
-  search: string;
-  browsing: string;
-  reading: string;
-}
-
 const presence = new Presence({
     clientId: "665519810054062100"
   }),
@@ -14,22 +5,26 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname,
-    path = window.location.pathname.split("/").slice(1);
+    path = window.location.pathname.split("/").slice(1),
+    presenceData: PresenceData = {
+      largeImageKey: "logo_big"
+    };
 
   if (host === "ift.tt") {
     // IFTTT URL Shortener (for the Help Center)
     presence.setActivity();
+    return;
   } else if (host === "help.ifttt.com") {
     // IFTTT Help Center
     switch (path[0]) {
       // Startpage
       case "hc":
         await handleHelpCenter(path);
-        break;
+        return;
       // Unknown
       default:
         presence.setActivity();
-        break;
+        return;
     }
   } else if (host === "platform.ifttt.com") {
     // IFTTT for Businesses / Developers
@@ -37,78 +32,57 @@ presence.on("UpdateData", async () => {
       // Documentation
       case "docs":
         await handleDocs();
-        break;
+        return;
       // Developer spotlight
       case "blog":
-        presence.setActivity({
-          details: "Developer spotlight",
-          state:
-            path[1]?.length > 0
-              ? document.querySelector<HTMLHeadingElement>("h1").textContent
-              : null,
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Developer spotlight";
+        presenceData.state =
+          path[1]?.length > 0
+            ? document.querySelector<HTMLHeadingElement>("h1").textContent
+            : null;
         break;
       // Solutions
       case "solutions":
-        presence.setActivity({
-          details: "Solutions",
-          state:
-            path[1]?.length > 0
-              ? document.querySelector<HTMLHeadingElement>("h3").textContent
-              : null,
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Solutions";
+        presenceData.state =
+          path[1]?.length > 0
+            ? document.querySelector<HTMLHeadingElement>("h3").textContent
+            : null;
         break;
       // Case studies
       case "case_studies":
-        presence.setActivity({
-          details: "Case studies",
-          state:
-            path[1]?.length > 0
-              ? document.querySelector<HTMLHeadingElement>("h1").textContent
-              : null,
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Case studies";
+        presenceData.state =
+          path[1]?.length > 0
+            ? document.querySelector<HTMLHeadingElement>("h1").textContent
+            : null;
         break;
       // Testimonials
       case "testimonials":
-        presence.setActivity({
-          details: "Testimonials",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Testimonials";
         break;
       // Contact sales
       case "contact_sales":
-        presence.setActivity({
-          details: "Contact sales",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Contact sales";
         break;
-      // Startpage
-      // Unknown
+      // Startpage, Unknown
       default:
         presence.setActivity();
-        break;
+        return;
     }
   } else if (host === "status.ifttt.com") {
     // IFTTT Status
     switch (path[0]) {
       // Incidents
       case "incidents":
-        presence.setActivity({
-          details: "IFTTT Status - Incident Report",
-          state:
-            document.querySelector<HTMLDivElement>(".incident-name")
-              .textContent,
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "IFTTT Status - Incident Report";
+        presenceData.state =
+          document.querySelector<HTMLDivElement>(".incident-name").textContent;
         break;
-      // Startpage
-      // Unknown
+      // Startpage, Unknown
       default:
         await handleStatusPage();
-        break;
+        return;
     }
   } else {
     // Main page
@@ -116,39 +90,27 @@ presence.on("UpdateData", async () => {
       // Applets
       case "applets":
         await handleApplet();
-        break;
+        return;
       // Account settings
       case "settings":
-        presence.setActivity({
-          details: "Account settings",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Account settings";
         break;
       // Billing
       case "billing":
-        presence.setActivity({
-          details: "Billing",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Billing";
         break;
       // My Applets
       case "home":
       case "my_applets":
-        presence.setActivity({
-          details: "My Applets",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "My Applets";
         break;
       // Creating an Applet
       case "create":
         await handleAppletCreation();
-        break;
+        return;
       // Activity
       case "activity":
-        presence.setActivity({
-          details: "Activity",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Activity";
         break;
       // My Services
       case "date_and_time":
@@ -163,10 +125,8 @@ presence.on("UpdateData", async () => {
         await handleMyServices(
           document.querySelector<HTMLHeadingElement>("h1")?.textContent
         );
-        break;
-      // Explore
-      // Blog entry
-      // Search
+        return;
+      // Explore, Blog entry, Search
       case "explore":
       case "search":
         if (
@@ -187,53 +147,33 @@ presence.on("UpdateData", async () => {
           return;
         }
 
-        presence.setActivity({
-          details: "Exploring Applets & Services",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Exploring Applets & Services";
         break;
       // Plans
       case "plans":
-        presence.setActivity({
-          details: "Plans",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Plans";
         break;
       // Blog
       case "blog":
         await handleBlog();
-        break;
+        return;
       // Developers
       case "developers":
-        presence.setActivity({
-          details: "Developers",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Developers";
         break;
       // Contact
       case "contact":
-        presence.setActivity({
-          details: "Contact",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Contact";
         break;
       // Trust & Privacy
       case "terms":
-        presence.setActivity({
-          details: "Privacy Policy & Terms of Use",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Privacy Policy & Terms of Use";
         break;
       // Careers
       case "careers":
-        presence.setActivity({
-          details: "Careers",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Careers";
         break;
-      // Startpage
-      // Services
-      // Unknown
+      // Startpage, Services, Unknown
       default:
         if (document.querySelector<HTMLDivElement>(".brand-section")) {
           await handleSerivce();
@@ -241,16 +181,18 @@ presence.on("UpdateData", async () => {
         }
 
         presence.setActivity();
-        break;
+        return;
     }
   }
+
+  presence.setActivity(presenceData);
 });
 
 /**
  * Get Language Strings
  * @returns Language Strings
  */
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       search: "general.searching",
