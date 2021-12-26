@@ -17,7 +17,7 @@ async function getStrings() {
       viewMovie: "general.buttonViewMovie",
       watchEpisode: "general.buttonViewEpisode"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -40,13 +40,13 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
   oldLang: string = null;
 
 function checkIfMovie() {
-  nextEpisodeElement === null && previousEpisodeElement === null
+  !nextEpisodeElement && !previousEpisodeElement
     ? (isMovie = true)
-    : nextEpisodeElement !== null && previousEpisodeElement === null
+    : nextEpisodeElement && !previousEpisodeElement
     ? (isMovie = false)
-    : nextEpisodeElement === null && previousEpisodeElement !== null
+    : !nextEpisodeElement && previousEpisodeElement
     ? (isMovie = false)
-    : nextEpisodeElement !== null && previousEpisodeElement !== null
+    : nextEpisodeElement && previousEpisodeElement
     ? (isMovie = false)
     : (isMovie = true);
 
@@ -80,12 +80,14 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "kaa"
+      largeImageKey: "kaa",
+      startTimestamp: browsingTimestamp
     },
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang");
-
-  presenceData.startTimestamp = browsingTimestamp;
+    [buttons, newLang, cover] = await Promise.all([
+      presence.getSetting("buttons"),
+      presence.getSetting("lang"),
+      presence.getSetting("cover")
+    ]);
 
   oldLang ??= newLang;
   if (oldLang !== newLang) {
@@ -129,6 +131,12 @@ presence.on("UpdateData", async () => {
             }
           ];
         }
+
+        presenceData.largeImageKey = cover
+          ? document
+              .querySelector<HTMLElement>("div.info-header")
+              .style.backgroundImage.match(/"(.*)"/)[1]
+          : "kaa";
       } else {
         currentAnimeEpisode = "Movie";
 
@@ -146,8 +154,8 @@ presence.on("UpdateData", async () => {
         }
       }
 
-      presenceData.details = `${currentAnimeTitle}`;
-      presenceData.state = `${currentAnimeEpisode}`;
+      presenceData.details = currentAnimeTitle;
+      presenceData.state = currentAnimeEpisode;
 
       if (paused) {
         delete presenceData.startTimestamp;
@@ -211,6 +219,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Looking at:";
     presenceData.state = `${currentAnimeTitle}`;
     presenceData.smallImageKey = "searching";
+    presenceData.largeImageKey = cover
+      ? document
+          .querySelector<HTMLElement>("div.poster")
+          .style.backgroundImage.match(/"(.*)"/)[1]
+      : "kaa";
 
     if (buttons) {
       presenceData.buttons = [
