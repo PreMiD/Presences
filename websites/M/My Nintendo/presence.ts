@@ -1,10 +1,15 @@
+/**
+ * Language Strings
+ */
+interface LangStrings {
+  browsing: string;
+  reading: string;
+}
+
 const presence = new Presence({
     clientId: "680498892651233310"
   }),
-  strings = presence.getStrings({
-    browsing: "presence.activity.browsing",
-    reading: "presence.activity.reading"
-  });
+  strings = getStrings();
 
 presence.on("UpdateData", async () => {
   const path = window.location.pathname.split("/").slice(1);
@@ -49,6 +54,20 @@ presence.on("UpdateData", async () => {
       break;
   }
 });
+
+/**
+ * Get Language Strings
+ * @returns Language Strings
+ */
+async function getStrings(): Promise<LangStrings> {
+  return presence.getStrings(
+    {
+      browsing: "general.browsing",
+      reading: "general.reading"
+    },
+    (await presence.getSetting("lang").catch(() => "en")) as string
+  );
+}
 
 /**
  * Handle reward category pages
