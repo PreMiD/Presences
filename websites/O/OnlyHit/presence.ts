@@ -13,27 +13,17 @@ let songTimestamp = Math.floor(Date.now() / 1000),
   lastTitle = "";
 
 presence.on("UpdateData", async () => {
-  //* Get customizable settings
-  let format1 = await presence.getSetting("sFormat1"),
-    format2 = await presence.getSetting("sFormat2"),
-    info = await presence.getSetting("sInfo"),
-    showElapsed = await presence.getSetting("tElapsed");
-
-  //! Only needed due to a bug PreMiD has atm
-  if (!info) {
-    format1 = '"%song%"';
-    format2 = "by %artist%";
-    info = true;
-    showElapsed = true;
-  }
-
-  const presenceData: PresenceData = {};
+  const presenceData: PresenceData = {},
+    [format1, format2, showElapsed] = await Promise.all([
+      presence.getSetting<string>("sFormat1"),
+      presence.getSetting<string>("sFormat2"),
+      presence.getSetting<boolean>("tElapsed")
+    ]);
 
   //! Merch website
   if (document.location.hostname === "onlyhit.merchforall.com") {
     //* Show timestamp if the setting is enabled and set largeImageKey
     if (showElapsed) presenceData.startTimestamp = browsingTimestamp;
-    else delete presenceData.startTimestamp;
 
     presenceData.largeImageKey = "logo_onlyhit";
     presenceData.smallImageKey = "reading";

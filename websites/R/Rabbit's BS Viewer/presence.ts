@@ -4,10 +4,10 @@
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const elapsed = await presence.getSetting("elapsed"),
-    timeleft = await presence.getSetting("timeleft"),
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons"),
+  const elapsed = await presence.getSetting<boolean>("elapsed"),
+    timeleft = await presence.getSetting<boolean>("timeleft"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    buttons = await presence.getSetting<boolean>("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
       } ${document.querySelector("#songsubname").textContent}`;
       presenceData.state = `${(
         document.getElementById("difficultyselect") as HTMLSelectElement
-      ).textContent.replace("Plus", "+")} (${
+      ).value.replace("Plus", "+")} (${
         (
           document.getElementById("difficultyselect") as HTMLSelectElement
         ).selectedOptions.item(0).textContent

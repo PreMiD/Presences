@@ -52,8 +52,8 @@ const statics = {
 presence.on("UpdateData", async () => {
   const { host } = location,
     path = location.pathname.replace(/\/?$/, "/"),
-    showSearch = await presence.getSetting("search"),
-    showTimestamps = await presence.getSetting("timestamp");
+    showSearch = await presence.getSetting<boolean>("search"),
+    showTimestamps = await presence.getSetting<boolean>("timestamp");
 
   let presenceData: PresenceData = {
     largeImageKey: "userbenchmark",

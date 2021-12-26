@@ -204,7 +204,7 @@ presence.on("UpdateData", async () => {
 
   for (const setting of data.settings) {
     const settingValue = await presence
-      .getSetting(setting.id)
+      .getSetting<boolean>(setting.id)
       .catch(() => null);
 
     if (!settingValue && setting.delete) {

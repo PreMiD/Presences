@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    privacymode = await presence.getSetting("privacy");
+    privacymode = await presence.getSetting<boolean>("privacy");
 
   if (document.location.hostname === "www.vrcarena.com") {
     if (!privacymode) {

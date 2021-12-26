@@ -482,7 +482,7 @@ presence.on("UpdateData", async () => {
   }
 
   for (const setting of data.settings) {
-    const settingValue = await presence.getSetting(setting.id);
+    const settingValue = await presence.getSetting<boolean>(setting.id);
 
     if (!settingValue && setting.delete) {
       for (const PData of setting.data)

@@ -4,10 +4,10 @@ const presence = new Presence({
   startedTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const privacyMode: boolean = await presence.getSetting("privacy"),
-    privacyChat: boolean = await presence.getSetting("privacyChat"),
-    showTimestamp: boolean = await presence.getSetting("showTimestamp"),
-    logo: number = await presence.getSetting("logo"),
+  const privacyMode = await presence.getSetting<boolean>("privacy"),
+    privacyChat = await presence.getSetting<boolean>("privacyChat"),
+    showTimestamp = await presence.getSetting<boolean>("showTimestamp"),
+    logo = await presence.getSetting<number>("logo"),
     // eslint-disable-next-line no-one-time-vars/no-one-time-vars
     logoArr = ["wov", "wov_no_bg", "wov_text"],
     presenceData: PresenceData = {

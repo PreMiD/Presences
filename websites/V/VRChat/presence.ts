@@ -15,7 +15,7 @@ async function getProfileDetails() {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    privacymode = await presence.getSetting("privacy"),
+    privacymode = await presence.getSetting<boolean>("privacy"),
     viewingprofilename =
       document.querySelector("div.col-md-12 > h2").textContent;
   if (privacymode === false) {
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    privacymode = await presence.getSetting("privacy");
+    privacymode = await presence.getSetting<boolean>("privacy");
 
   if (document.location.hostname === "hello.vrchat.com") {
     presenceData.details = "Landing Page:";

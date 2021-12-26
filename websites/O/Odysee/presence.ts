@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "837270687638224906" });
 
 presence.on("UpdateData", async () => {
-  const buttons = await presence.getSetting("buttons"),
+  const buttons = await presence.getSetting<boolean>("buttons"),
     floatingViewer: HTMLElement = document.querySelector(
       ".content__viewer--floating"
     ),

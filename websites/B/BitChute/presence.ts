@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     { pathname } = location,
     [privacy, buttons, time] = await Promise.all(
       ["privacy", "buttons", "time"].map(async setting => {
-        const s: boolean = await presence.getSetting(setting);
+        const s = await presence.getSetting<boolean>(setting);
         return s;
       })
     );

@@ -4,10 +4,10 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const time = await presence.getSetting("time"),
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons"),
-    cover = await presence.getSetting("cover"),
+  const time = await presence.getSetting<boolean>("time"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    buttons = await presence.getSetting<boolean>("buttons"),
+    cover = await presence.getSetting<boolean>("cover"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp

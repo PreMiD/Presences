@@ -13,27 +13,28 @@ async function getStrings() {
       viewUser: "general.viewUser",
       watchingVid: "general.watchingVid"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    showTimestamps = await presence.getSetting("timestamp"),
-    showSubdomain = await presence.getSetting("subdomain"),
-    bigicon = await presence.getSetting("bigicon"),
-    buttons = await presence.getSetting("buttons"),
+  const newLang: string = await presence
+      .getSetting<string>("lang")
+      .catch(() => "en"),
+    showTimestamps = await presence.getSetting<boolean>("timestamp"),
+    showSubdomain = await presence.getSetting<boolean>("subdomain"),
+    bigicon = await presence.getSetting<number>("bigicon"),
+    buttons = await presence.getSetting<boolean>("buttons"),
     { hostname, pathname, search, hash } = document.location,
     etrnl = "eternalnetworktm.com",
     ttl = document.title;
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {

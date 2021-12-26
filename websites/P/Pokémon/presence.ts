@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
         document.querySelector(".pokedex-pokemon-pagination-title > div") !==
         null
       ) {
-        const pdexID = await presence.getSetting("pdexID");
+        const pdexID = await presence.getSetting<boolean>("pdexID");
         let name = document.querySelector(
             ".pokedex-pokemon-pagination-title > div"
           ).textContent,
@@ -378,7 +378,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("body > div.single_header_wrap > div > h1") !==
         null
       ) {
-        const pdexID = await presence.getSetting("pdexID");
+        const pdexID = await presence.getSetting<boolean>("pdexID");
         let name = document
             .querySelector("body > div.single_header_wrap > div > h1")
             .textContent.trim(),
@@ -741,7 +741,7 @@ presence.on("UpdateData", async () => {
       const search = document.querySelector<HTMLInputElement>("#search_input");
 
       if (document.querySelector(".pokemon-detail__profile")) {
-        const pdexID = await presence.getSetting("pdexID"),
+        const pdexID = await presence.getSetting<boolean>("pdexID"),
           name = document.querySelector(
             ".pokemon-slider__main-name"
           ).textContent;

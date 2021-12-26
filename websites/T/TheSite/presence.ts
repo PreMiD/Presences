@@ -175,11 +175,16 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-    video: HTMLVideoElement = document.querySelector("video"),
-    search: HTMLInputElement = document.querySelector("input"),
-    showSearchInfo = await presence.getSetting("search"),
-    showBrowseInfo = await presence.getSetting("browse"),
-    showVideoInfo = await presence.getSetting("video"),
+    video = document.querySelector<HTMLVideoElement>("video"),
+    search = document.querySelector<HTMLInputElement>("input"),
+    [showSearchInfo, showBrowseInfo, showVideoInfo, format] = await Promise.all(
+      [
+        presence.getSetting<boolean>("search"),
+        presence.getSetting<boolean>("browse"),
+        presence.getSetting<boolean>("video"),
+        presence.getSetting<string>("show-format")
+      ]
+    ),
     presenceData: PresenceData = {
       largeImageKey: "thesite"
     };
@@ -256,16 +261,15 @@ presence.on("UpdateData", async () => {
     }
     /* Non Watch Later */
     if (path.includes("/shows")) {
-      const menu: HTMLElement = document.querySelector(".mv-movie-info"),
-        regex: RegExpMatchArray = getElement(
-          ".mv-movie-title > span > span > strong"
-        ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/),
-        setting = await presence.getSetting("show-format"),
+      const menu = document.querySelector<HTMLElement>(".mv-movie-info"),
+        regex = getElement(".mv-movie-title > span > span > strong").match(
+          /S(?<season>\d{1,4})E(?<episode>\d{1,4})/
+        ),
         title: string = getElement(".mv-movie-title > span > a");
       if (title !== "Loading...") {
         const { season } = regex.groups,
           { episode } = regex.groups,
-          state = setting
+          state = format
             .replace("%show%", title)
             .replace("%season%", season)
             .replace("%episode%", episode);
@@ -291,12 +295,11 @@ presence.on("UpdateData", async () => {
         regex: RegExpMatchArray = getElement(
           ".full-title > .content > .seq > em"
         ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/),
-        setting = await presence.getSetting("show-format"),
         title: string = getElement(".full-title > .content > .title");
       if (title !== "Loading...") {
         const { season } = regex.groups,
           { episode } = regex.groups,
-          state = setting
+          state = format
             .replace("%show%", title)
             .replace("%season%", season)
             .replace("%episode%", episode);

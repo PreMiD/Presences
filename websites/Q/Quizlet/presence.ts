@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "quizlet"
     },
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (qzData?.layer) {
     const pathSplits = qzData.layer.path.split("/");
@@ -151,4 +151,6 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: QuizletData) => (qzData = data));
+presence.on("iFrameData", (data: QuizletData) => {
+  qzData = data;
+});

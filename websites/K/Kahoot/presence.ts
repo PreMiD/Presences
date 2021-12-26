@@ -41,7 +41,7 @@ async function getStrings() {
       of: "kahoot.of",
       questionNumber: "kahoot.questionNumber"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting<string>("lang")
   );
 }
 
@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "kahoot"
     },
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang");
+    buttons = await presence.getSetting<boolean>("buttons"),
+    newLang = await presence.getSetting<string>("lang");
 
   oldLang ??= newLang;
   strings ??= await getStrings();

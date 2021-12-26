@@ -72,16 +72,19 @@ function findChannel(): string {
 newStats();
 setInterval(() => {
   newStats();
-}, 10000);
+}, 10_000);
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sInfo"),
-    elapsed = await presence.getSetting("tElapsed"),
-    format1 = await presence.getSetting("sFormat1"),
-    format2 = await presence.getSetting("sFormat2"),
-    format3 = await presence.getSetting("sListeners"),
-    buttons = await presence.getSetting("buttons"),
-    logo: number = await presence.getSetting("logo"),
+  const [info, elapsed, format1, format2, format3, buttons, logo] =
+      await Promise.all([
+        presence.getSetting<boolean>("sInfo"),
+        presence.getSetting<boolean>("tElapsed"),
+        presence.getSetting<string>("sFormat1"),
+        presence.getSetting<string>("sFormat2"),
+        presence.getSetting<string>("sListeners"),
+        presence.getSetting<boolean>("buttons"),
+        presence.getSetting<number>("logo")
+      ]),
     logoArr = [
       "reywhitebacksmall",
       "reyblackbacksmall",
@@ -144,12 +147,12 @@ presence.on("UpdateData", async () => {
     document.location.pathname === "/"
   ) {
     if (
-      (document.querySelector("#player") as HTMLElement).style.cssText !==
+      document.querySelector<HTMLElement>("#player").style.cssText !==
       "display: none;"
     ) {
-      const paused = (
-        document.querySelector("#miniplayer-play") as HTMLImageElement
-      ).src.includes("play.png");
+      const paused = document
+        .querySelector<HTMLImageElement>("#miniplayer-play")
+        .src.includes("play.png");
 
       let track: string, artist: string;
 
@@ -161,8 +164,8 @@ presence.on("UpdateData", async () => {
 
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = format3
-            .replace("%listeners%", channel.listeners)
-            .replace("%totalListeners%", totalListeners);
+            .replace("%listeners%", `${channel.listeners}`)
+            .replace("%totalListeners%", `${totalListeners}`);
           presenceData.startTimestamp = Date.parse(channel.timeStart);
           presenceData.endTimestamp = Date.parse(channel.timeEnd);
           showFormat3 = true;
@@ -206,9 +209,9 @@ presence.on("UpdateData", async () => {
         .querySelector("#channel-player")
         .className.replace("shadow channel-color-", ""),
       channel = channels.find(channel => channel.id === channelID),
-      paused = (
-        document.querySelector("#play") as HTMLImageElement
-      ).src.includes("play.png");
+      paused = document
+        .querySelector<HTMLImageElement>("#play")
+        .src.includes("play.png");
 
     paused
       ? (presenceData.smallImageKey = "pause")
@@ -222,8 +225,8 @@ presence.on("UpdateData", async () => {
       .replace("%artist%", channel.artist);
 
     presenceData.smallImageText = format3
-      .replace("%listeners%", channel.listeners)
-      .replace("%totalListeners%", totalListeners);
+      .replace("%listeners%", `${channel.listeners}`)
+      .replace("%totalListeners%", `${totalListeners}`);
 
     showFormat3 = true;
 

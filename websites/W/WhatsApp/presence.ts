@@ -5,8 +5,8 @@ const presence = new Presence({
     showRecipient: boolean;
     showNumbers: boolean;
   }> => ({
-    showRecipient: await presence.getSetting("showRecipient"),
-    showNumbers: await presence.getSetting("showNumbers")
+    showRecipient: await presence.getSetting<boolean>("showRecipient"),
+    showNumbers: await presence.getSetting<boolean>("showNumbers")
   });
 
 presence.on("UpdateData", async () => {
