@@ -13,13 +13,13 @@ const presence = new Presence({
   strings = getStrings();
 
 presence.on("UpdateData", async () => {
-  const host = window.location.hostname.split("."),
+  const host = window.location.hostname,
     path = window.location.pathname.split("/").slice(1);
 
-  if (host[0] === "ift") {
+  if (host === "ift.tt") {
     // IFTTT URL Shortener (for the Help Center)
     presence.setActivity();
-  } else if (host[0] === "help") {
+  } else if (host === "help.ifttt.com") {
     // IFTTT Help Center
     switch (path[0]) {
       // Startpage
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity();
         break;
     }
-  } else if (host[0] === "platform") {
+  } else if (host === "platform.ifttt.com") {
     // IFTTT for Businesses / Developers
     switch (path[0]) {
       // Documentation
@@ -79,15 +79,18 @@ presence.on("UpdateData", async () => {
         presence.setActivity();
         break;
     }
-  } else if (host[0] === "status") {
+  } else if (host === "status.ifttt.com") {
     // IFTTT Status
     switch (path[0]) {
+      // Incidents
       case "incidents":
         await handleCustom(
           "IFTTT Status - Incident Report",
           document.querySelector<HTMLDivElement>(".incident-name").textContent
         );
         break;
+      // Startpage
+      // Unknown
       default:
         await handleStatusPage();
         break;
