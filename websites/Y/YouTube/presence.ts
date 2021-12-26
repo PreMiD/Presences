@@ -245,7 +245,7 @@ presence.on("UpdateData", async () => {
           .replace("%uploader%", finalUploader),
         largeImageKey:
           unlistedVideo || logo === 0 || pfp === ""
-            ? "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024"
+            ? "yt-lg"
             : logo === 1
             ? `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`
             : pfp,
@@ -299,7 +299,7 @@ presence.on("UpdateData", async () => {
 
       delete presenceData.state;
       presenceData.largeImageKey =
-        "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024";
+        "yt-lg";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
@@ -337,7 +337,7 @@ presence.on("UpdateData", async () => {
   ) {
     const presenceData: PresenceData = {
         largeImageKey:
-          "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024"
+          "yt-lg"
       },
       browsingStamp = Math.floor(Date.now() / 1000);
     let searching = false;
@@ -531,7 +531,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "studio.youtube.com") {
     const presenceData: PresenceData = {
         largeImageKey:
-          "https://cdn.discordapp.com/app-assets/463097721130188830/513734690272968717.png?size=1024",
+          "yt-lg",
         smallImageKey: "studio",
         smallImageText: "Youtube Studio"
       },
