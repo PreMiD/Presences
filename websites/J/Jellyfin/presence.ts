@@ -428,10 +428,13 @@ const searchMediaCache = new Map<string, MediaInfo[]>();
 async function searchMedia(searchTerm: string): Promise<MediaInfo[]> {
   if (searchMediaCache.has(searchTerm)) return searchMediaCache.get(searchTerm);
 
+  if (/-[ ]S[0-9]+:E[0-9]+[ ]-/.test(searchTerm))
+    searchTerm = searchTerm.split(" - ").pop();
+
   const res = await fetch(
       `${jellyfinBasenameUrl()}Users/${getUserId()}/Items/?searchTerm=${searchTerm}` +
         "&IncludePeople=false&IncludeMedia=true&IncludeGenres=false&IncludeStudios=false" +
-        "&IncludeArtists=false&IncludeItemTypes=Movie,Series&Limit=24" +
+        "&IncludeArtists=false&IncludeItemTypes=Movie,Episode&Limit=3" +
         "&Fields=PrimaryImageAspectRatio%2CCanDelete%2CBasicSyncInfo%2CMediaSourceCount" +
         "&Recursive=true&EnableTotalRecordCount=false&ImageTypeLimit=1",
       {
@@ -470,26 +473,21 @@ async function handleVideoPlayback(): Promise<void> {
   let title, subtitle;
 
   // title on the header
-  const headerTitleElem = document.querySelector(
-    "h3.pageTitle"
-  ) as HTMLHeadingElement;
+  const headerTitle =
+      document.querySelector<HTMLHeadingElement>("h3.pageTitle").innerText,
+    [mediaInfo] = await searchMedia(headerTitle);
 
-  // media metadata
-  const [mediaInfo] = await searchMedia(headerTitleElem.innerText);
-
-  // no background image, we're playing live tv
   let largeImage = PRESENCE_ART_ASSETS.logo;
 
   // display generic info
   if (!mediaInfo) {
-    title = "Watching unknown content";
-    subtitle = "No metadata could be obtained";
-  } else if (typeof mediaInfo === "string") return;
-  else {
+    title = "Watching:";
+    subtitle = "Unknown Content";
+  } else {
     switch (mediaInfo.Type) {
       case "Movie":
-        title = "Watching a Movie:";
-        subtitle = headerTitleElem.textContent;
+        title = "Watching:";
+        subtitle = mediaInfo.Name;
         if (
           (await presence.getSetting("showRichImages")) &&
           (await presence.getSetting("showMoviePoster"))
@@ -497,13 +495,15 @@ async function handleVideoPlayback(): Promise<void> {
           largeImage = mediaPrimaryImage(mediaInfo.Id);
 
         break;
-      case "Series":
-        title = "Watching a Series:";
-        subtitle = headerTitleElem.textContent;
-        break;
-      case "TvChannel":
-        title = "Watching Live Tv";
-        subtitle = headerTitleElem.textContent;
+      case "Episode":
+        title = `Watching: ${mediaInfo.SeriesName}`;
+        subtitle = `${/S[0-9]+:E[0-9]+/.exec(headerTitle)} - ${mediaInfo.Name}`;
+
+        if (
+          (await presence.getSetting("showRichImages")) &&
+          (await presence.getSetting("showTvShowPoster"))
+        )
+          largeImage = mediaPrimaryImage(mediaInfo.ParentBackdropItemId);
         break;
       default:
         title = `Watching ${mediaInfo.Type}`;

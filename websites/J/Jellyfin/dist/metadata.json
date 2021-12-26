@@ -64,6 +64,15 @@
       "title": "Rich images for movies",
       "icon": "fad fa-film",
       "value": true
+    },
+    {
+      "if": {
+        "showRichImages": true
+      },
+      "id": "showTvShowPoster",
+      "title": "Rich images for TV Shows",
+      "icon": "fad fa-tv-retro",
+      "value": true
     }
   ]
 }
