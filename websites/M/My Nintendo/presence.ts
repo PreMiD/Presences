@@ -1,11 +1,3 @@
-/**
- * Language Strings
- */
-interface LangStrings {
-  browsing: string;
-  reading: string;
-}
-
 const presence = new Presence({
     clientId: "680498892651233310"
   }),
@@ -39,16 +31,13 @@ presence.on("UpdateData", async () => {
     case "serial_number":
       await handleGeneric();
       break;
-    // Getting Started
-    // About Points
-    // About Gold Points
+    // Getting Started, About Points, About Gold Points
     case "getting_started":
     case "about_point":
     case "about_gold_point":
       await handleGeneric(false, "reading");
       break;
-    // Startpage
-    // Unknown
+    // Startpage, Unknown
     default:
       presence.setActivity();
       break;
@@ -59,7 +48,7 @@ presence.on("UpdateData", async () => {
  * Get Language Strings
  * @returns Language Strings
  */
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       browsing: "general.browsing",
