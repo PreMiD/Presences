@@ -298,8 +298,7 @@ presence.on("UpdateData", async () => {
       else presenceData.details = (await strings).watchVid;
 
       delete presenceData.state;
-      presenceData.largeImageKey =
-        "yt_lg";
+      presenceData.largeImageKey = "yt_lg";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
@@ -336,8 +335,7 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "youtube.com"
   ) {
     const presenceData: PresenceData = {
-        largeImageKey:
-          "yt_lg"
+        largeImageKey: "yt_lg"
       },
       browsingStamp = Math.floor(Date.now() / 1000);
     let searching = false;
@@ -530,8 +528,7 @@ presence.on("UpdateData", async () => {
     else presence.setActivity(presenceData);
   } else if (document.location.hostname === "studio.youtube.com") {
     const presenceData: PresenceData = {
-        largeImageKey:
-          "yt_lg",
+        largeImageKey: "yt_lg",
         smallImageKey: "studio",
         smallImageText: "Youtube Studio"
       },
