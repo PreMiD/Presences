@@ -378,7 +378,6 @@ function getUserId(): string {
 }
 
 // cache the requested media
-// const media: Array<MediaInfo> = [];
 const media: Record<string, string | MediaInfo> = {};
 
 /**
