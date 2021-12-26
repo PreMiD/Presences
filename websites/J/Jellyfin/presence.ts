@@ -417,6 +417,39 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
   return mediaInfoCache.get(itemId);
 }
 
+const searchMediaCache = new Map<string, MediaInfo[]>();
+
+/**
+ * searchMedia - search Movie and Series
+ */
+async function searchMedia(searchTerm: string): Promise<MediaInfo[]> {
+  if (searchMediaCache.has(searchTerm)) return searchMediaCache.get(searchTerm);
+
+  const res = await fetch(
+      `${jellyfinBasenameUrl()}Users/${getUserId()}/Items/?searchTerm=${searchTerm}` +
+        "&IncludePeople=false&IncludeMedia=true&IncludeGenres=false&IncludeStudios=false" +
+        "&IncludeArtists=false&IncludeItemTypes=Movie,Series&Limit=24" +
+        "&Fields=PrimaryImageAspectRatio%2CCanDelete%2CBasicSyncInfo%2CMediaSourceCount" +
+        "&Recursive=true&EnableTotalRecordCount=false&ImageTypeLimit=1",
+      {
+        credentials: "include",
+        headers: {
+          "x-emby-authorization":
+            `MediaBrowser Client="${ApiClient._appName}",` +
+            `Device="${ApiClient._deviceName}",` +
+            `DeviceId="${ApiClient._deviceId}",` +
+            `Version="${ApiClient._appVersion}",` +
+            `Token="${ApiClient._serverInfo.AccessToken}"`
+        }
+      }
+    ),
+    resJson = await res.json();
+
+  searchMediaCache.set(searchTerm, resJson.Items);
+
+  return searchMediaCache.get(searchTerm);
+}
+
 /**
  * handleVideoPlayback - handles the presence when the user is using the video player
  */
