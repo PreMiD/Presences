@@ -1,13 +1,3 @@
-/**
- * Language Strings
- */
-interface LangStrings {
-  play: string;
-  pause: string;
-  search: string;
-  browsing: string;
-}
-
 const presence = new Presence({
     clientId: "634124614544392193"
   }),
@@ -22,12 +12,7 @@ presence.on("UpdateData", async () => {
   if (host[0] === "corporate") {
     // Corporate page
     switch (path[0]) {
-      // About us
-      // Broadcasters
-      // Advertising
-      // Press
-      // Jobs
-      // Contact
+      // About us, Broadcasters, Advertising, Press, Jobs, Contact
       case "about-us":
       case "ueber-uns":
       case "broadcasters":
@@ -60,12 +45,7 @@ presence.on("UpdateData", async () => {
       case "search":
         await handleSearch();
         break;
-      // Genre
-      // Topic
-      // Country
-      // City
-      // Local stations
-      // Top stations
+      // Genre, Topic, Country, City, Local stations, Top stations
       case "genre":
       case "topic":
       case "country":
@@ -74,12 +54,7 @@ presence.on("UpdateData", async () => {
       case "top-stations":
         await handleListing();
         break;
-      // Choose your country
-      // Contact
-      // App
-      // Terms and conditions
-      // Privacy policy
-      // Imprint
+      // Choose your country, Contact, App, Terms and conditions, Privacy policy, Imprint
       case "country-selector":
       case "contact":
       case "app":
@@ -88,8 +63,7 @@ presence.on("UpdateData", async () => {
       case "imprint":
         await handleGeneric(true);
         break;
-      // Startpage
-      // Unknown
+      // Startpage, Unknown
       default:
         presence.setActivity();
         break;
@@ -101,7 +75,7 @@ presence.on("UpdateData", async () => {
  * Get Language Strings
  * @returns Language Strings
  */
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -109,7 +83,7 @@ async function getStrings(): Promise<LangStrings> {
       search: "general.searching",
       browsing: "general.browsing"
     },
-    (await presence.getSetting("lang").catch(() => "en")) as string
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
