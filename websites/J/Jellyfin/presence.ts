@@ -780,8 +780,6 @@ async function updateData(): Promise<void> {
   if (showPresence) {
     if (!presenceData.details) presence.setActivity();
     else presence.setActivity(presenceData);
-
-    presence.info(JSON.stringify(presenceData));
   }
 }
 
