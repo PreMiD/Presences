@@ -36,7 +36,7 @@
   ],
   "settings": [
     {
-      "id": "language",
+      "id": "lang",
       "multiLanguage": true
     }
   ]

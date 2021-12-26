@@ -1,11 +1,16 @@
+/**
+ * Language Strings
+ */
+interface LangStrings {
+  search: string;
+  browsing: string;
+  reading: string;
+}
+
 const presence = new Presence({
     clientId: "665519810054062100"
   }),
-  strings = presence.getStrings({
-    search: "presence.activity.searching",
-    browsing: "presence.activity.browsing",
-    reading: "presence.activity.reading"
-  });
+  strings = getStrings();
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.split("."),
@@ -192,6 +197,21 @@ presence.on("UpdateData", async () => {
     }
   }
 });
+
+/**
+ * Get Language Strings
+ * @returns Language Strings
+ */
+async function getStrings(): Promise<LangStrings> {
+  return presence.getStrings(
+    {
+      search: "general.searching",
+      browsing: "general.browsing",
+      reading: "general.reading"
+    },
+    (await presence.getSetting("lang").catch(() => "en")) as string
+  );
+}
 
 /**
  * Handle status page
