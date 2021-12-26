@@ -34,6 +34,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${
           document.getElementsByClassName("game-text")[0].textContent
         } (${document.getElementsByClassName("subtitle")[0].textContent})`;
+        const storageID = document.getElementsByClassName('thumbnail')[0].getAttribute('src').replace(/^[a-z:/.]*\/([^]*)\.[a-z]*$$/gi, '$1')
+        presenceData.largeImageKey = `https://trackmania.io/api/download/jpg/${storageID}`;
       }
     } else if (window.location.hash.startsWith("#/cotd")) {
       presenceData.state = "Cup Of The Day";
@@ -53,7 +55,13 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Campaigns";
       if (!window.location.hash.endsWith("campaigns")) {
         if (!window.location.hash.includes("leaderboard")) {
-          presenceData.details = "Campaign";
+          if (window.location.hash.startsWith("#/campaigns/0")) {
+            presenceData.details = "Official Campaign";
+          } else {
+            presenceData.details = "Campaign";
+            presenceData.largeImageKey =
+              document.getElementsByClassName("campaign-media")[0].getAttribute("src");
+          }
           presenceData.state =
             document.getElementsByClassName("game-text")[0].textContent;
         } else {
@@ -61,6 +69,8 @@ presence.on("UpdateData", async () => {
           presenceData.state = `${
             document.getElementsByClassName("game-text")[0].textContent
           } (${document.getElementsByClassName("subtitle")[0].textContent})`;
+          const storageID = document.getElementsByClassName('thumbnail')[0].getAttribute('src').replace(/^[a-z:/.]*\/([^]*)\.[a-z]*$$/gi, '$1')
+          presenceData.largeImageKey = `https://trackmania.io/api/download/jpg/${storageID}`;
         }
       }
     } else if (window.location.hash.startsWith("#/rooms")) {
@@ -73,6 +83,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${text} (${
           document.getElementsByClassName("subtitle")[0].textContent
         })`;
+
+        presenceData.largeImageKey =
+          document.getElementsByClassName("room-media")[0].getAttribute("src");
       }
     } else if (window.location.hash.startsWith("#/clubs")) {
       presenceData.state = "Clubs";
@@ -84,6 +97,17 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${text} (${
           document.getElementsByClassName("subtitle")[0].textContent
         })`;
+
+        const clubImagesArray: string[] = [];
+
+        Array.prototype.forEach.call(document.getElementsByClassName('is-small'), function(el: Element) {
+            if (el.tagName === 'IMG') {
+                clubImagesArray.push(el.getAttribute('src'));
+            }
+        });
+
+        if (clubImagesArray.length > 0)
+          presenceData.largeImageKey = clubImagesArray[0];
       }
     } else if (window.location.hash.startsWith("#/competitions")) {
       presenceData.state = "Events";
@@ -95,6 +119,14 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${text} (${
           document.getElementsByClassName("subtitle")[0].textContent
         })`;
+        
+        let eventLogo = document.getElementsByClassName("logo")[0].getAttribute("src");
+
+        if (!eventLogo.startsWith('http')) {
+          eventLogo = `https://trackmania.io${eventLogo}`;
+        }
+
+        presenceData.largeImageKey = eventLogo;
       }
     } else if (window.location.hash.startsWith("#/top")) {
       presenceData.details =
@@ -128,7 +160,7 @@ presence.on("UpdateData", async () => {
         presenceData.state =
           document.getElementsByClassName("title")[1].textContent;
       }
-    } else if (window.location.hash.startsWith("#/news")) {
+    } else if (window.location.hash.startsWith("#/news") || window.location.hash.startsWith("#/ads")) {
       presenceData.state =
         document.getElementsByClassName("title")[1].textContent;
     } else if (window.location.hash.startsWith("#/leaderboard")) {
@@ -136,9 +168,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${
         document.getElementsByClassName("game-text")[0].textContent
       } (${document.getElementsByClassName("subtitle")[0].textContent})`;
+      const storageID = document.getElementsByClassName('thumbnail')[0].getAttribute('src').replace(/^[a-z:/.]*\/([^]*)\.[a-z]*$$/gi, '$1')
+      presenceData.largeImageKey = `https://trackmania.io/api/download/jpg/${storageID}`;
     }
   } else if (window.location.pathname.startsWith("/api")) {
-    presenceData.state = `Viewing API (${window.location.pathname.substr(
+    presenceData.state = `Viewing API (${window.location.pathname.substring(
       "/api/".length
     )})`;
   }
