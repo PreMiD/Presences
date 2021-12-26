@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (
-    document.querySelector(
+    !document.querySelector(
       "div.web-chrome-playback-lcd__playback-description.playback-description-not-loaded"
     )
   ) {
