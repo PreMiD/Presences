@@ -245,7 +245,7 @@ presence.on("UpdateData", async () => {
           .replace("%uploader%", finalUploader),
         largeImageKey:
           unlistedVideo || logo === 0 || pfp === ""
-            ? "yt-lg"
+            ? "yt_lg"
             : logo === 1
             ? `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`
             : pfp,
@@ -299,7 +299,7 @@ presence.on("UpdateData", async () => {
 
       delete presenceData.state;
       presenceData.largeImageKey =
-        "yt-lg";
+        "yt_lg";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
@@ -337,7 +337,7 @@ presence.on("UpdateData", async () => {
   ) {
     const presenceData: PresenceData = {
         largeImageKey:
-          "yt-lg"
+          "yt_lg"
       },
       browsingStamp = Math.floor(Date.now() / 1000);
     let searching = false;
@@ -531,7 +531,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "studio.youtube.com") {
     const presenceData: PresenceData = {
         largeImageKey:
-          "yt-lg",
+          "yt_lg",
         smallImageKey: "studio",
         smallImageText: "Youtube Studio"
       },
