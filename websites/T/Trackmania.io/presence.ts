@@ -62,8 +62,9 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Official Campaign";
           } else {
             presenceData.details = "Campaign";
-            presenceData.largeImageKey =
-              document.getElementsByClassName("campaign-media")[0].getAttribute("src");
+            presenceData.largeImageKey = document
+              .getElementsByClassName("campaign-media")[0]
+              .getAttribute("src");
           }
           presenceData.state =
             document.getElementsByClassName("game-text")[0].textContent;
@@ -90,8 +91,9 @@ presence.on("UpdateData", async () => {
           document.getElementsByClassName("subtitle")[0].textContent
         })`;
 
-        presenceData.largeImageKey =
-          document.getElementsByClassName("room-media")[0].getAttribute("src");
+        presenceData.largeImageKey = document
+          .getElementsByClassName("room-media")[0]
+          .getAttribute("src");
       }
     } else if (window.location.hash.startsWith("#/clubs")) {
       presenceData.state = "Clubs";
@@ -106,11 +108,14 @@ presence.on("UpdateData", async () => {
 
         const clubImagesArray: string[] = [];
 
-        Array.prototype.forEach.call(document.getElementsByClassName("is-small"), function(el: Element) {
+        Array.prototype.forEach.call(
+          document.getElementsByClassName("is-small"),
+          function (el: Element) {
             if (el.tagName === "IMG") {
-                clubImagesArray.push(el.getAttribute("src"));
+              clubImagesArray.push(el.getAttribute("src"));
             }
-        });
+          }
+        );
 
         if (clubImagesArray.length > 0)
           presenceData.largeImageKey = clubImagesArray[0];
@@ -126,7 +131,9 @@ presence.on("UpdateData", async () => {
           document.getElementsByClassName("subtitle")[0].textContent
         })`;
         
-        let eventLogo = document.getElementsByClassName("logo")[0].getAttribute("src");
+        let eventLogo = document
+          .getElementsByClassName("logo")[0]
+          .getAttribute("src");
 
         if (!eventLogo.startsWith("http")) {
           eventLogo = `https://trackmania.io${eventLogo}`;
@@ -167,8 +174,8 @@ presence.on("UpdateData", async () => {
           document.getElementsByClassName("title")[1].textContent;
       }
     } else if (
-      window.location.hash.startsWith("#/news")
-      || window.location.hash.startsWith("#/ads")
+      window.location.hash.startsWith("#/news") ||
+      window.location.hash.startsWith("#/ads")
     ) {
       presenceData.state =
         document.getElementsByClassName("title")[1].textContent;
