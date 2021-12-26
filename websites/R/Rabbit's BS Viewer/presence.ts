@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
       } ${document.querySelector("#songsubname").textContent}`;
       presenceData.state = `${(
         document.getElementById("difficultyselect") as HTMLSelectElement
-      ).textContent.replace("Plus", "+")} (${
+      ).value.replace("Plus", "+")} (${
         (
           document.getElementById("difficultyselect") as HTMLSelectElement
         ).selectedOptions.item(0).textContent
