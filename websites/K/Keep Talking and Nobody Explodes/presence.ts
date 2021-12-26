@@ -61,30 +61,48 @@ presence.on("UpdateData", async () => {
         break;
       // Presskit
       case "presskit":
-        await handleCustom("Presskit");
+        presence.setActivity({
+          details: "Presskit",
+          largeImageKey: "logo_big"
+        });
         break;
       // How To Play Remotely
       case "how-to-play-remotely":
-        await handleCustom("How To Play Remotely");
+        presence.setActivity({
+          details: "How To Play Remotely",
+          largeImageKey: "logo_big"
+        });
         break;
       // Mobile app
       case "mobile":
-        await handleCustom("Mobile App");
+        presence.setActivity({
+          details: "Mobile App",
+          largeImageKey: "logo_big"
+        });
         break;
       // Translation FAQ
       case "translation-faq":
-        await handleCustom("Translation FAQ");
+        presence.setActivity({
+          details: "Translation FAQ",
+          largeImageKey: "logo_big"
+        });
         break;
       case "faq":
         await handleFAQ();
         break;
       // Commercial Licensing
       case "commercial-license":
-        await handleCustom("Commercial Licensing");
+        presence.setActivity({
+          details: "Commercial Licensing",
+          largeImageKey: "logo_big"
+        });
         break;
       // Non-Commercial Use
       case "non-commercial-use":
-        await handleCustom("Non-Commercial Use");
+        presence.setActivity({
+          details: "Non-Commercial Use",
+          largeImageKey: "logo_big"
+        });
         break;
       // Startpage
       // Unknown
@@ -174,19 +192,6 @@ async function handleGeneric(preferTitle = false): Promise<void> {
       ? document.title
       : document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
         document.title,
-    largeImageKey: "logo_big"
-  });
-}
-
-/**
- * Handle custom pages
- * @param details Presence details text
- * @param state Presence state text
- */
-async function handleCustom(details: string, state?: string): Promise<void> {
-  presence.setActivity({
-    details,
-    state,
     largeImageKey: "logo_big"
   });
 }
