@@ -182,6 +182,61 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Notifications";
     delete presenceData.state;
   }
-
+  if (document.location.hostname === "devforum.roblox.com") {
+    // For some reason almost every single HTMLElement needed returned with value "null" so document.title was used
+    delete presenceData.largeImageKey;
+    presenceData.details = "Visiting the DevForum";
+    presenceData.largeImageKey = "https://i.imgur.com/07YmNQw.png";
+    if (document.location.pathname === "/categories")
+      presenceData.state = "Browsing categories";
+    else if (document.location.pathname === "/latest")
+      presenceData.state = "Browsing latest posts";
+    else if (document.location.pathname.startsWith("/top"))
+      presenceData.state = "Browsing top posts";
+    else if (document.location.pathname.startsWith("/c")) {
+      presenceData.state = `Category: ${document.title.substring(
+        document.title.indexOf("Latest") + 6,
+        document.title.indexOf("topics") - 1
+      )}`;
+    } else if (document.location.pathname.startsWith("/t")) {
+      presenceData.state = `Reading: ${
+        document.querySelector<HTMLAnchorElement>(
+          "#topic-title > div > div > h1 > a"
+        ).textContent
+      }`;
+    } else if (document.location.pathname.startsWith("/u")) {
+      presenceData.state = `Viewing user: ${document.title.substring(
+        document.title.indexOf("-") + 1,
+        document.title.lastIndexOf("-") - 1
+      )}`;
+    } else if (document.location.pathname.startsWith("/search")) {
+      presenceData.state = `Searching for: ${document.title.substring(
+        document.title.indexOf("'") + 1,
+        document.title.lastIndexOf("'")
+      )}`;
+    } else if (document.location.pathname.startsWith("/badges")) {
+      if (document.location.pathname === "/badges")
+        presenceData.state = "Viewing all badges";
+      else
+        presenceData.state = `Viewing badge: ${document.title.split(/[-]/, 1)}`;
+    } else if (document.location.pathname.startsWith("/g")) {
+      if (document.location.pathname === "/g")
+        presenceData.state = "Browsing groups";
+      else {
+        presenceData.state = `Viewing group: ${document.title.substring(
+          document.title.indexOf("-") + 1,
+          document.title.lastIndexOf("-") - 1
+        )}`;
+      }
+    } else if (document.location.pathname === "/tags")
+      presenceData.state = "Browsing tags";
+    else if (document.location.pathname.startsWith("/tag")) {
+      presenceData.state = `Browsing tag: ${document.title.substring(
+        document.title.indexOf("Latest") + 6,
+        document.title.indexOf("topics") - 1
+      )}`;
+    } else if (document.location.href === "https://devforum.roblox.com/")
+      presenceData.state = "Home page";
+  }
   presence.setActivity(presenceData);
 });

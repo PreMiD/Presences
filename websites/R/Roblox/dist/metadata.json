@@ -8,6 +8,10 @@
     {
       "name": "YJJcoolcool",
       "id": "300929818231308288"
+    },
+    {
+    "name": "Kyrie",
+    "id": "368399721494216706"
     }
   ],
   "service": "Roblox",
@@ -19,9 +23,10 @@
   },
   "url": [
     "www.roblox.com",
-    "web.roblox.com"
+    "web.roblox.com",
+    "devforum.roblox.com"
   ],
-  "version": "2.4.4",
+  "version": "2.5.0",
   "logo": "https://i.imgur.com/75dFVYB.png",
   "thumbnail": "https://i.imgur.com/pufi4q1.png",
   "color": "#1b1d1e",
