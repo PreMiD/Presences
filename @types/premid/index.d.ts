@@ -298,7 +298,9 @@ declare class Presence {
    * @link https://docs.premid.app/dev/presence/class#getsettingstring
    * @since 2.1
    */
-  getSetting(setting: string): Promise<any>;
+  getSetting<T extends string | boolean | number | undefined>(
+    setting: string
+  ): Promise<T>;
   /**
    * Hide a setting
    * @param setting Id of setting / Array of setting Id's
