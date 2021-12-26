@@ -9,7 +9,10 @@ let timestamp = 0,
 
 presence.on("UpdateData", async () => {
   current = window.location;
-  const path = current.pathname.split("/").slice(1);
+  const path = current.pathname.split("/").slice(1),
+    presenceData: PresenceData = {
+      largeImageKey: "logo_big"
+    };
 
   if (current.hostname.split(".")[0] === "bombmanual") {
     // Bomb manual page
@@ -18,7 +21,7 @@ presence.on("UpdateData", async () => {
       case "web":
       case "print":
         await handleManual(isNewLocation(previous, current));
-        break;
+        return;
       // How to play, Language select
       case "how-to-play-pc.html":
       case "how-to-play-mobile.html":
@@ -33,11 +36,11 @@ presence.on("UpdateData", async () => {
       case "how-to-play-daydream.html":
       case "language":
         await handleGeneric(true);
-        break;
+        return;
       // Startpage, Unknown
       default:
         presence.setActivity();
-        break;
+        return;
     }
   } else {
     // Main page
@@ -46,59 +49,42 @@ presence.on("UpdateData", async () => {
       case "contact-us":
       case "privacy-policy":
         await handleGeneric();
-        break;
+        return;
       // Presskit
       case "presskit":
-        presence.setActivity({
-          details: "Presskit",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Presskit";
         break;
       // How To Play Remotely
       case "how-to-play-remotely":
-        presence.setActivity({
-          details: "How To Play Remotely",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "How To Play Remotely";
         break;
       // Mobile app
       case "mobile":
-        presence.setActivity({
-          details: "Mobile App",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Mobile App";
         break;
       // Translation FAQ
       case "translation-faq":
-        presence.setActivity({
-          details: "Translation FAQ",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Translation FAQ";
         break;
       case "faq":
         await handleFAQ();
-        break;
+        return;
       // Commercial Licensing
       case "commercial-license":
-        presence.setActivity({
-          details: "Commercial Licensing",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Commercial Licensing";
         break;
       // Non-Commercial Use
       case "non-commercial-use":
-        presence.setActivity({
-          details: "Non-Commercial Use",
-          largeImageKey: "logo_big"
-        });
+        presenceData.details = "Non-Commercial Use";
         break;
       // Startpage, Unknown
       default:
         presence.setActivity();
-        break;
+        return;
     }
   }
 
+  presence.setActivity(presenceData);
   previous = current;
 });
 
