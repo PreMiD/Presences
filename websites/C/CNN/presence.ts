@@ -5,10 +5,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async function () {
   const setting = {
-      timeElapsed: await presence.getSetting("timeElapsed"),
-      showButtons: await presence.getSetting("showButtons"),
-      logo: await presence.getSetting("logo"),
-      privacy: await presence.getSetting("privacy")
+      timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
+      showButtons: await presence.getSetting<boolean>("showButtons"),
+      logo: await presence.getSetting<0 | 1>("logo"),
+      privacy: await presence.getSetting<boolean>("privacy")
     },
     urlpath = window.location.pathname.split("/"),
     presenceData: PresenceData = {

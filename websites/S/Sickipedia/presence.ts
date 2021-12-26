@@ -7,7 +7,7 @@ const presence = new Presence({
   } = {};
 
 presence.on("UpdateData", async () => {
-  data.privacyMode = await presence.getSetting("privacy");
+  data.privacyMode = await presence.getSetting<boolean>("privacy");
   data.presenceData = {
     largeImageKey: "logo"
   };

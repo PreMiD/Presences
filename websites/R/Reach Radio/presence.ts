@@ -7,10 +7,12 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "reach2"
     },
-    info = await presence.getSetting("sInfo"),
-    elapsed = await presence.getSetting("tElapsed"),
-    format1 = await presence.getSetting("sFormat1"),
-    format2 = await presence.getSetting("sFormat2"),
+    [info, elapsed, format1, format2] = await Promise.all([
+      presence.getSetting<boolean>("sInfo"),
+      presence.getSetting<boolean>("tElapsed"),
+      presence.getSetting<string>("sFormat1"),
+      presence.getSetting<string>("sFormat2")
+    ]),
     paused =
       document.querySelector<HTMLImageElement>(
         "#react-listen-content > div > div > div.pt-4.startpause.col > button > img"

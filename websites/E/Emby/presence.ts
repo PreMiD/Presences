@@ -332,8 +332,8 @@ function handleOfficialWebsite(): void {
  *
  * @return {ApiClient} ApiClient object
  */
-async function getApiClient(): Promise<ApiClient> {
-  return presence.getPageletiable("ApiClient");
+async function getApiClient() {
+  return presence.getPageletiable<ApiClient>("ApiClient");
 }
 
 /**
@@ -374,7 +374,7 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
 
-      if (await presence.getSetting("showMediaTimestamps")) {
+      if (await presence.getSetting<boolean>("showMediaTimestamps")) {
         [, presenceData.endTimestamp] =
           presence.getTimestampsfromMedia(audioElem);
       } else delete presenceData.endTimestamp;
@@ -534,7 +534,7 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
 
-      if (await presence.getSetting("showMediaTimestamps")) {
+      if (await presence.getSetting<boolean>("showMediaTimestamps")) {
         [, presenceData.endTimestamp] =
           presence.getTimestampsfromMedia(videoPlayerElem);
       } else delete presenceData.endTimestamp;
@@ -736,7 +736,7 @@ async function setDefaultsToPresence(): Promise<void> {
 
   if (presenceData.endTimestamp) delete presenceData.endTimestamp;
 
-  if (await presence.getSetting("showTimestamps"))
+  if (await presence.getSetting<boolean>("showTimestamps"))
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 }
 

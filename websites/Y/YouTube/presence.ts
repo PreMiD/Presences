@@ -58,27 +58,38 @@ async function getStrings() {
       watchVideoButton: "general.buttonWatchVideo",
       viewChannelButton: "general.buttonViewChannel"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy"),
-    time = await presence.getSetting("time"),
-    vidDetail = await presence.getSetting("vidDetail"),
-    vidState = await presence.getSetting("vidState"),
-    channelPic = await presence.getSetting("channelPic"),
-    logo = await presence.getSetting("logo"),
-    buttons = await presence.getSetting("buttons");
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  const [
+    newLang,
+    privacy,
+    time,
+    vidDetail,
+    vidState,
+    channelPic,
+    logo,
+    buttons
+  ] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("time"),
+    presence.getSetting<string>("vidDetail"),
+    presence.getSetting<string>("vidState"),
+    presence.getSetting<boolean>("channelPic"),
+    presence.getSetting<number>("logo"),
+    presence.getSetting<boolean>("Buttons")
+  ]);
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   //* If there is a vid playing

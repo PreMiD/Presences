@@ -44,11 +44,11 @@ async function getStrings() {
       metadata: "premid.pageMetadata",
       ts: "premid.pageTs"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   host: string;
 
@@ -56,12 +56,12 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "lg"
     },
-    newLang = await presence.getSetting("lang"),
-    time = await presence.getSetting("time");
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+    newLang = await presence.getSetting<string>("lang"),
+    time = await presence.getSetting<boolean>("time");
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (time) presenceData.startTimestamp = browsingTimestamp;

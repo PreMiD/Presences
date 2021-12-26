@@ -31,8 +31,8 @@ presence.on("UpdateData", async () => {
     },
     { pathname } = location,
     input = document.querySelector<HTMLInputElement>("input#keyword"),
-    buttons: boolean = await presence.getSetting("buttons"),
-    cookies: boolean = await presence.getSetting("cookies");
+    buttons = await presence.getSetting<boolean>("buttons"),
+    cookies = await presence.getSetting<boolean>("cookies");
 
   if (cookies && input && input.value)
     setCookie("PMD_searchQuery", input.value, 1);

@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "glogo",
       startTimestamp: browsingTimestamp
     },
-    privacyDraw = await presence.getSetting("privacyDraw"),
-    privacyAlbum = await presence.getSetting("privacyAlbum");
+    privacyDraw = await presence.getSetting<boolean>("privacyDraw"),
+    privacyAlbum = await presence.getSetting<boolean>("privacyAlbum");
 
   if (window.location.hostname.includes("garticphone")) {
     if (window.location.pathname.endsWith("lobby"))
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
     else if (window.location.pathname.endsWith("start"))
       presenceData.details = "Start a story";
     else if (window.location.pathname.endsWith("draw")) {
-      if (privacyDraw === true) presenceData.details = "Drawing...";
+      if (privacyDraw) presenceData.details = "Drawing...";
       else {
         presenceData.details = "Drawing:";
         presenceData.state = `${
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.endsWith("write"))
       presenceData.details = "Writing...";
     else if (window.location.pathname.endsWith("book")) {
-      if (privacyAlbum === true) presenceData.details = "Look at the album";
+      if (privacyAlbum) presenceData.details = "Look at the album";
       else {
         presenceData.details = "Look at the album of:";
         presenceData.state = `${

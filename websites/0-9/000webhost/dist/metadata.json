@@ -14,7 +14,7 @@
     "000webhost.com"
   ],
   "regExp": "([a-z0-9-]+[.])*000webhost[.]com[\\/]",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/FiCZfzh.png",
   "thumbnail": "https://i.imgur.com/coiMeKE.jpg",
   "color": "#ff5c62",

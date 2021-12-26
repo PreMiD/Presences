@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
   const [buttons, timestamp, privacy] = await Promise.all([
-      presence.getSetting("buttons"),
-      presence.getSetting("timestamp"),
-      presence.getSetting("privacy")
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<boolean>("timestamp"),
+      presence.getSetting<boolean>("privacy")
     ]),
     pages: Record<string, PresenceData> = {
       "/team": { details: "Viewing the staff team" },

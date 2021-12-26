@@ -12,7 +12,7 @@
   },
   "url": "animelon.com",
   "regExp": "([a-z0-9-]+[.])*animelon([.][a-z]+)+[/]",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/5gunVuc.png",
   "thumbnail": "https://i.imgur.com/sT2xcZP.jpg",
   "color": "#D34344",

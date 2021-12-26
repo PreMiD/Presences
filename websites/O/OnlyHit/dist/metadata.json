@@ -19,7 +19,7 @@
     "onlyhit.us",
     "onlyhit.merchforall.com"
   ],
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/vyiCjQz.png",
   "thumbnail": "https://i.imgur.com/x5Jpq7I.png",
   "color": "#C1272D",
@@ -31,12 +31,6 @@
     "station"
   ],
   "settings": [
-    {
-      "id": "sInfo",
-      "title": "Show site infomation",
-      "icon": "fas fa-info",
-      "value": true
-    },
     {
       "id": "tElapsed",
       "title": "Show time elapsed",

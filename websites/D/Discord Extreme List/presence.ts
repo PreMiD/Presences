@@ -7,10 +7,10 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if ((await presence.getSetting("incognito")) === false) {
+  if ((await presence.getSetting<boolean>("incognito")) === false) {
     presenceData.details =
       document.getElementById("premidPageInfo").textContent;
-    if ((await presence.getSetting("showTimestamp")) === true)
+    if ((await presence.getSetting<boolean>("showTimestamp")) === true)
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 

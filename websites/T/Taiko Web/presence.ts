@@ -30,8 +30,10 @@ async function getSongIndex(multiplayer: boolean) {
   if (multiplayer) {
     try {
       presence
-        .getPageletiable('p2"]["lastMessages"]["songsel"]["value"]["song')
-        .then((res: number) => {
+        .getPageletiable<number>(
+          'p2"]["lastMessages"]["songsel"]["value"]["song'
+        )
+        .then(res => {
           songIndex = res;
         });
     } catch (e) {
@@ -41,7 +43,7 @@ async function getSongIndex(multiplayer: boolean) {
 }
 
 async function getSongs() {
-  presence.getPageletiable('assets"]["songs').then(res => {
+  presence.getPageletiable<Song[]>('assets"]["songs').then(res => {
     if (res) {
       songs = res;
       songIndexToSongId = songs

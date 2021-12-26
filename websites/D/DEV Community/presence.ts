@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "lg",
       startTimestamp: timestamp
     },
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   let endTimestamp = 0;
 

@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
     },
     botPage = document.location.pathname,
     botHost = document.location.hostname,
-    buttons = await presence.getSetting("buttons"),
-    sSubmit = await presence.getSetting("submitP");
+    buttons = await presence.getSetting<boolean>("buttons"),
+    sSubmit = await presence.getSetting<boolean>("submitP");
 
   if (botHost === "discord-botlist.eu") {
     if (botPage === "/") presenceData.details = "Browsing";

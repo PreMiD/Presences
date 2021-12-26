@@ -13,7 +13,7 @@ let subReddit: string,
   username: string,
   nickname: string,
   rpanTitle: string,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 async function getStrings() {
@@ -30,7 +30,7 @@ async function getStrings() {
       viewProfileButton: "general.buttonViewProfile",
       streamButton: "general.buttonWatchStream"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
@@ -39,12 +39,12 @@ const startTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
   setPresence();
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    buttons = await presence.getSetting("buttons");
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+    buttons = await presence.getSetting<boolean>("buttons");
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {

@@ -16,11 +16,11 @@ async function getStrings() {
       chapter: "general.chapter",
       page: "general.page"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   lastPlaybackState = null,
   playback: boolean,
@@ -59,10 +59,10 @@ presence.on("iFrameData", (data: iFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang").catch(() => "en");
-  if (oldLang !== newLang) {
+  const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {
