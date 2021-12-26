@@ -58,9 +58,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Campaigns";
       if (!window.location.hash.endsWith("campaigns")) {
         if (!window.location.hash.includes("leaderboard")) {
-          if (window.location.hash.startsWith("#/campaigns/0")) {
+          if (window.location.hash.startsWith("#/campaigns/0"))
             presenceData.details = "Official Campaign";
-          } else {
+          else {
             presenceData.details = "Campaign";
             presenceData.largeImageKey = document
               .getElementsByClassName("campaign-media")[0]
@@ -111,14 +111,15 @@ presence.on("UpdateData", async () => {
         Array.prototype.forEach.call(
           document.getElementsByClassName("is-small"),
           function (el: Element) {
-            if (el.tagName === "IMG") {
+            if (el.tagName === "IMG")
               clubImagesArray.push(el.getAttribute("src"));
-            }
           }
         );
 
+        const clubLogo = clubImagesArray[0];
+
         if (clubImagesArray.length > 0)
-          presenceData.largeImageKey = clubImagesArray[0];
+          presenceData.largeImageKey = clubLogo;
       }
     } else if (window.location.hash.startsWith("#/competitions")) {
       presenceData.state = "Events";
@@ -130,14 +131,13 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${text} (${
           document.getElementsByClassName("subtitle")[0].textContent
         })`;
-        
+
         let eventLogo = document
           .getElementsByClassName("logo")[0]
           .getAttribute("src");
 
-        if (!eventLogo.startsWith("http")) {
+        if (!eventLogo.startsWith("http"))
           eventLogo = `https://trackmania.io${eventLogo}`;
-        }
 
         presenceData.largeImageKey = eventLogo;
       }
