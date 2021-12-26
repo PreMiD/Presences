@@ -273,6 +273,13 @@ const // official website
 
 let ApiClient: ApiClient, presence: Presence;
 
+function jellyfinBasenameUrl(): string {
+  return `${`${location.protocol}//${location.host}${location.pathname.replace(
+    location.pathname.split("/").slice(-2).join("/"),
+    ""
+  )}`}`;
+}
+
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
@@ -386,16 +393,14 @@ const media: Record<string, string | MediaInfo> = {};
  * @param  {string} itemId id of the item to get metadata of
  * @return {object}        metadata of the item
  */
-async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
+async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
   const pending = "pending";
-  if (media[itemId] && media[itemId] !== pending) return media[itemId];
+  if (media[itemId] && media[itemId] !== pending)
+    return media[itemId] as MediaInfo;
 
   media[itemId] = pending;
   const res = await fetch(
-      `${`${location.protocol}//${location.host}${location.pathname.replace(
-        location.pathname.split("/").slice(-2).join("/"),
-        ""
-      )}`}Users/${getUserId()}/Items/${itemId}`,
+      `${jellyfinBasenameUrl()}Users/${getUserId()}/Items/${itemId}`,
       {
         credentials: "include",
         headers: {
@@ -408,11 +413,11 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
         }
       }
     ),
-    mediaInfo = await res.json();
+    mediaInfo: MediaInfo = await res.json();
 
   if (media[itemId] === pending) media[itemId] = mediaInfo;
 
-  return media[itemId];
+  return media[itemId] as MediaInfo;
 }
 
 /**
