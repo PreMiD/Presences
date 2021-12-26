@@ -1,12 +1,17 @@
+/**
+ * Language Strings
+ */
+interface LangStrings {
+  play: string;
+  pause: string;
+  search: string;
+  browsing: string;
+}
+
 const presence = new Presence({
     clientId: "634124614544392193"
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    search: "presence.activity.searching",
-    browsing: "presence.activity.browsing"
-  });
+  strings = getStrings();
 
 let timestamp: number;
 
@@ -91,6 +96,22 @@ presence.on("UpdateData", async () => {
     }
   }
 });
+
+/**
+ * Get Language Strings
+ * @returns Language Strings
+ */
+async function getStrings(): Promise<LangStrings> {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      search: "general.searching",
+      browsing: "general.browsing"
+    },
+    (await presence.getSetting("lang").catch(() => "en")) as string
+  );
+}
 
 /**
  * Handle radio station
