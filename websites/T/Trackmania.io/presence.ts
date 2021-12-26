@@ -116,10 +116,8 @@ presence.on("UpdateData", async () => {
           }
         );
 
-        const clubLogo = clubImagesArray[0];
-
         if (clubImagesArray.length > 0)
-          presenceData.largeImageKey = clubLogo;
+          presenceData.largeImageKey = clubImagesArray[0];
       }
     } else if (window.location.hash.startsWith("#/competitions")) {
       presenceData.state = "Events";
