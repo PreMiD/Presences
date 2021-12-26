@@ -186,6 +186,10 @@ interface Chapter {
 }
 
 interface MediaInfo {
+  AlbumArtist: string;
+  AlbumArtists: { Name: string; Id: string }[];
+  ArtistsItems: { Name: string; Id: string }[];
+  Artists: string[];
   Name: string;
   OriginalTitle: string;
   ServerId: string;
