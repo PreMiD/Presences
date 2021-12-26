@@ -115,10 +115,13 @@ async function handleUnknown(path: string[]): Promise<void> {
     .filter(e => e.classList.contains("active"))[0]
     .pathname?.slice(1);
 
-  if (path[0] && region !== "" && path[0] === region)
-    return await handleGeneric();
-  else if (document.querySelector<HTMLElement>(".song-name"))
-    return await handleStation();
+  if (path[0] && region !== "" && path[0] === region) {
+    await handleGeneric();
+    return;
+  } else if (document.querySelector<HTMLElement>(".song-name")) {
+    await handleStation();
+    return;
+  }
 
   presence.setActivity();
 }
