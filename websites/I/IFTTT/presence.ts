@@ -137,17 +137,19 @@ presence.on("UpdateData", async () => {
         if (
           document.querySelector<HTMLDivElement>(".story-title")?.textContent
         ) {
-          return await handleBlog(
+          await handleBlog(
             document.querySelector<HTMLHeadingElement>("h1").textContent
           );
+          return;
         }
 
         if (
           document.querySelector<HTMLInputElement>("#search")?.value?.length > 0
         ) {
-          return await handleSearch(
+          await handleSearch(
             document.querySelector<HTMLInputElement>("#search").value
           );
+          return;
         }
 
         await handleCustom("Exploring Applets & Services");
@@ -180,8 +182,10 @@ presence.on("UpdateData", async () => {
       // Services
       // Unknown
       default:
-        if (document.querySelector<HTMLDivElement>(".brand-section"))
-          return await handleSerivce();
+        if (document.querySelector<HTMLDivElement>(".brand-section")) {
+          await handleSerivce();
+          return;
+        }
 
         presence.setActivity();
         break;
