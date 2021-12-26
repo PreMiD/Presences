@@ -141,10 +141,13 @@ presence.on("UpdateData", async () => {
   else if (location.pathname.endsWith("/tos.html"))
     presenceData.details = "Reading the Terms of Service";
 
-  if (!(await presence.getSetting("showName"))) delete presenceData.state;
+  if (!(await presence.getSetting<boolean>("showName")))
+    delete presenceData.state;
 
   if (!presenceData.details) presence.setActivity();
   else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: Data20XX) => (data20XX = data));
+presence.on("iFrameData", (data: Data20XX) => {
+  data20XX = data;
+});

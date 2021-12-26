@@ -37,9 +37,11 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "lr"
     },
-    sGlobalRepeat = await presence.getSetting("sGlobalRepeat"),
-    sFormatRepeat = await presence.getSetting("sFormatRepeat"),
-    sFormatGlobalRepeat = await presence.getSetting("sFormatGlobalRepeat"),
+    [sGlobalRepeat, sFormatRepeat, sFormatGlobalRepeat] = await Promise.all([
+      presence.getSetting<boolean>("sGlobalRepeat"),
+      presence.getSetting<string>("sFormatRepeat"),
+      presence.getSetting<string>("sFormatGlobalRepeat")
+    ]),
     //TODO language selector and translation strings
     repeatsTrans = "Repeats",
     repeats = document

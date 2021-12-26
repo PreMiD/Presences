@@ -9,4 +9,6 @@ presence.on("UpdateData", async () => {
   else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: PresenceData) => (presenceData = data));
+presence.on("iFrameData", (data: PresenceData) => {
+  presenceData = data;
+});

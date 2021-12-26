@@ -8,8 +8,11 @@
   "description": {
     "en": "Konachan - Image board site for Anime / Manga wallpapers. Unlimited and unrestricted downloads."
   },
-  "url": ["konachan.com","konachan.net"],
-  "version": "1.0.0",
+  "url": [
+    "konachan.com",
+    "konachan.net"
+  ],
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/g9Xe9SH.png",
   "thumbnail": "https://i.imgur.com/jIuUwC1.jpg",
   "color": "#676894",

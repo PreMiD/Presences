@@ -142,9 +142,11 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const showTimestamp: boolean = await presence.getSetting(Settings.TIMESTAMP),
-    showButtons: boolean = await presence.getSetting(Settings.BUTTONS),
-    logo: number = await presence.getSetting(Settings.LOGO);
+  const [showTimestamp, showButtons, logo] = await Promise.all([
+    presence.getSetting<boolean>(Settings.TIMESTAMP),
+    presence.getSetting<boolean>(Settings.BUTTONS),
+    presence.getSetting<number>(Settings.LOGO)
+  ]);
 
   let presenceData: PresenceData = {
     largeImageKey: [Logos.LIGHT, Logos.DARK][logo] || Logos.LIGHT

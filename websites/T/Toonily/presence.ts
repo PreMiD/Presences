@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     { pathname, href } = location,
-    buttons: boolean = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (document.querySelector("ul.search-main-menu.active")) {
     const searchBar = document.querySelector<HTMLInputElement>(

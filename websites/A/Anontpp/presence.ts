@@ -21,9 +21,11 @@ let oldUrl: string, elapsed: number;
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
     video: HTMLVideoElement = document.querySelector("video"),
-    showSearchInfo = await presence.getSetting("search"),
-    showBrowseInfo = await presence.getSetting("browse"),
-    showVideoInfo = await presence.getSetting("video"),
+    [showSearchInfo, showBrowseInfo, showVideoInfo] = await Promise.all([
+      presence.getSetting<boolean>("search"),
+      presence.getSetting<boolean>("browse"),
+      presence.getSetting<boolean>("video")
+    ]),
     presenceData: PresenceData = {
       largeImageKey: "anontpp"
     };

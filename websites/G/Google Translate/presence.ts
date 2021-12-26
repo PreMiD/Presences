@@ -485,9 +485,9 @@ const browsingTimestamp: number = Math.floor(Date.now() / 1000);
 let from: string, to: string;
 
 presence.on("UpdateData", async () => {
-  const showTime: boolean = await presence.getSetting("stamp"),
-    tDetail: string = await presence.getSetting("tDetail"),
-    tState: string = await presence.getSetting("tState"),
+  const showTime = await presence.getSetting<boolean>("stamp"),
+    tDetail = await presence.getSetting<string>("tDetail"),
+    tState = await presence.getSetting<string>("tState"),
     presenceData: PresenceData = {
       largeImageKey: "gt"
     };

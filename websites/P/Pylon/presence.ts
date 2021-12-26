@@ -432,7 +432,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the SDK reference";
     if (
       document.querySelector(docsSelector) &&
-      (await presence.getSetting("docname"))
+      (await presence.getSetting<boolean>("docname"))
     ) {
       presenceData.state = Array.from(document.querySelectorAll(docsSelector))
         .map(el => el.textContent)
@@ -471,14 +471,14 @@ presence.on("UpdateData", async () => {
         presenceData.largeImageKey = largeImageKey
           ? largeImageKey.image
           : "txt";
-        presenceData.details = (await presence.getSetting("details"))
+        presenceData.details = (await presence.getSetting<string>("details"))
           .replace(/%file%/g, currentFile.textContent)
           .replace(/%guild%/g, guildName)
           .replace(
             /%ext%/g,
             (largeImageKey ? largeImageKey.image : "txt").toUpperCase()
           );
-        presenceData.state = (await presence.getSetting("state"))
+        presenceData.state = (await presence.getSetting<string>("state"))
           .replace(/%file%/g, currentFile.textContent)
           .replace(/%guild%/g, guildName)
           .replace(
@@ -491,7 +491,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.startsWith("/studio/guilds/")) {
       presenceData.details += ": Viewing Server";
-      if (await presence.getSetting("studioguildname")) {
+      if (await presence.getSetting<boolean>("studioguildname")) {
         presenceData.state = document.querySelector(
           "#root > div:nth-child(4) > div.📦h_130px.📦box-szg_border-box > div.📦flt_left.📦w_340px.📦box-szg_border-box > div > div.📦flt_left.📦pl_0px.📦w_100prcnt.📦box-szg_border-box > div.📦flt_left.📦w_60prcnt.📦box-szg_border-box > div.PageStudioGuild_guildName__tgbvT"
         ).textContent;

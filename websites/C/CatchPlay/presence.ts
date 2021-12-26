@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "cp"
     },
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (document.location.pathname.includes("/watch")) {
     const video: HTMLVideoElement = document.querySelector(".player-box video");

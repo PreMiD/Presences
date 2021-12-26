@@ -9,8 +9,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "toloka"
     },
-    showUseramePM: boolean = await presence.getSetting("name"),
-    showSearchQuery: boolean = await presence.getSetting("search");
+    showUseramePM = await presence.getSetting<boolean>("name"),
+    showSearchQuery = await presence.getSetting<boolean>("search");
 
   if (document.location.pathname === "/") {
     presenceData.startTimestamp = browsingTimestamp;

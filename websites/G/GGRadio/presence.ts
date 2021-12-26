@@ -7,12 +7,14 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    format1 = await presence.getSetting("sFormatNoDj1"),
-    format2 = await presence.getSetting("sFormatNoDj2"),
-    elapsed = await presence.getSetting("tElapsed"),
-    format = await presence.getSetting("sFormat"),
-    info = await presence.getSetting("sInfo"),
-    dj = await presence.getSetting("sDJ");
+    [format1, format2, elapsed, format, info, dj] = await Promise.all([
+      presence.getSetting<string>("sFormatNoDj1"),
+      presence.getSetting<string>("sFormatNoDj2"),
+      presence.getSetting<boolean>("tElapsed"),
+      presence.getSetting<string>("sFormat"),
+      presence.getSetting<boolean>("sInfo"),
+      presence.getSetting<boolean>("sDj")
+    ]);
 
   if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 

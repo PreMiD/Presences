@@ -9,7 +9,7 @@ let roomName: string,
   joinedRoomName: string,
   joinedRoomTimestamp: number;
 
-function getData() {
+async function getData() {
   if (document.location.pathname.search("client/guest-wait.html") >= 0) {
     roomName = "Guest Lobby";
     userCount = 0;
@@ -44,7 +44,7 @@ function getData() {
   }
 
   if (inCall) {
-    if (presence.getSetting("readNotificationBar")) {
+    if (await presence.getSetting<boolean>("readNotificationBar")) {
       document.querySelectorAll("div").forEach(el => {
         if (el.className.startsWith("notificationsBar")) {
           userState = el.textContent;

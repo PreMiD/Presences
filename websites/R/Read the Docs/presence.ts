@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     id: string,
     values: Record<string, string>
   ): Promise<string> {
-    let str: string = await pres.getSetting(id);
+    let str = await pres.getSetting<string>(id);
 
     for (const [key, value] of Object.entries(values))
       str = str.replace(RegExp(`%${key}%`, "g"), value);

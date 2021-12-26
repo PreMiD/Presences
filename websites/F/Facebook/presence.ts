@@ -23,10 +23,10 @@ presence.on("UpdateData", async () => {
       largeImageKey: "facebook",
       startTimestamp: browsingTimestamp
     },
-    privacyMode = await presence.getSetting("privacyMode"),
-    showTimestamp = await presence.getSetting("timestamp"),
-    showSeachQuery = await presence.getSetting("searchQuery"),
-    messagerUsername = await presence.getSetting("messagerUsername");
+    privacyMode = await presence.getSetting<boolean>("privacyMode"),
+    showTimestamp = await presence.getSetting<boolean>("timestamp"),
+    showSeachQuery = await presence.getSetting<boolean>("searchQuery"),
+    messagerUsername = await presence.getSetting<boolean>("messagerUsername");
 
   let dontShowTmp = false;
 

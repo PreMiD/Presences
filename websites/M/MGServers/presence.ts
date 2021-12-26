@@ -7,8 +7,8 @@ const presence = new Presence({
   panelserverurl = "webinterface.mgservers.de/server/";
 
 presence.on("UpdateData", async () => {
-  const privacy = await presence.getSetting("privacy"),
-    werbung = await presence.getSetting("werbung"),
+  const privacy = await presence.getSetting<boolean>("privacy"),
+    werbung = await presence.getSetting<boolean>("werbung"),
     presenceData: PresenceData = {
       largeImageKey: "mgs-normal",
       smallImageKey: "mgs-normal",

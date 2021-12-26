@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: tmb
     },
     path = document.location.pathname.toLowerCase(),
-    showcon = await presence.getSetting("showContact");
+    showcon = await presence.getSetting<boolean>("showContact");
   // Home Page
   if (path === "/" || path.includes("/intl/")) {
     presenceData.largeImageKey = "icon";

@@ -12,8 +12,8 @@ presence.on("UpdateData", async () => {
     paused = false;
 
   const [buttons, newLang] = await Promise.all([
-    presence.getSetting("buttons"),
-    presence.getSetting("lang").catch(() => "en")
+    presence.getSetting<boolean>("buttons"),
+    presence.getSetting<string>("lang").catch(() => "en")
   ]);
 
   oldLang ??= newLang;
@@ -152,6 +152,6 @@ async function getStrings() {
       viewArtist: "general.buttonViewArtist",
       viewPodcast: "general.buttonViewPodcast"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }

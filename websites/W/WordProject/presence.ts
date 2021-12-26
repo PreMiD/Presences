@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     { pathname } = location,
-    buttons: boolean = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (pathname.startsWith("/index")) {
     const sample = document.querySelector("li.noMargin");

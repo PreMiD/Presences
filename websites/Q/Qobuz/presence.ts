@@ -10,7 +10,7 @@ async function getStrings() {
       viewAlbum: "general.buttonViewAlbum",
       viewPlaylist: "general.buttonViewPlaylist"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
@@ -22,9 +22,9 @@ presence.on("UpdateData", async () => {
     return presence.setActivity({ largeImageKey: "logo" });
 
   const [newLang, timestamps, cover] = await Promise.all([
-    presence.getSetting("lang").catch(() => "en"),
-    presence.getSetting("timestamps"),
-    presence.getSetting("cover")
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("timestamps"),
+    presence.getSetting<boolean>("cover")
   ]);
 
   if (oldLang !== newLang) {

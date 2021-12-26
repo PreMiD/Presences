@@ -25,10 +25,10 @@ const presence = new Presence({
         reading: "general.reading",
         viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     );
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("iFrameData", (data: Data) => {
@@ -49,14 +49,13 @@ presence.on("UpdateData", async () => {
       smallImageKey: "reading",
       startTimestamp: startsTime
     },
-    newLang = await presence.getSetting("lang").catch(() => "en"),
-    showButtons = await presence.getSetting("buttons"),
+    newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
     { pathname } = document.location;
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";

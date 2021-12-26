@@ -5,8 +5,8 @@ const presence = new Presence({
 
 // Presence On
 presence.on("UpdateData", async () => {
-  const buttons = await presence.getSetting("buttons"),
-    time = await presence.getSetting("timestamps"),
+  const buttons = await presence.getSetting<boolean>("buttons"),
+    time = await presence.getSetting<boolean>("timestamps"),
     presenceData: PresenceData = {
       details: "Page not Supported",
       largeImageKey: "logo",

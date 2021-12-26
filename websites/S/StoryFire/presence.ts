@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     video: HTMLVideoElement = document.querySelector(
       "#storyfire-player_html5_api"
     ),
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (document.location.pathname.startsWith("/video-details")) {
     const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching";
     presenceData.smallImageKey = "search";
     if (
-      (await presence.getSetting("showsearchterm")) &&
+      (await presence.getSetting<boolean>("showsearchterm")) &&
       document.querySelector(".content-header > span")
     ) {
       presenceData.state = document.querySelector(

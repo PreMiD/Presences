@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    broadcasttc = await presence.getSetting("broadcasttc"),
+    broadcasttc = await presence.getSetting<boolean>("broadcasttc"),
     active =
       window.getComputedStyle(document.getElementById("start-menu-wrapper"))
         .display === "none";

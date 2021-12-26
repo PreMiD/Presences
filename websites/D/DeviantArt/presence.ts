@@ -99,9 +99,9 @@ const updateCallback = {
 
 	*/
 
-    const presenceSettings: { [index: string]: boolean } = {
-      chatChannelNames: await presence.getSetting("chatChannelNames"),
-      detailedSettings: await presence.getSetting("detailedSettings")
+    const presenceSettings = {
+      chatChannelNames: await presence.getSetting<boolean>("chatChannelNames"),
+      detailedSettings: await presence.getSetting<boolean>("detailedSettings")
     };
 
     if (currentURL.hostname === "www.deviantart.com") {

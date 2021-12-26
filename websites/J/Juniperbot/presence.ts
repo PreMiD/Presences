@@ -23,21 +23,20 @@ async function getStrings() {
       privacy: "general.privacy",
       cookies: "juniperbot.cookies"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting<string>("lang")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "logo" },
-    newLang = await presence.getSetting("lang");
+    newLang = await presence.getSetting<string>("lang");
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (host === "juniper.bot") {
