@@ -6,6 +6,7 @@
 presence.on("UpdateData", async () => {
   const time = await presence.getSetting("time"),
     buttons = await presence.getSetting("buttons"),
+    cover = await presence.getSetting("cover"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
@@ -39,6 +40,10 @@ presence.on("UpdateData", async () => {
         document.querySelector("a[class~='active']").childNodes.item(1)
           .textContent
       }`;
+      if (cover)
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+          "[alt='Cover Image']"
+        ).src;
     }
     if (
       document
