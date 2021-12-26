@@ -1,13 +1,3 @@
-/**
- * Language Strings
- */
-interface LangStrings {
-  play: string;
-  pause: string;
-  search: string;
-  browsing: string;
-}
-
 const presence = new Presence({
     clientId: "660519861742731264"
   }),
@@ -23,15 +13,11 @@ presence.on("UpdateData", async () => {
     case "search":
       await handleSearch();
       break;
-    // Privacy policy
-    // Imprint
+    // Privacy policy, Imprint
     case "c":
       await handleGeneric(true);
       break;
-    // Startpage
-    // Radio station
-    // Region
-    // Unknown
+    // Startpage, Radio station, Region, Unknown
     default:
       await handleUnknown(path);
       break;
@@ -42,7 +28,7 @@ presence.on("UpdateData", async () => {
  * Get Language Strings
  * @returns Language Strings
  */
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
