@@ -150,6 +150,9 @@ presence.on("UpdateData", async () => {
       series = document.querySelector(".ellipsis .text-link");
       videoTitle = series.textContent;
       seriesLink = series.getAttribute("href");
+      episode = `${
+        document.querySelectorAll("#showmedia_about_media h4")[1].textContent
+      } - ${document.querySelector("h4#showmedia_about_name").textContent}`;
     }
     presenceData.smallImageKey = paused ? "pause" : "play";
     presenceData.smallImageText = paused
@@ -160,10 +163,8 @@ presence.on("UpdateData", async () => {
       Math.floor(duration)
     );
 
-    presenceData.details = videoTitle ? videoTitle : "Title not found...";
-    presenceData.state = `${
-      document.querySelectorAll("#showmedia_about_media h4")[1].textContent
-    } - ${document.querySelector("h4#showmedia_about_name").textContent}`;
+    presenceData.details = videoTitle ?? "Title not found...";
+    presenceData.state = episode;
 
     if (paused) {
       delete presenceData.startTimestamp;
