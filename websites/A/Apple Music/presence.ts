@@ -38,7 +38,9 @@ presence.on("UpdateData", async () => {
         ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
       ),
       artwork = document
-        .querySelector(".media-artwork-v2 > picture > source")
+        .querySelector(
+          ".media-artwork-v2:not(.media-artwork-v2--profile-badge) > picture > source"
+        )
         ?.getAttribute("srcset")
         .split(" ")[0]
         .replace("44x44bb", "1024x1024bb");
