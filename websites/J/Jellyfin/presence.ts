@@ -284,6 +284,10 @@ function jellyfinBasenameUrl(): string {
   )}`}`;
 }
 
+function mediaPrimaryImage(mediaId: string): string {
+  return `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
+}
+
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
@@ -309,8 +313,7 @@ async function handleAudioPlayback(): Promise<void> {
     document.querySelector<HTMLDivElement>(".nowPlayingImage").style
       .backgroundImage
   )
-    presenceData.largeImageKey = `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
-  else presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
+    presenceData.largeImageKey = mediaPrimaryImage(mediaId);
 
   // playing
   if (!audioElem.paused) {
@@ -714,6 +717,8 @@ async function handleWebClient(): Promise<void> {
  * setDefaultsToPresence - set default values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
+  presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
+
   if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
   if (presenceData.smallImageText) delete presenceData.smallImageText;
