@@ -1,10 +1,15 @@
+/**
+ * Language Strings
+ */
+interface LangStrings {
+  reading: string;
+  page: string;
+}
+
 const presence = new Presence({
     clientId: "681116862930747520"
   }),
-  strings = presence.getStrings({
-    reading: "presence.activity.reading",
-    page: "general.page"
-  });
+  strings = getStrings();
 
 let timestamp = 0,
   previous: Location,
@@ -91,6 +96,20 @@ presence.on("UpdateData", async () => {
 
   previous = current;
 });
+
+/**
+ * Get Language Strings
+ * @returns Language Strings
+ */
+async function getStrings(): Promise<LangStrings> {
+  return presence.getStrings(
+    {
+      reading: "general.reading",
+      page: "general.page"
+    },
+    (await presence.getSetting("lang").catch(() => "en")) as string
+  );
+}
 
 /**
  * Handle bomb manual
