@@ -7,138 +7,157 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const path = window.location.pathname.split("/").slice(1),
-    presenceData: PresenceData = {
-      details: "My Nintendo",
-      largeImageKey: "logo_big"
-    };
+  const path = window.location.pathname.split("/").slice(1);
 
-  if (path.length > 0) {
-    //Subpages
-    switch (path[0]) {
-      //Reward Categories
-      case "reward_categories":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).browsing;
+  switch (path[0]) {
+    // Reward Categories
+    case "reward_categories":
+      await handleRewardCategories(path);
+      break;
+    // Rewards
+    case "rewards":
+      await handleRewards(path);
+      break;
+    // Missions
+    case "missions":
+      await handleGeneric(false, "reading");
+      break;
+    // Points
+    case "point":
+      await handlePoints(path);
+      break;
+    // News
+    case "news":
+      await handleNews(path);
+      break;
+    // Redeem Point Codes
+    case "serial_number":
+      await handleGeneric();
+      break;
+    // Getting Started
+    // About Points
+    // About Gold Points
+    case "getting_started":
+    case "about_point":
+    case "about_gold_point":
+      await handleGeneric(false, "reading");
+      break;
+    // Startpage
+    // Unknown
+    default:
+      presence.setActivity();
+      break;
+  }
+});
 
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
+/**
+ * Handle reward category pages
+ * @param path URL path
+ */
+async function handleRewardCategories(path: string[]): Promise<void> {
+  const presenceData: PresenceData = {
+    details:
+      document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+      document.title,
+    largeImageKey: "logo_big",
+    smallImageText: (await strings).browsing,
+    smallImageKey: "reading"
+  };
 
-        if (path.length > 1) {
-          presenceData.state = document.getElementsByClassName(
-            "PageSubHeader_title"
-          )[0].textContent;
-        }
-        break;
-      //Rewards
-      case "rewards":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).reading;
-
-        if (!path.includes("media")) {
-          presenceData.details =
-            document.getElementsByClassName("PageHeader_title")[0].textContent;
-
-          if (path.length > 1) {
-            presenceData.state =
-              document.getElementsByClassName(
-                "RewardHeader_title"
-              )[0].textContent;
-          }
-        }
-        break;
-      //Missions
-      case "missions":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).browsing;
-
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
-        break;
-      //Points
-      case "point":
-        if (path.length > 1) {
-          switch (path[1]) {
-            //Wallet
-            case "wallet":
-              presenceData.details =
-                document.getElementsByClassName(
-                  "PageHeader_title"
-                )[0].textContent;
-              presenceData.state = document.getElementsByClassName(
-                "PageSubHeader_title"
-              )[0].textContent;
-              break;
-            //Unknown
-            default:
-              presence.setActivity();
-              return;
-          }
-        } else {
-          presence.setActivity();
-          return;
-        }
-        break;
-      //News
-      case "news":
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
-
-        if (path.length > 1) {
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).reading;
-
-          presenceData.state =
-            document.getElementsByClassName("NewsDetail_title")[0].textContent;
-        } else {
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browsing;
-
-          presenceData.state = document.getElementsByClassName(
-            "PageSubHeader_title"
-          )[0].textContent;
-        }
-        break;
-      //Redeem Point Codes
-      case "serial_number":
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
-        break;
-      //Getting Started
-      case "getting_started":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).reading;
-
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
-        break;
-      //About Points
-      case "about_point":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).reading;
-
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
-        break;
-      //About Gold Points
-      case "about_gold_point":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).reading;
-
-        presenceData.details =
-          document.getElementsByClassName("PageHeader_title")[0].textContent;
-        break;
-      //Unknown
-      default:
-        presence.setActivity();
-        return;
-    }
-  } else {
-    //Homepage
-
-    presence.setActivity();
-    return;
+  if (path.length > 1) {
+    presenceData.state = document.querySelector<HTMLHeadingElement>(
+      ".PageSubHeader_title"
+    )?.textContent;
   }
 
   presence.setActivity(presenceData);
-});
+}
+
+/**
+ * Handle reward page
+ * @param path URL path
+ */
+async function handleRewards(path: string[]): Promise<void> {
+  const presenceData: PresenceData = {
+    details:
+      document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+      document.title,
+    largeImageKey: "logo_big",
+    smallImageText: (await strings).browsing,
+    smallImageKey: "reading"
+  };
+
+  if (path.length > 1) {
+    presenceData.state = document.querySelector<HTMLHeadingElement>(
+      ".RewardHeader_title"
+    ).textContent;
+  }
+
+  presence.setActivity(presenceData);
+}
+
+/**
+ * Handle points page
+ * @param path URL path
+ */
+async function handlePoints(path: string[]): Promise<void> {
+  if (path.length < 2) return presence.setActivity();
+
+  presence.setActivity({
+    details: document.querySelector<HTMLHeadingElement>("h1").textContent,
+    state: document.querySelector<HTMLHeadingElement>("h2")?.textContent,
+    largeImageKey: "logo_big"
+  });
+}
+
+/**
+ * Handle news pages
+ * @param path URL path
+ */
+async function handleNews(path: string[]): Promise<void> {
+  const presenceData: PresenceData = {
+    details:
+      document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+      document.title,
+    largeImageKey: "logo_big",
+    smallImageText: (await strings).reading,
+    smallImageKey: "reading"
+  };
+
+  if (path.length > 1) {
+    presenceData.state =
+      document.querySelector<HTMLHeadingElement>(
+        ".NewsDetail_title"
+      )?.textContent;
+  } else {
+    presenceData.state = document.querySelector<HTMLHeadingElement>(
+      ".PageSubHeader_title"
+    )?.textContent;
+  }
+
+  presence.setActivity(presenceData);
+}
+
+/**
+ * Handle generic pages
+ * @param preferTitle Prefer document title over h1 text content
+ */
+async function handleGeneric(
+  preferTitle = false,
+  action: "none" | "reading" | "browsing" = "none"
+): Promise<void> {
+  const presenceData: PresenceData = {
+    details: preferTitle
+      ? document.title
+      : document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+        document.title,
+    largeImageKey: "logo_big"
+  };
+
+  if (action === "reading" || action === "browsing") {
+    presenceData.smallImageKey = (await strings)[action];
+    presenceData.smallImageText = action;
+  }
+
+  presence.setActivity(presenceData);
+}
