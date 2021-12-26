@@ -9,7 +9,7 @@ async function getStrings() {
       viewPlaylist: "general.buttonViewPlaylist",
       viewArtist: "general.buttonViewArtist"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
@@ -20,21 +20,22 @@ let fullscreen: boolean,
   timestamps,
   playlistLink,
   artistLink,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang").catch(() => "en"),
-    showPlaylist = await presence.getSetting("showPlaylist");
+    [buttons, newLang, showPlaylist] = await Promise.all([
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<string>("lang").catch(() => "en"),
+      presence.getSetting<boolean>("showPlaylist")
+    ]);
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
   player = document.querySelector(
     "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
@@ -83,9 +84,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = title;
       presenceData.state = artist;
       presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
+      presenceData.smallImageText = paused ? strings.pause : strings.play;
       presenceData.largeImageKey = "logo";
       presenceData.endTimestamp = timestamps.pop();
 
@@ -149,26 +148,24 @@ presence.on("UpdateData", async () => {
       presenceData.state = artist;
       presenceData.largeImageKey = "logo";
       presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
+      presenceData.smallImageText = paused ? strings.pause : strings.play;
       presenceData.endTimestamp = timestamps.pop();
 
       if (showPlaylist && buttons && artistLink && playlistLink) {
         presenceData.buttons = [
           {
-            label: (await strings).viewArtist,
+            label: strings.viewArtist,
             url: artistLink
           },
           {
-            label: (await strings).viewPlaylist,
+            label: strings.viewPlaylist,
             url: playlistLink
           }
         ];
       } else if (artistLink) {
         presenceData.buttons = [
           {
-            label: (await strings).viewArtist,
+            label: strings.viewArtist,
             url: artistLink
           }
         ];

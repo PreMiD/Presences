@@ -17,7 +17,7 @@ async function getStrings() {
       viewMovie: "general.buttonViewMovie",
       watchEpisode: "general.buttonViewEpisode"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
@@ -36,8 +36,18 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
   currentAnimeEpisode: string,
   isMovie: boolean = null,
   episodeNumber,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
+
+interface AppData {
+  anime: {
+    types?: [
+      {
+        name: string;
+      }
+    ];
+  };
+}
 
 function checkIfMovie() {
   !nextEpisodeElement && !previousEpisodeElement
@@ -51,7 +61,7 @@ function checkIfMovie() {
     : (isMovie = true);
 
   !isMovie
-    ? presence.getPageletiable("appData").then(appData => {
+    ? presence.getPageletiable<AppData>("appData").then(appData => {
         isMovie = appData.anime.types?.find(
           (x: { name: string }) => x.name === "Movie"
         )
@@ -84,15 +94,14 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     [buttons, newLang, cover] = await Promise.all([
-      presence.getSetting("buttons"),
-      presence.getSetting("lang"),
-      presence.getSetting("cover")
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<string>("lang"),
+      presence.getSetting<boolean>("cover")
     ]);
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (

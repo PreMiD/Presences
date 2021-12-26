@@ -4,7 +4,7 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const privacy = await presence.getSetting("privacy"),
+  const privacy = await presence.getSetting<boolean>("privacy"),
     presenceData: PresenceData = {
       largeImageKey: "malody",
       startTimestamp: browsingTimestamp

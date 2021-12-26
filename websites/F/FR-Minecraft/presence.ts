@@ -7,8 +7,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     },
     browsingTimestamp = Math.floor(Date.now() / 1000),
-    privacy = await presence.getSetting("privacy"),
-    button = await presence.getSetting("button");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    button = await presence.getSetting<boolean>("button");
 
   presenceData.startTimestamp = browsingTimestamp;
   if (privacy) presenceData.details = "Browsing";

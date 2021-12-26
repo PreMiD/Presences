@@ -4,8 +4,8 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const buttons = await presence.getSetting("buttons"),
-    time = await presence.getSetting("timestamps"),
+  const buttons = await presence.getSetting<boolean>("buttons"),
+    time = await presence.getSetting<boolean>("timestamps"),
     presenceData: PresenceData = {
       details: "Page not Supported",
       largeImageKey: "logo",

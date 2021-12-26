@@ -32,20 +32,20 @@ presence.on("UpdateData", async () => {
   } else if (location.pathname.includes("room")) {
     /*Try to get Metadata: Viewers, Game Name, if the elements don't exist, assume the user is on the indexpage */
     try {
-      activityName = document.querySelector(
+      activityName = document.querySelector<HTMLDivElement>(
         'div[class="appTitle-WJ3"]'
-      ) as HTMLDivElement;
+      );
       userCount =
         parseInt(
-          (
-            document.querySelectorAll(
+          document
+            .querySelectorAll<HTMLDivElement>(
               'div[class="ui tabular swipableMenu-xjk menu"] > a'
-            )[1] as HTMLDivElement
-          ).textContent.trim(),
+            )[1]
+            .textContent.trim(),
           10
         ) - 1;
     } catch {
-      return "element does not exist";
+      return;
     }
     /* Re-set the index status, as user is likely on the index page again and the Metadata objects exist now */
     details = "Choosing an activity";

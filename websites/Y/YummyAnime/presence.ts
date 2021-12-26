@@ -47,7 +47,8 @@ presence.on("UpdateData", async () => {
       Math.floor(duration)
     ),
     presenceData: PresenceData = {
-      largeImageKey: "ya"
+      largeImageKey: "ya",
+      startTimestamp: browsingTimestamp
     };
 
   if (document.location.pathname.includes("/item")) {
@@ -90,7 +91,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (!iFrameVideo && isNaN(duration)) {
-      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
         "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
@@ -101,11 +101,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/movie")) {
     presenceData.details = "Browsing through";
     presenceData.state = "all movies";
-    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/anime")) {
     presenceData.details = "Browsing through";
     presenceData.state = "all animes";
-    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.URL.includes("/search")) {
     search = document.querySelector(
       "body > div.content-block.container.clearfix > div.search-block-wrapper.main-search.clearfix > form > input.search"
@@ -113,15 +111,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching for:";
     presenceData.state = search.value;
     presenceData.smallImageKey = "search";
-    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/ongoing")) {
     presenceData.details = "Browsing through";
     presenceData.state = "ongoing animes";
-    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/anime-updates")) {
     presenceData.details = "Browsing through";
     presenceData.state = "anime updates";
-    presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname.includes("/post/")) {
     presenceData.details = "Reaing post:";
     title =
@@ -134,17 +129,13 @@ presence.on("UpdateData", async () => {
 
     presenceData.state = title.textContent;
     presenceData.smallImageKey = "reading";
-    presenceData.startTimestamp = browsingTimestamp;
-  } else if (document.location.pathname.includes("/post")) {
+  } else if (document.location.pathname.includes("/post"))
     presenceData.details = "Viewing posts";
-    presenceData.startTimestamp = browsingTimestamp;
-  } else if (document.location.pathname.includes("/top")) {
+  else if (document.location.pathname.includes("/top"))
     presenceData.details = "Viewing the top";
-    presenceData.startTimestamp = browsingTimestamp;
-  } else if (document.URL === "https://otakustream.tv/") {
+  else if (document.URL === "https://otakustream.tv/") {
     presenceData.details = "Browsing...";
     presenceData.smallImageKey = "reading";
-    presenceData.startTimestamp = browsingTimestamp;
   }
 
   if (presenceData.details) presence.setActivity(presenceData);

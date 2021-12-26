@@ -4,9 +4,9 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const time = await presence.getSetting("timestamps"),
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons"),
+  const time = await presence.getSetting<boolean>("timestamps"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    buttons = await presence.getSetting<boolean>("buttons"),
     path = document.location,
     lang = path.pathname.substring(1, 6),
     presenceData: PresenceData = {

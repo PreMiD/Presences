@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
         } else if (path.includes("/settings/")) {
           //Project Settings section.
           //Getting user preference for showSettingsSections.
-          const showSettingsSections = await presence.getSetting(
+          const showSettingsSections = await presence.getSetting<boolean>(
             "showSettingsSections"
           );
 

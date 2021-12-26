@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
       const animeTitleFull = document.querySelector(
           ".ani_titulo_original"
         ).textContent,
-        showFullName = await presence.getSetting("fullName");
+        showFullName = await presence.getSetting<boolean>("fullName");
       presenceData.details = "Vendo sobre um anime";
       if (showFullName && animeTitleFull)
         presenceData.state = `Vendo sobre ${animeTitleFull}`;
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
     const animeTitleFull = document.querySelector(
         ".ani_titulo_original"
       ).textContent,
-      showFullName = await presence.getSetting("fullName"),
+      showFullName = await presence.getSetting<boolean>("fullName"),
       video = document.querySelector(
         "#video > div > div > video"
       ) as HTMLMediaElement;

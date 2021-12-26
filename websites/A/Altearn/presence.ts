@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     },
-    privacy = await presence.getSetting("privacy"),
-    button = await presence.getSetting("button");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    button = await presence.getSetting<boolean>("button");
   if (privacy) presenceData.details = "Browsing";
   else if (window.location.pathname.startsWith("/articles")) {
     presenceData.details = "Viewing a page:";

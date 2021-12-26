@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
     itemName = document.querySelector('[itemprop="name"]')
       ? document.querySelector('[itemprop="name"]').textContent
       : null,
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (location.hostname !== "www.newgrounds.com") {
     const userName = document.querySelector(".user-link").textContent;
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "User Profile";
 
-    if (await presence.getSetting("showprofilename")) {
+    if (await presence.getSetting<boolean>("showprofilename")) {
       presenceData.state = userName.length < 2 ? `User: ${userName}` : userName;
       if (buttons) {
         presenceData.buttons = [
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Audio";
     if (document.location.pathname.startsWith("/audio/listen")) {
       presenceData.details = "Listening to audio";
-      if (await presence.getSetting("itemname")) {
+      if (await presence.getSetting<boolean>("itemname")) {
         presenceData.state = `${itemName} by ${document
           .querySelector(".item-details-main")
           .textContent.trim()}`;
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
       if (
         document.querySelector('#audio-listen-play[style="display: none;"]')
       ) {
-        if (await presence.getSetting("timestamp")) {
+        if (await presence.getSetting<boolean>("timestamp")) {
           [presenceData.startTimestamp, presenceData.endTimestamp] =
             getTimestamps(
               document.querySelector("#audio-listen-progress").textContent,
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Art";
     if (document.location.pathname.startsWith("/art/view")) {
       presenceData.details = "Viewing art";
-      if (await presence.getSetting("itemname")) {
+      if (await presence.getSetting<boolean>("itemname")) {
         presenceData.state =
           itemName.length < 2 ? `Art: ${itemName}` : itemName;
         if (buttons) {
@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
       ) {
         case "movie":
           presenceData.details = "Watching a movie";
-          if (await presence.getSetting("itemname")) {
+          if (await presence.getSetting<boolean>("itemname")) {
             presenceData.state =
               itemName.length < 2 ? `Movie: ${itemName}` : itemName;
             if (buttons) {
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
                 '[data-action="play"][style="display: none;"]'
               )
             ) {
-              if (await presence.getSetting("timestamp")) {
+              if (await presence.getSetting<boolean>("timestamp")) {
                 [presenceData.startTimestamp, presenceData.endTimestamp] =
                   getTimestamps(
                     document.querySelector('[data-value="current-time"]')
@@ -182,7 +182,7 @@ presence.on("UpdateData", async () => {
             lastGameChange = Date.now();
           }
           presenceData.details = "Playing a game";
-          if (await presence.getSetting("itemname")) {
+          if (await presence.getSetting<boolean>("itemname")) {
             presenceData.state =
               itemName.length < 2 ? `Game: ${itemName}` : itemName;
             if (buttons) {
@@ -196,7 +196,7 @@ presence.on("UpdateData", async () => {
           }
           presenceData.smallImageKey = "games_play";
           presenceData.smallImageText = "Games - Playing";
-          if (await presence.getSetting("timestamp"))
+          if (await presence.getSetting<boolean>("timestamp"))
             presenceData.startTimestamp = lastGameChange;
           break;
       }
@@ -212,14 +212,14 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a user's posts";
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "User Profile";
-      if (await presence.getSetting("showprofilename")) {
+      if (await presence.getSetting<boolean>("showprofilename")) {
         presenceData.state =
           userName.length < 2 ? `User: ${userName}` : userName;
       }
     } else if (document.location.pathname.startsWith("/bbs/topic/")) {
       const itemName = document.querySelector(".pod-head h2").textContent;
       presenceData.details = "Viewing a forum topic";
-      if (await presence.getSetting("topicname")) {
+      if (await presence.getSetting<boolean>("topicname")) {
         presenceData.state =
           itemName.length < 2 ? `Topic: ${itemName}` : itemName;
         if (buttons) {
@@ -241,7 +241,7 @@ presence.on("UpdateData", async () => {
         ".column.wide .pod-head h2"
       ).textContent;
       presenceData.details = "Viewing a collection";
-      if (await presence.getSetting("itemname")) {
+      if (await presence.getSetting<boolean>("itemname")) {
         presenceData.state =
           itemName.length < 2 ? `Collection: ${itemName}` : itemName;
         if (buttons) {
@@ -269,7 +269,7 @@ presence.on("UpdateData", async () => {
         ".column.wide .pod-head h2"
       ).textContent;
       presenceData.details = "Viewing a playlist";
-      if (await presence.getSetting("itemname")) {
+      if (await presence.getSetting<boolean>("itemname")) {
         presenceData.state =
           itemName.length < 2 ? `Playlist: ${itemName}` : itemName;
         if (buttons) {
@@ -306,7 +306,7 @@ presence.on("UpdateData", async () => {
     }`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Searching";
-    if (await presence.getSetting("showsearchterm")) {
+    if (await presence.getSetting<boolean>("showsearchterm")) {
       const query = new URLSearchParams(document.location.search).get("terms");
       if (query)
         presenceData.state = query.length < 2 ? `Query: ${query}` : query;

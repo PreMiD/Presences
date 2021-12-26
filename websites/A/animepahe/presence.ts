@@ -164,7 +164,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     },
     strings = await waitStrings(
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     ),
     viewing = strings.viewing.slice(0, -1);
   let playback = false;

@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "fbox_logo"
     },
     { pathname } = document.location,
-    buttons: boolean = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (pathname === "/") presenceData.details = "Browsing";
   else if (pathname.startsWith("/series/")) {

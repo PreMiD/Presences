@@ -22,8 +22,10 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const time = await presence.getSetting("timestamps"),
-    buttons = await presence.getSetting("buttons"),
+  const [time, buttons] = await Promise.all([
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("buttons")
+    ]),
     playvdo =
       document.querySelector("#info > h1")?.textContent ?? "desconhecido",
     path = document.location,

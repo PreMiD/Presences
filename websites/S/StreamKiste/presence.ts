@@ -144,7 +144,7 @@ presence.on("iFrameData", (data: VideoContext) => {
   frameData = data;
 });
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang");
+  const newLang = await presence.getSetting<string>("lang");
   if (newLang !== currentLang) {
     currentLang = newLang;
     localizedStrings = await presence.getStrings(
@@ -166,9 +166,9 @@ presence.on("UpdateData", async () => {
   const query: { [key: string]: unknown } = getQuery(),
     pageIndex = pages.findIndex(x => x.middleware(window, [query])),
     context = pages[pageIndex];
-  if (!context) return false;
+  if (!context) return;
 
-  return Promise.resolve(
+  return void Promise.resolve(
     context.exec(
       presence,
       {

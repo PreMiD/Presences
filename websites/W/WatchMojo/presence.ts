@@ -23,7 +23,7 @@ const presence = new Presence({
         buttonWatchVideo: "general.buttonWatchVideo",
         buttonPlayTrivia: "watchmojo.buttonPlayTrivia"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting<string>("lang")
     );
   },
   capitalize = (s: string) => {
@@ -40,7 +40,7 @@ const presence = new Presence({
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   iframeDur = 0,
   iframeCur = 0,
@@ -63,12 +63,12 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang"),
-    showBrowsing: boolean = await presence.getSetting("browse"),
-    showTimestamp: boolean = await presence.getSetting("timestamp"),
-    showButtons: boolean = await presence.getSetting("buttons"),
-    privacy: boolean = await presence.getSetting("privacy"),
-    video: HTMLVideoElement = document.querySelector("#myDiv_html5");
+  const newLang = await presence.getSetting<string>("lang"),
+    showBrowsing = await presence.getSetting<boolean>("browse"),
+    showTimestamp = await presence.getSetting<boolean>("timestamp"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    video = document.querySelector<HTMLVideoElement>("#myDiv_html5");
 
   let presenceData: PresenceData = {
     largeImageKey: "mojo"
@@ -79,10 +79,9 @@ presence.on("UpdateData", async () => {
     browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const statics: {

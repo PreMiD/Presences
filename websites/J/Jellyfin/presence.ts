@@ -522,7 +522,7 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
 
-      if (await presence.getSetting("showMediaTimestamps")) {
+      if (await presence.getSetting<boolean>("showMediaTimestamps")) {
         [, presenceData.endTimestamp] =
           presence.getTimestampsfromMedia(videoPlayerElem);
       }
@@ -729,7 +729,7 @@ async function setDefaultsToPresence(): Promise<void> {
   if (presenceData.endTimestamp && isNaN(presenceData.endTimestamp))
     delete presenceData.endTimestamp;
 
-  if (await presence.getSetting("showTimestamps"))
+  if (await presence.getSetting<boolean>("showTimestamps"))
     presenceData.startTimestamp = Date.now();
 }
 
@@ -740,7 +740,7 @@ async function setDefaultsToPresence(): Promise<void> {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isJellyfinWebClient(): Promise<boolean> {
-  ApiClient ??= await presence.getPageletiable("ApiClient");
+  ApiClient ??= await presence.getPageletiable<ApiClient>("ApiClient");
 
   if (ApiClient && typeof ApiClient === "object") {
     if (ApiClient._appName && ApiClient._appName === "Jellyfin Web")

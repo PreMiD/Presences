@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
   if (window.location.pathname === "/view_video.php") {
     const video: HTMLVideoElement =
         document.querySelector(".mgp_videoWrapper video") ?? null,
-      showTime = await presence.getSetting("time");
+      showTime = await presence.getSetting<boolean>("time");
 
     if (video && !isNaN(video.duration)) {
       //* Get required tags

@@ -113,7 +113,9 @@ presence.on("UpdateData", async () => {
         //Searching for a Job subsection.
         else if (path === "/jobs/search/") {
           //Getting user preference for showJobsQuery.
-          const showJobsQuery = await presence.getSetting("showJobsQuery");
+          const showJobsQuery = await presence.getSetting<boolean>(
+            "showJobsQuery"
+          );
 
           if (showJobsQuery) {
             presenceData.state = `Searching for a "${decodeURI(
@@ -150,7 +152,9 @@ presence.on("UpdateData", async () => {
       //Chats subsection.
       else {
         //Getting user preference for showChatUsername.
-        const showChatUsername = await presence.getSetting("showChatUsername");
+        const showChatUsername = await presence.getSetting<boolean>(
+          "showChatUsername"
+        );
 
         if (showChatUsername) {
           presenceData.state = `Chatting with ${unescapeHTML(

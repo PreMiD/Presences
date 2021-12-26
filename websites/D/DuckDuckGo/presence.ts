@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
     settingName: string,
     content?: string
   ): Promise<string> {
-    const setting = await presence.getSetting(settingName);
+    const setting = await presence.getSetting<string>(settingName);
     if (!content) return setting.replace("%search%", searchQuery().value);
     return setting.replace("%content%", content);
   }
@@ -36,10 +36,10 @@ presence.on("UpdateData", async () => {
     document.URL === "https://duckduckgo.com" ||
     document.location.href.includes("/&t=h_")
   ) {
-    presenceData.details = await presence.getSetting("homepageMessage");
+    presenceData.details = await presence.getSetting<string>("homepageMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/settings")) {
-    presenceData.details = await presence.getSetting("settingsMessage");
+    presenceData.details = await presence.getSetting<string>("settingsMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("?q=")) {
     presenceData.startTimestamp = setTimestamp();

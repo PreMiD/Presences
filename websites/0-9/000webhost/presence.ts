@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     page = window.location.pathname,
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   titleSite = document.querySelector(
     "#nav-container > div > div.sidebar__header.flex.flex-col > a.sidebar-header__app-link.text-color-white.text-bold.disabled-link.sidebar-header__app-link--disabled > span"
