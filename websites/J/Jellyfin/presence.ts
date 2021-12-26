@@ -475,18 +475,10 @@ async function handleVideoPlayback(): Promise<void> {
   ) as HTMLHeadingElement;
 
   // media metadata
-  let mediaInfo: string | MediaInfo;
+  const [mediaInfo] = await searchMedia(headerTitleElem.innerText);
 
   // no background image, we're playing live tv
-  if (videoPlayerElem?.hasAttribute("poster")) {
-    mediaInfo = await obtainMediaInfo(
-      videoPlayerElem.getAttribute("poster").split("/")[4]
-    );
-  } else if (videoPlayerElem?.src?.match(/(mediaSourceId=)([a-z0-9]{32})/)) {
-    mediaInfo = await obtainMediaInfo(
-      videoPlayerElem.src.match(/(mediaSourceId=)([a-z0-9]{32})/).slice(2)[0]
-    );
-  }
+  let largeImage = PRESENCE_ART_ASSETS.logo;
 
   // display generic info
   if (!mediaInfo) {
@@ -498,6 +490,12 @@ async function handleVideoPlayback(): Promise<void> {
       case "Movie":
         title = "Watching a Movie:";
         subtitle = headerTitleElem.textContent;
+        if (
+          (await presence.getSetting("showRichImages")) &&
+          (await presence.getSetting("showMoviePoster"))
+        )
+          largeImage = mediaPrimaryImage(mediaInfo.Id);
+
         break;
       case "Series":
         title = "Watching a Series:";
@@ -511,6 +509,9 @@ async function handleVideoPlayback(): Promise<void> {
         title = `Watching ${mediaInfo.Type}`;
         subtitle = mediaInfo.Name;
     }
+
+    presenceData.largeImageKey = largeImage;
+
     // watching live tv
     if (mediaInfo && mediaInfo.Type === "TvChannel") {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;

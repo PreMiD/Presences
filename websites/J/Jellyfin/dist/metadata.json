@@ -55,6 +55,15 @@
       "title": "Rich images for music",
       "icon": "fad fa-album",
       "value": true
+    },
+    {
+      "if": {
+        "showRichImages": true
+      },
+      "id": "showMoviePoster",
+      "title": "Rich images for movies",
+      "icon": "fad fa-film",
+      "value": true
     }
   ]
 }
