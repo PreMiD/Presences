@@ -74,7 +74,9 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     return `::${params.type} ${input.join(",")}::${params.message}`;
   },
   changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
-  metaFiles = changedFiles.filter(f => f.endsWith("metadata.json"));
+  metaFiles = [
+    ...new Set(changedFiles.filter(f => f.endsWith("metadata.json")))
+  ];
 
 (async (): Promise<void> => {
   console.log(blue("Getting latest schema..."));
