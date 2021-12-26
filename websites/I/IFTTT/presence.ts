@@ -40,38 +40,50 @@ presence.on("UpdateData", async () => {
         break;
       // Developer spotlight
       case "blog":
-        await handleCustom(
-          "Developer spotlight",
-          path[1]?.length > 0
-            ? document.querySelector<HTMLHeadingElement>("h1").textContent
-            : null
-        );
+        presence.setActivity({
+          details: "Developer spotlight",
+          state:
+            path[1]?.length > 0
+              ? document.querySelector<HTMLHeadingElement>("h1").textContent
+              : null,
+          largeImageKey: "logo_big"
+        });
         break;
       // Solutions
       case "solutions":
-        await handleCustom(
-          "Solutions",
-          path[1]?.length > 0
-            ? document.querySelector<HTMLHeadingElement>("h3").textContent
-            : null
-        );
+        presence.setActivity({
+          details: "Solutions",
+          state:
+            path[1]?.length > 0
+              ? document.querySelector<HTMLHeadingElement>("h3").textContent
+              : null,
+          largeImageKey: "logo_big"
+        });
         break;
       // Case studies
       case "case_studies":
-        await handleCustom(
-          "Case studies",
-          path[1]?.length > 0
-            ? document.querySelector<HTMLHeadingElement>("h1").textContent
-            : null
-        );
+        presence.setActivity({
+          details: "Case studies",
+          state:
+            path[1]?.length > 0
+              ? document.querySelector<HTMLHeadingElement>("h1").textContent
+              : null,
+          largeImageKey: "logo_big"
+        });
         break;
       // Testimonials
       case "testimonials":
-        await handleCustom("Testimonials");
+        presence.setActivity({
+          details: "Testimonials",
+          largeImageKey: "logo_big"
+        });
         break;
       // Contact sales
       case "contact_sales":
-        await handleCustom("Contact sales");
+        presence.setActivity({
+          details: "Contact sales",
+          largeImageKey: "logo_big"
+        });
         break;
       // Startpage
       // Unknown
@@ -84,10 +96,13 @@ presence.on("UpdateData", async () => {
     switch (path[0]) {
       // Incidents
       case "incidents":
-        await handleCustom(
-          "IFTTT Status - Incident Report",
-          document.querySelector<HTMLDivElement>(".incident-name").textContent
-        );
+        presence.setActivity({
+          details: "IFTTT Status - Incident Report",
+          state:
+            document.querySelector<HTMLDivElement>(".incident-name")
+              .textContent,
+          largeImageKey: "logo_big"
+        });
         break;
       // Startpage
       // Unknown
@@ -104,16 +119,25 @@ presence.on("UpdateData", async () => {
         break;
       // Account settings
       case "settings":
-        await handleCustom("Account settings");
+        presence.setActivity({
+          details: "Account settings",
+          largeImageKey: "logo_big"
+        });
         break;
       // Billing
       case "billing":
-        await handleCustom("Billing");
+        presence.setActivity({
+          details: "Billing",
+          largeImageKey: "logo_big"
+        });
         break;
       // My Applets
       case "home":
       case "my_applets":
-        await handleCustom("My Applets");
+        presence.setActivity({
+          details: "My Applets",
+          largeImageKey: "logo_big"
+        });
         break;
       // Creating an Applet
       case "create":
@@ -121,7 +145,10 @@ presence.on("UpdateData", async () => {
         break;
       // Activity
       case "activity":
-        await handleCustom("Activity");
+        presence.setActivity({
+          details: "Activity",
+          largeImageKey: "logo_big"
+        });
         break;
       // My Services
       case "date_and_time":
@@ -160,11 +187,17 @@ presence.on("UpdateData", async () => {
           return;
         }
 
-        await handleCustom("Exploring Applets & Services");
+        presence.setActivity({
+          details: "Exploring Applets & Services",
+          largeImageKey: "logo_big"
+        });
         break;
       // Plans
       case "plans":
-        await handleCustom("Plans");
+        presence.setActivity({
+          details: "Plans",
+          largeImageKey: "logo_big"
+        });
         break;
       // Blog
       case "blog":
@@ -172,19 +205,31 @@ presence.on("UpdateData", async () => {
         break;
       // Developers
       case "developers":
-        await handleCustom("Developers");
+        presence.setActivity({
+          details: "Developers",
+          largeImageKey: "logo_big"
+        });
         break;
       // Contact
       case "contact":
-        await handleCustom("Contact");
+        presence.setActivity({
+          details: "Contact",
+          largeImageKey: "logo_big"
+        });
         break;
       // Trust & Privacy
       case "terms":
-        await handleCustom("Privacy Policy & Terms of Use");
+        presence.setActivity({
+          details: "Privacy Policy & Terms of Use",
+          largeImageKey: "logo_big"
+        });
         break;
       // Careers
       case "careers":
-        await handleCustom("Careers");
+        presence.setActivity({
+          details: "Careers",
+          largeImageKey: "logo_big"
+        });
         break;
       // Startpage
       // Services
@@ -370,18 +415,5 @@ async function handleMyServices(category?: string): Promise<void> {
     largeImageKey: "logo_big",
     smallImageText: (await strings).browsing,
     smallImageKey: "reading"
-  });
-}
-
-/**
- * Handle custom pages
- * @param details Presence details text
- * @param state Presence state text
- */
-async function handleCustom(details: string, state?: string): Promise<void> {
-  presence.setActivity({
-    details,
-    state,
-    largeImageKey: "logo_big"
   });
 }
