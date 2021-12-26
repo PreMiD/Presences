@@ -584,7 +584,7 @@ async function handleWebClient(): Promise<void> {
   // obtain the path, on the example would return "login.html"
   // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
 
-  switch (location.hash.split("?")[0].substr(3)) {
+  switch (location.hash.split("?")[0].substring(3)) {
     case "login.html":
       presenceData.state = "Logging in";
       break;
@@ -740,6 +740,8 @@ async function updateData(): Promise<void> {
   if (showPresence) {
     if (!presenceData.details) presence.setActivity();
     else presence.setActivity(presenceData);
+
+    presence.info(JSON.stringify(presenceData));
   }
 }
 
