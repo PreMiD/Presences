@@ -183,6 +183,7 @@ presence.on("UpdateData", async () => {
     delete presenceData.state;
   }
   if (document.location.hostname === "devforum.roblox.com") {
+    // For some reason almost every single HTMLElement needed returned with value "null" so document.title was used
     delete presenceData.largeImageKey;
     presenceData.details = "Visiting the DevForum";
     presenceData.largeImageKey = "https://i.imgur.com/07YmNQw.png";
