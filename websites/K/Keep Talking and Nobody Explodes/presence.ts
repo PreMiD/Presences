@@ -1,11 +1,3 @@
-/**
- * Language Strings
- */
-interface LangStrings {
-  reading: string;
-  page: string;
-}
-
 const presence = new Presence({
     clientId: "681116862930747520"
   }),
@@ -22,14 +14,12 @@ presence.on("UpdateData", async () => {
   if (current.hostname.split(".")[0] === "bombmanual") {
     // Bomb manual page
     switch (isLanguageCode(path[0]) ? path[1] : path[0]) {
-      // Web manual
-      // PDF manual
+      // Web manual, PDF manual
       case "web":
       case "print":
         await handleManual(isNewLocation(previous, current));
         break;
-      // How to play
-      // Language select
+      // How to play, Language select
       case "how-to-play-pc.html":
       case "how-to-play-mobile.html":
       case "how-to-play-switch.html":
@@ -44,8 +34,7 @@ presence.on("UpdateData", async () => {
       case "language":
         await handleGeneric(true);
         break;
-      // Startpage
-      // Unknown
+      // Startpage, Unknown
       default:
         presence.setActivity();
         break;
@@ -53,8 +42,7 @@ presence.on("UpdateData", async () => {
   } else {
     // Main page
     switch (path[0]) {
-      // Contact Us
-      // Privacy Policy
+      // Contact Us, Privacy Policy
       case "contact-us":
       case "privacy-policy":
         await handleGeneric();
@@ -104,8 +92,7 @@ presence.on("UpdateData", async () => {
           largeImageKey: "logo_big"
         });
         break;
-      // Startpage
-      // Unknown
+      // Startpage, Unknown
       default:
         presence.setActivity();
         break;
@@ -119,13 +106,13 @@ presence.on("UpdateData", async () => {
  * Get Language Strings
  * @returns Language Strings
  */
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       reading: "general.reading",
       page: "general.page"
     },
-    (await presence.getSetting("lang").catch(() => "en")) as string
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
