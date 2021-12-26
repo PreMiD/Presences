@@ -391,21 +391,11 @@ function getUserId(): string {
   }
 }
 
-// cache the requested media
-const media: Record<string, string | MediaInfo> = {};
+const mediaInfoCache = new Map<string, MediaInfo>();
 
-/**
- * obtainMediaInfo - obtain the metadata of the given id
- *
- * @param  {string} itemId id of the item to get metadata of
- * @return {object}        metadata of the item
- */
 async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
-  const pending = "pending";
-  if (media[itemId] && media[itemId] !== pending)
-    return media[itemId] as MediaInfo;
+  if (mediaInfoCache.has(itemId)) return mediaInfoCache.get(itemId);
 
-  media[itemId] = pending;
   const res = await fetch(
       `${jellyfinBasenameUrl()}Users/${getUserId()}/Items/${itemId}`,
       {
@@ -422,9 +412,9 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
     ),
     mediaInfo: MediaInfo = await res.json();
 
-  if (media[itemId] === pending) media[itemId] = mediaInfo;
+  mediaInfoCache.set(itemId, mediaInfo);
 
-  return media[itemId] as MediaInfo;
+  return mediaInfoCache.get(itemId);
 }
 
 /**
