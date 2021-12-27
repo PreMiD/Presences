@@ -23,10 +23,10 @@ presence.on("UpdateData", async () => {
       .childNodes[3].textContent.substring(14, 21)} Vukkies!`;
   } else if (document.location.pathname === "/store") {
     presenceData.details = "Browsing the store";
-     if(document.getElementById("balance")) { 
+     if(document.getElementById("balance")) {
        presenceData.state = `${
           document.getElementById("balance").innerText
-       } Vukkybux to spend!`; 
+       } Vukkybux to spend!`;
      }
   } else if (document.location.pathname === "/buyBox/classic") {
     presenceData.details = "Opening a Classic Box";
