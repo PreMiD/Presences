@@ -229,7 +229,7 @@ function handleGeneric(preferTitle = false): void {
   presence.setActivity({
     details: preferTitle
       ? document.title
-      : document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+      : document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
         document.title,
     largeImageKey: "logo_big"
   });
