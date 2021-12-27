@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
         "div.game-calls-to-action > div.game-title-container > h2"
       )
     ),
-    imagesEnabled = await presence.getSetting("images");
+    imagesEnabled = await presence.getSetting<boolean>("images");
 
   if (document.location.pathname.includes("/home")) {
     presenceData.details = "Current page: ";
