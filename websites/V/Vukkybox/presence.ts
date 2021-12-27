@@ -1,6 +1,7 @@
 const presence = new Presence({
   clientId: "918248582459555871"
-}), browsingTimestamp = Math.floor(Date.now() / 1000);
+  }), 
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -22,9 +23,11 @@ presence.on("UpdateData", async () => {
       .childNodes[3].textContent.substring(14, 21)} Vukkies!`;
   } else if (document.location.pathname === "/store") {
     presenceData.details = "Browsing the store";
-    if(document.getElementById("balance")) presenceData.state = `${
-      document.getElementById("balance").innerText
-    } Vukkybux to spend!`;
+     if(document.getElementById("balance")) { 
+       presenceData.state = `${
+          document.getElementById("balance").innerText
+       } Vukkybux to spend!`; 
+     }
   } else if (document.location.pathname === "/buyBox/classic") {
     presenceData.details = "Opening a Classic Box";
     presenceData.state = `${
@@ -68,9 +71,12 @@ presence.on("UpdateData", async () => {
     )
       presenceData.state = "Yay, it's a valid coupon!";
     else presenceData.state = "Uh oh, the coupon is invalid!";
-  } else if (document.location.pathname === "/") presenceData.details = "Browsing the homepage";
-  else if (document.location.pathname === "/login") presenceData.details = "Logging in";
-  else if (document.location.pathname === "/profile") presenceData.details = "Changing profile settings";
+  } else if (document.location.pathname === "/") 
+    presenceData.details = "Browsing the homepage";
+  else if (document.location.pathname === "/login") 
+    presenceData.details = "Logging in";
+  else if (document.location.pathname === "/profile") 
+    presenceData.details = "Changing profile settings";
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
 });
