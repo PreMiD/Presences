@@ -96,7 +96,7 @@ function handleStation(): void {
       .display !== "none"
   ) {
     // Radio is playing / buffering
-    if (timestamp === 0) timestamp = Date.now();
+    timestamp &&= Date.now();
 
     presenceData = {
       details: document.querySelector<HTMLHeadingElement>("h1").textContent,
