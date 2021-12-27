@@ -148,11 +148,11 @@ presence.on("UpdateData", async () => {
       cover
     ] = await Promise.all([
       presence.getSetting<string>("movie"),
-      presence.getSetting<string>("movieDetail"),
-      presence.getSetting<string>("movieState"),
+      presence.getSetting<string>("movieDetails"),
+      presence.getSetting<string>("movieStates"),
       presence.getSetting<boolean>("series"),
-      presence.getSetting<string>("seriesDetail"),
-      presence.getSetting<string>("seriesState"),
+      presence.getSetting<string>("seriesDetails"),
+      presence.getSetting<string>("seriesStates"),
       presence.getSetting<boolean>("browse"),
       presence.getSetting<boolean>("timestamp"),
       presence.getSetting<boolean>("buttons"),

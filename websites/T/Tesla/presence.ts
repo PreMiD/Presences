@@ -4,10 +4,12 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
-  const setTimeElapsed = await presence.getSetting("timeElapsed"),
-    setShowButtons = await presence.getSetting("showButtons"),
-    setLogo = await presence.getSetting("logo"),
-    setShowCheckout = await presence.getSetting("showCheckout"),
+  const [timeElapsed, showButtons, logo, showCheckout] = await Promise.all([
+      presence.getSetting<boolean>("timeElapsed"),
+      presence.getSetting<boolean>("showButtons"),
+      presence.getSetting<number>("logo"),
+      presence.getSetting<boolean>("showCheckout")
+    ]),
     logoArr = ["logo_red", "logo_red_text", "logo_white", "logo_white_text"],
     urlpath = window.location.pathname.split("/"),
     langs = [
@@ -50,12 +52,12 @@ presence.on("UpdateData", async function () {
       "en_au",
       "en_nz"
     ],
-    urlpNum = new RegExp(langs.join("|")).test(urlpath[1]) ? 2 : 1,
+    urlpNum = langs.includes(urlpath[1]) ? 2 : 1,
     presenceData: PresenceData = {
-      largeImageKey: logoArr[setLogo] ?? "logo_red"
+      largeImageKey: logoArr[logo] ?? "logo_red"
     };
 
-  if (setTimeElapsed) presenceData.startTimestamp = browsingTimestamp;
+  if (timeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (window.location.hostname === "www.tesla.com") {
     if (!urlpath[urlpNum]) presenceData.details = "Home";
@@ -68,7 +70,7 @@ presence.on("UpdateData", async function () {
         ).textContent;
         presenceData.details = `Designing ${model}`;
 
-        if (setShowButtons) {
+        if (showButtons) {
           presenceData.buttons = [
             {
               label: `View ${model}`,
@@ -88,7 +90,7 @@ presence.on("UpdateData", async function () {
         ).textContent;
         presenceData.details = `Viewing ${model}`;
 
-        if (setShowButtons) {
+        if (showButtons) {
           presenceData.buttons = [
             {
               label: `View ${model}`,
@@ -105,7 +107,7 @@ presence.on("UpdateData", async function () {
       if (urlpath[num] === "design") {
         presenceData.state = "Designing";
 
-        if (setShowButtons) {
+        if (showButtons) {
           presenceData.buttons = [
             {
               label: "View Cybertruck",
@@ -120,7 +122,7 @@ presence.on("UpdateData", async function () {
       } else {
         presenceData.details = "Viewing Cybertruck";
 
-        if (setShowButtons) {
+        if (showButtons) {
           presenceData.buttons = [
             {
               label: "View Cybertruck",
@@ -143,7 +145,7 @@ presence.on("UpdateData", async function () {
 
       if (urlpath[num] === "design") presenceData.state = "Designing";
 
-      if (setShowButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
             label: "View Solar Roof",
@@ -154,7 +156,7 @@ presence.on("UpdateData", async function () {
     } else if (urlpath[urlpNum] === "solarpanels") {
       presenceData.details = "Solar Panels";
 
-      if (setShowButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
             label: "View Solar Panels",
@@ -168,7 +170,7 @@ presence.on("UpdateData", async function () {
 
       if (urlpath[num] === "design") presenceData.state = "Designing";
 
-      if (setShowButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
             label: "View Page",
@@ -179,7 +181,7 @@ presence.on("UpdateData", async function () {
     } else if (urlpath[urlpNum] === "powerwall") {
       presenceData.details = "Powerwall";
 
-      if (setShowButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
             label: "View Powerwall",
@@ -190,7 +192,7 @@ presence.on("UpdateData", async function () {
     } else if (urlpath[urlpNum] === "inventory") {
       presenceData.details = "Inventory";
 
-      if (setShowButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
             label: "View Inventory",
@@ -219,7 +221,7 @@ presence.on("UpdateData", async function () {
     if (urlpath[urlpNum] === "category" && urlpath[num]) {
       presenceData.state = document.title.replace("Tesla | ", "");
 
-      if (setShowButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
             label: "View Category",
@@ -232,7 +234,7 @@ presence.on("UpdateData", async function () {
         "h2.product-title.tds-text--h1-alt"
       ).textContent;
 
-      if (setShowButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
             label: "View Product",
@@ -245,7 +247,7 @@ presence.on("UpdateData", async function () {
       urlpath[num] === "billing-shipping-info"
     ) {
       presenceData.state = `Checkout${
-        setShowCheckout
+        showCheckout
           ? ` (${
               document.querySelector(
                 "span.ordersummary__container__order__details__line__total>span.inline-value"

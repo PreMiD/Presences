@@ -46,10 +46,10 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sSI"),
-    elapsed = await presence.getSetting("sTE"),
-    videoTime = await presence.getSetting("sVT"),
-    buttons = await presence.getSetting("buttons");
+  const info = await presence.getSetting<boolean>("sSI"),
+    elapsed = await presence.getSetting<boolean>("sTE"),
+    videoTime = await presence.getSetting<boolean>("sVT"),
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (elapsed) browsingTimestamp = Math.floor(Date.now() / 1000);
 

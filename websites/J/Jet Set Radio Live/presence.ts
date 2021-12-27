@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
     songName = document.querySelector(
       "#programInformationText.objectSettings.touchableOff"
     ),
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (songName.textContent.length < 1 || !audio) {
     presenceData.details = "Not tuned in.";
@@ -74,9 +74,9 @@ presence.on("UpdateData", async () => {
       !audio.paused &&
       !document.querySelector('#loadingTrackCircle:not([style*="hidden"])')
     ) {
-      if (await presence.getSetting("song"))
+      if (await presence.getSetting<boolean>("song"))
         presenceData.details = songName.textContent;
-      if (await presence.getSetting("timestamp")) {
+      if (await presence.getSetting<boolean>("timestamp")) {
         [presenceData.startTimestamp, presenceData.endTimestamp] =
           getTimestamps(
             Math.floor(audio.currentTime),

@@ -51,22 +51,22 @@ async function getStrings() {
       viewing: "general.viewing",
       profile: "general.viewProfile"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy"),
-    time = await presence.getSetting("time");
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    time = await presence.getSetting<boolean>("time");
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   let title: string,

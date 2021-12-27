@@ -44,9 +44,9 @@ presence.on("UpdateData", async () => {
     hostName = document.location.hostname.replace("www.", ""),
     path = window.location.pathname.split("/").slice(1),
     setting = {
-      showButtons: await presence.getSetting("buttons"),
-      showTimestamp: await presence.getSetting("timestamp"),
-      showCartTotal: await presence.getSetting("shop_total")
+      showButtons: await presence.getSetting<boolean>("buttons"),
+      showTimestamp: await presence.getSetting<boolean>("timestamp"),
+      showCartTotal: await presence.getSetting<boolean>("shop_total")
     };
 
   switch (hostName) {

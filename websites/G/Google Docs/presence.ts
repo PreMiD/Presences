@@ -21,24 +21,23 @@ async function getStrings() {
       browsingPresentation: "google docs.browsingPresentation",
       vieiwngPresentation: "google docs.viewingPresentation"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       startTimestamp: browsingTimestamp
     },
-    privacy = await presence.getSetting("privacy"),
-    newLang = await presence.getSetting("lang").catch(() => "en");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    newLang = await presence.getSetting<string>("lang").catch(() => "en");
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   title = document.title

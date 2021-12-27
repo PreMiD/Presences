@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
       startTimestamp
     },
     settings = {
-      buttons: await presence.getSetting("buttons")
+      buttons: await presence.getSetting<boolean>("buttons")
     };
 
   if (page.includes("/izle/")) {

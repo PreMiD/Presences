@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "codenames"
   };
 
-  const buttons = await presence.getSetting("buttons");
+  const buttons = await presence.getSetting<boolean>("buttons");
 
   //* If in a game or not
   if (document.querySelector("#gamescene")) {

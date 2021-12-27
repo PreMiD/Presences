@@ -4,6 +4,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 const presence = new Presence({
     clientId: "854999470357217290"
   }),
+  // TODO: Add multiLang
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
@@ -30,7 +31,7 @@ presence.on("UpdateData", async () => {
     if (location.pathname.startsWith("/live-tv")) {
       // Livestream
       const mediathekLivechannel = document
-          .querySelector(
+          .querySelector<HTMLHeadingElement>(
             "div.item.livetv-item.js-livetv-scroller-cell.m-active-done.m-activated-done.m-activated.m-active h2[class='visuallyhidden']"
           )
           .textContent.replace(/ {2}/g, " ")

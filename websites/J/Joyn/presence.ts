@@ -16,28 +16,28 @@ async function getStrings() {
       watchMovie: "general.buttonViewMovie",
       watchSeries: "general.buttonViewSeries"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let lang = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async function () {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    newLang = await presence.getSetting("lang").catch(() => "en"),
+    newLang = await presence.getSetting<string>("lang").catch(() => "en"),
     setting = {
-      timeRemaining: await presence.getSetting("timeRemaining"),
-      showButtons: await presence.getSetting("showButtons")
+      timeRemaining: await presence.getSetting<boolean>("timeRemaining"),
+      showButtons: await presence.getSetting<boolean>("showButtons")
     },
     urlpath = window.location.pathname.split("/"),
     video: HTMLVideoElement = document.querySelector("div video");
 
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    lang = getStrings();
+    strings = await getStrings();
   }
 
   if (
@@ -45,14 +45,14 @@ presence.on("UpdateData", async function () {
     document.location.hostname === "joyn.de"
   ) {
     if (document.querySelector(".lk71lm-0.htJLsh")) {
-      presenceData.details = (await lang).searching;
+      presenceData.details = (await strings).searching;
       presenceData.state =
         document.querySelector<HTMLInputElement>(".search-input").value;
     } else if (
       (urlpath[1] === "" || document.location.pathname.includes("/#home")) &&
       urlpath[2] !== ""
     )
-      presenceData.details = (await lang).browsing;
+      presenceData.details = (await strings).browsing;
     else if (urlpath[1] === "compilation") {
       const compilation = document.querySelector(".artLogo");
       presenceData.details = "Viewing Compilation:";
@@ -71,7 +71,7 @@ presence.on("UpdateData", async function () {
       }
     } else if (urlpath[1] === "filme") {
       const film = document.querySelector(".artLogo");
-      presenceData.details = (await lang).viewMovie;
+      presenceData.details = (await strings).viewMovie;
       if (film) presenceData.state = (film as HTMLImageElement).alt;
       if (!film)
         presenceData.state = document.querySelector(".hXdaOG").textContent;
@@ -79,7 +79,7 @@ presence.on("UpdateData", async function () {
       if (setting.showButtons) {
         presenceData.buttons = [
           {
-            label: (await lang).watchMovie,
+            label: (await strings).watchMovie,
             url: `https://www.joyn.de/filme/${urlpath[2]}`
           }
         ];
@@ -94,7 +94,7 @@ presence.on("UpdateData", async function () {
       if (setting.showButtons) {
         presenceData.buttons = [
           {
-            label: (await lang).watchSeries,
+            label: (await strings).watchSeries,
             url: `https://www.joyn.de/serien/${urlpath[2]}`
           }
         ];
@@ -105,9 +105,9 @@ presence.on("UpdateData", async function () {
         document.location.pathname.includes("/filme") ||
         document.location.pathname.includes("/sport"))
     )
-      presenceData.details = (await lang).browsing;
+      presenceData.details = (await strings).browsing;
     else if (urlpath[1] === "channels") {
-      presenceData.details = (await lang).browsing;
+      presenceData.details = (await strings).browsing;
       presenceData.state = document.querySelector(".bISbKZ").textContent;
     } else if (urlpath[1] === "play" && urlpath[2] === "filme") {
       const videoStartTime = Date.now();
@@ -122,15 +122,15 @@ presence.on("UpdateData", async function () {
             video.duration;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = (await lang).play;
+        presenceData.smallImageText = (await strings).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = (await lang).pause;
+        presenceData.smallImageText = (await strings).pause;
       }
       if (setting.showButtons) {
         presenceData.buttons = [
           {
-            label: (await lang).watchMovie,
+            label: (await strings).watchMovie,
             url: `https://www.joyn.de/filme/${urlpath[3]}`
           }
         ];
@@ -149,16 +149,16 @@ presence.on("UpdateData", async function () {
             video.duration;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = (await lang).play;
+        presenceData.smallImageText = (await strings).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = (await lang).pause;
+        presenceData.smallImageText = (await strings).pause;
       }
 
       if (setting.showButtons) {
         presenceData.buttons = [
           {
-            label: (await lang).watchSeries,
+            label: (await strings).watchSeries,
             url: `https://www.joyn.de/serien/${urlpath[3]}`
           }
         ];
@@ -176,10 +176,10 @@ presence.on("UpdateData", async function () {
             video.duration;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = (await lang).play;
+        presenceData.smallImageText = (await strings).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = (await lang).pause;
+        presenceData.smallImageText = (await strings).pause;
       }
     } else if (urlpath[1] === "play" && urlpath[2] === "live-tv") {
       presenceData.details = document.title.replace(
@@ -188,7 +188,7 @@ presence.on("UpdateData", async function () {
       );
       presenceData.state = "Live-TV";
       presenceData.smallImageKey = "live";
-      presenceData.smallImageText = (await lang).live;
+      presenceData.smallImageText = (await strings).live;
 
       if (setting.showButtons) {
         presenceData.buttons = [
@@ -211,10 +211,10 @@ presence.on("UpdateData", async function () {
             video.duration;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = (await lang).play;
+        presenceData.smallImageText = (await strings).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = (await lang).pause;
+        presenceData.smallImageText = (await strings).pause;
       }
 
       if (setting.showButtons) {
@@ -237,10 +237,10 @@ presence.on("UpdateData", async function () {
             Math.floor(Date.now() / 1000) - video.currentTime + video.duration;
         }
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = (await lang).play;
+        presenceData.smallImageText = (await strings).play;
       } else {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = (await lang).pause;
+        presenceData.smallImageText = (await strings).pause;
       }
 
       if (setting.showButtons) {

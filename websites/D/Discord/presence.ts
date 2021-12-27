@@ -67,24 +67,35 @@ async function getStrings() {
       viewPage: "general.viewPage",
       shopCart: "general.shopCart"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const showBrowsing: boolean = await presence.getSetting("browse"),
-    showTimestamp: boolean = await presence.getSetting("timestamp"),
-    showButtons: boolean = await presence.getSetting("buttons"),
-    showInvites: boolean = await presence.getSetting("invite"),
-    privacy: boolean = await presence.getSetting("privacy"),
-    showCalls: boolean = await presence.getSetting("call"),
-    newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    logo: number = await presence.getSetting("logo");
+  const [
+    showBrowsing,
+    showTimestamp,
+    showButtons,
+    showInvites,
+    privacy,
+    showCalls,
+    newLang,
+    logo
+  ] = await Promise.all([
+    presence.getSetting<boolean>("browse"),
+    presence.getSetting<boolean>("timestamp"),
+    presence.getSetting<boolean>("buttons"),
+    presence.getSetting<boolean>("invite"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("call"),
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<number>("logo")
+  ]);
 
   let presenceData: PresenceData = {
     largeImageKey:
@@ -96,10 +107,9 @@ presence.on("UpdateData", async () => {
     browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (document.location.hostname === "discord.com") {

@@ -7,8 +7,8 @@ let courseName: HTMLElement,
   lessonActivity: HTMLElement;
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("eSI"),
-    classInfo = await presence.getSetting("eCI"),
+  const info = await presence.getSetting<boolean>("eSI"),
+    classInfo = await presence.getSetting<boolean>("eCI"),
     presenceData: PresenceData = {
       largeImageKey: "logo"
     };

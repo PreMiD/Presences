@@ -65,7 +65,14 @@ const updateCallback = {
 
 		*/
 
-      const mwConfig = await presence.getPageletiable('mw"]["config"]["values'),
+      const mwConfig = await presence.getPageletiable<{
+          wgSiteName: string;
+          wgAction: string;
+          wgPageName: string;
+          wgCanonicalNamespace: string;
+          wgNamespaceNumber: number;
+          wgIsMainPage: boolean;
+        }>('mw"]["config"]["values'),
         siteName = mwConfig.wgSiteName,
         lang = currentPath[0] === "wiki" ? "en" : currentPath[0],
         actionResult = (): string =>

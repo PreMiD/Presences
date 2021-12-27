@@ -63,9 +63,9 @@ presence.on("UpdateData", async () => {
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
       .getAttribute("repeat-Mode_"),
     [buttons, timestamps, cover] = await Promise.all([
-      presence.getSetting("buttons"),
-      presence.getSetting("timestamps"),
-      presence.getSetting("cover")
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("cover")
     ]);
   if (title !== "" && !isNaN(video.duration)) {
     const endTimestamp =

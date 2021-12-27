@@ -6,8 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const video = document.querySelector("video"),
     path = document.location.pathname,
-    SouthParkData: Data = await presence.getPageletiable("__DATA__"),
-    buttons = await presence.getSetting("buttons");
+    SouthParkData = await presence.getPageletiable<Data>("__DATA__"),
+    buttons = await presence.getSetting<boolean>("buttons");
 
   let presenceData: PresenceData = {
     largeImageKey: "south_park_logo",

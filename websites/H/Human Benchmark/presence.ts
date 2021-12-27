@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "hb"
     },
-    showTime: boolean = await presence.getSetting("stamp");
+    showTime = await presence.getSetting<boolean>("stamp");
 
   if (showTime) presenceData.startTimestamp = browsingTimestamp;
 

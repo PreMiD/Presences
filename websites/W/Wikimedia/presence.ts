@@ -346,7 +346,14 @@ const updateCallback = {
       presenceData.details = "Donating to the Wikimedia Foundation";
       presenceData.state = "(or Wikipedia)";
     } else {
-      const mwConfig = await presence.getPageletiable('mw"]["config"]["values');
+      const mwConfig = await presence.getPageletiable<{
+        wgSiteName: string;
+        wgAction: string;
+        wgPageName: string;
+        wgCanonicalNamespace: string;
+        wgNamespaceNumber: number;
+        wgIsMainPage: boolean;
+      }>('mw"]["config"]["values');
       // console.log(mwConfig)
 
       if (currentURL.hostname === "meta.wikimedia.org")

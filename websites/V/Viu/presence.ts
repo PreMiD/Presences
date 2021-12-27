@@ -17,11 +17,11 @@ const presence = new Presence({
         watchEpisode: "general.buttonViewEpisode",
         searching: "general.search"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     ),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   episodeData: EpisodeData = null,
   title: string = null,
@@ -34,14 +34,14 @@ presence.on("UpdateData", async () => {
       smallImageKey: "reading",
       startTimestamp: browsingTimestamp
     },
-    newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    buttonsOn: boolean = await presence.getSetting("buttons"),
-    searchQueryOn: boolean = await presence.getSetting("searchQ"),
-    presenceLogo: number = await presence.getSetting("logo"),
-    // eslint-disable-next-line no-one-time-vars/no-one-time-vars
-    logos = ["viu_logo", "viu_logo_text"];
+    newLang: string = await presence
+      .getSetting<string>("lang")
+      .catch(() => "en"),
+    buttonsOn = await presence.getSetting<boolean>("buttons"),
+    searchQueryOn = await presence.getSetting<boolean>("searchQ"),
+    presenceLogo = await presence.getSetting<number>("logo");
 
-  presenceData.largeImageKey = logos[presenceLogo];
+  presenceData.largeImageKey = ["viu_logo", "viu_logo_text"][presenceLogo];
 
   if (oldPath !== document.location.pathname) {
     oldPath = document.location.pathname;
@@ -52,10 +52,9 @@ presence.on("UpdateData", async () => {
 
   if (location.pathname.includes("/vod/")) videoData ??= await getMeta();
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (document.location.pathname.includes("/vod/")) {
@@ -216,7 +215,9 @@ presence.on("UpdateData", async () => {
 });
 
 async function getMeta() {
-  return await presence.getPageletiable("GA_DIMENSIONS").catch(() => null);
+  return await presence
+    .getPageletiable<VideoData>("GA_DIMENSIONS")
+    .catch(() => null);
 }
 
 interface VideoData {

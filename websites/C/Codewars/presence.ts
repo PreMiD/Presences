@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: timebrowsed,
       details: "Browsing ..."
     },
-    displayStats = await presence.getSetting("statsdisplay");
+    displayStats = await presence.getSetting<boolean>("statsdisplay");
 
   if (pages[0] === "dashboard") {
     presenceData.details = "Viewing Dashboard";

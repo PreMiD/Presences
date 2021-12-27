@@ -16,22 +16,24 @@ async function getStrings() {
       watchLive: "general.live",
       watchStream: "general.buttonWatchStream"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   title: string,
   subtitle: string,
   groupWatchCount: number;
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    privacy: boolean = await presence.getSetting("privacy"),
-    time: boolean = await presence.getSetting("time"),
-    buttons: boolean = await presence.getSetting("buttons"),
-    groupWatchBtn: boolean = await presence.getSetting("groupWatchBtn"),
+  const newLang: string = await presence
+      .getSetting<string>("lang")
+      .catch(() => "en"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    time = await presence.getSetting<boolean>("time"),
+    buttons = await presence.getSetting<boolean>("buttons"),
+    groupWatchBtn = await presence.getSetting<boolean>("groupWatchBtn"),
     isHostSP = /(www\.)?starplus\.com/.test(location.hostname),
     presenceData: PresenceData & {
       partySize?: number;
@@ -39,9 +41,9 @@ presence.on("UpdateData", async () => {
     } = {};
 
   // Update strings when user sets language
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (isHostSP) presenceData.largeImageKey = "starplus-logo";

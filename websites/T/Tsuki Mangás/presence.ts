@@ -11,8 +11,8 @@ enum ResourceNames {
 }
 async function Resource(ResourceSelected: ResourceNames): Promise<string> {
   let value = ResourceSelected.toString();
-  const logo: number = await presence.getSetting("logo"),
-    darkmode: boolean = await presence.getSetting("darkResource");
+  const logo = await presence.getSetting<number>("logo"),
+    darkmode = await presence.getSetting<boolean>("darkResource");
   if (ResourceSelected === ResourceNames.logo)
     logo !== 0 ? (value += "_book") : (value += "_cloud");
   if (darkmode) value += "_dark";
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: await Resource(ResourceNames.logo)
     };
-  if (await presence.getSetting("resetTimestamp"))
+  if (await presence.getSetting<boolean>("resetTimestamp"))
     browsingTimestamp = Math.floor(Date.now() / 1000);
   if (pathName === "/") {
     let lancamentos = "...";
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
         .split("/")
         .slice(-1),
       usernameValue = [0, "...", true];
-    if (!(await presence.getSetting("showUserName"))) {
+    if (!(await presence.getSetting<boolean>("showUserName"))) {
       usernameValue[1] = "👁‍🗨👁‍🗨";
       usernameValue[3] = false;
     } else usernameValue[3] = true;
@@ -180,14 +180,14 @@ presence.on("UpdateData", async () => {
     }
     presenceData.state = chapter + page;
     if (
-      (await presence.getSetting("showComment")) &&
+      (await presence.getSetting<boolean>("showComment")) &&
       overlay &&
       overlay.getAttribute("data-modal").includes("comentarios")
     ) {
       presenceData.smallImageKey = await Resource(ResourceNames.writing);
       presenceData.smallImageText = "Comentando...";
     } else if (
-      (await presence.getSetting("showReport")) &&
+      (await presence.getSetting<boolean>("showReport")) &&
       overlay &&
       overlay.getAttribute("data-modal").includes("report")
     ) {
@@ -219,7 +219,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingTimestamp;
   }
   if (
-    (await presence.getSetting("showHistory")) &&
+    (await presence.getSetting<boolean>("showHistory")) &&
     document.getElementsByClassName("historicob").length !== 0
   ) {
     if (
@@ -244,7 +244,8 @@ presence.on("UpdateData", async () => {
         .textContent.replace(/^\s+|\s+$/g, "")} - ${hSession} - Página ${
         getPagination(0)[0]
       }/${getPagination(0)[1]}`;
-      if (!(await presence.getSetting("showUserName"))) user = "👁‍🗨👁‍🗨";
+      if (!(await presence.getSetting<boolean>("showUserName")))
+        user = "👁‍🗨👁‍🗨";
       presenceData.smallImageKey = await Resource(ResourceNames.history);
       presenceData.smallImageText = `Username: ${user}`;
     }

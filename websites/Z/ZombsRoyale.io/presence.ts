@@ -90,7 +90,6 @@ presence.on("UpdateData", async () => {
   else presence.setActivity();
 });
 
-// Stolen from https://github.com/PreMiD/Presences/blob/master/websites/R/Rythm/presence.ts#L461
 function getPageletiable(js: string): Promise<string> {
   const eventName = "PreMiD_ZombsRoyale_Pageletiable";
 

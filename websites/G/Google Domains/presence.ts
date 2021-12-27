@@ -21,9 +21,9 @@ const statics = {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-    showDomain = await presence.getSetting("domain"),
-    showSearch = await presence.getSetting("search"),
-    showTimestamps = await presence.getSetting("timestamp");
+    showDomain = await presence.getSetting<boolean>("domain"),
+    showSearch = await presence.getSetting<boolean>("search"),
+    showTimestamps = await presence.getSetting<boolean>("timestamp");
 
   let presenceData: PresenceData = {
     largeImageKey: "googledomains",

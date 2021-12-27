@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
    * @param {String} settingName Name of the setting
    */
   async function handleFormatting(settingName: string): Promise<string> {
-    const setting = await presence.getSetting(settingName);
+    const setting = await presence.getSetting<string>(settingName);
     return setting.replace("%search%", searchQuery().value);
   }
 
@@ -37,10 +37,10 @@ presence.on("UpdateData", async () => {
     document.location.href.includes("/?cc=") ||
     document.location.href.includes("/?FORM=Z9FD1")
   ) {
-    presenceData.details = await presence.getSetting("homepageMessage");
+    presenceData.details = await presence.getSetting<string>("homepageMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/account/general")) {
-    presenceData.details = await presence.getSetting("settingsMessage");
+    presenceData.details = await presence.getSetting<string>("settingsMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("?q=")) {
     presenceData.startTimestamp = setTimestamp();

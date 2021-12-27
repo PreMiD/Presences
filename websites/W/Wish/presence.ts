@@ -6,8 +6,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    itemsetting = await presence.getSetting("items"),
-    languagesetting = await presence.getSetting("language");
+    itemsetting = await presence.getSetting<boolean>("items"),
+    languagesetting = await presence.getSetting<string>("language");
   let itemsite = null,
     itemdesc;
 

@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "image"
     },
-    showISP = await presence.getSetting("showISP");
+    showISP = await presence.getSetting<boolean>("showISP");
 
   if (window.location.hostname.includes("speedtest")) {
     if (window.location.pathname.includes("/run")) {

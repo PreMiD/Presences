@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const [privacyMode, showTime, showButtons] = await Promise.all([
-      presence.getSetting("privacyMode"),
-      presence.getSetting("showTime"),
-      presence.getSetting("showButtons")
+      presence.getSetting<boolean>("privacyMode"),
+      presence.getSetting<boolean>("showTime"),
+      presence.getSetting<boolean>("showButtons")
     ]),
     presenceData: PresenceData = {
       largeImageKey: "logo",

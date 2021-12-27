@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "agar"
     },
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (agarData) {
     if (agarData.connecting) {
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
           gameStartTimestamp = null;
           break;
         case 1:
-          if (await presence.getSetting("showName"))
+          if (await presence.getSetting<boolean>("showName"))
             presenceData.details = `Playing as ${agarData.nick}`;
           else presenceData.details = "Playing";
           gameStartTimestamp ??= Date.now();
@@ -77,4 +77,6 @@ presence.on("UpdateData", async () => {
   else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: AgarData) => (agarData = data));
+presence.on("iFrameData", (data: AgarData) => {
+  agarData = data;
+});
