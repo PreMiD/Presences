@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "924791712944099389"
 });
 
-const filterCodes: any = {
+const filterCodes: Record<number, string> = {
   366: "bgsub"
 };
 
@@ -17,11 +17,11 @@ presence.on("UpdateData", async () => {
       state: "Viewing the home page"
     });
   } else if (document.location.pathname.startsWith("/animes")) {
-    let url = new URL(document.location.href);
-    let filter: any = url.searchParams.get("filters");
-    let paths = document.location.pathname.split("/");
+    const url = new URL(document.location.href);
+    const filter = url.searchParams.get("filters");
+    const paths = document.location.pathname.split("/");
     if (!paths[0]) paths.shift();
-    let filters: Array<string> = [];
+    const filters: string[] = [];
 
     if (filter) {
       filter
@@ -49,10 +49,10 @@ presence.on("UpdateData", async () => {
         }`
       });
   } else if (document.location.pathname.startsWith("/anime/")) {
-    let paths = document.location.pathname.split("/");
+    const paths = document.location.pathname.split("/");
     if (!paths[0]) paths.shift();
-    let uid = paths[1];
-    let eid = paths[2];
+    const uid = paths[1];
+    const eid = paths[2];
 
     if (uid && !eid) {
       let name = document.querySelector(
@@ -62,10 +62,10 @@ presence.on("UpdateData", async () => {
         details: `Viewing ${name}`
       });
     } else if (uid && eid) {
-      let ep = document.querySelector(
+      const ep = document.querySelector(
         "body > main.animated > div.wrapper > section.holder > h1.heading > b#num"
       ).innerHTML;
-      let name = document.querySelector(
+      const name = document.querySelector(
         "body > main.animated > div.wrapper > section.holder > h2.heading > a"
       ).innerHTML;
       let part = between(ep, "(", ")");
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
       if (ep.includes("(") && ep.includes(")")) {
         rep = ep.replace(` (${part})`, "");
         part = part.replace(/\D/g, "");
-      } else part = undefined;
+      } else part = null;
 
       let playing = document
         .querySelector(
@@ -102,10 +102,10 @@ presence.on("iFrameData", async (data: any) => {
     largeImageKey: "logo"
   };
 
-  let ep = document.querySelector(
+  const ep = document.querySelector(
     "body > main.animated > div.wrapper > section.holder > h1.heading > b#num"
   ).innerHTML;
-  let name = document.querySelector(
+  const name = document.querySelector(
     "body > main.animated > div.wrapper > section.holder > h2.heading > a"
   ).innerHTML;
   let part = between(ep, "(", ")");
@@ -114,7 +114,7 @@ presence.on("iFrameData", async (data: any) => {
   if (ep.includes("(") && ep.includes(")")) {
     rep = ep.replace(` (${part})`, "");
     part = part.replace(/\D/g, "");
-  } else part = undefined;
+  } else part = null;
 
   [presenceData.startTimestamp, presenceData.endTimestamp] =
     presence.getTimestamps(
