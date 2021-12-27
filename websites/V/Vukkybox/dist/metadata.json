@@ -4,12 +4,18 @@
     "name": "Mitchellonii",
     "id": "490664749315653642"
   },
+  "contributors": [
+    {
+      "name": "Vukky",
+      "id": "708333380525228082"
+    }
+  ],
   "service": "Vukkybox",
   "description": {
     "en": "The online gacha game that lets you collect mysterious creatures known as Vukkies!"
   },
   "url": "vukkybox.com",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "logo": "https://i.imgur.com/dIpE7wX.png",
   "thumbnail": "https://i.imgur.com/uS5AFMi.png",
   "color": "#5ea1c0",
