@@ -198,7 +198,7 @@ async function getStrings() {
       browsing: "general.browsing",
       reading: "general.reading"
     },
-    (await presence.getSetting("lang").catch(() => "en")) as string
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
