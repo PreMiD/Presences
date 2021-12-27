@@ -1,5 +1,5 @@
-  const presence = new Presence({
-  clientId: "918248582459555871"
+const presence = new Presence({
+    clientId: "918248582459555871"
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -23,11 +23,11 @@ presence.on("UpdateData", async () => {
       .childNodes[3].textContent.substring(14, 21)} Vukkies!`;
   } else if (document.location.pathname === "/store") {
     presenceData.details = "Browsing the store";
-     if(document.getElementById("balance")) {
-       presenceData.state = `${
-          document.getElementById("balance").innerText
-       } Vukkybux to spend!`;
-     }
+    if (document.getElementById("balance")) {
+      presenceData.state = `${
+        document.getElementById("balance").innerText
+      } Vukkybux to spend!`;
+    }
   } else if (document.location.pathname === "/buyBox/classic") {
     presenceData.details = "Opening a Classic Box";
     presenceData.state = `${
