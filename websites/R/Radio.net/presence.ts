@@ -6,7 +6,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>, timestamp: number;
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.split("."),
-    path = window.location.pathname.split("/").slice(1);
+    path = window.location.pathname.split("/").slice(1),
+    presenceData: PresenceData = {};
 
   strings = await getStrings();
 
@@ -24,27 +25,110 @@ presence.on("UpdateData", async () => {
       case "presse":
       case "jobs":
       case "contact":
-      case "kontakt":
-        handleCorporate(host.slice(1).join("."));
+      case "kontakt": {
+        const item: string =
+          document.querySelector<HTMLLIElement>(
+            ".current_page_item"
+          ).textContent;
+
+        presenceData.details = `${host.join(".")} corporate`;
+        presenceData.state =
+          item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
+        presenceData.largeImageKey = "logo_big";
         break;
+      }
       default:
-        presence.setActivity();
-        break;
+        return presence.setActivity();
     }
   } else {
     // Main page
     switch (path[0]) {
       // Radio station
       case "s":
-        handleStation();
+        // Check if the animation icon is shown
+        if (
+          document.querySelector<HTMLSpanElement>(".player__animate-icon").style
+            .display !== "none"
+        ) {
+          // Radio is playing / buffering
+          timestamp ||= Date.now();
+
+          presenceData.details =
+            document.querySelector<HTMLHeadingElement>("h1").textContent;
+          presenceData.state =
+            document.querySelector<HTMLDivElement>(".player__song").textContent;
+          presenceData.largeImageKey = (
+            document.querySelector<HTMLDivElement>("#station").children[3]
+              .children[1].firstChild.firstChild.firstChild as HTMLImageElement
+          ).src;
+          presenceData.smallImageText = strings.play;
+          presenceData.smallImageKey = "play";
+          presenceData.startTimestamp = timestamp;
+        } else {
+          // Radio is paused
+          timestamp = 0;
+
+          presenceData.details =
+            document.querySelector<HTMLHeadingElement>("h1").textContent;
+          presenceData.largeImageKey = (
+            document.querySelector<HTMLDivElement>("#station").children[3]
+              .children[1].firstChild.firstChild.firstChild as HTMLImageElement
+          ).src;
+          presenceData.smallImageText = strings.pause;
+          presenceData.smallImageKey = "pause";
+        }
         break;
       // Podcast
       case "p":
-        handlePodcast();
+        // Check if the animation icon is shown
+        if (
+          document.querySelector<HTMLSpanElement>(".player__animate-icon").style
+            .display !== "none"
+        ) {
+          // Podcast is playing / buffering
+          const times = document
+              .querySelector<HTMLDivElement>(".player__timing-wrap")
+              .textContent.split("|"),
+            timestamps = presence.getTimestamps(
+              presence.timestampFromFormat(times[0]),
+              presence.timestampFromFormat(times[1])
+            );
+
+          presenceData.details =
+            document.querySelector<HTMLHeadingElement>("h1").textContent;
+          presenceData.state =
+            document.querySelector<HTMLDivElement>(".player__song").textContent;
+          presenceData.largeImageKey = (
+            document.querySelector<HTMLDivElement>("#podcast").children[1]
+              .children[1].firstChild.firstChild.firstChild as HTMLImageElement
+          ).src;
+          presenceData.smallImageText = strings.play;
+          presenceData.smallImageKey = "play";
+          [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+        } else {
+          // Podcast is paused
+          presenceData.details =
+            document.querySelector<HTMLHeadingElement>("h1").textContent;
+          presenceData.state =
+            document.querySelector<HTMLDivElement>(".player__song").textContent;
+          presenceData.largeImageKey = (
+            document.querySelector<HTMLDivElement>("#podcast").children[1]
+              .children[1].firstChild.firstChild.firstChild as HTMLImageElement
+          ).src;
+          presenceData.smallImageText = strings.pause;
+          presenceData.smallImageKey = "pause";
+        }
         break;
       // Search
       case "search":
-        handleSearch();
+        presenceData.details = new URLSearchParams(window.location.search).get(
+          "q"
+        );
+        presenceData.state =
+          document.querySelector<HTMLHeadingElement>("h1").textContent;
+        presenceData.largeImageKey = "logo_big";
+        presenceData.smallImageText = strings.search;
+        presenceData.smallImageKey = "search";
         break;
       // Genre, Topic, Country, City, Local stations, Top stations
       case "genre":
@@ -53,7 +137,11 @@ presence.on("UpdateData", async () => {
       case "city":
       case "local-stations":
       case "top-stations":
-        handleListing();
+        presenceData.details =
+          document.querySelector<HTMLHeadingElement>("h1").textContent;
+        presenceData.largeImageKey = "logo_big";
+        presenceData.smallImageText = strings.browsing;
+        presenceData.smallImageKey = "reading";
         break;
       // Choose your country, Contact, App, Terms and conditions, Privacy policy, Imprint
       case "country-selector":
@@ -62,12 +150,12 @@ presence.on("UpdateData", async () => {
       case "terms-and-conditions":
       case "privacy-policy":
       case "imprint":
-        handleGeneric(true);
+        presenceData.details = document.title;
+        presenceData.largeImageKey = "logo_big";
         break;
       // Startpage, Unknown
       default:
-        presence.setActivity();
-        break;
+        return presence.setActivity();
     }
   }
 });
@@ -82,155 +170,4 @@ async function getStrings() {
     },
     await presence.getSetting<string>("lang").catch(() => "en")
   );
-}
-
-/**
- * Handle radio station
- */
-function handleStation(): void {
-  let presenceData: PresenceData;
-
-  // Check if the animation icon is shown
-  if (
-    document.querySelector<HTMLSpanElement>(".player__animate-icon").style
-      .display !== "none"
-  ) {
-    // Radio is playing / buffering
-    timestamp ||= Date.now();
-
-    presenceData = {
-      details: document.querySelector<HTMLHeadingElement>("h1").textContent,
-      state:
-        document.querySelector<HTMLDivElement>(".player__song").textContent,
-      largeImageKey: (
-        document.querySelector<HTMLDivElement>("#station").children[3]
-          .children[1].firstChild.firstChild.firstChild as HTMLImageElement
-      ).src,
-      smallImageText: strings.play,
-      smallImageKey: "play",
-      startTimestamp: timestamp
-    };
-  } else {
-    // Radio is paused
-    timestamp = 0;
-
-    presenceData = {
-      details: document.querySelector<HTMLHeadingElement>("h1").textContent,
-      largeImageKey: (
-        document.querySelector<HTMLDivElement>("#station").children[3]
-          .children[1].firstChild.firstChild.firstChild as HTMLImageElement
-      ).src,
-      smallImageText: strings.pause,
-      smallImageKey: "pause"
-    };
-  }
-
-  presence.setActivity(presenceData);
-}
-
-/**
- * Handle podcast
- */
-function handlePodcast(): void {
-  let presenceData: PresenceData;
-
-  // Check if the animation icon is shown
-  if (
-    document.querySelector<HTMLSpanElement>(".player__animate-icon").style
-      .display !== "none"
-  ) {
-    // Podcast is playing / buffering
-    const times = document
-        .querySelector<HTMLDivElement>(".player__timing-wrap")
-        .textContent.split("|"),
-      timestamps = presence.getTimestamps(
-        presence.timestampFromFormat(times[0]),
-        presence.timestampFromFormat(times[1])
-      );
-
-    presenceData = {
-      details: document.querySelector<HTMLHeadingElement>("h1").textContent,
-      state:
-        document.querySelector<HTMLDivElement>(".player__song").textContent,
-      largeImageKey: (
-        document.querySelector<HTMLDivElement>("#podcast").children[1]
-          .children[1].firstChild.firstChild.firstChild as HTMLImageElement
-      ).src,
-      smallImageText: strings.play,
-      smallImageKey: "play",
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
-  } else {
-    // Podcast is paused
-    presenceData = {
-      details: document.querySelector<HTMLHeadingElement>("h1").textContent,
-      state:
-        document.querySelector<HTMLDivElement>(".player__song").textContent,
-      largeImageKey: (
-        document.querySelector<HTMLDivElement>("#podcast").children[1]
-          .children[1].firstChild.firstChild.firstChild as HTMLImageElement
-      ).src,
-      smallImageText: strings.pause,
-      smallImageKey: "pause"
-    };
-  }
-
-  presence.setActivity(presenceData);
-}
-
-/**
- * Handle search
- */
-function handleSearch(): void {
-  const presenceData: PresenceData = {
-    details: new URLSearchParams(window.location.search).get("q"),
-    state: document.querySelector<HTMLHeadingElement>("h1").textContent,
-    largeImageKey: "logo_big",
-    smallImageText: strings.search,
-    smallImageKey: "search"
-  };
-
-  presence.setActivity(presenceData);
-}
-
-/**
- * Handle radio station or podcast listing
- */
-function handleListing(): void {
-  presence.setActivity({
-    details: document.querySelector<HTMLHeadingElement>("h1").textContent,
-    largeImageKey: "logo_big",
-    smallImageText: strings.browsing,
-    smallImageKey: "reading"
-  });
-}
-
-/**
- * Handle corporate page
- * @param hostname Hostname of the corporate page
- */
-function handleCorporate(hostname: string): void {
-  const item: string =
-    document.querySelector<HTMLLIElement>(".current_page_item").textContent;
-
-  presence.setActivity({
-    details: `${hostname} corporate`,
-    state: item.charAt(0).toUpperCase() + item.slice(1).toLowerCase(),
-    largeImageKey: "logo_big"
-  });
-}
-
-/**
- * Handle generic pages
- * @param preferTitle Prefer document title over h1 text content
- */
-function handleGeneric(preferTitle = false): void {
-  presence.setActivity({
-    details: preferTitle
-      ? document.title
-      : document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
-        document.title,
-    largeImageKey: "logo_big"
-  });
 }
