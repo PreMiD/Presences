@@ -8,10 +8,11 @@
   "description": {
     "de": "Die Anime Community mit hunderten Anime als Livestream.",
     "en": "The Anime Community with hundreds of Anime livestreams.",
-    "nl": "De Anime community met honderden Anime livestreams."
+    "nl": "De Anime community met honderden Anime livestreams.",
+    "vi_VN": "Cộng đồng Anime với hàng trăm bản Anime được phát trực tuyến."
   },
   "url": "anime-tube.tv",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/9MxXOK3.png",
   "thumbnail": "https://i.imgur.com/gz0tYlg.png",
   "color": "#9b403f",
