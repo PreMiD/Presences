@@ -59,7 +59,7 @@ presence.on('UpdateData', async () => {
       let part = between(ep, '(', ')');
       let rep = ep;
 
-      if (ep.includes('(') && ep.includes('(')) {
+      if (ep.includes('(') && ep.includes(')')) {
         rep = ep.replace(` (${part})`, '');
         part = part.replace(/\D/g, "");
       } else part = undefined;
@@ -95,7 +95,7 @@ presence.on('iFrameData', async (data: any) => {
   let part = between(ep, '(', ')');
   let rep = ep;
 
-  if (ep.includes('(') && ep.includes('(')) {
+  if (ep.includes('(') && ep.includes(')')) {
     rep = ep.replace(` (${part})`, '');
     part = part.replace(/\D/g, "");
   } else part = undefined;
