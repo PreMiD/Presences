@@ -1,13 +1,13 @@
 const presence = new Presence({
   clientId: "918248582459555871"
-});
-const browsingStamp = Date.now();
+}), browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "icon",
     smallImageKey: "vukky",
     smallImageText: "Playing Vukkybox",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/gallery") {
