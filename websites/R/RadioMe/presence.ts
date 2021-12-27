@@ -49,7 +49,7 @@ function handleStation(): void {
   // Check if the playing icon is shown
   if (document.querySelector<HTMLDivElement>(".playbutton-global-playing")) {
     // Radio is playing / buffering
-    if (timestamp === 0) timestamp = Date.now();
+    timestamp &&= Date.now();
 
     presenceData = {
       details: station,
