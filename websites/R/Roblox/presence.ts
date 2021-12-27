@@ -19,36 +19,29 @@ presence.on("UpdateData", async () => {
       largeImageKey: "lg",
       startTimestamp: browsingTimestamp
     },
-    gameName = <HTMLHeadingElement>(
-      document.querySelector(
-        "div.game-calls-to-action > div.game-title-container > h2"
-      )
+    gameName = document.querySelector<HTMLHeadingElement>(
+      "div.game-calls-to-action > div.game-title-container > h2"
     ),
     imagesEnabled = await presence.getSetting<boolean>("images");
 
   if (document.location.pathname.includes("/home")) {
     presenceData.details = "Current page: ";
-
     presenceData.state = "Home";
   } else if (
     document.location.pathname.includes("/users") &&
     document.location.pathname.includes("/profile")
   ) {
-    profileName = <HTMLHeadingElement>(
-      document.querySelector(
-        "div.profile-header-top > div.header-caption div.header-title > h2"
-      )
+    profileName = document.querySelector<HTMLHeadingElement>(
+      "div.profile-header-top > div.header-caption div.header-title > h2"
     );
 
-    profileTabs = <HTMLAnchorElement>(
-      document.querySelector("#horizontal-tabs li.rbx-tab.active a")
+    profileTabs = document.querySelector<HTMLAnchorElement>(
+      "#horizontal-tabs li.rbx-tab.active a"
     );
 
     profileAvatar = document.querySelector<HTMLImageElement>(
       ".avatar-headshot-lg thumbnail-2d img[image-load]"
     );
-
-    //console.log(profileTabs.textContent);
 
     if (profileTabs.textContent === "Creations") {
       presenceData.details = `Profile: ${profileName.textContent}`;
@@ -63,18 +56,16 @@ presence.on("UpdateData", async () => {
     if (imagesEnabled && profileAvatar)
       presenceData.largeImageKey = profileAvatar.src;
   } else if (document.location.pathname.includes("/my/messages")) {
-    messageTab = <HTMLLIElement>(
-      document.querySelector(
-        "#wrap > div.container-main > div.content > div.messages-container.ng-scope > div > ul > li.rbx-tab.ng-scope.active"
-      )
+    messageTab = document.querySelector<HTMLLIElement>(
+      "#wrap > div.container-main > div.content > div.messages-container.ng-scope > div > ul > li.rbx-tab.ng-scope.active"
     );
 
     presenceData.details = "Messages";
 
     presenceData.state = `Tab: ${messageTab.textContent}`;
   } else if (document.location.pathname.includes("/users/friends")) {
-    friendsTab = <HTMLAnchorElement>(
-      document.querySelector(".rbx-tab-heading.active")
+    friendsTab = document.querySelector<HTMLAnchorElement>(
+      ".rbx-tab-heading.active"
     );
 
     presenceData.details = "Friends";
@@ -88,8 +79,8 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/users") &&
     document.location.pathname.includes("/inventory")
   ) {
-    inventoryTab = <HTMLLIElement>(
-      document.querySelector("#vertical-menu > li.menu-option.ng-scope.active")
+    inventoryTab = document.querySelector<HTMLLIElement>(
+      "#vertical-menu > li.menu-option.ng-scope.active"
     );
 
     presenceData.details = "Inventory";
@@ -138,7 +129,7 @@ presence.on("UpdateData", async () => {
   } else if (
     (document.location.pathname === "/games/" ||
       document.location.pathname === "/games") &&
-    gameName === null
+    !gameName
   ) {
     presenceData.details = "Browsing games...";
 
@@ -175,17 +166,17 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname.includes("/develop")) {
     presenceData.details = "Developer Page";
-    const developTabs = (<HTMLDivElement>(
-      document.querySelector("#DevelopTabs .tab-active")
-    )).textContent;
+    const developTabs = document.querySelector<HTMLDivElement>(
+      "#DevelopTabs .tab-active"
+    ).textContent;
     if (developTabs === "My Creations") {
       presenceData.state = `Tab: ${developTabs} > ${
-        (<HTMLAnchorElement>document.querySelector(".tab-item-selected"))
+        document.querySelector<HTMLAnchorElement>(".tab-item-selected")
           .textContent
       }`;
     } else if (developTabs === "Library") {
       presenceData.state = `Tab: ${developTabs} > ${
-        (<HTMLAnchorElement>document.querySelector(".selectedAssetTypeFilter"))
+        document.querySelector<HTMLAnchorElement>(".selectedAssetTypeFilter")
           .textContent
       }`;
     } else presenceData.state = `Tab: ${developTabs}`;
