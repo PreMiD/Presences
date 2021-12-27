@@ -42,19 +42,19 @@ async function getStrings() {
  */
 function handleStation(): void {
   const station =
-    document.querySelector<HTMLElement>(".song-name")?.textContent;
+    document.querySelector<HTMLSpanElement>(".song-name")?.textContent;
 
   let presenceData: PresenceData;
 
   // Check if the playing icon is shown
-  if (document.querySelector<HTMLElement>(".playbutton-global-playing")) {
+  if (document.querySelector<HTMLDivElement>(".playbutton-global-playing")) {
     // Radio is playing / buffering
     if (timestamp === 0) timestamp = Date.now();
 
     presenceData = {
       details: station,
       largeImageKey: (
-        document.querySelector<HTMLElement>("#player-station-logo-link")
+        document.querySelector<HTMLAnchorElement>("#player-station-logo-link")
           .children[0] as HTMLImageElement
       ).src,
       smallImageText: strings.play,
@@ -68,7 +68,7 @@ function handleStation(): void {
     presenceData = {
       details: station,
       largeImageKey: (
-        document.querySelector<HTMLElement>("#player-station-logo-link")
+        document.querySelector<HTMLAnchorElement>("#player-station-logo-link")
           .children[0] as HTMLImageElement
       ).src,
       smallImageText: strings.pause,
