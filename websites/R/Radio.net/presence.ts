@@ -1,13 +1,14 @@
 const presence = new Presence({
-    clientId: "634124614544392193"
-  }),
-  strings = getStrings();
+  clientId: "634124614544392193"
+});
 
-let timestamp: number;
+let strings: Awaited<ReturnType<typeof getStrings>>, timestamp: number;
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.split("."),
     path = window.location.pathname.split("/").slice(1);
+
+  strings = await getStrings();
 
   if (host[0] === "corporate") {
     // Corporate page
@@ -24,7 +25,7 @@ presence.on("UpdateData", async () => {
       case "jobs":
       case "contact":
       case "kontakt":
-        await handleCorporate(host.slice(1).join("."));
+        handleCorporate(host.slice(1).join("."));
         break;
       default:
         presence.setActivity();
@@ -35,15 +36,15 @@ presence.on("UpdateData", async () => {
     switch (path[0]) {
       // Radio station
       case "s":
-        await handleStation();
+        handleStation();
         break;
       // Podcast
       case "p":
-        await handlePodcast();
+        handlePodcast();
         break;
       // Search
       case "search":
-        await handleSearch();
+        handleSearch();
         break;
       // Genre, Topic, Country, City, Local stations, Top stations
       case "genre":
@@ -52,7 +53,7 @@ presence.on("UpdateData", async () => {
       case "city":
       case "local-stations":
       case "top-stations":
-        await handleListing();
+        handleListing();
         break;
       // Choose your country, Contact, App, Terms and conditions, Privacy policy, Imprint
       case "country-selector":
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
       case "terms-and-conditions":
       case "privacy-policy":
       case "imprint":
-        await handleGeneric(true);
+        handleGeneric(true);
         break;
       // Startpage, Unknown
       default:
@@ -71,10 +72,6 @@ presence.on("UpdateData", async () => {
   }
 });
 
-/**
- * Get Language Strings
- * @returns Language Strings
- */
 async function getStrings() {
   return presence.getStrings(
     {
@@ -90,25 +87,26 @@ async function getStrings() {
 /**
  * Handle radio station
  */
-async function handleStation(): Promise<void> {
+function handleStation(): void {
   let presenceData: PresenceData;
 
   // Check if the animation icon is shown
   if (
-    document.querySelector<HTMLElement>(".player__animate-icon").style
+    document.querySelector<HTMLSpanElement>(".player__animate-icon").style
       .display !== "none"
   ) {
     // Radio is playing / buffering
     if (timestamp === 0) timestamp = Date.now();
 
     presenceData = {
-      details: document.querySelector("h1").textContent,
-      state: document.querySelector<HTMLElement>(".player__song").textContent,
+      details: document.querySelector<HTMLHeadingElement>("h1").textContent,
+      state:
+        document.querySelector<HTMLDivElement>(".player__song").textContent,
       largeImageKey: (
-        document.querySelector<HTMLElement>("#station").children[3].children[1]
-          .firstChild.firstChild.firstChild as HTMLImageElement
+        document.querySelector<HTMLDivElement>("#station").children[3]
+          .children[1].firstChild.firstChild.firstChild as HTMLImageElement
       ).src,
-      smallImageText: (await strings).play,
+      smallImageText: strings.play,
       smallImageKey: "play",
       startTimestamp: timestamp
     };
@@ -117,12 +115,12 @@ async function handleStation(): Promise<void> {
     timestamp = 0;
 
     presenceData = {
-      details: document.querySelector("h1").textContent,
+      details: document.querySelector<HTMLHeadingElement>("h1").textContent,
       largeImageKey: (
-        document.querySelector<HTMLElement>("#station").children[3].children[1]
-          .firstChild.firstChild.firstChild as HTMLImageElement
+        document.querySelector<HTMLDivElement>("#station").children[3]
+          .children[1].firstChild.firstChild.firstChild as HTMLImageElement
       ).src,
-      smallImageText: (await strings).pause,
+      smallImageText: strings.pause,
       smallImageKey: "pause"
     };
   }
@@ -133,17 +131,17 @@ async function handleStation(): Promise<void> {
 /**
  * Handle podcast
  */
-async function handlePodcast(): Promise<void> {
+function handlePodcast(): void {
   let presenceData: PresenceData;
 
   // Check if the animation icon is shown
   if (
-    document.querySelector<HTMLElement>(".player__animate-icon").style
+    document.querySelector<HTMLSpanElement>(".player__animate-icon").style
       .display !== "none"
   ) {
     // Podcast is playing / buffering
     const times = document
-        .querySelector<HTMLElement>(".player__timing-wrap")
+        .querySelector<HTMLDivElement>(".player__timing-wrap")
         .textContent.split("|"),
       timestamps = presence.getTimestamps(
         presence.timestampFromFormat(times[0]),
@@ -151,13 +149,14 @@ async function handlePodcast(): Promise<void> {
       );
 
     presenceData = {
-      details: document.querySelector("h1").textContent,
-      state: document.querySelector<HTMLElement>(".player__song").textContent,
+      details: document.querySelector<HTMLHeadingElement>("h1").textContent,
+      state:
+        document.querySelector<HTMLDivElement>(".player__song").textContent,
       largeImageKey: (
-        document.querySelector<HTMLElement>("#podcast").children[1].children[1]
-          .firstChild.firstChild.firstChild as HTMLImageElement
+        document.querySelector<HTMLDivElement>("#podcast").children[1]
+          .children[1].firstChild.firstChild.firstChild as HTMLImageElement
       ).src,
-      smallImageText: (await strings).play,
+      smallImageText: strings.play,
       smallImageKey: "play",
       startTimestamp: timestamps[0],
       endTimestamp: timestamps[1]
@@ -165,13 +164,14 @@ async function handlePodcast(): Promise<void> {
   } else {
     // Podcast is paused
     presenceData = {
-      details: document.querySelector("h1").textContent,
-      state: document.querySelector<HTMLElement>(".player__song").textContent,
+      details: document.querySelector<HTMLHeadingElement>("h1").textContent,
+      state:
+        document.querySelector<HTMLDivElement>(".player__song").textContent,
       largeImageKey: (
-        document.querySelector<HTMLElement>("#podcast").children[1].children[1]
-          .firstChild.firstChild.firstChild as HTMLImageElement
+        document.querySelector<HTMLDivElement>("#podcast").children[1]
+          .children[1].firstChild.firstChild.firstChild as HTMLImageElement
       ).src,
-      smallImageText: (await strings).pause,
+      smallImageText: strings.pause,
       smallImageKey: "pause"
     };
   }
@@ -182,12 +182,12 @@ async function handlePodcast(): Promise<void> {
 /**
  * Handle search
  */
-async function handleSearch(): Promise<void> {
+function handleSearch(): void {
   const presenceData: PresenceData = {
     details: new URLSearchParams(window.location.search).get("q"),
-    state: document.querySelector<HTMLElement>("h1").textContent,
+    state: document.querySelector<HTMLHeadingElement>("h1").textContent,
     largeImageKey: "logo_big",
-    smallImageText: (await strings).search,
+    smallImageText: strings.search,
     smallImageKey: "search"
   };
 
@@ -197,11 +197,11 @@ async function handleSearch(): Promise<void> {
 /**
  * Handle radio station or podcast listing
  */
-async function handleListing(): Promise<void> {
+function handleListing(): void {
   presence.setActivity({
-    details: document.querySelector<HTMLElement>("h1").textContent,
+    details: document.querySelector<HTMLHeadingElement>("h1").textContent,
     largeImageKey: "logo_big",
-    smallImageText: (await strings).browsing,
+    smallImageText: strings.browsing,
     smallImageKey: "reading"
   });
 }
@@ -210,9 +210,9 @@ async function handleListing(): Promise<void> {
  * Handle corporate page
  * @param hostname Hostname of the corporate page
  */
-async function handleCorporate(hostname: string): Promise<void> {
+function handleCorporate(hostname: string): void {
   const item: string =
-    document.querySelector<HTMLElement>(".current_page_item").textContent;
+    document.querySelector<HTMLLIElement>(".current_page_item").textContent;
 
   presence.setActivity({
     details: `${hostname} corporate`,
@@ -225,7 +225,7 @@ async function handleCorporate(hostname: string): Promise<void> {
  * Handle generic pages
  * @param preferTitle Prefer document title over h1 text content
  */
-async function handleGeneric(preferTitle = false): Promise<void> {
+function handleGeneric(preferTitle = false): void {
   presence.setActivity({
     details: preferTitle
       ? document.title
