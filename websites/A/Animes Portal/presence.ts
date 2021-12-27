@@ -17,8 +17,8 @@ presence.on("UpdateData", async () => {
       state: "Viewing the home page"
     });
   } else if (document.location.pathname.startsWith("/animes")) {
-    const url = new URL(document.location.href);
-    const filter = url.searchParams.get("filters");
+    let filter: any = new URL(document.location.href);
+    filter = filter.searchParams.get("filters");
     const paths = document.location.pathname.split("/");
     if (!paths[0]) paths.shift();
     const filters: string[] = [];
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
     const eid = paths[2];
 
     if (uid && !eid) {
-      let name = document.querySelector(
+      const name = document.querySelector(
         "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
       ).innerHTML;
       assign(presenceData, {
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
         part = part.replace(/\D/g, "");
       } else part = null;
 
-      let playing = document
+      const playing = document
         .querySelector(
           "body > main.animated > div.wrapper > section.holder > div.player > div.holder > div.vplayer"
         )
@@ -96,8 +96,13 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity();
 });
 
-presence.on("iFrameData", async (data: any) => {
-  if (!data.currentTime || !data.currentTime) return;
+export interface iframeData {
+  currentTime: number;
+  duration: number;
+}
+
+presence.on("iFrameData", async (data: iframeData) => {
+  if (!data.currentTime || !data.duration) return;
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
@@ -127,7 +132,7 @@ presence.on("iFrameData", async (data: any) => {
     state: `Episode ${rep} ${part ? `(part ${part})` : ""}`
   });
 
-  if (presenceData !== undefined) {
+  if (presenceData.details) {
     presence.setActivity(presenceData);
   } else presence.setActivity();
 });
