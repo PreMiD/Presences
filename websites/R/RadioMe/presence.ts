@@ -5,24 +5,79 @@ const presence = new Presence({
 let strings: Awaited<ReturnType<typeof getStrings>>, timestamp: number;
 
 presence.on("UpdateData", async () => {
-  const path = window.location.pathname.split("/").slice(1);
+  const path = window.location.pathname.split("/").slice(1),
+    presenceData: PresenceData = {};
 
   strings = await getStrings();
 
   switch (path[0]) {
     // Search
     case "search":
-      handleSearch();
+      presenceData.details = new URLSearchParams(window.location.search).get(
+        "term"
+      );
+      presenceData.state =
+        document.querySelector<HTMLHeadingElement>("h1").textContent;
+      presenceData.largeImageKey = "logo_big";
+      presenceData.smallImageText = strings.search;
+      presenceData.smallImageKey = "search";
       break;
     // Privacy policy, Imprint
     case "c":
-      handleGeneric(true);
+      presenceData.details = document.title;
+      presenceData.largeImageKey = "logo_big";
       break;
     // Startpage, Radio station, Region, Unknown
-    default:
-      handleUnknown(path);
+    default: {
+      const region = [
+          ...document.querySelectorAll<HTMLAnchorElement>(".region-btn")
+        ]
+          .filter(e => e.classList.contains("active"))[0]
+          .pathname?.slice(1),
+        station =
+          document.querySelector<HTMLSpanElement>(".song-name")?.textContent;
+
+      if (region && path[0] === region) {
+        presenceData.details =
+          document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
+          document.title;
+        presenceData.largeImageKey = "logo_big";
+      } else if (station) {
+        // Check if the playing icon is shown
+        if (
+          document.querySelector<HTMLDivElement>(".playbutton-global-playing")
+        ) {
+          // Radio is playing / buffering
+          timestamp ||= Date.now();
+
+          presenceData.details = station;
+          presenceData.largeImageKey = (
+            document.querySelector<HTMLAnchorElement>(
+              "#player-station-logo-link"
+            ).children[0] as HTMLImageElement
+          ).src;
+          presenceData.smallImageText = strings.play;
+          presenceData.smallImageKey = "play";
+          presenceData.startTimestamp = timestamp;
+        } else {
+          // Radio is paused
+          timestamp = 0;
+
+          presenceData.details = station;
+          presenceData.largeImageKey = (
+            document.querySelector<HTMLAnchorElement>(
+              "#player-station-logo-link"
+            ).children[0] as HTMLImageElement
+          ).src;
+          presenceData.smallImageText = strings.pause;
+          presenceData.smallImageKey = "pause";
+        }
+      }
       break;
+    }
   }
+
+  presence.setActivity(presenceData);
 });
 
 async function getStrings() {
@@ -35,97 +90,4 @@ async function getStrings() {
     },
     await presence.getSetting<string>("lang").catch(() => "en")
   );
-}
-
-/**
- * Handle radio station
- */
-function handleStation(): void {
-  const station =
-    document.querySelector<HTMLSpanElement>(".song-name")?.textContent;
-
-  let presenceData: PresenceData;
-
-  // Check if the playing icon is shown
-  if (document.querySelector<HTMLDivElement>(".playbutton-global-playing")) {
-    // Radio is playing / buffering
-    timestamp ||= Date.now();
-
-    presenceData = {
-      details: station,
-      largeImageKey: (
-        document.querySelector<HTMLAnchorElement>("#player-station-logo-link")
-          .children[0] as HTMLImageElement
-      ).src,
-      smallImageText: strings.play,
-      smallImageKey: "play",
-      startTimestamp: timestamp
-    };
-  } else {
-    // Radio is paused
-    timestamp = 0;
-
-    presenceData = {
-      details: station,
-      largeImageKey: (
-        document.querySelector<HTMLAnchorElement>("#player-station-logo-link")
-          .children[0] as HTMLImageElement
-      ).src,
-      smallImageText: strings.pause,
-      smallImageKey: "pause"
-    };
-  }
-
-  presence.setActivity(presenceData);
-}
-
-/**
- * Handle search
- */
-function handleSearch(): void {
-  const presenceData: PresenceData = {
-    details: new URLSearchParams(window.location.search).get("term"),
-    state: document.querySelector<HTMLHeadingElement>("h1").textContent,
-    largeImageKey: "logo_big",
-    smallImageText: strings.search,
-    smallImageKey: "search"
-  };
-
-  presence.setActivity(presenceData);
-}
-
-/**
- * Handle generic pages
- * @param preferTitle Prefer document title over h1 text content
- */
-function handleGeneric(preferTitle = false): void {
-  presence.setActivity({
-    details: preferTitle
-      ? document.title
-      : document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
-        document.title,
-    largeImageKey: "logo_big"
-  });
-}
-
-/**
- * Handle unknown page
- * @param path Page path
- */
-function handleUnknown(path: string[]): void {
-  const region = [
-    ...document.querySelectorAll<HTMLAnchorElement>(".region-btn")
-  ]
-    .filter(e => e.classList.contains("active"))[0]
-    .pathname?.slice(1);
-
-  if (region && path[0] === region) {
-    handleGeneric();
-    return;
-  } else if (document.querySelector<HTMLSpanElement>(".song-name")) {
-    handleStation();
-    return;
-  }
-
-  presence.setActivity();
 }
