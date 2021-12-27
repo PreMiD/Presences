@@ -49,7 +49,7 @@ function handleStation(): void {
   // Check if the playing icon is shown
   if (document.querySelector<HTMLDivElement>(".playbutton-global-playing")) {
     // Radio is playing / buffering
-    timestamp &&= Date.now();
+    timestamp ||= Date.now();
 
     presenceData = {
       details: station,
@@ -119,7 +119,7 @@ function handleUnknown(path: string[]): void {
     .filter(e => e.classList.contains("active"))[0]
     .pathname?.slice(1);
 
-  if (region !== "" && path[0] === region) {
+  if (region && path[0] === region) {
     handleGeneric();
     return;
   } else if (document.querySelector<HTMLSpanElement>(".song-name")) {
