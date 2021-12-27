@@ -1,18 +1,20 @@
 const presence = new Presence({
-    clientId: "681116862930747520"
-  }),
-  strings = getStrings();
+  clientId: "681116862930747520"
+});
 
-let timestamp = 0,
+let strings: Awaited<ReturnType<typeof getStrings>>,
+  timestamp = 0,
   previous: Location,
   current: Location;
 
 presence.on("UpdateData", async () => {
-  current = window.location;
   const path = current.pathname.split("/").slice(1),
     presenceData: PresenceData = {
       largeImageKey: "logo_big"
     };
+
+  strings = await getStrings();
+  current = window.location;
 
   if (current.hostname.split(".")[0] === "bombmanual") {
     // Bomb manual page
@@ -20,7 +22,7 @@ presence.on("UpdateData", async () => {
       // Web manual, PDF manual
       case "web":
       case "print":
-        await handleManual(isNewLocation(previous, current));
+        handleManual(isNewLocation(previous, current));
         return;
       // How to play, Language select
       case "how-to-play-pc.html":
@@ -35,7 +37,7 @@ presence.on("UpdateData", async () => {
       case "how-to-play-oculus-quest.html":
       case "how-to-play-daydream.html":
       case "language":
-        await handleGeneric(true);
+        handleGeneric(true);
         return;
       // Startpage, Unknown
       default:
@@ -48,7 +50,7 @@ presence.on("UpdateData", async () => {
       // Contact Us, Privacy Policy
       case "contact-us":
       case "privacy-policy":
-        await handleGeneric();
+        handleGeneric();
         return;
       // Presskit
       case "presskit":
@@ -67,7 +69,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Translation FAQ";
         break;
       case "faq":
-        await handleFAQ();
+        handleFAQ();
         return;
       // Commercial Licensing
       case "commercial-license":
@@ -88,10 +90,6 @@ presence.on("UpdateData", async () => {
   previous = current;
 });
 
-/**
- * Get Language Strings
- * @returns Language Strings
- */
 async function getStrings() {
   return presence.getStrings(
     {
@@ -106,7 +104,7 @@ async function getStrings() {
  * Handle bomb manual
  * @param resetTimestamp Reset the reading timestamp
  */
-async function handleManual(resetTimestamp = false): Promise<void> {
+function handleManual(resetTimestamp = false): void {
   if (timestamp === 0 || resetTimestamp) timestamp = Date.now();
 
   const pages = [...document.querySelectorAll<HTMLDivElement>(".page")],
@@ -118,7 +116,7 @@ async function handleManual(resetTimestamp = false): Promise<void> {
         .querySelector<HTMLTitleElement>(".title")
         .textContent.replace(/\n|\t/g, ""),
       largeImageKey: "logo_big",
-      smallImageText: (await strings).reading,
+      smallImageText: strings.reading,
       smallImageKey: "reading",
       startTimestamp: timestamp
     };
@@ -129,9 +127,9 @@ async function handleManual(resetTimestamp = false): Promise<void> {
         ".versioning"
       ).firstChild.textContent;
   } else {
-    presenceData.state = `${(await strings).page} ${page + 1} / ${
-      pages.length
-    }: ${pages[page].children[0].children[1].textContent}`;
+    presenceData.state = `${strings.page} ${page + 1} / ${pages.length}: ${
+      pages[page].children[0].children[1].textContent
+    }`;
   }
 
   presence.setActivity(presenceData);
@@ -140,7 +138,7 @@ async function handleManual(resetTimestamp = false): Promise<void> {
 /**
  * Handle faq page
  */
-async function handleFAQ(): Promise<void> {
+function handleFAQ(): void {
   const presenceData: PresenceData = {
     details: "FAQ",
     largeImageKey: "logo_big"
@@ -159,7 +157,7 @@ async function handleFAQ(): Promise<void> {
  * Handle generic pages
  * @param preferTitle Prefer document title over h1 text content
  */
-async function handleGeneric(preferTitle = false): Promise<void> {
+function handleGeneric(preferTitle = false): void {
   presence.setActivity({
     details: preferTitle
       ? document.title
