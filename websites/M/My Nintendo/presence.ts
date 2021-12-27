@@ -64,7 +64,7 @@ async function getStrings() {
 function handleRewardCategories(path: string[]): void {
   const presenceData: PresenceData = {
     details:
-      document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+      document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
       document.title,
     largeImageKey: "logo_big",
     smallImageText: strings.browsing,
@@ -87,7 +87,7 @@ function handleRewardCategories(path: string[]): void {
 function handleRewards(path: string[]): void {
   const presenceData: PresenceData = {
     details:
-      document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+      document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
       document.title,
     largeImageKey: "logo_big",
     smallImageText: strings.browsing,
@@ -124,7 +124,7 @@ function handlePoints(path: string[]): void {
 function handleNews(path: string[]): void {
   const presenceData: PresenceData = {
     details:
-      document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+      document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
       document.title,
     largeImageKey: "logo_big",
     smallImageText: strings.reading,
@@ -156,7 +156,7 @@ function handleGeneric(
   const presenceData: PresenceData = {
     details: preferTitle
       ? document.title
-      : document.querySelector<HTMLHeadingElement>("h1")?.textContent ||
+      : document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
         document.title,
     largeImageKey: "logo_big"
   };
