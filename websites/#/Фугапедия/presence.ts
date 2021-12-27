@@ -21,8 +21,11 @@ presence.on("UpdateData", async () => {
       .display === "block" &&
     searchText
   ) {
-    presenceData.details = "В поисках статьи по запросу";
-    presenceData.state = searchText;
+    presenceData.details = "В поисках статьи";
+    if (!privacyMode) {
+      presenceData.details = "В поисках статьи по запросу";
+      presenceData.state = `«${searchText}»`;
+    }
     presence.setActivity(presenceData);
     return;
   }
