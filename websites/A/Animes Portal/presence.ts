@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
     if (filter) {
       filter
         .split(",")
-        .map((x: string) => parseInt(x))
+        .map((x: string) => parseInt(x, 10))
         .forEach((f: number) => {
           if (filterCodes[f]) filters.push(filterCodes[f]);
         });
