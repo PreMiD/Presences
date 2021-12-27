@@ -17,8 +17,7 @@ presence.on("UpdateData", async () => {
       state: "Viewing the home page"
     });
   } else if (document.location.pathname.startsWith("/animes")) {
-    let filter: string | URL = new URL(document.location.href);
-    filter = filter.searchParams.get("filters");
+    const filter: string = new URL(document.location.href).searchParams.get("filters");
     const paths = document.location.pathname.split("/");
     if (!paths[0]) paths.shift();
     const filters: string[] = [];
@@ -34,9 +33,8 @@ presence.on("UpdateData", async () => {
 
     if (paths[1] === "search" && paths[2]) {
       assign(presenceData, {
-        details: `Searching for ${paths[2].replaceAll("-", " ")} ${
-          filters.includes("bgsub") ? `with BG sub` : ""
-        }`
+        details: `Searching for ${paths[2].replaceAll("-", " ")} ${filters.includes("bgsub") ? `with BG sub` : ""
+          }`
       });
     } else if (paths[1]) {
       assign(presenceData, {
@@ -44,9 +42,8 @@ presence.on("UpdateData", async () => {
       });
     } else
       assign(presenceData, {
-        details: `Viewing animes ${
-          filters.includes("bgsub") ? `with BG sub` : ""
-        }`
+        details: `Viewing animes ${filters.includes("bgsub") ? `with BG sub` : ""
+          }`
       });
   } else if (document.location.pathname.startsWith("/anime/")) {
     const paths = document.location.pathname.split("/");
