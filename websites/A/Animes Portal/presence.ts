@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
       state: "Viewing the home page"
     });
   } else if (document.location.pathname.startsWith("/animes")) {
-    let filter: any = new URL(document.location.href);
+    let filter: string | URL = new URL(document.location.href);
     filter = filter.searchParams.get("filters");
     const paths = document.location.pathname.split("/");
     if (!paths[0]) paths.shift();
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData !== undefined) {
+  if (presenceData.details) {
     presence.setActivity(presenceData);
   } else presence.setActivity();
 });
