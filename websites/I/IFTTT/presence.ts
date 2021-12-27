@@ -71,26 +71,26 @@ presence.on("UpdateData", async () => {
       // Developer spotlight
       case "blog":
         presenceData.details = "Developer spotlight";
-        presenceData.state =
-          path[1]?.length > 0
-            ? document.querySelector<HTMLHeadingElement>("h1").textContent
-            : null;
+        if (path[1]) {
+          presenceData.state =
+            document.querySelector<HTMLHeadingElement>("h1").textContent;
+        }
         break;
       // Solutions
       case "solutions":
         presenceData.details = "Solutions";
-        presenceData.state =
-          path[1]?.length > 0
-            ? document.querySelector<HTMLHeadingElement>("h3").textContent
-            : null;
+        if (path[1]) {
+          presenceData.state =
+            document.querySelector<HTMLHeadingElement>("h3").textContent;
+        }
         break;
       // Case studies
       case "case_studies":
         presenceData.details = "Case studies";
-        presenceData.state =
-          path[1]?.length > 0
-            ? document.querySelector<HTMLHeadingElement>("h1").textContent
-            : null;
+        if (path[1]) {
+          presenceData.state =
+            document.querySelector<HTMLHeadingElement>("h1").textContent;
+        }
         break;
       // Testimonials
       case "testimonials":
