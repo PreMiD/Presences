@@ -1,7 +1,8 @@
 const presence = new Presence({
-    clientId: "665519810054062100"
-  }),
-  strings = getStrings();
+  clientId: "665519810054062100"
+});
+
+let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname,
@@ -9,6 +10,8 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo_big"
     };
+
+  strings = await getStrings();
 
   if (host === "ift.tt") {
     // IFTTT URL Shortener (for the Help Center)
@@ -19,7 +22,7 @@ presence.on("UpdateData", async () => {
     switch (path[0]) {
       // Startpage
       case "hc":
-        await handleHelpCenter(path);
+        handleHelpCenter(path);
         return;
       // Unknown
       default:
@@ -31,7 +34,7 @@ presence.on("UpdateData", async () => {
     switch (path[0]) {
       // Documentation
       case "docs":
-        await handleDocs();
+        handleDocs();
         return;
       // Developer spotlight
       case "blog":
@@ -81,7 +84,7 @@ presence.on("UpdateData", async () => {
         break;
       // Startpage, Unknown
       default:
-        await handleStatusPage();
+        handleStatusPage();
         return;
     }
   } else {
@@ -89,7 +92,7 @@ presence.on("UpdateData", async () => {
     switch (path[0]) {
       // Applets
       case "applets":
-        await handleApplet();
+        handleApplet();
         return;
       // Account settings
       case "settings":
@@ -106,7 +109,7 @@ presence.on("UpdateData", async () => {
         break;
       // Creating an Applet
       case "create":
-        await handleAppletCreation();
+        handleAppletCreation();
         return;
       // Activity
       case "activity":
@@ -122,7 +125,7 @@ presence.on("UpdateData", async () => {
       case "weather":
       case "maker_webhooks":
       case "my_services":
-        await handleMyServices(
+        handleMyServices(
           document.querySelector<HTMLHeadingElement>("h1")?.textContent
         );
         return;
@@ -132,7 +135,7 @@ presence.on("UpdateData", async () => {
         if (
           document.querySelector<HTMLDivElement>(".story-title")?.textContent
         ) {
-          await handleBlog(
+          handleBlog(
             document.querySelector<HTMLHeadingElement>("h1").textContent
           );
           return;
@@ -141,7 +144,7 @@ presence.on("UpdateData", async () => {
         if (
           document.querySelector<HTMLInputElement>("#search")?.value?.length > 0
         ) {
-          await handleSearch(
+          handleSearch(
             document.querySelector<HTMLInputElement>("#search").value
           );
           return;
@@ -155,7 +158,7 @@ presence.on("UpdateData", async () => {
         break;
       // Blog
       case "blog":
-        await handleBlog();
+        handleBlog();
         return;
       // Developers
       case "developers":
@@ -176,7 +179,7 @@ presence.on("UpdateData", async () => {
       // Startpage, Services, Unknown
       default:
         if (document.querySelector<HTMLDivElement>(".brand-section")) {
-          await handleSerivce();
+          handleSerivce();
           return;
         }
 
@@ -188,10 +191,6 @@ presence.on("UpdateData", async () => {
   presence.setActivity(presenceData);
 });
 
-/**
- * Get Language Strings
- * @returns Language Strings
- */
 async function getStrings() {
   return presence.getStrings(
     {
@@ -206,7 +205,7 @@ async function getStrings() {
 /**
  * Handle status page
  */
-async function handleStatusPage(): Promise<void> {
+function handleStatusPage(): void {
   let incidents: HTMLDivElement[];
 
   try {
@@ -230,7 +229,7 @@ async function handleStatusPage(): Promise<void> {
  * Handle help center pages
  * @param path URL path
  */
-async function handleHelpCenter(path: string[]): Promise<void> {
+function handleHelpCenter(path: string[]): void {
   const presenceData: PresenceData = {
     details: "Help Center",
     largeImageKey: "logo_big"
@@ -266,7 +265,7 @@ async function handleHelpCenter(path: string[]): Promise<void> {
 /**
  * Handle documentation
  */
-async function handleDocs(): Promise<void> {
+function handleDocs(): void {
   const chapter = document.querySelector<HTMLHeadingElement>("h1")?.textContent,
     section =
       document.querySelector<HTMLAnchorElement>("a.active")?.textContent;
@@ -275,7 +274,7 @@ async function handleDocs(): Promise<void> {
     details: "Documentation",
     state: chapter ? `${chapter}${section ? ` - ${section}` : ""}` : null,
     largeImageKey: "logo_big",
-    smallImageText: (await strings).reading,
+    smallImageText: strings.reading,
     smallImageKey: "reading"
   });
 }
@@ -283,14 +282,14 @@ async function handleDocs(): Promise<void> {
 /**
  * Handle applet page
  */
-async function handleApplet(): Promise<void> {
+function handleApplet(): void {
   presence.setActivity({
     details: document.querySelector<HTMLHeadingElement>("h1").textContent,
     state: `by ${
       document.querySelector<HTMLSpanElement>(".author").textContent
     }`,
     largeImageKey: "logo_big",
-    smallImageText: (await strings).browsing,
+    smallImageText: strings.browsing,
     smallImageKey: "reading"
   });
 }
@@ -298,7 +297,7 @@ async function handleApplet(): Promise<void> {
 /**
  * Handle applet creation
  */
-async function handleAppletCreation(): Promise<void> {
+function handleAppletCreation(): void {
   presence.setActivity({
     details: "Creating an Applet",
     state: document.querySelector<HTMLHeadingElement>("h1").textContent,
@@ -309,13 +308,13 @@ async function handleAppletCreation(): Promise<void> {
 /**
  * Handle service page
  */
-async function handleSerivce(): Promise<void> {
+function handleSerivce(): void {
   presence.setActivity({
     details: document.querySelector<HTMLHeadingElement>("h1").textContent,
     state: document.querySelector<HTMLImageElement>(".large-service-logo")
       .title,
     largeImageKey: "logo_big",
-    smallImageText: (await strings).browsing,
+    smallImageText: strings.browsing,
     smallImageKey: "reading"
   });
 }
@@ -324,12 +323,12 @@ async function handleSerivce(): Promise<void> {
  * Handle search page
  * @param value Search value
  */
-async function handleSearch(value: string): Promise<void> {
+function handleSearch(value: string): void {
   presence.setActivity({
     details: "Searching for Applets & Services",
     state: value,
     largeImageKey: "logo_big",
-    smallImageText: (await strings).search,
+    smallImageText: strings.search,
     smallImageKey: "search"
   });
 }
@@ -338,7 +337,7 @@ async function handleSearch(value: string): Promise<void> {
  * Handle blog pages
  * @param entry Blog entry name
  */
-async function handleBlog(entry?: string): Promise<void> {
+function handleBlog(entry?: string): void {
   presence.setActivity({
     details: "Blog",
     state: entry,
@@ -350,12 +349,12 @@ async function handleBlog(entry?: string): Promise<void> {
  * Handle my services pages
  * @param category Service category
  */
-async function handleMyServices(category?: string): Promise<void> {
+function handleMyServices(category?: string): void {
   presence.setActivity({
     details: "My Services",
     state: category,
     largeImageKey: "logo_big",
-    smallImageText: (await strings).browsing,
+    smallImageText: strings.browsing,
     smallImageKey: "reading"
   });
 }
