@@ -119,7 +119,7 @@ function handleUnknown(path: string[]): void {
     .filter(e => e.classList.contains("active"))[0]
     .pathname?.slice(1);
 
-  if (path[0] && region !== "" && path[0] === region) {
+  if (region !== "" && path[0] === region) {
     handleGeneric();
     return;
   } else if (document.querySelector<HTMLSpanElement>(".song-name")) {
