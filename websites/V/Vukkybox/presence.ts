@@ -1,6 +1,6 @@
 const presence = new Presence({
   clientId: "918248582459555871"
-  }), 
+  }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -71,11 +71,11 @@ presence.on("UpdateData", async () => {
     )
       presenceData.state = "Yay, it's a valid coupon!";
     else presenceData.state = "Uh oh, the coupon is invalid!";
-  } else if (document.location.pathname === "/") 
+  } else if (document.location.pathname === "/")
     presenceData.details = "Browsing the homepage";
-  else if (document.location.pathname === "/login") 
+  else if (document.location.pathname === "/login")
     presenceData.details = "Logging in";
-  else if (document.location.pathname === "/profile") 
+  else if (document.location.pathname === "/profile")
     presenceData.details = "Changing profile settings";
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
