@@ -6,10 +6,11 @@
   },
   "service": "Autocode",
   "description": {
-    "en": "New user notifications. Purchase alerts. Scheduled jobs. Community bots. SQL queries. Internal tooling. Create whatever you want with JavaScript and APIs."
+    "en": "New user notifications. Purchase alerts. Scheduled jobs. Community bots. SQL queries. Internal tooling. Create whatever you want with JavaScript and APIs.",
+    "vi_VN": "Thông báo người dùng mới. Cảnh báo giao dịch. Các công việc được lên kế hoạch. Bot cộng đồng. Các truy vấn SQL. Công cụ nội bộ. Tạo dựng bất cả những gì bạn muốn với JavaScript và API."
   },
   "url": "autocode.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/KNLjAwu.jpg",
   "thumbnail": "https://i.imgur.com/iojaJvv.jpg",
   "color": "#ffffff",

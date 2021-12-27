@@ -15,13 +15,14 @@
     "tr": "AnimeWho? Türkçe anime & manga izleyip, okuyabileceğiniz bir sitedir.",
     "en": "AnimeWho? is a site where you can watch Turkish subtitle anime & read manga.",
     "ga_IE": "AnimeWho? Is suíomh é inar féidir leat féachaint ar anime fotheideal Tuircis & manga a léamh.",
-    "nl": "Anime Wie? is een site waar je anime kunt bekijken met Turkse ondertiteling en manga kunt lezen."
+    "nl": "Anime Wie? is een site waar je anime kunt bekijken met Turkse ondertiteling en manga kunt lezen.",
+    "vi_VN": "AnimeWho? là trang web nơi bạn có thể xem anime phụ đề Thổ Nhĩ Kì & đọc manga."
   },
   "url": [
     "www.animewho.com",
     "animewho.com"
   ],
-  "version": "1.0.6",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/y0RA8SX.jpg",
   "thumbnail": "https://i.imgur.com/HmLMCzv.png",
   "color": "#fc0043",
