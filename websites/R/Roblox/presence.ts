@@ -44,7 +44,9 @@ presence.on("UpdateData", async () => {
       document.querySelector("#horizontal-tabs li.rbx-tab.active a")
     );
 
-    profileAvatar = document.querySelector<HTMLImageElement>(".avatar-headshot-lg thumbnail-2d img[image-load]");
+    profileAvatar = document.querySelector<HTMLImageElement>(
+      ".avatar-headshot-lg thumbnail-2d img[image-load]"
+    );
 
     //console.log(profileTabs.textContent);
 
