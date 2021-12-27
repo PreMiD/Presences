@@ -30,8 +30,6 @@ presence.on('UpdateData', async () => {
       })
     }
 
-    console.log(filters)
-
     if (paths[1] === 'search' && paths[2]) {
       assign(presenceData, {
         details: `Searching for ${paths[2].replaceAll('-', ' ')} ${filters.includes('bgsub') ? `with BG sub` : ''}`
