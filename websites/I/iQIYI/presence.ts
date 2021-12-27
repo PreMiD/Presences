@@ -19,28 +19,28 @@ const presence = new Presence({
         viewAccount: "general.viewAccount",
         viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     ),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    showButtons: boolean = await presence.getSetting("buttons"),
-    searchQuery: boolean = await presence.getSetting("searchQuery");
+  const [newLang, showButtons, searchQuery, logo] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("showButtons"),
+    presence.getSetting<boolean>("searchQuery"),
+    presence.getSetting<number>("logo")
+  ]);
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][
-      await presence.getSetting("logo")
-    ],
+    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][logo],
     details: (await strings).browse,
     smallImageKey: "search",
     startTimestamp: browsingTimestamp

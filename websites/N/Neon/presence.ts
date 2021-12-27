@@ -104,9 +104,9 @@ presence.on("UpdateData", async () => {
     );
   }
 
-  if (!(await presence.getSetting("buttons")) && presenceData.buttons)
+  if (!(await presence.getSetting<boolean>("buttons")) && presenceData.buttons)
     delete presenceData.buttons;
-  if (!(await presence.getSetting("timestamp"))) {
+  if (!(await presence.getSetting<boolean>("timestamp"))) {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }

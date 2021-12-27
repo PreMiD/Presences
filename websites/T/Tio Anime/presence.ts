@@ -21,8 +21,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "tioanimelogo",
       startTimestamp: browsingTimestamp
     },
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (document.location.pathname === "/")
     presenceData.details = "En la página de inicio";

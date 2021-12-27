@@ -60,18 +60,20 @@ presence.on("UpdateData", async () => {
 
 function videoEnabled() {
   return (
-    document.querySelector(".send-video-container > button") &&
+    document.querySelector<HTMLButtonElement>(
+      ".send-video-container > button"
+    ) &&
     document
-      .querySelector(".send-video-container > button")
+      .querySelector<HTMLButtonElement>(".send-video-container > button")
       .getAttribute("aria-label") &&
     document
-      .querySelector(".send-video-container > button")
+      .querySelector<HTMLButtonElement>(".send-video-container > button")
       .getAttribute("aria-label") !== "start sending my video"
   );
 }
 
 function memberCount() {
-  const counter = document.querySelector(
+  const counter = document.querySelector<HTMLSpanElement>(
     ".footer-button__participants-icon > .footer-button__number-counter > span"
   );
   return counter === null ? null : Number(counter.textContent);

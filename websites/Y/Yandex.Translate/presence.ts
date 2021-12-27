@@ -34,8 +34,8 @@ presence.on("UpdateData", async () => {
     to = "Choosing...";
   }
 
-  const showTime: boolean = await presence.getSetting("stamp"),
-    showType: boolean = await presence.getSetting("type");
+  const showTime = await presence.getSetting<boolean>("stamp"),
+    showType = await presence.getSetting<boolean>("type");
 
   presenceData.startTimestamp = showTime ? browsingTimestamp : null;
   if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;

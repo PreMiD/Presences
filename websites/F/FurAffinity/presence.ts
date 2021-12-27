@@ -120,14 +120,14 @@ function checkCurrentPage() {
 }
 setInterval(checkCurrentPage, 1000);
 presence.on("UpdateData", async () => {
-  showBrowsingArt = await presence.getSetting("browse");
-  showBrowsingProfile = await presence.getSetting("profile");
-  showCreateJournal = await presence.getSetting("journal");
-  showBrowsingAccount = await presence.getSetting("account");
-  showBrowsingNotes = await presence.getSetting("notes");
-  showBrowsingSubmissions = await presence.getSetting("submissions");
-  showBrowsingSearch = await presence.getSetting("search");
-  showBrowsingCategory = await presence.getSetting("category");
+  showBrowsingArt = await presence.getSetting<boolean>("browse");
+  showBrowsingProfile = await presence.getSetting<boolean>("profile");
+  showCreateJournal = await presence.getSetting<boolean>("journal");
+  showBrowsingAccount = await presence.getSetting<boolean>("account");
+  showBrowsingNotes = await presence.getSetting<boolean>("notes");
+  showBrowsingSubmissions = await presence.getSetting<boolean>("submissions");
+  showBrowsingSearch = await presence.getSetting<boolean>("search");
+  showBrowsingCategory = await presence.getSetting<boolean>("category");
   presenceData.startTimestamp = browsingTimestamp;
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();

@@ -38,7 +38,7 @@ async function getStrings() {
       listening: "general.listeningMusic",
       show: "general.viewShow"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
@@ -48,10 +48,10 @@ let strings: Awaited<ReturnType<typeof getStrings>> = null,
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
   const [newLang, privacy, timestamps, cover] = await Promise.all([
-    presence.getSetting("lang"),
-    presence.getSetting("privacy"),
-    presence.getSetting("timestamps"),
-    presence.getSetting("cover")
+    presence.getSetting<string>("lang"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("timestamps"),
+    presence.getSetting<boolean>("cover")
   ]);
 
   if (oldLang !== newLang) {

@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     { pathname } = document.location,
-    buttons: boolean = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (pathname === "/" || pathname === "/home")
     presenceData.details = "Exploring Zoro.to";
@@ -35,29 +35,29 @@ presence.on("UpdateData", async () => {
       pathname
     )
   ) {
-    const heading: HTMLHeadElement = document.querySelector("h2.cat-heading");
+    const heading = document.querySelector<HTMLHeadElement>("h2.cat-heading");
     if (heading) presenceData.details = `Looking at ${heading.textContent}`;
   } else if (pathname.startsWith("/news")) {
     presenceData.details = "Looking at Anime news";
     if (pathname !== "/news") {
-      const title: HTMLHeadingElement = document.querySelector("h2.news-title");
+      const title = document.querySelector<HTMLHeadingElement>("h2.news-title");
       if (title) presenceData.state = title.textContent;
     }
   } else if (pathname === "/search") {
     presenceData.details = "Searching";
     presenceData.state = document.location.search.substring(9);
   } else if (pathname.startsWith("/user")) {
-    const profile: HTMLDivElement = document.querySelector("div.ph-title"),
-      link: HTMLAnchorElement = document
-        .querySelector("ul.nav.nav-tabs.pre-tabs")
-        .querySelector("a.nav-link.active");
+    const profile = document.querySelector<HTMLDivElement>("div.ph-title"),
+      link = document
+        .querySelector<HTMLUListElement>("ul.nav.nav-tabs.pre-tabs")
+        .querySelector<HTMLAnchorElement>("a.nav-link.active");
     if (profile) presenceData.details = `Viewing User: ${profile.textContent}`;
     if (link) presenceData.state = `At ${link.textContent}`;
   } else if (
     pathname.startsWith("people") ||
     pathname.startsWith("character")
   ) {
-    const name: HTMLHeadingElement = document.querySelector("h4.name");
+    const name = document.querySelector<HTMLHeadingElement>("h4.name");
     if (name) {
       presenceData.details = `Looking at ${
         pathname.startsWith("/people") ? "People" : "Character"
@@ -77,8 +77,8 @@ presence.on("UpdateData", async () => {
     if (pathname === "/watch2gether/")
       presenceData.details = "Looking for anime rooms";
     else {
-      const filmName: HTMLHeadingElement =
-        document.querySelector("h2.film-name");
+      const filmName =
+        document.querySelector<HTMLHeadingElement>("h2.film-name");
       presenceData.details = "In a room";
       if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
       if (data) {
@@ -99,10 +99,10 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (pathname.startsWith("/watch")) {
-    const title: HTMLDataListElement = document.querySelector(
+    const title = document.querySelector<HTMLDataListElement>(
         "li.breadcrumb-item.dynamic-name.active"
       ),
-      episode: HTMLSpanElement = document.querySelector(
+      episode = document.querySelector<HTMLSpanElement>(
         "span#cm-episode-number"
       );
     if (title) presenceData.details = title.textContent;
@@ -125,12 +125,12 @@ presence.on("UpdateData", async () => {
     }
   } else if (pathname === "/events") presenceData.details = "Looking at events";
   else if (pathname.startsWith("/event/")) {
-    const title: HTMLDivElement = document.querySelector("div.title"),
-      description: HTMLDivElement = document.querySelector("div.description");
+    const title = document.querySelector<HTMLDivElement>("div.title"),
+      description = document.querySelector<HTMLDivElement>("div.description");
     if (title) presenceData.details = `Event: ${title.textContent}`;
     if (description) presenceData.state = description.textContent;
   } else {
-    const title: HTMLHeadingElement = document.querySelector(
+    const title = document.querySelector<HTMLHeadingElement>(
       "h2.film-name.dynamic-name"
     );
     if (title) {

@@ -27,7 +27,7 @@
     "developer.apple.com",
     "www.icloud.com"
   ],
-  "version": "2.1.11",
+  "version": "2.2.0",
   "logo": "https://i.imgur.com/rBAusA5.png",
   "thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
   "color": "#606C80",
@@ -42,6 +42,10 @@
     "icloud"
   ],
   "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
     {
       "id": "logo",
       "title": "Icon",
@@ -62,12 +66,6 @@
       "id": "showButtons",
       "title": "Show buttons",
       "icon": "fas fa-compress-arrows-alt",
-      "value": true
-    },
-    {
-      "id": "shopCheckout",
-      "title": "Show shop summary",
-      "icon": "fas fa-store",
       "value": true
     },
     {

@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       fileExtension = main.slice(-1).toString().replace("- Google Drive", "");
 
     presenceData.details = "Viewing a file:";
-    presenceData.state = (await presence.getSetting("filename"))
+    presenceData.state = (await presence.getSetting<boolean>("filename"))
       ? `${
           main.length === 2 ? main[0] : main.slice(0, -1).join("").toString()
         }.${fileExtension.toUpperCase()}`

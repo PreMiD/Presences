@@ -8,25 +8,31 @@ presence.on("UpdateData", async () => {
       largeImageKey: "personality-database",
       startTimestamp: browsingTimestamp
     },
-    useOnlyFirstPersonalityType: boolean = await presence.getSetting(
+    useOnlyFirstPersonalityType = await presence.getSetting<boolean>(
       "useOnlyFirstPersonalityType"
     ),
-    showUserNameInUserProfile: boolean = await presence.getSetting(
+    showUserNameInUserProfile = await presence.getSetting<boolean>(
       "showUserNameInUserProfile"
     );
 
   if (document.location.pathname.includes("/profile/")) {
     const profileName: string = (<HTMLElement>(
         document.querySelector(
-          "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-name"
+          "div.profile-description-basic > h1.profile-name"
         )
       ))?.textContent,
       profilePersonality: string = (<HTMLElement>(
         document.querySelector(
           "div.profile-description > div.profile-description-info > div.profile-description-basic > div.profile-personality"
         )
-      ))?.textContent;
+      ))?.textContent,
+      profilePicture: string = (<HTMLElement>(
+        document.querySelector(
+          "div.profile-description > div.profile-description-info > div.profile-description-avatar img"
+        )
+      ))?.getAttribute("src");
 
+    if (profilePicture) presenceData.largeImageKey = profilePicture;
     presenceData.smallImageKey = "poll";
     presenceData.details = "Viewing:";
 

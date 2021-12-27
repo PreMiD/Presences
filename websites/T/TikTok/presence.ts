@@ -14,11 +14,11 @@ async function getStrings() {
       viewTikTok: "tiktok.viewing",
       buttonViewTikTok: "tiktok.buttonViewTikTok"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -26,13 +26,12 @@ presence.on("UpdateData", async () => {
       largeImageKey: "tiktok",
       startTimestamp: browsingTimestamp
     },
-    newLang = await presence.getSetting("lang").catch(() => "en"),
+    newLang = await presence.getSetting<string>("lang").catch(() => "en"),
     [, page, pageType] = location.pathname.split("/");
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (!page || page === "foryou") {
@@ -113,7 +112,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   }
 
-  const buttons = await presence.getSetting("buttons");
+  const buttons = await presence.getSetting<boolean>("buttons");
   if (!buttons) delete presenceData.buttons;
 
   presence.setActivity(presenceData);

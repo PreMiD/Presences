@@ -36,9 +36,11 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const time = await presence.getSetting("timestamps"),
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons"),
+  const [time, privacy, buttons] = await Promise.all([
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("privacy"),
+      presence.getSetting<boolean>("buttons")
+    ]),
     presenceData: PresenceData = {
       largeImageKey: "site",
       startTimestamp: browsingTimestamp

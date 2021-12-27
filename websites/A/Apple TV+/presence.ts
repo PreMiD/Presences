@@ -8,9 +8,7 @@ class AppleTV extends Presence {
       .querySelector("apple-tv-plus-player")
       .shadowRoot.querySelector("amp-video-player-internal")
       .shadowRoot.querySelector("amp-video-player")
-      .shadowRoot.querySelector(
-        "#apple-music-video-player"
-      ) as HTMLVideoElement;
+      .shadowRoot.querySelector<HTMLVideoElement>("#apple-music-video-player");
   }
 
   getTitle(eyebrow = false) {
@@ -193,7 +191,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.match(pathname)) PData.setPresenceData();
 
   for (const setting of data.settings) {
-    const settingValue = await presence.getSetting(setting.id);
+    const settingValue = await presence.getSetting<boolean>(setting.id);
 
     if (!settingValue && setting.delete) {
       for (const PData of setting.data)

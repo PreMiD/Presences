@@ -80,10 +80,13 @@ presence.on("UpdateData", async () => {
     if (gameStartTimestamp) presenceData.startTimestamp = gameStartTimestamp;
   }
 
-  if (!(await presence.getSetting("showName"))) delete presenceData.state;
+  if (!(await presence.getSetting<boolean>("showName")))
+    delete presenceData.state;
 
   if (!presenceData.details) presence.setActivity();
   else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: IFrameData) => (ifd = data));
+presence.on("iFrameData", (data: IFrameData) => {
+  ifd = data;
+});

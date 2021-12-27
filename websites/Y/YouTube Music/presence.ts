@@ -51,6 +51,8 @@ function getAuthorString(): string {
   }
 }
 
+let prevCover: [number, string] = null;
+
 presence.on("UpdateData", async () => {
   const title = document.querySelector<HTMLElement>(
       ".ytmusic-player-bar.title"
@@ -61,9 +63,9 @@ presence.on("UpdateData", async () => {
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
       .getAttribute("repeat-Mode_"),
     [buttons, timestamps, cover] = await Promise.all([
-      presence.getSetting("buttons"),
-      presence.getSetting("timestamps"),
-      presence.getSetting("cover")
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("cover")
     ]);
   if (title !== "" && !isNaN(video.duration)) {
     const endTimestamp =
@@ -123,6 +125,15 @@ presence.on("UpdateData", async () => {
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
+    }
+
+    if (cover) {
+      prevCover ??= [Date.now(), presenceData.largeImageKey];
+      if (prevCover[1] !== presenceData.largeImageKey) {
+        if (Date.now() - prevCover[0] < 20_000)
+          presenceData.largeImageKey = "ytm_lg";
+        else prevCover = [Date.now(), presenceData.largeImageKey];
+      }
     }
 
     presence.setActivity(presenceData);

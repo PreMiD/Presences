@@ -13,8 +13,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "xero"
     },
-    showChat = await presence.getSetting("showchat"),
-    showProfile = await presence.getSetting("showprofile");
+    showChat = await presence.getSetting<boolean>("showchat"),
+    showProfile = await presence.getSetting<boolean>("showprofile");
 
   presenceData.startTimestamp = getTimeStamp();
   if (document.location.pathname.includes("/player/")) {
