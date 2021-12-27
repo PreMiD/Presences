@@ -1,12 +1,13 @@
 const presence = new Presence({
   clientId: "918248582459555871"
 });
+const browsingStamp = Date.now();
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "icon",
     smallImageKey: "vukky",
     smallImageText: "Playing Vukkybox",
-    startTimestamp: Date.now()
+    startTimestamp: browsingStamp
   };
 
   if (document.location.pathname === "/gallery") {
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Opening a Fire Box";
     presenceData.state = `${
       document.getElementById("balance").innerText
-    } lVukkybux left!`;
+    } Vukkybux left!`;
   } else if (document.location.pathname === "/buyBox/warped") {
     presenceData.details = "Opening a Cursed Box";
     presenceData.state = `${
