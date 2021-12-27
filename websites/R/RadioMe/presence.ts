@@ -1,33 +1,30 @@
 const presence = new Presence({
-    clientId: "660519861742731264"
-  }),
-  strings = getStrings();
+  clientId: "660519861742731264"
+});
 
-let timestamp: number;
+let strings: Awaited<ReturnType<typeof getStrings>>, timestamp: number;
 
 presence.on("UpdateData", async () => {
   const path = window.location.pathname.split("/").slice(1);
 
+  strings = await getStrings();
+
   switch (path[0]) {
     // Search
     case "search":
-      await handleSearch();
+      handleSearch();
       break;
     // Privacy policy, Imprint
     case "c":
-      await handleGeneric(true);
+      handleGeneric(true);
       break;
     // Startpage, Radio station, Region, Unknown
     default:
-      await handleUnknown(path);
+      handleUnknown(path);
       break;
   }
 });
 
-/**
- * Get Language Strings
- * @returns Language Strings
- */
 async function getStrings() {
   return presence.getStrings(
     {
@@ -36,14 +33,14 @@ async function getStrings() {
       search: "general.searching",
       browsing: "general.browsing"
     },
-    (await presence.getSetting("lang").catch(() => "en")) as string
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
 /**
  * Handle radio station
  */
-async function handleStation(): Promise<void> {
+function handleStation(): void {
   const station =
     document.querySelector<HTMLElement>(".song-name")?.textContent;
 
@@ -60,7 +57,7 @@ async function handleStation(): Promise<void> {
         document.querySelector<HTMLElement>("#player-station-logo-link")
           .children[0] as HTMLImageElement
       ).src,
-      smallImageText: (await strings).play,
+      smallImageText: strings.play,
       smallImageKey: "play",
       startTimestamp: timestamp
     };
@@ -74,7 +71,7 @@ async function handleStation(): Promise<void> {
         document.querySelector<HTMLElement>("#player-station-logo-link")
           .children[0] as HTMLImageElement
       ).src,
-      smallImageText: (await strings).pause,
+      smallImageText: strings.pause,
       smallImageKey: "pause"
     };
   }
@@ -85,12 +82,12 @@ async function handleStation(): Promise<void> {
 /**
  * Handle search
  */
-async function handleSearch(): Promise<void> {
+function handleSearch(): void {
   const presenceData: PresenceData = {
     details: new URLSearchParams(window.location.search).get("term"),
-    state: document.querySelector<HTMLElement>("h1").textContent,
+    state: document.querySelector<HTMLHeadingElement>("h1").textContent,
     largeImageKey: "logo_big",
-    smallImageText: (await strings).search,
+    smallImageText: strings.search,
     smallImageKey: "search"
   };
 
@@ -101,7 +98,7 @@ async function handleSearch(): Promise<void> {
  * Handle generic pages
  * @param preferTitle Prefer document title over h1 text content
  */
-async function handleGeneric(preferTitle = false): Promise<void> {
+function handleGeneric(preferTitle = false): void {
   presence.setActivity({
     details: preferTitle
       ? document.title
@@ -115,7 +112,7 @@ async function handleGeneric(preferTitle = false): Promise<void> {
  * Handle unknown page
  * @param path Page path
  */
-async function handleUnknown(path: string[]): Promise<void> {
+function handleUnknown(path: string[]): void {
   const region = [
     ...document.querySelectorAll<HTMLAnchorElement>(".region-btn")
   ]
@@ -123,10 +120,10 @@ async function handleUnknown(path: string[]): Promise<void> {
     .pathname?.slice(1);
 
   if (path[0] && region !== "" && path[0] === region) {
-    await handleGeneric();
+    handleGeneric();
     return;
-  } else if (document.querySelector<HTMLElement>(".song-name")) {
-    await handleStation();
+  } else if (document.querySelector<HTMLSpanElement>(".song-name")) {
+    handleStation();
     return;
   }
 
