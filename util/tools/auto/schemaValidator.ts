@@ -50,8 +50,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     stats.validatedWithWarnings++;
   },
   failedToValidate = (service: string, errors: string[]): void => {
-    console.log(red(`✖ ${service}`));
-    console.log(`::group::${service}`);
+    console.log(`::group::${red(`✖ ${service}`)}`);
     console.log(errors.join("\n"));
     console.log("::endgroup::");
     stats.failedToValidate++;
