@@ -10,91 +10,90 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingTimestamp
   };
   const [buttons, timestamps, cover] = await Promise.all([
-    presence.getSetting<boolean>("buttons"),
-    presence.getSetting<boolean>("timestamps"),
-    presence.getSetting<boolean>("cover")
-  ]);
-
-  const pages: Record<string, PresenceData> = {
-    "/home": {
-      details: "Home"
-    },
-    "/dashboard": {
-      details: "Dashboard"
-    },
-    "/features": {
-      details: "Features"
-    },
-    "/events": {
-      details: "Events"
-    },
-    "/charts": {
-      details: "Charts"
-    },
-    "/inbox": {
-      details: "Inbox"
-    },
-    "/settings": {
-      details: "Settings"
-    },
-    "/pro": {
-      details: "Last.fm Pro"
-    },
-    "/about": {
-      details: "About"
-    },
-    "/api": {
-      details: "Developer API"
-    },
-    "/legal": {
-      details: "Legal"
-    },
-    "/help": {
-      details: "Help"
-    },
-    "/search": {
-      details: "Searching for:",
-      state: new URLSearchParams(document.location.search).get("q")
-    },
-    "/user": {
-      details: "Viewing user:",
-      state: document.querySelector("h1.header-title")?.textContent?.trim(),
-      buttons: [
-        {
-          url: document.querySelector<HTMLAnchorElement>("h1.header-title > a")
-            ?.href,
-          label: "View User"
-        }
-      ]
-    },
-    "/music": {
-      details: (() => {
-        if (document.querySelector("body.album-overview-new"))
-          return "Viewing Album:";
-        else if (document.querySelector("body.artist-overview-new"))
-          return "Viewing Artist:";
-        else if (document.querySelector("body.track-overview-new"))
-          return "Viewing Track:";
-        else if (
-          document.querySelector("body.namespace--music_bookmarks_overview")
-        )
-          return "Viewing Bookmarks";
-        else return "Music";
-      })(),
-      largeImageKey: (() => {
-        if (cover) {
-          if (document.querySelector("body.album-overview-new")) {
-            return (
-              document.querySelector<HTMLImageElement>(
-                ".album-overview-cover-art > .cover-art > img"
-              )?.src ?? "lastfm"
-            );
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("cover")
+    ]),
+    pages: Record<string, PresenceData> = {
+      "/home": {
+        details: "Home"
+      },
+      "/dashboard": {
+        details: "Dashboard"
+      },
+      "/features": {
+        details: "Features"
+      },
+      "/events": {
+        details: "Events"
+      },
+      "/charts": {
+        details: "Charts"
+      },
+      "/inbox": {
+        details: "Inbox"
+      },
+      "/settings": {
+        details: "Settings"
+      },
+      "/pro": {
+        details: "Last.fm Pro"
+      },
+      "/about": {
+        details: "About"
+      },
+      "/api": {
+        details: "Developer API"
+      },
+      "/legal": {
+        details: "Legal"
+      },
+      "/help": {
+        details: "Help"
+      },
+      "/search": {
+        details: "Searching for:",
+        state: new URLSearchParams(document.location.search).get("q")
+      },
+      "/user": {
+        details: "Viewing user:",
+        state: document.querySelector("h1.header-title")?.textContent?.trim(),
+        buttons: [
+          {
+            url: document.querySelector<HTMLAnchorElement>(
+              "h1.header-title > a"
+            )?.href,
+            label: "View User"
+          }
+        ]
+      },
+      "/music": {
+        details: (() => {
+          if (document.querySelector("body.album-overview-new"))
+            return "Viewing Album:";
+          else if (document.querySelector("body.artist-overview-new"))
+            return "Viewing Artist:";
+          else if (document.querySelector("body.track-overview-new"))
+            return "Viewing Track:";
+          else if (
+            document.querySelector("body.namespace--music_bookmarks_overview")
+          )
+            return "Viewing Bookmarks";
+          else return "Music";
+        })(),
+        largeImageKey: (() => {
+          if (cover) {
+            if (document.querySelector("body.album-overview-new")) {
+              return (
+                document.querySelector<HTMLImageElement>(
+                  ".album-overview-cover-art > .cover-art > img"
+                )?.src ?? "lastfm"
+              );
+            } else return "lastfm";
           } else return "lastfm";
-        } else return "lastfm";
-      })(),
-      state: document.querySelector("h1.header-new-title")?.textContent,
-      buttons: ((): [ButtonData] => {
-        if (buttons) {
+        })(),
+        state: document.querySelector("h1.header-new-title")?.textContent,
+        buttons: ((): [ButtonData] => {
           if (document.querySelector("body.album-overview-new")) {
             return [
               {
@@ -117,10 +116,9 @@ presence.on("UpdateData", async () => {
               }
             ];
           }
-        }
-      })()
-    }
-  };
+        })()
+      }
+    };
 
   for (const [path, data] of Object.entries(pages)) {
     if (location.pathname.match(path))
@@ -170,6 +168,7 @@ presence.on("UpdateData", async () => {
     delete presenceData.buttons;
   }
 
+  if (!buttons) delete presenceData.buttons;
   if (!timestamps) delete presenceData.startTimestamp;
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
