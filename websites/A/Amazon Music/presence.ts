@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
             url: playlistLink
           }
         ];
-      } else if (artistLink) {
+      } else if (artistLink && buttons) {
         presenceData.buttons = [
           {
             label: strings.viewArtist,
