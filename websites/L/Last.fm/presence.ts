@@ -5,15 +5,15 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
-      largeImageKey: "lastfm",
-      smallImageKey: "browse",
-      startTimestamp: browsingTimestamp
-    },
-    [buttons, timestamps, cover] = await Promise.all([
-      presence.getSetting<boolean>("buttons"),
-      presence.getSetting<boolean>("timestamps"),
-      presence.getSetting<boolean>("cover")
-    ]);
+    largeImageKey: "lastfm",
+    smallImageKey: "browse",
+    startTimestamp: browsingTimestamp
+  };
+  const [buttons, timestamps, cover] = await Promise.all([
+    presence.getSetting<boolean>("buttons"),
+    presence.getSetting<boolean>("timestamps"),
+    presence.getSetting<boolean>("cover")
+  ]);
 
   const pages: Record<string, PresenceData> = {
     "/home": {
