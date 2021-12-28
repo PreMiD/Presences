@@ -337,9 +337,7 @@ declare class Presence {
    * @link https://docs.premid.app/dev/presence/class#getsettingstring
    * @since 2.1
    */
-  getSetting<T extends string | boolean | number>(
-    setting: string
-  ): Promise<T>;
+  getSetting<T extends string | boolean | number>(setting: string): Promise<T>;
   /**
    * Hide a setting
    * @param setting Id of setting / Array of setting Id's
@@ -374,7 +372,7 @@ declare class Presence {
    * Converts a hex string into an RGB object
    * @param hex The hex string
    */
-  private hexToRGB(hex: `#${string}`): {r: number; g: number; b: number};
+  private hexToRGB(hex: `#${string}`): { r: number; g: number; b: number };
   /**
    * Calculates the font color based on the luminosity of the background
    * @param backgroundHex The hex string of the background
@@ -420,7 +418,10 @@ declare class Presence {
    * @param callback Callback function for event
    * @link https://docs.premid.app/dev/presence/class#events
    */
-  on<K extends keyof PresenceEvents>(eventName: K, listener: (...args: PresenceEvents[K]) => Awaitable<void>): void;
+  on<K extends keyof PresenceEvents>(
+    eventName: K,
+    listener: (...args: PresenceEvents[K]) => Awaitable<void>
+  ): void;
 }
 
 interface PresenceEvents {
@@ -539,9 +540,12 @@ declare class iFrame {
    * @param callback
    * @link https://docs.premid.app/dev/presence/class#updatedata
    */
-  on<K extends keyof IFrameEvents>(eventName: K, listener: (...args: IFrameEvents[K]) => Awaitable<void>): void;
+  on<K extends keyof IFrameEvents>(
+    eventName: K,
+    listener: (...args: IFrameEvents[K]) => Awaitable<void>
+  ): void;
 }
 
 interface IFrameEvents {
-  UpdateData: []
+  UpdateData: [];
 }
