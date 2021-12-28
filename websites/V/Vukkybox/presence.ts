@@ -26,43 +26,43 @@ presence.on("UpdateData", async () => {
     if (document.getElementById("balance")) {
       presenceData.state = `${
         document.getElementById("balance").innerText
-      } Vukkybux to spend!`;
+      } to spend!`;
     }
   } else if (document.location.pathname === "/buyBox/classic") {
     presenceData.details = "Opening a Classic Box";
     presenceData.state = `${
       document.getElementById("balance").innerText
-    } Vukkybux left!`;
+    } left!`;
   } else if (document.location.pathname === "/buyBox/veggie") {
     presenceData.details = "Opening a Veggie Box";
     presenceData.state = `${
       document.getElementById("balance").innerText
-    } Vukkybux left!`;
+    } left!`;
   } else if (document.location.pathname === "/buyBox/fire") {
     presenceData.details = "Opening a Fire Box";
     presenceData.state = `${
       document.getElementById("balance").innerText
-    } Vukkybux left!`;
+    } left!`;
   } else if (document.location.pathname === "/buyBox/warped") {
     presenceData.details = "Opening a Cursed Box";
     presenceData.state = `${
       document.getElementById("balance").innerText
-    } Vukkybux left!`;
+    } left!`;
   } else if (document.location.pathname === "/buyBox/pukky") {
     presenceData.details = "Opening a Pukky Box";
     presenceData.state = `${
       document.getElementById("balance").innerText
-    } Vukkybux left!`;
+    } left!`;
   } else if (document.location.pathname === "/buyBox/shark") {
     presenceData.details = "Opening a Shark Box";
     presenceData.state = `${
       document.getElementById("balance").innerText
-    } Vukkybux left!`;
+    } left!`;
   } else if (document.location.pathname === "/buyBox/beggars") {
     presenceData.details = "Opening a Beggar's Box";
     presenceData.state = `${
       document.getElementById("balance").innerText
-    } Vukkybux left!`;
+    } left!`;
   } else if (document.location.pathname.includes("/redeem")) {
     presenceData.details = "Redeeming a coupon!";
     if (
