@@ -203,13 +203,12 @@ presence.on("UpdateData", async () => {
           "body > main.animated > ul#path > li > a > span"
         );
         const name = list[1].textContent;
-        const chapter = between(list[3].textContent, "Глава ", " -");
         const page = document.querySelector(
           "body > main.animated > div.wrapper > div.heading > b#num"
         ).textContent;
 
         presenceData.details = `Reading manga ${name}`;
-        presenceData.state = `Tom: ${tom}, Chapter: ${chapter}, Page: ${page}`;
+        presenceData.state = `Tom: ${tom}, Chapter: ${between(list[3].textContent, "Глава ", " -")}, Page: ${page}`;
         presenceData.buttons = [
           {
             label: "Read manga",
