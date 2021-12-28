@@ -194,15 +194,13 @@ function getInfo(): {
   } else part = null;
 
   return {
-    name: name,
+    name,
     episode: parseInt(rep, 10),
     part: parseInt(part, 10)
   };
 }
 
 function parseAvatarFromAttr(attr: string) {
-  console.log(attr);
-
   let avatar;
   if (attr.includes("background-image: url('"))
     avatar = between(attr, "background-image: url('", "')");
