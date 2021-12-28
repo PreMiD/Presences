@@ -208,7 +208,11 @@ presence.on("UpdateData", async () => {
         ).textContent;
 
         presenceData.details = `Reading manga ${name}`;
-        presenceData.state = `Tom: ${tom}, Chapter: ${between(list[3].textContent, "Глава ", " -")}, Page: ${page}`;
+        presenceData.state = `Tom: ${tom}, Chapter: ${between(
+          list[3].textContent,
+          "Глава ",
+          " -"
+        )}, Page: ${page}`;
         presenceData.buttons = [
           {
             label: "Read manga",
