@@ -10,12 +10,12 @@ presence.on("UpdateData", () => {
     },
     path = document.location.pathname;
   if (path === "" || path === "/") presenceData.details = "Browsing photos";
-  else if (path.indexOf("/photo") > -1)
-    presenceData.details = "Viewing a photo";
   else if (path.startsWith("/memory")) {
     presenceData.details = "Playing back a memory:";
     [presenceData.state] = document.title.split(/-/, 1);
-  } else if (path.startsWith("/search")) {
+  } else if (path.indexOf("/photo") > -1)
+    presenceData.details = "Viewing a photo";
+  else if (path.startsWith("/search")) {
     presenceData.details = "Searching for:";
     [presenceData.state] = document.title.split(/-/, 1);
   } else if (path === "/albums") presenceData.details = "Browsing albums";
