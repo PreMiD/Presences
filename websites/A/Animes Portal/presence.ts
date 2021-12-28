@@ -26,11 +26,11 @@ presence.on("UpdateData", async () => {
         details: "Viewing messages"
       });
     } else if (paths[1].startsWith("pm-")) {
-      let body = document.querySelector(
+      const body = document.querySelector(
         "body > main.animated > div.wrapper > div.dialogPadding"
       );
-      let username = body.querySelector("span.username").textContent;
-      let avatar = parseAvatarFromAttr(
+      const username = body.querySelector("span.username").textContent;
+      const avatar = parseAvatarFromAttr(
         body.querySelector("a.avatar").attributes.getNamedItem("style")
           .textContent
       );
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
         "div.content > div.holder > span.heading"
       ).textContent;
 
-      let avatar = parseAvatarFromAttr(
+      const avatar = parseAvatarFromAttr(
         body.querySelector("a.avatar").attributes.getNamedItem("style")
           .textContent
       );
@@ -148,7 +148,7 @@ presence.on("iFrameData", async (data: iframeData) => {
     largeImageKey: "logo"
   };
 
-  const { name, episode, part } = getInfo();
+  const epInfo = getInfo();
 
   if (!data.paused)
     [presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -163,8 +163,10 @@ presence.on("iFrameData", async (data: iframeData) => {
     });
 
   assign(presenceData, {
-    details: `Watching ${name}`,
-    state: `Episode ${episode} ${part ? `(part ${part})` : ""}`
+    details: `Watching ${epInfo.name}`,
+    state: `Episode ${epInfo.episode} ${
+      epInfo.part ? `(part ${epInfo.part})` : ""
+    }`
   });
 
   if (presenceData.details) {
