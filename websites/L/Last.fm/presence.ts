@@ -3,12 +3,17 @@ const presence = new Presence({
   }),
   browsingTimestamp = Date.now() / 1000;
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
-    largeImageKey: "lastfm",
-    smallImageKey: "browse",
-    startTimestamp: browsingTimestamp
-  };
+      largeImageKey: "lastfm",
+      smallImageKey: "browse",
+      startTimestamp: browsingTimestamp
+    },
+    [buttons, timestamps, cover] = await Promise.all([
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("cover")
+    ]);
 
   const pages: Record<string, PresenceData> = {
     "/home": {
@@ -32,6 +37,21 @@ presence.on("UpdateData", () => {
     "/settings": {
       details: "Settings"
     },
+    "/pro": {
+      details: "Last.fm Pro"
+    },
+    "/about": {
+      details: "About"
+    },
+    "/api": {
+      details: "Developer API"
+    },
+    "/legal": {
+      details: "Legal"
+    },
+    "/help": {
+      details: "Help"
+    },
     "/search": {
       details: "Searching for:",
       state: new URLSearchParams(document.location.search).get("q")
@@ -49,35 +69,54 @@ presence.on("UpdateData", () => {
     },
     "/music": {
       details: (() => {
-        if (
-          location.pathname.split("/").length === 4 &&
-          !location.pathname.endsWith("+bookmarks")
-        )
+        if (document.querySelector("body.album-overview-new"))
           return "Viewing Album:";
-        else if (location.pathname.endsWith("+bookmarks"))
+        else if (document.querySelector("body.artist-overview-new"))
+          return "Viewing Artist:";
+        else if (document.querySelector("body.track-overview-new"))
+          return "Viewing Track:";
+        else if (
+          document.querySelector("body.namespace--music_bookmarks_overview")
+        )
           return "Viewing Bookmarks";
-        else if (location.pathname === "/music") return "Music";
-        else return "Viewing Artist:";
+        else return "Music";
+      })(),
+      largeImageKey: (() => {
+        if (cover) {
+          if (document.querySelector("body.album-overview-new")) {
+            return (
+              document.querySelector<HTMLImageElement>(
+                ".album-overview-cover-art > .cover-art > img"
+              )?.src ?? "lastfm"
+            );
+          } else return "lastfm";
+        } else return "lastfm";
       })(),
       state: document.querySelector("h1.header-new-title")?.textContent,
       buttons: ((): [ButtonData] => {
-        if (location.pathname.split("/").length === 4) {
-          return [
-            {
-              url: document.URL,
-              label: "View Album"
-            }
-          ];
-        } else if (
-          location.pathname.split("/").length === 3 &&
-          !location.pathname.endsWith("+bookmarks")
-        ) {
-          return [
-            {
-              url: document.URL,
-              label: "View Artist"
-            }
-          ];
+        if (buttons) {
+          if (document.querySelector("body.album-overview-new")) {
+            return [
+              {
+                url: document.URL,
+                label: "View Album"
+              }
+            ];
+          } else if (document.querySelector("body.artist-overview-new")) {
+            return [
+              {
+                url: document.URL,
+                label: "View Artist"
+              }
+            ];
+          } else if (document.querySelector("body.track-overview-new")) {
+            return [
+              {
+                url: document.URL,
+                label: "View Track"
+              }
+            ];
+          }
         }
       })()
     }
@@ -97,13 +136,27 @@ presence.on("UpdateData", () => {
       .querySelector('[data-analytics-action="PlaybarResumeTrack"]')
       .className.endsWith("play");
 
-    const timeLeft = presence.timestampFromFormat(
-      document
-        .querySelector("div.player-bar-progress-wrap > div > div > span")
-        .textContent.slice(1)
-    );
+    if (timestamps) {
+      const timeLeft = presence.timestampFromFormat(
+        document
+          .querySelector("div.player-bar-progress-wrap > div > div > span")
+          .textContent.slice(1)
+      );
 
-    if (Date.now() / 1000 >= Date.now() / 1000 + timeLeft) paused = true;
+      if (Date.now() / 1000 >= Date.now() / 1000 + timeLeft) paused = true;
+
+      if (!paused) presenceData.endTimestamp = Date.now() / 1000 + timeLeft;
+    }
+
+    if (cover) {
+      const artwork = document.querySelector<HTMLImageElement>(
+        ".player-bar-inner-wrap > .player-bar-artwork > img"
+      ).src;
+
+      presenceData.largeImageKey = artwork.includes("player_default_album")
+        ? "lastfm"
+        : artwork.replace("/174s/", "/1024s/");
+    } else presenceData.largeImageKey = "lastfm";
 
     presenceData.details = "Listening to:";
     presenceData.state = document
@@ -115,10 +168,9 @@ presence.on("UpdateData", () => {
 
     delete presenceData.startTimestamp;
     delete presenceData.buttons;
-
-    if (!paused) presenceData.endTimestamp = Date.now() / 1000 + timeLeft;
   }
 
+  if (!timestamps) delete presenceData.startTimestamp;
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
 });
