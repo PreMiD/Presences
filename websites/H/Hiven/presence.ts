@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
     // Presence for Hiven itself
   } else if (document.location.hostname === "app.hiven.io") {
     // Get Privacy Settings
-    const privacy = await presence.getSetting("privacy");
+    const privacy = await presence.getSetting<boolean>("privacy");
 
     presenceData.details = "Browsing Hiven...";
 

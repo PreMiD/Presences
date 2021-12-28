@@ -9,13 +9,14 @@
     "tr": "AniTürk online anime izleme sitesidir.",
     "en": "AniTurk is an online anime viewing site.",
     "ga_IE": "Is suíomh féachana anime ar líne é AniTurk.",
-    "nl": "AniTurk is een online site voor het bekijken van anime."
+    "nl": "AniTurk is een online site voor het bekijken van anime.",
+    "vi_VN": "AniTürk là trang web xem anime trực tuyến."
   },
   "url": [
     "www.aniturk.net",
     "aniturk.net"
   ],
-  "version": "1.0.11",
+  "version": "1.0.12",
   "logo": "https://i.imgur.com/xg4r7tM.png",
   "thumbnail": "https://i.imgur.com/0VdI8Mq.png",
   "color": "#ff31cb",

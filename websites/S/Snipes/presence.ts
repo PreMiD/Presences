@@ -7,9 +7,9 @@ presence.on("UpdateData", async function () {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    setTimeElapsed = await presence.getSetting("timeElapsed"),
-    setShowButtons = await presence.getSetting("showButtons"),
-    setSmallImages = await presence.getSetting("showSmallImages"),
+    setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
+    setShowButtons = await presence.getSetting<boolean>("showButtons"),
+    setSmallImages = await presence.getSetting<boolean>("showSmallImages"),
     urlpath = window.location.pathname.split("/"),
     urlpNum = /nl|fr|de/.test(urlpath[1]) ? 1 : 0;
 

@@ -32,8 +32,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    showPrivButton = await presence.getSetting("privateRoom"),
-    showButtons = await presence.getSetting("showButtons"),
+    showPrivButton = await presence.getSetting<boolean>("privateRoom"),
+    showButtons = await presence.getSetting<boolean>("showButtons"),
     header = getText(SelectorMap.header),
     status = getText(SelectorMap.status),
     game = getText(SelectorMap.game),

@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "jackbox"
     },
     // Check for presence setting
-    useName: boolean = await presence.getSetting("useName"),
-    useTime: boolean = await presence.getSetting("useTime");
+    useName = await presence.getSetting<boolean>("useName"),
+    useTime = await presence.getSetting<boolean>("useTime");
 
   if (useTime) presenceData.startTimestamp = browsingTimestamp;
 

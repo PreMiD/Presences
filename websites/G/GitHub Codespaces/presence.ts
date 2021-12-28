@@ -535,7 +535,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = lastFileChange;
     presenceData.largeImageKey = largeImageKey ? largeImageKey.image : "txt";
-    presenceData.details = (await presence.getSetting("details"))
+    presenceData.details = (await presence.getSetting<string>("details"))
       .replace(/%file%/g, filename)
       .replace(/%path%/g, filepath)
       .replace(/%folder%/g, filepath.split("/").reverse()[1])
@@ -548,7 +548,7 @@ presence.on("UpdateData", async () => {
         /%workspaceOrFolder%/g,
         workspace || filepath.split("/").reverse()[1]
       );
-    presenceData.state = (await presence.getSetting("state"))
+    presenceData.state = (await presence.getSetting<string>("state"))
       .replace(/%file%/g, filename)
       .replace(/%path%/g, filepath)
       .replace(/%folder%/g, filepath.split("/").reverse()[1])

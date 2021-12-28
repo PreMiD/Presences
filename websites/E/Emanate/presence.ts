@@ -85,10 +85,10 @@ emanate.on("UpdateData", async () => {
       break;
     } else if (emanate.isListening()) {
       const songData = emanate.getSong();
-      presenceData.details = (await emanate.getSetting("song_1"))
+      presenceData.details = (await emanate.getSetting<string>("song_1"))
         .replace("%title%", songData.title)
         .replace("%author%", songData.author);
-      presenceData.state = (await emanate.getSetting("song_2"))
+      presenceData.state = (await emanate.getSetting<string>("song_2"))
         .replace("%title%", songData.title)
         .replace("%author%", songData.author);
 
@@ -124,7 +124,7 @@ emanate.on("UpdateData", async () => {
     presenceData.state = document.querySelector("input").value;
   }
 
-  if (!(await emanate.getSetting("buttons")) && presenceData.buttons)
+  if (!(await emanate.getSetting<boolean>("buttons")) && presenceData.buttons)
     delete presenceData.buttons;
 
   if (!presenceData.details) emanate.setActivity();

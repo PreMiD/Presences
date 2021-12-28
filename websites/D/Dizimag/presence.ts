@@ -5,8 +5,9 @@ const presence = new Presence({
 let stream: { duration: number; currentTime: number; paused: boolean };
 presence.on(
   "iFrameData",
-  (data: { duration: number; currentTime: number; paused: boolean }) =>
-    (stream = data)
+  (data: { duration: number; currentTime: number; paused: boolean }) => {
+    stream = data;
+  }
 );
 
 presence.on("UpdateData", async () => {

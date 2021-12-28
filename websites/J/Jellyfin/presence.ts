@@ -186,6 +186,10 @@ interface Chapter {
 }
 
 interface MediaInfo {
+  AlbumArtist: string;
+  AlbumArtists: { Name: string; Id: string }[];
+  ArtistsItems: { Name: string; Id: string }[];
+  Artists: string[];
   Name: string;
   OriginalTitle: string;
   ServerId: string;
@@ -273,47 +277,60 @@ const // official website
 
 let ApiClient: ApiClient, presence: Presence;
 
+function jellyfinBasenameUrl(): string {
+  return `${`${location.protocol}//${location.host}${location.pathname.replace(
+    location.pathname.split("/").slice(-2).join("/"),
+    ""
+  )}`}`;
+}
+
+function mediaPrimaryImage(mediaId: string): string {
+  return `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
+}
+
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
 async function handleAudioPlayback(): Promise<void> {
-  // sometimes the buttons are not created fast enough
-  try {
-    const [audioElem] = document.getElementsByTagName("audio"),
-      [infoContainer] = document.getElementsByClassName("nowPlayingBar"),
-      title: HTMLAnchorElement = infoContainer
-        .getElementsByClassName("nowPlayingBarText")[0]
-        .querySelector("a"),
-      artist: HTMLDivElement = infoContainer.getElementsByClassName(
-        "nowPlayingBarSecondaryText"
-      )[0] as HTMLDivElement;
+  const [audioElem] = document.getElementsByTagName("audio"),
+    regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElem.src);
 
-    presenceData.details = `Listening to: ${
-      title ? title.textContent : "unknown title"
-    }`;
-    presenceData.state = `By: ${
-      artist ? artist.textContent : "unknown artist"
-    }`;
+  if (!regexResult) {
+    presence.error("Could not obtain audio itemId");
+    return;
+  }
 
-    // playing
-    if (!audioElem.paused) {
-      presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
-      presenceData.smallImageText = "Playing";
+  const [, mediaId] = regexResult,
+    info = await obtainMediaInfo(mediaId);
 
-      if (await presence.getSetting("showMediaTimestamps")) {
-        [, presenceData.endTimestamp] =
-          presence.getTimestampsfromMedia(audioElem);
-      }
+  presenceData.details = `Listening to: ${info.Name ?? "unknown title"}`;
+  presenceData.state = `By: ${info.AlbumArtist ?? "unknown artist"}`;
 
-      // paused
-    } else {
-      presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
-      presenceData.smallImageText = "Paused";
+  if (
+    (await presence.getSetting("showRichImages")) &&
+    (await presence.getSetting("showAlbumart")) &&
+    // some songs might not have albumart
+    document.querySelector<HTMLDivElement>(".nowPlayingImage").style
+      .backgroundImage
+  )
+    presenceData.largeImageKey = mediaPrimaryImage(mediaId);
 
-      delete presenceData.endTimestamp;
+  // playing
+  if (!audioElem.paused) {
+    presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+    presenceData.smallImageText = "Playing";
+
+    if (await presence.getSetting("showMediaTimestamps")) {
+      [, presenceData.endTimestamp] =
+        presence.getTimestampsfromMedia(audioElem);
     }
-  } catch (e) {
-    // do nothing
+
+    // paused
+  } else {
+    presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+    presenceData.smallImageText = "Paused";
+
+    delete presenceData.endTimestamp;
   }
 }
 
@@ -377,26 +394,13 @@ function getUserId(): string {
   }
 }
 
-// cache the requested media
-// const media: Array<MediaInfo> = [];
-const media: Record<string, string | MediaInfo> = {};
+const mediaInfoCache = new Map<string, MediaInfo>();
 
-/**
- * obtainMediaInfo - obtain the metadata of the given id
- *
- * @param  {string} itemId id of the item to get metadata of
- * @return {object}        metadata of the item
- */
-async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
-  const pending = "pending";
-  if (media[itemId] && media[itemId] !== pending) return media[itemId];
+async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
+  if (mediaInfoCache.has(itemId)) return mediaInfoCache.get(itemId);
 
-  media[itemId] = pending;
   const res = await fetch(
-      `${`${location.protocol}//${location.host}${location.pathname.replace(
-        location.pathname.split("/").slice(-2).join("/"),
-        ""
-      )}`}Users/${getUserId()}/Items/${itemId}`,
+      `${jellyfinBasenameUrl()}Users/${getUserId()}/Items/${itemId}`,
       {
         credentials: "include",
         headers: {
@@ -409,11 +413,47 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
         }
       }
     ),
-    mediaInfo = await res.json();
+    mediaInfo: MediaInfo = await res.json();
 
-  if (media[itemId] === pending) media[itemId] = mediaInfo;
+  mediaInfoCache.set(itemId, mediaInfo);
 
-  return media[itemId];
+  return mediaInfoCache.get(itemId);
+}
+
+const searchMediaCache = new Map<string, MediaInfo[]>();
+
+/**
+ * searchMedia - search Movie and Series
+ */
+async function searchMedia(searchTerm: string): Promise<MediaInfo[]> {
+  if (searchMediaCache.has(searchTerm)) return searchMediaCache.get(searchTerm);
+
+  if (/-[ ]S[0-9]+:E[0-9]+[ ]-/.test(searchTerm))
+    searchTerm = searchTerm.split(" - ").pop();
+
+  const res = await fetch(
+      `${jellyfinBasenameUrl()}Users/${getUserId()}/Items/?searchTerm=${searchTerm}` +
+        "&IncludePeople=false&IncludeMedia=true&IncludeGenres=false&IncludeStudios=false" +
+        "&IncludeArtists=false&IncludeItemTypes=Movie,Episode&Limit=3" +
+        "&Fields=PrimaryImageAspectRatio%2CCanDelete%2CBasicSyncInfo%2CMediaSourceCount" +
+        "&Recursive=true&EnableTotalRecordCount=false&ImageTypeLimit=1",
+      {
+        credentials: "include",
+        headers: {
+          "x-emby-authorization":
+            `MediaBrowser Client="${ApiClient._appName}",` +
+            `Device="${ApiClient._deviceName}",` +
+            `DeviceId="${ApiClient._deviceId}",` +
+            `Version="${ApiClient._appVersion}",` +
+            `Token="${ApiClient._serverInfo.AccessToken}"`
+        }
+      }
+    ),
+    resJson = await res.json();
+
+  searchMediaCache.set(searchTerm, resJson.Items);
+
+  return searchMediaCache.get(searchTerm);
 }
 
 /**
@@ -433,47 +473,45 @@ async function handleVideoPlayback(): Promise<void> {
   let title, subtitle;
 
   // title on the header
-  const headerTitleElem = document.querySelector(
-    "h3.pageTitle"
-  ) as HTMLHeadingElement;
+  const headerTitle =
+      document.querySelector<HTMLHeadingElement>("h3.pageTitle").innerText,
+    [mediaInfo] = await searchMedia(headerTitle);
 
-  // media metadata
-  let mediaInfo: string | MediaInfo;
-
-  // no background image, we're playing live tv
-  if (videoPlayerElem?.hasAttribute("poster")) {
-    mediaInfo = await obtainMediaInfo(
-      videoPlayerElem.getAttribute("poster").split("/")[4]
-    );
-  } else if (videoPlayerElem?.src?.match(/(mediaSourceId=)([a-z0-9]{32})/)) {
-    mediaInfo = await obtainMediaInfo(
-      videoPlayerElem.src.match(/(mediaSourceId=)([a-z0-9]{32})/).slice(2)[0]
-    );
-  }
+  let largeImage = PRESENCE_ART_ASSETS.logo;
 
   // display generic info
   if (!mediaInfo) {
-    title = "Watching unknown content";
-    subtitle = "No metadata could be obtained";
-  } else if (typeof mediaInfo === "string") return;
-  else {
+    title = "Watching:";
+    subtitle = "Unknown Content";
+  } else {
     switch (mediaInfo.Type) {
       case "Movie":
-        title = "Watching a Movie:";
-        subtitle = headerTitleElem.textContent;
+        title = "Watching:";
+        subtitle = mediaInfo.Name;
+        if (
+          (await presence.getSetting("showRichImages")) &&
+          (await presence.getSetting("showMoviePoster"))
+        )
+          largeImage = mediaPrimaryImage(mediaInfo.Id);
+
         break;
-      case "Series":
-        title = "Watching a Series:";
-        subtitle = headerTitleElem.textContent;
-        break;
-      case "TvChannel":
-        title = "Watching Live Tv";
-        subtitle = headerTitleElem.textContent;
+      case "Episode":
+        title = `Watching: ${mediaInfo.SeriesName}`;
+        subtitle = `${/S[0-9]+:E[0-9]+/.exec(headerTitle)} - ${mediaInfo.Name}`;
+
+        if (
+          (await presence.getSetting("showRichImages")) &&
+          (await presence.getSetting("showTvShowPoster"))
+        )
+          largeImage = mediaPrimaryImage(mediaInfo.ParentBackdropItemId);
         break;
       default:
         title = `Watching ${mediaInfo.Type}`;
         subtitle = mediaInfo.Name;
     }
+
+    presenceData.largeImageKey = largeImage;
+
     // watching live tv
     if (mediaInfo && mediaInfo.Type === "TvChannel") {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
@@ -484,7 +522,7 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
 
-      if (await presence.getSetting("showMediaTimestamps")) {
+      if (await presence.getSetting<boolean>("showMediaTimestamps")) {
         [, presenceData.endTimestamp] =
           presence.getTimestampsfromMedia(videoPlayerElem);
       }
@@ -584,7 +622,7 @@ async function handleWebClient(): Promise<void> {
   // obtain the path, on the example would return "login.html"
   // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
 
-  switch (location.hash.split("?")[0].substr(3)) {
+  switch (location.hash.split("?")[0].substring(3)) {
     case "login.html":
       presenceData.state = "Logging in";
       break;
@@ -680,6 +718,8 @@ async function handleWebClient(): Promise<void> {
  * setDefaultsToPresence - set default values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
+  presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
+
   if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
   if (presenceData.smallImageText) delete presenceData.smallImageText;
@@ -689,7 +729,7 @@ async function setDefaultsToPresence(): Promise<void> {
   if (presenceData.endTimestamp && isNaN(presenceData.endTimestamp))
     delete presenceData.endTimestamp;
 
-  if (await presence.getSetting("showTimestamps"))
+  if (await presence.getSetting<boolean>("showTimestamps"))
     presenceData.startTimestamp = Date.now();
 }
 
@@ -700,7 +740,7 @@ async function setDefaultsToPresence(): Promise<void> {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isJellyfinWebClient(): Promise<boolean> {
-  ApiClient ??= await presence.getPageletiable("ApiClient");
+  ApiClient ??= await presence.getPageletiable<ApiClient>("ApiClient");
 
   if (ApiClient && typeof ApiClient === "object") {
     if (ApiClient._appName && ApiClient._appName === "Jellyfin Web")

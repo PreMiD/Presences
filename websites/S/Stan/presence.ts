@@ -13,7 +13,7 @@ const presence = new Presence({
         viewEpisode: "general.buttonViewEpisode",
         viewList: "netflix.viewList"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     );
   },
   data: {
@@ -55,22 +55,23 @@ const presence = new Presence({
     oldLang: "null"
   };
 
-let strings = getStrings();
+let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "stan",
-      details: (await strings).browse,
+      details: strings.browse,
       smallImageKey: "browse",
       startTimestamp: data.startedSince
     },
-    newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy");
+    [newLang, privacy] = await Promise.all([
+      presence.getSetting<string>("lang").catch(() => "en"),
+      presence.getSetting<boolean>("privacy")
+    ]);
 
-  data.oldLang ??= newLang;
-  if (data.oldLang !== newLang) {
+  if (data.oldLang !== newLang || !strings) {
     data.oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   data.presence = {
@@ -87,16 +88,14 @@ presence.on("UpdateData", async () => {
 
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
 
         [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
         presenceData.buttons = [
           {
-            label: data.meta.episode
-              ? (await strings).viewEpisode
-              : "Watch Video",
+            label: data.meta.episode ? strings.viewEpisode : "Watch Video",
             url: document.URL
           }
         ];
@@ -127,7 +126,7 @@ presence.on("UpdateData", async () => {
     "/my/list": {
       disabled: privacy,
       async setPresenceData() {
-        presenceData.details = (await strings).viewList;
+        presenceData.details = strings.viewList;
       }
     },
     "/my/history": {
@@ -138,7 +137,7 @@ presence.on("UpdateData", async () => {
     },
     "/search": {
       async setPresenceData() {
-        presenceData.details = (await strings).searchFor;
+        presenceData.details = strings.searchFor;
         presenceData.state = new URLSearchParams(document.location.search).get(
           "q"
         );
@@ -178,13 +177,13 @@ presence.on("UpdateData", async () => {
           uses: "details",
           if: {
             k: privacy,
-            v: (await strings).searchSomething
+            v: strings.searchSomething
           }
         },
         {
           page: "/programs/([0-9]+)/play",
           uses: "details",
-          setTo: await presence.getSetting("seriesDetail"),
+          setTo: await presence.getSetting<string>("seriesDetail"),
           if: {
             k: privacy,
             v: "Watching something"
@@ -203,7 +202,7 @@ presence.on("UpdateData", async () => {
         {
           page: "/programs/([0-9]+)/play",
           uses: "state",
-          setTo: await presence.getSetting("seriesState"),
+          setTo: await presence.getSetting<string>("seriesState"),
           if: {
             k: privacy,
             delete: true
@@ -232,7 +231,7 @@ presence.on("UpdateData", async () => {
 
   for (const setting of data.settings) {
     const settingValue = await presence
-      .getSetting(setting.id)
+      .getSetting<boolean>(setting.id)
       .catch(() => null);
 
     if (

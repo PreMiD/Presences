@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     },
-    privacy = await presence.getSetting("privacy"),
-    sprivacy = await presence.getSetting("super-privacy");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    sprivacy = await presence.getSetting<boolean>("super-privacy");
   if (sprivacy || window.location.host === "kaniwork.com:8080")
     presenceData.details = "Browsing";
   else {

@@ -123,8 +123,10 @@ function abbrNum(number: number, decPlaces: number): string {
 }
 
 presence.on("UpdateData", async () => {
-  const bet = await presence.getSetting("bet"),
-    buttons = await presence.getSetting("buttons"),
+  const [bet, buttons] = await Promise.all([
+      presence.getSetting<boolean>("bet"),
+      presence.getSetting<boolean>("buttons")
+    ]),
     presenceData: PresenceData = {
       largeImageKey: "salty"
     };

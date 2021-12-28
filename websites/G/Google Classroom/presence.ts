@@ -18,7 +18,7 @@ async function getStrings() {
       classmembers: "google classroom.classmembers",
       settings: "google classroom.settings"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
@@ -32,8 +32,8 @@ presence.on("UpdateData", async () => {
     },
     path = document.location.pathname.split("/"),
     [newLang, privacy] = await Promise.all([
-      presence.getSetting("lang").catch(() => "en"),
-      presence.getSetting("privacy")
+      presence.getSetting<string>("lang").catch(() => "en"),
+      presence.getSetting<boolean>("privacy")
     ]);
 
   if (oldLang !== newLang) {

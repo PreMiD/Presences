@@ -21,19 +21,24 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       versions.at(-1)
     ];
   },
-  isVersionBumped = (oldVer: string, newVer: string) => {
-    const oldVerSplit = oldVer.split(".").map(Number),
-      newVerSplit = newVer.split(".").map(Number);
-    for (let i = 0; i < oldVerSplit.length; i++) {
-      if (newVerSplit[i] > oldVerSplit[i]) return true;
-      if (newVerSplit[i] < oldVerSplit[i]) return false;
-    }
-    return false;
-  },
   stats = {
     validated: 0,
     validatedWithWarnings: 0,
     failedToValidate: 0
+  },
+  isValidVersion = (oldVer: string, newVer: string): [boolean, string?] => {
+    if (!oldVer) {
+      if (newVer !== "1.0.0") return [false, "invalidVerNew"];
+      else return [true];
+    } else {
+      const oldVerSplit = oldVer.split(".").map(Number),
+        newVerSplit = newVer.split(".").map(Number);
+      for (let i = 0; i < oldVerSplit.length; i++) {
+        if (newVerSplit[i] > oldVerSplit[i]) return [true];
+        if (newVerSplit[i] < oldVerSplit[i]) return [false];
+      }
+      return [false];
+    }
   },
   validated = (service: string): void => {
     console.log(green(`✔ ${service}`));
@@ -45,8 +50,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     stats.validatedWithWarnings++;
   },
   failedToValidate = (service: string, errors: string[]): void => {
-    console.log(red(`✖ ${service}`));
-    console.log(`::group::${service}`);
+    console.log(`::group::${red(`✖ ${service}`)}`);
     console.log(errors.join("\n"));
     console.log("::endgroup::");
     stats.failedToValidate++;
@@ -58,8 +62,20 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       return null;
     }
   },
+  createAnnotation = (params: CreateAnnotationParams): string => {
+    const input = [];
+
+    for (const [key, value] of Object.entries(params)) {
+      if (["type", "message"].includes(key)) continue;
+      else input.push(`${key}=${value}`);
+    }
+
+    return `::${params.type} ${input.join(",")}::${params.message}`;
+  },
   changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
-  metaFiles = changedFiles.filter(f => f.endsWith("metadata.json"));
+  metaFiles = [
+    ...new Set(changedFiles.filter(f => f.endsWith("metadata.json")))
+  ];
 
 (async (): Promise<void> => {
   console.log(blue("Getting latest schema..."));
@@ -75,7 +91,12 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 
     if (!meta) {
       failedToValidate(folder, [
-        `::error file=${metaFile},title=Invalid JSON::Unable to parse the JSON file`
+        createAnnotation({
+          type: "error",
+          file: metaFile,
+          title: "Invalid JSON",
+          message: "Unable to parse the JSON file"
+        })
       ]);
       continue;
     }
@@ -106,71 +127,101 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     });
 
     if (
-      result.valid &&
+      isValidVersion(oldVersion, newVersion)[0] &&
+      folder === meta.service &&
       !invalidLangs.length &&
-      folder === service &&
-      ((!oldVersion && newVersion === "1.0.0") ||
-        isVersionBumped(oldVersion, newVersion))
+      result.valid
     ) {
-      if (meta.$schema && meta.$schema !== latestSchema)
+      if (meta.$schema && meta.$schema !== latestSchema) {
         validatedWithWarnings(
           service,
-          `::warning file=${metaFile},line=${getLine(
-            "$schema"
-          )},title=instance.$schema::Using out of date schema, the latest version is ${latestSchemaVersion}`
+          createAnnotation({
+            type: "warning",
+            file: metaFile,
+            line: getLine("$schema"),
+            title: "instance.$schema",
+            message: `Using out of date schema, the latest version is ${latestSchemaVersion}`
+          })
         );
-      else validated(service);
+      } else validated(service);
     } else {
-      const errors: string[] = [];
+      const errors: string[] = [],
+        versionCheck = isValidVersion(oldVersion, newVersion);
 
-      if (oldVersion && !isVersionBumped(oldVersion, newVersion)) {
-        errors.push(
-          `::error file=${metaFile},line=${getLine(
-            "version"
-          )},title=instance.version::The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`
-        );
-      }
-
-      if (!oldVersion && newVersion !== "1.0.0") {
-        errors.push(
-          `::error file=${metaFile},line=${getLine(
-            "version"
-          )},title=instance.version::The version of a new presence must start at "1.0.0".`
-        );
-      }
-
-      if (folder !== service)
-        errors.push(
-          `::error file=${metaFile},line=${getLine(
-            "service"
-          )},title=instance.service::does not equal to the folder name`
-        );
-
-      for (const error of result.errors) {
-        let property = error.property.split(".").at(1);
-
-        if (!property) {
-          property = error.message.match(/"(.*)"/g)[0].replace(/"/g, "");
+      if (!versionCheck[0]) {
+        if (!versionCheck[1]) {
           errors.push(
-            `::error file=${metaFile},line=${getLine(
-              property
-            )},title=instance.${property}::${error.message} @ ${error.property}`
+            createAnnotation({
+              type: "error",
+              file: metaFile,
+              line: getLine("version"),
+              title: "instance.version",
+              message: `The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`
+            })
           );
         } else {
-          if (property.match(/\[([0-9]+)\]/)) {
-            const index = property.match(/\[([0-9]+)\]/)![1];
+          errors.push(
+            createAnnotation({
+              type: "error",
+              file: metaFile,
+              line: getLine("version"),
+              title: "instance.version",
+              message: 'The version of a new presence must start at "1.0.0"'
+            })
+          );
+        }
+      }
+
+      if (folder !== service) {
+        errors.push(
+          createAnnotation({
+            type: "error",
+            file: metaFile,
+            line: getLine("service"),
+            title: "instance.service",
+            message: "does not equal to the folder name"
+          })
+        );
+      }
+
+      for (const error of result.errors) {
+        let property = error.property.split(".").at(1) as key;
+
+        if (!property) {
+          property = error.message.match(/"(.*)"/).at(1) as key;
+          errors.push(
+            createAnnotation({
+              type: "error",
+              file: metaFile,
+              line: getLine(property),
+              title: `instance.${property}`,
+              message: `${error.message} @ ${error.property}`
+            })
+          );
+        } else {
+          const messsage = property.match(/\[([0-9]+)\]/);
+
+          if (messsage) {
+            const [propertyName, index] = messsage;
 
             errors.push(
-              `::error file=${metaFile},line=${getLine(
-                property.replace(/\[([0-9]+)\]/, ""),
-                parseInt(index)
-              )},title=${error.property}::${error.message} @ ${error.property}`
+              createAnnotation({
+                type: "error",
+                file: metaFile,
+                line: getLine(propertyName as key, parseInt(index)),
+                title: error.property,
+                message: `${error.message} @ ${error.property}`
+              })
             );
           } else {
             errors.push(
-              `::error file=${metaFile},line=${getLine(property)},title=${
-                error.property
-              }::${error.message} @ ${error.property}`
+              createAnnotation({
+                type: "error",
+                file: metaFile,
+                line: getLine(property),
+                title: error.property,
+                message: `${error.message} @ ${error.property}`
+              })
             );
           }
         }
@@ -178,17 +229,20 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 
       for (const invalidLang of invalidLangs) {
         errors.push(
-          `::error file=${metaFile},line=${getLine(
-            "description",
-            invalidLang
-          )},title=instance.description.${invalidLang}::"${invalidLang}" is not a valid language or is a unsupported language`
+          createAnnotation({
+            type: "error",
+            file: metaFile,
+            line: getLine("description", invalidLang),
+            title: `instance.description.${invalidLang}`,
+            message: `${invalidLang}" is not a valid language or is a unsupported language`
+          })
         );
       }
 
       failedToValidate(service, errors);
     }
 
-    function getLine(line: string, value?: string | number) {
+    function getLine(line: key, value?: string | number) {
       const AST = ParseJSON(JSON.stringify(meta, null, 2), {
         loc: true,
         source: metaFile
@@ -243,6 +297,8 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     console.log(yellow("One or more services validated, but with warnings."));
 })();
 
+type key = keyof metadata;
+
 interface metadata extends Metadata {
   $schema: string;
 }
@@ -262,4 +318,15 @@ interface APIQuery {
       }
     ];
   };
+}
+
+interface CreateAnnotationParams {
+  type: "warning" | "error" | "notice";
+  title?: string;
+  file: string;
+  line?: string | number;
+  endLine?: string | number;
+  col?: string | number;
+  endColumn?: string | number;
+  message: string;
 }
