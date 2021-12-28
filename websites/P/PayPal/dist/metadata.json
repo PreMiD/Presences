@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "レム",
+    "id": "225657353696051200"
+  },
+  "contributors": [
+    {
+      "name": "Senko Nyan",
+      "id": "251098700259131404"
+    }
+  ],
+  "service": "PayPal",
+  "description": {
+    "en": "PayPal is a online payment service."
+  },
+  "url": "www.paypal.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/3Wg0uLc.png",
+  "thumbnail": "https://i.imgur.com/kll1Dhl.png",
+  "color": "#3b7bbf",
+  "category": "other",
+  "tags": [
+    "paypal",
+    "payment"
+  ]
+}
