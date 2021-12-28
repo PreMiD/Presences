@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
@@ -21,7 +21,9 @@ presence.on("UpdateData", () => {
   } else if (path === "/albums") presenceData.details = "Browsing albums";
   else if (path.startsWith("/album")) {
     presenceData.details = "Viewing an album:";
-    [presenceData.state] = document.title.split(/-/, 1);
+    presenceData.state = (await presence.getSetting<boolean>("albumname"))
+      ? document.title.split(/-/, 1)[0]
+      : "(Hidden in presence settings)";
   } else if (path.startsWith("/archive"))
     presenceData.details = "Viewing the archive";
   else presenceData;

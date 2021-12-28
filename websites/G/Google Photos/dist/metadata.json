@@ -22,5 +22,13 @@
     "videos",
     "storage",
     "share"
+  ],
+  "settings": [
+    {
+      "id": "albumname",
+      "title": "Show Album Name",
+      "icon": "fas fa-images",
+      "value": false
+    }
   ]
 }
