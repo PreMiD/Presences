@@ -9,8 +9,8 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     [messageRecipient, callRecipient] = await Promise.all([
-      presence.getSetting("message"),
-      presence.getSetting("call")
+      presence.getSetting<boolean>("message"),
+      presence.getSetting<boolean>("call")
     ]);
 
   if (document.location.pathname.includes("/groupcall/")) {
