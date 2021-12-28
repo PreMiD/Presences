@@ -110,8 +110,16 @@ presence.on("UpdateData", async () => {
       const name = document.querySelector(
         "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
       ).innerHTML;
+      const image = document
+        .querySelector(
+          "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
+        )
+        ?.getAttribute("src");
       assign(presenceData, {
-        details: `Viewing ${name}`
+        details: `Viewing ${name}`,
+        largeImageKey: image ?? "logo",
+        smallImageKey: image ? "logo" : "",
+        smallImageText: image ? name : ""
       });
     } else if (uid && eid) {
       const { name, episode, part } = getInfo();
