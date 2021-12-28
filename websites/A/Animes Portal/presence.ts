@@ -11,17 +11,70 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.pathname === "/") {
+  const pathname: string = document.location.pathname;
+  const paths = pathname.split("/");
+  if (!paths[0]) paths.shift();
+
+  if (pathname === "/") {
     assign(presenceData, {
       details: "Home",
       state: "Viewing the home page"
     });
-  } else if (document.location.pathname.startsWith("/animes")) {
+  } else if (pathname.startsWith("/messages")) {
+    if (!paths[1]) {
+      assign(presenceData, {
+        details: "Viewing messages"
+      });
+    } else if (paths[1].startsWith("pm-")) {
+      let body = document.querySelector(
+        "body > main.animated > div.wrapper > div.dialogPadding"
+      );
+      let username = body.querySelector("span.username").textContent;
+      let avatar = parseAvatarFromAttr(
+        body.querySelector("a.avatar").attributes.getNamedItem("style")
+          .textContent
+      );
+
+      assign(presenceData, {
+        details: `Messaging ${username}`,
+        smallImageKey: avatar,
+        smallImageText: `Messaging ${username}`
+      });
+    }
+  } else if (pathname === "/chat") {
+    assign(presenceData, {
+      details: "Chatting in the chat"
+    });
+  } else if (pathname.startsWith("/otakus")) {
+    if (!paths[1] || paths[1].startsWith("page-")) {
+      assign(presenceData, {
+        details: "Viewing otakus",
+        state: paths[1] ? "Page " + paths[1].replace("page-", "") : ""
+      });
+    } else if (paths[1]) {
+      const body = document.querySelector(
+        "body > main.animated > section.wrapper > div.header"
+      );
+      const username = body.querySelector(
+        "div.content > div.holder > span.heading"
+      ).textContent;
+
+      let avatar = parseAvatarFromAttr(
+        body.querySelector("a.avatar").attributes.getNamedItem("style")
+          .textContent
+      );
+
+      assign(presenceData, {
+        details: `Viewing otaku ${username}`,
+        largeImageKey: avatar,
+        smallImageKey: "logo",
+        smallImageText: username
+      });
+    }
+  } else if (pathname.startsWith("/animes")) {
     const filter: string = new URL(document.location.href).searchParams.get(
       "filters"
     );
-    const paths = document.location.pathname.split("/");
-    if (!paths[0]) paths.shift();
     const filters: string[] = [];
 
     if (filter) {
@@ -49,9 +102,7 @@ presence.on("UpdateData", async () => {
           filters.includes("bgsub") ? `with BG sub` : ""
         }`
       });
-  } else if (document.location.pathname.startsWith("/anime/")) {
-    const paths = document.location.pathname.split("/");
-    if (!paths[0]) paths.shift();
+  } else if (pathname.startsWith("/anime/")) {
     const uid = paths[1];
     const eid = paths[2];
 
@@ -63,19 +114,7 @@ presence.on("UpdateData", async () => {
         details: `Viewing ${name}`
       });
     } else if (uid && eid) {
-      const ep = document.querySelector(
-        "body > main.animated > div.wrapper > section.holder > h1.heading > b#num"
-      ).innerHTML;
-      const name = document.querySelector(
-        "body > main.animated > div.wrapper > section.holder > h2.heading > a"
-      ).innerHTML;
-      let part = between(ep, "(", ")");
-      let rep = ep;
-
-      if (ep.includes("(") && ep.includes(")")) {
-        rep = ep.replace(` (${part})`, "");
-        part = part.replace(/\D/g, "");
-      } else part = null;
+      const { name, episode, part } = getInfo();
 
       const playing = document
         .querySelector(
@@ -86,7 +125,7 @@ presence.on("UpdateData", async () => {
       if (!playing)
         assign(presenceData, {
           details: `Watching ${name}`,
-          state: `Episode ${rep} ${part ? `(part ${part})` : ""}`
+          state: `Episode ${episode} ${part ? `(part ${part})` : ""}`
         });
       else return;
     }
@@ -97,9 +136,10 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity();
 });
 
-export interface iframeData {
+declare interface iframeData {
   currentTime: number;
   duration: number;
+  paused: boolean;
 }
 
 presence.on("iFrameData", async (data: iframeData) => {
@@ -108,6 +148,35 @@ presence.on("iFrameData", async (data: iframeData) => {
     largeImageKey: "logo"
   };
 
+  const { name, episode, part } = getInfo();
+
+  if (!data.paused)
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(data.currentTime),
+        Math.floor(data.duration)
+      );
+  else
+    assign(presenceData, {
+      smallImageKey: "start",
+      smallImageText: "Paused"
+    });
+
+  assign(presenceData, {
+    details: `Watching ${name}`,
+    state: `Episode ${episode} ${part ? `(part ${part})` : ""}`
+  });
+
+  if (presenceData.details) {
+    presence.setActivity(presenceData);
+  } else presence.setActivity();
+});
+
+function getInfo(): {
+  name: string;
+  episode: number;
+  part: number;
+} {
   const ep = document.querySelector(
     "body > main.animated > div.wrapper > section.holder > h1.heading > b#num"
   ).innerHTML;
@@ -122,21 +191,30 @@ presence.on("iFrameData", async (data: iframeData) => {
     part = part.replace(/\D/g, "");
   } else part = null;
 
-  [presenceData.startTimestamp, presenceData.endTimestamp] =
-    presence.getTimestamps(
-      Math.floor(data.currentTime),
-      Math.floor(data.duration)
-    );
+  return {
+    name: name,
+    episode: parseInt(rep, 10),
+    part: parseInt(part, 10)
+  };
+}
 
-  assign(presenceData, {
-    details: `Watching ${name}`,
-    state: `Episode ${rep} ${part ? `(part ${part})` : ""}`
-  });
+function parseAvatarFromAttr(attr: string) {
+  console.log(attr);
 
-  if (presenceData.details) {
-    presence.setActivity(presenceData);
-  } else presence.setActivity();
-});
+  let avatar;
+  if (attr.includes("background-image: url('"))
+    avatar = between(attr, "background-image: url('", "')");
+  else if (attr.includes("background-image: url("))
+    avatar = between(attr, "background-image: url(", ")");
+
+  if (
+    avatar === "https://static.animes-portal.info/assets/images/avatar.svg" ||
+    !avatar
+  )
+    avatar = "defaultav";
+
+  return avatar;
+}
 
 function assign(data: PresenceData, newdata: PresenceData) {
   return Object.assign(data, newdata);

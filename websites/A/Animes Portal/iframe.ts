@@ -4,6 +4,7 @@ iframe.on("UpdateData", async () => {
   if (video && video.duration && !isNaN(video.duration))
     iframe.send({
       duration: video.duration,
-      currentTime: video.currentTime
+      currentTime: video.currentTime,
+      paused: video.paused
     });
 });
