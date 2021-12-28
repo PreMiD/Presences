@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "837754527217877003"
   }),
-  timestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let articleTitle: string,
   articleDate: string,
@@ -12,10 +12,10 @@ let articleTitle: string,
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: timestamp
+      startTimestamp: browsingTimestamp
     },
-    showButtons: boolean = await presence.getSetting("buttons"),
-    showTimestamps: boolean = await presence.getSetting("timestamps");
+    showButtons = await presence.getSetting<boolean>("buttons"),
+    showTimestamps = await presence.getSetting<boolean>("timestamps");
 
   switch (window.location.pathname) {
     case "/":
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = gameTitle;
 
     presenceData.buttons = [
-      { label: "View " + gameTitle, url: window.location.href }
+      { label: `View ${gameTitle}`, url: window.location.href }
     ];
   } else if (window.location.pathname.includes("/people/")) {
     profileTitle = document
@@ -160,22 +160,14 @@ presence.on("UpdateData", async () => {
 
     delete presenceData.buttons;
     presenceData.buttons = [
-      { label: "View " + profileTitle, url: window.location.href }
+      { label: `View ${profileTitle}`, url: window.location.href }
     ];
   }
 
-  if (!showButtons && presenceData.buttons) {
-    delete presenceData.buttons;
-  }
+  if (!showButtons && presenceData.buttons) delete presenceData.buttons;
 
-  if (!showTimestamps) {
-    delete presenceData.startTimestamp;
-  }
+  if (!showTimestamps) delete presenceData.startTimestamp;
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

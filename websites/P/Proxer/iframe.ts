@@ -4,9 +4,9 @@ iframe.on("UpdateData", async () => {
   // Exclude proxer
   if (document.getElementById("proxerToken")) return;
 
-  const videos = document.getElementsByTagName("video");
-  if (videos.length == 0) return;
-  const video = videos[0];
+  const videos = document.getElementsByTagName("video"),
+    [video] = videos;
+  if (videos.length === 0) return;
 
   if (video) {
     // Exclude proxer ads
@@ -16,7 +16,5 @@ iframe.on("UpdateData", async () => {
       duration: video.duration,
       paused: video.paused
     });
-  } else {
-    iframe.send(null);
-  }
+  } else iframe.send(null);
 });

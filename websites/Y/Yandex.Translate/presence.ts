@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "799583813582848041"
   }),
-  browsingStamp: number = Math.floor(Date.now() / 1000);
+  browsingTimestamp: number = Math.floor(Date.now() / 1000);
 
 let from: string, to: string, typet: string;
 
@@ -10,32 +10,35 @@ presence.on("UpdateData", async () => {
     largeImageKey: "yt"
   };
 
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     typet = "Text";
-    from = document.querySelector("#srcLangButton").innerHTML;
-    to = document.querySelector("#dstLangButton").innerHTML;
+    from = document.querySelector("#srcLangButton").textContent;
+    to = document.querySelector("#dstLangButton").textContent;
   } else if (
-    document.location.pathname == "/translate" ||
-    document.location.pathname == "/doc"
+    document.location.pathname === "/translate" ||
+    document.location.pathname === "/doc"
   ) {
-    typet = document.location.pathname == "/translate" ? "Website" : "Document";
-    from = document.querySelector("#srcLangButton > #sourceLangText").innerHTML;
-    to = document.querySelector("#dstLangButton > #targetLangText").innerHTML;
-  } else if (document.location.pathname == "/ocr") {
+    typet =
+      document.location.pathname === "/translate" ? "Website" : "Document";
+    from = document.querySelector(
+      "#srcLangButton > #sourceLangText"
+    ).textContent;
+    to = document.querySelector("#dstLangButton > #targetLangText").textContent;
+  } else if (document.location.pathname === "/ocr") {
     typet = "Image";
-    from = document.querySelector("#sourceLangButton").innerHTML;
-    to = document.querySelector("#targetLangButton").innerHTML;
+    from = document.querySelector("#sourceLangButton").textContent;
+    to = document.querySelector("#targetLangButton").textContent;
   } else {
     typet = "Text";
     from = "Choosing...";
     to = "Choosing...";
   }
 
-  const showTime: boolean = await presence.getSetting("stamp"),
-    showType: boolean = await presence.getSetting("type");
+  const showTime = await presence.getSetting<boolean>("stamp"),
+    showType = await presence.getSetting<boolean>("type");
 
-  presenceData.startTimestamp = showTime ? browsingStamp : null;
-  if (presenceData.startTimestamp == null) delete presenceData.startTimestamp;
+  presenceData.startTimestamp = showTime ? browsingTimestamp : null;
+  if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
 
   if (showType) {
     presenceData.details = `Translating: ${typet}`;

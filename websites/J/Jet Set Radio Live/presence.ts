@@ -5,15 +5,19 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
-    const startTime = Date.now(),
-      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
+  getTimestamps = (videoTime: number, videoDuration: number): number[] => {
+    const startTime = Date.now();
+    return [
+      Math.floor(startTime / 1000),
+      Math.floor(startTime / 1000) - videoTime + videoDuration
+    ];
   },
   stationIDMap: { [key: string]: string } = {
+    outerspace: "Outer Space",
     classic: "Classic",
     future: "Future",
     ultraremixes: "Ultra Remixes",
+    garage: "The Garage",
     ggs: "GG's",
     noisetanks: "Noise Tanks",
     poisonjam: "Poison Jam",
@@ -24,53 +28,60 @@ const presence = new Presence({
     goldenrhinos: "Golden Rhinos",
     ganjah: "Ganjah",
     lofi: "Lo-Fi",
-    siivagunner: "SilvaGunner x JSR",
+    chiptunes: "Chiptunes",
+    retroremix: "Retro Remix",
+    classical: "Classical Remix",
+    revolution: "Revolution",
+    endofdays: "End of Days",
     silvagunner: "SilvaGunner x JSR",
     futuregeneration: "Future Generation",
     jetmashradio: "Jet Mash Radio",
-    djchidow: "DJ Chidow",
+    crazytaxi: "Crazy Taxi",
+    ollieking: "Ollie King",
+    toejamandearl: "Toe Jam & Earl",
     hover: "Hover",
     butterflies: "Butterflies",
-    toejamandearl: "Toe Jam & Earl",
-    ollieking: "Ollie King",
-    crazytaxi: "Crazy Taxi",
-    revolution: "Revolution",
-    endofdays: "End of Days"
+    bonafidebloom: "BonafideBloom",
+    djchidow: "DJ Chidow",
+    verafx: "VeraFX",
+    summer: "Summer",
+    halloween: "Halloween",
+    christmas: "Christmas",
+    snowfi: "Snow-Fi"
   };
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "jsrl"
     },
-    audio: HTMLAudioElement = document.querySelector("#audioPlayer"),
+    audio = document.querySelector<HTMLAudioElement>("#audioPlayer"),
     songName = document.querySelector(
       "#programInformationText.objectSettings.touchableOff"
     ),
-    loadingSong = document.querySelector(
-      '#loadingTrackCircle:not([style*="hidden"])'
-    ),
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (songName.textContent.length < 1 || !audio) {
     presenceData.details = "Not tuned in.";
     presenceData.smallImageKey = "pause";
     presenceData.smallImageText = (await strings).pause;
   } else {
-    const stationID = (<HTMLImageElement>(
-        document.querySelector("#graffitiSoul")
-      )).src.split("/")[5],
-      timestamps = getTimestamps(
-        Math.floor(audio.currentTime),
-        Math.floor(audio.duration)
-      );
+    const [, , , , , stationID] = document
+      .querySelector<HTMLImageElement>("#graffitiSoul")
+      .src.split("/");
     presenceData.largeImageKey = stationID;
     presenceData.state = stationIDMap[stationID];
-    if (!audio.paused && !loadingSong) {
-      if (await presence.getSetting("song"))
+    if (
+      !audio.paused &&
+      !document.querySelector('#loadingTrackCircle:not([style*="hidden"])')
+    ) {
+      if (await presence.getSetting<boolean>("song"))
         presenceData.details = songName.textContent;
-      if (await presence.getSetting("timestamp")) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+      if (await presence.getSetting<boolean>("timestamp")) {
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          getTimestamps(
+            Math.floor(audio.currentTime),
+            Math.floor(audio.duration)
+          );
       }
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).play;
@@ -80,19 +91,16 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).pause;
     }
 
-    if (buttons)
+    if (buttons) {
       presenceData.buttons = [
         {
           label: "Tune In",
           url: document.URL
         }
       ];
+    }
   }
 
-  if (presenceData.details == null && presenceData.state == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (!presenceData.details && presenceData.state) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

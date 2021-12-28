@@ -13,7 +13,7 @@ const presence = new Presence({
         viewEpisode: "general.buttonViewEpisode",
         viewList: "netflix.viewList"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     );
   },
   data: {
@@ -55,50 +55,47 @@ const presence = new Presence({
     oldLang: "null"
   };
 
-let strings = getStrings();
+let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "stan",
-      details: (await strings).browse,
+      details: strings.browse,
       smallImageKey: "browse",
       startTimestamp: data.startedSince
     },
-    newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy");
+    [newLang, privacy] = await Promise.all([
+      presence.getSetting<string>("lang").catch(() => "en"),
+      presence.getSetting<boolean>("privacy")
+    ]);
 
-  if (!data.oldLang) {
+  if (data.oldLang !== newLang || !strings) {
     data.oldLang = newLang;
-  } else if (data.oldLang !== newLang) {
-    data.oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   data.presence = {
     "/programs/([0-9]+)/play": {
       async setPresenceData() {
-        const video = document.querySelector("video"),
-          timestamps = presence.getTimestampsfromMedia(video);
+        const video = document.querySelector("video");
 
-        data.meta["title"] =
+        data.meta.title =
           document.querySelector("h1.vjs-metadata.vjs-metadata--title")
             ?.textContent ?? "Loading...";
-        data.meta["episode"] = document.querySelector(
+        data.meta.episode = document.querySelector(
           "h2.vjs-metadata.vjs-metadata--subtitle"
         )?.textContent;
 
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
 
-        presenceData.endTimestamp = timestamps[1];
+        [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
         presenceData.buttons = [
           {
-            label: data.meta["episode"]
-              ? (await strings).viewEpisode
-              : "Watch Video",
+            label: data.meta.episode ? strings.viewEpisode : "Watch Video",
             url: document.URL
           }
         ];
@@ -129,7 +126,7 @@ presence.on("UpdateData", async () => {
     "/my/list": {
       disabled: privacy,
       async setPresenceData() {
-        presenceData.details = (await strings).viewList;
+        presenceData.details = strings.viewList;
       }
     },
     "/my/history": {
@@ -140,7 +137,7 @@ presence.on("UpdateData", async () => {
     },
     "/search": {
       async setPresenceData() {
-        presenceData.details = (await strings).searchFor;
+        presenceData.details = strings.searchFor;
         presenceData.state = new URLSearchParams(document.location.search).get(
           "q"
         );
@@ -180,13 +177,13 @@ presence.on("UpdateData", async () => {
           uses: "details",
           if: {
             k: privacy,
-            v: (await strings).searchSomething
+            v: strings.searchSomething
           }
         },
         {
           page: "/programs/([0-9]+)/play",
           uses: "details",
-          setTo: await presence.getSetting("seriesDetail"),
+          setTo: await presence.getSetting<string>("seriesDetail"),
           if: {
             k: privacy,
             v: "Watching something"
@@ -194,18 +191,18 @@ presence.on("UpdateData", async () => {
           replace: [
             {
               input: "%title%",
-              output: data.meta["title"]
+              output: data.meta.title
             },
             {
               input: "%episode%",
-              output: data.meta["episode"]
+              output: data.meta.episode
             }
           ]
         },
         {
           page: "/programs/([0-9]+)/play",
           uses: "state",
-          setTo: await presence.getSetting("seriesState"),
+          setTo: await presence.getSetting<string>("seriesState"),
           if: {
             k: privacy,
             delete: true
@@ -213,11 +210,11 @@ presence.on("UpdateData", async () => {
           replace: [
             {
               input: "%title%",
-              output: data.meta["title"]
+              output: data.meta.title
             },
             {
               input: "%episode%",
-              output: data.meta["episode"]
+              output: data.meta.episode
             }
           ]
         }
@@ -234,7 +231,7 @@ presence.on("UpdateData", async () => {
 
   for (const setting of data.settings) {
     const settingValue = await presence
-      .getSetting(setting.id)
+      .getSetting<boolean>(setting.id)
       .catch(() => null);
 
     if (
@@ -242,15 +239,14 @@ presence.on("UpdateData", async () => {
       setting.delete &&
       !setting.presence
     )
-      for (const PData of setting.uses)
-        delete presenceData[PData as keyof PresenceData];
+      for (const PData of setting.uses) delete presenceData[PData];
     else if (setting.presence) {
       for (const presenceSetting of setting.presence) {
         if (document.location.pathname.match(presenceSetting.page)) {
-          if (presenceSetting.setTo && !presenceSetting.replace)
+          if (presenceSetting.setTo && !presenceSetting.replace) {
             presenceData[presenceSetting.uses as "details"] =
               presenceSetting.setTo;
-          else if (presenceSetting.setTo && presenceSetting.replace) {
+          } else if (presenceSetting.setTo && presenceSetting.replace) {
             let replaced = presenceSetting.setTo;
 
             for (const toReplace of presenceSetting.replace)
@@ -263,18 +259,14 @@ presence.on("UpdateData", async () => {
           if (presenceSetting.if) {
             if (presenceSetting.if.k && presenceSetting.if.delete)
               delete presenceData[presenceSetting.uses];
-            else if (presenceSetting.if.k && presenceSetting.if.v)
+            else if (presenceSetting.if.k && presenceSetting.if.v) {
               presenceData[presenceSetting.uses as "details"] =
                 presenceSetting.if.v;
+            }
           }
         }
       }
     }
   }
-
-  for (const x of ["state", "details"])
-    if (presenceData[x as "details"] === "undefined")
-      delete presenceData[x as "details"];
-
   presence.setActivity(presenceData);
 });

@@ -6,65 +6,63 @@ const presence = new Presence({
     reading: "presence.activity.reading"
   });
 
-let browsingStamp = 0; //Last started activity
+let browsingTimestamp = 0; //Last started activity
 
 presence.on("UpdateData", async () => {
-  const host = window.location.hostname.replace("www.", "");
-  const path = window.location.pathname.split("/").slice(1);
-  const presenceData: PresenceData = {
-    details: "Keep Talking and Nobody Explodes",
-    largeImageKey: "logo_big"
-  };
+  const path = window.location.pathname.split("/").slice(1),
+    presenceData: PresenceData = {
+      details: "Keep Talking and Nobody Explodes",
+      largeImageKey: "logo_big"
+    };
 
-  switch (host) {
+  switch (window.location.hostname.replace("www.", "")) {
     //Keep Talking Game
     case "keeptalkinggame.com":
       switch (path[0]) {
         //Frequently Asked Questions
         case "faq":
-          browsingStamp = 0;
+          browsingTimestamp = 0;
 
           presenceData.details = "Frequently Asked Questions";
           break;
         //Commercial Licensing
         case "commercial-license":
-          browsingStamp = 0;
+          browsingTimestamp = 0;
 
           presenceData.details = "Commercial Licensing";
           break;
         //Non-Commercial Use
         case "non-commercial-use":
-          browsingStamp = 0;
+          browsingTimestamp = 0;
 
           presenceData.details = "Non-Commercial Use";
           break;
         //Community
         case "community":
-          browsingStamp = 0;
+          browsingTimestamp = 0;
 
           presenceData.details = "Community";
           break;
         //Press Kit
         case "presskit":
-          browsingStamp = 0;
+          browsingTimestamp = 0;
 
           presenceData.details = "Press Kit";
           break;
         //Contact Us
         case "contact-us":
-          browsingStamp = 0;
+          browsingTimestamp = 0;
 
           presenceData.details = "Contact Us";
           break;
         //Privacy Policy
         case "privacy-policy":
-          browsingStamp = 0;
+          browsingTimestamp = 0;
 
           presenceData.details = "Privacy Policy";
           break;
         //Unknown
         default:
-          presence.setTrayTitle();
           presence.setActivity();
           return;
       }
@@ -76,8 +74,8 @@ presence.on("UpdateData", async () => {
         //Bomb Defusal Manual
         case "print": //Currently not working for the pdf version
         case "web":
-          if (!browsingStamp) browsingStamp = Math.floor(Date.now() / 1000);
-          presenceData.startTimestamp = browsingStamp;
+          browsingTimestamp ??= Math.floor(Date.now() / 1000);
+          presenceData.startTimestamp = browsingTimestamp;
 
           presenceData.smallImageKey = "reading";
           presenceData.smallImageText = (await strings).reading;
@@ -95,11 +93,11 @@ presence.on("UpdateData", async () => {
         case "how-to-play-gear-vr.html":
         case "how-to-play-oculus-go.html":
         case "how-to-play-oculus-quest.html":
-        case "how-to-play-daydream.html":
-          browsingStamp = 0;
+        case "how-to-play-daydream.html": {
+          browsingTimestamp = 0;
+          let platform: string;
 
           presenceData.details = "How to Play";
-          var platform = null;
           switch (path[0].replace("how-to-play-", "").replace(".html", "")) {
             case "pc":
               platform = "PC/Mac/Linux";
@@ -139,19 +137,18 @@ presence.on("UpdateData", async () => {
           }
           if (platform) presenceData.state = `on ${platform}`;
           break;
+        }
         //Other Languages
         case "other-languages.html":
-          browsingStamp = 0;
+          browsingTimestamp = 0;
 
           presenceData.details = "Other Languages";
           break;
         //Unknown
         case "index.html":
-          presence.setTrayTitle();
           presence.setActivity();
           return;
         default:
-          presence.setTrayTitle();
           presence.setActivity();
           return;
       }

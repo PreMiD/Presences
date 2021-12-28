@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "731069087031230487"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
   presenceData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 const updateCallback = {
     _function: null as () => void,
@@ -28,7 +28,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -47,10 +47,12 @@ const updateCallback = {
    * @param {Number} videoTime Current video time seconds.
    * @param {Number} videoDuration Video duration seconds.
    */
-  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
-    const startTime = Date.now(),
-      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
+  getTimestamps = (videoTime: number, videoDuration: number): number[] => {
+    const startTime = Date.now();
+    return [
+      Math.floor(startTime / 1000),
+      Math.floor(startTime / 1000) - videoTime + videoDuration
+    ];
   };
 
 ((): void => {
@@ -61,12 +63,11 @@ const updateCallback = {
     if (currentPath[0] === "") presenceData.details = "On the portal";
     else {
       presenceData.details = "Viewing a page";
-      const pageNames: { [index: string]: string } = {
+      presenceData.state = {
         tac: "Terms and Conditions",
         privacy: "Privacy Policy",
         logos: "Logos & Signpacks"
-      };
-      presenceData.state = pageNames[currentPath[0]];
+      }[currentPath[0]];
     }
   } else if (
     currentURL.hostname.startsWith("tm.") ||
@@ -100,6 +101,7 @@ const updateCallback = {
 
     if (
       currentPath[0] === "error" ||
+      currentPath[0] === "errorhandler" ||
       (document.querySelector(".ly-box > span").children.length === 3 &&
         document.querySelector(".ly-box b").textContent === "Error")
     )
@@ -131,7 +133,7 @@ const updateCallback = {
         "Searching for a map"
       );
       updateCallback.function = (): void => {
-        presenceData.state = getURLParam("trackname") || undefined;
+        presenceData.state = getURLParam("trackname");
       };
     } else if (
       currentPath[0] === "tracksearch" ||
@@ -157,7 +159,7 @@ const updateCallback = {
       // Valid on TrackMania² and Trackmania (2020) only
       updateCallback.function = (): void => {
         presenceData.details = "Searching for a mappack";
-        presenceData.state = getURLParam("name") || undefined;
+        presenceData.state = getURLParam("name");
       };
     } else if (currentPath[0] === "mappack") {
       // Valid on TrackMania² and Trackmania (2020) only
@@ -181,7 +183,7 @@ const updateCallback = {
       // Valid on TrackMania² and Trackmania (2020) only
       presenceData.details = "Searching for a record";
       updateCallback.function = (): void => {
-        presenceData.state = getURLParam("name") || undefined;
+        presenceData.state = getURLParam("name");
       };
     } else if (currentPath[0] === "leaderboard") {
       // Valid on TrackMania² and Trackmania (2020) only
@@ -260,7 +262,7 @@ const updateCallback = {
       presenceData.details = "Viewing a page";
       presenceData.state = "Support";
     } else if (currentPath[0] === "messaging") {
-      if (currentPath[1] === "index" || currentPath[1] === undefined)
+      if (currentPath[1] === "index" || !currentPath[1])
         presenceData.details = "Viewing thier private messages";
       else if (currentPath[1] === "compose")
         presenceData.details = "Writing a private message";
@@ -307,12 +309,12 @@ const updateCallback = {
     } else if (currentPath[0] === "itemsearch") {
       presenceData.details = "Searching for an item";
       updateCallback.function = (): void => {
-        presenceData.state = getURLParam("itemname") || undefined;
+        presenceData.state = getURLParam("itemname");
       };
     } else if (currentPath[0] === "setsearch") {
       presenceData.details = "Searching for a set";
       updateCallback.function = (): void => {
-        presenceData.state = getURLParam("setname") || undefined;
+        presenceData.state = getURLParam("setname");
       };
     } else if (currentPath[0] === "blocks")
       presenceData.details = "Searching for a block";
@@ -329,11 +331,9 @@ const updateCallback = {
         .textContent.trim();
     } else if (currentPath[0] === "usersearch") {
       const details = [];
-      if (
-        (document.querySelector("#username") as HTMLInputElement).textContent
-      ) {
+      if ((document.querySelector("#username") as HTMLInputElement).value) {
         details.push(
-          (document.querySelector("#username") as HTMLInputElement).textContent
+          (document.querySelector("#username") as HTMLInputElement).value
         );
       }
       if (document.querySelector("#s2id_mode").textContent)
@@ -349,7 +349,7 @@ const updateCallback = {
       } else if (currentPath[1] === "edit")
         presenceData.details = "Editing their account information";
     } else if (currentPath[0] === "messaging") {
-      if (currentPath[1] === "index" || currentPath[1] === undefined)
+      if (currentPath[1] === "index" || !currentPath[1])
         presenceData.details = "Viewing thier private messages";
       else if (currentPath[1] === "compose")
         presenceData.details = "Writing a private message";
@@ -399,12 +399,11 @@ const updateCallback = {
           ) {
             presenceData.smallImageKey = "play";
             presenceData.smallImageText = "TMTube Archive — Playing";
-            const video: HTMLVideoElement = document.querySelector("video"),
-              timestamps = getTimestamps(
-                Math.floor(video.currentTime),
-                Math.floor(video.duration)
-              );
-            [, presenceData.endTimestamp] = timestamps;
+            const video: HTMLVideoElement = document.querySelector("video");
+            [, presenceData.endTimestamp] = getTimestamps(
+              Math.floor(video.currentTime),
+              Math.floor(video.duration)
+            );
           } else {
             presenceData.smallImageKey = "pause";
             presenceData.smallImageText = "TMTube Archive — Paused";

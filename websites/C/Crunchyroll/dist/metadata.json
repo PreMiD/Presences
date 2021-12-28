@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -25,10 +26,11 @@
     "www.crunchyroll.com",
     "beta.crunchyroll.com"
   ],
-  "version": "2.7.5",
+  "version": "2.7.12",
   "logo": "https://i.imgur.com/LpTKP8c.png",
   "thumbnail": "https://i.imgur.com/hzM7YCb.png",
   "color": "#f47521",
+  "category": "anime",
   "tags": [
     "video",
     "anime",
@@ -40,6 +42,5 @@
       "id": "lang",
       "multiLanguage": true
     }
-  ],
-  "category": "anime"
+  ]
 }

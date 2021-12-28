@@ -4,11 +4,11 @@ const presence = new Presence({
 
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -29,7 +29,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -40,22 +40,16 @@ const updateCallback = {
 ((): void => {
   let title: string;
 
-  const titleFromURL = (): string => {
-    const raw = currentPath.slice(1).join("/");
-    return decodeURI(raw.replace(/_/g, " "));
-  };
-
   try {
     title = document.querySelector("h1.firstHeading span").textContent;
   } catch (e) {
-    title = titleFromURL();
+    title = decodeURI(currentPath.slice(1).join("/").replace(/_/g, " "));
   }
 
-  if (currentPath[0] === "") {
-    presenceData.details = "On the main page";
-  } else if (document.querySelector(".error_content")) {
+  if (currentPath[0] === "") presenceData.details = "On the main page";
+  else if (document.querySelector(".error_content"))
     presenceData.details = "On a non-existent page";
-  } else if (title) {
+  else if (title) {
     presenceData.details = "Reading a wiki page";
     presenceData.state = title;
     if (currentPath[0] !== "en") presenceData.state += ` (${currentPath[0]})`;

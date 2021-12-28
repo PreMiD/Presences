@@ -1,18 +1,17 @@
-var presence = new Presence({
-  clientId: "626148940927991829" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var user: any, search: any, title: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "626148940927991829" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement | Element | string,
+  search: HTMLElement | Element | string,
+  title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "mc-market"
+    largeImageKey: "mc-market",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "www.mc-market.org") {
+  if (document.location.hostname === "www.mc-market.org") {
     if (document.location.pathname.includes("/chat/")) {
       presenceData.details = "Reading the";
       presenceData.state = "global chat";
@@ -20,10 +19,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/private-accounts/")) {
+    } else if (document.location.pathname.includes("/private-accounts/"))
       presence.setActivity();
-      presence.setTrayTitle();
-    } else if (document.location.pathname.includes("/advertising/")) {
+    else if (document.location.pathname.includes("/advertising/")) {
       presenceData.details = "Viewing the";
       presenceData.state = "advertising page";
 
@@ -31,12 +29,12 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/search/")) {
-      search = document.querySelector(
+      search = document.querySelector<HTMLElement>(
         "#content > div > div > div.mainContainer > div > div.titleBar > h1 > a > em"
       );
-      if (search !== null) {
+      if (search) {
         presenceData.details = "Searching for:";
-        presenceData.state = search.innerText;
+        presenceData.state = search.textContent;
 
         presenceData.smallImageKey = "search";
 
@@ -50,33 +48,30 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes("/resources/")) {
-      title = document.querySelector(
+      title = document.querySelector<HTMLElement>(
         "#content > div > div > div.mainContainer > div > div.resourceInfo > h1"
       );
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Resources, viewing:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
-          presenceData.state = title.innerText;
-        }
+        if (title.textContent.length > 128)
+          presenceData.state = `${title.textContent.substring(0, 125)}...`;
+        else presenceData.state = title.textContent;
+
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else if (document.location.pathname.includes("/categories/")) {
-        title = document.querySelector(
+        title = document.querySelector<HTMLElement>(
           "#content > div > div > div.titleBar > h1"
         );
         presenceData.details = "Resources, viewing";
-        presenceData.state =
-          "category: " +
-          title.innerText
-            .replace("Add Resource", "")
-            .replace("Sell your OG", "")
-            .replace("Sell your Semi-OG", "")
-            .replace("Sell your cape account", "")
-            .replace("Sell your Rank Account", "")
-            .replace("Post New Thread", "");
+        presenceData.state = `category: ${title.textContent
+          .replace("Add Resource", "")
+          .replace("Sell your OG", "")
+          .replace("Sell your Semi-OG", "")
+          .replace("Sell your cape account", "")
+          .replace("Sell your Rank Account", "")
+          .replace("Post New Thread", "")}`;
 
         delete presenceData.smallImageKey;
 
@@ -117,12 +112,12 @@ presence.on("UpdateData", async () => {
 
         presence.setActivity(presenceData);
       } else if (document.location.pathname.includes("/authors")) {
-        user = document.querySelector(
+        user = document.querySelector<HTMLElement>(
           "#content > div > div > div.mainContainer > div > div.titleBar > h1"
         );
-        if (user !== null) {
+        if (user) {
           presenceData.details = "Resources, viewing author:";
-          presenceData.state = user.innerText.replace("Resources from ", "");
+          presenceData.state = user.textContent.replace("Resources from ", "");
 
           delete presenceData.smallImageKey;
 
@@ -157,13 +152,13 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#content > div > div > div.mainContainer > div > div.titleBar > h1"
       );
-      if (title == null) {
+      if (!title) {
         title = document.querySelector(
           "#content > div > div > div.titleBar > h1"
         );
       }
       presenceData.details = "Wiki, viewing:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -179,16 +174,13 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#content > div > div > div.titleBar > h1"
       );
-      if (title.innerText.includes("Private OG")) {
-        presence.setActivity();
-        presence.setTrayTitle();
-      } else {
+      if (title.textContent.includes("Private OG")) presence.setActivity();
+      else {
         presenceData.details = "Reading thread:";
-        if (title.innerText.length > 128) {
-          presenceData.state = title.innerText.substring(0, 125) + "...";
-        } else {
-          presenceData.state = title.innerText;
-        }
+        if (title.textContent.length > 128)
+          presenceData.state = `${title.textContent.substring(0, 125)}...`;
+        else presenceData.state = title.textContent;
+
         presenceData.smallImageKey = "reading";
 
         presence.setActivity(presenceData);
@@ -198,7 +190,7 @@ presence.on("UpdateData", async () => {
         "#content > div > div > div.titleBar > h1"
       );
       presenceData.details = "Viewing category:";
-      presenceData.state = title.innerText
+      presenceData.state = title.textContent
         .replace("Post New Thread", "")
         .replace("Sell your OG", "")
         .replace("Sell your Semi-OG", "")
@@ -248,7 +240,7 @@ presence.on("UpdateData", async () => {
         "#content > div > div > div.titleBar > h1"
       );
       presenceData.details = "Viewing category:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -306,13 +298,13 @@ presence.on("UpdateData", async () => {
       } else if (
         document.querySelector(
           "#content > div > div > div.profilePage > div.mainProfileColumn > div > div > h1"
-        ) !== null
+        )
       ) {
         user = document.querySelector(
           "#content > div > div > div.profilePage > div.mainProfileColumn > div > div > h1"
         );
         presenceData.details = "Viewing user:";
-        presenceData.state = user.innerText;
+        presenceData.state = user.textContent;
 
         delete presenceData.smallImageKey;
 
@@ -372,7 +364,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#content > div > div > div.mainContainer > div > div.titleBar > h1"
       );
-      if (title == null) {
+      if (title === null) {
         presenceData.details = "Viewing their";
         presenceData.state = "conversations";
 
@@ -381,25 +373,19 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Reading conversation:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
 
         presenceData.smallImageKey = "reading";
 
         presence.setActivity(presenceData);
       }
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (document.location.hostname == "status.mc-market.org") {
+    } else presence.setActivity();
+  } else if (document.location.hostname === "status.mc-market.org") {
     presenceData.details = "Viewing MC-Market Status";
     delete presenceData.state;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

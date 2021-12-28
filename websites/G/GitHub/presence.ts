@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     },
     organization: { [key: string]: HTMLElement } = {
       name: document.querySelector(
-        "#js-pjax-container > div > header > div.container-lg.pt-4.pt-lg-0.p-responsive.clearfix > div > div.flex-auto.ml-3.ml-md-4 > h1"
+        "#js-pjax-container > div > header > div.container-xl.pt-4.pt-lg-0.p-responsive.clearfix > div > div.flex-1 > h1"
       )
     },
     repository: { [key: string]: HTMLElement } = {
@@ -19,11 +19,6 @@ presence.on("UpdateData", async () => {
       ),
       location: document.querySelector(
         "#branch-select-menu > summary > span.css-truncate-target"
-      )
-    },
-    action: { [key: string]: HTMLElement } = {
-      title: document.querySelector(
-        "#repo-content-pjax-container > div > div.js-updatable-content.js-socket-channel.d-flex.flex-items-start.flex-md-items-center.pb-3.pb-md-4.pl-0.pl-md-2.mt-n2.mb-1.ml-1 > div.d-flex.flex-auto.mr-3 > h3 > span"
       )
     },
     PRandIssues: { [key: string]: HTMLElement } = {
@@ -38,172 +33,139 @@ presence.on("UpdateData", async () => {
       ),
       repLoc2: document.querySelectorAll("#blob-path")
     },
-    browsingStamp = Math.floor(Date.now() / 1000),
-    searchURL = new URL(document.location.href),
-    searchResult = searchURL.searchParams.get("q");
-
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   let profileTabs: string, profileCurrentTab: string;
 
   if (profile.name) {
-    profileTabs = "/" + profile.nickname.innerText + "?tab=";
+    profileTabs = `/${profile.nickname.textContent}?tab=`;
     profileCurrentTab = new URL(document.location.href).searchParams.get("tab");
   }
 
   const presenceData: PresenceData = {
     details: "Unsupported page",
     largeImageKey: "lg",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
-  if (document.location.pathname == "/" || !document.location.pathname) {
+  if (document.location.pathname === "/" || !document.location.pathname)
     presenceData.details = "Home";
-  } else if (document.location.pathname.startsWith("/settings")) {
+  else if (document.location.pathname.startsWith("/login"))
+    presenceData.details = "Logging in";
+  else if (document.location.pathname.startsWith("/settings"))
     presenceData.details = "Settings";
-  } else if (
+  else if (
     document.location.pathname.startsWith("/explore") ||
     document.location.pathname.startsWith("/discover")
-  ) {
+  )
     presenceData.details = "Browsing repositories...";
-  } else if (document.location.pathname.startsWith("/marketplace")) {
+  else if (document.location.pathname.startsWith("/marketplace"))
     presenceData.details = "Browsing marketplace...";
-  } else if (document.location.pathname.startsWith("/pulls")) {
+  else if (document.location.pathname.startsWith("/pulls"))
     presenceData.details = "Browsing pull requests...";
-  } else if (document.location.pathname == "/notifications") {
+  else if (document.location.pathname === "/notifications")
     presenceData.details = "Browsing notifications...";
-  } else if (
+  else if (
     document.location.pathname.startsWith("/notifications/subscriptions")
-  ) {
+  )
     presenceData.details = "Browsing subscriptions...";
-  } else if (document.location.pathname.startsWith("/watching")) {
+  else if (document.location.pathname.startsWith("/watching"))
     presenceData.details = "Browsing interested repositories...";
-  } else if (document.location.pathname == "/new") {
+  else if (document.location.pathname === "/new")
     presenceData.details = "Creating a new repository...";
-  } else if (document.location.pathname.startsWith("/new/import")) {
+  else if (document.location.pathname.startsWith("/new/import"))
     presenceData.details = "Importing a repository...";
-  } else if (document.location.pathname.startsWith("/new/project")) {
+  else if (document.location.pathname.startsWith("/new/project"))
     presenceData.details = "Creating a new project...";
-  } else if (document.location.pathname.startsWith("/organizations/new")) {
+  else if (document.location.pathname.startsWith("/organizations/new"))
     presenceData.details = "Creating a new organization...";
-  } else if (document.location.pathname.startsWith("/topics")) {
+  else if (document.location.pathname.startsWith("/topics"))
     presenceData.details = "Browsing topics...";
-  } else if (document.location.pathname == "/trending") {
+  else if (document.location.pathname === "/trending")
     presenceData.details = "Browsing trending repositories...";
-  } else if (document.location.pathname.startsWith("/trending/developers")) {
+  else if (document.location.pathname.startsWith("/trending/developers"))
     presenceData.details = "Browsing trending developers...";
-  } else if (document.location.pathname.startsWith("/collections")) {
+  else if (document.location.pathname.startsWith("/collections"))
     presenceData.details = "Browsing collections...";
-  } else if (document.location.pathname.startsWith("/events")) {
+  else if (document.location.pathname.startsWith("/events"))
     presenceData.details = "Browsing events...";
-  } else if (document.location.pathname.startsWith("/codespaces")) {
+  else if (document.location.pathname.startsWith("/codespaces"))
     presenceData.details = "Browsing codespaces...";
-  } else if (document.location.pathname.includes("/search")) {
+  else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching for: ";
-    presenceData.state = searchResult;
+    presenceData.state = new URL(document.location.href).searchParams.get("q");
   }
 
   const pathData: string[] = document.location.pathname.split("/");
   if (repository.author && repository.name) {
     if (
-      repository.author.innerText.length > 0 &&
-      repository.name.innerText.length > 0 &&
-      document.location.pathname.toLowerCase() ==
-        "/" +
-          repository.author.innerText.toLowerCase() +
-          "/" +
-          repository.name.innerText.toLowerCase()
+      repository.author.textContent.length > 0 &&
+      repository.name.textContent.length > 0 &&
+      document.location.pathname.toLowerCase() ===
+        `/${repository.author.textContent.toLowerCase()}/${repository.name.textContent.toLowerCase()}`
     ) {
       presenceData.details = "Browsing a repository...";
 
-      presenceData.state =
-        repository.author.innerText + " / " + repository.name.innerText;
+      presenceData.state = `${repository.author.textContent} / ${repository.name.textContent}`;
     } else if (
-      repository.author.innerText.length > 0 &&
-      repository.name.innerText.length > 0 &&
+      repository.author.textContent.length > 0 &&
+      repository.name.textContent.length > 0 &&
       document.location.pathname.includes("/tree/") &&
-      repository.location.innerText.length > 0
+      repository.location.textContent.length > 0
     ) {
-      presenceData.details =
-        "Browsing " +
-        repository.author.innerText +
-        "/" +
-        repository.name.innerText;
+      presenceData.details = `Browsing ${repository.author.textContent}/${repository.name.textContent}`;
 
       presenceData.state = `📂 ${document.location.pathname
         .split("/")
         .slice(4)
         .join("/")}`;
     } else if (
-      repository.author.innerText.toString().length > 0 &&
-      repository.name.innerText.toString().length > 0 &&
+      repository.author.textContent.toString().length > 0 &&
+      repository.name.textContent.toString().length > 0 &&
       document.location.pathname.includes("/blob/") &&
       nodeListOf.repLoc2.length > 0
     ) {
-      const file: HTMLElement = document.querySelector("h2#blob-path > strong");
+      presenceData.details = `📂 Looking at a file from ${repository.author.textContent}/${repository.name.textContent}`;
 
-      presenceData.details =
-        "📂 Looking at a file from " +
-        repository.author.innerText +
-        "/" +
-        repository.name.innerText;
-
-      presenceData.state = `📝 ${file.textContent}`;
+      presenceData.state = `📝 ${
+        document.querySelector("h2#blob-path > strong").textContent
+      }`;
     } else if (
-      document.location.pathname.toLowerCase() ==
-      "/" +
-        repository.author.innerText.toLowerCase() +
-        "/" +
-        repository.name.innerText.toLowerCase() +
-        "/issues/"
+      document.location.pathname.toLowerCase() ===
+      `/${repository.author.textContent.toLowerCase()}/${repository.name.textContent.toLowerCase()}/issues/`
     ) {
       presenceData.details = "Browsing issues from:";
-      presenceData.state =
-        repository.author.innerText + " / " + repository.name.innerText;
+      presenceData.state = `${repository.author.textContent} / ${repository.name.textContent}`;
     } else if (
-      repository.author.innerText.length > 0 &&
-      repository.name.innerText.length > 0 &&
+      repository.author.textContent.length > 0 &&
+      repository.name.textContent.length > 0 &&
       document.location.pathname.includes("/pulls")
     ) {
       presenceData.details = "Browsing pull requests from:";
-      presenceData.state =
-        repository.author.innerText + " / " + repository.name.innerText;
+      presenceData.state = `${repository.author.textContent} / ${repository.name.textContent}`;
     } else if (
       document.location.pathname
         .toLowerCase()
         .includes(
-          "/" +
-            repository.author.innerText.toLowerCase() +
-            "/" +
-            repository.name.innerText.toLowerCase() +
-            "/pull/"
+          `/${repository.author.textContent.toLowerCase()}/${repository.name.textContent.toLowerCase()}/pull/`
         )
     ) {
-      presenceData.details =
-        "Looking on pull request #" +
-        document.location.pathname.split("/").slice(2)[2];
+      presenceData.details = `Looking on pull request #${
+        document.location.pathname.split("/").slice(2)[2]
+      }`;
 
-      presenceData.state =
-        nodeListOf.PRandIssueAuthor[0].innerText +
-        " - " +
-        PRandIssues.title.innerText;
+      presenceData.state = `${nodeListOf.PRandIssueAuthor[0].textContent} - ${PRandIssues.title.textContent}`;
     } else if (
       document.location.pathname
         .toLowerCase()
         .includes(
-          "/" +
-            repository.author.innerText.toLowerCase() +
-            "/" +
-            repository.name.innerText.toLowerCase() +
-            "/issues/"
+          `/${repository.author.textContent.toLowerCase()}/${repository.name.textContent.toLowerCase()}/issues/`
         )
     ) {
-      presenceData.details =
-        "Looking on issue #" +
-        document.location.pathname.split("/").slice(2)[2];
+      presenceData.details = `Looking on issue #${
+        document.location.pathname.split("/").slice(2)[2]
+      }`;
 
-      presenceData.state =
-        nodeListOf.PRandIssueAuthor[0].innerText +
-        " - " +
-        PRandIssues.title.innerText;
+      presenceData.state = `${nodeListOf.PRandIssueAuthor[0].textContent} - ${PRandIssues.title.textContent}`;
     } else if (
       document.location.pathname.includes("/pulse") ||
       document.location.pathname.includes("/graphs/contributors") ||
@@ -215,23 +177,16 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/network") ||
       document.location.pathname.includes("/network/members")
     ) {
-      const insightsTab: HTMLElement = document.querySelector(
+      presenceData.details = `Browsing insights from ${repository.author.textContent} / ${repository.name.textContent}`;
+
+      presenceData.state = document.querySelector(
         "nav a.js-selected-navigation-item.selected.menu-item"
-      );
-
-      presenceData.details =
-        "Browsing insights from " +
-        repository.author.innerText +
-        " / " +
-        repository.name.innerText;
-
-      presenceData.state = insightsTab.innerText;
+      ).textContent;
     } else {
       presenceData.details = `Browsing ${
         pathData[3] === "pulls" ? "pull requests" : pathData[3]
       } from:`;
-      presenceData.state =
-        repository.author.innerText + " / " + repository.name.innerText;
+      presenceData.state = `${repository.author.textContent} / ${repository.name.textContent}`;
     }
   } else if (
     repository.author &&
@@ -239,59 +194,58 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/runs")
   ) {
     presenceData.details = `Viewing action from ${pathData[1]}/${pathData[2]}`;
-    presenceData.state = action.title.textContent;
+    presenceData.state = document.querySelector(
+      "#repo-content-pjax-container > div > div.js-updatable-content.js-socket-channel.d-flex.flex-items-start.flex-md-items-center.pb-3.pb-md-4.pl-0.pl-md-2.mt-n2.mb-1.ml-1 > div.d-flex.flex-auto.mr-3 > h3 > span"
+    ).textContent;
   } else if (
     !repository.author &&
     !repository.name &&
     document.location.pathname.includes("/issues")
-  ) {
+  )
     presenceData.details = "Browsing issues...";
-  }
+
   if (profile.name && profile.nickname) {
     if (!document.location.pathname.indexOf(profileTabs)) {
       presenceData.details = "Browsing a profile...";
 
-      if (profile.name.innerText.length == 0) {
-        presenceData.state = profile.nickname.innerText;
-      } else if (profile.nickname.innerText.length == 0) {
-        presenceData.state = profile.name.innerText;
-      } else
-        presenceData.state =
-          profile.name.innerText + " | " + profile.nickname.innerText;
+      if (profile.name.textContent.length === 0)
+        presenceData.state = profile.nickname.textContent;
+      else if (profile.nickname.textContent.length === 0)
+        presenceData.state = profile.name.textContent;
+      else
+        presenceData.state = `${profile.name.textContent} | ${profile.nickname.textContent}`;
     } else if (document.location.pathname.indexOf(profileTabs)) {
-      presenceData.details = "Browsing " + profileCurrentTab + " from:";
+      presenceData.details = `Browsing ${profileCurrentTab} from:`;
 
-      if (profile.name.innerText.length == 0) {
-        presenceData.state = profile.nickname.innerText;
-      } else if (profile.nickname.innerText.length == 0) {
-        presenceData.state = profile.name.innerText;
-      } else
-        presenceData.state =
-          profile.name.innerText + " | " + profile.nickname.innerText;
+      if (profile.name.textContent.length === 0)
+        presenceData.state = profile.nickname.textContent;
+      else if (profile.nickname.textContent.length === 0)
+        presenceData.state = profile.name.textContent;
+      else
+        presenceData.state = `${profile.name.textContent} | ${profile.nickname.textContent}`;
 
-      if (profileCurrentTab == null) {
+      if (profileCurrentTab === null) {
         presenceData.details = "Browsing a profile...";
 
-        if (profile.name.innerText.length == 0) {
-          presenceData.state = profile.nickname.innerText;
-        } else if (profile.nickname.innerText.length == 0) {
-          presenceData.state = profile.name.innerText;
-        } else
-          presenceData.state =
-            profile.name.innerText + " | " + profile.nickname.innerText;
+        if (profile.name.textContent.length === 0)
+          presenceData.state = profile.nickname.textContent;
+        else if (profile.nickname.textContent.length === 0)
+          presenceData.state = profile.name.textContent;
+        else
+          presenceData.state = `${profile.name.textContent} | ${profile.nickname.textContent}`;
       }
     }
   } else if (organization.name) {
     presenceData.details = "Viewing an organization";
-    presenceData.state = organization.name.innerText;
+    presenceData.state = organization.name.textContent;
   } else if (
     !organization.name &&
-    document.location.pathname.includes(`/orgs/`)
+    document.location.pathname.includes("/orgs/")
   ) {
     const pathData: string[] = document.location.pathname.split("/").slice(2);
 
     presenceData.details = `Viewing ${pathData[1]} from`;
-    presenceData.state = pathData[0];
+    [presenceData.state] = pathData;
   }
   presence.setActivity(presenceData);
 });

@@ -7,28 +7,13 @@ const presence = new Presence({
     live: "presence.activity.live"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-let elapsed: number = undefined,
-  oldUrl: string = undefined;
+let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "philo"
     },
-    href = window.location.href,
+    { href } = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -39,16 +24,16 @@ presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector("#player video");
 
   if (video) {
-    const title = document.querySelector(".player-controls-title")?.textContent,
-      timestamps = getTimestamps(
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
       seriesEp = document.querySelector(".season-episode-format"),
-      subtitle = document.querySelector(".player-controls-subtitle-text"),
       live = document.querySelector(".flag.flag-live"),
       state = seriesEp
-        ? `${seriesEp.textContent} ${subtitle.textContent}`
+        ? `${seriesEp.textContent} ${
+            document.querySelector(".player-controls-subtitle-text").textContent
+          }`
         : live
         ? "Watching Live"
         : "Watching",
@@ -56,43 +41,47 @@ presence.on("UpdateData", async () => {
         ".player-controls-subtitle img"
       );
 
-    (data.details = title), (data.state = state);
-    (data.smallImageKey = live ? "live" : video.paused ? "pause" : "play"),
-      (data.smallImageText = live
-        ? (await strings).live
-        : video.paused
-        ? (await strings).pause
-        : (await strings).play),
-      (data.startTimestamp = live ? elapsed : timestamps[0]),
-      (data.endTimestamp = live ? undefined : timestamps[1]);
+    (presenceData.details = document.querySelector(
+      ".player-controls-title"
+    )?.textContent),
+      (presenceData.state = state);
+    presenceData.smallImageKey = live
+      ? "live"
+      : video.paused
+      ? "pause"
+      : "play";
+    presenceData.smallImageText = live
+      ? (await strings).live
+      : video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = live ? elapsed : startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
+
+    if (live) delete presenceData.endTimestamp;
 
     if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    if (!data.endTimestamp) {
-      delete data.endTimestamp;
-    }
+    if (!presenceData.endTimestamp) delete presenceData.endTimestamp;
 
-    if (data.details && data.state.trim()) {
-      if (channel && channel.getAttribute("alt")) {
-        data.state += " on " + channel.getAttribute("alt");
-      }
-      presence.setActivity(data, !video.paused);
+    if (presenceData.details && presenceData.state.trim()) {
+      if (channel && channel.getAttribute("alt"))
+        presenceData.state += ` on ${channel.getAttribute("alt")}`;
+
+      presence.setActivity(presenceData, !video.paused);
     }
   } else {
-    data.details = "Browsing...";
-    if (path.includes("/guide")) {
-      data.details = "Browsing Guide";
-    }
-    if (path.includes("/saved")) {
-      data.details = "Browsing Saved";
-    }
-    if (path.includes("/search")) {
-      data.details = "Searching...";
-    }
-    data.startTimestamp = elapsed;
-    presence.setActivity(data);
+    presenceData.details = "Browsing...";
+    if (path.includes("/guide")) presenceData.details = "Browsing Guide";
+
+    if (path.includes("/saved")) presenceData.details = "Browsing Saved";
+
+    if (path.includes("/search")) presenceData.details = "Searching...";
+
+    presenceData.startTimestamp = elapsed;
+    presence.setActivity(presenceData);
   }
 });

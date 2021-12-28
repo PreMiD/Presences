@@ -19,49 +19,48 @@ const presence = new Presence({
         viewAccount: "general.viewAccount",
         viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    showButtons: boolean = await presence.getSetting("buttons"),
-    searchQuery: boolean = await presence.getSetting("searchQuery");
+  const [newLang, showButtons, searchQuery, logo] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("showButtons"),
+    presence.getSetting<boolean>("searchQuery"),
+    presence.getSetting<number>("logo")
+  ]);
 
-  if (!oldLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][
-      await presence.getSetting("logo")
-    ],
+    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][logo],
     details: (await strings).browse,
     smallImageKey: "search",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") {
-    const category = Object.values(document.querySelectorAll("div")).filter(
-      (entry) => entry?.className === "row-title" && YouCanSeeThis(entry)
-    )[0]?.textContent;
-
     presenceData.details = (await strings).browsingThrough;
-    presenceData.state = category || "Home page";
+    presenceData.state =
+      Object.values(document.querySelectorAll("div")).filter(
+        entry => entry?.className === "row-title" && isVisible(entry)
+      )[0]?.textContent || "Home page";
   } else if (
     document.location.pathname.includes("/play") ||
     document.location.pathname.includes("/intl-common/")
   ) {
     const data = {
         title: (
-          document.querySelector("h1 a") || document.querySelector("title")
-        )?.textContent,
+          document.querySelector("h1 > a > span > span") ||
+          document.querySelector("title")
+        )?.textContent?.trim(),
         ep: (
           document.querySelector("h1") ||
           document.querySelector(".topice-source-list-item.item-active")
@@ -73,63 +72,59 @@ presence.on("UpdateData", async () => {
       URLItem: string =
         JSON.parse(
           document.querySelectorAll('script[type="application/ld+json"]')[1]
-            ?.innerHTML || "{}"
+            ?.textContent || "{}"
         )[0]
           ?.itemListElement.map(
             (x: {
               item: {
+                "@id": string;
                 name: string;
               };
-            }) => x.item.name.toLowerCase()
+            }) => `${x.item.name.toLowerCase()} ${x.item["@id"]}`
           )
           .join(" ") ?? "",
       video: HTMLVideoElement = document.querySelector("video"),
       isMovie = URLItem.includes("movie"),
       isVShow = URLItem.includes("variety-show"),
-      isVShowToo = document.location.pathname.includes("/intl-common/"),
-      isTrial =
-        document.querySelector(
-          ".iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip"
-        )?.textContent !== undefined,
+      possiblyVShow = document.location.pathname.includes("/intl-common/"),
+      isTrial = document.querySelector(
+        ".iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip"
+      )?.textContent,
       lastestEp: string[] = document
         .querySelector("div.broken-line")
         ?.nextSibling?.nextSibling?.nextSibling?.textContent?.match(
-          /[1-9]?[0-9]?[0-9]/g
+          /[1-9][0-9]?[0-9]?/g
         ),
-      contentEp: string[] = isVShowToo
-        ? data.ep.match(/([1-9]?[0-9]?[0-9]? ?\([1-9]?[0-9]\))/g)
-        : data.ep.match(/[1-9]?[0-9]?[0-9]/g),
+      contentEp: string[] = possiblyVShow
+        ? data.ep.match(/([1-9][0-9]?[0-9]? ?\([1-9][0-9]?\))/g)
+        : data.ep.match(/[1-9][0-9]?[0-9]?/g),
       isPreview =
-        lastestEp && contentEp && !isVShow && !isVShowToo
+        lastestEp && contentEp && !isVShow && !possiblyVShow
           ? parseInt(contentEp[0], 10) > parseInt(lastestEp[0], 10)
           : data.ep.toLowerCase().includes("preview");
 
     if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
-    if (isVShowToo) {
+    if (possiblyVShow) {
       if (contentEp?.length) {
         data.ep = `${(await strings).episode} ${
           contentEp[0].match(/.+?(?=\()/g)[0]
         } ${
           contentEp[0].includes("(")
-            ? `- ${contentEp[0].match(/(\([1-9]?[0-9]\))/g)[0]}`
+            ? `- ${contentEp[0].match(/(\([1-9][0-9]?\))/g)[0]}`
             : "Variety show"
         }`;
-      } else {
-        data.ep = `Variety show`;
-      }
+      } else data.ep = "Variety show";
 
-      data.title = (data.title.match(/.+?(?=\s{2})/g) || [null])[0];
+      [data.title] = data.title.match(/.+?(?=\s{2})/g) || [null];
     }
-    if (isVShow && !isVShowToo) data.ep = "Variety show";
-    if (!isVShow && !isVShowToo && !isMovie && contentEp !== null)
+    if (isVShow && !possiblyVShow) data.ep = "Variety show";
+    if (!isVShow && !possiblyVShow && !isMovie && contentEp)
       data.ep = `${(await strings).episode} ${contentEp[0]}`;
-    else if (!isVShow && !isVShowToo && !isMovie) data.ep = "Highlight";
+    else if (!isVShow && !possiblyVShow && !isMovie) data.ep = "Highlight";
 
     if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
-    if (video !== null && !Number.isNaN(Number(video.duration))) {
-      const timestamps: number[] = presence.getTimestampsfromMedia(video);
-
+    if (video && !Number.isNaN(Number(video.duration))) {
       if (isPreview && !isMovie) data.ep = `${data.ep} preview`;
       else if (video.duration < 270 && !isMovie && !isPreview && !isTrial)
         data.ep = "Highlight";
@@ -142,8 +137,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
       if (showButtons) {
         presenceData.buttons = [
@@ -167,42 +161,28 @@ presence.on("UpdateData", async () => {
     } else if (data.title) {
       presenceData.details = "Looking at:";
       presenceData.state = data.title;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   } else if (document.location.pathname.includes("/search")) {
-    const searchQuery_ = decodeURI(
-        document.location.search.replace("?query=", "")
-      ),
-      result = document
-        .querySelector("div.has-result")
-        ?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
+    const result = document
+      .querySelector("div.has-result")
+      ?.textContent.match(/[0-9][0-9]?[0-9]?[0-9]?/)[0];
 
     presenceData.details = `${(await strings).searchFor} ${
-      searchQuery ? searchQuery_ : "( Hidden )"
+      searchQuery
+        ? decodeURI(document.location.search.replace("?query=", ""))
+        : "( Hidden )"
     }`;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.smallImageKey = "search";
 
     if (result) {
       presenceData.state = `${result} matching ${
         parseInt(result, 10) > 1 ? "results" : "result"
       }`;
-    } else {
-      presenceData.state = `No matching result`;
-    }
+    } else presenceData.state = "No matching result";
   } else if (document.location.pathname.includes("/personal")) {
-    const type = new URLSearchParams(document.location.search).get("type"),
-      all = document.querySelector(
-        "div.trans-contributions-detail > span:nth-child(1) > i"
-      )?.textContent,
-      passed = document.querySelector(
-        "div.trans-contributions-detail > span:nth-child(2) > i"
-      )?.textContent,
-      adopted = document.querySelector(
-        "div.trans-contributions-detail > span:nth-child(3) > i"
-      )?.textContent;
-
-    switch (type) {
+    switch (new URLSearchParams(document.location.search).get("type")) {
       case "settings":
         presenceData.details = (await strings).viewingSettings;
         break;
@@ -217,7 +197,19 @@ presence.on("UpdateData", async () => {
 
       case "translation":
         presenceData.details = "Viewing their subtitle translation";
-        presenceData.state = `All: ${all} • Passed: ${passed} • Adopted: ${adopted}`;
+        presenceData.state = `All: ${
+          document.querySelector(
+            "div.trans-contributions-detail > span:nth-child(1) > i"
+          )?.textContent
+        } • Passed: ${
+          document.querySelector(
+            "div.trans-contributions-detail > span:nth-child(2) > i"
+          )?.textContent
+        } • Adopted: ${
+          document.querySelector(
+            "div.trans-contributions-detail > span:nth-child(3) > i"
+          )?.textContent
+        }`;
         break;
 
       default:
@@ -233,12 +225,11 @@ presence.on("UpdateData", async () => {
 });
 
 /**
- * Check if your eyes can see this element :)
- * @param element The element you want to check
- * @returns The result you want
+ * Check whether the given `Element` is visible.
+ * @param Element
  */
 
-function YouCanSeeThis(element: HTMLElement) {
+function isVisible(element: HTMLElement) {
   const clientRect = element.getBoundingClientRect();
   return (
     clientRect.top >= 0 &&

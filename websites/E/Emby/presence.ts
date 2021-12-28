@@ -25,7 +25,7 @@ interface ApiClient {
       HidePlayedInLatest: boolean;
       // LatestItemsExcludes: Array; // don't know type of content of the array
       // MyMediaExcludes: Array; // don't know type of content of the array
-      OrderedViews: Array<string>;
+      OrderedViews: string[];
       PlayDefaultAudioTrack: boolean;
       RememberAudioSelections: boolean;
       RememberSubtitleSelections: boolean;
@@ -159,7 +159,7 @@ interface MediaSource {
   RequiresLooping: boolean;
   SupportsProbing: true;
   VideoType: string;
-  MediaStreams: Array<MediaStream>;
+  MediaStreams: MediaStream[];
   MediaAttachments: [];
   Formats: [];
   Bitrate: number;
@@ -208,8 +208,8 @@ interface MediaInfo {
   Container: string;
   SortName: string;
   PremiereDate: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
-  ExternalUrls: Array<ExternalUrl>;
-  MediaSources: Array<MediaSource>;
+  ExternalUrls: ExternalUrl[];
+  MediaSources: MediaSource[];
   Path: string;
   EnableMediaSourceDisplay: boolean;
   Overview: string;
@@ -229,11 +229,11 @@ interface MediaInfo {
   IsFolder: boolean;
   ParentId: number;
   Type: string;
-  People: Array<Person>;
+  People: Person[];
   // Studios: Array;
   // GenreItems: Array;
   ParentBackdropItemId: string;
-  ParentBackdropImageTags: Array<string>;
+  ParentBackdropImageTags: string[];
   LocalTrailerCount: number;
   UserData: UserData;
   RecursiveItemCount: number;
@@ -247,7 +247,7 @@ interface MediaInfo {
   PrimaryImageAspectRatio: number;
   SeriesPrimaryImageTag: string;
   SeasonName: string;
-  MediaStreams: Array<MediaStream>;
+  MediaStreams: MediaStream[];
   VideoType: string;
   ImageTags: {
     Primary: string;
@@ -255,7 +255,7 @@ interface MediaInfo {
   // BackdropImageTags: Array;
   // ScreenshotImageTags: Array;
   SeriesStudio: string;
-  Chapters: Array<Chapter>;
+  Chapters: Chapter[];
   LocationType: string;
   MediaType: string;
   // LockedFields: Array;
@@ -267,7 +267,6 @@ interface MediaInfo {
 const // official website
   EMBY_URL = "emby.media",
   // web client app name
-  APP_NAME = "Emby Web",
   // all the presence art assets uploaded to discord
   PRESENCE_ART_ASSETS = {
     download: "downloading",
@@ -317,9 +316,9 @@ function handleOfficialWebsite(): void {
       break;
     default:
       // reading the docs
-      if (location.pathname.startsWith("/community")) {
+      if (location.pathname.startsWith("/community"))
         presenceData.state = "On community page";
-      } else if (
+      else if (
         document.querySelector(".w-pagehead > h1") &&
         document.querySelector(".w-pagehead > h1").textContent === "Emby Blog"
       ) {
@@ -333,8 +332,8 @@ function handleOfficialWebsite(): void {
  *
  * @return {ApiClient} ApiClient object
  */
-async function getApiClient(): Promise<ApiClient> {
-  return await presence.getPageletiable("ApiClient");
+async function getApiClient() {
+  return presence.getPageletiable<ApiClient>("ApiClient");
 }
 
 /**
@@ -344,15 +343,10 @@ async function getApiClient(): Promise<ApiClient> {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isEmbyWebClient(): Promise<boolean> {
-  if (!ApiClient) {
-    ApiClient = await getApiClient();
-  }
+  ApiClient ??= await getApiClient();
 
-  if (typeof ApiClient === "object") {
-    if (ApiClient["_appName"] && ApiClient["_appName"] === APP_NAME) {
-      return true;
-    }
-  }
+  if (typeof ApiClient === "object")
+    if (ApiClient._appName && ApiClient._appName === "Emby Web") return true;
 
   return false;
 }
@@ -363,9 +357,10 @@ async function isEmbyWebClient(): Promise<boolean> {
 async function handleAudioPlayback(): Promise<void> {
   // sometimes the buttons are not created fast enough
   try {
-    const audioElem = document.getElementsByTagName("audio")[0],
-      infoContainer = document.getElementsByClassName("nowPlayingBar")[0],
-      buttons = infoContainer.querySelectorAll("button.itemAction");
+    const [audioElem] = document.getElementsByTagName("audio"),
+      buttons = document
+        .getElementsByClassName("nowPlayingBar")[0]
+        .querySelectorAll("button.itemAction");
 
     presenceData.details = `Listening to: ${
       buttons.length >= 1 ? buttons[0].textContent : "unknown title"
@@ -379,9 +374,9 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
 
-      if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp =
-          presence.getTimestampsfromMedia(audioElem)[1];
+      if (await presence.getSetting<boolean>("showMediaTimestamps")) {
+        [, presenceData.endTimestamp] =
+          presence.getTimestampsfromMedia(audioElem);
       } else delete presenceData.endTimestamp;
 
       // paused
@@ -403,7 +398,7 @@ async function handleAudioPlayback(): Promise<void> {
  */
 function getUserId(): string {
   try {
-    return ApiClient["_currentUser"]["Id"];
+    return ApiClient._currentUser.Id;
   } catch (e) {
     const servers = JSON.parse(
       localStorage.getItem("servercredentials3")
@@ -413,18 +408,11 @@ function getUserId(): string {
     if (location.hash.indexOf("?") > 0) {
       for (const param of location.hash.split("?")[1].split("&")) {
         if (param.startsWith("serverId")) {
-          const serverId = param.split("=")[1];
-
-          for (const server of servers) {
-            if (server.Id === serverId) {
-              return server.UserId;
-            }
-          }
+          for (const server of servers)
+            if (server.Id === param.split("=")[0]) return server.UserId;
         }
       }
-    } else {
-      return servers[0].UserId;
-    }
+    } else return servers[0].UserId;
   }
 }
 
@@ -446,31 +434,27 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
     return;
   }
 
-  if (!ApiClient["_serverInfo"]["AccessToken"]) {
+  if (!ApiClient._serverInfo.AccessToken) {
     ApiClient = await getApiClient();
     return;
   }
 
   media[itemId] = pending;
 
-  const basePath = location.pathname.replace(
-      location.pathname.split("/").slice(-2).join("/"),
-      ""
-    ),
-    baseLocation = location.protocol + "//" + location.host + basePath,
-    res = await fetch(
-      `${baseLocation}emby/Users/${getUserId()}/Items/${itemId}?` +
-        `X-Emby-Client=${ApiClient["_appName"]}&` +
-        `X-Emby-Device-Name=${ApiClient["_deviceName"]}&` +
-        `X-Emby-Device-Id=${ApiClient["_deviceId"]}&` +
-        `X-Emby-Client-Version=${ApiClient["_appVersion"]}&` +
-        `X-Emby-Token=${ApiClient["_serverInfo"]["AccessToken"]}`
+  const res = await fetch(
+      `${`${location.protocol}//${location.host}${location.pathname.replace(
+        location.pathname.split("/").slice(-2).join("/"),
+        ""
+      )}`}emby/Users/${getUserId()}/Items/${itemId}?` +
+        `X-Emby-Client=${ApiClient._appName}&` +
+        `X-Emby-Device-Name=${ApiClient._deviceName}&` +
+        `X-Emby-Device-Id=${ApiClient._deviceId}&` +
+        `X-Emby-Client-Version=${ApiClient._appVersion}&` +
+        `X-Emby-Token=${ApiClient._serverInfo.AccessToken}`
     ),
     mediaInfo = await res.json();
 
-  if (media[itemId] === pending) {
-    media[itemId] = mediaInfo;
-  }
+  if (media[itemId] === pending) media[itemId] = mediaInfo;
 
   return media[itemId];
 }
@@ -486,35 +470,32 @@ async function handleVideoPlayback(): Promise<void> {
     return;
   }
 
-  const videoPlayerElem = document.getElementsByTagName("video")[0];
+  const [videoPlayerElem] = document.getElementsByTagName("video");
 
   // this variables content will be replaced in details and status properties on presenceData
   let title, subtitle;
 
   // title on the header
-  const headerTitleElem = videoPlayerPage.querySelector("h3.videoOsdTitle"),
-    // title on the osdControls
-    osdParentTitleElem = videoPlayerPage.querySelector(
-      "h2.videoOsdParentTitle"
-    );
+  const osdParentTitleElem = videoPlayerPage.querySelector(
+    "h2.videoOsdParentTitle"
+  );
 
   // media metadata
   let mediaInfo: string | MediaInfo;
 
-  const videoPlayerContainerElem = document.body.getElementsByClassName(
+  const [videoPlayerContainerElem] = document.body.getElementsByClassName(
     "videoPlayerContainer"
-  )[0];
+  );
 
   // no background image, we're playing live tv
   if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
     // with this url we can obtain the id of the item we are playing back
-    const mediaId = (
-      videoPlayerContainerElem as HTMLVideoElement
-    ).style.backgroundImage
-      .split('"')[1]
-      .split("/")[5];
 
-    mediaInfo = await obtainMediaInfo(mediaId);
+    mediaInfo = await obtainMediaInfo(
+      (videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage
+        .split('"')[1]
+        .split("/")[5]
+    );
   }
 
   // display generic info
@@ -529,7 +510,9 @@ async function handleVideoPlayback(): Promise<void> {
         subtitle = osdParentTitleElem.textContent;
         break;
       case "Series":
-        title = `Watching ${headerTitleElem.textContent}`;
+        title = `Watching ${
+          videoPlayerPage.querySelector("h3.videoOsdTitle").textContent
+        }`;
         subtitle = osdParentTitleElem.textContent;
         break;
       case "TvChannel":
@@ -551,9 +534,9 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
 
-      if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp =
-          presence.getTimestampsfromMedia(videoPlayerElem)[1];
+      if (await presence.getSetting<boolean>("showMediaTimestamps")) {
+        [, presenceData.endTimestamp] =
+          presence.getTimestampsfromMedia(videoPlayerElem);
       } else delete presenceData.endTimestamp;
 
       // paused
@@ -568,21 +551,18 @@ async function handleVideoPlayback(): Promise<void> {
   presenceData.details = title;
   presenceData.state = subtitle;
 
-  if (!presenceData.state) {
-    delete presenceData.state;
-  }
+  if (!presenceData.state) delete presenceData.state;
 }
 
 /**
  * handleItemDetails - handles the presence when the user is viewing the details of an item
  */
 async function handleItemDetails(): Promise<void> {
-  const params = location.hash.split("?")[1].split("&");
   let id;
 
-  for (const param of params) {
+  for (const param of location.hash.split("?")[1].split("&")) {
     if (param.startsWith("id=")) {
-      id = param.split("=")[1];
+      [id] = param.split("=");
       break;
     }
   }
@@ -740,9 +720,7 @@ async function handleWebClient(): Promise<void> {
       break;
 
     default:
-      if (path.substr(0, 3) !== "dlg") {
-        presence.info(`path: ${path}`);
-      }
+      if (path.substr(0, 3) !== "dlg") presence.info(`path: ${path}`);
   }
 }
 
@@ -750,20 +728,15 @@ async function handleWebClient(): Promise<void> {
  * setDefaultsToPresence - set defaul values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
-  if (presenceData.smallImageKey) {
-    delete presenceData.smallImageKey;
-  }
-  if (presenceData.smallImageText) {
-    delete presenceData.smallImageText;
-  }
-  if (presenceData.startTimestamp) {
-    delete presenceData.startTimestamp;
-  }
-  if (presenceData.endTimestamp) {
-    delete presenceData.endTimestamp;
-  }
+  if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
-  if (await presence.getSetting("showTimestamps"))
+  if (presenceData.smallImageText) delete presenceData.smallImageText;
+
+  if (presenceData.startTimestamp) delete presenceData.startTimestamp;
+
+  if (presenceData.endTimestamp) delete presenceData.endTimestamp;
+
+  if (await presence.getSetting<boolean>("showTimestamps"))
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 }
 
@@ -790,18 +763,13 @@ async function updateData(): Promise<void> {
   if (
     presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
     presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
-  ) {
+  )
     delete presenceData.startTimestamp;
-  }
 
   // if emby is detected init/update the presence status
   if (showPresence) {
-    if (presenceData.details == null) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else {
-      presence.setActivity(presenceData);
-    }
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 }
 
@@ -822,9 +790,9 @@ async function init(): Promise<void> {
     // web client
   } else {
     try {
-      const data = JSON.parse(localStorage.getItem("servercredentials3"));
-
-      for (const server of data.Servers) {
+      for (const server of JSON.parse(
+        localStorage.getItem("servercredentials3")
+      ).Servers) {
         // user has accessed in the last 30 seconds, should be enough for slow connections
         if (
           Date.now() - new Date(server.DateLastAccessed).getTime() <

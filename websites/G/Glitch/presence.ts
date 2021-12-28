@@ -42,13 +42,13 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a user profile:";
       presenceData.state = document.querySelector(
         "body > section > div > div > div > section > section > div > div > div > div > h2 "
-      ).innerHTML;
+      ).textContent;
     }
   } else {
     presenceData.details = "Viewing a page:";
-    if (window.location.pathname.toLowerCase() === "/") {
+    if (window.location.pathname.toLowerCase() === "/")
       presenceData.state = "Homepage";
-    } else if (window.location.pathname.toLowerCase().includes("/questions")) {
+    else if (window.location.pathname.toLowerCase().includes("/questions")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Questions";
     } else if (window.location.pathname.toLowerCase().includes("/create")) {
@@ -70,7 +70,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Editing a project:";
       presenceData.state = document.querySelector(
         "body > div > div > header > nav > button > div > span"
-      ).innerHTML;
+      ).textContent;
     } else if (window.location.pathname.toLowerCase().includes("~")) {
       presenceData.details = "Viewing a project:";
       presenceData.state = window.location.pathname.replace("/", "");
@@ -80,8 +80,6 @@ presence.on("UpdateData", () => {
     } else delete presenceData.details;
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

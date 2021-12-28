@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "630441527826579467"
 });
 
 presence.on("UpdateData", async () => {
-  const Data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "htmlcsscolor"
   };
 
@@ -12,11 +12,11 @@ presence.on("UpdateData", async () => {
   // State: tells you what they are doing with the action (viewing blah/generating blah/listening blah/etc)
 
   if (document.location.pathname.startsWith("/hex")) {
-    Data.details = `Viewing ${
+    presenceData.details = `Viewing ${
       document.querySelector("#uscBootStrapHeader_lblTitle > strong")
         .textContent
     }`;
-    Data.state = `${
+    presenceData.state = `${
       document
         .querySelector("#uscBootStrapHeader_lblTitle > small")
         .textContent.split("#")[0]
@@ -26,39 +26,39 @@ presence.on("UpdateData", async () => {
   // Wheel. Since its on main page the main page is also considered wheel.
   if (
     document.location.href.endsWith("/#wheel") ||
-    document.location.pathname == "/"
+    document.location.pathname === "/"
   ) {
-    Data.details = `Viewing on wheel`;
-    Data.state = `${
+    presenceData.details = "Viewing on wheel";
+    presenceData.state = `${
       (document.querySelector("#cntMain_txtColor") as HTMLInputElement).value
     }`;
   }
 
   // Sub pages
   if (document.location.pathname.startsWith("/html-color-names")) {
-    Data.details = `Viewing the list of`;
-    Data.state = `html color names.`;
+    presenceData.details = "Viewing the list of";
+    presenceData.state = "html color names.";
   }
   if (document.location.pathname.startsWith("/color-names-rgb-values")) {
-    Data.details = `Viewing the list of`;
-    Data.state = `RGB color names.`;
+    presenceData.details = "Viewing the list of";
+    presenceData.state = "RGB color names.";
   }
   if (document.location.pathname.startsWith("/web-safe-colors")) {
-    Data.details = `Viewing the list of`;
-    Data.state = `web save colors.`;
+    presenceData.details = "Viewing the list of";
+    presenceData.state = "web save colors.";
   }
   if (document.location.pathname.startsWith("/random-colors")) {
-    Data.details = `Viewing a list of`;
-    Data.state = `random colors.`;
+    presenceData.details = "Viewing a list of";
+    presenceData.state = "random colors.";
   }
   if (document.location.pathname.startsWith("/color-gradient")) {
-    Data.details = `Generating a`;
-    Data.state = `color gradient.`;
+    presenceData.details = "Generating a";
+    presenceData.state = "color gradient.";
   }
   if (document.location.pathname.startsWith("/contacts")) {
-    Data.details = `Viewing the`;
-    Data.state = `contacts page.`;
+    presenceData.details = "Viewing the";
+    presenceData.state = "contacts page.";
   }
 
-  presence.setActivity(Data);
+  presence.setActivity(presenceData);
 });

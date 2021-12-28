@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "वाह्य",
+    "id": "819696394180100106"
+  },
+  "service": "ComicK",
+  "description": {
+    "en": "🚀 ComicK - Fastest Comic Reader"
+  },
+  "url": "comick.fun",
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/DeNqLCB.png",
+  "thumbnail": "https://i.imgur.com/9Wp14l1.png",
+  "color": "#f698c7",
+  "category": "other",
+  "tags": [
+    "manga",
+    "comic-reader"
+  ]
+}

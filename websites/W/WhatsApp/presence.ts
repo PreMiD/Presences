@@ -5,8 +5,8 @@ const presence = new Presence({
     showRecipient: boolean;
     showNumbers: boolean;
   }> => ({
-    showRecipient: await presence.getSetting("showRecipient"),
-    showNumbers: await presence.getSetting("showNumbers")
+    showRecipient: await presence.getSetting<boolean>("showRecipient"),
+    showNumbers: await presence.getSetting<boolean>("showNumbers")
   });
 
 presence.on("UpdateData", async () => {
@@ -26,8 +26,8 @@ presence.on("UpdateData", async () => {
   )
     name = null;
 
-  if (!name && typing === null) return presence.setActivity();
-  else
+  if (!name && !typing) return presence.setActivity();
+  else {
     presence.setActivity({
       largeImageKey: "waweb-logo",
       details: `Texting with ${name || "someone"}`,
@@ -37,4 +37,5 @@ presence.on("UpdateData", async () => {
         "Just waiting...",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
+  }
 });

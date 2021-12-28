@@ -1,22 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "fjar",
     "id": "334358518570287104"
+  },
+  "service": "CatchPlay",
+  "description": {
+    "en": "CatchPlay is a Taiwanese multimedia company founded in 2007, whose businesses include OTT VOD streaming service operation, linear television channel operation (CatchPlay Movie Channel) and theatrical film distribution.",
+    "nl": "CatchPlay is een Taiwanees multimediabedrijf opgericht in 2007, met activiteiten als OTT VOD-streamingdienst, beheer van lineaire televisiekanalen (CatchPlay Movie Channel) en bioscoopfilmdistributie."
   },
   "url": [
     "www.catchplay.com",
     "catchplay.com"
   ],
-  "description": {
-    "en": "CatchPlay is a Taiwanese multimedia company founded in 2007, whose businesses include OTT VOD streaming service operation, linear television channel operation (CatchPlay Movie Channel) and theatrical film distribution.",
-    "nl": "CatchPlay is een Taiwanees multimediabedrijf opgericht in 2007, met activiteiten als OTT VOD-streamingdienst, beheer van lineaire televisiekanalen (CatchPlay Movie Channel) en bioscoopfilmdistributie."
-  },
-  "service": "CatchPlay",
-  "version": "1.0.4",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/hAt97QK.png",
   "thumbnail": "https://i.imgur.com/vaaItvT.png",
   "color": "#F26F21",
+  "category": "videos",
   "tags": [
     "catchplay",
     "video",
@@ -29,6 +30,5 @@
       "icon": "fas fa-th-large",
       "value": true
     }
-  ],
-  "category": "videos"
+  ]
 }

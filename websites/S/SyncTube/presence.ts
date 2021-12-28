@@ -1,33 +1,33 @@
 const presence = new Presence({
     clientId: "827892428266274857"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
-  const set_timeElapsed = await presence.getSetting("timeElapsed"),
-    set_showButtons = await presence.getSetting("showButtons"),
-    set_privacy = await presence.getSetting("privacy"),
-    set_logo = await presence.getSetting("logo"),
-    presenceData = {
-      largeImageKey: set_logo === 0 ? "logo" : "logo2"
+  const setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
+    setShowButtons = await presence.getSetting<boolean>("showButtons"),
+    setPrivacy = await presence.getSetting<boolean>("privacy"),
+    setLogo = await presence.getSetting<number>("logo"),
+    presenceData: PresenceData = {
+      largeImageKey: setLogo === 0 ? "logo" : "logo2"
     },
     urlpath = window.location.pathname.split("/");
 
-  if (set_timeElapsed) presenceData.startTimestamp = browsingStamp;
+  if (setTimeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
-  if (!urlpath[1]) {
-    presenceData.details = "Home";
-  } else if (urlpath[1] === "rooms") {
+  if (!urlpath[1]) presenceData.details = "Home";
+  else if (urlpath[1] === "rooms") {
     if (urlpath[2]) {
-      presenceData.details = set_privacy
+      presenceData.details = setPrivacy
         ? "In room"
         : document.querySelector("div.roomName.noselect").textContent;
-      if (!set_privacy)
+      if (!setPrivacy) {
         presenceData.state = document.querySelector(
           "div.userCount.noselect"
         ).textContent;
+      }
 
-      if (set_showButtons) {
+      if (setShowButtons) {
         presenceData.buttons = [
           {
             label: "Join room",
@@ -35,16 +35,9 @@ presence.on("UpdateData", async function () {
           }
         ];
       }
-    } else {
-      presenceData.details = "Browsing rooms";
-    }
-  } else {
-    presenceData.details = "Other";
-  }
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+    } else presenceData.details = "Browsing rooms";
+  } else presenceData.details = "Other";
+
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
