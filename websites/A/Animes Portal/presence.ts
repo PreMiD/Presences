@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const filterCodes: Record<number, string> = {
-  366: "bgsub"
+  366: "BG sub"
 };
 
 presence.on("UpdateData", async () => {
@@ -16,15 +16,11 @@ presence.on("UpdateData", async () => {
   if (!paths[0]) paths.shift();
 
   if (pathname === "/") {
-    assign(presenceData, {
-      details: "Home",
-      state: "Viewing the home page"
-    });
+    presenceData.details = "Home";
+    presenceData.state = "Viewing the home page";
   } else if (pathname.startsWith("/messages")) {
     if (!paths[1]) {
-      assign(presenceData, {
-        details: "Viewing messages"
-      });
+      presenceData.details = "Viewing messages";
     } else if (paths[1].startsWith("pm-")) {
       const body = document.querySelector(
         "body > main.animated > div.wrapper > div.dialogPadding"
@@ -35,22 +31,17 @@ presence.on("UpdateData", async () => {
           .textContent
       );
 
-      assign(presenceData, {
-        details: `Messaging ${username}`,
-        smallImageKey: avatar,
-        smallImageText: `Messaging ${username}`
-      });
+      presenceData.details = `Messaging ${username}`;
+      presenceData.smallImageKey = avatar;
+      presenceData.smallImageText = `Messaging ${username}`;
     }
   } else if (pathname === "/chat") {
-    assign(presenceData, {
-      details: "Chatting in the chat"
-    });
+    presenceData.details = "Chatting in the chat";
   } else if (pathname.startsWith("/otakus")) {
     if (!paths[1] || paths[1].startsWith("page-")) {
-      assign(presenceData, {
-        details: "Viewing otakus",
-        state: paths[1] ? "Page " + paths[1].replace("page-", "") : ""
-      });
+      presenceData.details = "Viewing otakus";
+      if (paths[1])
+        presenceData.state = `Page ${paths[1].replace("page-", "")}`;
     } else if (paths[1]) {
       const body = document.querySelector(
         "body > main.animated > section.wrapper > div.header"
@@ -64,12 +55,10 @@ presence.on("UpdateData", async () => {
           .textContent
       );
 
-      assign(presenceData, {
-        details: `Viewing otaku ${username}`,
-        largeImageKey: avatar,
-        smallImageKey: "logo",
-        smallImageText: username
-      });
+      presenceData.details = `Viewing otaku ${username}`;
+      presenceData.largeImageKey = avatar;
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = username;
     }
   } else if (pathname.startsWith("/animes")) {
     const filter: string = new URL(document.location.href).searchParams.get(
@@ -87,21 +76,15 @@ presence.on("UpdateData", async () => {
     }
 
     if (paths[1] === "search" && paths[2]) {
-      assign(presenceData, {
-        details: `Searching for ${paths[2].replaceAll("-", " ")} ${
-          filters.includes("bgsub") ? `with BG sub` : ""
-        }`
-      });
+      presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")} ${
+        filters.length ? "With " + filters.join(", ") : ""
+      }`;
     } else if (paths[1]) {
-      assign(presenceData, {
-        details: `Viewing animes that starts with the keyboard ${paths[1].toUpperCase()}`
-      });
+      presenceData.details = `Viewing animes that starts with the keyboard ${paths[1].toUpperCase()}`;
     } else
-      assign(presenceData, {
-        details: `Viewing animes ${
-          filters.includes("bgsub") ? `with BG sub` : ""
-        }`
-      });
+      presenceData.details = `Viewing animes ${
+        filters.length ? "With " + filters.join(", ") : ""
+      }`;
   } else if (pathname.startsWith("/anime/")) {
     const uid = paths[1];
     const eid = paths[2];
@@ -115,12 +98,20 @@ presence.on("UpdateData", async () => {
           "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
         )
         ?.getAttribute("src");
-      assign(presenceData, {
-        details: `Viewing ${name}`,
-        largeImageKey: image ?? "logo",
-        smallImageKey: image ? "logo" : "",
-        smallImageText: image ? name : ""
-      });
+
+      if (image) {
+        presenceData.smallImageKey = "logo";
+        presenceData.smallImageText = "logo";
+      }
+
+      presenceData.details = `Viewing ${name}`;
+      presenceData.largeImageKey = image ?? "logo";
+      presenceData.buttons = [
+        {
+          label: `View ${name}`,
+          url: document.location.href
+        }
+      ];
     } else if (uid && eid) {
       const { name, episode, part } = getInfo();
 
@@ -130,13 +121,147 @@ presence.on("UpdateData", async () => {
         )
         ?.classList.contains("playing");
 
-      if (!playing)
-        assign(presenceData, {
-          details: `Watching ${name}`,
-          state: `Episode ${episode} ${part ? `(part ${part})` : ""}`
-        });
-      else return;
+      if (!playing) {
+        presenceData.details = `Watching ${name}`;
+        presenceData.state = `Episode ${episode}`;
+        presenceData.buttons = [
+          {
+            label: `Watch ${name}`,
+            url: document.location.href
+          }
+        ];
+
+        if (part) presenceData.state = presenceData.state += ` (part ${part})`;
+      } else return;
     }
+  } else if (pathname.startsWith("/movies")) {
+    const filter: string = new URL(document.location.href).searchParams.get(
+      "filters"
+    );
+    const filters: string[] = [];
+
+    if (filter) {
+      filter
+        .split(",")
+        .map((x: string) => parseInt(x, 10))
+        .forEach((f: number) => {
+          if (filterCodes[f]) filters.push(filterCodes[f]);
+        });
+    }
+
+    if (paths[1] === "search" && paths[2]) {
+      presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")} ${
+        filters.length ? "With " + filters.join(", ") : ""
+      }`;
+    } else if (paths[1]) {
+      presenceData.details = `Viewing movies that starts with the keyboard ${paths[1].toUpperCase()}`;
+    } else
+      presenceData.details = `Viewing movies ${
+        filters.length ? "With " + filters.join(", ") : ""
+      }`;
+  } else if (pathname.startsWith("/movie/")) {
+    const name = document.querySelector(
+      "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
+    ).textContent;
+    const image = document
+      .querySelector(
+        "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
+      )
+      ?.getAttribute("src");
+
+    if (image) {
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = name;
+    }
+
+    presenceData.details = `Viewing movie ${name}`;
+    presenceData.largeImageKey = image ?? "logo";
+  } else if (pathname.startsWith("/manga")) {
+    const filter: string = new URL(document.location.href).searchParams.get(
+      "filters"
+    );
+    const filters: string[] = [];
+
+    if (filter) {
+      filter
+        .split(",")
+        .map((x: string) => parseInt(x, 10))
+        .forEach((f: number) => {
+          if (filterCodes[f]) filters.push(filterCodes[f]);
+        });
+    }
+
+    if (paths[1] === "search" && paths[2]) {
+      presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")} ${
+        filters.length ? "With " + filters.join(", ") : ""
+      }`;
+    } else if (paths[1] && paths[2]?.startsWith("vol-")) {
+      const tom = paths[2].replace("vol-", "");
+
+      if (paths[3].startsWith("chapter-")) {
+        const list = document.querySelectorAll(
+          "body > main.animated > ul#path > li > a > span"
+        );
+        const name = list[1].textContent;
+        const chapter = between(list[3].textContent, "Глава ", " -");
+        const page = document.querySelector(
+          "body > main.animated > div.wrapper > div.heading > b#num"
+        ).textContent;
+
+        presenceData.details = `Reading manga ${name}`;
+        presenceData.state = `Tom: ${tom}, Chapter: ${chapter}, Page: ${page}`;
+        presenceData.buttons = [
+          {
+            label: "Read manga",
+            url: document.location.href
+          }
+        ];
+      } else {
+        const name = document.querySelector(
+          "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h2 > a.sub"
+        ).textContent;
+
+        if (name) presenceData.details = `Reading manga ${name}`;
+
+        presenceData.state = `Tom ${tom}`;
+        presenceData.buttons = [
+          {
+            label: "Read manga",
+            url: document.location.href
+          }
+        ];
+      }
+    } else if (hasNumber(paths[1])) {
+      const name = document.querySelector(
+        "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
+      ).textContent;
+      const image = document
+        .querySelector(
+          "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
+        )
+        ?.getAttribute("src");
+
+      if (name) presenceData.details = `Viewing manga ${name}`;
+
+      presenceData.largeImageKey = image ?? "logo";
+
+      if (image) {
+        presenceData.smallImageKey = "logo";
+        presenceData.smallImageText = name;
+      }
+
+      presenceData.buttons = [
+        {
+          label: "View manga",
+          url: document.location.href
+        }
+      ];
+    } else if (paths[1]) {
+      presenceData.details = `Viewing manga that starts with the keyboard ${paths[1].toUpperCase()}`;
+    } else if (!paths[1])
+      presenceData.details = `Viewing manga ${
+        filters.length ? "With " + filters.join(", ") : ""
+      }`;
   }
 
   if (presenceData.details) {
@@ -144,7 +269,7 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity();
 });
 
-declare interface iframeData {
+interface iframeData {
   currentTime: number;
   duration: number;
   paused: boolean;
@@ -164,18 +289,22 @@ presence.on("iFrameData", async (data: iframeData) => {
         Math.floor(data.currentTime),
         Math.floor(data.duration)
       );
-  else
-    assign(presenceData, {
-      smallImageKey: "start",
-      smallImageText: "Paused"
-    });
+  else {
+    presenceData.smallImageKey = "start";
+    presenceData.smallImageText = "Paused";
+  }
 
-  assign(presenceData, {
-    details: `Watching ${epInfo.name}`,
-    state: `Episode ${epInfo.episode} ${
-      epInfo.part ? `(part ${epInfo.part})` : ""
-    }`
-  });
+  presenceData.details = `Watching ${epInfo.name}`;
+  presenceData.state = `Episode ${epInfo.episode}`;
+  presenceData.buttons = [
+    {
+      label: `Watch ${name}`,
+      url: document.location.href
+    }
+  ];
+
+  if (epInfo.part)
+    presenceData.state = presenceData.state += ` (part ${epInfo.part})`;
 
   if (presenceData.details) {
     presence.setActivity(presenceData);
@@ -224,8 +353,8 @@ function parseAvatarFromAttr(attr: string) {
   return avatar;
 }
 
-function assign(data: PresenceData, newdata: PresenceData) {
-  return Object.assign(data, newdata);
+function hasNumber(str: string) {
+  return /\d/.test(str);
 }
 
 function between(st: string, b1: string, b2: string) {
