@@ -95,7 +95,6 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     presenceData.details = "Browsing...";
-    presenceData.largeImageKey = "logo";
     presence.setActivity(presenceData);
   }
 });
