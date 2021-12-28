@@ -2,6 +2,7 @@
 node_modules
 package-lock.json
 .env
+yarn.lock
 
 # Compiled files
 **/*.js
