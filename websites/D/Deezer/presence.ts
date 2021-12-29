@@ -4,9 +4,9 @@ const presence = new Presence({
 
 let oldLang: string = null,
   albumCoverURL: string,
-  albumCoverID: string,
+  albumCoverId: string,
   podcastCoverURL: string,
-  podcastCoverID: string;
+  podcastCoverId: string;
 
 presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
