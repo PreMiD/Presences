@@ -30,62 +30,74 @@ presence.on("UpdateData", () => {
       presenceData.smallImageText = "IGDB";
     }
   } else if (path.startsWith("/genres")) {
-    path === "/genres"
-      ? (presenceData.details = "Browsing all genres")
-      : ((presenceData.details = "Browsing a genre"),
-        (presenceData.state = document.title.slice(0, -5)));
+    if (path === "/genres") presenceData.details = "Browsing all genres";
+    else {
+      (presenceData.details = "Browsing a genre"),
+        (presenceData.state = document.title.slice(0, -5));
+    }
   } else if (path.startsWith("/platforms")) {
-    path === "/platforms"
-      ? (presenceData.details = "Browsing all platforms")
-      : (delete presenceData.largeImageKey,
+    if (path === "/platforms") presenceData.details = "Browsing all platforms";
+    else {
+      delete presenceData.largeImageKey,
         (presenceData.details = "Viewing a platform"),
         (presenceData.state = document.title),
         (presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
           "#content-page > div > div > div.row > div.col-sm-4 > img"
         ).src),
         (presenceData.smallImageKey = "logo"),
-        (presenceData.smallImageText = "IGDB"));
+        (presenceData.smallImageText = "IGDB");
+    }
   } else if (path.startsWith("/top-100")) {
     presenceData.details = "Viewing Top 100";
     presenceData.state = document.title;
   } else if (path.startsWith("/reviews"))
     presenceData.details = "Finding game reviews";
   else if (path.startsWith("/themes")) {
-    path === "/themes"
-      ? (presenceData.details = "Browsing all themes")
-      : ((presenceData.details = "Browsing a theme"),
-        (presenceData.state = document.title.slice(0, -5)));
+    if (path === "/themes") presenceData.details = "Browsing all themes";
+    else {
+      presenceData.details = "Browsing a theme";
+      presenceData.state = document.title.slice(0, -5);
+    }
   } else if (path.startsWith("/collections")) {
-    path === "/collections"
-      ? (presenceData.details = "Browsing all collections")
-      : ((presenceData.details = "Browsing a collection"),
-        (presenceData.state = document.title));
+    if (path === "/collections")
+      presenceData.details = "Browsing all collections";
+    else {
+      presenceData.details = "Browsing a collection";
+      presenceData.state = document.title;
+    }
   } else if (path.startsWith("/player_perspectives")) {
-    path === "/player_perspectives"
-      ? (presenceData.details = "Browsing all player perspectives")
-      : ((presenceData.details = "Browsing a player perspective's games"),
-        (presenceData.state = document.title.slice(0, -5)));
+    if (path === "/player_perspectives")
+      presenceData.details = "Browsing all player perspectives";
+    else {
+      presenceData.details = "Browsing a player perspective's games";
+      presenceData.state = document.title.slice(0, -5);
+    }
   } else if (path.startsWith("/franchises")) {
-    path === "/franchises"
-      ? (presenceData.details = "Browsing all franchises")
-      : ((presenceData.details = "Browsing a franchise"),
-        (presenceData.state = document.title));
+    if (path === "/franchises")
+      presenceData.details = "Browsing all franchises";
+    else {
+      presenceData.details = "Browsing a franchise";
+      presenceData.state = document.title;
+    }
   } else if (path.startsWith("/categories")) {
-    path === "/categories"
-      ? (presenceData.details = "Browsing all categories")
-      : ((presenceData.details = "Browsing a category"),
-        (presenceData.state = document.title.slice(0, -5)));
+    if (path === "/categories")
+      presenceData.details = "Browsing all categories";
+    else {
+      presenceData.details = "Browsing a category";
+      presenceData.state = document.title.slice(0, -5);
+    }
   } else if (path.startsWith("/companies")) {
-    path === "/companies"
-      ? (presenceData.details = "Browsing all companies")
-      : (delete presenceData.largeImageKey,
-        (presenceData.details = "Viewing a company"),
-        (presenceData.state = document.title),
-        (presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-          "#content-page > div > div > div:nth-child(3) > div.row.mar-md-bottom > div.col-sm-4 > img"
-        ).src),
-        (presenceData.smallImageKey = "logo"),
-        (presenceData.smallImageText = "IGDB"));
+    if (path === "/companies") presenceData.details = "Browsing all companies";
+    else {
+      delete presenceData.largeImageKey;
+      presenceData.details = "Viewing a company";
+      presenceData.state = document.title;
+      presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+        "#content-page > div > div > div:nth-child(3) > div.row.mar-md-bottom > div.col-sm-4 > img"
+      ).src;
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "IGDB";
+    }
   }
   presence.setActivity(presenceData);
 });
