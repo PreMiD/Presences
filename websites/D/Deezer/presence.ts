@@ -2,7 +2,11 @@ const presence = new Presence({
   clientId: "607651992567021580"
 });
 
-let oldLang: string = null;
+let oldLang: string = null,
+  albumCoverURL: string,
+  albumCoverID: string,
+  podcastCoverURL: string,
+  podcastCoverID: string;
 
 presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
@@ -11,9 +15,10 @@ presence.on("UpdateData", async () => {
     strings = await getStrings(),
     paused = false;
 
-  const [buttons, newLang] = await Promise.all([
+  const [buttons, newLang, cover] = await Promise.all([
     presence.getSetting<boolean>("buttons"),
-    presence.getSetting<string>("lang").catch(() => "en")
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("cover")
   ]);
 
   oldLang ??= newLang;
@@ -63,7 +68,7 @@ presence.on("UpdateData", async () => {
   if (document.querySelector(".page-player")) {
     const [albumLink, artistLink] = document.querySelector<HTMLAnchorElement>(
         "div.marquee-content"
-      ).children,
+      ).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
       currentTime = document.querySelector(
         "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
       ).textContent,
@@ -73,7 +78,8 @@ presence.on("UpdateData", async () => {
       timestamps = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
         presence.timestampFromFormat(duration)
-      );
+      ),
+      [, , , , , albumID] = albumLink.href.split("/");
 
     if (
       document
@@ -91,6 +97,20 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
         ".track-link:nth-child(2)"
       ).textContent;
+
+      albumCoverID ??= albumID;
+      albumCoverURL ??= (
+        await fetch(`https://api.deezer.com/album/${albumCoverID}/image`)
+      ).url;
+
+      if (albumCoverID !== albumID) {
+        albumCoverID = albumID;
+        albumCoverURL = (
+          await fetch(`https://api.deezer.com/album/${albumCoverID}/image`)
+        ).url;
+      }
+
+      presenceData.largeImageKey = cover ? albumCoverURL : "deezer";
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused ? strings.pause : strings.play;
       [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
@@ -114,12 +134,30 @@ presence.on("UpdateData", async () => {
       }
     } else {
       const [podcastLink] = document.querySelector<HTMLAnchorElement>(
-        "div.marquee-content"
-      ).children;
+          "div.marquee-content"
+        ).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
+        [, , , , , podcastID] = podcastLink.href.split("/");
       [presenceData.state, presenceData.details] = document
         .querySelector("div.marquee-content")
         .textContent.split(" · ");
-      presenceData.largeImageKey = "deezer";
+
+      podcastCoverID ??= podcastID;
+      podcastCoverURL ??= (
+        await (
+          await fetch(`https://api.deezer.com/podcast/${podcastCoverID}`)
+        ).json()
+      ).picture;
+
+      if (podcastCoverID !== podcastID) {
+        podcastCoverID = podcastID;
+        podcastCoverURL = (
+          await (
+            await fetch(`https://api.deezer.com/podcast/${podcastCoverID}`)
+          ).json()
+        ).picture;
+      }
+
+      presenceData.largeImageKey = cover ? podcastCoverURL : "deezer";
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused ? strings.pause : strings.play;
       [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
