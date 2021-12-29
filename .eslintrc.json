@@ -44,13 +44,6 @@
     "template-curly-spacing": "error",
     "no-console": "warn",
     "no-var": "error",
-    "no-restricted-syntax": [
-      "error",
-      {
-        "selector": "TSEnumDeclaration[const=true]",
-        "message": "Usage of const enums is forbidden."
-      }
-    ],
     "@typescript-eslint/no-explicit-any": "error",
     "no-eval": "warn",
     "no-undefined": "error",
