@@ -118,7 +118,7 @@ const paths = {
 };
 
 presence.on("UpdateData", async () => {
-  const buttons = await presence.getSetting("buttons"),
+  const buttons = await presence.getSetting<boolean>("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       state: "Browsing...",

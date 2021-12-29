@@ -235,7 +235,14 @@ const updateCallback = {
 
 		*/
 
-      const mwConfig = await presence.getPageletiable('mw"]["config"]["values'),
+      const mwConfig = await presence.getPageletiable<{
+          wgSiteName: string;
+          wgAction: string;
+          wgPageName: string;
+          wgCanonicalNamespace: string;
+          wgNamespaceNumber: number;
+          wgIsMainPage: boolean;
+        }>('mw"]["config"]["values'),
         siteName = mwConfig.wgSiteName,
         actionResult = (): string =>
           getURLParam("action") || getURLParam("veaction") || mwConfig.wgAction,

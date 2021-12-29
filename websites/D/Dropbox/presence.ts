@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "dropbox_logo"
     },
-    showFileNames = await presence.getSetting("showFileNames");
+    showFileNames = await presence.getSetting<boolean>("showFileNames");
 
   if (document.location.pathname === "/")
     presenceData.details = "Viewing homepage";

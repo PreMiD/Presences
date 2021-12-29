@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: tmb
     },
     path = document.location.pathname.toLowerCase(),
-    showButton = await presence.getSetting("showButton");
+    showButton = await presence.getSetting<boolean>("showButton");
 
   if (path === "/") {
     const categ = document

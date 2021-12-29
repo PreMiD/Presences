@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "icon",
       startTimestamp: elapsed
     },
-    useChatNames: boolean = await presence.getSetting("useChatNames");
+    useChatNames = await presence.getSetting<boolean>("useChatNames");
 
   let department: string,
     category: string,

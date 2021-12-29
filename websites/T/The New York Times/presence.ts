@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
   if (!presenceData.state) delete presenceData.state;
 
   if (
-    !(await presence.getSetting("buttons")) ||
+    !(await presence.getSetting<boolean>("buttons")) ||
     window.location.href === "https://www.nytimes.com/"
   )
     delete presenceData.buttons;

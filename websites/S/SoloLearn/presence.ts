@@ -50,10 +50,10 @@ const statics = {
 presence.on("UpdateData", async () => {
   const { host } = location,
     path = location.pathname.replace(/\/?$/, "/"),
-    showBrowsing = await presence.getSetting("browse"),
-    showCourses = await presence.getSetting("course"),
-    showCodes = await presence.getSetting("code"),
-    showTimestamps = await presence.getSetting("timestamp");
+    showBrowsing = await presence.getSetting<boolean>("browse"),
+    showCourses = await presence.getSetting<boolean>("course"),
+    showCodes = await presence.getSetting<boolean>("code"),
+    showTimestamps = await presence.getSetting<boolean>("timestamp");
 
   let presenceData: PresenceData = {
     largeImageKey: "sololearn",

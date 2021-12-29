@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
     ];
   }
 
-  const showButtons = await presence.getSetting("buttons");
+  const showButtons = await presence.getSetting<boolean>("buttons");
 
   if (!showButtons) delete presenceData.buttons;
 

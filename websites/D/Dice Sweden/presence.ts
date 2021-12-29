@@ -14,8 +14,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     },
-    showButtons: boolean = await presence.getSetting("buttons"),
-    showTimestamps: boolean = await presence.getSetting("timestamps");
+    showButtons = await presence.getSetting<boolean>("buttons"),
+    showTimestamps = await presence.getSetting<boolean>("timestamps");
 
   switch (window.location.pathname) {
     case "/":

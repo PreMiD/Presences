@@ -44,13 +44,13 @@ async function getStrings() {
       followed: "v live.followed",
       policies: "v live.policies"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting<string>("lang")
   );
 }
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -58,7 +58,29 @@ presence.on("UpdateData", async () => {
     prevUrl = document.location.href;
     elapsed = Math.floor(Date.now() / 1000);
   }
-  const privacy = await presence.getSetting("privacy");
+  const [
+    privacy,
+    showBrowsing,
+    showLive,
+    showVideo,
+    showTimestamps,
+    newLang,
+    vidDetail,
+    vidState,
+    streamDetail,
+    streamState
+  ] = await Promise.all([
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("browse"),
+    presence.getSetting<boolean>("live"),
+    presence.getSetting<boolean>("video"),
+    presence.getSetting<boolean>("timestamp"),
+    presence.getSetting<string>("lang"),
+    presence.getSetting<string>("vidDetail"),
+    presence.getSetting<string>("vidState"),
+    presence.getSetting<string>("streamDetail"),
+    presence.getSetting<string>("streamState")
+  ]);
 
   let presenceData: PresenceData = {
       largeImageKey: "vlive2",
@@ -67,20 +89,11 @@ presence.on("UpdateData", async () => {
     searchPageValue: string;
   if (!privacy) {
     searchPageValue =
-      (document.querySelector("#searchForm > input") as HTMLInputElement)
-        ?.value ?? "ERROR: NOT FOUND!";
+      document.querySelector<HTMLInputElement>("#searchForm > input")?.value ??
+      "ERROR: NOT FOUND!";
   }
 
   const path = location.pathname.replace(/\/?$/, "/"),
-    showBrowsing = await presence.getSetting("browse"),
-    showLive = await presence.getSetting("live"),
-    showVideo = await presence.getSetting("video"),
-    showTimestamps = await presence.getSetting("timestamp"),
-    newLang = await presence.getSetting("lang"),
-    vidDetail = await presence.getSetting("vidDetail"),
-    vidState = await presence.getSetting("vidState"),
-    streamDetail = await presence.getSetting("streamDetail"),
-    streamState = await presence.getSetting("streamState"),
     channelPageChannelName = document.querySelector(
       "#root > div > div > div > nav > div > a > strong"
     )
@@ -92,110 +105,110 @@ presence.on("UpdateData", async () => {
       [name: string]: PresenceData;
     } = {
       "/home/new/": {
-        details: (await strings).browseThrough,
-        state: (await strings).newVid,
+        details: strings.browseThrough,
+        state: strings.newVid,
         smallImageKey: "reading"
       },
       "/home/chart/": {
-        details: (await strings).browseThrough,
-        state: (await strings).charts,
+        details: strings.browseThrough,
+        state: strings.charts,
         smallImageKey: "reading"
       },
       "/home/my/": {
-        details: (await strings).recentUploads.includes("{0}")
-          ? (await strings).recentUploads.split("{0}")[0]
-          : (await strings).recentUploads,
-        state: (await strings).recentUploads.split("{0}")[1],
+        details: strings.recentUploads.includes("{0}")
+          ? strings.recentUploads.split("{0}")[0]
+          : strings.recentUploads,
+        state: strings.recentUploads.split("{0}")[1],
         smallImageKey: "reading"
       },
       "/my/": {
-        details: (await strings).viewTheir,
-        state: (await strings).profile,
+        details: strings.viewTheir,
+        state: strings.profile,
         smallImageKey: "reading"
       },
       "/my/profile/": {
-        details: (await strings).profileEdit.includes("{0}")
-          ? (await strings).profileEdit.split("{0}")[0]
-          : (await strings).profileEdit,
-        state: (await strings).profileEdit.split("{0}")[1],
+        details: strings.profileEdit.includes("{0}")
+          ? strings.profileEdit.split("{0}")[0]
+          : strings.profileEdit,
+        state: strings.profileEdit.split("{0}")[1],
         smallImageKey: "search"
       },
       "/my/watched/": {
-        details: (await strings).viewTheir,
-        state: (await strings).watched,
+        details: strings.viewTheir,
+        state: strings.watched,
         smallImageKey: "reading"
       },
       "/my/purchased/": {
-        details: (await strings).viewTheir,
-        state: (await strings).purchases,
+        details: strings.viewTheir,
+        state: strings.purchases,
         smallImageKey: "reading"
       },
       "/my/coin/": {
-        details: (await strings).viewTheir,
-        state: (await strings).coins,
+        details: strings.viewTheir,
+        state: strings.coins,
         smallImageKey: "reading"
       },
       "/my/devices/": {
-        details: (await strings).viewTheir,
-        state: (await strings).devices,
+        details: strings.viewTheir,
+        state: strings.devices,
         smallImageKey: "reading"
       },
       "/my/channels/": {
-        details: (await strings).viewTheir,
-        state: (await strings).followed,
+        details: strings.viewTheir,
+        state: strings.followed,
         smallImageKey: "reading"
       },
       "/upcoming/": {
-        details: (await strings).browseThrough,
-        state: (await strings).upcoming,
+        details: strings.browseThrough,
+        state: strings.upcoming,
         smallImageKey: "reading"
       },
       "/channels/": {
-        details: (await strings).browseThrough,
-        state: (await strings).channelList,
+        details: strings.browseThrough,
+        state: strings.channelList,
         smallImageKey: "reading"
       },
       "/channel/(\\w*\\d*)/": {
-        details: (await strings).channelHome,
-        state: (await strings).ofChannel.replace("{0}", channelPageChannelName),
+        details: strings.channelHome,
+        state: strings.ofChannel.replace("{0}", channelPageChannelName),
         smallImageKey: "reading"
       },
       "/channel/(\\w*\\d*)/schedule/": {
-        details: (await strings).channelSchedule,
-        state: (await strings).ofChannel.replace("{0}", channelPageChannelName),
+        details: strings.channelSchedule,
+        state: strings.ofChannel.replace("{0}", channelPageChannelName),
         smallImageKey: "reading"
       },
       "/channel/(\\w*\\d*)/my/": {
-        details: (await strings).channelMy,
-        state: (await strings).ofChannel.replace("{0}", channelPageChannelName),
+        details: strings.channelMy,
+        state: strings.ofChannel.replace("{0}", channelPageChannelName),
         smallImageKey: "reading"
       },
       "/channel/(\\w*\\d*)/store/": {
-        details: (await strings).channelStore,
-        state: (await strings).ofChannel.replace("{0}", channelPageChannelName),
+        details: strings.channelStore,
+        state: strings.ofChannel.replace("{0}", channelPageChannelName),
         smallImageKey: "reading"
       },
       "/channel/(\\w*\\d*)/board/": {
-        details: (await strings).channelBoard.replace(
+        details: strings.channelBoard.replace(
           "{0}",
           document.querySelector("#root > div > div > div > div > div > h3")
             ?.textContent ?? "ERROR: NOT FOUND!"
         ),
-        state: (await strings).ofChannel.replace("{0}", channelPageChannelName),
+        state: strings.ofChannel.replace("{0}", channelPageChannelName),
         smallImageKey: "reading"
       },
       "/events/": {
-        details: (await strings).browseThrough,
-        state: (await strings).events,
+        details: strings.browseThrough,
+        state: strings.events,
         smallImageKey: "reading"
       },
       "/vstore/": {
-        details: (await strings).browseThrough,
-        state: (await strings).store,
+        details: strings.browseThrough,
+        state: strings.store,
         smallImageKey: "reading"
       },
       "/product/(\\w*\\d*)/": {
-        details: (await strings).product.replace(
+        details: strings.product.replace(
           "{0}",
           document.querySelector("a.name")?.textContent ?? "ERROR: NOT FOUND!"
         ),
@@ -204,26 +217,23 @@ presence.on("UpdateData", async () => {
         smallImageKey: "reading"
       },
       "/search/": {
-        details: privacy
-          ? (await strings).searchSomething
-          : (await strings).searchFor,
+        details: privacy ? strings.searchSomething : strings.searchFor,
         state: searchPageValue,
         smallImageKey: "search"
       },
       "/policies/": {
-        details: (await strings).policies,
+        details: strings.policies,
         smallImageKey: "reading"
       },
       "/about/": {
-        details: `${(await strings).readingAbout} V LIVE`,
+        details: `${strings.readingAbout} V LIVE`,
         smallImageKey: "reading"
       }
     };
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (showBrowsing) {
@@ -231,7 +241,7 @@ presence.on("UpdateData", async () => {
       if (path.match(k)) presenceData = { ...presenceData, ...v };
 
     if (privacy) {
-      presenceData.details = (await strings).browse;
+      presenceData.details = strings.browse;
       presenceData.smallImageKey = "reading";
       delete presenceData.state;
     }
@@ -265,8 +275,8 @@ presence.on("UpdateData", async () => {
           }
           presenceData.smallImageKey = video.paused ? "pause" : "live";
           presenceData.smallImageText = video.paused
-            ? (await strings).pause
-            : (await strings).live;
+            ? strings.pause
+            : strings.live;
           presenceData.details = streamDetail
             .replace("%title%", title)
             .replace("%streamer%", channelPageChannelName);
@@ -279,10 +289,10 @@ presence.on("UpdateData", async () => {
 
         //* Privacy mode enabled.
         if (privacy && showLive) {
-          presenceData.details = (await strings).watchingLive;
+          presenceData.details = strings.watchingLive;
           delete presenceData.state;
         } else if (showBrowsing && !showLive) {
-          presenceData.details = (await strings).browse;
+          presenceData.details = strings.browse;
           presenceData.smallImageKey = "reading";
           delete presenceData.state;
         }
@@ -293,8 +303,8 @@ presence.on("UpdateData", async () => {
             presence.getTimestampsfromMedia(video);
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused
-            ? (await strings).pause
-            : (await strings).play;
+            ? strings.pause
+            : strings.play;
           presenceData.details = vidDetail
             .replace("%title%", title)
             .replace("%uploader%", channelPageChannelName);
@@ -310,10 +320,10 @@ presence.on("UpdateData", async () => {
 
         //* Privacy mode enabled.
         if (privacy && showVideo) {
-          presenceData.details = (await strings).watchingVid;
+          presenceData.details = strings.watchingVid;
           delete presenceData.state;
         } else if (showBrowsing && !showVideo) {
-          presenceData.details = (await strings).browse;
+          presenceData.details = strings.browse;
           presenceData.smallImageKey = "reading";
           delete presenceData.state;
         }
@@ -334,16 +344,16 @@ presence.on("UpdateData", async () => {
             .replace("%title%", title)
             .replace("%streamer%", channelPageChannelName);
           presenceData.smallImageKey = "premiere-live";
-          presenceData.smallImageText = (await strings).waitingLiveThe;
+          presenceData.smallImageText = strings.waitingLiveThe;
         }
 
         //* Privacy mode enabled.
         if (privacy && showLive) {
-          presenceData.details = (await strings).waitingLive;
+          presenceData.details = strings.waitingLive;
           delete presenceData.state;
           delete presenceData.smallImageText;
         } else if (showBrowsing && !showLive) {
-          presenceData.details = (await strings).browse;
+          presenceData.details = strings.browse;
           presenceData.smallImageKey = "reading";
           delete presenceData.state;
           delete presenceData.smallImageText;
@@ -358,16 +368,16 @@ presence.on("UpdateData", async () => {
             .replace("%title%", title)
             .replace("%uploader%", channelPageChannelName);
           presenceData.smallImageKey = "premiere";
-          presenceData.smallImageText = (await strings).waitingVidThe;
+          presenceData.smallImageText = strings.waitingVidThe;
         }
 
         //* Privacy mode enabled.
         if (privacy && showVideo) {
-          presenceData.details = (await strings).waitingVid;
+          presenceData.details = strings.waitingVid;
           delete presenceData.state;
           delete presenceData.smallImageText;
         } else if (showBrowsing && !showVideo) {
-          presenceData.details = (await strings).browse;
+          presenceData.details = strings.browse;
           presenceData.smallImageKey = "reading";
           delete presenceData.state;
           delete presenceData.smallImageText;
@@ -399,8 +409,8 @@ presence.on("UpdateData", async () => {
           presence.getTimestampsfromMedia(video);
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
         presenceData.details = vidDetail
           .replace("%title%", videoTitle.textContent)
           .replace("%uploader%", videoPoster.textContent);
@@ -416,17 +426,15 @@ presence.on("UpdateData", async () => {
 
       //* Privacy mode enabled.
       if (privacy && showVideo) {
-        presenceData.details = (await strings).watchingVid;
+        presenceData.details = strings.watchingVid;
         delete presenceData.state;
       } else if (showBrowsing && !showVideo) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
       }
     } else if (postTitle && postPoster) {
       //* Normal text post
-      presenceData.details = `${(await strings).readingPost} (${
-        postPoster.textContent
-      })`;
+      presenceData.details = `${strings.readingPost} (${postPoster.textContent})`;
       presenceData.state = postTitle.textContent;
       presenceData.smallImageKey = "reading";
     }

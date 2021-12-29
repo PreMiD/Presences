@@ -11,8 +11,8 @@ presence.on("UpdateData", async () => {
     },
     page = window.location.pathname,
     pageh = document.location.href,
-    buttons = await presence.getSetting("buttons"),
-    privacy = await presence.getSetting("privacy");
+    buttons = await presence.getSetting<boolean>("buttons"),
+    privacy = await presence.getSetting<boolean>("privacy");
 
   if (page === "/" && !location.search) {
     presenceData.details = "Bekijkt:";

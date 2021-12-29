@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     },
-    lock = await presence.getSetting("lock");
+    lock = await presence.getSetting<boolean>("lock");
   presenceprivate = document.querySelector(
     "div.d-inline-flex.align-items-baseline > h1 > span"
   );

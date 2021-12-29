@@ -4,7 +4,8 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getTranslation(name: string) {
-  const language = (await presence.getSetting("lang")) === 0 ? "en" : "de";
+  const language =
+    (await presence.getSetting<0 | 1>("lang")) === 0 ? "en" : "de";
 
   switch (name) {
     case "home":

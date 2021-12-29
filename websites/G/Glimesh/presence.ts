@@ -61,15 +61,15 @@ presence.on("UpdateData", async () => {
       }
     } else if (locationPath.match("/profile")) {
       presenceData.details = `Viewing${
-        !(await presence.getSetting("show_details")) ? " a " : " "
+        !(await presence.getSetting<boolean>("show_details")) ? " a " : " "
       }Profile`;
 
-      if (await presence.getSetting("show_details"))
+      if (await presence.getSetting<boolean>("show_details"))
         presenceData.state = document.title.replace("'s Profile - Glimesh", "");
 
       if (
-        (await presence.getSetting("show_buttons")) &&
-        (await presence.getSetting("show_details"))
+        (await presence.getSetting<boolean>("show_buttons")) &&
+        (await presence.getSetting<boolean>("show_details"))
       ) {
         presenceData.buttons = [
           {
@@ -79,17 +79,19 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (document.getElementById("video-column")) {
-      presenceData.details = (await presence.getSetting("show_details"))
+      presenceData.details = (await presence.getSetting<boolean>(
+        "show_details"
+      ))
         ? document.title.replace(" - Glimesh", "")
         : "Watching a Stream";
-      if (await presence.getSetting("show_details"))
+      if (await presence.getSetting<boolean>("show_details"))
         presenceData.state = document.querySelector("h3").textContent;
 
       const video = document.querySelector("video");
 
       if (
-        (await presence.getSetting("show_buttons")) &&
-        (await presence.getSetting("show_details"))
+        (await presence.getSetting<boolean>("show_buttons")) &&
+        (await presence.getSetting<boolean>("show_details"))
       ) {
         presenceData.buttons = [
           {
@@ -105,8 +107,8 @@ presence.on("UpdateData", async () => {
 
       if (video && !isNaN(video.duration)) {
         if (
-          (await presence.getSetting("show_buttons")) &&
-          (await presence.getSetting("show_details"))
+          (await presence.getSetting<boolean>("show_buttons")) &&
+          (await presence.getSetting<boolean>("show_details"))
         ) {
           presenceData.buttons.unshift({
             label: "Watch Stream",
@@ -120,13 +122,13 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = "playing";
           presenceData.smallImageText = "Live!";
 
-          if (await presence.getSetting("show_timestamps"))
+          if (await presence.getSetting<boolean>("show_timestamps"))
             presenceData.startTimestamp = elapsedTime;
         } else {
           presenceData.smallImageKey = "paused";
           presenceData.smallImageText = "Paused";
 
-          if (await presence.getSetting("show_timestamps"))
+          if (await presence.getSetting<boolean>("show_timestamps"))
             presenceData.startTimestamp = 0;
         }
       }
@@ -140,17 +142,17 @@ presence.on("UpdateData", async () => {
 
     if (locationPath.match("/posts")) {
       presenceData.details = `Reading${
-        !(await presence.getSetting("show_details")) ? " a " : " "
+        !(await presence.getSetting<boolean>("show_details")) ? " a " : " "
       }Blog`;
-      if (await presence.getSetting("show_details")) {
+      if (await presence.getSetting<boolean>("show_details")) {
         presenceData.state = document.querySelector(
           "body > div > div > div > h1 > a"
         ).textContent;
       }
 
       if (
-        (await presence.getSetting("show_buttons")) &&
-        (await presence.getSetting("show_details"))
+        (await presence.getSetting<boolean>("show_buttons")) &&
+        (await presence.getSetting<boolean>("show_details"))
       ) {
         presenceData.buttons = [
           {

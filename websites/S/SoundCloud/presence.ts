@@ -10,7 +10,7 @@ const presence = new Presence({
         search: "general.searchSomething",
         listen: "general.buttonListenAlong"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     );
   },
   getElement = (query: string): string | undefined => {
@@ -30,7 +30,7 @@ const presence = new Presence({
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings: Awaited<ReturnType<typeof getStrings>> = null,
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 const statics = {
@@ -114,11 +114,11 @@ presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
     [showBrowsing, showSong, showTimestamps, cover, newLang] =
       await Promise.all([
-        presence.getSetting("browse"),
-        presence.getSetting("song"),
-        presence.getSetting("timestamp"),
-        presence.getSetting("cover"),
-        presence.getSetting("lang")
+        presence.getSetting<boolean>("browse"),
+        presence.getSetting<boolean>("song"),
+        presence.getSetting<boolean>("timestamp"),
+        presence.getSetting<boolean>("cover"),
+        presence.getSetting<string>("lang").catch(() => "en")
       ]),
     playing = Boolean(document.querySelector(".playControls__play.playing"));
 
@@ -219,7 +219,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("/search/")) {
       presenceData.details = "Searching...";
 
-      const searchBox: HTMLInputElement = document.querySelector(
+      const searchBox = document.querySelector<HTMLInputElement>(
         ".headerSearch__input"
       );
       presenceData.state = searchBox && searchBox.value;

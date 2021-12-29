@@ -9,7 +9,9 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "trello"
     },
-    displayPrivateBoards = await presence.getSetting("displayPrivateBoards");
+    displayPrivateBoards = await presence.getSetting<boolean>(
+      "displayPrivateBoards"
+    );
 
   presenceData.startTimestamp = browsingTimestamp;
 

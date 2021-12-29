@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "eBay Forum";
   }
 
-  const showButtons = await presence.getSetting("buttons");
+  const showButtons = await presence.getSetting<boolean>("buttons");
 
   if (!showButtons) delete presenceData.buttons;
 

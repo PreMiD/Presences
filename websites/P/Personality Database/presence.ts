@@ -8,10 +8,10 @@ presence.on("UpdateData", async () => {
       largeImageKey: "personality-database",
       startTimestamp: browsingTimestamp
     },
-    useOnlyFirstPersonalityType: boolean = await presence.getSetting(
+    useOnlyFirstPersonalityType = await presence.getSetting<boolean>(
       "useOnlyFirstPersonalityType"
     ),
-    showUserNameInUserProfile: boolean = await presence.getSetting(
+    showUserNameInUserProfile = await presence.getSetting<boolean>(
       "showUserNameInUserProfile"
     );
 

@@ -5,24 +5,39 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const [privacyMode, showTime, showButtons] = await Promise.all([
-      presence.getSetting("privacyMode"),
-      presence.getSetting("showTime"),
-      presence.getSetting("showButtons")
+      presence.getSetting<boolean>("privacyMode"),
+      presence.getSetting<boolean>("showTime"),
+      presence.getSetting<boolean>("showButtons")
     ]),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: showTime ? browsingTimestamp : null
     },
-    path = document.location.pathname;
+    path = document.location.pathname,
+    searchText = document.querySelector("#search-text").textContent;
+
+  if (
+    document.querySelector<HTMLDivElement>("#search-input-area").style
+      .display === "block" &&
+    searchText
+  ) {
+    presenceData.details = "В поисках статьи";
+    if (!privacyMode) {
+      presenceData.details = "В поисках статьи по запросу";
+      presenceData.state = `«${searchText}»`;
+    }
+    presence.setActivity(presenceData);
+    return;
+  }
 
   if (path === "/") presenceData.details = "На главной странице";
   else if (path === "/view") {
     presenceData.details = "Читает статью";
     if (!privacyMode) {
       // An article title
-      presenceData.state = document.querySelector(
-        "p.text-4xl.font-bold.font-3"
-      ).textContent;
+      presenceData.state = `«${
+        document.querySelector("p.text-4xl.font-bold.font-3").textContent
+      }»`;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -52,9 +67,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Смотрит категорию";
     if (!privacyMode) {
       // A category name
-      presenceData.state = document.querySelector(
-        "p.text-4xl.font-bold.font-3"
-      ).textContent;
+      presenceData.state = `«${
+        document.querySelector("p.text-4xl.font-bold.font-3").textContent
+      }»`;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -64,14 +79,24 @@ presence.on("UpdateData", async () => {
         ];
       }
     }
-  } else if (path === "/search") presenceData.details = "В поисках статьи";
-  else if (path === "/create") presenceData.details = "Создаёт статью";
+  } else if (path === "/search") {
+    presenceData.details = "В поисках статьи";
+    if (!privacyMode) {
+      const searchRequest = new URLSearchParams(document.location.search).get(
+        "q"
+      );
+      if (searchRequest) {
+        presenceData.details = "В поисках статьи по запросу";
+        presenceData.state = `«${searchRequest}»`;
+      }
+    }
+  } else if (path === "/create") presenceData.details = "Создаёт статью";
   else if (path === "/edit") {
     presenceData.details = "Редактирует статью";
     if (!privacyMode) {
       const pageTitle = document.querySelector("title").textContent;
       // An article title
-      presenceData.state = pageTitle.slice(2, pageTitle.length - 12);
+      presenceData.state = `«${pageTitle.slice(2, pageTitle.length - 12)}»`;
     }
   } else if (path === "/edits") {
     presenceData.details = "Смотрит список правок";
@@ -81,15 +106,16 @@ presence.on("UpdateData", async () => {
     if (!privacyMode) {
       const pageTitle = document.querySelector("title").textContent;
       // An article title
-      presenceData.state = pageTitle.slice(2, pageTitle.length - 12);
+      presenceData.state = `«${pageTitle.slice(2, pageTitle.length - 12)}»`;
     }
   } else if (path === "/portal") {
     presenceData.details = "В портале";
     if (!privacyMode) {
       // A portal name
-      presenceData.state = document.querySelector(
-        "p.text-4xl.font-semibold.text-white"
-      ).textContent;
+      presenceData.state = `«${
+        document.querySelector("p.text-4xl.font-semibold.text-white")
+          .textContent
+      }»`;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -104,9 +130,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Читает книгу";
     if (!privacyMode) {
       // A book name
-      presenceData.state = document.querySelector(
-        "p.text-4xl.font-bold.font-3"
-      ).textContent;
+      presenceData.state = `«${
+        document.querySelector("p.text-4xl.font-bold.font-3").textContent
+      }»`;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -149,7 +175,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Читает условия";
     presenceData.state = "размещения рекламы";
   } else if (path === "/account") {
-    if (document.querySelector("#admintools"))
+    if (document.location.hash === "#admintools")
       presenceData.details = "Что-то делает в админ-панели";
     else presenceData.details = "Редактирует свой аккаунт";
   } else if (path === "/sub")

@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     //Uploads
     const subCount =
         document.querySelector(".simplebar-content")?.children.length,
-      showCount = await presence.getSetting("subscriptions");
+      showCount = await presence.getSetting<boolean>("subscriptions");
 
     presenceData.details = "Vieweing uploads";
 
@@ -193,7 +193,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  const showButtons = await presence.getSetting("buttons");
+  const showButtons = await presence.getSetting<boolean>("buttons");
 
   if (!showButtons) delete presenceData.buttons;
 

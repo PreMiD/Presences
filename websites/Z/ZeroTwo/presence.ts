@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (!(await presence.getSetting("incognito"))) {
+  if (!(await presence.getSetting<boolean>("incognito"))) {
     presenceData.details = document.getElementById("premid").innerText;
-    if (await presence.getSetting("showTimestamp"))
+    if (await presence.getSetting<boolean>("showTimestamp"))
       presenceData.startTimestamp = browsingTimestamp;
   }
   if (!presenceData.details) presence.setActivity();

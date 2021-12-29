@@ -9,10 +9,11 @@
     "en": "Altearn is a non-profit association which aims to develop and implement solutions and events for educational, scientific or awareness purposes.",
     "fr": "Altearn est une association à but non-lucratif qui vise à déveloper et mettre en place des solutions et événements dans un but pédagogique, scientifique ou de sensibilisation.",
     "ga_IE": "Is cumann neamhbhrabúis é Altearn a bhfuil sé mar aidhm aige réitigh agus imeachtaí a fhorbairt agus a chur i bhfeidhm chun críocha oideachais, eolaíochta nó feasachta.",
-    "nl": "Altearn is een vereniging zonder winstoogmerk die tot doel heeft oplossingen en evenementen te ontwikkelen en te implementeren voor educatieve, wetenschappelijke of bewustmakingsdoeleinden."
+    "nl": "Altearn is een vereniging zonder winstoogmerk die tot doel heeft oplossingen en evenementen te ontwikkelen en te implementeren voor educatieve, wetenschappelijke of bewustmakingsdoeleinden.",
+    "vi_VN": "Altearn là hiệp hội phi lợi nhuận nhằm mục đích phát triển và áp dụng các giải pháp và sự kiện dành cho giáo dục, khoa học và nhận thức."
   },
   "url": "altearn.xyz",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/FXRVkUd.png",
   "thumbnail": "https://i.imgur.com/dWA3LHB.png",
   "color": "#888888",

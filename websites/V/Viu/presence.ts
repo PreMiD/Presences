@@ -17,11 +17,11 @@ const presence = new Presence({
         watchEpisode: "general.buttonViewEpisode",
         searching: "general.search"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     ),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   episodeData: EpisodeData = null,
   title: string = null,
@@ -29,19 +29,12 @@ let strings = getStrings(),
   oldPath = document.location.pathname;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      details: (await strings).browse,
-      smallImageKey: "reading",
-      startTimestamp: browsingTimestamp
-    },
-    newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    buttonsOn: boolean = await presence.getSetting("buttons"),
-    searchQueryOn: boolean = await presence.getSetting("searchQ"),
-    presenceLogo: number = await presence.getSetting("logo"),
-    // eslint-disable-next-line no-one-time-vars/no-one-time-vars
-    logos = ["viu_logo", "viu_logo_text"];
-
-  presenceData.largeImageKey = logos[presenceLogo];
+  const [newLang, buttonsOn, searchQueryOn, presenceLogo] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("buttons"),
+    presence.getSetting<boolean>("searchQ"),
+    presence.getSetting<number>("logo")
+  ]);
 
   if (oldPath !== document.location.pathname) {
     oldPath = document.location.pathname;
@@ -52,11 +45,17 @@ presence.on("UpdateData", async () => {
 
   if (location.pathname.includes("/vod/")) videoData ??= await getMeta();
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
+
+  const presenceData: PresenceData = {
+    details: strings.browse,
+    smallImageKey: "reading",
+    largeImageKey: ["viu_logo", "viu_logo_text"][presenceLogo],
+    startTimestamp: browsingTimestamp
+  };
 
   if (document.location.pathname.includes("/vod/")) {
     const video = document.querySelector("video"),
@@ -216,7 +215,9 @@ presence.on("UpdateData", async () => {
 });
 
 async function getMeta() {
-  return await presence.getPageletiable("GA_DIMENSIONS").catch(() => null);
+  return await presence
+    .getPageletiable<VideoData>("GA_DIMENSIONS")
+    .catch(() => null);
 }
 
 interface VideoData {

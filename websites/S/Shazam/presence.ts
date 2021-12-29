@@ -42,8 +42,8 @@ const statics = {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-    showSong = await presence.getSetting("song"),
-    showTimestamps = await presence.getSetting("timestamp"),
+    showSong = await presence.getSetting<boolean>("song"),
+    showTimestamps = await presence.getSetting<boolean>("timestamp"),
     song: HTMLVideoElement = document.querySelector("#audioctrl"),
     songPlaying = song ? !song.paused : false;
 

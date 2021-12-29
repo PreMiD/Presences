@@ -9,7 +9,7 @@ async function getStrings() {
       viewSeries: "general.buttonViewSeries",
       watchEpisode: "general.buttonViewEpisode"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting<string>("lang")
   );
 }
 
@@ -27,7 +27,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
   currentAnimeWatching: string[],
   currentAnimeTitle: string,
   currentAnimeEpisode: string,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on(
@@ -50,21 +50,20 @@ presence.on("UpdateData", async () => {
       largeImageKey: "animelon",
       startTimestamp: browsingTimestamp
     },
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang");
+    [buttons, newLang] = await Promise.all([
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<string>("lang")
+    ]);
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (document.location.pathname.includes("/video/")) {
     if (playback === true && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
+      presenceData.smallImageText = paused ? strings.pause : strings.play;
       [presenceData.startTimestamp, presenceData.endTimestamp] =
         presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
       currentAnimeWatching = document.title
@@ -79,11 +78,11 @@ presence.on("UpdateData", async () => {
       if (buttons) {
         presenceData.buttons = [
           {
-            label: (await strings).watchEpisode,
+            label: strings.watchEpisode,
             url: document.URL
           },
           {
-            label: (await strings).viewSeries,
+            label: strings.viewSeries,
             url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`
           }
         ];
@@ -106,11 +105,11 @@ presence.on("UpdateData", async () => {
       if (buttons) {
         presenceData.buttons = [
           {
-            label: (await strings).watchEpisode,
+            label: strings.watchEpisode,
             url: document.URL
           },
           {
-            label: (await strings).viewSeries,
+            label: strings.viewSeries,
             url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`
           }
         ];
@@ -128,7 +127,7 @@ presence.on("UpdateData", async () => {
     if (buttons) {
       presenceData.buttons = [
         {
-          label: (await strings).viewSeries,
+          label: strings.viewSeries,
           url: document.URL
         }
       ];

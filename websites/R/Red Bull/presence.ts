@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     { pathname } = location,
-    buttons: boolean = await presence.getSetting("buttons"),
+    buttons = await presence.getSetting<boolean>("buttons"),
     heading =
       document.querySelector<HTMLHeadingElement>(".content-hub-hero__title") ||
       document.querySelector<HTMLHeadingElement>("h1.collection-hero__title"),
