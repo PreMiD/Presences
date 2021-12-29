@@ -121,17 +121,16 @@ const readFile = (path: string): string =>
     );
 
     // Use Git to check what files have changed after TypeScript compilation
-    const listOfChangedFiles = await execShellCommand([
-        "git",
-        "--no-pager",
-        "diff",
-        "--name-only"
-      ]),
-      changedPresenceFiles = listOfChangedFiles
-        .split("\n")
-        .filter(
-          file => file.includes("presence.ts") || file.includes("iframe.ts")
-        );
+    const changedPresenceFiles = (
+      await execShellCommand(["git", "--no-pager", "diff", "--name-only"])
+    )
+      .split("\n")
+      .filter(
+        file =>
+          file.includes("presence.ts") ||
+          file.includes("iframe.ts") ||
+          file.includes("metadata.json")
+      );
 
     await increaseSemver(changedPresenceFiles);
 

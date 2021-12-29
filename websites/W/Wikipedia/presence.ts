@@ -113,6 +113,7 @@ const updateCallback = {
         details[
           [...document.querySelector("body").classList]
             .filter(v => /ns--?\d/.test(v))[0]
+            .split("[", 1)[0]
             .slice(3)
         ] || "Viewing a page"
       );

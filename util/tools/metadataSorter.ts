@@ -5,7 +5,7 @@ import {
   readFileSync as readFile,
   writeFileSync as writeFile
 } from "node:fs";
-import axios from "axios"
+import axios from "axios";
 import { sync as glob } from "glob";
 
 export function isValidJSON(text: string): boolean {
@@ -17,16 +17,15 @@ export function isValidJSON(text: string): boolean {
   }
 }
 
-const read = (path: string): string =>
-    readFile(path, { encoding: "utf8" }),
+const read = (path: string): string => readFile(path, { encoding: "utf8" }),
   write = (path: string, code: Metadata): void =>
     writeFile(path, JSON.stringify(code, null, 2), {
       encoding: "utf8",
       flag: "w"
     }),
-     missingMetadata: string[] = glob(
-    "./{websites,programs}/*/*/"
-  ).filter(pF => !exists(`${pF}/dist/metadata.json`)),
+  missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
+    pF => !exists(`${pF}/dist/metadata.json`)
+  ),
   allmeta: Array<[Metadata, string]> = glob(
     "./{websites,programs}/*/*/*/metadata.json"
   ).map(pF => {
@@ -37,19 +36,19 @@ const read = (path: string): string =>
       return null;
     }
   }),
-latestMetadataSchema = async () => {
-  const latestVersion = (
-    (
-      await axios.get(
-        "https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
-      )
-    ).data as { name: string }[]
-  )
-    .filter(c => c.name.endsWith(".json"))
-    .map(c => c.name.match(/\d.\d/g)[0])
-    .pop() as `${number}.${number}`
-  return `https://schemas.premid.app/metadata/${latestVersion}` as const
-}
+  latestMetadataSchema = async () => {
+    const latestVersion = (
+      (
+        await axios.get(
+          "https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
+        )
+      ).data as { name: string }[]
+    )
+      .filter(c => c.name.endsWith(".json"))
+      .map(c => c.name.match(/\d.\d/g)[0])
+      .pop() as `${number}.${number}`;
+    return `https://schemas.premid.app/metadata/${latestVersion}` as const;
+  };
 
 if (missingMetadata?.length > 0)
   console.log(
