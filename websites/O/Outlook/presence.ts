@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     path = document.location.pathname;
   if (path.startsWith("/mail")) {
     if (
-      document.querySelector(
+      document.querySelector<HTMLDivElement>(
         "#ReadingPaneContainerId > div > div > div > div:nth-child(1) > div._3Ot6xv41uIO58lh-I36wdt > div:nth-child(1) > div > div._1LtJxmUY1w2weHRM-NvCf9 > div"
       ) ||
       path.includes("compose")
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     else if (path.includes("id")) {
       presenceData.details = "Reading an email";
       if (await presence.getSetting<boolean>("title")) {
-        presenceData.state = document.querySelector(
+        presenceData.state = document.querySelector<HTMLSpanElement>(
           "#ReadingPaneContainerId div._2bnn4NUZa-NanNIO4GItP0.allowTextSelection._3FNHkYLZYD6Y3-QNc7ZBo2 > span"
         ).textContent;
       }
