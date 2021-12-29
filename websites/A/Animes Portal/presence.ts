@@ -10,9 +10,8 @@ presence.on("UpdateData", async () => {
     paths = pathname.split("/");
   if (!paths[0]) paths.shift();
 
-  if (pathname === "/") {
-    presenceData.details = "Viewing the home page";
-  } else if (pathname.startsWith("/messages")) {
+  if (pathname === "/") presenceData.details = "Viewing the home page";
+  else if (pathname.startsWith("/messages")) {
     if (!paths[1]) presenceData.details = "Viewing messages";
     else if (paths[1].startsWith("pm-")) {
       const body = document.querySelector(
@@ -53,13 +52,11 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = username;
     }
   } else if (pathname.startsWith("/animes")) {
-    if (paths[1] === "search" && paths[2]) {
+    if (paths[1] === "search" && paths[2])
       presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")}`;
-    } else if (paths[1])
+    else if (paths[1])
       presenceData.details = `Viewing animes that starts with the keyboard ${paths[1].toUpperCase()}`;
-    else {
-      presenceData.details = `Viewing animes`;
-    }
+    else presenceData.details = "Viewing animes";
   } else if (pathname.startsWith("/anime/")) {
     const [uid, eid] = paths;
 
@@ -82,7 +79,7 @@ presence.on("UpdateData", async () => {
       presenceData.largeImageKey = image ?? "logo";
       presenceData.buttons = [
         {
-          label: `View ${name}`,
+          label: "View",
           url: document.location.href
         }
       ];
@@ -99,7 +96,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = `Episode ${episode}`;
         presenceData.buttons = [
           {
-            label: `Watch`,
+            label: "Watch",
             url: document.location.href
           }
         ];
@@ -108,13 +105,11 @@ presence.on("UpdateData", async () => {
       } else return;
     }
   } else if (pathname.startsWith("/movies")) {
-    if (paths[1] === "search" && paths[2]) {
+    if (paths[1] === "search" && paths[2])
       presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")}`;
-    } else if (paths[1])
+    else if (paths[1])
       presenceData.details = `Viewing movies that starts with the keyboard ${paths[1].toUpperCase()}`;
-    else {
-      presenceData.details = `Viewing movies`;
-    }
+    else presenceData.details = "Viewing movies";
   } else if (pathname.startsWith("/movie/")) {
     const name = document.querySelector(
         "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
@@ -133,9 +128,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Viewing movie ${name}`;
     presenceData.largeImageKey = image ?? "logo";
   } else if (pathname.startsWith("/manga")) {
-    if (paths[1] === "search" && paths[2]) {
+    if (paths[1] === "search" && paths[2])
       presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")}`;
-    } else if (paths[1] && paths[2]?.startsWith("vol-")) {
+    else if (paths[1] && paths[2]?.startsWith("vol-")) {
       const tom = paths[2].replace("vol-", "");
 
       if (paths[3].startsWith("chapter-")) {
@@ -201,9 +196,7 @@ presence.on("UpdateData", async () => {
       ];
     } else if (paths[1])
       presenceData.details = `Viewing manga that starts with the keyboard ${paths[1].toUpperCase()}`;
-    else if (!paths[1]) {
-      presenceData.details = `Viewing manga`;
-    }
+    else if (!paths[1]) presenceData.details = "Viewing manga";
   }
 
   if (presenceData.details) presence.setActivity(presenceData);
