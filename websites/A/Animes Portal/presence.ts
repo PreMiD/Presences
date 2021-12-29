@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
 
     if (image) presenceData.smallImageKey = "logo";
 
-    presenceData.details = `Viewing movie`;
+    presenceData.details = "Viewing movie";
     presenceData.state = name;
     presenceData.largeImageKey = image ?? "logo";
   } else if (pathname.startsWith("/manga")) {
@@ -224,7 +224,7 @@ presence.on("iFrameData", async (data: iFrameData) => {
   presenceData.state = `Episode ${epInfo.episode}`;
   presenceData.buttons = [
     {
-      label: `Watch`,
+      label: "Watch",
       url: document.location.href
     }
   ];
