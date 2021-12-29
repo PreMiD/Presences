@@ -1,0 +1,43 @@
+const presence = new Presence({
+    clientId: "925643552208355378"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+
+presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
+    },
+    path = document.location.pathname;
+  if (path.startsWith("/mail")) {
+    if (
+      document.querySelector(
+        "#ReadingPaneContainerId > div > div > div > div:nth-child(1) > div._3Ot6xv41uIO58lh-I36wdt > div:nth-child(1) > div > div._1LtJxmUY1w2weHRM-NvCf9 > div"
+      ) ||
+      path.includes("compose")
+    )
+      presenceData.details = "Composing a mail";
+    else if (path.includes("id")) {
+      presenceData.details = "Reading a mail";
+      if (await presence.getSetting("title")) {
+        presenceData.state = document.querySelector(
+          "#ReadingPaneContainerId div._2bnn4NUZa-NanNIO4GItP0.allowTextSelection._3FNHkYLZYD6Y3-QNc7ZBo2 > span"
+        ).textContent;
+      } else presenceData.state;
+    } else if (path.includes("inbox")) presenceData.details = "Viewing inbox";
+    else if (path.includes("archive")) presenceData.details = "Viewing archive";
+    else if (path.includes("junkemail"))
+      presenceData.details = "Viewing junk mails";
+    else if (path.includes("sentitems"))
+      presenceData.details = "Viewing sent mails";
+    else if (path.includes("conversationhistory"))
+      presenceData.details = "Viewing conversation history";
+    else presenceData.details = "Browsing mails";
+  } else if (path.startsWith("/calendar"))
+    presenceData.details = "Viewing calendar";
+  else if (path.startsWith("/files")) presenceData.details = "Browsing files";
+  else if (path.startsWith("/people"))
+    presenceData.details = "Viewing contact list";
+  else presenceData;
+  presence.setActivity(presenceData);
+});
