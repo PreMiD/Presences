@@ -55,25 +55,22 @@ presence.on("UpdateData", async () => {
     if (paths[1] === "search" && paths[2])
       presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")}`;
     else if (paths[1])
-      presenceData.details = `Viewing animes that starts with the keyboard ${paths[1].toUpperCase()}`;
+      presenceData.details = `Viewing animes starting with ${paths[1].toUpperCase()}`;
     else presenceData.details = "Viewing animes";
   } else if (pathname.startsWith("/anime/")) {
-    const [uid, eid] = paths;
+    const [_, uid, eid] = paths;
 
     if (uid && !eid) {
       const name = document.querySelector<HTMLHeadingElement>(
           "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
-        ).innerHTML,
+        ).textContent,
         image = document
           .querySelector<HTMLDivElement>(
             "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
           )
           ?.getAttribute("src");
 
-      if (image) {
-        presenceData.smallImageKey = "logo";
-        presenceData.smallImageText = "logo";
-      }
+      if (image) presenceData.smallImageKey = "logo";
 
       presenceData.details = `Viewing ${name}`;
       presenceData.largeImageKey = image ?? "logo";
@@ -84,14 +81,15 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (uid && eid) {
-      const { name, episode, part } = getInfo(),
-        playing = document
+      const { name, episode, part } = getInfo();
+
+      if (
+        !document
           .querySelector(
             "body > main.animated > div.wrapper > section.holder > div.player > div.holder > div.vplayer"
           )
-          ?.classList.contains("playing");
-
-      if (!playing) {
+          ?.classList.contains("playing")
+      ) {
         presenceData.details = `Watching ${name}`;
         presenceData.state = `Episode ${episode}`;
         presenceData.buttons = [
@@ -108,7 +106,7 @@ presence.on("UpdateData", async () => {
     if (paths[1] === "search" && paths[2])
       presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")}`;
     else if (paths[1])
-      presenceData.details = `Viewing movies that starts with the keyboard ${paths[1].toUpperCase()}`;
+      presenceData.details = `Viewing movies starting with ${paths[1].toUpperCase()}`;
     else presenceData.details = "Viewing movies";
   } else if (pathname.startsWith("/movie/")) {
     const name = document.querySelector(
@@ -120,12 +118,10 @@ presence.on("UpdateData", async () => {
         )
         ?.getAttribute("src");
 
-    if (image) {
-      presenceData.smallImageKey = "logo";
-      presenceData.smallImageText = name;
-    }
+    if (image) presenceData.smallImageKey = "logo";
 
-    presenceData.details = `Viewing movie ${name}`;
+    presenceData.details = `Viewing movie`;
+    presenceData.state = name;
     presenceData.largeImageKey = image ?? "logo";
   } else if (pathname.startsWith("/manga")) {
     if (paths[1] === "search" && paths[2])
@@ -133,7 +129,7 @@ presence.on("UpdateData", async () => {
     else if (paths[1] && paths[2]?.startsWith("vol-")) {
       const tom = paths[2].replace("vol-", "");
 
-      if (paths[3].startsWith("chapter-")) {
+      if (paths[3]?.startsWith("chapter-")) {
         const list = document.querySelectorAll(
             "body > main.animated > ul#path > li > a > span"
           ),
@@ -143,7 +139,7 @@ presence.on("UpdateData", async () => {
           ).textContent;
 
         presenceData.details = `Reading manga ${name}`;
-        presenceData.state = `Tom: ${tom}, Chapter: ${between(
+        presenceData.state = `Volume: ${tom}, Chapter: ${between(
           list[3].textContent,
           "Глава ",
           " -"
@@ -161,7 +157,7 @@ presence.on("UpdateData", async () => {
 
         if (name) presenceData.details = `Reading manga ${name}`;
 
-        presenceData.state = `Tom ${tom}`;
+        presenceData.state = `Volume ${tom}`;
         presenceData.buttons = [
           {
             label: "Read manga",
@@ -183,10 +179,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.largeImageKey = image ?? "logo";
 
-      if (image) {
-        presenceData.smallImageKey = "logo";
-        presenceData.smallImageText = name;
-      }
+      if (image) presenceData.smallImageKey = "logo";
 
       presenceData.buttons = [
         {
@@ -195,7 +188,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (paths[1])
-      presenceData.details = `Viewing manga that starts with the keyboard ${paths[1].toUpperCase()}`;
+      presenceData.details = `Viewing manga starting with ${paths[1].toUpperCase()}`;
     else if (!paths[1]) presenceData.details = "Viewing manga";
   }
 
@@ -203,13 +196,13 @@ presence.on("UpdateData", async () => {
   else presence.setActivity();
 });
 
-interface iframeData {
+interface iFrameData {
   currentTime: number;
   duration: number;
   paused: boolean;
 }
 
-presence.on("iFrameData", async (data: iframeData) => {
+presence.on("iFrameData", async (data: iFrameData) => {
   if (!data.currentTime || !data.duration) return;
   const presenceData: PresenceData = {
       largeImageKey: "logo"
@@ -231,7 +224,7 @@ presence.on("iFrameData", async (data: iframeData) => {
   presenceData.state = `Episode ${epInfo.episode}`;
   presenceData.buttons = [
     {
-      label: `Watch ${name}`,
+      label: `Watch`,
       url: document.location.href
     }
   ];
