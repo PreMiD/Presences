@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Viewing animes starting with ${paths[1].toUpperCase()}`;
     else presenceData.details = "Viewing animes";
   } else if (pathname.startsWith("/anime/")) {
-    const [_, uid, eid] = paths;
+    const [, uid, eid] = paths;
 
     if (uid && !eid) {
       const name = document.querySelector<HTMLHeadingElement>(
@@ -209,13 +209,13 @@ presence.on("UpdateData", async () => {
   if (presenceData.details) presence.setActivity(presenceData);
 });
 
-interface iFrameData {
+interface IFrameData {
   currentTime: number;
   duration: number;
   paused: boolean;
 }
 
-presence.on("iFrameData", async (data: iFrameData) => {
+presence.on("iFrameData", async (data: IFrameData) => {
   if (!data.currentTime || !data.duration) return;
   const presenceData: PresenceData = {
       largeImageKey: "logo"
@@ -252,7 +252,7 @@ presence.on("iFrameData", async (data: iFrameData) => {
 
   if (thumb !== "logo" && showThumb === true) {
     presenceData.largeImageKey = thumb;
-    presenceData.smallImageKey = "logo";
+    presenceData.smallImageKey = data.paused ? "start" : "logo";
   }
 
   if (presenceData.details) presence.setActivity(presenceData);
