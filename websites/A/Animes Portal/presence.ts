@@ -11,24 +11,24 @@ presence.on("UpdateData", async () => {
       presence.getSetting<boolean>("showthumb"),
       presence.getSetting<boolean>("showmessaging")
     ]),
-    paths = pathname.split("/");
+    paths: string[] = pathname.split("/");
   if (!paths[0]) paths.shift();
 
   if (pathname === "/") presenceData.details = "Viewing the home page";
   else if (pathname.startsWith("/messages")) {
     if (!paths[1]) presenceData.details = "Viewing messages";
     else if (paths[1].startsWith("pm-") && showMessaging === true) {
-      const body = document.querySelector(
+      const body = document.querySelector<HTMLDivElement>(
           "body > main.animated > div.wrapper > div.dialogPadding"
         ),
-        username = body.querySelector("span.username").textContent;
+        username =
+          body.querySelector<HTMLSpanElement>("span.username").textContent;
 
       presenceData.smallImageKey = parseAvatarFromAttr(
         body.querySelector("a.avatar").getAttribute("style")
       );
 
       presenceData.details = `Messaging ${username}`;
-      presenceData.smallImageText = username;
     } else if (paths[1].startsWith("pm-") && showMessaging === false)
       presenceData.details = "Viewing messages";
   } else if (pathname === "/chat")
@@ -39,10 +39,10 @@ presence.on("UpdateData", async () => {
       if (paths[1])
         presenceData.state = `Page ${paths[1].replace("page-", "")}`;
     } else if (paths[1]) {
-      const body = document.querySelector(
+      const body = document.querySelector<HTMLDivElement>(
           "body > main.animated > section.wrapper > div.header"
         ),
-        username = body.querySelector(
+        username = body.querySelector<HTMLSpanElement>(
           "div.content > div.holder > span.heading"
         ).textContent;
 
@@ -52,12 +52,19 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = `Viewing otaku ${username}`;
       presenceData.smallImageKey = "logo";
-      presenceData.smallImageText = username;
     }
   } else if (pathname.startsWith("/animes")) {
-    if (paths[1] === "search" && paths[2])
-      presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")}`;
-    else if (paths[1])
+    if (paths[1] === "search" && paths[2]) {
+      const query: string = paths[2].replaceAll("-", " ");
+      let str: string = "Searching for";
+      if (query.length <= 10) {
+        str = str += ` ${query}`;
+      } else {
+        presenceData.state = query;
+      }
+
+      presenceData.details = str;
+    } else if (paths[1])
       presenceData.details = `Viewing animes starting with ${paths[1].toUpperCase()}`;
     else presenceData.details = "Viewing animes";
   } else if (pathname.startsWith("/anime/")) {
@@ -67,11 +74,9 @@ presence.on("UpdateData", async () => {
       const name = document.querySelector<HTMLHeadingElement>(
           "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
         ).textContent,
-        image = document
-          .querySelector<HTMLDivElement>(
-            "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
-          )
-          ?.getAttribute("src");
+        image = document.querySelector<HTMLImageElement>(
+          "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
+        ).src;
 
       if (image) presenceData.smallImageKey = "logo";
 
@@ -79,13 +84,13 @@ presence.on("UpdateData", async () => {
       presenceData.largeImageKey = image ?? "logo";
       presenceData.buttons = [
         {
-          label: "View",
+          label: "View anime",
           url: document.location.href
         }
       ];
     } else if (uid && eid) {
       const { name, episode, part } = getInfo(),
-        player = document.querySelector(
+        player = document.querySelector<HTMLDivElement>(
           "body > main.animated > div.wrapper > section.holder > div.player > div.holder > div.vplayer"
         ),
         thumb = parseAvatarFromAttr(player.getAttribute("style"), "logo");
@@ -95,7 +100,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = `Episode ${episode}`;
         presenceData.buttons = [
           {
-            label: "Watch",
+            label: "Watch anime",
             url: document.location.href
           }
         ];
@@ -106,23 +111,29 @@ presence.on("UpdateData", async () => {
           presenceData.largeImageKey = thumb;
           presenceData.smallImageKey = "logo";
         }
-      } else return;
+      }
     }
   } else if (pathname.startsWith("/movies")) {
-    if (paths[1] === "search" && paths[2])
-      presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")}`;
-    else if (paths[1])
+    if (paths[1] === "search" && paths[2]) {
+      const query: string = paths[2].replaceAll("-", " ");
+      let str: string = "Searching for";
+      if (query.length <= 10) {
+        str = str += ` ${query}`;
+      } else {
+        presenceData.state = query;
+      }
+
+      presenceData.details = str;
+    } else if (paths[1])
       presenceData.details = `Viewing movies starting with ${paths[1].toUpperCase()}`;
     else presenceData.details = "Viewing movies";
   } else if (pathname.startsWith("/movie/")) {
-    const name = document.querySelector(
+    const name = document.querySelector<HTMLHeadingElement>(
         "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
       ).textContent,
-      image = document
-        .querySelector(
-          "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
-        )
-        ?.getAttribute("src");
+      image = document.querySelector<HTMLImageElement>(
+        "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
+      ).src;
 
     if (image) presenceData.smallImageKey = "logo";
 
@@ -130,17 +141,25 @@ presence.on("UpdateData", async () => {
     presenceData.state = name;
     presenceData.largeImageKey = image ?? "logo";
   } else if (pathname.startsWith("/manga")) {
-    if (paths[1] === "search" && paths[2])
-      presenceData.details = `Searching for ${paths[2].replaceAll("-", " ")}`;
-    else if (paths[1] && paths[2]?.startsWith("vol-")) {
-      const tom = paths[2].replace("vol-", "");
+    if (paths[1] === "search" && paths[2]) {
+      const query: string = paths[2].replaceAll("-", " ");
+      let str: string = "Searching for";
+      if (query.length <= 10) {
+        str = str += ` ${query}`;
+      } else {
+        presenceData.state = query;
+      }
+
+      presenceData.details = str;
+    } else if (paths[1] && paths[2]?.startsWith("vol-")) {
+      const tom: string | number = paths[2].replace("vol-", "");
 
       if (paths[3]?.startsWith("chapter-")) {
-        const list = document.querySelectorAll(
+        const list = document.querySelectorAll<HTMLSpanElement>(
             "body > main.animated > ul#path > li > a > span"
           ),
           name = list[1].textContent,
-          page = document.querySelector(
+          page = document.querySelector<HTMLParagraphElement>(
             "body > main.animated > div.wrapper > div.heading > b#num"
           ).textContent;
 
@@ -157,7 +176,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       } else {
-        const name = document.querySelector(
+        const name = document.querySelector<HTMLAnchorElement>(
           "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h2 > a.sub"
         ).textContent;
 
@@ -172,14 +191,12 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (hasNumber(paths[1])) {
-      const name = document.querySelector(
+      const name = document.querySelector<HTMLHeadingElement>(
           "body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading"
         ).textContent,
-        image = document
-          .querySelector(
-            "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
-          )
-          ?.getAttribute("src");
+        image = document.querySelector<HTMLImageElement>(
+          "body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
+        ).src;
 
       if (name) presenceData.details = `Viewing manga ${name}`;
 
@@ -199,7 +216,6 @@ presence.on("UpdateData", async () => {
   }
 
   if (presenceData.details) presence.setActivity(presenceData);
-  else presence.setActivity();
 });
 
 interface iFrameData {
@@ -213,9 +229,9 @@ presence.on("iFrameData", async (data: iFrameData) => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    showThumb = await presence.getSetting("showthumb"),
+    showThumb = await presence.getSetting<boolean>("showthumb"),
     epInfo = getInfo(),
-    player = document.querySelector(
+    player = document.querySelector<HTMLDivElement>(
       "body > main.animated > div.wrapper > section.holder > div.player > div.holder > div.vplayer"
     ),
     thumb = parseAvatarFromAttr(player.getAttribute("style"), "logo");
@@ -235,7 +251,7 @@ presence.on("iFrameData", async (data: iFrameData) => {
   presenceData.state = `Episode ${epInfo.episode}`;
   presenceData.buttons = [
     {
-      label: "Watch",
+      label: "Watch anime",
       url: document.location.href
     }
   ];
@@ -249,7 +265,6 @@ presence.on("iFrameData", async (data: iFrameData) => {
   }
 
   if (presenceData.details) presence.setActivity(presenceData);
-  else presence.setActivity();
 });
 
 function getInfo(): {
@@ -278,7 +293,7 @@ function getInfo(): {
   };
 }
 
-function parseAvatarFromAttr(attr: string, def?: string) {
+function parseAvatarFromAttr(attr: string, def?: string): string {
   let avatar;
   if (attr.includes("background-image: url('"))
     avatar = between(attr, "background-image: url('", "')");
@@ -294,10 +309,10 @@ function parseAvatarFromAttr(attr: string, def?: string) {
   return avatar;
 }
 
-function hasNumber(str: string) {
+function hasNumber(str: string): boolean {
   return /\d/.test(str);
 }
 
-function between(st: string, b1: string, b2: string) {
+function between(st: string, b1: string, b2: string): string {
   return st.split(b1).pop().split(b2)[0];
 }
