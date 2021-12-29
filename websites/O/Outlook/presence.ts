@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = document.querySelector(
           "#ReadingPaneContainerId div._2bnn4NUZa-NanNIO4GItP0.allowTextSelection._3FNHkYLZYD6Y3-QNc7ZBo2 > span"
         ).textContent;
-      } else presenceData.state;
+      }
     } else if (path.includes("inbox")) presenceData.details = "Viewing inbox";
     else if (path.includes("archive")) presenceData.details = "Viewing archive";
     else if (path.includes("junkemail"))
@@ -39,6 +39,5 @@ presence.on("UpdateData", async () => {
   else if (path.startsWith("/files")) presenceData.details = "Browsing files";
   else if (path.startsWith("/people"))
     presenceData.details = "Viewing contact list";
-  else presenceData;
   presence.setActivity(presenceData);
 });
