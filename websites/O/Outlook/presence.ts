@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Composing a mail";
     else if (path.includes("id")) {
       presenceData.details = "Reading a mail";
-      if (await presence.getSetting("title")) {
+      if (await presence.getSetting<boolean>("title")) {
         presenceData.state = document.querySelector(
           "#ReadingPaneContainerId div._2bnn4NUZa-NanNIO4GItP0.allowTextSelection._3FNHkYLZYD6Y3-QNc7ZBo2 > span"
         ).textContent;
