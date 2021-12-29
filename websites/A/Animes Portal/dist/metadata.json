@@ -10,6 +10,9 @@
     "en": "Anime, manga and Asian culture",
     "bg": "Аниме, манга и азиатска култура"
   },
+  "altnames": [
+    "Аниме"
+  ],
   "url": "animes-portal.info",
   "logo": "https://i.imgur.com/I2wctf2.png",
   "thumbnail": "https://i.imgur.com/Nr3XhzA.jpg",
@@ -24,5 +27,19 @@
     "manga",
     "asia",
     "japan"
+  ],
+  "settings": [
+    {
+      "id": "showthumb",
+      "title": "Show thumbnails",
+      "icon": "fas fa-image",
+      "value": true
+    },
+    {
+      "id": "showmessaging",
+      "title": "Show my chats",
+      "icon": "fas fa-comments",
+      "value": true
+    }
   ]
 }
