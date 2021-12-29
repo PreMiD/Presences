@@ -20,10 +20,12 @@ presence.on("UpdateData", async () => {
     [presenceData.state] = document.title.split(/-/, 1);
   } else if (path === "/albums") presenceData.details = "Browsing albums";
   else if (path.startsWith("/album")) {
-    presenceData.details = "Viewing an album:";
-    presenceData.state = (await presence.getSetting<boolean>("albumname"))
-      ? document.title.split(/-/, 1)[0]
-      : "(Hidden in presence settings)";
+    presenceData.details = "Viewing an album";
+    {
+      if (await presence.getSetting<boolean>("albumname"))
+        [presenceData.state] = document.title.split(/-/, 1);
+      else presenceData.state;
+    }
   } else if (path.startsWith("/archive"))
     presenceData.details = "Viewing the archive";
   else presenceData;
