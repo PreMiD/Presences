@@ -1,6 +1,6 @@
 const iframe = new iFrame();
 iframe.on("UpdateData", async () => {
-  let paths: string[] = document.location.pathname.split("/");
+  const paths: string[] = document.location.pathname.split("/");
   if (!paths[0]) paths.shift();
   if (paths[0] !== "anime" && paths[1] && paths[2]) return;
   const video = document.querySelector<HTMLVideoElement>("#html5player");

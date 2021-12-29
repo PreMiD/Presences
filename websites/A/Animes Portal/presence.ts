@@ -56,12 +56,9 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/animes")) {
     if (paths[1] === "search" && paths[2]) {
       const query: string = paths[2].replaceAll("-", " ");
-      let str: string = "Searching for";
-      if (query.length <= 10) {
-        str = str += ` ${query}`;
-      } else {
-        presenceData.state = query;
-      }
+      let str = "Searching for";
+      if (query.length <= 10) str = str += ` ${query}`;
+      else presenceData.state = query;
 
       presenceData.details = str;
     } else if (paths[1])
@@ -116,12 +113,9 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/movies")) {
     if (paths[1] === "search" && paths[2]) {
       const query: string = paths[2].replaceAll("-", " ");
-      let str: string = "Searching for";
-      if (query.length <= 10) {
-        str = str += ` ${query}`;
-      } else {
-        presenceData.state = query;
-      }
+      let str = "Searching for";
+      if (query.length <= 10) str = str += ` ${query}`;
+      else presenceData.state = query;
 
       presenceData.details = str;
     } else if (paths[1])
@@ -143,12 +137,9 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/manga")) {
     if (paths[1] === "search" && paths[2]) {
       const query: string = paths[2].replaceAll("-", " ");
-      let str: string = "Searching for";
-      if (query.length <= 10) {
-        str = str += ` ${query}`;
-      } else {
-        presenceData.state = query;
-      }
+      let str = "Searching for";
+      if (query.length <= 10) str = str += ` ${query}`;
+      else presenceData.state = query;
 
       presenceData.details = str;
     } else if (paths[1] && paths[2]?.startsWith("vol-")) {
