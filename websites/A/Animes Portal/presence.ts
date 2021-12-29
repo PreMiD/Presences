@@ -24,8 +24,7 @@ presence.on("UpdateData", async () => {
         username = body.querySelector("span.username").textContent;
 
       presenceData.smallImageKey = parseAvatarFromAttr(
-        body.querySelector("a.avatar").attributes.getNamedItem("style")
-          .textContent
+        body.querySelector("a.avatar").getAttribute("style")
       );
 
       presenceData.details = `Messaging ${username}`;
@@ -48,8 +47,7 @@ presence.on("UpdateData", async () => {
         ).textContent;
 
       presenceData.largeImageKey = parseAvatarFromAttr(
-        body.querySelector("a.avatar").attributes.getNamedItem("style")
-          .textContent
+        body.querySelector("a.avatar").getAttribute("style")
       );
 
       presenceData.details = `Viewing otaku ${username}`;
