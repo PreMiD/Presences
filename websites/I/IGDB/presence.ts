@@ -32,8 +32,8 @@ presence.on("UpdateData", () => {
   } else if (path.startsWith("/genres")) {
     if (path === "/genres") presenceData.details = "Browsing all genres";
     else {
-      (presenceData.details = "Browsing a genre"),
-        (presenceData.state = document.title.slice(0, -5));
+      presenceData.details = "Browsing a genre";
+      presenceData.state = document.title.slice(0, -5);
     }
   } else if (path.startsWith("/platforms")) {
     if (path === "/platforms") presenceData.details = "Browsing all platforms";
