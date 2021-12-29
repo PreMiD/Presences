@@ -7,13 +7,17 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     },
     { pathname } = document.location,
+    [showThumb, showMessaging] = await Promise.all([
+      presence.getSetting<boolean>("showthumb"),
+      presence.getSetting<boolean>("showmessaging")
+    ]),
     paths = pathname.split("/");
   if (!paths[0]) paths.shift();
 
   if (pathname === "/") presenceData.details = "Viewing the home page";
   else if (pathname.startsWith("/messages")) {
     if (!paths[1]) presenceData.details = "Viewing messages";
-    else if (paths[1].startsWith("pm-")) {
+    else if (paths[1].startsWith("pm-") && showMessaging == true) {
       const body = document.querySelector(
           "body > main.animated > div.wrapper > div.dialogPadding"
         ),
@@ -26,7 +30,8 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = `Messaging ${username}`;
       presenceData.smallImageText = username;
-    }
+    } else if (paths[1].startsWith("pm-") && showMessaging == false)
+      presenceData.details = "Viewing messages";
   } else if (pathname === "/chat")
     presenceData.details = "Chatting in the chat";
   else if (pathname.startsWith("/otakus")) {
@@ -81,15 +86,13 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (uid && eid) {
-      const { name, episode, part } = getInfo();
+      const { name, episode, part } = getInfo(),
+        player = document.querySelector(
+          "body > main.animated > div.wrapper > section.holder > div.player > div.holder > div.vplayer"
+        ),
+        thumb = parseAvatarFromAttr(player.getAttribute("style"), "logo");
 
-      if (
-        !document
-          .querySelector(
-            "body > main.animated > div.wrapper > section.holder > div.player > div.holder > div.vplayer"
-          )
-          ?.classList.contains("playing")
-      ) {
+      if (!player.classList.contains("playing")) {
         presenceData.details = `Watching ${name}`;
         presenceData.state = `Episode ${episode}`;
         presenceData.buttons = [
@@ -100,6 +103,14 @@ presence.on("UpdateData", async () => {
         ];
 
         if (part) presenceData.state = presenceData.state += ` (part ${part})`;
+
+        if (thumb != "logo" && showThumb == true) {
+          presenceData.largeImageKey = parseAvatarFromAttr(
+            player.getAttribute("style"),
+            "logo"
+          );
+          presenceData.smallImageKey = "logo";
+        }
       } else return;
     }
   } else if (pathname.startsWith("/movies")) {
@@ -207,7 +218,12 @@ presence.on("iFrameData", async (data: iFrameData) => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    epInfo = getInfo();
+    showThumb = await presence.getSetting("showthumb"),
+    epInfo = getInfo(),
+    player = document.querySelector(
+      "body > main.animated > div.wrapper > section.holder > div.player > div.holder > div.vplayer"
+    ),
+    thumb = parseAvatarFromAttr(player.getAttribute("style"), "logo");
 
   if (!data.paused) {
     [presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -231,6 +247,14 @@ presence.on("iFrameData", async (data: iFrameData) => {
 
   if (epInfo.part)
     presenceData.state = presenceData.state += ` (part ${epInfo.part})`;
+
+  if (thumb != "logo" && showThumb == true) {
+    presenceData.largeImageKey = parseAvatarFromAttr(
+      player.getAttribute("style"),
+      "logo"
+    );
+    presenceData.smallImageKey = "logo";
+  }
 
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
@@ -262,7 +286,7 @@ function getInfo(): {
   };
 }
 
-function parseAvatarFromAttr(attr: string) {
+function parseAvatarFromAttr(attr: string, def?: string) {
   let avatar;
   if (attr.includes("background-image: url('"))
     avatar = between(attr, "background-image: url('", "')");
@@ -273,7 +297,7 @@ function parseAvatarFromAttr(attr: string) {
     avatar === "https://static.animes-portal.info/assets/images/avatar.svg" ||
     !avatar
   )
-    avatar = "defaultav";
+    avatar = def || "defaultav";
 
   return avatar;
 }
