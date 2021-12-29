@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
   if (pathname === "/") presenceData.details = "Viewing the home page";
   else if (pathname.startsWith("/messages")) {
     if (!paths[1]) presenceData.details = "Viewing messages";
-    else if (paths[1].startsWith("pm-") && showMessaging == true) {
+    else if (paths[1].startsWith("pm-") && showMessaging === true) {
       const body = document.querySelector(
           "body > main.animated > div.wrapper > div.dialogPadding"
         ),
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = `Messaging ${username}`;
       presenceData.smallImageText = username;
-    } else if (paths[1].startsWith("pm-") && showMessaging == false)
+    } else if (paths[1].startsWith("pm-") && showMessaging === false)
       presenceData.details = "Viewing messages";
   } else if (pathname === "/chat")
     presenceData.details = "Chatting in the chat";
@@ -104,11 +104,8 @@ presence.on("UpdateData", async () => {
 
         if (part) presenceData.state = presenceData.state += ` (part ${part})`;
 
-        if (thumb != "logo" && showThumb == true) {
-          presenceData.largeImageKey = parseAvatarFromAttr(
-            player.getAttribute("style"),
-            "logo"
-          );
+        if (thumb !== "logo" && showThumb === true) {
+          presenceData.largeImageKey = thumb;
           presenceData.smallImageKey = "logo";
         }
       } else return;
@@ -248,11 +245,8 @@ presence.on("iFrameData", async (data: iFrameData) => {
   if (epInfo.part)
     presenceData.state = presenceData.state += ` (part ${epInfo.part})`;
 
-  if (thumb != "logo" && showThumb == true) {
-    presenceData.largeImageKey = parseAvatarFromAttr(
-      player.getAttribute("style"),
-      "logo"
-    );
+  if (thumb !== "logo" && showThumb === true) {
+    presenceData.largeImageKey = thumb;
     presenceData.smallImageKey = "logo";
   }
 
