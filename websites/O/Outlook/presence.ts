@@ -28,6 +28,7 @@ presence.on("UpdateData", async () => {
     else if (path.includes("archive")) presenceData.details = "Viewing archive";
     else if (path.includes("junkemail"))
       presenceData.details = "Viewing junk mails";
+    else if (path.includes("drafts")) presenceData.details = "Viewing drafts";
     else if (path.includes("sentitems"))
       presenceData.details = "Viewing sent mails";
     else if (path.includes("conversationhistory"))
