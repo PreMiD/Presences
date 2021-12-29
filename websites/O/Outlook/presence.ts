@@ -16,9 +16,9 @@ presence.on("UpdateData", async () => {
       ) ||
       path.includes("compose")
     )
-      presenceData.details = "Composing a mail";
+      presenceData.details = "Composing an email";
     else if (path.includes("id")) {
-      presenceData.details = "Reading a mail";
+      presenceData.details = "Reading an email";
       if (await presence.getSetting("title")) {
         presenceData.state = document.querySelector(
           "#ReadingPaneContainerId div._2bnn4NUZa-NanNIO4GItP0.allowTextSelection._3FNHkYLZYD6Y3-QNc7ZBo2 > span"
@@ -27,13 +27,13 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("inbox")) presenceData.details = "Viewing inbox";
     else if (path.includes("archive")) presenceData.details = "Viewing archive";
     else if (path.includes("junkemail"))
-      presenceData.details = "Viewing junk mails";
+      presenceData.details = "Viewing junk emails";
     else if (path.includes("drafts")) presenceData.details = "Viewing drafts";
     else if (path.includes("sentitems"))
-      presenceData.details = "Viewing sent mails";
+      presenceData.details = "Viewing sent emails";
     else if (path.includes("conversationhistory"))
       presenceData.details = "Viewing conversation history";
-    else presenceData.details = "Browsing mails";
+    else presenceData.details = "Browsing emails";
   } else if (path.startsWith("/calendar"))
     presenceData.details = "Viewing calendar";
   else if (path.startsWith("/files")) presenceData.details = "Browsing files";
