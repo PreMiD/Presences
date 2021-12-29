@@ -32,20 +32,20 @@ presence.on("UpdateData", () => {
   } else if (path.startsWith("/genres")) {
     if (path === "/genres") presenceData.details = "Browsing all genres";
     else {
-      presenceData.details = "Browsing a genre",
-      presenceData.state = document.title.slice(0, -5);
+      (presenceData.details = "Browsing a genre"),
+        (presenceData.state = document.title.slice(0, -5));
     }
   } else if (path.startsWith("/platforms")) {
     if (path === "/platforms") presenceData.details = "Browsing all platforms";
     else {
-      delete presenceData.largeImageKey,
-        (presenceData.details = "Viewing a platform"),
-        (presenceData.state = document.title),
-        (presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-          "#content-page > div > div > div.row > div.col-sm-4 > img"
-        ).src),
-        (presenceData.smallImageKey = "logo"),
-        (presenceData.smallImageText = "IGDB");
+      delete presenceData.largeImageKey;
+      presenceData.details = "Viewing a platform";
+      presenceData.state = document.title;
+      presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+        "#content-page > div > div > div.row > div.col-sm-4 > img"
+      ).src;
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "IGDB";
     }
   } else if (path.startsWith("/top-100")) {
     presenceData.details = "Viewing Top 100";
