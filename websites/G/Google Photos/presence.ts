@@ -24,10 +24,8 @@ presence.on("UpdateData", async () => {
     {
       if (await presence.getSetting<boolean>("albumname"))
         [presenceData.state] = document.title.split(/-/, 1);
-      else presenceData.state;
     }
   } else if (path.startsWith("/archive"))
     presenceData.details = "Viewing the archive";
-  else presenceData;
   presence.setActivity(presenceData);
 });
