@@ -4,19 +4,15 @@
     "name": "レム",
     "id": "225657353696051200"
   },
-  "contributors": [
-    {
-      "name": "Senko Nyan",
-      "id": "251098700259131404"
-    }
-  ],
   "service": "PayPal",
   "description": {
-    "en": "PayPal is a online payment service."
+    "en": "PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.",
+    "de": "Mit PayPal einfach und sicher bargeldlos bezahlen, Zahlungen empfangen & Geld senden. Profitieren auch Sie vom Käuferschutz & Verkäuferschutz."
   },
-  "url": "www.paypal.com",
+  "url": ["www.paypal.com",
+  "developer.paypal.com"],
   "version": "1.0.0",
-  "logo": "https://i.imgur.com/3Wg0uLc.png",
+  "logo": "https://i.imgur.com/9yCFbcX.png",
   "thumbnail": "https://i.imgur.com/kll1Dhl.png",
   "color": "#3b7bbf",
   "category": "other",
