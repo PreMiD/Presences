@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       episode: HTMLElement = document.querySelector(
         "div > div.episodeInfo > div.epInfo"
       ),
-      timestamps = getTimestamps(
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
@@ -54,8 +54,8 @@ presence.on("UpdateData", async () => {
         smallImageText: video.paused
           ? (await strings).pause
           : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
+        startTimestamp,
+        endTimestamp
       };
 
     presenceData.details = videoTitle.innerText;
