@@ -167,7 +167,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
 
-      if (podcastLink && buttons) {
+      if (buttons) {
         presenceData.buttons = [
           {
             label: (await strings).viewPodcast,
