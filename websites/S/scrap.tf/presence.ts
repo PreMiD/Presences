@@ -1,31 +1,31 @@
 const presence = new Presence({
-    clientId: "918904479888334968",
+    clientId: "918904479888334968"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "scrap-logo",
+    largeImageKey: "scrap-logo"
   };
   presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname === "/")
     presenceData.details = "Viewing Main page";
-  else if (document.location.pathname.includes("/stats"))
+  else if (document.location.pathname.includes("/stats")) {
     (presenceData.details = "Viewing the site stats"),
-      (presenceData.state = "Trade-stats for the past 12 hours");
-  else if (document.location.pathname.includes("/partswap"))
+    (presenceData.state = "Trade-stats for the past 12 hours");
+  } else if (document.location.pathname.includes("/partswap")) {
     (presenceData.details = "MvM Part Swap"),
-      (presenceData.state = "Trading MvM Parts");
-  else if (document.location.pathname.includes("/itemvalues"))
+    (presenceData.state = "Trading MvM Parts");
+  } else if (document.location.pathname.includes("/itemvalues"))
     presenceData.details = "Checking Item Values for Premium";
   else if (document.location.pathname.includes("/games"))
     (presenceData.details = "Steam Game Trading"),
       (presenceData.state = "Viewing the games price info");
   else if (document.location.pathname.includes("/tips"))
     presenceData.details = "Viewing Tips page";
-  else if (document.location.pathname.includes("/twitch"))
+  else if (document.location.pathname.includes("/twitch")) {
     (presenceData.details = "Getting more information about"),
-      (presenceData.state = "Scrap.TF Twitch Raffle Bot");
-  else if (document.location.pathname.includes("/support"))
+    (presenceData.state = "Scrap.TF Twitch Raffle Bot");
+  } else if (document.location.pathname.includes("/support"))
     presenceData.details = "Viewing Live Support page";
   else if (document.location.pathname.includes("/inventory"))
     presenceData.details = "Viewing thier site inventory";
@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/profile")) {
     const title = document.querySelector(
       "#dynamic-height-slate > div > div > div.col-md-9 > div > div > div.profile-upper > div.rev-banking-background.profile-background > div > div.profile-summary.col-md-6 > h1 > span > span"
-    );
-    const perm = document.querySelector(
+    ),
+    perm = document.querySelector(
       "#dynamic-height-slate > div > div > div.col-md-9 > div > div > div.profile-upper > div.rev-banking-background.profile-background > div > div.profile-summary.col-md-6 > h3 > b"
     );
     presenceData.details = "Visiting a profile";
@@ -85,8 +85,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/keys")) {
     const sellp = document.querySelector(
       "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"
-    );
-    const buyp = document.querySelector(
+    ),
+    buyp = document.querySelector(
       "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(4) > span"
     );
     presenceData.details = "Key Trading";
@@ -138,8 +138,8 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("puzzle")) {
       const pze = document.querySelector(
         "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(2) > h1"
-      );
-      const pzw = document.querySelector(
+      ),
+      pzw = document.querySelector(
         "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(3) > h1"
       );
       presenceData.details = "Viewing Puzzle Raffles page";
@@ -183,8 +183,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("won")) {
       const title = document.querySelector(
         "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div > h1"
-      );
-      const item = document.querySelector(
+      ),
+      item = document.querySelector(
         "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div:nth-child(2) > h1"
       );
       if (document.location.pathname.includes("/public")) {
