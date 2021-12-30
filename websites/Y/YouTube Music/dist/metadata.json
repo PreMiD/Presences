@@ -8,6 +8,10 @@
     {
       "name": "Bas950",
       "id": "241278257335500811"
+    },
+    {
+      "name": "qwerty1 Verified ✔",
+      "id": "341761972142080002"
     }
   ],
   "service": "YouTube Music",
@@ -50,6 +54,12 @@
       "id": "buttons",
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "volume",
+      "title": "Show Volume",
+      "icon": "fas fa-volume",
       "value": true
     }
   ]
