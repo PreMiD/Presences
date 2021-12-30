@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
         presence.timestampFromFormat(currentTime),
         presence.timestampFromFormat(duration)
       ),
-      [, , , , , albumID] = albumLink.href.split("/");
+      [, , , , , albumId] = albumLink.href.split("/");
 
     if (
       document
@@ -98,15 +98,15 @@ presence.on("UpdateData", async () => {
         ".track-link:nth-child(2)"
       ).textContent;
 
-      albumCoverID ??= albumID;
+      albumCoverId ??= albumId;
       albumCoverURL ??= (
-        await fetch(`https://api.deezer.com/album/${albumCoverID}/image`)
+        await fetch(`https://api.deezer.com/album/${albumCoverId}/image`)
       ).url;
 
-      if (albumCoverID !== albumID) {
-        albumCoverID = albumID;
+      if (albumCoverId !== albumId) {
+        albumCoverId = albumId;
         albumCoverURL = (
-          await fetch(`https://api.deezer.com/album/${albumCoverID}/image`)
+          await fetch(`https://api.deezer.com/album/${albumCoverId}/image`)
         ).url;
       }
 
@@ -136,23 +136,23 @@ presence.on("UpdateData", async () => {
       const [podcastLink] = document.querySelector<HTMLAnchorElement>(
           "div.marquee-content"
         ).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
-        [, , , , , podcastID] = podcastLink.href.split("/");
+        [, , , , , podcastId] = podcastLink.href.split("/");
       [presenceData.state, presenceData.details] = document
         .querySelector("div.marquee-content")
         .textContent.split(" · ");
 
-      podcastCoverID ??= podcastID;
+      podcastCoverId ??= podcastId;
       podcastCoverURL ??= (
         await (
-          await fetch(`https://api.deezer.com/podcast/${podcastCoverID}`)
+          await fetch(`https://api.deezer.com/podcast/${podcastCoverId}`)
         ).json()
       ).picture;
 
-      if (podcastCoverID !== podcastID) {
-        podcastCoverID = podcastID;
+      if (podcastCoverId !== podcastId) {
+        podcastCoverId = podcastId;
         podcastCoverURL = (
           await (
-            await fetch(`https://api.deezer.com/podcast/${podcastCoverID}`)
+            await fetch(`https://api.deezer.com/podcast/${podcastCoverId}`)
           ).json()
         ).picture;
       }
