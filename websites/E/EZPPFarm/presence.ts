@@ -22,9 +22,9 @@ presence.on("UpdateData", () => {
     user = document.getElementById("username");
     presenceData.details = `Viewing ${user.innerText}'s profile`;
     url = new URL(document.location.href);
-    mode = parseInt(url.searchParams.get("mode"));
+    mode = parseInt(url.searchParams.get("mode"), 10);
     idURL = url.pathname.replace("/u/", "");
-    id = parseInt(idURL);
+    id = parseInt((idURL), 10);
     presenceData.largeImageKey = `https://a.ez-pp.farm/${id}`;
 
     switch (mode) {
@@ -130,7 +130,7 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.includes("/clans")) {
     presenceData.details = "Browsing the clans...";
     url = new URL(document.location.href);
-    mode = parseInt(url.searchParams.get("mode"));
+    mode = parseInt(url.searchParams.get("mode"), 10);
     switch (mode) {
       case 1:
         presenceData.state = "osu!taiko";
