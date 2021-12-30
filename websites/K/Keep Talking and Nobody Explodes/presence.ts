@@ -2,7 +2,9 @@ const presence = new Presence({
   clientId: "681116862930747520"
 });
 
-let strings: Awaited<ReturnType<typeof getStrings>>,
+let oldLang: string,
+  newLang: string,
+  strings: Awaited<ReturnType<typeof getStrings>>,
   timestamp = 0,
   previous: Location,
   current: Location;
@@ -13,7 +15,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo_big"
     };
 
-  strings = await getStrings();
+  oldLang = newLang;
+  newLang = await presence.getSetting<string>("lang").catch(() => "en");
+  if (!strings || oldLang !== newLang) strings = await getStrings(newLang);
   current = window.location;
 
   if (current.hostname.split(".")[0] === "bombmanual") {
@@ -121,13 +125,13 @@ presence.on("UpdateData", async () => {
   previous = current;
 });
 
-async function getStrings() {
+async function getStrings(lang: string) {
   return presence.getStrings(
     {
       reading: "general.reading",
       page: "general.page"
     },
-    await presence.getSetting<string>("lang").catch(() => "en")
+    lang
   );
 }
 
