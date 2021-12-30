@@ -11,7 +11,8 @@
   },
   "url": [
     "kickassanime.rs",
-    "kickassanime.lol"
+    "kickassanime.lol",
+    "kickassanime.ro"
   ],
   "regExp": "([a-z0-9-]+[.])*kickassanime([.][a-z]+)+[/]",
   "version": "1.0.13",
