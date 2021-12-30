@@ -1,20 +1,20 @@
 const presence = new Presence({
-    clientId: "918904479888334968"
+    clientId: "918904479888334968",
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "scrap-logo"
+    largeImageKey: "scrap-logo",
   };
   presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname === "/")
     presenceData.details = "Viewing Main page";
   else if (document.location.pathname.includes("/stats")) {
     (presenceData.details = "Viewing the site stats"),
-    (presenceData.state = "Trade-stats for the past 12 hours");
+      (presenceData.state = "Trade-stats for the past 12 hours");
   } else if (document.location.pathname.includes("/partswap")) {
     (presenceData.details = "MvM Part Swap"),
-    (presenceData.state = "Trading MvM Parts");
+      (presenceData.state = "Trading MvM Parts");
   } else if (document.location.pathname.includes("/itemvalues"))
     presenceData.details = "Checking Item Values for Premium";
   else if (document.location.pathname.includes("/games"))
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Tips page";
   else if (document.location.pathname.includes("/twitch")) {
     (presenceData.details = "Getting more information about"),
-    (presenceData.state = "Scrap.TF Twitch Raffle Bot");
+      (presenceData.state = "Scrap.TF Twitch Raffle Bot");
   } else if (document.location.pathname.includes("/support"))
     presenceData.details = "Viewing Live Support page";
   else if (document.location.pathname.includes("/inventory"))
@@ -63,11 +63,11 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "Visiting the Megaraffle page";
   } else if (document.location.pathname.includes("/profile")) {
     const title = document.querySelector(
-      "#dynamic-height-slate > div > div > div.col-md-9 > div > div > div.profile-upper > div.rev-banking-background.profile-background > div > div.profile-summary.col-md-6 > h1 > span > span"
-    ),
-    perm = document.querySelector(
-      "#dynamic-height-slate > div > div > div.col-md-9 > div > div > div.profile-upper > div.rev-banking-background.profile-background > div > div.profile-summary.col-md-6 > h3 > b"
-    );
+        "#dynamic-height-slate > div > div > div.col-md-9 > div > div > div.profile-upper > div.rev-banking-background.profile-background > div > div.profile-summary.col-md-6 > h1 > span > span"
+      ),
+      perm = document.querySelector(
+        "#dynamic-height-slate > div > div > div.col-md-9 > div > div > div.profile-upper > div.rev-banking-background.profile-background > div > div.profile-summary.col-md-6 > h3 > b"
+      );
     presenceData.details = "Visiting a profile";
     presenceData.state = `[${perm.textContent}] ${title.textContent}`;
   } else if (document.location.pathname.includes("/terms")) {
@@ -84,11 +84,11 @@ presence.on("UpdateData", async () => {
     presenceData.state = `${title} Donated`;
   } else if (document.location.pathname.includes("/keys")) {
     const sellp = document.querySelector(
-      "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"
-    ),
-    buyp = document.querySelector(
-      "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(4) > span"
-    );
+        "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"
+      ),
+      buyp = document.querySelector(
+        "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(4) > span"
+      );
     presenceData.details = "Key Trading";
     presenceData.state = `Buy price: ${buyp.textContent} | Sell price: ${sellp.textContent}`;
   } else if (document.location.pathname.includes("/sell")) {
@@ -137,11 +137,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/raffles")) {
     if (document.location.pathname.includes("puzzle")) {
       const pze = document.querySelector(
-        "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(2) > h1"
-      ),
-      pzw = document.querySelector(
-        "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(3) > h1"
-      );
+          "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(2) > h1"
+        ),
+        pzw = document.querySelector(
+          "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(3) > h1"
+        );
       presenceData.details = "Viewing Puzzle Raffles page";
       presenceData.state = `${pze.textContent} Puzzles Solved | ${pzw.textContent} Raffles Won`;
     } else if (document.location.pathname.includes("create"))
@@ -182,11 +182,11 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("won")) {
       const title = document.querySelector(
-        "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div > h1"
-      ),
-      item = document.querySelector(
-        "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div:nth-child(2) > h1"
-      );
+          "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div > h1"
+        ),
+        item = document.querySelector(
+          "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div:nth-child(2) > h1"
+        );
       if (document.location.pathname.includes("/public")) {
         presenceData.details = "Viewing history of Public raffles won";
         presenceData.state = `${title.textContent} Raffles Won | ${item.textContent} Items Won`;
