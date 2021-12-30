@@ -24,7 +24,7 @@ presence.on("UpdateData", () => {
     url = new URL(document.location.href);
     mode = parseInt(url.searchParams.get("mode"), 10);
     idURL = url.pathname.replace("/u/", "");
-    id = parseInt((idURL), 10);
+    id = parseInt(idURL, 10);
     presenceData.largeImageKey = `https://a.ez-pp.farm/${id}`;
 
     switch (mode) {
