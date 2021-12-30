@@ -59,15 +59,17 @@ presence.on("UpdateData", async () => {
     ).textContent,
     video = document.querySelector<HTMLVideoElement>(".video-stream"),
     progressBar = document.querySelector<HTMLElement>("#progress-bar"),
+    volumeSlider = document.querySelector<HTMLElement>(".style-scope tp-yt-paper-slider").getAttribute("aria-valuenow"),
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
       .getAttribute("repeat-Mode_"),
-    [buttons, timestamps, cover] = await Promise.all([
+    [buttons, timestamps, cover, volume] = await Promise.all([
       presence.getSetting<boolean>("buttons"),
       presence.getSetting<boolean>("timestamps"),
-      presence.getSetting<boolean>("cover")
+      presence.getSetting<boolean>("cover"),
+      presence.getSetting<boolean>("volume")
     ]);
-  if (title !== "" && !isNaN(video.duration)) {
+  if (title !== "" && !isNaN(video.duration) && volumeSlider) {
     const endTimestamp =
         Date.now() +
         Number(progressBar.getAttribute("aria-valuemax")) * 1000 -
@@ -134,6 +136,10 @@ presence.on("UpdateData", async () => {
           presenceData.largeImageKey = "ytm_lg";
         else prevCover = [Date.now(), presenceData.largeImageKey];
       }
+    }
+
+    if (volume) {
+      presenceData.details = presenceData.details + ` | VOL: ${volumeSlider}%`;
     }
 
     presence.setActivity(presenceData);
