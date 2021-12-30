@@ -2,7 +2,9 @@ const presence = new Presence({
   clientId: "680498892651233310"
 });
 
-let strings: Awaited<ReturnType<typeof getStrings>>;
+let oldLang: string,
+  newLang: string,
+  strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
   const path = window.location.pathname.split("/").slice(1),
@@ -10,7 +12,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo_big"
     };
 
-  strings = await getStrings();
+  oldLang = newLang;
+  newLang = await presence.getSetting<string>("lang").catch(() => "en");
+  if (!strings || oldLang !== newLang) strings = await getStrings(newLang);
 
   switch (path[0]) {
     // Reward Categories
@@ -101,12 +105,12 @@ presence.on("UpdateData", async () => {
   }
 });
 
-async function getStrings() {
+async function getStrings(lang: string) {
   return presence.getStrings(
     {
       browsing: "general.browsing",
       reading: "general.reading"
     },
-    await presence.getSetting<string>("lang").catch(() => "en")
+    lang
   );
 }
