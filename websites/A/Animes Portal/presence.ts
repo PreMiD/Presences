@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
   if (pathname === "/") presenceData.details = "Viewing the home page";
   else if (pathname.startsWith("/messages")) {
     if (!paths[1]) presenceData.details = "Viewing messages";
-    else if (paths[1].startsWith("pm-") && showMessaging === true) {
+    else if (paths[1].startsWith("pm-") && showMessaging) {
       const body = document.querySelector<HTMLDivElement>(
           "body > main.animated > div.wrapper > div.dialogPadding"
         ),
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
         ).textContent;
 
       presenceData.largeImageKey = parseAvatarFromAttr(
-        body.querySelector("a.avatar").getAttribute("style")
+        body.querySelector<HTMLAnchorElement>("a.avatar").getAttribute("style")
       );
 
       presenceData.details = `Viewing otaku ${username}`;
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 
         if (part) presenceData.state = presenceData.state += ` (part ${part})`;
 
-        if (thumb !== "logo" && showThumb === true) {
+        if (thumb !== "logo" && showThumb) {
           presenceData.largeImageKey = thumb;
           presenceData.smallImageKey = "logo";
         }
@@ -250,7 +250,7 @@ presence.on("iFrameData", async (data: IFrameData) => {
   if (epInfo.part)
     presenceData.state = presenceData.state += ` (part ${epInfo.part})`;
 
-  if (thumb !== "logo" && showThumb === true) {
+  if (thumb !== "logo" && showThumb) {
     presenceData.largeImageKey = thumb;
     presenceData.smallImageKey = data.paused ? "start" : "logo";
   }
