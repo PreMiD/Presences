@@ -84,11 +84,11 @@ presence.on("UpdateData", async () => {
     presenceData.state = `${title} Donated`;
   } else if (document.location.pathname.includes("/keys")) {
     const sellp = document.querySelector(
-        "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"
-      ),
-      buyp = document.querySelector(
-        "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(4) > span"
-      );
+      "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"
+     ),
+     buyp = document.querySelector(
+       "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(4) > span"
+     );
     presenceData.details = "Key Trading";
     presenceData.state = `Buy price: ${buyp.textContent} | Sell price: ${sellp.textContent}`;
   } else if (document.location.pathname.includes("/sell")) {
@@ -203,7 +203,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("mine")) {
       const title = document.querySelector(
         "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div > h1"
-      ),  
+      ),
       item = document.querySelector(
         "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div:nth-child(2) > h1"
       );
