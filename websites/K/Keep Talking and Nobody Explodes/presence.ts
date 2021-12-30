@@ -33,7 +33,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = document
           .querySelector<HTMLTitleElement>(".title")
           .textContent.replace(/\n|\t/g, "");
-        presenceData.largeImageKey = "logo_big";
         presenceData.smallImageText = strings.reading;
         presenceData.smallImageKey = "reading";
         presenceData.startTimestamp = timestamp;
@@ -64,7 +63,6 @@ presence.on("UpdateData", async () => {
       case "how-to-play-daydream.html":
       case "language":
         presenceData.details = document.title;
-        presenceData.largeImageKey = "logo_big";
         break;
       // Startpage, Unknown
       default:
@@ -79,7 +77,6 @@ presence.on("UpdateData", async () => {
         presenceData.details =
           document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
           document.title;
-        presenceData.largeImageKey = "logo_big";
         break;
       // Presskit
       case "presskit":
@@ -99,7 +96,6 @@ presence.on("UpdateData", async () => {
         break;
       case "faq":
         presenceData.details = "FAQ";
-        presenceData.largeImageKey = "logo_big";
 
         if (window.location.hash?.length > 0) {
           presenceData.state = document.querySelector(
