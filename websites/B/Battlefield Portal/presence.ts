@@ -26,11 +26,14 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "img1"
     },
-    block = await presence.getSetting<boolean>("block"),
-    time = await presence.getSetting<boolean>("time"),
-    buttons = await presence.getSetting<boolean>("buttons"),
-    name = await presence.getSetting<boolean>("name"),
-    description = await presence.getSetting<boolean>("desc"),
+    [block, time, buttons, name, description] = await Promise.all([
+		presence.getSetting<boolean>("block"),
+    	presence.getSetting<boolean>("time"),
+    	presence.getSetting<boolean>("buttons"),
+    	presence.getSetting<boolean>("name"),
+    	presence.getSetting<boolean>("desc")
+	]),
+    
     url = document.URL;
 
   if (url.search("=") > 0) playgroundId = url.split("=").pop();
