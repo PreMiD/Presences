@@ -8,10 +8,11 @@
   "description": {
     "en": "Bots on Discord is listing discord bots.",
     "tr": "Bots on Discord, disscord botlarını listeler.",
-    "nl": "Bots on Discord maakt een lijst van bots."
+    "nl": "Bots on Discord maakt een lijst van bots.",
+    "vi_VN": "Bots on Discord là danh sách các Discord bot."
   },
   "url": "bots.ondiscord.xyz",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/5nbGMhE.png",
   "thumbnail": "https://i.imgur.com/TZOWrzr.png",
   "color": "#089BEF",
