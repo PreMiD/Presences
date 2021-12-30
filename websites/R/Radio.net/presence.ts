@@ -2,14 +2,19 @@ const presence = new Presence({
   clientId: "634124614544392193"
 });
 
-let strings: Awaited<ReturnType<typeof getStrings>>, timestamp: number;
+let oldLang: string,
+  newLang: string,
+  strings: Awaited<ReturnType<typeof getStrings>>,
+  timestamp: number;
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.split("."),
     path = window.location.pathname.split("/").slice(1),
     presenceData: PresenceData = {};
 
-  strings = await getStrings();
+  oldLang = newLang;
+  newLang = await presence.getSetting<string>("lang").catch(() => "en");
+  if (!strings || oldLang !== newLang) strings = await getStrings(newLang);
 
   if (host[0] === "corporate") {
     // Corporate page
@@ -160,7 +165,7 @@ presence.on("UpdateData", async () => {
   }
 });
 
-async function getStrings() {
+async function getStrings(lang: string) {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -168,6 +173,6 @@ async function getStrings() {
       search: "general.searching",
       browsing: "general.browsing"
     },
-    await presence.getSetting<string>("lang").catch(() => "en")
+    lang
   );
 }
