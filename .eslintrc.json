@@ -32,7 +32,7 @@
     "no-multi-spaces": "error",
     "object-shorthand": "error",
     "quote-props": ["error", "as-needed"],
-    "prefer-destructuring": "error",
+    "prefer-destructuring": ["error", { "array": false, "object": true }],
     "prefer-template": "error",
     "space-before-blocks": ["error", "always"],
     "space-infix-ops": "error",
