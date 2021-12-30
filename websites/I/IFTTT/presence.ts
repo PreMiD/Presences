@@ -2,7 +2,9 @@ const presence = new Presence({
   clientId: "665519810054062100"
 });
 
-let strings: Awaited<ReturnType<typeof getStrings>>;
+let oldLang: string,
+  newLang: string,
+  strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname,
@@ -11,7 +13,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo_big"
     };
 
-  strings = await getStrings();
+  oldLang = newLang;
+  newLang = await presence.getSetting<string>("lang").catch(() => "en");
+  if (!strings || oldLang !== newLang) strings = await getStrings(newLang);
 
   if (host === "ift.tt") {
     // IFTTT URL Shortener (for the Help Center)
@@ -259,13 +263,13 @@ presence.on("UpdateData", async () => {
   presence.setActivity(presenceData);
 });
 
-async function getStrings() {
+async function getStrings(lang: string) {
   return presence.getStrings(
     {
       search: "general.searching",
       browsing: "general.browsing",
       reading: "general.reading"
     },
-    await presence.getSetting<string>("lang").catch(() => "en")
+    lang
   );
 }
