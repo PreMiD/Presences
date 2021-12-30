@@ -10,7 +10,9 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.split("."),
     path = window.location.pathname.split("/").slice(1),
-    presenceData: PresenceData = {};
+    presenceData: PresenceData = {
+      largeImageKey: "logo_big"
+    };
 
   oldLang = newLang;
   newLang = await presence.getSetting<string>("lang").catch(() => "en");
@@ -39,7 +41,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = `${host.join(".")} corporate`;
         presenceData.state =
           item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
-        presenceData.largeImageKey = "logo_big";
         break;
       }
       default:
@@ -131,7 +132,6 @@ presence.on("UpdateData", async () => {
         );
         presenceData.state =
           document.querySelector<HTMLHeadingElement>("h1").textContent;
-        presenceData.largeImageKey = "logo_big";
         presenceData.smallImageText = strings.search;
         presenceData.smallImageKey = "search";
         break;
@@ -144,7 +144,6 @@ presence.on("UpdateData", async () => {
       case "top-stations":
         presenceData.details =
           document.querySelector<HTMLHeadingElement>("h1").textContent;
-        presenceData.largeImageKey = "logo_big";
         presenceData.smallImageText = strings.browsing;
         presenceData.smallImageKey = "reading";
         break;
@@ -156,7 +155,6 @@ presence.on("UpdateData", async () => {
       case "privacy-policy":
       case "imprint":
         presenceData.details = document.title;
-        presenceData.largeImageKey = "logo_big";
         break;
       // Startpage, Unknown
       default:
