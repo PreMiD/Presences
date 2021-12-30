@@ -8,15 +8,15 @@ const presence = new Presence({
 
 let lastPlaybackState = null,
   playback,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-  const video: HTMLVideoElement = document.querySelector(
+  const video = document.querySelector<HTMLVideoElement>(
     "#player > div.jw-media.jw-reset > video"
   );
 
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "lg",
       details: "Browsing...",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
     delete presenceData.state;
@@ -36,10 +36,10 @@ presence.on("UpdateData", async () => {
   }
 
   if (playback) {
-    const videoTitle: HTMLElement = document.querySelector(
+    const videoTitle = document.querySelector<HTMLDivElement>(
         "div > div.episodeInfo > div.nomeAnime"
       ),
-      episode: HTMLElement = document.querySelector(
+      episode = document.querySelector<HTMLDivElement>(
         "div > div.episodeInfo > div.epInfo"
       ),
       [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = videoTitle.innerText;
     presenceData.state = episode.innerText;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (video.paused) {
       delete presenceData.startTimestamp;
@@ -70,16 +70,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number): number[] {
-  const startTime = Date.now();
-  return [
-    Math.floor(startTime / 1000),
-    Math.floor(startTime / 1000) - videoTime + videoDuration
-  ];
-}
