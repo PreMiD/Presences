@@ -6,7 +6,9 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
   const path = window.location.pathname.split("/").slice(1),
-    presenceData: PresenceData = {};
+    presenceData: PresenceData = {
+      largeImageKey: "logo_big"
+    };
 
   strings = await getStrings();
 
@@ -16,7 +18,6 @@ presence.on("UpdateData", async () => {
       presenceData.details =
         document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
         document.title;
-      presenceData.largeImageKey = "logo_big";
       presenceData.smallImageText = strings.browsing;
       presenceData.smallImageKey = "reading";
 
@@ -31,7 +32,6 @@ presence.on("UpdateData", async () => {
       presenceData.details =
         document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
         document.title;
-      presenceData.largeImageKey = "logo_big";
       presenceData.smallImageText = strings.browsing;
       presenceData.smallImageKey = "reading";
 
@@ -46,7 +46,6 @@ presence.on("UpdateData", async () => {
       presenceData.details =
         document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
         document.title;
-      presenceData.largeImageKey = "logo_big";
 
       presenceData.smallImageKey = strings.reading;
       presenceData.smallImageText = "reading";
@@ -59,14 +58,12 @@ presence.on("UpdateData", async () => {
         document.querySelector<HTMLHeadingElement>("h1").textContent;
       presenceData.state =
         document.querySelector<HTMLHeadingElement>("h2")?.textContent;
-      presenceData.largeImageKey = "logo_big";
       break;
     // News
     case "news":
       presenceData.details =
         document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
         document.title;
-      presenceData.largeImageKey = "logo_big";
       presenceData.smallImageText = strings.reading;
       presenceData.smallImageKey = "reading";
 
@@ -86,7 +83,6 @@ presence.on("UpdateData", async () => {
       presenceData.details =
         document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
         document.title;
-      presenceData.largeImageKey = "logo_big";
       break;
     // Getting Started, About Points, About Gold Points
     case "getting_started":
@@ -95,7 +91,6 @@ presence.on("UpdateData", async () => {
       presenceData.details =
         document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
         document.title;
-      presenceData.largeImageKey = "logo_big";
 
       presenceData.smallImageKey = strings.reading;
       presenceData.smallImageText = "reading";
