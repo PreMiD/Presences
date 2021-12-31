@@ -51,8 +51,8 @@ const readFile = (path: string): string =>
       // Normalize the path and seperate it on OS specific seperator
       const normalizedPath = normalize(dir).split(sep);
 
-      // Pop off the presence/iframe.ts
-      normalizedPath.pop();
+      // Pop off the presence/iframe.ts/metadata.json
+      normalizedPath.at(-1) === "metadata.json" ? normalizedPath.splice(normalizedPath.length - 2, 2) : normalizedPath.pop();
 
       filesToBump[i] = normalizedPath.join(sep);
     }
