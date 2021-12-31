@@ -51,8 +51,8 @@ const readFile = (path: string): string =>
       // Normalize the path and seperate it on OS specific seperator
       const normalizedPath = normalize(dir).split(sep);
 
-      // Pop off the presence/iframe.ts
-      normalizedPath.pop();
+      // Pop off the presence/iframe.ts/metadata.json
+      normalizedPath.at(-1) === "metadata.json" ? normalizedPath.splice(normalizedPath.length - 2, 2) : normalizedPath.pop();
 
       filesToBump[i] = normalizedPath.join(sep);
     }
@@ -121,17 +121,16 @@ const readFile = (path: string): string =>
     );
 
     // Use Git to check what files have changed after TypeScript compilation
-    const listOfChangedFiles = await execShellCommand([
-        "git",
-        "--no-pager",
-        "diff",
-        "--name-only"
-      ]),
-      changedPresenceFiles = listOfChangedFiles
-        .split("\n")
-        .filter(
-          file => file.includes("presence.ts") || file.includes("iframe.ts")
-        );
+    const changedPresenceFiles = (
+      await execShellCommand(["git", "--no-pager", "diff", "--name-only"])
+    )
+      .split("\n")
+      .filter(
+        file =>
+          file.includes("presence.ts") ||
+          file.includes("iframe.ts") ||
+          file.includes("metadata.json")
+      );
 
     await increaseSemver(changedPresenceFiles);
 

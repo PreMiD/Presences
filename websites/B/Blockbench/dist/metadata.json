@@ -7,13 +7,14 @@
   "service": "Blockbench",
   "description": {
     "en": "Blockbench is a boxy 3D model editor.",
-    "nl": "Blockbench is een boxy 3D modeleditor."
+    "nl": "Blockbench is een boxy 3D modeleditor.",
+    "vi_VN": "Blockbench là công cụ chỉnh sửa mô hình 3D khối lập phương."
   },
   "url": [
     "www.blockbench.net",
     "web.blockbench.net"
   ],
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/isuRsRF.png",
   "thumbnail": "https://i.imgur.com/A4LQrtg.png",
   "color": "#1E93D9",

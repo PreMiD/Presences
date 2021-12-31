@@ -25,7 +25,7 @@
   },
   "url": "music.amazon.com",
   "regExp": "music[.]amazon([.][a-z]+)+[/]",
-  "version": "2.0.14",
+  "version": "2.1.0",
   "logo": "https://i.imgur.com/AUKbzxX.png",
   "thumbnail": "https://i.imgur.com/htSGR6k.png",
   "color": "#21293C",
@@ -51,6 +51,12 @@
       "id": "showPlaylist",
       "title": "Show Playlist",
       "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "cover",
+      "title": "Show Cover",
+      "icon": "fad fa-images",
       "value": true
     }
   ]

@@ -4,8 +4,8 @@
   "author": "Timeraa",
   "license": "MPL-2.0",
   "scripts": {
-    "lint": "eslint --fix . && prettier --write **/*.ts **/{metadata,tsconfig}.json",
-    "lint:ci": "eslint . && prettier **/*.ts **/{metadata,tsconfig}.json",
+    "lint": "eslint --fix .",
+    "lint:ci": "eslint .",
     "inc": "tsc -p ./util/configs/tsconfig.massVer.json && node ./util/tools/massVer.js",
     "se": "tsc -p ./util/configs/tsconfig.auto.syntaxEnforcer.json && node ./util/tools/auto/syntaxEnforcer.js",
     "sv": "tsc -p ./util/configs/tsconfig.auto.schemaValidator.json && node ./util/tools/auto/schemaValidator.js",

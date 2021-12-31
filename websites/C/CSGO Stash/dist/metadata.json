@@ -9,10 +9,11 @@
     "CS:GO Stash"
   ],
   "description": {
-    "en": "Browse all CS:GO skins, knives, gloves, cases, collections, stickers, music kits, and more. Check prices, market stats, previews, and more for every CS:GO items"
+    "en": "Browse all CS:GO skins, knives, gloves, cases, collections, stickers, music kits, and more. Check prices, market stats, previews, and more for every CS:GO items",
+    "vi_VN": "Tìm tất cả các skin, găng tay, hòm, bộ sưu tập, hộp nhạc CS:GO và hơn nữa. Theo dõi giá, giá trị thị trường, xem trước và hơn nữa cho mọi vật phẩm CS:GO"
   },
   "url": "csgostash.com",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/1jY4wvb.png",
   "thumbnail": "https://i.imgur.com/C7bWRwD.png",
   "color": "#13AFF0",
