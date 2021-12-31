@@ -26,9 +26,13 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "img1"
     },
-    [block, time, buttons, name, description]: boolean[] = await Promise.all(
-      ["block", "time", "buttons", "name", "desc"].map(presence.getSetting)
-    ),
+    [block, time, buttons, name, description] = await Promise.all([
+      presence.getSetting<boolean>("block"),
+      presence.getSetting<boolean>("time"),
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<boolean>("name"),
+      presence.getSetting<boolean>("desc")
+    ]),
     url = document.URL;
 
   if (url.search("=") > 0) playgroundId = url.split("=").pop();
