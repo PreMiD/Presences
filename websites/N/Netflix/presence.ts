@@ -25,7 +25,7 @@ interface DiscoveryModel {
 }
 
 const presence = new Presence({
-    clientId: "499981204045430784"
+    clientId: "926541425682829352"
   }),
   getStrings = async () => {
     return presence.getStrings(
