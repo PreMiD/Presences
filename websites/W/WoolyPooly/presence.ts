@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "783702757021581352"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
@@ -19,22 +19,22 @@ presence.on("UpdateData", async () => {
       break;
 
     case "/faq":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "FAQ";
       break;
 
     case "/privacy":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Privacy Policy";
       break;
 
     case "/tos":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Terms of Service";
       break;
 
     case "/raveos":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Rave OS Redirect";
       break;
 
@@ -66,13 +66,13 @@ presence.on("UpdateData", async () => {
         [, , presenceData.smallImageKey] = window.location.pathname.split("/");
         presenceData.smallImageText = currencyTitle;
       } else {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Charts Overview";
       }
   }
 
   if (!presenceData.details) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Charts Overview";
   } else presence.setActivity(presenceData);
 });

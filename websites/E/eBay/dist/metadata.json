@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,22 +10,22 @@
       "id": "730142125181894657"
     }
   ],
-  "url": "www.ebay.com",
   "service": "eBay",
   "description": {
     "en": "Buy and sell electronics, cars, fashion apparel, collectibles, sporting goods, digital cameras, baby items, coupons, and everything else on eBay, the world's online marketplace.",
     "nl": "Koop en verkoop elektronica, auto's, mode, verzamelobjecten, sportartikelen, digitale camera's, babyartikelen, kortingsbonnen en al het andere op eBay, 's werelds online marktplaats."
   },
+  "url": "www.ebay.com",
   "regExp": "([a-z0-9-]+[.])*ebay([.][a-z]+)+[/]",
-  "version": "1.3.2",
+  "version": "1.3.4",
   "logo": "https://i.imgur.com/FuSdtYk.png",
   "thumbnail": "https://i.imgur.com/WajY5CI.png",
   "color": "#e53238",
+  "category": "other",
   "tags": [
     "store",
     "shopping"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "buttons",

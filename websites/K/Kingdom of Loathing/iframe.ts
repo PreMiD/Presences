@@ -1,12 +1,11 @@
-const KEEP_ALIVE = 10000,
-  koliFrame = new iFrame();
+const koliFrame = new iFrame();
 
 let currentMonster: string | null = null;
 function updateCombat(i: iFrame) {
   const name = document.getElementById("monname");
 
   if (name) {
-    const monster = name.innerText;
+    const monster = name.textContent;
     if (monster !== currentMonster) {
       currentMonster = monster;
       return i.send({ type: "MONSTER", payload: monster });
@@ -42,23 +41,16 @@ function updateCharpane(i: iFrame) {
 
   let adventures = -1;
 
-  if (nonCompactContainer) adventures = Number(nonCompactContainer.innerText);
+  if (nonCompactContainer) adventures = Number(nonCompactContainer.textContent);
   else if (compactContainer) {
     adventures = Number(
-      (compactContainer.parentElement.parentElement.nextSibling as HTMLElement)
-        .innerText
+      compactContainer.parentElement.parentElement.nextSibling.textContent
     );
-  } else if (chitContainer) {
-    adventures = Number(
-      (chitContainer.previousSibling as HTMLElement).innerText
-    );
-  }
+  } else if (chitContainer)
+    adventures = Number(chitContainer.previousSibling.textContent);
 
   if (adventures !== -1) {
-    if (
-      adventures !== currentAdventures ||
-      Date.now() - lastPing > KEEP_ALIVE
-    ) {
+    if (adventures !== currentAdventures || Date.now() - lastPing > 10_000) {
       currentAdventures = adventures;
       lastPing = Date.now();
       return i.send({ type: "ADVENTURES", payload: adventures });

@@ -11,19 +11,19 @@ interface Channel {
 const presence = new Presence({
     clientId: "748660637021896835"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let totalListeners: number,
   channels: Channel[] = [];
 
 function newStats(): void {
   fetch("https://api.reyfm.de/v4?voting=true")
-    .then((response) => response.json())
-    .then((data) => {
+    .then(response => response.json())
+    .then(data => {
       totalListeners = data.all_listeners;
-      const channelList: Array<string> = data.sequence,
+      const channelList: string[] = data.sequence,
         channelArray: Channel[] = [];
-      channelList.forEach((channel) => {
+      channelList.forEach(channel => {
         channelArray.push({
           id: channel,
           name: "",
@@ -34,7 +34,7 @@ function newStats(): void {
           timeEnd: ""
         });
       });
-      channelArray.forEach((channel) => {
+      channelArray.forEach(channel => {
         const channelData = data.channels[`${channel.id}`];
         channel.name = channelData.name;
         channel.listeners = channelData.listeners;
@@ -62,6 +62,7 @@ function findChannel(): string {
           return channel.firstElementChild.id.replace("channel-", "");
       }
     }
+
     return "YOU FAILED";
   } catch (e) {
     return "YOU FAILED";
@@ -71,16 +72,19 @@ function findChannel(): string {
 newStats();
 setInterval(() => {
   newStats();
-}, 10000);
+}, 10_000);
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sInfo"),
-    elapsed = await presence.getSetting("tElapsed"),
-    format1 = await presence.getSetting("sFormat1"),
-    format2 = await presence.getSetting("sFormat2"),
-    format3 = await presence.getSetting("sListeners"),
-    buttons = await presence.getSetting("buttons"),
-    logo: number = await presence.getSetting("logo"),
+  const [info, elapsed, format1, format2, format3, buttons, logo] =
+      await Promise.all([
+        presence.getSetting<boolean>("sInfo"),
+        presence.getSetting<boolean>("tElapsed"),
+        presence.getSetting<string>("sFormat1"),
+        presence.getSetting<string>("sFormat2"),
+        presence.getSetting<string>("sListeners"),
+        presence.getSetting<boolean>("buttons"),
+        presence.getSetting<number>("logo")
+      ]),
     logoArr = [
       "reywhitebacksmall",
       "reyblackbacksmall",
@@ -136,32 +140,32 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (elapsed) presenceData.startTimestamp = browsingStamp;
+  if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (
     document.location.hostname === "www.reyfm.de" &&
     document.location.pathname === "/"
   ) {
     if (
-      (document.querySelector("#player") as HTMLElement).style.cssText !==
+      document.querySelector<HTMLElement>("#player").style.cssText !==
       "display: none;"
     ) {
-      const paused = (
-        document.querySelector("#miniplayer-play") as HTMLImageElement
-      ).src.includes("play.png");
+      const paused = document
+        .querySelector<HTMLImageElement>("#miniplayer-play")
+        .src.includes("play.png");
 
       let track: string, artist: string;
 
       if (!paused) {
         const channelID = findChannel();
         if (channelID !== "YOU FAILED") {
-          const channel = channels.find((channel) => channel.id === channelID);
+          const channel = channels.find(channel => channel.id === channelID);
           ({ track, artist } = channel);
 
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = format3
-            .replace("%listeners%", channel.listeners)
-            .replace("%totalListeners%", totalListeners);
+            .replace("%listeners%", `${channel.listeners}`)
+            .replace("%totalListeners%", `${totalListeners}`);
           presenceData.startTimestamp = Date.parse(channel.timeStart);
           presenceData.endTimestamp = Date.parse(channel.timeEnd);
           showFormat3 = true;
@@ -204,10 +208,10 @@ presence.on("UpdateData", async () => {
     const channelID = document
         .querySelector("#channel-player")
         .className.replace("shadow channel-color-", ""),
-      channel = channels.find((channel) => channel.id === channelID),
-      paused = (
-        document.querySelector("#play") as HTMLImageElement
-      ).src.includes("play.png");
+      channel = channels.find(channel => channel.id === channelID),
+      paused = document
+        .querySelector<HTMLImageElement>("#play")
+        .src.includes("play.png");
 
     paused
       ? (presenceData.smallImageKey = "pause")
@@ -221,8 +225,8 @@ presence.on("UpdateData", async () => {
       .replace("%artist%", channel.artist);
 
     presenceData.smallImageText = format3
-      .replace("%listeners%", channel.listeners)
-      .replace("%totalListeners%", totalListeners);
+      .replace("%listeners%", `${channel.listeners}`)
+      .replace("%totalListeners%", `${totalListeners}`);
 
     showFormat3 = true;
 
@@ -243,8 +247,6 @@ presence.on("UpdateData", async () => {
 
   if (!buttons) delete presenceData.buttons;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

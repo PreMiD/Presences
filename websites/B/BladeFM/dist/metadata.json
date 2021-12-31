@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
@@ -8,13 +8,16 @@
   "description": {
     "en": "Providing non-stop music, 24/7",
     "ga_IE": "Ag soláthar ceoil gan stad, 24/7",
-    "nl": "Bied 24/7 non-stop muziek aan"
+    "nl": "Bied 24/7 non-stop muziek aan",
+    "vi_VN": "Cung cấp âm nhạc không ngừng nghỉ, 24/7"
   },
   "url": "bladefm.com.au",
-  "version": "1.0.4",
+  "regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/Sjj3gx6.png",
   "thumbnail": "https://i.imgur.com/DWa62sw.png",
   "color": "#203391",
+  "category": "music",
   "tags": [
     "music",
     "radio",
@@ -22,7 +25,6 @@
     "bladeradio",
     "bladefm"
   ],
-  "category": "music",
   "settings": [
     {
       "id": "timestamp",
@@ -44,6 +46,5 @@
       "value": "%songText%",
       "placeholder": "%artist%, %listeners%, %songText%, %title%"
     }
-  ],
-  "regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]"
+  ]
 }

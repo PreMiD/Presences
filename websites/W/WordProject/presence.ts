@@ -1,15 +1,15 @@
 const presence = new Presence({
     clientId: "869131200948756500"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = location,
-    buttons: boolean = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (pathname.startsWith("/index")) {
     const sample = document.querySelector("li.noMargin");
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
         total = document.querySelector<HTMLSpanElement>(".sm2_total");
       presenceData.state = "Listening to audio sample";
       if (current && total) {
-        const [currTS, durTS] = [current, total].map((e) =>
+        const [currTS, durTS] = [current, total].map(e =>
           presence.timestampFromFormat(e.textContent)
         );
 
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
           );
 
         if (time && duration) {
-          const [timeTS, durTS] = [time, duration].map((e) =>
+          const [timeTS, durTS] = [time, duration].map(e =>
             presence.timestampFromFormat(e.textContent)
           );
           [, presenceData.endTimestamp] = presence.getTimestamps(timeTS, durTS);
@@ -89,12 +89,12 @@ presence.on("UpdateData", async () => {
       if (sub) presenceData.state = sub.textContent;
     } else presenceData.details = document.title;
   } else if (/\/bibles\/\w+\/[0-9]+\/[0-9]+\.htm/.test(pathname)) {
-    const book = document.querySelector<HTMLHeadingElement>("h1"),
-      chapter = document.querySelector<HTMLHeadingElement>("h3"),
-      player = document.querySelector<HTMLDivElement>(".sm2-bar-ui");
+    const player = document.querySelector<HTMLDivElement>(".sm2-bar-ui");
 
     presenceData.details = "Listening to";
-    presenceData.state = `${book.textContent}: ${chapter.textContent}`;
+    presenceData.state = `${
+      document.querySelector<HTMLDivElement>(".sm2-bar-ui").textContent
+    }: ${document.querySelector<HTMLHeadingElement>("h3").textContent}`;
     if (player && player.classList.contains("playing")) {
       const time = document.querySelector<HTMLDivElement>(".sm2-inline-time"),
         duration = document.querySelector<HTMLDivElement>(
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
         );
 
       if (time && duration) {
-        const [timeTS, durTS] = [time, duration].map((e) =>
+        const [timeTS, durTS] = [time, duration].map(e =>
           presence.timestampFromFormat(e.textContent)
         );
         [, presenceData.endTimestamp] = presence.getTimestamps(timeTS, durTS);
@@ -118,8 +118,6 @@ presence.on("UpdateData", async () => {
     }
   } else presenceData.details = document.title; // for resources in languages other than English
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

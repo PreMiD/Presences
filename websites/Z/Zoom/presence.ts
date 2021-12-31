@@ -54,28 +54,27 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 function videoEnabled() {
   return (
-    document.querySelector(".send-video-container > button") &&
+    document.querySelector<HTMLButtonElement>(
+      ".send-video-container > button"
+    ) &&
     document
-      .querySelector(".send-video-container > button")
+      .querySelector<HTMLButtonElement>(".send-video-container > button")
       .getAttribute("aria-label") &&
     document
-      .querySelector(".send-video-container > button")
+      .querySelector<HTMLButtonElement>(".send-video-container > button")
       .getAttribute("aria-label") !== "start sending my video"
   );
 }
 
 function memberCount() {
-  const counter = document.querySelector(
-      ".footer-button__participants-icon > .footer-button__number-counter > span"
-    ),
-    res = counter === null ? null : Number(counter.innerHTML);
-  return res;
+  const counter = document.querySelector<HTMLSpanElement>(
+    ".footer-button__participants-icon > .footer-button__number-counter > span"
+  );
+  return counter === null ? null : Number(counter.textContent);
 }

@@ -1,20 +1,19 @@
 const presence = new Presence({
     clientId: "827620297896230912"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    setTimeElapsed = await presence.getSetting("timeElapsed"),
-    setShowButtons = await presence.getSetting("showButtons"),
-    setSmallImages = await presence.getSetting("showSmallImages"),
+    setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
+    setShowButtons = await presence.getSetting<boolean>("showButtons"),
+    setSmallImages = await presence.getSetting<boolean>("showSmallImages"),
     urlpath = window.location.pathname.split("/"),
-    langs = ["nl", "fr", "de"],
-    urlpNum = new RegExp(langs.join("|")).test(urlpath[1]) ? 1 : 0;
+    urlpNum = /nl|fr|de/.test(urlpath[1]) ? 1 : 0;
 
-  if (setTimeElapsed) presenceData.startTimestamp = browsingStamp;
+  if (setTimeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (!urlpath[urlpNum + 1]) presenceData.details = "Home";
   else if (urlpath[urlpNum + 1] === "c") {
@@ -28,10 +27,11 @@ presence.on("UpdateData", async function () {
     )
       num = num + urlpNum;
     if (document.querySelector("a.b-refinements-category-link.active")) {
-      const category = document
-        .querySelector("a.b-refinements-category-link.active")
-        .getAttribute("data-name");
-      if (urlpath[num + 1]) presenceData.state = category;
+      if (urlpath[num + 1]) {
+        presenceData.state = document
+          .querySelector("a.b-refinements-category-link.active")
+          .getAttribute("data-name");
+      }
     }
     if (setShowButtons) {
       presenceData.buttons = [
@@ -67,14 +67,7 @@ presence.on("UpdateData", async function () {
       ).textContent;
     }
   } else if (urlpath[urlpNum + 1] === "p") {
-    const prod = document.querySelector("div.js-target").textContent,
-      prodModel = document.querySelector("div.js-target>.h-hide").textContent,
-      brand = document.querySelector("div.js-target>a").textContent,
-      product = prod
-        .replace(prodModel, "")
-        .replace(brand, "")
-        .replace(/\s+/g, " ")
-        .trim();
+    const brand = document.querySelector("div.js-target>a").textContent;
     if (setShowButtons) {
       presenceData.buttons = [
         {
@@ -85,11 +78,18 @@ presence.on("UpdateData", async function () {
     }
 
     presenceData.details = brand;
-    presenceData.state = product;
+    presenceData.state = document
+      .querySelector("div.js-target")
+      .textContent.replace(
+        document.querySelector("div.js-target>.h-hide").textContent,
+        ""
+      )
+      .replace(brand, "")
+      .replace(/\s+/g, " ")
+      .trim();
   } else if (urlpath[urlpNum + 1].startsWith("search")) {
-    const urlParams = new URLSearchParams(window.location.search);
     presenceData.details = "Search:";
-    presenceData.state = urlParams.get("q");
+    presenceData.state = new URLSearchParams(window.location.search).get("q");
 
     if (setShowButtons) {
       presenceData.buttons = [
@@ -140,8 +140,6 @@ presence.on("UpdateData", async function () {
     presenceData.smallImageText = `SNIPES ${smallimage.toUpperCase()}`;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

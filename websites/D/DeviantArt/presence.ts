@@ -4,11 +4,11 @@ const presence = new Presence({
 
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -29,7 +29,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -99,9 +99,9 @@ const updateCallback = {
 
 	*/
 
-    const presenceSettings: { [index: string]: boolean } = {
-      chatChannelNames: await presence.getSetting("chatChannelNames"),
-      detailedSettings: await presence.getSetting("detailedSettings")
+    const presenceSettings = {
+      chatChannelNames: await presence.getSetting<boolean>("chatChannelNames"),
+      detailedSettings: await presence.getSetting<boolean>("detailedSettings")
     };
 
     if (currentURL.hostname === "www.deviantart.com") {
@@ -115,7 +115,7 @@ const updateCallback = {
       if (document.querySelector("#group")) profileType = "group";
       else profileType = "user";
 
-      const lastItem = (array: NodeList | Array<unknown>): unknown => {
+      const lastItem = (array: NodeList | unknown[]): unknown => {
           return array[array.length - 1];
         },
         getName = (override = false): string => {
@@ -230,7 +230,7 @@ const updateCallback = {
                 .replace(/-/g, " ")
                 .toLowerCase()
                 .split(" ")
-                .map((w) => w.replace(w[0], w[0].toUpperCase()))
+                .map(w => w.replace(w[0], w[0].toUpperCase()))
                 .join(" ");
             } else if (currentPath[0] === "daily-deviations") {
               presenceData.details = "Viewing daily deviations";
@@ -238,7 +238,7 @@ const updateCallback = {
                 document.querySelector(
                   "#daily-deviation-picker"
                 ) as HTMLSelectElement
-              ).value;
+              ).textContent;
             } else if (currentPath[0] === "journals") {
               presenceData.details = "Viewing daily deviations";
               if (currentPath[1]) {
@@ -367,28 +367,24 @@ const updateCallback = {
                 presenceData.state = `${
                   document.querySelector("h2.uUWfu").textContent
                 } by ${getName()}`;
-              } else {
-                if (profileType === "group" && !currentPath[2])
-                  presenceData.state = getName(true);
-                else {
-                  if (!document.querySelector(".gallery .active")) {
-                    presenceData.state = `${
-                      document.querySelector(".folder-title").textContent
-                    } by ${getName(true)}`;
-                  } else if (
-                    document
-                      .querySelector(".gallery .active")
-                      .textContent.slice(1) === "Featured"
-                  )
-                    presenceData.state = `Featured by ${getName(true)}`;
-                  else if (
-                    document
-                      .querySelector(".gallery .active")
-                      .textContent.slice(1) === "All"
-                  )
-                    presenceData.state = `All by ${getName(true)}`;
-                }
-              }
+              } else if (profileType === "group" && !currentPath[2])
+                presenceData.state = getName(true);
+              else if (!document.querySelector(".gallery .active")) {
+                presenceData.state = `${
+                  document.querySelector(".folder-title").textContent
+                } by ${getName(true)}`;
+              } else if (
+                document
+                  .querySelector(".gallery .active")
+                  .textContent.slice(1) === "Featured"
+              )
+                presenceData.state = `Featured by ${getName(true)}`;
+              else if (
+                document
+                  .querySelector(".gallery .active")
+                  .textContent.slice(1) === "All"
+              )
+                presenceData.state = `All by ${getName(true)}`;
 
               /* The functions below are vaild for users only. */
             } else if (currentPath[1] === "print") {
@@ -400,14 +396,12 @@ const updateCallback = {
               presenceData.state = getName();
             } else if (currentPath[1] === "posts") {
               /* This part is only valid on the Eclipse theme. */
-              const details: { [index: string]: string } = {
+              presenceData.details = {
                 All: "Viewing a user's posts",
                 Journals: "Viewing a user's journals",
                 "Status Updates": "Viewing a user's statuses",
                 Polls: "Viewing a user's polls"
-              };
-              presenceData.details =
-                details[document.querySelector("._3xmU1 div a").textContent];
+              }[document.querySelector("._3xmU1 div a").textContent];
               presenceData.state = getName();
             } else if (currentPath[1] === "journal") {
               if (currentPath[2]) {
@@ -542,7 +536,7 @@ const updateCallback = {
         const li = document.querySelectorAll(
           ".browse-facet-product ul li .selected"
         );
-        li.forEach((v) => {
+        li.forEach(v => {
           if (!presenceData.state) presenceData.state = v.textContent;
           else presenceData.state += ` > ${v.textContent}`;
         });

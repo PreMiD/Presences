@@ -1,18 +1,18 @@
 const presence = new Presence({
     clientId: "840126038205923369"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: Element, title2: Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     page = window.location.pathname,
     pageh = document.location.href,
-    buttons = await presence.getSetting("buttons"),
-    privacy = await presence.getSetting("privacy");
+    buttons = await presence.getSetting<boolean>("buttons"),
+    privacy = await presence.getSetting<boolean>("privacy");
 
   if (page === "/" && !location.search) {
     presenceData.details = "Bekijkt:";
@@ -23,8 +23,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Bekijkt:";
       presenceData.state = "Plaatjes";
     } else {
-      const content = element && element.getAttribute("content");
-      presenceData.details = content;
+      presenceData.details = element && element.getAttribute("content");
       if (buttons) {
         presenceData.buttons = [
           {
@@ -48,8 +47,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-      const content = element && element.getAttribute("content");
-      presenceData.details = content;
+      presenceData.details = element && element.getAttribute("content");
     }
   } else if (pageh.includes("selectedId=") || pageh.includes("/item/")) {
     if (!privacy) {
@@ -68,7 +66,8 @@ presence.on("UpdateData", async () => {
           delete presenceData.endTimestamp;
           presenceData.smallImageKey = "pause";
         } else if (title2.className.includes("playing")) {
-          const currentTime = presence.timestampFromFormat(
+          [, presenceData.endTimestamp] = presence.getTimestamps(
+            presence.timestampFromFormat(
               document.querySelector(
                 `#vjs_video_${title2.className
                   .slice(40, 55)
@@ -78,7 +77,7 @@ presence.on("UpdateData", async () => {
                   )} > div.vjs-control-bar.progress-in-menu > div.vjs-current-time.vjs-time-control.vjs-control > span.vjs-current-time-display`
               ).textContent
             ),
-            durationss = presence.timestampFromFormat(
+            presence.timestampFromFormat(
               document.querySelector(
                 `#vjs_video_${title2.className
                   .slice(40, 55)
@@ -87,25 +86,21 @@ presence.on("UpdateData", async () => {
                     ""
                   )} > div.vjs-control-bar.progress-in-menu > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display`
               ).textContent
-            ),
-            timestamps = presence.getTimestamps(currentTime, durationss);
-          [, presenceData.endTimestamp] = timestamps;
+            )
+          );
           presenceData.smallImageKey = "play";
         }
-      } else {
-        if (buttons) {
-          presenceData.buttons = [
-            {
-              label: "Bekijk Foto",
-              url: pageh
-            }
-          ];
-        }
+      } else if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "Bekijk Foto",
+            url: pageh
+          }
+        ];
       }
 
-      const element = document.querySelector('meta[property~="og:title"]'),
-        content = element && element.getAttribute("content");
-      presenceData.details = content;
+      const element = document.querySelector('meta[property~="og:title"]');
+      presenceData.details = element && element.getAttribute("content");
     } else {
       title2 = document.querySelector("[id*='vjs_video_']");
       if (!title2) presenceData.details = "Bekijkt een foto";
@@ -156,8 +151,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

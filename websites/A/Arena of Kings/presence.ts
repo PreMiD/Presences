@@ -3,8 +3,10 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const presenceData = await presence.getPageletiable("PreMiD_PresenceData");
+  const presenceData = await presence.getPageletiable<{ data: PresenceData }>(
+    "PreMiD_PresenceData"
+  );
 
-  if (presenceData === null) presence.setActivity();
+  if (!presenceData) presence.setActivity();
   else presence.setActivity(presenceData.data);
 });

@@ -2,14 +2,14 @@
 const presence = new Presence({
     clientId: "784650203172438026"
   }),
-  timeElapsed: number = new Date().getTime();
+  browsingTimestamp = new Date().getTime();
 
 presence.on("UpdateData", async () => {
   //default data
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     details: document.title,
-    startTimestamp: timeElapsed
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") presenceData.details = "Home";

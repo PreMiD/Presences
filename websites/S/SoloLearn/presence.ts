@@ -4,16 +4,10 @@ const presence = new Presence({
   strings = presence.getStrings({
     browsing: "presence.activity.browsing"
   }),
-  getElement = (query: string): string | undefined => {
-    const element = document.querySelector(query);
-    return element?.textContent.trimStart().trimEnd();
-  },
-  stripCourse = (course: string | undefined): string | undefined => {
-    return course
-      ?.replace("Tutorial", "")
-      .replace("Fundamentals", "")
-      .trimEnd();
-  };
+  getElement = (query: string): string | undefined =>
+    document.querySelector(query)?.textContent.trimStart().trimEnd(),
+  stripCourse = (course: string | undefined): string | undefined =>
+    course?.replace("Tutorial", "").replace("Fundamentals", "").trimEnd();
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
@@ -56,12 +50,12 @@ const statics = {
 presence.on("UpdateData", async () => {
   const { host } = location,
     path = location.pathname.replace(/\/?$/, "/"),
-    showBrowsing = await presence.getSetting("browse"),
-    showCourses = await presence.getSetting("course"),
-    showCodes = await presence.getSetting("code"),
-    showTimestamps = await presence.getSetting("timestamp");
+    showBrowsing = await presence.getSetting<boolean>("browse"),
+    showCourses = await presence.getSetting<boolean>("course"),
+    showCodes = await presence.getSetting<boolean>("code"),
+    showTimestamps = await presence.getSetting<boolean>("timestamp");
 
-  let data: PresenceData = {
+  let presenceData: PresenceData = {
     largeImageKey: "sololearn",
     startTimestamp: elapsed
   };
@@ -74,84 +68,85 @@ presence.on("UpdateData", async () => {
   if (showBrowsing) {
     if (host === "www.sololearn.com") {
       for (const [k, v] of Object.entries(statics))
-        if (path.match(k)) data = { ...data, ...v };
+        if (path.match(k)) presenceData = { ...presenceData, ...v };
 
       if (path === "/") {
-        data.details = "Browsing...";
-        data.state = "Home";
+        presenceData.details = "Browsing...";
+        presenceData.state = "Home";
       }
 
       if (path.includes("/Codes/")) {
-        data.details = "Browsing Code Playground...";
-        data.state = getElement(".tab.active");
+        presenceData.details = "Browsing Code Playground...";
+        presenceData.state = getElement(".tab.active");
       }
 
       if (path.includes("/Discuss/")) {
-        data.details = "Browsing Discussions...";
-        data.state = getElement(".tab.active");
+        presenceData.details = "Browsing Discussions...";
+        presenceData.state = getElement(".tab.active");
 
         if (document.querySelector(".post")) {
-          data.details = "Browsing Discussion...";
-          data.state = getElement(".detailsWrapper > .header");
+          presenceData.details = "Browsing Discussion...";
+          presenceData.state = getElement(".detailsWrapper > .header");
         }
       }
 
       if (path.includes("/Leaderboard/")) {
-        data.details = "Browsing Leaderboard...";
-        data.state = stripCourse(getElement(".nameTitle"));
+        presenceData.details = "Browsing Leaderboard...";
+        presenceData.state = stripCourse(getElement(".nameTitle"));
       }
 
       if (path.includes("/Blog/")) {
-        data.details = "Browsing Blogs...";
+        presenceData.details = "Browsing Blogs...";
 
         if (document.querySelector(".post")) {
-          data.details = "Browsing Blog...";
-          data.state = getElement(".articleTitle");
+          presenceData.details = "Browsing Blog...";
+          presenceData.state = getElement(".articleTitle");
         }
       }
 
       if (path.includes("/Course/")) {
-        data.details = "Browsing Course...";
-        data.state = getElement(".courseDescription > h1");
+        presenceData.details = "Browsing Course...";
+        presenceData.state = getElement(".courseDescription > h1");
       }
 
       if (path.includes("/Profile/")) {
-        data.details = "Browsing Profile...";
+        presenceData.details = "Browsing Profile...";
 
         const course = getElement(".course .name");
-        data.state = getElement(".user .name");
-        data.state += course ? ` (${stripCourse(course)})` : "";
+        presenceData.state = getElement(".user .name");
+        presenceData.state += course ? ` (${stripCourse(course)})` : "";
       }
     }
   }
 
   if (showCourses) {
     if (path.includes("/Play/")) {
-      const icon: HTMLImageElement = document.querySelector(".content > .icon");
-      data.details = `Learning ${stripCourse(icon.alt)}`;
-      data.state = getElement(".title");
+      presenceData.details = `Learning ${stripCourse(
+        document.querySelector<HTMLImageElement>(".content > .icon").alt
+      )}`;
+      presenceData.state = getElement(".title");
     }
   }
 
   if (showCodes) {
     if (host === "code.sololearn.com") {
-      data.details = "Viewing Code...";
-      data.state = `${getElement(".codeName")} (${getElement(
+      presenceData.details = "Viewing Code...";
+      presenceData.state = `${getElement(".codeName")} (${getElement(
         ".tab-box.active"
       )})`;
     }
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browsing;
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = (await strings).browsing;
     }
     if (!showTimestamps) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setActivity(data);
+    presence.setActivity(presenceData);
   } else presence.setActivity();
 });

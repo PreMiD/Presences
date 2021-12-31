@@ -38,14 +38,13 @@ presence.on("UpdateData", async () => {
     }
 
     if (document.querySelector('.universal-search[data-status="expanded"]')) {
-      const searchTerm = (
-          document.querySelector(".universal-search-input") as HTMLInputElement
-        ).value,
-        searchCount =
-          document.querySelector(".padlet-cards-list").children.length;
-
-      presenceData.details = `Searching: ${searchTerm}`;
-      presenceData.state = `${searchCount} Results`;
+      presenceData.details = `Searching: ${
+        (document.querySelector(".universal-search-input") as HTMLInputElement)
+          .value
+      }`;
+      presenceData.state = `${
+        document.querySelector(".padlet-cards-list").children.length
+      } Results`;
     }
   } else if (pathnames[1] === "create") {
     //Creating a Padlet
@@ -74,26 +73,23 @@ presence.on("UpdateData", async () => {
   } else if (document.querySelector(".header-user-info")) {
     //Author
     const padletData = JSON.parse(
-        document.querySelector('head > script[type="application/ld+json"]')
-          .textContent
-      ),
-      bio = document.querySelector(".header-user-bio").textContent;
+      document.querySelector('head > script[type="application/ld+json"]')
+        .textContent
+    );
 
     presenceData.details = `Viewing ${padletData.name}`;
 
-    presenceData.state = bio;
+    presenceData.state = document.querySelector(".header-user-bio").textContent;
 
     presenceData.buttons = [
       { label: "View Author", url: `https://padlet.com/${padletData.url}` }
     ];
   }
 
-  const showButtons = await presence.getSetting("buttons");
+  const showButtons = await presence.getSetting<boolean>("buttons");
 
   if (!showButtons) delete presenceData.buttons;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

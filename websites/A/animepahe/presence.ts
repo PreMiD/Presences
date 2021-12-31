@@ -48,11 +48,13 @@ class AnimeStorage {
     if (this.list[title] && this.list[title].listing) return this.list[title];
     else if (!listing) return;
     else {
-      const shareLink = document.getElementsByClassName("modal-body")[1]
-        .lastElementChild.lastElementChild as HTMLAnchorElement;
-
       this.list[title] = {
-        id: parseInt(shareLink.href.split("/a/")[1]),
+        id: parseInt(
+          (
+            document.getElementsByClassName("modal-body")[1].lastElementChild
+              .lastElementChild as HTMLAnchorElement
+          ).href.split("/a/")[1]
+        ),
         listing,
         time: Date.now()
       };
@@ -126,7 +128,7 @@ function parseInfo(dom: HTMLParagraphElement[]) {
     if (title.indexOf(" ") !== -1) {
       title = title
         .split(" ")
-        .map((e) => uncapitalize(e))
+        .map(e => uncapitalize(e))
         .join("_");
     } else title = uncapitalize(title);
 
@@ -162,10 +164,9 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     },
     strings = await waitStrings(
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     ),
-    viewing = strings.viewing.slice(0, -1),
-    watching = strings.watching.slice(0, -1);
+    viewing = strings.viewing.slice(0, -1);
   let playback = false;
 
   switch (path[0]) {
@@ -230,7 +231,7 @@ presence.on("UpdateData", async () => {
                   heading.indexOf(" ") !== -1
                     ? heading
                         .split(" ")
-                        .map((s) => capitalize(s))
+                        .map(s => capitalize(s))
                         .join(" ")
                     : capitalize(heading);
                 presenceData.smallImageKey = "presence_browsing_all";
@@ -273,6 +274,11 @@ presence.on("UpdateData", async () => {
 
                 presenceData.state = title;
 
+                presenceData.largeImageKey =
+                  document.querySelector<HTMLAnchorElement>(
+                    ".youtube-preview"
+                  ).href;
+
                 presenceData.smallImageKey = "presence_browsing_season";
                 presenceData.smallImageText = strings.browse;
 
@@ -310,11 +316,17 @@ presence.on("UpdateData", async () => {
               .replace(/^\s+|\s+$/g, "")
           );
 
-        if (!movie)
-          presenceData.details = `${watching} ${strings.episode} ${episode}`;
-        else presenceData.details = strings.watchingMovie;
+        if (!movie) {
+          presenceData.details = `${strings.watching.slice(0, -1)} ${
+            strings.episode
+          } ${episode}`;
+        } else presenceData.details = strings.watchingMovie;
 
         presenceData.state = title;
+
+        presenceData.largeImageKey = document
+          .querySelector<HTMLImageElement>(".anime-poster")
+          .src.replace(".th", "");
 
         presenceData.smallImageKey = `presence_playback_${
           iframeResponse.paused ? "paused" : "playing"

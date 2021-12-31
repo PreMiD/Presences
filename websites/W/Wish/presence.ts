@@ -6,8 +6,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    itemsetting = await presence.getSetting("items"),
-    languagesetting = await presence.getSetting("language");
+    itemsetting = await presence.getSetting<boolean>("items"),
+    languagesetting = await presence.getSetting<string>("language");
   let itemsite = null,
     itemdesc;
 
@@ -27,10 +27,8 @@ presence.on("UpdateData", async () => {
     ).textContent;
     // ------------------------------
     itemdesc = `${itemdesc.substring(0, itemdesc.length / 2)}...`;
-  } else {
-    if (languagesetting === "0") itemdesc = "Watching an item...";
-    else if (languagesetting === "1") itemdesc = "Beobachtet ein Produkt...";
-  }
+  } else if (languagesetting === "0") itemdesc = "Watching an item...";
+  else if (languagesetting === "1") itemdesc = "Beobachtet ein Produkt...";
   // ___________________________________________________________________________________________________________________________
 
   if (document.location.pathname === "/") {
@@ -162,11 +160,10 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
     if (document.location.pathname.includes("/product/")) {
-      const product = document.querySelector(
+      presenceData.details = "Viewing product";
+      presenceData.state = document.querySelector(
         "#react-app > div > div.modal-root.BaseModal__ModalContainer-sc-188teto-4.bFHXBY > div > div > div > div > div.ProductContainer__ProductMainSection-sc-1vbd28u-1.fYThRf > div.ProductContainer__RightColumn-sc-1vbd28u-3.ewTgOn > div > div.PurchaseContainer__UpperWrapper-sc-1qlezk8-1.jEnuPa > h1"
       ).textContent;
-      presenceData.details = "Viewing product";
-      presenceData.state = product;
       presence.setActivity(presenceData);
     }
     // ----------------------------------------------------------
@@ -247,11 +244,10 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
     if (document.location.pathname.includes("/product/")) {
-      const product = document.querySelector(
+      presenceData.details = "Viewing product";
+      presenceData.state = document.querySelector(
         "#react-app > div > div.modal-root.BaseModal__ModalContainer-sc-188teto-4.bFHXBY > div > div > div > div > div.ProductContainer__ProductMainSection-sc-1vbd28u-1.fYThRf > div.ProductContainer__RightColumn-sc-1vbd28u-3.ewTgOn > div > div.PurchaseContainer__UpperWrapper-sc-1qlezk8-1.jEnuPa > h1"
       ).textContent;
-      presenceData.details = "Viewing product";
-      presenceData.state = product;
       presence.setActivity(presenceData);
     }
   } else presence.setActivity();

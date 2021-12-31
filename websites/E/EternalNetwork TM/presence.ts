@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "440182142694064129"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
   return presence.getStrings(
@@ -13,39 +13,40 @@ async function getStrings() {
       viewUser: "general.viewUser",
       watchingVid: "general.watchingVid"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    showTimestamps = await presence.getSetting("timestamp"),
-    showSubdomain = await presence.getSetting("subdomain"),
-    bigicon = await presence.getSetting("bigicon"),
-    buttons = await presence.getSetting("buttons"),
+  const newLang: string = await presence
+      .getSetting<string>("lang")
+      .catch(() => "en"),
+    showTimestamps = await presence.getSetting<boolean>("timestamp"),
+    showSubdomain = await presence.getSetting<boolean>("subdomain"),
+    bigicon = await presence.getSetting<number>("bigicon"),
+    buttons = await presence.getSetting<boolean>("buttons"),
     { hostname, pathname, search, hash } = document.location,
     etrnl = "eternalnetworktm.com",
-    ttl = document.title,
-    logoArr = [
-      "eternalnetworktm_logo",
-      "eternalnetworktm_logo_2",
-      "eternalnetworktm_logo_3"
-    ];
+    ttl = document.title;
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {
     details: (await strings).viewPage,
-    largeImageKey: logoArr[bigicon] || "eternalnetworktm_logo",
+    largeImageKey:
+      [
+        "eternalnetworktm_logo",
+        "eternalnetworktm_logo_2",
+        "eternalnetworktm_logo_3"
+      ][bigicon] || "eternalnetworktm_logo",
     smallImageText: hostname + pathname,
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingTimestamp,
     buttons: [
       {
         label: (await strings).buttonViewPage,
@@ -93,19 +94,17 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Checking video gallery";
 
     if (search.includes("?mode=view&id=")) {
-      const videoTitle = document.querySelector("h3.first > a").textContent,
-        checkVideoBtn = document
-          .querySelector("div.postbody > div > a > span")
-          .getAttribute("title");
       presenceData.details = `${(await strings).watchingVid}:`;
-      presenceData.state = videoTitle;
+      presenceData.state = document.querySelector("h3.first > a").textContent;
       presenceData.buttons = [
         {
           label: (await strings).buttonViewPage,
           url: window.location.href
         },
         {
-          label: checkVideoBtn,
+          label: document
+            .querySelector("div.postbody > div > a > span")
+            .getAttribute("title"),
           url: document.querySelector("#video_title").getAttribute("value")
         }
       ];

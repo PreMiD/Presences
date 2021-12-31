@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -11,32 +11,6 @@
     }
   ],
   "service": "Wikipedia",
-  "description": {
-    "en": "Wikipedia is a multilingual online encyclopedia, based on open collaboration through a wiki-based content editing system.",
-    "ro": "Wikipedia este o enciclopedie generală, disponibilă pe Internet în mai multe limbi, având conținut ce poate fi utilizat liber și dezvoltat de oricine.",
-    "pt_BR": "Wikipédia é uma enciclopédia online multilingue, baseada em colaboração aberta através de um sistema de edição de conteúdo.",
-    "fr": "Wikipedia est une encyclopédie en ligne multilingue, basée sur collaboration ouverte grâce à un système d'édition de contenu.",
-    "uk_UA": "Вікіпедія — це багатомовна онлайн-енциклопедія, заснована на відкритій співпраці через систему редагування вмісту на основі вікі.",
-    "nl": "Wikipedia is een meertalige online encyclopedie, gebaseerd op open samenwerking via een wiki-gebaseerd contentbewerkingssysteem.",
-    "zh_CN": "维基百科是一种多语言的在线百科全书，包含基于Wiki的内容的协作编辑系统。",
-    "ga_IE": "Ciclipéid ilteangach ar líne é Wikipedia, bunaithe ar chomhoibriú oscailte trí chóras eagarthóireachta ábhar bunaithe ar wiki."
-  },
-  "url": "wikipedia.org",
-  "version": "2.7.11",
-  "logo": "https://i.imgur.com/4OX6OZi.png",
-  "thumbnail": "https://i.imgur.com/vJiuzZy.png",
-  "color": "#f9f9f9",
-  "tags": [
-    "encyclopedia",
-    "information",
-    "popular",
-    "wiki",
-    "wikimedia-foundation",
-    "wikimedia",
-    "wmf"
-  ],
-  "category": "other",
-  "regExp": "([a-z0-9-]+[.])+wikipedia[.]org[/]",
   "altnames": [
     "Biquipedia",
     "Biquipédia",
@@ -176,5 +150,31 @@
     "ꦮꦶꦏꦶꦥꦺꦢꦶꦪ",
     "위키백과",
     "𐍅𐌹𐌺𐌹𐍀𐌴𐌳𐌾𐌰"
+  ],
+  "description": {
+    "en": "Wikipedia is a multilingual online encyclopedia, based on open collaboration through a wiki-based content editing system.",
+    "ro": "Wikipedia este o enciclopedie generală, disponibilă pe Internet în mai multe limbi, având conținut ce poate fi utilizat liber și dezvoltat de oricine.",
+    "pt_BR": "Wikipédia é uma enciclopédia online multilingue, baseada em colaboração aberta através de um sistema de edição de conteúdo.",
+    "fr": "Wikipedia est une encyclopédie en ligne multilingue, basée sur collaboration ouverte grâce à un système d'édition de contenu.",
+    "uk_UA": "Вікіпедія — це багатомовна онлайн-енциклопедія, заснована на відкритій співпраці через систему редагування вмісту на основі вікі.",
+    "nl": "Wikipedia is een meertalige online encyclopedie, gebaseerd op open samenwerking via een wiki-gebaseerd contentbewerkingssysteem.",
+    "zh_CN": "维基百科是一种多语言的在线百科全书，包含基于Wiki的内容的协作编辑系统。",
+    "ga_IE": "Ciclipéid ilteangach ar líne é Wikipedia, bunaithe ar chomhoibriú oscailte trí chóras eagarthóireachta ábhar bunaithe ar wiki."
+  },
+  "url": "wikipedia.org",
+  "regExp": "([a-z0-9-]+[.])+wikipedia[.]org[/]",
+  "version": "2.7.13",
+  "logo": "https://i.imgur.com/4OX6OZi.png",
+  "thumbnail": "https://i.imgur.com/vJiuzZy.png",
+  "color": "#f9f9f9",
+  "category": "other",
+  "tags": [
+    "encyclopedia",
+    "information",
+    "popular",
+    "wiki",
+    "wikimedia-foundation",
+    "wikimedia",
+    "wmf"
   ]
 }

@@ -1,11 +1,11 @@
 const presence = new Presence({
     clientId: "843791837273391104"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const showTimestamp: boolean = await presence.getSetting("timestamp"),
-    showButtons: boolean = await presence.getSetting("buttons"),
+  const showTimestamp = await presence.getSetting<boolean>("timestamp"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "discords_logo"
     };
@@ -13,12 +13,14 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
   else if (document.location.pathname === "/servers/search") {
-    const page = document.querySelector("li.page-item.active")?.textContent,
-      search = document
+    presenceData.details = `🔍 Searching for: ${
+      document
         .querySelector("h1.text-center")
-        ?.textContent.replace("Discord Servers", " ");
-    presenceData.details = `🔍 Searching for: ${search || "Nothing"}`;
-    presenceData.state = `📖 Page ${page}`;
+        ?.textContent.replace("Discord Servers", " ") || "Nothing"
+    }`;
+    presenceData.state = `📖 Page ${
+      document.querySelector("li.page-item.active")?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Results",
@@ -26,12 +28,14 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/servers/tag/")) {
-    const page = document.querySelector("li.page-item.active")?.textContent,
-      tag = document
+    presenceData.details = `Viewing 📛 ${
+      document
         .querySelector("h1.text-center")
-        ?.textContent.replace("Discord Servers", " ");
-    presenceData.details = `Viewing 📛 ${tag || "Nothing"} tag`;
-    presenceData.state = `📖 Page ${page}`;
+        ?.textContent.replace("Discord Servers", " ") || "Nothing"
+    } tag`;
+    presenceData.state = `📖 Page ${
+      document.querySelector("li.page-item.active")?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Tag",
@@ -39,12 +43,14 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/servers/tags/")) {
-    const page = document.querySelector("li.page-item.active")?.textContent,
-      tag = document
+    presenceData.details = `Viewing 🔑 ${
+      document
         .querySelector("h1.text-center")
-        ?.textContent.replace("Discord Servers", " ");
-    presenceData.details = `Viewing 🔑 ${tag || "Nothing"} keyword`;
-    presenceData.state = `📖 Page ${page}`;
+        ?.textContent.replace("Discord Servers", " ") || "Nothing"
+    } keyword`;
+    presenceData.state = `📖 Page ${
+      document.querySelector("li.page-item.active")?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Keyword",
@@ -52,9 +58,10 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname === "/servers/top-100") {
-    const page = document.querySelector("li.page-item.active")?.textContent;
     presenceData.details = "Viewing 🏅 top-100 servers";
-    presenceData.state = `📖 Page ${page}`;
+    presenceData.state = `📖 Page ${
+      document.querySelector("li.page-item.active")?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Top-100",
@@ -88,31 +95,31 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (document.location.pathname.includes("/servers/")) {
-    const membersonline = document
+    presenceData.details = `Viewing 🎨 ${document
+      .querySelector("h1.servernameh1")
+      ?.textContent.replace("PREMIUM", " ")}`;
+    presenceData.state = `${
+      document
         .querySelectorAll("span.mr-2")[0]
         ?.textContent.replace(
           `${document.querySelectorAll("span.mr-2")[0]?.textContent}`,
           `${`👥 ${document.querySelectorAll("span.mr-2")[0]?.textContent}`}`
-        ),
-      members = document
+        ) || "0 members online"
+    }, ${
+      document
         .querySelectorAll("span.mr-2")[1]
         ?.textContent.replace(
           `${document.querySelectorAll("span.mr-2")[1]?.textContent}`,
           `${`🎁 ${document.querySelectorAll("span.mr-2")[1]?.textContent}`}`
-        ),
-      boosts = document
+        ) || "0 members"
+    }, ${
+      document
         .querySelectorAll("span.mr-2")[2]
         ?.textContent.replace(
           `${document.querySelectorAll("span.mr-2")[2]?.textContent}`,
           `${`💎 ${document.querySelectorAll("span.mr-2")[2]?.textContent}`}`
-        ),
-      server = document
-        .querySelector("h1.servernameh1")
-        ?.textContent.replace("PREMIUM", " ");
-    presenceData.details = `Viewing 🎨 ${server}`;
-    presenceData.state = `${membersonline || "0 members online"}, ${
-      members || "0 members"
-    }, ${boosts || "0 boosts"}`;
+        ) || "0 boosts"
+    }`;
     presenceData.buttons = [
       {
         label: "View Page",
@@ -162,12 +169,14 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname === "/emoji-list/search") {
-    const page = document.querySelector("li.page-item.active")?.textContent,
-      emojiSearch = document
+    presenceData.details = `🔍 Searching for emoji: ${
+      document
         .querySelector("h2.EmoList_heading1__3KEr_")
-        ?.textContent.replace("Emoji List", " ");
-    presenceData.details = `🔍 Searching for emoji: ${emojiSearch || "N/A"}`;
-    presenceData.state = `📖 Page ${page}`;
+        ?.textContent.replace("Emoji List", " ") || "N/A"
+    }`;
+    presenceData.state = `📖 Page ${
+      document.querySelector("li.page-item.active")?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Results",
@@ -175,12 +184,14 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/emoji-list/tag/")) {
-    const page = document.querySelector("li.page-item.active")?.textContent,
-      emojiTag = document
+    presenceData.details = `Looking at 📛 ${
+      document
         .querySelector("h2.EmoList_heading1__3KEr_")
-        ?.textContent.replace("Emoji List", " ");
-    presenceData.details = `Looking at 📛 ${emojiTag || "N/A"} emoji tag`;
-    presenceData.state = `📖 Page ${page}`;
+        ?.textContent.replace("Emoji List", " ") || "N/A"
+    } emoji tag`;
+    presenceData.state = `📖 Page ${
+      document.querySelector("li.page-item.active")?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Emoji Tag",
@@ -225,11 +236,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/p/")) {
     presenceData.largeImageKey = "discordbio_logo";
     const profileName = document.querySelector(
-        "span.text-white.font-bold.text-2xl"
-      )?.textContent,
-      premium = document.querySelector(
-        "div.text-xs.uppercase.tracking-widest.font-bold.text-blue-300"
-      )?.textContent;
+      "span.text-white.font-bold.text-2xl"
+    )?.textContent;
     presenceData.details = `Viewing ${
       profileName
         ? profileName.endsWith("s")
@@ -237,7 +245,13 @@ presence.on("UpdateData", async () => {
           : `${`${profileName}'s`}`
         : "Unknown"
     } bio`;
-    presenceData.state = `${premium ? "💎 Premium User" : "🎟️ Normal User"}`;
+    presenceData.state = `${
+      document.querySelector(
+        "div.text-xs.uppercase.tracking-widest.font-bold.text-blue-300"
+      )?.textContent
+        ? "💎 Premium User"
+        : "🎟️ Normal User"
+    }`;
     presenceData.buttons = [
       {
         label: "View Bio",
@@ -321,10 +335,8 @@ presence.on("UpdateData", async () => {
   }
 
   if (!showButtons) delete presenceData.buttons;
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -12,12 +12,12 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname === "/home") {
     if (
-      document.getElementsByTagName("p")[1].innerHTML.includes("Welcome back")
+      document.getElementsByTagName("p")[1].textContent.includes("Welcome back")
     )
-      text = document.getElementsByTagName("p")[1].innerHTML;
-    else text = document.getElementsByTagName("p")[3].innerHTML;
+      text = document.getElementsByTagName("p")[1].textContent;
+    else text = document.getElementsByTagName("p")[3].textContent;
 
-    if (localStorage.getItem("name") === null)
+    if (localStorage.getItem("name"))
       localStorage.setItem("name", text.split(",")[1]);
 
     presenceData.details = `Online as ${text.split(",")[1]}`;
@@ -30,9 +30,10 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = "in game";
   } else if (document.location.pathname.includes("/editor")) {
-    const d = document.getElementsByTagName("strong")[0].textContent;
     presenceData.details = "Building Decks";
-    presenceData.state = `Editing: ${d}`;
+    presenceData.state = `Editing: ${
+      document.getElementsByTagName("strong")[0].textContent
+    }`;
     presenceData.smallImageKey = "logo";
     presenceData.smallImageText = "in game";
   } else if (document.location.pathname.includes("/game")) {
@@ -99,8 +100,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "in game";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

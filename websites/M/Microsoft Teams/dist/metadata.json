@@ -1,13 +1,10 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "SlowLife",
     "id": "374905512661221377"
   },
-  "url": [
-    "teams.live.com",
-    "teams.microsoft.com"
-  ],
+  "service": "Microsoft Teams",
   "description": {
     "en": "Stay connected and organized. Accomplish more together across work, school, and life with Microsoft Teams.",
     "de": "Bleiben Sie gut vernetzt und organisiert – und erreichen Sie gemeinsam mehr mit Microsoft Teams: am Arbeitsplatz, in Schule und Studium und privat.",
@@ -15,18 +12,21 @@
     "pl": "Bądź w kontakcie z innymi i zachowaj dobrą organizację pracy. Osiągaj więcej razem z innymi — w pracy, szkole i życiu — dzięki usłudze Microsoft Teams.",
     "nl": "Blijf verbonden en georganiseerd. Bereik samen meer op het werk, op school en in het leven met Microsoft Teams."
   },
-  "service": "Microsoft Teams",
-  "version": "1.1.4",
+  "url": [
+    "teams.live.com",
+    "teams.microsoft.com"
+  ],
+  "version": "1.1.6",
   "logo": "https://i.imgur.com/G7Adh20.png",
   "thumbnail": "https://i.imgur.com/6HDv24v.png",
   "color": "#4A51BA",
+  "category": "other",
   "tags": [
     "microsoft",
     "learning",
     "meetings",
     "school"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "homepageMessage",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "DanPlayz",
     "id": "209796601357533184"
@@ -15,10 +15,11 @@
     "beta.voidbots.net",
     "docs.voidbots.net"
   ],
-  "version": "1.0.5",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/JZWaUA6.png",
   "thumbnail": "https://i.imgur.com/eQfwKHr.png",
   "color": "#B04BEC",
+  "category": "other",
   "tags": [
     "discord",
     "bot",
@@ -29,7 +30,6 @@
     "programming",
     "coding"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "lang",

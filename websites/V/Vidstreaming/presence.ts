@@ -18,9 +18,8 @@ let iFrameVideo: boolean,
       paused: boolean;
     };
   },
-  lastPlaybackState: boolean,
   playback: boolean,
-  browsingStamp: number,
+  browsingTimestamp: number,
   title: HTMLTextAreaElement,
   firstVideo: string,
   childLength: number;
@@ -36,7 +35,7 @@ presence.on(
       paused: boolean;
     };
   }) => {
-    playback = data.iframeVideo.duration !== null ? true : false;
+    playback = !!data.iframeVideo.duration;
     if (playback) {
       ({ iFrameVideo, paused } = data.iframeVideo);
       currentTime = data.iframeVideo.currTime;
@@ -47,47 +46,45 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sSI"),
-    elapsed = await presence.getSetting("sTE"),
-    videoTime = await presence.getSetting("sVT"),
-    buttons = await presence.getSetting("buttons");
-  if (videoTime)
-    if (lastPlaybackState !== playback) lastPlaybackState = playback;
+  const info = await presence.getSetting<boolean>("sSI"),
+    elapsed = await presence.getSetting<boolean>("sTE"),
+    videoTime = await presence.getSetting<boolean>("sVT"),
+    buttons = await presence.getSetting<boolean>("buttons");
 
-  if (elapsed) browsingStamp = Math.floor(Date.now() / 1000);
+  if (elapsed) browsingTimestamp = Math.floor(Date.now() / 1000);
 
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   if (info) {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page or recently subbed";
     } else if (document.location.pathname === "/recently-added-raw") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the recently added raw";
     } else if (document.location.pathname === "/recently-added-dub") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the recently added dub";
     } else if (document.location.pathname === "/movies") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the anime movies";
     } else if (document.location.pathname === "/new-season") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the new anime seasons.";
     } else if (document.location.pathname === "/popular") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the popular anime.";
     } else if (document.location.pathname === "/ongoing-series") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the ongoing series.";
     } else if (document.location.pathname.includes("/videos/")) {
       //Used for the video files (Needs some work done here)
       title = document.querySelector(
         "body > #wrapper_bg > #wrapper > #main_bg > div > div > div.video-info-left > h1"
       );
-      if (title !== null) {
-        presenceData.state = title.innerText;
+      if (title) {
+        presenceData.state = title.textContent;
         if (buttons) {
           childLength = document.querySelector(
             "#main_bg > div:nth-child(5) > div > div.video-info-left > ul"
@@ -110,12 +107,7 @@ presence.on("UpdateData", async () => {
             }
           ];
         }
-        if (
-          iFrameVideo === true &&
-          !isNaN(duration) &&
-          title !== null &&
-          video !== null
-        ) {
+        if (iFrameVideo && !isNaN(duration) && title && video) {
           if (!paused) {
             presenceData.details = "Watching:";
             presenceData.smallImageKey = paused ? "pause" : "play";
@@ -136,14 +128,14 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Paused:";
             presenceData.smallImageKey = "pause";
           }
-        } else if (iFrameVideo === null && isNaN(duration) && title !== null) {
+        } else if (!iFrameVideo && isNaN(duration) && title) {
           presenceData.details = "Viewing:";
-          presenceData.state = title.innerText;
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.state = title.textContent;
+          presenceData.startTimestamp = browsingTimestamp;
         } else {
           presenceData.details = "Error 03: Watching unknown anime.";
           presenceData.state = "Can't tell if playing or not.";
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.startTimestamp = browsingTimestamp;
           presenceData.smallImageKey = "search";
           presenceData.smallImageText = "Error 3";
           presence.error(
@@ -152,7 +144,7 @@ presence.on("UpdateData", async () => {
         }
       } else {
         //Can't get the basic site information
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Error 02: Watching unknown anime.";
         presenceData.smallImageKey = "search";
         presence.error("Watching an unknown show.");
@@ -171,7 +163,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Searching";
     } else {
       //If it can't get the page it will output an error
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Error 01: Can't Read Page";
       presenceData.smallImageKey = "search";
       presence.error("Can't read page.");
@@ -179,7 +171,7 @@ presence.on("UpdateData", async () => {
   }
   if (!presenceData.details) {
     //This will fire if you do not set presence details
-    presence.setTrayTitle();
+
     presence.setActivity();
   } else {
     //This will fire if you set presence details

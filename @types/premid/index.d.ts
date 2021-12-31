@@ -11,23 +11,27 @@ interface PresenceData {
    */
   state?: string;
   /**
-   * epoch seconds for start - including will show time as "elapsed"
+   * Timestamp in seconds or milliseconds for the start of the activity.
+   * Including this will show time as "elapsed"
    */
   startTimestamp?: number;
   /**
-   * epoch seconds for ending - including will show time as "remaining"
+   * Timestamp in seconds or milliseconds until the end of the activity.
+   * Including this will show time as "remaining" and it takes priority over startTimestamp
    */
   endTimestamp?: number;
   /**
-   * name of the uploaded image for the large profile artwork
+   * Key of an image uploaded to the Rich Presence Art Assets of your Presence or a URL to an image.
+   * Will display as the large profile artwork
    */
   largeImageKey?: string;
   /**
-   * name of the uploaded image for the small profile artwork
+   * Key of an image uploaded to the Rich Presence Art Assets of your Presence or a URL to an image.
+   * Will display as the small profile artwork
    */
   smallImageKey?: string;
   /**
-   * tooltip for the smallImageKey
+   * Tooltip for the smallImageKey
    */
   smallImageText?: string;
   /**
@@ -35,6 +39,7 @@ interface PresenceData {
    */
   buttons?: [ButtonData, ButtonData?];
 }
+
 interface ButtonData {
   /**
    * Text for the button
@@ -45,6 +50,7 @@ interface ButtonData {
    */
   url: string;
 }
+
 /**
  * Options that change the behavior of the presence
  */
@@ -67,6 +73,7 @@ interface PresenceOptions {
    */
   appMode?: boolean;
 }
+
 /**
  * Contains basic information about the presece
  * @link https://docs.premid.app/dev/presence/metadata
@@ -79,10 +86,7 @@ interface Metadata {
    *
    * User id can be copied from Discord by enabling developer mode and right-clicking on your profile.
    */
-  author: {
-    name: string;
-    id: string;
-  };
+  author: Contributor;
   /**
    * Should contain an Array of Objects with each Object having the name and id of the contributor.
    *
@@ -90,10 +94,7 @@ interface Metadata {
    *
    * User id can be copied from Discord by enabling developer mode and right-clicking on your profile.
    */
-  contributors?: Array<{
-    name: string;
-    id: string;
-  }>;
+  contributors?: Contributor[];
   /**
    * The title of the service that this presence supports. The folder name and service name should also be the same.
    */
@@ -105,7 +106,7 @@ interface Metadata {
    *
    * Note: This is **NOT** used for tags! Only for alternative names!
    */
-  altnames?: Array<string>;
+  altnames?: string[];
   /**
    * Small description of the service.
    *
@@ -128,7 +129,7 @@ interface Metadata {
    *
    * Note: Do **NOT** add `http://` or `https://` in the url or it will not work.
    */
-  url: string | Array<string>;
+  url: string | string[];
   /**
    * Version of your presence.
    *
@@ -140,7 +141,7 @@ interface Metadata {
   /**
    * Link to service's logo.
    *
-   * Must end with .png/.jpg/etc.
+   * Must be an imgur link ending with .png/.jpg/.jpeg/.gif.
    */
   logo: string;
   /**
@@ -152,15 +153,16 @@ interface Metadata {
   /**
    * `#HEX` value.
    *
-   * We recommend to use a primary color of the service that your presence supports.
+   * We recommend using a color that resembles the service the most.
    */
   color: string;
   /**
    * Array with tags, they will help users to search your presence on the website.
    */
-  tags: Array<string>;
+  tags: string[];
   /**
    * A string used to represent the category the presence falls under.
+   *
    * @link https://docs.premid.app/dev/presence/metadata#presence-categories
    */
   category: "anime" | "games" | "music" | "socials" | "videos" | "other";
@@ -172,23 +174,34 @@ interface Metadata {
    * A regular expression string used to match urls.
    * @link https://docs.premid.app/dev/presence/metadata#regular-expressions
    */
-  regExp?: RegExp;
+  regExp?: string;
   /**
    * A regular expression selector that selects iframes to inject into.
    * @link https://docs.premid.app/dev/presence/metadata#regular-expressions
    */
-  iframeRegExp?: RegExp;
+  iframeRegExp?: string;
   /**
    * Defines whether `getLogs()` is used.
    */
   readLogs?: boolean;
+  /**
+   * Whether to include a "add presence" button on the store. Only available for partnered presences.
+   *
+   * @private
+   */
   button?: boolean;
+  /**
+   * Whether to display a warning on the presence installation page.
+   */
   warning?: boolean;
   /**
    * An array of settings the user can change.
    * @link https://docs.premid.app/dev/presence/metadata#presence-settings
    */
-  settings?: Array<{
+  settings?: {
+    /**
+     * Identifier of the setting, used to obtain its value through presence.getSetting()
+     */
     id: string;
     /**
      * Needed for every setting except if you use `multiLanguage`.
@@ -198,22 +211,48 @@ interface Metadata {
      * Needed for every setting except if you use `multiLanguage`.
      */
     icon?: string;
+    /**
+     * Record of conditions that need to be matched for the setting to appear.
+     * The keys should be ids of other settings and the values should be the value they need to match.
+     */
     if?: Record<string, string | number | boolean>;
+    /**
+     * The text that appears in the background of string settings when nothing is in the input.
+     */
     placeholder?: string;
+    /**
+     * The default value of the setting.
+     */
     value?: string | number | boolean;
-    values?: Array<string | number | boolean>;
+    /**
+     * An array of values to be used as choices for the setting.
+     * The returned value will be a number representing the index of the chosen option
+     */
+    values?: (string | number | boolean)[];
     /**
      * `false`: default, it disables multi-localization.
      *
-     * `true`: use this if you are only going to use strings from the `general.json` file, of the  [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence).
+     * `true`: use this if you are only going to use strings from the [`general.json`](https://github.com/PreMiD/Localization/blob/main/src/Presence/general.json) file.
      *
      * `string`: name of the file, excluding the extension (.json), inside the [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence).
      *
-     * `Array<string>`: if you are using more than one file, from inside of the [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence), you can specify all the values in an array. Only common languages of all the files will be listed.
+     * `string[]`: if you are using more than one file, from inside of the [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence), you can specify all the values in an array. Only common languages of all the files will be listed.
      */
-    multiLanguage?: boolean | string | Array<string>;
-  }>;
+    multiLanguage?: boolean | string | string[];
+  }[];
 }
+
+interface Contributor {
+  /**
+   * Name of the contributor on Discord.
+   */
+  name: string;
+  /**
+   * Discord ID of the contributor.
+   */
+  id: string;
+}
+
 /**
  * Useful tools for developing presences
  * @link https://docs.premid.app/en/dev/presence/class
@@ -279,15 +318,15 @@ declare class Presence {
    * @example let pagelet = getPageletiable('pagelet') -> "letiable content"
    * @link https://docs.premid.app/presence-development/coding/presence-class#getpageletiable-string
    */
-  getPageletiable(letiable: string): Promise<any>;
+  getPageletiable<T>(letiable: string): Promise<T>;
   /**
    * Returns an array of the past 100 logs, you can filter these logs with a RegExp.
    * @param regExp Filter of the logs
    */
-  getLogs(regExp?: RegExp): Promise<Array<any>>;
+  getLogs(regExp?: RegExp): Promise<any[]>;
   /**
    * Returns extension version
-   * @param onlyNumeric version nubmer without dots
+   * @param onlyNumeric version number without dots
    * @link https://docs.premid.app/en/dev/presence/class#getextensionversionboolean
    * @since 2.1
    */
@@ -298,32 +337,32 @@ declare class Presence {
    * @link https://docs.premid.app/dev/presence/class#getsettingstring
    * @since 2.1
    */
-  getSetting(setting: string): Promise<any>;
+  getSetting<T extends string | boolean | number>(setting: string): Promise<T>;
   /**
    * Hide a setting
    * @param setting Id of setting / Array of setting Id's
    * @link https://docs.premid.app/dev/presence/class#hidesettingstring
    * @since 2.1
    */
-  hideSetting(settings: string | Array<string>): Promise<void>;
+  hideSetting(settings: string | string[]): Promise<void>;
   /**
    * Show a setting
    * @param setting Id of setting / Array of setting Id's
    * @link https://docs.premid.app/dev/presence/class#showsettingstring
    * @since 2.1
    */
-  showSetting(settings: string | Array<string>): Promise<void>;
+  showSetting(settings: string | string[]): Promise<void>;
   /**
    * Similar to `getTimestamps` but takes in a media element and returns snowflake timestamps
    * @param media Media object
    */
-  getTimestampsfromMedia(media: HTMLMediaElement): number[];
+  getTimestampsfromMedia(media: HTMLMediaElement): [number, number];
   /**
    * Converts time and duration integers into snowflake timestamps
    * @param {Number} elementTime Current element time seconds
    * @param {Number} elementDuration Element duration seconds
    */
-  getTimestamps(elementTime: number, elementDuration: number): number[];
+  getTimestamps(elementTime: number, elementDuration: number): [number, number];
   /**
    * Converts a string with format `HH:MM:SS` or `MM:SS` or `SS` into an integer (Does not return snowflake timestamp)
    * @param format The formatted string
@@ -333,12 +372,12 @@ declare class Presence {
    * Converts a hex string into an RGB object
    * @param hex The hex string
    */
-  private hexToRGB;
+  private hexToRGB(hex: `#${string}`): { r: number; g: number; b: number };
   /**
    * Calculates the font color based on the luminosity of the background
    * @param backgroundHex The hex string of the background
    */
-  private getFontColor;
+  private getFontColor(backgroundHex: string): "white" | "black";
   /**
    * Console logs with an info message
    * @param message The log message
@@ -363,24 +402,41 @@ declare class Presence {
    * Sends data back to application
    * @param data Data to send back to application
    */
-  private sendData;
+  private sendData(data: Object): void;
   /**
    * Generates a AES key from the app identifier
    */
-  private getEncryptionKey;
+  private getEncryptionKey(): Uint8Array;
   /**
    * Encrypts a string using AES algorithm
    * @param data String to be encrypted
    */
-  private encryptData;
+  private encryptData(data: string): string;
   /**
    * Subscribe to events emitted by the extension
    * @param eventName EventName to subscribe to
    * @param callback Callback function for event
    * @link https://docs.premid.app/dev/presence/class#events
    */
-  on(eventName: "UpdateData" | "iFrameData", callback: Function): void;
+  on<K extends keyof PresenceEvents>(
+    eventName: K,
+    listener: (...args: PresenceEvents[K]) => Awaitable<void>
+  ): void;
 }
+
+interface PresenceEvents {
+  /**
+   * Emitted on every tick, used to update the data displayed in the presence
+   */
+  UpdateData: [];
+  /**
+   * Emitted when data is received from the iframe.ts file
+   */
+  iFrameData: [data: unknown];
+}
+
+type Awaitable<T> = Promise<T> | T;
+
 /**
  * Minimum amount of time in ms between slide updates
  */
@@ -484,5 +540,12 @@ declare class iFrame {
    * @param callback
    * @link https://docs.premid.app/dev/presence/class#updatedata
    */
-  on(eventName: "UpdateData", callback: Function): void;
+  on<K extends keyof IFrameEvents>(
+    eventName: K,
+    listener: (...args: IFrameEvents[K]) => Awaitable<void>
+  ): void;
+}
+
+interface IFrameEvents {
+  UpdateData: [];
 }

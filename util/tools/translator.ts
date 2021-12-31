@@ -1,5 +1,5 @@
 import axios from "axios";
-import { gray, green, hex, red, white, yellow } from "chalk";
+import chalk from "chalk";
 import debug from "debug";
 import { prompt } from "enquirer";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
@@ -20,14 +20,14 @@ let loadSpinner: Ora,
 const spinnerSettings = {
     interval: 80,
     frames: [
-      hex("#bebebe")(`( ${white("●")}   )`),
-      hex("#bebebe")(`(  ${white("●")}  )`),
-      hex("#bebebe")(`(   ${white("●")} )`),
-      hex("#bebebe")(`(    ${white("●")})`),
-      hex("#bebebe")(`(   ${white("●")} )`),
-      hex("#bebebe")(`(  ${white("●")}  )`),
-      hex("#bebebe")(`( ${white("●")}   )`),
-      hex("#bebebe")(`(${white("●")}    )`)
+      chalk.hex("#bebebe")(`( ${chalk.white("●")}   )`),
+      chalk.hex("#bebebe")(`(  ${chalk.white("●")}  )`),
+      chalk.hex("#bebebe")(`(   ${chalk.white("●")} )`),
+      chalk.hex("#bebebe")(`(    ${chalk.white("●")})`),
+      chalk.hex("#bebebe")(`(   ${chalk.white("●")} )`),
+      chalk.hex("#bebebe")(`(  ${chalk.white("●")}  )`),
+      chalk.hex("#bebebe")(`( ${chalk.white("●")}   )`),
+      chalk.hex("#bebebe")(`(${chalk.white("●")}    )`)
     ]
   },
   filesMap = new Map(),
@@ -51,8 +51,8 @@ const spinnerSettings = {
       );
     }
 
-    readdirSync(src).forEach((letter) => {
-      readdirSync(`${src}/${letter}/`).forEach(async (presence) => {
+    readdirSync(src).forEach(letter => {
+      readdirSync(`${src}/${letter}/`).forEach(async presence => {
         const data = JSON.parse(
           readFileSync(
             `${src}/${letter}/${presence}/dist/metadata.json`,
@@ -71,14 +71,14 @@ const spinnerSettings = {
       if (file[1].description[language]) filesMap.delete(file[0]);
 
     loadSpinner.succeed(
-      green(` Loaded all presences… (${filesMap.size} to translate)`)
+      chalk.green(` Loaded all presences… (${filesMap.size} to translate)`)
     );
 
     return true;
   },
   main = async () => {
     const langLoadSpinner = ora({
-      text: green("Loading languages…")
+      text: chalk.green("Loading languages…")
     });
     langLoadSpinner.spinner = spinnerSettings;
     langLoadSpinner.start();
@@ -95,24 +95,24 @@ const spinnerSettings = {
     ).data.data.langFiles
       .map((c: { lang: string }) => c.lang)
       .filter((c: string) => c !== "en");
-    langLoadSpinner.succeed(green(" Loaded all languages."));
+    langLoadSpinner.succeed(chalk.green(" Loaded all languages."));
     const language: string = await prompt([
         {
           type: "autocomplete",
-          message: green("Pick the language you want to translate:"),
+          message: chalk.green("Pick the language you want to translate:"),
           name: "selectedLang",
           // @ts-expect-error Limit doesn't exist in Options.
           limit: 7,
           choices: langs.sort(),
           footer() {
-            return gray("(Scroll up and down to reveal more choices)");
+            return chalk.gray("(Scroll up and down to reveal more choices)");
           }
         }
       ])
         .then((answer: { selectedLang: string }) => answer.selectedLang)
         .catch(() => process.exit()),
       loadFilesSpinner = ora({
-        text: green("Loading presences... \n")
+        text: chalk.green("Loading presences... \n")
       });
 
     loadSpinner = loadFilesSpinner;
@@ -124,7 +124,7 @@ const spinnerSettings = {
     const mode: Mode = await prompt([
       {
         type: "select",
-        message: green("Pick the Translator Mode:"),
+        message: chalk.green("Pick the Translator Mode:"),
         name: "mode",
         choices: [
           {
@@ -156,7 +156,7 @@ const spinnerSettings = {
           const category: Metadata["category"] = await prompt([
             {
               type: "select",
-              message: green("Pick a category:"),
+              message: chalk.green("Pick a category:"),
               name: "category",
               choices: [
                 {
@@ -197,7 +197,7 @@ const spinnerSettings = {
             )
             .catch(() => process.exit());
           files = (Array.from(filesMap) as Files).filter(
-            (f) => f[1].category === category
+            f => f[1].category === category
           );
         }
         break;
@@ -206,15 +206,15 @@ const spinnerSettings = {
           const selected = await prompt([
             {
               type: "autocomplete",
-              message: green("Pick the Presences:"),
+              message: chalk.green("Pick the Presences:"),
               name: "selected",
               // @ts-expect-error Limit doesn't exist in Options.
               limit: 7,
               multiple: true,
-              choices: (Array.from(filesMap) as Files).map((f) => f[0]),
+              choices: (Array.from(filesMap) as Files).map(f => f[0]),
               footer() {
                 const selectedPresences = this.selected.length;
-                return gray(
+                return chalk.gray(
                   `(Scroll up and down to reveal more choices)\n(You selected ${selectedPresences} presences)`
                 );
               }
@@ -222,13 +222,13 @@ const spinnerSettings = {
           ])
             .then((answer: { selected: string }) => answer.selected)
             .catch(() => process.exit());
-          files = (Array.from(filesMap) as Files).filter((f) =>
+          files = (Array.from(filesMap) as Files).filter(f =>
             selected.includes(f[0])
           );
         }
         break;
       default:
-        error(red("Unknown Mode selected..."));
+        error(chalk.red("Unknown Mode selected..."));
         process.exit();
     }
 
@@ -247,12 +247,12 @@ const spinnerSettings = {
       const response: string = await prompt({
           type: "input",
           message:
-            green("Please translate the following description of ") +
-            yellow(file[0]) +
-            green(':\n"') +
-            hex("#bebebe")(file[1].description.en) +
-            green('":\n') +
-            hex("#bebebe")('(Type "skip" to skip or "stop" to stop)'),
+            chalk.green("Please translate the following description of ") +
+            chalk.yellow(file[0]) +
+            chalk.green(':\n"') +
+            chalk.hex("#bebebe")(file[1].description.en) +
+            chalk.green('":\n') +
+            chalk.hex("#bebebe")('(Type "skip" to skip or "stop" to stop)'),
           name: "translatedDes"
         })
           .then((answer: { translatedDes: string }) => answer.translatedDes)

@@ -11,20 +11,19 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (document.location.pathname.includes("video") && video) {
     const episode = JSON.parse(
       document.querySelector('[type="application/ld+json"]').textContent
     );
     if (!isNaN(video.duration)) {
-      const timestamps = presence.getTimestampsfromMedia(video);
       presenceData.details = episode.partOfSeries.name;
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? (await strings).pause
         : (await strings).play;
-      [, presenceData.endTimestamp] = timestamps;
+      [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
       if (buttons) {
         presenceData.buttons = [
           {
@@ -51,16 +50,17 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const catalogue = document.querySelector(
-      "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
-    );
-    if (catalogue) presenceData.details = "Browsing...";
+    if (
+      document.querySelector(
+        "#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
+      )
+    )
+      presenceData.details = "Browsing...";
     else {
-      const episode = JSON.parse(
-        document.querySelector('[type="application/ld+json"]').textContent
-      );
       presenceData.details = "Looking at";
-      presenceData.state = episode.name;
+      presenceData.state = JSON.parse(
+        document.querySelector('[type="application/ld+json"]').textContent
+      ).name;
       if (buttons) {
         presenceData.buttons = [
           {
@@ -72,8 +72,6 @@ presence.on("UpdateData", async () => {
     }
   } else presenceData.details = "Browsing...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

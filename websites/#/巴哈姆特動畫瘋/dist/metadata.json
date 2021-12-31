@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -10,16 +10,17 @@
     "nl": "Volledig gratis animatieplatform.",
     "zh_CN": "完全免费的动画平台。",
     "zh_TW": "完全免費的動畫平台。",
-    "ga_IE": "Ardán beochana go hiomlán saor in aisce."
+    "ga_IE": "Ardán beochana go hiomlán saor in aisce.",
+    "vi_VN": "Nền tảng cung cấp hoạt hình hoàn toàn miễn phí."
   },
   "url": "ani.gamer.com.tw",
-  "version": "1.2.8",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/24VLERu.png",
   "thumbnail": "https://i.imgur.com/atthc8l.png",
   "color": "#58bec9",
+  "category": "anime",
   "tags": [
     "anime",
     "videos"
-  ],
-  "category": "anime"
+  ]
 }

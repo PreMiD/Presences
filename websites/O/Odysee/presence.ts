@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "837270687638224906" });
 
 presence.on("UpdateData", async () => {
-  const buttons = await presence.getSetting("buttons"),
+  const buttons = await presence.getSetting<boolean>("buttons"),
     floatingViewer: HTMLElement = document.querySelector(
       ".content__viewer--floating"
     ),
@@ -33,11 +33,11 @@ presence.on("UpdateData", async () => {
     else presenceData.details = "Browsing subpage";
   } else if (floatingViewer || document.location.pathname.includes("/@")) {
     const userName: HTMLVideoElement =
-        document.querySelector("h1.channel__title"),
-      userTag: HTMLVideoElement = document.querySelector("span.channel-name");
+      document.querySelector("h1.channel__title");
     if (userName) {
       presenceData.details = `Viewing ${userName.textContent} page`;
-      presenceData.state = userTag.textContent;
+      presenceData.state =
+        document.querySelector("span.channel-name").textContent;
     } else {
       const title: HTMLElement = floatingViewer
           ? document.querySelector(
@@ -58,13 +58,14 @@ presence.on("UpdateData", async () => {
           ? document.querySelector("div.draggable.content__info > a")
           : document.querySelector(
               "div.media__subtitle > a.button--uri-indicator"
-            ),
-        uploaderTag = document.querySelector(
-          "div.card__main-actions div.media__subtitle  span.channel-name"
-        )?.textContent;
+            );
       if (title && uploaderName) {
         presenceData.details = title.textContent;
-        presenceData.state = uploaderName.textContent + uploaderTag;
+        presenceData.state =
+          uploaderName.textContent +
+          document.querySelector(
+            "div.card__main-actions div.media__subtitle  span.channel-name"
+          )?.textContent;
         presenceData.smallImageKey = "paused";
         presenceData.smallImageText = "Paused";
 
@@ -90,8 +91,6 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

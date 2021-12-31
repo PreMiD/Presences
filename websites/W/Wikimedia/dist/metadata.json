@@ -1,10 +1,13 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
   },
   "service": "Wikimedia",
+  "description": {
+    "en": "Wikimedia is a global movement whose mission is to bring free educational content to the world. Through various projects, chapters, and the support structure of the non-profit Wikimedia Foundation, Wikimedia strives to bring about a world in which every single human being can freely share in the sum of all knowledge. *For usage in specific projects from the Wikimedia Foundation, please use the appropriate presences instead.*"
+  },
   "url": [
     "www.wikimedia.org",
     "meta.wikimedia.org",
@@ -43,19 +46,16 @@
     "donate.wikimedia.org",
     "wikispore.wmflabs.org"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/M58Pucd.png",
   "thumbnail": "https://i.imgur.com/keAOFru.png",
   "color": "#000000",
+  "category": "other",
   "tags": [
     "encyclopedia",
     "wiki",
     "wikimedia-foundation",
     "wikimedia",
     "wmf"
-  ],
-  "description": {
-    "en": "Wikimedia is a global movement whose mission is to bring free educational content to the world. Through various projects, chapters, and the support structure of the non-profit Wikimedia Foundation, Wikimedia strives to bring about a world in which every single human being can freely share in the sum of all knowledge. *For usage in specific projects from the Wikimedia Foundation, please use the appropriate presences instead.*"
-  },
-  "category": "other"
+  ]
 }

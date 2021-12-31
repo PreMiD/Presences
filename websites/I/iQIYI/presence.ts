@@ -19,48 +19,48 @@ const presence = new Presence({
         viewAccount: "general.viewAccount",
         viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    showButtons: boolean = await presence.getSetting("buttons"),
-    searchQuery: boolean = await presence.getSetting("searchQuery");
+  const [newLang, showButtons, searchQuery, logo] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("showButtons"),
+    presence.getSetting<boolean>("searchQuery"),
+    presence.getSetting<number>("logo")
+  ]);
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][
-      await presence.getSetting("logo")
-    ],
+    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][logo],
     details: (await strings).browse,
     smallImageKey: "search",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") {
-    const category = Object.values(document.querySelectorAll("div")).filter(
-      (entry) => entry?.className === "row-title" && isVisible(entry)
-    )[0]?.textContent;
-
     presenceData.details = (await strings).browsingThrough;
-    presenceData.state = category || "Home page";
+    presenceData.state =
+      Object.values(document.querySelectorAll("div")).filter(
+        entry => entry?.className === "row-title" && isVisible(entry)
+      )[0]?.textContent || "Home page";
   } else if (
     document.location.pathname.includes("/play") ||
     document.location.pathname.includes("/intl-common/")
   ) {
     const data = {
         title: (
-          document.querySelector("h1 a") || document.querySelector("title")
-        )?.textContent,
+          document.querySelector("h1 > a > span > span") ||
+          document.querySelector("title")
+        )?.textContent?.trim(),
         ep: (
           document.querySelector("h1") ||
           document.querySelector(".topice-source-list-item.item-active")
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
       URLItem: string =
         JSON.parse(
           document.querySelectorAll('script[type="application/ld+json"]')[1]
-            ?.innerHTML || "{}"
+            ?.textContent || "{}"
         )[0]
           ?.itemListElement.map(
             (x: {
@@ -118,15 +118,13 @@ presence.on("UpdateData", async () => {
       [data.title] = data.title.match(/.+?(?=\s{2})/g) || [null];
     }
     if (isVShow && !possiblyVShow) data.ep = "Variety show";
-    if (!isVShow && !possiblyVShow && !isMovie && contentEp !== null)
+    if (!isVShow && !possiblyVShow && !isMovie && contentEp)
       data.ep = `${(await strings).episode} ${contentEp[0]}`;
     else if (!isVShow && !possiblyVShow && !isMovie) data.ep = "Highlight";
 
     if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
-    if (video !== null && !Number.isNaN(Number(video.duration))) {
-      const timestamps: number[] = presence.getTimestampsfromMedia(video);
-
+    if (video && !Number.isNaN(Number(video.duration))) {
       if (isPreview && !isMovie) data.ep = `${data.ep} preview`;
       else if (video.duration < 270 && !isMovie && !isPreview && !isTrial)
         data.ep = "Highlight";
@@ -139,7 +137,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
 
-      presenceData.endTimestamp = timestamps.pop();
+      [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
       if (showButtons) {
         presenceData.buttons = [
@@ -163,20 +161,19 @@ presence.on("UpdateData", async () => {
     } else if (data.title) {
       presenceData.details = "Looking at:";
       presenceData.state = data.title;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
     }
   } else if (document.location.pathname.includes("/search")) {
-    const searchQuery_ = decodeURI(
-        document.location.search.replace("?query=", "")
-      ),
-      result = document
-        .querySelector("div.has-result")
-        ?.textContent.match(/[0-9][0-9]?[0-9]?[0-9]?/)[0];
+    const result = document
+      .querySelector("div.has-result")
+      ?.textContent.match(/[0-9][0-9]?[0-9]?[0-9]?/)[0];
 
     presenceData.details = `${(await strings).searchFor} ${
-      searchQuery ? searchQuery_ : "( Hidden )"
+      searchQuery
+        ? decodeURI(document.location.search.replace("?query=", ""))
+        : "( Hidden )"
     }`;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.smallImageKey = "search";
 
     if (result) {
@@ -185,18 +182,7 @@ presence.on("UpdateData", async () => {
       }`;
     } else presenceData.state = "No matching result";
   } else if (document.location.pathname.includes("/personal")) {
-    const type = new URLSearchParams(document.location.search).get("type"),
-      all = document.querySelector(
-        "div.trans-contributions-detail > span:nth-child(1) > i"
-      )?.textContent,
-      passed = document.querySelector(
-        "div.trans-contributions-detail > span:nth-child(2) > i"
-      )?.textContent,
-      adopted = document.querySelector(
-        "div.trans-contributions-detail > span:nth-child(3) > i"
-      )?.textContent;
-
-    switch (type) {
+    switch (new URLSearchParams(document.location.search).get("type")) {
       case "settings":
         presenceData.details = (await strings).viewingSettings;
         break;
@@ -211,7 +197,19 @@ presence.on("UpdateData", async () => {
 
       case "translation":
         presenceData.details = "Viewing their subtitle translation";
-        presenceData.state = `All: ${all} • Passed: ${passed} • Adopted: ${adopted}`;
+        presenceData.state = `All: ${
+          document.querySelector(
+            "div.trans-contributions-detail > span:nth-child(1) > i"
+          )?.textContent
+        } • Passed: ${
+          document.querySelector(
+            "div.trans-contributions-detail > span:nth-child(2) > i"
+          )?.textContent
+        } • Adopted: ${
+          document.querySelector(
+            "div.trans-contributions-detail > span:nth-child(3) > i"
+          )?.textContent
+        }`;
         break;
 
       default:

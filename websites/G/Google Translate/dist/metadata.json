@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -12,6 +12,10 @@
     {
       "name": "Striker",
       "id": "215509157837537280"
+    },
+    {
+      "name": "Vasilis",
+      "id": "241929388403195914"
     }
   ],
   "service": "Google Translate",
@@ -22,22 +26,30 @@
   },
   "url": "translate.google.com",
   "regExp": "translate.google([.][a-z]+)+[/]",
-  "version": "2.0.8",
+  "version": "3.0.2",
   "logo": "https://i.imgur.com/TblAuvW.png",
   "thumbnail": "https://i.imgur.com/HSrkJq0.png",
   "color": "#4c8bf5",
+  "category": "other",
   "tags": [
     "translate",
     "google",
     "utility"
   ],
-  "category": "other",
   "settings": [
     {
-      "id": "type",
-      "title": "Show translation type",
-      "icon": "fas fa-info",
-      "value": false
+      "id": "tDetail",
+      "title": "Translation Details row 1",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "Translating",
+      "placeholder": "Use %from% or %to%"
+    },
+    {
+      "id": "tState",
+      "title": "Translation State row 2",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "From %from% to %to%",
+      "placeholder": "Use %from%, %to% or {0} to delete the row completely"
     },
     {
       "id": "stamp",

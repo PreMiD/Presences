@@ -1,28 +1,28 @@
 const presence = new Presence({
     clientId: "748698437720997888"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "reach2"
     },
-    info = await presence.getSetting("sInfo"),
-    elapsed = await presence.getSetting("tElapsed"),
-    format1 = await presence.getSetting("sFormat1"),
-    format2 = await presence.getSetting("sFormat2"),
+    [info, elapsed, format1, format2] = await Promise.all([
+      presence.getSetting<boolean>("sInfo"),
+      presence.getSetting<boolean>("tElapsed"),
+      presence.getSetting<string>("sFormat1"),
+      presence.getSetting<string>("sFormat2")
+    ]),
     paused =
-      (
-        document.querySelector(
-          "#react-listen-content > div > div > div.pt-4.startpause.col > button > img"
-        ) as HTMLImageElement
+      document.querySelector<HTMLImageElement>(
+        "#react-listen-content > div > div > div.pt-4.startpause.col > button > img"
       ).src ===
       "https://radiopanel.s3.nl-ams.scw.cloud/c9a65443-eed1-41ed-b9d2-743223b5ee75/a01dadcd-df3d-484b-8d20-4923156ce77a.svg";
 
   if (info && paused) {
-    if (elapsed) presenceData.startTimestamp = browsingStamp;
+    if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 
-    if (document.querySelector("#message > div") !== null) {
+    if (document.querySelector("#message > div")) {
       presenceData.details = "Requesting a song";
       presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/about")) {
@@ -63,12 +63,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Listening to podcast:";
       presenceData.state = document.querySelector(".pod-name").textContent;
 
-      const podcastPause =
+      if (
         document.querySelector(
           "#__layout > div > div.page > section > div > div.pod-player > div > div > div > button:nth-child(1)"
-        ).className === "plyr__controls__item plyr__control";
-
-      if (podcastPause) {
+        ).className === "plyr__controls__item plyr__control"
+      ) {
         presenceData.smallImageKey = "pause";
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
@@ -108,7 +107,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     } else {
       presenceData.smallImageKey = "play";
-      if (elapsed) presenceData.startTimestamp = browsingStamp;
+      if (elapsed) presenceData.startTimestamp = browsingTimestamp;
     }
 
     const [artist, title] = document
@@ -125,7 +124,7 @@ presence.on("UpdateData", async () => {
       .replace("%artist%", artist)
       .replace("%presenter%", presenter);
 
-    if (document.querySelector("#message > div") !== null)
+    if (document.querySelector("#message > div"))
       presenceData.smallImageText = "Requesting a song";
     else if (document.location.pathname.includes("/about"))
       presenceData.smallImageText = "Reading about Reach Radio";
@@ -160,8 +159,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Browsing...";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

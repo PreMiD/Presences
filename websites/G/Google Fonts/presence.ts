@@ -10,33 +10,31 @@ presence.on("UpdateData", async () => {
       startTimestamp: tmb
     },
     path = document.location.pathname.toLowerCase(),
-    showButton = await presence.getSetting("showButton");
+    showButton = await presence.getSetting<boolean>("showButton");
 
   if (path === "/") {
-    const categspan = document.querySelector(
+    const categ = document
+      .querySelector(
         "#main-content > gf-global-toolbar > div.global-toolbar__filters-area > gf-global-filters-row > div > div > gf-toolbar-category-filter > button > span.mat-button-wrapper"
-      ),
-      categ = categspan.getElementsByClassName(
-        "gf-outlined-menu-button-content"
-      )[0].textContent;
+      )
+      .getElementsByClassName("gf-outlined-menu-button-content")[0].textContent;
     if (categ === " Categories ") presenceData.state = "All categories";
-    else {
-      if (categ.includes("+")) {
-        const UrlResearch = new URL(document.location.href).searchParams,
-          Urlcategories = UrlResearch.get("category"),
-          reg = /,/gi;
-        presenceData.state = `Categories: ${Urlcategories.replace(reg, ", ")}`;
-      } else presenceData.state = `Category: ${categ}`;
-    }
+    else if (categ.includes("+")) {
+      presenceData.state = `Categories: ${new URL(
+        document.location.href
+      ).searchParams
+        .get("category")
+        .replace(/,/gi, ", ")}`;
+    } else presenceData.state = `Category: ${categ}`;
     presenceData.details = "Browsing fonts";
   } else if (path.includes("/specimen")) {
-    const fontName = document.querySelector(
-        "#main-content > gf-sticky-header > div > h1"
-      ).textContent,
-      fontMenu = document.getElementsByClassName("gf-nav__link--active")[0]
-        .textContent;
-    presenceData.details = `Looking at font: ${fontName}`;
-    presenceData.state = `Viewing the "${fontMenu.trim()}" tab`;
+    presenceData.details = `Looking at font: ${
+      document.querySelector("#main-content > gf-sticky-header > div > h1")
+        .textContent
+    }`;
+    presenceData.state = `Viewing the "${document
+      .getElementsByClassName("gf-nav__link--active")[0]
+      .textContent.trim()}" tab`;
     if (showButton) {
       presenceData.buttons = [
         {
@@ -72,26 +70,22 @@ presence.on("UpdateData", async () => {
       new URL(document.location.href).searchParams.get("icon.query") === null
     ) {
       if (document.getElementsByClassName("mdc-chip--selected")[0]) {
-        const iconsFilter = document
-          .getElementsByClassName("mdc-chip--selected")[0]
-          .textContent.toLowerCase();
         presenceData.details = "Browsing Material icons"; // The icons are named "Material icons" like this on the Fonts website
-        presenceData.state = `Looking at the ${iconsFilter} icons`;
+        presenceData.state = `Looking at the ${document
+          .getElementsByClassName("mdc-chip--selected")[0]
+          .textContent.toLowerCase()} icons`;
       } else {
         presenceData.details = "Browsing Material icons";
         presenceData.state = "Looking at all icons";
       }
     } else {
-      const iconSearch = new URL(document.location.href).searchParams.get(
-        "icon.query"
-      );
       presenceData.details = "Searching for icons";
-      presenceData.state = `Search query: ${iconSearch}`;
+      presenceData.state = `Search query: ${new URL(
+        document.location.href
+      ).searchParams.get("icon.query")}`;
     }
   } else if (path === "/about") presenceData.details = "Viewing the about page";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

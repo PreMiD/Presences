@@ -1,17 +1,17 @@
 const presence = new Presence({
     clientId: "864631234339930132"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let username: HTMLElement;
 
 presence.on("UpdateData", async () => {
-  const privacy: boolean = await presence.getSetting("privacy"),
-    showTimestamp: boolean = await presence.getSetting("timestamp"),
+  const privacy: boolean = await presence.getSetting<boolean>("privacy"),
+    showTimestamp: boolean = await presence.getSetting<boolean>("timestamp"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       smallImageKey: "small",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (!showTimestamp) delete presenceData.startTimestamp;
@@ -28,20 +28,21 @@ presence.on("UpdateData", async () => {
       ""
     )}`;
   } else if (document.location.pathname === "/games") {
-    const game = document.querySelector(
-      "gfn-evidence-panel-tile .evidence-panel-title span"
-    ) as HTMLElement;
-    presenceData.details = `Viewing ${game.innerText}`;
+    presenceData.details = `Viewing ${
+      (
+        document.querySelector(
+          "gfn-evidence-panel-tile .evidence-panel-title span"
+        ) as HTMLElement
+      ).textContent
+    }`;
   } else presenceData.details = "Unknown Page";
 
-  if (username && !privacy) presenceData.smallImageText = username.innerText;
+  if (username && !privacy) presenceData.smallImageText = username.textContent;
   else {
     delete presenceData.smallImageText;
     delete presenceData.smallImageKey;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

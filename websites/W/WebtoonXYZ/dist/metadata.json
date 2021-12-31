@@ -1,25 +1,25 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "WebtoonXYZ",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Harold",
     "id": "141206144264699904"
   },
-  "category": "anime",
+  "service": "WebtoonXYZ",
+  "description": {
+    "en": "WEBTOON.XYZ is a place for Webtoon lovers. If you are a lover of Korean, Japanese or Chinese comics, and you want to read all kinds of comics online manhwa, manga, manhua. This is a right place for you. You can read thousands of high-quality free Korean manhwa online. We want you to know that Webtoon.xyz was born for you.",
+    "nl": "WEBTOON.XYZ is een plek voor liefhebbers van Webtoon. Als je een liefhebber bent van Koreaanse, Japanse of Chinese strips, en je wilt allerlei soorten strips online lezen manhwa, manga, manhua. Dan is dit de juiste plek voor jou. Je kunt duizenden gratis Koreaanse manhwa van hoge kwaliteit online lezen. We willen dat je weet dat Webtoon.xyz voor jouw is geboren."
+  },
+  "url": "www.webtoon.xyz",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/ZLoGNfR.png",
   "thumbnail": "https://i.imgur.com/UkgngBO.png",
-  "version": "1.0.6",
   "color": "#eb2e73",
+  "category": "anime",
   "tags": [
     "manhwa",
     "webtoon",
     "nsfw"
   ],
-  "url": "www.webtoon.xyz",
-  "description": {
-    "en": "WEBTOON.XYZ is a place for Webtoon lovers. If you are a lover of Korean, Japanese or Chinese comics, and you want to read all kinds of comics online manhwa, manga, manhua. This is a right place for you. You can read thousands of high-quality free Korean manhwa online. We want you to know that Webtoon.xyz was born for you.",
-    "nl": "WEBTOON.XYZ is een plek voor liefhebbers van Webtoon. Als je een liefhebber bent van Koreaanse, Japanse of Chinese strips, en je wilt allerlei soorten strips online lezen manhwa, manga, manhua. Dan is dit de juiste plek voor jou. Je kunt duizenden gratis Koreaanse manhwa van hoge kwaliteit online lezen. We willen dat je weet dat Webtoon.xyz voor jouw is geboren."
-  },
   "settings": [
     {
       "id": "buttons",

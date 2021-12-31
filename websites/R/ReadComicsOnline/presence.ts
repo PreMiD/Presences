@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "868465354014359672"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   setCookie = (name: string, value: string, days: number) => {
     let expires: string;
     if (days) {
@@ -27,12 +27,12 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "rco_logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = location,
     input = document.querySelector<HTMLInputElement>("input#keyword"),
-    buttons: boolean = await presence.getSetting("buttons"),
-    cookies: boolean = await presence.getSetting("cookies");
+    buttons = await presence.getSetting<boolean>("buttons"),
+    cookies = await presence.getSetting<boolean>("cookies");
 
   if (cookies && input && input.value)
     setCookie("PMD_searchQuery", input.value, 1);
@@ -63,10 +63,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reporting Error";
       break;
     case "/Search/Comic": {
-      if (cookies) {
-        const searchQuery = getCookie("PMD_searchQuery");
-        presenceData.details = `Searching for ${searchQuery}`;
-      } else presenceData.details = "Searching";
+      if (cookies)
+        presenceData.details = `Searching for ${getCookie("PMD_searchQuery")}`;
+      else presenceData.details = "Searching";
       break;
     }
     case "/AdvanceSearch": {
@@ -88,19 +87,25 @@ presence.on("UpdateData", async () => {
             1
           );
         } else if (include.length > 0) {
-          const searchQuery = `Searching for Genre: ${include[0].innerText} ${
-            include.length > 1 ? `and ${include.length - 1} more` : ""
-          }`;
-          setCookie("PMD_searchQuery", searchQuery, 1);
+          setCookie(
+            "PMD_searchQuery",
+            `Searching for Genre: ${include[0].textContent} ${
+              include.length > 1 ? `and ${include.length - 1} more` : ""
+            }`,
+            1
+          );
         } else if (exclude.length > 0) {
-          const searchQuery = `Searching for all Genres except: ${
-            exclude[0].innerText
-          } ${exclude.length > 1 ? `and ${exclude.length - 1} more` : ""}`;
-          setCookie("PMD_searchQuery", searchQuery, 1);
+          setCookie(
+            "PMD_searchQuery",
+            `Searching for all Genres except: ${exclude[0].textContent} ${
+              exclude.length > 1 ? `and ${exclude.length - 1} more` : ""
+            }`,
+            1
+          );
         } else if (status) {
           setCookie(
             "PMD_searchQuery",
-            `Looking for: ${status.selectedOptions[0].innerText} comics`,
+            `Looking for: ${status.selectedOptions[0].textContent} comics`,
             1
           );
         } else {
@@ -114,15 +119,14 @@ presence.on("UpdateData", async () => {
       if (pathname.startsWith("/Genre")) {
         const barTitle = document.querySelector<HTMLDivElement>(".barTitle");
         if (barTitle)
-          presenceData.details = `Looking for ${barTitle.innerText}`;
+          presenceData.details = `Looking for ${barTitle.textContent}`;
         if (pathname.includes("MostPopular"))
           presenceData.state = "Sorted By Popularity";
         else if (pathname.includes("LatestUpdate"))
           presenceData.state = "Sorted By Latest Update";
         else presenceData.state = "Sorted by Alphabet";
       } else if (pathname.startsWith("/Comic")) {
-        const reading = !!document.querySelector("div#divImage");
-        if (reading) {
+        if (document.querySelector("div#divImage")) {
           const title =
               document.querySelector<HTMLAnchorElement>("#navsubbar > p > a"),
             episode =
@@ -133,15 +137,17 @@ presence.on("UpdateData", async () => {
             page =
               document.querySelector<HTMLSelectElement>("select#selectPage");
           if (title) {
-            presenceData.details = title.innerText.substring(
+            presenceData.details = title.textContent.substring(
               6,
-              title.innerText.indexOf("information")
+              title.textContent.indexOf("information")
             );
             presenceData.smallImageKey = "reading";
-            if (episode)
-              presenceData.state = episode.selectedOptions[0].innerText.trim();
+            if (episode) {
+              presenceData.state =
+                episode.selectedOptions[0].textContent.trim();
+            }
             if (page)
-              presenceData.state += `, Page: ${page.selectedOptions[0].innerText.trim()}`;
+              presenceData.state += `, Page: ${page.selectedOptions[0].textContent.trim()}`;
             if (buttons) {
               presenceData.buttons = [
                 {
@@ -157,7 +163,7 @@ presence.on("UpdateData", async () => {
           }
         } else {
           const title = document.querySelector<HTMLAnchorElement>("a.bigChar");
-          if (title) presenceData.details = title.innerText;
+          if (title) presenceData.details = title.textContent;
           presenceData.state = "Looking for issue to read";
           if (buttons) {
             presenceData.buttons = [
@@ -172,13 +178,11 @@ presence.on("UpdateData", async () => {
         presenceData.details = document.title;
       else {
         const barTitle = document.querySelector<HTMLDivElement>(".barTitle");
-        if (barTitle) presenceData.details = barTitle.innerText;
+        if (barTitle) presenceData.details = barTitle.textContent;
       }
       break;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

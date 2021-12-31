@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Timeraa",
     "id": "223238938716798978"
@@ -66,15 +66,15 @@
     "www.youtube.com",
     "studio.youtube.com"
   ],
-  "version": "5.1.11",
+  "version": "5.1.14",
   "logo": "https://i.imgur.com/o5injgg.png",
   "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
   "color": "#E40813",
+  "category": "videos",
   "tags": [
     "video",
     "media"
   ],
-  "category": "videos",
   "settings": [
     {
       "id": "lang",
@@ -111,6 +111,29 @@
       "icon": "fas fa-comment-alt-edit",
       "value": "%uploader%",
       "placeholder": "Use %title%, %uploader% or {0} to delete the row completely"
+    },
+    {
+      "id": "channelPic",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Channel's Picture",
+      "icon": "fas fa-user",
+      "value": false
+    },
+    {
+      "id": "logo",
+      "if": {
+        "privacy": false
+      },
+      "title": "Logo",
+      "icon": "fad fa-images",
+      "value": 0,
+      "values": [
+        "YT Logo",
+        "Thumbnail",
+        "Channel"
+      ]
     },
     {
       "id": "buttons",

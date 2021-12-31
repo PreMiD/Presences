@@ -1,31 +1,31 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Glimesh",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Nathaniel.",
     "id": "147891648628654082"
   },
-  "category": "videos",
-  "logo": "https://i.imgur.com/YqIpqg4.png",
-  "thumbnail": "https://i.imgur.com/aALh7B4.jpg",
-  "version": "1.0.7",
-  "color": "#2c409b",
-  "tags": [
-    "stream",
-    "glimesh",
-    "tv",
-    "live"
-  ],
+  "service": "Glimesh",
+  "description": {
+    "en": "Glimesh is the next generation streaming platform built by the community for the community.",
+    "nl": "Glimesh is het streamingplatform van de volgende generatie dat door de community voor de community is gebouwd."
+  },
   "url": [
     "glimesh.tv",
     "support.glimesh.tv",
     "blog.glimesh.tv",
     "glim.shop"
   ],
-  "description": {
-    "en": "Glimesh is the next generation streaming platform built by the community for the community.",
-    "nl": "Glimesh is het streamingplatform van de volgende generatie dat door de community voor de community is gebouwd."
-  },
+  "version": "1.0.9",
+  "logo": "https://i.imgur.com/YqIpqg4.png",
+  "thumbnail": "https://i.imgur.com/aALh7B4.jpg",
+  "color": "#2c409b",
+  "category": "videos",
+  "tags": [
+    "stream",
+    "glimesh",
+    "tv",
+    "live"
+  ],
   "settings": [
     {
       "id": "show_details",

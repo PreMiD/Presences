@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "614583717951963137" // CLIENT ID FOR YOUR PRESENCE
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let board: HTMLElement, profile: string;
 
@@ -9,16 +9,18 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "trello"
     },
-    displayPrivateBoards = await presence.getSetting("displayPrivateBoards");
+    displayPrivateBoards = await presence.getSetting<boolean>(
+      "displayPrivateBoards"
+    );
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.hostname === "trello.com") {
     if (document.location.pathname.includes("/b/")) {
       if (
         document.querySelector(
           ".board-header-btn.board-header-btn-org-name.js-open-org-menu"
-        ) !== null
+        )
       ) {
         if (
           document
@@ -144,14 +146,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Blog, viewing profile:";
       presenceData.state = profile;
     } else if (document.location.pathname.includes("/search")) {
-      profile = (document.querySelector("#gsc-i-id1") as HTMLInputElement)
-        .value;
+      profile = document.querySelector<HTMLInputElement>("#gsc-i-id1").value;
       presenceData.details = "Blog, searching for:";
       presenceData.state = profile;
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/")) {
       board = document.querySelector("#hs_cos_wrapper_name");
-      if (board !== null) {
+      if (board) {
         presenceData.details = "Blog, article:";
         presenceData.state = board.textContent;
         presenceData.smallImageKey = "reading";
@@ -171,8 +172,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

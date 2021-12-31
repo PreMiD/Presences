@@ -26,19 +26,17 @@ iframe.on("UpdateData", async () => {
 
   if (title.textContent.includes("Bölüm")) {
     const titleArr = title.textContent.split("."),
-      epTitle = `${titleArr[0].charAt(titleArr[0].length - 1)}.${titleArr[1]}`,
-      rx = new RegExp(epTitle, "g"),
-      seriesName: string =
-        title.textContent.charAt(0) !== epTitle.split(".")[0]
-          ? title.textContent.replace(rx, "")
-          : null;
+      epTitle = `${titleArr[0].charAt(titleArr[0].length - 1)}.${titleArr[1]}`;
 
     iframe.send({
       video: {
         ...videoMessage
       },
       series: {
-        name: seriesName,
+        name:
+          title.textContent.charAt(0) !== epTitle.split(".")[0]
+            ? title.textContent.replace(new RegExp(epTitle, "g"), "")
+            : null,
         ep: epTitle,
         season:
           season && season.textContent && season.textContent.includes("Sezon")

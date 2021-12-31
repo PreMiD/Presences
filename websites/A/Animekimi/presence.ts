@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
     current: 0,
@@ -23,9 +23,11 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const time = await presence.getSetting("timestamps"),
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons"),
+  const [time, privacy, buttons] = await Promise.all([
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("privacy"),
+      presence.getSetting<boolean>("buttons")
+    ]),
     title =
       document.querySelector(
         "#contenedor > div.module > div.content > header > h1"
@@ -36,24 +38,21 @@ presence.on("UpdateData", async () => {
       )?.textContent ?? "ไม่ทราบชื่อ",
     playvdo =
       document.querySelector("#info > h1")?.textContent ?? "ไม่ทราบชื่อเรื่อง",
-    ep =
-      document.querySelector(
-        "#single > div.content > div.sheader > div.data > h1"
-      )?.textContent ?? "ไม่ทราบชื่อตอน",
-    search =
-      document.querySelector(".content.rigth.csearch > header > h1")
-        ?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา",
     path = document.location,
     presenceData: PresenceData = {
       largeImageKey: "site",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   // Presence
   if (path.search.includes("?s")) {
-    const searchinfo = search.split("ผลการค้นหา:");
     presenceData.details = "กำลังค้นหา";
-    presenceData.state = searchinfo.pop();
+    presenceData.state = (
+      document.querySelector(".content.rigth.csearch > header > h1")
+        ?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา"
+    )
+      .split("ผลการค้นหา:")
+      .pop();
     presenceData.smallImageKey = "search";
   } else if (path.pathname === "/") presenceData.details = "อนิเมะอัพเดตล่าสุด";
   else if (path.pathname.includes("genre")) {
@@ -66,9 +65,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "หมวดหมู่";
     presenceData.state = title;
   } else if (path.pathname.includes("tag")) {
-    const titletag = title.split("รวมอนิเมะ");
     presenceData.details = "รวมอนิเมะ";
-    presenceData.state = titletag.pop();
+    presenceData.state = title.split("รวมอนิเมะ").pop();
   } else if (path.pathname.includes("release")) {
     presenceData.details = "ปี";
     presenceData.state = title;
@@ -76,10 +74,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "เดอะมูฟวี่";
     presenceData.state = titlemovies;
     let movie;
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.current),
-      Math.floor(video.duration)
-    );
     if (titlemovies.includes("มูฟวี่")) {
       const movieinfo = titlemovies.split(/(เดอะ)?(มูฟวี่)/);
       movie = movieinfo.pop();
@@ -98,7 +92,12 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    if (!video.paused) [, presenceData.endTimestamp] = timestamps;
+    if (!video.paused) {
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        Math.floor(video.current),
+        Math.floor(video.duration)
+      );
+    }
     if (buttons) {
       presenceData.buttons = [
         {
@@ -112,10 +111,6 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.pathname.includes("ep")) {
     let episode;
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.current),
-      Math.floor(video.duration)
-    );
     if (playvdo.includes("ตอนที่")) {
       const info = playvdo.split("ตอนที่");
       episode = info.pop();
@@ -143,7 +138,12 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    if (!video.paused) [, presenceData.endTimestamp] = timestamps;
+    if (!video.paused) {
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        Math.floor(video.current),
+        Math.floor(video.duration)
+      );
+    }
     if (buttons) {
       presenceData.buttons = [
         {
@@ -153,9 +153,12 @@ presence.on("UpdateData", async () => {
       ];
     }
   } else if (path.href) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "เลือกตอน";
-    presenceData.state = ep;
+    presenceData.state =
+      document.querySelector(
+        "#single > div.content > div.sheader > div.data > h1"
+      )?.textContent ?? "ไม่ทราบชื่อตอน";
   } else {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
@@ -168,8 +171,6 @@ presence.on("UpdateData", async () => {
     delete presenceData.state;
     delete presenceData.buttons;
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

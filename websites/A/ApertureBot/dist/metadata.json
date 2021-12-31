@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "AlbaySIMSEK",
     "id": "432476132609228800"
@@ -11,24 +11,25 @@
     }
   ],
   "service": "ApertureBot",
-  "url": [
-    "aperturebot.science",
-    "dashboard.aperturebot.science"
-  ],
-  "version": "1.2.7",
-  "logo": "https://i.imgur.com/0Tw3aDA.png",
-  "thumbnail": "https://i.imgur.com/LOClCfu.png",
-  "color": "#2c2834",
-  "tags": [
-    "bot",
-    "english",
-    "moderation"
-  ],
   "description": {
     "en": "ApertureBot is a fork of b1nzy's rowboat, a utilitarian and administration assistant for Discord.",
     "nl": "ApertureBot is een fork van de rowboat van b1nzy, een utilitaire en administratieve assistent voor Discord.",
     "zh_CN": "ApertureBot, 你全新的Discord服务器助理！",
-    "ga_IE": "Is forc é ApertureBot de bhád rósta b1nzy, cúntóir utilitarian agus riaracháin do Discord."
+    "ga_IE": "Is forc é ApertureBot de bhád rósta b1nzy, cúntóir utilitarian agus riaracháin do Discord.",
+    "vi_VN": "ApertureBot là một bản sao của b1nzy's rowboat, công cụ quản lý hữu hiệu dành cho Discord."
   },
-  "category": "other"
+  "url": [
+    "aperturebot.science",
+    "dashboard.aperturebot.science"
+  ],
+  "version": "1.2.9",
+  "logo": "https://i.imgur.com/0Tw3aDA.png",
+  "thumbnail": "https://i.imgur.com/LOClCfu.png",
+  "color": "#2c2834",
+  "category": "other",
+  "tags": [
+    "bot",
+    "english",
+    "moderation"
+  ]
 }

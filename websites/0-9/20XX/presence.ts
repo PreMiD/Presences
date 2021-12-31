@@ -79,75 +79,75 @@ const characterNameMap: ItemMap = {
 let gameStartTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "20xx"
   };
 
   if (data20XX) {
     switch (data20XX.nav) {
       case "setgame":
-        data.details = "Changing Game Settings";
+        presenceData.details = "Changing Game Settings";
         break;
       case "setgraphic":
-        data.details = "Changing Graphic Settings";
+        presenceData.details = "Changing Graphic Settings";
         break;
       case "stat":
-        data.details = "Looking at Player Stats";
+        presenceData.details = "Looking at Player Stats";
         break;
       case "unlock":
-        data.details = "Looking at Unlocks";
+        presenceData.details = "Looking at Unlocks";
         break;
       case "lobby":
-        data.details = "In Lobby Select";
+        presenceData.details = "In Lobby Select";
         break;
       default:
-        data.details = "Main Menu";
+        presenceData.details = "Main Menu";
     }
 
     if (data20XX.user) {
-      data.state = `${data20XX.user.displayName} (${
+      presenceData.state = `${data20XX.user.displayName} (${
         data20XX.user.isGuest ? "guest" : `rank ${data20XX.user.rank}`
       })`;
       if (data20XX.serverInfo)
-        data.state += ` in ${data20XX.serverInfo.location}`;
+        presenceData.state += ` in ${data20XX.serverInfo.location}`;
     }
 
     if (data20XX.game) {
-      data.details = `In-Game - ${data20XX.game.info.gametype} (${data20XX.game.info.players}/${data20XX.game.info.maxplayers})`;
+      presenceData.details = `In-Game - ${data20XX.game.info.gametype} (${data20XX.game.info.players}/${data20XX.game.info.maxplayers})`;
 
       gameStartTimestamp ??= Date.now();
 
       // Character
-      data.smallImageKey = `char_${data20XX.game.character.split("_")[0]}`;
-      data.smallImageText =
+      presenceData.smallImageKey = `char_${
+        data20XX.game.character.split("_")[0]
+      }`;
+      presenceData.smallImageText =
         characterNameMap[data20XX.game.character.split("_")[0]];
 
       // Map
       if (data20XX.game.map) {
-        data.largeImageKey = `map_${data20XX.game.map}`;
-        data.smallImageText = `${mapNameMap[data20XX.game.map]} - ${
-          data.smallImageText
+        presenceData.largeImageKey = `map_${data20XX.game.map}`;
+        presenceData.smallImageText = `${mapNameMap[data20XX.game.map]} - ${
+          presenceData.smallImageText
         }`;
       }
 
-      data.startTimestamp = gameStartTimestamp;
+      presenceData.startTimestamp = gameStartTimestamp;
     } else gameStartTimestamp = null;
-  } else {
-    if (location.pathname.endsWith("/help.html"))
-      data.details = "Reading the Help Document";
-    else if (location.pathname.endsWith("/rules.html"))
-      data.details = "Reading the Rules";
-    else if (location.pathname.endsWith("/tos.html"))
-      data.details = "Reading the Terms of Service";
-  }
+  } else if (location.pathname.endsWith("/help.html"))
+    presenceData.details = "Reading the Help Document";
+  else if (location.pathname.endsWith("/rules.html"))
+    presenceData.details = "Reading the Rules";
+  else if (location.pathname.endsWith("/tos.html"))
+    presenceData.details = "Reading the Terms of Service";
 
-  if (!(await presence.getSetting("showName"))) delete data.state;
+  if (!(await presence.getSetting<boolean>("showName")))
+    delete presenceData.state;
 
-  // If data doesn't exist clear else set activity to the presence data
-  if (!data.details) {
-    presence.setTrayTitle(); // Clear tray
-    presence.setActivity(); // Clear activity
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: Data20XX) => (data20XX = data));
+presence.on("iFrameData", (data: Data20XX) => {
+  data20XX = data;
+});

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Timeraa",
     "id": "223238938716798978"
@@ -8,14 +8,6 @@
     {
       "name": "Bas950",
       "id": "241278257335500811"
-    },
-    {
-      "name": "Bryan",
-      "id": "293775922757238784"
-    },
-    {
-      "name": "DooMLorD",
-      "id": "465105167751315471"
     }
   ],
   "service": "Netflix",
@@ -58,16 +50,16 @@
     "www.netflix.com",
     "netflix.com"
   ],
-  "version": "4.2.5",
+  "version": "5.0.1",
   "logo": "https://i.imgur.com/LyG9Afx.png",
   "thumbnail": "https://i.imgur.com/LWcRBZs.jpg",
   "color": "#db0000",
+  "category": "videos",
   "tags": [
     "netflix",
     "video",
     "media"
   ],
-  "category": "videos",
   "settings": [
     {
       "id": "lang",
@@ -92,7 +84,7 @@
       "value": true
     },
     {
-      "id": "movieDetail",
+      "id": "movieDetails",
       "if": {
         "privacy": false
       },
@@ -102,7 +94,7 @@
       "placeholder": "Use %title% or {0} to delete the row completely"
     },
     {
-      "id": "movieState",
+      "id": "movieStates",
       "if": {
         "privacy": false
       },
@@ -118,24 +110,24 @@
       "value": true
     },
     {
-      "id": "seriesDetail",
+      "id": "seriesDetails",
       "if": {
         "privacy": false
       },
       "title": "Series Details row1",
       "icon": "fas fa-comment-alt-edit",
       "value": "%title%",
-      "placeholder": "Use %title% or %episode%"
+      "placeholder": "Use %title% or %episode% or %season% or %episodeTitle%"
     },
     {
-      "id": "seriesState",
+      "id": "seriesStates",
       "if": {
         "privacy": false
       },
       "title": "Video Details row2",
       "icon": "fas fa-comment-alt-edit",
-      "value": "%episode%",
-      "placeholder": "Use %title% or %episode% or {0} to delete the row completely"
+      "value": "S%season%:E%episode% %episodeTitle%",
+      "placeholder": "Use %title% or %episode% or %season% or %episodeTitle% or {0} to delete the row completely"
     },
     {
       "id": "timestamp",
@@ -158,9 +150,16 @@
       "icon": "fad fa-images",
       "value": 0,
       "values": [
-        "Normal",
-        "No Background"
+        "Animated",
+        "Still",
+        "Still, No Background"
       ]
+    },
+    {
+      "id": "cover",
+      "title": "Show Cover",
+      "icon": "fad fa-images",
+      "value": true
     }
   ]
 }

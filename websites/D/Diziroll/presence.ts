@@ -3,8 +3,9 @@ const presence = new Presence({ clientId: "818550584994168934" });
 let stream: { duration: number; currentTime: number; paused: boolean };
 presence.on(
   "iFrameData",
-  (data: { duration: number; currentTime: number; paused: boolean }) =>
-    (stream = data)
+  (data: { duration: number; currentTime: number; paused: boolean }) => {
+    stream = data;
+  }
 );
 
 presence.on("UpdateData", async () => {
@@ -51,14 +52,15 @@ presence.on("UpdateData", async () => {
         }`
       }
     ];
-    const timestamps = presence.getTimestamps(
-      stream.currentTime ? Math.floor(stream.currentTime) : null,
-      stream.duration ? Math.floor(stream.duration) : null
-    );
     presenceData.smallImageKey = stream.paused ? "pause" : "play";
     presenceData.smallImageText = stream.paused ? "Durduruldu" : "Oynatılıyor";
-    if (!stream.paused)
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    if (!stream.paused) {
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          stream.currentTime ? Math.floor(stream.currentTime) : null,
+          stream.duration ? Math.floor(stream.duration) : null
+        );
+    }
   } else {
     presenceData.details = "Bir sayfayı inceliyor:";
     presenceData.state = "Bilinmeyen Sayfa";

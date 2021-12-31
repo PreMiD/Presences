@@ -7,7 +7,7 @@ let profile: string;
 function getUserName(): void {
   // Get your own username
   const tempusername = document.querySelector(".user-info > h6");
-  if (tempusername !== null) profile = tempusername.textContent;
+  if (tempusername) profile = tempusername.textContent;
 }
 
 async function getProfileDetails() {
@@ -15,14 +15,17 @@ async function getProfileDetails() {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    privacymode = await presence.getSetting("privacy"),
-    btnfriendcheck = document.querySelector(
-      "div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary"
-    ).textContent,
+    privacymode = await presence.getSetting<boolean>("privacy"),
     viewingprofilename =
       document.querySelector("div.col-md-12 > h2").textContent;
   if (privacymode === false) {
-    if (btnfriendcheck.includes("Unfriend")) {
+    if (
+      document
+        .querySelector(
+          "div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary"
+        )
+        .textContent.includes("Unfriend")
+    ) {
       presenceData.details = "Viewing Friend:";
       presenceData.state = viewingprofilename;
       presence.setActivity(presenceData);
@@ -41,7 +44,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    privacymode = await presence.getSetting("privacy");
+    privacymode = await presence.getSetting<boolean>("privacy");
 
   if (document.location.hostname === "hello.vrchat.com") {
     presenceData.details = "Landing Page:";
@@ -110,11 +113,11 @@ presence.on("UpdateData", async () => {
           presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/world")) {
           /* Viewing a specific world*/
-          const worldname =
-            document.querySelector(".col-md-12 > h3").textContent;
           presenceData.details = "Viewing World:";
-          if (privacymode === false) presenceData.state = worldname;
-          else presenceData.details = "Viewing a world";
+          if (privacymode === false) {
+            presenceData.state =
+              document.querySelector(".col-md-12 > h3").textContent;
+          } else presenceData.details = "Viewing a world";
 
           presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/avatars")) {
@@ -134,28 +137,26 @@ presence.on("UpdateData", async () => {
           presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/search")) {
           /* Searching */
-          const searchresult = window.location
-            .toString()
-            .substr(window.location.toString().lastIndexOf("/") + 1);
           if (!privacymode) {
             presenceData.details = "Searching:";
-            presenceData.state = searchresult;
+            presenceData.state = window.location
+              .toString()
+              .substr(window.location.toString().lastIndexOf("/") + 1);
             presence.setActivity(presenceData);
           } else {
             presenceData.details = "Searching";
             presence.setActivity(presenceData);
           }
         } else if (document.location.pathname.includes("/avatar")) {
-          /* Viewing a specific avatar*/
-          const avatarname =
-              document.querySelector("div.col-12 > h3").textContent,
-            avatarpublicstatus = document.querySelector(
-              "div.col-12.col-md-8 > h4 > span > small"
-            ).textContent;
           presenceData.details = "Viewing Avatar:";
-          if (privacymode === false)
-            presenceData.state = `${avatarname} ${avatarpublicstatus}`;
-          else presenceData.details = "Viewing an avatar";
+          if (privacymode === false) {
+            presenceData.state = `${
+              document.querySelector("div.col-12 > h3").textContent
+            } ${
+              document.querySelector("div.col-12.col-md-8 > h4 > span > small")
+                .textContent
+            }`;
+          } else presenceData.details = "Viewing an avatar";
 
           presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/playermoderations")) {
@@ -197,20 +198,19 @@ presence.on("UpdateData", async () => {
     if (!privacymode) {
       if (document.location.pathname.includes("/p/")) {
         /* Viewing a post */
-        const postname = document.querySelector("div.postTitle").textContent;
         presenceData.details = "Viewing feedback post:";
-        presenceData.state = postname;
+        presenceData.state =
+          document.querySelector("div.postTitle").textContent;
         presence.setActivity(presenceData);
       } else if (document.location.pathname === "/") {
         presenceData.details = "Browsing feedback...";
         presence.setActivity(presenceData);
       } else {
         /* Not viewing a post, display category */
-        const category = document.querySelector(
+        presenceData.details = "Browsing feedback...";
+        presenceData.state = document.querySelector(
           "div.optionContent > div"
         ).textContent;
-        presenceData.details = "Browsing feedback...";
-        presenceData.state = category;
         presence.setActivity(presenceData);
       }
     } else {

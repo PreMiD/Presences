@@ -1,23 +1,24 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Tio Anime",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Yelo",
     "id": "425326889565945856"
   },
-  "category": "anime",
-  "logo": "https://i.imgur.com/KJUHptb.png",
-  "thumbnail": "https://i.imgur.com/vNi2bMS.png",
-  "version": "1.0.2",
-  "color": "#18142f",
-  "tags": [
-    "anime"
-  ],
-  "url": "tioanime.com",
+  "service": "Tio Anime",
   "description": {
     "en": "The best portal to watch anime online sub spanish in HD quality, download light anime in HD from Mega, Mediafire and more! TioAnime your best option.",
     "es": "El mejor portal para ver anime online sub español en calidad HD, descargar anime ligero en HD desde Mega, Mediafire y más! TioAnime tu mejor opción."
   },
+  "url": "tioanime.com",
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/KJUHptb.png",
+  "thumbnail": "https://i.imgur.com/vNi2bMS.png",
+  "color": "#18142f",
+  "category": "anime",
+  "tags": [
+    "anime"
+  ],
+  "iframe": true,
   "settings": [
     {
       "id": "privacy",
@@ -31,6 +32,5 @@
       "icon": "fas fa-compress-arrows-alt",
       "value": true
     }
-  ],
-  "iframe": true
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,16 +9,17 @@
     "en": "Watch Animes Online for free in HD.",
     "nl": "Bekijk Animes Online gratis in HD.",
     "zh_CN": "免费的在线高清动漫视频网站。",
-    "ga_IE": "Féach ar Animes Online saor in aisce i HD."
+    "ga_IE": "Féach ar Animes Online saor in aisce i HD.",
+    "vi_VN": "Xem anime trực tuyến miễn phí với chất lượng HD."
   },
   "url": "www.animesonline.cz",
-  "version": "1.2.8",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/IcaSbEw.png",
   "thumbnail": "https://i.imgur.com/JsYwXRb.png",
   "color": "#008000",
+  "category": "anime",
   "tags": [
     "anime",
     "online"
-  ],
-  "category": "anime"
+  ]
 }

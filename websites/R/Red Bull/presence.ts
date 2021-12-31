@@ -1,15 +1,15 @@
 const presence = new Presence({
     clientId: "872712888375193680"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = location,
-    buttons: boolean = await presence.getSetting("buttons"),
+    buttons = await presence.getSetting<boolean>("buttons"),
     heading =
       document.querySelector<HTMLHeadingElement>(".content-hub-hero__title") ||
       document.querySelector<HTMLHeadingElement>("h1.collection-hero__title"),

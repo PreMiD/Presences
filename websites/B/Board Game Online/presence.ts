@@ -103,51 +103,48 @@ function setObject(path: string) {
 }
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "boardgameonline"
     },
-    { host } = location,
     path = location.pathname,
     query = location.search,
-    queryString = query && query.split("page=")[1].split("&")[0],
     detailsObj = setObject(path);
 
-  if (host === "www.boardgame-online.com") {
-    if (path || queryString)
-      (data.details = detailsObj.details), (data.state = detailsObj.state);
+  if (location.host === "www.boardgame-online.com") {
+    if (path || (query && query.split("page=")[1].split("&")[0])) {
+      (presenceData.details = detailsObj.details),
+        (presenceData.state = detailsObj.state);
+    }
 
     const header = getElement(".page_wrapper.show > .page_content > h2");
     if (header) {
-      data.details = "Viewing";
-      data.state = header;
+      presenceData.details = "Viewing";
+      presenceData.state = header;
     }
 
     const profile = getElement(
       ".page_wrapper.show > .page_content > #profile_name_title > .userName"
     );
     if (profile) {
-      data.details = "Viewing Profile";
-      data.state = profile;
+      presenceData.details = "Viewing Profile";
+      presenceData.state = profile;
     }
   } else {
     const playerCount =
       document.querySelector(".rankingTable").childElementCount;
 
-    data.details = "Playing Game";
-    data.state = document.title;
+    presenceData.details = "Playing Game";
+    presenceData.state = document.title;
 
     if (playerCount)
-      data.state = `${document.title} (${playerCount - 1} Players)`;
+      presenceData.state = `${document.title} (${playerCount - 1} Players)`;
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = (await strings).browse;
     }
-    presence.setActivity(data);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+    presence.setActivity(presenceData);
+  } else presence.setActivity();
 });

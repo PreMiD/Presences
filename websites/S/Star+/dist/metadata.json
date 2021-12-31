@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Tiemen",
     "id": "152164749868662784"
@@ -25,10 +25,11 @@
   },
   "url": "www.starplus.com",
   "regExp": "([a-z0-9-]+[.])*starplus[.]com[/]",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/egrBdbu.png",
   "thumbnail": "https://i.imgur.com/w6TdhJd.png",
   "color": "#271f44",
+  "category": "videos",
   "tags": [
     "star",
     "star-plus",
@@ -45,7 +46,6 @@
     "20th-century",
     "abc-signature"
   ],
-  "category": "videos",
   "settings": [
     {
       "id": "lang",

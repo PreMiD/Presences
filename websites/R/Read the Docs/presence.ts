@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     id: string,
     values: Record<string, string>
   ): Promise<string> {
-    let str: string = await pres.getSetting(id);
+    let str = await pres.getSetting<string>(id);
 
     for (const [key, value] of Object.entries(values))
       str = str.replace(RegExp(`%${key}%`, "g"), value);
@@ -98,8 +98,6 @@ presence.on("UpdateData", async () => {
     );
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

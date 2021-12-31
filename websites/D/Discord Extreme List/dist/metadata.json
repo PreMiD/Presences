@@ -1,15 +1,10 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Cairo",
     "id": "208105877838888960"
   },
-  "url": [
-    "discordextremelist.xyz",
-    "staging.discordextremelist.xyz",
-    "discordextremelist.gay",
-    "staging.discordextremelist.gay"
-  ],
+  "service": "Discord Extreme List",
   "description": {
     "de": "Discord's unbefangene Liste, gibt Bots und Server aller grössen eine grosse Chance!",
     "en": "Discord's unbiased list, giving bots and servers of all sizes a big chance!",
@@ -25,11 +20,17 @@
     "sv_SE": "Discords opartiska lista, ger alla bots och servrar en stor chans!",
     "tr": "Discord'un tarafsız bot listesi, büyüklüğü ne olursa olsun bütün botlara ve sunuculara büyük bir şans veriyor!"
   },
-  "service": "Discord Extreme List",
-  "version": "1.0.5",
+  "url": [
+    "discordextremelist.xyz",
+    "staging.discordextremelist.xyz",
+    "discordextremelist.gay",
+    "staging.discordextremelist.gay"
+  ],
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/ewofSNN.png",
   "thumbnail": "https://i.imgur.com/tMrrgGu.png",
   "color": "#b114ff",
+  "category": "other",
   "tags": [
     "discord",
     "bot",
@@ -39,7 +40,6 @@
     "discord-servers",
     "discord-templates"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "incognito",

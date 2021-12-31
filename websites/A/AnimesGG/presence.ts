@@ -26,104 +26,112 @@ const presence = new Presence({
   presenceTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let data: PresenceData = {
+  let presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: presenceTimestamp
   };
   const page = document.location.pathname,
     params = new URLSearchParams(document.location.search.substring(1));
 
-  if (page in pages) data = Object.assign(data, pages[page]);
+  if (page in pages) presenceData = Object.assign(presenceData, pages[page]);
   else if (page === "/") {
-    data.details = "Na página inicial";
-    data.state = "Procurando animes...";
-    if (params.get("s") !== null) {
-      data.details = "Procurando animes.";
-      data.state = `Procurando por ${params.get("s")}`;
+    presenceData.details = "Na página inicial";
+    presenceData.state = "Procurando animes...";
+    if (params.get("s")) {
+      presenceData.details = "Procurando animes.";
+      presenceData.state = `Procurando por ${params.get("s")}`;
     }
   } else if (page === "/lista-de-animes/") {
-    data.details = "Procurando animes";
-    data.state = "Na lista de animes";
+    presenceData.details = "Procurando animes";
+    presenceData.state = "Na lista de animes";
     if (params.get("search") !== "0")
-      data.state = `Procurando por ${params.get("search")}`;
+      presenceData.state = `Procurando por ${params.get("search")}`;
   } else if (page === "/filmes/") {
-    data.details = "Procurando filmes de animes";
-    data.state = "Na lista de filmes de animes";
-    if (params.get("search") !== "0" && params.get("search") !== null)
-      data.state = `Procurando por ${params.get("search")}`;
+    presenceData.details = "Procurando filmes de animes";
+    presenceData.state = "Na lista de filmes de animes";
+    if (params.get("search") !== "0" && params.get("search"))
+      presenceData.state = `Procurando por ${params.get("search")}`;
   } else if (page.includes("/anime/")) {
-    const isEpisode = page.includes("/episodio");
-    if (isEpisode) {
-      const animeTitleWatching =
-          document.querySelector("#anime_title").innerHTML,
-        video = document.querySelector(
-          "#video > div > div > video"
-        ) as HTMLMediaElement,
-        timestamps = presence.getTimestampsfromMedia(video);
-      data.details = "Assistindo um anime";
-      data.state = `${animeTitleWatching}`;
-      data.smallImageKey = "play";
+    if (page.includes("/episodio")) {
+      const video = document.querySelector(
+        "#video > div > div > video"
+      ) as HTMLMediaElement;
+      presenceData.details = "Assistindo um anime";
+      presenceData.state = `${
+        document.querySelector("#anime_title").textContent
+      }`;
+      presenceData.smallImageKey = "play";
       if (video.paused) {
-        delete data.endTimestamp;
-        delete data.startTimestamp;
-        data.smallImageKey = "pause";
+        delete presenceData.endTimestamp;
+        delete presenceData.startTimestamp;
+        presenceData.smallImageKey = "pause";
       }
-      [, data.endTimestamp] = timestamps;
-      data.buttons = [
+      [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+      presenceData.buttons = [
         {
           label: "Assista também",
           url: `https://animes.gg/${page}`
         }
       ];
     } else {
-      const animeTitleAbout =
-          document.querySelector(".ani_titulo > h1").innerHTML,
-        animeTitleFull = document.querySelector(
+      const animeTitleFull = document.querySelector(
           ".ani_titulo_original"
-        ).innerHTML,
-        showFullName = await presence.getSetting("fullName");
-      data.details = "Vendo sobre um anime";
+        ).textContent,
+        showFullName = await presence.getSetting<boolean>("fullName");
+      presenceData.details = "Vendo sobre um anime";
       if (showFullName && animeTitleFull)
-        data.state = `Vendo sobre ${animeTitleFull}`;
-      else data.state = `Vendo sobre ${animeTitleAbout}`;
+        presenceData.state = `Vendo sobre ${animeTitleFull}`;
+      else {
+        presenceData.state = `Vendo sobre ${
+          document.querySelector(".ani_titulo > h1").textContent
+        }`;
+      }
     }
   } else if (page.startsWith("/usuario")) {
-    const username = document.querySelector(".profile-name").innerHTML;
-    data.details = "Vendo a página de um usuário";
-    data.state = `Vendo a página do ${username}`;
+    presenceData.details = "Vendo a página de um usuário";
+    presenceData.state = `Vendo a página do ${
+      document.querySelector(".profile-name").textContent
+    }`;
   } else if (page.startsWith("/filme")) {
-    const animeTitleAbout =
-        document.querySelector(".ani_titulo > h1").innerHTML,
-      animeTitleFull = document.querySelector(".ani_titulo_original").innerHTML,
-      showFullName = await presence.getSetting("fullName"),
+    const animeTitleFull = document.querySelector(
+        ".ani_titulo_original"
+      ).textContent,
+      showFullName = await presence.getSetting<boolean>("fullName"),
       video = document.querySelector(
         "#video > div > div > video"
-      ) as HTMLMediaElement,
-      timestamps = presence.getTimestampsfromMedia(video);
-    data.details = "Assistindo um filme de anime";
-    if (showFullName && animeTitleFull) data.state = `${animeTitleFull}`;
-    else data.state = `${animeTitleAbout}`;
-    [, data.endTimestamp] = timestamps;
-    data.buttons = [
+      ) as HTMLMediaElement;
+    presenceData.details = "Assistindo um filme de anime";
+    if (showFullName && animeTitleFull)
+      presenceData.state = `${animeTitleFull}`;
+    else {
+      presenceData.state = `${
+        document.querySelector(".ani_titulo > h1").textContent
+      }`;
+    }
+    [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+    presenceData.buttons = [
       {
         label: "Assista também",
         url: `https://animes.gg/${page}`
       }
     ];
-    data.smallImageKey = "play";
+    presenceData.smallImageKey = "play";
     if (video.paused) {
-      delete data.endTimestamp;
-      delete data.startTimestamp;
-      data.smallImageKey = "pause";
+      delete presenceData.endTimestamp;
+      delete presenceData.startTimestamp;
+      presenceData.smallImageKey = "pause";
     }
   } else if (page.startsWith("/genero")) {
-    data.details = "Procurando um gênero de anime";
-    data.state = `Procurando ${page.substring("/genero/".length).slice(0, -1)}`;
+    presenceData.details = "Procurando um gênero de anime";
+    presenceData.state = `Procurando ${page
+      .substring("/genero/".length)
+      .slice(0, -1)}`;
   } else if (page.startsWith("/lancamentos")) {
-    data.details = "Vendo os ultimos lançamentos no site";
-    data.state = "Vendo...";
+    presenceData.details = "Vendo os ultimos lançamentos no site";
+    presenceData.state = "Vendo...";
   }
 
-  if (data.details && data.state) presence.setActivity(data);
+  if (presenceData.details && presenceData.state)
+    presence.setActivity(presenceData);
   else presence.setActivity();
 });

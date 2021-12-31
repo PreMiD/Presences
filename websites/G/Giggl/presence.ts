@@ -12,25 +12,24 @@ async function getStrings() {
       reading: "general.readingAbout",
       browsing: "general.browsing"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "lg"
     },
-    privacy = await presence.getSetting("privacy"),
-    newLang = await presence.getSetting("lang").catch(() => "en"),
-    timestamps = await presence.getSetting("time");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+    timestamps = await presence.getSetting<boolean>("time");
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (document.location.hostname === "giggl.app") {
@@ -52,7 +51,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "In a Portal";
       [presenceData.state] = document
         .querySelector("title")
-        .innerText.split(" • ");
+        .textContent.split(" • ");
     } else if (document.querySelector("svg.feather.feather-phone-missed")) {
       presenceData.smallImageKey = "call";
       presenceData.smallImageText = (await strings).call;

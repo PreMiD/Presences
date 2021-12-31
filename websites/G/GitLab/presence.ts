@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "709526684428271687"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let owner, title, presenceprivate;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
-    lock = await presence.getSetting("lock");
+    lock = await presence.getSetting<boolean>("lock");
   presenceprivate = document.querySelector(
     "div.d-inline-flex.align-items-baseline > h1 > span"
   );
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
         "#dashboard_search"
       ) as HTMLTextAreaElement;
       presenceData.details = "Searching";
-      presenceData.state = title.value;
+      presenceData.state = title.textContent;
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
     } else {
@@ -75,21 +75,19 @@ presence.on("UpdateData", async () => {
       ) {
         presenceData.details = "Viewing a Private Presence";
         presenceData.state = "or Private Group";
-      } else {
-        if (title && owner) {
-          presenceData.details = title.innerText;
-          presenceData.state = owner.innerText;
-        } else if (title === null && owner) {
-          presenceData.details = owner.innerText;
-          presenceData.state = "My Respository";
-        } else if (title === null && owner === null) {
-          owner = document.querySelector(
-            "#content-body > div.user-profile > div.cover-block.user-cover-block > div.profile-header > div.user-info > p > span:nth-child(1)"
-          ) as HTMLTextAreaElement;
-          presenceData.details = "Viewing:";
-          presenceData.state = owner.innerText;
-        } else presenceData.details = "Viewing Unknown";
-      }
+      } else if (title && owner) {
+        presenceData.details = title.textContent;
+        presenceData.state = owner.textContent;
+      } else if (title === null && owner) {
+        presenceData.details = owner.textContent;
+        presenceData.state = "My Respository";
+      } else if (title === null && owner === null) {
+        owner = document.querySelector(
+          "#content-body > div.user-profile > div.cover-block.user-cover-block > div.profile-header > div.user-info > p > span:nth-child(1)"
+        ) as HTMLTextAreaElement;
+        presenceData.details = "Viewing:";
+        presenceData.state = owner.textContent;
+      } else presenceData.details = "Viewing Unknown";
     }
   } else if (window.location.hostname === "about.gitlab.com") {
     if (document.location.pathname === "/")
@@ -134,7 +132,7 @@ presence.on("UpdateData", async () => {
   } else presenceData.details = "Viewing Unknown";
   if (!presenceData.details) {
     //This will fire if you do not set presence details
-    presence.setTrayTitle();
+
     presence.setActivity();
   } else {
     //This will fire if you set presence details

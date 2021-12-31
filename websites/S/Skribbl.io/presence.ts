@@ -7,34 +7,27 @@ async function getStrings() {
       buttonJoinGame: "kahoot.buttonJoinGame",
       viewHome: "general.viewHome"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    inGame =
-      document.querySelector("#containerGamePlayers").textContent === ""
-        ? false
-        : true,
-    inLobby =
-      document.querySelector("#round").textContent === "" ? false : true,
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang").catch(() => "en");
+    buttons = await presence.getSetting<boolean>("buttons"),
+    newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+    round = document.querySelector("#round").textContent;
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
-  if (inGame && !inLobby) {
-    const round = document.querySelector("#round").textContent;
+  if (document.querySelector("#containerGamePlayers").textContent && !round) {
     presenceData.details = round;
     if (buttons) {
       presenceData.buttons = [

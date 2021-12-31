@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "658230518520741915"
   }),
-  startsTime = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   getStrings = async () =>
     presence.getStrings(
       {
@@ -17,11 +17,11 @@ const presence = new Presence({
         viewPage: "general.viewPage",
         viewSeries: "general.buttonViewSeries"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting<string>("lang")
     );
 
 let oldLang: string = null,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   VideoMedia: MediaData = {
     duration: 0,
     currentTime: 0,
@@ -46,31 +46,29 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
   const path = document.location.pathname,
-    newLang = await presence.getSetting("lang"),
-    IPlayer: IPlayerData = await presence.getPageletiable(
-      "__IPLAYER_REDUX_STATE__"
-    ),
-    soundData: SoundData = await presence.getPageletiable(
-      "__PRELOADED_STATE__"
-    ),
-    buttonsE = await presence.getSetting("buttons"),
-    showSearchQuery = await presence.getSetting("search");
+    [newLang, IPlayer, soundData, buttonsE, showSearchQuery] =
+      await Promise.all([
+        presence.getSetting<string>("lang"),
+        presence.getPageletiable<IPlayerData>("__IPLAYER_REDUX_STATE__"),
+        presence.getPageletiable<SoundData>("__PRELOADED_STATE__"),
+        presence.getSetting<boolean>("buttons"),
+        presence.getSetting<boolean>("search")
+      ]);
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   let presenceData: PresenceData = {
     largeImageKey: "bbc_logo",
-    details: (await strings).browse,
-    startTimestamp: startsTime
+    details: strings.browse,
+    startTimestamp: browsingTimestamp
   };
 
   if (path.includes("/iplayer")) {
     presenceData.largeImageKey = "bbciplayer_logo";
-    presenceData.details = (await strings).browse;
+    presenceData.details = strings.browse;
 
     if (path.includes("/iplayer/episode")) {
       if (!VideoMedia.duration) {
@@ -80,10 +78,10 @@ presence.on("UpdateData", async () => {
 
           presenceData.smallImageKey = "live";
         } else if (!IPlayer.channel) {
-          presenceData.details = (await strings).viewPage;
+          presenceData.details = strings.viewPage;
           presenceData.state = (IPlayer.episode || IPlayer.header).title;
 
-          presenceData.startTimestamp = startsTime;
+          presenceData.startTimestamp = browsingTimestamp;
         }
       } else {
         const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -108,19 +106,19 @@ presence.on("UpdateData", async () => {
         presenceData.endTimestamp = endTimestamp;
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
 
         if (IPlayer.relatedEpisodes?.count) {
           presenceData.buttons = [
             {
-              label: (await strings).viewEpisode,
+              label: strings.viewEpisode,
               url: `https://www.bbc.co.uk/iplayer/episode/${
                 document.location.pathname.split("/")[3]
               }`
             },
             {
-              label: (await strings).viewSeries,
+              label: strings.viewSeries,
               url: `https://www.bbc.co.uk/iplayer/episode/${IPlayer.relatedEpisodes.episodes[0].episode.id}`
             }
           ];
@@ -128,8 +126,8 @@ presence.on("UpdateData", async () => {
           presenceData.buttons = [
             {
               label: presenceData.state.toLocaleLowerCase().includes("film")
-                ? (await strings).viewMovie
-                : (await strings).viewEpisode,
+                ? strings.viewMovie
+                : strings.viewEpisode,
               url: `https://www.bbc.co.uk/iplayer/episode/${
                 document.location.pathname.split("/")[3]
               }`
@@ -145,7 +143,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/sounds")) {
     presenceData.largeImageKey = "bbcsounds_logo";
-    presenceData.details = (await strings).browse;
+    presenceData.details = strings.browse;
 
     if (path.includes("/play/")) {
       const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -168,8 +166,8 @@ presence.on("UpdateData", async () => {
 
       presenceData.smallImageText =
         SoundMedia.paused || !SoundMedia.duration
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
 
       presenceData.startTimestamp = startTimestamp;
       presenceData.endTimestamp = endTimestamp;
@@ -188,26 +186,23 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/sport")) {
     presenceData.largeImageKey = "bbcsport_logo";
-    presenceData.details = (await strings).browse;
+    presenceData.details = strings.browse;
     presenceData.smallImageKey = "reading";
 
-    const title = document.querySelector("h1")?.textContent,
-      selectedMenu = document.querySelector(
-        "li.sp-c-sport-navigation__item.sp-c-sport-navigation__item--secondary-selected"
-      )?.textContent;
+    const title = document.querySelector("h1")?.textContent;
 
     if (path.includes("/sport/formula1")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = "Formula 1";
 
       if (path.includes("/latest")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/standings")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/sport/formula1/")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -216,7 +211,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       } else if (path.includes("/formula1/")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -226,17 +221,17 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (path.includes("/sport/football")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = "Football";
 
       if (path.includes("/averages")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/teams/")) {
-        presenceData.details = (await strings).viewTeam;
+        presenceData.details = strings.viewTeam;
         presenceData.state = title;
       } else if (path.includes("/gossip")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -245,7 +240,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       } else if (path.includes("/transfers")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -254,19 +249,19 @@ presence.on("UpdateData", async () => {
           }
         ];
       } else if (path.includes("/top-scorers")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/womens")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = "Women's Cricket";
       } else if (path.includes("/leagues-cups")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/european")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = "European's Cricket";
       } else if (path.includes("/football/")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -276,39 +271,44 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (path.includes("/sport/cricket")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = "Cricket";
 
       presenceData.smallImageText = "Cricket";
       if (path.includes("/averages")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/teams/")) {
-        presenceData.details = (await strings).viewTeam;
+        presenceData.details = strings.viewTeam;
         presenceData.state = title;
         presenceData.smallImageText = "Cricket Team";
-      } else if (selectedMenu === "Squad") {
-        presenceData.details = (await strings).viewPage;
+      } else if (
+        document.querySelector(
+          "li.sp-c-sport-navigation__item.sp-c-sport-navigation__item--secondary-selected"
+        )?.textContent === "Squad"
+      ) {
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/counties")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/womens")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = "Women's Cricket";
       } else if (path.includes("/scorecard/")) {
         presenceData.details = "Viewing scoredcard of:";
 
-        const Team1 = document.querySelector(
+        presenceData.state = `${
+          document.querySelector(
             "span.sp-c-fixture__team.sp-c-fixture__team--time.sp-c-fixture__team--time-home.gel-long-primer > span > span"
-          )?.textContent,
-          Team2 = document.querySelector(
+          )?.textContent
+        } & ${
+          document.querySelector(
             "div.sp-c-fixture__wrapper > span.sp-c-fixture__team.sp-c-fixture__team--time.sp-c-fixture__team--time-away.gel-long-primer > span > span"
-          )?.textContent;
-
-        presenceData.state = `${Team1} & ${Team2}`;
+          )?.textContent
+        }`;
       } else if (path.includes("/sport/cricket/")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -318,17 +318,17 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (path.includes("/rugby-union")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = "Rugby Union";
 
       presenceData.smallImageText = "Rugby Union";
 
       if (path.includes("/teams/")) {
-        presenceData.details = (await strings).viewTeam;
+        presenceData.details = strings.viewTeam;
         presenceData.state = title;
         presenceData.smallImageText = "Rugby Union Team";
       } else if (path.includes("/rugby-union/")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -338,19 +338,19 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (path.includes("/tennis")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = "Tennis";
 
       presenceData.smallImageText = "Tennis";
 
       if (path.includes("/live-scores")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/order-of-play")) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = title;
       } else if (path.includes("/tennis/")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -360,13 +360,13 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (path.includes("/golf")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = "Golf";
 
       presenceData.smallImageText = "Golf";
 
       if (path.includes("/athletics/")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -376,13 +376,13 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (path.includes("/cycling")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = "Cycling";
 
       presenceData.smallImageText = "Cycling";
 
       if (path.includes("/cycling/")) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
         presenceData.buttons = [
           {
@@ -392,7 +392,7 @@ presence.on("UpdateData", async () => {
         ];
       }
     } else if (path.includes("/sport/")) {
-      presenceData.details = (await strings).readingArticle;
+      presenceData.details = strings.readingArticle;
       presenceData.state = title;
       presenceData.buttons = [
         {
@@ -415,8 +415,8 @@ presence.on("UpdateData", async () => {
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
 
         if (VideoMedia.paused) {
           delete presenceData.startTimestamp;
@@ -425,7 +425,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.buttons = [
           {
-            label: (await strings).watchVideo,
+            label: strings.watchVideo,
             url: document.baseURI
           }
         ];
@@ -433,19 +433,19 @@ presence.on("UpdateData", async () => {
     }
 
     if (path.includes("/scores-fixtures")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = title;
     } else if (path.includes("/table")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = title;
     } else if (path.includes("/results")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = title;
     } else if (path.includes("/calendar")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = title;
     } else if (path.includes("/leaderboard")) {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = title;
     } else if (path.includes("/av/")) {
       if (VideoMedia.duration) {
@@ -464,8 +464,8 @@ presence.on("UpdateData", async () => {
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
 
         if (VideoMedia.paused) {
           delete presenceData.startTimestamp;
@@ -474,7 +474,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.buttons = [
           {
-            label: (await strings).watchVideo,
+            label: strings.watchVideo,
             url: document.baseURI
           }
         ];
@@ -482,41 +482,36 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/weather")) {
     presenceData.largeImageKey = "bbcweather_logo";
-    presenceData.details = (await strings).browse;
+    presenceData.details = strings.browse;
 
-    const searchValue = document.querySelector<HTMLInputElement>(
-        "input.location-search-input__input"
-      )?.value,
-      [location] = document
-        .querySelector("h1#wr-location-name-id")
-        ?.textContent.split(" - ") || [null],
-      title = (
+    const title = (
         document.querySelector("h2#wr-c-regional-forecast-slice__title") ||
         document.querySelector("h1")
-      )?.textContent,
-      time = (
-        document.querySelector("time>span") || document.querySelector("b")
-      )?.textContent,
-      weather = document.querySelector(
-        "div.wr-day-summary > div > span"
       )?.textContent,
       weatherPages: {
         [key: string]: PresenceData;
       } = {
         "/weather/search": {
-          details: (await strings).searchFor,
-          state: searchValue,
+          details: strings.searchFor,
+          state: document.querySelector<HTMLInputElement>(
+            "input.location-search-input__input"
+          )?.value,
           smallImageKey: "search"
         },
         "/weather/map": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Map",
           smallImageKey: "map"
         },
         "/weather/([0-9])": {
           details: "Viewing weather of:",
-          state: location,
-          smallImageText: weather,
+          state:
+            document
+              .querySelector("h1#wr-location-name-id")
+              ?.textContent.split(" - ")[0] || null,
+          smallImageText: document.querySelector(
+            "div.wr-day-summary > div > span"
+          )?.textContent,
           smallImageKey: "reading",
           buttons: [
             {
@@ -526,7 +521,7 @@ presence.on("UpdateData", async () => {
           ]
         },
         "/weather/features/([0-9])": {
-          details: (await strings).readingArticle,
+          details: strings.readingArticle,
           state: title,
           smallImageKey: "reading",
           buttons: [
@@ -549,15 +544,17 @@ presence.on("UpdateData", async () => {
         );
 
         presenceData.details = title;
-        presenceData.state = time;
+        presenceData.state = (
+          document.querySelector("time>span") || document.querySelector("b")
+        )?.textContent;
 
         presenceData.startTimestamp = startTimestamp;
         presenceData.endTimestamp = endTimestamp;
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
 
         if (VideoMedia.paused) {
           delete presenceData.startTimestamp;
@@ -567,7 +564,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/news")) {
     presenceData.largeImageKey = "bbcnews_logo";
-    presenceData.details = (await strings).browse;
+    presenceData.details = strings.browse;
     presenceData.smallImageKey = "reading";
 
     const title = document.querySelector("h1")?.textContent,
@@ -575,15 +572,15 @@ presence.on("UpdateData", async () => {
         [key: string]: PresenceData;
       } = {
         "/have_your_say": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Your Coronavirus Stories"
         },
         "/coronavirus": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Coronavirus pandemic"
         },
         "(-|/)([0-9])": {
-          details: (await strings).readingArticle,
+          details: strings.readingArticle,
           state: title,
           buttons: [
             {
@@ -593,51 +590,51 @@ presence.on("UpdateData", async () => {
           ]
         },
         "/in_pictures": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "In Pictures"
         },
         "/reality_check": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Reality Check"
         },
         "/the_reporters": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Long Reads"
         },
         "/newsbeat": {
-          details: (await strings).readingArticle,
+          details: strings.readingArticle,
           state: "Newsbeat"
         },
         "/blogs": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Blogs"
         },
         "/technology": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Technology news"
         },
         "/science-environment": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Technology news"
         },
         "/stories": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Stories"
         },
         "/entertainment_and_arts": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Entertainment and arts"
         },
         "/health": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Health news"
         },
         "/world": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "World news"
         },
         "/business": {
-          details: (await strings).viewPage,
+          details: strings.viewPage,
           state: "Business news"
         }
       };
@@ -651,7 +648,7 @@ presence.on("UpdateData", async () => {
         presenceData = { ...presenceData, ...value };
         break;
       } else if (path.includes("/world/") && !VideoMedia.duration) {
-        presenceData.details = (await strings).viewPage;
+        presenceData.details = strings.viewPage;
         presenceData.state = "World News";
       } else if (VideoMedia.duration) {
         const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -667,8 +664,8 @@ presence.on("UpdateData", async () => {
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
-          ? (await strings).pause
-          : (await strings).play;
+          ? strings.pause
+          : strings.play;
 
         if (VideoMedia.paused) {
           delete presenceData.startTimestamp;
@@ -677,12 +674,12 @@ presence.on("UpdateData", async () => {
 
         presenceData.buttons = [
           {
-            label: (await strings).watchVideo,
+            label: strings.watchVideo,
             url: document.baseURI
           }
         ];
       } else if (path.match(/(-[0-9])/)) {
-        presenceData.details = (await strings).readingArticle;
+        presenceData.details = strings.readingArticle;
         presenceData.state = title;
 
         presenceData.buttons = [
@@ -694,16 +691,14 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (path === "/search") {
-    const searchValue =
+    presenceData.details = strings.searchFor;
+    presenceData.state =
       document.querySelector<HTMLInputElement>("#search-input")?.value;
-
-    presenceData.details = (await strings).searchFor;
-    presenceData.state = searchValue;
     presenceData.smallImageKey = "search";
   }
 
   if (!buttonsE) delete presenceData.buttons;
-  if (presenceData.details === (await strings).searchFor && !showSearchQuery)
+  if (presenceData.details === strings.searchFor && !showSearchQuery)
     presenceData.state = "(Hidden)";
 
   presence.setActivity(presenceData);

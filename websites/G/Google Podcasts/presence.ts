@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     },
     podcastTitle =
       document.getElementsByClassName("Ut8Gr").length > 0 &&
-      document.getElementsByClassName("Ut8Gr")[1].innerHTML;
+      document.getElementsByClassName("Ut8Gr")[1].textContent;
 
   if (podcastTitle) {
     presenceData.details = (
@@ -24,13 +24,13 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "play";
       const ts = Math.round(new Date().getTime() / 1000),
         elapsedSeconds = parseLength(
-          document.querySelector(".oG0wpe").children[0].innerHTML
-        ),
-        totalSeconds = parseLength(
-          document.querySelector(".oG0wpe").children[1].innerHTML
+          document.querySelector(".oG0wpe").children[0].textContent
         );
       presenceData.startTimestamp = ts - elapsedSeconds;
-      presenceData.endTimestamp = ts + totalSeconds - elapsedSeconds;
+      presenceData.endTimestamp =
+        ts +
+        parseLength(document.querySelector(".oG0wpe").children[1].textContent) -
+        elapsedSeconds;
     }
   } else if (document.location.pathname === "/")
     presenceData.details = "Browsing Podcasts";
@@ -39,8 +39,8 @@ presence.on("UpdateData", async () => {
     // It's quite tricky to locate the right podcast title because
     // website makes new element for each of them
     for (const element of document.getElementsByClassName("dbCu3e")) {
-      if (element.children[0].innerHTML === document.title)
-        presenceData.state = `${document.title} by ${element.children[1].innerHTML}`;
+      if (element.children[0].textContent === document.title)
+        presenceData.state = `${document.title} by ${element.children[1].textContent}`;
     }
   } else if (document.location.pathname.includes("/subscriptions"))
     presenceData.details = "Browsing Subscriptions";
@@ -49,10 +49,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.location.pathname.replace("/search/", "");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 // Function that convert lengths like 01:13 to seconds like 73

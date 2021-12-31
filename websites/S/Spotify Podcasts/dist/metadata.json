@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -24,15 +24,15 @@
     "support.spotify.com",
     "podcasters.spotify.com"
   ],
-  "version": "2.1.8",
+  "version": "2.2.3",
   "logo": "https://i.imgur.com/q3tKDRA.png",
   "thumbnail": "https://i.imgur.com/AzNhQ4j.png",
   "color": "#1ed760",
+  "category": "music",
   "tags": [
     "audio",
     "podcast"
   ],
-  "category": "music",
   "settings": [
     {
       "id": "lang",
@@ -45,9 +45,15 @@
       "value": false
     },
     {
-      "id": "time",
+      "id": "timestamps",
       "title": "Show timestamps",
       "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "cover",
+      "title": "Show Cover",
+      "icon": "fad fa-images",
       "value": true
     }
   ]

@@ -1,16 +1,16 @@
 const presence = new Presence({
-  clientId: "723474173208297532"
-});
+    clientId: "723474173208297532"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
     },
-    browsingStamp = Math.floor(Date.now() / 1000),
-    privacy = await presence.getSetting("privacy"),
-    button = await presence.getSetting("button");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    button = await presence.getSetting<boolean>("button");
 
-  presenceData.startTimestamp = browsingStamp;
   if (privacy) presenceData.details = "Browsing";
   else if (document.location.hostname === "gunivers.net") {
     if (window.location.pathname.startsWith("/articles")) {
@@ -141,8 +141,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

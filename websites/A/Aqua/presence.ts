@@ -34,9 +34,11 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    changedetails = await presence.getSetting("changedetails"),
-    changestate = await presence.getSetting("changestate"),
-    changesmalltext = await presence.getSetting("changesmalltext");
+    [changeDetails, changeState, changeSmallText] = await Promise.all([
+      presence.getSetting<string>("changedetails"),
+      presence.getSetting<string>("changestate"),
+      presence.getSetting<string>("changesmalltext")
+    ]);
 
   if (lastTitle !== sname) {
     lastTitle = sname;
@@ -54,34 +56,33 @@ presence.on("UpdateData", async () => {
   aqualisteners ??= "Loading...";
 
   if (aquapresenter !== "AutoDJ") {
-    if (changedetails) {
-      presenceData.details = changedetails
+    if (changeDetails) {
+      presenceData.details = changeDetails
         .replace("%song%", sname)
         .replace("%artist%", sartist);
     } else presenceData.details = `🎵 | ${sartist} - ${sname}`;
 
-    if (changestate)
-      presenceData.state = changestate.replace("%presenter%", aquapresenter);
+    if (changeState)
+      presenceData.state = changeState.replace("%presenter%", aquapresenter);
     else presenceData.state = `🎙️ | ${aquapresenter}`;
   } else {
-    if (changedetails) {
-      presenceData.details = changedetails
+    if (changeDetails) {
+      presenceData.details = changeDetails
         .replace("%song%", sname)
         .replace("%artist%", sartist);
     } else presenceData.details = `🎵 | ${sartist} - ${sname}`;
 
-    if (changestate)
-      presenceData.state = changestate.replace("%presenter%", "AutoDJ");
+    if (changeState)
+      presenceData.state = changeState.replace("%presenter%", "AutoDJ");
     else presenceData.state = "🎙️ | " + "AutoDJ";
   }
 
-  if (changesmalltext) {
-    presenceData.smallImageText = changesmalltext.replace(
+  if (changeSmallText) {
+    presenceData.smallImageText = changeSmallText.replace(
       "%listeners%",
       aqualisteners
     );
   } else presenceData.smallImageText = `Listeners: ${aqualisteners}`;
 
   presence.setActivity(presenceData, true);
-  presence.setTrayTitle();
 });

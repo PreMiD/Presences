@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Yuu-San",
     "id": "316989384077475841"
@@ -11,14 +11,14 @@
     "nl": "Bekijk online anime in HD, ondertiteld of nagesynchroniseerd, op je mobiel of computer hier op Goyabu, zonder een online anime-portal!"
   },
   "url": "goyabu.com",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/poILuXD.png",
   "thumbnail": "https://i.imgur.com/Ah8prCg.png",
   "color": "#e53838",
+  "category": "anime",
   "tags": [
     "anime",
     "video",
     "media"
-  ],
-  "category": "anime"
+  ]
 }

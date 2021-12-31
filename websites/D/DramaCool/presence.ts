@@ -25,10 +25,10 @@ const presence = new Presence({
         reading: "general.reading",
         viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     );
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("iFrameData", (data: Data) => {
@@ -49,14 +49,13 @@ presence.on("UpdateData", async () => {
       smallImageKey: "reading",
       startTimestamp: startsTime
     },
-    newLang = await presence.getSetting("lang").catch(() => "en"),
-    showButtons = await presence.getSetting("buttons"),
+    newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
     { pathname } = document.location;
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
@@ -74,12 +73,10 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (pathname.includes("/search")) {
-    const searchType = document.location.search.includes("movies")
+    presenceData.details = (await strings).searchFor;
+    presenceData.state = document.location.search.includes("movies")
       ? "Movies"
       : "Stars";
-
-    presenceData.details = (await strings).searchFor;
-    presenceData.state = searchType;
 
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = (await strings).searching;
@@ -87,10 +84,6 @@ presence.on("UpdateData", async () => {
     ShowData.title = document.querySelector("div.category > a")?.textContent;
 
     if (ShowData.playback) {
-      const timestamps = presence.getTimestamps(
-        ShowData.currentTime,
-        ShowData.duration
-      );
       ShowData.ep = (document.title.match(
         /Episode ?([1-9]?[0-9]?[0-9])?( & )?([1-9]?[0-9]?[0-9])/g
       ) || document.URL.match(/episode-?([1-9]?[0-9]?[0-9])/g))[0].replace(
@@ -106,7 +99,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = ShowData.title;
       presenceData.state = `${(await strings).episode} ${ShowData.ep}`;
 
-      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(ShowData.currentTime, ShowData.duration);
 
       presenceData.buttons = [
         {

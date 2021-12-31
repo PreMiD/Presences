@@ -1,17 +1,17 @@
 const presence = new Presence({
     clientId: "875631338663870485"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "bitchute_logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = location,
     [privacy, buttons, time] = await Promise.all(
-      ["privacy", "buttons", "time"].map(async (setting) => {
-        const s: boolean = await presence.getSetting(setting);
+      ["privacy", "buttons", "time"].map(async setting => {
+        const s = await presence.getSetting<boolean>(setting);
         return s;
       })
     );
@@ -92,8 +92,6 @@ presence.on("UpdateData", async () => {
     )}`;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

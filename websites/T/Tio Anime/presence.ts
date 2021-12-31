@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "896323132871299103"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
   duration: 0,
@@ -19,10 +19,10 @@ presence.on(
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "tioanimelogo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (document.location.pathname === "/")
     presenceData.details = "En la página de inicio";
@@ -87,8 +87,6 @@ presence.on("UpdateData", async () => {
       break;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

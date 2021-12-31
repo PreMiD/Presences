@@ -4,6 +4,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 const presence = new Presence({
     clientId: "854999470357217290"
   }),
+  // TODO: Add multiLang
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
@@ -17,8 +18,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "zdf"
     },
-    path = location.pathname.replace(/\/?$/, "/"),
-    video: HTMLVideoElement = document.querySelector(
+    video = document.querySelector<HTMLVideoElement>(
       "div.zdfplayer-video_wrapper video"
     );
 
@@ -27,17 +27,14 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (video !== null) {
-    if (path.startsWith("/live-tv")) {
+  if (video) {
+    if (location.pathname.startsWith("/live-tv")) {
       // Livestream
-      const liveVideo: HTMLVideoElement = document.querySelector(
-          "div.item.livetv-item.js-livetv-scroller-cell.m-activated-done.m-activated.m-active.m-active-done div figure div video"
-        ),
-        mediathekLivechannel = document
-          .querySelector(
+      const mediathekLivechannel = document
+          .querySelector<HTMLHeadingElement>(
             "div.item.livetv-item.js-livetv-scroller-cell.m-active-done.m-activated-done.m-activated.m-active h2[class='visuallyhidden']"
           )
-          .innerHTML.replace(/ {2}/g, " ")
+          .textContent.replace(/ {2}/g, " ")
           .replace(/ im Livestream/g, "")
           .replace(/ Livestream/g, ""),
         videoInfoResults = document.getElementsByClassName(
@@ -47,32 +44,35 @@ presence.on("UpdateData", async () => {
       let videoInfoTag = null;
       for (let i = 0; i < videoInfoResults.length; i++) {
         if (
-          videoInfoResults[i].innerHTML
+          videoInfoResults[i].textContent
             .toLowerCase()
             .includes(` ${mediathekLivechannel.toLowerCase()} `) ||
-          videoInfoResults[i].innerHTML
+          videoInfoResults[i].textContent
             .toLowerCase()
             .includes(`>${mediathekLivechannel.toLowerCase()}<`)
         ) {
-          videoInfoTag = videoInfoResults[i].innerHTML;
+          videoInfoTag = videoInfoResults[i].textContent;
           break;
         }
       }
-      const videoTitle = videoInfoTag
-        .substring(videoInfoTag.lastIndexOf(">") + 1, videoInfoTag.length - 1)
-        .trim();
 
       presenceData.largeImageKey = mediathekLivechannel.toLowerCase();
       presenceData.smallImageKey = "live";
       presenceData.smallImageText = "Live";
       presenceData.details = `${mediathekLivechannel} Live`;
-      presenceData.state = videoTitle;
+      presenceData.state = videoInfoTag
+        .substring(videoInfoTag.lastIndexOf(">") + 1, videoInfoTag.length - 1)
+        .trim();
       presenceData.startTimestamp = elapsed;
       presenceData.buttons = [
         { label: (await strings).buttonWatchStream, url: prevUrl }
       ];
 
-      if (liveVideo.paused) {
+      if (
+        document.querySelector<HTMLVideoElement>(
+          "div.item.livetv-item.js-livetv-scroller-cell.m-activated-done.m-activated.m-active.m-active-done div figure div video"
+        ).paused
+      ) {
         presenceData.smallImageKey = "pause";
         presenceData.smallImageText = (await strings).pause;
         presenceData.startTimestamp = 0;
@@ -86,27 +86,25 @@ presence.on("UpdateData", async () => {
 
       const videoInfoTag = document.querySelector(
           ".zdfplayer-teaser-title"
-        ).innerHTML,
+        ).textContent,
         showTitleTag = videoInfoTag.substring(
           videoInfoTag.indexOf(">") + 1,
           videoInfoTag.lastIndexOf("<")
-        ),
-        episodeTitle = videoInfoTag
-          .substring(videoInfoTag.lastIndexOf(">") + 1, videoInfoTag.length - 1)
-          .trim(),
-        timestamps = presence.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
         );
 
-      presenceData.state = episodeTitle;
+      presenceData.state = videoInfoTag
+        .substring(videoInfoTag.lastIndexOf(">") + 1, videoInfoTag.length - 1)
+        .trim();
       presenceData.details = showTitleTag.includes("|")
         ? showTitleTag.substring(
             showTitleTag.indexOf("|") + 1,
             showTitleTag.length
           )
         : showTitleTag;
-      [, presenceData.endTimestamp] = timestamps;
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       presenceData.buttons = [
         { label: (await strings).buttonWatchVideo, url: prevUrl }
       ];
@@ -124,8 +122,6 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,37 +1,33 @@
 const presence = new Presence({
     clientId: "803366782722244638"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "glogo"
+      largeImageKey: "glogo",
+      startTimestamp: browsingTimestamp
     },
-    privacyDraw = await presence.getSetting("privacyDraw"),
-    privacyAlbum = await presence.getSetting("privacyAlbum");
+    privacyDraw = await presence.getSetting<boolean>("privacyDraw"),
+    privacyAlbum = await presence.getSetting<boolean>("privacyAlbum");
 
   if (window.location.hostname.includes("garticphone")) {
-    if (window.location.pathname.endsWith("lobby")) {
-      presenceData.startTimestamp = browsingStamp;
+    if (window.location.pathname.endsWith("lobby"))
       presenceData.details = "Awaiting the launch of the game...";
-    } else if (window.location.pathname.endsWith("start")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (window.location.pathname.endsWith("start"))
       presenceData.details = "Start a story";
-    } else if (window.location.pathname.endsWith("draw")) {
-      presenceData.startTimestamp = browsingStamp;
-      if (privacyDraw === true) presenceData.details = "Drawing...";
+    else if (window.location.pathname.endsWith("draw")) {
+      if (privacyDraw) presenceData.details = "Drawing...";
       else {
         presenceData.details = "Drawing:";
         presenceData.state = `${
           document.querySelector(".jsx-1934821697 h3").textContent
         }`;
       }
-    } else if (window.location.pathname.endsWith("write")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (window.location.pathname.endsWith("write"))
       presenceData.details = "Writing...";
-    } else if (window.location.pathname.endsWith("book")) {
-      presenceData.startTimestamp = browsingStamp;
-      if (privacyAlbum === true) presenceData.details = "Look at the album";
+    else if (window.location.pathname.endsWith("book")) {
+      if (privacyAlbum) presenceData.details = "Look at the album";
       else {
         presenceData.details = "Look at the album of:";
         presenceData.state = `${
@@ -39,13 +35,10 @@ presence.on("UpdateData", async () => {
         }`;
       }
     } else {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing the home page";
-      presenceData.endTimestamp; // Reset timestamp if not in game
+      delete presenceData.endTimestamp;
     }
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

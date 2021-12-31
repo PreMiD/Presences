@@ -1,19 +1,19 @@
 const presence = new Presence({
     clientId: "860131264034897951"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
   const setting = {
-      timeElapsed: await presence.getSetting("timeElapsed"),
-      showButtons: await presence.getSetting("showButtons")
+      timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
+      showButtons: await presence.getSetting<boolean>("showButtons")
     },
     urlpath = window.location.pathname.split("/"),
     presenceData: PresenceData = {
       largeImageKey: "logo"
     };
 
-  if (setting.timeElapsed) presenceData.startTimestamp = browsingStamp;
+  if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (!urlpath[1]) presenceData.details = "Home";
   else if (
@@ -88,21 +88,21 @@ presence.on("UpdateData", async function () {
   }
 
   function checkPublic(q: string, a: string) {
-    const url = window.location.hostname,
-      wl = (() => {
+    const url = window.location.hostname;
+
+    return (
+      document.querySelector(q).getAttribute(a).toLowerCase() ===
+      (() => {
         if (url === "www.komoot.com") return "visible to: anyone";
         else if (url === "www.komoot.de") return "sichtbar: für alle";
         else if (url === "www.komoot.fr") return "visible par : tout le monde";
         else if (url === "www.komoot.it") return "visibile a: tutti";
         else if (url === "www.komoot.es") return "visible para todo el mundo";
         else if (url === "www.komoot.nl") return "zichtbaar voor: iedereen";
-      })();
-
-    return document.querySelector(q).getAttribute(a).toLowerCase() === wl;
+      })()
+    );
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

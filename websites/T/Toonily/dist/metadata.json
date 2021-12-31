@@ -1,27 +1,27 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Toonily",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "वाह्य",
     "id": "819696394180100106"
   },
-  "category": "other",
+  "service": "Toonily",
+  "description": {
+    "en": "Read your favorite Manhua and Manhwa translated to English for free. Read Manga, Manhua, Manhwa Online, Free webtoon Online, Updated Daily!"
+  },
+  "url": [
+    "toonily.net",
+    "toonily.com"
+  ],
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/kKn9z4w.png",
   "thumbnail": "https://i.imgur.com/mTFbSCz.png",
-  "version": "1.1.3",
   "color": "#2f063e",
+  "category": "other",
   "tags": [
     "manga",
     "english-translation",
     "manhwa"
   ],
-  "url": [
-    "toonily.net",
-    "toonily.com"
-  ],
-  "description": {
-    "en": "Read your favorite Manhua and Manhwa translated to English for free. Read Manga, Manhua, Manhwa Online, Free webtoon Online, Updated Daily!"
-  },
   "iframe": true,
   "settings": [
     {

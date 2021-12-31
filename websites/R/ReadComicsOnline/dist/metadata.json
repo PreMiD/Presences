@@ -1,23 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "ReadComicsOnline",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "वाह्य",
     "id": "819696394180100106"
   },
-  "category": "other",
+  "service": "ReadComicsOnline",
+  "description": {
+    "en": "Read comics online in high quality. Free download high quality comics."
+  },
+  "url": "readcomiconline.li",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/rOrdlzw.png",
   "thumbnail": "https://i.imgur.com/EuVcqxz.png",
-  "version": "1.0.4",
   "color": "#6a0722",
+  "category": "other",
   "tags": [
     "comics",
     "online-reader"
   ],
-  "url": "readcomiconline.li",
-  "description": {
-    "en": "Read comics online in high quality. Free download high quality comics."
-  },
   "settings": [
     {
       "id": "buttons",

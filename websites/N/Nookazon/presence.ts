@@ -32,8 +32,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "icon",
       startTimestamp: elapsed
     },
-    useChatNames: boolean = await presence.getSetting("useChatNames"),
-    urlVars = new URLSearchParams(document.location.search);
+    useChatNames = await presence.getSetting<boolean>("useChatNames");
 
   let department: string,
     category: string,
@@ -85,15 +84,17 @@ presence.on("UpdateData", async () => {
         category = "";
       }
       try {
-        tag = urlVars.get("tag").capitalize();
+        tag = new URLSearchParams(document.location.search)
+          .get("tag")
+          .capitalize();
       } catch {
         tag = "";
       }
       try {
-        const element = document.querySelector(
-          ".search-diy-filter"
-        ) as HTMLInputElement;
-        diy = element.checked;
+        diy =
+          document.querySelector<HTMLInputElement>(
+            ".search-diy-filter"
+          ).checked;
       } catch {
         diy = false;
       }
@@ -127,7 +128,7 @@ presence.on("UpdateData", async () => {
       break;
     case "chat":
       presenceData.details = "Viewing Chats";
-      if (document.querySelector(".chat-info") !== null) {
+      if (document.querySelector(".chat-info")) {
         if (useChatNames) {
           presenceData.state = `Chatting With ${document
             .querySelector(".chat-info")

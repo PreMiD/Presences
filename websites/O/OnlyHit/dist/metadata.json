@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "a6d",
     "id": "523890815291097129"
@@ -10,33 +10,27 @@
       "id": "241278257335500811"
     }
   ],
-  "url": [
-    "onlyhit.us",
-    "onlyhit.merchforall.com"
-  ],
+  "service": "OnlyHit",
   "description": {
     "en": "OnlyHit is your online music radio station made to play your best hits 24/7 and to make you discover your future hits first.",
     "nl": "OnlyHit is jouw online muziek radiostation, gemaakt om je de beste hits 24/7 af te spelen en om je als eerste de toekomstige hits te laten ontdekken."
   },
-  "service": "OnlyHit",
-  "version": "1.1.5",
+  "url": [
+    "onlyhit.us",
+    "onlyhit.merchforall.com"
+  ],
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/vyiCjQz.png",
   "thumbnail": "https://i.imgur.com/x5Jpq7I.png",
   "color": "#C1272D",
+  "category": "music",
   "tags": [
     "onlyhit",
     "radio",
     "music",
     "station"
   ],
-  "category": "music",
   "settings": [
-    {
-      "id": "sInfo",
-      "title": "Show site infomation",
-      "icon": "fas fa-info",
-      "value": true
-    },
     {
       "id": "tElapsed",
       "title": "Show time elapsed",
@@ -57,6 +51,5 @@
       "value": "by %artist%",
       "placeholder": "use %song% or %artist%"
     }
-  ],
-  "button": false
+  ]
 }

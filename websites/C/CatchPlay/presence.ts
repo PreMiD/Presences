@@ -8,15 +8,15 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "cp"
     },
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (document.location.pathname.includes("/watch")) {
     const video: HTMLVideoElement = document.querySelector(".player-box video");
     if (buttons) {
-      data.buttons = [
+      presenceData.buttons = [
         {
           label: "Watch",
           url: document.URL
@@ -25,30 +25,31 @@ presence.on("UpdateData", async () => {
     }
     if (video && !isNaN(video.duration)) {
       if (document.querySelector(".CPplayer-header-subtitle")) {
-        data.state = ` ${
+        presenceData.state = ` ${
           document.querySelector(".CPplayer-header-subtitle").textContent
         }`;
-      } else data.state = "Movie";
+      } else presenceData.state = "Movie";
 
-      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
-      data.details = ` ${
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
+      presenceData.details = ` ${
         document.querySelector(".CPplayer-header-title span").textContent
       }`;
-      (data.smallImageKey = video.paused ? "pause" : "play"),
-        (data.smallImageText = video.paused
+      (presenceData.smallImageKey = video.paused ? "pause" : "play"),
+        (presenceData.smallImageText = video.paused
           ? (await strings).pause
           : (await strings).play);
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
-      presence.setActivity(data, !video.paused);
+      presence.setActivity(presenceData, !video.paused);
     }
   } else {
-    data.details = (await strings).browsing;
-    presence.setActivity(data);
+    presenceData.details = (await strings).browsing;
+    presence.setActivity(presenceData);
   }
 });

@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     //Uploads
     const subCount =
         document.querySelector(".simplebar-content")?.children.length,
-      showCount = await presence.getSetting("subscriptions");
+      showCount = await presence.getSetting<boolean>("subscriptions");
 
     presenceData.details = "Vieweing uploads";
 
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
   } else if (page === "support") {
     //Support Pages
     const searchTerm = (document.querySelector("#search") as HTMLInputElement)
-        .value,
+        .textContent,
       faqCount = document.querySelectorAll(".question-answer").length;
 
     presenceData.details = "Viewing FAQ";
@@ -159,25 +159,21 @@ presence.on("UpdateData", async () => {
     ];
   } else if (page === "post") {
     //Video
-    const title = document.querySelector(".title-text")?.textContent,
-      channel = document.querySelector(".channel-title")?.textContent,
-      channelURL = (
-        document.querySelector(".channel-title") as HTMLLinkElement
-      )?.href.toLowerCase(),
-      video = document.querySelector("video") as HTMLVideoElement;
+    const video = document.querySelector("video") as HTMLVideoElement;
 
     //Wait for page to load
     if (!video) return;
-
-    const timestamps = presence.getTimestampsfromMedia(video),
-      [, endTS] = timestamps;
-
     delete presenceData.startTimestamp;
 
-    presenceData.details = title;
-    presenceData.state = channel;
-    presenceData.largeImageKey = channelURL?.split("/").slice(-1)[0];
-    presenceData.endTimestamp = endTS;
+    presenceData.details = document.querySelector(".title-text")?.textContent;
+    presenceData.state = document.querySelector(".channel-title")?.textContent;
+    presenceData.largeImageKey = (
+      document.querySelector(".channel-title") as HTMLLinkElement
+    )?.href
+      .toLowerCase()
+      ?.split("/")
+      .slice(-1)[0];
+    [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
     presenceData.buttons = [
@@ -197,12 +193,10 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  const showButtons = await presence.getSetting("buttons");
+  const showButtons = await presence.getSetting<boolean>("buttons");
 
   if (!showButtons) delete presenceData.buttons;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

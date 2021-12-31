@@ -2,22 +2,23 @@ const presence = new Presence({
     clientId: "858246998561783828"
   }),
   slideshow = presence.createSlideshow(),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   difficulty: Record<number, string> = {
     2: "Easy",
     3: "Normal",
     4: "Hard",
     5: "Extreme"
   };
+
 interface Song {
-  // eslint-disable-next-line camelcase
   category_id: number;
   id: number;
   title: string;
-  // eslint-disable-next-line camelcase
+
   title_lang: Record<string, string>;
   category: string;
 }
+/* eslint-enable camelcase */
 
 let selectedSong: Song = null,
   lastId = -1,
@@ -29,8 +30,10 @@ async function getSongIndex(multiplayer: boolean) {
   if (multiplayer) {
     try {
       presence
-        .getPageletiable('p2"]["lastMessages"]["songsel"]["value"]["song')
-        .then((res: number) => {
+        .getPageletiable<number>(
+          'p2"]["lastMessages"]["songsel"]["value"]["song'
+        )
+        .then(res => {
           songIndex = res;
         });
     } catch (e) {
@@ -40,7 +43,7 @@ async function getSongIndex(multiplayer: boolean) {
 }
 
 async function getSongs() {
-  presence.getPageletiable('assets"]["songs').then((res) => {
+  presence.getPageletiable<Song[]>('assets"]["songs').then(res => {
     if (res) {
       songs = res;
       songIndexToSongId = songs
@@ -51,25 +54,22 @@ async function getSongs() {
             (b.category_id * songs.length + b.id)
           );
         })
-        .map((song) => song.id);
+        .map(song => song.id);
     }
   });
 }
 
 async function getSong(id: number) {
-  selectedSong = songs.find((s) => s.id === id);
+  selectedSong = songs.find(s => s.id === id);
 }
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "taiko_logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     canvas = document.querySelector<HTMLCanvasElement>("canvas"),
     initialLoading = document.querySelector<HTMLSpanElement>("span.percentage"),
-    loadingDon = document.querySelector<HTMLDivElement>("div#loading-don"),
-    invite = document.querySelector<HTMLDivElement>("div#session-invite"),
-    view = document.querySelector<HTMLDivElement>("div.view"),
     mulitplayer = !!(
       document.querySelector(".multiplayer") || document.location.hash
     );
@@ -80,13 +80,12 @@ presence.on("UpdateData", async () => {
     if (songs.length === 0) await getSongs();
     presenceData.state = mulitplayer ? "MultiPlayer" : "Singleplayer";
 
-    const { id } = canvas,
-      songId =
-        songIndex >= 0 && songIndex <= 200
-          ? <number>songIndexToSongId[songIndex]
-          : -1;
+    const songId =
+      songIndex >= 0 && songIndex <= 200
+        ? <number>songIndexToSongId[songIndex]
+        : -1;
 
-    switch (id) {
+    switch (canvas.id) {
       case "logo": {
         presenceData.details = "At Home Screen";
 
@@ -129,7 +128,7 @@ presence.on("UpdateData", async () => {
           "slide2",
           <PresenceData>{
             largeImageKey: "taiko_logo",
-            startTimestamp: browsingStamp,
+            startTimestamp: browsingTimestamp,
             smallImageKey: "taiko_logo",
             smallImageText: selectedSong.title,
             details: `Category: ${selectedSong.category}`,
@@ -146,11 +145,13 @@ presence.on("UpdateData", async () => {
     }
   } else if (initialLoading) {
     presenceData.details = "At Loading screen";
-    presenceData.state = `${initialLoading.innerText} Loaded`;
-  } else if (loadingDon) presenceData.details = "Game Loading ...";
-  else if (view) presenceData.details = "Changing Game Settings";
+    presenceData.state = `${initialLoading.textContent} Loaded`;
+  } else if (document.querySelector<HTMLDivElement>("div#loading-don"))
+    presenceData.details = "Game Loading ...";
+  else if (document.querySelector<HTMLDivElement>("div.view"))
+    presenceData.details = "Changing Game Settings";
 
-  if (invite) {
+  if (document.querySelector<HTMLDivElement>("div#session-invite")) {
     presenceData.details = "Waiting for other player to join ...";
     presenceData.buttons = [
       {
@@ -160,8 +161,6 @@ presence.on("UpdateData", async () => {
     ];
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(slideShowSet ? slideshow : presenceData);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(slideShowSet ? slideshow : presenceData);
 });

@@ -3,44 +3,26 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  let presenceData: PresenceData = {
-    details: "Viewing the homepage...",
-    largeImageKey: "lg-gb"
-  };
-  const urlParams = new URLSearchParams(window.location.search);
-  if (document.location.pathname === "/") {
-    presenceData = {
-      details: "Viewing the homepage...",
+  const presenceData: PresenceData = {
       largeImageKey: "lg-gb"
-    };
-    presence.setActivity(presenceData);
-  } else if (
+    },
+    urlParams = new URLSearchParams(window.location.search);
+  if (document.location.pathname === "/")
+    presenceData.details = "Viewing the homepage...";
+  else if (
     urlParams.get("page") &&
     urlParams.get("s") &&
     urlParams.get("page") === "post"
   ) {
     if (urlParams.get("s") === "list") {
       if (urlParams.get("tags")) {
-        presenceData = {
-          details: "Searching...",
-          state: urlParams.get("tags").replace(" ", ", "),
-          largeImageKey: "lg-gb"
-        };
-        presence.setActivity(presenceData);
-      } else {
-        presenceData = {
-          details: "Viewing Posts List...",
-          largeImageKey: "lg-gb"
-        };
-        presence.setActivity(presenceData);
-      }
+        presenceData.details = "Searching...";
+        presenceData.state = urlParams.get("tags").replace(" ", ", ");
+      } else presenceData.details = "Viewing Posts List...";
     } else if (urlParams.get("s") === "view" && urlParams.get("id")) {
-      presenceData = {
-        details: "Viewing a Post...",
-        state: `Post ${urlParams.get("id")}`,
-        largeImageKey: "lg-gb"
-      };
-      presence.setActivity(presenceData);
-    } else presence.setActivity(presenceData);
-  } else presence.setActivity(presenceData);
+      presenceData.details = "Viewing a Post...";
+      presenceData.state = `Post ${urlParams.get("id")}`;
+    } else presenceData.details = "Viewing the homepage...";
+  } else presenceData.details = "Viewing the homepage...";
+  presence.setActivity(presenceData);
 });

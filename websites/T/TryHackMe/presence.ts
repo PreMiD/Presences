@@ -5,30 +5,30 @@ const presence = new Presence({
   presenceData: PresenceData = {
     largeImageKey: "icon"
   },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let customData = false;
 
 presence.on("UpdateData", async () => {
   customData = false;
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname === "/dashboard")
     presenceData.details = "Viewing the Dashboard!";
   else if (document.location.pathname === "/profile")
     presenceData.details = "Viewing their profile!";
   else if (document.location.pathname.startsWith("/room")) {
-    const title = document.querySelector("#title");
+    const title = document.querySelector<HTMLElement>("#title");
 
-    if (title !== null) {
+    if (title) {
       customData = true;
 
-      const roomData: PresenceData = {
+      const presenceData: PresenceData = {
         details: "Completing room:",
-        state: (title as HTMLElement).innerText,
+        state: title.textContent,
         largeImageKey: "icon",
-        startTimestamp: browsingStamp
+        startTimestamp: browsingTimestamp
       };
-      presence.setActivity(roomData);
+      presence.setActivity(presenceData);
     } else presenceData.details = "Looking at rooms!";
   } else if (
     document.location.pathname === "/upload" ||
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Managing a room!";
     presenceData.state = `Page: ${document.location.pathname}`;
-    //presenceData.startTimestamp = browsingStamp;
+    //presenceData.startTimestamp = browsingTimestamp;
   } else if (document.location.pathname === "/leaderboards")
     presenceData.details = "Checking the leaderboards!";
   else presenceData.details = "Breaking stuff!";

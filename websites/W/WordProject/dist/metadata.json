@@ -1,24 +1,24 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "WordProject",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "वाह्य",
     "id": "819696394180100106"
   },
-  "category": "other",
+  "service": "WordProject",
+  "description": {
+    "en": "The Holy Bible International - in the major languages of the world"
+  },
+  "url": "www.wordproject.org",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/mydYezY.png",
   "thumbnail": "https://i.imgur.com/QteJu92.png",
-  "version": "1.0.3",
   "color": "#aa2023",
+  "category": "other",
   "tags": [
     "bible",
     "bible-verses",
     "audio-bible"
   ],
-  "url": "www.wordproject.org",
-  "description": {
-    "en": "The Holy Bible International - in the major languages of the world"
-  },
   "settings": [
     {
       "id": "buttons",

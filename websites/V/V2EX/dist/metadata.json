@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Xunco",
     "id": "611786551504011305"
@@ -17,14 +17,14 @@
     "fast.v2ex.com",
     "v2ex.com"
   ],
-  "version": "1.0.8",
+  "regExp": "([a-z0-9-]+[.])*v2ex[.]com[/]",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/kfj4PUe.png",
   "thumbnail": "https://i.imgur.com/eugm5S4.png",
   "color": "#aab0c6",
+  "category": "socials",
   "tags": [
     "sharing",
     "programming"
-  ],
-  "category": "socials",
-  "regExp": "([a-z0-9-]+[.])*v2ex[.]com[/]"
+  ]
 }

@@ -16,19 +16,19 @@ async function getStrings() {
       chapter: "general.chapter",
       page: "general.page"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   lastPlaybackState = null,
   playback: boolean,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 let iFrameVideo: boolean,
@@ -59,10 +59,10 @@ presence.on("iFrameData", (data: iFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang").catch(() => "en");
-  if (oldLang !== newLang) {
+  const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {
@@ -71,24 +71,21 @@ presence.on("UpdateData", async () => {
 
   if (!playback && document.location.pathname.includes("/manga")) {
     if (document.location.pathname.includes("/read")) {
-      const title = document.querySelector(".chapter-header a").innerHTML,
-        [currChapter] = document
-          .querySelector(".chapter-header")
-          .innerHTML.split("</a>")[1]
-          .split("\n"),
-        lastPage = document.querySelector(".images").children.length,
-        currPage =
-          document.querySelector(".first-page-number").innerHTML === ""
-            ? "1"
-            : document.querySelector(".first-page-number").innerHTML;
-
+      const title = document.querySelector(".chapter-header a").textContent;
       presenceData.details = title;
-      presenceData.state = `${(await strings).reading} ${currChapter}`;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `${(await strings).reading} ${
+        document
+          .querySelector(".chapter-header")
+          .textContent.split("</a>")[1]
+          .split("\n")[0]
+      }`;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.smallImageKey = "book_open";
-      presenceData.smallImageText = `${
-        (await strings).page
-      } ${currPage}/${lastPage}`;
+      presenceData.smallImageText = `${(await strings).page} ${
+        document.querySelector(".first-page-number").textContent === ""
+          ? "1"
+          : document.querySelector(".first-page-number").textContent
+      }/${document.querySelector(".images").children.length}`;
       presenceData.buttons = [
         {
           label: `Read ${(await strings).chapter}`,
@@ -98,7 +95,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/volumes")) {
       const [, title] = document
         .querySelector(".ellipsis")
-        .innerHTML.split("&gt;");
+        .textContent.split("&gt;");
 
       presenceData.details = (await strings).viewManga;
       presenceData.state = title;
@@ -110,7 +107,7 @@ presence.on("UpdateData", async () => {
       ];
     } else {
       presenceData.details = (await strings).browse;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
 
       delete presenceData.state;
       delete presenceData.smallImageKey;
@@ -121,7 +118,7 @@ presence.on("UpdateData", async () => {
 
   if (!playback && !document.location.pathname.includes("/manga")) {
     presenceData.details = (await strings).browse;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -143,7 +140,7 @@ presence.on("UpdateData", async () => {
         document.querySelector(".show-title-link").getAttribute("href");
       episode = document.querySelector(
         ".c-heading.c-heading--xs.c-heading--family-type-one.title"
-      ).innerHTML;
+      ).textContent;
       [, epName] = episode.match(/.* - (.*)/);
       epName = epName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       seasonregex = new RegExp(`(.*) ${epName} -`);
@@ -151,28 +148,22 @@ presence.on("UpdateData", async () => {
       videoTitle = seasonName;
     } else {
       series = document.querySelector(".ellipsis .text-link");
-      videoTitle = series.innerText;
+      videoTitle = series.textContent;
       seriesLink = series.getAttribute("href");
-      const episod = document.querySelectorAll("#showmedia_about_media h4"),
-        epName = document.querySelector("h4#showmedia_about_name");
-      episode = `${episod[1].innerHTML} - ${epName.innerHTML}`;
+      episode = `${
+        document.querySelectorAll("#showmedia_about_media h4")[1].textContent
+      } - ${document.querySelector("h4#showmedia_about_name").textContent}`;
     }
-    const [, endTimestamp] = presence.getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    );
     presenceData.smallImageKey = paused ? "pause" : "play";
     presenceData.smallImageText = paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.endTimestamp = endTimestamp;
-
-    presence.setTrayTitle(
-      paused ? "" : videoTitle !== null ? videoTitle : "Title not found..."
+    [, presenceData.endTimestamp] = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
     );
 
-    presenceData.details =
-      videoTitle !== null ? videoTitle : "Title not found...";
+    presenceData.details = videoTitle ?? "Title not found...";
     presenceData.state = episode;
 
     if (paused) {
@@ -180,7 +171,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (videoTitle !== null) {
+    if (videoTitle) {
       presenceData.buttons = [
         {
           label: (await strings).watchEpisode,

@@ -12,16 +12,15 @@ function settingSetter(): void {
   else presence.hideSetting("pdexID");
 }
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "pokemonlogo"
+    largeImageKey: "pokemonlogo",
+    startTimestamp: browsingTimestamp
   };
 
   settingSetter();
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.host === "www.pokemon.com") {
     if (
@@ -33,7 +32,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/noticias-pokemon/")
     ) {
       const title = document.querySelector(".full-article > h1");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Reading article:";
         presenceData.state = title.textContent;
         presenceData.smallImageKey = "reading";
@@ -44,7 +43,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/play-pokemon/")) {
       presenceData.largeImageKey = "pokemonplay";
       const title = document.querySelector(".full-article > h1");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Reading article:";
         presenceData.state = title.textContent;
         presenceData.smallImageKey = "reading";
@@ -55,13 +54,13 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/pokedex/")) {
       presenceData.smallImageKey = "pokeball";
       presenceData.smallImageText = "Pokédex";
-      const search = document.querySelector("#searchInput") as HTMLInputElement;
+      const search = document.querySelector<HTMLInputElement>("#searchInput");
 
       if (
         document.querySelector(".pokedex-pokemon-pagination-title > div") !==
         null
       ) {
-        const pdexID = await presence.getSetting("pdexID");
+        const pdexID = await presence.getSetting<boolean>("pdexID");
         let name = document.querySelector(
             ".pokedex-pokemon-pagination-title > div"
           ).textContent,
@@ -74,7 +73,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Pokémon:";
         if (pdexID) presenceData.state = `${name} (#${number})`;
         else presenceData.state = name;
-      } else if (search !== null && search.value !== "") {
+      } else if (search && search.value !== "") {
         if (search.value.length > 2) {
           presenceData.details = "Pokédex - Searching for:";
           presenceData.state = search.value;
@@ -90,7 +89,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/app")) {
       const title = document.querySelector(".full-article > h1");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing app:";
         presenceData.state = title.textContent;
         presenceData.smallImageKey = "reading";
@@ -104,7 +103,7 @@ presence.on("UpdateData", async () => {
     ) {
       const title = document.querySelector(".full-article > h1");
       presenceData.smallImageKey = "reading";
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Reading about game:";
         presenceData.state = title.textContent;
       } else if (
@@ -121,11 +120,9 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector(
         "body > nav > div.content-wrapper > ul > li.home > a"
-      ) !== null &&
-      (
-        document.querySelector(
-          "body > nav > div.content-wrapper > ul > li.home > a"
-        ) as HTMLLinkElement
+      ) &&
+      document.querySelector<HTMLLinkElement>(
+        "body > nav > div.content-wrapper > ul > li.home > a"
       ).href === document.URL
     )
       presenceData.details = "Viewing the homepage...";
@@ -155,7 +152,7 @@ presence.on("UpdateData", async () => {
         document.location.pathname.includes("/Produktgalerie")
       ) {
         const title = document.querySelector(".full-article > h1");
-        if (title !== null) {
+        if (title) {
           presenceData.details = "Viewing product:";
           presenceData.state = title.textContent;
         } else {
@@ -232,18 +229,17 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing the recent activity";
     else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching for:";
-      const input = document.querySelector(
-        "#elMainSearchInput"
-      ) as HTMLInputElement;
+      const input =
+        document.querySelector<HTMLInputElement>("#elMainSearchInput");
       presenceData.state = input.value;
       presenceData.smallImageKey = "search";
     } else presenceData.details = "Browsing the forums";
   } else if (document.location.host === "www.pokemoncenter.com") {
     presenceData.largeImageKey = "store";
-    if (document.querySelector(".main_header") !== null) {
+    if (document.querySelector(".main_header")) {
       presenceData.details = "Viewing product:";
       presenceData.state = document.querySelector(".main_header").textContent;
-    } else if (document.querySelector(".row > div > div > h1") !== null) {
+    } else if (document.querySelector(".row > div > div > h1")) {
       presenceData.details = "Viewing category:";
       presenceData.state = document
         .querySelector(".row > div > div > h1")
@@ -267,7 +263,7 @@ presence.on("UpdateData", async () => {
         if (
           document.querySelector(
             "#mainContent > section > div > div > div.boxStyle03 > div > h3"
-          ) !== null
+          )
         ) {
           presenceData.details = "Reading article:";
           presenceData.state = document.querySelector(
@@ -284,7 +280,7 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector(
         "#contents > section > div.item_detail > article > h1"
-      ) !== null
+      )
     ) {
       presenceData.details = "Viewing product:";
       presenceData.state = document.querySelector(
@@ -293,7 +289,7 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector(
         "#contents > div.topic_path > ul > li:nth-child(2) > span"
-      ) !== null
+      )
     ) {
       presenceData.details = "Viewing category:";
       presenceData.state = document.querySelector(
@@ -323,18 +319,16 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.startTimestamp = startTimestamp;
       presenceData.endTimestamp = endTimestamp;
-      const season = document
-          .querySelector(".header-bar-small > span:nth-child(2)")
-          .textContent.trim(),
-        episode = document
-          .querySelector(".header-bar-small > span:nth-child(4)")
-          .textContent.split(" - ")[0]
-          .trim(),
-        title = document
-          .querySelector(".header-bar-small > span:nth-child(4)")
-          .textContent.split(" - ")[1]
-          .trim();
-      presenceData.details = `${season} - ${episode}`;
+      const title = document
+        .querySelector(".header-bar-small > span:nth-child(4)")
+        .textContent.split(" - ")[1]
+        .trim();
+      presenceData.details = `${document
+        .querySelector(".header-bar-small > span:nth-child(2)")
+        .textContent.trim()} - ${document
+        .querySelector(".header-bar-small > span:nth-child(4)")
+        .textContent.split(" - ")[0]
+        .trim()}`;
       presenceData.state = title;
 
       if (video.paused) {
@@ -354,7 +348,7 @@ presence.on("UpdateData", async () => {
       const title = document.querySelector(".section-title"),
         tag = document.querySelector(".section-title > span"),
         publish = document.querySelector(".section-title > small");
-      if (tag !== null) {
+      if (tag) {
         presenceData.state = title.textContent
           .replace(tag.textContent, "")
           .replace(publish.textContent, "");
@@ -365,7 +359,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "News and Announcements";
     } else if (document.location.pathname.includes("/game/")) {
       const title = document.querySelector(".medium-title");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing game:";
         presenceData.state = title.textContent;
       } else if (document.location.pathname.includes("/category/")) {
@@ -378,14 +372,13 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/pokedex")) {
       presenceData.smallImageKey = "pokeball";
       presenceData.smallImageText = "Pokédex";
-      const search = document.querySelector(
-        "#word.form-control"
-      ) as HTMLInputElement;
+      const search =
+        document.querySelector<HTMLInputElement>("#word.form-control");
       if (
         document.querySelector("body > div.single_header_wrap > div > h1") !==
         null
       ) {
-        const pdexID = await presence.getSetting("pdexID");
+        const pdexID = await presence.getSetting<boolean>("pdexID");
         let name = document
             .querySelector("body > div.single_header_wrap > div > h1")
             .textContent.trim(),
@@ -398,10 +391,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Pokémon:";
         if (pdexID) presenceData.state = `${name} (#${number})`;
         else presenceData.state = name;
-      } else if (search !== null && search.value !== "") {
+      } else if (search && search.value !== "") {
         if (search.value.length > 2) {
           presenceData.details = "Pokédex - Searching for:";
-          presenceData.state = search.value;
+          presenceData.state = search.textContent;
         } else {
           presenceData.details = "Pokédex";
           presenceData.state = "Searching something up...";
@@ -414,7 +407,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/animation")) {
       const title = document.querySelector(".medium-title");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Reading about animation:";
         presenceData.state = title.textContent;
         presenceData.smallImageKey = "reading";
@@ -422,7 +415,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/product")) {
       presenceData.largeImageKey = "storekr";
       const title = document.querySelector(".medium-title");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing product:";
         presenceData.state = title.textContent;
       } else {
@@ -441,7 +434,7 @@ presence.on("UpdateData", async () => {
       const title = document.querySelector(".section-title"),
         tag = document.querySelector(".section-title > span"),
         publish = document.querySelector(".section-title > small");
-      if (tag !== null) {
+      if (tag) {
         presenceData.state = title.textContent
           .replace(tag.textContent, "")
           .replace(publish.textContent, "");
@@ -463,19 +456,15 @@ presence.on("UpdateData", async () => {
       } else if (document.location.pathname.includes("/play"))
         presenceData.details = "Learning how to play";
       else if (
-        (
-          document.querySelector(
-            "#header-top-menu > li.active > a"
-          ) as HTMLLinkElement
-        ).href.includes("/event")
+        document
+          .querySelector<HTMLLinkElement>("#header-top-menu > li.active > a")
+          .href.includes("/event")
       ) {
         presenceData.details = "Viewing event:";
         presenceData.state =
           document.querySelector(".medium-title").textContent;
       } else if (document.location.pathname.includes("/cards")) {
-        const input = document.querySelector(
-          "#search_text"
-        ) as HTMLInputElement;
+        const input = document.querySelector<HTMLInputElement>("#search_text");
         if (document.location.pathname.includes("/detail")) {
           presenceData.details = "Viewing card:";
           presenceData.state =
@@ -488,7 +477,7 @@ presence.on("UpdateData", async () => {
 
           presenceData.smallImageKey = "search";
         } else presenceData.details = "Browsing through the cards";
-      } else if (document.querySelector(".medium-title") !== null) {
+      } else if (document.querySelector(".medium-title")) {
         presenceData.details = "Viewing card:";
         presenceData.state =
           document.querySelector(".medium-title").textContent;
@@ -540,21 +529,18 @@ presence.on("UpdateData", async () => {
       const title =
         document.querySelector(".m-ttl-top") ||
         document.querySelector(".m-ttl-dot");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing show:";
         presenceData.state = title.textContent;
       } else presenceData.details = "Viewing Pokémon TV/Movies";
     } else if (document.location.pathname.includes("/gp")) {
       const title = document.querySelector(".m-ttl-top");
-      if (title !== null && title.textContent.includes("ポケモンセンタ")) {
+      if (title && title.textContent.includes("ポケモンセンタ")) {
         presenceData.details = "Viewing Pokémon Center:";
         presenceData.state = title.textContent
           .replace("ポケモンセンター", "")
           .trim();
-      } else if (
-        title !== null &&
-        title.textContent.includes("ポケモンストア")
-      ) {
+      } else if (title && title.textContent.includes("ポケモンストア")) {
         presenceData.details = "Viewing Pokémon Store:";
         presenceData.state = title.textContent
           .replace("ポケモンストア", "")
@@ -562,7 +548,7 @@ presence.on("UpdateData", async () => {
       } else presenceData.details = "Viewing Pokémon Centers";
     } else if (document.location.pathname.includes("/sp")) {
       const title = document.querySelector(".m-ttl-top");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing Upcoming Pokémon Center:";
         presenceData.state = title.textContent
           .split("、")[0]
@@ -572,7 +558,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/goods")) {
       presenceData.smallImageKey = "storejp";
       const title = document.querySelector(".m-ttl-hd");
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing Pokémon Goods";
         presenceData.state = `in category: ${title.textContent}`;
       } else presenceData.details = "Viewing Pokémon Goods";
@@ -604,11 +590,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Pokémon Movies";
       presenceData.state = "Viewing the playground";
     } else if (document.location.pathname.includes("/history/")) {
-      if (document.querySelector("#main > h1 > img") !== null) {
+      if (document.querySelector("#main > h1 > img")) {
         presenceData.details = "Viewing history of:";
-        presenceData.state = (
-          document.querySelector("#main > h1 > img") as HTMLImageElement
-        ).alt;
+        presenceData.state =
+          document.querySelector<HTMLImageElement>("#main > h1 > img").alt;
       } else {
         presenceData.details = "Pokémon Movies";
         presenceData.state = "Viewing the history";
@@ -633,15 +618,13 @@ presence.on("UpdateData", async () => {
         ).textContent;
       } else presenceData.details = "Viewing products";
     } else if (document.location.pathname.includes("/ex")) {
-      const [, state] = document.title.split("」 ｜ ")[0].split("「");
-
       presenceData.details = "Viewing extension pack:";
-      presenceData.state = state;
+      [, presenceData.state] = document.title.split("」 ｜ ")[0].split("「");
     } else if (document.location.pathname.includes("/event")) {
       if (
         document.querySelector(
           ".detailCalenderEventArea > section:nth-child(1) > ul > li:nth-child(1) > div > div.List_body"
-        ) !== null
+        )
       ) {
         let title = document.querySelector(
           ".detailCalenderEventArea > section:nth-child(1) > ul > li:nth-child(1) > div > div.List_body"
@@ -653,9 +636,9 @@ presence.on("UpdateData", async () => {
             ".detailCalenderEventArea > section:nth-child(1) > ul > li:nth-child(1) > div > div.List_body > div"
           );
 
-        if (tags !== null) title = title.replace(tags.textContent, "");
+        if (tags) title = title.replace(tags.textContent, "");
 
-        if (warning !== null) title = title.replace(warning.textContent, "");
+        if (warning) title = title.replace(warning.textContent, "");
 
         presenceData.details = "Viewing event:";
         presenceData.state = title;
@@ -727,13 +710,13 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/movie"))
       presenceData.details = "Viewing Pokémon's movies";
     else if (document.location.pathname.includes("/goods")) {
-      if (document.querySelector(".article-detail__title") !== null) {
+      if (document.querySelector(".article-detail__title")) {
         presenceData.details = "Viewing product:";
         presenceData.state = document.querySelector(
           ".article-detail__title"
         ).textContent;
       } else if (
-        document.querySelector(".category-list__element--current") !== null &&
+        document.querySelector(".category-list__element--current") &&
         document.querySelector(".category-list__element--current")
           .textContent !==
           document.querySelector(".category-list__element").textContent
@@ -755,26 +738,24 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/pokedex")) {
       presenceData.smallImageKey = "pokeball";
       presenceData.smallImageText = "Pokédex";
-      const search = document.querySelector(
-        "#search_input"
-      ) as HTMLInputElement;
+      const search = document.querySelector<HTMLInputElement>("#search_input");
 
-      if (document.querySelector(".pokemon-detail__profile") !== null) {
-        const pdexID = await presence.getSetting("pdexID"),
+      if (document.querySelector(".pokemon-detail__profile")) {
+        const pdexID = await presence.getSetting<boolean>("pdexID"),
           name = document.querySelector(
             ".pokemon-slider__main-name"
-          ).textContent,
-          number = document.querySelector(
-            ".pokemon-slider__main-no"
           ).textContent;
 
         presenceData.details = "Viewing Pokémon:";
-        if (pdexID) presenceData.state = `${name} (#${number})`;
-        else presenceData.state = name;
-      } else if (search !== null && search.value !== "") {
-        if (search.value.length > 2) {
+        if (pdexID) {
+          presenceData.state = `${name} (#${
+            document.querySelector(".pokemon-slider__main-no").textContent
+          })`;
+        } else presenceData.state = name;
+      } else if (search && search.textContent !== "") {
+        if (search.textContent.length > 2) {
           presenceData.details = "Pokédex - Searching for:";
-          presenceData.state = search.value;
+          presenceData.state = search.textContent;
         } else {
           presenceData.details = "Pokédex";
           presenceData.state = "Searching something up...";
@@ -787,7 +768,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/card")) {
       presenceData.largeImageKey = "tcg";
-      if (document.querySelector(".article-detail__title") !== null) {
+      if (document.querySelector(".article-detail__title")) {
         presenceData.details = "Viewing extension pack:";
         presenceData.state = document.querySelector(
           ".article-detail__title"
@@ -806,8 +787,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

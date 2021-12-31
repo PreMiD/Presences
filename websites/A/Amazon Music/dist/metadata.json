@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -20,21 +20,22 @@
     "zh_CN": "Amazon Music是由Amazon.com经营的音乐媒体平台和在线音乐商店。",
     "zh_TW": "Amazon Music是由Amazon.com經營的音樂串流平台和在線音樂商店。",
     "ga_IE": "Is ardán sruthú ceoil agus siopa ceoil ar líne é Amazon Music a oibríonn Amazon.com. Seoladh beta poiblí é ar 25 Meán Fómhair, 2007, i mí Eanáir 2008 agus ba é an chéad stór ceoil é chun ceol a dhíol gan bainistíocht ceart digiteach ó na ceithre mhór-lipéad ceoil, chomh maith le go leor neamhspleácha.",
-    "nl": "Amazon Music is een muziekstreamingplatform en een online muziekwinkel die wordt beheerd door Amazon.com. Gelanceerd in openbare bèta op 25 september 2007, werd het in januari 2008 de eerste muziekwinkel die muziek verkocht zonder beheer van digitale rechten van de vier grote muzieklabels, evenals vele onafhankelijke."
+    "nl": "Amazon Music is een muziekstreamingplatform en een online muziekwinkel die wordt beheerd door Amazon.com. Gelanceerd in openbare bèta op 25 september 2007, werd het in januari 2008 de eerste muziekwinkel die muziek verkocht zonder beheer van digitale rechten van de vier grote muzieklabels, evenals vele onafhankelijke.",
+    "vi_VN": "Amazon Music là nền tảng phát nhạc và cửa hàng trực tuyển của Amazon.com. Phát hành bản beta công cộng từ 25 Tháng 9 2007, trong Tháng 1 2008 nó đã trở thành cửa hàng nhạc đầu tiên bán nhạc không có quản lý bản quyền kỹ thuật số từ bốn hãng đĩa tên tuổi, cũng như nhiều nhà phát hành độc lập."
   },
   "url": "music.amazon.com",
-  "version": "2.0.11",
+  "regExp": "music[.]amazon([.][a-z]+)+[/]",
+  "version": "2.1.0",
   "logo": "https://i.imgur.com/AUKbzxX.png",
   "thumbnail": "https://i.imgur.com/htSGR6k.png",
   "color": "#21293C",
+  "category": "music",
   "tags": [
     "amazon-music",
     "music",
     "amazon",
     "media"
   ],
-  "category": "music",
-  "regExp": "music[.]amazon([.][a-z]+)+[/]",
   "settings": [
     {
       "id": "lang",
@@ -50,6 +51,12 @@
       "id": "showPlaylist",
       "title": "Show Playlist",
       "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "cover",
+      "title": "Show Cover",
+      "icon": "fad fa-images",
       "value": true
     }
   ]

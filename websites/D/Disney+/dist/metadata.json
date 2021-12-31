@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Tiemen",
     "id": "152164749868662784"
@@ -21,10 +21,11 @@
   },
   "url": "www.disneyplus.com",
   "regExp": "([a-z0-9-]+[.])*disneyplus[.]com[/]|([a-z0-9-]+[.])*hotstar[.]com[/]",
-  "version": "1.4.13",
+  "version": "1.4.15",
   "logo": "https://i.imgur.com/KIZSYhc.png",
   "thumbnail": "https://i.imgur.com/Tp9oYPj.png",
   "color": "#233778",
+  "category": "videos",
   "tags": [
     "disney",
     "disney-plus",
@@ -38,7 +39,6 @@
     "hotstar",
     "disney-plus-hotstar"
   ],
-  "category": "videos",
   "settings": [
     {
       "id": "lang",

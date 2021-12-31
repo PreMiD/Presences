@@ -1,35 +1,31 @@
 const presence = new Presence({
     clientId: "682781181863133220"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "upbeat"
     },
-    paused = document
-      .querySelector("#radioPlayer > span > i")
-      .className.includes("fa-play"),
-    newsreporterapply = document.querySelector("#modalmediaAppButton") !== null,
-    partner = document.querySelector("#modalpartnerEnquiryButton") !== null,
-    request = document.querySelector("#modalrequestFormModal") !== null,
-    enquiry = document.querySelector("#modalcontactUsButton") !== null,
-    djapply = document.querySelector("#modaldjAppButton") !== null,
-    feedback = document.querySelector("#modalundefined") !== null,
-    editingbio = document.querySelector("#accountBio") !== null,
-    format1 = await presence.getSetting("sFormatNoDj1"),
-    format2 = await presence.getSetting("sFormatNoDj2"),
-    elapsed = await presence.getSetting("tElapsed"),
-    format = await presence.getSetting("sFormat"),
-    info = await presence.getSetting("sInfo"),
-    dj = await presence.getSetting("sDJ");
+    [format1, format2, elapsed, format, info, dj] = await Promise.all([
+      presence.getSetting<string>("sFormatNoDj1"),
+      presence.getSetting<string>("sFormatNoDj2"),
+      presence.getSetting<boolean>("tElapsed"),
+      presence.getSetting<string>("sFormat"),
+      presence.getSetting<boolean>("sInfo"),
+      presence.getSetting<boolean>("sDJ")
+    ]);
   let djType;
 
-  if (elapsed) presenceData.startTimestamp = browsingStamp;
+  if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (info) {
     if (document.location.pathname.includes("/UpBeat.Home")) {
-      if (paused) {
+      if (
+        document
+          .querySelector("#radioPlayer > span > i")
+          .className.includes("fa-play")
+      ) {
         presenceData.details = "Viewing the main page...";
         presenceData.smallImageKey = "pause";
         presenceData.smallImageText = format
@@ -100,14 +96,16 @@ presence.on("UpdateData", async () => {
       presenceData.state = "recently played songs";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("Radio.SongProfile")) {
-      const SongProfileArtist = document.querySelector(
-          "#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.artist"
-        ).textContent,
-        SongProfileTitle = document.querySelector(
-          "#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.song"
-        ).textContent;
       presenceData.details = "Viewing song";
-      presenceData.state = `${SongProfileTitle} by ${SongProfileArtist}`;
+      presenceData.state = `${
+        document.querySelector(
+          "#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.song"
+        ).textContent
+      } by ${
+        document.querySelector(
+          "#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.artist"
+        ).textContent
+      }`;
     } else if (document.location.pathname.includes("/UpBeat.AboutUs")) {
       presenceData.details = "Reading about UpBeat";
       presenceData.smallImageKey = "reading";
@@ -123,7 +121,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing the";
       presenceData.state = `${type} members`;
       presenceData.smallImageKey = "reading";
-    } else if (document.querySelector(".bigTitle") !== null) {
+    } else if (document.querySelector(".bigTitle")) {
       let type = document.querySelector(".bigTitle").textContent.toLowerCase();
       if (type === "faq's") type = "FAQ's";
       presenceData.details = "Viewing the";
@@ -131,28 +129,28 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     }
 
-    if (request) {
+    if (document.querySelector("#modalrequestFormModal")) {
       presenceData.details = "Sending in a request...";
       presenceData.smallImageKey = "writing";
-    } else if (feedback) {
+    } else if (document.querySelector("#modalundefined")) {
       presenceData.details = "Sending in feedback...";
       presenceData.smallImageKey = "writing";
-    } else if (djapply) {
+    } else if (document.querySelector("#modaldjAppButton")) {
       presenceData.details = "Applying for:";
       presenceData.state = "Radio Presenter";
       presenceData.smallImageKey = "writing";
-    } else if (newsreporterapply) {
+    } else if (document.querySelector("#modalmediaAppButton")) {
       presenceData.details = "Applying for:";
       presenceData.state = "News Reporter";
       presenceData.smallImageKey = "writing";
-    } else if (editingbio) {
+    } else if (document.querySelector("#accountBio")) {
       presenceData.details = "Editing their bio";
       presenceData.smallImageKey = "writing";
-    } else if (enquiry) {
+    } else if (document.querySelector("#modalcontactUsButton")) {
       presenceData.details = "Sending in a";
       presenceData.state = "general enquiry";
       presenceData.smallImageKey = "writing";
-    } else if (partner) {
+    } else if (document.querySelector("#modalpartnerEnquiryButton")) {
       presenceData.details = "Sending in a";
       presenceData.state = "partner enquiry";
       presenceData.smallImageKey = "writing";
@@ -189,8 +187,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "play";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

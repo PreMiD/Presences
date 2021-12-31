@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "MauriceX",
     "id": "268768664411439115"
@@ -12,15 +12,15 @@
     "nl": "Koop veel producten met 80% korting."
   },
   "url": "www.wish.com",
-  "version": "1.4.11",
+  "version": "1.4.13",
   "logo": "https://i.imgur.com/SMaNfT2.png",
   "thumbnail": "https://i.imgur.com/R7AkWiP.png",
   "color": "#48c0eb",
+  "category": "other",
   "tags": [
     "shopping",
     "shop"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "items",

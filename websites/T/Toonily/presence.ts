@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "878203434468245545"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let data: {
   writing: boolean;
@@ -23,13 +23,12 @@ presence.on(
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
-    { hostname, pathname, href, hash, search } = location,
-    buttons: boolean = await presence.getSetting("buttons"),
-    searchBarVisible = !!document.querySelector("ul.search-main-menu.active");
+    { pathname, href } = location,
+    buttons = await presence.getSetting<boolean>("buttons");
 
-  if (searchBarVisible) {
+  if (document.querySelector("ul.search-main-menu.active")) {
     const searchBar = document.querySelector<HTMLInputElement>(
       "input.manga-search-field.ui-autocomplete-input"
     );
@@ -37,7 +36,7 @@ presence.on("UpdateData", async () => {
     if (searchBar && searchBar.value) presenceData.state = searchBar.value;
     presenceData.smallImageText = presenceData.smallImageKey = "search";
   } else if (pathname === "/") {
-    if (search) {
+    if (location.search) {
       const results = document.querySelector<HTMLHeadingElement>("h1.h4");
       presenceData.details = "Looking at";
       if (results) presenceData.state = results.textContent;
@@ -61,7 +60,7 @@ presence.on("UpdateData", async () => {
       category
         ? category.textContent
         : ""
-    } ${hostname.endsWith(".com") ? "Manhwas" : "Mangas"}`;
+    } ${location.hostname.endsWith(".com") ? "Manhwas" : "Mangas"}`;
     if (order) presenceData.state = `Ordered By ${order.textContent}`;
     presenceData.smallImageText = presenceData.smallImageKey = "looking";
   } else if (
@@ -93,25 +92,23 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-    } else {
-      if (hash) {
-        presenceData.details = title.textContent;
-        if (data && data.writing) {
-          presenceData.state = data.details;
-          presenceData.smallImageText = presenceData.smallImageKey =
-            data.smallImageKey;
-        } else {
-          presenceData.state = "Reading Commments";
-          presenceData.smallImageText = presenceData.smallImageKey = "reading";
-        }
-        if (buttons)
-          presenceData.buttons = [{ label: "See Comments", url: href }];
+    } else if (location.hash) {
+      presenceData.details = title.textContent;
+      if (data && data.writing) {
+        presenceData.state = data.details;
+        presenceData.smallImageText = presenceData.smallImageKey =
+          data.smallImageKey;
       } else {
-        presenceData.details = "Reading Summary";
-        if (title) presenceData.state = title.textContent;
-        if (buttons)
-          presenceData.buttons = [{ label: "Read Summary", url: href }];
+        presenceData.state = "Reading Commments";
+        presenceData.smallImageText = presenceData.smallImageKey = "reading";
       }
+      if (buttons)
+        presenceData.buttons = [{ label: "See Comments", url: href }];
+    } else {
+      presenceData.details = "Reading Summary";
+      if (title) presenceData.state = title.textContent;
+      if (buttons)
+        presenceData.buttons = [{ label: "Read Summary", url: href }];
     }
   } else if (pathname.startsWith("/user-settings")) {
     const tab = document.querySelector<HTMLLIElement>("li.active");
@@ -125,8 +122,6 @@ presence.on("UpdateData", async () => {
   else if (pathname.startsWith("/contact")) presenceData.details = "Contact Us";
   else if (pathname === "/terms") presenceData.details = "Terms of Service";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

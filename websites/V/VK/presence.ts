@@ -30,70 +30,51 @@ function getLocalizedString(stringPath: string): string {
   }
 }
 
-function getVKTrackTimeLeft(): string[] {
+function getVKTrackTimePassed(duration: number) {
   const playerDuration = document.querySelector(
     ".audio_page_player_duration"
-  ) as HTMLElement;
-
-  let timeLeft;
-
-  if (playerDuration.innerText.startsWith("-"))
-    timeLeft = playerDuration.innerText;
-  else {
-    playerDuration.click();
-    timeLeft = playerDuration.innerText;
-    playerDuration.click();
-  }
-
-  //* Removing the `-` symbol.
-  timeLeft = timeLeft.slice(1);
-
-  return timeLeft.split(":");
-}
-
-function getVKTrackTimePassed(): string[] {
-  const playerDuration = document.querySelector(
-    ".audio_page_player_duration"
-  ) as HTMLElement;
+  )?.textContent;
 
   let timePassed;
 
-  if (!playerDuration.innerText.startsWith("-"))
-    timePassed = playerDuration.innerText;
+  if (!playerDuration?.startsWith("-"))
+    timePassed = presence.timestampFromFormat(playerDuration);
   else {
-    playerDuration.click();
-    timePassed = playerDuration.innerText;
-    playerDuration.click();
+    timePassed =
+      duration - presence.timestampFromFormat(playerDuration.slice(1));
   }
 
-  return timePassed.split(":");
+  return timePassed;
 }
 
-//* Returns VK track length.
-function getVKTrackLength(): number[] {
-  let overallTime;
+function getAudioPlayer() {
+  return new Promise<[{ duration: number }]>(resolve => {
+    const script = document.createElement("script"),
+      _listener = (data: CustomEvent) => {
+        script.remove();
+        resolve(JSON.parse(data.detail));
 
-  const timeLeft = getVKTrackTimeLeft(),
-    timePassed = getVKTrackTimePassed();
+        window.removeEventListener("PreMiD_Pageletiable", _listener, true);
+      };
 
-  //* Summing minutes and seconds from time passed and left.
-  overallTime = [
-    Number(timePassed[0]) + Number(timeLeft[0]),
-    Number(timePassed[1]) + Number(timeLeft[1])
-  ];
+    window.addEventListener("PreMiD_Pageletiable", _listener);
 
-  //* Checking if overall time have more than 60 seconds and adding 1 minute if it does.
-  if (Number(overallTime[1]) > 60) {
-    const t1 = overallTime[0] + 1,
-      t2 = overallTime[1] - 60;
+    script.id = "PreMiD_Pageletiables";
+    script.appendChild(
+      document.createTextNode(`
+        var pmdPL = new CustomEvent("PreMiD_Pageletiable", {detail: JSON.stringify(window["getAudioPlayer"]()._currentAudio)});
+        window.dispatchEvent(pmdPL);
+      `)
+    );
 
-    overallTime = [t1, t2];
-  }
-
-  return overallTime;
+    (document.body || document.head || document.documentElement).appendChild(
+      script
+    );
+  });
 }
 
-let browsingTimestamp = Math.floor(Date.now() / 1000);
+let browsingTimestamp = Math.floor(Date.now() / 1000),
+  audioPlayer: [{ duration: number }];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -108,52 +89,45 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/audios") ||
     document.querySelector(".audio_layer_container")
   ) {
-    const title: string = (
-        document.querySelector(".audio_page_player_title_song") as HTMLElement
-      ).textContent,
-      author: string = (
-        document.querySelector(
-          ".audio_page_player_title_performer a"
-        ) as HTMLElement
-      ).textContent;
+    audioPlayer ??= await getAudioPlayer();
 
     if (document.querySelector(".audio_playing") === null) isPlaying = true;
     else isPlaying = false;
 
+    const { duration } = audioPlayer.find(x => x.duration);
+
     timestamps = presence.getTimestamps(
-      Math.floor(
-        Number(getVKTrackTimePassed()[0]) * 60 +
-          Number(getVKTrackTimePassed()[1])
-      ),
-      Math.floor(
-        Number(getVKTrackLength()[0]) * 60 + Number(getVKTrackLength()[1])
-      )
+      getVKTrackTimePassed(duration),
+      duration
     );
 
-    presenceData.details = title;
-    presenceData.state = author;
-    presenceData.smallImageKey = isPlaying ? "pause" : "play";
-    presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
-    presenceData.startTimestamp = isPlaying ? null : timestamps[0];
-    presenceData.endTimestamp = isPlaying ? null : timestamps[1];
+    presenceData.details = document.querySelector<HTMLElement>(
+      ".audio_page_player_title_song"
+    ).textContent;
+    presenceData.state = document.querySelector<HTMLElement>(
+      ".audio_page_player_title_performer a"
+    ).textContent;
+    if (isPlaying) {
+      presenceData.smallImageKey = "pause";
+      presenceData.smallImageText = gstrings.pause;
+    } else {
+      presenceData.smallImageKey = "play";
+      presenceData.smallImageText = gstrings.play;
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    }
 
     presence.setActivity(presenceData, true);
   } else if (window.location.href.match(/https:\/\/vk.com\/.*?z=video.*/)) {
-    document.querySelector(".videoplayer_ui").getAttribute("data-state") ===
-    "paused"
-      ? (isPlaying = true)
-      : (isPlaying = false);
+    isPlaying =
+      document.querySelector(".videoplayer_ui").getAttribute("data-state") ===
+      "paused";
 
-    const videoTitle = (document.querySelector(".mv_title") as HTMLElement)
-        .innerText,
-      videoCurrentTime = (
-        document.querySelector("._time_current") as HTMLElement
-      ).innerText.split(":"),
-      videoDuration = (
-        document.querySelector("._time_duration") as HTMLElement
-      ).innerText.split(":"),
-      videoAuthor = (document.querySelector(".mv_author_name a") as HTMLElement)
-        .innerText;
+    const videoCurrentTime = document
+        .querySelector<HTMLElement>("._time_current")
+        .textContent.split(":"),
+      videoDuration = document
+        .querySelector<HTMLElement>("._time_duration")
+        .textContent.split(":");
 
     timestamps = presence.getTimestamps(
       Math.floor(
@@ -162,19 +136,23 @@ presence.on("UpdateData", async () => {
       Math.floor(Number(videoDuration[0]) * 60 + Number(videoDuration[1]))
     );
 
-    presenceData.details = `${getLocalizedString("Watching")} ${videoTitle}`;
-    presenceData.state = videoAuthor;
-    presenceData.smallImageKey = isPlaying ? "pause" : "play";
-    presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
-    presenceData.startTimestamp = isPlaying ? null : timestamps[0];
-    presenceData.endTimestamp = isPlaying ? null : timestamps[1];
-
+    presenceData.details = `${getLocalizedString("Watching")} ${
+      document.querySelector<HTMLElement>(".mv_title").textContent
+    }`;
+    presenceData.state =
+      document.querySelector<HTMLElement>(".mv_author_name a").textContent;
+    if (isPlaying) {
+      presenceData.smallImageKey = "pause";
+      presenceData.smallImageText = gstrings.pause;
+    } else {
+      presenceData.smallImageKey = "play";
+      presenceData.smallImageText = gstrings.play;
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+    }
     presence.setActivity(presenceData, true);
-  } else if (document.querySelector(".page_name") !== null) {
-    const pageTitle = (document.querySelector(".page_name") as HTMLElement)
-      .innerText;
-
-    presenceData.details = pageTitle;
+  } else if (document.querySelector(".page_name")) {
+    presenceData.details =
+      document.querySelector<HTMLElement>(".page_name").textContent;
     presenceData.startTimestamp = browsingTimestamp;
 
     presence.setActivity(presenceData, true);

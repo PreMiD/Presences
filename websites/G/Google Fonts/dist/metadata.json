@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Paulé",
     "id": "376812375795302402"
@@ -11,15 +11,15 @@
     "nl": "Google Fonts is een Google-service die meer dan duizend gratis gelicentieerde lettertypefamilies biedt voor Android-projecten of CSS-gebruik."
   },
   "url": "fonts.google.com",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/l1S996y.png",
   "thumbnail": "https://i.imgur.com/lVved9l.png",
   "color": "#ff5756",
+  "category": "other",
   "tags": [
     "google",
     "fonts"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "showButton",

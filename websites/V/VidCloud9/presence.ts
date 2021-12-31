@@ -21,7 +21,7 @@ let iFrameVideo: boolean,
   },
   playback: boolean,
   title: HTMLTextAreaElement,
-  browsingStamp: number;
+  browsingTimestamp: number;
 
 presence.on(
   "iFrameData",
@@ -35,7 +35,7 @@ presence.on(
     };
   }) => {
     video = data;
-    playback = data.iframeVideo.duration !== null ? true : false;
+    playback = !!data.iframeVideo.duration;
     if (playback) {
       ({ iFrameVideo, paused } = data.iframeVideo);
       currentTime = data.iframeVideo.currTime;
@@ -45,62 +45,53 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sSI"),
-    elapsed = await presence.getSetting("sTE"),
-    videoTime = await presence.getSetting("sVT");
+  const info = await presence.getSetting<boolean>("sSI"),
+    elapsed = await presence.getSetting<boolean>("sTE"),
+    videoTime = await presence.getSetting<boolean>("sVT");
 
   if (elapsed) {
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
     presence.info("Elapsed is on");
   } else {
-    browsingStamp = null;
+    browsingTimestamp = null;
     presence.info("Elapsed Off");
   }
-  const timestamps = presence.getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    ),
-    presenceData: PresenceData = {
-      largeImageKey: "logo"
-    };
+  const presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
   if (videoTime) {
     presence.info("Video Time is On");
-    if (playback === true) {
+    if (playback) {
       // lastPlaybackState = playback;
-      browsingStamp = Math.floor(Date.now() / 1000);
+      browsingTimestamp = Math.floor(Date.now() / 1000);
     }
   } else presence.info("Video time is off");
 
   if (info) {
     presence.info("Info is On.");
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname === "/movies") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the recently added movies";
     } else if (document.location.pathname === "/series") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the recently added series";
     } else if (document.location.pathname === "/cinema-movies") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing the recently added cinema movies.";
     } else if (document.location.pathname === "/recommended-series") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing recommened series";
       //Used for the video files (Needs some work done here)
     } else if (document.location.pathname.includes("/videos/")) {
-      title = document.querySelector(
+      title = document.querySelector<HTMLTextAreaElement>(
         "#main_bg > div:nth-child(5) > div > div.video-info-left > h1"
       );
-      if (title !== null) {
-        presenceData.state = (title as HTMLTextAreaElement).innerText;
-        if (
-          iFrameVideo === true &&
-          !isNaN(duration) &&
-          title !== null &&
-          video !== null
-        ) {
+      if (title) {
+        presenceData.state = title.textContent;
+        if (iFrameVideo && !isNaN(duration) && title && video) {
           if (!paused) {
             presenceData.details = "Watching:";
             presenceData.smallImageKey = paused ? "pause" : "play";
@@ -109,7 +100,10 @@ presence.on("UpdateData", async () => {
                 ? (await strings).pause
                 : (await strings).play;
               [presenceData.startTimestamp, presenceData.endTimestamp] =
-                timestamps;
+                presence.getTimestamps(
+                  Math.floor(currentTime),
+                  Math.floor(duration)
+                );
             }
           } else if (paused) {
             delete presenceData.startTimestamp;
@@ -118,14 +112,14 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "pause";
             presenceData.smallImageText = (await strings).pause;
           }
-        } else if (iFrameVideo === null && isNaN(duration) && title !== null) {
+        } else if (!iFrameVideo && isNaN(duration) && title) {
           presenceData.details = "Viewing:";
-          presenceData.state = (title as HTMLTextAreaElement).innerText;
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.state = title.textContent;
+          presenceData.startTimestamp = browsingTimestamp;
         } else {
           presenceData.details = "Error 03: Watching unknown show/movie.";
           presenceData.state = "Can't tell if playing or not.";
-          presenceData.startTimestamp = browsingStamp;
+          presenceData.startTimestamp = browsingTimestamp;
           presenceData.smallImageKey = "search";
           presenceData.smallImageText = "Error 3";
           presence.error(
@@ -134,7 +128,7 @@ presence.on("UpdateData", async () => {
         }
       } else {
         //Can't get the basic site information
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Error 02: Watching unknown show/movie.";
         presenceData.smallImageKey = "search";
         presence.error("Can't read page.");
@@ -154,7 +148,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Searching";
     } else {
       //If it can't get the page it will output an error
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Error 01: Can't Read Page";
       presenceData.smallImageKey = "search";
       presence.error("Can't read page. Set up a conditional.");
@@ -166,7 +160,7 @@ presence.on("UpdateData", async () => {
 
   if (!presenceData.details) {
     //This will fire if you do not set presence details
-    presence.setTrayTitle();
+
     presence.setActivity();
   } else {
     //This will fire if you set presence details

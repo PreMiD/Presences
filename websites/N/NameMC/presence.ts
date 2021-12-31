@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "809067572061405246"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 async function getStrings() {
   return presence.getStrings(
     {
@@ -30,137 +30,139 @@ async function getStrings() {
       buttonViewProfile: "general.buttonViewProfile",
       viewSkin: "namemc.viewSkin"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting<string>("lang")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang"),
-    buttons = await presence.getSetting("buttons");
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  const newLang = await presence.getSetting<string>("lang"),
+    buttons = await presence.getSetting<boolean>("buttons");
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   let presenceData: PresenceData = {
     largeImageKey: "namemc",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
-  const path = location.href
-      .replace(/\/?$/, "/")
-      .replace(`https://${location.hostname}`, "")
-      .replace("?", "/"),
-    statics: {
-      [name: string]: PresenceData;
-    } = {
-      "/": {
-        details: (await strings).browse
-      },
-      "/minecraft-names/": {
-        details: (await strings).names
-      },
-      "/minecraft-skins/": {
-        details: (await strings).skinsFeatured
-      },
-      "/minecraft-skins/top/": {
-        details: (await strings).skinsTop
-      },
-      "/minecraft-skins/new/": {
-        details: (await strings).skinsNew
-      },
-      "/minecraft-skins/random/": {
-        details: (await strings).skinsRandom
-      },
-      "/minecraft-skins/tag/": {
-        details: (await strings).skinsTagged
-      },
-      "/minecraft-skins/tag/(\\w*)/": {
-        details: (await strings).skinsTag.replace(
-          "{0}",
-          document
-            .querySelector("body > main > h1")
-            ?.textContent.replace(
-              document.querySelector("body > main > h1 > small")?.textContent,
-              ""
-            )
-            .trim()
-        )
-      },
-      "/capes/": {
-        details: (await strings).capes
-      },
-      "/cape/": {
-        details: (await strings).viewCape,
-        state: `${
-          document
-            .querySelector(".default-skin main.container h1")
-            ?.textContent.split("\n")[1]
-        } Cape`
-      },
-      "/minecraft-servers/": {
-        details: (await strings).servers
-      },
-      "/server/": {
-        details: (await strings).viewServer,
-        state: document.querySelector(
-          "body > main > div.row.no-gutters.align-items-center > div.col > h1"
-        )?.textContent,
-        buttons: [
-          {
-            label: (await strings).buttonViewServer,
-            url: document.URL
-          }
-        ]
-      },
-      "/claim-your-profile/": {
-        details: (await strings).claim
-      },
-      "/my-profile/": {
-        details: (await strings).profileEdit.split("{0}")[0],
-        state: (await strings).profileEdit.split("{0}")[1]
-      },
-      "/my-profile/friends/": {
-        details: (await strings).viewFriends
-      },
-      "/my-profile/skins/": {
-        details: (await strings).viewSkins
-      },
-      "/my-profile/emoji/": {
-        details: (await strings).viewEmoji
-      },
-      "/profile/": {
-        details: (await strings).viewProfile,
-        state: document.querySelector("body > main > h1")?.textContent,
-        buttons: [
-          {
-            label: (await strings).buttonViewProfile,
-            url: document.URL
-          }
-        ]
-      },
-      "/privacy/": {
-        details: (await strings).viewing,
-        state: (await strings).privacy
-      },
-      "/search/": {
-        details: (await strings).search,
-        state: document.querySelector(
-          "#status-bar > div > div > div.col-lg-7 > h1 > samp"
-        )?.textContent,
-        smallImageKey: "search"
-      },
-      "/skin/": {
-        details: (await strings).viewSkin
-      }
-    };
+  const statics: {
+    [name: string]: PresenceData;
+  } = {
+    "/": {
+      details: (await strings).browse
+    },
+    "/minecraft-names/": {
+      details: (await strings).names
+    },
+    "/minecraft-skins/": {
+      details: (await strings).skinsFeatured
+    },
+    "/minecraft-skins/top/": {
+      details: (await strings).skinsTop
+    },
+    "/minecraft-skins/new/": {
+      details: (await strings).skinsNew
+    },
+    "/minecraft-skins/random/": {
+      details: (await strings).skinsRandom
+    },
+    "/minecraft-skins/tag/": {
+      details: (await strings).skinsTagged
+    },
+    "/minecraft-skins/tag/(\\w*)/": {
+      details: (await strings).skinsTag.replace(
+        "{0}",
+        document
+          .querySelector("body > main > h1")
+          ?.textContent.replace(
+            document.querySelector("body > main > h1 > small")?.textContent,
+            ""
+          )
+          .trim()
+      )
+    },
+    "/capes/": {
+      details: (await strings).capes
+    },
+    "/cape/": {
+      details: (await strings).viewCape,
+      state: `${
+        document
+          .querySelector(".default-skin main.container h1")
+          ?.textContent.split("\n")[1]
+      } Cape`
+    },
+    "/minecraft-servers/": {
+      details: (await strings).servers
+    },
+    "/server/": {
+      details: (await strings).viewServer,
+      state: document.querySelector(
+        "body > main > div.row.no-gutters.align-items-center > div.col > h1"
+      )?.textContent,
+      buttons: [
+        {
+          label: (await strings).buttonViewServer,
+          url: document.URL
+        }
+      ]
+    },
+    "/claim-your-profile/": {
+      details: (await strings).claim
+    },
+    "/my-profile/": {
+      details: (await strings).profileEdit.split("{0}")[0],
+      state: (await strings).profileEdit.split("{0}")[1]
+    },
+    "/my-profile/friends/": {
+      details: (await strings).viewFriends
+    },
+    "/my-profile/skins/": {
+      details: (await strings).viewSkins
+    },
+    "/my-profile/emoji/": {
+      details: (await strings).viewEmoji
+    },
+    "/profile/": {
+      details: (await strings).viewProfile,
+      state: document.querySelector("body > main > h1")?.textContent,
+      buttons: [
+        {
+          label: (await strings).buttonViewProfile,
+          url: document.URL
+        }
+      ]
+    },
+    "/privacy/": {
+      details: (await strings).viewing,
+      state: (await strings).privacy
+    },
+    "/search/": {
+      details: (await strings).search,
+      state: document.querySelector(
+        "#status-bar > div > div > div.col-lg-7 > h1 > samp"
+      )?.textContent,
+      smallImageKey: "search"
+    },
+    "/skin/": {
+      details: (await strings).viewSkin
+    }
+  };
 
   for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
+    if (
+      location.href
+        .replace(/\/?$/, "/")
+        .replace(`https://${location.hostname}`, "")
+        .replace("?", "/")
+        .match(k)
+    ) {
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = (await strings).browse;
       presenceData = { ...presenceData, ...v };

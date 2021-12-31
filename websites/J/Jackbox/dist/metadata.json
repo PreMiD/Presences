@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Stringy",
     "id": "577743466940071949"
@@ -10,14 +10,14 @@
     "nl": "Het is gemakkelijk om deze website te gebruiken om van je telefoon, tablet of computer een controller te maken voor een van de vele partygames van Jackbox Games. Het enige dat u nodig heeft, is een kamercode"
   },
   "url": "jackbox.tv",
-  "version": "1.4.9",
+  "version": "1.4.11",
   "logo": "https://i.imgur.com/SXfEdnL.png",
   "thumbnail": "https://i.imgur.com/poY2KNc.png",
   "color": "#4254f4",
+  "category": "games",
   "tags": [
     "games"
   ],
-  "category": "games",
   "settings": [
     {
       "id": "useName",

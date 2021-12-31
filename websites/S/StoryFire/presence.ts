@@ -4,12 +4,7 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  }),
-  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
-    const startTime = Date.now(),
-      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-  };
+  });
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -18,20 +13,18 @@ presence.on("UpdateData", async () => {
     video: HTMLVideoElement = document.querySelector(
       "#storyfire-player_html5_api"
     ),
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (document.location.pathname.startsWith("/video-details")) {
-    const [startTimestamp, endTimestamp] = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
-      uploader = document.querySelector(".user-name").textContent,
-      videoTitle = document.querySelector(
-        ".title > div:not(.series)"
-      ).textContent;
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
 
-    presenceData.details = videoTitle;
-    presenceData.state = uploader;
+    presenceData.details = document.querySelector(
+      ".title > div:not(.series)"
+    ).textContent;
+    presenceData.state = document.querySelector(".user-name").textContent;
     if (!video.paused) {
       presenceData.startTimestamp = startTimestamp;
       presenceData.endTimestamp = endTimestamp;
@@ -71,7 +64,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching";
     presenceData.smallImageKey = "search";
     if (
-      (await presence.getSetting("showsearchterm")) &&
+      (await presence.getSetting<boolean>("showsearchterm")) &&
       document.querySelector(".content-header > span")
     ) {
       presenceData.state = document.querySelector(
@@ -80,8 +73,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

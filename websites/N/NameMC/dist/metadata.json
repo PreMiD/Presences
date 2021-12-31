@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -17,16 +17,16 @@
   },
   "url": "namemc.com",
   "regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "logo": "https://i.imgur.com/9JDmZaF.png",
   "thumbnail": "https://i.imgur.com/XIZsGTQ.png",
   "color": "#000000",
+  "category": "games",
   "tags": [
     "namemc",
     "minecraft",
     "gaming"
   ],
-  "category": "games",
   "settings": [
     {
       "id": "lang",

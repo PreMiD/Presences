@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Yusaki",
     "id": "439582316873121793"
@@ -14,16 +14,16 @@
     "snowboltz.net",
     "shop.snowboltz.net"
   ],
-  "version": "1.1.4",
+  "regExp": "([a-z0-9-]+[.])*snowboltz[.]net[/]",
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/xMeXqcE.png",
   "thumbnail": "https://i.imgur.com/yYdlVDA.png",
   "color": "#00ccff",
+  "category": "other",
   "tags": [
     "shop",
     "robux",
     "thai",
     "thailand"
-  ],
-  "category": "other",
-  "regExp": "([a-z0-9-]+[.])*snowboltz[.]net[/]"
+  ]
 }

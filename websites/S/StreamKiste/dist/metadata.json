@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Cascade",
     "id": "442612628104151040"
@@ -10,23 +10,23 @@
     "en": "At StreamKiste.tv you will always find the latest movies, HD movies for free as online streams to watch directly. Always the fastest stream.",
     "nl": "Op StreamKiste.tv vindt u altijd de nieuwste films, HD-films gratis als online streams om direct te bekijken. Altijd de snelste stream."
   },
-  "regExp": "([a-z0-9-]+[.])*streamkiste([.][a-z]+)+[/]",
   "url": "streamkiste.tv",
-  "version": "1.0.4",
+  "regExp": "([a-z0-9-]+[.])*streamkiste([.][a-z]+)+[/]",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/bdGvqBo.png",
   "thumbnail": "https://i.imgur.com/TrhRNwT.jpg",
   "color": "#4DB8C9",
+  "category": "videos",
   "tags": [
     "movie",
     "video",
     "media"
   ],
+  "iframe": true,
   "settings": [
     {
       "id": "lang",
       "multiLanguage": true
     }
-  ],
-  "iframe": true,
-  "category": "videos"
+  ]
 }

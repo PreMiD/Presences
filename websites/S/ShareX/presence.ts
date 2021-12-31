@@ -1,11 +1,11 @@
 const presence = new Presence({
     clientId: "888726220571811914"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const showTimestamp: boolean = await presence.getSetting("timestamp"),
-    showButtons: boolean = await presence.getSetting("buttons"),
+  const showTimestamp = await presence.getSetting<boolean>("timestamp"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "sharex-logo",
       smallImageKey: "sharex-white-logo",
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
   }
 
   // Start Browsing Timestamp
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
   // If Buttons option is off, delete buttons
   if (!showButtons) delete presenceData.buttons;

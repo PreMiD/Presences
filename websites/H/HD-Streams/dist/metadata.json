@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Cascade",
     "id": "442612628104151040"
@@ -14,21 +14,21 @@
     "hd-streams.org",
     "www.hd-streams.org"
   ],
-  "version": "1.0.5",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/rtSPknc.png",
   "thumbnail": "https://i.imgur.com/0bLEfQ2.jpg",
   "color": "#64DD17",
+  "category": "videos",
   "tags": [
     "movie",
     "video",
     "media"
   ],
+  "iframe": true,
   "settings": [
     {
       "id": "lang",
       "multiLanguage": true
     }
-  ],
-  "iframe": true,
-  "category": "videos"
+  ]
 }

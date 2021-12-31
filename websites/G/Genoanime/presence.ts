@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement,
   currentTime: number,
@@ -35,10 +35,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "genoanime",
-      startTimestamp: browsingStamp
-    },
-    title = document.title.slice(0, -13); //title of the page
+    largeImageKey: "genoanime",
+    startTimestamp: browsingTimestamp
+  }; //title of the page
   if (document.location.pathname === "/")
     presenceData.details = "Exploring Genoanime";
   else if (document.location.pathname.includes("/browse")) {
@@ -68,7 +67,7 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/watch")) {
-    presenceData.details = title;
+    presenceData.details = document.title.slice(0, -13);
     presenceData.state = `Episode ${
       document.location.href.split("episode=")[1]
     }`;
@@ -135,8 +134,6 @@ presence.on("UpdateData", async () => {
       }
     ];
   }
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

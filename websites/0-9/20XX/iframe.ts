@@ -19,7 +19,7 @@ interface Main20XX {
     };
     ui: {
       score: {
-        scores: Array<Score20XX>;
+        scores: Score20XX[];
       };
     };
   };
@@ -49,8 +49,8 @@ interface Map20XX {
     x: number;
     y: number;
   };
-  spawns: Array<Spawn20XX>;
-  doodads: Array<Dooads>;
+  spawns: Spawn20XX[];
+  doodads: Dooads[];
 }
 
 interface Dooads {
@@ -75,6 +75,7 @@ interface Spawn20XX {
 
 // Since maps don't have IDs in the game object, we can infer
 // what map is being played by it's data.
+
 const guessKeys: ItemMap = {
   // 'xBound:yBound:camPosX:camPosY:spawnCount:doodadCount': 'mapID'
   "32:32:11:15.75:24:36": "attack",
@@ -97,8 +98,9 @@ const guessKeys: ItemMap = {
 // Guesses the map via the map object
 function guessMap(map: Map20XX): string {
   const camera = map.spawns.find((spawn: Spawn20XX) => spawn.type === "camera"),
-    cameraKey = camera ? `${camera.pos.x}:${camera.pos.y}` : "n",
-    guessKey = `${map.size.x}:${map.size.y}:${cameraKey}:${map.spawns.length}:${map.doodads.length}`;
+    guessKey = `${map.size.x}:${map.size.y}:${
+      camera ? `${camera.pos.x}:${camera.pos.y}` : "n"
+    }:${map.spawns.length}:${map.doodads.length}`;
   return guessKeys[guessKey] || null;
 }
 
@@ -106,7 +108,7 @@ iframe.on("UpdateData", async () => {
   const { main } = window as Window20XX;
   if (!main) return;
 
-  const data = {
+  iframe.send({
     user: main.net.user
       ? {
           displayName: main.net.display,
@@ -133,7 +135,5 @@ iframe.on("UpdateData", async () => {
         }
       : null,
     nav: main.menu.lastNav
-  };
-
-  iframe.send(data);
+  });
 });

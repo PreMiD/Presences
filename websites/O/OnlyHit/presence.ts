@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "666412985513672715"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
@@ -13,27 +13,17 @@ let songTimestamp = Math.floor(Date.now() / 1000),
   lastTitle = "";
 
 presence.on("UpdateData", async () => {
-  //* Get customizable settings
-  let format1 = await presence.getSetting("sFormat1"),
-    format2 = await presence.getSetting("sFormat2"),
-    info = await presence.getSetting("sInfo"),
-    showElapsed = await presence.getSetting("tElapsed");
-
-  //! Only needed due to a bug PreMiD has atm
-  if (!info) {
-    format1 = '"%song%"';
-    format2 = "by %artist%";
-    info = true;
-    showElapsed = true;
-  }
-
-  const presenceData: PresenceData = {};
+  const presenceData: PresenceData = {},
+    [format1, format2, showElapsed] = await Promise.all([
+      presence.getSetting<string>("sFormat1"),
+      presence.getSetting<string>("sFormat2"),
+      presence.getSetting<boolean>("tElapsed")
+    ]);
 
   //! Merch website
   if (document.location.hostname === "onlyhit.merchforall.com") {
     //* Show timestamp if the setting is enabled and set largeImageKey
-    if (showElapsed) presenceData.startTimestamp = browsingStamp;
-    else delete presenceData.startTimestamp;
+    if (showElapsed) presenceData.startTimestamp = browsingTimestamp;
 
     presenceData.largeImageKey = "logo_onlyhit";
     presenceData.smallImageKey = "reading";
@@ -42,7 +32,7 @@ presence.on("UpdateData", async () => {
     if (document.location.hash.includes("/cart"))
       presenceData.details = "Store - Viewing cart";
     else if (document.location.pathname === "/") {
-      if (document.querySelector(".popup-container.active") !== null) {
+      if (document.querySelector(".popup-container.active")) {
         presenceData.details = "Store - Viewing product:";
         presenceData.state = document.querySelector(
           ".popup-container.active .product-title"
@@ -74,7 +64,7 @@ presence.on("UpdateData", async () => {
     const artist = document.querySelector(".artist").textContent,
       title = document.querySelector(".title").textContent,
       paused =
-        (document.querySelector(".fa-pause.pause-button") as HTMLElement).style
+        document.querySelector<HTMLElement>(".fa-pause.pause-button").style
           .cssText === "display: none;";
 
     //* Set state details and image to track information.
@@ -107,7 +97,7 @@ presence.on("UpdateData", async () => {
       !document.location.pathname.includes("video-version")
     ) {
       //* Show timestamp if the setting is enabled
-      if (showElapsed) presenceData.startTimestamp = browsingStamp;
+      if (showElapsed) presenceData.startTimestamp = browsingTimestamp;
       else delete presenceData.startTimestamp;
 
       //* Get page title, and set smallImageText to track information
@@ -165,8 +155,6 @@ presence.on("UpdateData", async () => {
   }
 
   //* Sets the presenceData, if there is no details it sets empty data (Which will still show "Playing OnlyHit")
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

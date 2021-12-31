@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Viruz",
     "id": "158973226465230848"
@@ -33,10 +33,11 @@
     "www.reddit.com",
     "old.reddit.com"
   ],
-  "version": "3.0.2",
+  "version": "3.0.4",
   "logo": "https://i.imgur.com/Yzr4SeJ.png",
   "thumbnail": "https://i.imgur.com/fPUwXN5.png",
   "color": "#ff4500",
+  "category": "socials",
   "tags": [
     "photos",
     "videos",
@@ -44,7 +45,6 @@
     "media",
     "memes"
   ],
-  "category": "socials",
   "settings": [
     {
       "id": "lang",

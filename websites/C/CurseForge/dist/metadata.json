@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -7,18 +7,18 @@
   "service": "CurseForge",
   "description": {
     "en": "CurseForge allows for the uploading and reviewing of plugins, add-ons, and modifications for various games.",
-    "nl": "CurseForge zorgt voor het uploaden en beoordelen van plug-ins, add-ons en mods voor verschillende games."
+    "nl": "CurseForge zorgt voor het uploaden en beoordelen van plugins, add-ons en mods voor verschillende games."
   },
   "url": "www.curseforge.com",
-  "version": "1.2.7",
+  "regExp": "([a-z0-9-]+[.])*curseforge[.]com[/]",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/3V6FWir.png",
   "thumbnail": "https://i.imgur.com/IClUTAu.png",
   "color": "#f16725",
+  "category": "games",
   "tags": [
     "mods",
     "plugins",
     "curseforge"
-  ],
-  "category": "games",
-  "regExp": "([a-z0-9-]+[.])*curseforge[.]com[/]"
+  ]
 }

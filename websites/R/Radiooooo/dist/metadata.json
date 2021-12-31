@@ -1,24 +1,24 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "SlowLife",
     "id": "374905512661221377"
   },
-  "url": "radiooooo.com",
+  "service": "Radiooooo",
   "description": {
     "en": "Radiooooo - The Musical Time Machine.",
     "nl": "Radiooooo - De muzikale tijdmachine."
   },
-  "service": "Radiooooo",
-  "version": "1.0.6",
+  "url": "radiooooo.com",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/EktlHNP.png",
   "thumbnail": "https://i.imgur.com/AT7vWm9.jpg",
   "color": "#108cb4",
+  "category": "music",
   "tags": [
     "music",
     "radio"
   ],
-  "category": "music",
   "settings": [
     {
       "id": "lang",

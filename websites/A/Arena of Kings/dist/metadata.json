@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Timeraa",
     "id": "223238938716798978"
@@ -13,16 +13,16 @@
     "fr": "Arena of Kings est un jeu next-gen PvP rapide joué dans le navigateur. Unissez-vous aux héros pour revendiquer le trône!",
     "uk_UA": "Arena of Kings - це браузерна гра з PvP ареною нового покоління з постійними оновленнями. Об’єднайте свої сили з героями, щоб зайняти трон!",
     "nl": "Arena of Kings is een snelle PvP Arena Game van de volgende generatie die gespeelt wordt in uw browser. Werk samen met helden om de troon op te eisen!",
-    "zh_CN": "Arena of Kings是在浏览器中进行的快节奏PvP竞技场游戏。快来与英雄们联手夺取王位！"
+    "zh_CN": "Arena of Kings是在浏览器中进行的快节奏PvP竞技场游戏。快来与英雄们联手夺取王位！",
+    "vi_VN": "Arena of Kings là trò chơi Arena thế hệ tiếp theo có nhịp độ nhanh được chơi ngay trên trình duyệt. Tham gia với các anh hùng để lấy ngôi vương!"
   },
-  "version": "2.3.8",
   "url": "arenaofkings.com",
+  "version": "2.3.11",
   "logo": "https://i.imgur.com/WLS3BqZ.png",
   "thumbnail": "https://i.imgur.com/2K6n54H.png",
   "color": "#4a4a4a",
+  "category": "games",
   "tags": [
     "game"
-  ],
-  "button": false,
-  "category": "games"
+  ]
 }

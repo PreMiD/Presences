@@ -10,7 +10,7 @@ interface GameState {
 }
 
 // This will be how the site talks to the extension.
-// JSON data will be written to the output.value
+// JSON data will be written to the output.textContent
 const output = document.createElement("textarea");
 output.id = "PreMiD_Salem_Out";
 output.style.display = "none";
@@ -20,7 +20,7 @@ document.body.append(output);
 // This is because the game information is not global and everything is rendered on a canvas.
 // However, it seems that every event is logged to the console.
 const s = document.createElement("script");
-s.innerHTML = `(()=>{
+s.textContent = `(()=>{
   const mainObject = {
     page: "Login",
     day: 1,
@@ -49,7 +49,7 @@ s.innerHTML = `(()=>{
   }
 
   const output = document.getElementById("PreMiD_Salem_Out");
-  output.value = JSON.stringify(mainObject);
+  output.textContent = JSON.stringify(mainObject);
   // messages that can be ignored by this program
   const ignoreRegex = /(Submitting chat)|(SocketSend\\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\\[ApplicationController]|\\[UnityCache]|\\[Subsystems]|\\[CachedXMLHttpRequest]/gm,
     oldLog = console.log;
@@ -66,11 +66,11 @@ s.innerHTML = `(()=>{
           mainObject.state = 1;
           mainObject.type = "Classic";
         }
-        output.value = JSON.stringify(mainObject);
+        output.textContent = JSON.stringify(mainObject);
       }else if(args[0].search(/^Creating lobby:/gm) === 0){
         const type = args[0].split(" |")[0].split(": ")[1];
         mainObject.type = type;
-        output.value = JSON.stringify(mainObject);
+        output.textContent = JSON.stringify(mainObject);
       }else if(args[0].search(/\\[Network]/gm) !== -1 && args[0].search(/Bytes:/gm) !== -1){
         const hex = args[0].split("Bytes: ")[1].split("</color>")[0],
           out = decodeHex(hex);
@@ -100,14 +100,14 @@ s.innerHTML = `(()=>{
               break;
             }
           }
-          output.value = JSON.stringify(mainObject);
+          output.textContent = JSON.stringify(mainObject);
         }
       }else if(args[0].search(/Entered HandleStartRanked/gm) === 0){
         mainObject.type = "Ranked";
-        output.value = JSON.stringify(mainObject);
+        output.textContent = JSON.stringify(mainObject);
       }else if(args[0].search(/Entered HandleOnLeaveRankedQueue/gm) === 0){
         mainObject.type = "Classic";
-        output.value = JSON.stringify(mainObject);
+        output.textContent = JSON.stringify(mainObject);
       }
     }catch(err){
       // console.error(err);
@@ -142,7 +142,7 @@ presence.on("UpdateData", () => {
       const e = document.getElementById(
           "PreMiD_Salem_Out"
         ) as HTMLTextAreaElement,
-        info = JSON.parse(e.value);
+        info = JSON.parse(e.textContent);
       if (oldState.page !== info.page) elapsed = Math.round(Date.now() / 1000);
 
       let key = "regular";

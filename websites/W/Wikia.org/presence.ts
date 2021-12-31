@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "850759953718575224"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
   presenceData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 const updateCallback = {
     _function: null as () => void,
@@ -28,7 +28,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -50,7 +50,7 @@ const updateCallback = {
 
 		Chapter 1
 		This one is for the front page of Wikia.org.
-		
+
 		*/
 
       if (currentPath[0] === "") presenceData.details = "On the index page";
@@ -62,17 +62,23 @@ const updateCallback = {
 
 		Chapter 2
 		This one is for the wiki part on the Wikia.org.
-		
+
 		*/
 
-      const mwConfig = await presence.getPageletiable('mw"]["config"]["values'),
+      const mwConfig = await presence.getPageletiable<{
+          wgSiteName: string;
+          wgAction: string;
+          wgPageName: string;
+          wgCanonicalNamespace: string;
+          wgNamespaceNumber: number;
+          wgIsMainPage: boolean;
+        }>('mw"]["config"]["values'),
         siteName = mwConfig.wgSiteName,
         lang = currentPath[0] === "wiki" ? "en" : currentPath[0],
         actionResult = (): string =>
           getURLParam("action") || getURLParam("veaction") || mwConfig.wgAction,
         titleFromURL = (): string => {
-          const raw = mwConfig.wgPageName;
-          return decodeURIComponent(raw.replace(/_/g, " "));
+          return decodeURIComponent(mwConfig.wgPageName.replace(/_/g, " "));
         },
         title = document.querySelector("h1")
           ? document.querySelector("h1").textContent.trim()
@@ -183,20 +189,18 @@ const updateCallback = {
             presenceData.details = "Editing a page";
           else presenceData.details = namespaceDetails();
         };
+      } else if (actionResult() === "edit") {
+        presenceData.details = document.querySelector("#ca-edit")
+          ? "Editing a page"
+          : "Viewing source";
+        presenceData.state = titleFromURL();
       } else {
-        if (actionResult() === "edit") {
-          presenceData.details = document.querySelector("#ca-edit")
-            ? "Editing a page"
-            : "Viewing source";
-          presenceData.state = titleFromURL();
-        } else {
-          presenceData.details = namespaceDetails();
-          presenceData.state = `${
-            title.toLowerCase() === titleFromURL().toLowerCase()
-              ? `${title}`
-              : `${title} (${titleFromURL()})`
-          }`;
-        }
+        presenceData.details = namespaceDetails();
+        presenceData.state = `${
+          title.toLowerCase() === titleFromURL().toLowerCase()
+            ? `${title}`
+            : `${title} (${titleFromURL()})`
+        }`;
       }
 
       if (presenceData.state) presenceData.state += ` | ${siteName}`;

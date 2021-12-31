@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -24,17 +24,17 @@
     "ram.userbenchmark.com",
     "usb.userbenchmark.com"
   ],
-  "version": "1.0.7",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/4TBit6H.png",
   "thumbnail": "https://i.imgur.com/JOE2SVg.png",
   "color": "#FDA217",
+  "category": "other",
   "tags": [
     "speed-test",
     "market",
     "hardware",
     "software"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "search",

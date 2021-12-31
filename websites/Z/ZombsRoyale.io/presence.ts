@@ -81,23 +81,19 @@ presence.on("UpdateData", async () => {
   const playing =
     presenceData.details === "In Game" || presenceData.details === "In Lobby";
 
-  if (playing && matchStart === null)
-    matchStart = Math.floor(Date.now() / 1000);
-  else if (!playing && matchStart !== null) matchStart = null;
+  if (playing && !matchStart) matchStart = Math.floor(Date.now() / 1000);
+  else if (!playing && matchStart) matchStart = null;
 
   presenceData.startTimestamp = matchStart;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
-// Stolen from https://github.com/PreMiD/Presences/blob/master/websites/R/Rythm/presence.ts#L461
 function getPageletiable(js: string): Promise<string> {
   const eventName = "PreMiD_ZombsRoyale_Pageletiable";
 
-  return new Promise<string>((resolve) => {
+  return new Promise<string>(resolve => {
     const script = document.createElement("script"),
       _listener = (data: CustomEvent) => {
         script.remove();

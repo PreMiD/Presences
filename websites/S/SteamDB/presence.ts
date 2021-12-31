@@ -1,15 +1,15 @@
 const presence = new Presence({
     clientId: "858408468854997052"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const time = await presence.getSetting("time"),
-    buttons = await presence.getSetting("buttons"),
-    accountValue = await presence.getSetting("accountValue"),
+  const time = await presence.getSetting<boolean>("time"),
+    buttons = await presence.getSetting<boolean>("buttons"),
+    accountValue = await presence.getSetting<number>("accountValue"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   switch (document.location.hostname) {
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Viewing Steam Charts";
           if (
             (document.getElementById("js-tag-select") as HTMLSelectElement)
-              .value !== "0"
+              .textContent !== "0"
           ) {
             presenceData.state = `Filter: ${
               (document.getElementById("js-tag-select") as HTMLSelectElement)
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
           }
           if (
             (document.getElementById("js-category-select") as HTMLSelectElement)
-              .value !== "0"
+              .textContent !== "0"
           ) {
             presenceData.state = `Filter: ${
               (
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
               (
                 document.getElementById("table-apps_filter").firstElementChild
                   .firstElementChild as HTMLInputElement
-              ).value
+              ).textContent
             }`;
           }
           break;
@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
                 document
                   .getElementsByClassName("number-price")
                   .item(0)
-                  .innerHTML.split(">")[2]
+                  .textContent.split(">")[2]
                   .split("<")[0]
               })`;
             } else if (accountValue === 1) {
@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
                 document
                   .getElementsByClassName("number-price-lowest")
                   .item(0)
-                  .innerHTML.split(">")[2]
+                  .textContent.split(">")[2]
                   .split("<")[0]
               })`;
             }
@@ -493,7 +493,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Browsing Most Followed Upcoming Games";
             if (
               (document.getElementById("js-tag-select") as HTMLSelectElement)
-                .value !== "0"
+                .textContent !== "0"
             ) {
               presenceData.state = `Filter: ${
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
@@ -510,7 +510,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Browsing Upcoming Games";
             if (
               (document.getElementById("js-tag-select") as HTMLSelectElement)
-                .value !== "0"
+                .textContent !== "0"
             ) {
               presenceData.state = `Filter: ${
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
@@ -552,7 +552,7 @@ presence.on("UpdateData", async () => {
                   document.getElementById(
                     "js-category-select"
                   ) as HTMLSelectElement
-                ).value !== "0"
+                ).textContent !== "0"
               ) {
                 presenceData.state = `Filter: ${
                   (
@@ -629,7 +629,7 @@ presence.on("UpdateData", async () => {
               presenceData.details = "Viewing Game Release Summary";
               if (
                 (document.getElementById("js-tag-select") as HTMLSelectElement)
-                  .value !== "0"
+                  .textContent !== "0"
               ) {
                 presenceData.state = `Filter: ${
                   (
@@ -706,7 +706,7 @@ presence.on("UpdateData", async () => {
                   .options[
                   (document.getElementById("inputType") as HTMLSelectElement)
                     .selectedIndex
-                ].textContent
+                ].value
               } Category: ${
                 (document.getElementById("inputCategory") as HTMLSelectElement)
                   .options[
@@ -814,7 +814,7 @@ presence.on("UpdateData", async () => {
                   document.getElementById(
                     "patchnotes_appid"
                   ) as HTMLInputElement
-                ).value || "All"
+                ).textContent || "All"
               }`;
               break;
           }

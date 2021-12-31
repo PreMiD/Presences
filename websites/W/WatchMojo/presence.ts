@@ -23,7 +23,7 @@ const presence = new Presence({
         buttonWatchVideo: "general.buttonWatchVideo",
         buttonPlayTrivia: "watchmojo.buttonPlayTrivia"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting<string>("lang")
     );
   },
   capitalize = (s: string) => {
@@ -38,9 +38,9 @@ const presence = new Presence({
     } else return s.charAt(0).toUpperCase() + s.slice(1);
   };
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
-  strings = getStrings(),
+  strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   iframeDur = 0,
   iframeCur = 0,
@@ -63,12 +63,12 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang"),
-    showBrowsing: boolean = await presence.getSetting("browse"),
-    showTimestamp: boolean = await presence.getSetting("timestamp"),
-    showButtons: boolean = await presence.getSetting("buttons"),
-    privacy: boolean = await presence.getSetting("privacy"),
-    video: HTMLVideoElement = document.querySelector("#myDiv_html5");
+  const newLang = await presence.getSetting<string>("lang"),
+    showBrowsing = await presence.getSetting<boolean>("browse"),
+    showTimestamp = await presence.getSetting<boolean>("timestamp"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    video = document.querySelector<HTMLVideoElement>("#myDiv_html5");
 
   let presenceData: PresenceData = {
     largeImageKey: "mojo"
@@ -76,141 +76,129 @@ presence.on("UpdateData", async () => {
 
   if (document.location.href !== prevUrl) {
     prevUrl = document.location.href;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
-  const path = location.href
-      .replace(/\/?$/, "/")
-      .replace(`https://${document.location.hostname}`, "")
-      .replace("?", "/")
-      .replace("=", "/"),
-    statics: {
-      [name: string]: PresenceData;
-    } = {
-      "/": {
-        details: (await strings).browse
-      },
-      "/video/id/(\\d*)/": {
-        details: privacy
-          ? (await strings).watchingVid
-          : (await strings).watching,
-        state: privacy
-          ? null
-          : document.querySelector(".brid-poster-title")?.textContent,
-        smallImageKey: video?.paused ? "pause" : "play",
-        smallImageText: video?.paused
-          ? (await strings).pause
-          : (await strings).play,
-        startTimestamp: video?.paused
-          ? null
-          : video
-          ? presence.getTimestampsfromMedia(video)[0]
-          : null,
-        endTimestamp: video?.paused
-          ? null
-          : video
-          ? presence.getTimestampsfromMedia(video)[1]
-          : null,
-        buttons: [
-          { label: (await strings).buttonWatchVideo, url: document.URL }
-        ]
-      },
-      "/trivia/": {
-        details: privacy
-          ? (await strings).playingTrivia
-          : (await strings).trivia.replace(
+  const statics: {
+    [name: string]: PresenceData;
+  } = {
+    "/": {
+      details: (await strings).browse
+    },
+    "/video/id/(\\d*)/": {
+      details: privacy ? (await strings).watchingVid : (await strings).watching,
+      state: privacy
+        ? null
+        : document.querySelector(".brid-poster-title")?.textContent,
+      smallImageKey: video?.paused ? "pause" : "play",
+      smallImageText: video?.paused
+        ? (await strings).pause
+        : (await strings).play,
+      startTimestamp: video?.paused
+        ? null
+        : video
+        ? presence.getTimestampsfromMedia(video)[0]
+        : null,
+      endTimestamp: video?.paused
+        ? null
+        : video
+        ? presence.getTimestampsfromMedia(video)[1]
+        : null,
+      buttons: [{ label: (await strings).buttonWatchVideo, url: document.URL }]
+    },
+    "/trivia/": {
+      details: privacy
+        ? (await strings).playingTrivia
+        : (await strings).trivia.replace(
+            "{0}",
+            document.querySelector("#yttitle")?.textContent
+          ),
+      state: privacy
+        ? null
+        : (await strings).triviaGame
+            .replace(
               "{0}",
-              document.querySelector("#yttitle")?.textContent
+              document
+                .querySelector("#questnum")
+                ?.textContent.split("of")[0]
+                .split(" ")[1]
+                .trim()
+            )
+            .replace(
+              "{1}",
+              document
+                .querySelector("#questnum")
+                ?.textContent.split("of")[1]
+                .split(" ")[1]
+                .trim()
+            )
+            .replace(
+              "{2}",
+              document
+                .querySelector(".scorequiz > b")
+                ?.textContent.split("/")[0]
+                .split(" ")[2]
+            )
+            .replace(
+              "{3}",
+              document
+                .querySelector(".scorequiz > b")
+                ?.textContent.split("/")[1]
             ),
-        state: privacy
-          ? null
-          : (await strings).triviaGame
-              .replace(
-                "{0}",
-                document
-                  .querySelector("#questnum")
-                  ?.textContent.split("of")[0]
-                  .split(" ")[1]
-                  .trim()
-              )
-              .replace(
-                "{1}",
-                document
-                  .querySelector("#questnum")
-                  ?.textContent.split("of")[1]
-                  .split(" ")[1]
-                  .trim()
-              )
-              .replace(
-                "{2}",
-                document
-                  .querySelector(".scorequiz > b")
-                  ?.textContent.split("/")[0]
-                  .split(" ")[2]
-              )
-              .replace(
-                "{3}",
-                document
-                  .querySelector(".scorequiz > b")
-                  ?.textContent.split("/")[1]
-              ),
-        smallImageKey: iframePau ? "pause" : "play",
-        smallImageText: iframePau
-          ? (await strings).pause
-          : (await strings).play,
-        startTimestamp: iframePau
-          ? 0
-          : presence.getTimestamps(iframeCur, iframeDur)[0],
-        endTimestamp: iframePau
-          ? 0
-          : presence.getTimestamps(iframeCur, iframeDur)[1],
-        buttons: [
-          { label: (await strings).buttonPlayTrivia, url: document.URL }
-        ]
-      },
-      "/blog/(\\d*)/(\\d*)/(\\d*)/": {
-        details: (await strings).article,
-        state: document.querySelector("h1")?.textContent,
-        buttons: [
-          { label: (await strings).buttonReadArticle, url: document.URL }
-        ]
-      },
-      "/categories/": {
-        details: (await strings).category,
-        state:
-          typeof location.pathname.split("/")[2] === "string"
-            ? capitalize(location.pathname.split("/")[2])
-            : "NEEDS RESET"
-      },
-      "/channels/": {
-        details: (await strings).viewChannel,
-        state: location.pathname.split("/")[2],
-        buttons: [
-          { label: (await strings).buttonViewChannel, url: document.URL }
-        ]
-      },
-      "/search/": {
-        details: (await strings).searchFor,
-        state:
-          document.querySelector("#result > div > b:nth-child(2)")
-            ?.textContent ||
-          document.querySelector("#resultd > a > span")?.textContent,
-        smallImageKey: "search",
-        smallImageText: (await strings).search
-      }
-    };
+      smallImageKey: iframePau ? "pause" : "play",
+      smallImageText: iframePau ? (await strings).pause : (await strings).play,
+      startTimestamp: iframePau
+        ? 0
+        : presence.getTimestamps(iframeCur, iframeDur)[0],
+      endTimestamp: iframePau
+        ? 0
+        : presence.getTimestamps(iframeCur, iframeDur)[1],
+      buttons: [{ label: (await strings).buttonPlayTrivia, url: document.URL }]
+    },
+    "/blog/(\\d*)/(\\d*)/(\\d*)/": {
+      details: (await strings).article,
+      state: document.querySelector("h1")?.textContent,
+      buttons: [{ label: (await strings).buttonReadArticle, url: document.URL }]
+    },
+    "/categories/": {
+      details: (await strings).category,
+      state:
+        typeof location.pathname.split("/")[2] === "string"
+          ? capitalize(location.pathname.split("/")[2])
+          : "NEEDS RESET"
+    },
+    "/channels/": {
+      details: (await strings).viewChannel,
+      state: location.pathname.split("/")[2],
+      buttons: [{ label: (await strings).buttonViewChannel, url: document.URL }]
+    },
+    "/search/": {
+      details: (await strings).searchFor,
+      state:
+        document.querySelector("#result > div > b:nth-child(2)")?.textContent ||
+        document.querySelector("#resultd > a > span")?.textContent,
+      smallImageKey: "search",
+      smallImageText: (await strings).search
+    }
+  };
 
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
   if (showBrowsing) {
     for (const [k, v] of Object.entries(statics)) {
-      if (path.match(k)) {
+      if (
+        location.href
+          .replace(/\/?$/, "/")
+          .replace(`https://${document.location.hostname}`, "")
+          .replace("?", "/")
+          .replace("=", "/")
+          .match(k)
+      ) {
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = (await strings).browse;
         presenceData = { ...presenceData, ...v };
@@ -233,8 +221,6 @@ presence.on("UpdateData", async () => {
   if (!presenceData.startTimestamp) delete presenceData.startTimestamp;
   if (!presenceData.endTimestamp) delete presenceData.endTimestamp;
 
-  if (!presenceData.details) {
-    presence.setActivity();
-    presence.setTrayTitle();
-  } else presence.setActivity(presenceData);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

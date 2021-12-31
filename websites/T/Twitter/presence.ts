@@ -2,9 +2,10 @@ const presence = new Presence({
     clientId: "802958757909889054"
   }),
   capitalize = (text: string): string => {
-    const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
-    return texts
-      .map((str) => {
+    return text
+      .replace(/[[{(_)}\]]/g, " ")
+      .split(" ")
+      .map(str => {
         return str.charAt(0).toUpperCase() + str.slice(1);
       })
       .join(" ");
@@ -50,22 +51,22 @@ async function getStrings() {
       viewing: "general.viewing",
       profile: "general.viewProfile"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy"),
-    time = await presence.getSetting("time");
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    time = await presence.getSetting<boolean>("time");
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   let title: string,
@@ -103,7 +104,7 @@ presence.on("UpdateData", async () => {
       info = null;
     } else {
       title = (await strings).search;
-      info = document.querySelector("input").value;
+      info = document.querySelector("input").textContent;
     }
   }
 
@@ -143,7 +144,7 @@ presence.on("UpdateData", async () => {
 
   const etcHeader: HTMLElement = Array.from(
     document.querySelectorAll("h2")
-  ).find((c) => c.parentElement.children[1]?.textContent.includes("@"));
+  ).find(c => c.parentElement.children[1]?.textContent.includes("@"));
 
   if (path.match("/moments") && etcHeader) {
     title = "Browsing Moments...";
@@ -156,11 +157,12 @@ presence.on("UpdateData", async () => {
   }
 
   if (window.location.href.match("tweetdeck.twitter.com/")) {
-    const container =
-      document.querySelector("#container > div") ||
-      document.createElement("HTMLDivElement");
-
-    title = `Tweetdeck (${container.childElementCount} Columns)`;
+    title = `Tweetdeck (${
+      (
+        document.querySelector("#container > div") ||
+        document.createElement("HTMLDivElement")
+      ).childElementCount
+    } Columns)`;
     image = "tweetdeck";
 
     const header = document.querySelector(".mdl-header-title"),

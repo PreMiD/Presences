@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
@@ -16,14 +16,14 @@
     "nl": "Google Domains is een dienst voor het registreren van internetdomeinnamen die wordt aangeboden door Google. Google Domains biedt domeinregistratie, DNS-hosting, DNSSEC, dynamische DNS, domein doorsturen en e-mail doorsturen."
   },
   "url": "domains.google.com",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/345qLaW.jpg",
   "thumbnail": "https://i.imgur.com/5EXKSHI.png",
   "color": "#FCBC03",
+  "category": "other",
   "tags": [
     "domain"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "domain",

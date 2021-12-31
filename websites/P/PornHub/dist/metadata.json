@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -20,16 +20,16 @@
     "www.pornhub.com",
     "www.pornhubpremium.com"
   ],
-  "version": "2.2.10",
+  "regExp": "([a-z0-9-]+[.])*pornhub[.]com[/]|([a-z0-9-]+[.])*pornhubpremium[.]com[/]",
+  "version": "2.2.12",
   "logo": "https://i.imgur.com/ey3BiTYl.jpg",
   "thumbnail": "https://i.imgur.com/HpbdwCv.png",
   "color": "#ff9801",
+  "category": "videos",
   "tags": [
     "video",
     "nsfw"
   ],
-  "category": "videos",
-  "regExp": "([a-z0-9-]+[.])*pornhub[.]com[/]|([a-z0-9-]+[.])*pornhubpremium[.]com[/]",
   "settings": [
     {
       "id": "time",

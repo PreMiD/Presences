@@ -1,105 +1,80 @@
 const presence = new Presence({
     clientId: "791258115622305813"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-  const button = await presence.getSetting("button"),
+  const button = await presence.getSetting<boolean>("button"),
     presenceData: PresenceData = {
-      largeImageKey: "mplogo"
+      largeImageKey: "mplogo",
+      startTimestamp: browsingTimestamp
     },
     title = document.querySelector(
       "body > div#page-wrapper > div#page > div#main-wrapper.clearfix > div#main.clearfix > div#content.column > div.section > h1#page-title.title"
     );
 
   if (document.location.hostname === "multporn.net") {
-    if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+    if (document.location.pathname === "/")
       presenceData.details = "Viewing Homepage";
-    } else if (document.location.pathname.includes("/comics/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/comics/")) {
       presenceData.details = "Reading Comic";
-      presenceData.state = `Reading: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/porn_comics")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Reading: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/porn_comics"))
       presenceData.details = "Browsing Porn Comics";
-    } else if (document.location.pathname.includes("/pictures/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/pictures/")) {
       presenceData.details = "Viewing Images";
-      presenceData.state = `Viewing: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/pictures")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Viewing: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/pictures"))
       presenceData.details = "Browsing Images";
-    } else if (document.location.pathname.includes("/video/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/video/")) {
       presenceData.details = "Watching Porn";
-      presenceData.state = `Watching: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/video")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Watching: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/video"))
       presenceData.details = "Browsing Videos";
-    } else if (document.location.pathname.includes("/hentai_manga/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/hentai_manga/")) {
       presenceData.details = "Reading H-Mangas";
-      presenceData.state = `Reading: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/hentai_manga")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Reading: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/hentai_manga"))
       presenceData.details = "Browsing H-Mangas";
-    } else if (document.location.pathname.includes("/hentai_video/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/hentai_video/")) {
       presenceData.details = "Watching Hentai";
-      presenceData.state = `Watching: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/hentai_video")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Watching: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/hentai_video"))
       presenceData.details = "Browsing Hentai";
-    } else if (document.location.pathname.includes("/hentai/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/hentai/")) {
       presenceData.details = "Viewing Hentai";
-      presenceData.state = `Viewing: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/hentai")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Viewing: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/hentai"))
       presenceData.details = "Browsing Hentai Images";
-    } else if (document.location.pathname.includes("/gif/" || "/GIF/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/gif/" || "/GIF/")) {
       presenceData.details = "Viewing Gifs";
-      presenceData.state = `Watching: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/GIF" || "/gif")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Watching: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/GIF" || "/gif"))
       presenceData.details = "Browsing Gifs";
-    } else if (document.location.pathname.includes("/rule_63/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/rule_63/")) {
       presenceData.details = "Viewing Rule 63 Images";
-      presenceData.state = `Viewing: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/rule_63")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Viewing: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/rule_63"))
       presenceData.details = "Browsing Rule 63 Images";
-    } else if (document.location.pathname.includes("/gay_porn_comics/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/gay_porn_comics/")) {
       presenceData.details = "Reading Gay Porn Comics";
-      presenceData.state = `Reading: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/gay_porn_comics")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Reading: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/gay_porn_comics"))
       presenceData.details = "Browsing Gay Porn Comics";
-    } else if (document.location.pathname.includes("/humor/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/humor/")) {
       presenceData.details = "Reading Adult Humor Comics";
-      presenceData.state = `Reading: ${title.innerHTML}`;
-    } else if (document.location.pathname.includes("/humor")) {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `Reading: ${title.textContent}`;
+    } else if (document.location.pathname.includes("/humor"))
       presenceData.details = "Browsing Adult Humor Comics";
-    } else if (document.location.pathname.includes("/gif")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/gif"))
       presenceData.details = "Browsing Gifs";
-    } else if (document.location.pathname.includes("/new")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/new"))
       presenceData.details = "Browsing Newest Comics";
-    } else if (document.location.pathname.includes("/best")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/best"))
       presenceData.details = "Browsing Top Comics";
-    } else if (document.location.pathname.includes("/random")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/random"))
       presenceData.details = "Browsing Random Comics";
-    } else if (document.location.pathname.includes("/search")) {
+    else if (document.location.pathname.includes("/search")) {
       //TODO Show Searches
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for Comics";
     }
   }
@@ -110,8 +85,6 @@ presence.on("UpdateData", async () => {
     ];
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

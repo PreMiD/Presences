@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "631803867708915732"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function getVideoData(element: HTMLElement): [string?, HTMLVideoElement?] {
   if (!element) return [];
@@ -21,12 +21,12 @@ function getVideoData(element: HTMLElement): [string?, HTMLVideoElement?] {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "facebook",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
-    privacyMode = await presence.getSetting("privacyMode"),
-    showTimestamp = await presence.getSetting("timestamp"),
-    showSeachQuery = await presence.getSetting("searchQuery"),
-    messagerUsername = await presence.getSetting("messagerUsername");
+    privacyMode = await presence.getSetting<boolean>("privacyMode"),
+    showTimestamp = await presence.getSetting<boolean>("timestamp"),
+    showSeachQuery = await presence.getSetting<boolean>("searchQuery"),
+    messagerUsername = await presence.getSetting<boolean>("messagerUsername");
 
   let dontShowTmp = false;
 
@@ -35,22 +35,18 @@ presence.on("UpdateData", async () => {
 
     if (document.location.pathname.includes("/t/")) {
       const username = document
-          .querySelector("div.t6p9ggj4.tkr6xdv7")
-          .querySelector("span > span")?.textContent,
-        hasText = !!document.querySelector('[data-text="true"]')?.textContent;
-
-      if (hasText) {
+        .querySelector("div.t6p9ggj4.tkr6xdv7")
+        .querySelector("span > span")?.textContent;
+      if (document.querySelector('[data-text="true"]')?.textContent) {
         if (privacyMode) presenceData.details = "Writing to someone";
         else {
           presenceData.details = "Writing to:";
           presenceData.state = messagerUsername ? username : "(Hidden)";
         }
-      } else {
-        if (privacyMode) presenceData.details = "Reading messages";
-        else {
-          presenceData.details = "Reading messages from:";
-          presenceData.state = messagerUsername ? username : "(Hidden)";
-        }
+      } else if (privacyMode) presenceData.details = "Reading messages";
+      else {
+        presenceData.details = "Reading messages from:";
+        presenceData.state = messagerUsername ? username : "(Hidden)";
       }
     } else if (document.location.pathname.includes("/new"))
       presenceData.details = "Composing a new message";
@@ -65,13 +61,11 @@ presence.on("UpdateData", async () => {
     if (privacyMode)
       presenceData.details = `Watching a ${isLive ? "live" : "video"}`;
     else {
-      const username =
-        document.querySelector("span.nc684nl6 > span")?.textContent ||
-        document.querySelector("span.nc684nl6 > a > strong > span")
-          ?.textContent;
-
       presenceData.details = `Watching a ${isLive ? "live" : "video"} on:`;
-      presenceData.state = `${username}'s profile`;
+      presenceData.state = `${
+        document.querySelector("span.nc684nl6 > span")?.textContent ||
+        document.querySelector("span.nc684nl6 > a > strong > span")?.textContent
+      }'s profile`;
 
       if (isLive) {
         presenceData.smallImageKey = "live";
@@ -81,10 +75,11 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
         if (video.paused) dontShowTmp = true;
-        else
+        else {
           presenceData.endTimestamp = presence
             .getTimestampsfromMedia(video)
             .pop();
+        }
       }
 
       presenceData.buttons = [
@@ -97,13 +92,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/photo/")) {
     if (privacyMode) presenceData.details = "Viewing a photo";
     else {
-      const username =
-        document.querySelector("span.nc684nl6 > span")?.textContent ||
-        document.querySelector("span.nc684nl6 > a > strong > span")
-          ?.textContent;
-
       presenceData.details = "Viewing a photo on:";
-      presenceData.state = `${username}'s profile'`;
+      presenceData.state = `${
+        document.querySelector("span.nc684nl6 > span")?.textContent ||
+        document.querySelector("span.nc684nl6 > a > strong > span")?.textContent
+      }'s profile'`;
 
       presenceData.buttons = [
         {
@@ -120,7 +113,7 @@ presence.on("UpdateData", async () => {
       const videoFrame = Array.from(
         document.querySelectorAll('div[class="l9j0dhe7"]')
       ).find(
-        (x) => !x.parentElement.querySelector("video")?.paused
+        x => !x.parentElement.querySelector("video")?.paused
       )?.parentElement;
 
       if (videoFrame) {
@@ -137,24 +130,22 @@ presence.on("UpdateData", async () => {
           presenceData.details = `Watch - Watching a ${
             isLive ? "live" : "video"
           }`;
+        } else if (isLive) {
+          presenceData.details = "Wattch - Watching a live:";
+          presenceData.state = description || user;
+
+          presenceData.smallImageKey = "live";
+          presenceData.smallImageText = "Live";
         } else {
-          if (isLive) {
-            presenceData.details = "Wattch - Watching a live:";
-            presenceData.state = description || user;
+          presenceData.details = "Watch - Watching a video:";
+          presenceData.state = description || user;
 
-            presenceData.smallImageKey = "live";
-            presenceData.smallImageText = "Live";
-          } else {
-            presenceData.details = "Watch - Watching a video:";
-            presenceData.state = description || user;
+          presenceData.smallImageText = "Playing";
+          presenceData.smallImageKey = "play";
 
-            presenceData.smallImageText = "Playing";
-            presenceData.smallImageKey = "play";
-
-            presenceData.endTimestamp = presence
-              .getTimestampsfromMedia(video)
-              .pop();
-          }
+          presenceData.endTimestamp = presence
+            .getTimestampsfromMedia(video)
+            .pop();
         }
       } else if (location.pathname.includes("/live")) {
         presenceData.details = "Watch - Watching a live";
@@ -164,7 +155,7 @@ presence.on("UpdateData", async () => {
       } else presenceData.details = "Watch - Browsing";
     } else if (videoId) {
       const [title, video] = getVideoData(
-        Array.from(document.querySelectorAll("video")).find((x) => !x.paused)
+        Array.from(document.querySelectorAll("video")).find(x => !x.paused)
       );
 
       if (title && !privacyMode) {
@@ -185,7 +176,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
     }
   } else if (document.location.pathname.includes("/marketplace/")) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (document.location.pathname.includes("/search/") && !privacyMode) {
       const search = new URLSearchParams(location.search).get("q");
       presenceData.smallImageKey = "search";
@@ -195,12 +186,10 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/item/")) {
       if (privacyMode) presenceData.details = "Marketplace - Viewing item";
       else {
-        const item = document.querySelector(
+        presenceData.details = "Marketplace - Viewing item:";
+        presenceData.state = document.querySelector(
           ".dati1w0a.qt6c0cv9.hv4rvrfc.discj3wi span"
         )?.textContent;
-
-        presenceData.details = "Marketplace - Viewing item:";
-        presenceData.state = item;
       }
     } else if (document.location.pathname.includes("/groups/"))
       presenceData.details = "Marketplace - Viewing groups";
@@ -403,31 +392,43 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/news"))
     presenceData.details = "News - Browsing";
   else if (document.location.pathname.includes("/search")) {
-    const query = new URLSearchParams(location.search).get("q");
-
     presenceData.smallImageKey = "search";
     if (privacyMode) presenceData.details = "Searching for something";
     else {
       presenceData.details = "Searching for:";
-      presenceData.state = showSeachQuery ? query : "(Hidded)";
+      presenceData.state = showSeachQuery
+        ? new URLSearchParams(location.search).get("q")
+        : "(Hidded)";
     }
   } else if (
-    document.querySelector("div.bi6gxh9e.aov4n071 span") &&
     document.querySelector(
-      "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.i1fnvgqd.gs1a9yip.owycx6da.btwxx1t3.pxsmfnpt.pedkr2u6.n1dktuyu.dvqrsczn.l23jz15m.d4752i1f > div > div > div > div > div > div"
+      "h2.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.d2edcug0.hpfvmrgz span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
+    ) ||
+    document.querySelector(
+      "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
     )
   ) {
-    const hasCheckInTab = !!Array.from(
-        document.querySelector(
-          "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.i1fnvgqd.gs1a9yip.owycx6da.btwxx1t3.pxsmfnpt.pedkr2u6.n1dktuyu.dvqrsczn.l23jz15m.d4752i1f > div > div > div > div > div > div"
-        ).children
-      ).find((x: HTMLAnchorElement) => x.href?.endsWith("/map")),
-      name = document
-        .querySelector("div.bi6gxh9e.aov4n071 span")
-        .textContent.trim();
+    const hasCommentInput = document.querySelector(
+      "div.m9osqain.a5q79mjw.gy2v8mqq.jm1wdb64.k4urcfbm.qv66sw1b span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7"
+    );
+    let name = document
+      .querySelector(
+        "span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
+      )
+      ?.textContent.trim();
 
-    presenceData.details = `Viewing ${hasCheckInTab ? "user" : "page"}:`;
-    presenceData.state = name;
+    if (!hasCommentInput) {
+      name = document
+        .querySelector(
+          "h2.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.d2edcug0.hpfvmrgz span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
+        )
+        ?.textContent.trim();
+    }
+
+    presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${
+      privacyMode ? "" : ":"
+    }`;
+    if (!privacyMode) presenceData.state = name || "Unknown";
   } else if (document.location.pathname.includes("/settings"))
     presenceData.details = "Settings";
   else if (document.location.pathname.includes("/places"))
@@ -440,8 +441,6 @@ presence.on("UpdateData", async () => {
     delete presenceData.endTimestamp;
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

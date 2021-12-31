@@ -1,23 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Discord.style",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Anaxes",
     "id": "567885938160697377"
   },
-  "category": "socials",
+  "service": "Discord.style",
+  "description": {
+    "en": "Online library for finding and sharing free Discord Templates. Upload your own Discord Template and collect votes!"
+  },
+  "url": "www.discord.style",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/1wKlRwf.png",
   "thumbnail": "https://i.imgur.com/pigr2GZ.jpg",
-  "version": "1.0.5",
   "color": "#1f2131",
+  "category": "socials",
   "tags": [
     "discord",
     "discord-templates"
   ],
-  "url": "www.discord.style",
-  "description": {
-    "en": "Online library for finding and sharing free Discord Templates. Upload your own Discord Template and collect votes!"
-  },
   "settings": [
     {
       "id": "timestamp",

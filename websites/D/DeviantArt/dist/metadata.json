@@ -1,10 +1,14 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
   },
   "service": "DeviantArt",
+  "description": {
+    "en": "Founded in August 2000, DeviantArt is the largest online social network for artists and art enthusiasts, and a platform for emerging and established artists to exhibit, promote, and share their works with an enthusiastic, art-centric community.",
+    "nl": "DeviantArt, opgericht in augustus 2000, is het grootste online sociaal netwerk voor kunstenaars en kunstliefhebbers, en een platform voor opkomende en gevestigde kunstenaars om hun werken tentoon te stellen, te promoten en te delen met een enthousiaste, kunst-georiënteerde gemeenschap."
+  },
   "url": [
     "www.deviantart.com",
     "chat.deviantart.com",
@@ -15,10 +19,11 @@
     "deviantartads.com",
     "sta.sh"
   ],
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/6ZCPjDK.png",
   "thumbnail": "https://i.imgur.com/zW8OMC7.png",
   "color": "#05cc47",
+  "category": "other",
   "tags": [
     "art",
     "fandom",
@@ -27,11 +32,6 @@
     "literature",
     "deviation"
   ],
-  "description": {
-    "en": "Founded in August 2000, DeviantArt is the largest online social network for artists and art enthusiasts, and a platform for emerging and established artists to exhibit, promote, and share their works with an enthusiastic, art-centric community.",
-    "nl": "DeviantArt, opgericht in augustus 2000, is het grootste online sociaal netwerk voor kunstenaars en kunstliefhebbers, en een platform voor opkomende en gevestigde kunstenaars om hun werken tentoon te stellen, te promoten en te delen met een enthousiaste, kunst-georiënteerde gemeenschap."
-  },
-  "category": "other",
   "settings": [
     {
       "id": "chatChannelNames",

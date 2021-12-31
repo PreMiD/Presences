@@ -1,25 +1,25 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Snazzah",
     "id": "158049329150427136"
   },
-  "url": "storyfire.com",
+  "service": "StoryFire",
   "description": {
     "en": "Join the StoryFire rebellion! Watch and create the stories and videos that you want while growing a massive fanbase!",
     "nl": "Kom bij de StoryFire rebellie! Bekijk en maak de verhalen en video's die jij wilt terwijl je een enorme fanbase opbouwt!"
   },
-  "service": "StoryFire",
-  "version": "1.1.5",
+  "url": "storyfire.com",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/1RGQMmt.png",
   "thumbnail": "https://i.imgur.com/voBWTFb.png",
   "color": "#fc9000",
+  "category": "socials",
   "tags": [
     "stories",
     "videos",
     "social"
   ],
-  "category": "socials",
   "settings": [
     {
       "id": "showsearchterm",

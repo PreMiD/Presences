@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -11,17 +11,17 @@
     "nl": "Top 10-lijsten voor muziek, tv, film en videogames."
   },
   "url": "watchmojo.com",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/zQetOPX.jpg",
   "thumbnail": "https://i.imgur.com/X2KmnaF.jpg",
   "color": "#01ffff",
+  "category": "videos",
   "tags": [
     "top10",
     "video",
     "media"
   ],
   "iframe": true,
-  "category": "videos",
   "settings": [
     {
       "id": "lang",

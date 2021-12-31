@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -41,17 +41,16 @@
     "beta.premid.app",
     "status.premid.app"
   ],
-  "version": "3.0.5",
+  "version": "3.0.7",
   "logo": "https://i.imgur.com/eYLI4hf.png",
   "thumbnail": "https://i.imgur.com/OYxIOZ8.png",
   "color": "#7289DA",
+  "category": "other",
   "tags": [
     "discord",
     "web-service",
     "inception"
   ],
-  "category": "other",
-  "button": false,
   "settings": [
     {
       "id": "lang",

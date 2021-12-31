@@ -1,20 +1,20 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Stan",
-  "version": "1.0.4",
-  "logo": "https://i.imgur.com/uxbPLH1.png",
-  "thumbnail": "https://i.imgur.com/xpxHLMw.png",
-  "category": "videos",
-  "color": "#0173fa",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "SlowLife",
     "id": "374905512661221377"
   },
-  "url": "play.stan.com.au",
+  "service": "Stan",
   "description": {
     "en": "Stan offers unlimited access to thousands of hours of entertainment, first-run exclusives, award-winning TV shows, blockbuster movies and kids content.",
     "nl": "Stan biedt onbeperkte toegang tot duizenden uren amusement, exclusieve primeurs, bekroonde tv-programma's, kaskrakerfilms en inhoud voor kinderen."
   },
+  "url": "play.stan.com.au",
+  "version": "1.0.6",
+  "logo": "https://i.imgur.com/uxbPLH1.png",
+  "thumbnail": "https://i.imgur.com/xpxHLMw.png",
+  "color": "#0173fa",
+  "category": "videos",
   "tags": [
     "stan",
     "drama",

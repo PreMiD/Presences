@@ -10,25 +10,24 @@ let gametypequery: string,
   alivecount: string,
   place: string;
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    broadcasttc = await presence.getSetting("broadcasttc"),
+    broadcasttc = await presence.getSetting<boolean>("broadcasttc"),
     active =
       window.getComputedStyle(document.getElementById("start-menu-wrapper"))
-        .display === "none",
-    end = document.querySelector(".ui-stats-current") !== null;
-  data.startTimestamp = browsingStamp;
+        .display === "none";
+  presenceData.startTimestamp = browsingTimestamp;
 
-  if (end) {
+  if (document.querySelector(".ui-stats-current")) {
     // Player is looking at match results, this needs to be before checking if active due to the way the active variable is set up
     place = document.querySelector(
       ".ui-stats-current .ui-stats-player-rank"
     ).textContent;
-    data.details = `Placed ${place}`;
+    presenceData.details = `Placed ${place}`;
   } else if (!active) {
     gametypequery = 'div[id="index-play-type-selected"]';
     gamemodequery = 'div[id="index-play-mode-selected"]';
@@ -38,14 +37,15 @@ presence.on("UpdateData", async () => {
     ) {
       // If the player made a team
       if (broadcasttc && (gametype === "Duo" || gametype === "Squad")) {
-        data.buttons = [
+        presenceData.buttons = [
           {
             label: "Join Game",
             url: document.baseURI
           }
         ];
-        data.smallImageKey = gametype.toLowerCase();
-        data.smallImageText = document.querySelector("#team-code").textContent;
+        presenceData.smallImageKey = gametype.toLowerCase();
+        presenceData.smallImageText =
+          document.querySelector("#team-code").textContent;
       }
       gametypequery = gametypequery.replace('"]', '-team"]');
       gamemodequery = gamemodequery.replace('"]', '-team"]');
@@ -53,20 +53,20 @@ presence.on("UpdateData", async () => {
 
     gametype = document.querySelector(gametypequery).textContent;
     gamemode = document.querySelector(gamemodequery).textContent;
-    data.details = "In the menus...";
+    presenceData.details = "In the menus...";
   } else if (active) {
     // Player is in-game
-    data.smallImageText = `Playing ${gametype}s`;
+    presenceData.smallImageText = `Playing ${gametype}s`;
     alivecount = document.querySelector(".ui-players-alive").textContent;
     killcount = document.querySelector(".ui-player-kills").textContent;
 
-    data.details = `${killcount} kill${
+    presenceData.details = `${killcount} kill${
       parseInt(killcount) !== 1 ? "s" : ""
     } with ${alivecount} alive`;
-    data.state = `${gamemode !== "50v50" ? `${gametype} - ` : ""}${gamemode}`;
+    presenceData.state = `${
+      gamemode !== "50v50" ? `${gametype} - ` : ""
+    }${gamemode}`;
   }
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

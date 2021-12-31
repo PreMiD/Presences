@@ -1,7 +1,7 @@
-const yabancidizi = new Presence({
+const presence = new Presence({
     clientId: "643593006821408778"
   }),
-  strings = yabancidizi.getStrings({
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
@@ -25,7 +25,7 @@ let video: {
   paused?: boolean;
 } = {};
 
-yabancidizi.on(
+presence.on(
   "iFrameData",
   (data: {
     error?: boolean;
@@ -37,7 +37,7 @@ yabancidizi.on(
   }
 );
 
-yabancidizi.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     _video = document.querySelector("video") as HTMLVideoElement,
     isVideoData = Object.keys(video).length > 0 ? true : false,
@@ -59,7 +59,7 @@ yabancidizi.on("UpdateData", async () => {
 
   if (!isVideoData && !_video) {
     if (page.includes("/kesfet")) {
-      yabancidizi.setActivity({
+      presence.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir sayfaya göz atıyor:",
         state: "Keşfet",
@@ -70,7 +70,7 @@ yabancidizi.on("UpdateData", async () => {
         "#router-view > div > div.profile-header > div.heading-user-title > h1"
       );
 
-      yabancidizi.setActivity({
+      presence.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir aktöre göz atıyor:",
         state: actorName ? actorName.textContent.trim() : "Belirsiz",
@@ -81,7 +81,7 @@ yabancidizi.on("UpdateData", async () => {
       categoryTitle &&
       categoryTitle.textContent !== ""
     ) {
-      yabancidizi.setActivity({
+      presence.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir kategoriye göz atıyor:",
         state: categoryTitle.textContent,
@@ -92,7 +92,7 @@ yabancidizi.on("UpdateData", async () => {
       categoryTitle &&
       categoryTitle.textContent !== ""
     ) {
-      yabancidizi.setActivity({
+      presence.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir kategoriye göz atıyor:",
         state: categoryTitle.textContent,
@@ -103,7 +103,7 @@ yabancidizi.on("UpdateData", async () => {
       categoryTitle2 &&
       categoryTitle2.textContent !== ""
     ) {
-      yabancidizi.setActivity({
+      presence.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir kategoriye göz atıyor:",
         state: categoryTitle2.textContent,
@@ -114,7 +114,7 @@ yabancidizi.on("UpdateData", async () => {
       showName &&
       showName.textContent !== ""
     ) {
-      yabancidizi.setActivity({
+      presence.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir diziye göz atıyor:",
         state: showName.textContent,
@@ -125,14 +125,14 @@ yabancidizi.on("UpdateData", async () => {
       userName &&
       userName.textContent !== ""
     ) {
-      yabancidizi.setActivity({
+      presence.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir profile göz atıyor:",
         state: userName.textContent,
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (pages[page] || pages[page.slice(0, -1)]) {
-      yabancidizi.setActivity({
+      presence.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir sayfaya göz atıyor:",
         state: pages[page] || pages[page.slice(0, -1)],
@@ -148,11 +148,11 @@ yabancidizi.on("UpdateData", async () => {
       );
 
     if (page.includes("/film") && movieTitle && movieTitle.textContent !== "") {
-      const [startTimestamp, endTimestamp] = yabancidizi.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(_video.currentTime),
           Math.floor(_video.duration)
         ),
-        data: PresenceData = {
+        presenceData: PresenceData = {
           largeImageKey: "yd-logo",
           details: "Bir film izliyor:",
           state: movieTitle.textContent,
@@ -163,16 +163,15 @@ yabancidizi.on("UpdateData", async () => {
         };
 
       if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
-        data.startTimestamp = startTimestamp;
-        data.endTimestamp = endTimestamp;
+        presenceData.startTimestamp = startTimestamp;
+        presenceData.endTimestamp = endTimestamp;
       }
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
-      yabancidizi.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
-      yabancidizi.setActivity(data);
+      presence.setActivity(presenceData);
     } else if (
       page.includes("/dizi/") &&
       title &&
@@ -180,11 +179,11 @@ yabancidizi.on("UpdateData", async () => {
       title.textContent !== "" &&
       episode.textContent !== ""
     ) {
-      const [startTimestamp, endTimestamp] = yabancidizi.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        data: PresenceData = {
+        presenceData: PresenceData = {
           largeImageKey: "yd-logo",
           details: "Bir film izliyor:",
           state: title.textContent,
@@ -194,18 +193,15 @@ yabancidizi.on("UpdateData", async () => {
             : (await strings).play
         };
 
-      data.startTimestamp = startTimestamp;
-      data.endTimestamp = endTimestamp;
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
 
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
-      yabancidizi.setTrayTitle(
-        video.paused ? "" : `${title.textContent} - ${episode.textContent}`
-      );
-      yabancidizi.setActivity(data);
+      presence.setActivity(presenceData);
     }
   } else if (isVideoData && video && !isNaN(video.duration)) {
     const showName2 = document.querySelector(
@@ -220,11 +216,11 @@ yabancidizi.on("UpdateData", async () => {
       movieTitle &&
       movieTitle.textContent !== ""
     ) {
-      const [startTimestamp, endTimestamp] = yabancidizi.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        data: PresenceData = {
+        presenceData: PresenceData = {
           largeImageKey: "yd-logo",
           details: "Bir film izliyor:",
           state: movieTitle.textContent,
@@ -235,16 +231,15 @@ yabancidizi.on("UpdateData", async () => {
         };
 
       if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
-        data.startTimestamp = startTimestamp;
-        data.endTimestamp = endTimestamp;
+        presenceData.startTimestamp = startTimestamp;
+        presenceData.endTimestamp = endTimestamp;
       }
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
-      yabancidizi.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
-      yabancidizi.setActivity(data);
+      presence.setActivity(presenceData);
     } else if (
       page.includes("/dizi/") &&
       showName2 &&
@@ -252,11 +247,11 @@ yabancidizi.on("UpdateData", async () => {
       episode &&
       episode.textContent !== ""
     ) {
-      const [startTimestamp, endTimestamp] = yabancidizi.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        data: PresenceData = {
+        presenceData: PresenceData = {
           largeImageKey: "yd-logo",
           details: showName2.textContent,
           state: episode.textContent,
@@ -267,21 +262,18 @@ yabancidizi.on("UpdateData", async () => {
         };
 
       if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
-        data.startTimestamp = startTimestamp;
-        data.endTimestamp = endTimestamp;
+        presenceData.startTimestamp = startTimestamp;
+        presenceData.endTimestamp = endTimestamp;
       }
       if (video.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
-      yabancidizi.setTrayTitle(
-        video.paused ? "" : `${showName2.textContent} - ${episode.textContent}`
-      );
-      yabancidizi.setActivity(data);
+      presence.setActivity(presenceData);
     }
   } else {
-    yabancidizi.setActivity({
+    presence.setActivity({
       largeImageKey: "yd-logo",
       details: "Bir sayfaya göz atıyor:",
       state: "Bilinmeyen Sayfa",

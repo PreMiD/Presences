@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "roll20_logo",
       startTimestamp: websiteLoadTimestamp
     },
-    hideDetails = await presence.getSetting("hideDetails");
+    hideDetails = await presence.getSetting<boolean>("hideDetails");
 
   if (
     document.location.pathname.endsWith("roll20.net") ||
@@ -90,8 +90,6 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "Reading Blog";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

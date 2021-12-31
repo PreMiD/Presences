@@ -1,24 +1,24 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Snazzah",
     "id": "158049329150427136"
   },
-  "url": "tricksplit.io",
+  "service": "TrickSplit.io",
   "description": {
     "en": "Alternative Agar.io website, with different modes.",
     "nl": "Alternatieve Agar.io-website, met verschillende modi."
   },
-  "service": "TrickSplit.io",
-  "version": "1.0.5",
+  "url": "tricksplit.io",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/JdlCrl8.png",
   "thumbnail": "https://i.imgur.com/UshRMAY.png",
   "color": "#ABCF44",
+  "category": "games",
   "tags": [
     "agario",
     "game",
     "miniclip"
   ],
-  "category": "games",
   "iframe": true
 }

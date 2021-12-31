@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: "765261270814949417" }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let oldLang: string = null,
   strings: LangStrings;
 
@@ -23,10 +23,10 @@ function hasMeta(metaName: string): boolean {
 }
 
 presence.on("UpdateData", async () => {
-  const incognito: boolean = await presence.getSetting("incognito"),
-    showTimestamp: boolean = await presence.getSetting("showTimestamp"),
-    showButtons: boolean = await presence.getSetting("buttons"),
-    newLang: string = await presence.getSetting("lang");
+  const incognito = await presence.getSetting<boolean>("incognito"),
+    showTimestamp = await presence.getSetting<boolean>("showTimestamp"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
+    newLang = await presence.getSetting<string>("lang");
   if (!oldLang || oldLang !== newLang) {
     oldLang = newLang;
     strings = await presence.getStrings(
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "img_logo"
   };
 
-  if (showTimestamp === true) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp === true) presenceData.startTimestamp = browsingTimestamp;
 
   if (incognito === false) {
     if (
@@ -97,10 +97,8 @@ presence.on("UpdateData", async () => {
     }
   } else presenceData.details = strings.privacyVisit;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 interface LangStrings {

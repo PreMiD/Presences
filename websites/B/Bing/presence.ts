@@ -7,23 +7,17 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  /**
-   * Get search query from HTML form input.
-   */
+  // Get search query from HTML form input.
   function searchQuery(): HTMLInputElement {
     return document.getElementById("sb_form_q") as HTMLInputElement;
   }
 
-  /**
-   * Get amount of results from query.
-   */
+  //  Get amount of results from query.
   function queryResults(): HTMLElement {
     return document.getElementsByClassName("sb_count")[0] as HTMLElement;
   }
 
-  /**
-   * Sets the timestamp.
-   */
+  // Sets the timestamp.
   function setTimestamp(): number {
     return Math.floor(Date.now() / 1000);
   }
@@ -33,7 +27,7 @@ presence.on("UpdateData", async () => {
    * @param {String} settingName Name of the setting
    */
   async function handleFormatting(settingName: string): Promise<string> {
-    const setting = await presence.getSetting(settingName);
+    const setting = await presence.getSetting<string>(settingName);
     return setting.replace("%search%", searchQuery().value);
   }
 
@@ -43,10 +37,10 @@ presence.on("UpdateData", async () => {
     document.location.href.includes("/?cc=") ||
     document.location.href.includes("/?FORM=Z9FD1")
   ) {
-    presenceData.details = await presence.getSetting("homepageMessage");
+    presenceData.details = await presence.getSetting<string>("homepageMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/account/general")) {
-    presenceData.details = await presence.getSetting("settingsMessage");
+    presenceData.details = await presence.getSetting<string>("settingsMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("?q=")) {
     presenceData.startTimestamp = setTimestamp();
@@ -60,12 +54,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = await handleFormatting("newsSearch");
     else {
       presenceData.details = await handleFormatting("standardSearch");
-      presenceData.state = queryResults().innerText;
+      presenceData.state = queryResults().textContent;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

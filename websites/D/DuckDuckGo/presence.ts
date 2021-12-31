@@ -7,16 +7,12 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  /**
-   * Get search query from HTML form input.
-   */
+  // Get search query from HTML form input.
   function searchQuery(): HTMLInputElement {
     return document.getElementById("search_form_input") as HTMLInputElement;
   }
 
-  /**
-   * Sets the timestamp.
-   */
+  // Sets the timestamp.
   function setTimestamp(): number {
     return Math.floor(Date.now() / 1000);
   }
@@ -30,7 +26,7 @@ presence.on("UpdateData", async () => {
     settingName: string,
     content?: string
   ): Promise<string> {
-    const setting = await presence.getSetting(settingName);
+    const setting = await presence.getSetting<string>(settingName);
     if (!content) return setting.replace("%search%", searchQuery().value);
     return setting.replace("%content%", content);
   }
@@ -40,10 +36,10 @@ presence.on("UpdateData", async () => {
     document.URL === "https://duckduckgo.com" ||
     document.location.href.includes("/&t=h_")
   ) {
-    presenceData.details = await presence.getSetting("homepageMessage");
+    presenceData.details = await presence.getSetting<string>("homepageMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/settings")) {
-    presenceData.details = await presence.getSetting("settingsMessage");
+    presenceData.details = await presence.getSetting<string>("settingsMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("?q=")) {
     presenceData.startTimestamp = setTimestamp();
@@ -70,13 +66,11 @@ presence.on("UpdateData", async () => {
         "stockSearch",
         document
           .getElementsByClassName("stocks__header")[0]
-          .getElementsByTagName("a")[0].innerText
+          .getElementsByTagName("a")[0].textContent
       );
     } else presenceData.details = await handleFormatting("standardSearch");
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

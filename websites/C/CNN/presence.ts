@@ -1,23 +1,22 @@
 const presence = new Presence({
     clientId: "839539095393796116"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
   const setting = {
-      timeElapsed: await presence.getSetting("timeElapsed"),
-      showButtons: await presence.getSetting("showButtons"),
-      logo: await presence.getSetting("logo"),
-      privacy: await presence.getSetting("privacy")
+      timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
+      showButtons: await presence.getSetting<boolean>("showButtons"),
+      logo: await presence.getSetting<0 | 1>("logo"),
+      privacy: await presence.getSetting<boolean>("privacy")
     },
-    logoArr = ["logo", "logo-transp"],
     urlpath = window.location.pathname.split("/"),
     presenceData: PresenceData = {
-      largeImageKey: logoArr[setting.logo] || "logo"
+      largeImageKey: ["logo", "logo-transp"][setting.logo] || "logo"
     };
 
   if (setting.timeElapsed && !setting.privacy)
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
   if (!urlpath[1]) presenceData.details = "Home";
   else if (
@@ -43,15 +42,15 @@ presence.on("UpdateData", async function () {
     urlpath[1] === "middle-east" ||
     urlpath[1] === "uk"
   ) {
-    const category =
-      document.querySelector("h1.metadata-header__title")?.textContent ||
-      document
-        .querySelector(".Text-sc-1amvtpj-0-span.jKFEoX")
-        ?.textContent.replace("Follow CNN ", "") ||
-      "Not found";
-
     presenceData.details = setting.privacy ? "Category" : "Category:";
-    if (!setting.privacy) presenceData.state = category;
+    if (!setting.privacy) {
+      presenceData.state =
+        document.querySelector("h1.metadata-header__title")?.textContent ||
+        document
+          .querySelector(".Text-sc-1amvtpj-0-span.jKFEoX")
+          ?.textContent.replace("Follow CNN ", "") ||
+        "Not found";
+    }
 
     if (setting.showButtons && !setting.privacy) {
       presenceData.buttons = [
@@ -69,11 +68,11 @@ presence.on("UpdateData", async function () {
     urlpath[3] >= "01" &&
     urlpath[3] <= "31"
   ) {
-    const article =
-      document.querySelector("h1.pg-headline")?.textContent || "Not found";
-
     presenceData.details = setting.privacy ? "Article" : "Article:";
-    if (!setting.privacy) presenceData.state = article;
+    if (!setting.privacy) {
+      presenceData.state =
+        document.querySelector("h1.pg-headline")?.textContent || "Not found";
+    }
 
     if (setting.showButtons && !setting.privacy) {
       presenceData.buttons = [
@@ -84,12 +83,12 @@ presence.on("UpdateData", async function () {
       ];
     }
   } else if (urlpath[1] === "profiles") {
-    const profile =
-      document.querySelector("div.cd__profile-name")?.textContent ||
-      "Not found";
-
     presenceData.details = setting.privacy ? "Profile" : "Profile:";
-    if (!setting.privacy) presenceData.state = profile;
+    if (!setting.privacy) {
+      presenceData.state =
+        document.querySelector("div.cd__profile-name")?.textContent ||
+        "Not found";
+    }
 
     if (setting.showButtons && !setting.privacy) {
       presenceData.buttons = [
@@ -102,20 +101,20 @@ presence.on("UpdateData", async function () {
   } else if (urlpath[1] === "specials") {
     if (urlpath[2]) {
       if (urlpath[3] && urlpath[2] !== "us") {
-        const special =
-          document.querySelector("h1.pg-headline")?.textContent ||
-          document.querySelector("li>a.geyBat")?.textContent ||
-          "Not found";
-
         presenceData.details = setting.privacy ? "Special" : "Special:";
-        if (!setting.privacy) presenceData.state = special;
+        if (!setting.privacy) {
+          presenceData.state =
+            document.querySelector("h1.pg-headline")?.textContent ||
+            document.querySelector("li>a.geyBat")?.textContent ||
+            "Not found";
+        }
       } else {
-        const special =
-          document.querySelector("a.sc-fjdhpX.sc-chPdSV.ewmEKt")?.textContent ||
-          "Not found";
-
         presenceData.details = setting.privacy ? "Special" : "Special:";
-        if (!setting.privacy) presenceData.state = special;
+        if (!setting.privacy) {
+          presenceData.state =
+            document.querySelector("a.sc-fjdhpX.sc-chPdSV.ewmEKt")
+              ?.textContent || "Not found";
+        }
       }
 
       if (setting.showButtons && !setting.privacy) {
@@ -140,10 +139,9 @@ presence.on("UpdateData", async function () {
 
       presenceData.state = `${scoreStyle2[1]?.textContent}: ${scoreStyle[1]?.textContent} - ${scoreStyle2[2]?.textContent}: ${scoreStyle[2]?.textContent}`;
     } else if (urlpath[4] === "state") {
-      const details = document.querySelector(
+      presenceData.state = document.querySelector(
         "h1.pagestyles__DesktopH1-sc-7kqwl2-74"
       )?.textContent;
-      presenceData.state = details;
 
       if (setting.showButtons && !setting.privacy) {
         presenceData.buttons = [
@@ -168,8 +166,6 @@ presence.on("UpdateData", async function () {
     presenceData.details = "Browsing Newsletters";
   else presenceData.details = "Other";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -13,10 +13,18 @@ let timestamps: number[],
   paused: boolean,
   playback: boolean,
   lastPlaybackState: boolean,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframeVideo.duration !== null ? true : false;
+interface IFrameData {
+  iframeVideo: {
+    iFrameVideo: true;
+    currTime: number;
+    dur: number;
+    paused: boolean;
+  };
+}
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = data.iframeVideo.dur ? true : false;
 
   if (playback) {
     ({ iFrameVideo, paused } = data.iframeVideo);
@@ -29,12 +37,13 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "lr"
     },
-    sGlobalRepeat = await presence.getSetting("sGlobalRepeat"),
-    sFormatRepeat = await presence.getSetting("sFormatRepeat"),
-    sFormatGlobalRepeat = await presence.getSetting("sFormatGlobalRepeat"),
+    [sGlobalRepeat, sFormatRepeat, sFormatGlobalRepeat] = await Promise.all([
+      presence.getSetting<boolean>("sGlobalRepeat"),
+      presence.getSetting<string>("sFormatRepeat"),
+      presence.getSetting<string>("sFormatGlobalRepeat")
+    ]),
     //TODO language selector and translation strings
     repeatsTrans = "Repeats",
-    gRepeatTrans = "Global Repeats",
     repeats = document
       .querySelector(
         "#content > div.main-area-offset > div:nth-child(2) > div.player-card > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2) > div > div > span"
@@ -52,7 +61,7 @@ presence.on("UpdateData", async () => {
 
   if (lastPlaybackState !== playback) {
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (iFrameVideo === true && !isNaN(duration)) {
@@ -67,12 +76,12 @@ presence.on("UpdateData", async () => {
     [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
     [presenceData.details] = document.title.split(" - Listen On Repeat");
 
-    if (globalRepeats !== null) {
+    if (globalRepeats) {
       if (sGlobalRepeat) {
         presenceData.state = sFormatGlobalRepeat
           .replace("%repeatm%", repeatsTrans)
           .replace("%repeats%", repeats)
-          .replace("%grepeatm%", gRepeatTrans)
+          .replace("%grepeatm%", "Global Repeats")
           .replace("%grepeats%", globalRepeats);
       } else {
         presenceData.state = sFormatRepeat
@@ -90,14 +99,12 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
   } else if (iFrameVideo === null && isNaN(duration)) {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Loading video...";
     [presenceData.state] = document.title.split(" - Listen On Repeat");
     presenceData.smallImageKey = "reading";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

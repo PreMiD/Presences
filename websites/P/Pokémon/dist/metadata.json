@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -18,16 +18,16 @@
     "nl": "Pokémon zijn wezens in alle soorten en maten die in het wild of naast mensen leven. Voor het grootste deel spreken Pokémon niet, behalve om hun namen uit te spreken. Er zijn momenteel meer dan 700 wezens die het Pokémon-universum bewonen."
   },
   "url": "www.pokemon.com",
-  "version": "1.1.9",
+  "regExp": "([a-z0-9-]+[.])*(pokemon|portal-pokemon|pokemontcg|pokemoncenter|pokemoncenter-online|pokemon-cafe|pokemonkorea|pokemoncard|pokemonstore|pokemon-movie|pokemon-card)([.][a-z]+)+[/]",
+  "version": "1.1.11",
   "logo": "https://i.imgur.com/1BcRgET.png",
   "thumbnail": "https://i.imgur.com/WBJfQkW.jpg",
   "color": "#ffcb05",
+  "category": "games",
   "tags": [
     "pokémon",
     "pokémontv"
   ],
-  "category": "games",
-  "regExp": "([a-z0-9-]+[.])*(pokemon|portal-pokemon|pokemontcg|pokemoncenter|pokemoncenter-online|pokemon-cafe|pokemonkorea|pokemoncard|pokemonstore|pokemon-movie|pokemon-card)([.][a-z]+)+[/]",
   "settings": [
     {
       "id": "pdexID",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
@@ -9,13 +9,16 @@
     "en": "Beats Radio is a 24/7 international hit music station that provides hit music to everyone. Made by gamers for gamers.",
     "fr": "Beats Radio est une station de musique à succès internationale 24/7 qui fournit de la musique à succès à tout le monde. Fabriqué par des joueurs pour des joueurs.",
     "nl": "Beats Radio is een 24/7 internationaal hitmuziekstation dat iedereen hitmuziek biedt. Gemaakt door gamers voor gamers.",
-    "ga_IE": "Is stáisiún ceoil idirnáisiúnta buailte é Beats Radio a chuireann ceol buailte ar fáil do gach duine. Déanta ag gamers do gamers."
+    "ga_IE": "Is stáisiún ceoil idirnáisiúnta buailte é Beats Radio a chuireann ceol buailte ar fáil do gach duine. Déanta ag gamers do gamers.",
+    "vi_VN": "Beats Radio là trạm phát nhạc nổi tiếng từ toàn cầu phát 24/7, cung cấp những bản nhạc nổi nhất dành cho mọi người. Được dựng bởi các gamer dành cho các gamer."
   },
   "url": "itsbeats.net",
-  "version": "1.0.1",
+  "regExp": "([a-z0-9-]+[.])*(itsbeats[.]net)[/]",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/36Ln5RE.png",
   "thumbnail": "https://i.imgur.com/audBuMC.png",
   "color": "#32a852",
+  "category": "music",
   "tags": [
     "music",
     "radio",
@@ -24,7 +27,6 @@
     "beats",
     "beatsradio"
   ],
-  "category": "music",
   "settings": [
     {
       "id": "timestamp",
@@ -46,6 +48,5 @@
       "value": "%songText%",
       "placeholder": "%artist% - %song%"
     }
-  ],
-  "regExp": "([a-z0-9-]+[.])*(itsbeats[.]net)[/]"
+  ]
 }

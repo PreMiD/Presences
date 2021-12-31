@@ -1,15 +1,21 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Armorgames",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Dark_Ville",
     "id": "638080361179512853"
   },
-  "category": "games",
+  "service": "Armorgames",
+  "description": {
+    "en": "Play free online games at armorgames.",
+    "nl": "Speel gratis online games op armorgames.",
+    "vi_VN": "Chơi các trò chơi trực tuyến miễn phí tại armorgames."
+  },
+  "url": "armorgames.com",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/ofYOGAJ.png",
   "thumbnail": "https://i.imgur.com/aijPtTu.jpg",
-  "version": "1.0.3",
   "color": "#9ed2de",
+  "category": "games",
   "tags": [
     "armorgames",
     "armor",
@@ -18,10 +24,5 @@
     "flash",
     "mmo",
     "fantasy"
-  ],
-  "url": "armorgames.com",
-  "description": {
-    "en": "Play free online games at armorgames.",
-    "nl": "Speel gratis online games op armorgames."
-  }
+  ]
 }

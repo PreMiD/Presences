@@ -1,26 +1,26 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Snazzah",
     "id": "158049329150427136"
   },
-  "url": "github.dev",
-  "regExp": "(.*[.])?github.dev",
+  "service": "GitHub Codespaces",
   "description": {
     "en": "Contribute to projects without complicating your local setup. Spin up dev environments with a click — even for projects you haven't worked on before — and switch between them with ease.",
     "nl": "Draag bij aan projecten zonder uw lokale installatie ingewikkelder te maken. Zet met één klik een ontwikkelomgeving op, zelfs voor projecten waar u nog niet eerder aan hebt gewerkt, en schakel er gemakkelijk tussen."
   },
-  "service": "GitHub Codespaces",
-  "version": "1.0.9",
+  "url": "github.dev",
+  "regExp": "(.*[.])?github.dev",
+  "version": "1.0.11",
   "logo": "https://i.imgur.com/JWaYQC8.png",
   "thumbnail": "https://i.imgur.com/fLQ6JLS.png",
   "color": "#000000",
+  "category": "other",
   "tags": [
     "programming",
     "sharing",
     "coding"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "details",

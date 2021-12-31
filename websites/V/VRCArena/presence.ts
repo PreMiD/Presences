@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    privacymode = await presence.getSetting("privacy");
+    privacymode = await presence.getSetting<boolean>("privacy");
 
   if (document.location.hostname === "www.vrcarena.com") {
     if (!privacymode) {
@@ -56,19 +56,14 @@ presence.on("UpdateData", async () => {
       // User is viewing an asset.
       if (document.location.pathname.includes("/create"))
         presenceData.details = "Creating an asset";
-      else {
-        if (privacymode === false) {
-          const assetName = document.querySelector(
-              "h1.MuiTypography-root > a"
-            ).textContent,
-            parentforinfo = document.querySelector(
-              "h1.MuiTypography-root"
-            ).parentNode,
-            otherinfo = parentforinfo.querySelector("div > div").textContent;
-          presenceData.details = assetName;
-          presenceData.state = otherinfo;
-        } else presenceData.details = "Looking at an asset";
-      }
+      else if (privacymode === false) {
+        presenceData.details = document.querySelector(
+          "h1.MuiTypography-root > a"
+        ).textContent;
+        presenceData.state = document
+          .querySelector("h1.MuiTypography-root")
+          .parentNode.querySelector("div > div").textContent;
+      } else presenceData.details = "Looking at an asset";
       presence.setActivity(presenceData);
       // User pages
     } else if (document.location.pathname.includes("/users")) {
@@ -76,12 +71,10 @@ presence.on("UpdateData", async () => {
         "h1.MuiTypography-root"
       ).textContent;
       if (thetitle === "All Users") presenceData.details = "Browsing users";
-      else {
-        if (privacymode === false) {
-          presenceData.details = "Viewing user";
-          presenceData.state = thetitle;
-        } else presenceData.details = "Browsing users";
-      }
+      else if (privacymode === false) {
+        presenceData.details = "Viewing user";
+        presenceData.state = thetitle;
+      } else presenceData.details = "Browsing users";
       presence.setActivity(presenceData);
       // Pages that aren't the focus of the website will be kept in the else statement.
     } else if (document.location.pathname.includes("/species")) {

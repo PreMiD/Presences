@@ -1,25 +1,25 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "version": "1.0.3",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "SlowLife",
     "id": "374905512661221377"
   },
   "service": "Emanate",
-  "category": "music",
-  "color": "#1e1e1e",
-  "logo": "https://i.imgur.com/yFQLKFU.png",
-  "thumbnail": "https://i.imgur.com/XnyMHma.png",
-  "tags": [
-    "music"
-  ],
+  "description": {
+    "en": "Emanate unites musicians and music lovers on a fast and fair collaboration and sharing platform to create and earn more. You’ve always lived for music, now make it a living."
+  },
   "url": [
     "dashboard.emanate.live",
     "emanate.live"
   ],
-  "description": {
-    "en": "Emanate unites musicians and music lovers on a fast and fair collaboration and sharing platform to create and earn more. You’ve always lived for music, now make it a living."
-  },
+  "version": "1.0.5",
+  "logo": "https://i.imgur.com/yFQLKFU.png",
+  "thumbnail": "https://i.imgur.com/XnyMHma.png",
+  "color": "#1e1e1e",
+  "category": "music",
+  "tags": [
+    "music"
+  ],
   "settings": [
     {
       "id": "buttons",

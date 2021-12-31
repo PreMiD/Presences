@@ -25,43 +25,42 @@ let gameStartTimestamp: number = null,
   agarData: AgarData = null;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "agar"
     },
-    buttons = await presence.getSetting("buttons");
+    buttons = await presence.getSetting<boolean>("buttons");
 
   if (agarData) {
     if (agarData.connecting) {
-      data.details = "Connecting...";
+      presenceData.details = "Connecting...";
       gameStartTimestamp = null;
     } else {
       switch (agarData.state) {
         case 0:
-          data.details = "Main Menu";
+          presenceData.details = "Main Menu";
           gameStartTimestamp = null;
           break;
         case 1:
-          if (await presence.getSetting("showName"))
-            data.details = `Playing as ${agarData.nick}`;
-          else data.details = "Playing";
+          if (await presence.getSetting<boolean>("showName"))
+            presenceData.details = `Playing as ${agarData.nick}`;
+          else presenceData.details = "Playing";
           gameStartTimestamp ??= Date.now();
           break;
         case 2:
-          data.details = "Game Over";
+          presenceData.details = "Game Over";
           gameStartTimestamp = null;
           break;
         case 3:
-          data.details = "Spectating";
+          presenceData.details = "Spectating";
           gameStartTimestamp = null;
           break;
       }
-      data.state = gameModeMap[agarData.gameMode];
-      data.startTimestamp = gameStartTimestamp;
+      presenceData.state = gameModeMap[agarData.gameMode];
+      presenceData.startTimestamp = gameStartTimestamp;
 
       if (buttons) {
-        const code = document.querySelector(".partymode-info > #code");
-        if (code) {
-          data.buttons = [
+        if (document.querySelector(".partymode-info > #code")) {
+          presenceData.buttons = [
             {
               label: "Join Party",
               url: document.URL
@@ -73,10 +72,11 @@ presence.on("UpdateData", async () => {
   }
 
   // If data doesn't exist clear else set activity to the presence data
-  if (!data.details) {
-    presence.setTrayTitle(); // Clear tray
-    presence.setActivity(); // Clear activity
-  } else presence.setActivity(data);
+  if (!presenceData.details) presence.setActivity();
+  // Clear activity
+  else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: AgarData) => (agarData = data));
+presence.on("iFrameData", (data: AgarData) => {
+  agarData = data;
+});

@@ -38,22 +38,25 @@ async function getStrings() {
       listening: "general.listeningMusic",
       show: "general.viewShow"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>> = null,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang"),
-    privacy = await presence.getSetting("privacy"),
-    time = await presence.getSetting("time");
-  oldLang ??= newLang;
+  const [newLang, privacy, timestamps, cover] = await Promise.all([
+    presence.getSetting<string>("lang"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("timestamps"),
+    presence.getSetting<boolean>("cover")
+  ]);
+
   if (oldLang !== newLang) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   const presenceData: PresenceData = {
@@ -61,10 +64,10 @@ presence.on("UpdateData", async () => {
     },
     albumCover =
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "cover-art-link"
+        a => a.dataset?.testid === "cover-art-link"
       ) ||
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "context-link"
+        a => a.dataset?.testid === "context-link"
       );
 
   let podcast = false,
@@ -78,128 +81,124 @@ presence.on("UpdateData", async () => {
     podcast = true;
 
   if (!podcast) {
-    if (time) presenceData.startTimestamp = browsingStamp;
+    if (timestamps) presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
     if (document.location.hostname === "open.spotify.com") {
       if (document.location.pathname.includes("browse/featured")) {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).featured;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.featured;
       } else if (document.location.pathname.includes("browse/podcasts")) {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).bestPodcasts;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.bestPodcasts;
       } else if (document.location.pathname.includes("browse/charts"))
-        presenceData.details = (await strings).charts;
+        presenceData.details = strings.charts;
       else if (document.location.pathname.includes("browse/genres"))
-        presenceData.details = (await strings).genres;
+        presenceData.details = strings.genres;
       else if (document.location.pathname.includes("browse/newreleases"))
-        presenceData.details = (await strings).latest;
+        presenceData.details = strings.latest;
       else if (document.location.pathname.includes("browse/discover"))
-        presenceData.details = (await strings).discover;
+        presenceData.details = strings.discover;
       else if (document.location.pathname.includes("/search/")) {
         search = document.querySelector("input");
         searching = true;
-        presenceData.details = (await strings).searchFor;
+        presenceData.details = strings.searchFor;
         presenceData.state = search.value;
         if (search.value.length <= 3) presenceData.state = "something...";
 
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.includes("/search")) {
         searching = true;
-        presenceData.details = (await strings).search;
+        presenceData.details = strings.search;
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.includes("collection/playlists")) {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).playlist;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.playlist;
       } else if (
         document.location.pathname.includes("collection/made-for-you")
       ) {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).forMeh;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.forMeh;
       } else if (document.location.pathname.includes("collection/tracks")) {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).songLike;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.songLike;
       } else if (document.location.pathname.includes("collection/albums")) {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).albumLike;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.albumLike;
       } else if (document.location.pathname.includes("collection/artists")) {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).artistLike;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.artistLike;
       } else if (document.location.pathname.includes("collection/podcasts")) {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).podcastLike;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.podcastLike;
       } else if (document.location.pathname.includes("/playlist/")) {
         title = document.querySelector(
           "div.main-view-container__scroll-node-child > section > div > div > span > button > h1"
         ).textContent;
-        presenceData.details = (await strings).viewPlaylist;
+        presenceData.details = strings.viewPlaylist;
         presenceData.state = title;
         delete presenceData.smallImageKey;
       } else if (document.location.pathname.includes("/show/")) {
         title = document.querySelector(
           "div.main-view-container__scroll-node-child > section > div > div > h1"
         ).textContent;
-        presenceData.details = (await strings).show;
+        presenceData.details = strings.show;
         presenceData.state = title;
         delete presenceData.smallImageKey;
       } else if (document.location.pathname.includes("/settings")) {
-        presenceData.details = (await strings).account;
+        presenceData.details = strings.account;
         delete presenceData.smallImageKey;
       }
     } else if (document.location.hostname === "support.spotify.com") {
-      presenceData.details = (await strings).browse;
+      presenceData.details = strings.browse;
       presenceData.state = "Support Center";
     } else if (document.location.hostname === "investors.spotify.com") {
-      presenceData.details = (await strings).browse;
+      presenceData.details = strings.browse;
       presenceData.state = "Support Center";
     } else if (document.location.hostname === "developer.spotify.com") {
-      presenceData.details = (await strings).browse;
+      presenceData.details = strings.browse;
       presenceData.state = "Spotify for Developers";
     } else if (document.location.hostname === "artists.spotify.com") {
-      presenceData.details = (await strings).browse;
+      presenceData.details = strings.browse;
       presenceData.state = "Spotify for Artists";
     } else if (document.location.hostname === "newsroom.spotify.com") {
-      presenceData.details = (await strings).browse;
+      presenceData.details = strings.browse;
       presenceData.state = "Spotify for Newsroom";
     } else if (document.location.hostname === "podcasters.spotify.com") {
-      presenceData.details = (await strings).browse;
+      presenceData.details = strings.browse;
       presenceData.state = "Spotify for Podcasters";
     } else if (document.location.hostname === "www.spotify.com") {
       if (document.location.pathname.includes("/premium")) {
-        presenceData.details = (await strings).viewing;
+        presenceData.details = strings.viewing;
         presenceData.state = "Spotify Premium";
         delete presenceData.smallImageKey;
       } else if (document.location.pathname.includes("/download")) {
-        presenceData.details = (await strings).download;
+        presenceData.details = strings.download;
         presenceData.smallImageKey = "downloading";
       } else if (document.location.pathname.includes("/account")) {
-        presenceData.details = (await strings).account;
+        presenceData.details = strings.account;
         delete presenceData.smallImageKey;
       }
     }
-    const control = document.querySelector(
+    const control = document.querySelector<HTMLButtonElement>(
       "div.player-controls__buttons > button:nth-child(3)"
-    ) as HTMLButtonElement;
+    );
     if (
       document.querySelector(".now-playing-bar-hidden") !== null ||
       control === null ||
       control.dataset.testid === "control-button-play"
     ) {
-      if (!presenceData.details) {
-        presence.setTrayTitle();
-        presence.setActivity();
-      } else {
-        if (privacy) {
-          if (searching) {
-            presenceData.details = (await strings).searchSomething;
-            delete presenceData.state;
-          } else {
-            presenceData.details = (await strings).browsing;
-            delete presenceData.state;
-            delete presenceData.smallImageKey;
-          }
-          presence.setActivity(presenceData);
-        } else presence.setActivity(presenceData);
-      }
+      if (!presenceData.details) presence.setActivity();
+      else if (privacy) {
+        if (searching) {
+          presenceData.details = strings.searchSomething;
+          delete presenceData.state;
+        } else {
+          presenceData.details = strings.browsing;
+          delete presenceData.state;
+          delete presenceData.smallImageKey;
+        }
+        presence.setActivity(presenceData);
+      } else presence.setActivity(presenceData);
     } else {
       if (recentlyCleared < Date.now() - 1000) presence.clearActivity();
 
@@ -211,9 +210,7 @@ presence.on("UpdateData", async () => {
       ),
       duration = presence.timestampFromFormat(
         document.querySelector(".playback-bar").children[2].textContent
-      ),
-      [, endTimestamp] = presence.getTimestamps(currentTime, duration);
-
+      );
     let pause: boolean;
 
     if (
@@ -226,34 +223,38 @@ presence.on("UpdateData", async () => {
     else pause = false;
 
     presenceData.smallImageKey = pause ? "pause" : "play";
-    presenceData.smallImageText = pause
-      ? (await strings).pause
-      : (await strings).play;
-    presenceData.endTimestamp = endTimestamp;
+    presenceData.smallImageText = pause ? strings.pause : strings.play;
+    [, presenceData.endTimestamp] = presence.getTimestamps(
+      currentTime,
+      duration
+    );
 
-    if (pause || !time) {
+    if (pause || !timestamps) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
+
+    if (cover) presenceData.largeImageKey = albumCover.querySelector("img").src;
+
     title =
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "nowplaying-track-link"
+        a => a.dataset?.testid === "nowplaying-track-link"
       )?.textContent ||
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "context-item-link"
+        a => a.dataset?.testid === "context-item-link"
       )?.textContent;
     uploader =
       Array.from(document.querySelectorAll("div")).find(
-        (a) => a.dataset?.testid === "track-info-artists"
+        a => a.dataset?.testid === "track-info-artists"
       )?.textContent ||
       Array.from(document.querySelectorAll("a")).find(
-        (a) => a.dataset?.testid === "context-item-info-show"
+        a => a.dataset?.testid === "context-item-info-show"
       )?.textContent;
     presenceData.details = title;
     presenceData.state = uploader;
 
     if (privacy) {
-      presenceData.details = (await strings).listening;
+      presenceData.details = strings.listening;
       delete presenceData.state;
     }
 

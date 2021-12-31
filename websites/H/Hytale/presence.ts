@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "809083630117978123"
   }),
-  browsingStamp = Math.round(Date.now() / 1000);
+  browsingTimestamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "hytale_logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/")
@@ -101,8 +101,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Unknown page";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
     state = title.replace(" - The New York Times", "");
   }
 
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     details,
     largeImageKey: "logo",
     startTimestamp: time,
@@ -49,19 +49,14 @@ presence.on("UpdateData", async () => {
     buttons: [{ label: "View Page", url: document.URL }]
   };
 
-  if (!data.state) delete data.state;
+  if (!presenceData.state) delete presenceData.state;
 
   if (
-    !(await presence.getSetting("buttons")) ||
+    !(await presence.getSetting<boolean>("buttons")) ||
     window.location.href === "https://www.nytimes.com/"
   )
-    delete data.buttons;
+    delete presenceData.buttons;
 
-  if (!data.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setTrayTitle(data.state);
-    presence.setActivity(data);
-  }
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

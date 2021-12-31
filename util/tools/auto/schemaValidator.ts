@@ -1,11 +1,13 @@
 import "source-map-support/register";
 
+import { readFileSync } from "node:fs";
 import axios from "axios";
 import { blue, green, red, yellow } from "chalk";
-import { readFileSync } from "fs";
+import ParseJSON, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
+import { compare, diff } from "semver";
 
-const latestMetadataSchema = async (): Promise<string> => {
+const latestMetadataSchema = async (): Promise<string[]> => {
     const versions = (
       (
         await axios.get(
@@ -13,27 +15,66 @@ const latestMetadataSchema = async (): Promise<string> => {
         )
       ).data as { name: string }[]
     )
-      .filter((c) => c.name.endsWith(".json"))
-      .map((c) => c.name.match(/\d.\d/g)[0]);
-    return `https://schemas.premid.app/metadata/${versions.pop()}`;
+      .filter(c => c.name.endsWith(".json"))
+      .map(c => c.name.match(/\d.\d/g)[0]);
+    return [
+      `https://schemas.premid.app/metadata/${versions.at(-1)}`,
+      versions.at(-1)
+    ];
   },
   stats = {
     validated: 0,
     validatedWithWarnings: 0,
     failedToValidate: 0
   },
+  versionBumpErrors = {
+    invalidVerNew: () => 'The version of a new presence must start at "1.0.0"',
+    versionNotBumped: (oldVersion: string, newVersion: string) =>
+      `The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`,
+    badVersionBump: (oldVersion: string, newVersion: string) =>
+      `The current version (${newVersion}) of the presence was incorrectly bumped. The latest published version is ${oldVersion}.`
+  },
+  isValidVersionBump = (newVer: string, oldVer?: string) => {
+    if (!oldVer) {
+      if (newVer !== "1.0.0") return "invalidVerNew";
+      else return true;
+    } else {
+      const compared = compare(newVer, oldVer),
+        newVerSplit = newVer.split(".").map(Number),
+        oldVerSplit = oldVer.split(".").map(Number);
+      if (compared !== 1) return "versionNotBumped";
+      else {
+        switch (diff(newVer, oldVer)) {
+          case "major":
+            if (!newVer.endsWith(".0.0") || newVerSplit[0] - oldVerSplit[0] > 1)
+              return "badVersionBump";
+            else return true;
+          case "minor":
+            if (!newVer.endsWith(".0") || newVerSplit[1] - oldVerSplit[1] > 1)
+              return "badVersionBump";
+            else return true;
+          case "patch":
+            if (newVerSplit[2] - oldVerSplit[2] > 1) return "badVersionBump";
+            else return true;
+          default:
+            return true;
+        }
+      }
+    }
+  },
   validated = (service: string): void => {
     console.log(green(`✔ ${service}`));
     stats.validated++;
   },
   validatedWithWarnings = (service: string, warning: string): void => {
-    console.log(yellow(`✔ ${service} (${warning})`));
+    console.log(yellow(`✔ ${service}`));
+    console.log(warning);
     stats.validatedWithWarnings++;
   },
   failedToValidate = (service: string, errors: string[]): void => {
-    console.log(
-      red(`✘ ${service}\n${errors.map((e) => `  -> ${e}`).join("\n")}`)
-    );
+    console.log(`::group::${red(`✖ ${service}`)}`);
+    console.log(errors.join("\n"));
+    console.log("::endgroup::");
     stats.failedToValidate++;
   },
   loadMetadata = (path: string): metadata => {
@@ -43,64 +84,212 @@ const latestMetadataSchema = async (): Promise<string> => {
       return null;
     }
   },
-  changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
-  metaFiles = changedFiles.filter((f: string) => f.endsWith("metadata.json"));
+  createAnnotation = (params: CreateAnnotationParams): string => {
+    const input = [];
+
+    for (const [key, value] of Object.entries(params)) {
+      if (["type", "message"].includes(key)) continue;
+      else input.push(`${key}=${value}`);
+    }
+
+    return `::${params.type} ${input.join(",")}::${params.message}`;
+  },
+  changedMetaFiles = [
+    ...new Set(
+      readFileSync("./file_changes.txt", "utf-8")
+        .trim()
+        .split("\n")
+        .filter(f => f.endsWith("metadata.json"))
+    )
+  ];
 
 (async (): Promise<void> => {
   console.log(blue("Getting latest schema..."));
 
-  const latestSchema = await latestMetadataSchema(),
+  const [latestSchema, latestSchemaVersion] = await latestMetadataSchema(),
     schema = (await axios.get(latestSchema)).data;
 
-  console.log(blue(`Beginning validation of ${metaFiles.length} presences...`));
+  console.log(blue(`Beginning validation of ${changedMetaFiles.length} presences...`));
 
-  for (const metaFile of metaFiles) {
+  for (const metaFile of changedMetaFiles) {
     const meta = loadMetadata(metaFile),
       folder = metaFile.split("/")[2];
 
     if (!meta) {
-      failedToValidate(folder, ["Invalid JSON"]);
+      failedToValidate(folder, [
+        createAnnotation({
+          type: "error",
+          file: metaFile,
+          title: "Invalid JSON",
+          message: "Unable to parse the JSON file"
+        })
+      ]);
       continue;
     }
 
-    const { service } = meta,
+    const { service, version: newVersion } = meta,
       result = validate(meta, schema),
-      validLangs: string[] = (
-        await axios.post<LanguageFiles>("https://api.premid.app/v3", {
+      { langFiles, presences } = (
+        await axios.post<APIQuery>("https://api.premid.app/v3", {
           query: `{
+              presences(service: "${service}") {
+                metadata {
+                  version
+                }
+              }
               langFiles(project: "presence") {
                 lang
               }
             }`
         })
-      ).data.data.langFiles.map((l) => l.lang),
-      invalidLangs: string[] = [];
+      ).data.data,
+      validLangs = langFiles.map(l => l.lang),
+      oldVersion = presences[0]?.metadata.version,
+      invalidLangs: string[] = [],
+      versionCheck = isValidVersionBump(newVersion, oldVersion);
 
-    Object.keys(meta.description).forEach((lang) => {
+    Object.keys(meta.description).forEach(lang => {
       const index = validLangs.findIndex((l: string) => l === lang);
       if (index === -1) invalidLangs.push(lang);
     });
 
-    if (result.valid && !invalidLangs.length && folder === meta.service) {
-      if (meta.schema && meta.schema !== latestSchema)
-        validatedWithWarnings(service, "Using out of date schema");
-      else validated(service);
+    if (
+      versionCheck === true &&
+      folder === meta.service &&
+      !invalidLangs.length &&
+      result.valid
+    ) {
+      if (meta.$schema && meta.$schema !== latestSchema) {
+        validatedWithWarnings(
+          service,
+          createAnnotation({
+            type: "warning",
+            file: metaFile,
+            line: getLine("$schema"),
+            title: "instance.$schema",
+            message: `Using out of date schema, the latest version is ${latestSchemaVersion}`
+          })
+        );
+      } else validated(service);
     } else {
       const errors: string[] = [];
 
-      if (folder !== meta.service)
-        errors.push("service name does not equal to the name of the folder!");
+      if (typeof versionCheck === "string") {
+        errors.push(
+          createAnnotation({
+            type: "error",
+            file: metaFile,
+            line: getLine("version"),
+            title: "instance.version",
+            message: versionBumpErrors[versionCheck](oldVersion, newVersion)
+          })
+        );
+      }
 
-      for (const error of result.errors)
-        errors.push(`${error.message} @ ${error.property}`);
+      if (folder !== service) {
+        errors.push(
+          createAnnotation({
+            type: "error",
+            file: metaFile,
+            line: getLine("service"),
+            title: "instance.service",
+            message: "does not equal to the folder name"
+          })
+        );
+      }
+
+      for (const error of result.errors) {
+        let property = error.property.split(".").at(1) as key;
+
+        if (!property) {
+          property = error.message.match(/"(.*)"/).at(1) as key;
+          errors.push(
+            createAnnotation({
+              type: "error",
+              file: metaFile,
+              line: getLine(property),
+              title: `instance.${property}`,
+              message: `${error.message} @ ${error.property}`
+            })
+          );
+        } else {
+          const messsage = property.match(/\[([0-9]+)\]/);
+
+          if (messsage) {
+            const [propertyName, index] = messsage;
+
+            errors.push(
+              createAnnotation({
+                type: "error",
+                file: metaFile,
+                line: getLine(propertyName as key, parseInt(index)),
+                title: error.property,
+                message: `${error.message} @ ${error.property}`
+              })
+            );
+          } else {
+            errors.push(
+              createAnnotation({
+                type: "error",
+                file: metaFile,
+                line: getLine(property),
+                title: error.property,
+                message: `${error.message} @ ${error.property}`
+              })
+            );
+          }
+        }
+      }
 
       for (const invalidLang of invalidLangs) {
         errors.push(
-          `"${invalidLang}" is not a valid language! Valid languages can be found here: https://api.premid.app/v2/langFile/list`
+          createAnnotation({
+            type: "error",
+            file: metaFile,
+            line: getLine("description", invalidLang),
+            title: `instance.description.${invalidLang}`,
+            message: `${invalidLang}" is not a valid language or is a unsupported language`
+          })
         );
       }
 
       failedToValidate(service, errors);
+    }
+
+    function getLine(line: key, value?: string | number) {
+      const AST = ParseJSON(JSON.stringify(meta, null, 2), {
+        loc: true,
+        source: metaFile
+      }) as ObjectNode;
+
+      if (value) {
+        const node = AST.children.find(c => c.key.value === line).value;
+
+        switch (node.type) {
+          case "Literal":
+            return node.loc.start.line;
+          case "Object":
+            return node.children.find(c => c.key.value === value).loc.start
+              .line;
+          case "Array": {
+            if (typeof value === "number")
+              return node.children[value].loc.start.line;
+            else {
+              return node.children.find(c => {
+                switch (c.type) {
+                  case "Literal":
+                    return c.value === value;
+                  case "Object":
+                    return c.children.find(c => c.key.value === value);
+                }
+              }).loc.start.line;
+            }
+          }
+        }
+      } else
+        return (
+          AST.children.find(c => c.key.value === line)?.loc?.start?.line ?? 0
+        );
     }
   }
 
@@ -122,16 +311,36 @@ const latestMetadataSchema = async (): Promise<string> => {
     console.log(yellow("One or more services validated, but with warnings."));
 })();
 
+type key = keyof metadata;
+
 interface metadata extends Metadata {
-  schema: string;
+  $schema: string;
 }
 
-interface LanguageFiles {
+interface APIQuery {
   data: {
+    presences: [
+      {
+        metadata: {
+          version: string;
+        };
+      }
+    ];
     langFiles: [
       {
         lang: string;
       }
     ];
   };
+}
+
+interface CreateAnnotationParams {
+  type: "warning" | "error" | "notice";
+  title?: string;
+  file: string;
+  line?: string | number;
+  endLine?: string | number;
+  col?: string | number;
+  endColumn?: string | number;
+  message: string;
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "vasc",
     "id": "346977366569910274"
@@ -13,16 +13,16 @@
     "www.presencedb.com",
     "preview.presencedb.com"
   ],
-  "version": "1.0.3",
+  "regExp": "(www|preview)[.]presencedb[.]com[/]",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/6SyDAmT.png",
   "thumbnail": "https://i.imgur.com/P20KlQh.png",
   "color": "#fff",
+  "category": "other",
   "tags": [
     "presencedb",
     "database"
   ],
-  "category": "other",
-  "regExp": "(www|preview)[.]presencedb[.]com[/]",
   "settings": [
     {
       "id": "lang",

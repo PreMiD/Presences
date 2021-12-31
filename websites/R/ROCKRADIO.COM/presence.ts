@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "639616115873546261"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement,
   title: HTMLElement,
   replace: HTMLElement,
@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.rockradio.com") {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Browsing...";
     } else if (
       document.querySelector(
@@ -30,24 +30,22 @@ presence.on("UpdateData", async () => {
       replace = document.querySelector(
         "#now-playing > div.info-container > div.title-container > div > span > span.track-name"
       );
-      presenceData.details = title.innerText + replace.innerText;
-      presenceData.state = `${user.innerText.replace("-", "")} left`;
+      presenceData.details = title.textContent + replace.textContent;
+      presenceData.state = `${user.textContent.replace("-", "")} left`;
       playing =
         document.querySelector("#play-button > div > a").className ===
         "ico icon-pause"
           ? "play"
           : "pause";
       presenceData.smallImageKey = playing;
-    } else if (document.querySelector("#channel-title") !== null) {
+    } else if (document.querySelector("#channel-title")) {
       title = document.querySelector("#channel-title");
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing channel:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

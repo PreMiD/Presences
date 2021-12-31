@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "NMW03",
     "id": "534099893979971584"
@@ -16,16 +16,17 @@
     "nl": "De beste Discord-beveiligings- en checkpoint-bot!",
     "zh_CN": "最好的Discord安全检查机器人！",
     "zh_TW": "最好-最安全的Discord賬號驗證机器人！",
-    "ga_IE": "An bot slándála Discpoint agus seicphointe is fearr!"
+    "ga_IE": "An bot slándála Discpoint agus seicphointe is fearr!",
+    "vi_VN": "Bot bảo mật tốt nhất Discord!"
   },
   "url": "altdentifier.com",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/GT29NDe.png",
   "thumbnail": "https://i.imgur.com/Pbld3Tr.png",
   "color": "#7289D9",
+  "category": "other",
   "tags": [
     "bot",
     "discord"
-  ],
-  "category": "other"
+  ]
 }

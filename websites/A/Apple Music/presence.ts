@@ -14,54 +14,67 @@ function getTime(list: string[]): number {
   return ret;
 }
 
-function getTimestamps(audioDuration: string): Array<number> {
-  const splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
+function getTimestamps(audioDuration: string): number[] {
+  return [
+    Math.floor(Date.now() / 1000),
+    Math.floor(Date.now() / 1000) + getTime(audioDuration.split(":").reverse())
+  ];
 }
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "applemusic-logo"
-    },
-    playerCheck = document.querySelector(
-      ".web-chrome-playback-controls__playback-btn[disabled]"
+  const presenceData: PresenceData = {
+    largeImageKey: "applemusic-logo"
+  };
+
+  if (
+    !document.querySelector(
+      "div.web-chrome-playback-lcd__playback-description.playback-description-not-loaded"
     )
-      ? false
-      : true;
-  if (playerCheck) {
-    const title = document
+  ) {
+    const audioTime = document.querySelector(
+        ".web-chrome-playback-lcd__time-end"
+      )?.textContent,
+      paused = document.querySelector(
+        ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
+      ),
+      artwork = document
         .querySelector(
-          ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+          ".media-artwork-v2:not(.media-artwork-v2--profile-badge) > picture > source"
         )
-        ?.textContent.trim(),
-      author = document
+        ?.getAttribute("srcset")
+        .split(" ")[0]
+        .replace("44x44bb", "1024x1024bb");
+
+    presenceData.details = document
+      .querySelector(
+        ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+      )
+      ?.textContent.trim();
+    presenceData.state =
+      document
         .querySelector(
           ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
         )
-        ?.textContent.split("—")[0],
-      audioTime = document.querySelector(
-        ".web-chrome-playback-lcd__time-end"
-      ).textContent,
-      paused = document.querySelector(
-        ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
-      )
-        ? true
-        : false;
-
-    data.details = title;
-    data.state = author;
-    data.smallImageKey = paused ? "pause" : "play";
-    data.smallImageText = paused ? (await strings).pause : (await strings).play;
-    [data.startTimestamp, data.endTimestamp] = getTimestamps(audioTime);
-
-    if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+        ?.textContent.split("—")[0] ??
+      document.querySelector(
+        ".ember-view.web-chrome-playback-lcd__sub-copy-scroll-link"
+      )?.textContent;
+    presenceData.smallImageKey = paused ? "pause" : "play";
+    presenceData.smallImageText = paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.largeImageKey = artwork ?? "applemusic-logo";
+    if (audioTime) {
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        getTimestamps(audioTime);
     }
 
-    presence.setActivity(data);
+    if (paused) {
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+    }
+
+    if (!presenceData.details) presence.clearActivity();
+    else presence.setActivity(presenceData);
   } else presence.clearActivity();
 });

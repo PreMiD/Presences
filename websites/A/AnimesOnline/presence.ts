@@ -6,7 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
   current: 0,
@@ -22,25 +22,16 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const time = await presence.getSetting("timestamps"),
-    buttons = await presence.getSetting("buttons"),
-    title =
-      document.querySelector("div.data > h1")?.textContent ?? "desconhecido",
-    titlemovie = document.querySelector("#info > h2")?.textContent,
-    Search =
-      document.querySelector(
-        "#contenedor > div.module > div.content.rigth.csearch > header > h1"
-      )?.textContent ?? "pesquisa não encontrada",
-    playfilmes =
-      document.querySelector(
-        "#single > div.content.right > div.sheader > div.data > h1"
-      )?.textContent ?? "desconhecido",
+  const [time, buttons] = await Promise.all([
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("buttons")
+    ]),
     playvdo =
       document.querySelector("#info > h1")?.textContent ?? "desconhecido",
     path = document.location,
     presenceData: PresenceData = {
       largeImageKey: "site",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   // Presence
@@ -48,7 +39,11 @@ presence.on("UpdateData", async () => {
   presenceData.state = "em Página Inicial";
   if (path.search.includes("s")) {
     presenceData.details = "Pesquisando po";
-    presenceData.state = `${Search}`;
+    presenceData.state = `${
+      document.querySelector(
+        "#contenedor > div.module > div.content.rigth.csearch > header > h1"
+      )?.textContent ?? "pesquisa não encontrada"
+    }`;
     presenceData.smallImageKey = "search";
   } else if (path.pathname.includes("legendados")) {
     presenceData.details = "Vendo Legendados";
@@ -70,24 +65,26 @@ presence.on("UpdateData", async () => {
     presenceData.state =
       document.querySelector("header > h1")?.textContent ?? "desconhecido";
   } else if (path.pathname.includes("animes")) {
-    presenceData.details = title;
+    presenceData.details =
+      document.querySelector("div.data > h1")?.textContent ?? "desconhecido";
     presenceData.state = "Selecionando um episódio";
   } else if (
     path.pathname.includes("episodio") ||
     path.pathname.match(/(\W|^)filmes(\W\w|$)/)
   ) {
-    presenceData.startTimestamp = browsingStamp;
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.current),
-      Math.floor(video.duration)
-    );
+    presenceData.startTimestamp = browsingTimestamp;
     if (playvdo.includes("Episódio")) {
       const info = playvdo.split("- Episódio" || "Episódio");
       [presenceData.details] = info;
       presenceData.state = `Episódio ${info.pop()}`;
-    } else if (titlemovie.includes("Sinopse")) {
+    } else if (
+      document.querySelector("#info > h2")?.textContent.includes("Sinopse")
+    ) {
       presenceData.details = "Filmes";
-      presenceData.state = playfilmes;
+      presenceData.state =
+        document.querySelector(
+          "#single > div.content.right > div.sheader > div.data > h1"
+        )?.textContent ?? "desconhecido";
     } else {
       presenceData.details = playvdo;
       presenceData.state = "Assistir Anime";
@@ -96,7 +93,12 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    if (!video.paused) [, presenceData.endTimestamp] = timestamps;
+    if (!video.paused) {
+      [, presenceData.endTimestamp] = presence.getTimestamps(
+        Math.floor(video.current),
+        Math.floor(video.duration)
+      );
+    }
 
     if (buttons) {
       presenceData.buttons = [
@@ -117,8 +119,6 @@ presence.on("UpdateData", async () => {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }
-  if (!presenceData.state) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (!presenceData.state) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

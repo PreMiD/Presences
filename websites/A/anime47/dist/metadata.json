@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -9,17 +9,18 @@
     "en": "Anime Vietsub Online",
     "zh_CN": "在线的越南字幕动漫",
     "ga_IE": "Anime Vietsub Ar Líne",
-    "nl": "Anime Vietsub Online"
+    "nl": "Anime Vietsub Online",
+    "vi_VN": "Anime phụ đề Tiếng Việt trực tuyến"
   },
   "url": "anime47.com",
-  "version": "1.1.10",
+  "version": "1.1.12",
   "logo": "https://i.imgur.com/Vmm3C6N.png",
   "thumbnail": "https://i.imgur.com/07GZCVx.png",
   "color": "#ffffff",
+  "category": "anime",
   "tags": [
     "anime",
     "videos"
   ],
-  "iframe": true,
-  "category": "anime"
+  "iframe": true
 }

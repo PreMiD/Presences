@@ -117,8 +117,6 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.length < 8) presenceData.state = "Homepage";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

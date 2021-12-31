@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "SlowLife",
     "id": "374905512661221377"
@@ -17,16 +17,18 @@
   "service": "BBC",
   "description": {
     "en": "The best of the BBC, with the latest news and sport headlines, weather, TV & radio highlights and much more from across the whole of BBC Online.",
-    "nl": "Het beste van de BBC, met het laatste nieuws en sportkoppen, weerberichten, hoogtepunten op tv en radio en nog veel meer uit heel BBC Online."
+    "nl": "Het beste van de BBC, met het laatste nieuws en sportkoppen, weerberichten, hoogtepunten op tv en radio en nog veel meer uit heel BBC Online.",
+    "vi_VN": "Những tinh tuý vủa BBC, với những bài báo mới nhất và tiêu đề thể thao, thời tiết, truyền hình & radio nổi bật từ tất cả BBC Online."
   },
   "url": [
     "www.bbc.co.uk",
     "www.bbc.com"
   ],
-  "version": "2.0.7",
+  "version": "2.0.10",
   "logo": "https://i.imgur.com/4GzQf9o.png",
   "thumbnail": "https://i.imgur.com/fBxxQDw.png",
   "color": "#000000",
+  "category": "other",
   "tags": [
     "bbc",
     "bbc-iplayer",
@@ -36,7 +38,6 @@
     "bbc-weather",
     "news"
   ],
-  "category": "other",
   "iframe": true,
   "settings": [
     {

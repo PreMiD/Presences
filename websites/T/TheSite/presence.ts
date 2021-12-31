@@ -175,12 +175,17 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-    video: HTMLVideoElement = document.querySelector("video"),
-    search: HTMLInputElement = document.querySelector("input"),
-    showSearchInfo = await presence.getSetting("search"),
-    showBrowseInfo = await presence.getSetting("browse"),
-    showVideoInfo = await presence.getSetting("video"),
-    data: PresenceData = {
+    video = document.querySelector<HTMLVideoElement>("video"),
+    search = document.querySelector<HTMLInputElement>("input"),
+    [showSearchInfo, showBrowseInfo, showVideoInfo, format] = await Promise.all(
+      [
+        presence.getSetting<boolean>("search"),
+        presence.getSetting<boolean>("browse"),
+        presence.getSetting<boolean>("video"),
+        presence.getSetting<string>("show-format")
+      ]
+    ),
+    presenceData: PresenceData = {
       largeImageKey: "thesite"
     };
 
@@ -189,56 +194,55 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) data.startTimestamp = elapsed;
+  if (elapsed) presenceData.startTimestamp = elapsed;
 
   const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
-    data.smallImageKey = status;
+    presenceData.smallImageKey = status;
     if (status === "play") {
       const [startTimestamp, endTimestamp] = presence.getTimestamps(
         video.currentTime,
         video.duration
       );
-      data.startTimestamp = startTimestamp;
-      data.endTimestamp = endTimestamp;
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
     }
   };
 
   /* Browsing Info */
   if (showBrowseInfo) {
     if (path.includes("/person")) {
-      data.details = "Viewing Person";
-      data.state = getElement(".person-page-block h2");
+      presenceData.details = "Viewing Person";
+      presenceData.state = getElement(".person-page-block h2");
     }
     if (path.includes("/account")) {
-      data.details = "Viewing";
-      data.state = `Account (${getElement(".account-nav > .active")})`;
+      presenceData.details = "Viewing";
+      presenceData.state = `Account (${getElement(".account-nav > .active")})`;
     }
     if (path.includes("/request")) {
-      data.details = "Viewing";
-      data.state = `Requests (${getElement(".nav-tabs > .active")})`;
+      presenceData.details = "Viewing";
+      presenceData.state = `Requests (${getElement(".nav-tabs > .active")})`;
     }
     if (path.includes("/collections")) {
       const title = getElement(".page-videolist > h1");
 
-      data.details = "Browsing";
-      data.state = "Collections";
+      presenceData.details = "Browsing";
+      presenceData.state = "Collections";
       if (title !== "Loading...") {
-        data.details = "Browsing Collection";
-        data.state = title;
+        presenceData.details = "Browsing Collection";
+        presenceData.state = title;
       }
     }
 
     const detailsObj = setObject(path);
-    data.details = detailsObj.details;
-    data.state = detailsObj.state;
+    presenceData.details = detailsObj.details;
+    presenceData.state = detailsObj.state;
   }
 
   /* Video Info */
   if (showVideoInfo) {
     const wl = path.includes("/list"),
-      wlMovie = wl && getElement(".media-body .genre"),
-      wlShow = wl && !wlMovie;
+      wlMovie = wl && getElement(".media-body .genre");
 
     if (wlMovie || path.includes("/movies")) {
       const menu: HTMLElement = document.querySelector(".mv-movie-info"),
@@ -247,26 +251,25 @@ presence.on("UpdateData", async () => {
       if (menu) {
         if (menu.style.display === "none") {
           await parseVideo();
-          data.details = "Watching Movie";
-          data.state = title;
+          presenceData.details = "Watching Movie";
+          presenceData.state = title;
         } else {
-          data.details = "Viewing Movie Details";
-          data.state = title;
+          presenceData.details = "Viewing Movie Details";
+          presenceData.state = title;
         }
       }
     }
     /* Non Watch Later */
     if (path.includes("/shows")) {
-      const menu: HTMLElement = document.querySelector(".mv-movie-info"),
-        regex: RegExpMatchArray = getElement(
-          ".mv-movie-title > span > span > strong"
-        ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/),
-        setting = await presence.getSetting("show-format"),
+      const menu = document.querySelector<HTMLElement>(".mv-movie-info"),
+        regex = getElement(".mv-movie-title > span > span > strong").match(
+          /S(?<season>\d{1,4})E(?<episode>\d{1,4})/
+        ),
         title: string = getElement(".mv-movie-title > span > a");
       if (title !== "Loading...") {
         const { season } = regex.groups,
           { episode } = regex.groups,
-          state = setting
+          state = format
             .replace("%show%", title)
             .replace("%season%", season)
             .replace("%episode%", episode);
@@ -274,30 +277,29 @@ presence.on("UpdateData", async () => {
         if (menu) {
           if (menu.style.display === "none") {
             await parseVideo();
-            data.details = "Watching TV Show";
-            data.state = state;
+            presenceData.details = "Watching TV Show";
+            presenceData.state = state;
           } else {
-            data.details = "Viewing TV Show Details";
-            data.state = state;
+            presenceData.details = "Viewing TV Show Details";
+            presenceData.state = state;
           }
         }
       } else {
-        data.details = "Viewing TV Show Details";
-        data.state = getElement(".mv-movie-title > span");
+        presenceData.details = "Viewing TV Show Details";
+        presenceData.state = getElement(".mv-movie-title > span");
       }
     }
     /* Watch Later */
-    if (wlShow) {
+    if (wl && !wlMovie) {
       const menu: HTMLElement = document.querySelector(".mv-movie-info"),
         regex: RegExpMatchArray = getElement(
           ".full-title > .content > .seq > em"
         ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/),
-        setting = await presence.getSetting("show-format"),
         title: string = getElement(".full-title > .content > .title");
       if (title !== "Loading...") {
         const { season } = regex.groups,
           { episode } = regex.groups,
-          state = setting
+          state = format
             .replace("%show%", title)
             .replace("%season%", season)
             .replace("%episode%", episode);
@@ -305,16 +307,16 @@ presence.on("UpdateData", async () => {
         if (menu) {
           if (menu.style.display === "none") {
             await parseVideo();
-            data.details = "Watching TV Show";
-            data.state = state;
+            presenceData.details = "Watching TV Show";
+            presenceData.state = state;
           } else {
-            data.details = "Viewing TV Show Details";
-            data.state = state;
+            presenceData.details = "Viewing TV Show Details";
+            presenceData.state = state;
           }
         }
       } else {
-        data.details = "Viewing TV Show Details";
-        data.state = getElement(".mv-movie-title > span");
+        presenceData.details = "Viewing TV Show Details";
+        presenceData.state = getElement(".mv-movie-title > span");
       }
     }
   }
@@ -329,26 +331,23 @@ presence.on("UpdateData", async () => {
       (Date.now() - searchElapsed <= 5000 || path.includes("/search")) &&
       searchText.length > 0
     ) {
-      data.details = "Searching";
-      data.state = searchText;
-      data.startTimestamp = elapsed;
-      delete data.endTimestamp;
+      presenceData.details = "Searching";
+      presenceData.state = searchText;
+      presenceData.startTimestamp = elapsed;
+      delete presenceData.endTimestamp;
     }
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = (await strings).browse;
     }
-    if (data.details.includes("Searching")) {
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).search;
+    if (presenceData.details.includes("Searching")) {
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = (await strings).search;
     }
 
-    presence.setActivity(data);
-  } else {
-    presence.setTrayTitle();
-    presence.setActivity();
-  }
+    presence.setActivity(presenceData);
+  } else presence.setActivity();
 });

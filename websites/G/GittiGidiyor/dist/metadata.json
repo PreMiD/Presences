@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -15,14 +15,14 @@
     "urun.gittigidiyor.com",
     "gittigidiyor.com"
   ],
-  "version": "1.1.9",
+  "version": "1.1.10",
   "logo": "https://i.imgur.com/4XOmMIy.png",
   "thumbnail": "https://i.imgur.com/NtQEokm.png",
   "color": "#2a6bb0",
+  "category": "other",
   "tags": [
     "gittigidiyor",
     "shopping",
     "turkish"
-  ],
-  "category": "other"
+  ]
 }

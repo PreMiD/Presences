@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -40,16 +40,16 @@
     "devstatus.twitch.tv",
     "status.twitch.tv"
   ],
-  "version": "3.1.7",
+  "version": "3.1.11",
   "logo": "https://i.imgur.com/So7h3G0.png",
   "thumbnail": "https://i.imgur.com/OAcBmwW.png",
   "color": "#9146FF",
+  "category": "videos",
   "tags": [
     "video",
     "streaming",
     "entertainment"
   ],
-  "category": "videos",
   "settings": [
     {
       "id": "lang",
@@ -124,6 +124,12 @@
       "title": "Show Timestamps",
       "icon": "fad fa-stopwatch",
       "value": true
+    },
+    {
+      "id": "profilePic",
+      "title": "Show Streamer's Picture",
+      "icon": "fad fa-images",
+      "value": false
     },
     {
       "id": "logo",

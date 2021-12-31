@@ -21,11 +21,12 @@ let oldUrl: string, elapsed: number;
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
     video: HTMLVideoElement = document.querySelector("video"),
-    search: HTMLInputElement = document.querySelector("input"),
-    showSearchInfo = await presence.getSetting("search"),
-    showBrowseInfo = await presence.getSetting("browse"),
-    showVideoInfo = await presence.getSetting("video"),
-    data: PresenceData = {
+    [showSearchInfo, showBrowseInfo, showVideoInfo] = await Promise.all([
+      presence.getSetting<boolean>("search"),
+      presence.getSetting<boolean>("browse"),
+      presence.getSetting<boolean>("video")
+    ]),
+    presenceData: PresenceData = {
       largeImageKey: "anontpp"
     };
 
@@ -34,44 +35,41 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) data.startTimestamp = elapsed;
+  if (elapsed) presenceData.startTimestamp = elapsed;
 
   const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
-    data.smallImageKey = status;
-    data.smallImageText = (await strings)[status];
+    presenceData.smallImageKey = status;
+    presenceData.smallImageText = (await strings)[status];
     if (status === "play") {
-      [data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-        video.currentTime,
-        video.duration
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(video.currentTime, video.duration);
     }
   };
 
   /* Browsing Info */
-  if (showBrowseInfo) if (path === "/") data.details = "Browsing";
+  if (showBrowseInfo) if (path === "/") presenceData.details = "Browsing";
 
   /* Video Info */
   if (showVideoInfo) {
     if (video) {
-      const show = getElement("#episodetitle") !== "Feature Film",
-        state = (
-          document.querySelector("#infotitle") as HTMLElement
-        ).innerText.split("\n");
-      if (show) {
+      const state = (
+        document.querySelector("#infotitle") as HTMLElement
+      ).textContent.split("\n");
+      if (getElement("#episodetitle") !== "Feature Film") {
         // Show Logic
-        data.details = "Watching Show";
+        presenceData.details = "Watching Show";
         try {
-          data.state = `${state[0]} (${state[1]})`;
+          presenceData.state = `${state[0]} (${state[1]})`;
           await parseVideo();
         } catch {
           // deepscan
         }
       } else {
         // Movie Logic
-        data.details = "Watching Movie";
+        presenceData.details = "Watching Movie";
         try {
-          [data.state] = state;
+          [presenceData.state] = state;
           await parseVideo();
         } catch {
           // deepscan
@@ -83,24 +81,23 @@ presence.on("UpdateData", async () => {
   /* Search Info */
   if (showSearchInfo) {
     if (getElement("#indextitle").split("\n")[0] === "Search Results") {
-      data.details = "Searching for";
-      data.state = search.value;
+      presenceData.details = "Searching for";
+      presenceData.state = (
+        document.querySelector("input") as HTMLInputElement
+      ).value;
     }
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = (await strings).browse;
     }
-    if (data.details.includes("Searching")) {
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).search;
+    if (presenceData.details.includes("Searching")) {
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = (await strings).search;
     }
 
-    presence.setActivity(data);
-  } else {
-    presence.setTrayTitle();
-    presence.setActivity();
-  }
+    presence.setActivity(presenceData);
+  } else presence.setActivity();
 });

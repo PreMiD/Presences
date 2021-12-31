@@ -1,15 +1,15 @@
 const presence = new Presence({
-  clientId: "801742167608787015"
-});
+    clientId: "801742167608787015"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
     },
-    browsingStamp = Math.floor(Date.now() / 1000),
-    privacy = await presence.getSetting("privacy"),
-    sprivacy = await presence.getSetting("super-privacy");
-  presenceData.startTimestamp = browsingStamp;
+    privacy = await presence.getSetting<boolean>("privacy"),
+    sprivacy = await presence.getSetting<boolean>("super-privacy");
   if (sprivacy || window.location.host === "kaniwork.com:8080")
     presenceData.details = "Browsing";
   else {
@@ -53,8 +53,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

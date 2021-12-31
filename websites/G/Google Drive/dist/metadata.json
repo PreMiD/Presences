@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
@@ -19,10 +19,12 @@
     "nl": "Google Drive is een service voor bestandsopslag en synchronisatie die is gemaakt en wordt beheerd door Google. Met Google Drive kunnen documenten in de cloud worden opgeslagen, bestanden worden gedeeld en documenten samen met anderen worden bewerkt."
   },
   "url": "drive.google.com",
-  "version": "1.5.12",
+  "regExp": "drive[.]google([.][a-z]+)+[/]",
+  "version": "1.5.14",
   "logo": "https://i.imgur.com/WdNIJe8.png",
   "thumbnail": "https://i.imgur.com/mZdtUw5.png",
   "color": "#3aa154",
+  "category": "other",
   "tags": [
     "drive",
     "google"
@@ -34,7 +36,5 @@
       "icon": "fas fa-lock",
       "value": true
     }
-  ],
-  "category": "other",
-  "regExp": "drive[.]google([.][a-z]+)+[/]"
+  ]
 }

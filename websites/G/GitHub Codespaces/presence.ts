@@ -70,88 +70,8 @@ const presence = new Presence({
     "reason.hover.type": { image: "reasonml" },
     "jest-snapshot": { image: "jest" },
     erb: { image: "ruby" },
-    "x86 and x86_64 Assembly": { image: "assembly" },
+    "x86 and x86_64 Assembly": { image: "assembly" }
     // Auto-maps keys to identical image keys
-    ...((
-      keys = [
-        "applescript",
-        "autoit",
-        "brainfuck",
-        "c",
-        "cmake",
-        "css",
-        "clojure",
-        "coffee",
-        "crystal",
-        "d",
-        "dart",
-        "docker",
-        "editorconfig",
-        "elixir",
-        "erlang",
-        "gulp",
-        "gemfile",
-        "go",
-        "graphql",
-        "groovy",
-        "html",
-        "handlebars",
-        "harbour",
-        "haskell",
-        "haxe",
-        "hjson",
-        "json",
-        "java",
-        "julia",
-        "jupyter",
-        "kotlin",
-        "less",
-        "lisp",
-        "livescript",
-        "log",
-        "lua",
-        "makefile",
-        "markdown",
-        "nim",
-        "ocaml",
-        "php",
-        "pascal",
-        "perl",
-        "pony",
-        "postcss",
-        "powershell",
-        "prisma",
-        "processing",
-        "pug",
-        "purescript",
-        "python",
-        "r",
-        "ruby",
-        "rust",
-        "scss",
-        "sqf",
-        "sql",
-        "svg",
-        "scala",
-        "swift",
-        "stylus",
-        "svelte",
-        "tex",
-        "v",
-        "vba",
-        "vala",
-        "vue",
-        "xml",
-        "yaml",
-        "marko",
-        "nix",
-        "zig"
-      ]
-    ) => {
-      const r: ImageKeyMap = {};
-      keys.forEach((k) => (r[k] = { image: k }));
-      return r;
-    })()
   },
   // https://github.com/iCrawl/discord-vscode/blob/master/src/data/languages.json
   knownExtensions: ImageKeyMap = {
@@ -173,13 +93,13 @@ const presence = new Presence({
     ".asmx": { image: "asp" },
     ".aspx": { image: "asp" },
     ".axd": { image: "asp" },
-    "/\\.(l?a|[ls]?o|out|s|a51|asm|axf|elf|prx|puff|z80)$/i": {
+    "/\\.setTrayTitle(l?a|[ls]?o|out|s|a51|asm|axf|elf|prx|puff|z80)$/i": {
       image: "assembly"
     },
     ".agc": { image: "assembly" },
     ".ko": { image: "assembly" },
     ".lst": { image: "assembly" },
-    "/\\.((c([+px]{2}?)?-?)?objdump|bsdiff|bin|dat|pak|pdb)$/i": {
+    "/\\.setTrayTitle((c([+px]{2}?)?-?)?objdump|bsdiff|bin|dat|pak|pdb)$/i": {
       image: "assembly"
     },
     ".d-objdump": { image: "assembly" },
@@ -194,7 +114,7 @@ const presence = new Presence({
     ".bat": { image: "bat" },
     ".batch": { image: "bat" },
     ".cmd": { image: "bat" },
-    "/\\.(exe|com|msi)$/i": { image: "bat" },
+    "/\\.setTrayTitle(exe|com|msi)$/i": { image: "bat" },
     ".reg": { image: "bat" },
     "/^(\\.bowerrc|bower\\.json|Bowerfile)$/i": { image: "bower" },
     "/\\.bf?$/i": { image: "brainfuck" },
@@ -209,7 +129,7 @@ const presence = new Presence({
     "/\\.cljs(cm)?$/i": { image: "clojure" },
     ".cmake": { image: "cmake" },
     "/^CMakeLists\\.txt$/": { image: "cmake" },
-    "/\\.codeclimate\\.(yml|json)/i": { image: "codeclimate" },
+    "/\\.codeclimate\\.setTrayTitle(yml|json)/i": { image: "codeclimate" },
     ".coffee": { image: "coffee" },
     ".cjsx": { image: "coffee" },
     ".coffee.ecr": { image: "coffee" },
@@ -219,7 +139,7 @@ const presence = new Presence({
     "/\\.c[+px]{2}$|\\.cc$/i": { image: "cpp" },
     "/\\.h[+px]{2}$/i": { image: "cpp" },
     "/\\.[it]pp$/i": { image: "cpp" },
-    "/\\.(tcc|inl)$/i": { image: "cpp" },
+    "/\\.setTrayTitle(tcc|inl)$/i": { image: "cpp" },
     ".cats": { image: "cpp" },
     ".idc": { image: "cpp" },
     ".w": { image: "cpp" },
@@ -248,8 +168,8 @@ const presence = new Presence({
     ".editorconfig": { image: "editorconfig" },
     ".ejs": { image: "ejs" },
     ".ex": { image: "elixir" },
-    "/\\.(exs|l?eex)$/i": { image: "elixir" },
-    "/^mix\\.(exs?|lock)$/i": { image: "elixir" },
+    "/\\.setTrayTitle(exs|l?eex)$/i": { image: "elixir" },
+    "/^mix\\.setTrayTitle(exs?|lock)$/i": { image: "elixir" },
     ".elm": { image: "elm" },
     ".env": { image: "env" },
     ".erl": { image: "erlang" },
@@ -260,7 +180,7 @@ const presence = new Presence({
     ".app.src": { image: "erlang" },
     "/^Emakefile$/": { image: "erlang" },
     "/^rebar(\\.config)?\\.lock$/i": { image: "erlang" },
-    "/\\.(eslintrc|eslintignore)/i": { image: "eslint" },
+    "/\\.setTrayTitle(eslintrc|eslintignore)/i": { image: "eslint" },
     "/(\\.firebaserc|firebase\\.json)/i": { image: "firebase" },
     ".flowconfig": { image: "flowconfig" },
     ".fs": { image: "fsharp" },
@@ -280,9 +200,9 @@ const presence = new Presence({
     ".gvy": { image: "groovy" },
     ".gy": { image: "groovy" },
     ".gsh": { image: "groovy" },
-    "/gruntfile\\.(js|coffee)/i": { image: "gruntfile" },
+    "/gruntfile\\.setTrayTitle(js|coffee)/i": { image: "gruntfile" },
     "gulpfile.js": { image: "gulp" },
-    "/\\.(hbs|handlebars|(mu)?stache)$/i": { image: "handlebars" },
+    "/\\.setTrayTitle(hbs|handlebars|(mu)?stache)$/i": { image: "handlebars" },
     ".prg": { image: "harbour" },
     ".hbp": { image: "harbour" },
     ".hbc": { image: "harbour" },
@@ -311,7 +231,7 @@ const presence = new Presence({
     //    ".json": { "image": "json" },
     ".jsonc": { image: "json" },
     ".jsx": { image: "jsx" },
-    "/\\.(jil|jl)/i": { image: "julia" },
+    "/\\.setTrayTitle(jil|jl)/i": { image: "julia" },
     ".ipynb": { image: "jupyter" },
     ".kt": { image: "kotlin" },
     ".ktm": { image: "kotlin" },
@@ -332,7 +252,7 @@ const presence = new Presence({
     ".wlua": { image: "lua" },
     "/^Makefile/": { image: "makefile" },
     "/^mk\\.config$/": { image: "makefile" },
-    "/\\.(mk|mak|make)$/i": { image: "makefile" },
+    "/\\.setTrayTitle(mk|mak|make)$/i": { image: "makefile" },
     "/^BSDmakefile$/i": { image: "makefile" },
     "/^GNUmakefile$/i": { image: "makefile" },
     "/^makefile\\.sco$/i": { image: "makefile" },
@@ -340,7 +260,7 @@ const presence = new Presence({
     "/^makefile$/": { image: "makefile" },
     "/^mkfile$/i": { image: "makefile" },
     "/^\\.?qmake$/i": { image: "makefile" },
-    "/\\.(h|geo|topo)$/i": { image: "manifest" },
+    "/\\.setTrayTitle(h|geo|topo)$/i": { image: "manifest" },
     ".cson": { image: "manifest" },
     ".json5": { image: "manifest" },
     ".ndjson": { image: "manifest" },
@@ -376,7 +296,7 @@ const presence = new Presence({
       {
         image: "manifest"
       },
-    "/\\.(md|mdown|markdown|mkd|mkdown|mdwn|mkdn|rmd|ron|pmd)$/i": {
+    "/\\.setTrayTitle(md|mdown|markdown|mkd|mkdown|mdwn|mkdn|rmd|ron|pmd)$/i": {
       image: "markdown"
     },
     ".mdx": { image: "markdownx" },
@@ -409,10 +329,10 @@ const presence = new Presence({
     ".ph": { image: "perl" },
     ".plx": { image: "perl" },
     ".pm": { image: "perl" },
-    "/\\.(psgi|xs)$/i": { image: "perl" },
+    "/\\.setTrayTitle(psgi|xs)$/i": { image: "perl" },
     ".pl6": { image: "perl" },
     "/\\.[tp]6$|\\.6pl$/i": { image: "perl" },
-    "/\\.(pm6|p6m)$/i": { image: "perl" },
+    "/\\.setTrayTitle(pm6|p6m)$/i": { image: "perl" },
     ".6pm": { image: "perl" },
     ".nqp": { image: "perl" },
     ".p6l": { image: "perl" },
@@ -427,7 +347,7 @@ const presence = new Presence({
     ".psm1": { image: "powershell" },
     ".ps1xml": { image: "powershell" },
     ".prettierignore": { image: "prettier" },
-    "/\\.prettier((rc)|(\\.(toml|yml|yaml|json|js))?$){2}/i": {
+    "/\\.prettier((rc)|(\\.setTrayTitle(toml|yml|yaml|json|js))?$){2}/i": {
       image: "prettier"
     },
     "prettier.config.js": { image: "prettier" },
@@ -456,9 +376,9 @@ const presence = new Presence({
     "/^(SConstruct|SConscript)$/": { image: "python" },
     "/^(Snakefile|WATCHLISTS)$/": { image: "python" },
     "/^wscript$/": { image: "python" },
-    "/\\.(r|Rprofile|rsx|rd)$/i": { image: "r" },
+    "/\\.setTrayTitle(r|Rprofile|rsx|rd)$/i": { image: "r" },
     ".re": { image: "reasonml" },
-    "/\\.(rb|ru|ruby|erb|gemspec|god|mspec|pluginspec|podspec|rabl|rake|opal)$/i":
+    "/\\.setTrayTitle(rb|ru|ruby|erb|gemspec|god|mspec|pluginspec|podspec|rabl|rake|opal)$/i":
       {
         image: "ruby"
       },
@@ -467,19 +387,21 @@ const presence = new Presence({
       {
         image: "ruby"
       },
-    "/\\.(jbuilder|rbuild|rb[wx]|builder)$/i": { image: "ruby" },
+    "/\\.setTrayTitle(jbuilder|rbuild|rb[wx]|builder)$/i": { image: "ruby" },
     "/^rails$/": { image: "ruby" },
     ".watchr": { image: "ruby" },
     ".rs": { image: "rust" },
-    "/\\.(sc|scala)$/i": { image: "scala" },
+    "/\\.setTrayTitle(sc|scala)$/i": { image: "scala" },
     ".scss": { image: "scss" },
     ".sass": { image: "scss" },
-    "/\\.(sh|rc|bats|bash|tool|install|command)$/i": { image: "shell" },
+    "/\\.setTrayTitle(sh|rc|bats|bash|tool|install|command)$/i": {
+      image: "shell"
+    },
     "/^(\\.?bash(rc|[-_]?(profile|login|logout|history|prompt))|_osc|config|install-sh|PKGBUILD)$/i":
       {
         image: "shell"
       },
-    "/\\.(ksh|mksh|pdksh)$/i": { image: "shell" },
+    "/\\.setTrayTitle(ksh|mksh|pdksh)$/i": { image: "shell" },
     ".sh-session": { image: "shell" },
     "/\\.zsh(-theme|_history)?$|^\\.?(antigen|zpreztorc|zlogin|zlogout|zprofile|zshenv|zshrc)$/i":
       {
@@ -489,7 +411,7 @@ const presence = new Presence({
     "/^\\.?(login|profile)$/": { image: "shell" },
     ".inputrc": { image: "shell" },
     ".tmux": { image: "shell" },
-    "/^(configure|config\\.(guess|rpath|status|sub)|depcomp|libtool|compile)$/":
+    "/^(configure|config\\.setTrayTitle(guess|rpath|status|sub)|depcomp|libtool|compile)$/":
       {
         image: "shell"
       },
@@ -501,7 +423,7 @@ const presence = new Presence({
     ".tcsh": { image: "shell" },
     ".csh": { image: "shell" },
     ".sqf": { image: "sqf" },
-    "/\\.(my)?sql$/i": { image: "sql" },
+    "/\\.setTrayTitle(my)?sql$/i": { image: "sql" },
     ".ddl": { image: "sql" },
     ".udf": { image: "sql" },
     ".hql": { image: "sql" },
@@ -509,7 +431,7 @@ const presence = new Presence({
     ".prc": { image: "sql" },
     ".cql": { image: "sql" },
     ".db2": { image: "sql" },
-    "/\\.(styl|stylus)$/i": { image: "stylus" },
+    "/\\.setTrayTitle(styl|stylus)$/i": { image: "stylus" },
     ".svelte": { image: "svelte" },
     ".svg": { image: "svg" },
     ".swift": { image: "swift" },
@@ -525,12 +447,12 @@ const presence = new Presence({
     ".mkvi": { image: "tex" },
     ".mkii": { image: "tex" },
     ".texi": { image: "tex" },
-    "/^hyphen(ex)?\\.(cs|den|det|fr|sv|us)$/": { image: "tex" },
+    "/^hyphen(ex)?\\.setTrayTitle(cs|den|det|fr|sv|us)$/": { image: "tex" },
     "/\\.te?xt$/i": { image: "text" },
     ".rtf": { image: "text" },
     "/\\.i?nfo$/i": { image: "text" },
     ".msg": { image: "text" },
-    "/\\.(utxt|utf8)$/i": { image: "text" },
+    "/\\.setTrayTitle(utxt|utf8)$/i": { image: "text" },
     ".toml": { image: "toml" },
     ".travis.yml": { image: "travis" },
     ".ts": { image: "ts" },
@@ -551,7 +473,7 @@ const presence = new Presence({
     ".wat": { image: "wasm" },
     ".wast": { image: "wasm" },
     ".wasm": { image: "wasm" },
-    "/webpack(\\.dev|\\.development|\\.prod|\\.production)?\\.config(\\.babel)?\\.(js|jsx|coffee|ts|json|json5|yaml|yml)/i":
+    "/webpack(\\.dev|\\.development|\\.prod|\\.production)?\\.config(\\.babel)?\\.setTrayTitle(js|jsx|coffee|ts|json|json5|yaml|yml)/i":
       {
         image: "webpack"
       },
@@ -570,30 +492,26 @@ let lastFileChange: number = null,
   lastFile: string = null;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       smallImageKey: "gh",
       smallImageText: "GitHub Codespaces"
     },
-    isPreparing = document.querySelector(".vscs-splash-screen-steps-pane"),
     activeTab = document.querySelector(".tab.active"),
     editorMode = document.getElementById("status.editor.mode");
 
   // Preparing Screen
-  if (isPreparing) {
-    data.largeImageKey = "gh-lg";
-    data.details = "Preparing a codespace...";
-    delete data.smallImageKey;
+  if (document.querySelector(".vscs-splash-screen-steps-pane")) {
+    presenceData.largeImageKey = "gh-lg";
+    presenceData.details = "Preparing a codespace...";
+    delete presenceData.smallImageKey;
 
     if (document.querySelector(".vso-splash-screen__button"))
-      data.details = "Inactive Codespace";
+      presenceData.details = "Inactive Codespace";
     // Idle/Start Screen
   } else if (activeTab && editorMode) {
-    const scmTabs = Array.from(
-        document.querySelectorAll("#status\\.scm")
-      ).reverse(),
-      scmTab = scmTabs.find(
-        (scmTab) => scmTab && scmTab.hasAttribute("aria-label")
-      ),
+    const scmTab = Array.from(document.querySelectorAll("#status\\.scm"))
+        .reverse()
+        .find(scmTab => scmTab && scmTab.hasAttribute("aria-label")),
       workspace = scmTab
         ? scmTab.getAttribute("aria-label").split("(Git)")[0]
         : null,
@@ -602,12 +520,11 @@ presence.on("UpdateData", async () => {
       syntaxMode = editorMode.getAttribute("aria-label").toLowerCase(),
       largeImageKey =
         knownExtensions[
-          Object.keys(knownExtensions).find((key) => {
+          Object.keys(knownExtensions).find(key => {
             if (filename.endsWith(key)) return true;
             const match = /^\/(.*)\/([mgiy]+)$/.exec(key);
             if (!match) return false;
-            const regex = new RegExp(match[1], match[2]);
-            return regex.test(filename);
+            return new RegExp(match[1], match[2]).test(filename);
           })
         ] ?? (syntaxMode in langMap ? langMap[syntaxMode] : null);
 
@@ -616,9 +533,9 @@ presence.on("UpdateData", async () => {
       lastFileChange = Date.now();
     }
 
-    data.startTimestamp = lastFileChange;
-    data.largeImageKey = largeImageKey ? largeImageKey.image : "txt";
-    data.details = (await presence.getSetting("details"))
+    presenceData.startTimestamp = lastFileChange;
+    presenceData.largeImageKey = largeImageKey ? largeImageKey.image : "txt";
+    presenceData.details = (await presence.getSetting<string>("details"))
       .replace(/%file%/g, filename)
       .replace(/%path%/g, filepath)
       .replace(/%folder%/g, filepath.split("/").reverse()[1])
@@ -631,7 +548,7 @@ presence.on("UpdateData", async () => {
         /%workspaceOrFolder%/g,
         workspace || filepath.split("/").reverse()[1]
       );
-    data.state = (await presence.getSetting("state"))
+    presenceData.state = (await presence.getSetting<string>("state"))
       .replace(/%file%/g, filename)
       .replace(/%path%/g, filepath)
       .replace(/%folder%/g, filepath.split("/").reverse()[1])
@@ -645,12 +562,10 @@ presence.on("UpdateData", async () => {
         workspace || filepath.split("/").reverse()[1]
       );
   } else if (!editorMode) {
-    data.largeImageKey = "idle";
-    data.details = "Idling";
+    presenceData.largeImageKey = "idle";
+    presenceData.details = "Idling";
   }
 
-  if (!data.largeImageKey) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+  if (!presenceData.largeImageKey) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

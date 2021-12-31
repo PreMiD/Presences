@@ -1,26 +1,26 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Striker",
     "id": "215509157837537280"
   },
-  "url": "humanbenchmark.com",
+  "service": "Human Benchmark",
   "description": {
     "en": "Measure your abilities with brain games and congitive tests.",
     "nl": "Meet je vaardigheden met hersenspellen en cognitieve tests."
   },
-  "service": "Human Benchmark",
-  "version": "1.0.4",
+  "url": "humanbenchmark.com",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/vTQeYvH.png",
   "thumbnail": "https://i.imgur.com/jDQRXXN.jpg",
   "color": "#FFA600",
+  "category": "other",
   "tags": [
     "games",
     "tests",
     "brain",
     "cognitive"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "stamp",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
@@ -14,7 +14,8 @@
   "description": {
     "en": "Crowdin is a cloud-based solution that streamlines localization management for your team.",
     "ro": "Crowdin este o soluție bazată pe cloud care eficientizează gestionarea localizării pentru echipa ta.",
-    "nl": "Crowdin is een cloudgebaseerde oplossing die lokalisatiebeheer voor uw team stroomlijnt."
+    "nl": "Crowdin is een cloudgebaseerde oplossing die lokalisatiebeheer voor uw team stroomlijnt.",
+    "vi_VN": "Crowdin là giải pháp trực tuyến cho việc quản lý đội ngũ bản địa hoá của bạn."
   },
   "url": [
     "translate.premid.app",
@@ -24,14 +25,14 @@
     "status.crowdin.com",
     "blog.crowdin.com"
   ],
-  "version": "3.0.2",
+  "version": "3.0.4",
   "logo": "https://i.imgur.com/rtkC4kS.png",
   "thumbnail": "https://i.imgur.com/dJnnzqd.png",
   "color": "#2e3340",
+  "category": "other",
   "tags": [
     "partner",
     "translation",
     "projects"
-  ],
-  "category": "other"
+  ]
 }

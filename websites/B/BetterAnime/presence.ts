@@ -18,7 +18,7 @@ const presence = new Presence({
         watchMovie: "general.watchingMovie",
         watchSeries: "general.watchingSeries"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     );
   },
   data: {
@@ -71,7 +71,7 @@ const presence = new Presence({
     }
   };
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   video: {
     duration: number;
     currentTime: number;
@@ -83,12 +83,25 @@ presence.on("iFrameData", (data: typeof video) => {
 });
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy"),
-    anime = await presence.getSetting("anime"),
-    movie = await presence.getSetting("movie"),
-    browse = await presence.getSetting("browse"),
-    timestamp = await presence.getSetting("timestamp");
+  const [
+    newLang,
+    privacy,
+    anime,
+    movie,
+    browse,
+    timestamp,
+    AnimeState,
+    MovieState
+  ] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("anime"),
+    presence.getSetting<boolean>("movie"),
+    presence.getSetting<boolean>("browse"),
+    presence.getSetting<boolean>("timestamp"),
+    presence.getSetting<string>("AnimeState"),
+    presence.getSetting<string>("MovieState")
+  ]);
 
   if (browse) data.presenceData.details = (await strings).browse;
   if (
@@ -98,10 +111,9 @@ presence.on("UpdateData", async () => {
   )
     data.presenceData.startTimestamp = data.startedSince;
 
-  data.oldLang ??= newLang;
-  if (data.oldLang !== newLang) {
+  if (data.oldLang !== newLang || !strings) {
     data.oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   data.presence = {
@@ -267,7 +279,7 @@ presence.on("UpdateData", async () => {
         {
           page: "/anime/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)",
           uses: "details",
-          setTo: await presence.getSetting("AnimeDetails"),
+          setTo: await presence.getSetting<string>("AnimeDetails"),
           if: [
             {
               k: privacy && anime,
@@ -292,12 +304,9 @@ presence.on("UpdateData", async () => {
         {
           page: "/anime/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)",
           uses: "state",
-          setTo: await presence.getSetting("AnimeState"),
+          setTo: AnimeState,
           if: {
-            k:
-              !anime ||
-              privacy ||
-              (await presence.getSetting("AnimeState")).includes("{0}"),
+            k: !anime || privacy || AnimeState.includes("{0}"),
             delete: true
           },
           replace: [
@@ -314,7 +323,7 @@ presence.on("UpdateData", async () => {
         {
           page: "/filme/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)",
           uses: "details",
-          setTo: await presence.getSetting("MovieDetails"),
+          setTo: await presence.getSetting<string>("MovieDetails"),
           if: [
             {
               k: privacy && movie,
@@ -335,12 +344,9 @@ presence.on("UpdateData", async () => {
         {
           page: "/filme/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)",
           uses: "state",
-          setTo: await presence.getSetting("MovieState"),
+          setTo: MovieState,
           if: {
-            k:
-              !movie ||
-              privacy ||
-              (await presence.getSetting("MovieState")).includes("{0}"),
+            k: !movie || privacy || MovieState.includes("{0}"),
             delete: true
           },
           replace: [
@@ -363,7 +369,7 @@ presence.on("UpdateData", async () => {
 
   for (const setting of data.settings) {
     const settingValue = await presence
-      .getSetting(setting.id)
+      .getSetting<boolean>(setting.id)
       .catch(() => null);
 
     if (
@@ -401,14 +407,12 @@ presence.on("UpdateData", async () => {
                   }
                 }
               }
-            } else {
-              if (presenceSetting.if.k) {
-                if (presenceSetting.if.delete && !presenceSetting.if.v)
-                  delete data.presenceData[presenceSetting.uses];
-                else if (presenceSetting.if.v) {
-                  data.presenceData[presenceSetting.uses as "details"] =
-                    presenceSetting.if.v;
-                }
+            } else if (presenceSetting.if.k) {
+              if (presenceSetting.if.delete && !presenceSetting.if.v)
+                delete data.presenceData[presenceSetting.uses];
+              else if (presenceSetting.if.v) {
+                data.presenceData[presenceSetting.uses as "details"] =
+                  presenceSetting.if.v;
               }
             }
           }
@@ -422,8 +426,6 @@ presence.on("UpdateData", async () => {
       delete data.presenceData[x as "details"];
   }
 
-  if (!data.presenceData.details) {
-    presence.setActivity();
-    presence.setTrayTitle();
-  } else presence.setActivity(data.presenceData);
+  if (!data.presenceData.details) presence.setActivity();
+  else presence.setActivity(data.presenceData);
 });

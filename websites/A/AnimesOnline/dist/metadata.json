@@ -1,25 +1,26 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "AnimesOnline",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Faelayis",
     "id": "328731868096888833"
   },
-  "category": "anime",
+  "service": "AnimesOnline",
+  "description": {
+    "en": "Animes Online in FULLHD, HD and SD, choose the anime of your choice and watch it subtitled or dubbed! Join now it's free!",
+    "pt_BR": "Animes Online em FULLHD, HD e SD, escolha o anime de sua preferencia e assista legendado ou dublado! Acesse agora é gratuito!",
+    "vi_VN": "Xem anime trực tuyến với chất lượng FULLHD, HD và SD, chọn anime của bạn và xem với phụ đề hoặc thuyết minh! Tham gia hoàn toàn miễn phí!"
+  },
+  "url": "animesonline.org",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/5U9jD9W.jpg",
   "thumbnail": "https://i.imgur.com/4Q65GWB.jpg",
-  "version": "1.0.3",
   "color": "#e74c3c",
+  "category": "anime",
   "tags": [
     "animesonline",
     "videos",
     "anime"
   ],
-  "url": "animesonline.org",
-  "description": {
-    "en": "Animes Online in FULLHD, HD and SD, choose the anime of your choice and watch it subtitled or dubbed! Join now it's free!",
-    "pt_BR": "Animes Online em FULLHD, HD e SD, escolha o anime de sua preferencia e assista legendado ou dublado! Acesse agora é gratuito!"
-  },
   "iframe": true,
   "settings": [
     {

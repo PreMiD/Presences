@@ -1,11 +1,11 @@
 const presence = new Presence({
     clientId: "847409866528260116"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const showTimestamp: boolean = await presence.getSetting("timestamp"),
-    showButtons: boolean = await presence.getSetting("buttons"),
+  const showTimestamp = await presence.getSetting<boolean>("timestamp"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "discordstyle_logo"
     };
@@ -13,24 +13,28 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
   else if (document.location.pathname.includes("/results")) {
-    const search =
-        document.querySelectorAll("span.font-semibold")[1]?.textContent,
-      resultsAmount =
-        document.querySelectorAll("span.font-semibold")[0]?.textContent;
-    presenceData.details = `🔍 Searching for: ${search || "Nothing"}`;
-    presenceData.state = `📖 ${resultsAmount} result(s)`;
+    presenceData.details = `🔍 Searching for: ${
+      document.querySelectorAll("span.font-semibold")[1]?.textContent ||
+      "Nothing"
+    }`;
+    presenceData.state = `📖 ${
+      document.querySelectorAll("span.font-semibold")[0]?.textContent
+    } result(s)`;
   } else if (document.location.pathname.includes("/template/")) {
-    const templateName = document.querySelector(
+    presenceData.details = `Viewing ${
+      document.querySelector(
         "h1.w-full.pr-6.text-4xl.font-bold.break-words.opacity-95"
-      )?.textContent,
-      downloads = document.querySelectorAll("span.font-bold")[0]?.textContent,
-      likes = document.querySelectorAll("span.font-bold")[1]?.textContent,
-      comments = document.querySelectorAll("span.font-bold")[2]?.textContent,
-      age = document
+      )?.textContent
+    } template`;
+    presenceData.state = `👇 ${
+      document.querySelectorAll("span.font-bold")[0]?.textContent
+    }, ❤️ ${document.querySelectorAll("span.font-bold")[1]?.textContent}, 💬 ${
+      document.querySelectorAll("span.font-bold")[2]?.textContent
+    }, 📆 ${
+      document
         .querySelectorAll("span.font-bold")[3]
-        ?.textContent.split("ago")[0];
-    presenceData.details = `Viewing ${templateName} template`;
-    presenceData.state = `👇 ${downloads}, ❤️ ${likes}, 💬 ${comments}, 📆 ${age}`;
+        ?.textContent.split("ago")[0]
+    }`;
     presenceData.buttons = [
       {
         label: "View Template",
@@ -39,12 +43,8 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/user")) {
     const username = document.querySelector(
-        "h1.text-2xl.font-semibold.text-white"
-      )?.textContent,
-      templates = document.querySelectorAll("span.text-on-naked.text-xs")[0]
-        ?.textContent,
-      liked = document.querySelectorAll("span.text-on-naked.text-xs")[1]
-        ?.textContent;
+      "h1.text-2xl.font-semibold.text-white"
+    )?.textContent;
     presenceData.details = `Viewing ${
       username
         ? username.endsWith("s")
@@ -52,7 +52,11 @@ presence.on("UpdateData", async () => {
           : `${`${username}'s`}`
         : "Unknown"
     } profile`;
-    presenceData.state = `🖼️ ${templates} & ❤️ ${liked}`;
+    presenceData.state = `🖼️ ${
+      document.querySelectorAll("span.text-on-naked.text-xs")[0]?.textContent
+    } & ❤️ ${
+      document.querySelectorAll("span.text-on-naked.text-xs")[1]?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View User",
@@ -60,11 +64,10 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/latest")) {
-    const page = document.querySelector(
-      "h2.text-lg.font-semibold.text-white"
-    )?.textContent;
     presenceData.details = "Viewing latest templates";
-    presenceData.state = `📖 Page ${page}`;
+    presenceData.state = `📖 Page ${
+      document.querySelector("h2.text-lg.font-semibold.text-white")?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Latest",
@@ -90,12 +93,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/new"))
     presenceData.details = "Creating 🎨 new template";
   else if (document.location.pathname.includes("/browse")) {
-    const [tag] = document.location.href.split("tag=")[1].split("&"),
-      page = document.querySelector(
-        "h2.text-lg.font-semibold.text-white"
-      )?.textContent;
+    const [tag] = document.location.href.split("tag=")[1].split("&");
     presenceData.details = `Viewing ${tag ? `${`${tag} tag`}` : "Nothing"}`;
-    presenceData.state = `📖 Page ${page}`;
+    presenceData.state = `📖 Page ${
+      document.querySelector("h2.text-lg.font-semibold.text-white")?.textContent
+    }`;
     presenceData.buttons = [
       {
         label: "View Tag",
@@ -105,10 +107,8 @@ presence.on("UpdateData", async () => {
   }
 
   if (!showButtons) delete presenceData.buttons;
-  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

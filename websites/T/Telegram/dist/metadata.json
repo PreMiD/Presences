@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Kabal",
     "id": "269581360316940299"
@@ -13,16 +13,16 @@
     "nl": "Telegram is een veilige instant messaging-service met ondersteuning voor meerdere platforms."
   },
   "url": "web.telegram.org",
-  "version": "1.1.10",
+  "version": "1.1.12",
   "logo": "https://i.imgur.com/3hsUon3.png",
   "thumbnail": "https://i.imgur.com/aTmmCpt.png",
   "color": "#33abe0",
+  "category": "socials",
   "tags": [
     "telegram",
     "message",
     "social"
   ],
-  "category": "socials",
   "settings": [
     {
       "id": "name",

@@ -1,16 +1,16 @@
 ﻿const presence = new Presence({
     clientId: "839924185278840853"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const elapsed = await presence.getSetting("elapsed"),
-    timeleft = await presence.getSetting("timeleft"),
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons"),
+  const elapsed = await presence.getSetting<boolean>("elapsed"),
+    timeleft = await presence.getSetting<boolean>("timeleft"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    buttons = await presence.getSetting<boolean>("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (document.location.pathname.includes("/bs-viewer/")) {

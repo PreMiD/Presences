@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -20,10 +20,11 @@
     "ga_IE": "Seol agus faigh teachtaireachtaí WhatsApp go tapa ó do ríomhaire."
   },
   "url": "web.whatsapp.com",
-  "version": "2.0.2",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/iI0LOkF.png",
   "thumbnail": "https://i.imgur.com/Gk23OEd.jpg",
   "color": "#0dc143",
+  "category": "socials",
   "tags": [
     "whatsapp",
     "social",
@@ -34,7 +35,7 @@
       "id": "showRecipient",
       "title": "Show recipient name",
       "icon": "fas fa-user-alt",
-      "value": true
+      "value": false
     },
     {
       "id": "showNumbers",
@@ -42,6 +43,5 @@
       "icon": "fas fa-shield-alt",
       "value": false
     }
-  ],
-  "category": "socials"
+  ]
 }

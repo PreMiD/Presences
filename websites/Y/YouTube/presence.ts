@@ -58,25 +58,38 @@ async function getStrings() {
       watchVideoButton: "general.buttonWatchVideo",
       viewChannelButton: "general.buttonViewChannel"
     },
-    await presence.getSetting("lang").catch(() => "en")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy"),
-    time = await presence.getSetting("time"),
-    vidDetail = await presence.getSetting("vidDetail"),
-    vidState = await presence.getSetting("vidState"),
-    buttons = await presence.getSetting("buttons");
-  oldLang ??= newLang;
-  if (oldLang !== newLang) {
+  const [
+    newLang,
+    privacy,
+    time,
+    vidDetail,
+    vidState,
+    channelPic,
+    logo,
+    buttons
+  ] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("time"),
+    presence.getSetting<string>("vidDetail"),
+    presence.getSetting<string>("vidState"),
+    presence.getSetting<boolean>("channelPic"),
+    presence.getSetting<number>("logo"),
+    presence.getSetting<boolean>("Buttons")
+  ]);
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   //* If there is a vid playing
@@ -85,7 +98,8 @@ presence.on("UpdateData", async () => {
     let oldYouTube: boolean = null,
       YouTubeTV: boolean = null,
       YouTubeEmbed: boolean = null,
-      title: HTMLElement;
+      title: HTMLElement,
+      pfp: string;
 
     //* Checking if user has old YT layout.
     document.querySelector(".watch-title") !== null
@@ -163,9 +177,7 @@ presence.on("UpdateData", async () => {
               uploaderTV.textContent.replace(/\s+/g, ""),
               pattern
             )),
-      timestamps = presence.getTimestampsfromMedia(video),
-      live = Boolean(document.querySelector(".ytp-live")),
-      ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
+      live = Boolean(document.querySelector(".ytp-live"));
     let isPlaylistLoop = false;
 
     if (
@@ -214,6 +226,13 @@ presence.on("UpdateData", async () => {
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
+    if (logo === 2) {
+      pfp = document
+        .querySelector<HTMLImageElement>(
+          "#avatar.ytd-video-owner-renderer > img"
+        )
+        .src.replace("=s88", "=s512");
+    }
     const unlistedPathElement = document.querySelector<SVGPathElement>(
         "g#privacy_unlisted > path"
       ),
@@ -225,6 +244,9 @@ presence.on("UpdateData", async () => {
         unlistedBadgeElement !== null &&
         unlistedPathElement.getAttribute("d") ===
           unlistedBadgeElement.getAttribute("d"),
+      videoId = document
+        .querySelector("#page-manager > ytd-watch-flexy")
+        .getAttribute("video-id"),
       presenceData: PresenceData = {
         details: vidDetail
           .replace("%title%", finalTitle)
@@ -232,7 +254,12 @@ presence.on("UpdateData", async () => {
         state: vidState
           .replace("%title%", finalTitle)
           .replace("%uploader%", finalUploader),
-        largeImageKey: "yt_lg",
+        largeImageKey:
+          unlistedVideo || logo === 0 || pfp === ""
+            ? "yt_lg"
+            : logo === 1
+            ? `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`
+            : pfp,
         smallImageKey: video.paused
           ? "pause"
           : video.loop
@@ -247,7 +274,7 @@ presence.on("UpdateData", async () => {
           : isPlaylistLoop
           ? "Playlist on loop"
           : (await strings).play,
-        endTimestamp: timestamps[1]
+        endTimestamp: presence.getTimestampsfromMedia(video)[1]
       };
 
     if (vidState.includes("{0}")) delete presenceData.state;
@@ -274,7 +301,7 @@ presence.on("UpdateData", async () => {
     }
 
     //* Update title to indicate when an ad is being played
-    if (ads) {
+    if (document.querySelector(".ytp-ad-player-overlay")) {
       presenceData.details = (await strings).ad;
       delete presenceData.state;
     } else if (privacy) {
@@ -282,6 +309,7 @@ presence.on("UpdateData", async () => {
       else presenceData.details = (await strings).watchVid;
 
       delete presenceData.state;
+      presenceData.largeImageKey = "yt_lg";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
@@ -293,9 +321,7 @@ presence.on("UpdateData", async () => {
               : (await strings).watchVideoButton,
             url: document.URL.includes("/watch?v=")
               ? document.URL.split("&")[0]
-              : `https://www.youtube.com/watch?v=${document
-                  .querySelector("#page-manager > ytd-watch-flexy")
-                  .getAttribute("video-id")}`
+              : `https://www.youtube.com/watch?v=${videoId}`
           },
           {
             label: (await strings).viewChannelButton,
@@ -313,10 +339,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   } else if (
     document.location.hostname === "www.youtube.com" ||
     document.location.hostname === "youtube.com"
@@ -407,6 +431,13 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).viewChannel;
         presenceData.state = user;
         presenceData.startTimestamp = browsingStamp;
+      }
+      if (channelPic) {
+        presenceData.largeImageKey = document
+          .querySelector<HTMLImageElement>(
+            "#avatar.ytd-c4-tabbed-header-renderer > img"
+          )
+          .src.replace("=s176", "=s512");
       }
     } else if (document.location.pathname.includes("/post")) {
       presenceData.details = (await strings).viewCPost;
@@ -504,10 +535,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   } else if (document.location.hostname === "studio.youtube.com") {
     const presenceData: PresenceData = {
         largeImageKey: "yt_lg",
@@ -567,9 +596,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (!presenceData.details) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 });

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "PreMiD",
     "id": "503557087041683458"
@@ -10,13 +10,13 @@
     "nl": "Bekijk gratis alle nieuwe en oude films online in HD-kwaliteit en ondertitels."
   },
   "url": "lookmovie.io",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "logo": "https://i.imgur.com/vlSumUl.png",
   "thumbnail": "https://i.imgur.com/nseTbMZ.png",
   "color": "#ffcc00",
+  "category": "videos",
   "tags": [
     "lookmovie",
     "streaming"
-  ],
-  "category": "videos"
+  ]
 }

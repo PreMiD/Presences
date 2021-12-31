@@ -84,20 +84,18 @@ emanate.on("UpdateData", async () => {
       setData();
       break;
     } else if (emanate.isListening()) {
-      const songData = emanate.getSong(),
-        [, timestamps] = emanate.getTimestamps(
-          songData.currentTime,
-          songData.duration
-        );
-
-      presenceData.details = (await emanate.getSetting("song_1"))
+      const songData = emanate.getSong();
+      presenceData.details = (await emanate.getSetting<string>("song_1"))
         .replace("%title%", songData.title)
         .replace("%author%", songData.author);
-      presenceData.state = (await emanate.getSetting("song_2"))
+      presenceData.state = (await emanate.getSetting<string>("song_2"))
         .replace("%title%", songData.title)
         .replace("%author%", songData.author);
 
-      presenceData.endTimestamp = timestamps;
+      [, presenceData.endTimestamp] = emanate.getTimestamps(
+        songData.currentTime,
+        songData.duration
+      );
 
       presenceData.smallImageKey = songData.paused ? "pause" : "play";
       presenceData.smallImageText = songData.paused ? "Paused" : "Playing";
@@ -126,11 +124,9 @@ emanate.on("UpdateData", async () => {
     presenceData.state = document.querySelector("input").value;
   }
 
-  if (!(await emanate.getSetting("buttons")) && presenceData.buttons)
+  if (!(await emanate.getSetting<boolean>("buttons")) && presenceData.buttons)
     delete presenceData.buttons;
 
-  if (!presenceData.details) {
-    emanate.setTrayTitle();
-    emanate.setActivity();
-  } else emanate.setActivity(presenceData);
+  if (!presenceData.details) emanate.setActivity();
+  else emanate.setActivity(presenceData);
 });

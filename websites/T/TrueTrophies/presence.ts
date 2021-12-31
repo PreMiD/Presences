@@ -1,14 +1,14 @@
 const presence = new Presence({
     clientId: "702476721059790938"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "tt"
   };
 
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (document.location.pathname.includes("/gamer/")) {
     const user = document.querySelector(".tabs > ul > li").textContent;
@@ -66,8 +66,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(".info").textContent.trim();
     }
   } else if (
-    document.querySelector(".pagetitle") !== null &&
-    document.querySelector(".pagetitle").textContent === "Trophy Details"
+    document.querySelector(".pagetitle")?.textContent === "Trophy Details"
   ) {
     presenceData.details = "Viewing trophy:";
     presenceData.state = document.querySelector(".title").textContent;
@@ -80,7 +79,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname === "/news.aspx"
   )
     presenceData.details = "Viewing the latest news";
-  else if (document.querySelector(".newsitem > header > h1") !== null) {
+  else if (document.querySelector(".newsitem > header > h1")) {
     presenceData.details = "Reading article:";
     presenceData.state = document.querySelector(
       ".newsitem > header > h1"
@@ -140,8 +139,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the latest PlayStation VR games";
   else if (
     document.location.pathname.includes("/viewcomment.aspx") &&
-    document.querySelector(".pagetitle") !== null &&
-    document.querySelector(".pagetitle").textContent === "View Solution"
+    document.querySelector(".pagetitle")?.textContent === "View Solution"
   ) {
     presenceData.details = "Viewing solution for trophy:";
     presenceData.state = document.querySelector(".title").textContent;
@@ -163,16 +161,15 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the Gaming Sessions";
   else if (document.location.pathname === "/searchresults.aspx") {
     presenceData.details = "Searching for:";
-    presenceData.state = (
-      document.querySelector("#txtSearchFor") as HTMLInputElement
-    ).value;
+    presenceData.state =
+      document.querySelector<HTMLInputElement>("#txtSearchFor").value;
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname.includes("/products")) {
     if (document.location.pathname.includes("/latest"))
       presenceData.details = "Viewing the latest products";
     else if (document.location.pathname.includes("/playstation-sales"))
       presenceData.details = "Viewing PlayStation sales";
-    else if (document.querySelector(".pagetitle") !== null) {
+    else if (document.querySelector(".pagetitle")) {
       presenceData.details = "Viewing prices for:";
       presenceData.state = document
         .querySelector(".pagetitle")
@@ -197,9 +194,8 @@ presence.on("UpdateData", async () => {
       ).textContent;
     } else if (document.location.pathname.includes("/search.aspx")) {
       presenceData.details = "Forums - Searching for:";
-      presenceData.state = (
-        document.querySelector("#txtSearchFor") as HTMLInputElement
-      ).value;
+      presenceData.state =
+        document.querySelector<HTMLInputElement>("#txtSearchFor").value;
       presenceData.smallImageKey = "search";
     }
   } else if (document.location.pathname.includes("/leaderboard"))
@@ -209,8 +205,6 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname === "/")
     presenceData.details = "Browsing...";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

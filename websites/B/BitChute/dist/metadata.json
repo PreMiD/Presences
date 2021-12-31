@@ -1,25 +1,26 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "BitChute",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "वाह्य",
     "id": "819696394180100106"
   },
-  "category": "videos",
+  "service": "BitChute",
+  "description": {
+    "en": "BitChute is a peer-to-peer content sharing platform.",
+    "vi_VN": "BitChute là nền tảng chia sẻ nội dung qua hình thức peer-to-peer."
+  },
+  "url": "www.bitchute.com",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/ugI6cCC.png",
   "thumbnail": "https://i.imgur.com/9L0dyfo.png",
-  "version": "1.0.3",
   "color": "#ffa500",
+  "category": "videos",
   "tags": [
     "bitchute",
     "video",
     "yt-alt",
     "nsfw"
   ],
-  "url": "www.bitchute.com",
-  "description": {
-    "en": "BitChute is a peer-to-peer content sharing platform."
-  },
   "settings": [
     {
       "id": "privacy",

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "711685584573169686"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let currentTime: number,
   duration: number,
@@ -44,7 +44,8 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
     },
     path = document.location.pathname;
 
@@ -52,26 +53,19 @@ presence.on("UpdateData", async () => {
     if (document.title.includes("Resultados da pesquisa por ")) {
       presenceData.details = "Pesquisando por: ";
       presenceData.state = pesquisaText.value;
-      presenceData.startTimestamp = browsingStamp;
-    } else {
-      presenceData.details = "Pagina inícial";
-      presenceData.startTimestamp = browsingStamp;
-    }
+    } else presenceData.details = "Pagina inícial";
   } else if (path.includes("anime")) {
     path.split("/").length - 1 === 2 || path.split("/").length - 1 === 4
       ? ((presenceData.details = "Lista de animes"),
-        (presenceData.state = paginaText.innerText),
-        (presenceData.startTimestamp = browsingStamp))
-      : ((presenceData.details = nomeObraText.innerText),
-        (presenceData.state = lancamentoText.innerText),
-        (presenceData.startTimestamp = browsingStamp));
+        (presenceData.state = paginaText.textContent))
+      : ((presenceData.details = nomeObraText.textContent),
+        (presenceData.state = lancamentoText.textContent));
   } else if (path.includes("generos")) {
-    presenceData.details = `Gênero: ${generoText.innerText}`;
-    presenceData.state = paginaText.innerText;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = `Gênero: ${generoText.textContent}`;
+    presenceData.state = paginaText.textContent;
   } else if (path.includes("episodio")) {
-    presenceData.details = nomeObraEpisodioText.innerText;
-    presenceData.state = episodioEpisodioText.innerText;
+    presenceData.details = nomeObraEpisodioText.textContent;
+    presenceData.state = episodioEpisodioText.textContent;
     presenceData.smallImageKey = "";
     presenceData.smallImageText = "";
     if (played) {
@@ -90,11 +84,10 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("filme")) {
     if (path.split("/").length - 1 === 2 || path.split("/").length - 1 === 4) {
       presenceData.details = "Lista de filmes";
-      presenceData.state = paginaText.innerText;
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = paginaText.textContent;
     } else {
       presenceData.details = "Assistindo um filme";
-      presenceData.state = filmeNomeText.innerText;
+      presenceData.state = filmeNomeText.textContent;
       if (played) {
         !paused
           ? ((timestamps = presence.getTimestamps(
@@ -111,16 +104,13 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/pedidos")) {
     presenceData.details = "Página de pedidos";
-    presenceData.startTimestamp = browsingStamp;
     if (document.querySelector("div.discover.hidde.show"))
       presenceData.state = "Fazendo um novo pedido...";
-  } else if (path.includes("/calendario")) {
+  } else if (path.includes("/calendario"))
     presenceData.details = "Calendário de lançamentos";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (path.includes("/account")) {
+  else if (path.includes("/account")) {
     presenceData.details = "Minha Conta";
-    presenceData.state = contaText.innerText;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = contaText.textContent;
   } else presenceData.details = "Navegando...";
 
   presence.setActivity(presenceData);

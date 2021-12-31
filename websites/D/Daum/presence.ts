@@ -125,11 +125,6 @@ presence.on("UpdateData", async () => {
         ];
 
         if (video) {
-          const timestamps = presence.getTimestamps(
-            video.currentTime,
-            video.duration
-          );
-
           presenceData.details = "Watching video:";
           presenceData.state =
             video.title ?? document.querySelector("h3.tit_view")?.textContent;
@@ -137,7 +132,10 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-          [, presenceData.endTimestamp] = timestamps;
+          [, presenceData.endTimestamp] = presence.getTimestamps(
+            video.currentTime,
+            video.duration
+          );
 
           presenceData.buttons = [
             {
@@ -171,11 +169,6 @@ presence.on("UpdateData", async () => {
     "vod/view/([0-9a-zA-Z]+)": {
       service: "DAUM_AUTO",
       setPresenceData() {
-        const timestamps = presence.getTimestamps(
-          video?.currentTime,
-          video?.duration
-        );
-
         presenceData.details = "Watching video:";
         presenceData.state =
           document.querySelector("strong.tit_vod")?.textContent;
@@ -183,7 +176,8 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video?.paused ? "pause" : "play";
         presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
-        [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(video?.currentTime, video?.duration);
 
         presenceData.buttons = [
           {
@@ -247,11 +241,6 @@ presence.on("UpdateData", async () => {
       service: "DAUM_MOVIE",
       setPresenceData() {
         if (video) {
-          const timestamps = presence.getTimestamps(
-            video.currentTime,
-            video.duration
-          );
-
           presenceData.details = "Watching video:";
           presenceData.state =
             document.querySelector("strong.tit_player")?.textContent;
@@ -259,7 +248,10 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video.paused ? "pause" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-          [, presenceData.endTimestamp] = timestamps;
+          [, presenceData.endTimestamp] = presence.getTimestamps(
+            video.currentTime,
+            video.duration
+          );
 
           presenceData.buttons = [
             {
@@ -278,11 +270,6 @@ presence.on("UpdateData", async () => {
     "/video/([0-9a-zA-Z]+)": {
       service: "DAUM_SPORTS",
       setPresenceData() {
-        const timestamps = presence.getTimestamps(
-          video?.currentTime,
-          video?.duration
-        );
-
         presenceData.details = "Watching video:";
         presenceData.state =
           document.querySelector("strong.tit_vod")?.textContent;
@@ -290,7 +277,10 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video?.paused ? "pause" : "play";
         presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
-        [, presenceData.endTimestamp] = timestamps;
+        [, presenceData.endTimestamp] = presence.getTimestamps(
+          video?.currentTime,
+          video?.duration
+        );
 
         presenceData.buttons = [
           {
@@ -308,11 +298,6 @@ presence.on("UpdateData", async () => {
     "/tv/([0-9]+)/video/([0-9]+)": {
       service: "DAUM_ENTERTAIN",
       setPresenceData() {
-        const timestamps = presence.getTimestamps(
-          video?.currentTime,
-          video?.duration
-        );
-
         presenceData.details =
           video?.title ??
           document.querySelector("span.inner_tit2")?.textContent;
@@ -323,7 +308,10 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = video?.paused ? "pause" : "play";
         presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
-        [, presenceData.endTimestamp] = timestamps;
+        [, presenceData.endTimestamp] = presence.getTimestamps(
+          video?.currentTime,
+          video?.duration
+        );
 
         presenceData.buttons = [
           {
@@ -494,7 +482,7 @@ presence.on("UpdateData", async () => {
   }
 
   for (const setting of data.settings) {
-    const settingValue = await presence.getSetting(setting.id);
+    const settingValue = await presence.getSetting<boolean>(setting.id);
 
     if (!settingValue && setting.delete) {
       for (const PData of setting.data)

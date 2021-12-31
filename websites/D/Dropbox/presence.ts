@@ -6,8 +6,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "dropbox_logo"
     },
-    websiteLoadTimestamp = Math.floor(Date.now() / 1000),
-    showFileNames = await presence.getSetting("showFileNames");
+    showFileNames = await presence.getSetting<boolean>("showFileNames");
 
   if (document.location.pathname === "/")
     presenceData.details = "Viewing homepage";
@@ -17,8 +16,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Choosing new plan";
   else if (document.location.search.startsWith("?preview")) {
     presenceData.details = "Previewing a file";
-    if (showFileNames)
-      presenceData.state = document.querySelector(".filename--text").innerHTML;
+    if (showFileNames) {
+      presenceData.state =
+        document.querySelector(".filename--text").textContent;
+    }
   } else if (
     document.location.pathname.startsWith("/h") ||
     document.location.pathname.startsWith("/home")
@@ -26,7 +27,7 @@ presence.on("UpdateData", async () => {
     const currentFolder = document.querySelector(".page-header-text > h2");
     if (currentFolder) {
       presenceData.details = "Viewing folder";
-      if (showFileNames) presenceData.state = currentFolder.innerHTML;
+      if (showFileNames) presenceData.state = currentFolder.textContent;
     } else {
       presenceData.details = "Browsing files";
       presenceData.state = "All files";
@@ -48,15 +49,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Dropbox Paper";
   else if (document.location.pathname.startsWith("/scl")) {
     presenceData.details = "Working on paper";
-    presenceData.startTimestamp = websiteLoadTimestamp;
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     if (showFileNames) presenceData.state = document.title;
   } else if (document.location.pathname.startsWith("/landing/hellosign"))
     presenceData.details = "Dropbox HelloSign";
   else if (document.location.pathname.startsWith("/apps"))
     presenceData.details = "Browsing AppStore";
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
