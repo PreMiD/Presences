@@ -6,7 +6,8 @@ const gain = new Presence({
     pause: "presence.playback.paused"
   }),
   gainSettings = async () => ({
-    showImages: await gain.getSetting<boolean>("showImages")
+    showImages: await gain.getSetting<boolean>("showImages"),
+    showButtons: await gain.getSetting<boolean>("showButtons")
   }),
   gainPages: { [k: string]: string } = {
     "/": "Ana Sayfa",
@@ -57,6 +58,14 @@ gain.on("UpdateData", async () => {
 
     if ((await gainSettings()).showImages)
       presenceData.largeImageKey = image?.src || "g-logo";
+
+    if ((await gainSettings()).showButtons)
+      presenceData.buttons = [
+        {
+          label: presenceData.state ? "Bölüme Git" : "Filme Git",
+          url: `https://gain.tv${document.location.pathname}`
+        }
+      ];
 
     if (!isNaN(video?.duration)) {
       const [, endTimestamp] = gain.getTimestamps(

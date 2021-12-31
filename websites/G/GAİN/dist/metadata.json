@@ -26,6 +26,12 @@
       "title": "İçerik Resimleri",
       "icon": "fas fa-images",
       "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Butonları Göster",
+      "icon": "fas fa-mouse",
+      "value": true
     }
   ]
 }
