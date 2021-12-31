@@ -12,7 +12,6 @@ presence.on("UpdateData", async () => {
   if (path.startsWith("/product")) {
     if (path === "/product") presenceData.details = "Viewing Home page";
     else presenceData.details = "Viewing Products page";
-    presenceData.details = "Viewing home page";
   } else if (path.startsWith("/templates"))
     presenceData.details = "Browsing templates";
   else if (path.startsWith("/customers"))
