@@ -5,6 +5,9 @@ const gain = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
+  gainSettings = async () => ({
+    showImages: await gain.getSetting<boolean>("showImages")
+  }),
   gainPages: { [k: string]: string } = {
     "/": "Ana Sayfa",
     "/guncel": "Güncel İçerikler",
@@ -52,7 +55,8 @@ gain.on("UpdateData", async () => {
       title?.textContent?.split("-")?.[0] || "Bilinmeyen Dizi";
     presenceData.state = episode?.textContent;
 
-    presenceData.largeImageKey = image?.src || "g-logo";
+    if ((await gainSettings()).showImages)
+      presenceData.largeImageKey = image?.src || "g-logo";
 
     if (!isNaN(video?.duration)) {
       const [, endTimestamp] = gain.getTimestamps(
@@ -84,11 +88,12 @@ gain.on("UpdateData", async () => {
 
     presenceData.details = "Bir içeriğe göz atıyor:";
     presenceData.state = title?.textContent || "Bilinmeyen Dizi";
-    presenceData.largeImageKey = image?.src || "g-logo";
+
+    if ((await gainSettings()).showImages)
+      presenceData.largeImageKey = image?.src || "g-logo";
 
     gain.setActivity(presenceData);
   } else if (gainPages[path] || gainPages[path.slice(0, -1)]) {
-    // presenceData.details = "Bir sayfaya göz atıyor:";
     presenceData.state =
       gainPages[path] || gainPages[path.slice(0, -1)] || "Bilinmeyen Sayfa";
 

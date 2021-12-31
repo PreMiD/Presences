@@ -19,5 +19,13 @@
     "turkish",
     "series",
     "movie"
+  ],
+  "settings": [
+    {
+      "id": "showImages",
+      "title": "İçerik Resimleri",
+      "icon": "fas fa-images",
+      "value": true
+    }
   ]
 }
