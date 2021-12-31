@@ -4,27 +4,28 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "scrap-logo"
+    largeImageKey: "scrap-logo",
+    startTimestamp: browsingStamp
   };
-  presenceData.startTimestamp = browsingStamp;
+
   if (document.location.pathname === "/")
     presenceData.details = "Viewing Main page";
   else if (document.location.pathname.includes("/stats")) {
-    (presenceData.details = "Viewing the site stats"),
-      (presenceData.state = "Trade-stats for the past 12 hours");
+    presenceData.details = "Viewing the site stats";
+    presenceData.state = "Trade-stats for the past 12 hours";
   } else if (document.location.pathname.includes("/partswap")) {
-    (presenceData.details = "MvM Part Swap"),
-      (presenceData.state = "Trading MvM Parts");
+    presenceData.details = "MvM Part Swap";
+    presenceData.state = "Trading MvM Parts";
   } else if (document.location.pathname.includes("/itemvalues"))
     presenceData.details = "Checking Item Values for Premium";
   else if (document.location.pathname.includes("/games")) {
-    (presenceData.details = "Steam Game Trading"),
-      (presenceData.state = "Viewing the games price info");
+    presenceData.details = "Steam Game Trading";
+    presenceData.state = "Viewing the games price info";
   } else if (document.location.pathname.includes("/tips"))
     presenceData.details = "Viewing Tips page";
   else if (document.location.pathname.includes("/twitch")) {
-    (presenceData.details = "Getting more information about"),
-      (presenceData.state = "Scrap.TF Twitch Raffle Bot");
+    presenceData.details = "Getting more information about";
+    presenceData.state = "Scrap.TF Twitch Raffle Bot";
   } else if (document.location.pathname.includes("/support"))
     presenceData.details = "Viewing Live Support page";
   else if (document.location.pathname.includes("/inventory"))
@@ -79,16 +80,16 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/premium")) {
     const title = document
       .querySelector("#premium-balance")
-      .innerText.replace("You've Donated ", " ");
+      .textContent.replace("You've Donated ", " ");
     presenceData.details = "Visiting the Premium page";
     presenceData.state = `${title} Donated`;
   } else if (document.location.pathname.includes("/keys")) {
     const sellp = document.querySelector(
-      "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"
-     ),
-     buyp = document.querySelector(
-       "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(4) > span"
-     );
+        "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"
+      ),
+      buyp = document.querySelector(
+        "#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(4) > span"
+      );
     presenceData.details = "Key Trading";
     presenceData.state = `Buy price: ${buyp.textContent} | Sell price: ${sellp.textContent}`;
   } else if (document.location.pathname.includes("/sell")) {
@@ -137,11 +138,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/raffles")) {
     if (document.location.pathname.includes("puzzle")) {
       const pze = document.querySelector(
-        "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(2) > h1"
-      ),
-      pzw = document.querySelector(
-        "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(3) > h1"
-      );
+          "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(2) > h1"
+        ),
+        pzw = document.querySelector(
+          "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(3) > h1"
+        );
       presenceData.details = "Viewing Puzzle Raffles page";
       presenceData.state = `${pze.textContent} Puzzles Solved | ${pzw.textContent} Raffles Won`;
     } else if (document.location.pathname.includes("create"))
@@ -182,11 +183,11 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("won")) {
       const title = document.querySelector(
-        "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div > h1"
-      ),
-      item = document.querySelector(
-        "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div:nth-child(2) > h1"
-      );
+          "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div > h1"
+        ),
+        item = document.querySelector(
+          "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div:nth-child(2) > h1"
+        );
       if (document.location.pathname.includes("/public")) {
         presenceData.details = "Viewing history of Public raffles won";
         presenceData.state = `${title.textContent} Raffles Won | ${item.textContent} Items Won`;
@@ -202,11 +203,11 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("mine")) {
       const title = document.querySelector(
-        "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div > h1"
-      ),
-      item = document.querySelector(
-        "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div:nth-child(2) > h1"
-      );
+          "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div > h1"
+        ),
+        item = document.querySelector(
+          "#dynamic-height-slate > div > div.panel-body.raffle-header-border > div > div:nth-child(2) > h1"
+        );
       if (document.location.pathname.includes("/public")) {
         presenceData.details = "Viewing their Public created raffle history";
         presenceData.state = `${title.textContent} Raffles Created | ${item.textContent} Items Raffled`;
@@ -228,11 +229,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = `"${title.textContent}"`;
     } else {
       const re = document.querySelector(
-        "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(2) > h1"
-      ),
-      rw = document.querySelector(
-        "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(3) > h1"
-      );
+          "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(2) > h1"
+        ),
+        rw = document.querySelector(
+          "#main-container > div.panel.panel-info > div.panel-body.raffle-list-body > div.raffle-list-header > div:nth-child(3) > h1"
+        );
       presenceData.details = "Viewing Public Raffles page";
       presenceData.state = `${re.textContent} Raffles Entered | ${rw.textContent} Raffles Won`;
     }
@@ -244,7 +245,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#dynamic-height-slate > div > div.panel-body.text-center"
         )
-        .innerText.replace("You have joined a total of ", " ");
+        .textContent.replace("You have joined a total of ", " ");
       presenceData.details = "Viewing their joined auctions";
       presenceData.state = `${title.replace(
         ".\n\nAll Auctions\nJoined Auctions\nMy Auctions\nWon Auctions",
@@ -255,7 +256,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#dynamic-height-slate > div > div.panel-body.text-center"
         )
-        .innerText.replace("You have won a total of ", " ");
+        .textContent.replace("You have won a total of ", " ");
       presenceData.details = "Viewing their created auctions";
       presenceData.state = `${title.replace(
         ".\n\nAll Auctions\nJoined Auctions\nMy Auctions\nWon Auctions",
@@ -266,7 +267,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#dynamic-height-slate > div > div.panel-body.text-center"
         )
-        .innerText.replace("You have won a total of ", " ");
+        .textContent.replace("You have won a total of ", " ");
       presenceData.details = "Viewing auctions they've won";
       presenceData.state = `${title.replace(
         ".\n\nAll Auctions\nJoined Auctions\nMy Auctions\nWon Auctions",
@@ -283,7 +284,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#main-container > div:nth-child(2) > div.panel-body > div.text-center"
         )
-        .innerText.replace(" Steam API Availability: 100%\n", " ");
+        .textContent.replace(" Steam API Availability: 100%\n", " ");
       presenceData.details = "Viewing Public auctions";
       presenceData.state = title.replace(
         "\n\nAll Auctions\nEntered Auctions\nMy Auctions",
@@ -300,7 +301,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#main-container > div.welcome-overlay-well.well > div.well-padding > div.pull-left.well-title"
         )
-        .innerText.replace("Weapon Trading ", " ");
+        .textContent.replace("Weapon Trading ", " ");
       presenceData.details = "Trading Weapons with a Bot";
       presenceData.state = `Viewing ${title}`;
     } else presenceData.details = "Weapon Trading";
@@ -314,7 +315,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#main-container > div.welcome-overlay-well.well > div.well-padding > div.pull-left.well-title"
         )
-        .innerText.replace("Hat Trading ", " ");
+        .textContent.replace("Hat Trading ", " ");
       presenceData.details = "Trading Hats with a Bot";
       presenceData.state = `Viewing ${title}`;
     } else presenceData.details = "Hat Trading";
@@ -328,7 +329,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#main-container > div.welcome-overlay-well.well > div.well-padding > div.pull-left.well-title"
         )
-        .innerText.replace("Item Trading ", " ");
+        .textContent.replace("Item Trading ", " ");
       presenceData.details = "Trading Items with a Bot";
       presenceData.state = `Viewing ${title}`;
     } else {
@@ -339,8 +340,9 @@ presence.on("UpdateData", async () => {
     document.location.pathname !== "/sell/unusuals" &&
     document.location.pathname !== "/buy/unusuals" &&
     document.location.pathname.includes("unusuals")
-  )   presenceData.details = "Unusual Trading";
-    else if (
+  )
+    presenceData.details = "Unusual Trading";
+  else if (
     document.location.pathname !== "/sell/skins" &&
     document.location.pathname !== "/buy/skins" &&
     document.location.pathname.includes("skins")
@@ -350,7 +352,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#main-container > div.welcome-overlay-well.well > div.well-padding > div.pull-left.well-title"
         )
-        .innerText.replace("Skin + War Paint Trading ", " ");
+        .textContent.replace("Skin + War Paint Trading ", " ");
       presenceData.details = "Trading Warpaints/Skins with a Bot";
       presenceData.state = `Viewing ${title}`;
     } else presenceData.details = "Skin & War Paint Trading";
@@ -364,7 +366,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#main-container > div.welcome-overlay-well.well > div.well-padding > div.pull-left.well-title"
         )
-        .innerText.replace("Killstreak Kits ", " ");
+        .textContent.replace("Killstreak Kits ", " ");
       presenceData.details = "Trading Killstreaks with a Bot";
       presenceData.state = `Viewing ${title}`;
     } else presenceData.details = "Killstreak Kit Trading";
@@ -378,7 +380,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#main-container > div.welcome-overlay-well.well > div.well-padding > div.pull-left.well-title"
         )
-        .innerText.replace("Strange Trading ", " ");
+        .textContent.replace("Strange Trading ", " ");
       presenceData.details = "Trading Strange Items with a Bot";
       presenceData.state = `Viewing ${title}`;
     } else presenceData.details = "Strange Items Trading";
@@ -392,7 +394,7 @@ presence.on("UpdateData", async () => {
         .querySelector(
           "#main-container > div.welcome-overlay-well.well > div.well-padding > div.pull-left.well-title"
         )
-        .innerText.replace("Steam Trading Cards ", " ");
+        .textContent.replace("Steam Trading Cards ", " ");
       presenceData.details = "Trading Cards with a Bot";
       presenceData.state = `Viewing ${title}`;
     } else presenceData.details = "Card Trading";
@@ -409,8 +411,6 @@ presence.on("UpdateData", async () => {
     } else presenceData.details = "Item Incinerator";
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
