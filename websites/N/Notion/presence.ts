@@ -34,7 +34,10 @@ presence.on("UpdateData", async () => {
     )
   ) {
     presenceData.details = "Editing a page:";
-    presenceData.state = document.title;
+    presenceData.state =
+      document.querySelector(
+        "#notion-app > div > div.notion-overlay-container.notion-default-overlay-container > div:nth-child(2) > div > div:nth-child(2) > div.notion-scroller.vertical > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div"
+      ).textContent ?? document.title;
     presenceData.smallImageKey = "edit";
     presenceData.smallImageText = "Editing";
   } else if (
