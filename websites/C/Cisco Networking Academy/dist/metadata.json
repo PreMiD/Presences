@@ -6,10 +6,11 @@
   },
   "service": "Cisco Networking Academy",
   "description": {
-    "en": "Cisco Networking Academy is a global IT and cybersecurity education platform."
+    "en": "Cisco Networking Academy is a global IT and cybersecurity education platform.",
+    "vi_VN": "Cisco Networking Academy là nền tảng giáo dục an ninh mạng và IT toàn cầu."
   },
   "url": "www.netacad.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/pvz4KSf.png",
   "thumbnail": "https://i.imgur.com/wSSBD5e.png",
   "color": "#005073",

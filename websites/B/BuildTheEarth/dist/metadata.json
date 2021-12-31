@@ -7,10 +7,11 @@
   "service": "BuildTheEarth",
   "description": {
     "en": "We are recreating the entire planet in Minecraft.",
-    "nl": "We herbouwen de hele planeet in Minecraft."
+    "nl": "We herbouwen de hele planeet in Minecraft.",
+    "vi_VN": "Chúng tôi đang xây dựng cả hành tinh trong Minecraft."
   },
   "url": "buildtheearth.net",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/XvapvDX.png",
   "thumbnail": "https://i.imgur.com/YzqC7ju.png",
   "color": "#104D92",
