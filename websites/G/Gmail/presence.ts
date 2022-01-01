@@ -1,83 +1,156 @@
 const presence = new Presence({
     clientId: "808667100319186964"
   }),
-  elapsed = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: elapsed
+async function getStrings() {
+  return presence.getStrings(
+    {
+      categoryPrimary: "gmail.categoryPrimary",
+      categorySocial: "gmail.categorySocial",
+      categoryUpdates: "gmail.categoryUpdates",
+      categoryPromotions: "gmail.categoryPromotions",
+      categoryForum: "gmail.categoryForum",
+      inLabel: "gmail.inLabel",
+      generalSettings: "gmail.generalSettings",
+      labelSettings: "gmail.labelSettings",
+      accountSettings: "gmail.accountSettings",
+      filterSettings: "gmail.filterSettings",
+      fwdAndPOPSettings: "gmail.fwdAndPOPSettings",
+      addonSettings: "gmail.addonSettings",
+      chatSettings: "gmail.chatSettings",
+      advancedSettings: "gmail.advancedSettings",
+      offlineSettings: "gmail.offlineSettings",
+      themeSettings: "gmail.themeSettings",
+      lookingForEmail: "gmail.lookingForEmail",
+      viewingSentEmail: "gmail.viewingSentEmail",
+      viewingStarredEmails: "gmail.viewingStarredEmails",
+      viewingSnoozedEmails: "gmail.viewingSnoozedEmails",
+      viewingImportantEmails: "gmail.viewingImportantEmails",
+      viewingDrafts: "gmail.viewingDrafts",
+      viewingSentEmails: "gmail.viewingSentEmails",
+      viewingChat: "gmail.viewingChat",
+      viewingScheduled: "gmail.viewingScheduled",
+      viewingSpam: "gmail.viewingSpam",
+      viewingAllEmails: "gmail.viewingAllEmails",
+      composingEmail: "gmail.composingEmail",
+      viewingTrash: "gmail.viewingTrash",
+      viewingEmail: "gmail.viewingEmail"
     },
-    path = window.location.href;
+    await presence.getSetting<string>("lang").catch(() => "en")
+  );
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+  oldLang: string = null;
+
+presence.on("UpdateData", async () => {
+  let presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
+
+  const { href } = window.location,
+    [newLang, timestamps, privacy] = await Promise.all([
+      presence.getSetting<string>("lang").catch(() => "en"),
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("privacy")
+    ]);
+
+  if (oldLang !== newLang || !strings) {
+    oldLang = newLang;
+    strings = await getStrings();
+  }
+
+  const pages: Record<string, PresenceData> = {
+    "#category/social": {
+      details: strings.categorySocial
+    },
+    "#category/updates": {
+      details: strings.categoryUpdates
+    },
+    "#category/promotions": {
+      details: strings.categoryPromotions
+    },
+    "#category/forum": {
+      details: strings.categoryForum
+    },
+    "#settings/general": {
+      details: strings.generalSettings
+    },
+    "#settings/labels": {
+      details: strings.inLabel
+    },
+    "#settings/inbox": {
+      details: strings.generalSettings
+    },
+    "#settings/accounts": {
+      details: strings.accountSettings
+    },
+    "#settings/filters": {
+      details: strings.filterSettings
+    },
+    "#settings/fwdandpop": {
+      details: strings.fwdAndPOPSettings
+    },
+    "#settings/addons": {
+      details: strings.addonSettings
+    },
+    "#settings/chat": {
+      details: strings.chatSettings
+    },
+    "#settings/labs": {
+      details: strings.advancedSettings
+    },
+    "#settings/offline": {
+      details: strings.offlineSettings
+    },
+    "#settings/oldthemes": {
+      details: strings.themeSettings
+    },
+    inbox: {
+      details: strings.lookingForEmail
+    },
+    starred: { details: strings.viewingStarredEmails },
+    snoozed: { details: strings.viewingSnoozedEmails },
+    sent: { details: strings.viewingSentEmails },
+    drafts: { details: strings.viewingDrafts },
+    imp: { details: strings.viewingImportantEmails },
+    chats: { details: strings.viewingChat },
+    scheduled: { details: strings.viewingScheduled },
+    spam: { details: strings.viewingSpam },
+    all: { details: strings.viewingAllEmails },
+    trash: { details: strings.viewingTrash }
+  };
 
   if (window.location.href.split("/").length === 7) {
-    if (path.endsWith("#category/social"))
-      presenceData.details = "Viewing Social Mails";
-    else if (path.endsWith("#category/updates"))
-      presenceData.details = "Viewing Updates Mails";
-    else if (path.endsWith("#category/forums"))
-      presenceData.details = "Viewing Forums Mails";
-    else if (path.endsWith("#category/promotions"))
-      presenceData.details = "Viewing Promotions Mails";
-    else if (path.match("/#label/")) {
+    for (const [path, data] of Object.entries(pages)) {
+      if (document.location.pathname.endsWith(path))
+        presenceData = { ...presenceData, ...data };
+    }
+    if (href.match("/#label/")) {
       const labelname = document.querySelector("head > title").textContent;
       presenceData.details = "In the Label: ";
-      presenceData.state = labelname
-        .replace('"', "")
-        .split('" - ')[0]
-        .replace(
-          ` - ${
-            labelname.match(
-              /([a-zA-Z][\w.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z.]*[a-zA-Z])/
-            )[0]
-          } - Gmail`,
-          ""
-        );
-    } else if (path.endsWith("/#settings/general"))
-      presenceData.details = "In the General settings";
-    else if (path.endsWith("/#settings/labels"))
-      presenceData.details = "In the Labels settings";
-    else if (path.endsWith("/#settings/inbox")) {
-      presenceData.details = "In the settings of the";
-      presenceData.state = "Inbox Mails";
-    } else if (path.endsWith("/#settings/accounts"))
-      presenceData.details = "In the Account settings";
-    else if (path.endsWith("/#settings/filters"))
-      presenceData.details = "In the Filter settings";
-    else if (path.endsWith("/#settings/fwdandpop")) {
-      presenceData.details = "In the settings:";
-      presenceData.state = "POP and IMAP";
-    } else if (path.endsWith("/#settings/addons"))
-      presenceData.details = "In the Addons settings";
-    else if (path.endsWith("/#settings/chat"))
-      presenceData.details = "In the Chat settings";
-    else if (path.endsWith("/#settings/labs"))
-      presenceData.details = "In the Advanced settings";
-    else if (path.endsWith("/#settings/offline"))
-      presenceData.details = "In the Offline settings";
-    else if (path.endsWith("/#settings/oldthemes"))
-      presenceData.details = "In the Themes settings";
-    else if (path.match("/#search/"))
-      presenceData.details = "Looking for a mail";
-    else presenceData.details = "Viewing an Email";
-  } else if (path.endsWith("inbox")) presenceData.details = "Viewing Inbox";
-  else if (path.endsWith("compose=new"))
-    presenceData.details = "Composing a New Email";
-  else if (path.endsWith("starred")) presenceData.details = "Viewing Starred";
-  else if (path.endsWith("snoozed")) presenceData.details = "Viewing Snoozed";
-  else if (path.endsWith("sent")) presenceData.details = "Viewing Sent";
-  else if (path.endsWith("drafts")) presenceData.details = "Viewing Drafts";
-  else if (path.endsWith("imp")) presenceData.details = "Viewing Important";
-  else if (path.endsWith("chats")) presenceData.details = "Viewing Chats";
-  else if (path.endsWith("scheduled"))
-    presenceData.details = "Viewing Scheduled";
-  else if (path.endsWith("all")) presenceData.details = "Viewing All Mail";
-  else if (path.endsWith("spam")) presenceData.details = "Viewing Spam";
-  else if (path.endsWith("trash")) presenceData.details = "Viewing Trash";
-  else if (path.endsWith("#category/social"))
-    presenceData.details = "Viewing Social Mails";
-  else presenceData.details = "Viewing Mail";
+      if (!privacy) {
+        presenceData.state = labelname
+          .replace('"', "")
+          .split('" - ')[0]
+          .replace(
+            ` - ${
+              labelname.match(
+                /([a-zA-Z][\w.-]*[a-zA-Z0-9])@([a-zA-Z0-9][\w.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z.]*[a-zA-Z])/
+              )[0]
+            } - Gmail`,
+            ""
+          );
+      }
+    } else if (href.match("/#search"))
+      presenceData.details = strings.lookingForEmail;
+    else if (href.match("compose=new"))
+      presenceData.details = strings.composingEmail;
+    else presenceData.details = strings.viewingEmail;
+  }
 
-  if (presenceData.details) presence.setActivity(presenceData);
-  else presence.setActivity();
+  if (timestamps) presenceData.startTimestamp = browsingTimestamp;
+
+  presence.setActivity(presenceData);
 });
