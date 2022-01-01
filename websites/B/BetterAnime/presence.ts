@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
     presence.getSetting<string>("AnimeState"),
     presence.getSetting<string>("MovieState")
   ]);
-  
+
   if (data.oldLang !== newLang || !strings) {
     data.oldLang = newLang;
     strings = await getStrings();
