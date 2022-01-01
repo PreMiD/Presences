@@ -19,5 +19,13 @@
     "notetaking",
     "document",
     "management"
+  ],
+  "settings": [
+    {
+      "id": "title",
+      "title": "Show Document Name",
+      "icon": "fas fa-file-alt",
+      "value": false
+    }
   ]
 }

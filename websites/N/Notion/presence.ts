@@ -9,6 +9,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     path = document.location.pathname,
+    title = await presence.getSetting<boolean>("title"),
     overlayTitle = document.querySelector<HTMLDivElement>(
       "#notion-app > div > div.notion-overlay-container.notion-default-overlay-container > div:nth-child(2) > div > div:nth-child(2) > div.notion-scroller.vertical > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div"
     );
@@ -35,9 +36,11 @@ presence.on("UpdateData", async () => {
       "#notion-app > div > div.notion-cursor-listener > div:nth-child(2) > div.notion-frame > div:nth-child(2) > div > div"
     )
   ) {
-    presenceData.details = "Editing a page:";
-    if (!overlayTitle) presenceData.state = document.title;
-    else presenceData.state = overlayTitle.textContent;
+    presenceData.details = "Editing a page";
+    if (title) {
+      if (!overlayTitle) presenceData.state = document.title;
+      else presenceData.state = overlayTitle.textContent;
+    }
     presenceData.smallImageKey = "edit";
     presenceData.smallImageText = "Editing";
   } else if (
@@ -45,8 +48,8 @@ presence.on("UpdateData", async () => {
       "#notion-app > div > div.notion-cursor-listener > div:nth-child(2) > div:nth-child(1) > div.notion-topbar"
     )
   ) {
-    presenceData.details = "Reading a page:";
-    presenceData.state = document.title;
+    presenceData.details = "Reading a page";
+    if (title) presenceData.state = document.title;
     presenceData.smallImageKey = "read";
     presenceData.smallImageText = "Reading";
   }
