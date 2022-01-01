@@ -9,16 +9,14 @@ presence.on("UpdateData", async () => {
       startTimestamp: timer
     },
     { hash } = location,
-    [, , , , userInt, , LorLNorId] = location.href.split("/");
+    [, , , , LorLNorId] = location.href.split("/"),
+    privacy = await presence.getSetting<boolean>("privacy");
 
-  if (location.pathname === `/u/${userInt}/`) {
-    presenceData.details = "Viewing homepage";
-    presenceData.state = "Notes";
+  presenceData.details = "Viewing Homepage";
+  presenceData.state = "Notes";
 
-    if (hash === "#home") {
-      presenceData.details = "Viewing Homepage";
-      presenceData.state = "Notes";
-    } else if (hash === `#LIST/${LorLNorId}`) {
+  if (hash === `#LIST/${LorLNorId}`) {
+    if (!privacy) {
       const listName =
         document.querySelector(
           "body > div.notes-container.RfDI4d-sKfxWe > div.RfDI4d-Iu19ad > div.RfDI4d-bN97Pc.ogm-kpc > div.gkA7Yd-sKfxWe.ma6Yeb-r8s4j-gkA7Yd > div > div.IZ65Hb-n0tgWb.rymPhb.NYTeh-IT5dJd.RNfche > div.IZ65Hb-TBnied.zTETae-h1U9Be-hxXJme > div.IZ65Hb-s2gQvd > div.IZ65Hb-r4nke-haAclf > div.notranslate.IZ65Hb-YPqjbf.fmcmS-x3Eknd.r4nke-YPqjbf"
@@ -26,33 +24,45 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "body > div.VIpgJd-TUo6Hb.XKSfm-L9AdLc.eo9XGd > div > div.IZ65Hb-TBnied.zTETae-h1U9Be-hxXJme > div.IZ65Hb-s2gQvd > div.IZ65Hb-r4nke-haAclf > div.notranslate.IZ65Hb-YPqjbf.fmcmS-x3Eknd.r4nke-YPqjbf"
         );
-
       presenceData.details = "Reading Tasks:";
-
       if (listName.textContent) presenceData.state = listName.textContent;
       else if (!listName.textContent) presenceData.state = "Untitled List";
-    } else if (hash === `#NOTE/${LorLNorId}`) {
+    } else {
+      presenceData.details = "Reading Tasks";
+      delete presenceData.state;
+    }
+  } else if (hash === `#NOTE/${LorLNorId}`) {
+    if (!privacy) {
       const noteName = document.querySelector(
         "body > div.VIpgJd-TUo6Hb.XKSfm-L9AdLc.eo9XGd > div > div.IZ65Hb-TBnied.zTETae-h1U9Be-hxXJme > div.IZ65Hb-s2gQvd > div.IZ65Hb-r4nke-haAclf > div.notranslate.IZ65Hb-YPqjbf.fmcmS-x3Eknd.r4nke-YPqjbf"
       );
-
       presenceData.details = "Reading a Note:";
-
       if (noteName.textContent) presenceData.state = noteName.textContent;
       else if (!noteName.textContent) presenceData.state = "Untitled Note";
-    } else if (hash === "#reminders") {
-      presenceData.details = "Viewing at reminders";
-      delete presenceData.state;
-    } else if (hash === `#label/${LorLNorId}`) {
-      presenceData.details = "Viewing at a label:";
-      presenceData.state = decodeURIComponent(LorLNorId);
-    } else if (hash === "#archive") {
-      presenceData.details = "Viewing the archive";
-      delete presenceData.state;
-    } else if (hash === "#trash") {
-      presenceData.details = "Viewing at the trash";
+    } else {
+      presenceData.details = "Reading a Note";
       delete presenceData.state;
     }
+  } else if (hash === "#search" || hash === `#search/${LorLNorId}`) {
+    presenceData.details = "Search";
+    delete presenceData.state;
+  } else if (hash === "#reminders") {
+    presenceData.details = "Viewing reminders";
+    delete presenceData.state;
+  } else if (hash === `#label/${LorLNorId}`) {
+    if (!privacy) {
+      presenceData.details = "Viewing a label:";
+      presenceData.state = decodeURIComponent(LorLNorId);
+    } else {
+      presenceData.details = "Viewing a label";
+      delete presenceData.state;
+    }
+  } else if (hash === "#archive") {
+    presenceData.details = "Viewing the archive";
+    delete presenceData.state;
+  } else if (hash === "#trash") {
+    presenceData.details = "Viewing the trash";
+    delete presenceData.state;
   }
 
   if (!presenceData.details) presence.setActivity();

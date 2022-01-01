@@ -4,19 +4,33 @@
     "name": "rushia",
     "id": "398752205043400724"
   },
+  "contributors": [
+    {
+      "name": "Vasilis",
+      "id": "241929388403195914"
+    }
+  ],
   "service": "Google Keep",
   "description": {
     "en": "Google Keep is a note-taking service included as part of the free, web-based Google Docs Editors suite offered by Google."
   },
   "url": "keep.google.com",
-  "version": "1.0.4",
-  "logo": "https://i.imgur.com/XAaFBLf.png",
+  "version": "1.1.0",
+  "logo": "https://i.imgur.com/a3Zeo3X.png",
   "thumbnail": "https://i.imgur.com/AyaAOXp.png",
-  "color": "#f4b400",
+  "color": "#FFBA00",
   "category": "other",
   "tags": [
     "notes",
     "todo",
     "todo-list"
+  ],
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
   ]
 }
