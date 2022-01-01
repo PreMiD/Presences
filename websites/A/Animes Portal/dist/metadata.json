@@ -34,7 +34,7 @@
     },
     {
       "id": "showmessaging",
-      "title": "Show my chats",
+      "title": "Show chats",
       "icon": "fas fa-comments",
       "value": true
     }
