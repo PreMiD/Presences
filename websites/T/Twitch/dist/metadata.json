@@ -26,7 +26,8 @@
     "uk_UA": "Twitch - це провідна в світі платформа прямого ефіру для геймерів та речей, які ми любимо. Дивіться та спілкуйтеся зараз із мільйонами інших шанувальників з усього світу.",
     "nl": "Twitch is 's werelds grootste livestreaming-platform voor gamers en de dingen waar we van houden. Kijk en chat nu met miljoenen andere fans van over de hele wereld.",
     "zh_CN": "Twitch是面向游戏玩家和各种事物的全球领先的直播平台。快来与来自世界各地的数百万粉丝一起观看和聊天。",
-    "zh_TW": "Twitch是面向遊戲玩家和各種事物的全球領先的實時串流平台。快來與來自世界各地的數百萬粉絲一起觀看和聊天。"
+    "zh_TW": "Twitch是面向遊戲玩家和各種事物的全球領先的實時串流平台。快來與來自世界各地的數百萬粉絲一起觀看和聊天。",
+    "vi_VN": "Twitch là nền tảng phát trực tuyến dẫn đầu thế giới dành cho các gamer và các thứ ta yêu thích. Hãy theo dõi ngay và trò truyện với hàng triệu người hâm mộ từ khắp thế giới."
   },
   "url": [
     "www.twitch.tv",
@@ -40,7 +41,7 @@
     "devstatus.twitch.tv",
     "status.twitch.tv"
   ],
-  "version": "3.1.11",
+  "version": "3.1.12",
   "logo": "https://i.imgur.com/So7h3G0.png",
   "thumbnail": "https://i.imgur.com/OAcBmwW.png",
   "color": "#9146FF",
