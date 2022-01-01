@@ -38,7 +38,8 @@ gain.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "g-logo",
       startTimestamp: Math.floor(Date.now() / 1000)
-    };
+    },
+    settings = await gainSettings();
 
   if (path.startsWith("/v/")) {
     const video: HTMLVideoElement = document.querySelector("video"),
@@ -56,10 +57,10 @@ gain.on("UpdateData", async () => {
       title?.textContent?.split("-")?.[0] || "Bilinmeyen Dizi";
     presenceData.state = episode?.textContent;
 
-    if ((await gainSettings()).showImages)
+    if (settings.showImages)
       presenceData.largeImageKey = image?.src || "g-logo";
 
-    if ((await gainSettings()).showButtons)
+    if (settings.showButtons)
       presenceData.buttons = [
         {
           label: presenceData.state ? "Bölüme Git" : "Filme Git",
@@ -98,7 +99,7 @@ gain.on("UpdateData", async () => {
     presenceData.details = "Bir içeriğe göz atıyor:";
     presenceData.state = title?.textContent || "Bilinmeyen Dizi";
 
-    if ((await gainSettings()).showImages)
+    if (settings.showImages)
       presenceData.largeImageKey = image?.src || "g-logo";
 
     gain.setActivity(presenceData);
