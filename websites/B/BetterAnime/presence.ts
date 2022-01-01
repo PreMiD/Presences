@@ -102,19 +102,19 @@ presence.on("UpdateData", async () => {
     presence.getSetting<string>("AnimeState"),
     presence.getSetting<string>("MovieState")
   ]);
+  
+  if (data.oldLang !== newLang || !strings) {
+    data.oldLang = newLang;
+    strings = await getStrings();
+  }
 
-  if (browse) data.presenceData.details = (await strings).browse;
+  if (browse) data.presenceData.details = strings.browse;
   if (
     timestamp &&
     !data.presenceData.startTimestamp &&
     !data.presenceData.endTimestamp
   )
     data.presenceData.startTimestamp = data.startedSince;
-
-  if (data.oldLang !== newLang || !strings) {
-    data.oldLang = newLang;
-    strings = await getStrings();
-  }
 
   data.presence = {
     "/anime/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)": {
