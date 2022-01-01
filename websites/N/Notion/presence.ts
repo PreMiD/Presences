@@ -8,7 +8,10 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     },
-    path = document.location.pathname;
+    path = document.location.pathname,
+    overlayTitle = document.querySelector<HTMLDivElement>(
+      "#notion-app > div > div.notion-overlay-container.notion-default-overlay-container > div:nth-child(2) > div > div:nth-child(2) > div.notion-scroller.vertical > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div"
+    );
   if (path.startsWith("/product")) {
     if (path === "/product") presenceData.details = "Viewing Home page";
     else presenceData.details = "Viewing Products page";
@@ -27,18 +30,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading Guides & Tutorials";
   // Clearly not the best solution but it works(?)
   else if (
-    document.querySelector<HTMLDivElement>(
-      "#notion-app > div > div.notion-overlay-container.notion-default-overlay-container > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1)"
-    ) ||
+    overlayTitle ||
     document.querySelector<HTMLDivElement>(
       "#notion-app > div > div.notion-cursor-listener > div:nth-child(2) > div.notion-frame > div:nth-child(2) > div > div"
     )
   ) {
     presenceData.details = "Editing a page:";
-    presenceData.state =
-      document.querySelector<HTMLDivElement>(
-        "#notion-app > div > div.notion-overlay-container.notion-default-overlay-container > div:nth-child(2) > div > div:nth-child(2) > div.notion-scroller.vertical > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div"
-      ).textContent ?? document.title;
+    if (!overlayTitle) presenceData.state = document.title;
+    else presenceData.state = overlayTitle.textContent;
     presenceData.smallImageKey = "edit";
     presenceData.smallImageText = "Editing";
   } else if (
