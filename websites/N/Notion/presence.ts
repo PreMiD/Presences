@@ -25,6 +25,7 @@ presence.on("UpdateData", async () => {
   else if (path.startsWith("/blog")) presenceData.details = "Reading blogs";
   else if (path.startsWith("/guides"))
     presenceData.details = "Reading Guides & Tutorials";
+  // Clearly not the best solution but it works(?)
   else if (
     document.querySelector<HTMLDivElement>(
       "#notion-app > div > div.notion-overlay-container.notion-default-overlay-container > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1)"
