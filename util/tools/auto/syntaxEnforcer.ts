@@ -1,10 +1,9 @@
 import "source-map-support/register";
 
+import { exec } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+import { join, normalize, resolve, sep } from "node:path";
 import { coerce, inc } from "semver";
-import { join, normalize, resolve, sep } from "path";
-import { readFileSync, writeFileSync } from "fs";
-
-import { exec } from "child_process";
 import debug from "debug";
 
 const log = debug("SyntaxEnforcer");
