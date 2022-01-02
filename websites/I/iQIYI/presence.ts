@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname === "/") {
-    presenceData.details = (await strings).browsingThrough;
+    presenceData.details = strings.browsingThrough;
     presenceData.state =
       Object.values(document.querySelectorAll("div")).filter(
         entry => entry?.className === "row-title" && isInViewport(entry)
@@ -111,9 +111,7 @@ presence.on("UpdateData", async () => {
     if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
     if (possiblyVShow) {
       if (contentEp?.length) {
-        data.ep = `${(await strings).episode} ${
-          contentEp[0].match(/.+?(?=\()/g)[0]
-        } ${
+        data.ep = `${strings.episode} ${contentEp[0].match(/.+?(?=\()/g)[0]} ${
           contentEp[0].includes("(")
             ? `- ${contentEp[0].match(/(\([1-9][0-9]?\))/g)[0]}`
             : "Variety show"
@@ -176,7 +174,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = `${strings.searchFor} ${
       searchQuery
-        ? decodeURI(document.location.search.replace("?query=", ""))
+        ? decodeURI(new URLSearchParams(document.location.search).get("query"))
         : "( Hidden )"
     }`;
     presenceData.smallImageKey = "search";
@@ -218,7 +216,7 @@ presence.on("UpdateData", async () => {
         break;
 
       default:
-        presenceData.details = (await strings).viewAccount;
+        presenceData.details = strings.viewAccount;
         break;
     }
   } else if (document.location.pathname.includes("/vip/")) {
