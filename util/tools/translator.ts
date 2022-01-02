@@ -1,8 +1,8 @@
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import axios from "axios";
 import chalk from "chalk";
 import debug from "debug";
 import { prompt } from "enquirer";
-import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
 import ora, { Ora } from "ora";
 
 /**
