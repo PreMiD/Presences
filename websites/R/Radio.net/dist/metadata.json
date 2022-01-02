@@ -12,16 +12,22 @@
     "nl": "Radio.net brengt meer dan 30.000 radiostations en podcasts samen. Het heeft wereldwijd 4 miljoen maandelijkse gebruikers en is meer dan 20 miljoen keer gedownload."
   },
   "url": "www.radio.net",
-  "regExp": "((www|uk|au|nz|ie|za|ca|co|mx|br)[.]radio[.]net|www[.]radio[.](de|dk|at|es|fr|it|pl|pt|se))[/]",
-  "version": "3.1.6",
+  "regExp": "((www|uk|au|nz|ie|za|ca|co|mx|br|nl|za)[.]radio[.]net|www[.]radio[.](de|dk|at|es|fr|it|pl|pt|se)|corporate[.]radio[.](net|de))[/]",
+  "version": "4.0.0",
   "logo": "https://i.imgur.com/3IBLlpc.png",
   "thumbnail": "https://i.imgur.com/pYZzRDV.png",
-  "color": "#67e350",
+  "color": "#64e646",
   "category": "music",
   "tags": [
     "radio",
     "podcast",
     "music",
     "stream"
+  ],
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    }
   ]
 }

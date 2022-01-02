@@ -69,9 +69,9 @@ presence.on("UpdateData", async () => {
     ]);
   if (title !== "" && !isNaN(video.duration)) {
     const endTimestamp =
-        Date.now() +
-        Number(progressBar.getAttribute("aria-valuemax")) * 1000 -
-        Number(progressBar.getAttribute("value")) * 1000,
+        Date.now() / 1000 +
+        Number(progressBar.getAttribute("aria-valuemax")) -
+        Number(progressBar.getAttribute("value")),
       [, watchID] = document
         .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
         .href.match(/v=([^&#]{5,})/),
