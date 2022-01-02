@@ -213,7 +213,7 @@ presence.on("UpdateData", async () => {
       type: type,
       currentEpisode: watchId,
       id: watchId,
-      boxart: undefined,
+      boxart: null,
       seasons: [
         {
           seq: seasonId,
