@@ -234,7 +234,7 @@ presence.on("UpdateData", async () => {
         }
       ],
       title:
-        type === "movie"
+        this.type === "movie"
           ? (
               document.querySelector("[class$='title'] h4.ellipsize-text") ??
               document.querySelector("[data-uia$='video-title']")
