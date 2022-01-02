@@ -23,7 +23,7 @@
   "settings": [
     {
       "id": "title",
-      "title": "Show Document Name",
+      "title": "Show document name",
       "icon": "fas fa-file-alt",
       "value": false
     }
