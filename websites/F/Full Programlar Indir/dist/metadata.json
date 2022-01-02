@@ -4,7 +4,7 @@
     "name": "SinecKers",
     "id": "380411952666640385"
   },
-  "service": "Full Programlar İndir",
+  "service": "Full Programlar Indir",
   "description": {
     "tr": "Full Programlar İndir Türkçe bir program indirme sitesidir",
     "en": "Full Programlar İndir is a website that allows you to download many programs and games",
@@ -13,6 +13,9 @@
   "url": [
     "www.fullprogramlarindir.com",
     "fullprogramlarindir.com"
+  ],
+  "altnames": [
+    "Full Programlar İndir"
   ],
   "version": "1.0.10",
   "logo": "https://i.imgur.com/r2sQKMp.png",

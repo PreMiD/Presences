@@ -4,7 +4,7 @@
     "name": "EGGSY",
     "id": "162969778699501569"
   },
-  "service": "GAİN",
+  "service": "GAIN",
   "description": {
     "en": "GAİN offers long, short series as well as creative movies, latest news, documentaries and much more!",
     "tr": "GAİN ile uzun, kısa diziler, filmler, yaratıcı, güncel içerikler, belgeseller, spor, eğlence programları ve dahası istediğiniz her zaman, her yerde sizinle!"
@@ -15,6 +15,9 @@
   "thumbnail": "https://i.imgur.com/n8AgY7d.jpg",
   "color": "#f5313f",
   "category": "videos",
+  "altnames": [
+    "GAİN"
+  ],
   "tags": [
     "turkish",
     "series",

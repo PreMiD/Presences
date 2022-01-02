@@ -4,7 +4,7 @@
     "name": "erdem",
     "id": "292692556809109534"
   },
-  "service": "Ekrem İmamoğlu",
+  "service": "Ekrem Imamoglu",
   "description": {
     "en": "Istanbul Metropolitan Municipality president Ekrem Imamoglu's personal page.'",
     "tr": "İstanbul Büyükşehir Belediyesi başkanı Ekrem İmamoğlu'nun websitesi.",
@@ -13,6 +13,9 @@
   "url": [
     "www.ekremimamoglu.com",
     "ekremimamoglu.com"
+  ],
+  "altnames": [
+    "Ekrem İmamoğlu"
   ],
   "version": "1.0.5",
   "logo": "https://i.imgur.com/uFxg05Y.png",
