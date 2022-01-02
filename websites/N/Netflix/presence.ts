@@ -203,14 +203,14 @@ presence.on("UpdateData", async () => {
           .replace(/\D+/g, ""),
         0
       ),
-      watchId = parseInt(document.URL.split("?")[0].replace(/\D+/g, ""), 0),
-      type =
+      watchId = parseInt(document.URL.split("?")[0].replace(/\D+/g, ""), 0);
+
+    videoMetadata = {
+      type:
         document.querySelector("[class$='title'] .ellipsize-text span") ||
         document.querySelector("[data-uia$='video-title'] span")
           ? "show"
-          : "movie";
-    videoMetadata = {
-      type: type,
+          : "movie",
       currentEpisode: watchId,
       id: watchId,
       boxart: null,
