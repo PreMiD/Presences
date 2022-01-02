@@ -50,9 +50,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/") {
     presenceData.details = strings.browsingThrough;
     presenceData.state =
-      Object.values(document.querySelectorAll("h2")).filter(
-        entry => entry?.className === "row-title" && isInViewport(entry)
-      )[0]?.textContent || "Home page";
+      Object.values(document.querySelectorAll(".row-title")).find(isInViewport)?.textContent || "Home page";
   } else if (
     document.location.pathname.includes("/play") ||
     document.location.pathname.includes("/intl-common/")
