@@ -50,7 +50,8 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/") {
     presenceData.details = strings.browsingThrough;
     presenceData.state =
-      Object.values(document.querySelectorAll(".row-title")).find(isInViewport)?.textContent || "Home page";
+      Object.values(document.querySelectorAll(".row-title")).find(isInViewport)
+        ?.textContent || "Home page";
   } else if (
     document.location.pathname.includes("/play") ||
     document.location.pathname.includes("/intl-common/")
@@ -120,7 +121,7 @@ presence.on("UpdateData", async () => {
     }
     if (isVShow && !possiblyVShow) data.ep = "Variety show";
     if (!isVShow && !possiblyVShow && !isMovie && contentEp)
-      data.ep = `${(await strings).episode} ${contentEp[0]}`;
+      data.ep = `${strings.episode} ${contentEp[0]}`;
     else if (!isVShow && !possiblyVShow && !isMovie) data.ep = "Highlight";
 
     if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
@@ -137,8 +138,8 @@ presence.on("UpdateData", async () => {
 
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
-        ? (await strings).pause
-        : (await strings).play;
+        ? strings.pause
+        : strings.play;
 
       presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
 
@@ -146,10 +147,10 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: isVShow
-              ? (await strings).watchVideo
+              ? strings.watchVideo
               : isMovie
-              ? (await strings).watchMovie
-              : (await strings).watchEpisode,
+              ? strings.watchMovie
+              : strings.watchEpisode,
             url: `https://www.iq.com/play/${
               document.URL.split("?")[0].split("/")[4]
             }`
