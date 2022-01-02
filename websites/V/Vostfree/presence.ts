@@ -1,14 +1,13 @@
 const presence = new Presence({
     clientId: "925799512205844490"
-}),
-    path = document.location.pathname,
-    browsingStamp = Math.floor(Date.now() / 1000),
-    search = document.querySelector("#dle-content > h2"),
-    getGenreTitle = (genre: string) => {
-        var splitWord = genre.split("/");
-        genre = splitWord[2]
-        return genre
-    }
+  }),
+  path = document.location.pathname,
+  browsingStamp = Math.floor(Date.now() / 1000),
+  search = document.querySelector("#dle-content > h2"),
+  getGenreTitle = (genre: string) => {
+    [, , genre] = genre.split("/");
+    return genre;
+  };
 
 let video = {
   duration: 0,
@@ -19,71 +18,87 @@ let video = {
 presence.on(
   "iFrameData",
   (data: { duration: number; currentTime: number; paused: boolean }) => {
-    const playback: boolean = data?.duration ? true : false;
-    if (playback) video = data;
+    if (data?.duration ? true : false) video = data;
   }
 );
 
-presence.on('UpdateData', async () => {
-    const presenceData: PresenceData = {
-        largeImageKey: "logo",
-        startTimestamp: browsingStamp
+presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
     },
-        privacy: boolean = await presence.getSetting("privacy"),
-        button: boolean = await presence.getSetting("button"),
-        title = document.querySelector("#dle-content > div.watch-top > div > div > div > div.slide-middle > h1");
-    
-    if (!isNaN(video.duration) && title) {
-        const episode = document.querySelector("#player-tabs > div.tab-blocks > div:nth-child(1) > div > div.new_player_top > div.new_player_selector_box > div.jq-selectbox-wrapper > div > div.jq-selectbox__select > div.jq-selectbox__select-text"),
-            [startTimestamp, endTimestamp] = presence.getTimestamps(video.currentTime, video.duration);
-        presenceData.details = title?.textContent;
-        presenceData.state = episode?.textContent;
-        presenceData.startTimestamp = startTimestamp;
-        presenceData.endTimestamp = endTimestamp;
-        presenceData.buttons = [
-            {
-                label: "Regarder l'épisode",
-                url: document.location.href
-            }
-        ];
-        presenceData.smallImageKey = video.paused ? "pause" : "play";
-        presenceData.smallImageText = video.paused ? "En pause" : "En cours";
+    privacy: boolean = await presence.getSetting("privacy"),
+    button: boolean = await presence.getSetting("button"),
+    title = document.querySelector(
+      "#dle-content > div.watch-top > div > div > div > div.slide-middle > h1"
+    );
 
-        if (!button) {
-            delete presenceData.buttons;
-        }
-        if (privacy) {
-            delete presenceData.details;
-            delete presenceData.state;
-            delete presenceData.startTimestamp;
-            delete presenceData.endTimestamp;
-            delete presenceData.buttons;
-            presenceData.details = "Regarde un anime";
-            presenceData.startTimestamp = browsingStamp;
-        }
-    } else if (search) {
-        const searchResult = document.querySelector<HTMLInputElement>("#searchinput");
-        presenceData.details = "Recherche :";
-        presenceData.state = searchResult.value;
-        presenceData.smallImageKey = "search";
-        presenceData.smallImageText = "Recherche";
-    } else if (path.includes("/anime-vf")) {
-        presenceData.details = "Navigue les animes VF";
-    } else if (path.includes("/animes-vostfr")) {
-        presenceData.details = "Navigue les animes VOSTFR";
-    } else if (path.includes("/films-vf-vostfr")) {
-        presenceData.details = "Navigue les films";
-    } else if (path.includes("/newposts")) {
-        presenceData.details = "Page des nouveautés";
-    } else if (path.includes("/info-streaming.html")) {
-        presenceData.details = "Explore la page F.A.Q";
-    } else if (path.includes("/genre")) {
-        presenceData.details = "Navigue les animes";
-        presenceData.state = `de type "${getGenreTitle(path)}"`;
-    } else {
-        presenceData.details = "Page d'accueil";
+  if (!isNaN(video.duration) && title) {
+    const episode = document.querySelector(
+        "#player-tabs > div.tab-blocks > div:nth-child(1) > div > div.new_player_top > div.new_player_selector_box > div.jq-selectbox-wrapper > div > div.jq-selectbox__select > div.jq-selectbox__select-text"
+      ),
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
+        video.currentTime,
+        video.duration
+      );
+    presenceData.details = title?.textContent;
+    presenceData.state = episode?.textContent;
+    presenceData.startTimestamp = startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
+    presenceData.buttons = [
+      {
+        label: "Regarder l'épisode",
+        url: document.location.href
+      }
+    ];
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused ? "En pause" : "En cours";
+
+    if (!button) delete presenceData.buttons;
+
+    if (privacy) {
+      delete presenceData.details;
+      delete presenceData.state;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+      delete presenceData.buttons;
+      presenceData.details = "Regarde un anime";
+      presenceData.startTimestamp = browsingStamp;
     }
+  } else if (search) {
+    presenceData.details = "Recherche :";
+    presenceData.state =
+      document.querySelector<HTMLInputElement>("#searchinput").value;
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Recherche";
+  } else if (path.includes("/anime-vf")) {
+    presenceData.details = "Navigue les animes VF";
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Recherche";
+  } else if (path.includes("/animes-vostfr")) {
+    presenceData.details = "Navigue les animes VOSTFR";
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Recherche";
+  } else if (path.includes("/films-vf-vostfr")) {
+    presenceData.details = "Navigue les films";
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Recherche";
+  } else if (path.includes("/newposts")) {
+    presenceData.details = "Page des nouveautés";
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Recherche";
+  } else if (path.includes("/info-streaming.html")) {
+    presenceData.details = "Explore la page F.A.Q";
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Recherche";
+  } else if (path.includes("/genre")) {
+    presenceData.details = "Navigue les animes";
+    presenceData.state = `de type "${getGenreTitle(path)}"`;
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Recherche";
+  } else {
+    presenceData.details = "Page d'accueil";
+  }
 
-    presence.setActivity(presenceData);
-
-})
+  presence.setActivity(presenceData);
+});
