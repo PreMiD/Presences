@@ -161,12 +161,14 @@ presence.on("UpdateData", async () => {
       presence.getSetting<number>("logo"),
       presence.getSetting<boolean>("cover")
     ]),
-    largeImage = ["https://i.imgur.com/Wf8G0mk.gif", "nflix_lg", "noback"][logo] ||
-    "nflix_lg";
+    largeImage =
+      ["https://i.imgur.com/Wf8G0mk.gif", "nflix_lg", "noback"][logo] ||
+      "nflix_lg";
+
   let presenceData: PresenceData = {
-    largeImageKey: largeImage
-  },
-  [videoMetadata] = Object.values(latestData?.videoMetadata || {});
+      largeImageKey: largeImage
+    },
+    [videoMetadata] = Object.values(latestData?.videoMetadata || {});
   //* Reset browsingTimestamp if href has changed.
 
   if (document.location.href !== prevUrl) {
@@ -181,10 +183,30 @@ presence.on("UpdateData", async () => {
   }
 
   if (!videoMetadata && window.location.pathname.includes("/watch/")) {
-    const episodeId = parseInt((document.querySelector("[class$='title'] .ellipsize-text span") ?? document.querySelector("[data-uia$='video-title'] span"))?.textContent.split(":")[1].trim().replace(/\D+/g, "")),
-      seasonId = parseInt((document.querySelector("[class$='title'] .ellipsize-text span") ?? document.querySelector("[data-uia$='video-title'] span"))?.textContent.split(":")[0].trim().replace(/\D+/g, "")),
+    const episodeId = parseInt(
+        (
+          document.querySelector("[class$='title'] .ellipsize-text span") ??
+          document.querySelector("[data-uia$='video-title'] span")
+        )?.textContent
+          .split(":")[1]
+          .trim()
+          .replace(/\D+/g, "")
+      ),
+      seasonId = parseInt(
+        (
+          document.querySelector("[class$='title'] .ellipsize-text span") ??
+          document.querySelector("[data-uia$='video-title'] span")
+        )?.textContent
+          .split(":")[0]
+          .trim()
+          .replace(/\D+/g, "")
+      ),
       watchId = parseInt(document.URL.split("?")[0].replace(/\D+/g, "")),
-      type = (document.querySelector("[class$='title'] .ellipsize-text span") || document.querySelector("[data-uia$='video-title'] span")) ? "show" : "movie";
+      type =
+        document.querySelector("[class$='title'] .ellipsize-text span") ||
+        document.querySelector("[data-uia$='video-title'] span")
+          ? "show"
+          : "movie";
     videoMetadata = {
       type: type,
       currentEpisode: watchId,
@@ -197,12 +219,28 @@ presence.on("UpdateData", async () => {
             {
               episodeId: watchId,
               seq: episodeId,
-              title: (document.querySelector("[class$='title'] .ellipsize-text span:nth-child(3)") ?? document.querySelector("[data-uia$='video-title'] span:nth-child(3)"))?.textContent
+              title: (
+                document.querySelector(
+                  "[class$='title'] .ellipsize-text span:nth-child(3)"
+                ) ??
+                document.querySelector(
+                  "[data-uia$='video-title'] span:nth-child(3)"
+                )
+              )?.textContent
             }
           ]
         }
       ],
-      title: type === "movie" ? (document.querySelector("[class$='title'] h4.ellipsize-text") ?? document.querySelector("[data-uia$='video-title']"))?.textContent : (document.querySelector("[class$='title'] .ellipsize-text h4") ?? document.querySelector("[data-uia$='video-title'] h4"))?.textContent
+      title:
+        type === "movie"
+          ? (
+              document.querySelector("[class$='title'] h4.ellipsize-text") ??
+              document.querySelector("[data-uia$='video-title']")
+            )?.textContent
+          : (
+              document.querySelector("[class$='title'] .ellipsize-text h4") ??
+              document.querySelector("[data-uia$='video-title'] h4")
+            )?.textContent
     };
   }
   if (videoMetadata) {
