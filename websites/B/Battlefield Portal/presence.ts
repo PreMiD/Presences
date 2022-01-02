@@ -45,13 +45,13 @@ presence.on("UpdateData", async () => {
     if (document.readyState === "complete") {
       if (!called) {
         called = true;
-        await getPlaygroundInfo(playgroundId).then(value => {
-          const json = JSON.parse(value);
+        await getPlaygroundInfo(info.playgroundId).then(value => {
+          const json = JSON.parse(value).validatedPlayground;
           if (!json) called = false;
           else {
-            info.type = json.naming.type;
-            info.playgroundDescription = json.naming.playgroundDescription;
-            info.playgroundName = json.naming.playgroundName;
+            info.type = json.blueprintType;
+            info.playgroundDescription = json.playgroundDescription;
+            info.playgroundName = json.playgroundName;
             presence.info(JSON.stringify(info));
           }
         });
