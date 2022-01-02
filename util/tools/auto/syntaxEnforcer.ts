@@ -1,12 +1,13 @@
 import "source-map-support/register";
 
+import { exec } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+import { join, normalize, resolve, sep } from "node:path";
 import { coerce, inc } from "semver";
-import { yellow } from "chalk";
-import { join, normalize, resolve, sep } from "path";
-import { readFileSync, writeFileSync } from "fs";
+import debug from "debug";
 
-import { exec } from "child_process";
-
+const log = debug("SyntaxEnforcer");
+debug.enable("SyntaxEnforcer*");
 /**
  * Executes a shell command and return it as a Promise.
  * @param cmd {string[]}
@@ -52,7 +53,9 @@ const readFile = (path: string): string =>
       const normalizedPath = normalize(dir).split(sep);
 
       // Pop off the presence/iframe.ts/metadata.json
-      normalizedPath.at(-1) === "metadata.json" ? normalizedPath.splice(normalizedPath.length - 2, 2) : normalizedPath.pop();
+      normalizedPath.at(-1) === "metadata.json"
+        ? normalizedPath.splice(normalizedPath.length - 2, 2)
+        : normalizedPath.pop();
 
       filesToBump[i] = normalizedPath.join(sep);
     }
@@ -83,42 +86,15 @@ const readFile = (path: string): string =>
       );
     }
 
-    // A clear splitter before prettify
-    console.log(
-      yellow(
-        [
-          "|--------------------------------|",
-          "| PROCEEDING TO PRETTIFY SOURCES |",
-          "|--------------------------------|"
-        ].join("\n")
-      )
-    );
+    log.extend("Lint")("Prettifying files");
 
     await execShellCommand(["yarn", "lint"]);
 
-    // A clear splitter before metadata sorting
-    console.log(
-      yellow(
-        [
-          "|-----------------------------------|",
-          "| PROCEEDING TO SORT METADATA FILES |",
-          "|-----------------------------------|"
-        ].join("\n")
-      )
-    );
+    log.extend("MS")("Sorting metadata files");
 
     await execShellCommand(["yarn", "ms"]);
 
-    // A clear splitter between TypeScript compilation and semver bumps
-    console.log(
-      yellow(
-        [
-          "|----------------------------|",
-          "| PROCEEDING TO SEMVER BUMPS |",
-          "|----------------------------|"
-        ].join("\n")
-      )
-    );
+    log.extend("SemVer")("Bumping versions");
 
     // Use Git to check what files have changed after TypeScript compilation
     const changedPresenceFiles = (
