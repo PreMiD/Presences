@@ -137,9 +137,7 @@ presence.on("UpdateData", async () => {
       if (cover && coverImage) presenceData.largeImageKey = coverImage;
 
       presenceData.smallImageKey = video.paused ? "pause" : "play";
-      presenceData.smallImageText = video.paused
-        ? strings.pause
-        : strings.play;
+      presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 
       presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
 
