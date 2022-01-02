@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/") {
     presenceData.details = strings.browsingThrough;
     presenceData.state =
-      Object.values(document.querySelectorAll("div")).filter(
+      Object.values(document.querySelectorAll("h2")).filter(
         entry => entry?.className === "row-title" && isInViewport(entry)
       )[0]?.textContent || "Home page";
   } else if (
