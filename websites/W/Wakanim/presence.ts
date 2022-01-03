@@ -18,9 +18,10 @@ function capitalize(str: string): string {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "wakanim" },
-    video = document.querySelector("video"),
-    title = document.querySelector(".episode_title"),
-    subtitle = document.querySelector(".episode_subtitle") as HTMLElement;
+    video = document.querySelector<HTMLVideoElement>("video"),
+    title = document.querySelector<HTMLSpanElement>(".episode_title"),
+    subtitle = document.querySelector<HTMLSpanElement>(".episode_subtitle");
+
   if (
     document.location.pathname.includes("/v2/catalogue/episode/") &&
     video &&
@@ -30,10 +31,8 @@ presence.on("UpdateData", async () => {
 
     if (await presence.getSetting("thumbnail")) {
       presenceData.largeImageKey =
-        (
-          document.querySelector(
-            ".episode > .container > [itemprop=thumbnailUrl]"
-          ) as HTMLMetaElement
+        document.querySelector<HTMLMetaElement>(
+          ".episode > .container > [itemprop=thumbnailUrl]"
         ).content ?? "wakanim";
     }
 
