@@ -33,7 +33,8 @@
     "ga_IE": "Cuireann PreMiD tacaíocht Discord Rich Presence ar fáil do go leor seirbhísí a úsáideann tú agus a bhfuil grá agat dóibh.",
     "de": "PreMiD ergänzt viele Dienste, die du nutzt und liebst, um die Unterstützung von Discord Rich Presence.",
     "fr": "PreMiD ajoute le support de Discord Rich Presence à de nombreux services que vous utilisez et aimez.",
-    "tr": "PreMiD, kullandığınız internet servisleri için Discord profilinize Rich Presence bilgisi ekler."
+    "tr": "PreMiD, kullandığınız internet servisleri için Discord profilinize Rich Presence bilgisi ekler.",
+    "vi_VN": "PreMiD thêm hỗ trợ Discord Rich Presence cho các dịch vụ bạn yêu thích và sử dụng."
   },
   "url": [
     "premid.app",
@@ -41,7 +42,7 @@
     "beta.premid.app",
     "status.premid.app"
   ],
-  "version": "3.0.7",
+  "version": "3.0.8",
   "logo": "https://i.imgur.com/eYLI4hf.png",
   "thumbnail": "https://i.imgur.com/OYxIOZ8.png",
   "color": "#7289DA",
