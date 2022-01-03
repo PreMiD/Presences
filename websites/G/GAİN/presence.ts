@@ -60,13 +60,14 @@ gain.on("UpdateData", async () => {
     if (settings.showImages)
       presenceData.largeImageKey = image?.src || "g-logo";
 
-    if (settings.showButtons)
+    if (settings.showButtons) {
       presenceData.buttons = [
         {
           label: presenceData.state ? "Bölüme Git" : "Filme Git",
           url: `https://gain.tv${document.location.pathname}`
         }
       ];
+    }
 
     if (!isNaN(video?.duration)) {
       const [, endTimestamp] = gain.getTimestamps(
