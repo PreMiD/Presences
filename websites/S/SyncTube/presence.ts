@@ -69,3 +69,17 @@ presence.on("UpdateData", async function () {
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
 });
+
+presence.on(
+  "iFrameData",
+  (data: {
+    current: number;
+    duration: number;
+    paused: boolean;
+    title: string;
+    channel: string;
+    url: string;
+  }) => {
+    video = data;
+  }
+);
