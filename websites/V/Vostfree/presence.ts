@@ -27,8 +27,10 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     },
-    privacy: boolean = await presence.getSetting("privacy"),
-    button: boolean = await presence.getSetting("button"),
+    [privacy, button] = await Promise.all([
+      presence.getSetting<boolean>("privacy"),
+      presence.getSetting<boolean>("button")
+    ]),
     title = document.querySelector(
       "#dle-content > div.watch-top > div > div > div > div.slide-middle > h1"
     );
@@ -96,9 +98,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = `de type "${getGenreTitle(path)}"`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Recherche";
-  } else {
-    presenceData.details = "Page d'accueil";
-  }
+  } else presenceData.details = "Page d'accueil";
 
   presence.setActivity(presenceData);
 });
