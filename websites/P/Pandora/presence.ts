@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
       // If the art exists, set the big image key to that
       // Otherwise, use the default 'pandora' art
       if (art) presenceData.largeImageKey = art.src;
-      else presence.error("Art was null!");
+      else presence.error("Art is null!");
     } else presence.error("Play button is null!");
   }
 
