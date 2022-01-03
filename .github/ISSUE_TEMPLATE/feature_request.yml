@@ -1,0 +1,50 @@
+name: Feature Request
+description: Create a feature request to improve our presences
+title: Service Name | Service URL
+labels: [Feature Request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before submitting a new issue, ensure the domain is over two months old and there is not another request for the same presence.
+  - type: input
+    attributes:
+      label: Presence name
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Presence URL
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Presence logo
+    validations:
+      required: false
+  - type: checkboxes
+    attributes:
+      label: Paid Service
+      description: Do you have to pay to access this service?
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: NSFW Content
+      description: Does this service contain a NSFW content?
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Region Restricted
+      description: Is the service region restricted?
+    validations:
+      required: true
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Description
+      description:
+        Provide a detailed description on what you would like to see displayed
+        on this presence
