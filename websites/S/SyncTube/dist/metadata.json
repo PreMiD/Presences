@@ -18,12 +18,19 @@
   "tags": [
     "youtube"
   ],
+  "iframe": true,
   "settings": [
     {
       "id": "privacy",
       "title": "Privacy Mode",
       "icon": "fad fa-user-secret",
       "value": false
+    },
+    {
+      "id": "moreDetails",
+      "title": "Show video details",
+      "icon": "fas fa-file-video",
+      "value": true
     },
     {
       "id": "timeElapsed",
