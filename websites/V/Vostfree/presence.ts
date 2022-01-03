@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
         video.currentTime,
         video.duration
       );
-    presenceData.details = title?.textContent;
+    presenceData.details = title.textContent;
     presenceData.state = episode?.textContent;
     presenceData.startTimestamp = startTimestamp;
     presenceData.endTimestamp = endTimestamp;
