@@ -64,40 +64,29 @@ presence.on("UpdateData", async () => {
   }
 
   if (block) {
-    const selected = document.querySelector(".blocklySelected");
-    if (selected) {
-      if (
-        selected.querySelector(".subroutineBlockSubroutineText")
-          ?.textContent === "SUBROUTINE"
-      ) {
-        const blocklyText = selected.querySelectorAll(
-          "text[class=blocklyText]"
-        );
-        blocklyText.forEach(element => {
-          if (
-            element.parentElement.getAttribute("transform") ===
-            "translate(126.36666870117188,18)"
+    /* eslint-disable no-eval */
+    if (window.eval("_Blockly.selected")) {
+      const type = window.eval("_Blockly.selected.type");
+      let parentName: string = null,
+        blockName: string = null;
+      if (type !== "ruleBlock" && type !== "subroutineBlock") {
+        // its a block inside a rule or a subroutine or outside of all blocks
+        parentName = <string>(
+          window.eval(
+            'for(parent=_Blockly.selected.parentBlock_;parent&&"ruleBlock"!==parent.type&&"subroutineBlock"!==parent.type;)parent=parent.parentBlock_;parent&&parent.toString().split(" ")[1];'
           )
-            presenceData.state = `in Subroutine ${element.textContent}`;
-        });
-      } else if (
-        selected.querySelector(".ruleBlockRuleText")?.textContent === "RULE"
-      ) {
-        const blocklyText = selected.querySelectorAll(
-          "text[class=blocklyText]"
         );
-        blocklyText.forEach(element => {
-          if (
-            element.parentElement.getAttribute("transform") ===
-            "translate(72.78333282470703,8.5)"
-          )
-            presenceData.state = `in RULE ${element.textContent}`;
-        });
-      } else if (description) {
-        //todo: need to implement if a single block is selected
-        presenceData.state = info.playgroundDescription;
+        blockName = window.eval("_Blockly.selected.type");
+        if (parentName) presenceData.state = `in ${parentName} on ${blockName}`;
+        else presenceData.state = `on ${blockName}`;
+      } else {
+        parentName = window.eval('_Blockly.selected.toString().split(" ")[1];');
+        presenceData.state = `on ${
+          type === "ruleBlock" ? "RULE" : "SUB"
+        } ${parentName}`;
       }
-    }
+    } else presenceData.state = info.playgroundDescription;
+    /* eslint-enable no-eval */
   }
 
   if (time) presenceData.startTimestamp = editingStamp;
