@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Before submitting a new request, ensure your service hasn't already been
-        submitted before. If it has, reply to the open issue instead.
+        requested before. If it has, reply to the open issue instead.
   - type: input
     attributes:
       label: Website name
