@@ -42,10 +42,11 @@ presence.on("UpdateData", async function () {
             Math.floor(video.current),
             Math.floor(video.duration)
           )[1];
-        } else
+        } else {
           presenceData.state = document.querySelector(
             "div.userCount.noselect"
           ).textContent;
+        }
       }
 
       if (setting.showButtons) {
