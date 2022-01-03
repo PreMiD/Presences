@@ -20,5 +20,13 @@
   "tags": [
     "video",
     "anime"
+  ],
+  "settings": [
+    {
+      "id": "thumbnail",
+      "title": "Show Thumbnail",
+      "icon": "fad fa-images",
+      "value": false
+    }
   ]
 }

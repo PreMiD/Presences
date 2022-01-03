@@ -20,7 +20,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "wakanim" },
     video = document.querySelector("video"),
     title = document.querySelector(".episode_title"),
-    subtitle = document.querySelector(".episode_subtitle") as HTMLElement;
+    subtitle = document.querySelector(".episode_subtitle") as HTMLElement,
+    thumbnail = document.querySelector(".episode > .container > [itemprop=thumbnailUrl]") as HTMLMetaElement;
 
   if (
     document.location.pathname.includes("/v2/catalogue/episode/") &&
@@ -28,6 +29,10 @@ presence.on("UpdateData", async () => {
     title
   ) {
     presenceData.details = title.textContent;
+
+    if (await presence.getSetting("thumbnail"))
+      presenceData.largeImageKey = thumbnail.content ?? "wakanim";
+
     if (subtitle && subtitle.textContent)
       presenceData.state = capitalize(subtitle.textContent);
 
