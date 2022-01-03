@@ -34,12 +34,20 @@ presence.on("UpdateData", () => {
     } else {
       presenceData.details = "Reading an article:";
       presenceData.state = document.title;
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = "Reading";
       presenceData.buttons = [{ label: "Read article", url: document.URL }];
     }
   } else if (document.location.hostname === "forum.xda-developers.com") {
     if (document.location.href === "https://forum.xda-developers.com/")
       presenceData.details = "At Forum home page";
-    else if (path.startsWith("/c")) {
+    else if (path.startsWith("/conversations"))
+      presenceData.details = "Reading conversations";
+    else if (path.includes("post-thread")) {
+      presenceData.details = "Writing a thread";
+      presenceData.smallImageKey = "writing";
+      presenceData.smallImageText = "Writing";
+    } else if (path.startsWith("/c")) {
       presenceData.details = "Browsing a category:";
       presenceData.state = document.querySelector<HTMLHeadingElement>(
         "#top > div.p-body > div.p-body-inner > div > div.p-body-main.p-body-main--withSidebar > div.p-body-content > div.p-body-header > div > div > div > h1"
@@ -60,6 +68,8 @@ presence.on("UpdateData", () => {
       presenceData.state = document.querySelector<HTMLHeadingElement>(
         "#top > div.p-body > div.p-body-inner > div > div.p-body-main.p-body-main--withSidebar > div.p-body-content > div.p-body-header > div > div > div.p-title > h1"
       ).textContent;
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = "Reading";
     } else if (path.startsWith("/m")) {
       if (path === "/m/") presenceData.details = "Browsing members list";
       else {
@@ -85,6 +95,8 @@ presence.on("UpdateData", () => {
     } else if (path.startsWith("/login")) presenceData.details = "Logging in";
     else if (path.startsWith("/register"))
       presenceData.details = "Registering an account";
+    else if (path.startsWith("/account"))
+      presenceData.details = "Viewing account settings";
   }
   presence.setActivity(presenceData);
 });
