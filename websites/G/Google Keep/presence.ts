@@ -9,13 +9,13 @@ presence.on("UpdateData", async () => {
       startTimestamp: timer
     },
     { hash } = location,
-    [, , , , LorLNorId] = location.href.split("/"),
+    id = location.href.split("/")[4],
     privacy = await presence.getSetting<boolean>("privacy");
 
   presenceData.details = "Viewing Homepage";
   presenceData.state = "Notes";
 
-  if (hash === `#LIST/${LorLNorId}`) {
+  if (hash === `#LIST/${id}`) {
     if (!privacy) {
       const listName =
         document.querySelector(
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reading Tasks";
       delete presenceData.state;
     }
-  } else if (hash === `#NOTE/${LorLNorId}`) {
+  } else if (hash === `#NOTE/${id}`) {
     if (!privacy) {
       const noteName = document.querySelector(
         "body > div.VIpgJd-TUo6Hb.XKSfm-L9AdLc.eo9XGd > div > div.IZ65Hb-TBnied.zTETae-h1U9Be-hxXJme > div.IZ65Hb-s2gQvd > div.IZ65Hb-r4nke-haAclf > div.notranslate.IZ65Hb-YPqjbf.fmcmS-x3Eknd.r4nke-YPqjbf"
@@ -43,16 +43,16 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reading a Note";
       delete presenceData.state;
     }
-  } else if (hash === "#search" || hash === `#search/${LorLNorId}`) {
+  } else if (hash === "#search" || hash === `#search/${id}`) {
     presenceData.details = "Search";
     delete presenceData.state;
   } else if (hash === "#reminders") {
     presenceData.details = "Viewing reminders";
     delete presenceData.state;
-  } else if (hash === `#label/${LorLNorId}`) {
+  } else if (hash === `#label/${id}`) {
     if (!privacy) {
       presenceData.details = "Viewing a label:";
-      presenceData.state = decodeURIComponent(LorLNorId);
+      presenceData.state = decodeURIComponent(id);
     } else {
       presenceData.details = "Viewing a label";
       delete presenceData.state;
