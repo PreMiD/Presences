@@ -16,10 +16,11 @@ presence.on("UpdateData", async () => {
   switch (document.location.pathname.split("/")[3]) {
     case "my-home":
       presenceData.details = "Viewing Home Page";
-      if (welcome)
+      if (welcome) {
         presenceData.state = document.querySelector(
           ".otktitle-page.origin-welcome-message"
         ).textContent;
+      }
       break;
     case "game-library":
       presenceData.details = "Viewing Game Library";
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = document.querySelector(
           "[class^='otktitle-2 otktitle-2-caps origin-ogd-gametitle']"
         ).textContent;
-        if (cover)
+        if (cover) {
           presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
             `img[alt="${
               document.querySelector(
@@ -39,6 +40,7 @@ presence.on("UpdateData", async () => {
               ).textContent
             }"]`
           ).src;
+        }
       }
       break;
     case "profile":
@@ -62,11 +64,14 @@ presence.on("UpdateData", async () => {
       break;
     case "store":
       presenceData.details = "Browsing Store";
-      if (document.querySelector("h1.otktitle-2.origin-store-browse-pagetitle"))
+      if (
+        document.querySelector("h1.otktitle-2.origin-store-browse-pagetitle")
+      ) {
         presenceData.state = document
           .querySelector("h1.otktitle-2.origin-store-browse-pagetitle")
           .textContent.replace("Browse", "")
           .replace(" - ", "");
+      }
       if (document.querySelector(".otkex-product-hero-logo")) {
         presenceData.state = document.querySelector<HTMLImageElement>(
           ".otkex-product-hero-logo"
@@ -77,11 +82,12 @@ presence.on("UpdateData", async () => {
             url: document.location.href
           }
         ];
-        if (cover)
+        if (cover) {
           presenceData.largeImageKey = (
             document.querySelector("div[class='store-pdp-nav-mini-poster']")
               .firstChild as HTMLImageElement
           ).src;
+        }
       }
       break;
     case "search":
