@@ -13,28 +13,29 @@ let video = {
 };
 
 presence.on("UpdateData", async function () {
-  const setting = {
-      timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
-      moreDetails: await presence.getSetting<boolean>("moreDetails"),
-      showButtons: await presence.getSetting<boolean>("showButtons"),
-      privacy: await presence.getSetting<boolean>("privacy"),
-      logo: await presence.getSetting<number>("logo")
-    },
+  const [timeElapsed, moreDetails, showButtons, privacy, logo] =
+      await Promise.all([
+        presence.getSetting<boolean>("timeElapsed"),
+        presence.getSetting<boolean>("moreDetails"),
+        presence.getSetting<boolean>("showButtons"),
+        presence.getSetting<boolean>("privacy"),
+        presence.getSetting<number>("logo")
+      ]),
     presenceData: PresenceData = {
-      largeImageKey: setting.logo === 0 ? "logo" : "logo2"
+      largeImageKey: logo === 0 ? "logo" : "logo2"
     },
     urlpath = window.location.pathname.split("/");
 
-  if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;
+  if (timeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (!urlpath[1]) presenceData.details = "Home";
   else if (urlpath[1] === "rooms") {
     if (urlpath[2]) {
-      presenceData.details = setting.privacy
+      presenceData.details = privacy
         ? "In Room"
         : document.querySelector("div.roomName.noselect").textContent;
-      if (!setting.privacy) {
-        if (setting.moreDetails && video) {
+      if (!privacy) {
+        if (moreDetails && video) {
           presenceData.details = video.title;
           presenceData.state = video.channel;
 
@@ -49,7 +50,7 @@ presence.on("UpdateData", async function () {
         }
       }
 
-      if (setting.showButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
             label: "Join Room",
@@ -57,7 +58,7 @@ presence.on("UpdateData", async function () {
           }
         ];
 
-        if (!setting.privacy && video.url) {
+        if (!privacy && video.url) {
           presenceData.buttons.push({
             label: "Watch Video",
             url: video.url
