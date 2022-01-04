@@ -41,12 +41,16 @@ presence.on("UpdateData", async () => {
           "#csnplayer > div.jw-controls.jw-reset > div.jw-display.jw-reset > div > div > div.jw-display-icon-container.jw-display-icon-display.jw-reset > div"
         )
         .ariaLabel.includes("Pause");
-      presenceData.details = document.querySelector<HTMLHeadingElement>(
-        "body > section > div.container > div > div.col-md-9 > div.d-flex.justify-content-between.mb-3.box1.music-listen-title > h1"
-      ).textContent;
-      presenceData.state = document.querySelector<HTMLAnchorElement>(
-        "body > section > div.container > div > div.col-md-9 > div:nth-child(4) > div.col-md-4 > div > div.card-body > ul > li:nth-child(2) > a"
-      ).textContent;
+      [presenceData.details] = document
+        .querySelector<HTMLHeadingElement>(
+          "body > section > div.container > div > div.col-md-9 > div.d-flex.justify-content-between.mb-3.box1.music-listen-title > h1"
+        )
+        .textContent.split("-", 1);
+      [, presenceData.state] = document
+        .querySelector<HTMLHeadingElement>(
+          "body > section > div.container > div > div.col-md-9 > div.d-flex.justify-content-between.mb-3.box1.music-listen-title > h1"
+        )
+        .textContent.split(/-(.+)/);
       if (cover) {
         delete presenceData.largeImageKey;
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
