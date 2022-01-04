@@ -14,10 +14,11 @@
     "uk_UA": "Простий, веселий та творчий спосіб зйомки, редагування та обміну фотографіями, відео та повідомленнями з друзями та родиною.",
     "nl": "Een eenvoudige, leuke en creatieve manier om foto's, video's en berichten vast te leggen, te bewerken en te delen met vrienden en familie.",
     "zh_CN": "Instagram是一款运行在移动端上的社交应用，以一种快速、美妙和有趣的方式将你随时抓拍下的图片彼此分享。",
-    "zh_TW": "Instagram是Facebook公司旗下一款免費提供線上圖片及視訊分享的社群應用軟體。"
+    "zh_TW": "Instagram是Facebook公司旗下一款免費提供線上圖片及視訊分享的社群應用軟體。",
+    "vi_VN": "Một cách đơn giản, vui và sáng tạo để chụp, chỉnh sửa và chia sẻ các bức ảnh, video và tin nhắn với gia đình và bạn bè."
   },
   "url": "www.instagram.com",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "logo": "https://i.imgur.com/UFQy3sk.png",
   "thumbnail": "https://i.imgur.com/gcBDsYj.png",
   "color": "#E1306C",
