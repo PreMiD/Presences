@@ -88,23 +88,15 @@ presence.on("UpdateData", async () => {
       }
 
       // Even if we're not playing, we still want the album art if it exists
-      let art = document.querySelector<HTMLSourceElement>(
-        ".Tuner__Audio__TrackDetail__img :first-child :first-child"
-      );
-
-      // If the art does not exist, try again but this time with the now playing info
-      if (!art) {
-        art = document.querySelector<HTMLSourceElement>(
+      // Check multiple locations for the art and if it does not exist, use the default 'pandora' key
+      const art =
+        document.querySelector<HTMLSourceElement>(
+          ".Tuner__Audio__TrackDetail__img :first-child :first-child"
+        ) ??
+        document.querySelector<HTMLSourceElement>(
           ".nowPlayingTopInfo__artContainer__art :first-child :first-child"
-        );
-      }
-
-      // If the art still does not exist, try again but this time with the hero image
-      if (!art)
-        art = document.querySelector<HTMLSourceElement>(".HeroCard__image");
-
-      // If the art exists, set the big image key to that
-      // Otherwise, use the default 'pandora' art
+        ) ??
+        document.querySelector<HTMLSourceElement>(".HeroCard__image");
       if (art) presenceData.largeImageKey = art.src;
       else presence.error("Art is null!");
     } else presence.error("Play button is null!");
