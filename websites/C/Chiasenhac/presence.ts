@@ -14,7 +14,11 @@ presence.on("UpdateData", async () => {
       presence.getSetting<boolean>("timestamps"),
       presence.getSetting<boolean>("cover")
     ]);
-  if (path.startsWith("/mp3") || path.startsWith("/nghe-album")) {
+  if (
+    path.startsWith("/mp3") ||
+    path.startsWith("/nghe-album") ||
+    document.querySelector("#csnplayer > div.jw-overlays.jw-reset")
+  ) {
     if (path.startsWith("/mp3/vietnam"))
       presenceData.details = "Đang tìm nhạc Việt Nam";
     else if (path.startsWith("/mp3/us-uk"))
@@ -31,7 +35,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Đang tìm nhạc nước khác";
     else if (path.startsWith("/mp3/beat-playback"))
       presenceData.details = "Đang tìm beat/playback";
-    else {
+    else if (document.querySelector("#csnplayer > div.jw-overlays.jw-reset")) {
       let paused = !document
         .querySelector<HTMLDivElement>(
           "#csnplayer > div.jw-controls.jw-reset > div.jw-display.jw-reset > div > div > div.jw-display-icon-container.jw-display-icon-display.jw-reset > div"
@@ -41,7 +45,7 @@ presence.on("UpdateData", async () => {
         "body > section > div.container > div > div.col-md-9 > div.d-flex.justify-content-between.mb-3.box1.music-listen-title > h1"
       ).textContent;
       presenceData.state = document.querySelector<HTMLAnchorElement>(
-        "body > section > div.container > div > div.col-md-9 > div:nth-child(4) > div.col-md-4 > div > div.card-body > ul > li:nth-child(3) > a"
+        "body > section > div.container > div > div.col-md-9 > div:nth-child(4) > div.col-md-4 > div > div.card-body > ul > li:nth-child(2) > a"
       ).textContent;
       if (cover) {
         delete presenceData.largeImageKey;
@@ -60,17 +64,8 @@ presence.on("UpdateData", async () => {
 
         if (!paused) presenceData.endTimestamp = Date.now() / 1000 + timeLeft;
       }
-      if (buttons) {
-        presenceData.buttons = [
-          { label: "Nghe bài hát", url: document.URL },
-          {
-            label: "Nghe Album",
-            url: document.querySelector<HTMLAnchorElement>(
-              "body > section > div.container > div > div.col-md-9 > div:nth-child(4) > div.col-md-4 > div > div.card-body > ul > li:nth-child(3) > a"
-            ).href
-          }
-        ];
-      }
+      if (buttons)
+        presenceData.buttons = [{ label: "Nghe bài hát", url: document.URL }];
       presenceData.smallImageKey = paused ? "paused" : "play";
       presenceData.smallImageText = paused ? "Đã dừng" : "Đang phát";
     }
