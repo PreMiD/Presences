@@ -14,10 +14,11 @@
   "description": {
     "en": "nhentai is a hentai site that hosts pornographic hentai and doujinshi manga with various titles in different translated languages.",
     "ro": "nhentai este un site hentai care hostează hentai pornografic și manga doujinshi cu diferite titluri, în diferite limbi.",
-    "nl": "nhentai is een hentai-site die pornografische hentai en doujinshi-manga host met verschillende titels in verschillende vertaalde talen."
+    "nl": "nhentai is een hentai-site die pornografische hentai en doujinshi-manga host met verschillende titels in verschillende vertaalde talen.",
+    "vi_VN": "nhentai là trang web hentai lưu trữ các bộ manga hentai khiêu dâm với trong nhiều ngôn ngữ khác nhau."
   },
   "url": "nhentai.net",
-  "version": "2.4.6",
+  "version": "2.4.7",
   "logo": "https://i.imgur.com/xRqpOcL.png",
   "thumbnail": "https://i.imgur.com/Z3EG4lT.png",
   "color": "#eb2754",
