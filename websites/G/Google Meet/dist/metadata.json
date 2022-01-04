@@ -8,11 +8,12 @@
   "description": {
     "en": " Google Meet is a communication platform, developed by Google, which includes instant messaging, video chat, SMS and VOIP.",
     "pt_BR": "Google Meet é uma plataforma de comunicação, desenvolvida pela Google, que inclui mensagens instantâneas, chat de vídeo, SMS e VOIP.",
-    "nl": "Google Meet is een communicatieplatform ontwikkeld door Google en heeft de mogelijkheid om te chatten, te (video)bellen en te sms'en."
+    "nl": "Google Meet is een communicatieplatform ontwikkeld door Google en heeft de mogelijkheid om te chatten, te (video)bellen en te sms'en.",
+    "vi_VN": "Google Meet là một dịch vụ liên lạc qua video do Google phát triển."
   },
   "url": "meet.google.com",
   "regExp": "meet[.]google([.][a-z]+)+[/]",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://i.imgur.com/LyrRnRS.png",
   "thumbnail": "https://i.imgur.com/6BRZ63d.png",
   "color": "#308574",

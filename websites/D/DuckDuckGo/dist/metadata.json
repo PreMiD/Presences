@@ -7,10 +7,11 @@
   "service": "DuckDuckGo",
   "description": {
     "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs.",
-    "nl": "Het internetprivacybedrijf dat u in staat stelt naadloos controle te krijgen over uw persoonlijke gegevens online, zonder enige concessies."
+    "nl": "Het internetprivacybedrijf dat u in staat stelt naadloos controle te krijgen over uw persoonlijke gegevens online, zonder enige concessies.",
+    "vi_VN": "Công ty bảo mật Internet giúp bạn nắm kiểm soát về thông tin cá nhân của mình trên mạng, không cần đánh đổi bất cứ thứ gì."
   },
   "url": "duckduckgo.com",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "logo": "https://i.imgur.com/zl3jobl.png",
   "thumbnail": "https://i.imgur.com/VlPQGur.png",
   "color": "#FF5900",

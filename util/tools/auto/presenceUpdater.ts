@@ -1,14 +1,14 @@
 import "source-map-support/register";
 
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { join, normalize, resolve as rslv, sep } from "node:path";
 import { transformFileAsync as transform } from "@babel/core";
-import { existsSync, readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
 import {
   DeleteWriteOpResultObject,
   MongoClient,
   UpdateWriteOpResult
 } from "mongodb";
-import { join, normalize, resolve as rslv, sep } from "path";
 import { valid } from "semver";
 import { minify as terser } from "terser";
 import {
