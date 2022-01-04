@@ -14,66 +14,7 @@ presence.on("UpdateData", async () => {
       presence.getSetting<boolean>("timestamps"),
       presence.getSetting<boolean>("cover")
     ]);
-  if (
-    path.startsWith("/mp3") ||
-    path.startsWith("/nghe-album") ||
-    document.querySelector("#csnplayer > div.jw-overlays.jw-reset")
-  ) {
-    if (path.startsWith("/mp3/vietnam"))
-      presenceData.details = "Đang tìm nhạc Việt Nam";
-    else if (path.startsWith("/mp3/us-uk"))
-      presenceData.details = "Đang tìm nhạc Âu Mỹ";
-    else if (path.startsWith("/mp3/chinese"))
-      presenceData.details = "Đang tìm nhạc Hoa";
-    else if (path.startsWith("/mp3/korea"))
-      presenceData.details = "Đang tìm nhạc Hàn";
-    else if (path.startsWith("/mp3/japan"))
-      presenceData.details = "Đang tìm nhạc Nhật";
-    else if (path.startsWith("/mp3/france"))
-      presenceData.details = "Đang tìm nhạc Pháp";
-    else if (path.startsWith("/mp3/other"))
-      presenceData.details = "Đang tìm nhạc nước khác";
-    else if (path.startsWith("/mp3/beat-playback"))
-      presenceData.details = "Đang tìm beat/playback";
-    else if (document.querySelector("#csnplayer > div.jw-overlays.jw-reset")) {
-      let paused = !document
-        .querySelector<HTMLDivElement>(
-          "#csnplayer > div.jw-controls.jw-reset > div.jw-display.jw-reset > div > div > div.jw-display-icon-container.jw-display-icon-display.jw-reset > div"
-        )
-        .ariaLabel.includes("Pause");
-      [presenceData.details] = document
-        .querySelector<HTMLHeadingElement>(
-          "body > section > div.container > div > div.col-md-9 > div.d-flex.justify-content-between.mb-3.box1.music-listen-title > h1"
-        )
-        .textContent.split("-", 1);
-      [, presenceData.state] = document
-        .querySelector<HTMLHeadingElement>(
-          "body > section > div.container > div > div.col-md-9 > div.d-flex.justify-content-between.mb-3.box1.music-listen-title > h1"
-        )
-        .textContent.split(/-(.+)/);
-      if (cover) {
-        delete presenceData.largeImageKey;
-        presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-          "#companion_cover > img"
-        ).src;
-      }
-      if (timestamps) {
-        delete presenceData.startTimestamp;
-        const timeLeft = presence.timestampFromFormat(
-          document.querySelector<HTMLDivElement>(
-            "#csnplayer > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-countdown"
-          ).textContent
-        );
-        if (Date.now() / 1000 >= Date.now() / 1000 + timeLeft) paused = true;
-
-        if (!paused) presenceData.endTimestamp = Date.now() / 1000 + timeLeft;
-      }
-      if (buttons)
-        presenceData.buttons = [{ label: "Nghe bài hát", url: document.URL }];
-      presenceData.smallImageKey = paused ? "paused" : "play";
-      presenceData.smallImageText = paused ? "Đã dừng" : "Đang phát";
-    }
-  } else if (path.startsWith("/hd")) {
+  if (path.startsWith("/hd")) {
     if (path === "/hd/video.html") presenceData.details = "Đang tìm video";
     else if (path.endsWith("v-video.html"))
       presenceData.details = "Đang tìm video Việt Nam";
@@ -129,6 +70,65 @@ presence.on("UpdateData", async () => {
       }
       if (buttons)
         presenceData.buttons = [{ label: "Xem video", url: document.URL }];
+      presenceData.smallImageKey = paused ? "paused" : "play";
+      presenceData.smallImageText = paused ? "Đã dừng" : "Đang phát";
+    }
+  } else if (
+    path.startsWith("/mp3") ||
+    path.startsWith("/nghe-album") ||
+    document.querySelector("#csnplayer > div.jw-overlays.jw-reset")
+  ) {
+    if (path.startsWith("/mp3/vietnam"))
+      presenceData.details = "Đang tìm nhạc Việt Nam";
+    else if (path.startsWith("/mp3/us-uk"))
+      presenceData.details = "Đang tìm nhạc Âu Mỹ";
+    else if (path.startsWith("/mp3/chinese"))
+      presenceData.details = "Đang tìm nhạc Hoa";
+    else if (path.startsWith("/mp3/korea"))
+      presenceData.details = "Đang tìm nhạc Hàn";
+    else if (path.startsWith("/mp3/japan"))
+      presenceData.details = "Đang tìm nhạc Nhật";
+    else if (path.startsWith("/mp3/france"))
+      presenceData.details = "Đang tìm nhạc Pháp";
+    else if (path.startsWith("/mp3/other"))
+      presenceData.details = "Đang tìm nhạc nước khác";
+    else if (path.startsWith("/mp3/beat-playback"))
+      presenceData.details = "Đang tìm beat/playback";
+    else if (document.querySelector("#csnplayer > div.jw-overlays.jw-reset")) {
+      let paused = !document
+        .querySelector<HTMLDivElement>(
+          "#csnplayer > div.jw-controls.jw-reset > div.jw-display.jw-reset > div > div > div.jw-display-icon-container.jw-display-icon-display.jw-reset > div"
+        )
+        .ariaLabel.includes("Pause");
+      [presenceData.details] = document
+        .querySelector<HTMLHeadingElement>(
+          "body > section > div.container > div > div.col-md-9 > div.d-flex.justify-content-between.mb-3.box1.music-listen-title > h1"
+        )
+        .textContent.split("-", 1);
+      [, presenceData.state] = document
+        .querySelector<HTMLHeadingElement>(
+          "body > section > div.container > div > div.col-md-9 > div.d-flex.justify-content-between.mb-3.box1.music-listen-title > h1"
+        )
+        .textContent.split(/-(.+)/);
+      if (cover) {
+        delete presenceData.largeImageKey;
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+          "#companion_cover > img"
+        ).src;
+      }
+      if (timestamps) {
+        delete presenceData.startTimestamp;
+        const timeLeft = presence.timestampFromFormat(
+          document.querySelector<HTMLDivElement>(
+            "#csnplayer > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-countdown"
+          ).textContent
+        );
+        if (Date.now() / 1000 >= Date.now() / 1000 + timeLeft) paused = true;
+
+        if (!paused) presenceData.endTimestamp = Date.now() / 1000 + timeLeft;
+      }
+      if (buttons)
+        presenceData.buttons = [{ label: "Nghe bài hát", url: document.URL }];
       presenceData.smallImageKey = paused ? "paused" : "play";
       presenceData.smallImageText = paused ? "Đã dừng" : "Đang phát";
     }
