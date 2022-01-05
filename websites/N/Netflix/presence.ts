@@ -396,7 +396,7 @@ presence.on("UpdateData", async () => {
         return {
           details: isSeries ? strings.viewingSeries : strings.viewingMovie,
           state: model.title,
-          largeImageKey: cover ? model.imageHighRes ? await getShortURL(model.imageHighRes) : largeImage : null,
+          largeImageKey: cover ? model.imageHighRes ? await getShortURL(model.imageHighRes) : largeImage : largeImage,
           buttons: [
             {
               label: isSeries ? strings.viewSeries : strings.viewMovies,
@@ -431,7 +431,7 @@ presence.on("UpdateData", async () => {
         return {
           details: isSeries ? strings.viewingSeries : strings.viewingMovie,
           state: model.title,
-          largeImageKey: cover ? model.imageHighRes ? await getShortURL(model.imageHighRes) : largeImage : null,
+          largeImageKey: cover ? model.imageHighRes ? await getShortURL(model.imageHighRes) : largeImage : largeImage,
           buttons: [
             {
               label: isSeries ? strings.viewSeries : strings.viewMovies,
