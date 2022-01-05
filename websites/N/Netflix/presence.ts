@@ -205,6 +205,8 @@ presence.on("UpdateData", async () => {
       ),
       watchId = parseInt(document.URL.split("?")[0].replace(/\D+/g, ""), 0);
 
+    if (!episodeId || !seasonId || !watchId) return;
+
     videoMetadata = {
       type:
         document.querySelector("[class$='title'] .ellipsize-text span") ||
@@ -396,7 +398,11 @@ presence.on("UpdateData", async () => {
         return {
           details: isSeries ? strings.viewingSeries : strings.viewingMovie,
           state: model.title,
-          largeImageKey: cover ? model.imageHighRes ? await getShortURL(model.imageHighRes) : largeImage : largeImage,
+          largeImageKey: cover
+            ? model.imageHighRes
+              ? await getShortURL(model.imageHighRes)
+              : largeImage
+            : largeImage,
           buttons: [
             {
               label: isSeries ? strings.viewSeries : strings.viewMovies,
@@ -431,7 +437,11 @@ presence.on("UpdateData", async () => {
         return {
           details: isSeries ? strings.viewingSeries : strings.viewingMovie,
           state: model.title,
-          largeImageKey: cover ? model.imageHighRes ? await getShortURL(model.imageHighRes) : largeImage : largeImage,
+          largeImageKey: cover
+            ? model.imageHighRes
+              ? await getShortURL(model.imageHighRes)
+              : largeImage
+            : largeImage,
           buttons: [
             {
               label: isSeries ? strings.viewSeries : strings.viewMovies,
