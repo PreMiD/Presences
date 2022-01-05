@@ -4,17 +4,16 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  };
-
   const [time, buttons, cover, welcome] = await Promise.all([
-    presence.getSetting<boolean>("time"),
-    presence.getSetting<boolean>("buttons"),
-    presence.getSetting<boolean>("cover"),
-    presence.getSetting<boolean>("welcome")
-  ]);
+      presence.getSetting<boolean>("time"),
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<boolean>("cover"),
+      presence.getSetting<boolean>("welcome")
+    ]),
+    presenceData: PresenceData = {
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    };
 
   switch (document.location.pathname.split("/")[3]) {
     case "my-home":
