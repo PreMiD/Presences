@@ -255,7 +255,9 @@ presence.on("UpdateData", async () => {
     const { paused } = videoElement;
 
     if (cover)
-      presenceData.largeImageKey = videoMetadata.boxart ? await getShortURL(videoMetadata.boxart) : largeImage;
+      presenceData.largeImageKey = videoMetadata.boxart
+        ? await getShortURL(videoMetadata.boxart)
+        : largeImage;
 
     [, presenceData.endTimestamp] =
       presence.getTimestampsfromMedia(videoElement);
