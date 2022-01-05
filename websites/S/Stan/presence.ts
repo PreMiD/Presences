@@ -20,26 +20,22 @@ const presence = new Presence({
   data: {
     oldLang?: string;
     startedSince?: number;
-    meta?: {
-      [key: string]: string;
-    };
+    meta?: Record<string, string>;
     strings: Awaited<ReturnType<typeof getStrings>>;
-    coverUrls?: {
-      [key: string]: string;
-    };
+    coverUrls?: Record<string, string>;
     settings?: {
       id?: string;
-      delete?: boolean;
+      deleteEntry?: boolean;
       value?: boolean;
       uses?: (keyof PresenceData)[];
       presence?: {
         page: string;
         uses?: keyof PresenceData;
         setTo?: string;
-        if?: {
-          k: boolean;
-          v?: string;
-          delete?: boolean;
+        condition?: {
+          ifTrue: boolean;
+          setTo?: string;
+          deleteEntry?: boolean;
         };
         replace?: {
           input: string;
@@ -179,17 +175,17 @@ presence.on("UpdateData", async () => {
   data.settings = [
     {
       id: "timestamp",
-      delete: true,
+      deleteEntry: true,
       uses: ["startTimestamp", "endTimestamp"]
     },
     {
       id: "buttons",
-      delete: true,
+      deleteEntry: true,
       uses: ["buttons"]
     },
     {
       id: "privacy",
-      delete: true,
+      deleteEntry: true,
       value: true,
       uses: ["buttons"]
     },
@@ -198,26 +194,26 @@ presence.on("UpdateData", async () => {
         {
           page: "/search",
           uses: "state",
-          if: {
-            k: privacy,
-            delete: true
+          condition: {
+            ifTrue: privacy,
+            deleteEntry: true
           }
         },
         {
           page: "/search",
           uses: "details",
-          if: {
-            k: privacy,
-            v: data.strings.searchSomething
+          condition: {
+            ifTrue: privacy,
+            setTo: data.strings.searchSomething
           }
         },
         {
           page: "/programs/([0-9]+)/play",
           uses: "details",
           setTo: await presence.getSetting<string>("seriesDetail"),
-          if: {
-            k: privacy,
-            v: "Watching something"
+          condition: {
+            ifTrue: privacy,
+            setTo: "Watching something"
           },
           replace: [
             {
@@ -234,9 +230,9 @@ presence.on("UpdateData", async () => {
           page: "/programs/([0-9]+)/play",
           uses: "state",
           setTo: await presence.getSetting<string>("seriesState"),
-          if: {
-            k: privacy,
-            delete: true
+          condition: {
+            ifTrue: privacy,
+            deleteEntry: true
           },
           replace: [
             {
@@ -252,9 +248,9 @@ presence.on("UpdateData", async () => {
         {
           page: "/programs/([0-9]+)/play",
           uses: "largeImageKey",
-          if: {
-            k: cover,
-            v: await getShortURL(data.meta.coverUrl)
+          condition: {
+            ifTrue: cover && !privacy,
+            setTo: await getShortURL(data.meta.coverUrl)
           }
         }
       ]
@@ -275,7 +271,7 @@ presence.on("UpdateData", async () => {
 
     if (
       ((!settingValue && !setting.value) || settingValue === setting.value) &&
-      setting.delete &&
+      setting.deleteEntry &&
       !setting.presence
     )
       for (const PData of setting.uses) delete presenceData[PData];
@@ -298,12 +294,18 @@ presence.on("UpdateData", async () => {
             presenceData[presenceSetting.uses as "details"] = replaced.trim();
           }
 
-          if (presenceSetting.if) {
-            if (presenceSetting.if.k && presenceSetting.if.delete)
+          if (presenceSetting.condition) {
+            if (
+              presenceSetting.condition.ifTrue &&
+              presenceSetting.condition.deleteEntry
+            )
               delete presenceData[presenceSetting.uses];
-            else if (presenceSetting.if.k && presenceSetting.if.v) {
+            else if (
+              presenceSetting.condition.ifTrue &&
+              presenceSetting.condition.setTo
+            ) {
               presenceData[presenceSetting.uses as "details"] =
-                presenceSetting.if.v;
+                presenceSetting.condition.setTo;
             }
           }
         }
