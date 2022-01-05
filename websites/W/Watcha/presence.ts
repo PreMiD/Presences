@@ -313,7 +313,7 @@ app.on("UpdateData", async () => {
     };
 
   for (const [path, data] of Object.entries(pages)) {
-    if (document.location.pathname.match(path) && data.enabled !== false) {
+    if (document.location.pathname.match(path) && data.enabled) {
       if (data.presenceData) app.setData({ data: data.presenceData, assets });
       else if (data.setPresenceData) data.setPresenceData();
 
