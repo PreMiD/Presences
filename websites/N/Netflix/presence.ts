@@ -190,7 +190,8 @@ presence.on("UpdateData", async () => {
     //* User is currently playing a video
     const { paused } = videoElement;
 
-    if (cover) presenceData.largeImageKey = videoMetadata.boxart;
+    if (cover)
+      presenceData.largeImageKey = await getShortURL(videoMetadata.boxart);
 
     [, presenceData.endTimestamp] =
       presence.getTimestampsfromMedia(videoElement);
@@ -320,14 +321,14 @@ presence.on("UpdateData", async () => {
       details: strings.viewList
     },
     "/title/(\\d*)/": {
-      ...(() => {
+      ...(await (async () => {
         const model = latestData?.discoveryModels[document.URL.split("/")[4]],
           isSeries = model?.type === "show";
         if (!model) return {};
         return {
           details: isSeries ? strings.viewingSeries : strings.viewingMovie,
           state: model.title,
-          largeImageKey: cover ? model.imageHighRes : null,
+          largeImageKey: cover ? await getShortURL(model.imageHighRes) : null,
           buttons: [
             {
               label: isSeries ? strings.viewSeries : strings.viewMovies,
@@ -335,7 +336,7 @@ presence.on("UpdateData", async () => {
             }
           ]
         };
-      })()
+      })())
     },
     "/latest/": {
       details: strings.latest.includes("{0}")
@@ -350,7 +351,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: "search"
     },
     "jbv/(\\d*)/": {
-      ...(() => {
+      ...(await (async () => {
         const model =
             latestData?.discoveryModels[
               document.URL.split("&")[0].split("jbv=")[1]
@@ -362,7 +363,7 @@ presence.on("UpdateData", async () => {
         return {
           details: isSeries ? strings.viewingSeries : strings.viewingMovie,
           state: model.title,
-          largeImageKey: cover ? model.imageHighRes : null,
+          largeImageKey: cover ? await getShortURL(model.imageHighRes) : null,
           buttons: [
             {
               label: isSeries ? strings.viewSeries : strings.viewMovies,
@@ -370,7 +371,7 @@ presence.on("UpdateData", async () => {
             }
           ]
         };
-      })()
+      })())
     },
     "/referfriends/": {
       details: strings.refer.includes("{0}")
@@ -419,3 +420,19 @@ presence.on("UpdateData", async () => {
   else if (!showBrowsing) presence.setActivity();
   else presence.setActivity(presenceData);
 });
+
+const shortenedURLs: Record<string, string> = {};
+async function getShortURL(url: string) {
+  if (!url || url.length < 256) return url;
+  if (shortenedURLs[url]) return shortenedURLs[url];
+  try {
+    const pdURL = await (
+      await fetch(`https://pd.premid.app/create/${url}`)
+    ).text();
+    shortenedURLs[url] = pdURL;
+    return pdURL;
+  } catch (err) {
+    presence.error(err);
+    return url;
+  }
+}
