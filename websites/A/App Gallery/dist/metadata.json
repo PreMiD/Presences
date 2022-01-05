@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "version": "1.0.0",
+  "author": {
+    "name": "Angelo II",
+    "id": "728512329888825396"
+  },
+  "service": "App Gallery",
+  "description": {
+    "en": "AppGallery is a mobile app distribution platform that recommends curated apps for users, and allows them to search, install, manage, and share their favorite mobile apps with greater ease.",
+    "bg": "AppGallery е платформа за разпространение на мобилни приложения, която препоръчва на потребителите подбрани приложения и им позволява да търсят, инсталират, управляват и споделят любимите си мобилни приложения с по-голяма лекота."
+  },
+  "url": "appgallery.huawei.com",
+  "logo": "https://i.imgur.com/ZqhjaIb.png",
+  "thumbnail": "https://i.imgur.com/mqTRapM.png",
+  "color": "#F0464B",
+  "category": "socials",
+  "tags": [
+    "appgallery",
+    "app-gallery",
+    "huawei"
+  ]
+}
