@@ -1,13 +1,13 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
-    "name": "rushia",
-    "id": "398752205043400724"
+    "name": "Vasilis",
+    "id": "241929388403195914"
   },
   "contributors": [
     {
-      "name": "Vasilis",
-      "id": "241929388403195914"
+      "name": "rushia",
+      "id": "398752205043400724"
     }
   ],
   "service": "Google Keep",
