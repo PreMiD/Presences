@@ -22,6 +22,10 @@ const presence = new Presence({
     meta?: {
       [key: string]: string;
     };
+    strings: Awaited<ReturnType<typeof getStrings>>;
+    coverUrls?: {
+      [key: string]: string;
+    };
     settings?: {
       id?: string;
       delete?: boolean;
@@ -50,59 +54,85 @@ const presence = new Presence({
     };
   } = {
     presence: {},
+    coverUrls: {},
+    strings: null,
     meta: {},
     startedSince: ~~(Date.now() / 1000),
-    oldLang: "null"
+    oldLang: null
   };
 
-let strings: Awaited<ReturnType<typeof getStrings>>;
+async function getShortURL(url: string) {
+  if (!url || url.length < 256) return url;
+  if (data.coverUrls[url]) return data.coverUrls[url];
+  try {
+    const pdURL = await (
+      await fetch(`https://pd.premid.app/create/${url}`)
+    ).text();
+    data.coverUrls[url] = pdURL;
+    return pdURL;
+  } catch (err) {
+    presence.error(err);
+    return url;
+  }
+}
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "stan",
-      details: strings.browse,
-      smallImageKey: "browse",
-      startTimestamp: data.startedSince
-    },
-    [newLang, privacy] = await Promise.all([
-      presence.getSetting<string>("lang").catch(() => "en"),
-      presence.getSetting<boolean>("privacy")
-    ]);
+  const [newLang, privacy, cover] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("cover")
+  ]);
 
-  if (data.oldLang !== newLang || !strings) {
+  if (data.oldLang !== newLang || !data.strings) {
     data.oldLang = newLang;
-    strings = await getStrings();
+    data.strings = await getStrings();
   }
+
+  const presenceData: PresenceData = {
+    largeImageKey: "stan",
+    details: data.strings.browse,
+    smallImageKey: "browse",
+    startTimestamp: data.startedSince
+  };
 
   data.presence = {
     "/programs/([0-9]+)/play": {
       async setPresenceData() {
         const video = document.querySelector("video");
 
-        data.meta.title =
-          document.querySelector("h1.vjs-metadata.vjs-metadata--title")
-            ?.textContent ?? "Loading...";
-        data.meta.episode = document.querySelector(
-          "h2.vjs-metadata.vjs-metadata--subtitle"
-        )?.textContent;
+        if (video) {
+          data.meta.title = document.querySelector(
+            "h1.vjs-metadata.vjs-metadata--title"
+          )?.textContent;
+          data.meta.episode = document.querySelector(
+            "h2.vjs-metadata.vjs-metadata--subtitle"
+          )?.textContent;
+          data.meta.coverUrl = document
+            .querySelector<HTMLElement>(".vjs-end-slate-image")
+            ?.style?.backgroundImage?.match(/url\("(.*)"\)/)?.[1];
 
-        presenceData.smallImageKey = video.paused ? "pause" : "play";
-        presenceData.smallImageText = video.paused
-          ? strings.pause
-          : strings.play;
+          presenceData.smallImageKey = video.paused ? "pause" : "play";
+          presenceData.smallImageText = video.paused
+            ? data.strings.pause
+            : data.strings.play;
 
-        [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+          presenceData.endTimestamp = presence
+            .getTimestampsfromMedia(video)
+            .pop();
 
-        presenceData.buttons = [
-          {
-            label: data.meta.episode ? strings.viewEpisode : "Watch Video",
-            url: document.URL
+          presenceData.buttons = [
+            {
+              label: data.meta.episode
+                ? data.strings.viewEpisode
+                : "Watch Video",
+              url: document.URL
+            }
+          ];
+
+          if (video.paused) {
+            delete presenceData.endTimestamp;
+            delete presenceData.startTimestamp;
           }
-        ];
-
-        if (video.paused) {
-          delete presenceData.endTimestamp;
-          delete presenceData.startTimestamp;
         }
       }
     },
@@ -126,7 +156,7 @@ presence.on("UpdateData", async () => {
     "/my/list": {
       disabled: privacy,
       async setPresenceData() {
-        presenceData.details = strings.viewList;
+        presenceData.details = data.strings.viewList;
       }
     },
     "/my/history": {
@@ -137,7 +167,7 @@ presence.on("UpdateData", async () => {
     },
     "/search": {
       async setPresenceData() {
-        presenceData.details = strings.searchFor;
+        presenceData.details = data.strings.searchFor;
         presenceData.state = new URLSearchParams(document.location.search).get(
           "q"
         );
@@ -177,7 +207,7 @@ presence.on("UpdateData", async () => {
           uses: "details",
           if: {
             k: privacy,
-            v: strings.searchSomething
+            v: data.strings.searchSomething
           }
         },
         {
@@ -217,6 +247,14 @@ presence.on("UpdateData", async () => {
               output: data.meta.episode
             }
           ]
+        },
+        {
+          page: "/programs/([0-9]+)/play",
+          uses: "largeImageKey",
+          if: {
+            k: cover,
+            v: await getShortURL(data.meta.coverUrl)
+          }
         }
       ]
     }
@@ -268,5 +306,10 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-  presence.setActivity(presenceData);
+
+  for (const [key, value] of Object.entries(presenceData))
+    if (value === "undefined") delete presenceData[key as keyof PresenceData];
+
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
