@@ -12,11 +12,15 @@
     "pu": "tsc -p ./util/configs/tsconfig.auto.presenceUpdater.json && node ./util/tools/auto/presenceUpdater.js",
     "ms": "tsc -p ./util/configs/tsconfig.metadataSorter.json && node ./util/tools/metadataSorter.js",
     "mc": "tsc -p ./util/configs/tsconfig.massCompile.json && node ./util/tools/massCompile.js",
-    "translator": "tsc -p ./util/configs/tsconfig.translator.json && node ./util/tools/translator.js"
+    "translator": "tsc -p ./util/configs/tsconfig.translator.json && node ./util/tools/translator.js",
+    "prepare": "is-ci || husky install",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-angular": "^16.0.0",
     "@types/babel__core": "^7.1.18",
     "@types/chrome": "^0.0.175",
     "@types/debug": "^4.1.7",
@@ -38,6 +42,8 @@
     "eslint-plugin-no-one-time-vars": "^2.1.1",
     "eslint-plugin-prettier": "^4.0.0",
     "glob": "^7.2.0",
+    "husky": "^7.0.4",
+    "is-ci": "^3.0.1",
     "json-to-ast": "^2.1.0",
     "jsonschema": "^1.4.0",
     "mongodb": "^3.6.9",
