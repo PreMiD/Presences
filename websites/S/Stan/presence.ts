@@ -288,11 +288,12 @@ presence.on("UpdateData", async () => {
           } else if (presenceSetting.setTo && presenceSetting.replace) {
             let replaced = presenceSetting.setTo;
 
-            for (const toReplace of presenceSetting.replace)
+            for (const toReplace of presenceSetting.replace) {
               replaced = replaced.replace(
                 toReplace.input,
                 toReplace.output ?? ""
               );
+            }
 
             presenceData[presenceSetting.uses as "details"] = replaced.trim();
           }
