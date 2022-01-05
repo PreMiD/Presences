@@ -245,6 +245,7 @@ presence.on("UpdateData", async () => {
             )?.textContent
     };
   }
+
   if (videoMetadata) {
     const videoElement = document.querySelector("video"),
       { currentEpisode, id, seasons, title } = videoMetadata;
@@ -395,7 +396,7 @@ presence.on("UpdateData", async () => {
         return {
           details: isSeries ? strings.viewingSeries : strings.viewingMovie,
           state: model.title,
-          largeImageKey: cover ? await getShortURL(model.imageHighRes) : null,
+          largeImageKey: cover ? model.imageHighRes ? await getShortURL(model.imageHighRes) : largeImage : null,
           buttons: [
             {
               label: isSeries ? strings.viewSeries : strings.viewMovies,
@@ -430,7 +431,7 @@ presence.on("UpdateData", async () => {
         return {
           details: isSeries ? strings.viewingSeries : strings.viewingMovie,
           state: model.title,
-          largeImageKey: cover ? await getShortURL(model.imageHighRes) : null,
+          largeImageKey: cover ? model.imageHighRes ? await getShortURL(model.imageHighRes) : largeImage : null,
           buttons: [
             {
               label: isSeries ? strings.viewSeries : strings.viewMovies,
