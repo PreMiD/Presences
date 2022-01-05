@@ -11,6 +11,7 @@ const presence = new Presence({
         searchFor: "general.searchFor",
         searchSomething: "general.searchSomething",
         viewEpisode: "general.buttonViewEpisode",
+        watchVideo: "general.buttonWatchVideo",
         viewList: "netflix.viewList"
       },
       await presence.getSetting<string>("lang").catch(() => "en")
@@ -124,7 +125,7 @@ presence.on("UpdateData", async () => {
             {
               label: data.meta.episode
                 ? data.strings.viewEpisode
-                : "Watch Video",
+                : data.strings.watchVideo,
               url: document.URL
             }
           ];
@@ -288,10 +289,12 @@ presence.on("UpdateData", async () => {
             let replaced = presenceSetting.setTo;
 
             for (const toReplace of presenceSetting.replace)
-              replaced = replaced.replace(toReplace.input, toReplace.output);
+              replaced = replaced.replace(
+                toReplace.input,
+                toReplace.output ?? ""
+              );
 
-            if (replaced)
-              presenceData[presenceSetting.uses as "details"] = replaced;
+            presenceData[presenceSetting.uses as "details"] = replaced.trim();
           }
 
           if (presenceSetting.if) {
@@ -306,9 +309,6 @@ presence.on("UpdateData", async () => {
       }
     }
   }
-
-  for (const [key, value] of Object.entries(presenceData))
-    if (value === "undefined") delete presenceData[key as keyof PresenceData];
 
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
