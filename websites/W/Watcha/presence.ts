@@ -232,8 +232,7 @@ app.on("UpdateData", async () => {
           const video = document.querySelector("video");
 
           if (video) {
-            const timestamp = app.getTimestampsfromMedia(video).pop(),
-              episodeTitle = document.querySelector("h3")?.textContent;
+            const episodeTitle = document.querySelector("h3")?.textContent;
 
             [app.meta.title, app.meta.episode] =
               document
@@ -250,7 +249,7 @@ app.on("UpdateData", async () => {
 
             const data: PresenceData = {
               smallImageKey: video.paused ? assets.pause : assets.play,
-              endTimestamp: timestamp
+              endTimestamp: app.getTimestampsfromMedia(video).pop()
             };
 
             if (video.paused) delete data.endTimestamp;
