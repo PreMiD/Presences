@@ -8,10 +8,11 @@
   "description": {
     "en": "OneDrive is an online file storage and sharing service from Microsoft.",
     "tr": "OneDrive, Microsoft'un sunduğu bir çevrimiçi dosya depolama ve paylaşma hizmetidir.",
-    "nl": "OneDrive is een online service voor het opslaan en delen van bestanden van Microsoft."
+    "nl": "OneDrive is een online service voor het opslaan en delen van bestanden van Microsoft.",
+    "vi_VN": "OneDrive là dịch vụ lưu trữ đám mây và chia sẻ của Microsoft."
   },
   "url": "onedrive.live.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/waSBaVe.png",
   "thumbnail": "https://i.imgur.com/sXm35kV.png",
   "color": "#0078d4",

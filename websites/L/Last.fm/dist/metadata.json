@@ -12,10 +12,11 @@
   ],
   "service": "Last.fm",
   "description": {
-    "en": "We bring together your favourite music services and join up listening, watching and sharing to connect your musical world."
+    "en": "We bring together your favourite music services and join up listening, watching and sharing to connect your musical world.",
+    "vi_VN": "Chúng tôi đem cho bạn các dịch vụ nghe nhạc yêu thích để tham gia lắng nghe, theo dõi và chia sẻ để kết nối với thế giới âm nhạc."
   },
   "url": "www.last.fm",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/ZmDhLly.png",
   "thumbnail": "https://i.imgur.com/AWs9C6r.png",
   "color": "#E31B23",

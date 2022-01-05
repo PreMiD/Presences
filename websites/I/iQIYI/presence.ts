@@ -27,11 +27,12 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const [newLang, showButtons, searchQuery, logo] = await Promise.all([
+  const [newLang, showButtons, searchQuery, logo, cover] = await Promise.all([
     presence.getSetting<string>("lang").catch(() => "en"),
-    presence.getSetting<boolean>("showButtons"),
+    presence.getSetting<boolean>("buttons"),
     presence.getSetting<boolean>("searchQuery"),
-    presence.getSetting<number>("logo")
+    presence.getSetting<number>("logo"),
+    presence.getSetting<boolean>("cover")
   ]);
 
   if (oldLang !== newLang || !strings) {
@@ -41,17 +42,16 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][logo],
-    details: (await strings).browse,
+    details: strings.browse,
     smallImageKey: "search",
     startTimestamp: browsingTimestamp
   };
 
   if (document.location.pathname === "/") {
-    presenceData.details = (await strings).browsingThrough;
+    presenceData.details = strings.browsingThrough;
     presenceData.state =
-      Object.values(document.querySelectorAll("div")).filter(
-        entry => entry?.className === "row-title" && isVisible(entry)
-      )[0]?.textContent || "Home page";
+      Object.values(document.querySelectorAll(".row-title")).find(isInViewport)
+        ?.textContent || "Home page";
   } else if (
     document.location.pathname.includes("/play") ||
     document.location.pathname.includes("/intl-common/")
@@ -69,6 +69,10 @@ presence.on("UpdateData", async () => {
           ""
         )
       },
+      coverImage: string = JSON.parse(
+        document.querySelectorAll('script[type="application/ld+json"]')[0]
+          ?.textContent || "{}"
+      )[0]?.thumbnailUrl?.[0]?.replace(/[0-9]{3}_[0-9]{3}/, "1024_1024"),
       URLItem: string =
         JSON.parse(
           document.querySelectorAll('script[type="application/ld+json"]')[1]
@@ -106,9 +110,7 @@ presence.on("UpdateData", async () => {
     if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
     if (possiblyVShow) {
       if (contentEp?.length) {
-        data.ep = `${(await strings).episode} ${
-          contentEp[0].match(/.+?(?=\()/g)[0]
-        } ${
+        data.ep = `${strings.episode} ${contentEp[0].match(/.+?(?=\()/g)[0]} ${
           contentEp[0].includes("(")
             ? `- ${contentEp[0].match(/(\([1-9][0-9]?\))/g)[0]}`
             : "Variety show"
@@ -119,7 +121,7 @@ presence.on("UpdateData", async () => {
     }
     if (isVShow && !possiblyVShow) data.ep = "Variety show";
     if (!isVShow && !possiblyVShow && !isMovie && contentEp)
-      data.ep = `${(await strings).episode} ${contentEp[0]}`;
+      data.ep = `${strings.episode} ${contentEp[0]}`;
     else if (!isVShow && !possiblyVShow && !isMovie) data.ep = "Highlight";
 
     if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
@@ -132,21 +134,21 @@ presence.on("UpdateData", async () => {
       presenceData.details = data.title;
       presenceData.state = data.ep;
 
-      presenceData.smallImageKey = video.paused ? "pause" : "play";
-      presenceData.smallImageText = video.paused
-        ? (await strings).pause
-        : (await strings).play;
+      if (cover && coverImage) presenceData.largeImageKey = coverImage;
 
-      [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused ? strings.pause : strings.play;
+
+      presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
 
       if (showButtons) {
         presenceData.buttons = [
           {
             label: isVShow
-              ? (await strings).watchVideo
+              ? strings.watchVideo
               : isMovie
-              ? (await strings).watchMovie
-              : (await strings).watchEpisode,
+              ? strings.watchMovie
+              : strings.watchEpisode,
             url: `https://www.iq.com/play/${
               document.URL.split("?")[0].split("/")[4]
             }`
@@ -161,19 +163,17 @@ presence.on("UpdateData", async () => {
     } else if (data.title) {
       presenceData.details = "Looking at:";
       presenceData.state = data.title;
-      presenceData.startTimestamp = browsingTimestamp;
     }
   } else if (document.location.pathname.includes("/search")) {
     const result = document
       .querySelector("div.has-result")
       ?.textContent.match(/[0-9][0-9]?[0-9]?[0-9]?/)[0];
 
-    presenceData.details = `${(await strings).searchFor} ${
+    presenceData.details = `${strings.searchFor} ${
       searchQuery
-        ? decodeURI(document.location.search.replace("?query=", ""))
+        ? decodeURI(new URLSearchParams(document.location.search).get("query"))
         : "( Hidden )"
     }`;
-    presenceData.startTimestamp = browsingTimestamp;
     presenceData.smallImageKey = "search";
 
     if (result) {
@@ -184,15 +184,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/personal")) {
     switch (new URLSearchParams(document.location.search).get("type")) {
       case "settings":
-        presenceData.details = (await strings).viewingSettings;
+        presenceData.details = strings.viewingSettings;
         break;
 
       case "history":
-        presenceData.details = (await strings).viewingHistory;
+        presenceData.details = strings.viewingHistory;
         break;
 
       case "favorite":
-        presenceData.details = (await strings).viewingList;
+        presenceData.details = strings.viewingList;
         break;
 
       case "translation":
@@ -213,11 +213,11 @@ presence.on("UpdateData", async () => {
         break;
 
       default:
-        presenceData.details = (await strings).viewAccount;
+        presenceData.details = strings.viewAccount;
         break;
     }
   } else if (document.location.pathname.includes("/vip/")) {
-    presenceData.details = (await strings).viewPage;
+    presenceData.details = strings.viewPage;
     presenceData.state = "VIP membership";
   }
 
@@ -225,11 +225,10 @@ presence.on("UpdateData", async () => {
 });
 
 /**
- * Check whether the given `Element` is visible.
- * @param Element
+ * Check whether the given `Element` is in viewport.
  */
 
-function isVisible(element: HTMLElement) {
+function isInViewport(element: HTMLElement) {
   const clientRect = element.getBoundingClientRect();
   return (
     clientRect.top >= 0 &&

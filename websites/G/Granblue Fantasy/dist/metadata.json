@@ -7,10 +7,11 @@
   "service": "Granblue Fantasy",
   "description": {
     "en": "Japanese role playing game",
-    "nl": "Japans rollenspel"
+    "nl": "Japans rollenspel",
+    "vi_VN": "Trò chơi đóng vai Nhật Bản"
   },
   "url": "game.granbluefantasy.jp",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "logo": "https://i.imgur.com/XyHgDQX.png",
   "thumbnail": "https://i.imgur.com/2GPNZM8.jpg",
   "color": "#2F4F7A",
