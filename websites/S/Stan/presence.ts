@@ -58,7 +58,7 @@ const presence = new Presence({
     coverUrls: {},
     strings: null,
     meta: {},
-    startedSince: ~~(Date.now() / 1000),
+    startedSince: Math.round(Date.now() / 1000),
     oldLang: null
   };
 
