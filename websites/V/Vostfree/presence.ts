@@ -59,9 +59,7 @@ presence.on("UpdateData", async () => {
     if (!button) delete presenceData.buttons;
 
     if (privacy) {
-      delete presenceData.details;
       delete presenceData.state;
-      delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
       delete presenceData.buttons;
       presenceData.details = "Regarde un anime";
