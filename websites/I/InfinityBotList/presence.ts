@@ -9,15 +9,12 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    { pathname, href } = document.location,
-    [query] = href.split("q=")[1].split("&"),
-    [search] = href.split("page=")[1].split("&");
+    { pathname, href } = document.location;
 
-  if (pathname === "/") {
-    presenceData.details = "👀 Viewing homepage";
-  } else if (pathname.includes("/search")) {
-    presenceData.details = `👀 Searching for a bot`;
-    presenceData.state = `🔍 Query: ${query}`;
+  if (pathname === "/") presenceData.details = "👀 Viewing homepage";
+  else if (pathname.includes("/search")) {
+    presenceData.details = "👀 Searching for a bot";
+    presenceData.state = `🔍 Query: ${href.split("q=")[1].split("&")[0]}`;
     presenceData.smallImageKey = "search";
   } else if (pathname.endsWith("/vote")) {
     const botName = document
@@ -28,7 +25,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "vote";
   } else if (pathname.includes("/list")) {
     presenceData.details = "💻 Browsing all bots";
-    presenceData.state = `📖 Page: ${search}`;
+    presenceData.state = `📖 Page: ${href.split("page=")[1].split("&")[0]}`;
     presenceData.smallImageKey = "robot";
   } else if (pathname.includes("/bots/")) {
     const botName = document
@@ -39,11 +36,12 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "robot";
     presenceData.smallImageText = "Checking out a Bot!";
   } else if (pathname.includes("/users/")) {
-    const userName = document
-      .querySelector("body > center:nth-child(5) > h2")
-      .textContent.split("#")[0];
     presenceData.details = "👀 Viewing a user profile";
-    presenceData.state = `👤 User: ${userName}`;
+    presenceData.state = `👤 User: ${
+      document
+        .querySelector("body > center:nth-child(5) > h2")
+        .textContent.split("#")[0]
+    }`;
     presenceData.smallImageKey = "profile";
   } else if (pathname.includes("/profile")) {
     presenceData.details = "👀 Viewing my profile";
