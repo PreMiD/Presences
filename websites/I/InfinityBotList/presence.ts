@@ -45,7 +45,6 @@ presence.on("UpdateData", async () => {
             presenceData.details = "👀 Viewing a user profile";
             presenceData.state = `👤 User: ${userName}`
             presenceData.smallImageKey = "profile";
-            presenceData.smallImageText = "Checking out a User!"
         
         } else if (pathname.includes("/profile")) {
             presenceData.details = "👀 Viewing my profile";
@@ -56,7 +55,6 @@ presence.on("UpdateData", async () => {
             presenceData.details = "💻 Browsing the Partners Page";
             presenceData.state = "Just Showing some love!";
             presenceData.smallImageKey = "partners";
-            presenceData.smallImageText = "You know you can apply!";
             presenceData.buttons = [
                 {
                     label: "View Partners",
@@ -89,19 +87,16 @@ presence.on("UpdateData", async () => {
             presenceData.details = "👀 Viewing the Staff Panel";
             presenceData.state = "➕ Action: Approving Bots";
             presenceData.smallImageKey = "panel";
-            presenceData.smallImageText = "Look Toxic im Working!";
 
         } else if (pathname.includes("/panel/certification")) {
             presenceData.details = "👀 Viewing the Staff Panel"
             presenceData.state = "➰ Action: Certifying Bots"
             presenceData.smallImageKey = "panel";
-            presenceData.smallImageText = "Look Toxic im Working!";
 
         } else if (pathname.includes("/premium")) {
             presenceData.details = "👀 Viewing the Premium Page";
             presenceData.state = "💻 Browsing: Plans & Pricing";
             presenceData.smallImageKey = "premium";
-            presenceData.smallImageText = "Buy it. You know you wanna"
             presenceData.buttons = [
                 {
                     label: "View Premium Plans",
@@ -117,7 +112,6 @@ presence.on("UpdateData", async () => {
         } else if (pathname === "/bots/add") {
             presenceData.details = "👀 Viewing the Add Bot Page"
             presenceData.smallImageKey = "robot"
-            presenceData.smallImageText = "Submitting a new bot"
 
         }
 
