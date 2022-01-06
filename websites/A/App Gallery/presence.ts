@@ -18,16 +18,16 @@ presence.on("UpdateData", async () => {
   if (paths.length === 1) {
     switch (paths[0]) {
       case "Featured":
-        presenceData.details = "Browsing the featured apps";
+        presenceData.details = "Browsing for the featured apps";
         break;
       case "Categories":
         presenceData.details = "Browsing in the categories";
         break;
       case "Top":
-        presenceData.details = "Browsing the TOP apps";
+        presenceData.details = "Browsing for the TOP apps";
         break;
       default:
-        presenceData.details = "Browsing the featured apps";
+        presenceData.details = "Browsing for the featured apps";
         break;
     }
   } else if (paths[0] === "app" && paths[1]) {
