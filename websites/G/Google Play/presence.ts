@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
     else if (paths[1] === "myplayactivity")
       presenceData.details = "Viewing my activity";
     else if (paths[1] === "search") {
-      const q = query?.get("q");
+      const q = query.get("q");
       presenceData.details = `Searching${q ? ` for ${q}` : ""}`;
     } else if (paths[1] === "account") {
       if (!paths[2] || paths[2] === "rewards")
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
       else if (paths[2] === "new")
         presenceData.details = "Browsing for the new apps";
       else if (paths[2] === "details") {
-        if (query?.get("id")) {
+        if (query.get("id")) {
           const body = document.querySelector<HTMLDivElement>(
               "body > div#fcxH9b > div.WpDbMd > c-wiz > div.T4LgNb > div.ZfcPIb > div.UTg3hd > div.JNury > main.LXrl4c > c-wiz > c-wiz > div.oQ6oV"
             ),
