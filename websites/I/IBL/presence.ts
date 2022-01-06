@@ -12,7 +12,8 @@ presence.on('UpdateData', async () => {
         { pathname } = document.location;
 
         if (loc === '/') {
-            presenceData.details = '👀 Viewing: Home Page';
+            presenceData.details = 'Viewing homepage';
+
             presenceData.state = 'Just Chilling Here!';
             presenceData.smallImageKey = 'home';
             presenceData.smallImageText = 'What do you expect?'
