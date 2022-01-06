@@ -17,175 +17,168 @@ presence.on("UpdateData", async () => {
   if (document.querySelector("html").className.includes("vip"))
     presenceData.smallImageKey = "vip";
   presenceData.smallImageText = "VIP";
-  if (document.querySelector("div.logo")) {
+  if (document.querySelector("div.logo"))
     presenceData.details = "Viewing Homepage";
-  } else {
-    if (document.querySelector("html").className.includes("state-afterdance")) {
-      presenceData.details = "Scores";
-      presenceData.state = document
-        .querySelector(".song-detail__title")
-        .firstElementChild.textContent.replace(" - ALTERNATE", "");
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(
-          Math.floor(
-            (document.getElementById("in-game_video") as HTMLVideoElement)
-              .currentTime
-          ),
-          Math.floor(
-            (document.getElementById("in-game_video") as HTMLVideoElement)
-              .duration
-          )
-        );
+  else if (
+    document.querySelector("html").className.includes("state-afterdance")
+  ) {
+    presenceData.details = "Scores";
+    presenceData.state = document
+      .querySelector(".song-detail__title")
+      .firstElementChild.textContent.replace(" - ALTERNATE", "");
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(
+          (document.getElementById("in-game_video") as HTMLVideoElement)
+            .currentTime
+        ),
+        Math.floor(
+          (document.getElementById("in-game_video") as HTMLVideoElement)
+            .duration
+        )
+      );
+    if (cover) {
+      presenceData.largeImageKey = (
+        document.querySelector(".item-selected").firstElementChild
+          .firstElementChild as HTMLImageElement
+      ).src;
+    }
+    if (roomCode) {
+      presenceData.details = `Scores (${
+        document.querySelector(".danceroom__number").textContent
+      })`;
+    }
+  } else if (
+    document.querySelector("html").className.includes("state-tutorial")
+  ) {
+    presenceData.details = "Tutorial";
+    presenceData.state = document
+      .querySelector(".song-detail__title")
+      .firstElementChild.textContent.replace(" - ALTERNATE", "");
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(
+          (document.getElementById("in-game_video") as HTMLVideoElement)
+            .currentTime
+        ),
+        Math.floor(
+          (document.getElementById("in-game_video") as HTMLVideoElement)
+            .duration
+        )
+      );
+    if (cover) {
+      presenceData.largeImageKey = (
+        document.querySelector(".item-selected").firstElementChild
+          .firstElementChild as HTMLImageElement
+      ).src;
+    }
+    if (roomCode) {
+      presenceData.details = `Tutorial (${
+        document.querySelector(".danceroom__number").textContent
+      })`;
+    }
+  } else if (document.querySelector("html").className.includes("state-dance")) {
+    presenceData.details = "Playing";
+    presenceData.state = document
+      .querySelector(".song-detail__title")
+      .firstElementChild.textContent.replace(" - ALTERNATE", "");
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(
+          (document.getElementById("in-game_video") as HTMLVideoElement)
+            .currentTime
+        ),
+        Math.floor(
+          (document.getElementById("in-game_video") as HTMLVideoElement)
+            .duration
+        )
+      );
+    if (cover) {
+      presenceData.largeImageKey = (
+        document.querySelector(".item-selected").firstElementChild
+          .firstElementChild as HTMLImageElement
+      ).src;
+    }
+    if (roomCode) {
+      presenceData.details = `Playing (${
+        document.querySelector(".danceroom__number").textContent
+      })`;
+    }
+  } else if (
+    document.querySelector("html").className.includes("state-coachselection")
+  ) {
+    presenceData.details = "Coach Selection";
+    presenceData.state = `${
+      document.querySelector(".coach-selection__details-song").textContent
+    }`;
+    if (roomCode) {
+      presenceData.details = `Coach Selection (${
+        document.querySelector(".danceroom__number").textContent
+      })`;
+    }
+    if (cover) {
+      presenceData.largeImageKey = (
+        document.querySelector(".item-selected").firstElementChild
+          .firstElementChild as HTMLImageElement
+      ).src;
+    }
+  } else if (
+    document.querySelector("html").className.includes("state-songselection") &&
+    document.querySelector<HTMLLIElement>(".selected").title === "Playlists"
+  ) {
+    presenceData.details = `Browsing ${
+      document.querySelector(".selected").childNodes[3].textContent
+    }`;
+    if (
+      document.querySelector(".song-grid--title").textContent !== "Song Library"
+    ) {
+      presenceData.state =
+        document.querySelector(".song-grid--title").textContent;
       if (cover) {
         presenceData.largeImageKey = (
-          document.querySelector(".item-selected").firstElementChild
+          document.querySelector(".playlist--banner__selected")
             .firstElementChild as HTMLImageElement
         ).src;
       }
-      if (roomCode) {
-        presenceData.details = `Scores (${
-          document.querySelector(".danceroom__number").textContent
-        })`;
-      }
-    } else if (
-      document.querySelector("html").className.includes("state-tutorial")
-    ) {
-      presenceData.details = "Tutorial";
-      presenceData.state = document
-        .querySelector(".song-detail__title")
-        .firstElementChild.textContent.replace(" - ALTERNATE", "");
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(
-          Math.floor(
-            (document.getElementById("in-game_video") as HTMLVideoElement)
-              .currentTime
-          ),
-          Math.floor(
-            (document.getElementById("in-game_video") as HTMLVideoElement)
-              .duration
-          )
-        );
-      if (cover) {
-        presenceData.largeImageKey = (
-          document.querySelector(".item-selected").firstElementChild
-            .firstElementChild as HTMLImageElement
-        ).src;
-      }
-      if (roomCode) {
-        presenceData.details = `Tutorial (${
-          document.querySelector(".danceroom__number").textContent
-        })`;
-      }
-    } else if (
-      document.querySelector("html").className.includes("state-dance")
-    ) {
-      presenceData.details = "Playing";
-      presenceData.state = document
-        .querySelector(".song-detail__title")
-        .firstElementChild.textContent.replace(" - ALTERNATE", "");
-      [presenceData.startTimestamp, presenceData.endTimestamp] =
-        presence.getTimestamps(
-          Math.floor(
-            (document.getElementById("in-game_video") as HTMLVideoElement)
-              .currentTime
-          ),
-          Math.floor(
-            (document.getElementById("in-game_video") as HTMLVideoElement)
-              .duration
-          )
-        );
-      if (cover) {
-        presenceData.largeImageKey = (
-          document.querySelector(".item-selected").firstElementChild
-            .firstElementChild as HTMLImageElement
-        ).src;
-      }
-      if (roomCode) {
-        presenceData.details = `Playing (${
-          document.querySelector(".danceroom__number").textContent
-        })`;
-      }
-    } else if (
-      document.querySelector("html").className.includes("state-coachselection")
-    ) {
-      presenceData.details = "Coach Selection";
-      presenceData.state = `${
-        document.querySelector(".coach-selection__details-song").textContent
-      }`;
-      if (roomCode) {
-        presenceData.details = `Coach Selection (${
-          document.querySelector(".danceroom__number").textContent
-        })`;
-      }
-      if (cover) {
-        presenceData.largeImageKey = (
-          document.querySelector(".item-selected").firstElementChild
-            .firstElementChild as HTMLImageElement
-        ).src;
-      }
-    } else if (
-      document
-        .querySelector("html")
-        .className.includes("state-songselection") &&
-      document.querySelector<HTMLLIElement>(".selected").title === "Playlists"
-    ) {
+    }
+    if (roomCode) {
       presenceData.details = `Browsing ${
         document.querySelector(".selected").childNodes[3].textContent
-      }`;
-      if (
-        document.querySelector(".song-grid--title").textContent !==
-        "Song Library"
-      ) {
-        presenceData.state =
-          document.querySelector(".song-grid--title").textContent;
-        if (cover) {
-          presenceData.largeImageKey = (
-            document.querySelector(".playlist--banner__selected")
-              .firstElementChild as HTMLImageElement
-          ).src;
-        }
+      } (${document.querySelector(".danceroom__number").textContent})`;
+    }
+    if (document.querySelector(".item-selected")) {
+      presenceData.state = document
+        .querySelector(".song-detail__title")
+        .firstElementChild.textContent.replace(" - ALTERNATE", "");
+      if (cover) {
+        presenceData.largeImageKey = (
+          document.querySelector(".item-selected").firstElementChild
+            .firstElementChild as HTMLImageElement
+        ).src;
       }
-      if (roomCode) {
-        presenceData.details = `Browsing ${
-          document.querySelector(".selected").childNodes[3].textContent
-        } (${document.querySelector(".danceroom__number").textContent})`;
+    }
+  } else if (
+    document.querySelector("html").className.includes("state-songselection") &&
+    document.querySelector<HTMLLIElement>(".selected").title === "Songs"
+  ) {
+    presenceData.details = `Browsing ${
+      document.querySelector(".selected").childNodes[3].textContent
+    }`;
+    if (document.querySelector(".item-selected")) {
+      presenceData.state = document
+        .querySelector(".song-detail__title")
+        .firstElementChild.textContent.replace(" - ALTERNATE", "");
+      if (cover) {
+        presenceData.largeImageKey = (
+          document.querySelector(".item-selected").firstElementChild
+            .firstElementChild as HTMLImageElement
+        ).src;
       }
-      if (document.querySelector(".item-selected")) {
-        presenceData.state = document
-          .querySelector(".song-detail__title")
-          .firstElementChild.textContent.replace(" - ALTERNATE", "");
-        if (cover) {
-          presenceData.largeImageKey = (
-            document.querySelector(".item-selected").firstElementChild
-              .firstElementChild as HTMLImageElement
-          ).src;
-        }
-      }
-    } else if (
-      document
-        .querySelector("html")
-        .className.includes("state-songselection") &&
-      document.querySelector<HTMLLIElement>(".selected").title === "Songs"
-    ) {
+    }
+    if (roomCode) {
       presenceData.details = `Browsing ${
         document.querySelector(".selected").childNodes[3].textContent
-      }`;
-      if (document.querySelector(".item-selected")) {
-        presenceData.state = document
-          .querySelector(".song-detail__title")
-          .firstElementChild.textContent.replace(" - ALTERNATE", "");
-        if (cover) {
-          presenceData.largeImageKey = (
-            document.querySelector(".item-selected").firstElementChild
-              .firstElementChild as HTMLImageElement
-          ).src;
-        }
-      }
-      if (roomCode) {
-        presenceData.details = `Browsing ${
-          document.querySelector(".selected").childNodes[3].textContent
-        } (${document.querySelector(".danceroom__number").textContent})`;
-      }
+      } (${document.querySelector(".danceroom__number").textContent})`;
     }
   }
 
