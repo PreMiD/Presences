@@ -3,41 +3,85 @@ const presence = new Presence({
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
+let video = {
+  current: 0,
+  duration: 0,
+  paused: true,
+  title: "Unknown",
+  channel: "Unknown",
+  url: <string>null
+};
+
 presence.on("UpdateData", async function () {
-  const setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
-    setShowButtons = await presence.getSetting<boolean>("showButtons"),
-    setPrivacy = await presence.getSetting<boolean>("privacy"),
-    setLogo = await presence.getSetting<number>("logo"),
+  const [timeElapsed, moreDetails, showButtons, privacy, logo] =
+      await Promise.all([
+        presence.getSetting<boolean>("timeElapsed"),
+        presence.getSetting<boolean>("moreDetails"),
+        presence.getSetting<boolean>("showButtons"),
+        presence.getSetting<boolean>("privacy"),
+        presence.getSetting<number>("logo")
+      ]),
     presenceData: PresenceData = {
-      largeImageKey: setLogo === 0 ? "logo" : "logo2"
+      largeImageKey: logo === 0 ? "logo" : "logo2"
     },
     urlpath = window.location.pathname.split("/");
 
-  if (setTimeElapsed) presenceData.startTimestamp = browsingTimestamp;
+  if (timeElapsed) presenceData.startTimestamp = browsingTimestamp;
 
   if (!urlpath[1]) presenceData.details = "Home";
   else if (urlpath[1] === "rooms") {
     if (urlpath[2]) {
-      presenceData.details = setPrivacy
-        ? "In room"
+      presenceData.details = privacy
+        ? "In Room"
         : document.querySelector("div.roomName.noselect").textContent;
-      if (!setPrivacy) {
-        presenceData.state = document.querySelector(
-          "div.userCount.noselect"
-        ).textContent;
+      if (!privacy) {
+        if (moreDetails && video) {
+          presenceData.details = video.title;
+          presenceData.state = video.channel;
+
+          presenceData.endTimestamp = presence.getTimestamps(
+            Math.floor(video.current),
+            Math.floor(video.duration)
+          )[1];
+        } else {
+          presenceData.state = document.querySelector(
+            "div.userCount.noselect"
+          ).textContent;
+        }
       }
 
-      if (setShowButtons) {
+      if (showButtons) {
         presenceData.buttons = [
           {
-            label: "Join room",
+            label: "Join Room",
             url: window.location.href
           }
         ];
+
+        if (!privacy && video.url) {
+          presenceData.buttons.push({
+            label: "Watch Video",
+            url: video.url
+          });
+        }
       }
-    } else presenceData.details = "Browsing rooms";
+    } else presenceData.details = "Browsing Rooms";
   } else presenceData.details = "Other";
 
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
 });
+
+presence.on(
+  "iFrameData",
+  (data: {
+    current: number;
+    duration: number;
+    paused: boolean;
+    title: string;
+    channel: string;
+    url: string;
+  }) => {
+    video = data;
+  }
+);
