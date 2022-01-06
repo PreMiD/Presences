@@ -1,47 +1,47 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.6",
-    "service": "InfinityBotList",
-    "author": {
-      "name": "Toxic Dev",
-      "id": "510065483693817867"
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "service": "InfinityBotList",
+  "author": {
+    "name": "Toxic Dev",
+    "id": "510065483693817867"
+  },
+  "contributors": [
+    {
+      "name": "Anaxes",
+      "id": "567885938160697377"
+    }
+  ],
+  "description": {
+    "en": "The future of Discord Bot Listing Services!",
+    "fr": "L'avenir des services de référencement de Discord Bot !",
+    "nl": "De toekomst van Discord Bot Listing Services!"
+  },
+  "url": "infinitybots.gg",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/SSH8W2p.png",
+  "thumbnail": "https://i.imgur.com/t0PoYP6.png",
+  "color": "#7289DA",
+  "tags": [
+    "discord",
+    "bots",
+    "list",
+    "listing",
+    "service",
+    "bot"
+  ],
+  "category": "socials",
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
     },
-    "contributors": [
-      {
-        "name": "Anaxes",
-        "id": "567885938160697377"
-      }
-    ],
-    "description": {
-      "en": "The future of Discord Bot Listing Services!",
-      "fr": "L'avenir des services de référencement de Discord Bot !",
-      "nl": "De toekomst van Discord Bot Listing Services!"
-    },
-    "url": "infinitybots.gg",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/3mcVhg2.png",
-    "thumbnail": "https://i.imgur.com/t0PoYP6.png",
-    "color": "#7289DA",
-    "tags": [
-      "discord",
-      "bots",
-      "list",
-      "listing",
-      "service",
-      "bot"
-    ],
-    "category": "socials",
-    "settings": [
-      {
-        "id": "timestamp",
-        "title": "Show Timestamps",
-        "icon": "fad fa-stopwatch",
-        "value": true
-      },
-      {
-        "id": "buttons",
-        "title": "Show Buttons",
-        "icon": "fas fa-compress-arrows-alt",
-        "value": true
-      }
-    ]
-  } 
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
