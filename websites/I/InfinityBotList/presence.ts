@@ -16,12 +16,6 @@ presence.on("UpdateData", async () => {
 
         if (pathname === "/") {
             presenceData.details = "👀 Viewing homepage";
-            presenceData.buttons = [
-                {
-                    label: "View Infinity",
-                    url: document.location.href
-                }
-            ]
 
         } else if (pathname.includes("/search")) {
             presenceData.details = `👀 Searching for a bot`;
