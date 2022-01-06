@@ -9,8 +9,7 @@ presence.on('UpdateData', async () => {
         largeImageKey: 'logo',
         startTimestamp: timestamp
     },
-
-        loc = document.location.pathname;
+        { pathname } = document.location;
 
         if (loc === '/') {
             presenceData.details = '👀 Viewing: Home Page';
