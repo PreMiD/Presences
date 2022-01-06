@@ -10,10 +10,8 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Viewing Main page";
   else if (document.location.pathname.includes("/overview/")) {
-    presenceData.largeImageKey = (
-      document.querySelector(
-        "head > meta[property='og:image']"
-      )
+    presenceData.largeImageKey = document.querySelector(
+      "head > meta[property='og:image']"
     ).content;
     presenceData.smallImageKey = "logo";
     presenceData.details = "Viewing item stats:";
@@ -22,11 +20,12 @@ presence.on("UpdateData", async () => {
         "#page-content > div:nth-child(1) > div.stats-body > div > h1"
       ) as HTMLHeadingElement
     ).textContent;
-    presenceData.buttons =
-        [{
-          label: "View the Stats",
-          url: document.URL
-        }];
+    presenceData.buttons = [
+      {
+        label: "View the Stats",
+        url: document.URL
+      }
+    ];
   } else if (document.location.pathname.includes("/stats/")) {
     if (
       document.location.pathname.includes(
@@ -69,16 +68,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing item:";
       presenceData.smallImageKey = "logo";
       presenceData.smallImageText = "Backpack.tf Item stats";
-      presenceData.largeImageKey = (
-        document.querySelector(
-          "head > meta[property='og:image']"
-          )
-        ).content;
-      presenceData.buttons =
-        [{
+      presenceData.largeImageKey = document.querySelector(
+        "head > meta[property='og:image']"
+      ).content;
+      presenceData.buttons = [
+        {
           label: "View the Item",
           url: document.URL
-        }];
+        }
+      ];
       presenceData.state = (
         document.querySelector(
           "#page-content > div.row > div.col-md-8.stats-panel.stats-header-panel > div.stats-body > div.stats-header > div.stats-header-item > div.stats-header-title"
@@ -90,78 +88,65 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname === "/category/slots")
       presenceData.state = "Items by Slot";
     else if (document.location.pathname.includes("/slot/")) {
-      const title = (
-        document.querySelector(
-          "#page-content > div > div.stats-body > div.stats-header > p"
-        )
+      const title = document.querySelector(
+        "#page-content > div > div.stats-body > div.stats-header > p"
       );
       presenceData.details = "Viewing item:";
       presenceData.state = title.textContent;
     } else if (document.location.pathname === "/category/classes")
       presenceData.state = "Items by Class";
     else if (document.location.pathname.includes("/class/")) {
-      const title = (
-        document.querySelector(
-          "#page-content > div > div.stats-body > div.stats-header > p"
-          )
-        );
+      const title = document.querySelector(
+        "#page-content > div > div.stats-body > div.stats-header > p"
+      );
       presenceData.details = "Viewing item:";
       presenceData.state = title.textContent;
     } else presenceData.details = "This page doesn't exist you know :/";
   } else if (document.location.pathname.includes("/u/")) {
     presenceData.details = "Viewing a profile page:";
     presenceData.smallImageKey = "logo";
-    presenceData.largeImageKey = (
-      document.querySelector(
-        "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
-      )
+    presenceData.largeImageKey = document.querySelector(
+      "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
     ).content;
-    presenceData.state = (
-      document.querySelector(
-        "head > meta[property='og:title']"
-      )
+    presenceData.state = document.querySelector(
+      "head > meta[property='og:title']"
     ).content;
-    presenceData.buttons =
-      [{
+    presenceData.buttons = [
+      {
         label: "View the Profile",
         url: document.URL
-      }];
+      }
+    ];
   } else if (document.location.pathname.includes("/profiles/")) {
     presenceData.details = "Viewing a profile page:";
     presenceData.smallImageKey = "logo";
-    presenceData.largeImageKey = (
-      document.querySelector(
-        "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
-      )
+    presenceData.largeImageKey = document.querySelector(
+      "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
     ).content;
-    presenceData.state = (
-      document.querySelector(
-        "head > meta[property='og:title']"
-      )
+    presenceData.state = document.querySelector(
+      "head > meta[property='og:title']"
     ).content;
-    presenceData.buttons =
-      [{
+    presenceData.buttons = [
+      {
         label: "View the Profile",
         url: document.URL
-      }];
+      }
+    ];
   } else if (document.location.pathname.includes("/friends/")) {
     presenceData.details = "Viewing a profile page:";
     presenceData.smallImageKey = "logo";
-    presenceData.largeImageKey = (
-      document.querySelector(
-        "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
-      )
+    presenceData.largeImageKey = document.querySelector(
+      "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
     ).content;
-    presenceData.state = (
-      document.querySelector(
-        "head > meta[property='og:title']"
-      )
+    presenceData.state = document.querySelector(
+      "head > meta[property='og:title']"
     ).content;
-    presenceData.buttons =
-      [{
+    presenceData.buttons = [
+      {
         label: "View the Profile",
         url: document.URL
-      }];
+      }
+    ];
   } else if (document.location.pathname.includes("/unusual/")) {
     presenceData.details = "Viewing Unusual Pricelist:";
     presenceData.state = (
@@ -231,19 +216,21 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/classifieds")) {
     presenceData.details = "Searching through:";
     presenceData.state = "Classified Listings";
-    presenceData.buttons =
-      [{
+    presenceData.buttons = [
+      {
         label: "View the Classifieds",
         url: document.URL
-      }];
+      }
+    ];
   } else if (document.location.pathname.includes("/suggestion/")) {
     presenceData.details = "Searching through:";
     presenceData.state = "Price Suggestions";
-    presenceData.buttons =
-      [{
+    presenceData.buttons = [
+      {
         label: "View the Suggestions",
         url: document.URL
-      }];
+      }
+    ];
   } else if (document.location.pathname.includes("/about")) {
     presenceData.details = "Viewing page:";
     presenceData.state = "About backpack.tf";
