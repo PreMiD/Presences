@@ -33,10 +33,11 @@
     "th": "จังหวะนั้นอยู่ห่างแค่คลิกเดียว! ด้วย Ouendan/EBA, Taiko และเกมโหมดดั้งเดิมอีกมากมาย พร้อมทั้งหน้าต่างแก้ไขที่ใช้งานได้อย่างสมบูรณ์",
     "ru": "Ритм всего лишь в *клике* от тебя! Игра с Ouendan/EBA, Taiko и оригинальным типом игры, с многофункциональным редактором карт.",
     "tr": "Ritim sadece bir *tık* uzakta! Ouendan/EBA, Taiko ve orijinal oyun modlarıyla, hem de tamamiyle işlevsel seviye editörüyle beraber.",
-    "pt": "Ritmo está apenas a um *clique* de distância! Com Ouendan/EBA, Taiko e modos de jogo originais, como também um editor de níveis totalmente funcional."
+    "pt": "Ritmo está apenas a um *clique* de distância! Com Ouendan/EBA, Taiko e modos de jogo originais, como também um editor de níveis totalmente funcional.",
+    "vi_VN": "Giai điệu bắt đầu bằng một cái *click* chuột! Với Ouendan/EBA, Taiko và các chế độ trò chơi độc nhất, cũng như một bộ chỉnh sửa trò chơi."
   },
   "url": "osu.ppy.sh",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "logo": "https://i.imgur.com/IWWqSYR.png",
   "thumbnail": "https://i.imgur.com/6YEJ9sY.png",
   "color": "#FF66AA",

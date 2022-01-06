@@ -22,10 +22,11 @@
     "pt_BR": "Escute todas as músicas que você ama a qualquer hora, em qualquer lugar.",
     "fr": "Écoutez toutes les musiques que vous aimez quand vous voulez, où vous voulez.",
     "uk_UA": "Слухайте улюблену музику у будь-який час будь-де.",
-    "nl": "Luister altijd en overal naar alle nummers waar je van houdt."
+    "nl": "Luister altijd en overal naar alle nummers waar je van houdt.",
+    "vi_VN": "Nghe tất cả những bài hát bạn yêu thích mọi lúc, mọi nơi."
   },
   "url": "www.deezer.com",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "logo": "https://i.imgur.com/GKMQi3h.png",
   "thumbnail": "https://i.imgur.com/gVAvQ6k.png",
   "color": "#A31D7C",

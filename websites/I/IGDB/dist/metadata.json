@@ -6,10 +6,11 @@
   },
   "service": "IGDB",
   "description": {
-    "en": "IGDB.com is a video game database, intended for both game consumers and video game professionals alike."
+    "en": "IGDB.com is a video game database, intended for both game consumers and video game professionals alike.",
+    "vi_VN": "IGDB.com là cơ sở dữ liệu game, nhắm tới cả các người chơi và người chuyên nghiệp."
   },
   "url": "www.igdb.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/bMuJtQf.png",
   "thumbnail": "https://i.imgur.com/8mEtLsB.png",
   "color": "#9146FF",
