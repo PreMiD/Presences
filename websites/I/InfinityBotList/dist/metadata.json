@@ -1,22 +1,14 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.5",
-    "service": "Infinity Bots",
+    "$schema": "https://schemas.premid.app/metadata/1.6",
+    "service": "InfinityBotList",
     "author": {
       "name": "Toxic Dev",
       "id": "510065483693817867"
     },
     "contributors": [
       {
-        "name": "Connor20024",
-        "id": "324646179134636043"
-      },
-      {
         "name": "Anaxes",
         "id": "567885938160697377"
-      },
-      {
-        "name": "Dexter",
-        "id": "780079091172900884"
       }
     ],
     "description": {
