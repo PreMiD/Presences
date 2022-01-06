@@ -2,12 +2,28 @@ const presence = new Presence({
     clientId: "619561001234464789",
     injectOnComplete: true
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingStamp = Math.floor(Date.now() / 1000),
+  shortenedURLs: Record<string, string> = {};
 
 let title: string,
   uploader: string,
   search: HTMLInputElement,
   recentlyCleared = 0;
+
+async function getShortURL(url: string) {
+  if (!url || url.length < 256) return url;
+  if (shortenedURLs[url]) return shortenedURLs[url];
+  try {
+    const pdURL = await (
+      await fetch(`https://pd.premid.app/create/${url}`)
+    ).text();
+    shortenedURLs[url] = pdURL;
+    return pdURL;
+  } catch (err) {
+    presence.error(err);
+    return url;
+  }
+}
 
 async function getStrings() {
   return presence.getStrings(
@@ -234,7 +250,11 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (cover) presenceData.largeImageKey = albumCover.querySelector("img").src;
+    if (cover) {
+      presenceData.largeImageKey = await getShortURL(
+        albumCover.querySelector("img").src
+      );
+    }
 
     title =
       Array.from(document.querySelectorAll("a")).find(
