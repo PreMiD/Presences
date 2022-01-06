@@ -4,11 +4,15 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    paths: string[] = document.location.hash
-      ? document.location.hash.replace("#", "").split("/")
-      : document.location.pathname.split("/");
+    largeImageKey: "logo"
+  };
+
+  let { hash } = document.location;
+  if (hash.includes("?")) hash = hash.substring(0, hash.lastIndexOf("?") - 1);
+
+  const paths: string[] = hash
+    ? hash.replace("#", "").split("/")
+    : document.location.pathname.split("/");
   if (!paths[0]) paths.shift();
 
   if (paths.length === 1) {
