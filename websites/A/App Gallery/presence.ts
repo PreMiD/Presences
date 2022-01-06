@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Browsing the featured apps";
         break;
       case "Categories":
-        presenceData.details = "Browsing through the categories";
+        presenceData.details = "Browsing in the categories";
         break;
       case "Top":
         presenceData.details = "Browsing the TOP apps";
