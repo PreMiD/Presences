@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
       document.querySelector<HTMLLIElement>(".selected").title === "Playlists"
     ) {
       presenceData.details = `Browsing ${
-        document.querySelector(".selected").textContent
+        document.querySelector(".selected").childNodes[3].textContent
       }`;
       if (
         document.querySelector(".song-grid--title").textContent !==
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
       }
       if (roomCode) {
         presenceData.details = `Browsing ${
-          document.querySelector(".selected").textContent
+          document.querySelector(".selected").childNodes[3].textContent
         } (${document.querySelector(".danceroom__number").textContent})`;
       }
       if (document.querySelector(".item-selected")) {
@@ -169,7 +169,7 @@ presence.on("UpdateData", async () => {
       document.querySelector<HTMLLIElement>(".selected").title === "Songs"
     ) {
       presenceData.details = `Browsing ${
-        document.querySelector(".selected").textContent
+        document.querySelector(".selected").childNodes[3].textContent
       }`;
       if (document.querySelector(".item-selected")) {
         presenceData.state = document
@@ -184,7 +184,7 @@ presence.on("UpdateData", async () => {
       }
       if (roomCode) {
         presenceData.details = `Browsing ${
-          document.querySelector(".selected").textContent
+          document.querySelector(".selected").childNodes[3].textContent
         } (${document.querySelector(".danceroom__number").textContent})`;
       }
     }
