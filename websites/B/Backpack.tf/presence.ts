@@ -10,8 +10,10 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Viewing Main page";
   else if (document.location.pathname.includes("/overview/")) {
-    presenceData.largeImageKey = document.querySelector(
-      "head > meta[property='og:image']"
+    presenceData.largeImageKey = (
+      document.querySelector(
+        "head > meta[property='og:image']"
+      ) as HTMLMetaElement
     ).content;
     presenceData.smallImageKey = "logo";
     presenceData.details = "Viewing item stats:";
@@ -68,8 +70,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing item:";
       presenceData.smallImageKey = "logo";
       presenceData.smallImageText = "Backpack.tf Item stats";
-      presenceData.largeImageKey = document.querySelector(
-        "head > meta[property='og:image']"
+      presenceData.largeImageKey = (
+        document.querySelector(
+          "head > meta[property='og:image']"
+        ) as HTMLMetaElement
       ).content;
       presenceData.buttons = [
         {
@@ -105,11 +109,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/u/")) {
     presenceData.details = "Viewing a profile page:";
     presenceData.smallImageKey = "logo";
-    presenceData.largeImageKey = document.querySelector(
-      "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
-    ).content;
-    presenceData.state = document.querySelector(
-      "head > meta[property='og:title']"
+    presenceData.largeImageKey = (
+      document.querySelector(
+        "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
+      ) as HTMLImageElement
+    ).src;
+    presenceData.state = (
+      document.querySelector(
+        "head > meta[property='og:title']"
+      ) as HTMLMetaElement
     ).content;
     presenceData.buttons = [
       {
@@ -120,11 +128,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/profiles/")) {
     presenceData.details = "Viewing a profile page:";
     presenceData.smallImageKey = "logo";
-    presenceData.largeImageKey = document.querySelector(
-      "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
-    ).content;
-    presenceData.state = document.querySelector(
-      "head > meta[property='og:title']"
+    presenceData.largeImageKey = (
+      document.querySelector(
+        "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
+      ) as HTMLImageElement
+    ).src;
+    presenceData.state = (
+      document.querySelector(
+        "head > meta[property='og:title']"
+      ) as HTMLMetaElement
     ).content;
     presenceData.buttons = [
       {
@@ -135,11 +147,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/friends/")) {
     presenceData.details = "Viewing a profile page:";
     presenceData.smallImageKey = "logo";
-    presenceData.largeImageKey = document.querySelector(
-      "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
-    ).content;
-    presenceData.state = document.querySelector(
-      "head > meta[property='og:title']"
+    presenceData.largeImageKey = (
+      document.querySelector(
+        "#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img"
+      ) as HTMLImageElement
+    ).src;
+    presenceData.state = (
+      document.querySelector(
+        "head > meta[property='og:title']"
+      ) as HTMLMetaElement
     ).content;
     presenceData.buttons = [
       {
