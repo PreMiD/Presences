@@ -4,9 +4,8 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const [time, buttons, cover, roomCode] = await Promise.all([
+  const [time, cover, roomCode] = await Promise.all([
       presence.getSetting<boolean>("time"),
-      presence.getSetting<boolean>("buttons"),
       presence.getSetting<boolean>("cover"),
       presence.getSetting<boolean>("roomCode")
     ]),
@@ -191,7 +190,6 @@ presence.on("UpdateData", async () => {
   }
 
   if (!time) delete presenceData.startTimestamp;
-  if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
   presence.setActivity(presenceData);
 });

@@ -27,12 +27,6 @@
       "value": true
     },
     {
-      "id": "buttons",
-      "title": "Show Buttons",
-      "icon": "fas fa-compress-arrows-alt",
-      "value": true
-    },
-    {
       "id": "cover",
       "title": "Show Cover",
       "icon": "fad fa-images",
