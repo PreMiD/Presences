@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
     presenceData.state =
       document.querySelector<HTMLDivElement>("#coverart").title;
     if (cover) {
-      delete presenceData.largeImageKey;
       if (
         document.querySelector<HTMLMetaElement>("head > meta:nth-child(38)")
       ) {
@@ -37,7 +36,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing an artist:";
     presenceData.state = shortTitle;
     if (cover) {
-      delete presenceData.largeImageKey;
       if (
         document.querySelector<HTMLAnchorElement>(
           "#leftfloat > div:nth-child(3) > a"
@@ -69,7 +67,6 @@ presence.on("UpdateData", async () => {
     }
     presenceData.state = shortTitle;
     if (cover) {
-      delete presenceData.largeImageKey;
       if (
         document.querySelector<HTMLAnchorElement>(
           "#innermain > div:nth-child(2) > a"
