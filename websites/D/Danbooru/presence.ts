@@ -78,12 +78,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing forum posts";
   else presenceData.details = "Browsing the site";
   if (privacy) {
-    delete presenceData.details;
     delete presenceData.state;
-    delete presenceData.smallImageKey;
-    delete presenceData.smallImageText;
     delete presenceData.buttons;
-    presenceData.details = "Browsing...";
   }
   presence.setActivity(presenceData);
 });
