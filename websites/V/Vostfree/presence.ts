@@ -37,16 +37,12 @@ presence.on("UpdateData", async () => {
 
   if (!isNaN(video.duration) && title) {
     const episode = document.querySelector(
-        "#player-tabs > div.tab-blocks > div:nth-child(1) > div > div.new_player_top > div.new_player_selector_box > div.jq-selectbox-wrapper > div > div.jq-selectbox__select > div.jq-selectbox__select-text"
-      ),
-      [startTimestamp, endTimestamp] = presence.getTimestamps(
-        video.currentTime,
-        video.duration
-      );
+      "#player-tabs > div.tab-blocks > div:nth-child(1) > div > div.new_player_top > div.new_player_selector_box > div.jq-selectbox-wrapper > div > div.jq-selectbox__select > div.jq-selectbox__select-text"
+    );
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(video.currentTime, video.duration);
     presenceData.details = title.textContent;
     presenceData.state = episode?.textContent;
-    presenceData.startTimestamp = startTimestamp;
-    presenceData.endTimestamp = endTimestamp;
     presenceData.buttons = [
       {
         label: "Regarder l'épisode",
@@ -62,8 +58,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.state;
       delete presenceData.endTimestamp;
       delete presenceData.buttons;
-      presenceData.details = "Regarde un anime";
       presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Regarde un anime";
     }
   } else if (search) {
     presenceData.details = "Recherche :";
