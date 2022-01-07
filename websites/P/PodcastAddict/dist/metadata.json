@@ -4,7 +4,13 @@
     "name": "Harold",
     "id": "141206144264699904"
   },
-  "service": "PodcastAddict",
+  "contributors": [
+  {
+    "name": "Noah",
+    "id": "272450405525356546"
+  }
+],
+  "service": "Podcast Addict",
   "description": {
     "en": "Podcast Addict is Android #1 podcast app with over 10M downloads, 500K reviews and an average rating of 4.7/5",
     "nl": "Podcast Addict is Android's #1 podcast app met meer dan 10M downloads, 500K reviews en een gemiddelde waardering van 4.7/5"
@@ -13,10 +19,10 @@
     "podcastaddict.com",
     "www.podcastaddict.com"
   ],
-  "version": "1.0.5",
-  "logo": "https://i.imgur.com/tOin3KD.png",
-  "thumbnail": "https://i.imgur.com/IB8PF6i.jpg",
-  "color": "#fc7e0f",
+  "version": "1.1.0",
+  "logo": "https://i.imgur.com/gUCzed2.png",
+  "thumbnail": "https://i.imgur.com/1c3hF3G.png",
+  "color": "#f48529",
   "category": "music",
   "tags": [
     "podcast",
