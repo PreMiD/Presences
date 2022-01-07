@@ -9,10 +9,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     cover = await presence.getSetting<boolean>("cover"),
-    shortTitle = document.title.substring(
-      0,
-      document.title.lastIndexOf("-") - 1
-    ),
+    shortTitle = document.title.match(/(.*) -/)[1],
     path = document.location.pathname;
 
   if (path.startsWith("/album")) {
