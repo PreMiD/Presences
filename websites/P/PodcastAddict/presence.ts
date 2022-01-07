@@ -22,7 +22,9 @@ presence.on("UpdateData", async () => {
   else if (pathname.startsWith("/podcast")) {
     presenceData.details = "Viewing:";
     presenceData.state = document.querySelector(".caption").textContent;
-    presenceData.largeImageKey = document.querySelector(".headerThumbnail img").getAttribute("src");
+    presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+      ".headerThumbnail img"
+    ).src;
     presenceData.smallImageKey = "view";
     presenceData.buttons = [
       { label: "View Podcast", url: window.location.href }
@@ -36,7 +38,8 @@ presence.on("UpdateData", async () => {
     ];
     presenceData.details = document.querySelector(".pure-button").textContent;
     presenceData.state = document.querySelector(".title").textContent;
-    presenceData.largeImageKey = document.querySelector(".audioArtwork").getAttribute("src");
+    presenceData.largeImageKey =
+      document.querySelector<HTMLImageElement>(".audioArtwork").src;
     if (
       !document
         .querySelector("#play-pause-button")
