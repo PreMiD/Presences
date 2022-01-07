@@ -16,18 +16,18 @@ if (lastPlaybackState !== playback) {
 }
 
 presence.on("UpdateData", async () => {
-  playback =
-    document.querySelector("#player > div.jw-media.jw-reset > video") !== null
-      ? true
-      : false;
+  const video = document.querySelector<HTMLVideoElement>(
+    "#player > div.jw-media.jw-reset > video"
+  );
+
+  playback = video !== null ? true : false;
 
   if (!playback) {
     const presenceData: PresenceData = {
       largeImageKey: "lg",
+      details: "Browsing...",
       startTimestamp: browsingTimestamp
     };
-
-    presenceData.details = "Browsing...";
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -35,24 +35,20 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  const video: HTMLVideoElement = document.querySelector(
-    "#player > div.jw-media.jw-reset > video"
-  );
-
-  if (video) {
-    const videoTitle = document.querySelector(
+  if (playback) {
+    const videoTitle = document.querySelector<HTMLDivElement>(
         "div > div.episodeInfo > div.nomeAnime"
-      ) as HTMLElement,
-      episode = document.querySelector(
+      ),
+      episode = document.querySelector<HTMLDivElement>(
         "div > div.episodeInfo > div.epInfo"
-      ) as HTMLElement,
+      ),
       [startTimestamp, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
       presenceData: PresenceData = {
-        details: videoTitle.textContent,
-        state: episode.textContent,
+        details: videoTitle.innerText,
+        state: episode.innerText,
         largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
@@ -62,8 +58,10 @@ presence.on("UpdateData", async () => {
         endTimestamp
       };
 
-    presenceData.details = videoTitle.textContent;
-    presenceData.state = episode.textContent;
+    presenceData.details = videoTitle.innerText;
+    presenceData.state = episode.innerText;
+    presenceData.startTimestamp = browsingTimestamp;
+
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
