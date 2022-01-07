@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
     delete presenceData.smallImageText;
     delete presenceData.buttons;
-    presenceData.state = "Browsing...";
+    presenceData.details = "Browsing...";
   }
   presence.setActivity(presenceData);
 });
