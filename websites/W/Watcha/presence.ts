@@ -347,7 +347,7 @@ app.on("UpdateData", async () => {
     }
   }
 
-  if (app.data.largeImageKey.startsWith("http"))
+  if (app.data.largeImageKey?.startsWith("http"))
     app.data.largeImageKey = await app.getShortURL(app.data.largeImageKey);
 
   if (app.data.details) app.setActivity(app.data);
