@@ -49,7 +49,6 @@ presence.on("UpdateData", async () => {
         )
         .textContent.slice(7);
       if (cover) {
-        delete presenceData.largeImageKey;
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
           "#companion_cover > img"
         ).src;
