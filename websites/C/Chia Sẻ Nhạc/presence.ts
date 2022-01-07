@@ -55,7 +55,6 @@ presence.on("UpdateData", async () => {
         ).src;
       }
       if (timestamps) {
-        delete presenceData.startTimestamp;
         const timeLeft = presence.timestampFromFormat(
           document.querySelector<HTMLDivElement>(
             "#csnplayer > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-countdown"
@@ -112,7 +111,6 @@ presence.on("UpdateData", async () => {
         ).src;
       }
       if (timestamps) {
-        delete presenceData.startTimestamp;
         const timeLeft = presence.timestampFromFormat(
           document.querySelector<HTMLDivElement>(
             "#csnplayer > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-countdown"
