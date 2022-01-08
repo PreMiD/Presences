@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "Emijor",
+    "id": "466885774621540372"
+  },
+  "service": "AniStream",
+  "description": {
+    "en": "Anistream.de is a anime streaming site where you can watch many anime series and movies for free.",
+    "de": "Anistream.de ist eine Anime Stream Seite wo ihr viele Anime Serien und Filme kostenlos anschauen könnt.",
+    "nl": "",
+    "vi_VN": ""
+  },
+  "url": "anistream.cx",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/EcUbthC.png",
+  "thumbnail": "https://i.imgur.com/u3FJ6ZP.png",
+  "color": "#214bad",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "streaming",
+    "anistream",
+    "german",
+    "nsfw"
+  ],
+  "iframe": true
+}
