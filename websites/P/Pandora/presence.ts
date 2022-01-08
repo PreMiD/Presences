@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
             ".VolumeDurationControl__Duration [data-qa=remaining_time]"
           );
 
-        // Return if either are null
+        // If duration controls exist, set the timestamps and small image text appropriately
         if (timeElapsed && timeRemaining) {
           // Get timestamps
           [presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -86,6 +86,19 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "pause";
         presenceData.smallImageText = (await strings).pause;
       }
+
+      // Even if we're not playing, we still want the album art if it exists
+      // Check multiple locations for the art and if it does not exist, use the default 'pandora' key
+      const art =
+        document.querySelector<HTMLImageElement>(
+          ".Tuner__Audio__TrackDetail__img :first-child :first-child"
+        ) ??
+        document.querySelector<HTMLImageElement>(
+          ".nowPlayingTopInfo__artContainer__art :first-child :first-child"
+        ) ??
+        document.querySelector<HTMLImageElement>(".HeroCard__image");
+      if (art) presenceData.largeImageKey = art.src;
+      else presence.error("Art is null!");
     } else presence.error("Play button is null!");
   }
 

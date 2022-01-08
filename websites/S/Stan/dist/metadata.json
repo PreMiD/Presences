@@ -10,7 +10,7 @@
     "nl": "Stan biedt onbeperkte toegang tot duizenden uren amusement, exclusieve primeurs, bekroonde tv-programma's, kaskrakerfilms en inhoud voor kinderen."
   },
   "url": "play.stan.com.au",
-  "version": "1.0.6",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/uxbPLH1.png",
   "thumbnail": "https://i.imgur.com/xpxHLMw.png",
   "color": "#0173fa",
@@ -64,6 +64,15 @@
       },
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "cover",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Cover",
+      "icon": "fad fa-images",
       "value": true
     }
   ]

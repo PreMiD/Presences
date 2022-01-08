@@ -1,220 +1,97 @@
 const presence = new Presence({
-    clientId: "660519861742731264"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    browse: "presence.activity.browsing",
-    search: "presence.activity.searching"
-  });
+  clientId: "660519861742731264"
+});
 
-let { language } = navigator, //Browser language
-  lastRadio = "",
-  browsingTimestamp = 0; //Timestamp when started listening to a radio station
-
-switch (language) {
-  //German
-  case "de":
-  case "de-CH":
-  case "de-AT":
-  case "de-LU":
-  case "de-LI":
-    language = "de";
-    break;
-  //French
-  case "fr":
-  case "fr-BE":
-  case "fr-CA":
-  case "fr-CH":
-  case "fr-LU":
-    language = "fr";
-    break;
-  //English / Unknown
-  case "en":
-  case "en-US":
-  case "en-EG":
-  case "en-AU":
-  case "en-GB":
-  case "en-CA":
-  case "en-NZ":
-  case "en-IE":
-  case "en-ZA":
-  case "en-JM":
-  case "en-BZ":
-  case "en-TT":
-  default:
-    language = "en";
-    break;
-}
+let oldLang: string,
+  newLang: string,
+  strings: Awaited<ReturnType<typeof getStrings>>,
+  timestamp: number;
 
 presence.on("UpdateData", async () => {
-  const host = window.location.hostname.replace("www.", ""),
-    path = window.location.pathname.split("/").slice(1),
+  const path = window.location.pathname.split("/").slice(1),
     presenceData: PresenceData = {
-      details: "RadioMe",
       largeImageKey: "logo_big"
     };
 
+  oldLang = newLang;
+  newLang = await presence.getSetting<string>("lang").catch(() => "en");
+  if (!strings || oldLang !== newLang) strings = await getStrings(newLang);
+
   switch (path[0]) {
-    //Search
+    // Search
     case "search":
-      browsingTimestamp = 0;
+      presenceData.details = new URLSearchParams(window.location.search).get(
+        "term"
+      );
+      presenceData.state =
+        document.querySelector<HTMLHeadingElement>("h1").textContent;
+      presenceData.smallImageText = strings.search;
       presenceData.smallImageKey = "search";
-      presenceData.smallImageText = (await strings).search;
-      switch (language) {
-        case "de":
-          presenceData.details = `Sucht nach "${new URLSearchParams(
-            window.location.search
-          ).get("term")}"`;
-          presenceData.state = `auf ${host}`;
-          break;
-        case "fr":
-          presenceData.details = `Recherche "${new URLSearchParams(
-            window.location.search
-          ).get("term")}"`;
-          presenceData.state = `sur ${host}`;
-          break;
-        case "en":
-          presenceData.details = `Searching for "${new URLSearchParams(
-            window.location.search
-          ).get("term")}"`;
-          presenceData.state = `on ${host}`;
-          break;
-      }
       break;
+    // Privacy policy, Imprint
+    case "c":
+      presenceData.details = document.title;
+      break;
+    // Startpage, Radio station, Region, Unknown
+    default: {
+      const region = [
+          ...document.querySelectorAll<HTMLAnchorElement>(".region-btn")
+        ]
+          .filter(e => e.classList.contains("active"))[0]
+          .pathname?.slice(1),
+        station =
+          document.querySelector<HTMLSpanElement>(".song-name")?.textContent;
 
-    //Radio / Region
-    default:
-      if (path[0]) {
-        if (document.getElementById("station-website")) {
-          //Radio
-          if (
-            document.getElementsByClassName("song-name")[0].textContent.length >
-            0
-          ) {
-            //Player active
-            if (
-              document.getElementsByClassName(
-                "playbutton-global playbutton-global-playing"
-              ).length > 0
-            ) {
-              //Radio is playing
-              if (
-                !browsingTimestamp ||
-                lastRadio !==
-                  document.getElementsByClassName("song-name")[0].textContent
-              )
-                browsingTimestamp = Math.floor(Date.now() / 1000);
-              presenceData.startTimestamp = browsingTimestamp;
-              lastRadio =
-                document.getElementsByClassName("song-name")[0].textContent;
-
-              presenceData.smallImageKey = "play";
-              presenceData.smallImageText = (await strings).play;
-
-              presenceData.details =
-                document.getElementsByClassName("song-name")[0].textContent;
-            } else {
-              //Radio is stopped
-              browsingTimestamp = 0;
-
-              presenceData.smallImageKey = "pause";
-              presenceData.smallImageText = (await strings).pause;
-
-              presenceData.details =
-                document.getElementsByClassName("song-name")[0].textContent;
-            }
-          } else {
-            //Player inactive
-            browsingTimestamp = 0;
-
-            presenceData.details = document.querySelector("h1").textContent;
-            switch (language) {
-              case "de":
-                presenceData.state = `${
-                  document.getElementById("bar-ratingValue").textContent
-                } von 5 Sternen (${
-                  document.getElementById("bar-ratingCount").textContent
-                } Bewertungen)`;
-                break;
-              case "fr":
-                presenceData.state = `${
-                  document.getElementById("bar-ratingValue").textContent
-                } sur 5 étoiles (${
-                  document.getElementById("bar-ratingCount").textContent
-                } notes)`;
-                break;
-              case "en":
-                presenceData.state = `${
-                  document.getElementById("bar-ratingValue").textContent
-                } of 5 stars (${
-                  document.getElementById("bar-ratingCount").textContent
-                } Ratings)`;
-                break;
-            }
-          }
-        } else {
-          //Region
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
-          switch (language) {
-            case "de":
-              presenceData.details = document.querySelector("h1").textContent;
-              presenceData.state = `auf ${host}`;
-              break;
-            case "fr":
-              presenceData.details = document.querySelector("h1").textContent;
-              presenceData.state = `sur ${host}`;
-              break;
-            case "en":
-              presenceData.details = document.querySelector("h1").textContent;
-              presenceData.state = `on ${host}`;
-              break;
-          }
-        }
-      } else if (
-        document.getElementsByClassName("song-name")[0].textContent.length > 0
-      ) {
-        //Player is active
+      if (region && path[0] === region) {
+        presenceData.details =
+          document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
+          document.title;
+      } else if (station) {
+        // Check if the playing icon is shown
         if (
-          document.getElementsByClassName(
-            "playbutton-global playbutton-global-playing"
-          ).length > 0
+          document.querySelector<HTMLDivElement>(".playbutton-global-playing")
         ) {
-          //Radio is playing
-          if (
-            !browsingTimestamp ||
-            lastRadio !==
-              document.getElementsByClassName("song-name")[0].textContent
-          )
-            browsingTimestamp = Math.floor(Date.now() / 1000);
-          presenceData.startTimestamp = browsingTimestamp;
-          lastRadio =
-            document.getElementsByClassName("song-name")[0].textContent;
+          // Radio is playing / buffering
+          timestamp ||= Date.now();
 
+          presenceData.details = station;
+          presenceData.largeImageKey = (
+            document.querySelector<HTMLAnchorElement>(
+              "#player-station-logo-link"
+            ).children[0] as HTMLImageElement
+          ).src;
+          presenceData.smallImageText = strings.play;
           presenceData.smallImageKey = "play";
-          presenceData.smallImageText = (await strings).play;
-
-          presenceData.details =
-            document.getElementsByClassName("song-name")[0].textContent;
+          presenceData.startTimestamp = timestamp;
         } else {
-          //Radio is stopped
-          browsingTimestamp = 0;
+          // Radio is paused
+          timestamp = 0;
 
+          presenceData.details = station;
+          presenceData.largeImageKey = (
+            document.querySelector<HTMLAnchorElement>(
+              "#player-station-logo-link"
+            ).children[0] as HTMLImageElement
+          ).src;
+          presenceData.smallImageText = strings.pause;
           presenceData.smallImageKey = "pause";
-          presenceData.smallImageText = (await strings).pause;
-
-          presenceData.details =
-            document.getElementsByClassName("song-name")[0].textContent;
         }
-      } else {
-        //Player is inactive
-
-        presence.setActivity();
-        return;
       }
       break;
+    }
   }
 
   presence.setActivity(presenceData);
 });
+
+async function getStrings(lang: string) {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      search: "general.searching",
+      browsing: "general.browsing"
+    },
+    lang
+  );
+}

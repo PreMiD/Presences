@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
         presence.getSetting<boolean>("song"),
         presence.getSetting<boolean>("timestamp"),
         presence.getSetting<boolean>("cover"),
-        presence.getSetting<string>("lang")
+        presence.getSetting<string>("lang").catch(() => "en")
       ]),
     playing = Boolean(document.querySelector(".playControls__play.playing"));
 

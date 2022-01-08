@@ -1,10 +1,11 @@
 import "source-map-support/register";
 
+import { readFileSync } from "node:fs";
 import axios from "axios";
 import { blue, green, red, yellow } from "chalk";
-import { readFileSync } from "fs";
 import ParseJSON, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
+import { compare, diff } from "semver";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
     const versions = (
@@ -26,18 +27,39 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     validatedWithWarnings: 0,
     failedToValidate: 0
   },
-  isValidVersion = (oldVer: string, newVer: string): [boolean, string?] => {
+  versionBumpErrors = {
+    invalidVerNew: () => 'The version of a new presence must start at "1.0.0"',
+    versionNotBumped: (oldVersion: string, newVersion: string) =>
+      `The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`,
+    badVersionBump: (oldVersion: string, newVersion: string) =>
+      `The current version (${newVersion}) of the presence was incorrectly bumped. The latest published version is ${oldVersion}.`
+  },
+  isValidVersionBump = (newVer: string, oldVer?: string) => {
     if (!oldVer) {
-      if (newVer !== "1.0.0") return [false, "invalidVerNew"];
-      else return [true];
+      if (newVer !== "1.0.0") return "invalidVerNew";
+      else return true;
     } else {
-      const oldVerSplit = oldVer.split(".").map(Number),
-        newVerSplit = newVer.split(".").map(Number);
-      for (let i = 0; i < oldVerSplit.length; i++) {
-        if (newVerSplit[i] > oldVerSplit[i]) return [true];
-        if (newVerSplit[i] < oldVerSplit[i]) return [false];
+      const compared = compare(newVer, oldVer),
+        newVerSplit = newVer.split(".").map(Number),
+        oldVerSplit = oldVer.split(".").map(Number);
+      if (compared !== 1) return "versionNotBumped";
+      else {
+        switch (diff(newVer, oldVer)) {
+          case "major":
+            if (!newVer.endsWith(".0.0") || newVerSplit[0] - oldVerSplit[0] > 1)
+              return "badVersionBump";
+            else return true;
+          case "minor":
+            if (!newVer.endsWith(".0") || newVerSplit[1] - oldVerSplit[1] > 1)
+              return "badVersionBump";
+            else return true;
+          case "patch":
+            if (newVerSplit[2] - oldVerSplit[2] > 1) return "badVersionBump";
+            else return true;
+          default:
+            return true;
+        }
       }
-      return [false];
     }
   },
   validated = (service: string): void => {
@@ -50,8 +72,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     stats.validatedWithWarnings++;
   },
   failedToValidate = (service: string, errors: string[]): void => {
-    console.log(red(`✖ ${service}`));
-    console.log(`::group::${service}`);
+    console.log(`::group::${red(`✖ ${service}`)}`);
     console.log(errors.join("\n"));
     console.log("::endgroup::");
     stats.failedToValidate++;
@@ -73,9 +94,13 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 
     return `::${params.type} ${input.join(",")}::${params.message}`;
   },
-  changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
-  metaFiles = [
-    ...new Set(changedFiles.filter(f => f.endsWith("metadata.json")))
+  changedMetaFiles = [
+    ...new Set(
+      readFileSync("./file_changes.txt", "utf-8")
+        .trim()
+        .split("\n")
+        .filter(f => f.endsWith("metadata.json"))
+    )
   ];
 
 (async (): Promise<void> => {
@@ -84,9 +109,9 @@ const latestMetadataSchema = async (): Promise<string[]> => {
   const [latestSchema, latestSchemaVersion] = await latestMetadataSchema(),
     schema = (await axios.get(latestSchema)).data;
 
-  console.log(blue(`Beginning validation of ${metaFiles.length} presences...`));
+  console.log(blue(`Beginning validation of ${changedMetaFiles.length} presences...`));
 
-  for (const metaFile of metaFiles) {
+  for (const metaFile of changedMetaFiles) {
     const meta = loadMetadata(metaFile),
       folder = metaFile.split("/")[2];
 
@@ -120,7 +145,8 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       ).data.data,
       validLangs = langFiles.map(l => l.lang),
       oldVersion = presences[0]?.metadata.version,
-      invalidLangs: string[] = [];
+      invalidLangs: string[] = [],
+      versionCheck = isValidVersionBump(newVersion, oldVersion);
 
     Object.keys(meta.description).forEach(lang => {
       const index = validLangs.findIndex((l: string) => l === lang);
@@ -128,7 +154,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     });
 
     if (
-      isValidVersion(oldVersion, newVersion)[0] &&
+      versionCheck === true &&
       folder === meta.service &&
       !invalidLangs.length &&
       result.valid
@@ -146,31 +172,18 @@ const latestMetadataSchema = async (): Promise<string[]> => {
         );
       } else validated(service);
     } else {
-      const errors: string[] = [],
-        versionCheck = isValidVersion(oldVersion, newVersion);
+      const errors: string[] = [];
 
-      if (!versionCheck[0]) {
-        if (!versionCheck[1]) {
-          errors.push(
-            createAnnotation({
-              type: "error",
-              file: metaFile,
-              line: getLine("version"),
-              title: "instance.version",
-              message: `The current version (${newVersion}) of the presence has not been bumped. The latest published version is ${oldVersion}`
-            })
-          );
-        } else {
-          errors.push(
-            createAnnotation({
-              type: "error",
-              file: metaFile,
-              line: getLine("version"),
-              title: "instance.version",
-              message: 'The version of a new presence must start at "1.0.0"'
-            })
-          );
-        }
+      if (typeof versionCheck === "string") {
+        errors.push(
+          createAnnotation({
+            type: "error",
+            file: metaFile,
+            line: getLine("version"),
+            title: "instance.version",
+            message: versionBumpErrors[versionCheck](oldVersion, newVersion)
+          })
+        );
       }
 
       if (folder !== service) {

@@ -3,13 +3,17 @@ const presence = new Presence({
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "danbooru",
       startTimestamp: browsingTimestamp
     },
     [shortTitle] = document.title.split(/[|]/, 1),
-    path = document.location.pathname;
+    path = document.location.pathname,
+    [privacy, buttons] = await Promise.all([
+      presence.getSetting<boolean>("privacy"),
+      presence.getSetting<boolean>("buttons")
+    ]);
 
   if (path === "/posts") {
     presenceData.details = "Browsing posts";
@@ -20,9 +24,11 @@ presence.on("UpdateData", () => {
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "artwork";
     presenceData.smallImageText = "Viewing artworks";
-    presenceData.buttons = [
-      { label: "View Artwork", url: document.location.href }
-    ];
+    if (buttons) {
+      presenceData.buttons = [
+        { label: "View Artwork", url: document.location.href }
+      ];
+    }
   } else if (path.startsWith("/post_versions"))
     presenceData.details = "Searching for post versions";
   else if (path === "/comments") presenceData.details = "Reading comments";
@@ -42,9 +48,11 @@ presence.on("UpdateData", () => {
     presenceData.state = shortTitle;
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "Viewing a profile";
-    presenceData.buttons = [
-      { label: "View Artist", url: document.location.href }
-    ];
+    if (buttons) {
+      presenceData.buttons = [
+        { label: "View Artist", url: document.location.href }
+      ];
+    }
   } else if (path === "/users") {
     presenceData.details = "Looking up users";
     presenceData.smallImageKey = "user";
@@ -69,6 +77,9 @@ presence.on("UpdateData", () => {
   } else if (path === "/forum_posts")
     presenceData.details = "Browsing forum posts";
   else presenceData.details = "Browsing the site";
-
+  if (privacy) {
+    delete presenceData.state;
+    delete presenceData.buttons;
+  }
   presence.setActivity(presenceData);
 });

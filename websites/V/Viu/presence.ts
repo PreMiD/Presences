@@ -29,19 +29,12 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
   oldPath = document.location.pathname;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      details: (await strings).browse,
-      smallImageKey: "reading",
-      startTimestamp: browsingTimestamp
-    },
-    newLang: string = await presence
-      .getSetting<string>("lang")
-      .catch(() => "en"),
-    buttonsOn = await presence.getSetting<boolean>("buttons"),
-    searchQueryOn = await presence.getSetting<boolean>("searchQ"),
-    presenceLogo = await presence.getSetting<number>("logo");
-
-  presenceData.largeImageKey = ["viu_logo", "viu_logo_text"][presenceLogo];
+  const [newLang, buttonsOn, searchQueryOn, presenceLogo] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("buttons"),
+    presence.getSetting<boolean>("searchQ"),
+    presence.getSetting<number>("logo")
+  ]);
 
   if (oldPath !== document.location.pathname) {
     oldPath = document.location.pathname;
@@ -56,6 +49,13 @@ presence.on("UpdateData", async () => {
     oldLang = newLang;
     strings = await getStrings();
   }
+
+  const presenceData: PresenceData = {
+    details: strings.browse,
+    smallImageKey: "reading",
+    largeImageKey: ["viu_logo", "viu_logo_text"][presenceLogo],
+    startTimestamp: browsingTimestamp
+  };
 
   if (document.location.pathname.includes("/vod/")) {
     const video = document.querySelector("video"),
