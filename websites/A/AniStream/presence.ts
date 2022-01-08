@@ -105,7 +105,7 @@ if (!isNaN(duration)) {
     presenceData.details = "Betrachtet eine Serie:";
     presenceData.state = `${(document.querySelector("body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div.app-detail.flex-fill > div > div.col-md-9 > div > h1")as HTMLElement).textContent}`;
   
-  } if (page.startsWith("/profile/")) {
+  } else if (page.startsWith("/profile/")) {
     const elementavatar = document.getElementsByClassName("avatar")[0] as HTMLElement,
     image = elementavatar.style.backgroundImage,
     avatar = image.slice(5, -2);
