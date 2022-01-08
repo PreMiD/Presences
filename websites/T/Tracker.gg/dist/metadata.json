@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
-    "name": "OGMatrix#8818",
+    "name": "OGMatrix",
     "id": "657290880947978241"
   },
   "service": "Tracker.gg",
@@ -10,7 +10,7 @@
     "de": "Tracker Network bietet Spielern auf der ganzen Welt Statistiken, globale und regionale Bestenlisten und vieles mehr."
   },
   "url": ["tracker.gg", "fortnitetracker.com"],
-  "version": "1.0.1",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/YkjUiwX.png",
   "thumbnail": "https://i.imgur.com/sRio2Rr.png",
   "color": "#e2263c",

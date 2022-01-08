@@ -1,48 +1,45 @@
-const trackerPresence = new Presence({ clientId: "929349462365704222" }),
-  trackerBrowsing = Math.floor(Date.now() / 1000);
+const presence = new Presence({ clientId: "929349462365704222" }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-trackerPresence.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   const trackerPreData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: trackerBrowsing
+      startTimestamp: browsingTimestamp
     },
-    trackerPage = window.location.pathname,
+    { pathname } = window.location,
     botHost = document.location.hostname;
 
   if (botHost === "tracker.gg") {
-    if (trackerPage === "/") {
+    if (pathname === "/") {
       trackerPreData.details = "Viewing Page:";
       trackerPreData.state = "Homepage";
-    } else if (trackerPage === "/apps") {
+    } else if (pathname === "/apps") {
       trackerPreData.details = "Viewing Page:";
       trackerPreData.state = "Tracker Apps";
-    } else if (trackerPage === "/developers") {
+    } else if (pathname === "/developers") {
       trackerPreData.details = "Viewing Page:";
       trackerPreData.state = "Developers";
-    } else if (trackerPage === "/developers/apps/create") {
+    } else if (pathname === "/developers/apps/create") {
       trackerPreData.details = "Creating";
       trackerPreData.state = "Tracker Dev App";
-    } else if (trackerPage.includes("/developers/apps")) {
+    } else if (pathname.includes("/developers/apps/")) {
       try {
         const appName: string = document
           .querySelector(
             "#app > div.trn-wrapper > div.trn-container > div > main > div.apps > div.content-container > div > div > div > div > div.dashboard__analytics.card.bordered.responsive > header > div > div.left > div:nth-child(2) > div.title"
           )
           .textContent.replace("Dashboard", "");
-        trackerPreData.details = "Editing App:";
+        trackerPreData.details = "Editing App";
         trackerPreData.state = appName;
-        trackerPreData.smallImageKey = document
-          .querySelector(
-            "#app > div.trn-wrapper > div.trn-container > div > main > div.apps > div.content-container > div > div > div > div > div.dashboard__details.card.responsive > div > div:nth-child(1) > div > img"
-          )
-          .getAttribute("src")
-          .toString();
+        trackerPreData.smallImageKey = document.querySelector<HTMLImageElement>(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.apps > div.content-container > div > div > div > div > div.dashboard__details.card.responsive > div > div:nth-child(1) > div > img"
+        ).getAttribute("src");
         trackerPreData.smallImageText = appName;
-      } catch {
+      } catch (e) {
         trackerPreData.details = "Viewing:";
         trackerPreData.state = "Developer Apps";
       }
-    } else if (trackerPage.includes("/developers/docs")) {
+    } else if (pathname.includes("/developers/docs")) {
       try {
         const title: string = document.querySelector(
           "#app > div.trn-wrapper > div.trn-container > div > main > div.docs > div.content-container > div > div > h1"
@@ -63,27 +60,27 @@ trackerPresence.on("UpdateData", async () => {
         trackerPreData.details = "Viewing API";
         trackerPreData.state = game;
       }
-    } else if (trackerPage === "/overlays") {
+    } else if (pathname === "/overlays") {
       trackerPreData.details = "Viewing Page:";
       trackerPreData.state = "Overlays";
-    } else if (trackerPage === "/overlays/editor") {
+    } else if (pathname === "/overlays/editor") {
       trackerPreData.details = "Creating";
       trackerPreData.state = "Tracker Overlay";
-    } else if (trackerPage === "/premium") {
+    } else if (pathname === "/premium") {
       trackerPreData.details = "Viewing Page:";
       trackerPreData.state = "Premium";
-    } else if (trackerPage === "/partners") {
+    } else if (pathname === "/partners") {
       trackerPreData.details = "Viewing Page:";
       trackerPreData.state = "Partners";
-    } else if (trackerPage === "/shop") {
+    } else if (pathname === "/shop") {
       trackerPreData.details = "Viewing Page:";
       trackerPreData.state = "Shop";
-    } else if (trackerPage === "/valorant") {
+    } else if (pathname === "/valorant") {
       trackerPreData.details = "Viewing Valorant Page";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage.includes("/valorant/profile")) {
+    } else if (pathname.includes("/valorant/profile")) {
       const playerName: string = document.querySelector(
           "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__username"
         ).textContent,
@@ -100,27 +97,27 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageKey = image;
       trackerPreData.smallImageText = playerName;
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage.includes("/valorant/leaderboards")) {
-      if (trackerPage.includes("/valorant/leaderboards/ranked")) {
+    } else if (pathname.includes("/valorant/leaderboards")) {
+      if (pathname.includes("/valorant/leaderboards/ranked")) {
         trackerPreData.details = "Viewing:";
         trackerPreData.state = "Valorant Leaderboards Ranked";
         trackerPreData.smallImageKey = "logo";
         trackerPreData.smallImageText = "TRN";
         trackerPreData.largeImageKey = "valorant";
-      } else if (trackerPage.includes("/valorant/leaderboards/stats")) {
+      } else if (pathname.includes("/valorant/leaderboards/stats")) {
         trackerPreData.details = "Viewing:";
         trackerPreData.state = "Valorant Leaderboards Seasonal";
         trackerPreData.smallImageKey = "logo";
         trackerPreData.smallImageText = "TRN";
         trackerPreData.largeImageKey = "valorant";
       }
-    } else if (trackerPage.includes("/valorant/guides")) {
-      if (trackerPage.includes("/clips/submit")) {
+    } else if (pathname.includes("/valorant/guides")) {
+      if (pathname.includes("/clips/submit")) {
         trackerPreData.details = "Submitting Valorant Clip";
         trackerPreData.smallImageKey = "logo";
         trackerPreData.smallImageText = "TRN";
         trackerPreData.largeImageKey = "valorant";
-      } else if (trackerPage.includes("/clips")) {
+      } else if (pathname.includes("/clips")) {
         try {
           const stream: Element = document.querySelector(
             "#app > div.trn-wrapper > div.trn-container > div > div.container.guide-tile__modal > div.content.animated > div > div > iframe"
@@ -144,7 +141,7 @@ trackerPresence.on("UpdateData", async () => {
           trackerPreData.smallImageKey = "valorant";
           trackerPreData.smallImageText = "Valorant";
         }
-      } else if (trackerPage.includes("/dashboard")) {
+      } else if (pathname.includes("/dashboard")) {
         trackerPreData.details = "Viewing:";
         trackerPreData.state = "own Valorant Guides";
         trackerPreData.smallImageKey = "logo";
@@ -171,25 +168,25 @@ trackerPresence.on("UpdateData", async () => {
           trackerPreData.largeImageKey = "valorant";
         }
       }
-    } else if (trackerPage === "/valorant/lfg") {
+    } else if (pathname === "/valorant/lfg") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Valorant Looking for Group";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage === "/valorant/insights/agents") {
+    } else if (pathname === "/valorant/insights/agents") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Valorant Insights";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage === "/valorant/agents") {
+    } else if (pathname === "/valorant/agents") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Valorant Agents";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage.includes("/valorant/agents")) {
+    } else if (pathname.includes("/valorant/agents")) {
       const agentName: string = document.querySelector(
         "#app > div.trn-wrapper > div.trn-container > div > main > div:nth-child(2) > div.site-container.no-card-margin > div.agent-breadcrumbs > ol > li:nth-child(3) > a > span"
       ).textContent;
@@ -198,13 +195,13 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage === "/valorant/weapons") {
+    } else if (pathname === "/valorant/weapons") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Valorant Weapons";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage.includes("/valorant/weapons")) {
+    } else if (pathname.includes("/valorant/weapons")) {
       const weaponName: string = document.querySelector(
         "#app > div.trn-wrapper > div.trn-container > div > main > div:nth-child(2) > div.site-container.no-card-margin > ol > li:nth-child(4) > a > span"
       ).textContent;
@@ -213,13 +210,13 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage === "/valorant/maps") {
+    } else if (pathname === "/valorant/maps") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Valorant Maps";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage.includes("/valorant/maps")) {
+    } else if (pathname.includes("/valorant/maps")) {
       const mapName: string = document
         .querySelector(
           "#app > div.trn-wrapper > div.trn-container > div > main > div:nth-child(2) > div.no-card-margin.site-container.site-container--mobile-margin.site-container--background-fade.map-grid > div:nth-child(3) > div.map-info > h1"
@@ -230,31 +227,31 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage === "/valorant/cards") {
+    } else if (pathname === "/valorant/cards") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Valorant Cards";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage === "/valorant/buddies") {
+    } else if (pathname === "/valorant/buddies") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Valorant Buddies";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage === "/valorant/sprays") {
+    } else if (pathname === "/valorant/sprays") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Valorant Sprays";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "valorant";
-    } else if (trackerPage === "/hyper-scape") {
+    } else if (pathname === "/hyper-scape") {
       trackerPreData.details = "Viewing Game:";
       trackerPreData.state = "Hyper Scape";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "hyperscape";
-    } else if (trackerPage.includes("/hyper-scape/profile")) {
+    } else if (pathname.includes("/hyper-scape/profile")) {
       const playerName: string = document.querySelector(
           "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span"
         ).textContent,
@@ -269,26 +266,26 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageKey = image;
       trackerPreData.smallImageText = playerName;
       trackerPreData.largeImageKey = "hyperscape";
-    } else if (trackerPage.includes("/hyper-scape/leaderboards/")) {
-      if (trackerPage.includes("/stats/")) {
+    } else if (pathname.includes("/hyper-scape/leaderboards/")) {
+      if (pathname.includes("/stats/")) {
         trackerPreData.details = "Viewing:";
         trackerPreData.state = "HyperScape Leaderboards Lifetime";
         trackerPreData.smallImageKey = "logo";
         trackerPreData.smallImageText = "TRN";
         trackerPreData.largeImageKey = "hyperscape";
-      } else if (trackerPage.includes("/career-bests/")) {
+      } else if (pathname.includes("/career-bests/")) {
         trackerPreData.details = "Viewing:";
         trackerPreData.state = "HyperScape Leaderboards Career Bests";
         trackerPreData.smallImageKey = "logo";
         trackerPreData.smallImageText = "TRN";
         trackerPreData.largeImageKey = "hyperscape";
-      } else if (trackerPage.includes("/playlists/")) {
+      } else if (pathname.includes("/playlists/")) {
         trackerPreData.details = "Viewing:";
         trackerPreData.state = "HyperScape Leaderboards Playlists";
         trackerPreData.smallImageKey = "logo";
         trackerPreData.smallImageText = "TRN";
         trackerPreData.largeImageKey = "hyperscape";
-      } else if (trackerPage.includes("/weapons/")) {
+      } else if (pathname.includes("/weapons/")) {
         trackerPreData.details = "Viewing:";
         trackerPreData.state = "HyperScape Leaderboards Weapons";
         trackerPreData.smallImageKey = "logo";
@@ -297,12 +294,12 @@ trackerPresence.on("UpdateData", async () => {
       }
     }
   } else if (botHost === "fortnitetracker.com") {
-    if (trackerPage === "/") {
+    if (pathname === "/") {
       trackerPreData.details = "Viewing Fortnite Page";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage.includes("/profile/all/")) {
+    } else if (pathname.includes("/profile/all/")) {
       const playerName: string = document.querySelector(
           "#profile > div.trn-card.trn-profile-header > div > h1 > span"
         ).textContent,
@@ -317,63 +314,63 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageKey = image;
       trackerPreData.smallImageText = playerName;
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage === "/event-lfp") {
+    } else if (pathname === "/event-lfp") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Tournament Looking for Player";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage === "/events") {
+    } else if (pathname === "/events") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Events";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage === "/events/powerrankings") {
+    } else if (pathname === "/events/powerrankings") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Power Ranking";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage === "/arena/leaderboards") {
+    } else if (pathname === "/arena/leaderboards") {
       trackerPreData.details = "Viewing Leaderboard:";
       trackerPreData.state = "Hype";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage === "/events/earnings") {
+    } else if (pathname === "/events/earnings") {
       trackerPreData.details = "Viewing Leaderboard:";
       trackerPreData.state = "Earnings";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage === "/bests/win-streaks") {
+    } else if (pathname === "/bests/win-streaks") {
       trackerPreData.details = "Viewing Leaderboard:";
       trackerPreData.state = "Win Streak";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage.includes("/bests/high-kills/")) {
+    } else if (pathname.includes("/bests/high-kills/")) {
       trackerPreData.details = "Viewing Leaderboard:";
       trackerPreData.state = "Single Match Kills";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage.includes("/leaderboards/")) {
-      if (trackerPage.includes("/TRNRating")) {
+    } else if (pathname.includes("/leaderboards/")) {
+      if (pathname.includes("/TRNRating")) {
         trackerPreData.details = "Viewing Leaderboard:";
         trackerPreData.state = "Tracker Network Rating";
         trackerPreData.smallImageKey = "logo";
         trackerPreData.smallImageText = "TRN";
         trackerPreData.largeImageKey = "fortnite";
       }
-    } else if (trackerPage === "/challenges") {
+    } else if (pathname === "/challenges") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Challanges";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage.includes("/challenges/")) {
+    } else if (pathname.includes("/challenges/")) {
       const title: string = document.querySelector(
         "#app > div > div.ftr-challenges > div:nth-child(1) > div.trn-card__header > h3"
       ).textContent;
@@ -382,7 +379,7 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
-    } else if (trackerPage === "/creative") {
+    } else if (pathname === "/creative") {
       trackerPreData.details = "Viewing:";
       trackerPreData.state = "Creative Maps";
       trackerPreData.smallImageKey = "logo";
@@ -392,7 +389,7 @@ trackerPresence.on("UpdateData", async () => {
   }
 
   if (
-    !trackerPresence.getSetting("buttons") ||
+    !presence.getSetting("buttons") ||
     trackerPreData.details === "Editing App:"
   )
     delete trackerPreData.buttons;
@@ -405,6 +402,6 @@ trackerPresence.on("UpdateData", async () => {
     ];
   }
 
-  if (trackerPreData.details) trackerPresence.setActivity(trackerPreData);
-  else trackerPresence.setActivity();
+  if (trackerPreData.details) presence.setActivity(trackerPreData);
+  else presence.setActivity();
 });
