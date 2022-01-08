@@ -64,10 +64,8 @@ presence.on("UpdateData", async () => {
     }`;
     presenceData.state =
       `${
-        
-          document.querySelector(
-            "body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div.app-detail.flex-fill > div.detail-content > div.detail-text.flex-fill > div.caption > div.caption-content > h3"
-          
+        document.querySelector(
+          "body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div.app-detail.flex-fill > div.detail-content > div.detail-text.flex-fill > div.caption > div.caption-content > h3"
         ).textContent
       }` +
       " - " +
@@ -232,16 +230,12 @@ presence.on("UpdateData", async () => {
         "body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div > div.flex-fill > div > div.text-24.text-white.font-weight-bold"
       ).textContent
     }`;
-  } else if (page === "/settings") {
-    presenceData.details = pages[page];
-  } else if (page === "/notifications") {
-    presenceData.details = pages[page];
-  } else if (page === "/login") {
-    presenceData.details = pages[page];
-  } else if (page === "/register") {
-    presenceData.details = pages[page];
-  } else if (page === "/discovery") {
-    presenceData.details = pages[page];
+  } else if (page === "/settings") presenceData.details = pages[page];
+  else if (page === "/notifications") presenceData.details = pages[page];
+  else if (page === "/login") presenceData.details = pages[page];
+  else if (page === "/register") presenceData.details = pages[page];
+  else if (page === "/discovery") presenceData.details = pages[page];
+  {
   }
 
   presence.setActivity(presenceData);
