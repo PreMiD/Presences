@@ -348,6 +348,10 @@ function handleOfficialWebsite(): void {
       presenceData.state = "Reading the latest posts";
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.read;
       break;
+    case "/clients/":
+      presenceData.state = "Checking clients";
+      presenceData.smallImageKey = PRESENCE_ART_ASSETS.search;
+      break;
     case "/downloads/":
       presenceData.state = "On downloads";
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.download;
