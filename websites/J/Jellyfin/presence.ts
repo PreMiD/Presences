@@ -606,6 +606,31 @@ async function handleItemDetails(): Promise<void> {
 }
 
 /**
+ * sleep - Suspend execution of code for an interval, see <https://manpage.me/?q=sleep>
+ *
+ * @param ms Time in milliseconds
+ */
+function sleep(ms: number): Promise<void> {
+  return new Promise(res => {
+    setTimeout(res, ms);
+  });
+}
+
+/**
+ * loggedIn - Refreshes the ApiClient object
+ */
+async function loggedIn(): Promise<void> {
+  let apiClient: ApiClient;
+
+  do {
+    await sleep(125);
+    apiClient = await presence.getPageletiable<ApiClient>("ApiClient");
+  } while (!apiClient._serverInfo.AccessToken);
+
+  ApiClient = apiClient;
+}
+
+/**
  * handleWebClient - handle the presence while the user is in the web client
  */
 async function handleWebClient(): Promise<void> {
