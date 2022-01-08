@@ -240,10 +240,6 @@ trackerPresence.on("UpdateData", async () => {
     ];
   }
 
-  if (trackerPreData.details === null) {
-    trackerPresence.setTrayTitle();
-    trackerPresence.setActivity();
-  } else {
-    trackerPresence.setActivity(trackerPreData);
-  }
+  if (trackerPreData.details) trackerPresence.setActivity(trackerPreData);
+  else trackerPresence.setActivity();
 });
