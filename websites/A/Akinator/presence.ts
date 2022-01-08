@@ -1,32 +1,25 @@
-var presence = new Presence({
-  clientId: "631543282601558046"
-});
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "631543282601558046"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
-    largeImageKey: "akinator"
+  const presenceData: PresenceData = {
+    largeImageKey: "akinator",
+    startTimestamp: browsingTimestamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
-
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/")
     presenceData.details = "Starting Akinator";
-  } else if (document.location.pathname == "/theme-selection") {
+  else if (document.location.pathname === "/theme-selection")
     presenceData.details = "Selecting Theme";
-  } else if (document.location.pathname == "/game") {
-    const current = document.getElementsByClassName("bubble-body")[0]
-      .textContent;
+  else if (document.location.pathname === "/game") {
     const hover = document.querySelectorAll(":hover")[12].textContent;
-    presenceData.details = `Q: ${current}`;
-    presenceData.state = `Selecting: ${
-      hover != undefined ? hover : "Still Thinking"
+    presenceData.details = `Q: ${
+      document.getElementsByClassName("bubble-body")[0].textContent
     }`;
+    presenceData.state = `Selecting: ${hover ? hover : "Still Thinking"}`;
   }
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

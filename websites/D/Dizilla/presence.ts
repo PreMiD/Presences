@@ -6,6 +6,7 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   }),
   pages: { [k: string]: string } = {
+    "/": "Ana Sayfa",
     "/giris-yap": "Giriş Yap",
     "/kayit-ol": "Kayıt Ol",
     "/favorilerim": "Favorilerim",
@@ -23,27 +24,16 @@ const presence = new Presence({
     "/iletisim": "İletişim"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+interface IframeData {
+  duration: number;
+  currentTime: number;
+  paused: boolean;
 }
 
-let video: { duration: number; currentTime: number; paused: boolean };
-presence.on(
-  "iFrameData",
-  (data: { duration: number; currentTime: number; paused: boolean }) => {
-    video = data;
-  }
-);
+let video: IframeData;
+presence.on("iFrameData", (data: IframeData) => {
+  video = data;
+});
 
 presence.on("UpdateData", async () => {
   const path: string = document.location.pathname,
@@ -53,102 +43,87 @@ presence.on("UpdateData", async () => {
     episode: HTMLSpanElement = document.querySelector(
       "div.content > div > div.top-sticky-content span.text-white.text-small"
     ),
-    object: PresenceData = {
-      largeImageKey: "dz-logo"
+    presenceData: PresenceData = {
+      largeImageKey: "dz-logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
     };
 
   if (path.startsWith("/dizi/")) {
-    const showTitle = document.querySelector(
-      "div.content > div > div.top-sticky-content div > h1 > a"
-    );
+    presenceData.details = "Bir diziye göz atıyor:";
+    presenceData.state =
+      document.querySelector(
+        "div.content > div > div.top-sticky-content div > h1 > a"
+      )?.textContent || "Bilinmeyen Dizi";
 
-    object.details = "Bir diziye göz atıyor:";
-    object.state = showTitle?.textContent || "Bilinmeyen Dizi";
-    object.startTimestamp = Date.now();
-
-    presence.setActivity(object);
+    presence.setActivity(presenceData);
   } else if (path.startsWith("/oyuncular/")) {
-    const actorName = document.querySelector(
-      "div.content > div > div.top-sticky-content div > span"
-    );
+    presenceData.details = "Bir oyuncuya göz atıyor:";
+    presenceData.state =
+      document.querySelector(
+        "div.content > div > div.top-sticky-content div > span"
+      )?.textContent || "Bilinmeyen Oyuncu";
 
-    object.details = "Bir oyuncuya göz atıyor:";
-    object.state = actorName?.textContent || "Bilinmeyen Oyuncu";
-    object.startTimestamp = Date.now();
-
-    presence.setActivity(object);
+    presence.setActivity(presenceData);
   } else if (path.startsWith("/dizi-turu/")) {
-    const genre = document.querySelector(
-      "div.content > div > div.top-sticky-content div > h1"
-    );
+    presenceData.details = "Bir türe göz atıyor:";
+    presenceData.state =
+      document.querySelector(
+        "div.content > div > div.top-sticky-content div > h1"
+      )?.textContent || "Bilinmeyen Tür";
 
-    object.details = "Bir türe göz atıyor:";
-    object.state = genre?.textContent || "Bilinmeyen Tür";
-    object.startTimestamp = Date.now();
-
-    presence.setActivity(object);
+    presence.setActivity(presenceData);
   } else if (path.startsWith("/kanal/")) {
-    const title: string = document.title.slice(
-      0,
-      document.title.indexOf("arşivleri")
-    );
+    presenceData.details = "Bir kanala göz atıyor:";
+    presenceData.state =
+      document.title.slice(0, document.title.indexOf("arşivleri")) ||
+      "Bilinmeyen Kanal";
 
-    object.details = "Bir kanala göz atıyor:";
-    object.state = title || "Bilinmeyen Kanal";
-    object.startTimestamp = Date.now();
-
-    presence.setActivity(object);
+    presence.setActivity(presenceData);
   } else if (path.startsWith("/arsiv/")) {
-    const url: URL = new URL(document.location.href),
-      query = url.searchParams.get("q");
-
-    object.startTimestamp = Date.now();
+    const query = new URL(document.location.href).searchParams.get("q");
 
     if (query) {
-      object.details = "Bir şey arıyor:";
-      object.state = query[0].toUpperCase() + query.slice(1).toLowerCase();
-      object.smallImageKey = "search";
+      presenceData.details = "Bir şey arıyor:";
+      presenceData.state =
+        query[0].toUpperCase() + query.slice(1).toLowerCase();
+      presenceData.smallImageKey = "search";
     } else {
-      object.details = "Bir sayfaya göz atıyor:";
-      object.state = "Arşiv";
+      presenceData.details = "Bir sayfaya göz atıyor:";
+      presenceData.state = "Arşiv";
     }
 
-    presence.setActivity(object);
+    presence.setActivity(presenceData);
   } else if (pages[path] || pages[path.slice(0, -1)]) {
-    object.details = "Bir sayfaya göz atıyor:";
-    object.state =
+    presenceData.details = "Bir sayfaya göz atıyor:";
+    presenceData.state =
       pages[path] || pages[path.slice(0, -1)] || "Bilinmeyen Sayfa";
-    object.startTimestamp = Date.now();
 
-    presence.setActivity(object);
+    presence.setActivity(presenceData);
   } else if (
     !isNaN(video?.duration) &&
-    showName?.innerText &&
+    showName?.textContent &&
     episode?.textContent
   ) {
-    const timestamps = getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
       Math.floor(video?.currentTime),
       Math.floor(video?.duration)
     );
 
-    object.details = showName?.innerText || "Bilinmeyen Dizi";
-    object.state = episode?.textContent || "Bilinmeyen Bölüm";
-    object.smallImageKey = video?.paused ? "pause" : "play";
-    object.smallImageText = video?.paused
+    presenceData.details = showName?.textContent || "Bilinmeyen Dizi";
+    presenceData.state = episode?.textContent || "Bilinmeyen Bölüm";
+
+    presenceData.smallImageKey = video?.paused ? "pause" : "play";
+    presenceData.smallImageText = video?.paused
       ? (await strings).pause
       : (await strings).play;
 
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      object.startTimestamp = timestamps[0];
-      object.endTimestamp = timestamps[1];
-    }
+    if (!isNaN(endTimestamp)) presenceData.endTimestamp = endTimestamp;
 
     if (video.paused) {
-      delete object.startTimestamp;
-      delete object.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setTrayTitle(showName?.innerText);
-    presence.setActivity(object);
+    presence.setActivity(presenceData);
   } else presence.setActivity();
 });

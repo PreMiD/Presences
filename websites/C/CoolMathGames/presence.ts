@@ -7,16 +7,16 @@ enum PageType {
   Category = 1
 }
 
-const capitalize = (text: Array<string>): string => {
+const capitalize = (text: string[]): string => {
     return text
-      .map((str) => {
+      .map(str => {
         return str.charAt(0).toUpperCase() + str.slice(1);
       })
       .join(" ");
   },
-  parse = (path: string): Array<string> => {
+  parse = (path: string): string[] => {
     path = path.replace("/", "");
-    const split: Array<string> = path.split("-");
+    const split: string[] = path.split("-");
 
     return [split[0], capitalize(split.slice(1))];
   };
@@ -29,51 +29,40 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  let details = undefined,
-    state = undefined;
+  let details, state;
 
-  const startTimestamp = elapsed,
-    path = window.location.pathname;
+  const path = window.location.pathname;
 
-  if (path === "/") {
-    details = "Browsing...";
-  } else if (path.match("/user") || path.match("/signup")) {
-    if (path.match("signup")) {
-      details = "Signing up...";
-    } else {
-      details = "Logging in...";
-    }
-  } else if (path.match("/terms-use")) {
-    details = "Viewing Terms of Use";
-  } else if (path.match("/trivia")) {
+  if (path === "/") details = "Browsing...";
+  else if (path.match("/user") || path.match("/signup")) {
+    if (path.match("signup")) details = "Signing up...";
+    else details = "Logging in...";
+  } else if (path.match("/terms-use")) details = "Viewing Terms of Use";
+  else if (path.match("/trivia")) {
     details = "Viewing Trivia";
 
     const title = document.querySelector("#start-the-quiz-title");
-    if (title) {
-      state = title.textContent;
-    }
+    if (title) state = title.textContent;
   } else {
-    const playlists = document.querySelector(".playlists-queue-wrapper"),
-      breadcrumb = document.querySelector(".pane-content > .breadcrumb > ol"),
-      breadcrumb_last = document.querySelector(
+    const breadcrumb = document.querySelector(
+        ".pane-content > .breadcrumb > ol"
+      ),
+      breadcrumbLast = document.querySelector(
         ".pane-content > .breadcrumb > ol > li:last-child > span"
       ),
       difficulty = document.querySelector("a.active");
-    if (breadcrumb && breadcrumb_last && difficulty) {
+    if (breadcrumb && breadcrumbLast && difficulty) {
       details = "Viewing Jigsaw Puzzle";
-      state = `${breadcrumb_last.textContent} (${difficulty.textContent})`;
-    } else if (breadcrumb && breadcrumb_last) {
+      state = `${breadcrumbLast.textContent} (${difficulty.textContent})`;
+    } else if (breadcrumb && breadcrumbLast) {
       details = "Viewing Jigsaw Puzzles";
-      state = breadcrumb_last.textContent;
-    } else if (playlists) {
+      state = breadcrumbLast.textContent;
+    } else if (document.querySelector(".playlists-queue-wrapper")) {
       details = "Viewing Category";
       state = "Jigsaw Puzzles";
     } else {
-      const parsedData = parse(path),
-        type = parseInt(parsedData[0]),
-        name = parsedData[1];
-
-      switch (type) {
+      const [parsedInt, parsedName] = parse(path);
+      switch (parseInt(parsedInt)) {
         case PageType.Category:
           details = "Viewing Category";
           break;
@@ -85,16 +74,14 @@ presence.on("UpdateData", async () => {
         default:
           break;
       }
-      state = name;
+      state = parsedName;
     }
   }
 
-  const data: PresenceData = {
-    details: details,
-    state: state,
+  presence.setActivity({
+    details,
+    state,
     largeImageKey: "coolmathgames",
-    startTimestamp: startTimestamp
-  };
-
-  presence.setActivity(data);
+    startTimestamp: elapsed
+  });
 });

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Cascade",
     "id": "442612628104151040"
@@ -7,13 +7,15 @@
   "service": "Wallhaven",
   "description": {
     "en": "Your source for the best high quality wallpapers on the Net!",
-    "ga_IE": "Do foinse do na páipéir balla ardchaighdeáin is fearr ar an nGlan!"
+    "ga_IE": "Do foinse do na páipéir balla ardchaighdeáin is fearr ar an nGlan!",
+    "nl": "Uw bron voor de beste wallpapers van hoge kwaliteit op het net!"
   },
   "url": "wallhaven.cc",
-  "version": "1.0.2",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/SsIZl80.png",
   "thumbnail": "https://i.imgur.com/QV6vAk6.jpg",
   "color": "#0E6288",
+  "category": "other",
   "tags": [
     "anime",
     "general",
@@ -29,6 +31,5 @@
       "icon": "fas fa-external-link-alt",
       "value": true
     }
-  ],
-  "category": "other"
+  ]
 }

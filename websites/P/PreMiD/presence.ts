@@ -1,49 +1,14 @@
 const presence = new Presence({
     clientId: "792735245488488458"
   }),
-  timestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 // checkmate javascript
 function pathIncludes(string: string): boolean {
   return document.location.pathname.toLowerCase().includes(string);
 }
 
-interface LangStrings {
-  browsing: string;
-  reading: string;
-  viewPage: string;
-  viewUser: string;
-  viewPresence: string;
-  docs: string;
-  home: string;
-  contributors: string;
-  downloads: string;
-  store: string;
-  cookies: string;
-  privacy: string;
-  terms: string;
-  about: string;
-  sysreq: string;
-  install: string;
-  installFor: string;
-  yikes: string;
-  start: string;
-  api: string;
-  apiPage: string;
-  presenceDev: string;
-  presenceGuide: string;
-  partners: string;
-  viewing: string;
-  incident: string;
-  uptime: string;
-  class: string;
-  slideshow: string;
-  iframe: string;
-  metadata: string;
-  ts: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       browsing: "general.browsing",
@@ -79,36 +44,33 @@ async function getStrings(): Promise<LangStrings> {
       metadata: "premid.pageMetadata",
       ts: "premid.pageTs"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   host: string;
 
 presence.on("UpdateData", async () => {
-  //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang"),
-    time = await presence.getSetting("time");
-  if (!oldLang) {
+  const presenceData: PresenceData = {
+      largeImageKey: "lg"
+    },
+    newLang = await presence.getSetting<string>("lang"),
+    time = await presence.getSetting<boolean>("time");
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
-  const presenceData: PresenceData = {
-    largeImageKey: "lg"
-  };
-
-  if (time) presenceData.startTimestamp = timestamp;
+  if (time) presenceData.startTimestamp = browsingTimestamp;
 
   host = document.location.hostname;
 
   if (host === "premid.app" || host === "beta.premid.app") {
     host.includes("beta")
-      ? (presenceData.smallImageText = "BETA | " + (await strings).browsing)
+      ? (presenceData.smallImageText = `BETA | ${(await strings).browsing}`)
       : (presenceData.smallImageText = (await strings).browsing);
     presenceData.smallImageKey = "search";
 
@@ -166,8 +128,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = (await strings).home;
     }
   } else if (host === "docs.premid.app") {
-    presenceData.details =
-      (await strings).docs + " | " + (await strings).viewPage;
+    presenceData.details = `${(await strings).docs} | ${
+      (await strings).viewPage
+    }`;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).reading;
 
@@ -249,16 +212,15 @@ presence.on("UpdateData", async () => {
         presenceData.state = (await strings).home;
     }
   } else if (host === "status.premid.app") {
-    presenceData.details = "Status page | " + (await strings).viewing;
+    presenceData.details = `Status page | ${(await strings).viewing}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = (await strings).browsing;
 
     switch (true) {
       case pathIncludes("/incidents"):
-        presenceData.details =
-          (await strings).viewing +
-          " " +
-          document.title.replace("PreMiD Status - ", "");
+        presenceData.details = `${
+          (await strings).viewing
+        } ${document.title.replace("PreMiD Status - ", "")}`;
         break;
       case pathIncludes("/history"):
         presenceData.state = (await strings).incident;

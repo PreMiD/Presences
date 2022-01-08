@@ -58,43 +58,55 @@ async function getStrings() {
       watchVideoButton: "general.buttonWatchVideo",
       viewChannelButton: "general.buttonViewChannel"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang"),
-    privacy = await presence.getSetting("privacy"),
-    time = await presence.getSetting("time"),
-    vidDetail = await presence.getSetting("vidDetail"),
-    vidState = await presence.getSetting("vidState"),
-    buttons = await presence.getSetting("buttons");
-  if (!oldLang) {
+  const [
+    newLang,
+    privacy,
+    time,
+    vidDetail,
+    vidState,
+    channelPic,
+    logo,
+    buttons
+  ] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("time"),
+    presence.getSetting<string>("vidDetail"),
+    presence.getSetting<string>("vidState"),
+    presence.getSetting<boolean>("channelPic"),
+    presence.getSetting<number>("logo"),
+    presence.getSetting<boolean>("buttons")
+  ]);
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   //* If there is a vid playing
   const video: HTMLVideoElement = document.querySelector(".video-stream");
-  if (video !== null && !isNaN(video.duration)) {
+  if (!isNaN(video?.duration)) {
     let oldYouTube: boolean = null,
       YouTubeTV: boolean = null,
       YouTubeEmbed: boolean = null,
-      unlistedVideo = false,
-      title: HTMLElement;
+      title: HTMLElement,
+      pfp: string;
 
     //* Checking if user has old YT layout.
-    document.querySelector(".watch-title") !== null
+    document.querySelector(".watch-title")
       ? (oldYouTube = true)
       : (oldYouTube = false);
 
-    document.querySelector(".player-video-title") !== null
+    document.querySelector(".player-video-title")
       ? (YouTubeTV = true)
       : (YouTubeTV = false);
 
@@ -135,10 +147,7 @@ presence.on("UpdateData", async () => {
       )),
       (uploader2 = document.querySelector("#owner-name a"));
 
-    if (
-      uploaderMiniPlayer != null &&
-      uploaderMiniPlayer.textContent == "YouTube"
-    ) {
+    if (uploaderMiniPlayer && uploaderMiniPlayer.textContent === "YouTube") {
       edited = true;
       uploaderMiniPlayer.setAttribute(
         "premid-value",
@@ -147,17 +156,17 @@ presence.on("UpdateData", async () => {
     }
 
     const uploader =
-        uploaderMiniPlayer !== null && uploaderMiniPlayer.textContent.length > 0
+        uploaderMiniPlayer && uploaderMiniPlayer.textContent.length > 0
           ? uploaderMiniPlayer
-          : uploader2 !== null && uploader2.textContent.length > 0
+          : uploader2 && uploader2.textContent.length > 0
           ? uploader2
           : document.querySelector(
               "#upload-info yt-formatted-string.ytd-channel-name a"
-            ) !== null
+            )
           ? document.querySelector(
               "#upload-info yt-formatted-string.ytd-channel-name a"
             )
-          : uploaderEmbed !== null &&
+          : uploaderEmbed &&
             YouTubeEmbed &&
             uploaderEmbed.textContent.length > 0
           ? uploaderEmbed
@@ -165,9 +174,7 @@ presence.on("UpdateData", async () => {
               uploaderTV.textContent.replace(/\s+/g, ""),
               pattern
             )),
-      timestamps = presence.getTimestampsfromMedia(video),
-      live = Boolean(document.querySelector(".ytp-live")),
-      ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
+      live = Boolean(document.querySelector(".ytp-live"));
     let isPlaylistLoop = false;
 
     if (
@@ -175,16 +182,17 @@ presence.on("UpdateData", async () => {
       document
         .querySelector("#playlist-actions .yt-icon-button#button")
         .getAttribute("aria-pressed")
-    )
+    ) {
       isPlaylistLoop =
         document
           .querySelector("#playlist-actions .yt-icon-button#button")
           .getAttribute("aria-pressed") === "true";
+    }
 
     let finalUploader =
-        edited == true
+        edited === true
           ? uploaderMiniPlayer.getAttribute("premid-value")
-          : uploaderTV !== null
+          : uploaderTV
           ? typeof uploaderTV === "string"
             ? uploaderTV
             : uploaderTV.textContent
@@ -192,77 +200,86 @@ presence.on("UpdateData", async () => {
           ? uploader
           : uploader.textContent,
       finalTitle =
-        title == null || title.textContent.replace(/\s+/g, "") == ""
+        !title || title.textContent.replace(/\s+/g, "") === ""
           ? document.querySelector("div.ytp-title-text > a").textContent
           : title.textContent;
 
     //* YouTube Movies
     if (
-      title == null &&
+      !title &&
       document.querySelector(
         ".title.style-scope.ytd-video-primary-info-renderer"
-      ) !== null
+      )
     ) {
       finalTitle = document.querySelector(
         ".title.style-scope.ytd-video-primary-info-renderer"
       ).textContent;
     }
     if (
-      uploader == null &&
-      document.querySelector(".style-scope.ytd-channel-name > a") !== null
+      !uploader &&
+      document.querySelector(".style-scope.ytd-channel-name > a")
     ) {
       finalUploader = document.querySelector(
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
-    const metaVideoElement = document.querySelector<HTMLLinkElement>(
-      "div[itemtype='http://schema.org/VideoObject'] > link"
-    );
-    if (
-      metaVideoElement &&
-      metaVideoElement.href ==
-        `https://www.youtube.com/watch?v=${document
-          .querySelector("#page-manager > ytd-watch-flexy")
-          .getAttribute("video-id")}`
-    ) {
-      const unlistedVideoElement = document.querySelector<HTMLMetaElement>(
-        "div[itemtype='http://schema.org/VideoObject'] > meta[itemprop='unlisted']"
-      );
-      unlistedVideo =
-        unlistedVideoElement && unlistedVideoElement.content === "True";
+    if (logo === 2) {
+      pfp = document
+        .querySelector<HTMLImageElement>(
+          "#avatar.ytd-video-owner-renderer > img"
+        )
+        .src.replace("=s88", "=s512");
     }
-    const presenceData: PresenceData = {
-      details: vidDetail
-        .replace("%title%", finalTitle)
-        .replace("%uploader%", finalUploader),
-      state: vidState
-        .replace("%title%", finalTitle)
-        .replace("%uploader%", finalUploader),
-      largeImageKey: "yt_lg",
-      smallImageKey: video.paused
-        ? "pause"
-        : video.loop
-        ? "repeat-one"
-        : isPlaylistLoop
-        ? "repeat"
-        : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : video.loop
-        ? "On loop"
-        : isPlaylistLoop
-        ? "Playlist on loop"
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+    const unlistedPathElement = document.querySelector<SVGPathElement>(
+        "g#privacy_unlisted > path"
+      ),
+      unlistedBadgeElement = document.querySelector<SVGPathElement>(
+        "h1.title+ytd-badge-supported-renderer path"
+      ),
+      unlistedVideo =
+        unlistedPathElement &&
+        unlistedBadgeElement &&
+        unlistedPathElement.getAttribute("d") ===
+          unlistedBadgeElement.getAttribute("d"),
+      videoId = document
+        .querySelector("#page-manager > ytd-watch-flexy")
+        .getAttribute("video-id"),
+      presenceData: PresenceData = {
+        details: vidDetail
+          .replace("%title%", finalTitle)
+          .replace("%uploader%", finalUploader),
+        state: vidState
+          .replace("%title%", finalTitle)
+          .replace("%uploader%", finalUploader),
+        largeImageKey:
+          unlistedVideo || logo === 0 || pfp === ""
+            ? "yt_lg"
+            : logo === 1
+            ? `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`
+            : pfp,
+        smallImageKey: video.paused
+          ? "pause"
+          : video.loop
+          ? "repeat-one"
+          : isPlaylistLoop
+          ? "repeat"
+          : "play",
+        smallImageText: video.paused
+          ? strings.pause
+          : video.loop
+          ? "On loop"
+          : isPlaylistLoop
+          ? "Playlist on loop"
+          : strings.play,
+        endTimestamp: presence.getTimestampsfromMedia(video)[1]
+      };
 
     if (vidState.includes("{0}")) delete presenceData.state;
 
     presence.setTrayTitle(
       video.paused
         ? ""
-        : finalTitle == null
+        : !finalTitle
         ? document.querySelector(
             ".title.style-scope.ytd-video-primary-info-renderer"
           ).textContent
@@ -276,41 +293,38 @@ presence.on("UpdateData", async () => {
 
       if (live) {
         presenceData.smallImageKey = "live";
-        presenceData.smallImageText = (await strings).live;
+        presenceData.smallImageText = strings.live;
       }
     }
 
     //* Update title to indicate when an ad is being played
-    if (ads) {
-      presenceData.details = (await strings).ad;
+    if (document.querySelector(".ytp-ad-player-overlay")) {
+      presenceData.details = strings.ad;
       delete presenceData.state;
     } else if (privacy) {
-      if (live) {
-        presenceData.details = (await strings).watchLive;
-      } else {
-        presenceData.details = (await strings).watchVid;
-      }
+      if (live) presenceData.details = strings.watchLive;
+      else presenceData.details = strings.watchVid;
+
       delete presenceData.state;
+      presenceData.largeImageKey = "yt_lg";
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
       if (!unlistedVideo) {
         presenceData.buttons = [
           {
-            label: live
-              ? (await strings).watchStreamButton
-              : (await strings).watchVideoButton,
+            label: live ? strings.watchStreamButton : strings.watchVideoButton,
             url: document.URL.includes("/watch?v=")
               ? document.URL.split("&")[0]
-              : `https://www.youtube.com/watch?v=${document
-                  .querySelector("#page-manager > ytd-watch-flexy")
-                  .getAttribute("video-id")}`
+              : `https://www.youtube.com/watch?v=${videoId}`
           },
           {
-            label: (await strings).viewChannelButton,
-            url: (document.querySelector(
-              "#top-row > ytd-video-owner-renderer > a"
-            ) as HTMLLinkElement).href
+            label: strings.viewChannelButton,
+            url: (
+              document.querySelector(
+                "#top-row > ytd-video-owner-renderer > a"
+              ) as HTMLLinkElement
+            ).href
           }
         ];
       }
@@ -320,15 +334,11 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (presenceData.details == null) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else {
-      presence.setActivity(presenceData);
-    }
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   } else if (
-    document.location.hostname == "www.youtube.com" ||
-    document.location.hostname == "youtube.com"
+    document.location.hostname === "www.youtube.com" ||
+    document.location.hostname === "youtube.com"
   ) {
     const presenceData: PresenceData = {
         largeImageKey: "yt_lg"
@@ -343,15 +353,15 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#search-input > div > div:nth-child(2) > input"
       );
-      if (search == null) {
-        search = document.querySelector("#search-input > input");
-      }
-      presenceData.details = (await strings).search;
+      if (!search) search = document.querySelector("#search-input > input");
+
+      presenceData.details = strings.search;
       presenceData.state = search.value;
       presenceData.smallImageKey = "search";
       presenceData.startTimestamp = browsingStamp;
     } else if (
       document.location.pathname.includes("/channel") ||
+      document.location.pathname.includes("/c") ||
       document.location.pathname.includes("/user")
     ) {
       //Sometimes causes problems
@@ -363,9 +373,9 @@ presence.on("UpdateData", async () => {
           .includes(
             document.querySelector("#text.ytd-channel-name").textContent
           )
-      ) {
+      )
         user = document.querySelector("#text.ytd-channel-name").textContent;
-      } else if (
+      else if (
         /\(([^)]+)\)/.test(
           document.title.substr(0, document.title.lastIndexOf(" - YouTube"))
         )
@@ -381,128 +391,130 @@ presence.on("UpdateData", async () => {
       }
 
       // don't remove the second, includes an invisible character
-      if (user.replace(/\s+/g, "") == "" || user.replace(/\s+/g, "") == "‌")
+      if (user.replace(/\s+/g, "") === "" || user.replace(/\s+/g, "") === "‌")
         user = "null";
 
       if (document.location.pathname.includes("/videos")) {
-        presenceData.details = (await strings).browsingThrough;
-        presenceData.state = `${(await strings).ofChannel} ${user}`;
+        presenceData.details = strings.browsingThrough;
+        presenceData.state = `${strings.ofChannel} ${user}`;
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/playlists")) {
-        presenceData.details = (await strings).browsingPlayl;
-        presenceData.state = `${(await strings).ofChannel} ${user}`;
+        presenceData.details = strings.browsingPlayl;
+        presenceData.state = `${strings.ofChannel} ${user}`;
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/community")) {
-        presenceData.details = (await strings).viewCPost;
-        presenceData.state = `${(await strings).ofChannel} ${user}`;
+        presenceData.details = strings.viewCPost;
+        presenceData.state = `${strings.ofChannel} ${user}`;
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/about")) {
-        presenceData.details = (await strings).readChannel;
+        presenceData.details = strings.readChannel;
         presenceData.state = user;
         presenceData.smallImageKey = "reading";
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/search")) {
         searching = true;
-        const search = document.URL.split("search?query=")[1];
-        presenceData.details = (await strings).searchChannel.replace(
-          "{0}",
-          user
-        );
+        const [, search] = document.URL.split("search?query=");
+        presenceData.details = strings.searchChannel.replace("{0}", user);
         presenceData.state = search;
         presenceData.smallImageKey = "search";
         presenceData.startTimestamp = browsingStamp;
       } else {
-        presenceData.details = (await strings).viewChannel;
+        presenceData.details = strings.viewChannel;
         presenceData.state = user;
         presenceData.startTimestamp = browsingStamp;
       }
+      if (channelPic) {
+        presenceData.largeImageKey = document
+          .querySelector<HTMLImageElement>(
+            "#avatar.ytd-c4-tabbed-header-renderer > img"
+          )
+          .src.replace("=s176", "=s512");
+      }
     } else if (document.location.pathname.includes("/post")) {
-      presenceData.details = (await strings).viewCPost;
+      presenceData.details = strings.viewCPost;
       const selector: Node = document.querySelector("#author-text");
       presenceData.state =
-        (selector && `${(await strings).ofChannel} ${selector.textContent}`) ||
-        null;
+        (selector && `${strings.ofChannel} ${selector.textContent}`) || null;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/trending")) {
-      presenceData.details = (await strings).trending;
+      presenceData.details = strings.trending;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/subscriptions")) {
-      presenceData.details = (await strings).browsingThrough;
-      presenceData.state = (await strings).subscriptions;
+      presenceData.details = strings.browsingThrough;
+      presenceData.state = strings.subscriptions;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/library")) {
-      presenceData.details = (await strings).browsingThrough;
-      presenceData.state = (await strings).library;
+      presenceData.details = strings.browsingThrough;
+      presenceData.state = strings.library;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/history")) {
-      presenceData.details = (await strings).browsingThrough;
-      presenceData.state = (await strings).history;
+      presenceData.details = strings.browsingThrough;
+      presenceData.state = strings.history;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/purchases")) {
-      presenceData.details = (await strings).browsingThrough;
-      presenceData.state = (await strings).purchases;
+      presenceData.details = strings.browsingThrough;
+      presenceData.state = strings.purchases;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/playlist")) {
-      presenceData.details = (await strings).viewPlaylist;
+      presenceData.details = strings.viewPlaylist;
 
       let title: HTMLElement | null = document.querySelector("#text-displayed");
-      if (title == null) {
+      if (!title)
         title = document.querySelector("#title > yt-formatted-string > a");
-      }
 
       presenceData.state = title.textContent;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/premium")) {
-      presenceData.details = (await strings).readAbout;
+      presenceData.details = strings.readAbout;
       presenceData.state = "Youtube Premium";
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/gaming")) {
-      presenceData.details = (await strings).browsingThrough;
+      presenceData.details = strings.browsingThrough;
       presenceData.state = "Youtube Gaming";
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/account")) {
-      presenceData.details = (await strings).viewAccount;
+      presenceData.details = strings.viewAccount;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/reporthistory")) {
-      presenceData.details = (await strings).reports;
+      presenceData.details = strings.reports;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/intl")) {
-      presenceData.details = (await strings).readAbout;
+      presenceData.details = strings.readAbout;
       presenceData.state = document.title.substr(
         0,
         document.title.lastIndexOf(" - YouTube")
       );
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.URL == "https://www.youtube.com/") {
-      presenceData.details = (await strings).viewHome;
+    } else if (document.URL === "https://www.youtube.com/") {
+      presenceData.details = strings.viewHome;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/upload")) {
-      presenceData.details = (await strings).upload;
+      presenceData.details = strings.upload;
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/view_all_playlists")) {
-      presenceData.details = (await strings).viewAllPlayL;
+      presenceData.details = strings.viewAllPlayL;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/my_live_events")) {
-      presenceData.details = (await strings).viewEvent;
+      presenceData.details = strings.viewEvent;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/live_dashboard")) {
-      presenceData.details = (await strings).viewLiveDash;
+      presenceData.details = strings.viewLiveDash;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/audiolibrary")) {
-      presenceData.details = (await strings).viewAudio;
+      presenceData.details = strings.viewAudio;
       presenceData.startTimestamp = browsingStamp;
     }
 
     if (privacy) {
       if (searching) {
-        presenceData.details = (await strings).searchSomething;
+        presenceData.details = strings.searchSomething;
         delete presenceData.state;
       } else {
-        presenceData.details = (await strings).browsing;
+        presenceData.details = strings.browsing;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -513,13 +525,9 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (presenceData.details == null) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else {
-      presence.setActivity(presenceData);
-    }
-  } else if (document.location.hostname == "studio.youtube.com") {
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
+  } else if (document.location.hostname === "studio.youtube.com") {
     const presenceData: PresenceData = {
         largeImageKey: "yt_lg",
         smallImageKey: "studio",
@@ -528,47 +536,47 @@ presence.on("UpdateData", async () => {
       browsingStamp = Math.floor(Date.now() / 1000);
 
     if (document.location.pathname.includes("/videos")) {
-      presenceData.details = (await strings).studioVid;
+      presenceData.details = strings.studioVid;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/video")) {
       const title: HTMLElement = document.querySelector("#entity-name");
       presenceData.startTimestamp = browsingStamp;
       if (document.location.pathname.includes("/edit")) {
-        presenceData.details = (await strings).studioEdit;
+        presenceData.details = strings.studioEdit;
         presenceData.state = title.textContent;
       } else if (document.location.pathname.includes("/analytics")) {
-        presenceData.details = (await strings).studioAnaly;
+        presenceData.details = strings.studioAnaly;
         presenceData.state = title.textContent;
       } else if (document.location.pathname.includes("/comments")) {
-        presenceData.details = (await strings).studioComments;
+        presenceData.details = strings.studioComments;
         presenceData.state = title.textContent;
       } else if (document.location.pathname.includes("/translations")) {
-        presenceData.details = (await strings).studioTranslate;
+        presenceData.details = strings.studioTranslate;
         presenceData.state = title.textContent;
       }
     } else if (document.location.pathname.includes("/analytics")) {
-      presenceData.details = (await strings).studioTheir;
-      presenceData.state = (await strings).studioCAnaly;
+      presenceData.details = strings.studioTheir;
+      presenceData.state = strings.studioCAnaly;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/comments")) {
-      presenceData.details = (await strings).studioTheir;
-      presenceData.state = (await strings).studioCComments;
+      presenceData.details = strings.studioTheir;
+      presenceData.state = strings.studioCComments;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/translations")) {
-      presenceData.details = (await strings).studioTheir;
-      presenceData.state = (await strings).studioCTranslate;
+      presenceData.details = strings.studioTheir;
+      presenceData.state = strings.studioCTranslate;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/channel")) {
-      presenceData.details = (await strings).studioDash;
+      presenceData.details = strings.studioDash;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/artist")) {
-      presenceData.details = (await strings).studioTheir;
-      presenceData.state = (await strings).studioArtist;
+      presenceData.details = strings.studioTheir;
+      presenceData.state = strings.studioArtist;
       presenceData.startTimestamp = browsingStamp;
     }
 
     if (privacy) {
-      presenceData.details = (await strings).browsing;
+      presenceData.details = strings.browsing;
       delete presenceData.state;
       delete presenceData.smallImageKey;
     }
@@ -578,11 +586,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (presenceData.details == null) {
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else {
-      presence.setActivity(presenceData);
-    }
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
   }
 });

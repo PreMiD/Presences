@@ -1,26 +1,27 @@
-var presence = new Presence({
-  clientId: "623229289864626195" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var item: any, admin: any, item2: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "623229289864626195" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+let item: HTMLElement,
+  admin: HTMLElement,
+  item2: HTMLElement,
+  item3: HTMLImageElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "esl"
+    largeImageKey: "esl",
+    startTimestamp: browsingTimestamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
   admin = document.querySelector("#adminEnableLink > div");
-  if (document.location.hostname == "fantasy.eslgaming.com") {
+  if (document.location.hostname === "fantasy.eslgaming.com") {
     presenceData.details = "ESL Fantasy";
     delete presenceData.state;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "pro.eslgaming.com") {
+  } else if (document.location.hostname === "pro.eslgaming.com") {
     if (document.location.pathname.includes("/standings/")) {
       item = document.querySelector(
         "#site-navigation-wrap > nav > ul > li > a > span > span"
@@ -29,7 +30,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " standings, " + item2.innerText;
+      presenceData.state = `${item.textContent} standings, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -45,8 +46,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state =
-        item.innerText + " scores & schedule, " + item2.innerText;
+      presenceData.state = `${item.textContent} scores & schedule, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " statistics, " + item2.innerText;
+      presenceData.state = `${item.textContent} statistics, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " teams, " + item2.innerText;
+      presenceData.state = `${item.textContent} teams, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " brackets, " + item2.innerText;
+      presenceData.state = `${item.textContent} brackets, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " partners, " + item2.innerText;
+      presenceData.state = `${item.textContent} partners, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " sponsors, " + item2.innerText;
+      presenceData.state = `${item.textContent} sponsors, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " rules, " + item2.innerText;
+      presenceData.state = `${item.textContent} rules, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " contact, " + item2.innerText;
+      presenceData.state = `${item.textContent} contact, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " videos, " + item2.innerText;
+      presenceData.state = `${item.textContent} videos, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -163,7 +163,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, viewing:";
-      presenceData.state = item.innerText + " players, " + item2.innerText;
+      presenceData.state = `${item.textContent} players, ${item2.textContent}`;
 
       delete presenceData.smallImageKey;
 
@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
         "#networkbar > esl-div > esl-div > esl-span"
       );
       presenceData.details = "ESL Pros, reading:";
-      presenceData.state = item.innerText + " news, " + item2.innerText;
+      presenceData.state = `${item.textContent} news, ${item2.textContent}`;
 
       presenceData.smallImageKey = "reading";
 
@@ -189,11 +189,9 @@ presence.on("UpdateData", async () => {
     ) {
       item = document.querySelector("#content > article > header > h2");
       presenceData.details = "ESL Pros, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.textContent.length > 128)
+        presenceData.state = `${item.textContent.substring(0, 125)}...`;
+      else presenceData.state = item.textContent;
 
       presenceData.smallImageKey = "reading";
 
@@ -213,7 +211,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "intelgrandslam.eslgaming.com") {
+  } else if (document.location.hostname === "intelgrandslam.eslgaming.com") {
     if (document.location.pathname.includes("/rules/")) {
       presenceData.details = "ESL Intel Grand Slam";
       presenceData.state = "Reading the rules";
@@ -237,11 +235,9 @@ presence.on("UpdateData", async () => {
         "#content > div > div > div > section > div > div > div > div > div > div > div > h1"
       );
       presenceData.details = "ESL Intel Grand Slam, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.textContent.length > 128)
+        presenceData.state = `${item.textContent.substring(0, 125)}...`;
+      else presenceData.state = item.textContent;
 
       presenceData.smallImageKey = "reading";
 
@@ -254,12 +250,12 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "www.intelextrememasters.com") {
+  } else if (document.location.hostname === "www.intelextrememasters.com") {
     if (document.location.pathname.includes("/season-")) {
-      item = document.querySelector("#site-logo-inner > a > img");
-      if (item !== null) {
+      item3 = document.querySelector("#site-logo-inner > a > img");
+      if (item) {
         presenceData.details = "ESL Intel Extreme Masters";
-        presenceData.state = "Viewing: " + item.alt;
+        presenceData.state = `Viewing: ${item3.alt}`;
 
         delete presenceData.smallImageKey;
 
@@ -333,11 +329,9 @@ presence.on("UpdateData", async () => {
     ) {
       item = document.querySelector("#content > article > header > h2");
       presenceData.details = "ESL Intel Extreme Masters, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.textContent.length > 128)
+        presenceData.state = `${item.textContent.substring(0, 125)}...`;
+      else presenceData.state = item.textContent;
 
       presenceData.smallImageKey = "reading";
 
@@ -350,7 +344,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "www.esl-one.com") {
+  } else if (document.location.hostname === "www.esl-one.com") {
     item2 = document.querySelector("head > title");
     if (document.location.pathname.includes("/legal/")) {
       presenceData.details = "ESL ONE";
@@ -364,63 +358,58 @@ presence.on("UpdateData", async () => {
     ) {
       item = document.querySelector("#content > article > header > h2");
       presenceData.details = "ESL ONE, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.textContent.length > 128)
+        presenceData.state = `${item.textContent.substring(0, 125)}...`;
+      else presenceData.state = item.textContent;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
-    } else if (item2.innerText.includes(" - ")) {
-      if (item2.innerText.split(" - ")[0].includes("ESL")) {
+    } else if (item2.textContent.includes(" - ")) {
+      if (item2.textContent.split(" - ")[0].includes("ESL")) {
         presenceData.details = "ESL ONE viewing: ";
-        presenceData.state = item2.innerText.split(" - ")[0];
+        [presenceData.state] = item2.textContent.split(" - ");
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
-      } else if (item2.innerText.split(" - ")[1].includes("ESL")) {
+      } else if (item2.textContent.split(" - ")[1].includes("ESL")) {
         presenceData.details = "ESL ONE viewing: ";
-        presenceData.state = item2.innerText.split(" - ")[1];
+        [, presenceData.state] = item2.textContent.split(" - ");
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       }
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (document.location.hostname == "photos.eslgaming.com") {
+    } else presence.setActivity();
+  } else if (document.location.hostname === "photos.eslgaming.com") {
     presenceData.details = "ESL Photos";
     delete presenceData.state;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "brand.eslgaming.com") {
+  } else if (document.location.hostname === "brand.eslgaming.com") {
     presenceData.details = "ESL Brand";
     delete presenceData.state;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "about.eslgaming.com") {
+  } else if (document.location.hostname === "about.eslgaming.com") {
     presenceData.details = "ESL About";
     delete presenceData.state;
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "shop.eslgaming.com") {
+  } else if (document.location.hostname === "shop.eslgaming.com") {
     if (document.location.pathname.includes("/products/")) {
       item = document.querySelector(
         "#shopify-section-product-template > div > div > div > div > div:nth-child(2) > div > h1"
       );
       presenceData.details = "ESL Shop, viewing product:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -430,7 +419,7 @@ presence.on("UpdateData", async () => {
         "#shopify-section-collection-header > div > header > h1"
       );
       presenceData.details = "ESL Shop, viewing collection:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -447,7 +436,7 @@ presence.on("UpdateData", async () => {
         "#MainContent > div > div > div > form > input.input-group-field"
       );
       presenceData.details = "ESL Shop, searching for:";
-      presenceData.state = item.value;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -460,7 +449,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "tv.eslgaming.com") {
+  } else if (document.location.hostname === "tv.eslgaming.com") {
     if (
       document.querySelector(
         "#videoplayer_embed_container > div.videoplayer_embed_inner.ng-scope > h3"
@@ -470,7 +459,7 @@ presence.on("UpdateData", async () => {
         "#videoplayer_embed_container > div.videoplayer_embed_inner.ng-scope > h3"
       );
       presenceData.details = "ESL TV, watching:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -483,7 +472,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "play.eslgaming.com") {
+  } else if (document.location.hostname === "play.eslgaming.com") {
     item2 = document.querySelector("head > title");
     if (document.location.pathname.includes("/games")) {
       presenceData.details = "Browsing through games";
@@ -504,7 +493,7 @@ presence.on("UpdateData", async () => {
         "body > div.l-page > div.l-main > div > div.l-content > article > div > div > div > div > div > div:nth-child(3) > table.playerprofile_stammdaten > tbody > tr:nth-child(1) > td:nth-child(2)"
       );
       presenceData.details = "ESL Play, viewing team:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -514,7 +503,7 @@ presence.on("UpdateData", async () => {
         "body > div.l-page > div.l-main > div > div.l-content > article > div > div > div > div > div > div:nth-child(2) > div:nth-child(4) > table > tbody > tr:nth-child(2) > td:nth-child(2)"
       );
       presenceData.details = "ESL Play, viewing player:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -524,7 +513,7 @@ presence.on("UpdateData", async () => {
         "body > div.l-page > div.l-main > div > div.l-content > article > div > div > div > div > div > div:nth-child(1) > div:nth-child(1) > form > input[type=text]:nth-child(6)"
       );
       presenceData.details = "ESL Play, searching for:";
-      presenceData.state = item.value;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -536,71 +525,59 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       //disable Presence on admin settings
       presence.setActivity(presenceData);
-    } else if (admin !== null) {
-      if (admin.innerText == "Admin") {
-        presence.setActivity();
-        presence.setTrayTitle();
-      } else {
+    } else if (admin) {
+      if (admin.textContent === "Admin") presence.setActivity();
+      else {
         item = document.querySelector("head > title");
         presenceData.details = "ESL Play, viewing:";
-        presenceData.state = item.innerText.split(" | ESL Play")[0];
+        [presenceData.state] = item.textContent.split(" | ESL Play");
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       }
-    } else if (item2.innerText.includes(" | ESL Play")) {
+    } else if (item2.textContent.includes(" | ESL Play")) {
       presenceData.details = "ESL Play, viewing:";
-      presenceData.state = item2.innerText.split(" | ESL Play")[0];
+      [presenceData.state] = item2.textContent.split(" | ESL Play");
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (document.location.hostname == "www.eslgaming.com") {
+    } else presence.setActivity();
+  } else if (document.location.hostname === "www.eslgaming.com") {
     if (document.location.pathname.includes("/article/")) {
       item = document.querySelector("#content > article > header > h2");
       presenceData.details = "ESL News, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.textContent.length > 128)
+        presenceData.state = `${item.textContent.substring(0, 125)}...`;
+      else presenceData.state = item.textContent;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/category/")) {
       presenceData.details = "Browsing category:";
-      presenceData.state = document.location.pathname.split("category/")[1];
+      [presenceData.state] = document.location.pathname.split("category/");
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (document.location.hostname == "forum.eslgaming.com") {
+    } else presence.setActivity();
+  } else if (document.location.hostname === "forum.eslgaming.com") {
     if (document.location.pathname.includes("/discussion/")) {
       item = document.querySelector(
         "#vanilla_discussion_index > section > div > main > div.MessageList.Discussion > div > h1"
       );
       presenceData.details = "ESL Forums, reading:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.textContent.length > 128)
+        presenceData.state = `${item.textContent.substring(0, 125)}...`;
+      else presenceData.state = item.textContent;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/categories/")) {
       presenceData.details = "ESL Forums, Browsing category:";
-      presenceData.state = document.location.pathname.split("categories/")[1];
+      [, presenceData.state] = document.location.pathname.split("categories/");
 
       delete presenceData.smallImageKey;
 
@@ -613,19 +590,19 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/profile/comments")) {
       presenceData.details = "ESL Forums, viewing profile:";
-      presenceData.state = document.location.pathname.split("/")[4];
+      [, , , , presenceData.state] = document.location.pathname.split("/");
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/profile/discussions")) {
       presenceData.details = "ESL Forums, viewing profile:";
-      presenceData.state = document.location.pathname.split("/")[4];
+      [, , , , presenceData.state] = document.location.pathname.split("/");
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/profile")) {
       presenceData.details = "ESL Forums, viewing profile:";
-      presenceData.state = document.location.pathname.split("/")[3];
+      [, , , presenceData.state] = document.location.pathname.split("/");
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
@@ -642,13 +619,13 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "www.schulmeisterschaft.de") {
+  } else if (document.location.hostname === "www.schulmeisterschaft.de") {
     if (document.location.pathname.includes("/news")) {
       item = document.querySelector(
         "body > div.l-page > div.l-main > div > div.l-content > article > div > div > div > div > div > table > tbody > tr:nth-child(2) > td > div.TitleNews"
       );
       presenceData.details = "ESL - Schulmeisterschaft";
-      presenceData.state = "Reading: " + item.innerText;
+      presenceData.state = `Reading: ${item.textContent}`;
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
@@ -657,7 +634,7 @@ presence.on("UpdateData", async () => {
         "body > div.l-page > div.l-main > div > div.l-content > article > div > div > div > div > div > div:nth-child(3) > table.playerprofile_stammdaten > tbody > tr:nth-child(1) > td:nth-child(2)"
       );
       presenceData.details = "ESL Schulmeisterschaft, viewing team:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -667,7 +644,7 @@ presence.on("UpdateData", async () => {
         "body > div.l-page > div.l-main > div > div.l-content > article > div > div > div > div > div > div:nth-child(2) > div:nth-child(4) > table > tbody > tr:nth-child(2) > td:nth-child(2)"
       );
       presenceData.details = "ESL Schulmeisterschaft, viewing player:";
-      presenceData.state = item.innerText;
+      presenceData.state = item.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -702,15 +679,14 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (admin !== null) {
-      if (admin.innerText == "Admin") {
-        presence.setActivity();
-        presence.setTrayTitle();
-      } else {
+    } else if (admin) {
+      if (admin.textContent === "Admin") presence.setActivity();
+      else {
         item = document.querySelector("head > title");
         presenceData.details = "ESL - Schulmeisterschaft";
-        presenceData.state =
-          "Viewing: " + item.innerText.split(" | Schulmeisterschaft")[0];
+        presenceData.state = `Viewing: ${
+          item.textContent.split(" | Schulmeisterschaft")[0]
+        }`;
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
@@ -718,14 +694,12 @@ presence.on("UpdateData", async () => {
     } else {
       item = document.querySelector("head > title");
       presenceData.details = "ESL - Schulmeisterschaft";
-      presenceData.state =
-        "Viewing: " + item.innerText.split(" | Schulmeisterschaft")[0];
+      presenceData.state = `Viewing: ${
+        item.textContent.split(" | Schulmeisterschaft")[0]
+      }`;
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     }
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

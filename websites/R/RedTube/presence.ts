@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "605861238852943988"
   }),
   strings = presence.getStrings({
@@ -6,41 +6,21 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector(
+  const video = document.querySelector<HTMLVideoElement>(
     ".mhp1138_videoWrapper video"
   );
-  if (video[0] !== null && !isNaN(video.duration)) {
+  if (video && !isNaN(video.duration)) {
     //* Get required tags
-    var title: any;
-    title = document.querySelector(
-      "#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col .video_left_section .video_header_container #video_header h1"
-    );
-
-    var uploader = document.querySelector(
-        "#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col #video_underplayer #video-infobox #video-infobox-wrap .video-infobox-col .video-infobox-row .video-infobox-content .video-infobox-link"
-      ),
-      timestamps = getTimestamps(
+    const title = document.querySelector<HTMLHeadingElement>(".video_title"),
+      uploader = document.querySelector(".video-infobox-link"),
+      timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
       presenceData: PresenceData = {
-        details: title ? title.innerText : "Title not found...",
-        state: uploader ? uploader.textContent : "Uploader not found...",
+        details: title?.textContent ?? "Title not found...",
+        state: uploader?.textContent ?? "Uploader not found...",
         largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
@@ -50,8 +30,6 @@ presence.on("UpdateData", async () => {
         endTimestamp: timestamps[1]
       };
 
-    presence.setTrayTitle(video.paused ? "" : title.innerText);
-
     //* Remove timestamps if paused
     if (video.paused) {
       delete presenceData.startTimestamp;
@@ -59,11 +37,6 @@ presence.on("UpdateData", async () => {
     }
 
     //* If tags are not "null"
-    if (title !== null && uploader !== null) {
-      presence.setActivity(presenceData, !video.paused);
-    }
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+    if (title && uploader) presence.setActivity(presenceData, !video.paused);
+  } else presence.setActivity();
 });

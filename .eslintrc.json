@@ -6,7 +6,9 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:eqeqeq-fix/recommended",
+    "plugin:prettier/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -14,31 +16,45 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2020,
+    "ecmaVersion": 2021,
     "project": "./tsconfig.json"
   },
   "rules": {
-    "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
-    "no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
-    "quotes": "off",
-    "indent": "off",
-    "camelcase": "off",
-    "comma-dangle": ["warn", "never"],
-    "one-var": ["warn", "consecutive"],
-    "linebreak-style": ["warn", "unix"],
-    "no-console": "error",
+    "semi": ["error", "always", { "omitLastInOneLineBlock": true }],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
+    "quotes": ["error", "double", { "avoidEscape": true }],
+    "camelcase": ["error", { "properties": "always" }],
+    "curly": ["error", "multi-or-nest"],
+    "comma-dangle": ["error", "never"],
+    "one-var": ["error", "consecutive"],
+    "linebreak-style": ["error", "unix"],
+    "prefer-const": "error",
+    "no-multi-spaces": "error",
+    "object-shorthand": "error",
+    "quote-props": ["error", "as-needed"],
+    "prefer-destructuring": ["error", { "array": false, "object": true }],
+    "prefer-template": "error",
+    "space-before-blocks": ["error", "always"],
+    "space-infix-ops": "error",
+    "func-call-spacing": ["error", "never"],
+    "key-spacing": ["error", { "beforeColon": false }],
+    "dot-notation": "error",
+    "no-case-declarations": "error",
+    "brace-style": "error",
+    "template-curly-spacing": "error",
+    "no-console": "warn",
     "no-var": "error",
-    "no-undef": "off",
-    "no-restricted-syntax": [
-      "error",
-      {
-        "selector": "TSEnumDeclaration[const=true]",
-        "message": "Usage of const enums is forbidden."
-      }
-    ],
-    "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/indent": "off"
+    "no-eval": "warn",
+    "no-undefined": "error",
+    "no-eq-null": "error",
+    "@typescript-eslint/array-type": ["error", { "default": "array" }],
+    "no-lonely-if": "error",
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
+    "no-one-time-vars/no-one-time-vars": [2, {"ignoredVariables":["browsingTimestamp"]}],
+    "radix": "off"
   },
   "overrides": [
     {
@@ -53,7 +69,7 @@
       }
     }
   ],
-  "reportUnusedDisableDirectives": true,	
-  "noInlineConfig": true,
-  "plugins": ["@typescript-eslint"]
+  "reportUnusedDisableDirectives": true,
+  "noInlineConfig": false,
+  "plugins": ["@typescript-eslint", "prettier", "no-one-time-vars"]
 }

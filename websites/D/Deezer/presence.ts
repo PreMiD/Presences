@@ -1,183 +1,195 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  viewAlbum: string;
-  viewArtist: string;
-  viewPodcast: string;
-}
-
 const presence = new Presence({
-    clientId: "607651992567021580"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused",
-        viewAlbum: "general.buttonViewAlbum",
-        viewArtist: "general.buttonViewArtist",
-        viewPodcast: "general.buttonViewPodcast"
-      },
-      await presence.getSetting("lang")
-    );
-  };
+  clientId: "607651992567021580"
+});
 
-let currentTime,
-  duration,
-  title,
-  artist,
-  episode,
-  albumLink,
-  artistLink,
-  showLink,
-  strings: Promise<LangStrings> = getStrings(),
-  oldLang: string = null;
+let oldLang: string = null,
+  albumCoverURL: string,
+  albumCoverId: string,
+  podcastCoverURL: string,
+  podcastCoverId: string;
 
 presence.on("UpdateData", async () => {
-  const player = document.querySelector(".page-player"),
-    presenceData: PresenceData = {
-      largeImageKey: "logo"
+  let presenceData: PresenceData = {
+      largeImageKey: "deezer"
     },
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang");
+    strings = await getStrings(),
+    paused = false;
 
-  if (!oldLang) {
+  const [buttons, newLang, cover] = await Promise.all([
+    presence.getSetting<boolean>("buttons"),
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("cover")
+  ]);
+
+  oldLang ??= newLang;
+  if (oldLang !== newLang) {
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
-  if (player) {
-    artistLink = document.querySelector("div.marquee-content")
-      .children[1] as HTMLAnchorElement;
-    albumLink = document.querySelector("div.marquee-content")
-      .children[0] as HTMLAnchorElement;
+  const pages: Record<string, PresenceData> = {
+    shows: {
+      details: "Browsing shows"
+    },
+    channels: {
+      details: "Browsing channels"
+    },
+    loved: {
+      details: "Browsing user's loved"
+    },
+    playlists: {
+      details: "Browsing user's playlists"
+    },
+    albums: {
+      details: "Browsing user's albums"
+    },
+    artists: {
+      details: "Browsing user's artists"
+    },
+    podcasts: {
+      details: "Browsing user's podcasts"
+    },
+    playlist: {
+      details: "Looking at a playlist"
+    },
+    album: {
+      details: "Looking at an album"
+    },
+    artist: {
+      details: "Looking at an artist"
+    }
+  };
 
-    const paused =
-      document.querySelector(
-        ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
-      ) === null;
-    currentTime = document.querySelector(
-      "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
-    ).textContent;
-    duration = document.querySelector(
-      "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
-    ).textContent;
+  for (const [path, data] of Object.entries(pages)) {
+    if (location.pathname.includes(path))
+      presenceData = { ...presenceData, ...data };
+  }
 
-    const timestamps = presence.getTimestamps(
+  if (document.querySelector(".page-player")) {
+    const [albumLink, artistLink] = document.querySelector<HTMLAnchorElement>(
+        "div.marquee-content"
+      ).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
+      currentTime = document.querySelector(
+        "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
+      ).textContent,
+      duration = document.querySelector(
+        "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
+      ).textContent,
+      timestamps = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
         presence.timestampFromFormat(duration)
       ),
-      show =
-        document.querySelector(".track-link:nth-child(2)") === null
-          ? true
-          : false;
+      [, , , , , albumId] = albumLink.href.split("/");
 
-    if (!show) {
-      title = document.querySelector(".track-link:nth-child(1)").textContent;
-      artist = document.querySelector(".track-link:nth-child(2)").textContent;
-      presenceData.details = title;
-      presenceData.state = artist;
-      presenceData.largeImageKey = "deezer";
-      presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+    if (
+      document
+        .querySelector(
+          "#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path"
+        )
+        .outerHTML.match('<path d="m5 2 18 10L5 22V2z"></path>')
+    )
+      paused = true;
 
-      if (buttons) {
-        presenceData.buttons = [
-          {
-            label: (await strings).viewArtist,
-            url: artistLink.href
-          },
-          {
-            label: (await strings).viewAlbum,
-            url: albumLink.href
-          }
-        ];
+    if (document.querySelector(".track-link:nth-child(2)")) {
+      presenceData.details = document.querySelector(
+        ".track-link:nth-child(1)"
+      ).textContent;
+      presenceData.state = document.querySelector(
+        ".track-link:nth-child(2)"
+      ).textContent;
+
+      albumCoverId ??= albumId;
+      albumCoverURL ??= (
+        await fetch(`https://api.deezer.com/album/${albumCoverId}/image`)
+      ).url;
+
+      if (albumCoverId !== albumId) {
+        albumCoverId = albumId;
+        albumCoverURL = (
+          await fetch(`https://api.deezer.com/album/${albumCoverId}/image`)
+        ).url;
       }
+
+      presenceData.largeImageKey = cover ? albumCoverURL : "deezer";
+      presenceData.smallImageKey = paused ? "pause" : "play";
+      presenceData.smallImageText = paused ? strings.pause : strings.play;
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
 
-      presence.setActivity(presenceData, !paused);
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: strings.viewArtist,
+            url: (artistLink as HTMLAnchorElement).href
+          },
+          {
+            label: strings.viewAlbum,
+            url: (albumLink as HTMLAnchorElement).href
+          }
+        ];
+      }
     } else {
-      title = document
+      const [podcastLink] = document.querySelector<HTMLAnchorElement>(
+          "div.marquee-content"
+        ).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
+        [, , , , , podcastId] = podcastLink.href.split("/");
+      [presenceData.state, presenceData.details] = document
         .querySelector("div.marquee-content")
-        .textContent.split(" · ")[1];
-      episode = document
-        .querySelector("div.marquee-content")
-        .textContent.split(" · ")[0];
-      showLink = albumLink = document.querySelector("div.marquee-content")
-        .children[0] as HTMLAnchorElement;
-      presenceData.details = title;
-      presenceData.state = episode;
-      presenceData.largeImageKey = "deezer";
+        .textContent.split(" · ");
+
+      podcastCoverId ??= podcastId;
+      podcastCoverURL ??= (
+        await (
+          await fetch(`https://api.deezer.com/podcast/${podcastCoverId}`)
+        ).json()
+      ).picture;
+
+      if (podcastCoverId !== podcastId) {
+        podcastCoverId = podcastId;
+        podcastCoverURL = (
+          await (
+            await fetch(`https://api.deezer.com/podcast/${podcastCoverId}`)
+          ).json()
+        ).picture;
+      }
+
+      presenceData.largeImageKey = cover ? podcastCoverURL : "deezer";
       presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.smallImageText = paused ? strings.pause : strings.play;
+      [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+
+      if (paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
 
       if (buttons) {
         presenceData.buttons = [
           {
             label: (await strings).viewPodcast,
-            url: showLink.href
+            url: (podcastLink as HTMLAnchorElement).href
           }
         ];
       }
-      if (paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
-
-      presence.setActivity(presenceData, !paused);
     }
-  } else {
-    const pathname = document.location.pathname,
-      presenceData: PresenceData = {
-        largeImageKey: "deezer"
-      };
-    if (pathname.includes("shows")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "Shows";
-    } else if (pathname.includes("channels")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "Channels";
-    } else if (pathname.includes("loved")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Loved";
-    } else if (pathname.includes("playlists")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Playlists";
-    } else if (pathname.includes("albums")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Albums";
-    } else if (pathname.includes("artists")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Artists";
-    } else if (pathname.includes("podcasts")) {
-      presenceData.details = "Browsing...";
-      presenceData.state = "User's Podcasts";
-    } else if (pathname.includes("playlist")) {
-      presenceData.details = "Looking at...";
-      presenceData.state = "A Playlist";
-    } else if (pathname.includes("album")) {
-      presenceData.details = "Looking at...";
-      presenceData.state = "An Album";
-    } else if (pathname.includes("artist")) {
-      presenceData.details = "Looking at...";
-      presenceData.state = "An Artist";
-    } else {
-      presenceData.details = "Browsing...";
-    }
-    presence.setActivity(presenceData);
   }
+
+  presence.setActivity(presenceData);
 });
+
+async function getStrings() {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      viewAlbum: "general.buttonViewAlbum",
+      viewArtist: "general.buttonViewArtist",
+      viewPodcast: "general.buttonViewPodcast"
+    },
+    await presence.getSetting<string>("lang").catch(() => "en")
+  );
+}

@@ -17,7 +17,7 @@ const presence = new Presence({
     title: null,
     album: null,
     artist: null,
-    track_number: null,
+    trackNumber: null,
     showName: null,
     seasonNumber: null,
     episodeNumber: null
@@ -28,21 +28,7 @@ let isShow = false,
   elapsed: number,
   i: number;
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function setLoop(f: Function, ms: number): number {
+function setLoop(f: () => void, ms: number): number {
   f();
   return setInterval(f, ms);
 }
@@ -50,17 +36,16 @@ function setLoop(f: Function, ms: number): number {
 function decodeReq(entity: Element): string {
   // decoding HTML entities the stackoverflow way
   const txt = document.createElement("textarea");
-  txt.innerHTML = entity.textContent;
-  return txt.value;
+  txt.textContent = entity.textContent;
+  return txt.textContent;
 }
 
 function getTag(
   collection: HTMLCollectionOf<Element>,
   tagName: string
 ): Element {
-  for (const tag of collection) {
+  for (const tag of collection)
     if (tag.getAttribute("name") === tagName) return tag;
-  }
 }
 
 presence.on("UpdateData", async () => {
@@ -68,62 +53,61 @@ presence.on("UpdateData", async () => {
     document.querySelector(".footer") &&
     document.querySelector(".footer").textContent.includes("VLC")
   ) {
-    const data: PresenceData = {
-        largeImageKey: "vlc"
-      },
-      timestamps = getTimestamps(Number(media.time), Number(media.length));
+    const presenceData: PresenceData = {
+      largeImageKey: "vlc"
+    };
 
     if (media.state !== prev) {
       prev = media.state;
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-    if (media.state == "playing" || media.state == "paused") {
+    if (media.state === "playing" || media.state === "paused") {
       if (isSong) {
-        if (media.title && media.album && media.title == media.album) {
+        if (media.title && media.album && media.title === media.album)
           media.album = null;
-        }
-        data.details =
+
+        presenceData.details =
           (media.title
             ? media.title
-            : media.track_number
-            ? "Track N°" + media.track_number
-            : "A song") + (media.album ? " on " + media.album : "");
+            : media.trackNumber
+            ? `Track N°${media.trackNumber}`
+            : "A song") + (media.album ? ` on ${media.album}` : "");
         media.artist
-          ? (data.state = "by " + media.artist)
+          ? (presenceData.state = `by ${media.artist}`)
           : media.filename
-          ? (data.state = media.filename)
-          : delete data.state;
+          ? (presenceData.state = media.filename)
+          : delete presenceData.state;
       } else if (isShow) {
         media.showName
-          ? (data.details = media.showName)
+          ? (presenceData.details = media.showName)
           : media.title
-          ? (data.details = media.title)
+          ? (presenceData.details = media.title)
           : media.filename
-          ? (data.details = media.filename)
-          : (data.details = "some TV");
-        data.state = "S" + media.seasonNumber + "E" + media.episodeNumber;
+          ? (presenceData.details = media.filename)
+          : (presenceData.details = "some TV");
+        presenceData.state = `S${media.seasonNumber}E${media.episodeNumber}`;
       } else {
         media.showName
-          ? (data.details = media.showName)
+          ? (presenceData.details = media.showName)
           : media.title
-          ? (data.details = media.title)
+          ? (presenceData.details = media.title)
           : media.filename
-          ? (data.details = media.filename)
-          : (data.details = "something");
+          ? (presenceData.details = media.filename)
+          : (presenceData.details = "something");
         media.seasonNumber
-          ? (data.state = "season " + media.seasonNumber)
+          ? (presenceData.state = `season ${media.seasonNumber}`)
           : media.episodeNumber
-          ? (data.state = "episode " + media.episodeNumber)
-          : delete data.state;
+          ? (presenceData.state = `episode ${media.episodeNumber}`)
+          : delete presenceData.state;
       }
 
-      if (data.details && data.details.length > 100)
-        data.details = data.details.substring(0, 127);
-      if (data.state && data.state.length > 100)
-        data.state = data.state.substring(0, 127);
+      if (presenceData.details && presenceData.details.length > 100)
+        presenceData.details = presenceData.details.substring(0, 127);
+      if (presenceData.state && presenceData.state.length > 100)
+        presenceData.state = presenceData.state.substring(0, 127);
 
-      data.smallImageKey =
+      presenceData.smallImageKey =
         media.state === "paused"
           ? "pause"
           : media.loop === "true" && media.repeat === "false"
@@ -134,7 +118,7 @@ presence.on("UpdateData", async () => {
           ? "play"
           : "pause";
 
-      data.smallImageText =
+      presenceData.smallImageText =
         media.state === "paused"
           ? (await strings).pause
           : media.loop === "true" && media.repeat === "false"
@@ -145,25 +129,24 @@ presence.on("UpdateData", async () => {
           ? (await strings).play
           : (await strings).pause;
 
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(Number(media.time), Number(media.length));
 
-      if (media.state == "playing") {
-        presence.setActivity(data, true);
-      } else {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
-        presence.setActivity(data, false);
+      if (media.state === "playing") presence.setActivity(presenceData, true);
+      else {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+        presence.setActivity(presenceData, false);
       }
-    } else if (media.state == "stopped") {
-      data.details = "standby";
-      delete data.state;
-      delete data.smallImageKey;
-      delete data.smallImageText;
-      data.startTimestamp = elapsed;
-      delete data.endTimestamp;
+    } else if (media.state === "stopped") {
+      presenceData.details = "standby";
+      delete presenceData.state;
+      delete presenceData.smallImageKey;
+      delete presenceData.smallImageText;
+      presenceData.startTimestamp = elapsed;
+      delete presenceData.endTimestamp;
 
-      presence.setActivity(data, false);
+      presence.setActivity(presenceData, false);
     }
   }
 });
@@ -183,24 +166,19 @@ const getStatus = setLoop(function () {
 
           req.responseXML.getElementsByTagName("state")[0].textContent.length >
           0
-            ? (media.state = req.responseXML.getElementsByTagName(
-                "state"
-              )[0].textContent)
+            ? (media.state =
+                req.responseXML.getElementsByTagName("state")[0].textContent)
             : (media.state = "stopped");
 
           if (media.state !== "stopped") {
-            media.time = req.responseXML.getElementsByTagName(
-              "time"
-            )[0].textContent;
-            media.length = req.responseXML.getElementsByTagName(
-              "length"
-            )[0].textContent;
-            media.loop = req.responseXML.getElementsByTagName(
-              "loop"
-            )[0].textContent;
-            media.repeat = req.responseXML.getElementsByTagName(
-              "repeat"
-            )[0].textContent;
+            media.time =
+              req.responseXML.getElementsByTagName("time")[0].textContent;
+            media.length =
+              req.responseXML.getElementsByTagName("length")[0].textContent;
+            media.loop =
+              req.responseXML.getElementsByTagName("loop")[0].textContent;
+            media.repeat =
+              req.responseXML.getElementsByTagName("repeat")[0].textContent;
           } else {
             media.time = null;
             media.length = null;
@@ -237,11 +215,11 @@ const getStatus = setLoop(function () {
               media.album = null;
             }
 
-            getTag(collection, "track_number")
-              ? (media.track_number = decodeReq(
-                  getTag(collection, "track_number")
+            getTag(collection, "trackNumber")
+              ? (media.trackNumber = decodeReq(
+                  getTag(collection, "trackNumber")
                 ))
-              : (media.track_number = null);
+              : (media.trackNumber = null);
 
             if (
               getTag(collection, "seasonNumber") &&
@@ -297,11 +275,11 @@ const getStatus = setLoop(function () {
               media.album = null;
             }
 
-            req.responseXML.getElementsByName("track_number")[0]
-              ? (media.track_number = decodeReq(
-                  req.responseXML.getElementsByName("track_number")[0]
+            req.responseXML.getElementsByName("trackNumber")[0]
+              ? (media.trackNumber = decodeReq(
+                  req.responseXML.getElementsByName("trackNumber")[0]
                 ))
-              : (media.track_number = null);
+              : (media.trackNumber = null);
 
             if (
               req.responseXML.getElementsByName("seasonNumber")[0] &&
@@ -328,11 +306,7 @@ const getStatus = setLoop(function () {
             clearInterval(getStatus);
             media.state = "stopped";
             alert(
-              "Something went wrong with the request, please contact ririxi#2721 at https://discord.premid.app with the following infos (RES: " +
-                req.status +
-                " / S: " +
-                req.readyState +
-                ")"
+              `Something went wrong with the request, please contact other people at https://discord.premid.app with the following infos (RES: ${req.status} / S: ${req.readyState})`
             );
           }
         }
@@ -345,12 +319,9 @@ const getStatus = setLoop(function () {
 
     req.open(
       "GET",
-      document.location.protocol +
-        "//" +
-        document.location.hostname +
-        ":" +
-        (document.location.port ? document.location.port : "") +
-        "/requests/status.xml",
+      `${document.location.protocol}//${document.location.hostname}:${
+        document.location.port ? document.location.port : ""
+      }/requests/status.xml`,
       true
     );
     req.send();
@@ -367,7 +338,7 @@ interface MediaObj {
   title?: string;
   album?: string;
   artist?: string;
-  track_number?: string;
+  trackNumber?: string;
   showName?: string;
   seasonNumber?: string;
   episodeNumber?: string;

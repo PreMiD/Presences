@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "628269030901547037"
   }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/": "Ana Sayfa",
     "/haber": "Haberler",
     "/video": "Videolar",
@@ -17,7 +17,7 @@ const presence = new Presence({
     "/gizlilik": "Gizlilik",
     "/iletisim": "İletişim"
   },
-  smallImageKey = {
+  smallImageKey: { [key: string]: string } = {
     "/ara": "searching",
     "/video": "video",
     "/uye/favorilerim": "star"
@@ -41,53 +41,55 @@ presence.on("UpdateData", async () => {
       largeImageKey: "wt-logo",
       details: "Bir yazara göz atıyor:",
       state:
-        author && author.textContent != "" ? author.textContent : "Belirsiz",
+        author && author.textContent !== "" ? author.textContent : "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (title && title.textContent != "") {
-    const postCreated = document.querySelector(
-        "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > time"
-      )
-        ? document.querySelector(
-            "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > time"
-          ).textContent
-        : "Belirsiz Süre",
-      author = document.querySelector(
-        "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > span:nth-child(1) > a"
-      )
-        ? document.querySelector(
-            "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > span:nth-child(1) > a"
-          ).textContent
-        : "Belirsiz";
-
+  } else if (title && title.textContent !== "") {
     presence.setActivity({
       largeImageKey: "wt-logo",
       details: `${title.textContent}`,
-      state: `Yazar: ${author} (${postCreated})`,
+      state: `Yazar: ${
+        document.querySelector(
+          "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > span:nth-child(1) > a"
+        )
+          ? document.querySelector(
+              "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > span:nth-child(1) > a"
+            ).textContent
+          : "Belirsiz"
+      } (${
+        document.querySelector(
+          "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > time"
+        )
+          ? document.querySelector(
+              "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-info.clearfix > div.content-author > time"
+            ).textContent
+          : "Belirsiz Süre"
+      })`,
       smallImageKey: "post",
       smallImageText: "Bir gönderi okuyor...",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (videoTitle && videoTitle.textContent != "") {
-    const postCreated = document.querySelector(
-        "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > time"
-      )
-        ? document.querySelector(
-            "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > time"
-          ).textContent
-        : "Belirsiz Süre",
-      author = document.querySelector(
-        "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > span:nth-child(1) > a"
-      )
-        ? document.querySelector(
-            "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > span:nth-child(1) > a"
-          ).textContent
-        : "Belirsiz";
-
+  } else if (videoTitle && videoTitle.textContent !== "") {
     presence.setActivity({
       largeImageKey: "wt-logo",
       details: `${videoTitle.textContent}`,
-      state: `Yazar: ${author} (${postCreated})`,
+      state: `Yazar: ${
+        document.querySelector(
+          "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > span:nth-child(1) > a"
+        )
+          ? document.querySelector(
+              "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > span:nth-child(1) > a"
+            ).textContent
+          : "Belirsiz"
+      } (${
+        document.querySelector(
+          "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > time"
+        )
+          ? document.querySelector(
+              "body > div.wt-container > div.global-container.container > div.content > article > div.content-info > time"
+            ).textContent
+          : "Belirsiz Süre"
+      })`,
       smallImageKey: "video",
       smallImageText: "Bir video gönderi okuyor...",
       startTimestamp: Math.floor(Date.now() / 1000)
@@ -95,7 +97,7 @@ presence.on("UpdateData", async () => {
   } else {
     presence.setActivity({
       largeImageKey: "wt-logo",
-      details: `Bir sayfaya göz atıyor:`,
+      details: "Bir sayfaya göz atıyor:",
       state: pages[page] || pages[page.slice(0, -1)] || "Ana Sayfa",
       smallImageKey:
         smallImageKey[page] || smallImageKey[page.slice(0, -1)] || "NOTHING",

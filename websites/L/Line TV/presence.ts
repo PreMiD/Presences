@@ -18,31 +18,40 @@ const presence = new Presence({
         viewSong: "general.buttonViewSong",
         searching: "general.search"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting<string>("lang")
     ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+
+interface VideoData {
+  sClipTitle: string;
+  sCategoryCode: string;
+  nClipNo: number;
+  sLiveStatus: string;
+}
 
 let oldLang: string = null,
-  strings = getStrings();
+  strings: Awaited<ReturnType<typeof getStrings>>,
+  videoData: VideoData;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "linetv_logo",
-      startTimestamp: browsingStamp,
-      details: (await strings).browse
+      startTimestamp: browsingTimestamp,
+      details: strings.browse
     },
-    videoData = await presence.getPageletiable("ghtEnv"),
-    pathname = document.location.pathname,
-    newLang = await presence.getSetting("lang"),
-    showButton = await presence.getSetting("Buttons"),
-    showSearch = await presence.getSetting("searchQuery"),
-    pDetail = await presence.getSetting("detail");
+    { pathname } = document.location,
+    [newLang, showButton, showSearch, pDetail] = await Promise.all([
+      presence.getSetting<string>("lang"),
+      presence.getSetting<boolean>("Buttons"),
+      presence.getSetting<boolean>("searchQuery"),
+      presence.getSetting<string>("detail")
+    ]);
 
-  if (!oldLang) {
+  videoData ??= await presence.getPageletiable<VideoData>("ghtEnv");
+
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (pathname.includes("/v/") || pathname.includes("/special/")) {
@@ -51,34 +60,32 @@ presence.on("UpdateData", async () => {
         title: (videoData.sClipTitle.match(/.+?(?=\[|【|「)/) || [
           videoData.sClipTitle
         ])[0],
-        playList: (document.querySelector("tooltip") as HTMLElement)?.title,
+        playList: document.querySelector<HTMLElement>("tooltip")?.title,
         aTitle: videoData.sClipTitle,
         isTeaser: videoData.sClipTitle.toLowerCase().includes("teaser"),
         isTrailer: videoData.sClipTitle.toLowerCase().includes("trailer"),
         isHighligh:
-          (document.querySelector("tooltip") as HTMLElement)?.title
-            .toLowerCase()
+          document
+            .querySelector<HTMLElement>("tooltip")
+            ?.title.toLowerCase()
             .includes("highlight") ||
           videoData.sClipTitle.toLowerCase().includes("highlight"),
-        isLowerThan1_5mins: video ? video.duration < 90 : false,
+        isLowerThan15mins: video ? video.duration < 90 : false,
         episodes: null,
-        buttonLabel: (await strings).viewEpisode,
+        buttonLabel: strings.viewEpisode,
         smallImagePlay: "play",
         epText: null,
         id: videoData.nClipNo,
         genre: videoData.sCategoryCode
-      },
-      timestamps = video
-        ? presence.getTimestampsfromMedia(video)
-        : [browsingStamp, null];
-
+      };
     if (videoD.title.includes("["))
       videoD.title = videoD.title.replace(/(\[.+\])/g, "");
-    if (videoD.title.includes("EP."))
+    if (videoD.title.includes("EP.")) {
       videoD.title = videoD.title.replace(
         /(ตอนต่อไป EP.[1-9]?[0-9]?[0-9]|EP.[1-9]?[0-9]?[0-9])/,
         ""
       );
+    }
     if (videoD.title.match(/ \| | \|(?!.)/))
       videoD.title = videoD.title.replace(/ \| | \|(?!.)/, " ");
     if (videoD.title.match(/(highlight)/i))
@@ -87,17 +94,19 @@ presence.on("UpdateData", async () => {
       videoD.aTitle.match(
         /(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9])/g
       )
-    )
+    ) {
       videoD.episodes = videoD.aTitle.match(
         /(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9]|\([1-9]\/[1-9]\))/g
       );
-    if (videoD.episodes)
+    }
+    if (videoD.episodes) {
       videoD.epText =
         videoD.episodes[0].includes("[") || videoD.episodes[0].includes("(")
           ? ` ${videoD.episodes[0]}`
           : ` ${videoD.episodes[0].match(/[1-9]?[0-9]?[0-9]/)[0]}${
               videoD.episodes.length > 1 ? ` | ${videoD.episodes[1]}` : ""
             }`;
+    }
 
     if (video) {
       if (videoD.isTrailer) videoD.genre = "TRAILER";
@@ -108,7 +117,7 @@ presence.on("UpdateData", async () => {
         videoD.genre = "HIGHLIGHT_";
       else if (videoData.sLiveStatus) videoD.genre = "LIVE";
       else if (
-        videoD.isLowerThan1_5mins &&
+        videoD.isLowerThan15mins &&
         !videoD.isHighligh &&
         !videoD.isTrailer &&
         video.currentTime &&
@@ -128,68 +137,64 @@ presence.on("UpdateData", async () => {
             videoD.epText?.startsWith(" [") && videoD.episodes
               ? `Drama | ${videoD.epText}`
               : videoD.episodes
-              ? `${(await strings).episode} ${videoD.epText}`
+              ? `${strings.episode} ${videoD.epText}`
               : "Highlight";
           break;
 
         case "ARTIST":
           presenceData.details = videoD.title;
           presenceData.state = `Music ${
-            videoD.episodes
-              ? ` | ${(await strings).episode}${videoD.epText}`
-              : ""
+            videoD.episodes ? ` | ${strings.episode}${videoD.epText}` : ""
           }`;
           videoD.buttonLabel = videoD.epText
-            ? (await strings).viewEpisode
-            : (await strings).viewSong;
+            ? strings.viewEpisode
+            : strings.viewSong;
           break;
 
         case "ENTERTAINMENT":
           presenceData.details = videoD.title;
           presenceData.state = videoD.epText
-            ? `${(await strings).episode} ${videoD.epText}`
+            ? `${strings.episode} ${videoD.epText}`
             : "Entertainment";
           videoD.buttonLabel = videoD.epText
             ? videoD.buttonLabel
-            : (await strings).viewVideo;
+            : strings.viewVideo;
           break;
 
         case "LIFE":
           presenceData.details = videoD.title;
           presenceData.state = `${
             videoD.episodes
-              ? `${(await strings).episode} ${videoD.epText}`
+              ? `${strings.episode} ${videoD.epText}`
               : "Life style"
           }`;
           videoD.buttonLabel = videoD.episodes
-            ? (await strings).viewEpisode
-            : (await strings).viewVideo;
+            ? strings.viewEpisode
+            : strings.viewVideo;
           break;
 
         case "HIGHLIGHT":
           presenceData.details = videoD.title;
           presenceData.state = "Highlight";
-          videoD.buttonLabel = (await strings).viewVideo;
+          videoD.buttonLabel = strings.viewVideo;
           break;
 
         case "HIGHLIGHT_":
           presenceData.details = videoD.title;
-          presenceData.state = `${(await strings).episode}${
-            videoD.epText
-          } | Highlight`;
-          videoD.buttonLabel = (await strings).viewVideo;
+          presenceData.state = `${strings.episode}${videoD.epText} | Highlight`;
+          videoD.buttonLabel = strings.viewVideo;
           break;
 
         case "TRAILER":
           presenceData.details = videoD.title;
           presenceData.state = "Trailer";
-          videoD.buttonLabel = (await strings).viewVideo;
+          videoD.buttonLabel = strings.viewVideo;
           break;
 
         case "TEASER":
           presenceData.details = videoD.title;
           presenceData.state = "Teaser";
-          videoD.buttonLabel = (await strings).viewVideo;
+          videoD.buttonLabel = strings.viewVideo;
           break;
 
         case "MOVIE":
@@ -200,46 +205,42 @@ presence.on("UpdateData", async () => {
                   videoD.epText.startsWith(" [") ||
                   videoD.epText.startsWith(" (")
                     ? `|${videoD.epText}`
-                    : `| ${(await strings).episode}${videoD.epText}`
+                    : `| ${strings.episode}${videoD.epText}`
                 }`
               : ""
           }`;
-          videoD.buttonLabel = (await strings).viewVideo;
+          videoD.buttonLabel = strings.viewVideo;
           break;
 
         case "LIVE":
           presenceData.details = videoD.title;
           presenceData.state = `Live ${
-            videoD.episodes
-              ? ` | ${(await strings).episode}${videoD.epText}`
-              : ""
+            videoD.episodes ? ` | ${strings.episode}${videoD.epText}` : ""
           }`;
           videoD.smallImagePlay = "live";
-          videoD.buttonLabel = (await strings).watchStream;
+          videoD.buttonLabel = strings.watchStream;
           break;
 
         case "PREVIEW":
           presenceData.details = videoD.title;
-          presenceData.state = `${(await strings).episode} ${
-            videoD.epText
-          } | Preview`;
+          presenceData.state = `${strings.episode} ${videoD.epText} | Preview`;
           break;
 
         default:
           presenceData.details = videoD.title;
-          presenceData.state = `${(await strings).episode} ${videoD.epText}`;
+          presenceData.state = `${strings.episode} ${videoD.epText}`;
           break;
       }
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestampsfromMedia(video);
 
       presenceData.smallImageKey = video.paused
         ? "pause"
         : videoD.smallImagePlay;
       presenceData.smallImageText = video.paused
-        ? (await strings).paused
-        : (await strings).play;
+        ? strings.paused
+        : strings.play;
 
       if (video.paused || videoD.genre === "LIVE") {
         delete presenceData.startTimestamp;
@@ -258,27 +259,26 @@ presence.on("UpdateData", async () => {
         ];
       } else delete presenceData.buttons;
     } else {
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = strings.viewPage;
       presenceData.state = videoD.title;
-      presenceData.smallImageText = (await strings).reading;
+      presenceData.smallImageText = strings.reading;
     }
   } else if (pathname.includes("/search")) {
-    const query = decodeURI(document.location.search.replace("?query=", "")),
-      resutls = parseInt(document.querySelector("em.ea")?.textContent, 10);
+    const resutls = parseInt(document.querySelector("em.ea")?.textContent, 10);
 
-    presenceData.details = `${(await strings).searchFor} ${
-      showSearch ? query : "(Hidden)"
+    presenceData.details = `${strings.searchFor} ${
+      showSearch
+        ? decodeURI(document.location.search.replace("?query=", ""))
+        : "(Hidden)"
     }`;
     presenceData.smallImageKey = "search";
-    presenceData.smallImageText = (await strings).searching;
+    presenceData.smallImageText = strings.searching;
 
     if (resutls) {
       presenceData.state = `${resutls} matching ${
         resutls > 1 ? "results" : "result"
       }`;
-    } else {
-      presenceData.state = "No matching result";
-    }
+    } else presenceData.state = "No matching result";
   }
 
   presence.setActivity(presenceData);
@@ -290,7 +290,7 @@ interface VideoDType {
   isTrailer: boolean;
   isHighligh: boolean;
   isTeaser: boolean;
-  isLowerThan1_5mins: boolean;
+  isLowerThan15mins: boolean;
   episodes: string[];
   playList: string;
   buttonLabel: string;

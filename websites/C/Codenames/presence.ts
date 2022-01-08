@@ -30,7 +30,7 @@ const presence = new Presence({
     beige: ["beige1", "beige2", "beige3", "beige4", "beige5", "beige6"]
   };
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   lastTeamLog: availableColors = "beige",
   currentlySetColor: availableColors = "beige";
 
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "codenames"
   };
 
-  const buttons = await presence.getSetting("buttons");
+  const buttons = await presence.getSetting<boolean>("buttons");
 
   //* If in a game or not
   if (document.querySelector("#gamescene")) {
@@ -55,40 +55,40 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Waiting for game";
       presenceData.state = "to start...";
       if (lastTeamLog !== "beige") {
-        browsingStamp = Math.floor(Date.now() / 1000);
+        browsingTimestamp = Math.floor(Date.now() / 1000);
         lastTeamLog = "beige";
       }
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       if (slideshow.getSlides().length) {
-        presence.info(`Removing all cards from SlideShow.`);
+        presence.info("Removing all cards from SlideShow.");
         slideshow.deleteAllSlides();
       }
     } else {
-      const logDataLength = document.querySelector(".scrollTarget").children
-        .length;
+      const logDataLength =
+        document.querySelector(".scrollTarget").children.length;
       if (logDataLength) {
         const team = document
           .querySelector(".scrollTarget")
           .children[logDataLength - 1].className.split("team-")[1]
           .split(" ")[0] as availableColors;
         if (team !== lastTeamLog) {
-          browsingStamp = Math.floor(Date.now() / 1000);
+          browsingTimestamp = Math.floor(Date.now() / 1000);
           slideshow.deleteAllSlides();
-          presence.info(`Removing all cards from SlideShow.`);
+          presence.info("Removing all cards from SlideShow.");
           lastTeamLog = team;
         }
       }
-      presenceData.startTimestamp = browsingStamp;
-      const allCards = Array.from(
-          document.querySelectorAll("section")
-        ).filter((s) => s.className?.includes("items-center")),
+      presenceData.startTimestamp = browsingTimestamp;
+      const allCards = Array.from(document.querySelectorAll("section")).filter(
+          s => s.className?.includes("items-center")
+        ),
         availableCards = Array.from(document.querySelectorAll("section"))
-          .filter((s) => s.className?.includes("items-center"))
-          .filter((i) => {
+          .filter(s => s.className?.includes("items-center"))
+          .filter(i => {
             const style = i.parentElement.parentElement.style.transform;
             if (
               Array.from(document.querySelectorAll(".coverToken")).find(
-                (t) =>
+                t =>
                   (t as HTMLElement).style.transform.split("scale")[0] ===
                   style.split("scale")[0]
               )
@@ -96,17 +96,17 @@ presence.on("UpdateData", async () => {
               return false;
             else return true;
           }),
-        foundCards = allCards.filter((x) => !availableCards.includes(x)),
-        currentClueData = Array.from(
-          document.querySelectorAll("div")
-        ).filter((d) => d.className?.includes("items-center text")), //Empty array if no clue, else [0] then its split into 2 divs 1 with clue other with amount
+        foundCards = allCards.filter(x => !availableCards.includes(x)),
+        currentClueData = Array.from(document.querySelectorAll("div")).filter(
+          d => d.className?.includes("items-center text")
+        ), //Empty array if no clue, else [0] then its split into 2 divs 1 with clue other with amount
         color = Array.from(document.querySelectorAll("button"))
-          .find((b) => b.className?.includes("text-base color-"))
-          .attributes.getNamedItem("color").value as availableColors;
+          .find(b => b.className?.includes("text-base color-"))
+          .attributes.getNamedItem("color").textContent as availableColors;
 
       if (color !== currentlySetColor) {
         slideshow.deleteAllSlides();
-        presence.info(`Removing all cards from SlideShow.`);
+        presence.info("Removing all cards from SlideShow.");
         currentlySetColor = color;
       }
 
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
           randomInt++;
         }
       });
-      foundCards.forEach((card) => {
+      foundCards.forEach(card => {
         const name = card.textContent;
         if (slideshow.hasSlide(name)) {
           presence.info(`Removing ${name} card from SlideShow.`);
@@ -144,9 +144,7 @@ presence.on("UpdateData", async () => {
         if (currentClueData.length) {
           presenceData.details = "Spectating... Current clue:";
           presenceData.state = `${currentClueData[0].firstElementChild.textContent} (Matches ${currentClueData[0].children[1].textContent} cards)`;
-        } else {
-          presenceData.details = "Spectating...";
-        }
+        } else presenceData.details = "Spectating...";
       } else if (document.querySelector("input")) {
         //* is spymaster and has to put in a clue rn
         presenceData.details = "Giving a clue";
@@ -166,9 +164,9 @@ presence.on("UpdateData", async () => {
       }
     }
   } else {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     if (slideshow.getSlides().length) {
-      presence.info(`Removing all cards from SlideShow.`);
+      presence.info("Removing all cards from SlideShow.");
       slideshow.deleteAllSlides();
     }
 
@@ -192,9 +190,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-    } else {
-      presenceData.details = "Browsing...";
-    }
+    } else presenceData.details = "Browsing...";
   }
   presence.setActivity(presenceData);
 });

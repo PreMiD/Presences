@@ -27,17 +27,17 @@ newStats();
 
 presence.on("UpdateData", async () => {
   const settings = {
-      details: (await presence.getSetting("details"))
-        .replace("%listeners%", data.listeners?.unique ?? "Listeners")
+      details: (await presence.getSetting<string>("details"))
+        .replace("%listeners%", `${data.listeners?.unique ?? "Listeners"}`)
         .replace("%artist%", data.now_playing?.song.artist || "Artist")
         .replace("%songText%", data.now_playing.song.text || "Song")
         .replace("%title%", data.now_playing?.song.title || "Title"),
-      state: (await presence.getSetting("state"))
-        .replace("%listeners%", data.listeners?.unique ?? "Listeners")
+      state: (await presence.getSetting<string>("state"))
+        .replace("%listeners%", `${data.listeners?.unique ?? "Listeners"}`)
         .replace("%artist%", data.now_playing?.song.artist || "Artist")
         .replace("%songText%", data.now_playing.song.text || "Song")
         .replace("%title%", data.now_playing?.song.title || "Title"),
-      timestamp: await presence.getSetting("timestamp")
+      timestamp: await presence.getSetting<boolean>("timestamp")
     },
     presenceData: PresenceData = {
       largeImageKey: "logo",
