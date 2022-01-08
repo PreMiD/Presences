@@ -1,5 +1,5 @@
-const trackerPresence = new Presence({ clientId: "929349462365704222" });
-const trackerBrowsing = Math.floor(Date.now() / 1000);
+const trackerPresence = new Presence({ clientId: "929349462365704222" }),
+  trackerBrowsing = Math.floor(Date.now() / 1000);
 
 trackerPresence.on("UpdateData", async () => {
   const trackerPreData: PresenceData = {
@@ -18,7 +18,8 @@ trackerPresence.on("UpdateData", async () => {
     trackerPreData.details = "Viewing Page:";
     trackerPreData.state = "Developers";
   } else if (trackerPage === "/developers/apps/create") {
-    trackerPreData.details = "Creating App";
+    trackerPreData.details = "Creating";
+    trackerPreData.state = "Tracker Dev App";
   } else if (trackerPage.includes("/developers/apps")) {
     try {
       const appName: string = document
@@ -64,7 +65,8 @@ trackerPresence.on("UpdateData", async () => {
     trackerPreData.details = "Viewing Page:";
     trackerPreData.state = "Overlays";
   } else if (trackerPage === "/overlays/editor") {
-    trackerPreData.details = "Creating Overlay";
+    trackerPreData.details = "Creating";
+    trackerPreData.state = "Tracker Overlay";
   } else if (trackerPage === "/premium") {
     trackerPreData.details = "Viewing Page:";
     trackerPreData.state = "Premium";
@@ -81,16 +83,16 @@ trackerPresence.on("UpdateData", async () => {
     trackerPreData.smallImageText = "Valorant";
   } else if (trackerPage.includes("/valorant/profile")) {
     const playerName: string = document.querySelector(
-      "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__username"
-    ).textContent;
-    const playerTag: string = document.querySelector(
-      "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__discriminator"
-    ).textContent;
-    const image: string = document
-      .querySelector(
-        "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > svg > image"
-      )
-      .getAttribute("href");
+        "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__username"
+      ).textContent,
+      playerTag: string = document.querySelector(
+        "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__discriminator"
+      ).textContent,
+      image: string = document
+        .querySelector(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > svg > image"
+        )
+        .getAttribute("href");
     trackerPreData.details = "Viewing Valorant Profile:";
     trackerPreData.state = playerName + playerTag;
     trackerPreData.smallImageKey = image;
@@ -114,7 +116,7 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageText = "Valorant";
     } else if (trackerPage.includes("/clips")) {
       try {
-        const stream: any = document.querySelector(
+        const stream: Element = document.querySelector(
           "#app > div.trn-wrapper > div.trn-container > div > div.container.guide-tile__modal > div.content.animated > div > div > iframe"
         );
         if (stream) {
@@ -142,11 +144,11 @@ trackerPresence.on("UpdateData", async () => {
     } else {
       try {
         const guideName: string = document.querySelector(
-          "#app > div.trn-wrapper > div.trn-container > div > main > article > div.guide__header > h1"
-        ).textContent;
-        const authorName: string = document.querySelector(
-          "#app > div.trn-wrapper > div.trn-container > div > main > article > div.guide__main > div > div.guide-main__hero.card.header-bordered.responsive > div.guide-main-metadata > div.guide-main__author.guide-main-metadata__author > span.guide-main__author-username"
-        ).textContent;
+            "#app > div.trn-wrapper > div.trn-container > div > main > article > div.guide__header > h1"
+          ).textContent,
+          authorName: string = document.querySelector(
+            "#app > div.trn-wrapper > div.trn-container > div > main > article > div.guide__main > div > div.guide-main__hero.card.header-bordered.responsive > div.guide-main-metadata > div.guide-main__author.guide-main-metadata__author > span.guide-main__author-username"
+          ).textContent;
         trackerPreData.details = "Reading Guide:";
         trackerPreData.state = guideName;
         trackerPreData.smallImageKey = "valorant";
@@ -178,7 +180,7 @@ trackerPresence.on("UpdateData", async () => {
       "#app > div.trn-wrapper > div.trn-container > div > main > div:nth-child(2) > div.site-container.no-card-margin > div.agent-breadcrumbs > ol > li:nth-child(3) > a > span"
     ).textContent;
     trackerPreData.details = "Viewing Valorant Agent:";
-    trackerPreData.state = "" + agentName;
+    trackerPreData.state = agentName;
   } else if (trackerPage === "/valorant/weapons") {
     trackerPreData.details = "Viewing:";
     trackerPreData.state = "Valorant Weapons";
@@ -189,7 +191,7 @@ trackerPresence.on("UpdateData", async () => {
       "#app > div.trn-wrapper > div.trn-container > div > main > div:nth-child(2) > div.site-container.no-card-margin > ol > li:nth-child(4) > a > span"
     ).textContent;
     trackerPreData.details = "Viewing Valorant Weapon:";
-    trackerPreData.state = "" + weaponName;
+    trackerPreData.state = weaponName;
     trackerPreData.smallImageKey = "valorant";
     trackerPreData.smallImageText = "Valorant";
   } else if (trackerPage === "/valorant/maps") {
@@ -204,7 +206,7 @@ trackerPresence.on("UpdateData", async () => {
       )
       .textContent.replace(" - Valorant Map", "");
     trackerPreData.details = "Viewing Valorant Map:";
-    trackerPreData.state = "" + mapName;
+    trackerPreData.state = mapName;
     trackerPreData.smallImageKey = "valorant";
     trackerPreData.smallImageText = "Valorant";
   } else if (trackerPage === "/valorant/cards") {
@@ -238,10 +240,6 @@ trackerPresence.on("UpdateData", async () => {
     ];
   }
 
-  if (trackerPreData.details == null) {
-    trackerPresence.setTrayTitle();
-    trackerPresence.setActivity();
-  } else {
-    trackerPresence.setActivity(trackerPreData);
-  }
+  if (trackerPreData.details) trackerPresence.setActivity(trackerPreData);
+  else trackerPresence.setActivity();
 });
