@@ -7,21 +7,16 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  var route = document.location.pathname.split("/");
-
-  if (document.location.pathname === "/") {
-    presenceData.details = "Home";
-  } else if (document.location.pathname.includes("/dashboard")) {
+  if (document.location.pathname === "/") presenceData.details = "Home";
+  else if (document.location.pathname.includes("/dashboard")) {
     presenceData.details = "Dashboard";
     presenceData.state = "Choosing a server...";
   } else if (document.location.pathname.includes("/server/")) {
-    presenceData.details =
-      "Edit a server : " + document.querySelector(".title").textContent;
-    if (!route[3]) {
-      presenceData.state = "Main";
-    } else {
-      presenceData.state = document.querySelector("a.is-active").textContent;
-    }
+    presenceData.details = `Edit a server : ${
+      document.querySelector(".title").textContent
+    }`;
+    if (!document.location.pathname.split("/")[3]) presenceData.state = "Main";
+    else presenceData.state = document.querySelector("a.is-active").textContent;
   } else if (document.location.pathname.includes("/status")) {
     presenceData.details = "Status";
     presenceData.state = "Watching current status of Koya";
@@ -35,11 +30,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Watching premium page";
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    if (presenceData.state == null) presenceData.state = "Navigating...";
+  if (!presenceData.details) presence.setActivity();
+  else {
+    presenceData.state ??= "Navigating...";
     presence.setActivity(presenceData);
   }
 });

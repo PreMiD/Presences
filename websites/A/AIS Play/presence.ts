@@ -8,20 +8,6 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let video = {
   current: 0,
   duration: 0,
@@ -43,9 +29,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const path = document.location.pathname;
-  if (path == "/portal/search") {
+  if (path === "/portal/search") {
     return presence.setActivity({
-      details: `Searching for :`,
+      details: "Searching for :",
       state: document.location.search.replace("?q=", ""),
       largeImageKey: "logo",
       smallImageKey: "search",
@@ -55,7 +41,7 @@ presence.on("UpdateData", async () => {
 
   if (path.includes("/portal/get_section")) {
     return presence.setActivity({
-      details: `Browsing for :`,
+      details: "Browsing for :",
       state: document.querySelector(".default-title").textContent || "",
       largeImageKey: "logo"
     });
@@ -68,25 +54,23 @@ presence.on("UpdateData", async () => {
     return presence.setActivity(presenceData);
   }
 
-  const timestamps = getTimestamps(
-    Math.floor(video.current),
-    Math.floor(video.duration)
-  );
-  const Info =
-    document.querySelector(".default-title") ||
-    document.querySelector(".live-text-text");
+  const timestamps = presence.getTimestamps(
+      Math.floor(video.current),
+      Math.floor(video.duration)
+    ),
+    Info =
+      document.querySelector(".default-title") ||
+      document.querySelector(".live-text-text");
   let episode;
 
   if (Info.textContent.includes("ตอนที่")) {
     const info = Info.textContent.split("ตอนที่");
     episode = info.pop();
 
-    episode = "ตอนที่ " + episode;
+    episode = `ตอนที่ ${episode}`;
     presenceData.state = episode;
-    presenceData.details = info[0];
-  } else if (Info.textContent) {
-    presenceData.details = Info.textContent;
-  }
+    [presenceData.details] = info;
+  } else if (Info.textContent) presenceData.details = Info.textContent;
 
   presenceData.smallImageKey = video.paused
     ? "pause"
@@ -99,12 +83,11 @@ presence.on("UpdateData", async () => {
     ? (await strings).live
     : (await strings).play;
 
-  if (!video.paused && !video.isLive) {
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
-  } else if (!video.paused && video.isLive) {
-    presenceData.startTimestamp = timestamps[0];
-  } else {
+  if (!video.paused && !video.isLive)
+    [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+  else if (!video.paused && video.isLive)
+    [presenceData.startTimestamp] = timestamps;
+  else {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }

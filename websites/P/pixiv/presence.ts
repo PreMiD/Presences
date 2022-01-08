@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "640234287525920834"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000),
+let browsingTimestamp = Math.floor(Date.now() / 1000),
   lastPath: string;
 
 const typeURL = new URL(document.location.href),
@@ -13,8 +13,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "pix"
     },
     curPath = document.location.pathname;
-  if (lastPath != curPath) {
-    browsingStamp = Math.floor(Date.now() / 1000);
+  if (lastPath !== curPath) {
+    browsingTimestamp = Math.floor(Date.now() / 1000);
     lastPath = curPath;
   }
 
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing user:";
       presenceData.state = document.querySelector(
         "#root > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div > h1"
-      ).innerHTML;
+      ).textContent;
     } else if (curPath.includes("/tags")) {
       presenceData.details = "Viewing tags:";
       presenceData.state = `${
@@ -36,11 +36,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = typeURL.searchParams.get("nick");
       presenceData.smallImageKey = "search";
     } else if (curPath.includes("/dashboard")) {
-      if (curPath.includes("/works"))
+      if (curPath.includes("/works")) {
         presenceData.details = `Managing ${
           curPath.includes("/series") ? "Series" : "Artworks"
         }`;
-      else if (curPath.includes("/report/artworks"))
+      } else if (curPath.includes("/report/artworks"))
         presenceData.details = "Viewing access analytics";
       else if (curPath.includes("report/ranking"))
         presenceData.details = "Viewing ranking report";
@@ -49,22 +49,20 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing Feed";
       presenceData.state = document.querySelector<HTMLElement>(
         "#stacc_center_title"
-      ).innerText;
+      ).textContent;
     } else if (curPath.includes("/fanbox"))
       presenceData.details = "Viewing fanbox";
     else if (curPath.includes("/event")) {
       const title = document.querySelector(
         "#contents > div.pane.full.group > h1"
       );
-      if (title !== null) {
+      if (title) {
         presenceData.details = "Viewing event:";
         presenceData.state = title.textContent;
-      } else {
-        presenceData.details = "Browsing events...";
-      }
+      } else presenceData.details = "Browsing events...";
     } else if (curPath.includes("/ranking")) {
       presenceData.details = "Viewing ranking:";
-      presenceData.state = document.querySelector(".current").innerHTML;
+      presenceData.state = document.querySelector(".current").textContent;
     } else if (curPath.includes("/history.php"))
       presenceData.details = "Browsing History";
     else if (curPath.includes("/bookmark"))
@@ -107,7 +105,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Auto Feed activity";
     else if (curPath.includes("/setting_mute.php")) {
       presenceData.details = "Mute setting | Tags";
-      if (typeResult == "user") presenceData.details = "Mute setting | User";
+      if (typeResult === "user") presenceData.details = "Mute setting | User";
     } else if (curPath.includes("/premium"))
       presenceData.details = "Viewing Premium Registered Info";
     else if (curPath.includes("/messages.php"))
@@ -116,15 +114,15 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Recommended Works";
       if (curPath.includes("/users"))
         presenceData.details = "Viewing Recommended Users";
-    } else if (curPath.includes("/upload.php"))
+    } else if (curPath.includes("/upload.php")) {
       presenceData.details = `Submiting New ${
-        typeResult == "manga"
+        typeResult === "manga"
           ? "Manga"
           : curPath.includes("novel")
           ? "Novel"
           : "Illustrations"
       }`;
-    else if (curPath.includes("/ugoira_upload.php"))
+    } else if (curPath.includes("/ugoira_upload.php"))
       presenceData.details = "Submiting New Ugoira(Animations)";
     else if (curPath.includes("/manage"))
       presenceData.details = "Managing Artworks";
@@ -142,29 +140,32 @@ presence.on("UpdateData", async () => {
       })`;
     } else if (curPath.includes("/novel/")) {
       const title = document.querySelector(
-          "#root > div > div:nth-child(2) > div > div > main > section > div > div:nth-child(2) > div:nth-child(2)"
-        ),
-        author = document.querySelector(
-          "#root > div > div:nth-child(2) > div > div > aside > section > h2 > div > div > a"
-        );
-      presenceData.details =
-        title !== null ? "Viewing novel:" : "Browsing for novels...";
-      if (title !== null)
-        presenceData.state = `${title.textContent} (${author.textContent})`;
+        "#root > div > div:nth-child(2) > div > div > main > section > div > div:nth-child(2) > div:nth-child(2)"
+      );
+      presenceData.details = title
+        ? "Viewing novel:"
+        : "Browsing for novels...";
+      if (title) {
+        presenceData.state = `${title.textContent} (${
+          document.querySelector(
+            "#root > div > div:nth-child(2) > div > div > aside > section > h2 > div > div > a"
+          ).textContent
+        })`;
+      }
     } else if (curPath.startsWith("/") || curPath.startsWith("/en/"))
       presenceData.details = "Viewing home page";
 
     //end
-  } else if (document.location.hostname == "sketch.pixiv.net") {
+  } else if (document.location.hostname === "sketch.pixiv.net") {
     presenceData.smallImageKey = "writing";
-    if (curPath == "/" || curPath.includes("/public")) {
+    if (curPath === "/" || curPath.includes("/public"))
       presenceData.details = "Viewing sketch page";
-    } else if (curPath.includes("/lives/")) {
-      const title = document.querySelector<HTMLElement>(
-        "#LiveSidebarLiveUser > div.name"
-      );
+    else if (curPath.includes("/lives/")) {
       presenceData.details = "Sketch- Viewing livestream";
-      presenceData.state = "by user: " + title.innerText;
+      presenceData.state = `by user: ${
+        document.querySelector<HTMLElement>("#LiveSidebarLiveUser > div.name")
+          .textContent
+      }`;
       presenceData.smallImageKey = "live";
     } else if (curPath.includes("/lives"))
       presenceData.details = "Sketch- Browsing livestreams";
@@ -181,13 +182,12 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Sketch- Viewing tag:";
       presenceData.state = document.querySelector<HTMLElement>(
         "#TagHeader > div > div.CarouselOverlay > div > div"
-      ).innerText;
+      ).textContent;
     }
   }
 
-  presenceData.startTimestamp = browsingStamp;
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
+  presenceData.startTimestamp = browsingTimestamp;
+  if (!presenceData.details) {
     presence.setActivity();
     return;
   }

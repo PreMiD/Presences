@@ -25,17 +25,17 @@ presence.on("UpdateData", async () => {
     case "/search":
       presenceData.smallImageKey = "search";
       presenceData.details = "Searching for";
-      presenceData.state = (document.querySelector(
-        "#q"
-      ) as HTMLInputElement).value;
+      presenceData.state = (
+        document.querySelector("#q") as HTMLInputElement
+      ).value;
       break;
     case "/packages":
       presenceData.details = "Viewing packages pricing";
       break;
     default: {
-      if (document.location.pathname.startsWith("/dashboard")) {
+      if (document.location.pathname.startsWith("/dashboard"))
         presenceData.details = "Viewing account dashbaord";
-      }
+
       if (document.location.pathname.startsWith("/categories")) {
         presenceData.details = `Viewing ${toTitleCase(
           document.location.pathname
@@ -58,22 +58,19 @@ presence.on("UpdateData", async () => {
         if (video) {
           const title = document.querySelector(".video-property__title");
           if (title) presenceData.details = title.textContent;
-          else
+          else {
             presenceData.details = document.querySelector(
               ".content-title-season"
             ).textContent;
+          }
           const series = document.querySelector(".user-name.video-channel");
           if (series) presenceData.state = series.textContent;
-          else
-            presenceData.state = document.querySelector(
-              ".content-title-big"
-            ).textContent;
-          const timestamps = presence.getTimestamps(
-            video.currentTime,
-            video.duration
-          );
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
+          else {
+            presenceData.state =
+              document.querySelector(".content-title-big").textContent;
+          }
+          [presenceData.startTimestamp, presenceData.endTimestamp] =
+            presence.getTimestamps(video.currentTime, video.duration);
           if (video.paused) {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
@@ -114,6 +111,6 @@ presence.on("UpdateData", async () => {
 function toTitleCase(string: string) {
   return string
     .split(" ")
-    .map((x) => x.charAt(0).toUpperCase() + x.slice(1))
+    .map(x => x.charAt(0).toUpperCase() + x.slice(1))
     .join(" ");
 }

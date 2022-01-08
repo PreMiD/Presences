@@ -1,7 +1,9 @@
 const presence = new Presence({
     clientId: "643848955586805770"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/": "Ana Sayfa",
     "/espor": "Espor Haberleri",
     "/video-konusu": "Video Konuları",
@@ -34,9 +36,9 @@ presence.on("UpdateData", async () => {
     postTitle &&
     author &&
     date &&
-    postTitle.textContent != "" &&
-    author.textContent != "" &&
-    date.textContent != ""
+    postTitle.textContent !== "" &&
+    author.textContent !== "" &&
+    date.textContent !== ""
   ) {
     presence.setActivity({
       largeImageKey: "pb-logo",
@@ -49,7 +51,7 @@ presence.on("UpdateData", async () => {
   } else if (
     page.includes("/author/") &&
     _author &&
-    _author.textContent != ""
+    _author.textContent !== ""
   ) {
     presence.setActivity({
       largeImageKey: "pb-logo",
@@ -59,40 +61,34 @@ presence.on("UpdateData", async () => {
     });
   } else if (page.includes("/etiket/")) {
     const tag = document.querySelector(
-        "#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"
-      ),
-      number =
-        tag && tag.textContent != ""
-          ? tag.textContent.split(" ").length - 1
-          : null,
-      fixedTag =
-        tag && tag.textContent != ""
-          ? tag.textContent.split(" ")[number].replace(/"/g, "")
-          : null;
+      "#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"
+    );
 
     presence.setActivity({
       largeImageKey: "pb-logo",
       details: "Bir etikete göz atıyor:",
-      state: fixedTag || "Belirsiz",
+      state:
+        tag && tag.textContent !== ""
+          ? tag.textContent
+              .split(" ")
+              [tag.textContent.split(" ").length - 1].replace(/"/g, "")
+          : null || "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (document.location.search.includes("?s=")) {
     const searchingFor = document.querySelector(
-        "#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"
-      ),
-      number =
-        searchingFor && searchingFor.textContent != ""
-          ? searchingFor.textContent.split(" ").length - 1
-          : null,
-      fixedSearch =
-        searchingFor && searchingFor.textContent != ""
-          ? searchingFor.textContent.split(" ")[number].replace(/"/g, "")
-          : null;
+      "#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"
+    );
 
     presence.setActivity({
       largeImageKey: "pb-logo",
       details: "Bir şey arıyor:",
-      state: fixedSearch || "Belirsiz",
+      state:
+        searchingFor && searchingFor.textContent !== ""
+          ? searchingFor.textContent
+              .split(" ")
+              [searchingFor.textContent.split(" ").length - 1].replace(/"/g, "")
+          : null || "Belirsiz",
       smallImageKey: "search",
       startTimestamp: Math.floor(Date.now() / 1000)
     });

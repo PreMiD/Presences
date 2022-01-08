@@ -1,15 +1,13 @@
-const video_frame = new iFrame();
+const videoFrame = new iFrame();
 
-video_frame.on("UpdateData", async () => {
+videoFrame.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector("video");
 
   if (video) {
-    const videoMessage: Record<string, unknown> = {
+    videoFrame.send({
       paused: video.paused,
       duration: video.duration,
       currentTime: video.currentTime
-    };
-
-    video_frame.send(videoMessage);
+    });
   }
 });

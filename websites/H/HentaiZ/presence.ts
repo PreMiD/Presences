@@ -13,7 +13,7 @@ let lastPlaybackState: boolean,
     currentTime: 0,
     paused: true
   },
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on(
   "iFrameData",
@@ -29,66 +29,62 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    search = document.location.search;
+    { search } = document.location;
 
   if (lastPath !== curPath || lastPlaybackState !== playback) {
     lastPath = curPath;
     lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (!playback) {
-    if (curPath.includes("/login")) {
-      presenceData.details = "Đang đăng nhập";
-    } else if (search.startsWith("?s=")) {
+    if (curPath.includes("/login")) presenceData.details = "Đang đăng nhập";
+    else if (search.startsWith("?s=")) {
       presenceData.details = "Đang tìm kiếm";
-      presenceData.state = "Từ khoá: " + search.split("?s=")[1];
+      presenceData.state = `Từ khoá: ${search.split("?s=")[1]}`;
     } else if (curPath.includes("/category")) {
       const title = document.querySelector("title");
       presenceData.details = "Đang tìm phim";
-      presenceData.state = title.textContent.split(" - ")[0];
-    } else if (curPath.includes("/hentai-uncensored")) {
+      [presenceData.state] = title.textContent.split(" - ");
+    } else if (curPath.includes("/hentai-uncensored"))
       presenceData.details = "Đang tìm phim Uncensored";
-    } else if (curPath.includes("/completed-hentai")) {
+    else if (curPath.includes("/completed-hentai"))
       presenceData.details = "Đang tìm phim đã hoàn thành";
-    } else if (curPath.includes("/trailer-hentai")) {
+    else if (curPath.includes("/trailer-hentai"))
       presenceData.details = "Đang tìm trailer";
-    } else if (curPath.includes("/favorite-hentai")) {
+    else if (curPath.includes("/favorite-hentai"))
       presenceData.details = "Đang tìm danh đã thích";
-    } else if (curPath.includes("/images-gallery")) {
+    else if (curPath.includes("/images-gallery"))
       presenceData.details = "Đang tìm ảnh";
-    } else {
+    else {
       const title = document.querySelector(".anime-name>h1");
-      presenceData.details = title ? title.innerHTML : "Đang ở trang chủ";
+      presenceData.details = title ? title.textContent : "Đang ở trang chủ";
       if (title) presenceData.state = "Đang chọn tập";
     }
 
     if (!search.startsWith("?s=") && !curPath.includes("/category"))
       delete presenceData.state;
 
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
     presence.setActivity(presenceData, false);
     return;
   }
 
-  if (video !== null && !isNaN(video.duration)) {
-    const title = document.querySelector("h1").innerHTML,
-      brand = document.querySelector("#nhasx").innerHTML,
-      timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+  if (video && !isNaN(video.duration)) {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
-    presence.setTrayTitle(video.paused ? "" : title);
-
-    presenceData.details = "Đang xem: " + title;
-    presenceData.state = brand;
+    presenceData.details = `Đang xem: ${
+      document.querySelector("h1").textContent
+    }`;
+    presenceData.state = document.querySelector("#nhasx").textContent;
 
     if (video.paused) {
       delete presenceData.startTimestamp;

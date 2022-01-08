@@ -1,23 +1,26 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Cairo",
     "id": "208105877838888960"
   },
-  "url": "duckduckgo.com",
-  "description": {
-    "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs."
-  },
   "service": "DuckDuckGo",
-  "version": "1.2.6",
+  "description": {
+    "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs.",
+    "nl": "Het internetprivacybedrijf dat u in staat stelt naadloos controle te krijgen over uw persoonlijke gegevens online, zonder enige concessies.",
+    "vi_VN": "Công ty bảo mật Internet giúp bạn nắm kiểm soát về thông tin cá nhân của mình trên mạng, không cần đánh đổi bất cứ thứ gì."
+  },
+  "url": "duckduckgo.com",
+  "version": "1.2.12",
   "logo": "https://i.imgur.com/zl3jobl.png",
   "thumbnail": "https://i.imgur.com/VlPQGur.png",
   "color": "#FF5900",
+  "category": "other",
   "tags": [
     "internet",
     "browing",
     "search"
   ],
-  "category": "other",
   "settings": [
     {
       "id": "homepageMessage",

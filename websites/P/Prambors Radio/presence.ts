@@ -11,7 +11,7 @@ const presence = new Presence({
 let timestamp: number;
 
 presence.on("UpdateData", async () => {
-  const pause = (await strings).pause;
+  const { pause } = await strings;
   if (
     ["streaming.pramborsfm.com", "live.pramborsfm.com"].includes(
       document.location.hostname
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
         url: "https://live.pramborsfm.com"
       }
     ];
-    if (!timestamp) timestamp = Date.now();
+    timestamp ??= Date.now();
     switch (document.location.hostname) {
       case "streaming.pramborsfm.com": {
         const status = document.querySelector("#playerBtn")?.className;

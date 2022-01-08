@@ -2,37 +2,33 @@ const presence = new Presence({
   clientId: "645051733961211934"
 });
 
-var elapsed, oldURL;
+let elapsed: number, oldURL: string;
 
 presence.on("UpdateData", async () => {
-  let details, state;
-  const title = document.title;
-
   if (window.location.href !== oldURL) {
     oldURL = window.location.href;
     elapsed = Math.floor(Date.now() / 1000);
   }
 
+  const { title } = document,
+    presenceData: PresenceData = {
+      largeImageKey: "wired",
+      startTimestamp: elapsed
+    };
+
   if (
     document.location.pathname.includes("/gallery/") ||
     document.location.pathname.includes("/story/")
   ) {
-    details = "Reading: ";
-    state = title.replace(" | WIRED", "");
+    presenceData.details = "Reading: ";
+    presenceData.state = title.replace(" | WIRED", "");
   } else if (document.location.pathname.includes("/video/watch/")) {
-    details = "Watching: ";
-    state = title.replace(" | WIRED Video | CNE", "");
+    presenceData.details = "Watching: ";
+    presenceData.state = title.replace(" | WIRED Video | CNE", "");
   } else {
-    details = "Browsing: ";
-    state = title.replace(" | WIRED", "");
+    presenceData.details = "Browsing: ";
+    presenceData.state = title.replace(" | WIRED", "");
   }
 
-  var data: PresenceData = {
-    details: details,
-    state: state,
-    largeImageKey: "wired",
-    startTimestamp: elapsed
-  };
-
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

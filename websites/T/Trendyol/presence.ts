@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "643758670131363840"
   }),
-  pages = {
+  pages: { [key: string]: string } = {
     "/butik/liste/erkek": "Erkek Giyim",
     "/butik/liste/kadin": "Kadın Giyim",
     "/butik/liste/cocuk": "Çocuk Giyim",
@@ -66,8 +66,8 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     });
   } else if (
-    (page == "/tum--urunler" && document.location.search.includes("?q=")) ||
-    (searchingFor && searchingFor.textContent != "")
+    (page === "/tum--urunler" && document.location.search.includes("?q=")) ||
+    (searchingFor && searchingFor.textContent !== "")
   ) {
     presence.setActivity({
       largeImageKey: "ty-logo",
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: "search",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (category && category.textContent != "") {
+  } else if (category && category.textContent !== "") {
     presence.setActivity({
       largeImageKey: "ty-logo",
       details: "Bir kategoriye göz atıyor:",
@@ -86,14 +86,14 @@ presence.on("UpdateData", async () => {
   } else if (
     product &&
     product2 &&
-    product.textContent != "" &&
-    product2.textContent != ""
+    product.textContent !== "" &&
+    product2.textContent !== ""
   ) {
     presence.setActivity({
       largeImageKey: "ty-logo",
       details: "Bir ürüne göz atıyor:",
       state: `${product.textContent} | ${product2.textContent} ${
-        price && price.textContent != "" ? `(${price.textContent})` : null
+        price && price.textContent !== "" ? `(${price.textContent})` : null
       }`,
       startTimestamp: Math.floor(Date.now() / 1000)
     });

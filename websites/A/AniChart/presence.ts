@@ -30,16 +30,17 @@ presence.on("UpdateData", async () => {
       break;
     default: {
       if ((document.querySelector(".input") as HTMLInputElement)?.value) {
-        presenceData.details = `Searching anime`;
+        presenceData.details = "Searching anime";
         presenceData.smallImageKey = "search";
-        presenceData.state = (document.querySelector(
-          ".input"
-        ) as HTMLInputElement).value;
-      } else
+        presenceData.state = (
+          document.querySelector(".input") as HTMLInputElement
+        ).value;
+      } else {
         presenceData.details = `Viewing ${document.location.pathname
           .substring(1)
           .split("-")
           .join(" ")} anime`;
+      }
       break;
     }
   }

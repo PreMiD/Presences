@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 type VideoData = {
   paused: boolean;
@@ -19,14 +19,13 @@ presence.on("iFrameData", (videoData: VideoData) => {
 
 const paths = {
   async "/watch"(presenceData: PresenceData, buttons: boolean) {
-    const title = document.querySelector<HTMLAnchorElement>(".now2 .c a")
-        ?.textContent,
-      episode = document
+    presenceData.details =
+      document.querySelector<HTMLAnchorElement>(".now2 .c a")?.textContent ||
+      "Unknown title";
+    presenceData.state =
+      document
         .querySelector<HTMLElement>(".now2 .c")
-        ?.lastChild?.textContent?.match(/\s*-\s*(.+)/)[1];
-
-    presenceData.details = title || "Unknown title";
-    presenceData.state = episode || "Unknown episode";
+        ?.lastChild?.textContent?.match(/\s*-\s*(.+)/)[1] || "Unknown episode";
 
     if (buttons) {
       presenceData.buttons = [
@@ -36,8 +35,8 @@ const paths = {
         }
       ];
 
-      const link = document.querySelector<HTMLAnchorElement>(".now2 > div > a")
-        ?.href;
+      const link =
+        document.querySelector<HTMLAnchorElement>(".now2 > div > a")?.href;
       if (link) {
         presenceData.buttons.push({
           label: "Episode List",
@@ -70,13 +69,12 @@ const paths = {
     presenceData.state = "Searching...";
     presenceData.smallImageKey = "search";
 
-    const searchParams = new URLSearchParams(window.location.search);
-    let searchQuery = searchParams.get("q");
+    let searchQuery = new URLSearchParams(window.location.search).get("q");
 
     if (searchQuery) {
-      if (searchQuery.length > 18) {
+      if (searchQuery.length > 18)
         searchQuery = `${searchQuery.substring(0, 18)}…`;
-      }
+
       presenceData.details = `"${searchQuery}"`;
     }
   },
@@ -88,9 +86,7 @@ const paths = {
     if (title) {
       presenceData.state = "Viewing info...";
       presenceData.details = title;
-    } else {
-      presenceData.state = "Viewing info for a title...";
-    }
+    } else presenceData.state = "Viewing info for a title...";
   },
   "/animeheaven.eu"(presenceData: PresenceData) {
     presenceData.state = "Viewing front page...";
@@ -122,17 +118,16 @@ const paths = {
 };
 
 presence.on("UpdateData", async () => {
-  const buttons = await presence.getSetting("buttons"),
+  const buttons = await presence.getSetting<boolean>("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
       state: "Browsing...",
-      startTimestamp: browsingStamp
-    },
-    currentPath = window.location.pathname.toLowerCase();
+      startTimestamp: browsingTimestamp
+    };
 
   let playback = true;
   for (const [path, setPresence] of Object.entries(paths)) {
-    if (currentPath.startsWith(path)) {
+    if (window.location.pathname.toLowerCase().startsWith(path)) {
       const isPlaying = await setPresence(presenceData, buttons);
       if (isPlaying === false) playback = isPlaying;
       break;

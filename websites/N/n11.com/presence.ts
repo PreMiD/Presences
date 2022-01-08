@@ -1,7 +1,9 @@
 const presence = new Presence({
     clientId: "629588152679399424"
   }),
-  pages = {
+  pages: {
+    [name: string]: string;
+  } = {
     "/hesabim/siparislerim": "Siparişlerim",
     "/hesabim/iptal-degisim-iade": "İptal, Değişim ve İade",
     "/hesabim/biletlerim": "Biletlerim",
@@ -31,47 +33,42 @@ presence.on("UpdateData", async () => {
       (document.querySelector(
         "#contentProDetail > div.container.product-detail-container > section.box-view.pro-detail-part > div.pro-prop > div.pro-title > h1"
       ) as HTMLElement),
-    price =
-      (document.querySelector(
-        "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-      ) as any) &&
-      document.querySelector(
-        "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-      ).attributes["content"]
-        ? document.querySelector(
-            "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
-          ).attributes["content"].textContent
-        : null;
+    price = (
+      (
+        document.querySelector(
+          "#contentProDetail > div > div.proDetailArea > div.proDetail > div.paymentDetail > div.price-cover > div > div > div > ins"
+        )?.attributes as unknown as { [name: string]: string }
+      )?.content as unknown as Element
+    )?.textContent,
+    presenceData: PresenceData = {
+      largeImageKey: "n11-logo",
+      startTimestamp: Math.floor(Date.now() / 1000)
+    };
 
-  const data: { [k: string]: any } = {
-    largeImageKey: "n11-logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
-
-  if (productName && productName.textContent != "") {
-    data.details = "Bir ürüne göz atıyor:";
-    data.state = `${productName.textContent.trim()}${
-      price ? " - " + price + " TL" : ""
+  if (productName && productName.textContent !== "") {
+    presenceData.details = "Bir ürüne göz atıyor:";
+    presenceData.state = `${productName.textContent.trim()}${
+      price ? ` - ${price} TL` : ""
     }`;
   } else if (pages[page] || pages[page.slice(0, -1)]) {
-    data.details = "Bir sayfaya göz atıyor:";
-    data.state = pages[page] || pages[page.slice(0, -1)];
+    presenceData.details = "Bir sayfaya göz atıyor:";
+    presenceData.state = pages[page] || pages[page.slice(0, -1)];
   } else if (
     page.includes("/arama") &&
-    document.location.search != "?s=GOB2CGlobal"
+    document.location.search !== "?s=GOB2CGlobal"
   ) {
-    data.details = "Bir şey arıyor:";
-    data.state =
+    presenceData.details = "Bir şey arıyor:";
+    presenceData.state =
       document.title && document.title.includes(" - n11.com")
         ? document.title.replace(" - n11.com", "")
         : "";
-    data.smallImageKey = "search";
-  } else if (document.location.search == "?s=GOB2CGlobal") {
-    data.details = "Bir sayfaya göz atıyor:";
-    data.state = "Yurt Dışından Ürünler";
+    presenceData.smallImageKey = "search";
+  } else if (document.location.search === "?s=GOB2CGlobal") {
+    presenceData.details = "Bir sayfaya göz atıyor:";
+    presenceData.state = "Yurt Dışından Ürünler";
   } else if (page.includes("/magaza/")) {
-    data.details = "Bir mağazaya göz atıyor:";
-    data.state = document.querySelector(
+    presenceData.details = "Bir mağazaya göz atıyor:";
+    presenceData.state = document.querySelector(
       "#contentSellerShop > div > section.shopHeader > div.sellerInfo > div.sellerDetail > div.title > h1"
     )
       ? document.querySelector(
@@ -79,10 +76,10 @@ presence.on("UpdateData", async () => {
         ).textContent
       : "Belirsiz";
   } else {
-    data.details = "Bir sayfaya göz atıyor:";
-    data.state = "Ana Sayfa";
+    presenceData.details = "Bir sayfaya göz atıyor:";
+    presenceData.state = "Ana Sayfa";
   }
 
-  if (data.details && data.state && data.details != "" && data.state != "")
-    presence.setActivity(data);
+  if (presenceData.details && presenceData.state)
+    presence.setActivity(presenceData);
 });

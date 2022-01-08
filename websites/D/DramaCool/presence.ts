@@ -19,23 +19,25 @@ const presence = new Presence({
         episode: "general.episode",
         searchFor: "general.searchFor",
         searching: "general.search",
+        viewSeriesButton: "general.buttonViewSeries",
         viewEpisode: "general.buttonViewEpisode",
+        viewSeries: "general.viewSeries",
         reading: "general.reading",
         viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting<string>("lang").catch(() => "en")
     );
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("iFrameData", (data: Data) => {
-  ShowData.playback = !isNaN(data.iframe_video.duration) ? true : false;
+  ShowData.playback = !isNaN(data.iframeVideo.duration) ? true : false;
 
   if (ShowData.playback) {
-    ShowData.duration = data.iframe_video.duration;
-    ShowData.paused = data.iframe_video.paused;
-    ShowData.currentTime = data.iframe_video.currentTime;
+    ShowData.duration = data.iframeVideo.duration;
+    ShowData.paused = data.iframeVideo.paused;
+    ShowData.currentTime = data.iframeVideo.currentTime;
   }
 });
 
@@ -47,44 +49,41 @@ presence.on("UpdateData", async () => {
       smallImageKey: "reading",
       startTimestamp: startsTime
     },
-    newLang = await presence.getSetting("lang"),
-    showButtons = await presence.getSetting("buttons"),
-    pathname = document.location.pathname;
+    newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
+    { pathname } = document.location;
 
-  if (!oldLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
 
   if (pathname.includes("/drama-detail")) {
-    ShowData.title = document.querySelector("h1").textContent;
-
     presenceData.smallImageText = (await strings).reading;
 
-    presenceData.details = (await strings).viewPage;
-    presenceData.state = ShowData.title;
+    presenceData.details = (await strings).viewSeries;
+    presenceData.state = document.querySelector("h1").textContent;
+
+    presenceData.buttons = [
+      {
+        label: (await strings).viewSeriesButton,
+        url: document.URL
+      }
+    ];
   } else if (pathname.includes("/search")) {
-    const searchType = document.location.search.includes("movies")
+    presenceData.details = (await strings).searchFor;
+    presenceData.state = document.location.search.includes("movies")
       ? "Movies"
       : "Stars";
 
-    presenceData.details = (await strings).searchFor;
-    presenceData.state = searchType;
-
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = (await strings).searching;
-  } else if (pathname.includes("/")) {
+  } else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+).html")) {
     ShowData.title = document.querySelector("div.category > a")?.textContent;
 
     if (ShowData.playback) {
-      const timestamps = presence.getTimestamps(
-        ShowData.currentTime,
-        ShowData.duration
-      );
       ShowData.ep = (document.title.match(
         /Episode ?([1-9]?[0-9]?[0-9])?( & )?([1-9]?[0-9]?[0-9])/g
       ) || document.URL.match(/episode-?([1-9]?[0-9]?[0-9])/g))[0].replace(
@@ -100,17 +99,20 @@ presence.on("UpdateData", async () => {
       presenceData.details = ShowData.title;
       presenceData.state = `${(await strings).episode} ${ShowData.ep}`;
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(ShowData.currentTime, ShowData.duration);
 
-      if (showButtons) {
-        presenceData.buttons = [
-          {
-            label: (await strings).viewEpisode,
-            url: document.baseURI
-          }
-        ];
-      } else delete presenceData.buttons;
+      presenceData.buttons = [
+        {
+          label: (await strings).viewEpisode,
+          url: document.baseURI
+        },
+        {
+          label: (await strings).viewSeriesButton,
+          url: document.querySelector<HTMLAnchorElement>("div.category > a")
+            .href
+        }
+      ];
 
       if (ShowData.paused) {
         delete presenceData.startTimestamp;
@@ -119,16 +121,35 @@ presence.on("UpdateData", async () => {
     } else if (ShowData.title) {
       presenceData.smallImageText = (await strings).reading;
 
-      presenceData.details = (await strings).viewPage;
+      presenceData.details = (await strings).viewSeries;
       presenceData.state = ShowData.title;
+
+      presenceData.buttons = [
+        {
+          label: (await strings).viewSeriesButton,
+          url: document.URL
+        }
+      ];
     }
+  } else if (pathname.includes("/calendar")) {
+    presenceData.details = (await strings).viewPage;
+
+    presenceData.state = "Calendar";
+    presenceData.buttons = [
+      {
+        label: "View Calendar",
+        url: document.URL
+      }
+    ];
   }
+
+  if (!showButtons && presenceData.buttons) delete presenceData.buttons;
 
   presence.setActivity(presenceData);
 });
 
 interface Data {
-  iframe_video: {
+  iframeVideo: {
     currentTime: number;
     paused: boolean;
     duration: number;

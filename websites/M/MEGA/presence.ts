@@ -16,9 +16,9 @@ presence.on("UpdateData", () => {
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
-  if (page == "/" || page.includes("startpage") || page.includes("start")) {
+  if (page === "/" || page.includes("startpage") || page.includes("start"))
     presenceData.details = "Homepage";
-  } else if (page.includes("fm")) {
+  else if (page.includes("fm")) {
     presenceData.details = "Viewing:";
     presenceData.state = "File Manager";
   } else if (page.includes("chat")) {
@@ -29,14 +29,14 @@ presence.on("UpdateData", () => {
     fileExtension = document.querySelector("span.extension");
 
     if (
-      (fileName == null && fileExtension == null) ||
-      (fileName.innerText == "" && fileExtension.innerText == "")
+      (fileName === null && fileExtension === null) ||
+      (fileName.textContent === "" && fileExtension.textContent === "")
     ) {
       details = "Entering Decryption Key...";
       state = "Holding...";
     } else {
       details = "Viewing File:";
-      state = fileName.innerText + fileExtension.innerText;
+      state = fileName.textContent + fileExtension.textContent;
     }
     presenceData.details = details;
     presenceData.state = state;
@@ -70,7 +70,7 @@ presence.on("UpdateData", () => {
   } else if (page.includes("help")) {
     helpCategory = document.querySelector("div.section-title");
     presenceData.details = "MEGA Support";
-    presenceData.state = helpCategory.innerText;
+    presenceData.state = helpCategory.textContent;
   } else if (page.includes("register")) {
     presenceData.details = "Registering";
     presenceData.state = "mega.nz";
@@ -79,10 +79,6 @@ presence.on("UpdateData", () => {
     presenceData.state = "mega.nz";
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

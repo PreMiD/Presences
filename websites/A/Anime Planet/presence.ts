@@ -20,11 +20,11 @@ const presence = new Presence({
         viewManga: "general.viewManga",
         buttonViewProfile: "general.buttonViewProfile"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     ),
   startsTime = Math.floor(Date.now() / 1000);
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null,
   playback: boolean,
   duration: number,
@@ -32,34 +32,38 @@ let strings = getStrings(),
   paused: boolean;
 
 presence.on("iFrameData", (data: IFrameData) => {
-  playback = data.iframe_video?.duration !== undefined ? true : false;
+  playback = data.iframeVideo?.duration ? true : false;
 
-  if (playback) {
-    duration = data.iframe_video.duration;
-    currentTime = data.iframe_video.currentTime;
-    paused = data.iframe_video.paused;
-  }
+  if (playback) ({ duration, currentTime, paused } = data.iframeVideo);
 });
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang").catch(() => "en"),
-    AnimeDetails: string = await presence.getSetting("AnimeDetails"),
-    AnimeState: string = await presence.getSetting("AnimeState"),
-    MangaDetails: string = await presence.getSetting("MangaDetails"),
-    MangaState: string = await presence.getSetting("MangaState"),
-    timestamp: boolean = await presence.getSetting("timestamp"),
-    buttons = await presence.getSetting("buttons");
+  const [
+    newLang,
+    AnimeDetails,
+    AnimeState,
+    MangaDetails,
+    MangaState,
+    timestamp,
+    buttons
+  ] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<string>("AnimeDetails"),
+    presence.getSetting<string>("AnimeState"),
+    presence.getSetting<string>("MangaDetails"),
+    presence.getSetting<string>("MangaState"),
+    presence.getSetting<boolean>("timestamp"),
+    presence.getSetting<boolean>("buttons")
+  ]);
 
-  if (!oldLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   let presenceData: PresenceData = {
     largeImageKey: "animep_logo",
-    details: (await strings).browse,
+    details: strings.browse,
     smallImageKey: "reading",
     startTimestamp: startsTime
   };
@@ -88,11 +92,11 @@ presence.on("UpdateData", async () => {
       [key: string]: PresenceData;
     } = {
       "/characters/(top-hated|all|top-loved)": {
-        details: (await strings).viewPage,
+        details: strings.viewPage,
         state: content.title
       },
       "/characters/tags": {
-        details: (await strings).viewPage,
+        details: strings.viewPage,
         state: "Characters"
       },
       "/characters/": {
@@ -128,7 +132,7 @@ presence.on("UpdateData", async () => {
         ]
       },
       "/forum/": {
-        details: (await strings).viewPage,
+        details: strings.viewPage,
         state: "Forums"
       },
       "/challenges/": {
@@ -136,61 +140,62 @@ presence.on("UpdateData", async () => {
         state: content.title
       },
       "/community/": {
-        details: (await strings).viewPage,
+        details: strings.viewPage,
         state: `Community • ${content.title}`
       },
       "reviews.php": {
-        details: (await strings).viewPage,
+        details: strings.viewPage,
         state: `${content.title} • ${
           location.search.endsWith("anime") ? "Anime" : "Manga"
         }`
       },
       "/users/": {
-        details: (await strings).viewProfile,
+        details: strings.viewProfile,
         state: document.querySelector("h1")?.textContent.trim(),
-        smallImageText: document.querySelector("p:nth-child(2) > a")
-          .textContent,
+        smallImageText:
+          document.querySelector("p:nth-child(2) > a").textContent,
         buttons: [
           {
-            label: (await strings).buttonViewProfile,
+            label: strings.buttonViewProfile,
             url: document.baseURI
           }
         ]
       },
       "/studios/": {
-        details: `Viewing studio:`,
+        details: "Viewing studio:",
         state: content.title
       },
-      "/manga/(read-online|recommendations|light-novels|top-manga|all|magazines)": {
-        details: (await strings).viewPage,
-        state: content.title
-      },
+      "/manga/(read-online|recommendations|light-novels|top-manga|all|magazines)":
+        {
+          details: strings.viewPage,
+          state: content.title
+        },
       "/manga/tags/": {
-        details: `Manga | Viewing tag:`,
+        details: "Manga | Viewing tag:",
         state: content.title
       },
       "/manga/": {
-        details: (await strings).viewManga,
+        details: strings.viewManga,
         state: content.title
       },
       "/anime/(watch-online|top-anime|seasons|all|recommendations)": {
-        details: (await strings).viewPage,
+        details: strings.viewPage,
         state: content.title
       },
       "/anime/tags/": {
-        details: `Anime | Viewing tag:`,
+        details: "Anime | Viewing tag:",
         state: content.title
       },
       "/anime/": {
-        details: (await strings).viewAnime,
+        details: strings.viewAnime,
         state: content.title
       },
       "/login": {
-        details: (await strings).viewPage,
+        details: strings.viewPage,
         state: "The login page"
       },
       "/sign-up": {
-        details: (await strings).viewPage,
+        details: strings.viewPage,
         state: "The sign up page"
       }
     };
@@ -226,8 +231,6 @@ presence.on("UpdateData", async () => {
       .trim();
 
     if (!isNaN(duration)) {
-      const timestamps = presence.getTimestamps(currentTime, duration);
-
       presenceData.details = AnimeDetails.replace(
         "%title%",
         content.title
@@ -240,21 +243,19 @@ presence.on("UpdateData", async () => {
         `EP.${content.episode.ep} ${content.episode.title ?? ""}`
       );
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(currentTime, duration);
 
       presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
+      presenceData.smallImageText = paused ? strings.pause : strings.play;
 
       presenceData.buttons = [
         {
-          label: (await strings).viewEpisode,
+          label: strings.viewEpisode,
           url: document.baseURI
         },
         {
-          label: (await strings).viewSeries,
+          label: strings.viewSeries,
           url: document.querySelector<HTMLAnchorElement>("h2.sub > a").href
         }
       ];
@@ -264,25 +265,25 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else {
-      presenceData.details = (await strings).viewAnime;
+      presenceData.details = strings.viewAnime;
       presenceData.state = content.title;
     }
   } else if (path.includes("/chapters/")) {
-    content.episode.ep = document
+    [content.episode.ep] = document
       .querySelector("h1")
       .textContent.replace(content.title, "")
-      .match(/[1-9]?[0-9]?[0-9]?.?[1-9]?[0-9]?[0-9]/g)[0];
+      .match(/[1-9]?[0-9]?[0-9]?.?[1-9]?[0-9]?[0-9]/g);
 
     presenceData.details = MangaDetails.replace(
       "%title%",
       content.title
-    ).replace("%chapter%", `${(await strings).chapter} ${content.episode.ep}`);
+    ).replace("%chapter%", `${strings.chapter} ${content.episode.ep}`);
     presenceData.state = MangaState.replace("%title%", content.title).replace(
       "%chapter%",
-      `${(await strings).chapter} ${content.episode.ep}`
+      `${strings.chapter} ${content.episode.ep}`
     );
 
-    presenceData.smallImageText = (await strings).reading;
+    presenceData.smallImageText = strings.reading;
 
     presenceData.buttons = [
       {
@@ -302,7 +303,7 @@ presence.on("UpdateData", async () => {
 });
 
 interface IFrameData {
-  iframe_video: {
+  iframeVideo: {
     duration: number;
     currentTime: number;
     paused: boolean;

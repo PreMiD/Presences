@@ -1,15 +1,15 @@
-var presence = new Presence({
-  clientId: "631122124630654979"
-});
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "631122124630654979"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
-    largeImageKey: "logo"
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = "Browing Homepage";
     presenceData.state = "at Homepage";
     presenceData.smallImageKey = "search";
@@ -24,14 +24,13 @@ presence.on("UpdateData", async () => {
       "/top100"
     ].includes(document.location.pathname)
   ) {
-    var dstate;
+    let dstate;
 
-    if (document.location.search != "") {
-      var urlParams = new URLSearchParams(document.location.search);
-      dstate = `searching for ${urlParams.get("name_like")}`;
-    } else {
-      dstate = "browsing list";
-    }
+    if (document.location.search !== "") {
+      dstate = `searching for ${new URLSearchParams(
+        document.location.search
+      ).get("name_like")}`;
+    } else dstate = "browsing list";
 
     presenceData.details = `Browing ${document.location.pathname.replace(
       "/",
@@ -48,7 +47,7 @@ presence.on("UpdateData", async () => {
       "/help/report_recipe"
     ].includes(document.location.pathname)
   ) {
-    presenceData.details = `Browing help `;
+    presenceData.details = "Browing help ";
     presenceData.state = `on ${document.location.pathname
       .replace("/help", "")
       .split("_")
@@ -57,7 +56,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "browsing";
   } else if (document.location.pathname.startsWith("/flavors/")) {
-    presenceData.details = `Browing Flavors `;
+    presenceData.details = "Browing Flavors ";
     presenceData.state = `flavor: ${document.location.pathname
       .replace(/\d/, "")
       .replace(/\d/, "")
@@ -70,7 +69,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "browsing";
   } else if (document.location.pathname.startsWith("/recipes/")) {
-    var data = document.location.hash
+    const data = document.location.hash
       .replace(/\d/, "")
       .replace("#", "")
       .split("_by_");
@@ -79,10 +78,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "browsing";
   }
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -1,9 +1,9 @@
 const iframe = new iFrame();
 
 interface QuizletWindow {
-  dataLayer?: Array<{
+  dataLayer?: {
     event: string;
-  }>;
+  }[];
 }
 
 iframe.on("UpdateData", async () => {
@@ -12,8 +12,8 @@ iframe.on("UpdateData", async () => {
 
   iframe.send({
     layer: quizlet.dataLayer.find(
-      (layer) => layer.event === "dataLayer-initialized"
+      layer => layer.event === "dataLayer-initialized"
     ),
-    searchLayer: quizlet.dataLayer.find((layer) => layer.event === "Search")
+    searchLayer: quizlet.dataLayer.find(layer => layer.event === "Search")
   });
 });

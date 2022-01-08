@@ -1,5 +1,5 @@
-const presence = new Presence({ clientId: "714389082939064381" });
-const browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({ clientId: "714389082939064381" }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement,
   user: HTMLElement,
   pp: HTMLElement,
@@ -12,27 +12,26 @@ let title: HTMLElement,
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
-  if (document.location.pathname == "/") {
-    presenceData.details = "Home Page";
-  } else if (document.location.pathname.includes("/login")) {
+  if (document.location.pathname === "/") presenceData.details = "Home Page";
+  else if (document.location.pathname.includes("/login"))
     presenceData.details = "Logging in";
-  } else if (document.location.pathname.includes("/register")) {
+  else if (document.location.pathname.includes("/register"))
     presenceData.details = "Regitstering account";
-  } else if (document.location.pathname.includes("/u/")) {
+  else if (document.location.pathname.includes("/u/")) {
     user = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div > div.sixteen.wide.column.kpw--zero > div > div > div.kpw--profile--flex > div.kpw--info--block > h1 > p > span.bgf"
     );
-    presenceData.details = user.innerText;
+    presenceData.details = user.textContent;
 
     url = new URL(document.location.href);
     mode = parseInt(url.searchParams.get("mode"));
     country = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div > div.five.wide.column > div:nth-child(1) > div > div:nth-child(1) > b:nth-child(2)"
     );
-    if (country == null) {
+    if (country === null) {
       country = document.querySelector(
         "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div > div.five.wide.column > div:nth-child(1) > div > div:nth-child(1) > b:nth-child(4)"
       );
@@ -45,16 +44,9 @@ presence.on("UpdateData", () => {
         pp = document.querySelector(
           "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div > div.five.wide.column > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(2) > table > tbody > tr:nth-child(4) > td.right.aligned"
         );
-        presenceData.state =
-          pp.innerText +
-          "pp " +
-          rank.innerText +
-          " | " +
-          country.innerText +
-          " ";
-        if (rank.innerText == "Unknown") {
-          pp.innerText = "-";
-        }
+        presenceData.state = `${pp.textContent}pp ${rank.textContent} | ${country.textContent} `;
+        if (rank.textContent === "Unknown") pp.textContent = "-";
+
         presenceData.smallImageKey = "taiko";
         presenceData.smallImageText = "osu!taiko";
         break;
@@ -65,16 +57,9 @@ presence.on("UpdateData", () => {
         pp = document.querySelector(
           "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div > div.five.wide.column > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(3) > table > tbody > tr:nth-child(2) > td.right.aligned"
         );
-        if (rank.innerText == "Unknown") {
-          pp.innerText = "-";
-        }
-        presenceData.state =
-          pp.innerText +
-          "pp " +
-          rank.innerText +
-          " | " +
-          country.innerText +
-          " ";
+        if (rank.textContent === "Unknown") pp.textContent = "-";
+
+        presenceData.state = `${pp.textContent}pp ${rank.textContent} | ${country.textContent} `;
         presenceData.smallImageKey = "ctb";
         presenceData.smallImageText = "Catch the Beat";
         break;
@@ -85,16 +70,9 @@ presence.on("UpdateData", () => {
         pp = document.querySelector(
           "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div > div.five.wide.column > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(4) > table > tbody > tr:nth-child(4) > td.right.aligned"
         );
-        if (rank.innerText == "Unknown") {
-          pp.innerText = "-";
-        }
-        presenceData.state =
-          pp.innerText +
-          "pp " +
-          rank.innerText +
-          " | " +
-          country.innerText +
-          " ";
+        if (rank.textContent === "Unknown") pp.textContent = "-";
+
+        presenceData.state = `${pp.textContent}pp ${rank.textContent} | ${country.textContent} `;
         presenceData.smallImageKey = "mania";
         presenceData.smallImageText = "osu!mania";
         break;
@@ -105,16 +83,9 @@ presence.on("UpdateData", () => {
         pp = document.querySelector(
           "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div > div.five.wide.column > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(1) > table > tbody > tr:nth-child(4) > td.right.aligned"
         );
-        if (rank.innerText == "Unknown") {
-          pp.innerText = "-";
-        }
-        presenceData.state =
-          pp.innerText +
-          "pp " +
-          rank.innerText +
-          " | " +
-          country.innerText +
-          " ";
+        if (rank.textContent === "Unknown") pp.textContent = "-";
+
+        presenceData.state = `${pp.textContent}pp ${rank.textContent} | ${country.textContent} `;
         presenceData.smallImageKey = "std";
         presenceData.smallImageText = "osu!";
         break;
@@ -170,36 +141,36 @@ presence.on("UpdateData", () => {
     rank = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div:nth-child(3) > div > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.right.aligned"
     );
-    presenceData.details = title.innerText + " " + tag.innerText;
-    presenceData.state = pp.innerText + "pp " + rank.innerText;
+    presenceData.details = `${title.textContent} ${tag.textContent}`;
+    presenceData.state = `${pp.textContent}pp ${rank.textContent}`;
   } else if (document.location.pathname.includes("/b/")) {
     title = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.ui.container > div > div > h1"
     );
     presenceData.details = "Looking at the beatmap:";
-    presenceData.state = title.innerText;
-  } else if (document.location.pathname.includes("/beatmaps")) {
+    presenceData.state = title.textContent;
+  } else if (document.location.pathname.includes("/beatmaps"))
     presenceData.details = "Searching for new beatmaps";
-  } else if (document.location.pathname.includes("/beatmaps/rank_request")) {
+  else if (document.location.pathname.includes("/beatmaps/rank_request"))
     presenceData.details = "Request beatmap ranking";
-  } else if (document.location.pathname.includes("/donate")) {
+  else if (document.location.pathname.includes("/donate")) {
     presenceData.details = "Donate";
     presenceData.state = "What are you waiting for?";
-  } else if (document.location.pathname.includes("/shop")) {
+  } else if (document.location.pathname.includes("/shop"))
     presenceData.details = "Shop";
-  } else if (document.location.pathname.includes("/settings")) {
+  else if (document.location.pathname.includes("/settings"))
     presenceData.details = "Browsing their settings";
-  } else if (document.location.pathname.includes("/friends")) {
+  else if (document.location.pathname.includes("/friends"))
     presenceData.details = "Browsing their friends";
-  } else if (document.location.pathname.includes("/changelog")) {
+  else if (document.location.pathname.includes("/changelog"))
     presenceData.details = "Checking changelog";
-  } else if (document.location.pathname.includes("/team")) {
+  else if (document.location.pathname.includes("/team"))
     presenceData.details = "Viewing Kurikku team";
-  } else if (document.location.pathname.includes("/help")) {
+  else if (document.location.pathname.includes("/help"))
     presenceData.details = "Contact support";
-  } else if (document.location.pathname.includes("/streamers")) {
+  else if (document.location.pathname.includes("/streamers"))
     presenceData.details = "Streamers";
-  } else if (document.location.pathname.includes("/tournament/live")) {
+  else if (document.location.pathname.includes("/tournament/live")) {
     presenceData.details = "Viewing Tournament";
     presenceData.state = "Live";
   } else if (document.location.pathname.includes("/doc")) {
@@ -209,25 +180,20 @@ presence.on("UpdateData", () => {
     title = document.querySelector(
       "body > div.ui.full.height.main.wrapper > div.container-pd > div:nth-child(2) > div > div:nth-child(1) > h1"
     );
-    if (title !== null) {
+    if (title) {
       presenceData.details = " View document";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
     }
-  } else if (document.location.pathname.includes("/login")) {
-    presenceData.details = "Regitstering account";
   }
 
-  if (document.location.hostname == "status.kurikku.pw") {
+  if (document.location.hostname === "status.kurikku.pw") {
     presenceData.details = "Checking server status";
     presenceData.state = "Is kurikku down?";
   }
 
-  if (document.location.hostname == "sig.kurikku.pw") {
+  if (document.location.hostname === "sig.kurikku.pw")
     presenceData.details = "Signature Generator";
-  }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

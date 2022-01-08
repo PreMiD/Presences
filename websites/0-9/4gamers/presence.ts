@@ -1,42 +1,38 @@
-var presence = new Presence({
-  clientId: "648494004870184981"
-});
+const presence = new Presence({
+    clientId: "648494004870184981"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+let title: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "4gamers"
   };
 
-  if (document.location.hostname == "www.4gamers.com.tw") {
-    if (document.location.pathname == "/") {
-      presenceData.startTimestamp = browsingStamp;
+  if (document.location.hostname === "www.4gamers.com.tw") {
+    if (document.location.pathname === "/") {
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/new")) {
-      title = document.getElementsByClassName("news-header-title")[0].innerHTML;
-      var category = document.getElementsByClassName("news-header-category ")[0]
-        .innerHTML;
+      title =
+        document.getElementsByClassName("news-header-title")[0].textContent;
       presenceData.details = title;
-      presenceData.state = "Category: " + category;
+      presenceData.state = `Category: ${
+        document.getElementsByClassName("news-header-category ")[0].textContent
+      }`;
     } else if (document.location.pathname.includes("magazine")) {
       title = document.getElementsByClassName("magazine-content-title")[0]
-        .innerHTML;
-      var time = document.getElementsByClassName("magazine-content-time")[0]
-        .innerHTML;
+        .textContent;
       presenceData.details = title;
-      presenceData.state = "Publish Date: " + time;
-    } else if (document.location.pathname.includes("tournament")) {
+      presenceData.state = `Publish Date: ${
+        document.getElementsByClassName("magazine-content-time")[0].textContent
+      }`;
+    } else if (document.location.pathname.includes("tournament"))
       presenceData.details = "賽事專欄";
-    }
   }
-  if (presenceData.details == null) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing site:";
-    presenceData.state = "4gamers";
+  if (!presenceData.details) {
+    presenceData.startTimestamp = browsingTimestamp;
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

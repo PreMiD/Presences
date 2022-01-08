@@ -1,15 +1,15 @@
 const presence = new Presence({
     clientId: "768437292486361129"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "hf",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
-  if (document.location.hostname == "hacktoberfest.digitalocean.com") {
+  if (document.location.hostname === "hacktoberfest.digitalocean.com") {
     if (document.location.pathname.includes("/faq")) {
       presenceData.details = "Reading Page:";
       presenceData.state = "FAQ";
@@ -34,10 +34,6 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

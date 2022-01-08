@@ -9,24 +9,20 @@ const presence = new Presence({
 
 function getTime(list: string[]): number {
   let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
+  for (let index = list.length - 1; index >= 0; index--)
     ret += parseInt(list[index]) * 60 ** index;
-  }
+
   return ret;
 }
 
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const splitAudioTime = audioTime.split(":").reverse(),
-    splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioTime = getTime(splitAudioTime),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
+function getTimestamps(audioTime: string, audioDuration: string): number[] {
+  const startTime = Date.now();
+  return [
+    Math.floor(startTime / 1000),
+    Math.floor(startTime / 1000) -
+      getTime(audioTime.split(":").reverse()) +
+      getTime(audioDuration.split(":").reverse())
+  ];
 }
 
 let elapsed: number, oldUrl: string;
@@ -37,71 +33,61 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  let details = undefined,
-    state = undefined,
-    smallImageKey = undefined,
-    smallImageText = undefined,
+  let details,
+    state,
+    smallImageKey,
+    smallImageText,
     startTimestamp = elapsed,
-    endTimestamp = undefined,
+    endTimestamp,
     playing = true;
 
-  const host = window.location.hostname,
-    path = window.location.pathname;
+  const path = window.location.pathname;
 
   try {
-    if (host.match("app.getmetastream.com")) {
+    if (window.location.hostname.match("app.getmetastream.com")) {
       if (path === "/") {
         details = "Home";
 
-        const menu_item = document.querySelector(
+        const menuItem = document.querySelector(
           ".MenuTabs__tabItem__2ny6A.MenuTabs__selected__c65wY"
         );
-        if (menu_item) state = `Viewing ${menu_item.textContent}`;
+        if (menuItem) state = `Viewing ${menuItem.textContent}`;
       }
       if (path.match("/settings")) {
         details = "Settings";
 
-        const setting_item = document.querySelector(
+        const settingItem = document.querySelector(
           ".SettingsMenu__tabItem__3ypki.SettingsMenu__selectedTab__OMITL"
         );
-        if (setting_item) {
-          state = `Viewing ${setting_item.textContent}`;
-        }
+        if (settingItem) state = `Viewing ${settingItem.textContent}`;
       }
       if (path.match("/join")) {
-        const connection_info = document.querySelector(".Connect__info__3Vwlv"),
-          disconnection_info = document.querySelector(
-            ".Disconnect__info__3Uejx"
-          ),
-          disconnection_label = document.querySelector(
-            ".Disconnect__info__3Uejx > span"
-          ),
-          menu_header = document.querySelector(".MenuHeader__header__1SYq0");
+        const disconnecctionLabel = document.querySelector(
+          ".Disconnect__info__3Uejx > span"
+        );
 
-        if (connection_info) {
+        if (document.querySelector(".Connect__info__3Vwlv"))
           details = "Connecting...";
-        } else if (disconnection_info) {
+        else if (document.querySelector(".Disconnect__info__3Uejx")) {
           details = "Disconnected";
 
-          if (disconnection_label) {
-            state = disconnection_label.textContent;
-          }
-        } else if (menu_header) {
+          if (disconnecctionLabel) state = disconnecctionLabel.textContent;
+        } else if (document.querySelector(".MenuHeader__header__1SYq0"))
           details = "Setting up...";
-        } else {
+        else {
           smallImageKey = "live";
           smallImageText = (await strings).live;
 
           const users =
-              document.querySelector(".ListOverlay__list__1epFe") ||
-              document.createElement("HTMLDivElement"),
-            user_button = document.querySelector(".UserItem__menuBtn__1ST9k");
+            document.querySelector(".ListOverlay__list__1epFe") ||
+            document.createElement("HTMLDivElement");
 
-          if (users.childElementCount === 1 || user_button !== null) {
+          if (
+            users.childElementCount === 1 ||
+            document.querySelector(".UserItem__menuBtn__1ST9k") !== null
+          )
             details = `Hosting (${users.childElementCount} Users)`;
-          } else {
-            details = `Watching (${users.childElementCount} Users)`;
-          }
+          else details = `Watching (${users.childElementCount} Users)`;
 
           const title = document.querySelector(".TitleBar__title__3VPpW");
           if (title && title.textContent !== "Metastream") {
@@ -114,12 +100,10 @@ presence.on("UpdateData", async () => {
                 ".Timeline__time__gcvG5:nth-child(3)"
               );
             if (current && duration) {
-              const timestamps = getTimestamps(
+              [startTimestamp, endTimestamp] = getTimestamps(
                 current.textContent,
                 duration.textContent
               );
-              startTimestamp = timestamps[0];
-              endTimestamp = timestamps[1];
             }
 
             const play: SVGUseElement = document.querySelector(
@@ -144,15 +128,16 @@ presence.on("UpdateData", async () => {
     presence.error(err);
   }
 
-  const data: PresenceData = {
-    details: details,
-    state: state,
-    largeImageKey: "metastream",
-    smallImageKey: smallImageKey,
-    smallImageText: smallImageText,
-    startTimestamp: startTimestamp,
-    endTimestamp: endTimestamp
-  };
-
-  presence.setActivity(data, playing);
+  presence.setActivity(
+    {
+      details,
+      state,
+      largeImageKey: "metastream",
+      smallImageKey,
+      smallImageText,
+      startTimestamp,
+      endTimestamp
+    },
+    playing
+  );
 });

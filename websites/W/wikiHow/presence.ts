@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     topic = document.querySelector("#section_0"),
     category = document.querySelector("#article > div.wh_block > h1");
 
-  if (topic && topic.textContent != "") {
+  if (topic && topic.textContent !== "") {
     const author =
         document.querySelector("#sp_expert_name") ||
         document.querySelector("#sp_expert_team"),
@@ -16,9 +16,9 @@ presence.on("UpdateData", async () => {
     return presence.setActivity({
       details: topic.textContent,
       state: `by ${
-        author && author.textContent != "" ? author.textContent : "unknown"
+        author && author.textContent !== "" ? author.textContent : "unknown"
       }${
-        date && date.textContent != ""
+        date && date.textContent !== ""
           ? ` (${date.textContent.replace("Updated: ", "")})`
           : ""
       } `,
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
     });
   }
 
-  if (category && category.textContent != "") {
+  if (category && category.textContent !== "") {
     return presence.setActivity({
       details: "Viewing a category:",
       state: category.textContent,
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
     });
   }
 
-  if (path == "/index.php") {
+  if (path === "/index.php") {
     // Note that I (EGGSY) didn't work on this part, I don't know if it's working on the main site but I'm sure it doesn't work on Spanish version.
     const newTopic = document.getElementsByClassName("firstHeading")[0]
       ? document.getElementsByClassName("firstHeading")[0].textContent
@@ -56,14 +56,14 @@ presence.on("UpdateData", async () => {
     });
   }
 
-  if (path == "/wikiHowTo") {
+  if (path === "/wikiHowTo") {
     const searching = document.location.search
       .replace("?search=", "")
       .split("+")
       .join(" ");
 
     return presence.setActivity({
-      details: `Searching for:`,
+      details: "Searching for:",
       state: `${searching[0].toUpperCase() + searching.slice(1).toLowerCase()}`,
       largeImageKey: "banner",
       smallImageKey: "logo",

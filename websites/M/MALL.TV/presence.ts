@@ -16,30 +16,26 @@ presence.on("UpdateData", async () => {
       watchStream: "general.buttonWatchStream",
       viewChannel: "general.buttonViewChannel"
     }),
-    path: string = document.location.pathname.toLowerCase(),
-    channel: HTMLHeadingElement = document.querySelector("h1.text-ellipsis"),
-    videoElement: HTMLVideoElement = document.querySelector(
-      "#vp-player > video"
-    ),
-    videoTitle: HTMLHeadingElement = document.querySelector(
+    channel = document.querySelector<HTMLHeadingElement>("h1.text-ellipsis"),
+    videoElement: HTMLVideoElement =
+      document.querySelector("#vp-player > video"),
+    videoTitle = document.querySelector<HTMLHeadingElement>(
       "h1.video__info-title"
     ),
-    videoChannel: HTMLAnchorElement = document.querySelector(
+    videoChannel = document.querySelector<HTMLAnchorElement>(
       "a.influencer__info-link"
     );
-  if (path === "/") {
+  if (document.location.pathname === "/") {
     presenceData.details = strings.homepage;
     presenceData.state = strings.browsing;
     presenceData.smallImageKey = "malltvbrowsing";
-  } else if (channel !== null) {
+  } else if (channel) {
     presenceData.details = channel.textContent;
     presenceData.state = strings.browsing;
     presenceData.smallImageKey = "malltvbrowsing";
-  } else if (videoTitle !== null && videoChannel !== null) {
-    const videoTimestamp: number[] = presence.getTimestampsfromMedia(
-        videoElement
-      ),
-      videoLive: HTMLButtonElement = document.querySelector("button.vp-live");
+  } else if (videoTitle && videoChannel) {
+    const videoLive: HTMLButtonElement =
+      document.querySelector("button.vp-live");
     presenceData.details = videoTitle.textContent;
     presenceData.state = videoChannel.textContent;
     presenceData.buttons = [
@@ -59,17 +55,15 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "malltvlive";
       presenceData.smallImageText = strings.live;
     } else if (!videoElement.paused) {
-      presenceData.startTimestamp = videoTimestamp[0];
-      presenceData.endTimestamp = videoTimestamp[1];
-      presenceData.smallImageKey = "malltvplaying";
+      ([presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestampsfromMedia(videoElement)),
+        (presenceData.smallImageKey = "malltvplaying");
       presenceData.smallImageText = strings.playing;
     } else {
       presenceData.smallImageKey = "malltvpaused";
       presenceData.smallImageText = strings.paused;
     }
   }
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

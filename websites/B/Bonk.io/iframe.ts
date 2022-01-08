@@ -24,12 +24,10 @@ const iframe = new iFrame(),
   ],
   selector = menuIDs
     .map(
-      (id) =>
-        "#" +
-        id +
-        '[style*="visibility: inherit"]' +
+      id =>
+        `#${id}[style*="visibility: inherit"]` +
         "," +
-        ("#" + id + '[style*="display: block"]')
+        `#${id}[style*="display: block"]`
     )
     .join(",");
 
@@ -53,15 +51,19 @@ document.querySelector("#roomlistjoinbutton").addEventListener("click", () => {
 
 iframe.on("UpdateData", async () => {
   const element = document.querySelector(selector),
-    lobbyGameMode = document.querySelector("#newbonklobby_modetext")
-      ?.textContent,
-    state =
-      document.querySelector("#pretty_top_name").textContent +
-      " - " +
-      document.querySelector("#pretty_top_level").textContent,
-    playerCount = document.querySelectorAll(".newbonklobby_playerentry").length;
+    state = `${document.querySelector("#pretty_top_name").textContent} - ${
+      document.querySelector("#pretty_top_level").textContent
+    }`;
+  if (element?.id === "newbonklobby") {
+    lastGameMode = document.querySelector(
+      "#newbonklobby_modetext"
+    )?.textContent;
+  }
 
-  if (element?.id === "newbonklobby") lastGameMode = lobbyGameMode;
-
-  iframe.send({ lastGameMode, id: element?.id, state, playerCount });
+  iframe.send({
+    lastGameMode,
+    id: element?.id,
+    state,
+    playerCount: document.querySelectorAll(".newbonklobby_playerentry").length
+  });
 });

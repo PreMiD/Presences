@@ -7,10 +7,10 @@ const presence = new Presence({
     browsing: "presence.activity.browsing",
     episode: "presence.media.info.episode"
   }),
-  startTimestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "exxen"
   };
   if (document.location.pathname.indexOf("watch") > -1) {
@@ -19,25 +19,28 @@ presence.on("UpdateData", async () => {
       episode = episodeName.split(".Bölüm")[0].split(" ")[
         episodeName.split(".Bölüm")[0].split(" ").length - 1
       ],
-      timestamps = presence.getTimestamps(video.currentTime, video.duration);
-    data.details = episodeName
+      [startTimestamp, endTimestamp] = presence.getTimestamps(
+        video.currentTime,
+        video.duration
+      );
+    presenceData.details = episodeName
       .replace(`${episode}.Bölüm`, "")
       .replace(`Episode ${episode}`, "");
-    data.state = (await strings).episode.replace("{0}", episode);
+    presenceData.state = (await strings).episode.replace("{0}", episode);
     if (!video.paused) {
-      data.smallImageKey = "playing";
-      data.smallImageText = (await strings).playing;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      presenceData.smallImageKey = "playing";
+      presenceData.smallImageText = (await strings).playing;
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
     } else {
-      data.smallImageKey = "paused";
-      data.smallImageText = (await strings).paused;
+      presenceData.smallImageKey = "paused";
+      presenceData.smallImageText = (await strings).paused;
     }
   } else {
-    data.startTimestamp = startTimestamp;
-    data.details = (await strings).browsing;
+    presenceData.startTimestamp = browsingTimestamp;
+    presenceData.details = (await strings).browsing;
     if (document.location.pathname.indexOf("detail") > -1)
-      data.state = document.querySelector(".title").textContent;
+      presenceData.state = document.querySelector(".title").textContent;
   }
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

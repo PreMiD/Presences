@@ -1,51 +1,43 @@
-var presence = new Presence({
-  clientId: "639568013590528030"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
-var search: any;
+const presence = new Presence({
+    clientId: "639568013590528030"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+let user: HTMLElement, title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "bs"
   };
 
-  if (document.location.hostname == "bs.to") {
-    if (document.location.pathname == "/") {
-      presenceData.startTimestamp = browsingStamp;
+  if (document.location.hostname === "bs.to") {
+    presenceData.startTimestamp = browsingTimestamp;
+    if (document.location.pathname === "/")
       presenceData.details = "Viewing home page";
-    } else if (document.location.pathname.includes("/serie/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/serie/")) {
       user = document.querySelector("#sp_left > h2");
       presenceData.details = "Viewing serie:";
-      presenceData.state = user.innerText;
+      presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/andere-serien")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname.includes("/andere-serien"))
       presenceData.details = "Viewing all series";
-    } else if (document.location.pathname.includes("/search")) {
+    else if (document.location.pathname.includes("/search")) {
       search = document.querySelector(
         "#root > section > form > fieldset > label:nth-child(1) > input[type=text]"
       );
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
-      presenceData.state = search.value;
+      presenceData.state = (search as HTMLInputElement).value;
       presenceData.smallImageKey = "search";
     }
-  } else if (document.location.hostname == "board.bs.to") {
+  } else if (document.location.hostname === "board.bs.to") {
     if (document.URL.includes("/topic/")) {
       title = document.querySelector(
         "#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span"
       );
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.textContent.length > 128)
+        presenceData.state = `${title.textContent.substring(0, 125)}...`;
+      else presenceData.state = title.textContent;
+
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
     } else if (document.URL.includes("/trending/")) {
@@ -58,7 +50,7 @@ presence.on("UpdateData", async () => {
         "#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1"
       );
       presenceData.details = "Viewing the profile of:";
-      presenceData.state = user.innerText;
+      presenceData.state = user.textContent;
 
       presence.setActivity(presenceData);
     } else if (
@@ -85,14 +77,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = "news feed";
 
       presence.setActivity(presenceData);
-    } else if (
-      document.URL.includes("/whats-new/") &&
-      document.URL.includes("/news-feed")
-    ) {
-      presenceData.details = "Forums, Viewing the";
-      presenceData.state = "latest activity";
-
-      presence.setActivity(presenceData);
     } else if (document.URL.includes("/whats-new/")) {
       presenceData.details = "Forums, Viewing whats new";
 
@@ -113,9 +97,9 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#ipsLayout_mainArea > div > div.ipsResponsive_hidePhone.ipsResponsive_block.ipsPageHeader > p"
       );
-      if (search != null) {
+      if (search) {
         presenceData.details = "Forums, searching for:";
-        presenceData.state = search.innerText
+        presenceData.state = search.textContent
           .replace("Showing results for '", "")
           .replace("'.", "");
 
@@ -174,19 +158,13 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > header > h1"
       );
-      if (title != null) {
+      if (title) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = title.innerText;
-      } else {
-        presenceData.details = "Forums, Browsing...";
-      }
+        presenceData.state = title.textContent;
+      } else presenceData.details = "Forums, Browsing...";
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -36,36 +36,28 @@ presence.on("UpdateData", async () => {
       ? true
       : false;
 
-  if (!seriesBool && !movieBool) {
-    video = null;
-  }
+  if (!seriesBool && !movieBool) video = null;
 
   // Series
 
   if (seriesBool) {
-    const seriesTitle = document.querySelector(
-      "body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__container > div > div.card__content.pb-md-1.pb-0 > div > div.watch__title > div.watch__title__name > div > h2"
+    const [details, state] = document
+      .querySelector(
+        "body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__container > div > div.card__content.pb-md-1.pb-0 > div > div.watch__title > div.watch__title__name > div > h2"
+      )
+      .textContent.split("-");
+
+    presenceData.details = details;
+    presenceData.state = state.replace("n", "n |");
+  } else if (movieBool) {
+    presenceData.details = document.querySelector(
+      "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > h2"
     ).textContent;
-
-    presenceData.details = seriesTitle.split("-")[0];
-    presenceData.state = seriesTitle.split("-")[1].replace("n", "n |");
-  }
-
-  // Movies
-  else if (movieBool) {
-    const movieTitle = document.querySelector(
-        "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > h2"
-      ).textContent,
-      movieTitle2 = document.querySelector(
-        "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > span"
-      ).textContent;
-
-    presenceData.details = movieTitle;
-    presenceData.state = movieTitle2;
-  }
-
-  // Browsing
-  else {
+    presenceData.state = document.querySelector(
+      "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > span"
+    ).textContent;
+  } else {
+    // Browsing
     presenceData.details = (await strings).browsing;
     presenceData.startTimestamp = startTimestamp;
   }
@@ -77,12 +69,12 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const timestamps = presence.getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
         video.currentTime,
         video.duration
       );
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.startTimestamp = startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
     }
   }
 

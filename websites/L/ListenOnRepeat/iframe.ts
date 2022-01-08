@@ -1,11 +1,11 @@
-var iframe = new iFrame();
+const iframe = new iFrame();
 iframe.on("UpdateData", async () => {
-  var video: HTMLVideoElement;
-  if (document.querySelector(".video") !== null) {
+  let video: HTMLVideoElement;
+  if (document.querySelector(".video")) {
     video = document.querySelector(".video");
-    if (video != undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
@@ -13,13 +13,11 @@ iframe.on("UpdateData", async () => {
         }
       });
     }
-  } else if (
-    document.querySelector("body > div > div > div > video") !== null
-  ) {
+  } else if (document.querySelector("body > div > div > div > video")) {
     video = document.querySelector("body > div > div > div > video");
-    if (video != undefined && !isNaN(video.duration)) {
+    if (video && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,

@@ -8,20 +8,6 @@ const presence = new Presence({
     episode: "presence.media.info.episode"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "anvlogo",
@@ -29,38 +15,36 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000)
     },
     path = window.location.pathname;
-  if (path.endsWith("/equipe")) {
+  if (path.endsWith("/equipe"))
     presenceData.details = "Vendo os membros da equipe";
-  }
-  if (path.startsWith("/top")) {
-    presenceData.details = "Vendo o top animes";
-  } else if (path.endsWith("/doramas")) {
+
+  if (path.startsWith("/top")) presenceData.details = "Vendo o top animes";
+  else if (path.endsWith("/doramas"))
     presenceData.details = "Vendo a lista de doramas";
-  } else if (path.endsWith("/filmes")) {
+  else if (path.endsWith("/filmes"))
     presenceData.details = "Vendo a lista de filmes";
-  } else if (path.endsWith("/lancamentos")) {
+  else if (path.endsWith("/lancamentos"))
     presenceData.details = "Vendo a lista de lançamentos";
-  } else if (path.endsWith("/animes")) {
+  else if (path.endsWith("/animes"))
     presenceData.details = "Vendo a lista de animes";
-  } else if (path.endsWith("/legendado")) {
-    const episode = document
-      .getElementById("current_episode_name")
-      .innerText.match(/\d+/g);
-    const title = document
+  else if (path.endsWith("/legendado")) {
+    const video: HTMLVideoElement = document.querySelector("video");
+    presenceData.details = document
       .querySelectorAll(".active h1")[0]
       .textContent.replace(" - Episodio ", "")
       .replace(/[0-9]/g, "");
-    const video = document.querySelector("video");
-    presenceData.details = title;
-    presenceData.state = (await strings).episode.replace("{0}", episode[0]);
+    presenceData.state = (await strings).episode.replace(
+      "{0}",
+      document
+        .getElementById("current_episode_name")
+        .textContent.match(/\d+/g)[0]
+    );
     if (!video.paused) {
-      const { duration, currentTime } = video;
-      const timestamps = getTimestamps(currentTime, duration);
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(video.currentTime, video.duration);
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).playing;
-    } else if (video.currentTime > 0) {
+    } else if (document.querySelector("video").currentTime > 0) {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = (await strings).paused;
     }
