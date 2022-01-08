@@ -301,10 +301,16 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.details = "Viewing Fortnite Page";
       trackerPreData.smallImageKey = "logo";
       trackerPreData.smallImageText = "TRN";
-      trackerPreData.largeImageKey = "fortnite"
+      trackerPreData.largeImageKey = "fortnite";
     } else if (trackerPage.includes("/profile/all/")) {
-      const playerName: string = document.querySelector("#profile > div.trn-card.trn-profile-header > div > h1 > span").textContent,
-      image: string = document.querySelector("#profile > div.trn-card.trn-profile-header > div > div.trn-profile-header__avatar.trn-roundavatar.trn-roundavatar--white > img").getAttribute("src");
+      const playerName: string = document.querySelector(
+          "#profile > div.trn-card.trn-profile-header > div > h1 > span"
+        ).textContent,
+        image: string = document
+          .querySelector(
+            "#profile > div.trn-card.trn-profile-header > div > div.trn-profile-header__avatar.trn-roundavatar.trn-roundavatar--white > img"
+          )
+          .getAttribute("src");
 
       trackerPreData.details = "Viewing Fortnite Profile:";
       trackerPreData.state = playerName;
@@ -368,7 +374,9 @@ trackerPresence.on("UpdateData", async () => {
       trackerPreData.smallImageText = "TRN";
       trackerPreData.largeImageKey = "fortnite";
     } else if (trackerPage.includes("/challenges/")) {
-      const title: string = document.querySelector("#app > div > div.ftr-challenges > div:nth-child(1) > div.trn-card__header > h3").textContent;
+      const title: string = document.querySelector(
+        "#app > div > div.ftr-challenges > div:nth-child(1) > div.trn-card__header > h3"
+      ).textContent;
       trackerPreData.details = "Viewing Challange:";
       trackerPreData.state = title;
       trackerPreData.smallImageKey = "logo";
