@@ -16,7 +16,7 @@ const presence = new Presence({
     "/notifications": "Betrachtet seine Benachrichtigungen",
     "/settings": "Bearbeitet sein Account",
     "/hentais": "Befindet sich im Hentai Sektion",
-    "/premiumcollection": "[Premium Sektion]",
+    "/premiumcollection": "Befindet sich im Premium Sektion",
     "/movies": "Betrachtet alle Filme",
     "/series": "Betrachtet alle Serien",
     "/request": "Request Anime",
@@ -153,22 +153,18 @@ presence.on("UpdateData", async () => {
     ];
 
     //LINKE LEISTE & OBERE
-  } else if (page === "/trends") {
-    presenceData.details = pages[page];
-  } else if (page.startsWith("/search")) {
+  } else if (page === "/trends") presenceData.details = pages[page];
+  else if (page.startsWith("/search")) {
     presenceData.details = "Sucht nach:";
     presenceData.state = `${
       document.querySelector(
         "body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div > div.d-flex > div > div > div.mb-4 > div.subtext.text-12"
       ).textContent
     }`.replace("verbal", " - ");
-  } else if (page === "/request") {
-    presenceData.details = pages[page];
-  } else if (page === "/movies") {
-    presenceData.details = pages[page];
-  } else if (page === "/series") {
-    presenceData.details = pages[page];
-  } else if (page.startsWith("/movie/")) {
+  } else if (page === "/request") presenceData.details = pages[page];
+  else if (page === "/movies") presenceData.details = pages[page];
+  else if (page === "/series") presenceData.details = pages[page];
+  else if (page.startsWith("/movie/")) {
     presenceData.details = "Betrachtet ein Film:";
     presenceData.state = `${
       document.querySelector(
@@ -212,18 +208,12 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     }
-  } else if (page === "/actor") {
-    presenceData.details = pages[page];
-  } else if (page === "/premiumcollection") {
-    presenceData.details = "Befindet sich auf der Startseite";
-    presenceData.state = pages[page];
-  } else if (page === "/hentais") {
-    presenceData.details = pages[page];
-  } else if (page === "/kalender") {
-    presenceData.details = pages[page];
-  } else if (page === "/changelogs") {
-    presenceData.details = pages[page];
-  } else if (page.includes("/changelogs/")) {
+  } else if (page === "/actor") presenceData.details = pages[page];
+  else if (page === "/premiumcollection") presenceData.state = pages[page];
+  else if (page === "/hentais") presenceData.details = pages[page];
+  else if (page === "/kalender") presenceData.details = pages[page];
+  else if (page === "/changelogs") presenceData.details = pages[page];
+  else if (page.includes("/changelogs/")) {
     presenceData.details = "Anistream Changelog";
     presenceData.state = `${
       document.querySelector(
