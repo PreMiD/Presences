@@ -290,17 +290,6 @@ function mediaPrimaryImage(mediaId: string): string {
   return `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
 }
 
-function jellyfinBasenameUrl(): string {
-  return `${`${location.protocol}//${location.host}${location.pathname.replace(
-    location.pathname.split("/").slice(-2).join("/"),
-    ""
-  )}`}`;
-}
-
-function mediaPrimaryImage(mediaId: string): string {
-  return `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
-}
-
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
