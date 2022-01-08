@@ -738,13 +738,20 @@ async function setDefaultsToPresence(): Promise<void> {
 }
 
 /**
+ * refreshApiClient - Initializes the ApiClient object
+ */
+async function refreshApiClient(): Promise<void> {
+  ApiClient ??= await presence.getPageletiable<ApiClient>("ApiClient");
+}
+
+/**
  * isJellyfinWebClient - imports the ApiClient variable and
  * verifies that we are in the jellyfin web client
  *
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isJellyfinWebClient(): Promise<boolean> {
-  ApiClient ??= await presence.getPageletiable<ApiClient>("ApiClient");
+  if (!ApiClient) await refreshApiClient();
 
   if (ApiClient && typeof ApiClient === "object") {
     if (ApiClient._appName && ApiClient._appName === "Jellyfin Web")
