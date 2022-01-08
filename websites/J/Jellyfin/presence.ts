@@ -275,7 +275,9 @@ const // official website
     largeImageKey: PRESENCE_ART_ASSETS.logo
   };
 
-let ApiClient: ApiClient, presence: Presence;
+let ApiClient: ApiClient,
+  presence: Presence,
+  wasLogin = false;
 
 function jellyfinBasenameUrl(): string {
   return `${`${location.protocol}//${location.host}${location.pathname.replace(
@@ -651,10 +653,17 @@ async function handleWebClient(): Promise<void> {
   // obtain the path, on the example would return "login.html"
   // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
 
-  switch (location.hash.split("?")[0].substring(3)) {
-    case "login.html":
-      presenceData.state = "Logging in";
-      break;
+  const path = location.hash.split("?")[0].substring(3);
+
+  if (path === "login.html") {
+    wasLogin = true;
+    presenceData.state = "Logging in";
+  } else if (wasLogin) {
+    loggedIn();
+    wasLogin = false;
+  }
+
+  switch (path) {
     case "home.html":
       presenceData.state = "At home";
       break;
