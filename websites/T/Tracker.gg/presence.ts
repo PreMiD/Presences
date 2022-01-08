@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
         trackerPreData.state = appName;
         trackerPreData.smallImageKey = document.querySelector<HTMLImageElement>(
           "#app > div.trn-wrapper > div.trn-container > div > main > div.apps > div.content-container > div > div > div > div > div.dashboard__details.card.responsive > div > div:nth-child(1) > div > img"
-        ).getAttribute("src");
+        ).src;
         trackerPreData.smallImageText = appName;
       } catch (e) {
         trackerPreData.details = "Viewing:";
