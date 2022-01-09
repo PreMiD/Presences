@@ -33,9 +33,9 @@ presence.on("UpdateData", async () => {
         elapsedSeconds;
     }
   } else if (document.location.pathname === "/")
-    presenceData.details = "Browsing Podcasts";
+    presenceData.details = "Browsing podcasts";
   else if (document.location.pathname.includes("feed/")) {
-    presenceData.details = "Viewing Podcast";
+    presenceData.details = "Viewing podcast";
     // It's quite tricky to locate the right podcast title because
     // website makes new element for each of them
     for (const element of document.getElementsByClassName("dbCu3e")) {
@@ -43,7 +43,13 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${document.title} by ${element.children[1].textContent}`;
     }
   } else if (document.location.pathname.includes("/subscriptions"))
-    presenceData.details = "Browsing Subscriptions";
+    presenceData.details = "Browsing subscriptions";
+  else if (document.location.pathname.includes("/queue"))
+    presenceData.details = "Browsing queue";
+  else if (document.location.pathname.includes("/subscribe-by-rss-feed"))
+    presenceData.details = "Subscribing by RSS feed";
+  else if (document.location.pathname.includes("/settings"))
+    presenceData.details = "Browsing settings";
   else if (document.location.pathname.includes("search/")) {
     presenceData.details = "Searching for podcast";
     presenceData.state = document.location.pathname.replace("/search/", "");
