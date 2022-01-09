@@ -47,10 +47,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
         else {
           switch (diff(newVer, oldVer)) {
             case "major":
-              if (
-                !newVer.endsWith(".0.0") ||
-                newVerSplit[0] - oldVerSplit[0] > 1
-              )
+              if (!newVer.endsWith(".0.0") || newVerSplit[0] - oldVerSplit[0] > 1)
                 return "badVersionBump";
               else return true;
             case "minor":
