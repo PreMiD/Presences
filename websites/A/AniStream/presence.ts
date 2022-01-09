@@ -62,12 +62,11 @@ presence.on("UpdateData", async () => {
         ) as HTMLElement
       ).textContent
     }`;
-    presenceData.state =
-      `${
-        document.querySelector(
-          `body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div.app-detail.flex-fill > div.detail-content > div.detail-text.flex-fill > div.caption > div.caption-content > h3`
-        ).textContent
-      }
+    presenceData.state = `${
+      document.querySelector(
+        "body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div.app-detail.flex-fill > div.detail-content > div.detail-text.flex-fill > div.caption > div.caption-content > h3"
+      ).textContent
+    }
        -  
       ${
         document.querySelector(
