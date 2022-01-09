@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
   ) {
     const listname = document.querySelector<HTMLSpanElement>(
         "#root > div > div.css-1dbjc4n > div > div.w-full.xl\\:max-w-max.mx-auto.pt-8 > div > div.flex.flex-column.p-3 > div > div.flex.flex-column.md\\:flex-row.items-start.md\\:items-center > p:nth-child(1) > span"
-      ), // Can't trim or else would return a false positive
+      ),
       profilePicture = document.querySelector<HTMLImageElement>(
         "#root > div > div.css-1dbjc4n > div > div:nth-child(3) > div.w-full > div > div > a > img"
       );
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching for:";
     presenceData.state = document.querySelector<HTMLSpanElement>(
       "#root > div > div.css-1dbjc4n > div > div.w-full.xl\\:max-w-max.mx-auto > div > div:nth-child(1) > p > span.text-2xl.font-bold.pl-2"
-    ).textContent; // Can't trim or else would return null
+    ).textContent;
     presenceData.smallImageKey = "search";
   } else if (path.endsWith("/lists")) {
     presenceData.details = `Viewing ${document.title.match(/(.*) -/)[1]}`;
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing List:";
     presenceData.state = document.querySelector<HTMLHeadingElement>(
       "#root > div > div.css-1dbjc4n > div > div.flex.flex-col.flex-1.w-full.z-10.px-2.sm\\:px-4 > div > div:nth-child(1) > div.flex.flex-col.flex-grow > div.flex.flex-col > h1"
-    ).textContent; // Can't trim or else would return null
+    ).textContent;
     presenceData.buttons = [{ label: "View List", url: document.URL }];
   }
   if (!buttons) delete presenceData.buttons;
