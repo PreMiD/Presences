@@ -24,8 +24,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Tracker Dev App";
     } else if (pathname.includes("/developers/apps/")) {
       try {
-        const appName: string = document
-          .querySelector(
+        const appName = document
+          .querySelector<HTMLDivElement>(
             "#app > div.trn-wrapper > div.trn-container > div > main > div.apps > div.content-container > div > div > div > div > div.dashboard__analytics.card.bordered.responsive > header > div > div.left > div:nth-child(2) > div.title"
           )
           .textContent.replace("Dashboard", "");
