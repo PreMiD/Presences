@@ -209,7 +209,11 @@ presence.on("UpdateData", async () => {
   else if (page === "/notifications") presenceData.details = pages[page];
   else if (page === "/login") presenceData.details = pages[page];
   else if (page === "/register") presenceData.details = pages[page];
-  else if (page === "/discovery") presenceData.details = pages[page];{
+  else if (page === "/discovery") {
+    presenceData.details = "Betrachtet alle Animes";
+    presenceData.state = `Sortiert nach: ${
+      document.querySelector("#filter-sorting > div.filter-value").textContent
+    }`;
   }
   presence.setActivity(presenceData);
 });
