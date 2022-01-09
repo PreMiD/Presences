@@ -12,11 +12,10 @@ const presence = new Presence({
     "/discovery": "Betrachtet alle Anime",
     "/login": "Loggt sich ein....",
     "/register": "Registriert sich....",
-    "/profile": "Betrachtet das Profil von",
     "/notifications": "Betrachtet seine Benachrichtigungen",
     "/settings": "Bearbeitet sein Account",
     "/hentais": "Befindet sich im Hentai Sektion",
-    "/premiumcollection": "Befindet sich im Premium Sektion",
+    "/premiumcollection": "[AniStream Premium]",
     "/movies": "Betrachtet alle Filme",
     "/series": "Betrachtet alle Serien",
     "/request": "Request Anime",
@@ -121,7 +120,7 @@ presence.on("UpdateData", async () => {
       ).textContent
     }`;
   } else if (page.startsWith("/profile/")) {
-    presenceData.details = "Betrachtet das Profil von";
+    presenceData.details = "Betrachtet das Profil von:";
     presenceData.state = `${
       (
         document.querySelector(
@@ -198,7 +197,7 @@ presence.on("UpdateData", async () => {
   else if (page === "/kalender") presenceData.details = pages[page];
   else if (page === "/changelogs") presenceData.details = pages[page];
   else if (page.includes("/changelogs/")) {
-    presenceData.details = "Anistream Changelog";
+    presenceData.details = "Changelog";
     presenceData.state = `${
       document.querySelector(
         "body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div > div.flex-fill > div > div.text-24.text-white.font-weight-bold"
