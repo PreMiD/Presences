@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "service": "DscJobs",
+  "author": {
+    "name": "Anaxes",
+    "id": "567885938160697377"
+  },
+  "contributors": [
+    {
+      "name": "Toxic Dev",
+      "id": "510065483693817867"
+    }
+  ],
+  "description": {
+    "en": "Looking for experienced Moderators and Developers? Search our endless list of users to find someone who is perfect for you next Big Project!",
+    "fr": "Vous recherchez des modérateurs et développeurs expérimentés ? Recherchez dans notre liste interminable d'utilisateurs pour trouver quelqu'un qui est parfait pour votre prochain grand projet !",
+    "nl": "Op zoek naar ervaren moderators en developers? Doorzoek onze eindeloze lijst met gebruikers om iemand te vinden die perfect is voor je volgende grote project!"
+  },
+  "url": "dscjobs.org",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/37lGr33.png",
+  "thumbnail": "https://i.imgur.com/3ou9TJP.jpg",
+  "color": "#3D486F",
+  "tags": [
+    "search",
+    "get-hired",
+    "moderators",
+    "developers",
+    "discord"
+  ],
+  "category": "socials",
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fad fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "cvButton",
+      "title": "Show Resume Button",
+      "icon": "fad fa-id-badge",
+      "value": true
+    }
+  ]
+}
