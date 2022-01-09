@@ -114,9 +114,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
   const [latestSchema, latestSchemaVersion] = await latestMetadataSchema(),
     schema = (await axios.get(latestSchema)).data;
 
-  console.log(
-    blue(`Beginning validation of ${changedMetaFiles.length} presences...`)
-  );
+  console.log(blue(`Beginning validation of ${changedMetaFiles.length} presences...`));
 
   for (const metaFile of changedMetaFiles) {
     const [meta, rawMeta] = loadMetadata(metaFile),
