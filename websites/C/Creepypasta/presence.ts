@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
       if (
         (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.state = `Sorted By ${
           (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
             .options[
@@ -30,13 +30,14 @@ presence.on("UpdateData", async () => {
               .selectedIndex
           ].text
         }`;
+      }
       break;
     case "/archive/famous-creepypastas/":
       presenceData.details = "Browsing Famous";
       if (
         (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.state = `Sorted By ${
           (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
             .options[
@@ -44,13 +45,14 @@ presence.on("UpdateData", async () => {
               .selectedIndex
           ].text
         }`;
+      }
       break;
     case "/archive/":
       presenceData.details = "Browsing Recently Published";
       if (
         (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.state = `Sorted By ${
           (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
             .options[
@@ -58,13 +60,14 @@ presence.on("UpdateData", async () => {
               .selectedIndex
           ].text
         }`;
+      }
       break;
     case "/archive/sorted/":
       presenceData.details = "Browsing Sorted Stories";
       if (
         (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.state = `Sorted By ${
           (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
             .options[
@@ -72,6 +75,7 @@ presence.on("UpdateData", async () => {
               .selectedIndex
           ].text
         }`;
+      }
       break;
     case "/archive/sorted-by-category/":
       presenceData.details = `Browsing ${
@@ -85,7 +89,7 @@ presence.on("UpdateData", async () => {
       if (
         (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.state = `Sorted By ${
           (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
             .options[
@@ -93,12 +97,13 @@ presence.on("UpdateData", async () => {
               .selectedIndex
           ].text
         }`;
+      }
       break;
     case "/archive/sorted-by-length/":
       if (
         (document.getElementsByName("tx_story_length")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.details = `Browsing ${
           (
             document.getElementsByName(
@@ -112,11 +117,11 @@ presence.on("UpdateData", async () => {
             ).selectedIndex
           ].text.split(/\(|\)/)[1]
         }`;
-      else presenceData.details = "Browsing By Length";
+      } else presenceData.details = "Browsing By Length";
       if (
         (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.state = `Sorted By ${
           (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
             .options[
@@ -124,6 +129,7 @@ presence.on("UpdateData", async () => {
               .selectedIndex
           ].text
         }`;
+      }
       break;
     case "/archive/sorted-by-author/":
       presenceData.details = `Browsing ${
@@ -137,7 +143,7 @@ presence.on("UpdateData", async () => {
       if (
         (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.state = `Sorted By ${
           (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
             .options[
@@ -145,13 +151,14 @@ presence.on("UpdateData", async () => {
               .selectedIndex
           ].text
         }`;
+      }
       break;
     case "/archive/sorted-by-title/":
       presenceData.details = "Browsing By Title";
       if (
         (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
           .selectedIndex !== 0
-      )
+      ) {
         presenceData.state = `Sorted By ${
           (document.getElementsByName("_orderby")[0] as HTMLSelectElement)
             .options[
@@ -159,6 +166,7 @@ presence.on("UpdateData", async () => {
               .selectedIndex
           ].text
         }`;
+      }
       break;
     case "/submit-your-pasta/":
       presenceData.details = "Submitting Story";
