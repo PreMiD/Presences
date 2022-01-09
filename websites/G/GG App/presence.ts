@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
         )
         .textContent.slice(11);
     } else if (path.includes("edit")) {
-      presenceData.details = "Editing game:";
+      presenceData.details = "Editing Game:";
       presenceData.state = document.querySelector<HTMLAnchorElement>(
         "#root > div > div.css-1dbjc4n > div > div > h1 > a"
       ).textContent;
