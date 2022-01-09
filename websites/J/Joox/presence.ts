@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
         x.className
       )
     ),
-    cover = await presence.getSetting("cover");
+    cover = await presence.getSetting<boolean>("cover");
 
   if (player) {
     const paused = player.className.includes("pause") === false,
