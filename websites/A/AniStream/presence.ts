@@ -122,12 +122,6 @@ presence.on("UpdateData", async () => {
       ).textContent
     }`;
   } else if (page.startsWith("/profile/")) {
-    const elementavatar = document.getElementsByClassName(
-        "avatar"
-      )[0] as HTMLElement,
-      image = elementavatar.style.backgroundImage,
-      avatar = image.slice(5, -2);
-
     presenceData.details = "Betrachtet das Profil von";
     presenceData.state = `${
       (
@@ -136,15 +130,6 @@ presence.on("UpdateData", async () => {
         ) as HTMLElement
       ).textContent
     }`;
-    presenceData.smallImageKey = avatar;
-    presenceData.smallImageText = `${
-      (
-        document.querySelector(
-          "body > div.container > div > div.app-wrapper > div.app-container.flex-fill > div > div > div > div > div.profile-header > div.profile-content > div.name"
-        ) as HTMLElement
-      ).textContent
-    }`;
-
     presenceData.buttons = [
       {
         label: "Watch Profile",
