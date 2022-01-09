@@ -31,10 +31,11 @@ presence.on("UpdateData", async () => {
           .textContent.replace("Dashboard", "");
         presenceData.details = "Editing App";
         presenceData.state = appName;
-        presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+        presenceData.smallImageKey = "logo";
+        presenceData.smallImageText = appName;
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
           "#app > div.trn-wrapper > div.trn-container > div > main > div.apps > div.content-container > div > div > div > div > div.dashboard__details.card.responsive > div > div:nth-child(1) > div > img"
         ).src;
-        presenceData.smallImageText = appName;
       } catch (e) {
         presenceData.details = "Viewing:";
         presenceData.state = "Developer Apps";
@@ -94,9 +95,9 @@ presence.on("UpdateData", async () => {
           .getAttribute("href");
       presenceData.details = "Viewing Valorant Profile:";
       presenceData.state = playerName + playerTag;
-      presenceData.smallImageKey = image;
+      presenceData.smallImageKey = "valorant";
       presenceData.smallImageText = playerName;
-      presenceData.largeImageKey = "valorant";
+      presenceData.largeImageKey = image;
     } else if (pathname.includes("/valorant/leaderboards")) {
       if (pathname.includes("/valorant/leaderboards/ranked")) {
         presenceData.details = "Viewing:";
@@ -261,9 +262,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing HyperScape Profile:";
       presenceData.state = playerName;
-      presenceData.smallImageKey = image;
+      presenceData.smallImageKey = "hyperscape";
       presenceData.smallImageText = playerName;
-      presenceData.largeImageKey = "hyperscape";
+      presenceData.largeImageKey = image;
     } else if (pathname.includes("/hyper-scape/leaderboards/")) {
       if (pathname.includes("/stats/")) {
         presenceData.details = "Viewing:";
@@ -306,15 +307,40 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing CSGO Profile:";
       presenceData.state = playerName;
-      presenceData.smallImageKey = image;
+      presenceData.smallImageKey = "csgo";
       presenceData.smallImageText = playerName;
-      presenceData.largeImageKey = "csgo";
+      presenceData.largeImageKey = image;
     } else if (pathname.includes("/csgo/leaderboards/stats/all/")) {
       presenceData.details = "Viewing:";
       presenceData.state = "CSGO Leaderboard";
       presenceData.smallImageKey = "logo";
       presenceData.smallImageText = "TRN";
       presenceData.largeImageKey = "csgo";
+    } else if (pathname === "/lol") {
+      presenceData.details = "Viewing Game:";
+      presenceData.state = "Leage of Legends";
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "TRN";
+      presenceData.largeImageKey = "lol";
+    } else if (pathname.includes("/lol/profile")) {
+      const playerName: string = document.querySelector(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span"
+        ).textContent,
+        image = document.querySelector<HTMLImageElement>(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img"
+        ).src;
+
+      presenceData.details = "Viewing LoL Profile:";
+      presenceData.state = playerName;
+      presenceData.smallImageKey = "lol";
+      presenceData.smallImageText = playerName;
+      presenceData.largeImageKey = image;
+    } else if (pathname.includes("/lol/leaderboards/stats/")) {
+      presenceData.details = "Viewing:";
+      presenceData.state = "LoL Leaderboard";
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "TRN";
+      presenceData.largeImageKey = "lol";
     }
   } else if (botHost === "fortnitetracker.com") {
     if (pathname === "/") {
@@ -334,9 +360,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing Fortnite Profile:";
       presenceData.state = playerName;
-      presenceData.smallImageKey = image;
+      presenceData.smallImageKey = "fortnite";
       presenceData.smallImageText = playerName;
-      presenceData.largeImageKey = "fortnite";
+      presenceData.largeImageKey = image;
     } else if (pathname === "/event-lfp") {
       presenceData.details = "Viewing:";
       presenceData.state = "Tournament Looking for Player";
