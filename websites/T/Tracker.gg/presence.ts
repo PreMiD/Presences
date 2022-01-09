@@ -484,6 +484,25 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "TRN";
       presenceData.largeImageKey = "fortnite";
     }
+  } else if (botHost === "thetrackernetwork.com") {
+    if (pathname.includes("/manage/")) {
+      presenceData.details = "Editing Profile";
+      presenceData.state = document.querySelector<HTMLDivElement>(
+        "body > div > div.trn-wrapper > div > div > main > div > div:nth-child(2) > div.mgn-header"
+      ).textContent;
+    } else if (pathname === "/contact") {
+      presenceData.details = "Viewing Page:";
+      presenceData.state = "Contact Page";
+    } else if (pathname === "/home/privacypolicy") {
+      presenceData.details = "Viewing Page:";
+      presenceData.state = "Privacy Policy";
+    } else if (pathname === "/home/tos") {
+      presenceData.details = "Viewing Page:";
+      presenceData.state = "Terms of Service";
+    } else if (pathname === "/home") {
+      presenceData.details = "Viewing Page:";
+      presenceData.state = "Homepage";
+    }
   }
 
   if (
