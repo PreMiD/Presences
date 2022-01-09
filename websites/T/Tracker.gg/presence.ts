@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
           "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__discriminator"
         ).textContent,
         image: string = document
-          .querySelector(
+          .querySelector<HTMLImageElement>(
             "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > svg > image"
           )
           .getAttribute("href");
@@ -255,11 +255,9 @@ presence.on("UpdateData", async () => {
       const playerName: string = document.querySelector(
           "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span"
         ).textContent,
-        image: string = document
-          .querySelector(
-            "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img"
-          )
-          .getAttribute("src");
+        image: string = document.querySelector<HTMLImageElement>(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img"
+        ).src;
 
       presenceData.details = "Viewing HyperScape Profile:";
       presenceData.state = playerName;
@@ -292,6 +290,31 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = "TRN";
         presenceData.largeImageKey = "hyperscape";
       }
+    } else if (pathname === "/csgo") {
+      presenceData.details = "Viewing Game:";
+      presenceData.state = "CS:GO";
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "TRN";
+      presenceData.largeImageKey = "csgo";
+    } else if (pathname.includes("/csgo/profile/")) {
+      const playerName: string = document.querySelector(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span"
+        ).textContent,
+        image: string = document.querySelector<HTMLImageElement>(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img"
+        ).src;
+
+      presenceData.details = "Viewing CSGO Profile:";
+      presenceData.state = playerName;
+      presenceData.smallImageKey = image;
+      presenceData.smallImageText = playerName;
+      presenceData.largeImageKey = "csgo";
+    } else if (pathname.includes("/csgo/leaderboards/stats/all/")) {
+      presenceData.details = "Viewing:";
+      presenceData.state = "CSGO Leaderboard";
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "TRN";
+      presenceData.largeImageKey = "csgo";
     }
   } else if (botHost === "fortnitetracker.com") {
     if (pathname === "/") {
