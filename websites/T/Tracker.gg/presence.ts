@@ -341,6 +341,55 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "logo";
       presenceData.smallImageText = "TRN";
       presenceData.largeImageKey = "lol";
+    } else if (pathname === "/splitgate") {
+      presenceData.details = "Viewing Game:";
+      presenceData.state = "Splitgate";
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "TRN";
+      presenceData.largeImageKey = "splitgate";
+    } else if (pathname.includes("/splitgate/profile/")) {
+      const playerName: string = document.querySelector(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span"
+        ).textContent,
+        image = document.querySelector<HTMLImageElement>(
+          "#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img.ph-avatar__image"
+        ).src;
+
+      presenceData.details = "Viewing Splitgate Profile:";
+      presenceData.state = playerName;
+      presenceData.smallImageKey = "splitgate";
+      presenceData.smallImageText = playerName;
+      presenceData.largeImageKey = image;
+    } else if (pathname.includes("/splitgate/leaderboards/")) {
+      if (pathname.includes("/playlist/")) {
+        presenceData.details = "Viewing Leaderboard:";
+        presenceData.state = "Playlist";
+        presenceData.smallImageKey = "logo";
+        presenceData.smallImageText = "TRN";
+        presenceData.largeImageKey = "splitgate";
+      } else if (pathname.includes("/stats/")) {
+        presenceData.details = "Viewing Leaderboard:";
+        presenceData.state = "Overall";
+        presenceData.smallImageKey = "logo";
+        presenceData.smallImageText = "TRN";
+        presenceData.largeImageKey = "splitgate";
+      }
+    } else if (pathname === "/splitgate/challenges") {
+      presenceData.details = "Viewing:";
+      presenceData.state = "Splitgate Challenges";
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "TRN";
+      presenceData.largeImageKey = "splitgate";
+    } else if (pathname.includes("/splitgate/challenges/")) {
+      const challengeTitle: string = document.querySelector(
+        "#app > div.trn-wrapper > div.trn-container > div > main > div.challenge > div.challenge__header > div > div.challenge__meta > h1"
+      ).textContent;
+
+      presenceData.details = "Viewing Challenge:";
+      presenceData.state = challengeTitle;
+      presenceData.smallImageKey = "logo";
+      presenceData.smallImageText = "TRN";
+      presenceData.largeImageKey = "splitgate";
     }
   } else if (botHost === "fortnitetracker.com") {
     if (pathname === "/") {
