@@ -209,9 +209,7 @@ presence.on("UpdateData", async () => {
   else if (page === "/notifications") presenceData.details = pages[page];
   else if (page === "/login") presenceData.details = pages[page];
   else if (page === "/register") presenceData.details = pages[page];
-  else if (page === "/discovery") presenceData.details = pages[page];
-  {
+  else if (page === "/discovery") presenceData.details = pages[page];{
   }
-
   presence.setActivity(presenceData);
 });
