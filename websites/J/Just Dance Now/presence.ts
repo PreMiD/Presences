@@ -79,9 +79,9 @@ presence.on("UpdateData", async () => {
     document.querySelector("html").className.includes("state-coachselection")
   ) {
     presenceData.details = "Coach Selection";
-    presenceData.state = `${
-      document.querySelector(".coach-selection__details-song").textContent.replace(" - ALTERNATE", "")
-    }`;
+    presenceData.state = `${document
+      .querySelector(".coach-selection__details-song")
+      .textContent.replace(" - ALTERNATE", "")}`;
     if (roomCode) {
       presenceData.details = `Coach Selection (${
         document.querySelector(".danceroom__number").textContent
