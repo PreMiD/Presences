@@ -5,167 +5,140 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingTimestamp
-  };
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
+    },
+    { href } = document.location;
+  if (href.includes("/#mypage")) presenceData.details = "Home page";
+  else if (href.includes("/#quest")) {
+    presenceData.details = "Selecting a quest";
+    if (href.includes("extra"))
+      presenceData.state = "Treasure Quests / Event Quest";
+    else if (href.includes("assist")) presenceData.state = "Joining a raid";
+    else if (href.includes("supporter"))
+      presenceData.state = "Choosing a summon";
+    else if (href.includes("fate"))
+      presenceData.state = "Choosing a fate quest";
+    else if (href.includes("scene")) presenceData.state = "In a story scene";
+  } else if (href.includes("/#result"))
+    presenceData.details = "In a Quest result screen";
+  else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
+    presenceData.details =
+      document.getElementsByClassName("name")[0].textContent;
+    presenceData.state = `At ${
+      document.getElementsByClassName(
+        "btn-enemy-gauge prt-enemy-percent alive"
+      )[0].textContent
+    }`;
+  } else if (href.includes("/#party/index/0/npc/0"))
+    presenceData.details = "Viewing party";
+  else if (href.includes("/#enhancement")) {
+    presenceData.details = "Upgrading : ";
 
-  if (document.location.hostname === "game.granbluefantasy.jp") {
-    if (document.location.href.includes("/#mypage"))
-      presenceData.details = "Home page";
-    else if (document.location.href.includes("/#quest")) {
-      presenceData.details = "Selecting a quest";
-      if (document.location.href.includes("/#quest/extra"))
-        presenceData.state = "Treasure Quests / Event Quest";
-      else if (document.location.href.includes("/#quest/assist"))
-        presenceData.state = "Joining a raid";
-      else if (document.location.href.includes("/#quest/supporter"))
-        presenceData.state = "Choosing a summon";
-      else if (document.location.href.includes("/#quest/fate"))
-        presenceData.state = "Choosing a fate quest";
-      else if (document.location.href.includes("/#quest/scene"))
-        presenceData.state = "In a story scene";
-    } else if (document.location.href.includes("/#result"))
-      presenceData.details = "In a Quest result screen";
-    else if (
-      document.location.href.includes("/#raid") ||
-      document.location.href.includes("/#raid_multi")
-    ) {
-      presenceData.details =
-        document.getElementsByClassName("name")[0].textContent;
-    } else if (document.location.href.includes("/#party/index/0/npc/0"))
-      presenceData.details = "Viewing party";
-    else if (document.location.href.includes("/#enhancement")) {
-      presenceData.details = "Upgrading : ";
+    if (href.includes("npc")) presenceData.state = "Characters";
+    else if (href.includes("weapon")) presenceData.state = "Weapons";
+    else if (href.includes("summon")) presenceData.state = "Summons";
+  } else if (href.includes("/#evolution")) {
+    presenceData.details = "Uncapping :";
 
-      if (document.location.href.includes("/#enhancement/npc"))
-        presenceData.state = "Characters";
-      else if (document.location.href.includes("/#enhancement/weapon"))
-        presenceData.state = "Weapons";
-      else if (document.location.href.includes("/#enhancement/summon"))
-        presenceData.state = "Summons";
-    } else if (document.location.href.includes("/#evolution")) {
-      presenceData.details = "Uncapping :";
+    if (href.includes("npc")) presenceData.state = "Characters";
+    else if (href.includes("weapon")) presenceData.state = "Weapons";
+    else if (href.includes("summon")) presenceData.state = "Summons";
+  } else if (href.includes("/#coopraid")) {
+    presenceData.details = "Co-op :";
 
-      if (document.location.href.includes("/#evolution/npc"))
-        presenceData.state = "Characters";
-      else if (document.location.href.includes("/#evolution/weapon"))
-        presenceData.state = "Weapons";
-      else if (document.location.href.includes("/#evolution/summon"))
-        presenceData.state = "Summons";
-    } else if (document.location.href.includes("/#coopraid")) {
-      presenceData.details = "Co-op :";
+    if (href.includes("offer"))
+      presenceData.state = "Searching a raid coop room";
+    else if (href.includes("room")) presenceData.state = "In a coop room";
+  } else if (href.includes("/#lobby/room")) {
+    presenceData.details = "Co-op :";
+    presenceData.state = "In a raid coop room";
+  } else if (href.includes("/#casino")) {
+    presenceData.details = "Casino :";
+    presenceData.state = "Main menu";
+    if (href.includes("list/poker")) presenceData.state = "Choosing poker bet";
+    else if (href.includes("game/poker")) presenceData.state = "Playing poker";
+    else if (href.includes("#casino/list/slot"))
+      presenceData.state = "Choosing slots bet";
+    else if (href.includes("game/slot")) presenceData.state = "Playing slots";
+    else if (href.includes("list/bingo"))
+      presenceData.state = "Choosing bingo bet";
+    else if (href.includes("game/bingo")) presenceData.state = "Playing bingo";
+    else if (href.includes("exchange"))
+      presenceData.state = " In the casino cage";
+    else if (href.includes("rule/casino"))
+      presenceData.state = "Viewing casino rules";
+  } else if (href.includes("/#gacha"))
+    presenceData.details = "In the Draw menu";
+  else if (href.includes("/#profile"))
+    presenceData.details = "Viewing profile page";
+  else if (href.includes("/#archive")) presenceData.details = "Viewing journal";
+  else if (href.includes("/#title")) presenceData.details = "Viewing trophies";
+  else if (href.includes("/#guild")) presenceData.details = "Viewing crew";
+  else if (href.includes("/#shop")) {
+    presenceData.details = "Shop :";
+    presenceData.state = "Main menu";
 
-      if (document.location.href.includes("/#coopraid/offer"))
-        presenceData.state = "Searching a raid coop room";
-      else if (document.location.href.includes("/#coopraid/room"))
-        presenceData.state = "In a coop room";
-    } else if (document.location.href.includes("/#lobby/room")) {
-      presenceData.details = "Co-op :";
-      presenceData.state = "In a raid coop room";
-    } else if (document.location.href.includes("/#casino")) {
-      presenceData.details = "Casino :";
-      presenceData.state = "Main menu";
-      if (document.location.href.includes("/#casino/list/poker"))
-        presenceData.state = "Choosing poker bet";
-      else if (document.location.href.includes("/#casino/game/poker"))
-        presenceData.state = "Playing poker";
-      else if (document.location.href.includes("#casino/list/slot"))
-        presenceData.state = "Choosing slots bet";
-      else if (document.location.href.includes("/#casino/game/slot"))
-        presenceData.state = "Playing slots";
-      else if (document.location.href.includes("/#casino/list/bingo"))
-        presenceData.state = "Choosing bingo bet";
-      else if (document.location.href.includes("/#casino/game/bingo"))
-        presenceData.state = "Playing bingo";
-      else if (document.location.href.includes("/#casino/exchange"))
-        presenceData.state = " In the casino cage";
-      else if (document.location.href.includes("/#casino/rule/casino"))
-        presenceData.state = "Viewing casino rules";
-    } else if (document.location.href.includes("/#gacha"))
-      presenceData.details = "In the Draw menu";
-    else if (document.location.href.includes("/#profile"))
-      presenceData.details = "Viewing profile page";
-    else if (document.location.href.includes("/#archive"))
-      presenceData.details = "Viewing journal";
-    else if (document.location.href.includes("/#title"))
-      presenceData.details = "Viewing trophies";
-    else if (document.location.href.includes("/#guild"))
-      presenceData.details = "Viewing crew";
-    else if (document.location.href.includes("/#shop")) {
-      presenceData.details = "Shop :";
-      presenceData.state = "Main menu";
+    if (href.includes("exchange/points")) presenceData.state = "Pendants shop";
+    else if (href.includes("exchange/moon"))
+      presenceData.state = "Trading moons";
+    else if (href.includes("exchange/trajectory"))
+      presenceData.state = "Journey drops";
+    else if (href.includes("exchange/ceiling"))
+      presenceData.state = "Trading ceruleans stones";
+    else if (href.includes("skin/top")) presenceData.state = "Outfit shop";
+    else if (href.includes("skycompass/points"))
+      presenceData.state = "SkyCompass points exchange";
+    else if (href.includes("lupi/0")) presenceData.state = "Crystal shop";
+    else if (href.includes("exchange/list"))
+      presenceData.state = "Treasure trading";
+  } else if (href.includes("/#archaic")) {
+    presenceData.details = "Shop :";
+    presenceData.state = "Weapons Crafting";
+    if (href.includes("job"))
+      presenceData.state = "Crafting Class Champion weapons";
+    else if (href.includes("numbers"))
+      presenceData.state = "Crafting Revenant weapons";
+    else if (href.includes("seraphic"))
+      presenceData.state = "Crafting Seraphic weapons";
+    else if (href.includes("xeno/list"))
+      presenceData.state = "Crafting Xeno weapons";
+    else if (href.includes("bahamut"))
+      presenceData.state = "Crafting Bahamut weapons";
+    else if (href.includes("omega"))
+      presenceData.state = "Crafting Ultima weapons";
+  } else if (href.includes("#arcarum2/enhancement")) {
+    presenceData.details = " Shop :";
+    presenceData.state = "Crafting Arcarum summons";
+  } else if (href.includes("/#item")) presenceData.details = "Viewing supplies";
+  else if (href.includes("/#present")) presenceData.details = "Viewing Crate";
+  else if (href.includes("/#list")) presenceData.details = "Viewing inventory";
+  else if (href.includes("/#container")) presenceData.details = "Viewing stash";
+  else if (href.includes("/#friend"))
+    presenceData.details = "Viewing friends list";
+  else if (href.includes("/#event")) presenceData.details = "Event Menu";
+  else if (href.includes("/#setting"))
+    presenceData.details = "Changing settings";
+  else if (href.includes("/#teaser"))
+    presenceData.details = "Viewing event preview";
+  else if (href.includes("/#sell"))
+    presenceData.details = "Selling weapons/summons";
+  else if (href.includes("/#decompose"))
+    presenceData.details = "Reducing weapons/summons";
+  else if (href.includes("/#recycle"))
+    presenceData.details = "Reserve weapons/summons";
+  else if (href.includes("/#help")) presenceData.details = "Viewing help";
+  else if (href.includes("/#sidestory"))
+    presenceData.details = "Viewing side stories";
+  else if (href.includes("/#trial_battle"))
+    presenceData.details = "Viewing trial battles";
+  else if (href.includes("/#campaign/panel"))
+    presenceData.details = "Viewing pinboard missions";
+  else if (href.includes("/#beginnercomic"))
+    presenceData.details = "Reading This is Granblue Fantasy";
+  else if (href.includes("/#news")) presenceData.details = "Viewing the news";
+  else if (href.includes("/#comic"))
+    presenceData.details = "Reading Grand Blues";
 
-      if (document.location.href.includes("/#shop/exchange/points"))
-        presenceData.state = "Pendants shop";
-      else if (document.location.href.includes("/#shop/exchange/moon"))
-        presenceData.state = "Trading moons";
-      else if (document.location.href.includes("/#shop/exchange/trajectory"))
-        presenceData.state = "Journey drops";
-      else if (document.location.href.includes("/#shop/exchange/ceiling"))
-        presenceData.state = "Trading ceruleans stones";
-      else if (document.location.href.includes("/#shop/skin/top"))
-        presenceData.state = "Outfit shop";
-      else if (document.location.href.includes("/#shop/skycompass/points"))
-        presenceData.state = "SkyCompass points exchange";
-      else if (document.location.href.includes("/#shop/lupi/0"))
-        presenceData.state = "Crystal shop";
-      else if (document.location.href.includes("/#shop/exchange/list"))
-        presenceData.state = "Treasure trading";
-    } else if (document.location.href.includes("/#archaic")) {
-      presenceData.details = "Shop :";
-      presenceData.state = "Weapons Crafting";
-      if (document.location.href.includes("/#archaic/job"))
-        presenceData.state = "Crafting Class Champion weapons";
-      else if (document.location.href.includes("/#archaic/numbers"))
-        presenceData.state = "Crafting Revenant weapons";
-      else if (document.location.href.includes("/#archaic/seraphic"))
-        presenceData.state = "Crafting Seraphic weapons";
-      else if (document.location.href.includes("/#archaic/xeno/list"))
-        presenceData.state = "Crafting Xeno weapons";
-      else if (document.location.href.includes("/#archaic/bahamut"))
-        presenceData.state = "Crafting Bahamut weapons";
-      else if (document.location.href.includes("/#archaic/omega"))
-        presenceData.state = "Crafting Ultima weapons";
-    } else if (document.location.href.includes("#arcarum2/enhancement")) {
-      presenceData.details = " Shop :";
-      presenceData.state = "Crafting Arcarum summons";
-    } else if (document.location.href.includes("/#item"))
-      presenceData.details = "Viewing supplies";
-    else if (document.location.href.includes("/#present"))
-      presenceData.details = "Viewing Crate";
-    else if (document.location.href.includes("/#list"))
-      presenceData.details = "Viewing inventory";
-    else if (document.location.href.includes("/#container"))
-      presenceData.details = "Viewing stash";
-    else if (document.location.href.includes("/#friend"))
-      presenceData.details = "Viewing friends list";
-    else if (document.location.href.includes("/#event"))
-      presenceData.details = "Event Menu";
-    else if (document.location.href.includes("/#setting"))
-      presenceData.details = "Changing settings";
-    else if (document.location.href.includes("/#teaser"))
-      presenceData.details = "Viewing event preview";
-    else if (document.location.href.includes("/#sell"))
-      presenceData.details = "Selling weapons/summons";
-    else if (document.location.href.includes("/#decompose"))
-      presenceData.details = "Reducing weapons/summons";
-    else if (document.location.href.includes("/#recycle"))
-      presenceData.details = "Reserve weapons/summons";
-    else if (document.location.href.includes("/#help"))
-      presenceData.details = "Viewing help";
-    else if (document.location.href.includes("/#sidestory"))
-      presenceData.details = "Viewing side stories";
-    else if (document.location.href.includes("/#trial_battle"))
-      presenceData.details = "Viewing trial battles";
-    else if (document.location.href.includes("/#campaign/panel"))
-      presenceData.details = "Viewing pinboard missions";
-    else if (document.location.href.includes("/#beginnercomic"))
-      presenceData.details = "Reading This is Granblue Fantasy";
-    else if (document.location.href.includes("/#news"))
-      presenceData.details = "Viewing the news";
-    else if (document.location.href.includes("/#comic"))
-      presenceData.details = "Reading Grand Blues";
-
-    presence.setActivity(presenceData);
-  }
+  presence.setActivity(presenceData);
 });
