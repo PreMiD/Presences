@@ -26,17 +26,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = document
       .querySelector(".song-detail__title")
       .firstElementChild.textContent.replace(" - ALTERNATE", "");
-    [presenceData.startTimestamp, presenceData.endTimestamp] =
-      presence.getTimestamps(
-        Math.floor(
-          (document.getElementById("in-game_video") as HTMLVideoElement)
-            .currentTime
-        ),
-        Math.floor(
-          (document.getElementById("in-game_video") as HTMLVideoElement)
-            .duration
-        )
-      );
     if (cover) {
       presenceData.largeImageKey = (
         document.querySelector(".item-selected").firstElementChild
@@ -55,17 +44,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = document
       .querySelector(".song-detail__title")
       .firstElementChild.textContent.replace(" - ALTERNATE", "");
-    [presenceData.startTimestamp, presenceData.endTimestamp] =
-      presence.getTimestamps(
-        Math.floor(
-          (document.getElementById("in-game_video") as HTMLVideoElement)
-            .currentTime
-        ),
-        Math.floor(
-          (document.getElementById("in-game_video") as HTMLVideoElement)
-            .duration
-        )
-      );
     if (cover) {
       presenceData.largeImageKey = (
         document.querySelector(".item-selected").firstElementChild
@@ -83,15 +61,8 @@ presence.on("UpdateData", async () => {
       .querySelector(".song-detail__title")
       .firstElementChild.textContent.replace(" - ALTERNATE", "");
     [presenceData.startTimestamp, presenceData.endTimestamp] =
-      presence.getTimestamps(
-        Math.floor(
-          (document.getElementById("in-game_video") as HTMLVideoElement)
-            .currentTime
-        ),
-        Math.floor(
-          (document.getElementById("in-game_video") as HTMLVideoElement)
-            .duration
-        )
+      presence.getTimestampsfromMedia(
+        document.getElementById("in-game_video") as HTMLVideoElement
       );
     if (cover) {
       presenceData.largeImageKey = (
@@ -109,7 +80,7 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Coach Selection";
     presenceData.state = `${
-      document.querySelector(".coach-selection__details-song").textContent
+      document.querySelector(".coach-selection__details-song").textContent.replace(" - ALTERNATE", "")
     }`;
     if (roomCode) {
       presenceData.details = `Coach Selection (${
