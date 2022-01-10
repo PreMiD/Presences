@@ -39,26 +39,30 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       if (newVer !== "1.0.0") return "invalidVerNew";
       else return true;
     } else {
-      const compared = compare(newVer, oldVer),
-        newVerSplit = newVer.split(".").map(Number),
-        oldVerSplit = oldVer.split(".").map(Number);
-      if (compared !== 1) return "versionNotBumped";
-      else {
-        switch (diff(newVer, oldVer)) {
-          case "major":
-            if (!newVer.endsWith(".0.0") || newVerSplit[0] - oldVerSplit[0] > 1)
-              return "badVersionBump";
-            else return true;
-          case "minor":
-            if (!newVer.endsWith(".0") || newVerSplit[1] - oldVerSplit[1] > 1)
-              return "badVersionBump";
-            else return true;
-          case "patch":
-            if (newVerSplit[2] - oldVerSplit[2] > 1) return "badVersionBump";
-            else return true;
-          default:
-            return true;
+      try {
+        const compared = compare(newVer, oldVer),
+          newVerSplit = newVer.split(".").map(Number),
+          oldVerSplit = oldVer.split(".").map(Number);
+        if (compared !== 1) return "versionNotBumped";
+        else {
+          switch (diff(newVer, oldVer)) {
+            case "major":
+              if (!newVer.endsWith(".0.0") || newVerSplit[0] - oldVerSplit[0] > 1)
+                return "badVersionBump";
+              else return true;
+            case "minor":
+              if (!newVer.endsWith(".0") || newVerSplit[1] - oldVerSplit[1] > 1)
+                return "badVersionBump";
+              else return true;
+            case "patch":
+              if (newVerSplit[2] - oldVerSplit[2] > 1) return "badVersionBump";
+              else return true;
+            default:
+              return true;
+          }
         }
+      } catch {
+        return false;
       }
     }
   },
@@ -77,11 +81,12 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     console.log("::endgroup::");
     stats.failedToValidate++;
   },
-  loadMetadata = (path: string): metadata => {
+  loadMetadata = (path: string): [metadata, string?] => {
     try {
-      return JSON.parse(readFileSync(path, "utf-8"));
+      const metaFile = readFileSync(path, "utf8");
+      return [JSON.parse(metaFile), metaFile];
     } catch {
-      return null;
+      return [null];
     }
   },
   createAnnotation = (params: CreateAnnotationParams): string => {
@@ -112,7 +117,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
   console.log(blue(`Beginning validation of ${changedMetaFiles.length} presences...`));
 
   for (const metaFile of changedMetaFiles) {
-    const meta = loadMetadata(metaFile),
+    const [meta, rawMeta] = loadMetadata(metaFile),
       folder = metaFile.split("/")[2];
 
     if (!meta) {
@@ -257,7 +262,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
     }
 
     function getLine(line: key, value?: string | number) {
-      const AST = ParseJSON(JSON.stringify(meta, null, 2), {
+      const AST = ParseJSON(rawMeta, {
         loc: true,
         source: metaFile
       }) as ObjectNode;
