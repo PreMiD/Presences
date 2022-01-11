@@ -39,13 +39,13 @@ presence.on("UpdateData", async () => {
         "div.center_info > div.title"
       )?.textContent;
 
-    if (logo) presenceData.largeImageKey = await getShortURL(logo);
+    if (logo) presenceData.largeImageKey = logo;
 
     presenceData.details = `Viewing ${name ? name : "app"}`;
     presenceData.buttons = [
       {
         label: "View app",
-        url: await getShortURL(document.location.href)
+        url: document.location.href
       }
     ];
   } else if (paths[0] === "search" && paths[1])
@@ -54,19 +54,3 @@ presence.on("UpdateData", async () => {
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
 });
-
-const shortenedURLs: Record<string, string> = {};
-async function getShortURL(url: string) {
-  if (!url || url.length < 256) return url;
-  if (shortenedURLs[url]) return shortenedURLs[url];
-  try {
-    const pdURL = await (
-      await fetch(`https://pd.premid.app/create/${url}`)
-    ).text();
-    shortenedURLs[url] = pdURL;
-    return pdURL;
-  } catch (err) {
-    presence.error(err);
-    return url;
-  }
-}
