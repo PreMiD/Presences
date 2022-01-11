@@ -203,16 +203,17 @@ presence.on("UpdateData", async () => {
           .replace(/\D+/g, ""),
         0
       ),
-      watchId = parseInt(document.URL.split("?")[0].replace(/\D+/g, ""), 0);
+      watchId = parseInt(document.URL.split("?")[0].replace(/\D+/g, ""), 0),
+      type =
+        document.querySelector("[class$='title'] .ellipsize-text span") ||
+        document.querySelector("[data-uia$='video-title'] span")
+          ? "show"
+          : "movie";
 
     if (!episodeId || !seasonId || !watchId) return;
 
     videoMetadata = {
-      type:
-        document.querySelector("[class$='title'] .ellipsize-text span") ||
-        document.querySelector("[data-uia$='video-title'] span")
-          ? "show"
-          : "movie",
+      type,
       currentEpisode: watchId,
       id: watchId,
       boxart: null,
@@ -236,7 +237,7 @@ presence.on("UpdateData", async () => {
         }
       ],
       title:
-        this.type === "movie"
+        type === "movie"
           ? (
               document.querySelector("[class$='title'] h4.ellipsize-text") ??
               document.querySelector("[data-uia$='video-title']")
