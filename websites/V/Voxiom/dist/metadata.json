@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "Meow",
+    "id": "521701910609133570"
+  },
+  "service": "Voxiom",
+  "description": {
+    "en": "English"
+  },
+  "url": "voxiom.io",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/AJ9gTe1.png",
+  "thumbnail": "https://i.imgur.com/jWDLaoK.png",
+  "color": "#e67e22",
+  "category": "games",
+  "tags": [
+    "fps",
+    "gaming",
+    "shooter"
+  ]
+}
