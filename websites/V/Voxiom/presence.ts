@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
       let blueScore = Number(possibleScoreDiv.children[0]?.textContent) || 0;
       let timeLeft = possibleScoreDiv.children[1]?.textContent || "";
       let redScore = Number(possibleScoreDiv.children[2]?.textContent) || 0;
-      if(blueScore !== NaN && redScore !== NaN && timeLeft.includes(":")) {
+      if(timeLeft.includes(":")) {
         // time is in format 'mm:ss'
         let secondsLeft = Number(timeLeft.split(":")[1]);
         secondsLeft += Number(timeLeft.split(":")[0]) * 60;
