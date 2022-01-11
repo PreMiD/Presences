@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
       smallImageKey: "https://i.imgur.com/AJ9gTe1.png",
       smallImageText: "Playing Voxiom"
     },
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     gameCode = window.location.hash.substring(1);
 
   if (url === "/" && gameCode) {
-    data.details = "In a Game";
+    presenceData.details = "In a Game";
 
     /* this is done because classNames are randomized */
     const possibleScoreDiv = [...document.querySelectorAll("div div")] // score display is in two divs
@@ -26,12 +26,12 @@ presence.on("UpdateData", async () => {
         // time is in format 'mm:ss'
         let secondsLeft = Number(timeLeft.split(":")[1]);
         secondsLeft += Number(timeLeft.split(":")[0]) * 60;
-        data.state = `Score: ${
+        presenceData.state = `Score: ${
           Number(possibleScoreDiv.children[0]?.textContent) || 0
         }-${Number(possibleScoreDiv.children[2]?.textContent) || 0}`;
-        data.endTimestamp = Date.now() + secondsLeft * 1000;
+        presenceData.endTimestamp = Date.now() + secondsLeft * 1000;
         if (await presence.getSetting("showGame")) {
-          data.buttons = [
+          presenceData.buttons = [
             {
               label: "Join Game",
               url: `${window.location.protocol}//${window.location.hostname}/#${gameCode}`
@@ -41,58 +41,60 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (url === "/" || url === "/experimental")
-    data.details = "In Main Menu";
+    presenceData.details = "In Main Menu";
   else if (url.startsWith("/loadouts")) {
-    data.details = "Managing Loadouts";
+    presenceData.details = "Managing Loadouts";
     switch (url) {
       case "/loadouts":
       case "/loadouts/inventory":
-        data.state = "Viewing Inventory";
+        presenceData.state = "Viewing Inventory";
         break;
       case "/loadouts/market":
-        data.state = "Viewing Market";
+        presenceData.state = "Viewing Market";
         break;
       case "/loadouts/sales":
-        data.state = "Viewing Listed Items";
+        presenceData.state = "Viewing Listed Items";
         break;
       case "/loadouts/history":
-        data.state = "Viewing Market History";
+        presenceData.state = "Viewing Market History";
         break;
     }
-  } else if (url.startsWith("/shop")) data.details = "In Shop";
-  else if (url.startsWith("/leaderboard")) data.details = "Viewing Leaderboard";
-  else if (url === "/changelog") data.details = "Reading Changelog";
-  else if (url === "/settings") data.details = "Changing Settings";
-  else if (url === "/match") data.details = "Reviewing Match Stats";
-  else if (url.startsWith("/account")) data.details = "Viewing Account";
-  else if (url.startsWith("/friends")) data.details = "Managing Friends";
+  } else if (url.startsWith("/shop")) presenceData.details = "In Shop";
+  else if (url.startsWith("/leaderboard"))
+    presenceData.details = "Viewing Leaderboard";
+  else if (url === "/changelog") presenceData.details = "Reading Changelog";
+  else if (url === "/settings") presenceData.details = "Changing Settings";
+  else if (url === "/match") presenceData.details = "Reviewing Match Stats";
+  else if (url.startsWith("/account")) presenceData.details = "Viewing Account";
+  else if (url.startsWith("/friends"))
+    presenceData.details = "Managing Friends";
   else if (url.startsWith("/player")) {
     const viewName = url.substring("/player/".length);
-    data.details = "Viewing Player";
-    data.state = `Player: ${viewName}`;
+    presenceData.details = "Viewing Player";
+    presenceData.state = `Player: ${viewName}`;
   } else if (url.startsWith("/clans/view")) {
     const viewName = url.substring("/clans/view/".length);
-    data.details = "Viewing Clan";
-    data.state = `Clan: ${viewName}`;
+    presenceData.details = "Viewing Clan";
+    presenceData.state = `Clan: ${viewName}`;
   } else if (url.startsWith("/clans")) {
-    data.details = "Managing Clan";
+    presenceData.details = "Managing Clan";
     switch (url) {
       case "/clans":
       case "/clans/join":
-        data.state = "Viewing Clan List";
+        presenceData.state = "Viewing Clan List";
         break;
       case "/clans/create":
-        data.state = "Creating a Clan";
+        presenceData.state = "Creating a Clan";
         break;
       case "/clans/invites":
-        data.state = "Viewing Clan Invites";
+        presenceData.state = "Viewing Clan Invites";
         break;
       case "/clans/requests":
-        data.state = "Viewing Clan Requests";
+        presenceData.state = "Viewing Clan Requests";
         break;
     }
   }
 
-  if (data.details) presence.setActivity(data);
+  if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
 });
