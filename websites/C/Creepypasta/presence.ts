@@ -14,7 +14,6 @@ presence.on("UpdateData", async () => {
     },
     orderBy = document.getElementsByName("_orderby")[0] as HTMLSelectElement;
 
-  if (document.getElementsByName("_orderby")[0])
     switch (document.location.pathname) {
       case "/":
         presenceData.details = "Viewing Home Page";
