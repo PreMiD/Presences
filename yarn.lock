@@ -1881,10 +1881,10 @@ eslint-plugin-eqeqeq-fix@^1.0.3:
   resolved "https://registry.yarnpkg.com/eslint-plugin-eqeqeq-fix/-/eslint-plugin-eqeqeq-fix-1.0.3.tgz#5ee0b44ce97463e66fdfc6c1c91eb26878f030f8"
   integrity sha512-P1rvtn3iyMJGmF8zU6Q5+boNhYr+c+L4V3lLNGjNornLdZgXScekItxpxZdwKRXpZI30JmszVBH8U4hRj3Ly/Q==
 
-eslint-plugin-no-one-time-vars@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-no-one-time-vars/-/eslint-plugin-no-one-time-vars-2.1.1.tgz#bf952bc6b7de9d852f8f2fd9d3304c0eb492c0cc"
-  integrity sha512-ZV/UQe5VdUbEYviVuDaucjNHyjzA/Vy7lcckn+O71QUahr9mT2lrC8np0lawfweKk+G6JYskHyYzj4qS0FJTOw==
+eslint-plugin-no-one-time-vars@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-no-one-time-vars/-/eslint-plugin-no-one-time-vars-2.1.2.tgz#a811561a219516ddd17f3deabd12827124ef620c"
+  integrity sha512-rDH2RWZIHx2KRukgjJ5YA7q4bHLJfxPAgQbzz6SjDqYknaHPm3sEIyEcmIVWf9e34+nCh/3EGQcxUez7Ky0IVg==
   dependencies:
     requireindex "^1.2.0"
 
