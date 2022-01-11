@@ -18,5 +18,13 @@
     "fps",
     "gaming",
     "shooter"
+  ],
+  "settings": [
+    {
+      "id": "showGame",
+      "title": "Show Join Game Button",
+      "icon": "fas fa-sign-in-alt",
+      "value": true
+    }
   ]
 }

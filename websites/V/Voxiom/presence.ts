@@ -30,12 +30,14 @@ presence.on("UpdateData", async () => {
           Number(possibleScoreDiv.children[0]?.textContent) || 0
         }-${Number(possibleScoreDiv.children[2]?.textContent) || 0}`;
         data.endTimestamp = Date.now() + secondsLeft * 1000;
-        data.buttons = [
-          {
-            label: "Join Game",
-            url: `${window.location.protocol}//${window.location.hostname}/#${gameCode}`
-          }
-        ];
+        if (await presence.getSetting("showGame")) {
+          data.buttons = [
+            {
+              label: "Join Game",
+              url: `${window.location.protocol}//${window.location.hostname}/#${gameCode}`
+            }
+          ];
+        }
       }
     }
   } else if (url === "/" || url === "/experimental")
