@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
   if (pathname === "/" && gameCode) {
     presenceData.details = "In a Game";
 
-    /* this is done because classNames are randomized */
+    // this is done because classNames are randomized
     const possibleScoreDiv = [...document.querySelectorAll("div div")] // score display is in two divs
       .filter(d => d.innerHTML.match(/<div/g)?.length === 3) // score display has 3 divs inside it
       .find(d =>
