@@ -4,13 +4,13 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      smallImageKey: "https://i.imgur.com/AJ9gTe1.png",
+      smallImageKey: "voxiom",
       smallImageText: "Playing Voxiom"
     },
-    url = window.location.pathname,
+    { pathname } = window.location,
     gameCode = window.location.hash.substring(1);
 
-  if (url === "/" && gameCode) {
+  if (pathname === "/" && gameCode) {
     presenceData.details = "In a Game";
 
     /* this is done because classNames are randomized */
@@ -40,11 +40,11 @@ presence.on("UpdateData", async () => {
         }
       }
     }
-  } else if (url === "/" || url === "/experimental")
+  } else if (pathname === "/" || pathname === "/experimental")
     presenceData.details = "In Main Menu";
-  else if (url.startsWith("/loadouts")) {
+  else if (pathname.startsWith("/loadouts")) {
     presenceData.details = "Managing Loadouts";
-    switch (url) {
+    switch (pathname) {
       case "/loadouts":
       case "/loadouts/inventory":
         presenceData.state = "Viewing Inventory";
@@ -59,26 +59,29 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Viewing Market History";
         break;
     }
-  } else if (url.startsWith("/shop")) presenceData.details = "In Shop";
-  else if (url.startsWith("/leaderboard"))
+  } else if (pathname.startsWith("/shop")) presenceData.details = "In Shop";
+  else if (pathname.startsWith("/leaderboard"))
     presenceData.details = "Viewing Leaderboard";
-  else if (url === "/changelog") presenceData.details = "Reading Changelog";
-  else if (url === "/settings") presenceData.details = "Changing Settings";
-  else if (url === "/match") presenceData.details = "Reviewing Match Stats";
-  else if (url.startsWith("/account")) presenceData.details = "Viewing Account";
-  else if (url.startsWith("/friends"))
+  else if (pathname === "/changelog")
+    presenceData.details = "Reading Changelog";
+  else if (pathname === "/settings") presenceData.details = "Changing Settings";
+  else if (pathname === "/match")
+    presenceData.details = "Reviewing Match Stats";
+  else if (pathname.startsWith("/account"))
+    presenceData.details = "Viewing Account";
+  else if (pathname.startsWith("/friends"))
     presenceData.details = "Managing Friends";
-  else if (url.startsWith("/player")) {
-    const viewName = url.substring("/player/".length);
+  else if (pathname.startsWith("/player")) {
+    const viewName = pathname.substring("/player/".length);
     presenceData.details = "Viewing Player";
     presenceData.state = `Player: ${viewName}`;
-  } else if (url.startsWith("/clans/view")) {
-    const viewName = url.substring("/clans/view/".length);
+  } else if (pathname.startsWith("/clans/view")) {
+    const viewName = pathname.substring("/clans/view/".length);
     presenceData.details = "Viewing Clan";
     presenceData.state = `Clan: ${viewName}`;
-  } else if (url.startsWith("/clans")) {
+  } else if (pathname.startsWith("/clans")) {
     presenceData.details = "Managing Clan";
-    switch (url) {
+    switch (pathname) {
       case "/clans":
       case "/clans/join":
         presenceData.state = "Viewing Clan List";
