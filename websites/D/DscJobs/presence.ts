@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "846309777508007946",
+    clientId: "846309777508007946"
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
   [page] = document.location.href.split("page=")[1].split("&"),
@@ -11,10 +11,10 @@ presence.on("UpdateData", async () => {
   const [showTimestamp, showButtons, showCvButton] = await Promise.all([
       presence.getSetting<boolean>("timestamp"),
       presence.getSetting<boolean>("buttons"),
-      presence.getSetting<boolean>("cvButton"),
+      presence.getSetting<boolean>("cvButton")
     ]),
     presenceData: PresenceData = {
-      largeImageKey: "dscjobs_logo",
+      largeImageKey: "dscjobs_logo"
     };
 
   if (document.location.pathname === "/")
@@ -28,8 +28,8 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: "View Page",
-        url: document.location.href,
-      },
+        url: document.location.href
+      }
     ];
   } else if (document.location.pathname === "/developers") {
     presenceData.details = "Viewing hireable developers";
@@ -37,24 +37,24 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: "View Page",
-        url: document.location.href,
-      },
+        url: document.location.href
+      }
     ];
   } else if (document.location.pathname.includes("/premium")) {
     presenceData.details = "Viewing premium plan";
     presenceData.buttons = [
       {
         label: "View Premium Plan",
-        url: document.location.href,
-      },
+        url: document.location.href
+      }
     ];
   } else if (document.location.pathname === "/partners") {
     presenceData.details = "Viewing partners";
     presenceData.buttons = [
       {
         label: "View Partners",
-        url: document.location.href,
-      },
+        url: document.location.href
+      }
     ];
   } else if (document.location.pathname === "/profile")
     presenceData.details = "Viewing profile";
@@ -69,8 +69,8 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         {
           label: `Vote ${usernameVote}`,
-          url: document.location.href,
-        },
+          url: document.location.href
+        }
       ];
     }
   } else if (document.location.pathname.includes("/cv/")) {
@@ -86,8 +86,8 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         {
           label: "View Resume",
-          url: document.location.href,
-        },
+          url: document.location.href
+        }
       ];
     }
   } else if (document.location.pathname.includes("/settings"))
@@ -97,16 +97,16 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: "View Privacy Policy",
-        url: document.location.href,
-      },
+        url: document.location.href
+      }
     ];
   } else if (document.location.pathname.includes("/terms")) {
     presenceData.details = "Viewing Terms of Service";
     presenceData.buttons = [
       {
         label: "View Page",
-        url: document.location.href,
-      },
+        url: document.location.href
+      }
     ];
     // staff panel
   } else if (document.location.pathname.includes("/reviews")) {
