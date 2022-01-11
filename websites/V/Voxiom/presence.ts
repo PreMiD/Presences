@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     smallImageKey: "https://i.imgur.com/AJ9gTe1.png",
-    smallImageText: "Playing Voxoim"
+    smallImageText: "Playing Voxiom"
   };
 
   let url = window.location.pathname;
