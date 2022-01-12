@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
     if (djeeta) {
       const charaAlive =
         document.getElementsByClassName("img-chara-command")[0];
-      if (charaAlive)
+      if (!(charaAlive as HTMLImageElement).src.includes("3999999999"))
         presenceData.largeImageKey = (charaAlive as HTMLImageElement).src;
     }
   } else if (href.includes("/#party/index/0/npc/0"))
