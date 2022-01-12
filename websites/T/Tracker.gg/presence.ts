@@ -475,16 +475,16 @@ presence.on("UpdateData", async () => {
         "body > div > div.trn-wrapper > div > div > main > div > div:nth-child(2) > div.mgn-header"
       ).textContent;
     } else if (pathname === "/contact") {
-      presenceData.details = "Viewing Page:";
+      presenceData.details = "Viewing:";
       presenceData.state = "Contact Page";
     } else if (pathname === "/home/privacypolicy") {
-      presenceData.details = "Viewing Page:";
+      presenceData.details = "Viewing:";
       presenceData.state = "Privacy Policy";
     } else if (pathname === "/home/tos") {
-      presenceData.details = "Viewing Page:";
+      presenceData.details = "Viewing:";
       presenceData.state = "Terms of Service";
     } else if (pathname === "/home") {
-      presenceData.details = "Viewing Page:";
+      presenceData.details = "Viewing:";
       presenceData.state = "Homepage";
     }
   }
