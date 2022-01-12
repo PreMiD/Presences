@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const presence = new Presence({
     clientId: "632983924414349333"
   }),
@@ -7,8 +6,13 @@ const presence = new Presence({
   eventId = "PreMiD_GranBlueFantasy";
 
 interface GameStatus {
-  boss: any;
-  turn: number;
+  boss: {
+    param: {
+      hp: string;
+      hpmax: string;
+      alive: 1 | 0;
+    }[];
+  };
 }
 
 let gameStatus: GameStatus;
@@ -76,7 +80,7 @@ presence.on("UpdateData", async () => {
         )[0].textContent
       }`;
     } else if (health === 1) {
-      const boss = gameStatus.boss.param.find((x: { alive: any }) => x.alive),
+      const boss = gameStatus.boss.param.find(x => x.alive),
         hp = parseInt(boss.hp);
       presenceData.state = `${hp.toLocaleString()} [${(
         (100 * hp) /
