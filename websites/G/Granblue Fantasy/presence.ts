@@ -38,7 +38,7 @@ script.appendChild(
     });
     window.dispatchEvent(pmdEvent);
     isRunning = false;
-  }, 5000);
+  }, 4500);
 `)
 );
 document.head.appendChild(script);
