@@ -1,14 +1,59 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const presence = new Presence({
     clientId: "632983924414349333"
   }),
-  browsingTimestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000),
+  script = document.createElement("script"),
+  eventId = "PreMiD_GranBlueFantasy";
+
+interface GameStatus {
+  boss: any;
+  turn: number;
+}
+
+let gameStatus: GameStatus;
+
+script.id = eventId;
+script.appendChild(
+  document.createTextNode(`
+  let isRunning = false;
+  setInterval(() => {
+    if (isRunning) return;
+    isRunning = true;
+    const getCircularReplacer = () => {
+      const seen = new WeakSet();
+      return (key, value) => {
+        if (typeof value === "object" && value !== null) {
+          if (seen.has(value)) return;
+          else seen.add(value);
+        }
+        return value;
+      };
+    };
+    const gGameStatus = JSON.stringify(window.stage?.gGameStatus, getCircularReplacer());
+    const pmdEvent = new CustomEvent("${eventId}", {
+      detail: {
+        gGameStatus
+      }
+    });
+    window.dispatchEvent(pmdEvent);
+    isRunning = false;
+  }, 10);
+`)
+);
+document.head.appendChild(script);
+
+addEventListener(eventId, (data: CustomEvent) => {
+  gameStatus = JSON.parse(data.detail.gGameStatus);
+});
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: browsingTimestamp
     },
-    { href } = document.location;
+    { href } = document.location,
+    health = await presence.getSetting<number>("health");
   if (href.includes("/#mypage")) presenceData.details = "Home page";
   else if (href.includes("/#quest")) {
     presenceData.details = "Selecting a quest";
@@ -23,13 +68,24 @@ presence.on("UpdateData", async () => {
   } else if (href.includes("/#result"))
     presenceData.details = "In a Quest result screen";
   else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
+    if (health === 0) {
+      presenceData.state = `At ${
+        document.getElementsByClassName(
+          "btn-enemy-gauge prt-enemy-percent alive"
+        )[0].textContent
+      }`;
+    } else if (health === 1) {
+      const boss = gameStatus.boss.param.find((x: { alive: any }) => x.alive),
+        hp = parseInt(boss.hp);
+      presenceData.state = `${hp.toLocaleString()} [${(
+        (100 * hp) /
+        parseInt(boss.hpmax)
+      ).toLocaleString(void 0, {
+        maximumFractionDigits: 2
+      })}%]`;
+    }
     presenceData.details =
       document.getElementsByClassName("name")[0].textContent;
-    presenceData.state = `At ${
-      document.getElementsByClassName(
-        "btn-enemy-gauge prt-enemy-percent alive"
-      )[0].textContent
-    }`;
   } else if (href.includes("/#party/index/0/npc/0"))
     presenceData.details = "Viewing party";
   else if (href.includes("/#enhancement")) {
