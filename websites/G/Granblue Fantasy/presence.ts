@@ -17,6 +17,7 @@ interface GameStatus {
 
 let gameStatus: GameStatus;
 
+// Decreasing latency may greatly impact on gameplay/performance
 script.id = eventId;
 script.appendChild(
   document.createTextNode(`
