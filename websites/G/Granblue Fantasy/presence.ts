@@ -44,7 +44,8 @@ script.appendChild(
 document.head.appendChild(script);
 
 addEventListener(eventId, (data: CustomEvent) => {
-  gameStatus = JSON.parse(data.detail.gGameStatus);
+  if (!data.detail.gGameStatus) return (gameStatus = null);
+  else gameStatus = JSON.parse(data.detail.gGameStatus);
 });
 
 presence.on("UpdateData", async () => {
