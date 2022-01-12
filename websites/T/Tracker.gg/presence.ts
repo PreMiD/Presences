@@ -399,7 +399,7 @@ presence.on("UpdateData", async () => {
       ).src;
     } else if (pathname === "/event-lfp") {
       presenceData.details = "Viewing:";
-      presenceData.state = "Tournament Looking for Player";
+      presenceData.state = "Looking for Player";
 
       presenceData.smallImageText = "TRN";
       presenceData.largeImageKey = "fortnite";
