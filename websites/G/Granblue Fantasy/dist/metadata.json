@@ -41,6 +41,12 @@
         "Simple",
         "Detailed"
       ]
+    },
+    {
+      "id": "djeeta",
+      "title": "Show main charater",
+      "icon": "fas fa-user",
+      "value": false
     }
   ]
 }

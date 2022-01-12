@@ -59,7 +59,10 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingTimestamp
     },
     { href } = document.location,
-    health = await presence.getSetting<number>("health");
+    [health, djeeta] = await Promise.all([
+      presence.getSetting<number>("health"),
+      presence.getSetting<boolean>("djeeta")
+    ]);
   if (href.includes("/#mypage")) presenceData.details = "Home page";
   else if (href.includes("/#quest")) {
     presenceData.details = "Selecting a quest";
@@ -92,6 +95,12 @@ presence.on("UpdateData", async () => {
     }
     presenceData.details =
       document.getElementsByClassName("name")[0].textContent;
+    if (djeeta) {
+      const charaAlive =
+        document.getElementsByClassName("img-chara-command")[0];
+      if (charaAlive)
+        presenceData.largeImageKey = (charaAlive as HTMLImageElement).src;
+    }
   } else if (href.includes("/#party/index/0/npc/0"))
     presenceData.details = "Viewing party";
   else if (href.includes("/#enhancement")) {
