@@ -275,7 +275,9 @@ const // official website
     largeImageKey: PRESENCE_ART_ASSETS.logo
   };
 
-let ApiClient: ApiClient, presence: Presence;
+let ApiClient: ApiClient,
+  presence: Presence,
+  wasLogin = false;
 
 function jellyfinBasenameUrl(): string {
   return `${`${location.protocol}//${location.host}${location.pathname.replace(
@@ -347,6 +349,10 @@ function handleOfficialWebsite(): void {
     case "/posts/":
       presenceData.state = "Reading the latest posts";
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.read;
+      break;
+    case "/clients/":
+      presenceData.state = "Checking clients";
+      presenceData.smallImageKey = PRESENCE_ART_ASSETS.search;
       break;
     case "/downloads/":
       presenceData.state = "On downloads";
@@ -602,6 +608,31 @@ async function handleItemDetails(): Promise<void> {
 }
 
 /**
+ * sleep - Suspend execution of code for an interval, see <https://manpage.me/?q=sleep>
+ *
+ * @param ms Time in milliseconds
+ */
+function sleep(ms: number): Promise<void> {
+  return new Promise(res => {
+    setTimeout(res, ms);
+  });
+}
+
+/**
+ * loggedIn - Refreshes the ApiClient object
+ */
+async function loggedIn(): Promise<void> {
+  let apiClient: ApiClient;
+
+  do {
+    await sleep(125);
+    apiClient = await presence.getPageletiable<ApiClient>("ApiClient");
+  } while (!apiClient._serverInfo.AccessToken);
+
+  ApiClient = apiClient;
+}
+
+/**
  * handleWebClient - handle the presence while the user is in the web client
  */
 async function handleWebClient(): Promise<void> {
@@ -622,10 +653,17 @@ async function handleWebClient(): Promise<void> {
   // obtain the path, on the example would return "login.html"
   // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
 
-  switch (location.hash.split("?")[0].substring(3)) {
-    case "login.html":
-      presenceData.state = "Logging in";
-      break;
+  const path = location.hash.split("?")[0].substring(3);
+
+  if (path === "login.html") {
+    wasLogin = true;
+    presenceData.state = "Logging in";
+  } else if (wasLogin) {
+    loggedIn();
+    wasLogin = false;
+  }
+
+  switch (path) {
     case "home.html":
       presenceData.state = "At home";
       break;
@@ -734,13 +772,20 @@ async function setDefaultsToPresence(): Promise<void> {
 }
 
 /**
+ * refreshApiClient - Initializes the ApiClient object
+ */
+async function refreshApiClient(): Promise<void> {
+  ApiClient ??= await presence.getPageletiable<ApiClient>("ApiClient");
+}
+
+/**
  * isJellyfinWebClient - imports the ApiClient variable and
  * verifies that we are in the jellyfin web client
  *
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isJellyfinWebClient(): Promise<boolean> {
-  ApiClient ??= await presence.getPageletiable<ApiClient>("ApiClient");
+  if (!ApiClient) await refreshApiClient();
 
   if (ApiClient && typeof ApiClient === "object") {
     if (ApiClient._appName && ApiClient._appName === "Jellyfin Web")

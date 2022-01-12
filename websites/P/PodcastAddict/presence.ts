@@ -14,11 +14,25 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching:";
     presenceData.state = document.querySelector(".caption").textContent;
     presenceData.smallImageKey = "search";
-  } else if (pathname === "/") presenceData.details = "Viewing the Homepage";
+  } else if (pathname === "/") presenceData.details = "Viewing the homepage";
   else if (pathname.startsWith("/app"))
-    presenceData.details = "Viewing app page";
+    presenceData.details = "Reading the app page";
   else if (pathname.startsWith("/ads"))
-    presenceData.details = "Viewing ads page";
+    presenceData.details = "Reading the ads page";
+  else if (pathname.startsWith("/privacy"))
+    presenceData.details = "Reading the privacy policy & ToS page";
+  else if (pathname.startsWith("/submit"))
+    presenceData.details = "Reading the podcast submission page";
+  else if (pathname.startsWith("/podcasters"))
+    presenceData.details = "Reading the podcasters page";
+  else if (pathname.startsWith("/premium"))
+    presenceData.details = "Reading the premium page";
+  else if (pathname.startsWith("/faq"))
+    presenceData.details = "Reading the FAQ page";
+  else if (pathname.startsWith("/changelog"))
+    presenceData.details = "Reading the changelog page";
+  else if (pathname.startsWith("/contact"))
+    presenceData.details = "Reading the contact page";
   else if (pathname.startsWith("/podcast")) {
     presenceData.details = "Viewing:";
     presenceData.state = document.querySelector(".caption").textContent;

@@ -4,10 +4,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const player = Array.from(document.querySelectorAll("i")).find(x =>
-    ["playerIcon playerIcon--play", "playerIcon playerIcon--pause"].includes(
-      x.className
-    )
-  );
+      ["playerIcon playerIcon--play", "playerIcon playerIcon--pause"].includes(
+        x.className
+      )
+    ),
+    cover = await presence.getSetting<boolean>("cover");
 
   if (player) {
     const paused = player.className.includes("pause") === false,
@@ -30,7 +31,9 @@ presence.on("UpdateData", async () => {
       presenceData: PresenceData = {
         details: title,
         state: author,
-        largeImageKey: "icon",
+        largeImageKey: cover
+          ? document.querySelector<HTMLImageElement>(`img[alt="${title}"]`).src
+          : "icon",
         smallImageKey: paused ? "pause" : "playing",
         smallImageText: paused ? "Paused" : "Playing",
         startTimestamp: timestamps[0],
