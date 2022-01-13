@@ -11,9 +11,11 @@ interface FlimData {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "mdl-logo",
-    startTimestamp: browsingTimestamp
-  };
+      largeImageKey: "mdl-logo",
+      startTimestamp: browsingTimestamp
+    },
+    coverEnabled = await presence.getSetting("cover");
+
   if (document.location.pathname === "/") {
     presenceData.details = "Viewing the homepage";
     presenceData.smallImageKey = "reading";
@@ -53,6 +55,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
         "#content > div > div.container-fluid > div > div.col-lg-4.col-md-4 > div > div:nth-child(1) > div.box-header.p-b-0.text-center > h1"
       ).textContent;
+      presenceData.largeImageKey =
+        document.querySelector<HTMLImageElement>(".box-body > img").src;
       presenceData.smallImageKey = "mdl-logo";
       presenceData.smallImageText = "MDL";
     } else {
@@ -127,5 +131,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Looking at personailized recommendations";
     presenceData.smallImageKey = "mdl-logo";
   }
+
+  if (presenceData.largeImageKey.includes("http") && !coverEnabled)
+    presenceData.largeImageKey = "mdl-logo";
+
   presence.setActivity(presenceData);
 });
