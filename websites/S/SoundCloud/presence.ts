@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
       ]),
     playing = Boolean(document.querySelector(".playControls__play.playing"));
 
-  if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
     strings = await getStrings();
   }
