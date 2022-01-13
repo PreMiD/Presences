@@ -24,8 +24,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const curPath = document.location.pathname,
-    playback =
-      video !== null && !isNaN(video.duration) && curPath.includes("/xem-phim"),
+    playback = video !== null && !isNaN(video.duration),
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
@@ -70,7 +69,11 @@ presence.on("UpdateData", async () => {
     return;
   }
 
-  if (video && !isNaN(video.duration)) {
+  if (
+    video &&
+    !isNaN(video.duration) &&
+    document.getElementsByClassName("mr-1")[0].querySelector("h2")
+  ) {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
@@ -84,7 +87,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Đang xem: ${
       document.querySelector("h1").textContent
     }`;
-    presenceData.state = document.querySelector("#nhasx").textContent;
+    presenceData.state = document
+      .getElementsByClassName("mr-1")[0]
+      .querySelector("h2").textContent;
 
     if (video.paused) {
       delete presenceData.startTimestamp;

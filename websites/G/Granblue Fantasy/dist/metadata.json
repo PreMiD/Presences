@@ -8,10 +8,6 @@
     {
       "name": "Kyrie",
       "id": "368399721494216706"
-    },
-    {
-      "name": "Slowlife",
-      "id": "374905512661221377"
     }
   ],
   "service": "Granblue Fantasy",
@@ -21,7 +17,7 @@
     "vi_VN": "Trò chơi đóng vai Nhật Bản"
   },
   "url": "game.granbluefantasy.jp",
-  "version": "1.4.0",
+  "version": "1.3.0",
   "logo": "https://i.imgur.com/XyHgDQX.png",
   "thumbnail": "https://i.imgur.com/2GPNZM8.jpg",
   "color": "#2F4F7A",
@@ -30,23 +26,5 @@
     "grandblue-fanstasy",
     "game",
     "jrpg"
-  ],
-  "settings": [
-    {
-      "id": "health",
-      "title": "Health points",
-      "icon": "fad fa-heart",
-      "value": 0,
-      "values": [
-        "Simple",
-        "Detailed"
-      ]
-    },
-    {
-      "id": "djeeta",
-      "title": "Show main charater",
-      "icon": "fas fa-user",
-      "value": false
-    }
   ]
 }
