@@ -51,9 +51,10 @@ presence.on("UpdateData", async () => {
       }
       const capt = document.querySelector("h1").textContent;
       presenceData.details = "Viendo Anime:";
-      presenceData.state = `${capt.slice(0, -1)} capítulo ${capt.charAt(
-        capt.length - 1
-      )}`;
+      presenceData.state = `${capt.substring(
+        0,
+        document.querySelector("h1").textContent.lastIndexOf(" ")
+      )} capítulo ${capt.split(" ").pop()}`;
       [presenceData.startTimestamp, presenceData.endTimestamp] =
         presence.getTimestamps(
           Math.floor(video.currentTime),
