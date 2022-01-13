@@ -3,6 +3,12 @@ const presence = new Presence({
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
+interface FlimData {
+  "@type": string;
+  name: string;
+  image: string;
+}
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "mdl-logo",
@@ -30,27 +36,40 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "MDL";
   } else if (window.location.href.match("/[^-][0-9]{1,5}")) {
     if (document.location.pathname.startsWith("/profile/")) {
-      presenceData.details = "Looking at user profiles";
-      presenceData.state = document.querySelector(
-        "#content > div > div.container-fluid.profile-container > div > div.col-lg-8.col-md-8 > div.box > div.box-header.box-navbar > div.profile-header > div.hidden-sm-down > h1"
-      ).textContent;
+      const profilePicture = document.querySelector(
+        ".box-user-profile :is(video, img)"
+      );
+
+      presenceData.details = `Viewing ${document
+        .querySelector("profile-header h1")
+        .textContent.trim()}'s profile`;
+      presenceData.largeImageKey =
+        profilePicture.getAttribute("poster") ??
+        profilePicture.getAttribute("src");
+      presenceData.smallImageKey = "mdl-logo";
+      presenceData.smallImageText = "MDL";
     } else if (document.location.pathname.startsWith("/people/")) {
-      presenceData.details = "Looking at Actors";
+      presenceData.details = "Viewing an actor:";
       presenceData.state = document.querySelector(
         "#content > div > div.container-fluid > div > div.col-lg-4.col-md-4 > div > div:nth-child(1) > div.box-header.p-b-0.text-center > h1"
       ).textContent;
       presenceData.smallImageKey = "mdl-logo";
       presenceData.smallImageText = "MDL";
     } else {
-      presenceData.details = "Viewing show page ...";
-      presenceData.state = document.querySelector(
-        "div.col-lg-8.col-md-8.col-right > div:nth-child(1) > div.box-header.box-navbar > h1 > a"
-      ).textContent;
+      const flimData: FlimData = JSON.parse(
+        document.querySelector('[type="application/ld+json"]').textContent
+      ).mainEntity;
+
+      presenceData.details = `Viewing a ${
+        flimData["@type"] === "Movie" ? "movie" : "show"
+      }:`;
+      presenceData.state = flimData.name;
+      presenceData.largeImageKey = flimData.image;
       presenceData.smallImageKey = "mdl-logo";
       presenceData.smallImageText = "MDL";
     }
   } else if (document.location.pathname.startsWith("/article/")) {
-    presenceData.details = "Reading an article";
+    presenceData.details = "Reading an article:";
     presenceData.state = document.querySelector(
       "#article > div.box-header > h1 > a"
     ).textContent;
@@ -92,10 +111,16 @@ presence.on("UpdateData", async () => {
     /*
     There are two profile sections due to regex mathcing, some profiles have numbers some dont.
     */
-    presenceData.details = "Looking at user profile";
-    presenceData.state = document.querySelector(
-      "#content > div > div.container-fluid.profile-container > div > div.col-lg-8.col-md-8 > div.box > div.box-header.box-navbar > div.profile-header > div.hidden-sm-down > h1"
-    ).textContent;
+    const profilePicture = document.querySelector(
+      ".box-user-profile :is(video, img)"
+    );
+
+    presenceData.details = `Viewing ${document
+      .querySelector("profile-header h1")
+      .textContent.trim()}'s profile`;
+    presenceData.largeImageKey =
+      profilePicture.getAttribute("poster") ??
+      profilePicture.getAttribute("src");
     presenceData.smallImageKey = "mdl-logo";
     presenceData.smallImageText = "MDL";
   } else if (document.location.pathname.startsWith("/recommendations")) {
