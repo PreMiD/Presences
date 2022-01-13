@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
         document.querySelector('[type="application/ld+json"]').textContent
       ).mainEntity;
 
-      presenceData.details = `Viewing a ${
+      presenceData.details = `Viewing ${
         flimData["@type"] === "Movie" ? "movie" : "show"
       }:`;
       presenceData.state = flimData.name;
