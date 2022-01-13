@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
-interface FlimData {
+interface FilmData {
   "@type": string;
   name: string;
   image: string;
@@ -60,15 +60,15 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "mdl-logo";
       presenceData.smallImageText = "MDL";
     } else {
-      const flimData: FlimData = JSON.parse(
+      const filmData: FilmData = JSON.parse(
         document.querySelector('[type="application/ld+json"]').textContent
       ).mainEntity;
 
       presenceData.details = `Viewing ${
-        flimData["@type"] === "Movie" ? "movie" : "show"
+        filmData["@type"] === "Movie" ? "movie" : "show"
       }:`;
-      presenceData.state = flimData.name;
-      presenceData.largeImageKey = flimData.image;
+      presenceData.state = filmData.name;
+      presenceData.largeImageKey = filmData.image;
       presenceData.smallImageKey = "mdl-logo";
       presenceData.smallImageText = "MDL";
     }
