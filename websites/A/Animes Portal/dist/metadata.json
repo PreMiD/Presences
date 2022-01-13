@@ -1,9 +1,8 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.6",
-  "version": "1.0.0",
   "author": {
     "name": "Angelo II",
-    "id": "728512329888825396"
+    "id": "698966790356729907"
   },
   "service": "Animes Portal",
   "description": {
@@ -11,11 +10,11 @@
     "bg": "Аниме, манга и азиатска култура"
   },
   "url": "animes-portal.info",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/EwyBmHJ.png",
   "thumbnail": "https://i.imgur.com/Nr3XhzA.jpg",
   "color": "#365AA8",
   "category": "anime",
-  "iframe": true,
   "tags": [
     "anime",
     "online",
@@ -25,6 +24,7 @@
     "asia",
     "japan"
   ],
+  "iframe": true,
   "settings": [
     {
       "id": "showthumb",

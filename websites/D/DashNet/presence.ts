@@ -52,13 +52,11 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.includes("/igm/"))
     presenceData.details = "Making an idle game";
   else if (document.location.pathname.includes("/randomgen/"))
-    presenceData.details = "Using randomgen";
+    presenceData.details = "Using RandomGen";
   else if (document.location.pathname.includes("/nested/"))
     presenceData.details = "Playing Nested";
   else if (document.location.pathname.includes("/murdergames/"))
     presenceData.details = "Playing Murder Games";
-  else if (document.location.pathname.includes("/gamegen/"))
-    presenceData.details = "Using gamegen";
   else if (document.location.pathname.includes("/lsystem/"))
     presenceData.details = "Playing Tutrle Toy";
   else if (document.location.pathname.includes("/taskmaster/"))
@@ -66,9 +64,9 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.includes("/cookies2cash/"))
     presenceData.details = "Using Cookies2Cash";
   else if (document.location.pathname.includes("/musicgen/"))
-    presenceData.details = "Using musicgen";
+    presenceData.details = "Using MusicGen";
   else if (document.location.pathname.includes("/dungeongenerator/"))
-    presenceData.details = "Using dungeongenerator";
+    presenceData.details = "Using Dungeon Generator";
   else if (document.location.pathname.includes("/dreamlog/"))
     presenceData.details = "Playing Dreamlog";
   else if (document.location.pathname.includes("/PretendEverything/"))
@@ -77,6 +75,10 @@ presence.on("UpdateData", () => {
     presenceData.details = "Having a tea party";
   else if (document.location.pathname.includes("/mailtopia/"))
     presenceData.details = "Playing mailtopia";
+  else if (document.location.pathname.includes("/life"))
+    presenceData.details = "Playing Life";
+  else if (document.location.pathname.includes("/3dtest/2"))
+    presenceData.details = "Using WebGL test";
 
   if (presenceData.details) presence.setActivity(presenceData);
   else presence.setActivity();
