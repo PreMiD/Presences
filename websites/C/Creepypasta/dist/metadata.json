@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "joerkig",
+    "id": "205984221859151873"
+  },
+  "service": "Creepypasta",
+  "description": {
+    "en": "Get great PC and Mac games on Origin. Play the latest RPGs, shooters, Sims games & more."
+  },
+  "url": "www.creepypasta.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/WYcFqyS.png",
+  "thumbnail": "https://i.imgur.com/ZlvL1BP.png",
+  "color": "#dd3333",
+  "tags": [
+    "creepy",
+    "story",
+    "stories",
+    "spooky",
+    "scary",
+    "literature"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "time",
+      "title": "Show Timestamps",
+      "icon": "fas fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
