@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!document.getElementsByClassName("mr-1")[0].querySelector("h2")) {
+  if (!document.querySelector(".mr-1 h2")) {
     if (curPath.includes("/login")) presenceData.details = "Đang đăng nhập";
     else if (search.startsWith("?s=")) {
       presenceData.details = "Đang tìm kiếm";
