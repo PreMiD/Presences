@@ -87,10 +87,16 @@ presence.on("UpdateData", async () => {
       startTimestamp: elapsed
     },
     searchPageValue: string;
+
   if (!privacy) {
     searchPageValue =
       document.querySelector<HTMLInputElement>("#searchForm > input")?.value ??
       "ERROR: NOT FOUND!";
+  }
+
+  if (oldLang !== newLang || !strings) {
+    oldLang = newLang;
+    strings = await getStrings();
   }
 
   const path = location.pathname.replace(/\/?$/, "/"),
@@ -230,11 +236,6 @@ presence.on("UpdateData", async () => {
         smallImageKey: "reading"
       }
     };
-
-  if (oldLang !== newLang || !strings) {
-    oldLang = newLang;
-    strings = await getStrings();
-  }
 
   if (showBrowsing) {
     for (const [k, v] of Object.entries(statics))
