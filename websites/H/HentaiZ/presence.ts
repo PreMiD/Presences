@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!playback) {
+  if (!document.getElementsByClassName("mr-1")[0].querySelector("h2")) {
     if (curPath.includes("/login")) presenceData.details = "Đang đăng nhập";
     else if (search.startsWith("?s=")) {
       presenceData.details = "Đang tìm kiếm";
@@ -85,11 +85,11 @@ presence.on("UpdateData", async () => {
       );
 
     presenceData.details = `Đang xem: ${
-      document.querySelector("h1").textContent
+      document.getElementsByClassName("mr-1")[0].querySelector("h2").textContent
     }`;
-    presenceData.state = document
-      .getElementsByClassName("mr-1")[0]
-      .querySelector("h2").textContent;
+    presenceData.state = document.querySelector(
+      "#studio > ul > li > a"
+    ).textContent;
 
     if (video.paused) {
       delete presenceData.startTimestamp;
