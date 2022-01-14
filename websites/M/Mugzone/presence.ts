@@ -49,12 +49,16 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "slide";
         presenceData.smallImageText = "SlideMode";
         presenceData.state = "Slide Mode";
+      } else if (document.location.href.endsWith("?from=0&mode=8")) {
+        presenceData.smallImageKey = "livem";
+        presenceData.smallImageText = "LiveMode";
+        presenceData.state = "Live Mode";
       } else if (document.location.pathname.endsWith("/player")) {
         presenceData.smallImageKey = "key";
         presenceData.smallImageText = "KeyMode";
         presenceData.state = "Key Mode";
-      }
-    } else if (document.location.href.includes("/song")) {
+        }
+      } else if (document.location.href.includes("/song")) {
       presenceData.smallImageKey = "song";
       presenceData.details = "Viewing a song";
       presenceData.state = document.querySelector(
@@ -156,7 +160,7 @@ presence.on("UpdateData", async () => {
         if (
           document.querySelector(
             "#content > div.user_head.g_rblock > div.right > p.name > span"
-          ).textContent ===
+          ).textContent ==
         document.querySelector("#header > div > a:nth-child(4) > b"
         ).textContent
         ) {
@@ -180,29 +184,18 @@ presence.on("UpdateData", async () => {
                 "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
               )
               .textContent,
-            e = document
-              .querySelector(
-                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(5) > div > p.rank"
-              )
-              .textContent,
-            f = document
-              .querySelector(
-                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(6) > div > p.rank"
-              )
-              .textContent,
             a1: number = +a.replace("#", ""),
             b1: number = +b.replace("#", ""),
             c1: number = +c.replace("#", ""),
             d1: number = +d.replace("#", ""),
-            e1: number = +e.replace("#", ""),
-            f1: number = +f.replace("#", ""),
-            Top = Math.min(a1, b1, c1, d1, e1, f1);
+            Top = Math.min(a1, b1, c1,d1);
           presenceData.details = `User: ${
             document.querySelector(
               "#content > div.user_head.g_rblock > div.right > p.name > span"
             ).textContent
           }`;
           presenceData.state = `Best Rank: ${Top}`;
+
           presenceData.smallImageKey = "user";
           presenceData.buttons = [
             {
