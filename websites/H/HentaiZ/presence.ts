@@ -69,11 +69,7 @@ presence.on("UpdateData", async () => {
     return;
   }
 
-  if (
-    video &&
-    !isNaN(video.duration) &&
-    document.getElementsByClassName("mr-1")[0].querySelector("h2")
-  ) {
+  if (video && !isNaN(video.duration) && document.querySelector(".mr-1 h2")) {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
@@ -85,7 +81,7 @@ presence.on("UpdateData", async () => {
       );
 
     presenceData.details = `Đang xem: ${
-      document.getElementsByClassName("mr-1")[0].querySelector("h2").textContent
+      document.querySelector(".mr-1 h2").textContent
     }`;
     presenceData.state = document.querySelector(
       "#studio > ul > li > a"
