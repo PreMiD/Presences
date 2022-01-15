@@ -19,65 +19,48 @@ presence.on("UpdateData", async () => {
     pages: Record<string, PresenceData> = {
       "/manga/": {
         details: "Viewing a Manga...",
-        state: document.title.split(" | MangaLife")[0],
-        startTimestamp: browsingStamp
+        state: document.title.split(" | MangaLife")[0]
       },
       "/read-online/": {
-        smallImageKey: "reading",
-        startTimestamp: browsingStamp
+        smallImageKey: "reading"
       },
       "/search": {
         smallImageKey: "search",
-        details: "Searching...",
-        startTimestamp: browsingStamp
+        details: "Searching..."
       },
       "/discussion": {
         smallImageKey: !privacy ? "discussions" : "",
-        details: "Browsing...",
-        state: "at Discussions",
-        startTimestamp: browsingStamp
+        state: "at Discussions"
       },
       "hot.php": {
         smallImageKey: !privacy ? "hot" : "",
-        details: "Browsing...",
         state: "at Hot Manga Updates",
-        startTimestamp: browsingStamp,
         buttons: [{ label: "Hot Manga Updates", url: `${document.location}` }]
       },
       "subscription.php": {
         smallImageKey: !privacy ? "subscriptions" : "",
-        details: "Browsing...",
-        state: "at Subscriptions",
-        startTimestamp: browsingStamp
+        state: "at Subscriptions"
       },
       "feed.php": {
         smallImageKey: !privacy ? "subscriptions" : "",
-        details: "Browsing...",
-        state: "at Subscriptions Feed",
-        startTimestamp: browsingStamp
+        state: "at Subscriptions Feed"
       },
       "bookmark.php": {
         smallImageKey: !privacy ? "bookmark" : "",
-        details: "Browsing...",
-        state: "at Bookmarks",
-        startTimestamp: browsingStamp
+        state: "at Bookmarks"
       },
       "settings.php": {
         smallImageKey: "settings",
-        details: "Editing Settings...",
-        startTimestamp: browsingStamp
+        details: "Editing...",
+        state: "User Settings"
       },
       "/contact": {
         smallImageKey: !privacy ? "contact" : "",
-        details: "Browsing...",
-        state: "at Contact Page",
-        startTimestamp: browsingStamp
+        state: "at Contact Page"
       },
       "/privacy": {
         smallImageKey: !privacy ? "privacy" : "",
-        details: "Browsing...",
-        state: "at Privacy Policy Page",
-        startTimestamp: browsingStamp
+        state: "at Privacy Policy Page"
       }
     };
 
