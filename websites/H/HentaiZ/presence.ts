@@ -24,8 +24,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const curPath = document.location.pathname,
-    playback =
-      video !== null && !isNaN(video.duration) && curPath.includes("/xem-phim"),
+    playback = !isNaN(video?.duration),
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
@@ -37,7 +36,7 @@ presence.on("UpdateData", async () => {
     browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
-  if (!playback) {
+  if (!document.querySelector(".mr-1 h2")) {
     if (curPath.includes("/login")) presenceData.details = "Đang đăng nhập";
     else if (search.startsWith("?s=")) {
       presenceData.details = "Đang tìm kiếm";
@@ -70,7 +69,7 @@ presence.on("UpdateData", async () => {
     return;
   }
 
-  if (video && !isNaN(video.duration)) {
+  if (video && !isNaN(video.duration) && document.querySelector(".mr-1 h2")) {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
@@ -82,9 +81,11 @@ presence.on("UpdateData", async () => {
       );
 
     presenceData.details = `Đang xem: ${
-      document.querySelector("h1").textContent
+      document.querySelector(".mr-1 h2").textContent
     }`;
-    presenceData.state = document.querySelector("#nhasx").textContent;
+    presenceData.state = document.querySelector(
+      "#studio > ul > li > a"
+    ).textContent;
 
     if (video.paused) {
       delete presenceData.startTimestamp;
