@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "MDL";
   } else if (document.location.href.match("/[^-][0-9]{1,5}")) {
     const filmData: FilmData = (() => {
-      let title = document.querySelector(".film-title > a")?.textContent;
+      const title = document.querySelector(".film-title > a")?.textContent;
 
       if (!title) {
         const jsonData = document.querySelector(
