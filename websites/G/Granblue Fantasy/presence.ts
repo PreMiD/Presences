@@ -96,10 +96,10 @@ presence.on("UpdateData", async () => {
     presenceData.details =
       document.getElementsByClassName("name")[0].textContent;
     if (djeeta) {
-      const charaAlive =
+      const charaAlive: HTMLImageElement =
         document.getElementsByClassName("img-chara-command")[0];
-      if (!(charaAlive as HTMLImageElement).src.includes("3999999999"))
-        presenceData.largeImageKey = (charaAlive as HTMLImageElement).src;
+      if (!charaAlive.src.includes("3999999999"))
+        presenceData.largeImageKey = charaAlive.src;
     }
   } else if (href.includes("/#party/index/0/npc/0"))
     presenceData.details = "Viewing party";
