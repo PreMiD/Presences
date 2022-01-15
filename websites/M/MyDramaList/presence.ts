@@ -93,23 +93,46 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "mdl-logo";
   } else if (document.location.pathname.startsWith("/people/")) {
     presenceData.details = "Viewing actor:";
-    presenceData.state = document.querySelector(".box-header > h1");
+    presenceData.state = document.querySelector(".box-header > h1").textContent;
     presenceData.largeImageKey =
       document.querySelector<HTMLImageElement>(".box-body > img").src;
     presenceData.smallImageKey = "mdl-logo";
     presenceData.smallImageText = "MDL";
   } else if (document.location.href.match("/[^-][0-9]{1,5}")) {
-    const filmData: FilmData = JSON.parse(
-      document.querySelector('[type="application/ld+json"]').textContent
-    ).mainEntity;
+    const filmData: FilmData = (() => {
+      let title = document.querySelector(".film-title > a")?.textContent;
 
-    presenceData.details = `Viewing ${
-      filmData["@type"] === "Movie" ? "movie" : "show"
-    }:`;
-    presenceData.state = filmData.name;
-    presenceData.largeImageKey = filmData.image;
-    presenceData.smallImageKey = "mdl-logo";
-    presenceData.smallImageText = "MDL";
+      if (!title) {
+        const jsonData = document.querySelector(
+          '[type="application/ld+json"]'
+        )?.textContent;
+
+        if (!jsonData) return;
+        else return JSON.parse(jsonData);
+      }
+
+      return {
+        name: title,
+        image: document.querySelector<HTMLImageElement>(
+          ".box-body > .row > div img"
+        )?.src,
+        "@type": document
+          .querySelector(".container-fluid.title-container")
+          ?.getAttribute("itemtypex")
+          ?.split("/")
+          ?.pop()
+      };
+    })();
+
+    if (filmData) {
+      presenceData.details = `Viewing ${
+        filmData["@type"] === "Movie" ? "movie" : "show"
+      }:`;
+      presenceData.state = filmData.name;
+      presenceData.largeImageKey = filmData.image;
+      presenceData.smallImageKey = "mdl-logo";
+      presenceData.smallImageText = "MDL";
+    }
   }
 
   if (presenceData.largeImageKey.includes("http") && !coverEnabled)
