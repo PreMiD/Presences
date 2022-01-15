@@ -14,10 +14,11 @@ async function getStrings() {
       inLabel: "gmail.inLabel",
       generalSettings: "gmail.generalSettings",
       labelSettings: "gmail.labelSettings",
+      inboxSettings: "gmail.inboxSettings",
       accountSettings: "gmail.accountSettings",
       filterSettings: "gmail.filterSettings",
       fwdAndPOPSettings: "gmail.fwdAndPOPSettings",
-      addonSettings: "gmail.addonSettings",
+      addonSettings: "gmail.addonsSettings",
       chatSettings: "gmail.chatSettings",
       advancedSettings: "gmail.advancedSettings",
       offlineSettings: "gmail.offlineSettings",
@@ -48,13 +49,12 @@ presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-
-  const { href } = window.location,
-    [newLang, timestamps, privacy] = await Promise.all([
+  const [newLang, timestamps, privacy] = await Promise.all([
       presence.getSetting<string>("lang").catch(() => "en"),
       presence.getSetting<boolean>("timestamps"),
       presence.getSetting<boolean>("privacy")
-    ]);
+    ]),
+    { href } = document.location;
 
   if (oldLang !== newLang || !strings) {
     oldLang = newLang;
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
 
   if (window.location.href.split("/").length === 7) {
     for (const [path, data] of Object.entries(pages)) {
-      if (document.location.pathname.endsWith(path))
+      if (document.location.href.endsWith(path))
         presenceData = { ...presenceData, ...data };
     }
     if (href.match("/#label/")) {
@@ -151,6 +151,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (timestamps) presenceData.startTimestamp = browsingTimestamp;
+  if (privacy) delete presenceData.state;
 
   presence.setActivity(presenceData);
 });
