@@ -8,9 +8,19 @@
   "description": {
     "en": "You can watch all videos without logging in or registration. Soap2day is free all the time, but there are few ads on videoplayer page."
   },
-  "url": "soap2day.to",
-  "regExp": "([a-z0-9]+[.])*(soap2day|s2dfree)([.][a-z]+)",
-  "version": "1.0.5",
+  "url": [
+    "soap2day.to",
+    "soap2day.ac",
+    "soap2day.sh",
+    "soap2day.cx",
+    "s2dfree.to",
+    "s2dfree.cc",
+    "s2dfree.de",
+    "s2dfree.is",
+    "s2dfree.nl",
+    "secretlink.xyz"
+  ],
+  "version": "1.1.0",
   "logo": "https://i.imgur.com/WAOvAe6.png",
   "thumbnail": "https://i.imgur.com/AEHBaRS.png",
   "color": "#9eeae7",
