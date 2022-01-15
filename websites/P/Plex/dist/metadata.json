@@ -12,7 +12,7 @@
   },
   "url": "www.plex.tv",
   "regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)",
-  "version": "1.7.8",
+  "version": "1.8.0",
   "logo": "https://i.imgur.com/FPxlGGE.png",
   "thumbnail": "https://i.imgur.com/DQvN7Nx.png",
   "color": "#d78c14",
@@ -20,5 +20,13 @@
   "tags": [
     "video",
     "music"
+  ],
+  "settings": [
+    {
+      "id": "cover",
+      "title": "Show Cover",
+      "icon": "fad fa-images",
+      "value": true
+    }
   ]
 }
