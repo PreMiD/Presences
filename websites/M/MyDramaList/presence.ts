@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = `Viewing ${document
-        .querySelector("profile-header h1")
+        .querySelector(".profile-header h1")
         .textContent.trim()}'s profile`;
       presenceData.largeImageKey =
         profilePicture.getAttribute("poster") ??
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
     );
 
     presenceData.details = `Viewing ${document
-      .querySelector("profile-header h1")
+      .querySelector(".profile-header h1")
       .textContent.trim()}'s profile`;
     presenceData.largeImageKey =
       profilePicture.getAttribute("poster") ??
