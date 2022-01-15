@@ -5,11 +5,11 @@
     "id": "141206144264699904"
   },
   "contributors": [
-  {
-    "name": "Noah",
-    "id": "272450405525356546"
-  }
-],
+    {
+      "name": "Noah",
+      "id": "272450405525356546"
+    }
+  ],
   "service": "PodcastAddict",
   "description": {
     "en": "Podcast Addict is Android #1 podcast app with over 10M downloads, 500K reviews and an average rating of 4.7/5",
@@ -19,7 +19,7 @@
     "podcastaddict.com",
     "www.podcastaddict.com"
   ],
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/8toUcRE.png",
   "thumbnail": "https://i.imgur.com/IB8PF6i.jpg",
   "color": "#f48529",
