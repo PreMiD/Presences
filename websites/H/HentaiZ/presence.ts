@@ -24,7 +24,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const curPath = document.location.pathname,
-    playback = video !== null && !isNaN(video.duration),
+    playback = !isNaN(video?.duration),
     presenceData: PresenceData = {
       largeImageKey: "logo"
     },
