@@ -139,6 +139,22 @@ function getTranslation(stringName: string): string {
 
 let user, title, search;
 
+const shortenedURLs: Record<string, string> = {};
+async function getShortURL(url: string) {
+  if (!url || url.length < 256) return url;
+  if (shortenedURLs[url]) return shortenedURLs[url];
+  try {
+    const pdURL = await (
+      await fetch(`https://pd.premid.app/create/${url}`)
+    ).text();
+    shortenedURLs[url] = pdURL;
+    return pdURL;
+  } catch (err) {
+    presence.error(err);
+    return url;
+  }
+}
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "plex",
@@ -147,15 +163,24 @@ presence.on("UpdateData", async () => {
 
   if (document.querySelector("#plex")) {
     if (document.querySelector("#plex > div:nth-child(4) > div")) {
-      const { currentTime, duration, paused } =
-        document.querySelector<HTMLVideoElement>(
-          "#plex > div:nth-child(4) > div > div:nth-child(1) > video"
-        ) ||
-        document.querySelector<HTMLAudioElement>(
-          "#plex > div:nth-child(4) > div > div:nth-child(1) > audio"
-        );
+      const { currentTime, duration, paused } = document.querySelector<
+          HTMLVideoElement | HTMLAudioElement
+        >(
+          "#plex > div:nth-child(4) > div > div:nth-child(1) > :is(video, audio)"
+        ),
+        cover = await presence.getSetting("cover");
+
       [presenceData.startTimestamp, presenceData.endTimestamp] =
         presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
+
+      presenceData.largeImageKey = cover
+        ? await getShortURL(
+            navigator.mediaSession.metadata.artwork[0].src
+              .replace(/width=[0-9]{1,3}/, "width=1024")
+              .replace(/height=[0-9]{1,3}/, "height=1024")
+          )
+        : "plex";
+
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
@@ -174,7 +199,7 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "#plex > div:nth-child(4) > div > div:nth-child(4) > div > div > div:nth-child(2) > div:nth-child(1) > div > span"
         );
-      presenceData.details = user.textContent;
+      presenceData.details = user?.textContent;
       if (title) {
         title = (title.textContent || "").split("—");
         presenceData.state = title[1] || title[0];
