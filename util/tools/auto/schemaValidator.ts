@@ -104,8 +104,17 @@ const latestMetadataSchema = async (): Promise<string[]> => {
       readFileSync("./file_changes.txt", "utf-8")
         .trim()
         .split("\n")
-        .filter(f => f.endsWith("metadata.json"))
-    )
+        .filter(file => ["metadata.json", "presence.ts", "iframe.ts"].some(x => file.endsWith(x)))
+        .map(file => {
+          const path = file.split("/");
+
+          path.at(-1) === "metadata.json"
+            ? path.splice(path.length - 2, 2)
+            : path.pop();
+  
+          return `${path.join("/")}/dist/metadata.json`;
+        })
+     )
   ];
 
 (async (): Promise<void> => {
