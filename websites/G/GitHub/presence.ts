@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
       "div#repository-container-header"
     ):
       const repository = {
-        owner: document.location.pathname.split("/")[1], // Owner of the repository
+        owner: document.location.pathname.split("/")[1],
         name: document.location.pathname.split("/")[2],
         target: document.location.pathname.split("/")[4],
         id: document.location.pathname.split("/")[4]
@@ -127,11 +127,14 @@ presence.on("UpdateData", async () => {
           presenceData.buttons = [
             { label: "View Issue", url: document.location.href }
           ];
-        } else
-          presenceData.details = `Browsing issues in ${repository.owner}/${repository.name}`;
-      } else if (pathname.includes("/pulls"))
-        presenceData.details = `Browsing pull requests in ${repository.owner}/${repository.name}`;
-      else if (pathname.includes("/pull")) {
+        } else {
+          presenceData.details = "Browsing issues";
+          presenceData.state = `${repository.owner}/${repository.name}`;
+        }
+      } else if (pathname.includes("/pulls")) {
+        presenceData.details = "Browsing pull requests";
+        presenceData.state = `${repository.owner}/${repository.name}`;
+      } else if (pathname.includes("/pull")) {
         presenceData.details = `Looking at pull request #${repository.id}`;
         presenceData.state = `${
           document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
@@ -143,9 +146,10 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           { label: "View Pull Request", url: document.location.href }
         ];
-      } else if (pathname.endsWith("/discussions"))
-        presenceData.details = `Browsing discussions in ${repository.owner}/${repository.name}`;
-      else if (pathname.includes("/discussions/")) {
+      } else if (pathname.endsWith("/discussions")) {
+        presenceData.details = "Browsing discussions in";
+        presenceData.state = `${repository.owner}/${repository.name}`;
+      } else if (pathname.includes("/discussions/")) {
         presenceData.details = `Looking at discussion #${repository.id}`;
         presenceData.state = `${
           document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
