@@ -55,13 +55,12 @@
     "voting.wolvesville.com",
     "app.wolvesville.com"
   ],
-  "version": "1.1.2",
-  "logo": "https://i.imgur.com/y7daecg.png",
+  "version": "1.2.0",
+  "logo": "https://i.imgur.com/yowEwrw.png",
   "thumbnail": "https://i.imgur.com/s5NhKcP.png",
   "color": "#FF4181",
   "category": "games",
   "tags": [
-    "wolvesville",
     "werewolf",
     "online",
     "wov",
@@ -81,6 +80,15 @@
       },
       "title": "Hide Chat Recipient",
       "icon": "fad fa-comment-slash",
+      "value": false
+    },
+    {
+      "id": "gameLang",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Mode Language",
+      "icon": "fad fa-flag",
       "value": false
     },
     {
