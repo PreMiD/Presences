@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
       const boss = gameStatus.boss.param.find(x => x.alive),
         hp = parseInt(boss.hp);
       presenceData.state = `${hp.toLocaleString()} [${(
-        (100 * hp) /
+        (hp * 100) /
         parseInt(boss.hpmax)
       ).toFixed(2)}%]`;
     }
