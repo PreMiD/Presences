@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "oxmc",
+    "id": "740965195496816721"
+  },
+  "service": "MemeFileServer",
+  "description": {
+    "en": "A website to upload memes"
+  },
+  "url": "memefileserver.ml",
+  "version": "1.0.0",
+  "logo": "http://memefileserver.ml/assets/img/default.png",
+  "thumbnail": "http://memefileserver.ml/uploaded/Screenshot 2022-01-17 1.53.44 PM.png",
+  "color": "#f1e2ec",
+  "category": "other",
+  "tags": [
+    "meme",
+    "fileupload"
+  ]
+}
