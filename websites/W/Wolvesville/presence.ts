@@ -554,9 +554,8 @@ presence.on("UpdateData", async () => {
             } else if (gamemodeId?.includes("crazy")) gamemode = "a Crazy Game";
             else if (gamemodeId?.includes("ranked")) {
               gamemode = "a Ranked Game";
-              if (gamemodeId?.endsWith("2")) {
-                rankedLeague = "Standard League";
-              } else if (gamemodeId?.endsWith("3"))
+              if (gamemodeId?.endsWith("2")) rankedLeague = "Standard League";
+              else if (gamemodeId?.endsWith("3"))
                 rankedLeague = "Advanced League";
             } else {
               lang = languageCode(gamemodeId);
@@ -647,14 +646,15 @@ presence.on("UpdateData", async () => {
             if (gameOver === false && playerState !== "Spectator")
               gameState = `${playerState} - `;
 
-            if (aliveCount === 1)
+            if (aliveCount === 1) {
               gameState = gameState.concat(
                 `${aliveCount}/${playerCount} player left`
               );
-            else
+            } else {
               gameState = gameState.concat(
                 `${aliveCount}/${playerCount} players left`
               );
+            }
           }
           presenceData.state = gameState;
         }
