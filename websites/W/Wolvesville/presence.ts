@@ -442,11 +442,15 @@ presence.on("UpdateData", async () => {
     }
 
     //Custom Games
-    document.querySelector(
-      "div.css-1dbjc4n.r-18u37iz.r-1777fci.r-p1pxzi.r-1u936jj.r-1a6n0ax"
-    )
-      ? (presenceData.details = "Browsing custom games")
-      : false;
+    if (
+      document.querySelector(
+        "div.css-1dbjc4n.r-18u37iz.r-1777fci.r-p1pxzi.r-1u936jj.r-1a6n0ax"
+      )
+    ) {
+      presenceData.details = "Browsing custom games";
+      if (!privacyMode)
+        presenceData.state = root.getAttribute("premid-username");
+    }
 
     //Lobby
     if (
@@ -542,29 +546,22 @@ presence.on("UpdateData", async () => {
 
           if (!privacyMode) {
             const gamemodeId = localStorage?.getItem("last-game-game-mode");
-            if (gamemodeId?.includes("sandbox")) {
-              gamemode = "Sandbox";
-            } else if (gamemodeId?.includes("custom")) {
-              gamemode = "a Custom Game";
-            } else if (gamemodeId?.includes("advanced")) {
+            if (gamemodeId?.includes("sandbox")) gamemode = "Sandbox";
+            else if (gamemodeId?.includes("custom")) gamemode = "a Custom Game";
+            else if (gamemodeId?.includes("advanced")) {
               gamemode = "an Advanced Game";
               lang = languageCode(gamemodeId?.split("-")[1]);
-            } else if (gamemodeId?.includes("crazy")) {
-              gamemode = "a Crazy Game";
-            } else if (gamemodeId?.includes("ranked")) {
+            } else if (gamemodeId?.includes("crazy")) gamemode = "a Crazy Game";
+            else if (gamemodeId?.includes("ranked")) {
               gamemode = "a Ranked Game";
               if (gamemodeId?.endsWith("2")) {
                 rankedLeague = "Standard League";
-              } else if (gamemodeId?.endsWith("3")) {
+              } else if (gamemodeId?.endsWith("3"))
                 rankedLeague = "Advanced League";
-              }
             } else {
               lang = languageCode(gamemodeId);
-              if (lang === "unknown") {
-                gamemode = "a game";
-              } else {
-                gamemode = "a Quick Game";
-              }
+              if (lang === "unknown") gamemode = "a game";
+              else gamemode = "a Quick Game";
             }
           }
 
@@ -578,11 +575,11 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "popcorn";
             if (!privacyMode) {
               let gameDetails = `Spectating ${gamemode}`;
-              if (lang !== "unknown" && gameLang) {
+              if (lang !== "unknown" && gameLang)
                 gameDetails = gameDetails.concat(` in ${lang}`);
-              } else if (rankedLeague !== "unknown") {
+              else if (rankedLeague !== "unknown")
                 gameDetails = gameDetails.concat(` in ${rankedLeague}`);
-              }
+
               presenceData.details = gameDetails;
               presenceData.smallImageText = `${playerState} (${root.getAttribute(
                 "premid-username"
@@ -594,15 +591,13 @@ presence.on("UpdateData", async () => {
           } else {
             if (!privacyMode) {
               let details = `Playing ${gamemode}`;
-              if (lang !== "unknown" && gameLang) {
+              if (lang !== "unknown" && gameLang)
                 details = details.concat(` in ${lang}`);
-              } else if (rankedLeague !== "unknown") {
+              else if (rankedLeague !== "unknown")
                 details = details.concat(` in ${rankedLeague}`);
-              }
+
               presenceData.details = details;
-            } else {
-              presenceData.details = "Playing a game";
-            }
+            } else presenceData.details = "Playing a game";
 
             if (!privacyMode) {
               if (
@@ -635,23 +630,23 @@ presence.on("UpdateData", async () => {
           //Player count
           if (!privacyMode) {
             const playerCount = document.querySelectorAll(
-              "div.css-1dbjc4n.r-obd0qt.r-1p6tffz.r-17s6mgv.r-l4djrs.r-5kp9u6.r-12vffkv.r-u8s1d.r-1xce0ei.r-1s3egr7"
-            )?.length;
+                "div.css-1dbjc4n.r-obd0qt.r-1p6tffz.r-17s6mgv.r-l4djrs.r-5kp9u6.r-12vffkv.r-u8s1d.r-1xce0ei.r-1s3egr7"
+              )?.length,
+              aliveCount =
+                playerCount -
+                (
+                  document
+                    .querySelector(
+                      "div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
+                    )
+                    ?.innerHTML.match(/text-decoration-line: line-through/g) ||
+                  []
+                ).length /
+                  2;
 
-            let aliveCount =
-              playerCount -
-              (
-                document
-                  .querySelector(
-                    "div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
-                  )
-                  ?.innerHTML.match(/text-decoration-line: line-through/g) || []
-              ).length /
-                2;
-
-            if (gameOver === false && playerState !== "Spectator") {
+            if (gameOver === false && playerState !== "Spectator")
               gameState = `${playerState} - `;
-            }
+
             if (aliveCount === 1)
               gameState = gameState.concat(
                 `${aliveCount}/${playerCount} player left`
