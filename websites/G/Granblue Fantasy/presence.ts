@@ -89,15 +89,13 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${hp.toLocaleString()} [${(
         (100 * hp) /
         parseInt(boss.hpmax)
-      ).toLocaleString(void 0, {
-        maximumFractionDigits: 2
-      })}%]`;
+      ).toFixed(2)}%]`;
     }
     presenceData.details =
       document.getElementsByClassName("name")[0].textContent;
     if (djeeta) {
-      const charaAlive: HTMLImageElement =
-        document.getElementsByClassName("img-chara-command")[0];
+      const charaAlive =
+        document.querySelector<HTMLImageElement>(".img-chara-command");
       if (!charaAlive.src.includes("3999999999"))
         presenceData.largeImageKey = charaAlive.src;
     }
