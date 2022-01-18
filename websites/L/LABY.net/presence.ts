@@ -77,7 +77,9 @@ presence.on("UpdateData", () => {
     ).textContent;
     presenceData.buttons = [
       {
-        label: `View document.querySelector("div.server-info-wrapper>h1")?.textContent`,
+        label: `View ${
+          document.querySelector("div.server-info-wrapper>h1")?.textContent
+        }`,
         url: window.location.href
       }
     ];
