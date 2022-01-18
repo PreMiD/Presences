@@ -120,7 +120,7 @@
       },
       "title": "Show Channel's Picture",
       "icon": "fas fa-user",
-      "value": true
+      "value": false
     },
     {
       "id": "logo",
