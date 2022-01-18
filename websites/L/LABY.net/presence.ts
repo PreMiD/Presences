@@ -55,7 +55,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing a LabyMod cloak";
     presenceData.buttons = [
       {
-        label: "View this cloak",
+        label: "View this Cloak",
         url: window.location.href
       }
     ];
