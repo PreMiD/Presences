@@ -1,7 +1,7 @@
-const kitaplarinDili = new Presence({
+const presence = new Presence({
     clientId: "769651625379102761"
   }),
-  strings = kitaplarinDili.getStrings({
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
@@ -23,21 +23,7 @@ const kitaplarinDili = new Presence({
     "/my-account/change-password": "Şifre Değiştir"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-kitaplarinDili.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   const page = document.location.pathname;
 
   if (page.includes("/genre/")) {
@@ -51,23 +37,21 @@ kitaplarinDili.on("UpdateData", async () => {
       .join("")
       .split("-")
       .map(
-        (text) =>
+        text =>
           text[0]?.toUpperCase() + text.slice(1, text.length)?.toLowerCase()
       )
       .join(" ");
 
-    kitaplarinDili.setActivity({
+    presence.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir türü inceliyor:",
       state: genre || "Bilinmeyen Tür",
       startTimestamp: Date.now()
     });
   } else if (page.includes("/az-list/")) {
-    const letter = page
-      ?.split("/")
-      ?.[page.split("/").length - 1]?.toUpperCase();
+    const letter = page.split("/")?.[page.split("/").length - 1]?.toUpperCase();
 
-    kitaplarinDili.setActivity({
+    presence.setActivity({
       largeImageKey: "kd-logo",
       details: "Arşivi inceliyor:",
       state: letter ? `Harf: ${letter}` : "Bilinmeyen Harf",
@@ -75,41 +59,37 @@ kitaplarinDili.on("UpdateData", async () => {
       startTimestamp: Date.now()
     });
   } else if (page.includes("/search")) {
-    const term = document.title.replace(" - Kitapların Dili", "");
-
-    kitaplarinDili.setActivity({
+    presence.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir şey arıyor:",
-      state: term || "Bilinmeyen Terim",
+      state:
+        document.title.replace(" - Kitapların Dili", "") || "Bilinmeyen Terim",
       smallImageKey: "search",
       startTimestamp: Date.now()
     });
   } else if (page.includes("/country/")) {
-    const languageName = document
-      .querySelector(".breadcrumb > .active")
-      ?.textContent?.split(" ")
-      ?.map(
-        (text) =>
-          text[0]?.toUpperCase() + text.slice(1, text.length)?.toLowerCase()
-      )
-      ?.join(" ");
-
-    kitaplarinDili.setActivity({
+    presence.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir dili inceliyor:",
-      state: languageName || "Bilinmeyen Dil",
+      state:
+        document
+          .querySelector(".breadcrumb > .active")
+          ?.textContent?.split(" ")
+          ?.map(
+            text =>
+              text[0]?.toUpperCase() + text.slice(1, text.length)?.toLowerCase()
+          )
+          ?.join(" ") || "Bilinmeyen Dil",
       smallImageKey: "search",
       startTimestamp: Date.now()
     });
   } else if (page.includes("/star/")) {
-    const starName =
-      document.querySelector(".page-title > font")?.textContent?.trim() ||
-      "Bilinmeyen Yazar";
-
-    kitaplarinDili.setActivity({
+    presence.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir yazarı inceliyor:",
-      state: starName || "Bilinmeyen Yazar",
+      state:
+        document.querySelector(".page-title > font")?.textContent?.trim() ||
+        "Bilinmeyen Yazar",
       startTimestamp: Date.now()
     });
   } else if (page.includes("/watch/")) {
@@ -118,42 +98,42 @@ kitaplarinDili.on("UpdateData", async () => {
         "Bilinmeyen Kitap",
       video: HTMLVideoElement = document.querySelector("video.vjs-tech");
 
-    if (!video)
-      return kitaplarinDili.setActivity({
+    if (!video) {
+      return presence.setActivity({
         largeImageKey: "kd-logo",
-        details: bookName || "Bilinmeyen Kitap",
+        details: bookName,
         smallImageKey: "question",
         smallImageText: "Video verisi alınamıyor"
       });
-
-    const timestamps = getTimestamps(
-      Math.floor(video?.currentTime),
-      Math.floor(video?.duration)
-    );
-
-    const object = {
-      largeImageKey: "kd-logo",
-      details: bookName || "Bilinmeyen Kitap",
-      smallImageKey: video?.paused ? "pause" : "play",
-      smallImageText: video?.paused
-        ? (await strings).pause
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
-
-    if (video?.paused) {
-      delete object.startTimestamp;
-      delete object.endTimestamp;
     }
 
-    kitaplarinDili.setActivity(object);
+    const timestamps = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      ),
+      presenceData: PresenceData = {
+        largeImageKey: "kd-logo",
+        details: bookName,
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play,
+        startTimestamp: timestamps[0],
+        endTimestamp: timestamps[1]
+      };
+
+    if (video.paused) {
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+    }
+
+    presence.setActivity(presenceData);
   } else if (
     kitapPages[page] ||
     kitapPages[page.slice(0, -1)] ||
     kitapPages[page.replace(".html", "")]
   ) {
-    kitaplarinDili.setActivity({
+    presence.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir sayfaya göz atıyor:",
       state:
@@ -164,7 +144,7 @@ kitaplarinDili.on("UpdateData", async () => {
       startTimestamp: Date.now()
     });
   } else {
-    kitaplarinDili.setActivity({
+    presence.setActivity({
       largeImageKey: "kd-logo",
       details: "Bir sayfaya göz atıyor:",
       state: "Ana Sayfa",

@@ -1,14 +1,13 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "609531561389588480"
 });
+let lastPlaybackState = null,
+  playback: boolean,
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
@@ -23,35 +22,24 @@ presence.on("UpdateData", async () => {
     };
 
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingTimestamp;
 
     presence.setActivity(presenceData, true);
   }
 
-  var video: HTMLVideoElement = document.querySelector(
-    "video.dplayer-video.dplayer-video-current"
-  );
-
-  if (video !== null) {
-    var videoTitle: any, streamer: any;
-
-    videoTitle = document.querySelector(
-      ".info-line-left.flex-box .flex-column.flex-justify-center div"
-    );
-    streamer = document.querySelector(
-      "div.channel-header span.dlive-name span.overflow-ellipsis"
-    );
-
+  if (document.querySelector("video.dplayer-video.dplayer-video-current")) {
     const presenceData: PresenceData = {
       largeImageKey: "lg",
       smallImageKey: "live"
     };
 
-    presence.setTrayTitle(videoTitle.innerText);
-
-    presenceData.details = videoTitle.innerText;
-    presenceData.state = streamer.innerText;
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = document.querySelector<HTMLElement>(
+      ".info-line-left.flex-box .flex-column.flex-justify-center div"
+    ).textContent;
+    presenceData.state = document.querySelector<HTMLElement>(
+      "div.channel-header span.dlive-name span.overflow-ellipsis"
+    ).textContent;
+    presenceData.startTimestamp = browsingTimestamp;
 
     presence.setActivity(presenceData, true);
   }

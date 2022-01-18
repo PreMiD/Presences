@@ -1,56 +1,48 @@
 const presence = new Presence({
     clientId: "640980262750126080"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "tmo"
+    largeImageKey: "tmo",
+    startTimestamp: browsingTimestamp
   };
 
-  if (document.location.hostname == "lectortmo.com") {
-    if (document.location.pathname == "/") {
-      presenceData.startTimestamp = browsingStamp;
+  if (document.location.hostname === "lectortmo.com") {
+    if (document.location.pathname === "/")
       presenceData.details = "Browsing...";
-    } else if (document.location.pathname.includes("/library/manga/")) {
-      presenceData.startTimestamp = browsingStamp;
-      const user = document.querySelector(
-        "#app > section > header > section > div > div > div:nth-child(3) > h1"
-      );
+    else if (document.location.pathname.includes("/library/manga/")) {
       presenceData.details = "Viewing manga:";
-      presenceData.state = user.textContent;
+      presenceData.state = document.querySelector(
+        "#app > section > header > section > div > div > div:nth-child(3) > h1"
+      ).textContent;
       presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/library")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname.includes("/library"))
       presenceData.details = "Viewing the library";
-    } else if (document.location.pathname.includes("/groups/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/groups/")) {
       presenceData.details = "Viewing group:";
       presenceData.state = document.querySelector(
         "#app > section > header > section > div > div > div:nth-child(2) > h1"
       ).textContent;
-    } else if (document.location.pathname.includes("/groups")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname.includes("/groups"))
       presenceData.details = "Viewing groups";
-    } else if (document.location.pathname.includes("/lists/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/lists/")) {
       presenceData.details = "Viewing group:";
       presenceData.state = document.querySelector(
         "#app > section > header > section > div > div > div:nth-child(2) > h1"
       ).textContent;
-    } else if (document.location.pathname.includes("/lists")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname.includes("/lists"))
       presenceData.details = "Viewing groups";
-    } else if (document.location.pathname.includes("/viewer/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/viewer/")) {
       presenceData.details = "Reading manga:";
       presenceData.smallImageKey = "reading";
       presenceData.state = document.querySelector(
         "#app > section:nth-child(2) > div > div > h1"
       ).textContent;
     }
-  } else if (document.location.hostname == "tmocommunity.com") {
-    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.hostname === "tmocommunity.com") {
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Browsing the forums...";
     if (document.location.pathname.includes("/d/")) {
       presenceData.details = "Reading forum post:";
@@ -60,10 +52,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

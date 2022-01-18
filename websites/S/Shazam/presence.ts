@@ -42,19 +42,14 @@ const statics = {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-    showSong = await presence.getSetting("song"),
-    showTimestamps = await presence.getSetting("timestamp"),
+    showSong = await presence.getSetting<boolean>("song"),
+    showTimestamps = await presence.getSetting<boolean>("timestamp"),
     song: HTMLVideoElement = document.querySelector("#audioctrl"),
     songPlaying = song ? !song.paused : false;
 
-  let data: PresenceData = {
-    details: undefined,
-    state: undefined,
+  let presenceData: PresenceData = {
     largeImageKey: "shazam",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
+    startTimestamp: elapsed
   };
 
   if (document.location.href !== prevUrl) {
@@ -62,55 +57,54 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
-      data = { ...data, ...v };
-    }
-  }
+  for (const [k, v] of Object.entries(statics))
+    if (path.match(k)) presenceData = { ...presenceData, ...v };
 
   if (showSong && songPlaying) {
-    data.details = getElement(".track .heading");
-    data.state = getElement(".track .subheading");
-    data.smallImageKey = "play";
-    data.smallImageText = (await strings).play;
+    presenceData.details = getElement(".track .heading");
+    presenceData.state = getElement(".track .subheading");
+    presenceData.smallImageKey = "play";
+    presenceData.smallImageText = (await strings).play;
 
-    const timestamps = presence.getTimestamps(song.currentTime, song.duration);
-    data.startTimestamp = timestamps[0];
-    data.endTimestamp = timestamps[1];
+    const [startTimestamp, endTimestamp] = presence.getTimestamps(
+      song.currentTime,
+      song.duration
+    );
+    presenceData.startTimestamp = startTimestamp;
+    presenceData.endTimestamp = endTimestamp;
   }
 
   if (!songPlaying) {
     if (path.includes("/charts/")) {
-      data.details = "Viewing Charts...";
-      data.state = getElement(".quicklinks-content > li:not(.show-link)");
+      presenceData.details = "Viewing Charts...";
+      presenceData.state = getElement(
+        ".quicklinks-content > li:not(.show-link)"
+      );
     }
 
     if (path.includes("/track/")) {
-      data.details = "Viewing Track...";
-      data.state = `${getElement(".details h1")} by ${getElement(
+      presenceData.details = "Viewing Track...";
+      presenceData.state = `${getElement(".details h1")} by ${getElement(
         ".details h2"
       )}`;
     }
 
     if (path.includes("/artist/")) {
-      data.details = "Viewing Artist...";
-      data.state = getElement(".details h1");
+      presenceData.details = "Viewing Artist...";
+      presenceData.state = getElement(".details h1");
     }
   }
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
+  if (presenceData.details) {
+    if (presenceData.details.match("(Browsing|Viewing)")) {
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = (await strings).browse;
     }
     if (!showTimestamps) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
 
-    presence.setActivity(data);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+    presence.setActivity(presenceData);
+  } else presence.setActivity();
 });

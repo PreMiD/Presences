@@ -2,56 +2,46 @@ const presence = new Presence({
   clientId: "645290651604221999"
 });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "itv_logo",
-    startTimestamp: new Date().getTime()
-  };
-
-  const path = document.location.pathname;
+      largeImageKey: "itv_logo",
+      startTimestamp: new Date().getTime()
+    },
+    path = document.location.pathname;
 
   if (path === "/") {
     presenceData.details = "Browsing ITV Hub";
     presenceData.state = "Home Page";
   } else if (path === "/hub/itv") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITV live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/itv2") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITV2 live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/itvbe") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITVBe live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/itv3") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITV3 live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/itv4") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching ITV4 live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/citv") {
-    const show = document.getElementsByClassName("schedule__title--now")[0]
-      .innerHTML;
     presenceData.details = "Watching CITV live";
-    presenceData.state = show;
+    presenceData.state = document.getElementsByClassName(
+      "schedule__title--now"
+    )[0].textContent;
   } else if (path === "/hub/tv-guide") {
     presenceData.details = "Browsing ITV";
     presenceData.state = "Viewing the TV-Guide";
@@ -62,9 +52,10 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browsing ITV";
     presenceData.state = "Viewing categories";
   } else if (path.startsWith("/hub/categories/")) {
-    const category = path.split("/")[path.split("/").length - 1];
     presenceData.details = "Browsing ITV";
-    presenceData.state = `Viewing ${category} category`;
+    presenceData.state = `Viewing ${
+      path.split("/")[path.split("/").length - 1]
+    } category`;
   } else if (
     /^[-+]?[0-9A-Fa-f]+\.?[0-9A-Fa-f]*?$/.test(
       path.split("/")[path.split("/").length - 1]
@@ -73,23 +64,21 @@ presence.on("UpdateData", () => {
     // Last path is a valid hex (Show ID)
     delete presenceData.startTimestamp;
     const showDetails = {
-      name: document.getElementById("programme-title").innerText,
-      episode: document
-        .getElementsByClassName("episode-info__episode-title")[0]
-        .textContent.trim()
-    };
-
-    const video = document.getElementsByTagName("video")[0];
+        name: document.getElementById("programme-title").textContent,
+        episode: document
+          .getElementsByClassName("episode-info__episode-title")[0]
+          .textContent.trim()
+      },
+      [video] = document.getElementsByTagName("video");
     if (!video.paused) {
-      const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      [presenceData.startTimestamp, presenceData.endTimestamp] =
+        presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
 
       presenceData.details = `Watching ${showDetails.name}`;
       presenceData.state = showDetails.episode;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Playing";
     } else {
@@ -100,10 +89,6 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

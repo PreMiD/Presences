@@ -1,46 +1,42 @@
 const presence = new Presence({
     clientId: "867452106016161822"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "large_image",
-    details: "LABY.net"
+    details: "LABY.net",
+    startTimestamp: browsingTimestamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
-  if(document.location.pathname.startsWith("/skins")) 
+  if (document.location.pathname.startsWith("/skins"))
     presenceData.details = "Viewing skins";
-  else if(document.location.pathname.startsWith("/skin")) 
+  else if (document.location.pathname.startsWith("/skin"))
     presenceData.details = "Viewing skins";
-  else if(document.location.pathname.startsWith("/cloaks")) 
+  else if (document.location.pathname.startsWith("/cloaks"))
     presenceData.details = "Viewing LabyMod cloaks";
-  else if(document.location.pathname.startsWith("/capes")) 
+  else if (document.location.pathname.startsWith("/capes"))
     presenceData.details = "Viewing Minecraft capes";
-  else if(document.location.pathname.startsWith("/@")) {
-    const user = document.querySelector("div.profile-header>h1").textContent;
+  else if (document.location.pathname.startsWith("/@")) {
     presenceData.details = "Viewing profile of:";
-    presenceData.state = user;
-  } else if(document.location.pathname.startsWith("/settings")) 
-    presenceData.details = "Viewing profile settings";
-  else if(document.location.pathname.startsWith("/server")) {
-    const server = document.querySelector("div.server-info-wrapper>h1").textContent;
+    presenceData.state = document.querySelector(
+      "div.profile-header>h1"
+    ).textContent;
+  } else if (document.location.pathname.startsWith("/settings"))
+      presenceData.details = "Viewing profile settings";
+  else if (document.location.pathname.startsWith("/server")) {
     presenceData.details = "Viewing server:";
-    presenceData.state = server;
-  } else if(document.location.pathname.startsWith("/badge")) {
-    const badge = document.querySelector("div.mb-1>h1").textContent;
+    presenceData.state = document.querySelector(
+      "div.server-info-wrapper>h1"
+    ).textContent;
+  } else if (document.location.pathname.startsWith("/badge")) {
     presenceData.details = "Viewing badge:";
-    presenceData.state = badge;
-  } else if(document.location.pathname.startsWith("/cape")) {
-    const cape = document.querySelector("div.mb-1>h1").textContent;
+    presenceData.state = document.querySelector("div.mb-1>h1").textContent;
+  } else if (document.location.pathname.startsWith("/cape")) {
     presenceData.details = "Viewing cape:";
-    presenceData.state = cape;
+    presenceData.state = document.querySelector("div.mb-1>h1").textContent;
   }
 
-  if(!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else 
-    presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

@@ -4,10 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "virginmedia"
-  };
-
-  const pageTitle = document.title;
+      largeImageKey: "virginmedia"
+    },
+    pageTitle = document.title;
   let currentPage;
 
   presenceData.details = "Viewing a page";

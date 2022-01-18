@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "630771716058120192"
   }),
   strings = presence.getStrings({
@@ -7,47 +7,39 @@ var presence = new Presence({
   }),
   presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+  },
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector(
+  const video = document.querySelector<HTMLVideoElement>(
     "#picarto-player-1_html5_api"
   );
-  if (video !== null && !isNaN(video.duration)) {
-    var title: any, uploader: any;
-
-    title = document.querySelector(".d-flex h4");
-    uploader = document.querySelector("#userbar-name .d-flex .d-inline-block");
-    presenceData.details =
-      title !== null ? (title as HTMLElement).innerText : "Title not found...";
-    presenceData.state =
-      uploader !== null
-        ? (uploader as HTMLElement).textContent
-        : "Uploader not found...";
+  if (video && !isNaN(video.duration)) {
+    const title = document.querySelector<HTMLElement>(".d-flex h4"),
+      uploader = document.querySelector<HTMLElement>(
+        "#userbar-name .d-flex .d-inline-block"
+      );
+    presenceData.details = title ? title.textContent : "Title not found...";
+    presenceData.state = uploader
+      ? uploader.textContent
+      : "Uploader not found...";
     presenceData.largeImageKey = "logo";
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = browsingStamp;
-
-    presence.setTrayTitle(video.paused ? "" : title.innerText);
+    presenceData.startTimestamp = browsingTimestamp;
 
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
 
-    if (title !== null && uploader !== null) {
-      presence.setActivity(presenceData, !video.paused);
-    }
+    if (title && uploader) presence.setActivity(presenceData, !video.paused);
   } else {
-    var pageData: PresenceData = {
+    presence.setActivity({
       details: "Browsing..",
       largeImageKey: "logo"
-    };
-    presence.setActivity(pageData);
+    });
   }
 });

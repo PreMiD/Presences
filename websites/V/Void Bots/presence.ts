@@ -1,35 +1,32 @@
 const presence = new Presence({ clientId: "765261270814949417" }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let oldLang: string = null,
   strings: LangStrings;
 
 function getMeta(metaName: string): string {
-  metaName = "PreMiD_" + metaName;
+  metaName = `PreMiD_${metaName}`;
   const metas = document.getElementsByTagName("meta");
   for (let i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute("name") === metaName) {
+    if (metas[i].getAttribute("name") === metaName)
       return metas[i].getAttribute("content");
-    }
   }
   return "";
 }
 
 function hasMeta(metaName: string): boolean {
-  metaName = "PreMiD_" + metaName;
+  metaName = `PreMiD_${metaName}`;
   const metas = document.getElementsByTagName("meta");
-  for (let i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute("name") === metaName) {
-      return true;
-    }
-  }
+  for (let i = 0; i < metas.length; i++)
+    if (metas[i].getAttribute("name") === metaName) return true;
+
   return false;
 }
 
 presence.on("UpdateData", async () => {
-  const incognito: boolean = await presence.getSetting("incognito"),
-    showTimestamp: boolean = await presence.getSetting("showTimestamp"),
-    showButtons: boolean = await presence.getSetting("buttons"),
-    newLang: string = await presence.getSetting("lang");
+  const incognito = await presence.getSetting<boolean>("incognito"),
+    showTimestamp = await presence.getSetting<boolean>("showTimestamp"),
+    showButtons = await presence.getSetting<boolean>("buttons"),
+    newLang = await presence.getSetting<string>("lang");
   if (!oldLang || oldLang !== newLang) {
     oldLang = newLang;
     strings = await presence.getStrings(
@@ -51,7 +48,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "img_logo"
   };
 
-  if (showTimestamp == true) presenceData.startTimestamp = browsingStamp;
+  if (showTimestamp === true) presenceData.startTimestamp = browsingTimestamp;
 
   if (incognito === false) {
     if (
@@ -63,9 +60,10 @@ presence.on("UpdateData", async () => {
         presenceData.state = strings.state || getMeta("state");
       if (hasMeta("smallImageKey"))
         presenceData.smallImageKey = getMeta("smallImageKey");
-      if (hasMeta("smallImageText"))
+      if (hasMeta("smallImageText")) {
         presenceData.smallImageText =
           strings.smallImageText || getMeta("smallImageText");
+      }
       if (hasMeta("largeImageKey"))
         presenceData.largeImageKey = getMeta("largeImageKey");
       if (showButtons === true) {
@@ -73,17 +71,19 @@ presence.on("UpdateData", async () => {
           (hasMeta("button_1_Label") && hasMeta("button_1_Url")) ||
           (hasMeta("button_2_Label") && hasMeta("button_2_Url"))
         )
-          presenceData.buttons = [];
-        if (hasMeta("button_1_Label") && hasMeta("button_1_Url"))
+          delete presenceData.buttons;
+        if (hasMeta("button_1_Label") && hasMeta("button_1_Url")) {
           presenceData.buttons.push({
             label: getMeta("button_1_Label"),
             url: getMeta("button_1_Url")
           });
-        if (hasMeta("button_2_Label") && hasMeta("button_2_Url"))
+        }
+        if (hasMeta("button_2_Label") && hasMeta("button_2_Url")) {
           presenceData.buttons.push({
             label: getMeta("button_2_Label"),
             url: getMeta("button_2_Url")
           });
+        }
       }
     } else if (window.location.hostname === "docs.voidbots.net") {
       presenceData.details = `${strings.docsViewer1.slice(
@@ -95,16 +95,10 @@ presence.on("UpdateData", async () => {
       presenceData.state =
         document.querySelector("title").textContent || "Home";
     }
-  } else {
-    presenceData.details = strings.privacyVisit;
-  }
+  } else presenceData.details = strings.privacyVisit;
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
 
 interface LangStrings {

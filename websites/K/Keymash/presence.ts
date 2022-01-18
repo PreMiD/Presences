@@ -6,8 +6,7 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    path = document.location.pathname.split("/")[1],
-    query = document.location.pathname.split("/")[2];
+    [, path, query] = document.location.pathname.split("/");
 
   switch (path) {
     case "":
@@ -36,14 +35,15 @@ presence.on("UpdateData", () => {
       break;
     case "leaderboards":
       presenceData.details = "Viewing Leaderboards";
-      if (query)
+      if (query) {
         presenceData.state = `${
           query.charAt(0).toUpperCase() + query.slice(1)
         } Leaders`;
+      }
       break;
     case "profile":
       if (query) {
-        presenceData.details = `Viewing profile`;
+        presenceData.details = "Viewing profile";
         presenceData.state = query.replace("-", "#");
       } else presenceData.details = "Viewing profile";
       break;

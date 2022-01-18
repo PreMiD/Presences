@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     const page = paths[path];
     if (page) presenceData.details = page;
   } else {
-    const page = document.location.hostname.split(".")[0];
+    const [page] = document.location.hostname.split(".");
     presenceData.startTimestamp = Date.now();
     switch (page) {
       case "support":
@@ -57,12 +57,10 @@ presence.on("UpdateData", async () => {
             presenceData.state = article.textContent.trim();
           }
         } else if (document.location.pathname.includes("search")) {
-          const article: HTMLInputElement = document.querySelector("#query");
           presenceData.details = "Help Center - Searching:";
-          presenceData.state = article.value;
-        } else {
-          presenceData.details = "Help Center";
-        }
+          presenceData.state = document.querySelector("#query").textContent;
+        } else presenceData.details = "Help Center";
+
         break;
       case "board":
         presenceData.startTimestamp = Date.now();

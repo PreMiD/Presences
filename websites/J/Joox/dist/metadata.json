@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Yusaki",
     "id": "439582316873121793"
@@ -10,10 +11,12 @@
     "nl": "JOOX - muziekstreamingplatform dat u toegang geeft tot miljoenen nummers. Download JOOX GRATIS, gratis muziek, gratis radio, toplijsten, afspeellijsten, nieuwe releases"
   },
   "url": "www.joox.com",
-  "version": "1.0.3",
-  "logo": "https://i.imgur.com/h4Eb2q4.png",
+  "regExp": "([a-z0-9-]+[.])*joox[.]com[/]",
+  "version": "1.2.0",
+  "logo": "https://i.imgur.com/yoQPcUK.png",
   "thumbnail": "https://i.imgur.com/CZeMH5Q.jpg",
   "color": "#5abf77",
+  "category": "music",
   "tags": [
     "joox",
     "music",
@@ -21,6 +24,12 @@
     "free",
     "song"
   ],
-  "category": "music",
-  "regExp": "([a-z0-9-]+[.])*joox[.]com[/]"
+  "settings": [
+    {
+      "id": "cover",
+      "title": "Show Cover",
+      "icon": "fad fa-images",
+      "value": true
+    }
+  ]
 }

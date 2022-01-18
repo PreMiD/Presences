@@ -1,10 +1,10 @@
 const presence = new Presence({
     clientId: "837985880408457217"
   }),
-  timestamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function findElement(tagName: string, className: string): Element {
-  return Array.from(document.querySelectorAll(tagName)).find((x) =>
+  return Array.from(document.querySelectorAll(tagName)).find(x =>
     x.className.includes(className)
   );
 }
@@ -13,9 +13,9 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "key",
       details: "Browsing...",
-      startTimestamp: timestamp
+      startTimestamp: browsingTimestamp
     },
-    pathname = document.location.pathname;
+    { pathname } = document.location;
 
   if (pathname.includes("/series/")) {
     presenceData.details = "Viewing series:";
@@ -41,8 +41,7 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (pathname.includes("/trailer/")) {
-    const video = document.querySelector("video"),
-      timestamps = presence.getTimestampsfromMedia(video);
+    const video = document.querySelector("video");
 
     presenceData.details = findElement("span", "Tr-title")?.textContent;
     presenceData.state = "Trailer";
@@ -50,7 +49,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-    presenceData.endTimestamp = timestamps[1];
+    [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
     presenceData.buttons = [
       {
@@ -63,30 +62,29 @@ presence.on("UpdateData", async () => {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-  } else if (pathname.includes("/my-list")) {
+  } else if (pathname.includes("/my-list"))
     presenceData.details = "Viewing their list";
-  } else if (pathname.includes("/my-account")) {
+  else if (pathname.includes("/my-account"))
     presenceData.details = "Viewing their account";
-  } else if (pathname.includes("/watch/")) {
+  else if (pathname.includes("/watch/")) {
     const video = document.querySelector("video"),
-      isSeries = !!findElement("span", "Mr-text"),
-      timestamps = presence.getTimestampsfromMedia(video);
+      isSeries = !!findElement("span", "Mr-text");
 
     presenceData.details = findElement("span", "Tr-title")?.textContent;
 
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-    presenceData.endTimestamp = timestamps[1];
+    [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 
-    if (isSeries)
+    if (isSeries) {
       presenceData.state = `${findElement(
         "span",
         "Mr-text"
       )?.textContent.replace(".", ":")} ${findElement("h3", "so-name")
         ?.textContent.trim()
         .replace(/([0-9]+)[.]/, "")}`;
-    else presenceData.state = "Movie";
+    } else presenceData.state = "Movie";
 
     presenceData.buttons = [
       {
@@ -106,9 +104,9 @@ presence.on("UpdateData", async () => {
     );
   }
 
-  if (!(await presence.getSetting("buttons")) && presenceData.buttons)
+  if (!(await presence.getSetting<boolean>("buttons")) && presenceData.buttons)
     delete presenceData.buttons;
-  if (!(await presence.getSetting("timestamp"))) {
+  if (!(await presence.getSetting<boolean>("timestamp"))) {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
     "name": "Bas950",
     "id": "241278257335500811"
@@ -15,13 +16,13 @@
     "docs.spongepowered.org",
     "forums.spongepowered.org"
   ],
-  "version": "1.2.5",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/7uYnBAN.png",
   "thumbnail": "https://i.imgur.com/Kne85nE.png",
   "color": "#f6ce16",
+  "category": "games",
   "tags": [
     "minecraft",
     "sponge"
-  ],
-  "category": "games"
+  ]
 }

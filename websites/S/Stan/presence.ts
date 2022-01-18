@@ -11,30 +11,31 @@ const presence = new Presence({
         searchFor: "general.searchFor",
         searchSomething: "general.searchSomething",
         viewEpisode: "general.buttonViewEpisode",
+        watchVideo: "general.buttonWatchVideo",
         viewList: "netflix.viewList"
       },
-      await presence.getSetting("lang").catch(() => "en")
+      await presence.getSetting<string>("lang").catch(() => "en")
     );
   },
   data: {
     oldLang?: string;
     startedSince?: number;
-    meta?: {
-      [key: string]: string;
-    };
+    meta?: Record<string, string>;
+    strings: Awaited<ReturnType<typeof getStrings>>;
+    coverUrls?: Record<string, string>;
     settings?: {
       id?: string;
-      delete?: boolean;
+      deleteEntry?: boolean;
       value?: boolean;
       uses?: (keyof PresenceData)[];
       presence?: {
         page: string;
         uses?: keyof PresenceData;
         setTo?: string;
-        if?: {
-          k: boolean;
-          v?: string;
-          delete?: boolean;
+        condition?: {
+          ifTrue: boolean;
+          setTo?: string;
+          deleteEntry?: boolean;
         };
         replace?: {
           input: string;
@@ -50,62 +51,85 @@ const presence = new Presence({
     };
   } = {
     presence: {},
+    coverUrls: {},
+    strings: null,
     meta: {},
-    startedSince: ~~(Date.now() / 1000),
-    oldLang: "null"
+    startedSince: Math.round(Date.now() / 1000),
+    oldLang: null
   };
 
-let strings = getStrings();
+async function getShortURL(url: string) {
+  if (!url || url.length < 256) return url;
+  if (data.coverUrls[url]) return data.coverUrls[url];
+  try {
+    const pdURL = await (
+      await fetch(`https://pd.premid.app/create/${url}`)
+    ).text();
+    data.coverUrls[url] = pdURL;
+    return pdURL;
+  } catch (err) {
+    presence.error(err);
+    return url;
+  }
+}
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "stan",
-      details: (await strings).browse,
-      smallImageKey: "browse",
-      startTimestamp: data.startedSince
-    },
-    newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy");
+  const [newLang, privacy, cover] = await Promise.all([
+    presence.getSetting<string>("lang").catch(() => "en"),
+    presence.getSetting<boolean>("privacy"),
+    presence.getSetting<boolean>("cover")
+  ]);
 
-  if (!data.oldLang) {
+  if (data.oldLang !== newLang || !data.strings) {
     data.oldLang = newLang;
-  } else if (data.oldLang !== newLang) {
-    data.oldLang = newLang;
-    strings = getStrings();
+    data.strings = await getStrings();
   }
+
+  const presenceData: PresenceData = {
+    largeImageKey: "stan",
+    details: data.strings.browse,
+    smallImageKey: "browse",
+    startTimestamp: data.startedSince
+  };
 
   data.presence = {
     "/programs/([0-9]+)/play": {
       async setPresenceData() {
-        const video = document.querySelector("video"),
-          timestamps = presence.getTimestampsfromMedia(video);
+        const video = document.querySelector("video");
 
-        data.meta["title"] =
-          document.querySelector("h1.vjs-metadata.vjs-metadata--title")
-            ?.textContent ?? "Loading...";
-        data.meta["episode"] = document.querySelector(
-          "h2.vjs-metadata.vjs-metadata--subtitle"
-        )?.textContent;
+        if (video) {
+          data.meta.title = document.querySelector(
+            "h1.vjs-metadata.vjs-metadata--title"
+          )?.textContent;
+          data.meta.episode = document.querySelector(
+            "h2.vjs-metadata.vjs-metadata--subtitle"
+          )?.textContent;
+          data.meta.coverUrl = document
+            .querySelector<HTMLElement>(".vjs-end-slate-image")
+            ?.style?.backgroundImage?.match(/url\("(.*)"\)/)?.[1];
 
-        presenceData.smallImageKey = video.paused ? "pause" : "play";
-        presenceData.smallImageText = video.paused
-          ? (await strings).pause
-          : (await strings).play;
+          presenceData.smallImageKey = video.paused ? "pause" : "play";
+          presenceData.smallImageText = video.paused
+            ? data.strings.pause
+            : data.strings.play;
 
-        presenceData.endTimestamp = timestamps[1];
+          presenceData.endTimestamp = presence
+            .getTimestampsfromMedia(video)
+            .pop();
 
-        presenceData.buttons = [
-          {
-            label: data.meta["episode"]
-              ? (await strings).viewEpisode
-              : "Watch Video",
-            url: document.URL
+          presenceData.buttons = [
+            {
+              label: data.meta.episode
+                ? data.strings.viewEpisode
+                : data.strings.watchVideo,
+              url: document.URL
+            }
+          ];
+
+          if (video.paused) {
+            delete presenceData.endTimestamp;
+            delete presenceData.startTimestamp;
           }
-        ];
-
-        if (video.paused) {
-          delete presenceData.endTimestamp;
-          delete presenceData.startTimestamp;
         }
       }
     },
@@ -129,7 +153,7 @@ presence.on("UpdateData", async () => {
     "/my/list": {
       disabled: privacy,
       async setPresenceData() {
-        presenceData.details = (await strings).viewList;
+        presenceData.details = data.strings.viewList;
       }
     },
     "/my/history": {
@@ -140,7 +164,7 @@ presence.on("UpdateData", async () => {
     },
     "/search": {
       async setPresenceData() {
-        presenceData.details = (await strings).searchFor;
+        presenceData.details = data.strings.searchFor;
         presenceData.state = new URLSearchParams(document.location.search).get(
           "q"
         );
@@ -151,17 +175,17 @@ presence.on("UpdateData", async () => {
   data.settings = [
     {
       id: "timestamp",
-      delete: true,
+      deleteEntry: true,
       uses: ["startTimestamp", "endTimestamp"]
     },
     {
       id: "buttons",
-      delete: true,
+      deleteEntry: true,
       uses: ["buttons"]
     },
     {
       id: "privacy",
-      delete: true,
+      deleteEntry: true,
       value: true,
       uses: ["buttons"]
     },
@@ -170,56 +194,64 @@ presence.on("UpdateData", async () => {
         {
           page: "/search",
           uses: "state",
-          if: {
-            k: privacy,
-            delete: true
+          condition: {
+            ifTrue: privacy,
+            deleteEntry: true
           }
         },
         {
           page: "/search",
           uses: "details",
-          if: {
-            k: privacy,
-            v: (await strings).searchSomething
+          condition: {
+            ifTrue: privacy,
+            setTo: data.strings.searchSomething
           }
         },
         {
           page: "/programs/([0-9]+)/play",
           uses: "details",
-          setTo: await presence.getSetting("seriesDetail"),
-          if: {
-            k: privacy,
-            v: "Watching something"
+          setTo: await presence.getSetting<string>("seriesDetail"),
+          condition: {
+            ifTrue: privacy,
+            setTo: "Watching something"
           },
           replace: [
             {
               input: "%title%",
-              output: data.meta["title"]
+              output: data.meta.title
             },
             {
               input: "%episode%",
-              output: data.meta["episode"]
+              output: data.meta.episode
             }
           ]
         },
         {
           page: "/programs/([0-9]+)/play",
           uses: "state",
-          setTo: await presence.getSetting("seriesState"),
-          if: {
-            k: privacy,
-            delete: true
+          setTo: await presence.getSetting<string>("seriesState"),
+          condition: {
+            ifTrue: privacy,
+            deleteEntry: true
           },
           replace: [
             {
               input: "%title%",
-              output: data.meta["title"]
+              output: data.meta.title
             },
             {
               input: "%episode%",
-              output: data.meta["episode"]
+              output: data.meta.episode
             }
           ]
+        },
+        {
+          page: "/programs/([0-9]+)/play",
+          uses: "largeImageKey",
+          condition: {
+            ifTrue: cover && !privacy,
+            setTo: await getShortURL(data.meta.coverUrl)
+          }
         }
       ]
     }
@@ -234,47 +266,53 @@ presence.on("UpdateData", async () => {
 
   for (const setting of data.settings) {
     const settingValue = await presence
-      .getSetting(setting.id)
+      .getSetting<boolean>(setting.id)
       .catch(() => null);
 
     if (
       ((!settingValue && !setting.value) || settingValue === setting.value) &&
-      setting.delete &&
+      setting.deleteEntry &&
       !setting.presence
     )
-      for (const PData of setting.uses)
-        delete presenceData[PData as keyof PresenceData];
+      for (const PData of setting.uses) delete presenceData[PData];
     else if (setting.presence) {
       for (const presenceSetting of setting.presence) {
         if (document.location.pathname.match(presenceSetting.page)) {
-          if (presenceSetting.setTo && !presenceSetting.replace)
+          if (presenceSetting.setTo && !presenceSetting.replace) {
             presenceData[presenceSetting.uses as "details"] =
               presenceSetting.setTo;
-          else if (presenceSetting.setTo && presenceSetting.replace) {
+          } else if (presenceSetting.setTo && presenceSetting.replace) {
             let replaced = presenceSetting.setTo;
 
-            for (const toReplace of presenceSetting.replace)
-              replaced = replaced.replace(toReplace.input, toReplace.output);
+            for (const toReplace of presenceSetting.replace) {
+              replaced = replaced.replace(
+                toReplace.input,
+                toReplace.output ?? ""
+              );
+            }
 
-            if (replaced)
-              presenceData[presenceSetting.uses as "details"] = replaced;
+            presenceData[presenceSetting.uses as "details"] = replaced.trim();
           }
 
-          if (presenceSetting.if) {
-            if (presenceSetting.if.k && presenceSetting.if.delete)
+          if (presenceSetting.condition) {
+            if (
+              presenceSetting.condition.ifTrue &&
+              presenceSetting.condition.deleteEntry
+            )
               delete presenceData[presenceSetting.uses];
-            else if (presenceSetting.if.k && presenceSetting.if.v)
+            else if (
+              presenceSetting.condition.ifTrue &&
+              presenceSetting.condition.setTo
+            ) {
               presenceData[presenceSetting.uses as "details"] =
-                presenceSetting.if.v;
+                presenceSetting.condition.setTo;
+            }
           }
         }
       }
     }
   }
 
-  for (const x of ["state", "details"])
-    if (presenceData[x as "details"] === "undefined")
-      delete presenceData[x as "details"];
-
-  presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

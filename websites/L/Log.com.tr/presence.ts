@@ -1,13 +1,11 @@
 const presence = new Presence({
-  clientId: "657615662537244673"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-
-const presenceData: PresenceData = {
-  largeImageKey: "log-logo",
-  startTimestamp: browsingStamp
-};
+    clientId: "657615662537244673"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000),
+  presenceData: PresenceData = {
+    largeImageKey: "log-logo",
+    startTimestamp: browsingTimestamp
+  };
 
 function makeCategoryRPC(title: string): void {
   presenceData.details = "Bir kategoriye göz atıyor:";
@@ -17,14 +15,14 @@ function makeCategoryRPC(title: string): void {
 presence.on("UpdateData", () => {
   const page = document.location.pathname;
 
-  if (page.length == 1) {
+  if (page.length === 1) {
     presenceData.details = "Ana Sayfa";
     presenceData.state = "Haberlere göz atıyor...";
   }
 
   if (document.getElementsByClassName("entry-title").length > 0) {
     // Reading an article
-    const title = document.getElementsByClassName("entry-title")[0];
+    const [title] = document.getElementsByClassName("entry-title");
     presenceData.details = "Bir haber okuyor...";
     presenceData.state = title
       ? title.textContent.replace("[İzle]", "")
@@ -39,9 +37,10 @@ presence.on("UpdateData", () => {
   }
 
   if (page.includes("/page")) {
-    const pagenum = parseInt(document.location.pathname.split("/")[2]);
     presenceData.details = "Ana Sayfa";
-    presenceData.state = "Sayfa: " + pagenum;
+    presenceData.state = `Sayfa: ${parseInt(
+      document.location.pathname.split("/")[2]
+    )}`;
   }
   if (page.includes("/asfalt")) makeCategoryRPC("Asfalt");
   if (page.includes("/teknoloji-haberleri")) makeCategoryRPC("Teknoloji");
@@ -59,10 +58,6 @@ presence.on("UpdateData", () => {
     presenceData.state = tag ? tag.textContent : "Bilinmeyen";
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

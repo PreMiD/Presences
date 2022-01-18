@@ -8,74 +8,40 @@ const presence = new Presence({
     search: "presence.activity.searching"
   });
 
-/**
- * Get timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-let elapsed: number = undefined,
-  oldUrl: string = undefined,
-  title;
+let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null,
-    details = undefined,
-    state = undefined,
-    smallImageKey = undefined,
-    smallImageText = undefined,
-    startTimestamp = undefined,
-    endTimestamp = undefined,
-    extra = "...";
+    // eslint-disable-next-line no-one-time-vars/no-one-time-vars
+    details,
+    state,
+    smallImageKey,
+    smallImageText,
+    startTimestamp,
+    endTimestamp;
 
-  const href = window.location.href,
-    path = window.location.pathname;
+  const { href } = window.location,
+    path = window.location.pathname,
+    presenceData: PresenceData = {
+      largeImageKey: "peacock",
+      details
+    };
 
   if (href !== oldUrl) {
     oldUrl = href;
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (path.includes("/movies/highlights")) {
-    extra = " Movies";
-  } else if (path.includes("/watch/tv/highlights")) {
-    extra = " TV Shows";
-  } else if (path.includes("/watch/kids/highlights")) {
-    extra = " Kids";
-  } else if (path.includes("/watch/sports/highlights")) {
-    extra = " Sports";
-  } else if (path.includes("/watch/latino/highlights")) {
-    extra = " Latino";
-  }
-
-  // By default, details will be "Browsing..."
-  details = `Browsing${extra}`;
-
-  if (path.includes("/watch/search")) {
-    details = `Searching...`;
-  }
-
-  startTimestamp = elapsed;
+  presenceData.startTimestamp = elapsed;
 
   if (path.includes("/watch/playback") || path.includes("/watch/asset")) {
     video = document.querySelector(".video-player-component video");
     if (video) {
-      title =
-        document.querySelector(".playback-header__title") ||
-        document.querySelector(".playback-metadata__container-title");
-      const timestamps = getTimestamps(
+      const [startTimestamp, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        live = timestamps[1] === Infinity,
+        live = endTimestamp === Infinity,
         desc =
           document.querySelector(
             ".playback-metadata__container-episode-metadata-info"
@@ -85,15 +51,7 @@ presence.on("UpdateData", async () => {
             ".swiper-slide-active .playlist-item-overlay__container-title"
           );
 
-      if (desc) {
-        state = desc.textContent;
-      }
-      if (title) {
-        details = title.textContent;
-        if (path.includes("/watch/playback/playlist")) {
-          details = details + " Playlist";
-        }
-      }
+      if (desc) state = desc.textContent;
 
       smallImageKey = live ? "live" : video.paused ? "pause" : "play";
       smallImageText = live
@@ -101,36 +59,22 @@ presence.on("UpdateData", async () => {
         : video.paused
         ? (await strings).pause
         : (await strings).play;
-      startTimestamp = live ? elapsed : timestamps[0];
-      endTimestamp = live ? undefined : timestamps[1];
+      presenceData.startTimestamp = live ? elapsed : startTimestamp;
+      presenceData.endTimestamp = endTimestamp;
+
+      if (live) delete presenceData.endTimestamp;
       if (video.paused) {
-        startTimestamp = undefined;
-        endTimestamp = undefined;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
     }
   }
 
-  const data: PresenceData = {
-    largeImageKey: "peacock",
-    details
-  };
+  presenceData.state = state;
+  presenceData.smallImageKey = smallImageKey;
+  presenceData.smallImageText = smallImageText;
+  presenceData.startTimestamp = startTimestamp;
+  presenceData.endTimestamp = endTimestamp;
 
-  if (state !== undefined) {
-    data.state = state;
-  }
-  if (smallImageKey !== undefined) {
-    data.smallImageKey = smallImageKey;
-  }
-  if (smallImageText !== undefined) {
-    data.smallImageText = smallImageText;
-  }
-  if (startTimestamp !== undefined) {
-    data.startTimestamp = startTimestamp;
-  }
-  if (endTimestamp !== undefined) {
-    data.endTimestamp = endTimestamp;
-  }
-
-  presence.setActivity(data, video ? !video.paused : true);
-  presence.setTrayTitle(details);
+  presence.setActivity(presenceData, video ? !video.paused : true);
 });

@@ -1,29 +1,28 @@
-var presence = new Presence({
-  clientId: "626462884649500686" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var user: any, search: any, title: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "626462884649500686" // CLIENT ID FOR YOUR PRESENCE
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+let user: Element | HTMLElement | string,
+  search: Element | HTMLElement | string,
+  title: Element | HTMLElement | string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "forge"
+    largeImageKey: "forge",
+    startTimestamp: browsingTimestamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "www.minecraftforge.net") {
+  if (document.location.hostname === "www.minecraftforge.net") {
     if (document.location.pathname.includes("/topic/")) {
       title = document.querySelector(
         "body > main > div.sidebar-wrapper-content > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span > span"
       );
 
       presenceData.details = "Forums, viewing thread:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.textContent.length > 128)
+        presenceData.state = `${title.textContent.substring(0, 125)}...`;
+      else presenceData.state = title.textContent;
+
       delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/search/")) {
@@ -31,7 +30,7 @@ presence.on("UpdateData", async () => {
         "body > main > div > div:nth-child(2) > div.ipsResponsive_hidePhone.ipsResponsive_block.ipsPageHeader > p"
       );
       presenceData.details = "Forums, searching for:";
-      presenceData.state = search.innerText.split("'")[1];
+      [presenceData.state] = search.textContent.split("'");
 
       presenceData.smallImageKey = "search";
 
@@ -41,7 +40,7 @@ presence.on("UpdateData", async () => {
         "#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1"
       );
       presenceData.details = "Forums, viewing user:";
-      presenceData.state = user.innerText;
+      presenceData.state = user.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -61,12 +60,12 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/forum/")) {
-      title = document.querySelector(
+      title = document.querySelector<HTMLElement>(
         "body > main > div.sidebar-wrapper-content > div.forum-header > div:nth-child(1) > h1"
       );
-      if (title != null) {
+      if (title) {
         presenceData.details = "Forums, viewing category:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
 
         delete presenceData.smallImageKey;
 
@@ -79,17 +78,14 @@ presence.on("UpdateData", async () => {
 
         presence.setActivity(presenceData);
       }
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (document.location.hostname == "files.minecraftforge.net") {
-    title = document.querySelector(
+    } else presence.setActivity();
+  } else if (document.location.hostname === "files.minecraftforge.net") {
+    title = document.querySelector<HTMLElement>(
       "body > main > div.sidebar-sticky-wrapper-content > div.promos-wrapper > div.promos-content > h1"
     );
-    if (title != null) {
+    if (title) {
       presenceData.details = "Files, viewing Forge for:";
-      presenceData.state = title.innerText.replace(
+      presenceData.state = title.textContent.replace(
         "Downloads for Minecraft Forge - ",
         ""
       );
@@ -105,17 +101,17 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.hostname == "mcforge.readthedocs.io") {
-    title = document.querySelector(
+  } else if (document.location.hostname === "mcforge.readthedocs.io") {
+    title = document.querySelector<HTMLElement>(
       "body > main > div.sidebar-sticky-wrapper-content > article > h1"
     );
     presenceData.details = "Docs, reading:";
-    presenceData.state = title.innerText;
+    presenceData.state = title.textContent;
 
     presenceData.smallImageKey = "reading";
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "forgedev.flocker.tv") {
+  } else if (document.location.hostname === "forgedev.flocker.tv") {
     if (document.location.pathname.includes("/cart")) {
       presenceData.details = "Merch, viewing:";
       presenceData.state = "Shopping Cart";
@@ -124,11 +120,11 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/products/")) {
-      title = document.querySelector(
+      title = document.querySelector<HTMLElement>(
         "body > div:nth-child(18) > div > div.ant-modal-wrap.ant-modal-centered > div > div.ant-modal-content > div.ant-modal-body > div.creatorhub__product-modal-content > div > div.creatorhub__product-modal-title-wrapper > h1"
       );
       presenceData.details = "Merch, viewing:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
 
       delete presenceData.smallImageKey;
 
@@ -141,8 +137,5 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

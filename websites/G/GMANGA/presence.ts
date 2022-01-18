@@ -49,9 +49,10 @@ const presence = new Presence({
       {
         path: /^\/mangas\/\d+\/(.*)+\/[0-9.]+\/(.*)$/,
         run: () => {
-          const pages = document.querySelectorAll('[id^="page_"]').length,
-            readingTime = pages * AVERAGE_READING_TIME,
-            endTimestamp = readingTime + Date.now();
+          const endTimestamp =
+            document.querySelectorAll('[id^="page_"]').length *
+              AVERAGE_READING_TIME +
+            Date.now();
 
           data.endTimestamp = endTimestamp / 1000;
 
@@ -130,7 +131,7 @@ const presence = new Presence({
       }
     ];
 
-    return routes.find((route) => route.path.test(path));
+    return routes.find(route => route.path.test(path));
   };
 
 let searchData: Partial<PresenceData> = {};
@@ -144,41 +145,47 @@ if (searchInput) {
 
     searchData.smallImageKey = Icons.SEARCHING;
     searchData.smallImageText = "Searching";
-    searchData.state = `Searching: ${this.value}`;
+    searchData.state = `Searching: ${this.textContent}`;
   });
 }
 
 presence.on("UpdateData", async () => {
-  const showTimestamp: boolean = await presence.getSetting(Settings.TIMESTAMP),
-    showButtons: boolean = await presence.getSetting(Settings.BUTTONS),
-    logo: number = await presence.getSetting(Settings.LOGO),
-    logoArr = [Logos.LIGHT, Logos.DARK];
+  const showTimestamp = await presence.getSetting<boolean>(Settings.TIMESTAMP),
+    showButtons = await presence.getSetting<boolean>(Settings.BUTTONS),
+    logo = await presence.getSetting<number>(Settings.LOGO);
+  let presenceData: PresenceData = {
+    largeImageKey: [Logos.LIGHT, Logos.DARK][logo] || Logos.LIGHT
+  };
 
-  let data: PresenceData = { largeImageKey: logoArr[logo] || Logos.LIGHT };
+  if (showTimestamp) presenceData.startTimestamp = startTimestamp;
 
-  if (showTimestamp) data.startTimestamp = startTimestamp;
+  const route = router({
+    data: presenceData,
+    path: location.href.replace(`https://${location.hostname}`, "")
+  });
 
-  const path = location.href.replace(`https://${location.hostname}`, ""),
-    route = router({ data, path });
+  if (!route) return presence.setActivity(presenceData);
 
-  if (!route) return presence.setActivity(data);
-
-  if (route.run) data = route.run();
-  if (route.details) data.details = route.details();
-  if (route.buttons && showButtons) data.buttons = route.buttons();
-  if (route.largeImageKey) data.largeImageKey = route.largeImageKey();
+  if (route.run) presenceData = route.run();
+  if (route.details) presenceData.details = route.details();
+  if (route.buttons && showButtons) presenceData.buttons = route.buttons();
+  if (route.largeImageKey) presenceData.largeImageKey = route.largeImageKey();
 
   if (route.endTimestamp && showTimestamp)
-    data.endTimestamp = route.endTimestamp();
+    presenceData.endTimestamp = route.endTimestamp();
 
   if (searchData.state || route.state)
-    data.state = searchData.state || route.state();
+    presenceData.state = searchData.state || route.state();
 
-  if (searchData.smallImageKey || route.smallImageKey)
-    data.smallImageKey = searchData.smallImageKey || route.smallImageKey();
+  if (searchData.smallImageKey || route.smallImageKey) {
+    presenceData.smallImageKey =
+      searchData.smallImageKey || route.smallImageKey();
+  }
 
-  if (searchData.smallImageText || route.smallImageText)
-    data.smallImageText = searchData.smallImageText || route.smallImageText();
+  if (searchData.smallImageText || route.smallImageText) {
+    presenceData.smallImageText =
+      searchData.smallImageText || route.smallImageText();
+  }
 
-  presence.setActivity(data, route.playback ? route.playback() : false);
+  presence.setActivity(presenceData, route.playback ? route.playback() : false);
 });

@@ -33,25 +33,29 @@ const presence = new Presence({
     clientId: "770030754356396052"
   }),
   startTimestamp: number = Math.floor(Date.now() / 1000),
-  router = ({ path, data }: { path: string; data: PresenceData }): Route => {
+  router = ({
+    path,
+    presenceData
+  }: {
+    path: string;
+    presenceData: PresenceData;
+  }): Route => {
     const routes: Route[] = [
       { path: /^\/$/, details: () => "On Homepage" },
       {
         path: /^\/episode\//,
         run: () => {
-          const timestamps = presence.getTimestamps(
+          [, presenceData.endTimestamp] = presence.getTimestamps(
             Math.floor(video.currentTime),
             Math.floor(video.duration)
           );
 
-          [, data.endTimestamp] = timestamps;
-
           if (video.paused) {
-            delete data.startTimestamp;
-            delete data.endTimestamp;
+            delete presenceData.startTimestamp;
+            delete presenceData.endTimestamp;
           }
 
-          return data;
+          return presenceData;
         },
         playback: () => !video.paused,
         smallImageKey: () => (video.paused ? Icons.PAUSED : Icons.PLAYED),
@@ -127,7 +131,7 @@ const presence = new Presence({
       }
     ];
 
-    return routes.find((route) => route.path.test(path));
+    return routes.find(route => route.path.test(path));
   };
 
 presence.on(
@@ -138,32 +142,36 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const showTimestamp: boolean = await presence.getSetting(Settings.TIMESTAMP),
-    showButtons: boolean = await presence.getSetting(Settings.BUTTONS),
-    logo: number = await presence.getSetting(Settings.LOGO),
-    logoArr = [Logos.LIGHT, Logos.DARK];
+  const [showTimestamp, showButtons, logo] = await Promise.all([
+    presence.getSetting<boolean>(Settings.TIMESTAMP),
+    presence.getSetting<boolean>(Settings.BUTTONS),
+    presence.getSetting<number>(Settings.LOGO)
+  ]);
 
-  let data: PresenceData = {
-    largeImageKey: logoArr[logo] || Logos.LIGHT
+  let presenceData: PresenceData = {
+    largeImageKey: [Logos.LIGHT, Logos.DARK][logo] || Logos.LIGHT
   };
 
-  if (showTimestamp) data.startTimestamp = startTimestamp;
+  if (showTimestamp) presenceData.startTimestamp = startTimestamp;
 
-  const path = location.href.replace(`https://${location.hostname}`, ""),
-    route = router({ data, path });
+  const route = router({
+    presenceData,
+    path: location.href.replace(`https://${location.hostname}`, "")
+  });
 
-  if (!route) return presence.setActivity(data);
+  if (!route) return presence.setActivity(presenceData);
 
-  if (route.run) data = route.run();
-  if (route.state) data.state = route.state();
-  if (route.details) data.details = route.details();
-  if (showButtons && route.buttons) data.buttons = route.buttons();
-  if (route.largeImageKey) data.largeImageKey = route.largeImageKey();
-  if (route.smallImageKey) data.smallImageKey = route.smallImageKey();
-  if (route.smallImageText) data.smallImageText = route.smallImageText();
+  if (route.run) presenceData = route.run();
+  if (route.state) presenceData.state = route.state();
+  if (route.details) presenceData.details = route.details();
+  if (showButtons && route.buttons) presenceData.buttons = route.buttons();
+  if (route.largeImageKey) presenceData.largeImageKey = route.largeImageKey();
+  if (route.smallImageKey) presenceData.smallImageKey = route.smallImageKey();
+  if (route.smallImageText)
+    presenceData.smallImageText = route.smallImageText();
 
   if (showTimestamp && route.endTimestamp)
-    data.endTimestamp = route.endTimestamp();
+    presenceData.endTimestamp = route.endTimestamp();
 
-  presence.setActivity(data, route.playback ? route.playback() : false);
+  presence.setActivity(presenceData, route.playback ? route.playback() : false);
 });

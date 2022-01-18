@@ -3,103 +3,93 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "mangatube"
   };
 
   //Startseite
-  if (document.location.pathname == "/") {
-    data.details = "| Startseite";
-
-    //Serien
-  } else if (document.location.pathname.includes("/search")) {
-    data.details = "| Erweiterte Suche";
-  } else if (document.location.pathname.includes("/read/")) {
-    const chapter = document
-        .querySelector(
-          "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > ul > li.active > a"
-        )
-        .textContent.replace("Seite", "Kapitel"),
-      manganame = document
-        .querySelector("head > title")
-        .textContent.split("- Kapitel ")[0],
-      seite = document.querySelector(".page-text").textContent;
-    data.details = manganame;
-    data.state = chapter + " | " + seite;
-    data.smallImageKey = "manga";
-  } else if (document.location.pathname.startsWith("/series/")) {
-    const name = document.querySelector(".series-title").textContent;
-    data.details = "| Serie";
-    data.state = name;
-  } else if (document.location.pathname.startsWith("/series")) {
-    data.details = "| Serien";
-  } else if (document.location.pathname.includes("/serieslist")) {
-    const serieslist = document
+  if (document.location.pathname === "/") presenceData.details = "| Startseite";
+  //Serien
+  else if (document.location.pathname.includes("/search"))
+    presenceData.details = "| Erweiterte Suche";
+  else if (document.location.pathname.includes("/read/")) {
+    presenceData.details = document
       .querySelector("head > title")
-      .textContent.split("- Manga-Tube")[0];
-    data.details = "| Serienliste";
-    data.state = serieslist;
+      .textContent.split("- Kapitel ")
+      .toString();
+    presenceData.state = `${document
+      .querySelector(
+        "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > ul > li.active > a"
+      )
+      .textContent.replace("Seite", "Kapitel")
+      .toString()} | ${document.querySelector(".page-text").textContent}`;
+    presenceData.smallImageKey = "manga";
+  } else if (document.location.pathname.startsWith("/series/")) {
+    presenceData.details = "| Serie";
+    presenceData.state = document.querySelector(".series-title").textContent;
+  } else if (document.location.pathname.startsWith("/series"))
+    presenceData.details = "| Serien";
+  else if (document.location.pathname.includes("/serieslist")) {
+    presenceData.details = "| Serienliste";
+    [presenceData.state] = document
+      .querySelector("head > title")
+      .textContent.split("- Manga-Tube");
 
     //Community
-  } else if (document.location.pathname.includes("/team")) {
-    data.details = "| Team";
-  } else if (document.location.pathname.startsWith("/partner")) {
-    data.details = "| Partner";
-  } else if (document.location.pathname.startsWith("/gewinnspiel")) {
-    const giveaway = document
+  } else if (document.location.pathname.includes("/team"))
+    presenceData.details = "| Team";
+  else if (document.location.pathname.startsWith("/partner"))
+    presenceData.details = "| Partner";
+  else if (document.location.pathname.startsWith("/gewinnspiel")) {
+    presenceData.details = "| Gewinnspiel";
+    [presenceData.state] = document
       .querySelector("head > title")
-      .textContent.split(" - Manga-Tube")[0];
-    data.details = "| Gewinnspiel";
-    data.state = giveaway;
-  } else if (document.location.pathname.startsWith("/join")) {
-    data.details = "| Bewerben";
-  } else if (document.location.pathname.startsWith("/faq")) {
-    data.details = "| FAQ";
-
-    //Profilbar
-  } else if (document.location.pathname.startsWith("/poll")) {
-    if (document.location.pathname.endsWith("/poll/")) {
-      data.details = "| Laufende Umfragen";
-    } else {
-      const poll = document.querySelector("div.poll-question").textContent;
-      data.details = "| Umfrage";
-      data.state = poll;
+      .textContent.split(" - Manga-Tube");
+  } else if (document.location.pathname.startsWith("/join"))
+    presenceData.details = "| Bewerben";
+  else if (document.location.pathname.startsWith("/faq"))
+    presenceData.details = "| FAQ";
+  //Profilbar
+  else if (document.location.pathname.startsWith("/poll")) {
+    if (document.location.pathname.endsWith("/poll/"))
+      presenceData.details = "| Laufende Umfragen";
+    else {
+      presenceData.details = "| Umfrage";
+      presenceData.state =
+        document.querySelector("div.poll-question").textContent;
     }
   } else if (document.location.pathname.includes("/write/")) {
-    data.details = "| Postfach";
-    data.state = "Nachricht Verfassen";
+    presenceData.details = "| Postfach";
+    presenceData.state = "Nachricht Verfassen";
   } else if (document.location.pathname.includes("/inbox")) {
     if (document.location.pathname.includes("/message/")) {
-      data.details = "| Postfach";
-      data.state = "Nachricht";
+      presenceData.details = "| Postfach";
+      presenceData.state = "Nachricht";
     } else {
-      data.details = "| Postfach";
-      data.state = "Übersicht";
+      presenceData.details = "| Postfach";
+      presenceData.state = "Übersicht";
     }
   } else if (document.location.pathname.includes("/edit")) {
-    data.details = "| Profil";
-    data.state = "Bearbteiten";
+    presenceData.details = "| Profil";
+    presenceData.state = "Bearbteiten";
   } else if (document.location.pathname.startsWith("/profile/")) {
-    const profile = document.querySelector("b").textContent,
-      level = document.querySelector("#user_level").textContent;
-    data.details = "| Profil";
-    data.state = profile + " | " + level;
+    presenceData.details = "| Profil";
+    presenceData.state = `${document.querySelector("b").textContent} | ${
+      document.querySelector("#user_level").textContent
+    }`;
   } else if (document.location.pathname.includes("/blog/")) {
-    const blog = document.querySelector("h3").textContent;
-    data.details = "| Blog";
-    data.state = blog;
+    presenceData.details = "| Blog";
+    presenceData.state = document.querySelector("h3").textContent;
 
     //Datenschutz & Impressum
-  } else if (document.location.pathname.startsWith("/impressum")) {
-    data.details = "| Impressum";
-  } else if (document.location.pathname.startsWith("/datenschutz")) {
-    data.details = "| Datenschutz";
-
-    //Login
-  } else if (document.location.pathname.startsWith("/login")) {
-    data.details = "| Login";
-  }
+  } else if (document.location.pathname.startsWith("/impressum"))
+    presenceData.details = "| Impressum";
+  else if (document.location.pathname.startsWith("/datenschutz"))
+    presenceData.details = "| Datenschutz";
+  //Login
+  else if (document.location.pathname.startsWith("/login"))
+    presenceData.details = "| Login";
 
   //setActivity
-  presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

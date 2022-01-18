@@ -3,5 +3,8 @@
   "tabWidth": 2,
   "useTabs": false,
   "endOfLine": "lf",
-  "proseWrap": "always"
+  "proseWrap": "always",
+  "semi": true,
+  "quoteProps": "as-needed",
+  "arrowParens": "avoid"
 }
