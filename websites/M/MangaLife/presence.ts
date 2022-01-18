@@ -3,19 +3,12 @@ const presence = new Presence({ clientId: "906057236927893576" }),
 
 presence.on("UpdateData", async () => {
   const [privacy, cover, timestamps, buttons] = await Promise.all([
-    presence.getSetting<boolean>("privacy"),
-    presence.getSetting<boolean>("cover"),
-    presence.getSetting<boolean>("timestamps"),
-    presence.getSetting<boolean>("buttons")
-  ]);
-  let presenceData: PresenceData = {
-    largeImageKey: "logo",
-    smallImageKey: !privacy ? "home" : "",
-    details: "Browsing...",
-    state: "at Home Page",
-    startTimestamp: browsingStamp
-  };
-  const path = document.location.pathname,
+      presence.getSetting<boolean>("privacy"),
+      presence.getSetting<boolean>("cover"),
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("buttons")
+    ]),
+    path = document.location.pathname,
     pages: Record<string, PresenceData> = {
       "/manga/": {
         details: "Viewing a Manga...",
@@ -30,24 +23,24 @@ presence.on("UpdateData", async () => {
       },
       "/discussion": {
         smallImageKey: !privacy ? "discussions" : "",
-        state: "at Discussions"
+        state: "Discussions"
       },
       "hot.php": {
         smallImageKey: !privacy ? "hot" : "",
-        state: "at Hot Manga Updates",
+        state: "Hot Manga Updates",
         buttons: [{ label: "Hot Manga Updates", url: `${document.location}` }]
       },
       "subscription.php": {
         smallImageKey: !privacy ? "subscriptions" : "",
-        state: "at Subscriptions"
+        state: "Subscriptions"
       },
       "feed.php": {
         smallImageKey: !privacy ? "subscriptions" : "",
-        state: "at Subscriptions Feed"
+        state: "Subscriptions Feed"
       },
       "bookmark.php": {
         smallImageKey: !privacy ? "bookmark" : "",
-        state: "at Bookmarks"
+        state: "Bookmarks"
       },
       "settings.php": {
         smallImageKey: "settings",
@@ -56,13 +49,20 @@ presence.on("UpdateData", async () => {
       },
       "/contact": {
         smallImageKey: !privacy ? "contact" : "",
-        state: "at Contact Page"
+        state: "Contact Page"
       },
       "/privacy": {
         smallImageKey: !privacy ? "privacy" : "",
-        state: "at Privacy Policy Page"
+        state: "Privacy Policy Page"
       }
     };
+  let presenceData: PresenceData = {
+    largeImageKey: "logo",
+    smallImageKey: !privacy ? "home" : "",
+    details: "Browsing...",
+    state: "Home Page",
+    startTimestamp: browsingStamp
+  };
 
   for (const [path, data] of Object.entries(pages)) {
     if (
