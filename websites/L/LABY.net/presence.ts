@@ -65,7 +65,7 @@ presence.on("UpdateData", () => {
     presenceData.buttons = [
       {
         label: `View ${
-          document.querySelector("div.mb-1>h1")?.textContent
+          document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown Badge"
         } badge`,
         url: window.location.href
       }
