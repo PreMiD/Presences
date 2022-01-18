@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 let lastPath: string,
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const curPath = document.location.pathname,
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 
   if (lastPath !== curPath) {
     lastPath = curPath;
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (curPath.startsWith("/hot"))
@@ -28,11 +28,11 @@ presence.on("UpdateData", async () => {
   else if (curPath.startsWith("/tim-truyen-nang-cao"))
     presenceData.details = "Tìm truyện nâng cao...";
   else if (curPath.startsWith("/tim-truyen")) {
-    presenceData.state =
-      "Thể loại: " +
+    presenceData.state = `Thể loại: ${
       document.querySelector(
         "#ctl00_divRight > div > .ModuleContent > .nav > .active > a"
-      ).innerHTML;
+      ).textContent
+    }`;
     presenceData.details = "Đang tìm truyện...";
   } else if (curPath.startsWith("/truyen-con-gai"))
     presenceData.details = "Đang tìm truyện con gái...";
@@ -61,15 +61,16 @@ presence.on("UpdateData", async () => {
     if (tmp === null) {
       presenceData.details = document.querySelector(
         ".detail-info > div > div:nth-child(2) > div > a > span"
-      ).innerHTML;
+      ).textContent;
       presenceData.state = "Đang chọn chap...";
     } else {
-      presenceData.details = tmp.querySelector("a").innerHTML;
-      presenceData.state =
-        "Đang đọc: " + tmp.querySelector("span").innerHTML.substr(2);
+      presenceData.details = tmp.querySelector("a").textContent;
+      presenceData.state = `Đang đọc: ${tmp
+        .querySelector("span")
+        .textContent.substr(2)}`;
     }
   } else presenceData.details = "Đang xem trang chủ...";
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = browsingTimestamp;
 
   if (
     !curPath.startsWith("/truyen-tranh") &&

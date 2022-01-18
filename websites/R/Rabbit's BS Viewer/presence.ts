@@ -1,35 +1,32 @@
 ﻿const presence = new Presence({
     clientId: "839924185278840853"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const elapsed = await presence.getSetting("elapsed"),
-    timeleft = await presence.getSetting("timeleft"),
-    privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons"),
+  const elapsed = await presence.getSetting<boolean>("elapsed"),
+    timeleft = await presence.getSetting<boolean>("timeleft"),
+    privacy = await presence.getSetting<boolean>("privacy"),
+    buttons = await presence.getSetting<boolean>("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     };
 
   if (document.location.pathname.includes("/bs-viewer/")) {
-    if (document.querySelector("#songname").textContent === "") {
+    if (document.querySelector("#songname").textContent === "")
       presenceData.details = "Selecting Beatmap";
-    } else {
-      presenceData.details =
-        document.querySelector("#songname").textContent +
-        " " +
-        document.querySelector("#songsubname").textContent;
-      presenceData.state =
+    else {
+      presenceData.details = `${
+        document.querySelector("#songname").textContent
+      } ${document.querySelector("#songsubname").textContent}`;
+      presenceData.state = `${(
+        document.getElementById("difficultyselect") as HTMLSelectElement
+      ).value.replace("Plus", "+")} (${
         (
           document.getElementById("difficultyselect") as HTMLSelectElement
-        ).value.replace("Plus", "+") +
-        " (" +
-        (
-          document.getElementById("difficultyselect") as HTMLSelectElement
-        ).selectedOptions.item(0).textContent +
-        ")";
+        ).selectedOptions.item(0).textContent
+      })`;
       presenceData.buttons = [
         {
           label: "View Page",
@@ -79,16 +76,15 @@ presence.on("UpdateData", async () => {
         ) as HTMLInputElement
       ).value !== "" &&
       !privacy
-    )
-      presenceData.state =
-        document.querySelector(".selected-tab").textContent +
-        " (" +
-        (
-          document.querySelector(
-            "input#file-input.file-input"
-          ) as HTMLInputElement
-        ).value.replace("C:\\fakepath\\", "") +
-        ")";
+    ) {
+      presenceData.state = `${
+        document.querySelector(".selected-tab").textContent
+      } (${(
+        document.querySelector(
+          "input#file-input.file-input"
+        ) as HTMLInputElement
+      ).value.replace("C:\\fakepath\\", "")})`;
+    }
   } else if (document.location.pathname.includes("/"))
     presenceData.details = "Viewing Homepage";
 

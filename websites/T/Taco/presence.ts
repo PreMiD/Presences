@@ -3,15 +3,13 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "taco"
   };
-
-  const pathSplits = location.pathname.split("/");
-  switch (pathSplits[1]) {
+  switch (location.pathname.split("/")[1]) {
     case "guide":
-      data.details = "Reading the guide";
-      data.state = [
+      presenceData.details = "Reading the guide";
+      presenceData.state = [
         document.querySelector(".sidebar-links > li > a.active")
           ? document.querySelector(".sidebar-links > li > a.active").textContent
           : null,
@@ -19,17 +17,12 @@ presence.on("UpdateData", async () => {
           ? document.querySelector(".sidebar-sub-header > a.active").textContent
           : null
       ]
-        .filter((a) => !!a)
+        .filter(a => !!a)
         .join(" ― ");
       break;
     default:
-      data.details = "Homepage";
+      presenceData.details = "Homepage";
       break;
   }
-
-  // If data doesn't exist clear else set activity to the presence data
-  if (data.details == null) {
-    presence.setTrayTitle(); // Clear tray
-    presence.setActivity(); // Clear activity
-  } else presence.setActivity(data);
+  presence.setActivity(presenceData);
 });

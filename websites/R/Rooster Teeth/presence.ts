@@ -1,24 +1,20 @@
 const presence = new Presence({
-  clientId: "703697546794631209"
-});
-
-const elapsed = Math.floor(Date.now() / 1000);
+    clientId: "703697546794631209"
+  }),
+  elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const path = window.location.pathname;
-  var video;
-  var live;
-  const presenceData: PresenceData = {
-    largeImageKey: "roosterteeth",
-    details: "Browsing Rooster Teeth",
-    startTimestamp: elapsed
-  };
+  let video: HTMLVideoElement, live;
+  const path = window.location.pathname,
+    presenceData: PresenceData = {
+      largeImageKey: "roosterteeth",
+      details: "Browsing Rooster Teeth",
+      startTimestamp: elapsed
+    };
   if (window.location.hash.includes("#search?term=")) {
     presenceData.details = "Searching For:";
-    presenceData.state = (
-      document.querySelector(".search__input") as HTMLInputElement
-    ).value;
+    presenceData.state =
+      document.querySelector<HTMLInputElement>(".search__input").value;
   } else if (path.includes("/live/rt-tv")) {
     video = document.querySelector(".vjs-tech");
     presenceData.details = document
@@ -26,13 +22,13 @@ presence.on("UpdateData", () => {
         ".livestream-card.livestream-schedule-item-fade-enter-done"
       )
       .querySelector(".livestream-show").textContent;
-    presenceData.details +=
-      " " +
+    presenceData.details += ` ${
       document
         .querySelector(
           ".livestream-card.livestream-schedule-item-fade-enter-done"
         )
-        .querySelector(".livestream-title").textContent;
+        .querySelector(".livestream-title").textContent
+    }`;
     presenceData.state = "RT-TV";
     live = true;
   } else if (document.querySelector(".vjs-tech")) {
@@ -66,18 +62,23 @@ presence.on("UpdateData", () => {
   } else if (path.includes("/schedule")) {
     presenceData.details = "Viewing Schedule";
     for (const x in document.getElementsByClassName("schedule-day")) {
-      const position = document
-        .getElementsByClassName("schedule-day")
-        [x].getBoundingClientRect();
-      if (position.top < window.innerHeight && position.bottom >= 0) {
-        presenceData.state = document
+      // eslint-disable-next-line no-prototype-builtins
+      if (document.getElementsByClassName("schedule-day").hasOwnProperty(x)) {
+        const position = document
           .getElementsByClassName("schedule-day")
-          [x].querySelector(".schedule-day__heading")
-          .textContent.toLowerCase();
-        presenceData.state =
-          presenceData.state.substr(0, 1).toUpperCase() +
-          presenceData.state.substr(1);
-        break;
+
+          [x].getBoundingClientRect();
+        if (position.top < window.innerHeight && position.bottom >= 0) {
+          presenceData.state = document
+            .getElementsByClassName("schedule-day")
+
+            [x].querySelector(".schedule-day__heading")
+            .textContent.toLowerCase();
+          presenceData.state =
+            presenceData.state.substr(0, 1).toUpperCase() +
+            presenceData.state.substr(1);
+          break;
+        }
       }
     }
   } else if (path.includes("/series/")) {
@@ -85,36 +86,33 @@ presence.on("UpdateData", () => {
     presenceData.state = document.querySelector(".featured-title").textContent;
   } else if (path.includes("/channel/")) {
     presenceData.details = "Viewing Channel:";
-    presenceData.state = document
+    [, presenceData.state] = document
       .querySelector(".carousel-container")
       .querySelector(".carousel-title")
-      .textContent.split("RECENT EPISODES FROM ")[1];
-  } else if (path.includes("/series")) {
-    presenceData.details = "Browsing Series";
-  } else if (path.includes("/episodes")) {
-    if (urlParams.get("channel_id")) {
+      .textContent.split("RECENT EPISODES FROM ");
+  } else if (path.includes("/series")) presenceData.details = "Browsing Series";
+  else if (path.includes("/episodes")) {
+    if (new URLSearchParams(window.location.search).get("channel_id")) {
       presenceData.details = "Browsing Episodes Of:";
       presenceData.state = document
         .querySelector(".dropdown-label")
         .textContent.split("FILTER (")[1]
         .replace(")", "");
-    } else {
-      presenceData.details = "Browsing Episodes";
-    }
+    } else presenceData.details = "Browsing Episodes";
   } else if (path.includes("/g/") && !path.includes("/g/all")) {
     presenceData.details = "Browsing Group:";
-    if (path.includes("explore")) {
-      presenceData.state = "Explore";
-    } else {
+    if (path.includes("explore")) presenceData.state = "Explore";
+    else {
       presenceData.state = document
         .querySelector(".content-sidebar")
         .querySelector(".banner-title").textContent;
     }
   } else if (path.includes("/g")) {
-    presenceData.details =
-      "Browsing " + (path.includes("/g/all") ? "All " : "") + "Groups";
+    presenceData.details = `Browsing ${
+      path.includes("/g/all") ? "All " : ""
+    }Groups`;
   }
-  if (video != undefined) {
+  if (video) {
     if (live) {
       presenceData.smallImageKey = video.paused ? "livepause" : "live";
       presenceData.smallImageText = video.paused
@@ -130,16 +128,10 @@ presence.on("UpdateData", () => {
           Math.floor(Date.now() / 1000) -
           Math.floor(video.currentTime) +
           Math.floor(video.duration);
-      } else {
-        presenceData.startTimestamp = undefined;
-      }
+      } else delete presenceData.startTimestamp;
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

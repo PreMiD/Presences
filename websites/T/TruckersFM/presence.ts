@@ -1,11 +1,11 @@
 const presence = new Presence({
     clientId: "640914619082211338"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "tfmlogo",
-    startTimestamp: browsingStamp
+    startTimestamp: browsingTimestamp
   };
 
   presenceData.details = `${
@@ -33,5 +33,4 @@ presence.on("UpdateData", () => {
   }
 
   presence.setActivity(presenceData);
-  presence.setTrayTitle();
 });

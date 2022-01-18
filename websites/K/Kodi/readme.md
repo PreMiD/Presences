@@ -17,4 +17,8 @@ Needed for the Kodi presence to work.
 
 ![image](https://alexx.is-inside.me/7LhEQyTR.png)
 
-_This MD file is an edit of [the PreMiD VLC presence MD file](https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) originally meant for VLC, but was modified to work for Kodi. Thanks to them though, as well as the [original modified MD file.](https://github.com/azrafe7/vlc4youtube/blob/master/instructions/how-to-enable-vlc-web-interface.md)
+\_This MD file is an edit of
+[the PreMiD VLC presence MD file](https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md)
+originally meant for VLC, but was modified to work for Kodi. Thanks to them
+though, as well as the
+[original modified MD file.](https://github.com/azrafe7/vlc4youtube/blob/master/instructions/how-to-enable-vlc-web-interface.md)

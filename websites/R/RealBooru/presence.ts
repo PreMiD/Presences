@@ -1,20 +1,19 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "620304668710535207"
 });
 
 presence.on("UpdateData", () => {
-  var presenceData: PresenceData = {
+  const urlParams = new URLSearchParams(window.location.search);
+  let presenceData: PresenceData = {
     largeImageKey: "lg"
   };
-  var urlParams = new URLSearchParams(window.location.search);
-  if (document.location.pathname == "/") {
-    presence.setActivity(presenceData);
-  } else if (
+  if (document.location.pathname === "/") presence.setActivity(presenceData);
+  else if (
     urlParams.get("page") &&
     urlParams.get("s") &&
-    urlParams.get("page") == "post"
+    urlParams.get("page") === "post"
   ) {
-    if (urlParams.get("s") == "list") {
+    if (urlParams.get("s") === "list") {
       if (urlParams.get("tags")) {
         presenceData = {
           details: "Searching...",
@@ -29,10 +28,10 @@ presence.on("UpdateData", () => {
         };
         presence.setActivity(presenceData);
       }
-    } else if (urlParams.get("s") == "view" && urlParams.get("id")) {
+    } else if (urlParams.get("s") === "view" && urlParams.get("id")) {
       presenceData = {
         details: "Viewing a Post...",
-        state: "Post " + urlParams.get("id"),
+        state: `Post ${urlParams.get("id")}`,
         largeImageKey: "lg"
       };
       presence.setActivity(presenceData);

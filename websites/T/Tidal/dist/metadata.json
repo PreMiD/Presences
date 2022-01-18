@@ -1,50 +1,34 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.6",
   "author": {
-    "name": "ririxi",
-    "id": "192490421308489731"
+    "name": "The Gamerzs",
+    "id": "730142125181894657"
   },
-  "contributors": [
-    {
-      "name": "SinecKers",
-      "id": "380411952666640385"
-    }
-  ],
-  "url": [
-    "listen.tidal.com",
-    "tidal.com"
-  ],
+  "service": "Tidal",
   "description": {
     "tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir.",
     "en": "Tidal is a music stream service with very high sound quality.",
     "pl": "Tidal to strona do streamingowania muzyki z bardzo wysoką jakością audio.",
-    "nl": "Tidal is een muziekstreamdienst met een zeer hoge geluidskwaliteit."
+    "nl": "Tidal is een muziekstreamdienst met een zeer hoge geluidskwaliteit.",
+    "vi_VN": "Tidal là dịch vụ phát nhạc với chất lượng âm thanh rất cao."
   },
-  "service": "Tidal",
-  "version": "2.0.8",
-  "logo": "https://i.imgur.com/clJrylu.jpg",
-  "thumbnail": "https://i.imgur.com/UXbP7qG.png",
+  "url": [
+    "listen.tidal.com",
+    "tidal.com"
+  ],
+  "version": "3.0.3",
+  "logo": "https://i.imgur.com/i9pIvqR.png",
+  "thumbnail": "https://i.imgur.com/xNeJ8oq.png",
   "color": "#000000",
+  "category": "music",
   "tags": [
     "tidal",
     "music"
   ],
-  "category": "music",
   "settings": [
     {
-      "id": "language",
+      "id": "lang",
       "multiLanguage": true
-    },
-    {
-      "id": "privacy",
-      "title": "Privacy Mode",
-      "icon": "fad fa-user-secret",
-      "value": false
-    },
-    {
-      "id": "showQuality",
-      "title": "Show Song Quality",
-      "icon": "fas fa-music-alt",
-      "value": true
     }
   ]
 }

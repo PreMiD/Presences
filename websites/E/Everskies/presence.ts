@@ -199,24 +199,20 @@ presence.on("UpdateData", async () => {
     }
   ];
 
-  for (const [k, v] of Object.entries(data.presence)) {
-    if (document.location.pathname.match(k) && !v.disabled) {
-      v.setPresenceData();
-    }
-  }
+  for (const [k, v] of Object.entries(data.presence))
+    if (document.location.pathname.match(k) && !v.disabled) v.setPresenceData();
 
   for (const setting of data.settings) {
     const settingValue = await presence
-      .getSetting(setting.id)
+      .getSetting<boolean>(setting.id)
       .catch(() => null);
 
-    if (!settingValue && setting.delete)
+    if (!settingValue && setting.delete) {
       for (const PData of setting.uses)
         delete presenceData[PData as keyof PresenceData];
+    }
   }
 
-  if (!presenceData.details) {
-    presence.setActivity();
-    presence.setTrayTitle();
-  } else presence.setActivity(presenceData);
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

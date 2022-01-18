@@ -2,8 +2,6 @@ const presence = new Presence({
     clientId: "859781231351693312"
   }),
   timer = Math.floor(Date.now() / 1000),
-  // import $ from "jquery"
-
   characterList = [
     "amber",
     "barbara",
@@ -39,11 +37,17 @@ const presence = new Presence({
     "xinyan",
     "yanfei",
     "zhongli",
-    "albedo"
+    "albedo",
+    "kujou_sara",
+    "raiden_shogun",
+    "kamisato_ayaka",
+    "yoimiya",
+    "traveler_electro",
+    "sangonomiya_kokomi",
+    "sayu",
+    "aloy"
   ],
-  pathname = document.URL,
-  character = pathname.match(/\w+/gi).pop(),
-  validCharacter = characterList.includes(character);
+  validCharacter = characterList.includes(document.URL.match(/\w+/gi).pop());
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -58,17 +62,21 @@ presence.on("UpdateData", async () => {
   if (pathname === "/") presenceData.details = "Viewing homepage";
 
   if (pathname.includes("/characters") || pathname.includes("/characters/")) {
-    presenceData.details = "Viewing the character list";
+    presenceData.details = "Viewing the character list/details";
     if (validCharacter) {
-      const string = document.URL,
-        original = string
-          .match(/(\/\w+)/gi)
-          .pop()
-          .substr(1);
+      const original = document.URL.match(/(\/\w+)/gi)
+        .pop()
+        .substr(1);
       if (original === "traveler_anemo") stateText = "Anemo Traveler";
       else if (original === "traveler_geo") stateText = "Geo Traveler";
       else if (original === "kaedehara_kazuha") stateText = "Kaedehara Kazuha";
       else if (original === "hu_tao") stateText = "Hu Tao";
+      else if (original === "raiden_shogun") stateText = "Raiden Shogun (Baal)";
+      else if (original === "kujou_sara") stateText = "Kujou Sara";
+      else if (original === "traveler_electro") stateText = "Electro Traveler";
+      else if (original === "kamisato_ayaka") stateText = "Kamisato Ayaka";
+      else if (original === "sangonomiya_kokomi")
+        stateText = "Sangonomiya Kokomi";
       else stateText = original.charAt(0).toUpperCase() + original.slice(1);
 
       presenceData.details = "Viewing the character details:";
@@ -105,10 +113,11 @@ presence.on("UpdateData", async () => {
   )
     presenceData.details = "🌏 Global Wish Tally";
   else if (pathname.startsWith("/wish") || pathname.startsWith("/wish/")) {
-    const ww = document.querySelector(
-        "#sapper > main > div > div.grid.gap-4.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3.max-w-screen-xl > div:nth-child(6) > div.bg-item.rounded-xl.p-4.flex.items-center.w-full.text-white"
-      ),
-      [, , , number] = ww.textContent.split(" ");
+    const [, , , number] = document
+      .querySelector(
+        "#sapper > main > div > div.flex.flex-col.xl\\:flex-row > div.grid.gap-4.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3.max-w-screen-xl > div:nth-child(6) > div.bg-item.rounded-xl.p-4.flex.items-center.w-full.text-white"
+      )
+      .textContent.split(" ");
 
     presenceData.details = "Viewing at the Wish Counter";
     presenceData.state = `Wishes Worth: ✧ ${number}`;
@@ -157,16 +166,22 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing at the Database";
     presenceData.state = "Weapons";
   } else if (
+    pathname.includes("/artifacts") ||
+    pathname.includes("/artifacts/")
+  ) {
+    presenceData.details = "Viewing at the Database";
+    presenceData.state = "Artifacts";
+  } else if (
     pathname.includes("/timeline") ||
     pathname.includes("/timeline/")
   ) {
-    const servertime = document.querySelector(
-        "#sapper > main > div > div.px-4.md\\:px-8.text-white.select-none.svelte-15n1215 > label"
-      ),
-      finalText = servertime.textContent.match(/(\w(\s+)?)+/gi).pop();
-
     presenceData.details = "Viewing at the Timeline";
-    presenceData.state = `Time of ${finalText}`;
+    presenceData.state = `Time of ${document
+      .querySelector(
+        "#sapper > main > div > div.flex.svelte-15n1215 > div.svelte-15n1215 > div > label"
+      )
+      .textContent.match(/(\w(\s+)?)+/gi)
+      .pop()}`;
   } else if (pathname.includes("/settings") || pathname.includes("/settings/"))
     presenceData.details = "Settings";
   else if (
@@ -178,8 +193,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Reading";
   }
 
-  if (presenceData.details === null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

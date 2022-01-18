@@ -3,9 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  /* THIS IS EASY AND EFFICIENT! */
-  if (document.location.pathname != "/projects/premid/custom-status") {
-    // Adding this, probably not needed but it's fine.
+  if (document.location.pathname !== "/projects/premid/custom-status") {
     const details = document.querySelector("[name~=premid-details][content]")
         ? (
             document.querySelector(
@@ -28,20 +26,21 @@ presence.on("UpdateData", async () => {
           ).content
         : null;
 
-    if (state && details)
+    if (state && details) {
       presence.setActivity({
         largeImageKey: "ec-logo",
-        details: details,
-        state: state,
+        details,
+        state,
         smallImageKey: smallImage ? smallImage : "SOMETHING-SKETCHY",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
-    else
+    } else {
       presence.setActivity({
         largeImageKey: "ec-logo",
         details: "Viewing a page:",
         state: "Homepage",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
+    }
   }
 });

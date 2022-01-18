@@ -4,11 +4,11 @@ const presence = new Presence({
 
 let currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "lg",
-  startTimestamp: browsingStamp
+  startTimestamp: browsingTimestamp
 };
 const updateCallback = {
     _function: null as () => void,
@@ -29,7 +29,7 @@ const updateCallback = {
     defaultData: PresenceData = {
       details: "Viewing an unsupported page",
       largeImageKey: "lg",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     }
   ): void => {
     currentURL = new URL(document.location.href);
@@ -49,11 +49,12 @@ const updateCallback = {
   const actionResult = (): string =>
       getURLParam("action") || getURLParam("veaction"),
     titleFromURL = (): string => {
-      const raw =
-        currentPath[1] === "index.php"
+      return decodeURI(
+        (currentPath[1] === "index.php"
           ? getURLParam("title")
-          : currentPath.slice(1).join("/");
-      return decodeURI(raw.replace(/_/g, " "));
+          : currentPath.slice(1).join("/")
+        ).replace(/_/g, " ")
+      );
     };
 
   try {
@@ -101,33 +102,25 @@ const updateCallback = {
     return (
       details[
         [...document.querySelector("body").classList]
-          .filter((v) => /ns--?\d/.test(v))[0]
+          .filter(v => /ns--?\d/.test(v))[0]
           .slice(3)
       ] || "Viewing a page"
     );
   };
 
-  //
-  // Important note:
-  //
-  // When checking for the current location, avoid using the URL.
-  // The URL is going to be different in other languages.
-  // Use the elements on the page instead.
-  //
-
   if (
     (
-      (document.querySelector("#n-mainpage a") ||
-        document.querySelector("#p-navigation a") ||
-        document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement
+      document.querySelector<HTMLAnchorElement>("#n-mainpage a") ||
+      document.querySelector<HTMLAnchorElement>("#p-navigation a") ||
+      document.querySelector<HTMLAnchorElement>(".mw-wiki-logo")
     ).href === currentURL.href
-  ) {
+  )
     presenceData.details = "On the main page";
-  } else if (document.querySelector("#wpLoginAttempt")) {
+  else if (document.querySelector("#wpLoginAttempt"))
     presenceData.details = "Logging in";
-  } else if (document.querySelector("#wpCreateaccount")) {
+  else if (document.querySelector("#wpCreateaccount"))
     presenceData.details = "Creating an account";
-  } else if (document.querySelector(".searchresults")) {
+  else if (document.querySelector(".searchresults")) {
     presenceData.details = "Searching for a page";
     presenceData.state = (
       document.querySelector("input[type=search]") as HTMLInputElement
@@ -148,26 +141,22 @@ const updateCallback = {
         : `${title} (${titleFromURL()})`
     }`;
     updateCallback.function = (): void => {
-      if (actionResult() === "edit" || actionResult() === "editsource") {
+      if (actionResult() === "edit" || actionResult() === "editsource")
         presenceData.details = "Editing a page";
-      } else {
-        presenceData.details = namespaceDetails();
-      }
+      else presenceData.details = namespaceDetails();
     };
+  } else if (actionResult() === "edit") {
+    presenceData.details = document.querySelector("#ca-edit")
+      ? "Editing a page"
+      : "Viewing source";
+    presenceData.state = titleFromURL();
   } else {
-    if (actionResult() === "edit") {
-      presenceData.details = document.querySelector("#ca-edit")
-        ? "Editing a page"
-        : "Viewing source";
-      presenceData.state = titleFromURL();
-    } else {
-      presenceData.details = namespaceDetails();
-      presenceData.state = `${
-        title.toLowerCase() === titleFromURL().toLowerCase()
-          ? `${title}`
-          : `${title} (${titleFromURL()})`
-      }`;
-    }
+    presenceData.details = namespaceDetails();
+    presenceData.state = `${
+      title.toLowerCase() === titleFromURL().toLowerCase()
+        ? `${title}`
+        : `${title} (${titleFromURL()})`
+    }`;
   }
 })();
 

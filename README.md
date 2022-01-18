@@ -69,3 +69,7 @@ presence
 - Then at last you will be asked to fill in you translations. (You can type
   "skip" to skip)
 - To stop at any time, hit `ctrl+c` or type `stop`.
+
+## Committing
+
+On this repo we enforce the use of commitlint. For more information on this, read the [Commit Convention guide](./.github/COMMIT_CONVENTION.md)

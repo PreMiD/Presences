@@ -1,23 +1,17 @@
 const presence = new Presence({
-    clientId: "463151177836658699"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "463151177836658699"
+});
 
 function getAuthorString(): string {
   //* Get authors
-  const authors = document.querySelectorAll(
-    "span yt-formatted-string.ytmusic-player-bar a"
-  ) as NodeListOf<HTMLAnchorElement>;
-  let authorsArray: Array<HTMLAnchorElement>, authorString: string;
-
-  //* Author tags more than one => YouTube Music Song listing with release year etc.
-  if (authors.length > 1) {
+  const authors = document.querySelectorAll<HTMLAnchorElement>(
+      "span yt-formatted-string.ytmusic-player-bar a"
+    ),
     //* Convert to js array for .map function
     authorsArray = Array.from(authors);
 
+  //* Author tags more than one => YouTube Music Song listing with release year etc.
+  if (authors.length > 1) {
     //* If song is from a channel and not a video
     if (
       document.querySelector(
@@ -32,59 +26,65 @@ function getAuthorString(): string {
       year = year.slice(year.length - 4, year.length);
 
       //* Build output string
-      authorString = `${authorsArray
+      return `${authorsArray
         .slice(0, authorsArray.length - 1)
-        .map((a) => a.innerText)
+        .map(a => a.textContent)
         .join(", ")} - ${
-        authorsArray[authorsArray.length - 1].innerText
+        authorsArray[authorsArray.length - 1].textContent
       } (${year})`;
     } else {
       //* Build output string
-      authorString = `${authorsArray
+      return `${authorsArray
         .slice(0, authorsArray.length - 1)
-        .map((a) => a.innerText)
-        .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
+        .map(a => a.textContent)
+        .join(", ")} - ${authorsArray[authorsArray.length - 1].textContent}`;
     }
   } else {
-    authorString = (document.querySelector(
-      "span yt-formatted-string.ytmusic-player-bar a"
-    ) as HTMLAnchorElement)
-      ? (
-          document.querySelector(
-            "span yt-formatted-string.ytmusic-player-bar a"
-          ) as HTMLAnchorElement
-        ).innerText
-      : (
-          document.querySelector(
-            "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
-          ) as HTMLAnchorElement
-        ).innerText;
+    return (
+      document.querySelector<HTMLAnchorElement>(
+        "span yt-formatted-string.ytmusic-player-bar a"
+      )?.textContent ??
+      document.querySelector<HTMLAnchorElement>(
+        "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
+      ).textContent
+    );
   }
-
-  return authorString;
 }
 
+let prevCover: [number, string] = null;
+
 presence.on("UpdateData", async () => {
-  const title = (
-      document.querySelector(".ytmusic-player-bar.title") as HTMLElement
-    ).innerText,
-    video = document.querySelector(".video-stream") as HTMLVideoElement,
+  const title = document.querySelector<HTMLElement>(
+      ".ytmusic-player-bar.title"
+    ).textContent,
+    video = document.querySelector<HTMLVideoElement>(".video-stream"),
+    progressBar = document.querySelector<HTMLElement>("#progress-bar"),
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
-      .getAttribute("repeat-Mode_");
-
+      .getAttribute("repeat-Mode_"),
+    [buttons, timestamps, cover] = await Promise.all([
+      presence.getSetting<boolean>("buttons"),
+      presence.getSetting<boolean>("timestamps"),
+      presence.getSetting<boolean>("cover")
+    ]);
   if (title !== "" && !isNaN(video.duration)) {
-    const [, endTimestamp] = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
+    const endTimestamp =
+        Date.now() / 1000 +
+        Number(progressBar.getAttribute("aria-valuemax")) -
+        Number(progressBar.getAttribute("value")),
       [, watchID] = document
         .querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
         .href.match(/v=([^&#]{5,})/),
       presenceData: PresenceData = {
         details: title,
         state: getAuthorString(),
-        largeImageKey: "ytm_lg",
+        largeImageKey: cover
+          ? document
+              .querySelector<HTMLImageElement>(
+                ".image.style-scope.ytmusic-player-bar"
+              )
+              .src.replace("=w60-h60-l90", "=w600-h600-l900")
+          : "ytm_lg",
         smallImageKey: video.paused
           ? "pause"
           : repeatMode === "ONE"
@@ -93,26 +93,48 @@ presence.on("UpdateData", async () => {
           ? "repeat"
           : "play",
         smallImageText: video.paused
-          ? (await strings).pause
+          ? "Paused"
           : repeatMode === "ONE"
           ? "On loop"
           : repeatMode === "ALL"
           ? "Playlist on loop"
-          : (await strings).play,
-        endTimestamp,
-        buttons: [
-          {
-            label: "Listen Along",
-            url: `https://music.youtube.com/watch?v=${watchID}`
-          }
-        ]
+          : "Playing",
+        endTimestamp
       };
+
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${watchID}`
+        }
+      ];
+    }
+
+    if (!timestamps) delete presenceData.endTimestamp;
+
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${watchID}`
+        }
+      ];
+    }
 
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
-      presence.setTrayTitle();
-    } else presence.setTrayTitle(title);
+    }
+
+    if (cover) {
+      prevCover ??= [Date.now(), presenceData.largeImageKey];
+      if (prevCover[1] !== presenceData.largeImageKey) {
+        if (Date.now() - prevCover[0] < 20_000)
+          presenceData.largeImageKey = "ytm_lg";
+        else prevCover = [Date.now(), presenceData.largeImageKey];
+      }
+    }
 
     presence.setActivity(presenceData);
   } else presence.setActivity();

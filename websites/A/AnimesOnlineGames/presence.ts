@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "860857600203554816"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo_anime",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     { pathname } = document.location,
     { search } = document.location,
@@ -34,19 +34,19 @@ presence.on("UpdateData", async () => {
       "ul#calen-nav > li.active"
     );
     presenceData.details = "Olhando o Calendário";
-    if (day) presenceData.state = `No dia: ${day.innerText}`;
+    if (day) presenceData.state = `No dia: ${day.textContent}`;
   } else if (pathname.startsWith("/genero/")) {
     const genre: HTMLHeadingElement = document.querySelector(
       "body > div.conteudoAlinhado > div.conteudoGen > section:nth-child(1) > section > h1"
     );
     presenceData.details = "Procurando por gênero";
-    if (genre) presenceData.state = genre.innerText;
+    if (genre) presenceData.state = genre.textContent;
   } else if (/\/[a-z]\/animes\//.test(pathname)) {
     const anime: HTMLHeadingElement = document.querySelector(
       "body > div.conteudoAlinhado > div.conteudo > section:nth-child(1) > section.tituloPrincipal > h1"
     );
     presenceData.details = "Vendo Sinopse";
-    if (anime) presenceData.state = anime.innerText;
+    if (anime) presenceData.state = anime.textContent;
     presenceData.buttons = [
       {
         label: "Vendo Sinopse",
@@ -59,9 +59,8 @@ presence.on("UpdateData", async () => {
       ),
       video: HTMLVideoElement = document.querySelector("video");
     if (anime) {
-      const [animeTitle] = anime.innerText.split("-"),
-        episode = parseInt(anime.innerText.split(" ").pop());
-      presenceData.details = animeTitle;
+      const episode = parseInt(anime.textContent.split(" ").pop());
+      [presenceData.details] = anime.textContent.split("-");
       if (!isNaN(episode)) presenceData.state = `Episódio: ${episode}`;
       if (video)
         [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
@@ -75,8 +74,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

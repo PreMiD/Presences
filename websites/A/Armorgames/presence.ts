@@ -1,18 +1,18 @@
 const presence = new Presence({
     clientId: "827910536049852488"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
     page = window.location.pathname;
   if (page === "/") {
     search = document.querySelector("#search-input");
-    if (!search || search.value === "")
+    if (!search || search.textContent === "")
       presenceData.details = "Viewing The Homepage";
     else {
       presenceData.details = "Searching:";
@@ -32,15 +32,15 @@ presence.on("UpdateData", async () => {
         { label: "View Category", url: window.location.href }
       ];
     }
-  } else if (page === "/community") presenceData.details = `Viewing the forums`;
+  } else if (page === "/community") presenceData.details = "Viewing the forums";
   else if (page.includes("/forum/")) {
     title = document.querySelector("#content-canvas > main > h1");
-    presenceData.details = `Viewing Forum:`;
+    presenceData.details = "Viewing Forum:";
     presenceData.state = title.textContent.replace("Forums → ", "");
     presenceData.buttons = [{ label: "View Forum", url: window.location.href }];
   } else if (page.includes("thread")) {
     title = document.querySelector("#thread-title");
-    presenceData.details = `Reading Forum Thread:`;
+    presenceData.details = "Reading Forum Thread:";
     presenceData.state = title.textContent;
     presenceData.buttons = [
       { label: "View Thread", url: window.location.href }
@@ -48,12 +48,12 @@ presence.on("UpdateData", async () => {
   } else if (page.includes("/friends/")) {
     title = document.querySelector("#main > h2");
     if (title.textContent === "Your Friends") {
-      presenceData.details = `Viewing their friends`;
+      presenceData.details = "Viewing their friends";
       presenceData.buttons = [
         { label: "View Friends", url: window.location.href }
       ];
     } else {
-      presenceData.details = `Viewing the friends of:`;
+      presenceData.details = "Viewing the friends of:";
       presenceData.state = title.textContent;
       presenceData.buttons = [
         { label: "View Friends", url: window.location.href }
@@ -61,14 +61,14 @@ presence.on("UpdateData", async () => {
     }
   } else if (page.includes("/user/")) {
     title = document.querySelector("#user-data > h1");
-    presenceData.details = `Viewing the profile of:`;
+    presenceData.details = "Viewing the profile of:";
     presenceData.state = title.textContent;
     presenceData.buttons = [
       { label: "View Profile", url: window.location.href }
     ];
   } else if (page.includes("/author/")) {
     title = document.querySelector("#categorylisting > h2 > a");
-    presenceData.details = `Viewing Games Made By:`;
+    presenceData.details = "Viewing Games Made By:";
     presenceData.state = title.textContent;
     presenceData.buttons = [
       { label: "View Profile", url: window.location.href }
@@ -107,8 +107,6 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [{ label: "Play Game", url: window.location.href }];
   } else presenceData.details = "Page Not Found";
 
-  if (presenceData.details === null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

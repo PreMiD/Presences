@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "783702757021581352"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
@@ -12,29 +12,29 @@ presence.on("UpdateData", async () => {
 
   switch (window.location.pathname) {
     case "/":
-      presenceData.state =
-        document.querySelector("div.contentContainer > span")
-          .childElementCount + " Coins";
+      presenceData.state = `${
+        document.querySelector("div.contentContainer > span").childElementCount
+      } Coins`;
       presenceData.details = "Charts Overview";
       break;
 
     case "/faq":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "FAQ";
       break;
 
     case "/privacy":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Privacy Policy";
       break;
 
     case "/tos":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Terms of Service";
       break;
 
     case "/raveos":
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsingTimestamp;
       presenceData.details = "Rave OS Redirect";
       break;
 
@@ -49,8 +49,7 @@ presence.on("UpdateData", async () => {
             "div.mainContent > div.mainContainer.flex.flex-wrap > div.card.cardSpec > div > div:nth-child(4) > div.miningBShortCell.ctr.cbold.tooltip.tooltipx > span:nth-child(1)"
           ).textContent;
 
-          presenceData.state =
-            "24h Revenue: " + wallet24Revenue + " " + currencyTitle;
+          presenceData.state = `24h Revenue: ${wallet24Revenue} ${currencyTitle}`;
           currencyTitle += " Wallet";
         } else {
           currencyEffort = document.querySelector(
@@ -61,22 +60,19 @@ presence.on("UpdateData", async () => {
             "body > div.layout > div.contentWrapper > div.mainContent > div.typeSelection > div.typeSelectionRight.flexEqual > div > div.baseTab.activeTab"
           ).textContent;
 
-          presenceData.state =
-            "Effort (" + effortType + "): " + currencyEffort + "%";
+          presenceData.state = `Effort (${effortType}): ${currencyEffort}%`;
         }
         presenceData.details = currencyTitle;
-        presenceData.smallImageKey = window.location.pathname.split("/")[2];
+        [, , presenceData.smallImageKey] = window.location.pathname.split("/");
         presenceData.smallImageText = currencyTitle;
       } else {
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingTimestamp;
         presenceData.details = "Charts Overview";
       }
   }
 
-  if (presenceData.details == null) {
-    presenceData.startTimestamp = browsingStamp;
+  if (!presenceData.details) {
+    presenceData.startTimestamp = browsingTimestamp;
     presenceData.details = "Charts Overview";
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

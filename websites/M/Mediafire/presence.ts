@@ -1,31 +1,30 @@
 const presence = new Presence({
     clientId: "811965557184135179"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingTimestamp
     },
     page = window.location.pathname,
     host = document.location.hostname;
 
-  presenceData.startTimestamp = browsingStamp;
-  if (host == "www.mediafire.com") {
-    if (page == "/") {
-      presenceData.details = "Viewing the homepage";
-    }
+  if (host === "www.mediafire.com") {
+    if (page === "/") presenceData.details = "Viewing the homepage";
+
     if (page.includes("/file/")) {
       title = document.querySelector("div.dl-btn-label");
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
     }
-    if (page == "/software/mobile/" || page == "/software/mobile") {
+    if (page === "/software/mobile/" || page === "/software/mobile") {
       presenceData.details = "Viewing:";
       presenceData.state = "Mediafire Mobile Apps";
     }
-    if (page == "/about" || page == "/about/") {
+    if (page === "/about" || page === "/about/") {
       title = document.querySelector("#titlebar > div > h1");
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
@@ -38,7 +37,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
     }
-    if (page == "/advertising" || page == "/advertising/") {
+    if (page === "/advertising" || page === "/advertising/") {
       title = document.querySelector("#content > h2");
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
@@ -53,7 +52,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title.textContent;
       }
     }
-    if (page == "/press" || page == "/press/") {
+    if (page === "/press" || page === "/press/") {
       title = document.querySelector("#content > h2.h2.mb-4");
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
@@ -98,15 +97,14 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing:";
       presenceData.state = "Help";
     }
-    if (page.includes("/login/")) {
-      presenceData.details = "Logging in";
-    }
+    if (page.includes("/login/")) presenceData.details = "Logging in";
+
     if (page.includes("/upgrade/")) {
       presenceData.details = "Viewing:";
       presenceData.state = "Upgrade Plans";
     }
   }
-  if (host == "app.mediafire.com") {
+  if (host === "app.mediafire.com") {
     if (page.includes("/myfiles")) {
       presenceData.details = "Viewing:";
       presenceData.state = "My Files";
@@ -124,26 +122,22 @@ presence.on("UpdateData", async () => {
       presenceData.state = "My Files";
     }
   }
-  if (host == "mediafire.zendesk.com") {
+  if (host === "mediafire.zendesk.com") {
     if (page.includes("/articles/")) {
       title = document.querySelector("body > main > article > header > h1");
       presenceData.details = "Viewing Help Article About:";
       presenceData.state = title.textContent;
     } else {
       search = document.querySelector("#query");
-      if (search.value != "") {
-        presenceData.startTimestamp = browsingStamp;
+      if (search.textContent !== "") {
         presenceData.details = "Helpdesk searching for:";
         presenceData.state = search.value;
         presenceData.smallImageKey = "searching";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Checking out the helpdesk";
-      }
+      } else presenceData.details = "Checking out the helpdesk";
     }
   }
-  if (host == "blog.mediafire.com") {
-    if (page == "/") {
+  if (host === "blog.mediafire.com") {
+    if (page === "/") {
       title = document.querySelector("#fl-post-3434 > header > h2 > a");
       presenceData.details = "Viewing Blog Post About:";
       presenceData.state = title.textContent;
@@ -153,10 +147,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });

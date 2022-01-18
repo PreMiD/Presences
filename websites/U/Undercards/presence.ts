@@ -1,8 +1,9 @@
-const undercards = new Presence({
+/* eslint-disable no-eval */
+const presence = new Presence({
     clientId: "799885664538853417"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  URLMap: { [index: string]: Array<string> } = {
+  browsingTimestamp = Math.floor(Date.now() / 1000),
+  URLMap: { [index: string]: string[] } = {
     SignUp: ['"Registering an account"', '""'],
     AccountValidation: ['"Activating account"', '""'],
     SignIn: ['"Signing in"', '""'],
@@ -43,32 +44,25 @@ function getText(selector: string) {
   return document.querySelector(selector).textContent;
 }
 
-undercards.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingTimestamp
   };
-  if (document.location.pathname == "/") {
-    presenceData.startTimestamp = browsingStamp;
+  if (document.location.pathname === "/")
     presenceData.details = "Viewing homepage";
-  } else {
-    const re = new RegExp("^/([a-zA-Z.]+)"),
-      path = document.location.pathname.match(re)[1];
+  else {
+    const [, path] = document.location.pathname.match(
+      new RegExp("^/([a-zA-Z.]+)")
+    );
     if (Object.prototype.hasOwnProperty.call(URLMap, path)) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = eval(URLMap[path][0]);
       presenceData.state = eval(URLMap[path][1]);
     } else if (path.endsWith(".jsp")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing page";
       presenceData.state = getText(".mainContent > h2:nth-child(2)");
-    } else {
-      presenceData.details = "Browsing...";
-    }
+    } else presenceData.details = "Browsing...";
   }
-  if (presenceData.details == null) {
-    undercards.setTrayTitle();
-    undercards.setActivity();
-  } else {
-    undercards.setActivity(presenceData);
-  }
+  if (!presenceData.details) presence.setActivity();
+  else presence.setActivity(presenceData);
 });

@@ -7,22 +7,8 @@ const presence: Presence = new Presence({
   }),
   startTimestamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function capitalise(splitStr): string {
-  for (var i = 0; i < splitStr.length; i++) {
+function capitalise(splitStr: string[]): string {
+  for (let i = 0; i < splitStr.length; i++) {
     splitStr[i] =
       splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     splitStr[i] = splitStr[i]
@@ -39,15 +25,14 @@ presence.on("UpdateData", async () => {
   };
   const url = window.location.href;
   if (url.includes("/player/")) {
-    const video: HTMLVideoElement = document.getElementsByTagName("video")[0],
-      timestamps = getTimestamps(
+    const [video] = document.getElementsByTagName("video"),
+      timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
       tokens = url.split("/");
-    const title = capitalise(tokens[6].split("-"));
     presenceData = {
-      details: title,
+      details: capitalise(tokens[6].split("-")),
       largeImageKey: "large_img",
       smallImageKey: video.paused ? "pause" : "play",
       smallImageText: video.paused
@@ -58,10 +43,9 @@ presence.on("UpdateData", async () => {
     };
 
     if (tokens.length > 8) {
-      presenceData.state =
-        capitalise(tokens[7].split("-")) +
-        " " +
-        capitalise(tokens[8].split("-"));
+      presenceData.state = `${capitalise(tokens[7].split("-"))} ${capitalise(
+        tokens[8].split("-")
+      )}`;
     }
 
     if (video.paused) {
@@ -71,9 +55,7 @@ presence.on("UpdateData", async () => {
   } else if (url.includes("#search")) {
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "search";
-  } else {
-    presenceData.details = "Browsing";
-  }
+  } else presenceData.details = "Browsing";
 
   presence.setActivity(presenceData, true);
 });

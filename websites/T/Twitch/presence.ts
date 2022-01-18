@@ -6,9 +6,7 @@ const presence = new Presence({
     clientId: "802958789555781663"
   }),
   getElement = (query: string): string | undefined => {
-    return document.querySelector(query)
-      ? document.querySelector(query).textContent
-      : undefined;
+    return document.querySelector(query)?.textContent;
   },
   getStrings = async () => {
     return presence.getStrings(
@@ -105,33 +103,49 @@ const presence = new Presence({
       },
       oldLang
     );
-  };
+  },
+  devLogoArr = ["dev-main", "dev-white", "dev-purple"],
+  logoArr = ["twitch", "black-ops", "white", "purple", "pride"];
 
-let strings = getStrings();
+let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-    showBrowsing = await presence.getSetting("browse"),
-    showLive = await presence.getSetting("live"),
-    showVideo = await presence.getSetting("video"),
-    showTimestamps = await presence.getSetting("timestamp"),
-    newLang = await presence.getSetting("lang").catch(() => "en"),
-    privacy = await presence.getSetting("privacy"),
-    vidDetail = await presence.getSetting("vidDetail"),
-    vidState = await presence.getSetting("vidState"),
-    streamDetail = await presence.getSetting("streamDetail"),
-    streamState = await presence.getSetting("streamState"),
-    logo: number = await presence.getSetting("logo"),
-    logoArr = ["twitch", "black-ops", "white", "purple", "pride"],
-    devLogo: number = await presence.getSetting("devLogo"),
-    devLogoArr = ["dev-main", "dev-white", "dev-purple"],
-    buttons = await presence.getSetting("buttons");
+    [
+      showBrowsing,
+      showLive,
+      showVideo,
+      showTimestamps,
+      newLang,
+      privacy,
+      vidDetail,
+      vidState,
+      streamDetail,
+      streamState,
+      pfp,
+      logo,
+      devLogo,
+      buttons
+    ] = await Promise.all([
+      presence.getSetting<boolean>("browse"),
+      presence.getSetting<boolean>("live"),
+      presence.getSetting<boolean>("video"),
+      presence.getSetting<boolean>("timestamp"),
+      presence.getSetting<string>("lang").catch(() => "en"),
+      presence.getSetting<boolean>("privacy"),
+      presence.getSetting<string>("vidDetail"),
+      presence.getSetting<string>("vidState"),
+      presence.getSetting<string>("streamDetail"),
+      presence.getSetting<string>("streamState"),
+      presence.getSetting<boolean>("profilePic"),
+      presence.getSetting<number>("logo"),
+      presence.getSetting<number>("devLogo"),
+      presence.getSetting<boolean>("buttons")
+    ]);
 
-  if (!oldLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   let presenceData: PresenceData = {
@@ -146,298 +160,195 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.twitch.tv") {
     //* Main website
-    const parseVideo = async (video: HTMLVideoElement): Promise<void> => {
-        const live = video.duration >= 1073741824;
-
-        if (showLive && live) {
-          //* Live
-          const title = getElement(".channel-info-content h2"),
-            streamer = getElement(".channel-info-content h1"),
-            game =
-              document.querySelector("a[data-a-target='stream-game-link']")
-                ?.textContent || "Just Chatting";
-          presenceData.details =
-            title && streamer
-              ? streamDetail
-                  .replace("%title%", title)
-                  .replace("%streamer%", streamer)
-                  .replace("%game%", game)
-              : undefined;
-          presenceData.state =
-            title && streamer
-              ? streamState
-                  .replace("%title%", title)
-                  .replace("%streamer%", streamer)
-                  .replace("%game%", game)
-              : undefined;
-          presenceData.smallImageKey = "live";
-          presenceData.smallImageText = (await strings).live;
-          if (buttons) {
-            presenceData.buttons = [
-              {
-                label: (await strings).watchStream,
-                url: document.URL.split("?")[0]
-              }
-            ];
-          }
-        }
-
-        if (showVideo && !live) {
-          //* Video or Clips
-          const title = getElement(".channel-info-content h2")
-              .split("•")
-              .shift(),
-            uploader = getElement(".channel-info-content h1"),
-            game =
-              document.querySelector("a[data-a-target='stream-game-link']")
-                ?.textContent || "Just Chatting";
-          presenceData.details =
-            title && uploader
-              ? vidDetail
-                  .replace("%title%", title)
-                  .replace("%uploader%", uploader)
-                  .replace("%game%", game)
-              : undefined;
-          presenceData.state =
-            title && uploader
-              ? vidState
-                  .replace("%title%", title)
-                  .replace("%uploader%", uploader)
-                  .replace("%game%", game)
-              : undefined;
-          presenceData.smallImageKey = "play";
-          presenceData.smallImageText = (await strings).play;
-
-          const timestamps = presence.getTimestampsfromMedia(video);
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
-
-          if (buttons) {
-            presenceData.buttons = [
-              {
-                label: (await strings).watchVideo,
-                url: document.URL.split("?")[0]
-              }
-            ];
-          }
-        }
-
-        if (((showLive && live) || (showVideo && !live)) && video.paused) {
-          delete presenceData.startTimestamp;
-          delete presenceData.endTimestamp;
-          presenceData.smallImageKey = "pause";
-          presenceData.smallImageText = (await strings).pause;
-        }
-
-        //* Privacy mode enabled.
-        if (privacy && showLive && live) {
-          presenceData.details = (await strings).watchingLive;
-          delete presenceData.state;
-        } else if (privacy && showVideo && !live) {
-          presenceData.details = (await strings).watchingVid;
-          delete presenceData.state;
-        } else if (showBrowsing && (!showVideo || !showLive)) {
-          presenceData.details = (await strings).browse;
-          delete presenceData.state;
-        }
+    const statics = {
+      "/downloads/": {
+        details: strings.viewPage,
+        state: strings.download
       },
-      statics = {
-        "/downloads/": {
-          details: (await strings).viewPage,
-          state: (await strings).download
-        },
-        "/jobs/": {
-          details: (await strings).viewPage,
-          state: (await strings).jobs
-        },
-        "/turbo/": {
-          details: (await strings).viewPage,
-          state: (await strings).turbo
-        },
-        "/broadcast/studio/": {
-          details: (await strings).readingAbout,
-          state: "Twitch Studio"
-        },
-        "/redeem/": {
-          details: (await strings).redeem
-        },
-        "/p/partners/": {
-          details: (await strings).viewPage,
-          state: (await strings).partners
-        },
-        "/p/press-center/": {
-          details: (await strings).viewPage,
-          state: (await strings).press
-        },
-        "/p/security/": {
-          details: (await strings).viewPage,
-          state: (await strings).security
-        },
-        "/p/legal/accessibility/": {
-          details: (await strings).viewPage,
-          state: (await strings).access
-        },
-        "/p/legal/ad-choices/": {
-          details: (await strings).viewPage,
-          state: (await strings).ads
-        },
-        "/p/legal/community-guidelines/": {
-          details: (await strings).viewPage,
-          state: (await strings).guidelines
-        },
-        "/p/legal/cookie-policy/": {
-          details: (await strings).viewPage,
-          state: (await strings).cookie
-        },
-        "/p/legal/privacy-notice/": {
-          details: (await strings).viewPage,
-          state: (await strings).privacy
-        },
-        "/p/legal/terms-of-serice/": {
-          details: (await strings).viewPage,
-          state: (await strings).terms
-        },
-        "/p/(\\w*|\\w*-\\w*)/about/": {
-          details: (await strings).readingAbout,
-          state: "Twitch"
-        },
-        "/p/(\\w*|\\w*-\\w*)/stream/": {
-          details: (await strings).readingAbout,
-          state: "How to stream"
-        },
-        "/p/(\\w*|\\w*-\\w*)/watch/": {
-          details: (await strings).readingAbout,
-          state: "How to watch"
-        },
-        "/p/(\\w*|\\w*-\\w*)/company/": {
-          details: (await strings).readingAbout,
-          state: "The Company"
-        },
-        "/p/(\\w*|\\w*-\\w*)/giftcard/": {
-          details: (await strings).readingAbout,
-          state: "Giftcards"
-        },
-        "/p/(\\w*|\\w*-\\w*)/artists/": {
-          details: (await strings).readingAbout,
-          state: "Artists"
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/learn-the-basics/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
-          state: (await strings).campBasic
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/setting-up-your-stream/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
-          state: (await strings).campSetup
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/level-up/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
-          state: (await strings).campLevel
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/connect-and-engage/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
-          state: (await strings).campConnect
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/get-rewarded/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
-          state: (await strings).campReward
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/twitch-music-getting-started/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
-          state: (await strings).campMusic
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/live/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
-          state: (await strings).campLive
-        },
-        "/creatorcamp/(\\w*|\\w*-\\w*)/": {
-          details: (await strings).camp + " | " + (await strings).viewPage,
-          state: (await strings).home
-        }
-      };
+      "/jobs/": {
+        details: strings.viewPage,
+        state: strings.jobs
+      },
+      "/turbo/": {
+        details: strings.viewPage,
+        state: strings.turbo
+      },
+      "/broadcast/studio/": {
+        details: strings.readingAbout,
+        state: "Twitch Studio"
+      },
+      "/redeem/": {
+        details: strings.redeem
+      },
+      "/p/partners/": {
+        details: strings.viewPage,
+        state: strings.partners
+      },
+      "/p/press-center/": {
+        details: strings.viewPage,
+        state: strings.press
+      },
+      "/p/security/": {
+        details: strings.viewPage,
+        state: strings.security
+      },
+      "/p/legal/accessibility/": {
+        details: strings.viewPage,
+        state: strings.access
+      },
+      "/p/legal/ad-choices/": {
+        details: strings.viewPage,
+        state: strings.ads
+      },
+      "/p/legal/community-guidelines/": {
+        details: strings.viewPage,
+        state: strings.guidelines
+      },
+      "/p/legal/cookie-policy/": {
+        details: strings.viewPage,
+        state: strings.cookie
+      },
+      "/p/legal/privacy-notice/": {
+        details: strings.viewPage,
+        state: strings.privacy
+      },
+      "/p/legal/terms-of-serice/": {
+        details: strings.viewPage,
+        state: strings.terms
+      },
+      "/p/(\\w*|\\w*-\\w*)/about/": {
+        details: strings.readingAbout,
+        state: "Twitch"
+      },
+      "/p/(\\w*|\\w*-\\w*)/stream/": {
+        details: strings.readingAbout,
+        state: "How to stream"
+      },
+      "/p/(\\w*|\\w*-\\w*)/watch/": {
+        details: strings.readingAbout,
+        state: "How to watch"
+      },
+      "/p/(\\w*|\\w*-\\w*)/company/": {
+        details: strings.readingAbout,
+        state: "The Company"
+      },
+      "/p/(\\w*|\\w*-\\w*)/giftcard/": {
+        details: strings.readingAbout,
+        state: "Giftcards"
+      },
+      "/p/(\\w*|\\w*-\\w*)/artists/": {
+        details: strings.readingAbout,
+        state: "Artists"
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/learn-the-basics/": {
+        details: `${strings.camp} | ${strings.viewPage}`,
+        state: strings.campBasic
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/setting-up-your-stream/": {
+        details: `${strings.camp} | ${strings.viewPage}`,
+        state: strings.campSetup
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/level-up/": {
+        details: `${strings.camp} | ${strings.viewPage}`,
+        state: strings.campLevel
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/connect-and-engage/": {
+        details: `${strings.camp} | ${strings.viewPage}`,
+        state: strings.campConnect
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/get-rewarded/": {
+        details: `${strings.camp} | ${strings.viewPage}`,
+        state: strings.campReward
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/twitch-music-getting-started/": {
+        details: `${strings.camp} | ${strings.viewPage}`,
+        state: strings.campMusic
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/live/": {
+        details: `${strings.camp} | ${strings.viewPage}`,
+        state: strings.campLive
+      },
+      "/creatorcamp/(\\w*|\\w*-\\w*)/": {
+        details: `${strings.camp} | ${strings.viewPage}`,
+        state: strings.home
+      }
+    };
 
     if (showBrowsing) {
       for (const [k, v] of Object.entries(statics)) {
         if (path.match(k)) {
           presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
+          presenceData.smallImageText = strings.browse;
           presenceData = { ...presenceData, ...v };
         }
       }
 
       if (path === "/") {
-        presenceData.details = (await strings).browse;
-        presenceData.state = (await strings).home;
+        presenceData.details = strings.browse;
+        presenceData.state = strings.home;
       }
 
       let user = getElement(".home-header-sticky .tw-title");
       if (user) {
-        const tab = getElement(".tw-c-text-link");
+        const tab = getElement(".tw-c-text-link"),
+          profilePic = document
+            .querySelector<HTMLImageElement>(
+              ".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+            )
+            .src.replace("profile_image-70x70", "profile_image-600x600");
         user += tab ? ` (${tab})` : "";
 
-        presenceData.details = (await strings).viewProfile;
+        presenceData.details = strings.viewProfile;
         presenceData.state = user;
+        if (pfp) {
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
+        }
       }
 
       if (path.includes("/team/")) {
-        const teamName = document.location.pathname
+        presenceData.details = strings.viewTeam;
+        presenceData.state = document.location.pathname
           .split("/")
           .pop()
           .split("_")
-          .map((word) => {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-          })
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
-
-        presenceData.details = (await strings).viewTeam;
-        presenceData.state = teamName;
       }
 
       if (path.includes("/settings/")) {
-        presenceData.details = (await strings).viewSettings;
+        presenceData.details = strings.viewSettings;
         presenceData.state = getElement(".tw-tab__link--active");
       }
 
       if (path.includes("/friends/")) {
         const tab = getElement(".tw-tab__link--active");
 
-        presenceData.details = (await strings).viewFriends;
+        presenceData.details = strings.viewFriends;
         presenceData.state = tab;
       }
 
       let searching = false;
       if (path.includes("/search/")) {
         searching = true;
-        const search = document.querySelector(
-          ".tw-combo-input__input > div > input"
-        ) as HTMLInputElement;
 
-        presenceData.details = (await strings).searchingFor;
-        presenceData.state = search ? search.value : undefined;
+        presenceData.details = strings.searchingFor;
+        presenceData.state = getElement(".tw-combo-input__input > div > input");
         presenceData.smallImageKey = "search";
       }
 
-      if (path.includes("/drops/inventory/")) {
-        presenceData.details = (await strings).viewDropsInv;
-      }
+      if (path.includes("/drops/inventory/"))
+        presenceData.details = strings.viewDropsInv;
 
       if (path.includes("/drops/campaigns/")) {
-        presenceData.details = (await strings).viewDropsComp;
+        presenceData.details = strings.viewDropsComp;
 
-        const drops = document.querySelector(
-          ".drops-root__content > div:nth-child(5)"
-        ).children;
         let activeDrop = null;
-
-        for (const drop of drops) {
-          if (!drop.children[1].className.includes("tw-hide")) {
-            activeDrop =
-              drop.firstElementChild.firstElementChild.firstElementChild
-                .children[1].firstElementChild.children[0].textContent +
-              " (" +
-              drop.firstElementChild.firstElementChild.firstElementChild
-                .children[1].firstElementChild.children[1].textContent +
-              ")";
-          }
+        for (const drop of document.querySelector(
+          ".drops-root__content > div:nth-child(5)"
+        ).children) {
+          if (!drop.children[1].className.includes("tw-hide"))
+            activeDrop = `${drop.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.children[0].textContent} (${drop.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.children[1].textContent})`;
         }
 
         if (activeDrop) presenceData.state = activeDrop;
@@ -446,23 +357,22 @@ presence.on("UpdateData", async () => {
       if (path.includes("/subscriptions/")) {
         const tab = getElement(".tw-tab__link--active");
 
-        presenceData.details = (await strings).subs;
-        presenceData.state = !tab.includes("Your")
-          ? tab.replace("Subscriptions", "")
-          : undefined;
+        presenceData.details = strings.subs;
+        if (!tab.includes("Your"))
+          presenceData.state = tab.replace("Subscriptions", "");
       }
 
       if (path.includes("/wallet/")) {
         const tab = getElement(".tw-c-text-link");
 
-        presenceData.details = (await strings).viewWallet;
-        presenceData.state = !tab.includes("Wallet") ? tab : undefined;
+        presenceData.details = strings.viewWallet;
+        if (!tab.includes("Wallet")) presenceData.state = tab;
       }
 
       if (path.includes("/directory/")) {
         const tab = getElement(".tw-c-text-link");
 
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         presenceData.state = tab;
       }
 
@@ -470,31 +380,29 @@ presence.on("UpdateData", async () => {
         const category = getElement(".directory-header-new__banner-cover h1"),
           tab = getElement(".tw-c-text-link");
 
-        presenceData.details = (await strings).viewCategory;
-        presenceData.state = category && category + ` (${tab})`;
+        presenceData.details = strings.viewCategory;
+        presenceData.state = category && `${category} (${tab})`;
       }
 
       if (path.includes("/directory/esports/")) {
-        const game = getElement(
+        presenceData.details = strings.viewEsports;
+        presenceData.state = getElement(
           ".esports-directory-single-category-header__info p"
         );
-
-        presenceData.details = (await strings).viewEsports;
-        presenceData.state = game;
       }
 
       if (path.includes("/directory/following/")) {
         const tab = getElement(".tw-c-text-link");
 
-        presenceData.details = (await strings).viewFollow;
-        presenceData.state = !tab.includes("Overview") ? tab : undefined;
+        presenceData.details = strings.viewFollow;
+        if (!tab.includes("Overview")) presenceData.state = tab;
       }
 
       if (privacy && searching) {
-        presenceData.details = (await strings).searchingSomething;
+        presenceData.details = strings.searchingSomething;
         delete presenceData.state;
       } else if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -504,127 +412,220 @@ presence.on("UpdateData", async () => {
       const squad = document.querySelectorAll(".squad-stream-channel-card a"),
         squadNames: string[] = [];
 
-      squad.forEach((squadUser) => {
+      squad.forEach(squadUser => {
         squadNames.push(squadUser.textContent);
       });
 
-      presenceData.details = (await strings).squad;
+      presenceData.details = strings.squad;
       presenceData.state = squadNames.join(", ");
       presenceData.smallImageKey = "live";
-      presenceData.smallImageText = (await strings).live;
+      presenceData.smallImageText = strings.live;
     }
 
     if (path.includes("/moderator/")) {
-      const user = getElement(".stream-info-card p > a"),
-        status = getElement(".modview-dock-widget p");
+      const user = getElement(".stream-info-card p > a");
 
-      presenceData.details = (await strings).modStreamer;
+      presenceData.details = strings.modStreamer;
       presenceData.state = user;
 
-      if (status !== "Offline") {
+      if (getElement(".modview-dock-widget p") !== "Offline") {
         presenceData.smallImageKey = "live";
-        presenceData.smallImageText = (await strings).live;
+        presenceData.smallImageText = strings.live;
       }
     }
 
-    const homeCarousel: HTMLDivElement = document.querySelector(
-        ".home-carousel-info"
-      ),
-      channelRoot: HTMLDivElement = document.querySelector(".channel-root"),
-      video: HTMLVideoElement = document.querySelector("video");
-    if (!homeCarousel && channelRoot && video) {
-      await parseVideo(video);
+    const video = document.querySelector<HTMLVideoElement>("video");
+    if (
+      !document.querySelector<HTMLDivElement>(".home-carousel-info") &&
+      document.querySelector<HTMLDivElement>(".channel-root") &&
+      video
+    ) {
+      const live = video.duration >= 1073741824;
+
+      if (showLive && live) {
+        //* Live
+        const title = getElement(".channel-info-content h2"),
+          streamer = getElement(".channel-info-content h1"),
+          game =
+            getElement("a[data-a-target='stream-game-link']") ||
+            "Just Chatting",
+          profilePic = document
+            .querySelector<HTMLImageElement>(
+              ".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+            )
+            .src.replace("profile_image-70x70", "profile_image-600x600");
+        if (title && streamer) {
+          presenceData.details = streamDetail
+            .replace("%title%", title)
+            .replace("%streamer%", streamer)
+            .replace("%game%", game);
+        }
+        if (title && streamer) {
+          presenceData.state = streamState
+            .replace("%title%", title)
+            .replace("%streamer%", streamer)
+            .replace("%game%", game);
+        }
+        presenceData.smallImageKey = "live";
+        presenceData.smallImageText = strings.live;
+        if (pfp) {
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
+        }
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: strings.watchStream,
+              url: document.URL.split("?")[0]
+            }
+          ];
+        }
+      }
+
+      if (showVideo && !live) {
+        //* Video or Clips
+        const title = getElement(".channel-info-content h2").split("•").shift(),
+          uploader = getElement(".channel-info-content h1"),
+          game =
+            getElement("a[data-a-target='stream-game-link']") ||
+            "Just Chatting",
+          profilePic = document
+            .querySelector<HTMLImageElement>(
+              ".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+            )
+            .src.replace("profile_image-70x70", "profile_image-600x600");
+        if (title && uploader) {
+          presenceData.details = vidDetail
+            .replace("%title%", title)
+            .replace("%uploader%", uploader)
+            .replace("%game%", game);
+        }
+        if (title && uploader) {
+          presenceData.state = vidState
+            .replace("%title%", title)
+            .replace("%uploader%", uploader)
+            .replace("%game%", game);
+        }
+        presenceData.smallImageKey = "play";
+        presenceData.smallImageText = strings.play;
+        if (pfp) {
+          presenceData.largeImageKey =
+            profilePic ?? (logoArr[logo] || "twitch");
+        }
+        const [startTimestamp, endTimestamp] =
+          presence.getTimestampsfromMedia(video);
+        presenceData.startTimestamp = startTimestamp;
+        presenceData.endTimestamp = endTimestamp;
+
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: strings.watchVideo,
+              url: document.URL.split("?")[0]
+            }
+          ];
+        }
+      }
+
+      if (((showLive && live) || (showVideo && !live)) && video.paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+        presenceData.smallImageKey = "pause";
+        presenceData.smallImageText = strings.pause;
+      }
+
+      //* Privacy mode enabled.
+      if (privacy && showLive && live) {
+        presenceData.details = strings.watchingLive;
+        delete presenceData.state;
+      } else if (privacy && showVideo && !live) {
+        presenceData.details = strings.watchingVid;
+        delete presenceData.state;
+      } else if (showBrowsing && (!showVideo || !showLive)) {
+        presenceData.details = strings.browse;
+        delete presenceData.state;
+      }
     }
   } else if (document.location.hostname === "dashboard.twitch.tv") {
     //* Creator Dashboard
     if (showBrowsing) {
       const statics = {
         "/home/": {
-          details: (await strings).dashboard + " | " + (await strings).viewPage,
-          state: (await strings).home
+          details: `${strings.dashboard} | ${strings.viewPage}`,
+          state: strings.home
         },
         "/stream-manager/": {
-          details: (await strings).dashboard,
-          state: (await strings).dashboardManage
+          details: strings.dashboard,
+          state: strings.dashboardManage
         },
         "/channel-analytics/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).channelAnaly
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.channelAnaly
         },
         "/stream-summary/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).streamSum
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.streamSum
         },
         "/achievements/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).achievements
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.achievements
         },
         "/community/roles/": {
-          details: (await strings).dashboard,
-          state: (await strings).manageRoles
+          details: strings.dashboard,
+          state: strings.manageRoles
         },
         "/community/activity/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).activity
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.activity
         },
         "/community/followers-list/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).followList
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.followList
         },
         "/content/video-producer/": {
-          details: (await strings).dashboard,
-          state: (await strings).produce
+          details: strings.dashboard,
+          state: strings.produce
         },
         "/content/collections/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).colls
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.colls
         },
         "/content/clips/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).clips
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.clips
         },
         "/settings/channel/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).channelSettings
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.channelSettings
         },
         "/settings/moderation/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).moderationSettings
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.moderationSettings
         },
         "/drops/": {
-          details:
-            (await strings).dashboard + " | " + (await strings).viewTheir,
-          state: (await strings).dropsSettings
+          details: `${strings.dashboard} | ${strings.viewTheir}`,
+          state: strings.dropsSettings
         },
         "/broadcast/": {
-          details: (await strings).dashboard,
-          state: (await strings).tools
+          details: strings.dashboard,
+          state: strings.tools
         },
         "/extensions/": {
-          details: (await strings).dashboard,
-          state: (await strings).extensions
+          details: strings.dashboard,
+          state: strings.extensions
         }
       };
 
       for (const [k, v] of Object.entries(statics)) {
         if (path.match(k)) {
           presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
+          presenceData.smallImageText = strings.browse;
           presenceData = { ...presenceData, ...v };
         }
       }
 
       if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -634,27 +635,27 @@ presence.on("UpdateData", async () => {
     if (showBrowsing) {
       const statics = {
         "/brand/": {
-          details: (await strings).brand,
-          state: (await strings).brandReal
+          details: strings.brand,
+          state: strings.brandReal
         },
         "/madness/": {
-          details: (await strings).brand,
-          state: (await strings).brandMadness
+          details: strings.brand,
+          state: strings.brandMadness
         },
         "/expression/": {
-          details: (await strings).brand,
-          state: (await strings).brandExpression
+          details: strings.brand,
+          state: strings.brandExpression
         },
         "/together/": {
-          details: (await strings).brand,
-          state: (await strings).brandTogether
+          details: strings.brand,
+          state: strings.brandTogether
         }
       };
 
       for (const [k, v] of Object.entries(statics)) {
         if (path.match(k)) {
           presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
+          presenceData.smallImageText = strings.browse;
           presenceData = { ...presenceData, ...v };
         }
       }
@@ -663,24 +664,21 @@ presence.on("UpdateData", async () => {
         path === "/" &&
         document.querySelector(".plyr").className.includes("plyr--playing")
       ) {
-        presenceData.details = (await strings).brandWatch;
+        presenceData.details = strings.brandWatch;
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = (await strings).play;
-        const timestamps = presence.getTimestamps(
-          presence.timestampFromFormat(
-            document.querySelector(".c-controls__time.plyr__time--current")
-              .textContent
-          ),
-          presence.timestampFromFormat("01:30")
-        );
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
-      } else if (path === "/") {
-        presenceData.details = (await strings).brand;
-      }
+        presenceData.smallImageText = strings.play;
+        [presenceData.startTimestamp, presenceData.endTimestamp] =
+          presence.getTimestamps(
+            presence.timestampFromFormat(
+              document.querySelector(".c-controls__time.plyr__time--current")
+                .textContent
+            ),
+            presence.timestampFromFormat("01:30")
+          );
+      } else if (path === "/") presenceData.details = strings.brand;
 
       if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -690,33 +688,30 @@ presence.on("UpdateData", async () => {
     if (showBrowsing) {
       const statics = {
         "/": {
-          details: (await strings).blogBrowse
+          details: strings.blogBrowse
         },
         "/(\\w*|\\w*-\\w*)/archive/": {
-          details: (await strings).blogArchive.replace(
+          details: strings.blogArchive.replace(
             "{0}",
             location.pathname.replace(/\/?$/, "/").split("/")[3]
           )
         },
         "/(\\w*|\\w*-\\w*)/(\\d*)/(\\d*)/(\\d*)/((\\w*|\\w*-\\w*)*)/": {
-          details:
-            (await strings).blogs + " | " + (await strings).readingArticle,
-          state: document.querySelector(".c-page-heading__text")
-            ? document.querySelector(".c-page-heading__text").textContent
-            : undefined
+          details: `${strings.blogs} | ${strings.readingArticle}`,
+          state: document.querySelector(".c-page-heading__text")?.textContent
         }
       };
 
       for (const [k, v] of Object.entries(statics)) {
         if (path.match(k)) {
           presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
+          presenceData.smallImageText = strings.browse;
           presenceData = { ...presenceData, ...v };
         }
       }
 
       if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -726,36 +721,31 @@ presence.on("UpdateData", async () => {
     if (showBrowsing) {
       const statics = {
         "/s/": {
-          details: (await strings).help + " | " + (await strings).browse
+          details: `${strings.help} | ${strings.browse}`
         },
         "/s/topiccatalog/": {
-          details: (await strings).helpTopicCatalog
+          details: strings.helpTopicCatalog
         },
         "/s/topic/": {
-          details: (await strings).helpTopic,
-          state: document.querySelector(".headlineTitle")
-            ? document.querySelector(".headlineTitle").textContent
-            : undefined
+          details: strings.helpTopic,
+          state: document.querySelector(".headlineTitle")?.textContent
         },
         "/s/article/": {
-          details:
-            (await strings).help + " | " + (await strings).readingArticle,
-          state: document.querySelector(".articleTitle")
-            ? document.querySelector(".articleTitle").textContent
-            : undefined
+          details: `${strings.help} | ${strings.readingArticle}`,
+          state: document.querySelector(".articleTitle")?.textContent
         }
       };
 
       for (const [k, v] of Object.entries(statics)) {
         if (path.match(k)) {
           presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
+          presenceData.smallImageText = strings.browse;
           presenceData = { ...presenceData, ...v };
         }
       }
 
       if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -763,60 +753,57 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "affiliate.twitch.tv") {
     //* Help website
     if (showBrowsing) {
-      presenceData.details = (await strings).readingAbout;
-      presenceData.state = (await strings).affiliate;
+      presenceData.details = strings.readingAbout;
+      presenceData.state = strings.affiliate;
       presenceData.smallImageKey = "reading";
-      presenceData.smallImageText = (await strings).browse;
+      presenceData.smallImageText = strings.browse;
 
       if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
     }
-  } else if (document.location.hostname == "dev.twitch.tv") {
+  } else if (document.location.hostname === "dev.twitch.tv") {
     //* Dev docs
     presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
     if (showBrowsing) {
       const statics = {
         "/": {
-          details: (await strings).dev + " | " + (await strings).browse
+          details: `${strings.dev} | ${strings.browse}`
         },
         "/products/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
-          state: (await strings).devProduct
+          details: `${strings.dev} | ${strings.viewing}`,
+          state: strings.devProduct
         },
         "/showcase/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
-          state: (await strings).devShowcase
+          details: `${strings.dev} | ${strings.viewing}`,
+          state: strings.devShowcase
         },
         "/support/": {
-          details: (await strings).dev + " | " + (await strings).viewing,
-          state: (await strings).devSupport
+          details: `${strings.dev} | ${strings.viewing}`,
+          state: strings.devSupport
         },
         "/docs/": {
-          details: (await strings).devDocs,
-          state: (await strings).browse
+          details: strings.devDocs,
+          state: strings.browse
         },
         "/docs/(\\w*|\\w*-\\w*)/": {
-          details:
-            (await strings).devDocs + " | " + (await strings).readingAbout,
-          state: document.querySelector(".text-content > h1")
-            ? document.querySelector(".text-content > h1").textContent
-            : undefined
+          details: `${strings.devDocs} | ${strings.readingAbout}`,
+          state: document.querySelector(".text-content > h1")?.textContent
         }
       };
 
       for (const [k, v] of Object.entries(statics)) {
         if (path.match(k)) {
           presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
+          presenceData.smallImageText = strings.browse;
           presenceData = { ...presenceData, ...v };
         }
       }
 
       if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -827,58 +814,32 @@ presence.on("UpdateData", async () => {
     if (showBrowsing) {
       const statics = {
         "/": {
-          details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).browse
+          details: `${strings.dev} (${strings.forums}) | ${strings.browse}`
         },
         "/c/": {
-          details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).viewCategory,
-          state: document.querySelector(".category-name")
-            ? document.querySelector(".category-name").textContent
-            : undefined
+          details: `${strings.dev} (${strings.forums}) | ${strings.viewCategory}`,
+          state: document.querySelector(".category-name")?.textContent
         },
         "/t/": {
-          details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).thread,
-          state: document.querySelector(".fancy-title")
-            ? document.querySelector(".fancy-title").textContent
-            : undefined
+          details: `${strings.dev} (${strings.forums}) | ${strings.thread}`,
+          state: document.querySelector(".fancy-title")?.textContent
         },
         "/u/": {
-          details:
-            (await strings).dev +
-            " (" +
-            (await strings).forums +
-            ") | " +
-            (await strings).user,
-          state: document.querySelector(".username")
-            ? document.querySelector(".username").textContent
-            : undefined
+          details: `${strings.dev} (${strings.forums}) | ${strings.user}`,
+          state: document.querySelector(".username")?.textContent
         }
       };
 
       for (const [k, v] of Object.entries(statics)) {
         if (path.match(k)) {
           presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
+          presenceData.smallImageText = strings.browse;
           presenceData = { ...presenceData, ...v };
         }
       }
 
       if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -888,39 +849,37 @@ presence.on("UpdateData", async () => {
     document.location.hostname === "status.twitch.tv"
   ) {
     //* Status pages
-    if (document.location.hostname == "devstatus.twitch.tv")
+    if (document.location.hostname === "devstatus.twitch.tv")
       presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
     if (showBrowsing) {
       const statics = {
         "/": {
-          details: "Status page | " + (await strings).browse
+          details: `Status page | ${strings.browse}`
         },
         "/incidents/": {
-          details: "Status page | " + (await strings).viewing,
-          state: document.querySelector(".page-title > div")
-            ? document.querySelector(".page-title > div").textContent
-            : undefined
+          details: `Status page | ${strings.viewing}`,
+          state: document.querySelector(".page-title > div")?.textContent
         },
         "/history/": {
-          details: "Status page | " + (await strings).viewing,
-          state: (await strings).incident
+          details: `Status page | ${strings.viewing}`,
+          state: strings.incident
         },
         "/uptime/": {
-          details: "Status page | " + (await strings).viewing,
-          state: (await strings).uptime
+          details: `Status page | ${strings.viewing}`,
+          state: strings.uptime
         }
       };
 
       for (const [k, v] of Object.entries(statics)) {
         if (path.match(k)) {
           presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browse;
+          presenceData.smallImageText = strings.browse;
           presenceData = { ...presenceData, ...v };
         }
       }
 
       if (privacy) {
-        presenceData.details = (await strings).browse;
+        presenceData.details = strings.browse;
         delete presenceData.state;
         delete presenceData.smallImageKey;
       }
@@ -934,8 +893,5 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+  } else presence.setActivity();
 });

@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "630478614894477337"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let title: string;
 
@@ -21,24 +21,23 @@ async function getStrings() {
       browsingPresentation: "google docs.browsingPresentation",
       vieiwngPresentation: "google docs.viewingPresentation"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting<string>("lang").catch(() => "en")
   );
 }
 
-let strings = getStrings(),
+let strings: Awaited<ReturnType<typeof getStrings>>,
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      startTimestamp: browsingStamp
+      startTimestamp: browsingTimestamp
     },
-    privacy = await presence.getSetting("privacy"),
-    newLang = await presence.getSetting("lang");
+    privacy = await presence.getSetting<boolean>("privacy"),
+    newLang = await presence.getSetting<string>("lang").catch(() => "en");
 
-  if (!oldLang) oldLang = newLang;
-  else if (oldLang !== newLang) {
+  if (oldLang !== newLang || !strings) {
     oldLang = newLang;
-    strings = getStrings();
+    strings = await getStrings();
   }
 
   title = document.title
@@ -79,8 +78,6 @@ presence.on("UpdateData", async () => {
 
   if (!privacy) presenceData.state = title;
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+  if (presenceData.details) presence.setActivity(presenceData);
+  else presence.setActivity();
 });
