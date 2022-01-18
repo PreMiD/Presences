@@ -3,6 +3,8 @@ const presence = new Presence({
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
+console.log("ERFGBDWSHBF")
+
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "large_image",
@@ -11,17 +13,23 @@ presence.on("UpdateData", () => {
   };
   if (document.location.pathname.startsWith("/skins"))
     presenceData.details = "Viewing skins";
-  else if (document.location.pathname.startsWith("/skin"))
-    presenceData.details = "Viewing skins";
   else if (document.location.pathname.startsWith("/cloaks"))
     presenceData.details = "Viewing LabyMod cloaks";
+  else if (document.location.pathname.startsWith("/badges"))
+    presenceData.details = "Viewing LABY.net badges";
   else if (document.location.pathname.startsWith("/capes"))
     presenceData.details = "Viewing Minecraft capes";
   else if (document.location.pathname.startsWith("/@")) {
     presenceData.details = "Viewing profile of:";
     presenceData.state = document.querySelector(
-      "div.profile-header>h1"
-    ).textContent;
+      "div.col-12>h1"
+    )?.textContent ?? "an invalid account";
+    presenceData.buttons = [
+      {
+          label: "View " + document.querySelector("div.col-12>h1")?.textContent,
+          url: window.location.href
+      }
+    ];
   } else if (document.location.pathname.startsWith("/settings"))
       presenceData.details = "Viewing profile settings";
   else if (document.location.pathname.startsWith("/server")) {
@@ -35,6 +43,10 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.startsWith("/cape")) {
     presenceData.details = "Viewing cape:";
     presenceData.state = document.querySelector("div.mb-1>h1").textContent;
+  } else if (document.location.pathname.startsWith("/cloak")) {
+    presenceData.details = "Viewing a LabyMod cloak";
+  } else if (document.location.pathname.startsWith("/skin")) {
+    presenceData.details = "Viewing a Minecraft skin";
   }
 
   if (presenceData.details) presence.setActivity(presenceData);
