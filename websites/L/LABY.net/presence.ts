@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingTimestamp
   };
   if (document.location.pathname.startsWith("/skins"))
-    presenceData.details = "Viewing skins";
+    presenceData.details = "Viewing Skins";
   else if (document.location.pathname.startsWith("/capes"))
     presenceData.details = "Viewing Minecraft capes";
   else if (document.location.pathname.startsWith("/cloaks"))
