@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
     presenceData.buttons = [
       {
         label: `View ${
-          document.querySelector("div.col-12>h1")?.textContent
+          document.querySelector("div.col-12>h1")?.textContent ?? "Unknown"
         }'s profile`,
         url: window.location.href
       }
