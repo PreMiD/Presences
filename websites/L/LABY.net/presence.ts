@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.startsWith("/settings"))
     presenceData.details = "Viewing profile settings";
   else if (document.location.pathname.startsWith("/@")) {
-    presenceData.details = "Viewing profile of:";
+    presenceData.details = "Viewing Profile of:";
     presenceData.state =
       document.querySelector("div.col-12>h1")?.textContent ??
       "an invalid account";
