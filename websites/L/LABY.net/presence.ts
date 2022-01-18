@@ -33,7 +33,7 @@ presence.on("UpdateData", () => {
       }
     ];
   } else if (document.location.pathname.startsWith("/skin")) {
-    presenceData.details = "Viewing a Minecraft skin";
+    presenceData.details = "Viewing a Minecraft Skin";
     presenceData.buttons = [
       {
         label: "View this Minecraft skin",
