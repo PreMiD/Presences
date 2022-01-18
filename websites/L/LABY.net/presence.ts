@@ -36,7 +36,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing a Minecraft Skin";
     presenceData.buttons = [
       {
-        label: "View this Minecraft skin",
+        label: "View this Minecraft Skin",
         url: window.location.href
       }
     ];
