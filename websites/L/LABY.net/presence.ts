@@ -14,7 +14,7 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.startsWith("/capes"))
     presenceData.details = "Viewing Minecraft Capes";
   else if (document.location.pathname.startsWith("/cloaks"))
-    presenceData.details = "Viewing LabyMod cloaks";
+    presenceData.details = "Viewing LabyMod Cloaks";
   else if (document.location.pathname.startsWith("/badges"))
     presenceData.details = "Viewing LABY.net badges";
   else if (document.location.pathname.startsWith("/settings"))
