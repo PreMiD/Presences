@@ -41,7 +41,7 @@ presence.on("UpdateData", () => {
       }
     ];
   } else if (document.location.pathname.startsWith("/cape")) {
-    presenceData.details = "Viewing cape:";
+    presenceData.details = "Viewing Cape:";
     presenceData.state = document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown";
     presenceData.buttons = [
       {
