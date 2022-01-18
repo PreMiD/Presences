@@ -26,10 +26,9 @@ presence.on("UpdateData", () => {
       "an invalid account";
     presenceData.buttons = [
       {
-        label:
-          "View " +
-          document.querySelector("div.col-12>h1")?.textContent +
-          "'s profile",
+        label: `View ${
+          document.querySelector("div.col-12>h1")?.textContent
+        }'s profile`,
         url: window.location.href
       }
     ];
@@ -46,10 +45,9 @@ presence.on("UpdateData", () => {
     presenceData.state = document.querySelector("div.mb-1>h1").textContent;
     presenceData.buttons = [
       {
-        label:
-          "View " +
-          document.querySelector("div.mb-1>h1")?.textContent +
-          " cape",
+        label: `View ${
+          document.querySelector("div.mb-1>h1")?.textContent
+        } cape`,
         url: window.location.href
       }
     ];
@@ -66,10 +64,9 @@ presence.on("UpdateData", () => {
     presenceData.state = document.querySelector("div.mb-1>h1").textContent;
     presenceData.buttons = [
       {
-        label:
-          "View " +
-          document.querySelector("div.mb-1>h1")?.textContent +
-          " badge",
+        label: `View ${
+          document.querySelector("div.mb-1>h1")?.textContent
+        } badge`,
         url: window.location.href
       }
     ];
@@ -80,9 +77,7 @@ presence.on("UpdateData", () => {
     ).textContent;
     presenceData.buttons = [
       {
-        label:
-          "View " +
-          document.querySelector("div.server-info-wrapper>h1")?.textContent,
+        label: `View document.querySelector("div.server-info-wrapper>h1")?.textContent`,
         url: window.location.href
       }
     ];
