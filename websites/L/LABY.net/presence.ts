@@ -46,7 +46,7 @@ presence.on("UpdateData", () => {
     presenceData.buttons = [
       {
         label: `View ${
-          document.querySelector("div.mb-1>h1")?.textContent
+          document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown"
         } cape`,
         url: window.location.href
       }
