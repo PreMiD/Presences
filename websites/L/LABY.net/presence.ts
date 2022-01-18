@@ -16,7 +16,7 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.startsWith("/cloaks"))
     presenceData.details = "Viewing LabyMod Cloaks";
   else if (document.location.pathname.startsWith("/badges"))
-    presenceData.details = "Viewing LABY.net badges";
+    presenceData.details = "Viewing LABY.net Badges";
   else if (document.location.pathname.startsWith("/settings"))
     presenceData.details = "Viewing profile settings";
   else if (document.location.pathname.startsWith("/@")) {
