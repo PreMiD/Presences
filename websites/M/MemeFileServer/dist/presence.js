@@ -11,7 +11,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Uploading a meme";
     else
         presenceData.details = "Viewing memefileserver.ml";
-    console.log(presenceData.details);
     if (presenceData.details)
         presence.setActivity(presenceData);
     else

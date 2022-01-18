@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
   };
   if (document.location.href.includes("upload")) presenceData.details = "Uploading a meme";
   else presenceData.details = "Viewing memefileserver.ml";
-  console.log(presenceData.details);
+  //console.log(presenceData.details);
   //presenceData.startTimestamp = showTime ? browsingTimestamp : null;
   //if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
   if (presenceData.details) presence.setActivity(presenceData);
