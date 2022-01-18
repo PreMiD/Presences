@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.startsWith("/badges"))
     presenceData.details = "Viewing LABY.net Badges";
   else if (document.location.pathname.startsWith("/settings"))
-    presenceData.details = "Viewing profile settings";
+    presenceData.details = "Viewing Profile Settings";
   else if (document.location.pathname.startsWith("/@")) {
     presenceData.details = "Viewing Profile of:";
     presenceData.state =
