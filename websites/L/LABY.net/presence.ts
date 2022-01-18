@@ -71,7 +71,7 @@ presence.on("UpdateData", () => {
       }
     ];
   } else if (document.location.pathname.startsWith("/server")) {
-    presenceData.details = "Viewing server:";
+    presenceData.details = "Viewing Server:";
     presenceData.state = document.querySelector(
       "div.server-info-wrapper>h1"
     ).textContent;
