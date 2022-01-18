@@ -52,7 +52,7 @@ presence.on("UpdateData", () => {
       }
     ];
   } else if (document.location.pathname.startsWith("/cloak")) {
-    presenceData.details = "Viewing a LabyMod cloak";
+    presenceData.details = "Viewing a LabyMod Cloak";
     presenceData.buttons = [
       {
         label: "View this Cloak",
