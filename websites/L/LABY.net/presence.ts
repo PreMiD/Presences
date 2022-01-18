@@ -61,7 +61,7 @@ presence.on("UpdateData", () => {
     ];
   } else if (document.location.pathname.startsWith("/badge")) {
     presenceData.details = "Viewing badge:";
-    presenceData.state = document.querySelector("div.mb-1>h1").textContent;
+    presenceData.state = document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown Badge";
     presenceData.buttons = [
       {
         label: `View ${
