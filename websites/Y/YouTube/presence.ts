@@ -366,7 +366,7 @@ presence.on("UpdateData", async () => {
     ) {
       //Sometimes causes problems
       let user: string;
-      //get user title when viewing a community post
+      //get channel name when viewing a community post
       if (
         document.querySelector("#author-text.ytd-backstage-post-renderer") &&
         document.title
@@ -380,6 +380,7 @@ presence.on("UpdateData", async () => {
         user = document.querySelector(
           "#author-text.ytd-backstage-post-renderer"
         ).textContent;
+        //get channel name when viewing a channel
       } else if (
         document.querySelector("#text.ytd-channel-name") &&
         document.title
@@ -389,6 +390,7 @@ presence.on("UpdateData", async () => {
           )
       )
         user = document.querySelector("#text.ytd-channel-name").textContent;
+      //get channel name from website's title
       else if (
         /\(([^)]+)\)/.test(
           document.title.substr(0, document.title.lastIndexOf(" - YouTube"))
@@ -455,7 +457,7 @@ presence.on("UpdateData", async () => {
             )
             ?.src.replace("=s76", "=s512") ??
           "yt_lg";
-        if (channelImg !== "") presenceData.largeImageKey = channelImg;
+        if (channelImg) presenceData.largeImageKey = channelImg;
       }
     } else if (document.location.pathname.includes("/post")) {
       presenceData.details = strings.viewCPost;
