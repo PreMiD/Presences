@@ -391,11 +391,44 @@ presence.on("UpdateData", async () => {
             "div.css-1dbjc4n.r-13awgt0.r-zd98yo.r-1v1z2uz.r-13qz1uu"
           )
         ) {
-          document.querySelector(
-            "div.css-1dbjc4n.r-1xfd6ze.r-13awgt0.r-1pi2tsx.r-1udh08x"
-          )
-            ? (presenceData.state = "Browsing clans")
-            : (presenceData.state = "Viewing their clan");
+          //check if viewing their clan or another one
+          if (
+            document.querySelector(
+              "div.css-1dbjc4n.r-1xfd6ze.r-13awgt0.r-1pi2tsx.r-1udh08x"
+            )
+          ) {
+            //viewing a clan
+            if (
+              document.querySelector(
+                "div.css-901oao.css-vcwn7f.r-qctebb.r-1i10wst.r-1kfrs79"
+              )
+            ) {
+              presenceData.state = `Viewing clan: ${
+                document.querySelector(
+                  "div.css-901oao.css-vcwn7f.r-qctebb.r-1i10wst.r-1kfrs79"
+                ).textContent
+              }`;
+              //searching for a clan
+            } else if (
+              document
+                .querySelector(
+                  "div.css-1dbjc4n.r-cdmcib.r-13awgt0.r-88pszg.r-1uu6nss > input"
+                )
+                .getAttribute("value")
+            ) {
+              presenceData.state = `Searching clans for: '${document
+                .querySelector(
+                  "div.css-1dbjc4n.r-cdmcib.r-13awgt0.r-88pszg.r-1uu6nss > input"
+                )
+                .getAttribute("value")}'`;
+            } else presenceData.state = "Browsing clans";
+          } else {
+            presenceData.state = `Viewing their clan: ${
+              document.querySelector(
+                "div.css-901oao.css-vcwn7f.r-qctebb.r-1i10wst.r-1kfrs79"
+              )?.textContent
+            }`;
+          }
         }
 
         //Wheel
