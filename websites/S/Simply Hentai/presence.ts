@@ -1,41 +1,41 @@
 const presence = new Presence({
-  clientId: "608043966285348944"
+	clientId: "608043966285348944"
 });
 let lastPlaybackState = null,
-  reading,
-  browsingTimestamp = Math.floor(Date.now() / 1000);
+	reading,
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== reading) {
-  lastPlaybackState = reading;
-  browsingTimestamp = Math.floor(Date.now() / 1000);
+	lastPlaybackState = reading;
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {};
+	const presenceData: PresenceData = {};
 
-  reading =
-    document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
+	reading =
+		document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
 
-  if (reading) {
-    const [a, b] = document.querySelectorAll<HTMLElement>(
-      ".margin-bottom-12 h1 a"
-    );
+	if (reading) {
+		const [a, b] = document.querySelectorAll<HTMLElement>(
+			".margin-bottom-12 h1 a"
+		);
 
-    presenceData.details = a.textContent;
-    presenceData.state = `${b.textContent} [Page: ${
-      document.querySelector<HTMLInputElement>(".page-jump.text-center").value
-    }]`;
-    presenceData.largeImageKey = "lg";
-    presenceData.startTimestamp = browsingTimestamp;
-  } else {
-    const presenceData: PresenceData = {
-      largeImageKey: "lg"
-    };
+		presenceData.details = a.textContent;
+		presenceData.state = `${b.textContent} [Page: ${
+			document.querySelector<HTMLInputElement>(".page-jump.text-center").value
+		}]`;
+		presenceData.largeImageKey = "lg";
+		presenceData.startTimestamp = browsingTimestamp;
+	} else {
+		const presenceData: PresenceData = {
+			largeImageKey: "lg"
+		};
 
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingTimestamp;
-  }
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingTimestamp;
+	}
 
-  if (presenceData.details) presence.setActivity(presenceData);
-  else presence.setActivity();
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

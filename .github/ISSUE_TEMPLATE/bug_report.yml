@@ -5,9 +5,7 @@ labels: [🐛 Bug]
 body:
   - type: markdown
     attributes:
-      value:
-        Before submitting a new issue, ensure your bug hasn't already been
-        reported. If it has, reply to the open issue instead.
+      value: Before submitting a new issue, ensure your bug hasn't already been reported. If it has, reply to the open issue instead.
   - type: textarea
     validations:
       required: true
@@ -19,8 +17,7 @@ body:
       required: true
     attributes:
       label: Steps to Reproduce
-      description:
-        Provide clear and unambiguous steps on how to reproduce the bug
+      description: Provide clear and unambiguous steps on how to reproduce the bug
       placeholder: |
         1. Go to this link
         2. Click on this
@@ -66,6 +63,4 @@ body:
       required: true
     attributes:
       label: Browser Version
-      description:
-        You can get the version by visiting about:support on Firefox or
-        chrome://help on most browsers
+      description: You can get the version by visiting about:support on Firefox or chrome://help on most browsers
