@@ -42,7 +42,8 @@ presence.on("UpdateData", () => {
     ];
   } else if (document.location.pathname.startsWith("/cape")) {
     presenceData.details = "Viewing Cape:";
-    presenceData.state = document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown";
+    presenceData.state =
+      document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown";
     presenceData.buttons = [
       {
         label: `View ${
@@ -61,7 +62,8 @@ presence.on("UpdateData", () => {
     ];
   } else if (document.location.pathname.startsWith("/badge")) {
     presenceData.details = "Viewing badge:";
-    presenceData.state = document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown Badge";
+    presenceData.state =
+      document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown Badge";
     presenceData.buttons = [
       {
         label: `View ${
@@ -78,7 +80,8 @@ presence.on("UpdateData", () => {
     presenceData.buttons = [
       {
         label: `View ${
-          document.querySelector("div.server-info-wrapper>h1")?.textContent ?? "Unknown Cape"
+          document.querySelector("div.server-info-wrapper>h1")?.textContent ??
+          "Unknown Cape"
         }`,
         url: window.location.href
       }
