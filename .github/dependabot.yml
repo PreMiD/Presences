@@ -5,16 +5,16 @@ updates:
     schedule:
       interval: "daily"
     commit-message:
-      prefix: chore
-      include: scope
+      prefix: "🔼"
+      prefix-development: "🔼"
     labels:
-      - "dependencies"
+      - "🔼 dependencies"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
     commit-message:
-      prefix: chore
-      include: scope
+      prefix: "🔼"
+      prefix-development: "🔼"
     labels:
-      - "dependencies"
+      - "🔼 dependencies"

@@ -2,6 +2,7 @@ const presence = new Presence({
     clientId: "813781191308083239"
   }),
   time = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
   const { title } = document,
     setting = {
@@ -174,8 +175,8 @@ presence.on("UpdateData", async () => {
 
   if (!presenceData.state) delete presenceData.state;
 
-  if (!presenceData.details) presence.setActivity();
-  else presence.setActivity(presenceData);
+	if (!presenceData.details) presence.setActivity();
+	else presence.setActivity(presenceData);
 });
 
 const shortenedURLs: Record<string, string> = {};
