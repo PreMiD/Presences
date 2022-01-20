@@ -22,7 +22,8 @@
 			"title": "Show Buttons",
 			"value": true,
 			"icon": "fas fa-compress-arrows-alt"
-		}, {
+		},
+		{
 			"id": "privacy",
 			"title": "Privacy Mode",
 			"icon": "fas fa-user-secret",
