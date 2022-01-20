@@ -1,7 +1,7 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "target": "es6",
-    "outDir": "./dist/"
-  }
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"target": "es6",
+		"outDir": "./dist/"
+	}
 }
