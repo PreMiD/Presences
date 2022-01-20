@@ -30,6 +30,12 @@
   ],
   "settings": [
     {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fas fa-user-secret",
+      "value": false
+    },
+    {
       "id": "buttons",
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
