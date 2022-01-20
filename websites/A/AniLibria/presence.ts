@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	// Regex for inserting a separator between the name of anime in Russian and Romaji
-	regex = /((?<=[А-я0-9.…])(?=[A-z0-9]))/gm;
+	regex = /((?<=[А-я0-9.…])(?=[A-Za-z0-9]))/gm;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
