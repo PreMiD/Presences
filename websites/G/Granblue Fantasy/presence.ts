@@ -1,14 +1,68 @@
 const presence = new Presence({
 		clientId: "632983924414349333"
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	script = document.createElement("script"),
+	eventId = "PreMiD_GranBlueFantasy";
+
+interface GameStatus {
+	boss: {
+		param: {
+			hp: string;
+			hpmax: string;
+			alive: 1 | 0;
+		}[];
+	};
+}
+
+let gameStatus: GameStatus;
+
+// Decreasing latency may greatly impact on gameplay/performance
+script.id = eventId;
+script.appendChild(
+	document.createTextNode(`
+  let isRunning = false;
+  setInterval(() => {
+    if (isRunning) return;
+    isRunning = true;
+    const getCircularReplacer = () => {
+      const seen = new WeakSet();
+      return (key, value) => {
+        if (typeof value === "object" && value !== null) {
+          if (seen.has(value)) return;
+          else seen.add(value);
+        }
+        return value;
+      };
+    };
+    const gGameStatus = JSON.stringify(window.stage?.gGameStatus, getCircularReplacer());
+    const pmdEvent = new CustomEvent("${eventId}", {
+      detail: {
+        gGameStatus
+      }
+    });
+    window.dispatchEvent(pmdEvent);
+    isRunning = false;
+  }, 4500);
+`)
+);
+document.head.appendChild(script);
+
+addEventListener(eventId, (data: CustomEvent) => {
+	if (!data.detail.gGameStatus) return (gameStatus = null);
+	else gameStatus = JSON.parse(data.detail.gGameStatus);
+});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ href } = document.location;
+		{ href } = document.location,
+		[health, djeeta] = await Promise.all([
+			presence.getSetting<number>("health"),
+			presence.getSetting<boolean>("djeeta")
+		]);
 	if (href.includes("/#mypage")) presenceData.details = "Home page";
 	else if (href.includes("/#quest")) {
 		presenceData.details = "Selecting a quest";
@@ -23,18 +77,32 @@ presence.on("UpdateData", async () => {
 	} else if (href.includes("/#result"))
 		presenceData.details = "In a Quest result screen";
 	else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
+		if (health === 0) {
+			presenceData.state = `At ${
+				document.getElementsByClassName(
+					"btn-enemy-gauge prt-enemy-percent alive"
+				)[0].textContent
+			}`;
+		} else if (health === 1) {
+			const boss = gameStatus.boss.param.find(x => x.alive),
+				hp = parseInt(boss.hp);
+			presenceData.state = `${hp.toLocaleString()} [${(
+				(hp * 100) /
+				parseInt(boss.hpmax)
+			).toFixed(2)}%]`;
+		}
 		presenceData.details =
 			document.getElementsByClassName("name")[0].textContent;
-		presenceData.state = `At ${
-			document.getElementsByClassName(
-				"btn-enemy-gauge prt-enemy-percent alive"
-			)[0].textContent
-		}`;
+		if (djeeta) {
+			const charaAlive =
+				document.querySelector<HTMLImageElement>(".img-chara-command");
+			if (!charaAlive.src.includes("3999999999"))
+				presenceData.largeImageKey = charaAlive.src;
+		}
 	} else if (href.includes("/#party/index/0/npc/0"))
 		presenceData.details = "Viewing party";
 	else if (href.includes("/#enhancement")) {
 		presenceData.details = "Upgrading : ";
-
 		if (href.includes("npc")) presenceData.state = "Characters";
 		else if (href.includes("weapon")) presenceData.state = "Weapons";
 		else if (href.includes("summon")) presenceData.state = "Summons";
