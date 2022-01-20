@@ -21,6 +21,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Смотрит список команды проекта";
 	else if (path === "/pages/donate.php")
 		presenceData.details = "Решил поддержать проект";
+	else if (path === "/pages/login.php")
+		presenceData.details = "Входит в личный кабинет";
+	else if (path === "/pages/cp.php") presenceData.details = "В личном кабинете";
+	else if (path === "/pages/favorites.php")
+		presenceData.details = "Смотрит свой список избранного";
 	else {
 		const name = document
 			.getElementsByClassName("release-title")[0]
