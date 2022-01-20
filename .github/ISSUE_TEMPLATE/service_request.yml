@@ -38,6 +38,4 @@ body:
       required: true
     attributes:
       label: Description
-      description:
-        Provide a detailed description on what you would like to see displayed
-        on this presence
+      description: Provide a detailed description on what you would like to see displayed on this presence
