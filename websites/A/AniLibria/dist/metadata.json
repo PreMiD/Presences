@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "qwertyadrian",
+    "id": "369484940913410048"
+  },
+  "service": "AniLibria",
+  "description": {
+    "en": "AniLibria is a noncommercial project for the dubbing and adaptation of foreign TV series, cartoons and anime, anime reviews, video blogs, reviews.",
+    "ru": "AniLibria - некоммерческий проект по озвучиванию и адаптации зарубежных сериалов, мультфильмов и аниме, аниме-обзорам, видеоблогам, рецензиям."
+  },
+  "url": "www.anilibria.tv",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/7L5RRT1.png",
+  "thumbnail": "https://i.imgur.com/fnioQ4L.png",
+  "color": "#c60f10",
+  "category": "anime",
+  "tags": [
+    "anilibria",
+    "anime"
+  ]
+}
