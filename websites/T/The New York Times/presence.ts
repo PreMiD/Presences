@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
     setting = {
       privacy: await presence.getSetting("privacy"),
       buttons: await presence.getSetting("buttons"),
-      podcastLogo: await presence.getSetting("podcastLogo")
+      podcastLogo: await presence.getSetting("podcastLogo"),
+      articleAuthor: await presence.getSetting("articleAuthor")
     },
     pathname = window.location.pathname,
     path = pathname.split("/"),
@@ -123,6 +124,8 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = author;
       }
     } else if (hasDatePath(path) && path[4]) {
+      const author = document.querySelector<HTMLImageElement>("img.css-1bfqq7u.ey68jwv2");
+
       presenceData.details = setting.privacy
         ? "Reading an Article"
         : "Reading an Article:";
@@ -147,6 +150,9 @@ presence.on("UpdateData", async () => {
       ) {
         presenceData.smallImageKey = "live";
         presenceData.smallImageText = "Live";
+      } else if (setting.articleAuthor && !setting.privacy && author) {
+        presenceData.smallImageKey = await getShortURL(author.src);
+        presenceData.smallImageText = `By ${author.title}`;
       }
     }
   } else if (window.location.hostname === "myaccount.nytimes.com") {

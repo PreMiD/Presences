@@ -46,6 +46,12 @@
       "title": "Show Podcast logo",
       "icon": "fas fa-podcast",
       "value": true
+    },
+    {
+      "id": "articleAuthor",
+      "title": "Show Article Author",
+      "icon": "fas fa-newspaper",
+      "value": true
     }
   ]
 }
