@@ -71,11 +71,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.replace(" - The New York Times", "");
     } else if (hasDatePath(path) && pathname.includes("/podcasts/")) {
       const audioPlayer = document.querySelector("audio"),
-        podcast = document.querySelector(
-          "div.css-1kltdsh.ehra6vc0 span.css-1f76qa2 span"
-        ),
+        podcast = document.querySelector("span.css-1f76qa2 span"),
         podcastLogo = document.querySelector<HTMLImageElement>(
-          "div.css-1kltdsh.ehra6vc0 span.css-1f76qa2 img"
+          "span.css-1f76qa2 img"
         );
 
       presenceData.details = setting.privacy
