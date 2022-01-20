@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
       podcastLogo: await presence.getSetting("podcastLogo"),
       articleAuthor: await presence.getSetting("articleAuthor")
     },
-    pathname = window.location.pathname,
+    { pathname } = window.location,
     path = pathname.split("/"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
@@ -54,10 +54,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = title.replace(" - The New York Times", "");
     } else if (pathname.includes("/search")) {
       presenceData.details = setting.privacy ? "Searching" : "Searching for:";
-      if (!setting.privacy)
+      if (!setting.privacy) {
         presenceData.state = new URLSearchParams(window.location.search).get(
           "query"
         );
+      }
 
       if (setting.buttons && !setting.privacy) {
         presenceData.buttons = [
@@ -80,11 +81,12 @@ presence.on("UpdateData", async () => {
       presenceData.details = setting.privacy
         ? "Listening to a Podcast"
         : "Listening to a Podcast:";
-      if (podcast && !setting.privacy)
+      if (podcast && !setting.privacy) {
         presenceData.state = `${podcast.textContent}: ${title.replace(
           " - The New York Times",
           ""
         )}`;
+      }
 
       if (audioPlayer && !isNaN(audioPlayer.duration)) {
         const timestamps = presence.getTimestampsfromMedia(audioPlayer);
@@ -124,15 +126,18 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = author;
       }
     } else if (hasDatePath(path) && path[4]) {
-      const author = document.querySelector<HTMLImageElement>("img.css-1bfqq7u.ey68jwv2");
+      const author = document.querySelector<HTMLImageElement>(
+        "img.css-1bfqq7u.ey68jwv2"
+      );
 
       presenceData.details = setting.privacy
         ? "Reading an Article"
         : "Reading an Article:";
-      if (!setting.privacy)
+      if (!setting.privacy) {
         presenceData.state =
           document.querySelector('h1[data-testid="headline"]')?.textContent ??
           title.replace(" - The New York Times", "");
+      }
 
       if (setting.buttons && !setting.privacy) {
         presenceData.buttons = [
@@ -194,17 +199,18 @@ async function getShortURL(url: string) {
   }
 }
 
-function hasDatePath(path: Array<string>) {
-  if (path[1] === "live")
+function hasDatePath(path: string[]) {
+  if (path[1] === "live") {
     return (
       /[0-9]{4}$/g.test(path[2]) &&
       /[0-9]{2}|[0-9]{1}$/g.test(path[3]) &&
       /[0-9]{2}|[0-9]{1}$/g.test(path[4])
     );
-  else
+  } else {
     return (
       /[0-9]{4}$/g.test(path[1]) &&
       /[0-9]{2}|[0-9]{1}$/g.test(path[2]) &&
       /[0-9]{2}|[0-9]{1}$/g.test(path[3])
     );
+  }
 }
