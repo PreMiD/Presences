@@ -490,7 +490,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (
-		!presence.getSetting("buttons") ||
+		!await presence.getSetting("buttons") ||
 		presenceData.details === "Editing App:"
 	)
 		delete presenceData.buttons;
@@ -502,6 +502,11 @@ presence.on("UpdateData", async () => {
 			}
 		];
 	}
+
+  if (pathname.includes("/manage/") && await presence.getSetting("privacy") && botHost === "thetrackernetwork.com") {
+    presenceData.details = "Viewing Page:";
+		presenceData.state = "Homepage";
+  }
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
