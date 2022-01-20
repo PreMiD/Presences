@@ -77,8 +77,6 @@ presence.on("UpdateData", async () => {
 	} else if (href.includes("/#result"))
 		presenceData.details = "In a Quest result screen";
 	else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
-		presenceData.details =
-			document.getElementsByClassName("name")[0].textContent;
 		if (health === 0) {
 			presenceData.state = `At ${
 				document.getElementsByClassName(
