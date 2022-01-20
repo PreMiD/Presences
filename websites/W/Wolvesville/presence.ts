@@ -227,11 +227,14 @@ function languageCode(language: string): string {
 }
 
 presence.on("UpdateData", async () => {
-	const privacyMode = await presence.getSetting<boolean>("privacy"),
-		privacyChat = await presence.getSetting<boolean>("privacyChat"),
-		gameLang = await presence.getSetting<boolean>("gameLang"),
-		showTimestamp = await presence.getSetting<boolean>("showTimestamp"),
-		logo = await presence.getSetting<number>("logo"),
+	const [privacyMode, privacyChat, gameLang, showTimestamp, logo] =
+			await Promise.all([
+				presence.getSetting<boolean>("privacy"),
+				presence.getSetting<boolean>("privacyChat"),
+				presence.getSetting<boolean>("gameLang"),
+				presence.getSetting<boolean>("showTimestamp"),
+				presence.getSetting<number>("logo")
+			]),
 		// eslint-disable-next-line no-one-time-vars/no-one-time-vars
 		logoArr = ["wov", "wov_no_bg", "wov_text"],
 		presenceData: PresenceData = {
