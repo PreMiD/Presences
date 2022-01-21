@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 		document.querySelectorAll<HTMLVideoElement>(".video-stream")
 	).find(video => video.duration);
 
-	if (!isNaN(video?.duration)) {
+	if (video) {
 		let oldYouTube: boolean = null,
 			YouTubeTV: boolean = null,
 			YouTubeEmbed: boolean = null,
