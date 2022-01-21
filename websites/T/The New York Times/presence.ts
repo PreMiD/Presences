@@ -162,7 +162,9 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Live";
 			} else if (setting.articleAuthor && !setting.privacy && author) {
 				presenceData.smallImageKey = await getShortURL(author.src);
-				presenceData.smallImageText = `By ${author.title}`;
+				presenceData.smallImageText =
+					document.querySelector("p.css-aknsld.e1jsehar1")?.textContent ??
+					`By ${author.title}`;
 			}
 		}
 	} else if (window.location.hostname === "myaccount.nytimes.com") {
