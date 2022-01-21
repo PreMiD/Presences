@@ -275,7 +275,7 @@ const spinnerSettings = {
 					data.description[language] = response;
 					delete data.path;
 
-					writeFileSync(path, JSON.stringify(data, null, 2));
+					writeFileSync(path, JSON.stringify(data, null, "\t"));
 					filesMap.delete(file[0]);
 					await checkCount();
 

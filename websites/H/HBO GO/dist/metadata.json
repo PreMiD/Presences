@@ -28,5 +28,8 @@
 	"thumbnail": "https://i.imgur.com/vvAp3GI.png",
 	"color": "#011921",
 	"category": "videos",
-	"tags": ["video", "media"]
+	"tags": [
+		"video",
+		"media"
+	]
 }
