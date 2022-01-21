@@ -40,7 +40,7 @@ const readFile = (path: string): string =>
 	 * @param jsonPath The path to write the JSON file to
 	 */
 	writeJson = <T>(data: T, jsonPath: string): void =>
-		writeFileSync(jsonPath, JSON.stringify(data, null, 2), {
+		writeFileSync(jsonPath, JSON.stringify(data, null, "\t"), {
 			encoding: "utf8"
 		}),
 	increaseSemver = async (filesToBump: string[]): Promise<void> => {
