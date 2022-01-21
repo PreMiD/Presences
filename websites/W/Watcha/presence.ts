@@ -22,7 +22,7 @@ interface Pages {
 	[key: string]: {
 		setPresenceData?: () => void;
 		presenceData?: PresenceData;
-		enabled?: boolean;
+		disabled?: boolean;
 		presenceSettings?: {
 			[key in keyof PresenceData]: {
 				condition: {
@@ -216,7 +216,7 @@ app.on("UpdateData", async () => {
 				}
 			},
 			"/search": {
-				enabled: search,
+				disabled: !search,
 				presenceData: {
 					details: "검색 중:",
 					state: decodeURI(new URLSearchParams(location.search).get("q"))
@@ -313,7 +313,7 @@ app.on("UpdateData", async () => {
 		};
 
 	for (const [path, data] of Object.entries(pages)) {
-		if (document.location.pathname.match(path) && data.enabled) {
+		if (document.location.pathname.match(path) && !data.disabled) {
 			if (data.presenceData) app.setData({ data: data.presenceData, assets });
 			else if (data.setPresenceData) data.setPresenceData();
 

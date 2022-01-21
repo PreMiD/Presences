@@ -369,7 +369,22 @@ presence.on("UpdateData", async () => {
 		) {
 			//Sometimes causes problems
 			let user: string;
+			//get channel name when viewing a community post
 			if (
+				document.querySelector("#author-text.ytd-backstage-post-renderer") &&
+				document.title
+					.substr(0, document.title.lastIndexOf(" - YouTube"))
+					.includes(
+						document
+							.querySelector("#author-text.ytd-backstage-post-renderer")
+							.textContent.trim()
+					)
+			) {
+				user = document.querySelector(
+					"#author-text.ytd-backstage-post-renderer"
+				).textContent;
+				//get channel name when viewing a channel
+			} else if (
 				document.querySelector("#text.ytd-channel-name") &&
 				document.title
 					.substr(0, document.title.lastIndexOf(" - YouTube"))
@@ -378,6 +393,7 @@ presence.on("UpdateData", async () => {
 					)
 			)
 				user = document.querySelector("#text.ytd-channel-name").textContent;
+			//get channel name from website's title
 			else if (
 				/\(([^)]+)\)/.test(
 					document.title.substr(0, document.title.lastIndexOf(" - YouTube"))
@@ -427,11 +443,24 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingStamp;
 			}
 			if (channelPic) {
-				presenceData.largeImageKey = document
-					.querySelector<HTMLImageElement>(
-						"#avatar.ytd-c4-tabbed-header-renderer > img"
-					)
-					.src.replace("=s176", "=s512");
+				const channelImg =
+					document //self channel
+						.querySelector<HTMLImageElement>(
+							"yt-img-shadow.ytd-channel-avatar-editor > img"
+						)
+						?.src.replace("=s176", "=s512") ??
+					document
+						.querySelector<HTMLImageElement>(
+							"#avatar.ytd-c4-tabbed-header-renderer > img"
+						)
+						?.src.replace("=s176", "=s512") ??
+					document //when viewing a community post
+						.querySelector<HTMLImageElement>(
+							"#author-thumbnail > a > yt-img-shadow > img"
+						)
+						?.src.replace("=s76", "=s512") ??
+					"yt_lg";
+				if (channelImg) presenceData.largeImageKey = channelImg;
 			}
 		} else if (document.location.pathname.includes("/post")) {
 			presenceData.details = strings.viewCPost;
