@@ -93,8 +93,11 @@ presence.on("UpdateData", async () => {
 	}
 
 	//* If there is a vid playing
-	const video: HTMLVideoElement = document.querySelector(".video-stream");
-	if (!isNaN(video?.duration)) {
+	const video = Array.from(
+		document.querySelectorAll<HTMLVideoElement>(".video-stream")
+	).find(video => video.duration);
+
+	if (video) {
 		let oldYouTube: boolean = null,
 			YouTubeTV: boolean = null,
 			YouTubeEmbed: boolean = null,
