@@ -9,7 +9,8 @@ presence.on("UpdateData", async () => {
 			privacy: await presence.getSetting("privacy"),
 			buttons: await presence.getSetting("buttons"),
 			podcastLogo: await presence.getSetting("podcastLogo"),
-			articleAuthor: await presence.getSetting("articleAuthor")
+			articleAuthor: await presence.getSetting("articleAuthor"),
+			moreDetails: await presence.getSetting("moreDetails")
 		},
 		{ pathname } = window.location,
 		path = pathname.split("/"),
@@ -132,16 +133,25 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (hasDatePath(pathname) && path[4]) {
 			const author = document.querySelector<HTMLImageElement>(
-				"img.css-1bfqq7u.ey68jwv2"
-			);
+					"img.css-1bfqq7u.ey68jwv2"
+				),
+				authors = document.querySelector("p.css-aknsld.e1jsehar1"),
+				headline =
+					document.querySelector('h1[data-testid="headline"]')?.textContent ??
+					title.replace(" - The New York Times", "");
 
 			presenceData.details = setting.privacy
 				? "Reading an Article"
+				: setting.moreDetails
+				? headline
 				: "Reading an Article:";
+
 			if (!setting.privacy) {
-				presenceData.state =
-					document.querySelector('h1[data-testid="headline"]')?.textContent ??
-					title.replace(" - The New York Times", "");
+				presenceData.state = setting.moreDetails
+					? `${authors?.textContent ?? `By ${author?.title ?? "Unknown"}`}, ${
+							document.querySelector("time span")?.textContent
+					  }`
+					: headline;
 			}
 
 			if (setting.buttons && !setting.privacy) {
@@ -163,8 +173,7 @@ presence.on("UpdateData", async () => {
 			} else if (setting.articleAuthor && !setting.privacy && author) {
 				presenceData.smallImageKey = await getShortURL(author.src);
 				presenceData.smallImageText =
-					document.querySelector("p.css-aknsld.e1jsehar1")?.textContent ??
-					`By ${author.title}`;
+					authors?.textContent ?? `By ${author.title}`;
 			}
 		}
 	} else if (window.location.hostname === "myaccount.nytimes.com") {

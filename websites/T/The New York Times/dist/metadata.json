@@ -50,8 +50,14 @@
 		{
 			"id": "articleAuthor",
 			"title": "Show Article Author",
-			"icon": "fas fa-newspaper",
+			"icon": "fas fa-address-card",
 			"value": true
+		},
+		{
+			"id": "moreDetails",
+			"title": "Show more Details",
+			"icon": "fas fa-newspaper",
+			"value": false
 		}
 	]
 }
