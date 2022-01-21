@@ -10,30 +10,29 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		path = document.location.pathname;
+		{ pathname } = document.location;
 
-	if (path === "/") presenceData.details = "Смотрит главную страницу";
-	else if (path === "/pages/catalog.php")
+	if (pathname === "/") presenceData.details = "Смотрит главную страницу";
+	else if (pathname === "/pages/catalog.php")
 		presenceData.details = "Выбирает аниме";
-	else if (path === "/pages/schedule.php")
+	else if (pathname === "/pages/schedule.php")
 		presenceData.details = "Смотрит расписание выхода серий";
-	else if (path === "/pages/team.php")
+	else if (pathname === "/pages/team.php")
 		presenceData.details = "Смотрит список команды проекта";
-	else if (path === "/pages/donate.php")
+	else if (pathname === "/pages/donate.php")
 		presenceData.details = "Решил поддержать проект";
-	else if (path === "/pages/login.php")
+	else if (pathname === "/pages/login.php")
 		presenceData.details = "Входит в личный кабинет";
-	else if (path === "/pages/cp.php") presenceData.details = "В личном кабинете";
-	else if (path === "/pages/favorites.php")
+	else if (pathname === "/pages/cp.php")
+		presenceData.details = "В личном кабинете";
+	else if (pathname === "/pages/favorites.php")
 		presenceData.details = "Смотрит свой список избранного";
 	else {
-		const name = document
+		presenceData.details = "Смотрит:";
+		presenceData.state = document
 			.getElementsByClassName("release-title")[0]
 			.textContent.trim()
 			.replace(regex, " / ");
-
-		presenceData.details = "Смотрит:";
-		presenceData.state = name;
 
 		presenceData.buttons = [
 			{
