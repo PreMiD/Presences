@@ -23,13 +23,10 @@
 		"hbogo.sk",
 		"www.hbogoasia.my"
 	],
-	"version": "2.2.17",
+	"version": "2.2.16",
 	"logo": "https://i.imgur.com/TTHQtBH.png",
 	"thumbnail": "https://i.imgur.com/vvAp3GI.png",
 	"color": "#011921",
 	"category": "videos",
-	"tags": [
-		"video",
-		"media"
-	]
+	"tags": ["video", "media"]
 }
