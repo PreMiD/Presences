@@ -29,9 +29,8 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (
-			path[1] === "international" ||
-			path[1] === "ca" ||
-			(path[1] === "es" && !path[2]) ||
+			((path[1] === "international" || path[1] === "ca" || path[1] === "es") &&
+				!path[2]) ||
 			!path[1]
 		)
 			presenceData.details = "Viewing Home Page";
