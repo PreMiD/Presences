@@ -28,7 +28,12 @@ presence.on("UpdateData", async () => {
 			];
 		}
 
-		if (window.location.href === "https://www.nytimes.com/")
+		if (
+			path[1] === "international" ||
+			path[1] === "ca" ||
+			(path[1] === "es" && !path[2]) ||
+			!path[1]
+		)
 			presenceData.details = "Viewing Home Page";
 		else if (pathname.includes("/interactive/")) {
 			presenceData.details = "Viewing an Interactive:";
@@ -72,7 +77,7 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("/video/")) {
 			presenceData.details = "Viewing a Video Section:";
 			presenceData.state = title.replace(" - The New York Times", "");
-		} else if (hasDatePath(path) && pathname.includes("/podcasts/")) {
+		} else if (hasDatePath(pathname) && pathname.includes("/podcasts/")) {
 			const audioPlayer = document.querySelector("audio"),
 				podcast = document.querySelector("span.css-1f76qa2 span"),
 				podcastLogo = document.querySelector<HTMLImageElement>(
@@ -126,7 +131,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.smallImageText = author;
 			}
-		} else if (hasDatePath(path) && path[4]) {
+		} else if (hasDatePath(pathname) && path[4]) {
 			const author = document.querySelector<HTMLImageElement>(
 				"img.css-1bfqq7u.ey68jwv2"
 			);
@@ -200,18 +205,6 @@ async function getShortURL(url: string) {
 	}
 }
 
-function hasDatePath(path: string[]) {
-	if (path[1] === "live") {
-		return (
-			/[0-9]{4}$/g.test(path[2]) &&
-			/[0-9]{2}|[0-9]{1}$/g.test(path[3]) &&
-			/[0-9]{2}|[0-9]{1}$/g.test(path[4])
-		);
-	} else {
-		return (
-			/[0-9]{4}$/g.test(path[1]) &&
-			/[0-9]{2}|[0-9]{1}$/g.test(path[2]) &&
-			/[0-9]{2}|[0-9]{1}$/g.test(path[3])
-		);
-	}
+function hasDatePath(pathname: string) {
+	return /[0-9]{4}\/[0-9]{2}\/[0-9]{2}/g.test(pathname);
 }
