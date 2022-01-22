@@ -138,20 +138,24 @@ presence.on("UpdateData", async () => {
 				authors = document.querySelector("p.css-aknsld.e1jsehar1"),
 				headline =
 					document.querySelector('h1[data-testid="headline"]')?.textContent ??
-					title.replace(" - The New York Times", "");
+					title.replace(" - The New York Times", ""),
+				isLive = document.querySelector(
+					'span span.css-bwjyn0.live-blog-header-live-label[data-active="true"]'
+				);
 
 			presenceData.details = setting.privacy
 				? "Reading an Article"
-				: setting.moreDetails
+				: setting.moreDetails && !isLive
 				? headline
 				: "Reading an Article:";
 
 			if (!setting.privacy) {
-				presenceData.state = setting.moreDetails
-					? `${authors?.textContent ?? `By ${author?.title ?? "Unknown"}`}, ${
-							document.querySelector("time span")?.textContent
-					  }`
-					: headline;
+				presenceData.state =
+					setting.moreDetails && !isLive
+						? `${authors?.textContent ?? `By ${author?.title ?? "Unknown"}`}, ${
+								document.querySelector("time span")?.textContent
+						  }`
+						: headline;
 			}
 
 			if (setting.buttons && !setting.privacy) {
@@ -163,11 +167,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 
-			if (
-				document.querySelector(
-					'span span.css-bwjyn0.live-blog-header-live-label[data-active="true"]'
-				)
-			) {
+			if (isLive) {
 				presenceData.smallImageKey = "live";
 				presenceData.smallImageText = "Live";
 			} else if (setting.articleAuthor && !setting.privacy && author) {
