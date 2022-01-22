@@ -17,7 +17,7 @@ const exec = promisify(processExec);
 export const read = (path: string): string =>
 		readFile(path, { encoding: "utf8" }),
 	write = (path: string, code: Metadata): void =>
-		writeFile(path, JSON.stringify(code, null, 2), {
+		writeFile(path, JSON.stringify(code, null, "\t"), {
 			encoding: "utf8",
 			flag: "w"
 		});
