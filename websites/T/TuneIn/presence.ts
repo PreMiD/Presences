@@ -20,9 +20,7 @@ presence.on("UpdateData", async () => {
       ? true
       : false;
   if (playerCheck) {
-    const liveCheck = document.querySelector("#scrubberElapsed"),
-      artwork = document.getElementById("playerArtwork").getAttribute("src");
-    presenceData.largeImageKey = artwork ?? "logo";
+    const liveCheck = document.querySelector("#scrubberElapsed");
     if (!liveCheck) return presence.setActivity();
     if (liveCheck.textContent === "LIVE") {
       const pauseCheck = document
