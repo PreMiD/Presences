@@ -24,6 +24,6 @@
   "logo": "https://i.imgur.com/mcwhb4p.png",
   "thumbnail": "https://i.imgur.com/lewvpKU.png",
   "color": "#33B6A8",
-  "tags": ["tunein", "music", "radio", "media"],
-  "category": "music"
+  "category": "music",
+  "tags": ["tunein", "music", "radio", "media"]
 }
