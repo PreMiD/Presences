@@ -4,6 +4,12 @@
 		"name": "CRUGG",
 		"id": "228965621478588416"
 	},
+	"contributors": [
+		{
+			"name": "N0chteil ^^",
+			"id": "495901098926669825"
+		}
+	],
 	"service": "Instagram",
 	"description": {
 		"en": "A simple, fun & creative way to capture, edit & share photos, videos & messages with friends & family.",
@@ -27,5 +33,25 @@
 		"photos",
 		"images",
 		"media"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "elapsedTime",
+			"title": "Show elapsed Time",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "postImage",
+			"title": "Show Post Image",
+			"icon": "fas fa-image",
+			"value": true
+		}
 	]
 }
