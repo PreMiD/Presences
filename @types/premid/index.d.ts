@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * @link https://docs.premid.app/dev/presence/class#presencedata-interface
  */
@@ -402,7 +403,7 @@ declare class Presence {
 	 * Sends data back to application
 	 * @param data Data to send back to application
 	 */
-	private sendData(data: Object): void;
+	private sendData(data: Record<string, unknown>): void;
 	/**
 	 * Generates a AES key from the app identifier
 	 */
