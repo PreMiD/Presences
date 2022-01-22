@@ -130,17 +130,18 @@ presence.on("UpdateData", async () => {
 					title,
 				isLive = document.querySelector(
 					'span span.css-bwjyn0.live-blog-header-live-label[data-active="true"]'
-				);
+				),
+				wasLive = document.querySelector("span.css-233int.e16638kd4");
 
 			presenceData.details = setting.privacy
 				? "Reading an Article"
-				: setting.moreDetails && !isLive
+				: setting.moreDetails && !isLive && !wasLive
 				? headline
 				: "Reading an Article:";
 
 			if (!setting.privacy) {
 				presenceData.state =
-					setting.moreDetails && !isLive
+					setting.moreDetails && !isLive && !wasLive
 						? `${authors?.textContent ?? `By ${author?.title ?? "Unknown"}`}, ${
 								document.querySelector("time span")?.textContent
 						  }`
