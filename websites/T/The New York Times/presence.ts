@@ -4,7 +4,7 @@ const presence = new Presence({
 	time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const { title } = document,
+	const title = document.title.replace(" - The New York Times", ""),
 		setting = {
 			privacy: await presence.getSetting("privacy"),
 			buttons: await presence.getSetting("buttons"),
@@ -37,27 +37,22 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Home Page";
 		else if (pathname.includes("/interactive/")) {
 			presenceData.details = "Viewing an Interactive:";
-			if (!setting.privacy)
-				presenceData.state = title.replace(" - The New York Times", "");
+			if (!setting.privacy) presenceData.state = title;
 		} else if (
 			pathname.includes("/section/") ||
 			pathname.includes("/spotlight/podcasts")
 		) {
 			presenceData.details = "Viewing a Section Page:";
-			if (!setting.privacy)
-				presenceData.state = title.replace(" - The New York Times", "");
+			if (!setting.privacy) presenceData.state = title;
 		} else if (pathname.includes("/destination/")) {
 			presenceData.details = "Viewing a Destination Page:";
-			if (!setting.privacy)
-				presenceData.state = title.replace(" - The New York Times", "");
+			if (!setting.privacy) presenceData.state = title;
 		} else if (pathname.includes("/reviews/")) {
 			presenceData.details = "Viewing a Review Page:";
-			if (!setting.privacy)
-				presenceData.state = title.replace(" - The New York Times", "");
+			if (!setting.privacy) presenceData.state = title;
 		} else if (pathname.includes("/column/")) {
 			presenceData.details = "Viewing a Column Page:";
-			if (!setting.privacy)
-				presenceData.state = title.replace(" - The New York Times", "");
+			if (!setting.privacy) presenceData.state = title;
 		} else if (pathname.includes("/search")) {
 			presenceData.details = setting.privacy ? "Searching" : "Searching for:";
 			if (!setting.privacy) {
@@ -76,7 +71,7 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (pathname.includes("/video/")) {
 			presenceData.details = "Viewing a Video Section:";
-			presenceData.state = title.replace(" - The New York Times", "");
+			presenceData.state = title;
 		} else if (hasDatePath(pathname) && pathname.includes("/podcasts/")) {
 			const audioPlayer = document.querySelector("audio"),
 				podcast = document.querySelector("span.css-1f76qa2 span"),
@@ -138,7 +133,7 @@ presence.on("UpdateData", async () => {
 				authors = document.querySelector("p.css-aknsld.e1jsehar1"),
 				headline =
 					document.querySelector('h1[data-testid="headline"]')?.textContent ??
-					title.replace(" - The New York Times", ""),
+					title,
 				isLive = document.querySelector(
 					'span span.css-bwjyn0.live-blog-header-live-label[data-active="true"]'
 				);
