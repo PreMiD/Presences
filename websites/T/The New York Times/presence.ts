@@ -5,13 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const title = document.title.replace(" - The New York Times", ""),
-		setting = {
-			privacy: await presence.getSetting("privacy"),
-			buttons: await presence.getSetting("buttons"),
-			podcastLogo: await presence.getSetting("podcastLogo"),
-			articleAuthor: await presence.getSetting("articleAuthor"),
-			moreDetails: await presence.getSetting("moreDetails")
-		},
+		setting = await getSettings(),
 		{ pathname } = window.location,
 		path = pathname.split("/"),
 		presenceData: PresenceData = {
@@ -212,4 +206,30 @@ async function getShortURL(url: string) {
 
 function hasDatePath(pathname: string) {
 	return /[0-9]{4}\/[0-9]{2}\/[0-9]{2}/g.test(pathname);
+}
+
+async function getSettings() {
+	const settings = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("podcastLogo"),
+			presence.getSetting<boolean>("articleAuthor"),
+			presence.getSetting<boolean>("moreDetails")
+		]),
+		names = [
+			"privacy",
+			"buttons",
+			"podcastLogo",
+			"articleAuthor",
+			"moreDetails"
+		],
+		obj: {
+			[key: string]: boolean;
+		} = {};
+
+	names.forEach((name, i) => {
+		obj[name] = settings[i];
+	});
+
+	return obj;
 }
