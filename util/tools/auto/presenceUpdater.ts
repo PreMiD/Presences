@@ -4,11 +4,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, normalize, resolve as rslv, sep } from "node:path";
 import { transformFileAsync as transform } from "@babel/core";
 import { sync as glob } from "glob";
-import {
-	DeleteWriteOpResultObject,
-	MongoClient,
-	UpdateWriteOpResult
-} from "mongodb";
+import { DeleteResult, MongoClient, UpdateResult } from "mongodb";
 import { valid } from "semver";
 import { minify as terser } from "terser";
 import {
@@ -33,10 +29,7 @@ function isValidJSON(text: string): boolean {
 	}
 }
 
-let client = new MongoClient(url, {
-	appname: "PreMiD-PresenceUpdater",
-	useUnifiedTopology: true
-});
+let client = new MongoClient(url, { appName: "PreMiD-PresenceUpdater" });
 
 const readFile = (path: string): string =>
 		readFileSync(path, { encoding: "utf8" }),
@@ -140,8 +133,8 @@ const readFile = (path: string): string =>
 			process.exit(1);
 		}
 
-		let database = client.db(dbname).collection("presences");
-		const dbPresences: Array<DBdata> = await database
+		let database = client.db(dbname).collection<DBdata>("presences");
+		const dbPresences = await database
 				.find({}, { projection: { _id: 0, name: 1, "metadata.version": 1 } })
 				.toArray(),
 			presences: Array<[Metadata, string]> = glob("./{websites,programs}/*/*/")
@@ -189,8 +182,8 @@ const readFile = (path: string): string =>
 		if (extendedRun) console.log("This will take some time...");
 
 		let nP,
-			dP: Promise<DeleteWriteOpResultObject>[] = [],
-			oP: Promise<UpdateWriteOpResult>[] = [];
+			dP: Promise<DeleteResult>[] = [],
+			oP: Promise<UpdateResult>[] = [];
 
 		const compiledPresences = await Promise.all(
 			dbDiff.map(async file => {
@@ -279,11 +272,8 @@ const readFile = (path: string): string =>
 		console.log("\nUPDATING...\n");
 
 		try {
-			if (extendedRun || !client.isConnected) {
-				client = new MongoClient(url, {
-					appname: "PreMiD-PresenceUpdater",
-					useUnifiedTopology: true
-				});
+			if (extendedRun) {
+				client = new MongoClient(url, { appName: "PreMiD-PresenceUpdater" });
 				await client.connect();
 				database = client.db(dbname).collection("presences");
 			}
