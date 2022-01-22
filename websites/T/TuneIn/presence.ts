@@ -16,9 +16,7 @@ presence.on("UpdateData", async () => {
     },
     playerCheck = document
       .querySelector("#innerAppContent")
-      .querySelectorAll('[data-testid="player"]')
-      ? true
-      : false;
+      .querySelectorAll('[data-testid="player"]');
   if (playerCheck) {
     const liveCheck = document.querySelector("#scrubberElapsed"),
       artwork = document.getElementById("playerArtwork").getAttribute("src");
@@ -27,9 +25,7 @@ presence.on("UpdateData", async () => {
     if (liveCheck.textContent === "LIVE") {
       const pauseCheck = document
         .querySelector("#innerAppContent")
-        .querySelectorAll('[data-testid="player-status-stopped"]')[0]
-        ? true
-        : false;
+        .querySelectorAll('[data-testid="player-status-stopped"]');
       title = document.querySelector("#playerTitle").textContent;
       author = document.querySelector("#playerSubtitle").textContent;
 
@@ -40,11 +36,13 @@ presence.on("UpdateData", async () => {
       presenceData.state = author;
       if (author.length > 128)
         presenceData.state = `${author.substring(0, 125)}...`;
-
-      presenceData.smallImageKey = pauseCheck ? "pause" : "live";
-      presenceData.smallImageText = pauseCheck
-        ? (await strings).pause
-        : (await strings).live;
+      if (pauseCheck[0]) {
+        presenceData.smallImageKey = "pause";
+        presenceData.smallImageText = (await strings).pause;
+      } else {
+        presenceData.smallImageKey = "live";
+        presenceData.smallImageText = (await strings).live;
+      }
     } else {
       title = document.querySelector("#playerTitle").textContent;
       author = document.querySelector("#playerSubtitle").textContent;
@@ -55,9 +53,7 @@ presence.on("UpdateData", async () => {
         timestamps = presence.getTimestamps(timestamp1, timestamp2),
         paused = document
           .querySelector("#innerAppContent")
-          .querySelectorAll('[data-testid="player-status-paused"]')[0]
-          ? true
-          : false;
+          .querySelectorAll('[data-testid="player-status-paused"]');
 
       presenceData.details = title;
       if (title.length > 128)
@@ -67,10 +63,13 @@ presence.on("UpdateData", async () => {
       if (author.length > 128)
         presenceData.state = `${author.substring(0, 125)}...`;
 
-      presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
+      if (paused[0]) {
+        presenceData.smallImageKey = "pause";
+        presenceData.smallImageText = (await strings).pause;
+      } else {
+        presenceData.smallImageKey = "play";
+        presenceData.smallImageText = (await strings).play;
+      }
       presenceData.endTimestamp = timestamps.pop();
 
       if (paused) {
