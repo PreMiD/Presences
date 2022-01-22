@@ -64,6 +64,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = `${author.substring(0, 125)}...`;
 
       if (paused[0]) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
         presenceData.smallImageKey = "pause";
         presenceData.smallImageText = (await strings).pause;
       } else {
@@ -71,11 +73,6 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).play;
       }
       presenceData.endTimestamp = timestamps.pop();
-
-      if (paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
     }
     if (!presenceData.details) presence.setActivity();
     else presence.setActivity(presenceData);
