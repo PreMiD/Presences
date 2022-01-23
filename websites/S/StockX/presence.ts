@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Buying a Product/Placing a Bid:";
 			else presenceData.details = "Selling an Item:";
 			presenceData.state = document.querySelector<HTMLHeadingElement>(
-				"#main-content > div > div > div > div > div> h1"
+				"#main-content > div > div > div > div > div > h1"
 			).textContent;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>(
