@@ -76,12 +76,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = setting.privacy
 				? "Listening to a Podcast"
 				: "Listening to a Podcast:";
-			if (podcast && !setting.privacy) {
-				presenceData.state = `${podcast.textContent}: ${title.replace(
-					" - The New York Times",
-					""
-				)}`;
-			}
+			if (podcast && !setting.privacy)
+				presenceData.state = `${podcast.textContent}: ${title}`;
 
 			if (audioPlayer && !isNaN(audioPlayer.duration)) {
 				const timestamps = presence.getTimestampsfromMedia(audioPlayer);
