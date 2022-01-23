@@ -61,18 +61,14 @@ presence.on("UpdateData", async () => {
 					"#main-content div:nth-child(3) > div > dl > dd"
 				).textContent
 			}`;
-			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("div > div > div > img")
-					?.src ?? "logo";
-			presenceData.smallImageKey = "search";
 		} else {
 			presenceData.details = "Viewing Product:";
 			presenceData.state = productName.textContent;
-			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("div > div > div > img")
-					?.src ?? "logo";
-			presenceData.smallImageKey = "search";
 		}
+		presenceData.largeImageKey =
+			document.querySelector<HTMLImageElement>("div > div > div > img")?.src ??
+			"logo";
+		presenceData.smallImageKey = "search";
 		presenceData.buttons = [{ label: "View Product", url: document.URL }];
 	} else if (
 		document.querySelector<HTMLHeadingElement>("#browse-wrapper > div > h1")
