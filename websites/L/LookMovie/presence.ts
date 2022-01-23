@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 		videoDur = document.querySelector(
 			"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
 		);
-	if (video && video !== null && videoDur !== null) {
+	if (video !== null && videoDur !== null) {
 		const titles = document.querySelector(
 				'meta[property="og:title"]'
 			) as HTMLMetaElement,
