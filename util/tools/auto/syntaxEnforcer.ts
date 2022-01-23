@@ -9,7 +9,7 @@ import debug from "debug";
 const log = debug("SyntaxEnforcer");
 debug.enable("SyntaxEnforcer*");
 /**
- * Executes a shell command and return it as a Promise.
+ * Executes a shell command
  * @param cmd {string[]}
  * @return Promise<string>
  */
@@ -80,12 +80,6 @@ const readFile = (path: string): string =>
 	},
 	// Main function that calls the other functions above
 	main = async (): Promise<void> => {
-		if (!process.env.GITHUB_ACTIONS) {
-			console.log(
-				"\nPlease note that this script is ONLY supposed to run on a CI environment\n"
-			);
-		}
-
 		log.extend("Lint")("Prettifying files");
 
 		await execShellCommand(["yarn", "lint"]);
