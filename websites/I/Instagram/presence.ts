@@ -29,25 +29,19 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		if (!settings.privacy) {
-			if (video && video.duration) {
-				const timestamps = presence.getTimestampsfromMedia(video);
+		if (!settings.privacy && video && video.duration) {
+			const timestamps = presence.getTimestampsfromMedia(video);
 
-				presenceData.startTimestamp = timestamps[0];
-				presenceData.endTimestamp = timestamps[1];
-			}
-
-			presenceData.buttons = [
-				{
-					label: "View Story",
-					url: `https://www.instagram.com/stories/${path[2]}/${path[3]}`
-				}
-			];
-		} else {
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
-			delete presenceData.buttons;
+			presenceData.startTimestamp = timestamps[0];
+			presenceData.endTimestamp = timestamps[1];
 		}
+
+		presenceData.buttons = [
+			{
+				label: "View Story",
+				url: `https://www.instagram.com/stories/${path[2]}/${path[3]}`
+			}
+		];
 	} else if (pathname.startsWith("/accounts")) {
 		presenceData.details = "Settings";
 		presenceData.state = "Changing their Settings";
@@ -71,17 +65,15 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		if (!settings.privacy) {
-			if (settings.postImage && image && image.src)
-				presenceData.largeImageKey = await getShortURL(image.src);
+		if (!settings.privacy && settings.postImage && image && image.src)
+			presenceData.largeImageKey = await getShortURL(image.src);
 
-			presenceData.buttons = [
-				{
-					label: "View Post",
-					url: `https://www.instagram.com/${path[1]}/${path[2]}`
-				}
-			];
-		} else delete presenceData.buttons;
+		presenceData.buttons = [
+			{
+				label: "View Post",
+				url: `https://www.instagram.com/${path[1]}/${path[2]}`
+			}
+		];
 	} else if (pathname.startsWith("/explore"))
 		presenceData.details = "Exploring...";
 	else if (pathname.startsWith("/nametag"))
@@ -96,71 +88,59 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLImageElement>("img._6q-tv");
 
 		presenceData.details = `Viewing a Profile${settings.privacy ? "" : ":"}`;
+		presenceData.state = `${
+			document.querySelector("div.QGPIr h1")?.textContent ?? "Unknown"
+		} (@${profileName.textContent})`;
 
-		if (!settings.privacy) {
-			presenceData.state = `${
-				document.querySelector("div.QGPIr h1")?.textContent ?? "Unknown"
-			} (@${profileName.textContent})`;
+		if (profilePicture)
+			presenceData.smallImageKey = await getShortURL(profilePicture.src);
 
-			if (profilePicture)
-				presenceData.smallImageKey = await getShortURL(profilePicture.src);
-
-			presenceData.buttons = [
-				{
-					label: "View Profile",
-					url: `https://www.instagram.com/${path[1]}`
-				}
-			];
-		} else {
-			delete presenceData.state;
-			delete presenceData.smallImageKey;
-			delete presenceData.buttons;
-		}
+		presenceData.buttons = [
+			{
+				label: "View Profile",
+				url: `https://www.instagram.com/${path[1]}`
+			}
+		];
 	}
 
 	if (document.querySelector("div.QY4Ed.P0xOK input.focus-visible")) {
 		presenceData.details = settings.privacy ? "Searching" : "Searching:";
+		presenceData.state = document.querySelector<HTMLInputElement>(
+			"div.QY4Ed.P0xOK input.focus-visible"
+		)?.value;
+	}
 
-		if (!settings.privacy) {
-			presenceData.state = document.querySelector<HTMLInputElement>(
-				"div.QY4Ed.P0xOK input.focus-visible"
-			)?.value;
-		} else delete presenceData.state;
+	if (settings.privacy) {
+		delete presenceData.state;
+		delete presenceData.endTimestamp;
+		delete presenceData.buttons;
+		delete presenceData.smallImageKey;
 	}
 
 	presence.setActivity(presenceData);
 });
 
 function getDateString(date: Date) {
-	const seconds = Math.abs(Date.now() - date.getTime()) / 1000;
+	const seconds = Math.abs(Date.now() - date.getTime()) / 1000,
+		minutes = Math.floor(seconds / 60),
+		hours = Math.floor(minutes / 60),
+		days = Math.floor(hours / 24);
 
 	switch (true) {
 		case seconds < 60:
 			return `${Math.floor(seconds)} second${seconds === 1 ? "" : "s"} ago`;
 		case seconds < 3600:
-			return `${Math.floor(seconds / 60)} minute${
-				seconds === 60 ? "" : "s"
-			} ago`;
+			return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
 		case seconds < 86400:
-			return `${Math.floor(seconds / 3600)} hour${
-				seconds === 3600 ? "" : "s"
-			} ago`;
+			return `${hours} hour${hours === 1 ? "" : "s"} ago`;
 		case seconds < 604800:
-			return `${Math.floor(seconds / 86400)} day${
-				seconds === 86400 ? "" : "s"
-			} ago`;
+			return `${days} day${days === 1 ? "" : "s"} ago`;
 		case seconds < 2419200:
-			return `${Math.floor(seconds / 604800)} week${
-				seconds === 604800 ? "" : "s"
-			} ago`;
+			return `${days / 7} week${days === 7 ? "" : "s"} ago`;
 		case seconds < 29030400:
-			return `${Math.floor(seconds / 2419200)} month${
-				seconds === 2419200 ? "" : "s"
-			} ago`;
+			return `${days / 30} month${days === 30 ? "" : "s"} ago`;
 		default:
-			return `${Math.floor(seconds / 29030400)} year${
-				seconds === 29030400 ? "" : "s"
-			} ago`;
+			return `${days / 365} year${days === 365 ? "" : "s"} ago`;
 	}
 }
 
