@@ -11,75 +11,81 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingTimestamp
   };
 
-  type st = {
+  type dt = {
     [hostName: string]: {
       [webPath: string]: string;
     };
   };
 
-  const archData: st = {
+  const archData: dt = {
     "archlinux.org": {
-      root: "Viewing the home page"
+      root: "Browsing the home page",
+      news: "Browsing the news archives",
+      donate: "Browsing the donation page",
+      mirrorlist: "Browsing the Mirrorlist",
+      mirrors: "Browsing the Mirrorlist",
+      groups: "Browsing the package groups",
+      todo: "Browsing the todo lists"
     },
     "bbs.archlinux.org": {
-      root: "Viewing the forums"
+      root: "Browsing the forums"
     },
     "wiki.archlinux.org": {
-      root: "Viewing the Wiki"
+      root: "Browsing the Wiki"
     },
     "bugs.archlinux.org": {
-      root: "Viewing the Bugtracker"
+      root: "Browsing the Bugtracker"
     },
     "security.archlinux.org": {
-      root: "Viewing Security Issues"
+      root: "Browsing Security Issues"
     },
     "aur.archlinux.org": {
-      root: "Viewing the user repository"
+      root: "Browsing the user repository"
     },
     "status.archlinux.org": {
-      root: "Viewing the status dashboard"
+      root: "Browsing the status dashboard"
     },
     "lists.archlinux.org": {
-      root: "Viewing the mailing lists"
+      root: "Browsing the mailing lists"
     },
     "archive.archlinux.org": {
-      root: "Viewing the archive"
+      root: "Browsing the archive"
     },
     "matrix.archlinux.org": {
-      root: "Viewing nothing of importance..."
+      root: "Browsing nothing of importance..."
     },
     "dashboards.archlinux.org": {
-      root: "Viewing the Grafana dashboards"
+      root: "Browsing the Grafana dashboards"
     },
     "conf.archlinux.org": {
-      root: "Viewing the Arch Conferences"
+      root: "Browsing the Arch Conferences"
     },
     "whatcanidofor.archlinux.org": {
       root: "Learning how to help Arch Linux"
     },
     "reproducible.archlinux.org": {
-      root: "Viewing the Reproducible Status"
+      root: "Browsing the Reproducible Status"
     },
     "aur-dev.archlinux.org": {
-      root: "Viewing the AUR-DEV Repository"
+      root: "Browsing the AUR-DEV Repository"
     },
     "terms.archlinux.org": {
-      root: "Viewing the terms of service"
+      root: "Browsing the terms of service"
     },
     "gitlab.archlinux.org": {
-      root: "Viewing the GitLab repository"
+      root: "Browsing the GitLab repository"
     },
     "patchwork.archlinux.org": {
-      root: "Viewing the patch tracking system"
+      root: "Browsing the patch tracking system"
     },
     "man.archlinux.org": {
-      root: "Viewing the manual pages"
+      root: "Browsing the manual pages"
     }
   };
 
   if (hostName in archData) {
-    if (webPath in archData[hostName])
-      presenceData.details = archData[hostName][webPath];
+    if (webPath.split("/")[1] in archData[hostName])
+      presenceData.details = archData[hostName][webPath.split("/")[1]];
     else presenceData.details = archData[hostName].root;
   }
 
