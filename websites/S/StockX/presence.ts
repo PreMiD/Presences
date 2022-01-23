@@ -65,7 +65,6 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLImageElement>("div > div > div > img")
 					?.src ?? "logo";
 			presenceData.smallImageKey = "search";
-			presenceData.buttons = [{ label: "View Product", url: document.URL }];
 		} else {
 			presenceData.details = "Viewing Product:";
 			presenceData.state = productName.textContent;
@@ -74,6 +73,7 @@ presence.on("UpdateData", async () => {
 					?.src ?? "logo";
 			presenceData.smallImageKey = "search";
 		}
+		presenceData.buttons = [{ label: "View Product", url: document.URL }];
 	} else if (
 		document.querySelector<HTMLHeadingElement>("#browse-wrapper > div > h1")
 	) {
