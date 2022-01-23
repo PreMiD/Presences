@@ -7,11 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo"
 		},
-		setting = {
-			privacy: await presence.getSetting<boolean>("privacy"),
-			elapsedTime: await presence.getSetting<boolean>("elapsedTime"),
-			postImage: await presence.getSetting<boolean>("postImage")
-		},
+		setting = await getSettings(),
 		{ pathname } = window.location,
 		path = pathname.split("/"),
 		profileName = document.querySelector("div.XBGH5 h2");
@@ -173,4 +169,22 @@ async function getShortURL(url: string) {
 		presence.error(err);
 		return url;
 	}
+}
+
+async function getSettings() {
+	const settings = await Promise.all([
+			await presence.getSetting<boolean>("privacy"),
+			await presence.getSetting<boolean>("elapsedTime"),
+			await presence.getSetting<boolean>("postImage")
+		]),
+		names = ["privacy", "elapsedTime", "postImage"],
+		obj: {
+			[key: string]: boolean;
+		} = {};
+
+	names.forEach((name, i) => {
+		obj[name] = settings[i];
+	});
+
+	return obj;
 }
