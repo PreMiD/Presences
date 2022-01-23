@@ -7,19 +7,19 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo"
 		},
-		setting = await getSettings(),
+		settings = await getSettings(),
 		{ pathname } = window.location,
 		path = pathname.split("/"),
 		profileName = document.querySelector("div.XBGH5 h2");
 
-	if (setting.elapsedTime) presenceData.startTimestamp = timestamp;
+	if (settings.elapsedTime) presenceData.startTimestamp = timestamp;
 
 	if (!path[1]) presenceData.details = "Viewing the Homepage";
 	else if (pathname.startsWith("/stories")) {
 		const time = document.querySelector("time.BPyeS.Nzb55"),
 			video = document.querySelector("video");
 
-		presenceData.details = setting.privacy
+		presenceData.details = settings.privacy
 			? "Viewing a Story"
 			: `Viewing ${path[2]}'s Story`;
 
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		if (!setting.privacy) {
+		if (!settings.privacy) {
 			if (video && video.duration) {
 				const timestamps = presence.getTimestampsfromMedia(video);
 
@@ -43,6 +43,10 @@ presence.on("UpdateData", async () => {
 					url: `https://www.instagram.com/stories/${path[2]}/${path[3]}`
 				}
 			];
+		} else {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+			delete presenceData.buttons;
 		}
 	} else if (pathname.startsWith("/accounts")) {
 		presenceData.details = "Settings";
@@ -57,7 +61,7 @@ presence.on("UpdateData", async () => {
 			);
 
 		presenceData.details =
-			setting.privacy || !profileName
+			settings.privacy || !profileName
 				? "Viewing a Post"
 				: `Viewing ${profileName}'s Post`;
 
@@ -67,8 +71,8 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		if (!setting.privacy) {
-			if (setting.postImage && image && image.src)
+		if (!settings.privacy) {
+			if (settings.postImage && image && image.src)
 				presenceData.largeImageKey = await getShortURL(image.src);
 
 			presenceData.buttons = [
@@ -77,7 +81,7 @@ presence.on("UpdateData", async () => {
 					url: `https://www.instagram.com/${path[1]}/${path[2]}`
 				}
 			];
-		}
+		} else delete presenceData.buttons;
 	} else if (pathname.startsWith("/explore"))
 		presenceData.details = "Exploring...";
 	else if (pathname.startsWith("/nametag"))
@@ -91,11 +95,9 @@ presence.on("UpdateData", async () => {
 		const profilePicture =
 			document.querySelector<HTMLImageElement>("img._6q-tv");
 
-		presenceData.details = setting.privacy
-			? "Viewing a Profile"
-			: "Viewing a Profile:";
+		presenceData.details = `Viewing a Profile${settings.privacy ? "" : ":"}`;
 
-		if (!setting.privacy) {
+		if (!settings.privacy) {
 			presenceData.state = `${
 				document.querySelector("div.QGPIr h1")?.textContent ?? "Unknown"
 			} (@${profileName.textContent})`;
@@ -109,49 +111,56 @@ presence.on("UpdateData", async () => {
 					url: `https://www.instagram.com/${path[1]}`
 				}
 			];
+		} else {
+			delete presenceData.state;
+			delete presenceData.smallImageKey;
+			delete presenceData.buttons;
 		}
 	}
 
 	if (document.querySelector("div.QY4Ed.P0xOK input.focus-visible")) {
-		presenceData.details = setting.privacy ? "Searching" : "Searching:";
+		presenceData.details = settings.privacy ? "Searching" : "Searching:";
 
-		if (!setting.privacy) {
+		if (!settings.privacy) {
 			presenceData.state = document.querySelector<HTMLInputElement>(
 				"div.QY4Ed.P0xOK input.focus-visible"
 			)?.value;
-		}
+		} else delete presenceData.state;
 	}
 
 	presence.setActivity(presenceData);
 });
 
 function getDateString(date: Date) {
-	const seconds = Math.abs(Date.now() - +date) / 1000;
+	const seconds = Math.abs(Date.now() - date.getTime()) / 1000;
 
-	if (seconds < 60) {
-		return `${Math.trunc(seconds)} ${
-			Math.trunc(seconds) > 1 ? "seconds" : "second"
-		} ago`;
-	} else if (seconds < 3600) {
-		return `${Math.trunc(seconds / 60)} ${
-			Math.trunc(seconds / 60) > 1 ? "minutes" : "minute"
-		} ago`;
-	} else if (seconds < 86400) {
-		return `${Math.trunc(seconds / 3600)} ${
-			Math.trunc(seconds / 3600) > 1 ? "hours" : "hour"
-		} ago`;
-	} else if (seconds < 604800) {
-		return `${Math.trunc(seconds / 86400)} ${
-			Math.trunc(seconds / 86400) > 1 ? "days" : "day"
-		} ago`;
-	} else if (seconds < 2419200) {
-		return `${Math.trunc(seconds / 604800)} ${
-			Math.trunc(seconds / 604800) > 1 ? "weeks" : "week"
-		} ago`;
-	} else {
-		return `${Math.trunc(seconds / 2419200)} ${
-			Math.trunc(seconds / 2419200) > 1 ? "months" : "month"
-		} ago`;
+	switch (true) {
+		case seconds < 60:
+			return `${Math.floor(seconds)} second${seconds === 1 ? "" : "s"} ago`;
+		case seconds < 3600:
+			return `${Math.floor(seconds / 60)} minute${
+				seconds === 60 ? "" : "s"
+			} ago`;
+		case seconds < 86400:
+			return `${Math.floor(seconds / 3600)} hour${
+				seconds === 3600 ? "" : "s"
+			} ago`;
+		case seconds < 604800:
+			return `${Math.floor(seconds / 86400)} day${
+				seconds === 86400 ? "" : "s"
+			} ago`;
+		case seconds < 2419200:
+			return `${Math.floor(seconds / 604800)} week${
+				seconds === 604800 ? "" : "s"
+			} ago`;
+		case seconds < 29030400:
+			return `${Math.floor(seconds / 2419200)} month${
+				seconds === 2419200 ? "" : "s"
+			} ago`;
+		default:
+			return `${Math.floor(seconds / 29030400)} year${
+				seconds === 29030400 ? "" : "s"
+			} ago`;
 	}
 }
 
@@ -179,7 +188,7 @@ async function getSettings() {
 		]),
 		names = ["privacy", "elapsedTime", "postImage"],
 		obj: {
-			[key: string]: boolean;
+			[key in typeof names[number]]?: boolean;
 		} = {};
 
 	names.forEach((name, i) => {
