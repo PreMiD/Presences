@@ -36,10 +36,6 @@ presence.on("UpdateData", async () => {
 	if (pathname.startsWith("/gallery")) {
 		presenceData.details =
 			document.querySelector("figcaption > span").textContent;
-		presenceData.largeImageKey =
-			document.querySelector<HTMLImageElement>(
-				"div.Popover-activator-14J.Miniprofile-activator-1QJ > span > a > div > img"
-			)?.src ?? "logo";
 		presenceData.smallImageKey = "reading";
 		if (
 			document.querySelector(
@@ -49,6 +45,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"figcaption > div > a > div > div.Popover-activator-14J.Miniprofile-activator-1QJ > span"
 			)?.textContent;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(
+					"div.Popover-activator-14J.Miniprofile-activator-1QJ > span > a > div > img"
+				)?.src ?? "logo";
 			presenceData.buttons = [
 				{
 					label: "View Work",
