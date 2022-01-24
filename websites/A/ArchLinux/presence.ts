@@ -4,10 +4,7 @@ const presence = new Presence({
   browsingTimestamp = Math.floor(Date.now() / 1000),
   hostName = location.hostname,
   webPath = location.pathname,
-  pathArr = webPath.split("/"),
-  path0 = pathArr[0],
-  path1 = pathArr[1],
-  data = "";
+  path1 = webPath.split("/")[1];
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "arch",
