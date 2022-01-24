@@ -13,10 +13,10 @@
 		"vi_VN": "AnizmTV là trang web giúp bạn xem anime phụ đề mới nhất với chất lượng cao."
 	},
 	"url": [
-		"www.anizm.tv",
-		"anizm.tv"
+		"www.anizm.net",
+		"anizm.net"
 	],
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/TZZcyOQ.png",
 	"thumbnail": "https://i.imgur.com/o4P1a0J.png",
 	"color": "#fc9003",
