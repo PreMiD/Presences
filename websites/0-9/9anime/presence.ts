@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "760581243686748232"
+		clientId: "934701636251680768"
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
@@ -30,9 +30,11 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.includes("/watch")
 	) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
-			Math.floor(video.currentTime),
-			Math.floor(video.duration)
-		);
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			),
+			coverArt = document.querySelector<HTMLImageElement>("#info img")?.src,
+			showCover = await presence.getSetting<boolean>("cover");
 
 		presenceData.details = document.querySelector("#info .title").textContent;
 		presenceData.state =
@@ -50,6 +52,9 @@ presence.on("UpdateData", async () => {
 				: document.querySelector(
 						".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
 				  ).textContent;
+
+		if (coverArt && showCover) presenceData.largeImageKey = coverArt;
+
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
