@@ -35,14 +35,14 @@ presence.on("UpdateData", async () => {
 		]);
 	if (pathname.startsWith("/gallery")) {
 		presenceData.details =
-			document.querySelector("figcaption > span").textContent;
+			document.querySelector<HTMLSpanElement>("figcaption > span").textContent;
 		presenceData.smallImageKey = "reading";
 		if (
-			document.querySelector(
+			document.querySelector<HTMLSpanElement>(
 				"figcaption > div > a > div > div.Popover-activator-14J.Miniprofile-activator-1QJ > span"
 			)
 		) {
-			presenceData.state = document.querySelector(
+			presenceData.state = document.querySelector<HTMLSpanElement>(
 				"figcaption > div > a > div > div.Popover-activator-14J.Miniprofile-activator-1QJ > span"
 			)?.textContent;
 			presenceData.largeImageKey =
@@ -71,15 +71,17 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.startsWith("/galleries")) {
 		presenceData.details = "Discovering Galleries";
-		presenceData.state = document.querySelector(
+		presenceData.state = document.querySelector<HTMLHeadingElement>(
 			"#site-content div > div > h1"
 		).textContent;
 		presenceData.smallImageKey = "search";
 	} else if (
-		document.querySelector("#site-content div.ProfileCard-header-2wU > h1")
+		document.querySelector<HTMLHeadingElement>(
+			"#site-content div.ProfileCard-header-2wU > h1"
+		)
 	) {
 		presenceData.details = "Viewing Profile";
-		presenceData.state = document.querySelector(
+		presenceData.state = document.querySelector<HTMLHeadingElement>(
 			"#site-content div.ProfileCard-header-2wU > h1"
 		).textContent;
 		presenceData.largeImageKey =
@@ -88,7 +90,7 @@ presence.on("UpdateData", async () => {
 			)?.src ?? "logo";
 		presenceData.buttons = [{ label: "View Profile", url: document.URL }];
 	} else if (pathname.startsWith("/search")) {
-		const searchContent = document.querySelector(
+		const searchContent = document.querySelector<HTMLSpanElement>(
 			"#site-content ul > li:nth-child(1) > a > span"
 		);
 		if (!searchContent) presenceData.details = "Searching...";
@@ -98,10 +100,10 @@ presence.on("UpdateData", async () => {
 		}
 		presenceData.smallImageKey = "search";
 	} else if (pathname.startsWith("/videos")) {
-		presenceData.details = document.querySelector(
+		presenceData.details = document.querySelector<HTMLHeadingElement>(
 			"div.Stream-titleContainer-1D_ > h1"
 		).textContent;
-		presenceData.state = document.querySelector(
+		presenceData.state = document.querySelector<HTMLAnchorElement>(
 			"div.UserInfo-main-gTU > div:nth-child(2) > a"
 		).textContent;
 		presenceData.largeImageKey =
@@ -152,7 +154,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing Videos";
 		presenceData.smallImageKey = "search";
 	} else if (pathname.startsWith("/joblist")) {
-		const jobLocation = document.querySelector(
+		const jobLocation = document.querySelector<HTMLParagraphElement>(
 			"div.JobDetailContent-jobHeader-2Pv > p"
 		);
 		if (!jobLocation) {

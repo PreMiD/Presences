@@ -1,16 +1,20 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-	if (document.querySelector("span.liveText")) {
+	if (document.querySelector<HTMLSpanElement>("span.liveText")) {
 		iframe.send({
-			live: document.querySelector("span.liveText")
+			live: document.querySelector<HTMLSpanElement>("span.liveText")
 		});
-	} else if (document.querySelector("span.timelabel")) {
+	} else if (document.querySelector<HTMLSpanElement>("span.timelabel")) {
 		iframe.send({
-			currentTime: document.querySelector("span.timelabel").textContent,
-			duration: document.querySelector("span.vduration").textContent,
+			currentTime:
+				document.querySelector<HTMLSpanElement>("span.timelabel").textContent,
+			duration:
+				document.querySelector<HTMLSpanElement>("span.vduration").textContent,
 			paused: document
-				.querySelector("#videocontrols > div.controlsleft > button")
+				.querySelector<HTMLButtonElement>(
+					"#videocontrols > div.controlsleft > button"
+				)
 				.textContent.includes("play")
 		});
 	}
