@@ -12,7 +12,7 @@ function getQueryVariable(v: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Z8MBnw9.jpg",
+		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp
 	};
 
