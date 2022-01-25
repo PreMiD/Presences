@@ -9,12 +9,17 @@
 		"en": "Buy and sell the hottest sneakers including Adidas Yeezy and Retro Jordans, Supreme streetwear, trading cards, collectibles, designer handbags and luxury watches."
 	},
 	"url": "stockx.com",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/RMjJZkx.png",
 	"thumbnail": "https://i.imgur.com/uQh3Mx3.png",
 	"color": "#15A25D",
 	"category": "other",
-	"tags": ["stock", "market", "sneakers", "electronic"],
+	"tags": [
+		"stock",
+		"market",
+		"sneakers",
+		"electronic"
+	],
 	"settings": [
 		{
 			"id": "price",
