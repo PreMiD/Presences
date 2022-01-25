@@ -4,8 +4,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
-	duration: "i spent way too much time",
-	currentTime: "on this presence alone",
+	duration: "",
+	currentTime: "",
 	live: false,
 	paused: true
 };
