@@ -11,10 +11,11 @@ function getQueryVariable(v: string) {
 }
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
-	};
+	const privacy = await presence.getSetting<boolean>("privacy"),
+		presenceData: PresenceData = {
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp
+		};
 
 	if (
 		document.location.pathname === "/" ||
@@ -23,30 +24,34 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing home page";
 	else if (document.location.pathname === "/my-stats") {
 		presenceData.details = "Viewing profile";
-		const correct = Math.round(
-			(Number(
-				document.querySelector("div#vue-tooltip-6 small span").innerHTML
-			) /
-				Number(
-					document.querySelector("div#vue-tooltip-5 small span").innerHTML
-				)) *
-				100
-		);
-		presenceData.state = `${correct}% correct answers`;
+		if (!privacy) {
+			const correct = Math.round(
+				(Number(
+					document.querySelector("div#vue-tooltip-6 small span").innerHTML
+				) /
+					Number(
+						document.querySelector("div#vue-tooltip-5 small span").innerHTML
+					)) *
+					100
+			);
+			presenceData.state = `${correct}% correct answers`;
+		}
 	} else if (document.location.pathname === "/assessment") {
 		if (
 			document.querySelectorAll("ul.Assessment__breadcrumb li")[0].innerHTML ===
 			"Fix Up 5"
 		) {
 			presenceData.details = "Revising";
-			presenceData.state = "Fix Up 5";
+			if (!privacy) presenceData.state = "Fix Up 5";
 		} else {
 			presenceData.details = "Doing a lesson";
-
-			presenceData.state = new DOMParser().parseFromString(
-				document.querySelectorAll("ul.Assessment__breadcrumb li")[2].innerHTML,
-				"text/html"
-			).documentElement.textContent;
+			if (!privacy) {
+				presenceData.state = new DOMParser().parseFromString(
+					document.querySelectorAll("ul.Assessment__breadcrumb li")[2]
+						.innerHTML,
+					"text/html"
+				).documentElement.textContent;
+			}
 		}
 	} else if (document.location.pathname.includes("/progress"))
 		presenceData.details = "Choosing a lesson";
@@ -78,10 +83,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "No tasks";
 	} else if (document.location.pathname === "/fixup5") {
 		presenceData.details = "Revising";
-		presenceData.state = "Fix Up 5";
+		if (!privacy) presenceData.state = "Fix Up 5";
 	} else if (document.location.pathname === "/memri") {
 		presenceData.details = "Revising";
-		presenceData.state = "Memri";
+		if (!privacy) presenceData.state = "Memri";
 	}
 	presence.setActivity(presenceData);
 });
