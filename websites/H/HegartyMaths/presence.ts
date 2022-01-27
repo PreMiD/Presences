@@ -55,38 +55,87 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.includes("/progress"))
 		presenceData.details = "Choosing a lesson";
-	else if (document.location.pathname.includes("scores")) {
-		switch (getQueryVariable("filter")) {
-			case "green":
-				presenceData.details = "Viewing green scores";
+	else if (document.location.pathname.includes("/scores")) {
+		if (document.location.pathname !== "/scores") {
+			presenceData.details = "Viewing scores for a task";
+			if (!privacy) {
+				const task = (presenceData.state = new DOMParser().parseFromString(
+					document.querySelector("h2.Review__name").innerHTML,
+					"text/html"
+				).documentElement.textContent);
+
+				presenceData.state = `${task}: ${
+					document.querySelector("div.Review__hero-score h1").innerHTML
+				}`;
+			}
+		} else {
+			switch (getQueryVariable("filter")) {
+				case "green":
+					presenceData.details = "Viewing green scores";
+					break;
+				case "amber":
+					presenceData.details = "Viewing amber scores";
+					break;
+				case "red":
+					presenceData.details = "Viewing red scores";
+					break;
+				default:
+					presenceData.details = "Viewing all scores";
+					break;
+			}
+			const text = document.querySelector("div.row div.col-xs-12").innerHTML,
+				outof = Math.ceil(
+					Number(text.substring(text.indexOf("f ") + 1).slice(0, 4)) / 10
+				);
+			presenceData.state = `Page ${
+				getQueryVariable("page") ? getQueryVariable("page") : 1
+			} of ${outof === 0 ? 1 : outof}`;
+		}
+	} else {
+		switch (document.location.pathname) {
+			case "/tasks":
+				presenceData.details = "Viewing tasks";
+				if (document.querySelector("div.text-grey-darker h3").innerHTML)
+					presenceData.state = "No tasks";
 				break;
-			case "amber":
-				presenceData.details = "Viewing amber scores";
+			case "/fixup5":
+				presenceData.details = "Revising";
+				if (!privacy) presenceData.state = "Fix Up 5";
 				break;
-			case "red":
-				presenceData.details = "Viewing red scores";
+			case "/memri":
+				presenceData.details = "Revising";
+				if (!privacy) presenceData.state = "Memri";
+				break;
+			case "/contact":
+				presenceData.details = "Viewing contact page";
+				break;
+			case "/contact-us":
+				presenceData.details = "Viewing contact page";
+				break;
+			case "/student-resources":
+				presenceData.details = "Viewing student resources";
+				break;
+			case "/story":
+				presenceData.details = "Reading";
+				presenceData.state = "The story of HegartyMaths";
+				break;
+			case "/trial":
+				presenceData.details = "Reading";
+				if (!privacy) presenceData.state = "Trial page";
+				break;
+			case "/press":
+				presenceData.details = "Reading";
+				presenceData.state = "HegartyMaths in the news";
+				break;
+			case "/success":
+				presenceData.details = "Reading";
+				presenceData.state = "HegartyMaths success stories";
 				break;
 			default:
-				presenceData.details = "Viewing all scores";
+				presenceData.details = "Viewing a task";
 				break;
 		}
-		const text = document.querySelector("div.row div.col-xs-12").innerHTML,
-			outof = Math.ceil(
-				Number(text.substring(text.indexOf("f ") + 1).slice(0, 4)) / 10
-			);
-		presenceData.state = `Page ${
-			getQueryVariable("page") ? getQueryVariable("page") : 1
-		} of ${outof === 0 ? 1 : outof}`;
-	} else if (document.location.pathname === "/tasks") {
-		presenceData.details = "Viewing tasks";
-		if (document.querySelector("div.text-grey-darker h3").innerHTML)
-			presenceData.state = "No tasks";
-	} else if (document.location.pathname === "/fixup5") {
-		presenceData.details = "Revising";
-		if (!privacy) presenceData.state = "Fix Up 5";
-	} else if (document.location.pathname === "/memri") {
-		presenceData.details = "Revising";
-		if (!privacy) presenceData.state = "Memri";
 	}
+
 	presence.setActivity(presenceData);
 });
