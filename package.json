@@ -5,7 +5,7 @@
 	"license": "MPL-2.0",
 	"scripts": {
 		"lint": "prettier --write . && eslint --fix .",
-		"lint:ci": "eslint .",
+		"lint:ci": "prettier --check . && eslint .",
 		"inc": "tsc -p ./util/configs/tsconfig.massVer.json && node ./util/tools/massVer.js",
 		"incChanged": "tsc -p ./util/configs/tsconfig.bumpChanged.json && node ./util/tools/bumpChanged",
 		"format": "yarn ms && yarn lint",
