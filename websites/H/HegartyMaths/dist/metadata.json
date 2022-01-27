@@ -14,5 +14,13 @@
 	"thumbnail": "https://i.imgur.com/67EEyre.png",
 	"color": "#33a7e0",
 	"category": "other",
-	"tags": ["work", "school", "maths", "educational", "uk"]
+	"tags": ["work", "school", "maths", "educational", "uk"],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
+	]
 }
