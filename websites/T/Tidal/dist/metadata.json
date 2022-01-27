@@ -4,6 +4,12 @@
 		"name": "The Gamerzs",
 		"id": "730142125181894657"
 	},
+	"contributors": [
+		{
+			"name": "Kyrie",
+			"id": "368399721494216706"
+		}
+	],
 	"service": "Tidal",
 	"description": {
 		"tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir.",
@@ -12,23 +18,35 @@
 		"nl": "Tidal is een muziekstreamdienst met een zeer hoge geluidskwaliteit.",
 		"vi_VN": "Tidal là dịch vụ phát nhạc với chất lượng âm thanh rất cao."
 	},
-	"url": [
-		"listen.tidal.com",
-		"tidal.com"
-	],
-	"version": "3.0.5",
+	"url": ["listen.tidal.com", "tidal.com"],
+	"version": "3.1.0",
 	"logo": "https://i.imgur.com/i9pIvqR.png",
 	"thumbnail": "https://i.imgur.com/xNeJ8oq.png",
 	"color": "#000000",
 	"category": "music",
-	"tags": [
-		"tidal",
-		"music"
-	],
+	"tags": ["tidal", "music"],
 	"settings": [
 		{
 			"id": "lang",
 			"multiLanguage": true
+		},
+		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
 		}
 	]
 }
