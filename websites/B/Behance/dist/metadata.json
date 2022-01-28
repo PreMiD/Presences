@@ -9,7 +9,7 @@
 		"en": "Behance is the world's largest creative network for showcasing and discovering creative work."
 	},
 	"url": "www.behance.net",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/XyGiJIR.png",
 	"thumbnail": "https://i.imgur.com/NxcdIqY.jpeg",
 	"color": "#1769FF",
@@ -22,6 +22,7 @@
 		"community",
 		"professional"
 	],
+	"iframe": true,
 	"settings": [
 		{
 			"id": "image",
@@ -35,6 +36,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-	"iframe": true
+	]
 }
