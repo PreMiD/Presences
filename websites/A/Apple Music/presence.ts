@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 		const timestamp = document.querySelector<HTMLInputElement>(
 				"input[aria-valuenow][aria-valuemax]"
 			),
-			loaded = Boolean(audio.played.length);
+			loaded = audio.readyState > 2;
 
 		presenceData.details = navigator.mediaSession.metadata.title;
 		presenceData.state = navigator.mediaSession.metadata.artist;
