@@ -20,9 +20,5 @@
 	"thumbnail": "https://i.imgur.com/1pthcL3.png",
 	"color": "#fbff00",
 	"category": "games",
-	"tags": [
-		"rockstargames",
-		"rockstar",
-		"gaming"
-	]
+	"tags": ["rockstargames", "rockstar", "gaming"]
 }

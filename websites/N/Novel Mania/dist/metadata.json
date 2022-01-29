@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/lxuE4zN.jpg",
 	"color": "#008cff",
 	"category": "other",
-	"tags": [
-		"novel",
-		"mania",
-		"translator"
-	]
+	"tags": ["novel", "mania", "translator"]
 }

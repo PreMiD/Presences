@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/jojxLOU.png",
 	"color": "#343C42",
 	"category": "other",
-	"tags": [
-		"security",
-		"games"
-	]
+	"tags": ["security", "games"]
 }

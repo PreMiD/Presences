@@ -15,13 +15,7 @@
 	"thumbnail": "https://i.imgur.com/d0l7u4C.png",
 	"color": "#4165b3",
 	"category": "anime",
-	"tags": [
-		"comics",
-		"manga",
-		"reading",
-		"komiku",
-		"other"
-	],
+	"tags": ["comics", "manga", "reading", "komiku", "other"],
 	"settings": [
 		{
 			"id": "buttons",

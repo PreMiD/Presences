@@ -16,12 +16,7 @@
 	"thumbnail": "https://i.imgur.com/xBnaql3.jpg",
 	"color": "#f58a2f",
 	"category": "socials",
-	"tags": [
-		"games",
-		"art",
-		"movies",
-		"music"
-	],
+	"tags": ["games", "art", "movies", "music"],
 	"settings": [
 		{
 			"id": "showprofilename",

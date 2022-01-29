@@ -18,11 +18,6 @@
 	"thumbnail": "https://i.imgur.com/soODdkD.png",
 	"color": "#00468b",
 	"category": "anime",
-	"tags": [
-		"animetw",
-		"streaming",
-		"embedded-links",
-		"anime"
-	],
+	"tags": ["animetw", "streaming", "embedded-links", "anime"],
 	"iframe": true
 }

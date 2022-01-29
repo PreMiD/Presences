@@ -23,20 +23,13 @@
 		"zh_TW": "Crunchyroll是美國的一家提供東亞相關串流媒體影視服務和國際交流社區的網站。",
 		"vi_VN": "Crunchyroll là điểm đến lớn nhất thế giới dành cho anime và manga, với một cộng đồng trực tuyến với hơn 45 triệu người dùng đã đăng ký và 2 triệu người dùng đang theo dõi."
 	},
-	"url": [
-		"www.crunchyroll.com",
-		"beta.crunchyroll.com"
-	],
+	"url": ["www.crunchyroll.com", "beta.crunchyroll.com"],
 	"version": "2.7.15",
 	"logo": "https://i.imgur.com/LpTKP8c.png",
 	"thumbnail": "https://i.imgur.com/hzM7YCb.png",
 	"color": "#f47521",
 	"category": "anime",
-	"tags": [
-		"video",
-		"anime",
-		"manga"
-	],
+	"tags": ["video", "anime", "manga"],
 	"iframe": true,
 	"settings": [
 		{

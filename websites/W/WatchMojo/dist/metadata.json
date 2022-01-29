@@ -16,11 +16,7 @@
 	"thumbnail": "https://i.imgur.com/X2KmnaF.jpg",
 	"color": "#01ffff",
 	"category": "videos",
-	"tags": [
-		"top10",
-		"video",
-		"media"
-	],
+	"tags": ["top10", "video", "media"],
 	"iframe": true,
 	"settings": [
 		{

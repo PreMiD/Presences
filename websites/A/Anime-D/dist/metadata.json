@@ -17,12 +17,7 @@
 	"thumbnail": "https://i.imgur.com/2wyv3S9.jpg",
 	"color": "#cc6d00",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"videos",
-		"thai",
-		"nsfw"
-	],
+	"tags": ["anime", "videos", "thai", "nsfw"],
 	"iframe": true,
 	"settings": [
 		{

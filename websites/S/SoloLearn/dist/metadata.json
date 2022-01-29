@@ -22,10 +22,7 @@
 	"thumbnail": "https://i.imgur.com/k7Mi8zh.png",
 	"color": "#1ABC9C",
 	"category": "other",
-	"tags": [
-		"learning",
-		"coding"
-	],
+	"tags": ["learning", "coding"],
 	"settings": [
 		{
 			"id": "browse",

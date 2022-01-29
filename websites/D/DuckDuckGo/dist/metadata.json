@@ -16,11 +16,7 @@
 	"thumbnail": "https://i.imgur.com/VlPQGur.png",
 	"color": "#FF5900",
 	"category": "other",
-	"tags": [
-		"internet",
-		"browing",
-		"search"
-	],
+	"tags": ["internet", "browing", "search"],
 	"settings": [
 		{
 			"id": "homepageMessage",

@@ -19,14 +19,7 @@
 	"thumbnail": "https://i.imgur.com/audBuMC.png",
 	"color": "#32a852",
 	"category": "music",
-	"tags": [
-		"music",
-		"radio",
-		"gamers",
-		"community",
-		"beats",
-		"beatsradio"
-	],
+	"tags": ["music", "radio", "gamers", "community", "beats", "beatsradio"],
 	"settings": [
 		{
 			"id": "timestamp",

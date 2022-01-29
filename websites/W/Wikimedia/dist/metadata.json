@@ -51,11 +51,5 @@
 	"thumbnail": "https://i.imgur.com/keAOFru.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": [
-		"encyclopedia",
-		"wiki",
-		"wikimedia-foundation",
-		"wikimedia",
-		"wmf"
-	]
+	"tags": ["encyclopedia", "wiki", "wikimedia-foundation", "wikimedia", "wmf"]
 }

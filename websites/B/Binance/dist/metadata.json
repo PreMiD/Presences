@@ -26,9 +26,5 @@
 	"thumbnail": "https://i.imgur.com/m5v9X9P.jpg",
 	"color": "#f0b90b",
 	"category": "other",
-	"tags": [
-		"crypto",
-		"mining",
-		"exchange"
-	]
+	"tags": ["crypto", "mining", "exchange"]
 }

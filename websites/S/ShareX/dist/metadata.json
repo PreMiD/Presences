@@ -15,12 +15,7 @@
 	"thumbnail": "https://i.imgur.com/TC5juuA.png",
 	"color": "#2486f1",
 	"category": "socials",
-	"tags": [
-		"uploader",
-		"screenshot",
-		"sharex",
-		"capture"
-	],
+	"tags": ["uploader", "screenshot", "sharex", "capture"],
 	"settings": [
 		{
 			"id": "timestamp",

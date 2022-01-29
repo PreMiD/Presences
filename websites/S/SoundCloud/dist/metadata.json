@@ -37,10 +37,7 @@
 	"thumbnail": "https://i.imgur.com/eZyrvbS.jpg",
 	"color": "#FF7E30",
 	"category": "music",
-	"tags": [
-		"songs",
-		"music"
-	],
+	"tags": ["songs", "music"],
 	"settings": [
 		{
 			"id": "lang",

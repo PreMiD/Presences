@@ -22,8 +22,5 @@
 	"thumbnail": "https://i.imgur.com/E31fDeI.png",
 	"color": "#4CAF50",
 	"category": "other",
-	"tags": [
-		"programming",
-		"learning"
-	]
+	"tags": ["programming", "learning"]
 }

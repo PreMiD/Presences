@@ -16,10 +16,5 @@
 	"thumbnail": "https://i.imgur.com/UxPGmuo.png",
 	"color": "#FFFFFF",
 	"category": "games",
-	"tags": [
-		"fifa",
-		"web-app",
-		"fut20",
-		"fifa-ultimate-team"
-	]
+	"tags": ["fifa", "web-app", "fut20", "fifa-ultimate-team"]
 }

@@ -21,9 +21,5 @@
 	"thumbnail": "https://i.imgur.com/KWY5wqt.png",
 	"color": "#0000ff",
 	"category": "other",
-	"tags": [
-		"light-novels",
-		"reading",
-		"free"
-	]
+	"tags": ["light-novels", "reading", "free"]
 }

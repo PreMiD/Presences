@@ -17,8 +17,5 @@
 	"thumbnail": "https://i.imgur.com/HE2xzdF.png",
 	"color": "#397eff",
 	"category": "other",
-	"tags": [
-		"safety",
-		"virus-check"
-	]
+	"tags": ["safety", "virus-check"]
 }

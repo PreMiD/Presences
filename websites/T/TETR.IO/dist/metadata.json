@@ -16,11 +16,7 @@
 	"thumbnail": "https://i.imgur.com/n7wLG8i.jpg",
 	"color": "#142472",
 	"category": "games",
-	"tags": [
-		"puzzle",
-		"multiplayer",
-		"online"
-	],
+	"tags": ["puzzle", "multiplayer", "online"],
 	"settings": [
 		{
 			"id": "privateRoom",

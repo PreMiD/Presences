@@ -17,11 +17,5 @@
 	"thumbnail": "https://i.imgur.com/MJptA60.jpg",
 	"color": "#0e71eb",
 	"category": "socials",
-	"tags": [
-		"video",
-		"media",
-		"meeting",
-		"conference",
-		"social"
-	]
+	"tags": ["video", "media", "meeting", "conference", "social"]
 }

@@ -19,9 +19,5 @@
 	"thumbnail": "https://i.imgur.com/61ks2yh.png",
 	"color": "#d3369f",
 	"category": "music",
-	"tags": [
-		"subscription-based",
-		"music",
-		"region-restricted"
-	]
+	"tags": ["subscription-based", "music", "region-restricted"]
 }

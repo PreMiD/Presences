@@ -17,10 +17,7 @@
 	"thumbnail": "https://i.imgur.com/DQvN7Nx.png",
 	"color": "#d78c14",
 	"category": "videos",
-	"tags": [
-		"video",
-		"music"
-	],
+	"tags": ["video", "music"],
 	"settings": [
 		{
 			"id": "cover",

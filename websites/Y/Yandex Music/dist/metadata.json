@@ -17,8 +17,5 @@
 	"thumbnail": "https://i.imgur.com/JohXxhi.png",
 	"color": "#FDCD01",
 	"category": "music",
-	"tags": [
-		"audio",
-		"music"
-	]
+	"tags": ["audio", "music"]
 }

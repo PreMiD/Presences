@@ -17,11 +17,5 @@
 	"thumbnail": "https://i.imgur.com/td3BVmm.png",
 	"color": "#02442F",
 	"category": "games",
-	"tags": [
-		"champion",
-		"champion-gg",
-		"league-of-legends",
-		"league",
-		"lol"
-	]
+	"tags": ["champion", "champion-gg", "league-of-legends", "league", "lol"]
 }

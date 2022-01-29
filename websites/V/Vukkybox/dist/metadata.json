@@ -22,13 +22,5 @@
 	"thumbnail": "https://i.imgur.com/uS5AFMi.png",
 	"color": "#5ea1c0",
 	"category": "games",
-	"tags": [
-		"gacha",
-		"game",
-		"vukky",
-		"vukkybox",
-		"box",
-		"litdevs",
-		"vukkies"
-	]
+	"tags": ["gacha", "game", "vukky", "vukkybox", "box", "litdevs", "vukkies"]
 }

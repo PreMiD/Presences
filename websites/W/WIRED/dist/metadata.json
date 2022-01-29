@@ -16,8 +16,5 @@
 	"thumbnail": "https://i.imgur.com/YWSISdY.png",
 	"color": "#ffffff",
 	"category": "other",
-	"tags": [
-		"news",
-		"articles"
-	]
+	"tags": ["news", "articles"]
 }

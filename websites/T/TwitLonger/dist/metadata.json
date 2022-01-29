@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/Fx8VNFk.png",
 	"color": "#428BCA",
 	"category": "other",
-	"tags": [
-		"twitter",
-		"micro-blogging"
-	]
+	"tags": ["twitter", "micro-blogging"]
 }

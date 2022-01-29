@@ -14,10 +14,7 @@
 	"thumbnail": "https://i.imgur.com/I8dYgHQ.png",
 	"color": "#303644",
 	"category": "other",
-	"tags": [
-		"boards",
-		"information"
-	],
+	"tags": ["boards", "information"],
 	"settings": [
 		{
 			"id": "buttons",

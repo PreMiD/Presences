@@ -17,10 +17,5 @@
 	"thumbnail": "https://i.imgur.com/YlrRdTn.png",
 	"color": "#BFFF00",
 	"category": "other",
-	"tags": [
-		"wiki",
-		"life-hacks",
-		"tutorial",
-		"how-to"
-	]
+	"tags": ["wiki", "life-hacks", "tutorial", "how-to"]
 }

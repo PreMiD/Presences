@@ -20,12 +20,5 @@
 	"thumbnail": "https://i.imgur.com/8OKXkxY.png",
 	"color": "#1BA0ED",
 	"category": "other",
-	"tags": [
-		"education",
-		"japanese",
-		"kanji",
-		"srs",
-		"vocabulary",
-		"language"
-	]
+	"tags": ["education", "japanese", "kanji", "srs", "vocabulary", "language"]
 }

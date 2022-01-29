@@ -15,10 +15,5 @@
 	"thumbnail": "https://i.imgur.com/WQSwVVv.png",
 	"color": "#2e94d8",
 	"category": "other",
-	"tags": [
-		"true",
-		"achievements",
-		"playstation",
-		"trophies"
-	]
+	"tags": ["true", "achievements", "playstation", "trophies"]
 }

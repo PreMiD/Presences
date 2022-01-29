@@ -18,9 +18,5 @@
 	"thumbnail": "https://i.imgur.com/6BRZ63d.png",
 	"color": "#308574",
 	"category": "socials",
-	"tags": [
-		"google",
-		"meet",
-		"video"
-	]
+	"tags": ["google", "meet", "video"]
 }

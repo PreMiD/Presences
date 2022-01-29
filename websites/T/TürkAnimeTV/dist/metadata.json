@@ -16,10 +16,6 @@
 	"thumbnail": "https://i.imgur.com/sIWWJ0X.png",
 	"color": "#3398b9",
 	"category": "videos",
-	"tags": [
-		"türk",
-		"anime",
-		"video"
-	],
+	"tags": ["türk", "anime", "video"],
 	"iframe": true
 }

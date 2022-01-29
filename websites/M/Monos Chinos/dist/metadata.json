@@ -15,10 +15,6 @@
 	"thumbnail": "https://i.imgur.com/togvEtr.png",
 	"color": "#ff6348",
 	"category": "anime",
-	"tags": [
-		"monoschinos",
-		"streaming",
-		"embedded-links"
-	],
+	"tags": ["monoschinos", "streaming", "embedded-links"],
 	"iframe": true
 }

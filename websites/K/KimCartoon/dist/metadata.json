@@ -15,9 +15,6 @@
 	"thumbnail": "https://i.imgur.com/pk2GCF7.png",
 	"color": "#fdf5ad",
 	"category": "videos",
-	"tags": [
-		"cartoon",
-		"videos"
-	],
+	"tags": ["cartoon", "videos"],
 	"iframe": true
 }

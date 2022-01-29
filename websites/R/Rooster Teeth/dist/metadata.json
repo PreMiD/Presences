@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/BwJU788.png",
 	"color": "#2c2420",
 	"category": "videos",
-	"tags": [
-		"video",
-		"media",
-		"streaming"
-	]
+	"tags": ["video", "media", "streaming"]
 }

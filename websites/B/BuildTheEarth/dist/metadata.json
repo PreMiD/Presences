@@ -16,10 +16,7 @@
 	"thumbnail": "https://i.imgur.com/YzqC7ju.png",
 	"color": "#104D92",
 	"category": "games",
-	"tags": [
-		"minecraft",
-		"buildtheearth"
-	],
+	"tags": ["minecraft", "buildtheearth"],
 	"settings": [
 		{
 			"id": "privacy",

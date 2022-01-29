@@ -16,12 +16,7 @@
 	"thumbnail": "https://i.imgur.com/XIed4IC.png",
 	"color": "#4AD818",
 	"category": "games",
-	"tags": [
-		"community",
-		"fr-minecraft",
-		"minecraft",
-		"news"
-	],
+	"tags": ["community", "fr-minecraft", "minecraft", "news"],
 	"settings": [
 		{
 			"id": "privacy",

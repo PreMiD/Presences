@@ -21,9 +21,5 @@
 	"thumbnail": "https://i.imgur.com/jPv0Zw1.png",
 	"color": "#000",
 	"category": "videos",
-	"tags": [
-		"starz",
-		"video",
-		"media"
-	]
+	"tags": ["starz", "video", "media"]
 }

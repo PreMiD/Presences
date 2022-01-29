@@ -15,12 +15,5 @@
 	"thumbnail": "https://i.imgur.com/8mEtLsB.png",
 	"color": "#9146FF",
 	"category": "games",
-	"tags": [
-		"video",
-		"games",
-		"database",
-		"reviews",
-		"community",
-		"critics"
-	]
+	"tags": ["video", "games", "database", "reviews", "community", "critics"]
 }

@@ -18,8 +18,5 @@
 	"thumbnail": "https://i.imgur.com/DDdRgoz.jpg",
 	"color": "#ea552a",
 	"category": "anime",
-	"tags": [
-		"video",
-		"anime"
-	]
+	"tags": ["video", "anime"]
 }

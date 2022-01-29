@@ -15,10 +15,5 @@
 	"thumbnail": "https://i.imgur.com/3L4UHk9.png",
 	"color": "#0f7e49",
 	"category": "games",
-	"tags": [
-		"garden",
-		"minecraft",
-		"survival",
-		"french"
-	]
+	"tags": ["garden", "minecraft", "survival", "french"]
 }

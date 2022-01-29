@@ -26,11 +26,6 @@
 	"thumbnail": "https://i.imgur.com/YS3pllQ.png",
 	"color": "#2c004b",
 	"category": "music",
-	"tags": [
-		"brasil",
-		"anime",
-		"radio",
-		"moe"
-	],
+	"tags": ["brasil", "anime", "radio", "moe"],
 	"iframe": true
 }

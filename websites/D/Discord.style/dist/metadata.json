@@ -14,10 +14,7 @@
 	"thumbnail": "https://i.imgur.com/pigr2GZ.jpg",
 	"color": "#1f2131",
 	"category": "socials",
-	"tags": [
-		"discord",
-		"discord-templates"
-	],
+	"tags": ["discord", "discord-templates"],
 	"settings": [
 		{
 			"id": "timestamp",

@@ -21,10 +21,7 @@
 	"thumbnail": "https://i.imgur.com/TmgNbn4.jpg",
 	"color": "#FFE222",
 	"category": "music",
-	"tags": [
-		"music",
-		"radio"
-	],
+	"tags": ["music", "radio"],
 	"settings": [
 		{
 			"id": "song",

@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/OxSGg0B.jpg",
 	"color": "#FE7405",
 	"category": "videos",
-	"tags": [
-		"videos",
-		"livestreams"
-	]
+	"tags": ["videos", "livestreams"]
 }

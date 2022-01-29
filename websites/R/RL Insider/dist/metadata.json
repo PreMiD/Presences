@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/Q33K0W3.png",
 	"color": "#b8b8b8",
 	"category": "games",
-	"tags": [
-		"rocket-league",
-		"prices",
-		"insider"
-	]
+	"tags": ["rocket-league", "prices", "insider"]
 }

@@ -17,10 +17,5 @@
 	"thumbnail": "https://i.imgur.com/iI3qc0M.jpg",
 	"color": "#ffffff",
 	"category": "other",
-	"tags": [
-		"google",
-		"podcast",
-		"audio",
-		"listen"
-	]
+	"tags": ["google", "podcast", "audio", "listen"]
 }

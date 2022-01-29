@@ -15,11 +15,7 @@
 	"thumbnail": "https://i.imgur.com/xpxHLMw.png",
 	"color": "#0173fa",
 	"category": "videos",
-	"tags": [
-		"stan",
-		"drama",
-		"movie"
-	],
+	"tags": ["stan", "drama", "movie"],
 	"settings": [
 		{
 			"id": "lang",

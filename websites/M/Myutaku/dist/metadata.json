@@ -15,10 +15,5 @@
 	"thumbnail": "https://i.imgur.com/AxKmWj3.png",
 	"color": "#6958ff",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"manga",
-		"community",
-		"french"
-	]
+	"tags": ["anime", "manga", "community", "french"]
 }

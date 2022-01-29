@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/otlm8c2.png",
 	"color": "#000084",
 	"category": "videos",
-	"tags": [
-		"video",
-		"memes",
-		"webm"
-	]
+	"tags": ["video", "memes", "webm"]
 }

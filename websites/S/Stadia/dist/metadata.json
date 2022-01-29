@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/CyujQo7.png",
 	"color": "#0081FF",
 	"category": "games",
-	"tags": [
-		"gaming",
-		"streaming"
-	]
+	"tags": ["gaming", "streaming"]
 }

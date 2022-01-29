@@ -10,18 +10,11 @@
 		"en": "Letgo is an app which allows yo to buy and sell some stuff to people around you",
 		"nl": "Letgo is een app waarmee je wat spullen kunt kopen en verkopen aan mensen om je heen"
 	},
-	"url": [
-		"www.letgo.com",
-		"letgo.com"
-	],
+	"url": ["www.letgo.com", "letgo.com"],
 	"version": "1.0.12",
 	"logo": "https://i.imgur.com/6vPSsMf.png",
 	"thumbnail": "https://i.imgur.com/WiqOZh3.png",
 	"color": "#FF3F56",
 	"category": "other",
-	"tags": [
-		"turkish",
-		"shopping",
-		"letgo"
-	]
+	"tags": ["turkish", "shopping", "letgo"]
 }

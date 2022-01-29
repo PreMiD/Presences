@@ -25,10 +25,5 @@
 	"thumbnail": "https://i.imgur.com/ncLBJMx.png",
 	"color": "#FF6347",
 	"category": "other",
-	"tags": [
-		"food",
-		"diy",
-		"tutorial",
-		"recipes"
-	]
+	"tags": ["food", "diy", "tutorial", "recipes"]
 }

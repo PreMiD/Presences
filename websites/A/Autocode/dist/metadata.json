@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/iojaJvv.jpg",
 	"color": "#ffffff",
 	"category": "other",
-	"tags": [
-		"code",
-		"ide",
-		"editor"
-	]
+	"tags": ["code", "ide", "editor"]
 }

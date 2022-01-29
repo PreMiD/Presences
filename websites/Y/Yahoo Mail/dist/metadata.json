@@ -27,9 +27,5 @@
 	"thumbnail": "https://i.imgur.com/l3hHxP9.png",
 	"color": "#6923D1",
 	"category": "other",
-	"tags": [
-		"yahoo-mail",
-		"email",
-		"other"
-	]
+	"tags": ["yahoo-mail", "email", "other"]
 }

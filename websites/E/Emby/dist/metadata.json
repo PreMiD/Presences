@@ -22,12 +22,7 @@
 	"thumbnail": "https://i.imgur.com/gDfeWur.png",
 	"color": "#52B54B",
 	"category": "videos",
-	"tags": [
-		"video",
-		"movie",
-		"tv",
-		"media"
-	],
+	"tags": ["video", "movie", "tv", "media"],
 	"settings": [
 		{
 			"id": "showMediaTimestamps",

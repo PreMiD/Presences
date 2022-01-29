@@ -18,17 +18,11 @@
 		"zh_CN": "Ask Ubuntu是一个由社区驱动的Ubuntu操作系统问答网站。",
 		"vi_VN": "Ask Ubuntu là cộng đồng hỏi đáp dành cho hệ điều hành Ubuntu. Nó là một phần của mạng lưới Stack Exchange, chạy cùng phần mềm với Stack Overflox. Người dùng nhận danh tiếng dựa trên các phản hồi của cộng đồng đói với các câu hỏi và câu trả lời của họ."
 	},
-	"url": [
-		"www.askubuntu.com",
-		"askubuntu.com"
-	],
+	"url": ["www.askubuntu.com", "askubuntu.com"],
 	"version": "1.2.11",
 	"logo": "https://i.imgur.com/pj2bELp.png",
 	"thumbnail": "https://i.imgur.com/9Iy8Ibg.png",
 	"color": "#dc461d",
 	"category": "other",
-	"tags": [
-		"askubuntu",
-		"ubuntu"
-	]
+	"tags": ["askubuntu", "ubuntu"]
 }

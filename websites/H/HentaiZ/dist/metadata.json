@@ -16,10 +16,6 @@
 	"thumbnail": "https://i.imgur.com/3XfELvO.png",
 	"color": "#1f1f1f",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"hentai",
-		"nsfw"
-	],
+	"tags": ["anime", "hentai", "nsfw"],
 	"iframe": true
 }

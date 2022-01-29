@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/HkLnasC.jpg",
 	"color": "#53abee",
 	"category": "music",
-	"tags": [
-		"music",
-		"personal-library"
-	]
+	"tags": ["music", "personal-library"]
 }

@@ -18,12 +18,7 @@
 	"thumbnail": "https://i.imgur.com/pYZzRDV.png",
 	"color": "#64e646",
 	"category": "music",
-	"tags": [
-		"radio",
-		"podcast",
-		"music",
-		"stream"
-	],
+	"tags": ["radio", "podcast", "music", "stream"],
 	"settings": [
 		{
 			"id": "lang",

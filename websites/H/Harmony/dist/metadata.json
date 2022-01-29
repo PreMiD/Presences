@@ -14,9 +14,5 @@
 	"thumbnail": "https://i.imgur.com/MqPDsUl.png",
 	"color": "#4c1eff",
 	"category": "music",
-	"tags": [
-		"music",
-		"harmony",
-		"radio"
-	]
+	"tags": ["music", "harmony", "radio"]
 }

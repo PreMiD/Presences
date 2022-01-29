@@ -17,9 +17,5 @@
 	"thumbnail": "https://i.imgur.com/iszRY6f.png",
 	"color": "#f68a1a",
 	"category": "videos",
-	"tags": [
-		"nsfw",
-		"webcam",
-		"live-streaming"
-	]
+	"tags": ["nsfw", "webcam", "live-streaming"]
 }

@@ -20,10 +20,7 @@
 		"nl": "Het beste van de BBC, met het laatste nieuws en sportkoppen, weerberichten, hoogtepunten op tv en radio en nog veel meer uit heel BBC Online.",
 		"vi_VN": "Những tinh tuý vủa BBC, với những bài báo mới nhất và tiêu đề thể thao, thời tiết, truyền hình & radio nổi bật từ tất cả BBC Online."
 	},
-	"url": [
-		"www.bbc.co.uk",
-		"www.bbc.com"
-	],
+	"url": ["www.bbc.co.uk", "www.bbc.com"],
 	"version": "2.0.12",
 	"logo": "https://i.imgur.com/4GzQf9o.png",
 	"thumbnail": "https://i.imgur.com/fBxxQDw.png",

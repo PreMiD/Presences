@@ -17,10 +17,7 @@
 	"thumbnail": "https://i.imgur.com/lVved9l.png",
 	"color": "#ff5756",
 	"category": "other",
-	"tags": [
-		"google",
-		"fonts"
-	],
+	"tags": ["google", "fonts"],
 	"settings": [
 		{
 			"id": "showButton",

@@ -26,10 +26,5 @@
 	"thumbnail": "https://i.imgur.com/U9eCt4s.png",
 	"color": "#f47c8c",
 	"category": "other",
-	"tags": [
-		"web",
-		"discord",
-		"server",
-		"hosting"
-	]
+	"tags": ["web", "discord", "server", "hosting"]
 }
