@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"author": {
+		"name": "Sadashi",
+		"id": "546384046394048538"
+	},
+	"contributors": [
+		{
+			"name": "Sadashi",
+			"id": "546384046394048538"
+		}
+	],
+	"service": "ZNotes",
+	"altnames": ["ZNotes"],
+	"description": {
+		"en": "ZNotes is the ultimate revision platform with 20+ million hits. Free summarized revision notes for international examination boards written for students, by students."
+	},
+	"url": ["znotes.org", "www.znotes.org"],
+	"regExp": "(www\\.)?znotes\\.org",
+	"version": "1.0",
+	"logo": "https://znotes.org/img/logo.png",
+	"thumbnail": "https://images.znotes.org/web_images/Study_Guide_Wallpaper-01-min.jpg",
+	"color": "#d82057",
+	"tags": ["znotes", "revision", "education"],
+	"category": "other",
+	"iframe": false,
+	"iFrameRegExp": "REGEXP",
+	"readLogs": false,
+	"settings": []
+}
