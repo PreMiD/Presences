@@ -18,14 +18,15 @@ presence.on("UpdateData", async () => {
 		const timestamp = document.querySelector<HTMLInputElement>(
 				"input[aria-valuenow][aria-valuemax]"
 			),
-			loaded = audio.readyState > 2;
+			paused = audio.paused || audio.readyState <= 2;
 
 		presenceData.details = navigator.mediaSession.metadata.title;
 		presenceData.state = navigator.mediaSession.metadata.artist;
 
-		presenceData.smallImageKey = audio.paused || !loaded ? "pause" : "play";
-		presenceData.smallImageText =
-			audio.paused || !loaded ? (await strings).pause : (await strings).play;
+		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageText = paused
+			? (await strings).pause
+			: (await strings).play;
 
 		presenceData.largeImageKey =
 			navigator.mediaSession.metadata.artwork[0].src.replace(
@@ -39,7 +40,7 @@ presence.on("UpdateData", async () => {
 				Number(timestamp.ariaValueMax)
 			);
 
-		if (audio.paused || !loaded) {
+		if (paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
