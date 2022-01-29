@@ -27,7 +27,10 @@
 	"thumbnail": "https://i.imgur.com/iftQq6r.jpg",
 	"color": "#4267B2",
 	"category": "socials",
-	"tags": ["friends", "family"],
+	"tags": [
+		"friends",
+		"family"
+	],
 	"settings": [
 		{
 			"icon": "fad fa-user-secret",

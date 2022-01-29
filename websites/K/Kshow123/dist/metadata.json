@@ -15,6 +15,10 @@
 	"thumbnail": "https://i.imgur.com/JMRVXls.png",
 	"color": "#2daae1",
 	"category": "videos",
-	"tags": ["video", "media", "kpop"],
+	"tags": [
+		"video",
+		"media",
+		"kpop"
+	],
 	"iframe": true
 }

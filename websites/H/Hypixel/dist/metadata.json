@@ -17,5 +17,8 @@
 	"thumbnail": "https://i.imgur.com/9eFIHYS.jpg",
 	"color": "#d9992a",
 	"category": "games",
-	"tags": ["minecraft", "hypixel"]
+	"tags": [
+		"minecraft",
+		"hypixel"
+	]
 }

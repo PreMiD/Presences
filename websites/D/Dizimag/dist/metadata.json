@@ -16,6 +16,11 @@
 	"thumbnail": "https://i.imgur.com/EnLqRkt.png",
 	"color": "#bac510",
 	"category": "videos",
-	"tags": ["dizimag", "video", "tv-series", "turkish"],
+	"tags": [
+		"dizimag",
+		"video",
+		"tv-series",
+		"turkish"
+	],
 	"iframe": true
 }

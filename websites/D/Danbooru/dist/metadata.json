@@ -15,7 +15,14 @@
 	"thumbnail": "https://i.imgur.com/T1pAw9x.jpg",
 	"color": "#006FFA",
 	"category": "socials",
-	"tags": ["art", "anime", "fanart", "manga", "board", "nsfw"],
+	"tags": [
+		"art",
+		"anime",
+		"fanart",
+		"manga",
+		"board",
+		"nsfw"
+	],
 	"settings": [
 		{
 			"id": "privacy",

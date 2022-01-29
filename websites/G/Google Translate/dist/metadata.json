@@ -32,7 +32,11 @@
 	"thumbnail": "https://i.imgur.com/HSrkJq0.png",
 	"color": "#4c8bf5",
 	"category": "other",
-	"tags": ["translate", "google", "utility"],
+	"tags": [
+		"translate",
+		"google",
+		"utility"
+	],
 	"settings": [
 		{
 			"id": "tDetail",

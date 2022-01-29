@@ -17,7 +17,12 @@
 	"thumbnail": "https://i.imgur.com/ISBVR2q.png",
 	"color": "#ff4400",
 	"category": "other",
-	"tags": ["programming", "sharing", "coding", "gitlab"],
+	"tags": [
+		"programming",
+		"sharing",
+		"coding",
+		"gitlab"
+	],
 	"settings": [
 		{
 			"id": "lock",

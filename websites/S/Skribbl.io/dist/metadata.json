@@ -26,7 +26,10 @@
 	"thumbnail": "https://i.imgur.com/sDWwUZk.png",
 	"color": "#245195",
 	"category": "games",
-	"tags": ["skribbl-io", "games"],
+	"tags": [
+		"skribbl-io",
+		"games"
+	],
 	"settings": [
 		{
 			"id": "lang",

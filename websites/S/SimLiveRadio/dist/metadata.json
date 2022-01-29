@@ -10,11 +10,20 @@
 		"nl": "SimLiveRadio is de meest succesvolle infotainment radio voor simulatiespellen in Duitsland, Oostenrijk en Zwitserland!",
 		"de": "Deutschlands Radio Nr. 1 für Simulationsspiele"
 	},
-	"url": ["simliveradio.net", "laut.fm"],
+	"url": [
+		"simliveradio.net",
+		"laut.fm"
+	],
 	"version": "1.0.9",
 	"logo": "https://i.imgur.com/GCpxrYu.png",
 	"thumbnail": "https://i.imgur.com/d8J0v3O.png",
 	"color": "#f87d04",
 	"category": "games",
-	"tags": ["ets2", "ats", "tmp", "fs19", "german"]
+	"tags": [
+		"ets2",
+		"ats",
+		"tmp",
+		"fs19",
+		"german"
+	]
 }

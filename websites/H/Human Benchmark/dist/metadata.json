@@ -15,7 +15,12 @@
 	"thumbnail": "https://i.imgur.com/jDQRXXN.jpg",
 	"color": "#FFA600",
 	"category": "other",
-	"tags": ["games", "tests", "brain", "cognitive"],
+	"tags": [
+		"games",
+		"tests",
+		"brain",
+		"cognitive"
+	],
 	"settings": [
 		{
 			"id": "stamp",

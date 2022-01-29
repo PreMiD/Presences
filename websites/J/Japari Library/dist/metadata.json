@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/nGO9Amx.png",
 	"color": "#4CC5FF",
 	"category": "anime",
-	"tags": ["anime", "wiki"]
+	"tags": [
+		"anime",
+		"wiki"
+	]
 }

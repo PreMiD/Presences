@@ -22,7 +22,14 @@
 	"thumbnail": "https://i.imgur.com/8pBRB2e.png",
 	"color": "#c005e6",
 	"category": "other",
-	"tags": ["community", "network", "gaming", "news", "radio", "forum"],
+	"tags": [
+		"community",
+		"network",
+		"gaming",
+		"news",
+		"radio",
+		"forum"
+	],
 	"settings": [
 		{
 			"id": "lang",
@@ -51,7 +58,11 @@
 			"title": "Icon",
 			"icon": "fas fa-cog",
 			"value": 0,
-			"values": ["Full", "Icon", "Text"]
+			"values": [
+				"Full",
+				"Icon",
+				"Text"
+			]
 		}
 	]
 }

@@ -16,7 +16,11 @@
 	"thumbnail": "https://i.imgur.com/ds4icXO.png",
 	"color": "#00809D",
 	"category": "other",
-	"tags": ["internet", "browsing", "search"],
+	"tags": [
+		"internet",
+		"browsing",
+		"search"
+	],
 	"settings": [
 		{
 			"id": "homepageMessage",

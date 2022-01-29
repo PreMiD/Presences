@@ -14,7 +14,11 @@
 	"thumbnail": "https://i.imgur.com/jWDLaoK.png",
 	"color": "#e67e22",
 	"category": "games",
-	"tags": ["fps", "gaming", "shooter"],
+	"tags": [
+		"fps",
+		"gaming",
+		"shooter"
+	],
 	"settings": [
 		{
 			"id": "showGame",

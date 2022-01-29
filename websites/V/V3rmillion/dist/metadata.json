@@ -16,5 +16,10 @@
 	"thumbnail": "https://i.imgur.com/YaTDSvj.png",
 	"color": "#CD1818",
 	"category": "other",
-	"tags": ["forum", "programming", "sharing", "coding"]
+	"tags": [
+		"forum",
+		"programming",
+		"sharing",
+		"coding"
+	]
 }

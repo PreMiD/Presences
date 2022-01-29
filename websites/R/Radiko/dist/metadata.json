@@ -22,5 +22,10 @@
 	"thumbnail": "https://i.imgur.com/FQ4vUVs.png",
 	"color": "#0064FF",
 	"category": "music",
-	"tags": ["radio", "podcast", "japan", "stream"]
+	"tags": [
+		"radio",
+		"podcast",
+		"japan",
+		"stream"
+	]
 }

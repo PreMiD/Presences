@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/VhUKz5t.jpg",
 	"color": "#fc4513",
 	"category": "games",
-	"tags": ["pokémon-go", "ingress"]
+	"tags": [
+		"pokémon-go",
+		"ingress"
+	]
 }

@@ -15,7 +15,10 @@
 	"thumbnail": "https://i.imgur.com/eTT4eEI.png",
 	"color": "#83AF50",
 	"category": "games",
-	"tags": ["games", "battleroyale"],
+	"tags": [
+		"games",
+		"battleroyale"
+	],
 	"settings": [
 		{
 			"id": "broadcasttc",

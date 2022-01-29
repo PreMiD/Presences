@@ -15,13 +15,24 @@
 		"en": "Oculus is a brand of Meta that produces virtual reality headsets.",
 		"de": "Oculus ist eine Marke von Meta, die Virtual-Reality-Headsets herstellt."
 	},
-	"url": ["www.oculus.com", "support.oculus.com", "secure.oculus.com"],
+	"url": [
+		"www.oculus.com",
+		"support.oculus.com",
+		"secure.oculus.com"
+	],
 	"version": "1.2.4",
 	"logo": "https://i.imgur.com/jzoFzDA.jpg",
 	"thumbnail": "https://i.imgur.com/E2oERhP.png",
 	"color": "#ffffff",
 	"category": "games",
-	"tags": ["games", "vr", "gaming", "quest", "rift", "meta"],
+	"tags": [
+		"games",
+		"vr",
+		"gaming",
+		"quest",
+		"rift",
+		"meta"
+	],
 	"settings": [
 		{
 			"id": "buttons",

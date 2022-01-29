@@ -23,7 +23,10 @@
 	"thumbnail": "https://i.imgur.com/jy7RZMJ.png",
 	"color": "#e61d2f",
 	"category": "anime",
-	"tags": ["video", "anime"],
+	"tags": [
+		"video",
+		"anime"
+	],
 	"iframe": true,
 	"settings": [
 		{

@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/Ko4785o.png",
 	"color": "#2a9bd5",
 	"category": "socials",
-	"tags": ["socials", "other"]
+	"tags": [
+		"socials",
+		"other"
+	]
 }

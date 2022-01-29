@@ -21,5 +21,8 @@
 	"thumbnail": "https://i.imgur.com/m7Av02S.png",
 	"color": "#7A64EF",
 	"category": "other",
-	"tags": ["hosting", "minecraft"]
+	"tags": [
+		"hosting",
+		"minecraft"
+	]
 }

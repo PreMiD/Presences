@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/pSyDDdg.png",
 	"color": "#a42925",
 	"category": "games",
-	"tags": ["io", "splix"]
+	"tags": [
+		"io",
+		"splix"
+	]
 }

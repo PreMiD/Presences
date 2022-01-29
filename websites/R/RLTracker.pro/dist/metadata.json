@@ -16,5 +16,9 @@
 	"thumbnail": "https://i.imgur.com/55LQ9p5.png",
 	"color": "#f16522",
 	"category": "games",
-	"tags": ["rocket-league", "stats", "tracker"]
+	"tags": [
+		"rocket-league",
+		"stats",
+		"tracker"
+	]
 }

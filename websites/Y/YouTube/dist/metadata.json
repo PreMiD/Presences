@@ -63,13 +63,19 @@
 		"ga_IE": "Bain sult as na físeáin agus an ceol is breá leat, uaslódáil ábhar bunaidh, agus déan é a roinnt le cairde, le do mhuintir agus leis an domhan ar YouTube.",
 		"vi_VN": "Thưởng thức các bài hát và video bạn yêu thích, đăng tải nội dung của riêng mình, và chia sẻ chúng với bạn bè, người thân, và cả thế giới trên YouTube."
 	},
-	"url": ["www.youtube.com", "studio.youtube.com"],
+	"url": [
+		"www.youtube.com",
+		"studio.youtube.com"
+	],
 	"version": "5.1.21",
 	"logo": "https://i.imgur.com/o5injgg.png",
 	"thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
 	"color": "#E40813",
 	"category": "videos",
-	"tags": ["video", "media"],
+	"tags": [
+		"video",
+		"media"
+	],
 	"settings": [
 		{
 			"id": "lang",
@@ -124,7 +130,11 @@
 			"title": "Logo",
 			"icon": "fad fa-images",
 			"value": 0,
-			"values": ["YT Logo", "Thumbnail", "Channel"]
+			"values": [
+				"YT Logo",
+				"Thumbnail",
+				"Channel"
+			]
 		},
 		{
 			"id": "buttons",

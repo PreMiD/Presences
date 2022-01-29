@@ -21,7 +21,10 @@
 	"thumbnail": "https://i.imgur.com/hPkh9Br.png",
 	"color": "#3961DD",
 	"category": "other",
-	"tags": ["bot", "discord"],
+	"tags": [
+		"bot",
+		"discord"
+	],
 	"settings": [
 		{
 			"id": "docname",

@@ -5,7 +5,9 @@
 		"id": "374905512661221377"
 	},
 	"service": "Apple TV+",
-	"altnames": ["애플 TV"],
+	"altnames": [
+		"애플 TV"
+	],
 	"description": {
 		"en": "Apple TV+ is a streaming service featuring Apple Originals — award-winning series, compelling dramas, groundbreaking documentaries, kids’ entertainment, comedies, and more — with new Apple Originals added every month.",
 		"th": "Apple TV+ เป็นบริการสตรีมมิ่งที่มาพร้อมกับ Apple Original ไม่ว่าจะเป็นซีรีส์ที่ได้รับรางวัล ละครที่น่าสนใจ สารคดีแปลกใหม่ รายการบันเทิงสำหรับเด็กๆ รายการตลก และอีกมากมาย รวมไปถึง Apple Original ที่เพิ่มมาใหม่ทุกเดือน",
@@ -18,7 +20,12 @@
 	"thumbnail": "https://i.imgur.com/i7Vt4uR.png",
 	"color": "#2e2e2e",
 	"category": "videos",
-	"tags": ["apple-tv", "apple-tv-plus", "movie", "drama"],
+	"tags": [
+		"apple-tv",
+		"apple-tv-plus",
+		"movie",
+		"drama"
+	],
 	"settings": [
 		{
 			"id": "timestamp",

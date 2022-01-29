@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/frsAsls.png",
 	"color": "#b4ad9d",
 	"category": "anime",
-	"tags": ["anime", "manga"]
+	"tags": [
+		"anime",
+		"manga"
+	]
 }

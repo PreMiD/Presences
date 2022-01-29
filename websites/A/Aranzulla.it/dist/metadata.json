@@ -19,11 +19,19 @@
 		"ga_IE": "Faigh amach suíomh Gréasáin Aranzulla.it chun treoracha agus ranganna teagaisc i dteanga na hIodáile a léamh.",
 		"vi_VN": "Khám phá trang web Aranzulla.it để được các bài hướng dẫn bằng Tiếng Tây Ban Nha."
 	},
-	"url": ["www.aranzulla.it", "aranzulla.it"],
+	"url": [
+		"www.aranzulla.it",
+		"aranzulla.it"
+	],
 	"version": "1.2.11",
 	"logo": "https://i.imgur.com/P47inut.png",
 	"thumbnail": "https://i.imgur.com/gZ1Vwml.png",
 	"color": "#EE701B",
 	"category": "other",
-	"tags": ["aranzulla", "salvatore-aranzulla", "tutorial", "guide"]
+	"tags": [
+		"aranzulla",
+		"salvatore-aranzulla",
+		"tutorial",
+		"guide"
+	]
 }

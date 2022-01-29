@@ -17,6 +17,9 @@
 	"thumbnail": "https://i.imgur.com/DosCQw9.png",
 	"color": "#0F62E0",
 	"category": "anime",
-	"tags": ["anime", "nsfw"],
+	"tags": [
+		"anime",
+		"nsfw"
+	],
 	"iframe": true
 }

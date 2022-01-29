@@ -9,11 +9,17 @@
 		"en": "The Indonesian E-Commerce Site",
 		"nl": "De Indonesische e-commerce-site"
 	},
-	"url": ["www.tokopedia.com", "seller.tokopedia.com"],
+	"url": [
+		"www.tokopedia.com",
+		"seller.tokopedia.com"
+	],
 	"version": "1.0.8",
 	"logo": "https://i.imgur.com/oR93cDm.png",
 	"thumbnail": "https://i.imgur.com/ixO23A2.png",
 	"color": "#90ee90",
 	"category": "other",
-	"tags": ["e-commerce", "shopping"]
+	"tags": [
+		"e-commerce",
+		"shopping"
+	]
 }

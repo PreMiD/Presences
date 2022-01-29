@@ -17,7 +17,11 @@
 	"thumbnail": "https://i.imgur.com/TrhRNwT.jpg",
 	"color": "#4DB8C9",
 	"category": "videos",
-	"tags": ["movie", "video", "media"],
+	"tags": [
+		"movie",
+		"video",
+		"media"
+	],
 	"iframe": true,
 	"settings": [
 		{

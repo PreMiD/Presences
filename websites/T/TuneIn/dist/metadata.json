@@ -25,5 +25,10 @@
 	"thumbnail": "https://i.imgur.com/lewvpKU.png",
 	"color": "#33B6A8",
 	"category": "music",
-	"tags": ["tunein", "music", "radio", "media"]
+	"tags": [
+		"tunein",
+		"music",
+		"radio",
+		"media"
+	]
 }

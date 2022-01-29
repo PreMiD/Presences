@@ -15,5 +15,9 @@
 	"thumbnail": "https://i.imgur.com/qnTU97o.jpg",
 	"color": "#f58ea8",
 	"category": "music",
-	"tags": ["music", "radio", "vaporwave"]
+	"tags": [
+		"music",
+		"radio",
+		"vaporwave"
+	]
 }

@@ -17,5 +17,8 @@
 	"thumbnail": "https://i.imgur.com/4ttiUZu.jpg",
 	"color": "#1751f0",
 	"category": "other",
-	"tags": ["coin", "currency"]
+	"tags": [
+		"coin",
+		"currency"
+	]
 }

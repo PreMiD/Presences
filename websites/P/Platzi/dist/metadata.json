@@ -16,5 +16,9 @@
 	"thumbnail": "https://i.imgur.com/wVy2Pqc.png",
 	"color": "#98CA3F",
 	"category": "videos",
-	"tags": ["courses", "learning", "platzi"]
+	"tags": [
+		"courses",
+		"learning",
+		"platzi"
+	]
 }

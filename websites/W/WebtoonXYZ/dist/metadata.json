@@ -15,7 +15,11 @@
 	"thumbnail": "https://i.imgur.com/UkgngBO.png",
 	"color": "#eb2e73",
 	"category": "anime",
-	"tags": ["manhwa", "webtoon", "nsfw"],
+	"tags": [
+		"manhwa",
+		"webtoon",
+		"nsfw"
+	],
 	"settings": [
 		{
 			"id": "buttons",
@@ -28,7 +32,10 @@
 			"title": "Icon",
 			"icon": "fad fa-images",
 			"value": 0,
-			"values": ["Without bg", "With bg"]
+			"values": [
+				"Without bg",
+				"With bg"
+			]
 		}
 	]
 }

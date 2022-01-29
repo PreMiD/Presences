@@ -27,5 +27,9 @@
 	"thumbnail": "https://i.imgur.com/zLejTHm.png",
 	"color": "#DD4B3E",
 	"category": "other",
-	"tags": ["gmail", "email", "other"]
+	"tags": [
+		"gmail",
+		"email",
+		"other"
+	]
 }

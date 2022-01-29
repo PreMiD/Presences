@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/jsMsjMk.png",
 	"color": "#c6a24c",
 	"category": "games",
-	"tags": ["speed", "run"]
+	"tags": [
+		"speed",
+		"run"
+	]
 }

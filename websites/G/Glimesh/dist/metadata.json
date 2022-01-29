@@ -9,13 +9,23 @@
 		"en": "Glimesh is the next generation streaming platform built by the community for the community.",
 		"nl": "Glimesh is het streamingplatform van de volgende generatie dat door de community voor de community is gebouwd."
 	},
-	"url": ["glimesh.tv", "support.glimesh.tv", "blog.glimesh.tv", "glim.shop"],
+	"url": [
+		"glimesh.tv",
+		"support.glimesh.tv",
+		"blog.glimesh.tv",
+		"glim.shop"
+	],
 	"version": "1.0.11",
 	"logo": "https://i.imgur.com/YqIpqg4.png",
 	"thumbnail": "https://i.imgur.com/aALh7B4.jpg",
 	"color": "#2c409b",
 	"category": "videos",
-	"tags": ["stream", "glimesh", "tv", "live"],
+	"tags": [
+		"stream",
+		"glimesh",
+		"tv",
+		"live"
+	],
 	"settings": [
 		{
 			"id": "show_details",

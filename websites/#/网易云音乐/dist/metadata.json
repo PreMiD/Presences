@@ -18,5 +18,8 @@
 	"thumbnail": "https://i.imgur.com/zmIDGO1.png",
 	"color": "#E30000",
 	"category": "music",
-	"tags": ["songs", "music"]
+	"tags": [
+		"songs",
+		"music"
+	]
 }

@@ -11,11 +11,18 @@
 		"ga_IE": "Cluiche il-imreora ar líne bunaithe ar chárta Werewolf. Fan i do dhúiseacht.",
 		"nl": "Een online weerwolf-kaartspel voor meerdere spelers. Wakker blijven."
 	},
-	"url": ["wolfy.fr", "www.wolfy.fr"],
+	"url": [
+		"wolfy.fr",
+		"www.wolfy.fr"
+	],
 	"version": "1.1.17",
 	"logo": "https://i.imgur.com/TFduNvD.png",
 	"thumbnail": "https://i.imgur.com/aCO5gAP.png",
 	"color": "#1b1b2b",
 	"category": "games",
-	"tags": ["games", "card-based", "multiplayer"]
+	"tags": [
+		"games",
+		"card-based",
+		"multiplayer"
+	]
 }

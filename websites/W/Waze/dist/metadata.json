@@ -14,5 +14,10 @@
 	"thumbnail": "https://i.imgur.com/t1HF0dC.png",
 	"color": "#33ccff",
 	"category": "other",
-	"tags": ["navigation", "waze", "live", "map"]
+	"tags": [
+		"navigation",
+		"waze",
+		"live",
+		"map"
+	]
 }

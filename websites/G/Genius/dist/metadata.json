@@ -22,7 +22,11 @@
 	"thumbnail": "https://i.imgur.com/mxOLBAC.png",
 	"color": "#FFFF64",
 	"category": "music",
-	"tags": ["genius", "lyrics", "music"],
+	"tags": [
+		"genius",
+		"lyrics",
+		"music"
+	],
 	"settings": [
 		{
 			"id": "lang",

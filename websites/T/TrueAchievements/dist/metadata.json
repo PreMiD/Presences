@@ -15,5 +15,9 @@
 	"thumbnail": "https://i.imgur.com/rrvYL5I.png",
 	"color": "#c1f800",
 	"category": "other",
-	"tags": ["true", "achievements", "xbox"]
+	"tags": [
+		"true",
+		"achievements",
+		"xbox"
+	]
 }

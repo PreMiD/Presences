@@ -13,13 +13,19 @@
 		"zh_CN": "截至2021年3月24日，Qobuz是第一个提供24位高分辨率音频流的音乐流平台，包括在Sonos上。",
 		"vi_VN": "Tính từ 24 Tháng 8 2021, Qobuz là nền tảng phát nhạc đầu tiên cung cấp âm thanh chất lượng cao lên tới 24-bit, bao gồm cả trên Sonos."
 	},
-	"url": ["play.qobuz.com", "qobuz.com"],
+	"url": [
+		"play.qobuz.com",
+		"qobuz.com"
+	],
 	"version": "1.0.4",
 	"logo": "https://i.imgur.com/mE5JHCJ.png",
 	"thumbnail": "https://i.imgur.com/iu14N5f.png",
 	"color": "#0086f5",
 	"category": "music",
-	"tags": ["qobuz", "music"],
+	"tags": [
+		"qobuz",
+		"music"
+	],
 	"settings": [
 		{
 			"id": "lang",

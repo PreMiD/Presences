@@ -10,11 +10,19 @@
 		"nl": "Brick Hill is het ultieme bouwsteenspel, waarmee je de grenzen van digitale stenen kunt verleggen en je eigen spellen kunt maken.",
 		"vi_VN": "Brick Hill là trò chơi xây hộp tối thượng, cho phép bạn vượt khỏi giới hạn của các hộp điện tử và tự tạo trò chơi của riêng mình."
 	},
-	"url": ["www.brick-hill.com", "blog.brick-hill.com", "api.brick-hill.com"],
+	"url": [
+		"www.brick-hill.com",
+		"blog.brick-hill.com",
+		"api.brick-hill.com"
+	],
 	"version": "1.0.11",
 	"logo": "https://i.imgur.com/zeeZUb0.png",
 	"thumbnail": "https://i.imgur.com/Gy5U4QK.png",
 	"color": "#00A9FE",
 	"category": "games",
-	"tags": ["game", "community", "gaming"]
+	"tags": [
+		"game",
+		"community",
+		"gaming"
+	]
 }

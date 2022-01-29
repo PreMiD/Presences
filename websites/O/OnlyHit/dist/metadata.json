@@ -15,13 +15,21 @@
 		"en": "OnlyHit is your online music radio station made to play your best hits 24/7 and to make you discover your future hits first.",
 		"nl": "OnlyHit is jouw online muziek radiostation, gemaakt om je de beste hits 24/7 af te spelen en om je als eerste de toekomstige hits te laten ontdekken."
 	},
-	"url": ["onlyhit.us", "onlyhit.merchforall.com"],
+	"url": [
+		"onlyhit.us",
+		"onlyhit.merchforall.com"
+	],
 	"version": "1.1.9",
 	"logo": "https://i.imgur.com/vyiCjQz.png",
 	"thumbnail": "https://i.imgur.com/x5Jpq7I.png",
 	"color": "#C1272D",
 	"category": "music",
-	"tags": ["onlyhit", "radio", "music", "station"],
+	"tags": [
+		"onlyhit",
+		"radio",
+		"music",
+		"station"
+	],
 	"settings": [
 		{
 			"id": "tElapsed",

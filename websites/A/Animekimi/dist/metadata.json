@@ -17,7 +17,11 @@
 	"thumbnail": "https://i.imgur.com/eeLOziv.jpg",
 	"color": "#e67e22",
 	"category": "anime",
-	"tags": ["anime", "videos", "thai"],
+	"tags": [
+		"anime",
+		"videos",
+		"thai"
+	],
 	"iframe": true,
 	"settings": [
 		{

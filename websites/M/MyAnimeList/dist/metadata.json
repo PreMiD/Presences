@@ -27,5 +27,9 @@
 	"thumbnail": "https://i.imgur.com/VyAAcEN.png",
 	"color": "#2e51a2",
 	"category": "anime",
-	"tags": ["anime", "manga", "community"]
+	"tags": [
+		"anime",
+		"manga",
+		"community"
+	]
 }

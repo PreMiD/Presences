@@ -26,5 +26,9 @@
 	"thumbnail": "https://i.imgur.com/NIfFOgK.png",
 	"color": "#EA580C",
 	"category": "music",
-	"tags": ["q-dance", "music", "media"]
+	"tags": [
+		"q-dance",
+		"music",
+		"media"
+	]
 }

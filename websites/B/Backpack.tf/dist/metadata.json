@@ -15,5 +15,10 @@
 	"thumbnail": "https://i.imgur.com/uQCICM4.png",
 	"color": "#757575",
 	"category": "other",
-	"tags": ["steam", "tf2", "trading", "price"]
+	"tags": [
+		"steam",
+		"tf2",
+		"trading",
+		"price"
+	]
 }

@@ -17,5 +17,9 @@
 	"thumbnail": "https://i.imgur.com/sXm35kV.png",
 	"color": "#0078d4",
 	"category": "other",
-	"tags": ["onedrive", "microsoft", "office"]
+	"tags": [
+		"onedrive",
+		"microsoft",
+		"office"
+	]
 }

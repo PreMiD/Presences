@@ -20,7 +20,13 @@
 	"thumbnail": "https://i.imgur.com/YnAyvct.png",
 	"color": "#0080cb",
 	"category": "other",
-	"tags": ["projects", "board", "card", "list", "management"],
+	"tags": [
+		"projects",
+		"board",
+		"card",
+		"list",
+		"management"
+	],
 	"settings": [
 		{
 			"id": "displayPrivateBoards",

@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/8Ofdw6h.png",
 	"color": "#3FA549",
 	"category": "other",
-	"tags": ["bot", "tatsumaki"]
+	"tags": [
+		"bot",
+		"tatsumaki"
+	]
 }

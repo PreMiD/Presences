@@ -24,5 +24,9 @@
 	"thumbnail": "https://i.imgur.com/umMu8Jc.png",
 	"color": "#00a896",
 	"category": "anime",
-	"tags": ["anime", "manga", "novel"]
+	"tags": [
+		"anime",
+		"manga",
+		"novel"
+	]
 }

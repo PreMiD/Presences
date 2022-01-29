@@ -17,11 +17,19 @@
 		"ga_IE": "Is meascán é QDSSClub idir Blag agus Fóram atá á bhainistiú ag YouTubers: Freastalaí Sul dlite Quei.",
 		"nl": "QDSSClub is een mix tussen een blog en een forum beheerd door YouTubers: Quei Due Sul Server."
 	},
-	"url": ["qdssclub.com", "www.qdssclub.com"],
+	"url": [
+		"qdssclub.com",
+		"www.qdssclub.com"
+	],
 	"version": "1.2.12",
 	"logo": "https://i.imgur.com/R10jnF3.png",
 	"thumbnail": "https://i.imgur.com/G0CHGdM.png",
 	"color": "#9A12D6",
 	"category": "other",
-	"tags": ["qdss", "quei-due-sul-server", "qdssclub", "forum"]
+	"tags": [
+		"qdss",
+		"quei-due-sul-server",
+		"qdssclub",
+		"forum"
+	]
 }

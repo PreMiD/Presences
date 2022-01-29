@@ -17,6 +17,13 @@
 	"thumbnail": "https://i.imgur.com/2PnNeRa.png",
 	"color": "#FFCC74",
 	"category": "videos",
-	"tags": ["diziay", "yabancı", "dizi", "series", "movie", "video"],
+	"tags": [
+		"diziay",
+		"yabancı",
+		"dizi",
+		"series",
+		"movie",
+		"video"
+	],
 	"iframe": true
 }

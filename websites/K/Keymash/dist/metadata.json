@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/ZHE29sF.png",
 	"color": "#FB923C",
 	"category": "games",
-	"tags": ["typing", "game"]
+	"tags": [
+		"typing",
+		"game"
+	]
 }

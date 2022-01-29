@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/PdormPN.png",
 	"color": "#2abfc6",
 	"category": "videos",
-	"tags": ["share", "skills"]
+	"tags": [
+		"share",
+		"skills"
+	]
 }

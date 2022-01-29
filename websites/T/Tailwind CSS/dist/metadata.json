@@ -20,5 +20,9 @@
 	"thumbnail": "https://i.imgur.com/hyH0NT9.png",
 	"color": "#06b6d4",
 	"category": "other",
-	"tags": ["tailwind", "framework", "turkish"]
+	"tags": [
+		"tailwind",
+		"framework",
+		"turkish"
+	]
 }

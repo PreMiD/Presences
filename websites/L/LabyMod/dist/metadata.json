@@ -22,5 +22,8 @@
 	"thumbnail": "https://i.imgur.com/SDMxfEg.png",
 	"color": "#008fe8",
 	"category": "games",
-	"tags": ["minecraft", "labymod"]
+	"tags": [
+		"minecraft",
+		"labymod"
+	]
 }

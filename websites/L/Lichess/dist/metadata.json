@@ -16,5 +16,9 @@
 	"thumbnail": "https://i.imgur.com/kXZgHJS.png",
 	"color": "#c5c5c5",
 	"category": "games",
-	"tags": ["lichess", "games", "chess"]
+	"tags": [
+		"lichess",
+		"games",
+		"chess"
+	]
 }

@@ -17,7 +17,10 @@
 	"thumbnail": "https://i.imgur.com/Bnxt3z4.png",
 	"color": "#4257B2",
 	"category": "other",
-	"tags": ["learn", "study"],
+	"tags": [
+		"learn",
+		"study"
+	],
 	"iframe": true,
 	"settings": [
 		{

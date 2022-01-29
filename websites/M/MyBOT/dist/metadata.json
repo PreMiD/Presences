@@ -22,5 +22,13 @@
 	"thumbnail": "https://i.imgur.com/B8x9D6k.png",
 	"color": "#00fef4",
 	"category": "other",
-	"tags": ["other", "development", "bots", "apps", "discord", "guides", "mybot"]
+	"tags": [
+		"other",
+		"development",
+		"bots",
+		"apps",
+		"discord",
+		"guides",
+		"mybot"
+	]
 }

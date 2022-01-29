@@ -26,7 +26,13 @@
 	"thumbnail": "https://i.imgur.com/Z8CxsNw.png",
 	"color": "#B92025",
 	"category": "games",
-	"tags": ["ets2", "ats", "scs", "drive", "truck"],
+	"tags": [
+		"ets2",
+		"ats",
+		"scs",
+		"drive",
+		"truck"
+	],
 	"settings": [
 		{
 			"id": "buttons",

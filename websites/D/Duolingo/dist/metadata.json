@@ -47,5 +47,9 @@
 	"thumbnail": "https://i.imgur.com/M3nbjZJ.png",
 	"color": "#58cc02",
 	"category": "other",
-	"tags": ["education", "games", "languages"]
+	"tags": [
+		"education",
+		"games",
+		"languages"
+	]
 }

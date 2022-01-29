@@ -16,7 +16,10 @@
 	"thumbnail": "https://i.imgur.com/f3AIc30.png",
 	"color": "#26bdc6",
 	"category": "videos",
-	"tags": ["drama", "movie"],
+	"tags": [
+		"drama",
+		"movie"
+	],
 	"iframe": true,
 	"settings": [
 		{

@@ -15,7 +15,9 @@
 	"thumbnail": "https://i.imgur.com/2cTHWAe.png",
 	"color": "#381010",
 	"category": "other",
-	"tags": ["youtube"],
+	"tags": [
+		"youtube"
+	],
 	"iframe": true,
 	"settings": [
 		{
@@ -47,7 +49,10 @@
 			"title": "Icon",
 			"icon": "fad fa-icons",
 			"value": 0,
-			"values": ["With text", "Icon"]
+			"values": [
+				"With text",
+				"Icon"
+			]
 		}
 	]
 }

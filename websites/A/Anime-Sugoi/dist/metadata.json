@@ -19,6 +19,12 @@
 	"thumbnail": "https://i.imgur.com/3wTOxd0.jpg",
 	"color": "#ff6666",
 	"category": "anime",
-	"tags": ["anime-sugoi", "anime", "videos", "free", "thai"],
+	"tags": [
+		"anime-sugoi",
+		"anime",
+		"videos",
+		"free",
+		"thai"
+	],
 	"iframe": true
 }

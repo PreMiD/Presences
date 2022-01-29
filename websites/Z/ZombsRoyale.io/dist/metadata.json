@@ -14,5 +14,9 @@
 	"thumbnail": "https://i.imgur.com/WPQqHRU.png",
 	"color": "#45bd4c",
 	"category": "games",
-	"tags": ["battle-royale", "games", "action"]
+	"tags": [
+		"battle-royale",
+		"games",
+		"action"
+	]
 }

@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/QnDRaNN.png",
 	"color": "#ff0000",
 	"category": "games",
-	"tags": ["game", "enthix-net"]
+	"tags": [
+		"game",
+		"enthix-net"
+	]
 }

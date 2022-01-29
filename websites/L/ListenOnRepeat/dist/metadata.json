@@ -15,7 +15,10 @@
 	"thumbnail": "https://i.imgur.com/jhah8BE.png",
 	"color": "#ff0066",
 	"category": "videos",
-	"tags": ["listen", "repeat"],
+	"tags": [
+		"listen",
+		"repeat"
+	],
 	"iframe": true,
 	"settings": [
 		{

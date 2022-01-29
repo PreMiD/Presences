@@ -5,7 +5,10 @@
 		"id": "180867904135233536"
 	},
 	"service": "FormulaOneTv",
-	"altnames": ["Formula 1 TV", "F1 TV"],
+	"altnames": [
+		"Formula 1 TV",
+		"F1 TV"
+	],
 	"description": {
 		"en": "Watch F1 live & on demand. Every F1 race live and on demand. With exclusive access to on-board cameras, team radio and live timing."
 	},
@@ -15,5 +18,9 @@
 	"thumbnail": "https://i.imgur.com/uDxWlhL.jpg",
 	"color": "#e10600",
 	"category": "other",
-	"tags": ["formula1", "racing", "driving"]
+	"tags": [
+		"formula1",
+		"racing",
+		"driving"
+	]
 }

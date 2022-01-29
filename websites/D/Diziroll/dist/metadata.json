@@ -10,12 +10,20 @@
 		"tr": "Diziroll bir dizi izleme sitesidir.",
 		"nl": "Diziroll is een website waar je series kunt kijken."
 	},
-	"url": ["diziroll.com", "www.diziroll.com"],
+	"url": [
+		"diziroll.com",
+		"www.diziroll.com"
+	],
 	"version": "1.0.8",
 	"logo": "https://i.imgur.com/PY7u54F.png",
 	"thumbnail": "https://i.imgur.com/YsL5RgB.jpg",
 	"color": "#1a1d30",
 	"category": "videos",
-	"tags": ["diziroll", "video", "tv-series", "turkish"],
+	"tags": [
+		"diziroll",
+		"video",
+		"tv-series",
+		"turkish"
+	],
 	"iframe": true
 }

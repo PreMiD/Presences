@@ -11,11 +11,17 @@
 		"nl": "VLC aanwezigheid voor PreMiD! Lees [deze pagina] (https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) om te beginnen!",
 		"vi_VN": "Presence VLC dành cho PreMiD! Hãy đọc [trang này](https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) để bắt đầu!"
 	},
-	"url": ["localhost", "127.0.0.1"],
+	"url": [
+		"localhost",
+		"127.0.0.1"
+	],
 	"version": "1.4.23",
 	"logo": "https://i.imgur.com/WuzLOQu.png",
 	"thumbnail": "https://i.imgur.com/Bg2AFYN.png",
 	"color": "#ff7c00",
 	"category": "videos",
-	"tags": ["videolan", "media-player"]
+	"tags": [
+		"videolan",
+		"media-player"
+	]
 }

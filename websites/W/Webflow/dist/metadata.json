@@ -25,5 +25,8 @@
 	"thumbnail": "https://i.imgur.com/fCSFzpr.png",
 	"color": "#4353FF",
 	"category": "other",
-	"tags": ["website", "development"]
+	"tags": [
+		"website",
+		"development"
+	]
 }

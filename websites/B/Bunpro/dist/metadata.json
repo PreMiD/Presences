@@ -5,7 +5,9 @@
 		"id": "159565307831123968"
 	},
 	"service": "Bunpro",
-	"altnames": ["文プロ"],
+	"altnames": [
+		"文プロ"
+	],
 	"description": {
 		"en": "Bunpro is a japanese grammar learning application.",
 		"fr": "Bunpro est une application d'apprentissage de la grammaire japonaise.",
@@ -13,11 +15,20 @@
 		"ja_JP": "Bunproは日本語の文法学ぶアプリ",
 		"vi_VN": "Bunpro là phần mềm dạy ngữ pháp Tiếng Nhật."
 	},
-	"url": ["www.bunpro.jp", "bunpro.jp"],
+	"url": [
+		"www.bunpro.jp",
+		"bunpro.jp"
+	],
 	"version": "1.0.9",
 	"logo": "https://i.imgur.com/NkfEDwV.png",
 	"thumbnail": "https://i.imgur.com/uKMafFN.png",
 	"color": "#5e6266",
 	"category": "other",
-	"tags": ["education", "japanese", "grammar", "srs", "language"]
+	"tags": [
+		"education",
+		"japanese",
+		"grammar",
+		"srs",
+		"language"
+	]
 }

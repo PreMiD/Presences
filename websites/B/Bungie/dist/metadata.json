@@ -21,5 +21,9 @@
 	"thumbnail": "https://i.imgur.com/ivK2Uww.png",
 	"color": "#12171C",
 	"category": "games",
-	"tags": ["games", "socials", "other"]
+	"tags": [
+		"games",
+		"socials",
+		"other"
+	]
 }

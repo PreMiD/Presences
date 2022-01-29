@@ -30,5 +30,8 @@
 	"thumbnail": "https://i.imgur.com/6DD83q7.png",
 	"color": "#af181f",
 	"category": "videos",
-	"tags": ["video", "nsfw"]
+	"tags": [
+		"video",
+		"nsfw"
+	]
 }

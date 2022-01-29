@@ -28,5 +28,8 @@
 	"thumbnail": "https://i.imgur.com/Ut7qqHx.png",
 	"color": "#d63600",
 	"category": "other",
-	"tags": ["torrents", "shows"]
+	"tags": [
+		"torrents",
+		"shows"
+	]
 }

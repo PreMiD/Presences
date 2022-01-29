@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/nRikMNR.png",
 	"color": "#0fa6a9",
 	"category": "anime",
-	"tags": ["anime", "stream"]
+	"tags": [
+		"anime",
+		"stream"
+	]
 }

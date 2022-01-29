@@ -16,5 +16,9 @@
 	"thumbnail": "https://i.imgur.com/uVujqhk.png",
 	"color": "#FF9F00",
 	"category": "games",
-	"tags": ["minecraft", "server", "hosting"]
+	"tags": [
+		"minecraft",
+		"server",
+		"hosting"
+	]
 }

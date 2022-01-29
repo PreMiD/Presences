@@ -8,11 +8,17 @@
 	"description": {
 		"en": "Biggest manga library on the web. Absolutely free and daily updated English translated manga online for free!"
 	},
-	"url": ["www.readm.org", "readm.org"],
+	"url": [
+		"www.readm.org",
+		"readm.org"
+	],
 	"version": "1.0.6",
 	"logo": "https://i.imgur.com/GTbLxVt.png",
 	"thumbnail": "https://i.imgur.com/fpxf9Hb.png",
 	"color": "#2d2f33",
 	"category": "anime",
-	"tags": ["manga", "manhwa"]
+	"tags": [
+		"manga",
+		"manhwa"
+	]
 }

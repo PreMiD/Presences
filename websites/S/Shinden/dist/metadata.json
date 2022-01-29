@@ -10,12 +10,18 @@
 		"nl": "Poolse site waar je anime kunt bekijken",
 		"pl": "Polska strona, na której można obejrzeć anime"
 	},
-	"url": ["shinden.pl", "forum.shinden.pl"],
+	"url": [
+		"shinden.pl",
+		"forum.shinden.pl"
+	],
 	"version": "1.0.9",
 	"logo": "https://i.imgur.com/sGSeLBJ.png",
 	"thumbnail": "https://i.imgur.com/atx9P8n.png",
 	"color": "#6a2b8b",
 	"category": "anime",
-	"tags": ["polish", "anime"],
+	"tags": [
+		"polish",
+		"anime"
+	],
 	"iframe": true
 }

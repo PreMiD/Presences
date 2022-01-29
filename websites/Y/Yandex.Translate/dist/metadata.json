@@ -22,7 +22,11 @@
 	"thumbnail": "https://i.imgur.com/iRYR5Rj.png",
 	"color": "#FF2222",
 	"category": "other",
-	"tags": ["translate", "yandex", "utility"],
+	"tags": [
+		"translate",
+		"yandex",
+		"utility"
+	],
 	"settings": [
 		{
 			"id": "type",

@@ -21,7 +21,12 @@
 	"thumbnail": "https://i.imgur.com/9ohIvQW.png",
 	"color": "#222327",
 	"category": "games",
-	"tags": ["keep-talking-and-nobody-explodes", "ktane", "bomb", "manual"],
+	"tags": [
+		"keep-talking-and-nobody-explodes",
+		"ktane",
+		"bomb",
+		"manual"
+	],
 	"settings": [
 		{
 			"id": "lang",

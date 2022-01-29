@@ -15,5 +15,9 @@
 	"thumbnail": "https://i.imgur.com/7ha5AqJ.jpg",
 	"color": "#E7FF7B",
 	"category": "other",
-	"tags": ["news", "racing", "sport"]
+	"tags": [
+		"news",
+		"racing",
+		"sport"
+	]
 }

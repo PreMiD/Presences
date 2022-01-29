@@ -15,5 +15,9 @@
 	"thumbnail": "https://i.imgur.com/xKUNEbz.png",
 	"color": "#3e6ea0",
 	"category": "games",
-	"tags": ["csgo", "demo", "stats"]
+	"tags": [
+		"csgo",
+		"demo",
+		"stats"
+	]
 }

@@ -26,7 +26,13 @@
 	"thumbnail": "https://i.imgur.com/jbuIiwv.jpg",
 	"color": "#3a404a",
 	"category": "other",
-	"tags": ["google", "sheets", "slides", "forms", "docs"],
+	"tags": [
+		"google",
+		"sheets",
+		"slides",
+		"forms",
+		"docs"
+	],
 	"settings": [
 		{
 			"id": "lang",

@@ -5,7 +5,9 @@
 		"id": "374905512661221377"
 	},
 	"service": "Watcha",
-	"altnames": ["왓챠"],
+	"altnames": [
+		"왓챠"
+	],
 	"description": {
 		"en": "Enjoy all movies, dramas, documentaries, animations with the best quality anytime, anywhere.",
 		"ko_KR": "모든 영화, 드라마, 다큐멘터리, 애니메이션을 언제 어디서나 최고의 화질로 무제한 감상하세요."
@@ -16,7 +18,13 @@
 	"thumbnail": "https://i.imgur.com/br4smvQ.png",
 	"color": "#FE0557",
 	"category": "videos",
-	"tags": ["movie", "tvshow", "drama", "시리즈", "영화"],
+	"tags": [
+		"movie",
+		"tvshow",
+		"drama",
+		"시리즈",
+		"영화"
+	],
 	"settings": [
 		{
 			"id": "movieDetail",
@@ -61,7 +69,10 @@
 		{
 			"title": "Watcha Logo",
 			"icon": "fas fa-paint-roller",
-			"values": ["White", "Red"],
+			"values": [
+				"White",
+				"Red"
+			],
 			"id": "logo",
 			"value": 0
 		}

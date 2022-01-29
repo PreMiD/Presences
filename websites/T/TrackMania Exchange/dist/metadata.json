@@ -5,7 +5,9 @@
 		"id": "279855717203050496"
 	},
 	"service": "TrackMania Exchange",
-	"altnames": ["TM-Exchange"],
+	"altnames": [
+		"TM-Exchange"
+	],
 	"description": {
 		"en": "TrackMania Exchange (TMX) is the biggest and best TrackMania track-swapping website in the world. This one is not for the newer, TrackmaniaExchange, which is for the 2020 Trackmania. Use the ManiaExchange presence for that.",
 		"nl": "TrackMania Exchange (TMX) is de grootste en beste TrackMania track-swapping-website ter wereld. Deze is niet voor de nieuwere TrackmaniaExchange, die voor de Trackmania 2020 is. Gebruik daarvoor de aanwezigheid van ManiaExchange."

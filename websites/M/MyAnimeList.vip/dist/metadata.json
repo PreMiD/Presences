@@ -15,6 +15,10 @@
 	"thumbnail": "https://i.imgur.com/pxSgtdy.png",
 	"color": "#c62d3c",
 	"category": "anime",
-	"tags": ["anime", "stream", "brazilian"],
+	"tags": [
+		"anime",
+		"stream",
+		"brazilian"
+	],
 	"iframe": true
 }

@@ -15,5 +15,11 @@
 	"thumbnail": "https://i.imgur.com/TiNwU7O.png",
 	"color": "#ffc147",
 	"category": "games",
-	"tags": ["krunker", "game", "multiplayer", "fps", "browser"]
+	"tags": [
+		"krunker",
+		"game",
+		"multiplayer",
+		"fps",
+		"browser"
+	]
 }

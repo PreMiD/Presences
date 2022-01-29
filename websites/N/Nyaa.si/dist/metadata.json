@@ -10,7 +10,10 @@
 		"pt_BR": "Nyaa.si é um indexador público de BitTorrent focado em contéudo do Leste Asiático.",
 		"nl": "Nyaa.si is een BitTorrent-website gericht op Oost-Aziatische media."
 	},
-	"url": ["nyaa.si", "sukebei.nyaa.si"],
+	"url": [
+		"nyaa.si",
+		"sukebei.nyaa.si"
+	],
 	"version": "1.3.10",
 	"logo": "https://i.imgur.com/FGXtWsm.png",
 	"thumbnail": "https://i.imgur.com/t6N5AHK.png",

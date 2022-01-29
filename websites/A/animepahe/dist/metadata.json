@@ -12,13 +12,21 @@
 		"nl": "Anime site met goede bitrate videostreaming in Engelse ondertiteling met geplande uploads en een groeiende bibliotheek",
 		"vi_VN": "Trang xem anime phụ đề Tiếng Anh với chất lượng tốt, cập nhật thường xuyên và thư viện đang được mở rộng"
 	},
-	"url": ["animepahe.com", "animepahe.ru", "animepahe.org"],
+	"url": [
+		"animepahe.com",
+		"animepahe.ru",
+		"animepahe.org"
+	],
 	"version": "1.5.4",
 	"logo": "https://i.imgur.com/LBb6FrK.png",
 	"thumbnail": "https://i.imgur.com/Tm58ZXt.png",
 	"color": "#d5015b",
 	"category": "anime",
-	"tags": ["anime", "video", "media"],
+	"tags": [
+		"anime",
+		"video",
+		"media"
+	],
 	"iframe": true,
 	"iFrameRegExp": "kwik.cx/e",
 	"settings": [

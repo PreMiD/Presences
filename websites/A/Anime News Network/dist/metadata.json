@@ -24,5 +24,8 @@
 	"thumbnail": "https://i.imgur.com/ejeJMJ7.png",
 	"color": "#afeeee",
 	"category": "anime",
-	"tags": ["anime", "news"]
+	"tags": [
+		"anime",
+		"news"
+	]
 }

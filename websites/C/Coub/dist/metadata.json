@@ -24,7 +24,12 @@
 	"thumbnail": "https://i.imgur.com/8P8RhcZ.png",
 	"color": "#0084FF",
 	"category": "videos",
-	"tags": ["socials", "music", "video", "media"],
+	"tags": [
+		"socials",
+		"music",
+		"video",
+		"media"
+	],
 	"settings": [
 		{
 			"id": "lang",

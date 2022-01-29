@@ -17,7 +17,14 @@
 	"thumbnail": "https://i.imgur.com/lRV5RQt.png",
 	"color": "#2684FF",
 	"category": "other",
-	"tags": ["projects", "board", "software", "management", "issues", "tasks"],
+	"tags": [
+		"projects",
+		"board",
+		"software",
+		"management",
+		"issues",
+		"tasks"
+	],
 	"settings": [
 		{
 			"id": "showSettingsSections",

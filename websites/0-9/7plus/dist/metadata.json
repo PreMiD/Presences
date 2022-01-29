@@ -23,5 +23,9 @@
 	"thumbnail": "https://i.imgur.com/A50n9nx.png",
 	"color": "#FF0000",
 	"category": "videos",
-	"tags": ["video", "media", "streaming"]
+	"tags": [
+		"video",
+		"media",
+		"streaming"
+	]
 }

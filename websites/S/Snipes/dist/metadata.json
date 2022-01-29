@@ -17,7 +17,10 @@
 	"thumbnail": "https://i.imgur.com/bKZ2EQH.png",
 	"color": "#DF632F",
 	"category": "other",
-	"tags": ["shop", "clothes"],
+	"tags": [
+		"shop",
+		"clothes"
+	],
 	"settings": [
 		{
 			"id": "timeElapsed",

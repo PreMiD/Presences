@@ -21,5 +21,9 @@
 	"thumbnail": "https://i.imgur.com/9uhpjDJ.png",
 	"color": "#7FFF00",
 	"category": "other",
-	"tags": ["uptime", "uptimerobot", "stats"]
+	"tags": [
+		"uptime",
+		"uptimerobot",
+		"stats"
+	]
 }

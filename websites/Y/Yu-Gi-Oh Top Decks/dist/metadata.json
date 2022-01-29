@@ -21,5 +21,10 @@
 	"thumbnail": "https://i.imgur.com/tXU27kB.jpg",
 	"color": "#FFD700",
 	"category": "other",
-	"tags": ["yu-gi-oh", "tcg", "database", "decks"]
+	"tags": [
+		"yu-gi-oh",
+		"tcg",
+		"database",
+		"decks"
+	]
 }

@@ -5,7 +5,9 @@
 		"id": "241278257335500811"
 	},
 	"service": "V LIVE",
-	"altnames": ["VLIVE"],
+	"altnames": [
+		"VLIVE"
+	],
 	"description": {
 		"en": "V LIVE is a global entertainment platform that connects Korean stars and their fans.",
 		"nl": "V LIVE is een wereldwijd entertainmentplatform dat Koreaanse sterren en hun fans met elkaar verbindt.",
@@ -17,7 +19,12 @@
 	"thumbnail": "https://i.imgur.com/dLde4Ko.png",
 	"color": "#54f7ff",
 	"category": "videos",
-	"tags": ["video", "media", "streaming", "kpop"],
+	"tags": [
+		"video",
+		"media",
+		"streaming",
+		"kpop"
+	],
 	"settings": [
 		{
 			"id": "lang",

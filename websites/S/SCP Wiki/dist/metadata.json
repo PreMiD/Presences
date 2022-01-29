@@ -40,5 +40,10 @@
 	"thumbnail": "https://i.imgur.com/el9c68A.png",
 	"color": "#BB0011",
 	"category": "other",
-	"tags": ["fiction", "horror", "reading", "wiki"]
+	"tags": [
+		"fiction",
+		"horror",
+		"reading",
+		"wiki"
+	]
 }

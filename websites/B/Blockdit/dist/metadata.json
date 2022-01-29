@@ -18,5 +18,10 @@
 	"thumbnail": "https://i.imgur.com/s1U0Bq7.png",
 	"color": "#4a7fe0",
 	"category": "socials",
-	"tags": ["blockdit", "forum", "post", "friends"]
+	"tags": [
+		"blockdit",
+		"forum",
+		"post",
+		"friends"
+	]
 }

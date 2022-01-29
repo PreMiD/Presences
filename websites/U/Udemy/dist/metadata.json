@@ -16,5 +16,9 @@
 	"thumbnail": "https://i.imgur.com/g1yqYRK.png",
 	"color": "#ea5252",
 	"category": "videos",
-	"tags": ["udemy", "course", "learning"]
+	"tags": [
+		"udemy",
+		"course",
+		"learning"
+	]
 }

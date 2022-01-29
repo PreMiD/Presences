@@ -5,7 +5,9 @@
 		"id": "239381559482777600"
 	},
 	"service": "MangaLife",
-	"altnames": ["Manga4Life"],
+	"altnames": [
+		"Manga4Life"
+	],
 	"description": {
 		"en": "MangaLife: Read free manga online."
 	},
@@ -15,7 +17,10 @@
 	"thumbnail": "https://i.imgur.com/7R0tE9U.png",
 	"color": "#6cabdf",
 	"category": "anime",
-	"tags": ["anime", "manga"],
+	"tags": [
+		"anime",
+		"manga"
+	],
 	"settings": [
 		{
 			"id": "privacy",

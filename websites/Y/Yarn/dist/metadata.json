@@ -17,5 +17,10 @@
 	"thumbnail": "https://i.imgur.com/vyNPYsU.png",
 	"color": "#2188b6",
 	"category": "other",
-	"tags": ["yarn", "yarnpkg", "manager", "package"]
+	"tags": [
+		"yarn",
+		"yarnpkg",
+		"manager",
+		"package"
+	]
 }

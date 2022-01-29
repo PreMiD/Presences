@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/ySBvYkV.png",
 	"color": "#ffffff",
 	"category": "videos",
-	"tags": ["tv", "live"]
+	"tags": [
+		"tv",
+		"live"
+	]
 }

@@ -17,5 +17,8 @@
 	"thumbnail": "https://i.imgur.com/OcNBvvP.png",
 	"color": "#61929c",
 	"category": "music",
-	"tags": ["music", "albums"]
+	"tags": [
+		"music",
+		"albums"
+	]
 }

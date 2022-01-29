@@ -15,5 +15,12 @@
 	"thumbnail": "https://i.imgur.com/zsAl5W5.png",
 	"color": "#161833",
 	"category": "games",
-	"tags": ["counter", "side", "prydwen", "institute", "wiki", "database"]
+	"tags": [
+		"counter",
+		"side",
+		"prydwen",
+		"institute",
+		"wiki",
+		"database"
+	]
 }

@@ -25,5 +25,8 @@
 	"thumbnail": "https://i.imgur.com/Bg869KE.png",
 	"color": "#FFBE55",
 	"category": "games",
-	"tags": ["stopots", "games"]
+	"tags": [
+		"stopots",
+		"games"
+	]
 }

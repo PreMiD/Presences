@@ -15,5 +15,9 @@
 	"thumbnail": "https://i.imgur.com/b0fX8RB.png",
 	"color": "#93A01E",
 	"category": "other",
-	"tags": ["discord", "bot", "trello"]
+	"tags": [
+		"discord",
+		"bot",
+		"trello"
+	]
 }

@@ -16,7 +16,11 @@
 	"thumbnail": "https://i.imgur.com/BpXZEqW.png",
 	"color": "#FF0090",
 	"category": "games",
-	"tags": ["beatsaver", "beatsaber", "gaming"],
+	"tags": [
+		"beatsaver",
+		"beatsaber",
+		"gaming"
+	],
 	"settings": [
 		{
 			"id": "time",

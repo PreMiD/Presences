@@ -16,7 +16,10 @@
 	"thumbnail": "https://i.imgur.com/ja7iISJ.jpg",
 	"color": "#1a73e8",
 	"category": "socials",
-	"tags": ["google", "message"],
+	"tags": [
+		"google",
+		"message"
+	],
 	"settings": [
 		{
 			"id": "showContact",

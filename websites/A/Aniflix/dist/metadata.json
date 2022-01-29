@@ -21,6 +21,10 @@
 	"thumbnail": "https://i.imgur.com/Io2fHvW.png",
 	"color": "#ff3645",
 	"category": "anime",
-	"tags": ["anime", "german", "video"],
+	"tags": [
+		"anime",
+		"german",
+		"video"
+	],
 	"iframe": true
 }

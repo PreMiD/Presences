@@ -30,7 +30,10 @@
 	"thumbnail": "https://i.imgur.com/iQ8MA50.png",
 	"color": "#E40813",
 	"category": "music",
-	"tags": ["audio", "music"],
+	"tags": [
+		"audio",
+		"music"
+	],
 	"settings": [
 		{
 			"id": "timestamps",

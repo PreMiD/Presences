@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/mqTRapM.png",
 	"color": "#F0464B",
 	"category": "socials",
-	"tags": ["google", "googleplay"]
+	"tags": [
+		"google",
+		"googleplay"
+	]
 }

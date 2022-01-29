@@ -21,5 +21,8 @@
 	"thumbnail": "https://i.imgur.com/LTkN2jF.png",
 	"color": "#2096e1",
 	"category": "games",
-	"tags": ["minecraft", "bukkit"]
+	"tags": [
+		"minecraft",
+		"bukkit"
+	]
 }

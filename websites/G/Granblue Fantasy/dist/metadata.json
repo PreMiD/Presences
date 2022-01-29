@@ -26,14 +26,21 @@
 	"thumbnail": "https://i.imgur.com/2GPNZM8.jpg",
 	"color": "#2F4F7A",
 	"category": "games",
-	"tags": ["grandblue-fanstasy", "game", "jrpg"],
+	"tags": [
+		"grandblue-fanstasy",
+		"game",
+		"jrpg"
+	],
 	"settings": [
 		{
 			"id": "health",
 			"title": "Health points",
 			"icon": "fad fa-heart",
 			"value": 0,
-			"values": ["Simple", "Detailed"]
+			"values": [
+				"Simple",
+				"Detailed"
+			]
 		},
 		{
 			"id": "djeeta",

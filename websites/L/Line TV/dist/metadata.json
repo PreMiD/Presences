@@ -15,7 +15,10 @@
 	"thumbnail": "https://i.imgur.com/5sqClBZ.png",
 	"color": "#01d145",
 	"category": "videos",
-	"tags": ["drama", "video"],
+	"tags": [
+		"drama",
+		"video"
+	],
 	"settings": [
 		{
 			"id": "lang",

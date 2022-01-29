@@ -22,7 +22,10 @@
 	"thumbnail": "https://i.imgur.com/WajY5CI.png",
 	"color": "#e53238",
 	"category": "other",
-	"tags": ["store", "shopping"],
+	"tags": [
+		"store",
+		"shopping"
+	],
 	"settings": [
 		{
 			"id": "buttons",

@@ -51,5 +51,8 @@
 	"thumbnail": "https://i.imgur.com/UrX3fAS.png",
 	"color": "#e62e04",
 	"category": "other",
-	"tags": ["store", "shopping"]
+	"tags": [
+		"store",
+		"shopping"
+	]
 }

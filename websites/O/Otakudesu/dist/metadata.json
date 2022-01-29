@@ -15,5 +15,10 @@
 	"thumbnail": "https://i.imgur.com/wHfvj2a.png",
 	"color": "#ffffff",
 	"category": "anime",
-	"tags": ["anime", "videos", "streaming", "other"]
+	"tags": [
+		"anime",
+		"videos",
+		"streaming",
+		"other"
+	]
 }

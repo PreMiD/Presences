@@ -16,5 +16,10 @@
 	"thumbnail": "https://i.imgur.com/hPrMgUE.png",
 	"color": "#e6b91e",
 	"category": "socials",
-	"tags": ["movies", "shows", "videos", "tv"]
+	"tags": [
+		"movies",
+		"shows",
+		"videos",
+		"tv"
+	]
 }

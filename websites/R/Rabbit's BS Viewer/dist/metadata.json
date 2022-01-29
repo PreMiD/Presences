@@ -15,7 +15,11 @@
 	"thumbnail": "https://i.imgur.com/wseLQzZ.png",
 	"color": "#232325",
 	"category": "games",
-	"tags": ["skystudioapps", "beatsaber", "gaming"],
+	"tags": [
+		"skystudioapps",
+		"beatsaber",
+		"gaming"
+	],
 	"settings": [
 		{
 			"id": "privacy",

@@ -15,6 +15,10 @@
 	"thumbnail": "https://i.imgur.com/UshRMAY.png",
 	"color": "#ABCF44",
 	"category": "games",
-	"tags": ["agario", "game", "miniclip"],
+	"tags": [
+		"agario",
+		"game",
+		"miniclip"
+	],
 	"iframe": true
 }

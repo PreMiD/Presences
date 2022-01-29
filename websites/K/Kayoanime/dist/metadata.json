@@ -14,6 +14,10 @@
 	"thumbnail": "https://i.imgur.com/z7BnqDr.png",
 	"color": "#FFFFFF",
 	"category": "anime",
-	"tags": ["anime", "video", "kayoanime"],
+	"tags": [
+		"anime",
+		"video",
+		"kayoanime"
+	],
 	"iframe": true
 }

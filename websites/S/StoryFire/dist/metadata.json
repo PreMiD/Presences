@@ -15,7 +15,11 @@
 	"thumbnail": "https://i.imgur.com/voBWTFb.png",
 	"color": "#fc9000",
 	"category": "socials",
-	"tags": ["stories", "videos", "social"],
+	"tags": [
+		"stories",
+		"videos",
+		"social"
+	],
 	"settings": [
 		{
 			"id": "showsearchterm",

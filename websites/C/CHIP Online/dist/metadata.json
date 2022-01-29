@@ -17,5 +17,8 @@
 	"thumbnail": "https://i.imgur.com/r9jJ1vN.png",
 	"color": "#F10C0C",
 	"category": "other",
-	"tags": ["news", "turkish"]
+	"tags": [
+		"news",
+		"turkish"
+	]
 }

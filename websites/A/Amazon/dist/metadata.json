@@ -20,5 +20,8 @@
 	"thumbnail": "https://i.imgur.com/Y6njoa3.png",
 	"color": "#ff9900",
 	"category": "other",
-	"tags": ["store", "shopping"]
+	"tags": [
+		"store",
+		"shopping"
+	]
 }

@@ -15,7 +15,10 @@
 	"thumbnail": "https://i.imgur.com/scedVmN.png",
 	"color": "#c9bfff",
 	"category": "socials",
-	"tags": ["everskies", "forums"],
+	"tags": [
+		"everskies",
+		"forums"
+	],
 	"settings": [
 		{
 			"id": "timestamp",

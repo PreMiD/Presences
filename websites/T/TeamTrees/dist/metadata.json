@@ -15,7 +15,10 @@
 	"thumbnail": "https://i.imgur.com/t0W0P5C.jpg",
 	"color": "#8ab740",
 	"category": "other",
-	"tags": ["trees", "mrbeast"],
+	"tags": [
+		"trees",
+		"mrbeast"
+	],
 	"settings": [
 		{
 			"id": "count",

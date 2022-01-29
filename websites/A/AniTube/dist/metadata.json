@@ -19,5 +19,9 @@
 	"thumbnail": "https://i.imgur.com/3h85tmP.png",
 	"color": "#BE1515",
 	"category": "anime",
-	"tags": ["anime", "video", "media"]
+	"tags": [
+		"anime",
+		"video",
+		"media"
+	]
 }

@@ -17,7 +17,13 @@
 	"thumbnail": "https://i.imgur.com/CZeMH5Q.jpg",
 	"color": "#5abf77",
 	"category": "music",
-	"tags": ["joox", "music", "streamming", "free", "song"],
+	"tags": [
+		"joox",
+		"music",
+		"streamming",
+		"free",
+		"song"
+	],
 	"settings": [
 		{
 			"id": "cover",

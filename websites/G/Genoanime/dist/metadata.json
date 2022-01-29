@@ -15,6 +15,11 @@
 	"thumbnail": "https://i.imgur.com/lANOUyc.png",
 	"color": "#42b5f7",
 	"category": "anime",
-	"tags": ["anime", "entertainment", "amv", "videos"],
+	"tags": [
+		"anime",
+		"entertainment",
+		"amv",
+		"videos"
+	],
 	"iframe": true
 }

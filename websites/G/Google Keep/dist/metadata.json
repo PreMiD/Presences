@@ -21,7 +21,11 @@
 	"thumbnail": "https://i.imgur.com/AyaAOXp.png",
 	"color": "#FFBA00",
 	"category": "other",
-	"tags": ["notes", "todo", "todo-list"],
+	"tags": [
+		"notes",
+		"todo",
+		"todo-list"
+	],
 	"settings": [
 		{
 			"id": "privacy",

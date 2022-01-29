@@ -16,5 +16,10 @@
 	"thumbnail": "https://i.imgur.com/N0SrNHb.jpg",
 	"color": "#e37d00",
 	"category": "games",
-	"tags": ["codes", "steam", "console", "games"]
+	"tags": [
+		"codes",
+		"steam",
+		"console",
+		"games"
+	]
 }

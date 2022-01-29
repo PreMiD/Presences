@@ -16,7 +16,12 @@
 	"thumbnail": "https://i.imgur.com/4PESzW3.png",
 	"color": "#0BBE06",
 	"category": "videos",
-	"tags": ["iqiyi", "drama", "anime", "movie"],
+	"tags": [
+		"iqiyi",
+		"drama",
+		"anime",
+		"movie"
+	],
 	"settings": [
 		{
 			"id": "lang",
@@ -45,7 +50,10 @@
 			"title": "Logo",
 			"value": 0,
 			"icon": "fas fa-paint-roller",
-			"values": ["Normal", "No background"]
+			"values": [
+				"Normal",
+				"No background"
+			]
 		}
 	]
 }

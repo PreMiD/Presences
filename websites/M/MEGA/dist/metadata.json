@@ -15,5 +15,9 @@
 	"thumbnail": "https://i.imgur.com/fqgcQtf.png",
 	"color": "#d90007",
 	"category": "other",
-	"tags": ["files", "upload", "manager"]
+	"tags": [
+		"files",
+		"upload",
+		"manager"
+	]
 }

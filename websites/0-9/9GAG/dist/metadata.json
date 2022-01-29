@@ -20,5 +20,8 @@
 	"thumbnail": "https://i.imgur.com/CmOz6oG.png",
 	"color": "#ffffff",
 	"category": "other",
-	"tags": ["gifs", "pics"]
+	"tags": [
+		"gifs",
+		"pics"
+	]
 }

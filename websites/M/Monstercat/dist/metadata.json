@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/g6GSlJd.png",
 	"color": "#000000",
 	"category": "music",
-	"tags": ["monstercat", "music"]
+	"tags": [
+		"monstercat",
+		"music"
+	]
 }

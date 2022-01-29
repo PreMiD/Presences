@@ -15,7 +15,9 @@
 	"thumbnail": "https://i.imgur.com/poY2KNc.png",
 	"color": "#4254f4",
 	"category": "games",
-	"tags": ["games"],
+	"tags": [
+		"games"
+	],
 	"settings": [
 		{
 			"id": "useName",

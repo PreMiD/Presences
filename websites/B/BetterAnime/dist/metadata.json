@@ -17,7 +17,10 @@
 	"thumbnail": "https://i.imgur.com/lpAk9DH.png",
 	"color": "#ffffff",
 	"category": "anime",
-	"tags": ["anime", "betteranime"],
+	"tags": [
+		"anime",
+		"betteranime"
+	],
 	"iframe": true,
 	"settings": [
 		{

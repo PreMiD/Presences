@@ -15,5 +15,9 @@
 	"thumbnail": "https://i.imgur.com/51zS6sN.jpg",
 	"color": "#ffff00",
 	"category": "socials",
-	"tags": ["chat", "guilded", "games"]
+	"tags": [
+		"chat",
+		"guilded",
+		"games"
+	]
 }

@@ -23,5 +23,9 @@
 	"thumbnail": "https://i.imgur.com/AkSVbml.jpg",
 	"color": "#FFFFFF",
 	"category": "videos",
-	"tags": ["video", "amazon", "prime"]
+	"tags": [
+		"video",
+		"amazon",
+		"prime"
+	]
 }

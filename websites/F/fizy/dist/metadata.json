@@ -16,5 +16,9 @@
 	"thumbnail": "https://i.imgur.com/e8fJNdk.png",
 	"color": "#fed200",
 	"category": "music",
-	"tags": ["fizy", "music", "turkish"]
+	"tags": [
+		"fizy",
+		"music",
+		"turkish"
+	]
 }

@@ -5,7 +5,10 @@
 		"id": "263438077865754644"
 	},
 	"service": "Kingdom of Loathing",
-	"altnames": ["KoL", "KoLmafia"],
+	"altnames": [
+		"KoL",
+		"KoLmafia"
+	],
 	"description": {
 		"en": "Kingdom of Loathing (abbreviated KoL) is a browser-based multiplayer role-playing game designed and operated by Asymmetric Publications",
 		"nl": "Kingdom of Loathing (afgekort KoL) is een browsergebaseerd rollenspel voor meerdere spelers, ontworpen en beheerd door Asymmetric Publications"
@@ -17,7 +20,11 @@
 	"thumbnail": "https://i.imgur.com/ZhJPGTN.png",
 	"color": "#0000ff",
 	"category": "games",
-	"tags": ["rpg", "asym", "kol"],
+	"tags": [
+		"rpg",
+		"asym",
+		"kol"
+	],
 	"iframe": true,
 	"iFrameRegExp": ".*?\\.php"
 }

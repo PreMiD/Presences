@@ -21,7 +21,12 @@
 	"thumbnail": "https://i.imgur.com/mbb326e.png",
 	"color": "#FFFFFF",
 	"category": "other",
-	"tags": ["planner", "bike", "bicycle", "walk"],
+	"tags": [
+		"planner",
+		"bike",
+		"bicycle",
+		"walk"
+	],
 	"settings": [
 		{
 			"id": "timeElapsed",

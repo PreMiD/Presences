@@ -15,7 +15,11 @@
 	"thumbnail": "https://i.imgur.com/03m7awX.png",
 	"color": "#003d91",
 	"category": "music",
-	"tags": ["radio", "reach", "music"],
+	"tags": [
+		"radio",
+		"reach",
+		"music"
+	],
 	"settings": [
 		{
 			"id": "sInfo",

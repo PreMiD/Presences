@@ -9,7 +9,10 @@
 		"en": "Paramount+ is an American subscription video on-demand over-the-top streaming service. This service contains Paramount+ originals and even includes shows from Nick, Nick. Jr and Nick Toons.",
 		"nl": "Paramount + is een Amerikaanse over-the-top streamingdienst voor video-on-demand met een abonnement. Deze service bevat Paramount + originelen en zelfs shows van Nick, Nick. Jr en Nick Toons."
 	},
-	"url": ["www.paramountplus.com", "paramountplus.com"],
+	"url": [
+		"www.paramountplus.com",
+		"paramountplus.com"
+	],
 	"version": "1.0.7",
 	"logo": "https://i.imgur.com/VWrl85V.jpg",
 	"thumbnail": "https://i.imgur.com/s70veYl.png",

@@ -21,5 +21,9 @@
 	"thumbnail": "https://i.imgur.com/jb8OK5e.png",
 	"color": "#C42224",
 	"category": "music",
-	"tags": ["iheartradio", "radio", "music"]
+	"tags": [
+		"iheartradio",
+		"radio",
+		"music"
+	]
 }

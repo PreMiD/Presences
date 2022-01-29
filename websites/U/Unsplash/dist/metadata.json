@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/75wDPD4.jpg",
 	"color": "#ffffff",
 	"category": "other",
-	"tags": ["images", "photos"]
+	"tags": [
+		"images",
+		"photos"
+	]
 }

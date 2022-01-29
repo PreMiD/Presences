@@ -16,7 +16,10 @@
 	"thumbnail": "https://i.imgur.com/v5BuHwD.png",
 	"color": "#cc0000",
 	"category": "other",
-	"tags": ["nsfw", "multporn"],
+	"tags": [
+		"nsfw",
+		"multporn"
+	],
 	"settings": [
 		{
 			"id": "button",

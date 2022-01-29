@@ -15,6 +15,10 @@
 	"thumbnail": "https://i.imgur.com/stBappT.png",
 	"color": "#161616",
 	"category": "anime",
-	"tags": ["anime", "streaming", "free"],
+	"tags": [
+		"anime",
+		"streaming",
+		"free"
+	],
 	"iframe": true
 }

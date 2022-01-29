@@ -14,5 +14,10 @@
 	"thumbnail": "https://i.imgur.com/F7mDpmK.png",
 	"color": "#4e6edd",
 	"category": "games",
-	"tags": ["typing", "competition", "typerio", "race"]
+	"tags": [
+		"typing",
+		"competition",
+		"typerio",
+		"race"
+	]
 }

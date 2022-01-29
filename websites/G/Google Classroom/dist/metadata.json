@@ -23,7 +23,11 @@
 	"thumbnail": "https://i.imgur.com/35OLcKf.png",
 	"color": "#1e8e3e",
 	"category": "other",
-	"tags": ["google", "classroom", "school"],
+	"tags": [
+		"google",
+		"classroom",
+		"school"
+	],
 	"settings": [
 		{
 			"id": "lang",

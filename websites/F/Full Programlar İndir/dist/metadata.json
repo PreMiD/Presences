@@ -10,11 +10,18 @@
 		"en": "Full Programlar İndir is a website that allows you to download many programs and games",
 		"nl": "Full Programlar İndir is een website waar u vele programma's en spelletjes kunt downloaden"
 	},
-	"url": ["www.fullprogramlarindir.com", "fullprogramlarindir.com"],
+	"url": [
+		"www.fullprogramlarindir.com",
+		"fullprogramlarindir.com"
+	],
 	"version": "1.0.12",
 	"logo": "https://i.imgur.com/r2sQKMp.png",
 	"thumbnail": "https://i.imgur.com/FetH0CL.png",
 	"color": "#3F9EDD",
 	"category": "other",
-	"tags": ["full-programlar-indir", "turkish", "program"]
+	"tags": [
+		"full-programlar-indir",
+		"turkish",
+		"program"
+	]
 }

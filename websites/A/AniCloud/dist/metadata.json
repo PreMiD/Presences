@@ -17,6 +17,10 @@
 	"thumbnail": "https://i.imgur.com/fKBCijM.png",
 	"color": "#637cf9",
 	"category": "anime",
-	"tags": ["anime", "streaming", "anicloud"],
+	"tags": [
+		"anime",
+		"streaming",
+		"anicloud"
+	],
 	"iframe": true
 }

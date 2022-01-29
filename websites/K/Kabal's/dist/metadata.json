@@ -16,5 +16,9 @@
 	"thumbnail": "https://i.imgur.com/nitFxle.png",
 	"color": "#2942BF",
 	"category": "other",
-	"tags": ["discord", "bot", "turkish"]
+	"tags": [
+		"discord",
+		"bot",
+		"turkish"
+	]
 }

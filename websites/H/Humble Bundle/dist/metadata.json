@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/nLBIlpU.png",
 	"color": "#cc2929",
 	"category": "games",
-	"tags": ["codes", "steam"]
+	"tags": [
+		"codes",
+		"steam"
+	]
 }

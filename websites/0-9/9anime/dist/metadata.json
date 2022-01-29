@@ -20,7 +20,11 @@
 	"thumbnail": "https://i.imgur.com/RIGfshD.png",
 	"color": "#694ba1",
 	"category": "anime",
-	"tags": ["embedded-links", "9anime", "streaming"],
+	"tags": [
+		"embedded-links",
+		"9anime",
+		"streaming"
+	],
 	"iframe": true,
 	"settings": [
 		{

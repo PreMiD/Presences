@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/YOTecOf.png",
 	"color": "#e4007b",
 	"category": "music",
-	"tags": ["music", "albums"]
+	"tags": [
+		"music",
+		"albums"
+	]
 }

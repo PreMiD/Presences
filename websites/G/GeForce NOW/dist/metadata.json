@@ -15,7 +15,10 @@
 	"thumbnail": "https://i.imgur.com/JCyb4zk.png",
 	"color": "#76B918",
 	"category": "games",
-	"tags": ["gaming", "streaming"],
+	"tags": [
+		"gaming",
+		"streaming"
+	],
 	"settings": [
 		{
 			"id": "privacy",

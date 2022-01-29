@@ -21,5 +21,9 @@
 	"thumbnail": "https://i.imgur.com/ooIBlD5.jpg",
 	"color": "#02A9FF",
 	"category": "anime",
-	"tags": ["anime", "manga", "list"]
+	"tags": [
+		"anime",
+		"manga",
+		"list"
+	]
 }

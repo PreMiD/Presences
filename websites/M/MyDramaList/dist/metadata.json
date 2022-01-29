@@ -21,7 +21,11 @@
 	"thumbnail": "https://i.imgur.com/1yEErjU.jpg",
 	"color": "#0006FF",
 	"category": "other",
-	"tags": ["korean", "drama", "tvshows"],
+	"tags": [
+		"korean",
+		"drama",
+		"tvshows"
+	],
 	"settings": [
 		{
 			"id": "cover",

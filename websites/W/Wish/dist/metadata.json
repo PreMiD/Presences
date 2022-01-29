@@ -17,7 +17,10 @@
 	"thumbnail": "https://i.imgur.com/R7AkWiP.png",
 	"color": "#48c0eb",
 	"category": "other",
-	"tags": ["shopping", "shop"],
+	"tags": [
+		"shopping",
+		"shop"
+	],
 	"settings": [
 		{
 			"id": "items",
@@ -30,7 +33,10 @@
 			"title": "Language",
 			"icon": "fas fa-language",
 			"value": 0,
-			"values": ["English", "German"]
+			"values": [
+				"English",
+				"German"
+			]
 		}
 	]
 }

@@ -17,5 +17,10 @@
 	"thumbnail": "https://i.imgur.com/PeahIhY.png",
 	"color": "#319c2c",
 	"category": "games",
-	"tags": ["io-game", "games", "snake", "ranks"]
+	"tags": [
+		"io-game",
+		"games",
+		"snake",
+		"ranks"
+	]
 }

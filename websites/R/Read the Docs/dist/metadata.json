@@ -16,7 +16,12 @@
 	"thumbnail": "https://i.imgur.com/i7xxsx3.png",
 	"color": "#404A50",
 	"category": "other",
-	"tags": ["programming", "docs", "documentation", "hosting"],
+	"tags": [
+		"programming",
+		"docs",
+		"documentation",
+		"hosting"
+	],
 	"settings": [
 		{
 			"title": "Main page",

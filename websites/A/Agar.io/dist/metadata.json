@@ -17,7 +17,11 @@
 	"thumbnail": "https://i.imgur.com/R1Ytqci.png",
 	"color": "#ED1C24",
 	"category": "games",
-	"tags": ["game", "cell", "agario"],
+	"tags": [
+		"game",
+		"cell",
+		"agario"
+	],
 	"iframe": true,
 	"settings": [
 		{

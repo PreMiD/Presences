@@ -16,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/mix2mJC.jpg",
 	"color": "#000f2d",
 	"category": "videos",
-	"tags": ["videos", "livestreams"]
+	"tags": [
+		"videos",
+		"livestreams"
+	]
 }

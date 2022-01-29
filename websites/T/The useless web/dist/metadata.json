@@ -84,5 +84,8 @@
 	"thumbnail": "https://i.imgur.com/G9tV2NS.png",
 	"color": "#ae3484",
 	"category": "other",
-	"tags": ["random", "fun"]
+	"tags": [
+		"random",
+		"fun"
+	]
 }

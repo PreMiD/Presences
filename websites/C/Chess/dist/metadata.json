@@ -18,5 +18,8 @@
 	"thumbnail": "https://i.imgur.com/boFdmKN.png",
 	"color": "#4d7737",
 	"category": "games",
-	"tags": ["chess", "games"]
+	"tags": [
+		"chess",
+		"games"
+	]
 }

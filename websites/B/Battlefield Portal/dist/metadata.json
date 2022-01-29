@@ -15,7 +15,12 @@
 	"thumbnail": "https://i.imgur.com/3WooHwa.png",
 	"color": "#FF2C10",
 	"category": "games",
-	"tags": ["battlefield2042", "portal", "rules-editor", "battlefield"],
+	"tags": [
+		"battlefield2042",
+		"portal",
+		"rules-editor",
+		"battlefield"
+	],
 	"settings": [
 		{
 			"id": "block",

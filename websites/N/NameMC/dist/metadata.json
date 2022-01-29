@@ -22,7 +22,11 @@
 	"thumbnail": "https://i.imgur.com/XIZsGTQ.png",
 	"color": "#000000",
 	"category": "games",
-	"tags": ["namemc", "minecraft", "gaming"],
+	"tags": [
+		"namemc",
+		"minecraft",
+		"gaming"
+	],
 	"settings": [
 		{
 			"id": "lang",

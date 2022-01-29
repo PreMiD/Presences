@@ -17,7 +17,10 @@
 	"thumbnail": "https://i.imgur.com/lYQlABH.png",
 	"color": "#ec554a",
 	"category": "anime",
-	"tags": ["anime", "anime-planet"],
+	"tags": [
+		"anime",
+		"anime-planet"
+	],
 	"iframe": true,
 	"settings": [
 		{

@@ -16,6 +16,11 @@
 	"thumbnail": "https://i.imgur.com/TckG8Jd.png",
 	"color": "#007AFF",
 	"category": "videos",
-	"tags": ["cuevana", "streaming", "movies", "series"],
+	"tags": [
+		"cuevana",
+		"streaming",
+		"movies",
+		"series"
+	],
 	"iframe": true
 }

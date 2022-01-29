@@ -16,7 +16,14 @@
 	"thumbnail": "https://i.imgur.com/ekWK1iw.png",
 	"color": "#e60012",
 	"category": "games",
-	"tags": ["my", "nintendo", "switch", "ds", "2ds", "3ds"],
+	"tags": [
+		"my",
+		"nintendo",
+		"switch",
+		"ds",
+		"2ds",
+		"3ds"
+	],
 	"settings": [
 		{
 			"id": "lang",

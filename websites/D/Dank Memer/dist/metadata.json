@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/jHWdjyU.png",
 	"color": "#555C56",
 	"category": "other",
-	"tags": ["discord", "bot"]
+	"tags": [
+		"discord",
+		"bot"
+	]
 }

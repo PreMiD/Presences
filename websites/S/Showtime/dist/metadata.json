@@ -25,5 +25,8 @@
 	"thumbnail": "https://i.imgur.com/PrH5IJL.png",
 	"color": "#B20000",
 	"category": "videos",
-	"tags": ["video", "media"]
+	"tags": [
+		"video",
+		"media"
+	]
 }

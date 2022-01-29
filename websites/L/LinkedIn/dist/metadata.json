@@ -17,7 +17,9 @@
 	"thumbnail": "https://i.imgur.com/b4LpEa9.png",
 	"color": "#2867B2",
 	"category": "socials",
-	"tags": ["jobs"],
+	"tags": [
+		"jobs"
+	],
 	"settings": [
 		{
 			"id": "showJobsQuery",

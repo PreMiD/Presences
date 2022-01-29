@@ -9,12 +9,23 @@
 		"en": "HITMAPS™ is a website that shows interactive maps for the HITMAN series.",
 		"nl": "HITMAPS™ is een website met interactieve kaarten voor de HITMAN-reeks."
 	},
-	"url": ["www.hitmaps.com", "roulette.hitmaps.com"],
+	"url": [
+		"www.hitmaps.com",
+		"roulette.hitmaps.com"
+	],
 	"regExp": "([a-z0-9]+)[.]hitmaps[.]com",
 	"version": "1.0.6",
 	"logo": "https://i.imgur.com/CgaXYn2.png",
 	"thumbnail": "https://i.imgur.com/S6DAuSR.png",
 	"color": "#fb0111",
 	"category": "games",
-	"tags": ["hitmaps", "hitman", "ioi", "maps", "events", "community", "game"]
+	"tags": [
+		"hitmaps",
+		"hitman",
+		"ioi",
+		"maps",
+		"events",
+		"community",
+		"game"
+	]
 }

@@ -17,6 +17,10 @@
 	"thumbnail": "https://i.imgur.com/vDiAD3L.png",
 	"color": "#fba0a8",
 	"category": "videos",
-	"tags": ["series", "anime", "movies"],
+	"tags": [
+		"series",
+		"anime",
+		"movies"
+	],
 	"iframe": true
 }

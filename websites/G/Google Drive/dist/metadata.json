@@ -26,7 +26,10 @@
 	"thumbnail": "https://i.imgur.com/mZdtUw5.png",
 	"color": "#3aa154",
 	"category": "other",
-	"tags": ["drive", "google"],
+	"tags": [
+		"drive",
+		"google"
+	],
 	"settings": [
 		{
 			"id": "filename",

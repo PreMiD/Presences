@@ -17,7 +17,10 @@
 	"thumbnail": "https://i.imgur.com/EfWn94W.jpg",
 	"color": "#171717",
 	"category": "anime",
-	"tags": ["video", "anime"],
+	"tags": [
+		"video",
+		"anime"
+	],
 	"settings": [
 		{
 			"id": "thumbnail",

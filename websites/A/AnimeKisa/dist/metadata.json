@@ -23,6 +23,9 @@
 	"thumbnail": "https://i.imgur.com/mgcsfhc.png",
 	"color": "#FF0000",
 	"category": "anime",
-	"tags": ["anime", "animekisa"],
+	"tags": [
+		"anime",
+		"animekisa"
+	],
 	"iframe": true
 }

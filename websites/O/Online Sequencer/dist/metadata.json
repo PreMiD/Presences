@@ -15,5 +15,10 @@
 	"thumbnail": "https://i.imgur.com/PmxYsRT.png",
 	"color": "#2C5AA1",
 	"category": "music",
-	"tags": ["onlinesequencer", "online-sequencer", "sequencer", "os"]
+	"tags": [
+		"onlinesequencer",
+		"online-sequencer",
+		"sequencer",
+		"os"
+	]
 }

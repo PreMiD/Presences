@@ -22,5 +22,8 @@
 	"thumbnail": "https://i.imgur.com/wQiURMm.png",
 	"color": "#FF0000",
 	"category": "videos",
-	"tags": ["videos", "streaming"]
+	"tags": [
+		"videos",
+		"streaming"
+	]
 }

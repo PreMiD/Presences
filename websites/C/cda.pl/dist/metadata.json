@@ -17,5 +17,9 @@
 	"thumbnail": "https://i.imgur.com/z9J4MSd.png",
 	"color": "#B22907",
 	"category": "videos",
-	"tags": ["video", "movies", "vod"]
+	"tags": [
+		"video",
+		"movies",
+		"vod"
+	]
 }

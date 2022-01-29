@@ -16,6 +16,11 @@
 	"thumbnail": "https://i.imgur.com/j0hV7nO.png",
 	"color": "#8A0E0E",
 	"category": "anime",
-	"tags": ["anime", "streaming", "proxer", "proxerme"],
+	"tags": [
+		"anime",
+		"streaming",
+		"proxer",
+		"proxerme"
+	],
 	"iframe": true
 }

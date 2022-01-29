@@ -20,5 +20,8 @@
 	"thumbnail": "https://i.imgur.com/RVcVhQy.png",
 	"color": "#d90e15",
 	"category": "videos",
-	"tags": ["video", "nsfw"]
+	"tags": [
+		"video",
+		"nsfw"
+	]
 }

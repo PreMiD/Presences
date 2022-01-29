@@ -14,7 +14,12 @@
 	"thumbnail": "https://i.imgur.com/b4eo89T.png",
 	"color": "#ffffff",
 	"category": "videos",
-	"tags": ["streaming", "vod", "video", "media"],
+	"tags": [
+		"streaming",
+		"vod",
+		"video",
+		"media"
+	],
 	"settings": [
 		{
 			"id": "buttons",

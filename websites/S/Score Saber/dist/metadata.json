@@ -15,7 +15,11 @@
 	"thumbnail": "https://i.imgur.com/3SmQEc2.png",
 	"color": "#ffde1a",
 	"category": "games",
-	"tags": ["scoresaber", "beatsaber", "gaming"],
+	"tags": [
+		"scoresaber",
+		"beatsaber",
+		"gaming"
+	],
 	"settings": [
 		{
 			"id": "time",

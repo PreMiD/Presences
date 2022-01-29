@@ -16,7 +16,11 @@
 	"thumbnail": "https://i.imgur.com/Bv7T0JI.png",
 	"color": "#9c1414",
 	"category": "other",
-	"tags": ["codewars", "coding", "social"],
+	"tags": [
+		"codewars",
+		"coding",
+		"social"
+	],
 	"settings": [
 		{
 			"id": "statsdisplay",

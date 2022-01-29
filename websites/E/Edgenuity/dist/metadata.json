@@ -20,7 +20,10 @@
 	"thumbnail": "https://i.imgur.com/sEMMqUf.png",
 	"color": "#FF0000",
 	"category": "other",
-	"tags": ["classroom", "other"],
+	"tags": [
+		"classroom",
+		"other"
+	],
 	"settings": [
 		{
 			"id": "eSI",

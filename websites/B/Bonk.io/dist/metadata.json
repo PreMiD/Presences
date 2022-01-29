@@ -16,7 +16,11 @@
 	"thumbnail": "https://i.imgur.com/i67aXvn.png",
 	"color": "#151f29",
 	"category": "games",
-	"tags": ["game", "multiplayer", "browser"],
+	"tags": [
+		"game",
+		"multiplayer",
+		"browser"
+	],
 	"iframe": true,
 	"settings": [
 		{

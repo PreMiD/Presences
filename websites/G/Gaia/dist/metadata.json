@@ -14,7 +14,11 @@
 	"thumbnail": "https://i.imgur.com/dVKxkkZ.png",
 	"color": "#ffffff",
 	"category": "videos",
-	"tags": ["films", "yoga", "meditation"],
+	"tags": [
+		"films",
+		"yoga",
+		"meditation"
+	],
 	"settings": [
 		{
 			"id": "buttons",

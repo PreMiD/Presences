@@ -9,7 +9,10 @@
 		"nl": "Ga ervoor het begint op Marktplaats.",
 		"en": "Go for it, it starts on Marktplaats."
 	},
-	"url": ["www.marktplaats.nl", "help.marktplaats.nl"],
+	"url": [
+		"www.marktplaats.nl",
+		"help.marktplaats.nl"
+	],
 	"regExp": "([a-z0-9-]+[.])*marktplaats[.]nl[/]",
 	"version": "1.0.8",
 	"logo": "https://i.imgur.com/K0yeNeC.png",

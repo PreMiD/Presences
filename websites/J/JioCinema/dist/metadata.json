@@ -15,5 +15,10 @@
 	"thumbnail": "https://i.imgur.com/uzYoaXO.png",
 	"color": "#ec5a7f",
 	"category": "videos",
-	"tags": ["movies", "shows", "videos", "tv"]
+	"tags": [
+		"movies",
+		"shows",
+		"videos",
+		"tv"
+	]
 }

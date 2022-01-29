@@ -10,11 +10,16 @@
 		"ga_IE": "Is inneall cuardaigh é Qwant a urramaíonn do phríobháideacht agus a éascaíonn fionnachtain agus comhroinnt trí chur chuige sóisialta.",
 		"nl": "Qwant is een zoekmachine die uw privacy respecteert en het ontdekken en delen via een sociale benadering vergemakkelijkt."
 	},
-	"url": ["www.qwant.com", "www.qwantjunior.com"],
+	"url": [
+		"www.qwant.com",
+		"www.qwantjunior.com"
+	],
 	"version": "1.0.9",
 	"logo": "https://i.imgur.com/peAp6sZ.png",
 	"thumbnail": "https://i.imgur.com/nEMCic5.png",
 	"color": "#4BA2EA",
 	"category": "other",
-	"tags": ["search"]
+	"tags": [
+		"search"
+	]
 }

@@ -8,11 +8,17 @@
 	"description": {
 		"en": "WuxiaWorldSite Provides you English Translation of Latest Chinese, Japanese, Korean - Fantasy and Light Novels."
 	},
-	"url": ["www.wuxiaworld.com", "wuxiaworld.com"],
+	"url": [
+		"www.wuxiaworld.com",
+		"wuxiaworld.com"
+	],
 	"version": "1.0.5",
 	"logo": "https://i.imgur.com/5tfjCTi.png",
 	"thumbnail": "https://i.imgur.com/yWh6rb5.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": ["novel", "lightnovel"]
+	"tags": [
+		"novel",
+		"lightnovel"
+	]
 }

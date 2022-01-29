@@ -15,5 +15,8 @@
 	"thumbnail": "https://i.imgur.com/olNX0gM.png",
 	"color": "#00ff00",
 	"category": "other",
-	"tags": ["node-js", "javascript"]
+	"tags": [
+		"node-js",
+		"javascript"
+	]
 }

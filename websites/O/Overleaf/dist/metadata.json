@@ -17,5 +17,8 @@
 	"thumbnail": "https://i.imgur.com/lWInfl3.png",
 	"color": "#138A07",
 	"category": "other",
-	"tags": ["overleaf", "latex"]
+	"tags": [
+		"overleaf",
+		"latex"
+	]
 }

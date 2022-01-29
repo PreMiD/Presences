@@ -17,6 +17,12 @@
 	"thumbnail": "https://i.imgur.com/QvrAmhs.png",
 	"color": "#f7a1f3",
 	"category": "anime",
-	"tags": ["fairyanime", "anime", "videos", "free", "thai"],
+	"tags": [
+		"fairyanime",
+		"anime",
+		"videos",
+		"free",
+		"thai"
+	],
 	"iframe": true
 }

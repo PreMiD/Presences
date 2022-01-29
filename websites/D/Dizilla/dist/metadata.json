@@ -16,6 +16,11 @@
 	"thumbnail": "https://i.imgur.com/aqrhBjE.png",
 	"color": "#d32028",
 	"category": "videos",
-	"tags": ["dizilla", "video", "tv-series", "turkish"],
+	"tags": [
+		"dizilla",
+		"video",
+		"tv-series",
+		"turkish"
+	],
 	"iframe": true
 }

@@ -19,5 +19,11 @@
 	"thumbnail": "https://i.imgur.com/5SnUKIH.png",
 	"color": "#f9f9f9",
 	"category": "other",
-	"tags": ["information", "wiki", "wikimedia-foundation", "wikimedia", "wmf"]
+	"tags": [
+		"information",
+		"wiki",
+		"wikimedia-foundation",
+		"wikimedia",
+		"wmf"
+	]
 }
