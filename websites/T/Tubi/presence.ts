@@ -6,8 +6,6 @@ const presence = new Presence({
 		pause: "presence.playback.paused"
 	});
 
-let subtitle;
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "tubi-logo"
@@ -16,14 +14,13 @@ presence.on("UpdateData", async () => {
 			"video#videoPlayerComponent"
 		);
 	if (video && !isNaN(video.duration)) {
-		const title = document.querySelector(
-				'meta[property="og:title"]'
-			) as HTMLMetaElement,
-			[startTimestamp, endTimestamp] = presence.getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			);
-		presenceData.details = title.content;
+		const [startTimestamp, endTimestamp] = presence.getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
+		presenceData.details = document
+			.querySelector('meta[property="og:title"]')
+			.getAttribute("content");
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
