@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 						.textContent
 				) -
 				timeElapsed;
-		} else if (time === 2)
+		} else if (!paused && time === 2)
 			presenceData.startTimestamp = Date.now() / 1000 - timeElapsed;
 
 		presenceData.smallImageKey = paused ? "pause" : "play";
