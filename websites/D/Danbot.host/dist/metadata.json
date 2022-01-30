@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.6",
+    "author": {
+      "name": "Luxxy",
+      "id": "517107022399799331"
+    },
+    "service": "danbot.host",
+    "description": {
+      "en": "DanBot Hosting® is a free Server Hosting"
+    },
+    "url": "panel.danbot.host",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/bTqnoA1.png",
+    "thumbnail": "https://i.imgur.com/bTqnoA1.png",
+    "color": "#3e9392",
+    "category": "other",
+    "tags": [
+      "game",
+      "panel",
+      "control"
+    ]
+  }
