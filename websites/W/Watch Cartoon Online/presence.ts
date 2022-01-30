@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 		]);
 	if (video?.timeLeft !== "") {
 		presenceData.details = "Watching:";
-		presenceData.state = document.querySelector(
+		presenceData.state = document.querySelector<HTMLSpanElement>(
 			"#content div.iltext > strong > span"
 		).textContent;
 		if (
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 	} else if (pathname.startsWith("/anime")) {
 		presenceData.details = "Viewing a Series:";
-		presenceData.state = document.querySelector(
+		presenceData.state = document.querySelector<HTMLHeadingElement>(
 			"tbody > tr > td > h2"
 		).textContent;
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
@@ -65,9 +65,13 @@ presence.on("UpdateData", async () => {
 		).src;
 		presenceData.smallImageKey = "reading";
 		presenceData.buttons = [{ label: "View Series", url: document.URL }];
-	} else if (document.querySelector("table > tbody > tr > td > h2 > a")) {
+	} else if (
+		document.querySelector<HTMLAnchorElement>(
+			"table > tbody > tr > td > h2 > a"
+		)
+	) {
 		presenceData.details = "Browsing a Category:";
-		presenceData.state = document.querySelector(
+		presenceData.state = document.querySelector<HTMLAnchorElement>(
 			"table > tbody > tr > td > h2 > a"
 		).textContent;
 		presenceData.smallImageKey = "search";

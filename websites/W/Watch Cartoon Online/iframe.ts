@@ -8,8 +8,9 @@ iframe.on("UpdateData", async () => {
 					"#video-js > div.vjs-control-bar > button"
 				)
 				.title.includes("Play"),
-			timeLeft: document.querySelector("span.vjs-remaining-time-display")
-				.textContent
+			timeLeft: document.querySelector<HTMLSpanElement>(
+				"span.vjs-remaining-time-display"
+			).textContent
 		});
 	}
 });
