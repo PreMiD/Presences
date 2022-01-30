@@ -14,6 +14,11 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (document.location.pathname.includes("video") && video) {
+		const titles = document.querySelector(
+			'meta[property="og:image"]'
+		) as HTMLMetaElement;
+		presenceData.largeImageKey =
+			titles.content.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
 		const episode = JSON.parse(
 			document.querySelector('[type="application/ld+json"]').textContent
 		);
@@ -50,6 +55,11 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (document.location.pathname.includes("video") && !video) {
+		const titles = document.querySelector(
+			'meta[property="og:image"]'
+		) as HTMLMetaElement;
+		presenceData.largeImageKey =
+			titles.content.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
 		if (
 			document.querySelector(
 				"#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
