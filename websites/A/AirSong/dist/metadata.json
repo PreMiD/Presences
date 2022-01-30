@@ -15,5 +15,28 @@
 	"thumbnail": "https://i.imgur.com/Xr5RBAm.png",
 	"color": "#0094CB",
 	"category": "music",
-	"tags": ["audio", "server", "streaming"]
+	"tags": ["audio", "server", "streaming"],
+	"settings": [
+		{
+			"id": "songDetail",
+			"title": "Song Title row1",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "%artist% - %title%",
+			"placeholder": "Use %title% or %artist% or %album%"
+		},
+		{
+			"id": "songState",
+			"title": "Song Title row2",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "%album%",
+			"placeholder": "Use %title% or %artist% or %album%"
+		},
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": 1,
+			"values": ["Off", "Time Left", "Time Elapsed"]
+		}
+	]
 }
