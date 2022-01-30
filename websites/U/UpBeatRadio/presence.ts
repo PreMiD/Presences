@@ -76,10 +76,10 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (document.location.pathname.includes("/News.Article")) {
 			presenceData.details = `Reading article: ${document
-				.querySelector(".title")
+				.querySelector("#newsTitle")
 				.textContent.trim()}`;
 			presenceData.state = `Written by: ${document
-				.querySelector(".info > a")
+				.querySelector("#newsInfo > a")
 				.textContent.trim()}`;
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/Account.Profile")) {

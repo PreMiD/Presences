@@ -4,6 +4,12 @@
 		"name": "The Gamerzs",
 		"id": "730142125181894657"
 	},
+	"contributors": [
+		{
+			"name": "Kyrie",
+			"id": "368399721494216706"
+		}
+	],
 	"service": "Tidal",
 	"description": {
 		"tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir.",
@@ -16,7 +22,7 @@
 		"listen.tidal.com",
 		"tidal.com"
 	],
-	"version": "3.0.5",
+	"version": "3.1.1",
 	"logo": "https://i.imgur.com/i9pIvqR.png",
 	"thumbnail": "https://i.imgur.com/xNeJ8oq.png",
 	"color": "#000000",
@@ -29,6 +35,24 @@
 		{
 			"id": "lang",
 			"multiLanguage": true
+		},
+		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
 		}
 	]
 }
