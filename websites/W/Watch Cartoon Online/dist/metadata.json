@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"author": {
+		"name": "Kyrie",
+		"id": "368399721494216706"
+	},
+	"service": "Watch Cartoon Online",
+	"description": {
+		"en": "ArtStation is a community that was shaped with the goal of empowering artists and creating opportunities for success. It's the place for artists to connect with each other and showcase their work with others. The more you work and post, the more you get noticed by the community."
+	},
+	"url": "www.wcostream.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/SDiZrOe.png",
+	"thumbnail": "https://i.imgur.com/q82HBPT.png",
+	"color": "#FFCE39",
+	"category": "videos",
+	"tags": ["anime", "cartoon", "streaming"],
+	"settings": [
+		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	],
+	"iframe": true
+}
