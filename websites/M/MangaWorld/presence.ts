@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 				DROPPED: "Droppati",
 				READING: "In lettura"
 			},
-			[, , , category] = document.location.pathname.split("/");
+			category = document.location.pathname.split("/")[3];
 		if (category in categories) presenceData.state = categories[category];
 	} else if (document.location.href.includes("keyword=")) {
 		/* ----- ARCHIVIO - ARCHIVE ----- */
