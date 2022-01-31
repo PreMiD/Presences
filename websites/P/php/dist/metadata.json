@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "Rology",
+    "id": "893220537772437516",
+    "website": "https://satowa-network.at"
+  },
+  "service": "PHP",
+  "description": {
+    "en": "PHP is a popular general-purpose scripting language that is especially suited to web development.  Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world."
+  },
+  "url": [
+    "php.net",
+    "www.php.net",
+    "news-web.php.net",
+    "wiki.php.net",
+    "docs.php.net",
+    "bugs.php.net",
+    "qa.php.net",
+    "windows.php.net",
+    "downloads.php.net"
+  ],
+  "version": "1.0.0",
+  "logo": "https://www.php.net/images/logos/new-php-logo.png",
+  "thumbnail": "https://www.php.net/images/logos/new-php-logo.png",
+  "color": "#787cb5",
+  "category": "other",
+  "tags": [
+    "php",
+    "phtml",
+    "php7",
+    "php8",
+    "php8.1",
+    "Rasmus-Lerdorf"
+  ]
+}
