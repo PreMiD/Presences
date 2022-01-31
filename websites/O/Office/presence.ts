@@ -53,8 +53,7 @@ presence.on("UpdateData", async () => {
 				.querySelector('link[rel~="icon"]')
 				.getAttribute("href"),
 			appName = appIcon
-				.substring(appIcon.lastIndexOf("/"))
-				.slice(9)
+				.substring(appIcon.lastIndexOf("/") + 9)
 				.replace(".ico", "")
 				.toLowerCase();
 		if (appName === "onenote") {
