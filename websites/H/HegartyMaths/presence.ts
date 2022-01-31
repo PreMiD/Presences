@@ -3,13 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-function getQueryVariable(v: string) {
-	const vars = window.location.search.substring(1).split("&");
-	for (let i = 0; i < vars.length; i++)
-		if (vars[i].split("=")[0] === v) return vars[i].split("=")[1];
-	return false;
-}
-
 presence.on("UpdateData", async () => {
 	const privacy = await presence.getSetting<boolean>("privacy"),
 		presenceData: PresenceData = {
@@ -69,7 +62,7 @@ presence.on("UpdateData", async () => {
 				}`;
 			}
 		} else {
-			switch (getQueryVariable("filter")) {
+			switch (new URLSearchParams(window.location.search).get("filter")) {
 				case "green":
 					presenceData.details = "Viewing green scores";
 					break;
@@ -86,18 +79,24 @@ presence.on("UpdateData", async () => {
 			const text = document.querySelector("div.row div.col-xs-12").innerHTML,
 				outof = Math.ceil(
 					Number(text.substring(text.indexOf("f ") + 1).slice(0, 4)) / 10
-				);
+				),
+				pageParams = new URLSearchParams(window.location.search);
+
 			presenceData.state = `Page ${
-				getQueryVariable("page") ? getQueryVariable("page") : 1
+				pageParams.has("page") ? pageParams.get("page") : 1
 			} of ${outof === 0 ? 1 : outof}`;
 		}
+	} else if (document.location.pathname.includes("/tasks")) {
+		presenceData.details = "Viewing tasks";
+		if (document.querySelector("table.table tbody")) {
+			if (!privacy) {
+				presenceData.state = `${
+					document.querySelectorAll("table.table tbody tr").length
+				} tasks`;
+			}
+		} else presenceData.state = "No tasks";
 	} else {
 		switch (document.location.pathname) {
-			case "/tasks":
-				presenceData.details = "Viewing tasks";
-				if (document.querySelector("div.text-grey-darker h3").innerHTML)
-					presenceData.state = "No tasks";
-				break;
 			case "/fixup5":
 				presenceData.details = "Revising";
 				if (!privacy) presenceData.state = "Fix Up 5";
