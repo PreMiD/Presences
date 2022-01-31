@@ -236,7 +236,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 						})
 					);
 				} else {
-					const messsage = property.match(/(.*)\[([0-9]+)\]/i);
+					const messsage = property.match(/(.*)\[([0-9]+)\]/);
 
 					if (messsage) {
 						const [propertyName, index] = messsage.slice(1);
