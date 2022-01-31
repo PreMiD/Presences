@@ -50,9 +50,9 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else {
-		const appIcon = document.querySelector<HTMLLinkElement>(
-				"head > link:nth-child(8)"
-			).href,
+		const appIcon = document
+				.querySelector('link[rel~="icon"]')
+				.getAttribute("href"),
 			appName = appIcon
 				.substring(appIcon.lastIndexOf("/"))
 				.slice(9)
@@ -76,7 +76,8 @@ presence.on("UpdateData", async () => {
 				.replace("excel", "an Excel")
 				.replace("ppt", "a PowerPoint")} document`;
 			if (!privacy) {
-				presenceData.details = `Editing ${title}`;
+				// Intentional whitespaces
+				presenceData.details = `Editing ${title.split(" - ", 1)[0]}`;
 				if (appName === "word") presenceData.state = office.WordStatus;
 				else if (appName === "ppt") presenceData.state = office.PptCurrentSlide;
 				else if (appName === "excel" && office.ExcelActiveTab !== "")
