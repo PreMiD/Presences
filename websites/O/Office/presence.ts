@@ -29,13 +29,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "office",
 			startTimestamp: browsingTimestamp
 		},
-		{ title } = document,
 		{ pathname } = document.location,
 		privacy = await presence.getSetting<boolean>("privacy");
 	if (document.location.hostname === "www.office.com") {
 		presenceData.details = "Home page";
 		if (pathname.startsWith("/launch/")) {
-			presenceData.details = `Browsing ${title} documents`;
+			presenceData.details = `Browsing ${document.title} documents`;
 			presenceData.smallImageKey = "reading";
 			presenceData.smallImageText = "Browsing";
 		} else if (pathname.startsWith("/search")) {
@@ -77,7 +76,9 @@ presence.on("UpdateData", async () => {
 				.replace("ppt", "a PowerPoint")} document`;
 			if (!privacy) {
 				// Intentional whitespaces
-				presenceData.details = `Editing ${title.split(" - ", 1)[0]}`;
+				presenceData.details = `Editing ${document
+					.querySelector('meta[name="title"]')
+					.getAttribute("content")}`;
 				if (appName === "word") presenceData.state = office.WordStatus;
 				else if (appName === "ppt") presenceData.state = office.PptCurrentSlide;
 				else if (appName === "excel" && office.ExcelActiveTab !== "")
