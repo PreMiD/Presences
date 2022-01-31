@@ -75,7 +75,6 @@ presence.on("UpdateData", async () => {
 				.replace("excel", "an Excel")
 				.replace("ppt", "a PowerPoint")} document`;
 			if (!privacy) {
-				// Intentional whitespaces
 				presenceData.details = `Editing ${document
 					.querySelector('meta[name="title"]')
 					.getAttribute("content")}`;
