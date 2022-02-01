@@ -56,6 +56,13 @@ presence.on("UpdateData", async () => {
 							}
 						];
 					}
+				} else if (path.includes("posts/")) {
+					presenceData.buttons = [
+						{
+							label: "View Post",
+							url: document.location.href
+						}
+					];
 				} else {
 					presenceData.buttons = [
 						{
