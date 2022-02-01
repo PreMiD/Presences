@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 			'meta[property="og:image"]'
 		);
 		presenceData.largeImageKey =
-			titles.content.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
+			titles?.content?.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
 		const episode = JSON.parse(
 			document.querySelector('[type="application/ld+json"]').textContent
 		);
