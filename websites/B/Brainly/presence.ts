@@ -25,12 +25,12 @@ function setPathName() {
 	if (
 		document.location.hostname === "brainly.id" ||
 		document.location.hostname === "brainly.ro"
-	)
+	) {
 		pathNameLocalize.forEach((item, index) => {
 			if (document.location.hostname === item.hostname)
 				pathName = pathNameLocalize[index];
 		});
-	else pathName = pathNameLocalize[0];
+	} else pathName = pathNameLocalize[0];
 }
 
 presence.on("UpdateData", async () => {
