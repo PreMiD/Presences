@@ -14,9 +14,9 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (document.location.pathname.includes("video") && video) {
-		const titles = document.querySelector(
+		const titles = document.querySelector<HTMLMetaElement>(
 			'meta[property="og:image"]'
-		) as HTMLMetaElement;
+		);
 		presenceData.largeImageKey =
 			titles.content.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
 		const episode = JSON.parse(
