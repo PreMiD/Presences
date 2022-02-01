@@ -23,16 +23,15 @@ let pathName: { hostname: string; subject: string; question: string };
 
 function setPathName() {
 	if (
-		document.location.hostname === "brainly.com" ||
-		document.location.hostname === "brainly.in" ||
-		document.location.hostname === "brainly.ph"
+		document.location.hostname === "brainly.id" ||
+		document.location.hostname === "brainly.ro"
 	)
-		pathName = pathNameLocalize[0];
-	else {
 		pathNameLocalize.forEach((item, index) => {
 			if (document.location.hostname === item.hostname)
 				pathName = pathNameLocalize[index];
 		});
+	else {
+		pathName = pathNameLocalize[0];
 	}
 }
 
@@ -75,6 +74,14 @@ presence.on("UpdateData", async () => {
 				url: document.URL
 			}
 		];
+
+		if (document.querySelector("div[role=textbox]") && document.querySelector("div[role=textbox]").innerHTML !== "") {
+			presenceData.details = "Answering question:";
+			presenceData.smallImageKey = "writing";
+			presenceData.state = (
+				document.querySelector("div[role=textbox]") as HTMLInputElement
+			).textContent;
+		}
 	} else if (page.includes("/app/ask")) {
 		presenceData.details = "Searching for a question:";
 		presenceData.smallImageKey = "search";
@@ -102,23 +109,20 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "On messages page";
 
 	if (
-		document.querySelector("div.brn-attachment-grabber-container > textarea")
+		document.querySelector("div.brn-attachment-grabber-container > textarea") &&
+		(
+			document.querySelector(
+				"div.brn-attachment-grabber-container > textarea"
+			) as HTMLInputElement
+		).value !== ""
 	) {
-		if (
-			(
-				document.querySelector(
-					"div.brn-attachment-grabber-container > textarea"
-				) as HTMLInputElement
-			).value !== ""
-		) {
-			presenceData.smallImageKey = "writing";
-			presenceData.details = "Writing a question:";
-			presenceData.state = (
-				document.querySelector(
-					"div.brn-attachment-grabber-container > textarea"
-				) as HTMLInputElement
-			).value;
-		}
+		presenceData.smallImageKey = "writing";
+		presenceData.details = "Writing a question:";
+		presenceData.state = (
+			document.querySelector(
+				"div.brn-attachment-grabber-container > textarea"
+			) as HTMLInputElement
+		).value;
 	}
 
 	if (!time) delete presenceData.startTimestamp;
