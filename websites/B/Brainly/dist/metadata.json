@@ -14,7 +14,7 @@
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/vbRAvej.png",
 	"thumbnail": "https://i.imgur.com/ymZ1MKN.png",
-	"color": "#56b3f9",
+	"color": "#000000",
 	"category": "other",
 	"tags": ["learning", "educative", "question", "answer"],
 	"settings": [
@@ -26,7 +26,7 @@
 		},
 		{
 			"id": "buttons",
-			"title": "Show buttons",
+			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
