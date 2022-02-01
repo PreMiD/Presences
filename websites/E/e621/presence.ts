@@ -48,14 +48,12 @@ presence.on("UpdateData", async () => {
 							document.querySelector<HTMLInputElement>("#tags_query").value) ||
 					document.location.href.includes("/posts?tags=")
 				) {
-					if (buttons) {
-						presenceData.buttons = [
-							{
-								label: "View Search",
-								url: document.location.href
-							}
-						];
-					}
+					presenceData.buttons = [
+						{
+							label: "View Search",
+							url: document.location.href
+						}
+					];
 				} else if (path.includes("posts/")) {
 					presenceData.buttons = [
 						{
