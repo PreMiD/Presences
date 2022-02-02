@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "writing";
 				break;
 			} else if (!guessed) {
-				if (i === 0) presenceData.details = "Warming up...";
+				if (i === 0) presenceData.details = `Warming up... (#${puzzleNumber})`;
 				else presenceData.details = `Guessing... (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
 				presenceData.smallImageKey = "thought";
