@@ -15,32 +15,6 @@ presence.on("UpdateData", async () => {
 			},
 			guess = await presence.getSetting<boolean>("guess");
 		for (let i = 0; i < 6; i++) {
-			const notGuessed = document
-				.querySelector("body > game-app")
-				.shadowRoot.querySelectorAll("#board > game-row")
-				[i].shadowRoot.querySelector("div > game-tile")
-				.shadowRoot.querySelector('div[data-state="empty"]');
-			if (notGuessed) {
-				presenceData.details = `Guessing... (#${puzzleNumber})`;
-				presenceData.state = `Guess ${i + 1} / 6`;
-				presenceData.smallImageKey = "thought";
-				break;
-			}
-		}
-		for (let i = 0; i < 6; i++) {
-			const typing = document
-				.querySelector("body > game-app")
-				.shadowRoot.querySelectorAll("#board > game-row")
-				[i].shadowRoot.querySelector("div > game-tile")
-				.shadowRoot.querySelector('div[data-state="tbd"]');
-			if (typing) {
-				presenceData.details = `Typing... (#${puzzleNumber})`;
-				presenceData.state = `Guess ${i + 1} / 6`;
-				presenceData.smallImageKey = "writing";
-				break;
-			}
-		}
-		for (let i = 0; i < 6; i++) {
 			const guessed = document
 					.querySelector("body > game-app")
 					.shadowRoot.querySelectorAll("#board > game-row")
@@ -50,7 +24,17 @@ presence.on("UpdateData", async () => {
 					.shadowRoot.querySelectorAll("#board > game-row")
 					[i].shadowRoot.querySelectorAll(
 						'div > game-tile[evaluation="correct"]'
-					).length;
+					).length,
+				notGuessed = document
+					.querySelector("body > game-app")
+					.shadowRoot.querySelectorAll("#board > game-row")
+					[i].shadowRoot.querySelector("div > game-tile")
+					.shadowRoot.querySelector('div[data-state="empty"]'),
+				typing = document
+					.querySelector("body > game-app")
+					.shadowRoot.querySelectorAll("#board > game-row")
+					[i].shadowRoot.querySelector("div > game-tile")
+					.shadowRoot.querySelector('div[data-state="tbd"]');
 			if (correct === 5) {
 				presenceData.details = `Solved (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
@@ -61,9 +45,19 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Guess X / 6";
 				presenceData.smallImageKey = "fail";
 				break;
+			} else if (typing) {
+				presenceData.details = `Typing... (#${puzzleNumber})`;
+				presenceData.state = `Guess ${i + 1} / 6`;
+				presenceData.smallImageKey = "writing";
+				break;
+			} else if (notGuessed) {
+				presenceData.details = `Guessing... (#${puzzleNumber})`;
+				presenceData.state = `Guess ${i + 1} / 6`;
+				presenceData.smallImageKey = "thought";
+				break;
 			}
+			if (!guess) delete presenceData.state;
 		}
-		if (!guess) delete presenceData.state;
 		presence.setActivity(presenceData);
 	}
 });
