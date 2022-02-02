@@ -4,11 +4,10 @@ const presence = new Presence({
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
-	});
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let browsingTimestamp = Math.floor(Date.now() / 1000),
-	prevTitle: string,
-	prevEpisode: string;
+let prevTitle: string, prevEpisode: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -19,8 +18,7 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector<HTMLVideoElement>("video.vjs-tech");
 
 	if (location.pathname.includes("/v/") && video) {
-		const { duration, currentTime, paused } = video,
-			poster = document.querySelector<HTMLElement>(".vjs-poster"),
+		const poster = document.querySelector<HTMLElement>(".vjs-poster"),
 			title = document.querySelector(
 				".meta-overlay > div > div > ul > li > h1"
 			)?.textContent,
@@ -31,21 +29,22 @@ presence.on("UpdateData", async () => {
 		if (title) prevTitle = title;
 		if (episode) prevEpisode = episode;
 
-		if (showPoster && poster?.style?.backgroundImage)
+		if (showPoster && poster?.style?.backgroundImage) {
 			presenceData.largeImageKey =
 				poster.style.backgroundImage.match(/"(.*)"/)[1];
+		}
 
-		presenceData.smallImageKey = paused ? "pause" : "play";
-		presenceData.smallImageText = paused
+		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
+			presence.getTimestampsfromMedia(video);
 
 		presenceData.details = prevTitle;
 		presenceData.state = prevEpisode;
 
-		if (paused) {
+		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
@@ -57,9 +56,10 @@ presence.on("UpdateData", async () => {
 				".v-image__image.v-image__image--contain"
 			);
 
-			if (showPoster && poster?.style?.backgroundImage)
+			if (showPoster && poster?.style?.backgroundImage) {
 				presenceData.largeImageKey =
 					poster.style.backgroundImage.match(/"(.*)"/)[1];
+			}
 
 			presenceData.details = "Viewing show:";
 			presenceData.state = document.querySelector(
