@@ -25,11 +25,6 @@ presence.on("UpdateData", async () => {
 					[i].shadowRoot.querySelectorAll(
 						'div > game-tile[evaluation="correct"]'
 					).length,
-				notGuessed = document
-					.querySelector("body > game-app")
-					.shadowRoot.querySelectorAll("#board > game-row")
-					[i].shadowRoot.querySelector("div > game-tile")
-					.shadowRoot.querySelector('div[data-state="empty"]'),
 				typing = document
 					.querySelector("body > game-app")
 					.shadowRoot.querySelectorAll("#board > game-row")
@@ -50,7 +45,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `Guess ${i + 1} / 6`;
 				presenceData.smallImageKey = "writing";
 				break;
-			} else if (notGuessed) {
+			} else if (!guessed) {
 				presenceData.details = `Guessing... (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
 				presenceData.smallImageKey = "thought";
