@@ -56,8 +56,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "thought";
 				break;
 			}
-			if (!guess) delete presenceData.state;
 		}
+		if (!guess) delete presenceData.state;
 		presence.setActivity(presenceData);
 	}
 });
