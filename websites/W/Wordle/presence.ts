@@ -1,7 +1,11 @@
 const presence = new Presence({
 		clientId: "938310167404101683"
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	puzzleNumber = Math.trunc(
+		(new Date().getTime() - new Date("06/19/2021").getTime()) /
+			(1000 * 3600 * 24)
+	);
 
 presence.on("UpdateData", async () => {
 	if (document.location.pathname.startsWith("/wordle")) {
@@ -17,7 +21,7 @@ presence.on("UpdateData", async () => {
 				[i].shadowRoot.querySelector("div > game-tile")
 				.shadowRoot.querySelector('div[data-state="empty"]');
 			if (notGuessed) {
-				presenceData.details = "Guessing...";
+				presenceData.details = `Guessing... (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
 				presenceData.smallImageKey = "thought";
 				break;
@@ -30,7 +34,7 @@ presence.on("UpdateData", async () => {
 				[i].shadowRoot.querySelector("div > game-tile")
 				.shadowRoot.querySelector('div[data-state="tbd"]');
 			if (typing) {
-				presenceData.details = "Typing...";
+				presenceData.details = `Typing... (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
 				presenceData.smallImageKey = "writing";
 				break;
@@ -48,12 +52,12 @@ presence.on("UpdateData", async () => {
 						'div > game-tile[evaluation="correct"]'
 					).length;
 			if (correct === 5) {
-				presenceData.details = "Solved";
+				presenceData.details = `Solved (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
 				presenceData.smallImageKey = "solved";
 				break;
 			} else if (i === 5 && guessed) {
-				presenceData.details = "Failed";
+				presenceData.details = `Failed (#${puzzleNumber})`;
 				presenceData.state = "Guess X / 6";
 				presenceData.smallImageKey = "fail";
 				break;
