@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.6",
+    "author": {
+      "name": "Ismael",
+      "id": "1169"
+    },
+    "service": "IPStressin",
+    "description": {
+      "en": "The best ip booter stresser in 2021. Can down any game server such as ovh, nfo, fivem servers etc. Bypassing every protection such as cloudflare with our blazingfast methods. Buy now and enjoy the strong power from our botnets as well."
+    },
+    "url": "ipstress.in",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/Kq1haF1.png",
+    "thumbnail": "https://i.imgur.com/1Jn7pd3.png",
+    "color": "#0E87F9",
+    "category": "other",
+    "tags": [
+      "DDoS"
+    ]
+  }
