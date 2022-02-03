@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("buttons")
 		]);
-	if (video?.timeLeft !== "") {
+	if (video.timeLeft !== "") {
 		presenceData.details = "Watching:";
 		presenceData.state = document.querySelector<HTMLSpanElement>(
 			"#content div.iltext > strong > span"
