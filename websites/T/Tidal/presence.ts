@@ -54,16 +54,20 @@ presence.on("UpdateData", async () => {
 			.querySelector(
 				'div[data-test="play-controls"] > button[data-test="repeat"]'
 			)
-			.getAttribute("aria-label"),
-		coverArt = document.querySelector<HTMLImageElement>("#react-tabs-1 img");
+			.getAttribute("aria-label");
 
 	presenceData.details = songTitle.textContent;
 	presenceData.state = document.querySelector(
 		'div[data-test="left-column-footer-player"] > div:nth-child(2) > div:nth-child(2) > span > span > span'
 	).textContent;
 
-	if (coverArt && cover) presenceData.largeImageKey = coverArt.src;
-
+	if (cover) {
+		presenceData.largeImageKey =
+			navigator.mediaSession.metadata.artwork[0].src.replace(
+				"160x160",
+				"640x640"
+			);
+	}
 	if (currentTimeSec > 0 || !paused) {
 		presenceData.endTimestamp =
 			Date.now() +
