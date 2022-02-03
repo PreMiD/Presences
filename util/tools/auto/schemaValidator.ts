@@ -236,10 +236,10 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 						})
 					);
 				} else {
-					const messsage = property.match(/\[([0-9]+)\]/);
+					const messsage = property.match(/(.*)\[([0-9]+)\]/);
 
 					if (messsage) {
-						const [propertyName, index] = messsage;
+						const [propertyName, index] = messsage.slice(1);
 
 						errors.push(
 							createAnnotation({
@@ -271,7 +271,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 						file: metaFile,
 						line: getLine("description", invalidLang),
 						title: `instance.description.${invalidLang}`,
-						message: `${invalidLang}" is not a valid language or is a unsupported language`
+						message: `"${invalidLang}" is not a valid language or is a unsupported language`
 					})
 				);
 			}

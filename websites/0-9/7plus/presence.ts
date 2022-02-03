@@ -9,12 +9,11 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "logo"
 	};
 
-	if (document.location.pathname === "/home/")
-		presenceData.details = "Viewing 7plus Home";
-	else if (document.location.pathname === "/home")
-		presenceData.details = "Viewing 7plus Home";
-	else if (document.location.pathname === "/")
-		presenceData.details = "Viewing 7plus Home";
+	if (
+		document.location.pathname.includes("/home/") ||
+		document.location.pathname === "/"
+	)
+		presenceData.details = "Viewing 7plus home";
 	else if (document.location.pathname === "/shows-a-z")
 		presenceData.details = "Viewing 7plus Shows";
 	else if (document.location.pathname === "/sport")
@@ -35,9 +34,21 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Watching: ${showName.textContent}`;
 	} else if (document.location.pathname === "/query")
 		presenceData.details = "Searching 7plus!";
-	else
-		presenceData.details = `Viewing "${document.title.split(" | 7plus")[0]}"`;
+	else {
+		const cover = document.querySelector(
+			"#app > div > section.Section--page§DHZyX.Section--heroBanner§1F7Fz > div > div.contentContainer§35zFv > div > div.thumbnail§umnvX > img"
+		);
+		presenceData.largeImageKey = cover?.getAttribute("src") ?? "logo";
 
+		presenceData.details = `Viewing "${document
+			.querySelector<HTMLMetaElement>('meta[property="og:title"]')
+			.content.replace("Online: Free Streaming & Catch Up TV in Australia", "")
+			.slice(
+				6,
+				document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
+					.content.length
+			)}"`;
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
