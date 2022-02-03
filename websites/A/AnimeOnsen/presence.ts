@@ -76,7 +76,6 @@ presence.on("UpdateData", () => {
 			const { title, episode, episodeName, playbackState, time } = playerData,
 				episodeUrl = new URL(window.location.href);
 			episodeUrl.searchParams.set("episode", episode.toString());
-			episodeUrl.searchParams.append("ep", episode.toString());
 			presenceData = {
 				...presenceData,
 				smallImageKey:
